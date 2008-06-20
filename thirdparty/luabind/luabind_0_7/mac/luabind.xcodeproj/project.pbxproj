@@ -1,0 +1,271 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA68CDFE0E02204300E24D68 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */; };
+		EA68CDFF0E02204300E24D68 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEC0E02204300E24D68 /* weak_ref.cpp */; };
+		EA68CE000E02204300E24D68 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */; };
+		EA68CE010E02204300E24D68 /* scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEE0E02204300E24D68 /* scope.cpp */; };
+		EA68CE020E02204300E24D68 /* ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEF0E02204300E24D68 /* ref.cpp */; };
+		EA68CE030E02204300E24D68 /* pcall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF00E02204300E24D68 /* pcall.cpp */; };
+		EA68CE040E02204300E24D68 /* overload_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF10E02204300E24D68 /* overload_rep.cpp */; };
+		EA68CE050E02204300E24D68 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF20E02204300E24D68 /* open.cpp */; };
+		EA68CE060E02204300E24D68 /* object_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF30E02204300E24D68 /* object_rep.cpp */; };
+		EA68CE070E02204300E24D68 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF40E02204300E24D68 /* link_compatibility.cpp */; };
+		EA68CE080E02204300E24D68 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF50E02204300E24D68 /* implicit_cast.cpp */; };
+		EA68CE090E02204300E24D68 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF60E02204300E24D68 /* function.cpp */; };
+		EA68CE0A0E02204300E24D68 /* find_best_match.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF70E02204300E24D68 /* find_best_match.cpp */; };
+		EA68CE0B0E02204300E24D68 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF80E02204300E24D68 /* error.cpp */; };
+		EA68CE0C0E02204300E24D68 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF90E02204300E24D68 /* create_class.cpp */; };
+		EA68CE0D0E02204300E24D68 /* class_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFA0E02204300E24D68 /* class_rep.cpp */; };
+		EA68CE0E0E02204300E24D68 /* class_registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFB0E02204300E24D68 /* class_registry.cpp */; };
+		EA68CE0F0E02204300E24D68 /* class_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFC0E02204300E24D68 /* class_info.cpp */; };
+		EA68CE100E02204300E24D68 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFD0E02204300E24D68 /* class.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D2AAC046055464E500DB518D /* libluabind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluabind.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../original/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDEC0E02204300E24D68 /* weak_ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = weak_ref.cpp; path = ../original/src/weak_ref.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stack_content_by_name.cpp; path = ../original/src/stack_content_by_name.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDEE0E02204300E24D68 /* scope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scope.cpp; path = ../original/src/scope.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDEF0E02204300E24D68 /* ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ref.cpp; path = ../original/src/ref.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF00E02204300E24D68 /* pcall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pcall.cpp; path = ../original/src/pcall.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF10E02204300E24D68 /* overload_rep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = overload_rep.cpp; path = ../original/src/overload_rep.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF20E02204300E24D68 /* open.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = open.cpp; path = ../original/src/open.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF30E02204300E24D68 /* object_rep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = object_rep.cpp; path = ../original/src/object_rep.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF40E02204300E24D68 /* link_compatibility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = link_compatibility.cpp; path = ../original/src/link_compatibility.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF50E02204300E24D68 /* implicit_cast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = implicit_cast.cpp; path = ../original/src/implicit_cast.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF60E02204300E24D68 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = ../original/src/function.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF70E02204300E24D68 /* find_best_match.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = find_best_match.cpp; path = ../original/src/find_best_match.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF80E02204300E24D68 /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error.cpp; path = ../original/src/error.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDF90E02204300E24D68 /* create_class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = create_class.cpp; path = ../original/src/create_class.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDFA0E02204300E24D68 /* class_rep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_rep.cpp; path = ../original/src/class_rep.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDFB0E02204300E24D68 /* class_registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_registry.cpp; path = ../original/src/class_registry.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDFC0E02204300E24D68 /* class_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_info.cpp; path = ../original/src/class_info.cpp; sourceTree = SOURCE_ROOT; };
+		EA68CDFD0E02204300E24D68 /* class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class.cpp; path = ../original/src/class.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* luabind */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = luabind;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */,
+				EA68CDEC0E02204300E24D68 /* weak_ref.cpp */,
+				EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */,
+				EA68CDEE0E02204300E24D68 /* scope.cpp */,
+				EA68CDEF0E02204300E24D68 /* ref.cpp */,
+				EA68CDF00E02204300E24D68 /* pcall.cpp */,
+				EA68CDF10E02204300E24D68 /* overload_rep.cpp */,
+				EA68CDF20E02204300E24D68 /* open.cpp */,
+				EA68CDF30E02204300E24D68 /* object_rep.cpp */,
+				EA68CDF40E02204300E24D68 /* link_compatibility.cpp */,
+				EA68CDF50E02204300E24D68 /* implicit_cast.cpp */,
+				EA68CDF60E02204300E24D68 /* function.cpp */,
+				EA68CDF70E02204300E24D68 /* find_best_match.cpp */,
+				EA68CDF80E02204300E24D68 /* error.cpp */,
+				EA68CDF90E02204300E24D68 /* create_class.cpp */,
+				EA68CDFA0E02204300E24D68 /* class_rep.cpp */,
+				EA68CDFB0E02204300E24D68 /* class_registry.cpp */,
+				EA68CDFC0E02204300E24D68 /* class_info.cpp */,
+				EA68CDFD0E02204300E24D68 /* class.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libluabind.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC045055464E500DB518D /* luabind */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "luabind" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = luabind;
+			productName = luabind;
+			productReference = D2AAC046055464E500DB518D /* libluabind.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "luabind" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* luabind */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* luabind */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA68CDFE0E02204300E24D68 /* wrapper_base.cpp in Sources */,
+				EA68CDFF0E02204300E24D68 /* weak_ref.cpp in Sources */,
+				EA68CE000E02204300E24D68 /* stack_content_by_name.cpp in Sources */,
+				EA68CE010E02204300E24D68 /* scope.cpp in Sources */,
+				EA68CE020E02204300E24D68 /* ref.cpp in Sources */,
+				EA68CE030E02204300E24D68 /* pcall.cpp in Sources */,
+				EA68CE040E02204300E24D68 /* overload_rep.cpp in Sources */,
+				EA68CE050E02204300E24D68 /* open.cpp in Sources */,
+				EA68CE060E02204300E24D68 /* object_rep.cpp in Sources */,
+				EA68CE070E02204300E24D68 /* link_compatibility.cpp in Sources */,
+				EA68CE080E02204300E24D68 /* implicit_cast.cpp in Sources */,
+				EA68CE090E02204300E24D68 /* function.cpp in Sources */,
+				EA68CE0A0E02204300E24D68 /* find_best_match.cpp in Sources */,
+				EA68CE0B0E02204300E24D68 /* error.cpp in Sources */,
+				EA68CE0C0E02204300E24D68 /* create_class.cpp in Sources */,
+				EA68CE0D0E02204300E24D68 /* class_rep.cpp in Sources */,
+				EA68CE0E0E02204300E24D68 /* class_registry.cpp in Sources */,
+				EA68CE0F0E02204300E24D68 /* class_info.cpp in Sources */,
+				EA68CE100E02204300E24D68 /* class.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = luabind;
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = luabind;
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../original\"",
+					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../original\"",
+					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "luabind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "luabind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
