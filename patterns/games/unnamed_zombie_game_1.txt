@@ -1,0 +1,94 @@
+12:05:00 Jomanto: alter
+12:05:23 Jomanto: ich hab grade die spielidee mit den zombiemassen nochmal aufgegriffen und hab da was einigermaßen klares im kopf
+12:06:16 Jomanto: stell dir eine stadt vor. einfach eine aneinanderreihung von einfamilienhäusern in einem völlig abgelegenen kaff
+12:06:49 Jomanto: in diesem kaff sind aus irgendeinem grund (können uns noch was aus den fingern saugen) zombies am start und überrennen die stadt
+12:07:08 Jomanto: jetzt hast du eine truppe von spezialeinheiten, die alle bewohner befreien sollen
+12:07:50 Jomanto: 2D top-down kamera. die spezialeinheit am oberen bildschirmrand, in der mitte vorm haus eine riesige horde zombies und unten das haus mit den menschen
+12:09:50: Tony ist nun Online (war Abwesend)
+12:10:07 Jomanto: im planungsmodus kannst du mit dir zur verfügung stehenden mitteln einen befreiungsplan erstellen.
+1.) granate von soldat x an stelle x,y mit geschwindigkeit x und unter berücksichtigung des windes
+2.) fleischschleuder von soldat y an stelle x,y
+3.) soldat z klettert über die stromleitung zum haus
+4.) soldat z eröffnet frontales feuer auf die zombies
+5.) soldat *name here* fährt mit dem auto eine schleuse in die mitte der zombie horde
+12:10:28 Tony: ui! :D 
+12:10:33 Jomanto: usw. und anschließend klickst du auf "aktion ausführen" und in einem zeitlichen ablauf werden alle aktionen ausgelöst
+12:10:44 Tony: rundenbasiert?
+12:10:54 Jomanto: und wenn du es schaffst menschen zu befreien, dann bekommst du verstärkung von anderen spezialeinheiten
+12:11:02 Tony: oder ähnlich wie desktop tower defense?
+12:11:08 Tony: das hört sich arg gut an :) 
+12:11:14 Tony: und sehr gut umsetzbar vor allem
+12:11:14 Jomanto: du kannst dir frei die nachbarschaften auswählen, die du als nächstes spielen willst
+12:12:10 Jomanto: weniger rundenbasiert als vielmehr die ausführung von einem einzigen plan pro level
+12:12:25 Jomanto: und es gibt natürlich auch verschiedene varianten von zombies
+12:12:48 Tony: hahaha! :D  ok, jetzt bin ich aber auf die Zombie-Typen gespannt! :D 
+12:13:53 Jomanto: fliegende schwanzombies, die die soldaten auf stromleitungen / im hubschrauber angreifen. pferdezombies, die brutale rammböcke sind, menschenzombies, die einfach gerade auf die menschen losgehen
+12:13:58 Jomanto: da gibts unendlich möglichkeiten
+12:14:06 Tony: aber wir eigentlich relative Mauskoordinaten bei glfw? Ich find grade nix
+12:14:20 Tony: you were killed by a PIGZOMBIE!
+12:14:24 Tony: völlig geil
+12:14:26 Jomanto: glfw dreht die koordinaten um
+12:14:39 Jomanto: top-left to bottom-right
+12:14:48 Tony: ne, was passiert wenn ich am bildschirmrand bin und die Maus weiterbewege?
+12:14:50 Jomanto: also die y-komponente
+12:14:57 Jomanto: hmm
+12:15:01 Jomanto: das glaube ich nicht
+12:15:13 Tony: SDL schickt weiter Mauskoordinaten, aber nach dem Motto: du wärst grade 2 Pixel weitergekommen
+12:15:18 Jomanto: da glfw ein fenster für den input braucht, kann er eigentlich nur über fenstermessages arbeiten
+12:15:19 Tony: die pos bleibt die gleiche
+12:15:26 Tony: müssen wir mal schauen.
+12:15:46 Tony: Das brauchen wir nämlich wenn wir mit der Maus scrollen wollen, bzw. mit dem pointer den Bildschirm verschieben
+12:16:06 Tony: hast schon nen Namen für das Spiel?
+12:16:13 Jomanto: nein
+12:20:08 Jomanto: Crouching Zombie, Hidden Victim
+12:20:15 Tony: :) 
+12:20:30 Tony: Zombie Nazis must die!
+12:20:36 Jomanto: haha
+12:20:41 Tony: ich mag die Kombi aus Nazis und Fantasy/SciFi
+12:20:50 Tony: ähnlich RTCW
+12:21:04 Tony: Nazi Ninja chicks, Zombie Nazis, zombie Nazi Ninjas!
+12:21:20 Jomanto: "And then there were brains"
+12:21:29 Tony: Brain Rain
+12:24:02 Jomanto: Brainless things - Welcome to Zombieville
+12:24:49 Tony: Zombie Mutilation Force
+12:25:17 Tony: wir müssten das ganze so ein bischen 80er Jahre mässig aufziehen mit überzeichneten Charakteren, und die auch so beschreiben und bebildern, dass man einen Bezug dazu hat
+12:25:40 Tony: also Chuck der Nahkampfexperte, oder John der Waffenspezialist
+12:25:49 Jomanto: jahaaaa
+12:26:13 Tony: so dass man sich evtl. aus nem Pool von 8 Leuten ein Team von 4 zusammenstellen kann, mit denen man dann eine Aufgabe lösen muss
+12:26:18 Jomanto: thomas the ferrari guy
+12:26:22 Tony: ! HAHAHA!
+12:26:31 Tony: so wie A-Team bloss als Z-Team :D 
+12:26:44 Jomanto: Z-Team!
+12:26:47 Tony: "ich liebe es, wenn ein Plan funktioniert"
+12:27:01 Tony: aber!
+12:27:57 Tony: mit nem intelligenten Auto, nem rosafarbenen alten Hubschrauber aus dem vietnamkrieg, einem semiintelligenten roboter der sich anhört wie R2D2, einem steinreichen turteligen Liebespaar, dass den Job nur aus Spaß macht, einem Bond-mässiogen Bösewicht
+12:28:24 Tony: nur so als Idee ... wir könnten alles wunderbar in einen Topf werfen, die ganzen Klischees der 80er und .... ZOMBIES!
+12:28:58 Jomanto: "i love it when zombies pop out their inwards"
+12:29:08 Tony: :X  supi! :) 
+12:29:20 Tony: 2 girls 1 zombie
+12:29:25 Tony: *schüttel*
+12:29:46 Jomanto: haha
+12:43:30 Jomanto: George A. Romero hat heute geburtstag
+12:44:10 Tony: MHAHAHAA! :D 
+12:45:25 Jomanto: PLAN!
+12:45:29 Tony: ja?
+12:45:32 Tony: what you mean?
+12:45:56 Jomanto: Dirty Dancing: ein völlig bescheuerter Patrick Swayze, der die zombies mit seiner hüfte umhaut
+12:46:02 Jomanto: haha
+12:46:07 Tony: hahaha! :D  YES!
+12:46:10 Jomanto: mit so einem riesen walkman auf dem kopf
+12:46:22 Tony: zombie Dance Massacre
+12:46:29 Jomanto: "aha, aha, yeah, yeah. nightfever, nightfever..."
+12:46:39 Tony: Lambada oder Disco?! You choose the weapon!
+12:46:52 Jomanto: juhu
+12:46:55 Jomanto: das wird gut
+12:47:29 Jomanto: muss nachher noch das log speichern auf jeden fall
+12:47:48 Tony: :)  aber hallo ....
+12:48:06 Jomanto: das wär doch ein thema fürs erste spiel
+12:48:24 Jomanto: ZOMBIES (ganz wichtig) und noch ein paar bekannte elemente etwas anders kombiniert
+12:48:47 Tony: wobei ich deses bizarre eigentlich sehr mag
+12:48:56 Tony: zombies kaputt tanzen :P 
+12:49:11 Jomanto: achso, als hauptthema?
+12:49:30 Tony: ne, nicht unbedingt, aber die idee ist halt schön abgefahren, wir brauchen mehr solcher ideen
+12:49:47 Tony: irgendwann ergibt sich dann was gutes. Speicher mal bitte das log!
+12:50:02 Jomanto: na klar, aber was meinst du zu dem grundgerüst mit der spezialeinheit und den zombiehorden in der kleinstadt?
