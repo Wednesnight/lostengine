@@ -1,0 +1,8 @@
+* create Window Images in VanillaFactory so Windows finally have a decent look.
+* rethink image/views: should images should be replaced by views everywhere? for a button, this would mean that it could easily
+  incorporate a button next to its caption, easily specifiable merely through a view => this would also mean that each 
+  button state view would have to contain a caption object inside each state view that would need to be set and rendered.
+* font renderer: implement caching and text rendering by rendering each character separately and rebuilding the strings
+  through multiple quads => would it be feasbile to implement a quadstrip class that can more efficiently hold and render
+  multiple quads at once (e.g. for string rendering) that wouldn't use glbeing/end for each quad?
+  

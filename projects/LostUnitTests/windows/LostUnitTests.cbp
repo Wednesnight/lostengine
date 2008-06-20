@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LostUnitTests" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="build\TestLostEngine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="tmp\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPROFILER_ENABLED" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="build\TestLostEngine" prefix_auto="1" extension_auto="1" />
+				<Option object_output="tmp\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DGLUT_NO_LIB_PRAGMA" />
+			<Add option="-DGLUT_NO_WARNING_DISABLE" />
+			<Add option="-DGLUT_DISABLE_ATEXIT_HACK" />
+			<Add directory="..\..\..\thirdparty\UnitTest++\include" />
+			<Add directory="..\..\lostengine" />
+			<Add directory="..\..\..\thirdparty\boost\boost_1_34_1\include" />
+			<Add directory="..\..\..\thirdparty\ftgl\ftgl_2_1_2\include" />
+			<Add directory="..\..\..\thirdparty\freetype2\freetype_2_3_5\include" />
+			<Add directory="..\..\..\thirdparty\FreeImage\FreeImage_3_10_0\include" />
+		</Compiler>
+		<Linker>
+			<Add library="..\..\..\thirdparty\boost\boost_1_34_1\windows\lib\libboost_signals-mgw34-mt-s-1_34_1.a" />
+			<Add library="..\..\..\thirdparty\boost\boost_1_34_1\windows\lib\libboost_serialization-mgw34-mt-s-1_34_1.a" />
+			<Add library="..\..\..\thirdparty\glfw\glfw_2_6\windows\libglfw.a" />
+			<Add library="..\..\..\thirdparty\FreeImage\FreeImage_3_10_0\windows\libfreeimage.a" />
+			<Add library="..\..\..\thirdparty\ftgl\ftgl_2_1_2\windows\libftgl.a" />
+			<Add library="..\..\..\thirdparty\freetype2\freetype_2_3_5\windows\libfreetype.a" />
+			<Add library="libopengl32.a" />
+			<Add library="libglu32.a" />
+			<Add library="libglut32.a" />
+			<Add library="libshlwapi.a" />
+		</Linker>
+		<ExtraCommands>
+			<Add after="cmd /c copy /Y ..\..\..\thirdparty\FreeImage\FreeImage_3_10_0\windows\FreeImage.dll build\" />
+			<Add after="cmd /c copy /Y ..\..\..\thirdparty\glut\glut-3.7.6-bin\windows\glut32.dll build\" />
+			<Mode after="always" />
+		</ExtraCommands>
+		<Unit filename="..\..\lostengine\lost\bitmap\Bitmap.h" />
+		<Unit filename="..\..\lostengine\lost\bitmap\BitmapLoader.h" />
+		<Unit filename="..\..\lostengine\lost\bitmap\FreeImageWrapper.h" />
+		<Unit filename="..\..\lostengine\lost\engine\Engine.h" />
+		<Unit filename="..\..\lostengine\lost\engine\KeySym.h" />
+		<Unit filename="..\..\lostengine\lost\engine\MouseSym.h" />
+		<Unit filename="..\..\lostengine\lost\engine\glfw\Engine.h" />
+		<Unit filename="..\..\lostengine\lost\engine\glfw\InputSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\glfw\TimerSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\glfw\VideoSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\no\AudioSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\no\InputSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\no\TimerSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\no\VideoSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\sdl\AudioSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\sdl\Engine.h" />
+		<Unit filename="..\..\lostengine\lost\engine\sdl\InputSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\sdl\TimerSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\engine\sdl\VideoSubSystem.h" />
+		<Unit filename="..\..\lostengine\lost\event\Event.h" />
+		<Unit filename="..\..\lostengine\lost\event\EventManager.h" />
+		<Unit filename="..\..\lostengine\lost\event\EventTypes.h" />
+		<Unit filename="..\..\lostengine\lost\event\KeyEvent.h" />
+		<Unit filename="..\..\lostengine\lost\event\MouseEvent.h" />
+		<Unit filename="..\..\lostengine\lost\font\BitmapFont.h" />
+		<Unit filename="..\..\lostengine\lost\font\Font.h" />
+		<Unit filename="..\..\lostengine\lost\font\TrueTypeFont.h" />
+		<Unit filename="..\..\lostengine\lost\gl\Draw.h" />
+		<Unit filename="..\..\lostengine\lost\gl\Scissor.h" />
+		<Unit filename="..\..\lostengine\lost\gl\Utils.h" />
+		<Unit filename="..\..\lostengine\lost\gl\gl.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Area.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Button.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Clonable.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Dimension.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Edit.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Image.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\InputManager.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Label.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\ProgressBar.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Quad.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Scrollbar.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\ShapeView.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Slider.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Texture.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Theme.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\UserInterface.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\View.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\ViewPath.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\Window.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\BitmapFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\ControlFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\Factory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\FontFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\FuglyFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\TextureFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\ThemeFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\factory\VanillaFactory.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\AreaIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\DimensionIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\EditIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\ImageIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\Io.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\LabelIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\QuadIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\TextureIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\ThemeIo.h" />
+		<Unit filename="..\..\lostengine\lost\guiro\io\ViewIo.h" />
+		<Unit filename="..\..\lostengine\lost\io\ColorIo.h" />
+		<Unit filename="..\..\lostengine\lost\io\Io.h" />
+		<Unit filename="..\..\lostengine\lost\io\Vec2Io.h" />
+		<Unit filename="..\..\lostengine\lost\math\Generator.h" />
+		<Unit filename="..\..\lostengine\lost\math\Math.h" />
+		<Unit filename="..\..\lostengine\lost\math\Matrix.h" />
+		<Unit filename="..\..\lostengine\lost\math\Rect.h" />
+		<Unit filename="..\..\lostengine\lost\math\Vec2.h" />
+		<Unit filename="..\..\lostengine\lost\math\Vec3.h" />
+		<Unit filename="..\..\lostengine\lost\math\Vec4.h" />
+		<Unit filename="..\..\lostengine\lost\object\Object.h" />
+		<Unit filename="..\..\lostengine\lost\object\ObjectReference.h" />
+		<Unit filename="..\..\lostengine\lost\object\ObjectReferenceContainer.h" />
+		<Unit filename="..\..\lostengine\lost\object\ObjectReferenceResolver.h" />
+		<Unit filename="..\..\lostengine\lost\platform\Platform.cpp" />
+		<Unit filename="..\..\lostengine\lost\platform\Platform.h" />
+		<Unit filename="..\..\lostengine\lost\platform\Platform_Linux.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="..\..\lostengine\lost\platform\Platform_Mac.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="..\..\lostengine\lost\platform\Platform_Windows.cpp" />
+		<Unit filename="..\..\lostengine\lost\resource\File.h" />
+		<Unit filename="..\..\lostengine\lost\resource\Loader.h" />
+		<Unit filename="..\..\lostengine\lost\resource\LocalRepository.h" />
+		<Unit filename="..\..\lostengine\lost\resource\Repository.h" />
+		<Unit filename="..\..\lostengine\lost\resource\Set.h" />
+		<Unit filename="..\..\lostengine\lost\signal\ConnectionMapping.h" />
+		<Unit filename="..\..\lostengine\lost\signal\SignalNode.h" />
+		<Unit filename="..\..\lostengine\lost\signal\SignalNodeManager.h" />
+		<Unit filename="..\..\lostengine\lost\test\TestArea.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostGuiroControlIo.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostGuiroFactory.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostGuiroIoAreaIo.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostGuiroIoDimensionIo.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostGuiroIoTextureIo.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostIoColorIo.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostIoVec2Io.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestCompileLostMathVec2.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestDimensions.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestEngine.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestEvent.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestEventManager.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestProfiler.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestView.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\TestViewPath.cpp" />
+		<Unit filename="..\..\lostengine\lost\test\main.cpp" />
+		<Unit filename="..\..\lostengine\lost\util\Color.h" />
+		<Unit filename="..\..\lostengine\lost\util\Config.h" />
+		<Unit filename="..\..\lostengine\lost\util\DisplayAttributes.h" />
+		<Unit filename="..\..\lostengine\lost\util\FpsMeter.h" />
+		<Unit filename="..\..\lostengine\lost\util\Logger.h" />
+		<Unit filename="..\..\lostengine\lost\util\NullDeleter.h" />
+		<Unit filename="..\..\lostengine\lost\util\Profiler.cpp" />
+		<Unit filename="..\..\lostengine\lost\util\Profiler.h" />
+		<Unit filename="..\..\lostengine\lost\util\SerializationHelper.h" />
+		<Unit filename="..\..\lostengine\lost\util\SpiritHelpers.h" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\AssertException.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\Checks.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\DeferredTestReporter.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\DeferredTestResult.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\MemoryOutStream.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\ReportAssert.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\Test.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestDetails.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestList.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestReporter.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestReporterStdout.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestResults.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TestRunner.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\TimeConstraint.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\Win32\TimeHelpers.cpp" />
+		<Unit filename="..\..\..\thirdparty\UnitTest++\include\XmlTestReporter.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
