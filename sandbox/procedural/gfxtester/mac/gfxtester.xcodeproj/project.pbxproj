@@ -1,0 +1,335 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		EAC676F50C2C7A1300711E58 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC676F40C2C7A1300711E58 /* Effect.cpp */; };
+		EAD13B710C2EDB96004472B7 /* RenderStats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD13B700C2EDB96004472B7 /* RenderStats.cpp */; };
+		EAD13B8F0C2EDD0B004472B7 /* GlUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD13B8E0C2EDD0B004472B7 /* GlUtils.cpp */; };
+		EAD13BEA0C2EDEF9004472B7 /* TimeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD13BE90C2EDEF9004472B7 /* TimeUtils.cpp */; };
+		EAF13D630C28938100A0396C /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF13D610C28938100A0396C /* SDLMain.m */; };
+		EAF13D660C28939900A0396C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF13D650C28939900A0396C /* main.cpp */; };
+		EAF13D6F0C2893D000A0396C /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF13D6E0C2893D000A0396C /* SDL.framework */; };
+		EAF13D9B0C2893DF00A0396C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF13D9A0C2893DF00A0396C /* OpenGL.framework */; };
+		EAF13DAD0C2893E600A0396C /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF13DAC0C2893E600A0396C /* GLUT.framework */; };
+		EAF13DC20C28942000A0396C /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF13DC10C28942000A0396C /* Application.cpp */; };
+		EAF13DD90C2894C900A0396C /* MainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF13DD80C2894C900A0396C /* MainRenderer.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* gfxtester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gfxtester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAC676EE0C2C796600711E58 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		EAC676F40C2C7A1300711E58 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
+		EAC677330C2C7CAB00711E58 /* RenderEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderEnvironment.h; sourceTree = "<group>"; };
+		EAC6776B0C2C7E5600711E58 /* GlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlUtils.h; sourceTree = "<group>"; };
+		EAC6778B0C2C7F3A00711E58 /* CircleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleEffect.h; sourceTree = "<group>"; };
+		EAD13A6A0C2EC58A004472B7 /* CubeEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeEffect.h; sourceTree = "<group>"; };
+		EAD13AC60C2ECE8A004472B7 /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
+		EAD13B6F0C2EDB96004472B7 /* RenderStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderStats.h; sourceTree = "<group>"; };
+		EAD13B700C2EDB96004472B7 /* RenderStats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderStats.cpp; sourceTree = "<group>"; };
+		EAD13B8E0C2EDD0B004472B7 /* GlUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlUtils.cpp; sourceTree = "<group>"; };
+		EAD13BE90C2EDEF9004472B7 /* TimeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeUtils.cpp; sourceTree = "<group>"; };
+		EAD141040C2F3304004472B7 /* RingsEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingsEffect.h; sourceTree = "<group>"; };
+		EAF13D600C28938100A0396C /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
+		EAF13D610C28938100A0396C /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		EAF13D640C28939900A0396C /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		EAF13D650C28939900A0396C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EAF13D6E0C2893D000A0396C /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		EAF13D9A0C2893DF00A0396C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAF13DAC0C2893E600A0396C /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EAF13DC00C28942000A0396C /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		EAF13DC10C28942000A0396C /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
+		EAF13DD70C2894C900A0396C /* MainRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainRenderer.h; sourceTree = "<group>"; };
+		EAF13DD80C2894C900A0396C /* MainRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainRenderer.cpp; sourceTree = "<group>"; };
+		EAF13E600C28977500A0396C /* generator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = generator.h; sourceTree = "<group>"; };
+		EAF13E610C28978600A0396C /* point.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = point.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				EAF13D6F0C2893D000A0396C /* SDL.framework in Frameworks */,
+				EAF13D9B0C2893DF00A0396C /* OpenGL.framework in Frameworks */,
+				EAF13DAD0C2893E600A0396C /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* gfxtester.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* gfxtester */ = {
+			isa = PBXGroup;
+			children = (
+				EAF13E5F0C28977500A0396C /* lib */,
+				EAF13D5E0C28938100A0396C /* sdlsupport */,
+				29B97315FDCFA39411CA2CEA /* App Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = gfxtester;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* App Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EAF13D640C28939900A0396C /* main.h */,
+				EAF13D650C28939900A0396C /* main.cpp */,
+				EAF13DC00C28942000A0396C /* Application.h */,
+				EAF13DC10C28942000A0396C /* Application.cpp */,
+				EAF13DD70C2894C900A0396C /* MainRenderer.h */,
+				EAF13DD80C2894C900A0396C /* MainRenderer.cpp */,
+				EAC676EE0C2C796600711E58 /* Effect.h */,
+				EAC676F40C2C7A1300711E58 /* Effect.cpp */,
+				EAC677330C2C7CAB00711E58 /* RenderEnvironment.h */,
+				EAC6776B0C2C7E5600711E58 /* GlUtils.h */,
+				EAC6778B0C2C7F3A00711E58 /* CircleEffect.h */,
+				EAD13A6A0C2EC58A004472B7 /* CubeEffect.h */,
+				EAD13AC60C2ECE8A004472B7 /* TimeUtils.h */,
+				EAD13B6F0C2EDB96004472B7 /* RenderStats.h */,
+				EAD13B700C2EDB96004472B7 /* RenderStats.cpp */,
+				EAD13B8E0C2EDD0B004472B7 /* GlUtils.cpp */,
+				EAD13BE90C2EDEF9004472B7 /* TimeUtils.cpp */,
+				EAD141040C2F3304004472B7 /* RingsEffect.h */,
+			);
+			name = "App Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAF13DAC0C2893E600A0396C /* GLUT.framework */,
+				EAF13D9A0C2893DF00A0396C /* OpenGL.framework */,
+				EAF13D6E0C2893D000A0396C /* SDL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAF13D5E0C28938100A0396C /* sdlsupport */ = {
+			isa = PBXGroup;
+			children = (
+				EAF13D600C28938100A0396C /* SDLMain.h */,
+				EAF13D610C28938100A0396C /* SDLMain.m */,
+			);
+			name = sdlsupport;
+			path = ../../../thirdparty/sdlsupport;
+			sourceTree = SOURCE_ROOT;
+		};
+		EAF13E5F0C28977500A0396C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				EAF13E600C28977500A0396C /* generator.h */,
+				EAF13E610C28978600A0396C /* point.h */,
+			);
+			name = lib;
+			path = ../lib;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* gfxtester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "gfxtester" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gfxtester;
+			productInstallPath = "$(HOME)/Applications";
+			productName = gfxtester;
+			productReference = 8D1107320486CEB800E47090 /* gfxtester.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "gfxtester" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* gfxtester */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* gfxtester */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF13D630C28938100A0396C /* SDLMain.m in Sources */,
+				EAF13D660C28939900A0396C /* main.cpp in Sources */,
+				EAF13DC20C28942000A0396C /* Application.cpp in Sources */,
+				EAF13DD90C2894C900A0396C /* MainRenderer.cpp in Sources */,
+				EAC676F50C2C7A1300711E58 /* Effect.cpp in Sources */,
+				EAD13B710C2EDB96004472B7 /* RenderStats.cpp in Sources */,
+				EAD13B8F0C2EDD0B004472B7 /* GlUtils.cpp in Sources */,
+				EAD13BEA0C2EDEF9004472B7 /* TimeUtils.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = gfxtester;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = gfxtester;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					../../../thirdparty/boost_1_33_1,
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					../../../thirdparty/boost_1_33_1,
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "gfxtester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "gfxtester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

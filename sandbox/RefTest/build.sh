@@ -1,0 +1,1 @@
+g++ -I /Users/tony/development/lostgenius/lostgenius.net/thirdparty/boost/boost_1_34_1/include -L/Users/tony/development/lostgenius/lostgenius.net/thirdparty/boost/boost_1_34_1/mac -lboost_signals -o tester main.cpp 

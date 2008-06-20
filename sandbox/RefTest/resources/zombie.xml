@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="4">
+<zombieBitmaps class_id="0" tracking_level="0" version="0">
+	<objects class_id="1" tracking_level="0" version="0">
+		<count>4</count>
+		<item_version>1</item_version>
+		<item class_id="2" tracking_level="0" version="1">
+			<px class_id="3" tracking_level="1" version="0" object_id="_0">
+				<Object class_id="4" tracking_level="0" version="0">
+					<object.id>zombie</object.id>
+					<object.location>nomnomnom.jpg</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_1">
+				<Object>
+					<object.id>zombie2</object.id>
+					<object.location>nomnomnom.jpg</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_2">
+				<Object>
+					<object.id>zombie3</object.id>
+					<object.location>gay_zombie.jpg</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_3">
+				<Object>
+					<object.id>editbackground</object.id>
+					<object.location>edit.png</object.location>
+				</Object>
+			</px>
+		</item>
+	</objects>
+</zombieBitmaps>
+</boost_serialization>

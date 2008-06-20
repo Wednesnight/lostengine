@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="4">
+<buttonBitmaps class_id="0" tracking_level="0" version="0">
+	<objects class_id="1" tracking_level="0" version="0">
+		<count>8</count>
+		<item_version>1</item_version>
+		<item class_id="2" tracking_level="0" version="1">
+			<px class_id="3" tracking_level="1" version="0" object_id="_0">
+				<Object class_id="4" tracking_level="0" version="0">
+					<object.id>ButtonPressed</object.id>
+					<object.location>buttonPressed.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_1">
+				<Object>
+					<object.id>ButtonReleased</object.id>
+					<object.location>buttonReleased.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_2">
+				<Object>
+					<object.id>ButtonHover</object.id>
+					<object.location>buttonHover.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_3">
+				<Object>
+					<object.id>ButtonDisabled</object.id>
+					<object.location>buttonDisabled.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_4">
+				<Object>
+					<object.id>ButtonOnPressed</object.id>
+					<object.location>buttonOnPressed.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_5">
+				<Object>
+					<object.id>ButtonOnReleased</object.id>
+					<object.location>buttonOnReleased.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_6">
+				<Object>
+					<object.id>ButtonOnHover</object.id>
+					<object.location>buttonOnHover.png</object.location>
+				</Object>
+			</px>
+		</item>
+		<item>
+			<px class_id_reference="3" object_id="_7">
+				<Object>
+					<object.id>ButtonOnDisabled</object.id>
+					<object.location>buttonOnDisabled.png</object.location>
+				</Object>
+			</px>
+		</item>
+	</objects>
+</buttonBitmaps>
+</boost_serialization>

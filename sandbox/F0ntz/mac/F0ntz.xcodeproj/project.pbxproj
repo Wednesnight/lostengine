@@ -1,0 +1,374 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
+		8D0C4E8E0486CD37000505A6 /* main.nib in Resources */ = {isa = PBXBuildFile; fileRef = 02345980000FD03B11CA0E72 /* main.nib */; };
+		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA03D8130DBBEE91001665C3 /* suigeneris.ttf */; };
+		EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2AFA8F0DC2984F0034A6F5 /* main.cpp */; };
+		EA3B974F0E047D0400B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B974E0E047CFF00B6423B /* libLostEngine.a */; };
+		EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5EA5BC0E023BD100E7349B /* Vera.ttf */; };
+		EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41A0DB53F9800855E60 /* OpenGL.framework */; };
+		EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41B0DB53F9800855E60 /* GLUT.framework */; };
+		EAECD4520DB542AF00855E60 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD4510DB542AF00855E60 /* AGL.framework */; };
+		EAECD4930DB5443C00855E60 /* F0ntz.cfg in Resources */ = {isa = PBXBuildFile; fileRef = EAECD4920DB5443C00855E60 /* F0ntz.cfg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = LostEngine;
+		};
+		EA3B97500E047D0D00B6423B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1870340FFE93FCAF11CA0CD7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/main.nib; sourceTree = "<group>"; };
+		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		5048396D09E3307300765E4B /* F0ntzProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = F0ntzProj.xcconfig; sourceTree = "<group>"; };
+		5048396E09E3307300765E4B /* F0ntzTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = F0ntzTarget.xcconfig; sourceTree = "<group>"; };
+		508344B209E5C41E0093A071 /* F0ntz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = F0ntz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA03D8130DBBEE91001665C3 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../resources/suigeneris.ttf; sourceTree = SOURCE_ROOT; };
+		EA2AFA8F0DC2984F0034A6F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA5EA5BC0E023BD100E7349B /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../resources/Vera.ttf; sourceTree = SOURCE_ROOT; };
+		EAECD41A0DB53F9800855E60 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAECD41B0DB53F9800855E60 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EAECD4510DB542AF00855E60 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EAECD4920DB5443C00855E60 /* F0ntz.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = F0ntz.cfg; path = ../resources/F0ntz.cfg; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D0C4E910486CD37000505A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3B974F0E047D0400B6423B /* libLostEngine.a in Frameworks */,
+				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
+				EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */,
+				EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */,
+				EAECD4520DB542AF00855E60 /* AGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		195DF8CFFE9D517E11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				508344B209E5C41E0093A071 /* F0ntz.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20286C29FDCF999611CA2CEA /* F0ntz */ = {
+			isa = PBXGroup;
+			children = (
+				5048396909E3304600765E4B /* Configuration Files */,
+				20286C2AFDCF999611CA2CEA /* Sources */,
+				20286C2CFDCF999611CA2CEA /* Resources */,
+				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
+				195DF8CFFE9D517E11CA2CBB /* Products */,
+			);
+			name = F0ntz;
+			sourceTree = "<group>";
+		};
+		20286C2AFDCF999611CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EA2AFA8F0DC2984F0034A6F5 /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		20286C2CFDCF999611CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA03D8130DBBEE91001665C3 /* suigeneris.ttf */,
+				EA5EA5BC0E023BD100E7349B /* Vera.ttf */,
+				EAECD4920DB5443C00855E60 /* F0ntz.cfg */,
+				8D0C4E960486CD37000505A6 /* Info.plist */,
+				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
+				02345980000FD03B11CA0E72 /* main.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */,
+				EAECD4510DB542AF00855E60 /* AGL.framework */,
+				EAECD41A0DB53F9800855E60 /* OpenGL.framework */,
+				EAECD41B0DB53F9800855E60 /* GLUT.framework */,
+				20286C33FDCF999611CA2CEA /* Carbon.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		5048396909E3304600765E4B /* Configuration Files */ = {
+			isa = PBXGroup;
+			children = (
+				5048396D09E3307300765E4B /* F0ntzProj.xcconfig */,
+				5048396E09E3307300765E4B /* F0ntzTarget.xcconfig */,
+			);
+			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		EA3B974A0E047CFF00B6423B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA3B974E0E047CFF00B6423B /* libLostEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D0C4E890486CD37000505A6 /* F0ntz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "F0ntz" */;
+			buildPhases = (
+				8D0C4E8C0486CD37000505A6 /* Resources */,
+				8D0C4E8F0486CD37000505A6 /* Sources */,
+				8D0C4E910486CD37000505A6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA3B97510E047D0D00B6423B /* PBXTargetDependency */,
+			);
+			name = F0ntz;
+			productInstallPath = "$(HOME)/Applications";
+			productName = F0ntz;
+			productReference = 508344B209E5C41E0093A071 /* F0ntz.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20286C28FDCF999611CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "F0ntz" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 20286C29FDCF999611CA2CEA /* F0ntz */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA3B974A0E047CFF00B6423B /* Products */;
+					ProjectRef = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D0C4E890486CD37000505A6 /* F0ntz */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA3B974E0E047CFF00B6423B /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D0C4E8C0486CD37000505A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */,
+				8D0C4E8E0486CD37000505A6 /* main.nib in Resources */,
+				EAECD4930DB5443C00855E60 /* F0ntz.cfg in Resources */,
+				EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */,
+				EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D0C4E8F0486CD37000505A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA3B97510E047D0D00B6423B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EA3B97500E047D0D00B6423B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		02345980000FD03B11CA0E72 /* main.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1870340FFE93FCAF11CA0CD7 /* English */,
+			);
+			name = main.nib;
+			sourceTree = "<group>";
+		};
+		0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0867D6ABFE840B52C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C0E91AC608A95435008D54AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5048396E09E3307300765E4B /* F0ntzTarget.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_5/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/lib/mac\"",
+				);
+			};
+			name = Debug;
+		};
+		C0E91AC708A95435008D54AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5048396E09E3307300765E4B /* F0ntzTarget.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_PREFIX_HEADER = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_5/mac\"",
+					"\"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/lib/mac\"",
+				);
+				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+			};
+			name = Release;
+		};
+		C0E91ACA08A95435008D54AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5048396D09E3307300765E4B /* F0ntzProj.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C0E91ACB08A95435008D54AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5048396D09E3307300765E4B /* F0ntzProj.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_5/include\"",
+					"\"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/include\"",
+				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = macosx10.5;
+				SEPARATE_STRIP = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "F0ntz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E91AC608A95435008D54AB /* Debug */,
+				C0E91AC708A95435008D54AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "F0ntz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E91ACA08A95435008D54AB /* Debug */,
+				C0E91ACB08A95435008D54AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 20286C28FDCF999611CA2CEA /* Project object */;
+}

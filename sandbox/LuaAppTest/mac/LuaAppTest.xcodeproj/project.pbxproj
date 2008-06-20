@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA3B993D0E04ABE600B6423B /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B99390E04ABE600B6423B /* AGL.framework */; };
+		EA3B993E0E04ABE600B6423B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B993A0E04ABE600B6423B /* OpenGL.framework */; };
+		EA3B993F0E04ABE600B6423B /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B993B0E04ABE600B6423B /* GLUT.framework */; };
+		EA3B99400E04ABE600B6423B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B993C0E04ABE600B6423B /* Carbon.framework */; };
+		EA3B99460E04ABF600B6423B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B99450E04ABF600B6423B /* main.cpp */; };
+		EA3B99480E04ABFA00B6423B /* application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA3B99470E04ABFA00B6423B /* application.lua */; };
+		EA3B995E0E04ACF300B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B99430E04ABE600B6423B /* libLostEngine.a */; };
+		EA3B99E80E04C2FD00B6423B /* stuff.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA3B99E60E04C2C600B6423B /* stuff.lua */; };
+		EA3B9A280E04D5A700B6423B /* luabindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B9A270E04D5A700B6423B /* luabindings.cpp */; };
+		EAA6C1420E0724390014AE0F /* MouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6C1410E0724390014AE0F /* MouseEvent.cpp */; };
+		EAA6C1570E0724C10014AE0F /* KeyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6C1560E0724C10014AE0F /* KeyEvent.cpp */; };
+		EAC5C6220E0B229A00B9DFAC /* LuaMouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C61D0E0B229A00B9DFAC /* LuaMouseEvent.cpp */; };
+		EAC5C6230E0B229A00B9DFAC /* LuaEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C61E0E0B229A00B9DFAC /* LuaEventDispatcher.cpp */; };
+		EAC5C6240E0B229A00B9DFAC /* LuaApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C61F0E0B229A00B9DFAC /* LuaApplication.cpp */; };
+		EAC5C6250E0B229A00B9DFAC /* LuaKeyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C6200E0B229A00B9DFAC /* LuaKeyEvent.cpp */; };
+		EAC5C6260E0B229A00B9DFAC /* LuaEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C6210E0B229A00B9DFAC /* LuaEvent.cpp */; };
+		EACFF9FB0E09EA9E00A25FED /* firefox logo ktten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EACFF9F80E09EA9E00A25FED /* firefox logo ktten+tits.jpg */; };
+		EACFF9FC0E09EA9E00A25FED /* ssao.png in Resources */ = {isa = PBXBuildFile; fileRef = EACFF9F90E09EA9E00A25FED /* ssao.png */; };
+		EACFF9FD0E09EA9E00A25FED /* 286die.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EACFF9FA0E09EA9E00A25FED /* 286die.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA3B99420E04ABE600B6423B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B99360E04ABE600B6423B /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA3B995F0E04ACFB00B6423B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B99360E04ABE600B6423B /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* LuaAppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaAppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3B99360E04ABE600B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA3B99390E04ABE600B6423B /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EA3B993A0E04ABE600B6423B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EA3B993B0E04ABE600B6423B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EA3B993C0E04ABE600B6423B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EA3B99450E04ABF600B6423B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA3B99470E04ABFA00B6423B /* application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = application.lua; path = ../application.lua; sourceTree = SOURCE_ROOT; };
+		EA3B99E60E04C2C600B6423B /* stuff.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stuff.lua; sourceTree = "<group>"; };
+		EA3B9A270E04D5A700B6423B /* luabindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = luabindings.cpp; path = ../luabindings.cpp; sourceTree = SOURCE_ROOT; };
+		EA842EAA0E05840800BDF3C0 /* Konfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Konfig.h; path = ../Konfig.h; sourceTree = SOURCE_ROOT; };
+		EA842EAB0E05840800BDF3C0 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../Application.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1350E0722D90014AE0F /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MouseEvent.h; path = ../MouseEvent.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1360E0722D90014AE0F /* KeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyEvent.h; path = ../KeyEvent.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1370E0722D90014AE0F /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDispatcher.h; path = ../EventDispatcher.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1380E0722D90014AE0F /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../Event.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1390E0722D90014AE0F /* EventQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventQueue.h; path = ../EventQueue.h; sourceTree = SOURCE_ROOT; };
+		EAA6C1410E0724390014AE0F /* MouseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MouseEvent.cpp; path = ../MouseEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EAA6C1560E0724C10014AE0F /* KeyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KeyEvent.cpp; path = ../KeyEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EAA6C1C40E0731DB0014AE0F /* luabindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luabindings.h; path = ../luabindings.h; sourceTree = SOURCE_ROOT; };
+		EAC5C61D0E0B229A00B9DFAC /* LuaMouseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaMouseEvent.cpp; path = ../LuaMouseEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EAC5C61E0E0B229A00B9DFAC /* LuaEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaEventDispatcher.cpp; path = ../LuaEventDispatcher.cpp; sourceTree = SOURCE_ROOT; };
+		EAC5C61F0E0B229A00B9DFAC /* LuaApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaApplication.cpp; path = ../LuaApplication.cpp; sourceTree = SOURCE_ROOT; };
+		EAC5C6200E0B229A00B9DFAC /* LuaKeyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaKeyEvent.cpp; path = ../LuaKeyEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EAC5C6210E0B229A00B9DFAC /* LuaEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaEvent.cpp; path = ../LuaEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EACFF9F80E09EA9E00A25FED /* firefox logo ktten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "firefox logo ktten+tits.jpg"; path = "../resources/firefox logo ktten+tits.jpg"; sourceTree = SOURCE_ROOT; };
+		EACFF9F90E09EA9E00A25FED /* ssao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ssao.png; path = ../resources/ssao.png; sourceTree = SOURCE_ROOT; };
+		EACFF9FA0E09EA9E00A25FED /* 286die.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 286die.jpg; path = ../resources/286die.jpg; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3B995E0E04ACF300B6423B /* libLostEngine.a in Frameworks */,
+				EA3B993D0E04ABE600B6423B /* AGL.framework in Frameworks */,
+				EA3B993E0E04ABE600B6423B /* OpenGL.framework in Frameworks */,
+				EA3B993F0E04ABE600B6423B /* GLUT.framework in Frameworks */,
+				EA3B99400E04ABE600B6423B /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* LuaAppTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* LuaAppTest */ = {
+			isa = PBXGroup;
+			children = (
+				EA3B99450E04ABF600B6423B /* main.cpp */,
+				EAC5C6180E0B223D00B9DFAC /* TestClasses */,
+				EAC5C6190E0B225500B9DFAC /* Lua Bindings */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Libs */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = LuaAppTest;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EACFF9F80E09EA9E00A25FED /* firefox logo ktten+tits.jpg */,
+				EACFF9F90E09EA9E00A25FED /* ssao.png */,
+				EACFF9FA0E09EA9E00A25FED /* 286die.jpg */,
+				EA3B99470E04ABFA00B6423B /* application.lua */,
+				EA3B99E60E04C2C600B6423B /* stuff.lua */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				EA3B99360E04ABE600B6423B /* LostEngine.xcodeproj */,
+				EA3B99390E04ABE600B6423B /* AGL.framework */,
+				EA3B993A0E04ABE600B6423B /* OpenGL.framework */,
+				EA3B993B0E04ABE600B6423B /* GLUT.framework */,
+				EA3B993C0E04ABE600B6423B /* Carbon.framework */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		EA3B99370E04ABE600B6423B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA3B99430E04ABE600B6423B /* libLostEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAC5C6180E0B223D00B9DFAC /* TestClasses */ = {
+			isa = PBXGroup;
+			children = (
+				EA842EAA0E05840800BDF3C0 /* Konfig.h */,
+				EA842EAB0E05840800BDF3C0 /* Application.h */,
+				EAA6C1410E0724390014AE0F /* MouseEvent.cpp */,
+				EAA6C1350E0722D90014AE0F /* MouseEvent.h */,
+				EAA6C1360E0722D90014AE0F /* KeyEvent.h */,
+				EAA6C1560E0724C10014AE0F /* KeyEvent.cpp */,
+				EAA6C1370E0722D90014AE0F /* EventDispatcher.h */,
+				EAA6C1380E0722D90014AE0F /* Event.h */,
+				EAA6C1390E0722D90014AE0F /* EventQueue.h */,
+			);
+			name = TestClasses;
+			sourceTree = "<group>";
+		};
+		EAC5C6190E0B225500B9DFAC /* Lua Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				EAA6C1C40E0731DB0014AE0F /* luabindings.h */,
+				EA3B9A270E04D5A700B6423B /* luabindings.cpp */,
+				EAC5C61D0E0B229A00B9DFAC /* LuaMouseEvent.cpp */,
+				EAC5C61E0E0B229A00B9DFAC /* LuaEventDispatcher.cpp */,
+				EAC5C61F0E0B229A00B9DFAC /* LuaApplication.cpp */,
+				EAC5C6200E0B229A00B9DFAC /* LuaKeyEvent.cpp */,
+				EAC5C6210E0B229A00B9DFAC /* LuaEvent.cpp */,
+			);
+			name = "Lua Bindings";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* LuaAppTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "LuaAppTest" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA3B99600E04ACFB00B6423B /* PBXTargetDependency */,
+			);
+			name = LuaAppTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = LuaAppTest;
+			productReference = 8D1107320486CEB800E47090 /* LuaAppTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LuaAppTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* LuaAppTest */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA3B99370E04ABE600B6423B /* Products */;
+					ProjectRef = EA3B99360E04ABE600B6423B /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* LuaAppTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA3B99430E04ABE600B6423B /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA3B99420E04ABE600B6423B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3B99480E04ABFA00B6423B /* application.lua in Resources */,
+				EA3B99E80E04C2FD00B6423B /* stuff.lua in Resources */,
+				EACFF9FB0E09EA9E00A25FED /* firefox logo ktten+tits.jpg in Resources */,
+				EACFF9FC0E09EA9E00A25FED /* ssao.png in Resources */,
+				EACFF9FD0E09EA9E00A25FED /* 286die.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3B99460E04ABF600B6423B /* main.cpp in Sources */,
+				EA3B9A280E04D5A700B6423B /* luabindings.cpp in Sources */,
+				EAA6C1420E0724390014AE0F /* MouseEvent.cpp in Sources */,
+				EAA6C1570E0724C10014AE0F /* KeyEvent.cpp in Sources */,
+				EAC5C6220E0B229A00B9DFAC /* LuaMouseEvent.cpp in Sources */,
+				EAC5C6230E0B229A00B9DFAC /* LuaEventDispatcher.cpp in Sources */,
+				EAC5C6240E0B229A00B9DFAC /* LuaApplication.cpp in Sources */,
+				EAC5C6250E0B229A00B9DFAC /* LuaKeyEvent.cpp in Sources */,
+				EAC5C6260E0B229A00B9DFAC /* LuaEvent.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA3B99600E04ACFB00B6423B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EA3B995F0E04ACFB00B6423B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = LuaAppTest;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = LuaAppTest;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "LuaAppTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LuaAppTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

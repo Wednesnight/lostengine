@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="F0ntz" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="build\F0ntz" prefix_auto="1" extension_auto="1" />
+				<Option object_output="tmp\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPROFILER_ENABLED" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="build\F0ntz" prefix_auto="1" extension_auto="1" />
+				<Option object_output="tmp\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DGLUT_NO_LIB_PRAGMA" />
+			<Add option="-DGLUT_NO_WARNING_DISABLE" />
+			<Add option="-DGLUT_BUILDING_LIB" />
+			<Add directory="..\..\..\thirdparty\boost\boost_1_34_1\include" />
+			<Add directory="..\..\..\projects\lostengine" />
+			<Add directory="..\..\..\thirdparty\freetype2\freetype_2_3_5\include" />
+			<Add directory="..\..\..\thirdparty\FreeImage\FreeImage_3_10_0\include" />
+			<Add directory="..\..\..\thirdparty\glfw\glfw_2_6\include" />
+		</Compiler>
+		<Linker>
+			<Add library="..\..\..\thirdparty\boost\boost_1_34_1\windows\lib\libboost_signals-mgw34-mt-s-1_34_1.a" />
+			<Add library="..\..\..\thirdparty\freetype2\freetype_2_3_5\windows\libfreetype.a" />
+			<Add library="..\..\..\thirdparty\glfw\glfw_2_6\windows\libglfw.a" />
+			<Add library="libopengl32.a" />
+			<Add library="libglu32.a" />
+			<Add library="libglut32.a" />
+			<Add library="libshlwapi.a" />
+		</Linker>
+		<ExtraCommands>
+			<Add after="cmd /c copy /Y ..\resources\* build\" />
+			<Mode after="always" />
+		</ExtraCommands>
+		<Unit filename="..\..\..\projects\lostengine\lost\common\Logger.cpp" />
+		<Unit filename="..\..\..\projects\lostengine\lost\common\Profiler.cpp" />
+		<Unit filename="..\..\..\projects\lostengine\lost\platform\Platform.cpp" />
+		<Unit filename="..\..\..\projects\lostengine\lost\platform\Platform_Windows.cpp" />
+		<Unit filename="..\main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

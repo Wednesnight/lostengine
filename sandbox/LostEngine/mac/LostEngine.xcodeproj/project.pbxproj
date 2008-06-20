@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA01CECF0D412C1700F63EC5 /* SliderBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA01CECB0D412BF600F63EC5 /* SliderBackground.jpg */; };
+		EA600F6B0D2C4A46000498C2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD339B00CF4D50A004C8879 /* main.cpp */; };
+		EA600F6C0D2C4A46000498C2 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADDEC8B0D15BE1B005E3FC7 /* Platform_Mac.cpp */; };
+		EA600F6D0D2C4A46000498C2 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADDEC8C0D15BE1B005E3FC7 /* Platform.cpp */; };
+		EA600F6E0D2C4A88000498C2 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33A0E0CF4E8DE004C8879 /* libboost_program_options.a */; };
+		EA600F6F0D2C4A88000498C2 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B270CF524DD004C8879 /* libglfw.a */; };
+		EA600F700D2C4A88000498C2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B380CF527A4004C8879 /* OpenGL.framework */; };
+		EA600F710D2C4A88000498C2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B4C0CF527AD004C8879 /* GLUT.framework */; };
+		EA600F720D2C4A88000498C2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B510CF527D9004C8879 /* CoreFoundation.framework */; };
+		EA600F730D2C4A88000498C2 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B800CF52800004C8879 /* Carbon.framework */; };
+		EA600F740D2C4A88000498C2 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33CDF0CF52824004C8879 /* AGL.framework */; };
+		EA600F750D2C4A88000498C2 /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EACDDC450CF62700001D3759 /* libboost_signals.a */; };
+		EA600F760D2C4A88000498C2 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9578F10D1373F2008A4ADA /* libftgl.a */; };
+		EA600F770D2C4A88000498C2 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9578FA0D1373FF008A4ADA /* libfreetype.a */; };
+		EA600F780D2C4A88000498C2 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9579020D137554008A4ADA /* libz.a */; };
+		EA600F790D2C4A88000498C2 /* libfreeimage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA957A0A0D138A80008A4ADA /* libfreeimage.a */; };
+		EA600F9A0D2C4AFD000498C2 /* zig.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA9578990D137205008A4ADA /* zig.ttf */; };
+		EA600F9B0D2C4AFD000498C2 /* Blindfold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA95789A0D137205008A4ADA /* Blindfold.ttf */; };
+		EA600F9C0D2C4AFD000498C2 /* Slaytanic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA95789B0D137205008A4ADA /* Slaytanic.ttf */; };
+		EA600F9D0D2C4AFD000498C2 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA95789C0D137205008A4ADA /* suigeneris.ttf */; };
+		EA600F9E0D2C4AFD000498C2 /* LostEngine.cfg in Resources */ = {isa = PBXBuildFile; fileRef = EA9579A40D137B66008A4ADA /* LostEngine.cfg */; };
+		EA600F9F0D2C4AFD000498C2 /* nomnomnom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA957A910D1393C9008A4ADA /* nomnomnom.jpg */; };
+		EA95789D0D137205008A4ADA /* zig.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA9578990D137205008A4ADA /* zig.ttf */; };
+		EA95789E0D137205008A4ADA /* Blindfold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA95789A0D137205008A4ADA /* Blindfold.ttf */; };
+		EA95789F0D137205008A4ADA /* Slaytanic.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA95789B0D137205008A4ADA /* Slaytanic.ttf */; };
+		EA9578A00D137205008A4ADA /* suigeneris.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA95789C0D137205008A4ADA /* suigeneris.ttf */; };
+		EA9578F20D1373F2008A4ADA /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9578F10D1373F2008A4ADA /* libftgl.a */; };
+		EA9578FB0D1373FF008A4ADA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9578FA0D1373FF008A4ADA /* libfreetype.a */; };
+		EA9579030D137554008A4ADA /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA9579020D137554008A4ADA /* libz.a */; };
+		EA9579A50D137B66008A4ADA /* LostEngine.cfg in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA9579A40D137B66008A4ADA /* LostEngine.cfg */; };
+		EA957A0B0D138A80008A4ADA /* libfreeimage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA957A0A0D138A80008A4ADA /* libfreeimage.a */; };
+		EA957A920D1393C9008A4ADA /* nomnomnom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA957A910D1393C9008A4ADA /* nomnomnom.jpg */; };
+		EAB5137A0D3EB73E0009DAB2 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB513790D3EB73E0009DAB2 /* libboost_serialization.a */; };
+		EAB513810D3EB7680009DAB2 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAB513790D3EB73E0009DAB2 /* libboost_serialization.a */; };
+		EACDDC460CF62700001D3759 /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EACDDC450CF62700001D3759 /* libboost_signals.a */; };
+		EAD339B10CF4D50A004C8879 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD339B00CF4D50A004C8879 /* main.cpp */; };
+		EAD33A0F0CF4E8DE004C8879 /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33A0E0CF4E8DE004C8879 /* libboost_program_options.a */; };
+		EAD33B280CF524DD004C8879 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B270CF524DD004C8879 /* libglfw.a */; };
+		EAD33B390CF527A4004C8879 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B380CF527A4004C8879 /* OpenGL.framework */; };
+		EAD33B4D0CF527AD004C8879 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B4C0CF527AD004C8879 /* GLUT.framework */; };
+		EAD33B520CF527D9004C8879 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B510CF527D9004C8879 /* CoreFoundation.framework */; };
+		EAD33B810CF52800004C8879 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33B800CF52800004C8879 /* Carbon.framework */; };
+		EAD33CE00CF52824004C8879 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD33CDF0CF52824004C8879 /* AGL.framework */; };
+		EADDEC8D0D15BE1B005E3FC7 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADDEC8B0D15BE1B005E3FC7 /* Platform_Mac.cpp */; };
+		EADDEC8E0D15BE1B005E3FC7 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADDEC8C0D15BE1B005E3FC7 /* Platform.cpp */; };
+		EAE480E10D2C5669000FEC03 /* munkeebrain.icns in Resources */ = {isa = PBXBuildFile; fileRef = EAE480DF0D2C5661000FEC03 /* munkeebrain.icns */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EA9578940D1371A8008A4ADA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				EA95789D0D137205008A4ADA /* zig.ttf in CopyFiles */,
+				EA95789E0D137205008A4ADA /* Blindfold.ttf in CopyFiles */,
+				EA95789F0D137205008A4ADA /* Slaytanic.ttf in CopyFiles */,
+				EA9578A00D137205008A4ADA /* suigeneris.ttf in CopyFiles */,
+				EA9579A50D137B66008A4ADA /* LostEngine.cfg in CopyFiles */,
+				EA957A920D1393C9008A4ADA /* nomnomnom.jpg in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8DD76F6C0486A84900D96B5E /* LostEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LostEngine; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA01CECB0D412BF600F63EC5 /* SliderBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SliderBackground.jpg; path = ../pics/SliderBackground.jpg; sourceTree = SOURCE_ROOT; };
+		EA600E250D2C1E1A000498C2 /* LostEngine-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LostEngine-Info.plist"; sourceTree = "<group>"; };
+		EA600F620D2C2011000498C2 /* LostEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA69D7980D135881003D7F29 /* Pfonts.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Pfonts.h; path = ../Pfonts.h; sourceTree = SOURCE_ROOT; };
+		EA82F2D10D2C601600E28A55 /* Guiro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Guiro.h; path = ../Guiro.h; sourceTree = SOURCE_ROOT; };
+		EA9578990D137205008A4ADA /* zig.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = zig.ttf; path = ../fonts/zig.ttf; sourceTree = SOURCE_ROOT; };
+		EA95789A0D137205008A4ADA /* Blindfold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Blindfold.ttf; path = ../fonts/Blindfold.ttf; sourceTree = SOURCE_ROOT; };
+		EA95789B0D137205008A4ADA /* Slaytanic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Slaytanic.ttf; path = ../fonts/Slaytanic.ttf; sourceTree = SOURCE_ROOT; };
+		EA95789C0D137205008A4ADA /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../fonts/suigeneris.ttf; sourceTree = SOURCE_ROOT; };
+		EA9578F10D1373F2008A4ADA /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../thirdparty/ftgl/ftgl_2_1_2/mac/libftgl.a; sourceTree = SOURCE_ROOT; };
+		EA9578FA0D1373FF008A4ADA /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../thirdparty/freetype2/freetype_2_3_5/mac/libfreetype.a; sourceTree = SOURCE_ROOT; };
+		EA9579020D137554008A4ADA /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../../thirdparty/zlib/zlib_1_2_3/mac/libz.a; sourceTree = SOURCE_ROOT; };
+		EA9579A40D137B66008A4ADA /* LostEngine.cfg */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = LostEngine.cfg; path = ../LostEngine.cfg; sourceTree = SOURCE_ROOT; };
+		EA957A040D138A42008A4ADA /* Imagombies.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Imagombies.h; path = ../Imagombies.h; sourceTree = SOURCE_ROOT; };
+		EA957A0A0D138A80008A4ADA /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = ../../../thirdparty/FreeImage/FreeImage_3_10_0/mac/libfreeimage.a; sourceTree = SOURCE_ROOT; };
+		EA957A910D1393C9008A4ADA /* nomnomnom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nomnomnom.jpg; path = ../pics/nomnomnom.jpg; sourceTree = SOURCE_ROOT; };
+		EA957B4E0D139DED008A4ADA /* MouseFuxx0r.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MouseFuxx0r.h; path = ../MouseFuxx0r.h; sourceTree = SOURCE_ROOT; };
+		EAB513790D3EB73E0009DAB2 /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = ../../../thirdparty/boost/boost_1_34_1/mac/libboost_serialization.a; sourceTree = SOURCE_ROOT; };
+		EACDDC450CF62700001D3759 /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = ../../../thirdparty/boost/boost_1_34_1/mac/libboost_signals.a; sourceTree = SOURCE_ROOT; };
+		EAD339B00CF4D50A004C8879 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAD33A0E0CF4E8DE004C8879 /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../thirdparty/boost/boost_1_34_1/mac/libboost_program_options.a; sourceTree = SOURCE_ROOT; };
+		EAD33B270CF524DD004C8879 /* libglfw.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw.a; path = ../../../thirdparty/glfw/glfw_2_6/mac/libglfw.a; sourceTree = SOURCE_ROOT; };
+		EAD33B380CF527A4004C8879 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAD33B4C0CF527AD004C8879 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EAD33B510CF527D9004C8879 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		EAD33B800CF52800004C8879 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EAD33CDF0CF52824004C8879 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EADDEC8B0D15BE1B005E3FC7 /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = Platform_Mac.cpp; path = ../../../projects/lostengine/lost/platform/Platform_Mac.cpp; sourceTree = SOURCE_ROOT; };
+		EADDEC8C0D15BE1B005E3FC7 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = Platform.cpp; path = ../../../projects/lostengine/lost/platform/Platform.cpp; sourceTree = SOURCE_ROOT; };
+		EADF9BF90D00BED900124F4C /* StupidDots.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = StupidDots.h; path = ../StupidDots.h; sourceTree = SOURCE_ROOT; };
+		EADF9C160D00C4BF00124F4C /* Visual.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Visual.h; path = ../Visual.h; sourceTree = SOURCE_ROOT; };
+		EADF9D940D00D8CC00124F4C /* Cock.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Cock.h; path = ../Cock.h; sourceTree = SOURCE_ROOT; };
+		EAE480DF0D2C5661000FEC03 /* munkeebrain.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = munkeebrain.icns; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD33A0F0CF4E8DE004C8879 /* libboost_program_options.a in Frameworks */,
+				EAD33B280CF524DD004C8879 /* libglfw.a in Frameworks */,
+				EAD33B390CF527A4004C8879 /* OpenGL.framework in Frameworks */,
+				EAD33B4D0CF527AD004C8879 /* GLUT.framework in Frameworks */,
+				EAD33B520CF527D9004C8879 /* CoreFoundation.framework in Frameworks */,
+				EAD33B810CF52800004C8879 /* Carbon.framework in Frameworks */,
+				EAD33CE00CF52824004C8879 /* AGL.framework in Frameworks */,
+				EACDDC460CF62700001D3759 /* libboost_signals.a in Frameworks */,
+				EA9578F20D1373F2008A4ADA /* libftgl.a in Frameworks */,
+				EA9578FB0D1373FF008A4ADA /* libfreetype.a in Frameworks */,
+				EA9579030D137554008A4ADA /* libz.a in Frameworks */,
+				EA957A0B0D138A80008A4ADA /* libfreeimage.a in Frameworks */,
+				EAB5137A0D3EB73E0009DAB2 /* libboost_serialization.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA600F600D2C2011000498C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA600F6E0D2C4A88000498C2 /* libboost_program_options.a in Frameworks */,
+				EAB513810D3EB7680009DAB2 /* libboost_serialization.a in Frameworks */,
+				EA600F6F0D2C4A88000498C2 /* libglfw.a in Frameworks */,
+				EA600F700D2C4A88000498C2 /* OpenGL.framework in Frameworks */,
+				EA600F710D2C4A88000498C2 /* GLUT.framework in Frameworks */,
+				EA600F720D2C4A88000498C2 /* CoreFoundation.framework in Frameworks */,
+				EA600F730D2C4A88000498C2 /* Carbon.framework in Frameworks */,
+				EA600F740D2C4A88000498C2 /* AGL.framework in Frameworks */,
+				EA600F750D2C4A88000498C2 /* libboost_signals.a in Frameworks */,
+				EA600F760D2C4A88000498C2 /* libftgl.a in Frameworks */,
+				EA600F770D2C4A88000498C2 /* libfreetype.a in Frameworks */,
+				EA600F780D2C4A88000498C2 /* libz.a in Frameworks */,
+				EA600F790D2C4A88000498C2 /* libfreeimage.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				EAD339BD0CF4DFCF004C8879 /* libs */,
+				EA95790C0D1375DA008A4ADA /* Resources */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = LostEngine;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EAD339B00CF4D50A004C8879 /* main.cpp */,
+				EADF9BF90D00BED900124F4C /* StupidDots.h */,
+				EADF9D940D00D8CC00124F4C /* Cock.h */,
+				EADF9C160D00C4BF00124F4C /* Visual.h */,
+				EA69D7980D135881003D7F29 /* Pfonts.h */,
+				EA957A040D138A42008A4ADA /* Imagombies.h */,
+				EA957B4E0D139DED008A4ADA /* MouseFuxx0r.h */,
+				EA82F2D10D2C601600E28A55 /* Guiro.h */,
+				EADDEC8B0D15BE1B005E3FC7 /* Platform_Mac.cpp */,
+				EADDEC8C0D15BE1B005E3FC7 /* Platform.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* LostEngine */,
+				EA600F620D2C2011000498C2 /* LostEngine.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA95790C0D1375DA008A4ADA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAE480DF0D2C5661000FEC03 /* munkeebrain.icns */,
+				EA9578990D137205008A4ADA /* zig.ttf */,
+				EA95789A0D137205008A4ADA /* Blindfold.ttf */,
+				EA95789B0D137205008A4ADA /* Slaytanic.ttf */,
+				EA95789C0D137205008A4ADA /* suigeneris.ttf */,
+				EA9579A40D137B66008A4ADA /* LostEngine.cfg */,
+				EA957A910D1393C9008A4ADA /* nomnomnom.jpg */,
+				EA600E250D2C1E1A000498C2 /* LostEngine-Info.plist */,
+				EA01CECB0D412BF600F63EC5 /* SliderBackground.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EAD339BD0CF4DFCF004C8879 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				EAD33A0E0CF4E8DE004C8879 /* libboost_program_options.a */,
+				EACDDC450CF62700001D3759 /* libboost_signals.a */,
+				EAB513790D3EB73E0009DAB2 /* libboost_serialization.a */,
+				EAD33B270CF524DD004C8879 /* libglfw.a */,
+				EA9578F10D1373F2008A4ADA /* libftgl.a */,
+				EA9578FA0D1373FF008A4ADA /* libfreetype.a */,
+				EA957A0A0D138A80008A4ADA /* libfreeimage.a */,
+				EA9579020D137554008A4ADA /* libz.a */,
+				EAD33B380CF527A4004C8879 /* OpenGL.framework */,
+				EAD33B4C0CF527AD004C8879 /* GLUT.framework */,
+				EAD33B800CF52800004C8879 /* Carbon.framework */,
+				EAD33B510CF527D9004C8879 /* CoreFoundation.framework */,
+				EAD33CDF0CF52824004C8879 /* AGL.framework */,
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* LostEngineCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "LostEngineCLI" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				EA9578940D1371A8008A4ADA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LostEngineCLI;
+			productInstallPath = "$(HOME)/bin";
+			productName = LostEngine;
+			productReference = 8DD76F6C0486A84900D96B5E /* LostEngine */;
+			productType = "com.apple.product-type.tool";
+		};
+		EA600F610D2C2011000498C2 /* LostEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA600F660D2C202F000498C2 /* Build configuration list for PBXNativeTarget "LostEngine" */;
+			buildPhases = (
+				EA600F5E0D2C2011000498C2 /* Resources */,
+				EA600F5F0D2C2011000498C2 /* Sources */,
+				EA600F600D2C2011000498C2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LostEngine;
+			productName = LostEngine;
+			productReference = EA600F620D2C2011000498C2 /* LostEngine.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "LostEngine" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* LostEngine */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* LostEngineCLI */,
+				EA600F610D2C2011000498C2 /* LostEngine */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA600F5E0D2C2011000498C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA600F9A0D2C4AFD000498C2 /* zig.ttf in Resources */,
+				EA600F9B0D2C4AFD000498C2 /* Blindfold.ttf in Resources */,
+				EA600F9C0D2C4AFD000498C2 /* Slaytanic.ttf in Resources */,
+				EA600F9D0D2C4AFD000498C2 /* suigeneris.ttf in Resources */,
+				EA600F9E0D2C4AFD000498C2 /* LostEngine.cfg in Resources */,
+				EA600F9F0D2C4AFD000498C2 /* nomnomnom.jpg in Resources */,
+				EA01CECF0D412C1700F63EC5 /* SliderBackground.jpg in Resources */,
+				EAE480E10D2C5669000FEC03 /* munkeebrain.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD339B10CF4D50A004C8879 /* main.cpp in Sources */,
+				EADDEC8D0D15BE1B005E3FC7 /* Platform_Mac.cpp in Sources */,
+				EADDEC8E0D15BE1B005E3FC7 /* Platform.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA600F5F0D2C2011000498C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA600F6B0D2C4A46000498C2 /* main.cpp in Sources */,
+				EA600F6C0D2C4A46000498C2 /* Platform_Mac.cpp in Sources */,
+				EA600F6D0D2C4A46000498C2 /* Platform.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_4 = "\"$(SRCROOT)/../../../thirdparty/ftgl/ftgl_2_1_2/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_5 = "\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_6 = "\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_7 = "\"$(SRCROOT)/../../../thirdparty/FreeImage/FreeImage_3_10_0/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				PRODUCT_NAME = LostEngine;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = i386;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = "$(HOME)/bin";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_7)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_8)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_3 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_4 = "\"$(SRCROOT)/../../../thirdparty/ftgl/ftgl_2_1_2/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_5 = "\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_6 = "\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_7 = "\"$(SRCROOT)/../../../thirdparty/FreeImage/FreeImage_3_10_0/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_8 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				PRODUCT_NAME = LostEngine;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../thirdparty/boost/boost_1_34_1/include,
+					../../../projects/lostengine,
+					../../../thirdparty/glfw/glfw_2_6/include,
+					../../../thirdparty/ftgl/ftgl_2_1_2/include,
+					../../../thirdparty/freetype2/freetype_2_3_5/include,
+					../../../thirdparty/FreeImage/FreeImage_3_10_0/include,
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				VALID_ARCHS = "i386 ";
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../thirdparty/boost/boost_1_34_1/include,
+					../../../projects/lostengine,
+					../../../thirdparty/glfw/glfw_2_6/include,
+					../../../thirdparty/ftgl/ftgl_2_1_2/include,
+					../../../thirdparty/freetype2/freetype_2_3_5/include,
+					../../../thirdparty/FreeImage/FreeImage_3_10_0/include,
+				);
+				LIBRARY_SEARCH_PATHS = "";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				VALID_ARCHS = "i386 ";
+			};
+			name = Release;
+		};
+		EA600F640D2C2011000498C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "LostEngine-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../thirdparty/ftgl/ftgl_2_1_2/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4 = "\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5 = "\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../thirdparty/FreeImage/FreeImage_3_10_0/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = LostEngine;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		EA600F650D2C2011000498C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "LostEngine-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)/../../../thirdparty/ftgl/ftgl_2_1_2/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_4 = "\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_5 = "\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../thirdparty/FreeImage/FreeImage_3_10_0/mac\"";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = LostEngine;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "LostEngineCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "LostEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA600F660D2C202F000498C2 /* Build configuration list for PBXNativeTarget "LostEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA600F640D2C2011000498C2 /* Debug */,
+				EA600F650D2C2011000498C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
