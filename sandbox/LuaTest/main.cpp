@@ -56,7 +56,6 @@ int main (int argc, char * const argv[]) {
     state.openLibs();
     
     // perform luabind stuff
-    open(state); // luabind::open requires a lua_State*, but we can cast lost::lua::State to lua_State*, so it just works
     module(state, "testing")
     [
         def("greet", &greet),
