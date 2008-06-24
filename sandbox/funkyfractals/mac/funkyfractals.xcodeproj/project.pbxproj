@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EFEF5070E10278B006B3721 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */; };
+		3EFEF5470E10384C006B3721 /* funkyfractals.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEF5460E10384C006B3721 /* funkyfractals.lua */; };
+		3EFEF5670E103C56006B3721 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEF5660E103C56006B3721 /* LuaVec3.cpp */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA3B977D0E04832000B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B977C0E04831B00B6423B /* libLostEngine.a */; };
 		EA45F5B50DE52D08001B4889 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AE0DE52D08001B4889 /* AGL.framework */; };
@@ -23,20 +26,25 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA3B977E0E04832700B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLSystem.cpp; path = ../../../projects/lostengine/lost/lsystem/LuaLSystem.cpp; sourceTree = SOURCE_ROOT; };
+		3EFEF5460E10384C006B3721 /* funkyfractals.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = funkyfractals.lua; path = ../funkyfractals.lua; sourceTree = SOURCE_ROOT; };
+		3EFEF54D0E1038D5006B3721 /* LuaLSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaLSystem.h; path = ../../../projects/lostengine/lost/lsystem/LuaLSystem.h; sourceTree = SOURCE_ROOT; };
+		3EFEF5650E103C56006B3721 /* LuaVec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaVec3.h; path = ../../../projects/lostengine/lost/math/LuaVec3.h; sourceTree = SOURCE_ROOT; };
+		3EFEF5660E103C56006B3721 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaVec3.cpp; path = ../../../projects/lostengine/lost/math/LuaVec3.cpp; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* funkyfractals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = funkyfractals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -89,6 +97,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3EFEF5460E10384C006B3721 /* funkyfractals.lua */,
 				EA45F6050DE52EE3001B4889 /* lighting.vs */,
 				EA45F6060DE52EE3001B4889 /* lighting.fs */,
 				EA45F5CB0DE52DA7001B4889 /* funkyfractals.cfg */,
@@ -122,6 +131,10 @@
 			isa = PBXGroup;
 			children = (
 				EA45F5E60DE52DF9001B4889 /* main.cpp */,
+				3EFEF5650E103C56006B3721 /* LuaVec3.h */,
+				3EFEF5660E103C56006B3721 /* LuaVec3.cpp */,
+				3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */,
+				3EFEF54D0E1038D5006B3721 /* LuaLSystem.h */,
 				EA45F5CA0DE52DA1001B4889 /* FunkyFractals.h */,
 			);
 			name = Sources;
@@ -187,6 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EFEF5470E10384C006B3721 /* funkyfractals.lua in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */,
 				EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */,
@@ -201,6 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */,
+				3EFEF5070E10278B006B3721 /* LuaLSystem.cpp in Sources */,
+				3EFEF5670E103C56006B3721 /* LuaVec3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +302,8 @@
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

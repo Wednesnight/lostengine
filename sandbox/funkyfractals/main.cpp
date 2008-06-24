@@ -3,6 +3,12 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/Timer.h"
+
+#include "lost/lua/lua.h"
+#include "lost/lua/State.h"
+#include "lost/lsystem/LuaLSystem.h"
+#include "lost/math/LuaVec3.h"
+
 #include "FunkyFractals.h"
 
 using namespace std;
@@ -16,7 +22,11 @@ int main(int argn, char** args)
   {
     Application app;
 
-    FunkyFractals funkyfractals(app.displayAttributes);
+    lost::lua::State interpreter;
+    bindLSystem(interpreter);
+    bindVec3(interpreter);
+    FunkyFractals funkyfractals(app.displayAttributes, interpreter);
+
     app.key.connect(boost::bind(&FunkyFractals::keyboard, &funkyfractals, _1));
     app.windowResize.connect(boost::bind(&FunkyFractals::resetViewPort, &funkyfractals, _1,_2));
     funkyfractals.quit.connect(boost::bind(&Application::quit, &app));

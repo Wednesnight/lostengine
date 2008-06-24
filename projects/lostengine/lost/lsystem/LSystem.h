@@ -84,6 +84,7 @@ namespace lost
         mAxiom(inAxiom),
         mVariableMap(inVariableMap)
       {
+        reset();
       }
 
       math::Vec3& angle() { return mAngle; }
@@ -120,7 +121,7 @@ namespace lost
       LSystem() {}
 
       // advance given LSystemState (steps = iteration count from current state)
-      void advance( boost::shared_ptr<LSystemState>& state, unsigned int steps = 1 )
+      void advance( boost::shared_ptr<LSystemState>& state, unsigned int steps )
       {
         for (unsigned int stepCount = 0; stepCount < steps; ++stepCount)
         {
@@ -141,11 +142,19 @@ namespace lost
           }
         }
       }
+      void advance( boost::shared_ptr<LSystemState>& state )
+      {
+        advance(state, 1);
+      }
 
       // regress given LSystemState (steps = iteration count from current state)
       void regress( boost::shared_ptr<LSystemState>& state, unsigned int steps = 1 )
       {
         throw std::runtime_error( "lost::lsystem::LSystem::regress() : not implemented" );
+      }
+      void regress( boost::shared_ptr<LSystemState>& state )
+      {
+        regress(state, 1);
       }
 
       void walk( const boost::shared_ptr<LSystemState>& state, const lost::math::Matrix& startMatrix, const boost::function<void (lost::math::Matrix&, LSystemResult&)> callback )

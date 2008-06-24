@@ -55,20 +55,27 @@ struct FunkyFractals
   lost::lsystem::LSystem                         lsystem;
   boost::shared_ptr<lost::lsystem::LSystemState> state;
 
-  FunkyFractals(lost::common::DisplayAttributes& inDisplayAttributes)
+  lost::lua::State& interpreter;
+  
+  FunkyFractals(lost::common::DisplayAttributes& inDisplayAttributes, lost::lua::State& inInterpreter)
   : eye(50,50,100),
     at(0,50,0),
     up(0,1,0),
     fovy(90),
     znear(1),
     zfar(1000),
-    displayAttributes(inDisplayAttributes)
+    displayAttributes(inDisplayAttributes),
+    interpreter(inInterpreter)
   {
+/*
     std::map<char, std::string> variableMap;
     variableMap['F'] = "FzXFZxFzXFzXF";
     state.reset(new lost::lsystem::LSystemState("FzFzFzF", variableMap, lost::math::Vec3(5,0,90)));
     state->reset();
     lsystem.advance(state, 6);
+*/
+    interpreter.doResourceFile("funkyfractals.lua");      
+    state = luabind::object_cast<boost::shared_ptr<lost::lsystem::LSystemState> >(luabind::globals(interpreter)["state"]);
 
     lightingShaderInit();
   }
@@ -104,6 +111,7 @@ struct FunkyFractals
 
   void keyboard( const lost::event::KeyEvent& inEvent )
   {
+    std::string input;
     switch (inEvent.key)
     {
       case lost::engine::K_ESCAPE :
@@ -112,8 +120,12 @@ struct FunkyFractals
           quit();
         }
         break;
-        default :
+      case lost::engine::K_F6 :
+        std::cin >> input;
+        interpreter.doString(input);
         break;
+      default :
+      break;
     }
   }
 
