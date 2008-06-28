@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		341D7D4E0D9EE69A00259455 /* TestViewPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 341D7D4D0D9EE69A00259455 /* TestViewPath.cpp */; };
-		EA0B20250DC6502900EC4F12 /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0B20240DC6502900EC4F12 /* libboost_signals.a */; };
-		EA0B20270DC6502E00EC4F12 /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0B20260DC6502E00EC4F12 /* libboost_serialization.a */; };
 		EA32C5BF0DAC03B10016D0E4 /* TestCompileLostGuiroControlView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA32C5BE0DAC03B10016D0E4 /* TestCompileLostGuiroControlView.cpp */; };
 		EA32C5D30DAC04B40016D0E4 /* TestCompileLostGuiroControlEdit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA32C5D20DAC04B40016D0E4 /* TestCompileLostGuiroControlEdit.cpp */; };
 		EA32C5DF0DAC06870016D0E4 /* TestCompileLostGuiroControlUserInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA32C5DE0DAC06870016D0E4 /* TestCompileLostGuiroControlUserInterface.cpp */; };
@@ -46,15 +44,14 @@
 		EA3E200F0D6B61B10021BD14 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3E200E0D6B61B10021BD14 /* main.cpp */; };
 		EA3E20130D6B62F50021BD14 /* TestDimensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3E20120D6B62F50021BD14 /* TestDimensions.cpp */; };
 		EA3E20B30D6BA31A0021BD14 /* TestArea.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3E20B20D6BA31A0021BD14 /* TestArea.cpp */; };
-		EA9776010DABF31600A8FC10 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9776000DABF31600A8FC10 /* Logger.cpp */; };
 		EAA205D40D7FCEA000CEB871 /* TestCompileLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA205D30D7FCEA000CEB871 /* TestCompileLostMathVec2.cpp */; };
 		EAA205E70D7FCEEA00CEB871 /* TestCompileLostIoVec2Io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA205E60D7FCEEA00CEB871 /* TestCompileLostIoVec2Io.cpp */; };
 		EAA206010D7FD33100CEB871 /* TestCompileLostGuiroIoTextureIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA205FA0D7FD33100CEB871 /* TestCompileLostGuiroIoTextureIo.cpp */; };
+		EAAF97090E15B3EA00B28BF6 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAF97080E15B3DC00B28BF6 /* libLostEngine.a */; };
+		EAAF97310E15B89800B28BF6 /* TestEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAF97300E15B89800B28BF6 /* TestEventDispatcher.cpp */; };
 		EABE1E510DA9596D00A934C4 /* TestCompileLostGuiroFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABE1E500DA9596D00A934C4 /* TestCompileLostGuiroFactory.cpp */; };
 		EABF3B970DA41F300093A3D7 /* TestView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABF3B960DA41F300093A3D7 /* TestView.cpp */; };
 		EAD9F6EB0D9AE8A100390D25 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD9F6EA0D9AE8A100390D25 /* OpenGL.framework */; };
-		EAD9F6FE0D9AE8B100390D25 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9F6FD0D9AE8B100390D25 /* Platform.cpp */; };
-		EAD9F7000D9AE8B500390D25 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9F6FF0D9AE8B500390D25 /* Platform_Mac.cpp */; };
 		EAD9F7030D9AE8C100390D25 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD9F7020D9AE8C100390D25 /* CoreFoundation.framework */; };
 		EAD9F7430D9AE92D00390D25 /* TestCompileLostGuiroIoAreaIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9F7420D9AE92D00390D25 /* TestCompileLostGuiroIoAreaIo.cpp */; };
 		EAD9F7470D9AE94A00390D25 /* TestCompileLostGuiroIoDimensionIo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9F7460D9AE94A00390D25 /* TestCompileLostGuiroIoDimensionIo.cpp */; };
@@ -64,6 +61,23 @@
 		EAEA59930DDA2F59008C3FE7 /* TestLostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEA59920DDA2F59008C3FE7 /* TestLostMathVec4.cpp */; };
 		EAECD5280DB5718000855E60 /* TestGlUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAECD5270DB5718000855E60 /* TestGlUtils.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAAF97070E15B3DC00B28BF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = LostEngine;
+		};
+		EAAF970A0E15B3F700B28BF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
@@ -80,8 +94,6 @@
 /* Begin PBXFileReference section */
 		341D7D4D0D9EE69A00259455 /* TestViewPath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestViewPath.cpp; path = ../../lostengine/lost/test/TestViewPath.cpp; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* LostUnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LostUnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA0B20240DC6502900EC4F12 /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_signals.a; sourceTree = SOURCE_ROOT; };
-		EA0B20260DC6502E00EC4F12 /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_serialization.a; sourceTree = SOURCE_ROOT; };
 		EA32C5BE0DAC03B10016D0E4 /* TestCompileLostGuiroControlView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroControlView.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroControlView.cpp; sourceTree = SOURCE_ROOT; };
 		EA32C5D20DAC04B40016D0E4 /* TestCompileLostGuiroControlEdit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroControlEdit.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroControlEdit.cpp; sourceTree = SOURCE_ROOT; };
 		EA32C5DE0DAC06870016D0E4 /* TestCompileLostGuiroControlUserInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroControlUserInterface.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroControlUserInterface.cpp; sourceTree = SOURCE_ROOT; };
@@ -118,15 +130,14 @@
 		EA3E200E0D6B61B10021BD14 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../lostengine/lost/test/main.cpp; sourceTree = SOURCE_ROOT; };
 		EA3E20120D6B62F50021BD14 /* TestDimensions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestDimensions.cpp; path = ../../lostengine/lost/test/TestDimensions.cpp; sourceTree = SOURCE_ROOT; };
 		EA3E20B20D6BA31A0021BD14 /* TestArea.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestArea.cpp; path = ../../lostengine/lost/test/TestArea.cpp; sourceTree = SOURCE_ROOT; };
-		EA9776000DABF31600A8FC10 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = ../../lostengine/lost/common/Logger.cpp; sourceTree = SOURCE_ROOT; };
 		EAA205D30D7FCEA000CEB871 /* TestCompileLostMathVec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostMathVec2.cpp; path = ../../lostengine/lost/test/TestCompileLostMathVec2.cpp; sourceTree = SOURCE_ROOT; };
 		EAA205E60D7FCEEA00CEB871 /* TestCompileLostIoVec2Io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostIoVec2Io.cpp; path = ../../lostengine/lost/test/TestCompileLostIoVec2Io.cpp; sourceTree = SOURCE_ROOT; };
 		EAA205FA0D7FD33100CEB871 /* TestCompileLostGuiroIoTextureIo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroIoTextureIo.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroIoTextureIo.cpp; sourceTree = SOURCE_ROOT; };
+		EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAAF97300E15B89800B28BF6 /* TestEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestEventDispatcher.cpp; path = ../../lostengine/lost/test/TestEventDispatcher.cpp; sourceTree = SOURCE_ROOT; };
 		EABE1E500DA9596D00A934C4 /* TestCompileLostGuiroFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroFactory.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroFactory.cpp; sourceTree = SOURCE_ROOT; };
 		EABF3B960DA41F300093A3D7 /* TestView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestView.cpp; path = ../../lostengine/lost/test/TestView.cpp; sourceTree = SOURCE_ROOT; };
 		EAD9F6EA0D9AE8A100390D25 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		EAD9F6FD0D9AE8B100390D25 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform.cpp; path = ../../lostengine/lost/platform/Platform.cpp; sourceTree = SOURCE_ROOT; };
-		EAD9F6FF0D9AE8B500390D25 /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform_Mac.cpp; path = ../../lostengine/lost/platform/Platform_Mac.cpp; sourceTree = SOURCE_ROOT; };
 		EAD9F7020D9AE8C100390D25 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		EAD9F7420D9AE92D00390D25 /* TestCompileLostGuiroIoAreaIo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroIoAreaIo.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroIoAreaIo.cpp; sourceTree = SOURCE_ROOT; };
 		EAD9F7460D9AE94A00390D25 /* TestCompileLostGuiroIoDimensionIo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostGuiroIoDimensionIo.cpp; path = ../../lostengine/lost/test/TestCompileLostGuiroIoDimensionIo.cpp; sourceTree = SOURCE_ROOT; };
@@ -142,11 +153,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAAF97090E15B3EA00B28BF6 /* libLostEngine.a in Frameworks */,
 				EAD9F6EB0D9AE8A100390D25 /* OpenGL.framework in Frameworks */,
 				EAD9F7030D9AE8C100390D25 /* CoreFoundation.framework in Frameworks */,
 				EA32C6B30DAC18350016D0E4 /* GLUT.framework in Frameworks */,
-				EA0B20250DC6502900EC4F12 /* libboost_signals.a in Frameworks */,
-				EA0B20270DC6502E00EC4F12 /* libboost_serialization.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +166,6 @@
 		08FB7794FE84155DC02AAC07 /* LostUnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				EABF3C0D0DA42FDB0093A3D7 /* LostSources */,
 				EA3E1FE00D6B5FFD0021BD14 /* UnitTest++ */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				EAD9F6E50D9AE88900390D25 /* libs */,
@@ -198,6 +207,7 @@
 				EAECD5270DB5718000855E60 /* TestGlUtils.cpp */,
 				EAEA59300DDA2557008C3FE7 /* TestLostMathMatrix.cpp */,
 				EAEA59920DDA2F59008C3FE7 /* TestLostMathVec4.cpp */,
+				EAAF97300E15B89800B28BF6 /* TestEventDispatcher.cpp */,
 				EA3E200E0D6B61B10021BD14 /* main.cpp */,
 			);
 			name = Source;
@@ -235,21 +245,18 @@
 			name = "UnitTest++";
 			sourceTree = "<group>";
 		};
-		EABF3C0D0DA42FDB0093A3D7 /* LostSources */ = {
+		EAAF97040E15B3DC00B28BF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA9776000DABF31600A8FC10 /* Logger.cpp */,
-				EAD9F6FF0D9AE8B500390D25 /* Platform_Mac.cpp */,
-				EAD9F6FD0D9AE8B100390D25 /* Platform.cpp */,
+				EAAF97080E15B3DC00B28BF6 /* libLostEngine.a */,
 			);
-			name = LostSources;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EAD9F6E50D9AE88900390D25 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				EA0B20240DC6502900EC4F12 /* libboost_signals.a */,
-				EA0B20260DC6502E00EC4F12 /* libboost_serialization.a */,
+				EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */,
 				EA32C6B20DAC18350016D0E4 /* GLUT.framework */,
 				EAD9F6EA0D9AE8A100390D25 /* OpenGL.framework */,
 				EAD9F7020D9AE8C100390D25 /* CoreFoundation.framework */,
@@ -271,6 +278,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EAAF970B0E15B3F700B28BF6 /* PBXTargetDependency */,
 			);
 			name = LostUnitTests;
 			productInstallPath = "$(HOME)/bin";
@@ -288,12 +296,28 @@
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* LostUnitTests */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EAAF97040E15B3DC00B28BF6 /* Products */;
+					ProjectRef = EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8DD76F620486A84900D96B5E /* LostUnitTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EAAF97080E15B3DC00B28BF6 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EAAF97070E15B3DC00B28BF6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DD76F640486A84900D96B5E /* Sources */ = {
@@ -324,8 +348,6 @@
 				EAA205E70D7FCEEA00CEB871 /* TestCompileLostIoVec2Io.cpp in Sources */,
 				EAA206010D7FD33100CEB871 /* TestCompileLostGuiroIoTextureIo.cpp in Sources */,
 				EA3949160D91D5FC00099979 /* TestCompileLostIoColorIo.cpp in Sources */,
-				EAD9F6FE0D9AE8B100390D25 /* Platform.cpp in Sources */,
-				EAD9F7000D9AE8B500390D25 /* Platform_Mac.cpp in Sources */,
 				EAD9F7430D9AE92D00390D25 /* TestCompileLostGuiroIoAreaIo.cpp in Sources */,
 				EAD9F7470D9AE94A00390D25 /* TestCompileLostGuiroIoDimensionIo.cpp in Sources */,
 				EAD9F75A0D9AEEDF00390D25 /* TestCompileLostGuiroControlIo.cpp in Sources */,
@@ -333,7 +355,6 @@
 				341D7D4E0D9EE69A00259455 /* TestViewPath.cpp in Sources */,
 				EABF3B970DA41F300093A3D7 /* TestView.cpp in Sources */,
 				EABE1E510DA9596D00A934C4 /* TestCompileLostGuiroFactory.cpp in Sources */,
-				EA9776010DABF31600A8FC10 /* Logger.cpp in Sources */,
 				EA32C5BF0DAC03B10016D0E4 /* TestCompileLostGuiroControlView.cpp in Sources */,
 				EA32C5D30DAC04B40016D0E4 /* TestCompileLostGuiroControlEdit.cpp in Sources */,
 				EA32C5DF0DAC06870016D0E4 /* TestCompileLostGuiroControlUserInterface.cpp in Sources */,
@@ -351,10 +372,19 @@
 				EAECD5280DB5718000855E60 /* TestGlUtils.cpp in Sources */,
 				EAEA59310DDA2557008C3FE7 /* TestLostMathMatrix.cpp in Sources */,
 				EAEA59930DDA2F59008C3FE7 /* TestLostMathVec4.cpp in Sources */,
+				EAAF97310E15B89800B28BF6 /* TestEventDispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAAF970B0E15B3F700B28BF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EAAF970A0E15B3F700B28BF6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB923208733DC60010E9CD /* Debug */ = {
@@ -365,10 +395,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_GLIBCXX_DEBUG=1",
-					"_GLIBCXX_DEBUG_PEDANTIC=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -406,6 +433,10 @@
 					i386,
 					ppc,
 				);
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -416,6 +447,8 @@
 					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/FreeImage/FreeImage_3_10_0/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 				);
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";

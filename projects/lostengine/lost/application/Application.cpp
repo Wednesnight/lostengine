@@ -9,6 +9,7 @@
 
 using namespace std;
 using namespace lost::engine;
+using namespace lost::event;
 
 namespace lost
 {
@@ -68,9 +69,8 @@ namespace application
   void Application::injectMouseMove(const lost::math::Vec2& pos)
   {
     lost::math::Vec2 point = pos;
-    lost::event::MouseEvent event;
+    lost::event::MouseEvent event(MouseEvent::MOUSE_MOVE);
     point.y = displayAttributes.height - point.y;
-    event.type = lost::event::MouseMoveEventType;
     event.pos = point;
     event.button = M_UNKNOWN;
     event.pressed = false;
@@ -79,10 +79,10 @@ namespace application
 
   void Application::injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos)
   {
-    lost::event::MouseEvent event;
+    lost::event::MouseEvent event(pressed ? MouseEvent::MOUSE_DOWN : MouseEvent::MOUSE_UP);
     lost::math::Vec2 point = pos;
     point.y = displayAttributes.height - point.y;
-    event.type = lost::event::MouseButtonEventType;
+
     event.pos = point;
     event.button = (button == GLFW_MOUSE_BUTTON_1)
                      ? M_LEFT
@@ -167,7 +167,7 @@ namespace application
         }
       }
     }
-    lost::event::KeyEvent event;
+    lost::event::KeyEvent event(pressed ? KeyEvent::KEY_DOWN : KeyEvent::KEY_UP);
     event.key = l_key;
     event.pressed = pressed;
     key(event);

@@ -10,10 +10,13 @@ namespace event
 
   struct KeyEvent : public Event
   {
+    static const EventType KEY_DOWN;
+    static const EventType KEY_UP;
+  
     int key;
     bool pressed;
 
-    KeyEvent() { type = lost::event::KeyEventType; }
+    KeyEvent(const EventType inType) : Event(inType) { }
     virtual ~KeyEvent() {}
   };
 
