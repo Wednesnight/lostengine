@@ -42,7 +42,7 @@ struct Screen : public View
     View::add(inUI);
   }
   
-  void injectKeyboardEvent( const lost::event::KeyEvent& inEvent )
+  void injectKeyboardEvent( const lost::application::KeyEvent& inEvent )
   {
     // FIXME: maybe implement this with visitor pattern so we need to write the iteration onyl once?
     for(ChildList::iterator i=unsortedChildren.begin(); i!=unsortedChildren.end(); ++i)
@@ -56,7 +56,7 @@ struct Screen : public View
     }
   }
   
-  void injectMouseButtonEvent( const lost::event::MouseEvent& inEvent )
+  void injectMouseButtonEvent( const lost::application::MouseEvent& inEvent )
   {
     // FIXME: maybe implement this with visitor pattern so we need to write the iteration onyl once?
     for(ChildList::iterator i=unsortedChildren.begin(); i!=unsortedChildren.end(); ++i)
@@ -70,7 +70,7 @@ struct Screen : public View
     }
   }
   
-  void injectMouseMoveEvent( const lost::event::MouseEvent& inEvent )
+  void injectMouseMoveEvent( const lost::application::MouseEvent& inEvent )
   {
     // FIXME: maybe implement this with visitor pattern so we need to write the iteration onyl once?
     for(ChildList::iterator i=unsortedChildren.begin(); i!=unsortedChildren.end(); ++i)

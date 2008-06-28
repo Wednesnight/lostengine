@@ -8,8 +8,8 @@
 #include "lost/guiro/control/View.h"
 #include "lost/math/Vec2.h"
 #include "lost/common/Logger.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/event/MouseEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include "lost/engine/MouseSym.h"
 
 namespace lost
@@ -74,7 +74,7 @@ namespace lost
           return result;
         }
 
-        void keyboardEvent( const lost::event::KeyEvent& inEvent )
+        void keyboardEvent( const lost::application::KeyEvent& inEvent )
         {
           boost::shared_ptr<control::View> view = focusedView.lock();
           // handle keyboard input
@@ -86,7 +86,7 @@ namespace lost
           }
         }
 
-        void mouseButtonEvent( const lost::event::MouseEvent& inEvent )
+        void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
         {
           // get the clicked view (if any)
           boost::shared_ptr<control::View> view     = getTopMostView( inEvent.pos );
@@ -133,7 +133,7 @@ namespace lost
           }
         }
 
-        void mouseMoveEvent( const lost::event::MouseEvent& inEvent )
+        void mouseMoveEvent( const lost::application::MouseEvent& inEvent )
         {
           // handle moving
           boost::shared_ptr<control::View> view = focusedView.lock();

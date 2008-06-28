@@ -12,14 +12,14 @@ namespace lost
     typedef boost::shared_ptr<lost::event::Event>               EventPtr;
     typedef boost::signal<void (EventPtr)>                      EventSignal;
     typedef boost::shared_ptr<boost::signal<void (EventPtr)> >  EventSignalPtr;    
-    typedef std::map<lost::event::EventType,EventSignalPtr>     EventSignalPtrMap;
+    typedef std::map<lost::event::Type,EventSignalPtr>          EventSignalPtrMap;
     typedef boost::function<void (EventPtr)>                    EventListenerFunc;
 
     struct EventDispatcher
     {
       EventSignalPtrMap listeners;
 
-      void addEventListener( const lost::event::EventType& type, EventListenerFunc callback )
+      void addEventListener( const lost::event::Type& type, EventListenerFunc callback )
       {
         EventSignalPtrMap::iterator pos = listeners.find(type);
         if(pos == listeners.end())

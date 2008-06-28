@@ -2,10 +2,11 @@
 #include "lost/event/EventDispatcher.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
-#include "lost/event/KeyEvent.h"
+#include "lost/application/KeyEvent.h"
 #include <boost/function.hpp>
 
 using namespace lost::event;
+using namespace lost::application;
 
 TEST(eventmanager)
 {
@@ -29,7 +30,7 @@ TEST(eventmanager_listener)
   lost::event::EventDispatcher  dispatcher;
   bool signalFired = false;
 
-  dispatcher.addEventListener( lost::event::KeyEvent::KEY_DOWN, EventListener(&signalFired));
+  dispatcher.addEventListener( lost::application::KeyEvent::KEY_DOWN, EventListener(&signalFired));
   dispatcher.dispatchEvent(EventPtr(new KeyEvent(KeyEvent::KEY_DOWN)));
 
   CHECK(dispatcher.listeners.size() == 1);

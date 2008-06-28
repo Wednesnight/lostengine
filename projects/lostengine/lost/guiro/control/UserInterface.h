@@ -25,17 +25,17 @@ namespace lost
 
       virtual ~UserInterface() {}
 
-      void injectKeyboardEvent( const lost::event::KeyEvent& inEvent )
+      void injectKeyboardEvent( const lost::application::KeyEvent& inEvent )
       {
         inputController->keyboardEvent(inEvent);
       }
 
-      void injectMouseButtonEvent( const lost::event::MouseEvent& inEvent )
+      void injectMouseButtonEvent( const lost::application::MouseEvent& inEvent )
       {
         inputController->mouseButtonEvent(inEvent);
       }
 
-      void injectMouseMoveEvent( const lost::event::MouseEvent& inEvent )
+      void injectMouseMoveEvent( const lost::application::MouseEvent& inEvent )
       {
         inputController->mouseMoveEvent(inEvent);
       }

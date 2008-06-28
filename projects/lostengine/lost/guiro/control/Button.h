@@ -133,7 +133,7 @@ namespace lost
           }
         }
 
-        virtual void mouseButtonEvent( const lost::event::MouseEvent& inEvent )
+        virtual void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
         {
           if (enabled && inEvent.button == lost::engine::M_LEFT)
           {

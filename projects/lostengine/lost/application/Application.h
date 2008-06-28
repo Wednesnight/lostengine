@@ -5,8 +5,8 @@
 #include "lost/common/Config.h"
 #include <boost/signal.hpp>
 #include "lost/common/Logger.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/event/MouseEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include <list>
 
 namespace lost
@@ -27,9 +27,9 @@ public:
   void run();
   void quit();
 
-  boost::signal<void(const lost::event::KeyEvent&)>     key;
-  boost::signal<void(const lost::event::MouseEvent&)>   mouseMove;
-  boost::signal<void(const lost::event::MouseEvent&)>   mouseButton;
+  boost::signal<void(const lost::application::KeyEvent&)>     key;
+  boost::signal<void(const lost::application::MouseEvent&)>   mouseMove;
+  boost::signal<void(const lost::application::MouseEvent&)>   mouseButton;
   boost::signal<void(int, int)>                         windowResize;
 
   void resize(int width, int height); // FIXME: can we make this private?

@@ -1,5 +1,5 @@
-#ifndef LOST_GUIRO_EVENT_EVENT_H
-#define LOST_GUIRO_EVENT_EVENT_H
+#ifndef LOST_EVENT_EVENT_H
+#define LOST_EVENT_EVENT_H
 
 #include <string>
 
@@ -7,14 +7,14 @@ namespace lost
 {
 namespace event
 {
-  typedef std::string EventType;
+  typedef std::string Type;
 
   struct Event
   {
   
-    EventType type;
+    Type type;
 
-    Event(const EventType& inType) : type(inType) {}
+    Event(const Type& inType) : type(inType) {}
     virtual ~Event() {}
   };
 

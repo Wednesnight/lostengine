@@ -21,8 +21,8 @@
 #include "lost/guiro/common/Area.h"
 
 #include "lost/guiro/common/Clonable.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/event/MouseEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include "lost/guiro/common/ViewPath.h"
 
 #include "lost/common/Profiler.h"
@@ -600,7 +600,7 @@ namespace lost
 
         @see lost::guiro::InputManager::keyboardEvent
        **/
-      virtual void keyboardEvent( const lost::event::KeyEvent& inEvent )
+      virtual void keyboardEvent( const lost::application::KeyEvent& inEvent )
       {
       }
 
@@ -609,7 +609,7 @@ namespace lost
 
         @see lost::guiro::InputManager::mouseButtonEvent
        **/
-      virtual void mouseButtonEvent( const lost::event::MouseEvent& inEvent )
+      virtual void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
       {
       }
 
@@ -618,7 +618,7 @@ namespace lost
 
         @see lost::guiro::InputManager::mouseMoveEvent
        **/
-      virtual void mouseMoveEvent( const lost::event::MouseEvent& inEvent )
+      virtual void mouseMoveEvent( const lost::application::MouseEvent& inEvent )
       {
       }
 

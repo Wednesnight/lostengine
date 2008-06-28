@@ -1,10 +1,11 @@
 #include "lost/event/Event.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/event/MouseEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 
 using namespace lost::event;
+using namespace lost::application;
 
 TEST(event)
 {
@@ -14,12 +15,12 @@ TEST(event)
 
 TEST(keyevent)
 {
-  lost::event::KeyEvent event(KeyEvent::KEY_DOWN);
+  KeyEvent event(KeyEvent::KEY_DOWN);
   CHECK(event.type == KeyEvent::KEY_DOWN);
 }
 
 TEST(mouseevent)
 {
-  lost::event::MouseEvent event(MouseEvent::MOUSE_DOWN);
+  MouseEvent event(MouseEvent::MOUSE_DOWN);
   CHECK(event.type == MouseEvent::MOUSE_DOWN);
 }

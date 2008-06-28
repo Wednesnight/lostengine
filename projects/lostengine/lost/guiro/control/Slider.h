@@ -223,7 +223,7 @@ namespace lost
           return result + mMin;
         }
 
-        virtual void mouseButtonEvent( const lost::event::MouseEvent& inEvent )
+        virtual void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
         {
           if (inEvent.button == lost::engine::M_LEFT)
           {
@@ -256,7 +256,7 @@ namespace lost
           }
         }
 
-        virtual void mouseMoveEvent( const lost::event::MouseEvent& inEvent )
+        virtual void mouseMoveEvent( const lost::application::MouseEvent& inEvent )
         {
           if (mHandleActive)
           {
