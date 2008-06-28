@@ -13,7 +13,7 @@
 #include "lost/guiro/control/Button.h"
 #include "lost/math/Vec2.h"
 #include "lost/guiro/common/Themable.h"
-#include "lost/engine/MouseSym.h"
+#include "lost/application/MouseSym.h"
 
 #define SLIDER_sliderHandle "Handle"
 
@@ -225,7 +225,7 @@ namespace lost
 
         virtual void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
         {
-          if (inEvent.button == lost::engine::M_LEFT)
+          if (inEvent.button == lost::application::M_LEFT)
           {
             if (mHandleActive)
             {

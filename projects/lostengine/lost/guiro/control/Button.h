@@ -6,7 +6,7 @@
 #include "lost/guiro/control/View.h"
 #include "lost/guiro/common/Themable.h"
 #include "lost/gl/Scissor.h"
-#include "lost/engine/MouseSym.h"
+#include "lost/application/MouseSym.h"
 #include "lost/object/ObjectReference.h"
 
 #define BUTTON_buttonOnPressed    "OnPressed"
@@ -135,7 +135,7 @@ namespace lost
 
         virtual void mouseButtonEvent( const lost::application::MouseEvent& inEvent )
         {
-          if (enabled && inEvent.button == lost::engine::M_LEFT)
+          if (enabled && inEvent.button == lost::application::M_LEFT)
           {
             if (mouseDown && !inEvent.pressed) doSignal( buttonClick );
 

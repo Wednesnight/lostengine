@@ -33,22 +33,6 @@
 		EA3B953D0E04639D00B6423B /* ResourcePath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94770E04639D00B6423B /* ResourcePath.h */; };
 		EA3B953E0E04639D00B6423B /* SerializationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94780E04639D00B6423B /* SerializationHelper.h */; };
 		EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
-		EA3B95400E04639D00B6423B /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B947B0E04639D00B6423B /* Engine.h */; };
-		EA3B95410E04639D00B6423B /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B947D0E04639D00B6423B /* Engine.h */; };
-		EA3B95420E04639D00B6423B /* InputSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B947E0E04639D00B6423B /* InputSubSystem.h */; };
-		EA3B95430E04639D00B6423B /* TimerSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B947F0E04639D00B6423B /* TimerSubSystem.h */; };
-		EA3B95440E04639D00B6423B /* VideoSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94800E04639D00B6423B /* VideoSubSystem.h */; };
-		EA3B95450E04639D00B6423B /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94810E04639D00B6423B /* KeySym.h */; };
-		EA3B95460E04639D00B6423B /* MouseSym.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94820E04639D00B6423B /* MouseSym.h */; };
-		EA3B95470E04639D00B6423B /* AudioSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94840E04639D00B6423B /* AudioSubSystem.h */; };
-		EA3B95480E04639D00B6423B /* InputSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94850E04639D00B6423B /* InputSubSystem.h */; };
-		EA3B95490E04639D00B6423B /* TimerSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94860E04639D00B6423B /* TimerSubSystem.h */; };
-		EA3B954A0E04639D00B6423B /* VideoSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94870E04639D00B6423B /* VideoSubSystem.h */; };
-		EA3B954B0E04639D00B6423B /* AudioSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94890E04639D00B6423B /* AudioSubSystem.h */; };
-		EA3B954C0E04639D00B6423B /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948A0E04639D00B6423B /* Engine.h */; };
-		EA3B954D0E04639D00B6423B /* InputSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948B0E04639D00B6423B /* InputSubSystem.h */; };
-		EA3B954E0E04639D00B6423B /* TimerSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948C0E04639D00B6423B /* TimerSubSystem.h */; };
-		EA3B954F0E04639D00B6423B /* VideoSubSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948D0E04639D00B6423B /* VideoSubSystem.h */; };
 		EA3B95500E04639D00B6423B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
 		EA3B95560E04639D00B6423B /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
@@ -212,22 +196,6 @@
 		EA3B94770E04639D00B6423B /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		EA3B94780E04639D00B6423B /* SerializationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerializationHelper.h; sourceTree = "<group>"; };
 		EA3B94790E04639D00B6423B /* SpiritHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritHelpers.h; sourceTree = "<group>"; };
-		EA3B947B0E04639D00B6423B /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
-		EA3B947D0E04639D00B6423B /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
-		EA3B947E0E04639D00B6423B /* InputSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSubSystem.h; sourceTree = "<group>"; };
-		EA3B947F0E04639D00B6423B /* TimerSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerSubSystem.h; sourceTree = "<group>"; };
-		EA3B94800E04639D00B6423B /* VideoSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSubSystem.h; sourceTree = "<group>"; };
-		EA3B94810E04639D00B6423B /* KeySym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeySym.h; sourceTree = "<group>"; };
-		EA3B94820E04639D00B6423B /* MouseSym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseSym.h; sourceTree = "<group>"; };
-		EA3B94840E04639D00B6423B /* AudioSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSubSystem.h; sourceTree = "<group>"; };
-		EA3B94850E04639D00B6423B /* InputSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSubSystem.h; sourceTree = "<group>"; };
-		EA3B94860E04639D00B6423B /* TimerSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerSubSystem.h; sourceTree = "<group>"; };
-		EA3B94870E04639D00B6423B /* VideoSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSubSystem.h; sourceTree = "<group>"; };
-		EA3B94890E04639D00B6423B /* AudioSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSubSystem.h; sourceTree = "<group>"; };
-		EA3B948A0E04639D00B6423B /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
-		EA3B948B0E04639D00B6423B /* InputSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputSubSystem.h; sourceTree = "<group>"; };
-		EA3B948C0E04639D00B6423B /* TimerSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerSubSystem.h; sourceTree = "<group>"; };
-		EA3B948D0E04639D00B6423B /* VideoSubSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSubSystem.h; sourceTree = "<group>"; };
 		EA3B948F0E04639D00B6423B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		EA3B94950E04639D00B6423B /* BitmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapFont.h; sourceTree = "<group>"; };
 		EA3B94960E04639D00B6423B /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
@@ -462,7 +430,6 @@
 				EA3B94640E04639D00B6423B /* application */,
 				EA3B94690E04639D00B6423B /* bitmap */,
 				EA3B946C0E04639D00B6423B /* common */,
-				EA3B947A0E04639D00B6423B /* engine */,
 				EA3B948E0E04639D00B6423B /* event */,
 				EA3B94940E04639D00B6423B /* font */,
 				EA3B949C0E04639D00B6423B /* gl */,
@@ -521,53 +488,6 @@
 				EA3B94790E04639D00B6423B /* SpiritHelpers.h */,
 			);
 			path = common;
-			sourceTree = "<group>";
-		};
-		EA3B947A0E04639D00B6423B /* engine */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B947B0E04639D00B6423B /* Engine.h */,
-				EA3B947C0E04639D00B6423B /* glfw */,
-				EA3B94810E04639D00B6423B /* KeySym.h */,
-				EA3B94820E04639D00B6423B /* MouseSym.h */,
-				EA3B94830E04639D00B6423B /* no */,
-				EA3B94880E04639D00B6423B /* sdl */,
-			);
-			path = engine;
-			sourceTree = "<group>";
-		};
-		EA3B947C0E04639D00B6423B /* glfw */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B947D0E04639D00B6423B /* Engine.h */,
-				EA3B947E0E04639D00B6423B /* InputSubSystem.h */,
-				EA3B947F0E04639D00B6423B /* TimerSubSystem.h */,
-				EA3B94800E04639D00B6423B /* VideoSubSystem.h */,
-			);
-			path = glfw;
-			sourceTree = "<group>";
-		};
-		EA3B94830E04639D00B6423B /* no */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94840E04639D00B6423B /* AudioSubSystem.h */,
-				EA3B94850E04639D00B6423B /* InputSubSystem.h */,
-				EA3B94860E04639D00B6423B /* TimerSubSystem.h */,
-				EA3B94870E04639D00B6423B /* VideoSubSystem.h */,
-			);
-			path = no;
-			sourceTree = "<group>";
-		};
-		EA3B94880E04639D00B6423B /* sdl */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94890E04639D00B6423B /* AudioSubSystem.h */,
-				EA3B948A0E04639D00B6423B /* Engine.h */,
-				EA3B948B0E04639D00B6423B /* InputSubSystem.h */,
-				EA3B948C0E04639D00B6423B /* TimerSubSystem.h */,
-				EA3B948D0E04639D00B6423B /* VideoSubSystem.h */,
-			);
-			path = sdl;
 			sourceTree = "<group>";
 		};
 		EA3B948E0E04639D00B6423B /* event */ = {
@@ -822,22 +742,6 @@
 				EA3B953D0E04639D00B6423B /* ResourcePath.h in Headers */,
 				EA3B953E0E04639D00B6423B /* SerializationHelper.h in Headers */,
 				EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */,
-				EA3B95400E04639D00B6423B /* Engine.h in Headers */,
-				EA3B95410E04639D00B6423B /* Engine.h in Headers */,
-				EA3B95420E04639D00B6423B /* InputSubSystem.h in Headers */,
-				EA3B95430E04639D00B6423B /* TimerSubSystem.h in Headers */,
-				EA3B95440E04639D00B6423B /* VideoSubSystem.h in Headers */,
-				EA3B95450E04639D00B6423B /* KeySym.h in Headers */,
-				EA3B95460E04639D00B6423B /* MouseSym.h in Headers */,
-				EA3B95470E04639D00B6423B /* AudioSubSystem.h in Headers */,
-				EA3B95480E04639D00B6423B /* InputSubSystem.h in Headers */,
-				EA3B95490E04639D00B6423B /* TimerSubSystem.h in Headers */,
-				EA3B954A0E04639D00B6423B /* VideoSubSystem.h in Headers */,
-				EA3B954B0E04639D00B6423B /* AudioSubSystem.h in Headers */,
-				EA3B954C0E04639D00B6423B /* Engine.h in Headers */,
-				EA3B954D0E04639D00B6423B /* InputSubSystem.h in Headers */,
-				EA3B954E0E04639D00B6423B /* TimerSubSystem.h in Headers */,
-				EA3B954F0E04639D00B6423B /* VideoSubSystem.h in Headers */,
 				EA3B95500E04639D00B6423B /* Event.h in Headers */,
 				EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */,
 				EA3B95560E04639D00B6423B /* Font.h in Headers */,

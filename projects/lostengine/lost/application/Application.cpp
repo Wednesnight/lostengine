@@ -2,13 +2,12 @@
 #include <GL/glfw.h>
 #include <iostream>
 #include <algorithm>
-#include "lost/engine/KeySym.h"
-#include "lost/engine/MouseSym.h"
+#include "lost/application/KeySym.h"
+#include "lost/application/MouseSym.h"
 #include "lost/application/Timer.h"
 #include <boost/bind.hpp>
 
 using namespace std;
-using namespace lost::engine;
 
 namespace lost
 {

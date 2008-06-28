@@ -10,7 +10,7 @@
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
-#include "lost/engine/MouseSym.h"
+#include "lost/application/MouseSym.h"
 
 namespace lost
 {
@@ -110,7 +110,7 @@ namespace lost
             }
           }
 
-          if (inEvent.button == lost::engine::M_LEFT)
+          if (inEvent.button == lost::application::M_LEFT)
           {
             // handle moving state
             moving = inEvent.pressed;
