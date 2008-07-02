@@ -1,32 +1,23 @@
 #include "lost/common/Logger.h"
-#include "lost/application/Application.h"
-#include "lost/application/Timer.h"
-#include "Object0r.h"
-#include <boost/bind.hpp>
+#include "lost/obj/Parser.h"
+#include "lost/platform/Platform.h"
+#include "lost/common/FileHelpers.h"
 
 using namespace std;
 using namespace lost::common;
-using namespace lost::application;
+using namespace lost::obj;
+using namespace lost::obj::parser;
 
 int main(int argn, char** args)
 {
   LogLevel( log_all );
   try
   {
-    Application app;
-    if(GLEE_EXT_framebuffer_object)
-    {  DOUT("Framebuffer objects OK");}
-    else
-      DOUT("NO framebuffer objects");
-
-    Object0r object0r(app.displayAttributes);
-    app.key.connect(boost::bind(&Object0r::keyboard, &object0r, _1));
-    app.windowResize.connect(boost::bind(&Object0r::resetViewPort, &object0r, _1,_2));
-    object0r.quit.connect(boost::bind(&Application::quit, &app));
-    Timer t1("redrawTimer", 0.015);
-    t1.action.connect(boost::bind(&Object0r::redraw, &object0r, _1, _2));
-
-    app.run();
+    string buffer = loadFile(string("cube.obj"));
+    Scene scene;
+    parse(buffer, scene);
+    
+    cout << scene << endl;
   }
   catch (exception& e)
   {

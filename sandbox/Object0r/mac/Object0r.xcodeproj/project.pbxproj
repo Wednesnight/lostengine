@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */; };
+		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -23,20 +25,22 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B98160E04849B00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA3B98280E0484A800B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B98160E04849B00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../../../projects/lostengine/lost/obj/Parser.cpp; sourceTree = SOURCE_ROOT; };
+		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Object0r.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Object0r.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA27DE3A0DD87DA100552F5E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
@@ -88,6 +92,7 @@
 		29B97315FDCFA39411CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */,
 				EA27DE3A0DD87DA100552F5E /* main.cpp */,
 				EA27DE3D0DD87E7A00552F5E /* Object0r.h */,
 			);
@@ -97,6 +102,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3EBE300A0E1C3DB20071E6F2 /* cube.obj */,
 				EA27DEB40DD88F4400552F5E /* lattice.vs */,
 				EAA5004B0DE0FD4F0046F2B5 /* lattice.fs */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -185,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EA27DEB60DD88F4400552F5E /* lattice.vs in Resources */,
 				EAA5004C0DE0FD4F0046F2B5 /* lattice.fs in Resources */,
@@ -199,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */,
+				3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
