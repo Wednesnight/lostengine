@@ -1,34 +1,37 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/Timer.h"
+#include "lost/application/TimerEvent.h"
 
 using namespace std;
+using namespace boost;
 using namespace lost::common;
+using namespace lost::event;
 using namespace lost::application;
 
-void mouseButton(const lost::event::MouseEvent& event)
+void mouseButton(shared_ptr<MouseEvent> event)
 {
   DOUT("mb stuff");
 }
 
-void mouseMove(const lost::event::MouseEvent& event)
+void mouseMove(shared_ptr<MouseEvent> event)
 {
   DOUT("mm stuff");
 }
 
-void keyHandler(const lost::event::KeyEvent&)
+void keyHandler(shared_ptr<KeyEvent> event)
 {
   DOUT("kb stuff");
 }
 
-void resize(int width, int height)
+void resize(shared_ptr<ResizeEvent> event)
 {
-  DOUT("resize w: "<<width << " h:" << height);
+  DOUT("resize w: "<<event->width << " h:" << event->height);
 }
 
-void timerAction(double passed, Timer* timer)
+void timerAction(shared_ptr<TimerEvent> event)
 {
-  DOUT("Timer "<<timer->name()<<" called after "<<passed << " sec");
+  DOUT("Timer "<<event->timer->name()<<" called after "<<event->passedSec << " sec");
 }
 
 int main(int argn, char** args)
@@ -37,15 +40,15 @@ int main(int argn, char** args)
   try
   {
     Application app;
-    app.mouseButton.connect(boost::function<void(const lost::event::MouseEvent& event)>(mouseButton));
-    app.mouseMove.connect(boost::function<void(const lost::event::MouseEvent& event)>(mouseMove));
-    app.key.connect(boost::function<void(const lost::event::KeyEvent& event)>(keyHandler));
-    app.windowResize.connect(boost::function<void(int, int)>(resize));
+    app.addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(mouseButton));
+    app.addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(mouseButton));
+    app.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(mouseMove));
+    app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
+    app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
+    app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resize));
     
-    Timer t1("fuggn", 0.020);
-    t1.action.connect(boost::function<void(double passed, Timer* timer)>(timerAction));
-    Timer t2("orkor", 0.200);
-    t2.action.connect(boost::function<void(double passed, Timer* timer)>(timerAction));
+    Timer t1("fuggn", 0.020);t1.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(timerAction));
+    Timer t2("orkor", 0.200);t2.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(timerAction));
     
     app.run();
   }
