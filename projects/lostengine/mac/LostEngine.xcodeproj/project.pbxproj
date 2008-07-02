@@ -128,9 +128,9 @@
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
 		EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
 		EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
-		EAAF97820E15C30400B28BF6 /* MouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAF977E0E15C30400B28BF6 /* MouseEvent.cpp */; };
 		EAAF97830E15C30400B28BF6 /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977F0E15C30400B28BF6 /* KeyEvent.h */; };
-		EAAF97840E15C30400B28BF6 /* KeyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAF97800E15C30400B28BF6 /* KeyEvent.cpp */; };
+		EAAF97F70E15CFD000B28BF6 /* ResizeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */; };
+		EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
 		EAC5C63E0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */; };
 		EAC5C63F0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */; };
 		EAC5C6400E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */; };
@@ -291,9 +291,9 @@
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
 		EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		EAAF977D0E15C30400B28BF6 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
-		EAAF977E0E15C30400B28BF6 /* MouseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MouseEvent.cpp; sourceTree = "<group>"; };
 		EAAF977F0E15C30400B28BF6 /* KeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEvent.h; sourceTree = "<group>"; };
-		EAAF97800E15C30400B28BF6 /* KeyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyEvent.cpp; sourceTree = "<group>"; };
+		EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeEvent.h; sourceTree = "<group>"; };
+		EAAF98480E15DB9100B28BF6 /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
 		EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonDisplayAttributes.cpp; sourceTree = "<group>"; };
 		EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmapLoader.cpp; sourceTree = "<group>"; };
 		EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmap.cpp; sourceTree = "<group>"; };
@@ -453,10 +453,10 @@
 				EA3B94660E04639D00B6423B /* Application.h */,
 				EA3B94670E04639D00B6423B /* Timer.cpp */,
 				EA3B94680E04639D00B6423B /* Timer.h */,
+				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
 				EAAF977D0E15C30400B28BF6 /* MouseEvent.h */,
-				EAAF977E0E15C30400B28BF6 /* MouseEvent.cpp */,
 				EAAF977F0E15C30400B28BF6 /* KeyEvent.h */,
-				EAAF97800E15C30400B28BF6 /* KeyEvent.cpp */,
+				EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */,
 			);
 			path = application;
 			sourceTree = "<group>";
@@ -834,6 +834,8 @@
 				EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */,
 				EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */,
 				EAAF97830E15C30400B28BF6 /* KeyEvent.h in Headers */,
+				EAAF97F70E15CFD000B28BF6 /* ResizeEvent.h in Headers */,
+				EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,8 +921,6 @@
 				EAC5C63E0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp in Sources */,
 				EAC5C63F0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp in Sources */,
 				EAC5C6400E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp in Sources */,
-				EAAF97820E15C30400B28BF6 /* MouseEvent.cpp in Sources */,
-				EAAF97840E15C30400B28BF6 /* KeyEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

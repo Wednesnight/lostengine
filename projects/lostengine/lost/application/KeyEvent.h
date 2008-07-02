@@ -10,8 +10,17 @@ namespace application
 
   struct KeyEvent : public event::Event
   {
-    static const event::Type KEY_DOWN;
-    static const event::Type KEY_UP;
+    static const event::Type& KEY_DOWN()
+    {
+      static const event::Type d = "keyDown";
+      return d;    
+    }
+    
+    static const event::Type& KEY_UP()
+    {
+      static const event::Type d = "keyUp";
+      return d;
+    }
   
     int key;
     bool pressed;

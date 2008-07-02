@@ -1,5 +1,8 @@
 #include "lost/application/Timer.h"
+#include "lost/application/TimerEvent.h"
 #include "lost/application/Application.h"
+
+using namespace boost;
 
 namespace lost
 {
@@ -20,7 +23,10 @@ extern Application* appInstance;
       passedSec += deltaSec;
       if(passedSec >= intervalSec)
       {
-        action(passedSec, this);
+        shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
+        ev->timer = this;
+        ev->passedSec = passedSec;
+        dispatchEvent(ev);
         passedSec = 0;
       }
     }

@@ -8,6 +8,7 @@
 #include <boost/bind.hpp>
 
 using namespace std;
+using namespace boost;
 
 namespace lost
 {
@@ -47,50 +48,53 @@ namespace application
   {
     if(appInstance != NULL)
     {
-      throw std::runtime_error("appInstance wasn'nt NULL, did you instance more than one app?");
+      throw std::runtime_error("appInstance wasn't NULL, did you instance more than one app?");
     }
     appInstance = this;
     glfwInit();    // must init glfw before anything else
     initDisplay(); // must be initialised first or no input callbacks will be called
     initCallbacks(); // connect callbacks AFTER display was initialised or nothing will happen (yes, I know, I'm repeating myslef but you don't wanna know how much time we lost tracking stuff like this down)
     running = false;
+
     // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
-    windowResize.connect(boost::bind(&Application::resize, this, _1, _2));
+    addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
   }
 
-  void Application::resize(int width, int height)
+  void Application::handleResize(boost::shared_ptr<ResizeEvent> ev)
   {
-    displayAttributes.width = width;
-    displayAttributes.height = height;
+    DOUT("resize NEW "<<ev->type);
+    displayAttributes.width = ev->width;
+    displayAttributes.height = ev->height;
   }
 
   void Application::injectMouseMove(const lost::math::Vec2& pos)
   {
     lost::math::Vec2 point = pos;
-    MouseEvent event(MouseEvent::MOUSE_MOVE);
+        
+    shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
     point.y = displayAttributes.height - point.y;
-    event.pos = point;
-    event.button = M_UNKNOWN;
-    event.pressed = false;
-    mouseMove( event );
+    ev->pos = point;
+    ev->button = M_UNKNOWN;
+    ev->pressed = false;
+    dispatchEvent(ev);
   }
 
   void Application::injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos)
   {
-    MouseEvent event(pressed ? MouseEvent::MOUSE_DOWN : MouseEvent::MOUSE_UP);
+    shared_ptr<MouseEvent> ev(new MouseEvent(pressed ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP()));
     lost::math::Vec2 point = pos;
     point.y = displayAttributes.height - point.y;
 
-    event.pos = point;
-    event.button = (button == GLFW_MOUSE_BUTTON_1)
+    ev->pos = point;
+    ev->button = (button == GLFW_MOUSE_BUTTON_1)
                      ? M_LEFT
                      : ((button == GLFW_MOUSE_BUTTON_2)
                          ? M_RIGHT
                          : ((button == GLFW_MOUSE_BUTTON_3)
                              ? M_MIDDLE
                              : M_UNKNOWN));
-    event.pressed = pressed;
-    mouseButton( event );
+    ev->pressed = pressed;
+    dispatchEvent(ev);
   }
 
   void Application::injectKey(int keysym, int pressed)
@@ -165,15 +169,19 @@ namespace application
         }
       }
     }
-    KeyEvent event(pressed ? KeyEvent::KEY_DOWN : KeyEvent::KEY_UP);
-    event.key = l_key;
-    event.pressed = pressed;
-    key(event);
+        
+    shared_ptr<KeyEvent> ev(new KeyEvent(pressed ? KeyEvent::KEY_DOWN() : KeyEvent::KEY_UP()));
+    ev->key = l_key;
+    ev->pressed = pressed;
+    dispatchEvent(ev);
   }
 
   void Application::injectWindowResize(int x, int y)
   {
-    windowResize(x, y);
+    shared_ptr<ResizeEvent> ev(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
+    ev->width = x;
+    ev->height = y;
+    dispatchEvent(ev);
   }
 
   void Application::initDisplay()

@@ -7,6 +7,8 @@
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
+#include "lost/application/ResizeEvent.h"
+#include "lost/event/EventDispatcher.h"
 #include <list>
 
 namespace lost
@@ -16,7 +18,7 @@ namespace application
 
 struct Timer;
 
-struct Application
+struct Application : public event::EventDispatcher
 {
 public:
   Application();
@@ -26,13 +28,6 @@ public:
 
   void run();
   void quit();
-
-  boost::signal<void(const lost::application::KeyEvent&)>     key;
-  boost::signal<void(const lost::application::MouseEvent&)>   mouseMove;
-  boost::signal<void(const lost::application::MouseEvent&)>   mouseButton;
-  boost::signal<void(int, int)>                         windowResize;
-
-  void resize(int width, int height); // FIXME: can we make this private?
 
   common::DisplayAttributes displayAttributes;
 private:
@@ -50,9 +45,15 @@ private:
   void injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos);
   void injectWindowResize(int x, int y);
 
+  // internal event handlers
+  void handleResize(boost::shared_ptr<ResizeEvent> ev);
+
   void init();
   void initDisplay();
   void initCallbacks();
+
+  // FIXME: create member instances of events we'Re sending to supress superfluous new/delete calls
+  // since the current eventDispatcher instance is synchroous and not reentrant, we can assume this optimisation
 
   void updateTimers(double deltaSec);
   bool running;

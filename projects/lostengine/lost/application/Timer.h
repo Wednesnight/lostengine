@@ -2,13 +2,13 @@
 #define LOST_APPLICATION_TIMER_H
 
 #include <string>
-#include <boost/signal.hpp>
+#include "lost/event/EventDispatcher.h"
 
 namespace lost
 {
 namespace application
 {
-struct Timer
+struct Timer : public event::EventDispatcher
 {
   Timer(const std::string& name, double inIntervalSec);
   virtual ~Timer();
@@ -18,8 +18,6 @@ struct Timer
   void enable() { running = true; }
 
   const std::string& name() { return mName; }
-
-  boost::signal<void(double, Timer*)> action;
 
 private:
   double intervalSec;

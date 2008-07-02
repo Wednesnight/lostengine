@@ -3,10 +3,12 @@
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include <boost/function.hpp>
 
 using namespace lost::event;
 using namespace lost::application;
+using namespace boost;
 
 TEST(eventmanager)
 {
@@ -27,11 +29,34 @@ struct EventListener
 
 TEST(eventmanager_listener)
 {
-  lost::event::EventDispatcher  dispatcher;
+  EventDispatcher  dispatcher;
   bool signalFired = false;
 
-  dispatcher.addEventListener( lost::application::KeyEvent::KEY_DOWN, EventListener(&signalFired));
-  dispatcher.dispatchEvent(EventPtr(new KeyEvent(KeyEvent::KEY_DOWN)));
+  dispatcher.addEventListener( lost::application::KeyEvent::KEY_DOWN(), EventListener(&signalFired));
+  dispatcher.dispatchEvent(EventPtr(new KeyEvent(KeyEvent::KEY_DOWN())));
+
+  CHECK(dispatcher.listeners.size() == 1);
+  CHECK(signalFired);
+}
+
+struct MouseListener
+{
+  bool* dest;
+  MouseListener(bool* inDest) : dest(inDest) {}
+  void operator()(shared_ptr<MouseEvent> event)
+  {
+    IOUT("EventListener fired for : "+ event->type);
+    (*dest) = true;
+  }
+};
+
+TEST(event_cast)
+{
+  EventDispatcher  dispatcher;
+  bool signalFired = false;
+
+  dispatcher.addEventListener( MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(MouseListener(&signalFired)));
+  dispatcher.dispatchEvent(EventPtr(new MouseEvent(MouseEvent::MOUSE_DOWN())));
 
   CHECK(dispatcher.listeners.size() == 1);
   CHECK(signalFired);

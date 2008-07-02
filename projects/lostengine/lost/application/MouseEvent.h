@@ -10,9 +10,23 @@ namespace application
 {
   struct MouseEvent : public event::Event
   {
-    static const event::Type MOUSE_UP;
-    static const event::Type MOUSE_DOWN;
-    static const event::Type MOUSE_MOVE;
+    static const event::Type& MOUSE_UP()
+    {
+      static const event::Type d = "mouseUp";
+      return d;
+    }
+    
+    static const event::Type& MOUSE_DOWN()
+    {
+      static const event::Type d = "mouseDown";
+      return d;
+    }
+    
+    static const event::Type& MOUSE_MOVE()
+    {
+      static const event::Type d = "mouseMove";
+      return d;
+    }
   
     lost::math::Vec2 pos;
     int              button;
