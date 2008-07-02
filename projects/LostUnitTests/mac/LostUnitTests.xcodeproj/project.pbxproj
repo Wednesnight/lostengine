@@ -67,14 +67,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EAAF970A0E15B3F700B28BF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAAF97030E15B3DC00B28BF6 /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
