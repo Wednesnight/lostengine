@@ -53,7 +53,6 @@ function Bitmaps(t)
   result = {}
   for k,name in pairs(t)
   do
-    print("loading: "..name)
     result[name] = bitmapLoader:loadFromResourcePath(name)
   end
   return result
