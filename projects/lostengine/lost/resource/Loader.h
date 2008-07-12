@@ -14,31 +14,10 @@ namespace lost
   namespace resource
   {
 
-    /** a simple caching resource loader for fonts and images.
-     * Fonts and images are currently loaded as simple as possible.
-     * Caching is implemented by using the file system paths as indices
-     * in a map of shared_ptrs to these objects.
-     * The only Fonts you can load through the ResourceLoader are truetype fonts.
-     * If you need to use the builtin OpenGL fonts, you can simply instantiate
-     *
-     * FIXME: rewrite this so arbitrary sources for the loading process can be specified.
-     *
-     */
     struct Loader
     {
       Loader() {}
       virtual ~Loader() {}
-
-      // FIXME: obsolete but still used in some testing code, remove asap
-      boost::shared_ptr<lost::font::TrueTypeFont> loadFont(const std::string& pathToFont)
-      {
-        boost::shared_ptr<lost::font::TrueTypeFont> result;
-        std::map<std::string, boost::shared_ptr<lost::font::TrueTypeFont> >::iterator pos;
-
-        result.reset(new lost::font::TrueTypeFont(pathToFont));
-
-        return result;
-      }
 
       boost::shared_ptr<lost::resource::File> load( const std::string& inLocation)
       {

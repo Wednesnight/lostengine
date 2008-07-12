@@ -7,7 +7,8 @@ namespace lost
 {
 namespace application
 {
-
+  /** sent when main application window size changes.
+   */
   struct ResizeEvent : public event::Event
   {
     static const event::Type& MAIN_WINDOW_RESIZE()
