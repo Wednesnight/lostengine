@@ -2,6 +2,9 @@
 #include "lost/application/Application.h"
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
+#include "lost/application/ResizeEvent.h"
 
 using namespace std;
 using namespace boost;

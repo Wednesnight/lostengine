@@ -5,11 +5,10 @@
 #include "lost/common/Config.h"
 #include <boost/signal.hpp>
 #include "lost/common/Logger.h"
-#include "lost/application/KeyEvent.h"
-#include "lost/application/MouseEvent.h"
-#include "lost/application/ResizeEvent.h"
 #include "lost/event/EventDispatcher.h"
 #include <list>
+#include "lost/application/GlfwAdapter.h"
+#include "lost/application/ResizeEvent.h"
 
 namespace lost
 {
@@ -22,8 +21,6 @@ struct Application : public event::EventDispatcher
 {
 public:
   Application();
-  Application(common::Config& config);
-  Application(const common::DisplayAttributes& attribs);
   virtual ~Application();
 
   void run();
@@ -31,26 +28,15 @@ public:
 
   common::DisplayAttributes displayAttributes;
 private:
+  GlfwAdapter adapter;
+
+  friend struct lost::application::Timer;
   void addTimer(Timer* timer);
   void removeTimer(Timer* timer);
-
-  friend void glfwKeyCallback( int key, int action );
-  friend void glfwMouseButtonCallback( int button, int action );
-  friend void glfwMouseMoveCallback( int x, int y );
-  friend void glfwWindowSizeCallback(int width, int height);
-  friend struct lost::application::Timer;
-
-  void injectKey(int key, int pressed);
-  void injectMouseMove(const lost::math::Vec2& pos);
-  void injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos);
-  void injectWindowResize(int x, int y);
 
   // internal event handlers
   void handleResize(boost::shared_ptr<ResizeEvent> ev);
 
-  void init();
-  void initDisplay();
-  void initCallbacks();
 
   // FIXME: create member instances of events we'Re sending to supress superfluous new/delete calls
   // since the current eventDispatcher instance is synchroous and not reentrant, we can assume this optimisation
