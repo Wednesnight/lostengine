@@ -2,9 +2,6 @@
 #define LOST_APPLICATION_APPLICATION
 
 #include "lost/common/DisplayAttributes.h"
-#include "lost/common/Config.h"
-#include <boost/signal.hpp>
-#include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/GlfwAdapter.h"
 #include "lost/application/ResizeEvent.h"
@@ -14,8 +11,6 @@ namespace lost
 {
 namespace application
 {
-
-struct Timer;
 
 struct Application : public event::EventDispatcher
 {
@@ -27,6 +22,7 @@ public:
   void quit();
 
   common::DisplayAttributes displayAttributes;
+  
 private:
   GlfwAdapter   adapter;
   TimerManager  timerManager;
