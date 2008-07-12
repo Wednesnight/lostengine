@@ -45,7 +45,7 @@ namespace application
       double now = adapter.getTime();
       double delta = now - lastTime;
       lastTime = now;
-      updateTimers(delta);
+      timerManager.updateTimers(delta);
       adapter.pollEvents();
       adapter.sleep(.001); // stupid fucking hack because glfw doesn't support OS timers and we need to measure manually.
       if(!adapter.displayOpen())
@@ -55,32 +55,7 @@ namespace application
     }
   }
 
-  void Application::updateTimers(double deltaSec)
-  {
-    for(list<Timer*>::iterator i = timers.begin(); i!=timers.end(); ++i)
-    {
-      (*i)->update(deltaSec);
-    }
-  }
-
   void Application::quit() { running=false; }
 
-  void Application::addTimer(Timer* timer)
-  {
-    timers.push_back(timer);
-  }
-
-  void Application::removeTimer(Timer* timer)
-  {
-    list<Timer*>::iterator pos = find(timers.begin(), timers.end(), timer);
-    if(pos != timers.end())
-    {
-      timers.erase(pos);
-    }
-    else
-    {
-      WOUT("tried to remove timer "<<timer->name() << " which wasn't previously added");
-    }
-  };
 }
 }

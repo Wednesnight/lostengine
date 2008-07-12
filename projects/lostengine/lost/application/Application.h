@@ -6,9 +6,9 @@
 #include <boost/signal.hpp>
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
-#include <list>
 #include "lost/application/GlfwAdapter.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/TimerManager.h"
 
 namespace lost
 {
@@ -28,22 +28,11 @@ public:
 
   common::DisplayAttributes displayAttributes;
 private:
-  GlfwAdapter adapter;
+  GlfwAdapter   adapter;
+  TimerManager  timerManager;
+  bool          running;
 
-  friend struct lost::application::Timer;
-  void addTimer(Timer* timer);
-  void removeTimer(Timer* timer);
-
-  // internal event handlers
-  void handleResize(boost::shared_ptr<ResizeEvent> ev);
-
-
-  // FIXME: create member instances of events we'Re sending to supress superfluous new/delete calls
-  // since the current eventDispatcher instance is synchroous and not reentrant, we can assume this optimisation
-
-  void updateTimers(double deltaSec);
-  bool running;
-  std::list<Timer*> timers;
+  void          handleResize(boost::shared_ptr<ResizeEvent> ev);
 };
 }
 }

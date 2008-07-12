@@ -1,6 +1,6 @@
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
-#include "lost/application/Application.h"
+#include "lost/application/TimerManager.h"
 
 using namespace boost;
 
@@ -8,12 +8,12 @@ namespace lost
 {
 namespace application
 {
-extern Application* appInstance;
+extern TimerManager* timerManagerInstance;
 
   Timer::Timer(const std::string& name, double inIntervalSec)
   : intervalSec(inIntervalSec), passedSec(0), running(true), mName(name)
   {
-    appInstance->addTimer(this);
+    timerManagerInstance->addTimer(this);
   }
 
   void Timer::update(double deltaSec)
@@ -34,7 +34,7 @@ extern Application* appInstance;
 
   Timer::~Timer()
   {
-    appInstance->removeTimer(this);
+    timerManagerInstance->removeTimer(this);
   }
 }
 }
