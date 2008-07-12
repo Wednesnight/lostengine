@@ -115,7 +115,6 @@
 		EA3B95B10E04639D00B6423B /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95020E04639D00B6423B /* Loader.h */; };
 		EA3B95B20E04639D00B6423B /* LocalRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95030E04639D00B6423B /* LocalRepository.h */; };
 		EA3B95B30E04639D00B6423B /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95040E04639D00B6423B /* Repository.h */; };
-		EA3B95B40E04639D00B6423B /* Set.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95050E04639D00B6423B /* Set.h */; };
 		EA3B967B0E046C5400B6423B /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96740E046C5400B6423B /* Generator.h */; };
 		EA3B967D0E046C5400B6423B /* Matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96760E046C5400B6423B /* Matrix.h */; };
 		EA3B967E0E046C5400B6423B /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96770E046C5400B6423B /* Rect.h */; };
@@ -126,6 +125,8 @@
 		EA3B96FE0E047BA100B6423B /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B96FC0E047BA100B6423B /* libboost_signals.a */; };
 		EA3B97460E047CED00B6423B /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B97450E047CED00B6423B /* libboost_serialization.a */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
+		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
+		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EAAA56350E285086002EB663 /* GlfwAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56330E285086002EB663 /* GlfwAdapter.h */; };
 		EAAA56360E285086002EB663 /* GlfwAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAA56340E285086002EB663 /* GlfwAdapter.cpp */; };
 		EAAA56740E2864A4002EB663 /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAA56720E2864A4002EB663 /* TimerManager.cpp */; };
@@ -283,7 +284,6 @@
 		EA3B95020E04639D00B6423B /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
 		EA3B95030E04639D00B6423B /* LocalRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalRepository.h; sourceTree = "<group>"; };
 		EA3B95040E04639D00B6423B /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
-		EA3B95050E04639D00B6423B /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
 		EA3B96740E046C5400B6423B /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		EA3B96760E046C5400B6423B /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		EA3B96770E046C5400B6423B /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
@@ -294,6 +294,8 @@
 		EA3B96FC0E047BA100B6423B /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_signals.a; sourceTree = SOURCE_ROOT; };
 		EA3B97450E047CED00B6423B /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_serialization.a; sourceTree = SOURCE_ROOT; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
+		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
+		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EAAA56330E285086002EB663 /* GlfwAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlfwAdapter.h; sourceTree = "<group>"; };
 		EAAA56340E285086002EB663 /* GlfwAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlfwAdapter.cpp; sourceTree = "<group>"; };
 		EAAA56720E2864A4002EB663 /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerManager.cpp; sourceTree = "<group>"; };
@@ -702,11 +704,12 @@
 		EA3B95000E04639D00B6423B /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				EA7116670E2942D000279E0B /* DefaultLoader.h */,
+				EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */,
 				EA3B95010E04639D00B6423B /* File.h */,
 				EA3B95020E04639D00B6423B /* Loader.h */,
 				EA3B95030E04639D00B6423B /* LocalRepository.h */,
 				EA3B95040E04639D00B6423B /* Repository.h */,
-				EA3B95050E04639D00B6423B /* Set.h */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -837,7 +840,6 @@
 				EA3B95B10E04639D00B6423B /* Loader.h in Headers */,
 				EA3B95B20E04639D00B6423B /* LocalRepository.h in Headers */,
 				EA3B95B30E04639D00B6423B /* Repository.h in Headers */,
-				EA3B95B40E04639D00B6423B /* Set.h in Headers */,
 				EA3B967B0E046C5400B6423B /* Generator.h in Headers */,
 				EA3B967D0E046C5400B6423B /* Matrix.h in Headers */,
 				EA3B967E0E046C5400B6423B /* Rect.h in Headers */,
@@ -854,6 +856,8 @@
 				EAAA56350E285086002EB663 /* GlfwAdapter.h in Headers */,
 				EAAA56750E2864A4002EB663 /* TimerManager.h in Headers */,
 				EAAA56950E286E4A002EB663 /* ApplicationEvent.h in Headers */,
+				EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */,
+				EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

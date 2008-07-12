@@ -6,6 +6,8 @@
 #include "lost/application/GlfwAdapter.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/TimerManager.h"
+#include "lost/lua/State.h"
+#include "lost/resource/Loader.h"
 
 namespace lost
 {
@@ -21,7 +23,9 @@ public:
   void run();
   void quit();
 
-  common::DisplayAttributes displayAttributes;
+  common::DisplayAttributes             displayAttributes;
+  boost::shared_ptr<resource::Loader>   loader;
+  boost::shared_ptr<lua::State>         interpreter;
   
 private:
   GlfwAdapter   adapter;

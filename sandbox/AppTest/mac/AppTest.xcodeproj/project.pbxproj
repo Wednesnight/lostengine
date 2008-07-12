@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA3B97070E047BD700B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B97040E047BC100B6423B /* libLostEngine.a */; };
+		EA7116C30E2967D600279E0B /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA7116C20E2967D600279E0B /* init */; };
 		EAE813880DC9914200E9331A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAE813870DC9914200E9331A /* main.cpp */; };
 		EAE813BA0DC9922A00E9331A /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE813B90DC9922A00E9331A /* AGL.framework */; };
 		EAE813BE0DC9922D00E9331A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE813BD0DC9922D00E9331A /* OpenGL.framework */; };
@@ -39,6 +40,7 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* AppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA7116C20E2967D600279E0B /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
 		EAE813870DC9914200E9331A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EAE813B90DC9922A00E9331A /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EAE813BD0DC9922D00E9331A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -88,6 +90,7 @@
 				EAE813D40DC9937100E9331A /* AppTest.cfg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				EA7116C20E2967D600279E0B /* init */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EAE813D50DC9937100E9331A /* AppTest.cfg in Resources */,
+				EA7116C30E2967D600279E0B /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +277,8 @@
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

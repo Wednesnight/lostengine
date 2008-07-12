@@ -4,9 +4,11 @@
 #include "lost/application/Timer.h"
 #include <boost/bind.hpp>
 #include "lost/application/ApplicationEvent.h"
+#include "lost/resource/DefaultLoader.h"
 
 using namespace std;
 using namespace boost;
+using namespace lost::resource;
 
 namespace lost
 {
@@ -28,8 +30,20 @@ namespace application
     running = false;
 
     // init default resource loader
+    loader.reset(new lost::resource::DefaultLoader);
     // init lua state with resource loader
+    interpreter.reset(new lua::State);
     // try to load default lua script
+    shared_ptr<File> initScript;
+    try
+    {
+      initScript = loader->load("init");
+      interpreter->doString(initScript->str());
+    }
+    catch(exception& ex)
+    {
+      IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
+    }
     
     // broadcast preinit event, this is the latest point for client code to setup the configuration
     shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::PREINIT()));dispatchEvent(appEvent);
@@ -59,6 +73,7 @@ namespace application
 
   void Application::run()
   {
+    shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
     running = true;
     double lastTime = adapter.getTime();

@@ -16,6 +16,7 @@ namespace resource
     std::string               location;
     
     File() { size=0; }
+    std::string str() { return std::string(data.get(), size); }
   };
 }
 }

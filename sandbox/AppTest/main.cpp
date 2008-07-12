@@ -5,6 +5,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/resource/DefaultLoader.h"
 
 using namespace std;
 using namespace boost;
@@ -34,7 +35,7 @@ void resize(shared_ptr<ResizeEvent> event)
 
 void timerAction(shared_ptr<TimerEvent> event)
 {
-  DOUT("Timer "<<event->timer->name()<<" called after "<<event->passedSec << " sec");
+  //DOUT("Timer "<<event->timer->name()<<" called after "<<event->passedSec << " sec");
 }
 
 int main(int argn, char** args)
