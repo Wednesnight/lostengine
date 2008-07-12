@@ -19,6 +19,12 @@ struct GlfwAdapter
 
   void init(const common::DisplayAttributes& displayAttributes);
 
+  void terminate();
+  double getTime();
+  void pollEvents();
+  void sleep(double seconds);
+  bool displayOpen(); // FIXME:  should we convert this to an event that is sent to the application?
+
 private: 
   void initDisplay(const common::DisplayAttributes& displayAttributes);
   void initCallbacks();

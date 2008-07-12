@@ -169,5 +169,30 @@ namespace application
     ev->height = y;
     target->dispatchEvent(ev);
   }
+  
+  void GlfwAdapter::terminate()
+  {
+    glfwTerminate();
+  }
+
+  double GlfwAdapter::getTime()
+  {
+    return glfwGetTime();
+  }
+
+  void GlfwAdapter::pollEvents()
+  {
+    glfwPollEvents();
+  }
+
+  void GlfwAdapter::sleep(double seconds)
+  {
+    glfwSleep(seconds);
+  }
+
+  bool GlfwAdapter::displayOpen()
+  {
+    return glfwGetWindowParam(GLFW_OPENED);
+  }
 }
 }

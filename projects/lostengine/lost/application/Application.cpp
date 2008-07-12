@@ -1,5 +1,4 @@
 #include "lost/application/Application.h"
-#include <GL/glfw.h>
 #include <iostream>
 #include <algorithm>
 #include "lost/application/Timer.h"
@@ -29,7 +28,7 @@ namespace application
     addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
   }
   
-  Application::~Application() { glfwTerminate(); }
+  Application::~Application() { adapter.terminate(); }
 
   void Application::handleResize(boost::shared_ptr<ResizeEvent> ev)
   {
@@ -40,16 +39,16 @@ namespace application
   void Application::run()
   {
     running = true;
-    double lastTime = glfwGetTime();
+    double lastTime = adapter.getTime();
     while(running)
     {
-      double now = glfwGetTime();
+      double now = adapter.getTime();
       double delta = now - lastTime;
       lastTime = now;
       updateTimers(delta);
-      glfwPollEvents();
-      glfwSleep(.001); // stupid fucking hack because glfw doesn't support OS timers and we need to measure manually.
-      if(!glfwGetWindowParam(GLFW_OPENED))
+      adapter.pollEvents();
+      adapter.sleep(.001); // stupid fucking hack because glfw doesn't support OS timers and we need to measure manually.
+      if(!adapter.displayOpen())
       {
         running = false;
       }
