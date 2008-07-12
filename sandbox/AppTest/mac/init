@@ -1,1 +1,5 @@
 print("chello from da Lua")
+config = {}
+config.displayAttributes = "asd"
+
+

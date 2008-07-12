@@ -20,7 +20,7 @@ void mouseButton(shared_ptr<MouseEvent> event)
 
 void mouseMove(shared_ptr<MouseEvent> event)
 {
-  DOUT("mm stuff");
+  //DOUT("mm stuff");
 }
 
 void keyHandler(shared_ptr<KeyEvent> event)
