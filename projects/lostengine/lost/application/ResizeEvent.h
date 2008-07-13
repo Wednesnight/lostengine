@@ -20,7 +20,7 @@ namespace application
     int width;
     int height;
 
-    ResizeEvent(const event::Type& inType) : Event(inType) { }
+    ResizeEvent(const event::Type& inType) : Event(inType), width(0), height(0) { }
     virtual ~ResizeEvent() {}
   };
 

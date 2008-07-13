@@ -32,7 +32,7 @@ namespace application
     int              button;
     bool             pressed;
 
-    MouseEvent(const event::Type& inType) : Event(inType) { }
+    MouseEvent(const event::Type& inType) : Event(inType), button(0), pressed(false) { }
     virtual ~MouseEvent() {}
   };
 

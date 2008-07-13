@@ -1,5 +1,6 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/common/Logger.h"
 
 using namespace std;
 using namespace boost;
@@ -37,12 +38,18 @@ struct LuaHandlerMethod
   }
 };
   
-void addEventListener(luabind::object dispatcher, const std::string& type, luabind::object func)
+void addEventListener(object dispatcher, const string& type, object func)
 {
   EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
   disp->addEventListener(type, LuaHandlerFunction(func));
 }
 
+void addEventListener(object dispatcher, const string& type, object obj, object method)
+{
+  EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
+  disp->addEventListener(type, LuaHandlerMethod(obj, method));
+}
+  
 void bindLostEventEventDispatcher(lost::lua::State& state)
 {
   module(state, "lost")
@@ -51,7 +58,8 @@ void bindLostEventEventDispatcher(lost::lua::State& state)
     [
       class_<EventDispatcher>("EventDispatcher")
         .def(constructor<>())
-        .def("addEventListener", &addEventListener)
+        .def("addEventListener", (void(*)(object, const string&, object))&addEventListener)
+        .def("addEventListener", (void(*)(object, const string&, object, object))&addEventListener)
     ]
   ];
 }  

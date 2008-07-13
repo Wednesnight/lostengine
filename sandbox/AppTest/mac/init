@@ -15,13 +15,23 @@ end
 
 function key(event)
   log.debug("got event: "..event.type)
+--  log.debug("key: "..event.key)
+--  log.debug("pressed: "..event.pressed)
   app:quit()
-  print("gc mem: "..collectgarbage("count"))
+  log.debug("gc mem: "..collectgarbage("count"))
 end
 
 app:addEventListener("applicationPreInit", preinit)
 app:addEventListener("applicationInit", init)
 app:addEventListener("keyDown", key)
 
+controller = {}
+controller.data = 13;
+controller.keyDown = function(self, event)
+  log.debug("in controller keyDown: "..self.data);
+end
 
+app:addEventListener("keyDown", controller, controller.keyDown)
 
+ke = lost.application.KeyEvent("keyDown")
+log.debug(tostring(ke.key).." : "..tostring(ke.pressed))

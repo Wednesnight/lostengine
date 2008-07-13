@@ -17,6 +17,11 @@ void bindLostResourceLoader(lost::lua::State& state);
 void bindLostEventEvent(lost::lua::State& state);
 void bindLostEventEventDispatcher(lost::lua::State& state);
 void bindLostApplicationApplication(lost::lua::State& state);
+void bindLostApplicationKeyEvent(lost::lua::State& state);
+void bindLostApplicationTimerEvent(lost::lua::State& state);
+void bindLostApplicationResizeEvent(lost::lua::State& state);
+void bindLostApplicationMouseEvent(lost::lua::State& state);
+void bindLostApplicationApplicationEvent(lost::lua::State& state);
 
 static inline void bindAll(lost::lua::State& state)
 {
@@ -29,6 +34,11 @@ static inline void bindAll(lost::lua::State& state)
   bindLostEventEvent(state);  
   bindLostEventEventDispatcher(state);
   bindLostApplicationApplication(state);
+  bindLostApplicationKeyEvent(state);
+  bindLostApplicationTimerEvent(state);
+  bindLostApplicationResizeEvent(state);
+  bindLostApplicationMouseEvent(state);
+  bindLostApplicationApplicationEvent(state);
 }
 
 
