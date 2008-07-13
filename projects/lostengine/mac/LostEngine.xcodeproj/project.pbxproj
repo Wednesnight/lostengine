@@ -130,6 +130,8 @@
 		EA9A35310E297E3B0090BAD0 /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */; };
 		EA9A35DF0E299C540090BAD0 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
 		EA9A35E00E299C540090BAD0 /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */; };
+		EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
+		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		EAAA56350E285086002EB663 /* GlfwAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56330E285086002EB663 /* GlfwAdapter.h */; };
 		EAAA56360E285086002EB663 /* GlfwAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAA56340E285086002EB663 /* GlfwAdapter.cpp */; };
 		EAAA56740E2864A4002EB663 /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAA56720E2864A4002EB663 /* TimerManager.cpp */; };
@@ -302,6 +304,8 @@
 		EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonLog.cpp; sourceTree = "<group>"; };
 		EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceLoader.cpp; sourceTree = "<group>"; };
 		EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceFile.cpp; sourceTree = "<group>"; };
+		EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleLoader.h; sourceTree = "<group>"; };
+		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
 		EAAA56330E285086002EB663 /* GlfwAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlfwAdapter.h; sourceTree = "<group>"; };
 		EAAA56340E285086002EB663 /* GlfwAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlfwAdapter.cpp; sourceTree = "<group>"; };
 		EAAA56720E2864A4002EB663 /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimerManager.cpp; sourceTree = "<group>"; };
@@ -678,6 +682,8 @@
 			children = (
 				EA3B94E40E04639D00B6423B /* lua.h */,
 				EA3B94E50E04639D00B6423B /* State.h */,
+				EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */,
+				EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */,
 				EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */,
 				EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */,
 				EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */,
@@ -867,6 +873,7 @@
 				EAAA56950E286E4A002EB663 /* ApplicationEvent.h in Headers */,
 				EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */,
 				EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */,
+				EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +964,7 @@
 				EA9A35310E297E3B0090BAD0 /* LuaLostCommonLog.cpp in Sources */,
 				EA9A35DF0E299C540090BAD0 /* LuaLostResourceLoader.cpp in Sources */,
 				EA9A35E00E299C540090BAD0 /* LuaLostResourceFile.cpp in Sources */,
+				EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

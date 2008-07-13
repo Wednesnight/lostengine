@@ -1,6 +1,4 @@
-log.debug("chello from da Lua")
 config = {}
-config.displayAttributes = "asd"
 
 function printkeys(t)
   for k,v in pairs(t)
@@ -10,32 +8,8 @@ function printkeys(t)
  end
 end
 
-log.debug("loglog")
-log.info(config)
-log.warn(tostring(config))
-log.error(tostring(config))
-
-log.debug("package: "..tostring(package.loaders));
-printkeys(package)
-print("\n")
-printkeys(package.loaders)
-
-function customloader(m)
-  print(tostring("customloader: "..m))
-  return nil
-end
-
---function customIndex(table, key)
---  print("customIndex")
---  return customloader
---end
-
-mt = {}
-mt.__index = function(table, key) print("customindex");return customloader;end
-setmetatable(package.preload, mt)
-
 require("foo")
-log.debug("attempting resource load from lua")
-filowitsch = resourceLoader:load("init")
-log.debug("ok");
---print(filowitsch:str())
+foo.printIt("zigzag");
+
+require("baz")
+baz.printIt("zigzag");

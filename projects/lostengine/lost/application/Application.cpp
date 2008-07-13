@@ -6,6 +6,7 @@
 #include "lost/application/ApplicationEvent.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/lua/LuaBindings.h"
+#include "lost/lua/ModuleLoader.h"
 
 using namespace std;
 using namespace boost;
@@ -30,15 +31,13 @@ namespace application
     // the main loop is not running yet
     running = false;
 
-    // init default resource loader
-    loader.reset(new lost::resource::DefaultLoader);
-    // init lua state with resource loader
-    interpreter.reset(new lua::State);
-    // bind lostengine lu mappings
-    lost::lua::bindAll(*interpreter);
+    loader.reset(new lost::resource::DefaultLoader);// init default resource loader
+    interpreter.reset(new lua::State); // init lua state with resource loader
+    lost::lua::bindAll(*interpreter); // bind lostengine lu mappings
 
+    // install custom module loader for current lua state and resource loader
+    lost::lua::ModuleLoader::install(*interpreter, loader);
     //----DEBUG
-    luabind::globals(*interpreter)["resourceLoader"] = loader;
     //
 
 
