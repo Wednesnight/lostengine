@@ -36,6 +36,12 @@ namespace application
     interpreter.reset(new lua::State);
     // bind lostengine lu mappings
     lost::lua::bindAll(*interpreter);
+
+    //----DEBUG
+    luabind::globals(*interpreter)["resourceLoader"] = loader;
+    //
+
+
     // try to load default lua script
     shared_ptr<File> initScript;
     try
@@ -47,6 +53,8 @@ namespace application
     {
       IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
     }
+    
+    
     
     // broadcast preinit event, this is the latest point for client code to setup the configuration
     shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::PREINIT()));dispatchEvent(appEvent);

@@ -2,7 +2,7 @@
 #define LOST_RESOURCE_FILE_H
 
 #include <string>
-#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include <stdint.h>
 
 namespace lost
