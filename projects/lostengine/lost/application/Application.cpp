@@ -5,6 +5,7 @@
 #include <boost/bind.hpp>
 #include "lost/application/ApplicationEvent.h"
 #include "lost/resource/DefaultLoader.h"
+#include "lost/lua/LuaBindings.h"
 
 using namespace std;
 using namespace boost;
@@ -33,6 +34,8 @@ namespace application
     loader.reset(new lost::resource::DefaultLoader);
     // init lua state with resource loader
     interpreter.reset(new lua::State);
+    // bind lostengine lu mappings
+    lost::lua::bindAll(*interpreter);
     // try to load default lua script
     shared_ptr<File> initScript;
     try

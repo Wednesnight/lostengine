@@ -1,5 +1,12 @@
-print("chello from da Lua")
+log.debug("chello from da Lua")
 config = {}
 config.displayAttributes = "asd"
-
+--for k,v in pairs(_G)
+--do
+--  print(k)
+--end
+log.debug("loglog")
+log.info(config)
+log.warn(tostring(config))
+log.error(tostring(config))
 
