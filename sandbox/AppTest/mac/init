@@ -32,6 +32,3 @@ controller.keyDown = function(self, event)
 end
 
 app:addEventListener("keyDown", controller, controller.keyDown)
-
-ke = lost.application.KeyEvent("keyDown")
-log.debug(tostring(ke.key).." : "..tostring(ke.pressed))
