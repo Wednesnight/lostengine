@@ -1,3 +1,7 @@
+
+require("foo")
+require("baz")
+
 config = {}
 
 function preinit(event)
@@ -12,6 +16,7 @@ end
 function key(event)
   log.debug("got event: "..event.type)
   app:quit()
+  print("gc mem: "..collectgarbage("count"))
 end
 
 app:addEventListener("applicationPreInit", preinit)

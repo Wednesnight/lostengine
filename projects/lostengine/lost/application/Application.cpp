@@ -33,7 +33,7 @@ namespace application
 
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
-    lost::lua::bindAll(*interpreter); // bind lostengine lu mappings    
+    lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     luabind::globals(*interpreter)["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
 

@@ -116,7 +116,6 @@
 		EA3B95AE0E04639D00B6423B /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		EA3B95B00E04639D00B6423B /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95010E04639D00B6423B /* File.h */; };
 		EA3B95B10E04639D00B6423B /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95020E04639D00B6423B /* Loader.h */; };
-		EA3B95B20E04639D00B6423B /* LocalRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95030E04639D00B6423B /* LocalRepository.h */; };
 		EA3B95B30E04639D00B6423B /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95040E04639D00B6423B /* Repository.h */; };
 		EA3B967B0E046C5400B6423B /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96740E046C5400B6423B /* Generator.h */; };
 		EA3B967D0E046C5400B6423B /* Matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96760E046C5400B6423B /* Matrix.h */; };
@@ -293,7 +292,6 @@
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
 		EA3B95010E04639D00B6423B /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		EA3B95020E04639D00B6423B /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
-		EA3B95030E04639D00B6423B /* LocalRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalRepository.h; sourceTree = "<group>"; };
 		EA3B95040E04639D00B6423B /* Repository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repository.h; sourceTree = "<group>"; };
 		EA3B96740E046C5400B6423B /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		EA3B96760E046C5400B6423B /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
@@ -732,7 +730,6 @@
 				EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */,
 				EA3B95010E04639D00B6423B /* File.h */,
 				EA3B95020E04639D00B6423B /* Loader.h */,
-				EA3B95030E04639D00B6423B /* LocalRepository.h */,
 				EA3B95040E04639D00B6423B /* Repository.h */,
 			);
 			path = resource;
@@ -862,7 +859,6 @@
 				EA3B95AC0E04639D00B6423B /* Platform.h in Headers */,
 				EA3B95B00E04639D00B6423B /* File.h in Headers */,
 				EA3B95B10E04639D00B6423B /* Loader.h in Headers */,
-				EA3B95B20E04639D00B6423B /* LocalRepository.h in Headers */,
 				EA3B95B30E04639D00B6423B /* Repository.h in Headers */,
 				EA3B967B0E046C5400B6423B /* Generator.h in Headers */,
 				EA3B967D0E046C5400B6423B /* Matrix.h in Headers */,
