@@ -14,6 +14,9 @@ void bindLostBitmapBitmapLoader(lost::lua::State& state);
 void bindLostCommonLog(lost::lua::State& state);
 void bindLostResourceFile(lost::lua::State& state);
 void bindLostResourceLoader(lost::lua::State& state);
+void bindLostEventEvent(lost::lua::State& state);
+void bindLostEventEventDispatcher(lost::lua::State& state);
+void bindLostApplicationApplication(lost::lua::State& state);
 
 static inline void bindAll(lost::lua::State& state)
 {
@@ -23,6 +26,9 @@ static inline void bindAll(lost::lua::State& state)
   bindLostCommonLog(state);
   bindLostResourceFile(state);
   bindLostResourceLoader(state);
+  bindLostEventEvent(state);  
+  bindLostEventEventDispatcher(state);
+  bindLostApplicationApplication(state);
 }
 
 

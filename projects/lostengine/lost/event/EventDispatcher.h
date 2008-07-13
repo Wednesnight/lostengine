@@ -38,12 +38,14 @@ namespace lost
         func(p);
       }  
     };
-
-
+    
     struct EventDispatcher
     {
       EventSignalPtrMap listeners;
 
+      EventDispatcher() {}
+      virtual ~EventDispatcher() {}
+      
       void addEventListener( const lost::event::Type& type, EventListenerFunc callback )
       {
         EventSignalPtrMap::iterator pos = listeners.find(type);

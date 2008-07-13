@@ -1,15 +1,22 @@
 config = {}
 
-function printkeys(t)
-  for k,v in pairs(t)
-  do
-    --print(k.." : "..tostring(v))
-    print(k)
- end
+function preinit(event)
+  log.debug("preinit, building config")
+  config.myparam = "value"
 end
 
-require("foo")
-foo.printIt("zigzag");
+function init(event)
+  log.debug("got event: "..event.type)
+end
 
-require("baz")
-baz.printIt("zigzag");
+function key(event)
+  log.debug("got event: "..event.type)
+  app:quit()
+end
+
+app:addEventListener("applicationPreInit", preinit)
+app:addEventListener("applicationInit", init)
+app:addEventListener("keyDown", key)
+
+
+
