@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1AEF040E1CC567007575E9 /* glm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1AEF030E1CC567007575E9 /* glm.cpp */; };
+		3E1AEF5C0E1CC8B3007575E9 /* sponza.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */; };
+		3E3D52880E2AC75700931839 /* cessna.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52810E2AC75700931839 /* cessna.obj */; };
+		3E3D52890E2AC75700931839 /* gourd.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52820E2AC75700931839 /* gourd.obj */; };
+		3E3D528A0E2AC75700931839 /* humanoid_quad.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52830E2AC75700931839 /* humanoid_quad.obj */; };
+		3E3D528B0E2AC75700931839 /* humanoid_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52840E2AC75700931839 /* humanoid_tri.obj */; };
+		3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52850E2AC75700931839 /* shuttle.obj */; };
+		3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52860E2AC75700931839 /* tetrahedron.obj */; };
+		3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52870E2AC75700931839 /* magnolia.obj */; };
 		3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */; };
 		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -39,6 +48,20 @@
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3E1AEEDF0E1CBD74007575E9 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = ../../../projects/lostengine/lost/obj/Parser.h; sourceTree = SOURCE_ROOT; };
+		3E1AEEE00E1CBD74007575E9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../../../projects/lostengine/lost/obj/Scene.h; sourceTree = SOURCE_ROOT; };
+		3E1AEEE10E1CBD74007575E9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = ../../../projects/lostengine/lost/obj/Vertex.h; sourceTree = SOURCE_ROOT; };
+		3E1AEEE20E1CBD74007575E9 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Face.h; path = ../../../projects/lostengine/lost/obj/Face.h; sourceTree = SOURCE_ROOT; };
+		3E1AEF030E1CC567007575E9 /* glm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glm.cpp; path = ../../../thirdparty/glm/glm.cpp; sourceTree = SOURCE_ROOT; };
+		3E1AEF090E1CC57B007575E9 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glm.h; path = ../../../thirdparty/glm/glm.h; sourceTree = SOURCE_ROOT; };
+		3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza.obj; path = ../../../data/obj/sponza.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52810E2AC75700931839 /* cessna.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cessna.obj; path = ../../../data/obj/cessna.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52820E2AC75700931839 /* gourd.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gourd.obj; path = ../../../data/obj/gourd.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52830E2AC75700931839 /* humanoid_quad.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = humanoid_quad.obj; path = ../../../data/obj/humanoid_quad.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52840E2AC75700931839 /* humanoid_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = humanoid_tri.obj; path = ../../../data/obj/humanoid_tri.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52850E2AC75700931839 /* shuttle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shuttle.obj; path = ../../../data/obj/shuttle.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52860E2AC75700931839 /* tetrahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tetrahedron.obj; path = ../../../data/obj/tetrahedron.obj; sourceTree = SOURCE_ROOT; };
+		3E3D52870E2AC75700931839 /* magnolia.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia.obj; path = ../../../data/obj/magnolia.obj; sourceTree = SOURCE_ROOT; };
 		3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../../../projects/lostengine/lost/obj/Parser.cpp; sourceTree = SOURCE_ROOT; };
 		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +115,12 @@
 		29B97315FDCFA39411CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3E1AEF090E1CC57B007575E9 /* glm.h */,
+				3E1AEF030E1CC567007575E9 /* glm.cpp */,
+				3E1AEEDF0E1CBD74007575E9 /* Parser.h */,
+				3E1AEEE00E1CBD74007575E9 /* Scene.h */,
+				3E1AEEE10E1CBD74007575E9 /* Vertex.h */,
+				3E1AEEE20E1CBD74007575E9 /* Face.h */,
 				3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */,
 				EA27DE3A0DD87DA100552F5E /* main.cpp */,
 				EA27DE3D0DD87E7A00552F5E /* Object0r.h */,
@@ -102,6 +131,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E3D52810E2AC75700931839 /* cessna.obj */,
+				3E3D52820E2AC75700931839 /* gourd.obj */,
+				3E3D52830E2AC75700931839 /* humanoid_quad.obj */,
+				3E3D52840E2AC75700931839 /* humanoid_tri.obj */,
+				3E3D52850E2AC75700931839 /* shuttle.obj */,
+				3E3D52860E2AC75700931839 /* tetrahedron.obj */,
+				3E3D52870E2AC75700931839 /* magnolia.obj */,
+				3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */,
 				3EBE300A0E1C3DB20071E6F2 /* cube.obj */,
 				EA27DEB40DD88F4400552F5E /* lattice.vs */,
 				EAA5004B0DE0FD4F0046F2B5 /* lattice.fs */,
@@ -195,6 +232,14 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EA27DEB60DD88F4400552F5E /* lattice.vs in Resources */,
 				EAA5004C0DE0FD4F0046F2B5 /* lattice.fs in Resources */,
+				3E1AEF5C0E1CC8B3007575E9 /* sponza.obj in Resources */,
+				3E3D52880E2AC75700931839 /* cessna.obj in Resources */,
+				3E3D52890E2AC75700931839 /* gourd.obj in Resources */,
+				3E3D528A0E2AC75700931839 /* humanoid_quad.obj in Resources */,
+				3E3D528B0E2AC75700931839 /* humanoid_tri.obj in Resources */,
+				3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */,
+				3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */,
+				3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +252,7 @@
 			files = (
 				EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */,
 				3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */,
+				3E1AEF040E1CC567007575E9 /* glm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +333,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/glm\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
@@ -308,6 +355,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/glm\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 				);
 				PREBINDING = NO;
