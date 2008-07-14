@@ -12,7 +12,7 @@ namespace ModuleLoader
 {
   void install(State& inState, boost::shared_ptr<resource::Loader> inLoader)
   {
-    static string script =
+    const static string script =
     "local debug = _G.log.debug\n"
     "local setmetatable = _G.setmetatable\n"
     "local package = _G.package\n"

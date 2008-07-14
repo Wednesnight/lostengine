@@ -28,8 +28,11 @@ public:
   boost::shared_ptr<lua::State>         interpreter;
   
 private:
+  void          init();
+
   GlfwAdapter   adapter;
   TimerManager  timerManager;
+  bool          initialised;
   bool          running;
 
   void          handleResize(boost::shared_ptr<ResizeEvent> ev);

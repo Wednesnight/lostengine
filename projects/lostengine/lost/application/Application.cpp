@@ -11,6 +11,8 @@
 using namespace std;
 using namespace boost;
 using namespace lost::resource;
+using namespace lost::common;
+using namespace luabind;
 
 namespace lost
 {
@@ -18,6 +20,9 @@ namespace application
 {
   Application* appInstance = NULL;
 
+  /** Constructs application 
+   *
+   */
   Application::Application()
   : adapter(this)
   {
@@ -28,20 +33,25 @@ namespace application
     }
     appInstance = this;
 
-    // the main loop is not running yet
-    running = false;
+    initialised = false; // init wasn't called yet
+    running = false;// the main loop is not running yet
 
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     luabind::globals(*interpreter)["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
+  }
 
+  void Application::init()
+  {
+    if(initialised) return;
+    initialised = true;
+    
     // try to load default lua script
-    shared_ptr<File> initScript;
     try
     {
-      initScript = loader->load("init");
+      shared_ptr<File> initScript = loader->load("init");
       interpreter->doString(initScript->str());
     }
     catch(exception& ex)
@@ -49,24 +59,29 @@ namespace application
       IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
     }
     
-    
-    
     // broadcast preinit event, this is the latest point for client code to setup the configuration
     shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::PREINIT()));dispatchEvent(appEvent);
     
     // try to extract default display attributes from lua state
-    
+    try
+    {
+      displayAttributes = object_cast<DisplayAttributes>(globals(*interpreter)["config"]["displayAttributes"]);
+    }
+    catch(exception& ex)
+    {
+      IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
+    }
     // init display/adapter so all other code is safe from here on because an OpenGL context now exists
     adapter.init(displayAttributes);
     
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();dispatchEvent(appEvent);
-
+    
     // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
     addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
-
+    
     // broadcast postinit event to signal that the application initialisation has finished
-    appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);
+    appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
   }
   
   Application::~Application() { adapter.terminate(); }
@@ -79,6 +94,7 @@ namespace application
 
   void Application::run()
   {
+    init();
     shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
     running = true;
@@ -97,6 +113,7 @@ namespace application
       }
     }
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
+    EventDispatcher::clear();
   }
 
   void Application::quit() { running=false; }

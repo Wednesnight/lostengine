@@ -65,6 +65,11 @@ namespace lost
           (*(pos->second))(event);
         }
       }
+      
+      void clear()
+      {
+        listeners.clear();
+      }
     };
   }
 }
