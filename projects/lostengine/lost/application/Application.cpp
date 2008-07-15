@@ -35,7 +35,8 @@ namespace application
 
     initialised = false; // init wasn't called yet
     running = false;// the main loop is not running yet
-
+    sendIdleEvents=true; // Application sends idle events by default
+    
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
@@ -106,6 +107,10 @@ namespace application
       lastTime = now;
       timerManager.updateTimers(delta);
       adapter.pollEvents();
+      if(sendIdleEvents)
+      {
+        appEvent->type = ApplicationEvent::IDLE();dispatchEvent(appEvent);
+      }
       adapter.sleep(.001); // stupid fucking hack because glfw doesn't support OS timers and we need to measure manually.
       if(!adapter.displayOpen())
       {
