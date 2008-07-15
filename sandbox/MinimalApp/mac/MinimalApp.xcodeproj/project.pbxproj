@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAE51A080E2C275A00606CF5 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE51A040E2C275A00606CF5 /* AGL.framework */; };
+		EAE51A090E2C275A00606CF5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE51A050E2C275A00606CF5 /* OpenGL.framework */; };
+		EAE51A0A0E2C275A00606CF5 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE51A060E2C275A00606CF5 /* GLUT.framework */; };
+		EAE51A0B0E2C275A00606CF5 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE51A070E2C275A00606CF5 /* Carbon.framework */; };
+		EAE51A390E2C27CC00606CF5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAE51A380E2C27CC00606CF5 /* main.cpp */; };
+		EAE51A3A0E2C27DD00606CF5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE51A1B0E2C277D00606CF5 /* libLostEngine.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAE51A1A0E2C277D00606CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE51A160E2C277D00606CF5 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = LostEngine;
+		};
+		EAE51A3B0E2C27E700606CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAE51A160E2C277D00606CF5 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* MinimalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinimalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE51A040E2C275A00606CF5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EAE51A050E2C275A00606CF5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAE51A060E2C275A00606CF5 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EAE51A070E2C275A00606CF5 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EAE51A160E2C277D00606CF5 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAE51A380E2C27CC00606CF5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAE51A3A0E2C27DD00606CF5 /* libLostEngine.a in Frameworks */,
+				EAE51A080E2C275A00606CF5 /* AGL.framework in Frameworks */,
+				EAE51A090E2C275A00606CF5 /* OpenGL.framework in Frameworks */,
+				EAE51A0A0E2C275A00606CF5 /* GLUT.framework in Frameworks */,
+				EAE51A0B0E2C275A00606CF5 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* MinimalApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* MinimalApp */ = {
+			isa = PBXGroup;
+			children = (
+				EAE51A380E2C27CC00606CF5 /* main.cpp */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Libraries */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = MinimalApp;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EAE51A160E2C277D00606CF5 /* LostEngine.xcodeproj */,
+				EAE51A040E2C275A00606CF5 /* AGL.framework */,
+				EAE51A050E2C275A00606CF5 /* OpenGL.framework */,
+				EAE51A060E2C275A00606CF5 /* GLUT.framework */,
+				EAE51A070E2C275A00606CF5 /* Carbon.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		EAE51A170E2C277D00606CF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAE51A1B0E2C277D00606CF5 /* libLostEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* MinimalApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MinimalApp" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAE51A3C0E2C27E700606CF5 /* PBXTargetDependency */,
+			);
+			name = MinimalApp;
+			productInstallPath = "$(HOME)/Applications";
+			productName = MinimalApp;
+			productReference = 8D1107320486CEB800E47090 /* MinimalApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MinimalApp" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* MinimalApp */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EAE51A170E2C277D00606CF5 /* Products */;
+					ProjectRef = EAE51A160E2C277D00606CF5 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* MinimalApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EAE51A1B0E2C277D00606CF5 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EAE51A1A0E2C277D00606CF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAE51A390E2C27CC00606CF5 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAE51A3C0E2C27E700606CF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EAE51A3B0E2C27E700606CF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MinimalApp;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MinimalApp_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MinimalApp;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MinimalApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MinimalApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
