@@ -1,3 +1,181 @@
+#include "lost/common/Logger.h"
+#include "lost/application/Application.h"
+#include "lost/application/ApplicationEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/ResizeEvent.h"
+#include "lost/gl/Utils.h"
+#include "lost/gl/Draw.h"
+#include "lost/math/Vec2.h"
+#include "lost/math/Matrix.h"
+
+using namespace std;
+using namespace boost;
+using namespace lost::common;
+using namespace lost::event;
+using namespace lost::math;
+using namespace lost::gl;
+using namespace lost::gl::utils;
+using namespace lost::application;
+
+namespace lost
+{
+  namespace gl
+  {
+    struct Camera
+    {
+      // window attributes
+      int width;
+      int height;
+      // camera attributes
+      Vec3  target;
+      float distance;
+      Vec3  rotation;
+      float fovy;
+      Vec2  depth;
+      // transformation attributes
+      Matrix transformMatrix;
+      
+      Camera(Application& inApp, const Vec3& inTarget, const float& inDistance, const Vec3& inRotation)
+      : width(inApp.displayAttributes.width),
+        height(inApp.displayAttributes.height),
+        target(inTarget),
+        distance(inDistance),
+        rotation(inRotation),
+        fovy(60),
+        depth(1.5,20)
+      {
+        transformMatrix.initIdentity();
+        inApp.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(boost::bind( &Camera::resize, this, _1 )));
+      }
+      ~Camera() {}
+      
+      void resize(shared_ptr<ResizeEvent> event)
+      {
+        DOUT("Camera::resize(): " << event->width << "x" << event->height);
+        width  = event->width;
+        height = event->height;
+      }
+      
+      void apply()
+      {
+        glViewport (0, 0, width, height); 
+        glMatrixMode (GL_PROJECTION);
+        glLoadIdentity();
+        gluPerspective(fovy, width/height, depth.x, depth.y);
+        
+        Vec3 eye = this->eye();
+        Vec3 up  = this->up();
+        gluLookAt(eye.x, eye.y, eye.z, target.x, target.y, target.z, up.x, up.y, up.z);
+      }
+
+      Vec3 direction()
+      {
+        return target - eye();
+      }
+      
+      Vec3 eye()
+      {
+        return transformMatrix * rotationMatrixX() * rotationMatrixY() * rotationMatrixZ() * (target + Vec3(0, 0, distance));
+      }
+
+      Matrix rotationMatrixX()
+      {
+        Matrix rotationX;
+        rotationX.initRotateX(rotation.x);
+        return rotationX;
+      }
+      Matrix rotationMatrixY()
+      {
+        Matrix rotationY;
+        rotationY.initRotateY(rotation.y);
+        return rotationY;
+      }
+      Matrix rotationMatrixZ()
+      {
+        Matrix rotationZ;
+        rotationZ.initRotateZ(rotation.z);
+        return rotationZ;
+      }
+      
+      void transform(const Matrix& inMatrix)
+      {
+        DOUT("Camera::transform(): " << inMatrix);
+        transformMatrix = transformMatrix * inMatrix;
+      }
+      
+      Vec3 up()
+      {
+        return rotationMatrixX() * rotationMatrixY() * rotationMatrixZ() * Vec3(0, 1, 0);
+      }
+      
+    };
+  }
+}
+
+shared_ptr<Camera> cam;
+void idle(shared_ptr<Event> event)
+{
+  // camera stuff
+  if (!cam) 
+  {
+    cam.reset(new Camera(*appInstance, Vec3(0,0,0), 5, Vec3(45, 45, 45)));
+  }
+  cam->apply();
+  
+  glDisable(GL_DEPTH_TEST);GLDEBUG;
+  glDisable(GL_TEXTURE_2D);GLDEBUG;
+  glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
+  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
+  
+  setColor(whiteColor);
+  
+  glutWireCube(1.0);
+  glfwSwapBuffers();  
+}
+
+void keyHandler(shared_ptr<KeyEvent> event)
+{
+  DOUT("key: " << event->key);
+  if (event->pressed)
+  {
+    switch (event->key)
+    {
+      case 27:
+        exit(0);
+        break;
+      case 87: //w
+        cam->distance -= 0.1;
+        break;
+      case 83: //s
+        cam->distance += 0.1;
+        break;
+      case 65: //a
+        break;
+      case 68: //d
+        break;
+    }
+  }
+}
+
+int main(int argn, char** args)
+{
+  LogLevel( log_all );
+  try
+  {
+    Application app;
+    app.addEventListener(ApplicationEvent::IDLE(), idle);
+    app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
+    app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
+    app.run();
+  }
+  catch (exception& e)
+  {
+    EOUT("exception: " << e.what());
+  }
+  
+  return 0;
+}
+/*
 #include <iostream>
 
 #include "lost/platform/Platform.h"
@@ -115,13 +293,14 @@ void display(void)
 
   camera.apply();
 
-  glScalef (1.0, 2.0, 1.0);      /* modeling transformation */ 
+  glScalef (1.0, 2.0, 1.0);      // modeling transformation 
   glutWireCube (1.0);
   glFlush ();
 }
 
 void keyboard(unsigned char key, int x, int y)
 {
+  cout << key << endl;
   switch (key) {
     case 27:
       exit(0);
@@ -137,6 +316,10 @@ void keyboard(unsigned char key, int x, int y)
       break;
     case 'd':
       camera.strafe(-1);
+      break;
+    case '+':
+      break;
+    case '-':
       break;
   }
 }
@@ -180,7 +363,6 @@ int main(int argc, char** argv)
   glutMainLoop();
   return 0;
 }
-/*
 #include "lost/common/Logger.h"
 #include "lost/obj/Parser.h"
 #include "lost/platform/Platform.h"
