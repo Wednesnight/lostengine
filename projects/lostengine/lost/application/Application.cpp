@@ -66,7 +66,13 @@ namespace application
     // try to extract default display attributes from lua state
     try
     {
-      displayAttributes = object_cast<DisplayAttributes>(globals(*interpreter)["config"]["displayAttributes"]);
+      object g = globals(*interpreter);
+      if((luabind::type(g["config"])!= LUA_TNIL)
+        && 
+        (luabind::type(g["config"]["displayAttributes"])!=LUA_TNIL))
+      {
+        displayAttributes = object_cast<DisplayAttributes>(g["config"]["displayAttributes"]);
+      }
     }
     catch(exception& ex)
     {

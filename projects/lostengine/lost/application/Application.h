@@ -38,6 +38,9 @@ private:
 
   void          handleResize(boost::shared_ptr<ResizeEvent> ev);
 };
+
+extern Application* appInstance;
+
 }
 }
 
