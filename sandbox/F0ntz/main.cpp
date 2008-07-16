@@ -2,34 +2,31 @@
 #include <iostream>
 #include <boost/shared_ptr.hpp>
 #include "lost/common/Logger.h"
-#include "lost/Platform/Platform.h"
-#include "lost/engine/glfw/Engine.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/Utils.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/engine/KeySym.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Rect.h"
-#include "lost/common/Config.h"
 #include "lost/gl/Draw.h"
-
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
 #include "lost/font/freetype/Glyph.h"
-
 #include "lost/gl/DisplayList.h"
+#include "lost/application/Application.h"
+#include "lost/application/ApplicationEvent.h"
+#include "lost/application/TimerEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/KeySym.h"
 
 using namespace std;
 using namespace boost;
 using namespace lost;
 using namespace lost::common;
+using namespace lost::application;
 using namespace lost::math;
-using namespace lost::engine;
+using namespace lost::event;
 using namespace lost::font::freetype;
 
-namespace tech = engine::glfw;
-
-struct LostEngine : tech::Engine
+struct Controller 
 {
   DisplayAttributes   display;
   FpsMeter            fpsmeter;
@@ -43,15 +40,17 @@ struct LostEngine : tech::Engine
 
   double passedTime;
 
-  LostEngine( boost::shared_ptr<Config> inConfig )
-  : tech::Engine::Engine(inConfig),
-  display(*inConfig)
+  Controller()
   {
     passedTime = 0;
   }
 
-  void fontit()
+  void init(shared_ptr<Event> event)
   {
+    IOUT("driver reports OpenGL version " << gl::utils::getVersion());
+    IOUT("Extensions: "<<glGetString(GL_EXTENSIONS));
+
+
     freetypeLibrary.reset(new Library());
 
     string path = lost::platform::buildResourcePath( "Vera.ttf" );
@@ -66,48 +65,15 @@ struct LostEngine : tech::Engine
 //    defaultFont->renderText(16, "The quick brown fox jumps over the lazy dog VA fi glrb", smallText);
     defaultFont->renderText(64, "The quick brown fox jumps over the lazy dog VA fi glrb", midText);
     defaultFont->renderText(164, "The quick brown fox jumps over the lazy dog VA fi glrb", largeText);
+
   }
 
-  void run()
+  void keyboard( shared_ptr<KeyEvent> event )
   {
-    video.restart(display);
-    video.setWindowTitle("F0ntz");
-
-    IOUT("driver reports OpenGL version " << gl::utils::getVersion());
-    IOUT("Extensions: "<<glGetString(GL_EXTENSIONS));
-
-    timer.setTimerResolution(0.001);
-    timer.add("redraw", 0.015);
-    timer["redraw"].connect(boost::bind(&LostEngine::redraw, this, _1));
-
-    // handle keyboard input
-    input.keyboard.connect( boost::bind( &LostEngine::keyboard, this, _1 ) );
-    // connect InputManager events
-    input.mouseMove.connect( boost::bind( &LostEngine::injectMouseMoveEvent, this, _1 ) );
-    input.mouseButton.connect( boost::bind( &LostEngine::injectMouseButtonEvent, this, _1 ) );
-
-    video.windowResize.connect( boost::bind( &LostEngine::windowResize, this, _1, _2 ) );
-
-    fontit();
-
-    // run the loop, timers and redraws
-    tech::Engine::run();
-  }
-
-  void injectMouseButtonEvent( const lost::event::MouseEvent& inEvent )
-  {
-  }
-
-  void injectMouseMoveEvent( const lost::event::MouseEvent& inEvent )
-  {
-  }
-
-  void keyboard( const lost::event::KeyEvent& inEvent )
-  {
-    switch (inEvent.key)
+    switch (event->key)
     {
       case K_ESCAPE :
-        if (!inEvent.pressed) shutdown();
+        if (!event->pressed) appInstance->quit();
         break;
         case K_SPACE :
         break;
@@ -116,22 +82,7 @@ struct LostEngine : tech::Engine
     }
   }
 
-  void windowResize(int width, int height)
-  {
-    DOUT("window resize w:"<<width<<" h:"<<height);
-    display.width = width;
-    display.height = height;
-    video.attributes = display; // FIXME: stupid ugly fucking hack!! the whole engine needs a DisplayAttributes singleton thats accessed from everywhere
-    // but since it contains its own copy now, we need to update it somewhere.
-  }
-
-  void resetViewPort()
-  {
-    glViewport(0, 0, display.width, display.height);GLDEBUG;
-    lost::gl::utils::set2DProjection(lost::math::Vec2(0, 0), lost::math::Vec2(display.width, display.height));GLDEBUG;
-  }
-
-  void redraw(double timeSinceLastCallSec)
+  void redraw(shared_ptr<TimerEvent> event)
   {
     //glEnable( GL_SCISSOR_TEST ); FIXME: leave this off or inital scissor will fuck up ui on window resize, we need to investigate this
     GLDEBUG;
@@ -139,7 +90,8 @@ struct LostEngine : tech::Engine
     glDisable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
     glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-    resetViewPort();
+    glViewport(0, 0, display.width, display.height);GLDEBUG;
+    lost::gl::utils::set2DProjection(lost::math::Vec2(0, 0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));GLDEBUG;
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); GLDEBUG;
@@ -151,7 +103,7 @@ struct LostEngine : tech::Engine
     glPushMatrix();
     glLoadIdentity();
 
-    passedTime += timeSinceLastCallSec;
+    passedTime += event->passedSec;
     double tsin = sin(passedTime);
     double factor = 60;
     glTranslatef(0+tsin*factor, 40, 0);
@@ -168,8 +120,8 @@ struct LostEngine : tech::Engine
     glPopMatrix(); // restore the original modelview
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
-    fpsmeter.render( display.width - (fpsmeter.width + 10), 0, timeSinceLastCallSec );
-    video.swapBuffers();
+    fpsmeter.render( appInstance->displayAttributes.width - (fpsmeter.width + 10), 0, event->passedSec );
+    glfwSwapBuffers();
   }
 };
 
@@ -179,12 +131,16 @@ int main( int argc, char *argv[] )
 
   try
   {
-    shared_ptr<Config> config(new Config( argc, argv, lost::platform::buildResourcePath( "F0ntz.cfg" ) ));
-    LostEngine         engine(config);
+    Application app;
+    Controller  controller;
+    Timer       redrawTimer("redraw", 1.0/60.0); 
 
-    engine.init();
-    engine.run();
-    config->saveToFile( lost::platform::buildResourcePath( "F0ntz.cfg" ) );
+    redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, &controller, _1)));
+    app.addEventListener(ApplicationEvent::INIT(), bind(&Controller::init, &controller, _1));
+    app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
+    app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
+
+    app.run();
   }
   catch (exception& e)
   {

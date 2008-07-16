@@ -25,14 +25,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA3B97500E047D0D00B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
@@ -85,7 +85,7 @@
 				5048396909E3304600765E4B /* Configuration Files */,
 				20286C2AFDCF999611CA2CEA /* Sources */,
 				20286C2CFDCF999611CA2CEA /* Resources */,
-				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
+				20286C32FDCF999611CA2CEA /* Libraries */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
 			);
 			name = F0ntz;
@@ -112,7 +112,7 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
+		20286C32FDCF999611CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */,
@@ -121,7 +121,7 @@
 				EAECD41B0DB53F9800855E60 /* GLUT.framework */,
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 			);
-			name = "External Frameworks and Libraries";
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		5048396909E3304600765E4B /* Configuration Files */ = {
@@ -320,6 +320,8 @@
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
