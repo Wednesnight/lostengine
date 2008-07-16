@@ -27,7 +27,6 @@ public:
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
   
-  bool                                  sendIdleEvents;
 private:
   void          init();
 

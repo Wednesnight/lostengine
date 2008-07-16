@@ -14,7 +14,6 @@ struct ApplicationEvent : public event::Event
     static const event::Type& POSTINIT(){ static event::Type d = "applicationPostInit";return d;}
     static const event::Type& RUN()     { static event::Type d = "applicationRun";return d;}
     static const event::Type& QUIT()    { static event::Type d = "applicationQuit";return d;}
-    static const event::Type& IDLE()    { static event::Type d = "applicationIdle";return d;}
 
     ApplicationEvent(const event::Type& inType) : Event(inType) { }
     virtual ~ApplicationEvent() {}

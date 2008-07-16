@@ -33,7 +33,6 @@ namespace application
     }
     appInstance = this;
 
-    initialised = false; // init wasn't called yet
     running = false;// the main loop is not running yet
     sendIdleEvents=true; // Application sends idle events by default
     
@@ -113,11 +112,7 @@ namespace application
       lastTime = now;
       timerManager.updateTimers(delta);
       adapter.pollEvents();
-      if(sendIdleEvents)
-      {
-        appEvent->type = ApplicationEvent::IDLE();dispatchEvent(appEvent);
-      }
-      adapter.sleep(.001); // stupid fucking hack because glfw doesn't support OS timers and we need to measure manually.
+      adapter.sleep(.001); // don't eat CPU time with a pure spin wait, sleep in intervals
       if(!adapter.displayOpen())
       {
         running = false;

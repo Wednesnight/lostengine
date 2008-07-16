@@ -1,6 +1,7 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/TimerEvent.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
@@ -44,7 +45,8 @@ int main(int argn, char** args)
   try
   {
     Application app;
-    app.addEventListener(ApplicationEvent::IDLE(), idle);
+    Timer timer("redraw", 1.0/60.0);
+    timer.addEventListener(TimerEvent::TIMER_FIRED(), idle);
     app.run();
   }
   catch (exception& e)
