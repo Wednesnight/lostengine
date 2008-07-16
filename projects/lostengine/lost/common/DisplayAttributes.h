@@ -2,7 +2,7 @@
 #define LOST_COMMON_DISPLAYATTRIBUTES_H
 
 #include <stdint.h>
-#include "lost/common/Config.h"
+#include <string>
 
 namespace lost
 {
@@ -46,22 +46,7 @@ namespace lost
         fullscreen = defaultFullscreen;
         title = "Application";
       }
-
-      DisplayAttributes(lost::common::Config& config)
-      {
-        width       = config.get<uint16_t>("screen.width",defaultWidth);
-        height      = config.get<uint16_t>("screen.height",defaultHeight);
-        redbits     = config.get<uint16_t>("screen.redbits",defaultRedBits);
-        bluebits    = config.get<uint16_t>("screen.bluebits",defaultBlueBits);
-        greenbits   = config.get<uint16_t>("screen.greenbits",defaultGreenBits);
-        alphabits   = config.get<uint16_t>("screen.alphabits",defaultAlphaBits);
-        depthbits   = config.get<uint16_t>("screen.depthbits",defaultDepthBits);
-        stencilbits = config.get<uint16_t>("screen.stencilbits",defaultStencilBits);
-        fullscreen  = config.get<bool>("screen.fullscreen",defaultFullscreen);
-        title       = config.get<std::string>("screen.title","Application");
-      }
     };
-
   }
 }
 

@@ -39,12 +39,6 @@ void timerAction(shared_ptr<TimerEvent> event)
   //DOUT("Timer "<<event->timer->name()<<" called after "<<event->passedSec << " sec");
 }
 
-void idle(shared_ptr<ApplicationEvent> event)
-{
-  DOUT("idle");
-  //DOUT("Timer "<<event->timer->name()<<" called after "<<event->passedSec << " sec");
-}
-
 int main(int argn, char** args)
 {
   LogLevel( log_all );
@@ -57,7 +51,6 @@ int main(int argn, char** args)
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resize));
-    app.addEventListener(ApplicationEvent::IDLE(), receive<ApplicationEvent>(idle));
     
     Timer t1("fuggn", 0.020);t1.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(timerAction));
     Timer t2("orkor", 0.200);t2.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(timerAction));
