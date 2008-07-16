@@ -1,14 +1,11 @@
 #ifndef LOST_IMAGE_BITMAP_H
 #define LOST_IMAGE_BITMAP_H
 
-#include <boost/serialization/base_object.hpp>
-
 #include "stb_image.h"
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
 #include "lost/gl/gl.h"
 
-#include "lost/object/Object.h"
 #include "lost/common/SerializationHelper.h"
 #include "stb_image.h"
 
@@ -17,7 +14,7 @@ namespace lost
   namespace bitmap
   {
 
-    struct Bitmap : public lost::object::Object
+    struct Bitmap
     {
       unsigned char*  data;
       unsigned long   width;
@@ -55,20 +52,5 @@ namespace lost
 
   } // namespace bitmap
 } // namespace lost
-
-
-namespace boost
-{
-  namespace serialization
-  {
-
-    template<class Archive>
-    inline void serialize( Archive& ar, lost::bitmap::Bitmap& bitmap, const unsigned int version )
-    {
-      ar &BOOST_SERIALIZATION_NON_INTRUSIVE_BASE_OBJECT_NVP(Object, lost::object::Object, bitmap);
-    }
-
-  } // namespace serialization
-} // namespace boost
 
 #endif
