@@ -40,7 +40,6 @@ namespace lost
       BitmapFont(void* inFont)
       : font(inFont)
       {
-        id = "BitmapFont";
       }
 
       void render(float x, float y)

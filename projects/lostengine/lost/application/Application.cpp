@@ -33,8 +33,8 @@ namespace application
     }
     appInstance = this;
 
+    initialised = false;
     running = false;// the main loop is not running yet
-    sendIdleEvents=true; // Application sends idle events by default
     
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader

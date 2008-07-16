@@ -5,6 +5,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
+#include "lost/common/FpsMeter.h"
 
 using namespace std;
 using namespace boost;
@@ -16,7 +17,9 @@ using namespace lost::gl::utils;
 using namespace lost::application;
 
 
-void idle(shared_ptr<Event> event)
+FpsMeter fpsMeter;
+
+void idle(shared_ptr<TimerEvent> event)
 {
   DOUT("idle");
   int width = appInstance->displayAttributes.width;
@@ -36,6 +39,9 @@ void idle(shared_ptr<Event> event)
   glVertex2f(0,0);
   glVertex2f(width-1, height-1);
   glEnd();
+  
+  fpsMeter.render(200,0,event->passedSec);
+  
   glfwSwapBuffers();  
 }
 
@@ -46,7 +52,7 @@ int main(int argn, char** args)
   {
     Application app;
     Timer timer("redraw", 1.0/60.0);
-    timer.addEventListener(TimerEvent::TIMER_FIRED(), idle);
+    timer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(idle));
     app.run();
   }
   catch (exception& e)

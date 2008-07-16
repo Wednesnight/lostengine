@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "lost/object/Object.h"
 #include "lost/common/Color.h"
 
 namespace lost
@@ -14,7 +13,7 @@ namespace lost
     /** base class for any 2D font thats drawn to screen without any additional transformation.
      *
      */
-    struct Font : public object::Object
+    struct Font 
     {
       protected:
         common::Color mColor;

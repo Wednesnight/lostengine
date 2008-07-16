@@ -65,57 +65,9 @@
 		EA3B95690E04639D00B6423B /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AB0E04639D00B6423B /* Texture.h */; };
 		EA3B956A0E04639D00B6423B /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AC0E04639D00B6423B /* Utils.h */; };
 		EA3B956B0E04639D00B6423B /* VertexShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AD0E04639D00B6423B /* VertexShader.h */; };
-		EA3B956C0E04639D00B6423B /* Area.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B00E04639D00B6423B /* Area.h */; };
-		EA3B956D0E04639D00B6423B /* Clonable.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B10E04639D00B6423B /* Clonable.h */; };
-		EA3B956E0E04639D00B6423B /* Dimension.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B20E04639D00B6423B /* Dimension.h */; };
-		EA3B956F0E04639D00B6423B /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B30E04639D00B6423B /* Texture.h */; };
-		EA3B95700E04639D00B6423B /* Themable.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B40E04639D00B6423B /* Themable.h */; };
-		EA3B95710E04639D00B6423B /* Theme.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B50E04639D00B6423B /* Theme.h */; };
-		EA3B95720E04639D00B6423B /* ViewPath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B60E04639D00B6423B /* ViewPath.h */; };
-		EA3B95730E04639D00B6423B /* Button.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B80E04639D00B6423B /* Button.h */; };
-		EA3B95740E04639D00B6423B /* Edit.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94B90E04639D00B6423B /* Edit.h */; };
-		EA3B95750E04639D00B6423B /* Image.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BA0E04639D00B6423B /* Image.h */; };
-		EA3B95760E04639D00B6423B /* Label.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BB0E04639D00B6423B /* Label.h */; };
-		EA3B95770E04639D00B6423B /* ProgressBar.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BC0E04639D00B6423B /* ProgressBar.h */; };
-		EA3B95780E04639D00B6423B /* Quad.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BD0E04639D00B6423B /* Quad.h */; };
-		EA3B95790E04639D00B6423B /* Screen.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BE0E04639D00B6423B /* Screen.h */; };
-		EA3B957A0E04639D00B6423B /* Scrollbar.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94BF0E04639D00B6423B /* Scrollbar.h */; };
-		EA3B957B0E04639D00B6423B /* ScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C00E04639D00B6423B /* ScrollView.h */; };
-		EA3B957C0E04639D00B6423B /* ShapeView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C10E04639D00B6423B /* ShapeView.h */; };
-		EA3B957D0E04639D00B6423B /* Slider.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C20E04639D00B6423B /* Slider.h */; };
-		EA3B957E0E04639D00B6423B /* UserInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C30E04639D00B6423B /* UserInterface.h */; };
-		EA3B957F0E04639D00B6423B /* View.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C40E04639D00B6423B /* View.h */; };
-		EA3B95800E04639D00B6423B /* Window.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C50E04639D00B6423B /* Window.h */; };
-		EA3B95810E04639D00B6423B /* InputController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C70E04639D00B6423B /* InputController.h */; };
-		EA3B95820E04639D00B6423B /* BitmapFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94C90E04639D00B6423B /* BitmapFactory.h */; };
-		EA3B95830E04639D00B6423B /* ControlFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CA0E04639D00B6423B /* ControlFactory.h */; };
-		EA3B95840E04639D00B6423B /* Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CB0E04639D00B6423B /* Factory.h */; };
-		EA3B95850E04639D00B6423B /* FontFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CC0E04639D00B6423B /* FontFactory.h */; };
-		EA3B95860E04639D00B6423B /* FuglyFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CD0E04639D00B6423B /* FuglyFactory.h */; };
-		EA3B95870E04639D00B6423B /* TextureFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CE0E04639D00B6423B /* TextureFactory.h */; };
-		EA3B95880E04639D00B6423B /* ThemeFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94CF0E04639D00B6423B /* ThemeFactory.h */; };
-		EA3B95890E04639D00B6423B /* UserInterfaceBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D00E04639D00B6423B /* UserInterfaceBuilder.h */; };
-		EA3B958A0E04639D00B6423B /* VanillaFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D10E04639D00B6423B /* VanillaFactory.h */; };
-		EA3B958B0E04639D00B6423B /* AreaIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D30E04639D00B6423B /* AreaIo.h */; };
-		EA3B958C0E04639D00B6423B /* DimensionIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D40E04639D00B6423B /* DimensionIo.h */; };
-		EA3B958D0E04639D00B6423B /* EditIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D50E04639D00B6423B /* EditIo.h */; };
-		EA3B958E0E04639D00B6423B /* ImageIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D60E04639D00B6423B /* ImageIo.h */; };
-		EA3B958F0E04639D00B6423B /* Io.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D70E04639D00B6423B /* Io.h */; };
-		EA3B95900E04639D00B6423B /* LabelIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D80E04639D00B6423B /* LabelIo.h */; };
-		EA3B95910E04639D00B6423B /* QuadIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94D90E04639D00B6423B /* QuadIo.h */; };
-		EA3B95920E04639D00B6423B /* TextureIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94DA0E04639D00B6423B /* TextureIo.h */; };
-		EA3B95930E04639D00B6423B /* ThemeIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94DB0E04639D00B6423B /* ThemeIo.h */; };
-		EA3B95940E04639D00B6423B /* ViewIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94DC0E04639D00B6423B /* ViewIo.h */; };
-		EA3B95950E04639D00B6423B /* ColorIo.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94DE0E04639D00B6423B /* ColorIo.h */; };
-		EA3B95960E04639D00B6423B /* Io.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94DF0E04639D00B6423B /* Io.h */; };
-		EA3B95970E04639D00B6423B /* Vec2Io.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E00E04639D00B6423B /* Vec2Io.h */; };
 		EA3B95980E04639D00B6423B /* LSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E20E04639D00B6423B /* LSystem.h */; };
 		EA3B95990E04639D00B6423B /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E40E04639D00B6423B /* lua.h */; };
 		EA3B959A0E04639D00B6423B /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E50E04639D00B6423B /* State.h */; };
-		EA3B95A70E04639D00B6423B /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94F60E04639D00B6423B /* Object.h */; };
-		EA3B95A80E04639D00B6423B /* ObjectReference.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94F70E04639D00B6423B /* ObjectReference.h */; };
-		EA3B95A90E04639D00B6423B /* ObjectReferenceContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94F80E04639D00B6423B /* ObjectReferenceContainer.h */; };
-		EA3B95AA0E04639D00B6423B /* ObjectReferenceResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94F90E04639D00B6423B /* ObjectReferenceResolver.h */; };
 		EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		EA3B95AC0E04639D00B6423B /* Platform.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94FC0E04639D00B6423B /* Platform.h */; };
 		EA3B95AE0E04639D00B6423B /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
@@ -130,7 +82,6 @@
 		EA3B96810E046C5400B6423B /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
 		EA3B96FD0E047BA100B6423B /* libboost_program_options.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B96FB0E047BA100B6423B /* libboost_program_options.a */; };
 		EA3B96FE0E047BA100B6423B /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B96FC0E047BA100B6423B /* libboost_signals.a */; };
-		EA3B97460E047CED00B6423B /* libboost_serialization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B97450E047CED00B6423B /* libboost_serialization.a */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
@@ -246,57 +197,9 @@
 		EA3B94AB0E04639D00B6423B /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		EA3B94AC0E04639D00B6423B /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		EA3B94AD0E04639D00B6423B /* VertexShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexShader.h; sourceTree = "<group>"; };
-		EA3B94B00E04639D00B6423B /* Area.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Area.h; sourceTree = "<group>"; };
-		EA3B94B10E04639D00B6423B /* Clonable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clonable.h; sourceTree = "<group>"; };
-		EA3B94B20E04639D00B6423B /* Dimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dimension.h; sourceTree = "<group>"; };
-		EA3B94B30E04639D00B6423B /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
-		EA3B94B40E04639D00B6423B /* Themable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Themable.h; sourceTree = "<group>"; };
-		EA3B94B50E04639D00B6423B /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
-		EA3B94B60E04639D00B6423B /* ViewPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPath.h; sourceTree = "<group>"; };
-		EA3B94B80E04639D00B6423B /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
-		EA3B94B90E04639D00B6423B /* Edit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edit.h; sourceTree = "<group>"; };
-		EA3B94BA0E04639D00B6423B /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		EA3B94BB0E04639D00B6423B /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Label.h; sourceTree = "<group>"; };
-		EA3B94BC0E04639D00B6423B /* ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressBar.h; sourceTree = "<group>"; };
-		EA3B94BD0E04639D00B6423B /* Quad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quad.h; sourceTree = "<group>"; };
-		EA3B94BE0E04639D00B6423B /* Screen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Screen.h; sourceTree = "<group>"; };
-		EA3B94BF0E04639D00B6423B /* Scrollbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scrollbar.h; sourceTree = "<group>"; };
-		EA3B94C00E04639D00B6423B /* ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollView.h; sourceTree = "<group>"; };
-		EA3B94C10E04639D00B6423B /* ShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeView.h; sourceTree = "<group>"; };
-		EA3B94C20E04639D00B6423B /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
-		EA3B94C30E04639D00B6423B /* UserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterface.h; sourceTree = "<group>"; };
-		EA3B94C40E04639D00B6423B /* View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = View.h; sourceTree = "<group>"; };
-		EA3B94C50E04639D00B6423B /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		EA3B94C70E04639D00B6423B /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
-		EA3B94C90E04639D00B6423B /* BitmapFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapFactory.h; sourceTree = "<group>"; };
-		EA3B94CA0E04639D00B6423B /* ControlFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlFactory.h; sourceTree = "<group>"; };
-		EA3B94CB0E04639D00B6423B /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
-		EA3B94CC0E04639D00B6423B /* FontFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontFactory.h; sourceTree = "<group>"; };
-		EA3B94CD0E04639D00B6423B /* FuglyFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuglyFactory.h; sourceTree = "<group>"; };
-		EA3B94CE0E04639D00B6423B /* TextureFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureFactory.h; sourceTree = "<group>"; };
-		EA3B94CF0E04639D00B6423B /* ThemeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeFactory.h; sourceTree = "<group>"; };
-		EA3B94D00E04639D00B6423B /* UserInterfaceBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterfaceBuilder.h; sourceTree = "<group>"; };
-		EA3B94D10E04639D00B6423B /* VanillaFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VanillaFactory.h; sourceTree = "<group>"; };
-		EA3B94D30E04639D00B6423B /* AreaIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaIo.h; sourceTree = "<group>"; };
-		EA3B94D40E04639D00B6423B /* DimensionIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DimensionIo.h; sourceTree = "<group>"; };
-		EA3B94D50E04639D00B6423B /* EditIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditIo.h; sourceTree = "<group>"; };
-		EA3B94D60E04639D00B6423B /* ImageIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageIo.h; sourceTree = "<group>"; };
-		EA3B94D70E04639D00B6423B /* Io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Io.h; sourceTree = "<group>"; };
-		EA3B94D80E04639D00B6423B /* LabelIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelIo.h; sourceTree = "<group>"; };
-		EA3B94D90E04639D00B6423B /* QuadIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadIo.h; sourceTree = "<group>"; };
-		EA3B94DA0E04639D00B6423B /* TextureIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureIo.h; sourceTree = "<group>"; };
-		EA3B94DB0E04639D00B6423B /* ThemeIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeIo.h; sourceTree = "<group>"; };
-		EA3B94DC0E04639D00B6423B /* ViewIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewIo.h; sourceTree = "<group>"; };
-		EA3B94DE0E04639D00B6423B /* ColorIo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorIo.h; sourceTree = "<group>"; };
-		EA3B94DF0E04639D00B6423B /* Io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Io.h; sourceTree = "<group>"; };
-		EA3B94E00E04639D00B6423B /* Vec2Io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec2Io.h; sourceTree = "<group>"; };
 		EA3B94E20E04639D00B6423B /* LSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSystem.h; sourceTree = "<group>"; };
 		EA3B94E40E04639D00B6423B /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua.h; sourceTree = "<group>"; };
 		EA3B94E50E04639D00B6423B /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
-		EA3B94F60E04639D00B6423B /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
-		EA3B94F70E04639D00B6423B /* ObjectReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectReference.h; sourceTree = "<group>"; };
-		EA3B94F80E04639D00B6423B /* ObjectReferenceContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectReferenceContainer.h; sourceTree = "<group>"; };
-		EA3B94F90E04639D00B6423B /* ObjectReferenceResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectReferenceResolver.h; sourceTree = "<group>"; };
 		EA3B94FB0E04639D00B6423B /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		EA3B94FC0E04639D00B6423B /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
@@ -311,7 +214,6 @@
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
 		EA3B96FB0E047BA100B6423B /* libboost_program_options.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_program_options.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_program_options.a; sourceTree = SOURCE_ROOT; };
 		EA3B96FC0E047BA100B6423B /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_signals.a; sourceTree = SOURCE_ROOT; };
-		EA3B97450E047CED00B6423B /* libboost_serialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_serialization.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_serialization.a; sourceTree = SOURCE_ROOT; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
@@ -348,7 +250,6 @@
 				EA3B94530E0462FB00B6423B /* libz.a in Frameworks */,
 				EA3B96FD0E047BA100B6423B /* libboost_program_options.a in Frameworks */,
 				EA3B96FE0E047BA100B6423B /* libboost_signals.a in Frameworks */,
-				EA3B97460E047CED00B6423B /* libboost_serialization.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,12 +370,9 @@
 				EA3B948E0E04639D00B6423B /* event */,
 				EA3B94940E04639D00B6423B /* font */,
 				EA3B949C0E04639D00B6423B /* gl */,
-				EA3B94AE0E04639D00B6423B /* guiro */,
-				EA3B94DD0E04639D00B6423B /* io */,
 				EA3B94E10E04639D00B6423B /* lsystem */,
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
-				EA3B94F50E04639D00B6423B /* object */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 				EA3B95000E04639D00B6423B /* resource */,
 			);
@@ -585,104 +483,6 @@
 			path = gl;
 			sourceTree = "<group>";
 		};
-		EA3B94AE0E04639D00B6423B /* guiro */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94AF0E04639D00B6423B /* common */,
-				EA3B94B70E04639D00B6423B /* control */,
-				EA3B94C60E04639D00B6423B /* controller */,
-				EA3B94C80E04639D00B6423B /* factory */,
-				EA3B94D20E04639D00B6423B /* io */,
-			);
-			path = guiro;
-			sourceTree = "<group>";
-		};
-		EA3B94AF0E04639D00B6423B /* common */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94B00E04639D00B6423B /* Area.h */,
-				EA3B94B10E04639D00B6423B /* Clonable.h */,
-				EA3B94B20E04639D00B6423B /* Dimension.h */,
-				EA3B94B30E04639D00B6423B /* Texture.h */,
-				EA3B94B40E04639D00B6423B /* Themable.h */,
-				EA3B94B50E04639D00B6423B /* Theme.h */,
-				EA3B94B60E04639D00B6423B /* ViewPath.h */,
-			);
-			path = common;
-			sourceTree = "<group>";
-		};
-		EA3B94B70E04639D00B6423B /* control */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94B80E04639D00B6423B /* Button.h */,
-				EA3B94B90E04639D00B6423B /* Edit.h */,
-				EA3B94BA0E04639D00B6423B /* Image.h */,
-				EA3B94BB0E04639D00B6423B /* Label.h */,
-				EA3B94BC0E04639D00B6423B /* ProgressBar.h */,
-				EA3B94BD0E04639D00B6423B /* Quad.h */,
-				EA3B94BE0E04639D00B6423B /* Screen.h */,
-				EA3B94BF0E04639D00B6423B /* Scrollbar.h */,
-				EA3B94C00E04639D00B6423B /* ScrollView.h */,
-				EA3B94C10E04639D00B6423B /* ShapeView.h */,
-				EA3B94C20E04639D00B6423B /* Slider.h */,
-				EA3B94C30E04639D00B6423B /* UserInterface.h */,
-				EA3B94C40E04639D00B6423B /* View.h */,
-				EA3B94C50E04639D00B6423B /* Window.h */,
-			);
-			path = control;
-			sourceTree = "<group>";
-		};
-		EA3B94C60E04639D00B6423B /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94C70E04639D00B6423B /* InputController.h */,
-			);
-			path = controller;
-			sourceTree = "<group>";
-		};
-		EA3B94C80E04639D00B6423B /* factory */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94C90E04639D00B6423B /* BitmapFactory.h */,
-				EA3B94CA0E04639D00B6423B /* ControlFactory.h */,
-				EA3B94CB0E04639D00B6423B /* Factory.h */,
-				EA3B94CC0E04639D00B6423B /* FontFactory.h */,
-				EA3B94CD0E04639D00B6423B /* FuglyFactory.h */,
-				EA3B94CE0E04639D00B6423B /* TextureFactory.h */,
-				EA3B94CF0E04639D00B6423B /* ThemeFactory.h */,
-				EA3B94D00E04639D00B6423B /* UserInterfaceBuilder.h */,
-				EA3B94D10E04639D00B6423B /* VanillaFactory.h */,
-			);
-			path = factory;
-			sourceTree = "<group>";
-		};
-		EA3B94D20E04639D00B6423B /* io */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94D30E04639D00B6423B /* AreaIo.h */,
-				EA3B94D40E04639D00B6423B /* DimensionIo.h */,
-				EA3B94D50E04639D00B6423B /* EditIo.h */,
-				EA3B94D60E04639D00B6423B /* ImageIo.h */,
-				EA3B94D70E04639D00B6423B /* Io.h */,
-				EA3B94D80E04639D00B6423B /* LabelIo.h */,
-				EA3B94D90E04639D00B6423B /* QuadIo.h */,
-				EA3B94DA0E04639D00B6423B /* TextureIo.h */,
-				EA3B94DB0E04639D00B6423B /* ThemeIo.h */,
-				EA3B94DC0E04639D00B6423B /* ViewIo.h */,
-			);
-			path = io;
-			sourceTree = "<group>";
-		};
-		EA3B94DD0E04639D00B6423B /* io */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94DE0E04639D00B6423B /* ColorIo.h */,
-				EA3B94DF0E04639D00B6423B /* Io.h */,
-				EA3B94E00E04639D00B6423B /* Vec2Io.h */,
-			);
-			path = io;
-			sourceTree = "<group>";
-		};
 		EA3B94E10E04639D00B6423B /* lsystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,17 +515,6 @@
 				EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */,
 			);
 			path = lua;
-			sourceTree = "<group>";
-		};
-		EA3B94F50E04639D00B6423B /* object */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B94F60E04639D00B6423B /* Object.h */,
-				EA3B94F70E04639D00B6423B /* ObjectReference.h */,
-				EA3B94F80E04639D00B6423B /* ObjectReferenceContainer.h */,
-				EA3B94F90E04639D00B6423B /* ObjectReferenceResolver.h */,
-			);
-			path = object;
 			sourceTree = "<group>";
 		};
 		EA3B94FA0E04639D00B6423B /* platform */ = {
@@ -769,7 +558,6 @@
 			children = (
 				EA3B96FB0E047BA100B6423B /* libboost_program_options.a */,
 				EA3B96FC0E047BA100B6423B /* libboost_signals.a */,
-				EA3B97450E047CED00B6423B /* libboost_serialization.a */,
 			);
 			name = boost;
 			sourceTree = "<group>";
@@ -820,57 +608,9 @@
 				EA3B95690E04639D00B6423B /* Texture.h in Headers */,
 				EA3B956A0E04639D00B6423B /* Utils.h in Headers */,
 				EA3B956B0E04639D00B6423B /* VertexShader.h in Headers */,
-				EA3B956C0E04639D00B6423B /* Area.h in Headers */,
-				EA3B956D0E04639D00B6423B /* Clonable.h in Headers */,
-				EA3B956E0E04639D00B6423B /* Dimension.h in Headers */,
-				EA3B956F0E04639D00B6423B /* Texture.h in Headers */,
-				EA3B95700E04639D00B6423B /* Themable.h in Headers */,
-				EA3B95710E04639D00B6423B /* Theme.h in Headers */,
-				EA3B95720E04639D00B6423B /* ViewPath.h in Headers */,
-				EA3B95730E04639D00B6423B /* Button.h in Headers */,
-				EA3B95740E04639D00B6423B /* Edit.h in Headers */,
-				EA3B95750E04639D00B6423B /* Image.h in Headers */,
-				EA3B95760E04639D00B6423B /* Label.h in Headers */,
-				EA3B95770E04639D00B6423B /* ProgressBar.h in Headers */,
-				EA3B95780E04639D00B6423B /* Quad.h in Headers */,
-				EA3B95790E04639D00B6423B /* Screen.h in Headers */,
-				EA3B957A0E04639D00B6423B /* Scrollbar.h in Headers */,
-				EA3B957B0E04639D00B6423B /* ScrollView.h in Headers */,
-				EA3B957C0E04639D00B6423B /* ShapeView.h in Headers */,
-				EA3B957D0E04639D00B6423B /* Slider.h in Headers */,
-				EA3B957E0E04639D00B6423B /* UserInterface.h in Headers */,
-				EA3B957F0E04639D00B6423B /* View.h in Headers */,
-				EA3B95800E04639D00B6423B /* Window.h in Headers */,
-				EA3B95810E04639D00B6423B /* InputController.h in Headers */,
-				EA3B95820E04639D00B6423B /* BitmapFactory.h in Headers */,
-				EA3B95830E04639D00B6423B /* ControlFactory.h in Headers */,
-				EA3B95840E04639D00B6423B /* Factory.h in Headers */,
-				EA3B95850E04639D00B6423B /* FontFactory.h in Headers */,
-				EA3B95860E04639D00B6423B /* FuglyFactory.h in Headers */,
-				EA3B95870E04639D00B6423B /* TextureFactory.h in Headers */,
-				EA3B95880E04639D00B6423B /* ThemeFactory.h in Headers */,
-				EA3B95890E04639D00B6423B /* UserInterfaceBuilder.h in Headers */,
-				EA3B958A0E04639D00B6423B /* VanillaFactory.h in Headers */,
-				EA3B958B0E04639D00B6423B /* AreaIo.h in Headers */,
-				EA3B958C0E04639D00B6423B /* DimensionIo.h in Headers */,
-				EA3B958D0E04639D00B6423B /* EditIo.h in Headers */,
-				EA3B958E0E04639D00B6423B /* ImageIo.h in Headers */,
-				EA3B958F0E04639D00B6423B /* Io.h in Headers */,
-				EA3B95900E04639D00B6423B /* LabelIo.h in Headers */,
-				EA3B95910E04639D00B6423B /* QuadIo.h in Headers */,
-				EA3B95920E04639D00B6423B /* TextureIo.h in Headers */,
-				EA3B95930E04639D00B6423B /* ThemeIo.h in Headers */,
-				EA3B95940E04639D00B6423B /* ViewIo.h in Headers */,
-				EA3B95950E04639D00B6423B /* ColorIo.h in Headers */,
-				EA3B95960E04639D00B6423B /* Io.h in Headers */,
-				EA3B95970E04639D00B6423B /* Vec2Io.h in Headers */,
 				EA3B95980E04639D00B6423B /* LSystem.h in Headers */,
 				EA3B95990E04639D00B6423B /* lua.h in Headers */,
 				EA3B959A0E04639D00B6423B /* State.h in Headers */,
-				EA3B95A70E04639D00B6423B /* Object.h in Headers */,
-				EA3B95A80E04639D00B6423B /* ObjectReference.h in Headers */,
-				EA3B95A90E04639D00B6423B /* ObjectReferenceContainer.h in Headers */,
-				EA3B95AA0E04639D00B6423B /* ObjectReferenceResolver.h in Headers */,
 				EA3B95AC0E04639D00B6423B /* Platform.h in Headers */,
 				EA3B95B00E04639D00B6423B /* File.h in Headers */,
 				EA3B95B10E04639D00B6423B /* Loader.h in Headers */,
