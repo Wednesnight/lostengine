@@ -5,8 +5,6 @@
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
 #include "lost/gl/gl.h"
-
-#include "lost/common/SerializationHelper.h"
 #include "stb_image.h"
 
 namespace lost
