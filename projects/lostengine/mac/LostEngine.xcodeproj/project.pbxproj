@@ -73,12 +73,12 @@
 		EA3B967F0E046C5400B6423B /* Vec2.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96780E046C5400B6423B /* Vec2.h */; };
 		EA3B96800E046C5400B6423B /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
 		EA3B96810E046C5400B6423B /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
-		EA3B96FE0E047BA100B6423B /* libboost_signals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B96FC0E047BA100B6423B /* libboost_signals.a */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF5430E2EAE70006E9E8A /* libzlib.a */; };
 		EA7CF6350E2ED002006E9E8A /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6340E2ECFF8006E9E8A /* libfreetype.a */; };
+		EA7CF6A60E2ED7F0006E9E8A /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6A50E2ED7E8006E9E8A /* libboost.a */; };
 		EA9A35310E297E3B0090BAD0 /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */; };
 		EA9A35DF0E299C540090BAD0 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
 		EA9A35E00E299C540090BAD0 /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */; };
@@ -133,29 +133,43 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = zlib;
 		};
 		EA7CF5450E2EAE9E006E9E8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* zlib */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = zlib;
 		};
 		EA7CF6330E2ECFF8006E9E8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = freetype;
 		};
 		EA7CF6360E2ED00A006E9E8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* freetype */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = freetype;
+		};
+		EA7CF6A40E2ED7E8006E9E8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = boost;
+		};
+		EA7CF6A70E2ED80A006E9E8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* boost */;
+			remoteInfo = boost;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -227,12 +241,12 @@
 		EA3B96780E046C5400B6423B /* Vec2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
 		EA3B96790E046C5400B6423B /* Vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3.h; sourceTree = "<group>"; };
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
-		EA3B96FC0E047BA100B6423B /* libboost_signals.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_signals.a; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/libboost_signals.a; sourceTree = SOURCE_ROOT; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/mac/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = freetype.xcodeproj; path = ../../../thirdparty/freetype2/freetype_2_3_7/mac/freetype.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonLog.cpp; sourceTree = "<group>"; };
 		EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceLoader.cpp; sourceTree = "<group>"; };
 		EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceFile.cpp; sourceTree = "<group>"; };
@@ -259,11 +273,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA7CF6A60E2ED7F0006E9E8A /* libboost.a in Frameworks */,
 				EA7CF6350E2ED002006E9E8A /* libfreetype.a in Frameworks */,
 				EA3B94430E04626D00B6423B /* libluabind.a in Frameworks */,
 				EA3B94440E04627100B6423B /* liblua.a in Frameworks */,
 				EA3B944D0E0462CE00B6423B /* libglfw.a in Frameworks */,
-				EA3B96FE0E047BA100B6423B /* libboost_signals.a in Frameworks */,
 				EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,7 +580,7 @@
 		EA3B96FA0E047B7400B6423B /* boost */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B96FC0E047BA100B6423B /* libboost_signals.a */,
+				EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */,
 			);
 			name = boost;
 			sourceTree = "<group>";
@@ -583,6 +597,14 @@
 			isa = PBXGroup;
 			children = (
 				EA7CF6340E2ECFF8006E9E8A /* libfreetype.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA7CF6A10E2ED7E8006E9E8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA7CF6A50E2ED7E8006E9E8A /* libboost.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -675,6 +697,7 @@
 				EA3B94420E04626000B6423B /* PBXTargetDependency */,
 				EA7CF5460E2EAE9E006E9E8A /* PBXTargetDependency */,
 				EA7CF6370E2ED00A006E9E8A /* PBXTargetDependency */,
+				EA7CF6A80E2ED80A006E9E8A /* PBXTargetDependency */,
 			);
 			name = LostEngine;
 			productName = LostEngine;
@@ -692,6 +715,10 @@
 			mainGroup = 08FB7794FE84155DC02AAC07 /* LostEngine */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = EA7CF6A10E2ED7E8006E9E8A /* Products */;
+					ProjectRef = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
+				},
 				{
 					ProductGroup = EA7CF6300E2ECFF7006E9E8A /* Products */;
 					ProjectRef = EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */;
@@ -743,6 +770,13 @@
 			fileType = archive.ar;
 			path = libfreetype.a;
 			remoteRef = EA7CF6330E2ECFF8006E9E8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA7CF6A50E2ED7E8006E9E8A /* libboost.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libboost.a;
+			remoteRef = EA7CF6A40E2ED7E8006E9E8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -802,6 +836,11 @@
 			isa = PBXTargetDependency;
 			name = freetype;
 			targetProxy = EA7CF6360E2ED00A006E9E8A /* PBXContainerItemProxy */;
+		};
+		EA7CF6A80E2ED80A006E9E8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = boost;
+			targetProxy = EA7CF6A70E2ED80A006E9E8A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
