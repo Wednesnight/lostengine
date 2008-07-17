@@ -1,0 +1,205 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA7CF67F0E2ED78E006E9E8A /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF67A0E2ED78E006E9E8A /* slot.cpp */; };
+		EA7CF6800E2ED78E006E9E8A /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF67B0E2ED78E006E9E8A /* signal_base.cpp */; };
+		EA7CF6810E2ED78E006E9E8A /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF67C0E2ED78E006E9E8A /* trackable.cpp */; };
+		EA7CF6820E2ED78E006E9E8A /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF67D0E2ED78E006E9E8A /* named_slot_map.cpp */; };
+		EA7CF6830E2ED78E006E9E8A /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF67E0E2ED78E006E9E8A /* connection.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D2AAC046055464E500DB518D /* libboost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libboost.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA7CF67A0E2ED78E006E9E8A /* slot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slot.cpp; path = ../../original/libs/signals/src/slot.cpp; sourceTree = SOURCE_ROOT; };
+		EA7CF67B0E2ED78E006E9E8A /* signal_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signal_base.cpp; path = ../../original/libs/signals/src/signal_base.cpp; sourceTree = SOURCE_ROOT; };
+		EA7CF67C0E2ED78E006E9E8A /* trackable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trackable.cpp; path = ../../original/libs/signals/src/trackable.cpp; sourceTree = SOURCE_ROOT; };
+		EA7CF67D0E2ED78E006E9E8A /* named_slot_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = named_slot_map.cpp; path = ../../original/libs/signals/src/named_slot_map.cpp; sourceTree = SOURCE_ROOT; };
+		EA7CF67E0E2ED78E006E9E8A /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = ../../original/libs/signals/src/connection.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* boost */ = {
+			isa = PBXGroup;
+			children = (
+				EA7CF6D50E2ED939006E9E8A /* signals */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = boost;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libboost.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA7CF6D50E2ED939006E9E8A /* signals */ = {
+			isa = PBXGroup;
+			children = (
+				EA7CF67A0E2ED78E006E9E8A /* slot.cpp */,
+				EA7CF67B0E2ED78E006E9E8A /* signal_base.cpp */,
+				EA7CF67C0E2ED78E006E9E8A /* trackable.cpp */,
+				EA7CF67D0E2ED78E006E9E8A /* named_slot_map.cpp */,
+				EA7CF67E0E2ED78E006E9E8A /* connection.cpp */,
+			);
+			name = signals;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC045055464E500DB518D /* boost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "boost" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = boost;
+			productName = boost;
+			productReference = D2AAC046055464E500DB518D /* libboost.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "boost" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* boost */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* boost */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA7CF67F0E2ED78E006E9E8A /* slot.cpp in Sources */,
+				EA7CF6800E2ED78E006E9E8A /* signal_base.cpp in Sources */,
+				EA7CF6810E2ED78E006E9E8A /* trackable.cpp in Sources */,
+				EA7CF6820E2ED78E006E9E8A /* named_slot_map.cpp in Sources */,
+				EA7CF6830E2ED78E006E9E8A /* connection.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = boost;
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = boost;
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../include\"";
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
