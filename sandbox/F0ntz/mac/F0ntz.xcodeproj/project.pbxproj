@@ -316,7 +316,7 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
