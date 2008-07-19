@@ -161,14 +161,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = boost;
 		};
 		EA7CF6A70E2ED80A006E9E8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* boost */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = boost;
 		};
 /* End PBXContainerItemProxy section */

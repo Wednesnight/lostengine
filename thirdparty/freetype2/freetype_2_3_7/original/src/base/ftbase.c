@@ -31,6 +31,7 @@
 #include "fttrigon.c"
 #include "ftutil.c"
 
+#define DARWIN_NO_CARBON 1
 #if defined( __APPLE__ ) && !defined ( DARWIN_NO_CARBON )
 #include "ftmac.c"
 #endif

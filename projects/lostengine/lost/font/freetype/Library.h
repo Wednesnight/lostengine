@@ -10,6 +10,7 @@
 #include "lost/common/Logger.h"
 #include "lost/font/freetype/Face.h"
 #include <boost/lexical_cast.hpp>
+#include "lost/resource/File.h"
 
 namespace lost
 {
@@ -43,13 +44,13 @@ namespace lost
           }
         }
 
-        /** loads a font from file via freetype and caches it in the map using the path as key.
+        /** loads a font from file via and caches it in the map using the path as key.
          */
-        boost::shared_ptr<Face> initFaceFromFile(std::string path)
+        boost::shared_ptr<Face> initFace(boost::shared_ptr<lost::resource::File> file)
         {
           boost::shared_ptr<Face> result;
           FaceCache::iterator pos;
-          pos = mFaceCache.find(path);
+          pos = mFaceCache.find(file->location);
           if(pos != mFaceCache.end())
           {
             return pos->second;
@@ -57,13 +58,14 @@ namespace lost
           else
           {
             FT_Face face;
-            FT_Error error = FT_New_Face(mLibrary, path.c_str(), 0, &face);
+            //FT_Error error = FT_New_Face(mLibrary, path.c_str(), 0, &face);
+            FT_Error error  = FT_New_Memory_Face(mLibrary, reinterpret_cast<FT_Byte*>(file->data.get()), file->size, 0, &face);
             if(error)
             {
               throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
             }
             result.reset(new Face(face));
-            mFaceCache[path] = result;
+            mFaceCache[file->location] = result;
           }
           return result;
         }

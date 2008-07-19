@@ -16,11 +16,13 @@
 #include "lost/application/TimerEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/KeySym.h"
+#include "lost/resource/DefaultLoader.h"
 
 using namespace std;
 using namespace boost;
 using namespace lost;
 using namespace lost::common;
+using namespace lost::resource;
 using namespace lost::application;
 using namespace lost::math;
 using namespace lost::event;
@@ -37,7 +39,8 @@ struct Controller
   shared_ptr<lost::gl::DisplayList> smallText;
   shared_ptr<lost::gl::DisplayList> midText;
   shared_ptr<lost::gl::DisplayList> largeText;
-
+  shared_ptr<File>  fontfile;
+  
   double passedTime;
 
   Controller()
@@ -52,9 +55,8 @@ struct Controller
 
 
     freetypeLibrary.reset(new Library());
-
-    string path = lost::platform::buildResourcePath( "Vera.ttf" );
-    defaultFont = freetypeLibrary->initFaceFromFile(path);
+    fontfile = appInstance->loader->load("Vera.ttf");
+    defaultFont = freetypeLibrary->initFace(fontfile);
     unsigned long fontSizeInPoints = 164;
     glyphquad = defaultFont->getGlyph(fontSizeInPoints, 'S');
     smallText.reset(new lost::gl::DisplayList());
