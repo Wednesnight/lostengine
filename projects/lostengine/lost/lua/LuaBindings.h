@@ -2,6 +2,7 @@
 #define LOST_LUA_LUABINDINGS_H
 
 #include "lost/lua/State.h"
+#include "luabind/class_info.hpp"
 
 namespace lost
 {
@@ -39,6 +40,7 @@ static inline void bindAll(lost::lua::State& state)
   bindLostApplicationResizeEvent(state);
   bindLostApplicationMouseEvent(state);
   bindLostApplicationApplicationEvent(state);
+  luabind::bind_class_info(state);
 }
 
 

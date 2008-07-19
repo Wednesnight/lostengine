@@ -2,11 +2,15 @@
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
+#include "lost/application/KeySym.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Matrix.h"
+#include "lost/event/EventDispatcher.h"
+#include "lost/gl/ShaderHelper.h"
 
 using namespace std;
 using namespace boost;
@@ -24,112 +28,276 @@ namespace lost
     struct Camera
     {
       // window attributes
-      int width;
-      int height;
+      Vec2 windowDimensions;
       // camera attributes
+      Vec3  position;
       Vec3  target;
-      float distance;
-      Vec3  rotation;
+      Vec3  up;
       float fovy;
       Vec2  depth;
-      // transformation attributes
-      Matrix transformMatrix;
       
-      Camera(Application& inApp, const Vec3& inTarget, const float& inDistance, const Vec3& inRotation)
-      : width(inApp.displayAttributes.width),
-        height(inApp.displayAttributes.height),
+      Camera(const Vec2& inWindowDimensions, const Vec3& inPosition, const Vec3& inTarget, const Vec3& inUp, const float& inFovY, const Vec2& inDepth)
+      : windowDimensions(inWindowDimensions),
+        position(inPosition),
         target(inTarget),
-        distance(inDistance),
-        rotation(inRotation),
-        fovy(60),
-        depth(1.5,20)
+        up(inUp),
+        fovy(inFovY),
+        depth(inDepth)
       {
-        transformMatrix.initIdentity();
-        inApp.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(boost::bind( &Camera::resize, this, _1 )));
       }
       ~Camera() {}
       
-      void resize(shared_ptr<ResizeEvent> event)
-      {
-        DOUT("Camera::resize(): " << event->width << "x" << event->height);
-        width  = event->width;
-        height = event->height;
-      }
+    };
+    
+    struct FPSCameraController
+    {
+      Camera& camera;
+      bool    moveInitialized;
+      Vec2    mousePos;
       
-      void apply()
+      FPSCameraController(Camera& inCamera, EventDispatcher& inDispatcher)
+      : camera(inCamera),
+        moveInitialized(false),
+        mousePos(0, 0)
       {
-        glViewport (0, 0, width, height); 
-        glMatrixMode (GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(fovy, width/height, depth.x, depth.y);
-        
-        Vec3 eye = this->eye();
-        Vec3 up  = this->up();
-        gluLookAt(eye.x, eye.y, eye.z, target.x, target.y, target.z, up.x, up.y, up.z);
+        inDispatcher.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(boost::bind(&FPSCameraController::keyPressed, this, _1)));
+        inDispatcher.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(boost::bind(&FPSCameraController::mouseMoved, this, _1)));
+      }
+      ~FPSCameraController() {}
+
+      void keyPressed(shared_ptr<KeyEvent> event)
+      {
+        if (event->pressed)
+        {
+          Vec3 direction(camera.target - camera.position);
+          normalise(direction);
+          Matrix rotation;
+          switch (event->key)
+          {
+            case K_W:
+              camera.position += direction * 0.1;
+              camera.target   += direction * 0.1;
+              break;
+            case K_S:
+              camera.position -= direction * 0.1;
+              camera.target   -= direction * 0.1;
+              break;
+            case K_A:
+              rotation.initRotateY(90);
+              camera.position -= (rotation * direction) * 0.1;
+              camera.target   -= (rotation * direction) * 0.1;
+              break;
+            case K_D:
+              rotation.initRotateY(90);
+              camera.position += (rotation * direction) * 0.1;
+              camera.target   += (rotation * direction) * 0.1;
+              break;
+          }
+        }
+      }
+    
+      void mouseMoved(shared_ptr<MouseEvent> event)
+      {
+        DOUT("mouseMoved(" << event->pos.x << ", " << event->pos.y << ")");
+        if (!moveInitialized)
+        {
+          mousePos = event->pos;
+          moveInitialized = true;
+        }
+        else
+        {
+          Vec3 direction(camera.target - camera.position);
+          DOUT("direction: " << direction);
+
+          float angleX = (event->pos.y - mousePos.y) * 0.1;
+          float angleY = (event->pos.x - mousePos.x) * 0.1;
+          DOUT("angleX: " << angleX << " angleY: " << angleY);
+/*
+          Matrix rotation;
+          rotation.initRotateX(angleX);
+          direction = rotation * direction;
+          rotation.initRotateY(angleY);
+          direction = rotation * direction;
+          
+          camera.target = camera.position + direction;
+*/
+/*
+          float  angleZX = angle(Vec3(0, 0, 1), Vec3(0, direction.y, direction.z));
+          if (angleZX > 90) angleZX = 180 - angleZX;
+          Matrix matrixZX;
+          matrixZX.initRotateX(angleZX);
+          Matrix matrixZXBack(matrixZX);
+          matrixZXBack.transpose();
+
+          float  angleZY = angle(Vec3(0, 0, 1), Vec3(direction.x, 0, direction.z));
+          if (angleZY > 90) angleZY = 180 - angleZY;
+          Matrix matrixZY;
+          matrixZY.initRotateY(angleZY);
+          Matrix matrixZYBack(matrixZY);
+          matrixZYBack.transpose();
+
+          Matrix matrixRotX;
+          matrixRotX.initRotateX(angleX);
+          Matrix matrixRotY;
+          matrixRotY.initRotateY(angleY);
+
+          direction     = (matrixZYBack * (matrixZXBack * (matrixRotX * (matrixRotY * (matrixZX * (matrixZY * direction))))));
+          camera.target = camera.position + direction;
+//          camera.up     = matrixZYBack * matrixZXBack * matrixRotX * matrixRotY * matrixZX * matrixZY * camera.up;
+*/
+          float axisAngleX = rad2deg(atan(direction.z/direction.x));
+          float axisAngleY = rad2deg(acos(direction.y/len(direction)));
+          float axisAngleZ = rad2deg(atan(direction.x/direction.z));
+          DOUT("axisAngleX: " << axisAngleX);
+          DOUT("axisAngleY: " << axisAngleY);
+          DOUT("axisAngleZ: " << axisAngleZ);
+
+          // rotate over z-axis
+          Matrix rotationY;
+          DOUT("rotating over Z: " << axisAngleZ);
+          rotationY.initRotateY(axisAngleZ);
+          direction = rotationY * direction;
+
+          // rotate on z-axis
+          Matrix rotationX;
+          DOUT("rotating on Z: " << 90-((axisAngleY < 0) ? -axisAngleY : axisAngleY));
+          rotationX.initRotateX(90-((axisAngleY < 0) ? -axisAngleY : axisAngleY));
+          direction = rotationX * direction;
+
+          // apply new x-axis rotation
+          Matrix newRotationX;
+          newRotationX.initRotateX(angleX);
+          direction = newRotationX * direction;
+          
+          // apply new y-axis rotation
+          Matrix newRotationY;
+          newRotationY.initRotateY(angleY);
+          direction = newRotationY * direction;
+
+          // recalculate up vector
+          Matrix matrixUp;
+          matrixUp.initRotateX(90);
+          camera.up = matrixUp * direction;
+          
+          // undo rotation on z-axis
+          rotationX.transpose();
+          direction = rotationX * direction;
+          camera.up = rotationX * camera.up;
+
+          // undo rotation over z-axis
+          rotationY.transpose();
+          direction = rotationY * direction;
+          camera.up = rotationY * camera.up;
+                    
+          camera.target = camera.position + direction;
+          mousePos = event->pos;
+        }
       }
 
-      Vec3 direction()
-      {
-        return target - eye();
-      }
-      
-      Vec3 eye()
-      {
-        return transformMatrix * rotationMatrixX() * rotationMatrixY() * rotationMatrixZ() * (target + Vec3(0, 0, distance));
-      }
-
-      Matrix rotationMatrixX()
-      {
-        Matrix rotationX;
-        rotationX.initRotateX(rotation.x);
-        return rotationX;
-      }
-      Matrix rotationMatrixY()
-      {
-        Matrix rotationY;
-        rotationY.initRotateY(rotation.y);
-        return rotationY;
-      }
-      Matrix rotationMatrixZ()
-      {
-        Matrix rotationZ;
-        rotationZ.initRotateZ(rotation.z);
-        return rotationZ;
-      }
-      
-      void transform(const Matrix& inMatrix)
-      {
-        DOUT("Camera::transform(): " << inMatrix);
-        transformMatrix = transformMatrix * inMatrix;
-      }
-      
-      Vec3 up()
-      {
-        return rotationMatrixX() * rotationMatrixY() * rotationMatrixZ() * Vec3(0, 1, 0);
-      }
-      
     };
   }
 }
 
-shared_ptr<Camera> cam;
+shared_ptr<Camera>              cam;
+shared_ptr<FPSCameraController> fps;
+shared_ptr<ShaderProgram>       lightingShader;
+
+void shaderInit()
+{
+  lightingShader = lost::gl::loadShader("lighting");
+  lightingShader->enable();
+  lightingShader->validate();
+  if(!lightingShader->validated())
+  {
+    DOUT("Problem found during validation: \n"<<lightingShader->log())
+  }
+  else
+  {
+    DOUT("Program validated OK");
+  }
+  (*lightingShader)["LightPosition"] = lost::math::Vec3(0,5,-5);
+  (*lightingShader)["LightColor"]    = lost::common::Color(1,1,1);
+  (*lightingShader)["EyePosition"]   = cam->position;
+  (*lightingShader)["Specular"]      = lost::common::Color(1,1,1);
+  (*lightingShader)["Ambient"]       = lost::common::Color(1,.1,.1);
+  (*lightingShader)["SurfaceColor"]  = lost::common::Color(1,1,.1);
+  (*lightingShader)["Kd"]            = 0.8f;
+  lightingShader->disable();
+}
+
 void idle(shared_ptr<Event> event)
 {
-  // camera stuff
-  if (!cam) 
-  {
-    cam.reset(new Camera(*appInstance, Vec3(0,0,0), 5, Vec3(45, 45, 45)));
-  }
-  cam->apply();
-  
+  int width  = appInstance->displayAttributes.width;
+  int height = appInstance->displayAttributes.height;
+
   glDisable(GL_DEPTH_TEST);GLDEBUG;
   glDisable(GL_TEXTURE_2D);GLDEBUG;
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
+
+  // camera stuff
+  if (!cam) 
+  {
+    cam.reset(new Camera(Vec2(width, height),   // window dimensions
+                         Vec3(0, 0, -5),         // position
+                         Vec3(0, 0, 0),         // target (projection center)
+                         Vec3(0, 1, 0),         // up vector (rotation)
+                         45,                    // field of view on Y-axis
+                         Vec2(1, 100)));        // depth (znear, zfar)
+  }
+  if (!fps) 
+  {
+    glfwSetMousePos(width/2, height/2);
+    glfwDisable(GLFW_MOUSE_CURSOR);
+    fps.reset(new FPSCameraController(*cam, *appInstance));
+  }
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(cam->fovy, cam->windowDimensions.x/cam->windowDimensions.y, cam->depth.x, cam->depth.y);
+  gluLookAt(cam->position.x, cam->position.y, cam->position.z, cam->target.x, cam->target.y, cam->target.z, cam->up.x, cam->up.y, cam->up.z);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  // Draw the positive side of the lines x,y,z
+  glBegin(GL_LINES);
+    glColor3f(0.0f, 1.0f, 0.0f);                // Green for x axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(10.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 0.0f, 0.0f);                // Red for y axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 10.0f, 0.0f);
+    glColor3f(0.0f, 0.0f, 1.0f);                // Blue for z axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 10.0f);
+  glEnd();
   
+  // Dotted lines for the negative sides of x,y,z coordinates
+  glEnable(GL_LINE_STIPPLE);                // Enable line stipple to use a dotted pattern for the lines
+  glLineStipple(1, 0x0101);                    // Dotted stipple pattern for the lines
+  glBegin(GL_LINES);
+    glColor3f(0.0f, 1.0f, 0.0f);                    // Green for x axis
+    glVertex3f(-10.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 0.0f, 0.0f);                    // Red for y axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, -10.0f, 0.0f);
+    glColor3f(0.0f, 0.0f, 1.0f);                    // Blue for z axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, -10.0f);
+  glEnd();
+  glDisable(GL_LINE_STIPPLE);                // Disable the line stipple
+  
+  // shader stuff
+  if (!lightingShader)
+  {
+    shaderInit();
+  }
+  lightingShader->enable();
   setColor(whiteColor);
-  
-  glutWireCube(1.0);
+  glutSolidCube(1.0);
+  lightingShader->disable();
+
   glfwSwapBuffers();  
 }
 
@@ -140,21 +308,21 @@ void keyHandler(shared_ptr<KeyEvent> event)
   {
     switch (event->key)
     {
-      case 27:
+      case K_ESCAPE:
         exit(0);
-        break;
-      case 87: //w
-        cam->distance -= 0.1;
-        break;
-      case 83: //s
-        cam->distance += 0.1;
-        break;
-      case 65: //a
-        break;
-      case 68: //d
         break;
     }
   }
+}
+
+void resizeHandler(shared_ptr<ResizeEvent> event)
+{
+  glViewport (0, 0, event->width, event->height); 
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+  DOUT(key);
 }
 
 int main(int argn, char** args)
@@ -166,6 +334,8 @@ int main(int argn, char** args)
     app.addEventListener(ApplicationEvent::IDLE(), idle);
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
+    app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resizeHandler));
+    glutKeyboardFunc(keyboard);
     app.run();
   }
   catch (exception& e)

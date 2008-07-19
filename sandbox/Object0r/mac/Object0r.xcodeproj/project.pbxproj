@@ -17,6 +17,8 @@
 		3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52860E2AC75700931839 /* tetrahedron.obj */; };
 		3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52870E2AC75700931839 /* magnolia.obj */; };
 		3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */; };
+		3EB514A70E325AD30099EC4B /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A50E325AD30099EC4B /* lighting.vs */; };
+		3EB514A80E325AD30099EC4B /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A60E325AD30099EC4B /* lighting.fs */; };
 		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
@@ -63,6 +65,8 @@
 		3E3D52860E2AC75700931839 /* tetrahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tetrahedron.obj; path = ../../../data/obj/tetrahedron.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52870E2AC75700931839 /* magnolia.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia.obj; path = ../../../data/obj/magnolia.obj; sourceTree = SOURCE_ROOT; };
 		3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../../../projects/lostengine/lost/obj/Parser.cpp; sourceTree = SOURCE_ROOT; };
+		3EB514A50E325AD30099EC4B /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
+		3EB514A60E325AD30099EC4B /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
 		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Object0r.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Object0r.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +135,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3EB514A50E325AD30099EC4B /* lighting.vs */,
+				3EB514A60E325AD30099EC4B /* lighting.fs */,
 				3E3D52810E2AC75700931839 /* cessna.obj */,
 				3E3D52820E2AC75700931839 /* gourd.obj */,
 				3E3D52830E2AC75700931839 /* humanoid_quad.obj */,
@@ -240,6 +246,8 @@
 				3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */,
 				3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */,
 				3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */,
+				3EB514A70E325AD30099EC4B /* lighting.vs in Resources */,
+				3EB514A80E325AD30099EC4B /* lighting.fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

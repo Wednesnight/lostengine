@@ -67,6 +67,14 @@ inline Vec3 cross(const Vec3& inOp1, const Vec3& inOp2)
                 inOp1.x * inOp2.y - inOp1.y * inOp2.x);
 }
 
+inline float angle(const Vec3& inOp1, const Vec3& inOp2)
+{
+  float result = 0.0f;
+  float length = (len(inOp1) * len(inOp2));
+  if (length > 0) result = rad2deg(acos((inOp1 * inOp2) / length));
+  return result;
+}
+  
 inline Vec3 operator+(const Vec3& inOp1, const Vec3& inOp2)
 {
     Vec3 result;
@@ -78,9 +86,9 @@ inline Vec3 operator+(const Vec3& inOp1, const Vec3& inOp2)
 
 inline void operator +=(Vec3& inOp1, const Vec3& inOp2)
 {
-    inOp1.x = inOp2.x;
-    inOp1.y = inOp2.y;
-    inOp1.z = inOp2.z;
+    inOp1.x += inOp2.x;
+    inOp1.y += inOp2.y;
+    inOp1.z += inOp2.z;
 }
 
 inline Vec3 operator-(const Vec3& inOp1, const Vec3& inOp2)
@@ -92,7 +100,14 @@ inline Vec3 operator-(const Vec3& inOp1, const Vec3& inOp2)
     return result;
 }
 
-inline std::ostream& operator<<(std::ostream& s, const Vec3& v)
+inline void operator -=(Vec3& inOp1, const Vec3& inOp2)
+{
+  inOp1.x -= inOp2.x;
+  inOp1.y -= inOp2.y;
+  inOp1.z -= inOp2.z;
+}
+  
+  inline std::ostream& operator<<(std::ostream& s, const Vec3& v)
 {
     s << v.x << " " << v.y << " "<< v.z;
     return s;

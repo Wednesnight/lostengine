@@ -60,6 +60,7 @@ namespace application
 
   void GlfwAdapter::initCallbacks()
   {
+    glfwEnable(GLFW_KEY_REPEAT);
     glfwSetKeyCallback( glfwKeyCallback );
     glfwSetMousePosCallback( glfwMouseMoveCallback );
     glfwSetMouseButtonCallback( glfwMouseButtonCallback );

@@ -3,12 +3,23 @@ require("foo")
 require("baz")
 
 
+function dumpPair(key, value)
+  log.debug("  ".. tostring(key) .." (".. tostring(value) ..")")
+end
+
+function dump(object)
+  local info = class_info(object)
+  log.debug(info.name ..":")
+  table.foreach(info.methods, dumpPair)
+  table.foreach(info.attributes, dumpPair)
+end
 
 function preinit(event)
   log.debug("preinit, building config")
 
   config = {}
   config.displayAttributes = lost.common.DisplayAttributes()
+
   config.displayAttributes.width = 320;
   config.displayAttributes.height = 480;
   config.displayAttributes.redbits = 8;
@@ -19,6 +30,15 @@ function preinit(event)
   config.displayAttributes.stencilbits = 0;
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "AppTest";
+  
+  local mt = getmetatable(config.displayAttributes)
+  if (mt.__luabind_class) then
+    log.debug("is class: ".. tostring(mt.__luabind_class))
+  end
+
+  dump(app)
+  dump(app.loader)
+  dump(config.displayAttributes)
 
 end
 
