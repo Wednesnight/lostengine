@@ -213,7 +213,7 @@ void render(shared_ptr<Event> event)
   int width  = appInstance->displayAttributes.width;
   int height = appInstance->displayAttributes.height;
 
-  glDisable(GL_DEPTH_TEST);GLDEBUG;
+  glEnable(GL_DEPTH_TEST);GLDEBUG;
   glDisable(GL_TEXTURE_2D);GLDEBUG;
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
