@@ -1,6 +1,7 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/TimerEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeySym.h"
@@ -204,7 +205,7 @@ shared_ptr<ShaderProgram>       lightingShader;
 
 void shaderInit()
 {
-  lightingShader = lost::gl::loadShader("lighting");
+  lightingShader = lost::gl::loadShader(appInstance->loader, "lighting");
   lightingShader->enable();
   lightingShader->validate();
   if(!lightingShader->validated())
@@ -331,7 +332,8 @@ int main(int argn, char** args)
   try
   {
     Application app;
-    app.addEventListener(ApplicationEvent::IDLE(), idle);
+    Timer redrawTimer("redraw", 1.0/60.0);
+    redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), idle);
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resizeHandler));

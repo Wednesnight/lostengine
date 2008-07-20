@@ -4,10 +4,10 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/FragmentShader.h"
 #include "lost/gl/VertexShader.h"
-#include "lost/common/FileHelpers.h"
 #include <stdexcept>
 #include <string>
 #include <boost/shared_ptr.hpp>
+#include "lost/resource/Loader.h"
 
 namespace lost
 {
@@ -23,18 +23,20 @@ namespace gl
  *
  *  throws if one of the compile stages or the link stage fail.
  */
-boost::shared_ptr<lost::gl::ShaderProgram> loadShader(const std::string& inName)
+  boost::shared_ptr<lost::gl::ShaderProgram> loadShader(boost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
 {
   boost::shared_ptr<lost::gl::FragmentShader> fragmentShader(new lost::gl::FragmentShader());
   boost::shared_ptr<lost::gl::VertexShader>   vertexShader(new lost::gl::VertexShader());
   boost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram(new lost::gl::ShaderProgram());
 
-  vertexShader->source(lost::common::loadFile(inName+".vs"));
+  boost::shared_ptr<resource::File> vsfile = loader->load(inName+".vs");
+  vertexShader->source(vsfile->str());
   vertexShader->compile();
   if(!vertexShader->compiled())
     throw std::runtime_error(vertexShader->log());
 
-  fragmentShader->source(lost::common::loadFile(inName+".fs"));
+  boost::shared_ptr<resource::File> fsfile = loader->load(inName+".fs");
+  fragmentShader->source(fsfile->str());
   fragmentShader->compile();
   if(!fragmentShader->compiled())
     throw std::runtime_error(fragmentShader->log());
