@@ -213,6 +213,31 @@ namespace math
     s << m.m[3] << " " << m.m[7] << " " << m.m[11] << " " << m.m[15] << std::endl;
     return s;
   }
+  
+  struct MatrixRotX : public Matrix
+  {
+    MatrixRotX(const float inAngle)
+    {
+      initRotateX(inAngle);
+    }
+  };
+  
+  struct MatrixRotY : public Matrix
+  {
+    MatrixRotY(const float inAngle)
+    {
+      initRotateY(inAngle);
+    }
+  };
+  
+  struct MatrixRotZ : public Matrix
+  {
+    MatrixRotZ(const float inAngle)
+    {
+      initRotateZ(inAngle);
+    }
+  };
+  
 }
 }
 

@@ -38,7 +38,7 @@ namespace lost
       Vec3  up;
       float fovy;
       Vec2  depth;
-      
+            
       Camera(const Vec2& inWindowDimensions, const Vec3& inPosition, const Vec3& inTarget, const Vec3& inUp, const float& inFovY, const Vec2& inDepth)
       : windowDimensions(inWindowDimensions),
         position(inPosition),
@@ -72,11 +72,9 @@ namespace lost
       {
         if (event->pressed)
         {
-          Vec3 direction(camera.target - camera.position);
-          normalise(direction);
-          Matrix rotation;
           switch (event->key)
           {
+/*
             case K_W:
               camera.position += direction * 0.1;
               camera.target   += direction * 0.1;
@@ -95,6 +93,7 @@ namespace lost
               camera.position += (rotation * direction) * 0.1;
               camera.target   += (rotation * direction) * 0.1;
               break;
+*/
             case K_UP:
               camera.position = Vec3(0, 0, 5);
               camera.target   = Vec3(0, 0, 0);
@@ -129,12 +128,11 @@ namespace lost
         }
         else
         {
-          Vec3 direction(camera.target - camera.position);
-          DOUT("direction: " << direction);
-
           float angleX = (event->pos.y - mousePos.y) * 0.1;
           float angleY = (event->pos.x - mousePos.x) * 0.1;
           DOUT("angleX: " << angleX << " angleY: " << angleY);
+
+          Vec3 direction(camera.target - camera.position);
 
           // angle between direction and Y-axis
           float axisAngleY = rad2deg(acos(direction.y/len(direction)));
@@ -144,36 +142,34 @@ namespace lost
           DOUT("axisAngleZ: " << axisAngleZ);
 
           // rotate over z-axis
-          Matrix rotationY;
+          MatrixRotY rotationY(axisAngleZ);
+          MatrixRotY rotationYTrans(-axisAngleZ);
           DOUT("rotating over Z: " << axisAngleZ);
-          rotationY.initRotateY(axisAngleZ);
-          Matrix rotationYTrans;
-          rotationYTrans.initRotateY(-axisAngleZ);
 
           // rotate on z-axis
-          Matrix rotationX;
+          MatrixRotX rotationX(axisAngleY);
+          MatrixRotX rotationXTrans(-axisAngleY);
           DOUT("rotating on Z: " << axisAngleY);
-          rotationX.initRotateX(axisAngleY);
-          Matrix rotationXTrans;
-          rotationXTrans.initRotateX(-axisAngleY);
 
           // apply new x-axis rotation
-          Matrix newRotationX;
-          newRotationX.initRotateX(angleX);
+          MatrixRotX newRotationX(angleX);
           direction = rotationYTrans * newRotationX * rotationY * direction;
 
           // apply new y-axis rotation
-          Matrix newRotationY;
-          newRotationY.initRotateY(angleY);
+          MatrixRotY newRotationY(angleY);
           direction = newRotationY * direction;
 
-          Matrix upX;
-          upX.initRotateX((direction.z > 0) ? 90 : -90);
+          /* we don't have to update the up vector, but why? WTF?!
+          // up vector correction
+          MatrixRotX upX((direction.z > 0) ? 90 : -90);
           camera.up = rotationYTrans * upX * rotationY * direction;
           DOUT("camera.up: " << camera.up);
-          
+          */
+
           camera.target = camera.position + direction;
           mousePos = event->pos;
+          axisAngleY += angleX;
+          axisAngleZ += angleY;
         }
       }
 
@@ -206,6 +202,35 @@ void shaderInit()
   (*lightingShader)["SurfaceColor"]  = lost::common::Color(1,1,.1);
   (*lightingShader)["Kd"]            = 0.8f;
   lightingShader->disable();
+}
+
+void keyboard(shared_ptr<Event> event)
+{
+  Vec3 direction(cam->target - cam->position);
+  normalise(direction);
+  Matrix rotation;
+  if (glfwGetKey(K_W))
+  {
+    cam->position += direction * 0.1;
+    cam->target   += direction * 0.1;
+  }
+  if (glfwGetKey(K_S))
+  {
+    cam->position -= direction * 0.1;
+    cam->target   -= direction * 0.1;
+  }
+  if (glfwGetKey(K_A))
+  {
+    rotation.initRotateY(90);
+    cam->position -= (rotation * direction) * 0.1;
+    cam->target   -= (rotation * direction) * 0.1;
+  }
+  if (glfwGetKey(K_D))
+  {
+    rotation.initRotateY(90);
+    cam->position += (rotation * direction) * 0.1;
+    cam->target   += (rotation * direction) * 0.1;
+  }
 }
 
 void render(shared_ptr<Event> event)
@@ -327,6 +352,7 @@ int main(int argn, char** args)
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resizeHandler));
 
     Timer t1("render", 0.025);t1.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(render));
+    Timer t2("keyboard", 0.025);t2.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(keyboard));
 
     app.run();
   }
