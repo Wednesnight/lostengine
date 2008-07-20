@@ -6,11 +6,13 @@
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeySym.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/TimerEvent.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Matrix.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
 
 using namespace std;
@@ -93,6 +95,26 @@ namespace lost
               camera.position += (rotation * direction) * 0.1;
               camera.target   += (rotation * direction) * 0.1;
               break;
+            case K_UP:
+              camera.position = Vec3(0, 0, 5);
+              camera.target   = Vec3(0, 0, 0);
+              camera.up       = Vec3(0, 1, 0);
+              break;
+            case K_DOWN:
+              camera.position = Vec3(0, 0, -5);
+              camera.target   = Vec3(0, 0, 0);
+              camera.up       = Vec3(0, 1, 0);
+              break;
+            case K_LEFT:
+              camera.position = Vec3(-5, 0, 0);
+              camera.target   = Vec3(0, 0, 0);
+              camera.up       = Vec3(0, 1, 0);
+              break;
+            case K_RIGHT:
+              camera.position = Vec3(5, 0, 0);
+              camera.target   = Vec3(0, 0, 0);
+              camera.up       = Vec3(0, 1, 0);
+              break;
           }
         }
       }
@@ -113,43 +135,11 @@ namespace lost
           float angleX = (event->pos.y - mousePos.y) * 0.1;
           float angleY = (event->pos.x - mousePos.x) * 0.1;
           DOUT("angleX: " << angleX << " angleY: " << angleY);
-/*
-          Matrix rotation;
-          rotation.initRotateX(angleX);
-          direction = rotation * direction;
-          rotation.initRotateY(angleY);
-          direction = rotation * direction;
-          
-          camera.target = camera.position + direction;
-*/
-/*
-          float  angleZX = angle(Vec3(0, 0, 1), Vec3(0, direction.y, direction.z));
-          if (angleZX > 90) angleZX = 180 - angleZX;
-          Matrix matrixZX;
-          matrixZX.initRotateX(angleZX);
-          Matrix matrixZXBack(matrixZX);
-          matrixZXBack.transpose();
 
-          float  angleZY = angle(Vec3(0, 0, 1), Vec3(direction.x, 0, direction.z));
-          if (angleZY > 90) angleZY = 180 - angleZY;
-          Matrix matrixZY;
-          matrixZY.initRotateY(angleZY);
-          Matrix matrixZYBack(matrixZY);
-          matrixZYBack.transpose();
-
-          Matrix matrixRotX;
-          matrixRotX.initRotateX(angleX);
-          Matrix matrixRotY;
-          matrixRotY.initRotateY(angleY);
-
-          direction     = (matrixZYBack * (matrixZXBack * (matrixRotX * (matrixRotY * (matrixZX * (matrixZY * direction))))));
-          camera.target = camera.position + direction;
-//          camera.up     = matrixZYBack * matrixZXBack * matrixRotX * matrixRotY * matrixZX * matrixZY * camera.up;
-*/
-          float axisAngleX = rad2deg(atan(direction.z/direction.x));
+          // angle between direction and Y-axis
           float axisAngleY = rad2deg(acos(direction.y/len(direction)));
+          // angle between direction and Z-axis
           float axisAngleZ = rad2deg(atan(direction.x/direction.z));
-          DOUT("axisAngleX: " << axisAngleX);
           DOUT("axisAngleY: " << axisAngleY);
           DOUT("axisAngleZ: " << axisAngleZ);
 
@@ -157,39 +147,31 @@ namespace lost
           Matrix rotationY;
           DOUT("rotating over Z: " << axisAngleZ);
           rotationY.initRotateY(axisAngleZ);
-          direction = rotationY * direction;
+          Matrix rotationYTrans;
+          rotationYTrans.initRotateY(-axisAngleZ);
 
           // rotate on z-axis
           Matrix rotationX;
-          DOUT("rotating on Z: " << 90-((axisAngleY < 0) ? -axisAngleY : axisAngleY));
-          rotationX.initRotateX(90-((axisAngleY < 0) ? -axisAngleY : axisAngleY));
-          direction = rotationX * direction;
+          DOUT("rotating on Z: " << axisAngleY);
+          rotationX.initRotateX(axisAngleY);
+          Matrix rotationXTrans;
+          rotationXTrans.initRotateX(-axisAngleY);
 
           // apply new x-axis rotation
           Matrix newRotationX;
           newRotationX.initRotateX(angleX);
-          direction = newRotationX * direction;
-          
+          direction = rotationYTrans * newRotationX * rotationY * direction;
+
           // apply new y-axis rotation
           Matrix newRotationY;
           newRotationY.initRotateY(angleY);
           direction = newRotationY * direction;
 
-          // recalculate up vector
-          Matrix matrixUp;
-          matrixUp.initRotateX(90);
-          camera.up = matrixUp * direction;
+          Matrix upX;
+          upX.initRotateX((direction.z > 0) ? 90 : -90);
+          camera.up = rotationYTrans * upX * rotationY * direction;
+          DOUT("camera.up: " << camera.up);
           
-          // undo rotation on z-axis
-          rotationX.transpose();
-          direction = rotationX * direction;
-          camera.up = rotationX * camera.up;
-
-          // undo rotation over z-axis
-          rotationY.transpose();
-          direction = rotationY * direction;
-          camera.up = rotationY * camera.up;
-                    
           camera.target = camera.position + direction;
           mousePos = event->pos;
         }
@@ -205,7 +187,7 @@ shared_ptr<ShaderProgram>       lightingShader;
 
 void shaderInit()
 {
-  lightingShader = lost::gl::loadShader(appInstance->loader, "lighting");
+  lightingShader = loadShader(appInstance->loader, "lighting");
   lightingShader->enable();
   lightingShader->validate();
   if(!lightingShader->validated())
@@ -226,7 +208,7 @@ void shaderInit()
   lightingShader->disable();
 }
 
-void idle(shared_ptr<Event> event)
+void render(shared_ptr<Event> event)
 {
   int width  = appInstance->displayAttributes.width;
   int height = appInstance->displayAttributes.height;
@@ -260,35 +242,6 @@ void idle(shared_ptr<Event> event)
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  // Draw the positive side of the lines x,y,z
-  glBegin(GL_LINES);
-    glColor3f(0.0f, 1.0f, 0.0f);                // Green for x axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(10.0f, 0.0f, 0.0f);
-    glColor3f(1.0f, 0.0f, 0.0f);                // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 10.0f, 0.0f);
-    glColor3f(0.0f, 0.0f, 1.0f);                // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, 10.0f);
-  glEnd();
-  
-  // Dotted lines for the negative sides of x,y,z coordinates
-  glEnable(GL_LINE_STIPPLE);                // Enable line stipple to use a dotted pattern for the lines
-  glLineStipple(1, 0x0101);                    // Dotted stipple pattern for the lines
-  glBegin(GL_LINES);
-    glColor3f(0.0f, 1.0f, 0.0f);                    // Green for x axis
-    glVertex3f(-10.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1.0f, 0.0f, 0.0f);                    // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, -10.0f, 0.0f);
-    glColor3f(0.0f, 0.0f, 1.0f);                    // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, -10.0f);
-  glEnd();
-  glDisable(GL_LINE_STIPPLE);                // Disable the line stipple
-  
   // shader stuff
   if (!lightingShader)
   {
@@ -297,8 +250,50 @@ void idle(shared_ptr<Event> event)
   lightingShader->enable();
   setColor(whiteColor);
   glutSolidCube(1.0);
+  glTranslatef(2.0f, 0.0f, 0.0f);
+  glutSolidCube(1.0);
+  glTranslatef(-4.0f, 0.0f, 0.0f);
+  glutSolidCube(1.0);
+  glTranslatef(2.0f, 2.0f, 0.0f);
+  glutSolidCube(1.0);
+  glTranslatef(0.0f, -4.0f, 0.0f);
+  glutSolidCube(1.0);
+  glTranslatef(0.0f, 2.0f, 2.0f);
+  glutSolidCube(1.0);
+  glTranslatef(0.0f, 0.0f, -4.0f);
+  glutSolidCube(1.0);
+  glTranslatef(0.0f, 0.0f, 2.0f);
   lightingShader->disable();
 
+  // Draw the positive side of the lines x,y,z
+  glBegin(GL_LINES);
+  glColor3f(0.0f, 1.0f, 0.0f);                // Green for x axis
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glVertex3f(10.0f, 0.0f, 0.0f);
+  glColor3f(1.0f, 0.0f, 0.0f);                // Red for y axis
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glVertex3f(0.0f, 10.0f, 0.0f);
+  glColor3f(0.0f, 0.0f, 1.0f);                // Blue for z axis
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glVertex3f(0.0f, 0.0f, 10.0f);
+  glEnd();
+  
+  // Dotted lines for the negative sides of x,y,z coordinates
+  glEnable(GL_LINE_STIPPLE);                // Enable line stipple to use a dotted pattern for the lines
+  glLineStipple(1, 0x0101);                    // Dotted stipple pattern for the lines
+  glBegin(GL_LINES);
+  glColor3f(0.0f, 1.0f, 0.0f);                    // Green for x axis
+  glVertex3f(-10.0f, 0.0f, 0.0f);
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glColor3f(1.0f, 0.0f, 0.0f);                    // Red for y axis
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glVertex3f(0.0f, -10.0f, 0.0f);
+  glColor3f(0.0f, 0.0f, 1.0f);                    // Blue for z axis
+  glVertex3f(0.0f, 0.0f, 0.0f);
+  glVertex3f(0.0f, 0.0f, -10.0f);
+  glEnd();
+  glDisable(GL_LINE_STIPPLE);                // Disable the line stipple
+  
   glfwSwapBuffers();  
 }
 
@@ -321,23 +316,18 @@ void resizeHandler(shared_ptr<ResizeEvent> event)
   glViewport (0, 0, event->width, event->height); 
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-  DOUT(key);
-}
-
 int main(int argn, char** args)
 {
   LogLevel( log_all );
   try
   {
     Application app;
-    Timer redrawTimer("redraw", 1.0/60.0);
-    redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), idle);
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resizeHandler));
-    glutKeyboardFunc(keyboard);
+
+    Timer t1("render", 0.025);t1.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(render));
+
     app.run();
   }
   catch (exception& e)
