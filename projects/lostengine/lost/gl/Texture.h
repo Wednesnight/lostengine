@@ -36,8 +36,8 @@ namespace lost
                  bool border,
                  const lost::bitmap::Bitmap& inBitmap)
       {
-        reset(0,
-              GL_RGBA8, 
+        reset(level,
+              internalformat, 
               inBitmap.width,
               inBitmap.height,
               border ? 1 : 0,

@@ -1,11 +1,9 @@
 #ifndef LOST_IMAGE_BITMAP_H
 #define LOST_IMAGE_BITMAP_H
 
-#include "stb_image.h"
-#include "lost/common/Logger.h"
-#include "lost/platform/Platform.h"
 #include "lost/gl/gl.h"
-#include "stb_image.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/resource/File.h"
 
 namespace lost
 {
@@ -20,32 +18,11 @@ namespace lost
       GLenum          format;
       GLenum          type;
 
-      Bitmap()
-      {
-        data = NULL;
-      }
+      Bitmap();
+      virtual ~Bitmap();
 
-      ~Bitmap()
-      {
-        if(data)
-        {
-          stbi_image_free(data);
-        }
-      }
-
-      unsigned char* getPixels()
-      {
-        return data;
-      }
-
-      void render(float x, float y)
-      {
-        if (data)
-        {
-          glRasterPos2f(x, y);
-          glDrawPixels( width, height, format, type, getPixels());
-        }
-      }
+      void init(boost::shared_ptr<lost::resource::File> inFile);
+      unsigned char* getPixels() { return data; }
     };
 
   } // namespace bitmap

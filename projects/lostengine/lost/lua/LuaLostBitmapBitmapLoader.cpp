@@ -10,6 +10,12 @@ namespace lost
 namespace lua
 {
 
+boost::shared_ptr<lost::bitmap::Bitmap> load(BitmapLoader* loader, std::string path)
+{
+  return loader->load(path);
+}
+
+
 void bindLostBitmapBitmapLoader(lost::lua::State& state)
 {
   module(state, "lost")
@@ -17,8 +23,8 @@ void bindLostBitmapBitmapLoader(lost::lua::State& state)
     namespace_("bitmap")
     [
       class_<BitmapLoader >("BitmapLoader")
-        .def(constructor<>())    
-        .def("loadFromResourcePath", &BitmapLoader::loadFromResourcePath)
+        .def(constructor<boost::shared_ptr<resource::Loader> >())    
+        .def("load", &load)
     ]
   ];
 }

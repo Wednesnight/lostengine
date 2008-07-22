@@ -2,12 +2,14 @@
 #define LOST_GL_UTILS_H
 
 #include "lost/gl/gl.h"
+#include "lost/common/Logger.h"
 #include "lost/math/Vec2.h"
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
 #include "lost/math/Vec3.h"
 #include "stb_image.h"
 #include <boost/scoped_ptr.hpp>
+#include <boost/scoped_array.hpp>
 #include "lost/common/DisplayAttributes.h"
 
 namespace lost
