@@ -10,6 +10,16 @@ namespace lost
 {
 namespace gl
 {
+/*      void render(const Bitmap&, float x, float y)
+      {
+        if (data)
+        {
+          glRasterPos2f(x, y);
+          glDrawPixels( width, height, format, type, getPixels());
+        }
+      }*/
+
+
   /** draw a string at the specified position with a builtin glut font
    * font can be one of the following defines:
    *  GLUT_BITMAP_9_BY_15
