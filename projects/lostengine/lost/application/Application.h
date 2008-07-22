@@ -8,6 +8,7 @@
 #include "lost/application/TimerManager.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
+#include "lost/gl/Context.h"
 
 namespace lost
 {
@@ -26,7 +27,7 @@ public:
   common::DisplayAttributes             displayAttributes;
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
-  
+  lost::gl::Context                     glc;
 private:
   void          init();
 
