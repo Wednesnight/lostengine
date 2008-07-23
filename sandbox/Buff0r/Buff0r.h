@@ -81,11 +81,8 @@ struct Buff0r
     colorTexture->bind();
     colorTexture->reset(0,GL_RGBA8,frameBufferWidth, frameBufferHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     frameBuffer->attachColor(0, *colorTexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // GL_NEAREST to switch off filtering
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    int clampparam = GL_CLAMP; // clamp the texture, don't repeat it if the coords are larger than 1s
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clampparam);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, clampparam);
+    colorTexture->filter(GL_NEAREST);
+    colorTexture->wrap(GL_CLAMP);
 
     if(!frameBuffer->status() == GL_FRAMEBUFFER_COMPLETE_EXT)
       throw std::runtime_error("FrameBuffer status: "+lost::gl::utils::enum2string(frameBuffer->status()));

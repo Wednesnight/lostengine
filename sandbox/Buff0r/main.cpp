@@ -24,6 +24,7 @@ int main(int argn, char** args)
     Buff0r buff0r(app.displayAttributes, app.loader);
     app.addEventListener(ApplicationEvent::INIT(), bind(&Buff0r::init, &buff0r, _1));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Buff0r::keyboard, &buff0r, _1)));
+    app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Buff0r::keyboard, &buff0r, _1)));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Buff0r::resetViewPort, &buff0r, _1)));
     buff0r.quit.connect(bind(&Application::quit, &app));
 
