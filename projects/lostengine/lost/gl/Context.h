@@ -8,10 +8,10 @@ namespace gl
 
 struct Context
 {
-  Context();
-  virtual ~Context();
+  Context() {};
+  virtual ~Context() {};
   
-  void swapBuffers();
+  void swapBuffers() {};
   
 };
       
