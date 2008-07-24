@@ -5,6 +5,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
+#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
@@ -34,7 +35,7 @@ struct FrameBuffer
 
   // attach a color buffer to one of 16 slots, zero indexed
   // no need to proivde GLenum ,just index them
-  void attachColor(int index, const lost::gl::RenderBuffer& inRenderBuffer)
+  void attachColor(int index, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
     GLenum target;
     switch(index)
@@ -60,26 +61,26 @@ struct FrameBuffer
     attach(target, inRenderBuffer);
   }
 
-  void attachStencil(const lost::gl::RenderBuffer& inRenderBuffer)
+  void attachStencil(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
     attach(GL_STENCIL_ATTACHMENT_EXT, inRenderBuffer);
   }
 
-  void attachDepth(const lost::gl::RenderBuffer& inRenderBuffer)
+  void attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
     attach(GL_DEPTH_ATTACHMENT_EXT, inRenderBuffer);
   }
 
   // attaches the renderbuffer to the currently bound framebuffer at the specified attachment target
-  void attach(GLenum target, const lost::gl::RenderBuffer& inRenderBuffer)
+  void attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, target, GL_RENDERBUFFER_EXT, inRenderBuffer.buffer);GLDEBUG_THROW;
+    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, target, GL_RENDERBUFFER_EXT, inRenderBuffer->buffer);GLDEBUG_THROW;
   }
 
 
   // attach a color buffer to one of 16 slots, zero indexed
   // no need to proivde GLenum ,just index them
-  void attachColor(int index, const lost::gl::Texture& inTexture)
+  void attachColor(int index, boost::shared_ptr<lost::gl::Texture> inTexture)
   {
     GLenum target;
     switch(index)
@@ -105,20 +106,20 @@ struct FrameBuffer
     attach(target, inTexture);
   }
 
-  void attachStencil(const lost::gl::Texture& inTexture)
+  void attachStencil(boost::shared_ptr<lost::gl::Texture> inTexture)
   {
     attach(GL_STENCIL_ATTACHMENT_EXT, inTexture);
   }
 
-  void attachDepth(const lost::gl::Texture& inTexture)
+  void attachDepth(boost::shared_ptr<lost::gl::Texture> inTexture)
   {
     attach(GL_DEPTH_ATTACHMENT_EXT, inTexture);
   }
 
-  void attach(GLenum target, const lost::gl::Texture& inTexture)
+  void attach(GLenum target, boost::shared_ptr<lost::gl::Texture> inTexture)
   {
     GLint mipmaplevel = 0;
-    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, target, GL_TEXTURE_2D, inTexture.texture, mipmaplevel);GLDEBUG_THROW;
+    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, target, GL_TEXTURE_2D, inTexture->texture, mipmaplevel);GLDEBUG_THROW;
   }
 
   GLenum status()

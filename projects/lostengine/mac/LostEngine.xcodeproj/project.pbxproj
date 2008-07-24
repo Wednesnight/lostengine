@@ -39,7 +39,6 @@
 		EA3B953A0E04639D00B6423B /* NullDeleter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94740E04639D00B6423B /* NullDeleter.h */; };
 		EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
 		EA3B953C0E04639D00B6423B /* Profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94760E04639D00B6423B /* Profiler.h */; };
-		EA3B953D0E04639D00B6423B /* ResourcePath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94770E04639D00B6423B /* ResourcePath.h */; };
 		EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA3B95500E04639D00B6423B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
@@ -213,7 +212,6 @@
 		EA3B94740E04639D00B6423B /* NullDeleter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullDeleter.h; sourceTree = "<group>"; };
 		EA3B94750E04639D00B6423B /* Profiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Profiler.cpp; sourceTree = "<group>"; };
 		EA3B94760E04639D00B6423B /* Profiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profiler.h; sourceTree = "<group>"; };
-		EA3B94770E04639D00B6423B /* ResourcePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcePath.h; sourceTree = "<group>"; };
 		EA3B94790E04639D00B6423B /* SpiritHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritHelpers.h; sourceTree = "<group>"; };
 		EA3B948F0E04639D00B6423B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		EA3B94950E04639D00B6423B /* BitmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapFont.h; sourceTree = "<group>"; };
@@ -462,7 +460,6 @@
 				EA3B94740E04639D00B6423B /* NullDeleter.h */,
 				EA3B94750E04639D00B6423B /* Profiler.cpp */,
 				EA3B94760E04639D00B6423B /* Profiler.h */,
-				EA3B94770E04639D00B6423B /* ResourcePath.h */,
 				EA3B94790E04639D00B6423B /* SpiritHelpers.h */,
 			);
 			path = common;
@@ -644,7 +641,6 @@
 				EA3B95390E04639D00B6423B /* Logger.h in Headers */,
 				EA3B953A0E04639D00B6423B /* NullDeleter.h in Headers */,
 				EA3B953C0E04639D00B6423B /* Profiler.h in Headers */,
-				EA3B953D0E04639D00B6423B /* ResourcePath.h in Headers */,
 				EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */,
 				EA3B95500E04639D00B6423B /* Event.h in Headers */,
 				EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */,

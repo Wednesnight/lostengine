@@ -76,7 +76,7 @@ namespace lost
       void minFilter(GLint p) {param(GL_TEXTURE_MIN_FILTER, p);}
       void magFilter(GLint p) {param(GL_TEXTURE_MAG_FILTER, p);}
   
-      void param(GLenum pname, GLint p) {glTexParameteri(GL_TEXTURE_2D, pname, p);}      
+      void param(GLenum pname, GLint p) {glTexParameteri(GL_TEXTURE_2D, pname, p);GLDEBUG_THROW;}      
                       
       GLuint        texture;
       // original width and height of the bitmap this texture was created from

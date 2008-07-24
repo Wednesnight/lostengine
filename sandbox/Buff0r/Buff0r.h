@@ -76,11 +76,11 @@ struct Buff0r
 
     depthTexture->bind();
     depthTexture->reset(0,GL_DEPTH_COMPONENT32,frameBufferWidth, frameBufferHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-    frameBuffer->attachDepth(*depthTexture);
+    frameBuffer->attachDepth(depthTexture);
 
     colorTexture->bind();
     colorTexture->reset(0,GL_RGBA8,frameBufferWidth, frameBufferHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    frameBuffer->attachColor(0, *colorTexture);
+    frameBuffer->attachColor(0, colorTexture);
     colorTexture->filter(GL_NEAREST);
     colorTexture->wrap(GL_CLAMP);
 
