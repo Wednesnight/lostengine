@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef LOST_MATH_MATRIX_H
+#define LOST_MATH_MATRIX_H
 
 #include <algorithm>
 #include "lost/math/Vec4.h"

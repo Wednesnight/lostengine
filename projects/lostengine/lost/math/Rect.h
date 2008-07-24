@@ -1,5 +1,5 @@
-#ifndef LOST_GUIRO_RECT_H
-#define LOST_GUIRO_RECT_H
+#ifndef LOST_MATH_RECT_H
+#define LOST_MATH_RECT_H
 
 #include "lost/math/Vec2.h"
 #include <iostream>

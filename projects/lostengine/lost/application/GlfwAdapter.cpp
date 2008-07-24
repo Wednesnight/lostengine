@@ -67,9 +67,9 @@ namespace application
     glfwSetWindowSizeCallback(glfwWindowSizeCallback);
   }
 
-  void glfwKeyCallback( int keysym, int action )
+  void glfwKeyCallback( int keysym, int action, int repeat )
   {
-    glfwAdapterInstance->injectKey(keysym, action);
+    glfwAdapterInstance->injectKey(keysym, action, repeat);
   }
 
   void glfwMouseMoveCallback( int x, int y )
@@ -120,7 +120,7 @@ namespace application
     target->dispatchEvent(ev);
   }
 
-  void GlfwAdapter::injectKey(int keysym, int pressed)
+  void GlfwAdapter::injectKey(int keysym, int pressed, int repeat)
   {
     int l_key = keysym;
     if (keysym > GLFW_KEY_SPECIAL && keysym <= GLFW_KEY_LAST)
@@ -159,6 +159,7 @@ namespace application
     shared_ptr<KeyEvent> ev(new KeyEvent(pressed ? KeyEvent::KEY_DOWN() : KeyEvent::KEY_UP()));
     ev->key = l_key;
     ev->pressed = pressed;
+    ev->repeat = repeat;
     target->dispatchEvent(ev);
   }
 

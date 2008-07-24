@@ -24,6 +24,7 @@ namespace application
   
     int key;
     bool pressed;
+    bool repeat;
 
     KeyEvent(const event::Type inType) : Event(inType), key(0), pressed(false) { }
     virtual ~KeyEvent() {}

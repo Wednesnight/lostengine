@@ -61,6 +61,7 @@ namespace lost
 
       void render(unsigned long x, unsigned long y, double timeSinceLastCallSec)
       {
+        glDisable(GL_DEPTH_TEST);GLDEBUG;
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         // FIXME: coordinates are off somehow ... we need to figure out the definitve way to draw precise coords. Somehow, OpenGL offsets things for a pixel sometimes

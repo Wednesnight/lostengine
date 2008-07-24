@@ -3,50 +3,68 @@
 
 #include <string>
 #include <iostream>
+#include "lost/model/Vertex.h"
 
 namespace lost
 {
   namespace common
   {
   
-  namespace spirithelpers
-  {
-    
-    template<typename CONTAINER, typename ENTITY>
-    struct push_back_a
+    namespace spirithelpers
     {
-      CONTAINER& cont;
-      ENTITY& ent;
       
-      push_back_a(CONTAINER& c, ENTITY& e) : cont(c), ent(e) {}
-      template<typename IteratorT>
-      void operator()(IteratorT first, IteratorT last) const
+      template<typename CONTAINER, typename ENTITY>
+      struct push_back_a
       {
-        cont.push_back(ent);
+        CONTAINER& cont;
+        ENTITY& ent;
+        
+        push_back_a(CONTAINER& c, ENTITY& e) : cont(c), ent(e) {}
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          cont.push_back(ent);
+        }
+      };
+      
+      template<typename CONTAINER, typename ENTITY>
+      push_back_a<CONTAINER, ENTITY>
+      push_back(CONTAINER& c, ENTITY& e)
+      {
+        return push_back_a<CONTAINER, ENTITY>(c, e);
       }
-    };
-    
-    template<typename CONTAINER, typename ENTITY>
-    push_back_a<CONTAINER, ENTITY>
-    push_back(CONTAINER& c, ENTITY& e)
-    {
-      return push_back_a<CONTAINER, ENTITY>(c, e);
+      
+      
+      struct print
+      {
+        std::string msg;
+        print(const std::string& m) : msg(m) {}
+        
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          std::cout << msg << std::string(first, last) << std::endl;
+        }
+      };
+      
+      struct increment
+      {
+        unsigned int& number;
+        int amount;
+        
+        increment(unsigned int& inNumber, const int inAmount = 1)
+        : number(inNumber), amount(inAmount)
+        {
+        }
+        
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          number += amount;
+        }
+      };
+      
     }
-    
-    
-    struct print
-    {
-      std::string msg;
-      print(const std::string& m) : msg(m) {}
-      
-      template<typename IteratorT>
-      void operator()(IteratorT first, IteratorT last) const
-      {
-        std::cout << msg << std::string(first, last) << std::endl;
-      }
-    };
-    
-  }
   }
 }
 

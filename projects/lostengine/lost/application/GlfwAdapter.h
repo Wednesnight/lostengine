@@ -28,12 +28,12 @@ struct GlfwAdapter
 private: 
   void initDisplay(const common::DisplayAttributes& displayAttributes);
   void initCallbacks();
-  friend void glfwKeyCallback( int key, int action );
+  friend void glfwKeyCallback( int key, int action, int repeat );
   friend void glfwMouseButtonCallback( int button, int action );
   friend void glfwMouseMoveCallback( int x, int y );
   friend void glfwWindowSizeCallback(int width, int height);
 
-  void injectKey(int key, int pressed);
+  void injectKey(int key, int pressed, int repeat);
   void injectMouseMove(const lost::math::Vec2& pos);
   void injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos);
   void injectWindowResize(int x, int y);

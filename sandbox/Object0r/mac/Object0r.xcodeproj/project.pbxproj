@@ -16,7 +16,6 @@
 		3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52850E2AC75700931839 /* shuttle.obj */; };
 		3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52860E2AC75700931839 /* tetrahedron.obj */; };
 		3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52870E2AC75700931839 /* magnolia.obj */; };
-		3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */; };
 		3EB514A70E325AD30099EC4B /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A50E325AD30099EC4B /* lighting.vs */; };
 		3EB514A80E325AD30099EC4B /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A60E325AD30099EC4B /* lighting.fs */; };
 		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
@@ -50,10 +49,6 @@
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3E1AEEDF0E1CBD74007575E9 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = ../../../projects/lostengine/lost/obj/Parser.h; sourceTree = SOURCE_ROOT; };
-		3E1AEEE00E1CBD74007575E9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../../../projects/lostengine/lost/obj/Scene.h; sourceTree = SOURCE_ROOT; };
-		3E1AEEE10E1CBD74007575E9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = ../../../projects/lostengine/lost/obj/Vertex.h; sourceTree = SOURCE_ROOT; };
-		3E1AEEE20E1CBD74007575E9 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Face.h; path = ../../../projects/lostengine/lost/obj/Face.h; sourceTree = SOURCE_ROOT; };
 		3E1AEF030E1CC567007575E9 /* glm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glm.cpp; path = ../../../thirdparty/glm/glm.cpp; sourceTree = SOURCE_ROOT; };
 		3E1AEF090E1CC57B007575E9 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glm.h; path = ../../../thirdparty/glm/glm.h; sourceTree = SOURCE_ROOT; };
 		3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza.obj; path = ../../../data/obj/sponza.obj; sourceTree = SOURCE_ROOT; };
@@ -64,7 +59,6 @@
 		3E3D52850E2AC75700931839 /* shuttle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shuttle.obj; path = ../../../data/obj/shuttle.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52860E2AC75700931839 /* tetrahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tetrahedron.obj; path = ../../../data/obj/tetrahedron.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52870E2AC75700931839 /* magnolia.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia.obj; path = ../../../data/obj/magnolia.obj; sourceTree = SOURCE_ROOT; };
-		3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../../../projects/lostengine/lost/obj/Parser.cpp; sourceTree = SOURCE_ROOT; };
 		3EB514A50E325AD30099EC4B /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		3EB514A60E325AD30099EC4B /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
 		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
@@ -121,11 +115,6 @@
 			children = (
 				3E1AEF090E1CC57B007575E9 /* glm.h */,
 				3E1AEF030E1CC567007575E9 /* glm.cpp */,
-				3E1AEEDF0E1CBD74007575E9 /* Parser.h */,
-				3E1AEEE00E1CBD74007575E9 /* Scene.h */,
-				3E1AEEE10E1CBD74007575E9 /* Vertex.h */,
-				3E1AEEE20E1CBD74007575E9 /* Face.h */,
-				3EACBF7D0E1C3EE10021BA32 /* Parser.cpp */,
 				EA27DE3A0DD87DA100552F5E /* main.cpp */,
 				EA27DE3D0DD87E7A00552F5E /* Object0r.h */,
 			);
@@ -259,7 +248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */,
-				3EACBF7E0E1C3EE10021BA32 /* Parser.cpp in Sources */,
 				3E1AEF040E1CC567007575E9 /* glm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +291,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+					"\"$(SRCROOT)/../../../../build/Debug\"",
 				);
 				PRODUCT_NAME = Object0r;
 			};
@@ -322,6 +311,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+					"\"$(SRCROOT)/../../../../build/Debug\"",
 				);
 				PRODUCT_NAME = Object0r;
 			};
@@ -345,6 +335,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
@@ -369,6 +360,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
