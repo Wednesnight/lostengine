@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
+		EA0F2DF80E37DC4C0001F530 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DF70E37DC4C0001F530 /* Buffer.h */; };
+		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
+		EA0F2E870E381C3D0001F530 /* BufferBase.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E860E381C3D0001F530 /* BufferBase.h */; };
+		EA0F2E890E381C410001F530 /* ElementBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E880E381C410001F530 /* ElementBuffer.h */; };
 		EA24DAEB0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */; };
 		EA24DB0A0E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */; };
 		EA24DB170E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */; };
@@ -176,6 +181,11 @@
 
 /* Begin PBXFileReference section */
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0F2DE10E37D68C0001F530 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		EA0F2DF70E37DC4C0001F530 /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
+		EA0F2E840E381C390001F530 /* ArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayBuffer.h; sourceTree = "<group>"; };
+		EA0F2E860E381C3D0001F530 /* BufferBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferBase.h; sourceTree = "<group>"; };
+		EA0F2E880E381C410001F530 /* ElementBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementBuffer.h; sourceTree = "<group>"; };
 		EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostEventEvent.cpp; sourceTree = "<group>"; };
 		EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostEventEventDispatcher.cpp; sourceTree = "<group>"; };
 		EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationApplication.cpp; sourceTree = "<group>"; };
@@ -491,6 +501,11 @@
 		EA3B949C0E04639D00B6423B /* gl */ = {
 			isa = PBXGroup;
 			children = (
+				EA0F2E860E381C3D0001F530 /* BufferBase.h */,
+				EA0F2DF70E37DC4C0001F530 /* Buffer.h */,
+				EA0F2E840E381C390001F530 /* ArrayBuffer.h */,
+				EA0F2E880E381C410001F530 /* ElementBuffer.h */,
+				EA0F2DE10E37D68C0001F530 /* Context.h */,
 				EA3B949D0E04639D00B6423B /* DisplayList.h */,
 				EA3B949E0E04639D00B6423B /* Draw.h */,
 				EA3B949F0E04639D00B6423B /* FragmentShader.h */,
@@ -679,6 +694,11 @@
 				EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */,
 				EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */,
 				EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */,
+				EA0F2DE20E37D68C0001F530 /* Context.h in Headers */,
+				EA0F2DF80E37DC4C0001F530 /* Buffer.h in Headers */,
+				EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */,
+				EA0F2E870E381C3D0001F530 /* BufferBase.h in Headers */,
+				EA0F2E890E381C410001F530 /* ElementBuffer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
