@@ -18,7 +18,6 @@
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Matrix.h"
-#include "lost/math/Quaternion.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
@@ -199,7 +198,7 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     mesh = parser::parse(appInstance->loader->load("cube.obj")->str());
-    DOUT(*mesh);
+    DOUT(mesh);
 
     shaderInit();
     bufferInit();
@@ -231,7 +230,7 @@ struct Object0r
   void bufferInit()
   {
     vertexBuffer.reset(new ArrayBuffer<Vertex>);
-    vertexBuffer->bindBufferData(mesh->vertices, mesh->vertexCount);
+    vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
     
     glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
   }

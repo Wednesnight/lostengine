@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3E209BA50E36357F00DE6055 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E209BA40E36357F00DE6055 /* Context.cpp */; };
-		3E2FE1E40E33B3380010DE4B /* Quaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2FE1E30E33B3380010DE4B /* Quaternion.h */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3EB93D370E37FE2500FF10C9 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D310E37FE2500FF10C9 /* Face.h */; };
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
@@ -211,7 +210,6 @@
 
 /* Begin PBXFileReference section */
 		3E209BA40E36357F00DE6055 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = gl/Context.cpp; sourceTree = "<group>"; };
-		3E2FE1E30E33B3380010DE4B /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3EB93D310E37FE2500FF10C9 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Face.h; path = model/Face.h; sourceTree = "<group>"; };
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
@@ -684,7 +682,6 @@
 				EA3B96780E046C5400B6423B /* Vec2.h */,
 				EA3B96790E046C5400B6423B /* Vec3.h */,
 				EA3B967A0E046C5400B6423B /* Vec4.h */,
-				3E2FE1E30E33B3380010DE4B /* Quaternion.h */,
 			);
 			path = math;
 			sourceTree = "<group>";
@@ -787,7 +784,6 @@
 				EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */,
 				EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */,
 				EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */,
-				3E2FE1E40E33B3380010DE4B /* Quaternion.h in Headers */,
 				3EB93D370E37FE2500FF10C9 /* Face.h in Headers */,
 				3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */,
 				3EB93D3A0E37FE2500FF10C9 /* Parser.h in Headers */,
