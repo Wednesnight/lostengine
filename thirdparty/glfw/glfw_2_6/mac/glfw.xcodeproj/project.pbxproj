@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3ED38F020E37878B0055BDA7 /* enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EF50E37878B0055BDA7 /* enable.c */; };
+		3ED38F030E37878B0055BDA7 /* fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EF60E37878B0055BDA7 /* fullscreen.c */; };
+		3ED38F040E37878B0055BDA7 /* glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EF70E37878B0055BDA7 /* glext.c */; };
+		3ED38F050E37878B0055BDA7 /* image.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EF80E37878B0055BDA7 /* image.c */; };
+		3ED38F060E37878B0055BDA7 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EF90E37878B0055BDA7 /* init.c */; };
+		3ED38F070E37878B0055BDA7 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EFA0E37878B0055BDA7 /* input.c */; };
+		3ED38F080E37878B0055BDA7 /* internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED38EFB0E37878B0055BDA7 /* internal.h */; };
+		3ED38F090E37878B0055BDA7 /* joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EFC0E37878B0055BDA7 /* joystick.c */; };
+		3ED38F0A0E37878B0055BDA7 /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EFD0E37878B0055BDA7 /* stream.c */; };
+		3ED38F0B0E37878B0055BDA7 /* tga.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EFE0E37878B0055BDA7 /* tga.c */; };
+		3ED38F0C0E37878B0055BDA7 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38EFF0E37878B0055BDA7 /* thread.c */; };
+		3ED38F0D0E37878B0055BDA7 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F000E37878B0055BDA7 /* time.c */; };
+		3ED38F0E0E37878B0055BDA7 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F010E37878B0055BDA7 /* window.c */; };
+		3ED38F180E3787BC0055BDA7 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED38F0F0E3787BC0055BDA7 /* platform.h */; };
+		3ED38F190E3787BC0055BDA7 /* macosx_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F100E3787BC0055BDA7 /* macosx_window.c */; };
+		3ED38F1A0E3787BC0055BDA7 /* macosx_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F110E3787BC0055BDA7 /* macosx_time.c */; };
+		3ED38F1B0E3787BC0055BDA7 /* macosx_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F120E3787BC0055BDA7 /* macosx_thread.c */; };
+		3ED38F1C0E3787BC0055BDA7 /* macosx_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F130E3787BC0055BDA7 /* macosx_init.c */; };
+		3ED38F1D0E3787BC0055BDA7 /* macosx_glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F140E3787BC0055BDA7 /* macosx_glext.c */; };
+		3ED38F1E0E3787BC0055BDA7 /* macosx_fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F150E3787BC0055BDA7 /* macosx_fullscreen.c */; };
+		3ED38F1F0E3787BC0055BDA7 /* macosx_enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F160E3787BC0055BDA7 /* macosx_enable.c */; };
+		3ED38F200E3787BC0055BDA7 /* macosx_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 3ED38F170E3787BC0055BDA7 /* macosx_joystick.c */; };
+		3ED38F220E3787C90055BDA7 /* glfw.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED38F210E3787C90055BDA7 /* glfw.h */; };
+		3ED38F2A0E3787F00055BDA7 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED38F280E3787F00055BDA7 /* AGL.framework */; };
+		3ED38F2B0E3787F00055BDA7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED38F290E3787F00055BDA7 /* OpenGL.framework */; };
+		D2AAC0700554677100DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		32BAE0B70371A74B00C91783 /* glfw_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw_Prefix.pch; sourceTree = "<group>"; };
+		3ED38EF50E37878B0055BDA7 /* enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = enable.c; path = ../source/enable.c; sourceTree = SOURCE_ROOT; };
+		3ED38EF60E37878B0055BDA7 /* fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fullscreen.c; path = ../source/fullscreen.c; sourceTree = SOURCE_ROOT; };
+		3ED38EF70E37878B0055BDA7 /* glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glext.c; path = ../source/glext.c; sourceTree = SOURCE_ROOT; };
+		3ED38EF80E37878B0055BDA7 /* image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = image.c; path = ../source/image.c; sourceTree = SOURCE_ROOT; };
+		3ED38EF90E37878B0055BDA7 /* init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = init.c; path = ../source/init.c; sourceTree = SOURCE_ROOT; };
+		3ED38EFA0E37878B0055BDA7 /* input.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = input.c; path = ../source/input.c; sourceTree = SOURCE_ROOT; };
+		3ED38EFB0E37878B0055BDA7 /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../source/internal.h; sourceTree = SOURCE_ROOT; };
+		3ED38EFC0E37878B0055BDA7 /* joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = joystick.c; path = ../source/joystick.c; sourceTree = SOURCE_ROOT; };
+		3ED38EFD0E37878B0055BDA7 /* stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stream.c; path = ../source/stream.c; sourceTree = SOURCE_ROOT; };
+		3ED38EFE0E37878B0055BDA7 /* tga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tga.c; path = ../source/tga.c; sourceTree = SOURCE_ROOT; };
+		3ED38EFF0E37878B0055BDA7 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thread.c; path = ../source/thread.c; sourceTree = SOURCE_ROOT; };
+		3ED38F000E37878B0055BDA7 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = time.c; path = ../source/time.c; sourceTree = SOURCE_ROOT; };
+		3ED38F010E37878B0055BDA7 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../source/window.c; sourceTree = SOURCE_ROOT; };
+		3ED38F0F0E3787BC0055BDA7 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform.h; path = ../source/macosx/platform.h; sourceTree = SOURCE_ROOT; };
+		3ED38F100E3787BC0055BDA7 /* macosx_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_window.c; path = ../source/macosx/macosx_window.c; sourceTree = SOURCE_ROOT; };
+		3ED38F110E3787BC0055BDA7 /* macosx_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_time.c; path = ../source/macosx/macosx_time.c; sourceTree = SOURCE_ROOT; };
+		3ED38F120E3787BC0055BDA7 /* macosx_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_thread.c; path = ../source/macosx/macosx_thread.c; sourceTree = SOURCE_ROOT; };
+		3ED38F130E3787BC0055BDA7 /* macosx_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_init.c; path = ../source/macosx/macosx_init.c; sourceTree = SOURCE_ROOT; };
+		3ED38F140E3787BC0055BDA7 /* macosx_glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_glext.c; path = ../source/macosx/macosx_glext.c; sourceTree = SOURCE_ROOT; };
+		3ED38F150E3787BC0055BDA7 /* macosx_fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_fullscreen.c; path = ../source/macosx/macosx_fullscreen.c; sourceTree = SOURCE_ROOT; };
+		3ED38F160E3787BC0055BDA7 /* macosx_enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_enable.c; path = ../source/macosx/macosx_enable.c; sourceTree = SOURCE_ROOT; };
+		3ED38F170E3787BC0055BDA7 /* macosx_joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_joystick.c; path = ../source/macosx/macosx_joystick.c; sourceTree = SOURCE_ROOT; };
+		3ED38F210E3787C90055BDA7 /* glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw.h; path = ../include/GL/glfw.h; sourceTree = SOURCE_ROOT; };
+		3ED38F280E3787F00055BDA7 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		3ED38F290E3787F00055BDA7 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		D2AAC06F0554671400DB518D /* libglfw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libglfw.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC06D0554671400DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AAC0700554677100DB518D /* Carbon.framework in Frameworks */,
+				3ED38F2A0E3787F00055BDA7 /* AGL.framework in Frameworks */,
+				3ED38F2B0E3787F00055BDA7 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC06F0554671400DB518D /* libglfw.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* glfw */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77ACFE841707C02AAC07 /* Source */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = glfw;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3ED38F280E3787F00055BDA7 /* AGL.framework */,
+				3ED38F290E3787F00055BDA7 /* OpenGL.framework */,
+				08FB77AAFE841565C02AAC07 /* Carbon.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3ED38F210E3787C90055BDA7 /* glfw.h */,
+				3ED38F0F0E3787BC0055BDA7 /* platform.h */,
+				3ED38F100E3787BC0055BDA7 /* macosx_window.c */,
+				3ED38F110E3787BC0055BDA7 /* macosx_time.c */,
+				3ED38F120E3787BC0055BDA7 /* macosx_thread.c */,
+				3ED38F130E3787BC0055BDA7 /* macosx_init.c */,
+				3ED38F140E3787BC0055BDA7 /* macosx_glext.c */,
+				3ED38F150E3787BC0055BDA7 /* macosx_fullscreen.c */,
+				3ED38F160E3787BC0055BDA7 /* macosx_enable.c */,
+				3ED38F170E3787BC0055BDA7 /* macosx_joystick.c */,
+				3ED38EF50E37878B0055BDA7 /* enable.c */,
+				3ED38EF60E37878B0055BDA7 /* fullscreen.c */,
+				3ED38EF70E37878B0055BDA7 /* glext.c */,
+				3ED38EF80E37878B0055BDA7 /* image.c */,
+				3ED38EF90E37878B0055BDA7 /* init.c */,
+				3ED38EFA0E37878B0055BDA7 /* input.c */,
+				3ED38EFB0E37878B0055BDA7 /* internal.h */,
+				3ED38EFC0E37878B0055BDA7 /* joystick.c */,
+				3ED38EFD0E37878B0055BDA7 /* stream.c */,
+				3ED38EFE0E37878B0055BDA7 /* tga.c */,
+				3ED38EFF0E37878B0055BDA7 /* thread.c */,
+				3ED38F000E37878B0055BDA7 /* time.c */,
+				3ED38F010E37878B0055BDA7 /* window.c */,
+				32BAE0B70371A74B00C91783 /* glfw_Prefix.pch */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC06B0554671400DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ED38F080E37878B0055BDA7 /* internal.h in Headers */,
+				3ED38F180E3787BC0055BDA7 /* platform.h in Headers */,
+				3ED38F220E3787C90055BDA7 /* glfw.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC06E0554671400DB518D /* glfw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB920108733DBB0010E9CD /* Build configuration list for PBXNativeTarget "glfw" */;
+			buildPhases = (
+				D2AAC06B0554671400DB518D /* Headers */,
+				D2AAC06C0554671400DB518D /* Sources */,
+				D2AAC06D0554671400DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = glfw;
+			productName = glfw;
+			productReference = D2AAC06F0554671400DB518D /* libglfw.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB920508733DBB0010E9CD /* Build configuration list for PBXProject "glfw" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* glfw */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC06E0554671400DB518D /* glfw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC06C0554671400DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ED38F020E37878B0055BDA7 /* enable.c in Sources */,
+				3ED38F030E37878B0055BDA7 /* fullscreen.c in Sources */,
+				3ED38F040E37878B0055BDA7 /* glext.c in Sources */,
+				3ED38F050E37878B0055BDA7 /* image.c in Sources */,
+				3ED38F060E37878B0055BDA7 /* init.c in Sources */,
+				3ED38F070E37878B0055BDA7 /* input.c in Sources */,
+				3ED38F090E37878B0055BDA7 /* joystick.c in Sources */,
+				3ED38F0A0E37878B0055BDA7 /* stream.c in Sources */,
+				3ED38F0B0E37878B0055BDA7 /* tga.c in Sources */,
+				3ED38F0C0E37878B0055BDA7 /* thread.c in Sources */,
+				3ED38F0D0E37878B0055BDA7 /* time.c in Sources */,
+				3ED38F0E0E37878B0055BDA7 /* window.c in Sources */,
+				3ED38F190E3787BC0055BDA7 /* macosx_window.c in Sources */,
+				3ED38F1A0E3787BC0055BDA7 /* macosx_time.c in Sources */,
+				3ED38F1B0E3787BC0055BDA7 /* macosx_thread.c in Sources */,
+				3ED38F1C0E3787BC0055BDA7 /* macosx_init.c in Sources */,
+				3ED38F1D0E3787BC0055BDA7 /* macosx_glext.c in Sources */,
+				3ED38F1E0E3787BC0055BDA7 /* macosx_fullscreen.c in Sources */,
+				3ED38F1F0E3787BC0055BDA7 /* macosx_enable.c in Sources */,
+				3ED38F200E3787BC0055BDA7 /* macosx_joystick.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB920208733DBB0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = glfw_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = glfw;
+			};
+			name = Debug;
+		};
+		1DEB920308733DBB0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = glfw_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = glfw;
+			};
+			name = Release;
+		};
+		1DEB920608733DBB0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB920708733DBB0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB920108733DBB0010E9CD /* Build configuration list for PBXNativeTarget "glfw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB920208733DBB0010E9CD /* Debug */,
+				1DEB920308733DBB0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB920508733DBB0010E9CD /* Build configuration list for PBXProject "glfw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB920608733DBB0010E9CD /* Debug */,
+				1DEB920708733DBB0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
