@@ -73,7 +73,7 @@ namespace lost
       {
         camera.setBehavior(Camera::CAMERA_BEHAVIOR_SPECTATOR);
         camera.perspective(fovX, display.width / display.height, depth.min, depth.max);
-        camera.setPosition(Vector3(30.0f, 20.0f, 60.0f));
+        camera.setPosition(Vector3(0.0f, 0.0f, 10.0f));
         camera.setAcceleration(Vector3(acceleration.x, acceleration.y, acceleration.z));
         camera.setVelocity(Vector3(velocity.x, velocity.y, velocity.z));
 
@@ -186,7 +186,7 @@ struct Object0r
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
-    mesh = parser::parse(appInstance->loader->load("sponza.obj")->str());
+    mesh = parser::parse(appInstance->loader->load("cube.obj")->str());
 
     shaderInit();
     bufferInit();
@@ -219,6 +219,7 @@ struct Object0r
   {
     vertexBuffer.reset(new ArrayBuffer<Vec3>);
     vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
+    vertexBuffer->bindVertexPointer();
     
     glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
   }
@@ -240,7 +241,6 @@ struct Object0r
 
     glScalef(2.0f, 2.0f, 2.0f);
     lightingShader->enable();
-    vertexBuffer->bindVertexPointer();
     // draw mesh vertices as points
     glPointSize(5);
     setColor(whiteColor);

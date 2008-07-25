@@ -14,15 +14,20 @@ namespace lost
     
     struct Mesh
     {
-      unsigned int                          vertexCount;
+      unsigned int vertexCount;
+      unsigned int normalCount;
+
       boost::shared_array<lost::math::Vec3> vertices;
+      boost::shared_array<lost::math::Vec3> normals;
 
       lost::math::AABB box;
 
-      Mesh(unsigned int inVertexCount)
-      : vertexCount(inVertexCount)
+      Mesh(unsigned int inVertexCount, unsigned int inNormalCount)
+      : vertexCount(inVertexCount),
+        normalCount(inNormalCount)
       {
         vertices.reset(new lost::math::Vec3[vertexCount]);
+        normals.reset(new lost::math::Vec3[normalCount]);
         clear();
       }
       
@@ -33,6 +38,10 @@ namespace lost
         for (unsigned int idx = 0; idx < vertexCount; ++idx)
         {
           vertices[idx].zero();
+        }
+        for (unsigned int idx = 0; idx < normalCount; ++idx)
+        {
+          normals[idx].zero();
         }
       }
 
@@ -50,13 +59,27 @@ namespace lost
         }
       }
       
+      void setNormal(unsigned int inIndex, lost::math::Vec3& inNormal)
+      {
+        if (inIndex < normalCount)
+        {
+          normals[inIndex] = inNormal;
+        }
+      }
+      
     };
     
     inline std::ostream& operator << (std::ostream& stream, const boost::shared_ptr<Mesh>& m)
     {
-      stream << "vertexCount: " << m->vertexCount << std::endl;
+      stream << "Mesh:" << std::endl;
+      stream << std::endl;
+      stream << "  vertexCount: " << m->vertexCount << std::endl;
       for (unsigned int idx = 0; idx < m->vertexCount; ++idx)
-        stream << "vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
+        stream << "    vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
+      stream << std::endl;
+      stream << "  normalCount: " << m->normalCount << std::endl;
+      for (unsigned int idx = 0; idx < m->normalCount; ++idx)
+        stream << "    normals[" << idx << "]: " << m->normals[idx] << std::endl;
       return stream;
     }
     
