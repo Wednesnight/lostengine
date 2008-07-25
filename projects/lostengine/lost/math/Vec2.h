@@ -15,6 +15,7 @@ namespace lost
         {
             struct {float x,y;};
             struct {float w,h;};
+            struct {float min,max;};
         };
 
         Vec2(float a, float b) : x(a), y(b) {}

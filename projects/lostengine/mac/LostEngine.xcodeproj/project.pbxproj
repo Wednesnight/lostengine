@@ -19,6 +19,7 @@
 		3EB93D810E38043000FF10C9 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D7D0E38043000FF10C9 /* Camera.h */; };
 		3EB93D820E38043000FF10C9 /* mathlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB93D7E0E38043000FF10C9 /* mathlib.cpp */; };
 		3EB93D830E38043000FF10C9 /* mathlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D7F0E38043000FF10C9 /* mathlib.h */; };
+		3EBEE8360E39D4EE0055A8D2 /* AABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEE8350E39D4EE0055A8D2 /* AABB.h */; };
 		3ED38F690E3788430055BDA7 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED38F680E3788330055BDA7 /* libglfw.a */; };
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
 		3ED3A3A40E3886C7000199E7 /* LuaLSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A00E3886C7000199E7 /* LuaLSystem.h */; };
@@ -221,6 +222,7 @@
 		3EB93D7D0E38043000FF10C9 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = camera/Camera.h; sourceTree = "<group>"; };
 		3EB93D7E0E38043000FF10C9 /* mathlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mathlib.cpp; path = camera/mathlib.cpp; sourceTree = "<group>"; };
 		3EB93D7F0E38043000FF10C9 /* mathlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mathlib.h; path = camera/mathlib.h; sourceTree = "<group>"; };
+		3EBEE8350E39D4EE0055A8D2 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AABB.h; path = model/AABB.h; sourceTree = "<group>"; };
 		3ED38F600E3788330055BDA7 /* glfw.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = glfw.xcodeproj; path = ../../../thirdparty/glfw/glfw_2_6/mac/glfw.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
 		3ED3A3A00E3886C7000199E7 /* LuaLSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaLSystem.h; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				3EB93D340E37FE2500FF10C9 /* Parser.h */,
 				3EB93D350E37FE2500FF10C9 /* Scene.h */,
 				3EB93D360E37FE2500FF10C9 /* Vertex.h */,
+				3EBEE8350E39D4EE0055A8D2 /* AABB.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				EA0F2E870E381C3D0001F530 /* BufferBase.h in Headers */,
 				EA0F2E890E381C410001F530 /* ElementBuffer.h in Headers */,
 				3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */,
+				3EBEE8360E39D4EE0055A8D2 /* AABB.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

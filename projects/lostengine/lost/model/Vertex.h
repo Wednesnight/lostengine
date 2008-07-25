@@ -20,6 +20,14 @@ namespace lost
         clear();
       }
       
+      Vertex(float inX, float inY, float inZ, float inW)
+      : x(inX),
+        y(inY),
+        z(inZ),
+        w(inW)
+      {
+      }
+      
       void clear()
       {
         x = 0.0f;

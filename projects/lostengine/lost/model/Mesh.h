@@ -3,8 +3,9 @@
 
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
-#include "lost/model/Vertex.h"
+#include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
+#include "lost/model/AABB.h"
 
 namespace lost
 {
@@ -13,13 +14,15 @@ namespace lost
     
     struct Mesh
     {
-      unsigned int                vertexCount;
-      boost::shared_array<Vertex> vertices;
-      
+      unsigned int                          vertexCount;
+      boost::shared_array<lost::math::Vec3> vertices;
+
+      AABB box;
+
       Mesh(unsigned int inVertexCount)
       : vertexCount(inVertexCount)
       {
-        vertices.reset(new Vertex[vertexCount]);
+        vertices.reset(new lost::math::Vec3[vertexCount]);
         clear();
       }
       
@@ -29,15 +32,22 @@ namespace lost
       {
         for (unsigned int idx = 0; idx < vertexCount; ++idx)
         {
-          vertices[idx].clear();
+          vertices[idx].zero();
         }
       }
-      
-      void setVertex(unsigned int inIndex, const Vertex& inVertex)
+
+      void setVertex(unsigned int inIndex, lost::math::Vec3& inVertex)
       {
-        DOUT("vertices[" << inIndex << "] = " << inVertex);
         if (inIndex < vertexCount)
+        {
           vertices[inIndex] = inVertex;
+          box.origin.x = std::min(box.origin.x, inVertex.x);
+          box.origin.y = std::min(box.origin.y, inVertex.y);
+          box.origin.z = std::min(box.origin.z, inVertex.z);
+          box.size.x = std::max(box.size.x + box.origin.x, inVertex.x) - box.origin.x;
+          box.size.y = std::max(box.size.y + box.origin.y, inVertex.y) - box.origin.y;
+          box.size.z = std::max(box.size.z + box.origin.z, inVertex.z) - box.origin.z;
+        }
       }
       
     };

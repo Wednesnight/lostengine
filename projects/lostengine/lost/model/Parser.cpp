@@ -1,6 +1,6 @@
 #include <iostream>
 
-#define BOOST_SPIRIT_DEBUG
+//#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/core.hpp>
 #include <boost/spirit/utility/lists.hpp>
 #include <boost/spirit/actor/increment_actor.hpp>
@@ -9,7 +9,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "lost/model/Parser.h"
-#include "lost/model/Vertex.h"
+#include "lost/math/Vec3.h"
 #include "lost/model/Mesh.h"
 #include "lost/math/Vec4.h"
 #include "lost/common/SpiritHelpers.h"
@@ -35,9 +35,9 @@ namespace lost
       {
         Mesh&         mesh;
         unsigned int& index;
-        Vertex&       vertex;
+        Vec3&         vertex;
         
-        MeshAssignVertex(Mesh& inMesh, unsigned int& inIndex, Vertex& inVertex)
+        MeshAssignVertex(Mesh& inMesh, unsigned int& inIndex, Vec3& inVertex)
         : mesh(inMesh),
           index(inIndex),
           vertex(inVertex)
@@ -75,15 +75,16 @@ namespace lost
           result.reset(new Mesh(vertexCount));
 
           unsigned int index;
-          Vertex vertex;
+          Vec3         vertex;
           rule<> vertex_p  = ch_p('v')
                               >> +space_p >> real_p[assign_a(vertex.x)] 
                               >> +space_p >> real_p[assign_a(vertex.y)]
                               >> +space_p >> real_p[assign_a(vertex.z)]
-                              >> !(+space_p >> real_p[assign_a(vertex.w)])
+                              >> !(+space_p >> real_p)
+//                              >> !(+space_p >> real_p[assign_a(vertex.w)])
                               >> *(space_p-eol_p) >> eol_p;
           rule<> unknown_p = *(anychar_p-eol_p) >> eol_p;
-          rule<> objfile_p = *(vertex_p[MeshAssignVertex(*result, index, vertex)][bind(&Vertex::clear)(var(vertex))] | unknown_p);
+          rule<> objfile_p = *(vertex_p[MeshAssignVertex(*result, index, vertex)][bind(&Vec3::zero)(var(vertex))] | unknown_p);
 
           BOOST_SPIRIT_DEBUG_NODE(vertex_p);
           BOOST_SPIRIT_DEBUG_NODE(unknown_p);

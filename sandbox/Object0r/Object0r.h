@@ -17,6 +17,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
 #include "lost/math/Matrix.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/ShaderProgram.h"
@@ -25,10 +26,10 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
 #include "lost/model/Mesh.h"
-#include "lost/model/Vertex.h"
 #include "lost/model/Parser.h"
 #include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
+#include "lost/gl/Draw.h"
 
 using namespace boost;
 using namespace lost::application;
@@ -51,7 +52,6 @@ namespace lost
       float              fovX;
       DisplayAttributes& display;
       Vec2               depth;
-      Vec2               zoom;
       Vec3               acceleration;
       Vec3               velocity;
       
@@ -65,7 +65,6 @@ namespace lost
       : fovX(60.0f),
         display(inDisplay),
         depth(0.1f, 100.0f),
-        zoom(1.5f, 5.0f),
         acceleration(4.0f, 4.0f, 4.0f),
         velocity(1.0f, 1.0f, 1.0f),
         mousePos(0,0),
@@ -73,20 +72,11 @@ namespace lost
         cameraTimer("CameraController::cameraTimer", 0.025f)
       {
         camera.setBehavior(Camera::CAMERA_BEHAVIOR_SPECTATOR);
-        
-        camera.perspective(fovX, display.width / display.height, depth.x, depth.y);
-        
-        camera.setPosition(Vector3(0.0f, 0.0f, 5.0f));
-        camera.setOrbitMinZoom(zoom.x);
-        camera.setOrbitMaxZoom(zoom.y);
-        camera.setOrbitOffsetDistance(zoom.x + (zoom.y - zoom.x) * 0.3f);
-        
+        camera.perspective(fovX, display.width / display.height, depth.min, depth.max);
+        camera.setPosition(Vector3(0.0f, 0.0f, 20.0f));
         camera.setAcceleration(Vector3(acceleration.x, acceleration.y, acceleration.z));
         camera.setVelocity(Vector3(velocity.x, velocity.y, velocity.z));
-        
-        //        g_cameraBoundsMax.set(FLOOR_WIDTH / 2.0f, 4.0f, FLOOR_HEIGHT / 2.0f);
-        //        g_cameraBoundsMin.set(-FLOOR_WIDTH / 2.0f, cameraOffset, -FLOOR_HEIGHT / 2.0f);
-        
+
         inDispatcher.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(boost::bind(&CameraController::keyPressed, this, _1)));
         inDispatcher.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(boost::bind(&CameraController::keyPressed, this, _1)));
         inDispatcher.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(boost::bind(&CameraController::mouseMoved, this, _1)));
@@ -97,7 +87,6 @@ namespace lost
       void updateCamera(boost::shared_ptr<TimerEvent> event)
       {
         camera.updatePosition(direction, event->passedSec);
-        //        DOUT("camera.position: " << camera.getPosition().x << ", " << camera.getPosition().y << ", " << camera.getPosition().z);
       }
       
       void mouseMoved(boost::shared_ptr<MouseEvent> event)
@@ -188,8 +177,8 @@ struct Object0r
   FpsMeter                     fpsMeter;
   shared_ptr<Mesh>             mesh;
   
-  shared_ptr<ShaderProgram>        lightingShader;
-  shared_ptr<ArrayBuffer<Vertex> > vertexBuffer;
+  shared_ptr<ShaderProgram>      lightingShader;
+  shared_ptr<ArrayBuffer<Vec3> > vertexBuffer;
   
   void init(shared_ptr<Event> event)
   {
@@ -197,8 +186,7 @@ struct Object0r
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
-    mesh = parser::parse(appInstance->loader->load("cube.obj")->str());
-    DOUT(mesh);
+    mesh = parser::parse(appInstance->loader->load("magnolia.obj")->str());
 
     shaderInit();
     bufferInit();
@@ -229,7 +217,7 @@ struct Object0r
   
   void bufferInit()
   {
-    vertexBuffer.reset(new ArrayBuffer<Vertex>);
+    vertexBuffer.reset(new ArrayBuffer<Vec3>);
     vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
     
     glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
@@ -249,7 +237,8 @@ struct Object0r
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
-    
+
+    glScalef(0.1f, 0.1f, 0.1f);
     lightingShader->enable();
     vertexBuffer->bindVertexPointer();
     // draw mesh vertices as points
@@ -257,6 +246,44 @@ struct Object0r
     setColor(whiteColor);
     vertexBuffer->draw(GL_POINTS);
     lightingShader->disable();
+    setColor(whiteColor);
+
+    drawLine(mesh->box.origin, Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z));
+
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z),
+             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
+
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
+
+    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z));
+
+    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z));
+
+    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
+
+    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
+    
+    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z));
+    
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
+    
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
+
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z));
+    
+    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
+             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
+    
+    glScalef(10.0f, 10.0f, 10.0f);
 
     /* no cubes anymore
      glutSolidCube(1.0);

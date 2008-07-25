@@ -5,6 +5,7 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/gl/Texture.h"
+#include "lost/math/Vec3.h"
 
 namespace lost
 {
@@ -54,6 +55,14 @@ namespace gl
     glEnd();
   }
 
+  inline void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
+  {
+    glBegin(GL_LINES);
+    glVertex3f(start.x,start.y, start.z);
+    glVertex3f(end.x, end.y, end.z);
+    glEnd();
+  }
+  
   inline void drawRectOutline(const lost::math::Rect& rect)
   {
     drawLine(rect.bottomLeft(), rect.bottomRight());
