@@ -73,7 +73,7 @@ namespace lost
       {
         camera.setBehavior(Camera::CAMERA_BEHAVIOR_SPECTATOR);
         camera.perspective(fovX, display.width / display.height, depth.min, depth.max);
-        camera.setPosition(Vector3(0.0f, 0.0f, 20.0f));
+        camera.setPosition(Vector3(30.0f, 20.0f, 60.0f));
         camera.setAcceleration(Vector3(acceleration.x, acceleration.y, acceleration.z));
         camera.setVelocity(Vector3(velocity.x, velocity.y, velocity.z));
 
@@ -186,7 +186,7 @@ struct Object0r
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
-    mesh = parser::parse(appInstance->loader->load("magnolia.obj")->str());
+    mesh = parser::parse(appInstance->loader->load("sponza.obj")->str());
 
     shaderInit();
     bufferInit();
@@ -238,7 +238,7 @@ struct Object0r
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
-    glScalef(0.1f, 0.1f, 0.1f);
+    glScalef(2.0f, 2.0f, 2.0f);
     lightingShader->enable();
     vertexBuffer->bindVertexPointer();
     // draw mesh vertices as points
@@ -247,89 +247,10 @@ struct Object0r
     vertexBuffer->draw(GL_POINTS);
     lightingShader->disable();
     setColor(whiteColor);
-
-    drawLine(mesh->box.origin, Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z));
-
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z),
-             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
-
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
-
-    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z));
-
-    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z));
-
-    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
-
-    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
-    
-    drawLine(Vec3(mesh->box.origin.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z));
-    
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
-    
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z));
-
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y, mesh->box.origin.z));
-    
-    drawLine(Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z + mesh->box.size.z),
-             Vec3(mesh->box.origin.x + mesh->box.size.x, mesh->box.origin.y + mesh->box.size.y, mesh->box.origin.z));
-    
+    drawAABB(mesh->box);
     glScalef(10.0f, 10.0f, 10.0f);
 
-    /* no cubes anymore
-     glutSolidCube(1.0);
-     glTranslatef(2.0f, 0.0f, 0.0f);
-     glutSolidCube(1.0);
-     glTranslatef(-4.0f, 0.0f, 0.0f);
-     glutSolidCube(1.0);
-     glTranslatef(2.0f, 2.0f, 0.0f);
-     glutSolidCube(1.0);
-     glTranslatef(0.0f, -4.0f, 0.0f);
-     glutSolidCube(1.0);
-     glTranslatef(0.0f, 2.0f, 2.0f);
-     glutSolidCube(1.0);
-     glTranslatef(0.0f, 0.0f, -4.0f);
-     glutSolidCube(1.0);
-     glTranslatef(0.0f, 0.0f, 2.0f);
-     */
-    
-    // Draw the positive side of the lines x,y,z
-    glBegin(GL_LINES);
-    glColor3f(0.0f, 1.0f, 0.0f);                // Green for x axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(10.0f, 0.0f, 0.0f);
-    glColor3f(1.0f, 0.0f, 0.0f);                // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 10.0f, 0.0f);
-    glColor3f(0.0f, 0.0f, 1.0f);                // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, 10.0f);
-    glEnd();
-    
-    // Dotted lines for the negative sides of x,y,z coordinates
-    glEnable(GL_LINE_STIPPLE);                // Enable line stipple to use a dotted pattern for the lines
-    glLineStipple(1, 0x0101);                    // Dotted stipple pattern for the lines
-    glBegin(GL_LINES);
-    glColor3f(0.0f, 1.0f, 0.0f);                    // Green for x axis
-    glVertex3f(-10.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1.0f, 0.0f, 0.0f);                    // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, -10.0f, 0.0f);
-    glColor3f(0.0f, 0.0f, 1.0f);                    // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, -10.0f);
-    glEnd();
-    glDisable(GL_LINE_STIPPLE);                // Disable the line stipple
+    drawAxes(Vec3(10.0f, 10.0f, 10.0f));
     
     set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
     glMatrixMode(GL_MODELVIEW);

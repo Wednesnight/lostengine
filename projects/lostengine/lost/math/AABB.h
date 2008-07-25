@@ -5,13 +5,13 @@
 
 namespace lost
 {
-  namespace model
+  namespace math
   {
     
     struct AABB
     {
-      lost::math::Vec3 origin;
-      lost::math::Vec3 size;
+      Vec3 origin;
+      Vec3 size;
       
       AABB()
       : origin(0.0f, 0.0f, 0.0f),

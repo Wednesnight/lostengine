@@ -5,7 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
-#include "lost/model/AABB.h"
+#include "lost/math/AABB.h"
 
 namespace lost
 {
@@ -17,7 +17,7 @@ namespace lost
       unsigned int                          vertexCount;
       boost::shared_array<lost::math::Vec3> vertices;
 
-      AABB box;
+      lost::math::AABB box;
 
       Mesh(unsigned int inVertexCount)
       : vertexCount(inVertexCount)

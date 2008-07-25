@@ -5,6 +5,7 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/gl/Texture.h"
+#include "lost/math/AABB.h"
 #include "lost/math/Vec3.h"
 
 namespace lost
@@ -103,7 +104,81 @@ namespace gl
       glTexCoord2f(0, 0);glVertex2f(rect.x, rect.y+rect.height-1);    
     }
     glEnd();
-  }  
+  }
+  
+  inline void drawAABB(const lost::math::AABB& box)
+  {
+    glBegin(GL_LINES);
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
+    
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
+    
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
+    
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
+    
+    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
+    
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
+    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
+    glEnd();    
+  }
+  
+  inline void drawAxes(const lost::math::Vec3& length)
+  {
+    // Draw the positive side of the lines x,y,z
+    glBegin(GL_LINES);
+    setColor(lost::common::greenColor);         // Green for x axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(length.x, 0.0f, 0.0f);
+    setColor(lost::common::redColor);           // Red for y axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, length.y, 0.0f);
+    setColor(lost::common::blueColor);          // Blue for z axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, length.z);
+    glEnd();
+    
+    // Dotted lines for the negative sides of x,y,z coordinates
+    glEnable(GL_LINE_STIPPLE);                  // Enable line stipple to use a dotted pattern for the lines
+    glLineStipple(1, 0x0101);                   // Dotted stipple pattern for the lines
+    glBegin(GL_LINES);
+    setColor(lost::common::greenColor);         // Green for x axis
+    glVertex3f(-length.x, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    setColor(lost::common::redColor);           // Red for y axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, -length.y, 0.0f);
+    setColor(lost::common::blueColor);          // Blue for z axis
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glVertex3f(0.0f, 0.0f, -length.z);
+    glEnd();
+    glDisable(GL_LINE_STIPPLE);                 // Disable the line stipple
+  }
+  
 }
 }
 
