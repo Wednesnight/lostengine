@@ -1,6 +1,7 @@
 function preinit(event)
   log.debug("preinit, building config")
 
+  -- config is deliberatly global so application-internal startup code can find it
   config = {}
   config.displayAttributes = lost.common.DisplayAttributes()
 
@@ -16,4 +17,11 @@ function preinit(event)
   config.displayAttributes.title = "VertexBuff0r";
 end
 
-app:addEventListener("applicationPreInit", preinit)
+function cleanupOnQuit(event)
+  log.debug("quitting");
+end
+
+local ApplicationEvent = lost.application.ApplicationEvent
+
+app:addEventListener(ApplicationEvent.PREINIT, preinit)
+app:addEventListener(ApplicationEvent.QUIT, cleanupOnQuit)
