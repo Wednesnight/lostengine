@@ -39,6 +39,7 @@ namespace lost
         .def_readwrite("passedSec", &TimerEvent::passedSec)
         ]
        ];
+      globals(state)["lost"]["application"]["TimerEvent"]["TIMER_FIRED"] = TimerEvent::TIMER_FIRED();
     }
   }
 }

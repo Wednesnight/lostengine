@@ -40,6 +40,8 @@ namespace lost
         .def_readwrite("pressed", &KeyEvent::pressed)
         ]
        ];
+      globals(state)["lost"]["application"]["KeyEvent"]["KEY_UP"] = KeyEvent::KEY_UP();
+      globals(state)["lost"]["application"]["KeyEvent"]["KEY_DOWN"] = KeyEvent::KEY_DOWN();
     }
   }
 }

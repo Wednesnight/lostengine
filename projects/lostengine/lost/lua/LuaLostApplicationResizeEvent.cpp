@@ -40,6 +40,8 @@ namespace lost
         .def_readwrite("height", &ResizeEvent::height)
         ]
        ];
+      
+      globals(state)["lost"]["application"]["ResizeEvent"]["MAIN_WINDOW_RESIZE"] = ResizeEvent::MAIN_WINDOW_RESIZE();
     }
   }
 }
