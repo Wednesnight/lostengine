@@ -40,12 +40,15 @@ struct LuaHandlerMethod
   
 void addEventListener(object dispatcher, const string& type, object func)
 {
+  if(luabind::type(func) == LUA_TNIL) { throw runtime_error("can't register NIL lua callback function"); }
   EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
   disp->addEventListener(type, LuaHandlerFunction(func));
 }
 
 void addEventListener(object dispatcher, const string& type, object obj, object method)
 {
+  if(luabind::type(obj) == LUA_TNIL) { throw runtime_error("can't register lua callback method with NIL object"); }
+  if(luabind::type(method) == LUA_TNIL) { throw runtime_error("can't register NIL lua callback method"); }
   EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
   disp->addEventListener(type, LuaHandlerMethod(obj, method));
 }
