@@ -4,6 +4,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
+#include <stdint.h>
 
 namespace lost
 {
@@ -44,7 +45,7 @@ struct TraitsSelector<lost::math::Vec4>
 };
 
 template<>
-struct TraitsSelector<unsigned char>
+struct TraitsSelector<uint8_t>
 {
   GLint size;
   GLenum type;
@@ -52,7 +53,7 @@ struct TraitsSelector<unsigned char>
 };
 
 template<>
-struct TraitsSelector<unsigned short>
+struct TraitsSelector<uint16_t>
 {
   GLint size;
   GLenum type;
@@ -60,7 +61,7 @@ struct TraitsSelector<unsigned short>
 };
 
 template<>
-struct TraitsSelector<unsigned int>
+struct TraitsSelector<uint32_t>
 {
   GLint size;
   GLenum type;

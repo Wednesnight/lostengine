@@ -22,7 +22,7 @@ using namespace lost::gl::utils;
 using namespace lost::application;
 
 
-typedef unsigned char INDEXTYPE;
+typedef uint32_t INDEXTYPE;
 
 FpsMeter fpsMeter;
 shared_ptr<gl::ArrayBuffer<Vec2> > vb;
