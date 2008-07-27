@@ -18,7 +18,8 @@ namespace lost
     {
       platform_windows = 0,
       platform_mac     = 1,
-      platform_linux   = 2
+      platform_linux   = 2,
+      platform_iphone  = 3
     } PlatformType;
 
     PlatformType getPlatform();
@@ -26,6 +27,7 @@ namespace lost
     bool isWindows();
     bool isMac();
     bool isLinux();
+    bool isiPhone();
 
     typedef enum
     {
