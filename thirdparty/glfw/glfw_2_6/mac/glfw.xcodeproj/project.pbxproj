@@ -37,7 +37,6 @@
 
 /* Begin PBXFileReference section */
 		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		32BAE0B70371A74B00C91783 /* glfw_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glfw_Prefix.pch; sourceTree = "<group>"; };
 		3ED38EF50E37878B0055BDA7 /* enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = enable.c; path = ../source/enable.c; sourceTree = SOURCE_ROOT; };
 		3ED38EF60E37878B0055BDA7 /* fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fullscreen.c; path = ../source/fullscreen.c; sourceTree = SOURCE_ROOT; };
 		3ED38EF70E37878B0055BDA7 /* glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glext.c; path = ../source/glext.c; sourceTree = SOURCE_ROOT; };
@@ -134,7 +133,6 @@
 				3ED38EFF0E37878B0055BDA7 /* thread.c */,
 				3ED38F000E37878B0055BDA7 /* time.c */,
 				3ED38F010E37878B0055BDA7 /* window.c */,
-				32BAE0B70371A74B00C91783 /* glfw_Prefix.pch */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -230,8 +228,8 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = glfw_Prefix.pch;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = glfw;
 			};
