@@ -86,7 +86,7 @@ public:
   }
 
   // always 3 coords?
-  virtual void normalPointer(GLenum type, GLsizei stride=0, const GLvoid* pointer)
+  virtual void normalPointer(GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
   {
     glNormalPointer(type, stride, pointer);GLDEBUG_THROW;
   }
