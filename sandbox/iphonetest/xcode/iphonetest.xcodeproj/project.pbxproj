@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* iphonetestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iphonetestAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.mm */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		EA17DEAE0E3D1EC100E25681 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DEAD0E3D1EC100E25681 /* Platform_Mac.cpp */; };
+		EA17DEB60E3D1F9400E25681 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA17DEB50E3D1F9400E25681 /* init */; };
+		EA17DEC50E3D205200E25681 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DEC40E3D204200E25681 /* libboost.a */; };
+		EA17DEF40E3D21EC00E25681 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DEF30E3D21EC00E25681 /* Logger.cpp */; };
+		EA17DF020E3D229F00E25681 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DF010E3D229600E25681 /* liblua.a */; };
+		EA17DF0C0E3D22B700E25681 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DF0B0E3D22AE00E25681 /* libluabind.a */; };
+		EA17DF260E3D239D00E25681 /* helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF250E3D239D00E25681 /* helper.cpp */; };
+		EA17DF680E3D26C000E25681 /* LuaLostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF590E3D26C000E25681 /* LuaLostApplicationApplicationEvent.cpp */; };
+		EA17DF690E3D26C000E25681 /* LuaLostApplicationMouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF5A0E3D26C000E25681 /* LuaLostApplicationMouseEvent.cpp */; };
+		EA17DF6A0E3D26C000E25681 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF5B0E3D26C000E25681 /* LuaLSystem.cpp */; };
+		EA17DF6C0E3D26C000E25681 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF5D0E3D26C000E25681 /* LuaLostResourceLoader.cpp */; };
+		EA17DF6D0E3D26C000E25681 /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF5E0E3D26C000E25681 /* LuaLostResourceFile.cpp */; };
+		EA17DF6E0E3D26C000E25681 /* LuaLostEventEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF5F0E3D26C000E25681 /* LuaLostEventEventDispatcher.cpp */; };
+		EA17DF6F0E3D26C000E25681 /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF600E3D26C000E25681 /* LuaLostEventEvent.cpp */; };
+		EA17DF700E3D26C000E25681 /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF610E3D26C000E25681 /* LuaLostCommonLog.cpp */; };
+		EA17DF710E3D26C000E25681 /* LuaLostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF620E3D26C000E25681 /* LuaLostCommonDisplayAttributes.cpp */; };
+		EA17DF720E3D26C000E25681 /* LuaLostApplicationResizeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF630E3D26C000E25681 /* LuaLostApplicationResizeEvent.cpp */; };
+		EA17DF730E3D26C000E25681 /* LuaLostApplicationKeyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF640E3D26C000E25681 /* LuaLostApplicationKeyEvent.cpp */; };
+		EA17DF760E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF670E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp */; };
+		EA17DF790E3D26C800E25681 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF770E3D26C800E25681 /* LuaVec3.cpp */; };
+		EA17DF7A0E3D26C800E25681 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF780E3D26C800E25681 /* ModuleLoader.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA17DEC30E3D204200E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libboost.a */;
+			remoteInfo = boost;
+		};
+		EA17DF000E3D229600E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DEF90E3D229600E25681 /* lua.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* liblua.a */;
+			remoteInfo = lua;
+		};
+		EA17DF0A0E3D22AE00E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libluabind.a */;
+			remoteInfo = luabind;
+		};
+		EA17DF0D0E3D22C400E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* luabind */;
+			remoteInfo = luabind;
+		};
+		EA17DF0F0E3D22C400E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DEF90E3D229600E25681 /* lua.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* lua */;
+			remoteInfo = lua;
+		};
+		EA17DF110E3D22C400E25681 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* boost */;
+			remoteInfo = boost;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* iphonetestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iphonetestAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* iphonetestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iphonetestAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* iphonetest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iphonetest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* iphonetest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iphonetest_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA17DEAD0E3D1EC100E25681 /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform_Mac.cpp; path = ../../../projects/lostengine/lost/platform/Platform_Mac.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DEB50E3D1F9400E25681 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
+		EA17DEBC0E3D204200E25681 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA17DEF30E3D21EC00E25681 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = ../../../projects/lostengine/lost/common/Logger.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DEF90E3D229600E25681 /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_3/mac/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7/mac/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA17DF240E3D239D00E25681 /* helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helper.h; sourceTree = "<group>"; };
+		EA17DF250E3D239D00E25681 /* helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = helper.cpp; sourceTree = "<group>"; };
+		EA17DF590E3D26C000E25681 /* LuaLostApplicationApplicationEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationApplicationEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationApplicationEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF5A0E3D26C000E25681 /* LuaLostApplicationMouseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationMouseEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationMouseEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF5B0E3D26C000E25681 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLSystem.cpp; path = ../../../projects/lostengine/lost/lua/LuaLSystem.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF5D0E3D26C000E25681 /* LuaLostResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostResourceLoader.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostResourceLoader.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF5E0E3D26C000E25681 /* LuaLostResourceFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostResourceFile.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostResourceFile.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF5F0E3D26C000E25681 /* LuaLostEventEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostEventEventDispatcher.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostEventEventDispatcher.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF600E3D26C000E25681 /* LuaLostEventEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostEventEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostEventEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF610E3D26C000E25681 /* LuaLostCommonLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostCommonLog.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostCommonLog.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF620E3D26C000E25681 /* LuaLostCommonDisplayAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostCommonDisplayAttributes.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostCommonDisplayAttributes.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF630E3D26C000E25681 /* LuaLostApplicationResizeEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationResizeEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationResizeEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF640E3D26C000E25681 /* LuaLostApplicationKeyEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationKeyEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationKeyEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF670E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationTimerEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationTimerEvent.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF770E3D26C800E25681 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaVec3.cpp; path = ../../../projects/lostengine/lost/lua/LuaVec3.cpp; sourceTree = SOURCE_ROOT; };
+		EA17DF780E3D26C800E25681 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModuleLoader.cpp; path = ../../../projects/lostengine/lost/lua/ModuleLoader.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA17DF0C0E3D22B700E25681 /* libluabind.a in Frameworks */,
+				EA17DF020E3D229F00E25681 /* liblua.a in Frameworks */,
+				EA17DEC50E3D205200E25681 /* libboost.a in Frameworks */,
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623240D0F684500981E51 /* iphonetestAppDelegate.h */,
+				1D3623250D0F684500981E51 /* iphonetestAppDelegate.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* iphonetest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* iphonetest_Prefix.pch */,
+				EA17DEAD0E3D1EC100E25681 /* Platform_Mac.cpp */,
+				EA17DEF30E3D21EC00E25681 /* Logger.cpp */,
+				29B97316FDCFA39411CA2CEA /* main.mm */,
+				EA17DF240E3D239D00E25681 /* helper.h */,
+				EA17DF250E3D239D00E25681 /* helper.cpp */,
+				EA17DF770E3D26C800E25681 /* LuaVec3.cpp */,
+				EA17DF780E3D26C800E25681 /* ModuleLoader.cpp */,
+				EA17DF590E3D26C000E25681 /* LuaLostApplicationApplicationEvent.cpp */,
+				EA17DF5A0E3D26C000E25681 /* LuaLostApplicationMouseEvent.cpp */,
+				EA17DF5B0E3D26C000E25681 /* LuaLSystem.cpp */,
+				EA17DF5D0E3D26C000E25681 /* LuaLostResourceLoader.cpp */,
+				EA17DF5E0E3D26C000E25681 /* LuaLostResourceFile.cpp */,
+				EA17DF5F0E3D26C000E25681 /* LuaLostEventEventDispatcher.cpp */,
+				EA17DF600E3D26C000E25681 /* LuaLostEventEvent.cpp */,
+				EA17DF610E3D26C000E25681 /* LuaLostCommonLog.cpp */,
+				EA17DF620E3D26C000E25681 /* LuaLostCommonDisplayAttributes.cpp */,
+				EA17DF630E3D26C000E25681 /* LuaLostApplicationResizeEvent.cpp */,
+				EA17DF640E3D26C000E25681 /* LuaLostApplicationKeyEvent.cpp */,
+				EA17DF670E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				EA17DEB50E3D1F9400E25681 /* init */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */,
+				EA17DEF90E3D229600E25681 /* lua.xcodeproj */,
+				EA17DEBC0E3D204200E25681 /* boost.xcodeproj */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA17DEBD0E3D204200E25681 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA17DEC40E3D204200E25681 /* libboost.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA17DEFA0E3D229600E25681 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA17DF010E3D229600E25681 /* liblua.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA17DF040E3D22AE00E25681 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA17DF0B0E3D22AE00E25681 /* libluabind.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* iphonetest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iphonetest" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA17DF0E0E3D22C400E25681 /* PBXTargetDependency */,
+				EA17DF100E3D22C400E25681 /* PBXTargetDependency */,
+				EA17DF120E3D22C400E25681 /* PBXTargetDependency */,
+			);
+			name = iphonetest;
+			productName = iphonetest;
+			productReference = 1D6058910D05DD3D006BFB54 /* iphonetest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iphonetest" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA17DEBD0E3D204200E25681 /* Products */;
+					ProjectRef = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
+				},
+				{
+					ProductGroup = EA17DEFA0E3D229600E25681 /* Products */;
+					ProjectRef = EA17DEF90E3D229600E25681 /* lua.xcodeproj */;
+				},
+				{
+					ProductGroup = EA17DF040E3D22AE00E25681 /* Products */;
+					ProjectRef = EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* iphonetest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA17DEC40E3D204200E25681 /* libboost.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libboost.a;
+			remoteRef = EA17DEC30E3D204200E25681 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA17DF010E3D229600E25681 /* liblua.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblua.a;
+			remoteRef = EA17DF000E3D229600E25681 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA17DF0B0E3D22AE00E25681 /* libluabind.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libluabind.a;
+			remoteRef = EA17DF0A0E3D22AE00E25681 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				EA17DEB60E3D1F9400E25681 /* init in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.mm in Sources */,
+				1D3623260D0F684500981E51 /* iphonetestAppDelegate.m in Sources */,
+				EA17DEAE0E3D1EC100E25681 /* Platform_Mac.cpp in Sources */,
+				EA17DEF40E3D21EC00E25681 /* Logger.cpp in Sources */,
+				EA17DF260E3D239D00E25681 /* helper.cpp in Sources */,
+				EA17DF680E3D26C000E25681 /* LuaLostApplicationApplicationEvent.cpp in Sources */,
+				EA17DF690E3D26C000E25681 /* LuaLostApplicationMouseEvent.cpp in Sources */,
+				EA17DF6A0E3D26C000E25681 /* LuaLSystem.cpp in Sources */,
+				EA17DF6C0E3D26C000E25681 /* LuaLostResourceLoader.cpp in Sources */,
+				EA17DF6D0E3D26C000E25681 /* LuaLostResourceFile.cpp in Sources */,
+				EA17DF6E0E3D26C000E25681 /* LuaLostEventEventDispatcher.cpp in Sources */,
+				EA17DF6F0E3D26C000E25681 /* LuaLostEventEvent.cpp in Sources */,
+				EA17DF700E3D26C000E25681 /* LuaLostCommonLog.cpp in Sources */,
+				EA17DF710E3D26C000E25681 /* LuaLostCommonDisplayAttributes.cpp in Sources */,
+				EA17DF720E3D26C000E25681 /* LuaLostApplicationResizeEvent.cpp in Sources */,
+				EA17DF730E3D26C000E25681 /* LuaLostApplicationKeyEvent.cpp in Sources */,
+				EA17DF760E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp in Sources */,
+				EA17DF790E3D26C800E25681 /* LuaVec3.cpp in Sources */,
+				EA17DF7A0E3D26C800E25681 /* ModuleLoader.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA17DF0E0E3D22C400E25681 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = luabind;
+			targetProxy = EA17DF0D0E3D22C400E25681 /* PBXContainerItemProxy */;
+		};
+		EA17DF100E3D22C400E25681 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = lua;
+			targetProxy = EA17DF0F0E3D22C400E25681 /* PBXContainerItemProxy */;
+		};
+		EA17DF120E3D22C400E25681 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = boost;
+			targetProxy = EA17DF110E3D22C400E25681 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iphonetest_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = iphonetest;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iphonetest_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = iphonetest;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iphonetest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iphonetest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
