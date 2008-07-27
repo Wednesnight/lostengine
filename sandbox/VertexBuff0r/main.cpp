@@ -49,7 +49,6 @@ void init(shared_ptr<Event> event)
   eb->bindBufferData(indices, numindices);
   
   glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-  glEnableClientState(GL_INDEX_ARRAY);GLDEBUG;
 }
 
 void redraw(shared_ptr<TimerEvent> event)
