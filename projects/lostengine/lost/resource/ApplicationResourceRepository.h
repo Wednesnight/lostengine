@@ -3,6 +3,8 @@
 
 #include "lost/resource/Repository.h"
 #include "lost/platform/Platform.h"
+#include "lost/common/Logger.h"
+#include <fstream>
 
 namespace lost
 {
