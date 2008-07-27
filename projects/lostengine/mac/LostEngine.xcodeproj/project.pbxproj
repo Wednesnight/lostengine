@@ -26,10 +26,7 @@
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3ED3A3A60E3886C7000199E7 /* LuaVec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A20E3886C7000199E7 /* LuaVec3.h */; };
 		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
-		EA0F2DF80E37DC4C0001F530 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DF70E37DC4C0001F530 /* Buffer.h */; };
 		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
-		EA0F2E870E381C3D0001F530 /* BufferBase.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E860E381C3D0001F530 /* BufferBase.h */; };
-		EA0F2E890E381C410001F530 /* ElementBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E880E381C410001F530 /* ElementBuffer.h */; };
 		EA24DAEB0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */; };
 		EA24DB0A0E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */; };
 		EA24DB170E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */; };
@@ -38,6 +35,9 @@
 		EA24DC590E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC540E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp */; };
 		EA24DC5A0E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC550E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp */; };
 		EA24DC5B0E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC560E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp */; };
+		EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
+		EA2BC5390E3CAB5300C0A216 /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
+		EA2BC5420E3CAF0B00C0A216 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
 		EA3B94430E04626D00B6423B /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B943D0E04624400B6423B /* libluabind.a */; };
 		EA3B94440E04627100B6423B /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B942E0E04622200B6423B /* liblua.a */; };
 		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
@@ -230,10 +230,7 @@
 		3ED3A3A20E3886C7000199E7 /* LuaVec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaVec3.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0F2DE10E37D68C0001F530 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
-		EA0F2DF70E37DC4C0001F530 /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
 		EA0F2E840E381C390001F530 /* ArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayBuffer.h; sourceTree = "<group>"; };
-		EA0F2E860E381C3D0001F530 /* BufferBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BufferBase.h; sourceTree = "<group>"; };
-		EA0F2E880E381C410001F530 /* ElementBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementBuffer.h; sourceTree = "<group>"; };
 		EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostEventEvent.cpp; sourceTree = "<group>"; };
 		EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostEventEventDispatcher.cpp; sourceTree = "<group>"; };
 		EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationApplication.cpp; sourceTree = "<group>"; };
@@ -242,6 +239,9 @@
 		EA24DC540E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationTimerEvent.cpp; sourceTree = "<group>"; };
 		EA24DC550E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationMouseEvent.cpp; sourceTree = "<group>"; };
 		EA24DC560E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationApplicationEvent.cpp; sourceTree = "<group>"; };
+		EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementArrayBuffer.h; sourceTree = "<group>"; };
+		EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedBuffer.h; sourceTree = "<group>"; };
+		EA2BC5410E3CAF0B00C0A216 /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
 		EA3B94260E04622200B6423B /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_3/mac/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA3B94350E04624300B6423B /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7/mac/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/src/GLee.c; sourceTree = SOURCE_ROOT; };
@@ -589,10 +589,10 @@
 			isa = PBXGroup;
 			children = (
 				3E209BA30E36357500DE6055 /* gl */,
-				EA0F2E860E381C3D0001F530 /* BufferBase.h */,
-				EA0F2DF70E37DC4C0001F530 /* Buffer.h */,
+				EA2BC5410E3CAF0B00C0A216 /* Buffer.h */,
+				EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */,
 				EA0F2E840E381C390001F530 /* ArrayBuffer.h */,
-				EA0F2E880E381C410001F530 /* ElementBuffer.h */,
+				EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */,
 				EA0F2DE10E37D68C0001F530 /* Context.h */,
 				EA3B949D0E04639D00B6423B /* DisplayList.h */,
 				EA3B949E0E04639D00B6423B /* Draw.h */,
@@ -797,12 +797,12 @@
 				3ED3A3A40E3886C7000199E7 /* LuaLSystem.h in Headers */,
 				3ED3A3A60E3886C7000199E7 /* LuaVec3.h in Headers */,
 				EA0F2DE20E37D68C0001F530 /* Context.h in Headers */,
-				EA0F2DF80E37DC4C0001F530 /* Buffer.h in Headers */,
 				EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */,
-				EA0F2E870E381C3D0001F530 /* BufferBase.h in Headers */,
-				EA0F2E890E381C410001F530 /* ElementBuffer.h in Headers */,
 				3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */,
 				3EBEE8900E3A05190055A8D2 /* AABB.h in Headers */,
+				EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */,
+				EA2BC5390E3CAB5300C0A216 /* TypedBuffer.h in Headers */,
+				EA2BC5420E3CAF0B00C0A216 /* Buffer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

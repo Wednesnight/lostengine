@@ -8,9 +8,8 @@
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/common/FpsMeter.h"
-
-#include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
+#include "lost/gl/ElementArrayBuffer.h"
 
 using namespace std;
 using namespace boost;
@@ -23,8 +22,11 @@ using namespace lost::gl::utils;
 using namespace lost::application;
 
 
+typedef unsigned char INDEXTYPE;
+
 FpsMeter fpsMeter;
 shared_ptr<gl::ArrayBuffer<Vec2> > vb;
+shared_ptr<gl::ElementArrayBuffer<INDEXTYPE> > eb;
 
 void init(shared_ptr<Event> event)
 {
@@ -34,14 +36,20 @@ void init(shared_ptr<Event> event)
   Vec2 verts[numVerts];
   verts[0] = Vec2(0,0);
   verts[1] = Vec2(150,200);
-  GLsizeiptr sizeVerts = sizeof(verts);
 
-  DOUT("sizeof(verts): "<<sizeVerts);
-
+  const int numindices = 2;
+  INDEXTYPE indices[numindices];
+  indices[0] = 0;
+  indices[1] = 1;
+  
   vb.reset(new gl::ArrayBuffer<Vec2>);
   vb->bindBufferData(verts, numVerts);
 
+  eb.reset(new gl::ElementArrayBuffer<INDEXTYPE>);
+  eb->bindBufferData(indices, numindices);
+  
   glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+  glEnableClientState(GL_INDEX_ARRAY);GLDEBUG;
 }
 
 void redraw(shared_ptr<TimerEvent> event)
@@ -61,12 +69,15 @@ void redraw(shared_ptr<TimerEvent> event)
   // draw lines
   setColor(whiteColor);
   vb->bindVertexPointer();
-  vb->draw(GL_LINES);
+  eb->bind();
+  eb->drawElements(GL_LINE_STRIP);
+//  eb->unbind();
+//  vb->drawArrays(GL_LINES);
 
   // draw points
   glPointSize(5);
   setColor(redColor);
-  vb->draw(GL_POINTS);
+  vb->drawArrays(GL_POINTS);
   
   fpsMeter.render(200,0,event->passedSec);
   

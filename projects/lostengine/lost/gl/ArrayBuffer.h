@@ -1,20 +1,20 @@
 #ifndef LOST_GL_ARRAYBUFFER_H
 #define LOST_GL_ARRAYBUFFER_H
 
-#include "lost/gl/Buffer.h"
+#include "lost/gl/TypedBuffer.h"
 
 namespace lost
 {
 namespace gl
 {
 template<typename T>
-struct ArrayBuffer : public Buffer<T>
+struct ArrayBuffer : public TypedBuffer<T>
 {
 public:
   
   ArrayBuffer()
   {  
-    Buffer<T>::target = GL_ARRAY_BUFFER;
+    TypedBuffer<T>::target = GL_ARRAY_BUFFER;
   }
   
   virtual ~ArrayBuffer()

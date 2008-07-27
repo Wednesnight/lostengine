@@ -43,6 +43,30 @@ struct TraitsSelector<lost::math::Vec4>
   TraitsSelector() : size(4), type(GL_FLOAT) {}
 };
 
+template<>
+struct TraitsSelector<unsigned char>
+{
+  GLint size;
+  GLenum type;
+  TraitsSelector() : size(1), type(GL_UNSIGNED_BYTE) {}
+};
+
+template<>
+struct TraitsSelector<unsigned short>
+{
+  GLint size;
+  GLenum type;
+  TraitsSelector() : size(2), type(GL_UNSIGNED_SHORT) {}
+};
+
+template<>
+struct TraitsSelector<unsigned int>
+{
+  GLint size;
+  GLenum type;
+  TraitsSelector() : size(4), type(GL_UNSIGNED_INT) {}
+};
+  
 }
 }
 
