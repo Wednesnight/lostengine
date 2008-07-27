@@ -1,5 +1,5 @@
 #include "lost/lua/State.h"
-#include "LSystem.h"
+#include "lost/lsystem/LSystem.h"
 #include <boost/shared_ptr.hpp>
 
 using namespace std;

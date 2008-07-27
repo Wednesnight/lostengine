@@ -1,5 +1,5 @@
 #include "lost/lua/State.h"
-#include "Vec3.h"
+#include "lost/math/Vec3.h"
 #include <boost/shared_ptr.hpp>
 
 using namespace std;
