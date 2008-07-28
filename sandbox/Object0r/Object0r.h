@@ -187,7 +187,6 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     mesh = parser::parse(appInstance->loader->load("cube.obj")->str());
-
     shaderInit();
     bufferInit();
   }
@@ -244,7 +243,7 @@ struct Object0r
     // draw mesh vertices as points
     glPointSize(5);
     setColor(whiteColor);
-    vertexBuffer->draw(GL_POINTS);
+    vertexBuffer->drawArrays(GL_POINTS);
     lightingShader->disable();
     setColor(whiteColor);
     drawAABB(mesh->box);
