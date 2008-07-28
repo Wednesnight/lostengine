@@ -26,7 +26,6 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
 #include "lost/model/Mesh.h"
-#include "lost/model/Parser.h"
 #include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
