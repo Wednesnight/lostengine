@@ -138,7 +138,7 @@ namespace lost
           if (targets & log_console)
             std::cout << entry.rdbuf();
 
-          // callbacks
+/*          // callbacks
           if (targets & log_callback)
             signal( type, msg );
 
@@ -148,7 +148,7 @@ namespace lost
             std::ofstream file( filename.c_str(), std::ios_base::app );
             assert( file.good() );
             file.write( entry.str().c_str(), entry.str().size() );
-          }
+          }*/
         }
       }
 
