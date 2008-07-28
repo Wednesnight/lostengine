@@ -3,9 +3,7 @@
 
 #include "lost/common/DisplayAttributes.h"
 #include "lost/event/EventDispatcher.h"
-#include "lost/application/GlfwAdapter.h"
 #include "lost/application/ResizeEvent.h"
-#include "lost/application/TimerManager.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/gl/Context.h"
@@ -15,6 +13,8 @@ namespace lost
 namespace application
 {
 
+struct ApplicationImpl;  
+  
 struct Application : public event::EventDispatcher
 {
 public:
@@ -28,15 +28,9 @@ public:
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
   lost::gl::Context                     glc;
+
 private:
-  void          init();
-
-  GlfwAdapter   adapter;
-  TimerManager  timerManager;
-  bool          initialised;
-  bool          running;
-
-  void          handleResize(boost::shared_ptr<ResizeEvent> ev);
+  boost::shared_ptr<ApplicationImpl> impl;
 };
 
 extern Application* appInstance;

@@ -1,4 +1,4 @@
-#include "lost/application/TimerManager.h"
+#include "lost/application/glfw/TimerManager.h"
 #include "lost/common/Logger.h"
 
 using namespace std;

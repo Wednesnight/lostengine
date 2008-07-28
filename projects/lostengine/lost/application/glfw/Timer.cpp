@@ -1,6 +1,6 @@
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
-#include "lost/application/TimerManager.h"
+#include "lost/application/glfw/TimerManager.h"
 
 using namespace boost;
 
