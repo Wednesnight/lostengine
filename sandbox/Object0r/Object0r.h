@@ -31,6 +31,8 @@
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
 
+#include "lost/model/loader/DefaultModelLoader.h"
+
 using namespace boost;
 using namespace lost::application;
 using namespace lost::common;
@@ -180,13 +182,17 @@ struct Object0r
   shared_ptr<ShaderProgram>      lightingShader;
   shared_ptr<ArrayBuffer<Vec3> > vertexBuffer;
   
+  shared_ptr<loader::ModelLoader> modelLoader;
+  
   void init(shared_ptr<Event> event)
   {
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
-    mesh = parser::parse(appInstance->loader->load("cube.obj")->str());
+    modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
+    mesh = modelLoader->loadMesh("cube.obj");
+
     shaderInit();
     bufferInit();
   }

@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3E209BA50E36357F00DE6055 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E209BA40E36357F00DE6055 /* Context.cpp */; };
+		3E23E87D0E3DD697007231CD /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8790E3DD697007231CD /* ModelLoader.h */; };
+		3E23E87E0E3DD697007231CD /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87B0E3DD697007231CD /* Parser.h */; };
+		3E23E87F0E3DD697007231CD /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87C0E3DD697007231CD /* ParserOBJ.h */; };
+		3E23E8B40E3DD9EF007231CD /* DefaultModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3EB93D370E37FE2500FF10C9 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D310E37FE2500FF10C9 /* Face.h */; };
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
-		3EB93D390E37FE2500FF10C9 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB93D330E37FE2500FF10C9 /* Parser.cpp */; };
-		3EB93D3A0E37FE2500FF10C9 /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D340E37FE2500FF10C9 /* Parser.h */; };
 		3EB93D3B0E37FE2500FF10C9 /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D350E37FE2500FF10C9 /* Scene.h */; };
 		3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
 		3EB93D800E38043000FF10C9 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB93D7C0E38043000FF10C9 /* Camera.cpp */; };
@@ -211,11 +213,13 @@
 
 /* Begin PBXFileReference section */
 		3E209BA40E36357F00DE6055 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = gl/Context.cpp; sourceTree = "<group>"; };
+		3E23E8790E3DD697007231CD /* ModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLoader.h; path = model/loader/ModelLoader.h; sourceTree = "<group>"; };
+		3E23E87B0E3DD697007231CD /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
+		3E23E87C0E3DD697007231CD /* ParserOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserOBJ.h; sourceTree = "<group>"; };
+		3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultModelLoader.h; path = model/loader/DefaultModelLoader.h; sourceTree = "<group>"; };
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3EB93D310E37FE2500FF10C9 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Face.h; path = model/Face.h; sourceTree = "<group>"; };
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
-		3EB93D330E37FE2500FF10C9 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = model/Parser.cpp; sourceTree = "<group>"; };
-		3EB93D340E37FE2500FF10C9 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = model/Parser.h; sourceTree = "<group>"; };
 		3EB93D350E37FE2500FF10C9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = model/Scene.h; sourceTree = "<group>"; };
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
 		3EB93D7C0E38043000FF10C9 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
@@ -384,13 +388,32 @@
 			name = gl;
 			sourceTree = "<group>";
 		};
+		3E23E87A0E3DD697007231CD /* parser */ = {
+			isa = PBXGroup;
+			children = (
+				3E23E87B0E3DD697007231CD /* Parser.h */,
+				3E23E87C0E3DD697007231CD /* ParserOBJ.h */,
+			);
+			name = parser;
+			path = model/loader/parser;
+			sourceTree = "<group>";
+		};
+		3E5F77560E3DC86200260427 /* loader */ = {
+			isa = PBXGroup;
+			children = (
+				3E23E87A0E3DD697007231CD /* parser */,
+				3E23E8790E3DD697007231CD /* ModelLoader.h */,
+				3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */,
+			);
+			name = loader;
+			sourceTree = "<group>";
+		};
 		3EB93D300E37FE0D00FF10C9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3E5F77560E3DC86200260427 /* loader */,
 				3EB93D310E37FE2500FF10C9 /* Face.h */,
 				3EB93D320E37FE2500FF10C9 /* Mesh.h */,
-				3EB93D330E37FE2500FF10C9 /* Parser.cpp */,
-				3EB93D340E37FE2500FF10C9 /* Parser.h */,
 				3EB93D350E37FE2500FF10C9 /* Scene.h */,
 				3EB93D360E37FE2500FF10C9 /* Vertex.h */,
 			);
@@ -789,7 +812,6 @@
 				EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */,
 				3EB93D370E37FE2500FF10C9 /* Face.h in Headers */,
 				3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */,
-				3EB93D3A0E37FE2500FF10C9 /* Parser.h in Headers */,
 				3EB93D3B0E37FE2500FF10C9 /* Scene.h in Headers */,
 				3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */,
 				3EB93D810E38043000FF10C9 /* Camera.h in Headers */,
@@ -803,6 +825,10 @@
 				EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */,
 				EA2BC5390E3CAB5300C0A216 /* TypedBuffer.h in Headers */,
 				EA2BC5420E3CAF0B00C0A216 /* Buffer.h in Headers */,
+				3E23E87D0E3DD697007231CD /* ModelLoader.h in Headers */,
+				3E23E87E0E3DD697007231CD /* Parser.h in Headers */,
+				3E23E87F0E3DD697007231CD /* ParserOBJ.h in Headers */,
+				3E23E8B40E3DD9EF007231CD /* DefaultModelLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,7 +978,6 @@
 				EA24DC5B0E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp in Sources */,
 				EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */,
 				3E209BA50E36357F00DE6055 /* Context.cpp in Sources */,
-				3EB93D390E37FE2500FF10C9 /* Parser.cpp in Sources */,
 				3EB93D800E38043000FF10C9 /* Camera.cpp in Sources */,
 				3EB93D820E38043000FF10C9 /* mathlib.cpp in Sources */,
 				3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */,

@@ -23,28 +23,40 @@ namespace lost
       lost::math::AABB box;
 
       Mesh(unsigned int inVertexCount, unsigned int inNormalCount)
-      : vertexCount(inVertexCount),
-        normalCount(inNormalCount)
       {
-        vertices.reset(new lost::math::Vec3[vertexCount]);
-        normals.reset(new lost::math::Vec3[normalCount]);
-        clear();
+        setVertexCount(inVertexCount);
+        setNormalCount(inNormalCount);
+      }
+      
+      Mesh()
+      : vertexCount(0),
+        normalCount(0)
+      {
       }
       
       ~Mesh() {}
 
       void clear()
       {
+        clearVertices();
+        clearNormals();
+      }
+
+      void clearVertices()
+      {
         for (unsigned int idx = 0; idx < vertexCount; ++idx)
         {
           vertices[idx].zero();
         }
-        for (unsigned int idx = 0; idx < normalCount; ++idx)
-        {
-          normals[idx].zero();
-        }
       }
-
+      
+      void setVertexCount(unsigned int inCount)
+      {
+        vertexCount = inCount;
+        vertices.reset(new lost::math::Vec3[vertexCount]);
+        clearVertices();
+      }
+      
       void setVertex(unsigned int inIndex, lost::math::Vec3& inVertex)
       {
         if (inIndex < vertexCount)
@@ -57,6 +69,21 @@ namespace lost
           box.size.y = std::max(box.size.y + box.origin.y, inVertex.y) - box.origin.y;
           box.size.z = std::max(box.size.z + box.origin.z, inVertex.z) - box.origin.z;
         }
+      }
+      
+      void clearNormals()
+      {
+        for (unsigned int idx = 0; idx < normalCount; ++idx)
+        {
+          normals[idx].zero();
+        }
+      }
+      
+      void setNormalCount(unsigned int inCount)
+      {
+        normalCount = inCount;
+        normals.reset(new lost::math::Vec3[normalCount]);
+        clearNormals();
       }
       
       void setNormal(unsigned int inIndex, lost::math::Vec3& inNormal)
