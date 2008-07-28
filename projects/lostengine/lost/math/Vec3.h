@@ -13,8 +13,9 @@ struct Vec3
 {
     union
     {
-        struct {float x,y,z;};
-        struct {float r,g,b;};
+      struct {float x,y,z;};
+      struct {float r,g,b;};
+      struct {float v,vt,vn;};
     };
 
 

@@ -43,7 +43,7 @@ namespace lost
             
             MeshAssignType assignType;
             
-            MeshAssign(MeshAssignType inType, Mesh& inMesh, unsigned int& inIndex, DataType& inData)
+            MeshAssign(MeshAssignType inType, Mesh& inMesh, DataType& inData, unsigned int& inIndex)
             : mesh(inMesh),
               index(inIndex),
               data(inData),
@@ -87,13 +87,26 @@ namespace lost
                                                     >> +boost::spirit::space_p >> boost::spirit::real_p
                                                     >> +boost::spirit::space_p >> boost::spirit::real_p
                                                     >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
+            boost::spirit::rule<> facevert_p_count = boost::spirit::int_p
+                                                     >> !(   '/'
+                                                          >>  !(boost::spirit::int_p)
+                                                          >>  !(   '/'
+                                                                >> !(boost::spirit::int_p)
+                                                                )
+                                                          );                   
+            boost::spirit::rule<> face_p_count = boost::spirit::ch_p('f') >> +boost::spirit::space_p
+                                                 >> boost::spirit::list_p(facevert_p_count, +boost::spirit::space_p)
+                                                 >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;                                                       
             boost::spirit::rule<> unknown_p_count = *(boost::spirit::anychar_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
             boost::spirit::rule<> objfile_p_count = *(vertex_p_count[boost::spirit::increment_a(vertexCount)] | 
                                                       normal_p_count[boost::spirit::increment_a(normalCount)] | 
+                                                      face_p_count |
                                                       unknown_p_count);
             
             BOOST_SPIRIT_DEBUG_NODE(vertex_p_count);
             BOOST_SPIRIT_DEBUG_NODE(normal_p_count);
+            BOOST_SPIRIT_DEBUG_NODE(facevert_p_count);
+            BOOST_SPIRIT_DEBUG_NODE(face_p_count);
             BOOST_SPIRIT_DEBUG_NODE(unknown_p_count);
             BOOST_SPIRIT_DEBUG_NODE(objfile_p_count);
             
@@ -116,9 +129,13 @@ namespace lost
             boost::shared_ptr<lost::model::Mesh> result = initMesh(inData);
             if (result)
             {
-              unsigned int     index;
-              lost::math::Vec3 vertex;
-              lost::math::Vec3 normal;
+              unsigned int vertexIdx;
+              unsigned int normalIdx;
+              
+              lost::math::Vec3              vertex;
+              lost::math::Vec3              normal;
+              lost::math::Vec3              faceIdx;
+              std::vector<lost::math::Vec3> face;
               
               boost::spirit::rule<> vertex_p  = boost::spirit::ch_p('v')
                                                 >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(vertex.x)] 
@@ -131,15 +148,30 @@ namespace lost
                                                 >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(normal.y)]
                                                 >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(normal.z)]
                                                 >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
+              boost::spirit::rule<> facevert_p = boost::spirit::int_p[boost::spirit::assign_a(faceIdx.v)]
+                                                 >> !(   '/'
+                                                      >>  !(boost::spirit::int_p[boost::spirit::assign_a(faceIdx.vt)])
+                                                      >>  !(   '/'
+                                                            >> !(boost::spirit::int_p[boost::spirit::assign_a(faceIdx.vn)])
+                                                            )
+                                                      );                   
+              boost::spirit::rule<> face_p = boost::spirit::ch_p('f') >> +boost::spirit::space_p
+              >> boost::spirit::list_p(facevert_p[lost::common::spirithelpers::push_back(face, faceIdx)]
+                                                                                [phoenix::bind(&lost::math::Vec3::zero)(phoenix::var(faceIdx))], +boost::spirit::space_p)
+                                             >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;                                                       
               boost::spirit::rule<> unknown_p = *(boost::spirit::anychar_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-              boost::spirit::rule<> objfile_p = *(vertex_p[MeshAssign<lost::math::Vec3>(MeshAssignTypeVertex, *result, index, vertex)]
+              boost::spirit::rule<> objfile_p = *(vertex_p[MeshAssign<lost::math::Vec3>(MeshAssignTypeVertex, *result, vertex, vertexIdx)]
                                                           [phoenix::bind(&lost::math::Vec3::zero)(phoenix::var(vertex))] |
-                                                  normal_p[MeshAssign<lost::math::Vec3>(MeshAssignTypeNormal, *result, index, normal)]
+                                                  normal_p[MeshAssign<lost::math::Vec3>(MeshAssignTypeNormal, *result, normal, normalIdx)]
                                                           [phoenix::bind(&lost::math::Vec3::zero)(phoenix::var(normal))] |
+                                                  face_p[lost::common::spirithelpers::push_back(result->faces, face)]
+                                                  [phoenix::bind(&std::vector<lost::math::Vec3>::clear)(phoenix::var(face))] |
                                                   unknown_p);
               
               BOOST_SPIRIT_DEBUG_NODE(vertex_p);
               BOOST_SPIRIT_DEBUG_NODE(normal_p);
+              BOOST_SPIRIT_DEBUG_NODE(facevert_p);
+              BOOST_SPIRIT_DEBUG_NODE(face_p);
               BOOST_SPIRIT_DEBUG_NODE(unknown_p);
               BOOST_SPIRIT_DEBUG_NODE(objfile_p);
               

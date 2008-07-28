@@ -1,6 +1,7 @@
 #ifndef LOST_MODEL_MESH_H
 #define LOST_MODEL_MESH_H
 
+#include <vector>
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include "lost/math/Vec3.h"
@@ -17,8 +18,9 @@ namespace lost
       unsigned int vertexCount;
       unsigned int normalCount;
 
-      boost::shared_array<lost::math::Vec3> vertices;
-      boost::shared_array<lost::math::Vec3> normals;
+      boost::shared_array<lost::math::Vec3>       vertices;
+      boost::shared_array<lost::math::Vec3>       normals;
+      std::vector<std::vector<lost::math::Vec3> > faces;
 
       lost::math::AABB box;
 
@@ -40,6 +42,7 @@ namespace lost
       {
         clearVertices();
         clearNormals();
+        clearFaces();
       }
 
       void clearVertices()
@@ -92,6 +95,11 @@ namespace lost
         {
           normals[inIndex] = inNormal;
         }
+      }
+      
+      void clearFaces()
+      {
+        faces.clear();
       }
       
     };
