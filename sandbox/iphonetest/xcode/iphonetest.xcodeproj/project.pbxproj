@@ -14,7 +14,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		EA17DEAE0E3D1EC100E25681 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DEAD0E3D1EC100E25681 /* Platform_Mac.cpp */; };
 		EA17DEB60E3D1F9400E25681 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA17DEB50E3D1F9400E25681 /* init */; };
-		EA17DEC50E3D205200E25681 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DEC40E3D204200E25681 /* libboost.a */; };
 		EA17DEF40E3D21EC00E25681 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DEF30E3D21EC00E25681 /* Logger.cpp */; };
 		EA17DF020E3D229F00E25681 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DF010E3D229600E25681 /* liblua.a */; };
 		EA17DF0C0E3D22B700E25681 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA17DF0B0E3D22AE00E25681 /* libluabind.a */; };
@@ -33,47 +32,48 @@
 		EA17DF760E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF670E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp */; };
 		EA17DF790E3D26C800E25681 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF770E3D26C800E25681 /* LuaVec3.cpp */; };
 		EA17DF7A0E3D26C800E25681 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA17DF780E3D26C800E25681 /* ModuleLoader.cpp */; };
+		EA3D73450E3D396C007280D8 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3D73440E3D3966007280D8 /* libboost.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA17DEC30E3D204200E25681 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libboost.a */;
-			remoteInfo = boost;
-		};
 		EA17DF000E3D229600E25681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA17DEF90E3D229600E25681 /* lua.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* liblua.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = lua;
 		};
 		EA17DF0A0E3D22AE00E25681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libluabind.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = luabind;
 		};
 		EA17DF0D0E3D22C400E25681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* luabind */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = luabind;
 		};
 		EA17DF0F0E3D22C400E25681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA17DEF90E3D229600E25681 /* lua.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* lua */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = lua;
 		};
-		EA17DF110E3D22C400E25681 /* PBXContainerItemProxy */ = {
+		EA3D73430E3D3966007280D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
+			containerPortal = EA3D733C0E3D3966007280D8 /* boost.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libboost.a */;
+			remoteInfo = boost;
+		};
+		EA3D73470E3D3987007280D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3D733C0E3D3966007280D8 /* boost.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D /* boost */;
 			remoteInfo = boost;
@@ -92,7 +92,6 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA17DEAD0E3D1EC100E25681 /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform_Mac.cpp; path = ../../../projects/lostengine/lost/platform/Platform_Mac.cpp; sourceTree = SOURCE_ROOT; };
 		EA17DEB50E3D1F9400E25681 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
-		EA17DEBC0E3D204200E25681 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA17DEF30E3D21EC00E25681 /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Logger.cpp; path = ../../../projects/lostengine/lost/common/Logger.cpp; sourceTree = SOURCE_ROOT; };
 		EA17DEF90E3D229600E25681 /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_3/mac/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7/mac/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -112,6 +111,7 @@
 		EA17DF670E3D26C000E25681 /* LuaLostApplicationTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLostApplicationTimerEvent.cpp; path = ../../../projects/lostengine/lost/lua/LuaLostApplicationTimerEvent.cpp; sourceTree = SOURCE_ROOT; };
 		EA17DF770E3D26C800E25681 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaVec3.cpp; path = ../../../projects/lostengine/lost/lua/LuaVec3.cpp; sourceTree = SOURCE_ROOT; };
 		EA17DF780E3D26C800E25681 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModuleLoader.cpp; path = ../../../projects/lostengine/lost/lua/ModuleLoader.cpp; sourceTree = SOURCE_ROOT; };
+		EA3D733C0E3D3966007280D8 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +119,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3D73450E3D396C007280D8 /* libboost.a in Frameworks */,
 				EA17DF0C0E3D22B700E25681 /* libluabind.a in Frameworks */,
 				EA17DF020E3D229F00E25681 /* liblua.a in Frameworks */,
-				EA17DEC50E3D205200E25681 /* libboost.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 			);
@@ -199,21 +199,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA3D733C0E3D3966007280D8 /* boost.xcodeproj */,
 				EA17DF030E3D22AE00E25681 /* luabind.xcodeproj */,
 				EA17DEF90E3D229600E25681 /* lua.xcodeproj */,
-				EA17DEBC0E3D204200E25681 /* boost.xcodeproj */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EA17DEBD0E3D204200E25681 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA17DEC40E3D204200E25681 /* libboost.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EA17DEFA0E3D229600E25681 /* Products */ = {
@@ -228,6 +220,14 @@
 			isa = PBXGroup;
 			children = (
 				EA17DF0B0E3D22AE00E25681 /* libluabind.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA3D733D0E3D3966007280D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D73440E3D3966007280D8 /* libboost.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,7 +248,7 @@
 			dependencies = (
 				EA17DF0E0E3D22C400E25681 /* PBXTargetDependency */,
 				EA17DF100E3D22C400E25681 /* PBXTargetDependency */,
-				EA17DF120E3D22C400E25681 /* PBXTargetDependency */,
+				EA3D73480E3D3987007280D8 /* PBXTargetDependency */,
 			);
 			name = iphonetest;
 			productName = iphonetest;
@@ -267,8 +267,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA17DEBD0E3D204200E25681 /* Products */;
-					ProjectRef = EA17DEBC0E3D204200E25681 /* boost.xcodeproj */;
+					ProductGroup = EA3D733D0E3D3966007280D8 /* Products */;
+					ProjectRef = EA3D733C0E3D3966007280D8 /* boost.xcodeproj */;
 				},
 				{
 					ProductGroup = EA17DEFA0E3D229600E25681 /* Products */;
@@ -287,13 +287,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA17DEC40E3D204200E25681 /* libboost.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libboost.a;
-			remoteRef = EA17DEC30E3D204200E25681 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		EA17DF010E3D229600E25681 /* liblua.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -306,6 +299,13 @@
 			fileType = archive.ar;
 			path = libluabind.a;
 			remoteRef = EA17DF0A0E3D22AE00E25681 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA3D73440E3D3966007280D8 /* libboost.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libboost.a;
+			remoteRef = EA3D73430E3D3966007280D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -362,10 +362,10 @@
 			name = lua;
 			targetProxy = EA17DF0F0E3D22C400E25681 /* PBXContainerItemProxy */;
 		};
-		EA17DF120E3D22C400E25681 /* PBXTargetDependency */ = {
+		EA3D73480E3D3987007280D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = boost;
-			targetProxy = EA17DF110E3D22C400E25681 /* PBXContainerItemProxy */;
+			targetProxy = EA3D73470E3D3987007280D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
