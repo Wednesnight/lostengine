@@ -4,6 +4,7 @@
 #include "lost/font/BitmapFont.h"
 #include <vector>
 #include <boost/lexical_cast.hpp>
+#include "lost/gl/Utils.h"
 
 namespace lost
 {
