@@ -22,19 +22,40 @@ namespace gl
 
 namespace utils
 {
-  inline std::string getGlErrorAsString(GLenum err)
+  static inline std::string getGlErrorAsString(GLenum err)
   {
-    const char* buf = reinterpret_cast<const char*>(gluErrorString(err));
-    if(buf)
-      return std::string(buf);
-    else
-    {
-      // null pointer most probably means some extension produced an error that standard gluErrorString doesn't know
-      // so we just output a hex number
-      std::ostringstream os;
-      os << "unknown error 0x" << std::hex <<  err << " look it up in your GL headers";
-      return os.str();
-    }
+    // FIXME: we need a cleaner way to handle this, maybe move error handling/debugging to a dedicated header
+    #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+      // there are only a handful of error codes in OpenGL ES, so we switch them by hand
+      std::string result;
+      switch(err)
+      {
+        case GL_NO_ERROR:result="GL_NO_ERROR";break;
+        case GL_INVALID_ENUM:result="GL_INVALID_ENUM";break;
+        case GL_INVALID_VALUE:result="GL_INVALID_VALUE";break;
+        case GL_INVALID_OPERATION:result="GL_INVALID_OPERATION";break;
+        case GL_STACK_OVERFLOW:result="GL_STACK_OVERFLOW";break;
+        case GL_STACK_UNDERFLOW:result="GL_STACK_UNDERFLOW";break;
+        case GL_OUT_OF_MEMORY:result="GL_OUT_OF_MEMORY";break;
+        default:
+          std::ostringstream os;
+          os << "error 0x" << std::hex << err;
+          result = os.str();
+      }
+      return result;
+    #else
+      const char* buf = reinterpret_cast<const char*>(gluErrorString(err));
+      if(buf)
+        return std::string(buf);
+      else
+      {
+        // null pointer most probably means some extension produced an error that standard gluErrorString doesn't know
+        // so we just output a hex number
+        std::ostringstream os;
+        os << "error 0x" << std::hex <<  err;
+        return os.str();
+      }
+    #endif
   }
 
 #define GLDEBUG { GLenum err = glGetError(); if(err != GL_NO_ERROR) {DOUT("GL ERROR:"+lost::gl::utils::getGlErrorAsString(err));};}
@@ -59,8 +80,8 @@ namespace utils
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         double screenAspectRatio = (double)windowWidth/(double)windowHeight;
-        gluPerspective(fovy, screenAspectRatio, znear, zfar);
-        gluLookAt(eye.x,  eye.y,  eye.z,
+        lgluPerspective(fovy, screenAspectRatio, znear, zfar);
+        lgluLookAt(eye.x,  eye.y,  eye.z,
                   at.x,   at.y,   at.z,
                   up.x,   up.y,   up.z);
     }

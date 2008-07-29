@@ -21,7 +21,10 @@ namespace gl
         }
       }*/
 
-
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+  // FIXME: what do we do about these glut bitmap fonts in OpenGL ES? Do we need 
+  // a cut down font drawing engine with built in resources only,
+  // or do we fully rely on truetype rendering?
   /** draw a string at the specified position with a builtin glut font
    * font can be one of the following defines:
    *  GLUT_BITMAP_9_BY_15
@@ -42,7 +45,8 @@ namespace gl
       glutBitmapCharacter(GLUT_BITMAP_8_BY_13, text[i]);
     }
   }
-
+#endif
+  
   inline void setColor(const lost::common::Color& col)
   {
     glColor4f(col.fv[0], col.fv[1], col.fv[2], col.fv[3]); // OpenGL ES compatible
