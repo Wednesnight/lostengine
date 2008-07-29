@@ -11,7 +11,7 @@ struct Context
   Context() {};
   virtual ~Context() {};
   
-  void swapBuffers() {};
+  void swapBuffers();
   
 };
       

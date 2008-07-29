@@ -12,6 +12,8 @@
 #include <boost/scoped_array.hpp>
 #include "lost/common/DisplayAttributes.h"
 
+#include "lost/lgl/lglu.h"
+
 namespace lost
 {
 
@@ -42,7 +44,7 @@ namespace utils
     {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(offset.x, dimension.w-1, offset.y, dimension.h-1);
+        lgluOrtho2D(offset.x, dimension.w-1, offset.y, dimension.h-1);
     }
 
     inline std::string getVersion()
@@ -120,6 +122,8 @@ namespace utils
         throw std::runtime_error("screenshot save failed");
     } 
 
+#ifdef LOST_IPHONE
+#else
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
 
     inline static std::string enum2string(GLenum inVal)
@@ -165,6 +169,7 @@ namespace utils
         default: throw std::runtime_error("enum2string: don't know enum: "+boost::lexical_cast<std::string>(inVal));
       }
     }
+#endif
 }
 
 }

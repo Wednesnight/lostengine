@@ -6,7 +6,7 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
-#include "lost/gl/Context.h"
+#include "lost/application/GLContext.h"
 
 namespace lost
 {
@@ -27,7 +27,7 @@ public:
   common::DisplayAttributes             displayAttributes;
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
-  lost::gl::Context                     glc;
+  lost::application::GLContext          glc;
 
 private:
   boost::shared_ptr<ApplicationImpl> impl;

@@ -45,7 +45,7 @@ namespace gl
 
   inline void setColor(const lost::common::Color& col)
   {
-    glColor4fv(col.fv);
+    glColor4f(col.fv[0], col.fv[1], col.fv[2], col.fv[3]); // OpenGL ES compatible
   }
 
   inline void drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)

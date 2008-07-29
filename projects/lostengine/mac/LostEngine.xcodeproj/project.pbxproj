@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E209BA50E36357F00DE6055 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E209BA40E36357F00DE6055 /* Context.cpp */; };
 		3E23E87D0E3DD697007231CD /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8790E3DD697007231CD /* ModelLoader.h */; };
 		3E23E87E0E3DD697007231CD /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87B0E3DD697007231CD /* Parser.h */; };
 		3E23E87F0E3DD697007231CD /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87C0E3DD697007231CD /* ParserOBJ.h */; };
@@ -95,12 +94,119 @@
 		EA3B96800E046C5400B6423B /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
 		EA3B96810E046C5400B6423B /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
+		EA422D220E3FC86E00C82940 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA422D210E3FC86E00C82940 /* GLContext.cpp */; };
 		EA6710780E3E53B000B961EC /* GlfwAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710720E3E53B000B961EC /* GlfwAdapter.h */; };
 		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
 		EA67107A0E3E53B000B961EC /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710740E3E53B000B961EC /* Application.cpp */; };
 		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710760E3E53B000B961EC /* TimerManager.h */; };
 		EA67107D0E3E53B000B961EC /* GlfwAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */; };
+		EA6711350E3E88D500B961EC /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B942E0E04622200B6423B /* liblua.a */; };
+		EA6711360E3E88E400B961EC /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B943D0E04624400B6423B /* libluabind.a */; };
+		EA6711370E3E88F000B961EC /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6340E2ECFF8006E9E8A /* libfreetype.a */; };
+		EA6711390E3E893C00B961EC /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
+		EA67113A0E3E894600B961EC /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF5430E2EAE70006E9E8A /* libzlib.a */; };
+		EA67113B0E3E895200B961EC /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6A50E2ED7E8006E9E8A /* libboost.a */; };
+		EA67115E0E3E89DB00B961EC /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
+		EA67115F0E3E89DB00B961EC /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94680E04639D00B6423B /* Timer.h */; };
+		EA6711600E3E89DB00B961EC /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
+		EA6711610E3E89DB00B961EC /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
+		EA6711620E3E89DB00B961EC /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977F0E15C30400B28BF6 /* KeyEvent.h */; };
+		EA6711630E3E89DB00B961EC /* ResizeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */; };
+		EA6711640E3E89DB00B961EC /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
+		EA6711650E3E89DB00B961EC /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946A0E04639D00B6423B /* Bitmap.h */; };
+		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
+		EA6711670E3E89DB00B961EC /* BitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946B0E04639D00B6423B /* BitmapLoader.h */; };
+		EA6711680E3E89DB00B961EC /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB93D7C0E38043000FF10C9 /* Camera.cpp */; };
+		EA6711690E3E89DB00B961EC /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D7D0E38043000FF10C9 /* Camera.h */; };
+		EA67116A0E3E89DB00B961EC /* mathlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB93D7E0E38043000FF10C9 /* mathlib.cpp */; };
+		EA67116B0E3E89DB00B961EC /* mathlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D7F0E38043000FF10C9 /* mathlib.h */; };
+		EA67116C0E3E89DB00B961EC /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946D0E04639D00B6423B /* Color.h */; };
+		EA67116D0E3E89DB00B961EC /* DisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946F0E04639D00B6423B /* DisplayAttributes.h */; };
+		EA67116E0E3E89DB00B961EC /* FpsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94710E04639D00B6423B /* FpsMeter.h */; };
+		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
+		EA6711700E3E89DB00B961EC /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94730E04639D00B6423B /* Logger.h */; };
+		EA6711710E3E89DB00B961EC /* NullDeleter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94740E04639D00B6423B /* NullDeleter.h */; };
+		EA6711720E3E89DB00B961EC /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
+		EA6711730E3E89DB00B961EC /* Profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94760E04639D00B6423B /* Profiler.h */; };
+		EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
+		EA6711750E3E89DB00B961EC /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
+		EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
+		EA6711770E3E89DB00B961EC /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
+		EA6711780E3E89DB00B961EC /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
+		EA6711790E3E89DB00B961EC /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94980E04639D00B6423B /* Face.h */; };
+		EA67117A0E3E89DB00B961EC /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94990E04639D00B6423B /* Glyph.h */; };
+		EA67117B0E3E89DB00B961EC /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949A0E04639D00B6423B /* Library.h */; };
+		EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
+		EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
+		EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
+		EA6711800E3E89DB00B961EC /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
+		EA6711810E3E89DB00B961EC /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
+		EA6711820E3E89DB00B961EC /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
+		EA6711830E3E89DB00B961EC /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
+		EA6711840E3E89DB00B961EC /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
+		EA6711850E3E89DB00B961EC /* FragmentShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949F0E04639D00B6423B /* FragmentShader.h */; };
+		EA6711860E3E89DB00B961EC /* FrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A00E04639D00B6423B /* FrameBuffer.h */; };
+		EA6711870E3E89DB00B961EC /* gl.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A10E04639D00B6423B /* gl.h */; };
+		EA6711880E3E89DB00B961EC /* PushAttrib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A20E04639D00B6423B /* PushAttrib.h */; };
+		EA6711890E3E89DB00B961EC /* PushClientAttrib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A30E04639D00B6423B /* PushClientAttrib.h */; };
+		EA67118A0E3E89DB00B961EC /* RenderBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A40E04639D00B6423B /* RenderBuffer.h */; };
+		EA67118B0E3E89DB00B961EC /* Scissor.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A50E04639D00B6423B /* Scissor.h */; };
+		EA67118C0E3E89DB00B961EC /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A60E04639D00B6423B /* Shader.h */; };
+		EA67118D0E3E89DB00B961EC /* ShaderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A80E04639D00B6423B /* ShaderHelper.h */; };
+		EA67118E0E3E89DB00B961EC /* ShaderProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AA0E04639D00B6423B /* ShaderProgram.h */; };
+		EA67118F0E3E89DB00B961EC /* Texture.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AB0E04639D00B6423B /* Texture.h */; };
+		EA6711900E3E89DB00B961EC /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
+		EA6711910E3E89DB00B961EC /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AC0E04639D00B6423B /* Utils.h */; };
+		EA6711920E3E89DB00B961EC /* VertexShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94AD0E04639D00B6423B /* VertexShader.h */; };
+		EA6711930E3E89DB00B961EC /* LSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E20E04639D00B6423B /* LSystem.h */; };
+		EA6711940E3E89DB00B961EC /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E40E04639D00B6423B /* lua.h */; };
+		EA6711950E3E89DB00B961EC /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94E50E04639D00B6423B /* State.h */; };
+		EA6711960E3E89DB00B961EC /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
+		EA6711970E3E89DB00B961EC /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
+		EA6711980E3E89DB00B961EC /* LuaBindings.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */; };
+		EA6711990E3E89DB00B961EC /* LuaLostApplicationApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */; };
+		EA67119A0E3E89DB00B961EC /* LuaLostApplicationResizeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC520E2AC261007AFAB0 /* LuaLostApplicationResizeEvent.cpp */; };
+		EA67119B0E3E89DB00B961EC /* LuaLostApplicationKeyEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC530E2AC261007AFAB0 /* LuaLostApplicationKeyEvent.cpp */; };
+		EA67119C0E3E89DB00B961EC /* LuaLostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC540E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp */; };
+		EA67119D0E3E89DB00B961EC /* LuaLostApplicationMouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC550E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp */; };
+		EA67119E0E3E89DB00B961EC /* LuaLostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DC560E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp */; };
+		EA67119F0E3E89DB00B961EC /* LuaLostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */; };
+		EA6711A00E3E89DB00B961EC /* LuaLostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */; };
+		EA6711A10E3E89DB00B961EC /* LuaLostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */; };
+		EA6711A20E3E89DB00B961EC /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */; };
+		EA6711A30E3E89DB00B961EC /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */; };
+		EA6711A40E3E89DB00B961EC /* LuaLostEventEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */; };
+		EA6711A50E3E89DB00B961EC /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
+		EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */; };
+		EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
+		EA6711A80E3E89DB00B961EC /* LuaLSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A00E3886C7000199E7 /* LuaLSystem.h */; };
+		EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
+		EA6711AA0E3E89DB00B961EC /* LuaVec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A20E3886C7000199E7 /* LuaVec3.h */; };
+		EA6711AB0E3E89DB00B961EC /* AABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEE88F0E3A05190055A8D2 /* AABB.h */; };
+		EA6711AC0E3E89DB00B961EC /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96740E046C5400B6423B /* Generator.h */; };
+		EA6711AD0E3E89DB00B961EC /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
+		EA6711AE0E3E89DB00B961EC /* Matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96760E046C5400B6423B /* Matrix.h */; };
+		EA6711AF0E3E89DB00B961EC /* Rect.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96770E046C5400B6423B /* Rect.h */; };
+		EA6711B00E3E89DB00B961EC /* Vec2.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96780E046C5400B6423B /* Vec2.h */; };
+		EA6711B10E3E89DB00B961EC /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
+		EA6711B20E3E89DB00B961EC /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
+		EA6711B30E3E89DB00B961EC /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87B0E3DD697007231CD /* Parser.h */; };
+		EA6711B40E3E89DB00B961EC /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87C0E3DD697007231CD /* ParserOBJ.h */; };
+		EA6711B50E3E89DB00B961EC /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8790E3DD697007231CD /* ModelLoader.h */; };
+		EA6711B60E3E89DB00B961EC /* DefaultModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */; };
+		EA6711B70E3E89DB00B961EC /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D310E37FE2500FF10C9 /* Face.h */; };
+		EA6711B80E3E89DB00B961EC /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
+		EA6711B90E3E89DB00B961EC /* Scene.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D350E37FE2500FF10C9 /* Scene.h */; };
+		EA6711BA0E3E89DB00B961EC /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
+		EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
+		EA6711BC0E3E89DB00B961EC /* Platform.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94FC0E04639D00B6423B /* Platform.h */; };
+		EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
+		EA6711BE0E3E89DB00B961EC /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
+		EA6711BF0E3E89DB00B961EC /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
+		EA6711C00E3E89DB00B961EC /* File.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95010E04639D00B6423B /* File.h */; };
+		EA6711C10E3E89DB00B961EC /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95020E04639D00B6423B /* Loader.h */; };
+		EA6711C20E3E89DB00B961EC /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95040E04639D00B6423B /* Repository.h */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF5430E2EAE70006E9E8A /* libzlib.a */; };
@@ -167,6 +273,41 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = lua;
 		};
+		EA67112B0E3E88A800B961EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = boost;
+		};
+		EA67112D0E3E88A800B961EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = luabind;
+		};
+		EA67112F0E3E88A800B961EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = zlib;
+		};
+		EA6711310E3E88A800B961EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = lua;
+		};
+		EA6711330E3E88A800B961EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = freetype;
+		};
 		EA7CF5420E2EAE70006E9E8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
@@ -212,7 +353,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E209BA40E36357F00DE6055 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = gl/Context.cpp; sourceTree = "<group>"; };
 		3E23E8790E3DD697007231CD /* ModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLoader.h; path = model/loader/ModelLoader.h; sourceTree = "<group>"; };
 		3E23E87B0E3DD697007231CD /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		3E23E87C0E3DD697007231CD /* ParserOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserOBJ.h; sourceTree = "<group>"; };
@@ -301,12 +441,14 @@
 		EA3B96790E046C5400B6423B /* Vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3.h; sourceTree = "<group>"; };
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
+		EA422D210E3FC86E00C82940 /* GLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLContext.cpp; path = glfw/GLContext.cpp; sourceTree = "<group>"; };
 		EA6710720E3E53B000B961EC /* GlfwAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlfwAdapter.h; path = glfw/GlfwAdapter.h; sourceTree = "<group>"; };
 		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
 		EA6710740E3E53B000B961EC /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6710760E3E53B000B961EC /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerManager.h; path = glfw/TimerManager.h; sourceTree = "<group>"; };
 		EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlfwAdapter.cpp; path = glfw/GlfwAdapter.cpp; sourceTree = "<group>"; };
+		EA6711250E3E885300B961EC /* libLostEngine-iPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-iPhone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/mac/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -344,6 +486,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EA6711230E3E885300B961EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA67113B0E3E895200B961EC /* libboost.a in Frameworks */,
+				EA67113A0E3E894600B961EC /* libzlib.a in Frameworks */,
+				EA6711360E3E88E400B961EC /* libluabind.a in Frameworks */,
+				EA6711350E3E88D500B961EC /* liblua.a in Frameworks */,
+				EA6711370E3E88F000B961EC /* libfreetype.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -376,16 +530,9 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC046055464E500DB518D /* libLostEngine.a */,
+				EA6711250E3E885300B961EC /* libLostEngine-iPhone.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3E209BA30E36357500DE6055 /* gl */ = {
-			isa = PBXGroup;
-			children = (
-				3E209BA40E36357F00DE6055 /* Context.cpp */,
-			);
-			name = gl;
 			sourceTree = "<group>";
 		};
 		3E23E87A0E3DD697007231CD /* parser */ = {
@@ -607,7 +754,6 @@
 		EA3B949C0E04639D00B6423B /* gl */ = {
 			isa = PBXGroup;
 			children = (
-				3E209BA30E36357500DE6055 /* gl */,
 				EA2BC5410E3CAF0B00C0A216 /* Buffer.h */,
 				EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */,
 				EA0F2E840E381C390001F530 /* ArrayBuffer.h */,
@@ -720,6 +866,7 @@
 			isa = PBXGroup;
 			children = (
 				EA6710740E3E53B000B961EC /* Application.cpp */,
+				EA422D210E3FC86E00C82940 /* GLContext.cpp */,
 				EA6710720E3E53B000B961EC /* GlfwAdapter.h */,
 				EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */,
 				EA6710750E3E53B000B961EC /* Timer.cpp */,
@@ -848,6 +995,89 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EA6711210E3E885300B961EC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA67115E0E3E89DB00B961EC /* Application.h in Headers */,
+				EA67115F0E3E89DB00B961EC /* Timer.h in Headers */,
+				EA6711600E3E89DB00B961EC /* TimerEvent.h in Headers */,
+				EA6711610E3E89DB00B961EC /* MouseEvent.h in Headers */,
+				EA6711620E3E89DB00B961EC /* KeyEvent.h in Headers */,
+				EA6711630E3E89DB00B961EC /* ResizeEvent.h in Headers */,
+				EA6711640E3E89DB00B961EC /* ApplicationEvent.h in Headers */,
+				EA6711650E3E89DB00B961EC /* Bitmap.h in Headers */,
+				EA6711670E3E89DB00B961EC /* BitmapLoader.h in Headers */,
+				EA6711690E3E89DB00B961EC /* Camera.h in Headers */,
+				EA67116B0E3E89DB00B961EC /* mathlib.h in Headers */,
+				EA67116C0E3E89DB00B961EC /* Color.h in Headers */,
+				EA67116D0E3E89DB00B961EC /* DisplayAttributes.h in Headers */,
+				EA67116E0E3E89DB00B961EC /* FpsMeter.h in Headers */,
+				EA6711700E3E89DB00B961EC /* Logger.h in Headers */,
+				EA6711710E3E89DB00B961EC /* NullDeleter.h in Headers */,
+				EA6711730E3E89DB00B961EC /* Profiler.h in Headers */,
+				EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */,
+				EA6711750E3E89DB00B961EC /* Event.h in Headers */,
+				EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */,
+				EA6711770E3E89DB00B961EC /* BitmapFont.h in Headers */,
+				EA6711780E3E89DB00B961EC /* Font.h in Headers */,
+				EA6711790E3E89DB00B961EC /* Face.h in Headers */,
+				EA67117A0E3E89DB00B961EC /* Glyph.h in Headers */,
+				EA67117B0E3E89DB00B961EC /* Library.h in Headers */,
+				EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */,
+				EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */,
+				EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */,
+				EA6711800E3E89DB00B961EC /* ArrayBuffer.h in Headers */,
+				EA6711810E3E89DB00B961EC /* ElementArrayBuffer.h in Headers */,
+				EA6711820E3E89DB00B961EC /* Context.h in Headers */,
+				EA6711830E3E89DB00B961EC /* DisplayList.h in Headers */,
+				EA6711840E3E89DB00B961EC /* Draw.h in Headers */,
+				EA6711850E3E89DB00B961EC /* FragmentShader.h in Headers */,
+				EA6711860E3E89DB00B961EC /* FrameBuffer.h in Headers */,
+				EA6711870E3E89DB00B961EC /* gl.h in Headers */,
+				EA6711880E3E89DB00B961EC /* PushAttrib.h in Headers */,
+				EA6711890E3E89DB00B961EC /* PushClientAttrib.h in Headers */,
+				EA67118A0E3E89DB00B961EC /* RenderBuffer.h in Headers */,
+				EA67118B0E3E89DB00B961EC /* Scissor.h in Headers */,
+				EA67118C0E3E89DB00B961EC /* Shader.h in Headers */,
+				EA67118D0E3E89DB00B961EC /* ShaderHelper.h in Headers */,
+				EA67118E0E3E89DB00B961EC /* ShaderProgram.h in Headers */,
+				EA67118F0E3E89DB00B961EC /* Texture.h in Headers */,
+				EA6711900E3E89DB00B961EC /* TraitsSelector.h in Headers */,
+				EA6711910E3E89DB00B961EC /* Utils.h in Headers */,
+				EA6711920E3E89DB00B961EC /* VertexShader.h in Headers */,
+				EA6711930E3E89DB00B961EC /* LSystem.h in Headers */,
+				EA6711940E3E89DB00B961EC /* lua.h in Headers */,
+				EA6711950E3E89DB00B961EC /* State.h in Headers */,
+				EA6711960E3E89DB00B961EC /* ModuleLoader.h in Headers */,
+				EA6711980E3E89DB00B961EC /* LuaBindings.h in Headers */,
+				EA6711A80E3E89DB00B961EC /* LuaLSystem.h in Headers */,
+				EA6711AA0E3E89DB00B961EC /* LuaVec3.h in Headers */,
+				EA6711AB0E3E89DB00B961EC /* AABB.h in Headers */,
+				EA6711AC0E3E89DB00B961EC /* Generator.h in Headers */,
+				EA6711AD0E3E89DB00B961EC /* lmath.h in Headers */,
+				EA6711AE0E3E89DB00B961EC /* Matrix.h in Headers */,
+				EA6711AF0E3E89DB00B961EC /* Rect.h in Headers */,
+				EA6711B00E3E89DB00B961EC /* Vec2.h in Headers */,
+				EA6711B10E3E89DB00B961EC /* Vec3.h in Headers */,
+				EA6711B20E3E89DB00B961EC /* Vec4.h in Headers */,
+				EA6711B30E3E89DB00B961EC /* Parser.h in Headers */,
+				EA6711B40E3E89DB00B961EC /* ParserOBJ.h in Headers */,
+				EA6711B50E3E89DB00B961EC /* ModelLoader.h in Headers */,
+				EA6711B60E3E89DB00B961EC /* DefaultModelLoader.h in Headers */,
+				EA6711B70E3E89DB00B961EC /* Face.h in Headers */,
+				EA6711B80E3E89DB00B961EC /* Mesh.h in Headers */,
+				EA6711B90E3E89DB00B961EC /* Scene.h in Headers */,
+				EA6711BA0E3E89DB00B961EC /* Vertex.h in Headers */,
+				EA6711BC0E3E89DB00B961EC /* Platform.h in Headers */,
+				EA6711BE0E3E89DB00B961EC /* DefaultLoader.h in Headers */,
+				EA6711BF0E3E89DB00B961EC /* ApplicationResourceRepository.h in Headers */,
+				EA6711C00E3E89DB00B961EC /* File.h in Headers */,
+				EA6711C10E3E89DB00B961EC /* Loader.h in Headers */,
+				EA6711C20E3E89DB00B961EC /* Repository.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -872,6 +1102,28 @@
 			name = LostEngine;
 			productName = LostEngine;
 			productReference = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EA6711240E3E885300B961EC /* LostEngine-iPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA67112A0E3E889B00B961EC /* Build configuration list for PBXNativeTarget "LostEngine-iPhone" */;
+			buildPhases = (
+				EA6711210E3E885300B961EC /* Headers */,
+				EA6711220E3E885300B961EC /* Sources */,
+				EA6711230E3E885300B961EC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA67112C0E3E88A800B961EC /* PBXTargetDependency */,
+				EA67112E0E3E88A800B961EC /* PBXTargetDependency */,
+				EA6711300E3E88A800B961EC /* PBXTargetDependency */,
+				EA6711320E3E88A800B961EC /* PBXTargetDependency */,
+				EA6711340E3E88A800B961EC /* PBXTargetDependency */,
+			);
+			name = "LostEngine-iPhone";
+			productName = "LostEngine-iPhone";
+			productReference = EA6711250E3E885300B961EC /* libLostEngine-iPhone.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -913,6 +1165,7 @@
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* LostEngine */,
+				EA6711240E3E885300B961EC /* LostEngine-iPhone */,
 			);
 		};
 /* End PBXProject section */
@@ -989,7 +1242,6 @@
 				EA24DC5A0E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp in Sources */,
 				EA24DC5B0E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp in Sources */,
 				EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */,
-				3E209BA50E36357F00DE6055 /* Context.cpp in Sources */,
 				3EB93D800E38043000FF10C9 /* Camera.cpp in Sources */,
 				3EB93D820E38043000FF10C9 /* mathlib.cpp in Sources */,
 				3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */,
@@ -998,6 +1250,39 @@
 				EA67107A0E3E53B000B961EC /* Application.cpp in Sources */,
 				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
 				EA67107D0E3E53B000B961EC /* GlfwAdapter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA6711220E3E885300B961EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6711390E3E893C00B961EC /* stb_image.c in Sources */,
+				EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */,
+				EA6711680E3E89DB00B961EC /* Camera.cpp in Sources */,
+				EA67116A0E3E89DB00B961EC /* mathlib.cpp in Sources */,
+				EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */,
+				EA6711720E3E89DB00B961EC /* Profiler.cpp in Sources */,
+				EA6711970E3E89DB00B961EC /* ModuleLoader.cpp in Sources */,
+				EA6711990E3E89DB00B961EC /* LuaLostApplicationApplication.cpp in Sources */,
+				EA67119A0E3E89DB00B961EC /* LuaLostApplicationResizeEvent.cpp in Sources */,
+				EA67119B0E3E89DB00B961EC /* LuaLostApplicationKeyEvent.cpp in Sources */,
+				EA67119C0E3E89DB00B961EC /* LuaLostApplicationTimerEvent.cpp in Sources */,
+				EA67119D0E3E89DB00B961EC /* LuaLostApplicationMouseEvent.cpp in Sources */,
+				EA67119E0E3E89DB00B961EC /* LuaLostApplicationApplicationEvent.cpp in Sources */,
+				EA67119F0E3E89DB00B961EC /* LuaLostCommonDisplayAttributes.cpp in Sources */,
+				EA6711A00E3E89DB00B961EC /* LuaLostBitmapBitmapLoader.cpp in Sources */,
+				EA6711A10E3E89DB00B961EC /* LuaLostBitmapBitmap.cpp in Sources */,
+				EA6711A20E3E89DB00B961EC /* LuaLostCommonLog.cpp in Sources */,
+				EA6711A30E3E89DB00B961EC /* LuaLostEventEvent.cpp in Sources */,
+				EA6711A40E3E89DB00B961EC /* LuaLostEventEventDispatcher.cpp in Sources */,
+				EA6711A50E3E89DB00B961EC /* LuaLostResourceLoader.cpp in Sources */,
+				EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */,
+				EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */,
+				EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */,
+				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
+				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
+				EA422D220E3FC86E00C82940 /* GLContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,6 +1303,31 @@
 			isa = PBXTargetDependency;
 			name = lua;
 			targetProxy = EA3B94410E04626000B6423B /* PBXContainerItemProxy */;
+		};
+		EA67112C0E3E88A800B961EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = boost;
+			targetProxy = EA67112B0E3E88A800B961EC /* PBXContainerItemProxy */;
+		};
+		EA67112E0E3E88A800B961EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = luabind;
+			targetProxy = EA67112D0E3E88A800B961EC /* PBXContainerItemProxy */;
+		};
+		EA6711300E3E88A800B961EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = zlib;
+			targetProxy = EA67112F0E3E88A800B961EC /* PBXContainerItemProxy */;
+		};
+		EA6711320E3E88A800B961EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = lua;
+			targetProxy = EA6711310E3E88A800B961EC /* PBXContainerItemProxy */;
+		};
+		EA6711340E3E88A800B961EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = freetype;
+			targetProxy = EA6711330E3E88A800B961EC /* PBXContainerItemProxy */;
 		};
 		EA7CF5460E2EAE9E006E9E8A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1125,6 +1435,32 @@
 			};
 			name = Release;
 		};
+		EA6711260E3E885300B961EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = LOST_IPHONE;
+				PREBINDING = NO;
+				PRODUCT_NAME = "LostEngine-iPhone";
+			};
+			name = Debug;
+		};
+		EA6711270E3E885300B961EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = "LostEngine-iPhone";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1142,6 +1478,15 @@
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
 				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA67112A0E3E889B00B961EC /* Build configuration list for PBXNativeTarget "LostEngine-iPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA6711260E3E885300B961EC /* Debug */,
+				EA6711270E3E885300B961EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
