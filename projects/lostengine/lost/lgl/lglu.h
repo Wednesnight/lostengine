@@ -1,19 +1,14 @@
-#ifndef LOST_GL_LGLU_H
-#define LOST_GL_LGLU_H
+#ifndef LOST_LGL_LGLU_H
+#define LOST_LGL_LGLU_H
 
-namespace lost
-{
-namespace gl
-{
-  void lgluOrtho2D(GLdouble left,
-              GLdouble right,
-              GLdouble bottom,
-              GLdouble top)
-  {
-    glOrtho(left, right, bottom, top, -1.0, 1-0);
-  }
-}
-}
+#include "lost/lgl/lgl.h"
 
+void lgluOrtho2D(GLfloat left,
+            GLfloat right,
+            GLfloat bottom,
+            GLfloat top)
+{
+  lglOrtho(left, right, bottom, top, -1.0, 1.0);
+}
 
 #endif

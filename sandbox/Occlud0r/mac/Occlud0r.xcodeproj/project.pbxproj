@@ -25,15 +25,22 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B98360E0484DA00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA3B98480E0484EF00B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B98360E0484DA00B6423B /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
+		};
+		EA422D900E3FCF3800C82940 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B98360E0484DA00B6423B /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iPhone.a */;
+			remoteInfo = "LostEngine-iPhone";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -127,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				EA3B98460E0484DA00B6423B /* libLostEngine.a */,
+				EA422D910E3FCF3800C82940 /* libLostEngine-iPhone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,6 +190,13 @@
 			fileType = archive.ar;
 			path = libLostEngine.a;
 			remoteRef = EA3B98450E0484DA00B6423B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA422D910E3FCF3800C82940 /* libLostEngine-iPhone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-iPhone.a";
+			remoteRef = EA422D900E3FCF3800C82940 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -292,6 +307,8 @@
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

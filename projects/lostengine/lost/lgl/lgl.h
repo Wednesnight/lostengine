@@ -12,7 +12,9 @@
 #include "lost/gl/gl.h"
 
 #if defined(TARGET_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
-# include "lost/gl/lgl_gles.h"
+# include "lost/lgl/lgl_gles.h"
 #else
-# include "lost/gl/lgl_gl.h"
+# include "lost/lgl/lgl_gl.h"
 #endif
+
+#endif 

@@ -123,7 +123,7 @@ struct Controller
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
     fpsmeter.render( appInstance->displayAttributes.width - (fpsmeter.width + 10), 0, event->passedSec );
-    glfwSwapBuffers();
+    appInstance->glc.swapBuffers();
   }
 };
 
