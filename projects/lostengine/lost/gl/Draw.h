@@ -54,18 +54,28 @@ namespace gl
 
   inline void drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
   {
-    glBegin(GL_LINES);
-    glVertex2f(start.x,start.y);
-    glVertex2f(end.x, end.y);
-    glEnd();
+    float p[4];
+    p[0] = start.x;
+    p[1] = start.y;
+    p[2] = end.x;
+    p[3] = end.y;
+    
+    glVertexPointer(2, GL_FLOAT, 0, p);
+    glDrawArrays(GL_LINES, 0,2);    
   }
 
   inline void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
   {
-    glBegin(GL_LINES);
-    glVertex3f(start.x,start.y, start.z);
-    glVertex3f(end.x, end.y, end.z);
-    glEnd();
+    float p[6];
+    p[0] = start.x;
+    p[1] = start.y;
+    p[2] = start.z;
+    p[3] = end.x;
+    p[4] = end.y;
+    p[5] = end.z;
+    
+    glVertexPointer(3, GL_FLOAT, 0, p);
+    glDrawArrays(GL_LINES, 0,2);    
   }
   
   inline void drawRectOutline(const lost::math::Rect& rect)

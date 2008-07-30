@@ -235,6 +235,8 @@ struct Object0r
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
     
+    glEnableClientState(GL_VERTEX_ARRAY);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
@@ -248,7 +250,9 @@ struct Object0r
     // draw mesh vertices as points
     glPointSize(5);
     setColor(whiteColor);
+    vertexBuffer->bindVertexPointer();
     vertexBuffer->drawArrays(GL_POINTS);
+    vertexBuffer->unbind();
     lightingShader->disable();
     setColor(whiteColor);
     drawAABB(mesh->box);
