@@ -112,75 +112,39 @@ namespace gl
   
   inline void drawAABB(const lost::math::AABB& box)
   {
-    glBegin(GL_LINES);
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
-    
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
-    
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z);
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
-    
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z);
-    
-    glVertex3f(box.origin.x, box.origin.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y, box.origin.z);
-    
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z);
-    glVertex3f(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z);
-    glEnd();    
+    drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z), math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z));    
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z), math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z));
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z), math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z));    
+    drawLine(math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z), math::Vec3(box.origin.x, box.origin.y, box.origin.z));
+    drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z),math::Vec3(box.origin.x, box.origin.y, box.origin.z + box.size.z));    
+    drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z + box.size.z), math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z));    
+    drawLine(math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z), math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z));    
+    drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z + box.size.z), math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z));
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z), math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z));
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z), math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z + box.size.z));
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z + box.size.z),math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z));
+    drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z + box.size.z),math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z));
   }
   
   inline void drawAxes(const lost::math::Vec3& length)
   {
     // Draw the positive side of the lines x,y,z
-    glBegin(GL_LINES);
     setColor(lost::common::greenColor);         // Green for x axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(length.x, 0.0f, 0.0f);
+    drawLine(math::Vec3(0.0f, 0.0f, 0.0f), math::Vec3(length.x, 0.0f, 0.0f));
     setColor(lost::common::redColor);           // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, length.y, 0.0f);
+    drawLine(math::Vec3(0.0f, 0.0f, 0.0f), math::Vec3(0.0f, length.y, 0.0f));
     setColor(lost::common::blueColor);          // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, length.z);
-    glEnd();
+    drawLine(math::Vec3(0.0f, 0.0f, 0.0f), math::Vec3(0.0f, 0.0f, length.z));
     
-    // Dotted lines for the negative sides of x,y,z coordinates
-    glEnable(GL_LINE_STIPPLE);                  // Enable line stipple to use a dotted pattern for the lines
-    glLineStipple(1, 0x0101);                   // Dotted stipple pattern for the lines
-    glBegin(GL_LINES);
-    setColor(lost::common::greenColor);         // Green for x axis
-    glVertex3f(-length.x, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    setColor(lost::common::redColor);           // Red for y axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, -length.y, 0.0f);
-    setColor(lost::common::blueColor);          // Blue for z axis
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glVertex3f(0.0f, 0.0f, -length.z);
-    glEnd();
-    glDisable(GL_LINE_STIPPLE);                 // Disable the line stipple
+    // transparent lines for the negative sides of x,y,z coordinates
+    // this is kinda stupid, but OpenGL ES doesn't have line stippling anymore
+    float a = .15f;
+    glColor4f(0,1,0,a);         // Green for x axis
+    drawLine(lost::math::Vec3(-length.x, 0.0f, 0.0f), lost::math::Vec3(0.0f, 0.0f, 0.0f));
+    glColor4f(1,0,0,a);           // Red for y axis
+    drawLine(lost::math::Vec3(0.0f, 0.0f, 0.0f), lost::math::Vec3(0.0f, -length.y, 0.0f));
+    glColor4f(0,0,1,a);          // Blue for z axis
+    drawLine(lost::math::Vec3(0.0f, 0.0f, 0.0f), lost::math::Vec3(0.0f, 0.0f, -length.z));
   }
   
 }
