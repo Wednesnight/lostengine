@@ -88,36 +88,55 @@ namespace gl
 
   inline void drawRectFilled(const lost::math::Rect& rect)
   {
-    glBegin(GL_QUADS);
-    glVertex2f(rect.x, rect.y);
-    glVertex2f(rect.x+rect.width-1, rect.y);
-    glVertex2f(rect.x+rect.width-1, rect.y+rect.height-1);
-    glVertex2f(rect.x, rect.y+rect.height-1);
-    glEnd();
+    // points
+    lost::math::Vec2 bl(rect.x, rect.y);
+    lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
+    lost::math::Vec2 tr(rect.x+rect.width-1, rect.y+rect.height-1);
+    lost::math::Vec2 tl(rect.x, rect.y+rect.height-1);
+    
+    float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
+    // indices for 2 triangles, first upper left, then lower right
+    GLubyte idx[] = {0,2,3,0,1,2};
+
+    glVertexPointer(2,GL_FLOAT,0,verts);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx);    
   }
   
   // don't forget glEnable(GL_TEXTURE_2D);
   // rect is drawn counterclockwise
+  // requires vertex arrays, texture arrays, index arrays
+  // FIXME: needs serious optimisation/rethinking, but at least it works
   inline void drawRectTextured(const lost::math::Rect& rect, const lost::gl::Texture& tex, const lost::common::Color& col = lost::common::whiteColor, bool flip=true)
   {
     setColor(col);
     tex.bind();
-    glBegin(GL_QUADS);
-    if(!flip)
-    {
-      glTexCoord2f(0, 0);glVertex2f(rect.x, rect.y);
-      glTexCoord2f(1, 0);glVertex2f(rect.x+rect.width-1, rect.y);
-      glTexCoord2f(1, 1);glVertex2f(rect.x+rect.width-1, rect.y+rect.height-1);
-      glTexCoord2f(0, 1);glVertex2f(rect.x, rect.y+rect.height-1);
-    }
+
+    // points
+    lost::math::Vec2 bl(rect.x, rect.y);
+    lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
+    lost::math::Vec2 tr(rect.x+rect.width-1, rect.y+rect.height-1);
+    lost::math::Vec2 tl(rect.x, rect.y+rect.height-1);
+    
+    // texcoords
+    lost::math::Vec2 tbl(0,0);
+    lost::math::Vec2 tbr(1,0);
+    lost::math::Vec2 ttr(1,1);
+    lost::math::Vec2 ttl(0,1);
+
+    // build arrays
+    float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
+    float texcoordsNormal[] = {tbl.x, tbl.y, tbr.x, tbr.y, ttr.x, ttr.y, ttl.x, ttl.y};
+    float texcoordsFlipped[] = {ttl.x, ttl.y, ttr.x, ttr.y, tbr.x, tbr.y, tbl.x, tbl.y};
+    // indices for 2 triangles, first upper left, then lower right
+    GLubyte idx[] = {0,2,3,0,1,2};
+    
+    glVertexPointer(2,GL_FLOAT,0,verts);
+    if(flip)
+      glTexCoordPointer(2,GL_FLOAT,0,texcoordsFlipped);
     else
-    {
-      glTexCoord2f(0, 1);glVertex2f(rect.x, rect.y);
-      glTexCoord2f(1, 1);glVertex2f(rect.x+rect.width-1, rect.y);
-      glTexCoord2f(1, 0);glVertex2f(rect.x+rect.width-1, rect.y+rect.height-1);
-      glTexCoord2f(0, 0);glVertex2f(rect.x, rect.y+rect.height-1);    
-    }
-    glEnd();
+      glTexCoordPointer(2,GL_FLOAT,0,texcoordsNormal);
+      
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx);    
   }
   
   inline void drawAABB(const lost::math::AABB& box)
