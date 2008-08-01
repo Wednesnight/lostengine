@@ -53,9 +53,13 @@ void redraw(shared_ptr<TimerEvent> event)
   glEnd();
   
   drawRectTextured(Rect(10,10,texture->width,texture->height), *texture);
-
+  
   glDisable(GL_TEXTURE_2D);
   glDisable(GL_BLEND);
+
+  setColor(whiteColor);
+  drawRectFilled(Rect(400,400,50,50));
+  
   fpsMeter.render(2,2,event->passedSec);
 
   glfwSwapBuffers();
@@ -75,22 +79,23 @@ void keyboard(shared_ptr<KeyEvent> inEvent)
 
 void init(shared_ptr<ApplicationEvent> event)
 {
-    //setup resources
-    //string filename = "gay_zombie.jpg";
-    //string filename = "nomnomnom.jpg";
-    //string filename = "buttonReleased.png";
-    string filename = "stubs.jpg";
-    bitmap = loader.load(filename);
-    
-    
-    texture.reset(new Texture());
-    texture->bind();
-    texture->reset(0, GL_RGBA8, false, *bitmap);
-    texture->wrap(GL_CLAMP);
-    texture->filter(GL_LINEAR);
+  //setup resources
+  //string filename = "gay_zombie.jpg";
+  //string filename = "nomnomnom.jpg";
+  //string filename = "buttonReleased.png";
+  string filename = "stubs.jpg";
+  bitmap = loader.load(filename);
+  
+  
+  texture.reset(new Texture());
+  texture->bind();
+  texture->reset(0, GL_RGBA8, false, *bitmap);
+  texture->wrap(GL_CLAMP);
+  texture->filter(GL_LINEAR);
         
-    
-    DOUT("width: "<<texture->width<< " height: "<<texture->height);
+  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
+  DOUT("width: "<<texture->width<< " height: "<<texture->height);
 }
 };
 
