@@ -8,6 +8,9 @@ namespace lost
 {
 namespace application
 {
+
+  struct TimerImpl;
+  
 struct Timer : public event::EventDispatcher
 {
   Timer(const std::string& name, double inIntervalSec);
@@ -24,6 +27,8 @@ private:
   double passedSec;
   bool running;
   std::string mName;
+  
+  boost::shared_ptr<TimerImpl> impl;
 };
 }
 }
