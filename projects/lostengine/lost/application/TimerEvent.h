@@ -2,12 +2,13 @@
 #define LOST_APPLICATION_TIMEREVENT_H
 
 #include "lost/event/Event.h"
-#include "lost/application/Timer.h"
 
 namespace lost
 {
 namespace application
 {
+
+  struct Timer;
 
   struct TimerEvent : public event::Event
   {
