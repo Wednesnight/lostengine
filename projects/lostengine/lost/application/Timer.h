@@ -3,6 +3,7 @@
 
 #include <string>
 #include "lost/event/EventDispatcher.h"
+#include "lost/application/TimerEvent.h"
 
 namespace lost
 {
@@ -16,7 +17,23 @@ struct Timer : public event::EventDispatcher
   Timer(const std::string& name, double inIntervalSec);
   virtual ~Timer();
 
-  void update(double deltaSec);
+  void update(double deltaSec)
+  {
+    if(running)
+    {
+      passedSec += deltaSec;
+      if(passedSec >= intervalSec)
+      {
+        boost::shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
+        ev->timer = this;
+        ev->passedSec = passedSec;
+        dispatchEvent(ev);
+        passedSec = 0;
+      }
+    }
+  }
+  
+  
   void disable() { running = false; }
   void enable() { running = true; }
 
