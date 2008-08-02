@@ -31,6 +31,7 @@
 #include "lost/gl/Draw.h"
 
 #include "lost/model/loader/DefaultModelLoader.h"
+#include "lost/application/Timer.h"
 
 using namespace boost;
 using namespace lost::application;
@@ -190,7 +191,7 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
-    mesh = modelLoader->loadMesh("cube.obj");
+    mesh = modelLoader->loadMesh("cessna.obj");
 
     shaderInit();
     bufferInit();
