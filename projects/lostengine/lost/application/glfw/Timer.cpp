@@ -16,22 +16,6 @@ extern TimerManager* timerManagerInstance;
     timerManagerInstance->addTimer(this);
   }
 
-  void Timer::update(double deltaSec)
-  {
-    if(running)
-    {
-      passedSec += deltaSec;
-      if(passedSec >= intervalSec)
-      {
-        shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
-        ev->timer = this;
-        ev->passedSec = passedSec;
-        dispatchEvent(ev);
-        passedSec = 0;
-      }
-    }
-  }
-
   Timer::~Timer()
   {
     timerManagerInstance->removeTimer(this);
