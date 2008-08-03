@@ -193,7 +193,7 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
-    mesh = modelLoader->loadMesh("cessna_tri.obj");
+    mesh = modelLoader->loadMesh("ladybird_tri.obj");
 
     shaderInit();
     bufferInit();
