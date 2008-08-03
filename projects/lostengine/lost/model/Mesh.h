@@ -4,35 +4,34 @@
 #include <vector>
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
-#include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
 #include "lost/math/AABB.h"
+#include "lost/model/Vertex.h"
 
 namespace lost
 {
   namespace model
   {
-    
+
     struct Mesh
     {
       unsigned int vertexCount;
-      unsigned int normalCount;
+      unsigned int faceCount;
 
-      boost::shared_array<lost::math::Vec3>       vertices;
-      boost::shared_array<lost::math::Vec3>       normals;
-      std::vector<std::vector<lost::math::Vec3> > faces;
+      boost::shared_array<Vertex>       vertices;
+      boost::shared_array<unsigned int> faces;
 
       lost::math::AABB box;
 
-      Mesh(unsigned int inVertexCount, unsigned int inNormalCount)
+      Mesh(unsigned int inVertexCount, unsigned int inFaceCount)
       {
         setVertexCount(inVertexCount);
-        setNormalCount(inNormalCount);
+        setFaceCount(inFaceCount);
       }
       
       Mesh()
       : vertexCount(0),
-        normalCount(0)
+        faceCount(0)
       {
       }
       
@@ -41,7 +40,6 @@ namespace lost
       void clear()
       {
         clearVertices();
-        clearNormals();
         clearFaces();
       }
 
@@ -56,11 +54,11 @@ namespace lost
       void setVertexCount(unsigned int inCount)
       {
         vertexCount = inCount;
-        vertices.reset(new lost::math::Vec3[vertexCount]);
+        vertices.reset(new Vertex[vertexCount]);
         clearVertices();
       }
       
-      void setVertex(unsigned int inIndex, lost::math::Vec3& inVertex)
+      void setVertex(unsigned int inIndex, Vertex& inVertex)
       {
         if (inIndex < vertexCount)
         {
@@ -74,32 +72,27 @@ namespace lost
         }
       }
       
-      void clearNormals()
-      {
-        for (unsigned int idx = 0; idx < normalCount; ++idx)
-        {
-          normals[idx].zero();
-        }
-      }
-      
-      void setNormalCount(unsigned int inCount)
-      {
-        normalCount = inCount;
-        normals.reset(new lost::math::Vec3[normalCount]);
-        clearNormals();
-      }
-      
-      void setNormal(unsigned int inIndex, lost::math::Vec3& inNormal)
-      {
-        if (inIndex < normalCount)
-        {
-          normals[inIndex] = inNormal;
-        }
-      }
-      
       void clearFaces()
       {
-        faces.clear();
+        for (unsigned int idx = 0; idx < faceCount; ++idx)
+        {
+          faces[idx] = 0;
+        }
+      }
+      
+      void setFaceCount(unsigned int inCount)
+      {
+        faceCount = inCount;
+        faces.reset(new unsigned int[faceCount]);
+        clearFaces();
+      }
+      
+      void setFacePoint(unsigned int inIndex, unsigned int& inFacePoint)
+      {
+        if (inIndex < faceCount)
+        {
+          faces[inIndex] = inFacePoint;
+        }
       }
       
     };
@@ -112,9 +105,9 @@ namespace lost
       for (unsigned int idx = 0; idx < m->vertexCount; ++idx)
         stream << "    vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
       stream << std::endl;
-      stream << "  normalCount: " << m->normalCount << std::endl;
-      for (unsigned int idx = 0; idx < m->normalCount; ++idx)
-        stream << "    normals[" << idx << "]: " << m->normals[idx] << std::endl;
+      stream << "  faceCount: " << m->faceCount << std::endl;
+      for (unsigned int idx = 0; idx < m->faceCount; ++idx)
+        stream << "    faces[" << idx << "]: " << m->faces[idx] << std::endl;
       return stream;
     }
     

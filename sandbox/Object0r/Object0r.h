@@ -29,6 +29,7 @@
 #include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
+#include "lost/gl/ElementArrayBuffer.h"
 
 #include "lost/model/loader/DefaultModelLoader.h"
 #include "lost/application/Timer.h"
@@ -179,9 +180,10 @@ struct Object0r
   FpsMeter                     fpsMeter;
   shared_ptr<Mesh>             mesh;
   
-  shared_ptr<ShaderProgram>      lightingShader;
-  shared_ptr<ArrayBuffer<Vec3> > vertexBuffer;
-  
+  shared_ptr<ShaderProgram>                     lightingShader;
+  shared_ptr<ArrayBuffer<Vec3> >                vertexBuffer;
+  shared_ptr<ElementArrayBuffer<unsigned int> > elementBuffer;
+
   shared_ptr<loader::ModelLoader> modelLoader;
   
   void init(shared_ptr<Event> event)
@@ -191,7 +193,7 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
-    mesh = modelLoader->loadMesh("cessna.obj");
+    mesh = modelLoader->loadMesh("cessna_tri.obj");
 
     shaderInit();
     bufferInit();
@@ -224,8 +226,10 @@ struct Object0r
   {
     vertexBuffer.reset(new ArrayBuffer<Vec3>);
     vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
-    vertexBuffer->bindVertexPointer();
-    
+
+    elementBuffer.reset(new ElementArrayBuffer<unsigned int>);
+    elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
+
     glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
   }
   
@@ -248,11 +252,19 @@ struct Object0r
 
     glScalef(2.0f, 2.0f, 2.0f);
     lightingShader->enable();
+    vertexBuffer->bindVertexPointer();
+    elementBuffer->bind();
+    // draw mesh faces as triangles
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    elementBuffer->drawElements(GL_TRIANGLES);
+/*
     // draw mesh vertices as points
     glPointSize(5);
     setColor(whiteColor);
     vertexBuffer->bindVertexPointer();
     vertexBuffer->drawArrays(GL_POINTS);
+*/
+    elementBuffer->unbind();
     vertexBuffer->unbind();
     lightingShader->disable();
     setColor(whiteColor);
