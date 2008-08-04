@@ -84,7 +84,7 @@ namespace lost
                                                     >> +boost::spirit::space_p >> boost::spirit::real_p
                                                     >> !(+boost::spirit::space_p >> boost::spirit::real_p)
                                                     >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-            boost::spirit::rule<> facevert_p_count = boost::spirit::int_p
+            boost::spirit::rule<> facevert_p_count = boost::spirit::int_p[boost::spirit::increment_a(faceCount)]
                                                      >> !(   '/'
                                                           >>  !(boost::spirit::int_p)
                                                           >>  !(   '/'
@@ -96,7 +96,7 @@ namespace lost
                                                  >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;                                                       
             boost::spirit::rule<> unknown_p_count = *(boost::spirit::anychar_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
             boost::spirit::rule<> objfile_p_count = *(vertex_p_count[boost::spirit::increment_a(vertexCount)] | 
-                                                      face_p_count[boost::spirit::increment_a(faceCount)] | 
+                                                      face_p_count | 
                                                       unknown_p_count);
             
             BOOST_SPIRIT_DEBUG_NODE(vertex_p_count);

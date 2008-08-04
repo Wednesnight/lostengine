@@ -102,12 +102,12 @@ namespace lost
       stream << "Mesh:" << std::endl;
       stream << std::endl;
       stream << "  vertexCount: " << m->vertexCount << std::endl;
-      for (unsigned int idx = 0; idx < m->vertexCount; ++idx)
-        stream << "    vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
+//      for (unsigned int idx = 0; idx < m->vertexCount; ++idx)
+//        stream << "    vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
       stream << std::endl;
       stream << "  faceCount: " << m->faceCount << std::endl;
-      for (unsigned int idx = 0; idx < m->faceCount; ++idx)
-        stream << "    faces[" << idx << "]: " << m->faces[idx] << std::endl;
+//      for (unsigned int idx = 0; idx < m->faceCount; ++idx)
+//        stream << "    faces[" << idx << "]: " << m->faces[idx] << std::endl;
       return stream;
     }
     

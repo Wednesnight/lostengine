@@ -34,6 +34,8 @@
 #include "lost/model/loader/DefaultModelLoader.h"
 #include "lost/application/Timer.h"
 
+#include "lost/lua/lua.h"
+
 using namespace boost;
 using namespace lost::application;
 using namespace lost::common;
@@ -193,7 +195,9 @@ struct Object0r
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
     modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
-    mesh = modelLoader->loadMesh("ladybird_tri.obj");
+    std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
+    mesh = modelLoader->loadMesh(modelname);
+    DOUT(mesh);
 
     shaderInit();
     bufferInit();
