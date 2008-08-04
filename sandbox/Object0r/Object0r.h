@@ -187,6 +187,17 @@ struct Object0r
   shared_ptr<ElementArrayBuffer<unsigned int> > elementBuffer;
 
   shared_ptr<loader::ModelLoader> modelLoader;
+
+  float       modelSize;
+  std::string modelDisplayFront;
+  std::string modelDisplayBack;
+  
+  Object0r()
+  : modelSize(1.0f),
+    modelDisplayFront("solid"),
+    modelDisplayBack("solid")
+  {
+  }
   
   void init(shared_ptr<Event> event)
   {
@@ -194,8 +205,13 @@ struct Object0r
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
-    modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
+
     std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
+    modelSize             = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
+    modelDisplayFront     = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayFront"]);
+    modelDisplayBack      = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayBack"]);
+
+    modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
     mesh = modelLoader->loadMesh(modelname);
     DOUT(mesh);
 
@@ -237,6 +253,23 @@ struct Object0r
     glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
   }
   
+  GLenum getModelDisplay(std::string& which)
+  {
+    if (which == "points")
+    {
+      return GL_POINT;
+    }
+    else if (which == "wireframe")
+    {
+      return GL_LINE;
+    }
+    else
+    {
+      return GL_FILL;
+    }
+
+  }
+  
   void render(shared_ptr<TimerEvent> event)
   {
     glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
@@ -254,12 +287,13 @@ struct Object0r
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
-    glScalef(2.0f, 2.0f, 2.0f);
+    glScalef(modelSize, modelSize, modelSize);
     lightingShader->enable();
     vertexBuffer->bindVertexPointer();
     elementBuffer->bind();
     // draw mesh faces as triangles
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT, getModelDisplay(modelDisplayFront));
+    glPolygonMode(GL_BACK, getModelDisplay(modelDisplayBack));
     elementBuffer->drawElements(GL_TRIANGLES);
 /*
     // draw mesh vertices as points

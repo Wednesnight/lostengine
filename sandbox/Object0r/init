@@ -16,7 +16,10 @@ function preinit(event)
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "Object0r";
   
-  modelFilename = "ladybird_tri.obj"
+  modelFilename     = "ladybird_tri.obj"
+  modelSize         = 1.0
+  modelDisplayFront = "wireframe"             -- points / wireframe / solid
+  modelDisplayBack  = "solid"                 -- points / wireframe / solid
 end
 
 function cleanupOnQuit(event)
