@@ -3,17 +3,17 @@
 
 #include "lost/common/DisplayAttributes.h"
 #include "lost/event/EventDispatcher.h"
-#include "lost/application/ResizeEvent.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/application/GLContext.h"
+
+struct LostApplicationImpl;  
 
 namespace lost
 {
 namespace application
 {
 
-struct ApplicationImpl;  
   
 struct Application : public event::EventDispatcher
 {
@@ -30,7 +30,7 @@ public:
   lost::application::GLContext          glc;
 
 private:
-  boost::shared_ptr<ApplicationImpl> impl;
+  boost::shared_ptr<LostApplicationImpl> impl;
 };
 
 extern Application* appInstance;
