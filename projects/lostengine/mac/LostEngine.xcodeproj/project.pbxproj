@@ -92,8 +92,6 @@
 		EA3B96800E046C5400B6423B /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
 		EA3B96810E046C5400B6423B /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
-		EA422E050E3FE51600C82940 /* GLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EA422E040E3FE51600C82940 /* GLContext.h */; };
-		EA422E090E3FE57100C82940 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA422D210E3FC86E00C82940 /* GLContext.cpp */; };
 		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
 		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710760E3E53B000B961EC /* TimerManager.h */; };
@@ -439,8 +437,6 @@
 		EA3B96790E046C5400B6423B /* Vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3.h; sourceTree = "<group>"; };
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
-		EA422D210E3FC86E00C82940 /* GLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLContext.cpp; path = glfw/GLContext.cpp; sourceTree = "<group>"; };
-		EA422E040E3FE51600C82940 /* GLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLContext.h; sourceTree = "<group>"; };
 		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
 		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6710760E3E53B000B961EC /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerManager.h; path = glfw/TimerManager.h; sourceTree = "<group>"; };
@@ -687,7 +683,6 @@
 				EAEAF6CA0E4A58270003A334 /* ApplicationAdapter.h */,
 				EABF73F80E492B34005C37F2 /* Application.cpp */,
 				EA3B94660E04639D00B6423B /* Application.h */,
-				EA422E040E3FE51600C82940 /* GLContext.h */,
 				EA3B94680E04639D00B6423B /* Timer.h */,
 				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
 				EAAF977D0E15C30400B28BF6 /* MouseEvent.h */,
@@ -869,7 +864,6 @@
 			isa = PBXGroup;
 			children = (
 				EAEAF6C40E4A57E60003A334 /* ApplicationAdapter.cpp */,
-				EA422D210E3FC86E00C82940 /* GLContext.cpp */,
 				EA6710750E3E53B000B961EC /* Timer.cpp */,
 				EA6710760E3E53B000B961EC /* TimerManager.h */,
 				EA6710730E3E53B000B961EC /* TimerManager.cpp */,
@@ -1075,7 +1069,6 @@
 				EA6711C00E3E89DB00B961EC /* File.h in Headers */,
 				EA6711C10E3E89DB00B961EC /* Loader.h in Headers */,
 				EA6711C20E3E89DB00B961EC /* Repository.h in Headers */,
-				EA422E050E3FE51600C82940 /* GLContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,7 +1242,6 @@
 				3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */,
 				EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */,
 				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
-				EA422E090E3FE57100C82940 /* GLContext.cpp in Sources */,
 				EABF73F90E492B34005C37F2 /* Application.cpp in Sources */,
 				EAEAF6C60E4A57E60003A334 /* ApplicationAdapter.cpp in Sources */,
 			);

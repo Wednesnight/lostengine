@@ -5,7 +5,6 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
-#include "lost/application/GLContext.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/ApplicationAdapter.h"
 
@@ -22,13 +21,13 @@ public:
   virtual ~Application();
 
   void run();
+  void swapBuffers();
   void quit();
 
   common::DisplayAttributes             displayAttributes;
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
-  lost::application::GLContext          glc;
-
+  
 private:
   boost::shared_ptr<ApplicationAdapter> adapter;
   void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      

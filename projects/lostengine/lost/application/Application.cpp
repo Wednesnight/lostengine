@@ -102,6 +102,8 @@ namespace application
     adapter->terminate();    
   }
 
+  void Application::swapBuffers() {adapter->swapBuffers();}
+
   void Application::quit() { adapter->quit(); }
 }
 }

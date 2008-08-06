@@ -317,7 +317,7 @@ struct Object0r
     glLoadIdentity();
     fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
     
-    appInstance->glc.swapBuffers();
+    appInstance->swapBuffers();
   }
   
   void keyHandler(shared_ptr<KeyEvent> event)
