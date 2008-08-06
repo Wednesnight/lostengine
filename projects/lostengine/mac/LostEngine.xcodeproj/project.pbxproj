@@ -211,8 +211,6 @@
 		EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		EA9C188D0E42983800504B0C /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188A0E42983800504B0C /* Timer.cpp */; };
-		EA9C188E0E42983800504B0C /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188B0E42983800504B0C /* Application.cpp */; };
-		EA9C188F0E42983800504B0C /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188C0E42983800504B0C /* GLContext.cpp */; };
 		EAAA56950E286E4A002EB663 /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
 		EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
 		EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
@@ -226,6 +224,10 @@
 		EAC5C6420E0B23EC00B9DFAC /* LuaBindings.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */; };
 		EAEAF6C60E4A57E60003A334 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6C40E4A57E60003A334 /* ApplicationAdapter.cpp */; };
 		EAEAF6CB0E4A58270003A334 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF6CA0E4A58270003A334 /* ApplicationAdapter.h */; };
+		EAEAF6E20E4A5DC90003A334 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */; };
+		EAEAF6E70E4A5DD00003A334 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */; };
+		EAEAF6E80E4A5DD00003A334 /* GLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF6E60E4A5DD00003A334 /* GLContext.h */; };
+		EAEAF7660E4A64170003A334 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABF73F80E492B34005C37F2 /* Application.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -453,8 +455,6 @@
 		EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleLoader.h; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
 		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
-		EA9C188B0E42983800504B0C /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = iphone/Application.cpp; sourceTree = "<group>"; };
-		EA9C188C0E42983800504B0C /* GLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLContext.cpp; path = iphone/GLContext.cpp; sourceTree = "<group>"; };
 		EAAA56940E286E4A002EB663 /* ApplicationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		EAAF977D0E15C30400B28BF6 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
@@ -468,6 +468,9 @@
 		EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBindings.h; sourceTree = "<group>"; };
 		EAEAF6C40E4A57E60003A334 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
 		EAEAF6CA0E4A58270003A334 /* ApplicationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationAdapter.h; sourceTree = "<group>"; };
+		EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = iphone/ApplicationAdapter.cpp; sourceTree = "<group>"; };
+		EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLContext.cpp; path = iphone/GLContext.cpp; sourceTree = "<group>"; };
+		EAEAF6E60E4A5DD00003A334 /* GLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLContext.h; path = iphone/GLContext.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -874,9 +877,10 @@
 		EA67106F0E3E539900B961EC /* iphone */ = {
 			isa = PBXGroup;
 			children = (
+				EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */,
 				EA9C188A0E42983800504B0C /* Timer.cpp */,
-				EA9C188B0E42983800504B0C /* Application.cpp */,
-				EA9C188C0E42983800504B0C /* GLContext.cpp */,
+				EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */,
+				EAEAF6E60E4A5DD00003A334 /* GLContext.h */,
 			);
 			name = iphone;
 			sourceTree = "<group>";
@@ -1069,6 +1073,7 @@
 				EA6711C00E3E89DB00B961EC /* File.h in Headers */,
 				EA6711C10E3E89DB00B961EC /* Loader.h in Headers */,
 				EA6711C20E3E89DB00B961EC /* Repository.h in Headers */,
+				EAEAF6E80E4A5DD00003A334 /* GLContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,8 +1282,9 @@
 				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
 				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
 				EA9C188D0E42983800504B0C /* Timer.cpp in Sources */,
-				EA9C188E0E42983800504B0C /* Application.cpp in Sources */,
-				EA9C188F0E42983800504B0C /* GLContext.cpp in Sources */,
+				EAEAF6E20E4A5DC90003A334 /* ApplicationAdapter.cpp in Sources */,
+				EAEAF6E70E4A5DD00003A334 /* GLContext.cpp in Sources */,
+				EAEAF7660E4A64170003A334 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

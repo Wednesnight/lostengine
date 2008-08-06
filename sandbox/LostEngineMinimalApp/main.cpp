@@ -38,7 +38,7 @@ void idle(shared_ptr<TimerEvent> event)
   drawLine(Vec2(0,0), Vec2(width-1, height-1));
     
   //fpsMeter.render(200,0,event->passedSec);
-  appInstance->glc.swapBuffers();
+  appInstance->swapBuffers();
 }
 
 int main(int argn, char** args)

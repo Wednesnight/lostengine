@@ -1,11 +1,18 @@
-#include "lost/application/GLContext.h"
+#include "lost/application/iphone/GLContext.h"
 
-namespace lost
+GLContext::GLContext()
 {
-  namespace application
-  {
-    void GLContext::swapBuffers()
-    {
-    }
-  }
 }
+
+GLContext::~GLContext()
+{
+}
+
+void GLContext::init(const lost::common::DisplayAttributes inAtt)
+{
+}
+
+void GLContext::swapBuffers()
+{
+}
+

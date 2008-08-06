@@ -12,27 +12,27 @@
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		EA6712F00E3E94A900B961EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6712EF0E3E94A900B961EC /* main.cpp */; };
-		EA67130C0E3E951D00B961EC /* libLostEngine-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6713090E3E950500B961EC /* libLostEngine-iPhone.a */; };
+		EAEAF7220E4A61B00003A334 /* libLostEngine-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEAF7210E4A61A50003A334 /* libLostEngine-iPhone.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA6713060E3E950500B961EC /* PBXContainerItemProxy */ = {
+		EAEAF71E0E4A61A50003A334 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA6713010E3E950500B961EC /* LostEngine.xcodeproj */;
+			containerPortal = EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
-		EA6713080E3E950500B961EC /* PBXContainerItemProxy */ = {
+		EAEAF7200E4A61A50003A334 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA6713010E3E950500B961EC /* LostEngine.xcodeproj */;
+			containerPortal = EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EA6711250E3E885300B961EC;
 			remoteInfo = "LostEngine-iPhone";
 		};
-		EA67130A0E3E951300B961EC /* PBXContainerItemProxy */ = {
+		EAEAF7230E4A61BB0003A334 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA6713010E3E950500B961EC /* LostEngine.xcodeproj */;
+			containerPortal = EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = EA6711240E3E885300B961EC;
 			remoteInfo = "LostEngine-iPhone";
@@ -47,7 +47,7 @@
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA6712EF0E3E94A900B961EC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		EA6713010E3E950500B961EC /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = "../../development/lostgenius/lua-test-branch/projects/lostengine/mac/LostEngine.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA67130C0E3E951D00B961EC /* libLostEngine-iPhone.a in Frameworks */,
+				EAEAF7220E4A61B00003A334 /* libLostEngine-iPhone.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */,
@@ -96,7 +96,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EA6713010E3E950500B961EC /* LostEngine.xcodeproj */,
+				EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */,
 				28FD15070DC6FC5B0079059D /* QuartzCore.framework */,
 				28FD14FF0DC6FC520079059D /* OpenGLES.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -105,11 +105,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA6713020E3E950500B961EC /* Products */ = {
+		EAEAF71A0E4A61A50003A334 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA6713070E3E950500B961EC /* libLostEngine.a */,
-				EA6713090E3E950500B961EC /* libLostEngine-iPhone.a */,
+				EAEAF71F0E4A61A50003A334 /* libLostEngine.a */,
+				EAEAF7210E4A61A50003A334 /* libLostEngine-iPhone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA67130B0E3E951300B961EC /* PBXTargetDependency */,
+				EAEAF7240E4A61BB0003A334 /* PBXTargetDependency */,
 			);
 			name = LostEngineMinimalApp;
 			productName = LostEngineMinimalApp;
@@ -147,8 +147,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA6713020E3E950500B961EC /* Products */;
-					ProjectRef = EA6713010E3E950500B961EC /* LostEngine.xcodeproj */;
+					ProductGroup = EAEAF71A0E4A61A50003A334 /* Products */;
+					ProjectRef = EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -159,18 +159,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA6713070E3E950500B961EC /* libLostEngine.a */ = {
+		EAEAF71F0E4A61A50003A334 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = EA6713060E3E950500B961EC /* PBXContainerItemProxy */;
+			remoteRef = EAEAF71E0E4A61A50003A334 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA6713090E3E950500B961EC /* libLostEngine-iPhone.a */ = {
+		EAEAF7210E4A61A50003A334 /* libLostEngine-iPhone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libLostEngine-iPhone.a";
-			remoteRef = EA6713080E3E950500B961EC /* PBXContainerItemProxy */;
+			remoteRef = EAEAF7200E4A61A50003A334 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -197,10 +197,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA67130B0E3E951300B961EC /* PBXTargetDependency */ = {
+		EAEAF7240E4A61BB0003A334 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "LostEngine-iPhone";
-			targetProxy = EA67130A0E3E951300B961EC /* PBXContainerItemProxy */;
+			targetProxy = EAEAF7230E4A61BB0003A334 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -208,22 +208,14 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = LOST_IPHONE;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/projects/lostengine\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/luabind/luabind_0_7/original\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/zlib/zlib_1_2_3/include\"",
-				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = LostEngineMinimalApp;
 			};
@@ -259,9 +251,11 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos2.0;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7/original\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
 			};
 			name = Debug;
 		};
