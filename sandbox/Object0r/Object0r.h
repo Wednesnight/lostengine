@@ -139,32 +139,32 @@ namespace lost
               break;
               
             case K_W:
-              camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
+              if (!event->repeat) camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
               direction.z += 1.0f;
               break;
               
             case K_S:
-              camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
+              if (!event->repeat) camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
               direction.z -= 1.0f;
               break;
               
             case K_A:
-              camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
+              if (!event->repeat) camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
               direction.x -= 1.0f;
               break;
               
             case K_D:
-              camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
+              if (!event->repeat) camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
               direction.x += 1.0f;
               break;
               
             case K_Q:
-              camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
+              if (!event->repeat) camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
               direction.y -= 1.0f;
               break;
               
             case K_E:
-              camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
+              if (!event->repeat) camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
               direction.y += 1.0f;
               break;
           }
@@ -295,6 +295,7 @@ struct Object0r
     glPolygonMode(GL_FRONT, getModelDisplay(modelDisplayFront));
     glPolygonMode(GL_BACK, getModelDisplay(modelDisplayBack));
     elementBuffer->drawElements(GL_TRIANGLES);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 /*
     // draw mesh vertices as points
     glPointSize(5);

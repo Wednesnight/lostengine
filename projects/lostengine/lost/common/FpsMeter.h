@@ -1,10 +1,13 @@
 #ifndef LOST_COMMON_FPSMETER_h
 #define LOST_COMMON_FPSMETER_h
 
-#include "lost/font/BitmapFont.h"
 #include <vector>
 #include <boost/lexical_cast.hpp>
 #include "lost/gl/Utils.h"
+#include "lost/gl/Draw.h"
+#include "lost/common/Color.h"
+#include "lost/math/Rect.h"
+#include "lost/math/Vec2.h"
 
 namespace lost
 {
@@ -14,7 +17,7 @@ namespace lost
 
     struct FpsMeter
     {
-      const static unsigned long historylength = 100;
+      const static unsigned long historylength = 160;
 
       unsigned long width;
       unsigned long height;
@@ -24,14 +27,14 @@ namespace lost
       unsigned long labelstepping;
       float alpha;
       boost::shared_array<float> history;
-      lost::font::BitmapFont font;
+      void* font;
       std::vector<std::string> labels;
 
       FpsMeter()
-      : font(GLUT_BITMAP_HELVETICA_10)
+      : font(GLUT_BITMAP_TIMES_ROMAN_10)
       {
         width = historylength;
-        height = 60;
+        height = 100;
         alpha = .6f;
         history.reset(new float[historylength]);
         historycurpos = 0;
@@ -69,40 +72,28 @@ namespace lost
         addHistoryEntry(timeSinceLastCallSec);
 
         // background
-        glColor4f(1, 0, 0, alpha);
-        glBegin(GL_QUADS);
-        glVertex2f(x-1, y);
-        glVertex2f(x+width, y);
-        glVertex2f(x+width,y+height);
-        glVertex2f(x-1, y+height);
-        glEnd();
+        gl::setColor(Color(.75, .75, .75, alpha));
+        gl::drawRectFilled(math::Rect(x, y, width, height));
 
         // top caption
-        glColor4f(1, 1, 1, alpha);
-        font.text("fps");
-        font.render((x+width)-16, (y+height)-10);
+        gl::setColor(Color(0, 0, 0, alpha));
+        gl::drawString((x+width)-17, (y+height)-9, "FPS", font);
 
         // horizontal stripes
-        glColor4f(1, 1, 1, alpha);
+        gl::setColor(Color(0, 0, 0, alpha));
         for(unsigned long n=0; n<numlabels; ++n)
         {
-          glBegin(GL_LINES);
-          glVertex2f(x, y+10*(n+1));
-          glVertex2f(x+width-1, y+10*(n+1));
-          glEnd();
-          font.text(labels[n]);
-          font.render(x, y+10*n+1);
+          gl::drawLine(math::Vec2(x, y+10*(n+1)-1), math::Vec2(x+width-1, y+10*(n+1)-1));
+          gl::drawString(x+1, y+10*n+1, labels[n], font);
         }
 
         // draw history ringbuffer
-        glColor4f(1,.8,0,.4);
+        gl::setColor(Color(0, 0, 0, alpha));
         unsigned long curpos = historycurpos;
-        for(unsigned long i=0; i<historylength; ++i)
+        for(unsigned long i=0; i<historylength-1; ++i)
         {
-          glBegin(GL_LINES);
-          glVertex2f(x+i, y);
-          glVertex2f(x+i, y+history[curpos]);
-          glEnd();
+//          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
+          gl::drawLine(math::Vec2(x+i, y+history[curpos]), math::Vec2(x+i+1, y+history[(curpos+1)%historylength]));
           curpos = (curpos+1) % historylength;
         }
 

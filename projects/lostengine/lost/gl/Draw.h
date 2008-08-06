@@ -42,7 +42,7 @@ namespace gl
     len = text.size();
     for (i = 0; i < len; i++)
     {
-      glutBitmapCharacter(GLUT_BITMAP_8_BY_13, text[i]);
+      glutBitmapCharacter(font, text[i]);
     }
   }
 #endif
