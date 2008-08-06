@@ -1,20 +1,21 @@
-#ifndef LOST_APPLICATION_GLFWADAPTER_H
-#define LOST_APPLICATION_GLFWADAPTER_H
+#ifndef LOST_APPLICATION_APPLICATIONADAPTER_H
+#define LOST_APPLICATION_APPLICATIONADAPTER_H
 
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/DisplayAttributes.h"
 
 struct ApplicationAdapterState;
 
-struct GlfwAdapter
+struct ApplicationAdapter
 {
   lost::event::EventDispatcher* target;
   
-  GlfwAdapter(lost::event::EventDispatcher* inTarget);
-  virtual ~GlfwAdapter();
+  ApplicationAdapter(lost::event::EventDispatcher* inTarget);
+  virtual ~ApplicationAdapter();
 
   void init(const lost::common::DisplayAttributes& displayAttributes); // call this to configure adapter before running it, creates OpenGL context 
   void run(); // runs the main loop
+  void swapBuffers(); // tell the current gl context to flip buffers
   void quit(); // quits the main loop
   void terminate(); // call this to shut the adapter down whe your application has quit
     

@@ -1,4 +1,4 @@
-#include "lost/application/glfw/GlfwAdapter.h"
+#include "lost/application/glfw/ApplicationAdapter.h"
 #include "lost/common/Logger.h"
 #include <GL/glfw.h>
 #include "lost/application/KeySym.h"
@@ -34,7 +34,7 @@ void glfwMouseButtonCallback( int button, int action );
 void glfwKeyCallback( int key, int action, int repeat );
 
 
-GlfwAdapter::GlfwAdapter(EventDispatcher* inTarget)
+ApplicationAdapter::ApplicationAdapter(EventDispatcher* inTarget)
 : target(inTarget)
 {
   if(glfwAdapterInstance != NULL)
@@ -46,11 +46,11 @@ GlfwAdapter::GlfwAdapter(EventDispatcher* inTarget)
   state->running = false;// the main loop is not running yet
 }
 
-GlfwAdapter::~GlfwAdapter()
+ApplicationAdapter::~ApplicationAdapter()
 {
 }
 
-void GlfwAdapter::init(const DisplayAttributes& displayAttributes)
+void ApplicationAdapter::init(const DisplayAttributes& displayAttributes)
 {
   glfwInit();    // must init glfw before anything else
 
@@ -78,7 +78,7 @@ void GlfwAdapter::init(const DisplayAttributes& displayAttributes)
   glfwSetWindowSizeCallback(glfwWindowSizeCallback);    
 }
 
-void GlfwAdapter::run()
+void ApplicationAdapter::run()
 {
   state->running = true;
   double lastTime = glfwGetTime();
@@ -97,7 +97,7 @@ void GlfwAdapter::run()
   }  
 }
 
-void GlfwAdapter::quit()
+void ApplicationAdapter::quit()
 {
   state->running = false;
 }
@@ -187,7 +187,12 @@ void glfwWindowSizeCallback(int width, int height)
   glfwAdapterInstance->target->dispatchEvent(ev);    
 }
 
-void GlfwAdapter::terminate()
+void ApplicationAdapter::swapBuffers()
+{
+  glfwSwapBuffers();
+}
+
+void ApplicationAdapter::terminate()
 {
   glfwTerminate();
 }
