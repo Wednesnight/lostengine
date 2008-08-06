@@ -7,8 +7,8 @@
 #include "lost/resource/Loader.h"
 #include "lost/application/GLContext.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/ApplicationAdapter.h"
 
-struct LostApplicationImpl;  
 
 namespace lost
 {
@@ -30,7 +30,7 @@ public:
   lost::application::GLContext          glc;
 
 private:
-  boost::shared_ptr<LostApplicationImpl> impl;
+  boost::shared_ptr<ApplicationAdapter> adapter;
   void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
   
 };

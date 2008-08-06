@@ -6,6 +6,8 @@
 
 struct ApplicationAdapterState;
 
+// this is the interface to the plattform specific part of the application.
+// each platform needs to implement a suitable ApplicationAdapter.cpp and link withe the project
 struct ApplicationAdapter
 {
   lost::event::EventDispatcher* target;

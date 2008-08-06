@@ -1,4 +1,4 @@
-#include "lost/application/glfw/ApplicationAdapter.h"
+#include "lost/application/ApplicationAdapter.h"
 #include "lost/common/Logger.h"
 #include <GL/glfw.h>
 #include "lost/application/KeySym.h"
@@ -25,7 +25,7 @@ struct ApplicationAdapterState
 };
 
 // there is only one global adapter instance, but it's not public
-GlfwAdapter* glfwAdapterInstance = NULL;
+ApplicationAdapter* adapterInstance = NULL;
 
 // prototypes for callbacks
 void glfwWindowSizeCallback(int width, int height);
@@ -37,11 +37,11 @@ void glfwKeyCallback( int key, int action, int repeat );
 ApplicationAdapter::ApplicationAdapter(EventDispatcher* inTarget)
 : target(inTarget)
 {
-  if(glfwAdapterInstance != NULL)
+  if(adapterInstance != NULL)
   {
     throw std::runtime_error("glfwAdapterInstance wasn't NULL, did you instance more than one adapter/application?");
   }
-  glfwAdapterInstance = this;
+  adapterInstance = this;
   state.reset(new ApplicationAdapterState);
   state->running = false;// the main loop is not running yet
 }
@@ -142,18 +142,18 @@ void glfwKeyCallback( int keysym, int pressed, int repeat )
   ev->key = l_key;
   ev->pressed = pressed;
   ev->repeat = repeat;
-  glfwAdapterInstance->target->dispatchEvent(ev);    
+  adapterInstance->target->dispatchEvent(ev);    
 }
 
 void glfwMouseMoveCallback( int x, int y )
 {
   lost::math::Vec2 point(x,y);    
   shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
-  point.y = glfwAdapterInstance->state->displayHeight - point.y;
+  point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
   ev->button = M_UNKNOWN;
   ev->pressed = false;
-  glfwAdapterInstance->target->dispatchEvent(ev);
+  adapterInstance->target->dispatchEvent(ev);
 }
 
 void glfwMouseButtonCallback( int button, int action )
@@ -165,7 +165,7 @@ void glfwMouseButtonCallback( int button, int action )
   bool pressed = (action == GLFW_PRESS);
   shared_ptr<MouseEvent> ev(new MouseEvent(pressed ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP()));
   lost::math::Vec2 point(x,y);
-  point.y = glfwAdapterInstance->state->displayHeight - point.y;
+  point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
   ev->button = (button == GLFW_MOUSE_BUTTON_1)
   ? M_LEFT
@@ -175,16 +175,16 @@ void glfwMouseButtonCallback( int button, int action )
         ? M_MIDDLE
         : M_UNKNOWN));
   ev->pressed = pressed;
-  glfwAdapterInstance->target->dispatchEvent(ev);
+  adapterInstance->target->dispatchEvent(ev);
 }
 
 void glfwWindowSizeCallback(int width, int height)
 {
-  glfwAdapterInstance->state->displayHeight = height;
+  adapterInstance->state->displayHeight = height;
   shared_ptr<ResizeEvent> ev(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
   ev->width = width;
   ev->height = height;
-  glfwAdapterInstance->target->dispatchEvent(ev);    
+  adapterInstance->target->dispatchEvent(ev);    
 }
 
 void ApplicationAdapter::swapBuffers()

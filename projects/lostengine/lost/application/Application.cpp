@@ -7,7 +7,6 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/lua/LuaBindings.h"
 #include "lost/lua/ModuleLoader.h"
-#include "lost/application/glfw/LostApplicationImpl.h"
 
 using namespace std;
 using namespace boost;
@@ -32,8 +31,7 @@ namespace application
       throw std::runtime_error("appInstance wasn't NULL, did you instance more than one app?");
     }
     appInstance = this;
-    impl.reset(new LostApplicationImpl(this));
-    
+    adapter.reset(new ApplicationAdapter(this));
     
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
@@ -65,7 +63,7 @@ namespace application
       IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
     }
     
-    // broadcast preinit event, this is the latest point for client code to setup the configuration
+    // broadcast preinit event, this is the latest point for c++ client code to setup the configuration
     appEvent->type = ApplicationEvent::PREINIT();dispatchEvent(appEvent);
     
     // try to extract default display attributes from lua state
@@ -84,9 +82,12 @@ namespace application
       IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
     }
      
-    impl->adapter.init(displayAttributes);
+
     // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
     addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
+
+    // the gl context will be created here, so resize event needs to be connected before
+    adapter->init(displayAttributes);
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
@@ -95,12 +96,12 @@ namespace application
     appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
     
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
-    impl->adapter.run();
+    adapter->run();
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
     EventDispatcher::clear();
-    impl->adapter.terminate();    
+    adapter->terminate();    
   }
 
-  void Application::quit() { impl->adapter.quit(); }
+  void Application::quit() { adapter->quit(); }
 }
 }
