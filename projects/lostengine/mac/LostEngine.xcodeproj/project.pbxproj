@@ -96,7 +96,6 @@
 		EA422E090E3FE57100C82940 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA422D210E3FC86E00C82940 /* GLContext.cpp */; };
 		EA6710780E3E53B000B961EC /* GlfwAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710720E3E53B000B961EC /* GlfwAdapter.h */; };
 		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
-		EA67107A0E3E53B000B961EC /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710740E3E53B000B961EC /* Application.cpp */; };
 		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710760E3E53B000B961EC /* TimerManager.h */; };
 		EA67107D0E3E53B000B961EC /* GlfwAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */; };
@@ -226,6 +225,7 @@
 		EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
 		EABF73620E4918C1005C37F2 /* LostApplicationImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABF73610E4918C1005C37F2 /* LostApplicationImpl.cpp */; };
 		EABF738E0E491C14005C37F2 /* LostApplicationImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = EABF738D0E491C14005C37F2 /* LostApplicationImpl.h */; };
+		EABF73F90E492B34005C37F2 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABF73F80E492B34005C37F2 /* Application.cpp */; };
 		EAC5C63E0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */; };
 		EAC5C63F0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */; };
 		EAC5C6400E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */; };
@@ -445,7 +445,6 @@
 		EA422E040E3FE51600C82940 /* GLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLContext.h; sourceTree = "<group>"; };
 		EA6710720E3E53B000B961EC /* GlfwAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlfwAdapter.h; path = glfw/GlfwAdapter.h; sourceTree = "<group>"; };
 		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
-		EA6710740E3E53B000B961EC /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6710760E3E53B000B961EC /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerManager.h; path = glfw/TimerManager.h; sourceTree = "<group>"; };
 		EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GlfwAdapter.cpp; path = glfw/GlfwAdapter.cpp; sourceTree = "<group>"; };
@@ -472,6 +471,7 @@
 		EAAF98480E15DB9100B28BF6 /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
 		EABF73610E4918C1005C37F2 /* LostApplicationImpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationImpl.cpp; path = glfw/LostApplicationImpl.cpp; sourceTree = "<group>"; };
 		EABF738D0E491C14005C37F2 /* LostApplicationImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationImpl.h; path = glfw/LostApplicationImpl.h; sourceTree = "<group>"; };
+		EABF73F80E492B34005C37F2 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonDisplayAttributes.cpp; sourceTree = "<group>"; };
 		EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmapLoader.cpp; sourceTree = "<group>"; };
 		EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmap.cpp; sourceTree = "<group>"; };
@@ -688,6 +688,7 @@
 			children = (
 				EA67106F0E3E539900B961EC /* iphone */,
 				EA67106E0E3E539200B961EC /* glfw */,
+				EABF73F80E492B34005C37F2 /* Application.cpp */,
 				EA3B94660E04639D00B6423B /* Application.h */,
 				EA422E040E3FE51600C82940 /* GLContext.h */,
 				EA3B94680E04639D00B6423B /* Timer.h */,
@@ -872,7 +873,6 @@
 			children = (
 				EABF73610E4918C1005C37F2 /* LostApplicationImpl.cpp */,
 				EABF738D0E491C14005C37F2 /* LostApplicationImpl.h */,
-				EA6710740E3E53B000B961EC /* Application.cpp */,
 				EA422D210E3FC86E00C82940 /* GLContext.cpp */,
 				EA6710720E3E53B000B961EC /* GlfwAdapter.h */,
 				EA6710770E3E53B000B961EC /* GlfwAdapter.cpp */,
@@ -1255,11 +1255,11 @@
 				3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */,
 				3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */,
 				EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */,
-				EA67107A0E3E53B000B961EC /* Application.cpp in Sources */,
 				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
 				EA67107D0E3E53B000B961EC /* GlfwAdapter.cpp in Sources */,
 				EA422E090E3FE57100C82940 /* GLContext.cpp in Sources */,
 				EABF73620E4918C1005C37F2 /* LostApplicationImpl.cpp in Sources */,
+				EABF73F90E492B34005C37F2 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
