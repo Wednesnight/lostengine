@@ -16,6 +16,7 @@
 		3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52850E2AC75700931839 /* shuttle.obj */; };
 		3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52860E2AC75700931839 /* tetrahedron.obj */; };
 		3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52870E2AC75700931839 /* magnolia.obj */; };
+		3E8066A10E49EB0C00844523 /* magnolia_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E8066A00E49EB0C00844523 /* magnolia_tri.obj */; };
 		3EB514A70E325AD30099EC4B /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A50E325AD30099EC4B /* lighting.vs */; };
 		3EB514A80E325AD30099EC4B /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A60E325AD30099EC4B /* lighting.fs */; };
 		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
@@ -72,6 +73,7 @@
 		3E3D52850E2AC75700931839 /* shuttle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shuttle.obj; path = ../../../data/obj/shuttle.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52860E2AC75700931839 /* tetrahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tetrahedron.obj; path = ../../../data/obj/tetrahedron.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52870E2AC75700931839 /* magnolia.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia.obj; path = ../../../data/obj/magnolia.obj; sourceTree = SOURCE_ROOT; };
+		3E8066A00E49EB0C00844523 /* magnolia_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia_tri.obj; path = ../../../data/obj/magnolia_tri.obj; sourceTree = SOURCE_ROOT; };
 		3EB514A50E325AD30099EC4B /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		3EB514A60E325AD30099EC4B /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
 		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
@@ -146,6 +148,7 @@
 				3ED935C90E4756B700AABFAB /* init */,
 				3EB514A50E325AD30099EC4B /* lighting.vs */,
 				3EB514A60E325AD30099EC4B /* lighting.fs */,
+				3E8066A00E49EB0C00844523 /* magnolia_tri.obj */,
 				3EC77F020E45D348009D4167 /* ladybird_tri.obj */,
 				3ED8F6CD0E461CC50043F5CE /* cart_tri.obj */,
 				3E3D52810E2AC75700931839 /* cessna.obj */,
@@ -276,6 +279,7 @@
 				3ED8F6CE0E461CC50043F5CE /* cart_tri.obj in Resources */,
 				3ED935A70E47516800AABFAB /* cube_tri.obj in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
+				3E8066A10E49EB0C00844523 /* magnolia_tri.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

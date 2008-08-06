@@ -16,7 +16,7 @@ function preinit(event)
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "Object0r";
   
-  modelFilename     = "cessna_tri.obj"
+  modelFilename     = "magnolia_tri.obj"
   modelSize         = 5.0
   modelDisplayFront = "wireframe"             -- points / wireframe / solid
   modelDisplayBack  = "wireframe"                 -- points / wireframe / solid
