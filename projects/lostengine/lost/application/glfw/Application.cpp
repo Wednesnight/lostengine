@@ -42,7 +42,7 @@ namespace application
     luabind::globals(*interpreter)["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
   }
 
-  Application::~Application() { impl->adapter.terminate(); }
+  Application::~Application() {  }
 
   void Application::handleResize(boost::shared_ptr<ResizeEvent> ev)
   {
@@ -85,13 +85,12 @@ namespace application
     }
      
     impl->adapter.init(displayAttributes);
+    // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
+    addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
-    
-    // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
-    addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
-    
+        
     // broadcast postinit event to signal that the application initialisation has finished
     appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
     
@@ -99,6 +98,7 @@ namespace application
     impl->adapter.run();
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
     EventDispatcher::clear();
+    impl->adapter.terminate();    
   }
 
   void Application::quit() { impl->adapter.quit(); }

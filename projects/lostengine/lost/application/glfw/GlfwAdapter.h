@@ -19,14 +19,10 @@ struct GlfwAdapter
   virtual ~GlfwAdapter();
 
   void init(const common::DisplayAttributes& displayAttributes); // call this to configure adapter before running it, creates OpenGL context 
-
   void run(); // runs the main loop
   void quit(); // quits the main loop
-
   void terminate(); // call this to shut the adapter down whe your application has quit
   
-  void sleep(double seconds); // FIXME: move this to platform
-
 private: 
   void initDisplay(const common::DisplayAttributes& displayAttributes);
   void initCallbacks();

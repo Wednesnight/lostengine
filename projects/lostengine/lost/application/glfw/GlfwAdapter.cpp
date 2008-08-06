@@ -200,10 +200,5 @@ namespace application
   {
     glfwTerminate();
   }
-
-  void GlfwAdapter::sleep(double seconds)
-  {
-    glfwSleep(seconds);
-  }
 }
 }
