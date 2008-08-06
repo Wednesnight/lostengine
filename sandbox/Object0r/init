@@ -18,7 +18,7 @@ function preinit(event)
   
   modelFilename     = "magnolia_tri.obj"
   modelSize         = 5.0
-  modelDisplayFront = "wireframe"             -- points / wireframe / solid
+  modelDisplayFront = "solid"             -- points / wireframe / solid
   modelDisplayBack  = "wireframe"                 -- points / wireframe / solid
 end
 
