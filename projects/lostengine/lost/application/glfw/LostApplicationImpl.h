@@ -6,7 +6,7 @@
 
 struct LostApplicationImpl
 {
-  lost::application::GlfwAdapter   adapter;
+  GlfwAdapter   adapter;
 
   LostApplicationImpl(lost::event::EventDispatcher* target);  
 };

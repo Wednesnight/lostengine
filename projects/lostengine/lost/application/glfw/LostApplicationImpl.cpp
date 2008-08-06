@@ -3,7 +3,6 @@
 
 using namespace lost::event;
 using namespace lost;
-using namespace lost::application;
 using namespace boost;
 using namespace lost::common;
 using namespace std;
