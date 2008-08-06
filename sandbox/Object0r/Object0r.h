@@ -25,13 +25,15 @@
 #include "lost/camera/Camera.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
+#include "lost/model/parser/ParserOBJ.h"
 #include "lost/model/Mesh.h"
+#include "lost/model/MaterialOBJ.h"
+#include "lost/model/RendererOBJ.h"
 #include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
 #include "lost/gl/ElementArrayBuffer.h"
 
-#include "lost/model/loader/DefaultModelLoader.h"
 #include "lost/application/Timer.h"
 
 #include "lost/lua/lua.h"
@@ -180,23 +182,31 @@ struct Object0r
   boost::signal<void(void)>    quit;
   shared_ptr<CameraController> camera;
   FpsMeter                     fpsMeter;
-  shared_ptr<Mesh>             mesh;
   
-  shared_ptr<ShaderProgram>                     lightingShader;
-  shared_ptr<ArrayBuffer<Vec3> >                vertexBuffer;
-  shared_ptr<ElementArrayBuffer<unsigned int> > elementBuffer;
+  shared_ptr<ShaderProgram> lightingShader;
 
-  shared_ptr<loader::ModelLoader> modelLoader;
+  shared_ptr<parser::ParserOBJ> modelParser;
+  shared_ptr<Mesh>              mesh;
+  shared_ptr<MaterialOBJ>       material;
+  shared_ptr<RendererOBJ>       modelRenderer;
 
-  float       modelSize;
-  std::string modelDisplayFront;
-  std::string modelDisplayBack;
+  Object0r() {}
   
-  Object0r()
-  : modelSize(1.0f),
-    modelDisplayFront("solid"),
-    modelDisplayBack("solid")
+  GLenum getModelDisplay(std::string& which)
   {
+    if (which == "points")
+    {
+      return GL_POINT;
+    }
+    else if (which == "wireframe")
+    {
+      return GL_LINE;
+    }
+    else
+    {
+      return GL_FILL;
+    }
+    
   }
   
   void init(shared_ptr<Event> event)
@@ -205,18 +215,19 @@ struct Object0r
     glfwDisable(GLFW_MOUSE_CURSOR);
     camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
 
+    std::string modelname         = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
+    float       modelSize         = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
+    std::string modelDisplayFront = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayFront"]);
+    std::string modelDisplayBack  = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayBack"]);
 
-    std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
-    modelSize             = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
-    modelDisplayFront     = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayFront"]);
-    modelDisplayBack      = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayBack"]);
-
-    modelLoader.reset(new loader::DefaultModelLoader(appInstance->loader));
-    mesh = modelLoader->loadMesh(modelname);
-    DOUT(mesh);
+    modelParser.reset(new parser::ParserOBJ(appInstance->loader));
+    modelParser->parseMesh(modelname, mesh, material);
+    modelRenderer.reset(new RendererOBJ(mesh, material));
+    modelRenderer->size            = modelSize;
+    modelRenderer->renderModeFront = getModelDisplay(modelDisplayFront);
+    modelRenderer->renderModeBack  = getModelDisplay(modelDisplayBack);
 
     shaderInit();
-    bufferInit();
   }
   
   void shaderInit()
@@ -242,34 +253,6 @@ struct Object0r
     lightingShader->disable();
   }
   
-  void bufferInit()
-  {
-    vertexBuffer.reset(new ArrayBuffer<Vec3>);
-    vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
-
-    elementBuffer.reset(new ElementArrayBuffer<unsigned int>);
-    elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
-
-    glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-  }
-  
-  GLenum getModelDisplay(std::string& which)
-  {
-    if (which == "points")
-    {
-      return GL_POINT;
-    }
-    else if (which == "wireframe")
-    {
-      return GL_LINE;
-    }
-    else
-    {
-      return GL_FILL;
-    }
-
-  }
-  
   void render(shared_ptr<TimerEvent> event)
   {
     glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
@@ -287,25 +270,10 @@ struct Object0r
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
-    glScalef(modelSize, modelSize, modelSize);
     lightingShader->enable();
-    vertexBuffer->bindVertexPointer();
-    elementBuffer->bind();
-    // draw mesh faces as triangles
-    glPolygonMode(GL_FRONT, getModelDisplay(modelDisplayFront));
-    glPolygonMode(GL_BACK, getModelDisplay(modelDisplayBack));
-    elementBuffer->drawElements(GL_TRIANGLES);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-/*
-    // draw mesh vertices as points
-    glPointSize(5);
-    setColor(whiteColor);
-    vertexBuffer->bindVertexPointer();
-    vertexBuffer->drawArrays(GL_POINTS);
-*/
-    elementBuffer->unbind();
-    vertexBuffer->unbind();
+    modelRenderer->render();
     lightingShader->disable();
+
     setColor(whiteColor);
     drawAABB(mesh->box);
     glScalef(10.0f, 10.0f, 10.0f);

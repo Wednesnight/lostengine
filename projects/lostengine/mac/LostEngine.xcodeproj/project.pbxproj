@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E23E87D0E3DD697007231CD /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8790E3DD697007231CD /* ModelLoader.h */; };
-		3E23E87E0E3DD697007231CD /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87B0E3DD697007231CD /* Parser.h */; };
-		3E23E87F0E3DD697007231CD /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87C0E3DD697007231CD /* ParserOBJ.h */; };
-		3E23E8B40E3DD9EF007231CD /* DefaultModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */; };
+		3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */; };
+		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
+		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
 		3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
@@ -185,10 +184,6 @@
 		EA6711B00E3E89DB00B961EC /* Vec2.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96780E046C5400B6423B /* Vec2.h */; };
 		EA6711B10E3E89DB00B961EC /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
 		EA6711B20E3E89DB00B961EC /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
-		EA6711B30E3E89DB00B961EC /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87B0E3DD697007231CD /* Parser.h */; };
-		EA6711B40E3E89DB00B961EC /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E87C0E3DD697007231CD /* ParserOBJ.h */; };
-		EA6711B50E3E89DB00B961EC /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8790E3DD697007231CD /* ModelLoader.h */; };
-		EA6711B60E3E89DB00B961EC /* DefaultModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */; };
 		EA6711B80E3E89DB00B961EC /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
 		EA6711BA0E3E89DB00B961EC /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
 		EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
@@ -353,10 +348,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E23E8790E3DD697007231CD /* ModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelLoader.h; path = model/loader/ModelLoader.h; sourceTree = "<group>"; };
-		3E23E87B0E3DD697007231CD /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
-		3E23E87C0E3DD697007231CD /* ParserOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserOBJ.h; sourceTree = "<group>"; };
-		3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultModelLoader.h; path = model/loader/DefaultModelLoader.h; sourceTree = "<group>"; };
+		3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RendererOBJ.h; path = model/RendererOBJ.h; sourceTree = "<group>"; };
+		3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialOBJ.h; path = model/MaterialOBJ.h; sourceTree = "<group>"; };
+		3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserOBJ.h; sourceTree = "<group>"; };
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
@@ -536,32 +530,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3E23E87A0E3DD697007231CD /* parser */ = {
+		3E4129A90E4A53AF000CC2B8 /* parser */ = {
 			isa = PBXGroup;
 			children = (
-				3E23E87B0E3DD697007231CD /* Parser.h */,
-				3E23E87C0E3DD697007231CD /* ParserOBJ.h */,
+				3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */,
 			);
 			name = parser;
-			path = model/loader/parser;
-			sourceTree = "<group>";
-		};
-		3E5F77560E3DC86200260427 /* loader */ = {
-			isa = PBXGroup;
-			children = (
-				3E23E87A0E3DD697007231CD /* parser */,
-				3E23E8790E3DD697007231CD /* ModelLoader.h */,
-				3E23E8B30E3DD9EF007231CD /* DefaultModelLoader.h */,
-			);
-			name = loader;
+			path = model/parser;
 			sourceTree = "<group>";
 		};
 		3EB93D300E37FE0D00FF10C9 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				3E5F77560E3DC86200260427 /* loader */,
+				3E4129A90E4A53AF000CC2B8 /* parser */,
 				3EB93D320E37FE2500FF10C9 /* Mesh.h */,
 				3EB93D360E37FE2500FF10C9 /* Vertex.h */,
+				3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */,
+				3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -986,12 +971,11 @@
 				EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */,
 				EA2BC5390E3CAB5300C0A216 /* TypedBuffer.h in Headers */,
 				EA2BC5420E3CAF0B00C0A216 /* Buffer.h in Headers */,
-				3E23E87D0E3DD697007231CD /* ModelLoader.h in Headers */,
-				3E23E87E0E3DD697007231CD /* Parser.h in Headers */,
-				3E23E87F0E3DD697007231CD /* ParserOBJ.h in Headers */,
-				3E23E8B40E3DD9EF007231CD /* DefaultModelLoader.h in Headers */,
 				EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */,
 				EAEAF6CB0E4A58270003A334 /* ApplicationAdapter.h in Headers */,
+				3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */,
+				3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */,
+				3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,10 +1045,6 @@
 				EA6711B00E3E89DB00B961EC /* Vec2.h in Headers */,
 				EA6711B10E3E89DB00B961EC /* Vec3.h in Headers */,
 				EA6711B20E3E89DB00B961EC /* Vec4.h in Headers */,
-				EA6711B30E3E89DB00B961EC /* Parser.h in Headers */,
-				EA6711B40E3E89DB00B961EC /* ParserOBJ.h in Headers */,
-				EA6711B50E3E89DB00B961EC /* ModelLoader.h in Headers */,
-				EA6711B60E3E89DB00B961EC /* DefaultModelLoader.h in Headers */,
 				EA6711B80E3E89DB00B961EC /* Mesh.h in Headers */,
 				EA6711BA0E3E89DB00B961EC /* Vertex.h in Headers */,
 				EA6711BC0E3E89DB00B961EC /* Platform.h in Headers */,

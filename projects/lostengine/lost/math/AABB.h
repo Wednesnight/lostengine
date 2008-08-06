@@ -1,5 +1,5 @@
-#ifndef LOST_MODEL_AABB_H
-#define LOST_MODEL_AABB_H
+#ifndef LOST_MATH_AABB_H
+#define LOST_MATH_AABB_H
 
 #include "lost/math/Vec3.h"
 
