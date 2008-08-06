@@ -6,6 +6,7 @@
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/application/GLContext.h"
+#include "lost/application/ResizeEvent.h"
 
 struct LostApplicationImpl;  
 
@@ -14,7 +15,6 @@ namespace lost
 namespace application
 {
 
-  
 struct Application : public event::EventDispatcher
 {
 public:
@@ -31,6 +31,8 @@ public:
 
 private:
   boost::shared_ptr<LostApplicationImpl> impl;
+  void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
+  
 };
 
 extern Application* appInstance;

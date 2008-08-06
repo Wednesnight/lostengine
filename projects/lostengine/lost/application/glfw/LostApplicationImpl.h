@@ -15,8 +15,7 @@ struct LostApplicationImpl
   bool          running;
 
   LostApplicationImpl(lost::event::EventDispatcher* target);  
-  void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
-  void init();
+  void init(const lost::common::DisplayAttributes& displayAttributes);
 };
 
 
