@@ -25,7 +25,7 @@ namespace application
       throw std::runtime_error("glfwAdapterInstance wasn't NULL, did you instance more than one adapter/application?");
     }
     glfwAdapterInstance = this;
-
+    running = false;// the main loop is not running yet
   }
   
   GlfwAdapter::~GlfwAdapter()
@@ -37,6 +37,30 @@ namespace application
     glfwInit();    // must init glfw before anything else
     initDisplay(displayAttributes); // must be initialised first or no input callbacks will be called
     initCallbacks(); // connect callbacks AFTER display was initialised or nothing will happen (yes, I know, I'm repeating myslef but you don't wanna know how much time we lost tracking stuff like this down)  
+  }
+
+  void GlfwAdapter::run()
+  {
+    running = true;
+    double lastTime = glfwGetTime();
+    while(running)
+    {
+      double now = glfwGetTime();
+      double delta = now - lastTime;
+      lastTime = now;
+      timerManager.updateTimers(delta);
+      glfwPollEvents();
+      glfwSleep(.001); // don't eat CPU time with a pure spin wait, sleep in intervals // FIXME: make this configurable?
+      if(!glfwGetWindowParam(GLFW_OPENED))
+      {
+        running = false;
+      }
+    }  
+  }
+
+  void GlfwAdapter::quit()
+  {
+    running = false;
   }
 
   void GlfwAdapter::initDisplay(const common::DisplayAttributes& displayAttributes)
@@ -177,24 +201,9 @@ namespace application
     glfwTerminate();
   }
 
-  double GlfwAdapter::getTime()
-  {
-    return glfwGetTime();
-  }
-
-  void GlfwAdapter::pollEvents()
-  {
-    glfwPollEvents();
-  }
-
   void GlfwAdapter::sleep(double seconds)
   {
     glfwSleep(seconds);
-  }
-
-  bool GlfwAdapter::displayOpen()
-  {
-    return glfwGetWindowParam(GLFW_OPENED);
   }
 }
 }

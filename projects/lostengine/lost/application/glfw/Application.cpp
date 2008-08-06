@@ -84,7 +84,7 @@ namespace application
       IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
     }
      
-    impl->init(displayAttributes);
+    impl->adapter.init(displayAttributes);
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
@@ -96,25 +96,11 @@ namespace application
     appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
     
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
-    impl->running = true;
-    double lastTime = impl->adapter.getTime();
-    while(impl->running)
-    {
-      double now = impl->adapter.getTime();
-      double delta = now - lastTime;
-      lastTime = now;
-      impl->timerManager.updateTimers(delta);
-      impl->adapter.pollEvents();
-      impl->adapter.sleep(.001); // don't eat CPU time with a pure spin wait, sleep in intervals
-      if(!impl->adapter.displayOpen())
-      {
-        impl->running = false;
-      }
-    }
+    impl->adapter.run();
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
     EventDispatcher::clear();
   }
 
-  void Application::quit() { impl->running=false; }
+  void Application::quit() { impl->adapter.quit(); }
 }
 }

@@ -4,6 +4,7 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/math/Vec2.h"
+#include "lost/application/glfw/TimerManager.h"
 
 namespace lost
 {
@@ -17,13 +18,14 @@ struct GlfwAdapter
   GlfwAdapter(event::EventDispatcher* inTarget);
   virtual ~GlfwAdapter();
 
-  void init(const common::DisplayAttributes& displayAttributes);
+  void init(const common::DisplayAttributes& displayAttributes); // call this to configure adapter before running it, creates OpenGL context 
 
-  void terminate();
-  double getTime();
-  void pollEvents();
-  void sleep(double seconds);
-  bool displayOpen(); // FIXME:  should we convert this to an event that is sent to the application?
+  void run(); // runs the main loop
+  void quit(); // quits the main loop
+
+  void terminate(); // call this to shut the adapter down whe your application has quit
+  
+  void sleep(double seconds); // FIXME: move this to platform
 
 private: 
   void initDisplay(const common::DisplayAttributes& displayAttributes);
@@ -37,8 +39,10 @@ private:
   void injectMouseMove(const lost::math::Vec2& pos);
   void injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos);
   void injectWindowResize(int x, int y);
-  
+
+  lost::application::TimerManager  timerManager;  
   int displayHeight;
+  bool          running;  
 };
 
 }

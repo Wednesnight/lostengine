@@ -9,15 +9,6 @@ using namespace lost::common;
 using namespace std;
 
 LostApplicationImpl::LostApplicationImpl(EventDispatcher* target)
-: adapter(target), delegate(target) // instantiate impl AFTER appInstance pointer was set!
+: adapter(target) // instantiate impl AFTER appInstance pointer was set!
 {
-  initialised = false;
-  running = false;// the main loop is not running yet
-}
-    
-void LostApplicationImpl::init(const common::DisplayAttributes& displayAttributes)
-{  
-  // init display/adapter so all other code is safe from here on because an OpenGL context now exists
-  adapter.init(displayAttributes);
-  
 }
