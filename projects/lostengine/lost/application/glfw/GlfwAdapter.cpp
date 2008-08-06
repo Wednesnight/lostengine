@@ -15,8 +15,16 @@ namespace lost
 namespace application
 {
 
+  // there is only one global adapter instance, but it's not public
   GlfwAdapter* glfwAdapterInstance = NULL;
 
+  // prototypes for callbacks
+  void glfwWindowSizeCallback(int width, int height);
+  void glfwMouseMoveCallback( int x, int y );
+  void glfwMouseButtonCallback( int button, int action );
+  void glfwKeyCallback( int key, int action, int repeat );
+
+  
   GlfwAdapter::GlfwAdapter(event::EventDispatcher* inTarget)
   : target(inTarget)
   {
@@ -35,8 +43,29 @@ namespace application
   void GlfwAdapter::init(const common::DisplayAttributes& displayAttributes)
   {
     glfwInit();    // must init glfw before anything else
-    initDisplay(displayAttributes); // must be initialised first or no input callbacks will be called
-    initCallbacks(); // connect callbacks AFTER display was initialised or nothing will happen (yes, I know, I'm repeating myslef but you don't wanna know how much time we lost tracking stuff like this down)  
+
+    int result = glfwOpenWindow(displayAttributes.width,
+                                displayAttributes.height,
+                                displayAttributes.redbits,
+                                displayAttributes.greenbits,
+                                displayAttributes.bluebits,
+                                displayAttributes.alphabits,
+                                displayAttributes.depthbits,
+                                displayAttributes.stencilbits,
+                                displayAttributes.fullscreen ? GLFW_FULLSCREEN : GLFW_WINDOW);
+    if(!result)
+    {
+      throw std::runtime_error("couldn't open display");
+    }
+    glfwSetWindowTitle(displayAttributes.title.c_str());
+    displayHeight = displayAttributes.height;
+
+    // connect callbacks AFTER display was initialised or nothing will happen (yes, I know, I'm repeating myslef but you don't wanna know how much time we lost tracking stuff like this down)  
+    glfwEnable(GLFW_KEY_REPEAT);
+    glfwSetKeyCallback( glfwKeyCallback );
+    glfwSetMousePosCallback( glfwMouseMoveCallback );
+    glfwSetMouseButtonCallback( glfwMouseButtonCallback );
+    glfwSetWindowSizeCallback(glfwWindowSizeCallback);    
   }
 
   void GlfwAdapter::run()
@@ -63,88 +92,7 @@ namespace application
     running = false;
   }
 
-  void GlfwAdapter::initDisplay(const common::DisplayAttributes& displayAttributes)
-  {
-      int result = glfwOpenWindow(displayAttributes.width,
-                     displayAttributes.height,
-                     displayAttributes.redbits,
-                     displayAttributes.greenbits,
-                     displayAttributes.bluebits,
-                     displayAttributes.alphabits,
-                     displayAttributes.depthbits,
-                     displayAttributes.stencilbits,
-                     displayAttributes.fullscreen ? GLFW_FULLSCREEN : GLFW_WINDOW);
-      if(!result)
-      {
-        throw std::runtime_error("couldn't open display");
-      }
-      glfwSetWindowTitle(displayAttributes.title.c_str());
-      displayHeight = displayAttributes.height;
-  }
-
-  void GlfwAdapter::initCallbacks()
-  {
-    glfwEnable(GLFW_KEY_REPEAT);
-    glfwSetKeyCallback( glfwKeyCallback );
-    glfwSetMousePosCallback( glfwMouseMoveCallback );
-    glfwSetMouseButtonCallback( glfwMouseButtonCallback );
-    glfwSetWindowSizeCallback(glfwWindowSizeCallback);
-  }
-
-  void glfwKeyCallback( int keysym, int action, int repeat )
-  {
-    glfwAdapterInstance->injectKey(keysym, action, repeat);
-  }
-
-  void glfwMouseMoveCallback( int x, int y )
-  {
-    glfwAdapterInstance->injectMouseMove(lost::math::Vec2(x, y));
-  }
-
-  void glfwMouseButtonCallback( int button, int action )
-  {
-    int x, y;
-    glfwGetMousePos( &x, &y );
-    glfwAdapterInstance->injectMouseButton(button, (action == GLFW_PRESS), lost::math::Vec2(x, y) );
-  }
-
-  void glfwWindowSizeCallback(int width, int height)
-  {
-    glfwAdapterInstance->injectWindowResize(width, height);
-  }
-
-
-  void GlfwAdapter::injectMouseMove(const lost::math::Vec2& pos)
-  {
-    lost::math::Vec2 point = pos;
-        
-    shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
-    point.y = displayHeight - point.y;
-    ev->pos = point;
-    ev->button = M_UNKNOWN;
-    ev->pressed = false;
-    target->dispatchEvent(ev);
-  }
-
-  void GlfwAdapter::injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos)
-  {
-    shared_ptr<MouseEvent> ev(new MouseEvent(pressed ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP()));
-    lost::math::Vec2 point = pos;
-    point.y = displayHeight - point.y;
-
-    ev->pos = point;
-    ev->button = (button == GLFW_MOUSE_BUTTON_1)
-                     ? M_LEFT
-                     : ((button == GLFW_MOUSE_BUTTON_2)
-                         ? M_RIGHT
-                         : ((button == GLFW_MOUSE_BUTTON_3)
-                             ? M_MIDDLE
-                             : M_UNKNOWN));
-    ev->pressed = pressed;
-    target->dispatchEvent(ev);
-  }
-
-  void GlfwAdapter::injectKey(int keysym, int pressed, int repeat)
+  void glfwKeyCallback( int keysym, int pressed, int repeat )
   {
     int l_key = keysym;
     if (keysym > GLFW_KEY_SPECIAL && keysym <= GLFW_KEY_LAST)
@@ -179,23 +127,56 @@ namespace application
         }
       }
     }
-        
+    
     shared_ptr<KeyEvent> ev(new KeyEvent(pressed ? KeyEvent::KEY_DOWN() : KeyEvent::KEY_UP()));
     ev->key = l_key;
     ev->pressed = pressed;
     ev->repeat = repeat;
-    target->dispatchEvent(ev);
+    glfwAdapterInstance->target->dispatchEvent(ev);    
   }
 
-  void GlfwAdapter::injectWindowResize(int x, int y)
+  void glfwMouseMoveCallback( int x, int y )
   {
-    displayHeight = y;
-    shared_ptr<ResizeEvent> ev(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
-    ev->width = x;
-    ev->height = y;
-    target->dispatchEvent(ev);
+    lost::math::Vec2 point(x,y);    
+    shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
+    point.y = glfwAdapterInstance->displayHeight - point.y;
+    ev->pos = point;
+    ev->button = M_UNKNOWN;
+    ev->pressed = false;
+    glfwAdapterInstance->target->dispatchEvent(ev);
   }
-  
+
+  void glfwMouseButtonCallback( int button, int action )
+  {
+    int x, y;
+    glfwGetMousePos( &x, &y );
+    //glfwAdapterInstance->injectMouseButton(button, (action == GLFW_PRESS), lost::math::Vec2(x, y) );
+    
+    bool pressed = (action == GLFW_PRESS);
+    shared_ptr<MouseEvent> ev(new MouseEvent(pressed ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP()));
+    lost::math::Vec2 point(x,y);
+    point.y = glfwAdapterInstance->displayHeight - point.y;
+    ev->pos = point;
+    ev->button = (button == GLFW_MOUSE_BUTTON_1)
+    ? M_LEFT
+    : ((button == GLFW_MOUSE_BUTTON_2)
+       ? M_RIGHT
+       : ((button == GLFW_MOUSE_BUTTON_3)
+          ? M_MIDDLE
+          : M_UNKNOWN));
+    ev->pressed = pressed;
+    glfwAdapterInstance->target->dispatchEvent(ev);
+  }
+
+  void glfwWindowSizeCallback(int width, int height)
+  {
+    glfwAdapterInstance->displayHeight = height;
+    shared_ptr<ResizeEvent> ev(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
+    ev->width = width;
+    ev->height = height;
+    glfwAdapterInstance->target->dispatchEvent(ev);    
+  }
+
   void GlfwAdapter::terminate()
   {
     glfwTerminate();
