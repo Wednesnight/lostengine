@@ -192,4 +192,21 @@
 	[super dealloc];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touchesBegan");
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touchesMoved");
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touchesEnded");
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+  NSLog(@"touchesCancelled");
+}
+
+
 @end
