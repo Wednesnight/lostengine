@@ -6,8 +6,8 @@
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/application/ResizeEvent.h"
-#include "lost/application/ApplicationAdapter.h"
 
+struct ApplicationAdapter;
 
 namespace lost
 {
