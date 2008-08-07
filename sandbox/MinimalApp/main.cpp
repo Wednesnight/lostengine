@@ -1,6 +1,7 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
@@ -21,7 +22,6 @@ FpsMeter fpsMeter;
 
 void idle(shared_ptr<TimerEvent> event)
 {
-  DOUT("idle");
   int width = appInstance->displayAttributes.width;
   int height = appInstance->displayAttributes.height;
   
@@ -30,6 +30,8 @@ void idle(shared_ptr<TimerEvent> event)
 
   glDisable(GL_DEPTH_TEST);GLDEBUG;
   glDisable(GL_TEXTURE_2D);GLDEBUG;
+  glEnableClientState(GL_VERTEX_ARRAY);
+
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
 
@@ -42,7 +44,7 @@ void idle(shared_ptr<TimerEvent> event)
   
   fpsMeter.render(200,0,event->passedSec);
   
-  glfwSwapBuffers();  
+  appInstance->swapBuffers();  
 }
 
 int main(int argn, char** args)
