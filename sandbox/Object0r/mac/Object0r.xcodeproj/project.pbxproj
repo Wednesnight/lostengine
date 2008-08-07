@@ -20,6 +20,12 @@
 		3E3D528C0E2AC75700931839 /* shuttle.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52850E2AC75700931839 /* shuttle.obj */; };
 		3E3D528D0E2AC75700931839 /* tetrahedron.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52860E2AC75700931839 /* tetrahedron.obj */; };
 		3E3D528E0E2AC75700931839 /* magnolia.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52870E2AC75700931839 /* magnolia.obj */; };
+		3E6BC1C00E4B40FA00FC5232 /* professor_tri.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1BE0E4B40FA00FC5232 /* professor_tri.mtl */; };
+		3E6BC1C10E4B40FA00FC5232 /* professor_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1BF0E4B40FA00FC5232 /* professor_tri.obj */; };
+		3E6BC1C60E4B42E300FC5232 /* skeleton.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1C40E4B42E300FC5232 /* skeleton.mtl */; };
+		3E6BC1C70E4B42E300FC5232 /* skeleton.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1C50E4B42E300FC5232 /* skeleton.obj */; };
+		3E6BC1CB0E4B43B400FC5232 /* speedcraft.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */; };
+		3E6BC1CC0E4B43B400FC5232 /* speedcraft.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1CA0E4B43B400FC5232 /* speedcraft.obj */; };
 		3E8066A10E49EB0C00844523 /* magnolia_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E8066A00E49EB0C00844523 /* magnolia_tri.obj */; };
 		3EB514A70E325AD30099EC4B /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A50E325AD30099EC4B /* lighting.vs */; };
 		3EB514A80E325AD30099EC4B /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A60E325AD30099EC4B /* lighting.fs */; };
@@ -81,6 +87,12 @@
 		3E3D52850E2AC75700931839 /* shuttle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = shuttle.obj; path = ../../../data/obj/shuttle.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52860E2AC75700931839 /* tetrahedron.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tetrahedron.obj; path = ../../../data/obj/tetrahedron.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52870E2AC75700931839 /* magnolia.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia.obj; path = ../../../data/obj/magnolia.obj; sourceTree = SOURCE_ROOT; };
+		3E6BC1BE0E4B40FA00FC5232 /* professor_tri.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = professor_tri.mtl; path = ../../../data/obj/professor_tri.mtl; sourceTree = SOURCE_ROOT; };
+		3E6BC1BF0E4B40FA00FC5232 /* professor_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = professor_tri.obj; path = ../../../data/obj/professor_tri.obj; sourceTree = SOURCE_ROOT; };
+		3E6BC1C40E4B42E300FC5232 /* skeleton.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = skeleton.mtl; path = ../../../data/obj/skeleton.mtl; sourceTree = SOURCE_ROOT; };
+		3E6BC1C50E4B42E300FC5232 /* skeleton.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = skeleton.obj; path = ../../../data/obj/skeleton.obj; sourceTree = SOURCE_ROOT; };
+		3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = speedcraft.mtl; path = ../../../data/obj/speedcraft.mtl; sourceTree = SOURCE_ROOT; };
+		3E6BC1CA0E4B43B400FC5232 /* speedcraft.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = speedcraft.obj; path = ../../../data/obj/speedcraft.obj; sourceTree = SOURCE_ROOT; };
 		3E8066A00E49EB0C00844523 /* magnolia_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia_tri.obj; path = ../../../data/obj/magnolia_tri.obj; sourceTree = SOURCE_ROOT; };
 		3EB514A50E325AD30099EC4B /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		3EB514A60E325AD30099EC4B /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
@@ -156,6 +168,12 @@
 				3ED935C90E4756B700AABFAB /* init */,
 				3EB514A50E325AD30099EC4B /* lighting.vs */,
 				3EB514A60E325AD30099EC4B /* lighting.fs */,
+				3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */,
+				3E6BC1CA0E4B43B400FC5232 /* speedcraft.obj */,
+				3E6BC1C40E4B42E300FC5232 /* skeleton.mtl */,
+				3E6BC1C50E4B42E300FC5232 /* skeleton.obj */,
+				3E6BC1BE0E4B40FA00FC5232 /* professor_tri.mtl */,
+				3E6BC1BF0E4B40FA00FC5232 /* professor_tri.obj */,
 				3E318BCB0E4B298F006FB6F3 /* sponza_tri_mtl.obj */,
 				3E318BCC0E4B298F006FB6F3 /* sponza_tri_mtl.mtl */,
 				3E31898A0E4AE3E4006FB6F3 /* kenny_tri.obj */,
@@ -296,6 +314,12 @@
 				3E31898D0E4AE3E4006FB6F3 /* kenny_tri.mtl in Resources */,
 				3E318BCD0E4B298F006FB6F3 /* sponza_tri_mtl.obj in Resources */,
 				3E318BCE0E4B298F006FB6F3 /* sponza_tri_mtl.mtl in Resources */,
+				3E6BC1C00E4B40FA00FC5232 /* professor_tri.mtl in Resources */,
+				3E6BC1C10E4B40FA00FC5232 /* professor_tri.obj in Resources */,
+				3E6BC1C60E4B42E300FC5232 /* skeleton.mtl in Resources */,
+				3E6BC1C70E4B42E300FC5232 /* skeleton.obj in Resources */,
+				3E6BC1CB0E4B43B400FC5232 /* speedcraft.mtl in Resources */,
+				3E6BC1CC0E4B43B400FC5232 /* speedcraft.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

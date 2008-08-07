@@ -273,7 +273,7 @@ struct Object0r
     GLfloat ambient[]   = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat diffuse[]   = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat specular[]  = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat shininess[] = {75.0f};
+    GLfloat shininess[] = {100.0f};
     GLfloat position[]  = {1.0f, 1.0f, 1.0f, 0.0f};
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -315,6 +315,18 @@ struct Object0r
       {
         case K_ESCAPE:
           quit();
+          break;
+        case K_F1:
+          modelRenderer->renderModeFront = GL_POINT;
+          modelRenderer->renderModeBack  = GL_POINT;
+          break;
+        case K_F2:
+          modelRenderer->renderModeFront = GL_LINE;
+          modelRenderer->renderModeBack  = GL_LINE;
+          break;
+        case K_F3:
+          modelRenderer->renderModeFront = GL_FILL;
+          modelRenderer->renderModeBack  = GL_FILL;
           break;
       }
     }
