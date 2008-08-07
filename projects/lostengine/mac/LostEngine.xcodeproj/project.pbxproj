@@ -230,6 +230,7 @@
 		EAEAF7F60E4A77F40003A334 /* GLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF6E60E4A5DD00003A334 /* GLContext.h */; };
 		EAEAF7F70E4A77F40003A334 /* LostApplicationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */; };
 		EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */; };
+		EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -480,6 +481,7 @@
 		EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationHelpers.h; path = iphone/LostApplicationHelpers.h; sourceTree = "<group>"; };
 		EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostApplicationHelpers.mm; path = iphone/LostApplicationHelpers.mm; sourceTree = "<group>"; };
 		EAEAF7920E4A6EF20003A334 /* teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = teapot.h; path = iphone/teapot.h; sourceTree = "<group>"; };
+		EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationHelpers.cpp; path = iphone/LostApplicationHelpers.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -889,6 +891,7 @@
 				EAEAF6E60E4A5DD00003A334 /* GLContext.h */,
 				EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */,
 				EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */,
+				EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */,
 			);
 			name = iphone;
 			sourceTree = "<group>";
@@ -1295,6 +1298,7 @@
 				EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */,
 				EAEAF7F50E4A77F40003A334 /* GLContext.cpp in Sources */,
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
+				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,7 @@
 #import "lost/application/iphone/LostAppController.h"
 #import "lost/application/iphone/teapot.h"
 #include "lost/common/Logger.h"
+#include "lost/application/iphone/LostApplicationHelpers.h"
 
 // CONSTANTS
 #define kTeapotScale				3.0
@@ -125,6 +126,7 @@
 	
 	//Make the OpenGL modelview matrix the default
 	glMatrixMode(GL_MODELVIEW);
+  
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
@@ -177,6 +179,9 @@
 	//Configure and start accelerometer
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+  lostApplicationHelpers_preinit();
+  lostApplicationHelpers_init();
+  lostApplicationHelpers_run();
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
@@ -192,6 +197,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
   NSLog(@"applicationWillTerminate");
+  lostApplicationHelpers_quit();
 }
 
 

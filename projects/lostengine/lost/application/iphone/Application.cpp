@@ -56,66 +56,8 @@ namespace application
     displayAttributes.height = ev->height;
   }
 
-  void Application::run()
-  {
-    // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
-    addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
-
-/*    shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
-  
-    // try to load default lua script
-    try
-    {
-      shared_ptr<File> initScript = loader->load("init");
-      interpreter->doString(initScript->str());
-    }
-    catch(exception& ex)
-    {
-      IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
-    }
-    
-    // broadcast preinit event, this is the latest point for c++ client code to setup the configuration
-    appEvent->type = ApplicationEvent::PREINIT();dispatchEvent(appEvent);
-    
-    // try to extract default display attributes from lua state
-    try
-    {
-      object g = globals(*(interpreter));
-      if((luabind::type(g["config"])!= LUA_TNIL)
-         && 
-         (luabind::type(g["config"]["displayAttributes"])!=LUA_TNIL))
-      {
-        displayAttributes = object_cast<DisplayAttributes>(g["config"]["displayAttributes"]);
-      }
-    }
-    catch(exception& ex)
-    {
-      IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
-    }
-     
-
-    // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
-    addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
-
-    // the gl context will be created here, so resize event needs to be connected before
-    adapter->init(displayAttributes);
-
-    // broadcast init event so dependant code knows its safe to init resources now
-    appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
-        
-    // broadcast postinit event to signal that the application initialisation has finished
-    appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
-    
-    appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
-    adapter->run();
-    appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
-    EventDispatcher::clear();
-    adapter->terminate();   */
-    lostApplicationHelpers_run();
-  }
-
-  void Application::swapBuffers() {lostApplicationHelpers_swapBuffers();}
-
-  void Application::quit() { lostApplicationHelpers_quit(); }
+  void Application::run() { lostApplicationHelpers_runAppController(); }
+  void Application::swapBuffers() { lostApplicationHelpers_swapBuffers(); }
+  void Application::quit() { lostApplicationHelpers_quitAppController(); }
 }
 }

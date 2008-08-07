@@ -2,7 +2,10 @@
 #include "lost/application/iphone/LostApplicationHelpers.h"
 #import "lost/application/iphone/LostAppController.h"
 
-void lostApplicationHelpers_run()
+using namespace std;
+
+
+void lostApplicationHelpers_runAppController()
 {
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
 	UIApplicationMain(0, NULL, nil, @"LostAppController");
@@ -13,7 +16,7 @@ void lostApplicationHelpers_swapBuffers()
 {
 }
 
-void lostApplicationHelpers_quit()
+void lostApplicationHelpers_quitAppController()
 {
 }
 
@@ -21,3 +24,4 @@ void* lostApplicationHelpers_linkHelper()
 {
   return (void*)[LostAppController alloc];
 }
+

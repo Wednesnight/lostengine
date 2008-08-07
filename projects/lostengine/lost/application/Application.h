@@ -27,10 +27,10 @@ public:
   common::DisplayAttributes             displayAttributes;
   boost::shared_ptr<resource::Loader>   loader;
   boost::shared_ptr<lua::State>         interpreter;
+  void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
   
 private:
   boost::shared_ptr<ApplicationAdapter> adapter;
-  void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
   
 };
 

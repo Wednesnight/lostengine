@@ -13,6 +13,7 @@
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
 		EA6712F00E3E94A900B961EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6712EF0E3E94A900B961EC /* main.cpp */; };
 		EAEAF7220E4A61B00003A334 /* libLostEngine-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEAF7210E4A61A50003A334 /* libLostEngine-iPhone.a */; };
+		EAF706C60E4B81B000EF62CB /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAF706C50E4B81B000EF62CB /* init */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA6712EF0E3E94A900B961EC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAF706C50E4B81B000EF62CB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
+				EAF706C50E4B81B000EF62CB /* init */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF706C60E4B81B000EF62CB /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,22 @@
+function preinitHandler(event)
+  log.debug("preinit")
+end
+
+function initHandler(event)
+  log.debug("init")
+end
+
+function runHandler(event)
+  log.debug("run")
+end
+
+function quitHandler(event)
+  log.debug("quit")
+end
+
+local ApplicationEvent = lost.application.ApplicationEvent
+
+app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
+app:addEventListener(ApplicationEvent.INIT, initHandler)
+app:addEventListener(ApplicationEvent.RUN, runHandler)
+app:addEventListener(ApplicationEvent.QUIT, quitHandler)
