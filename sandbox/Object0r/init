@@ -16,10 +16,10 @@ function preinit(event)
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "Object0r";
   
-  modelFilename     = "magnolia_tri.obj"
-  modelSize         = 5.0
+  modelFilename     = "kenny_tri.obj"
+  modelSize         = 2.0
   modelDisplayFront = "solid"             -- points / wireframe / solid
-  modelDisplayBack  = "wireframe"                 -- points / wireframe / solid
+  modelDisplayBack  = "solid"             -- points / wireframe / solid
 end
 
 function cleanupOnQuit(event)

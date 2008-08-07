@@ -1,6 +1,7 @@
 #ifndef LOST_MODEL_RENDERER_H
 #define LOST_MODEL_RENDERER_H
 
+#include <vector>
 #include <boost/shared_ptr.hpp>
 
 #include "lost/model/Mesh.h"
@@ -37,7 +38,7 @@ namespace lost
       {
         vertexBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
         vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
-        
+
         elementBuffer.reset(new gl::ElementArrayBuffer<unsigned int>);
         elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
         
@@ -48,13 +49,39 @@ namespace lost
       {
         glScalef(size, size, size);
         vertexBuffer->bindVertexPointer();
-        elementBuffer->bind();
         // draw mesh faces as triangles
         glPolygonMode(GL_FRONT, renderModeFront);
         glPolygonMode(GL_BACK, renderModeBack);
-        elementBuffer->drawElements(GL_TRIANGLES);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        elementBuffer->bind();
+        if (material)
+        {
+          for (MaterialGroups::iterator idx = material->groups.begin(); idx != material->groups.end(); ++idx)
+          {
+            if ((*idx)->ambient) 
+            {
+//              DOUT(*((*idx)->ambient));
+              glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, (GLfloat*)(*idx)->ambient.get());
+            }
+            if ((*idx)->diffuse)
+            {
+//              DOUT(*((*idx)->diffuse));
+              glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, (GLfloat*)(*idx)->diffuse.get());
+            }
+            if ((*idx)->specular)
+            {
+//              DOUT(*((*idx)->specular));
+              glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, (GLfloat*)(*idx)->specular.get());
+            }
+
+            elementBuffer->drawRangeElements(GL_TRIANGLES, (*idx)->faceOffset, (*idx)->faceOffset + ((*idx)->faceLength - 1));
+          }
+        }
+        else
+        {
+          elementBuffer->drawElements(GL_TRIANGLES);
+        }
         elementBuffer->unbind();
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         vertexBuffer->unbind();
       }
     };

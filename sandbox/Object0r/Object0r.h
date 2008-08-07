@@ -255,8 +255,8 @@ struct Object0r
   
   void render(shared_ptr<TimerEvent> event)
   {
-    glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
+    glClearColor(0.0, 0.0, 0.0, 0.0);GLDEBUG;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
     
@@ -270,9 +270,27 @@ struct Object0r
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
-    lightingShader->enable();
+    GLfloat ambient[]   = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat diffuse[]   = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat specular[]  = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat shininess[] = {75.0f};
+    GLfloat position[]  = {1.0f, 1.0f, 1.0f, 0.0f};
+    glShadeModel(GL_SMOOTH);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, position);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+
+//    lightingShader->enable();
+    setColor(whiteColor);
     modelRenderer->render();
-    lightingShader->disable();
+//    lightingShader->disable();
+
+    glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHTING);
 
     setColor(whiteColor);
     drawAABB(mesh->box);

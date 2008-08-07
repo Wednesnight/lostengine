@@ -31,7 +31,9 @@ namespace lost
       std::vector<std::string> labels;
 
       FpsMeter()
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
       : font(GLUT_BITMAP_TIMES_ROMAN_10)
+#endif
       {
         width = historylength;
         height = 100;
@@ -77,14 +79,18 @@ namespace lost
 
         // top caption
         gl::setColor(Color(0, 0, 0, alpha));
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
         gl::drawString((x+width)-17, (y+height)-9, "FPS", font);
+#endif
 
         // horizontal stripes
         gl::setColor(Color(0, 0, 0, alpha));
         for(unsigned long n=0; n<numlabels; ++n)
         {
           gl::drawLine(math::Vec2(x, y+10*(n+1)-1), math::Vec2(x+width-1, y+10*(n+1)-1));
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
           gl::drawString(x+1, y+10*n+1, labels[n], font);
+#endif
         }
 
         // draw history ringbuffer

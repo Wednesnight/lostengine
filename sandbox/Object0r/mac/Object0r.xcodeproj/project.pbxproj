@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E1AEF040E1CC567007575E9 /* glm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1AEF030E1CC567007575E9 /* glm.cpp */; };
 		3E1AEF5C0E1CC8B3007575E9 /* sponza.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */; };
+		3E31898C0E4AE3E4006FB6F3 /* kenny_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E31898A0E4AE3E4006FB6F3 /* kenny_tri.obj */; };
+		3E31898D0E4AE3E4006FB6F3 /* kenny_tri.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E31898B0E4AE3E4006FB6F3 /* kenny_tri.mtl */; };
 		3E3D52880E2AC75700931839 /* cessna.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52810E2AC75700931839 /* cessna.obj */; };
 		3E3D52890E2AC75700931839 /* gourd.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52820E2AC75700931839 /* gourd.obj */; };
 		3E3D528A0E2AC75700931839 /* humanoid_quad.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E3D52830E2AC75700931839 /* humanoid_quad.obj */; };
@@ -66,6 +68,8 @@
 		3E1AEF030E1CC567007575E9 /* glm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = glm.cpp; path = ../../../thirdparty/glm/glm.cpp; sourceTree = SOURCE_ROOT; };
 		3E1AEF090E1CC57B007575E9 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glm.h; path = ../../../thirdparty/glm/glm.h; sourceTree = SOURCE_ROOT; };
 		3E1AEF5B0E1CC8B3007575E9 /* sponza.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza.obj; path = ../../../data/obj/sponza.obj; sourceTree = SOURCE_ROOT; };
+		3E31898A0E4AE3E4006FB6F3 /* kenny_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = kenny_tri.obj; path = ../../../data/obj/kenny_tri.obj; sourceTree = SOURCE_ROOT; };
+		3E31898B0E4AE3E4006FB6F3 /* kenny_tri.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = kenny_tri.mtl; path = ../../../data/obj/kenny_tri.mtl; sourceTree = SOURCE_ROOT; };
 		3E3D52810E2AC75700931839 /* cessna.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cessna.obj; path = ../../../data/obj/cessna.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52820E2AC75700931839 /* gourd.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = gourd.obj; path = ../../../data/obj/gourd.obj; sourceTree = SOURCE_ROOT; };
 		3E3D52830E2AC75700931839 /* humanoid_quad.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = humanoid_quad.obj; path = ../../../data/obj/humanoid_quad.obj; sourceTree = SOURCE_ROOT; };
@@ -148,6 +152,8 @@
 				3ED935C90E4756B700AABFAB /* init */,
 				3EB514A50E325AD30099EC4B /* lighting.vs */,
 				3EB514A60E325AD30099EC4B /* lighting.fs */,
+				3E31898A0E4AE3E4006FB6F3 /* kenny_tri.obj */,
+				3E31898B0E4AE3E4006FB6F3 /* kenny_tri.mtl */,
 				3E8066A00E49EB0C00844523 /* magnolia_tri.obj */,
 				3EC77F020E45D348009D4167 /* ladybird_tri.obj */,
 				3ED8F6CD0E461CC50043F5CE /* cart_tri.obj */,
@@ -280,6 +286,8 @@
 				3ED935A70E47516800AABFAB /* cube_tri.obj in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
 				3E8066A10E49EB0C00844523 /* magnolia_tri.obj in Resources */,
+				3E31898C0E4AE3E4006FB6F3 /* kenny_tri.obj in Resources */,
+				3E31898D0E4AE3E4006FB6F3 /* kenny_tri.mtl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

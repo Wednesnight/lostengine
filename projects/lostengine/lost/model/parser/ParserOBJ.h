@@ -18,6 +18,7 @@
 #include "lost/common/Logger.h"
 #include "lost/model/MaterialOBJ.h"
 #include "lost/resource/Loader.h"
+#include "lost/math/Vec4.h"
 
 namespace lost
 {
@@ -28,57 +29,78 @@ namespace lost
     
       struct MaterialAttributes
       {
-        boost::shared_ptr<math::Vec3> ambient;
-        boost::shared_ptr<math::Vec3> diffuse;
-        boost::shared_ptr<math::Vec3> specular;
-        
-        void clear()
-        {
-          ambient.reset();
-          diffuse.reset();
-          specular.reset();
-        }
+        boost::shared_ptr<math::Vec4> ambient;
+        boost::shared_ptr<math::Vec4> diffuse;
+        boost::shared_ptr<math::Vec4> specular;
       };
       
-      struct MaterialAttributesReset
+      struct MaterialAttributesNext
       {
-        boost::shared_ptr<MaterialAttributes>& attributes;
+        std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
+        std::string&                                                   name;
+        boost::shared_ptr<MaterialAttributes>&                         attributes;
         
-        MaterialAttributesReset(boost::shared_ptr<MaterialAttributes>& inAttributes)
-        : attributes(inAttributes)
+        MaterialAttributesNext(std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials, std::string& inName, boost::shared_ptr<MaterialAttributes>& inAttributes)
+        : materials(inMaterials),
+          name(inName),
+          attributes(inAttributes)
         {
         }
         
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
+          DOUT("adding material: " << name);
           attributes.reset(new MaterialAttributes());
+          materials[name] = attributes;
         }
       };
       
-      struct Vec3Reset
+      struct MaterialAttributesAssign
       {
-        boost::shared_ptr<math::Vec3>& vec;
+        typedef enum
+        {
+          typeAmbient,
+          typeDiffuse,
+          typeSpecular
+        } AssignType;
         
-        Vec3Reset(boost::shared_ptr<math::Vec3>& inVec)
-        : vec(inVec)
+        AssignType                             type;
+        boost::shared_ptr<MaterialAttributes>& attributes;
+        math::Vec4&                            vec;
+        
+        MaterialAttributesAssign(AssignType inType, boost::shared_ptr<MaterialAttributes>& inAttributes, math::Vec4& inVec)
+        : type(inType),
+          attributes(inAttributes),
+          vec(inVec)
         {
         }
         
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
-          vec.reset(new math::Vec3());
+          switch (type)
+          {
+            case typeAmbient:
+              attributes->ambient.reset(new math::Vec4(vec));
+              break;
+            case typeDiffuse:
+              attributes->diffuse.reset(new math::Vec4(vec));
+              break;
+            case typeSpecular:
+              attributes->specular.reset(new math::Vec4(vec));
+              break;
+          }
         }
       };
       
       struct MaterialParser
       {
-        std::string&                               filename;
-        boost::shared_ptr<resource::Loader>&       loader;
-        std::map<std::string, MaterialAttributes>& materials;
+        std::string&                                                   filename;
+        boost::shared_ptr<resource::Loader>&                           loader;
+        std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
         
-        MaterialParser(std::string& inFilename, boost::shared_ptr<resource::Loader>& inLoader, std::map<std::string, MaterialAttributes>& inMaterials)
+        MaterialParser(std::string& inFilename, boost::shared_ptr<resource::Loader>& inLoader, std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials)
         : filename(inFilename),
           loader(inLoader),
           materials(inMaterials)
@@ -88,38 +110,46 @@ namespace lost
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
+          DOUT("loading");
           boost::shared_ptr<resource::File> file = loader->load(filename);
           if (file)
           {
+            DOUT("file is valid");
             std::string currentName;
 
             boost::shared_ptr<MaterialAttributes> currentAttributes;
-            
-            boost::spirit::rule<> material_p = boost::spirit::str_p("newmtl")[MaterialAttributesReset(currentAttributes)]
-                                               >> +boost::spirit::space_p >> +(boost::spirit::anychar_p-boost::spirit::space_p)[boost::spirit::assign_a(currentName)]
+
+            math::Vec4 ambient;
+            math::Vec4 diffuse;
+            math::Vec4 specular;
+
+            DOUT("rules");
+            boost::spirit::rule<> material_p = boost::spirit::str_p("newmtl")
+                                               >> +boost::spirit::space_p >> (+(boost::spirit::anychar_p-boost::spirit::space_p))[boost::spirit::assign_a(currentName)]
                                                >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-            boost::spirit::rule<> ambient_p = boost::spirit::str_p("Ka")[Vec3Reset(currentAttributes->ambient)]
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->ambient->x)] 
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->ambient->y)]
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->ambient->z)]
+            boost::spirit::rule<> ambient_p = boost::spirit::str_p("Ka")
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(ambient.x)] 
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(ambient.y)]
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(ambient.z)][boost::spirit::assign_a(ambient.w, 1.0f)]
                                               >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-            boost::spirit::rule<> diffuse_p = boost::spirit::str_p("Kd")[Vec3Reset(currentAttributes->diffuse)]
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->diffuse->x)] 
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->diffuse->y)]
-                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->diffuse->z)]
+            boost::spirit::rule<> diffuse_p = boost::spirit::str_p("Kd")
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(diffuse.x)] 
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(diffuse.y)]
+                                              >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(diffuse.z)][boost::spirit::assign_a(diffuse.w, 1.0f)]
                                               >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-            boost::spirit::rule<> specular_p = boost::spirit::str_p("Ks")[Vec3Reset(currentAttributes->specular)]
-                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->specular->x)] 
-                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->specular->y)]
-                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(currentAttributes->specular->z)]
+            boost::spirit::rule<> specular_p = boost::spirit::str_p("Ks")
+                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(specular.x)] 
+                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(specular.y)]
+                                               >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(specular.z)][boost::spirit::assign_a(specular.w, 1.0f)]
                                                >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
             boost::spirit::rule<> unknown_p = *(boost::spirit::anychar_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-            boost::spirit::rule<> mtlfile_p = *(material_p |
-                                                ambient_p |
-                                                diffuse_p |
-                                                specular_p |
+            boost::spirit::rule<> mtlfile_p = *(material_p[MaterialAttributesNext(materials, currentName, currentAttributes)] |
+                                                ambient_p[MaterialAttributesAssign(MaterialAttributesAssign::typeAmbient, currentAttributes, ambient)] |
+                                                diffuse_p[MaterialAttributesAssign(MaterialAttributesAssign::typeDiffuse, currentAttributes, diffuse)] |
+                                                specular_p[MaterialAttributesAssign(MaterialAttributesAssign::typeSpecular, currentAttributes, specular)] |
                                                 unknown_p);
             
+            DOUT("debug");
             BOOST_SPIRIT_DEBUG_NODE(material_p);
             BOOST_SPIRIT_DEBUG_NODE(ambient_p);
             BOOST_SPIRIT_DEBUG_NODE(diffuse_p);
@@ -127,6 +157,7 @@ namespace lost
             BOOST_SPIRIT_DEBUG_NODE(unknown_p);
             BOOST_SPIRIT_DEBUG_NODE(mtlfile_p);
             
+            DOUT("parse");
             if (boost::spirit::parse(file->str().c_str(), mtlfile_p).full)
             {
             }
@@ -134,11 +165,82 @@ namespace lost
         }
       };
       
+      struct MaterialInit
+      {
+        boost::shared_ptr<MaterialOBJ>& material;
+        
+        MaterialInit(boost::shared_ptr<MaterialOBJ>& inMaterial)
+        : material(inMaterial)
+        {
+        }
+        
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          material.reset(new MaterialOBJ());
+        }
+      };
+      
+      struct MaterialAssign
+      {
+        boost::shared_ptr<MaterialOBJ>& material;
+        std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
+        std::string& materialName;
+        unsigned int& materialFaceOffset; 
+        boost::shared_ptr<MaterialGroup>& group;
+
+        MaterialAssign(boost::shared_ptr<MaterialOBJ>& inMaterial, 
+                       std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials, 
+                       std::string& inMaterialName, 
+                       unsigned int& inMaterialFaceOffset, 
+                       boost::shared_ptr<MaterialGroup>& inGroup)
+        : material(inMaterial),
+          materials(inMaterials),
+          materialName(inMaterialName),
+          materialFaceOffset(inMaterialFaceOffset),
+          group(inGroup)
+        {
+        }
+
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          DOUT("trying to add material group: " << materialName);
+          DOUT("materials.find(materialName): " << (materials.find(materialName) != materials.end()));
+          if (materialName.size() && materials.find(materialName) != materials.end())
+          {
+            DOUT("adding material group: " << materialName);
+            boost::shared_ptr<MaterialAttributes> attributes = materials[materialName];
+            DOUT("resetting group");
+            group.reset(new MaterialGroup(materialFaceOffset, 0, attributes->ambient, attributes->diffuse, attributes->specular));
+            DOUT("adding group to material");
+            material->groups.push_back(group);
+          }
+        }
+      };
+      
+      struct MaterialGroupIncrement
+      {
+        boost::shared_ptr<MaterialGroup>& group;
+        
+        MaterialGroupIncrement(boost::shared_ptr<MaterialGroup>& inGroup)
+        : group(inGroup)
+        {
+        }
+        
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          if (group) group->faceLength+= 3;
+        }
+      };
+      
       struct ParserOBJ
       {
       private:
-        boost::shared_ptr<resource::Loader>       loader;
-        std::map<std::string, MaterialAttributes> materials;
+        boost::shared_ptr<resource::Loader> loader;
+
+        std::map<std::string, boost::shared_ptr<MaterialAttributes> > materials;
 
         struct MeshAssignVertex
         {
@@ -254,10 +356,17 @@ namespace lost
               Vertex       vertex;
               unsigned int facePoint;
               
-              std::string materialFile;
+              std::string  materialFile;
+              std::string  materialName;
+              unsigned int materialFaceOffset;
+
+              boost::shared_ptr<MaterialGroup> currentGroup;
               
               boost::spirit::rule<> mtllib_p = boost::spirit::str_p("mtllib")
-                                               >> +boost::spirit::space_p >> +(boost::spirit::anychar_p-boost::spirit::space_p)[boost::spirit::assign_a(materialFile)][MaterialParser(materialFile, loader, materials)]
+                                               >> +boost::spirit::space_p >> (+(boost::spirit::anychar_p-boost::spirit::space_p))[boost::spirit::assign_a(materialFile)][MaterialParser(materialFile, loader, materials)]
+                                               >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
+              boost::spirit::rule<> usemtl_p = boost::spirit::str_p("usemtl")
+                                               >> +boost::spirit::space_p >> (+(boost::spirit::anychar_p-boost::spirit::space_p))[boost::spirit::assign_a(materialName)][boost::spirit::assign_a(materialFaceOffset, faceIdx)]
                                                >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
               boost::spirit::rule<> vertex_p  = boost::spirit::ch_p('v')
                                                 >> +boost::spirit::space_p >> boost::spirit::real_p[boost::spirit::assign_a(vertex.x)] 
@@ -276,13 +385,15 @@ namespace lost
                                              >> boost::spirit::list_p(facevert_p[MeshAssignFacePoint(*outMesh, facePoint, faceIdx)][boost::spirit::assign_a(facePoint, 0)], +boost::spirit::space_p)
                                              >> *(boost::spirit::space_p-boost::spirit::eol_p) >> boost::spirit::eol_p;                                                       
               boost::spirit::rule<> unknown_p = *(boost::spirit::anychar_p-boost::spirit::eol_p) >> boost::spirit::eol_p;
-              boost::spirit::rule<> objfile_p = *(mtllib_p |
+              boost::spirit::rule<> objfile_p = *(mtllib_p[MaterialInit(outMaterial)] |
+                                                  usemtl_p[MaterialAssign(outMaterial, materials, materialName, materialFaceOffset, currentGroup)] |
                                                   vertex_p[MeshAssignVertex(*outMesh, vertex, vertexIdx)]
                                                           [phoenix::bind(&Vertex::zero)(phoenix::var(vertex))] |
-                                                  face_p |
+                                                  face_p[MaterialGroupIncrement(currentGroup)] |
                                                   unknown_p);
               
               BOOST_SPIRIT_DEBUG_NODE(mtllib_p);
+              BOOST_SPIRIT_DEBUG_NODE(usemtl_p);
               BOOST_SPIRIT_DEBUG_NODE(vertex_p);
               BOOST_SPIRIT_DEBUG_NODE(facevert_p);
               BOOST_SPIRIT_DEBUG_NODE(face_p);

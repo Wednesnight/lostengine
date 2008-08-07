@@ -6,7 +6,7 @@
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/application/Timer.h"
-//#include "lost/common/FpsMeter.h"
+#include "lost/common/FpsMeter.h"
 
 using namespace std;
 using namespace boost;
@@ -18,7 +18,7 @@ using namespace lost::gl::utils;
 using namespace lost::application;
 
 
-//FpsMeter fpsMeter;
+FpsMeter fpsMeter;
 
 void idle(shared_ptr<TimerEvent> event)
 {
@@ -37,7 +37,11 @@ void idle(shared_ptr<TimerEvent> event)
   setColor(whiteColor);
   drawLine(Vec2(0,0), Vec2(width-1, height-1));
     
-  //fpsMeter.render(200,0,event->passedSec);
+  set2DProjection(Vec2(0,0), Vec2(width, height));
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  fpsMeter.render(width - fpsMeter.width, 0, event->passedSec);
+
   appInstance->swapBuffers();
 }
 

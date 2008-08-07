@@ -51,12 +51,30 @@ struct Buffer
     drawElements(mode, count, this->type, indices);
   }
   
-  virtual void drawElements(GLenum  	mode,
-                            GLsizei  	count,
-                            GLenum  	inType,
-                            const GLvoid *  	indices)
+  virtual void drawElements(GLenum  	     mode,
+                            GLsizei  	     count,
+                            GLenum  	     inType,
+                            const GLvoid * indices)
   {
-    glDrawElements(mode, count, type, indices);GLDEBUG_THROW;
+    glDrawElements(mode, count, inType, indices);GLDEBUG_THROW;
+  }
+  
+  // indices: used as byte offset into buffer when element array is bound
+  virtual void drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count=-1, const GLvoid* indices = 0)
+  {
+    if(count == -1)
+      count = numElements;
+    drawRangeElements(mode, start, end, count, this->type, indices);
+  }
+  
+  virtual void drawRangeElements(GLenum      	  mode,
+                                 GLuint         start,
+                                 GLuint         end,
+                                 GLsizei        count,
+                                 GLenum  	      inType,
+                                 const GLvoid * indices)
+  {
+    glDrawRangeElements(mode, start, end, count, inType, indices);GLDEBUG_THROW;
   }
   
   /**
