@@ -122,7 +122,8 @@ namespace lost
     // TODO: buildUserDataPath() not implemented
     std::string buildUserDataPath( const std::string& filename )
     {
-      std::string result( filename );
+      std::string home = std::getenv("HOME");
+      std::string result( home +"/"+ filename );
       return result;
     }
 

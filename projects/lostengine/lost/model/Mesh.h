@@ -7,6 +7,7 @@
 #include "lost/common/Logger.h"
 #include "lost/math/AABB.h"
 #include "lost/model/Vertex.h"
+#include "lost/math/Vec3.h"
 
 namespace lost
 {
@@ -17,9 +18,11 @@ namespace lost
     {
       unsigned int vertexCount;
       unsigned int faceCount;
+      unsigned int normalCount;
 
       boost::shared_array<Vertex>       vertices;
       boost::shared_array<unsigned int> faces;
+      boost::shared_array<math::Vec3>   normals;
 
       lost::math::AABB box;
 

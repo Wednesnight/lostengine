@@ -33,7 +33,7 @@ struct Buffer
 
   virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();vertexPointer(size, type, stride, pointer);}
   virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();texCoordPointer(size, type, stride, pointer);}
-  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer) {bind();normalPointer(type, stride, pointer);}
+  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();normalPointer(type, stride, pointer);}
   virtual void bindColorPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();colorPointer(size, type, stride, pointer);}
 
   virtual void drawArrays(GLenum mode, GLint first=0, GLsizei count=-1)

@@ -8,8 +8,22 @@ namespace lost
   namespace model
   {
 
-    typedef lost::math::Vec3 Vertex;
+    struct Vertex : public math::Vec3
+    {
+    };
 
+    inline void operator +=(math::Vec3& inOp1, const Vertex& inOp2)
+    {
+      inOp1.x += inOp2.x;
+      inOp1.y += inOp2.y;
+      inOp1.z += inOp2.z;
+    }
+    
+    inline bool operator ==(const Vertex& inOp1, const Vertex& inOp2)
+    {
+      return (inOp1.x == inOp2.x) && (inOp1.y == inOp2.y) && (inOp1.z == inOp2.z);
+    }
+    
   }
 }
 

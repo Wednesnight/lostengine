@@ -17,9 +17,13 @@ function preinit(event)
   config.displayAttributes.title = "Object0r";
   
   modelFilename     = "kenny_tri.obj"
-  modelSize         = 2.0
+  modelSize         = 5.0
   modelDisplayFront = "solid"             -- points / wireframe / solid
   modelDisplayBack  = "solid"             -- points / wireframe / solid
+
+--  lightingAmbient  = Vec4();
+--  lightingDiffuse  = Vec4();
+--  lightingSpecular = Vec4();
 end
 
 function cleanupOnQuit(event)

@@ -33,7 +33,7 @@
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
 #include "lost/gl/ElementArrayBuffer.h"
-
+#include "lost/platform/Platform.h"
 #include "lost/application/Timer.h"
 
 #include "lost/lua/lua.h"
@@ -269,21 +269,30 @@ struct Object0r
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
-
-    GLfloat ambient[]   = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat diffuse[]   = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat specular[]  = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat shininess[] = {100.0f};
-    GLfloat position[]  = {1.0f, 1.0f, 1.0f, 0.0f};
+    
+    GLfloat shininess[] = {128.0f};
+    GLfloat ambient[]   = {0.1f, 0.1f, 0.1f, 1.0f};
+    GLfloat diffuse[]   = {0.8f, 0.8f, 0.8f, 1.0f};
+    GLfloat specular[]  = {0.5f, 0.5f, 0.5f, 1.0f};
+    Vector3 cameraPosition = camera->camera.getPosition();
+    GLfloat position[] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
+    Vector3 cameraDirection = camera->camera.getViewDirection();
+    GLfloat direction[] = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    GLfloat cutoff[] = {180.0f};
+    
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction);
+    glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, cutoff);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-
+    glEnable(GL_NORMALIZE);
+    
 //    lightingShader->enable();
     setColor(whiteColor);
     modelRenderer->render();
@@ -327,6 +336,11 @@ struct Object0r
         case K_F3:
           modelRenderer->renderModeFront = GL_FILL;
           modelRenderer->renderModeBack  = GL_FILL;
+          break;
+        case K_F5:
+          std::stringstream file;
+          file << "Desktop/Object0r_" << (unsigned int)lost::platform::currentTimeMilliSeconds() << ".tga";
+          lost::gl::utils::saveScreenshotTGA(appInstance->displayAttributes, lost::platform::buildUserDataPath(file.str()));
           break;
       }
     }
