@@ -169,7 +169,7 @@ namespace gl
     // this is kinda stupid, but OpenGL ES doesn't have line stippling anymore
     float a = .15f;
     glColor4f(0,1,0,a);         // Green for x axis
-    drawLine(lost::math::Vec3(-length.x, 0.0f, 0.0f), lost::math::Vec3(0.0f, 0.0f, 0.0f));
+    drawLine(lost::math::Vec3(0.0f, 0.0f, 0.0f), lost::math::Vec3(-length.x, 0.0f, 0.0f));
     glColor4f(1,0,0,a);           // Red for y axis
     drawLine(lost::math::Vec3(0.0f, 0.0f, 0.0f), lost::math::Vec3(0.0f, -length.y, 0.0f));
     glColor4f(0,0,1,a);          // Blue for z axis

@@ -4,6 +4,7 @@
 #include "lost/application/iphone/LostApplicationHelpers.h"
 #include "lost/gl/Draw.h"
 #include "lost/platform/Platform.h"
+#include "lost/math/AABB.h"
 
 using namespace lost;
 using namespace lost::math;
@@ -33,15 +34,21 @@ using namespace lost::common;
   int height = 480;
   
   glViewport(0, 0, width, height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(width, height));GLDEBUG;
   
   glDisable(GL_DEPTH_TEST);GLDEBUG;
   glDisable(GL_TEXTURE_2D);GLDEBUG;
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
   
+  set3DProjection(width, height, Vec3(10,10,10), Vec3(0,0,0), Vec3(0,1,0), 120, .1, 100);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
   setColor(whiteColor);
-  drawLine(Vec2(0,0), Vec2(width-1, height-1));
+  AABB box(Vec3(-2,-2,-2), Vec3(4,4,4));
+  drawAABB(box);
+  
+  drawAxes(Vec3(10,10,10));
   
   set2DProjection(Vec2(0,0), Vec2(width, height));
   glMatrixMode(GL_MODELVIEW);
