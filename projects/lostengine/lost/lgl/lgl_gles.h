@@ -3,7 +3,7 @@
 
 #include "lost/gl/gl.h"
 
-void lglOrtho(GLfloat left,
+static inline void lglOrtho(GLfloat left,
               GLfloat right,
               GLfloat bottom,
               GLfloat top,

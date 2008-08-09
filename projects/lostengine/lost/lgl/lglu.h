@@ -6,7 +6,7 @@
 #include "lost/math/Matrix.h"
 #include "lost/math/Vec3.h"
 
-void lgluOrtho2D(GLfloat left,
+static inline void lgluOrtho2D(GLfloat left,
             GLfloat right,
             GLfloat bottom,
             GLfloat top)
@@ -16,7 +16,7 @@ void lgluOrtho2D(GLfloat left,
 
 // reimplementation of gluPerspective
 // following the OpenGL blue book, version 1.4, p. 652
-void lgluPerspective(GLfloat fovy,
+static inline void lgluPerspective(GLfloat fovy,
                      GLfloat aspect,
                      GLfloat zNear,
                      GLfloat zFar)
@@ -43,7 +43,7 @@ void lgluPerspective(GLfloat fovy,
 
 // reimplementation of gluLookAt
 // following the OpenGL blue book, version 1.4, p. 627
-void lgluLookAt(GLfloat eyeX,
+static inline void lgluLookAt(GLfloat eyeX,
                 GLfloat eyeY,
                 GLfloat eyeZ,
                 GLfloat centerX,

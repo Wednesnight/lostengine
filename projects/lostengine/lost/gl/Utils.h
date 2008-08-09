@@ -143,7 +143,7 @@ namespace utils
         throw std::runtime_error("screenshot save failed");
     } 
 
-#ifdef LOST_IPHONE
+#if defined(TARGET_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 #else
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
 
