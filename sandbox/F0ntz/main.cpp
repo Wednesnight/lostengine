@@ -14,6 +14,7 @@
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/TimerEvent.h"
+#include "lost/application/Timer.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/KeySym.h"
 #include "lost/resource/DefaultLoader.h"
@@ -123,7 +124,7 @@ struct Controller
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
     fpsmeter.render( appInstance->displayAttributes.width - (fpsmeter.width + 10), 0, event->passedSec );
-    appInstance->glc.swapBuffers();
+    appInstance->swapBuffers();
   }
 };
 
