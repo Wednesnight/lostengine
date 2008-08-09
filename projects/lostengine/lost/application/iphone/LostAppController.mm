@@ -1,21 +1,19 @@
 #import "lost/application/iphone/LostAppController.h"
 #include "lost/common/Logger.h"
 #include "lost/application/iphone/LostApplicationHelpers.h"
-#include "lost/gl/Draw.h"
 #include "lost/platform/Platform.h"
-#include "lost/math/AABB.h"
 
 using namespace lost;
-using namespace lost::math;
-using namespace lost::gl;
-using namespace lost::gl::utils;
+
+
+
 using namespace lost::common;
 
 // CONSTANTS
-#define kTeapotScale				3.0
+//#define kTeapotScale				3.0
 #define kAccelerometerFrequency		100.0 // Hz
-#define kRenderingFrequency			30.0 // Hz
-#define kFilteringFactor			0.1
+//#define kRenderingFrequency			30.0 // Hz
+//#define kFilteringFactor			0.1
 
 // MACROS
 //#define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
@@ -36,42 +34,10 @@ LostAppController* lostAppController = NULL;
 
 - (void)drawView:(LostGlView*)view;
 {
-/*  DOUT("idle");
-  int width = 320;
-  int height = 480;
-  
-  glViewport(0, 0, width, height);GLDEBUG;
-  
-  glDisable(GL_DEPTH_TEST);GLDEBUG;
-  glDisable(GL_TEXTURE_2D);GLDEBUG;
-  glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
-  
-  set3DProjection(width, height, Vec3(10,10,10), Vec3(0,0,0), Vec3(0,1,0), 120, .1, 100);
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  setColor(whiteColor);
-  AABB box(Vec3(-2,-2,-2), Vec3(4,4,4));
-  drawAABB(box);
-  
-  drawAxes(Vec3(10,10,10));
-  
-  set2DProjection(Vec2(0,0), Vec2(width, height));
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  
-  double now = platform::currentTimeSeconds();
-  double delta = now-lastTime;
-  fpsMeter->render(5,5,delta);
-  lastTime = now;*/
 }
 
 -(void)setupView:(LostGlView*)view
 {
-/*  glEnableClientState(GL_VERTEX_ARRAY);
-  lastTime = platform::currentTimeSeconds();
-  fpsMeter = new lost::common::FpsMeter();    */
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
@@ -114,8 +80,6 @@ LostAppController* lostAppController = NULL;
 	[window addSubview:glView];
 
 	glView.delegate = self;
-	//glView.animationInterval = 1.0 / kRenderingFrequency;
-	//[glView startAnimation];
 
 	//Show the window
 	[window makeKeyAndVisible];
