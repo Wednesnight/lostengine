@@ -1,5 +1,5 @@
 #include "lost/application/Application.h"
-#include "lost/application/ApplicationAdapter.h"
+#include "lost/application/glfw/ApplicationAdapter.h"
 #include <iostream>
 #include <algorithm>
 #include "lost/application/Timer.h"
