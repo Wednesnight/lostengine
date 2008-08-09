@@ -26,8 +26,8 @@ void redraw(shared_ptr<TimerEvent> event)
 //  DOUT("redraw");
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  int width = 320;// appInstance->displayAttributes.width;
-  int height = 480;//appInstance->displayAttributes.height;
+  int width = appInstance->displayAttributes.width;
+  int height = appInstance->displayAttributes.height;
   
   glViewport(0, 0, width, height);GLDEBUG;
   set2DProjection(Vec2(0, 0), Vec2(width, height));GLDEBUG;

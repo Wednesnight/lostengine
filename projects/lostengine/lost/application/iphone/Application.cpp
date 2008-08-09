@@ -45,6 +45,9 @@ namespace application
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     luabind::globals(*interpreter)["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
+    
+    // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
+    appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, appInstance, _1)));    
   }
 
   Application::~Application() {  }

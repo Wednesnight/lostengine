@@ -16,6 +16,7 @@ void lostApplicationHelpers_quitAppController(); // shuts down UIKit app control
 // the controller can call these functions in order to perform the intended lifecycle operations.
 
 void lostApplicationHelpers_preinit();
+void lostApplicationHelpers_resize(unsigned short width, unsigned short height);
 void lostApplicationHelpers_init();
 void lostApplicationHelpers_run();
 void lostApplicationHelpers_quit();

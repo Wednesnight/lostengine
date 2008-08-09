@@ -88,6 +88,7 @@ LostAppController* lostAppController = NULL;
 	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
 	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
   lostApplicationHelpers_preinit();
+  lostApplicationHelpers_resize(rect.size.width, rect.size.height);
   lostApplicationHelpers_init();
   lostApplicationHelpers_run();
 }

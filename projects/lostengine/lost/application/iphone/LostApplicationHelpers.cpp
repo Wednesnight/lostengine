@@ -31,6 +31,14 @@ void lostApplicationHelpers_preinit()
   appEvent->type = ApplicationEvent::PREINIT();appInstance->dispatchEvent(appEvent);
 }
 
+void lostApplicationHelpers_resize(unsigned short width, unsigned short height)
+{
+  shared_ptr<ResizeEvent> event(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
+  event->width = width;
+  event->height = height;
+  appInstance->dispatchEvent(event);
+}
+
 void lostApplicationHelpers_init()
 {
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
@@ -51,9 +59,6 @@ void lostApplicationHelpers_init()
     IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
   }
   
-  
-  // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
-  appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, appInstance, _1)));
   
   // no adapter init called since its all done in the uikit app controller
   
