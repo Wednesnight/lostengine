@@ -2,10 +2,11 @@
 #import <OpenGLES/EAGLDrawable.h>
 
 #import "lost/application/iphone/LostGlView.h"
+#import "lost/common/Logger.h"
 
 @implementation LostGlView
 
-@synthesize animationInterval;
+//@synthesize animationInterval;
 
 // Implement this to override the default layer class (which is [CALayer class]).
 // We do this so that our view will be backed by a layer that is capable of OpenGL ES rendering.
@@ -56,7 +57,7 @@
 	}
 	
 	// Default the animation interval to 1/60th of a second.
-	animationInterval = 1.0 / 60.0;
+//	animationInterval = 1.0 / 60.0;
 	return self;
 }
 
@@ -129,7 +130,7 @@
 	}
 }
 
-- (void)startAnimation
+/*- (void)startAnimation
 {
 	animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval target:self selector:@selector(drawView) userInfo:nil repeats:YES];
 }
@@ -149,7 +150,7 @@
 		[self stopAnimation];
 		[self startAnimation];
 	}
-}
+}*/
 
 // Updates the OpenGL view when the timer fires
 - (void)drawView
@@ -168,18 +169,24 @@
 
 	[delegate drawView:self];
 	
-	glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
-	[context presentRenderbuffer:GL_RENDERBUFFER_OES];
+  [self swapBuffers];
 	
 	GLenum err = glGetError();
 	if(err)
 		NSLog(@"%x error", err);
 }
 
+- (void)swapBuffers
+{
+	glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
+	[context presentRenderbuffer:GL_RENDERBUFFER_OES];
+}
+
+
 // Stop animating and release resources when they are no longer needed.
 - (void)dealloc
 {
-	[self stopAnimation];
+//	[self stopAnimation];
 	
 	if([EAGLContext currentContext] == context)
 	{

@@ -220,16 +220,12 @@
 		EAC5C6420E0B23EC00B9DFAC /* LuaBindings.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */; };
 		EAEAF6C60E4A57E60003A334 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6C40E4A57E60003A334 /* ApplicationAdapter.cpp */; };
 		EAEAF6CB0E4A58270003A334 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF6CA0E4A58270003A334 /* ApplicationAdapter.h */; };
-		EAEAF7ED0E4A77F40003A334 /* teapot.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF7920E4A6EF20003A334 /* teapot.h */; };
 		EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF77F0E4A6C6F0003A334 /* Application.cpp */; };
 		EAEAF7EF0E4A77F40003A334 /* LostGlView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF7770E4A6BA70003A334 /* LostGlView.h */; };
 		EAEAF7F00E4A77F40003A334 /* LostGlView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7790E4A6BA70003A334 /* LostGlView.mm */; };
 		EAEAF7F10E4A77F40003A334 /* LostAppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7780E4A6BA70003A334 /* LostAppController.mm */; };
 		EAEAF7F20E4A77F40003A334 /* LostAppController.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF77A0E4A6BA70003A334 /* LostAppController.h */; };
-		EAEAF7F30E4A77F40003A334 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */; };
 		EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188A0E42983800504B0C /* Timer.cpp */; };
-		EAEAF7F50E4A77F40003A334 /* GLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */; };
-		EAEAF7F60E4A77F40003A334 /* GLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF6E60E4A5DD00003A334 /* GLContext.h */; };
 		EAEAF7F70E4A77F40003A334 /* LostApplicationHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */; };
 		EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */; };
 		EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
@@ -474,9 +470,6 @@
 		EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaBindings.h; sourceTree = "<group>"; };
 		EAEAF6C40E4A57E60003A334 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
 		EAEAF6CA0E4A58270003A334 /* ApplicationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationAdapter.h; sourceTree = "<group>"; };
-		EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = iphone/ApplicationAdapter.cpp; sourceTree = "<group>"; };
-		EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GLContext.cpp; path = iphone/GLContext.cpp; sourceTree = "<group>"; };
-		EAEAF6E60E4A5DD00003A334 /* GLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLContext.h; path = iphone/GLContext.h; sourceTree = "<group>"; };
 		EAEAF7770E4A6BA70003A334 /* LostGlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGlView.h; path = iphone/LostGlView.h; sourceTree = "<group>"; };
 		EAEAF7780E4A6BA70003A334 /* LostAppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostAppController.mm; path = iphone/LostAppController.mm; sourceTree = "<group>"; };
 		EAEAF7790E4A6BA70003A334 /* LostGlView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostGlView.mm; path = iphone/LostGlView.mm; sourceTree = "<group>"; };
@@ -484,7 +477,6 @@
 		EAEAF77F0E4A6C6F0003A334 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = iphone/Application.cpp; sourceTree = "<group>"; };
 		EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationHelpers.h; path = iphone/LostApplicationHelpers.h; sourceTree = "<group>"; };
 		EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostApplicationHelpers.mm; path = iphone/LostApplicationHelpers.mm; sourceTree = "<group>"; };
-		EAEAF7920E4A6EF20003A334 /* teapot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = teapot.h; path = iphone/teapot.h; sourceTree = "<group>"; };
 		EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationHelpers.cpp; path = iphone/LostApplicationHelpers.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -885,16 +877,12 @@
 		EA67106F0E3E539900B961EC /* iphone */ = {
 			isa = PBXGroup;
 			children = (
-				EAEAF7920E4A6EF20003A334 /* teapot.h */,
 				EAEAF77F0E4A6C6F0003A334 /* Application.cpp */,
 				EAEAF7770E4A6BA70003A334 /* LostGlView.h */,
 				EAEAF7790E4A6BA70003A334 /* LostGlView.mm */,
 				EAEAF7780E4A6BA70003A334 /* LostAppController.mm */,
 				EAEAF77A0E4A6BA70003A334 /* LostAppController.h */,
-				EAEAF6E10E4A5DC90003A334 /* ApplicationAdapter.cpp */,
 				EA9C188A0E42983800504B0C /* Timer.cpp */,
-				EAEAF6E50E4A5DD00003A334 /* GLContext.cpp */,
-				EAEAF6E60E4A5DD00003A334 /* GLContext.h */,
 				EAEAF78B0E4A6E4F0003A334 /* LostApplicationHelpers.h */,
 				EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */,
 				EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */,
@@ -1086,10 +1074,8 @@
 				EA6711C00E3E89DB00B961EC /* File.h in Headers */,
 				EA6711C10E3E89DB00B961EC /* Loader.h in Headers */,
 				EA6711C20E3E89DB00B961EC /* Repository.h in Headers */,
-				EAEAF7ED0E4A77F40003A334 /* teapot.h in Headers */,
 				EAEAF7EF0E4A77F40003A334 /* LostGlView.h in Headers */,
 				EAEAF7F20E4A77F40003A334 /* LostAppController.h in Headers */,
-				EAEAF7F60E4A77F40003A334 /* GLContext.h in Headers */,
 				EAEAF7F70E4A77F40003A334 /* LostApplicationHelpers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1302,9 +1288,7 @@
 				EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */,
 				EAEAF7F00E4A77F40003A334 /* LostGlView.mm in Sources */,
 				EAEAF7F10E4A77F40003A334 /* LostAppController.mm in Sources */,
-				EAEAF7F30E4A77F40003A334 /* ApplicationAdapter.cpp in Sources */,
 				EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */,
-				EAEAF7F50E4A77F40003A334 /* GLContext.cpp in Sources */,
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
 				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
 			);

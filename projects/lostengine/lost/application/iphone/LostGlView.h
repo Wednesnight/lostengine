@@ -21,8 +21,8 @@
 	GLuint depthRenderbuffer;
 	
 	// An animation timer that, when animation is started, will periodically call -drawView at the given rate.
-	NSTimer *animationTimer;
-	NSTimeInterval animationInterval;
+//	NSTimer *animationTimer;
+//	NSTimeInterval animationInterval;
 	
 	// Delegate to do our drawing, called by -drawView, which can be called manually or via the animation timer.
 	id<LostGlViewDelegate> delegate;
@@ -34,15 +34,15 @@
 
 @property(nonatomic, assign) id<LostGlViewDelegate> delegate;
 
--(void)startAnimation;
--(void)stopAnimation;
+//-(void)startAnimation;
+//-(void)stopAnimation;
 -(void)drawView;
 
 - (id)initGLES;
 - (BOOL)createFramebuffer;
 - (void)destroyFramebuffer;
-
-@property NSTimeInterval animationInterval;
+- (void)swapBuffers;
+//@property NSTimeInterval animationInterval;
 
 @end
 

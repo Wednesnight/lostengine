@@ -39,7 +39,6 @@ namespace application
       throw std::runtime_error("appInstance wasn't NULL, did you instance more than one app?");
     }
     appInstance = this;
-    //adapter.reset(new ApplicationAdapter(this));
     
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader

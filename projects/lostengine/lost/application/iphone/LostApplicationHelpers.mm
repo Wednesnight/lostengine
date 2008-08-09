@@ -14,6 +14,7 @@ void lostApplicationHelpers_runAppController()
 
 void lostApplicationHelpers_swapBuffers()
 {
+  [lostAppController swapBuffers];
 }
 
 void lostApplicationHelpers_quitAppController()

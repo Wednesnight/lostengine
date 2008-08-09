@@ -19,12 +19,15 @@ using namespace lost::application;
 
 
 FpsMeter fpsMeter;
+Timer* redrawTimer;
 
-void idle(shared_ptr<TimerEvent> event)
+void redraw(shared_ptr<TimerEvent> event)
 {
-  DOUT("idle");
-  int width = appInstance->displayAttributes.width;
-  int height = appInstance->displayAttributes.height;
+//  DOUT("redraw");
+
+  glEnableClientState(GL_VERTEX_ARRAY);
+  int width = 320;// appInstance->displayAttributes.width;
+  int height = 480;//appInstance->displayAttributes.height;
   
   glViewport(0, 0, width, height);GLDEBUG;
   set2DProjection(Vec2(0, 0), Vec2(width, height));GLDEBUG;
@@ -45,6 +48,18 @@ void idle(shared_ptr<TimerEvent> event)
   appInstance->swapBuffers();
 }
 
+void testing(shared_ptr<TimerEvent> event)
+{
+  DOUT("testing");
+}
+
+void init(shared_ptr<Event> event)
+{
+  DOUT("initialising");
+  redrawTimer = new Timer("redraw", 1.0/60.0);
+  redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));  
+}
+
 int main(int argn, char** args)
 {
   LogLevel( log_all );
@@ -52,8 +67,7 @@ int main(int argn, char** args)
   {
     DOUT("starting up");
     Application app;
-    Timer timer("redraw", 1.0/60.0);
-    timer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(idle));
+    app.addEventListener(ApplicationEvent::INIT(), init);
     app.run();
     DOUT("shutting down");
   }

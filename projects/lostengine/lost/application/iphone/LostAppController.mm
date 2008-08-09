@@ -1,5 +1,4 @@
 #import "lost/application/iphone/LostAppController.h"
-#import "lost/application/iphone/teapot.h"
 #include "lost/common/Logger.h"
 #include "lost/application/iphone/LostApplicationHelpers.h"
 #include "lost/gl/Draw.h"
@@ -19,17 +18,25 @@ using namespace lost::common;
 #define kFilteringFactor			0.1
 
 // MACROS
-#define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
+//#define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
 
-#define OLD_DRAW 0
+//#define OLD_DRAW 0
 
+LostAppController* lostAppController = NULL;
 
 
 @implementation LostAppController
 
+- (void)dealloc
+{
+	[window release];
+	[glView release];
+	[super dealloc];
+}
+
 - (void)drawView:(LostGlView*)view;
 {
-  DOUT("idle");
+/*  DOUT("idle");
   int width = 320;
   int height = 480;
   
@@ -57,14 +64,14 @@ using namespace lost::common;
   double now = platform::currentTimeSeconds();
   double delta = now-lastTime;
   fpsMeter->render(5,5,delta);
-  lastTime = now;
+  lastTime = now;*/
 }
 
 -(void)setupView:(LostGlView*)view
 {
-  glEnableClientState(GL_VERTEX_ARRAY);
+/*  glEnableClientState(GL_VERTEX_ARRAY);
   lastTime = platform::currentTimeSeconds();
-  fpsMeter = new lost::common::FpsMeter();    
+  fpsMeter = new lost::common::FpsMeter();    */
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
@@ -95,22 +102,21 @@ using namespace lost::common;
 - (void)applicationDidFinishLaunching:(UIApplication*)application
 {
   NSLog(@"applicationDidFinishLaunching");
-
+  lostAppController = self;
+  
 	CGRect					rect = [[UIScreen mainScreen] bounds];
 	
 	//Create a full-screen window
 	window = [[UIWindow alloc] initWithFrame:rect];
 	
 	//Create the OpenGL ES view and add it to the window
-	LostGlView *glView = [[LostGlView alloc] initWithFrame:rect];
+	glView = [[LostGlView alloc] initWithFrame:rect];
 	[window addSubview:glView];
 
 	glView.delegate = self;
-	glView.animationInterval = 1.0 / kRenderingFrequency;
-	[glView startAnimation];
+	//glView.animationInterval = 1.0 / kRenderingFrequency;
+	//[glView startAnimation];
 
-	[glView release];
-	
 	//Show the window
 	[window makeKeyAndVisible];
 	
@@ -139,18 +145,14 @@ using namespace lost::common;
 }
 
 
-- (void)dealloc
-{
-	[window release];
-	[super dealloc];
-}
-
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {
-	//Use a basic low-pass filter to only keep the gravity in the accelerometer values
-	accel[0] = acceleration.x * kFilteringFactor + accel[0] * (1.0 - kFilteringFactor);
-	accel[1] = acceleration.y * kFilteringFactor + accel[1] * (1.0 - kFilteringFactor);
-	accel[2] = acceleration.z * kFilteringFactor + accel[2] * (1.0 - kFilteringFactor);
+  // FIXME: pass on accelerometer data as events
+}
+
+- (void) swapBuffers
+{
+  [glView swapBuffers];
 }
 
 @end

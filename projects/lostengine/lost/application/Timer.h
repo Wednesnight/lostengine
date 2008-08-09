@@ -10,42 +10,38 @@ namespace lost
 namespace application
 {
 
-  struct TimerImpl;
+  struct TimerContext;
   
 struct Timer : public event::EventDispatcher
 {
   Timer(const std::string& name, double inIntervalSec);
   virtual ~Timer();
 
+  // FIXME we need start/stop functions
+  
+  // FIXME: this is glfw specific, we might want to move this out of the way, kept stuttering in iphone simulator
   void update(double deltaSec)
   {
-    if(running)
+    passedSec += deltaSec;
+    if(passedSec >= intervalSec)
     {
-      passedSec += deltaSec;
-      if(passedSec >= intervalSec)
-      {
-        boost::shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
-        ev->timer = this;
-        ev->passedSec = passedSec;
-        dispatchEvent(ev);
-        passedSec = 0;
-      }
+      boost::shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
+      ev->timer = this;
+      ev->passedSec = passedSec;
+      dispatchEvent(ev);
+      passedSec = 0;
     }
   }
   
-  
-  void disable() { running = false; }
-  void enable() { running = true; }
-
   const std::string& name() { return mName; }
+  boost::shared_ptr<TimerEvent> event;  
 
 private:
   double intervalSec;
   double passedSec;
   bool running;
   std::string mName;
-  
-  boost::shared_ptr<TimerImpl> impl;
+  boost::shared_ptr<TimerContext> context;
 };
 }
 }
