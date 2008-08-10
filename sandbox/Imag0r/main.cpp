@@ -25,6 +25,10 @@ using namespace lost::resource;
 using namespace lost::application;
 using namespace boost;
 
+
+Timer* redrawTimer;
+
+
 struct Controller
 {
 BitmapLoader loader;
@@ -90,12 +94,15 @@ void init(shared_ptr<ApplicationEvent> event)
   texture.reset(new Texture());
   texture->bind();
   texture->reset(0, GL_RGBA8, false, *bitmap);
-  texture->wrap(GL_CLAMP);
+  texture->wrap(GL_CLAMP_TO_EDGE);
   texture->filter(GL_LINEAR);
         
   glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
   DOUT("width: "<<texture->width<< " height: "<<texture->height);
+
+  redrawTimer = new Timer("redrawTimer", 1.0/60.0);
+  redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
 }
 };
 
@@ -106,12 +113,9 @@ int main(int argn, char** args)
   {
     Application app;
     Controller controller(appInstance->loader);
-    Timer redrawTimer("redrawTimer", 1.0/60.0);
 
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
-    redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, &controller, _1)));
-    
     app.run();
   }
   catch (exception& e)

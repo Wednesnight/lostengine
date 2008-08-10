@@ -11,7 +11,6 @@ struct ApplicationEvent : public event::Event
 {
     static const event::Type& PREINIT() { static event::Type d = "applicationPreInit";return d;}
     static const event::Type& INIT()    { static event::Type d = "applicationInit";return d;}
-    static const event::Type& POSTINIT(){ static event::Type d = "applicationPostInit";return d;}
     static const event::Type& RUN()     { static event::Type d = "applicationRun";return d;}
     static const event::Type& QUIT()    { static event::Type d = "applicationQuit";return d;}
 

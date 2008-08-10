@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		EA0E04770E4E1AEB001556D6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0E04760E4E1AEB001556D6 /* stubs.jpg */; };
 		EA6712F00E3E94A900B961EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6712EF0E3E94A900B961EC /* main.cpp */; };
 		EAEAF7220E4A61B00003A334 /* libLostEngine-iPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEAF7210E4A61A50003A334 /* libLostEngine-iPhone.a */; };
 		EAF706C60E4B81B000EF62CB /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAF706C50E4B81B000EF62CB /* init */; };
@@ -47,6 +48,7 @@
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA0E04760E4E1AEB001556D6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stubs.jpg; sourceTree = "<group>"; };
 		EA6712EF0E3E94A900B961EC /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EAEAF7190E4A61A50003A334 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EAF706C50E4B81B000EF62CB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA0E04760E4E1AEB001556D6 /* stubs.jpg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EAF706C50E4B81B000EF62CB /* init */,
 			);
@@ -184,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF706C60E4B81B000EF62CB /* init in Resources */,
+				EA0E04770E4E1AEB001556D6 /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

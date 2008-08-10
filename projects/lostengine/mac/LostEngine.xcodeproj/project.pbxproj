@@ -25,8 +25,8 @@
 		3ED3A3A60E3886C7000199E7 /* LuaVec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A20E3886C7000199E7 /* LuaVec3.h */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3EDB06920E4C5787006D6305 /* LuaVec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDB06900E4C5787006D6305 /* LuaVec4.h */; };
-		EA0E04060E4E0FC1001556D6 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0E04040E4E0FC1001556D6 /* ApplicationAdapter.h */; };
-		EA0E04070E4E0FC1001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
+		EA0E04210E4E11A2001556D6 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0E04040E4E0FC1001556D6 /* ApplicationAdapter.h */; };
+		EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
 		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
 		EA24DAEB0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */; };
@@ -996,6 +996,7 @@
 				3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */,
 				3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */,
 				3EDB06920E4C5787006D6305 /* LuaVec4.h in Headers */,
+				EA0E04210E4E11A2001556D6 /* ApplicationAdapter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,7 +1077,6 @@
 				EAEAF7EF0E4A77F40003A334 /* LostGlView.h in Headers */,
 				EAEAF7F20E4A77F40003A334 /* LostAppController.h in Headers */,
 				EAEAF7F70E4A77F40003A334 /* LostApplicationHelpers.h in Headers */,
-				EA0E04060E4E0FC1001556D6 /* ApplicationAdapter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1252,7 @@
 				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
 				EAEAF6C60E4A57E60003A334 /* ApplicationAdapter.cpp in Sources */,
 				3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */,
+				EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1290,7 +1291,6 @@
 				EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */,
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
 				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
-				EA0E04070E4E0FC1001556D6 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

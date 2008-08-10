@@ -40,7 +40,6 @@ namespace lost
        ];
       globals(state)["lost"]["application"]["ApplicationEvent"]["PREINIT"] = ApplicationEvent::PREINIT();
       globals(state)["lost"]["application"]["ApplicationEvent"]["INIT"] = ApplicationEvent::INIT();
-      globals(state)["lost"]["application"]["ApplicationEvent"]["POSTINIT"] = ApplicationEvent::POSTINIT();
       globals(state)["lost"]["application"]["ApplicationEvent"]["RUN"] = ApplicationEvent::RUN();
       globals(state)["lost"]["application"]["ApplicationEvent"]["QUIT"] = ApplicationEvent::QUIT();
     }

@@ -92,10 +92,7 @@ namespace application
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
-        
-    // broadcast postinit event to signal that the application initialisation has finished
-    appEvent->type = ApplicationEvent::POSTINIT();dispatchEvent(appEvent);    
-    
+            
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
     adapter->run();
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);

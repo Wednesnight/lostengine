@@ -1,80 +1,125 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
-#include "lost/application/ApplicationEvent.h"
+#include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/ApplicationEvent.h"
+#include <boost/bind.hpp>
+#include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
-#include "lost/math/Vec2.h"
-#include "lost/application/Timer.h"
+#include "lost/bitmap/BitmapLoader.h"
+#include "lost/platform/Platform.h"
+#include "lost/application/KeySym.h"
 #include "lost/common/FpsMeter.h"
 
 using namespace std;
-using namespace boost;
+using namespace lost::gl;
+using namespace lost::math;
 using namespace lost::common;
 using namespace lost::event;
-using namespace lost::math;
-using namespace lost::gl;
-using namespace lost::gl::utils;
 using namespace lost::application;
+using namespace lost::platform;
+using namespace lost::bitmap;
+using namespace lost::resource;
+using namespace lost::application;
+using namespace boost;
 
 
-FpsMeter fpsMeter;
 Timer* redrawTimer;
 
-void redraw(shared_ptr<TimerEvent> event)
-{
-//  DOUT("redraw");
 
-  glEnableClientState(GL_VERTEX_ARRAY);
-  int width = appInstance->displayAttributes.width;
-  int height = appInstance->displayAttributes.height;
+struct Controller
+{
+  BitmapLoader loader;
+  shared_ptr<Bitmap> bitmap;
+  shared_ptr<Texture> texture;
+  FpsMeter fpsMeter;
   
-  glViewport(0, 0, width, height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(width, height));GLDEBUG;
-
-  glDisable(GL_DEPTH_TEST);GLDEBUG;
-  glDisable(GL_TEXTURE_2D);GLDEBUG;
-  glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
-
-  setColor(whiteColor);
-  drawLine(Vec2(0,0), Vec2(width-1, height-1));
+  Controller(shared_ptr<Loader> inLoader) : loader(inLoader) {}
+  
+  void redraw(shared_ptr<TimerEvent> event)
+  {
+    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
+    lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+    glClearColor(1,0,1,0);GLDEBUG;
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
     
-  set2DProjection(Vec2(0,0), Vec2(width, height));
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  fpsMeter.render(width - fpsMeter.width, 0, event->passedSec);
-
-  appInstance->swapBuffers();
-}
-
-void testing(shared_ptr<TimerEvent> event)
-{
-  DOUT("testing");
-}
-
-void init(shared_ptr<Event> event)
-{
-  DOUT("initialising");
-  redrawTimer = new Timer("redraw", 1.0/60.0);
-  redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));  
-}
+    glMatrixMode(GL_MODELVIEW);GLDEBUG;
+    glLoadIdentity();GLDEBUG;
+    glEnable(GL_TEXTURE_2D);GLDEBUG;
+    glEnable(GL_BLEND);GLDEBUG;
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);    GLDEBUG;
+    glColor4f(1, 1, 1,1);GLDEBUG;
+//    drawLine(Vec2(0,0),Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+    glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;    
+    drawLine(Vec2(0,0), Vec2(320,480));
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
+    drawRectTextured(Rect(10,10,texture->width,texture->height), *texture);
+    
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    
+    setColor(whiteColor);
+    drawRectFilled(Rect(400,400,50,50));
+    
+    fpsMeter.render(2,2,event->passedSec);
+    
+    appInstance->swapBuffers();
+  }
+  
+  void keyboard(shared_ptr<KeyEvent> inEvent)
+  {
+    switch (inEvent->key)
+    {
+      case K_ESCAPE :
+        appInstance->quit();
+        break;
+      default :
+        break;
+    }
+  }
+  
+  void init(shared_ptr<ApplicationEvent> event)
+  {
+    //setup resources
+    //string filename = "gay_zombie.jpg";
+    //string filename = "nomnomnom.jpg";
+    //string filename = "buttonReleased.png";
+    string filename = "stubs.jpg";
+    bitmap = loader.load(filename);
+    
+    
+    texture.reset(new Texture());
+    texture->bind();
+    texture->reset(0, bitmap->format, false, *bitmap);
+    texture->wrap(GL_CLAMP_TO_EDGE);
+    texture->filter(GL_LINEAR);
+    
+    DOUT("width: "<<texture->width<< " height: "<<texture->height);
+    
+    redrawTimer = new Timer("redrawTimer", 1.0/60.0);
+    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
+  }
+};
 
 int main(int argn, char** args)
 {
   LogLevel( log_all );
   try
   {
-    DOUT("starting up");
     Application app;
-    app.addEventListener(ApplicationEvent::INIT(), init);
+    Controller controller(appInstance->loader);
+    
+    app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
+    app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
     app.run();
-    DOUT("shutting down");
   }
   catch (exception& e)
   {
     EOUT("exception: " << e.what());
   }
-
+  
   return 0;
 }
