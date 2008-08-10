@@ -3,6 +3,7 @@
 
 #import "lost/application/iphone/LostGlView.h"
 #import "lost/common/Logger.h"
+#include "lost/gl/Utils.h"
 
 @implementation LostGlView
 
@@ -108,7 +109,7 @@
 
 	if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
 	{
-		NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+		DOUT("failed to make complete framebuffer object "<< glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
 		return NO;
 	}
 	
@@ -171,9 +172,7 @@
 	
   [self swapBuffers];
 	
-	GLenum err = glGetError();
-	if(err)
-		NSLog(@"%x error", err);
+  GLDEBUG;
 }
 
 - (void)swapBuffers

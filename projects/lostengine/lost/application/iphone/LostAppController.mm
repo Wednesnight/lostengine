@@ -42,32 +42,32 @@ LostAppController* lostAppController = NULL;
 
 - (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame
 {
-  NSLog(@"didChangeStatusBarFrame");
+  DOUT("didChangeStatusBarFrame");
 }
 
 - (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation
 {
-  NSLog(@"didChangeStatusBarOrientation");
+  DOUT("didChangeStatusBarOrientation");
 }
 
 - (void)application:(UIApplication *)application willChangeStatusBarFrame:(CGRect)newStatusBarFrame
 {
-  NSLog(@"willChangeStatusBarFrame");
+  DOUT("willChangeStatusBarFrame");
 }
 
 - (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration
 {
-  NSLog(@"willChangeStatusBarOrientation");
+  DOUT("willChangeStatusBarOrientation");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-  NSLog(@"applicationDidBecomeActive");
+  DOUT("applicationDidBecomeActive");
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication*)application
 {
-  NSLog(@"applicationDidFinishLaunching");
+  DOUT("applicationDidFinishLaunching");
   lostAppController = self;
   
 	CGRect					rect = [[UIScreen mainScreen] bounds];
@@ -95,17 +95,17 @@ LostAppController* lostAppController = NULL;
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-  NSLog(@"applicationDidReceiveMemoryWarning");
+  DOUT("applicationDidReceiveMemoryWarning");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-  NSLog(@"applicationWillResignActive");
+  DOUT("applicationWillResignActive");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-  NSLog(@"applicationWillTerminate");
+  DOUT("applicationWillTerminate");
   lostApplicationHelpers_quit();
 }
 
