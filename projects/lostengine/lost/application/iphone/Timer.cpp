@@ -49,11 +49,8 @@ namespace application
                                             0,
                                             updateCallback,
                                             &rltcontext);
-    
-    DOUT("timer: "<<context->rltimer);
-    DOUT("rl: "<<CFRunLoopGetMain());
-    
-    CFRunLoopAddTimer(CFRunLoopGetMain(), context->rltimer, kCFRunLoopCommonModes);
+        
+    CFRunLoopAddTimer(CFRunLoopGetCurrent(), context->rltimer, kCFRunLoopCommonModes);
   }
   
   Timer::~Timer()

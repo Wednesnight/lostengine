@@ -4,6 +4,12 @@
 #import "lost/application/iphone/LostGlView.h"
 #import "lost/common/Logger.h"
 #include "lost/gl/Utils.h"
+#include "lost/application/iphone/LostApplicationHelpers.h"
+#include <boost/shared_ptr.hpp>
+
+using namespace boost;
+using namespace lost;
+using namespace lost::application;
 
 @implementation LostGlView
 
@@ -39,6 +45,9 @@
 
 -(id)initGLES
 {
+  // FIXME: clean up init process, it makes no sense to init general members in initGLES
+  touchEvent = new shared_ptr<TouchEvent>;
+  touchEvent->reset(new TouchEvent(""));
 	// Get our backing layer
 	CAEAGLLayer *eaglLayer = (CAEAGLLayer*) self.layer;
 	
@@ -57,8 +66,6 @@
 		return nil;
 	}
 	
-	// Default the animation interval to 1/60th of a second.
-//	animationInterval = 1.0 / 60.0;
 	return self;
 }
 
@@ -71,7 +78,6 @@
 -(void)setDelegate:(id<LostGlViewDelegate>)d
 {
 	delegate = d;
-	delegateSetup = ![delegate respondsToSelector:@selector(setupView:)];
 }
 
 // If our view is resized, we'll be asked to layout subviews.
@@ -131,47 +137,14 @@
 	}
 }
 
-/*- (void)startAnimation
-{
-	animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval target:self selector:@selector(drawView) userInfo:nil repeats:YES];
-}
-
-- (void)stopAnimation
-{
-	[animationTimer invalidate];
-	animationTimer = nil;
-}
-
-- (void)setAnimationInterval:(NSTimeInterval)interval
-{
-	animationInterval = interval;
-	
-	if(animationTimer)
-	{
-		[self stopAnimation];
-		[self startAnimation];
-	}
-}*/
-
 // Updates the OpenGL view when the timer fires
 - (void)drawView
 {
 	// Make sure that you are drawing to the current context
 	[EAGLContext setCurrentContext:context];
-	
-	// If our drawing delegate needs to have the view setup, then call -setupView: and flag that it won't need to be called again.
-	if(!delegateSetup)
-	{
-		[delegate setupView:self];
-		delegateSetup = YES;
-	}
-	
 	glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
-
 	[delegate drawView:self];
-	
   [self swapBuffers];
-	
   GLDEBUG;
 }
 
@@ -184,9 +157,8 @@
 
 // Stop animating and release resources when they are no longer needed.
 - (void)dealloc
-{
-//	[self stopAnimation];
-	
+{	
+  if(touchEvent) { delete touchEvent; }  
 	if([EAGLContext currentContext] == context)
 	{
 		[EAGLContext setCurrentContext:nil];
@@ -199,20 +171,23 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
- // NSLog(@"touchesBegan");
+  (*touchEvent)->type = TouchEvent::TOUCHES_BEGAN();
+  lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
- // NSLog(@"touchesMoved");
+  (*touchEvent)->type = TouchEvent::TOUCHES_MOVED();
+  lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
- // NSLog(@"touchesEnded");
+  (*touchEvent)->type = TouchEvent::TOUCHES_ENDED();
+  lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
- // NSLog(@"touchesCancelled");
+  (*touchEvent)->type = TouchEvent::TOUCHES_CANCELLED();
+  lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
-
 
 @end

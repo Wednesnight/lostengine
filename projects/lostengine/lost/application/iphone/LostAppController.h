@@ -4,7 +4,7 @@
 
 @interface LostAppController : NSObject <UIAccelerometerDelegate, LostGlViewDelegate>
 {
-	UIWindow*				window;
+	UIWindow*             window;
 	UIAccelerationValue		accel[3];
   
   double lastTime;

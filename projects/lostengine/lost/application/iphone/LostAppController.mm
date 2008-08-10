@@ -15,10 +15,7 @@ LostAppController* lostAppController = NULL; // global instance so LostApplicati
 
 - (void)dealloc
 {
-  if(acevent)
-  {
-    delete acevent;
-  }
+  if(acevent) { delete acevent; }
 	[window release];
 	[glView release];
 	[super dealloc];
@@ -90,6 +87,11 @@ LostAppController* lostAppController = NULL; // global instance so LostApplicati
   lostApplicationHelpers_run();
 }
 
+- (void) swapBuffers
+{
+  [glView swapBuffers];
+}
+
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
   DOUT("applicationDidReceiveMemoryWarning");
@@ -115,11 +117,6 @@ LostAppController* lostAppController = NULL; // global instance so LostApplicati
   (*acevent)->z = acceleration.z;
   lostApplicationHelpers_dispatchEvent(*acevent);
   DOUT("acceleration");
-}
-
-- (void) swapBuffers
-{
-  [glView swapBuffers];
 }
 
 @end

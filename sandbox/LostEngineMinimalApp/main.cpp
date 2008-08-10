@@ -4,6 +4,7 @@
 #include "lost/application/TimerEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/TouchEvent.h"
 #include <boost/bind.hpp>
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
@@ -102,6 +103,11 @@ struct Controller
     redrawTimer = new Timer("redrawTimer", 1.0/30.0);
     redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
   }
+  
+  void touches(shared_ptr<TouchEvent> event)
+  {
+    DOUT(event->type);
+  }
 };
 
 int main(int argn, char** args)
@@ -114,6 +120,10 @@ int main(int argn, char** args)
     
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
+    app.addEventListener(TouchEvent::TOUCHES_BEGAN(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
+    app.addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
+    app.addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
+    app.addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
     app.run();
   }
   catch (exception& e)
