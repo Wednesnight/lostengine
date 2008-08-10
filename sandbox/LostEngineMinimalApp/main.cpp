@@ -99,7 +99,7 @@ struct Controller
     
     DOUT("width: "<<texture->width<< " height: "<<texture->height);
     
-    redrawTimer = new Timer("redrawTimer", 1.0/60.0);
+    redrawTimer = new Timer("redrawTimer", 1.0/30.0);
     redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
   }
 };
