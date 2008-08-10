@@ -200,19 +200,19 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  NSLog(@"touchesBegan");
+ // NSLog(@"touchesBegan");
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  NSLog(@"touchesMoved");
+ // NSLog(@"touchesMoved");
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  NSLog(@"touchesEnded");
+ // NSLog(@"touchesEnded");
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-  NSLog(@"touchesCancelled");
+ // NSLog(@"touchesCancelled");
 }
 
 
