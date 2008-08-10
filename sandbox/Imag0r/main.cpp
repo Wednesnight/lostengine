@@ -56,7 +56,10 @@ void redraw(shared_ptr<TimerEvent> event)
   glVertex2f(appInstance->displayAttributes.width, appInstance->displayAttributes.height);
   glEnd();
   
+  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
   drawRectTextured(Rect(10,10,texture->width,texture->height), *texture);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
   
   glDisable(GL_TEXTURE_2D);
   glDisable(GL_BLEND);
@@ -97,8 +100,6 @@ void init(shared_ptr<ApplicationEvent> event)
   texture->wrap(GL_CLAMP_TO_EDGE);
   texture->filter(GL_LINEAR);
         
-  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
   DOUT("width: "<<texture->width<< " height: "<<texture->height);
 
   redrawTimer = new Timer("redrawTimer", 1.0/60.0);
