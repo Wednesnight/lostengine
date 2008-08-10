@@ -4,29 +4,21 @@
 #include "lost/platform/Platform.h"
 
 using namespace lost;
-
-
-
+using namespace lost::application;
+using namespace boost;
 using namespace lost::common;
 
-// CONSTANTS
-//#define kTeapotScale				3.0
-#define kAccelerometerFrequency		100.0 // Hz
-//#define kRenderingFrequency			30.0 // Hz
-//#define kFilteringFactor			0.1
-
-// MACROS
-//#define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
-
-//#define OLD_DRAW 0
-
-LostAppController* lostAppController = NULL;
-
+#define kAccelerometerFrequency		100.0 // Hz FIXME: this should really be configurable
+LostAppController* lostAppController = NULL; // global instance so LostApplicationHelper functions can find this controller
 
 @implementation LostAppController
 
 - (void)dealloc
 {
+  if(acevent)
+  {
+    delete acevent;
+  }
 	[window release];
 	[glView release];
 	[super dealloc];
@@ -68,7 +60,12 @@ LostAppController* lostAppController = NULL;
 - (void)applicationDidFinishLaunching:(UIApplication*)application
 {
   DOUT("applicationDidFinishLaunching");
-  lostAppController = self;
+  lostAppController = self; // set up global instance pointer so LostApplicationHelper functions can find us
+  // setup accelerometer event instance.
+  // the crude pointer-pointer construct is required since C++ constructors aren't called in Objective-C++ files
+  // we therefore have to allocate the shared_ptr by hand, then the actual event instance
+  acevent = new shared_ptr<AccelerometerEvent>;
+  acevent->reset(new AccelerometerEvent(AccelerometerEvent::DEVICE_ACCELERATED()));
   
 	CGRect					rect = [[UIScreen mainScreen] bounds];
 	
@@ -112,7 +109,12 @@ LostAppController* lostAppController = NULL;
 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {
-  // FIXME: pass on accelerometer data as events
+  (*acevent)->timeStamp = acceleration.timestamp;
+  (*acevent)->x = acceleration.x;
+  (*acevent)->y = acceleration.y;
+  (*acevent)->z = acceleration.z;
+  lostApplicationHelpers_dispatchEvent(*acevent);
+  DOUT("acceleration");
 }
 
 - (void) swapBuffers

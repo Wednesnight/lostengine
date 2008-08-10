@@ -10,6 +10,12 @@ using namespace lost::common;
 using namespace lost::application;
 using namespace luabind;
 
+
+void lostApplicationHelpers_dispatchEvent(boost::shared_ptr<lost::event::Event> event)
+{
+  appInstance->dispatchEvent(event);
+}
+
 void lostApplicationHelpers_preinit()
 {
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
