@@ -16,17 +16,17 @@ namespace lost
 
     struct Mesh
     {
-      unsigned int vertexCount;
-      unsigned int faceCount;
-      unsigned int normalCount;
+      unsigned short vertexCount;
+      unsigned short faceCount;
+      unsigned short normalCount;
 
-      boost::shared_array<Vertex>       vertices;
-      boost::shared_array<unsigned int> faces;
-      boost::shared_array<math::Vec3>   normals;
+      boost::shared_array<Vertex>         vertices;
+      boost::shared_array<unsigned short> faces;
+      boost::shared_array<math::Vec3>     normals;
 
       lost::math::AABB box;
 
-      Mesh(unsigned int inVertexCount, unsigned int inFaceCount)
+      Mesh(unsigned short inVertexCount, unsigned short inFaceCount)
       {
         setVertexCount(inVertexCount);
         setFaceCount(inFaceCount);
@@ -48,20 +48,20 @@ namespace lost
 
       void clearVertices()
       {
-        for (unsigned int idx = 0; idx < vertexCount; ++idx)
+        for (unsigned short idx = 0; idx < vertexCount; ++idx)
         {
           vertices[idx].zero();
         }
       }
       
-      void setVertexCount(unsigned int inCount)
+      void setVertexCount(unsigned short inCount)
       {
         vertexCount = inCount;
         vertices.reset(new Vertex[vertexCount]);
         clearVertices();
       }
       
-      void setVertex(unsigned int inIndex, Vertex& inVertex)
+      void setVertex(unsigned short inIndex, Vertex& inVertex)
       {
         if (inIndex < vertexCount)
         {
@@ -77,20 +77,20 @@ namespace lost
       
       void clearFaces()
       {
-        for (unsigned int idx = 0; idx < faceCount; ++idx)
+        for (unsigned short idx = 0; idx < faceCount; ++idx)
         {
           faces[idx] = 0;
         }
       }
       
-      void setFaceCount(unsigned int inCount)
+      void setFaceCount(unsigned short inCount)
       {
         faceCount = inCount;
-        faces.reset(new unsigned int[faceCount]);
+        faces.reset(new unsigned short[faceCount]);
         clearFaces();
       }
       
-      void setFacePoint(unsigned int inIndex, unsigned int& inFacePoint)
+      void setFacePoint(unsigned short inIndex, unsigned short& inFacePoint)
       {
         if (inIndex < faceCount)
         {
@@ -105,11 +105,11 @@ namespace lost
       stream << "Mesh:" << std::endl;
       stream << std::endl;
       stream << "  vertexCount: " << m->vertexCount << std::endl;
-//      for (unsigned int idx = 0; idx < m->vertexCount; ++idx)
+//      for (unsigned short idx = 0; idx < m->vertexCount; ++idx)
 //        stream << "    vertices[" << idx << "]: " << m->vertices[idx] << std::endl;
       stream << std::endl;
       stream << "  faceCount: " << m->faceCount << std::endl;
-//      for (unsigned int idx = 0; idx < m->faceCount; ++idx)
+//      for (unsigned short idx = 0; idx < m->faceCount; ++idx)
 //        stream << "    faces[" << idx << "]: " << m->faces[idx] << std::endl;
       return stream;
     }

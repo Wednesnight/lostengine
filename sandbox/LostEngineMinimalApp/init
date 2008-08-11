@@ -1,5 +1,8 @@
 function preinitHandler(event)
   log.debug("preinit")
+
+  modelFilename = "kenny_tri.obj"
+  modelSize     = 5.0
 end
 
 function initHandler(event)

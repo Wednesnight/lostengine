@@ -186,13 +186,13 @@ namespace lost
         boost::shared_ptr<MaterialOBJ>& material;
         std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
         std::string& materialName;
-        unsigned int& materialFaceOffset; 
+        unsigned short& materialFaceOffset; 
         boost::shared_ptr<MaterialGroup>& group;
 
         MaterialAssign(boost::shared_ptr<MaterialOBJ>& inMaterial, 
                        std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials, 
                        std::string& inMaterialName, 
-                       unsigned int& inMaterialFaceOffset, 
+                       unsigned short& inMaterialFaceOffset, 
                        boost::shared_ptr<MaterialGroup>& inGroup)
         : material(inMaterial),
           materials(inMaterials),
@@ -244,11 +244,11 @@ namespace lost
 
         struct MeshAssignVertex
         {
-          Mesh&         mesh;
-          unsigned int& index;
-          Vertex&       data;
+          Mesh&           mesh;
+          unsigned short& index;
+          Vertex&         data;
           
-          MeshAssignVertex(Mesh& inMesh, Vertex& inData, unsigned int& inIndex)
+          MeshAssignVertex(Mesh& inMesh, Vertex& inData, unsigned short& inIndex)
           : mesh(inMesh),
             index(inIndex),
             data(inData)
@@ -265,11 +265,11 @@ namespace lost
         
         struct MeshAssignFacePoint
         {
-          Mesh&         mesh;
-          unsigned int& index;
-          unsigned int& data;
+          Mesh&           mesh;
+          unsigned short& index;
+          unsigned short& data;
           
-          MeshAssignFacePoint(Mesh& inMesh, unsigned int& inData, unsigned int& inIndex)
+          MeshAssignFacePoint(Mesh& inMesh, unsigned short& inData, unsigned short& inIndex)
           : mesh(inMesh),
             index(inIndex),
             data(inData)
@@ -288,8 +288,8 @@ namespace lost
         {
           boost::shared_ptr<lost::model::Mesh> result;
           
-          unsigned int vertexCount = 0;
-          unsigned int faceCount   = 0;
+          unsigned short vertexCount = 0;
+          unsigned short faceCount   = 0;
           
           boost::spirit::rule<> vertex_p_count  = boost::spirit::ch_p('v')
                                                   >> +boost::spirit::space_p >> boost::spirit::real_p
@@ -350,15 +350,15 @@ namespace lost
             {
               materials.clear();
               
-              unsigned int vertexIdx;
-              unsigned int faceIdx;
+              unsigned short vertexIdx;
+              unsigned short faceIdx;
 
-              Vertex       vertex;
-              unsigned int facePoint;
+              Vertex         vertex;
+              unsigned short facePoint;
               
-              std::string  materialFile;
-              std::string  materialName;
-              unsigned int materialFaceOffset;
+              std::string    materialFile;
+              std::string    materialName;
+              unsigned short materialFaceOffset;
 
               boost::shared_ptr<MaterialGroup> currentGroup;
               

@@ -17,7 +17,7 @@ namespace lost
   namespace model
   {
 
-    typedef std::map<boost::shared_ptr<MaterialGroup>, boost::shared_ptr<gl::ElementArrayBuffer<unsigned int> > > ElementBuffers;
+    typedef std::map<boost::shared_ptr<MaterialGroup>, boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > > ElementBuffers;
     struct RendererOBJ
     {
       boost::shared_ptr<Mesh>        mesh;
@@ -27,20 +27,24 @@ namespace lost
       boost::shared_ptr<gl::ArrayBuffer<math::Vec3> > normalBuffer;
       
       // without material
-      boost::shared_ptr<gl::ElementArrayBuffer<unsigned int> > elementBuffer;
+      boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > elementBuffer;
       // with material
       ElementBuffers elementBuffers;
 
       float  size;
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
       GLenum renderModeFront;
       GLenum renderModeBack;
+#endif
       
       RendererOBJ(boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<MaterialOBJ> inMaterial)
       : mesh(inMesh),
         material(inMaterial),
-        size(1.0f),
-        renderModeFront(GL_FILL),
-        renderModeBack(GL_FILL)
+        size(1.0f)
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+        ,renderModeFront(GL_FILL)
+        ,renderModeBack(GL_FILL)
+#endif
       {
         vertexBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
         vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
@@ -65,17 +69,17 @@ namespace lost
         
         if (material)
         {
-          unsigned int* faces = mesh->faces.get();
+          unsigned short* faces = mesh->faces.get();
           for (MaterialGroups::iterator idx = material->groups.begin(); idx != material->groups.end(); ++idx)
           {
-            boost::shared_ptr<gl::ElementArrayBuffer<unsigned int> > buffer(new gl::ElementArrayBuffer<unsigned int>);
+            boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > buffer(new gl::ElementArrayBuffer<unsigned short>);
             buffer->bindBufferData(&faces[(*idx)->faceOffset], (*idx)->faceLength);
             elementBuffers[*idx] = buffer;
           }
         }
         else
         {
-          elementBuffer.reset(new gl::ElementArrayBuffer<unsigned int>);
+          elementBuffer.reset(new gl::ElementArrayBuffer<unsigned short>);
           elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
         }
         
@@ -89,8 +93,10 @@ namespace lost
         vertexBuffer->bindVertexPointer();
         normalBuffer->bindNormalPointer();
         // draw mesh faces as triangles
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
         glPolygonMode(GL_FRONT, renderModeFront);
         glPolygonMode(GL_BACK, renderModeBack);
+#endif
         if (material)
         {
           for (ElementBuffers::iterator idx = elementBuffers.begin(); idx != elementBuffers.end(); ++idx)
@@ -114,7 +120,9 @@ namespace lost
           elementBuffer->drawElements(GL_TRIANGLES);
           elementBuffer->unbind();
         }
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
         normalBuffer->unbind();
         vertexBuffer->unbind();
       }

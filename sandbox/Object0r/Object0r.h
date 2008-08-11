@@ -260,8 +260,6 @@ struct Object0r
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
     
-    glEnableClientState(GL_VERTEX_ARRAY);
-    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);

@@ -59,6 +59,7 @@ struct Buffer
     glDrawElements(mode, count, inType, indices);GLDEBUG_THROW;
   }
   
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   // indices: used as byte offset into buffer when element array is bound
   virtual void drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count=-1, const GLvoid* indices = 0)
   {
@@ -76,6 +77,7 @@ struct Buffer
   {
     glDrawRangeElements(mode, start, end, count, inType, indices);GLDEBUG_THROW;
   }
+#endif
   
   /**
    * GL_ARRAY_BUFFER
@@ -153,6 +155,7 @@ struct Buffer
     glColorPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
   
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   /**
    * index_ index of generic vertex attribute
    * size: number of components per attribute, 1,2,3 or 4
@@ -162,7 +165,8 @@ struct Buffer
   virtual void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride=0, const GLvoid* pointer=0)
   {
     glVertexAttribPointer(index, size, type, normalized, stride, pointer);GLDEBUG_THROW; 
-  }  
+  }
+#endif
   
 };
 }
