@@ -116,7 +116,6 @@ LostAppController* lostAppController = NULL; // global instance so LostApplicati
   (*acevent)->y = acceleration.y;
   (*acevent)->z = acceleration.z;
   lostApplicationHelpers_dispatchEvent(*acevent);
-  DOUT("acceleration");
 }
 
 @end
