@@ -46,11 +46,16 @@ namespace lost
         ,renderModeBack(GL_FILL)
 #endif
       {
+        DOUT("constructor start");
+        DOUT("bind vertex buffer data start");
         vertexBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
         vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
+        DOUT("bind vertex buffer data end");
 
         if (!mesh->normals)
         {
+          DOUT("calculate normals start");
+          DOUT("vertices: "<<mesh->vertexCount<<" faces: "<<mesh->faceCount<<" num checks: "<<mesh->vertexCount*mesh->faceCount);
           mesh->normalCount = mesh->vertexCount;
           mesh->normals.reset(new math::Vec3[mesh->normalCount]);
           for (unsigned int vertexIdx = 0; vertexIdx < mesh->vertexCount; ++vertexIdx)
@@ -63,12 +68,16 @@ namespace lost
             }
             normalise(mesh->normals[vertexIdx]);
           }
+          DOUT("calculate normals end");
         }
+        DOUT("bind normal data start");
         normalBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
         normalBuffer->bindBufferData(mesh->normals.get(), mesh->normalCount);
+        DOUT("bind normal data end");
         
         if (material)
         {
+          DOUT("create element buffers start");
           unsigned short* faces = mesh->faces.get();
           for (MaterialGroups::iterator idx = material->groups.begin(); idx != material->groups.end(); ++idx)
           {
@@ -76,15 +85,19 @@ namespace lost
             buffer->bindBufferData(&faces[(*idx)->faceOffset], (*idx)->faceLength);
             elementBuffers[*idx] = buffer;
           }
+          DOUT("create element buffers end");
         }
         else
         {
+          DOUT("create single element buffer start");
           elementBuffer.reset(new gl::ElementArrayBuffer<unsigned short>);
           elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
+          DOUT("create single element buffer end");          
         }
         
         glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
         glEnableClientState(GL_NORMAL_ARRAY);GLDEBUG;
+        DOUT("constructor end");
       }
 
       void render()
