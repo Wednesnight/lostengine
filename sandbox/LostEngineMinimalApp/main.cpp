@@ -17,6 +17,7 @@
 #include "lost/model/Mesh.h"
 #include "lost/model/MaterialOBJ.h"
 #include "lost/model/RendererOBJ.h"
+#include "lost/camera/CameraController.h"
 
 using namespace std;
 using namespace lost::gl;
@@ -29,6 +30,7 @@ using namespace lost::bitmap;
 using namespace lost::resource;
 using namespace lost::application;
 using namespace lost::model;
+using namespace lost::camera;
 using namespace boost;
 
 
@@ -46,7 +48,9 @@ struct Controller
   shared_ptr<Mesh>              mesh;
   shared_ptr<MaterialOBJ>       material;
   shared_ptr<RendererOBJ>       modelRenderer;  
-  
+
+  shared_ptr<CameraController> camera;
+
   Controller(shared_ptr<Loader> inLoader) : loader(inLoader) {}
   
   void redraw(shared_ptr<TimerEvent> event)
@@ -56,20 +60,30 @@ struct Controller
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
-
+/*
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
+*/
     lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
                                      Vec3(0.0f, 3.0f, 15.0f), Vec3(0.0f, 3.0f, 0.0f), Vec3(0,1,0),
-                                     120, .1, 1000);
-    glMatrixMode(GL_MODELVIEW);GLDEBUG;
-    glLoadIdentity();GLDEBUG;
-    
+                                     120, .1, 100);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     GLfloat shininess[] = {128.0f};
     GLfloat ambient[]   = {0.1f, 0.1f, 0.1f, 1.0f};
     GLfloat diffuse[]   = {0.8f, 0.8f, 0.8f, 1.0f};
     GLfloat specular[]  = {0.5f, 0.5f, 0.5f, 1.0f};
-    GLfloat position[] = {1.0f, 1.0f, 5.0f, 0.0f};
-//    GLfloat direction[] = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
-//    GLfloat cutoff[] = {180.0f};
+    Vector3 cameraPosition = camera->camera.getPosition();
+    GLfloat position[] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
+    Vector3 cameraDirection = camera->camera.getViewDirection();
+    GLfloat direction[] = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    GLfloat cutoff[] = {180.0f};
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -78,16 +92,14 @@ struct Controller
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
-//    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction);
-//    glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, cutoff);
+    glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction);
+    glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, cutoff);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_NORMALIZE);
     
-    //    lightingShader->enable();
     setColor(whiteColor);
     modelRenderer->render();
-    //    lightingShader->disable();
     
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
@@ -145,6 +157,7 @@ struct Controller
     string filename = "stubs.jpg";
     bitmap = loader.load(filename);
     
+    camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
     
     texture.reset(new Texture());
     texture->bind();

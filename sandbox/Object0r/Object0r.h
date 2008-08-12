@@ -23,6 +23,7 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/camera/Camera.h"
+#include "lost/camera/CameraController.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
 #include "lost/model/parser/ParserOBJ.h"
@@ -35,7 +36,6 @@
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/platform/Platform.h"
 #include "lost/application/Timer.h"
-
 #include "lost/lua/lua.h"
 
 using namespace boost;
@@ -46,136 +46,8 @@ using namespace lost::gl;
 using namespace lost::gl::utils;
 using namespace lost::math;
 using namespace lost::model;
+using namespace lost::camera;
 using namespace std;
-
-namespace lost
-{
-  namespace gl
-  {
-    struct CameraController
-    {
-      Camera camera;
-      
-      float              fovX;
-      DisplayAttributes& display;
-      Vec2               depth;
-      Vec3               acceleration;
-      Vec3               velocity;
-      
-      Vec2 mousePos;
-      Vector3 direction;
-      
-      Timer cameraTimer;
-      
-      
-      CameraController(DisplayAttributes& inDisplay, EventDispatcher& inDispatcher)
-      : fovX(60.0f),
-        display(inDisplay),
-        depth(0.1f, 100.0f),
-        acceleration(4.0f, 4.0f, 4.0f),
-        velocity(1.0f, 1.0f, 1.0f),
-        mousePos(0,0),
-        direction(0.0f, 0.0f, 0.0f),
-        cameraTimer("CameraController::cameraTimer", 0.025f)
-      {
-        camera.setBehavior(Camera::CAMERA_BEHAVIOR_SPECTATOR);
-        camera.perspective(fovX, display.width / display.height, depth.min, depth.max);
-        camera.setPosition(Vector3(0.0f, 0.0f, 10.0f));
-        camera.setAcceleration(Vector3(acceleration.x, acceleration.y, acceleration.z));
-        camera.setVelocity(Vector3(velocity.x, velocity.y, velocity.z));
-
-        inDispatcher.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(boost::bind(&CameraController::keyPressed, this, _1)));
-        inDispatcher.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(boost::bind(&CameraController::keyPressed, this, _1)));
-        inDispatcher.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(boost::bind(&CameraController::mouseMoved, this, _1)));
-        
-        cameraTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(boost::bind(&CameraController::updateCamera, this, _1)));
-      }
-      
-      void updateCamera(boost::shared_ptr<TimerEvent> event)
-      {
-        camera.updatePosition(direction, event->passedSec);
-      }
-      
-      void mouseMoved(boost::shared_ptr<MouseEvent> event)
-      {
-        static bool moveInitialized = false;
-        
-        if (!moveInitialized)
-        {
-          moveInitialized = true;
-          mousePos = event->pos;
-        }
-        else
-        {
-          float dx = -(event->pos.x - mousePos.x);
-          float dy = event->pos.y - mousePos.y;
-          
-          camera.rotateSmoothly(dx, dy, 0.0f);
-          mousePos = event->pos;
-        }
-      }
-      
-      void keyPressed(boost::shared_ptr<KeyEvent> event)
-      {
-        Vector3 velocity = camera.getCurrentVelocity();
-        direction = Vector3(0.0f, 0.0f, 0.0f);
-        
-        if (event->pressed)
-        {
-          switch (event->key)
-          {
-            case K_NUMPAD_PLUS:
-              camera.setRotationSpeed(camera.getRotationSpeed() + 0.01f);
-              if (camera.getRotationSpeed() > 1.0f)
-                camera.setRotationSpeed(1.0f);
-              break;
-              
-            case K_NUMPAD_MINUS:            
-              camera.setRotationSpeed(camera.getRotationSpeed() - 0.01f);
-              if (camera.getRotationSpeed() <= 0.0f)
-                camera.setRotationSpeed(0.01f);
-              break;
-              
-            case K_BACKSPACE:
-              if (event->pressed) camera.undoRoll();
-              break;
-              
-            case K_W:
-              if (!event->repeat) camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
-              direction.z += 1.0f;
-              break;
-              
-            case K_S:
-              if (!event->repeat) camera.setCurrentVelocity(velocity.x, velocity.y, 0.0f);
-              direction.z -= 1.0f;
-              break;
-              
-            case K_A:
-              if (!event->repeat) camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
-              direction.x -= 1.0f;
-              break;
-              
-            case K_D:
-              if (!event->repeat) camera.setCurrentVelocity(0.0f, velocity.y, velocity.z);
-              direction.x += 1.0f;
-              break;
-              
-            case K_Q:
-              if (!event->repeat) camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
-              direction.y -= 1.0f;
-              break;
-              
-            case K_E:
-              if (!event->repeat) camera.setCurrentVelocity(velocity.x, 0.0f, velocity.z);
-              direction.y += 1.0f;
-              break;
-          }
-        }
-      }
-    };
-    
-  }
-}
 
 struct Object0r
 {

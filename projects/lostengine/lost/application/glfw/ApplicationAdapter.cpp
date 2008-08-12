@@ -1,4 +1,4 @@
-#include "lost/application/ApplicationAdapter.h"
+#include "lost/application/glfw/ApplicationAdapter.h"
 #include "lost/common/Logger.h"
 #include <GL/glfw.h>
 #include "lost/application/KeySym.h"
