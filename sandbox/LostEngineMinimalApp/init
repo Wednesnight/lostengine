@@ -3,6 +3,12 @@ function preinitHandler(event)
 
   modelFilename = "kenny_tri.obj"
   modelSize     = 5.0
+
+  lightShininess = 128
+  lightCutoff    = 180
+  lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
+  lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
+  lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
 end
 
 function initHandler(event)

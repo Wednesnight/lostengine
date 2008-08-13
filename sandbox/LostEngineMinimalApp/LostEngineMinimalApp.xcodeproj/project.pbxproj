@@ -85,7 +85,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				EA6712EF0E3E94A900B961EC /* main.cpp */,
+				3EC866A90E53269F00981B59 /* Scripts */,
+				3EC866A80E53269900981B59 /* Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -98,7 +99,6 @@
 			children = (
 				EA0E04760E4E1AEB001556D6 /* stubs.jpg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				EAF706C50E4B81B000EF62CB /* init */,
 				3E398C4A0E5080A800D40DDE /* kenny_tri.mtl */,
 				3E398C4B0E5080A800D40DDE /* kenny_tri.obj */,
 			);
@@ -115,6 +115,22 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3EC866A80E53269900981B59 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EA6712EF0E3E94A900B961EC /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		3EC866A90E53269F00981B59 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				EAF706C50E4B81B000EF62CB /* init */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		EAEAF71A0E4A61A50003A334 /* Products */ = {

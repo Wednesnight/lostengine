@@ -37,7 +37,7 @@ namespace lost
       
       
       CameraController(common::DisplayAttributes& inDisplay, event::EventDispatcher& inDispatcher)
-      : fovX(120.0f),
+      : fovX(60.0f),
         display(inDisplay),
         depth(0.1f, 100.0f),
         acceleration(4.0f, 4.0f, 4.0f),
@@ -48,7 +48,7 @@ namespace lost
       {
         camera.setBehavior(Camera::CAMERA_BEHAVIOR_SPECTATOR);
         camera.perspective(fovX, display.width / display.height, depth.min, depth.max);
-        camera.setPosition(Vector3(0.0f, 0.0f, 10.0f));
+        camera.setPosition(Vector3(0.0f, 0.0f, 1.0f));
         camera.setAcceleration(Vector3(acceleration.x, acceleration.y, acceleration.z));
         camera.setVelocity(Vector3(velocity.x, velocity.y, velocity.z));
         

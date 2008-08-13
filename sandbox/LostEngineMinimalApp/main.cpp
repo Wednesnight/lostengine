@@ -55,28 +55,35 @@ struct Controller
   
   void redraw(shared_ptr<TimerEvent> event)
   {
-    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);
-    
     glClearColor(0,0,0,0);GLDEBUG;
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
-    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
-                                     Vec3(0.0f, 3.0f, 15.0f), Vec3(0.0f, 3.0f, 0.0f), Vec3(0,1,0),
-                                     120, .1, 100);
+//    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
+//                                     Vec3(0.0f, 3.0f, 15.0f), Vec3(0.0f, 3.0f, 0.0f), Vec3(0,1,0),
+//                                     120, .1, 100);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
-    GLfloat shininess[] = {128.0f};
-    GLfloat ambient[]   = {0.1f, 0.1f, 0.1f, 1.0f};
-    GLfloat diffuse[]   = {0.8f, 0.8f, 0.8f, 1.0f};
-    GLfloat specular[]  = {0.5f, 0.5f, 0.5f, 1.0f};
-    Vector3 cameraPosition = camera->camera.getPosition();
-    GLfloat position[] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
+    Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
+    Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
+    Vec4 vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
+
+    GLfloat shininess[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
+    GLfloat ambient[]       = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
+    GLfloat diffuse[]       = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
+    GLfloat specular[]      = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
+    Vector3 cameraPosition  = camera->camera.getPosition();
+    GLfloat position[]      = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
     Vector3 cameraDirection = camera->camera.getViewDirection();
-    GLfloat direction[] = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
-    GLfloat cutoff[] = {180.0f};
+    GLfloat direction[]     = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    GLfloat cutoff[]        = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -176,6 +183,8 @@ struct Controller
   void touches(shared_ptr<TouchEvent> event)
   {
     DOUT(event->type);
+    DOUT("camera position   : " << camera->camera.getPosition().x << ", " << camera->camera.getPosition().y << ", " << camera->camera.getPosition().z);
+    DOUT("camera orientation: " << camera->camera.getOrientation().x << ", " << camera->camera.getOrientation().y << ", " << camera->camera.getOrientation().z);
   }
 };
 
