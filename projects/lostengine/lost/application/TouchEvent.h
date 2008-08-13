@@ -22,9 +22,8 @@ struct TouchEvent : public event::Event
   struct Touch
   {
     lost::math::Vec2  location; // location on screen, origin in the lower left corner, same as OpenGL
-    unsigned short    tapcount;  // number of taps for this touch
-    double            timestamp; // should only be used for delta calculation
-    event::Type       phase; // one of the four phases: began, moved, ended, cancelled
+    unsigned short    tapCount;  // number of taps for this touch
+    double            timeStamp; // should only be used for delta calculation
   };
   
   static const event::Type& TOUCHES_BEGAN() { static event::Type d = "touchesBegan";return d;}  

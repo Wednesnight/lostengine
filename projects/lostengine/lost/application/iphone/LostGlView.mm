@@ -6,9 +6,11 @@
 #include "lost/gl/Utils.h"
 #include "lost/application/iphone/LostApplicationHelpers.h"
 #include <boost/shared_ptr.hpp>
+#include "lost/math/Vec2.h"
 
 using namespace boost;
 using namespace lost;
+using namespace lost::math;
 using namespace lost::application;
 
 @implementation LostGlView
@@ -48,6 +50,14 @@ using namespace lost::application;
   // FIXME: clean up init process, it makes no sense to init general members in initGLES
   touchEvent = new shared_ptr<TouchEvent>;
   touchEvent->reset(new TouchEvent(""));
+  
+  touches = new std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >;
+  maxNumTouches = 10;
+  for(NSUInteger i=0; i<maxNumTouches; ++i)
+  {
+    touches->push_back(shared_ptr<TouchEvent::Touch>(new TouchEvent::Touch));
+  }
+  
 	// Get our backing layer
 	CAEAGLLayer *eaglLayer = (CAEAGLLayer*) self.layer;
 	
@@ -158,7 +168,8 @@ using namespace lost::application;
 // Stop animating and release resources when they are no longer needed.
 - (void)dealloc
 {	
-  if(touchEvent) { delete touchEvent; }  
+  if(touchEvent) { delete touchEvent; } 
+  if(touches) { delete touches; }
 	if([EAGLContext currentContext] == context)
 	{
 		[EAGLContext setCurrentContext:nil];
@@ -170,23 +181,47 @@ using namespace lost::application;
 	[super dealloc];
 }
 
+-(void) convertTouches:(UIEvent*)event
+{
+  if([[event allTouches] count] > maxNumTouches)
+  {
+    EOUT("too many touches, dropping all");
+    return;
+  }
+  
+  (*touchEvent)->touches.clear();
+  std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >::iterator i = touches->begin();
+  for(UITouch* touch in [event allTouches])
+  {
+    (*i)->tapCount = touch.tapCount;
+    (*i)->timeStamp = touch.timestamp;
+    CGPoint loc = [touch locationInView:self];
+    (*i)->location = Vec2(loc.x, loc.y);
+    (*touchEvent)->touches.push_back(*i);
+  }
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   (*touchEvent)->type = TouchEvent::TOUCHES_BEGAN();
+  [self convertTouches:event];
   lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
   (*touchEvent)->type = TouchEvent::TOUCHES_MOVED();
+  [self convertTouches:event];
   lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   (*touchEvent)->type = TouchEvent::TOUCHES_ENDED();
+  [self convertTouches:event];
   lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
   (*touchEvent)->type = TouchEvent::TOUCHES_CANCELLED();
+  [self convertTouches:event];
   lostApplicationHelpers_dispatchEvent(*touchEvent);
 }
 

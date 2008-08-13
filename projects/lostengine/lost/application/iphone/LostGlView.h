@@ -3,7 +3,7 @@
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
 #include "lost/application/TouchEvent.h"
-
+#include <list>
 @protocol LostGlViewDelegate;
 
 @interface LostGlView : UIView
@@ -24,7 +24,9 @@
 	// Delegate to do our drawing, called by -drawView, which can be called manually or via the animation timer.
 	id<LostGlViewDelegate> delegate;
 	  
-  boost::shared_ptr<lost::application::TouchEvent>* touchEvent;  
+  boost::shared_ptr<lost::application::TouchEvent>* touchEvent; 
+  std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >* touches;
+  NSUInteger maxNumTouches;
 }
 
 @property(nonatomic, assign) id<LostGlViewDelegate> delegate;
