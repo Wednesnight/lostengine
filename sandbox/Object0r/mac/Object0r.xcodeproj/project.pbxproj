@@ -140,10 +140,11 @@
 		29B97314FDCFA39411CA2CEA /* Object0r */ = {
 			isa = PBXGroup;
 			children = (
-				29B97315FDCFA39411CA2CEA /* Sources */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Libraries */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				3E75F0A60E52EFBB006179E4 /* Scripts */,
+				29B97315FDCFA39411CA2CEA /* Sources */,
 			);
 			name = Object0r;
 			sourceTree = "<group>";
@@ -160,7 +161,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3ED935C90E4756B700AABFAB /* init */,
 				3EB514A50E325AD30099EC4B /* lighting.vs */,
 				3EB514A60E325AD30099EC4B /* lighting.fs */,
 				3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */,
@@ -206,6 +206,14 @@
 				EA27DE4C0DD87EE200552F5E /* Carbon.framework */,
 			);
 			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3ED935C90E4756B700AABFAB /* init */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		EA3B98170E04849B00B6423B /* Products */ = {

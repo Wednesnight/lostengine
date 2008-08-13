@@ -35,14 +35,15 @@ inline float squlen(const Vec3& inOp)
     return (inOp.x*inOp.x + inOp.y*inOp.y + inOp.z*inOp.z);
 }
 
-inline void normalise(Vec3& ioOp)
+inline Vec3& normalise(Vec3& ioOp)
 {
-    float l = len(ioOp);
-    float x0 = 1.0f/l;
+  float l = len(ioOp);
+  float x0 = 1.0f/l;
 
-    ioOp.x *= x0;
-    ioOp.y *= x0;
-    ioOp.z *= x0;
+  ioOp.x *= x0;
+  ioOp.y *= x0;
+  ioOp.z *= x0;
+  return ioOp; 
 }
 
 inline Vec3 operator*(const Vec3& inOp1,  float v)

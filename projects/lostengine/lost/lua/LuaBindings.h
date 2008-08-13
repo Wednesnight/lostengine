@@ -23,6 +23,7 @@ void bindLostApplicationTimerEvent(lost::lua::State& state);
 void bindLostApplicationResizeEvent(lost::lua::State& state);
 void bindLostApplicationMouseEvent(lost::lua::State& state);
 void bindLostApplicationApplicationEvent(lost::lua::State& state);
+void bindLostMathVec4(lost::lua::State& state);
 
 static inline void bindAll(lost::lua::State& state)
 {
@@ -40,6 +41,7 @@ static inline void bindAll(lost::lua::State& state)
   bindLostApplicationResizeEvent(state);
   bindLostApplicationMouseEvent(state);
   bindLostApplicationApplicationEvent(state);
+  bindLostMathVec4(state);
   luabind::bind_class_info(state);
 }
 

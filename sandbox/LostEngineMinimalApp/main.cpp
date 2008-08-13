@@ -55,11 +55,11 @@ struct Controller
   
   void redraw(shared_ptr<TimerEvent> event)
   {
-    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
-    glClearColor(1,0,1,0);GLDEBUG;
+    glClearColor(0,0,0,0);GLDEBUG;
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
+
 /*
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -103,11 +103,11 @@ struct Controller
     
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
+
+    modelRenderer->renderNormals();
+    modelRenderer->renderAABB();
     
-    setColor(whiteColor);
-    drawAABB(mesh->box);
     glScalef(10.0f, 10.0f, 10.0f);
-    
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
 
     lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
@@ -176,6 +176,8 @@ struct Controller
 
     redrawTimer = new Timer("redrawTimer", 1.0/30.0);
     redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
+
+    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
   }
   
   void touches(shared_ptr<TouchEvent> event)

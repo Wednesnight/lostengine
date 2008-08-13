@@ -55,18 +55,16 @@ namespace lost
         if (!mesh->normals)
         {
           DOUT("calculate normals start");
-          DOUT("vertices: "<<mesh->vertexCount<<" faces: "<<mesh->faceCount<<" num checks: "<<mesh->vertexCount*mesh->faceCount);
+          DOUT("vertices: " << mesh->vertexCount << " faces: " << mesh->faceCount << " num checks: " << mesh->vertexCount + mesh->faceCount);
           mesh->normalCount = mesh->vertexCount;
           mesh->normals.reset(new math::Vec3[mesh->normalCount]);
-          for (unsigned int vertexIdx = 0; vertexIdx < mesh->vertexCount; ++vertexIdx)
+          for (unsigned int faceIdx = 0; faceIdx < mesh->faceCount; ++faceIdx)
           {
-            mesh->normals[vertexIdx].zero();
-            for (unsigned int faceIdx = 0; faceIdx < mesh->faceCount; ++faceIdx)
-            {
-              if (mesh->vertices[vertexIdx] == mesh->vertices[mesh->faces[faceIdx]])
-                mesh->normals[vertexIdx] += mesh->vertices[vertexIdx];
-            }
-            normalise(mesh->normals[vertexIdx]);
+            mesh->normals[mesh->faces[faceIdx]] += mesh->vertices[mesh->faces[faceIdx]];
+          }
+          for (unsigned int normalIdx = 0; normalIdx < mesh->normalCount; ++normalIdx)
+          {
+            normalise(mesh->normals[normalIdx]);
           }
           DOUT("calculate normals end");
         }
@@ -138,6 +136,28 @@ namespace lost
 #endif
         normalBuffer->unbind();
         vertexBuffer->unbind();
+      }
+      
+      void renderNormals()
+      {
+        if (mesh->normals)
+        {
+          glScalef(size, size, size);
+          gl::setColor(common::redColor);
+          for (unsigned int idx = 0; idx < mesh->normalCount; ++idx)
+          {
+            math::Vec3 offset(mesh->vertices[mesh->faces[idx*3]]);
+            math::Vec3 normal(offset + mesh->normals[idx] * .1);
+            gl::drawLine(offset, normal);
+          }
+        }
+      }
+      
+      void renderAABB()
+      {
+        glScalef(size, size, size);
+        gl::setColor(common::whiteColor);
+        gl::drawAABB(mesh->box);
       }
     };
 

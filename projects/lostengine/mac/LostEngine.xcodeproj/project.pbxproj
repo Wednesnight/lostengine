@@ -10,6 +10,7 @@
 		3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */; };
 		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
 		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
+		3E75F1500E52FD3B006179E4 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3E9462D40E51713200F67187 /* CameraController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E9462D30E51713200F67187 /* CameraController.h */; };
 		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
@@ -27,7 +28,6 @@
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3ED3A3A60E3886C7000199E7 /* LuaVec3.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ED3A3A20E3886C7000199E7 /* LuaVec3.h */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
-		3EDB06920E4C5787006D6305 /* LuaVec4.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDB06900E4C5787006D6305 /* LuaVec4.h */; };
 		EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
 		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
@@ -377,7 +377,6 @@
 		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
 		3ED3A3A20E3886C7000199E7 /* LuaVec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaVec3.h; sourceTree = "<group>"; };
 		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
-		3EDB06900E4C5787006D6305 /* LuaVec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaVec4.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E04050E4E0FC1001556D6 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA0F2DE10E37D68C0001F530 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
@@ -820,7 +819,6 @@
 				3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */,
 				3ED3A3A20E3886C7000199E7 /* LuaVec3.h */,
 				3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */,
-				3EDB06900E4C5787006D6305 /* LuaVec4.h */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -1004,7 +1002,6 @@
 				3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */,
 				3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */,
 				3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */,
-				3EDB06920E4C5787006D6305 /* LuaVec4.h in Headers */,
 				3E9462D40E51713200F67187 /* CameraController.h in Headers */,
 				3E94632F0E5173BB00F67187 /* ApplicationAdapter.h in Headers */,
 			);
@@ -1295,6 +1292,7 @@
 				EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */,
 				EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */,
 				EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */,
+				3E75F1500E52FD3B006179E4 /* LuaVec4.cpp in Sources */,
 				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
 				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
 				EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */,

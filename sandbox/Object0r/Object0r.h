@@ -18,6 +18,7 @@
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
+#include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/ShaderProgram.h"
@@ -62,7 +63,14 @@ struct Object0r
   shared_ptr<MaterialOBJ>       material;
   shared_ptr<RendererOBJ>       modelRenderer;
 
-  Object0r() {}
+  bool renderNormals;
+  bool renderAABB;
+  
+  Object0r()
+  : renderNormals(false),
+    renderAABB(false)
+  {
+  }
   
   GLenum getModelDisplay(std::string& which)
   {
@@ -140,15 +148,19 @@ struct Object0r
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
     
-    GLfloat shininess[] = {128.0f};
-    GLfloat ambient[]   = {0.1f, 0.1f, 0.1f, 1.0f};
-    GLfloat diffuse[]   = {0.8f, 0.8f, 0.8f, 1.0f};
-    GLfloat specular[]  = {0.5f, 0.5f, 0.5f, 1.0f};
-    Vector3 cameraPosition = camera->camera.getPosition();
-    GLfloat position[] = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
+    Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
+    Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
+    Vec4 vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
+
+    GLfloat shininess[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
+    GLfloat ambient[]       = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
+    GLfloat diffuse[]       = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
+    GLfloat specular[]      = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
+    Vector3 cameraPosition  = camera->camera.getPosition();
+    GLfloat position[]      = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
     Vector3 cameraDirection = camera->camera.getViewDirection();
-    GLfloat direction[] = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
-    GLfloat cutoff[] = {180.0f};
+    GLfloat direction[]     = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    GLfloat cutoff[]        = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -170,11 +182,15 @@ struct Object0r
 
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
-
-    setColor(whiteColor);
-    drawAABB(mesh->box);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
+    
+    if (renderNormals) modelRenderer->renderNormals();
+    if (renderAABB) modelRenderer->renderAABB();
+    
     glScalef(10.0f, 10.0f, 10.0f);
-
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
     
     set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
@@ -206,6 +222,12 @@ struct Object0r
         case K_F3:
           modelRenderer->renderModeFront = GL_FILL;
           modelRenderer->renderModeBack  = GL_FILL;
+          break;
+        case K_N:
+          renderNormals = !renderNormals;
+          break;
+        case K_B:
+          renderAABB = !renderAABB;
           break;
         case K_F5:
           std::stringstream file;

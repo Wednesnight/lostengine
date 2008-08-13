@@ -7,15 +7,26 @@ using namespace luabind;
 using namespace lost;
 using namespace lost::math;
 
-void bindVec4(lost::lua::State& state)
+namespace lost
 {
-	module(state)
-	[
-	 class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
-	 .def(constructor<>())
-	 .def(constructor<float, float, float, float>())
-	 .def("clear", (void(Vec4::*)()) &Vec4::clear)
-	 ];
+  namespace lua
+  {
+    
+    void bindLostMathVec4(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("math")
+        [
+          class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
+            .def(constructor<>())
+            .def(constructor<float, float, float, float>())
+            .def("clear", (void(Vec4::*)()) &Vec4::clear)
+        ]
+      ];
+    }
+
+  }
 }
 
 // required for shared_ptr management by Lua/luabind
