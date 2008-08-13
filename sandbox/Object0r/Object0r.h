@@ -173,7 +173,7 @@ struct Object0r
     glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, cutoff);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_NORMALIZE);
+    glEnable(GL_RESCALE_NORMAL);
     
 //    lightingShader->enable();
     setColor(whiteColor);
@@ -183,12 +183,12 @@ struct Object0r
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
     
+    if (renderNormals) modelRenderer->renderNormals();
+    if (renderAABB) modelRenderer->renderAABB();
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
-    
-    if (renderNormals) modelRenderer->renderNormals();
-    if (renderAABB) modelRenderer->renderAABB();
     
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));

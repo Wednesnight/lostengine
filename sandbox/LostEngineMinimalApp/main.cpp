@@ -55,20 +55,13 @@ struct Controller
   
   void redraw(shared_ptr<TimerEvent> event)
   {
+    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);
+    
     glClearColor(0,0,0,0);GLDEBUG;
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
-/*
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
-*/
     lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
                                      Vec3(0.0f, 3.0f, 15.0f), Vec3(0.0f, 3.0f, 0.0f), Vec3(0,1,0),
                                      120, .1, 100);
@@ -96,7 +89,7 @@ struct Controller
     glLightfv(GL_LIGHT0, GL_SPOT_CUTOFF, cutoff);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glEnable(GL_NORMALIZE);
+    glEnable(GL_RESCALE_NORMAL);
     
     setColor(whiteColor);
     modelRenderer->render();
@@ -104,8 +97,8 @@ struct Controller
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
 
-    modelRenderer->renderNormals();
-    modelRenderer->renderAABB();
+//    modelRenderer->renderNormals();
+//    modelRenderer->renderAABB();
     
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));

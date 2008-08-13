@@ -37,7 +37,7 @@ namespace lost
       
       
       CameraController(common::DisplayAttributes& inDisplay, event::EventDispatcher& inDispatcher)
-      : fovX(60.0f),
+      : fovX(120.0f),
         display(inDisplay),
         depth(0.1f, 100.0f),
         acceleration(4.0f, 4.0f, 4.0f),

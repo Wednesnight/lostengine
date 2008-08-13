@@ -100,6 +100,7 @@ namespace lost
 
       void render()
       {
+        glPushMatrix();
         glScalef(size, size, size);
         vertexBuffer->bindVertexPointer();
         normalBuffer->bindNormalPointer();
@@ -136,12 +137,14 @@ namespace lost
 #endif
         normalBuffer->unbind();
         vertexBuffer->unbind();
+        glPopMatrix();
       }
       
       void renderNormals()
       {
         if (mesh->normals)
         {
+          glPushMatrix();
           glScalef(size, size, size);
           gl::setColor(common::redColor);
           for (unsigned int idx = 0; idx < mesh->normalCount; ++idx)
@@ -150,14 +153,17 @@ namespace lost
             math::Vec3 normal(offset + mesh->normals[idx] * .1);
             gl::drawLine(offset, normal);
           }
+          glPopMatrix();
         }
       }
       
       void renderAABB()
       {
+        glPushMatrix();
         glScalef(size, size, size);
         gl::setColor(common::whiteColor);
         gl::drawAABB(mesh->box);
+        glPopMatrix();
       }
     };
 
