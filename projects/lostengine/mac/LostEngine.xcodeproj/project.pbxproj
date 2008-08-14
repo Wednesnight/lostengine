@@ -17,6 +17,8 @@
 		3E2950200E540A5D00E83965 /* lgl_gles.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950180E540A5D00E83965 /* lgl_gles.h */; };
 		3E2950210E540A5D00E83965 /* lgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950190E540A5D00E83965 /* lgl.h */; };
 		3E2950220E540A5D00E83965 /* lglu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E29501A0E540A5D00E83965 /* lglu.h */; };
+		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
+		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */; };
 		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
 		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
@@ -363,6 +365,7 @@
 		3E2950180E540A5D00E83965 /* lgl_gles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl_gles.h; path = lgl/lgl_gles.h; sourceTree = "<group>"; };
 		3E2950190E540A5D00E83965 /* lgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl.h; path = lgl/lgl.h; sourceTree = "<group>"; };
 		3E29501A0E540A5D00E83965 /* lglu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lglu.h; path = lgl/lglu.h; sourceTree = "<group>"; };
+		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
 		3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RendererOBJ.h; path = model/RendererOBJ.h; sourceTree = "<group>"; };
 		3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialOBJ.h; path = model/MaterialOBJ.h; sourceTree = "<group>"; };
 		3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserOBJ.h; sourceTree = "<group>"; };
@@ -581,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				3E04DFCF0E537F4500BFF964 /* Camera.h */,
+				3E376F4A0E543F6F0050A5DF /* Camera.cpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -1274,6 +1278,7 @@
 				3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */,
 				EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */,
 				3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */,
+				3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1311,6 +1316,7 @@
 				EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */,
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
 				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
+				3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
