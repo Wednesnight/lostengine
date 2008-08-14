@@ -237,7 +237,15 @@ namespace math
       initRotateZ(inAngle);
     }
   };
-  
+
+  struct MatrixTranslation : public Matrix
+  {
+    MatrixTranslation(const lost::math::Vec3& inTranslation)
+    {
+      initTranslation(inTranslation);
+    }
+  };
+
 }
 }
 

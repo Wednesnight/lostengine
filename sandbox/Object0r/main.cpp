@@ -11,6 +11,9 @@ int main(int argn, char** args)
     app.addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Object0r::init, &object0r, _1)));
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, &object0r, _1)));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, &object0r, _1)));
+    app.addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, &object0r, _1)));
+    app.addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, &object0r, _1)));
+    app.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(bind(&Object0r::mouseMoveHandler, &object0r, _1)));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Object0r::resizeHandler, &object0r, _1)));
     object0r.quit.connect(bind(&Application::quit, &app));
 

@@ -17,7 +17,7 @@
 #include "lost/model/Mesh.h"
 #include "lost/model/MaterialOBJ.h"
 #include "lost/model/RendererOBJ.h"
-#include "lost/camera/CameraController.h"
+#include "lost/camera/Camera.h"
 
 using namespace std;
 using namespace lost::gl;
@@ -49,7 +49,7 @@ struct Controller
   shared_ptr<MaterialOBJ>       material;
   shared_ptr<RendererOBJ>       modelRenderer;  
 
-  shared_ptr<CameraController> camera;
+  shared_ptr<Camera> camera;
 
   Controller(shared_ptr<Loader> inLoader) : loader(inLoader) {}
   
@@ -60,16 +60,12 @@ struct Controller
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
-//    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
-//                                     Vec3(0.0f, 3.0f, 15.0f), Vec3(0.0f, 3.0f, 0.0f), Vec3(0,1,0),
-//                                     120, .1, 100);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
+    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
+                                     camera->position(), camera->target(), camera->up(),
+                                     camera->fovY(), camera->depth().min, camera->depth().max);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
 
     Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
     Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
@@ -79,10 +75,10 @@ struct Controller
     GLfloat ambient[]       = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
     GLfloat diffuse[]       = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
     GLfloat specular[]      = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
-    Vector3 cameraPosition  = camera->camera.getPosition();
-    GLfloat position[]      = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
-    Vector3 cameraDirection = camera->camera.getViewDirection();
-    GLfloat direction[]     = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    Vec3 lightPosition(0,3,15);
+    GLfloat position[]      = {lightPosition.x, lightPosition.y, lightPosition.z, 0.0f};
+    Vec3 lightDirection(0,0,-1);
+    GLfloat direction[]     = {lightDirection.x, lightDirection.y, lightDirection.z};
     GLfloat cutoff[]        = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
     
     glShadeModel(GL_SMOOTH);
@@ -104,8 +100,8 @@ struct Controller
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
 
-//    modelRenderer->renderNormals();
-//    modelRenderer->renderAABB();
+    modelRenderer->renderNormals();
+    modelRenderer->renderAABB();
     
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
@@ -157,8 +153,6 @@ struct Controller
     string filename = "stubs.jpg";
     bitmap = loader.load(filename);
     
-    camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
-    
     texture.reset(new Texture());
     texture->bind();
     texture->reset(0, bitmap->format, false, *bitmap);
@@ -174,6 +168,10 @@ struct Controller
     modelRenderer.reset(new RendererOBJ(mesh, material));
     modelRenderer->size = modelSize;
 
+    camera.reset(new Camera());
+    camera->position(Vec3(0,3,15));
+    camera->target(Vec3(0,3,0));
+
     redrawTimer = new Timer("redrawTimer", 1.0/30.0);
     redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
 
@@ -183,8 +181,6 @@ struct Controller
   void touches(shared_ptr<TouchEvent> event)
   {
     DOUT(event->type);
-    DOUT("camera position   : " << camera->camera.getPosition().x << ", " << camera->camera.getPosition().y << ", " << camera->camera.getPosition().z);
-    DOUT("camera orientation: " << camera->camera.getOrientation().x << ", " << camera->camera.getOrientation().y << ", " << camera->camera.getOrientation().z);
   }
 };
 

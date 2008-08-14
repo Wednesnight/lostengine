@@ -24,7 +24,6 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/camera/Camera.h"
-#include "lost/camera/CameraController.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
 #include "lost/model/parser/ParserOBJ.h"
@@ -52,9 +51,9 @@ using namespace std;
 
 struct Object0r
 {
-  boost::signal<void(void)>    quit;
-  shared_ptr<CameraController> camera;
-  FpsMeter                     fpsMeter;
+  boost::signal<void(void)> quit;
+  shared_ptr<Camera>        camera;
+  FpsMeter                  fpsMeter;
   
   shared_ptr<ShaderProgram> lightingShader;
 
@@ -93,7 +92,9 @@ struct Object0r
   {
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
-    camera.reset(new CameraController(appInstance->displayAttributes, *appInstance));
+    camera.reset(new Camera());
+    camera->position(Vec3(0,3,15));
+    camera->target(Vec3(0,3,0));
 
     std::string modelname         = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
     float       modelSize         = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
@@ -125,7 +126,7 @@ struct Object0r
     }
     (*lightingShader)["LightPosition"] = Vec3(0,5,-5);
     (*lightingShader)["LightColor"]    = Color(1,1,1);
-    (*lightingShader)["EyePosition"]   = Vec3(camera->camera.getPosition().x, camera->camera.getPosition().y, camera->camera.getPosition().z);
+    (*lightingShader)["EyePosition"]   = Vec3(camera->position().x, camera->position().y, camera->position().z);
     (*lightingShader)["Specular"]      = Color(1,1,1);
     (*lightingShader)["Ambient"]       = Color(1,.1,.1);
     (*lightingShader)["SurfaceColor"]  = Color(1,1,.1);
@@ -139,28 +140,43 @@ struct Object0r
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
     glEnable(GL_DEPTH_TEST);GLDEBUG;
     glDisable(GL_TEXTURE_2D);GLDEBUG;
-    
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMultMatrixf(&camera->camera.getProjectionMatrix()[0][0]);
+
+    static double lastSec = 0;
+    if (lastSec >= 1)
+    {
+      DOUT("camera->position(): " << camera->position());
+      DOUT("camera->target()  : " << camera->target());
+      DOUT("camera->up()      : " << camera->up());
+      DOUT("camera->fovY()    : " << camera->fovY());
+      DOUT("camera->depth()   : " << camera->depth());
+      DOUT("camera->rotation(): " << camera->rotation());
+      lastSec = 0;
+    }
+    else
+    {
+      lastSec += event->passedSec;
+    }
+
+    set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
+                    camera->position(), camera->target(), camera->up(),
+                    camera->fovY(), camera->depth().min, camera->depth().max);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
     
     Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
     Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
     Vec4 vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
 
-    GLfloat shininess[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
-    GLfloat ambient[]       = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
-    GLfloat diffuse[]       = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
-    GLfloat specular[]      = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
-    Vector3 cameraPosition  = camera->camera.getPosition();
-    GLfloat position[]      = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
-    Vector3 cameraDirection = camera->camera.getViewDirection();
-    GLfloat direction[]     = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
-    GLfloat cutoff[]        = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
+    GLfloat shininess[]  = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
+    GLfloat ambient[]    = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
+    GLfloat diffuse[]    = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
+    GLfloat specular[]   = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
+    Vec3 cameraPosition  = camera->position();
+    GLfloat position[]   = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
+    Vec3 cameraDirection = camera->direction();
+    GLfloat direction[]  = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
+    GLfloat cutoff[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -185,10 +201,6 @@ struct Object0r
     
     if (renderNormals) modelRenderer->renderNormals();
     if (renderAABB) modelRenderer->renderAABB();
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glMultMatrixf(&camera->camera.getViewMatrix()[0][0]);
     
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
@@ -223,18 +235,64 @@ struct Object0r
           modelRenderer->renderModeFront = GL_FILL;
           modelRenderer->renderModeBack  = GL_FILL;
           break;
+        case K_F5:
+          {
+            std::stringstream file;
+            file << "Desktop/Object0r_" << (unsigned int)lost::platform::currentTimeMilliSeconds() << ".tga";
+            lost::gl::utils::saveScreenshotTGA(appInstance->displayAttributes, lost::platform::buildUserDataPath(file.str()));
+          }
+          break;
         case K_N:
           renderNormals = !renderNormals;
           break;
         case K_B:
           renderAABB = !renderAABB;
           break;
-        case K_F5:
-          std::stringstream file;
-          file << "Desktop/Object0r_" << (unsigned int)lost::platform::currentTimeMilliSeconds() << ".tga";
-          lost::gl::utils::saveScreenshotTGA(appInstance->displayAttributes, lost::platform::buildUserDataPath(file.str()));
+        case K_W:
+          camera->move(Vec3(0,0,-0.5));
+          break;
+        case K_A:
+          camera->move(Vec3(-0.5,0,0));
+          break;
+        case K_S:
+          camera->move(Vec3(0,0,0.5));
+          break;
+        case K_D:
+          camera->move(Vec3(0.5,0,0));
+          break;
+        case K_Q:
+          camera->move(Vec3(0,-0.5,0));
+          break;
+        case K_E:
+          camera->move(Vec3(0,0.5,0));
           break;
       }
+    }
+  }
+
+  void mouseClickHandler(shared_ptr<MouseEvent> event)
+  {
+  }
+  
+  void mouseMoveHandler(shared_ptr<MouseEvent> event)
+  {
+    static bool moveInitialized = false;
+    static Vec2 mousePos(0,0);
+    
+    if (!moveInitialized)
+    {
+      moveInitialized = true;
+      mousePos = event->pos;
+    }
+    else
+    {
+      // x-axis rotation
+      float dx = -1.0f * (event->pos.y - mousePos.y) * 0.1f;
+      // y-axis rotation
+      float dy = (event->pos.x - mousePos.x) * 0.1f;
+      
+      camera->rotate(Vec3(dx, dy, 0.0f));
+      mousePos = event->pos;
     }
   }
   
