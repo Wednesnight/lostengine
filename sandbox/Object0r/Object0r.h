@@ -51,6 +51,7 @@ using namespace std;
 
 struct Object0r
 {
+  Timer                     renderTimer;
   boost::signal<void(void)> quit;
   shared_ptr<Camera>        camera;
   FpsMeter                  fpsMeter;
@@ -65,10 +66,12 @@ struct Object0r
   bool renderNormals;
   bool renderAABB;
   
-  Object0r()
-  : renderNormals(false),
+  Object0r(Application& app)
+  : renderTimer("render", 0.015),
+    renderNormals(false),
     renderAABB(false)
   {
+    app.addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Object0r::init, this, _1)));
   }
   
   GLenum getModelDisplay(std::string& which)
@@ -92,6 +95,7 @@ struct Object0r
   {
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
+
     camera.reset(new Camera());
     camera->position(Vec3(0,3,15));
     camera->target(Vec3(0,3,0));
@@ -109,6 +113,16 @@ struct Object0r
     modelRenderer->renderModeBack  = getModelDisplay(modelDisplayBack);
 
     shaderInit();
+
+    appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
+    appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
+    appInstance->addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, this, _1)));
+    appInstance->addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, this, _1)));
+    appInstance->addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(bind(&Object0r::mouseMoveHandler, this, _1)));
+    appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Object0r::resizeHandler, this, _1)));
+    quit.connect(bind(&Application::quit, appInstance));
+    
+    renderTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Object0r::render, this, _1)));
   }
   
   void shaderInit()
@@ -249,22 +263,22 @@ struct Object0r
           renderAABB = !renderAABB;
           break;
         case K_W:
-          camera->move(Vec3(0,0,-0.5));
+          camera->move(Vec3(0,0,-0.25));
           break;
         case K_A:
-          camera->move(Vec3(-0.5,0,0));
+          camera->move(Vec3(-0.25,0,0));
           break;
         case K_S:
-          camera->move(Vec3(0,0,0.5));
+          camera->move(Vec3(0,0,0.25));
           break;
         case K_D:
-          camera->move(Vec3(0.5,0,0));
+          camera->move(Vec3(0.25,0,0));
           break;
         case K_Q:
-          camera->move(Vec3(0,-0.5,0));
+          camera->move(Vec3(0,-0.25,0));
           break;
         case K_E:
-          camera->move(Vec3(0,0.5,0));
+          camera->move(Vec3(0,0.25,0));
           break;
       }
     }
@@ -281,11 +295,13 @@ struct Object0r
     
     if (!moveInitialized)
     {
+      mousePos        = event->pos;
       moveInitialized = true;
-      mousePos = event->pos;
     }
     else
     {
+      DOUT("event->pos: " << event->pos);
+      DOUT("mousePos  : " << mousePos);
       // x-axis rotation
       float dx = -1.0f * (event->pos.y - mousePos.y) * 0.1f;
       // y-axis rotation
