@@ -1,3 +1,5 @@
+#include <boost/bind.hpp>
+
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/Timer.h"
@@ -6,7 +8,7 @@
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/application/AccelerometerEvent.h"
-#include <boost/bind.hpp>
+#include "lost/application/ResizeEvent.h"
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Draw.h"
@@ -34,15 +36,10 @@ using namespace lost::model;
 using namespace lost::camera;
 using namespace boost;
 
-
-Timer* redrawTimer;
-
-
 struct Controller
 {
-  BitmapLoader loader;
-  shared_ptr<Bitmap> bitmap;
-  shared_ptr<Texture> texture;
+  Timer* redrawTimer;
+
   FpsMeter fpsMeter;
   
   shared_ptr<parser::ParserOBJ> modelParser;
@@ -54,6 +51,7 @@ struct Controller
 
   bool renderNormals;
   bool renderAABB;
+  bool processAcceleration;
 
   Vec4 vecAmbient;
   Vec4 vecDiffuse;
@@ -70,9 +68,9 @@ struct Controller
   
   
   Controller(shared_ptr<Loader> inLoader)
-  : loader(inLoader),
-    renderNormals(false),
-    renderAABB(false)
+  : renderNormals(false),
+    renderAABB(false),
+    processAcceleration(false)
   {
   }
   
@@ -89,7 +87,17 @@ struct Controller
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+
+    lightPosition = camera->position();
+    position[0] = lightPosition.x;
+    position[1] = lightPosition.y;
+    position[2] = lightPosition.z;
+    position[3] = 0.0f;
+    lightDirection = camera->direction();
+    direction[0] = lightDirection.x;
+    direction[1] = lightDirection.y;
+    direction[2] = lightDirection.z;
+
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
@@ -118,68 +126,15 @@ struct Controller
     lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
     glMatrixMode(GL_MODELVIEW);GLDEBUG;
     glLoadIdentity();GLDEBUG;
-/*
-    glEnable(GL_TEXTURE_2D);GLDEBUG;
-    glEnable(GL_BLEND);GLDEBUG;
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);    GLDEBUG;
-    glColor4f(1, 1, 1,1);GLDEBUG;
-//    drawLine(Vec2(0,0),Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
-    glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;    
-    drawLine(Vec2(0,0), Vec2(320,480));
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
-    drawRectTextured(Rect(10,10,texture->width,texture->height), *texture);
-    
-    glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
-    
-    setColor(whiteColor);
-    drawRectFilled(Rect(400,400,50,50));
-*/    
     fpsMeter.render(2,2,event->passedSec);
-    
+
     appInstance->swapBuffers();
-  }
-  
-  void keyboard(shared_ptr<KeyEvent> inEvent)
-  {
-    switch (inEvent->key)
-    {
-      case K_ESCAPE :
-        appInstance->quit();
-        break;
-      default :
-        break;
-    }
   }
   
   void init(shared_ptr<ApplicationEvent> event)
   {
-    //setup resources
-    //string filename = "gay_zombie.jpg";
-    //string filename = "nomnomnom.jpg";
-    //string filename = "buttonReleased.png";
-    string filename = "stubs.jpg";
-    bitmap = loader.load(filename);
-    
-    texture.reset(new Texture());
-    texture->bind();
-    texture->reset(0, bitmap->format, false, *bitmap);
-    texture->wrap(GL_CLAMP_TO_EDGE);
-    texture->filter(GL_LINEAR);
-    
-    DOUT("width: "<<texture->width<< " height: "<<texture->height);
-    
-    DisplayAttributes da = luabind::object_cast<DisplayAttributes>(luabind::globals(*(appInstance->interpreter))["config"]["displayAttributes"]);
-    
-    DOUT("Lua mem usage: " << appInstance->interpreter->memUsage());
-    
-    luabind::object la = luabind::globals(*(appInstance->interpreter))["lightAmbient"];
-    DOUT("lightAmbient type: "<< luabind::type(la));
-    Vec4 lav4 = luabind::object_cast<Vec4>(la);
-    
-    std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
-    float       modelSize = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
+    std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["config"]["modelFilename"]);
+    float       modelSize = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["modelSize"]);
     modelParser.reset(new parser::ParserOBJ(appInstance->loader));
     modelParser->parseMesh(modelname, mesh, material);
     modelRenderer.reset(new RendererOBJ(mesh, material));
@@ -189,15 +144,12 @@ struct Controller
     camera->position(Vec3(0,3,15));
     camera->target(Vec3(0,3,0));
 
-    redrawTimer = new Timer("redrawTimer", 1.0/30.0);
-    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
-
-    vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
-    vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
-    vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
+    vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);
+    vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightDiffuse"]);
+    vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightSpecular"]);
 
     shininess     = new GLfloat[1];
-    shininess[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"]);
+    shininess[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["lightShininess"]);
     ambient       = new GLfloat[4];
     ambient[0] = vecAmbient.x;
     ambient[1] = vecAmbient.y;
@@ -213,26 +165,34 @@ struct Controller
     specular[1] = vecSpecular.y;
     specular[2] = vecSpecular.z;
     specular[3] = vecSpecular.w;
-    lightPosition = Vec3(0,3,15);
+    lightPosition = camera->position();
     position = new GLfloat[4];
     position[0] = lightPosition.x;
     position[1] = lightPosition.y;
     position[2] = lightPosition.z;
     position[3] = 0.0f;
-    lightDirection = Vec3(0,0,-1);
+    lightDirection = camera->direction();
     direction = new GLfloat[3];
     direction[0] = lightDirection.x;
     direction[1] = lightDirection.y;
     direction[2] = lightDirection.z;
     cutoff        = new GLfloat[1];
-    cutoff[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"]);    
+    cutoff[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["lightCutoff"]);    
     
-    glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
+    glViewport (0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);
+
+    redrawTimer = new Timer("redrawTimer", 1.0/30.0);
+    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
+
+    appInstance->addEventListener(TouchEvent::TOUCHES_BEGAN(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
+    appInstance->addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
+    appInstance->addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
+    appInstance->addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
+    appInstance->addEventListener(AccelerometerEvent::DEVICE_ACCELERATED(), receive<AccelerometerEvent>(bind(&Controller::accelerate, this, _1)));
   }
   
   void touches(shared_ptr<TouchEvent> event)
   {
-//    DOUT(event->type);
     if (event->touches.size() == 1)
     {
       static bool   initialized = false;
@@ -243,7 +203,7 @@ struct Controller
         initialized = true;
         lastPos     = event->touches[0]->location;
 
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.2) renderNormals = !renderNormals;
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) renderNormals = !renderNormals;
         lastTap = event->touches[0]->timeStamp;
       }
       else if (event->type == TouchEvent::TOUCHES_ENDED() || event->type == TouchEvent::TOUCHES_CANCELLED())
@@ -264,7 +224,16 @@ struct Controller
       static double lastTap = 0.0;
       if (event->type == TouchEvent::TOUCHES_BEGAN())
       {
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.2) renderAABB = !renderAABB;
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) renderAABB = !renderAABB;
+        lastTap = event->touches[0]->timeStamp;
+      }
+    }
+    else if (event->touches.size() == 3)
+    {
+      static double lastTap = 0.0;
+      if (event->type == TouchEvent::TOUCHES_BEGAN())
+      {
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) processAcceleration = !processAcceleration;
         lastTap = event->touches[0]->timeStamp;
       }
     }
@@ -272,8 +241,9 @@ struct Controller
 
   void accelerate(shared_ptr<AccelerometerEvent> event)
   {
-//    DOUT(event->type);
+    if (processAcceleration) camera->rotate(Vec3(-1.0*event->y*0.1, event->x*0.1, 0.0));
   }
+  
 };
 
 int main(int argn, char** args)
@@ -284,13 +254,7 @@ int main(int argn, char** args)
     Application app;
     Controller controller(appInstance->loader);
     
-    app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
-    app.addEventListener(TouchEvent::TOUCHES_BEGAN(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
-    app.addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
-    app.addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
-    app.addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
-    app.addEventListener(AccelerometerEvent::DEVICE_ACCELERATED(), receive<AccelerometerEvent>(bind(&Controller::accelerate, &controller, _1)));
     app.run();
   }
   catch (exception& e)

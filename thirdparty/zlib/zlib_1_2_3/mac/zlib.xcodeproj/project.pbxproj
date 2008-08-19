@@ -158,6 +158,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = zlib;
+				SDKROOT = iphoneos2.0;
 				VALID_ARCHS = "armv6 i386 ppc ppc64 ppc7400 ppc970 x86_64";
 			};
 			name = Debug;

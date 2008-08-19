@@ -22,7 +22,7 @@
 		3E4129660E4A2F7A000CC2B8 /* RendererOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129650E4A2F7A000CC2B8 /* RendererOBJ.h */; };
 		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
 		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
-		3E75F1500E52FD3B006179E4 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
+		3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
 		3E94632F0E5173BB00F67187 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */; };
@@ -1307,7 +1307,6 @@
 				EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */,
 				EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */,
 				EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */,
-				3E75F1500E52FD3B006179E4 /* LuaVec4.cpp in Sources */,
 				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
 				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
 				EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */,
@@ -1317,6 +1316,7 @@
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
 				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
 				3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */,
+				3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,7 +1479,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iPhone";
 				SDKROOT = iphoneos2.0;

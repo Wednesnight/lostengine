@@ -14,10 +14,10 @@ namespace lost
     
     Camera::Camera()
     : mPosition(positionBase),
-    mDirection(directionBase),
-    mRotation(rotationBase),
-    mFovY(fovYBase),
-    mDepth(depthBase)
+      mDirection(directionBase),
+      mRotation(rotationBase),
+      mFovY(fovYBase),
+      mDepth(depthBase)
     {
     }
     
