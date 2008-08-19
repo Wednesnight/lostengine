@@ -55,6 +55,20 @@ struct Controller
   bool renderNormals;
   bool renderAABB;
 
+  Vec4 vecAmbient;
+  Vec4 vecDiffuse;
+  Vec4 vecSpecular;
+  GLfloat* shininess;
+  GLfloat* ambient;
+  GLfloat* diffuse;
+  GLfloat* specular;
+  Vec3 lightPosition;
+  GLfloat* position;
+  Vec3 lightDirection;
+  GLfloat* direction;
+  GLfloat* cutoff;
+  
+  
   Controller(shared_ptr<Loader> inLoader)
   : loader(inLoader),
     renderNormals(false),
@@ -75,20 +89,6 @@ struct Controller
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
-    Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
-    Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
-    Vec4 vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
-
-    GLfloat shininess[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
-    GLfloat ambient[]       = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
-    GLfloat diffuse[]       = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
-    GLfloat specular[]      = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
-    Vec3 lightPosition(0,3,15);
-    GLfloat position[]      = {lightPosition.x, lightPosition.y, lightPosition.z, 0.0f};
-    Vec3 lightDirection(0,0,-1);
-    GLfloat direction[]     = {lightDirection.x, lightDirection.y, lightDirection.z};
-    GLfloat cutoff[]        = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -170,6 +170,14 @@ struct Controller
     
     DOUT("width: "<<texture->width<< " height: "<<texture->height);
     
+    DisplayAttributes da = luabind::object_cast<DisplayAttributes>(luabind::globals(*(appInstance->interpreter))["config"]["displayAttributes"]);
+    
+    DOUT("Lua mem usage: " << appInstance->interpreter->memUsage());
+    
+    luabind::object la = luabind::globals(*(appInstance->interpreter))["lightAmbient"];
+    DOUT("lightAmbient type: "<< luabind::type(la));
+    Vec4 lav4 = luabind::object_cast<Vec4>(la);
+    
     std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
     float       modelSize = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
     modelParser.reset(new parser::ParserOBJ(appInstance->loader));
@@ -184,12 +192,47 @@ struct Controller
     redrawTimer = new Timer("redrawTimer", 1.0/30.0);
     redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
 
+    vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
+    vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
+    vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
+
+    shininess     = new GLfloat[1];
+    shininess[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"]);
+    ambient       = new GLfloat[4];
+    ambient[0] = vecAmbient.x;
+    ambient[1] = vecAmbient.y;
+    ambient[2] = vecAmbient.z;
+    ambient[3] = vecAmbient.w;
+    diffuse  = new GLfloat[4];
+    diffuse[0] = vecDiffuse.x;
+    diffuse[1] = vecDiffuse.y;
+    diffuse[2] = vecDiffuse.z;
+    diffuse[3] = vecDiffuse.w;
+    specular = new GLfloat[4];
+    specular[0] = vecSpecular.x;
+    specular[1] = vecSpecular.y;
+    specular[2] = vecSpecular.z;
+    specular[3] = vecSpecular.w;
+    lightPosition = Vec3(0,3,15);
+    position = new GLfloat[4];
+    position[0] = lightPosition.x;
+    position[1] = lightPosition.y;
+    position[2] = lightPosition.z;
+    position[3] = 0.0f;
+    lightDirection = Vec3(0,0,-1);
+    direction = new GLfloat[3];
+    direction[0] = lightDirection.x;
+    direction[1] = lightDirection.y;
+    direction[2] = lightDirection.z;
+    cutoff        = new GLfloat[1];
+    cutoff[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"]);    
+    
     glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
   }
   
   void touches(shared_ptr<TouchEvent> event)
   {
-    DOUT(event->type);
+//    DOUT(event->type);
     if (event->touches.size() == 1)
     {
       static bool   initialized = false;
@@ -229,7 +272,7 @@ struct Controller
 
   void accelerate(shared_ptr<AccelerometerEvent> event)
   {
-    DOUT(event->type);
+//    DOUT(event->type);
   }
 };
 
