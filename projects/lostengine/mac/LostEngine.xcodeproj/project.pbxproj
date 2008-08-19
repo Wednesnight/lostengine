@@ -555,6 +555,10 @@
 		3E2950140E540A2F00E83965 /* lgl */ = {
 			isa = PBXGroup;
 			children = (
+				3E2950170E540A5D00E83965 /* lgl_gl.h */,
+				3E2950180E540A5D00E83965 /* lgl_gles.h */,
+				3E2950190E540A5D00E83965 /* lgl.h */,
+				3E29501A0E540A5D00E83965 /* lglu.h */,
 			);
 			name = lgl;
 			sourceTree = "<group>";
@@ -680,10 +684,6 @@
 				EA3B94940E04639D00B6423B /* font */,
 				EA3B949C0E04639D00B6423B /* gl */,
 				3E2950140E540A2F00E83965 /* lgl */,
-				3E2950170E540A5D00E83965 /* lgl_gl.h */,
-				3E2950180E540A5D00E83965 /* lgl_gles.h */,
-				3E2950190E540A5D00E83965 /* lgl.h */,
-				3E29501A0E540A5D00E83965 /* lglu.h */,
 				EA3B94E10E04639D00B6423B /* lsystem */,
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
@@ -1398,7 +1398,9 @@
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = LostEngine;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -1480,7 +1482,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iPhone";
-				SDKROOT = iphonesimulator2.0;
+				SDKROOT = iphoneos2.0;
+				VALID_ARCHS = "armv6 i386";
 			};
 			name = Debug;
 		};
