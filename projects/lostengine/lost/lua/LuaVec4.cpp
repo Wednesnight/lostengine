@@ -18,29 +18,13 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
+          class_<Vec4 >("Vec4")
             .def(constructor<>())
             .def(constructor<float, float, float, float>())
-            .def("clear", (void(Vec4::*)()) &Vec4::clear)
+            .def("clear", &Vec4::clear)
         ]
       ];
     }
 
-  }
-}
-
-// required for shared_ptr management by Lua/luabind
-namespace luabind {
-  template<class Vec4>
-  Vec4* get_pointer(boost::shared_ptr<Vec4>& p) 
-  {
-    return p.get(); 
-  }
-	
-  template<class Vec4>
-  boost::shared_ptr<const Vec4>* 
-  get_const_holder(boost::shared_ptr<Vec4>*)
-  {
-    return 0;
   }
 }
