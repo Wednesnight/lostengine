@@ -73,7 +73,7 @@ namespace std
 	#define LUABIND_MAX_BASES 1
 #endif
 
-// LUABIND_NO_ERROR_CHECKING
+#define LUABIND_NO_ERROR_CHECKING
 // define this to remove all error checks
 // this will improve performance and memory
 // footprint.
