@@ -5,6 +5,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/TouchEvent.h"
+#include "lost/application/AccelerometerEvent.h"
 #include <boost/bind.hpp>
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
@@ -51,7 +52,15 @@ struct Controller
 
   shared_ptr<Camera> camera;
 
-  Controller(shared_ptr<Loader> inLoader) : loader(inLoader) {}
+  bool renderNormals;
+  bool renderAABB;
+
+  Controller(shared_ptr<Loader> inLoader)
+  : loader(inLoader),
+    renderNormals(false),
+    renderAABB(false)
+  {
+  }
   
   void redraw(shared_ptr<TimerEvent> event)
   {
@@ -100,8 +109,8 @@ struct Controller
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
 
-    modelRenderer->renderNormals();
-    modelRenderer->renderAABB();
+    if (renderNormals) modelRenderer->renderNormals();
+    if (renderAABB) modelRenderer->renderAABB();
     
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
@@ -181,6 +190,46 @@ struct Controller
   void touches(shared_ptr<TouchEvent> event)
   {
     DOUT(event->type);
+    if (event->touches.size() == 1)
+    {
+      static bool   initialized = false;
+      static Vec2   lastPos(0,0);
+      static double lastTap = 0.0;
+      if (event->type == TouchEvent::TOUCHES_BEGAN())
+      {
+        initialized = true;
+        lastPos     = event->touches[0]->location;
+
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.2) renderNormals = !renderNormals;
+        lastTap = event->touches[0]->timeStamp;
+      }
+      else if (event->type == TouchEvent::TOUCHES_ENDED() || event->type == TouchEvent::TOUCHES_CANCELLED())
+      {
+        initialized = false;
+      }
+      else if (event->type == TouchEvent::TOUCHES_MOVED() && initialized)
+      {
+        float dx = (event->touches[0]->location.x - lastPos.x) * 0.1f;
+        float dy = -1.0f * (event->touches[0]->location.y - lastPos.y) * 0.1f;
+        
+        camera->move(Vec3(dx, dy, 0.0f));
+        lastPos = event->touches[0]->location;
+      }
+    }
+    else if (event->touches.size() == 2)
+    {
+      static double lastTap = 0.0;
+      if (event->type == TouchEvent::TOUCHES_BEGAN())
+      {
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.2) renderAABB = !renderAABB;
+        lastTap = event->touches[0]->timeStamp;
+      }
+    }
+  }
+
+  void accelerate(shared_ptr<AccelerometerEvent> event)
+  {
+    DOUT(event->type);
   }
 };
 
@@ -198,6 +247,7 @@ int main(int argn, char** args)
     app.addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
     app.addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
     app.addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, &controller, _1)));
+    app.addEventListener(AccelerometerEvent::DEVICE_ACCELERATED(), receive<AccelerometerEvent>(bind(&Controller::accelerate, &controller, _1)));
     app.run();
   }
   catch (exception& e)
