@@ -51,7 +51,6 @@ struct Controller
 
   bool renderNormals;
   bool renderAABB;
-  bool processAcceleration;
 
   Vec4 vecAmbient;
   Vec4 vecDiffuse;
@@ -69,8 +68,7 @@ struct Controller
   
   Controller(shared_ptr<Loader> inLoader)
   : renderNormals(false),
-    renderAABB(false),
-    processAcceleration(false)
+    renderAABB(false)
   {
   }
   
@@ -143,6 +141,7 @@ struct Controller
     camera.reset(new Camera());
     camera->position(Vec3(0,3,15));
     camera->target(Vec3(0,3,0));
+    camera->stickToTarget(true);
 
     vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);
     vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightDiffuse"]);
@@ -195,53 +194,44 @@ struct Controller
   {
     if (event->touches.size() == 1)
     {
-      static bool   initialized = false;
-      static Vec2   lastPos(0,0);
       static double lastTap = 0.0;
       if (event->type == TouchEvent::TOUCHES_BEGAN())
       {
-        initialized = true;
-        lastPos     = event->touches[0]->location;
-
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) renderNormals = !renderNormals;
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0) renderNormals = !renderNormals;
         lastTap = event->touches[0]->timeStamp;
-      }
-      else if (event->type == TouchEvent::TOUCHES_ENDED() || event->type == TouchEvent::TOUCHES_CANCELLED())
-      {
-        initialized = false;
-      }
-      else if (event->type == TouchEvent::TOUCHES_MOVED() && initialized)
-      {
-        float dx = (event->touches[0]->location.x - lastPos.x) * 0.1f;
-        float dy = -1.0f * (event->touches[0]->location.y - lastPos.y) * 0.1f;
-        
-        camera->move(Vec3(dx, dy, 0.0f));
-        lastPos = event->touches[0]->location;
       }
     }
     else if (event->touches.size() == 2)
     {
+      static bool   initialized = false;
+      static double lastLength = 0.0;
       static double lastTap = 0.0;
       if (event->type == TouchEvent::TOUCHES_BEGAN())
       {
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) renderAABB = !renderAABB;
+        initialized = true;
+        lastLength  = len(event->touches[1]->location - event->touches[0]->location);
+        
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0) renderAABB = !renderAABB;
         lastTap = event->touches[0]->timeStamp;
       }
-    }
-    else if (event->touches.size() == 3)
-    {
-      static double lastTap = 0.0;
-      if (event->type == TouchEvent::TOUCHES_BEGAN())
+      else if (event->type == TouchEvent::TOUCHES_MOVED() && initialized)
       {
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 0.3) processAcceleration = !processAcceleration;
-        lastTap = event->touches[0]->timeStamp;
+        double currentLength = len(event->touches[1]->location - event->touches[0]->location);
+        float delta = currentLength - lastLength;
+        DOUT("moving " << delta << " units");
+        lastLength = currentLength;
+        camera->move(Vec3(0.0f, 0.0f, delta));
+      }
+      else if (event->type == TouchEvent::TOUCHES_ENDED() || event->type == TouchEvent::TOUCHES_CANCELLED())
+      {
+        initialized = false;
       }
     }
   }
 
   void accelerate(shared_ptr<AccelerometerEvent> event)
   {
-    if (processAcceleration) camera->rotate(Vec3(-1.0*event->y*0.1, event->x*0.1, 0.0));
+    camera->rotate(Vec3(event->y*0.5, -1.0*event->x*0.5, 0.0));
   }
   
 };

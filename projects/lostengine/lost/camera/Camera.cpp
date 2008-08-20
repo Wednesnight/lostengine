@@ -17,7 +17,8 @@ namespace lost
       mDirection(directionBase),
       mRotation(rotationBase),
       mFovY(fovYBase),
-      mDepth(depthBase)
+      mDepth(depthBase),
+      mStickToTarget(false)
     {
     }
     
@@ -31,19 +32,37 @@ namespace lost
       return mFovY;
     }
     
-    math::Vec3& Camera::position()
+    math::Vec3 Camera::position()
     {
-      return mPosition;
+      math::Vec3 result = mPosition;
+      if (stickToTarget())
+      {
+        math::MatrixRotX rotX(mRotation.x);
+        math::MatrixRotY rotY(mRotation.y);
+        math::MatrixRotZ rotZ(mRotation.z);
+        result = target() + (rotZ * rotY * rotX * (mDirection * -1.0f));
+      }
+      return result;
     }
     
     math::Vec3 Camera::direction()
     {
-      math::MatrixRotX rotX(mRotation.x);
-      math::MatrixRotY rotY(mRotation.y);
-      math::MatrixRotZ rotZ(mRotation.z);
-      return rotZ * rotY * rotX * mDirection;
+      math::Vec3 result = mDirection;
+      if (!stickToTarget())
+      {
+        math::MatrixRotX rotX(mRotation.x);
+        math::MatrixRotY rotY(mRotation.y);
+        math::MatrixRotZ rotZ(mRotation.z);
+        result = rotZ * rotY * rotX * result;
+      }
+      return result;
     }
-    
+
+    bool Camera::stickToTarget()
+    {
+      return mStickToTarget;
+    }
+
     math::Vec3& Camera::rotation()
     {
       return mRotation;
@@ -81,7 +100,12 @@ namespace lost
     {
       mDirection = newDirection;
     }
-    
+
+    void Camera::stickToTarget(const bool newStickToTarget)
+    {
+      mStickToTarget = newStickToTarget;
+    }
+
     void Camera::rotation(const math::Vec3& newRotation)
     {
       mRotation = newRotation;
@@ -94,12 +118,22 @@ namespace lost
     
     void Camera::move(const math::Vec3& deltaMove)
     {
-      math::MatrixRotX        rotX(mRotation.x);
-      math::MatrixRotY        rotY(mRotation.y);
-      math::MatrixRotZ        rotZ(mRotation.z);
-      math::Vec3              newDelta(rotZ * rotY * rotX * deltaMove);
-      math::MatrixTranslation translationMatrix(newDelta);
-      position(translationMatrix * mPosition);
+      if (stickToTarget())
+      {
+        math::MatrixTranslation translationMatrix(deltaMove);
+        math::Vec3 currentTarget(target());
+        position(translationMatrix * mPosition);
+        target(currentTarget);
+      }
+      else
+      {
+        math::MatrixRotX        rotX(mRotation.x);
+        math::MatrixRotY        rotY(mRotation.y);
+        math::MatrixRotZ        rotZ(mRotation.z);
+        math::Vec3              newDelta(rotZ * rotY * rotX * deltaMove);
+        math::MatrixTranslation translationMatrix(newDelta);
+        position(translationMatrix * mPosition);
+      }
     }
     
     void Camera::rotate(const math::Vec3& deltaRotate)

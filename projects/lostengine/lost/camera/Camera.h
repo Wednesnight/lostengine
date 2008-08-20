@@ -25,6 +25,7 @@ namespace lost
       math::Vec3 mRotation;
       float      mFovY;
       math::Vec2 mDepth;
+      bool       mStickToTarget;
     public:
       // constructor
       Camera();
@@ -32,9 +33,10 @@ namespace lost
       // getters
       math::Vec2& depth();
       float& fovY();
-      math::Vec3& position();
+      math::Vec3 position();
       math::Vec3 direction();
       math::Vec3& rotation();
+      bool stickToTarget();
       math::Vec3 target();
       math::Vec3 up();
 
@@ -43,6 +45,7 @@ namespace lost
       void depth(const math::Vec2& newDepth);
       void position(const math::Vec3& newPosition);
       void direction(const math::Vec3& newDirection);
+      void stickToTarget(const bool newStickToTarget);
       void rotation(const math::Vec3& newRotation);
       void target(const math::Vec3& newTarget);
 
