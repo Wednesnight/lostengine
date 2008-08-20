@@ -7,6 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E7323070E5CD451000FF838 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */; };
+		3E7323080E5CD451000FF838 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEC0E02204300E24D68 /* weak_ref.cpp */; };
+		3E7323090E5CD451000FF838 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */; };
+		3E73230A0E5CD451000FF838 /* scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEE0E02204300E24D68 /* scope.cpp */; };
+		3E73230B0E5CD451000FF838 /* ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEF0E02204300E24D68 /* ref.cpp */; };
+		3E73230C0E5CD451000FF838 /* pcall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF00E02204300E24D68 /* pcall.cpp */; };
+		3E73230D0E5CD451000FF838 /* overload_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF10E02204300E24D68 /* overload_rep.cpp */; };
+		3E73230E0E5CD451000FF838 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF20E02204300E24D68 /* open.cpp */; };
+		3E73230F0E5CD451000FF838 /* object_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF30E02204300E24D68 /* object_rep.cpp */; };
+		3E7323100E5CD451000FF838 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF40E02204300E24D68 /* link_compatibility.cpp */; };
+		3E7323110E5CD451000FF838 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF50E02204300E24D68 /* implicit_cast.cpp */; };
+		3E7323120E5CD451000FF838 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF60E02204300E24D68 /* function.cpp */; };
+		3E7323130E5CD451000FF838 /* find_best_match.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF70E02204300E24D68 /* find_best_match.cpp */; };
+		3E7323140E5CD451000FF838 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF80E02204300E24D68 /* error.cpp */; };
+		3E7323150E5CD451000FF838 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF90E02204300E24D68 /* create_class.cpp */; };
+		3E7323160E5CD451000FF838 /* class_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFA0E02204300E24D68 /* class_rep.cpp */; };
+		3E7323170E5CD451000FF838 /* class_registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFB0E02204300E24D68 /* class_registry.cpp */; };
+		3E7323180E5CD451000FF838 /* class_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFC0E02204300E24D68 /* class_info.cpp */; };
+		3E7323190E5CD451000FF838 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFD0E02204300E24D68 /* class.cpp */; };
+		3E7325CE0E5CE3DB000FF838 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */; };
+		3E7325CF0E5CE3DB000FF838 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEC0E02204300E24D68 /* weak_ref.cpp */; };
+		3E7325D00E5CE3DB000FF838 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */; };
+		3E7325D10E5CE3DB000FF838 /* scope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEE0E02204300E24D68 /* scope.cpp */; };
+		3E7325D20E5CE3DB000FF838 /* ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEF0E02204300E24D68 /* ref.cpp */; };
+		3E7325D30E5CE3DB000FF838 /* pcall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF00E02204300E24D68 /* pcall.cpp */; };
+		3E7325D40E5CE3DB000FF838 /* overload_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF10E02204300E24D68 /* overload_rep.cpp */; };
+		3E7325D50E5CE3DB000FF838 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF20E02204300E24D68 /* open.cpp */; };
+		3E7325D60E5CE3DB000FF838 /* object_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF30E02204300E24D68 /* object_rep.cpp */; };
+		3E7325D70E5CE3DB000FF838 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF40E02204300E24D68 /* link_compatibility.cpp */; };
+		3E7325D80E5CE3DB000FF838 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF50E02204300E24D68 /* implicit_cast.cpp */; };
+		3E7325D90E5CE3DB000FF838 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF60E02204300E24D68 /* function.cpp */; };
+		3E7325DA0E5CE3DB000FF838 /* find_best_match.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF70E02204300E24D68 /* find_best_match.cpp */; };
+		3E7325DB0E5CE3DB000FF838 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF80E02204300E24D68 /* error.cpp */; };
+		3E7325DC0E5CE3DB000FF838 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDF90E02204300E24D68 /* create_class.cpp */; };
+		3E7325DD0E5CE3DB000FF838 /* class_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFA0E02204300E24D68 /* class_rep.cpp */; };
+		3E7325DE0E5CE3DB000FF838 /* class_registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFB0E02204300E24D68 /* class_registry.cpp */; };
+		3E7325DF0E5CE3DB000FF838 /* class_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFC0E02204300E24D68 /* class_info.cpp */; };
+		3E7325E00E5CE3DB000FF838 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDFD0E02204300E24D68 /* class.cpp */; };
 		EA68CDFE0E02204300E24D68 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */; };
 		EA68CDFF0E02204300E24D68 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDEC0E02204300E24D68 /* weak_ref.cpp */; };
 		EA68CE000E02204300E24D68 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA68CDED0E02204300E24D68 /* stack_content_by_name.cpp */; };
@@ -29,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E73231E0E5CD451000FF838 /* libluabind-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libluabind-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libluabind-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libluabind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluabind.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA68CDEB0E02204300E24D68 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../original/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
 		EA68CDEC0E02204300E24D68 /* weak_ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = weak_ref.cpp; path = ../original/src/weak_ref.cpp; sourceTree = SOURCE_ROOT; };
@@ -52,6 +92,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E73231A0E5CD451000FF838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7325E10E5CE3DB000FF838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC046055464E500DB518D /* libluabind.a */,
+				3E73231E0E5CD451000FF838 /* libluabind-iphone.a */,
+				3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +164,20 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3E7323050E5CD451000FF838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7325CC0E5CE3DB000FF838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC043055464E500DB518D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,6 +188,40 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3E7323040E5CD451000FF838 /* luabind-iphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E73231B0E5CD451000FF838 /* Build configuration list for PBXNativeTarget "luabind-iphone" */;
+			buildPhases = (
+				3E7323050E5CD451000FF838 /* Headers */,
+				3E7323060E5CD451000FF838 /* Sources */,
+				3E73231A0E5CD451000FF838 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "luabind-iphone";
+			productName = luabind;
+			productReference = 3E73231E0E5CD451000FF838 /* libluabind-iphone.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3E7325CB0E5CE3DB000FF838 /* luabind-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E7325E20E5CE3DB000FF838 /* Build configuration list for PBXNativeTarget "luabind-simulator" */;
+			buildPhases = (
+				3E7325CC0E5CE3DB000FF838 /* Headers */,
+				3E7325CD0E5CE3DB000FF838 /* Sources */,
+				3E7325E10E5CE3DB000FF838 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "luabind-simulator";
+			productName = luabind;
+			productReference = 3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		D2AAC045055464E500DB518D /* luabind */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "luabind" */;
@@ -148,11 +252,65 @@
 			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* luabind */,
+				3E7323040E5CD451000FF838 /* luabind-iphone */,
+				3E7325CB0E5CE3DB000FF838 /* luabind-simulator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E7323060E5CD451000FF838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7323070E5CD451000FF838 /* wrapper_base.cpp in Sources */,
+				3E7323080E5CD451000FF838 /* weak_ref.cpp in Sources */,
+				3E7323090E5CD451000FF838 /* stack_content_by_name.cpp in Sources */,
+				3E73230A0E5CD451000FF838 /* scope.cpp in Sources */,
+				3E73230B0E5CD451000FF838 /* ref.cpp in Sources */,
+				3E73230C0E5CD451000FF838 /* pcall.cpp in Sources */,
+				3E73230D0E5CD451000FF838 /* overload_rep.cpp in Sources */,
+				3E73230E0E5CD451000FF838 /* open.cpp in Sources */,
+				3E73230F0E5CD451000FF838 /* object_rep.cpp in Sources */,
+				3E7323100E5CD451000FF838 /* link_compatibility.cpp in Sources */,
+				3E7323110E5CD451000FF838 /* implicit_cast.cpp in Sources */,
+				3E7323120E5CD451000FF838 /* function.cpp in Sources */,
+				3E7323130E5CD451000FF838 /* find_best_match.cpp in Sources */,
+				3E7323140E5CD451000FF838 /* error.cpp in Sources */,
+				3E7323150E5CD451000FF838 /* create_class.cpp in Sources */,
+				3E7323160E5CD451000FF838 /* class_rep.cpp in Sources */,
+				3E7323170E5CD451000FF838 /* class_registry.cpp in Sources */,
+				3E7323180E5CD451000FF838 /* class_info.cpp in Sources */,
+				3E7323190E5CD451000FF838 /* class.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7325CD0E5CE3DB000FF838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7325CE0E5CE3DB000FF838 /* wrapper_base.cpp in Sources */,
+				3E7325CF0E5CE3DB000FF838 /* weak_ref.cpp in Sources */,
+				3E7325D00E5CE3DB000FF838 /* stack_content_by_name.cpp in Sources */,
+				3E7325D10E5CE3DB000FF838 /* scope.cpp in Sources */,
+				3E7325D20E5CE3DB000FF838 /* ref.cpp in Sources */,
+				3E7325D30E5CE3DB000FF838 /* pcall.cpp in Sources */,
+				3E7325D40E5CE3DB000FF838 /* overload_rep.cpp in Sources */,
+				3E7325D50E5CE3DB000FF838 /* open.cpp in Sources */,
+				3E7325D60E5CE3DB000FF838 /* object_rep.cpp in Sources */,
+				3E7325D70E5CE3DB000FF838 /* link_compatibility.cpp in Sources */,
+				3E7325D80E5CE3DB000FF838 /* implicit_cast.cpp in Sources */,
+				3E7325D90E5CE3DB000FF838 /* function.cpp in Sources */,
+				3E7325DA0E5CE3DB000FF838 /* find_best_match.cpp in Sources */,
+				3E7325DB0E5CE3DB000FF838 /* error.cpp in Sources */,
+				3E7325DC0E5CE3DB000FF838 /* create_class.cpp in Sources */,
+				3E7325DD0E5CE3DB000FF838 /* class_rep.cpp in Sources */,
+				3E7325DE0E5CE3DB000FF838 /* class_registry.cpp in Sources */,
+				3E7325DF0E5CE3DB000FF838 /* class_info.cpp in Sources */,
+				3E7325E00E5CE3DB000FF838 /* class.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D2AAC044055464E500DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,13 +347,11 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = luabind;
-				SDKROOT = iphoneos2.0;
-				VALID_ARCHS = "armv6 i386 ppc ppc64 ppc7400 ppc970 x86_64";
+				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
@@ -224,9 +380,10 @@
 					"\"$(SRCROOT)/../original\"",
 					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
 			};
 			name = Debug;
 		};
@@ -247,6 +404,60 @@
 			};
 			name = Release;
 		};
+		3E73231C0E5CD451000FF838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "luabind-iphone";
+				SDKROOT = iphoneos2.0;
+			};
+			name = Debug;
+		};
+		3E73231D0E5CD451000FF838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = luabind;
+			};
+			name = Release;
+		};
+		3E7325E30E5CE3DB000FF838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "luabind-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Debug;
+		};
+		3E7325E40E5CE3DB000FF838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = luabind;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -264,6 +475,24 @@
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
 				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E73231B0E5CD451000FF838 /* Build configuration list for PBXNativeTarget "luabind-iphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E73231C0E5CD451000FF838 /* Debug */,
+				3E73231D0E5CD451000FF838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7325E20E5CE3DB000FF838 /* Build configuration list for PBXNativeTarget "luabind-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7325E30E5CE3DB000FF838 /* Debug */,
+				3E7325E40E5CE3DB000FF838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
