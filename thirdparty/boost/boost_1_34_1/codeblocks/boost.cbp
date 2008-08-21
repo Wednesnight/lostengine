@@ -35,13 +35,13 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add directory="..\..\include" />
+			<Add directory="..\include" />
 		</Compiler>
-		<Unit filename="..\..\original\libs\signals\src\connection.cpp" />
-		<Unit filename="..\..\original\libs\signals\src\named_slot_map.cpp" />
-		<Unit filename="..\..\original\libs\signals\src\signal_base.cpp" />
-		<Unit filename="..\..\original\libs\signals\src\slot.cpp" />
-		<Unit filename="..\..\original\libs\signals\src\trackable.cpp" />
+		<Unit filename="..\source\libs\signals\src\connection.cpp" />
+		<Unit filename="..\source\libs\signals\src\named_slot_map.cpp" />
+		<Unit filename="..\source\libs\signals\src\signal_base.cpp" />
+		<Unit filename="..\source\libs\signals\src\slot.cpp" />
+		<Unit filename="..\source\libs\signals\src\trackable.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
