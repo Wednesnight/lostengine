@@ -23,7 +23,6 @@
 		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
 		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
 		3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
-		3E7324500E5CDC3E000FF838 /* libboost-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7320E00E5CC42A000FF838 /* libboost-iphone.a */; };
 		3E7324510E5CDC3E000FF838 /* libzlib-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7321090E5CC556000FF838 /* libzlib-iphone.a */; };
 		3E7324520E5CDC3E000FF838 /* libfreetype-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7321320E5CC5E1000FF838 /* libfreetype-iphone.a */; };
 		3E7324530E5CDC3E000FF838 /* libluabind-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7323250E5CD46F000FF838 /* libluabind-iphone.a */; };
@@ -135,7 +134,6 @@
 		3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E73256B0E5CE3A4000FF838 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
-		3E7326480E5CE4F2000FF838 /* libboost-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325890E5CE3B5000FF838 /* libboost-simulator.a */; };
 		3E7326490E5CE4F2000FF838 /* libzlib-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325A00E5CE3C3000FF838 /* libzlib-simulator.a */; };
 		3E73264A0E5CE4F2000FF838 /* libfreetype-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E73261C0E5CE3E6000FF838 /* libfreetype-simulator.a */; };
 		3E73264B0E5CE4F2000FF838 /* libluabind-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325E80E5CE3DB000FF838 /* libluabind-simulator.a */; };
@@ -321,7 +319,6 @@
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF5430E2EAE70006E9E8A /* libzlib.a */; };
 		EA7CF6350E2ED002006E9E8A /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6340E2ECFF8006E9E8A /* libfreetype.a */; };
-		EA7CF6A60E2ED7F0006E9E8A /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF6A50E2ED7E8006E9E8A /* libboost.a */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A35310E297E3B0090BAD0 /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */; };
 		EA9A35DF0E299C540090BAD0 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
@@ -352,20 +349,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3E7320DF0E5CC42A000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7320DB0E5CC40B000FF838;
-			remoteInfo = "boost-iphone";
-		};
-		3E7320E80E5CC463000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7320DA0E5CC40B000FF838;
-			remoteInfo = "boost-iphone";
-		};
 		3E7321080E5CC556000FF838 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
@@ -422,13 +405,6 @@
 			remoteGlobalIDString = 3E73228F0E5CD341000FF838;
 			remoteInfo = "freetype-iphone";
 		};
-		3E7325880E5CE3B5000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7325860E5CE3B5000FF838;
-			remoteInfo = "boost-iphone copy";
-		};
 		3E73259F0E5CE3C3000FF838 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
@@ -456,13 +432,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3E7326190E5CE3E6000FF838;
 			remoteInfo = "freetype-iphone copy";
-		};
-		3E7326390E5CE4C0000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E73257A0E5CE3B5000FF838;
-			remoteInfo = "boost-simulator";
 		};
 		3E73263B0E5CE4C0000FF838 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -561,20 +530,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = freetype;
-		};
-		EA7CF6A40E2ED7E8006E9E8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = boost;
-		};
-		EA7CF6A70E2ED80A006E9E8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = boost;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -679,7 +634,7 @@
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/mac/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = freetype.xcodeproj; path = ../../../thirdparty/freetype2/freetype_2_3_7/mac/freetype.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/lib/mac/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonLog.cpp; sourceTree = "<group>"; };
 		EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceLoader.cpp; sourceTree = "<group>"; };
@@ -714,7 +669,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7326480E5CE4F2000FF838 /* libboost-simulator.a in Frameworks */,
 				3E7326490E5CE4F2000FF838 /* libzlib-simulator.a in Frameworks */,
 				3E73264A0E5CE4F2000FF838 /* libfreetype-simulator.a in Frameworks */,
 				3E73264B0E5CE4F2000FF838 /* libluabind-simulator.a in Frameworks */,
@@ -727,7 +681,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED38F690E3788430055BDA7 /* libglfw.a in Frameworks */,
-				EA7CF6A60E2ED7F0006E9E8A /* libboost.a in Frameworks */,
 				EA7CF6350E2ED002006E9E8A /* libfreetype.a in Frameworks */,
 				EA3B94430E04626D00B6423B /* libluabind.a in Frameworks */,
 				EA3B94440E04627100B6423B /* liblua.a in Frameworks */,
@@ -739,7 +692,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7324500E5CDC3E000FF838 /* libboost-iphone.a in Frameworks */,
 				3E7324510E5CDC3E000FF838 /* libzlib-iphone.a in Frameworks */,
 				3E7324520E5CDC3E000FF838 /* libfreetype-iphone.a in Frameworks */,
 				3E7324530E5CDC3E000FF838 /* libluabind-iphone.a in Frameworks */,
@@ -1167,16 +1119,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EA7CF6A10E2ED7E8006E9E8A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA7CF6A50E2ED7E8006E9E8A /* libboost.a */,
-				3E7320E00E5CC42A000FF838 /* libboost-iphone.a */,
-				3E7325890E5CE3B5000FF838 /* libboost-simulator.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1443,7 +1385,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E73263A0E5CE4C0000FF838 /* PBXTargetDependency */,
 				3E73263C0E5CE4C0000FF838 /* PBXTargetDependency */,
 				3E73263E0E5CE4C0000FF838 /* PBXTargetDependency */,
 				3E7326400E5CE4C0000FF838 /* PBXTargetDependency */,
@@ -1469,7 +1410,6 @@
 				EA3B94420E04626000B6423B /* PBXTargetDependency */,
 				EA7CF5460E2EAE9E006E9E8A /* PBXTargetDependency */,
 				EA7CF6370E2ED00A006E9E8A /* PBXTargetDependency */,
-				EA7CF6A80E2ED80A006E9E8A /* PBXTargetDependency */,
 				3ED38FD70E378B1C0055BDA7 /* PBXTargetDependency */,
 			);
 			name = LostEngine;
@@ -1488,7 +1428,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E7320E90E5CC463000FF838 /* PBXTargetDependency */,
 				3E73211B0E5CC583000FF838 /* PBXTargetDependency */,
 				3E7323670E5CD604000FF838 /* PBXTargetDependency */,
 				3E7323690E5CD60A000FF838 /* PBXTargetDependency */,
@@ -1510,10 +1449,6 @@
 			mainGroup = 08FB7794FE84155DC02AAC07 /* LostEngine */;
 			projectDirPath = "";
 			projectReferences = (
-				{
-					ProductGroup = EA7CF6A10E2ED7E8006E9E8A /* Products */;
-					ProjectRef = EA7CF6A00E2ED7E8006E9E8A /* boost.xcodeproj */;
-				},
 				{
 					ProductGroup = EA7CF6300E2ECFF7006E9E8A /* Products */;
 					ProjectRef = EA7CF62F0E2ECFF7006E9E8A /* freetype.xcodeproj */;
@@ -1545,13 +1480,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3E7320E00E5CC42A000FF838 /* libboost-iphone.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libboost-iphone.a";
-			remoteRef = 3E7320DF0E5CC42A000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		3E7321090E5CC556000FF838 /* libzlib-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1578,13 +1506,6 @@
 			fileType = archive.ar;
 			path = "liblua-iphone.a";
 			remoteRef = 3E7323610E5CD593000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7325890E5CE3B5000FF838 /* libboost-simulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libboost-simulator.a";
-			remoteRef = 3E7325880E5CE3B5000FF838 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3E7325A00E5CE3C3000FF838 /* libzlib-simulator.a */ = {
@@ -1648,13 +1569,6 @@
 			fileType = archive.ar;
 			path = libfreetype.a;
 			remoteRef = EA7CF6330E2ECFF8006E9E8A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA7CF6A50E2ED7E8006E9E8A /* libboost.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libboost.a;
-			remoteRef = EA7CF6A40E2ED7E8006E9E8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1782,11 +1696,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3E7320E90E5CC463000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "boost-iphone";
-			targetProxy = 3E7320E80E5CC463000FF838 /* PBXContainerItemProxy */;
-		};
 		3E73211B0E5CC583000FF838 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "zlib-iphone";
@@ -1806,11 +1715,6 @@
 			isa = PBXTargetDependency;
 			name = "freetype-iphone";
 			targetProxy = 3E73236A0E5CD60F000FF838 /* PBXContainerItemProxy */;
-		};
-		3E73263A0E5CE4C0000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "boost-simulator";
-			targetProxy = 3E7326390E5CE4C0000FF838 /* PBXContainerItemProxy */;
 		};
 		3E73263C0E5CE4C0000FF838 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1856,11 +1760,6 @@
 			isa = PBXTargetDependency;
 			name = freetype;
 			targetProxy = EA7CF6360E2ED00A006E9E8A /* PBXContainerItemProxy */;
-		};
-		EA7CF6A80E2ED80A006E9E8A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = boost;
-			targetProxy = EA7CF6A70E2ED80A006E9E8A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
