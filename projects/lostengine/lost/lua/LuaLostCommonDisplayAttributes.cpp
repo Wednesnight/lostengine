@@ -1,16 +1,10 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/common/DisplayAttributes.h"
 
-using namespace std;
 using namespace luabind;
 using namespace lost::common;
 
-namespace lost
-{
-namespace lua
-{
-
-void bindLostCommonDisplayAttributes(lost::lua::State& state)
+LOST_LUA_EXPORT_BEGIN(LuaLostCommonDisplayAttributes)
 {
   module(state, "lost")
   [
@@ -31,6 +25,4 @@ void bindLostCommonDisplayAttributes(lost::lua::State& state)
     ]
   ];
 }
-
-}
-}
+LOST_LUA_EXPORT_END

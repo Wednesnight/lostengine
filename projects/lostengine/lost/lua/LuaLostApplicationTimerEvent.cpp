@@ -1,45 +1,21 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/application/TimerEvent.h"
-#include <boost/shared_ptr.hpp>
 
-using namespace std;
-using namespace boost;
 using namespace luabind;
 using namespace lost::event;
 using namespace lost::application;
 
-// required for shared_ptr handling of Event objects 
-namespace luabind {
-  template<class T>
-  T* get_pointer(boost::shared_ptr<T>& p) 
-  {
-    return p.get(); 
-  }
-  
-  template<class T>
-  boost::shared_ptr<const T>* 
-  get_const_holder(boost::shared_ptr<T>*)
-  {
-    return 0;
-  }
-}
-
-namespace lost
+LOST_LUA_EXPORT_BEGIN(LuaLostApplicationTimerEvent)
 {
-  namespace lua
-  {
-    void bindLostApplicationTimerEvent(lost::lua::State& state)
-    {
-      module(state, "lost")
-      [
-       namespace_("application")
-       [
-        class_<TimerEvent, shared_ptr<TimerEvent>, shared_ptr<Event> >("TimerEvent")
-        .def(constructor<string>()) 
-        .def_readwrite("passedSec", &TimerEvent::passedSec)
-        ]
-       ];
-      globals(state)["lost"]["application"]["TimerEvent"]["TIMER_FIRED"] = TimerEvent::TIMER_FIRED();
-    }
-  }
+  module(state, "lost")
+  [
+   namespace_("application")
+   [
+    class_<TimerEvent, boost::shared_ptr<TimerEvent>, boost::shared_ptr<Event> >("TimerEvent")
+    .def(constructor<std::string>()) 
+    .def_readwrite("passedSec", &TimerEvent::passedSec)
+    ]
+   ];
+  globals(state)["lost"]["application"]["TimerEvent"]["TIMER_FIRED"] = TimerEvent::TIMER_FIRED();
 }
+LOST_LUA_EXPORT_END

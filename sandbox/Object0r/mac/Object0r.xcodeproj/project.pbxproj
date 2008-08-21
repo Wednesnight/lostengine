@@ -47,6 +47,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3EF26D3B0E5D7178002F9CF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B98160E04849B00B6423B /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteInfo = "LostEngine-simulator";
+		};
 		EA3B98250E04849C00B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B98160E04849B00B6423B /* LostEngine.xcodeproj */;
@@ -220,7 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				EA3B98260E04849C00B6423B /* libLostEngine.a */,
-				EA6713240E3E9A6A00B961EC /* libLostEngine-iPhone.a */,
+				EA6713240E3E9A6A00B961EC /* libLostEngine-iphone.a */,
+				3EF26D3C0E5D7178002F9CF0 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,6 +279,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		3EF26D3C0E5D7178002F9CF0 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = 3EF26D3B0E5D7178002F9CF0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EA3B98260E04849C00B6423B /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -278,10 +293,10 @@
 			remoteRef = EA3B98250E04849C00B6423B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA6713240E3E9A6A00B961EC /* libLostEngine-iPhone.a */ = {
+		EA6713240E3E9A6A00B961EC /* libLostEngine-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iPhone.a";
+			path = "libLostEngine-iphone.a";
 			remoteRef = EA6713230E3E9A6A00B961EC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

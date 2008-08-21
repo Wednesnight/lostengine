@@ -1,17 +1,11 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/application/Application.h"
 
-using namespace std;
-using namespace boost;
 using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
 
-namespace lost
-{
-namespace lua
-{
-void bindLostApplicationApplication(lost::lua::State& state)
+LOST_LUA_EXPORT_BEGIN(LuaLostApplicationApplication)
 {
   module(state, "lost")
   [
@@ -24,5 +18,4 @@ void bindLostApplicationApplication(lost::lua::State& state)
     ]
   ];
 }
-}
-}
+LOST_LUA_EXPORT_END

@@ -1,43 +1,19 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/event/Event.h"
-#include <boost/shared_ptr.hpp>
 
-using namespace std;
-using namespace boost;
 using namespace luabind;
 using namespace lost::event;
 
-// required for shared_ptr handling of Event objects 
-namespace luabind {
-  template<class T>
-  T* get_pointer(boost::shared_ptr<T>& p) 
-  {
-    return p.get(); 
-  }
-  
-  template<class T>
-  boost::shared_ptr<const T>* 
-  get_const_holder(boost::shared_ptr<T>*)
-  {
-    return 0;
-  }
-}
-
-namespace lost
-{
-namespace lua
-{
-void bindLostEventEvent(lost::lua::State& state)
+LOST_LUA_EXPORT_BEGIN(LuaLostEventEvent)
 {
   module(state, "lost")
   [
     namespace_("event")
     [
-      class_<Event, shared_ptr<Event> >("Event")
-       .def(constructor<string>()) 
+      class_<Event, boost::shared_ptr<Event> >("Event")
+       .def(constructor<std::string>()) 
        .def_readwrite("type", &Event::type)
     ]
   ];
 }
-}
-}
+LOST_LUA_EXPORT_END

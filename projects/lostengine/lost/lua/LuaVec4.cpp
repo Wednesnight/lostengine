@@ -1,30 +1,20 @@
-#include "lost/lua/State.h"
+#include "lost/lua/Luabindings.h"
 #include "lost/math/Vec4.h"
-#include <boost/shared_ptr.hpp>
 
-using namespace std;
 using namespace luabind;
-using namespace lost;
 using namespace lost::math;
 
-namespace lost
+LOST_LUA_EXPORT_BEGIN(LuaLostMathVec4)
 {
-  namespace lua
-  {
-    
-    void bindLostMathVec4(lost::lua::State& state)
-    {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Vec4 >("Vec4")
-            .def(constructor<>())
-            .def(constructor<float, float, float, float>())
-            .def("clear", &Vec4::clear)
-        ]
-      ];
-    }
-
-  }
+  module(state, "lost")
+  [
+    namespace_("math")
+    [
+      class_<Vec4 >("Vec4")
+        .def(constructor<>())
+        .def(constructor<float, float, float, float>())
+        .def("clear", &Vec4::clear)
+    ]
+  ];
 }
+LOST_LUA_EXPORT_END

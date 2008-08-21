@@ -1,52 +1,60 @@
 #ifndef LOST_LUA_LUABINDINGS_H
 #define LOST_LUA_LUABINDINGS_H
 
+#include <vector>
+#include <boost/shared_ptr.hpp>
 #include "lost/lua/State.h"
 #include "luabind/class_info.hpp"
 
+#define LUABIND_SHAREDPTR_HANDLER namespace luabind                         \
+                                  {                                         \
+                                    template<class T>                       \
+                                    T* get_pointer(boost::shared_ptr<T>& p) \
+                                    {                                       \
+                                      return p.get();                       \
+                                    }                                       \
+                                    template<class T>                       \
+                                    boost::shared_ptr<const T>*             \
+                                    get_const_holder(boost::shared_ptr<T>*) \
+                                    {                                       \
+                                      return 0;                             \
+                                    }                                       \
+                                  }
+
+#define LOST_LUA_EXPORT_BEGIN(s) LUABIND_SHAREDPTR_HANDLER                   \
+                                                                             \
+                                 namespace lost                              \
+                                 {                                           \
+                                   namespace lua                             \
+                                   {                                         \
+                                     void s(lost::lua::State& state)
+#define LOST_LUA_EXPORT_END        }                                         \
+                                 }
+
 namespace lost
 {
-namespace lua
-{
-
-void bindLostCommonDisplayAttributes(lost::lua::State& state);
-void bindLostBitmapBitmap(lost::lua::State& state);
-void bindLostBitmapBitmapLoader(lost::lua::State& state);
-void bindLostCommonLog(lost::lua::State& state);
-void bindLostResourceFile(lost::lua::State& state);
-void bindLostResourceLoader(lost::lua::State& state);
-void bindLostEventEvent(lost::lua::State& state);
-void bindLostEventEventDispatcher(lost::lua::State& state);
-void bindLostApplicationApplication(lost::lua::State& state);
-void bindLostApplicationKeyEvent(lost::lua::State& state);
-void bindLostApplicationTimerEvent(lost::lua::State& state);
-void bindLostApplicationResizeEvent(lost::lua::State& state);
-void bindLostApplicationMouseEvent(lost::lua::State& state);
-void bindLostApplicationApplicationEvent(lost::lua::State& state);
-void bindLostMathVec4(lost::lua::State& state);
-
-static inline void bindAll(lost::lua::State& state)
-{
-  bindLostCommonDisplayAttributes(state);
-  bindLostBitmapBitmap(state);
-  bindLostBitmapBitmapLoader(state);
-  bindLostCommonLog(state);
-  bindLostResourceFile(state);
-  bindLostResourceLoader(state);
-  bindLostEventEvent(state);  
-  bindLostEventEventDispatcher(state);
-  bindLostApplicationApplication(state);
-  bindLostApplicationKeyEvent(state);
-  bindLostApplicationTimerEvent(state);
-  bindLostApplicationResizeEvent(state);
-  bindLostApplicationMouseEvent(state);
-  bindLostApplicationApplicationEvent(state);
-  bindLostMathVec4(state);
-  luabind::bind_class_info(state);
-}
-
-
-}
+  namespace lua
+  {
+    void LuaLostCommonDisplayAttributes(lost::lua::State& state);
+    void LuaLostBitmapBitmap(lost::lua::State& state);
+    void LuaLostBitmapBitmapLoader(lost::lua::State& state);
+    void LuaLostCommonLog(lost::lua::State& state);
+    void LuaLostResourceFile(lost::lua::State& state);
+    void LuaLostResourceLoader(lost::lua::State& state);
+    void LuaLostEventEvent(lost::lua::State& state);
+    void LuaLostEventEventDispatcher(lost::lua::State& state);
+    void LuaLostApplicationApplication(lost::lua::State& state);
+    void LuaLostApplicationKeyEvent(lost::lua::State& state);
+    void LuaLostApplicationTimerEvent(lost::lua::State& state);
+    void LuaLostApplicationResizeEvent(lost::lua::State& state);
+    void LuaLostApplicationMouseEvent(lost::lua::State& state);
+    void LuaLostApplicationApplicationEvent(lost::lua::State& state);
+    void LuaLostLSystemLSystem(lost::lua::State& state);
+    void LuaLostMathVec3(lost::lua::State& state);
+    void LuaLostMathVec4(lost::lua::State& state);
+    
+    void bindAll(lost::lua::State& state);
+  }
 }
 
 #endif

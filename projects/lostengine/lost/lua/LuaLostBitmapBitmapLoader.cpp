@@ -1,22 +1,21 @@
 #include "lost/lua/Luabindings.h"
 #include "lost/bitmap/BitmapLoader.h"
 
-using namespace std;
 using namespace luabind;
 using namespace lost::bitmap;
 
 namespace lost
 {
-namespace lua
-{
-
-boost::shared_ptr<lost::bitmap::Bitmap> load(BitmapLoader* loader, std::string path)
-{
-  return loader->load(path);
+  namespace lua
+  {
+    boost::shared_ptr<lost::bitmap::Bitmap> load(BitmapLoader* loader, std::string path)
+    {
+      return loader->load(path);
+    }
+  }
 }
-
-
-void bindLostBitmapBitmapLoader(lost::lua::State& state)
+    
+LOST_LUA_EXPORT_BEGIN(LuaLostBitmapBitmapLoader)
 {
   module(state, "lost")
   [
@@ -28,6 +27,4 @@ void bindLostBitmapBitmapLoader(lost::lua::State& state)
     ]
   ];
 }
-
-}
-}
+LOST_LUA_EXPORT_END
