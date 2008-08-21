@@ -14,10 +14,10 @@ namespace resource
   {
     addRepository(boost::shared_ptr<Repository>(new ApplicationResourceRepository));
   }
-  
+
   virtual ~DefaultLoader() {}
 };
-}  
+}
 }
 
 #endif

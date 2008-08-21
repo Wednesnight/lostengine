@@ -17,7 +17,7 @@ namespace application
     }
     timerManagerInstance = this;
   }
-  
+
   TimerManager::~TimerManager() {}
 
   void TimerManager::updateTimers(double deltaSec)
@@ -27,7 +27,7 @@ namespace application
       (*i)->update(deltaSec);
     }
   }
-  
+
   void TimerManager::addTimer(Timer* timer)
   {
     timers.push_back(timer);

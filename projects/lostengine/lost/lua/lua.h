@@ -10,8 +10,8 @@ extern "C" {
 #include <luabind/luabind.hpp>
 
 // from here: http://www.codeproject.com/KB/graphics/luabindLuaAndOgre3d.aspx
-#define LOST_LUA_CONST_START( class, state ) { object g = globals(state); object table = g[#class]; 
+#define LOST_LUA_CONST_START( class, state ) { object g = globals(state); object table = g[#class];
 #define LOST_LUA_CONST( class, name ) table[#name] = class::name;
-#define LOST_LUA_CONST_END } 
+#define LOST_LUA_CONST_END }
 
 #endif

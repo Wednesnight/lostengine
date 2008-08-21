@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LostEngine" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="libLostEngine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="tmp\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="libLostEngine" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="tmp\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="..\..\..\thirdparty\boost\boost_1_34_1\include" />
+			<Add directory="..\..\..\thirdparty\zlib\zlib_1_2_3\include" />
+			<Add directory="..\..\..\thirdparty\stb\stb_image_1_14" />
+			<Add directory="..\..\..\thirdparty\glfw\glfw_2_6\include" />
+			<Add directory="..\..\..\thirdparty\glee\glee_5_21\include" />
+			<Add directory="..\..\..\thirdparty\freetype2\freetype_2_3_7\include" />
+			<Add directory="..\..\..\thirdparty\luabind\luabind_0_7\original" />
+			<Add directory="..\..\..\thirdparty\lua\lua_5_1_3\include" />
+			<Add directory="..\..\lostengine" />
+		</Compiler>
+		<Unit filename="..\lost\application\AccelerometerEvent.h" />
+		<Unit filename="..\lost\application\Application.h" />
+		<Unit filename="..\lost\application\ApplicationEvent.h" />
+		<Unit filename="..\lost\application\KeyEvent.h" />
+		<Unit filename="..\lost\application\KeySym.h" />
+		<Unit filename="..\lost\application\MouseEvent.h" />
+		<Unit filename="..\lost\application\MouseSym.h" />
+		<Unit filename="..\lost\application\ResizeEvent.h" />
+		<Unit filename="..\lost\application\Timer.h" />
+		<Unit filename="..\lost\application\TimerEvent.h" />
+		<Unit filename="..\lost\application\TouchEvent.h" />
+		<Unit filename="..\lost\application\glfw\Application.cpp" />
+		<Unit filename="..\lost\application\glfw\ApplicationAdapter.cpp" />
+		<Unit filename="..\lost\application\glfw\ApplicationAdapter.h" />
+		<Unit filename="..\lost\application\glfw\Timer.cpp" />
+		<Unit filename="..\lost\application\glfw\TimerManager.cpp" />
+		<Unit filename="..\lost\application\glfw\TimerManager.h" />
+		<Unit filename="..\lost\bitmap\Bitmap.cpp" />
+		<Unit filename="..\lost\bitmap\Bitmap.h" />
+		<Unit filename="..\lost\bitmap\BitmapLoader.h" />
+		<Unit filename="..\lost\camera\Camera.cpp" />
+		<Unit filename="..\lost\camera\Camera.h" />
+		<Unit filename="..\lost\common\Color.h" />
+		<Unit filename="..\lost\common\DisplayAttributes.h" />
+		<Unit filename="..\lost\common\FpsMeter.h" />
+		<Unit filename="..\lost\common\Logger.cpp" />
+		<Unit filename="..\lost\common\Logger.h" />
+		<Unit filename="..\lost\common\NullDeleter.h" />
+		<Unit filename="..\lost\common\Profiler.cpp" />
+		<Unit filename="..\lost\common\Profiler.h" />
+		<Unit filename="..\lost\common\SpiritHelpers.h" />
+		<Unit filename="..\lost\event\Event.h" />
+		<Unit filename="..\lost\event\EventDispatcher.h" />
+		<Unit filename="..\lost\font\BitmapFont.h" />
+		<Unit filename="..\lost\font\Font.h" />
+		<Unit filename="..\lost\font\TrueTypeFont.h" />
+		<Unit filename="..\lost\font\freetype\Face.h" />
+		<Unit filename="..\lost\font\freetype\Glyph.h" />
+		<Unit filename="..\lost\font\freetype\Library.h" />
+		<Unit filename="..\lost\gl\ArrayBuffer.h" />
+		<Unit filename="..\lost\gl\Buffer.h" />
+		<Unit filename="..\lost\gl\Context.h" />
+		<Unit filename="..\lost\gl\DisplayList.h" />
+		<Unit filename="..\lost\gl\Draw.h" />
+		<Unit filename="..\lost\gl\ElementArrayBuffer.h" />
+		<Unit filename="..\lost\gl\FragmentShader.h" />
+		<Unit filename="..\lost\gl\FrameBuffer.h" />
+		<Unit filename="..\lost\gl\PushAttrib.h" />
+		<Unit filename="..\lost\gl\PushClientAttrib.h" />
+		<Unit filename="..\lost\gl\RenderBuffer.h" />
+		<Unit filename="..\lost\gl\Scissor.h" />
+		<Unit filename="..\lost\gl\Shader.h" />
+		<Unit filename="..\lost\gl\ShaderHelper.h" />
+		<Unit filename="..\lost\gl\ShaderProgram.h" />
+		<Unit filename="..\lost\gl\Texture.h" />
+		<Unit filename="..\lost\gl\TraitsSelector.h" />
+		<Unit filename="..\lost\gl\TypedBuffer.h" />
+		<Unit filename="..\lost\gl\Utils.h" />
+		<Unit filename="..\lost\gl\VertexShader.h" />
+		<Unit filename="..\lost\gl\gl.h" />
+		<Unit filename="..\lost\guiro\Screen.h" />
+		<Unit filename="..\lost\guiro\Ui.h" />
+		<Unit filename="..\lost\guiro\View.h" />
+		<Unit filename="..\lost\lgl\lgl.h" />
+		<Unit filename="..\lost\lgl\lgl_gl.h" />
+		<Unit filename="..\lost\lgl\lgl_gles.h" />
+		<Unit filename="..\lost\lgl\lglu.h" />
+		<Unit filename="..\lost\lsystem\LSystem.h" />
+		<Unit filename="..\lost\lua\LuaBindings.h" />
+		<Unit filename="..\lost\lua\LuaLSystem.cpp" />
+		<Unit filename="..\lost\lua\LuaLSystem.h" />
+		<Unit filename="..\lost\lua\LuaLostApplicationApplication.cpp" />
+		<Unit filename="..\lost\lua\LuaLostApplicationApplicationEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostApplicationKeyEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostApplicationMouseEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostApplicationResizeEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostApplicationTimerEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostBitmapBitmap.cpp" />
+		<Unit filename="..\lost\lua\LuaLostBitmapBitmapLoader.cpp" />
+		<Unit filename="..\lost\lua\LuaLostCommonDisplayAttributes.cpp" />
+		<Unit filename="..\lost\lua\LuaLostCommonLog.cpp" />
+		<Unit filename="..\lost\lua\LuaLostEventEvent.cpp" />
+		<Unit filename="..\lost\lua\LuaLostEventEventDispatcher.cpp" />
+		<Unit filename="..\lost\lua\LuaLostResourceFile.cpp" />
+		<Unit filename="..\lost\lua\LuaLostResourceLoader.cpp" />
+		<Unit filename="..\lost\lua\LuaVec3.cpp" />
+		<Unit filename="..\lost\lua\LuaVec3.h" />
+		<Unit filename="..\lost\lua\LuaVec4.cpp" />
+		<Unit filename="..\lost\lua\ModuleLoader.cpp" />
+		<Unit filename="..\lost\lua\ModuleLoader.h" />
+		<Unit filename="..\lost\lua\State.h" />
+		<Unit filename="..\lost\lua\lua.h" />
+		<Unit filename="..\lost\math\AABB.h" />
+		<Unit filename="..\lost\math\Generator.h" />
+		<Unit filename="..\lost\math\Matrix.h" />
+		<Unit filename="..\lost\math\Rect.h" />
+		<Unit filename="..\lost\math\Vec2.h" />
+		<Unit filename="..\lost\math\Vec3.h" />
+		<Unit filename="..\lost\math\Vec4.h" />
+		<Unit filename="..\lost\math\lmath.h" />
+		<Unit filename="..\lost\model\MaterialOBJ.h" />
+		<Unit filename="..\lost\model\Mesh.h" />
+		<Unit filename="..\lost\model\RendererOBJ.h" />
+		<Unit filename="..\lost\model\Vertex.h" />
+		<Unit filename="..\lost\model\parser\ParserOBJ.h" />
+		<Unit filename="..\lost\obj\Face.h" />
+		<Unit filename="..\lost\obj\Parser.cpp" />
+		<Unit filename="..\lost\obj\Parser.h" />
+		<Unit filename="..\lost\obj\Scene.h" />
+		<Unit filename="..\lost\obj\Vertex.h" />
+		<Unit filename="..\lost\platform\Platform.cpp" />
+		<Unit filename="..\lost\platform\Platform.h" />
+		<Unit filename="..\lost\platform\Platform_Linux.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="..\lost\platform\Platform_Mac.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="..\lost\platform\Platform_Windows.cpp" />
+		<Unit filename="..\lost\resource\ApplicationResourceRepository.h" />
+		<Unit filename="..\lost\resource\DefaultLoader.h" />
+		<Unit filename="..\lost\resource\File.h" />
+		<Unit filename="..\lost\resource\Loader.h" />
+		<Unit filename="..\lost\resource\Repository.h" />
+		<Unit filename="..\..\..\thirdparty\glee\glee_5_21\src\GLee.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\..\..\thirdparty\stb\stb_image_1_14\stb_image.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

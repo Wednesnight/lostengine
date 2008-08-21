@@ -26,12 +26,12 @@ struct State
       initPackagePath();
     }
   }
-  
+
   ~State()
   {
-    lua_close(state); 
+    lua_close(state);
   }
-  
+
   // cast operator to original lua_State* value
   operator lua_State*() { return state; }
 
@@ -40,9 +40,9 @@ struct State
   {
     std::string basePath=lost::platform::getResourcePath()+"/";
     std::string packageSearchPattern = basePath+"?;"+basePath+"?.lua";
-    luabind::globals(state)["package"]["path"] = packageSearchPattern;  
+    luabind::globals(state)["package"]["path"] = packageSearchPattern;
   }
-  
+
   // adds all standard libs to the state of the interpreter
   void openLibs()  { luaL_openlibs(state);  }
   // or fine grained functions if you only want to add single libs
@@ -54,13 +54,13 @@ struct State
   void openStringLib() { lua_pushcfunction(state, luaopen_string);lua_pushstring(state, "string");lua_call(state, 1, 0); }
   void openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
   void openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
-  
+
   // loads and executes a file from the resource directory
   void doResourceFile(const std::string& inRelativePath)
   {
     doFile(lost::platform::buildResourcePath(inRelativePath));
   }
-  
+
   // loads and executes a file
   void doFile(const std::string& inAbsolutePath)
   {
@@ -71,7 +71,7 @@ struct State
     std::string data = os.str();
     doString(data);
   }
-  
+
   // executes the given string as a lua program
   void doString(const std::string& inData)
   {
@@ -91,12 +91,12 @@ struct State
       std::string errstring = lua_tostring(state, -1);
       lua_pop(state,1);
       throw std::runtime_error(errcode+" : "+errstring);
-    }  
+    }
   }
-  
+
   // returns memory usage of the lua state in kilobytes
   int memUsage() { return lua_getgccount(state); }
-  
+
 
   lua_State* state;
 };

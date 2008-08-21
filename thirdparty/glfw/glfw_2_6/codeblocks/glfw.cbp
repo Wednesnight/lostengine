@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="glfw" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="libglfw" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="tmp\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="libglfw" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="tmp\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="..\include" />
+			<Add directory="..\source" />
+			<Add directory="..\source\win32" />
+		</Compiler>
+		<Unit filename="..\source\enable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\fullscreen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\glext.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\image.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\input.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\joystick.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\stream.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\tga.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\thread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_enable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_fullscreen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_glext.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_joystick.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_thread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\win32\win32_window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="..\source\window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

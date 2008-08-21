@@ -12,11 +12,11 @@ struct TimerManager
 {
   TimerManager();
   virtual ~TimerManager();
-  
+
   void addTimer(Timer* timer);
   void removeTimer(Timer* timer);
-  void updateTimers(double deltaSec);  
-  std::list<Timer*> timers;  
+  void updateTimers(double deltaSec);
+  std::list<Timer*> timers;
 };
 }
 }
