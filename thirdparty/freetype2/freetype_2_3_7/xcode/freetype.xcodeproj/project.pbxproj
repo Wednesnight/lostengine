@@ -7,172 +7,172 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E7322920E5CD341000FF838 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B60E2EC888006E9E8A /* ftinit.c */; };
-		3E7322930E5CD341000FF838 /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B70E2EC888006E9E8A /* ftsystem.c */; };
-		3E7322940E5CD341000FF838 /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B80E2EC888006E9E8A /* ftdebug.c */; };
-		3E7322950E5CD341000FF838 /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BC0E2ECC36006E9E8A /* ftbase.c */; };
-		3E7322960E5CD341000FF838 /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BD0E2ECC36006E9E8A /* ftbdf.c */; };
-		3E7322970E5CD341000FF838 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BE0E2ECC36006E9E8A /* ftcid.c */; };
-		3E7322980E5CD341000FF838 /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BF0E2ECC36006E9E8A /* ftgxval.c */; };
-		3E7322990E5CD341000FF838 /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C00E2ECC36006E9E8A /* ftglyph.c */; };
-		3E73229A0E5CD341000FF838 /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C10E2ECC36006E9E8A /* ftsynth.c */; };
-		3E73229B0E5CD341000FF838 /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C20E2ECC36006E9E8A /* ftstroke.c */; };
-		3E73229C0E5CD341000FF838 /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C30E2ECC36006E9E8A /* ftlcdfil.c */; };
-		3E73229D0E5CD341000FF838 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C40E2ECC36006E9E8A /* ftgasp.c */; };
-		3E73229E0E5CD341000FF838 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C50E2ECC36006E9E8A /* ftpfr.c */; };
-		3E73229F0E5CD341000FF838 /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C60E2ECC36006E9E8A /* ftpatent.c */; };
-		3E7322A00E5CD341000FF838 /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C70E2ECC36006E9E8A /* ftotval.c */; };
-		3E7322A10E5CD341000FF838 /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C80E2ECC36006E9E8A /* ftmm.c */; };
-		3E7322A20E5CD341000FF838 /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C90E2ECC36006E9E8A /* ftbbox.c */; };
-		3E7322A30E5CD341000FF838 /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CA0E2ECC36006E9E8A /* ftwinfnt.c */; };
-		3E7322A40E5CD341000FF838 /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CB0E2ECC36006E9E8A /* fttype1.c */; };
-		3E7322A50E5CD341000FF838 /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CC0E2ECC36006E9E8A /* ftbitmap.c */; };
-		3E7322A60E5CD341000FF838 /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CD0E2ECC36006E9E8A /* ftxf86.c */; };
-		3E7322A70E5CD341000FF838 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E00E2ECC49006E9E8A /* truetype.c */; };
-		3E7322A80E5CD341000FF838 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E20E2ECC56006E9E8A /* type1.c */; };
-		3E7322A90E5CD341000FF838 /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E70E2ECC63006E9E8A /* cff.c */; };
-		3E7322AA0E5CD341000FF838 /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E90E2ECC76006E9E8A /* type1cid.c */; };
-		3E7322AB0E5CD341000FF838 /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EB0E2ECC81006E9E8A /* pfr.c */; };
-		3E7322AC0E5CD341000FF838 /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5ED0E2ECC8B006E9E8A /* type42.c */; };
-		3E7322AD0E5CD341000FF838 /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EF0E2ECC9A006E9E8A /* winfnt.c */; };
-		3E7322AE0E5CD341000FF838 /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F10E2ECCA2006E9E8A /* pcf.c */; };
-		3E7322AF0E5CD341000FF838 /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F50E2ECCAB006E9E8A /* bdf.c */; };
-		3E7322B00E5CD341000FF838 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F70E2ECCB5006E9E8A /* sfnt.c */; };
-		3E7322B10E5CD341000FF838 /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F90E2ECCC1006E9E8A /* autofit.c */; };
-		3E7322B20E5CD341000FF838 /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FB0E2ECCD9006E9E8A /* pshinter.c */; };
-		3E7322B30E5CD341000FF838 /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FD0E2ECCE5006E9E8A /* raster.c */; };
-		3E7322B40E5CD341000FF838 /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FF0E2ECCEF006E9E8A /* smooth.c */; };
-		3E7322B50E5CD341000FF838 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6010E2ECD00006E9E8A /* ftcache.c */; };
-		3E7322B60E5CD341000FF838 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6030E2ECD27006E9E8A /* ftgzip.c */; };
-		3E7322B70E5CD341000FF838 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6050E2ECD31006E9E8A /* ftlzw.c */; };
-		3E7322B80E5CD341000FF838 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6070E2ECD3B006E9E8A /* psaux.c */; };
-		3E7322B90E5CD341000FF838 /* psmodule.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psmodule.c */; };
-		3E7325ED0E5CE3E6000FF838 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B60E2EC888006E9E8A /* ftinit.c */; };
-		3E7325EE0E5CE3E6000FF838 /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B70E2EC888006E9E8A /* ftsystem.c */; };
-		3E7325EF0E5CE3E6000FF838 /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B80E2EC888006E9E8A /* ftdebug.c */; };
-		3E7325F00E5CE3E6000FF838 /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BC0E2ECC36006E9E8A /* ftbase.c */; };
-		3E7325F10E5CE3E6000FF838 /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BD0E2ECC36006E9E8A /* ftbdf.c */; };
-		3E7325F20E5CE3E6000FF838 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BE0E2ECC36006E9E8A /* ftcid.c */; };
-		3E7325F30E5CE3E6000FF838 /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BF0E2ECC36006E9E8A /* ftgxval.c */; };
-		3E7325F40E5CE3E6000FF838 /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C00E2ECC36006E9E8A /* ftglyph.c */; };
-		3E7325F50E5CE3E6000FF838 /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C10E2ECC36006E9E8A /* ftsynth.c */; };
-		3E7325F60E5CE3E6000FF838 /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C20E2ECC36006E9E8A /* ftstroke.c */; };
-		3E7325F70E5CE3E6000FF838 /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C30E2ECC36006E9E8A /* ftlcdfil.c */; };
-		3E7325F80E5CE3E6000FF838 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C40E2ECC36006E9E8A /* ftgasp.c */; };
-		3E7325F90E5CE3E6000FF838 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C50E2ECC36006E9E8A /* ftpfr.c */; };
-		3E7325FA0E5CE3E6000FF838 /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C60E2ECC36006E9E8A /* ftpatent.c */; };
-		3E7325FB0E5CE3E6000FF838 /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C70E2ECC36006E9E8A /* ftotval.c */; };
-		3E7325FC0E5CE3E6000FF838 /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C80E2ECC36006E9E8A /* ftmm.c */; };
-		3E7325FD0E5CE3E6000FF838 /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C90E2ECC36006E9E8A /* ftbbox.c */; };
-		3E7325FE0E5CE3E6000FF838 /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CA0E2ECC36006E9E8A /* ftwinfnt.c */; };
-		3E7325FF0E5CE3E6000FF838 /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CB0E2ECC36006E9E8A /* fttype1.c */; };
-		3E7326000E5CE3E6000FF838 /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CC0E2ECC36006E9E8A /* ftbitmap.c */; };
-		3E7326010E5CE3E6000FF838 /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CD0E2ECC36006E9E8A /* ftxf86.c */; };
-		3E7326020E5CE3E6000FF838 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E00E2ECC49006E9E8A /* truetype.c */; };
-		3E7326030E5CE3E6000FF838 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E20E2ECC56006E9E8A /* type1.c */; };
-		3E7326040E5CE3E6000FF838 /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E70E2ECC63006E9E8A /* cff.c */; };
-		3E7326050E5CE3E6000FF838 /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E90E2ECC76006E9E8A /* type1cid.c */; };
-		3E7326060E5CE3E6000FF838 /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EB0E2ECC81006E9E8A /* pfr.c */; };
-		3E7326070E5CE3E6000FF838 /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5ED0E2ECC8B006E9E8A /* type42.c */; };
-		3E7326080E5CE3E6000FF838 /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EF0E2ECC9A006E9E8A /* winfnt.c */; };
-		3E7326090E5CE3E6000FF838 /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F10E2ECCA2006E9E8A /* pcf.c */; };
-		3E73260A0E5CE3E6000FF838 /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F50E2ECCAB006E9E8A /* bdf.c */; };
-		3E73260B0E5CE3E6000FF838 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F70E2ECCB5006E9E8A /* sfnt.c */; };
-		3E73260C0E5CE3E6000FF838 /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F90E2ECCC1006E9E8A /* autofit.c */; };
-		3E73260D0E5CE3E6000FF838 /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FB0E2ECCD9006E9E8A /* pshinter.c */; };
-		3E73260E0E5CE3E6000FF838 /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FD0E2ECCE5006E9E8A /* raster.c */; };
-		3E73260F0E5CE3E6000FF838 /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FF0E2ECCEF006E9E8A /* smooth.c */; };
-		3E7326100E5CE3E6000FF838 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6010E2ECD00006E9E8A /* ftcache.c */; };
-		3E7326110E5CE3E6000FF838 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6030E2ECD27006E9E8A /* ftgzip.c */; };
-		3E7326120E5CE3E6000FF838 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6050E2ECD31006E9E8A /* ftlzw.c */; };
-		3E7326130E5CE3E6000FF838 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6070E2ECD3B006E9E8A /* psaux.c */; };
-		3E7326140E5CE3E6000FF838 /* psmodule.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psmodule.c */; };
-		EA7CF5B90E2EC888006E9E8A /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B60E2EC888006E9E8A /* ftinit.c */; };
-		EA7CF5BA0E2EC888006E9E8A /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B70E2EC888006E9E8A /* ftsystem.c */; };
-		EA7CF5BB0E2EC888006E9E8A /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5B80E2EC888006E9E8A /* ftdebug.c */; };
-		EA7CF5CE0E2ECC36006E9E8A /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BC0E2ECC36006E9E8A /* ftbase.c */; };
-		EA7CF5CF0E2ECC36006E9E8A /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BD0E2ECC36006E9E8A /* ftbdf.c */; };
-		EA7CF5D00E2ECC36006E9E8A /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BE0E2ECC36006E9E8A /* ftcid.c */; };
-		EA7CF5D10E2ECC36006E9E8A /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5BF0E2ECC36006E9E8A /* ftgxval.c */; };
-		EA7CF5D20E2ECC36006E9E8A /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C00E2ECC36006E9E8A /* ftglyph.c */; };
-		EA7CF5D30E2ECC36006E9E8A /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C10E2ECC36006E9E8A /* ftsynth.c */; };
-		EA7CF5D40E2ECC36006E9E8A /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C20E2ECC36006E9E8A /* ftstroke.c */; };
-		EA7CF5D50E2ECC36006E9E8A /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C30E2ECC36006E9E8A /* ftlcdfil.c */; };
-		EA7CF5D60E2ECC36006E9E8A /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C40E2ECC36006E9E8A /* ftgasp.c */; };
-		EA7CF5D70E2ECC36006E9E8A /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C50E2ECC36006E9E8A /* ftpfr.c */; };
-		EA7CF5D80E2ECC36006E9E8A /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C60E2ECC36006E9E8A /* ftpatent.c */; };
-		EA7CF5D90E2ECC36006E9E8A /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C70E2ECC36006E9E8A /* ftotval.c */; };
-		EA7CF5DA0E2ECC36006E9E8A /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C80E2ECC36006E9E8A /* ftmm.c */; };
-		EA7CF5DB0E2ECC36006E9E8A /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5C90E2ECC36006E9E8A /* ftbbox.c */; };
-		EA7CF5DC0E2ECC36006E9E8A /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CA0E2ECC36006E9E8A /* ftwinfnt.c */; };
-		EA7CF5DD0E2ECC36006E9E8A /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CB0E2ECC36006E9E8A /* fttype1.c */; };
-		EA7CF5DE0E2ECC36006E9E8A /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CC0E2ECC36006E9E8A /* ftbitmap.c */; };
-		EA7CF5DF0E2ECC36006E9E8A /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5CD0E2ECC36006E9E8A /* ftxf86.c */; };
-		EA7CF5E10E2ECC49006E9E8A /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E00E2ECC49006E9E8A /* truetype.c */; };
-		EA7CF5E30E2ECC56006E9E8A /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E20E2ECC56006E9E8A /* type1.c */; };
-		EA7CF5E80E2ECC63006E9E8A /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E70E2ECC63006E9E8A /* cff.c */; };
-		EA7CF5EA0E2ECC76006E9E8A /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5E90E2ECC76006E9E8A /* type1cid.c */; };
-		EA7CF5EC0E2ECC81006E9E8A /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EB0E2ECC81006E9E8A /* pfr.c */; };
-		EA7CF5EE0E2ECC8B006E9E8A /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5ED0E2ECC8B006E9E8A /* type42.c */; };
-		EA7CF5F00E2ECC9A006E9E8A /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5EF0E2ECC9A006E9E8A /* winfnt.c */; };
-		EA7CF5F20E2ECCA2006E9E8A /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F10E2ECCA2006E9E8A /* pcf.c */; };
-		EA7CF5F60E2ECCAB006E9E8A /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F50E2ECCAB006E9E8A /* bdf.c */; };
-		EA7CF5F80E2ECCB5006E9E8A /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F70E2ECCB5006E9E8A /* sfnt.c */; };
-		EA7CF5FA0E2ECCC1006E9E8A /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5F90E2ECCC1006E9E8A /* autofit.c */; };
-		EA7CF5FC0E2ECCD9006E9E8A /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FB0E2ECCD9006E9E8A /* pshinter.c */; };
-		EA7CF5FE0E2ECCE5006E9E8A /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FD0E2ECCE5006E9E8A /* raster.c */; };
-		EA7CF6000E2ECCEF006E9E8A /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF5FF0E2ECCEF006E9E8A /* smooth.c */; };
-		EA7CF6020E2ECD00006E9E8A /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6010E2ECD00006E9E8A /* ftcache.c */; };
-		EA7CF6040E2ECD27006E9E8A /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6030E2ECD27006E9E8A /* ftgzip.c */; };
-		EA7CF6060E2ECD31006E9E8A /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6050E2ECD31006E9E8A /* ftlzw.c */; };
-		EA7CF6080E2ECD3B006E9E8A /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6070E2ECD3B006E9E8A /* psaux.c */; };
-		EA7CF60A0E2ECD4D006E9E8A /* psmodule.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psmodule.c */; };
+		EA0E43860E5E22D400B5EBF1 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43850E5E22D400B5EBF1 /* psaux.c */; };
+		EA0E43880E5E22F400B5EBF1 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43870E5E22F400B5EBF1 /* ftlzw.c */; };
+		EA0E438A0E5E230C00B5EBF1 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43890E5E230C00B5EBF1 /* ftgzip.c */; };
+		EA0E438C0E5E231700B5EBF1 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438B0E5E231700B5EBF1 /* ftcache.c */; };
+		EA0E438E0E5E232100B5EBF1 /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438D0E5E232100B5EBF1 /* smooth.c */; };
+		EA0E43900E5E232A00B5EBF1 /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438F0E5E232A00B5EBF1 /* raster.c */; };
+		EA0E43920E5E233300B5EBF1 /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43910E5E233300B5EBF1 /* pshinter.c */; };
+		EA0E43940E5E233C00B5EBF1 /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43930E5E233C00B5EBF1 /* autofit.c */; };
+		EA0E43960E5E234600B5EBF1 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43950E5E234600B5EBF1 /* sfnt.c */; };
+		EA0E43980E5E234F00B5EBF1 /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43970E5E234F00B5EBF1 /* bdf.c */; };
+		EA0E439A0E5E235B00B5EBF1 /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43990E5E235B00B5EBF1 /* pcf.c */; };
+		EA0E439C0E5E236400B5EBF1 /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439B0E5E236400B5EBF1 /* winfnt.c */; };
+		EA0E439E0E5E236D00B5EBF1 /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439D0E5E236D00B5EBF1 /* type42.c */; };
+		EA0E43A00E5E237600B5EBF1 /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439F0E5E237600B5EBF1 /* pfr.c */; };
+		EA0E43A20E5E238700B5EBF1 /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A10E5E238700B5EBF1 /* type1cid.c */; };
+		EA0E43A40E5E239000B5EBF1 /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A30E5E239000B5EBF1 /* cff.c */; };
+		EA0E43A60E5E239900B5EBF1 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A50E5E239900B5EBF1 /* type1.c */; };
+		EA0E43A80E5E23A100B5EBF1 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A70E5E23A100B5EBF1 /* truetype.c */; };
+		EA0E43AA0E5E23CC00B5EBF1 /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A90E5E23CC00B5EBF1 /* ftbase.c */; };
+		EA0E43AC0E5E23D200B5EBF1 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AB0E5E23D200B5EBF1 /* ftinit.c */; };
+		EA0E43AE0E5E23D800B5EBF1 /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AD0E5E23D800B5EBF1 /* ftsystem.c */; };
+		EA0E43B00E5E23E000B5EBF1 /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AF0E5E23E000B5EBF1 /* ftdebug.c */; };
+		EA0E43B20E5E23E700B5EBF1 /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B10E5E23E700B5EBF1 /* ftbdf.c */; };
+		EA0E43B40E5E23F000B5EBF1 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B30E5E23F000B5EBF1 /* ftcid.c */; };
+		EA0E43B60E5E23FA00B5EBF1 /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B50E5E23FA00B5EBF1 /* ftgxval.c */; };
+		EA0E43B80E5E240200B5EBF1 /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B70E5E240200B5EBF1 /* ftglyph.c */; };
+		EA0E43BA0E5E240700B5EBF1 /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B90E5E240700B5EBF1 /* ftsynth.c */; };
+		EA0E43BC0E5E240D00B5EBF1 /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BB0E5E240D00B5EBF1 /* ftstroke.c */; };
+		EA0E43BE0E5E241400B5EBF1 /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BD0E5E241400B5EBF1 /* ftlcdfil.c */; };
+		EA0E43C00E5E241A00B5EBF1 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BF0E5E241A00B5EBF1 /* ftgasp.c */; };
+		EA0E43C20E5E242000B5EBF1 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C10E5E242000B5EBF1 /* ftpfr.c */; };
+		EA0E43C40E5E242500B5EBF1 /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C30E5E242500B5EBF1 /* ftpatent.c */; };
+		EA0E43C60E5E242D00B5EBF1 /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C50E5E242D00B5EBF1 /* ftotval.c */; };
+		EA0E43C80E5E243300B5EBF1 /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C70E5E243300B5EBF1 /* ftmm.c */; };
+		EA0E43CA0E5E243800B5EBF1 /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C90E5E243800B5EBF1 /* ftbbox.c */; };
+		EA0E43CC0E5E243D00B5EBF1 /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CB0E5E243D00B5EBF1 /* ftwinfnt.c */; };
+		EA0E43CE0E5E244300B5EBF1 /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CD0E5E244300B5EBF1 /* fttype1.c */; };
+		EA0E43D00E5E244800B5EBF1 /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CF0E5E244800B5EBF1 /* ftbitmap.c */; };
+		EA0E43D20E5E244D00B5EBF1 /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43D10E5E244D00B5EBF1 /* ftxf86.c */; };
+		EA0E44210E5E245700B5EBF1 /* psnames.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psnames.c */; };
+		EA0E44220E5E245700B5EBF1 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43850E5E22D400B5EBF1 /* psaux.c */; };
+		EA0E44230E5E245700B5EBF1 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43870E5E22F400B5EBF1 /* ftlzw.c */; };
+		EA0E44240E5E245700B5EBF1 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43890E5E230C00B5EBF1 /* ftgzip.c */; };
+		EA0E44250E5E245700B5EBF1 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438B0E5E231700B5EBF1 /* ftcache.c */; };
+		EA0E44260E5E245700B5EBF1 /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438D0E5E232100B5EBF1 /* smooth.c */; };
+		EA0E44270E5E245700B5EBF1 /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438F0E5E232A00B5EBF1 /* raster.c */; };
+		EA0E44280E5E245700B5EBF1 /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43910E5E233300B5EBF1 /* pshinter.c */; };
+		EA0E44290E5E245700B5EBF1 /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43930E5E233C00B5EBF1 /* autofit.c */; };
+		EA0E442A0E5E245700B5EBF1 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43950E5E234600B5EBF1 /* sfnt.c */; };
+		EA0E442B0E5E245700B5EBF1 /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43970E5E234F00B5EBF1 /* bdf.c */; };
+		EA0E442C0E5E245700B5EBF1 /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43990E5E235B00B5EBF1 /* pcf.c */; };
+		EA0E442D0E5E245700B5EBF1 /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439B0E5E236400B5EBF1 /* winfnt.c */; };
+		EA0E442E0E5E245700B5EBF1 /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439D0E5E236D00B5EBF1 /* type42.c */; };
+		EA0E442F0E5E245700B5EBF1 /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439F0E5E237600B5EBF1 /* pfr.c */; };
+		EA0E44300E5E245700B5EBF1 /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A10E5E238700B5EBF1 /* type1cid.c */; };
+		EA0E44310E5E245700B5EBF1 /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A30E5E239000B5EBF1 /* cff.c */; };
+		EA0E44320E5E245700B5EBF1 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A50E5E239900B5EBF1 /* type1.c */; };
+		EA0E44330E5E245700B5EBF1 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A70E5E23A100B5EBF1 /* truetype.c */; };
+		EA0E44340E5E245700B5EBF1 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AB0E5E23D200B5EBF1 /* ftinit.c */; };
+		EA0E44350E5E245700B5EBF1 /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AD0E5E23D800B5EBF1 /* ftsystem.c */; };
+		EA0E44360E5E245700B5EBF1 /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AF0E5E23E000B5EBF1 /* ftdebug.c */; };
+		EA0E44370E5E245700B5EBF1 /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A90E5E23CC00B5EBF1 /* ftbase.c */; };
+		EA0E44380E5E245700B5EBF1 /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B10E5E23E700B5EBF1 /* ftbdf.c */; };
+		EA0E44390E5E245700B5EBF1 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B30E5E23F000B5EBF1 /* ftcid.c */; };
+		EA0E443A0E5E245700B5EBF1 /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B50E5E23FA00B5EBF1 /* ftgxval.c */; };
+		EA0E443B0E5E245700B5EBF1 /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B70E5E240200B5EBF1 /* ftglyph.c */; };
+		EA0E443C0E5E245700B5EBF1 /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B90E5E240700B5EBF1 /* ftsynth.c */; };
+		EA0E443D0E5E245700B5EBF1 /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BB0E5E240D00B5EBF1 /* ftstroke.c */; };
+		EA0E443E0E5E245700B5EBF1 /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BD0E5E241400B5EBF1 /* ftlcdfil.c */; };
+		EA0E443F0E5E245700B5EBF1 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BF0E5E241A00B5EBF1 /* ftgasp.c */; };
+		EA0E44400E5E245700B5EBF1 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C10E5E242000B5EBF1 /* ftpfr.c */; };
+		EA0E44410E5E245700B5EBF1 /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C30E5E242500B5EBF1 /* ftpatent.c */; };
+		EA0E44420E5E245700B5EBF1 /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C50E5E242D00B5EBF1 /* ftotval.c */; };
+		EA0E44430E5E245700B5EBF1 /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C70E5E243300B5EBF1 /* ftmm.c */; };
+		EA0E44440E5E245700B5EBF1 /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C90E5E243800B5EBF1 /* ftbbox.c */; };
+		EA0E44450E5E245700B5EBF1 /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CB0E5E243D00B5EBF1 /* ftwinfnt.c */; };
+		EA0E44460E5E245700B5EBF1 /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CD0E5E244300B5EBF1 /* fttype1.c */; };
+		EA0E44470E5E245700B5EBF1 /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CF0E5E244800B5EBF1 /* ftbitmap.c */; };
+		EA0E44480E5E245700B5EBF1 /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43D10E5E244D00B5EBF1 /* ftxf86.c */; };
+		EA0E44490E5E245700B5EBF1 /* psnames.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psnames.c */; };
+		EA0E444A0E5E245700B5EBF1 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43850E5E22D400B5EBF1 /* psaux.c */; };
+		EA0E444B0E5E245700B5EBF1 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43870E5E22F400B5EBF1 /* ftlzw.c */; };
+		EA0E444C0E5E245700B5EBF1 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43890E5E230C00B5EBF1 /* ftgzip.c */; };
+		EA0E444D0E5E245700B5EBF1 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438B0E5E231700B5EBF1 /* ftcache.c */; };
+		EA0E444E0E5E245700B5EBF1 /* smooth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438D0E5E232100B5EBF1 /* smooth.c */; };
+		EA0E444F0E5E245700B5EBF1 /* raster.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E438F0E5E232A00B5EBF1 /* raster.c */; };
+		EA0E44500E5E245700B5EBF1 /* pshinter.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43910E5E233300B5EBF1 /* pshinter.c */; };
+		EA0E44510E5E245700B5EBF1 /* autofit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43930E5E233C00B5EBF1 /* autofit.c */; };
+		EA0E44520E5E245700B5EBF1 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43950E5E234600B5EBF1 /* sfnt.c */; };
+		EA0E44530E5E245700B5EBF1 /* bdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43970E5E234F00B5EBF1 /* bdf.c */; };
+		EA0E44540E5E245700B5EBF1 /* pcf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43990E5E235B00B5EBF1 /* pcf.c */; };
+		EA0E44550E5E245700B5EBF1 /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439B0E5E236400B5EBF1 /* winfnt.c */; };
+		EA0E44560E5E245700B5EBF1 /* type42.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439D0E5E236D00B5EBF1 /* type42.c */; };
+		EA0E44570E5E245700B5EBF1 /* pfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E439F0E5E237600B5EBF1 /* pfr.c */; };
+		EA0E44580E5E245700B5EBF1 /* type1cid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A10E5E238700B5EBF1 /* type1cid.c */; };
+		EA0E44590E5E245700B5EBF1 /* cff.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A30E5E239000B5EBF1 /* cff.c */; };
+		EA0E445A0E5E245700B5EBF1 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A50E5E239900B5EBF1 /* type1.c */; };
+		EA0E445B0E5E245700B5EBF1 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A70E5E23A100B5EBF1 /* truetype.c */; };
+		EA0E445C0E5E245700B5EBF1 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AB0E5E23D200B5EBF1 /* ftinit.c */; };
+		EA0E445D0E5E245700B5EBF1 /* ftsystem.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AD0E5E23D800B5EBF1 /* ftsystem.c */; };
+		EA0E445E0E5E245700B5EBF1 /* ftdebug.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43AF0E5E23E000B5EBF1 /* ftdebug.c */; };
+		EA0E445F0E5E245700B5EBF1 /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43A90E5E23CC00B5EBF1 /* ftbase.c */; };
+		EA0E44600E5E245700B5EBF1 /* ftbdf.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B10E5E23E700B5EBF1 /* ftbdf.c */; };
+		EA0E44610E5E245700B5EBF1 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B30E5E23F000B5EBF1 /* ftcid.c */; };
+		EA0E44620E5E245700B5EBF1 /* ftgxval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B50E5E23FA00B5EBF1 /* ftgxval.c */; };
+		EA0E44630E5E245700B5EBF1 /* ftglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B70E5E240200B5EBF1 /* ftglyph.c */; };
+		EA0E44640E5E245700B5EBF1 /* ftsynth.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43B90E5E240700B5EBF1 /* ftsynth.c */; };
+		EA0E44650E5E245700B5EBF1 /* ftstroke.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BB0E5E240D00B5EBF1 /* ftstroke.c */; };
+		EA0E44660E5E245700B5EBF1 /* ftlcdfil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BD0E5E241400B5EBF1 /* ftlcdfil.c */; };
+		EA0E44670E5E245700B5EBF1 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43BF0E5E241A00B5EBF1 /* ftgasp.c */; };
+		EA0E44680E5E245700B5EBF1 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C10E5E242000B5EBF1 /* ftpfr.c */; };
+		EA0E44690E5E245700B5EBF1 /* ftpatent.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C30E5E242500B5EBF1 /* ftpatent.c */; };
+		EA0E446A0E5E245700B5EBF1 /* ftotval.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C50E5E242D00B5EBF1 /* ftotval.c */; };
+		EA0E446B0E5E245700B5EBF1 /* ftmm.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C70E5E243300B5EBF1 /* ftmm.c */; };
+		EA0E446C0E5E245700B5EBF1 /* ftbbox.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43C90E5E243800B5EBF1 /* ftbbox.c */; };
+		EA0E446D0E5E245700B5EBF1 /* ftwinfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CB0E5E243D00B5EBF1 /* ftwinfnt.c */; };
+		EA0E446E0E5E245700B5EBF1 /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CD0E5E244300B5EBF1 /* fttype1.c */; };
+		EA0E446F0E5E245700B5EBF1 /* ftbitmap.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43CF0E5E244800B5EBF1 /* ftbitmap.c */; };
+		EA0E44700E5E245700B5EBF1 /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = EA0E43D10E5E244D00B5EBF1 /* ftxf86.c */; };
+		EA7CF60A0E2ECD4D006E9E8A /* psnames.c in Sources */ = {isa = PBXBuildFile; fileRef = EA7CF6090E2ECD4D006E9E8A /* psnames.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E7322BE0E5CD341000FF838 /* libfreetype-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libfreetype-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7326190E5CE3E6000FF838 /* libfreetype-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libfreetype-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libfreetype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfreetype.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA7CF5B60E2EC888006E9E8A /* ftinit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftinit.c; path = ../original/src/base/ftinit.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5B70E2EC888006E9E8A /* ftsystem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftsystem.c; path = ../original/src/base/ftsystem.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5B80E2EC888006E9E8A /* ftdebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftdebug.c; path = ../original/src/base/ftdebug.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5BC0E2ECC36006E9E8A /* ftbase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbase.c; path = ../original/src/base/ftbase.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5BD0E2ECC36006E9E8A /* ftbdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbdf.c; path = ../original/src/base/ftbdf.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5BE0E2ECC36006E9E8A /* ftcid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcid.c; path = ../original/src/base/ftcid.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5BF0E2ECC36006E9E8A /* ftgxval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgxval.c; path = ../original/src/base/ftgxval.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C00E2ECC36006E9E8A /* ftglyph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftglyph.c; path = ../original/src/base/ftglyph.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C10E2ECC36006E9E8A /* ftsynth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftsynth.c; path = ../original/src/base/ftsynth.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C20E2ECC36006E9E8A /* ftstroke.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftstroke.c; path = ../original/src/base/ftstroke.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C30E2ECC36006E9E8A /* ftlcdfil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlcdfil.c; path = ../original/src/base/ftlcdfil.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C40E2ECC36006E9E8A /* ftgasp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgasp.c; path = ../original/src/base/ftgasp.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C50E2ECC36006E9E8A /* ftpfr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftpfr.c; path = ../original/src/base/ftpfr.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C60E2ECC36006E9E8A /* ftpatent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftpatent.c; path = ../original/src/base/ftpatent.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C70E2ECC36006E9E8A /* ftotval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftotval.c; path = ../original/src/base/ftotval.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C80E2ECC36006E9E8A /* ftmm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftmm.c; path = ../original/src/base/ftmm.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5C90E2ECC36006E9E8A /* ftbbox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbbox.c; path = ../original/src/base/ftbbox.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5CA0E2ECC36006E9E8A /* ftwinfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftwinfnt.c; path = ../original/src/base/ftwinfnt.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5CB0E2ECC36006E9E8A /* fttype1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fttype1.c; path = ../original/src/base/fttype1.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5CC0E2ECC36006E9E8A /* ftbitmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbitmap.c; path = ../original/src/base/ftbitmap.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5CD0E2ECC36006E9E8A /* ftxf86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftxf86.c; path = ../original/src/base/ftxf86.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5E00E2ECC49006E9E8A /* truetype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = truetype.c; path = ../original/src/truetype/truetype.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5E20E2ECC56006E9E8A /* type1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type1.c; path = ../original/src/type1/type1.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5E70E2ECC63006E9E8A /* cff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cff.c; path = ../original/src/cff/cff.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5E90E2ECC76006E9E8A /* type1cid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type1cid.c; path = ../original/src/cid/type1cid.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5EB0E2ECC81006E9E8A /* pfr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pfr.c; path = ../original/src/pfr/pfr.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5ED0E2ECC8B006E9E8A /* type42.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type42.c; path = ../original/src/type42/type42.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5EF0E2ECC9A006E9E8A /* winfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = winfnt.c; path = ../original/src/winfonts/winfnt.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5F10E2ECCA2006E9E8A /* pcf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcf.c; path = ../original/src/pcf/pcf.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5F50E2ECCAB006E9E8A /* bdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bdf.c; path = ../original/src/bdf/bdf.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5F70E2ECCB5006E9E8A /* sfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sfnt.c; path = ../original/src/sfnt/sfnt.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5F90E2ECCC1006E9E8A /* autofit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = autofit.c; path = ../original/src/autofit/autofit.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5FB0E2ECCD9006E9E8A /* pshinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pshinter.c; path = ../original/src/pshinter/pshinter.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5FD0E2ECCE5006E9E8A /* raster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = raster.c; path = ../original/src/raster/raster.c; sourceTree = SOURCE_ROOT; };
-		EA7CF5FF0E2ECCEF006E9E8A /* smooth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = smooth.c; path = ../original/src/smooth/smooth.c; sourceTree = SOURCE_ROOT; };
-		EA7CF6010E2ECD00006E9E8A /* ftcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcache.c; path = ../original/src/cache/ftcache.c; sourceTree = SOURCE_ROOT; };
-		EA7CF6030E2ECD27006E9E8A /* ftgzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgzip.c; path = ../original/src/gzip/ftgzip.c; sourceTree = SOURCE_ROOT; };
-		EA7CF6050E2ECD31006E9E8A /* ftlzw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlzw.c; path = ../original/src/lzw/ftlzw.c; sourceTree = SOURCE_ROOT; };
-		EA7CF6070E2ECD3B006E9E8A /* psaux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psaux.c; path = ../original/src/psaux/psaux.c; sourceTree = SOURCE_ROOT; };
-		EA7CF6090E2ECD4D006E9E8A /* psmodule.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psmodule.c; path = ../original/src/psnames/psmodule.c; sourceTree = SOURCE_ROOT; };
+		EA0E43850E5E22D400B5EBF1 /* psaux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psaux.c; path = ../source/src/psaux/psaux.c; sourceTree = SOURCE_ROOT; };
+		EA0E43870E5E22F400B5EBF1 /* ftlzw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlzw.c; path = ../source/src/lzw/ftlzw.c; sourceTree = SOURCE_ROOT; };
+		EA0E43890E5E230C00B5EBF1 /* ftgzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgzip.c; path = ../source/src/gzip/ftgzip.c; sourceTree = SOURCE_ROOT; };
+		EA0E438B0E5E231700B5EBF1 /* ftcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcache.c; path = ../source/src/cache/ftcache.c; sourceTree = SOURCE_ROOT; };
+		EA0E438D0E5E232100B5EBF1 /* smooth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = smooth.c; path = ../source/src/smooth/smooth.c; sourceTree = SOURCE_ROOT; };
+		EA0E438F0E5E232A00B5EBF1 /* raster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = raster.c; path = ../source/src/raster/raster.c; sourceTree = SOURCE_ROOT; };
+		EA0E43910E5E233300B5EBF1 /* pshinter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pshinter.c; path = ../source/src/pshinter/pshinter.c; sourceTree = SOURCE_ROOT; };
+		EA0E43930E5E233C00B5EBF1 /* autofit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = autofit.c; path = ../source/src/autofit/autofit.c; sourceTree = SOURCE_ROOT; };
+		EA0E43950E5E234600B5EBF1 /* sfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sfnt.c; path = ../source/src/sfnt/sfnt.c; sourceTree = SOURCE_ROOT; };
+		EA0E43970E5E234F00B5EBF1 /* bdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bdf.c; path = ../source/src/bdf/bdf.c; sourceTree = SOURCE_ROOT; };
+		EA0E43990E5E235B00B5EBF1 /* pcf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcf.c; path = ../source/src/pcf/pcf.c; sourceTree = SOURCE_ROOT; };
+		EA0E439B0E5E236400B5EBF1 /* winfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = winfnt.c; path = ../source/src/winfonts/winfnt.c; sourceTree = SOURCE_ROOT; };
+		EA0E439D0E5E236D00B5EBF1 /* type42.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type42.c; path = ../source/src/type42/type42.c; sourceTree = SOURCE_ROOT; };
+		EA0E439F0E5E237600B5EBF1 /* pfr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pfr.c; path = ../source/src/pfr/pfr.c; sourceTree = SOURCE_ROOT; };
+		EA0E43A10E5E238700B5EBF1 /* type1cid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type1cid.c; path = ../source/src/cid/type1cid.c; sourceTree = SOURCE_ROOT; };
+		EA0E43A30E5E239000B5EBF1 /* cff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cff.c; path = ../source/src/cff/cff.c; sourceTree = SOURCE_ROOT; };
+		EA0E43A50E5E239900B5EBF1 /* type1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = type1.c; path = ../source/src/type1/type1.c; sourceTree = SOURCE_ROOT; };
+		EA0E43A70E5E23A100B5EBF1 /* truetype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = truetype.c; path = ../source/src/truetype/truetype.c; sourceTree = SOURCE_ROOT; };
+		EA0E43A90E5E23CC00B5EBF1 /* ftbase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbase.c; path = ../source/src/base/ftbase.c; sourceTree = SOURCE_ROOT; };
+		EA0E43AB0E5E23D200B5EBF1 /* ftinit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftinit.c; path = ../source/src/base/ftinit.c; sourceTree = SOURCE_ROOT; };
+		EA0E43AD0E5E23D800B5EBF1 /* ftsystem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftsystem.c; path = ../source/src/base/ftsystem.c; sourceTree = SOURCE_ROOT; };
+		EA0E43AF0E5E23E000B5EBF1 /* ftdebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftdebug.c; path = ../source/src/base/ftdebug.c; sourceTree = SOURCE_ROOT; };
+		EA0E43B10E5E23E700B5EBF1 /* ftbdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbdf.c; path = ../source/src/base/ftbdf.c; sourceTree = SOURCE_ROOT; };
+		EA0E43B30E5E23F000B5EBF1 /* ftcid.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcid.c; path = ../source/src/base/ftcid.c; sourceTree = SOURCE_ROOT; };
+		EA0E43B50E5E23FA00B5EBF1 /* ftgxval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgxval.c; path = ../source/src/base/ftgxval.c; sourceTree = SOURCE_ROOT; };
+		EA0E43B70E5E240200B5EBF1 /* ftglyph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftglyph.c; path = ../source/src/base/ftglyph.c; sourceTree = SOURCE_ROOT; };
+		EA0E43B90E5E240700B5EBF1 /* ftsynth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftsynth.c; path = ../source/src/base/ftsynth.c; sourceTree = SOURCE_ROOT; };
+		EA0E43BB0E5E240D00B5EBF1 /* ftstroke.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftstroke.c; path = ../source/src/base/ftstroke.c; sourceTree = SOURCE_ROOT; };
+		EA0E43BD0E5E241400B5EBF1 /* ftlcdfil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlcdfil.c; path = ../source/src/base/ftlcdfil.c; sourceTree = SOURCE_ROOT; };
+		EA0E43BF0E5E241A00B5EBF1 /* ftgasp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftgasp.c; path = ../source/src/base/ftgasp.c; sourceTree = SOURCE_ROOT; };
+		EA0E43C10E5E242000B5EBF1 /* ftpfr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftpfr.c; path = ../source/src/base/ftpfr.c; sourceTree = SOURCE_ROOT; };
+		EA0E43C30E5E242500B5EBF1 /* ftpatent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftpatent.c; path = ../source/src/base/ftpatent.c; sourceTree = SOURCE_ROOT; };
+		EA0E43C50E5E242D00B5EBF1 /* ftotval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftotval.c; path = ../source/src/base/ftotval.c; sourceTree = SOURCE_ROOT; };
+		EA0E43C70E5E243300B5EBF1 /* ftmm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftmm.c; path = ../source/src/base/ftmm.c; sourceTree = SOURCE_ROOT; };
+		EA0E43C90E5E243800B5EBF1 /* ftbbox.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbbox.c; path = ../source/src/base/ftbbox.c; sourceTree = SOURCE_ROOT; };
+		EA0E43CB0E5E243D00B5EBF1 /* ftwinfnt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftwinfnt.c; path = ../source/src/base/ftwinfnt.c; sourceTree = SOURCE_ROOT; };
+		EA0E43CD0E5E244300B5EBF1 /* fttype1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fttype1.c; path = ../source/src/base/fttype1.c; sourceTree = SOURCE_ROOT; };
+		EA0E43CF0E5E244800B5EBF1 /* ftbitmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftbitmap.c; path = ../source/src/base/ftbitmap.c; sourceTree = SOURCE_ROOT; };
+		EA0E43D10E5E244D00B5EBF1 /* ftxf86.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftxf86.c; path = ../source/src/base/ftxf86.c; sourceTree = SOURCE_ROOT; };
+		EA7CF6090E2ECD4D006E9E8A /* psnames.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psnames.c; path = ../source/src/psnames/psnames.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,46 +203,46 @@
 		08FB7794FE84155DC02AAC07 /* freetype */ = {
 			isa = PBXGroup;
 			children = (
-				EA7CF6090E2ECD4D006E9E8A /* psmodule.c */,
-				EA7CF6070E2ECD3B006E9E8A /* psaux.c */,
-				EA7CF6050E2ECD31006E9E8A /* ftlzw.c */,
-				EA7CF6030E2ECD27006E9E8A /* ftgzip.c */,
-				EA7CF6010E2ECD00006E9E8A /* ftcache.c */,
-				EA7CF5FF0E2ECCEF006E9E8A /* smooth.c */,
-				EA7CF5FD0E2ECCE5006E9E8A /* raster.c */,
-				EA7CF5FB0E2ECCD9006E9E8A /* pshinter.c */,
-				EA7CF5F90E2ECCC1006E9E8A /* autofit.c */,
-				EA7CF5F70E2ECCB5006E9E8A /* sfnt.c */,
-				EA7CF5F50E2ECCAB006E9E8A /* bdf.c */,
-				EA7CF5F10E2ECCA2006E9E8A /* pcf.c */,
-				EA7CF5EF0E2ECC9A006E9E8A /* winfnt.c */,
-				EA7CF5ED0E2ECC8B006E9E8A /* type42.c */,
-				EA7CF5EB0E2ECC81006E9E8A /* pfr.c */,
-				EA7CF5E90E2ECC76006E9E8A /* type1cid.c */,
-				EA7CF5E70E2ECC63006E9E8A /* cff.c */,
-				EA7CF5E20E2ECC56006E9E8A /* type1.c */,
-				EA7CF5E00E2ECC49006E9E8A /* truetype.c */,
-				EA7CF5B60E2EC888006E9E8A /* ftinit.c */,
-				EA7CF5B70E2EC888006E9E8A /* ftsystem.c */,
-				EA7CF5B80E2EC888006E9E8A /* ftdebug.c */,
-				EA7CF5BC0E2ECC36006E9E8A /* ftbase.c */,
-				EA7CF5BD0E2ECC36006E9E8A /* ftbdf.c */,
-				EA7CF5BE0E2ECC36006E9E8A /* ftcid.c */,
-				EA7CF5BF0E2ECC36006E9E8A /* ftgxval.c */,
-				EA7CF5C00E2ECC36006E9E8A /* ftglyph.c */,
-				EA7CF5C10E2ECC36006E9E8A /* ftsynth.c */,
-				EA7CF5C20E2ECC36006E9E8A /* ftstroke.c */,
-				EA7CF5C30E2ECC36006E9E8A /* ftlcdfil.c */,
-				EA7CF5C40E2ECC36006E9E8A /* ftgasp.c */,
-				EA7CF5C50E2ECC36006E9E8A /* ftpfr.c */,
-				EA7CF5C60E2ECC36006E9E8A /* ftpatent.c */,
-				EA7CF5C70E2ECC36006E9E8A /* ftotval.c */,
-				EA7CF5C80E2ECC36006E9E8A /* ftmm.c */,
-				EA7CF5C90E2ECC36006E9E8A /* ftbbox.c */,
-				EA7CF5CA0E2ECC36006E9E8A /* ftwinfnt.c */,
-				EA7CF5CB0E2ECC36006E9E8A /* fttype1.c */,
-				EA7CF5CC0E2ECC36006E9E8A /* ftbitmap.c */,
-				EA7CF5CD0E2ECC36006E9E8A /* ftxf86.c */,
+				EA7CF6090E2ECD4D006E9E8A /* psnames.c */,
+				EA0E43850E5E22D400B5EBF1 /* psaux.c */,
+				EA0E43870E5E22F400B5EBF1 /* ftlzw.c */,
+				EA0E43890E5E230C00B5EBF1 /* ftgzip.c */,
+				EA0E438B0E5E231700B5EBF1 /* ftcache.c */,
+				EA0E438D0E5E232100B5EBF1 /* smooth.c */,
+				EA0E438F0E5E232A00B5EBF1 /* raster.c */,
+				EA0E43910E5E233300B5EBF1 /* pshinter.c */,
+				EA0E43930E5E233C00B5EBF1 /* autofit.c */,
+				EA0E43950E5E234600B5EBF1 /* sfnt.c */,
+				EA0E43970E5E234F00B5EBF1 /* bdf.c */,
+				EA0E43990E5E235B00B5EBF1 /* pcf.c */,
+				EA0E439B0E5E236400B5EBF1 /* winfnt.c */,
+				EA0E439D0E5E236D00B5EBF1 /* type42.c */,
+				EA0E439F0E5E237600B5EBF1 /* pfr.c */,
+				EA0E43A10E5E238700B5EBF1 /* type1cid.c */,
+				EA0E43A30E5E239000B5EBF1 /* cff.c */,
+				EA0E43A50E5E239900B5EBF1 /* type1.c */,
+				EA0E43A70E5E23A100B5EBF1 /* truetype.c */,
+				EA0E43AB0E5E23D200B5EBF1 /* ftinit.c */,
+				EA0E43AD0E5E23D800B5EBF1 /* ftsystem.c */,
+				EA0E43AF0E5E23E000B5EBF1 /* ftdebug.c */,
+				EA0E43A90E5E23CC00B5EBF1 /* ftbase.c */,
+				EA0E43B10E5E23E700B5EBF1 /* ftbdf.c */,
+				EA0E43B30E5E23F000B5EBF1 /* ftcid.c */,
+				EA0E43B50E5E23FA00B5EBF1 /* ftgxval.c */,
+				EA0E43B70E5E240200B5EBF1 /* ftglyph.c */,
+				EA0E43B90E5E240700B5EBF1 /* ftsynth.c */,
+				EA0E43BB0E5E240D00B5EBF1 /* ftstroke.c */,
+				EA0E43BD0E5E241400B5EBF1 /* ftlcdfil.c */,
+				EA0E43BF0E5E241A00B5EBF1 /* ftgasp.c */,
+				EA0E43C10E5E242000B5EBF1 /* ftpfr.c */,
+				EA0E43C30E5E242500B5EBF1 /* ftpatent.c */,
+				EA0E43C50E5E242D00B5EBF1 /* ftotval.c */,
+				EA0E43C70E5E243300B5EBF1 /* ftmm.c */,
+				EA0E43C90E5E243800B5EBF1 /* ftbbox.c */,
+				EA0E43CB0E5E243D00B5EBF1 /* ftwinfnt.c */,
+				EA0E43CD0E5E244300B5EBF1 /* fttype1.c */,
+				EA0E43CF0E5E244800B5EBF1 /* ftbitmap.c */,
+				EA0E43D10E5E244D00B5EBF1 /* ftxf86.c */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = freetype;
@@ -360,46 +360,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7322920E5CD341000FF838 /* ftinit.c in Sources */,
-				3E7322930E5CD341000FF838 /* ftsystem.c in Sources */,
-				3E7322940E5CD341000FF838 /* ftdebug.c in Sources */,
-				3E7322950E5CD341000FF838 /* ftbase.c in Sources */,
-				3E7322960E5CD341000FF838 /* ftbdf.c in Sources */,
-				3E7322970E5CD341000FF838 /* ftcid.c in Sources */,
-				3E7322980E5CD341000FF838 /* ftgxval.c in Sources */,
-				3E7322990E5CD341000FF838 /* ftglyph.c in Sources */,
-				3E73229A0E5CD341000FF838 /* ftsynth.c in Sources */,
-				3E73229B0E5CD341000FF838 /* ftstroke.c in Sources */,
-				3E73229C0E5CD341000FF838 /* ftlcdfil.c in Sources */,
-				3E73229D0E5CD341000FF838 /* ftgasp.c in Sources */,
-				3E73229E0E5CD341000FF838 /* ftpfr.c in Sources */,
-				3E73229F0E5CD341000FF838 /* ftpatent.c in Sources */,
-				3E7322A00E5CD341000FF838 /* ftotval.c in Sources */,
-				3E7322A10E5CD341000FF838 /* ftmm.c in Sources */,
-				3E7322A20E5CD341000FF838 /* ftbbox.c in Sources */,
-				3E7322A30E5CD341000FF838 /* ftwinfnt.c in Sources */,
-				3E7322A40E5CD341000FF838 /* fttype1.c in Sources */,
-				3E7322A50E5CD341000FF838 /* ftbitmap.c in Sources */,
-				3E7322A60E5CD341000FF838 /* ftxf86.c in Sources */,
-				3E7322A70E5CD341000FF838 /* truetype.c in Sources */,
-				3E7322A80E5CD341000FF838 /* type1.c in Sources */,
-				3E7322A90E5CD341000FF838 /* cff.c in Sources */,
-				3E7322AA0E5CD341000FF838 /* type1cid.c in Sources */,
-				3E7322AB0E5CD341000FF838 /* pfr.c in Sources */,
-				3E7322AC0E5CD341000FF838 /* type42.c in Sources */,
-				3E7322AD0E5CD341000FF838 /* winfnt.c in Sources */,
-				3E7322AE0E5CD341000FF838 /* pcf.c in Sources */,
-				3E7322AF0E5CD341000FF838 /* bdf.c in Sources */,
-				3E7322B00E5CD341000FF838 /* sfnt.c in Sources */,
-				3E7322B10E5CD341000FF838 /* autofit.c in Sources */,
-				3E7322B20E5CD341000FF838 /* pshinter.c in Sources */,
-				3E7322B30E5CD341000FF838 /* raster.c in Sources */,
-				3E7322B40E5CD341000FF838 /* smooth.c in Sources */,
-				3E7322B50E5CD341000FF838 /* ftcache.c in Sources */,
-				3E7322B60E5CD341000FF838 /* ftgzip.c in Sources */,
-				3E7322B70E5CD341000FF838 /* ftlzw.c in Sources */,
-				3E7322B80E5CD341000FF838 /* psaux.c in Sources */,
-				3E7322B90E5CD341000FF838 /* psmodule.c in Sources */,
+				EA0E44490E5E245700B5EBF1 /* psnames.c in Sources */,
+				EA0E444A0E5E245700B5EBF1 /* psaux.c in Sources */,
+				EA0E444B0E5E245700B5EBF1 /* ftlzw.c in Sources */,
+				EA0E444C0E5E245700B5EBF1 /* ftgzip.c in Sources */,
+				EA0E444D0E5E245700B5EBF1 /* ftcache.c in Sources */,
+				EA0E444E0E5E245700B5EBF1 /* smooth.c in Sources */,
+				EA0E444F0E5E245700B5EBF1 /* raster.c in Sources */,
+				EA0E44500E5E245700B5EBF1 /* pshinter.c in Sources */,
+				EA0E44510E5E245700B5EBF1 /* autofit.c in Sources */,
+				EA0E44520E5E245700B5EBF1 /* sfnt.c in Sources */,
+				EA0E44530E5E245700B5EBF1 /* bdf.c in Sources */,
+				EA0E44540E5E245700B5EBF1 /* pcf.c in Sources */,
+				EA0E44550E5E245700B5EBF1 /* winfnt.c in Sources */,
+				EA0E44560E5E245700B5EBF1 /* type42.c in Sources */,
+				EA0E44570E5E245700B5EBF1 /* pfr.c in Sources */,
+				EA0E44580E5E245700B5EBF1 /* type1cid.c in Sources */,
+				EA0E44590E5E245700B5EBF1 /* cff.c in Sources */,
+				EA0E445A0E5E245700B5EBF1 /* type1.c in Sources */,
+				EA0E445B0E5E245700B5EBF1 /* truetype.c in Sources */,
+				EA0E445C0E5E245700B5EBF1 /* ftinit.c in Sources */,
+				EA0E445D0E5E245700B5EBF1 /* ftsystem.c in Sources */,
+				EA0E445E0E5E245700B5EBF1 /* ftdebug.c in Sources */,
+				EA0E445F0E5E245700B5EBF1 /* ftbase.c in Sources */,
+				EA0E44600E5E245700B5EBF1 /* ftbdf.c in Sources */,
+				EA0E44610E5E245700B5EBF1 /* ftcid.c in Sources */,
+				EA0E44620E5E245700B5EBF1 /* ftgxval.c in Sources */,
+				EA0E44630E5E245700B5EBF1 /* ftglyph.c in Sources */,
+				EA0E44640E5E245700B5EBF1 /* ftsynth.c in Sources */,
+				EA0E44650E5E245700B5EBF1 /* ftstroke.c in Sources */,
+				EA0E44660E5E245700B5EBF1 /* ftlcdfil.c in Sources */,
+				EA0E44670E5E245700B5EBF1 /* ftgasp.c in Sources */,
+				EA0E44680E5E245700B5EBF1 /* ftpfr.c in Sources */,
+				EA0E44690E5E245700B5EBF1 /* ftpatent.c in Sources */,
+				EA0E446A0E5E245700B5EBF1 /* ftotval.c in Sources */,
+				EA0E446B0E5E245700B5EBF1 /* ftmm.c in Sources */,
+				EA0E446C0E5E245700B5EBF1 /* ftbbox.c in Sources */,
+				EA0E446D0E5E245700B5EBF1 /* ftwinfnt.c in Sources */,
+				EA0E446E0E5E245700B5EBF1 /* fttype1.c in Sources */,
+				EA0E446F0E5E245700B5EBF1 /* ftbitmap.c in Sources */,
+				EA0E44700E5E245700B5EBF1 /* ftxf86.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,46 +407,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7325ED0E5CE3E6000FF838 /* ftinit.c in Sources */,
-				3E7325EE0E5CE3E6000FF838 /* ftsystem.c in Sources */,
-				3E7325EF0E5CE3E6000FF838 /* ftdebug.c in Sources */,
-				3E7325F00E5CE3E6000FF838 /* ftbase.c in Sources */,
-				3E7325F10E5CE3E6000FF838 /* ftbdf.c in Sources */,
-				3E7325F20E5CE3E6000FF838 /* ftcid.c in Sources */,
-				3E7325F30E5CE3E6000FF838 /* ftgxval.c in Sources */,
-				3E7325F40E5CE3E6000FF838 /* ftglyph.c in Sources */,
-				3E7325F50E5CE3E6000FF838 /* ftsynth.c in Sources */,
-				3E7325F60E5CE3E6000FF838 /* ftstroke.c in Sources */,
-				3E7325F70E5CE3E6000FF838 /* ftlcdfil.c in Sources */,
-				3E7325F80E5CE3E6000FF838 /* ftgasp.c in Sources */,
-				3E7325F90E5CE3E6000FF838 /* ftpfr.c in Sources */,
-				3E7325FA0E5CE3E6000FF838 /* ftpatent.c in Sources */,
-				3E7325FB0E5CE3E6000FF838 /* ftotval.c in Sources */,
-				3E7325FC0E5CE3E6000FF838 /* ftmm.c in Sources */,
-				3E7325FD0E5CE3E6000FF838 /* ftbbox.c in Sources */,
-				3E7325FE0E5CE3E6000FF838 /* ftwinfnt.c in Sources */,
-				3E7325FF0E5CE3E6000FF838 /* fttype1.c in Sources */,
-				3E7326000E5CE3E6000FF838 /* ftbitmap.c in Sources */,
-				3E7326010E5CE3E6000FF838 /* ftxf86.c in Sources */,
-				3E7326020E5CE3E6000FF838 /* truetype.c in Sources */,
-				3E7326030E5CE3E6000FF838 /* type1.c in Sources */,
-				3E7326040E5CE3E6000FF838 /* cff.c in Sources */,
-				3E7326050E5CE3E6000FF838 /* type1cid.c in Sources */,
-				3E7326060E5CE3E6000FF838 /* pfr.c in Sources */,
-				3E7326070E5CE3E6000FF838 /* type42.c in Sources */,
-				3E7326080E5CE3E6000FF838 /* winfnt.c in Sources */,
-				3E7326090E5CE3E6000FF838 /* pcf.c in Sources */,
-				3E73260A0E5CE3E6000FF838 /* bdf.c in Sources */,
-				3E73260B0E5CE3E6000FF838 /* sfnt.c in Sources */,
-				3E73260C0E5CE3E6000FF838 /* autofit.c in Sources */,
-				3E73260D0E5CE3E6000FF838 /* pshinter.c in Sources */,
-				3E73260E0E5CE3E6000FF838 /* raster.c in Sources */,
-				3E73260F0E5CE3E6000FF838 /* smooth.c in Sources */,
-				3E7326100E5CE3E6000FF838 /* ftcache.c in Sources */,
-				3E7326110E5CE3E6000FF838 /* ftgzip.c in Sources */,
-				3E7326120E5CE3E6000FF838 /* ftlzw.c in Sources */,
-				3E7326130E5CE3E6000FF838 /* psaux.c in Sources */,
-				3E7326140E5CE3E6000FF838 /* psmodule.c in Sources */,
+				EA0E44210E5E245700B5EBF1 /* psnames.c in Sources */,
+				EA0E44220E5E245700B5EBF1 /* psaux.c in Sources */,
+				EA0E44230E5E245700B5EBF1 /* ftlzw.c in Sources */,
+				EA0E44240E5E245700B5EBF1 /* ftgzip.c in Sources */,
+				EA0E44250E5E245700B5EBF1 /* ftcache.c in Sources */,
+				EA0E44260E5E245700B5EBF1 /* smooth.c in Sources */,
+				EA0E44270E5E245700B5EBF1 /* raster.c in Sources */,
+				EA0E44280E5E245700B5EBF1 /* pshinter.c in Sources */,
+				EA0E44290E5E245700B5EBF1 /* autofit.c in Sources */,
+				EA0E442A0E5E245700B5EBF1 /* sfnt.c in Sources */,
+				EA0E442B0E5E245700B5EBF1 /* bdf.c in Sources */,
+				EA0E442C0E5E245700B5EBF1 /* pcf.c in Sources */,
+				EA0E442D0E5E245700B5EBF1 /* winfnt.c in Sources */,
+				EA0E442E0E5E245700B5EBF1 /* type42.c in Sources */,
+				EA0E442F0E5E245700B5EBF1 /* pfr.c in Sources */,
+				EA0E44300E5E245700B5EBF1 /* type1cid.c in Sources */,
+				EA0E44310E5E245700B5EBF1 /* cff.c in Sources */,
+				EA0E44320E5E245700B5EBF1 /* type1.c in Sources */,
+				EA0E44330E5E245700B5EBF1 /* truetype.c in Sources */,
+				EA0E44340E5E245700B5EBF1 /* ftinit.c in Sources */,
+				EA0E44350E5E245700B5EBF1 /* ftsystem.c in Sources */,
+				EA0E44360E5E245700B5EBF1 /* ftdebug.c in Sources */,
+				EA0E44370E5E245700B5EBF1 /* ftbase.c in Sources */,
+				EA0E44380E5E245700B5EBF1 /* ftbdf.c in Sources */,
+				EA0E44390E5E245700B5EBF1 /* ftcid.c in Sources */,
+				EA0E443A0E5E245700B5EBF1 /* ftgxval.c in Sources */,
+				EA0E443B0E5E245700B5EBF1 /* ftglyph.c in Sources */,
+				EA0E443C0E5E245700B5EBF1 /* ftsynth.c in Sources */,
+				EA0E443D0E5E245700B5EBF1 /* ftstroke.c in Sources */,
+				EA0E443E0E5E245700B5EBF1 /* ftlcdfil.c in Sources */,
+				EA0E443F0E5E245700B5EBF1 /* ftgasp.c in Sources */,
+				EA0E44400E5E245700B5EBF1 /* ftpfr.c in Sources */,
+				EA0E44410E5E245700B5EBF1 /* ftpatent.c in Sources */,
+				EA0E44420E5E245700B5EBF1 /* ftotval.c in Sources */,
+				EA0E44430E5E245700B5EBF1 /* ftmm.c in Sources */,
+				EA0E44440E5E245700B5EBF1 /* ftbbox.c in Sources */,
+				EA0E44450E5E245700B5EBF1 /* ftwinfnt.c in Sources */,
+				EA0E44460E5E245700B5EBF1 /* fttype1.c in Sources */,
+				EA0E44470E5E245700B5EBF1 /* ftbitmap.c in Sources */,
+				EA0E44480E5E245700B5EBF1 /* ftxf86.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,46 +454,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA7CF5B90E2EC888006E9E8A /* ftinit.c in Sources */,
-				EA7CF5BA0E2EC888006E9E8A /* ftsystem.c in Sources */,
-				EA7CF5BB0E2EC888006E9E8A /* ftdebug.c in Sources */,
-				EA7CF5CE0E2ECC36006E9E8A /* ftbase.c in Sources */,
-				EA7CF5CF0E2ECC36006E9E8A /* ftbdf.c in Sources */,
-				EA7CF5D00E2ECC36006E9E8A /* ftcid.c in Sources */,
-				EA7CF5D10E2ECC36006E9E8A /* ftgxval.c in Sources */,
-				EA7CF5D20E2ECC36006E9E8A /* ftglyph.c in Sources */,
-				EA7CF5D30E2ECC36006E9E8A /* ftsynth.c in Sources */,
-				EA7CF5D40E2ECC36006E9E8A /* ftstroke.c in Sources */,
-				EA7CF5D50E2ECC36006E9E8A /* ftlcdfil.c in Sources */,
-				EA7CF5D60E2ECC36006E9E8A /* ftgasp.c in Sources */,
-				EA7CF5D70E2ECC36006E9E8A /* ftpfr.c in Sources */,
-				EA7CF5D80E2ECC36006E9E8A /* ftpatent.c in Sources */,
-				EA7CF5D90E2ECC36006E9E8A /* ftotval.c in Sources */,
-				EA7CF5DA0E2ECC36006E9E8A /* ftmm.c in Sources */,
-				EA7CF5DB0E2ECC36006E9E8A /* ftbbox.c in Sources */,
-				EA7CF5DC0E2ECC36006E9E8A /* ftwinfnt.c in Sources */,
-				EA7CF5DD0E2ECC36006E9E8A /* fttype1.c in Sources */,
-				EA7CF5DE0E2ECC36006E9E8A /* ftbitmap.c in Sources */,
-				EA7CF5DF0E2ECC36006E9E8A /* ftxf86.c in Sources */,
-				EA7CF5E10E2ECC49006E9E8A /* truetype.c in Sources */,
-				EA7CF5E30E2ECC56006E9E8A /* type1.c in Sources */,
-				EA7CF5E80E2ECC63006E9E8A /* cff.c in Sources */,
-				EA7CF5EA0E2ECC76006E9E8A /* type1cid.c in Sources */,
-				EA7CF5EC0E2ECC81006E9E8A /* pfr.c in Sources */,
-				EA7CF5EE0E2ECC8B006E9E8A /* type42.c in Sources */,
-				EA7CF5F00E2ECC9A006E9E8A /* winfnt.c in Sources */,
-				EA7CF5F20E2ECCA2006E9E8A /* pcf.c in Sources */,
-				EA7CF5F60E2ECCAB006E9E8A /* bdf.c in Sources */,
-				EA7CF5F80E2ECCB5006E9E8A /* sfnt.c in Sources */,
-				EA7CF5FA0E2ECCC1006E9E8A /* autofit.c in Sources */,
-				EA7CF5FC0E2ECCD9006E9E8A /* pshinter.c in Sources */,
-				EA7CF5FE0E2ECCE5006E9E8A /* raster.c in Sources */,
-				EA7CF6000E2ECCEF006E9E8A /* smooth.c in Sources */,
-				EA7CF6020E2ECD00006E9E8A /* ftcache.c in Sources */,
-				EA7CF6040E2ECD27006E9E8A /* ftgzip.c in Sources */,
-				EA7CF6060E2ECD31006E9E8A /* ftlzw.c in Sources */,
-				EA7CF6080E2ECD3B006E9E8A /* psaux.c in Sources */,
-				EA7CF60A0E2ECD4D006E9E8A /* psmodule.c in Sources */,
+				EA7CF60A0E2ECD4D006E9E8A /* psnames.c in Sources */,
+				EA0E43860E5E22D400B5EBF1 /* psaux.c in Sources */,
+				EA0E43880E5E22F400B5EBF1 /* ftlzw.c in Sources */,
+				EA0E438A0E5E230C00B5EBF1 /* ftgzip.c in Sources */,
+				EA0E438C0E5E231700B5EBF1 /* ftcache.c in Sources */,
+				EA0E438E0E5E232100B5EBF1 /* smooth.c in Sources */,
+				EA0E43900E5E232A00B5EBF1 /* raster.c in Sources */,
+				EA0E43920E5E233300B5EBF1 /* pshinter.c in Sources */,
+				EA0E43940E5E233C00B5EBF1 /* autofit.c in Sources */,
+				EA0E43960E5E234600B5EBF1 /* sfnt.c in Sources */,
+				EA0E43980E5E234F00B5EBF1 /* bdf.c in Sources */,
+				EA0E439A0E5E235B00B5EBF1 /* pcf.c in Sources */,
+				EA0E439C0E5E236400B5EBF1 /* winfnt.c in Sources */,
+				EA0E439E0E5E236D00B5EBF1 /* type42.c in Sources */,
+				EA0E43A00E5E237600B5EBF1 /* pfr.c in Sources */,
+				EA0E43A20E5E238700B5EBF1 /* type1cid.c in Sources */,
+				EA0E43A40E5E239000B5EBF1 /* cff.c in Sources */,
+				EA0E43A60E5E239900B5EBF1 /* type1.c in Sources */,
+				EA0E43A80E5E23A100B5EBF1 /* truetype.c in Sources */,
+				EA0E43AA0E5E23CC00B5EBF1 /* ftbase.c in Sources */,
+				EA0E43AC0E5E23D200B5EBF1 /* ftinit.c in Sources */,
+				EA0E43AE0E5E23D800B5EBF1 /* ftsystem.c in Sources */,
+				EA0E43B00E5E23E000B5EBF1 /* ftdebug.c in Sources */,
+				EA0E43B20E5E23E700B5EBF1 /* ftbdf.c in Sources */,
+				EA0E43B40E5E23F000B5EBF1 /* ftcid.c in Sources */,
+				EA0E43B60E5E23FA00B5EBF1 /* ftgxval.c in Sources */,
+				EA0E43B80E5E240200B5EBF1 /* ftglyph.c in Sources */,
+				EA0E43BA0E5E240700B5EBF1 /* ftsynth.c in Sources */,
+				EA0E43BC0E5E240D00B5EBF1 /* ftstroke.c in Sources */,
+				EA0E43BE0E5E241400B5EBF1 /* ftlcdfil.c in Sources */,
+				EA0E43C00E5E241A00B5EBF1 /* ftgasp.c in Sources */,
+				EA0E43C20E5E242000B5EBF1 /* ftpfr.c in Sources */,
+				EA0E43C40E5E242500B5EBF1 /* ftpatent.c in Sources */,
+				EA0E43C60E5E242D00B5EBF1 /* ftotval.c in Sources */,
+				EA0E43C80E5E243300B5EBF1 /* ftmm.c in Sources */,
+				EA0E43CA0E5E243800B5EBF1 /* ftbbox.c in Sources */,
+				EA0E43CC0E5E243D00B5EBF1 /* ftwinfnt.c in Sources */,
+				EA0E43CE0E5E244300B5EBF1 /* fttype1.c in Sources */,
+				EA0E43D00E5E244800B5EBF1 /* ftbitmap.c in Sources */,
+				EA0E43D20E5E244D00B5EBF1 /* ftxf86.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
