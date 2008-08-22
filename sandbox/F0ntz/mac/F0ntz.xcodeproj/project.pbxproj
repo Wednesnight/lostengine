@@ -21,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EA0E475E0E5E35D500B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteInfo = "LostEngine-simulator";
+		};
 		EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
@@ -144,7 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				EA3B974E0E047CFF00B6423B /* libLostEngine.a */,
-				EA422D640E3FCCFE00C82940 /* libLostEngine-iPhone.a */,
+				EA422D640E3FCCFE00C82940 /* libLostEngine-iphone.a */,
+				EA0E475F0E5E35D500B5EBF1 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,6 +203,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		EA0E475F0E5E35D500B5EBF1 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = EA0E475E0E5E35D500B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EA3B974E0E047CFF00B6423B /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -202,10 +217,10 @@
 			remoteRef = EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA422D640E3FCCFE00C82940 /* libLostEngine-iPhone.a */ = {
+		EA422D640E3FCCFE00C82940 /* libLostEngine-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iPhone.a";
+			path = "libLostEngine-iphone.a";
 			remoteRef = EA422D630E3FCCFE00C82940 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -336,7 +351,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;

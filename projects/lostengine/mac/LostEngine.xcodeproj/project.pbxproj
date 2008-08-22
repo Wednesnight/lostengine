@@ -23,9 +23,6 @@
 		3E4129690E4A3062000CC2B8 /* MaterialOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129680E4A3062000CC2B8 /* MaterialOBJ.h */; };
 		3E4129AB0E4A53AF000CC2B8 /* ParserOBJ.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E4129AA0E4A53AF000CC2B8 /* ParserOBJ.h */; };
 		3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
-		3E7324510E5CDC3E000FF838 /* libzlib-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7321090E5CC556000FF838 /* libzlib-iphone.a */; };
-		3E7324530E5CDC3E000FF838 /* libluabind-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7323250E5CD46F000FF838 /* libluabind-iphone.a */; };
-		3E7324540E5CDC3E000FF838 /* liblua-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7323620E5CD593000FF838 /* liblua-iphone.a */; };
 		3E7324FE0E5CE3A4000FF838 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
 		3E7324FF0E5CE3A4000FF838 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94680E04639D00B6423B /* Timer.h */; };
 		3E7325000E5CE3A4000FF838 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
@@ -133,16 +130,12 @@
 		3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E73256B0E5CE3A4000FF838 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
-		3E7326490E5CE4F2000FF838 /* libzlib-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325A00E5CE3C3000FF838 /* libzlib-simulator.a */; };
-		3E73264B0E5CE4F2000FF838 /* libluabind-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325E80E5CE3DB000FF838 /* libluabind-simulator.a */; };
-		3E73264C0E5CE4F2000FF838 /* liblua-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7325C90E5CE3D0000FF838 /* liblua-simulator.a */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
 		3E94632F0E5173BB00F67187 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */; };
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
 		3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
 		3EBEE8900E3A05190055A8D2 /* AABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEE88F0E3A05190055A8D2 /* AABB.h */; };
-		3ED38F690E3788430055BDA7 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ED38F680E3788330055BDA7 /* libglfw.a */; };
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
@@ -159,6 +152,16 @@
 		EA0E44A50E5E24DC00B5EBF1 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A00E5E24D300B5EBF1 /* libfreetype.a */; };
 		EA0E44A60E5E24EA00B5EBF1 /* libfreetype-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A20E5E24D300B5EBF1 /* libfreetype-iphone.a */; };
 		EA0E44A70E5E24F800B5EBF1 /* libfreetype-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A40E5E24D300B5EBF1 /* libfreetype-simulator.a */; };
+		EA0E44EB0E5E281200B5EBF1 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44EA0E5E280C00B5EBF1 /* libglfw.a */; };
+		EA0E45C50E5E2A4200B5EBF1 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E45BC0E5E29FA00B5EBF1 /* liblua.a */; };
+		EA0E45D90E5E2AE600B5EBF1 /* liblua-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E45BE0E5E29FA00B5EBF1 /* liblua-iphone.a */; };
+		EA0E45DE0E5E2B1800B5EBF1 /* liblua-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E45C00E5E29FA00B5EBF1 /* liblua-simulator.a */; };
+		EA0E46770E5E30C600B5EBF1 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46700E5E30AD00B5EBF1 /* libzlib.a */; };
+		EA0E46780E5E30CF00B5EBF1 /* libzlib-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46720E5E30AD00B5EBF1 /* libzlib-iphone.a */; };
+		EA0E46790E5E30DC00B5EBF1 /* libzlib-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46740E5E30AD00B5EBF1 /* libzlib-simulator.a */; };
+		EA0E47250E5E34CE00B5EBF1 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E471E0E5E34B000B5EBF1 /* libluabind.a */; };
+		EA0E472B0E5E351C00B5EBF1 /* libluabind-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E47220E5E34B000B5EBF1 /* libluabind-simulator.a */; };
+		EA0E472C0E5E352C00B5EBF1 /* libluabind-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E47200E5E34B000B5EBF1 /* libluabind-iphone.a */; };
 		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
 		EA24DAEB0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */; };
@@ -172,8 +175,6 @@
 		EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
 		EA2BC5390E3CAB5300C0A216 /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
 		EA2BC5420E3CAF0B00C0A216 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
-		EA3B94430E04626D00B6423B /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B943D0E04624400B6423B /* libluabind.a */; };
-		EA3B94440E04627100B6423B /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B942E0E04622200B6423B /* liblua.a */; };
 		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
 		EA3B94500E0462E200B6423B /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA3B952E0E04639D00B6423B /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
@@ -321,7 +322,6 @@
 		EA6711C20E3E89DB00B961EC /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95040E04639D00B6423B /* Repository.h */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
-		EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7CF5430E2EAE70006E9E8A /* libzlib.a */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A35310E297E3B0090BAD0 /* LuaLostCommonLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */; };
 		EA9A35DF0E299C540090BAD0 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
@@ -352,104 +352,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3E7321080E5CC556000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7321020E5CC538000FF838;
-			remoteInfo = "zlib-iphone";
-		};
-		3E73211A0E5CC583000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7321010E5CC538000FF838;
-			remoteInfo = "zlib-iphone";
-		};
-		3E7323240E5CD46F000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E73231E0E5CD451000FF838;
-			remoteInfo = "luabind-iphone";
-		};
-		3E7323610E5CD593000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E73235E0E5CD575000FF838;
-			remoteInfo = "lua-iphone";
-		};
-		3E7323660E5CD604000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7323040E5CD451000FF838;
-			remoteInfo = "luabind-iphone";
-		};
-		3E7323680E5CD60A000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E73233A0E5CD575000FF838;
-			remoteInfo = "lua-iphone";
-		};
-		3E73259F0E5CE3C3000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E73259D0E5CE3C3000FF838;
-			remoteInfo = "zlib-iphone copy";
-		};
-		3E7325C80E5CE3D0000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7325C60E5CE3D0000FF838;
-			remoteInfo = "lua-iphone copy";
-		};
-		3E7325E70E5CE3DB000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7325E50E5CE3DB000FF838;
-			remoteInfo = "luabind-iphone copy";
-		};
-		3E73263B0E5CE4C0000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7325CB0E5CE3DB000FF838;
-			remoteInfo = "luabind-simulator";
-		};
-		3E73263D0E5CE4C0000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E73258A0E5CE3C3000FF838;
-			remoteInfo = "zlib-simulator";
-		};
-		3E73263F0E5CE4C0000FF838 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7325A20E5CE3D0000FF838;
-			remoteInfo = "lua-simulator";
-		};
-		3ED38F670E3788330055BDA7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED38F600E3788330055BDA7 /* glfw.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC06F0554671400DB518D;
-			remoteInfo = glfw;
-		};
-		3ED38FD60E378B1C0055BDA7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ED38F600E3788330055BDA7 /* glfw.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC06E0554671400DB518D;
-			remoteInfo = glfw;
-		};
 		EA0E431A0E5E075300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */;
@@ -478,13 +380,6 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = boost;
 		};
-		EA0E43240E5E078E00B5EBF1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = boost;
-		};
 		EA0E43280E5E07AC00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */;
@@ -496,64 +391,190 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = freetype;
 		};
 		EA0E44A10E5E24D300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7322BE0E5CD341000FF838 /* libfreetype-iphone.a */;
+			remoteGlobalIDString = 3E7322BE0E5CD341000FF838;
 			remoteInfo = "freetype-iphone";
 		};
 		EA0E44A30E5E24D300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7326190E5CE3E6000FF838 /* libfreetype-simulator.a */;
+			remoteGlobalIDString = 3E7326190E5CE3E6000FF838;
 			remoteInfo = "freetype-simulator";
 		};
-		EA3B942D0E04622200B6423B /* PBXContainerItemProxy */ = {
+		EA0E44E90E5E280C00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
+			containerPortal = EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC06F0554671400DB518D;
+			remoteInfo = glfw;
+		};
+		EA0E45BB0E5E29FA00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = lua;
 		};
-		EA3B943C0E04624400B6423B /* PBXContainerItemProxy */ = {
+		EA0E45BD0E5E29FA00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = luabind;
+			remoteGlobalIDString = 3E73235E0E5CD575000FF838;
+			remoteInfo = "lua-iphone";
 		};
-		EA3B943F0E04625B00B6423B /* PBXContainerItemProxy */ = {
+		EA0E45BF0E5E29FA00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = luabind;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325C60E5CE3D0000FF838;
+			remoteInfo = "lua-simulator";
 		};
-		EA3B94410E04626000B6423B /* PBXContainerItemProxy */ = {
+		EA0E45C10E5E2A1E00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B94260E04622200B6423B /* lua.xcodeproj */;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = lua;
 		};
-		EA7CF5420E2EAE70006E9E8A /* PBXContainerItemProxy */ = {
+		EA0E45C30E5E2A2200B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
+			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = freetype;
+		};
+		EA0E45D30E5E2AB400B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E73233A0E5CD575000FF838;
+			remoteInfo = "lua-iphone";
+		};
+		EA0E45D50E5E2AB700B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E73228F0E5CD341000FF838;
+			remoteInfo = "freetype-iphone";
+		};
+		EA0E45D70E5E2AD200B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7320DA0E5CC40B000FF838;
+			remoteInfo = "boost-iphone";
+		};
+		EA0E45DA0E5E2AF300B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7325A20E5CE3D0000FF838;
+			remoteInfo = "lua-simulator";
+		};
+		EA0E45DC0E5E2AF600B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7325EA0E5CE3E6000FF838;
+			remoteInfo = "freetype-simulator";
+		};
+		EA0E466F0E5E30AD00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = zlib;
 		};
-		EA7CF5450E2EAE9E006E9E8A /* PBXContainerItemProxy */ = {
+		EA0E46710E5E30AD00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7321020E5CC538000FF838;
+			remoteInfo = "zlib-iphone";
+		};
+		EA0E46730E5E30AD00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E73259D0E5CE3C3000FF838;
+			remoteInfo = "zlib-simulator";
+		};
+		EA0E46750E5E30BA00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = zlib;
+		};
+		EA0E467A0E5E30E500B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7321010E5CC538000FF838;
+			remoteInfo = "zlib-iphone";
+		};
+		EA0E467C0E5E30F500B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E73258A0E5CE3C3000FF838;
+			remoteInfo = "zlib-simulator";
+		};
+		EA0E46800E5E324E00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC06E0554671400DB518D;
+			remoteInfo = glfw;
+		};
+		EA0E471D0E5E34B000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = luabind;
+		};
+		EA0E471F0E5E34B000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E73231E0E5CD451000FF838;
+			remoteInfo = "luabind-iphone";
+		};
+		EA0E47210E5E34B000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325E50E5CE3DB000FF838;
+			remoteInfo = "luabind-simulator";
+		};
+		EA0E47230E5E34C600B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = luabind;
+		};
+		EA0E47260E5E34DA00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7323040E5CD451000FF838;
+			remoteInfo = "luabind-iphone";
+		};
+		EA0E47290E5E350500B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7325CB0E5CE3DB000FF838;
+			remoteInfo = "luabind-simulator";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -574,7 +595,6 @@
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
 		3EBEE88F0E3A05190055A8D2 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
-		3ED38F600E3788330055BDA7 /* glfw.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = glfw.xcodeproj; path = ../../../thirdparty/glfw/glfw_2_6/mac/glfw.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
 		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
 		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
@@ -584,6 +604,10 @@
 		EA0E04050E4E0FC1001556D6 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = freetype.xcodeproj; path = ../../../thirdparty/freetype2/freetype_2_3_7/xcode/freetype.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = glfw.xcodeproj; path = ../../../thirdparty/glfw/glfw_2_6/xcode/glfw.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_3/xcode/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/xcode/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7/xcode/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA0F2DE10E37D68C0001F530 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		EA0F2E840E381C390001F530 /* ArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayBuffer.h; sourceTree = "<group>"; };
 		EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostEventEvent.cpp; sourceTree = "<group>"; };
@@ -597,8 +621,6 @@
 		EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementArrayBuffer.h; sourceTree = "<group>"; };
 		EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedBuffer.h; sourceTree = "<group>"; };
 		EA2BC5410E3CAF0B00C0A216 /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
-		EA3B94260E04622200B6423B /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_3/mac/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA3B94350E04624300B6423B /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7/mac/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
 		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EA3B94660E04639D00B6423B /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
@@ -658,7 +680,6 @@
 		EA6711250E3E885300B961EC /* libLostEngine-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
-		EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/mac/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonLog.cpp; sourceTree = "<group>"; };
 		EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostResourceLoader.cpp; sourceTree = "<group>"; };
@@ -695,9 +716,9 @@
 			files = (
 				EA0E44A70E5E24F800B5EBF1 /* libfreetype-simulator.a in Frameworks */,
 				EA0E43270E5E07A300B5EBF1 /* libboost-simulator.a in Frameworks */,
-				3E7326490E5CE4F2000FF838 /* libzlib-simulator.a in Frameworks */,
-				3E73264B0E5CE4F2000FF838 /* libluabind-simulator.a in Frameworks */,
-				3E73264C0E5CE4F2000FF838 /* liblua-simulator.a in Frameworks */,
+				EA0E45DE0E5E2B1800B5EBF1 /* liblua-simulator.a in Frameworks */,
+				EA0E46790E5E30DC00B5EBF1 /* libzlib-simulator.a in Frameworks */,
+				EA0E472B0E5E351C00B5EBF1 /* libluabind-simulator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,12 +726,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA0E46770E5E30C600B5EBF1 /* libzlib.a in Frameworks */,
+				EA0E45C50E5E2A4200B5EBF1 /* liblua.a in Frameworks */,
+				EA0E47250E5E34CE00B5EBF1 /* libluabind.a in Frameworks */,
+				EA0E44EB0E5E281200B5EBF1 /* libglfw.a in Frameworks */,
 				EA0E44A50E5E24DC00B5EBF1 /* libfreetype.a in Frameworks */,
 				EA0E43220E5E077C00B5EBF1 /* libboost.a in Frameworks */,
-				3ED38F690E3788430055BDA7 /* libglfw.a in Frameworks */,
-				EA3B94430E04626D00B6423B /* libluabind.a in Frameworks */,
-				EA3B94440E04627100B6423B /* liblua.a in Frameworks */,
-				EA7CF5440E2EAE90006E9E8A /* libzlib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,11 +739,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA0E46780E5E30CF00B5EBF1 /* libzlib-iphone.a in Frameworks */,
+				EA0E45D90E5E2AE600B5EBF1 /* liblua-iphone.a in Frameworks */,
 				EA0E44A60E5E24EA00B5EBF1 /* libfreetype-iphone.a in Frameworks */,
 				EA0E43260E5E079900B5EBF1 /* libboost-iphone.a in Frameworks */,
-				3E7324510E5CDC3E000FF838 /* libzlib-iphone.a in Frameworks */,
-				3E7324530E5CDC3E000FF838 /* libluabind-iphone.a in Frameworks */,
-				3E7324540E5CDC3E000FF838 /* liblua-iphone.a in Frameworks */,
+				EA0E472C0E5E352C00B5EBF1 /* libluabind-iphone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,14 +826,6 @@
 			name = camera;
 			sourceTree = "<group>";
 		};
-		3ED38F610E3788330055BDA7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3ED38F680E3788330055BDA7 /* libglfw.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		EA0E43120E5E075300B5EBF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,12 +846,40 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EA3B94270E04622200B6423B /* Products */ = {
+		EA0E44E30E5E280C00B5EBF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B942E0E04622200B6423B /* liblua.a */,
-				3E7323620E5CD593000FF838 /* liblua-iphone.a */,
-				3E7325C90E5CE3D0000FF838 /* liblua-simulator.a */,
+				EA0E44EA0E5E280C00B5EBF1 /* libglfw.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA0E45B30E5E29FA00B5EBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E45BC0E5E29FA00B5EBF1 /* liblua.a */,
+				EA0E45BE0E5E29FA00B5EBF1 /* liblua-iphone.a */,
+				EA0E45C00E5E29FA00B5EBF1 /* liblua-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA0E46670E5E30AD00B5EBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E46700E5E30AD00B5EBF1 /* libzlib.a */,
+				EA0E46720E5E30AD00B5EBF1 /* libzlib-iphone.a */,
+				EA0E46740E5E30AD00B5EBF1 /* libzlib-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA0E47150E5E34B000B5EBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E471E0E5E34B000B5EBF1 /* libluabind.a */,
+				EA0E47200E5E34B000B5EBF1 /* libluabind-iphone.a */,
+				EA0E47220E5E34B000B5EBF1 /* libluabind-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -846,7 +887,7 @@
 		EA3B94300E04622D00B6423B /* Lua */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B94260E04622200B6423B /* lua.xcodeproj */,
+				EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */,
 			);
 			name = Lua;
 			sourceTree = "<group>";
@@ -854,19 +895,9 @@
 		EA3B94310E04623600B6423B /* luabind */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B94350E04624300B6423B /* luabind.xcodeproj */,
+				EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */,
 			);
 			name = luabind;
-			sourceTree = "<group>";
-		};
-		EA3B94360E04624300B6423B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA3B943D0E04624400B6423B /* libluabind.a */,
-				3E7323250E5CD46F000FF838 /* libluabind-iphone.a */,
-				3E7325E80E5CE3DB000FF838 /* libluabind-simulator.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		EA3B94450E04628C00B6423B /* freetype2 */ = {
@@ -888,7 +919,7 @@
 		EA3B944B0E0462BB00B6423B /* GLFW */ = {
 			isa = PBXGroup;
 			children = (
-				3ED38F600E3788330055BDA7 /* glfw.xcodeproj */,
+				EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */,
 			);
 			name = GLFW;
 			sourceTree = "<group>";
@@ -904,7 +935,7 @@
 		EA3B94510E0462F400B6423B /* zlib */ = {
 			isa = PBXGroup;
 			children = (
-				EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */,
+				EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */,
 			);
 			name = zlib;
 			sourceTree = "<group>";
@@ -1144,16 +1175,6 @@
 				EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */,
 			);
 			name = iphone;
-			sourceTree = "<group>";
-		};
-		EA7CF53C0E2EAE70006E9E8A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EA7CF5430E2EAE70006E9E8A /* libzlib.a */,
-				3E7321090E5CC556000FF838 /* libzlib-iphone.a */,
-				3E7325A00E5CE3C3000FF838 /* libzlib-simulator.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1422,10 +1443,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E73263C0E5CE4C0000FF838 /* PBXTargetDependency */,
-				3E73263E0E5CE4C0000FF838 /* PBXTargetDependency */,
-				3E7326400E5CE4C0000FF838 /* PBXTargetDependency */,
 				EA0E43290E5E07AC00B5EBF1 /* PBXTargetDependency */,
+				EA0E45DB0E5E2AF300B5EBF1 /* PBXTargetDependency */,
+				EA0E45DD0E5E2AF600B5EBF1 /* PBXTargetDependency */,
+				EA0E467D0E5E30F500B5EBF1 /* PBXTargetDependency */,
+				EA0E472A0E5E350500B5EBF1 /* PBXTargetDependency */,
 			);
 			name = "LostEngine-simulator";
 			productName = "LostEngine-iPhone";
@@ -1443,11 +1465,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA3B94400E04625B00B6423B /* PBXTargetDependency */,
-				EA3B94420E04626000B6423B /* PBXTargetDependency */,
-				EA7CF5460E2EAE9E006E9E8A /* PBXTargetDependency */,
-				3ED38FD70E378B1C0055BDA7 /* PBXTargetDependency */,
 				EA0E43210E5E076300B5EBF1 /* PBXTargetDependency */,
+				EA0E45C20E5E2A1E00B5EBF1 /* PBXTargetDependency */,
+				EA0E45C40E5E2A2200B5EBF1 /* PBXTargetDependency */,
+				EA0E46760E5E30BA00B5EBF1 /* PBXTargetDependency */,
+				EA0E46810E5E324E00B5EBF1 /* PBXTargetDependency */,
+				EA0E47240E5E34C600B5EBF1 /* PBXTargetDependency */,
 			);
 			name = LostEngine;
 			productName = LostEngine;
@@ -1465,10 +1488,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E73211B0E5CC583000FF838 /* PBXTargetDependency */,
-				3E7323670E5CD604000FF838 /* PBXTargetDependency */,
-				3E7323690E5CD60A000FF838 /* PBXTargetDependency */,
-				EA0E43250E5E078E00B5EBF1 /* PBXTargetDependency */,
+				EA0E45D40E5E2AB400B5EBF1 /* PBXTargetDependency */,
+				EA0E45D60E5E2AB700B5EBF1 /* PBXTargetDependency */,
+				EA0E45D80E5E2AD200B5EBF1 /* PBXTargetDependency */,
+				EA0E467B0E5E30E500B5EBF1 /* PBXTargetDependency */,
+				EA0E47270E5E34DA00B5EBF1 /* PBXTargetDependency */,
 			);
 			name = "LostEngine-iphone";
 			productName = "LostEngine-iPhone";
@@ -1495,20 +1519,20 @@
 					ProjectRef = EA0E44960E5E24D300B5EBF1 /* freetype.xcodeproj */;
 				},
 				{
-					ProductGroup = 3ED38F610E3788330055BDA7 /* Products */;
-					ProjectRef = 3ED38F600E3788330055BDA7 /* glfw.xcodeproj */;
+					ProductGroup = EA0E44E30E5E280C00B5EBF1 /* Products */;
+					ProjectRef = EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */;
 				},
 				{
-					ProductGroup = EA3B94270E04622200B6423B /* Products */;
-					ProjectRef = EA3B94260E04622200B6423B /* lua.xcodeproj */;
+					ProductGroup = EA0E45B30E5E29FA00B5EBF1 /* Products */;
+					ProjectRef = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
 				},
 				{
-					ProductGroup = EA3B94360E04624300B6423B /* Products */;
-					ProjectRef = EA3B94350E04624300B6423B /* luabind.xcodeproj */;
+					ProductGroup = EA0E47150E5E34B000B5EBF1 /* Products */;
+					ProjectRef = EA0E47140E5E34B000B5EBF1 /* luabind.xcodeproj */;
 				},
 				{
-					ProductGroup = EA7CF53C0E2EAE70006E9E8A /* Products */;
-					ProjectRef = EA7CF53B0E2EAE70006E9E8A /* zlib.xcodeproj */;
+					ProductGroup = EA0E46670E5E30AD00B5EBF1 /* Products */;
+					ProjectRef = EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1521,55 +1545,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3E7321090E5CC556000FF838 /* libzlib-iphone.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libzlib-iphone.a";
-			remoteRef = 3E7321080E5CC556000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7323250E5CD46F000FF838 /* libluabind-iphone.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluabind-iphone.a";
-			remoteRef = 3E7323240E5CD46F000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7323620E5CD593000FF838 /* liblua-iphone.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "liblua-iphone.a";
-			remoteRef = 3E7323610E5CD593000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7325A00E5CE3C3000FF838 /* libzlib-simulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libzlib-simulator.a";
-			remoteRef = 3E73259F0E5CE3C3000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7325C90E5CE3D0000FF838 /* liblua-simulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "liblua-simulator.a";
-			remoteRef = 3E7325C80E5CE3D0000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3E7325E80E5CE3DB000FF838 /* libluabind-simulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libluabind-simulator.a";
-			remoteRef = 3E7325E70E5CE3DB000FF838 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3ED38F680E3788330055BDA7 /* libglfw.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libglfw.a;
-			remoteRef = 3ED38F670E3788330055BDA7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		EA0E431B0E5E075300B5EBF1 /* libboost.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1612,25 +1587,74 @@
 			remoteRef = EA0E44A30E5E24D300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA3B942E0E04622200B6423B /* liblua.a */ = {
+		EA0E44EA0E5E280C00B5EBF1 /* libglfw.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libglfw.a;
+			remoteRef = EA0E44E90E5E280C00B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E45BC0E5E29FA00B5EBF1 /* liblua.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = liblua.a;
-			remoteRef = EA3B942D0E04622200B6423B /* PBXContainerItemProxy */;
+			remoteRef = EA0E45BB0E5E29FA00B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA3B943D0E04624400B6423B /* libluabind.a */ = {
+		EA0E45BE0E5E29FA00B5EBF1 /* liblua-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libluabind.a;
-			remoteRef = EA3B943C0E04624400B6423B /* PBXContainerItemProxy */;
+			path = "liblua-iphone.a";
+			remoteRef = EA0E45BD0E5E29FA00B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA7CF5430E2EAE70006E9E8A /* libzlib.a */ = {
+		EA0E45C00E5E29FA00B5EBF1 /* liblua-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "liblua-simulator.a";
+			remoteRef = EA0E45BF0E5E29FA00B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E46700E5E30AD00B5EBF1 /* libzlib.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libzlib.a;
-			remoteRef = EA7CF5420E2EAE70006E9E8A /* PBXContainerItemProxy */;
+			remoteRef = EA0E466F0E5E30AD00B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E46720E5E30AD00B5EBF1 /* libzlib-iphone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libzlib-iphone.a";
+			remoteRef = EA0E46710E5E30AD00B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E46740E5E30AD00B5EBF1 /* libzlib-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libzlib-simulator.a";
+			remoteRef = EA0E46730E5E30AD00B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E471E0E5E34B000B5EBF1 /* libluabind.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libluabind.a;
+			remoteRef = EA0E471D0E5E34B000B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E47200E5E34B000B5EBF1 /* libluabind-iphone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libluabind-iphone.a";
+			remoteRef = EA0E471F0E5E34B000B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E47220E5E34B000B5EBF1 /* libluabind-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libluabind-simulator.a";
+			remoteRef = EA0E47210E5E34B000B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1758,70 +1782,85 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3E73211B0E5CC583000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "zlib-iphone";
-			targetProxy = 3E73211A0E5CC583000FF838 /* PBXContainerItemProxy */;
-		};
-		3E7323670E5CD604000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "luabind-iphone";
-			targetProxy = 3E7323660E5CD604000FF838 /* PBXContainerItemProxy */;
-		};
-		3E7323690E5CD60A000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "lua-iphone";
-			targetProxy = 3E7323680E5CD60A000FF838 /* PBXContainerItemProxy */;
-		};
-		3E73263C0E5CE4C0000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "luabind-simulator";
-			targetProxy = 3E73263B0E5CE4C0000FF838 /* PBXContainerItemProxy */;
-		};
-		3E73263E0E5CE4C0000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "zlib-simulator";
-			targetProxy = 3E73263D0E5CE4C0000FF838 /* PBXContainerItemProxy */;
-		};
-		3E7326400E5CE4C0000FF838 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "lua-simulator";
-			targetProxy = 3E73263F0E5CE4C0000FF838 /* PBXContainerItemProxy */;
-		};
-		3ED38FD70E378B1C0055BDA7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = glfw;
-			targetProxy = 3ED38FD60E378B1C0055BDA7 /* PBXContainerItemProxy */;
-		};
 		EA0E43210E5E076300B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = boost;
 			targetProxy = EA0E43200E5E076300B5EBF1 /* PBXContainerItemProxy */;
-		};
-		EA0E43250E5E078E00B5EBF1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = boost;
-			targetProxy = EA0E43240E5E078E00B5EBF1 /* PBXContainerItemProxy */;
 		};
 		EA0E43290E5E07AC00B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "boost-simulator";
 			targetProxy = EA0E43280E5E07AC00B5EBF1 /* PBXContainerItemProxy */;
 		};
-		EA3B94400E04625B00B6423B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = luabind;
-			targetProxy = EA3B943F0E04625B00B6423B /* PBXContainerItemProxy */;
-		};
-		EA3B94420E04626000B6423B /* PBXTargetDependency */ = {
+		EA0E45C20E5E2A1E00B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = lua;
-			targetProxy = EA3B94410E04626000B6423B /* PBXContainerItemProxy */;
+			targetProxy = EA0E45C10E5E2A1E00B5EBF1 /* PBXContainerItemProxy */;
 		};
-		EA7CF5460E2EAE9E006E9E8A /* PBXTargetDependency */ = {
+		EA0E45C40E5E2A2200B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = freetype;
+			targetProxy = EA0E45C30E5E2A2200B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E45D40E5E2AB400B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lua-iphone";
+			targetProxy = EA0E45D30E5E2AB400B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E45D60E5E2AB700B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "freetype-iphone";
+			targetProxy = EA0E45D50E5E2AB700B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E45D80E5E2AD200B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "boost-iphone";
+			targetProxy = EA0E45D70E5E2AD200B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E45DB0E5E2AF300B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "lua-simulator";
+			targetProxy = EA0E45DA0E5E2AF300B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E45DD0E5E2AF600B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "freetype-simulator";
+			targetProxy = EA0E45DC0E5E2AF600B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E46760E5E30BA00B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = zlib;
-			targetProxy = EA7CF5450E2EAE9E006E9E8A /* PBXContainerItemProxy */;
+			targetProxy = EA0E46750E5E30BA00B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E467B0E5E30E500B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "zlib-iphone";
+			targetProxy = EA0E467A0E5E30E500B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E467D0E5E30F500B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "zlib-simulator";
+			targetProxy = EA0E467C0E5E30F500B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E46810E5E324E00B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = glfw;
+			targetProxy = EA0E46800E5E324E00B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E47240E5E34C600B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = luabind;
+			targetProxy = EA0E47230E5E34C600B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E47270E5E34DA00B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "luabind-iphone";
+			targetProxy = EA0E47260E5E34DA00B5EBF1 /* PBXContainerItemProxy */;
+		};
+		EA0E472A0E5E350500B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "luabind-simulator";
+			targetProxy = EA0E47290E5E350500B5EBF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1831,14 +1870,18 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngine;
 				VALID_ARCHS = i386;
@@ -1921,10 +1964,17 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(SRCROOT)/../../../../build/Debug-iphoneos\\\"",
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-simulator";
@@ -1958,10 +2008,17 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iphone";
