@@ -26,6 +26,7 @@ namespace lost
       LuaLostMathVec4(state);
       LuaLostApplicationAccelerometerEvent(state);
       LuaLostApplicationTouchEvent(state);
+      LuaLostCameraCamera(state);
       luabind::bind_class_info(state);
     }
   }

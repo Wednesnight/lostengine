@@ -6,12 +6,15 @@ using namespace lost::math;
 
 LOST_LUA_EXPORT_BEGIN(LuaLostMathVec3)
 {
-	module(state)
-	[
-	 class_<Vec3, boost::shared_ptr<Vec3> >("Vec3")
-	 .def(constructor<>())
-	 .def(constructor<float, float, float>())
-	 .def("zero", (void(Vec3::*)()) &Vec3::zero)
-	 ];
+  module(state, "lost")
+  [
+    namespace_("math")
+    [
+      class_<Vec3, boost::shared_ptr<Vec3> >("Vec3")
+	      .def(constructor<>())
+	      .def(constructor<float, float, float>())
+	      .def("zero", (void(Vec3::*)()) &Vec3::zero)
+	  ]
+  ];
 }
 LOST_LUA_EXPORT_END

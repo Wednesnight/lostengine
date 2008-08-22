@@ -4,7 +4,7 @@
 using namespace luabind;
 using namespace lost::camera;
 
-LOST_LUA_EXPORT_BEGIN(bindLostCameraCamera)
+LOST_LUA_EXPORT_BEGIN(LuaLostCameraCamera)
   {
     module(state, "lost")
     [

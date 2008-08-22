@@ -138,10 +138,11 @@ struct Controller
     modelRenderer.reset(new RendererOBJ(mesh, material));
     modelRenderer->size = modelSize;
 
-    camera.reset(new Camera());
-    camera->position(Vec3(0,3,15));
-    camera->target(Vec3(0,3,0));
-    camera->stickToTarget(true);
+    camera = luabind::object_cast<shared_ptr<Camera> >(luabind::globals(*(appInstance->interpreter))["config"]["camera"]);
+//    camera.reset(new Camera());
+//    camera->position(Vec3(0,3,15));
+//    camera->target(Vec3(0,3,0));
+//    camera->stickToTarget(true);
 
     vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);
     vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightDiffuse"]);
@@ -197,7 +198,11 @@ struct Controller
       static double lastTap = 0.0;
       if (event->type == TouchEvent::TOUCHES_BEGAN())
       {
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0) renderNormals = !renderNormals;
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0)
+        {
+          renderNormals = !renderNormals;
+          lastTap = 0.0;
+        }
         lastTap = event->touches[0]->timeStamp;
       }
     }
@@ -211,7 +216,11 @@ struct Controller
         initialized = true;
         lastLength  = len(event->touches[1]->location - event->touches[0]->location);
         
-        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0) renderAABB = !renderAABB;
+        if (lastTap > 0.0 && (event->touches[0]->timeStamp - lastTap) < 1.0)
+        {
+          renderAABB = !renderAABB;
+          lastTap = 0.0;
+        }
         lastTap = event->touches[0]->timeStamp;
       }
       else if (event->type == TouchEvent::TOUCHES_MOVED() && initialized)
@@ -231,7 +240,7 @@ struct Controller
 
   void accelerate(shared_ptr<AccelerometerEvent> event)
   {
-    camera->rotate(Vec3(((event->y > 0.1) ? event->y*0.5 : 0.0), ((event->x > 0.1) ? -1.0*event->x*0.5 : 0.0), 0.0));
+//    camera->rotate(Vec3(((event->y > 0.1) ? event->y*0.5 : 0.0), ((event->x > 0.1) ? -1.0*event->x*0.5 : 0.0), 0.0));
   }
   
 };

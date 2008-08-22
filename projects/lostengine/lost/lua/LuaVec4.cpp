@@ -10,7 +10,7 @@ LOST_LUA_EXPORT_BEGIN(LuaLostMathVec4)
   [
     namespace_("math")
     [
-      class_<Vec4 >("Vec4")
+      class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
         .def(constructor<>())
         .def(constructor<float, float, float, float>())
         .def("clear", &Vec4::clear)
