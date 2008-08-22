@@ -11,8 +11,8 @@
 		8D0C4E8E0486CD37000505A6 /* main.nib in Resources */ = {isa = PBXBuildFile; fileRef = 02345980000FD03B11CA0E72 /* main.nib */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA03D8130DBBEE91001665C3 /* suigeneris.ttf */; };
+		EA0E484E0E5E3E3600B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */; };
 		EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2AFA8F0DC2984F0034A6F5 /* main.cpp */; };
-		EA3B974F0E047D0400B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B974E0E047CFF00B6423B /* libLostEngine.a */; };
 		EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5EA5BC0E023BD100E7349B /* Vera.ttf */; };
 		EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41A0DB53F9800855E60 /* OpenGL.framework */; };
 		EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41B0DB53F9800855E60 /* GLUT.framework */; };
@@ -21,33 +21,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA0E475E0E5E35D500B5EBF1 /* PBXContainerItemProxy */ = {
+		EA0E48480E5E3E3000B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
-			remoteInfo = "LostEngine-simulator";
-		};
-		EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+			containerPortal = EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
-		EA3B97500E047D0D00B6423B /* PBXContainerItemProxy */ = {
+		EA0E484A0E5E3E3000B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = LostEngine;
-		};
-		EA422D630E3FCCFE00C82940 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+			containerPortal = EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EA6711250E3E885300B961EC;
-			remoteInfo = "LostEngine-iPhone";
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA0E484C0E5E3E3000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA0E4A9B0E5E42C000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -60,8 +60,8 @@
 		508344B209E5C41E0093A071 /* F0ntz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = F0ntz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA03D8130DBBEE91001665C3 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../resources/suigeneris.ttf; sourceTree = SOURCE_ROOT; };
+		EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA2AFA8F0DC2984F0034A6F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
-		EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA5EA5BC0E023BD100E7349B /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../resources/Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EAECD41A0DB53F9800855E60 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAECD41B0DB53F9800855E60 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3B974F0E047D0400B6423B /* libLostEngine.a in Frameworks */,
+				EA0E484E0E5E3E3600B5EBF1 /* libLostEngine.a in Frameworks */,
 				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
 				EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */,
 				EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */,
@@ -129,7 +129,7 @@
 		20286C32FDCF999611CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */,
+				EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */,
 				EAECD4510DB542AF00855E60 /* AGL.framework */,
 				EAECD41A0DB53F9800855E60 /* OpenGL.framework */,
 				EAECD41B0DB53F9800855E60 /* GLUT.framework */,
@@ -147,12 +147,12 @@
 			name = "Configuration Files";
 			sourceTree = "<group>";
 		};
-		EA3B974A0E047CFF00B6423B /* Products */ = {
+		EA0E48280E5E3E3000B5EBF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B974E0E047CFF00B6423B /* libLostEngine.a */,
-				EA422D640E3FCCFE00C82940 /* libLostEngine-iphone.a */,
-				EA0E475F0E5E35D500B5EBF1 /* libLostEngine-simulator.a */,
+				EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */,
+				EA0E484B0E5E3E3000B5EBF1 /* libLostEngine-iphone.a */,
+				EA0E484D0E5E3E3000B5EBF1 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA3B97510E047D0D00B6423B /* PBXTargetDependency */,
+				EA0E4A9C0E5E42C000B5EBF1 /* PBXTargetDependency */,
 			);
 			name = F0ntz;
 			productInstallPath = "$(HOME)/Applications";
@@ -191,8 +191,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA3B974A0E047CFF00B6423B /* Products */;
-					ProjectRef = EA3B97490E047CFF00B6423B /* LostEngine.xcodeproj */;
+					ProductGroup = EA0E48280E5E3E3000B5EBF1 /* Products */;
+					ProjectRef = EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -203,25 +203,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA0E475F0E5E35D500B5EBF1 /* libLostEngine-simulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
-			remoteRef = EA0E475E0E5E35D500B5EBF1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		EA3B974E0E047CFF00B6423B /* libLostEngine.a */ = {
+		EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = EA3B974D0E047CFF00B6423B /* PBXContainerItemProxy */;
+			remoteRef = EA0E48480E5E3E3000B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA422D640E3FCCFE00C82940 /* libLostEngine-iphone.a */ = {
+		EA0E484B0E5E3E3000B5EBF1 /* libLostEngine-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libLostEngine-iphone.a";
-			remoteRef = EA422D630E3FCCFE00C82940 /* PBXContainerItemProxy */;
+			remoteRef = EA0E484A0E5E3E3000B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E484D0E5E3E3000B5EBF1 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = EA0E484C0E5E3E3000B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -253,10 +253,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA3B97510E047D0D00B6423B /* PBXTargetDependency */ = {
+		EA0E4A9C0E5E42C000B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LostEngine;
-			targetProxy = EA3B97500E047D0D00B6423B /* PBXContainerItemProxy */;
+			targetProxy = EA0E4A9B0E5E42C000B5EBF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -289,20 +289,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/mac\"",
-					"\"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/mac\"",
-					"\"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_5/mac\"",
-					"\"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/lib/mac\"",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};

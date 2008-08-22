@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		EA3B97070E047BD700B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B97040E047BC100B6423B /* libLostEngine.a */; };
+		EA0E48090E5E3D7800B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48040E5E3D7300B5EBF1 /* libLostEngine.a */; };
 		EA7116C30E2967D600279E0B /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA7116C20E2967D600279E0B /* init */; };
 		EA9A36840E29B1A70090BAD0 /* foo.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA9A367C0E29B1250090BAD0 /* foo.lua */; };
 		EA9A36A00E29B3250090BAD0 /* baz.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA9A36990E29B2FF0090BAD0 /* baz.lua */; };
@@ -21,26 +21,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA3B97030E047BC100B6423B /* PBXContainerItemProxy */ = {
+		EA0E48030E5E3D7300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */;
+			containerPortal = EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
-		EA3B97050E047BCC00B6423B /* PBXContainerItemProxy */ = {
+		EA0E48050E5E3D7300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */;
+			containerPortal = EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA0E48070E5E3D7300B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA0E480A0E5E3D8000B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
-		};
-		EA92A69A0E4A8653009C0681 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EA6711250E3E885300B961EC;
-			remoteInfo = "LostEngine-iPhone";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -48,7 +55,7 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* AppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA7116C20E2967D600279E0B /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
 		EA9A367C0E29B1250090BAD0 /* foo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = foo.lua; sourceTree = "<group>"; };
 		EA9A36990E29B2FF0090BAD0 /* baz.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = baz.lua; sourceTree = "<group>"; };
@@ -65,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3B97070E047BD700B6423B /* libLostEngine.a in Frameworks */,
+				EA0E48090E5E3D7800B5EBF1 /* libLostEngine.a in Frameworks */,
 				EAE813BA0DC9922A00E9331A /* AGL.framework in Frameworks */,
 				EAE813BE0DC9922D00E9331A /* OpenGL.framework in Frameworks */,
 				EAE813C20DC9923400E9331A /* GLUT.framework in Frameworks */,
@@ -111,7 +118,7 @@
 		29B97323FDCFA39411CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */,
+				EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */,
 				EAE813B90DC9922A00E9331A /* AGL.framework */,
 				EAE813BD0DC9922D00E9331A /* OpenGL.framework */,
 				EAE813C10DC9923400E9331A /* GLUT.framework */,
@@ -120,11 +127,12 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		EA3B97000E047BC100B6423B /* Products */ = {
+		EA0E47E30E5E3D7200B5EBF1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B97040E047BC100B6423B /* libLostEngine.a */,
-				EA92A69B0E4A8653009C0681 /* libLostEngine-iPhone.a */,
+				EA0E48040E5E3D7300B5EBF1 /* libLostEngine.a */,
+				EA0E48060E5E3D7300B5EBF1 /* libLostEngine-iphone.a */,
+				EA0E48080E5E3D7300B5EBF1 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -151,7 +159,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA3B97060E047BCC00B6423B /* PBXTargetDependency */,
+				EA0E480B0E5E3D8000B5EBF1 /* PBXTargetDependency */,
 			);
 			name = AppTest;
 			productInstallPath = "$(HOME)/Applications";
@@ -171,8 +179,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA3B97000E047BC100B6423B /* Products */;
-					ProjectRef = EA3B96FF0E047BC100B6423B /* LostEngine.xcodeproj */;
+					ProductGroup = EA0E47E30E5E3D7200B5EBF1 /* Products */;
+					ProjectRef = EA0E47E20E5E3D7200B5EBF1 /* LostEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -183,18 +191,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA3B97040E047BC100B6423B /* libLostEngine.a */ = {
+		EA0E48040E5E3D7300B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = EA3B97030E047BC100B6423B /* PBXContainerItemProxy */;
+			remoteRef = EA0E48030E5E3D7300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA92A69B0E4A8653009C0681 /* libLostEngine-iPhone.a */ = {
+		EA0E48060E5E3D7300B5EBF1 /* libLostEngine-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iPhone.a";
-			remoteRef = EA92A69A0E4A8653009C0681 /* PBXContainerItemProxy */;
+			path = "libLostEngine-iphone.a";
+			remoteRef = EA0E48050E5E3D7300B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E48080E5E3D7300B5EBF1 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = EA0E48070E5E3D7300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -226,10 +241,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA3B97060E047BCC00B6423B /* PBXTargetDependency */ = {
+		EA0E480B0E5E3D8000B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LostEngine;
-			targetProxy = EA3B97050E047BCC00B6423B /* PBXContainerItemProxy */;
+			targetProxy = EA0E480A0E5E3D8000B5EBF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -301,7 +316,7 @@
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
