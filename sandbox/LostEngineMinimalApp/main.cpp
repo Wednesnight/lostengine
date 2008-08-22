@@ -231,7 +231,7 @@ struct Controller
 
   void accelerate(shared_ptr<AccelerometerEvent> event)
   {
-    camera->rotate(Vec3(event->y*0.5, -1.0*event->x*0.5, 0.0));
+    camera->rotate(Vec3(((event->y > 0.1) ? event->y*0.5 : 0.0), ((event->x > 0.1) ? -1.0*event->x*0.5 : 0.0), 0.0));
   }
   
 };

@@ -41,8 +41,8 @@ namespace lost
       math::Vec3 up();
 
       // setters
-      void fovY(const float newFovY);
       void depth(const math::Vec2& newDepth);
+      void fovY(const float newFovY);
       void position(const math::Vec3& newPosition);
       void direction(const math::Vec3& newDirection);
       void stickToTarget(const bool newStickToTarget);

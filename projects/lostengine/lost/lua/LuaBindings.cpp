@@ -24,6 +24,8 @@ namespace lost
       LuaLostLSystemLSystem(state);
       LuaLostMathVec3(state);
       LuaLostMathVec4(state);
+      LuaLostApplicationAccelerometerEvent(state);
+      LuaLostApplicationTouchEvent(state);
       luabind::bind_class_info(state);
     }
   }

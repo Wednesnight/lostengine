@@ -11,6 +11,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		3E251FED0E5EC1C5002CDC21 /* iphone.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E251FEC0E5EC1C5002CDC21 /* iphone.lua */; };
+		3E251FEE0E5EC1C5002CDC21 /* iphone.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E251FEC0E5EC1C5002CDC21 /* iphone.lua */; };
 		3E398C4C0E5080A800D40DDE /* kenny_tri.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E398C4A0E5080A800D40DDE /* kenny_tri.mtl */; };
 		3E398C4D0E5080A800D40DDE /* kenny_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E398C4B0E5080A800D40DDE /* kenny_tri.obj */; };
 		3E7326530E5CE549000FF838 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAF706C50E4B81B000EF62CB /* init */; };
@@ -73,6 +75,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3E251FEC0E5EC1C5002CDC21 /* iphone.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iphone.lua; path = ../../projects/lostengine/lost/camera/controller/iphone.lua; sourceTree = SOURCE_ROOT; };
 		3E398C4A0E5080A800D40DDE /* kenny_tri.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = kenny_tri.mtl; path = ../../data/obj/kenny_tri.mtl; sourceTree = SOURCE_ROOT; };
 		3E398C4B0E5080A800D40DDE /* kenny_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = kenny_tri.obj; path = ../../data/obj/kenny_tri.obj; sourceTree = SOURCE_ROOT; };
 		3E7326620E5CE549000FF838 /* LostEngineMinimalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineMinimalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				EAF706C50E4B81B000EF62CB /* init */,
+				3E251FEC0E5EC1C5002CDC21 /* iphone.lua */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -277,6 +281,7 @@
 				EA0E04770E4E1AEB001556D6 /* stubs.jpg in Resources */,
 				3E398C4C0E5080A800D40DDE /* kenny_tri.mtl in Resources */,
 				3E398C4D0E5080A800D40DDE /* kenny_tri.obj in Resources */,
+				3E251FED0E5EC1C5002CDC21 /* iphone.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +293,7 @@
 				3E7326540E5CE549000FF838 /* stubs.jpg in Resources */,
 				3E7326550E5CE549000FF838 /* kenny_tri.mtl in Resources */,
 				3E7326560E5CE549000FF838 /* kenny_tri.obj in Resources */,
+				3E251FEE0E5EC1C5002CDC21 /* iphone.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

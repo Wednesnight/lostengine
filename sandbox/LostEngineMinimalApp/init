@@ -1,3 +1,5 @@
+require("iphone")
+
 function preinitHandler(event)
   log.debug("preinit")
 

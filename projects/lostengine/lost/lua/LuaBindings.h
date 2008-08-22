@@ -51,6 +51,8 @@ namespace lost
     void LuaLostLSystemLSystem(lost::lua::State& state);
     void LuaLostMathVec3(lost::lua::State& state);
     void LuaLostMathVec4(lost::lua::State& state);
+    void LuaLostApplicationAccelerometerEvent(lost::lua::State& state);
+    void LuaLostApplicationTouchEvent(lost::lua::State& state);
 
     void bindAll(lost::lua::State& state);
   }
