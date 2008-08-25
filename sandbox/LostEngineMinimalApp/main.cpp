@@ -131,18 +131,18 @@ struct Controller
   
   void init(shared_ptr<ApplicationEvent> event)
   {
+/*
     std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["config"]["modelFilename"]);
     float       modelSize = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["modelSize"]);
     modelParser.reset(new parser::ParserOBJ(appInstance->loader));
     modelParser->parseMesh(modelname, mesh, material);
     modelRenderer.reset(new RendererOBJ(mesh, material));
     modelRenderer->size = modelSize;
-
-    camera = luabind::object_cast<shared_ptr<Camera> >(luabind::globals(*(appInstance->interpreter))["config"]["camera"]);
-//    camera.reset(new Camera());
-//    camera->position(Vec3(0,3,15));
-//    camera->target(Vec3(0,3,0));
-//    camera->stickToTarget(true);
+*/
+    mesh          = luabind::object_cast<shared_ptr<Mesh> >(luabind::globals(*(appInstance->interpreter))["config"]["modelMesh"]);
+    material      = luabind::object_cast<shared_ptr<MaterialOBJ> >(luabind::globals(*(appInstance->interpreter))["config"]["modelMaterial"]);
+    modelRenderer = luabind::object_cast<shared_ptr<RendererOBJ> >(luabind::globals(*(appInstance->interpreter))["config"]["modelRenderer"]);
+    camera        = luabind::object_cast<shared_ptr<Camera> >(luabind::globals(*(appInstance->interpreter))["config"]["camera"]);
 
     vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);
     vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightDiffuse"]);
@@ -188,7 +188,6 @@ struct Controller
     appInstance->addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
-    appInstance->addEventListener(AccelerometerEvent::DEVICE_ACCELERATED(), receive<AccelerometerEvent>(bind(&Controller::accelerate, this, _1)));
   }
   
   void touches(shared_ptr<TouchEvent> event)
@@ -203,7 +202,10 @@ struct Controller
           renderNormals = !renderNormals;
           lastTap = 0.0;
         }
-        lastTap = event->touches[0]->timeStamp;
+        else
+        {
+          lastTap = event->touches[0]->timeStamp;
+        }
       }
     }
     else if (event->touches.size() == 2)
@@ -221,7 +223,10 @@ struct Controller
           renderAABB = !renderAABB;
           lastTap = 0.0;
         }
-        lastTap = event->touches[0]->timeStamp;
+        else
+        {
+          lastTap = event->touches[0]->timeStamp;
+        }
       }
       else if (event->type == TouchEvent::TOUCHES_MOVED() && initialized)
       {
@@ -238,11 +243,6 @@ struct Controller
     }
   }
 
-  void accelerate(shared_ptr<AccelerometerEvent> event)
-  {
-//    camera->rotate(Vec3(((event->y > 0.1) ? event->y*0.5 : 0.0), ((event->x > 0.1) ? -1.0*event->x*0.5 : 0.0), 0.0));
-  }
-  
 };
 
 int main(int argn, char** args)

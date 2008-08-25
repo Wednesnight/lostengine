@@ -34,6 +34,19 @@ namespace lost
       TouchEvent(const event::Type& inType) : Event(inType) { }
       virtual ~TouchEvent() {}
 
+      unsigned int size()
+      {
+        return touches.size();
+      }
+
+      boost::shared_ptr<lost::application::TouchEvent::Touch> get(unsigned int idx)
+      {
+        boost::shared_ptr<lost::application::TouchEvent::Touch> result;
+        if (idx < touches.size())
+          result = touches[idx];
+        return result;
+      }
+
       // contains all touches for the current event. Might contain more than one, depending
       // on how many fingers the user applied to the screen
       std::vector<boost::shared_ptr<lost::application::TouchEvent::Touch> > touches;

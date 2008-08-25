@@ -1,9 +1,10 @@
-CameraController = 
+lost.camera.CameraController = 
 {
-  camera = lost.camera.Camera()
+  camera  = lost.camera.Camera(),
+  lastTap = 0.0;
 }
 
-function CameraController:init()
+function lost.camera.CameraController:init()
   self.camera:position(lost.math.Vec3(0,3,15));
   self.camera:target(lost.math.Vec3(0,3,0));
   self.camera:stickToTarget(true);
@@ -11,18 +12,12 @@ function CameraController:init()
   self:initCallbacks()
 end
 
-function CameraController:initCallbacks()
+function lost.camera.CameraController:initCallbacks()
   local AccelerometerEvent = lost.application.AccelerometerEvent
-  app:addEventListener(AccelerometerEvent.DEVICE_ACCELERATED, self.accelerate)
-
-  local TouchEvent = lost.application.TouchEvent
-  app:addEventListener(TouchEvent.TOUCHES_BEGAN, self.touch)
-  app:addEventListener(TouchEvent.TOUCHES_MOVED, self.touch)
-  app:addEventListener(TouchEvent.TOUCHES_ENDED, self.touch)
-  app:addEventListener(TouchEvent.TOUCHES_CANCELLED, self.touch)
+  app:addEventListener(AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
 end
 
-function CameraController:accelerate(event)
+function lost.camera.CameraController:accelerate(event)
   local accelerometerEvent = lost.application.AccelerometerEvent.cast(event)
 
   local x = 0.0
@@ -39,15 +34,10 @@ function CameraController:accelerate(event)
   self.camera:rotate(lost.math.Vec3(x, y, z));
 end
 
-function CameraController:touch(event)
-  log.debug(event.type)
-  local touchEvent = lost.application.TouchEvent.cast(event)
-end
+lost.camera.CameraController_mt = { __index = lost.camera.CameraController }
 
-CameraController_mt = {__index = CameraController}
-
-function CameraController:new()
+function lost.camera.CameraController()
   local result = {}
-  setmetatable(result, CameraController_mt)
+  setmetatable(result, lost.camera.CameraController_mt)
   return result
 end

@@ -13,6 +13,9 @@ namespace lost
 {
 namespace lua
 {
+
+int errorMsg(lua_State *lua);
+  
 struct State
 {
   State(bool callLuabindOpen=true, bool doOpenLibs=true, bool doInitPackagePath=true)
@@ -76,7 +79,7 @@ struct State
   void doString(const std::string& inData)
   {
     // execute the loaded file and handle errors
-    if(int err = luaL_dostring(state, inData.c_str()))
+    if (int err = luaL_dostring(state, inData.c_str()))
     {
       std::string errcode;
       switch(err)

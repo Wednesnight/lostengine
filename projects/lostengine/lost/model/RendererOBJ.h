@@ -10,6 +10,7 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
+#include "lost/gl/Draw.h"
 #include "lost/math/Vec3.h"
 
 namespace lost

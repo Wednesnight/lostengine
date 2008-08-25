@@ -14,7 +14,9 @@ LOST_LUA_EXPORT_BEGIN(LuaLostApplicationTouchEvent)
     [
       class_<TouchEvent, boost::shared_ptr<TouchEvent>, boost::shared_ptr<Event> >("TouchEvent")
         .def(constructor<std::string>()) 
-        .def_readwrite("touches", &TouchEvent::touches)
+        .def("size", &TouchEvent::size) 
+        .def("get", &TouchEvent::get) 
+//        .def_readwrite("touches", &TouchEvent::touches)
         .scope
         [
           class_<TouchEvent::Touch, boost::shared_ptr<TouchEvent::Touch> >("Touch")

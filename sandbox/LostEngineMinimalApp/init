@@ -3,19 +3,31 @@ require("iphone")
 function preinitHandler(event)
   log.debug("preinit")
 
-  config.cameraController = CameraController:new()
-  config.cameraController:init()
-
   config = {}
+
   config.displayAttributes = lost.common.DisplayAttributes()
 
   config.displayAttributes.width  = 320;
   config.displayAttributes.height = 480;
 
+  -- Initialize camera
+  config.cameraController = lost.camera.CameraController()
+  config.cameraController:init()
   config.camera = config.cameraController.camera
 
+  -- Initialize model attributes
   config.modelFilename = "kenny_tri.obj"
   config.modelSize     = 5.0
+
+  -- Initialize model parser, mesh, material
+  config.modelParser   = lost.model.parser.ParserOBJ(app.loader);
+  config.modelMesh     = lost.model.Mesh()
+  config.modelMaterial = lost.model.MaterialOBJ()
+  config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
+
+  -- Initialize model renderer
+  config.modelRenderer      = lost.model.RendererOBJ(config.modelMesh, config.modelMaterial);
+  config.modelRenderer.size = config.modelSize;
 
   config.lightShininess = 128
   config.lightCutoff    = 180

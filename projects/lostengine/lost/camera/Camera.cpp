@@ -20,6 +20,7 @@ namespace lost
       mDepth(depthBase),
       mStickToTarget(false)
     {
+      DOUT("Camera::Camera()");
     }
     
     math::Vec2& Camera::depth()
