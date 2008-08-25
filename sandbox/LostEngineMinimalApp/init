@@ -9,6 +9,10 @@ function preinitHandler(event)
 
   config.displayAttributes.width  = 320;
   config.displayAttributes.height = 480;
+end
+
+function initHandler(event)
+  log.debug("init")
 
   -- Initialize camera
   config.cameraController = lost.camera.CameraController()
@@ -34,10 +38,6 @@ function preinitHandler(event)
   config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
   config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
   config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
-end
-
-function initHandler(event)
-  log.debug("init")
 end
 
 function runHandler(event)

@@ -6,6 +6,7 @@
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/Config.h"
 
 struct ApplicationAdapter;
 
@@ -24,9 +25,10 @@ public:
   void swapBuffers();
   void quit();
 
-  common::DisplayAttributes             displayAttributes;
-  boost::shared_ptr<resource::Loader>   loader;
-  boost::shared_ptr<lua::State>         interpreter;
+  common::DisplayAttributes           displayAttributes;
+  boost::shared_ptr<resource::Loader> loader;
+  boost::shared_ptr<lua::State>       interpreter;
+  Config::SharedPtr                   config;
   void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
   
 private:

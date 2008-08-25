@@ -122,17 +122,24 @@ struct Controller
     appInstance->swapBuffers();
   }
   
+  void preinit(shared_ptr<ApplicationEvent> event)
+  {
+    appInstance->addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, this, _1)));
+  }
+  
   void init(shared_ptr<ApplicationEvent> event)
   {
-    modelRenderer = luabind::object_cast<shared_ptr<Renderer> >(luabind::globals(*(appInstance->interpreter))["config"]["modelRenderer"]);
-    camera        = luabind::object_cast<shared_ptr<Camera> >(luabind::globals(*(appInstance->interpreter))["config"]["camera"]);
+    DOUT("Controller::init()");
 
-    vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);
-    vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightDiffuse"]);
-    vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightSpecular"]);
+    modelRenderer = appInstance->config["modelRenderer"].as<shared_ptr<Renderer> >();
+    camera        = appInstance->config["camera"].as<shared_ptr<Camera> >();
+
+    vecAmbient  = appInstance->config["lightAmbient"].as<Vec4>(Vec4());
+    vecDiffuse  = appInstance->config["lightDiffuse"].as<Vec4>(Vec4());
+    vecSpecular = appInstance->config["lightSpecular"].as<Vec4>(Vec4());
 
     shininess     = new GLfloat[1];
-    shininess[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["lightShininess"]);
+    shininess[0] = appInstance->config["lightShininess"].as<float>(0.0f);
     ambient       = new GLfloat[4];
     ambient[0] = vecAmbient.x;
     ambient[1] = vecAmbient.y;
@@ -159,8 +166,8 @@ struct Controller
     direction[0] = lightDirection.x;
     direction[1] = lightDirection.y;
     direction[2] = lightDirection.z;
-    cutoff        = new GLfloat[1];
-    cutoff[0] = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["lightCutoff"]);    
+    cutoff       = new GLfloat[1];
+    cutoff[0]    = appInstance->config["lightCutoff"].as<float>(0.0f);
     
     glViewport (0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);
 
@@ -236,7 +243,7 @@ int main(int argn, char** args)
     Application app;
     Controller controller(appInstance->loader);
     
-    app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
+    app.addEventListener(ApplicationEvent::PREINIT(), receive<ApplicationEvent>(bind(&Controller::preinit, &controller, _1)));
     app.run();
   }
   catch (exception& e)

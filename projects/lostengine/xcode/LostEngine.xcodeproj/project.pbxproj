@@ -172,6 +172,9 @@
 		3EFEC1280E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */; };
 		3EFEC1290E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */; };
 		3EFEC12A0E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */; };
+		3EFEC13E0E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
+		3EFEC13F0E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
+		3EFEC1400E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
 		EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
 		EA0E43220E5E077C00B5EBF1 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E431B0E5E075300B5EBF1 /* libboost.a */; };
 		EA0E43260E5E079900B5EBF1 /* libboost-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E431D0E5E075300B5EBF1 /* libboost-iphone.a */; };
@@ -635,6 +638,7 @@
 		3EFEC11F0E62C5480053EB12 /* LuaLostModelObjParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostModelObjParser.cpp; sourceTree = "<group>"; };
 		3EFEC1230E62C5620053EB12 /* LuaLostModelObjRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostModelObjRenderer.cpp; sourceTree = "<group>"; };
 		3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostModelObjMaterial.cpp; sourceTree = "<group>"; };
+		3EFEC13D0E62CB500053EB12 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E04050E4E0FC1001556D6 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_34_1/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -1020,6 +1024,7 @@
 				EAAA56940E286E4A002EB663 /* ApplicationEvent.h */,
 				EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */,
 				EAB343180E4F3A6C00C89299 /* TouchEvent.h */,
+				3EFEC13D0E62CB500053EB12 /* Config.h */,
 			);
 			path = application;
 			sourceTree = "<group>";
@@ -1315,6 +1320,7 @@
 				3EFEC1060E62C4670053EB12 /* Material.h in Headers */,
 				3EFEC1070E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1080E62C4670053EB12 /* Renderer.h in Headers */,
+				3EFEC13E0E62CB500053EB12 /* Config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1399,6 +1405,7 @@
 				3EFEC1030E62C4670053EB12 /* Material.h in Headers */,
 				3EFEC1040E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1050E62C4670053EB12 /* Renderer.h in Headers */,
+				3EFEC1400E62CB500053EB12 /* Config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,6 +1493,7 @@
 				3EFEC1000E62C4670053EB12 /* Material.h in Headers */,
 				3EFEC1010E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1020E62C4670053EB12 /* Renderer.h in Headers */,
+				3EFEC13F0E62CB500053EB12 /* Config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
