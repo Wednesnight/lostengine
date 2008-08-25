@@ -24,11 +24,11 @@ function lost.camera.CameraController:accelerate(event)
   local y = 0.0
   local z = 0.0
 
-  if (accelerometerEvent.y > 0.1) then
+  if (accelerometerEvent.y > 0.1 or accelerometerEvent.y < -0.1) then
     x = accelerometerEvent.y*0.5
   end
-  if (accelerometerEvent.x > 0.1) then
-    y = accelerometerEvent.x*0.5
+  if (accelerometerEvent.x > 0.1 or accelerometerEvent.x < -0.1) then
+    y = -1*accelerometerEvent.x*0.5
   end
 
   self.camera:rotate(lost.math.Vec3(x, y, z));
