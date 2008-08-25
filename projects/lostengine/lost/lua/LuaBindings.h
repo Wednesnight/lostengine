@@ -54,10 +54,10 @@ namespace lost
     void LuaLostApplicationAccelerometerEvent(lost::lua::State& state);
     void LuaLostApplicationTouchEvent(lost::lua::State& state);
     void LuaLostCameraCamera(lost::lua::State& state);
-    void LuaLostModelRendererOBJ(lost::lua::State& state);
+    void LuaLostModelObjRenderer(lost::lua::State& state);
     void LuaLostModelMesh(lost::lua::State& state);
-    void LuaLostModelMaterialOBJ(lost::lua::State& state);
-    void LuaLostModelParserParserOBJ(lost::lua::State& state);
+    void LuaLostModelObjMaterial(lost::lua::State& state);
+    void LuaLostModelObjParser(lost::lua::State& state);
 
     void bindAll(lost::lua::State& state);
   }

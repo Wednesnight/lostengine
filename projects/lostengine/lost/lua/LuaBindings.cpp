@@ -27,10 +27,10 @@ namespace lost
       LuaLostApplicationAccelerometerEvent(state);
       LuaLostApplicationTouchEvent(state);
       LuaLostCameraCamera(state);
-      LuaLostModelRendererOBJ(state);
+      LuaLostModelObjRenderer(state);
       LuaLostModelMesh(state);
-      LuaLostModelMaterialOBJ(state);
-      LuaLostModelParserParserOBJ(state);
+      LuaLostModelObjMaterial(state);
+      LuaLostModelObjParser(state);
       
       luabind::bind_class_info(state);
     }

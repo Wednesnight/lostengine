@@ -1,5 +1,5 @@
-#ifndef LOST_MODEL_PARSER_PARSEROBJ_H
-#define LOST_MODEL_PARSER_PARSEROBJ_H
+#ifndef LOST_MODEL_OBJ_PARSER_H
+#define LOST_MODEL_OBJ_PARSER_H
 
 #include <map>
 
@@ -16,7 +16,7 @@
 #include "lost/model/Mesh.h"
 #include "lost/common/SpiritHelpers.h"
 #include "lost/common/Logger.h"
-#include "lost/model/MaterialOBJ.h"
+#include "lost/model/obj/Material.h"
 #include "lost/resource/Loader.h"
 #include "lost/math/Vec4.h"
 
@@ -24,7 +24,7 @@ namespace lost
 {
   namespace model
   {
-    namespace parser
+    namespace obj
     {
     
       struct MaterialAttributes
@@ -167,9 +167,9 @@ namespace lost
       
       struct MaterialInit
       {
-        boost::shared_ptr<MaterialOBJ>& material;
+        boost::shared_ptr<Material>& material;
         
-        MaterialInit(boost::shared_ptr<MaterialOBJ>& inMaterial)
+        MaterialInit(boost::shared_ptr<Material>& inMaterial)
         : material(inMaterial)
         {
         }
@@ -177,19 +177,19 @@ namespace lost
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
-          material.reset(new MaterialOBJ());
+          material.reset(new Material());
         }
       };
       
       struct MaterialAssign
       {
-        boost::shared_ptr<MaterialOBJ>& material;
+        boost::shared_ptr<Material>& material;
         std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
         std::string& materialName;
         unsigned short& materialFaceOffset; 
         boost::shared_ptr<MaterialGroup>& group;
 
-        MaterialAssign(boost::shared_ptr<MaterialOBJ>& inMaterial, 
+        MaterialAssign(boost::shared_ptr<Material>& inMaterial, 
                        std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials, 
                        std::string& inMaterialName, 
                        unsigned short& inMaterialFaceOffset, 
@@ -235,7 +235,7 @@ namespace lost
         }
       };
       
-      struct ParserOBJ
+      struct Parser
       {
       private:
         boost::shared_ptr<resource::Loader> loader;
@@ -327,7 +327,7 @@ namespace lost
         }
         
       public:
-        ParserOBJ(boost::shared_ptr<resource::Loader> inLoader)
+        Parser(boost::shared_ptr<resource::Loader> inLoader)
         : loader(inLoader)
         {
         }
@@ -337,7 +337,7 @@ namespace lost
           return "OBJ";
         }
 
-        bool parseMesh(const std::string& inFilename, boost::shared_ptr<Mesh>& outMesh, boost::shared_ptr<MaterialOBJ>& outMaterial)
+        bool parseMesh(const std::string& inFilename, boost::shared_ptr<Mesh>& outMesh, boost::shared_ptr<Material>& outMaterial)
         {
           bool result = false;
           boost::shared_ptr<resource::File> file = loader->load(inFilename);

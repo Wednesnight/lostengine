@@ -16,10 +16,7 @@
 #include "lost/platform/Platform.h"
 #include "lost/application/KeySym.h"
 #include "lost/common/FpsMeter.h"
-#include "lost/model/parser/ParserOBJ.h"
-#include "lost/model/Mesh.h"
-#include "lost/model/MaterialOBJ.h"
-#include "lost/model/RendererOBJ.h"
+#include "lost/model/obj/Renderer.h"
 #include "lost/camera/Camera.h"
 
 using namespace std;
@@ -32,7 +29,7 @@ using namespace lost::platform;
 using namespace lost::bitmap;
 using namespace lost::resource;
 using namespace lost::application;
-using namespace lost::model;
+using namespace lost::model::obj;
 using namespace lost::camera;
 using namespace boost;
 
@@ -42,12 +39,8 @@ struct Controller
 
   FpsMeter fpsMeter;
   
-  shared_ptr<parser::ParserOBJ> modelParser;
-  shared_ptr<Mesh>              mesh;
-  shared_ptr<MaterialOBJ>       material;
-  shared_ptr<RendererOBJ>       modelRenderer;  
-
-  shared_ptr<Camera> camera;
+  shared_ptr<Renderer> modelRenderer;  
+  shared_ptr<Camera>   camera;
 
   bool renderNormals;
   bool renderAABB;
@@ -131,17 +124,7 @@ struct Controller
   
   void init(shared_ptr<ApplicationEvent> event)
   {
-/*
-    std::string modelname = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["config"]["modelFilename"]);
-    float       modelSize = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["config"]["modelSize"]);
-    modelParser.reset(new parser::ParserOBJ(appInstance->loader));
-    modelParser->parseMesh(modelname, mesh, material);
-    modelRenderer.reset(new RendererOBJ(mesh, material));
-    modelRenderer->size = modelSize;
-*/
-    mesh          = luabind::object_cast<shared_ptr<Mesh> >(luabind::globals(*(appInstance->interpreter))["config"]["modelMesh"]);
-    material      = luabind::object_cast<shared_ptr<MaterialOBJ> >(luabind::globals(*(appInstance->interpreter))["config"]["modelMaterial"]);
-    modelRenderer = luabind::object_cast<shared_ptr<RendererOBJ> >(luabind::globals(*(appInstance->interpreter))["config"]["modelRenderer"]);
+    modelRenderer = luabind::object_cast<shared_ptr<Renderer> >(luabind::globals(*(appInstance->interpreter))["config"]["modelRenderer"]);
     camera        = luabind::object_cast<shared_ptr<Camera> >(luabind::globals(*(appInstance->interpreter))["config"]["camera"]);
 
     vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["config"]["lightAmbient"]);

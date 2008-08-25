@@ -20,13 +20,13 @@ function preinitHandler(event)
   config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
-  config.modelParser   = lost.model.parser.ParserOBJ(app.loader);
+  config.modelParser   = lost.model.obj.Parser(app.loader);
   config.modelMesh     = lost.model.Mesh()
-  config.modelMaterial = lost.model.MaterialOBJ()
+  config.modelMaterial = lost.model.obj.Material()
   config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
 
   -- Initialize model renderer
-  config.modelRenderer      = lost.model.RendererOBJ(config.modelMesh, config.modelMaterial);
+  config.modelRenderer      = lost.model.obj.Renderer(config.modelMesh, config.modelMaterial);
   config.modelRenderer.size = config.modelSize;
 
   config.lightShininess = 128
