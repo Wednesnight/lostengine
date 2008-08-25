@@ -121,7 +121,7 @@ namespace lost
     {
       if (stickToTarget())
       {
-        math::MatrixTranslation translationMatrix(deltaMove);
+        math::MatrixTranslation translationMatrix(math::Vec3(0.0f, 0.0f, deltaMove.z));
         math::Vec3 currentTarget(target());
         position(translationMatrix * mPosition);
         target(currentTarget);

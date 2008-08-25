@@ -39,6 +39,7 @@ namespace application
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     luabind::globals(*interpreter)["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
+    config.reset(new Config(interpreter)); // init config
   }
 
   Application::~Application() {  }
@@ -68,21 +69,7 @@ namespace application
     appEvent->type = ApplicationEvent::PREINIT();dispatchEvent(appEvent);
     
     // try to extract default display attributes from lua state
-    try
-    {
-      object g = globals(*(interpreter));
-      if((luabind::type(g["config"])!= LUA_TNIL)
-         && 
-         (luabind::type(g["config"]["displayAttributes"])!=LUA_TNIL))
-      {
-        displayAttributes = object_cast<DisplayAttributes>(g["config"]["displayAttributes"]);
-      }
-    }
-    catch(exception& ex)
-    {
-      IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
-    }
-     
+    displayAttributes = config["displayAttributes"].as<DisplayAttributes>(displayAttributes);
 
     // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
     addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));

@@ -26,10 +26,7 @@
 #include "lost/camera/Camera.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
-#include "lost/model/parser/ParserOBJ.h"
-#include "lost/model/Mesh.h"
-#include "lost/model/MaterialOBJ.h"
-#include "lost/model/RendererOBJ.h"
+#include "lost/model/obj/Renderer.h"
 #include "lost/gl/Buffer.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/Draw.h"
@@ -45,7 +42,7 @@ using namespace lost::event;
 using namespace lost::gl;
 using namespace lost::gl::utils;
 using namespace lost::math;
-using namespace lost::model;
+using namespace lost::model::obj;
 using namespace lost::camera;
 using namespace std;
 
@@ -57,21 +54,30 @@ struct Object0r
   FpsMeter                  fpsMeter;
   
   shared_ptr<ShaderProgram> lightingShader;
-
-  shared_ptr<parser::ParserOBJ> modelParser;
-  shared_ptr<Mesh>              mesh;
-  shared_ptr<MaterialOBJ>       material;
-  shared_ptr<RendererOBJ>       modelRenderer;
+  shared_ptr<Renderer>      modelRenderer;
 
   bool renderNormals;
   bool renderAABB;
+
+  Vec4 vecAmbient;
+  Vec4 vecDiffuse;
+  Vec4 vecSpecular;
+  GLfloat* shininess;
+  GLfloat* ambient;
+  GLfloat* diffuse;
+  GLfloat* specular;
+  Vec3 lightPosition;
+  GLfloat* position;
+  Vec3 lightDirection;
+  GLfloat* direction;
+  GLfloat* cutoff;
   
   Object0r(Application& app)
   : renderTimer("render", 0.015),
     renderNormals(false),
     renderAABB(false)
   {
-    app.addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Object0r::init, this, _1)));
+    app.addEventListener(ApplicationEvent::PREINIT(), receive<Event>(bind(&Object0r::preinit, this, _1)));
   }
   
   GLenum getModelDisplay(std::string& which)
@@ -91,27 +97,55 @@ struct Object0r
     
   }
   
+  void preinit(shared_ptr<Event> event)
+  {
+    appInstance->addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Object0r::init, this, _1)));
+  }
+  
   void init(shared_ptr<Event> event)
   {
+    DOUT("init()");
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
 
-    camera.reset(new Camera());
-    camera->position(Vec3(0,3,15));
-    camera->target(Vec3(0,3,0));
+    modelRenderer = appInstance->config["modelRenderer"].as<shared_ptr<Renderer> >();
+    camera        = appInstance->config["camera"].as<shared_ptr<Camera> >();
+    
+    vecAmbient  = appInstance->config["lightAmbient"].as<Vec4>(Vec4());
+    vecDiffuse  = appInstance->config["lightDiffuse"].as<Vec4>(Vec4());
+    vecSpecular = appInstance->config["lightSpecular"].as<Vec4>(Vec4());
 
-    std::string modelname         = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelFilename"]);
-    float       modelSize         = luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["modelSize"]);
-    std::string modelDisplayFront = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayFront"]);
-    std::string modelDisplayBack  = luabind::object_cast<std::string>(luabind::globals(*(appInstance->interpreter))["modelDisplayBack"]);
-
-    modelParser.reset(new parser::ParserOBJ(appInstance->loader));
-    modelParser->parseMesh(modelname, mesh, material);
-    modelRenderer.reset(new RendererOBJ(mesh, material));
-    modelRenderer->size            = modelSize;
-    modelRenderer->renderModeFront = getModelDisplay(modelDisplayFront);
-    modelRenderer->renderModeBack  = getModelDisplay(modelDisplayBack);
-
+    shininess     = new GLfloat[1];
+    shininess[0] = appInstance->config["lightShininess"].as<float>(0.0f);
+    ambient       = new GLfloat[4];
+    ambient[0] = vecAmbient.x;
+    ambient[1] = vecAmbient.y;
+    ambient[2] = vecAmbient.z;
+    ambient[3] = vecAmbient.w;
+    diffuse  = new GLfloat[4];
+    diffuse[0] = vecDiffuse.x;
+    diffuse[1] = vecDiffuse.y;
+    diffuse[2] = vecDiffuse.z;
+    diffuse[3] = vecDiffuse.w;
+    specular = new GLfloat[4];
+    specular[0] = vecSpecular.x;
+    specular[1] = vecSpecular.y;
+    specular[2] = vecSpecular.z;
+    specular[3] = vecSpecular.w;
+    lightPosition = camera->position();
+    position = new GLfloat[4];
+    position[0] = lightPosition.x;
+    position[1] = lightPosition.y;
+    position[2] = lightPosition.z;
+    position[3] = 0.0f;
+    lightDirection = camera->direction();
+    direction = new GLfloat[3];
+    direction[0] = lightDirection.x;
+    direction[1] = lightDirection.y;
+    direction[2] = lightDirection.z;
+    cutoff       = new GLfloat[1];
+    cutoff[0]    = appInstance->config["lightCutoff"].as<float>(0.0f);
+    
     shaderInit();
 
     appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
@@ -178,19 +212,15 @@ struct Object0r
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
-    Vec4 vecAmbient  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightAmbient"]);
-    Vec4 vecDiffuse  = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightDiffuse"]);
-    Vec4 vecSpecular = luabind::object_cast<Vec4>(luabind::globals(*(appInstance->interpreter))["lightSpecular"]);
-
-    GLfloat shininess[]  = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightShininess"])};
-    GLfloat ambient[]    = {vecAmbient.x, vecAmbient.y, vecAmbient.z, vecAmbient.w};
-    GLfloat diffuse[]    = {vecDiffuse.x, vecDiffuse.y, vecDiffuse.z, vecDiffuse.w};
-    GLfloat specular[]   = {vecSpecular.x, vecSpecular.y, vecSpecular.z, vecSpecular.w};
-    Vec3 cameraPosition  = camera->position();
-    GLfloat position[]   = {cameraPosition.x, cameraPosition.y, cameraPosition.z, 0.0f};
-    Vec3 cameraDirection = camera->direction();
-    GLfloat direction[]  = {cameraDirection.x, cameraDirection.y, cameraDirection.z};
-    GLfloat cutoff[]     = {luabind::object_cast<float>(luabind::globals(*(appInstance->interpreter))["lightCutoff"])};
+    lightPosition = camera->position();
+    position[0] = lightPosition.x;
+    position[1] = lightPosition.y;
+    position[2] = lightPosition.z;
+    position[3] = 0.0f;
+    lightDirection = camera->direction();
+    direction[0] = lightDirection.x;
+    direction[1] = lightDirection.y;
+    direction[2] = lightDirection.z;
     
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
@@ -320,4 +350,3 @@ struct Object0r
 };
 
 #endif
-

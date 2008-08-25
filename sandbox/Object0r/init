@@ -1,10 +1,12 @@
-function preinit(event)
+require("spectator")
+
+function preinitHandler(event)
   log.debug("preinit, building config")
 
   -- config is deliberatly global so application-internal startup code can find it
   config = {}
-  config.displayAttributes = lost.common.DisplayAttributes()
 
+  config.displayAttributes = lost.common.DisplayAttributes()
   config.displayAttributes.width = 800;
   config.displayAttributes.height = 600;
   config.displayAttributes.redbits = 8;
@@ -15,24 +17,47 @@ function preinit(event)
   config.displayAttributes.stencilbits = 0;
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "Object0r";
-  
-  modelFilename     = "kenny_tri.obj"
-  modelSize         = 5.0
-  modelDisplayFront = "solid"             -- points / wireframe / solid
-  modelDisplayBack  = "solid"             -- points / wireframe / solid
-
-  lightShininess = 128
-  lightCutoff    = 180
-  lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
-  lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
-  lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
 end
 
-function cleanupOnQuit(event)
-  log.debug("quitting");
+function initHandler(event)
+  log.debug("init")
+
+  -- Initialize camera
+  config.cameraController = lost.camera.CameraController()
+  config.cameraController:init()
+  config.camera = config.cameraController.camera
+
+  -- Initialize model attributes
+  config.modelFilename = "kenny_tri.obj"
+  config.modelSize     = 5.0
+
+  -- Initialize model parser, mesh, material
+  config.modelParser   = lost.model.obj.Parser(app.loader);
+  config.modelMesh     = lost.model.Mesh()
+  config.modelMaterial = lost.model.obj.Material()
+  config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
+
+  -- Initialize model renderer
+  config.modelRenderer      = lost.model.obj.Renderer(config.modelMesh, config.modelMaterial);
+  config.modelRenderer.size = config.modelSize;
+
+  config.lightShininess = 128
+  config.lightCutoff    = 180
+  config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
+  config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
+  config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
+end
+
+function runHandler(event)
+  log.debug("run")
+end
+
+function quitHandler(event)
+  log.debug("quit")
 end
 
 local ApplicationEvent = lost.application.ApplicationEvent
-
-app:addEventListener(ApplicationEvent.PREINIT, preinit)
-app:addEventListener(ApplicationEvent.QUIT, cleanupOnQuit)
+app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
+app:addEventListener(ApplicationEvent.INIT, initHandler)
+app:addEventListener(ApplicationEvent.RUN, runHandler)
+app:addEventListener(ApplicationEvent.QUIT, quitHandler)

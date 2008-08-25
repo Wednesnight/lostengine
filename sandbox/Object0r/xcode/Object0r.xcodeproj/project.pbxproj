@@ -26,6 +26,7 @@
 		3E6BC1CB0E4B43B400FC5232 /* speedcraft.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */; };
 		3E6BC1CC0E4B43B400FC5232 /* speedcraft.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E6BC1CA0E4B43B400FC5232 /* speedcraft.obj */; };
 		3E8066A10E49EB0C00844523 /* magnolia_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E8066A00E49EB0C00844523 /* magnolia_tri.obj */; };
+		3EA8683D0E6307E600E34D51 /* spectator.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EA8683C0E6307E600E34D51 /* spectator.lua */; };
 		3EB514A70E325AD30099EC4B /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A50E325AD30099EC4B /* lighting.vs */; };
 		3EB514A80E325AD30099EC4B /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = 3EB514A60E325AD30099EC4B /* lighting.fs */; };
 		3EBE300B0E1C3DB20071E6F2 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EBE300A0E1C3DB20071E6F2 /* cube.obj */; };
@@ -51,28 +52,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
 			remoteInfo = "LostEngine-iphone";
 		};
 		EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
 			remoteInfo = "LostEngine-simulator";
 		};
 		EA0E497C0E5E405C00B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		3E6BC1C90E4B43B400FC5232 /* speedcraft.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = speedcraft.mtl; path = ../../../data/obj/speedcraft.mtl; sourceTree = SOURCE_ROOT; };
 		3E6BC1CA0E4B43B400FC5232 /* speedcraft.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = speedcraft.obj; path = ../../../data/obj/speedcraft.obj; sourceTree = SOURCE_ROOT; };
 		3E8066A00E49EB0C00844523 /* magnolia_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = magnolia_tri.obj; path = ../../../data/obj/magnolia_tri.obj; sourceTree = SOURCE_ROOT; };
+		3EA8683C0E6307E600E34D51 /* spectator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spectator.lua; path = ../../../projects/lostengine/lost/camera/controller/spectator.lua; sourceTree = SOURCE_ROOT; };
 		3EB514A50E325AD30099EC4B /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		3EB514A60E325AD30099EC4B /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
 		3EBE300A0E1C3DB20071E6F2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = ../../../data/obj/cube.obj; sourceTree = SOURCE_ROOT; };
@@ -218,6 +220,7 @@
 		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				3EA8683C0E6307E600E34D51 /* spectator.lua */,
 				3ED935C90E4756B700AABFAB /* init */,
 			);
 			name = Scripts;
@@ -338,6 +341,7 @@
 				3E6BC1C70E4B42E300FC5232 /* skeleton.obj in Resources */,
 				3E6BC1CB0E4B43B400FC5232 /* speedcraft.mtl in Resources */,
 				3E6BC1CC0E4B43B400FC5232 /* speedcraft.obj in Resources */,
+				3EA8683D0E6307E600E34D51 /* spectator.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
