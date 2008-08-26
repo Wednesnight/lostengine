@@ -76,7 +76,7 @@ namespace lost
           normalBuffer->bindBufferData(mesh->normals.get(), mesh->normalCount);
           DOUT("bind normal data end");
           
-          if (material)
+          if (material && material->groups.size() > 0)
           {
             DOUT("create element buffers start");
             unsigned short* faces = mesh->faces.get();
@@ -112,7 +112,7 @@ namespace lost
           glPolygonMode(GL_FRONT, renderModeFront);
           glPolygonMode(GL_BACK, renderModeBack);
 #endif
-          if (material)
+          if (material && material->groups.size() > 0)
           {
             for (ElementBuffers::iterator idx = elementBuffers.begin(); idx != elementBuffers.end(); ++idx)
             {

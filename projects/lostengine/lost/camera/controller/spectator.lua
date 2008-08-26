@@ -6,7 +6,7 @@ lost.camera.CameraController =
 function lost.camera.CameraController:init()
   self.camera:position(lost.math.Vec3(0,3,15));
   self.camera:target(lost.math.Vec3(0,3,0));
-  self.camera:stickToTarget(true);
+  self.camera:stickToTarget(false);
 
   self:initCallbacks()
 end

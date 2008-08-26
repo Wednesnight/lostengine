@@ -19,8 +19,30 @@ function preinitHandler(event)
   config.displayAttributes.title = "Object0r";
 end
 
+function figgn5()
+  config.cameraController = lost.camera.ICameraController()
+end
+
+function figgn4()
+  figgn5()
+end
+
+function figgn3()
+  figgn4()
+end
+
+function figgn2()
+  figgn3()
+end
+
+function figgn1()
+  figgn2()
+end
+
 function initHandler(event)
   log.debug("init")
+
+  figgn1()
 
   -- Initialize camera
   config.cameraController = lost.camera.CameraController()
@@ -28,7 +50,7 @@ function initHandler(event)
   config.camera = config.cameraController.camera
 
   -- Initialize model attributes
-  config.modelFilename = "kenny_tri.obj"
+  config.modelFilename = "professor_tri.obj"
   config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material

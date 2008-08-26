@@ -139,6 +139,9 @@
 		3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E73256B0E5CE3A4000FF838 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
+		3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
+		3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
+		3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
 		3E94632F0E5173BB00F67187 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */; };
@@ -621,6 +624,7 @@
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
 		3E6EE7D30E62B5D200C4430C /* LuaLostModelMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostModelMesh.cpp; sourceTree = "<group>"; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaErrorHandling.cpp; sourceTree = "<group>"; };
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
 		3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationAdapter.h; path = glfw/ApplicationAdapter.h; sourceTree = "<group>"; };
@@ -1157,6 +1161,7 @@
 				3EFEC11F0E62C5480053EB12 /* LuaLostModelObjParser.cpp */,
 				3EFEC1230E62C5620053EB12 /* LuaLostModelObjRenderer.cpp */,
 				3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */,
+				3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -1773,6 +1778,7 @@
 				3EFEC1220E62C5480053EB12 /* LuaLostModelObjParser.cpp in Sources */,
 				3EFEC1260E62C5620053EB12 /* LuaLostModelObjRenderer.cpp in Sources */,
 				3EFEC12A0E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
+				3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,6 +1824,7 @@
 				3EFEC1210E62C5480053EB12 /* LuaLostModelObjParser.cpp in Sources */,
 				3EFEC1250E62C5620053EB12 /* LuaLostModelObjRenderer.cpp in Sources */,
 				3EFEC1290E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
+				3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1864,6 +1871,7 @@
 				3EFEC1200E62C5480053EB12 /* LuaLostModelObjParser.cpp in Sources */,
 				3EFEC1240E62C5620053EB12 /* LuaLostModelObjRenderer.cpp in Sources */,
 				3EFEC1280E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
+				3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

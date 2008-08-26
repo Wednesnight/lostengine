@@ -20,7 +20,7 @@ function initHandler(event)
   config.camera = config.cameraController.camera
 
   -- Initialize model attributes
-  config.modelFilename = "kenny_tri.obj"
+  config.modelFilename = "sponza_tri_mtl.obj"
   config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
