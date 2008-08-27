@@ -151,6 +151,9 @@
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
+		3EE0563F0E65545600E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE056210E65530600E044A2 /* libhashlib++.a */; };
+		3EE056400E65546200E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561F0E65530600E044A2 /* libhashlib++.a */; };
+		3EE056410E65546E00E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561D0E65530600E044A2 /* libhashlib++.a */; };
 		3EF26D590E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */; };
 		3EF26D5B0E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */; };
 		3EF26D5D0E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */; };
@@ -385,6 +388,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3EE0561C0E65530600E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = "hashlib++";
+		};
+		3EE0561E0E65530600E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3EE055C70E65519A00E044A2 /* libhashlib++.a */;
+			remoteInfo = "hashlib++-iphone";
+		};
+		3EE056200E65530600E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3EE055E60E65519D00E044A2 /* libhashlib++.a */;
+			remoteInfo = "hashlib++-simulator";
+		};
+		3EE056250E65531900E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* hashlib++ */;
+			remoteInfo = "hashlib++";
+		};
+		3EE0562E0E65535400E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EE055A90E65519A00E044A2 /* hashlib++-iphone */;
+			remoteInfo = "hashlib++-iphone";
+		};
+		3EE056350E6553C100E044A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EE055C80E65519D00E044A2 /* hashlib++-simulator */;
+			remoteInfo = "hashlib++-simulator";
+		};
 		EA0E431A0E5E075300B5EBF1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E43110E5E075300B5EBF1 /* boost.xcodeproj */;
@@ -635,6 +680,7 @@
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
 		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
 		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
+		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCameraCamera.cpp; sourceTree = "<group>"; };
 		3EF26DA10E5D7F8A002F9CF0 /* LuaBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaBindings.cpp; sourceTree = "<group>"; };
 		3EFEC0FD0E62C4670053EB12 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
@@ -763,6 +809,7 @@
 				EA0E45DE0E5E2B1800B5EBF1 /* liblua-simulator.a in Frameworks */,
 				EA0E46790E5E30DC00B5EBF1 /* libzlib-simulator.a in Frameworks */,
 				EA0E472B0E5E351C00B5EBF1 /* libluabind-simulator.a in Frameworks */,
+				3EE0563F0E65545600E044A2 /* libhashlib++.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +823,7 @@
 				EA0E44EB0E5E281200B5EBF1 /* libglfw.a in Frameworks */,
 				EA0E44A50E5E24DC00B5EBF1 /* libfreetype.a in Frameworks */,
 				EA0E43220E5E077C00B5EBF1 /* libboost.a in Frameworks */,
+				3EE056410E65546E00E044A2 /* libhashlib++.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +836,7 @@
 				EA0E44A60E5E24EA00B5EBF1 /* libfreetype-iphone.a in Frameworks */,
 				EA0E43260E5E079900B5EBF1 /* libboost-iphone.a in Frameworks */,
 				EA0E472C0E5E352C00B5EBF1 /* libluabind-iphone.a in Frameworks */,
+				3EE056400E65546200E044A2 /* libhashlib++.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +856,7 @@
 		08FB7795FE84155DC02AAC07 /* thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				3EE056120E6552D000E044A2 /* hashlib++ */,
 				EA3B96FA0E047B7400B6423B /* boost */,
 				EA3B94510E0462F400B6423B /* zlib */,
 				EA3B944E0E0462DB00B6423B /* stb */,
@@ -867,6 +917,24 @@
 				3E376F4A0E543F6F0050A5DF /* Camera.cpp */,
 			);
 			name = camera;
+			sourceTree = "<group>";
+		};
+		3EE056120E6552D000E044A2 /* hashlib++ */ = {
+			isa = PBXGroup;
+			children = (
+				3EE056130E65530600E044A2 /* hashlib++.xcodeproj */,
+			);
+			name = "hashlib++";
+			sourceTree = "<group>";
+		};
+		3EE056140E65530600E044A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3EE0561D0E65530600E044A2 /* libhashlib++.a */,
+				3EE0561F0E65530600E044A2 /* libhashlib++.a */,
+				3EE056210E65530600E044A2 /* libhashlib++.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3EFEC0E10E62C0AD0053EB12 /* obj */ = {
@@ -1523,6 +1591,7 @@
 				EA0E45DD0E5E2AF600B5EBF1 /* PBXTargetDependency */,
 				EA0E467D0E5E30F500B5EBF1 /* PBXTargetDependency */,
 				EA0E472A0E5E350500B5EBF1 /* PBXTargetDependency */,
+				3EE056360E6553C100E044A2 /* PBXTargetDependency */,
 			);
 			name = "LostEngine-simulator";
 			productName = "LostEngine-iPhone";
@@ -1546,6 +1615,7 @@
 				EA0E46760E5E30BA00B5EBF1 /* PBXTargetDependency */,
 				EA0E46810E5E324E00B5EBF1 /* PBXTargetDependency */,
 				EA0E47240E5E34C600B5EBF1 /* PBXTargetDependency */,
+				3EE056260E65531900E044A2 /* PBXTargetDependency */,
 			);
 			name = LostEngine;
 			productName = LostEngine;
@@ -1568,6 +1638,7 @@
 				EA0E45D80E5E2AD200B5EBF1 /* PBXTargetDependency */,
 				EA0E467B0E5E30E500B5EBF1 /* PBXTargetDependency */,
 				EA0E47270E5E34DA00B5EBF1 /* PBXTargetDependency */,
+				3EE0562F0E65535400E044A2 /* PBXTargetDependency */,
 			);
 			name = "LostEngine-iphone";
 			productName = "LostEngine-iPhone";
@@ -1598,6 +1669,10 @@
 					ProjectRef = EA0E44E20E5E280C00B5EBF1 /* glfw.xcodeproj */;
 				},
 				{
+					ProductGroup = 3EE056140E65530600E044A2 /* Products */;
+					ProjectRef = 3EE056130E65530600E044A2 /* hashlib++.xcodeproj */;
+				},
+				{
 					ProductGroup = EA0E45B30E5E29FA00B5EBF1 /* Products */;
 					ProjectRef = EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */;
 				},
@@ -1620,6 +1695,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		3EE0561D0E65530600E044A2 /* libhashlib++.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libhashlib++.a";
+			remoteRef = 3EE0561C0E65530600E044A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EE0561F0E65530600E044A2 /* libhashlib++.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libhashlib++.a";
+			remoteRef = 3EE0561E0E65530600E044A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3EE056210E65530600E044A2 /* libhashlib++.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libhashlib++.a";
+			remoteRef = 3EE056200E65530600E044A2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EA0E431B0E5E075300B5EBF1 /* libboost.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1878,6 +1974,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3EE056260E65531900E044A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "hashlib++";
+			targetProxy = 3EE056250E65531900E044A2 /* PBXContainerItemProxy */;
+		};
+		3EE0562F0E65535400E044A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "hashlib++-iphone";
+			targetProxy = 3EE0562E0E65535400E044A2 /* PBXContainerItemProxy */;
+		};
+		3EE056360E6553C100E044A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "hashlib++-simulator";
+			targetProxy = 3EE056350E6553C100E044A2 /* PBXContainerItemProxy */;
+		};
 		EA0E43210E5E076300B5EBF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = boost;
@@ -1977,7 +2088,10 @@
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../build/Debug\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngine;
 				VALID_ARCHS = i386;
@@ -1997,6 +2111,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+					"\"$(SRCROOT)/../../../../build/Debug\"",
 				);
 				PRODUCT_NAME = LostEngine;
 			};
@@ -2070,7 +2185,10 @@
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-simulator";
@@ -2089,6 +2207,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/../../../../build/Debug-iphoneos\\\"",
+					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iPhone";
@@ -2114,7 +2233,10 @@
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iphone";

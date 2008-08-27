@@ -354,9 +354,7 @@
 					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = luabind;
-				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
@@ -367,7 +365,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = luabind;
 			};
 			name = Release;
@@ -406,6 +403,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
 			};
 			name = Release;
 		};
@@ -423,7 +421,6 @@
 					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "luabind-iphone";
 				SDKROOT = iphoneos2.0;
 			};
@@ -436,8 +433,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = luabind;
+				SDKROOT = iphoneos2.0;
 			};
 			name = Release;
 		};
@@ -455,7 +452,6 @@
 					"\"$(SRCROOT)/../../../lua/lua_5_1_3/include\"",
 				);
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "luabind-simulator";
 				SDKROOT = iphonesimulator2.0;
 			};
@@ -468,8 +464,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = luabind;
+				SDKROOT = iphonesimulator2.0;
 			};
 			name = Release;
 		};
