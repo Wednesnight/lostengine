@@ -1,7 +1,7 @@
 /* 
  * hashlib++ - a simple hash library for C++
  * 
- * Copyright (c) 2007,2008 Benjamin Grüdelbach
+ * Copyright (c) 2007,2008 Benjamin GrÂ¸delbach
  * 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -99,8 +99,14 @@
 * (which in  turn includes <machine/endian.h> where the appropriate
 * definitions are actually made).
 */
-#define LITTLE_ENDIAN 1234
-#define BYTE_ORDER LITTLE_ENDIAN 
+#if !defined(LITTLE_ENDIAN)
+# define LITTLE_ENDIAN 1234
+#endif
+
+#if !defined(BYTE_ORDER)
+# define BYTE_ORDER LITTLE_ENDIAN 
+#endif
+
 #if !defined(BYTE_ORDER) || (BYTE_ORDER != LITTLE_ENDIAN && BYTE_ORDER != BIG_ENDIAN)
 #error Define BYTE_ORDER to be equal to either LITTLE_ENDIAN or BIG_ENDIAN
 #endif
