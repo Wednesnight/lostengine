@@ -50,11 +50,7 @@
 		3E73250D0E5CE3A4000FF838 /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		3E73250E0E5CE3A4000FF838 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		3E73250F0E5CE3A4000FF838 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
-		3E7325100E5CE3A4000FF838 /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
 		3E7325110E5CE3A4000FF838 /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		3E7325120E5CE3A4000FF838 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94980E04639D00B6423B /* Face.h */; };
-		3E7325130E5CE3A4000FF838 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94990E04639D00B6423B /* Glyph.h */; };
-		3E7325140E5CE3A4000FF838 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949A0E04639D00B6423B /* Library.h */; };
 		3E7325150E5CE3A4000FF838 /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		3E7325160E5CE3A4000FF838 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
 		3E7325170E5CE3A4000FF838 /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
@@ -233,11 +229,7 @@
 		EA3B953C0E04639D00B6423B /* Profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94760E04639D00B6423B /* Profiler.h */; };
 		EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA3B95500E04639D00B6423B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
-		EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
 		EA3B95560E04639D00B6423B /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		EA3B95570E04639D00B6423B /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94980E04639D00B6423B /* Face.h */; };
-		EA3B95580E04639D00B6423B /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94990E04639D00B6423B /* Glyph.h */; };
-		EA3B95590E04639D00B6423B /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949A0E04639D00B6423B /* Library.h */; };
 		EA3B955A0E04639D00B6423B /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
 		EA3B955C0E04639D00B6423B /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
@@ -270,6 +262,30 @@
 		EA3B96800E046C5400B6423B /* Vec3.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96790E046C5400B6423B /* Vec3.h */; };
 		EA3B96810E046C5400B6423B /* Vec4.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B967A0E046C5400B6423B /* Vec4.h */; };
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
+		EA54FA6B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
+		EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
+		EA54FA6D0E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
+		EA54FA6E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
+		EA54FA6F0E676E2200605409 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA670E676E2200605409 /* Glyph.h */; };
+		EA54FA700E676E2200605409 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA680E676E2200605409 /* Face.h */; };
+		EA54FA710E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
+		EA54FA720E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
+		EA54FA730E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
+		EA54FA740E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
+		EA54FA750E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
+		EA54FA760E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
+		EA54FA770E676E2200605409 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA670E676E2200605409 /* Glyph.h */; };
+		EA54FA780E676E2200605409 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA680E676E2200605409 /* Face.h */; };
+		EA54FA790E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
+		EA54FA7A0E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
+		EA54FA7B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
+		EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
+		EA54FA7D0E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
+		EA54FA7E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
+		EA54FA7F0E676E2200605409 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA670E676E2200605409 /* Glyph.h */; };
+		EA54FA800E676E2200605409 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA680E676E2200605409 /* Face.h */; };
+		EA54FA810E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
+		EA54FA820E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
 		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
 		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710760E3E53B000B961EC /* TimerManager.h */; };
@@ -295,11 +311,7 @@
 		EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA6711750E3E89DB00B961EC /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
-		EA6711770E3E89DB00B961EC /* BitmapFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94950E04639D00B6423B /* BitmapFont.h */; };
 		EA6711780E3E89DB00B961EC /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		EA6711790E3E89DB00B961EC /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94980E04639D00B6423B /* Face.h */; };
-		EA67117A0E3E89DB00B961EC /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94990E04639D00B6423B /* Glyph.h */; };
-		EA67117B0E3E89DB00B961EC /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949A0E04639D00B6423B /* Library.h */; };
 		EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
 		EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
@@ -735,11 +747,7 @@
 		EA3B94760E04639D00B6423B /* Profiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profiler.h; sourceTree = "<group>"; };
 		EA3B94790E04639D00B6423B /* SpiritHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritHelpers.h; sourceTree = "<group>"; };
 		EA3B948F0E04639D00B6423B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		EA3B94950E04639D00B6423B /* BitmapFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapFont.h; sourceTree = "<group>"; };
 		EA3B94960E04639D00B6423B /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
-		EA3B94980E04639D00B6423B /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
-		EA3B94990E04639D00B6423B /* Glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glyph.h; sourceTree = "<group>"; };
-		EA3B949A0E04639D00B6423B /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		EA3B949B0E04639D00B6423B /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
 		EA3B949D0E04639D00B6423B /* DisplayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayList.h; sourceTree = "<group>"; };
 		EA3B949E0E04639D00B6423B /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
@@ -772,6 +780,14 @@
 		EA3B96790E046C5400B6423B /* Vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3.h; sourceTree = "<group>"; };
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
+		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
+		EA54FA640E676E2200605409 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		EA54FA650E676E2200605409 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
+		EA54FA670E676E2200605409 /* Glyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glyph.h; sourceTree = "<group>"; };
+		EA54FA680E676E2200605409 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
+		EA54FA690E676E2200605409 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		EA54FA6A0E676E2200605409 /* Glyph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Glyph.cpp; sourceTree = "<group>"; };
 		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
 		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6710760E3E53B000B961EC /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerManager.h; path = glfw/TimerManager.h; sourceTree = "<group>"; };
@@ -1149,7 +1165,6 @@
 		EA3B94940E04639D00B6423B /* font */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B94950E04639D00B6423B /* BitmapFont.h */,
 				EA3B94960E04639D00B6423B /* Font.h */,
 				EA3B94970E04639D00B6423B /* freetype */,
 				EA3B949B0E04639D00B6423B /* TrueTypeFont.h */,
@@ -1160,9 +1175,14 @@
 		EA3B94970E04639D00B6423B /* freetype */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B94980E04639D00B6423B /* Face.h */,
-				EA3B94990E04639D00B6423B /* Glyph.h */,
-				EA3B949A0E04639D00B6423B /* Library.h */,
+				EA54FA630E676E2200605409 /* Library.cpp */,
+				EA54FA640E676E2200605409 /* Renderer.cpp */,
+				EA54FA650E676E2200605409 /* Renderer.h */,
+				EA54FA660E676E2200605409 /* Face.cpp */,
+				EA54FA670E676E2200605409 /* Glyph.h */,
+				EA54FA680E676E2200605409 /* Face.h */,
+				EA54FA690E676E2200605409 /* Library.h */,
+				EA54FA6A0E676E2200605409 /* Glyph.cpp */,
 			);
 			path = freetype;
 			sourceTree = "<group>";
@@ -1343,11 +1363,7 @@
 				3E73250D0E5CE3A4000FF838 /* SpiritHelpers.h in Headers */,
 				3E73250E0E5CE3A4000FF838 /* Event.h in Headers */,
 				3E73250F0E5CE3A4000FF838 /* EventDispatcher.h in Headers */,
-				3E7325100E5CE3A4000FF838 /* BitmapFont.h in Headers */,
 				3E7325110E5CE3A4000FF838 /* Font.h in Headers */,
-				3E7325120E5CE3A4000FF838 /* Face.h in Headers */,
-				3E7325130E5CE3A4000FF838 /* Glyph.h in Headers */,
-				3E7325140E5CE3A4000FF838 /* Library.h in Headers */,
 				3E7325150E5CE3A4000FF838 /* TrueTypeFont.h in Headers */,
 				3E7325160E5CE3A4000FF838 /* Buffer.h in Headers */,
 				3E7325170E5CE3A4000FF838 /* TypedBuffer.h in Headers */,
@@ -1406,6 +1422,10 @@
 				3EFEC1070E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1080E62C4670053EB12 /* Renderer.h in Headers */,
 				3EFEC13E0E62CB500053EB12 /* Config.h in Headers */,
+				EA54FA7D0E676E2200605409 /* Renderer.h in Headers */,
+				EA54FA7F0E676E2200605409 /* Glyph.h in Headers */,
+				EA54FA800E676E2200605409 /* Face.h in Headers */,
+				EA54FA810E676E2200605409 /* Library.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1425,11 +1445,7 @@
 				EA3B953C0E04639D00B6423B /* Profiler.h in Headers */,
 				EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */,
 				EA3B95500E04639D00B6423B /* Event.h in Headers */,
-				EA3B95550E04639D00B6423B /* BitmapFont.h in Headers */,
 				EA3B95560E04639D00B6423B /* Font.h in Headers */,
-				EA3B95570E04639D00B6423B /* Face.h in Headers */,
-				EA3B95580E04639D00B6423B /* Glyph.h in Headers */,
-				EA3B95590E04639D00B6423B /* Library.h in Headers */,
 				EA3B955A0E04639D00B6423B /* TrueTypeFont.h in Headers */,
 				EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */,
 				EA3B955C0E04639D00B6423B /* Draw.h in Headers */,
@@ -1491,6 +1507,10 @@
 				3EFEC1040E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1050E62C4670053EB12 /* Renderer.h in Headers */,
 				3EFEC1400E62CB500053EB12 /* Config.h in Headers */,
+				EA54FA6D0E676E2200605409 /* Renderer.h in Headers */,
+				EA54FA6F0E676E2200605409 /* Glyph.h in Headers */,
+				EA54FA700E676E2200605409 /* Face.h in Headers */,
+				EA54FA710E676E2200605409 /* Library.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1516,11 +1536,7 @@
 				EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */,
 				EA6711750E3E89DB00B961EC /* Event.h in Headers */,
 				EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */,
-				EA6711770E3E89DB00B961EC /* BitmapFont.h in Headers */,
 				EA6711780E3E89DB00B961EC /* Font.h in Headers */,
-				EA6711790E3E89DB00B961EC /* Face.h in Headers */,
-				EA67117A0E3E89DB00B961EC /* Glyph.h in Headers */,
-				EA67117B0E3E89DB00B961EC /* Library.h in Headers */,
 				EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */,
 				EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */,
 				EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */,
@@ -1579,6 +1595,10 @@
 				3EFEC1010E62C4670053EB12 /* Parser.h in Headers */,
 				3EFEC1020E62C4670053EB12 /* Renderer.h in Headers */,
 				3EFEC13F0E62CB500053EB12 /* Config.h in Headers */,
+				EA54FA750E676E2200605409 /* Renderer.h in Headers */,
+				EA54FA770E676E2200605409 /* Glyph.h in Headers */,
+				EA54FA780E676E2200605409 /* Face.h in Headers */,
+				EA54FA790E676E2200605409 /* Library.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1887,6 +1907,10 @@
 				3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398E90E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFD00E673182003CED66 /* State.cpp in Sources */,
+				EA54FA7B0E676E2200605409 /* Library.cpp in Sources */,
+				EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */,
+				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
+				EA54FA820E676E2200605409 /* Glyph.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1935,6 +1959,10 @@
 				3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EB0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFCF0E673182003CED66 /* State.cpp in Sources */,
+				EA54FA6B0E676E2200605409 /* Library.cpp in Sources */,
+				EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */,
+				EA54FA6E0E676E2200605409 /* Face.cpp in Sources */,
+				EA54FA720E676E2200605409 /* Glyph.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1984,6 +2012,10 @@
 				3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EA0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFD10E673182003CED66 /* State.cpp in Sources */,
+				EA54FA730E676E2200605409 /* Library.cpp in Sources */,
+				EA54FA740E676E2200605409 /* Renderer.cpp in Sources */,
+				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
+				EA54FA7A0E676E2200605409 /* Glyph.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

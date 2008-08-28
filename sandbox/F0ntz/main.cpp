@@ -10,6 +10,7 @@
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
 #include "lost/font/freetype/Glyph.h"
+#include "lost/font/freetype/Renderer.h"
 #include "lost/gl/DisplayList.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
@@ -35,8 +36,9 @@ struct Controller
   FpsMeter            fpsmeter;
   shared_ptr<Library> freetypeLibrary;
   shared_ptr<Face>  defaultFont;
+  shared_ptr<Renderer>  renderer;
   shared_ptr<gl::Texture> glyphtex;
-  shared_ptr<lost::font::freetype::Glyph> glyphquad;
+//  shared_ptr<lost::font::freetype::Glyph> glyphquad;
   shared_ptr<lost::gl::DisplayList> smallText;
   shared_ptr<lost::gl::DisplayList> midText;
   shared_ptr<lost::gl::DisplayList> largeText;
@@ -51,23 +53,24 @@ struct Controller
 
   void init(shared_ptr<Event> event)
   {
-    IOUT("driver reports OpenGL version " << gl::utils::getVersion());
-    IOUT("Extensions: "<<glGetString(GL_EXTENSIONS));
+//    IOUT("driver reports OpenGL version " << gl::utils::getVersion());
+//    IOUT("Extensions: "<<glGetString(GL_EXTENSIONS));
 
 
     freetypeLibrary.reset(new Library());
+    renderer.reset(new Renderer);
     fontfile = appInstance->loader->load("Vera.ttf");
     defaultFont = freetypeLibrary->initFace(fontfile);
-    unsigned long fontSizeInPoints = 164;
-    glyphquad = defaultFont->getGlyph(fontSizeInPoints, 'S');
+//    unsigned long fontSizeInPoints = 164;
+//    glyphquad = defaultFont->getGlyph(fontSizeInPoints, 'S');
     smallText.reset(new lost::gl::DisplayList());
     midText.reset(new lost::gl::DisplayList());
     largeText.reset(new lost::gl::DisplayList());
 
-    defaultFont->renderText(10, "The quick brown fox jumps over the lazy dog VA fi glrb", smallText);
+    renderer->renderText(defaultFont, 10, "The quick brown fox jumps over the lazy dog VA fi glrb", smallText);
 //    defaultFont->renderText(16, "The quick brown fox jumps over the lazy dog VA fi glrb", smallText);
-    defaultFont->renderText(64, "The quick brown fox jumps over the lazy dog VA fi glrb", midText);
-    defaultFont->renderText(164, "The quick brown fox jumps over the lazy dog VA fi glrb", largeText);
+    renderer->renderText(defaultFont, 64, "The quick brown fox jumps over the lazy dog VA fi glrb", midText);
+    renderer->renderText(defaultFont, 164, "The quick brown fox jumps over the lazy dog VA fi glrb", largeText);
 
   }
 

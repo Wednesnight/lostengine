@@ -30,7 +30,7 @@ namespace lost
 
       void updateBuffer()
       {
-        mFace->renderText( mSize, mText, mRenderBuffer );
+        mFace->renderText( mSize, "asd", mRenderBuffer );
       }
 
     public:
@@ -50,26 +50,11 @@ namespace lost
       {
         DOUT("loading font: " << inPathToFile);
       }
-
-/*
-      TrueTypeFont(boost::shared_ptr<lost::resource::File> inFile)
-      : font(reinterpret_cast<const unsigned char*>(inFile->data.get()), inFile->size)
-      {
-        DOUT("loading font from memory");
-        if(font.Error() != 0) { throw std::runtime_error("couldn't load font from memory"); }
-      }
-*/
-
+      
+      
+      
       void render(float x, float y)
       {
-/*
-        glDisable(GL_SCISSOR_TEST);
-        glColor4fv(common::redColor.fv);
-        math::Rect rect = mFace->rect();
-        rect.x = x;
-        rect.y = y;
-        gl::drawRectOutline( rect );
-*/
         lost::gl::PushAttrib attrib(GL_ENABLE_BIT);GLDEBUG;
         glEnable(GL_BLEND);GLDEBUG;
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); GLDEBUG;
@@ -80,7 +65,6 @@ namespace lost
         glPushMatrix();GLDEBUG;
         glLoadIdentity();GLDEBUG;
 
-        glColor4fv(mColor.fv);GLDEBUG;
         glTranslatef(x, y-mFace->rect().y, 0);GLDEBUG;
         mRenderBuffer->call();
 
@@ -96,23 +80,7 @@ namespace lost
         mSize = inSize;
         updateBuffer();
       }
-
-      void text( const std::string& inText )
-      {
-        Font::text(inText);
-        updateBuffer();
-      }
-
-      virtual float textWidth()
-      {
-        return mFace->rect().width;
-      }
-      virtual float textHeight()
-      {
-        return mFace->rect().height;
-      }
     };
-
   }
 }
 
