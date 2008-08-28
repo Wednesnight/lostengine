@@ -435,6 +435,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;

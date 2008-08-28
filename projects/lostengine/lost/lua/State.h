@@ -7,8 +7,11 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <map>
+#include <hashlibpp.h>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
+#include "lost/resource/File.h"
 
 namespace lost
 {
@@ -40,6 +43,17 @@ namespace lost
         lua_close(state);
       }
 
+      std::string getScriptSource(lua_Debug& debug)
+      {
+        std::string result("source: ");
+        md5wrapper  md5;
+        std::string file(md5.getHashFromString(debug.source));
+        if (fileHashes.find(file) != fileHashes.end()) result.append(fileHashes[file]);
+          else result.append(debug.short_src);
+
+        return result;
+      }
+      
       void handleError()
       {
         // old error message
@@ -54,9 +68,9 @@ namespace lost
         std::stringstream msg;
         msg << "in " << debug.what;
         if (debug.namewhat != 0) msg << " " << debug.namewhat;
-        else msg << " unknown";
+          else msg << " unknown";
         if (debug.name != 0) msg << " " << debug.name;
-        if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
+        if (debug.currentline >= 0) msg  << " (" << getScriptSource(debug) << ", line " << debug.currentline << ")";
         
         // print out current func
         EOUT(msg.str());
@@ -69,9 +83,9 @@ namespace lost
           msg.str("");
           msg << "called from " << debug.what;
           if (debug.namewhat != "") msg << " " << debug.namewhat;
-          else msg << " unknown";
+            else msg << " unknown";
           if (debug.name != 0) msg << " " << debug.name;
-          if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
+          if (debug.currentline >= 0) msg  << " (" << getScriptSource(debug) << ", line " << debug.currentline << ")";
           
           // print out info
           EOUT(msg.str());
@@ -115,6 +129,17 @@ namespace lost
         if(!file) throw std::runtime_error("couldn't load file: '"+inAbsolutePath+"'");
         os << file.rdbuf();
         std::string data = os.str();
+        md5wrapper md5;
+        fileHashes[md5.getHashFromString(data)] = inAbsolutePath;
+        doString(data);
+      }
+
+      void doFile(const boost::shared_ptr<lost::resource::File>& inFile)
+      {
+        std::string data(inFile->str());
+        md5wrapper  md5;
+
+        fileHashes[md5.getHashFromString(data)] = inFile->location;
         doString(data);
       }
 
@@ -147,6 +172,8 @@ namespace lost
       lua_State* state;
 
       int callstackSize;
+
+      std::map<std::string, std::string> fileHashes;
     };
 
   }

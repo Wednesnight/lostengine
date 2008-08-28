@@ -32,7 +32,7 @@ namespace lost
       LuaLostModelObjMaterial(state);
       LuaLostModelObjParser(state);
       LuaLostLuaState(state);
-      
+
       luabind::bind_class_info(state);
     }
   }
