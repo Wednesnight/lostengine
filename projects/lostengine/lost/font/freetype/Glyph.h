@@ -29,14 +29,9 @@ namespace lost
                                                     float maxv,
                                                     signed long inXOffset,
                                                     signed long inYOffset,
-                                                    signed long inAdvance)
-        : mTexture(tex), mRect(rect), mMaxU(maxu), mMaxV(maxv), mXOffset(inXOffset), mYOffset(inYOffset), mAdvance(inAdvance)
-        {
-        }
+                                                    signed long inAdvance);
 
-        virtual ~Glyph()
-        {
-        }
+        virtual ~Glyph();
 
         /** draws a quad using the rect coordinates and the glyph texture.
          * This is a minimal drawing routine thats missing some important parts that should be set
@@ -51,19 +46,7 @@ namespace lost
          * if the quad coords are e.g. x+rect.width which is actually one pixel too large. I'm not sure why this is the case.
          *
          */
-        void draw(float xoffset = 0, float yoffset = 0)
-        {
-          mTexture->bind();GLDEBUG;
-          lost::math::Rect temprect = mRect;
-          temprect.x += xoffset;
-          temprect.y += yoffset;
-          glBegin(GL_QUADS);
-          glTexCoord2f(0,mMaxV);glVertex2f(temprect.x, temprect.y);
-          glTexCoord2f(mMaxU,mMaxV);glVertex2f(temprect.x+temprect.width, temprect.y);
-          glTexCoord2f(mMaxU,0);glVertex2f(temprect.x+temprect.width, temprect.y+temprect.height);
-          glTexCoord2f(0,0);glVertex2f(temprect.x, temprect.y+temprect.height);
-          glEnd();GLDEBUG;
-        }
+        void draw(float xoffset = 0, float yoffset = 0);
 
         lost::math::Rect& rect() { return mRect; }
         signed long xoffset() { return mXOffset; }
