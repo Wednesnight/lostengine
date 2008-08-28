@@ -42,14 +42,14 @@ namespace lost
 
       void handleError()
       {
-        lua_Debug debug;
-        lua_getstack(state, 0, &debug);
-        lua_getinfo(state, "Sln", &debug);
-        
         // old error message
         std::string err = lua_tostring(state, -1);
         EOUT(err);
         lua_pop(state, 1);
+        
+        lua_Debug debug;
+        lua_getstack(state, 0, &debug);
+        lua_getinfo(state, "Sln", &debug);
         
         std::stringstream msg;
         msg << "in " << debug.what;
@@ -122,7 +122,7 @@ namespace lost
       void doString(const std::string& inData)
       {
         // execute the loaded file and handle errors
-        if (int err = luaL_dostring(state, inData.c_str()))
+        if (int err = (luaL_loadstring(state, inData.c_str()) || luabind::detail::pcall(state, 0, LUA_MULTRET)))
         {
           std::string errcode;
           switch(err)
