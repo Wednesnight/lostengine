@@ -148,7 +148,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/boost/boost_1_34_1/include\"";
+				HEADER_SEARCH_PATHS = ../../thirdparty/boost/boost_1_34_1/include;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
@@ -162,6 +162,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ../../thirdparty/boost/boost_1_34_1/include;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 			};

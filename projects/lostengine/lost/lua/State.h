@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <string>
 #include "lost/platform/Platform.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -15,10 +16,11 @@ namespace lost
   {
 
     int errorCallback(lua_State* state);
-  
+
     struct State
     {
       State(bool callLuabindOpen=true, bool doOpenLibs=true, bool doInitPackagePath=true)
+      : callstackSize(10)
       {
         state = luaL_newstate();
         if(callLuabindOpen) luabind::open(state);
@@ -38,6 +40,44 @@ namespace lost
         lua_close(state);
       }
 
+      void handleError()
+      {
+        lua_Debug debug;
+        lua_getstack(state, 0, &debug);
+        lua_getinfo(state, "Sln", &debug);
+        
+        // old error message
+        std::string err = lua_tostring(state, -1);
+        EOUT(err);
+        lua_pop(state, 1);
+        
+        std::stringstream msg;
+        msg << "in " << debug.what;
+        if (debug.namewhat != 0) msg << " " << debug.namewhat;
+        else msg << " unknown";
+        if (debug.name != 0) msg << " " << debug.name;
+        if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
+        
+        // print out current func
+        EOUT(msg.str());
+        
+        // get call stack
+        unsigned int idx = 1;
+        while (idx <= callstackSize && lua_getstack(state, idx++, &debug) == 1)
+        {
+          lua_getinfo(state, "Sln", &debug);
+          msg.str("");
+          msg << "called from " << debug.what;
+          if (debug.namewhat != "") msg << " " << debug.namewhat;
+          else msg << " unknown";
+          if (debug.name != 0) msg << " " << debug.name;
+          if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
+          
+          // print out info
+          EOUT(msg.str());
+        }
+      }
+      
       // cast operator to original lua_State* value
       operator lua_State*() { return state; }
 
@@ -105,6 +145,8 @@ namespace lost
 
 
       lua_State* state;
+
+      int callstackSize;
     };
 
   }

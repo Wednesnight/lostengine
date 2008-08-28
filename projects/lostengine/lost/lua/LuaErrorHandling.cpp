@@ -1,8 +1,12 @@
-#include <sstream>
+#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
+#include "lost/lua/State.h"
 #include "lost/common/Logger.h"
 
+using namespace std;
+using namespace boost;
 using namespace luabind;
+using namespace lost::lua;
 
 namespace lost
 {
@@ -11,39 +15,14 @@ namespace lost
 
     int errorCallback(lua_State* state)
     {
-      lua_Debug debug;
-      lua_getstack(state, 0, &debug);
-      lua_getinfo(state, "Sln", &debug);
-
-      // old error message
-      std::string err = lua_tostring(state, -1);
-      EOUT(err);
-      lua_pop(state, 1);
-
-      std::stringstream msg;
-      msg << "in " << debug.what;
-      if (debug.namewhat != 0) msg << " " << debug.namewhat;
-        else msg << " unknown";
-      if (debug.name != 0) msg << " " << debug.name;
-      if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
-
-      // print out current func
-      EOUT(msg.str());
-
-      // get call stack (depth: 10)
-      unsigned int idx = 1;
-      while (idx <= 10 && lua_getstack(state, idx++, &debug) == 1)
+      try
       {
-        lua_getinfo(state, "Sln", &debug);
-        msg.str("");
-        msg << "called from " << debug.what;
-        if (debug.namewhat != "") msg << " " << debug.namewhat;
-          else msg << " unknown";
-        if (debug.name != 0) msg << " " << debug.name;
-        if (debug.currentline >= 0) msg  << " (line " << debug.currentline << ")";
-        
-        // print out info
-        EOUT(msg.str());
+        shared_ptr<State> interpreter = object_cast<shared_ptr<State> >(globals(state)["globals"]["state"]);
+        interpreter->handleError();
+      }
+      catch (exception& e)
+      {
+        EOUT("could not call error handler: " << e.what());
       }
 
       return 1;

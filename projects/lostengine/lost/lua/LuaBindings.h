@@ -58,6 +58,7 @@ namespace lost
     void LuaLostModelMesh(lost::lua::State& state);
     void LuaLostModelObjMaterial(lost::lua::State& state);
     void LuaLostModelObjParser(lost::lua::State& state);
+    void LuaLostLuaState(lost::lua::State& state);
 
     void bindAll(lost::lua::State& state);
   }
