@@ -15,17 +15,18 @@ namespace lost
 
     int errorCallback(lua_State* state)
     {
+      int result = 0;
       try
       {
         shared_ptr<State> interpreter = object_cast<shared_ptr<State> >(globals(state)["globals"]["state"]);
-        interpreter->handleError();
+        result = interpreter->handleError();
       }
       catch (exception& e)
       {
         EOUT("could not call error handler: " << e.what());
       }
 
-      return 1;
+      return result;
     }
 
   }

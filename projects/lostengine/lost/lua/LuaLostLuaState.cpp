@@ -13,7 +13,7 @@ LOST_LUA_EXPORT_BEGIN(LuaLostLuaState)
     [
       class_<State, boost::shared_ptr<State> >("State")
       .def(constructor<>())
-     .def("doFile", (void(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
+     .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
       .def_readwrite("callstackSize", &State::callstackSize)
     ]
   ];

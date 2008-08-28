@@ -151,6 +151,9 @@
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
 		3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
 		3EBEE8900E3A05190055A8D2 /* AABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEE88F0E3A05190055A8D2 /* AABB.h */; };
+		3EC9CFCF0E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
+		3EC9CFD00E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
+		3EC9CFD10E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
@@ -681,6 +684,7 @@
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
 		3EBEE88F0E3A05190055A8D2 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
+		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
 		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
 		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
@@ -868,7 +872,7 @@
 				EA3B94480E0462A600B6423B /* GLee */,
 				EA3B94450E04628C00B6423B /* freetype2 */,
 				EA3B94310E04623600B6423B /* luabind */,
-				EA3B94300E04622D00B6423B /* Lua */,
+				EA3B94300E04622D00B6423B /* lua */,
 			);
 			name = thirdparty;
 			sourceTree = "<group>";
@@ -1010,12 +1014,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EA3B94300E04622D00B6423B /* Lua */ = {
+		EA3B94300E04622D00B6423B /* lua */ = {
 			isa = PBXGroup;
 			children = (
 				EA0E45B20E5E29FA00B5EBF1 /* lua.xcodeproj */,
 			);
-			name = Lua;
+			name = lua;
 			sourceTree = "<group>";
 		};
 		EA3B94310E04623600B6423B /* luabind */ = {
@@ -1204,6 +1208,7 @@
 			children = (
 				EA3B94E40E04639D00B6423B /* lua.h */,
 				EA3B94E50E04639D00B6423B /* State.h */,
+				3EC9CFCE0E673182003CED66 /* State.cpp */,
 				EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */,
 				EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */,
 				EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */,
@@ -1881,6 +1886,7 @@
 				3EFEC12A0E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
 				3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398E90E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
+				3EC9CFD00E673182003CED66 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1928,6 +1934,7 @@
 				3EFEC1290E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
 				3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EB0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
+				3EC9CFCF0E673182003CED66 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,6 +1983,7 @@
 				3EFEC1280E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp in Sources */,
 				3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EA0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
+				3EC9CFD10E673182003CED66 /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

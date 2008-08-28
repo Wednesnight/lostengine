@@ -42,11 +42,10 @@ end
 function initHandler(event)
   log.debug("init")
 
---  figgn1()
+  figgn1()
 
   -- Initialize camera
   config.cameraController = lost.camera.CameraController()
-  config.cameraController:init()
   config.camera = config.cameraController.camera
 
   -- Initialize model attributes

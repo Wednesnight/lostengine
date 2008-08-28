@@ -19,5 +19,6 @@ lost.camera.CameraController_mt = { __index = lost.camera.CameraController }
 function lost.camera.CameraController()
   local result = {}
   setmetatable(result, lost.camera.CameraController_mt)
+  result:init()
   return result
 end

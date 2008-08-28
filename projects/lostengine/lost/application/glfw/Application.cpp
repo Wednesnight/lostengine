@@ -37,11 +37,12 @@ namespace application
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
-    lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
 
     globals(*interpreter)["globals"]                   = newtable(*interpreter); // create globals table
     globals(*interpreter)["globals"]["app"]            = this; // map the app itself into the interpreter so scripts can attach to its events
     luabind::globals(*interpreter)["globals"]["state"] = interpreter; // map the state itself into the interpreter so scripts can use it
+    
+    lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
 
     config.reset(new Config(interpreter)); // init config
   }
