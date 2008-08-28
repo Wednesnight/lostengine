@@ -123,7 +123,10 @@ struct Controller
     glPopMatrix(); // restore the original modelview
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
+    glEnableClientState(GL_VERTEX_ARRAY);
     fpsmeter.render( appInstance->displayAttributes.width - (fpsmeter.width + 10), 0, event->passedSec );
+    glDisableClientState(GL_VERTEX_ARRAY);
+
     appInstance->swapBuffers();
   }
 };
