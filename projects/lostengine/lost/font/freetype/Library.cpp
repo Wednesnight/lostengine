@@ -1,4 +1,7 @@
 #include "lost/font/freetype/Library.h"
+#include "lost/common/Logger.h"
+#include <stdexcept>
+#include <boost/lexical_cast.hpp>
 
 namespace lost
 {
@@ -39,7 +42,6 @@ boost::shared_ptr<Face> Library::initFace(boost::shared_ptr<lost::resource::File
   else
   {
     FT_Face face;
-    //FT_Error error = FT_New_Face(mLibrary, path.c_str(), 0, &face);
     FT_Error error  = FT_New_Memory_Face(mLibrary, reinterpret_cast<FT_Byte*>(file->data.get()), file->size, 0, &face);
     if(error)
     {

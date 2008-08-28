@@ -6,10 +6,7 @@
 #include <boost/shared_ptr.hpp>
 #include <string>
 #include <map>
-#include <stdexcept>
-#include "lost/common/Logger.h"
 #include "lost/font/freetype/Face.h"
-#include <boost/lexical_cast.hpp>
 #include "lost/resource/File.h"
 
 namespace lost
@@ -18,12 +15,13 @@ namespace lost
   {
     namespace freetype
     {
-      typedef std::map<std::string, boost::shared_ptr<Face> > FaceCache;
       /** loads fonts via freetype2, either from file or memory, and
        * caches them in a map.
        */
       struct Library
       {
+        typedef std::map<std::string, boost::shared_ptr<Face> > FaceCache;
+
         Library();
         virtual ~Library();
 
