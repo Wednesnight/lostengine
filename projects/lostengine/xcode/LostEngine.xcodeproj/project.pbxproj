@@ -150,6 +150,15 @@
 		3EC9CFCF0E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD00E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD10E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
+		3EC9D0C00E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */; };
+		3EC9D0C20E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */; };
+		3EC9D0C40E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */; };
+		3EC9D0D50E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */; };
+		3EC9D0D60E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */; };
+		3EC9D0D70E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */; };
+		3EC9D0EA0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
+		3EC9D0EB0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
+		3EC9D0EC0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
 		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
@@ -697,6 +706,9 @@
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
 		3EBEE88F0E3A05190055A8D2 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonColor.cpp; sourceTree = "<group>"; };
+		3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostMathRect.cpp; sourceTree = "<group>"; };
+		3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationTimer.cpp; sourceTree = "<group>"; };
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
 		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
 		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
@@ -1260,6 +1272,9 @@
 				3EFEC1270E62C56F0053EB12 /* LuaLostModelObjMaterial.cpp */,
 				3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */,
 				3EB398E80E669B6B00326946 /* LuaLostLuaState.cpp */,
+				3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */,
+				3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */,
+				3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -1907,6 +1922,9 @@
 				3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398E90E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFD00E673182003CED66 /* State.cpp in Sources */,
+				3EC9D0C20E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */,
+				3EC9D0D70E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */,
+				3EC9D0EA0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */,
 				EA54FA7B0E676E2200605409 /* Library.cpp in Sources */,
 				EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
@@ -1959,6 +1977,9 @@
 				3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EB0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFCF0E673182003CED66 /* State.cpp in Sources */,
+				3EC9D0C00E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */,
+				3EC9D0D60E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */,
+				3EC9D0EC0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */,
 				EA54FA6B0E676E2200605409 /* Library.cpp in Sources */,
 				EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA6E0E676E2200605409 /* Face.cpp in Sources */,
@@ -2012,6 +2033,9 @@
 				3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */,
 				3EB398EA0E669B6B00326946 /* LuaLostLuaState.cpp in Sources */,
 				3EC9CFD10E673182003CED66 /* State.cpp in Sources */,
+				3EC9D0C40E675F6E003CED66 /* LuaLostCommonColor.cpp in Sources */,
+				3EC9D0D50E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */,
+				3EC9D0EB0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */,
 				EA54FA730E676E2200605409 /* Library.cpp in Sources */,
 				EA54FA740E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,

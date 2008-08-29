@@ -1,0 +1,62 @@
+function preinitHandler(event)
+  log.debug("preinit, building config")
+
+  -- config is deliberatly global so application-internal startup code can find it
+  config = {}
+
+  config.displayAttributes = lost.common.DisplayAttributes()
+  config.displayAttributes.width = 800;
+  config.displayAttributes.height = 600;
+  config.displayAttributes.redbits = 8;
+  config.displayAttributes.bluebits = 8;
+  config.displayAttributes.greenbits = 8;
+  config.displayAttributes.alphabits = 8;
+  config.displayAttributes.depthbits = 24;
+  config.displayAttributes.stencilbits = 0;
+  config.displayAttributes.fullscreen = false;
+  config.displayAttributes.title = "Object0r";
+end
+
+function initHandler(event)
+  log.debug("init")
+  
+  controls = {}
+  controls.button = Button()
+end
+
+function runHandler(event)
+  log.debug("run")
+end
+
+function quitHandler(event)
+  log.debug("quit")
+end
+
+function renderHandler(event)
+  controls.button:internalRender()
+end
+
+local ApplicationEvent = lost.application.ApplicationEvent
+globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
+globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
+globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
+globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
+globals.timer = lost.application.Timer("luarender", 0.015)
+globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+
+class 'Button' (lost.guiro.View)
+
+function Button:__init() super()
+  log.debug("Button:__init()")
+end
+
+function Button:render()
+--  log.debug("Button:render()")
+  
+  lost.gl.setColor(lost.common.Color(1,0,0))
+  lost.gl.drawRectFilled(lost.math.Rect(100,100,100,100))
+end
+
+function Button:__finalize()
+  log.debug("Button:__finalize()")
+end

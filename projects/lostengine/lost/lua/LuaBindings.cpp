@@ -32,6 +32,9 @@ namespace lost
       LuaLostModelObjMaterial(state);
       LuaLostModelObjParser(state);
       LuaLostLuaState(state);
+      LuaLostCommonColor(state);
+      LuaLostMathRect(state);
+      LuaLostApplicationTimer(state);
 
       luabind::bind_class_info(state);
     }

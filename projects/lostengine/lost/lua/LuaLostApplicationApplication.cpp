@@ -9,7 +9,7 @@ LOST_LUA_EXPORT_BEGIN(LuaLostApplicationApplication)
 {
   module(state, "lost")
   [
-    namespace_("event")
+    namespace_("application")
     [
       class_<Application, EventDispatcher>("Application")
        .def(constructor<>())
