@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -49,7 +48,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3EC9D00F0E6748D9003CED66 /* GuiroTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuiroTest.h; path = ../GuiroTest.h; sourceTree = SOURCE_ROOT; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -220,7 +217,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,17 +241,6 @@
 			targetProxy = EA0E497C0E5E405C00B5EBF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
