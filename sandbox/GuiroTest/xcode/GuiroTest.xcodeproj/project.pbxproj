@@ -48,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E1D63560E683C9D00675671 /* GuiroTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuiroTest.h; path = ../GuiroTest.h; sourceTree = SOURCE_ROOT; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				EA27DE3A0DD87DA100552F5E /* main.cpp */,
+				3E1D63560E683C9D00675671 /* GuiroTest.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
