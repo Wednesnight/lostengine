@@ -37,9 +37,15 @@ namespace lost
       template <typename Type>
       Type as(const Type& inDefault)
       {
-        Type result = as<Type>();
-        if (luabind::type((luabind::object)*this) == LUA_TNIL) result = inDefault;
-        return result;
+        try 
+        {
+          Type result = as<Type>();
+          return result;
+        }
+        catch (std::exception& e)
+        {
+          return inDefault;
+        }
       }
     };
 

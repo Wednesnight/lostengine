@@ -33,14 +33,14 @@ function quitHandler(event)
 end
 
 function renderHandler(event)
-  controls.button:internalRender()
+--  controls.button:internalRender()
 end
 
 local ApplicationEvent = lost.application.ApplicationEvent
-globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
-globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
-globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
-globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
+--globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
+--globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
+--globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
+--globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
 globals.timer = lost.application.Timer("luarender", 0.015)
 globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
 
