@@ -67,7 +67,7 @@ namespace application
     }
     catch(exception& ex)
     {
-      IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
+      IOUT("couldn't load init script, proceeding without it, error: "+string(ex.what()));
     }
     
     // broadcast preinit event, this is the latest point for c++ client code to setup the configuration
