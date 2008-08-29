@@ -2,15 +2,9 @@
 #define LOST_LUA_STATE_H
 
 #include "lost/lua/lua.h"
-
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
+#include <boost/shared_ptr.hpp>
 #include <string>
 #include <map>
-#include <hashlibpp.h>
-#include "lost/platform/Platform.h"
-#include "lost/common/Logger.h"
 #include "lost/resource/File.h"
 
 namespace lost

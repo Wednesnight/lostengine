@@ -1,4 +1,8 @@
 #include "lost/lua/State.h"
+#include <hashlibpp.h>
+#include "lost/platform/Platform.h"
+#include "lost/common/Logger.h"
+#include <stdexcept>
 
 namespace lost
 {
