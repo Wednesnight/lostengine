@@ -49,6 +49,7 @@ namespace lost
     void LuaLostApplicationMouseEvent(lost::lua::State& state);
     void LuaLostApplicationApplicationEvent(lost::lua::State& state);
     void LuaLostLSystemLSystem(lost::lua::State& state);
+    void LuaLostMathVec2(lost::lua::State& state);
     void LuaLostMathVec3(lost::lua::State& state);
     void LuaLostMathVec4(lost::lua::State& state);
     void LuaLostApplicationAccelerometerEvent(lost::lua::State& state);
@@ -62,6 +63,10 @@ namespace lost
     void LuaLostCommonColor(lost::lua::State& state);
     void LuaLostMathRect(lost::lua::State& state);
     void LuaLostApplicationTimer(lost::lua::State& state);
+    void LuaLostCommonFpsMeter(lost::lua::State& state);
+    void LuaLostGLGL(lost::lua::State& state);
+    void LuaLostGLDraw(lost::lua::State& state);
+    void LuaLostGLUtils(lost::lua::State& state);
 
     void bindAll(lost::lua::State& state);
   }

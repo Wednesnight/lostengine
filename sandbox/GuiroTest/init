@@ -1,3 +1,26 @@
+--[[
+     Button class
+  ]]
+class 'Button' (lost.guiro.View)
+
+function Button:__init() super()
+  log.debug("Button:__init()")
+end
+
+function Button:render()
+--  log.debug("Button:render()")
+  
+  lost.gl.setColor(lost.common.Color(0,1,0))
+  lost.gl.drawRectFilled(lost.math.Rect(100,100,100,100))
+end
+
+function Button:__finalize()
+  log.debug("Button:__finalize()")
+end
+
+--[[
+     main
+  ]]
 function preinitHandler(event)
   log.debug("preinit, building config")
 
@@ -15,13 +38,38 @@ function preinitHandler(event)
   config.displayAttributes.stencilbits = 0;
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "Object0r";
+
+  globals.app:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.INIT, initHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
+
+  globals.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+  globals.app:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
 end
+globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, preinitHandler)
 
 function initHandler(event)
   log.debug("init")
   
   controls = {}
   controls.button = Button()
+  controls.fpsMeter = lost.common.FpsMeter()
+
+  globals.timer = lost.application.Timer("luarender", 0.015)
+  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+end
+
+function keyHandler(event)
+  keyEvent = lost.application.KeyEvent.cast(event)
+  
+  if (keyEvent.pressed) then
+  
+    if (keyEvent.key == lost.application.K_ESCAPE) then
+      globals.app:quit()
+    end
+  
+  end
 end
 
 function runHandler(event)
@@ -33,30 +81,28 @@ function quitHandler(event)
 end
 
 function renderHandler(event)
---  controls.button:internalRender()
-end
+  local timerEvent = lost.application.TimerEvent.cast(event)
 
-local ApplicationEvent = lost.application.ApplicationEvent
---globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
---globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
---globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
---globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
-globals.timer = lost.application.Timer("luarender", 0.015)
-globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+  gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()
+  gl.glClear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT) gl.GLDEBUG()
 
-class 'Button' (lost.guiro.View)
+  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
+  gl.glEnableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
+  gl.glDisable(gl.GL_DEPTH_TEST) gl.GLDEBUG()
+  gl.glDisable(gl.GL_TEXTURE_2D) gl.GLDEBUG()
 
-function Button:__init() super()
-  log.debug("Button:__init()")
-end
+  controls.button:internalRender()
+  controls.fpsMeter:render(globals.app.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
-function Button:render()
---  log.debug("Button:render()")
+  gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
   
-  lost.gl.setColor(lost.common.Color(1,0,0))
-  lost.gl.drawRectFilled(lost.math.Rect(100,100,100,100))
+  globals.app:swapBuffers()
 end
 
-function Button:__finalize()
-  log.debug("Button:__finalize()")
+function resizeHandler(event)
+  local resizeEvent = lost.application.ResizeEvent.cast(event)
+
+  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
 end

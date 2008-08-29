@@ -14,7 +14,9 @@ LOST_LUA_EXPORT_BEGIN(LuaLostApplicationApplication)
       class_<Application, EventDispatcher>("Application")
        .def(constructor<>())
        .def("quit", &Application::quit)
+       .def("swapBuffers", &Application::swapBuffers)
        .def_readonly("loader", &Application::loader)
+       .def_readonly("displayAttributes", &Application::displayAttributes)
     ]
   ];
 }

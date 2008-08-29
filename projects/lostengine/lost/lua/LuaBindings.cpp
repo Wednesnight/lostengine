@@ -22,6 +22,7 @@ namespace lost
       LuaLostApplicationMouseEvent(state);
       LuaLostApplicationApplicationEvent(state);
       LuaLostLSystemLSystem(state);
+      LuaLostMathVec2(state);
       LuaLostMathVec3(state);
       LuaLostMathVec4(state);
       LuaLostApplicationAccelerometerEvent(state);
@@ -35,6 +36,10 @@ namespace lost
       LuaLostCommonColor(state);
       LuaLostMathRect(state);
       LuaLostApplicationTimer(state);
+      LuaLostCommonFpsMeter(state);
+      LuaLostGLGL(state);
+      LuaLostGLDraw(state);
+      LuaLostGLUtils(state);
 
       luabind::bind_class_info(state);
     }

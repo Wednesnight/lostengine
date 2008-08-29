@@ -28,7 +28,6 @@
 		3E2950220E540A5D00E83965 /* lglu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E29501A0E540A5D00E83965 /* lglu.h */; };
 		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3E6EE7D40E62B5D200C4430C /* LuaLostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE7D30E62B5D200C4430C /* LuaLostModelMesh.cpp */; };
 		3E6EE7D50E62B5D200C4430C /* LuaLostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE7D30E62B5D200C4430C /* LuaLostModelMesh.cpp */; };
 		3E6EE7D60E62B5D200C4430C /* LuaLostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6EE7D30E62B5D200C4430C /* LuaLostModelMesh.cpp */; };
@@ -124,7 +123,6 @@
 		3E73255E0E5CE3A4000FF838 /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
 		3E73255F0E5CE3A4000FF838 /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */; };
 		3E7325600E5CE3A4000FF838 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
-		3E7325610E5CE3A4000FF838 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E7325640E5CE3A4000FF838 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF77F0E4A6C6F0003A334 /* Application.cpp */; };
@@ -134,7 +132,6 @@
 		3E7325680E5CE3A4000FF838 /* LostApplicationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */; };
 		3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E73256B0E5CE3A4000FF838 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3E852ECE0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
 		3E852ECF0E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
 		3E852ED00E640DB400E123E2 /* LuaErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E852ECD0E640DB400E123E2 /* LuaErrorHandling.cpp */; };
@@ -159,9 +156,31 @@
 		3EC9D0EA0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
 		3EC9D0EB0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
 		3EC9D0EC0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */; };
+		3EC9D26B0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D26A0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp */; };
+		3EC9D26C0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D26A0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp */; };
+		3EC9D26D0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D26A0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp */; };
+		3EC9D2850E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2840E67815A003CED66 /* LuaLostMathVec2.cpp */; };
+		3EC9D2860E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2840E67815A003CED66 /* LuaLostMathVec2.cpp */; };
+		3EC9D2870E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2840E67815A003CED66 /* LuaLostMathVec2.cpp */; };
+		3EC9D29B0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2990E6782C2003CED66 /* LuaLostMathVec3.cpp */; };
+		3EC9D29C0E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D29A0E6782C2003CED66 /* LuaLostMathVec4.cpp */; };
+		3EC9D29D0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2990E6782C2003CED66 /* LuaLostMathVec3.cpp */; };
+		3EC9D29E0E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D29A0E6782C2003CED66 /* LuaLostMathVec4.cpp */; };
+		3EC9D29F0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2990E6782C2003CED66 /* LuaLostMathVec3.cpp */; };
+		3EC9D2A00E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D29A0E6782C2003CED66 /* LuaLostMathVec4.cpp */; };
+		3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
+		3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
+		3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
+		3EC9D2E70E678A74003CED66 /* LuaLostGLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2E60E678A74003CED66 /* LuaLostGLGL.cpp */; };
+		3EC9D2E80E678A74003CED66 /* LuaLostGLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2E60E678A74003CED66 /* LuaLostGLGL.cpp */; };
+		3EC9D2E90E678A74003CED66 /* LuaLostGLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2E60E678A74003CED66 /* LuaLostGLGL.cpp */; };
+		3EC9D2FF0E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2FE0E678C7E003CED66 /* LuaLostGLDraw.cpp */; };
+		3EC9D3000E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2FE0E678C7E003CED66 /* LuaLostGLDraw.cpp */; };
+		3EC9D3010E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D2FE0E678C7E003CED66 /* LuaLostGLDraw.cpp */; };
+		3EC9D3200E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D31F0E678D2B003CED66 /* LuaLostGLUtils.cpp */; };
+		3EC9D3210E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D31F0E678D2B003CED66 /* LuaLostGLUtils.cpp */; };
+		3EC9D3220E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9D31F0E678D2B003CED66 /* LuaLostGLUtils.cpp */; };
 		3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
-		3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
-		3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */; };
 		3EE0563F0E65545600E044A2 /* libhashlib++-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE056210E65530600E044A2 /* libhashlib++-simulator.a */; };
 		3EE056400E65546200E044A2 /* libhashlib++-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561F0E65530600E044A2 /* libhashlib++-iphone.a */; };
 		3EE056410E65546E00E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561D0E65530600E044A2 /* libhashlib++.a */; };
@@ -364,7 +383,6 @@
 		EA6711A50E3E89DB00B961EC /* LuaLostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */; };
 		EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */; };
 		EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */; };
-		EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */; };
 		EA6711AB0E3E89DB00B961EC /* AABB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBEE88F0E3A05190055A8D2 /* AABB.h */; };
 		EA6711AC0E3E89DB00B961EC /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B96740E046C5400B6423B /* Generator.h */; };
 		EA6711AD0E3E89DB00B961EC /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
@@ -709,9 +727,15 @@
 		3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonColor.cpp; sourceTree = "<group>"; };
 		3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostMathRect.cpp; sourceTree = "<group>"; };
 		3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostApplicationTimer.cpp; sourceTree = "<group>"; };
+		3EC9D26A0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonFpsMeter.cpp; sourceTree = "<group>"; };
+		3EC9D2840E67815A003CED66 /* LuaLostMathVec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostMathVec2.cpp; sourceTree = "<group>"; };
+		3EC9D2990E6782C2003CED66 /* LuaLostMathVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostMathVec3.cpp; sourceTree = "<group>"; };
+		3EC9D29A0E6782C2003CED66 /* LuaLostMathVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostMathVec4.cpp; sourceTree = "<group>"; };
+		3EC9D2E10E6789F2003CED66 /* KeySym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeySym.h; sourceTree = "<group>"; };
+		3EC9D2E60E678A74003CED66 /* LuaLostGLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostGLGL.cpp; sourceTree = "<group>"; };
+		3EC9D2FE0E678C7E003CED66 /* LuaLostGLDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostGLDraw.cpp; sourceTree = "<group>"; };
+		3EC9D31F0E678D2B003CED66 /* LuaLostGLUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostGLUtils.cpp; sourceTree = "<group>"; };
 		3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLSystem.cpp; sourceTree = "<group>"; };
-		3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec3.cpp; sourceTree = "<group>"; };
-		3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaVec4.cpp; sourceTree = "<group>"; };
 		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCameraCamera.cpp; sourceTree = "<group>"; };
 		3EF26DA10E5D7F8A002F9CF0 /* LuaBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaBindings.cpp; sourceTree = "<group>"; };
@@ -1130,6 +1154,7 @@
 				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
 				EAAF977D0E15C30400B28BF6 /* MouseEvent.h */,
 				EAAF977F0E15C30400B28BF6 /* KeyEvent.h */,
+				3EC9D2E10E6789F2003CED66 /* KeySym.h */,
 				EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */,
 				EAAA56940E286E4A002EB663 /* ApplicationEvent.h */,
 				EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */,
@@ -1245,27 +1270,29 @@
 				EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */,
 				EAC5C6410E0B23EC00B9DFAC /* LuaBindings.h */,
 				3EF26DA10E5D7F8A002F9CF0 /* LuaBindings.cpp */,
+				3E2520D90E5EED38002CDC21 /* LuaEventCast.h */,
 				EA24DB160E2A5E66007AFAB0 /* LuaLostApplicationApplication.cpp */,
-				EA24DC520E2AC261007AFAB0 /* LuaLostApplicationResizeEvent.cpp */,
-				EA24DC530E2AC261007AFAB0 /* LuaLostApplicationKeyEvent.cpp */,
-				EA24DC540E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp */,
-				EA24DC550E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp */,
 				EA24DC560E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp */,
-				EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */,
+				EA24DC530E2AC261007AFAB0 /* LuaLostApplicationKeyEvent.cpp */,
+				EA24DC550E2AC261007AFAB0 /* LuaLostApplicationMouseEvent.cpp */,
+				EA24DC520E2AC261007AFAB0 /* LuaLostApplicationResizeEvent.cpp */,
+				3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */,
+				EA24DC540E2AC261007AFAB0 /* LuaLostApplicationTimerEvent.cpp */,
 				EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */,
 				EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */,
+				EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */,
 				EA9A35300E297E3B0090BAD0 /* LuaLostCommonLog.cpp */,
 				EA24DAEA0E2A5AEF007AFAB0 /* LuaLostEventEvent.cpp */,
 				EA24DB090E2A5DF3007AFAB0 /* LuaLostEventEventDispatcher.cpp */,
 				EA9A35DD0E299C540090BAD0 /* LuaLostResourceLoader.cpp */,
 				EA9A35DE0E299C540090BAD0 /* LuaLostResourceFile.cpp */,
 				3ED3A39F0E3886C7000199E7 /* LuaLSystem.cpp */,
-				3ED3A3A10E3886C7000199E7 /* LuaVec3.cpp */,
-				3EDB068F0E4C5787006D6305 /* LuaVec4.cpp */,
+				3EC9D2840E67815A003CED66 /* LuaLostMathVec2.cpp */,
+				3EC9D2990E6782C2003CED66 /* LuaLostMathVec3.cpp */,
+				3EC9D29A0E6782C2003CED66 /* LuaLostMathVec4.cpp */,
 				3EF26D570E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp */,
 				3E251FD30E5EC035002CDC21 /* LuaLostApplicationAccelerometerEvent.cpp */,
 				3E251FF40E5EC288002CDC21 /* LuaLostApplicationTouchEvent.cpp */,
-				3E2520D90E5EED38002CDC21 /* LuaEventCast.h */,
 				3E6EE7D30E62B5D200C4430C /* LuaLostModelMesh.cpp */,
 				3EFEC11F0E62C5480053EB12 /* LuaLostModelObjParser.cpp */,
 				3EFEC1230E62C5620053EB12 /* LuaLostModelObjRenderer.cpp */,
@@ -1274,7 +1301,10 @@
 				3EB398E80E669B6B00326946 /* LuaLostLuaState.cpp */,
 				3EC9D0BE0E675F6E003CED66 /* LuaLostCommonColor.cpp */,
 				3EC9D0D40E6760E4003CED66 /* LuaLostMathRect.cpp */,
-				3EC9D0E90E676443003CED66 /* LuaLostApplicationTimer.cpp */,
+				3EC9D26A0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp */,
+				3EC9D2E60E678A74003CED66 /* LuaLostGLGL.cpp */,
+				3EC9D2FE0E678C7E003CED66 /* LuaLostGLDraw.cpp */,
+				3EC9D31F0E678D2B003CED66 /* LuaLostGLUtils.cpp */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -1441,6 +1471,7 @@
 				EA54FA7F0E676E2200605409 /* Glyph.h in Headers */,
 				EA54FA800E676E2200605409 /* Face.h in Headers */,
 				EA54FA810E676E2200605409 /* Library.h in Headers */,
+				3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1526,6 +1557,7 @@
 				EA54FA6F0E676E2200605409 /* Glyph.h in Headers */,
 				EA54FA700E676E2200605409 /* Face.h in Headers */,
 				EA54FA710E676E2200605409 /* Library.h in Headers */,
+				3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1614,6 +1646,7 @@
 				EA54FA770E676E2200605409 /* Glyph.h in Headers */,
 				EA54FA780E676E2200605409 /* Face.h in Headers */,
 				EA54FA790E676E2200605409 /* Library.h in Headers */,
+				3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1900,7 +1933,6 @@
 				3E73255E0E5CE3A4000FF838 /* LuaLostResourceLoader.cpp in Sources */,
 				3E73255F0E5CE3A4000FF838 /* LuaLostResourceFile.cpp in Sources */,
 				3E7325600E5CE3A4000FF838 /* LuaLSystem.cpp in Sources */,
-				3E7325610E5CE3A4000FF838 /* LuaVec3.cpp in Sources */,
 				3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */,
 				3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */,
 				3E7325640E5CE3A4000FF838 /* Application.cpp in Sources */,
@@ -1910,7 +1942,6 @@
 				3E7325680E5CE3A4000FF838 /* LostApplicationHelpers.mm in Sources */,
 				3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */,
 				3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */,
-				3E73256B0E5CE3A4000FF838 /* LuaVec4.cpp in Sources */,
 				3EF26D5B0E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp in Sources */,
 				3EF26DA30E5D7F8A002F9CF0 /* LuaBindings.cpp in Sources */,
 				3E251FD50E5EC035002CDC21 /* LuaLostApplicationAccelerometerEvent.cpp in Sources */,
@@ -1929,6 +1960,13 @@
 				EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
 				EA54FA820E676E2200605409 /* Glyph.cpp in Sources */,
+				3EC9D26B0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */,
+				3EC9D2850E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */,
+				3EC9D29B0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */,
+				3EC9D29C0E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */,
+				3EC9D2E70E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
+				3EC9D2FF0E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
+				3EC9D3200E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1959,10 +1997,8 @@
 				EA24DC5B0E2AC261007AFAB0 /* LuaLostApplicationApplicationEvent.cpp in Sources */,
 				EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */,
 				3ED3A3A30E3886C7000199E7 /* LuaLSystem.cpp in Sources */,
-				3ED3A3A50E3886C7000199E7 /* LuaVec3.cpp in Sources */,
 				EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */,
 				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
-				3EDB06910E4C5787006D6305 /* LuaVec4.cpp in Sources */,
 				EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */,
 				3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */,
 				3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */,
@@ -1984,6 +2020,13 @@
 				EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA6E0E676E2200605409 /* Face.cpp in Sources */,
 				EA54FA720E676E2200605409 /* Glyph.cpp in Sources */,
+				3EC9D26C0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */,
+				3EC9D2870E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */,
+				3EC9D29F0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */,
+				3EC9D2A00E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */,
+				3EC9D2E80E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
+				3EC9D3010E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
+				3EC9D3220E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2011,7 +2054,6 @@
 				EA6711A50E3E89DB00B961EC /* LuaLostResourceLoader.cpp in Sources */,
 				EA6711A60E3E89DB00B961EC /* LuaLostResourceFile.cpp in Sources */,
 				EA6711A70E3E89DB00B961EC /* LuaLSystem.cpp in Sources */,
-				EA6711A90E3E89DB00B961EC /* LuaVec3.cpp in Sources */,
 				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
 				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
 				EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */,
@@ -2021,7 +2063,6 @@
 				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
 				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
 				3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */,
-				3E6E413F0E5AEBB400E5A064 /* LuaVec4.cpp in Sources */,
 				3EF26D590E5D73EF002F9CF0 /* LuaLostCameraCamera.cpp in Sources */,
 				3EF26DA20E5D7F8A002F9CF0 /* LuaBindings.cpp in Sources */,
 				3E251FD40E5EC035002CDC21 /* LuaLostApplicationAccelerometerEvent.cpp in Sources */,
@@ -2040,6 +2081,13 @@
 				EA54FA740E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
 				EA54FA7A0E676E2200605409 /* Glyph.cpp in Sources */,
+				3EC9D26D0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */,
+				3EC9D2860E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */,
+				3EC9D29D0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */,
+				3EC9D29E0E6782C2003CED66 /* LuaLostMathVec4.cpp in Sources */,
+				3EC9D2E90E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
+				3EC9D3000E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
+				3EC9D3210E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
