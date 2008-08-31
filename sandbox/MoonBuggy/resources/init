@@ -1,0 +1,5 @@
+log.debug("hello from lua");
+
+config = {}
+config.displayAttributes = lost.common.DisplayAttributes()
+config.displayAttributes.title = "Press mouse button to play"

@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EAF700590E6B09B600CA3865 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700550E6B09B600CA3865 /* AGL.framework */; };
+		EAF7005A0E6B09B600CA3865 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700560E6B09B600CA3865 /* OpenGL.framework */; };
+		EAF7005B0E6B09B600CA3865 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700570E6B09B600CA3865 /* GLUT.framework */; };
+		EAF7005C0E6B09B600CA3865 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700580E6B09B600CA3865 /* Carbon.framework */; };
+		EAF7006A0E6B0A0D00CA3865 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700610E6B09B600CA3865 /* libLostEngine.a */; };
+		EAF700890E6B0D4C00CA3865 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAF700880E6B0D4C00CA3865 /* init */; };
+		EAF700B50E6B0F8A00CA3865 /* libchipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF700B10E6B0F8200CA3865 /* libchipmunk.a */; };
+		EAF700BA0E6B0FD900CA3865 /* moon_buggy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF700B80E6B0FD900CA3865 /* moon_buggy.cpp */; };
+		EAF700BB0E6B0FD900CA3865 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF700B90E6B0FD900CA3865 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EAF700600E6B09B600CA3865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteInfo = LostEngine;
+		};
+		EAF700620E6B09B600CA3865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EAF700640E6B09B600CA3865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EAF7006B0E6B0A1C00CA3865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
+		};
+		EAF700B00E6B0F8200CA3865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAF700A90E6B0F8200CA3865 /* chipmunk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libchipmunk.a */;
+			remoteInfo = chipmunk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* MoonBuggy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoonBuggy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAF700550E6B09B600CA3865 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EAF700560E6B09B600CA3865 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAF700570E6B09B600CA3865 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EAF700580E6B09B600CA3865 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EAF700880E6B0D4C00CA3865 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../resources/init; sourceTree = SOURCE_ROOT; };
+		EAF700A90E6B0F8200CA3865 /* chipmunk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = chipmunk.xcodeproj; path = ../../../thirdparty/chipmunk/chipmunk_4_0_2/xcode/chipmunk.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EAF700B80E6B0FD900CA3865 /* moon_buggy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = moon_buggy.cpp; path = ../moon_buggy.cpp; sourceTree = SOURCE_ROOT; };
+		EAF700B90E6B0FD900CA3865 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAF700CB0E6B109F00CA3865 /* moonbuggy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moonbuggy.h; path = ../moonbuggy.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF700B50E6B0F8A00CA3865 /* libchipmunk.a in Frameworks */,
+				EAF7006A0E6B0A0D00CA3865 /* libLostEngine.a in Frameworks */,
+				EAF700590E6B09B600CA3865 /* AGL.framework in Frameworks */,
+				EAF7005A0E6B09B600CA3865 /* OpenGL.framework in Frameworks */,
+				EAF7005B0E6B09B600CA3865 /* GLUT.framework in Frameworks */,
+				EAF7005C0E6B09B600CA3865 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* MoonBuggy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* MoonBuggy */ = {
+			isa = PBXGroup;
+			children = (
+				EAF700B90E6B0FD900CA3865 /* main.cpp */,
+				EAF700B80E6B0FD900CA3865 /* moon_buggy.cpp */,
+				EAF700CB0E6B109F00CA3865 /* moonbuggy.h */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Libraries */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = MoonBuggy;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				EAF700880E6B0D4C00CA3865 /* init */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EAF700A90E6B0F8200CA3865 /* chipmunk.xcodeproj */,
+				EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */,
+				EAF700550E6B09B600CA3865 /* AGL.framework */,
+				EAF700560E6B09B600CA3865 /* OpenGL.framework */,
+				EAF700570E6B09B600CA3865 /* GLUT.framework */,
+				EAF700580E6B09B600CA3865 /* Carbon.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		EAF700530E6B09B600CA3865 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAF700610E6B09B600CA3865 /* libLostEngine.a */,
+				EAF700630E6B09B600CA3865 /* libLostEngine-iphone.a */,
+				EAF700650E6B09B600CA3865 /* libLostEngine-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAF700AA0E6B0F8200CA3865 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAF700B10E6B0F8200CA3865 /* libchipmunk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* MoonBuggy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MoonBuggy" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EAF7006C0E6B0A1C00CA3865 /* PBXTargetDependency */,
+			);
+			name = MoonBuggy;
+			productInstallPath = "$(HOME)/Applications";
+			productName = MoonBuggy;
+			productReference = 8D1107320486CEB800E47090 /* MoonBuggy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MoonBuggy" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* MoonBuggy */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EAF700AA0E6B0F8200CA3865 /* Products */;
+					ProjectRef = EAF700A90E6B0F8200CA3865 /* chipmunk.xcodeproj */;
+				},
+				{
+					ProductGroup = EAF700530E6B09B600CA3865 /* Products */;
+					ProjectRef = EAF700520E6B09B600CA3865 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* MoonBuggy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EAF700610E6B09B600CA3865 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EAF700600E6B09B600CA3865 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EAF700630E6B09B600CA3865 /* libLostEngine-iphone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-iphone.a";
+			remoteRef = EAF700620E6B09B600CA3865 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EAF700650E6B09B600CA3865 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = EAF700640E6B09B600CA3865 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EAF700B10E6B0F8200CA3865 /* libchipmunk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libchipmunk.a;
+			remoteRef = EAF700B00E6B0F8200CA3865 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF700890E6B0D4C00CA3865 /* init in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAF700BA0E6B0FD900CA3865 /* moon_buggy.cpp in Sources */,
+				EAF700BB0E6B0FD900CA3865 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EAF7006C0E6B0A1C00CA3865 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EAF7006B0E6B0A1C00CA3865 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MoonBuggy;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MoonBuggy_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = MoonBuggy;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/chipmunk/chipmunk_4_0_2/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/chipmunk/chipmunk_4_0_2/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MoonBuggy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MoonBuggy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
