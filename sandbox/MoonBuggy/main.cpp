@@ -10,6 +10,9 @@
 #include "lost/gl/gl.h"
 #include "chipmunk.h"
 #include "moonbuggy.h"
+#include "lost/common/FpsMeter.h"
+#include "lost/gl/Utils.h"
+#include "lost/math/Vec2.h"
 
 #define SLEEP_TICKS 16
 
@@ -19,6 +22,8 @@ extern cpBody *staticBody;
 extern cpBody *chassis;
 
 int ticks = 0;
+
+lost::common::FpsMeter fpsMeter;
 
 void drawCircle(cpFloat x, cpFloat y, cpFloat r, cpFloat a)
 {
@@ -168,7 +173,18 @@ void redraw(shared_ptr<TimerEvent> event)
 		glColor3f(1.0, 0.0, 0.0);
 		cpArrayEach(space->arbiters, &drawCollisions, NULL);
 	} glEnd();
-	
+
+  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+  glDisable(GL_DEPTH_TEST);GLDEBUG;
+  glDisable(GL_TEXTURE_2D);GLDEBUG;
+  
+  lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
+
+  glDisableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+
 	appInstance->swapBuffers();
 	ticks++;
 	
@@ -182,7 +198,7 @@ int main(int argn, char** args)
   {
     cpInitChipmunk();    
     moonBuggy_init();
-    
+ 
     Application app;
     app.addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(mouseButtonUp));
     app.addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(mouseButtonDown));
