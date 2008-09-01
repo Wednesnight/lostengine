@@ -3,7 +3,9 @@
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/application/KeySym.h"
 #include "lost/application/MouseEvent.h"
+#include "lost/application/TouchEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/resource/DefaultLoader.h"
@@ -12,9 +14,16 @@
 #include "moonbuggy.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/Utils.h"
+#include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
 
 #define SLEEP_TICKS 16
+
+using namespace std;
+using namespace boost;
+using namespace lost::common;
+using namespace lost::event;
+using namespace lost::application;
 
 extern cpSpace *space;
 extern cpBody *staticBody;
@@ -24,20 +33,26 @@ extern cpBody *chassis;
 int ticks = 0;
 
 lost::common::FpsMeter fpsMeter;
+Timer redrawTimer("redraw", 0.016);
 
 void drawCircle(cpFloat x, cpFloat y, cpFloat r, cpFloat a)
 {
 	const int segs = 15;
 	const cpFloat coef = 2.0*M_PI/(cpFloat)segs;
 	
+  float p[segs*2+2];
 	int n;
-	glBegin(GL_LINE_LOOP); {
-		for(n = 0; n < segs; n++){
-			cpFloat rads = n*coef;
-			glVertex2f(r*cos(rads + a) + x, r*sin(rads + a) + y);
-		}
-		glVertex2f(x,y);
-	} glEnd();
+  for(n = 0; n < segs; n++)
+  {
+		cpFloat rads = n*coef;
+    p[n*2]   = r*cos(rads + a) + x;
+    p[n*2+1] = r*sin(rads + a) + y;
+	}
+  p[segs*2]   = x;
+  p[segs*2+1] = y;
+
+  glVertexPointer(2, GL_FLOAT, 0, p);
+  glDrawArrays(GL_LINE_LOOP, 0, segs+1);
 }
 
 void drawCircleShape(cpShape *shape)
@@ -54,11 +69,7 @@ void drawSegmentShape(cpShape *shape)
 	cpSegmentShape *seg = (cpSegmentShape *)shape;
 	cpVect a = cpvadd(body->p, cpvrotate(seg->a, body->rot));
 	cpVect b = cpvadd(body->p, cpvrotate(seg->b, body->rot));
-	
-	glBegin(GL_LINES); {
-		glVertex2f(a.x, a.y);
-		glVertex2f(b.x, b.y);
-	} glEnd();
+  lost::gl::drawLine(lost::math::Vec2(a.x, a.y), lost::math::Vec2(b.x, b.y));
 }
 
 void drawPolyShape(cpShape *shape)
@@ -69,12 +80,17 @@ void drawPolyShape(cpShape *shape)
 	int num = poly->numVerts;
 	cpVect *verts = poly->verts;
 	
+  float p[num*2];
 	int i;
-	glBegin(GL_LINE_LOOP);
-	for(i=0; i<num; i++){
+	for(i = 0; i < num; i++)
+  {
 		cpVect v = cpvadd(body->p, cpvrotate(verts[i], body->rot));
-		glVertex2f(v.x, v.y);
-	} glEnd();
+		p[i*2]   = v.x;
+		p[i*2+1] = v.y;
+	}
+  
+  glVertexPointer(2, GL_FLOAT, 0, p);
+  glDrawArrays(GL_LINE_LOOP, 0, num);    
 }
 
 void drawObject(void *ptr, void *unused)
@@ -98,29 +114,29 @@ void drawObject(void *ptr, void *unused)
 void drawCollisions(void *ptr, void *data)
 {
 	cpArbiter *arb = static_cast<cpArbiter*>(ptr);
+  float p[arb->numContacts*2];
 	int i;
-	for(i=0; i<arb->numContacts; i++){
+	for(i=0; i < arb->numContacts; i++)
+  {
 		cpVect v = arb->contacts[i].p;
-		glVertex2f(v.x, v.y);
+		p[i*2]   = v.x;
+    p[i*2+1] = v.y;
 	}
+
+  glVertexPointer(2, GL_FLOAT, 0, p);
+  glDrawArrays(GL_POINTS, 0, arb->numContacts);    
 }
 
-using namespace std;
-using namespace boost;
-using namespace lost::common;
-using namespace lost::event;
-using namespace lost::application;
-
-void mouseButtonDown(shared_ptr<MouseEvent> event)
+void mouseButtonDown(shared_ptr<Event> event)
 {
   moonBuggy_input(0, 0, 0, 0);
-  DOUT("mb stuff");
+  //DOUT("mb stuff");
 }
 
-void mouseButtonUp(shared_ptr<MouseEvent> event)
+void mouseButtonUp(shared_ptr<Event> event)
 {
   moonBuggy_input(0, 1, 0, 0);
-  DOUT("mb stuff");
+  //DOUT("mb stuff");
 }
 
 void mouseMove(shared_ptr<MouseEvent> event)
@@ -130,57 +146,66 @@ void mouseMove(shared_ptr<MouseEvent> event)
 
 void keyHandler(shared_ptr<KeyEvent> event)
 {
-  DOUT("kb stuff");
+  //DOUT("kb stuff");
+  if (event->key == K_ESCAPE && event->pressed)
+    appInstance->quit();
 }
 
 void resize(shared_ptr<ResizeEvent> event)
 {
   DOUT("resize w: "<<event->width << " h:" << event->height);
+  glViewport (0, 0, event->width, event->height);
 }
 
 void redraw(shared_ptr<TimerEvent> event)
 {
   // init
-  glClearColor(1.0, 1.0, 1.0, 0.0);  
-	glPointSize(3.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-1000.0f, 1000.0f, -750.0, 750.0, -1.0, 1.0);
-	glScalef(2.0, 2.0, 1.0);
-	glMatrixMode(GL_MODELVIEW);
+  glClearColor(1.0, 1.0, 1.0, 0.0);GLDEBUG;
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
+	glPointSize(3.0);GLDEBUG;
+	glMatrixMode(GL_PROJECTION);GLDEBUG;
+	glLoadIdentity();GLDEBUG;
+	lglOrtho(-1000.0f, 1000.0f, -750.0, 750.0, -1.0, 1.0);GLDEBUG;
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+	glScalef(2.0, 2.0, 1.0);GLDEBUG;
+#else
+	glScalef(4.0, 2.0, 1.0);GLDEBUG;
+#endif
+	glMatrixMode(GL_MODELVIEW);GLDEBUG;
+  
+  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
+  glDisable(GL_DEPTH_TEST);GLDEBUG;
+  glDisable(GL_TEXTURE_2D);GLDEBUG;
   
   // display
 	int i;
 	
-	glClear(GL_COLOR_BUFFER_BIT);
-	glLoadIdentity();
-	glTranslatef(-chassis->p.x, -chassis->p.y, 0.0);
+	glLoadIdentity();GLDEBUG;
+	glTranslatef(-chassis->p.x, -chassis->p.y, 0.0);GLDEBUG;
 	
-	glColor3f(0.0, 0.0, 0.0);
+	glColor4f(0.0, 0.0, 0.0, 1.0);GLDEBUG;
 	cpSpaceHashEach(space->activeShapes, &drawObject, NULL);
 	cpSpaceHashEach(space->staticShapes, &drawObject, NULL);
   
 	cpArray *bodies = space->bodies;
 	int num = bodies->num;
 	
-	glBegin(GL_POINTS); {
-		glColor3f(0.0, 0.0, 1.0);
-		for(i=0; i<num; i++){
-			cpBody *body = static_cast<cpBody*>(bodies->arr[i]);
-			glVertex2f(body->p.x, body->p.y);
-		}
-		
-		glColor3f(1.0, 0.0, 0.0);
-		cpArrayEach(space->arbiters, &drawCollisions, NULL);
-	} glEnd();
+  float p[num*2];
+  glColor4f(0.0, 0.0, 1.0, 1.0);GLDEBUG;
+  for(i = 0; i < num; i++){
+    cpBody *body = static_cast<cpBody*>(bodies->arr[i]);
+    p[i*2]   = body->p.x;
+    p[i*2+1] = body->p.y;
+  }
+  glVertexPointer(2, GL_FLOAT, 0, p);GLDEBUG;
+  glDrawArrays(GL_POINTS, 0, num);GLDEBUG;
 
-  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-  glDisable(GL_DEPTH_TEST);GLDEBUG;
-  glDisable(GL_TEXTURE_2D);GLDEBUG;
-  
+  glColor4f(1.0, 0.0, 0.0, 1.0);GLDEBUG;
+  cpArrayEach(space->arbiters, &drawCollisions, NULL);
+
   lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+  glMatrixMode(GL_MODELVIEW);GLDEBUG;
+  glLoadIdentity();GLDEBUG;
   fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
 
   glDisableClientState(GL_VERTEX_ARRAY);GLDEBUG;
@@ -189,6 +214,11 @@ void redraw(shared_ptr<TimerEvent> event)
 	ticks++;
 	
 	moonBuggy_update();
+}
+
+void init(shared_ptr<Event> event)
+{
+  redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));
 }
 
 int main(int argn, char** args)
@@ -201,13 +231,15 @@ int main(int argn, char** args)
  
     Application app;
     app.addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(mouseButtonUp));
+    app.addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(mouseButtonUp));
+    app.addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(mouseButtonUp));
     app.addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(mouseButtonDown));
+    app.addEventListener(TouchEvent::TOUCHES_BEGAN(), receive<TouchEvent>(mouseButtonDown));
     app.addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(mouseMove));
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(keyHandler));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
     app.addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(resize));
-    
-    Timer redrawTimer("redraw", 0.016);redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));
+    app.addEventListener(ApplicationEvent::INIT(), receive<Event>(init));
     
     app.run();
   }

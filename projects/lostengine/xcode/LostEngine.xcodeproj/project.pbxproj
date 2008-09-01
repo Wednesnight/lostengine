@@ -299,21 +299,17 @@
 		EA54FA710E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
 		EA54FA720E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
 		EA54FA730E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
-		EA54FA740E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
 		EA54FA750E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
 		EA54FA760E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA770E676E2200605409 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA670E676E2200605409 /* Glyph.h */; };
 		EA54FA780E676E2200605409 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA680E676E2200605409 /* Face.h */; };
 		EA54FA790E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
-		EA54FA7A0E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
 		EA54FA7B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
-		EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
 		EA54FA7D0E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
 		EA54FA7E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA7F0E676E2200605409 /* Glyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA670E676E2200605409 /* Glyph.h */; };
 		EA54FA800E676E2200605409 /* Face.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA680E676E2200605409 /* Face.h */; };
 		EA54FA810E676E2200605409 /* Library.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA690E676E2200605409 /* Library.h */; };
-		EA54FA820E676E2200605409 /* Glyph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA6A0E676E2200605409 /* Glyph.cpp */; };
 		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
 		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA67107C0E3E53B000B961EC /* TimerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6710760E3E53B000B961EC /* TimerManager.h */; };
@@ -1957,9 +1953,7 @@
 				3EC9D0D70E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */,
 				3EC9D0EA0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */,
 				EA54FA7B0E676E2200605409 /* Library.cpp in Sources */,
-				EA54FA7C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
-				EA54FA820E676E2200605409 /* Glyph.cpp in Sources */,
 				3EC9D26B0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */,
 				3EC9D2850E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */,
 				3EC9D29B0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */,
@@ -2078,9 +2072,7 @@
 				3EC9D0D50E6760E4003CED66 /* LuaLostMathRect.cpp in Sources */,
 				3EC9D0EB0E676443003CED66 /* LuaLostApplicationTimer.cpp in Sources */,
 				EA54FA730E676E2200605409 /* Library.cpp in Sources */,
-				EA54FA740E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
-				EA54FA7A0E676E2200605409 /* Glyph.cpp in Sources */,
 				3EC9D26D0E677E44003CED66 /* LuaLostCommonFpsMeter.cpp in Sources */,
 				3EC9D2860E67815A003CED66 /* LuaLostMathVec2.cpp in Sources */,
 				3EC9D29D0E6782C2003CED66 /* LuaLostMathVec3.cpp in Sources */,
@@ -2295,6 +2287,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2334,16 +2327,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
-				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
