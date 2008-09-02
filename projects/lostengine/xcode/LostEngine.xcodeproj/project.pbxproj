@@ -49,8 +49,6 @@
 		3E73250D0E5CE3A4000FF838 /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		3E73250E0E5CE3A4000FF838 /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		3E73250F0E5CE3A4000FF838 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
-		3E7325110E5CE3A4000FF838 /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		3E7325150E5CE3A4000FF838 /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		3E7325160E5CE3A4000FF838 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
 		3E7325170E5CE3A4000FF838 /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
 		3E7325180E5CE3A4000FF838 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
@@ -257,8 +255,6 @@
 		EA3B953C0E04639D00B6423B /* Profiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94760E04639D00B6423B /* Profiler.h */; };
 		EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA3B95500E04639D00B6423B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
-		EA3B95560E04639D00B6423B /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		EA3B955A0E04639D00B6423B /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
 		EA3B955C0E04639D00B6423B /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
 		EA3B955D0E04639D00B6423B /* FragmentShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949F0E04639D00B6423B /* FragmentShader.h */; };
@@ -335,8 +331,6 @@
 		EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA6711750E3E89DB00B961EC /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
-		EA6711780E3E89DB00B961EC /* Font.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94960E04639D00B6423B /* Font.h */; };
-		EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949B0E04639D00B6423B /* TrueTypeFont.h */; };
 		EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5410E3CAF0B00C0A216 /* Buffer.h */; };
 		EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5380E3CAB5300C0A216 /* TypedBuffer.h */; };
 		EA6711800E3E89DB00B961EC /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
@@ -413,6 +407,12 @@
 		EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
 		EAB343170E4F3A6400C89299 /* AccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */; };
 		EAB343190E4F3A6C00C89299 /* TouchEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343180E4F3A6C00C89299 /* TouchEvent.h */; };
+		EAB83A060E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
+		EAB83A070E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
+		EAB83A080E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
+		EAB83A090E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
+		EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
+		EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
 		EAC5C63E0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */; };
 		EAC5C63F0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */; };
 		EAC5C6400E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */; };
@@ -779,8 +779,6 @@
 		EA3B94760E04639D00B6423B /* Profiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profiler.h; sourceTree = "<group>"; };
 		EA3B94790E04639D00B6423B /* SpiritHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritHelpers.h; sourceTree = "<group>"; };
 		EA3B948F0E04639D00B6423B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		EA3B94960E04639D00B6423B /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font.h; sourceTree = "<group>"; };
-		EA3B949B0E04639D00B6423B /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
 		EA3B949D0E04639D00B6423B /* DisplayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayList.h; sourceTree = "<group>"; };
 		EA3B949E0E04639D00B6423B /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
 		EA3B949F0E04639D00B6423B /* FragmentShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragmentShader.h; sourceTree = "<group>"; };
@@ -841,6 +839,8 @@
 		EAAF98480E15DB9100B28BF6 /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
 		EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerEvent.h; sourceTree = "<group>"; };
 		EAB343180E4F3A6C00C89299 /* TouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEvent.h; sourceTree = "<group>"; };
+		EAB83A040E6DD4C700A6570F /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
+		EAB83A050E6DD4C700A6570F /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
 		EAC5C63B0E0B23E200B9DFAC /* LuaLostCommonDisplayAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostCommonDisplayAttributes.cpp; sourceTree = "<group>"; };
 		EAC5C63C0E0B23E200B9DFAC /* LuaLostBitmapBitmapLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmapLoader.cpp; sourceTree = "<group>"; };
 		EAC5C63D0E0B23E200B9DFAC /* LuaLostBitmapBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaLostBitmapBitmap.cpp; sourceTree = "<group>"; };
@@ -1198,9 +1198,7 @@
 		EA3B94940E04639D00B6423B /* font */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B94960E04639D00B6423B /* Font.h */,
 				EA3B94970E04639D00B6423B /* freetype */,
-				EA3B949B0E04639D00B6423B /* TrueTypeFont.h */,
 			);
 			path = font;
 			sourceTree = "<group>";
@@ -1208,14 +1206,16 @@
 		EA3B94970E04639D00B6423B /* freetype */ = {
 			isa = PBXGroup;
 			children = (
-				EA54FA630E676E2200605409 /* Library.cpp */,
-				EA54FA640E676E2200605409 /* Renderer.cpp */,
-				EA54FA650E676E2200605409 /* Renderer.h */,
-				EA54FA660E676E2200605409 /* Face.cpp */,
-				EA54FA670E676E2200605409 /* Glyph.h */,
-				EA54FA680E676E2200605409 /* Face.h */,
 				EA54FA690E676E2200605409 /* Library.h */,
+				EA54FA630E676E2200605409 /* Library.cpp */,
+				EA54FA660E676E2200605409 /* Face.cpp */,
+				EA54FA680E676E2200605409 /* Face.h */,
+				EA54FA670E676E2200605409 /* Glyph.h */,
 				EA54FA6A0E676E2200605409 /* Glyph.cpp */,
+				EA54FA650E676E2200605409 /* Renderer.h */,
+				EA54FA640E676E2200605409 /* Renderer.cpp */,
+				EAB83A050E6DD4C700A6570F /* Loader.h */,
+				EAB83A040E6DD4C700A6570F /* Loader.cpp */,
 			);
 			path = freetype;
 			sourceTree = "<group>";
@@ -1404,8 +1404,6 @@
 				3E73250D0E5CE3A4000FF838 /* SpiritHelpers.h in Headers */,
 				3E73250E0E5CE3A4000FF838 /* Event.h in Headers */,
 				3E73250F0E5CE3A4000FF838 /* EventDispatcher.h in Headers */,
-				3E7325110E5CE3A4000FF838 /* Font.h in Headers */,
-				3E7325150E5CE3A4000FF838 /* TrueTypeFont.h in Headers */,
 				3E7325160E5CE3A4000FF838 /* Buffer.h in Headers */,
 				3E7325170E5CE3A4000FF838 /* TypedBuffer.h in Headers */,
 				3E7325180E5CE3A4000FF838 /* ArrayBuffer.h in Headers */,
@@ -1468,6 +1466,7 @@
 				EA54FA800E676E2200605409 /* Face.h in Headers */,
 				EA54FA810E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */,
+				EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1487,8 +1486,6 @@
 				EA3B953C0E04639D00B6423B /* Profiler.h in Headers */,
 				EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */,
 				EA3B95500E04639D00B6423B /* Event.h in Headers */,
-				EA3B95560E04639D00B6423B /* Font.h in Headers */,
-				EA3B955A0E04639D00B6423B /* TrueTypeFont.h in Headers */,
 				EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */,
 				EA3B955C0E04639D00B6423B /* Draw.h in Headers */,
 				EA3B955D0E04639D00B6423B /* FragmentShader.h in Headers */,
@@ -1554,6 +1551,7 @@
 				EA54FA700E676E2200605409 /* Face.h in Headers */,
 				EA54FA710E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */,
+				EAB83A070E6DD4C700A6570F /* Loader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1579,8 +1577,6 @@
 				EA6711740E3E89DB00B961EC /* SpiritHelpers.h in Headers */,
 				EA6711750E3E89DB00B961EC /* Event.h in Headers */,
 				EA6711760E3E89DB00B961EC /* EventDispatcher.h in Headers */,
-				EA6711780E3E89DB00B961EC /* Font.h in Headers */,
-				EA67117C0E3E89DB00B961EC /* TrueTypeFont.h in Headers */,
 				EA67117E0E3E89DB00B961EC /* Buffer.h in Headers */,
 				EA67117F0E3E89DB00B961EC /* TypedBuffer.h in Headers */,
 				EA6711800E3E89DB00B961EC /* ArrayBuffer.h in Headers */,
@@ -1643,6 +1639,7 @@
 				EA54FA780E676E2200605409 /* Face.h in Headers */,
 				EA54FA790E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */,
+				EAB83A090E6DD4C700A6570F /* Loader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1961,6 +1958,7 @@
 				3EC9D2E70E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
 				3EC9D2FF0E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
 				3EC9D3200E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
+				EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2021,6 +2019,7 @@
 				3EC9D2E80E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
 				3EC9D3010E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
 				3EC9D3220E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
+				EAB83A060E6DD4C700A6570F /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2080,6 +2079,7 @@
 				3EC9D2E90E678A74003CED66 /* LuaLostGLGL.cpp in Sources */,
 				3EC9D3000E678C7E003CED66 /* LuaLostGLDraw.cpp in Sources */,
 				3EC9D3210E678D2B003CED66 /* LuaLostGLUtils.cpp in Sources */,
+				EAB83A080E6DD4C700A6570F /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
