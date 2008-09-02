@@ -14,6 +14,7 @@
 		EA0E484E0E5E3E3600B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */; };
 		EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2AFA8F0DC2984F0034A6F5 /* main.cpp */; };
 		EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5EA5BC0E023BD100E7349B /* Vera.ttf */; };
+		EAB83A1C0E6DD82200A6570F /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A1B0E6DD82200A6570F /* Controller.cpp */; };
 		EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41A0DB53F9800855E60 /* OpenGL.framework */; };
 		EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41B0DB53F9800855E60 /* GLUT.framework */; };
 		EAECD4520DB542AF00855E60 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD4510DB542AF00855E60 /* AGL.framework */; };
@@ -63,6 +64,8 @@
 		EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA2AFA8F0DC2984F0034A6F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA5EA5BC0E023BD100E7349B /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../resources/Vera.ttf; sourceTree = SOURCE_ROOT; };
+		EAB83A1A0E6DD82200A6570F /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
+		EAB83A1B0E6DD82200A6570F /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
 		EAECD41A0DB53F9800855E60 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAECD41B0DB53F9800855E60 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EAECD4510DB542AF00855E60 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -108,6 +111,8 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				EAB83A1A0E6DD82200A6570F /* Controller.h */,
+				EAB83A1B0E6DD82200A6570F /* Controller.cpp */,
 				EA2AFA8F0DC2984F0034A6F5 /* main.cpp */,
 			);
 			name = Sources;
@@ -247,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */,
+				EAB83A1C0E6DD82200A6570F /* Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
