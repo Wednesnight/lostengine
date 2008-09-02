@@ -15,10 +15,27 @@ Bitmap::Bitmap()
 
 Bitmap::~Bitmap()
 {
-  if(data)
+  if(data && loaded)
   {
+    DOUT("stbi_image_free");
     stbi_image_free(data);
   }
+  else if(data && !loaded)
+  {
+    DOUT("delete");
+    delete [] data;
+  }
+}
+
+void Bitmap::init(unsigned long inWidth,
+                  unsigned long inHeight)
+{
+  unsigned long bytesPerPixel = 4;
+  unsigned long sizeInBytes = inWidth * inHeight * bytesPerPixel;
+  data = new unsigned char[sizeInBytes];
+  loaded = false;
+  format = GL_RGBA;
+  type = GL_UNSIGNED_BYTE;
 }
 
 void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
@@ -40,6 +57,7 @@ void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
     default:throw std::runtime_error("couldn't init image: "+inFile->location+" don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
   }
   type = GL_UNSIGNED_BYTE;  
+  loaded = true;
 }
 
 } 
