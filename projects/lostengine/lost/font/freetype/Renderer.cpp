@@ -7,6 +7,8 @@
 #include "lost/gl/PushAttrib.h"
 #include "lost/gl/PushClientAttrib.h"
 
+using namespace lost::math;
+
 namespace lost
 {
 namespace font
@@ -99,8 +101,8 @@ void Renderer::createGlyphPowerOfTwoTexture(boost::shared_ptr<Face> face,
 {
   // find the power-of-two measurements for the current glyph
   // we need this to create power-of-two sized textures for opengl to be on the safe side and avoid side effects
-  unsigned long potwidth = gl::utils::nextPowerOf2(face->face()->glyph->bitmap.width);
-  unsigned long potheight = gl::utils::nextPowerOf2(face->face()->glyph->bitmap.rows);
+  unsigned long potwidth = nextPowerOf2(face->face()->glyph->bitmap.width);
+  unsigned long potheight = nextPowerOf2(face->face()->glyph->bitmap.rows);
 
   // call glTexImage2D once with pixels = 0 to allocate memory
   glTexImage2D(GL_TEXTURE_2D,

@@ -45,7 +45,20 @@ namespace lost
       else
         return false;
     }
-    
+
+    // calculate the next value that is >= inVal and also a power of two  
+    static inline unsigned long nextPowerOf2(unsigned long inVal)
+    {
+      unsigned long result = 1;
+
+      while(result < inVal)
+      {
+        result <<= 1;
+      }
+
+      return result;
+    }
+
   }
 }
 

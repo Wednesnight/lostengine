@@ -86,18 +86,6 @@ namespace utils
                   up.x,   up.y,   up.z);
     }
 
-    inline unsigned long nextPowerOf2(unsigned long inVal)
-    {
-      unsigned long result = 1;
-
-      while(result < inVal)
-      {
-        result <<= 1;
-      }
-
-      return result;
-    }
-
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
      * as a tga file to the specified file path.
      *
