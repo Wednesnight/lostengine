@@ -21,6 +21,7 @@ namespace lost
       struct Library
       {
         typedef std::map<std::string, boost::shared_ptr<Face> > FaceCache;
+        typedef std::map<std::string, boost::shared_ptr<resource::File> > FileCache;
 
         Library();
         virtual ~Library();
@@ -32,6 +33,7 @@ namespace lost
       private:
         FT_Library    mLibrary;
         FaceCache     mFaceCache;
+        FileCache     mFileCache;
       };
     }
   }

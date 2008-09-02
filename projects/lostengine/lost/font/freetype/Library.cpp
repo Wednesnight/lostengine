@@ -22,14 +22,18 @@ Library::Library()
 
 Library::~Library()
 {
-  mFaceCache.clear(); // get rid of fonts before the library handle gets invalid
+  // get rid of fonts before the library handle gets invalid
+  mFaceCache.clear(); 
+  mFileCache.clear();
   FT_Error error = FT_Done_FreeType(mLibrary);
+  // don't throw, just log
   if(error)
   {
     DOUT("FT_Done_FreeType error: "<< error);
   }
 }
 
+// FIXME: move caching into loader?
 boost::shared_ptr<Face> Library::initFace(boost::shared_ptr<lost::resource::File> file)
 {
   boost::shared_ptr<Face> result;
@@ -49,6 +53,7 @@ boost::shared_ptr<Face> Library::initFace(boost::shared_ptr<lost::resource::File
     }
     result.reset(new Face(face));
     mFaceCache[file->location] = result;
+    mFileCache[file->location] = file;
   }
   return result;
 }
