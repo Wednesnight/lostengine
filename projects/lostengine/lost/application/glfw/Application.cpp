@@ -6,7 +6,7 @@
 #include <boost/bind.hpp>
 #include "lost/application/ApplicationEvent.h"
 #include "lost/resource/DefaultLoader.h"
-#include "lost/lua/LuaBindings.h"
+#include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
 
 using namespace std;

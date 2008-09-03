@@ -32,14 +32,14 @@ function preinit(event)
   config.displayAttributes.fullscreen = false;
   config.displayAttributes.title = "AppTest";
   
-  local mt = getmetatable(config.displayAttributes)
-  if (mt.__luabind_class) then
-    log.debug("is class: ".. tostring(mt.__luabind_class))
-  end
+--  local mt = getmetatable(config.displayAttributes)
+--  if (mt.__luabind_class) then
+--    log.debug("is class: ".. tostring(mt.__luabind_class))
+--  end
 
-  dump(app)
-  dump(app.loader)
-  dump(config.displayAttributes)
+--  dump(app)
+--  dump(app.loader)
+--  dump(config.displayAttributes)
 
 end
 
@@ -51,13 +51,13 @@ function key(event)
   log.debug("got event: "..event.type)
 --  log.debug("key: "..event.key)
 --  log.debug("pressed: "..event.pressed)
-  app:quit()
+  globals.app:quit()
   log.debug("gc mem: "..collectgarbage("count"))
 end
 
-app:addEventListener("applicationPreInit", preinit)
-app:addEventListener("applicationInit", init)
-app:addEventListener("keyDown", key)
+globals.app:addEventListener("applicationPreInit", preinit)
+globals.app:addEventListener("applicationInit", init)
+globals.app:addEventListener("keyDown", key)
 
 controller = {}
 controller.data = 13;
@@ -65,4 +65,4 @@ controller.keyDown = function(self, event)
   log.debug("in controller keyDown: "..self.data);
 end
 
-app:addEventListener("keyDown", controller, controller.keyDown)
+globals.app:addEventListener("keyDown", controller, controller.keyDown)
