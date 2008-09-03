@@ -17,8 +17,6 @@ namespace lost
      */
     struct TouchEvent : public event::Event
     {  
-      struct Touch; 
-      
       struct Touch
       {
         lost::math::Vec2  location; // location on screen, origin in the lower left corner, same as OpenGL
