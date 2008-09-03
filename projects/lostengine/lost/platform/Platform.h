@@ -1,6 +1,12 @@
 #ifndef LOST_PLATFORM_PLATFORM_H
 #define LOST_PLATFORM_PLATFORM_H
 
+// TargetConditionals defines the IPHONE Macros we require
+// this header is only present if we build on an apple platform
+#if defined __APPLE__
+  #include <TargetConditionals.h>
+#endif
+
 #include <string>
 
 #if defined WIN32
@@ -27,7 +33,7 @@ namespace lost
     bool isWindows();
     bool isMac();
     bool isLinux();
-    bool isiPhone();
+    bool isIPhone();
 
     typedef enum
     {

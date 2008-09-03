@@ -22,7 +22,11 @@ namespace lost
       #if defined WIN32
         return platform_windows;
       #elif defined __APPLE__
-        return platform_mac;
+        #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+          return platform_iphone;
+        #else
+          return platform_mac;
+        #endif
       #elif defined linux
         return platform_linux;
       #endif
@@ -41,6 +45,11 @@ namespace lost
     bool isLinux()
     {
       return (getPlatform() == platform_linux);
+    }
+
+    bool isIPhone()
+    {
+      return (getPlatform() == platform_iphone);
     }
 
     Endianness getEndianness()

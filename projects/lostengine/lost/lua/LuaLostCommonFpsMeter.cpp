@@ -15,6 +15,7 @@ LOST_LUA_EXPORT_BEGIN(LuaLostCommonFpsMeter)
       .def("render", &FpsMeter::render)
       .def_readwrite("width", &FpsMeter::width)
       .def_readwrite("height", &FpsMeter::height)
+      .def_readwrite("alpha", &FpsMeter::alpha)
     ]
   ];
 }

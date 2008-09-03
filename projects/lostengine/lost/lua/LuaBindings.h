@@ -43,6 +43,7 @@ namespace lost
     void LuaLostGLGL(lost::lua::State& state);
     void LuaLostGLDraw(lost::lua::State& state);
     void LuaLostGLUtils(lost::lua::State& state);
+    void LuaLostPlatformPlatform(lost::lua::State& state);
 
     void bindAll(lost::lua::State& state);
   }

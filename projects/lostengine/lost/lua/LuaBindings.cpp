@@ -40,6 +40,7 @@ namespace lost
       LuaLostGLGL(state);
       LuaLostGLDraw(state);
       LuaLostGLUtils(state);
+      LuaLostPlatformPlatform(state);
 
       luabind::bind_class_info(state);
     }

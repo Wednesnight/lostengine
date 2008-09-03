@@ -41,10 +41,7 @@ namespace lost
 
       boost::shared_ptr<lost::application::TouchEvent::Touch> get(unsigned int idx)
       {
-        boost::shared_ptr<lost::application::TouchEvent::Touch> result;
-        if (idx < touches.size())
-          result = touches[idx];
-        return result;
+        return touches[idx];
       }
 
       // contains all touches for the current event. Might contain more than one, depending

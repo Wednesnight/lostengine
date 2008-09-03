@@ -11,6 +11,7 @@ LOST_LUA_EXPORT_BEGIN(LuaLostGLDraw)
     namespace_("gl")
     [
       def("setColor", &setColor),
+      def("drawRectOutline", &drawRectOutline),
       def("drawRectFilled", &drawRectFilled)
     ]
   ];
