@@ -10,7 +10,8 @@ LOST_LUA_EXPORT_BEGIN(LostMathVec2)
   [
    namespace_("math")
    [
-    class_<Vec2, boost::shared_ptr<Vec2> >("Vec2")
+//    class_<Vec2, boost::shared_ptr<Vec2> >("Vec2")
+    class_<Vec2>("Vec2")
     .def(constructor<>())
     .def(constructor<float, float>())
     .def("zero", (void(Vec2::*)()) &Vec2::zero)

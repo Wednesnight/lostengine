@@ -1,0 +1,152 @@
+--[[
+     main
+  ]]
+function preinitHandler(event)
+  log.debug("preinit, building config")
+
+  -- config is deliberatly global so application-internal startup code can find it
+  config = {}
+
+  config.displayAttributes = lost.common.DisplayAttributes()
+  if lost.platform.isIPhone() then
+    log.debug("iPhone")
+    config.displayAttributes.width = 320
+    config.displayAttributes.height = 480
+  else
+    log.debug("Desktop")
+    config.displayAttributes.width = 800
+    config.displayAttributes.height = 600
+  end
+  config.displayAttributes.redbits = 8
+  config.displayAttributes.bluebits = 8
+  config.displayAttributes.greenbits = 8
+  config.displayAttributes.alphabits = 8
+  config.displayAttributes.depthbits = 24
+  config.displayAttributes.stencilbits = 0
+  config.displayAttributes.fullscreen = false
+  config.displayAttributes.title = "TixTixTix - The Combination of the beast"
+
+  globals.app:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.INIT, initHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
+  globals.app:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
+
+  globals.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+  globals.app:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
+
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, touchHandler)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, touchHandler)
+  
+  game =
+  {
+    board =
+    {
+      [0] =
+      {
+        [0] = false,
+        [1] = false,
+        [2] = false
+      },
+      [1] =
+      {
+        [0] = false,
+        [1] = false,
+        [2] = false
+      },
+      [2] =
+      {
+        [0] = false,
+        [1] = false,
+        [2] = false
+      }
+    }
+  }
+end
+globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, preinitHandler)
+
+function initHandler(event)
+  log.debug("init")
+
+  controls = {}
+  controls.fpsMeter = lost.common.FpsMeter()
+  controls.fpsMeter.alpha = 0.25
+
+  globals.timer = lost.application.Timer("luarender", 0.02)
+  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+end
+
+function keyHandler(event)
+  local keyEvent = lost.application.KeyEvent.cast(event)
+
+  if (keyEvent.pressed) then
+  
+    if (keyEvent.key == lost.application.K_ESCAPE) then
+      globals.app:quit()
+    end
+  
+  end
+end
+
+function touchHandler(event)
+  local touchEvent = lost.application.TouchEvent.cast(event)
+
+  if (event.type == lost.application.TouchEvent.TOUCHES_BEGAN) then
+    if (touchEvent:size() == 1) then
+      local touch = touchEvent:get(0)
+      log.debug("touch.location.x: ".. touch.location.x ..", touch.location.y: ".. touch.location.y)
+      local x = math.floor(touch.location.x / (320/3))
+      local y = math.floor((480 - touch.location.y) / (480/3))
+      game.board[x][y] = not game.board[x][y]
+    end
+  end
+end
+
+function runHandler(event)
+  log.debug("run")
+end
+
+function quitHandler(event)
+  log.debug("quit")
+end
+
+function renderHandler(event)
+  local timerEvent = lost.application.TimerEvent.cast(event)
+
+  gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()
+  gl.glClear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT) gl.GLDEBUG()
+
+  gl.glEnableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
+  gl.glDisable(gl.GL_DEPTH_TEST) gl.GLDEBUG()
+  gl.glDisable(gl.GL_TEXTURE_2D) gl.GLDEBUG()
+
+  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
+
+  lost.gl.setColor(lost.common.Color(1,1,1))
+  for x = 0, 2 do
+    for y = 0, 2 do
+      if game.board[x][y] then
+        lost.gl.drawRectFilled(lost.math.Rect(x*320/3, y*480/3, 320/3, 480/3))
+      else
+        lost.gl.drawRectOutline(lost.math.Rect(x*320/3, y*480/3, 320/3, 480/3))
+      end
+    end
+  end
+
+  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
+  controls.fpsMeter:render(globals.app.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
+
+  gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
+  
+  globals.app:swapBuffers()
+end
+
+function resizeHandler(event)
+  local resizeEvent = lost.application.ResizeEvent.cast(event)
+
+  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+end

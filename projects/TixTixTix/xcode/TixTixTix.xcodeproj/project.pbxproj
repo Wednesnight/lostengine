@@ -1,0 +1,584 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E01666A0E6F28B2002528D5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
+		3E01666C0E6F28B2002528D5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		3E01667B0E6F2918002528D5 /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */; };
+		3E0166AC0E6F29C4002528D5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A80E6F29C4002528D5 /* QuartzCore.framework */; };
+		3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
+		3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
+		3E0166AF0E6F29C4002528D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AB0E6F29C4002528D5 /* UIKit.framework */; };
+		3E7E60940E6F35E800B61285 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
+		3E7E60960E6F35E800B61285 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		3E7E60990E6F35E800B61285 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A80E6F29C4002528D5 /* QuartzCore.framework */; };
+		3E7E609A0E6F35E800B61285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
+		3E7E609B0E6F35E800B61285 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
+		3E7E609C0E6F35E800B61285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AB0E6F29C4002528D5 /* UIKit.framework */; };
+		3E7E60A80E6F364500B61285 /* libLostEngine-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */; };
+		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
+		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
+		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
+		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
+		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
+		EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4C0DD87EE200552F5E /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3E0166790E6F28F4002528D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7324F20E5CE3A4000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		3E7E60A40E6F363500B61285 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EA6711240E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA0E497C0E5E405C00B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3E0166760E6F28B2002528D5 /* TixTixTix-simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TixTixTix-simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E0166780E6F28B2002528D5 /* Info-simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-simulator.plist"; sourceTree = "<group>"; };
+		3E0166A80E6F29C4002528D5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3E0166A90E6F29C4002528D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3E0166AB0E6F29C4002528D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3E7E60A00E6F35E800B61285 /* TixTixTix-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TixTixTix-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7E60A20E6F35E800B61285 /* Info-iphone.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iphone.plist"; sourceTree = "<group>"; };
+		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* TixTixTix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TixTixTix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA27DE3A0DD87DA100552F5E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA27DE490DD87EE200552F5E /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EA27DE4C0DD87EE200552F5E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E01666D0E6F28B2002528D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E01667B0E6F2918002528D5 /* libLostEngine-simulator.a in Frameworks */,
+				3E0166AC0E6F29C4002528D5 /* QuartzCore.framework in Frameworks */,
+				3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */,
+				3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */,
+				3E0166AF0E6F29C4002528D5 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7E60970E6F35E800B61285 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7E60A80E6F364500B61285 /* libLostEngine-iphone.a in Frameworks */,
+				3E7E60990E6F35E800B61285 /* QuartzCore.framework in Frameworks */,
+				3E7E609A0E6F35E800B61285 /* Foundation.framework in Frameworks */,
+				3E7E609B0E6F35E800B61285 /* OpenGLES.framework in Frameworks */,
+				3E7E609C0E6F35E800B61285 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */,
+				EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */,
+				EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */,
+				EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */,
+				EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* TixTixTix.app */,
+				3E0166760E6F28B2002528D5 /* TixTixTix-simulator.app */,
+				3E7E60A00E6F35E800B61285 /* TixTixTix-iphone.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Object0r */ = {
+			isa = PBXGroup;
+			children = (
+				29B97323FDCFA39411CA2CEA /* Libraries */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				3E75F0A60E52EFBB006179E4 /* Scripts */,
+				29B97315FDCFA39411CA2CEA /* Sources */,
+			);
+			name = Object0r;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EA27DE3A0DD87DA100552F5E /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				3E0166780E6F28B2002528D5 /* Info-simulator.plist */,
+				3E7E60A20E6F35E800B61285 /* Info-iphone.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */,
+				EA27DE490DD87EE200552F5E /* AGL.framework */,
+				EA27DE4A0DD87EE200552F5E /* OpenGL.framework */,
+				EA27DE4B0DD87EE200552F5E /* GLUT.framework */,
+				EA27DE4C0DD87EE200552F5E /* Carbon.framework */,
+				3E0166A80E6F29C4002528D5 /* QuartzCore.framework */,
+				3E0166A90E6F29C4002528D5 /* Foundation.framework */,
+				3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */,
+				3E0166AB0E6F29C4002528D5 /* UIKit.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3ED935C90E4756B700AABFAB /* init */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		EA0E49550E5E403800B5EBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E49760E5E403800B5EBF1 /* libLostEngine.a */,
+				EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */,
+				EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3E0166660E6F28B2002528D5 /* TixTixTix-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E0166730E6F28B2002528D5 /* Build configuration list for PBXNativeTarget "TixTixTix-simulator" */;
+			buildPhases = (
+				3E0166690E6F28B2002528D5 /* Resources */,
+				3E01666B0E6F28B2002528D5 /* Sources */,
+				3E01666D0E6F28B2002528D5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E01667A0E6F28F4002528D5 /* PBXTargetDependency */,
+			);
+			name = "TixTixTix-simulator";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 3E0166760E6F28B2002528D5 /* TixTixTix-simulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3E7E60900E6F35E800B61285 /* TixTixTix-iphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E7E609D0E6F35E800B61285 /* Build configuration list for PBXNativeTarget "TixTixTix-iphone" */;
+			buildPhases = (
+				3E7E60930E6F35E800B61285 /* Resources */,
+				3E7E60950E6F35E800B61285 /* Sources */,
+				3E7E60970E6F35E800B61285 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E7E60A50E6F363500B61285 /* PBXTargetDependency */,
+			);
+			name = "TixTixTix-iphone";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 3E7E60A00E6F35E800B61285 /* TixTixTix-iphone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D1107260486CEB800E47090 /* TixTixTix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TixTixTix" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA0E497D0E5E405C00B5EBF1 /* PBXTargetDependency */,
+			);
+			name = TixTixTix;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 8D1107320486CEB800E47090 /* TixTixTix.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TixTixTix" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Object0r */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA0E49550E5E403800B5EBF1 /* Products */;
+					ProjectRef = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* TixTixTix */,
+				3E0166660E6F28B2002528D5 /* TixTixTix-simulator */,
+				3E7E60900E6F35E800B61285 /* TixTixTix-iphone */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA0E49760E5E403800B5EBF1 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-iphone.a";
+			remoteRef = EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3E0166690E6F28B2002528D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E01666A0E6F28B2002528D5 /* init in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7E60930E6F35E800B61285 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7E60940E6F35E800B61285 /* init in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ED935CA0E4756B700AABFAB /* init in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E01666B0E6F28B2002528D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E01666C0E6F28B2002528D5 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7E60950E6F35E800B61285 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7E60960E6F35E800B61285 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E01667A0E6F28F4002528D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "LostEngine-simulator";
+			targetProxy = 3E0166790E6F28F4002528D5 /* PBXContainerItemProxy */;
+		};
+		3E7E60A50E6F363500B61285 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "LostEngine-iphone";
+			targetProxy = 3E7E60A40E6F363500B61285 /* PBXContainerItemProxy */;
+		};
+		EA0E497D0E5E405C00B5EBF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EA0E497C0E5E405C00B5EBF1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3E0166740E6F28B2002528D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-simulator.plist";
+				PRODUCT_NAME = "TixTixTix-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Debug;
+		};
+		3E0166750E6F28B2002528D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-simulator.plist";
+				PRODUCT_NAME = "TixTixTix-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Release;
+		};
+		3E7E609E0E6F35E800B61285 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-iphone.plist";
+				PRODUCT_NAME = "TixTixTix-iphone";
+				SDKROOT = iphoneos2.0;
+				SKIP_INSTALL = NO;
+			};
+			name = Debug;
+		};
+		3E7E609F0E6F35E800B61285 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-iphone.plist";
+				PRODUCT_NAME = "TixTixTix-iphone";
+				SDKROOT = iphoneos2.0;
+				SKIP_INSTALL = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = TixTixTix;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = TixTixTix;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/glm\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/glm\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E0166730E6F28B2002528D5 /* Build configuration list for PBXNativeTarget "TixTixTix-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E0166740E6F28B2002528D5 /* Debug */,
+				3E0166750E6F28B2002528D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7E609D0E6F35E800B61285 /* Build configuration list for PBXNativeTarget "TixTixTix-iphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7E609E0E6F35E800B61285 /* Debug */,
+				3E7E609F0E6F35E800B61285 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "TixTixTix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TixTixTix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
