@@ -1,3 +1,5 @@
+require("game")
+
 --[[
      main
   ]]
@@ -34,34 +36,13 @@ function preinitHandler(event)
   globals.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   globals.app:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
 
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, touchHandler)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, touchHandler)
+  if lost.platform.isIPhone() then
+    globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
+  else
+    globals.app:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, clickHandler)
+  end
   
-  game =
-  {
-    board =
-    {
-      [0] =
-      {
-        [0] = false,
-        [1] = false,
-        [2] = false
-      },
-      [1] =
-      {
-        [0] = false,
-        [1] = false,
-        [2] = false
-      },
-      [2] =
-      {
-        [0] = false,
-        [1] = false,
-        [2] = false
-      }
-    }
-  }
+  config.FieldSize = lost.math.Vec2((config.displayAttributes.width / 3), (config.displayAttributes.height / 3))
 end
 globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, preinitHandler)
 
@@ -88,17 +69,43 @@ function keyHandler(event)
   end
 end
 
+function clickField(location)
+  local valid = false
+
+  local x = math.floor(location.x / config.FieldSize.x)
+  local y = math.floor(location.y / config.FieldSize.y)
+  if game.board[x][y].player == -1 then
+    game.board[x][y].player = game.currentPlayer
+    valid = true
+  end
+
+  if valid then
+    if game.currentPlayer == 0 then
+      game.currentPlayer = 1
+    else
+      game.currentPlayer = 0
+    end
+  end
+end
+
 function touchHandler(event)
   local touchEvent = lost.application.TouchEvent.cast(event)
 
   if (event.type == lost.application.TouchEvent.TOUCHES_BEGAN) then
     if (touchEvent:size() == 1) then
       local touch = touchEvent:get(0)
-      log.debug("touch.location.x: ".. touch.location.x ..", touch.location.y: ".. touch.location.y)
-      local x = math.floor(touch.location.x / (320/3))
-      local y = math.floor((480 - touch.location.y) / (480/3))
-      game.board[x][y] = not game.board[x][y]
+      local location = touch.location
+      location.y = (config.displayAttributes.height - location.y)
+      clickField(location)
     end
+  end
+end
+
+function clickHandler(event)
+  local mouseEvent = lost.application.MouseEvent.cast(event)
+
+  if (event.type == lost.application.MouseEvent.MOUSE_DOWN) then
+    clickField(mouseEvent.pos)
   end
 end
 
@@ -124,13 +131,17 @@ function renderHandler(event)
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
-  lost.gl.setColor(lost.common.Color(1,1,1))
   for x = 0, 2 do
     for y = 0, 2 do
-      if game.board[x][y] then
-        lost.gl.drawRectFilled(lost.math.Rect(x*320/3, y*480/3, 320/3, 480/3))
+      if game.board[x][y].player == 0 then
+        lost.gl.setColor(lost.common.Color(1,0,0))
+        lost.gl.drawRectFilled(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
+      elseif game.board[x][y].player == 1 then
+        lost.gl.setColor(lost.common.Color(0,0,1))
+        lost.gl.drawRectFilled(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
       else
-        lost.gl.drawRectOutline(lost.math.Rect(x*320/3, y*480/3, 320/3, 480/3))
+        lost.gl.setColor(lost.common.Color(1,1,1))
+        lost.gl.drawRectOutline(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
       end
     end
   end

@@ -14,6 +14,9 @@
 		3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
 		3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
 		3E0166AF0E6F29C4002528D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AB0E6F29C4002528D5 /* UIKit.framework */; };
+		3E5D16630E6FD16000053AEA /* game.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* game.lua */; };
+		3E5D16640E6FD16800053AEA /* game.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* game.lua */; };
+		3E5D16650E6FD16D00053AEA /* game.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* game.lua */; };
 		3E7E60940E6F35E800B61285 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3E7E60960E6F35E800B61285 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		3E7E60990E6F35E800B61285 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A80E6F29C4002528D5 /* QuartzCore.framework */; };
@@ -82,6 +85,7 @@
 		3E0166A90E6F29C4002528D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		3E0166AB0E6F29C4002528D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3E5D16370E6FCDAB00053AEA /* game.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = game.lua; path = ../game.lua; sourceTree = SOURCE_ROOT; };
 		3E7E60A00E6F35E800B61285 /* TixTixTix-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TixTixTix-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7E60A20E6F35E800B61285 /* Info-iphone.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iphone.plist"; sourceTree = "<group>"; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
@@ -195,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				3ED935C90E4756B700AABFAB /* init */,
+				3E5D16370E6FCDAB00053AEA /* game.lua */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E5D16640E6FD16800053AEA /* game.lua in Resources */,
 				3E01666A0E6F28B2002528D5 /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E5D16650E6FD16D00053AEA /* game.lua in Resources */,
 				3E7E60940E6F35E800B61285 /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E5D16630E6FD16000053AEA /* game.lua in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,7 +517,6 @@
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 armv6";
 			};
 			name = Debug;
@@ -534,7 +541,6 @@
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 				VALID_ARCHS = "i386 armv6";
 			};
 			name = Release;
