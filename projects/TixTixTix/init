@@ -1,57 +1,46 @@
+require("Application")
 require("game")
 
---[[
-     main
-  ]]
-function preinitHandler(event)
-  log.debug("preinit, building config")
-
-  -- config is deliberatly global so application-internal startup code can find it
-  config = {}
-
-  config.displayAttributes = lost.common.DisplayAttributes()
+function Application:configure(event)
+  log.debug("Application:configure()")
+  self.config.displayAttributes = lost.common.DisplayAttributes()
   if lost.platform.isIPhone() then
     log.debug("iPhone")
-    config.displayAttributes.width = 320
-    config.displayAttributes.height = 480
+    self.config.displayAttributes.width = 320
+    self.config.displayAttributes.height = 480
   else
     log.debug("Desktop")
-    config.displayAttributes.width = 800
-    config.displayAttributes.height = 600
+    self.config.displayAttributes.width = 800
+    self.config.displayAttributes.height = 600
   end
-  config.displayAttributes.redbits = 8
-  config.displayAttributes.bluebits = 8
-  config.displayAttributes.greenbits = 8
-  config.displayAttributes.alphabits = 8
-  config.displayAttributes.depthbits = 24
-  config.displayAttributes.stencilbits = 0
-  config.displayAttributes.fullscreen = false
-  config.displayAttributes.title = "TixTixTix - The Combination of the beast"
+  self.config.displayAttributes.redbits = 8
+  self.config.displayAttributes.bluebits = 8
+  self.config.displayAttributes.greenbits = 8
+  self.config.displayAttributes.alphabits = 8
+  self.config.displayAttributes.depthbits = 24
+  self.config.displayAttributes.stencilbits = 0
+  self.config.displayAttributes.fullscreen = false
+  self.config.displayAttributes.title = "TixTixTix - The Combination of the beast"
+end
 
-  globals.app:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.INIT, initHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
+function Application:init(event)
+  log.debug("Application:init()")
 
-  globals.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  globals.app:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 
   if lost.platform.isIPhone() then
-    globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
+    self:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
   else
-    globals.app:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, clickHandler)
+    self:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+    self:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
+    self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, clickHandler)
   end
   
-  config.FieldSize = lost.math.Vec2((config.displayAttributes.width / 3), (config.displayAttributes.height / 3))
-end
-globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, preinitHandler)
-
-function initHandler(event)
-  log.debug("init")
-
   controls = {}
   controls.fpsMeter = lost.common.FpsMeter()
   controls.fpsMeter.alpha = 0.25
+
+  self.config.FieldSize = lost.math.Vec2((self.config.displayAttributes.width / 3), (self.config.displayAttributes.height / 3))
 
   globals.timer = lost.application.Timer("luarender", 0.02)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
@@ -72,8 +61,8 @@ end
 function clickField(location)
   local valid = false
 
-  local x = math.floor(location.x / config.FieldSize.x)
-  local y = math.floor(location.y / config.FieldSize.y)
+  local x = math.floor(location.x / Application.config.FieldSize.x)
+  local y = math.floor(location.y / Application.config.FieldSize.y)
   if game.board[x][y].player == -1 then
     game.board[x][y].player = game.currentPlayer
     valid = true
@@ -95,7 +84,7 @@ function touchHandler(event)
     if (touchEvent:size() == 1) then
       local touch = touchEvent:get(0)
       local location = touch.location
-      location.y = (config.displayAttributes.height - location.y)
+      location.y = (Application.config.displayAttributes.height - location.y)
       clickField(location)
     end
   end
@@ -107,14 +96,6 @@ function clickHandler(event)
   if (event.type == lost.application.MouseEvent.MOUSE_DOWN) then
     clickField(mouseEvent.pos)
   end
-end
-
-function runHandler(event)
-  log.debug("run")
-end
-
-function quitHandler(event)
-  log.debug("quit")
 end
 
 function renderHandler(event)
@@ -135,13 +116,13 @@ function renderHandler(event)
     for y = 0, 2 do
       if game.board[x][y].player == 0 then
         lost.gl.setColor(lost.common.Color(1,0,0))
-        lost.gl.drawRectFilled(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
+        lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       elseif game.board[x][y].player == 1 then
         lost.gl.setColor(lost.common.Color(0,0,1))
-        lost.gl.drawRectFilled(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
+        lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       else
         lost.gl.setColor(lost.common.Color(1,1,1))
-        lost.gl.drawRectOutline(lost.math.Rect(x*config.FieldSize.x+1, y*config.FieldSize.y+1, config.FieldSize.x-1, config.FieldSize.y-1))
+        lost.gl.drawRectOutline(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       end
     end
   end
