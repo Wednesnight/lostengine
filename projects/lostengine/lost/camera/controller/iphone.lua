@@ -14,7 +14,7 @@ end
 
 function lost.camera.CameraController:initCallbacks()
   local AccelerometerEvent = lost.application.AccelerometerEvent
-  app:addEventListener(AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
+  globals.app:addEventListener(AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
 end
 
 function lost.camera.CameraController:accelerate(event)
