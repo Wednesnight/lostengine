@@ -2,6 +2,8 @@
 #define LOST_MODEL_VERTEX_H
 
 #include "lost/math/Vec3.h"
+#include "lost/math/Vec4.h"
+#include "lost/math/Matrix.h"
 
 namespace lost
 {
@@ -22,6 +24,23 @@ namespace lost
     inline bool operator ==(const Vertex& inOp1, const Vertex& inOp2)
     {
       return (inOp1.x == inOp2.x) && (inOp1.y == inOp2.y) && (inOp1.z == inOp2.z);
+    }
+    
+    inline Vertex operator*(const lost::math::Matrix& lhs, const Vertex& rhs)
+    {
+      Vertex           result;
+      lost::math::Vec4 temp;
+      
+      temp.x = rhs.x;
+      temp.y = rhs.y;
+      temp.z = rhs.z;
+      temp.w = 1.0f;
+      
+      result.x = lhs.row(0) * temp;
+      result.y = lhs.row(1) * temp;
+      result.z = lhs.row(2) * temp;
+      
+      return result;
     }
     
   }

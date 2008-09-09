@@ -1,84 +1,43 @@
+require("Application")
 require("spectator")
 
-function preinitHandler(event)
-  log.debug("preinit, building config")
-
-  -- config is deliberatly global so application-internal startup code can find it
-  config = {}
-
-  config.displayAttributes = lost.common.DisplayAttributes()
-  config.displayAttributes.width = 800;
-  config.displayAttributes.height = 600;
-  config.displayAttributes.redbits = 8;
-  config.displayAttributes.bluebits = 8;
-  config.displayAttributes.greenbits = 8;
-  config.displayAttributes.alphabits = 8;
-  config.displayAttributes.depthbits = 24;
-  config.displayAttributes.stencilbits = 0;
-  config.displayAttributes.fullscreen = false;
-  config.displayAttributes.title = "Object0r";
+function lost.application.Application:configure(event)
+  self.config.displayAttributes = lost.common.DisplayAttributes()
+  self.config.displayAttributes.width = 800;
+  self.config.displayAttributes.height = 600;
+  self.config.displayAttributes.redbits = 8;
+  self.config.displayAttributes.bluebits = 8;
+  self.config.displayAttributes.greenbits = 8;
+  self.config.displayAttributes.alphabits = 8;
+  self.config.displayAttributes.depthbits = 24;
+  self.config.displayAttributes.stencilbits = 0;
+  self.config.displayAttributes.fullscreen = false;
+  self.config.displayAttributes.title = "Object0r";
 end
 
-function figgn5()
-  config.cameraController = lost.camera.ICameraController()
-end
-
-function figgn4()
-  figgn5()
-end
-
-function figgn3()
-  figgn4()
-end
-
-function figgn2()
-  figgn3()
-end
-
-function figgn1()
-  figgn2()
-end
-
-function initHandler(event)
-  log.debug("init")
-
-  figgn1()
-
+function lost.application.Application:init(event)
   -- Initialize camera
-  config.cameraController = lost.camera.CameraController()
-  config.camera = config.cameraController.camera
+  self.config.cameraController = lost.camera.CameraController()
+  self.config.camera = self.config.cameraController.camera
 
   -- Initialize model attributes
-  config.modelFilename = "professor_tri.obj"
-  config.modelSize     = 5.0
+  self.config.modelFilename = "professor_tri.obj"
+  self.config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
-  config.modelParser   = lost.model.obj.Parser(globals.app.loader);
-  config.modelMesh     = lost.model.Mesh()
-  config.modelMaterial = lost.model.obj.Material()
-  config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
+  self.config.modelMesh     = lost.model.Mesh()
+  self.config.modelMaterial = lost.model.obj.Material()
+
+  local modelParser = lost.model.obj.Parser(globals.app.loader);
+  modelParser:parseMesh(self.config.modelFilename, self.config.modelMesh, self.config.modelMaterial);
 
   -- Initialize model renderer
-  config.modelRenderer      = lost.model.obj.Renderer(config.modelMesh, config.modelMaterial);
-  config.modelRenderer.size = config.modelSize;
+  self.config.modelRenderer      = lost.model.obj.Renderer(self.config.modelMesh, self.config.modelMaterial);
+  self.config.modelRenderer.size = self.config.modelSize;
 
-  config.lightShininess = 128
-  config.lightCutoff    = 180
-  config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
-  config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
-  config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
+  self.config.lightShininess = 128
+  self.config.lightCutoff    = 180
+  self.config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
+  self.config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
+  self.config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
 end
-
-function runHandler(event)
-  log.debug("run")
-end
-
-function quitHandler(event)
-  log.debug("quit")
-end
-
-local ApplicationEvent = lost.application.ApplicationEvent
-globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
-globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
-globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
-globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)

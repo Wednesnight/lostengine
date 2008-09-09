@@ -67,11 +67,13 @@ namespace lost
         {
           ConfigValue result;
           luabind::object globals = luabind::globals(*((*this)->interpreter.get()));
-          if (luabind::type(globals["Application"]) != LUA_TNIL && 
-              luabind::type(globals["Application"]["config"]) != LUA_TNIL && 
-              luabind::type(globals["Application"]["config"][key]) != LUA_TNIL)
+          if (luabind::type(globals["lost"]) != LUA_TNIL && 
+              luabind::type(globals["lost"]["application"]) != LUA_TNIL && 
+              luabind::type(globals["lost"]["application"]["Application"]) != LUA_TNIL && 
+              luabind::type(globals["lost"]["application"]["Application"]["config"]) != LUA_TNIL && 
+              luabind::type(globals["lost"]["application"]["Application"]["config"][key]) != LUA_TNIL)
           {
-            result = ConfigValue(globals["Application"]["config"][key]);
+            result = ConfigValue(globals["lost"]["application"]["Application"]["config"][key]);
           }
           return result;
         }

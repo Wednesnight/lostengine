@@ -34,6 +34,8 @@
 #include "lost/platform/Platform.h"
 #include "lost/application/Timer.h"
 #include "lost/lua/lua.h"
+#include "lost/model/lsystem/Generator.h"
+#include "lost/model/lsystem/Renderer.h"
 
 using namespace boost;
 using namespace lost::application;
@@ -72,12 +74,25 @@ struct Object0r
   GLfloat* direction;
   GLfloat* cutoff;
   
+  lost::lsystem::LSystem                            lsystem;
+  lost::model::lsystem::Generator                   lsystemGenerator;
+  boost::shared_ptr<lost::model::lsystem::Renderer> lsystemRenderer;
+  boost::shared_ptr<lost::lsystem::LSystemState>    lsystemState;
+  boost::shared_ptr<lost::model::Mesh>              lsystemMesh;
+  
   Object0r(Application& app)
   : renderTimer("render", 0.015),
     renderNormals(false),
     renderAABB(false)
   {
     app.addEventListener(ApplicationEvent::PREINIT(), receive<Event>(bind(&Object0r::preinit, this, _1)));
+
+    std::map<char, std::string> variableMap;
+    variableMap['F'] = "FzXFZxFzXFzXF";
+    lsystemState.reset(new lost::lsystem::LSystemState("FzFzFzF", variableMap, lost::math::Vec3(5,0,90)));
+    lsystemState->reset();
+    lsystem.advance(lsystemState, 6);
+    lsystemMesh = lsystemGenerator.generate(lsystemState);
   }
   
   GLenum getModelDisplay(std::string& which)
@@ -148,6 +163,8 @@ struct Object0r
     
     shaderInit();
 
+    lsystemRenderer.reset(new lost::model::lsystem::Renderer(lsystemMesh));
+
     appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
     appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
     appInstance->addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, this, _1)));
@@ -208,10 +225,10 @@ struct Object0r
     set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
                     camera->position(), camera->target(), camera->up(),
                     camera->fovY(), camera->depth().min, camera->depth().max);
-    
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+
     lightPosition = camera->position();
     position[0] = lightPosition.x;
     position[1] = lightPosition.y;
@@ -221,7 +238,7 @@ struct Object0r
     direction[0] = lightDirection.x;
     direction[1] = lightDirection.y;
     direction[2] = lightDirection.z;
-    
+
     glShadeModel(GL_SMOOTH);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
@@ -234,18 +251,21 @@ struct Object0r
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_RESCALE_NORMAL);
-    
+
 //    lightingShader->enable();
     setColor(whiteColor);
-    modelRenderer->render();
+//    modelRenderer->render();
+//    lsystemRenderer->render();
+    for (unsigned int idx = 0; idx < lsystemMesh->vertexCount / 2; ++idx)
+      lost::gl::drawLine(lsystemMesh->vertices[idx*2], lsystemMesh->vertices[idx*2+1]);
 //    lightingShader->disable();
 
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
-    
+
     if (renderNormals) modelRenderer->renderNormals();
     if (renderAABB) modelRenderer->renderAABB();
-    
+
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
     

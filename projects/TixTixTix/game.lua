@@ -78,8 +78,8 @@ end
 function clickField(location)
   local valid = false
 
-  local x = math.floor(location.x / Application.config.FieldSize.x)
-  local y = math.floor(location.y / Application.config.FieldSize.y)
+  local x = math.floor(location.x / lost.application.Application.config.FieldSize.x)
+  local y = math.floor(location.y / lost.application.Application.config.FieldSize.y)
   if game.board[x][y].player == -1 then
     game.board[x][y].player = game.currentPlayer
     valid = true
@@ -101,7 +101,7 @@ function touchHandler(event)
     if (touchEvent:size() == 1) then
       local touch = touchEvent:get(0)
       local location = touch.location
-      location.y = (Application.config.displayAttributes.height - location.y)
+      location.y = (lost.application.Application.config.displayAttributes.height - location.y)
       clickField(location)
     end
   end
@@ -116,6 +116,7 @@ function clickHandler(event)
 end
 
 function renderHandler(event)
+  local Application = lost.application.Application
   local timerEvent = lost.application.TimerEvent.cast(event)
 
   gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()

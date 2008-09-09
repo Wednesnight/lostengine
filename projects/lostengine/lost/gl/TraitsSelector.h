@@ -4,6 +4,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
+#include "lost/model/Vertex.h"
 #include <stdint.h>
 
 namespace lost
@@ -44,6 +45,14 @@ namespace lost
       TraitsSelector() : size(4), type(GL_FLOAT) {}
     };
 
+    template<>
+    struct TraitsSelector<lost::model::Vertex>
+    {
+      GLint size;
+      GLenum type;
+      TraitsSelector() : size(3), type(GL_FLOAT) {}
+    };
+    
     template<>
     struct TraitsSelector<uint8_t>
     {

@@ -1,8 +1,8 @@
 require("Application")
 require("game")
 
-function Application:configure(event)
-  log.debug("Application:configure()")
+function lost.application.Application:configure(event)
+  log.debug("lost.application.Application:configure()")
   self.config.displayAttributes = lost.common.DisplayAttributes()
   if lost.platform.isIPhone() then
     log.debug("iPhone")
@@ -23,8 +23,8 @@ function Application:configure(event)
   self.config.displayAttributes.title = "TixTixTix - The Combination of the beast"
 end
 
-function Application:init(event)
-  log.debug("Application:init()")
+function lost.application.Application:init(event)
+  log.debug("lost.application.Application:init()")
 
   self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 

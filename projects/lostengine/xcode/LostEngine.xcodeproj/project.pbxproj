@@ -114,6 +114,12 @@
 		3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
 		3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
 		3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EC9D2E10E6789F2003CED66 /* KeySym.h */; };
+		3EDE44160E766D8500C38A71 /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44150E766D8500C38A71 /* Generator.h */; };
+		3EDE44170E766D8500C38A71 /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44150E766D8500C38A71 /* Generator.h */; };
+		3EDE44180E766D8500C38A71 /* Generator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44150E766D8500C38A71 /* Generator.h */; };
+		3EDE446A0E767CC600C38A71 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44690E767CC600C38A71 /* Renderer.h */; };
+		3EDE446B0E767CC600C38A71 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44690E767CC600C38A71 /* Renderer.h */; };
+		3EDE446C0E767CC600C38A71 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EDE44690E767CC600C38A71 /* Renderer.h */; };
 		3EE0563F0E65545600E044A2 /* libhashlib++-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE056210E65530600E044A2 /* libhashlib++-simulator.a */; };
 		3EE056400E65546200E044A2 /* libhashlib++-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561F0E65530600E044A2 /* libhashlib++-iphone.a */; };
 		3EE056410E65546E00E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561D0E65530600E044A2 /* libhashlib++.a */; };
@@ -817,6 +823,8 @@
 		3EBEE88F0E3A05190055A8D2 /* AABB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		3EC9D2E10E6789F2003CED66 /* KeySym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeySym.h; sourceTree = "<group>"; };
+		3EDE44150E766D8500C38A71 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Generator.h; path = model/lsystem/Generator.h; sourceTree = "<group>"; };
+		3EDE44690E767CC600C38A71 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Renderer.h; path = model/lsystem/Renderer.h; sourceTree = "<group>"; };
 		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EFEC0FD0E62C4670053EB12 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		3EFEC0FE0E62C4670053EB12 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
@@ -1094,6 +1102,7 @@
 		3EB93D300E37FE0D00FF10C9 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				3EDE44120E766D5A00C38A71 /* lsystem */,
 				3EFEC0E10E62C0AD0053EB12 /* obj */,
 				3EB93D320E37FE2500FF10C9 /* Mesh.h */,
 				3EB93D360E37FE2500FF10C9 /* Vertex.h */,
@@ -1109,6 +1118,15 @@
 				3E376F4A0E543F6F0050A5DF /* Camera.cpp */,
 			);
 			name = camera;
+			sourceTree = "<group>";
+		};
+		3EDE44120E766D5A00C38A71 /* lsystem */ = {
+			isa = PBXGroup;
+			children = (
+				3EDE44150E766D8500C38A71 /* Generator.h */,
+				3EDE44690E767CC600C38A71 /* Renderer.h */,
+			);
+			name = lsystem;
 			sourceTree = "<group>";
 		};
 		3EE056120E6552D000E044A2 /* hashlib++ */ = {
@@ -1678,6 +1696,8 @@
 				EA7BE2B70E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2C00E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907240E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
+				3EDE44180E766D8500C38A71 /* Generator.h in Headers */,
+				3EDE446C0E767CC600C38A71 /* Renderer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1796,6 +1816,8 @@
 				EA7BE2B50E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2BE0E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907220E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
+				3EDE44170E766D8500C38A71 /* Generator.h in Headers */,
+				3EDE446B0E767CC600C38A71 /* Renderer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1917,6 +1939,8 @@
 				EA7BE2B60E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2BF0E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907230E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
+				3EDE44160E766D8500C38A71 /* Generator.h in Headers */,
+				3EDE446A0E767CC600C38A71 /* Renderer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
