@@ -126,7 +126,7 @@ function renderHandler(event)
   gl.glDisable(gl.GL_DEPTH_TEST) gl.GLDEBUG()
   gl.glDisable(gl.GL_TEXTURE_2D) gl.GLDEBUG()
 
-  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
+  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
@@ -145,10 +145,10 @@ function renderHandler(event)
     end
   end
 
-  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
+  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
-  controls.fpsMeter:render(globals.app.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
+  controls.fpsMeter:render(Application.config.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
   gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
   
