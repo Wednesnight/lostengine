@@ -18,6 +18,9 @@
 		EABC60730DE9A97B007B63E9 /* gay_zombie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABC60720DE9A97B007B63E9 /* gay_zombie.jpg */; };
 		EABC612E0DE9D735007B63E9 /* buttonReleased.png in Resources */ = {isa = PBXBuildFile; fileRef = EABC612D0DE9D735007B63E9 /* buttonReleased.png */; };
 		EABC614C0DE9D853007B63E9 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABC614B0DE9D853007B63E9 /* stubs.jpg */; };
+		EADA8DA50E76F21E0048AE02 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EADA8DA40E76F21E0048AE02 /* Application.lua */; };
+		EADA8DB10E76F3C30048AE02 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADA8DB00E76F3C30048AE02 /* Controller.cpp */; };
+		EADA8DD20E7746010048AE02 /* init.lua in Resources */ = {isa = PBXBuildFile; fileRef = EADA8DD10E7746010048AE02 /* init.lua */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,10 @@
 		EABC60720DE9A97B007B63E9 /* gay_zombie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gay_zombie.jpg; sourceTree = "<group>"; };
 		EABC612D0DE9D735007B63E9 /* buttonReleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonReleased.png; sourceTree = "<group>"; };
 		EABC614B0DE9D853007B63E9 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stubs.jpg; sourceTree = "<group>"; };
+		EADA8DA40E76F21E0048AE02 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
+		EADA8DAF0E76F3C30048AE02 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
+		EADA8DB00E76F3C30048AE02 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
+		EADA8DD10E7746010048AE02 /* init.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init.lua; path = ../init.lua; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				EABC5FF30DE9A43D007B63E9 /* main.cpp */,
+				EADA8DAF0E76F3C30048AE02 /* Controller.h */,
+				EADA8DB00E76F3C30048AE02 /* Controller.cpp */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Libs */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -111,6 +120,8 @@
 				EABC614B0DE9D853007B63E9 /* stubs.jpg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				EADA8DD10E7746010048AE02 /* init.lua */,
+				EADA8DA40E76F21E0048AE02 /* Application.lua */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -216,6 +227,8 @@
 				EABC60730DE9A97B007B63E9 /* gay_zombie.jpg in Resources */,
 				EABC612E0DE9D735007B63E9 /* buttonReleased.png in Resources */,
 				EABC614C0DE9D853007B63E9 /* stubs.jpg in Resources */,
+				EADA8DA50E76F21E0048AE02 /* Application.lua in Resources */,
+				EADA8DD20E7746010048AE02 /* init.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EABC5FF40DE9A43D007B63E9 /* main.cpp in Sources */,
+				EADA8DB10E76F3C30048AE02 /* Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
