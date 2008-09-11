@@ -20,11 +20,11 @@ function initHandler(event)
   config.camera = config.cameraController.camera
 
   -- Initialize model attributes
-  config.modelFilename = "sponza_tri_mtl.obj"
+  config.modelFilename = "kenny_tri.obj"
   config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
-  config.modelParser   = lost.model.obj.Parser(app.loader);
+  config.modelParser   = lost.model.obj.Parser(globals.app.loader);
   config.modelMesh     = lost.model.Mesh()
   config.modelMaterial = lost.model.obj.Material()
   config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
@@ -49,7 +49,7 @@ function quitHandler(event)
 end
 
 local ApplicationEvent = lost.application.ApplicationEvent
-app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
-app:addEventListener(ApplicationEvent.INIT, initHandler)
-app:addEventListener(ApplicationEvent.RUN, runHandler)
-app:addEventListener(ApplicationEvent.QUIT, quitHandler)
+globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
+globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
+globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
+globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
