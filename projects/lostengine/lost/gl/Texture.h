@@ -31,13 +31,30 @@ namespace lost
         glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;       
       }
 
+      // binds the texture, resets it from a bitmap and sets default wrap and filter params
+/*      void createFromBitmap(const lost::bitmap::Bitmap& inBitmap,                
+                bool powerOfTwo=false‚
+                GLint level=0,
+                GLenum internalFormat=GL_RGBA8,
+                bool border=false,
+                GLenum inWrap = GL_CLAMP_TO_EDGE,
+                GLenum inFilter = GL_NEAREST)
+      {
+        // FIXME: use powerOfTwo flag here
+        bind();
+        reset(level, internalFormat, border, inBitmap);
+        wrap(inWrap);
+        filter(inFilter);
+      }*/
+      
+      
       void reset(GLint level,
-                 GLenum internalformat,
+                 GLenum internalFormat,
                  bool border,
                  const lost::bitmap::Bitmap& inBitmap)
       {
         reset(level,
-              internalformat, 
+              internalFormat, 
               inBitmap.width,
               inBitmap.height,
               border ? 1 : 0,
