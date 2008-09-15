@@ -7,6 +7,7 @@
 #include "lost/resource/Loader.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/Config.h"
+#include "lost/gl/Context.h"
 
 struct ApplicationAdapter;
 

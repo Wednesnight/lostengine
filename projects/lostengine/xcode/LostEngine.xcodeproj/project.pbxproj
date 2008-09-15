@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E03001C0E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
+		3E03001E0E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
+		3E0300200E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
 		3E04DFD00E537F4500BFF964 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E04DFCF0E537F4500BFF964 /* Camera.h */; };
 		3E04DFD10E537F4500BFF964 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E04DFCF0E537F4500BFF964 /* Camera.h */; };
 		3E29501B0E540A5D00E83965 /* lgl_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950170E540A5D00E83965 /* lgl_gl.h */; };
@@ -806,6 +809,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E03001A0E791AE500DC26B8 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		3E04DFCF0E537F4500BFF964 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = camera/Camera.h; sourceTree = "<group>"; };
 		3E251FEB0E5EC1C1002CDC21 /* iphone.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iphone.lua; path = camera/controller/iphone.lua; sourceTree = "<group>"; };
 		3E2950170E540A5D00E83965 /* lgl_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl_gl.h; path = lgl/lgl_gl.h; sourceTree = "<group>"; };
@@ -1394,6 +1398,7 @@
 				EA3B94A60E04639D00B6423B /* Shader.h */,
 				EA3B94A80E04639D00B6423B /* ShaderHelper.h */,
 				EA3B94AA0E04639D00B6423B /* ShaderProgram.h */,
+				3E03001A0E791AE500DC26B8 /* State.h */,
 				EA3B94AB0E04639D00B6423B /* Texture.h */,
 				3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */,
 				EA3B94AC0E04639D00B6423B /* Utils.h */,
@@ -1698,6 +1703,7 @@
 				EA0907240E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
 				3EDE44180E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446C0E767CC600C38A71 /* Renderer.h in Headers */,
+				3E03001E0E791AE500DC26B8 /* State.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,6 +1824,7 @@
 				EA0907220E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
 				3EDE44170E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446B0E767CC600C38A71 /* Renderer.h in Headers */,
+				3E0300200E791AE500DC26B8 /* State.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1941,6 +1948,7 @@
 				EA0907230E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
 				3EDE44160E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446A0E767CC600C38A71 /* Renderer.h in Headers */,
+				3E03001C0E791AE500DC26B8 /* State.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

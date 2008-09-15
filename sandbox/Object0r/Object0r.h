@@ -36,6 +36,7 @@
 #include "lost/lua/lua.h"
 #include "lost/model/lsystem/Generator.h"
 #include "lost/model/lsystem/Renderer.h"
+#include "lost/gl/Context.h"
 
 using namespace boost;
 using namespace lost::application;
@@ -119,7 +120,6 @@ struct Object0r
   
   void init(shared_ptr<Event> event)
   {
-    DOUT("init()");
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
 
@@ -201,11 +201,17 @@ struct Object0r
   
   void render(shared_ptr<TimerEvent> event)
   {
+    boost::shared_ptr<Context> context = lost::gl::Context::instance();
+    boost::shared_ptr<lost::gl::State> newState = context->copyState();
+    newState->depthTest = true;
+    newState->texture2D = false;
+    newState->vertexArray = true;
+    context->pushState(newState);
+
     glClearColor(0.0, 0.0, 0.0, 0.0);GLDEBUG;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
-    glEnable(GL_DEPTH_TEST);GLDEBUG;
-    glDisable(GL_TEXTURE_2D);GLDEBUG;
 
+/*
     static double lastSec = 0;
     if (lastSec >= 1)
     {
@@ -221,6 +227,7 @@ struct Object0r
     {
       lastSec += event->passedSec;
     }
+*/
 
     set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
                     camera->position(), camera->target(), camera->up(),
@@ -254,10 +261,9 @@ struct Object0r
 
 //    lightingShader->enable();
     setColor(whiteColor);
+    context->drawLine(Vec3(0,0,0), Vec3(1,1,1));
 //    modelRenderer->render();
-//    lsystemRenderer->render();
-    for (unsigned int idx = 0; idx < lsystemMesh->vertexCount / 2; ++idx)
-      lost::gl::drawLine(lsystemMesh->vertices[idx*2], lsystemMesh->vertices[idx*2+1]);
+    lsystemRenderer->render();
 //    lightingShader->disable();
 
     glDisable(GL_LIGHT0);
@@ -274,12 +280,14 @@ struct Object0r
     glLoadIdentity();
     fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
     
+    context->popState();
+
     appInstance->swapBuffers();
   }
   
   void keyHandler(shared_ptr<KeyEvent> event)
   {
-    DOUT("key: " << event->key);
+//    DOUT("key: " << event->key);
     if (event->pressed)
     {
       switch (event->key)
@@ -350,8 +358,10 @@ struct Object0r
     }
     else
     {
+/*
       DOUT("event->pos: " << event->pos);
       DOUT("mousePos  : " << mousePos);
+*/
       // x-axis rotation
       float dx = -1.0f * (event->pos.y - mousePos.y) * 0.1f;
       // y-axis rotation

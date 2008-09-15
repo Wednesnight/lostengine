@@ -9,6 +9,7 @@
 
 #include "lost/gl/gl.h"
 #include "lost/gl/ArrayBuffer.h"
+#include "lost/gl/Context.h"
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/Vec3.h"
@@ -23,6 +24,8 @@ namespace lost
       typedef std::map<boost::shared_ptr<MaterialGroup>, boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > > ElementBuffers;
       struct Renderer
       {
+        boost::shared_ptr<lost::gl::Context> context;
+
         boost::shared_ptr<Mesh>     mesh;
         boost::shared_ptr<Material> material;
 
@@ -39,9 +42,10 @@ namespace lost
         GLenum renderModeFront;
         GLenum renderModeBack;
 #endif
-      
+
         Renderer(boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
-        : mesh(inMesh),
+        : context(lost::gl::Context::instance()),
+          mesh(inMesh),
           material(inMaterial),
           size(1.0f)
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
@@ -53,6 +57,7 @@ namespace lost
           DOUT("bind vertex buffer data start");
           vertexBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
           vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
+          vertexBuffer->unbind();
           DOUT("bind vertex buffer data end");
 
           if (!mesh->normals)
@@ -74,6 +79,7 @@ namespace lost
           DOUT("bind normal data start");
           normalBuffer.reset(new gl::ArrayBuffer<math::Vec3>);
           normalBuffer->bindBufferData(mesh->normals.get(), mesh->normalCount);
+          normalBuffer->unbind();
           DOUT("bind normal data end");
           
           if (material && material->groups.size() > 0)
@@ -85,6 +91,7 @@ namespace lost
               boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > buffer(new gl::ElementArrayBuffer<unsigned short>);
               buffer->bindBufferData(&faces[(*idx)->faceOffset], (*idx)->faceLength);
               elementBuffers[*idx] = buffer;
+              buffer->unbind();
             }
             DOUT("create element buffers end");
           }
@@ -93,16 +100,18 @@ namespace lost
             DOUT("create single element buffer start");
             elementBuffer.reset(new gl::ElementArrayBuffer<unsigned short>);
             elementBuffer->bindBufferData(mesh->faces.get(), mesh->faceCount);
+            elementBuffer->unbind();
             DOUT("create single element buffer end");          
           }
-          
-          glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-          glEnableClientState(GL_NORMAL_ARRAY);GLDEBUG;
           DOUT("constructor end");
         }
 
         void render()
         {
+          boost::shared_ptr<lost::gl::State> newState = context->copyState();
+          newState->normalArray = true;
+          newState->vertexArray = true;
+          context->pushState(newState);
           glPushMatrix();
           glScalef(size, size, size);
           vertexBuffer->bindVertexPointer();
@@ -141,6 +150,7 @@ namespace lost
           normalBuffer->unbind();
           vertexBuffer->unbind();
           glPopMatrix();
+          context->popState();
         }
         
         void renderNormals()
