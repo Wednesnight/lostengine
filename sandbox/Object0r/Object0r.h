@@ -21,8 +21,6 @@
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/event/EventDispatcher.h"
-#include "lost/gl/ShaderProgram.h"
-#include "lost/gl/ShaderHelper.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
@@ -56,7 +54,6 @@ struct Object0r
   shared_ptr<Camera>        camera;
   FpsMeter                  fpsMeter;
   
-  shared_ptr<ShaderProgram> lightingShader;
   shared_ptr<Renderer>      modelRenderer;
 
   bool renderNormals;
@@ -161,9 +158,7 @@ struct Object0r
     cutoff       = new GLfloat[1];
     cutoff[0]    = appInstance->config["lightCutoff"].as<float>(0.0f);
     
-    shaderInit();
-
-    lsystemRenderer.reset(new lost::model::lsystem::Renderer(lsystemMesh));
+    lsystemRenderer.reset(new lost::model::lsystem::Renderer(appInstance->context, lsystemMesh));
 
     appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
     appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
@@ -176,58 +171,16 @@ struct Object0r
     renderTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Object0r::render, this, _1)));
   }
   
-  void shaderInit()
-  {
-    lightingShader = loadShader(appInstance->loader, "lighting");
-    lightingShader->enable();
-    lightingShader->validate();
-    if(!lightingShader->validated())
-    {
-      DOUT("Problem found during validation: \n"<<lightingShader->log())
-    }
-    else
-    {
-      DOUT("Program validated OK");
-    }
-    (*lightingShader)["LightPosition"] = Vec3(0,5,-5);
-    (*lightingShader)["LightColor"]    = Color(1,1,1);
-    (*lightingShader)["EyePosition"]   = Vec3(camera->position().x, camera->position().y, camera->position().z);
-    (*lightingShader)["Specular"]      = Color(1,1,1);
-    (*lightingShader)["Ambient"]       = Color(1,.1,.1);
-    (*lightingShader)["SurfaceColor"]  = Color(1,1,.1);
-    (*lightingShader)["Kd"]            = 0.8f;
-    lightingShader->disable();
-  }
-  
   void render(shared_ptr<TimerEvent> event)
   {
-    boost::shared_ptr<Context> context = lost::gl::Context::instance();
-    boost::shared_ptr<lost::gl::State> newState = context->copyState();
+    boost::shared_ptr<lost::gl::State> newState = appInstance->context->copyState();
     newState->depthTest = true;
     newState->texture2D = false;
     newState->vertexArray = true;
-    context->pushState(newState);
+    appInstance->context->pushState(newState);
 
     glClearColor(0.0, 0.0, 0.0, 0.0);GLDEBUG;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
-
-/*
-    static double lastSec = 0;
-    if (lastSec >= 1)
-    {
-      DOUT("camera->position(): " << camera->position());
-      DOUT("camera->target()  : " << camera->target());
-      DOUT("camera->up()      : " << camera->up());
-      DOUT("camera->fovY()    : " << camera->fovY());
-      DOUT("camera->depth()   : " << camera->depth());
-      DOUT("camera->rotation(): " << camera->rotation());
-      lastSec = 0;
-    }
-    else
-    {
-      lastSec += event->passedSec;
-    }
-*/
 
     set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
                     camera->position(), camera->target(), camera->up(),
@@ -259,12 +212,9 @@ struct Object0r
     glEnable(GL_LIGHT0);
     glEnable(GL_RESCALE_NORMAL);
 
-//    lightingShader->enable();
     setColor(whiteColor);
-    context->drawLine(Vec3(0,0,0), Vec3(1,1,1));
-//    modelRenderer->render();
+    modelRenderer->render();
     lsystemRenderer->render();
-//    lightingShader->disable();
 
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
@@ -280,14 +230,13 @@ struct Object0r
     glLoadIdentity();
     fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
     
-    context->popState();
+    appInstance->context->popState();
 
     appInstance->swapBuffers();
   }
   
   void keyHandler(shared_ptr<KeyEvent> event)
   {
-//    DOUT("key: " << event->key);
     if (event->pressed)
     {
       switch (event->key)
@@ -358,10 +307,6 @@ struct Object0r
     }
     else
     {
-/*
-      DOUT("event->pos: " << event->pos);
-      DOUT("mousePos  : " << mousePos);
-*/
       // x-axis rotation
       float dx = -1.0f * (event->pos.y - mousePos.y) * 0.1f;
       // y-axis rotation

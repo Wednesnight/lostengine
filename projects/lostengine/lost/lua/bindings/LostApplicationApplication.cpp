@@ -17,6 +17,7 @@ LOST_LUA_EXPORT_BEGIN(LostApplicationApplication)
        .def("swapBuffers", &Application::swapBuffers)
        .def_readonly("loader", &Application::loader)
        .def_readonly("displayAttributes", &Application::displayAttributes)
+       .def_readonly("context", &Application::context)
     ]
   ];
 }

@@ -13,6 +13,7 @@ using namespace std;
 using namespace boost;
 using namespace lost::resource;
 using namespace lost::common;
+using namespace lost::gl;
 using namespace luabind;
 
 namespace lost
@@ -81,6 +82,8 @@ namespace application
 
     // the gl context will be created here, so resize event needs to be connected before
     adapter->init(displayAttributes);
+    // init gl context
+    context.reset(new Context());
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);

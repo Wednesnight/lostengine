@@ -34,6 +34,8 @@
 #include "lost/lua/bindings/LostBitmapBitmap.h"
 #include "luabind/class_info.hpp"
 #include "lost/lua/bindings/LostPlatformPlatform.h"
+#include "lost/lua/bindings/LostGLContext.h"
+#include "lost/lua/bindings/LostGLState.h"
 
 namespace lost
 {
@@ -75,6 +77,8 @@ namespace lost
       LostGLDraw(state);
       LostGLUtils(state);
       LostPlatformPlatform(state);
+      LostGLContext(state);
+      LostGLState(state);
       
       luabind::bind_class_info(state);
     }

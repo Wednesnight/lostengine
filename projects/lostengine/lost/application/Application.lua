@@ -4,7 +4,9 @@ lost.application.Application =
     globals.app:addEventListener(which, where)
   end,
 
-  config = {}
+  config = {},
+
+  context = globals.app.context
 }
 
 function fireEvent(name, event)

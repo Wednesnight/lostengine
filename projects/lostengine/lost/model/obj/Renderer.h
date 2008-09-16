@@ -43,8 +43,8 @@ namespace lost
         GLenum renderModeBack;
 #endif
 
-        Renderer(boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
-        : context(lost::gl::Context::instance()),
+        Renderer(const boost::shared_ptr<lost::gl::Context>& inContext, boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
+        : context(inContext),
           mesh(inMesh),
           material(inMaterial),
           size(1.0f)

@@ -32,7 +32,7 @@ function lost.application.Application:init(event)
   modelParser:parseMesh(self.config.modelFilename, self.config.modelMesh, self.config.modelMaterial);
 
   -- Initialize model renderer
-  self.config.modelRenderer      = lost.model.obj.Renderer(self.config.modelMesh, self.config.modelMaterial);
+  self.config.modelRenderer      = lost.model.obj.Renderer(self.context, self.config.modelMesh, self.config.modelMaterial);
   self.config.modelRenderer.size = self.config.modelSize;
 
   self.config.lightShininess = 128

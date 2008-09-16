@@ -14,6 +14,7 @@ using namespace std;
 using namespace boost;
 using namespace lost::resource;
 using namespace lost::common;
+using namespace lost::gl;
 using namespace luabind;
 
 namespace lost

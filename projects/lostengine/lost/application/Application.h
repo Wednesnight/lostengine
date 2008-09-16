@@ -13,33 +13,35 @@ struct ApplicationAdapter;
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-struct Application : public event::EventDispatcher
-{
-public:
-  Application();
-  virtual ~Application();
+    struct Application : public event::EventDispatcher
+    {
+    public:
+      Application();
+      virtual ~Application();
 
-  void run();
-  void swapBuffers();
-  void quit();
+      void run();
+      void swapBuffers();
+      void quit();
 
-  common::DisplayAttributes           displayAttributes;
-  boost::shared_ptr<resource::Loader> loader;
-  boost::shared_ptr<lua::State>       interpreter;
-  Config::SharedPtr                   config;
-  void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
-  
-private:
-  boost::shared_ptr<ApplicationAdapter> adapter;
-  
-};
+      common::DisplayAttributes            displayAttributes;
+      boost::shared_ptr<resource::Loader>  loader;
+      boost::shared_ptr<lua::State>        interpreter;
+      Config::SharedPtr                    config;
+      boost::shared_ptr<lost::gl::Context> context;
 
-extern Application* appInstance;
+      void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
+      
+    private:
+      boost::shared_ptr<ApplicationAdapter> adapter;
+      
+    };
 
-}
+    extern Application* appInstance;
+
+  }
 }
 
 #endif

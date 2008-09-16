@@ -22,6 +22,18 @@
 		3E2950220E540A5D00E83965 /* lglu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E29501A0E540A5D00E83965 /* lglu.h */; };
 		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
+		3E650FF10E7F914D00DE5AFE /* LostGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */; };
+		3E650FF20E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
+		3E650FF30E7F914D00DE5AFE /* LostGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */; };
+		3E650FF40E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
+		3E650FF50E7F914D00DE5AFE /* LostGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */; };
+		3E650FF60E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
+		3E6510020E7F92C700DE5AFE /* LostGLState.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6510000E7F92C700DE5AFE /* LostGLState.h */; };
+		3E6510030E7F92C700DE5AFE /* LostGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6510010E7F92C700DE5AFE /* LostGLState.cpp */; };
+		3E6510040E7F92C700DE5AFE /* LostGLState.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6510000E7F92C700DE5AFE /* LostGLState.h */; };
+		3E6510050E7F92C700DE5AFE /* LostGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6510010E7F92C700DE5AFE /* LostGLState.cpp */; };
+		3E6510060E7F92C700DE5AFE /* LostGLState.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6510000E7F92C700DE5AFE /* LostGLState.h */; };
+		3E6510070E7F92C700DE5AFE /* LostGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6510010E7F92C700DE5AFE /* LostGLState.cpp */; };
 		3E7324FE0E5CE3A4000FF838 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
 		3E7324FF0E5CE3A4000FF838 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94680E04639D00B6423B /* Timer.h */; };
 		3E7325000E5CE3A4000FF838 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
@@ -817,6 +829,10 @@
 		3E2950190E540A5D00E83965 /* lgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl.h; path = lgl/lgl.h; sourceTree = "<group>"; };
 		3E29501A0E540A5D00E83965 /* lglu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lglu.h; path = lgl/lglu.h; sourceTree = "<group>"; };
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
+		3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLContext.h; path = bindings/LostGLContext.h; sourceTree = "<group>"; };
+		3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLContext.cpp; path = bindings/LostGLContext.cpp; sourceTree = "<group>"; };
+		3E6510000E7F92C700DE5AFE /* LostGLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLState.h; path = bindings/LostGLState.h; sourceTree = "<group>"; };
+		3E6510010E7F92C700DE5AFE /* LostGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLState.cpp; path = bindings/LostGLState.cpp; sourceTree = "<group>"; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
@@ -1544,6 +1560,10 @@
 				EA7BE2400E6F44B20017B031 /* LostModelObjMaterial.h */,
 				EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */,
 				EA7BE2480E6F45050017B031 /* LostModelMesh.h */,
+				3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */,
+				3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */,
+				3E6510000E7F92C700DE5AFE /* LostGLState.h */,
+				3E6510010E7F92C700DE5AFE /* LostGLState.cpp */,
 				EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */,
 				EA7BE2500E6F45380017B031 /* LostGLDraw.h */,
 				EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */,
@@ -1704,6 +1724,8 @@
 				3EDE44180E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446C0E767CC600C38A71 /* Renderer.h in Headers */,
 				3E03001E0E791AE500DC26B8 /* State.h in Headers */,
+				3E650FF50E7F914D00DE5AFE /* LostGLContext.h in Headers */,
+				3E6510020E7F92C700DE5AFE /* LostGLState.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1825,6 +1847,8 @@
 				3EDE44170E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446B0E767CC600C38A71 /* Renderer.h in Headers */,
 				3E0300200E791AE500DC26B8 /* State.h in Headers */,
+				3E650FF10E7F914D00DE5AFE /* LostGLContext.h in Headers */,
+				3E6510060E7F92C700DE5AFE /* LostGLState.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1949,6 +1973,8 @@
 				3EDE44160E766D8500C38A71 /* Generator.h in Headers */,
 				3EDE446A0E767CC600C38A71 /* Renderer.h in Headers */,
 				3E03001C0E791AE500DC26B8 /* State.h in Headers */,
+				3E650FF30E7F914D00DE5AFE /* LostGLContext.h in Headers */,
+				3E6510040E7F92C700DE5AFE /* LostGLState.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2269,6 +2295,8 @@
 				EA7BE18B0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE18C0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
+				3E650FF60E7F914D00DE5AFE /* LostGLContext.cpp in Sources */,
+				3E6510030E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2331,6 +2359,8 @@
 				EA7BE1490E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE14A0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
+				3E650FF20E7F914D00DE5AFE /* LostGLContext.cpp in Sources */,
+				3E6510070E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2392,6 +2422,8 @@
 				EA7BE16A0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE16B0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
+				3E650FF40E7F914D00DE5AFE /* LostGLContext.cpp in Sources */,
+				3E6510050E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

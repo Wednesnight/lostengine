@@ -46,12 +46,6 @@ namespace lost
     public:
       boost::shared_ptr<State> state;
 
-      static boost::shared_ptr<Context>& instance()
-      {
-        static boost::shared_ptr<Context> context(new Context());
-        return context;
-      }
-
       Context()
       {
         DOUT("lost::gl::Context::Context()");
@@ -104,11 +98,20 @@ namespace lost
         }
       }
 
+      inline boost::shared_ptr<State>& defaultVertexState()
+      {
+        static boost::shared_ptr<State> newState;
+        if (!newState)
+        {
+          newState = copyState();
+          newState->vertexArray = true;
+        }
+        return newState;
+      }
+
       void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
       {
-        boost::shared_ptr<State> newState = copyState();
-        newState->vertexArray = true;
-        pushState(newState);
+        pushState(defaultVertexState());
         lost::gl::drawLine(start, end);
         popState();
       }

@@ -20,8 +20,8 @@ namespace lost
         boost::shared_ptr<Mesh> mesh;
         boost::shared_ptr<gl::ArrayBuffer<Vertex> > vertexBuffer;
 
-        Renderer(const boost::shared_ptr<Mesh>& inMesh)
-        : context(lost::gl::Context::instance()),
+        Renderer(const boost::shared_ptr<lost::gl::Context>& inContext, const boost::shared_ptr<Mesh>& inMesh)
+        : context(inContext),
           mesh(inMesh)
         {
           vertexBuffer.reset(new gl::ArrayBuffer<Vertex>);
