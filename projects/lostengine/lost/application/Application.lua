@@ -4,6 +4,10 @@ lost.application.Application =
     globals.app:addEventListener(which, where)
   end,
 
+  addEventListener = function(self, which, owner, where)
+    globals.app:addEventListener(which, owner, where)
+  end,
+
   config = {},
 
   context = globals.app.context

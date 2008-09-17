@@ -17,7 +17,7 @@ end
 
 function lost.application.Application:init(event)
   -- Initialize camera
-  self.config.cameraController = lost.camera.CameraController()
+  self.config.cameraController = lost.camera.CameraController(self)
   self.config.camera = self.config.cameraController.camera
 
   -- Initialize model attributes

@@ -109,11 +109,22 @@ namespace lost
         return newState;
       }
 
-      void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
+      template <typename Vec>
+      inline void drawLine(const Vec& start, const Vec& end)
       {
         pushState(defaultVertexState());
         lost::gl::drawLine(start, end);
         popState();
+      }
+
+      void drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
+      {
+        drawLine<lost::math::Vec2>(start, end);
+      }
+
+      void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
+      {
+        drawLine<lost::math::Vec3>(start, end);
       }
     };
         

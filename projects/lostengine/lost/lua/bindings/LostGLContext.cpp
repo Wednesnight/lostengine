@@ -1,6 +1,8 @@
 #include "lost/lua/bindings/LostGLContext.h"
 #include "lost/gl/Context.h"
 #include "lost/gl/State.h"
+#include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
 
 using namespace luabind;
 using namespace lost::gl;
@@ -18,7 +20,8 @@ LOST_LUA_EXPORT_BEGIN(LostGLContext)
       .def("pushState", (void(Context::*)())&Context::pushState)
       .def("pushState", (void(Context::*)(const boost::shared_ptr<lost::gl::State>&))&Context::pushState)
       .def("popState",  &Context::popState)
-      .def("drawLine",  &Context::drawLine)
+      .def("drawLine",  (void(Context::*)(const lost::math::Vec3&, const lost::math::Vec3&))&Context::drawLine)
+      .def("drawLine",  (void(Context::*)(const lost::math::Vec2&, const lost::math::Vec2&))&Context::drawLine)
     ]
   ];
 }

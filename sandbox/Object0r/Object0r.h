@@ -162,9 +162,6 @@ struct Object0r
 
     appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
     appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
-    appInstance->addEventListener(MouseEvent::MOUSE_UP(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, this, _1)));
-    appInstance->addEventListener(MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(bind(&Object0r::mouseClickHandler, this, _1)));
-    appInstance->addEventListener(MouseEvent::MOUSE_MOVE(), receive<MouseEvent>(bind(&Object0r::mouseMoveHandler, this, _1)));
     appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Object0r::resizeHandler, this, _1)));
     quit.connect(bind(&Application::quit, appInstance));
     
@@ -269,54 +266,10 @@ struct Object0r
         case K_B:
           renderAABB = !renderAABB;
           break;
-        case K_W:
-          camera->move(Vec3(0,0,-0.25));
-          break;
-        case K_A:
-          camera->move(Vec3(-0.25,0,0));
-          break;
-        case K_S:
-          camera->move(Vec3(0,0,0.25));
-          break;
-        case K_D:
-          camera->move(Vec3(0.25,0,0));
-          break;
-        case K_Q:
-          camera->move(Vec3(0,-0.25,0));
-          break;
-        case K_E:
-          camera->move(Vec3(0,0.25,0));
-          break;
       }
     }
   }
 
-  void mouseClickHandler(shared_ptr<MouseEvent> event)
-  {
-  }
-  
-  void mouseMoveHandler(shared_ptr<MouseEvent> event)
-  {
-    static bool moveInitialized = false;
-    static Vec2 mousePos(0,0);
-    
-    if (!moveInitialized)
-    {
-      mousePos        = event->pos;
-      moveInitialized = true;
-    }
-    else
-    {
-      // x-axis rotation
-      float dx = -1.0f * (event->pos.y - mousePos.y) * 0.1f;
-      // y-axis rotation
-      float dy = (event->pos.x - mousePos.x) * 0.1f;
-      
-      camera->rotate(Vec3(dx, dy, 0.0f));
-      mousePos = event->pos;
-    }
-  }
-  
   void resizeHandler(shared_ptr<ResizeEvent> event)
   {
     glViewport (0, 0, event->width, event->height); 
