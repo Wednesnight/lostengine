@@ -59,10 +59,14 @@ namespace lost
             lines.push_back(start);
             lines.push_back(end);
             start = end;
+
+            lost::math::Matrix matrix;
+            matrix.initTranslation(lost::math::Vec3(0, 2, 0));
+            result.matrix = result.matrix * matrix;
           }
           else
           {
-            end = matrix * end;
+            end = result.matrix * end;
           }
         }
 

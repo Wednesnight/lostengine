@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EFEF5070E10278B006B3721 /* LuaLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */; };
-		3EFEF5470E10384C006B3721 /* funkyfractals.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EFEF5460E10384C006B3721 /* funkyfractals.lua */; };
-		3EFEF5670E103C56006B3721 /* LuaVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFEF5660E103C56006B3721 /* LuaVec3.cpp */; };
+		3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0BA1CE0E81011600A49C49 /* libLostEngine.a */; };
+		3E0BA1E90E8102A300A49C49 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3E0BA1E80E8102A300A49C49 /* init */; };
+		3E0BA1EC0E8102CC00A49C49 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E0BA1EB0E8102CC00A49C49 /* Application.lua */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		EA3B977D0E04832000B6423B /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3B977C0E04831B00B6423B /* libLostEngine.a */; };
 		EA45F5B50DE52D08001B4889 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AE0DE52D08001B4889 /* AGL.framework */; };
 		EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AF0DE52D08001B4889 /* OpenGL.framework */; };
 		EA45F5B70DE52D09001B4889 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5B00DE52D08001B4889 /* GLUT.framework */; };
@@ -22,38 +21,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EA3B977B0E04831B00B6423B /* PBXContainerItemProxy */ = {
+		3E0BA1CD0E81011600A49C49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
 			remoteInfo = LostEngine;
 		};
-		EA3B977E0E04832700B6423B /* PBXContainerItemProxy */ = {
+		3E0BA1CF0E81011600A49C49 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			remoteInfo = "LostEngine-iphone";
+		};
+		3E0BA1D10E81011600A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteInfo = "LostEngine-simulator";
+		};
+		3E0BA1D50E81013F00A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaLSystem.cpp; path = ../../../projects/lostengine/lost/lsystem/LuaLSystem.cpp; sourceTree = SOURCE_ROOT; };
-		3EFEF5460E10384C006B3721 /* funkyfractals.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = funkyfractals.lua; path = ../funkyfractals.lua; sourceTree = SOURCE_ROOT; };
-		3EFEF54D0E1038D5006B3721 /* LuaLSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaLSystem.h; path = ../../../projects/lostengine/lost/lsystem/LuaLSystem.h; sourceTree = SOURCE_ROOT; };
-		3EFEF5650E103C56006B3721 /* LuaVec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LuaVec3.h; path = ../../../projects/lostengine/lost/math/LuaVec3.h; sourceTree = SOURCE_ROOT; };
-		3EFEF5660E103C56006B3721 /* LuaVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaVec3.cpp; path = ../../../projects/lostengine/lost/math/LuaVec3.cpp; sourceTree = SOURCE_ROOT; };
+		3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		3E0BA1E80E8102A300A49C49 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
+		3E0BA1EB0E8102CC00A49C49 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* funkyfractals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = funkyfractals.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/mac/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA45F5AE0DE52D08001B4889 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EA45F5AF0DE52D08001B4889 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA45F5B00DE52D08001B4889 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EA45F5B10DE52D08001B4889 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		EA45F5CA0DE52DA1001B4889 /* FunkyFractals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunkyFractals.h; path = ../FunkyFractals.h; sourceTree = SOURCE_ROOT; };
-		EA45F5CB0DE52DA7001B4889 /* funkyfractals.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = funkyfractals.cfg; path = ../funkyfractals.cfg; sourceTree = SOURCE_ROOT; };
 		EA45F5E60DE52DF9001B4889 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA45F6050DE52EE3001B4889 /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		EA45F6060DE52EE3001B4889 /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
@@ -64,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3B977D0E04832000B6423B /* libLostEngine.a in Frameworks */,
+				3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */,
 				EA45F5B50DE52D08001B4889 /* AGL.framework in Frameworks */,
 				EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */,
 				EA45F5B70DE52D09001B4889 /* GLUT.framework in Frameworks */,
@@ -97,10 +106,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3EFEF5460E10384C006B3721 /* funkyfractals.lua */,
+				3E0BA1E80E8102A300A49C49 /* init */,
+				3E0BA1EB0E8102CC00A49C49 /* Application.lua */,
 				EA45F6050DE52EE3001B4889 /* lighting.vs */,
 				EA45F6060DE52EE3001B4889 /* lighting.fs */,
-				EA45F5CB0DE52DA7001B4889 /* funkyfractals.cfg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -110,7 +119,7 @@
 		29B97323FDCFA39411CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */,
+				3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */,
 				EA45F5AE0DE52D08001B4889 /* AGL.framework */,
 				EA45F5AF0DE52D08001B4889 /* OpenGL.framework */,
 				EA45F5B00DE52D08001B4889 /* GLUT.framework */,
@@ -119,10 +128,12 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		EA3B976D0E04831B00B6423B /* Products */ = {
+		3E0BA1C80E81011600A49C49 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B977C0E04831B00B6423B /* libLostEngine.a */,
+				3E0BA1CE0E81011600A49C49 /* libLostEngine.a */,
+				3E0BA1D00E81011600A49C49 /* libLostEngine-iphone.a */,
+				3E0BA1D20E81011600A49C49 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,10 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				EA45F5E60DE52DF9001B4889 /* main.cpp */,
-				3EFEF5650E103C56006B3721 /* LuaVec3.h */,
-				3EFEF5660E103C56006B3721 /* LuaVec3.cpp */,
-				3EFEF5060E10278B006B3721 /* LuaLSystem.cpp */,
-				3EFEF54D0E1038D5006B3721 /* LuaLSystem.h */,
 				EA45F5CA0DE52DA1001B4889 /* FunkyFractals.h */,
 			);
 			name = Sources;
@@ -154,7 +161,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EA3B977F0E04832700B6423B /* PBXTargetDependency */,
+				3E0BA1D60E81013F00A49C49 /* PBXTargetDependency */,
 			);
 			name = funkyfractals;
 			productInstallPath = "$(HOME)/Applications";
@@ -174,8 +181,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EA3B976D0E04831B00B6423B /* Products */;
-					ProjectRef = EA3B976C0E04831B00B6423B /* LostEngine.xcodeproj */;
+					ProductGroup = 3E0BA1C80E81011600A49C49 /* Products */;
+					ProjectRef = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -186,11 +193,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EA3B977C0E04831B00B6423B /* libLostEngine.a */ = {
+		3E0BA1CE0E81011600A49C49 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = EA3B977B0E04831B00B6423B /* PBXContainerItemProxy */;
+			remoteRef = 3E0BA1CD0E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3E0BA1D00E81011600A49C49 /* libLostEngine-iphone.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-iphone.a";
+			remoteRef = 3E0BA1CF0E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3E0BA1D20E81011600A49C49 /* libLostEngine-simulator.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLostEngine-simulator.a";
+			remoteRef = 3E0BA1D10E81011600A49C49 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -200,10 +221,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFEF5470E10384C006B3721 /* funkyfractals.lua in Resources */,
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */,
 				EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */,
+				3E0BA1E90E8102A300A49C49 /* init in Resources */,
+				3E0BA1EC0E8102CC00A49C49 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,18 +237,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */,
-				3EFEF5070E10278B006B3721 /* LuaLSystem.cpp in Sources */,
-				3EFEF5670E103C56006B3721 /* LuaVec3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EA3B977F0E04832700B6423B /* PBXTargetDependency */ = {
+		3E0BA1D60E81013F00A49C49 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LostEngine;
-			targetProxy = EA3B977E0E04832700B6423B /* PBXContainerItemProxy */;
+			targetProxy = 3E0BA1D50E81013F00A49C49 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -303,7 +323,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

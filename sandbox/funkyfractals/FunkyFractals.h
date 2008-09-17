@@ -9,12 +9,20 @@
 #include "lost/gl/Utils.h"
 #include "lost/common/Color.h"
 #include "lost/math/Vec2.h"
-#include "lost/application/Timer.h"
+#include "lost/application/TimerEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/application/ResizeEvent.h"
+#include "lost/application/ApplicationEvent.h"
 #include "lost/common/DisplayAttributes.h"
-#include "lost/engine/KeySym.h"
+#include "lost/application/KeySym.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/lsystem/LSystem.h"
 #include "lost/gl/ShaderHelper.h"
+
+using namespace boost;
+using namespace lost;
+using namespace lost::application;
+using namespace lost::event;
 
 struct Line
 {
@@ -49,40 +57,41 @@ struct FunkyFractals
   float                   zfar;
   boost::shared_ptr<lost::gl::ShaderProgram>      lightingShader;
 
-  lost::common::DisplayAttributes& displayAttributes;
   boost::signal<void(void)>        quit;
 
   lost::lsystem::LSystem                         lsystem;
   boost::shared_ptr<lost::lsystem::LSystemState> state;
 
-  lost::lua::State& interpreter;
+  shared_ptr<Timer> t1;
   
-  FunkyFractals(lost::common::DisplayAttributes& inDisplayAttributes, lost::lua::State& inInterpreter)
+  FunkyFractals()
   : eye(50,50,100),
     at(0,50,0),
     up(0,1,0),
     fovy(90),
     znear(1),
-    zfar(1000),
-    displayAttributes(inDisplayAttributes),
-    interpreter(inInterpreter)
+    zfar(1000)
   {
-/*
-    std::map<char, std::string> variableMap;
-    variableMap['F'] = "FzXFZxFzXFzXF";
-    state.reset(new lost::lsystem::LSystemState("FzFzFzF", variableMap, lost::math::Vec3(5,0,90)));
-    state->reset();
-    lsystem.advance(state, 6);
-*/
-    interpreter.doResourceFile("funkyfractals.lua");      
-    state = luabind::object_cast<boost::shared_ptr<lost::lsystem::LSystemState> >(luabind::globals(interpreter)["state"]);
+  }
 
+  void init(shared_ptr<ApplicationEvent> event)
+  {
+    appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&FunkyFractals::keyboard, this, _1)));
+    appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&FunkyFractals::keyboard, this, _1)));
+    appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&FunkyFractals::resetViewPort, this, _1)));
+    
+    quit.connect(boost::bind(&Application::quit, appInstance));
+    t1.reset(new Timer("redrawTimer", 0.015));
+    t1->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&FunkyFractals::redraw, this, _1)));
+
+    state = appInstance->config["state"].as<boost::shared_ptr<lost::lsystem::LSystemState> >();
+    
     lightingShaderInit();
   }
 
   void lightingShaderInit()
   {
-    lightingShader = lost::gl::loadShader("lighting");
+    lightingShader = lost::gl::loadShader(appInstance->loader, "lighting");
     lightingShader->enable();
     lightingShader->validate();
     if(!lightingShader->validated())
@@ -103,40 +112,36 @@ struct FunkyFractals
     lightingShader->disable();
   }
 
-  void resetViewPort(int width, int height)
+  void resetViewPort(shared_ptr<ResizeEvent> event)
   {
-    glViewport(0, 0, width-1, height-1);GLDEBUG;
-    lost::gl::utils::set3DProjection(displayAttributes.width, displayAttributes.height, eye, at, up, fovy, znear, zfar);
+    glViewport(0, 0, event->width-1, event->height-1);GLDEBUG;
   }
 
-  void keyboard( const lost::event::KeyEvent& inEvent )
+  void keyboard(shared_ptr<KeyEvent> event)
   {
     std::string input;
-    switch (inEvent.key)
+    switch (event->key)
     {
-      case lost::engine::K_ESCAPE :
-        if (!inEvent.pressed)
+      case K_ESCAPE :
+        if (!event->pressed)
         {
           quit();
         }
         break;
-      case lost::engine::K_F6 :
-        std::cin >> input;
-        interpreter.doString(input);
-        break;
-      default :
-      break;
     }
   }
 
-  void redraw(double deltaSec, lost::application::Timer* timer)
+  void redraw(shared_ptr<TimerEvent> event)
   {
+    boost::shared_ptr<lost::gl::State> newState = appInstance->context->copyState();
+    newState->depthTest = true;
+    newState->texture2D = false;
+    newState->vertexArray = true;
+    appInstance->context->pushState(newState);
     glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
 
-    glEnable(GL_DEPTH_TEST);
-
-    lost::gl::utils::set3DProjection(displayAttributes.width, displayAttributes.height, eye, at, up, fovy, znear, zfar);
+    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height, eye, at, up, fovy, znear, zfar);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -147,10 +152,13 @@ struct FunkyFractals
     lsystem.walk(state, matrix, boost::bind(&FunkyFractals::renderLSystemNode, this, _1, _2));
     lightingShader->disable();
 
-    lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(displayAttributes.width, displayAttributes.height));
+    lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    fpsMeter.render(displayAttributes.width - fpsMeter.width, 0, deltaSec);
+    fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
+
+    appInstance->context->popState();
+
     glfwSwapBuffers();
   }
 

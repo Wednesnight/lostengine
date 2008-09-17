@@ -210,7 +210,7 @@ struct Object0r
     glEnable(GL_RESCALE_NORMAL);
 
     setColor(whiteColor);
-    modelRenderer->render();
+//    modelRenderer->render();
     lsystemRenderer->render();
 
     glDisable(GL_LIGHT0);

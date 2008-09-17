@@ -3,17 +3,19 @@
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/Timer.h"
+#include "lost/application/KeyEvent.h"
 
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
-#include "lost/lsystem/LuaLSystem.h"
-#include "lost/math/LuaVec3.h"
+#include "lost/lua/bindings/LostLSystemLSystem.h"
+#include "lost/lua/bindings/LostMathVec3.h"
 
 #include "FunkyFractals.h"
 
 using namespace std;
 using namespace lost::application;
 using namespace lost::common;
+using namespace lost::event;
 
 int main(int argn, char** args)
 {
@@ -21,17 +23,9 @@ int main(int argn, char** args)
   try
   {
     Application app;
+    FunkyFractals funkyfractals;
 
-    lost::lua::State interpreter;
-    bindLSystem(interpreter);
-    bindVec3(interpreter);
-    FunkyFractals funkyfractals(app.displayAttributes, interpreter);
-
-    app.key.connect(boost::bind(&FunkyFractals::keyboard, &funkyfractals, _1));
-    app.windowResize.connect(boost::bind(&FunkyFractals::resetViewPort, &funkyfractals, _1,_2));
-    funkyfractals.quit.connect(boost::bind(&Application::quit, &app));
-    Timer t1("redrawTimer", 0.015);
-    t1.action.connect(boost::bind(&FunkyFractals::redraw, &funkyfractals, _1, _2));
+    appInstance->addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&FunkyFractals::init, &funkyfractals, _1)));
 
     app.run();
   }
