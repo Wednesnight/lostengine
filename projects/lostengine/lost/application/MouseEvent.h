@@ -3,6 +3,7 @@
 
 #include "lost/event/Event.h"
 #include "lost/math/Vec2.h"
+#include "lost/application/MouseButton.h"
 
 namespace lost
 {
@@ -32,7 +33,7 @@ namespace application
     int              button;
     bool             pressed;
 
-    MouseEvent(const event::Type& inType) : Event(inType), button(0), pressed(false) { }
+    MouseEvent(const event::Type& inType) : Event(inType), button(MB_UNKNOWN), pressed(false) { }
     virtual ~MouseEvent() {}
   };
 

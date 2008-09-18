@@ -138,6 +138,9 @@
 		3EE0563F0E65545600E044A2 /* libhashlib++-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE056210E65530600E044A2 /* libhashlib++-simulator.a */; };
 		3EE056400E65546200E044A2 /* libhashlib++-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561F0E65530600E044A2 /* libhashlib++-iphone.a */; };
 		3EE056410E65546E00E044A2 /* libhashlib++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE0561D0E65530600E044A2 /* libhashlib++.a */; };
+		3EE57C9C0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
+		3EE57C9D0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
+		3EE57C9E0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
 		3EFEC1000E62C4670053EB12 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FD0E62C4670053EB12 /* Material.h */; };
 		3EFEC1010E62C4670053EB12 /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FE0E62C4670053EB12 /* Parser.h */; };
 		3EFEC1020E62C4670053EB12 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FF0E62C4670053EB12 /* Renderer.h */; };
@@ -846,6 +849,7 @@
 		3EDE44150E766D8500C38A71 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Generator.h; path = model/lsystem/Generator.h; sourceTree = "<group>"; };
 		3EDE44690E767CC600C38A71 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Renderer.h; path = model/lsystem/Renderer.h; sourceTree = "<group>"; };
 		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		3EE57C9B0E82572E00066396 /* MouseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseButton.h; sourceTree = "<group>"; };
 		3EFEC0FD0E62C4670053EB12 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		3EFEC0FE0E62C4670053EB12 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
 		3EFEC0FF0E62C4670053EB12 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
@@ -1323,6 +1327,7 @@
 				EA3B94680E04639D00B6423B /* Timer.h */,
 				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
 				EAAF977D0E15C30400B28BF6 /* MouseEvent.h */,
+				3EE57C9B0E82572E00066396 /* MouseButton.h */,
 				EAAF977F0E15C30400B28BF6 /* KeyEvent.h */,
 				3EC9D2E10E6789F2003CED66 /* KeySym.h */,
 				EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */,
@@ -1726,6 +1731,7 @@
 				3E03001E0E791AE500DC26B8 /* State.h in Headers */,
 				3E650FF50E7F914D00DE5AFE /* LostGLContext.h in Headers */,
 				3E6510020E7F92C700DE5AFE /* LostGLState.h in Headers */,
+				3EE57C9C0E82572E00066396 /* MouseButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1849,6 +1855,7 @@
 				3E0300200E791AE500DC26B8 /* State.h in Headers */,
 				3E650FF10E7F914D00DE5AFE /* LostGLContext.h in Headers */,
 				3E6510060E7F92C700DE5AFE /* LostGLState.h in Headers */,
+				3EE57C9E0E82572E00066396 /* MouseButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1975,6 +1982,7 @@
 				3E03001C0E791AE500DC26B8 /* State.h in Headers */,
 				3E650FF30E7F914D00DE5AFE /* LostGLContext.h in Headers */,
 				3E6510040E7F92C700DE5AFE /* LostGLState.h in Headers */,
+				3EE57C9D0E82572E00066396 /* MouseButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

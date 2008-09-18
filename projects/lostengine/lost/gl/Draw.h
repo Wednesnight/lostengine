@@ -64,6 +64,16 @@ namespace gl
     glDrawArrays(GL_LINES, 0,2);    
   }
 
+  inline void drawPoint(const lost::math::Vec2& point)
+  {
+    float p[2];
+    p[0] = point.x;
+    p[1] = point.y;
+    
+    glVertexPointer(2, GL_FLOAT, 0, p);
+    glDrawArrays(GL_POINTS, 0, 1);    
+  }
+
   inline void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
   {
     float p[6];

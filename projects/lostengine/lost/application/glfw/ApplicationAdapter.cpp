@@ -2,7 +2,7 @@
 #include "lost/common/Logger.h"
 #include <GL/glfw.h>
 #include "lost/application/KeySym.h"
-#include "lost/application/MouseSym.h"
+#include "lost/application/MouseButton.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
@@ -151,8 +151,11 @@ void glfwMouseMoveCallback( int x, int y )
   shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
   point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
-  ev->button = M_UNKNOWN;
-  ev->pressed = false;
+  ev->button = MB_UNKNOWN;
+  if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_1)) ev->button += MB_LEFT;
+  if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_2)) ev->button += MB_RIGHT;
+  if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_3)) ev->button += MB_MIDDLE;
+  ev->pressed = glfwGetMouseButton(GLFW_MOUSE_BUTTON_1) || glfwGetMouseButton(GLFW_MOUSE_BUTTON_2) || glfwGetMouseButton(GLFW_MOUSE_BUTTON_3);
   adapterInstance->target->dispatchEvent(ev);
 }
 
@@ -168,12 +171,12 @@ void glfwMouseButtonCallback( int button, int action )
   point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
   ev->button = (button == GLFW_MOUSE_BUTTON_1)
-  ? M_LEFT
+  ? MB_LEFT
   : ((button == GLFW_MOUSE_BUTTON_2)
-     ? M_RIGHT
+     ? MB_RIGHT
      : ((button == GLFW_MOUSE_BUTTON_3)
-        ? M_MIDDLE
-        : M_UNKNOWN));
+        ? MB_MIDDLE
+        : MB_UNKNOWN));
   ev->pressed = pressed;
   adapterInstance->target->dispatchEvent(ev);
 }
