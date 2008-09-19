@@ -41,6 +41,16 @@ namespace lost
       return result;
     }
 
+    static inline bool operator ==(const Color& l, const Color& r)
+    {
+      return (l.fv[0] == r.fv[0]) && (l.fv[1] == r.fv[1]) && (l.fv[2] == r.fv[2]) && (l.fv[3] == r.fv[3]);
+    }
+    
+    static inline bool operator !=(const Color& l, const Color& r)
+    {
+      return !(l==r);
+    }
+    
     static inline void operator+=(Color& l, const Color& r)
     {
       l.fv[0] = std::min( 1.0f, l.fv[0] + r.fv[0] );

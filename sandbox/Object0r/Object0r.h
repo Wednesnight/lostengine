@@ -192,21 +192,19 @@ struct Object0r
   void render(shared_ptr<TimerEvent> event)
   {
     boost::shared_ptr<lost::gl::State> newState = appInstance->context->copyState();
+    newState->clearColor = blackColor;
     newState->depthTest = true;
     newState->texture2D = false;
     newState->vertexArray = true;
     appInstance->context->pushState(newState);
 
-    glClearColor(0.0, 0.0, 0.0, 0.0);GLDEBUG;
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);GLDEBUG;
-
-    set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
-                    camera->position(), camera->target(), camera->up(),
-                    camera->fovY(), camera->depth().min, camera->depth().max);
+    appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    appInstance->context->set3DProjection(appInstance->displayAttributes, camera->position(), camera->target(), camera->up(),
+                                          camera->fovY(), camera->depth());
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glLineWidth(5.0f);
+    glLineWidth(10.0f);
     setColor(lost::common::Color(0,0,1,0.5));
     dragonCurve->size = 0.3f;
     static float dragonCurveAngle(0.0f);
@@ -220,7 +218,7 @@ struct Object0r
     dragonCurve->render();
     glLineWidth(1.0f);
 
-    glLineWidth(2.0f);
+    glLineWidth(3.0f);
     setColor(lost::common::Color(1,0,0,0.5));
     tree->size = 0.1f;
     static float treeAngle(0.0f);

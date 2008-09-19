@@ -18,6 +18,8 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/model/obj/Renderer.h"
 #include "lost/camera/Camera.h"
+#include "lost/model/lsystem/Generator.h"
+#include "lost/model/lsystem/Renderer.h"
 
 using namespace std;
 using namespace lost::gl;
@@ -57,24 +59,100 @@ struct Controller
   Vec3 lightDirection;
   GLfloat* direction;
   GLfloat* cutoff;
+
+  lost::lsystem::LSystem                            lsystem;
+  lost::model::lsystem::Generator                   lsystemGenerator;
+  boost::shared_ptr<lost::lsystem::LSystemState>    lsystemState;
   
+  boost::shared_ptr<lost::model::Mesh>              dragonCurveMesh;
+  boost::shared_ptr<lost::model::lsystem::Renderer> dragonCurve;
+  
+  boost::shared_ptr<lost::model::Mesh>              treeMesh;
+  boost::shared_ptr<lost::model::lsystem::Renderer> tree;
+  
+  bool animate;
   
   Controller(shared_ptr<Loader> inLoader)
   : renderNormals(false),
-    renderAABB(false)
+    renderAABB(false),
+    animate(true)
   {
+    // generate dragon curve
+    std::map<char, std::string> variableMap;
+    variableMap['F'] = "FxyzFXYZFxyzFxyzF";
+    lsystemState.reset(new lost::lsystem::LSystemState("FxyzFxyzFxyzF", variableMap, lost::math::Vec3(25,25,90)));
+    lsystemState->reset();
+    lsystem.advance(lsystemState, 6);
+    dragonCurveMesh = lsystemGenerator.generate(lsystemState);
+    // generate tree
+    variableMap.clear();
+    variableMap['f'] = "Fxyz[[f]XYZf]XYZF[XYZFf]xyzf";
+    variableMap['F'] = "FF";
+    lsystemState.reset(new lost::lsystem::LSystemState("f", variableMap, lost::math::Vec3(25,25,25)));
+    lsystemState->reset();
+    lsystem.advance(lsystemState, 6);
+    treeMesh = lsystemGenerator.generate(lsystemState);
   }
   
   void redraw(shared_ptr<TimerEvent> event)
   {
-    glClearColor(0,0,0,0);GLDEBUG;
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
-    glEnable(GL_DEPTH_TEST);GLDEBUG;
-    glDisable(GL_TEXTURE_2D);GLDEBUG;
-
-    lost::gl::utils::set3DProjection(appInstance->displayAttributes.width, appInstance->displayAttributes.height,
-                                     camera->position(), camera->target(), camera->up(),
-                                     camera->fovY(), camera->depth().min, camera->depth().max);
+    boost::shared_ptr<lost::gl::State> newState = appInstance->context->copyState();
+    newState->clearColor = blackColor;
+    newState->depthTest = true;
+    newState->texture2D = false;
+    newState->vertexArray = true;
+    appInstance->context->pushState(newState);
+    
+    appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    appInstance->context->set3DProjection(appInstance->displayAttributes, camera->position(), camera->target(), camera->up(),
+                                          camera->fovY(), camera->depth());
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glLineWidth(10.0f);
+    setColor(lost::common::Color(0,0,1,0.5));
+    dragonCurve->size = 0.3f;
+    static float dragonCurveAngle(0.0f);
+    if (animate)
+    {
+      dragonCurveAngle += 0.25f;
+      if (dragonCurveAngle >= 360) dragonCurveAngle -= 360.0f;
+    }
+    glTranslatef(0, 0, -20);
+    glRotatef(-dragonCurveAngle, 0, 0, 1);
+    dragonCurve->render();
+    glLineWidth(1.0f);
+    
+    glLineWidth(3.0f);
+    setColor(lost::common::Color(1,0,0,0.5));
+    tree->size = 0.1f;
+    static float treeAngle(0.0f);
+    if (animate)
+    {
+      treeAngle += 0.25f;
+      if (treeAngle >= 360) treeAngle -= 360.0f;
+    }
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle-45, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle+45, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle-135, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle+135, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glLineWidth(1.0f);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -118,6 +196,8 @@ struct Controller
     glMatrixMode(GL_MODELVIEW);GLDEBUG;
     glLoadIdentity();GLDEBUG;
     fpsMeter.render(2,2,event->passedSec);
+
+    appInstance->context->popState();
 
     appInstance->swapBuffers();
   }
@@ -168,20 +248,27 @@ struct Controller
     direction[2] = lightDirection.z;
     cutoff       = new GLfloat[1];
     cutoff[0]    = appInstance->config["lightCutoff"].as<float>(0.0f);
-    
-    glViewport (0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);
 
-    redrawTimer = new Timer("redrawTimer", 1.0/30.0);
-    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
+    dragonCurve.reset(new lost::model::lsystem::Renderer(appInstance->context, dragonCurveMesh));
+    tree.reset(new lost::model::lsystem::Renderer(appInstance->context, treeMesh));
 
+    appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Controller::resizeHandler, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_BEGAN(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_MOVED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_ENDED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
     appInstance->addEventListener(TouchEvent::TOUCHES_CANCELLED(), receive<TouchEvent>(bind(&Controller::touches, this, _1)));
+
+    redrawTimer = new Timer("redrawTimer", 1.0/60.0);
+    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, this, _1)));
   }
   
   void touches(shared_ptr<TouchEvent> event)
   {
+    if (event->type == TouchEvent::TOUCHES_ENDED() && event->touches.size() == 1)
+    {
+      animate = !animate;
+    }
+/*
     if (event->touches.size() == 1)
     {
       static double lastTap = 0.0;
@@ -231,6 +318,12 @@ struct Controller
         initialized = false;
       }
     }
+*/
+  }
+
+  void resizeHandler(shared_ptr<ResizeEvent> event)
+  {
+    glViewport (0, 0, event->width, event->height); 
   }
 
 };

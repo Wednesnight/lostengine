@@ -3,6 +3,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include "lost/gl/gl.h"
+#include "lost/common/Color.h"
 
 namespace lost
 {
@@ -15,6 +16,8 @@ namespace lost
       bool alphaTest;
       bool depthTest;
       bool texture2D;
+
+      lost::common::Color clearColor;
 
       // client-side attributes
       bool normalArray;

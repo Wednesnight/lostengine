@@ -30,6 +30,8 @@
 		3E73265C0E5CE549000FF838 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		3E73265D0E5CE549000FF838 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		3E73265E0E5CE549000FF838 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		3EE3102C0E83C8D9006387C3 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3102B0E83C8D9006387C3 /* Application.lua */; };
+		3EE3102D0E83C8D9006387C3 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3102B0E83C8D9006387C3 /* Application.lua */; };
 		EA0E04770E4E1AEB001556D6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0E04760E4E1AEB001556D6 /* stubs.jpg */; };
 		EA0E492A0E5E3F9F00B5EBF1 /* libLostEngine-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49270E5E3F9200B5EBF1 /* libLostEngine-iphone.a */; };
 		EA0E492D0E5E3FA600B5EBF1 /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49290E5E3F9200B5EBF1 /* libLostEngine-simulator.a */; };
@@ -88,6 +90,7 @@
 		3E500A710E6404E2006C9028 /* sponza_tri_mtl.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza_tri_mtl.mtl; path = ../../data/obj/sponza_tri_mtl.mtl; sourceTree = SOURCE_ROOT; };
 		3E500A7D0E6405A4006C9028 /* sponza_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza_tri.obj; path = ../../data/obj/sponza_tri.obj; sourceTree = SOURCE_ROOT; };
 		3E7326620E5CE549000FF838 /* LostEngineMinimalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineMinimalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EE3102B0E83C8D9006387C3 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA0E04760E4E1AEB001556D6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stubs.jpg; sourceTree = "<group>"; };
 		EA0E49030E5E3F9200B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -182,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				EAF706C50E4B81B000EF62CB /* init */,
+				3EE3102B0E83C8D9006387C3 /* Application.lua */,
 				3E251FEC0E5EC1C5002CDC21 /* iphone.lua */,
 			);
 			name = Scripts;
@@ -297,6 +301,7 @@
 				3E500A720E6404E2006C9028 /* sponza_tri_mtl.obj in Resources */,
 				3E500A730E6404E2006C9028 /* sponza_tri_mtl.mtl in Resources */,
 				3E500A7E0E6405A4006C9028 /* sponza_tri.obj in Resources */,
+				3EE3102C0E83C8D9006387C3 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +317,7 @@
 				3E500A740E6404E2006C9028 /* sponza_tri_mtl.obj in Resources */,
 				3E500A750E6404E2006C9028 /* sponza_tri_mtl.mtl in Resources */,
 				3E500A7F0E6405A4006C9028 /* sponza_tri.obj in Resources */,
+				3EE3102D0E83C8D9006387C3 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

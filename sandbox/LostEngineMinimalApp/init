@@ -1,55 +1,38 @@
+require("Application")
 require("iphone")
 
-function preinitHandler(event)
-  log.debug("preinit")
-
-  config = {}
-
-  config.displayAttributes = lost.common.DisplayAttributes()
-
-  config.displayAttributes.width  = 320;
-  config.displayAttributes.height = 480;
+function lost.application.Application:configure(event)
+  self.config.displayAttributes = lost.common.DisplayAttributes()
+  self.config.displayAttributes.width  = 320;
+  self.config.displayAttributes.height = 480;
 end
 
-function initHandler(event)
+function lost.application.Application:init(event)
   log.debug("init")
 
   -- Initialize camera
-  config.cameraController = lost.camera.CameraController()
-  config.cameraController:init()
-  config.camera = config.cameraController.camera
+  self.config.cameraController = lost.camera.CameraController()
+  self.config.cameraController:init()
+  self.config.camera = self.config.cameraController.camera
+  self.config.camera:position(lost.math.Vec3(0,3,60));
 
   -- Initialize model attributes
-  config.modelFilename = "kenny_tri.obj"
-  config.modelSize     = 5.0
+  self.config.modelFilename = "kenny_tri.obj"
+  self.config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
-  config.modelParser   = lost.model.obj.Parser(globals.app.loader);
-  config.modelMesh     = lost.model.Mesh()
-  config.modelMaterial = lost.model.obj.Material()
-  config.modelParser:parseMesh(config.modelFilename, config.modelMesh, config.modelMaterial);
+  self.config.modelParser   = lost.model.obj.Parser(globals.app.loader);
+  self.config.modelMesh     = lost.model.Mesh()
+  self.config.modelMaterial = lost.model.obj.Material()
+--  self.config.modelParser:parseMesh(self.config.modelFilename, self.config.modelMesh, self.config.modelMaterial);
 
   -- Initialize model renderer
-  config.modelRenderer      = lost.model.obj.Renderer(config.modelMesh, config.modelMaterial);
-  config.modelRenderer.size = config.modelSize;
+  self.config.modelRenderer      = lost.model.obj.Renderer(globals.app.context, self.config.modelMesh, self.config.modelMaterial);
+  self.config.modelRenderer.size = self.config.modelSize;
 
-  config.lightShininess = 128
-  config.lightCutoff    = 180
-  config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
-  config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
-  config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
+  self.config.lightShininess = 128
+  self.config.lightCutoff    = 180
+  self.config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
+  self.config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
+  self.config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
 end
-
-function runHandler(event)
-  log.debug("run")
-end
-
-function quitHandler(event)
-  log.debug("quit")
-end
-
-local ApplicationEvent = lost.application.ApplicationEvent
-globals.app:addEventListener(ApplicationEvent.PREINIT, preinitHandler)
-globals.app:addEventListener(ApplicationEvent.INIT, initHandler)
-globals.app:addEventListener(ApplicationEvent.RUN, runHandler)
-globals.app:addEventListener(ApplicationEvent.QUIT, quitHandler)
