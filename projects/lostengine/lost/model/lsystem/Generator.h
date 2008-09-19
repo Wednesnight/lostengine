@@ -43,7 +43,7 @@ namespace lost
           unsigned int vertexIdx = 0;
           for (std::vector<lost::model::Vertex>::iterator idx = lines.begin(); idx != lines.end(); ++idx)
           {
-            result->setVertex(vertexIdx, *idx);
+            result->setVertex(vertexIdx++, *idx);
           }
 
           return result;
@@ -51,22 +51,11 @@ namespace lost
         
         void buildLSystemMesh(lost::math::Matrix& matrix, lost::lsystem::LSystemResult& result)
         {
-          static lost::model::Vertex start;
-          static lost::model::Vertex end;
-
           if (result.drawable)
           {
-            lines.push_back(start);
-            lines.push_back(end);
-            start = end;
-
-            lost::math::Matrix matrix;
-            matrix.initTranslation(lost::math::Vec3(0, 2, 0));
+            lines.push_back(result.matrix * Vertex(0,0,0));
             result.matrix = result.matrix * matrix;
-          }
-          else
-          {
-            end = result.matrix * end;
+            lines.push_back(result.matrix * Vertex(0,0,0));
           }
         }
 

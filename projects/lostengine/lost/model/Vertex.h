@@ -12,20 +12,38 @@ namespace lost
 
     struct Vertex : public math::Vec3
     {
+      Vertex()
+      : Vec3()
+      {
+      }
+
+      Vertex(const float& inX, const float& inY, const float& inZ)
+      : Vec3(inX, inY, inZ)
+      {
+      }
     };
 
+    inline Vertex operator+(const Vertex& inOp1, const Vertex& inOp2)
+    {
+      Vertex result;
+      result.x = inOp1.x + inOp2.x;
+      result.y = inOp1.y + inOp2.y;
+      result.z = inOp1.z + inOp2.z;
+      return result;
+    }
+    
     inline void operator +=(math::Vec3& inOp1, const Vertex& inOp2)
     {
       inOp1.x += inOp2.x;
       inOp1.y += inOp2.y;
       inOp1.z += inOp2.z;
     }
-    
+
     inline bool operator ==(const Vertex& inOp1, const Vertex& inOp2)
     {
       return (inOp1.x == inOp2.x) && (inOp1.y == inOp2.y) && (inOp1.z == inOp2.z);
     }
-    
+
     inline Vertex operator*(const lost::math::Matrix& lhs, const Vertex& rhs)
     {
       Vertex           result;
@@ -42,7 +60,7 @@ namespace lost
       
       return result;
     }
-    
+
   }
 }
 

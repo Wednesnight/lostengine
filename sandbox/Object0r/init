@@ -3,8 +3,15 @@ require("spectator")
 
 function lost.application.Application:configure(event)
   self.config.displayAttributes = lost.common.DisplayAttributes()
-  self.config.displayAttributes.width = 800;
-  self.config.displayAttributes.height = 600;
+  if lost.platform.isIPhone() then
+    log.debug("iPhone")
+    self.config.displayAttributes.width = 320
+    self.config.displayAttributes.height = 480
+  else
+    log.debug("Desktop")
+    self.config.displayAttributes.width = 800
+    self.config.displayAttributes.height = 600
+  end
   self.config.displayAttributes.redbits = 8;
   self.config.displayAttributes.bluebits = 8;
   self.config.displayAttributes.greenbits = 8;
@@ -19,6 +26,7 @@ function lost.application.Application:init(event)
   -- Initialize camera
   self.config.cameraController = lost.camera.CameraController(self)
   self.config.camera = self.config.cameraController.camera
+  self.config.camera:position(lost.math.Vec3(0,0,60))
 
   -- Initialize model attributes
   self.config.modelFilename = "professor_tri.obj"

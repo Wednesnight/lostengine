@@ -49,7 +49,7 @@ namespace lost
           switch (inString[idx])
           {
             case 'f':
-              matrix.initTranslation( math::Vec3(1,1,1) );
+              matrix.initTranslation( math::Vec3(0,1,0) );
               break;
             case 'X':
               matrix.initRotateX( mAngle.x );
@@ -72,7 +72,7 @@ namespace lost
             case 'F':
             default :
               drawable = true;
-              matrix.initTranslation( math::Vec3(1,1,1) );
+              matrix.initTranslation( math::Vec3(0,1,0) );
           }
           inResultList.push_back( boost::shared_ptr<LSystemResult>(new LSystemResult(inString[idx], matrix, drawable)) );
         }

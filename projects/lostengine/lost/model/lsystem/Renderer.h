@@ -5,6 +5,7 @@
 #include "lost/model/Mesh.h"
 #include "lost/model/Vertex.h"
 #include "lost/gl/Context.h"
+#include "lost/gl/ArrayBuffer.h"
 
 namespace lost
 {
@@ -20,9 +21,12 @@ namespace lost
         boost::shared_ptr<Mesh> mesh;
         boost::shared_ptr<gl::ArrayBuffer<Vertex> > vertexBuffer;
 
+        float size;
+
         Renderer(const boost::shared_ptr<lost::gl::Context>& inContext, const boost::shared_ptr<Mesh>& inMesh)
         : context(inContext),
-          mesh(inMesh)
+          mesh(inMesh),
+          size(1.0f)
         {
           vertexBuffer.reset(new gl::ArrayBuffer<Vertex>);
           vertexBuffer->bindBufferData(mesh->vertices.get(), mesh->vertexCount);
@@ -35,6 +39,7 @@ namespace lost
           newState->vertexArray = true;
           context->pushState(newState);
           glPushMatrix();GLDEBUG;
+          glScalef(size, size, size);
           vertexBuffer->bindVertexPointer();
           vertexBuffer->drawArrays(GL_LINES);
           vertexBuffer->unbind();

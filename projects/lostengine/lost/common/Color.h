@@ -70,6 +70,7 @@ namespace lost
     static const lost::common::Color greenColor      (0.0f, 1.0f, 0.0f, 1.0f);
     static const lost::common::Color blueColor       (0.0f, 0.0f, 1.0f, 1.0f);
     static const lost::common::Color yellowColor     (1.0f, 1.0f, 0.0f, 1.0f);
+    static const lost::common::Color grayColor       (0.5f, 0.5f, 0.5f, 1.0f);
 
   }
 }

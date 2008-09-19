@@ -7,9 +7,9 @@ lost.camera.CameraController =
 }
 
 function lost.camera.CameraController:init(eventDispatcher)
-  self.camera:position(lost.math.Vec3(0,3,15));
-  self.camera:target(lost.math.Vec3(0,3,0));
-  self.camera:stickToTarget(false);
+  self.camera:position(lost.math.Vec3(0,3,15))
+  self.camera:target(lost.math.Vec3(0,3,0))
+  self.camera:stickToTarget(false)
 
   self.dispatcher = eventDispatcher
 
@@ -29,12 +29,12 @@ function lost.camera.CameraController:moveHandler(event)
     self.moveInitialized = true
   else
     -- x-axis rotation
-    local dx = -1.0 * (moveEvent.pos.y - self.mousePos.y) * 0.1;
+    local dx = -1.0 * (moveEvent.pos.y - self.mousePos.y) * 0.1
     -- y-axis rotation
-    local dy = (moveEvent.pos.x - self.mousePos.x) * 0.1;
+    local dy = (moveEvent.pos.x - self.mousePos.x) * 0.1
     
-    self.camera:rotate(lost.math.Vec3(dx, dy, 0.0));
-    self.mousePos = moveEvent.pos;
+    self.camera:rotate(lost.math.Vec3(dx, dy, 0.0))
+    self.mousePos = moveEvent.pos
   end
 end
 

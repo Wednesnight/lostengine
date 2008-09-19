@@ -74,25 +74,42 @@ struct Object0r
   
   lost::lsystem::LSystem                            lsystem;
   lost::model::lsystem::Generator                   lsystemGenerator;
-  boost::shared_ptr<lost::model::lsystem::Renderer> lsystemRenderer;
   boost::shared_ptr<lost::lsystem::LSystemState>    lsystemState;
-  boost::shared_ptr<lost::model::Mesh>              lsystemMesh;
-  
+
+  boost::shared_ptr<lost::model::Mesh>              dragonCurveMesh;
+  boost::shared_ptr<lost::model::lsystem::Renderer> dragonCurve;
+
+  boost::shared_ptr<lost::model::Mesh>              treeMesh;
+  boost::shared_ptr<lost::model::lsystem::Renderer> tree;
+
+  bool animate;
+
   Object0r(Application& app)
   : renderTimer("render", 0.015),
     renderNormals(false),
-    renderAABB(false)
+    renderAABB(false),
+    animate(true)
   {
     app.addEventListener(ApplicationEvent::PREINIT(), receive<Event>(bind(&Object0r::preinit, this, _1)));
 
+    // generate dragon curve
     std::map<char, std::string> variableMap;
-    variableMap['F'] = "FzXFZxFzXFzXF";
-    lsystemState.reset(new lost::lsystem::LSystemState("FzFzFzF", variableMap, lost::math::Vec3(5,0,90)));
+    variableMap['F'] = "FxyzFXYZFxyzFxyzF";
+    lsystemState.reset(new lost::lsystem::LSystemState("FxyzFxyzFxyzF", variableMap, lost::math::Vec3(25,25,90)));
     lsystemState->reset();
     lsystem.advance(lsystemState, 6);
-    lsystemMesh = lsystemGenerator.generate(lsystemState);
+    dragonCurveMesh = lsystemGenerator.generate(lsystemState);
+    // generate tree
+    variableMap.clear();
+    variableMap['f'] = "Fxyz[[f]XYZf]XYZF[XYZFf]xyzf";
+    variableMap['F'] = "FF";
+    lsystemState.reset(new lost::lsystem::LSystemState("f", variableMap, lost::math::Vec3(25,25,25)));
+    lsystemState->reset();
+    lsystem.advance(lsystemState, 6);
+    treeMesh = lsystemGenerator.generate(lsystemState);
   }
-  
+
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   GLenum getModelDisplay(std::string& which)
   {
     if (which == "points")
@@ -109,7 +126,8 @@ struct Object0r
     }
     
   }
-  
+#endif
+
   void preinit(shared_ptr<Event> event)
   {
     appInstance->addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Object0r::init, this, _1)));
@@ -117,8 +135,10 @@ struct Object0r
   
   void init(shared_ptr<Event> event)
   {
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
     glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
+#endif
 
     modelRenderer = appInstance->config["modelRenderer"].as<shared_ptr<Renderer> >();
     camera        = appInstance->config["camera"].as<shared_ptr<Camera> >();
@@ -158,7 +178,8 @@ struct Object0r
     cutoff       = new GLfloat[1];
     cutoff[0]    = appInstance->config["lightCutoff"].as<float>(0.0f);
     
-    lsystemRenderer.reset(new lost::model::lsystem::Renderer(appInstance->context, lsystemMesh));
+    dragonCurve.reset(new lost::model::lsystem::Renderer(appInstance->context, dragonCurveMesh));
+    tree.reset(new lost::model::lsystem::Renderer(appInstance->context, treeMesh));
 
     appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
     appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Object0r::keyHandler, this, _1)));
@@ -183,6 +204,53 @@ struct Object0r
                     camera->position(), camera->target(), camera->up(),
                     camera->fovY(), camera->depth().min, camera->depth().max);
 
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glLineWidth(5.0f);
+    setColor(lost::common::Color(0,0,1,0.5));
+    dragonCurve->size = 0.3f;
+    static float dragonCurveAngle(0.0f);
+    if (animate)
+    {
+      dragonCurveAngle += 0.25f;
+      if (dragonCurveAngle >= 360) dragonCurveAngle -= 360.0f;
+    }
+    glTranslatef(0, 0, -20);
+    glRotatef(-dragonCurveAngle, 0, 0, 1);
+    dragonCurve->render();
+    glLineWidth(1.0f);
+
+    glLineWidth(2.0f);
+    setColor(lost::common::Color(1,0,0,0.5));
+    tree->size = 0.1f;
+    static float treeAngle(0.0f);
+    if (animate)
+    {
+      treeAngle += 0.25f;
+      if (treeAngle >= 360) treeAngle -= 360.0f;
+    }
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle-45, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle+45, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle-135, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glRotatef(treeAngle+135, 0, 0, 1);
+    glRotatef(treeAngle, 0, 1, 0);
+    tree->render();
+    glLineWidth(1.0f);
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -210,8 +278,8 @@ struct Object0r
     glEnable(GL_RESCALE_NORMAL);
 
     setColor(whiteColor);
-//    modelRenderer->render();
-    lsystemRenderer->render();
+    glTranslatef(0, 0, 10);
+    modelRenderer->render();
 
     glDisable(GL_LIGHT0);
     glDisable(GL_LIGHTING);
@@ -231,15 +299,19 @@ struct Object0r
 
     appInstance->swapBuffers();
   }
-  
+
   void keyHandler(shared_ptr<KeyEvent> event)
   {
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
     if (event->pressed)
     {
       switch (event->key)
       {
         case K_ESCAPE:
           quit();
+          break;
+        case K_SPACE:
+          animate = !animate;
           break;
         case K_F1:
           modelRenderer->renderModeFront = GL_POINT;
@@ -268,6 +340,7 @@ struct Object0r
           break;
       }
     }
+#endif
   }
 
   void resizeHandler(shared_ptr<ResizeEvent> event)
