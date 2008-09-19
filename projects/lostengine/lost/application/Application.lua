@@ -4,7 +4,7 @@ lost.application.Application =
     globals.app:addEventListener(which, where)
   end,
 
-  addEventListener = function(self, which, owner, where)
+  addEventListenerMethod = function(self, which, owner, where)
     globals.app:addEventListener(which, owner, where)
   end,
 

@@ -119,14 +119,16 @@ function renderHandler(event)
   local Application = lost.application.Application
   local timerEvent = lost.application.TimerEvent.cast(event)
 
-  gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()
-  gl.glClear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT) gl.GLDEBUG()
+  local newState = Application.context:copyState()
+  newState.vertexArray = true
+  newState.depthTest = false
+  newState.texture2D = false
+  newState.clearColor = lost.common.Color(0.0, 0.0, 0.0, 0.0)
+  Application.context:pushState(newState)
 
-  gl.glEnableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
-  gl.glDisable(gl.GL_DEPTH_TEST) gl.GLDEBUG()
-  gl.glDisable(gl.GL_TEXTURE_2D) gl.GLDEBUG()
+  Application.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+  Application.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
 
-  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
@@ -145,13 +147,12 @@ function renderHandler(event)
     end
   end
 
-  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
+  Application.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
   controls.fpsMeter:render(Application.config.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
-  gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
-  
+  Application.context:popState()
   globals.app:swapBuffers()
 end
 

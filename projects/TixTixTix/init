@@ -21,12 +21,12 @@ function lost.application.Application:configure(event)
   self.config.displayAttributes.stencilbits = 0
   self.config.displayAttributes.fullscreen = false
   self.config.displayAttributes.title = "TixTixTix - The Combination of the beast"
-
-  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 end
 
 function lost.application.Application:init(event)
   log.debug("lost.application.Application:init()")
+
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 
   if lost.platform.isIPhone() then
     self:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
