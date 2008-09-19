@@ -109,7 +109,12 @@ inline void operator -=(Vec3& inOp1, const Vec3& inOp2)
   inOp1.z -= inOp2.z;
 }
   
-  inline std::ostream& operator<<(std::ostream& s, const Vec3& v)
+inline bool operator ==(const Vec3& inOp1, const Vec3& inOp2)
+{
+  return (inOp1.x == inOp2.x && inOp1.y == inOp2.y && inOp1.z == inOp2.z);
+}
+  
+inline std::ostream& operator<<(std::ostream& s, const Vec3& v)
 {
     s << v.x << " " << v.y << " "<< v.z;
     return s;

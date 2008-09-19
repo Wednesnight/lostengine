@@ -82,7 +82,7 @@ struct Controller
     variableMap['F'] = "FxyzFXYZFxyzFxyzF";
     lsystemState.reset(new lost::lsystem::LSystemState("FxyzFxyzFxyzF", variableMap, lost::math::Vec3(25,25,90)));
     lsystemState->reset();
-    lsystem.advance(lsystemState, 6);
+    lsystem.advance(lsystemState, 5);
     dragonCurveMesh = lsystemGenerator.generate(lsystemState);
     // generate tree
     variableMap.clear();
@@ -90,7 +90,7 @@ struct Controller
     variableMap['F'] = "FF";
     lsystemState.reset(new lost::lsystem::LSystemState("f", variableMap, lost::math::Vec3(25,25,25)));
     lsystemState->reset();
-    lsystem.advance(lsystemState, 6);
+    lsystem.advance(lsystemState, 5);
     treeMesh = lsystemGenerator.generate(lsystemState);
   }
   
@@ -264,9 +264,21 @@ struct Controller
   
   void touches(shared_ptr<TouchEvent> event)
   {
-    if (event->type == TouchEvent::TOUCHES_ENDED() && event->touches.size() == 1)
+    static bool moved = false;
+    if (event->touches.size() == 1)
     {
-      animate = !animate;
+      if (event->type == TouchEvent::TOUCHES_BEGAN())
+      {
+        moved = false;
+      }
+      else if (event->type == TouchEvent::TOUCHES_MOVED())
+      {
+        moved = true;
+      }
+      else if (!moved && event->type == TouchEvent::TOUCHES_ENDED())
+      {
+        animate = !animate;
+      }
     }
 /*
     if (event->touches.size() == 1)

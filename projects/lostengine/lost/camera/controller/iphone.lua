@@ -1,7 +1,8 @@
 lost.camera.CameraController = 
 {
   camera  = lost.camera.Camera(),
-  lastTap = 0.0;
+  lastTap = 0.0,
+  lastPos = lost.math.Vec2()
 }
 
 function lost.camera.CameraController:init()
@@ -13,8 +14,11 @@ function lost.camera.CameraController:init()
 end
 
 function lost.camera.CameraController:initCallbacks()
-  local AccelerometerEvent = lost.application.AccelerometerEvent
-  globals.app:addEventListener(AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
+  globals.app:addEventListener(lost.application.AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, self, self.touchHandler)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, self, self.touchHandler)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, self, self.touchHandler)
+  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, self, self.touchHandler)
 end
 
 function lost.camera.CameraController:accelerate(event)
@@ -32,6 +36,24 @@ function lost.camera.CameraController:accelerate(event)
   end
 
   self.camera:rotate(lost.math.Vec3(x, y, z));
+end
+
+function lost.camera.CameraController:touchHandler(event)
+  local touchEvent = lost.application.TouchEvent.cast(event)
+  if (touchEvent:size() == 1) then
+    local touch = touchEvent:get(0)
+    if (event.type == lost.application.TouchEvent.TOUCHES_BEGAN) then
+      self.lastPos.x = touch.location.x
+      self.lastPos.y = touch.location.y
+      self.lastPos.z = touch.location.z
+    elseif (event.type == lost.application.TouchEvent.TOUCHES_MOVED) then
+      local deltaMove = lost.math.Vec3(0, 0, (touch.location.y - self.lastPos.y) * 0.1)
+      self.camera:move(deltaMove)
+      self.lastPos.x = touch.location.x
+      self.lastPos.y = touch.location.y
+      self.lastPos.z = touch.location.z
+    end
+  end
 end
 
 lost.camera.CameraController_mt = { __index = lost.camera.CameraController }
