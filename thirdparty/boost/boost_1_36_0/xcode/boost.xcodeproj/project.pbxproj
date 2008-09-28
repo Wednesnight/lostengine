@@ -22,6 +22,7 @@
 		EA0E42900E5E01E200B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
 		EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426B0E5E012700B5EBF1 /* trackable.cpp */; };
 		EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426C0E5E012700B5EBF1 /* connection.cpp */; };
+		EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signal_base.cpp; path = ../source/libs/signals/src/signal_base.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E426B0E5E012700B5EBF1 /* trackable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trackable.cpp; path = ../source/libs/signals/src/trackable.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E426C0E5E012700B5EBF1 /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = ../source/libs/signals/src/connection.cpp; sourceTree = SOURCE_ROOT; };
+		EA6D04630E83030E002C8DD3 /* error_code.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_code.cpp; path = ../source/libs/system/src/error_code.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		08FB7794FE84155DC02AAC07 /* boost */ = {
 			isa = PBXGroup;
 			children = (
+				EA6D04620E830300002C8DD3 /* system */,
 				EA7CF6D50E2ED939006E9E8A /* signals */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
@@ -77,6 +80,14 @@
 				3E7325860E5CE3B5000FF838 /* libboost-simulator.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6D04620E830300002C8DD3 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D04630E83030E002C8DD3 /* error_code.cpp */,
+			);
+			name = system;
 			sourceTree = "<group>";
 		};
 		EA7CF6D50E2ED939006E9E8A /* signals */ = {
@@ -222,6 +233,7 @@
 				EA0E42860E5E01E100B5EBF1 /* signal_base.cpp in Sources */,
 				EA0E42870E5E01E100B5EBF1 /* trackable.cpp in Sources */,
 				EA0E42880E5E01E100B5EBF1 /* connection.cpp in Sources */,
+				EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +251,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = NO;
@@ -264,6 +277,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../include\"";
