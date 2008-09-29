@@ -21,7 +21,7 @@ namespace lost
         shared_ptr<State> interpreter = object_cast<shared_ptr<State> >(globals(state)["globals"]["state"]);
         result = interpreter->handleError();
       }
-      catch (exception& e)
+      catch (std::exception& e)
       {
         EOUT("could not call error handler: " << e.what());
       }
