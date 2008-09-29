@@ -29,7 +29,7 @@ function lost.application.Application:init(event)
   self.config.camera:position(lost.math.Vec3(0,0,60))
 
   -- Initialize model attributes
-  self.config.modelFilename = "professor_tri.obj"
+  self.config.modelFilename = "kenny_tri.obj"
   self.config.modelSize     = 5.0
 
   -- Initialize model parser, mesh, material
