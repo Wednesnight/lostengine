@@ -29,7 +29,7 @@ void lostApplicationHelpers_preinit()
     shared_ptr<File> initScript = appInstance->loader->load("init");
     appInstance->interpreter->doString(initScript->str());
   }
-  catch(exception& ex)
+  catch(std::exception& ex)
   {
     IOUT("couldn't load init script, proceeeding without it, error: "+string(ex.what()));
   }    
@@ -61,7 +61,7 @@ void lostApplicationHelpers_init()
       appInstance->displayAttributes = object_cast<DisplayAttributes>(g["config"]["displayAttributes"]);
     }
   }
-  catch(exception& ex)
+  catch(std::exception& ex)
   {
     IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
   }
