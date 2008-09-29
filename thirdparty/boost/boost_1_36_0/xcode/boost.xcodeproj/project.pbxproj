@@ -22,6 +22,8 @@
 		EA0E42900E5E01E200B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
 		EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426B0E5E012700B5EBF1 /* trackable.cpp */; };
 		EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426C0E5E012700B5EBF1 /* connection.cpp */; };
+		EA1B78B50E917EF300004196 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
+		EA1B78B60E917EF400004196 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
 		EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
 /* End PBXBuildFile section */
 
@@ -209,6 +211,7 @@
 				EA0E428B0E5E01E100B5EBF1 /* signal_base.cpp in Sources */,
 				EA0E428C0E5E01E100B5EBF1 /* trackable.cpp in Sources */,
 				EA0E428D0E5E01E100B5EBF1 /* connection.cpp in Sources */,
+				EA1B78B50E917EF300004196 /* error_code.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +224,7 @@
 				EA0E42900E5E01E200B5EBF1 /* signal_base.cpp in Sources */,
 				EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */,
 				EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */,
+				EA1B78B60E917EF400004196 /* error_code.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +255,6 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = NO;
@@ -277,7 +280,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../include\"";
@@ -308,6 +311,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
 				PREBINDING = NO;
 				PRODUCT_NAME = "boost-iphone";

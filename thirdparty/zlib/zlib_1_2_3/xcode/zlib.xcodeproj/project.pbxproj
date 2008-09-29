@@ -337,6 +337,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = "zlib-iphone";
 				SDKROOT = iphoneos2.0;
