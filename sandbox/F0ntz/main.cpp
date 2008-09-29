@@ -31,7 +31,7 @@ int main( int argc, char *argv[] )
 
     app.run();
   }
-  catch (exception& e)
+  catch (std::exception& e)
   {
     EOUT("exception: " << e.what());
   }
