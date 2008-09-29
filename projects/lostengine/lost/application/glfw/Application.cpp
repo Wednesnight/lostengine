@@ -66,7 +66,7 @@ namespace application
       shared_ptr<File> initScript = loader->load("init");
       interpreter->doFile(initScript);
     }
-    catch(exception& ex)
+    catch(std::exception& ex)
     {
       IOUT("couldn't load init script, proceeding without it, error: "+string(ex.what()));
     }
