@@ -12,9 +12,9 @@
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA03D8130DBBEE91001665C3 /* suigeneris.ttf */; };
 		EA0E484E0E5E3E3600B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */; };
+		EA1B77F40E917B4F00004196 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA1B77F30E917B4F00004196 /* init */; };
 		EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2AFA8F0DC2984F0034A6F5 /* main.cpp */; };
 		EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5EA5BC0E023BD100E7349B /* Vera.ttf */; };
-		EA6D04A00E8306F8002C8DD3 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA6D049F0E8306F8002C8DD3 /* init */; };
 		EA6D04AA0E830719002C8DD3 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA6D04A90E830719002C8DD3 /* Application.lua */; };
 		EAB83A1C0E6DD82200A6570F /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A1B0E6DD82200A6570F /* Controller.cpp */; };
 		EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41A0DB53F9800855E60 /* OpenGL.framework */; };
@@ -64,9 +64,9 @@
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA03D8130DBBEE91001665C3 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../resources/suigeneris.ttf; sourceTree = SOURCE_ROOT; };
 		EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA1B77F30E917B4F00004196 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		EA2AFA8F0DC2984F0034A6F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA5EA5BC0E023BD100E7349B /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../resources/Vera.ttf; sourceTree = SOURCE_ROOT; };
-		EA6D049F0E8306F8002C8DD3 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = init; sourceTree = "<group>"; };
 		EA6D04A90E830719002C8DD3 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EAB83A1A0E6DD82200A6570F /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
 		EAB83A1B0E6DD82200A6570F /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
@@ -131,7 +131,7 @@
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 				02345980000FD03B11CA0E72 /* main.nib */,
-				EA6D049F0E8306F8002C8DD3 /* init */,
+				EA1B77F30E917B4F00004196 /* init */,
 				EA6D04A90E830719002C8DD3 /* Application.lua */,
 			);
 			name = Resources;
@@ -242,13 +242,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA6D04A00E8306F8002C8DD3 /* init in Resources */,
 				EA6D04AA0E830719002C8DD3 /* Application.lua in Resources */,
 				8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */,
 				8D0C4E8E0486CD37000505A6 /* main.nib in Resources */,
 				EAECD4930DB5443C00855E60 /* F0ntz.cfg in Resources */,
 				EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */,
 				EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */,
+				EA1B77F40E917B4F00004196 /* init in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
