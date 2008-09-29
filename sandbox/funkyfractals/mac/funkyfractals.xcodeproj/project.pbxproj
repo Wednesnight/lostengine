@@ -275,13 +275,7 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
-					"\"$(SRCROOT)/../../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = funkyfractals;
 			};
 			name = Debug;
@@ -314,16 +308,17 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
