@@ -18,12 +18,6 @@ namespace luabind
   {
     return p.get();
   }
-  template<class T>
-  boost::shared_ptr<const T>*
-  get_const_holder(boost::shared_ptr<T>*)
-  {
-    return 0;
-  }
 }
 
 #endif
