@@ -17,7 +17,6 @@
   // in case of iphone, this header includes the OpenGL ES interfaces
   // every other platform gets the standard gl headers plus helpers provided 
   // by GLee (extension handling) and GLFW (platform abstraction)
-  // FIXME: do we really need to include GLFW here?
   #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
     #import <OpenGLES/ES1/gl.h>
     #import <OpenGLES/ES1/glext.h>
@@ -36,6 +35,7 @@
       #include <OpenGL/glext.h>
       #include <GLUT/glut.h>
     #endif
+  // FIXME: do we really need to include GLFW here?
     #include "GL/glfw.h"
   #endif
 #endif

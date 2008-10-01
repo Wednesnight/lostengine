@@ -555,6 +555,15 @@
 		EAB83A090E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
 		EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
 		EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
+		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
+		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
+		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
+		EAD2E8930E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
+		EAD2E8940E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
+		EAD2E8950E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
+		EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
+		EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
+		EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 		EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF77F0E4A6C6F0003A334 /* Application.cpp */; };
 		EAEAF7EF0E4A77F40003A334 /* LostGlView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEAF7770E4A6BA70003A334 /* LostGlView.h */; };
 		EAEAF7F00E4A77F40003A334 /* LostGlView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7790E4A6BA70003A334 /* LostGlView.mm */; };
@@ -1029,6 +1038,9 @@
 		EAB343180E4F3A6C00C89299 /* TouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEvent.h; sourceTree = "<group>"; };
 		EAB83A040E6DD4C700A6570F /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
 		EAB83A050E6DD4C700A6570F /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
+		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
+		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
 		EAEAF7770E4A6BA70003A334 /* LostGlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGlView.h; path = iphone/LostGlView.h; sourceTree = "<group>"; };
 		EAEAF7780E4A6BA70003A334 /* LostAppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostAppController.mm; path = iphone/LostAppController.mm; sourceTree = "<group>"; };
 		EAEAF7790E4A6BA70003A334 /* LostGlView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostGlView.mm; path = iphone/LostGlView.mm; sourceTree = "<group>"; };
@@ -1351,6 +1363,7 @@
 				EA3B946D0E04639D00B6423B /* Color.h */,
 				EA3B946F0E04639D00B6423B /* DisplayAttributes.h */,
 				EA3B94710E04639D00B6423B /* FpsMeter.h */,
+				EAD2E8B40E941880000535DB /* FpsMeter.cpp */,
 				EA3B94720E04639D00B6423B /* Logger.cpp */,
 				EA3B94730E04639D00B6423B /* Logger.h */,
 				EA3B94740E04639D00B6423B /* NullDeleter.h */,
@@ -1403,6 +1416,7 @@
 				EA0F2E840E381C390001F530 /* ArrayBuffer.h */,
 				EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */,
 				EA0F2DE10E37D68C0001F530 /* Context.h */,
+				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EA3B949D0E04639D00B6423B /* DisplayList.h */,
 				EA3B949E0E04639D00B6423B /* Draw.h */,
 				EA3B949F0E04639D00B6423B /* FragmentShader.h */,
@@ -1416,6 +1430,7 @@
 				EA3B94A80E04639D00B6423B /* ShaderHelper.h */,
 				EA3B94AA0E04639D00B6423B /* ShaderProgram.h */,
 				3E03001A0E791AE500DC26B8 /* State.h */,
+				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA3B94AB0E04639D00B6423B /* Texture.h */,
 				3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */,
 				EA3B94AC0E04639D00B6423B /* Utils.h */,
@@ -2333,6 +2348,9 @@
 				3E6510030E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 				3EBDF5C90E8386D000F9E989 /* LostModelLSystemGenerator.cpp in Sources */,
 				3EBDF5D10E8386E200F9E989 /* LostModelLSystemRenderer.cpp in Sources */,
+				EAD2E87E0E94104F000535DB /* Context.cpp in Sources */,
+				EAD2E8950E94132F000535DB /* State.cpp in Sources */,
+				EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2399,6 +2417,9 @@
 				3E6510070E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 				3EBDF5CB0E8386D000F9E989 /* LostModelLSystemGenerator.cpp in Sources */,
 				3EBDF5D30E8386E200F9E989 /* LostModelLSystemRenderer.cpp in Sources */,
+				EAD2E87C0E94104F000535DB /* Context.cpp in Sources */,
+				EAD2E8930E94132F000535DB /* State.cpp in Sources */,
+				EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2464,6 +2485,9 @@
 				3E6510050E7F92C700DE5AFE /* LostGLState.cpp in Sources */,
 				3EBDF5C70E8386D000F9E989 /* LostModelLSystemGenerator.cpp in Sources */,
 				3EBDF5CF0E8386E200F9E989 /* LostModelLSystemRenderer.cpp in Sources */,
+				EAD2E87D0E94104F000535DB /* Context.cpp in Sources */,
+				EAD2E8940E94132F000535DB /* State.cpp in Sources */,
+				EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

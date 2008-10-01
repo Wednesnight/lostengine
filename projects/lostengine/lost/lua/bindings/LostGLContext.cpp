@@ -3,6 +3,7 @@
 #include "lost/gl/State.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
+#include "lost/common/DisplayAttributes.h"
 
 using namespace luabind;
 using namespace lost::gl;
