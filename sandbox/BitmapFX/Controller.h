@@ -14,6 +14,8 @@ struct Controller
   boost::shared_ptr<lost::gl::Context>            context;
   boost::shared_ptr<lost::gl::State>              renderState;
 
+  boost::shared_ptr<lost::bitmap::Bitmap>         pic;
+
   Controller();
   void init(boost::shared_ptr<lost::event::Event> event);
   void keyboard(boost::shared_ptr<lost::application::KeyEvent> event );

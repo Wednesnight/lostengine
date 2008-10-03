@@ -7,10 +7,12 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
 #include "lost/application/KeySym.h"
+#include "lost/bitmap/Bitmap.h"
 
 using namespace std;
 using namespace boost;
 using namespace lost;
+using namespace lost::bitmap;
 using namespace lost::common;
 using namespace lost::resource;
 using namespace lost::application;
@@ -30,11 +32,17 @@ void Controller::init(shared_ptr<Event> event)
   fpsMeter.reset(new FpsMeter(context));
 
   renderState = context->copyState();
-  renderState->blend = true;
+  renderState->blend = false;
   renderState->depthTest = false;
   renderState->texture2D = false;
   renderState->clearColor = blackColor;
-  renderState->vertexArray = false;  
+  renderState->vertexArray = true;  
+  renderState->blendSrc = GL_SRC_ALPHA;
+  renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+  
+  
+  pic.reset(new Bitmap);
+  pic->init(640, 480);
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -55,8 +63,11 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
 {
   context->pushState(renderState);
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+
+  gl::setColor(redColor);
+  gl::drawRectFilled(math::Rect(0, 0, 600, 100));
 
   fpsMeter->render( appInstance->displayAttributes.width - (fpsMeter->width + 10), 0, event->passedSec );
   context->popState();
