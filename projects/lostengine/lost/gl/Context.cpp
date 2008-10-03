@@ -24,13 +24,13 @@ void Context::setState(const boost::shared_ptr<State>& newState)
   SET_STATE_BOOL(GL_ALPHA_TEST, state, newState, alphaTest);
   SET_STATE_BOOL(GL_DEPTH_TEST, state, newState, depthTest);
   SET_STATE_BOOL(GL_TEXTURE_2D, state, newState, texture2D);
-  SET_STATE_BOOL(GL_BLEND, state, newState, texture2D);
+  SET_STATE_BOOL(GL_BLEND, state, newState, blend);
 
   if((state->blendSrc != newState->blendSrc) || (state->blendDest != newState->blendDest))
   {
     state->blendSrc = newState->blendSrc;
     state->blendDest = newState->blendDest;
-    glBlendFunc(state->blendSrc, state->blendDest);
+    glBlendFunc(state->blendSrc, state->blendDest);GLDEBUG;
   }
 
   if (state->clearColor != newState->clearColor)
@@ -67,28 +67,30 @@ boost::shared_ptr<State> Context::newState()
 {
   boost::shared_ptr<State> result(new State());
   
-  glGetBooleanv(GL_ALPHA_TEST, (GLboolean*)&result->alphaTest);GLDEBUG_THROW;
-  glGetBooleanv(GL_DEPTH_TEST, (GLboolean*)&result->depthTest);GLDEBUG_THROW;
-  glGetBooleanv(GL_TEXTURE_2D, (GLboolean*)&result->texture2D);GLDEBUG_THROW;
+  glGetBooleanv(GL_ALPHA_TEST, (GLboolean*)&(result->alphaTest));GLDEBUG_THROW;
+  glGetBooleanv(GL_DEPTH_TEST, (GLboolean*)&(result->depthTest));GLDEBUG_THROW;
+  glGetBooleanv(GL_TEXTURE_2D, (GLboolean*)&(result->texture2D));GLDEBUG_THROW;
 
-  glGetFloatv(GL_COLOR_CLEAR_VALUE, (GLfloat*)&result->clearColor.fv);GLDEBUG_THROW;
+  glGetFloatv(GL_COLOR_CLEAR_VALUE, (GLfloat*)result->clearColor.fv);GLDEBUG_THROW;
   
-  glGetBooleanv(GL_NORMAL_ARRAY, (GLboolean*)&result->normalArray);GLDEBUG_THROW;
-  glGetBooleanv(GL_VERTEX_ARRAY, (GLboolean*)&result->vertexArray);GLDEBUG_THROW;
+  glGetBooleanv(GL_NORMAL_ARRAY, (GLboolean*)&(result->normalArray));GLDEBUG_THROW;
+  glGetBooleanv(GL_VERTEX_ARRAY, (GLboolean*)&(result->vertexArray));GLDEBUG_THROW;
 
-  GLfloat f;
+  GLfloat f = 0;
   glGetFloatv(GL_BLEND, &f);GLDEBUG_THROW;
   if(f != 0.0f)
     result->blend = true;
   else
     result->blend = false;
     
+  f = 0;  
   glGetFloatv(GL_BLEND_SRC, &f);GLDEBUG_THROW;
-  result->blendSrc = *(reinterpret_cast<GLenum*>(&f));
-  glGetFloatv(GL_BLEND_DST, &f);GLDEBUG_THROW;
-  result->blendDest = *(reinterpret_cast<GLenum*>(&f));
-    
+  result->blendSrc = static_cast<GLenum>(f);
 
+  f = 0;
+  glGetFloatv(GL_BLEND_DST, &f);GLDEBUG_THROW;
+  result->blendDest = static_cast<GLenum>(f);
+    
   return result;
 }
       
