@@ -2,6 +2,7 @@
 #define LOST_MATH_VEC3_H
 
 #include "lost/math/lmath.h"
+#include <iostream>
 
 namespace lost
 {
