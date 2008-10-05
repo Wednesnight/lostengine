@@ -28,6 +28,7 @@ namespace lost
       // client-side attributes
       bool normalArray;
       bool vertexArray;
+      bool textureCoordArray;
     };
   }
 }

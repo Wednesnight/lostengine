@@ -16,6 +16,8 @@ State::State()
   clearColor = lost::common::blackColor;
   normalArray = false;
   vertexArray = false;
+  textureCoordArray = false;
 }
 }
 }
+
