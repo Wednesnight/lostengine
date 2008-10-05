@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
+		EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9137DF0E997F6B006884D7 /* stubs.jpg */; };
 		EAC026670E96AF8C00067FC5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026630E96AF8C00067FC5 /* main.cpp */; };
 		EAC026680E96AF8C00067FC5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAC026640E96AF8C00067FC5 /* init */; };
 		EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026660E96AF8C00067FC5 /* Controller.cpp */; };
@@ -54,6 +55,7 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
+		EA9137DF0E997F6B006884D7 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 		EAC026630E96AF8C00067FC5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EAC026640E96AF8C00067FC5 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		EAC026650E96AF8C00067FC5 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
@@ -104,6 +106,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA9137DF0E997F6B006884D7 /* stubs.jpg */,
 				EA9136A50E995BDD006884D7 /* kitten+tits.jpg */,
 				EAC0266A0E96B0E500067FC5 /* Application.lua */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -221,6 +224,7 @@
 				EAC026680E96AF8C00067FC5 /* init in Resources */,
 				EAC0266B0E96B0E500067FC5 /* Application.lua in Resources */,
 				EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */,
+				EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

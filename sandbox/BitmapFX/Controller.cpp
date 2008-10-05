@@ -31,23 +31,31 @@ void Controller::init(shared_ptr<Event> event)
   context = appInstance->context;
   fpsMeter.reset(new FpsMeter(context));
 
-  renderState = context->copyState();
-  renderState->blend = false;
-  renderState->depthTest = false;
-  renderState->texture2D = false;
-  renderState->clearColor = blackColor;
-  renderState->vertexArray = true;  
+  renderState = appInstance->context->copyState();
+  renderState->texture2D = true;
+  renderState->blend = true;
   renderState->blendSrc = GL_SRC_ALPHA;
   renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-  
-  
+  renderState->clearColor = blackColor;
+  renderState->depthTest = false;  
+  renderState->alphaTest = false;  
+  renderState->normalArray = false;  
+  renderState->vertexArray = true;  
+  renderState->textureCoordArray = true;  
+
   pic.reset(new Bitmap);
   pic->init(640, 480);
   
-  shared_ptr<File> file = appInstance->loader->load("kitten+tits.jpg");
+  string filename;
+  filename = "kitten+tits.jpg";
+//  filename = "stubs.jpg";
+  shared_ptr<File> file = appInstance->loader->load(filename);
   loadedPic.reset(new Bitmap(file));
   tex.reset(new Texture);
-  tex->reset(0, GL_RGBA, 0, loadedPic);
+  tex->bind();
+  tex->reset(0, GL_RGB, false, loadedPic);
+  tex->wrap(GL_CLAMP_TO_EDGE);
+  tex->filter(GL_LINEAR);
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -66,15 +74,15 @@ void Controller::keyboard( shared_ptr<KeyEvent> event )
 
 void Controller::redraw(shared_ptr<TimerEvent> event)
 {
-  context->pushState(renderState);
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
   set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+  context->pushState(renderState);
+  context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-  gl::setColor(redColor);
-  gl::drawRectFilled(math::Rect(0, 0, 600, 100));
+  setColor(whiteColor);
+  drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
+  context->popState();
 
   fpsMeter->render( appInstance->displayAttributes.width - (fpsMeter->width + 10), 0, event->passedSec );
-  context->popState();
   appInstance->swapBuffers();
 }
