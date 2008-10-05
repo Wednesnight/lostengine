@@ -538,6 +538,9 @@
 		EA7BE2BE0E6F49920017B031 /* LostBitmapBitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */; };
 		EA7BE2BF0E6F49920017B031 /* LostBitmapBitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */; };
 		EA7BE2C00E6F49920017B031 /* LostBitmapBitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */; };
+		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
+		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
+		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
@@ -1024,6 +1027,7 @@
 		EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostBitmapBitmapLoader.h; path = bindings/LostBitmapBitmapLoader.h; sourceTree = "<group>"; };
 		EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostCommonDisplayAttributes.h; path = bindings/LostCommonDisplayAttributes.h; sourceTree = "<group>"; };
 		EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostBitmapBitmap.h; path = bindings/LostBitmapBitmap.h; sourceTree = "<group>"; };
+		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleLoader.h; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
@@ -1432,6 +1436,7 @@
 				3E03001A0E791AE500DC26B8 /* State.h */,
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA3B94AB0E04639D00B6423B /* Texture.h */,
+				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */,
 				EA3B94AC0E04639D00B6423B /* Utils.h */,
 				EA3B94AD0E04639D00B6423B /* VertexShader.h */,
@@ -2351,6 +2356,7 @@
 				EAD2E87E0E94104F000535DB /* Context.cpp in Sources */,
 				EAD2E8950E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */,
+				EA9136400E994F18006884D7 /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2420,6 +2426,7 @@
 				EAD2E87C0E94104F000535DB /* Context.cpp in Sources */,
 				EAD2E8930E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */,
+				EA91363E0E994F18006884D7 /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2488,6 +2495,7 @@
 				EAD2E87D0E94104F000535DB /* Context.cpp in Sources */,
 				EAD2E8940E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */,
+				EA91363F0E994F18006884D7 /* Texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2632,6 +2640,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";

@@ -7,44 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EAD2E8300E93FFC9000535DB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E82E0E93FFC9000535DB /* main.cpp */; };
-		EAD2E8310E93FFC9000535DB /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAD2E82F0E93FFC9000535DB /* init */; };
+		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
+		EAC026670E96AF8C00067FC5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026630E96AF8C00067FC5 /* main.cpp */; };
+		EAC026680E96AF8C00067FC5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAC026640E96AF8C00067FC5 /* init */; };
+		EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026660E96AF8C00067FC5 /* Controller.cpp */; };
+		EAC0266B0E96B0E500067FC5 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAC0266A0E96B0E500067FC5 /* Application.lua */; };
+		EAC0267A0E96B11600067FC5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC026750E96B10F00067FC5 /* libLostEngine.a */; };
 		EAD2E8330E940009000535DB /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8320E940009000535DB /* AGL.framework */; };
 		EAD2E8370E940011000535DB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8360E940011000535DB /* OpenGL.framework */; };
 		EAD2E83E0E94001A000535DB /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E83C0E94001A000535DB /* GLUT.framework */; };
 		EAD2E83F0E94001A000535DB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E83D0E94001A000535DB /* Carbon.framework */; };
-		EAD2E8500E9400FD000535DB /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E84B0E9400F6000535DB /* libLostEngine.a */; };
-		EAD2E8550E940118000535DB /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD2E8540E940118000535DB /* Application.lua */; };
-		EAD2E8720E9403A9000535DB /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8700E9403A9000535DB /* Controller.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		EAD2E84A0E9400F6000535DB /* PBXContainerItemProxy */ = {
+		EAC026740E96B10F00067FC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */;
+			containerPortal = EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
-		EAD2E84C0E9400F6000535DB /* PBXContainerItemProxy */ = {
+		EAC026760E96B10F00067FC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */;
+			containerPortal = EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
 			remoteInfo = "LostEngine-iphone";
 		};
-		EAD2E84E0E9400F6000535DB /* PBXContainerItemProxy */ = {
+		EAC026780E96B10F00067FC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */;
+			containerPortal = EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
 			remoteInfo = "LostEngine-simulator";
 		};
-		EAD2E8570E94021A000535DB /* PBXContainerItemProxy */ = {
+		EAC0267B0E96B12600067FC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */;
+			containerPortal = EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
@@ -52,16 +53,17 @@
 /* Begin PBXFileReference section */
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAD2E82E0E93FFC9000535DB /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../main.cpp; sourceTree = SOURCE_ROOT; };
-		EAD2E82F0E93FFC9000535DB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../../init; sourceTree = SOURCE_ROOT; };
+		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
+		EAC026630E96AF8C00067FC5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAC026640E96AF8C00067FC5 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
+		EAC026650E96AF8C00067FC5 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
+		EAC026660E96AF8C00067FC5 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
+		EAC0266A0E96B0E500067FC5 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
+		EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EAD2E8320E940009000535DB /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EAD2E8360E940011000535DB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAD2E83C0E94001A000535DB /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EAD2E83D0E94001A000535DB /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EAD2E8540E940118000535DB /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
-		EAD2E8700E9403A9000535DB /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../../Controller.cpp; sourceTree = SOURCE_ROOT; };
-		EAD2E8710E9403A9000535DB /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../../Controller.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD2E8500E9400FD000535DB /* libLostEngine.a in Frameworks */,
+				EAC0267A0E96B11600067FC5 /* libLostEngine.a in Frameworks */,
 				EAD2E8330E940009000535DB /* AGL.framework in Frameworks */,
 				EAD2E8370E940011000535DB /* OpenGL.framework in Frameworks */,
 				EAD2E83E0E94001A000535DB /* GLUT.framework in Frameworks */,
@@ -102,7 +104,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2E8540E940118000535DB /* Application.lua */,
+				EA9136A50E995BDD006884D7 /* kitten+tits.jpg */,
+				EAC0266A0E96B0E500067FC5 /* Application.lua */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
@@ -111,7 +114,7 @@
 		29B97323FDCFA39411CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */,
+				EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */,
 				EAD2E83C0E94001A000535DB /* GLUT.framework */,
 				EAD2E83D0E94001A000535DB /* Carbon.framework */,
 				EAD2E8360E940011000535DB /* OpenGL.framework */,
@@ -120,25 +123,25 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		EAC0266F0E96B10F00067FC5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAC026750E96B10F00067FC5 /* libLostEngine.a */,
+				EAC026770E96B10F00067FC5 /* libLostEngine-iphone.a */,
+				EAC026790E96B10F00067FC5 /* libLostEngine-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		EAD2E8260E93FFB7000535DB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2E8700E9403A9000535DB /* Controller.cpp */,
-				EAD2E8710E9403A9000535DB /* Controller.h */,
-				EAD2E82E0E93FFC9000535DB /* main.cpp */,
-				EAD2E82F0E93FFC9000535DB /* init */,
+				EAC026630E96AF8C00067FC5 /* main.cpp */,
+				EAC026640E96AF8C00067FC5 /* init */,
+				EAC026650E96AF8C00067FC5 /* Controller.h */,
+				EAC026660E96AF8C00067FC5 /* Controller.cpp */,
 			);
 			name = Sources;
-			sourceTree = "<group>";
-		};
-		EAD2E8450E9400F6000535DB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2E84B0E9400F6000535DB /* libLostEngine.a */,
-				EAD2E84D0E9400F6000535DB /* libLostEngine-iphone.a */,
-				EAD2E84F0E9400F6000535DB /* libLostEngine-simulator.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +158,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				EAD2E8580E94021A000535DB /* PBXTargetDependency */,
+				EAC0267C0E96B12600067FC5 /* PBXTargetDependency */,
 			);
 			name = BitmapFX;
 			productInstallPath = "$(HOME)/Applications";
@@ -175,8 +178,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EAD2E8450E9400F6000535DB /* Products */;
-					ProjectRef = EAD2E8440E9400F6000535DB /* LostEngine.xcodeproj */;
+					ProductGroup = EAC0266F0E96B10F00067FC5 /* Products */;
+					ProjectRef = EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -187,25 +190,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		EAD2E84B0E9400F6000535DB /* libLostEngine.a */ = {
+		EAC026750E96B10F00067FC5 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = EAD2E84A0E9400F6000535DB /* PBXContainerItemProxy */;
+			remoteRef = EAC026740E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EAD2E84D0E9400F6000535DB /* libLostEngine-iphone.a */ = {
+		EAC026770E96B10F00067FC5 /* libLostEngine-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libLostEngine-iphone.a";
-			remoteRef = EAD2E84C0E9400F6000535DB /* PBXContainerItemProxy */;
+			remoteRef = EAC026760E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EAD2E84F0E9400F6000535DB /* libLostEngine-simulator.a */ = {
+		EAC026790E96B10F00067FC5 /* libLostEngine-simulator.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libLostEngine-simulator.a";
-			remoteRef = EAD2E84E0E9400F6000535DB /* PBXContainerItemProxy */;
+			remoteRef = EAC026780E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -215,8 +218,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD2E8310E93FFC9000535DB /* init in Resources */,
-				EAD2E8550E940118000535DB /* Application.lua in Resources */,
+				EAC026680E96AF8C00067FC5 /* init in Resources */,
+				EAC0266B0E96B0E500067FC5 /* Application.lua in Resources */,
+				EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,18 +231,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD2E8300E93FFC9000535DB /* main.cpp in Sources */,
-				EAD2E8720E9403A9000535DB /* Controller.cpp in Sources */,
+				EAC026670E96AF8C00067FC5 /* main.cpp in Sources */,
+				EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		EAD2E8580E94021A000535DB /* PBXTargetDependency */ = {
+		EAC0267C0E96B12600067FC5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LostEngine;
-			targetProxy = EAD2E8570E94021A000535DB /* PBXContainerItemProxy */;
+			targetProxy = EAC0267B0E96B12600067FC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -277,52 +281,54 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
-					"\"$(SRCROOT)/../../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/luabind/luabind_0_7_1/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
-					"\"$(SRCROOT)/../../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/luabind/luabind_0_7_1/include\"",
-					"\"$(SRCROOT)/../../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};

@@ -2,13 +2,14 @@
 #define LOST_GL_TEXTURE_H
 
 #include "lost/gl/gl.h"
-#include "lost/gl/Utils.h"
-#include <stdexcept>
 #include <boost/noncopyable.hpp>
-#include "lost/bitmap/Bitmap.h"
+#include <boost/shared_ptr.hpp>
+
 
 namespace lost
 {
+  namespace bitmap { struct Bitmap; };
+
   namespace gl
   {
     /** a 2D Texture helper class.
@@ -16,55 +17,25 @@ namespace lost
      */
     struct Texture : private boost::noncopyable
     {
-      Texture()
+      struct Params
       {
-        glGenTextures(1, &texture);GLDEBUG_THROW;
-      }
-      
-      ~Texture()
-      {
-        glDeleteTextures(1, &texture);GLDEBUG;
-      }
-      
-      void bind() const
-      {
-        glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;       
-      }
-
-      // binds the texture, resets it from a bitmap and sets default wrap and filter params
-/*      void createFromBitmap(const lost::bitmap::Bitmap& inBitmap,                
-                bool powerOfTwo=false‚
-                GLint level=0,
-                GLenum internalFormat=GL_RGBA8,
-                bool border=false,
-                GLenum inWrap = GL_CLAMP_TO_EDGE,
-                GLenum inFilter = GL_NEAREST)
-      {
-        // FIXME: use powerOfTwo flag here
-        bind();
-        reset(level, internalFormat, border, inBitmap);
-        wrap(inWrap);
-        filter(inFilter);
-      }*/
-      
-      
+        GLint   level;          // mipmap level
+        GLenum  internalFormat; // number of color components 
+        GLsizei width;          // texture width
+        GLsizei height;         // texture height
+        GLint   border;         // 1 = with border, 0 = without
+        GLenum  format;         // format of the incoming bitmap data: number and kind of components, sequence
+        GLenum  type;           // type of the color components
+      };
+    
+      Texture();
+      ~Texture();    
+      void destroy();  
+      void bind() const;      
       void reset(GLint level,
                  GLenum internalFormat,
                  bool border,
-                 const lost::bitmap::Bitmap& inBitmap)
-      {
-        reset(level,
-              internalFormat, 
-              inBitmap.width,
-              inBitmap.height,
-              border ? 1 : 0,
-              inBitmap.format,
-              inBitmap.type,
-              inBitmap.data);
-        width = inBitmap.width;
-        height = inBitmap.height;
-      }
-
+                 boost::shared_ptr<lost::bitmap::Bitmap> inBitmap);
       void reset(GLint level, // mipmap level
                  GLenum internalformat, // number of color components
                  GLsizei width,
@@ -72,31 +43,19 @@ namespace lost
                  GLint border, // must be 0 or 1 
                  GLenum format, // composition of each element in pixels 
                  GLenum type, // numerical type of provided pixel data
-                 const GLvoid* data) // pointer to the data or 0 if you only want to reserve data for later usage
-      {
-          glTexImage2D(GL_TEXTURE_2D,
-                       level,
-                       internalformat,
-                       width,
-                       height,
-                       border,
-                       format,
-                       type,
-                       data);GLDEBUG_THROW;      
-      }
+                 const GLvoid* data); // pointer to the data or 0 if you only want to reserve data for later usage
 
-      void wrap(GLint p) { wrapS(p); wrapT(p);}
-      void wrapS(GLint p) { param(GL_TEXTURE_WRAP_S, p); }
-      void wrapT(GLint p) { param(GL_TEXTURE_WRAP_T, p); }
+      void wrap(GLint p);
+      void wrapS(GLint p);
+      void wrapT(GLint p);
 
-      void filter(GLint p)  {minFilter(p); magFilter(p); }
-      void minFilter(GLint p) {param(GL_TEXTURE_MIN_FILTER, p);}
-      void magFilter(GLint p) {param(GL_TEXTURE_MAG_FILTER, p);}
+      void filter(GLint p);
+      void minFilter(GLint p);
+      void magFilter(GLint p);
   
-      void param(GLenum pname, GLint p) {glTexParameteri(GL_TEXTURE_2D, pname, p);GLDEBUG_THROW;}      
+      void param(GLenum pname, GLint p);
                       
       GLuint        texture;
-      // original width and height of the bitmap this texture was created from
       int width;
       int height;      
     };

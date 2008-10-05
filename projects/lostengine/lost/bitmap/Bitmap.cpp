@@ -2,18 +2,48 @@
 #include "stb_image.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include "lost/resource/File.h"
 
 namespace lost
 {
 namespace bitmap
 {
 
-Bitmap::Bitmap()
+void Bitmap::init()
 {
   data = NULL;
+  loaded = false;
+  width = 0;
+  height = 0;
+  format = 0;
+  type = 0;
 }
 
+Bitmap::Bitmap()
+{
+  init();
+}
+
+Bitmap::Bitmap(unsigned long inWidth,
+          unsigned long inHeight)
+{
+  init();
+  init(inWidth, inHeight);
+}
+          
+Bitmap::Bitmap(boost::shared_ptr<lost::resource::File> inFile)
+{
+  init();
+  init(inFile);
+}
+
+
 Bitmap::~Bitmap()
+{
+  destroy();
+}
+
+void Bitmap::destroy()
 {
   if(data && loaded)
   {
@@ -30,6 +60,7 @@ Bitmap::~Bitmap()
 void Bitmap::init(unsigned long inWidth,
                   unsigned long inHeight)
 {
+  destroy();
   unsigned long bytesPerPixel = 4;
   unsigned long sizeInBytes = inWidth * inHeight * bytesPerPixel;
   data = new unsigned char[sizeInBytes];
@@ -40,6 +71,7 @@ void Bitmap::init(unsigned long inWidth,
 
 void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
 {
+  destroy();
   DOUT("init image from memory: " << inFile->location);
   int bytesPerPixel, w, h;
   data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(inFile->data.get()), inFile->size, &w, &h, &bytesPerPixel, 0);

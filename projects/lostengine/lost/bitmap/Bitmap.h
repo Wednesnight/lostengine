@@ -3,22 +3,27 @@
 
 #include "lost/gl/gl.h"
 #include <boost/shared_ptr.hpp>
-#include "lost/resource/File.h"
+#include <boost/noncopyable.hpp>
 
 namespace lost
 {
+  namespace resource{ struct File; };
+
   namespace bitmap
   {
-
-    struct Bitmap
+    struct Bitmap : private boost::noncopyable
     {
-      unsigned char*  data;
-      unsigned long   width;
-      unsigned long   height;
-      GLenum          format;
-      GLenum          type;
+      unsigned char*  data;   // points to the raw pixel data
+      unsigned long   width;  // width in pixels
+      unsigned long   height; // height in pixels
+      GLenum          format; // format of bitmap as GL constant (e.g. rgb, rgba)
+      GLenum          type;   // type of the components of a pixel, this will always be "unisgned byte"
 
       Bitmap();
+      Bitmap(unsigned long inWidth,
+                unsigned long inHeight);
+      Bitmap(boost::shared_ptr<lost::resource::File> inFile);
+      void init();
       virtual ~Bitmap();
 
       /** inits a 32bit rgba bitmap with the given width and height.
@@ -31,11 +36,10 @@ namespace lost
        * An exception is thrown if an error occurs.
        */
       void init(boost::shared_ptr<lost::resource::File> inFile);
-      unsigned char* getPixels() { return data; }
     private:
+      void destroy();
       bool loaded; // true if the image was loaded with the image library and data be freed by it.
                    // false if data is just a chunk of memory and can simply be deleted
-      Bitmap(const Bitmap& inBitmap) {}; // don't copy, manage it in smart pointer
     };
 
   } // namespace bitmap

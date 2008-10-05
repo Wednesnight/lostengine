@@ -43,6 +43,11 @@ void Controller::init(shared_ptr<Event> event)
   
   pic.reset(new Bitmap);
   pic->init(640, 480);
+  
+  shared_ptr<File> file = appInstance->loader->load("kitten+tits.jpg");
+  loadedPic.reset(new Bitmap(file));
+  tex.reset(new Texture);
+  tex->reset(0, GL_RGBA, 0, loadedPic);
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
