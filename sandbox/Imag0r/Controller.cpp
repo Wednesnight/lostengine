@@ -16,34 +16,24 @@ using namespace lost::resource;
 using namespace lost::application;
 using namespace boost;
 
-Controller::Controller(shared_ptr<Loader> inLoader) : loader(inLoader) {}
 
 void Controller::redraw(shared_ptr<TimerEvent> event)
 {
   glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
   set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
-  glClearColor(1,0,1,0);GLDEBUG;
-  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
+
+  appInstance->context->pushState(textureRenderState);
+  appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  setColor(whiteColor);
+  drawRectTextured(Rect(10,10,texture->width,texture->height), texture);
+  appInstance->context->popState();  
   
-  glMatrixMode(GL_MODELVIEW);GLDEBUG;
-  glLoadIdentity();GLDEBUG;
-  glEnable(GL_TEXTURE_2D);GLDEBUG;
-  glEnable(GL_BLEND);GLDEBUG;
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);    GLDEBUG;
-  
-  glEnableClientState(GL_VERTEX_ARRAY);GLDEBUG;
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
-  drawRectTextured(Rect(10,10,texture->width,texture->height), *texture);
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);GLDEBUG;
-  
-  glDisable(GL_TEXTURE_2D);
-  glDisable(GL_BLEND);
-  
+  appInstance->context->pushState(vanillaRenderState);
   setColor(whiteColor);
   drawRectFilled(Rect(400,400,50,50));
+  appInstance->context->popState();  
   
-  fpsMeter.render(2,2,event->passedSec);
-  
+  fpsMeter->render(2,2,event->passedSec);
   appInstance->swapBuffers();
 }
 
@@ -62,15 +52,38 @@ void Controller::init(shared_ptr<ApplicationEvent> event)
   //string filename = "gay_zombie.jpg";
   //string filename = "nomnomnom.jpg";
   //string filename = "buttonReleased.png";
+  fpsMeter.reset(new FpsMeter(appInstance->context));
   string filename = "stubs.jpg";
-  bitmap = loader.load(filename);
+  bitmap.reset(new Bitmap(appInstance->loader->load(filename)));
   
   
   texture.reset(new Texture());
   texture->bind();
-  texture->reset(0, GL_RGBA8, false, *bitmap);
+  texture->reset(0, GL_RGBA8, false, bitmap);
   texture->wrap(GL_CLAMP_TO_EDGE);
   texture->filter(GL_LINEAR);
+  
+  textureRenderState = appInstance->context->copyState();
+  textureRenderState->texture2D = true;
+  textureRenderState->blend = true;
+  textureRenderState->blendSrc = GL_SRC_ALPHA;
+  textureRenderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+  textureRenderState->clearColor = Color(1,0,1,1);
+  textureRenderState->depthTest = false;  
+  textureRenderState->alphaTest = false;  
+  textureRenderState->normalArray = false;  
+  textureRenderState->vertexArray = true;  
+  textureRenderState->textureCoordArray = true;  
+
+  vanillaRenderState = appInstance->context->copyState();
+  vanillaRenderState->texture2D = false;
+  vanillaRenderState->blend = false;
+  vanillaRenderState->clearColor = Color(1,0,1,1);
+  vanillaRenderState->depthTest = false;  
+  vanillaRenderState->alphaTest = false;  
+  vanillaRenderState->normalArray = false;  
+  vanillaRenderState->vertexArray = true;  
+  vanillaRenderState->textureCoordArray = false;  
   
   DOUT("width: "<<texture->width<< " height: "<<texture->height);
   

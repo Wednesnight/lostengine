@@ -23,13 +23,13 @@ int main(int argn, char** args)
   try
   {
     Application app;
-    Controller controller(appInstance->loader);
+    Controller controller;
 
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(ApplicationEvent::INIT(), receive<ApplicationEvent>(bind(&Controller::init, &controller, _1)));
     app.run();
   }
-  catch (exception& e)
+  catch (std::exception& e)
   {
     EOUT("exception: " << e.what());
   }

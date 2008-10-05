@@ -14,13 +14,12 @@
 struct Controller
 {
   lost::application::Timer* redrawTimer;
-  lost::bitmap::BitmapLoader loader;
   boost::shared_ptr<lost::bitmap::Bitmap> bitmap;
   boost::shared_ptr<lost::gl::Texture> texture;
-  lost::common::FpsMeter fpsMeter;
-  
-  Controller(boost::shared_ptr<lost::resource::Loader> inLoader);
-  
+  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  boost::shared_ptr<lost::gl::State> textureRenderState;
+  boost::shared_ptr<lost::gl::State> vanillaRenderState;
+      
   void redraw(boost::shared_ptr<lost::application::TimerEvent> event);
   void keyboard(boost::shared_ptr<lost::application::KeyEvent> inEvent);
   void init(boost::shared_ptr<lost::application::ApplicationEvent> event);
