@@ -48,6 +48,7 @@ void Context::setState(const boost::shared_ptr<State>& newState)
 
   SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, state, newState, normalArray);
   SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, state, newState, vertexArray);
+  SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, state, newState, textureCoordArray);
 }
 
 
