@@ -46,10 +46,7 @@ void Controller::init(shared_ptr<Event> event)
   pic.reset(new Bitmap);
   pic->init(640, 480);
   
-  string filename;
-  filename = "kitten+tits.jpg";
-//  filename = "stubs.jpg";
-  shared_ptr<File> file = appInstance->loader->load(filename);
+  shared_ptr<File> file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
   tex.reset(new Texture);
   tex->bind();
