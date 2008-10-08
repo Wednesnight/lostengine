@@ -57,7 +57,7 @@ Context::Context()
   DOUT("lost::gl::Context::Context()");
 
   // initialize state
-  pushState();
+  state = newState();
 }
 
 Context::~Context()
@@ -108,7 +108,7 @@ void Context::pushState()
 void Context::pushState(const boost::shared_ptr<State>& inState)
 {
   if (state) stateStack.push_back(state);
-  state = newState();
+  state = copyState();
   if (inState) setState(inState);
 }
 

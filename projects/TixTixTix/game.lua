@@ -63,6 +63,35 @@ local combinationLookup =
   [8] = { 2,5,6 }
 }
 
+function resetGame()
+  log.debug("resetting game")
+  game =
+  {
+    currentPlayer = 0,
+    board =
+    {
+      [0] =
+      {
+        [0] = Field(),
+        [1] = Field(),
+        [2] = Field()
+      },
+      [1] =
+      {
+        [0] = Field(),
+        [1] = Field(),
+        [2] = Field()
+      },
+      [2] =
+      {
+        [0] = Field(),
+        [1] = Field(),
+        [2] = Field()
+      }
+    }
+  }
+end
+
 function keyHandler(event)
   local keyEvent = lost.application.KeyEvent.cast(event)
 
@@ -104,14 +133,25 @@ function touchHandler(event)
       location.y = (lost.application.Application.config.displayAttributes.height - location.y)
       clickField(location)
     end
+  elseif (event.type == lost.application.TouchEvent.TOUCHES_ENDED and touchEvent:size() == 4) then
+    resetGame()
   end
 end
 
 function clickHandler(event)
   local mouseEvent = lost.application.MouseEvent.cast(event)
 
-  if (event.type == lost.application.MouseEvent.MOUSE_DOWN) then
-    clickField(mouseEvent.pos)
+  if (event.type == lost.application.MouseEvent.MOUSE_DOWN) and (mouseEvent.button == lost.application.MB_LEFT) then
+    game.leftButtonDown = true
+  elseif (event.type == lost.application.MouseEvent.MOUSE_UP) and (mouseEvent.button == lost.application.MB_LEFT) then
+    game.leftButtonDown = false
+  end
+  if (game.leftButtonDown) and (event.type == lost.application.MouseEvent.MOUSE_UP) and (mouseEvent.button == lost.application.MB_RIGHT) then
+    resetGame()
+  else
+    if (event.type == lost.application.MouseEvent.MOUSE_DOWN) then
+      clickField(mouseEvent.pos)
+    end
   end
 end
 
@@ -125,6 +165,8 @@ function renderHandler(event)
   newState.texture2D = false
   newState.clearColor = lost.common.Color(0.0, 0.0, 0.0, 0.0)
   Application.context:pushState(newState)
+  gl.glEnable(gl.GL_POINT_SMOOTH) gl.GLDEBUG()
+  gl.glEnable(gl.GL_LINE_SMOOTH) gl.GLDEBUG()
 
   Application.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
   Application.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
@@ -132,17 +174,17 @@ function renderHandler(event)
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
+  gl.glLineWidth(1.0)
   for x = 0, 2 do
     for y = 0, 2 do
+      lost.gl.setColor(lost.common.Color(1,1,1))
+      lost.gl.drawRectOutline(lost.math.Rect(x*Application.config.FieldSize.x, y*Application.config.FieldSize.y, Application.config.FieldSize.x, Application.config.FieldSize.y))
       if game.board[x][y].player == 0 then
         lost.gl.setColor(lost.common.Color(1,0,0))
         lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       elseif game.board[x][y].player == 1 then
         lost.gl.setColor(lost.common.Color(0,0,1))
         lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
-      else
-        lost.gl.setColor(lost.common.Color(1,1,1))
-        lost.gl.drawRectOutline(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       end
     end
   end
@@ -159,5 +201,6 @@ end
 function resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
+  lost.application.Application.config.FieldSize = lost.math.Vec2((resizeEvent.width / 3), (resizeEvent.height / 3))
   gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
 end
