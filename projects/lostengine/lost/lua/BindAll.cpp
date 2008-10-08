@@ -29,7 +29,6 @@
 #include "lost/lua/bindings/LostLuaState.h"
 #include "lost/lua/bindings/LostLSystemLSystem.h"
 #include "lost/lua/bindings/LostApplicationAccelerometerEvent.h"
-#include "lost/lua/bindings/LostBitmapBitmapLoader.h"
 #include "lost/lua/bindings/LostCommonDisplayAttributes.h"
 #include "lost/lua/bindings/LostBitmapBitmap.h"
 #include "luabind/class_info.hpp"
@@ -45,7 +44,6 @@ namespace lost
     {
       LostCommonDisplayAttributes(state);
       LostBitmapBitmap(state);
-      LostBitmapBitmapLoader(state);
       LostCommonLog(state);
       LostResourceFile(state);
       LostResourceLoader(state);

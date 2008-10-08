@@ -7,7 +7,6 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
 #include "lost/application/KeySym.h"
-#include "lost/bitmap/Bitmap.h"
 
 using namespace std;
 using namespace boost;

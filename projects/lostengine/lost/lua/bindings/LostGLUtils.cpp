@@ -1,5 +1,6 @@
 #include "lost/lua/bindings/LostGLUtils.h"
 #include "lost/gl/Utils.h"
+#include "lost/math/Vec2.h"
 
 using namespace luabind;
 using namespace lost::gl::utils;

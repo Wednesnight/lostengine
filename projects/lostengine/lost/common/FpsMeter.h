@@ -2,16 +2,14 @@
 #define LOST_COMMON_FPSMETER_h
 
 #include <vector>
-#include <boost/lexical_cast.hpp>
-#include "lost/gl/Utils.h"
-#include "lost/gl/Draw.h"
-#include "lost/common/Color.h"
-#include "lost/math/Rect.h"
-#include "lost/math/Vec2.h"
-#include "lost/gl/Context.h"
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
+#include <string>
 
 namespace lost
 {
+  namespace gl { struct Context; struct State; };
+
   namespace common
   {
     struct FpsMeter

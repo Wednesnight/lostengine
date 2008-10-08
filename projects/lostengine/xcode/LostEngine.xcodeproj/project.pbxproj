@@ -42,7 +42,6 @@
 		3E7325030E5CE3A4000FF838 /* ResizeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97F50E15CFD000B28BF6 /* ResizeEvent.h */; };
 		3E7325040E5CE3A4000FF838 /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
 		3E7325050E5CE3A4000FF838 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946A0E04639D00B6423B /* Bitmap.h */; };
-		3E7325060E5CE3A4000FF838 /* BitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946B0E04639D00B6423B /* BitmapLoader.h */; };
 		3E7325070E5CE3A4000FF838 /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946D0E04639D00B6423B /* Color.h */; };
 		3E7325080E5CE3A4000FF838 /* DisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946F0E04639D00B6423B /* DisplayAttributes.h */; };
 		3E7325090E5CE3A4000FF838 /* FpsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94710E04639D00B6423B /* FpsMeter.h */; };
@@ -192,7 +191,6 @@
 		EA3B952E0E04639D00B6423B /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
 		EA3B95300E04639D00B6423B /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94680E04639D00B6423B /* Timer.h */; };
 		EA3B95310E04639D00B6423B /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946A0E04639D00B6423B /* Bitmap.h */; };
-		EA3B95320E04639D00B6423B /* BitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946B0E04639D00B6423B /* BitmapLoader.h */; };
 		EA3B95330E04639D00B6423B /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946D0E04639D00B6423B /* Color.h */; };
 		EA3B95350E04639D00B6423B /* DisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946F0E04639D00B6423B /* DisplayAttributes.h */; };
 		EA3B95370E04639D00B6423B /* FpsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94710E04639D00B6423B /* FpsMeter.h */; };
@@ -271,7 +269,6 @@
 		EA6711640E3E89DB00B961EC /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
 		EA6711650E3E89DB00B961EC /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946A0E04639D00B6423B /* Bitmap.h */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
-		EA6711670E3E89DB00B961EC /* BitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946B0E04639D00B6423B /* BitmapLoader.h */; };
 		EA67116C0E3E89DB00B961EC /* Color.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946D0E04639D00B6423B /* Color.h */; };
 		EA67116D0E3E89DB00B961EC /* DisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B946F0E04639D00B6423B /* DisplayAttributes.h */; };
 		EA67116E0E3E89DB00B961EC /* FpsMeter.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94710E04639D00B6423B /* FpsMeter.h */; };
@@ -376,7 +373,6 @@
 		EA7BE1450E6F38A10017B031 /* LostLuaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */; };
 		EA7BE1460E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */; };
 		EA7BE1470E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */; };
-		EA7BE1480E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1270E6F38A10017B031 /* LostBitmapBitmapLoader.cpp */; };
 		EA7BE1490E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */; };
 		EA7BE14A0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */; };
 		EA7BE14B0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
@@ -409,7 +405,6 @@
 		EA7BE1660E6F38A10017B031 /* LostLuaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */; };
 		EA7BE1670E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */; };
 		EA7BE1680E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */; };
-		EA7BE1690E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1270E6F38A10017B031 /* LostBitmapBitmapLoader.cpp */; };
 		EA7BE16A0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */; };
 		EA7BE16B0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */; };
 		EA7BE16C0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
@@ -442,7 +437,6 @@
 		EA7BE1870E6F38A10017B031 /* LostLuaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */; };
 		EA7BE1880E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */; };
 		EA7BE1890E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */; };
-		EA7BE18A0E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1270E6F38A10017B031 /* LostBitmapBitmapLoader.cpp */; };
 		EA7BE18B0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */; };
 		EA7BE18C0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */; };
 		EA7BE1B70E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE1B60E6F3C9D0017B031 /* LostApplicationTimer.h */; };
@@ -529,9 +523,6 @@
 		EA7BE2A00E6F48490017B031 /* LostLSystemLSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */; };
 		EA7BE2A10E6F48490017B031 /* LostLSystemLSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */; };
 		EA7BE2A20E6F48490017B031 /* LostLSystemLSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */; };
-		EA7BE2AC0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */; };
-		EA7BE2AD0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */; };
-		EA7BE2AE0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */; };
 		EA7BE2B50E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */; };
 		EA7BE2B60E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */; };
 		EA7BE2B70E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */; };
@@ -547,6 +538,9 @@
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
+		EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
+		EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
+		EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAAA56950E286E4A002EB663 /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
 		EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
 		EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
@@ -903,7 +897,6 @@
 		EA3B94660E04639D00B6423B /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
 		EA3B94680E04639D00B6423B /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
 		EA3B946A0E04639D00B6423B /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bitmap.h; sourceTree = "<group>"; };
-		EA3B946B0E04639D00B6423B /* BitmapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitmapLoader.h; sourceTree = "<group>"; };
 		EA3B946D0E04639D00B6423B /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		EA3B946F0E04639D00B6423B /* DisplayAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayAttributes.h; sourceTree = "<group>"; };
 		EA3B94710E04639D00B6423B /* FpsMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FpsMeter.h; sourceTree = "<group>"; };
@@ -996,7 +989,6 @@
 		EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLuaState.cpp; path = bindings/LostLuaState.cpp; sourceTree = "<group>"; };
 		EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLSystemLSystem.cpp; path = bindings/LostLSystemLSystem.cpp; sourceTree = "<group>"; };
 		EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationAccelerometerEvent.cpp; path = bindings/LostApplicationAccelerometerEvent.cpp; sourceTree = "<group>"; };
-		EA7BE1270E6F38A10017B031 /* LostBitmapBitmapLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostBitmapBitmapLoader.cpp; path = bindings/LostBitmapBitmapLoader.cpp; sourceTree = "<group>"; };
 		EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommonDisplayAttributes.cpp; path = bindings/LostCommonDisplayAttributes.cpp; sourceTree = "<group>"; };
 		EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostBitmapBitmap.cpp; path = bindings/LostBitmapBitmap.cpp; sourceTree = "<group>"; };
 		EA7BE1B60E6F3C9D0017B031 /* LostApplicationTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationTimer.h; path = bindings/LostApplicationTimer.h; sourceTree = "<group>"; };
@@ -1027,7 +1019,6 @@
 		EA7BE28C0E6F473A0017B031 /* LostApplicationMouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationMouseEvent.h; path = bindings/LostApplicationMouseEvent.h; sourceTree = "<group>"; };
 		EA7BE2940E6F47920017B031 /* LostLuaState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostLuaState.h; path = bindings/LostLuaState.h; sourceTree = "<group>"; };
 		EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostLSystemLSystem.h; path = bindings/LostLSystemLSystem.h; sourceTree = "<group>"; };
-		EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostBitmapBitmapLoader.h; path = bindings/LostBitmapBitmapLoader.h; sourceTree = "<group>"; };
 		EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostCommonDisplayAttributes.h; path = bindings/LostCommonDisplayAttributes.h; sourceTree = "<group>"; };
 		EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostBitmapBitmap.h; path = bindings/LostBitmapBitmap.h; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
@@ -1036,6 +1027,7 @@
 		EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleLoader.h; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
 		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
+		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAA56940E286E4A002EB663 /* ApplicationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		EAAF977D0E15C30400B28BF6 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
@@ -1360,7 +1352,6 @@
 			children = (
 				EA3B946A0E04639D00B6423B /* Bitmap.h */,
 				EA97FC110E35ABD800851245 /* Bitmap.cpp */,
-				EA3B946B0E04639D00B6423B /* BitmapLoader.h */,
 			);
 			path = bitmap;
 			sourceTree = "<group>";
@@ -1444,6 +1435,7 @@
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */,
 				EA3B94AC0E04639D00B6423B /* Utils.h */,
+				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
 				EA3B94AD0E04639D00B6423B /* VertexShader.h */,
 			);
 			path = gl;
@@ -1634,8 +1626,6 @@
 				EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */,
 				EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */,
 				EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */,
-				EA7BE1270E6F38A10017B031 /* LostBitmapBitmapLoader.cpp */,
-				EA7BE2AB0E6F48D10017B031 /* LostBitmapBitmapLoader.h */,
 				EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */,
 				EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */,
 				EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */,
@@ -1665,7 +1655,6 @@
 				3E7325030E5CE3A4000FF838 /* ResizeEvent.h in Headers */,
 				3E7325040E5CE3A4000FF838 /* ApplicationEvent.h in Headers */,
 				3E7325050E5CE3A4000FF838 /* Bitmap.h in Headers */,
-				3E7325060E5CE3A4000FF838 /* BitmapLoader.h in Headers */,
 				3E7325070E5CE3A4000FF838 /* Color.h in Headers */,
 				3E7325080E5CE3A4000FF838 /* DisplayAttributes.h in Headers */,
 				3E7325090E5CE3A4000FF838 /* FpsMeter.h in Headers */,
@@ -1767,7 +1756,6 @@
 				EA7BE28F0E6F473A0017B031 /* LostApplicationMouseEvent.h in Headers */,
 				EA7BE2970E6F47920017B031 /* LostLuaState.h in Headers */,
 				EA7BE2A20E6F48490017B031 /* LostLSystemLSystem.h in Headers */,
-				EA7BE2AE0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */,
 				EA7BE2B70E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2C00E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907240E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
@@ -1789,7 +1777,6 @@
 				EA3B952E0E04639D00B6423B /* Application.h in Headers */,
 				EA3B95300E04639D00B6423B /* Timer.h in Headers */,
 				EA3B95310E04639D00B6423B /* Bitmap.h in Headers */,
-				EA3B95320E04639D00B6423B /* BitmapLoader.h in Headers */,
 				EA3B95330E04639D00B6423B /* Color.h in Headers */,
 				EA3B95350E04639D00B6423B /* DisplayAttributes.h in Headers */,
 				EA3B95370E04639D00B6423B /* FpsMeter.h in Headers */,
@@ -1893,7 +1880,6 @@
 				EA7BE28D0E6F473A0017B031 /* LostApplicationMouseEvent.h in Headers */,
 				EA7BE2950E6F47920017B031 /* LostLuaState.h in Headers */,
 				EA7BE2A00E6F48490017B031 /* LostLSystemLSystem.h in Headers */,
-				EA7BE2AC0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */,
 				EA7BE2B50E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2BE0E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907220E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
@@ -1920,7 +1906,6 @@
 				EA6711630E3E89DB00B961EC /* ResizeEvent.h in Headers */,
 				EA6711640E3E89DB00B961EC /* ApplicationEvent.h in Headers */,
 				EA6711650E3E89DB00B961EC /* Bitmap.h in Headers */,
-				EA6711670E3E89DB00B961EC /* BitmapLoader.h in Headers */,
 				EA67116C0E3E89DB00B961EC /* Color.h in Headers */,
 				EA67116D0E3E89DB00B961EC /* DisplayAttributes.h in Headers */,
 				EA67116E0E3E89DB00B961EC /* FpsMeter.h in Headers */,
@@ -2022,7 +2007,6 @@
 				EA7BE28E0E6F473A0017B031 /* LostApplicationMouseEvent.h in Headers */,
 				EA7BE2960E6F47920017B031 /* LostLuaState.h in Headers */,
 				EA7BE2A10E6F48490017B031 /* LostLSystemLSystem.h in Headers */,
-				EA7BE2AD0E6F48D10017B031 /* LostBitmapBitmapLoader.h in Headers */,
 				EA7BE2B60E6F49080017B031 /* LostCommonDisplayAttributes.h in Headers */,
 				EA7BE2BF0E6F49920017B031 /* LostBitmapBitmap.h in Headers */,
 				EA0907230E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */,
@@ -2350,7 +2334,6 @@
 				EA7BE1870E6F38A10017B031 /* LostLuaState.cpp in Sources */,
 				EA7BE1880E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */,
 				EA7BE1890E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */,
-				EA7BE18A0E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */,
 				EA7BE18B0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE18C0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
@@ -2363,6 +2346,7 @@
 				EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA9136400E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AD0E9968AF006884D7 /* Draw.cpp in Sources */,
+				EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2421,7 +2405,6 @@
 				EA7BE1450E6F38A10017B031 /* LostLuaState.cpp in Sources */,
 				EA7BE1460E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */,
 				EA7BE1470E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */,
-				EA7BE1480E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */,
 				EA7BE1490E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE14A0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
@@ -2434,6 +2417,7 @@
 				EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363E0E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AB0E9968AF006884D7 /* Draw.cpp in Sources */,
+				EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2491,7 +2475,6 @@
 				EA7BE1660E6F38A10017B031 /* LostLuaState.cpp in Sources */,
 				EA7BE1670E6F38A10017B031 /* LostLSystemLSystem.cpp in Sources */,
 				EA7BE1680E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */,
-				EA7BE1690E6F38A10017B031 /* LostBitmapBitmapLoader.cpp in Sources */,
 				EA7BE16A0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */,
 				EA7BE16B0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */,
 				EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */,
@@ -2504,6 +2487,7 @@
 				EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363F0E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AC0E9968AF006884D7 /* Draw.cpp in Sources */,
+				EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

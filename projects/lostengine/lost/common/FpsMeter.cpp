@@ -1,5 +1,11 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/State.h"
+#include <boost/lexical_cast.hpp>
+#include "lost/gl/Draw.h"
+#include "lost/gl/Context.h"
+#include "lost/common/Color.h"
+#include "lost/math/Rect.h"
+#include "lost/math/Vec2.h"
 
 namespace lost
 {

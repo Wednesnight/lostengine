@@ -4,9 +4,10 @@
 #include <string>
 #include <fstream>
 #include <boost/lexical_cast.hpp>
-#include <boost/signal.hpp>
+//#include <boost/signal.hpp>
 #include "lost/platform/Platform.h"
 #include <iostream>
+#include <stdexcept>
 
 #ifndef __GNUC__
   #define __FUNCTION__ "(unknown)"
@@ -67,7 +68,7 @@ namespace lost
         return lost::platform::currentTimeFormat( t );
       }
 
-      typedef boost::signal<void ( const LogEntryType, const std::string& )> LogSignal;
+//      typedef boost::signal<void ( const LogEntryType, const std::string& )> LogSignal;
 
       // global states for << operator
       std::string  currentEntry;
@@ -76,7 +77,7 @@ namespace lost
 
       std::string  filename;
       unsigned     level;
-      LogSignal    signal;
+//      LogSignal    signal;
       unsigned     targets;
 
       Logger()

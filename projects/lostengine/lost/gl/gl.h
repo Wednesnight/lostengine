@@ -8,11 +8,8 @@
 
 #ifndef LOST_GL_GL_H
 #define LOST_GL_GL_H
-  // TargetConditionals defines the IPHONE Macros we require
-  // this header is only present if we build on an apple platform
-  #if defined __APPLE__
-  # include <TargetConditionals.h>
-  #endif
+
+  #include "lost/platform/Platform.h"
 
   // in case of iphone, this header includes the OpenGL ES interfaces
   // every other platform gets the standard gl headers plus helpers provided 

@@ -6,6 +6,8 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/TimerEvent.h"
+#include "lost/bitmap/Bitmap.h"
+#include "lost/gl/Texture.h"
 
 struct Controller 
 {
