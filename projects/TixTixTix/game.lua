@@ -109,9 +109,12 @@ function clickField(location)
 
   local x = math.floor(location.x / lost.application.Application.config.FieldSize.x)
   local y = math.floor(location.y / lost.application.Application.config.FieldSize.y)
-  if game.board[x][y].player == -1 then
-    game.board[x][y].player = game.currentPlayer
-    valid = true
+  valid = (x >= 0 and x <= 2) and (y >= 0 and y <= 2)
+  if valid then
+    if game.board[x][y].player == -1 then
+      game.board[x][y].player = game.currentPlayer
+      valid = true
+    end
   end
 
   if valid then
@@ -165,8 +168,6 @@ function renderHandler(event)
   newState.texture2D = false
   newState.clearColor = lost.common.Color(0.0, 0.0, 0.0, 0.0)
   Application.context:pushState(newState)
-  gl.glEnable(gl.GL_POINT_SMOOTH) gl.GLDEBUG()
-  gl.glEnable(gl.GL_LINE_SMOOTH) gl.GLDEBUG()
 
   Application.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
   Application.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))

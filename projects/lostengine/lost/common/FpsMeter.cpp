@@ -12,8 +12,9 @@ namespace lost
   namespace common
   {
       FpsMeter::FpsMeter(boost::shared_ptr<lost::gl::Context> inContext)
+      : context(inContext)
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-      : font(GLUT_BITMAP_TIMES_ROMAN_10), context(inContext)
+        ,font(GLUT_BITMAP_TIMES_ROMAN_10)
 #endif
       {
         width = historylength;
