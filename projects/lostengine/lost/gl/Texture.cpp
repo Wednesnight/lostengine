@@ -2,12 +2,29 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/gl/Utils.h"
 #include <stdexcept>
+#include <boost/lexical_cast.hpp>
+#include <boost/shared_ptr.hpp>
 
+using namespace std;
+using namespace boost;
 
 namespace lost
 {
 namespace gl
 {
+
+GLenum bitmapComponents2GlFormat(bitmap::Bitmap::Components components)
+{
+  GLenum result = 0;
+  switch(components)
+  {
+    case bitmap::Bitmap::COMPONENTS_RGB:result=GL_RGB;break;
+    case bitmap::Bitmap::COMPONENTS_RGBA:result=GL_RGBA;break;
+    case bitmap::Bitmap::COMPONENTS_ALPHA:result=GL_ALPHA;break;
+    default:DOUT("throwing from her");throw runtime_error(string("can't convert bitmap components ")+lexical_cast<string>(components));
+  }
+  return result;
+}
 
 Texture::Texture()
 {
@@ -39,8 +56,8 @@ void Texture::reset(GLint level,
         inBitmap->width,
         inBitmap->height,
         border ? 1 : 0,
-        inBitmap->format,
-        inBitmap->type,
+        bitmapComponents2GlFormat(inBitmap->format),
+        GL_UNSIGNED_BYTE,
         inBitmap->data);
   width = inBitmap->width;
   height = inBitmap->height;

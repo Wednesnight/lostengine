@@ -3,6 +3,7 @@
 #include "lost/common/Logger.h"
 #include <stdexcept>
 #include "lost/resource/File.h"
+#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
@@ -15,8 +16,7 @@ void Bitmap::init()
   loaded = false;
   width = 0;
   height = 0;
-  format = 0;
-  type = 0;
+  format = COMPONENTS_UNDEFINED;
 }
 
 Bitmap::Bitmap()
@@ -65,8 +65,7 @@ void Bitmap::init(unsigned long inWidth,
   unsigned long sizeInBytes = inWidth * inHeight * bytesPerPixel;
   data = new unsigned char[sizeInBytes];
   loaded = false;
-  format = GL_RGBA;
-  type = GL_UNSIGNED_BYTE;
+  format = COMPONENTS_RGBA;
 }
 
 void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
@@ -84,11 +83,10 @@ void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
       
   switch(bytesPerPixel)
   {
-    case 3:format = GL_RGB;break;
-    case 4:format = GL_RGBA;break;
+    case 3:format = COMPONENTS_RGB;break;
+    case 4:format = COMPONENTS_RGBA;break;
     default:throw std::runtime_error("couldn't init image: "+inFile->location+" don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
   }
-  type = GL_UNSIGNED_BYTE;  
   loaded = true;
 }
 

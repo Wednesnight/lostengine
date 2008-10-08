@@ -1,3 +1,5 @@
+#include <boost/shared_ptr.hpp>
+#include "lost/gl/Texture.h"
 #include "lost/font/freetype/Glyph.h"
 
 namespace lost

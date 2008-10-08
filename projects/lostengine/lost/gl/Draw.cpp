@@ -1,3 +1,5 @@
+#include <boost/shared_ptr.hpp>
+#include "lost/gl/Texture.h"
 #include "lost/gl/Draw.h"
 #include "lost/math/AABB.h"
 #include "lost/math/Vec3.h"

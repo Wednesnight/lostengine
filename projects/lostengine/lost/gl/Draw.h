@@ -2,7 +2,8 @@
 #define LOST_GL_DRAW_H
 
 #include "lost/gl/gl.h"
-#include "lost/gl/Texture.h"
+
+namespace  boost { template<typename T> class shared_ptr; };
 
 namespace lost
 {
@@ -12,6 +13,8 @@ namespace common{ struct Color; };
 
 namespace gl
 {
+  struct Texture;
+
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   // FIXME: what do we do about these glut bitmap fonts in OpenGL ES? Do we need 
   // a cut down font drawing engine with built in resources only,

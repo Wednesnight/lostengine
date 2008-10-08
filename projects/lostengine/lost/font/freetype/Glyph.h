@@ -6,8 +6,12 @@
 #include "lost/gl/Draw.h"
 #include "lost/math/Rect.h"
 
+namespace boost { template <typename T> class shared_ptr; };
+
 namespace lost
 {
+  namespace gl { struct Texture; };
+
   namespace font
   {
     namespace freetype

@@ -1,9 +1,9 @@
 #ifndef LOST_IMAGE_BITMAP_H
 #define LOST_IMAGE_BITMAP_H
 
-#include "lost/gl/gl.h"
-#include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
+
+namespace boost { template<typename T> class shared_ptr; }
 
 namespace lost
 {
@@ -13,11 +13,20 @@ namespace lost
   {
     struct Bitmap : private boost::noncopyable
     {
+      enum Components
+      {
+        COMPONENTS_UNDEFINED = 0, // for defined init, can't be used for anything
+        COMPONENTS_ALPHA = 1,     // 8 bit
+        COMPONENTS_RGB = 3,       // 24 bit
+        COMPONENTS_RGBA = 4,      // 32 bit
+        COMPONENTS_NUM
+      };
+
+    
       unsigned char*  data;   // points to the raw pixel data
       unsigned long   width;  // width in pixels
       unsigned long   height; // height in pixels
-      GLenum          format; // format of bitmap as GL constant (e.g. rgb, rgba)
-      GLenum          type;   // type of the components of a pixel, this will always be "unisgned byte"
+      Components      format; // format of bitmap as GL constant (e.g. rgb, rgba)
 
       Bitmap();
       Bitmap(unsigned long inWidth,
