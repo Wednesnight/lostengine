@@ -1,5 +1,4 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/common/Logger.h"
 
@@ -13,7 +12,7 @@ namespace lost
   namespace lua
   {
 
-    int errorCallback(lua_State* state)
+    int errorHandler(lua_State* state)
     {
       int result = 0;
       try

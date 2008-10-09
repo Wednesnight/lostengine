@@ -1,5 +1,8 @@
-#include "lost/lua/bindings/LostEventEventDispatcher.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/event/EventDispatcher.h"
+
+#include "lost/lua/bindings/LostEventEventDispatcher.h"
 
 using namespace luabind;
 using namespace lost::event;
@@ -52,17 +55,22 @@ namespace lost
   }
 }
 
-LOST_LUA_EXPORT_BEGIN(LostEventEventDispatcher)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("event")
-    [
-      class_<EventDispatcher>("EventDispatcher")
-        .def(constructor<>())
-       .def("addEventListener", (void(*)(object, const std::string&, object))&addEventListener)
-       .def("addEventListener", (void(*)(object, const std::string&, object, object))&addEventListener)
-    ]
-  ];
-}  
-LOST_LUA_EXPORT_END
+  namespace lua
+  {
+    void LostEventEventDispatcher(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("event")
+        [
+          class_<EventDispatcher>("EventDispatcher")
+            .def(constructor<>())
+           .def("addEventListener", (void(*)(object, const std::string&, object))&addEventListener)
+           .def("addEventListener", (void(*)(object, const std::string&, object, object))&addEventListener)
+        ]
+      ];
+    }  
+  }
+}

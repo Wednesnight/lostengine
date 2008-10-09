@@ -1,19 +1,27 @@
-#include "lost/lua/bindings/LostEventEvent.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/event/Event.h"
+
+#include "lost/lua/bindings/LostEventEvent.h"
 
 using namespace luabind;
 using namespace lost::event;
 
-LOST_LUA_EXPORT_BEGIN(LostEventEvent)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("event")
-    [
-      class_<Event, boost::shared_ptr<Event> >("Event")
-       .def(constructor<std::string>()) 
-       .def_readwrite("type", &Event::type)
-    ]
-  ];
+  namespace lua
+  {
+    void LostEventEvent(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("event")
+        [
+          class_<Event, boost::shared_ptr<Event> >("Event")
+           .def(constructor<std::string>()) 
+           .def_readwrite("type", &Event::type)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

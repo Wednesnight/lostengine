@@ -7,7 +7,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
-
+#include "lost/event/Receive.h"
 #include "lost/application/iphone/LostApplicationHelpers.h"
 
 using namespace std;

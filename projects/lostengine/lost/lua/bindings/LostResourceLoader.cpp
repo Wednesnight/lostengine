@@ -1,5 +1,8 @@
-#include "lost/lua/bindings/LostResourceLoader.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
+
+#include "lost/lua/bindings/LostResourceLoader.h"
 
 using namespace luabind;
 using namespace lost::resource;
@@ -16,16 +19,21 @@ namespace lost
   }
 }
 
-LOST_LUA_EXPORT_BEGIN(LostResourceLoader)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("resource")
-    [
-      class_<Loader, boost::shared_ptr<Loader> >("Loader")
-        .def(constructor<>())
-        .def("load", &load)
-    ]
-  ];
+  namespace lua
+  {
+    void LostResourceLoader(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("resource")
+        [
+          class_<Loader, boost::shared_ptr<Loader> >("Loader")
+            .def(constructor<>())
+            .def("load", &load)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

@@ -1,21 +1,28 @@
-#include "lost/lua/bindings/LostLuaState.h"
+#include <boost/shared_ptr.hpp>
 #include "lost/lua/State.h"
 #include "lost/resource/File.h"
+
+#include "lost/lua/bindings/LostLuaState.h"
 
 using namespace luabind;
 using namespace lost::lua;
 
-LOST_LUA_EXPORT_BEGIN(LostLuaState)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("lua")
-    [
-      class_<State, boost::shared_ptr<State> >("State")
-      .def(constructor<>())
-     .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
-      .def_readwrite("callstackSize", &State::callstackSize)
-    ]
-  ];
+  namespace lua
+  {
+    void LostLuaState(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("lua")
+        [
+          class_<State, boost::shared_ptr<State> >("State")
+          .def(constructor<>())
+         .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
+          .def_readwrite("callstackSize", &State::callstackSize)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

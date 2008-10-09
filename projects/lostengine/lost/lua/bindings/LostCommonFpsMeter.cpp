@@ -1,22 +1,30 @@
-#include "lost/lua/bindings/LostCommonFpsMeter.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/common/FpsMeter.h"
+
+#include "lost/lua/bindings/LostCommonFpsMeter.h"
 
 using namespace luabind;
 using namespace lost::common;
 
-LOST_LUA_EXPORT_BEGIN(LostCommonFpsMeter)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("common")
-    [
-      class_<FpsMeter, boost::shared_ptr<FpsMeter> >("FpsMeter")
-      .def(constructor<boost::shared_ptr<lost::gl::Context> >()) 
-      .def("render", &FpsMeter::render)
-      .def_readwrite("width", &FpsMeter::width)
-      .def_readwrite("height", &FpsMeter::height)
-      .def_readwrite("alpha", &FpsMeter::alpha)      
-    ]
-  ];
+  namespace lua
+  {
+    void LostCommonFpsMeter(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("common")
+        [
+          class_<FpsMeter, boost::shared_ptr<FpsMeter> >("FpsMeter")
+          .def(constructor<boost::shared_ptr<lost::gl::Context> >()) 
+          .def("render", &FpsMeter::render)
+          .def_readwrite("width", &FpsMeter::width)
+          .def_readwrite("height", &FpsMeter::height)
+          .def_readwrite("alpha", &FpsMeter::alpha)      
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

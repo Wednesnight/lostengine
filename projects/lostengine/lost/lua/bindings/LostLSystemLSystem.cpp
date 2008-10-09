@@ -1,5 +1,8 @@
-#include "lost/lua/bindings/LostLSystemLSystem.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/lsystem/LSystem.h"
+
+#include "lost/lua/bindings/LostLSystemLSystem.h"
 
 using namespace luabind;
 using namespace lost::lsystem;
@@ -24,30 +27,35 @@ namespace lost
   }
 }
 
-LOST_LUA_EXPORT_BEGIN(LostLSystemLSystem)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("lsystem")
-    [
-      class_<LSystem, boost::shared_ptr<LSystem> >("LSystem")
-      .def(constructor<>())
-      .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::advance)
-      .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::advance)
-      .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::regress)
-      .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::regress)
-      .def("walk", (void(LSystem::*)(const boost::shared_ptr<lsystem::LSystemState>&, const lost::math::Matrix&, const boost::function<void (lost::math::Matrix&, LSystemResult&)>)) &LSystem::walk)
-	  ]
-  ];
+  namespace lua
+  {
+    void LostLSystemLSystem(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("lsystem")
+        [
+          class_<LSystem, boost::shared_ptr<LSystem> >("LSystem")
+          .def(constructor<>())
+          .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::advance)
+          .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::advance)
+          .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::regress)
+          .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::regress)
+          .def("walk", (void(LSystem::*)(const boost::shared_ptr<lsystem::LSystemState>&, const lost::math::Matrix&, const boost::function<void (lost::math::Matrix&, LSystemResult&)>)) &LSystem::walk)
+        ]
+      ];
 
-  module(state, "lost")
-  [
-    namespace_("lsystem")
-    [
-      class_<lsystem::LSystemState, boost::shared_ptr<lsystem::LSystemState> >("LSystemState")
-      .def("reset", &LSystemState::reset),
-      def("LSystemState", &createLSystemState)
-	  ]
-  ];
+      module(state, "lost")
+      [
+        namespace_("lsystem")
+        [
+          class_<lsystem::LSystemState, boost::shared_ptr<lsystem::LSystemState> >("LSystemState")
+          .def("reset", &LSystemState::reset),
+          def("LSystemState", &createLSystemState)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

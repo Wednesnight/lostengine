@@ -17,8 +17,10 @@ function lost.camera.CameraController:init(eventDispatcher)
 end
 
 function lost.camera.CameraController:initCallbacks()
-  self.dispatcher:addEventListenerMethod(lost.application.MouseEvent.MOUSE_MOVE, self, self.moveHandler)
-  self.dispatcher:addEventListenerMethod(lost.application.KeyEvent.KEY_DOWN, self, self.keyHandler)
+--  self.dispatcher:addEventListenerMethod(lost.application.MouseEvent.MOUSE_MOVE, self, self.moveHandler)
+--  self.dispatcher:addEventListenerMethod(lost.application.KeyEvent.KEY_DOWN, self, self.keyHandler)
+  self.dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, self, self.moveHandler)
+  self.dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, self, self.keyHandler)
 end
 
 function lost.camera.CameraController:moveHandler(event)

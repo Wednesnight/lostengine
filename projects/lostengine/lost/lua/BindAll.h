@@ -1,7 +1,7 @@
 #ifndef LOST_LUA_LUABINDINGS_H
 #define LOST_LUA_LUABINDINGS_H
 
-#include "lost/lua/State.h"
+#include "lost/forward/lost/lua/State.h"
 
 namespace lost
 {

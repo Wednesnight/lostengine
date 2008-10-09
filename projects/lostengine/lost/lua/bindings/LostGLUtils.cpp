@@ -1,21 +1,28 @@
-#include "lost/lua/bindings/LostGLUtils.h"
+#include "lost/lua/State.h"
 #include "lost/gl/Utils.h"
 #include "lost/math/Vec2.h"
+
+#include "lost/lua/bindings/LostGLUtils.h"
 
 using namespace luabind;
 using namespace lost::gl::utils;
 
-LOST_LUA_EXPORT_BEGIN(LostGLUtils)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("gl")
-    [
-      namespace_("utils")
+  namespace lua
+  {
+    void LostGLUtils(lost::lua::State& state)
+    {
+      module(state, "lost")
       [
-        def("set2DProjection", &set2DProjection)
-      ]
-    ]
-  ];
+        namespace_("gl")
+        [
+          namespace_("utils")
+          [
+            def("set2DProjection", &set2DProjection)
+          ]
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

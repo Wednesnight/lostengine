@@ -1,8 +1,10 @@
 #include "lost/lua/State.h"
+#include "lost/lua/ErrorHandler.h"
 #include <hashlibpp.h>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
@@ -22,8 +24,7 @@ namespace lost
       }
       
       // set our own error callback
-      int errorCallback(lua_State* state);
-      luabind::set_pcall_callback(errorCallback);
+      luabind::set_pcall_callback(lost::lua::errorHandler);
     }
     
     State::~State()

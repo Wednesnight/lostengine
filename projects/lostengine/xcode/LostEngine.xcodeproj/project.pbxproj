@@ -7,11 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E00028F0E9D7AFF00BD3455 /* Receive.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E00028E0E9D7AFF00BD3455 /* Receive.h */; };
+		3E0002900E9D7AFF00BD3455 /* Receive.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E00028E0E9D7AFF00BD3455 /* Receive.h */; };
+		3E0002910E9D7AFF00BD3455 /* Receive.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E00028E0E9D7AFF00BD3455 /* Receive.h */; };
 		3E03001C0E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
 		3E03001E0E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
 		3E0300200E791AE500DC26B8 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E03001A0E791AE500DC26B8 /* State.h */; };
 		3E04DFD00E537F4500BFF964 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E04DFCF0E537F4500BFF964 /* Camera.h */; };
 		3E04DFD10E537F4500BFF964 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E04DFCF0E537F4500BFF964 /* Camera.h */; };
+		3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
+		3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
+		3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
+		3E2060B70E9E08C20042BC53 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2060B60E9E08C20042BC53 /* State.h */; };
+		3E2060B80E9E08C20042BC53 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2060B60E9E08C20042BC53 /* State.h */; };
+		3E2060B90E9E08C20042BC53 /* State.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2060B60E9E08C20042BC53 /* State.h */; };
+		3E2061A90E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */; };
+		3E2061AA0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */; };
+		3E2061AB0E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */; };
+		3E2061AC0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */; };
+		3E2061AD0E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */; };
+		3E2061AE0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */; };
+		3E2062380E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
+		3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
+		3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
+		3E2062560E9E1C3B0042BC53 /* ErrorHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2062550E9E1C3B0042BC53 /* ErrorHandler.h */; };
+		3E2062570E9E1C3B0042BC53 /* ErrorHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2062550E9E1C3B0042BC53 /* ErrorHandler.h */; };
+		3E2062580E9E1C3B0042BC53 /* ErrorHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2062550E9E1C3B0042BC53 /* ErrorHandler.h */; };
 		3E29501B0E540A5D00E83965 /* lgl_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950170E540A5D00E83965 /* lgl_gl.h */; };
 		3E29501C0E540A5D00E83965 /* lgl_gles.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950180E540A5D00E83965 /* lgl_gles.h */; };
 		3E29501D0E540A5D00E83965 /* lgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2950190E540A5D00E83965 /* lgl.h */; };
@@ -22,6 +43,18 @@
 		3E2950220E540A5D00E83965 /* lglu.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E29501A0E540A5D00E83965 /* lglu.h */; };
 		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
+		3E3B3D870E9D5E2800DD2D4E /* Camera2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3D850E9D5E2800DD2D4E /* Camera2D.h */; };
+		3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */; };
+		3E3B3D890E9D5E2800DD2D4E /* Camera2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3D850E9D5E2800DD2D4E /* Camera2D.h */; };
+		3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */; };
+		3E3B3D8B0E9D5E2800DD2D4E /* Camera2D.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3D850E9D5E2800DD2D4E /* Camera2D.h */; };
+		3E3B3D8C0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */; };
+		3E3B3E240E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3E230E9D6BD900DD2D4E /* shared_ptr.hpp */; };
+		3E3B3E250E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3E230E9D6BD900DD2D4E /* shared_ptr.hpp */; };
+		3E3B3E260E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B3E230E9D6BD900DD2D4E /* shared_ptr.hpp */; };
+		3E3B3E410E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */; };
+		3E3B3E420E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */; };
+		3E3B3E430E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */; };
 		3E650FF10E7F914D00DE5AFE /* LostGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */; };
 		3E650FF20E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
 		3E650FF30E7F914D00DE5AFE /* LostGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */; };
@@ -330,19 +363,16 @@
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EA7BE0F80E6F38760017B031 /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE0F50E6F38760017B031 /* BindAll.cpp */; };
 		EA7BE0F90E6F38760017B031 /* BindAll.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F60E6F38760017B031 /* BindAll.h */; };
-		EA7BE0FA0E6F38760017B031 /* BindingHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F70E6F38760017B031 /* BindingHelpers.h */; };
 		EA7BE0FB0E6F38760017B031 /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE0F50E6F38760017B031 /* BindAll.cpp */; };
 		EA7BE0FC0E6F38760017B031 /* BindAll.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F60E6F38760017B031 /* BindAll.h */; };
-		EA7BE0FD0E6F38760017B031 /* BindingHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F70E6F38760017B031 /* BindingHelpers.h */; };
 		EA7BE0FE0E6F38760017B031 /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE0F50E6F38760017B031 /* BindAll.cpp */; };
 		EA7BE0FF0E6F38760017B031 /* BindAll.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F60E6F38760017B031 /* BindAll.h */; };
-		EA7BE1000E6F38760017B031 /* BindingHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F70E6F38760017B031 /* BindingHelpers.h */; };
 		EA7BE1030E6F38890017B031 /* EventCast.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE1010E6F38890017B031 /* EventCast.h */; };
-		EA7BE1040E6F38890017B031 /* ErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandling.cpp */; };
+		EA7BE1040E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
 		EA7BE1050E6F38890017B031 /* EventCast.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE1010E6F38890017B031 /* EventCast.h */; };
-		EA7BE1060E6F38890017B031 /* ErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandling.cpp */; };
+		EA7BE1060E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
 		EA7BE1070E6F38890017B031 /* EventCast.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE1010E6F38890017B031 /* EventCast.h */; };
-		EA7BE1080E6F38890017B031 /* ErrorHandling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandling.cpp */; };
+		EA7BE1080E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
 		EA7BE12A0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
 		EA7BE12B0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */; };
 		EA7BE12C0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */; };
@@ -845,14 +875,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E00028E0E9D7AFF00BD3455 /* Receive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receive.h; sourceTree = "<group>"; };
 		3E03001A0E791AE500DC26B8 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		3E04DFCF0E537F4500BFF964 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = camera/Camera.h; sourceTree = "<group>"; };
+		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
+		3E2060B60E9E08C20042BC53 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = forward/lost/lua/State.h; sourceTree = "<group>"; };
+		3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationAccelerometerEvent.h; path = bindings/LostApplicationAccelerometerEvent.h; sourceTree = "<group>"; };
+		3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostEventEventDispatcher.h; path = bindings/LostEventEventDispatcher.h; sourceTree = "<group>"; };
+		3E2062370E9E1AFD0042BC53 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		3E2062550E9E1C3B0042BC53 /* ErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorHandler.h; sourceTree = "<group>"; };
 		3E251FEB0E5EC1C1002CDC21 /* iphone.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iphone.lua; path = camera/controller/iphone.lua; sourceTree = "<group>"; };
 		3E2950170E540A5D00E83965 /* lgl_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl_gl.h; path = lgl/lgl_gl.h; sourceTree = "<group>"; };
 		3E2950180E540A5D00E83965 /* lgl_gles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl_gles.h; path = lgl/lgl_gles.h; sourceTree = "<group>"; };
 		3E2950190E540A5D00E83965 /* lgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lgl.h; path = lgl/lgl.h; sourceTree = "<group>"; };
 		3E29501A0E540A5D00E83965 /* lglu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lglu.h; path = lgl/lglu.h; sourceTree = "<group>"; };
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
+		3E3B3D850E9D5E2800DD2D4E /* Camera2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera2D.h; path = camera/Camera2D.h; sourceTree = "<group>"; };
+		3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera2D.cpp; path = camera/Camera2D.cpp; sourceTree = "<group>"; };
+		3E3B3E230E9D6BD900DD2D4E /* shared_ptr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = shared_ptr.hpp; path = forward/boost/shared_ptr.hpp; sourceTree = "<group>"; };
+		3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventDispatcher.cpp; sourceTree = "<group>"; };
 		3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLContext.h; path = bindings/LostGLContext.h; sourceTree = "<group>"; };
 		3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLContext.cpp; path = bindings/LostGLContext.cpp; sourceTree = "<group>"; };
 		3E6510000E7F92C700DE5AFE /* LostGLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLState.h; path = bindings/LostGLState.h; sourceTree = "<group>"; };
@@ -956,9 +997,8 @@
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EA7BE0F50E6F38760017B031 /* BindAll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindAll.cpp; sourceTree = "<group>"; };
 		EA7BE0F60E6F38760017B031 /* BindAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindAll.h; sourceTree = "<group>"; };
-		EA7BE0F70E6F38760017B031 /* BindingHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingHelpers.h; sourceTree = "<group>"; };
 		EA7BE1010E6F38890017B031 /* EventCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCast.h; sourceTree = "<group>"; };
-		EA7BE1020E6F38890017B031 /* ErrorHandling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ErrorHandling.cpp; sourceTree = "<group>"; };
+		EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ErrorHandler.cpp; sourceTree = "<group>"; };
 		EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationTimer.cpp; path = bindings/LostApplicationTimer.cpp; sourceTree = "<group>"; };
 		EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationApplicationEvent.cpp; path = bindings/LostApplicationApplicationEvent.cpp; sourceTree = "<group>"; };
 		EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationTouchEvent.cpp; path = bindings/LostApplicationTouchEvent.cpp; sourceTree = "<group>"; };
@@ -1131,6 +1171,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3E2060B20E9E08990042BC53 /* lost */ = {
+			isa = PBXGroup;
+			children = (
+				3E2060B30E9E089F0042BC53 /* lua */,
+			);
+			name = lost;
+			sourceTree = "<group>";
+		};
+		3E2060B30E9E089F0042BC53 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				3E2060B60E9E08C20042BC53 /* State.h */,
+			);
+			name = lua;
+			sourceTree = "<group>";
+		};
 		3E251FEA0E5EC1B8002CDC21 /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,6 +1207,23 @@
 			name = lgl;
 			sourceTree = "<group>";
 		};
+		3E3B3E210E9D6B6300DD2D4E /* forward */ = {
+			isa = PBXGroup;
+			children = (
+				3E2060B20E9E08990042BC53 /* lost */,
+				3E3B3E220E9D6B8900DD2D4E /* boost */,
+			);
+			name = forward;
+			sourceTree = "<group>";
+		};
+		3E3B3E220E9D6B8900DD2D4E /* boost */ = {
+			isa = PBXGroup;
+			children = (
+				3E3B3E230E9D6BD900DD2D4E /* shared_ptr.hpp */,
+			);
+			name = boost;
+			sourceTree = "<group>";
+		};
 		3EB93D300E37FE0D00FF10C9 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1168,6 +1241,8 @@
 				3E251FEA0E5EC1B8002CDC21 /* controller */,
 				3E04DFCF0E537F4500BFF964 /* Camera.h */,
 				3E376F4A0E543F6F0050A5DF /* Camera.cpp */,
+				3E3B3D850E9D5E2800DD2D4E /* Camera2D.h */,
+				3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -1313,6 +1388,7 @@
 				EA3B946C0E04639D00B6423B /* common */,
 				EA3B948E0E04639D00B6423B /* event */,
 				EA3B94940E04639D00B6423B /* font */,
+				3E3B3E210E9D6B6300DD2D4E /* forward */,
 				EA3B949C0E04639D00B6423B /* gl */,
 				3E2950140E540A2F00E83965 /* lgl */,
 				EA3B94E10E04639D00B6423B /* lsystem */,
@@ -1333,6 +1409,7 @@
 				EA67106E0E3E539200B961EC /* glfw */,
 				EA3B94660E04639D00B6423B /* Application.h */,
 				EA3B94680E04639D00B6423B /* Timer.h */,
+				3E2062370E9E1AFD0042BC53 /* Timer.cpp */,
 				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
 				EAAF977D0E15C30400B28BF6 /* MouseEvent.h */,
 				3EE57C9B0E82572E00066396 /* MouseButton.h */,
@@ -1378,6 +1455,8 @@
 			children = (
 				EA3B948F0E04639D00B6423B /* Event.h */,
 				EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */,
+				3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */,
+				3E00028E0E9D7AFF00BD3455 /* Receive.h */,
 			);
 			path = event;
 			sourceTree = "<group>";
@@ -1455,9 +1534,10 @@
 				EA7BE0F40E6F38470017B031 /* bindings */,
 				EA7BE0F50E6F38760017B031 /* BindAll.cpp */,
 				EA7BE0F60E6F38760017B031 /* BindAll.h */,
-				EA7BE0F70E6F38760017B031 /* BindingHelpers.h */,
+				3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */,
 				EA7BE1010E6F38890017B031 /* EventCast.h */,
-				EA7BE1020E6F38890017B031 /* ErrorHandling.cpp */,
+				3E2062550E9E1C3B0042BC53 /* ErrorHandler.h */,
+				EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */,
 				EA3B94E40E04639D00B6423B /* lua.h */,
 				EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */,
 				EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */,
@@ -1564,74 +1644,76 @@
 		EA7BE0F40E6F38470017B031 /* bindings */ = {
 			isa = PBXGroup;
 			children = (
-				EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */,
 				EA7BE1B60E6F3C9D0017B031 /* LostApplicationTimer.h */,
-				EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */,
+				EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */,
 				EA7BE1BD0E6F3DEE0017B031 /* LostApplicationApplicationEvent.h */,
-				EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */,
+				EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */,
 				EA7BE1C50E6F40050017B031 /* LostApplicationTouchEvent.h */,
-				EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */,
+				EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */,
 				EA7BE1CE0E6F40730017B031 /* LostEventEvent.h */,
-				EA7BE10D0E6F38A10017B031 /* LostCommonLog.cpp */,
+				EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */,
 				EA7BE1D50E6F40B60017B031 /* LostCommonLog.h */,
-				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
+				EA7BE10D0E6F38A10017B031 /* LostCommonLog.cpp */,
 				EA7BE1DC0E6F40F80017B031 /* LostApplicationKeyEvent.h */,
-				EA7BE10F0E6F38A10017B031 /* LostGLGL.cpp */,
+				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
 				EA7BE1E70E6F41700017B031 /* LostGLGL.h */,
-				EA7BE1100E6F38A10017B031 /* LostGLUtils.cpp */,
+				EA7BE10F0E6F38A10017B031 /* LostGLGL.cpp */,
 				EA7BE1EE0E6F41C00017B031 /* LostGLUtils.h */,
-				EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */,
+				EA7BE1100E6F38A10017B031 /* LostGLUtils.cpp */,
 				EA7BE1F50E6F42020017B031 /* LostCommonFpsMeter.h */,
-				EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */,
+				EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */,
 				EA7BE1FD0E6F424A0017B031 /* LostApplicationResizeEvent.h */,
-				EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */,
+				EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */,
 				EA7BE2060E6F42A20017B031 /* LostCommonColor.h */,
-				EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */,
+				EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */,
 				EA7BE20E0E6F43530017B031 /* LostApplicationTimerEvent.h */,
-				EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */,
+				EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */,
 				EA7BE2160E6F43890017B031 /* LostMathVec2.h */,
-				EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */,
+				EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */,
 				EA7BE2300E6F44360017B031 /* LostMathRect.h */,
-				EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */,
+				EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */,
 				EA7BE2380E6F44750017B031 /* LostModelObjParser.h */,
-				EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */,
+				EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */,
 				EA7BE2400E6F44B20017B031 /* LostModelObjMaterial.h */,
-				EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */,
+				EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */,
 				EA7BE2480E6F45050017B031 /* LostModelMesh.h */,
+				EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */,
 				3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */,
 				3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */,
 				3E6510000E7F92C700DE5AFE /* LostGLState.h */,
 				3E6510010E7F92C700DE5AFE /* LostGLState.cpp */,
-				EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */,
 				EA7BE2500E6F45380017B031 /* LostGLDraw.h */,
-				EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */,
+				EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */,
 				EA7BE2280E6F440D0017B031 /* LostMathVec4.h */,
-				EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */,
+				EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */,
 				EA7BE21E0E6F43D40017B031 /* LostMathVec3.h */,
-				EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */,
+				EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */,
 				EA7BE2590E6F45870017B031 /* LostCameraCamera.h */,
-				EA7BE11E0E6F38A10017B031 /* LostApplicationApplication.cpp */,
+				EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */,
 				EA7BE2680E6F45FD0017B031 /* LostApplicationApplication.h */,
-				EA7BE11F0E6F38A10017B031 /* LostResourceLoader.cpp */,
+				EA7BE11E0E6F38A10017B031 /* LostApplicationApplication.cpp */,
 				EA7BE26F0E6F463B0017B031 /* LostResourceLoader.h */,
-				EA7BE1200E6F38A10017B031 /* LostResourceFile.cpp */,
+				EA7BE11F0E6F38A10017B031 /* LostResourceLoader.cpp */,
 				EA7BE2790E6F468C0017B031 /* LostResourceFile.h */,
-				EA7BE1210E6F38A10017B031 /* LostModelObjRenderer.cpp */,
+				EA7BE1200E6F38A10017B031 /* LostResourceFile.cpp */,
 				EA7BE2810E6F46C70017B031 /* LostModelObjRenderer.h */,
+				EA7BE1210E6F38A10017B031 /* LostModelObjRenderer.cpp */,
+				3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */,
 				EA7BE1220E6F38A10017B031 /* LostEventEventDispatcher.cpp */,
-				EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */,
 				EA7BE28C0E6F473A0017B031 /* LostApplicationMouseEvent.h */,
-				EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */,
+				EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */,
 				EA7BE2940E6F47920017B031 /* LostLuaState.h */,
-				EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */,
+				EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */,
 				EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */,
+				EA7BE1250E6F38A10017B031 /* LostLSystemLSystem.cpp */,
+				3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */,
 				EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */,
-				EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */,
 				EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */,
-				EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */,
+				EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */,
 				EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */,
-				EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */,
+				EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */,
 				EA0907210E6F4F7F00852256 /* LostPlatformPlatform.h */,
+				EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */,
 				3EBDF5C40E8386D000F9E989 /* LostModelLSystemGenerator.h */,
 				3EBDF5C50E8386D000F9E989 /* LostModelLSystemGenerator.cpp */,
 				3EBDF5CC0E8386E200F9E989 /* LostModelLSystemRenderer.h */,
@@ -1726,7 +1808,6 @@
 				3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */,
 				EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0FF0E6F38760017B031 /* BindAll.h in Headers */,
-				EA7BE1000E6F38760017B031 /* BindingHelpers.h in Headers */,
 				EA7BE1070E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B90E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
 				EA7BE1C00E6F3DEE0017B031 /* LostApplicationApplicationEvent.h in Headers */,
@@ -1767,6 +1848,13 @@
 				3EE57C9C0E82572E00066396 /* MouseButton.h in Headers */,
 				3EBDF5C80E8386D000F9E989 /* LostModelLSystemGenerator.h in Headers */,
 				3EBDF5D00E8386E200F9E989 /* LostModelLSystemRenderer.h in Headers */,
+				3E3B3D8B0E9D5E2800DD2D4E /* Camera2D.h in Headers */,
+				3E3B3E260E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */,
+				3E0002910E9D7AFF00BD3455 /* Receive.h in Headers */,
+				3E2060B90E9E08C20042BC53 /* State.h in Headers */,
+				3E2061AD0E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */,
+				3E2061AE0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */,
+				3E2062580E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1850,7 +1938,6 @@
 				3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */,
 				EAB83A070E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0F90E6F38760017B031 /* BindAll.h in Headers */,
-				EA7BE0FA0E6F38760017B031 /* BindingHelpers.h in Headers */,
 				EA7BE1030E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B70E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
 				EA7BE1BE0E6F3DEE0017B031 /* LostApplicationApplicationEvent.h in Headers */,
@@ -1891,6 +1978,13 @@
 				3EE57C9E0E82572E00066396 /* MouseButton.h in Headers */,
 				3EBDF5CA0E8386D000F9E989 /* LostModelLSystemGenerator.h in Headers */,
 				3EBDF5D20E8386E200F9E989 /* LostModelLSystemRenderer.h in Headers */,
+				3E3B3D890E9D5E2800DD2D4E /* Camera2D.h in Headers */,
+				3E3B3E250E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */,
+				3E0002900E9D7AFF00BD3455 /* Receive.h in Headers */,
+				3E2060B70E9E08C20042BC53 /* State.h in Headers */,
+				3E2061A90E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */,
+				3E2061AA0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */,
+				3E2062560E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1977,7 +2071,6 @@
 				3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */,
 				EAB83A090E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0FC0E6F38760017B031 /* BindAll.h in Headers */,
-				EA7BE0FD0E6F38760017B031 /* BindingHelpers.h in Headers */,
 				EA7BE1050E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B80E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
 				EA7BE1BF0E6F3DEE0017B031 /* LostApplicationApplicationEvent.h in Headers */,
@@ -2018,6 +2111,13 @@
 				3EE57C9D0E82572E00066396 /* MouseButton.h in Headers */,
 				3EBDF5C60E8386D000F9E989 /* LostModelLSystemGenerator.h in Headers */,
 				3EBDF5CE0E8386E200F9E989 /* LostModelLSystemRenderer.h in Headers */,
+				3E3B3D870E9D5E2800DD2D4E /* Camera2D.h in Headers */,
+				3E3B3E240E9D6BD900DD2D4E /* shared_ptr.hpp in Headers */,
+				3E00028F0E9D7AFF00BD3455 /* Receive.h in Headers */,
+				3E2060B80E9E08C20042BC53 /* State.h in Headers */,
+				3E2061AB0E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h in Headers */,
+				3E2061AC0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */,
+				3E2062570E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2303,7 +2403,7 @@
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
 				EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0FE0E6F38760017B031 /* BindAll.cpp in Sources */,
-				EA7BE1080E6F38890017B031 /* ErrorHandling.cpp in Sources */,
+				EA7BE1080E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE16C0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE16D0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE16E0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
@@ -2347,6 +2447,10 @@
 				EA9136400E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AD0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */,
+				3E3B3D8C0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
+				3E3B3E430E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
+				3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
+				3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2374,7 +2478,7 @@
 				EA54FA720E676E2200605409 /* Glyph.cpp in Sources */,
 				EAB83A060E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0F80E6F38760017B031 /* BindAll.cpp in Sources */,
-				EA7BE1040E6F38890017B031 /* ErrorHandling.cpp in Sources */,
+				EA7BE1040E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE12A0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE12B0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE12C0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
@@ -2418,6 +2522,10 @@
 				EA91363E0E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AB0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */,
+				3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
+				3E3B3E420E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
+				3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
+				3E2062380E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2444,7 +2552,7 @@
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
 				EAB83A080E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0FB0E6F38760017B031 /* BindAll.cpp in Sources */,
-				EA7BE1060E6F38890017B031 /* ErrorHandling.cpp in Sources */,
+				EA7BE1060E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE14B0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE14C0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE14D0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
@@ -2488,6 +2596,10 @@
 				EA91363F0E994F18006884D7 /* Texture.cpp in Sources */,
 				EA9136AC0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */,
+				3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
+				3E3B3E410E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
+				3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
+				3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

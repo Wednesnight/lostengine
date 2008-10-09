@@ -8,6 +8,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
+#include "lost/event/Receive.h"
 
 using namespace std;
 using namespace boost;

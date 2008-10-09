@@ -1,29 +1,37 @@
-#include "lost/lua/bindings/LostGLState.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/gl/State.h"
+
+#include "lost/lua/bindings/LostGLState.h"
 
 using namespace luabind;
 using namespace lost::gl;
 
-LOST_LUA_EXPORT_BEGIN(LostGLState)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("gl")
-    [
-      class_<lost::gl::State, boost::shared_ptr<lost::gl::State> >("State")
-      .def(constructor<>())
+  namespace lua
+  {
+    void LostGLState(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<lost::gl::State, boost::shared_ptr<lost::gl::State> >("State")
+          .def(constructor<>())
 
-      // server-side attributes
-      .def_readwrite("alphaTest", &lost::gl::State::alphaTest)
-      .def_readwrite("depthTest", &lost::gl::State::depthTest)
-      .def_readwrite("texture2D", &lost::gl::State::texture2D)
+          // server-side attributes
+          .def_readwrite("alphaTest", &lost::gl::State::alphaTest)
+          .def_readwrite("depthTest", &lost::gl::State::depthTest)
+          .def_readwrite("texture2D", &lost::gl::State::texture2D)
 
-      .def_readwrite("clearColor", &lost::gl::State::clearColor)
-       
-      // client-side attributes
-      .def_readwrite("normalArray", &lost::gl::State::normalArray)
-      .def_readwrite("vertexArray", &lost::gl::State::vertexArray)
-    ]
-  ];
+          .def_readwrite("clearColor", &lost::gl::State::clearColor)
+           
+          // client-side attributes
+          .def_readwrite("normalArray", &lost::gl::State::normalArray)
+          .def_readwrite("vertexArray", &lost::gl::State::vertexArray)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

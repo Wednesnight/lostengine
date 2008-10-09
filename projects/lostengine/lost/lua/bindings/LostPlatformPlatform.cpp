@@ -1,20 +1,27 @@
-#include "lost/lua/bindings/LostPlatformPlatform.h"
+#include "lost/lua/State.h"
 #include "lost/platform/Platform.h"
+
+#include "lost/lua/bindings/LostPlatformPlatform.h"
 
 using namespace luabind;
 using namespace lost::platform;
 
-LOST_LUA_EXPORT_BEGIN(LostPlatformPlatform)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("platform")
-    [
-      def("isWindows", &isWindows),
-      def("isMac", &isMac),
-      def("isLinux", &isLinux),
-      def("isIPhone", &isIPhone)
-    ]
-  ];
+  namespace lua
+  {
+    void LostPlatformPlatform(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("platform")
+        [
+          def("isWindows", &isWindows),
+          def("isMac", &isMac),
+          def("isLinux", &isLinux),
+          def("isIPhone", &isIPhone)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

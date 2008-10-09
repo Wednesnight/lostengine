@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/application/glfw/TimerManager.h"
 #include "lost/common/Logger.h"
 

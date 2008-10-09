@@ -1,7 +1,6 @@
 #ifndef LOST_APPLICATION_CONFIG_H
 #define LOST_APPLICATION_CONFIG_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 

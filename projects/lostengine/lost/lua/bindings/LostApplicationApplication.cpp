@@ -1,24 +1,31 @@
-#include "lost/lua/bindings/LostApplicationApplication.h"
+#include "lost/lua/State.h"
 #include "lost/application/Application.h"
+
+#include "lost/lua/bindings/LostApplicationApplication.h"
 
 using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
 
-LOST_LUA_EXPORT_BEGIN(LostApplicationApplication)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("application")
-    [
-      class_<Application, EventDispatcher>("Application")
-       .def(constructor<>())
-       .def("quit", &Application::quit)
-       .def("swapBuffers", &Application::swapBuffers)
-       .def_readonly("loader", &Application::loader)
-       .def_readonly("displayAttributes", &Application::displayAttributes)
-       .def_readonly("context", &Application::context)
-    ]
-  ];
+  namespace lua
+  {
+    void LostApplicationApplication(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("application")
+        [
+          class_<Application, EventDispatcher>("Application")
+           .def(constructor<>())
+           .def("quit", &Application::quit)
+           .def("swapBuffers", &Application::swapBuffers)
+           .def_readonly("loader", &Application::loader)
+           .def_readonly("displayAttributes", &Application::displayAttributes)
+           .def_readonly("context", &Application::context)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

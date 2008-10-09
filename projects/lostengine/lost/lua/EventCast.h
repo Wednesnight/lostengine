@@ -1,7 +1,6 @@
 #ifndef LOST_LUA_LUAEVENTCAST_H
 #define LOST_LUA_LUAEVENTCAST_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/event/Event.h"
 
 namespace lost

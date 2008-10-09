@@ -5,20 +5,20 @@
 
 namespace lost
 {
-namespace event
-{
-  typedef std::string Type;
-
-  struct Event
+  namespace event
   {
-  
-    Type type;
+    typedef std::string Type;
 
-    Event(const Type& inType) : type(inType) {}
-    virtual ~Event() {}
-  };
+    struct Event
+    {
+    
+      Type type;
 
-}
+      Event(const Type& inType) : type(inType) {}
+      virtual ~Event() {}
+    };
+
+  }
 }
 
 #endif

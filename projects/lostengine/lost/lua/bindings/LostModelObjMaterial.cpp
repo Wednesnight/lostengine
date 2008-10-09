@@ -1,21 +1,29 @@
-#include "lost/lua/bindings/LostModelObjMaterial.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/model/obj/Material.h"
+
+#include "lost/lua/bindings/LostModelObjMaterial.h"
 
 using namespace luabind;
 using namespace lost::model::obj;
 
-LOST_LUA_EXPORT_BEGIN(LostModelObjMaterial)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("model")
-    [
-      namespace_("obj")
+  namespace lua
+  {
+    void LostModelObjMaterial(lost::lua::State& state)
+    {
+      module(state, "lost")
       [
-        class_<Material, boost::shared_ptr<Material> >("Material")
-        .def(constructor<>()) 
-      ]
-    ]
-  ];
+        namespace_("model")
+        [
+          namespace_("obj")
+          [
+            class_<Material, boost::shared_ptr<Material> >("Material")
+            .def(constructor<>()) 
+          ]
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

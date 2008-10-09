@@ -1,5 +1,7 @@
-#include "lost/lua/bindings/LostCommonLog.h"
+#include "lost/lua/State.h"
 #include "lost/common/Logger.h"
+
+#include "lost/lua/bindings/LostCommonLog.h"
 
 using namespace luabind;
 using namespace lost::common;
@@ -44,14 +46,19 @@ namespace lost
   }
 }
 
-LOST_LUA_EXPORT_BEGIN(LostCommonLog)
+namespace lost
 {
-  module(state, "log")
-  [
-    def("debug", &debug),
-    def("info", &info),
-    def("warn", &warn),
-    def("error", &error)
-  ];
+  namespace lua
+  {
+    void LostCommonLog(lost::lua::State& state)
+    {
+      module(state, "log")
+      [
+        def("debug", &debug),
+        def("info", &info),
+        def("warn", &warn),
+        def("error", &error)
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

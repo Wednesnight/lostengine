@@ -1,20 +1,28 @@
-#include "lost/lua/bindings/LostBitmapBitmap.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/lua/State.h"
 #include "lost/bitmap/Bitmap.h"
+
+#include "lost/lua/bindings/LostBitmapBitmap.h"
 
 using namespace luabind;
 using namespace lost::bitmap;
 
-LOST_LUA_EXPORT_BEGIN(LostBitmapBitmap)
+namespace lost
 {
-  module(state, "lost")
-  [
-    namespace_("bitmap")
-    [
-      class_<Bitmap, boost::shared_ptr<Bitmap> >("Bitmap")
-        .def(constructor<>())    
-         .def_readwrite("width",     &Bitmap::width)
-         .def_readwrite("height",     &Bitmap::height)
-    ]
-  ];
+  namespace lua
+  {
+    void LostBitmapBitmap(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+        namespace_("bitmap")
+        [
+          class_<Bitmap, boost::shared_ptr<Bitmap> >("Bitmap")
+            .def(constructor<>())    
+             .def_readwrite("width",     &Bitmap::width)
+             .def_readwrite("height",     &Bitmap::height)
+        ]
+      ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END

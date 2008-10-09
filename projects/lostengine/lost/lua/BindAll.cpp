@@ -1,3 +1,4 @@
+#include "lost/lua/State.h"
 #include "lost/lua/BindAll.h"
 #include "lost/lua/bindings/LostApplicationTimer.h"
 #include "lost/lua/bindings/LostApplicationApplicationEvent.h"

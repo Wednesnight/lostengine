@@ -2,6 +2,8 @@
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include <boost/bind.hpp>
+#include "lost/event/Receive.h"
+
 using namespace std;
 using namespace boost;
 using namespace lost;
