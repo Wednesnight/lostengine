@@ -48,4 +48,6 @@ function lost.application.Application:init(event)
   self.config.lightAmbient   = lost.math.Vec4(0.1, 0.1, 0.1, 1.0)
   self.config.lightDiffuse   = lost.math.Vec4(0.8, 0.8, 0.8, 1.0)
   self.config.lightSpecular  = lost.math.Vec4(0.5, 0.5, 0.5, 1.0)
+
+  self.config.fpsMeter = lost.common.FpsMeter(self.context)
 end

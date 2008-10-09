@@ -21,6 +21,7 @@
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/event/Receive.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/File.h"
@@ -52,7 +53,7 @@ struct Object0r
   Timer                     renderTimer;
   boost::signal<void(void)> quit;
   shared_ptr<Camera>        camera;
-  FpsMeter                  fpsMeter;
+  shared_ptr<FpsMeter>      fpsMeter;
   
   shared_ptr<Renderer>      modelRenderer;
 
@@ -142,6 +143,7 @@ struct Object0r
 
     modelRenderer = appInstance->config["modelRenderer"].as<shared_ptr<Renderer> >();
     camera        = appInstance->config["camera"].as<shared_ptr<Camera> >();
+    fpsMeter      = appInstance->config["fpsMeter"].as<shared_ptr<FpsMeter> >();
     
     vecAmbient  = appInstance->config["lightAmbient"].as<Vec4>(Vec4());
     vecDiffuse  = appInstance->config["lightDiffuse"].as<Vec4>(Vec4());
@@ -196,6 +198,9 @@ struct Object0r
     newState->depthTest = true;
     newState->texture2D = false;
     newState->vertexArray = true;
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
     appInstance->context->pushState(newState);
 
     appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -291,7 +296,7 @@ struct Object0r
     set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
+    fpsMeter->render(appInstance->displayAttributes.width - fpsMeter->width, 0, event->passedSec);
     
     appInstance->context->popState();
 
