@@ -11,8 +11,7 @@ function lost.application.Application:init(event)
   log.debug("init")
 
   -- Initialize camera
-  self.config.cameraController = lost.camera.CameraController()
-  self.config.cameraController:init()
+  self.config.cameraController = lost.camera.CameraController(self)
   self.config.camera = self.config.cameraController.camera
   self.config.camera:position(lost.math.Vec3(0,3,60));
 

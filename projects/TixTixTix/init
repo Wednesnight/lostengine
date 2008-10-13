@@ -1,5 +1,5 @@
 require("Application")
-require("game")
+require("TixTixTix")
 
 function lost.application.Application:configure(event)
   log.debug("lost.application.Application:configure()")
@@ -26,24 +26,11 @@ end
 function lost.application.Application:init(event)
   log.debug("lost.application.Application:init()")
 
-  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
-
-  if lost.platform.isIPhone() then
-    self:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, touchHandler)
-    self:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, touchHandler)
-  else
-    self:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-    self:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
-    self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, clickHandler)
-    self:addEventListener(lost.application.MouseEvent.MOUSE_UP, clickHandler)
-  end
-  
   controls = {}
   controls.fpsMeter = lost.common.FpsMeter(lost.application.Application.context)
   controls.fpsMeter.alpha = 0.25
 
   self.config.FieldSize = lost.math.Vec2((self.config.displayAttributes.width / 3), (self.config.displayAttributes.height / 3))
 
-  globals.timer = lost.application.Timer("luarender", 0.02)
-  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+  game = TixTixTix(self)
 end

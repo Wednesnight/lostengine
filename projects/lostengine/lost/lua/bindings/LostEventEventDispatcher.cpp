@@ -24,33 +24,11 @@ namespace lost
       }
     };
 
-    struct LuaHandlerMethod
-    {
-      luabind::object obj;
-      luabind::object method;
-      
-      LuaHandlerMethod(luabind::object inObj, luabind::object inMethod)
-      : obj(inObj), method(inMethod) {}
-      
-      void operator()(EventPtr event)
-      {
-        luabind::call_function<void>(method, obj, event);
-      }
-    };
-      
     void addEventListener(object dispatcher, const std::string& type, object func)
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
       EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
       disp->addEventListener(type, LuaHandlerFunction(func));
-    }
-
-    void addEventListener(object dispatcher, const std::string& type, object obj, object method)
-    {
-      if(luabind::type(obj) == LUA_TNIL) { throw std::runtime_error("can't register lua callback method with NIL object"); }
-      if(luabind::type(method) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback method"); }
-      EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
-      disp->addEventListener(type, LuaHandlerMethod(obj, method));
     }
   }
 }
@@ -67,8 +45,7 @@ namespace lost
         [
           class_<EventDispatcher>("EventDispatcher")
             .def(constructor<>())
-           .def("addEventListener", (void(*)(object, const std::string&, object))&addEventListener)
-           .def("addEventListener", (void(*)(object, const std::string&, object, object))&addEventListener)
+            .def("addEventListener", (void(*)(object, const std::string&, object))&addEventListener)
         ]
       ];
     }  

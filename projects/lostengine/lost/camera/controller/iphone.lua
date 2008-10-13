@@ -1,24 +1,27 @@
 lost.camera.CameraController = 
 {
   camera  = lost.camera.Camera(),
+  dispatcher = nil,
   lastTap = 0.0,
   lastPos = lost.math.Vec2()
 }
 
-function lost.camera.CameraController:init()
-  self.camera:position(lost.math.Vec3(0,3,30));
-  self.camera:target(lost.math.Vec3(0,3,0));
-  self.camera:stickToTarget(true);
+function lost.camera.CameraController:init(eventDispatcher)
+  self.camera:position(lost.math.Vec3(0,3,30))
+  self.camera:target(lost.math.Vec3(0,3,0))
+  self.camera:stickToTarget(true)
+
+  self.dispatcher = eventDispatcher
 
   self:initCallbacks()
 end
 
 function lost.camera.CameraController:initCallbacks()
-  globals.app:addEventListener(lost.application.AccelerometerEvent.DEVICE_ACCELERATED, self, self.accelerate)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, self, self.touchHandler)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, self, self.touchHandler)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, self, self.touchHandler)
-  globals.app:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, self, self.touchHandler)
+  self.dispatcher:addEventListener(lost.application.AccelerometerEvent.DEVICE_ACCELERATED, function(event) self.accelerate(self, event) end)
+  self.dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self.touchHandler(self, event) end)
+  self.dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self.touchHandler(self, event) end)
+  self.dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self.touchHandler(self, event) end)
+  self.dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self.touchHandler(self, event) end)
 end
 
 function lost.camera.CameraController:accelerate(event)
@@ -58,8 +61,9 @@ end
 
 lost.camera.CameraController_mt = { __index = lost.camera.CameraController }
 
-function lost.camera.CameraController()
+function lost.camera.CameraController(eventDispatcher)
   local result = {}
   setmetatable(result, lost.camera.CameraController_mt)
+  result:init(eventDispatcher)
   return result
 end
