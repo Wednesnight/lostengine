@@ -4,71 +4,74 @@ Field =
 {
   player = -1
 }
-Field_mt = { __index = Field }
 
+Field_mt = { __index = Field }
 function Field()
   local result = {}
   setmetatable(result, Field_mt)
   return result
 end
 
-local game =
+TixTixTix =
 {
-  currentPlayer = 0,
-  board =
+  combinationLookup =
   {
-    [0] =
-    {
-      [0] = Field(),
-      [1] = Field(),
-      [2] = Field()
-    },
-    [1] =
-    {
-      [0] = Field(),
-      [1] = Field(),
-      [2] = Field()
-    },
-    [2] =
-    {
-      [0] = Field(),
-      [1] = Field(),
-      [2] = Field()
-    }
+    [0] = { 0,3,6 },
+    [1] = { 0,4 },
+    [2] = { 0,5,7 },
+    [3] = { 1,3 },
+    [4] = { 1,4,6,7 },
+    [5] = { 1,5 },
+    [6] = { 2,3,7 },
+    [7] = { 2,4 },
+    [8] = { 2,5,6 }
+  },
+
+  dispatcher = nil,
+
+  validCombinations =
+  {
+    [0] = { 0,1,2 },
+    [1] = { 3,4,5 },
+    [2] = { 6,7,8 },
+    [3] = { 0,3,6 },
+    [4] = { 1,4,7 },
+    [5] = { 2,5,8 },
+    [6] = { 0,4,8 },
+    [7] = { 2,4,6 }
   }
 }
 
-local validCombinations =
-{
-  [0] = { 0,1,2 },
-  [1] = { 3,4,5 },
-  [2] = { 6,7,8 },
-  [3] = { 0,3,6 },
-  [4] = { 1,4,7 },
-  [5] = { 2,5,8 },
-  [6] = { 0,4,8 },
-  [7] = { 2,4,6 }
-}
+function TixTixTix:init(eventDispatcher)
+  self:resetGame()
 
-local combinationLookup =
-{
-  [0] = { 0,3,6 },
-  [1] = { 0,4 },
-  [2] = { 0,5,7 },
-  [3] = { 1,3 },
-  [4] = { 1,4,6,7 },
-  [5] = { 1,5 },
-  [6] = { 2,3,7 },
-  [7] = { 2,4 },
-  [8] = { 2,5,6 }
-}
+  self.renderState = lost.application.Application.context:copyState()
+  self.renderState.clearColor = lost.common.Color(0,0,0)
+  self.renderState.depthTest = false
+  self.renderState.texture2D = false
+  self.renderState.vertexArray = true
 
-function resetGame()
+  dispatcher = eventDispatcher
+  dispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self.resizeHandler(self, event) end)
+
+  if lost.platform.isIPhone() then
+    dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self.touchHandler(self, event) end)
+    dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self.touchHandler(self, event) end)
+  else
+    dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self.keyHandler(self, event) end)
+    dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self.keyHandler(self, event) end)
+    dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self.clickHandler(self, event) end)
+    dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self.clickHandler(self, event) end)
+  end
+
+  self.timer = lost.application.Timer("TixTixTixRender", 1/30)
+  self.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self.renderHandler(self, event) end)
+end
+
+function TixTixTix:resetGame()
   log.debug("resetting game")
-  game =
-  {
-    currentPlayer = 0,
-    board =
+  self.currentPlayer = 0
+  self.board =
     {
       [0] =
       {
@@ -89,10 +92,9 @@ function resetGame()
         [2] = Field()
       }
     }
-  }
 end
 
-function keyHandler(event)
+function TixTixTix:keyHandler(event)
   local keyEvent = lost.application.KeyEvent.cast(event)
 
   if (keyEvent.pressed) then
@@ -104,29 +106,29 @@ function keyHandler(event)
   end
 end
 
-function clickField(location)
+function TixTixTix:clickField(location)
   local valid = false
 
   local x = math.floor(location.x / lost.application.Application.config.FieldSize.x)
   local y = math.floor(location.y / lost.application.Application.config.FieldSize.y)
   valid = (x >= 0 and x <= 2) and (y >= 0 and y <= 2)
   if valid then
-    if game.board[x][y].player == -1 then
-      game.board[x][y].player = game.currentPlayer
+    if self.board[x][y].player == -1 then
+      self.board[x][y].player = self.currentPlayer
       valid = true
     end
   end
 
   if valid then
-    if game.currentPlayer == 0 then
-      game.currentPlayer = 1
+    if self.currentPlayer == 0 then
+      self.currentPlayer = 1
     else
-      game.currentPlayer = 0
+      self.currentPlayer = 0
     end
   end
 end
 
-function touchHandler(event)
+function TixTixTix:touchHandler(event)
   local touchEvent = lost.application.TouchEvent.cast(event)
 
   if (event.type == lost.application.TouchEvent.TOUCHES_BEGAN) then
@@ -134,41 +136,35 @@ function touchHandler(event)
       local touch = touchEvent:get(0)
       local location = touch.location
       location.y = (lost.application.Application.config.displayAttributes.height - location.y)
-      clickField(location)
+      self:clickField(location)
     end
   elseif (event.type == lost.application.TouchEvent.TOUCHES_ENDED and touchEvent:size() == 4) then
-    resetGame()
+    self:resetGame()
   end
 end
 
-function clickHandler(event)
+function TixTixTix:clickHandler(event)
   local mouseEvent = lost.application.MouseEvent.cast(event)
 
   if (event.type == lost.application.MouseEvent.MOUSE_DOWN) and (mouseEvent.button == lost.application.MB_LEFT) then
-    game.leftButtonDown = true
+    self.leftButtonDown = true
   elseif (event.type == lost.application.MouseEvent.MOUSE_UP) and (mouseEvent.button == lost.application.MB_LEFT) then
-    game.leftButtonDown = false
+    self.leftButtonDown = false
   end
-  if (game.leftButtonDown) and (event.type == lost.application.MouseEvent.MOUSE_UP) and (mouseEvent.button == lost.application.MB_RIGHT) then
-    resetGame()
+  if (self.leftButtonDown) and (event.type == lost.application.MouseEvent.MOUSE_UP) and (mouseEvent.button == lost.application.MB_RIGHT) then
+    self:resetGame()
   else
     if (event.type == lost.application.MouseEvent.MOUSE_DOWN) then
-      clickField(mouseEvent.pos)
+      self:clickField(mouseEvent.pos)
     end
   end
 end
 
-function renderHandler(event)
+function TixTixTix:renderHandler(event)
   local Application = lost.application.Application
   local timerEvent = lost.application.TimerEvent.cast(event)
 
-  local newState = Application.context:copyState()
-  newState.vertexArray = true
-  newState.depthTest = false
-  newState.texture2D = false
-  newState.clearColor = lost.common.Color(0.0, 0.0, 0.0, 0.0)
-  Application.context:pushState(newState)
-
+  Application.context:pushState(self.renderState)
   Application.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
   Application.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(Application.config.displayAttributes.width, Application.config.displayAttributes.height))
 
@@ -180,10 +176,10 @@ function renderHandler(event)
     for y = 0, 2 do
       lost.gl.setColor(lost.common.Color(1,1,1))
       lost.gl.drawRectOutline(lost.math.Rect(x*Application.config.FieldSize.x, y*Application.config.FieldSize.y, Application.config.FieldSize.x, Application.config.FieldSize.y))
-      if game.board[x][y].player == 0 then
+      if self.board[x][y].player == 0 then
         lost.gl.setColor(lost.common.Color(1,0,0))
         lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
-      elseif game.board[x][y].player == 1 then
+      elseif self.board[x][y].player == 1 then
         lost.gl.setColor(lost.common.Color(0,0,1))
         lost.gl.drawRectFilled(lost.math.Rect(x*Application.config.FieldSize.x+1, y*Application.config.FieldSize.y+1, Application.config.FieldSize.x-1, Application.config.FieldSize.y-1))
       end
@@ -199,9 +195,17 @@ function renderHandler(event)
   globals.app:swapBuffers()
 end
 
-function resizeHandler(event)
+function TixTixTix:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
   lost.application.Application.config.FieldSize = lost.math.Vec2((resizeEvent.width / 3), (resizeEvent.height / 3))
   gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+end
+
+TixTixTix_mt = { __index = TixTixTix }
+function TixTixTix(eventDispatcher)
+  local result = {}
+  setmetatable(result, TixTixTix_mt)
+  result:init(eventDispatcher)
+  return result
 end

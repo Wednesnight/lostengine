@@ -366,12 +366,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = LUABIND_NO_ERROR_CHECKING;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngineMinimalApp;
 				SDKROOT = iphoneos2.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
 			};
 			name = Debug;
 		};
@@ -383,6 +384,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LostEngineMinimalApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LOST_IPHONE;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/projects/lostengine\"",
 					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/boost/boost_1_34_1/include\"",
@@ -412,7 +414,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngineMinimalApp;
 				SDKROOT = iphonesimulator2.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
 			};
 			name = Debug;
 		};
