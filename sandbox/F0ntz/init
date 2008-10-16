@@ -1,1 +1,18 @@
 require("Application")
+
+function lost.application.Application:init(evn)
+--  local ev = lost.application.MouseEvent("")
+--  log.debug(ev.pos.x)
+  
+  a = A()
+  a.s = "warum geht das?"
+  log.debug(a.s)
+  test_a(a)
+  b = B()
+  b.a.s = "verdammte fickscheisse"
+  log.debug(b.a.s)
+  test_b(b)
+  b.a = a
+  log.debug(b.a.s)
+  test_b(b)
+end

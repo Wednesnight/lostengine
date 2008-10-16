@@ -14,16 +14,16 @@
 
 struct Controller 
 {
-  lost::common::DisplayAttributes                 display;
-  lost::common::FpsMeter                          fpsmeter;
-  boost::shared_ptr<lost::font::freetype::Library>               freetypeLibrary;
-  boost::shared_ptr<lost::font::freetype::Face>                  defaultFont;
-  boost::shared_ptr<lost::font::freetype::Renderer>              renderer;
+  lost::common::DisplayAttributes                      display;
+  boost::shared_ptr<lost::common::FpsMeter>            fpsmeter;
+  boost::shared_ptr<lost::font::freetype::Library>     freetypeLibrary;
+  boost::shared_ptr<lost::font::freetype::Face>        defaultFont;
+  boost::shared_ptr<lost::font::freetype::Renderer>    renderer;
   boost::shared_ptr<lost::font::freetype::Loader>      fontLoader;
-  boost::shared_ptr<lost::gl::Texture>           glyphtex;
-  boost::shared_ptr<lost::gl::DisplayList> smallText;
-  boost::shared_ptr<lost::gl::DisplayList> midText;
-  boost::shared_ptr<lost::gl::DisplayList> largeText;
+  boost::shared_ptr<lost::gl::Texture>                 glyphtex;
+  boost::shared_ptr<lost::gl::DisplayList>             smallText;
+  boost::shared_ptr<lost::gl::DisplayList>             midText;
+  boost::shared_ptr<lost::gl::DisplayList>             largeText;
   
   double passedTime;
 

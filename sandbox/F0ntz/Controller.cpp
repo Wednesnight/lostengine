@@ -38,6 +38,8 @@ void Controller::init(shared_ptr<Event> event)
   midText.reset(new lost::gl::DisplayList());
   largeText.reset(new lost::gl::DisplayList());
 
+  fpsmeter.reset(new FpsMeter(appInstance->context));
+  
   renderer->renderText(defaultFont, 10, "The quick brown fox jumps over the lazy dog VA fi glrb", smallText);
   renderer->renderText(defaultFont, 64, "The quick brown fox jumps over the lazy dog VA fi glrb", midText);
   renderer->renderText(defaultFont, 164, "The quick brown fox jumps over the lazy dog VA fi glrb", largeText);
@@ -95,7 +97,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   glDisable(GL_TEXTURE_2D);GLDEBUG;
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  fpsmeter.render( appInstance->displayAttributes.width - (fpsmeter.width + 10), 0, event->passedSec );
+  fpsmeter->render( appInstance->displayAttributes.width - (fpsmeter->width + 10), 0, event->passedSec );
   glDisableClientState(GL_VERTEX_ARRAY);
 
   appInstance->swapBuffers();
