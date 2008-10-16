@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_LOSTGLSTATE_H
 #define LOST_LUA_LOSTGLSTATE_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostGLState(lost::lua::State& state);
+    void LostGLState(lua_State* state);
   }
 }
 

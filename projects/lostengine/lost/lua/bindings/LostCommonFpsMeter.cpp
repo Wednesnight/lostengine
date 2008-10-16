@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/common/FpsMeter.h"
 
 #include "lost/lua/bindings/LostCommonFpsMeter.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostCommonFpsMeter(lost::lua::State& state)
+    void LostCommonFpsMeter(lua_State* state)
     {
       module(state, "lost")
       [

@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_MODELLSYSTEMGENERATOR_H
 #define LOST_LUA_MODELLSYSTEMGENERATOR_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostModelLSystemGenerator(lost::lua::State& state);
+    void LostModelLSystemGenerator(lua_State* state);
   }
 }
 

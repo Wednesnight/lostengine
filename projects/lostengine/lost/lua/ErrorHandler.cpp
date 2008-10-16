@@ -1,6 +1,9 @@
 #include <boost/shared_ptr.hpp>
+#include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/common/Logger.h"
+
+#include "lost/lua/ErrorHandler.h"
 
 using namespace std;
 using namespace boost;

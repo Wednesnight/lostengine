@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/bitmap/Bitmap.h"
 
 #include "lost/lua/bindings/LostBitmapBitmap.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostBitmapBitmap(lost::lua::State& state)
+    void LostBitmapBitmap(lua_State* state)
     {
       module(state, "lost")
       [

@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/application/Timer.h"
 
 #include "lost/lua/bindings/LostApplicationTimer.h"
@@ -12,7 +12,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostApplicationTimer(lost::lua::State& state)
+    void LostApplicationTimer(lua_State* state)
     {
       module(state, "lost")
       [

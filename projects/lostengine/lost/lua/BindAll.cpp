@@ -1,4 +1,4 @@
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/lua/BindAll.h"
 #include "lost/lua/bindings/LostApplicationTimer.h"
 #include "lost/lua/bindings/LostApplicationApplicationEvent.h"
@@ -42,7 +42,7 @@ namespace lost
 {
   namespace lua
   {
-    void bindAll(lost::lua::State& state)
+    void bindAll(lua_State* state)
     {
       LostCommonDisplayAttributes(state);
       LostBitmapBitmap(state);

@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_LOSTMATHRECT_H
 #define LOST_LUA_LOSTMATHRECT_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostMathRect(lost::lua::State& state);
+    void LostMathRect(lua_State* state);
   }
 }
 

@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_LOSTAPPLICATIONACCELEROMETEREVENT_H
 #define LOST_LUA_LOSTAPPLICATIONACCELEROMETEREVENT_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostApplicationAccelerometerEvent(lost::lua::State& state);
+    void LostApplicationAccelerometerEvent(lua_State* state);
   }
 }
 

@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_LOSTMATHVEC3_H
 #define LOST_LUA_LOSTMATHVEC3_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostMathVec3(lost::lua::State& state);
+    void LostMathVec3(lua_State* state);
   }
 }
 

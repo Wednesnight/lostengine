@@ -215,6 +215,9 @@
 		3EFF94320EA749F2005C9288 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF94310EA749F2005C9288 /* Screen.cpp */; };
 		3EFF94330EA749F2005C9288 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF94310EA749F2005C9288 /* Screen.cpp */; };
 		3EFF94340EA749F2005C9288 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF94310EA749F2005C9288 /* Screen.cpp */; };
+		3EFF944C0EA74E35005C9288 /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFF944B0EA74E35005C9288 /* lua.h */; };
+		3EFF944D0EA74E35005C9288 /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFF944B0EA74E35005C9288 /* lua.h */; };
+		3EFF944E0EA74E35005C9288 /* lua.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFF944B0EA74E35005C9288 /* lua.h */; };
 		EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
@@ -946,6 +949,7 @@
 		3EFF940C0EA7466B005C9288 /* LostGuiroScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGuiroScreen.h; path = bindings/LostGuiroScreen.h; sourceTree = "<group>"; };
 		3EFF940D0EA7466B005C9288 /* LostGuiroScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGuiroScreen.cpp; path = bindings/LostGuiroScreen.cpp; sourceTree = "<group>"; };
 		3EFF94310EA749F2005C9288 /* Screen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
+		3EFF944B0EA74E35005C9288 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = forward/lost/lua/lua.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
 		EA0907210E6F4F7F00852256 /* LostPlatformPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostPlatformPlatform.h; path = bindings/LostPlatformPlatform.h; sourceTree = "<group>"; };
@@ -1208,6 +1212,7 @@
 		3E2060B30E9E089F0042BC53 /* lua */ = {
 			isa = PBXGroup;
 			children = (
+				3EFF944B0EA74E35005C9288 /* lua.h */,
 				3E2060B60E9E08C20042BC53 /* State.h */,
 			);
 			name = lua;
@@ -1933,6 +1938,7 @@
 				3EFF92F30EA72545005C9288 /* Ui.h in Headers */,
 				3EFF92F40EA72545005C9288 /* View.h in Headers */,
 				3EFF94120EA7466B005C9288 /* LostGuiroScreen.h in Headers */,
+				3EFF944C0EA74E35005C9288 /* lua.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2067,6 +2073,7 @@
 				3EFF92ED0EA72545005C9288 /* Ui.h in Headers */,
 				3EFF92EE0EA72545005C9288 /* View.h in Headers */,
 				3EFF940E0EA7466B005C9288 /* LostGuiroScreen.h in Headers */,
+				3EFF944E0EA74E35005C9288 /* lua.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2204,6 +2211,7 @@
 				3EFF92F00EA72545005C9288 /* Ui.h in Headers */,
 				3EFF92F10EA72545005C9288 /* View.h in Headers */,
 				3EFF94100EA7466B005C9288 /* LostGuiroScreen.h in Headers */,
+				3EFF944D0EA74E35005C9288 /* lua.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

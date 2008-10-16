@@ -1,4 +1,4 @@
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/platform/Platform.h"
 
 #include "lost/lua/bindings/LostPlatformPlatform.h"
@@ -10,7 +10,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostPlatformPlatform(lost::lua::State& state)
+    void LostPlatformPlatform(lua_State* state)
     {
       module(state, "lost")
       [

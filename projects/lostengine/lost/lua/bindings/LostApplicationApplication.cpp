@@ -1,4 +1,4 @@
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/application/Application.h"
 
 #include "lost/lua/bindings/LostApplicationApplication.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostApplicationApplication(lost::lua::State& state)
+    void LostApplicationApplication(lua_State* state)
     {
       module(state, "lost")
       [

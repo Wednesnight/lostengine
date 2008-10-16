@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/KeySym.h"
 #include "lost/lua/EventCast.h"
@@ -14,7 +14,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostApplicationKeyEvent(lost::lua::State& state)
+    void LostApplicationKeyEvent(lua_State* state)
     {
       module(state, "lost")
       [

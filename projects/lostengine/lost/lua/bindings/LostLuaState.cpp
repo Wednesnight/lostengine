@@ -1,4 +1,5 @@
 #include <boost/shared_ptr.hpp>
+#include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/resource/File.h"
 
@@ -11,7 +12,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostLuaState(lost::lua::State& state)
+    void LostLuaState(lua_State* state)
     {
       module(state, "lost")
       [

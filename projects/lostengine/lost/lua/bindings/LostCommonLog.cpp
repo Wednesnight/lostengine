@@ -1,4 +1,4 @@
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/common/Logger.h"
 
 #include "lost/lua/bindings/LostCommonLog.h"
@@ -50,7 +50,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostCommonLog(lost::lua::State& state)
+    void LostCommonLog(lua_State* state)
     {
       module(state, "log")
       [

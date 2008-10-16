@@ -1,7 +1,7 @@
 #ifndef LOST_LUA_ERRORHANDLER_H
 #define LOST_LUA_ERRORHANDLER_H
 
-#include "lost/lua/lua.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {

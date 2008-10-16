@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/gl/Context.h"
 #include "lost/gl/State.h"
 #include "lost/math/Vec2.h"
@@ -15,7 +15,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostGLContext(lost::lua::State& state)
+    void LostGLContext(lua_State* state)
     {
       module(state, "lost")
       [

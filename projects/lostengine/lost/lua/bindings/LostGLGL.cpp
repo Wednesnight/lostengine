@@ -1,4 +1,4 @@
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 
@@ -15,7 +15,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostGLGL(lost::lua::State& state)
+    void LostGLGL(lua_State* state)
     {
       module(state, "gl")
       [

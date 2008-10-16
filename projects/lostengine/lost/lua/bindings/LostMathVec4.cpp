@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/math/Vec4.h"
 
 #include "lost/lua/bindings/LostMathVec4.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostMathVec4(lost::lua::State& state)
+    void LostMathVec4(lua_State* state)
     {
       module(state, "lost")
       [

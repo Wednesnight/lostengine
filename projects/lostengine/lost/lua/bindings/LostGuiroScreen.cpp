@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/guiro/Screen.h"
 
@@ -12,7 +12,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostGuiroScreen(lost::lua::State& state)
+    void LostGuiroScreen(lua_State* state)
     {
       module(state, "lost")
       [

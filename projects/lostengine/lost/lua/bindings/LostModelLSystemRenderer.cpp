@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/model/lsystem/Renderer.h"
 
 #include "lost/lua/bindings/LostModelLSystemRenderer.h"
@@ -12,7 +12,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostModelLSystemRenderer(lost::lua::State& state)
+    void LostModelLSystemRenderer(lua_State* state)
     {
       module(state, "lost")
       [

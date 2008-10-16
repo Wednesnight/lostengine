@@ -1,13 +1,13 @@
 #ifndef LOST_LUA_LOSTAPPLICATIONTOUCHEVENT_H
 #define LOST_LUA_LOSTAPPLICATIONTOUCHEVENT_H
 
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua/lua.h"
 
 namespace lost
 {
   namespace lua
   {
-    void LostApplicationTouchEvent(lost::lua::State& state);
+    void LostApplicationTouchEvent(lua_State* state);
   }
 }
 

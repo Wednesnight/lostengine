@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/lua/EventCast.h"
 
@@ -13,7 +13,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostApplicationResizeEvent(lost::lua::State& state)
+    void LostApplicationResizeEvent(lua_State* state)
     {
       module(state, "lost")
       [

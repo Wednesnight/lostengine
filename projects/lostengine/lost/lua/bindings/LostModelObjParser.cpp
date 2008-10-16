@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/model/obj/Parser.h"
 
 #include "lost/lua/bindings/LostModelObjParser.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostModelObjParser(lost::lua::State& state)
+    void LostModelObjParser(lua_State* state)
     {
       module(state, "lost")
       [

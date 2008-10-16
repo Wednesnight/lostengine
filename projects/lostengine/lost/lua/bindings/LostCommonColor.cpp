@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/common/Color.h"
 
 #include "lost/lua/bindings/LostCommonColor.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostCommonColor(lost::lua::State& state)
+    void LostCommonColor(lua_State* state)
     {
       module(state, "lost")
       [

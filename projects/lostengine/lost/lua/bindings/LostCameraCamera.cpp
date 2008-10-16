@@ -1,5 +1,5 @@
 #include <boost/shared_ptr.hpp>
-#include "lost/lua/State.h"
+#include "lost/lua/lua.h"
 #include "lost/camera/Camera.h"
 
 #include "lost/lua/bindings/LostCameraCamera.h"
@@ -11,7 +11,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostCameraCamera(lost::lua::State& state)
+    void LostCameraCamera(lua_State* state)
     {
       module(state, "lost")
       [
