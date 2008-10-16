@@ -37,6 +37,9 @@ namespace lost
       void openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
       void openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
 
+      // convert naming convention "lost.lua..." to path "lost/lua/..."
+      std::string State::pathFromNamespace(const std::string& inNamespace);
+
       // loads and executes a file from the resource directory
       int doResourceFile(const std::string& inRelativePath);
 

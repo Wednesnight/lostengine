@@ -2,19 +2,26 @@
 #define LOST_GUIRO_SCREEN_H
 
 #include "lost/guiro/View.h"
+#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/boost/shared_ptr.hpp"
 
 namespace lost
 {
-namespace guiro
-{
+  namespace guiro
+  {
 
-  struct Screen : public View
-{
-  Screen() {}
-  virtual ~Screen() {}
-};
+    struct Screen : public View
+    {
+      boost::shared_ptr<lua::State>                      interpreter;
+      boost::shared_ptr<lost::common::DisplayAttributes> displayAttributes;
 
-}
+      Screen(const boost::shared_ptr<lua::State>& inInterpreter, const boost::shared_ptr<lost::common::DisplayAttributes>& inAttributes);
+      virtual ~Screen() {}
+
+      void reset(const std::string& inFile);
+    };
+
+  }
 }
 
 #endif

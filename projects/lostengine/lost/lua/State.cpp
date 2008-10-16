@@ -86,11 +86,25 @@ namespace lost
       std::string packageSearchPattern = basePath+"?;"+basePath+"?.lua";
       luabind::globals(state)["package"]["path"] = packageSearchPattern;
     }
+
+    std::string State::pathFromNamespace(const std::string& inNamespace)
+    {
+      // convert naming convention "lost.lua..." to path "lost/lua/..."
+      std::string filename(inNamespace);
+      size_t pos;
+      while ((pos = filename.find(".")) != filename.npos && pos != filename.find(".lua"))
+      {
+        filename.replace(pos, 1, "/");
+      }
+      return filename;
+    }
     
     // loads and executes a file from the resource directory
     int State::doResourceFile(const std::string& inRelativePath)
     {
-      return doFile(lost::platform::buildResourcePath(inRelativePath));
+      // buildResourcePath doesn't work as expected
+      //return doFile(lost::platform::buildResourcePath(pathFromNamespace(inRelativePath)));
+      return doFile(lost::platform::getResourcePath() +"/"+ pathFromNamespace(inRelativePath));
     }
     
     // loads and executes a file
@@ -98,7 +112,7 @@ namespace lost
     {
       std::ostringstream os;
       std::ifstream file(inAbsolutePath.c_str());
-      if(!file) throw std::runtime_error("couldn't load file: '"+inAbsolutePath+"'");
+      if(!file) throw std::runtime_error("couldn't load file: '"+ inAbsolutePath +"'");
       os << file.rdbuf();
       std::string data = os.str();
       md5wrapper md5;

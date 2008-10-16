@@ -41,6 +41,8 @@ namespace application
     }
     appInstance = this;
     
+    displayAttributes.reset(new DisplayAttributes());
+
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
@@ -61,8 +63,8 @@ namespace application
 
   void Application::handleResize(boost::shared_ptr<ResizeEvent> ev)
   {
-    displayAttributes.width = ev->width;
-    displayAttributes.height = ev->height;
+    displayAttributes->width = ev->width;
+    displayAttributes->height = ev->height;
   }
 
   void Application::run() { lostApplicationHelpers_runAppController(); }

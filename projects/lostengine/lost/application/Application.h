@@ -9,6 +9,7 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/Config.h"
 #include "lost/gl/Context.h"
+#include "lost/guiro/Screen.h"
 
 struct ApplicationAdapter;
 
@@ -27,11 +28,12 @@ namespace lost
       void swapBuffers();
       void quit();
 
-      common::DisplayAttributes            displayAttributes;
-      boost::shared_ptr<resource::Loader>  loader;
-      boost::shared_ptr<lua::State>        interpreter;
-      Config::SharedPtr                    config;
-      boost::shared_ptr<lost::gl::Context> context;
+      boost::shared_ptr<common::DisplayAttributes> displayAttributes;
+      boost::shared_ptr<resource::Loader>          loader;
+      boost::shared_ptr<lua::State>                interpreter;
+      Config::SharedPtr                            config;
+      boost::shared_ptr<lost::gl::Context>         context;
+      boost::shared_ptr<lost::guiro::Screen>       screen;
 
       void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
       

@@ -2,9 +2,9 @@
 #define GUIROTEST_H
 
 #include "lost/common/Logger.h"
-#include "lost/lua/LuaBindings.h"
 #include "lost/gl/Draw.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/lua/State.h"
 
 using namespace std;
 using namespace luabind;
@@ -62,19 +62,24 @@ struct ViewLuaWrapper : View, luabind::wrap_base
   }
 };
 
-LOST_LUA_EXPORT_BEGIN(GuiroTestView)
+namespace lost
 {
-  module(state, "lost")
-  [
-   namespace_("guiro")
-   [
-    class_<View, ViewLuaWrapper>("View")
-    .def(constructor<>())
-    .def("render", &View::render, &ViewLuaWrapper::renderBase)
-    .def("internalRender", &View::internalRender, &ViewLuaWrapper::internalRenderBase)
-    ]
-   ];
+  namespace lua
+  {
+    void GuiroTestView(lost::lua::State& state)
+    {
+      module(state, "lost")
+      [
+       namespace_("guiro")
+       [
+        class_<View, ViewLuaWrapper>("View")
+        .def(constructor<>())
+        .def("render", &View::render, &ViewLuaWrapper::renderBase)
+        .def("internalRender", &View::internalRender, &ViewLuaWrapper::internalRenderBase)
+        ]
+       ];
+    }
+  }
 }
-LOST_LUA_EXPORT_END
 
 #endif

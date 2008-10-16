@@ -5,16 +5,16 @@
 
 namespace lost
 {
-namespace guiro
-{
+  namespace guiro
+  {
 
-struct Ui : public View
-{
-  Ui() {}
-  virtual ~Ui() {}
-};
+    struct Ui : public View
+    {
+      Ui() {}
+      virtual ~Ui() {}
+    };
 
-}
+  }
 }
 
 #endif

@@ -11,6 +11,7 @@ using namespace lost::resource;
 using namespace lost::common;
 using namespace lost::application;
 using namespace lost::gl;
+using namespace lost::guiro;
 using namespace luabind;
 
 
@@ -53,26 +54,14 @@ void lostApplicationHelpers_init()
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
 
   // try to extract default display attributes from lua state
-  try
-  {
-    object g = globals(*(appInstance->interpreter));
-    if((luabind::type(g["config"])!= LUA_TNIL)
-       && 
-       (luabind::type(g["config"]["displayAttributes"])!=LUA_TNIL))
-    {
-      appInstance->displayAttributes = object_cast<DisplayAttributes>(g["config"]["displayAttributes"]);
-    }
-  }
-  catch(std::exception& ex)
-  {
-    IOUT("couldn't find config.displayAttributes, proceeding without, error: "<<ex.what());
-  }
-  
+  displayAttributes = appInstance->config["displayAttributes"].as<shared_ptr<DisplayAttributes> >(displayAttributes);
   
   // no adapter init called since its all done in the uikit app controller
 
   // init gl context
   appInstance->context.reset(new Context());
+  // init ui screen
+  screen.reset(new Screen(appInstance->interpreter, appInstance->displayAttributes));
 
   // broadcast init event so dependant code knows its safe to init resources now
   appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);  

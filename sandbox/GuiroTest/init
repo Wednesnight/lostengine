@@ -1,60 +1,33 @@
---[[
-     Button class
-  ]]
-class 'Button' (lost.guiro.View)
+require("lost.application.Application")
+require("lost.guiro.controls.Button")
 
-function Button:__init() super()
-  log.debug("Button:__init()")
+function lost.application.Application:configure(event)
+  self.config.displayAttributes = lost.common.DisplayAttributes()
+  self.config.displayAttributes.width = 800;
+  self.config.displayAttributes.height = 600;
+  self.config.displayAttributes.redbits = 8;
+  self.config.displayAttributes.bluebits = 8;
+  self.config.displayAttributes.greenbits = 8;
+  self.config.displayAttributes.alphabits = 8;
+  self.config.displayAttributes.depthbits = 24;
+  self.config.displayAttributes.stencilbits = 0;
+  self.config.displayAttributes.fullscreen = false;
+  self.config.displayAttributes.title = "GuiroTest";
+
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
+  self:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
+  self:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
+
+  self:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+  self:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
 end
 
-function Button:render()
---  log.debug("Button:render()")
-  
-  lost.gl.setColor(lost.common.Color(0,1,0))
-  lost.gl.drawRectFilled(lost.math.Rect(100,100,100,100))
-end
-
-function Button:__finalize()
-  log.debug("Button:__finalize()")
-end
-
---[[
-     main
-  ]]
-function preinitHandler(event)
-  log.debug("preinit, building config")
-
-  -- config is deliberatly global so application-internal startup code can find it
-  config = {}
-
-  config.displayAttributes = lost.common.DisplayAttributes()
-  config.displayAttributes.width = 800;
-  config.displayAttributes.height = 600;
-  config.displayAttributes.redbits = 8;
-  config.displayAttributes.bluebits = 8;
-  config.displayAttributes.greenbits = 8;
-  config.displayAttributes.alphabits = 8;
-  config.displayAttributes.depthbits = 24;
-  config.displayAttributes.stencilbits = 0;
-  config.displayAttributes.fullscreen = false;
-  config.displayAttributes.title = "Object0r";
-
-  globals.app:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.INIT, initHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
-  globals.app:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
-
-  globals.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  globals.app:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
-end
-globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, preinitHandler)
-
-function initHandler(event)
+function lost.application.Application:init(event)
   log.debug("init")
   
   controls = {}
   controls.button = Button()
-  controls.fpsMeter = lost.common.FpsMeter()
+  controls.fpsMeter = lost.common.FpsMeter(self.context)
 
   globals.timer = lost.application.Timer("luarender", 0.015)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
@@ -78,6 +51,8 @@ end
 
 function quitHandler(event)
   log.debug("quit")
+  
+  controls.button = nil
 end
 
 function renderHandler(event)

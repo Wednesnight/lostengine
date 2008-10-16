@@ -15,6 +15,7 @@ using namespace boost;
 using namespace lost::resource;
 using namespace lost::common;
 using namespace lost::gl;
+using namespace lost::guiro;
 using namespace luabind;
 
 namespace lost
@@ -35,6 +36,7 @@ namespace application
     }
     appInstance = this;
     adapter.reset(new ApplicationAdapter(this));
+    displayAttributes.reset(new DisplayAttributes());
     
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State); // init lua state with resource loader
@@ -53,8 +55,8 @@ namespace application
 
   void Application::handleResize(boost::shared_ptr<ResizeEvent> ev)
   {
-    displayAttributes.width = ev->width;
-    displayAttributes.height = ev->height;
+    displayAttributes->width = ev->width;
+    displayAttributes->height = ev->height;
   }
 
   void Application::run()
@@ -76,7 +78,7 @@ namespace application
     appEvent->type = ApplicationEvent::PREINIT();dispatchEvent(appEvent);
     
     // try to extract default display attributes from lua state
-    displayAttributes = config["displayAttributes"].as<DisplayAttributes>(displayAttributes);
+    displayAttributes = config["displayAttributes"].as<shared_ptr<DisplayAttributes> >(displayAttributes);
 
     // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
     addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
@@ -85,6 +87,9 @@ namespace application
     adapter->init(displayAttributes);
     // init gl context
     context.reset(new Context());
+    // init ui screen
+    screen.reset(new Screen(interpreter, displayAttributes));
+
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);

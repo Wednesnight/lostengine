@@ -51,25 +51,25 @@ ApplicationAdapter::~ApplicationAdapter()
 {
 }
 
-void ApplicationAdapter::init(const DisplayAttributes& displayAttributes)
+void ApplicationAdapter::init(const shared_ptr<DisplayAttributes>& displayAttributes)
 {
   glfwInit();    // must init glfw before anything else
 
-  int result = glfwOpenWindow(displayAttributes.width,
-                              displayAttributes.height,
-                              displayAttributes.redbits,
-                              displayAttributes.greenbits,
-                              displayAttributes.bluebits,
-                              displayAttributes.alphabits,
-                              displayAttributes.depthbits,
-                              displayAttributes.stencilbits,
-                              displayAttributes.fullscreen ? GLFW_FULLSCREEN : GLFW_WINDOW);
+  int result = glfwOpenWindow(displayAttributes->width,
+                              displayAttributes->height,
+                              displayAttributes->redbits,
+                              displayAttributes->greenbits,
+                              displayAttributes->bluebits,
+                              displayAttributes->alphabits,
+                              displayAttributes->depthbits,
+                              displayAttributes->stencilbits,
+                              displayAttributes->fullscreen ? GLFW_FULLSCREEN : GLFW_WINDOW);
   if(!result)
   {
     throw std::runtime_error("couldn't open display");
   }
-  glfwSetWindowTitle(displayAttributes.title.c_str());
-  state->displayHeight = displayAttributes.height;
+  glfwSetWindowTitle(displayAttributes->title.c_str());
+  state->displayHeight = displayAttributes->height;
 
   // connect callbacks AFTER display was initialised or nothing will happen (yes, I know, I'm repeating myslef but you don't wanna know how much time we lost tracking stuff like this down)  
   glfwEnable(GLFW_KEY_REPEAT);

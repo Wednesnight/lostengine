@@ -18,9 +18,11 @@ namespace lost
         namespace_("lua")
         [
           class_<State, boost::shared_ptr<State> >("State")
-          .def(constructor<>())
-         .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
-          .def_readwrite("callstackSize", &State::callstackSize)
+            .def(constructor<>())
+            .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
+            .def("doFile", (int(State::*)(const std::string&)) &State::doFile)
+            .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
+            .def_readwrite("callstackSize", &State::callstackSize)
         ]
       ];
     }

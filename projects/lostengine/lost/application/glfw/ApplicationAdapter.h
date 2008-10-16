@@ -15,7 +15,7 @@ struct ApplicationAdapter
   ApplicationAdapter(lost::event::EventDispatcher* inTarget);
   virtual ~ApplicationAdapter();
 
-  void init(const lost::common::DisplayAttributes& displayAttributes); // call this to configure adapter before running it, creates OpenGL context
+  void init(const boost::shared_ptr<lost::common::DisplayAttributes>& displayAttributes); // call this to configure adapter before running it, creates OpenGL context
   void run(); // runs the main loop
   void swapBuffers(); // tell the current gl context to flip buffers
   void quit(); // quits the main loop
