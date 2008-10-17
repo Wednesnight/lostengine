@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
-		3EFF92E40EA724D9005C9288 /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF92DA0EA724D9005C9288 /* lost */; };
+		3EFF95400EA77353005C9288 /* mainScreen.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF95200EA770F4005C9288 /* mainScreen.lua */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -50,8 +50,13 @@
 
 /* Begin PBXFileReference section */
 		3E1D63560E683C9D00675671 /* GuiroTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GuiroTest.h; path = ../GuiroTest.h; sourceTree = SOURCE_ROOT; };
+		3E7B27D90EA77E6800F70E7C /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.lua; sourceTree = "<group>"; };
+		3E7B27DC0EA77E6800F70E7C /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.lua; sourceTree = "<group>"; };
+		3E7B28100EA796E800F70E7C /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
-		3EFF92DA0EA724D9005C9288 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../../../projects/lostengine/lost/lua/lost; sourceTree = SOURCE_ROOT; };
+		3EE2E8940EA8AD4900BA12BB /* Loader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loader.lua; path = io/Loader.lua; sourceTree = "<group>"; };
+		3EE2E9140EA8CC6100BA12BB /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Screen.lua; path = io/Screen.lua; sourceTree = "<group>"; };
+		3EFF95200EA770F4005C9288 /* mainScreen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mainScreen.lua; path = ../mainScreen.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -130,10 +135,56 @@
 		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3EFF92DA0EA724D9005C9288 /* lost */,
+				3E7B27D70EA77E6800F70E7C /* lost */,
 				3ED935C90E4756B700AABFAB /* init */,
+				3EFF95200EA770F4005C9288 /* mainScreen.lua */,
 			);
 			name = Scripts;
+			sourceTree = "<group>";
+		};
+		3E7B27D70EA77E6800F70E7C /* lost */ = {
+			isa = PBXGroup;
+			children = (
+				3EE2E8760EA8A58D00BA12BB /* io */,
+				3E7B27D80EA77E6800F70E7C /* application */,
+				3E7B27DA0EA77E6800F70E7C /* guiro */,
+			);
+			name = lost;
+			path = ../../../projects/lostengine/lost/lua/lost;
+			sourceTree = SOURCE_ROOT;
+		};
+		3E7B27D80EA77E6800F70E7C /* application */ = {
+			isa = PBXGroup;
+			children = (
+				3E7B27D90EA77E6800F70E7C /* Application.lua */,
+			);
+			path = application;
+			sourceTree = "<group>";
+		};
+		3E7B27DA0EA77E6800F70E7C /* guiro */ = {
+			isa = PBXGroup;
+			children = (
+				3E7B27DB0EA77E6800F70E7C /* controls */,
+				3E7B28100EA796E800F70E7C /* Screen.lua */,
+			);
+			path = guiro;
+			sourceTree = "<group>";
+		};
+		3E7B27DB0EA77E6800F70E7C /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				3E7B27DC0EA77E6800F70E7C /* Button.lua */,
+			);
+			path = controls;
+			sourceTree = "<group>";
+		};
+		3EE2E8760EA8A58D00BA12BB /* io */ = {
+			isa = PBXGroup;
+			children = (
+				3EE2E9140EA8CC6100BA12BB /* Screen.lua */,
+				3EE2E8940EA8AD4900BA12BB /* Loader.lua */,
+			);
+			name = io;
 			sourceTree = "<group>";
 		};
 		EA0E49550E5E403800B5EBF1 /* Products */ = {
@@ -156,6 +207,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				3E7B27D60EA77E0000F70E7C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -220,12 +272,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EFF95400EA77353005C9288 /* mainScreen.lua in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
-				3EFF92E40EA724D9005C9288 /* lost in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E7B27D60EA77E0000F70E7C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {

@@ -24,6 +24,7 @@ namespace lost
            .def_readonly("loader", &Application::loader)
            .def_readonly("displayAttributes", &Application::displayAttributes)
            .def_readonly("context", &Application::context)
+           .def_readonly("screen", &Application::screen)
         ]
       ];
     }

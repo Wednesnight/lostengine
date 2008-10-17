@@ -20,7 +20,6 @@ namespace lost
         [
           class_<Screen, boost::shared_ptr<Screen>, boost::shared_ptr<View> >("Screen")
             .def(constructor<const boost::shared_ptr<lost::lua::State>&, const boost::shared_ptr<lost::common::DisplayAttributes>&>())
-            .def("reset", &Screen::reset)
         ]
       ];
     }

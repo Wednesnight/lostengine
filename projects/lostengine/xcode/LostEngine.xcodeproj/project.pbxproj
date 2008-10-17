@@ -936,6 +936,8 @@
 		3EDE44150E766D8500C38A71 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Generator.h; path = model/lsystem/Generator.h; sourceTree = "<group>"; };
 		3EDE44690E767CC600C38A71 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Renderer.h; path = model/lsystem/Renderer.h; sourceTree = "<group>"; };
 		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		3EE2E8910EA8AC5100BA12BB /* Loader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loader.lua; path = io/Loader.lua; sourceTree = "<group>"; };
+		3EE2E9130EA8CC5500BA12BB /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Screen.lua; path = io/Screen.lua; sourceTree = "<group>"; };
 		3EE57C9B0E82572E00066396 /* MouseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseButton.h; sourceTree = "<group>"; };
 		3EFEC0FD0E62C4670053EB12 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		3EFEC0FE0E62C4670053EB12 /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parser.h; sourceTree = "<group>"; };
@@ -950,6 +952,7 @@
 		3EFF940D0EA7466B005C9288 /* LostGuiroScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGuiroScreen.cpp; path = bindings/LostGuiroScreen.cpp; sourceTree = "<group>"; };
 		3EFF94310EA749F2005C9288 /* Screen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
 		3EFF944B0EA74E35005C9288 /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua.h; path = forward/lost/lua/lua.h; sourceTree = "<group>"; };
+		3EFF95100EA76E42005C9288 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
 		EA0907210E6F4F7F00852256 /* LostPlatformPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostPlatformPlatform.h; path = bindings/LostPlatformPlatform.h; sourceTree = "<group>"; };
@@ -1305,6 +1308,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3EE2E86B0EA8A32E00BA12BB /* io */ = {
+			isa = PBXGroup;
+			children = (
+				3EE2E9130EA8CC5500BA12BB /* Screen.lua */,
+				3EE2E8910EA8AC5100BA12BB /* Loader.lua */,
+			);
+			name = io;
+			sourceTree = "<group>";
+		};
 		3EFEC0E10E62C0AD0053EB12 /* obj */ = {
 			isa = PBXGroup;
 			children = (
@@ -1319,6 +1331,7 @@
 		3EFF92D40EA724C6005C9288 /* lost */ = {
 			isa = PBXGroup;
 			children = (
+				3EE2E86B0EA8A32E00BA12BB /* io */,
 				3EFF92D50EA724C6005C9288 /* application */,
 				3EFF92D70EA724C6005C9288 /* guiro */,
 			);
@@ -1337,6 +1350,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFF92D80EA724C6005C9288 /* controls */,
+				3EFF95100EA76E42005C9288 /* Screen.lua */,
 			);
 			path = guiro;
 			sourceTree = "<group>";

@@ -1,6 +1,77 @@
 require("lost.application.Application")
 require("lost.guiro.controls.Button")
 
+require("lost.io.Loader")
+require("lost.io.Screen")
+local foo = lost.io.Loader(globals.app.loader)
+foo:load("mainScreen.lua")
+
+-- testing
+function applyChildren(view, children)
+  log.debug("applyChildren()")
+  if (view and children) then
+    for name,object in next,children do
+      if type(object) == "userdata" then
+        log.debug("setting child: ".. name)
+        --view.applyChild(object)
+      end
+    end
+  end
+end
+
+function applyProperties(view, properties)
+  log.debug("applyProperties()")
+  if (view and properties) then
+    for name,value in next,properties do
+      if type(name) == "string" then
+        log.debug("setting property: ".. name)
+        view[name] = value
+      end
+    end
+  end
+end
+
+function defineView(view, definition)
+  log.debug("defineView()")
+  applyProperties(view, definition)
+  applyChildren(view, definition)
+  return view
+end
+
+lost.guiro.controls.Window = lost.guiro.View
+function Window(definition)
+  log.debug("Window()")
+  return defineView(lost.guiro.controls.Window(), definition)
+end
+
+lost.guiro.controls.Text = lost.guiro.View
+function Text(definition)
+  log.debug("Text()")
+  return defineView(lost.guiro.controls.Text(), definition)
+end
+
+window = Window
+{
+  width = 640,
+  height = 480,
+  text = Text
+  {
+    width = 100,
+    font = "font.ttf"
+  }
+}
+
+log.debug(window["width"])
+log.debug(window["height"])
+log.debug(window.text["width"])
+log.debug(window.text["font"])
+
+--[[
+for k,v in next,_G do
+  print(k,v)
+end
+]]
+
 function lost.application.Application:configure(event)
   self.config.displayAttributes = lost.common.DisplayAttributes()
   self.config.displayAttributes.width = 800;
@@ -24,9 +95,9 @@ end
 
 function lost.application.Application:init(event)
   log.debug("init")
-  
+
   controls = {}
-  controls.button = Button()
+  controls.button = lost.guiro.controls.Button()
   controls.fpsMeter = lost.common.FpsMeter(self.context)
 
   globals.timer = lost.application.Timer("luarender", 0.015)

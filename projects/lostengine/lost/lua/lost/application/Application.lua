@@ -6,7 +6,9 @@ lost.application.Application =
 
   config = {},
 
-  context = globals.app.context
+  context = globals.app.context,
+
+  screen = globals.app.screen
 }
 
 function fireEvent(name, event)

@@ -1,5 +1,7 @@
 #include <boost/shared_ptr.hpp>
+#include "lost/common/Logger.h"
 #include "lost/common/DisplayAttributes.h"
+#include "lost/lua/State.h"
 
 #include "lost/guiro/Screen.h"
 
@@ -11,10 +13,7 @@ namespace lost
     : interpreter(inInterpreter),
       displayAttributes(inAttributes)
     {
-    }
-
-    void Screen::reset(const std::string& inFile)
-    {
+      DOUT("Screen::Screen()");
     }
   }
 }
