@@ -6,8 +6,11 @@
 #include "lost/common/Logger.h"
 #include "lost/gl/PushAttrib.h"
 #include "lost/gl/PushClientAttrib.h"
+#include "lost/bitmap/Bitmap.h"
 
 using namespace lost::math;
+using namespace boost;
+using namespace lost::bitmap;
 
 namespace lost
 {
@@ -59,28 +62,6 @@ void Renderer::renderGlyphToTexture(boost::shared_ptr<Face> face,
   outTexture->filter(GL_NEAREST);
   outTexture->wrap(GL_CLAMP_TO_EDGE);
   
-  // set the appropriate pixel storage and transfer modes so the data is copied to the destination texture correctly
-  // since freetype rendered to a 8bit buffer, we need some trickery to blow it up to the desired rgba texture
-  // specifying GL_ALPHA means: the 8 bit source value is used as alpha, rgb components are set to zero.
-  // this is NOT what we want! In order to draw correctly, the glyph should be white with the appropriate alpha channel
-  // for anti-aliasing.
-  // Therefore, we specify scale = 1 and bias = 1 for each color channel. Since all colors are initially zero, this results in
-  // destcol = (srccol *scale)+bias = (0*1)+1 = 1
-  // This means all pixels of the glyph end up being white, with only the alpha value controlling the actual drawing.
-  // in order to prevent side effects, we need to push the attributes for this action
-  lost::gl::PushAttrib attrib(GL_PIXEL_MODE_BIT);
-  lost::gl::PushClientAttrib clientAttrib(GL_CLIENT_PIXEL_STORE_BIT);
-  glPixelStorei( GL_UNPACK_ROW_LENGTH, 0);GLDEBUG_THROW; // do not skip any additionaly components
-  glPixelStorei( GL_UNPACK_ALIGNMENT, 1);GLDEBUG_THROW; // each value is a byte, hence the 1 byte alignment
-  glPixelTransferf(GL_RED_SCALE, 1.0f);GLDEBUG_THROW; // component scale and bias as described above
-  glPixelTransferf(GL_RED_BIAS, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_GREEN_SCALE, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_GREEN_BIAS, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_BLUE_SCALE, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_BLUE_BIAS, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_ALPHA_SCALE, 1.0f);GLDEBUG_THROW;
-  glPixelTransferf(GL_ALPHA_BIAS, 0.0f);GLDEBUG_THROW;
-
   if(mPowerOfTwoTextures)
   {
     createGlyphPowerOfTwoTexture(face, outTexture, outTextureWidth, outTextureHeight);
@@ -104,14 +85,20 @@ void Renderer::createGlyphPowerOfTwoTexture(boost::shared_ptr<Face> face,
   unsigned long potwidth = nextPowerOf2(face->face()->glyph->bitmap.width);
   unsigned long potheight = nextPowerOf2(face->face()->glyph->bitmap.rows);
 
+  shared_ptr<Bitmap> bmp(new Bitmap(face->face()->glyph->bitmap.width,
+                                      face->face()->glyph->bitmap.rows,
+                                      Bitmap::COMPONENTS_RGBA,
+                                      Bitmap::COMPONENTS_ALPHA,
+                                      face->face()->glyph->bitmap.buffer));
+  
   // call glTexImage2D once with pixels = 0 to allocate memory
   glTexImage2D(GL_TEXTURE_2D,
                0,
-               GL_ALPHA,
+               GL_RGBA,
                potwidth,
                potheight,
                0,
-               GL_ALPHA,
+               GL_RGBA,
                GL_UNSIGNED_BYTE,
                0);GLDEBUG_THROW;
 
@@ -120,11 +107,11 @@ void Renderer::createGlyphPowerOfTwoTexture(boost::shared_ptr<Face> face,
                   0,
                   0,
                   0,
-                  face->face()->glyph->bitmap.width,
-                  face->face()->glyph->bitmap.rows,
-                  GL_ALPHA,
+                  bmp->width,
+                  bmp->height,
+                  GL_RGBA,
                   GL_UNSIGNED_BYTE,
-                  face->face()->glyph->bitmap.buffer);GLDEBUG_THROW;
+                  bmp->data);GLDEBUG_THROW;
   outTexWidth = potwidth;
   outTexHeight = potheight;
 }
@@ -134,17 +121,23 @@ void Renderer::createGlyphNonPowerOfTwoTexture(boost::shared_ptr<Face> face,
                                                unsigned long& outTexWidth,
                                                unsigned long& outTexHeight)
 {
+  shared_ptr<Bitmap> bmp(new Bitmap(face->face()->glyph->bitmap.width,
+                                    face->face()->glyph->bitmap.rows,
+                                    Bitmap::COMPONENTS_RGBA,
+                                    Bitmap::COMPONENTS_ALPHA,
+                                    face->face()->glyph->bitmap.buffer));  
+  
   glTexImage2D(GL_TEXTURE_2D,
                0,
-               GL_ALPHA,
-               face->face()->glyph->bitmap.width,
-               face->face()->glyph->bitmap.rows,
+               GL_RGBA,
+               bmp->width,
+               bmp->height,
                0,
-               GL_ALPHA,
+               GL_RGBA,
                GL_UNSIGNED_BYTE,
-               face->face()->glyph->bitmap.buffer);GLDEBUG_THROW;
-  outTexWidth = face->face()->glyph->bitmap.width;
-  outTexHeight = face->face()->glyph->bitmap.rows;
+               bmp->data);GLDEBUG_THROW;
+  outTexWidth = bmp->width;
+  outTexHeight = bmp->height;
 }
 
 boost::shared_ptr<lost::font::freetype::Glyph> Renderer::renderGlyph(boost::shared_ptr<Face> face,
