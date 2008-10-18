@@ -6,7 +6,6 @@
 #include "lost/font/freetype/Face.h"
 #include "lost/font/freetype/Glyph.h"
 #include "lost/font/freetype/Renderer.h"
-#include "lost/font/freetype/Loader.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/application/KeyEvent.h"
@@ -19,7 +18,6 @@ struct Controller
   boost::shared_ptr<lost::font::freetype::Library>     freetypeLibrary;
   boost::shared_ptr<lost::font::freetype::Face>        defaultFont;
   boost::shared_ptr<lost::font::freetype::Renderer>    renderer;
-  boost::shared_ptr<lost::font::freetype::Loader>      fontLoader;
   boost::shared_ptr<lost::gl::Texture>                 glyphtex;
   boost::shared_ptr<lost::gl::DisplayList>             smallText;
   boost::shared_ptr<lost::gl::DisplayList>             midText;

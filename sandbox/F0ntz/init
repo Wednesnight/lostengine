@@ -1,5 +1,6 @@
 require("Application")
 
+--[==[
 function lost.application.Application:init(evn)
 --  local ev = lost.application.MouseEvent("")
 --  log.debug(ev.pos.x)
@@ -16,3 +17,4 @@ function lost.application.Application:init(evn)
   log.debug(b.a.s)
   test_b(b)
 end
+]==]--

@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
-		8D0C4E8E0486CD37000505A6 /* main.nib in Resources */ = {isa = PBXBuildFile; fileRef = 02345980000FD03B11CA0E72 /* main.nib */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		EA01BAD90EAA2A6500F649F0 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA01BAD80EAA2A6500F649F0 /* Application.lua */; };
 		EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA03D8130DBBEE91001665C3 /* suigeneris.ttf */; };
@@ -20,7 +18,6 @@
 		EAECD4210DB53F9800855E60 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41A0DB53F9800855E60 /* OpenGL.framework */; };
 		EAECD4220DB53F9800855E60 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD41B0DB53F9800855E60 /* GLUT.framework */; };
 		EAECD4520DB542AF00855E60 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAECD4510DB542AF00855E60 /* AGL.framework */; };
-		EAECD4930DB5443C00855E60 /* F0ntz.cfg in Resources */ = {isa = PBXBuildFile; fileRef = EAECD4920DB5443C00855E60 /* F0ntz.cfg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1870340FFE93FCAF11CA0CD7 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/main.nib; sourceTree = "<group>"; };
 		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		5048396D09E3307300765E4B /* F0ntzProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = F0ntzProj.xcconfig; sourceTree = "<group>"; };
 		5048396E09E3307300765E4B /* F0ntzTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = F0ntzTarget.xcconfig; sourceTree = "<group>"; };
@@ -73,7 +68,6 @@
 		EAECD41A0DB53F9800855E60 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAECD41B0DB53F9800855E60 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EAECD4510DB542AF00855E60 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
-		EAECD4920DB5443C00855E60 /* F0ntz.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = F0ntz.cfg; path = ../resources/F0ntz.cfg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,10 +121,7 @@
 			children = (
 				EA03D8130DBBEE91001665C3 /* suigeneris.ttf */,
 				EA5EA5BC0E023BD100E7349B /* Vera.ttf */,
-				EAECD4920DB5443C00855E60 /* F0ntz.cfg */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
-				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
-				02345980000FD03B11CA0E72 /* main.nib */,
 				EA1B77F30E917B4F00004196 /* init */,
 				EA01BAD80EAA2A6500F649F0 /* Application.lua */,
 			);
@@ -242,9 +233,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */,
-				8D0C4E8E0486CD37000505A6 /* main.nib in Resources */,
-				EAECD4930DB5443C00855E60 /* F0ntz.cfg in Resources */,
 				EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */,
 				EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */,
 				EA1B77F40E917B4F00004196 /* init in Resources */,
@@ -273,25 +261,6 @@
 			targetProxy = EA0E4A9B0E5E42C000B5EBF1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		02345980000FD03B11CA0E72 /* main.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1870340FFE93FCAF11CA0CD7 /* English */,
-			);
-			name = main.nib;
-			sourceTree = "<group>";
-		};
-		0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0867D6ABFE840B52C02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C0E91AC608A95435008D54AB /* Debug */ = {

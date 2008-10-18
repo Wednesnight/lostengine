@@ -32,8 +32,8 @@ void Controller::init(shared_ptr<Event> event)
 {
   freetypeLibrary.reset(new Library());
   renderer.reset(new Renderer);
-  fontLoader.reset(new freetype::Loader(freetypeLibrary, appInstance->loader));
-  defaultFont = fontLoader->load("Vera.ttf");
+  shared_ptr<File> fontFile = appInstance->loader->load("Vera.ttf");
+  defaultFont = freetypeLibrary->initFace(fontFile);
   smallText.reset(new lost::gl::DisplayList());
   midText.reset(new lost::gl::DisplayList());
   largeText.reset(new lost::gl::DisplayList());

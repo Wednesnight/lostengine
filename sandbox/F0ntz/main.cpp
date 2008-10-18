@@ -17,7 +17,7 @@ using namespace lost::resource;
 using namespace lost::application;
 using namespace lost::event;
 
-struct A
+/*struct A
 {
   std::string s;
   A() { DOUT("A::A()"); }
@@ -52,7 +52,7 @@ void test_b(luabind::object b)
   DOUT("test_b()");
   A* myA = luabind::object_cast<A*>(b["a"]);
   DOUT(myA->s);
-}
+}*/
 
 int main( int argc, char *argv[] )
 {
@@ -69,7 +69,7 @@ int main( int argc, char *argv[] )
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
 
-    luabind::module(*app.interpreter)
+/*    luabind::module(*app.interpreter)
     [
       luabind::def("test_a", &test_a),
       luabind::def("test_b", &test_b),
@@ -85,7 +85,7 @@ int main( int argc, char *argv[] )
 //        .def_readwrite("a", &B::a)
         .property("a", &get_a, &set_a)
         .def_readwrite("a_ptr", &B::a_ptr)
-    ];
+    ];*/
     
     app.run();
   }
