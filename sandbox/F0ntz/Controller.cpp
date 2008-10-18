@@ -67,7 +67,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   glDisable(GL_TEXTURE_2D);GLDEBUG;
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));GLDEBUG;
+  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); GLDEBUG;
@@ -97,7 +97,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   glDisable(GL_TEXTURE_2D);GLDEBUG;
 
   glEnableClientState(GL_VERTEX_ARRAY);
-  fpsmeter->render( appInstance->displayAttributes.width - (fpsmeter->width + 10), 0, event->passedSec );
+  fpsmeter->render( appInstance->displayAttributes->width - (fpsmeter->width + 10), 0, event->passedSec );
   glDisableClientState(GL_VERTEX_ARRAY);
 
   appInstance->swapBuffers();
