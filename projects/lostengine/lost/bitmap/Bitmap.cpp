@@ -5,12 +5,15 @@
 #include "lost/resource/File.h"
 #include <boost/shared_ptr.hpp>
 
+using namespace std;
+using namespace boost;
+
 namespace lost
 {
 namespace bitmap
 {
 
-void Bitmap::init()
+void Bitmap::reset()
 {
   data = NULL;
   loaded = false;
@@ -21,19 +24,22 @@ void Bitmap::init()
 
 Bitmap::Bitmap()
 {
-  init();
+  reset();
 }
 
-Bitmap::Bitmap(unsigned long inWidth,
-          unsigned long inHeight)
+Bitmap::Bitmap(uint32_t inWidth,
+               uint32_t inHeight,
+               Components destComponents,
+               Components srcComponents,
+               uint8_t* data)
 {
-  init();
-  init(inWidth, inHeight);
+  reset();
+  init(inWidth, inHeight, destComponents, srcComponents, data);
 }
           
 Bitmap::Bitmap(boost::shared_ptr<lost::resource::File> inFile)
 {
-  init();
+  reset();
   init(inFile);
 }
 
@@ -55,17 +61,93 @@ void Bitmap::destroy()
     DOUT("delete");
     delete [] data;
   }
+  reset();
 }
 
-void Bitmap::init(unsigned long inWidth,
-                  unsigned long inHeight)
+void Bitmap::init(uint32_t inWidth,
+                  uint32_t inHeight,
+                  Components destComponents,
+                  Components srcComponents,
+                  uint8_t* srcData)
 {
   destroy();
-  unsigned long bytesPerPixel = 4;
-  unsigned long sizeInBytes = inWidth * inHeight * bytesPerPixel;
-  data = new unsigned char[sizeInBytes];
-  loaded = false;
-  format = COMPONENTS_RGBA;
+  
+  // create target memory
+  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(destComponents);
+  uint32_t destSizeInBytes = destBytesPerPixel * inWidth * inHeight;
+  data = new uint8_t[destSizeInBytes];
+  loaded = false; // prevent stb_image from freeing
+  
+  // setup stc values for loop
+  uint32_t srcBytesPerPixel = bytesPerPixelFromComponents(srcComponents);
+  uint8_t* destWriter = data;
+  uint8_t* srcReader = srcData;
+  uint32_t numPixels = inWidth*inHeight;
+
+  // copy pixels
+  for(uint32_t currentPixel=0; currentPixel<numPixels; ++currentPixel)
+  {
+    copyPixel(destWriter, destComponents, srcReader, srcComponents);
+    destWriter+=destBytesPerPixel;
+    srcReader+=srcBytesPerPixel;
+  }
+  
+  width = inWidth;
+  height = inHeight;
+  format = destComponents;
+}
+
+// FIXME: not endian safe, we nee dto fix this for big endian
+// FIXME: not sure if this is even correct byte order for little endian
+  void Bitmap::copyPixel(uint8_t* dest,
+                Components destComponents, 
+                uint8_t* src,
+                Components srcComponents)
+{
+  switch(destComponents)
+  {
+    case COMPONENTS_RGBA:
+      switch(srcComponents)
+      {
+        case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=src[3];break;
+        case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=255;break;
+        case COMPONENTS_ALPHA:dest[0]=src[0];dest[1]=src[0];dest[2]=src[0];dest[3]=src[0];break;
+        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+      }      
+      break;
+    case COMPONENTS_RGB:
+      switch(srcComponents)
+      {
+        case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];break;
+        case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];break;
+        case COMPONENTS_ALPHA:dest[0]=src[0];dest[1]=src[0];dest[2]=src[0];break;
+        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+      }
+      break;
+    case COMPONENTS_ALPHA:
+      switch(srcComponents)
+      {
+        case COMPONENTS_RGBA:dest[0]=src[3];break;
+        case COMPONENTS_RGB:dest[0]=255;break;
+        case COMPONENTS_ALPHA:dest[0]=src[0];break;
+        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+      }
+      break;
+    default:throw runtime_error("can't copy pixel to destination with components: "+lexical_cast<string>(destComponents));
+  }
+}
+  
+uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
+{
+  uint32_t result = 0;
+  switch(components)
+  {
+    case COMPONENTS_ALPHA:result = 1;break;
+    case COMPONENTS_RGB:result = 3;break;
+    case COMPONENTS_RGBA:result = 4;break;
+    default:throw runtime_error("can't determine bytes per pixel from components: "+lexical_cast<string>(components));
+  }
+  return result;
 }
 
 void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
