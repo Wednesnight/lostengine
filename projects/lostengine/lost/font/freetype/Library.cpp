@@ -22,9 +22,6 @@ Library::Library()
 
 Library::~Library()
 {
-  // get rid of fonts before the library handle gets invalid
-  mFaceCache.clear(); 
-  mFileCache.clear();
   FT_Error error = FT_Done_FreeType(mLibrary);
   // don't throw, just log
   if(error)
@@ -37,24 +34,13 @@ Library::~Library()
 boost::shared_ptr<Face> Library::initFace(boost::shared_ptr<lost::resource::File> file)
 {
   boost::shared_ptr<Face> result;
-  FaceCache::iterator pos;
-  pos = mFaceCache.find(file->location);
-  if(pos != mFaceCache.end())
+  FT_Face face;
+  FT_Error error  = FT_New_Memory_Face(mLibrary, reinterpret_cast<FT_Byte*>(file->data.get()), file->size, 0, &face);
+  if(error)
   {
-    return pos->second;
+    throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
   }
-  else
-  {
-    FT_Face face;
-    FT_Error error  = FT_New_Memory_Face(mLibrary, reinterpret_cast<FT_Byte*>(file->data.get()), file->size, 0, &face);
-    if(error)
-    {
-      throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
-    }
-    result.reset(new Face(face));
-    mFaceCache[file->location] = result;
-    mFileCache[file->location] = file;
-  }
+  result.reset(new Face(face, file));
   return result;
 }
 

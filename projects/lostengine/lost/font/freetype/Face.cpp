@@ -8,9 +8,12 @@ namespace font
 namespace freetype
 {
 
-Face::Face(FT_Face inFace)
+Face::Face(FT_Face inFace, boost::shared_ptr<lost::resource::File> inFile)
 {
+  
+  
   mFace = inFace;
+  mFile = inFile;
 }
 
 Face::~Face()

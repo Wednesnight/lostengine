@@ -15,25 +15,20 @@ namespace lost
   {
     namespace freetype
     {
-      /** loads fonts via freetype2, either from file or memory, and
+      /** initializes fonts via freetype2 from file or memory, and
        * caches them in a map.
        */
       struct Library
       {
-        typedef std::map<std::string, boost::shared_ptr<Face> > FaceCache;
-        typedef std::map<std::string, boost::shared_ptr<resource::File> > FileCache;
-
         Library();
         virtual ~Library();
 
-        /** loads a font from file via and caches it in the map using the path as key.
+        /** creates a font from a file
          */
         boost::shared_ptr<Face> initFace(boost::shared_ptr<lost::resource::File> file);
 
       private:
         FT_Library    mLibrary;
-        FaceCache     mFaceCache;
-        FileCache     mFileCache;
       };
     }
   }
