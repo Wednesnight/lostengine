@@ -600,12 +600,6 @@
 		EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
 		EAB343170E4F3A6400C89299 /* AccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */; };
 		EAB343190E4F3A6C00C89299 /* TouchEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343180E4F3A6C00C89299 /* TouchEvent.h */; };
-		EAB83A060E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
-		EAB83A070E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
-		EAB83A080E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
-		EAB83A090E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
-		EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A040E6DD4C700A6570F /* Loader.cpp */; };
-		EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB83A050E6DD4C700A6570F /* Loader.h */; };
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
@@ -1109,8 +1103,6 @@
 		EAAF98480E15DB9100B28BF6 /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
 		EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerEvent.h; sourceTree = "<group>"; };
 		EAB343180E4F3A6C00C89299 /* TouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEvent.h; sourceTree = "<group>"; };
-		EAB83A040E6DD4C700A6570F /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
-		EAB83A050E6DD4C700A6570F /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
@@ -1570,8 +1562,6 @@
 				EA54FA6A0E676E2200605409 /* Glyph.cpp */,
 				EA54FA650E676E2200605409 /* Renderer.h */,
 				EA54FA640E676E2200605409 /* Renderer.cpp */,
-				EAB83A050E6DD4C700A6570F /* Loader.h */,
-				EAB83A040E6DD4C700A6570F /* Loader.cpp */,
 			);
 			path = freetype;
 			sourceTree = "<group>";
@@ -1899,7 +1889,6 @@
 				EA54FA800E676E2200605409 /* Face.h in Headers */,
 				EA54FA810E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E20E6789F2003CED66 /* KeySym.h in Headers */,
-				EAB83A0B0E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0FF0E6F38760017B031 /* BindAll.h in Headers */,
 				EA7BE1070E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B90E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
@@ -2034,7 +2023,6 @@
 				EA54FA700E676E2200605409 /* Face.h in Headers */,
 				EA54FA710E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E40E6789F2003CED66 /* KeySym.h in Headers */,
-				EAB83A070E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0F90E6F38760017B031 /* BindAll.h in Headers */,
 				EA7BE1030E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B70E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
@@ -2172,7 +2160,6 @@
 				EA54FA780E676E2200605409 /* Face.h in Headers */,
 				EA54FA790E676E2200605409 /* Library.h in Headers */,
 				3EC9D2E30E6789F2003CED66 /* KeySym.h in Headers */,
-				EAB83A090E6DD4C700A6570F /* Loader.h in Headers */,
 				EA7BE0FC0E6F38760017B031 /* BindAll.h in Headers */,
 				EA7BE1050E6F38890017B031 /* EventCast.h in Headers */,
 				EA7BE1B80E6F3C9D0017B031 /* LostApplicationTimer.h in Headers */,
@@ -2509,7 +2496,6 @@
 				3EC9CFD00E673182003CED66 /* State.cpp in Sources */,
 				EA54FA7B0E676E2200605409 /* Library.cpp in Sources */,
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
-				EAB83A0A0E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0FE0E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1080E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE16C0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
@@ -2586,7 +2572,6 @@
 				EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */,
 				EA54FA6E0E676E2200605409 /* Face.cpp in Sources */,
 				EA54FA720E676E2200605409 /* Glyph.cpp in Sources */,
-				EAB83A060E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0F80E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1040E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE12A0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
@@ -2662,7 +2647,6 @@
 				3EC9CFD10E673182003CED66 /* State.cpp in Sources */,
 				EA54FA730E676E2200605409 /* Library.cpp in Sources */,
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
-				EAB83A080E6DD4C700A6570F /* Loader.cpp in Sources */,
 				EA7BE0FB0E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1060E6F38890017B031 /* ErrorHandler.cpp in Sources */,
 				EA7BE14B0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
