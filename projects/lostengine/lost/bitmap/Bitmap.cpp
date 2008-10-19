@@ -99,7 +99,14 @@ void Bitmap::init(uint32_t inWidth,
 
 // FIXME: not endian safe, we nee dto fix this for big endian
 // FIXME: not sure if this is even correct byte order for little endian
-  void Bitmap::copyPixel(uint8_t* dest,
+//
+// BIG MESS ALERT!!!!!
+//
+// the whole conversion process from one component type to another should really be programmable, but I can't be bothered right now.
+// this thing was really only meant to convert alpha to rgba. This was tweaked to work for the fonts, everything else is an 
+// untested bonus. Maybe we should really resort to using boost::gil, but this should be enough for now.
+//
+void Bitmap::copyPixel(uint8_t* dest,
                 Components destComponents, 
                 uint8_t* src,
                 Components srcComponents)
@@ -111,7 +118,7 @@ void Bitmap::init(uint32_t inWidth,
       {
         case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=src[3];break;
         case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=255;break;
-        case COMPONENTS_ALPHA:dest[0]=src[0];dest[1]=src[0];dest[2]=src[0];dest[3]=src[0];break;
+        case COMPONENTS_ALPHA:dest[0]=255;dest[1]=255;dest[2]=255;dest[3]=src[0];break;
         default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
       }      
       break;
