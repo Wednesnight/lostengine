@@ -1,11 +1,13 @@
 #include "Controller.h"
 #include "lost/application/Application.h"
 #include "lost/application/KeySym.h"
-
+#include "lost/gl/Utils.h"
+#include "lost/gl/Draw.h"
+#include "lost/bitmap/Bitmap.h"
+#include "lost/event/Receive.h"
 
 using namespace std;
 using namespace lost::gl;
-using namespace lost::gl::utils;
 using namespace lost::math;
 using namespace lost::common;
 using namespace lost::event;
@@ -19,8 +21,8 @@ using namespace boost;
 
 void Controller::redraw(shared_ptr<TimerEvent> event)
 {
-  glViewport(0, 0, appInstance->displayAttributes.width, appInstance->displayAttributes.height);GLDEBUG;
-  set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+  glViewport(0, 0, appInstance->displayAttributes->width, appInstance->displayAttributes->height);GLDEBUG;
+  appInstance->context->set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
 
   appInstance->context->pushState(textureRenderState);
   appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -53,15 +55,8 @@ void Controller::init(shared_ptr<ApplicationEvent> event)
   //string filename = "nomnomnom.jpg";
   //string filename = "buttonReleased.png";
   fpsMeter.reset(new FpsMeter(appInstance->context));
-  string filename = "stubs.jpg";
-  bitmap.reset(new Bitmap(appInstance->loader->load(filename)));
-  
-  
-  texture.reset(new Texture());
-  texture->bind();
-  texture->reset(0, GL_RGBA8, false, bitmap);
-  texture->wrap(GL_CLAMP_TO_EDGE);
-  texture->filter(GL_LINEAR);
+  string filename = "stubs.jpg";  
+  texture.reset(new Texture(appInstance->loader->load(filename)));
   
   textureRenderState = appInstance->context->copyState();
   textureRenderState->texture2D = true;

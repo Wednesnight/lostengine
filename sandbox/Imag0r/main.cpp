@@ -4,6 +4,7 @@
 #include "lost/application/ApplicationEvent.h"
 #include <boost/bind.hpp>
 #include "Controller.h"
+#include "lost/event/Receive.h"
 
 using namespace std;
 using namespace lost::gl;

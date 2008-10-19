@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		EA01BC1B0EAABAB700F649F0 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA01BC1A0EAABAB700F649F0 /* Application.lua */; };
 		EA0E48E00E5E3F2800B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48DB0E5E3F2200B5EBF1 /* libLostEngine.a */; };
 		EA9137210E996C7A006884D7 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA9137200E996C7A006884D7 /* init */; };
 		EABC5FF40DE9A43D007B63E9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABC5FF30DE9A43D007B63E9 /* main.cpp */; };
@@ -19,7 +20,6 @@
 		EABC60730DE9A97B007B63E9 /* gay_zombie.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABC60720DE9A97B007B63E9 /* gay_zombie.jpg */; };
 		EABC612E0DE9D735007B63E9 /* buttonReleased.png in Resources */ = {isa = PBXBuildFile; fileRef = EABC612D0DE9D735007B63E9 /* buttonReleased.png */; };
 		EABC614C0DE9D853007B63E9 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EABC614B0DE9D853007B63E9 /* stubs.jpg */; };
-		EADA8DA50E76F21E0048AE02 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EADA8DA40E76F21E0048AE02 /* Application.lua */; };
 		EADA8DB10E76F3C30048AE02 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADA8DB00E76F3C30048AE02 /* Controller.cpp */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +58,7 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Imag0r.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imag0r.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA01BC1A0EAABAB700F649F0 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EA0E48B90E5E3F2200B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA9137200E996C7A006884D7 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		EABC5FF30DE9A43D007B63E9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
@@ -69,7 +70,6 @@
 		EABC60720DE9A97B007B63E9 /* gay_zombie.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gay_zombie.jpg; sourceTree = "<group>"; };
 		EABC612D0DE9D735007B63E9 /* buttonReleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonReleased.png; sourceTree = "<group>"; };
 		EABC614B0DE9D853007B63E9 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stubs.jpg; sourceTree = "<group>"; };
-		EADA8DA40E76F21E0048AE02 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EADA8DAF0E76F3C30048AE02 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
 		EADA8DB00E76F3C30048AE02 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -121,7 +121,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				EA9137200E996C7A006884D7 /* init */,
-				EADA8DA40E76F21E0048AE02 /* Application.lua */,
+				EA01BC1A0EAABAB700F649F0 /* Application.lua */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -227,8 +227,8 @@
 				EABC60730DE9A97B007B63E9 /* gay_zombie.jpg in Resources */,
 				EABC612E0DE9D735007B63E9 /* buttonReleased.png in Resources */,
 				EABC614C0DE9D853007B63E9 /* stubs.jpg in Resources */,
-				EADA8DA50E76F21E0048AE02 /* Application.lua in Resources */,
 				EA9137210E996C7A006884D7 /* init in Resources */,
+				EA01BC1B0EAABAB700F649F0 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

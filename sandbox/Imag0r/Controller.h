@@ -7,14 +7,12 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/gl/Texture.h"
-#include "lost/bitmap/BitmapLoader.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/resource/Loader.h"
 
 struct Controller
 {
   lost::application::Timer* redrawTimer;
-  boost::shared_ptr<lost::bitmap::Bitmap> bitmap;
   boost::shared_ptr<lost::gl::Texture> texture;
   boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
   boost::shared_ptr<lost::gl::State> textureRenderState;
