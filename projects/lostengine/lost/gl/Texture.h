@@ -9,6 +9,7 @@ namespace boost { template<typename T> class shared_ptr; }
 namespace lost
 {
   namespace bitmap { struct Bitmap; };
+  namespace resource { struct File; };
 
   namespace gl
   {
@@ -17,26 +18,43 @@ namespace lost
      */
     struct Texture : private boost::noncopyable
     {
+      enum SizeHint
+      {
+        SIZE_ORIGINAL = 0,
+        SIZE_POWER_OF_TWO,
+        SIZE_DONT_CARE,
+        SIZE_NUM
+      };
+      
       struct Params
       {
-        GLint   level;          // mipmap level
-        GLenum  internalFormat; // number of color components 
-        GLsizei width;          // texture width
-        GLsizei height;         // texture height
-        GLint   border;         // 1 = with border, 0 = without
-        GLenum  format;         // format of the incoming bitmap data: number and kind of components, sequence
-        GLenum  type;           // type of the color components
+        Params();
+        
+        GLint     level;          // mipmap level
+        GLenum    internalFormat; // number of color components 
+        GLint     border;         // 1 = with border, 0 = without
+        GLenum    format;         // format of the incoming bitmap data: number and kind of components, sequence
+        GLenum    type;           // type of the color components
+        GLint     wrapS;          // default s wrapping mode that will be set after construction
+        GLint     wrapT;          // default t wrapping mode that will be set after construction
+        GLint     minFilter;      // default minification filter that will be set after construction
+        GLint     magFilter;      // default magnification filter that will be set after construction
+        SizeHint  sizeHint;       // size for constructing power of two textures depending on the capabilities of the platform
+                                  // with this flag, you can force (non) power of two textures or just leave it up
+                                  // to the Texture class to decide what's best
       };
     
       Texture();
+      Texture(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
+      Texture(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());      
       ~Texture();    
       void destroy();  
       void bind() const;      
-      void reset(GLint level,
-                 GLenum internalFormat,
-                 bool border,
-                 boost::shared_ptr<lost::bitmap::Bitmap> inBitmap);
-      void reset(GLint level, // mipmap level
+      
+      void init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
+      void init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());
+      
+      void init(GLint level, // mipmap level
                  GLenum internalformat, // number of color components
                  GLsizei width,
                  GLsizei height,
@@ -56,8 +74,13 @@ namespace lost
       void param(GLenum pname, GLint p);
                       
       GLuint        texture;
-      int width;
-      int height;      
+      // width and height of the texture object
+      uint32_t width;
+      uint32_t height;      
+      uint32_t dataWidth; 
+      uint32_t dataHeight;
+    private:
+      void create();
     };
   }
 }
