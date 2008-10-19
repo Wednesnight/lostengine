@@ -11,6 +11,7 @@
 using namespace lost::math;
 using namespace boost;
 using namespace lost::bitmap;
+using namespace lost::gl;
 
 namespace lost
 {
@@ -21,7 +22,6 @@ namespace freetype
 
 Renderer::Renderer()
 {
-  mPowerOfTwoTextures = true;
 }
 
 Renderer::~Renderer()
@@ -45,116 +45,32 @@ void Renderer::renderGlyphToBitmap(boost::shared_ptr<Face> face,
   if(error) {WOUT("FT_Render_Glyph error: " << error);}
 }
 
-void Renderer::renderGlyphToTexture(boost::shared_ptr<Face> face,
+boost::shared_ptr<lost::gl::Texture> Renderer::renderGlyphToTexture(boost::shared_ptr<Face> face,
                                     unsigned long inSizeInPoints,
-                                    char inCharacter,
-                                    boost::shared_ptr<lost::gl::Texture>& outTexture,
-                                    unsigned long& outBitmapWidth,
-                                    unsigned long& outBitmapHeight,
-                                    unsigned long& outTextureWidth,
-                                    unsigned long& outTextureHeight)
+                                    char inCharacter)
 {
   // FIXME: I think renderGlyph should throw for undefined glyphs so we don't crash here
   renderGlyphToBitmap(face, inSizeInPoints, inCharacter); // let freetype render the glyph as 8 bit bitmap
-                          // we'll convert this bitmap to an opengl texture
-  outTexture.reset(new lost::gl::Texture()); // also creates the opengl texture object
-  outTexture->bind(); // all subsequent operations will occur on the now bound texture object
-  outTexture->filter(GL_NEAREST);
-  outTexture->wrap(GL_CLAMP_TO_EDGE);
-  
-  if(mPowerOfTwoTextures)
-  {
-    createGlyphPowerOfTwoTexture(face, outTexture, outTextureWidth, outTextureHeight);
-  }
-  else
-  {
-    createGlyphNonPowerOfTwoTexture(face, outTexture, outTextureWidth, outTextureHeight);
-  }
 
-  outBitmapWidth = face->face()->glyph->bitmap.width;
-  outBitmapHeight = face->face()->glyph->bitmap.rows;
-}
-
-void Renderer::createGlyphPowerOfTwoTexture(boost::shared_ptr<Face> face,
-                                            boost::shared_ptr<lost::gl::Texture> tex,
-                                            unsigned long& outTexWidth,
-                                            unsigned long& outTexHeight)
-{
-  // find the power-of-two measurements for the current glyph
-  // we need this to create power-of-two sized textures for opengl to be on the safe side and avoid side effects
-  unsigned long potwidth = nextPowerOf2(face->face()->glyph->bitmap.width);
-  unsigned long potheight = nextPowerOf2(face->face()->glyph->bitmap.rows);
-
-  shared_ptr<Bitmap> bmp(new Bitmap(face->face()->glyph->bitmap.width,
-                                      face->face()->glyph->bitmap.rows,
-                                      Bitmap::COMPONENTS_RGBA,
-                                      Bitmap::COMPONENTS_ALPHA,
-                                      face->face()->glyph->bitmap.buffer));
-  
-  // call glTexImage2D once with pixels = 0 to allocate memory
-  glTexImage2D(GL_TEXTURE_2D,
-               0,
-               GL_RGBA,
-               potwidth,
-               potheight,
-               0,
-               GL_RGBA,
-               GL_UNSIGNED_BYTE,
-               0);GLDEBUG_THROW;
-
-  // now we copy the actual data to the previsouly allocated texture
-  glTexSubImage2D(GL_TEXTURE_2D,
-                  0,
-                  0,
-                  0,
-                  bmp->width,
-                  bmp->height,
-                  GL_RGBA,
-                  GL_UNSIGNED_BYTE,
-                  bmp->data);GLDEBUG_THROW;
-  outTexWidth = potwidth;
-  outTexHeight = potheight;
-}
-
-void Renderer::createGlyphNonPowerOfTwoTexture(boost::shared_ptr<Face> face,
-                                               boost::shared_ptr<lost::gl::Texture> tex,
-                                               unsigned long& outTexWidth,
-                                               unsigned long& outTexHeight)
-{
   shared_ptr<Bitmap> bmp(new Bitmap(face->face()->glyph->bitmap.width,
                                     face->face()->glyph->bitmap.rows,
                                     Bitmap::COMPONENTS_RGBA,
                                     Bitmap::COMPONENTS_ALPHA,
-                                    face->face()->glyph->bitmap.buffer));  
-  
-  glTexImage2D(GL_TEXTURE_2D,
-               0,
-               GL_RGBA,
-               bmp->width,
-               bmp->height,
-               0,
-               GL_RGBA,
-               GL_UNSIGNED_BYTE,
-               bmp->data);GLDEBUG_THROW;
-  outTexWidth = bmp->width;
-  outTexHeight = bmp->height;
+                                    face->face()->glyph->bitmap.buffer));
+
+  boost::shared_ptr<lost::gl::Texture> result(new lost::gl::Texture(bmp));
+  return result;
 }
 
 boost::shared_ptr<lost::font::freetype::Glyph> Renderer::renderGlyph(boost::shared_ptr<Face> face,
                                                                      unsigned long inSizeInPoints,
                                                                      char inCharacter)
 {
-  boost::shared_ptr<lost::gl::Texture> texture;
-  unsigned long bitmapWidth;
-  unsigned long bitmapHeight;
-  unsigned long textureWidth;
-  unsigned long textureHeight;
+  boost::shared_ptr<lost::gl::Texture> texture = renderGlyphToTexture(face, inSizeInPoints, inCharacter);
 
-  renderGlyphToTexture(face, inSizeInPoints, inCharacter, texture, bitmapWidth, bitmapHeight, textureWidth, textureHeight);
-
-  lost::math::Rect rect(0, 0, bitmapWidth, bitmapHeight);
-  float maxU = static_cast<float>(bitmapWidth)/static_cast<float>(textureWidth);
-  float maxV = static_cast<float>(bitmapHeight)/static_cast<float>(textureHeight);
+  lost::math::Rect rect(0, 0, texture->dataWidth, texture->dataHeight);
+  float maxU = static_cast<float>(texture->dataWidth)/static_cast<float>(texture->width);
+  float maxV = static_cast<float>(texture->dataHeight)/static_cast<float>(texture->height);
 
   signed long xoffset = face->face()->glyph->bitmap_left;
   signed long yoffset = face->face()->glyph->bitmap_top - (face->face()->glyph->metrics.height >> 6);

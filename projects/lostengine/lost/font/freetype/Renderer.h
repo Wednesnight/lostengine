@@ -49,44 +49,13 @@ private:
    * memory, but provide better backwards compatibility.
    *
    * @param inCharacter   the character to render
-   * @param outTexture    receives a new texture object containing the converted bitmap data
    *
-   * The following parameters are required for the calling code to correctly calculate the texture coordinates for
-   * the target surface:
-   *
-   * @param outBitmapWidth    receives the original width of the freetype bitmap
-   * @param outBitmapHeight   receives the original height of the freetype bitmap
-   * @param outTextureWidth   receives the width of the resulting texture
-   * @param outTextureHeight  receives the height of the resulting texture
+   * @return outTexture    returns a new texture object containing the converted bitmap data
    */
   // NOTE: set face size before rendering!
-  void renderGlyphToTexture(boost::shared_ptr<Face> face,
+  boost::shared_ptr<lost::gl::Texture> renderGlyphToTexture(boost::shared_ptr<Face> face,
                             unsigned long inSizeInPoints,
-                            char inCharacter,
-                            boost::shared_ptr<lost::gl::Texture>& outTexture,
-                            unsigned long& outBitmapWidth,
-                            unsigned long& outBitmapHeight,
-                            unsigned long& outTextureWidth,
-                            unsigned long& outTextureHeight);
-
-  /** takes the current glyph of the face and converts it to a texture
-   * with power-of-two measurements for backwwards compatibility.
-   * A texture object must have been created and bound before calling this function.
-   */
-  void createGlyphPowerOfTwoTexture(boost::shared_ptr<Face> face,
-                                    boost::shared_ptr<lost::gl::Texture> tex,
-                                    unsigned long& outTexWidth,
-                                    unsigned long& outTexHeight);
-
-  /** takes the current glyph of the face and converts it to a texture
-   * with the exact same size as the bitmap. This only works on OpenGL >= 2.0 or if GL_ARB_texture_non_power_of_two
-   * or similar was defined.
-   * A texture object must have been created and bound before calling this function.
-   */
-  void createGlyphNonPowerOfTwoTexture(boost::shared_ptr<Face> face,
-                                       boost::shared_ptr<lost::gl::Texture> tex,
-                                       unsigned long& outTexWidth,
-                                       unsigned long& outTexHeight);
+                            char inCharacter);
 
   /** always renders and creates a new glyph object.
    * if you want to us ethe cache, use getGlyph(...);
@@ -107,7 +76,6 @@ private:
   typedef std::map<char, GlyphPtr>                       CharToGlyphMap;
   typedef std::map<unsigned long, CharToGlyphMap >       GlyphCache;
 
-  bool        mPowerOfTwoTextures;
   GlyphCache  glyphCache;  
 };
 
