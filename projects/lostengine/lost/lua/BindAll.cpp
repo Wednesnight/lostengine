@@ -37,6 +37,8 @@
 #include "lost/lua/bindings/LostGLContext.h"
 #include "lost/lua/bindings/LostGLState.h"
 #include "lost/lua/bindings/LostGuiroScreen.h"
+#include "lost/lua/bindings/LostGuiroUserInterface.h"
+#include "lost/lua/bindings/LostGuiroView.h"
 
 namespace lost
 {
@@ -79,7 +81,9 @@ namespace lost
       LostPlatformPlatform(state);
       LostGLContext(state);
       LostGLState(state);
+      LostGuiroView(state);
       LostGuiroScreen(state);
+      LostGuiroUserInterface(state);
       
       luabind::bind_class_info(state);
     }

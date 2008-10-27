@@ -13,7 +13,6 @@ namespace lost
     typedef boost::shared_ptr<lost::event::Event> EventPtr;
     typedef boost::function<void (EventPtr)>      EventListenerFunc;
 
-    // EventSignalPtrMap pimpl
     struct EventSignalPtrMap;
     struct EventDispatcher
     {
@@ -23,7 +22,8 @@ namespace lost
       virtual ~EventDispatcher();
       
       void addEventListener(const lost::event::Type& type, EventListenerFunc callback);
-      void dispatchEvent(EventPtr event);
+      void removeEventListener(const lost::event::Type& type, EventListenerFunc callback);
+      virtual void dispatchEvent(EventPtr event);
       void clear();
     };
   }

@@ -18,7 +18,7 @@ namespace lost
       [
         namespace_("guiro")
         [
-          class_<Screen, boost::shared_ptr<Screen>, boost::shared_ptr<View> >("Screen")
+          class_<Screen, View, boost::shared_ptr<Screen> >("Screen")
             .def(constructor<const boost::shared_ptr<lost::lua::State>&, const boost::shared_ptr<lost::common::DisplayAttributes>&>())
         ]
       ];

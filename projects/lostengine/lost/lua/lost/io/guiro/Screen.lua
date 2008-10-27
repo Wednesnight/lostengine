@@ -6,5 +6,6 @@ module("lost.io", package.seeall)
 
 require("lost.io.Loader")
 
-function Loader:Screen(table)
+function Loader:Screen(definition)
+  return self:applyDefinitionToView(globals.app.screen, definition)
 end

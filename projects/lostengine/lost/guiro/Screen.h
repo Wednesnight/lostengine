@@ -16,7 +16,9 @@ namespace lost
       boost::shared_ptr<lost::common::DisplayAttributes> displayAttributes;
 
       Screen(const boost::shared_ptr<lua::State>& inInterpreter, const boost::shared_ptr<lost::common::DisplayAttributes>& inAttributes);
-      virtual ~Screen() {}
+      virtual ~Screen();
+
+      virtual void validateChild(const boost::shared_ptr<View>& child);
 
       void reset(const std::string& inFile);
     };

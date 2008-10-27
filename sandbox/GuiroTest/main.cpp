@@ -1,7 +1,7 @@
-#include "GuiroTest.h"
 #include "lost/application/Application.h"
 
 using namespace std;
+using namespace boost;
 using namespace lost::common;
 using namespace lost::application;
 
@@ -12,9 +12,6 @@ int main(int argn, char** args)
   {
     Application app;
 
-    // register test class
-    GuiroTestView(*(app.interpreter));
-    
     // run
     app.run();
   }

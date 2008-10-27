@@ -6,12 +6,11 @@ namespace lost
 {
   namespace event
   {
-    typedef boost::signal<void (EventPtr)>                      EventSignal;
-    typedef boost::shared_ptr<boost::signal<void (EventPtr)> >  EventSignalPtr;    
-//    typedef std::map<lost::event::Type,EventSignalPtr>          EventSignalPtrMap;
-
+    typedef boost::signal<void (EventPtr)>             EventSignal;
+    typedef boost::shared_ptr<EventSignal>             EventSignalPtr;    
+//    typedef std::map<lost::event::Type,EventSignalPtr> EventSignalPtrMap;
     struct EventSignalPtrMap : public std::map<lost::event::Type,EventSignalPtr> {};
-
+    
     EventDispatcher::EventDispatcher()
     {
       listeners = new EventSignalPtrMap();
@@ -22,7 +21,7 @@ namespace lost
       delete listeners;
     }
     
-    void EventDispatcher::addEventListener( const lost::event::Type& type, EventListenerFunc callback )
+    void EventDispatcher::addEventListener(const lost::event::Type& type, EventListenerFunc callback)
     {
       EventSignalPtrMap::iterator pos = (*listeners).find(type);
       if(pos == (*listeners).end())
@@ -31,6 +30,11 @@ namespace lost
         (*listeners)[type] =  EventSignalPtr(new EventSignal);
       }
       (*listeners)[type]->connect(callback);
+    }
+    
+    void EventDispatcher::removeEventListener(const lost::event::Type& type, EventListenerFunc callback)
+    {
+      //
     }
     
     void EventDispatcher::dispatchEvent(EventPtr event)
