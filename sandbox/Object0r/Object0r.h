@@ -137,7 +137,7 @@ struct Object0r
   void init(shared_ptr<Event> event)
   {
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-    glfwSetMousePos(appInstance->displayAttributes.width/2, appInstance->displayAttributes.height/2);
+    glfwSetMousePos(appInstance->displayAttributes->width/2, appInstance->displayAttributes->height/2);
     glfwDisable(GLFW_MOUSE_CURSOR);
 #endif
 
@@ -204,7 +204,7 @@ struct Object0r
     appInstance->context->pushState(newState);
 
     appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    appInstance->context->set3DProjection(appInstance->displayAttributes, camera->position(), camera->target(), camera->up(),
+    appInstance->context->set3DProjection(*(appInstance->displayAttributes.get()), camera->position(), camera->target(), camera->up(),
                                           camera->fovY(), camera->depth());
 
     glMatrixMode(GL_MODELVIEW);
@@ -293,10 +293,10 @@ struct Object0r
     glScalef(10.0f, 10.0f, 10.0f);
     drawAxes(Vec3(10.0f, 10.0f, 10.0f));
     
-    set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+    set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    fpsMeter->render(appInstance->displayAttributes.width - fpsMeter->width, 0, event->passedSec);
+    fpsMeter->render(appInstance->displayAttributes->width - fpsMeter->width, 0, event->passedSec);
     
     appInstance->context->popState();
 
@@ -332,7 +332,7 @@ struct Object0r
           {
             std::stringstream file;
             file << "Desktop/Object0r_" << (unsigned int)lost::platform::currentTimeMilliSeconds() << ".tga";
-            lost::gl::utils::saveScreenshotTGA(appInstance->displayAttributes, lost::platform::buildUserDataPath(file.str()));
+            lost::gl::utils::saveScreenshotTGA(*(appInstance->displayAttributes.get()), lost::platform::buildUserDataPath(file.str()));
           }
           break;
         case K_N:

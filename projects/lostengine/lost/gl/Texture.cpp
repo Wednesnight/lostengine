@@ -81,7 +81,7 @@ void Texture::bind() const
   glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;       
 }
 
-  void Texture::init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
+void Texture::init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
 {
   shared_ptr<Bitmap> bmp(new Bitmap(inFile));
   init(bmp, inParams);

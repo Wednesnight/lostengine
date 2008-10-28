@@ -1,4 +1,4 @@
-require("Application")
+require("lost.application.Application")
 
 lost.camera.CameraController = 
 {

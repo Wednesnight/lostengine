@@ -44,7 +44,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E48670E5E3E9100B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
@@ -307,11 +307,11 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

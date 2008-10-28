@@ -65,24 +65,22 @@ namespace lost
         ConfigValue operator[](const std::string& key)
         {
           ConfigValue result;
-          luabind::object globals = luabind::globals(*((*this)->interpreter.get()));
-          if (luabind::type(globals["lost"]) != LUA_TNIL && 
-              luabind::type(globals["lost"]["application"]) != LUA_TNIL && 
-              luabind::type(globals["lost"]["application"]["Application"]) != LUA_TNIL && 
-              luabind::type(globals["lost"]["application"]["Application"]["config"]) != LUA_TNIL && 
-              luabind::type(globals["lost"]["application"]["Application"]["config"][key]) != LUA_TNIL)
+          if (luabind::type((*this)->config[key]) != LUA_TNIL)
           {
-            result = ConfigValue(globals["lost"]["application"]["Application"]["config"][key]);
+            result = ConfigValue((*this)->config[key]);
           }
           return result;
         }
       };
 
       boost::shared_ptr<lua::State> interpreter;
+      luabind::object               config;
 
       Config(const boost::shared_ptr<lua::State>& inInterpreter)
       : interpreter(inInterpreter)
       {
+        luabind::object globals = luabind::globals(*(interpreter.get()));
+        config = globals["lost"]["application"]["Application"]["config"] = luabind::newtable(*(interpreter.get()));
       }
     };
   }

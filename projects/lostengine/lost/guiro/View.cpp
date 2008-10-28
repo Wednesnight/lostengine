@@ -33,6 +33,7 @@ namespace lost
       }
 
       children[child->id] = child;
+      child->parentView = shared_from_this();
     }
 
     void View::removeChild(const boost::shared_ptr<View>& child)
@@ -44,6 +45,7 @@ namespace lost
         throw std::runtime_error("[View::appendChild] child '"+ child->id +"' does not exist");
       }
 
+      child->parentView.reset();
       children.erase(child->id);
     }
 

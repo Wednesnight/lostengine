@@ -35,7 +35,6 @@
 		3ED8F6CE0E461CC50043F5CE /* cart_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3ED8F6CD0E461CC50043F5CE /* cart_tri.obj */; };
 		3ED935A70E47516800AABFAB /* cube_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935A60E47516800AABFAB /* cube_tri.obj */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
-		3EDE44010E766A7900C38A71 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EDE44000E766A7900C38A71 /* Application.lua */; };
 		3EF2ABE90E43484A005624C3 /* cessna_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EF2ABE80E43484A005624C3 /* cessna_tri.obj */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
@@ -110,7 +109,6 @@
 		3ED8F6CD0E461CC50043F5CE /* cart_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cart_tri.obj; path = ../../../data/obj/cart_tri.obj; sourceTree = SOURCE_ROOT; };
 		3ED935A60E47516800AABFAB /* cube_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_tri.obj; path = ../../../data/obj/cube_tri.obj; sourceTree = SOURCE_ROOT; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
-		3EDE44000E766A7900C38A71 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		3EF2ABE80E43484A005624C3 /* cessna_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cessna_tri.obj; path = ../../../data/obj/cessna_tri.obj; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Object0r.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Object0r.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,7 +222,6 @@
 		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3EDE44000E766A7900C38A71 /* Application.lua */,
 				3EA8683C0E6307E600E34D51 /* spectator.lua */,
 				3ED935C90E4756B700AABFAB /* init */,
 			);
@@ -251,6 +248,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				3ED285C10EB6FCA600BEA5C3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -347,11 +345,26 @@
 				3E6BC1CB0E4B43B400FC5232 /* speedcraft.mtl in Resources */,
 				3E6BC1CC0E4B43B400FC5232 /* speedcraft.obj in Resources */,
 				3EA8683D0E6307E600E34D51 /* spectator.lua in Resources */,
-				3EDE44010E766A7900C38A71 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3ED285C10EB6FCA600BEA5C3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {

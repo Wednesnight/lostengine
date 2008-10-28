@@ -4,6 +4,7 @@
 #include "lost/gl/gl.h"
 #include <string>
 #include <boost/scoped_ptr.hpp>
+#include <boost/scoped_array.hpp>
 
 namespace lost
 {

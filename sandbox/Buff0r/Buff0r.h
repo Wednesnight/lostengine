@@ -1,6 +1,8 @@
 #ifndef BUFF0R_H
 #define BUFF0R_H
 
+#include <boost/shared_ptr.hpp>
+#include <boost/signal.hpp>
 #include "lost/gl/gl.h"
 #include "lost/gl/Draw.h"
 #include "lost/gl/Utils.h"
@@ -14,16 +16,15 @@
 #include "lost/application/KeySym.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/ShaderHelper.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/PushAttrib.h"
 #include "lost/math/Rect.h"
+#include "lost/application/Application.h"
 
 struct Buff0r
 {
-  lost::common::FpsMeter  fpsMeter;
   lost::math::Vec3        eye;
   lost::math::Vec3        at;
   lost::math::Vec3        up;
@@ -39,6 +40,7 @@ struct Buff0r
   int frameBufferWidth;
   int frameBufferHeight;
   boost::shared_ptr<lost::resource::Loader> loader;
+  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
   
   Buff0r(lost::common::DisplayAttributes& inDisplayAttributes, boost::shared_ptr<lost::resource::Loader> inLoader)
   : eye(0,0,-5),
@@ -58,6 +60,7 @@ struct Buff0r
     frameBuffer.reset(new lost::gl::FrameBuffer);
     depthTexture.reset(new lost::gl::Texture);
     colorTexture.reset(new lost::gl::Texture);
+    fpsMeter.reset(new lost::common::FpsMeter(lost::application::appInstance->context));
 
     frameBufferInit();
     shaderInit();
@@ -75,11 +78,11 @@ struct Buff0r
     frameBuffer->enable();
 
     depthTexture->bind();
-    depthTexture->reset(0,GL_DEPTH_COMPONENT32,frameBufferWidth, frameBufferHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+    depthTexture->init(0,GL_DEPTH_COMPONENT32,frameBufferWidth, frameBufferHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
     frameBuffer->attachDepth(depthTexture);
 
     colorTexture->bind();
-    colorTexture->reset(0,GL_RGBA8,frameBufferWidth, frameBufferHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+    colorTexture->init(0,GL_RGBA8,frameBufferWidth, frameBufferHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     frameBuffer->attachColor(0, colorTexture);
     colorTexture->filter(GL_NEAREST);
     colorTexture->wrap(GL_CLAMP);
@@ -204,7 +207,7 @@ struct Buff0r
     glDisable(GL_TEXTURE_2D);GLDEBUG;
 
     glLoadIdentity();GLDEBUG;
-    fpsMeter.render(1, 0, event->passedSec);
+    fpsMeter->render(1, 0, event->passedSec);
     glfwSwapBuffers();
   }
 

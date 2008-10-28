@@ -1,4 +1,4 @@
-require("Application")
+require("lost.application.Application")
 require("spectator")
 
 function lost.application.Application:configure(event)
