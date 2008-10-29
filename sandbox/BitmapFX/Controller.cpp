@@ -43,13 +43,11 @@ void Controller::init(shared_ptr<Event> event)
   renderState->textureCoordArray = true;  
 
   pic.reset(new Bitmap);
-  pic->init(640, 480);
+  pic->init(640, 480, Bitmap::COMPONENTS_RGBA);
   
   shared_ptr<File> file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
-  tex.reset(new Texture);
-  tex->bind();
-  tex->reset(0, GL_RGB, false, loadedPic);
+  tex.reset(new Texture(file));
   tex->wrap(GL_CLAMP_TO_EDGE);
   tex->filter(GL_LINEAR);
 }
@@ -71,7 +69,7 @@ void Controller::keyboard( shared_ptr<KeyEvent> event )
 void Controller::redraw(shared_ptr<TimerEvent> event)
 {
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
   context->pushState(renderState);
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -79,6 +77,6 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
   context->popState();
 
-  fpsMeter->render( appInstance->displayAttributes.width - (fpsMeter->width + 10), 0, event->passedSec );
+  fpsMeter->render( appInstance->displayAttributes->width - (fpsMeter->width + 10), 0, event->passedSec );
   appInstance->swapBuffers();
 }

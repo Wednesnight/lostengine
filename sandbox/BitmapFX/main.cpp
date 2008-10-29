@@ -4,6 +4,7 @@
 #include "lost/application/TimerEvent.h"
 #include "lost/application/Timer.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/event/Receive.h"
 #include "Controller.h"
 
 using namespace std;

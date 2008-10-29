@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA2ECA300EB922A90062B593 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2ECA2F0EB922A90062B593 /* Application.lua */; };
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
 		EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9137DF0E997F6B006884D7 /* stubs.jpg */; };
 		EAC026670E96AF8C00067FC5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026630E96AF8C00067FC5 /* main.cpp */; };
 		EAC026680E96AF8C00067FC5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAC026640E96AF8C00067FC5 /* init */; };
 		EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026660E96AF8C00067FC5 /* Controller.cpp */; };
-		EAC0266B0E96B0E500067FC5 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAC0266A0E96B0E500067FC5 /* Application.lua */; };
 		EAC0267A0E96B11600067FC5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC026750E96B10F00067FC5 /* libLostEngine.a */; };
 		EAD2E8330E940009000535DB /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8320E940009000535DB /* AGL.framework */; };
 		EAD2E8370E940011000535DB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8360E940011000535DB /* OpenGL.framework */; };
@@ -54,13 +54,13 @@
 /* Begin PBXFileReference section */
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2ECA2F0EB922A90062B593 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
 		EA9137DF0E997F6B006884D7 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 		EAC026630E96AF8C00067FC5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EAC026640E96AF8C00067FC5 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		EAC026650E96AF8C00067FC5 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
 		EAC026660E96AF8C00067FC5 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
-		EAC0266A0E96B0E500067FC5 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EAD2E8320E940009000535DB /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EAD2E8360E940011000535DB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -106,9 +106,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA2ECA2F0EB922A90062B593 /* Application.lua */,
 				EA9137DF0E997F6B006884D7 /* stubs.jpg */,
 				EA9136A50E995BDD006884D7 /* kitten+tits.jpg */,
-				EAC0266A0E96B0E500067FC5 /* Application.lua */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
@@ -222,9 +222,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAC026680E96AF8C00067FC5 /* init in Resources */,
-				EAC0266B0E96B0E500067FC5 /* Application.lua in Resources */,
 				EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */,
 				EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */,
+				EA2ECA300EB922A90062B593 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
