@@ -28,6 +28,14 @@ Bitmap::Bitmap()
 }
 
 Bitmap::Bitmap(uint32_t inWidth,
+       uint32_t inHeight,
+       Components format)
+{
+  reset();
+  init(inWidth, inHeight, format);
+}
+
+Bitmap::Bitmap(uint32_t inWidth,
                uint32_t inHeight,
                Components destComponents,
                Components srcComponents,
@@ -42,7 +50,6 @@ Bitmap::Bitmap(boost::shared_ptr<lost::resource::File> inFile)
   reset();
   init(inFile);
 }
-
 
 Bitmap::~Bitmap()
 {
@@ -66,18 +73,18 @@ void Bitmap::destroy()
 
 void Bitmap::init(uint32_t inWidth,
           uint32_t inHeight,
-          Components format)
+          Components inFormat)
 {
   destroy();
   // create target memory
-  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(format);
+  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(inFormat);
   uint32_t destSizeInBytes = destBytesPerPixel * inWidth * inHeight;
   data = new uint8_t[destSizeInBytes];
   loaded = false; // prevent stb_image from freeing  
 
   width = inWidth;
   height = inHeight;
-  format = format;
+  format = inFormat;
 }
 
 
@@ -186,6 +193,64 @@ void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
     default:throw std::runtime_error("couldn't init image: "+inFile->location+" don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
   }
   loaded = true;
+}
+
+void Bitmap::clear(const lost::common::Color& inColor)
+{
+  uint32_t bpp = bytesPerPixelFromComponents(format);
+  switch(bpp)
+  {
+    case 1:clearA(inColor);break;
+    case 3:clearRGB(inColor);break;
+    case 4:clearRGBA(inColor);break;
+    default:throw std::runtime_error("couldn't clear image with bpp: "+boost::lexical_cast<std::string>(bpp));    
+  }
+}
+
+void Bitmap::clearA(const lost::common::Color& inColor)
+{
+  uint8_t v = static_cast<uint8_t>(inColor.a()*255.0f);
+  uint32_t numpixels = width * height;
+  for(uint32_t i=0; i<numpixels; ++i)
+    data[i] = v;
+}
+
+void Bitmap::clearRGB(const lost::common::Color& inColor)
+{
+  uint32_t numpixels = width * height;
+  uint32_t bpp = 3;
+  uint8_t* d = data;
+  uint8_t r = static_cast<uint8_t>(inColor.r()*255.0f);
+  uint8_t g = static_cast<uint8_t>(inColor.g()*255.0f);
+  uint8_t b = static_cast<uint8_t>(inColor.b()*255.0f);
+  uint32_t bytesize = numpixels * bpp;
+  
+  for(uint32_t i=0; i<bytesize; i+=bpp)
+  {
+    d[i+0] = r;
+    d[i+1] = g;
+    d[i+2] = b;
+  }
+}
+
+void Bitmap::clearRGBA(const lost::common::Color& inColor)
+{
+  uint32_t numpixels = width * height;
+  uint32_t bpp = 4;
+  uint8_t* d = data;
+  uint8_t r = static_cast<uint8_t>(inColor.r()*255.0f);
+  uint8_t g = static_cast<uint8_t>(inColor.g()*255.0f);
+  uint8_t b = static_cast<uint8_t>(inColor.b()*255.0f);
+  uint8_t a = static_cast<uint8_t>(inColor.a()*255.0f);
+  uint32_t bytesize = numpixels * bpp;
+  
+  for(uint32_t i=0; i<bytesize; i+=bpp)
+  {
+    d[i+0] = r;
+    d[i+1] = g;
+    d[i+2] = b;
+    d[i+3] = a;
+  }
 }
 
 } 

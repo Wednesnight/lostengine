@@ -3,6 +3,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <stdint.h>
+#include "lost/common/Color.h"
 
 namespace boost { template<typename T> class shared_ptr; }
 
@@ -29,6 +30,9 @@ namespace lost
       Components  format; // format of bitmap as GL constant (e.g. rgb, rgba)
 
       Bitmap();
+      Bitmap(uint32_t inWidth,
+             uint32_t inHeight,
+             Components format);
       Bitmap(uint32_t inWidth,
              uint32_t inHeight,
              Components destComponents,
@@ -90,10 +94,25 @@ namespace lost
                             Components destComponents, 
                             uint8_t* src,
                             Components srcComponents);
+                            
+                            
+      /** clears the bitmap, overwriting all pixels with the given color.
+       * Depending on the internal format of the bitmap, not all of the color components might be used.
+       * I.e. for COMPONENTS_ALPHA, only the alpha value of the given color will be used for clearing. 
+       *
+       * @param inColor the clear color.
+       *
+       */                      
+      void clear(const lost::common::Color& inColor);
+      
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.
                    // false if data is just a chunk of memory and can simply be deleted
+
+      void clearA(const lost::common::Color& inColor);
+      void clearRGB(const lost::common::Color& inColor);
+      void clearRGBA(const lost::common::Color& inColor);
     };
 
   } // namespace bitmap

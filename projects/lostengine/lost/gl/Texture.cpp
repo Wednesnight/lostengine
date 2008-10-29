@@ -38,7 +38,9 @@ GLenum bitmapComponents2GlFormat(bitmap::Bitmap::Components components)
     case bitmap::Bitmap::COMPONENTS_RGB:result=GL_RGB;break;
     case bitmap::Bitmap::COMPONENTS_RGBA:result=GL_RGBA;break;
     case bitmap::Bitmap::COMPONENTS_ALPHA:result=GL_ALPHA;break;
-    default:DOUT("throwing from her");throw runtime_error(string("can't convert bitmap components ")+lexical_cast<string>(components));
+    default:
+      DOUT("throwing from here");
+      throw runtime_error(string("can't convert bitmap components ")+lexical_cast<string>(components));
   }
   return result;
 }
