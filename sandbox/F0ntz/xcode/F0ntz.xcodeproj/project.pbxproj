@@ -11,7 +11,6 @@
 		EA01BAD90EAA2A6500F649F0 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA01BAD80EAA2A6500F649F0 /* Application.lua */; };
 		EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA03D8130DBBEE91001665C3 /* suigeneris.ttf */; };
 		EA0E484E0E5E3E3600B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E48490E5E3E3000B5EBF1 /* libLostEngine.a */; };
-		EA1B77F40E917B4F00004196 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EA1B77F30E917B4F00004196 /* init */; };
 		EA2AFA900DC2984F0034A6F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2AFA8F0DC2984F0034A6F5 /* main.cpp */; };
 		EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA5EA5BC0E023BD100E7349B /* Vera.ttf */; };
 		EAB83A1C0E6DD82200A6570F /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB83A1B0E6DD82200A6570F /* Controller.cpp */; };
@@ -60,7 +59,6 @@
 		EA01BAD80EAA2A6500F649F0 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EA03D8130DBBEE91001665C3 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../resources/suigeneris.ttf; sourceTree = SOURCE_ROOT; };
 		EA0E48270E5E3E3000B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EA1B77F30E917B4F00004196 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		EA2AFA8F0DC2984F0034A6F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA5EA5BC0E023BD100E7349B /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../resources/Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EAB83A1A0E6DD82200A6570F /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
@@ -122,7 +120,6 @@
 				EA03D8130DBBEE91001665C3 /* suigeneris.ttf */,
 				EA5EA5BC0E023BD100E7349B /* Vera.ttf */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
-				EA1B77F30E917B4F00004196 /* init */,
 				EA01BAD80EAA2A6500F649F0 /* Application.lua */,
 			);
 			name = Resources;
@@ -235,7 +232,6 @@
 			files = (
 				EA03D8140DBBEE91001665C3 /* suigeneris.ttf in Resources */,
 				EA5EA5BD0E023BD100E7349B /* Vera.ttf in Resources */,
-				EA1B77F40E917B4F00004196 /* init in Resources */,
 				EA01BAD90EAA2A6500F649F0 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
