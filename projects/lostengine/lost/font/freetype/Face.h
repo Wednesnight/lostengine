@@ -17,6 +17,7 @@ namespace lost
       struct Face
       {
 
+        // FIXME: needs more configuration parameters for e.g. kerning or texture filtering
         Face(FT_Face inFace, boost::shared_ptr<lost::resource::File> inFile);
         virtual ~Face();
 
