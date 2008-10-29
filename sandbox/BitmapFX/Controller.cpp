@@ -42,14 +42,12 @@ void Controller::init(shared_ptr<Event> event)
   renderState->vertexArray = true;  
   renderState->textureCoordArray = true;  
 
-  pic.reset(new Bitmap);
-  pic->init(640, 480, Bitmap::COMPONENTS_RGBA);
+  pic.reset(new Bitmap(100, 100, Bitmap::COMPONENTS_RGBA));
+  pic->clear(whiteColor);
   
   shared_ptr<File> file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
-  tex.reset(new Texture(file));
-  tex->wrap(GL_CLAMP_TO_EDGE);
-  tex->filter(GL_LINEAR);
+  tex.reset(new Texture(pic));
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )

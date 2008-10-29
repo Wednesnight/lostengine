@@ -29,7 +29,6 @@ int main( int argc, char *argv[] )
     app.addEventListener(ApplicationEvent::INIT(), bind(&Controller::init, &controller, _1));
     app.addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
     app.addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Controller::keyboard, &controller, _1)));
-
     app.run();
   }
   catch (std::exception& e)
