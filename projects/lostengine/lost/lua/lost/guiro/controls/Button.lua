@@ -1,9 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.controls.Control")
+
 --[[
      Button class
   ]]
-class "lost.guiro.controls.Button" (lost.guiro.View)
+class "lost.guiro.controls.Button" (lost.guiro.controls.Control)
 Button = _G["lost.guiro.controls.Button"]
 
 function Button:__init() super()

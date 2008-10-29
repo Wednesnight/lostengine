@@ -13,13 +13,9 @@ function lost.application.Application:configure(event)
   self.config.displayAttributes.fullscreen = false;
   self.config.displayAttributes.title = "GuiroTest";
 
-  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
-
-  self:addEventListener(lost.application.ApplicationEvent.RUN, runHandler)
-  self:addEventListener(lost.application.ApplicationEvent.QUIT, quitHandler)
-
-  self:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  self:addEventListener(lost.application.KeyEvent.KEY_UP, keyHandler)
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
+  self:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
+  self:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
 end
 
 function lost.application.Application:init(event)
@@ -33,31 +29,39 @@ function lost.application.Application:init(event)
   controls.fpsMeter = lost.common.FpsMeter(self.context)
 
   globals.timer = lost.application.Timer("luarender", 0.015)
-  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, renderHandler)
+  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
 end
 
-function keyHandler(event)
+function lost.application.Application:run(event)
+  log.debug("run")
+end
+
+function lost.application.Application:exit(event)
+  log.debug("exit")
+end
+
+function lost.application.Application:resizeHandler(event)
+  local resizeEvent = lost.application.ResizeEvent.cast(event)
+
+  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+end
+
+function lost.application.Application:keyHandler(event)
   keyEvent = lost.application.KeyEvent.cast(event)
   
   if (keyEvent.pressed) then
   
     if (keyEvent.key == lost.application.K_ESCAPE) then
-      globals.app:quit()
+      self:quit()
     end
   
   end
 end
 
-function runHandler(event)
-  log.debug("run")
-end
-
-function quitHandler(event)
-  log.debug("quit")
-end
-
-function renderHandler(event)
+function lost.application.Application:renderHandler(event)
   local timerEvent = lost.application.TimerEvent.cast(event)
+
+  self.screen:render()
 
   gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()
   gl.glClear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT) gl.GLDEBUG()
@@ -74,10 +78,4 @@ function renderHandler(event)
   gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
   
   globals.app:swapBuffers()
-end
-
-function resizeHandler(event)
-  local resizeEvent = lost.application.ResizeEvent.cast(event)
-
-  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
 end

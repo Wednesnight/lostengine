@@ -14,11 +14,16 @@ end
 
 function Loader:load(filename)
   log.debug("Loader:load()")
+  self:executeScript(filename, {guiro = self, lost = lost})
+end
+
+function Loader:executeScript(filename, environment)
+  log.debug("Loader:executeScript()")
   local file = self.loader:load(filename)
   local script = file:str()
   local func,error = loadstring(script, filename)
   if (func) then
-    setfenv(func, {guiro = self, lost = lost})
+    setfenv(func, environment)
     local result,error = pcall(func)
     if (not result) then
       log.error("error while executing '".. filename .."': ".. error)

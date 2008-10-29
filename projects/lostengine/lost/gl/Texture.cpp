@@ -94,9 +94,11 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
   // if sizehint is dontcare we try to choose non-power-of-two, unless the platform doesn't allow it
   if(sizeHint == Texture::SIZE_DONT_CARE)
   {
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
     if(GLEE_ARB_texture_non_power_of_two)
       sizeHint = Texture::SIZE_ORIGINAL;
     else
+#endif
       sizeHint = Texture::SIZE_POWER_OF_TWO;
   }
 

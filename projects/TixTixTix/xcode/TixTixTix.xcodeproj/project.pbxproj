@@ -14,9 +14,6 @@
 		3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
 		3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
 		3E0166AF0E6F29C4002528D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AB0E6F29C4002528D5 /* UIKit.framework */; };
-		3E201E8F0E7146D50016F395 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E201E8E0E7146D50016F395 /* Application.lua */; };
-		3E201E900E7146D50016F395 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E201E8E0E7146D50016F395 /* Application.lua */; };
-		3E201E910E7146D50016F395 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E201E8E0E7146D50016F395 /* Application.lua */; };
 		3E5D16630E6FD16000053AEA /* TixTixTix.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* TixTixTix.lua */; };
 		3E5D16640E6FD16800053AEA /* TixTixTix.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* TixTixTix.lua */; };
 		3E5D16650E6FD16D00053AEA /* TixTixTix.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D16370E6FCDAB00053AEA /* TixTixTix.lua */; };
@@ -88,7 +85,6 @@
 		3E0166A90E6F29C4002528D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		3E0166AB0E6F29C4002528D5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		3E201E8E0E7146D50016F395 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		3E5D16370E6FCDAB00053AEA /* TixTixTix.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TixTixTix.lua; path = ../TixTixTix.lua; sourceTree = SOURCE_ROOT; };
 		3E7E60A00E6F35E800B61285 /* TixTixTix-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TixTixTix-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7E60A20E6F35E800B61285 /* Info-iphone.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iphone.plist"; sourceTree = "<group>"; };
@@ -202,7 +198,6 @@
 		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3E201E8E0E7146D50016F395 /* Application.lua */,
 				3ED935C90E4756B700AABFAB /* init */,
 				3E5D16370E6FCDAB00053AEA /* TixTixTix.lua */,
 			);
@@ -335,7 +330,6 @@
 			files = (
 				3E5D16640E6FD16800053AEA /* TixTixTix.lua in Resources */,
 				3E01666A0E6F28B2002528D5 /* init in Resources */,
-				3E201E910E7146D50016F395 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +339,6 @@
 			files = (
 				3E5D16650E6FD16D00053AEA /* TixTixTix.lua in Resources */,
 				3E7E60940E6F35E800B61285 /* init in Resources */,
-				3E201E900E7146D50016F395 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +348,6 @@
 			files = (
 				3E5D16630E6FD16000053AEA /* TixTixTix.lua in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
-				3E201E8F0E7146D50016F395 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

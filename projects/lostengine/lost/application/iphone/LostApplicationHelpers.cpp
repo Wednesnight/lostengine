@@ -54,14 +54,14 @@ void lostApplicationHelpers_init()
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
 
   // try to extract default display attributes from lua state
-  displayAttributes = appInstance->config["displayAttributes"].as<shared_ptr<DisplayAttributes> >(displayAttributes);
+  appInstance->displayAttributes = appInstance->config["displayAttributes"].as<shared_ptr<DisplayAttributes> >(appInstance->displayAttributes);
   
   // no adapter init called since its all done in the uikit app controller
 
   // init gl context
   appInstance->context.reset(new Context());
   // init ui screen
-  screen.reset(new Screen(appInstance->interpreter, appInstance->displayAttributes));
+  appInstance->screen.reset(new Screen(appInstance->interpreter, appInstance->displayAttributes));
 
   // broadcast init event so dependant code knows its safe to init resources now
   appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);  

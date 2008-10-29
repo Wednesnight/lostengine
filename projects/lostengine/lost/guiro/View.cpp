@@ -1,5 +1,6 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/guiro/View.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -59,6 +60,13 @@ namespace lost
       {
         throw std::runtime_error("[View::validateChild] cannot handle empty child IDs");
       }
+    }
+
+    void View::render()
+    {
+      DOUT("View::render()");
+      for (ChildHierarchy::iterator idx = children.begin(); idx != children.end(); ++idx)
+        idx->second->render();
     }
 
   }

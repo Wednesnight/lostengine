@@ -53,6 +53,10 @@
 		3E7B27DC0EA77E6800F70E7C /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.lua; sourceTree = "<group>"; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		3EE2E8940EA8AD4900BA12BB /* Loader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loader.lua; path = io/Loader.lua; sourceTree = "<group>"; };
+		3EE9AAFB0EB90A6E00E832CA /* Style.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Style.lua; path = io/guiro/Style.lua; sourceTree = "<group>"; };
+		3EE9AB1E0EB90D8400E832CA /* Window.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Window.lua; path = styles/default/Window.lua; sourceTree = "<group>"; };
+		3EE9AB490EB915FD00E832CA /* Renderer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Renderer.lua; path = io/guiro/Renderer.lua; sourceTree = "<group>"; };
+		3EE9AB5A0EB91E4900E832CA /* Control.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Control.lua; sourceTree = "<group>"; };
 		3EF9B8DD0EB21570009094A7 /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Button.lua; path = io/guiro/Button.lua; sourceTree = "<group>"; };
 		3EF9B8DE0EB21570009094A7 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Screen.lua; path = io/guiro/Screen.lua; sourceTree = "<group>"; };
 		3EF9B8DF0EB21570009094A7 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UserInterface.lua; path = io/guiro/UserInterface.lua; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		3E7B27DA0EA77E6800F70E7C /* guiro */ = {
 			isa = PBXGroup;
 			children = (
+				3EE9AB180EB90D2D00E832CA /* styles */,
 				3E7B27DB0EA77E6800F70E7C /* controls */,
 			);
 			path = guiro;
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				3E7B27DC0EA77E6800F70E7C /* Button.lua */,
+				3EE9AB5A0EB91E4900E832CA /* Control.lua */,
 				3EF9B8F00EB21690009094A7 /* Window.lua */,
 			);
 			path = controls;
@@ -190,11 +196,29 @@
 			name = io;
 			sourceTree = "<group>";
 		};
+		3EE9AB180EB90D2D00E832CA /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				3EE9AB1D0EB90D7A00E832CA /* default */,
+			);
+			name = styles;
+			sourceTree = "<group>";
+		};
+		3EE9AB1D0EB90D7A00E832CA /* default */ = {
+			isa = PBXGroup;
+			children = (
+				3EE9AB1E0EB90D8400E832CA /* Window.lua */,
+			);
+			name = default;
+			sourceTree = "<group>";
+		};
 		3EF9B8DC0EB21563009094A7 /* guiro */ = {
 			isa = PBXGroup;
 			children = (
 				3EF9B8DD0EB21570009094A7 /* Button.lua */,
+				3EE9AB490EB915FD00E832CA /* Renderer.lua */,
 				3EF9B8DE0EB21570009094A7 /* Screen.lua */,
+				3EE9AAFB0EB90A6E00E832CA /* Style.lua */,
 				3EF9B8DF0EB21570009094A7 /* UserInterface.lua */,
 				3EF9B8F70EB2172C009094A7 /* Window.lua */,
 			);

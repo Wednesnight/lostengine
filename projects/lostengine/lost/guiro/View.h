@@ -24,6 +24,8 @@ namespace lost
       virtual void removeChild(const boost::shared_ptr<View>& child);
       virtual void validateChild(const boost::shared_ptr<View>& child);
 
+      virtual void render();
+
       std::string             id;
       ChildHierarchy          children;
       boost::shared_ptr<View> parentView;

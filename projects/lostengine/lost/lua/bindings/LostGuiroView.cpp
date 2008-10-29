@@ -8,10 +8,6 @@ using namespace luabind;
 using namespace lost::event;
 using namespace lost::guiro;
 
-/*
-
-example for base class wrapper
- 
 struct ViewLuaWrapper : View, luabind::wrap_base
 {
   ViewLuaWrapper()
@@ -28,38 +24,7 @@ struct ViewLuaWrapper : View, luabind::wrap_base
   {
     return base->View::render();
   }
-  
-  virtual void internalRender()
-  {
-    call<void>("internalRender");
-  }
-  
-  static void internalRenderBase(View* base)
-  {
-    return base->View::internalRender();
-  }
 };
-
-namespace lost
-{
-  namespace lua
-  {
-    void GuiroTestView(lost::lua::State& state)
-    {
-      module(state, "lost")
-      [
-       namespace_("guiro")
-       [
-        class_<View, ViewLuaWrapper>("View")
-        .def(constructor<>())
-        .def("render", &View::render, &ViewLuaWrapper::renderBase)
-        .def("internalRender", &View::internalRender, &ViewLuaWrapper::internalRenderBase)
-        ]
-       ];
-    }
-  }
-}
-*/
 
 namespace lost
 {
@@ -85,11 +50,12 @@ namespace lost
       [
         namespace_("guiro")
         [
-          class_<View, EventDispatcher, boost::shared_ptr<View> >("View")
+          class_<View, EventDispatcher, boost::shared_ptr<View>, ViewLuaWrapper>("View")
             .def(constructor<>())
             .def("appendChild", &appendChild)
             .def("removeChild", &View::removeChild)
             .def("validateChild", &View::validateChild)
+            .def("render", &View::render, &ViewLuaWrapper::renderBase)
             .def_readwrite("id", &View::id)
             .property("isView", &isView)
         ]

@@ -960,6 +960,10 @@
 		3EE056130E65530600E044A2 /* hashlib++.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "hashlib++.xcodeproj"; path = "../../../thirdparty/hashlib++/hashlib++_0_3_1/xcode/hashlib++.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		3EE2E8910EA8AC5100BA12BB /* Loader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loader.lua; path = io/Loader.lua; sourceTree = "<group>"; };
 		3EE57C9B0E82572E00066396 /* MouseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseButton.h; sourceTree = "<group>"; };
+		3EE9AAFA0EB90A6200E832CA /* Style.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Style.lua; path = io/guiro/Style.lua; sourceTree = "<group>"; };
+		3EE9AB1C0EB90D7400E832CA /* Window.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Window.lua; path = styles/default/Window.lua; sourceTree = "<group>"; };
+		3EE9AB480EB915F200E832CA /* Renderer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Renderer.lua; path = io/guiro/Renderer.lua; sourceTree = "<group>"; };
+		3EE9AB500EB91D8600E832CA /* Control.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Control.lua; sourceTree = "<group>"; };
 		3EF9B8D80EB21532009094A7 /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Button.lua; path = io/guiro/Button.lua; sourceTree = "<group>"; };
 		3EF9B8D90EB21532009094A7 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Screen.lua; path = io/guiro/Screen.lua; sourceTree = "<group>"; };
 		3EF9B8DA0EB21532009094A7 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UserInterface.lua; path = io/guiro/UserInterface.lua; sourceTree = "<group>"; };
@@ -1346,11 +1350,29 @@
 			name = io;
 			sourceTree = "<group>";
 		};
+		3EE9AB190EB90D3900E832CA /* styles */ = {
+			isa = PBXGroup;
+			children = (
+				3EE9AB1B0EB90D5E00E832CA /* default */,
+			);
+			name = styles;
+			sourceTree = "<group>";
+		};
+		3EE9AB1B0EB90D5E00E832CA /* default */ = {
+			isa = PBXGroup;
+			children = (
+				3EE9AB1C0EB90D7400E832CA /* Window.lua */,
+			);
+			name = default;
+			sourceTree = "<group>";
+		};
 		3EF9B8D70EB2151D009094A7 /* guiro */ = {
 			isa = PBXGroup;
 			children = (
 				3EF9B8D80EB21532009094A7 /* Button.lua */,
+				3EE9AB480EB915F200E832CA /* Renderer.lua */,
 				3EF9B8D90EB21532009094A7 /* Screen.lua */,
+				3EE9AAFA0EB90A6200E832CA /* Style.lua */,
 				3EF9B8DA0EB21532009094A7 /* UserInterface.lua */,
 				3EF9B8F60EB2171D009094A7 /* Window.lua */,
 			);
@@ -1389,6 +1411,7 @@
 		3EFF92D70EA724C6005C9288 /* guiro */ = {
 			isa = PBXGroup;
 			children = (
+				3EE9AB190EB90D3900E832CA /* styles */,
 				3EFF92D80EA724C6005C9288 /* controls */,
 			);
 			path = guiro;
@@ -1398,6 +1421,7 @@
 			isa = PBXGroup;
 			children = (
 				3EFF92D90EA724C6005C9288 /* Button.lua */,
+				3EE9AB500EB91D8600E832CA /* Control.lua */,
 				3EF9B8EF0EB21683009094A7 /* Window.lua */,
 			);
 			path = controls;

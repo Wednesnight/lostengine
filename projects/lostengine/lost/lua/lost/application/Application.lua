@@ -1,35 +1,24 @@
-lost.application.Application =
-{
-  addEventListener = function(self, which, where)
-    globals.app:addEventListener(which, where)
-  end,
+lost.application.Application = globals.app
 
-  config = {},
-
-  context = globals.app.context,
-
-  screen = globals.app.screen
-}
-
-function fireEvent(name, event)
-  if type(lost.application.Application[name]) == "function" then
-    lost.application.Application[name](lost.application.Application, event)
+function lost.application.Application:fireEvent(name, event)
+  if type(self[name]) == "function" then
+    self[name](self, event)
   end
 end
 
-function eventHandler(event)
+function lost.application.Application:eventHandler(event)
   if (event.type == lost.application.ApplicationEvent.PREINIT) then
-    fireEvent("configure", event)
+    self:fireEvent("configure", event)
   elseif (event.type == lost.application.ApplicationEvent.INIT) then
-    fireEvent("init", event)
+    self:fireEvent("init", event)
   elseif (event.type == lost.application.ApplicationEvent.RUN) then
-    fireEvent("run", event)
+    self:fireEvent("run", event)
   elseif (event.type == lost.application.ApplicationEvent.QUIT) then
-    fireEvent("quit", event)
+    self:fireEvent("exit", event)
   end
 end
 
-globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, eventHandler)
-globals.app:addEventListener(lost.application.ApplicationEvent.INIT,    eventHandler)
-globals.app:addEventListener(lost.application.ApplicationEvent.RUN,     eventHandler)
-globals.app:addEventListener(lost.application.ApplicationEvent.QUIT,    eventHandler)
+globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, function(event) lost.application.Application:eventHandler(event) end)
+globals.app:addEventListener(lost.application.ApplicationEvent.INIT,    function(event) lost.application.Application:eventHandler(event) end)
+globals.app:addEventListener(lost.application.ApplicationEvent.RUN,     function(event) lost.application.Application:eventHandler(event) end)
+globals.app:addEventListener(lost.application.ApplicationEvent.QUIT,    function(event) lost.application.Application:eventHandler(event) end)

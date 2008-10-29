@@ -1,9 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.controls.Control")
+
 --[[
      Window class
   ]]
-class "lost.guiro.controls.Window" (lost.guiro.View)
+class "lost.guiro.controls.Window" (lost.guiro.controls.Control)
 Window = _G["lost.guiro.controls.Window"]
 
 function Window:__init() super()
