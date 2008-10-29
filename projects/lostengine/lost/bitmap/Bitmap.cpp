@@ -65,18 +65,31 @@ void Bitmap::destroy()
 }
 
 void Bitmap::init(uint32_t inWidth,
+          uint32_t inHeight,
+          Components format)
+{
+  destroy();
+  // create target memory
+  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(format);
+  uint32_t destSizeInBytes = destBytesPerPixel * inWidth * inHeight;
+  data = new uint8_t[destSizeInBytes];
+  loaded = false; // prevent stb_image from freeing  
+
+  width = inWidth;
+  height = inHeight;
+  format = format;
+}
+
+
+void Bitmap::init(uint32_t inWidth,
                   uint32_t inHeight,
                   Components destComponents,
                   Components srcComponents,
                   uint8_t* srcData)
 {
-  destroy();
-  
-  // create target memory
-  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(destComponents);
-  uint32_t destSizeInBytes = destBytesPerPixel * inWidth * inHeight;
-  data = new uint8_t[destSizeInBytes];
-  loaded = false; // prevent stb_image from freeing
+  // basic initialisation of target area, size and flags
+  init(inWidth, inHeight, destComponents);
+  uint32_t destBytesPerPixel = bytesPerPixelFromComponents(format);
   
   // setup stc values for loop
   uint32_t srcBytesPerPixel = bytesPerPixelFromComponents(srcComponents);
@@ -90,14 +103,10 @@ void Bitmap::init(uint32_t inWidth,
     copyPixel(destWriter, destComponents, srcReader, srcComponents);
     destWriter+=destBytesPerPixel;
     srcReader+=srcBytesPerPixel;
-  }
-  
-  width = inWidth;
-  height = inHeight;
-  format = destComponents;
+  }  
 }
 
-// FIXME: not endian safe, we nee dto fix this for big endian
+// FIXME: not endian safe, we need to fix this for big endian
 // FIXME: not sure if this is even correct byte order for little endian
 //
 // BIG MESS ALERT!!!!!

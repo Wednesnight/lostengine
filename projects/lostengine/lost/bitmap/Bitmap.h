@@ -38,14 +38,32 @@ namespace lost
       void reset();
       virtual ~Bitmap();
 
-      /** inits a 32bit rgba bitmap with the given width and height.
-       * The contents are undefined.
+      /** inits a bitmap of destComponents format with the given data in the given format.
+       * The data is copied and converted if necessary.
+       *
+       * @param inWidth width of the new bitmap
+       * @param inHeight height of the new bitmap
+       * @param destComponents format of the bitmap
+       * @param srcComponents format of the source data
+       * @param srcData source data from which the bitmap is constructed
        */
       void init(uint32_t inWidth,
                 uint32_t inHeight,
                 Components destComponents,
                 Components srcComponents,
                 uint8_t* srcData);
+
+      /** initialises the bitmap with the given size and format. 
+       * The initial contents are undefined.
+       *
+       * @param inWidth width of the bitmap.
+       * @param inHeight height of the bitmap.
+       * @param format pixel format of the bitmap.
+       *
+       */
+      void init(uint32_t inWidth,
+                uint32_t inHeight,
+                Components format);
 
       /** attempts to interpret a chunk ofmemory as a bitmap, with the help of the underlying image library.
        * An exception is thrown if an error occurs.
