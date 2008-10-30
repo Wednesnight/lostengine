@@ -21,12 +21,12 @@ end
 function lost.application.Application:init(event)
   log.debug("init")
 
-  require("lost.io.Guiro")
-  local foo = lost.io.Loader(globals.app.loader)
-  foo:load("mainScreen.lua")
-
   controls = {}
   controls.fpsMeter = lost.common.FpsMeter(self.context)
+
+  require("lost.io.Guiro")
+  controls.loader = lost.io.Loader(globals.app.loader)
+  controls.loader:load("mainScreen.lua")
 
   globals.timer = lost.application.Timer("luarender", 0.015)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)

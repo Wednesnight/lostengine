@@ -17,7 +17,7 @@ namespace lost
       [
         namespace_("guiro")
         [
-          class_<UserInterface, View, boost::shared_ptr<UserInterface> >("UserInterface")
+          class_<UserInterface, View, boost::shared_ptr<UserInterface>, boost::shared_ptr<View> >("UserInterface")
             .def(constructor<>())
         ]
       ];

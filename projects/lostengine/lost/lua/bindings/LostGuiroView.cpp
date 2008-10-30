@@ -1,6 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/guiro/View.h"
+#include "lost/common/Logger.h"
 
 #include "lost/lua/bindings/LostGuiroView.h"
 
@@ -13,15 +14,23 @@ struct ViewLuaWrapper : View, luabind::wrap_base
   ViewLuaWrapper()
   : View()
   {
+    DOUT("ViewLuaWrapper::ViewLuaWrapper()");
+  }
+  
+  ~ViewLuaWrapper()
+  {
+    DOUT("ViewLuaWrapper::~ViewLuaWrapper()");
   }
   
   virtual void render()
   {
+    DOUT("ViewLuaWrapper::render()");
     call<void>("render");
   }
   
   static void renderBase(View* base)
   {
+    DOUT("ViewLuaWrapper::renderBase()");
     return base->View::render();
   }
 };
@@ -30,14 +39,13 @@ namespace lost
 {
   namespace lua
   {
-    void appendChild(object parent, object child)
-    {
-      if (luabind::type(child) == LUA_TNIL) { throw std::runtime_error("can't add NIL child"); }
-      View* parentView = object_cast<View*>(parent);
-      View* childView  = object_cast<View*>(child);
-      parentView->appendChild(boost::shared_ptr<View>(childView));
-    }
 
+    void appendChild(View* parent, View* child)
+    {
+      DOUT("appendChild()");
+      parent->appendChild(child->shared_from_this());
+    }
+    
     // dummy function for lua type validation
     bool isView(View* view)
     {
@@ -50,9 +58,9 @@ namespace lost
       [
         namespace_("guiro")
         [
-          class_<View, EventDispatcher, boost::shared_ptr<View>, ViewLuaWrapper>("View")
+          class_<View, ViewLuaWrapper, EventDispatcher, boost::shared_ptr<View> >("View")
             .def(constructor<>())
-            .def("appendChild", &appendChild)
+            .def("appendChild", (void(*)(View*, View*))&appendChild)
             .def("removeChild", &View::removeChild)
             .def("validateChild", &View::validateChild)
             .def("render", &View::render, &ViewLuaWrapper::renderBase)

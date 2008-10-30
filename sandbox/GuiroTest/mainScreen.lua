@@ -11,7 +11,7 @@ guiro:Screen
       id = "mainMenu",
       style = guiro:Style("lost/guiro/styles/default/Window.lua"),
 
-      guiro:Button
+--[[      guiro:Button
       {
         id = "closeButton",
         bounds = lost.math.Rect(100, 100, 25, 25),
@@ -19,7 +19,7 @@ guiro:Screen
         {
           color = Color(0,0,0,0)
         }
-      }
+      }]]--
     }
   }
 }

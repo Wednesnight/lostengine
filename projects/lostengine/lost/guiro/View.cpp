@@ -9,10 +9,13 @@ namespace lost
     
     View::View()
     {
+      DOUT("View::View()");
     }
 
     View::~View()
     {
+      DOUT("View::~View()");
+      if (parentView) parentView->removeChild(shared_from_this());
     }
 
     void View::dispatchEvent(lost::event::EventPtr event)

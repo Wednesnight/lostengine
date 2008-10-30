@@ -1,4 +1,5 @@
 #include "lost/guiro/UserInterface.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -7,10 +8,12 @@ namespace lost
 
     UserInterface::UserInterface()
     {
+      DOUT("UserInterface::UserInterface()");
     }
 
     UserInterface::~UserInterface()
     {
+      DOUT("UserInterface::~UserInterface()");
     }
 
   }
