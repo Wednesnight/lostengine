@@ -56,59 +56,6 @@ namespace utils
     #endif
   }
 
-
-    void set2DProjection(const lost::math::Vec2& offset, const lost::math::Vec2& dimension)
-    {
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        lgluOrtho2D(offset.x, dimension.w-1, offset.y, dimension.h-1);
-    }
-
-    std::string getVersion()
-    {
-      return reinterpret_cast<const char*>(glGetString(GL_VERSION));
-    }
-
-    void set3DProjection(int windowWidth, int windowHeight,
-                         const lost::math::Vec3& eye,
-                         const lost::math::Vec3& at,
-                         const lost::math::Vec3& up,
-                         float fovy, float znear, float zfar)
-    {
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        double screenAspectRatio = (double)windowWidth/(double)windowHeight;
-        lgluPerspective(fovy, screenAspectRatio, znear, zfar);
-        lgluLookAt(eye.x,  eye.y,  eye.z,
-                  at.x,   at.y,   at.z,
-                  up.x,   up.y,   up.z);
-    }
-
-    /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
-     * as a tga file to the specified file path.
-     *
-     * @param fullPathName full path name of file to be saved. You must ensure that the location is writable.
-     *        
-     */
-    void saveScreenshotTGA(const common::DisplayAttributes& displayAttributes,
-                                      const std::string& fullPathName,
-                                      bool withAlphaChannel)
-    {
-      GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;
-      Bitmap::Components bitmapFormat = withAlphaChannel ? Bitmap::COMPONENTS_RGBA : Bitmap::COMPONENTS_RGB;
-      Bitmap bmp(displayAttributes.width, displayAttributes.height, bitmapFormat);
-            
-      glReadPixels(0,
-                   0,
-                   bmp.width,
-                   bmp.height,
-                   format,
-                   GL_UNSIGNED_BYTE,                        
-                   bmp.data);GLDEBUG_THROW;
-      bmp.flip();
-      bmp.write(fullPathName);
-    } 
-
 #if defined(TARGET_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
 #else
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
