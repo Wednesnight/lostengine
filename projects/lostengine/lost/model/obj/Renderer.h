@@ -159,12 +159,12 @@ namespace lost
           {
             glPushMatrix();
             glScalef(size, size, size);
-            gl::setColor(common::redColor);
+            context->setColor(common::redColor);
             for (unsigned int idx = 0; idx < mesh->normalCount; ++idx)
             {
               math::Vec3 offset(mesh->vertices[mesh->faces[idx*3]]);
               math::Vec3 normal(offset + mesh->normals[idx] * .1);
-              gl::drawLine(offset, normal);
+              context->drawLine(offset, normal);
             }
             glPopMatrix();
           }
@@ -174,8 +174,8 @@ namespace lost
         {
           glPushMatrix();
           glScalef(size, size, size);
-          gl::setColor(common::whiteColor);
-          gl::drawAABB(mesh->box);
+          context->setColor(common::whiteColor);
+          context->drawAABB(mesh->box);
           glPopMatrix();
         }
       };
