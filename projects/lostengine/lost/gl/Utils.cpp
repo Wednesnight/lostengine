@@ -8,6 +8,9 @@
 #include <boost/scoped_array.hpp>
 #include "lost/common/DisplayAttributes.h"
 #include "lost/lgl/lglu.h"
+#include "lost/bitmap/Bitmap.h"
+
+using namespace lost::bitmap;
 
 namespace lost
 {
@@ -91,39 +94,19 @@ namespace utils
                                       const std::string& fullPathName,
                                       bool withAlphaChannel)
     {
-      // reserve memory for read data
-      unsigned long pixelSizeBytes = withAlphaChannel ? 4 : 3;
       GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;
-      
-      unsigned long memSizeBytes = displayAttributes.width * displayAttributes.height * pixelSizeBytes;
-      boost::scoped_array<unsigned char> data(new unsigned char[memSizeBytes]);
-      
+      Bitmap::Components bitmapFormat = withAlphaChannel ? Bitmap::COMPONENTS_RGBA : Bitmap::COMPONENTS_RGB;
+      Bitmap bmp(displayAttributes.width, displayAttributes.height, bitmapFormat);
+            
       glReadPixels(0,
                    0,
-                   displayAttributes.width,
-                   displayAttributes.height,
+                   bmp.width,
+                   bmp.height,
                    format,
                    GL_UNSIGNED_BYTE,                        
-                   data.get());GLDEBUG_THROW;
-      // flip vertically because OpenGL returns it the other way round
-      unsigned long lineInBytes = displayAttributes.width * pixelSizeBytes;
-      unsigned long halfHeight = displayAttributes.height / 2; // deliberately round down if height is odd
-      unsigned char* dataBytes = data.get();
-      for(unsigned long bottomLine=0; bottomLine<halfHeight; ++bottomLine)
-      {
-        unsigned long topLine = (displayAttributes.height - 1) - bottomLine;
-        for(unsigned long bi=0; bi<lineInBytes; ++bi)
-        {
-          unsigned long topLineByte = displayAttributes.width*topLine*pixelSizeBytes+bi;
-          unsigned long bottomLineByte = displayAttributes.width*bottomLine*pixelSizeBytes+bi;
-          unsigned char b = dataBytes[topLineByte];
-          dataBytes[topLineByte] = dataBytes[bottomLineByte];
-          dataBytes[bottomLineByte] = b;
-        }
-      }
-
-      if(!stbi_write_tga(fullPathName.c_str(), displayAttributes.width, displayAttributes.height, pixelSizeBytes, data.get()))
-        throw std::runtime_error("screenshot save failed");
+                   bmp.data);GLDEBUG_THROW;
+      bmp.flip();
+      bmp.write(fullPathName);
     } 
 
 #if defined(TARGET_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
