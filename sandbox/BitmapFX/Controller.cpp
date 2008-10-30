@@ -44,10 +44,11 @@ void Controller::init(shared_ptr<Event> event)
 
   pic.reset(new Bitmap(100, 100, Bitmap::COMPONENTS_RGBA));
   pic->clear(whiteColor);
+//  pic->write("/Users/tony/test.tga");
   
   shared_ptr<File> file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
-  tex.reset(new Texture(pic));
+  tex.reset(new Texture(loadedPic));
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -71,10 +72,12 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   context->pushState(renderState);
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-  setColor(whiteColor);
-  drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
+  context->setColor(whiteColor);
+  context->drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
   context->popState();
 
   fpsMeter->render( appInstance->displayAttributes->width - (fpsMeter->width + 10), 0, event->passedSec );
   appInstance->swapBuffers();
+//  context->writeScreenshot("/Users/tony/screenshot.tga");
+//  appInstance->quit();
 }

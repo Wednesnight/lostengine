@@ -204,13 +204,13 @@ struct Object0r
     appInstance->context->pushState(newState);
 
     appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    appInstance->context->set3DProjection(*(appInstance->displayAttributes.get()), camera->position(), camera->target(), camera->up(),
+    appInstance->context->set3DProjection(camera->position(), camera->target(), camera->up(),
                                           camera->fovY(), camera->depth());
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glLineWidth(10.0f);
-    setColor(lost::common::Color(0,0,1,0.5));
+    appInstance->context->setColor(lost::common::Color(0,0,1,0.5));
     dragonCurve->size = 0.3f;
     static float dragonCurveAngle(0.0f);
     if (animate)
@@ -224,7 +224,7 @@ struct Object0r
     glLineWidth(1.0f);
 
     glLineWidth(3.0f);
-    setColor(lost::common::Color(1,0,0,0.5));
+    appInstance->context->setColor(lost::common::Color(1,0,0,0.5));
     tree->size = 0.1f;
     static float treeAngle(0.0f);
     if (animate)
@@ -280,7 +280,7 @@ struct Object0r
     glEnable(GL_LIGHT0);
     glEnable(GL_RESCALE_NORMAL);
 
-    setColor(whiteColor);
+    appInstance->context->setColor(whiteColor);
     glTranslatef(0, 0, 10);
     modelRenderer->render();
 
@@ -291,9 +291,9 @@ struct Object0r
     if (renderAABB) modelRenderer->renderAABB();
 
     glScalef(10.0f, 10.0f, 10.0f);
-    drawAxes(Vec3(10.0f, 10.0f, 10.0f));
+    appInstance->context->drawAxes(Vec3(10.0f, 10.0f, 10.0f));
     
-    set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
+    appInstance->context->set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     fpsMeter->render(appInstance->displayAttributes->width - fpsMeter->width, 0, event->passedSec);
@@ -332,7 +332,7 @@ struct Object0r
           {
             std::stringstream file;
             file << "Desktop/Object0r_" << (unsigned int)lost::platform::currentTimeMilliSeconds() << ".tga";
-            lost::gl::utils::saveScreenshotTGA(*(appInstance->displayAttributes.get()), lost::platform::buildUserDataPath(file.str()));
+            appInstance->context->writeScreenshot(lost::platform::buildUserDataPath(file.str()));
           }
           break;
         case K_N:
