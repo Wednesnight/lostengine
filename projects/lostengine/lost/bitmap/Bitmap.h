@@ -29,10 +29,17 @@ namespace lost
       uint32_t    height; // height in pixels
       Components  format; // format of bitmap as GL constant (e.g. rgb, rgba)
 
+      /** creates an empty bitmap with zero size.
+       * Use init to resize it in a given format.
+       */
       Bitmap();
+        
+      /** creates a bitmap with the given size and format. The initial content is undefined.
+       */
       Bitmap(uint32_t inWidth,
              uint32_t inHeight,
              Components format);
+    
       Bitmap(uint32_t inWidth,
              uint32_t inHeight,
              Components destComponents,
@@ -117,9 +124,13 @@ namespace lost
       /** flips the bitmap vertically.
        * This moves a lot of memory, so be careful performance wise.
        */
-      void Bitmap::flip();
+      void flip();
     
+        
+      /** sets a pixel with the given color */
+      void pixel(uint32_t x, uint32_t y, const common::Color& inColor);
       
+        
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.
