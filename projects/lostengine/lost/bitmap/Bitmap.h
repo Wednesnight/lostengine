@@ -105,6 +105,21 @@ namespace lost
        */                      
       void clear(const lost::common::Color& inColor);
       
+      /** writes the bitmap to a TGA file.
+       * The file is created or overwritten.
+       *
+       * @param inFullPathname full path name of the file to write to.
+       *
+       * @throws if the file couldn't be written.
+       */
+      void write(const std::string inFullPathname);
+
+      /** flips the bitmap vertically.
+       * This moves a lot of memory, so be careful performance wise.
+       */
+      void Bitmap::flip();
+    
+      
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.

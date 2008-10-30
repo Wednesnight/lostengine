@@ -253,5 +253,33 @@ void Bitmap::clearRGBA(const lost::common::Color& inColor)
   }
 }
 
+void Bitmap::write(const std::string inFullPathname)
+{
+  if(!stbi_write_tga(inFullPathname.c_str(), width, height, bytesPerPixelFromComponents(format), data))
+    throw std::runtime_error("screenshot save failed");
+}
+
+void Bitmap::flip()
+{
+      unsigned long pixelSizeBytes = bytesPerPixelFromComponents(format);
+      // flip vertically because OpenGL returns it the other way round
+      unsigned long lineInBytes = width * pixelSizeBytes;
+      unsigned long halfHeight = height / 2; // deliberately round down if height is odd
+      unsigned char* dataBytes = data;
+      for(unsigned long bottomLine=0; bottomLine<halfHeight; ++bottomLine)
+      {
+        unsigned long topLine = (height - 1) - bottomLine;
+        for(unsigned long bi=0; bi<lineInBytes; ++bi)
+        {
+          unsigned long topLineByte = width*topLine*pixelSizeBytes+bi;
+          unsigned long bottomLineByte = width*bottomLine*pixelSizeBytes+bi;
+          unsigned char b = dataBytes[topLineByte];
+          dataBytes[topLineByte] = dataBytes[bottomLineByte];
+          dataBytes[bottomLineByte] = b;
+        }
+      }
+
+}
+
 } 
 } 
