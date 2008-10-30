@@ -52,7 +52,8 @@ void Context::setState(const boost::shared_ptr<State>& newState)
 }
 
 
-Context::Context()
+Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttributes)
+:displayAttributes(inDisplayAttributes)
 {
   DOUT("lost::gl::Context::Context()");
 
@@ -131,14 +132,20 @@ void Context::set2DProjection(const lost::math::Vec2& offset, const lost::math::
   lost::gl::utils::set2DProjection(offset, dimension);
 }
       
-void Context::set3DProjection(const lost::common::DisplayAttributes& attributes,
-                            const lost::math::Vec3& eye,
-                            const lost::math::Vec3& at,
-                            const lost::math::Vec3& up,
-                            const float& fovy,
-                            const lost::math::Vec2& depth)
+void Context::set3DProjection(const lost::math::Vec3& eye,
+                              const lost::math::Vec3& at,
+                              const lost::math::Vec3& up,
+                              const float& fovy,
+                              const lost::math::Vec2& depth)
 {
-  lost::gl::utils::set3DProjection(attributes.width, attributes.height, eye, at, up, fovy, depth.min, depth.max);
+  lost::gl::utils::set3DProjection(displayAttributes->width,
+                                   displayAttributes->height,
+                                   eye,
+                                   at,
+                                   up,
+                                   fovy,
+                                   depth.min,
+                                   depth.max);
 }
 
 boost::shared_ptr<State>& Context::defaultVertexState()

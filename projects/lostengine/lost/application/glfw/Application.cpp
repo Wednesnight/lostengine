@@ -86,7 +86,7 @@ namespace application
     // the gl context will be created here, so resize event needs to be connected before
     adapter->init(displayAttributes);
     // init gl context
-    context.reset(new Context());
+    context.reset(new Context(displayAttributes));
     // init ui screen
     screen.reset(new Screen(interpreter, displayAttributes));
 

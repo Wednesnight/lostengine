@@ -22,7 +22,7 @@ namespace lost
         namespace_("gl")
         [
           class_<Context, boost::shared_ptr<Context> >("Context")
-          .def(constructor<>())
+          .def(constructor<boost::shared_ptr<lost::common::DisplayAttributes> >())
           .def("newState",  &Context::newState)
           .def("copyState", &Context::copyState)
           .def("pushState", (void(Context::*)())&Context::pushState)
