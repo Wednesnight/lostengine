@@ -60,32 +60,26 @@ namespace lost
         addHistoryEntry(timeSinceLastCallSec);
         context->pushState(renderState);
         // background
-        gl::setColor(Color(.75, .75, .75, alpha));
-        gl::drawRectFilled(math::Rect(x, y, width, height));
+        context->setColor(Color(.75, .75, .75, alpha));
+        context->drawRectFilled(math::Rect(x, y, width, height));
 
         // top caption
-        gl::setColor(Color(0, 0, 0, alpha));
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-        gl::drawString((x+width)-17, (y+height)-9, "FPS", font);
-#endif
+        context->setColor(Color(0, 0, 0, alpha));
 
         // horizontal stripes
-        gl::setColor(Color(0, 0, 0, alpha));
+        context->setColor(Color(0, 0, 0, alpha));
         for(unsigned long n=0; n<numlabels; ++n)
         {
-          gl::drawLine(math::Vec2(x, y+10*(n+1)-1), math::Vec2(x+width-1, y+10*(n+1)-1));
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-          gl::drawString(x+1, y+10*n+1, labels[n], font);
-#endif
+          context->drawLine(math::Vec2(x, y+10*(n+1)-1), math::Vec2(x+width-1, y+10*(n+1)-1));
         }
 
         // draw history ringbuffer
-        gl::setColor(Color(0, 0, 0, alpha));
+        context->setColor(Color(0, 0, 0, alpha));
         unsigned long curpos = historycurpos;
         for(unsigned long i=0; i<historylength-1; ++i)
         {
 //          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
-          gl::drawLine(math::Vec2(x+i, y+history[curpos]), math::Vec2(x+i+1, y+history[(curpos+1)%historylength]));
+          context->drawLine(math::Vec2(x+i, y+history[curpos]), math::Vec2(x+i+1, y+history[(curpos+1)%historylength]));
           curpos = (curpos+1) % historylength;
         }
         context->popState();
