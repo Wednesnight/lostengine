@@ -14,7 +14,7 @@ namespace lost
   {
     void LostGLDraw(lua_State* state)
     {
-      module(state, "lost")
+/*      module(state, "lost")
       [
         namespace_("gl")
         [
@@ -22,7 +22,7 @@ namespace lost
           def("drawRectOutline", &drawRectOutline),
           def("drawRectFilled", &drawRectFilled)
         ]
-      ];
+      ];*/
     }
   }
 }

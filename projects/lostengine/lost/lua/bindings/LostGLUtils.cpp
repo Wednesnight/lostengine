@@ -13,7 +13,7 @@ namespace lost
   {
     void LostGLUtils(lua_State* state)
     {
-      module(state, "lost")
+/*      module(state, "lost")
       [
         namespace_("gl")
         [
@@ -22,7 +22,7 @@ namespace lost
             def("set2DProjection", &set2DProjection)
           ]
         ]
-      ];
+      ];*/
     }
   }
 }
