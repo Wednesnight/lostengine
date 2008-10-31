@@ -26,6 +26,12 @@ namespace lost
       inline void b(float v) { fv[2] = v; }
       inline void a(float v) { fv[3] = v; }
 
+      // accessors for rgba values as usingned 8 bit integers
+      inline uint8_t ru8() const { return fv[0]*255.0; };
+      inline uint8_t gu8() const { return fv[1]*255.0; };
+      inline uint8_t bu8() const { return fv[2]*255.0; };
+      inline uint8_t au8() const { return fv[3]*255.0; };
+
       float fv[4];
     };
 

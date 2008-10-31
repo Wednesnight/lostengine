@@ -3,7 +3,6 @@
 
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
-#include "lost/gl/Draw.h"
 #include "lost/math/Rect.h"
 
 namespace boost { template <typename T> class shared_ptr; };

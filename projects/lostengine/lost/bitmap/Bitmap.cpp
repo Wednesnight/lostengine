@@ -261,25 +261,62 @@ void Bitmap::write(const std::string inFullPathname)
 
 void Bitmap::flip()
 {
-      unsigned long pixelSizeBytes = bytesPerPixelFromComponents(format);
-      // flip vertically because OpenGL returns it the other way round
-      unsigned long lineInBytes = width * pixelSizeBytes;
-      unsigned long halfHeight = height / 2; // deliberately round down if height is odd
-      unsigned char* dataBytes = data;
-      for(unsigned long bottomLine=0; bottomLine<halfHeight; ++bottomLine)
-      {
-        unsigned long topLine = (height - 1) - bottomLine;
-        for(unsigned long bi=0; bi<lineInBytes; ++bi)
-        {
-          unsigned long topLineByte = width*topLine*pixelSizeBytes+bi;
-          unsigned long bottomLineByte = width*bottomLine*pixelSizeBytes+bi;
-          unsigned char b = dataBytes[topLineByte];
-          dataBytes[topLineByte] = dataBytes[bottomLineByte];
-          dataBytes[bottomLineByte] = b;
-        }
-      }
-
+  unsigned long pixelSizeBytes = bytesPerPixelFromComponents(format);
+  // flip vertically because OpenGL returns it the other way round
+  unsigned long lineInBytes = width * pixelSizeBytes;
+  unsigned long halfHeight = height / 2; // deliberately round down if height is odd
+  unsigned char* dataBytes = data;
+  for(unsigned long bottomLine=0; bottomLine<halfHeight; ++bottomLine)
+  {
+    unsigned long topLine = (height - 1) - bottomLine;
+    for(unsigned long bi=0; bi<lineInBytes; ++bi)
+    {
+      unsigned long topLineByte = width*topLine*pixelSizeBytes+bi;
+      unsigned long bottomLineByte = width*bottomLine*pixelSizeBytes+bi;
+      unsigned char b = dataBytes[topLineByte];
+      dataBytes[topLineByte] = dataBytes[bottomLineByte];
+      dataBytes[bottomLineByte] = b;
+    }
+  }
 }
+
+void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
+{
+  uint32_t bpp = bytesPerPixelFromComponents(format);
+  uint8_t* target = data+((x+(((height-1)-y)*width))*bpp);
+  switch(format)
+  {
+    case COMPONENTS_ALPHA:target[0] =inColor.au8();break;
+    case COMPONENTS_RGB:
+      target[0]=inColor.ru8();
+      target[1]=inColor.gu8();
+      target[2]=inColor.bu8();
+      break;
+    case COMPONENTS_RGBA:
+      target[0]=inColor.ru8();
+      target[1]=inColor.gu8();
+      target[2]=inColor.bu8();
+      target[3]=inColor.au8();
+      break;
+  }
+}
+
+void Bitmap::hline(uint32_t y, uint32_t xl, uint32_t xr, const common::Color& inColor)
+{
+  for(uint32_t x=xl; x<xr; ++x)
+  {
+    pixel(x,y,inColor);
+  }
+}
+
+void Bitmap::vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& inColor)
+{
+  for(uint32_t y=yb; y<yt; ++y)
+  {
+    pixel(x,y,inColor);
+  }  
+}
+
 
 } 
 } 

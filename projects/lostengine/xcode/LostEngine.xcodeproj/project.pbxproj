@@ -93,7 +93,6 @@
 		3E7325190E5CE3A4000FF838 /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
 		3E73251A0E5CE3A4000FF838 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		3E73251B0E5CE3A4000FF838 /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
-		3E73251C0E5CE3A4000FF838 /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
 		3E73251D0E5CE3A4000FF838 /* FragmentShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949F0E04639D00B6423B /* FragmentShader.h */; };
 		3E73251E0E5CE3A4000FF838 /* FrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A00E04639D00B6423B /* FrameBuffer.h */; };
 		3E73251F0E5CE3A4000FF838 /* gl.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A10E04639D00B6423B /* gl.h */; };
@@ -278,7 +277,6 @@
 		EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94790E04639D00B6423B /* SpiritHelpers.h */; };
 		EA3B95500E04639D00B6423B /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B948F0E04639D00B6423B /* Event.h */; };
 		EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
-		EA3B955C0E04639D00B6423B /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
 		EA3B955D0E04639D00B6423B /* FragmentShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949F0E04639D00B6423B /* FragmentShader.h */; };
 		EA3B955E0E04639D00B6423B /* FrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A00E04639D00B6423B /* FrameBuffer.h */; };
 		EA3B955F0E04639D00B6423B /* gl.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A10E04639D00B6423B /* gl.h */; };
@@ -362,7 +360,6 @@
 		EA6711810E3E89DB00B961EC /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
 		EA6711820E3E89DB00B961EC /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		EA6711830E3E89DB00B961EC /* DisplayList.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949D0E04639D00B6423B /* DisplayList.h */; };
-		EA6711840E3E89DB00B961EC /* Draw.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949E0E04639D00B6423B /* Draw.h */; };
 		EA6711850E3E89DB00B961EC /* FragmentShader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B949F0E04639D00B6423B /* FragmentShader.h */; };
 		EA6711860E3E89DB00B961EC /* FrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A00E04639D00B6423B /* FrameBuffer.h */; };
 		EA6711870E3E89DB00B961EC /* gl.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94A10E04639D00B6423B /* gl.h */; };
@@ -605,9 +602,6 @@
 		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
-		EA9136AB0E9968AF006884D7 /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9136AA0E9968AF006884D7 /* Draw.cpp */; };
-		EA9136AC0E9968AF006884D7 /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9136AA0E9968AF006884D7 /* Draw.cpp */; };
-		EA9136AD0E9968AF006884D7 /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9136AA0E9968AF006884D7 /* Draw.cpp */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A36540E29A61D0090BAD0 /* ModuleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
@@ -1016,7 +1010,6 @@
 		EA3B94790E04639D00B6423B /* SpiritHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiritHelpers.h; sourceTree = "<group>"; };
 		EA3B948F0E04639D00B6423B /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		EA3B949D0E04639D00B6423B /* DisplayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayList.h; sourceTree = "<group>"; };
-		EA3B949E0E04639D00B6423B /* Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Draw.h; sourceTree = "<group>"; };
 		EA3B949F0E04639D00B6423B /* FragmentShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FragmentShader.h; sourceTree = "<group>"; };
 		EA3B94A00E04639D00B6423B /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
 		EA3B94A10E04639D00B6423B /* gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gl.h; sourceTree = "<group>"; };
@@ -1129,7 +1122,6 @@
 		EA7BE2B40E6F49080017B031 /* LostCommonDisplayAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostCommonDisplayAttributes.h; path = bindings/LostCommonDisplayAttributes.h; sourceTree = "<group>"; };
 		EA7BE2BD0E6F49920017B031 /* LostBitmapBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostBitmapBitmap.h; path = bindings/LostBitmapBitmap.h; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
-		EA9136AA0E9968AF006884D7 /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Draw.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A36520E29A61D0090BAD0 /* ModuleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleLoader.h; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
@@ -1654,8 +1646,6 @@
 				EA0F2DE10E37D68C0001F530 /* Context.h */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EA3B949D0E04639D00B6423B /* DisplayList.h */,
-				EA3B949E0E04639D00B6423B /* Draw.h */,
-				EA9136AA0E9968AF006884D7 /* Draw.cpp */,
 				EA3B949F0E04639D00B6423B /* FragmentShader.h */,
 				EA3B94A00E04639D00B6423B /* FrameBuffer.h */,
 				EA3B94A10E04639D00B6423B /* gl.h */,
@@ -1917,7 +1907,6 @@
 				3E7325190E5CE3A4000FF838 /* ElementArrayBuffer.h in Headers */,
 				3E73251A0E5CE3A4000FF838 /* Context.h in Headers */,
 				3E73251B0E5CE3A4000FF838 /* DisplayList.h in Headers */,
-				3E73251C0E5CE3A4000FF838 /* Draw.h in Headers */,
 				3E73251D0E5CE3A4000FF838 /* FragmentShader.h in Headers */,
 				3E73251E0E5CE3A4000FF838 /* FrameBuffer.h in Headers */,
 				3E73251F0E5CE3A4000FF838 /* gl.h in Headers */,
@@ -2045,7 +2034,6 @@
 				EA3B953F0E04639D00B6423B /* SpiritHelpers.h in Headers */,
 				EA3B95500E04639D00B6423B /* Event.h in Headers */,
 				EA3B955B0E04639D00B6423B /* DisplayList.h in Headers */,
-				EA3B955C0E04639D00B6423B /* Draw.h in Headers */,
 				EA3B955D0E04639D00B6423B /* FragmentShader.h in Headers */,
 				EA3B955E0E04639D00B6423B /* FrameBuffer.h in Headers */,
 				EA3B955F0E04639D00B6423B /* gl.h in Headers */,
@@ -2194,7 +2182,6 @@
 				EA6711810E3E89DB00B961EC /* ElementArrayBuffer.h in Headers */,
 				EA6711820E3E89DB00B961EC /* Context.h in Headers */,
 				EA6711830E3E89DB00B961EC /* DisplayList.h in Headers */,
-				EA6711840E3E89DB00B961EC /* Draw.h in Headers */,
 				EA6711850E3E89DB00B961EC /* FragmentShader.h in Headers */,
 				EA6711860E3E89DB00B961EC /* FrameBuffer.h in Headers */,
 				EA6711870E3E89DB00B961EC /* gl.h in Headers */,
@@ -2629,7 +2616,6 @@
 				EAD2E8950E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA9136400E994F18006884D7 /* Texture.cpp in Sources */,
-				EA9136AD0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D8C0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E430E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
@@ -2709,7 +2695,6 @@
 				EAD2E8930E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363E0E994F18006884D7 /* Texture.cpp in Sources */,
-				EA9136AB0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E420E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
@@ -2790,7 +2775,6 @@
 				EAD2E8940E94132F000535DB /* State.cpp in Sources */,
 				EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363F0E994F18006884D7 /* Texture.cpp in Sources */,
-				EA9136AC0E9968AF006884D7 /* Draw.cpp in Sources */,
 				EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E410E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,

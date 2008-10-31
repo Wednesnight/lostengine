@@ -3,7 +3,6 @@
 #include "lost/gl/Utils.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Rect.h"
-#include "lost/gl/Draw.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
 #include "lost/application/KeySym.h"
@@ -42,12 +41,15 @@ void Controller::init(shared_ptr<Event> event)
   renderState->vertexArray = true;  
   renderState->textureCoordArray = true;  
 
-  pic.reset(new Bitmap(100, 100, Bitmap::COMPONENTS_RGBA));
-  pic->clear(whiteColor);
+  pic.reset(new Bitmap(640, 480, Bitmap::COMPONENTS_RGBA));
+  pic->clear(blackColor);
+  pic->hline(50, 0, pic->width, redColor);
 //  pic->write("/Users/tony/test.tga");
   
   shared_ptr<File> file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
+  loadedPic->hline(50, 0, loadedPic->width, redColor);
+  loadedPic->vline(50, 0, loadedPic->height, greenColor);
   tex.reset(new Texture(loadedPic));
 }
 
@@ -68,7 +70,7 @@ void Controller::keyboard( shared_ptr<KeyEvent> event )
 void Controller::redraw(shared_ptr<TimerEvent> event)
 {
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
+  context->set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
   context->pushState(renderState);
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 

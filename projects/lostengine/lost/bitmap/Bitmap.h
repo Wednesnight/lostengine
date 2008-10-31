@@ -130,7 +130,24 @@ namespace lost
       /** sets a pixel with the given color */
       void pixel(uint32_t x, uint32_t y, const common::Color& inColor);
       
-        
+      /** draws a horizontal line into the bitmap.
+       * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
+       * @param y       the y coordinate of the line.
+       * @param xl      the left x coordinate of the starting point.
+       * @param xr      the right x coordinate of the end point.
+       * @param inColor color to draw the line in.
+       */
+      void hline(uint32_t y, uint32_t xl, uint32_t xr, const common::Color& inColor);
+      
+      /** draws a horizontal line into the bitmap.
+       * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
+       * @param x         the x coordinate of the line.
+       * @param yb        the bottom y coordinate of the starting point.
+       * @param yt        the top y coordinate of the end point.
+       * @param inColor   color to draw the line in.
+       */
+      void vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& inColor);
+
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.
