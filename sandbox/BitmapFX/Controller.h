@@ -19,6 +19,7 @@ struct Controller
   boost::shared_ptr<lost::bitmap::Bitmap>         pic;
   boost::shared_ptr<lost::bitmap::Bitmap>         loadedPic;
   boost::shared_ptr<lost::gl::Texture>            tex;
+  boost::shared_ptr<lost::gl::Texture>            tex2;
 
   Controller();
   void init(boost::shared_ptr<lost::event::Event> event);

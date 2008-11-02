@@ -9,6 +9,8 @@
 
 namespace lost
 {
+  
+  namespace bitmap { struct Bitmap;}  
 namespace font
 {
   namespace freetype { struct face; }
@@ -24,32 +26,24 @@ struct Engine
 {
   Engine();
   virtual ~Engine();
-  
-  /** adds the given freetype font under the provided alias.
-   *
-   * @param inId id for the given font.
-   * @param inFtFace fuly initialised freety font face object.
-   *
-   * @throws runtime_error if the font id was already used.
-   *
+
+    
+  /** lets freetype render the specified glyph.
+   * All memory management is performed by freetype. The result is placed in the
+   * face->glyph->bitmap structure.
    */
-  void addFont(const std::string& inId,
-               boost::shared_ptr<freetype::Face> inFtFace);
-  
-  /** tries to find the font for the given font id and renders the provided text into 
-   * a model.
-   * The resulting model holds a textured mesh.
-   */
-  boost::shared_ptr<Model>
-  render(const std::string& inFontId,
-         const std::string& inText);
-  
+  static boost::shared_ptr<bitmap::Bitmap>
+  renderGlyphToBitmap(boost::shared_ptr<freetype::Face> face,
+                      uint32_t inSizeInPoints,
+                      char c);
+    
 private:
-  typedef std::string FontId;
+
+  /*typedef std::string FontId;
   typedef boost::shared_ptr<freetype::Face> FreetypeFacePtr;
   typedef std::map<FontId, FreetypeFacePtr> FontCache; 
   
-  FontCache fontCache;
+  FontCache fontCache;*/
 };
   
 }

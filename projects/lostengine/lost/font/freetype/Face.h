@@ -5,29 +5,33 @@
 #include FT_FREETYPE_H
 #include "lost/resource/File.h"
 #include <boost/shared_ptr.hpp>
+#include "lost/font/freetype/Library.h"
 
 namespace lost
 {
-//  namespace resource { struct File; }
-  
   namespace font
   {
     namespace freetype
     {
       struct Face
       {
-
-        // FIXME: needs more configuration parameters for e.g. kerning or texture filtering
-        Face(FT_Face inFace, boost::shared_ptr<lost::resource::File> inFile);
+        Face(boost::shared_ptr<freetype::Library> inLibrary,
+             boost::shared_ptr<resource::File> inFile);
         virtual ~Face();
 
         FT_Face face() { return mFace; }
 
       private:
         FT_Face     mFace;
+        
         // font faces are only valid as long as the loaded data stays alive
         // so every font face object takes care of its own data
-        boost::shared_ptr<lost::resource::File> mFile; 
+        boost::shared_ptr<lost::resource::File> mFile;
+        
+        // the freetype Library must ony be destroyed after all fonts were removed.
+        // in order to avoid crashes and keep the fonts alive as long as possible,
+        // we keep a reference to the library inside the font.
+        boost::shared_ptr<Library> mLibrary;
       };
     }
   }

@@ -3,7 +3,6 @@
 #include "lost/gl/Utils.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Rect.h"
-#include "lost/gl/Draw.h"
 #include "lost/gl/DisplayList.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
@@ -33,7 +32,7 @@ void Controller::init(shared_ptr<Event> event)
   freetypeLibrary.reset(new Library());
   renderer.reset(new Renderer);
   shared_ptr<File> fontFile = appInstance->loader->load("Vera.ttf");
-  defaultFont = freetypeLibrary->initFace(fontFile);
+  defaultFont.reset(new Face(freetypeLibrary, fontFile));
   smallText.reset(new lost::gl::DisplayList());
   midText.reset(new lost::gl::DisplayList());
   largeText.reset(new lost::gl::DisplayList());
@@ -67,7 +66,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   glDisable(GL_TEXTURE_2D);GLDEBUG;
   glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
   glViewport(0, 0, display.width, display.height);GLDEBUG;
-  set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));GLDEBUG;
+  appInstance->context->set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));GLDEBUG;
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); GLDEBUG;

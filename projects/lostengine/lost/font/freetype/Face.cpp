@@ -8,12 +8,21 @@ namespace font
 namespace freetype
 {
 
-Face::Face(FT_Face inFace, boost::shared_ptr<lost::resource::File> inFile)
+Face::Face(boost::shared_ptr<Library> inLibrary,
+           boost::shared_ptr<resource::File> inFile)
 {
+  FT_Error error  = FT_New_Memory_Face(inLibrary->library,
+                                       reinterpret_cast<FT_Byte*>(inFile->data.get()),
+                                       inFile->size,
+                                       0,
+                                       &mFace);
+  if(error)
+  {
+    throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
+  }
   
-  
-  mFace = inFace;
   mFile = inFile;
+  mLibrary = inLibrary;
 }
 
 Face::~Face()
