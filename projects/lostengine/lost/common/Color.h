@@ -32,6 +32,11 @@ namespace lost
       inline uint8_t bu8() const { return fv[2]*255.0; };
       inline uint8_t au8() const { return fv[3]*255.0; };
 
+      inline void ru8(uint8_t v) { fv[0] = float(v)/255.0; }
+      inline void gu8(uint8_t v) { fv[1] = float(v)/255.0; }
+      inline void bu8(uint8_t v) { fv[2] = float(v)/255.0; }
+      inline void au8(uint8_t v) { fv[3] = float(v)/255.0; }
+      
       float fv[4];
     };
 

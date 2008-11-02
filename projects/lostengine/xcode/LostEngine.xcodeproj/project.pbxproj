@@ -401,6 +401,8 @@
 		EA6D045A0E8302D7002C8DD3 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04530E8302C3002C8DD3 /* libboost.a */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
+		EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
+		EA7163B30EBE17E0005DB902 /* Packer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7163B10EBE17E0005DB902 /* Packer.h */; };
 		EA7BE0F80E6F38760017B031 /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE0F50E6F38760017B031 /* BindAll.cpp */; };
 		EA7BE0F90E6F38760017B031 /* BindAll.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7BE0F60E6F38760017B031 /* BindAll.h */; };
 		EA7BE0FB0E6F38760017B031 /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE0F50E6F38760017B031 /* BindAll.cpp */; };
@@ -1055,6 +1057,8 @@
 		EA6D04490E8302C3002C8DD3 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_36_0/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
+		EA7163B00EBE17E0005DB902 /* Packer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packer.cpp; sourceTree = "<group>"; };
+		EA7163B10EBE17E0005DB902 /* Packer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Packer.h; sourceTree = "<group>"; };
 		EA7BE0F50E6F38760017B031 /* BindAll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindAll.cpp; sourceTree = "<group>"; };
 		EA7BE0F60E6F38760017B031 /* BindAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindAll.h; sourceTree = "<group>"; };
 		EA7BE1010E6F38890017B031 /* EventCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCast.h; sourceTree = "<group>"; };
@@ -1577,6 +1581,8 @@
 			children = (
 				EA3B946A0E04639D00B6423B /* Bitmap.h */,
 				EA97FC110E35ABD800851245 /* Bitmap.cpp */,
+				EA7163B10EBE17E0005DB902 /* Packer.h */,
+				EA7163B00EBE17E0005DB902 /* Packer.cpp */,
 			);
 			path = bitmap;
 			sourceTree = "<group>";
@@ -2152,6 +2158,7 @@
 				EA1D54F00EB34E0400591811 /* Engine.h in Headers */,
 				3E8328090EB1D09A00084036 /* LostGuiroUserInterface.h in Headers */,
 				3E8328520EB1F2BB00084036 /* LostGuiroView.h in Headers */,
+				EA7163B30EBE17E0005DB902 /* Packer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2708,6 +2715,7 @@
 				3EBF8B3C0EB1B46400B3DD9D /* UserInterface.cpp in Sources */,
 				3E83280A0EB1D09A00084036 /* LostGuiroUserInterface.cpp in Sources */,
 				3E8328530EB1F2BB00084036 /* LostGuiroView.cpp in Sources */,
+				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

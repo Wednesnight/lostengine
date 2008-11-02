@@ -62,6 +62,7 @@ void Controller::init(shared_ptr<Event> event)
   loadedPic.reset(new Bitmap(file));
   loadedPic->hline(50, 0, loadedPic->width, redColor);
   loadedPic->vline(50, 0, loadedPic->height, greenColor);
+  loadedPic = loadedPic->rotCW();
   tex.reset(new Texture(loadedPic));
 }
 

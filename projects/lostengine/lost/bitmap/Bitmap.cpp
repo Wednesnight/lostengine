@@ -1,3 +1,4 @@
+
 #include "lost/bitmap/Bitmap.h"
 #include "stb_image.h"
 #include "lost/common/Logger.h"
@@ -280,10 +281,17 @@ void Bitmap::flip()
   }
 }
 
-void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
+uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
 {
   uint32_t bpp = bytesPerPixelFromComponents(format);
   uint8_t* target = data+((x+(((height-1)-y)*width))*bpp);
+  return target;
+}
+
+  
+void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
+{
+  uint8_t* target = pixelPointer(x,y);
   switch(format)
   {
     case COMPONENTS_ALPHA:target[0] =inColor.au8();break;
@@ -299,6 +307,48 @@ void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
       target[3]=inColor.au8();
       break;
   }
+}
+
+/** reads a pixel from the given coordinates and returns it as a Color. */
+  common::Color Bitmap::pixel(uint32_t x, uint32_t y)
+{
+  uint8_t* target = pixelPointer(x,y);
+  common::Color result;
+  switch(format)
+  {
+    case COMPONENTS_ALPHA:
+      result.r(1);
+      result.g(1);
+      result.b(1);      
+      result.au8(target[0]);break;
+    case COMPONENTS_RGB:
+      result.ru8(target[0]);
+      result.gu8(target[1]);
+      result.bu8(target[2]);
+      result.a(1);
+      break;
+    case COMPONENTS_RGBA:
+      result.ru8(target[0]);
+      result.gu8(target[1]);
+      result.bu8(target[2]);
+      result.au8(target[3]);
+      break;
+  }  
+  return result;
+}
+
+  
+boost::shared_ptr<Bitmap> Bitmap::rotCW()
+{
+  shared_ptr<Bitmap> result(new Bitmap(height, width, COMPONENTS_RGBA));
+  for(uint32_t y=0; y<height; ++y)
+  {
+    for(uint32_t x=0; x<width; ++x)
+    {
+      result->pixel(y, x, pixel(width-x,y));
+    }
+  }
+  return result;
 }
 
 void Bitmap::hline(uint32_t y, uint32_t xl, uint32_t xr, const common::Color& inColor)

@@ -126,9 +126,14 @@ namespace lost
        */
       void flip();
     
+      /** returns a pointer to the data of the pixel at the given coordinates */
+      uint8_t* pixelPointer(uint32_t x, uint32_t y);
         
       /** sets a pixel with the given color */
       void pixel(uint32_t x, uint32_t y, const common::Color& inColor);
+      
+      /** reads a pixel from the given coordinates and returns it as a Color. */
+      common::Color pixel(uint32_t x, uint32_t y);
       
       /** draws a horizontal line into the bitmap.
        * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
@@ -148,6 +153,10 @@ namespace lost
        */
       void vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& inColor);
 
+      
+      /** rotates the bitmap clock wise and returns it as a new bitmap*/
+      boost::shared_ptr<Bitmap> rotCW();
+      
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.
