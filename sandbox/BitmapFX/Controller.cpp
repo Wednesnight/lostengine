@@ -10,6 +10,7 @@
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
 #include "lost/font/Engine.h"
+#include "lost/bitmap/Packer.h"
 
 using namespace std;
 using namespace boost;
@@ -55,15 +56,30 @@ void Controller::init(shared_ptr<Event> event)
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   
-  shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, 128, 'g');
-  tex2.reset(new Texture(characterBitmap));
+  uint32_t fontSize = 20;
+  uint8_t maxc = 254;
+  bitmap::Packer packer(256, 256);
+  for(uint8_t c=0; c<=maxc; ++c)
+  {
+    shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, fontSize, c);    
+    if(!packer.add(characterBitmap))
+    {
+      DOUT("couldn't add bitmap, "<<uint32_t(c-1));
+//      break;
+    }
+  }
   
-  file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
+  shared_ptr<Bitmap> packedBitmap = packer.packedBitmap();
+//  tex2.reset(new Texture(packedBitmap));
+  
+/*  file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
   loadedPic.reset(new Bitmap(file));
   loadedPic->hline(50, 0, loadedPic->width, redColor);
   loadedPic->vline(50, 0, loadedPic->height, greenColor);
   loadedPic = loadedPic->rotCW();
   tex.reset(new Texture(loadedPic));
+  */
+  tex.reset(new Texture(packedBitmap));
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -89,7 +105,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
 
   context->setColor(whiteColor);
   context->drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
-  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
+//  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
   context->popState();
 
   fpsMeter->render( appInstance->displayAttributes->width - (fpsMeter->width + 10), 0, event->passedSec );

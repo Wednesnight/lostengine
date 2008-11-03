@@ -61,12 +61,12 @@ void Bitmap::destroy()
 {
   if(data && loaded)
   {
-    DOUT("stbi_image_free");
+//    DOUT("stbi_image_free");
     stbi_image_free(data);
   }
   else if(data && !loaded)
   {
-    DOUT("delete");
+//    DOUT("delete");
     delete [] data;
   }
   reset();
@@ -365,6 +365,17 @@ void Bitmap::vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& in
   {
     pixel(x,y,inColor);
   }  
+}
+
+void Bitmap::draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target)
+{
+  for(uint32_t cy=0; cy<height; ++cy)
+  {
+    for(uint32_t cx=0; cx<width; ++cx)
+    {
+      target->pixel(x+cx, y+cy, pixel(cx, cy));
+    }
+  }
 }
 
 

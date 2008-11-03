@@ -157,6 +157,12 @@ namespace lost
       /** rotates the bitmap clock wise and returns it as a new bitmap*/
       boost::shared_ptr<Bitmap> rotCW();
       
+      /** returns the occupied are in pixels. */
+      float area() { return width*height; }
+      
+      /** draws this bitmap into the specified target. */
+      void draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target);
+      
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.

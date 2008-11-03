@@ -55,6 +55,16 @@ namespace math
       return result;
     }
 
+    float area() { return width*height; } 
+    
+    bool fitsInto(const Rect& inTarget) const
+    {
+      if((width <= inTarget.width) &&(height <= inTarget.height))
+        return true;
+      else
+        return false;
+    }
+    
     bool contains(const lost::math::Vec2& inPoint) const
     {
       bool result = false;
