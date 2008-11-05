@@ -26,7 +26,14 @@ function lost.application.Application:init(event)
 
   require("lost.io.Guiro")
   controls.loader = lost.io.Loader(globals.app.loader)
-  controls.loader:load("mainScreen.lua")
+--  self.screen = controls.loader:loadScreen("mainScreen.lua")
+  controls.screen = controls.loader:loadScreen("mainScreen.lua")
+
+  self.renderState = self.context:copyState()
+  self.renderState.clearColor = lost.common.Color(0,0,0)
+  self.renderState.depthTest = false
+  self.renderState.texture2D = false
+  self.renderState.vertexArray = true
 
   globals.timer = lost.application.Timer("luarender", 0.015)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
@@ -61,21 +68,19 @@ end
 function lost.application.Application:renderHandler(event)
   local timerEvent = lost.application.TimerEvent.cast(event)
 
-  self.screen:render()
+--  self.screen:render()
+  controls.screen:render()
 
-  gl.glClearColor(0.0, 0.0, 0.0, 0.0) gl.GLDEBUG()
-  gl.glClear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT) gl.GLDEBUG()
+  self.context:pushState(self.renderState)
+  self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+  self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
 
-  lost.gl.utils.set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globals.app.displayAttributes.width, globals.app.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
-  gl.glEnableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
-  gl.glDisable(gl.GL_DEPTH_TEST) gl.GLDEBUG()
-  gl.glDisable(gl.GL_TEXTURE_2D) gl.GLDEBUG()
 
   controls.fpsMeter:render(globals.app.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
-  gl.glDisableClientState(gl.GL_VERTEX_ARRAY) gl.GLDEBUG()
+  self.context:popState()
   
   globals.app:swapBuffers()
 end

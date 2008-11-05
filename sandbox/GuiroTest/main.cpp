@@ -15,7 +15,7 @@ int main(int argn, char** args)
     // run
     app.run();
   }
-  catch (exception& e)
+  catch (std::exception& e)
   {
     EOUT("exception: " << e.what());
   }

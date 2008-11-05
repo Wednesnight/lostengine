@@ -15,7 +15,6 @@ using namespace boost;
 using namespace lost::resource;
 using namespace lost::common;
 using namespace lost::gl;
-using namespace lost::guiro;
 using namespace luabind;
 
 namespace lost
@@ -87,9 +86,6 @@ namespace application
     adapter->init(displayAttributes);
     // init gl context
     context.reset(new Context(displayAttributes));
-    // init ui screen
-    screen.reset(new Screen(interpreter, displayAttributes));
-
 
     // broadcast init event so dependant code knows its safe to init resources now
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);

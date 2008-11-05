@@ -60,8 +60,6 @@ void lostApplicationHelpers_init()
 
   // init gl context
   appInstance->context.reset(new Context());
-  // init ui screen
-  appInstance->screen.reset(new Screen(appInstance->interpreter, appInstance->displayAttributes));
 
   // broadcast init event so dependant code knows its safe to init resources now
   appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);  

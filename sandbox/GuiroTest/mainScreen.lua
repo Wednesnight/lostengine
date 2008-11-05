@@ -1,7 +1,7 @@
-local Color = lost.common.Color
-
 guiro:Screen
 {
+  id = "mainScreen",
+
   guiro:UserInterface
   {
     id = "mainUI",
@@ -11,15 +11,15 @@ guiro:Screen
       id = "mainMenu",
       style = guiro:Style("lost/guiro/styles/default/Window.lua"),
 
---[[      guiro:Button
+      guiro:Button
       {
         id = "closeButton",
         bounds = lost.math.Rect(100, 100, 25, 25),
         style =
         {
-          color = Color(0,0,0,0)
+          color = lost.common.Color(0,0,0,0)
         }
-      }]]--
+      }
     }
   }
 }

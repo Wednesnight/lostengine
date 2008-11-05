@@ -49,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E7706910EC1AC9000D0DA42 /* View.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = View.lua; sourceTree = "<group>"; };
+		3E7706BC0EC1AF5A00D0DA42 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserInterface.lua; sourceTree = "<group>"; };
+		3E7706CB0EC1B15900D0DA42 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
 		3E7B27D90EA77E6800F70E7C /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.lua; sourceTree = "<group>"; };
 		3E7B27DC0EA77E6800F70E7C /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.lua; sourceTree = "<group>"; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
@@ -172,6 +175,9 @@
 			children = (
 				3EE9AB180EB90D2D00E832CA /* styles */,
 				3E7B27DB0EA77E6800F70E7C /* controls */,
+				3E7706CB0EC1B15900D0DA42 /* Screen.lua */,
+				3E7706BC0EC1AF5A00D0DA42 /* UserInterface.lua */,
+				3E7706910EC1AC9000D0DA42 /* View.lua */,
 			);
 			path = guiro;
 			sourceTree = "<group>";
@@ -402,13 +408,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/glm\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);

@@ -12,11 +12,6 @@ function Loader:__init(loader)
   self.loader = loader
 end
 
-function Loader:load(filename)
-  log.debug("Loader:load()")
-  self:executeScript(filename, {guiro = self, lost = lost})
-end
-
 function Loader:executeScript(filename, environment)
   log.debug("Loader:executeScript()")
   local file = self.loader:load(filename)
@@ -31,31 +26,4 @@ function Loader:executeScript(filename, environment)
   else
     log.error("error while loading '".. filename .."': ".. error)
   end
-end
-
-function Loader:applyDefinitionToView(view, definition)
-  log.debug("Loader:applyDefinitionToView()")
-
-  -- apply properties
-  if (view and definition) then
-    for name,value in next,definition do
-      if type(name) == "string" then
-        log.debug("setting property: ".. name)
-        view[name] = value
-      end
-    end
-  end
-
-  -- apply children
-  if (view and definition) then
-    for name,object in next,definition do
-      if (type(object) == "userdata" and object.isView) then
-        local info = class_info(object)
-        log.debug("setting child: ".. info.name)
-        view:appendChild(object)
-      end
-    end
-  end
-
-  return view
 end

@@ -3,6 +3,7 @@
 
 #include "lost/lua/bindings/LostApplicationApplication.h"
 
+using namespace boost;
 using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
@@ -24,7 +25,7 @@ namespace lost
            .def_readonly("loader", &Application::loader)
            .def_readonly("displayAttributes", &Application::displayAttributes)
            .def_readonly("context", &Application::context)
-           .def_readonly("screen", &Application::screen)
+           .def_readwrite("screen", &Application::screen)
         ]
       ];
     }
