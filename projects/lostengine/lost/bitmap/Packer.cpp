@@ -86,29 +86,54 @@ bool Packer::Node::fits(shared_ptr<Bitmap> bmp)
   math::Rect bmprect(0,0,bmp->width, bmp->height);
   return bmprect.fitsInto(frame);
 }
+
+bool Packer::Node::fitsExactly(shared_ptr<Bitmap> bmp)
+{
+  return ((bmp->width == frame.width) && (bmp->height == frame.height));
+}
+ 
+bool Packer::Node::fitsNormalOrRotated(shared_ptr<Bitmap> bmp)
+{
+  Rect bmprect(0,0,bmp->width, bmp->height);
+  Rect bmprectRot(0,0,bmp->height, bmp->width);
   
+  return (bmprect.fitsInto(frame) || bmprectRot.fitsInto(frame));
+  
+}
+    
 bool Packer::Node::add(boost::shared_ptr<Bitmap> inBitmap)
 {
   bool result = false;
-  if(!bitmap && fits(inBitmap) && (inBitmap->area() == frame.area())) // terminate if no bitmap was assigned to this node and the area is exactly the same as the bitmap
+  if(!bitmap && fitsExactly(inBitmap)) // terminate if no bitmap was assigned to this node and the area is exactly the same as the bitmap
   {
     bitmap = inBitmap;
     result = true;
   }
-  else if(!bitmap && fits(inBitmap)) // if this node has a bitmap or is not an exact match, add subnodes if necessary and recurse
+  else if(!bitmap && fitsNormalOrRotated(inBitmap)) // if this node has a bitmap or is not an exact match, add subnodes if necessary and recurse
   {
     bool didSplit = false;
+    bool doRotate = !fits(inBitmap);
+    boost::shared_ptr<Bitmap> maybeRotatedBitmap;
+    if(doRotate)
+    {
+//      DOUT("rotating");
+      maybeRotatedBitmap = inBitmap->rotCW();
+    }  
+    else
+    {
+      maybeRotatedBitmap = inBitmap;
+    }
     if(!(small && large) && (frame.area()>1))
     {
       // split current frame to best accomodate bitmap
-      split(inBitmap);
+      split(maybeRotatedBitmap);
 //      DOUT("new split: "<<small->frame << " " << large->frame);
       didSplit = true;
     }
     // traverse the children, small first
-    if((small && small->add(inBitmap))
+    if((small && small->add(maybeRotatedBitmap))
        ||
-       (large && large->add(inBitmap))
+       (large && large->add(maybeRotatedBitmap))
       )
     {
       result = true;
@@ -153,7 +178,7 @@ bool Packer::add(shared_ptr<Bitmap> inBitmap)
     return false;
   }
   
-  DOUT("adding bitmap, frame: " << Rect(0,0,inBitmap->width, inBitmap->height));
+//  DOUT("adding bitmap, frame: " << Rect(0,0,inBitmap->width, inBitmap->height));
   bool result = rootNode->add(inBitmap);
   if(!result)
   {

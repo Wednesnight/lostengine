@@ -345,7 +345,7 @@ boost::shared_ptr<Bitmap> Bitmap::rotCW()
   {
     for(uint32_t x=0; x<width; ++x)
     {
-      result->pixel(y, x, pixel(width-x,y));
+      result->pixel(y, x, pixel((width-1)-x,y));
     }
   }
   return result;

@@ -26,6 +26,8 @@ struct Packer
     bool add(boost::shared_ptr<Bitmap> bitmap);
     void split(boost::shared_ptr<Bitmap> bitmap);    
     bool fits(boost::shared_ptr<Bitmap> bmp);
+    bool fitsExactly(boost::shared_ptr<Bitmap> bmp);
+    bool fitsNormalOrRotated(boost::shared_ptr<Bitmap> bmp);
     void draw(boost::shared_ptr<Bitmap> target); // draws itself or its children to the target bitmap
   };
   
