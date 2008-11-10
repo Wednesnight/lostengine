@@ -29,6 +29,10 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
           const std::vector<lost::math::Rect>& rects,
           bool rotate)
 {
+  // clear stats
+  sumIter = 0;
+  sumNodes = 0;
+  
   // clear previous result and init to target area
   nodes.clear();
   Node rootNode;
@@ -50,7 +54,10 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // pack all source rects into the target area
   for(int32_t i=0; i<numRects; ++i)
   {
-    pack(i);
+    if(!pack(i))
+    {
+      DOUT("couldn't pack "<<i);
+    }
   }
   
   // clean up temporary data
@@ -71,7 +78,7 @@ bool RectPacker::fits(const Node& n, const SourceRect& s)
 }
 
 
-void RectPacker::pack(int32_t sourceRectId)
+bool RectPacker::pack(int32_t sourceRectId)
 {
   // try to find an exactly matching node for the given sourceRectId
   // if there is none, we split the current node until we find one
@@ -84,7 +91,7 @@ void RectPacker::pack(int32_t sourceRectId)
   if((currentSourceRect.rect.width == 0) || (currentSourceRect.rect.height == 0))
   {
     DOUT("rejecting degenerate rect");
-    return;
+    return false;
   }
 
   DOUT("------------------ "<<sourceRectId<<" "<<currentSourceRect.rect);
@@ -136,6 +143,7 @@ void RectPacker::pack(int32_t sourceRectId)
   DOUT("iterations: "<<iterations<<" nodes: "<<nodes.size());
   sumIter += iterations;
   sumNodes += nodes.size();
+  return foundNode;
 }
 
 int32_t RectPacker::newNode(const lost::math::Rect& r)

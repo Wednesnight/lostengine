@@ -53,7 +53,7 @@ private:
   bool exactMatch(const Node& n, const SourceRect& s);
   bool RectPacker::fits(const Node& n, const SourceRect& s);
   void split(Node& n, const SourceRect& s); // splits node to accomodate source rect, if necessary and possible
-  void pack(int32_t sourceRectId);
+  bool pack(int32_t sourceRectId);
   int32_t newNode(const lost::math::Rect& r);
 
   std::vector<SourceRect> sourceRects;

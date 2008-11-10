@@ -73,7 +73,7 @@ void Controller::buildCharacterRects()
   uint32_t numBitmaps = characterBitmaps.size();
   for(uint32_t i=0; i<numBitmaps; ++i)
   {
-    characterRects.push_back(Rect(0,0,characterBitmaps[i]->width, characterBitmaps[i]->width));
+    characterRects.push_back(Rect(0,0,characterBitmaps[i]->width, characterBitmaps[i]->height));
   }
   DOUT("created "<<characterRects.size()<<" rects");
 }
