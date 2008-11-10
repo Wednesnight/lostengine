@@ -378,6 +378,20 @@ void Bitmap::draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target)
   }
 }
 
+void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color& inColor)
+{
+  float minX = inRect.x;
+  float minY = inRect.y;
+  float maxX = inRect.maxX();
+  float maxY = inRect.maxY();
+  
+  vline(minX, minY, maxY, inColor);
+  vline(maxX, minY, maxY, inColor);
+  hline(minY, minX, maxX, inColor);
+  hline(maxY, minX, maxX, inColor);
+}
+
+
 
 } 
 } 

@@ -4,6 +4,7 @@
 #include <boost/noncopyable.hpp>
 #include <stdint.h>
 #include "lost/common/Color.h"
+#include "lost/math/Rect.h"
 
 namespace boost { template<typename T> class shared_ptr; }
 
@@ -154,6 +155,11 @@ namespace lost
       void vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& inColor);
 
       
+        
+      /** draws the rect outline into the bitmap with the given color
+       */
+      void drawRectOutline(const lost::math::Rect& inRect, const common::Color& inColor);  
+        
       /** rotates the bitmap clock wise and returns it as a new bitmap*/
       boost::shared_ptr<Bitmap> rotCW();
       
