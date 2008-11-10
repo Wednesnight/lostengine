@@ -93,6 +93,21 @@ void Controller::updateCharacterAtlas()
 
 void Controller::buildAtlasFromPackedRectsAndBitmaps()
 {
+  characterAtlas.reset(new Bitmap(characterAtlasSize.width, characterAtlasSize.height, Bitmap::COMPONENTS_RGBA));
+  uint32_t numNodes = rectPacker.nodes.size();
+  for(uint32_t i=0; i<numNodes; ++i)
+  {
+    if(rectPacker.nodes[i].rectid != -1)
+    characterAtlas->drawRectOutline(rectPacker.nodes[i].rect, whiteColor);
+/*    int32_t bmpid = rectPacker.nodes[i].rectid;
+    if(bmpid != -1)
+    {
+      Rect r = rectPacker.nodes[i].rect;
+      shared_ptr<Bitmap> bmp = characterBitmaps[bmpid];
+      bmp->draw(r.x, r.y, characterAtlas);
+      DOUT("drawing "<<r);
+    }*/
+  }
 }
 
 void Controller::init(shared_ptr<Event> event)
@@ -166,7 +181,7 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   if(characterTexture)
   {
     context->setColor(whiteColor);
-    context->drawRectTextured(Rect(0,0,tex->width, tex->height), characterTexture);
+    context->drawRectTextured(Rect(0,0,characterTexture->width, characterTexture->height), characterTexture);
   //  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
     context->popState();
   }
