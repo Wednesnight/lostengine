@@ -22,7 +22,7 @@ RectPacker::~RectPacker()
 
 bool compareRects(const RectPacker::SourceRect& r1, const RectPacker::SourceRect& r2)
 {
-  return (r1.rect.area() < r2.rect.area());
+  return (r1.rect.area() > r2.rect.area());
 }
 
 void RectPacker::pack(const lost::math::Rect& targetArea,
@@ -104,7 +104,7 @@ void RectPacker::pack(int32_t sourceRectId)
     if((currentNode.rectid == -1) && exactMatch(currentNode, currentSourceRect))
     {
         foundNode = true;
-        currentNode.rect = currentSourceRect.rect;
+//        currentNode.rect = currentSourceRect.rect;
         currentNode.rectid = currentSourceRect.id;
 //        DOUT("found match, stack size: "<<recursionStack.size());
         nodes[currentNodeIndex] = currentNode;
