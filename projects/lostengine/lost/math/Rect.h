@@ -55,7 +55,7 @@ namespace math
       return result;
     }
 
-    float area() { return width*height; } 
+    float area() const { return width*height; } 
     
     bool fitsInto(const Rect& inTarget) const
     {
