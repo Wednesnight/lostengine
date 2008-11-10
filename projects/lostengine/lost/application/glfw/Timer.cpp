@@ -15,6 +15,7 @@ extern TimerManager* timerManagerInstance;
   : intervalSec(inIntervalSec), passedSec(0), running(true), mName(name)
   {
     timerManagerInstance->addTimer(this);
+    event.reset(new TimerEvent(TimerEvent::TIMER_FIRED()));
   }
 
   Timer::~Timer()

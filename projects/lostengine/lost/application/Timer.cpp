@@ -11,10 +11,9 @@ namespace lost
       passedSec += deltaSec;
       if(passedSec >= intervalSec)
       {
-        boost::shared_ptr<TimerEvent> ev(new TimerEvent(TimerEvent::TIMER_FIRED()));
-        ev->timer = this;
-        ev->passedSec = passedSec;
-        dispatchEvent(ev);
+        event->timer = this;
+        event->passedSec = passedSec;
+        dispatchEvent(event);
         passedSec = 0;
       }
     }
