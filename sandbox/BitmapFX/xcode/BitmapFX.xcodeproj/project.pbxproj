@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA2ECA300EB922A90062B593 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2ECA2F0EB922A90062B593 /* Application.lua */; };
+		EA4DC3990EC764AA00423CFE /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4DC3970EC764AA00423CFE /* RectPacker.cpp */; };
 		EA57CA800EBD3AF6000E3D01 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */; };
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
 		EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9137DF0E997F6B006884D7 /* stubs.jpg */; };
@@ -56,6 +57,8 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2ECA2F0EB922A90062B593 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
+		EA4DC3970EC764AA00423CFE /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RectPacker.cpp; path = ../RectPacker.cpp; sourceTree = SOURCE_ROOT; };
+		EA4DC3980EC764AA00423CFE /* RectPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RectPacker.h; path = ../RectPacker.h; sourceTree = SOURCE_ROOT; };
 		EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
 		EA9137DF0E997F6B006884D7 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
@@ -146,6 +149,8 @@
 				EAC026640E96AF8C00067FC5 /* init */,
 				EAC026650E96AF8C00067FC5 /* Controller.h */,
 				EAC026660E96AF8C00067FC5 /* Controller.cpp */,
+				EA4DC3970EC764AA00423CFE /* RectPacker.cpp */,
+				EA4DC3980EC764AA00423CFE /* RectPacker.h */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			files = (
 				EAC026670E96AF8C00067FC5 /* main.cpp in Sources */,
 				EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */,
+				EA4DC3990EC764AA00423CFE /* RectPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

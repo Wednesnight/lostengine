@@ -3,4 +3,5 @@ require("Application")
 function lost.application.Application:configure(event)
 --  self.config.bitmapFilename = "kitten+tits.jpg"
   self.config.bitmapFilename = "stubs.jpg"
+  self.config.fontSize = 22
 end

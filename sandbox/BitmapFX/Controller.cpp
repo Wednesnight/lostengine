@@ -30,6 +30,71 @@ Controller::Controller()
 {
 }
 
+/*void Controller::createCharacterMap()
+{
+  shared_ptr<freetype::Library> ftlib(new freetype::Library);
+  shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
+  shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
+  
+  uint8_t maxc = 254;
+  bitmap::Packer packer(256, 256);
+  for(uint8_t c=0; c<=maxc; ++c)
+  {
+    shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, fontSize, c);    
+    if(!packer.add(characterBitmap))
+    {
+      DOUT("couldn't add bitmap, "<<uint32_t(c-1));
+    }
+  }
+  
+  shared_ptr<Bitmap> packedBitmap = packer.packedBitmap();
+  tex.reset(new Texture(packedBitmap));
+}*/
+
+void Controller::renderCharacterBitmaps()
+{
+  characterBitmaps.clear();
+  shared_ptr<freetype::Library> ftlib(new freetype::Library);
+  shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
+  shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
+  
+  uint8_t maxc = 254;
+  for(uint8_t c=0; c<=maxc; ++c)
+  {
+    shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, fontSize, c);    
+    characterBitmaps.push_back(characterBitmap);
+  }
+  DOUT("created "<<characterBitmaps.size()<<" bitmaps");
+}
+
+void Controller::buildCharacterRects()
+{
+  characterRects.clear();
+  uint32_t numBitmaps = characterBitmaps.size();
+  for(uint32_t i=0; i<numBitmaps; ++i)
+  {
+    characterRects.push_back(Rect(0,0,characterBitmaps[i]->width, characterBitmaps[i]->width));
+  }
+  DOUT("created "<<characterRects.size()<<" rects");
+}
+
+void Controller::updateCharacterAtlas()
+{
+  renderCharacterBitmaps();
+  buildCharacterRects();
+  characterAtlasSize = Rect(0,0,256,256);
+  rectPacker.pack(characterAtlasSize, characterRects, true);
+  buildAtlasFromPackedRectsAndBitmaps();
+  if(characterAtlas)
+    characterTexture.reset(new Texture(characterAtlas));
+  else
+    characterTexture.reset();
+}
+
+void Controller::buildAtlasFromPackedRectsAndBitmaps()
+{
+}
+
 void Controller::init(shared_ptr<Event> event)
 {
   context = appInstance->context;
@@ -56,30 +121,9 @@ void Controller::init(shared_ptr<Event> event)
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   
-  uint32_t fontSize = 20;
-  uint8_t maxc = 254;
-  bitmap::Packer packer(256, 256);
-  for(uint8_t c=0; c<=maxc; ++c)
-  {
-    shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, fontSize, c);    
-    if(!packer.add(characterBitmap))
-    {
-      DOUT("couldn't add bitmap, "<<uint32_t(c-1));
-//      break;
-    }
-  }
-  
-  shared_ptr<Bitmap> packedBitmap = packer.packedBitmap();
-//  tex2.reset(new Texture(packedBitmap));
-  
-/*  file = appInstance->loader->load(appInstance->config["bitmapFilename"].as<string>());
-  loadedPic.reset(new Bitmap(file));
-  loadedPic->hline(50, 0, loadedPic->width, redColor);
-  loadedPic->vline(50, 0, loadedPic->height, greenColor);
-  loadedPic = loadedPic->rotCW();
-  tex.reset(new Texture(loadedPic));
-  */
-  tex.reset(new Texture(packedBitmap));
+  fontSize = appInstance->config["fontSize"].as<uint32_t>();
+//  createCharacterMap();
+  updateCharacterAtlas();
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -89,9 +133,25 @@ void Controller::keyboard( shared_ptr<KeyEvent> event )
     case K_ESCAPE :
       if (!event->pressed) appInstance->quit();
       break;
-      case K_SPACE :
+    case K_UP:
+      if(event->pressed)
+      {
+        fontSize++;
+        DOUT("FONTSIZE: "<<fontSize);
+        updateCharacterAtlas();
+      }
       break;
-      default :
+    case K_DOWN:
+      if(event->pressed)
+      {
+        fontSize--;
+        DOUT("FONTSIZE: "<<fontSize);
+        updateCharacterAtlas();
+      }
+      break;
+    case K_SPACE :
+      break;
+    default :
       break;
   }
 }
@@ -103,10 +163,13 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   context->pushState(renderState);
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-  context->setColor(whiteColor);
-  context->drawRectTextured(Rect(0,0,tex->width, tex->height), tex);
-//  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
-  context->popState();
+  if(characterTexture)
+  {
+    context->setColor(whiteColor);
+    context->drawRectTextured(Rect(0,0,tex->width, tex->height), characterTexture);
+  //  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
+    context->popState();
+  }
 
   fpsMeter->render( appInstance->displayAttributes->width - (fpsMeter->width + 10), 0, event->passedSec );
   appInstance->swapBuffers();
