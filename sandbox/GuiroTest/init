@@ -31,6 +31,15 @@ function lost.application.Application:init(event)
   controls.screen = controls.loader:loadScreen("mainScreen.lua")
   self.screen = controls.screen
 
+  -- print out class hierarchy
+  print("class hierarchy:")
+  lost.guiro.View:whoAmI()
+  lost.guiro.Screen:whoAmI()
+  lost.guiro.UserInterface:whoAmI()
+  lost.guiro.controls.Control:whoAmI()
+  lost.guiro.controls.Button:whoAmI()
+  lost.guiro.controls.Window:whoAmI()
+
   self.renderState = self.context:copyState()
   self.renderState.clearColor = lost.common.Color(0,0,0)
   self.renderState.depthTest = false

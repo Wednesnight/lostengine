@@ -151,6 +151,9 @@
 		3E8683F20E38A2C900F73BA8 /* TraitsSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */; };
 		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
 		3E94632F0E5173BB00F67187 /* ApplicationAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */; };
+		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
+		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
+		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3EB93D380E37FE2500FF10C9 /* Mesh.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D320E37FE2500FF10C9 /* Mesh.h */; };
 		3EB93D3C0E37FE2500FF10C9 /* Vertex.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EB93D360E37FE2500FF10C9 /* Vertex.h */; };
 		3EBDF5C60E8386D000F9E989 /* LostModelLSystemGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EBDF5C40E8386D000F9E989 /* LostModelLSystemGenerator.h */; };
@@ -902,6 +905,7 @@
 		3E8683F10E38A2C900F73BA8 /* TraitsSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraitsSelector.h; sourceTree = "<group>"; };
 		3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
 		3E94632D0E5173BB00F67187 /* ApplicationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationAdapter.h; path = glfw/ApplicationAdapter.h; sourceTree = "<group>"; };
+		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EA8683B0E6307DC00E34D51 /* spectator.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = spectator.lua; path = camera/controller/spectator.lua; sourceTree = "<group>"; };
 		3EB93D320E37FE2500FF10C9 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = model/Mesh.h; sourceTree = "<group>"; };
 		3EB93D360E37FE2500FF10C9 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = model/Vertex.h; sourceTree = "<group>"; };
@@ -1504,6 +1508,7 @@
 				EA67106F0E3E539900B961EC /* iphone */,
 				EA67106E0E3E539200B961EC /* glfw */,
 				EA3B94660E04639D00B6423B /* Application.h */,
+				3E9531300EC98D62003FCAF0 /* Application.cpp */,
 				EA3B94680E04639D00B6423B /* Timer.h */,
 				3E2062370E9E1AFD0042BC53 /* Timer.cpp */,
 				EAAF98480E15DB9100B28BF6 /* TimerEvent.h */,
@@ -2548,6 +2553,7 @@
 				3E3B3E430E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
 				3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */,
+				3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2624,6 +2630,7 @@
 				EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */,
 				EA1D54F10EB34E0400591811 /* Engine.cpp in Sources */,
 				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
+				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2696,6 +2703,7 @@
 				3E3B3E410E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
 				3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */,
+				3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

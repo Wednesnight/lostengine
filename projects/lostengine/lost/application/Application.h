@@ -35,6 +35,8 @@ namespace lost
       boost::shared_ptr<lost::event::EventDispatcher> screen;
 
       void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
+
+      virtual void dispatchEvent(lost::event::EventPtr event);
       
     private:
       boost::shared_ptr<ApplicationAdapter> adapter;

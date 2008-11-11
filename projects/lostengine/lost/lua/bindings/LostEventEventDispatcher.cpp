@@ -35,6 +35,31 @@ namespace lost
 
 namespace lost
 {
+  namespace event
+  {
+
+    struct LuaEventDispatcher : EventDispatcher, luabind::wrap_base
+    {
+      LuaEventDispatcher()
+      : EventDispatcher()
+      {}
+      
+      virtual void dispatchEvent(EventPtr event)
+      { 
+        call<void>("dispatchEvent", event); 
+      }
+      
+      static void dispatchEventBase(EventDispatcher* dispatcher, EventPtr event)
+      {
+        return dispatcher->EventDispatcher::dispatchEvent(event);
+      }
+    };
+    
+  }
+}
+
+namespace lost
+{
   namespace lua
   {
     void LostEventEventDispatcher(lua_State* state)
@@ -52,10 +77,11 @@ namespace lost
       [
         namespace_("event")
         [
-          class_<EventDispatcher, boost::shared_ptr<EventDispatcher> >("EventDispatcher")
+          class_<EventDispatcher, LuaEventDispatcher, boost::shared_ptr<EventDispatcher> >("EventDispatcher")
             .def(constructor<>())
             .def("addEventListener", (boost::signals::connection(*)(object, const std::string&, object))&addEventListener)
             .def("removeEventListener", &EventDispatcher::removeEventListener)
+            .def("dispatchEvent", &EventDispatcher::dispatchEvent, &LuaEventDispatcher::dispatchEventBase)
         ]
       ];
     }  
