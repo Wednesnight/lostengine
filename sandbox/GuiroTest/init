@@ -1,5 +1,7 @@
 require("lost.application.Application")
 
+local connection = nil
+
 function lost.application.Application:configure(event)
   self.config.displayAttributes = lost.common.DisplayAttributes()
   self.config.displayAttributes.width = 800;
@@ -13,7 +15,7 @@ function lost.application.Application:configure(event)
   self.config.displayAttributes.fullscreen = false;
   self.config.displayAttributes.title = "GuiroTest";
 
-  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
+  connection = self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
   self:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
   self:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
 end
@@ -26,8 +28,8 @@ function lost.application.Application:init(event)
 
   require("lost.io.Guiro")
   controls.loader = lost.io.Loader(globals.app.loader)
---  self.screen = controls.loader:loadScreen("mainScreen.lua")
   controls.screen = controls.loader:loadScreen("mainScreen.lua")
+  self.screen = controls.screen
 
   self.renderState = self.context:copyState()
   self.renderState.clearColor = lost.common.Color(0,0,0)
@@ -51,6 +53,7 @@ function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
   gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+  self:removeEventListener(connection)
 end
 
 function lost.application.Application:keyHandler(event)
@@ -68,7 +71,6 @@ end
 function lost.application.Application:renderHandler(event)
   local timerEvent = lost.application.TimerEvent.cast(event)
 
---  self.screen:render()
   controls.screen:render()
 
   self.context:pushState(self.renderState)

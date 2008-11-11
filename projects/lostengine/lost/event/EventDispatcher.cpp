@@ -1,6 +1,7 @@
 #include <boost/signal.hpp>
 #include <boost/shared_ptr.hpp>
 #include "lost/event/EventDispatcher.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -21,7 +22,7 @@ namespace lost
       delete listeners;
     }
     
-    void EventDispatcher::addEventListener(const lost::event::Type& type, EventListenerFunc callback)
+    boost::signals::connection EventDispatcher::addEventListener(const lost::event::Type& type, EventListenerFunc callback)
     {
       EventSignalPtrMap::iterator pos = (*listeners).find(type);
       if(pos == (*listeners).end())
@@ -29,12 +30,13 @@ namespace lost
         EventSignalPtr(new EventSignal);
         (*listeners)[type] =  EventSignalPtr(new EventSignal);
       }
-      (*listeners)[type]->connect(callback);
+      return (*listeners)[type]->connect(callback);
     }
     
-    void EventDispatcher::removeEventListener(const lost::event::Type& type, EventListenerFunc callback)
+    void EventDispatcher::removeEventListener(const boost::signals::connection& connection)
     {
-      //
+      DOUT("EventDispatcher::removeEventListener()");
+      connection.disconnect();
     }
     
     void EventDispatcher::dispatchEvent(EventPtr event)

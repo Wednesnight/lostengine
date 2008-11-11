@@ -24,11 +24,11 @@ namespace lost
       }
     };
 
-    void addEventListener(object dispatcher, const std::string& type, object func)
+    boost::signals::connection addEventListener(object dispatcher, const std::string& type, object func)
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
       EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
-      disp->addEventListener(type, LuaHandlerFunction(func));
+      return disp->addEventListener(type, LuaHandlerFunction(func));
     }
   }
 }
@@ -39,13 +39,23 @@ namespace lost
   {
     void LostEventEventDispatcher(lua_State* state)
     {
+      module(state, "boost")
+      [
+        namespace_("signals")
+        [
+          class_<boost::signals::connection>("connection")
+            .def(constructor<>())
+        ]
+      ];
+
       module(state, "lost")
       [
         namespace_("event")
         [
-          class_<EventDispatcher>("EventDispatcher")
+          class_<EventDispatcher, boost::shared_ptr<EventDispatcher> >("EventDispatcher")
             .def(constructor<>())
-            .def("addEventListener", (void(*)(object, const std::string&, object))&addEventListener)
+            .def("addEventListener", (boost::signals::connection(*)(object, const std::string&, object))&addEventListener)
+            .def("removeEventListener", &EventDispatcher::removeEventListener)
         ]
       ];
     }  

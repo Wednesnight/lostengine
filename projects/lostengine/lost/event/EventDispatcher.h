@@ -3,6 +3,7 @@
 
 #include "lost/forward/boost/shared_ptr.hpp"
 #include <boost/function.hpp>
+#include <boost/signal.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
 
@@ -21,8 +22,8 @@ namespace lost
       EventDispatcher();
       virtual ~EventDispatcher();
       
-      void addEventListener(const lost::event::Type& type, EventListenerFunc callback);
-      void removeEventListener(const lost::event::Type& type, EventListenerFunc callback);
+      boost::signals::connection addEventListener(const lost::event::Type& type, EventListenerFunc callback);
+      void removeEventListener(const boost::signals::connection& connection);
       virtual void dispatchEvent(EventPtr event);
       void clear();
     };
