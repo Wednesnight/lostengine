@@ -1,7 +1,7 @@
 module("lost.guiro.controls", package.seeall)
 
 --[[
-     Window class
+     Window control
   ]]
 require("lost.guiro.controls.Control")
 

@@ -59,6 +59,7 @@ function View:__init() super()
   self.bounds = lost.math.Rect(0,0,0,0)
   self.children = {}
   self.isView = true
+  self.listeners = {}
 end
 
 --[[ 
@@ -105,10 +106,36 @@ function View:setParent(parent)
 end
 
 --[[ 
+    overrides lost.event.EventDispatcher.addEventListener to preserve lua event types
+  ]]
+function View:addEventListener(which, listener)
+  if not self.listeners[which] then
+    self.listeners[which] = {}
+  end
+  table.insert(self.listeners[which], listener)
+end
+
+--[[ 
     derived from EventDispatcher, routes all events to self.children
   ]]
 function View:dispatchEvent(event)
+  --[[
+      first we iterate through the "lua" event handlers
+    ]]
+  if self.listeners[event.type] then
+    for k,listener in next,self.listeners[event.type] do
+      listener(event)
+    end
+  end
+
+  --[[
+      then the native ones
+    ]]
   lost.event.EventDispatcher.dispatchEvent(self, event)
+
+  --[[
+      and now the children
+    ]]
   for k,view in next,self.children do
     view:dispatchEvent(event)
   end

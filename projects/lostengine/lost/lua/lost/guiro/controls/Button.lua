@@ -1,7 +1,7 @@
 module("lost.guiro.controls", package.seeall)
 
 --[[
-     Button class
+     Button control
   ]]
 require("lost.guiro.controls.Control")
 
@@ -9,6 +9,20 @@ class "lost.guiro.controls.Button" (lost.guiro.controls.Control)
 Button = _G["lost.guiro.controls.Button"]
 
 lost.guiro.controls.Control:addBase(Button, "Button")
+
+--[[
+    button events
+  ]]
+Button.ButtonPressed  = "BUTTON_PRESSED"
+Button.ButtonReleased = "BUTTON_RELEASED"
+Button.ButtonClicked  = "BUTTON_CLICKED"
+
+class "lost.guiro.controls.Button.ButtonEvent" (lost.event.Event)
+Button.ButtonEvent = _G["lost.guiro.controls.Button.ButtonEvent"]
+
+function Button.ButtonEvent:__init(which, pos) super(which)
+  self.pos = pos
+end
 
 --[[
     button states
@@ -46,6 +60,9 @@ function Button:handleMouse(event)
     if mouseEvent.type == lost.application.MouseEvent.MOUSE_DOWN then
       self.down = globalRect:contains(mouseEvent.pos)
       self.pressed = self.down
+      if self.down then
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonPressed, mouseEvent.pos))
+      end
 
     -- left button release
     elseif mouseEvent.type == lost.application.MouseEvent.MOUSE_UP then
@@ -56,6 +73,12 @@ function Button:handleMouse(event)
     elseif mouseEvent.type == lost.application.MouseEvent.MOUSE_MOVE then
       self.hovered = globalRect:contains(mouseEvent.pos)
       self.pressed = self.down and self.hovered
+      if not self.down then
+        if self.hovered then
+          self:dispatchEvent(Button.ButtonEvent(Button.ButtonClicked, mouseEvent.pos))
+        end
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonReleased, mouseEvent.pos))
+      end
     end
 
     if self.pressed then

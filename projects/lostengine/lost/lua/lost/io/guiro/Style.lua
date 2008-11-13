@@ -6,8 +6,10 @@ module("lost.io", package.seeall)
 
 require("lost.io.Loader")
 
-function Loader:Style(filename)
+function Loader:StyleFromFile(filename)
   local result
-  self:executeScript(filename, {guiro = {Style = function(self, table) result = table end}, lost = lost})
+  local guiro = self
+  guiro.Style = function(self, table) result = table end
+  self:executeScript(filename, {guiro = guiro, lost = lost})
   return result
 end

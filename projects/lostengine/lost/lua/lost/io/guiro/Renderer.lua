@@ -6,8 +6,10 @@ module("lost.io", package.seeall)
 
 require("lost.io.Loader")
 
-function Loader:Renderer(filename)
+function Loader:RendererFromFile(filename)
   local result
-  self:executeScript(filename, {guiro = {Renderer = function(self, table) result = table end}, lost = lost})
+  local guiro = self
+  guiro.Renderer = function(self, table) result = table end
+  self:executeScript(filename, {guiro = guiro, lost = lost})
   return result
 end
