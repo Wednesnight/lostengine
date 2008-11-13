@@ -4,42 +4,48 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/bitmap/Bitmap.h"
 #include "lost/math/Rect.h"
+#include "lost/math/RectPacker.h"
+#include <stdint.h>
 
 namespace lost
 {
 namespace bitmap
 {
 struct Packer
-{
-  struct Node
+{  
+  struct Result
   {
-    Node(math::Rect inFrame);
     
-    lost::math::Rect          frame; // position and size of this node in the global coord system
+    boost::shared_ptr<lost::bitmap::Bitmap> packedBitmap; // the resulting bitmap
+    std::vector<lost::math::Rect>           rects;        // the resulting rects. Size of this vector is number of bitmaps that fit into the target area
+    std::vector<int32_t>                    bitmapIds;    // the initial index of the bitmap in the incoming data
+    std::vector<bool>                       rotated;      // true if the bitmap was rotated
 
-    boost::shared_ptr<Node>   small;  // left child or null if not split
-    boost::shared_ptr<Node>   large; // right child or null if not split
-    
-    boost::shared_ptr<Bitmap> bitmap; // bitmap if this node is in use or null
-
-    // adds the given bitmap to this node and splits the remaining area
-    bool add(boost::shared_ptr<Bitmap> bitmap);
-    void split(boost::shared_ptr<Bitmap> bitmap);    
-    bool fits(boost::shared_ptr<Bitmap> bmp);
-    bool fitsExactly(boost::shared_ptr<Bitmap> bmp);
-    bool fitsNormalOrRotated(boost::shared_ptr<Bitmap> bmp);
-    void draw(boost::shared_ptr<Bitmap> target); // draws itself or its children to the target bitmap
+    void clear();
   };
   
-  // creates the packer for a bitmap with the given width and height
-  Packer(uint32_t width, uint32_t height);
+  Packer();
   virtual ~Packer();
   
-  bool add(boost::shared_ptr<Bitmap> inBitmap); // adds a new bitmap to the packing structure, splitting nodes if necessary
-  bool recursiveAdd(boost::shared_ptr<Packer::Node> node, boost::shared_ptr<Bitmap> bitmap);
-  boost::shared_ptr<Bitmap> packedBitmap(); // creates a packed bitmap from all the nodes
+  /** Tries to pack as many bitmaps as possible into a new bitmap with the given size.
+   *
+   * @param outResult   receives the result of the packing
+   * @param targetSize  size of the bitmap that contains all the provided bitmaps.
+   * @param bitmaps     all bitmaps to pack.
+   * @param format      format of the pixel components of the resulting bitmap.
+   * @param rotate      set this to true if you want to allow rotation of the packed bitmaps
+   */
+  void pack(Packer::Result& outResult,
+            const lost::math::Vec2& targetSize,
+            std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
+            Bitmap::Components format = Bitmap::COMPONENTS_RGBA,
+            bool rotate = false);  // won't do anything for now, so you can leave it at false
+
+private:
+  void buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
+                             std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps);
   
-  boost::shared_ptr<Node> rootNode;
+  lost::math::RectPacker rectPacker;
 };
 }
 }

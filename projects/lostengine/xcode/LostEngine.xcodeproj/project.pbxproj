@@ -578,6 +578,9 @@
 		EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAAA56950E286E4A002EB663 /* ApplicationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAA56940E286E4A002EB663 /* ApplicationEvent.h */; };
+		EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
+		EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
+		EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
 		EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
 		EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
 		EAAF97830E15C30400B28BF6 /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977F0E15C30400B28BF6 /* KeyEvent.h */; };
@@ -1091,6 +1094,7 @@
 		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAA56940E286E4A002EB663 /* ApplicationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
+		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		EAAF977D0E15C30400B28BF6 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		EAAF977F0E15C30400B28BF6 /* KeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEvent.h; sourceTree = "<group>"; };
@@ -1681,6 +1685,7 @@
 				EA3B990A0E04903700B6423B /* lmath.h */,
 				EA3B96760E046C5400B6423B /* Matrix.h */,
 				EA3B96770E046C5400B6423B /* Rect.h */,
+				EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */,
 				EA3B96780E046C5400B6423B /* Vec2.h */,
 				EA3B96790E046C5400B6423B /* Vec3.h */,
 				EA3B967A0E046C5400B6423B /* Vec4.h */,
@@ -2554,6 +2559,7 @@
 				3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
 				3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */,
+				EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2631,6 +2637,7 @@
 				EA1D54F10EB34E0400591811 /* Engine.cpp in Sources */,
 				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
+				EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2704,6 +2711,7 @@
 				3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
 				3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */,
+				EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

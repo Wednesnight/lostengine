@@ -30,27 +30,6 @@ Controller::Controller()
 {
 }
 
-/*void Controller::createCharacterMap()
-{
-  shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
-  shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
-  
-  uint8_t maxc = 254;
-  bitmap::Packer packer(256, 256);
-  for(uint8_t c=0; c<=maxc; ++c)
-  {
-    shared_ptr<Bitmap> characterBitmap = Engine::renderGlyphToBitmap(fnt, fontSize, c);    
-    if(!packer.add(characterBitmap))
-    {
-      DOUT("couldn't add bitmap, "<<uint32_t(c-1));
-    }
-  }
-  
-  shared_ptr<Bitmap> packedBitmap = packer.packedBitmap();
-  tex.reset(new Texture(packedBitmap));
-}*/
-
 void Controller::renderCharacterBitmaps()
 {
   characterBitmaps.clear();
@@ -67,47 +46,17 @@ void Controller::renderCharacterBitmaps()
   DOUT("created "<<characterBitmaps.size()<<" bitmaps");
 }
 
-void Controller::buildCharacterRects()
-{
-  characterRects.clear();
-  uint32_t numBitmaps = characterBitmaps.size();
-  for(uint32_t i=0; i<numBitmaps; ++i)
-  {
-    characterRects.push_back(Rect(0,0,characterBitmaps[i]->width, characterBitmaps[i]->height));
-  }
-  DOUT("created "<<characterRects.size()<<" rects");
-}
-
 void Controller::updateCharacterAtlas()
 {
   renderCharacterBitmaps();
-  buildCharacterRects();
   characterAtlasSize = Rect(0,0,256,256);
-  rectPacker.pack(characterAtlasSize, characterRects, true);
-  buildAtlasFromPackedRectsAndBitmaps();
-  if(characterAtlas)
-    characterTexture.reset(new Texture(characterAtlas));
+  bitmapPacker.pack(packerResult,
+                    Vec2(characterAtlasSize.width,characterAtlasSize.height),
+                    characterBitmaps);
+  if(packerResult.packedBitmap)
+    characterTexture.reset(new Texture(packerResult.packedBitmap));
   else
     characterTexture.reset();
-}
-
-void Controller::buildAtlasFromPackedRectsAndBitmaps()
-{
-  characterAtlas.reset(new Bitmap(characterAtlasSize.width, characterAtlasSize.height, Bitmap::COMPONENTS_RGBA));
-  uint32_t numNodes = rectPacker.nodes.size();
-  for(uint32_t i=0; i<numNodes; ++i)
-  {
-    if(rectPacker.nodes[i].rectid != -1)
-    characterAtlas->drawRectOutline(rectPacker.nodes[i].rect, whiteColor);
-/*    int32_t bmpid = rectPacker.nodes[i].rectid;
-    if(bmpid != -1)
-    {
-      Rect r = rectPacker.nodes[i].rect;
-      shared_ptr<Bitmap> bmp = characterBitmaps[bmpid];
-      bmp->draw(r.x, r.y, characterAtlas);
-      DOUT("drawing "<<r);
-    }*/
-  }
 }
 
 void Controller::init(shared_ptr<Event> event)

@@ -7,193 +7,70 @@ namespace lost
 {
 namespace bitmap
 {
-
-Packer::Node::Node(lost::math::Rect inFrame)
-: frame(inFrame)
-{
-}
-
-void Packer::Node::split(boost::shared_ptr<Bitmap> bitmap)
-{  
-  // there are two ways to split this frame, horizontally or vertically 
-  // we need to find the split with the largest child
-
-  // the bitmap rect is always situated at the origin of the current frame
-  math::Rect bmprect(frame.x, frame.y, bitmap->width, bitmap->height);
-  
-  float vsplitmax, hsplitmax;
-  Rect vl, vr, ht, hb;
-  
-  if(frame.width <= bitmap->width) // don't vsplit if width is already minimum fit for bitmap
-  {
-    vsplitmax = 0;
-  }
-  else
-  {
-    // setup rects for vertical split
-    vl = Rect(frame.x, frame.y, bmprect.width, frame.height);  // vertical split left rect
-    vr = Rect(frame.x+bmprect.width, frame.y, frame.width-bmprect.width, frame.height); // vertical split right rect
-    // find max child area for vsplit
-    vsplitmax = std::max(vl.area(), vr.area());
-  }
-
-  if(frame.height <= bitmap->height) // don't split if height is aready minimum fit for bitmap
-  {
-    hsplitmax = 0;
-  }
-  else
-  {
-    // setup rects for horizontal split
-    hb = Rect(frame.x, frame.y, frame.width, bmprect.height);
-    ht = Rect(frame.x, frame.y+bmprect.height, frame.width, frame.height-bmprect.height);
-    // find max child area for hsplit
-    hsplitmax = std::max(ht.area(), hb.area());
-  }
-   
-  if((vsplitmax == 0) && (vsplitmax == hsplitmax))
-    DOUT("DANGER, zero rects!");
-  
-  if(vsplitmax > hsplitmax)
-  {
-    if(vl.area() < vr.area())
-    {
-      small.reset(new Node(vl));
-      large.reset(new Node(vr));
-    }
-    else
-    {
-      small.reset(new Node(vr));
-      large.reset(new Node(vl));
-    }
-  }
-  else
-  {
-    if(hb.area() < ht.area())
-    {
-      small.reset(new Node(hb));
-      large.reset(new Node(ht));
-    }
-    else
-    {
-      small.reset(new Node(ht));
-      large.reset(new Node(hb));
-    }
-  }
-}
-
-bool Packer::Node::fits(shared_ptr<Bitmap> bmp)  
-{
-  math::Rect bmprect(0,0,bmp->width, bmp->height);
-  return bmprect.fitsInto(frame);
-}
-
-bool Packer::Node::fitsExactly(shared_ptr<Bitmap> bmp)
-{
-  return ((bmp->width == frame.width) && (bmp->height == frame.height));
-}
  
-bool Packer::Node::fitsNormalOrRotated(shared_ptr<Bitmap> bmp)
+void Packer::Result::clear()
 {
-  Rect bmprect(0,0,bmp->width, bmp->height);
-  Rect bmprectRot(0,0,bmp->height, bmp->width);
+  packedBitmap.reset();
+  rects.clear();
+  bitmapIds.clear();
+  rotated.clear();
+}    
   
-  return (bmprect.fitsInto(frame) || bmprectRot.fitsInto(frame));
   
-}
-    
-bool Packer::Node::add(boost::shared_ptr<Bitmap> inBitmap)
+Packer::Packer()
 {
-  bool result = false;
-  if(!bitmap && fitsExactly(inBitmap)) // terminate if no bitmap was assigned to this node and the area is exactly the same as the bitmap
-  {
-    bitmap = inBitmap;
-    result = true;
-  }
-  else if(!bitmap && fitsNormalOrRotated(inBitmap)) // if this node has a bitmap or is not an exact match, add subnodes if necessary and recurse
-  {
-    bool didSplit = false;
-    bool doRotate = !fits(inBitmap);
-    boost::shared_ptr<Bitmap> maybeRotatedBitmap;
-    if(doRotate)
-    {
-//      DOUT("rotating");
-      maybeRotatedBitmap = inBitmap->rotCW();
-    }  
-    else
-    {
-      maybeRotatedBitmap = inBitmap;
-    }
-    if(!(small && large) && (frame.area()>1))
-    {
-      // split current frame to best accomodate bitmap
-      split(maybeRotatedBitmap);
-//      DOUT("new split: "<<small->frame << " " << large->frame);
-      didSplit = true;
-    }
-    // traverse the children, small first
-    if((small && small->add(maybeRotatedBitmap))
-       ||
-       (large && large->add(maybeRotatedBitmap))
-      )
-    {
-      result = true;
-    }
-    else
-    {
-      if(didSplit)
-      {
-        DOUT("reverting split");
-        small.reset();
-        large.reset();
-      }
-    }
-  }
-  return result;
-}
- 
-void Packer::Node::draw(boost::shared_ptr<Bitmap> inBitmap)
-{
-  if(bitmap)
-    bitmap->draw(frame.x, frame.y, inBitmap);
-  if(small)
-    small->draw(inBitmap);
-  if(large)
-    large->draw(inBitmap);
-}
-  
-Packer::Packer(uint32_t width, uint32_t height)
-{
-  rootNode.reset(new Node(math::Rect(0,0,width,height)));
 }
 
 Packer::~Packer()
 {
 }
-  
-bool Packer::add(shared_ptr<Bitmap> inBitmap)
+
+void Packer::pack(Packer::Result& outResult,
+        const lost::math::Vec2& targetSize,
+        std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
+        Bitmap::Components format,
+        bool rotate)
 {
-  if((inBitmap->width==0) || (inBitmap->height == 0))
+  outResult.clear();
+  buildRectsFromBitmaps(outResult.rects, bitmaps);
+  rectPacker.pack(Rect(0,0,targetSize.width, targetSize.height),
+                  outResult.rects,
+                  rotate); 
+  // extract missing infos from rectpacker
+  // build final bitmap
+  outResult.packedBitmap.reset(new Bitmap(targetSize.width, targetSize.height, format));
+  outResult.rects.clear();
+  uint32_t numNodes = rectPacker.nodes.size();
+  for(uint32_t i=0; i<numNodes; ++i)
   {
-    DOUT("rejecting degenerate bitmap");
-    return false;
+    int32_t bmpid = rectPacker.nodes[i].rectid;
+    if(bmpid != -1)
+    {
+      outResult.rects.push_back(rectPacker.nodes[i].rect);
+      outResult.bitmapIds.push_back(rectPacker.nodes[i].rectid);
+      outResult.rotated.push_back(rectPacker.nodes[i].rotated);
+      
+      Rect r = rectPacker.nodes[i].rect;
+      shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
+      bmp->draw(r.x, r.y, outResult.packedBitmap);
+      DOUT("drawing "<<r);
+    }
   }
+}
+
   
-//  DOUT("adding bitmap, frame: " << Rect(0,0,inBitmap->width, inBitmap->height));
-  bool result = rootNode->add(inBitmap);
-  if(!result)
+void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
+                                   std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
+{
+  outRects.clear();
+  uint32_t numBitmaps = inBitmaps.size();
+  for(uint32_t i=0; i<numBitmaps; ++i)
   {
-    DOUT("couldn't pack bitmap");
+    outRects.push_back(Rect(0,0,inBitmaps[i]->width, inBitmaps[i]->height));
   }
-  return result;
+  DOUT("created "<<inBitmaps.size()<<" rects");
 }
   
-boost::shared_ptr<Bitmap> Packer::packedBitmap()
-{
-  boost::shared_ptr<Bitmap> result(new Bitmap(rootNode->frame.width, rootNode->frame.height, Bitmap::COMPONENTS_RGBA));
-  result->clear(common::Color(1,0,1,1));
-  rootNode->draw(result);
-  return result;
-}  
   
 }
 }
