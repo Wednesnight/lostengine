@@ -581,6 +581,12 @@
 		EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
 		EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
 		EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
+		EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EAAC572E0ECBAE71004AD566 /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC572C0ECBAE71004AD566 /* TrueTypeFont.h */; };
+		EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EAAC57300ECBAE71004AD566 /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC572C0ECBAE71004AD566 /* TrueTypeFont.h */; };
+		EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EAAC57320ECBAE71004AD566 /* TrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC572C0ECBAE71004AD566 /* TrueTypeFont.h */; };
 		EAAF97670E15BD0900B28BF6 /* EventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */; };
 		EAAF97810E15C30400B28BF6 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977D0E15C30400B28BF6 /* MouseEvent.h */; };
 		EAAF97830E15C30400B28BF6 /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF977F0E15C30400B28BF6 /* KeyEvent.h */; };
@@ -1095,6 +1101,8 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAA56940E286E4A002EB663 /* ApplicationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
+		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
+		EAAC572C0ECBAE71004AD566 /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
 		EAAF97660E15BD0900B28BF6 /* EventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatcher.h; sourceTree = "<group>"; };
 		EAAF977D0E15C30400B28BF6 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		EAAF977F0E15C30400B28BF6 /* KeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEvent.h; sourceTree = "<group>"; };
@@ -1571,6 +1579,8 @@
 		EA3B94940E04639D00B6423B /* font */ = {
 			isa = PBXGroup;
 			children = (
+				EAAC572C0ECBAE71004AD566 /* TrueTypeFont.h */,
+				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
 				EA1D54EA0EB34E0400591811 /* Model.h */,
 				EA1D54EB0EB34E0400591811 /* Model.cpp */,
 				EA1D54EC0EB34E0400591811 /* Engine.h */,
@@ -1963,6 +1973,7 @@
 				3E2061AE0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */,
 				3E2062580E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 				3EFF944C0EA74E35005C9288 /* lua.h in Headers */,
+				EAAC57320ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2095,6 +2106,7 @@
 				EA1D54EE0EB34E0400591811 /* Model.h in Headers */,
 				EA1D54F00EB34E0400591811 /* Engine.h in Headers */,
 				EA7163B30EBE17E0005DB902 /* Packer.h in Headers */,
+				EAAC572E0ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2227,6 +2239,7 @@
 				3E2061AC0E9E14E60042BC53 /* LostEventEventDispatcher.h in Headers */,
 				3E2062570E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 				3EFF944D0EA74E35005C9288 /* lua.h in Headers */,
+				EAAC57300ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2560,6 +2573,7 @@
 				3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
+				EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,6 +2652,7 @@
 				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
+				EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2712,6 +2727,7 @@
 				3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
+				EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

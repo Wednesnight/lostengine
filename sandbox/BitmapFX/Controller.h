@@ -11,6 +11,8 @@
 
 #include "lost/bitmap/Packer.h"
 
+#include "lost/font/TrueTypeFont.h"
+
 struct Controller 
 {
   lost::common::DisplayAttributes                 display;
@@ -28,6 +30,8 @@ struct Controller
   lost::math::Rect                                characterAtlasSize;
   lost::bitmap::Packer                            bitmapPacker;
   lost::bitmap::Packer::Result                    packerResult;
+  
+  boost::shared_ptr<lost::font::TrueTypeFont>     ttf;
   
   void renderCharacterBitmaps(); // renders a character range for the given size into the characterBitmaps array
   void updateCharacterAtlas();
