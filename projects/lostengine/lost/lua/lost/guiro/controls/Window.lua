@@ -42,9 +42,19 @@ function Window:handleMouse(event)
     -- left button release
     elseif mouseEvent.type == lost.application.MouseEvent.MOUSE_MOVE then
       if self.dragging then
-        self.bounds.x = self.bounds.x + (mouseEvent.pos.x - self.lastDragPos.x)
-        self.bounds.y = self.bounds.y + (mouseEvent.pos.y - self.lastDragPos.y)
-        self.lastDragPos = mouseEvent.pos
+        local parentRect = nil
+        if self.parent then
+          parentRect = self.parent:globalRect()
+        end
+        local newBounds = lost.math.Vec2(self.bounds.x + (mouseEvent.pos.x - self.lastDragPos.x),
+                                         self.bounds.y + (mouseEvent.pos.y - self.lastDragPos.y))
+        if not parentRect or (parentRect:contains(newBounds) and 
+                              parentRect:contains(lost.math.Vec2(newBounds.x + self.bounds.width, newBounds.y + self.bounds.height)))
+        then
+          self.bounds.x = newBounds.x
+          self.bounds.y = newBounds.y
+          self.lastDragPos = mouseEvent.pos
+        end
       end
     end
   end

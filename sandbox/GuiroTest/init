@@ -1,7 +1,5 @@
 require("lost.application.Application")
 
-local connection = nil
-
 function lost.application.Application:configure(event)
   self.config.displayAttributes = lost.common.DisplayAttributes()
   self.config.displayAttributes.width = 800;
@@ -15,7 +13,7 @@ function lost.application.Application:configure(event)
   self.config.displayAttributes.fullscreen = false;
   self.config.displayAttributes.title = "GuiroTest";
 
-  connection = self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
   self:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
   self:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
 end
@@ -65,7 +63,6 @@ function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
   gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
-  self:removeEventListener(connection)
 end
 
 function lost.application.Application:keyHandler(event)
