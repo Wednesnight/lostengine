@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
-		3EFF95400EA77353005C9288 /* mainScreen.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF95200EA770F4005C9288 /* mainScreen.lua */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -49,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E1EE3FC0ECC7CA400E86C94 /* screen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screen; path = ../screen; sourceTree = SOURCE_ROOT; };
 		3E7706910EC1AC9000D0DA42 /* View.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = View.lua; sourceTree = "<group>"; };
 		3E7706BC0EC1AF5A00D0DA42 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserInterface.lua; sourceTree = "<group>"; };
 		3E7706CB0EC1B15900D0DA42 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
@@ -66,7 +67,6 @@
 		3EF9B8E30EB21579009094A7 /* Guiro.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Guiro.lua; path = io/Guiro.lua; sourceTree = "<group>"; };
 		3EF9B8F00EB21690009094A7 /* Window.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Window.lua; sourceTree = "<group>"; };
 		3EF9B8F70EB2172C009094A7 /* Window.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Window.lua; path = io/guiro/Window.lua; sourceTree = "<group>"; };
-		3EFF95200EA770F4005C9288 /* mainScreen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mainScreen.lua; path = ../mainScreen.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -146,7 +146,7 @@
 			children = (
 				3E7B27D70EA77E6800F70E7C /* lost */,
 				3ED935C90E4756B700AABFAB /* init */,
-				3EFF95200EA770F4005C9288 /* mainScreen.lua */,
+				3E1EE3FC0ECC7CA400E86C94 /* screen */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -316,8 +316,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFF95400EA77353005C9288 /* mainScreen.lua in Resources */,
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
+				3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

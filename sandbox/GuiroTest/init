@@ -26,7 +26,7 @@ function lost.application.Application:init(event)
 
   require("lost.io.Guiro")
   controls.loader = lost.io.Loader(globals.app.loader)
-  controls.screen = controls.loader:loadScreen("mainScreen.lua")
+  controls.screen = controls.loader:loadScreen("screen")
   self.screen = controls.screen
 
   -- print out class hierarchy
