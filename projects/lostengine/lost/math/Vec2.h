@@ -14,7 +14,7 @@ namespace lost
         union
         {
             struct {float x,y;};
-            struct {float w,h;};
+            struct {float width,height;};
             struct {float min,max;};
         };
 
