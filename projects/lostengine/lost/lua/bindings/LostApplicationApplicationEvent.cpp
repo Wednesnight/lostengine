@@ -19,7 +19,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ApplicationEvent, boost::shared_ptr<ApplicationEvent>, boost::shared_ptr<Event> >("ApplicationEvent")
+          class_<ApplicationEvent, Event, boost::shared_ptr<ApplicationEvent> >("ApplicationEvent")
           .def(constructor<std::string>()) 
           .scope
           [

@@ -19,7 +19,7 @@ namespace lost
       [
        namespace_("application")
        [
-         class_<AccelerometerEvent, boost::shared_ptr<AccelerometerEvent>, boost::shared_ptr<Event> >("AccelerometerEvent")
+         class_<AccelerometerEvent, Event, boost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
            .def(constructor<std::string>()) 
            .def_readwrite("x", &AccelerometerEvent::x)
            .def_readwrite("y", &AccelerometerEvent::y)

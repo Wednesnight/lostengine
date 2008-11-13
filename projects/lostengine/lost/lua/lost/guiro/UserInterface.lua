@@ -11,19 +11,15 @@ UserInterface = _G["lost.guiro.UserInterface"]
 lost.guiro.View:addBase(UserInterface, "UserInterface")
 
 function UserInterface:__init() super()
-  log.debug("UserInterface:__init()")
 end
 
-function UserInterface:dispatchEvent(event)
-  log.debug("UserInterface:dispatchEvent()")
-  lost.guiro.View.dispatchEvent(self, event)
-end
-
-function UserInterface:render()
---  log.debug("UserInterface:render()")
-  lost.guiro.View.render(self)
-end
-
-function UserInterface:__finalize()
-  log.debug("UserInterface:__finalize()")
+--[[
+    only accepts lost.guiro.controls.Window
+  ]]
+function UserInterface:appendChild(child)
+  if child:is("Window") then
+    lost.guiro.View.appendChild(self, child)
+  else
+    log.error("UserInterface:appendChild() cannot append ".. child:className())
+  end
 end

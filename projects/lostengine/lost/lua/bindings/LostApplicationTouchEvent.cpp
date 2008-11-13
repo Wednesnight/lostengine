@@ -19,7 +19,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<TouchEvent, boost::shared_ptr<TouchEvent>, boost::shared_ptr<Event> >("TouchEvent")
+          class_<TouchEvent, Event, boost::shared_ptr<TouchEvent> >("TouchEvent")
             .def(constructor<std::string>()) 
             .def("size", &TouchEvent::size) 
             .def("get", &TouchEvent::get) 

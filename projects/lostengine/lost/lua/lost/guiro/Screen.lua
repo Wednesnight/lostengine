@@ -11,19 +11,15 @@ Screen = _G["lost.guiro.Screen"]
 lost.guiro.View:addBase(Screen, "Screen")
 
 function Screen:__init() super()
-  log.debug("Screen:__init()")
 end
 
-function Screen:dispatchEvent(event)
-  log.debug("Screen:dispatchEvent()")
-  lost.guiro.View.dispatchEvent(self, event)
-end
-
-function Screen:render()
---  log.debug("Screen:render()")
-  lost.guiro.View.render(self)
-end
-
-function Screen:__finalize()
-  log.debug("Screen:__finalize()")
+--[[
+    only accepts lost.guiro.UserInterface
+  ]]
+function Screen:appendChild(child)
+  if child:is("UserInterface") then
+    lost.guiro.View.appendChild(self, child)
+  else
+    log.error("Screen:appendChild() cannot append ".. child:className())
+  end
 end

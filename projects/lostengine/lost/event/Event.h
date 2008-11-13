@@ -2,6 +2,7 @@
 #define LOST_EVENT_EVENT_H
 
 #include <string>
+#include <boost/enable_shared_from_this.hpp>
 
 namespace lost
 {
@@ -9,7 +10,7 @@ namespace lost
   {
     typedef std::string Type;
 
-    struct Event
+    struct Event : public boost::enable_shared_from_this<Event>
     {
     
       Type type;

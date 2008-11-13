@@ -19,7 +19,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ResizeEvent, boost::shared_ptr<ResizeEvent>, boost::shared_ptr<Event> >("ResizeEvent")
+          class_<ResizeEvent, Event, boost::shared_ptr<ResizeEvent> >("ResizeEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("width", &ResizeEvent::width)
           .def_readwrite("height", &ResizeEvent::height)

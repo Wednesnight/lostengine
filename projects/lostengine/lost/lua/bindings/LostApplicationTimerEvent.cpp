@@ -19,7 +19,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<TimerEvent, boost::shared_ptr<TimerEvent>, boost::shared_ptr<Event> >("TimerEvent")
+          class_<TimerEvent, Event, boost::shared_ptr<TimerEvent> >("TimerEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("passedSec", &TimerEvent::passedSec)
           .scope

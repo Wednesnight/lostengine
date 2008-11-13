@@ -20,7 +20,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<KeyEvent, boost::shared_ptr<KeyEvent>, boost::shared_ptr<Event> >("KeyEvent")
+          class_<KeyEvent, Event, boost::shared_ptr<KeyEvent> >("KeyEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("key", &KeyEvent::key)
           .def_readwrite("pressed", &KeyEvent::pressed)

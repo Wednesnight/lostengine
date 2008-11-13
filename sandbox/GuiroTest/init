@@ -32,13 +32,16 @@ function lost.application.Application:init(event)
   self.screen = controls.screen
 
   -- print out class hierarchy
-  print("class hierarchy:")
-  lost.guiro.View:whoAmI()
-  lost.guiro.Screen:whoAmI()
-  lost.guiro.UserInterface:whoAmI()
-  lost.guiro.controls.Control:whoAmI()
-  lost.guiro.controls.Button:whoAmI()
-  lost.guiro.controls.Window:whoAmI()
+  log.debug("class hierarchy:")
+  lost.guiro.View:printBases()
+  lost.guiro.Screen:printBases()
+  lost.guiro.UserInterface:printBases()
+  lost.guiro.controls.Control:printBases()
+  lost.guiro.controls.Button:printBases()
+  lost.guiro.controls.Window:printBases()
+  -- print out view hierarchy
+  log.debug("view hierarchy:")
+  controls.screen:printChildren()
 
   self.renderState = self.context:copyState()
   self.renderState.clearColor = lost.common.Color(0,0,0)
@@ -80,8 +83,6 @@ end
 function lost.application.Application:renderHandler(event)
   local timerEvent = lost.application.TimerEvent.cast(event)
 
-  controls.screen:render()
-
   self.context:pushState(self.renderState)
   self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
   self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
@@ -89,7 +90,8 @@ function lost.application.Application:renderHandler(event)
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
-  controls.fpsMeter:render(globals.app.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
+  controls.screen:render(self.context)
+  controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
   self.context:popState()
   

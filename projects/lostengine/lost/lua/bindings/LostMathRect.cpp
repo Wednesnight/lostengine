@@ -1,6 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/math/Rect.h"
+#include <luabind/operator.hpp>
 
 #include "lost/lua/bindings/LostMathRect.h"
 
@@ -19,7 +20,14 @@ namespace lost
         [
           class_<Rect, boost::shared_ptr<Rect> >("Rect")
           .def(constructor<>()) 
+          .def(constructor<const Rect&>()) 
           .def(constructor<float, float, float, float>())
+          .def("contains", &Rect::contains)
+          .def(tostring(self))
+          .def_readwrite("x", &Rect::x)
+          .def_readwrite("y", &Rect::y)
+          .def_readwrite("width", &Rect::width)
+          .def_readwrite("height", &Rect::height)
         ]
       ];
     }
