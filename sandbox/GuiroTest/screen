@@ -11,7 +11,7 @@ guiro:Screen
     guiro:Window
     {
       id = "window",
-      bounds = lost.math.Rect(250, 200, 300, 200),
+      bounds = lost.math.Rect(10, 200, 300, 200),
       style = guiro:StyleFromFile("lost/guiro/styles/default/Window.lua"),
       renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Window.lua"),
 

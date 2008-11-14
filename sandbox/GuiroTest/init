@@ -2,8 +2,13 @@ require("lost.application.Application")
 
 function lost.application.Application:configure(event)
   self.config.displayAttributes = lost.common.DisplayAttributes()
-  self.config.displayAttributes.width = 800;
-  self.config.displayAttributes.height = 600;
+  if lost.platform.isIPhone() then
+    self.config.displayAttributes.width = 320
+    self.config.displayAttributes.height = 480
+  else
+    self.config.displayAttributes.width = 800
+    self.config.displayAttributes.height = 600
+  end
   self.config.displayAttributes.redbits = 8;
   self.config.displayAttributes.bluebits = 8;
   self.config.displayAttributes.greenbits = 8;
@@ -47,7 +52,7 @@ function lost.application.Application:init(event)
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
 
-  globals.timer = lost.application.Timer("luarender", 0.015)
+  globals.timer = lost.application.Timer("luarender", 1/60)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
 end
 

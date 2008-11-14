@@ -19,6 +19,7 @@ namespace lost
         [
           class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
             .def(constructor<>())
+            .def(constructor<const Vec4&>())
             .def(constructor<float, float, float, float>())
             .def("clear", &Vec4::clear)
         ]

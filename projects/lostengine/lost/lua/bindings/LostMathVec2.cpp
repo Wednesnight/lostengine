@@ -21,6 +21,7 @@ namespace lost
 //        class_<Vec2, boost::shared_ptr<Vec2> >("Vec2")
         class_<Vec2>("Vec2")
         .def(constructor<>())
+        .def(constructor<const Vec2&>())
         .def(constructor<float, float>())
         .def("zero", (void(Vec2::*)()) &Vec2::zero)
         .def_readwrite("x", &Vec2::x)

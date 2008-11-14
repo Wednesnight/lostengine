@@ -11,7 +11,6 @@ using namespace lost::resource;
 using namespace lost::common;
 using namespace lost::application;
 using namespace lost::gl;
-using namespace lost::guiro;
 using namespace luabind;
 
 
@@ -59,7 +58,7 @@ void lostApplicationHelpers_init()
   // no adapter init called since its all done in the uikit app controller
 
   // init gl context
-  appInstance->context.reset(new Context());
+  appInstance->context.reset(new Context(appInstance->displayAttributes));
 
   // broadcast init event so dependant code knows its safe to init resources now
   appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);  

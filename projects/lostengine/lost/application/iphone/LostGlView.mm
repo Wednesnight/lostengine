@@ -196,7 +196,7 @@ using namespace lost::application;
     (*i)->tapCount = touch.tapCount;
     (*i)->timeStamp = touch.timestamp;
     CGPoint loc = [touch locationInView:self];
-    (*i)->location = Vec2(loc.x, loc.y);
+    (*i)->location = Vec2(loc.x, backingHeight - loc.y);
     (*touchEvent)->touches.push_back(*i);
   }
 }

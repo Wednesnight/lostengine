@@ -20,6 +20,7 @@ namespace lost
         [
           class_<Vec3, boost::shared_ptr<Vec3> >("Vec3")
             .def(constructor<>())
+            .def(constructor<const Vec3&>())
             .def(constructor<float, float, float>())
             .def("zero", (void(Vec3::*)()) &Vec3::zero)
             .def(self * float())
