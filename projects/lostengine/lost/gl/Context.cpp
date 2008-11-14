@@ -23,7 +23,7 @@ std::string Context::getVersion()
   return reinterpret_cast<const char*>(glGetString(GL_VERSION));
 }
 
-void Context::setState(const boost::shared_ptr<State>& newState)
+void Context::setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState)
 {
 #define SET_STATE_BOOL(which, target, source, attribute)\
     if (target->attribute != source->attribute)\
@@ -31,23 +31,23 @@ void Context::setState(const boost::shared_ptr<State>& newState)
       target->attribute = source->attribute;\
       (target->attribute) ? glEnable(which) : glDisable(which);GLDEBUG;\
     }
+    
+  SET_STATE_BOOL(GL_ALPHA_TEST, oldState, newState, alphaTest);
+  SET_STATE_BOOL(GL_DEPTH_TEST, oldState, newState, depthTest);
+  SET_STATE_BOOL(GL_TEXTURE_2D, oldState, newState, texture2D);
+  SET_STATE_BOOL(GL_BLEND, oldState, newState, blend);
 
-  SET_STATE_BOOL(GL_ALPHA_TEST, state, newState, alphaTest);
-  SET_STATE_BOOL(GL_DEPTH_TEST, state, newState, depthTest);
-  SET_STATE_BOOL(GL_TEXTURE_2D, state, newState, texture2D);
-  SET_STATE_BOOL(GL_BLEND, state, newState, blend);
-
-  if((state->blendSrc != newState->blendSrc) || (state->blendDest != newState->blendDest))
+  if((oldState->blendSrc != newState->blendSrc) || (oldState->blendDest != newState->blendDest))
   {
-    state->blendSrc = newState->blendSrc;
-    state->blendDest = newState->blendDest;
-    glBlendFunc(state->blendSrc, state->blendDest);GLDEBUG;
+    oldState->blendSrc = newState->blendSrc;
+    oldState->blendDest = newState->blendDest;
+    glBlendFunc(oldState->blendSrc, oldState->blendDest);GLDEBUG;
   }
 
-  if (state->clearColor != newState->clearColor)
+  if (oldState->clearColor != newState->clearColor)
   {
-    state->clearColor = newState->clearColor;
-    glClearColor(state->clearColor.r(), state->clearColor.g(), state->clearColor.b(), state->clearColor.a());GLDEBUG;
+    oldState->clearColor = newState->clearColor;
+    glClearColor(oldState->clearColor.r(), oldState->clearColor.g(), oldState->clearColor.b(), oldState->clearColor.a());GLDEBUG;
   }
 
 #define SET_CLIENT_STATE_BOOL(which, target, source, attribute)\
@@ -57,9 +57,9 @@ void Context::setState(const boost::shared_ptr<State>& newState)
       (target->attribute) ? glEnableClientState(which) : glDisableClientState(which);GLDEBUG;\
     }
 
-  SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, state, newState, normalArray);
-  SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, state, newState, vertexArray);
-  SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, state, newState, textureCoordArray);
+  SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, oldState, newState, normalArray);
+  SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, oldState, newState, vertexArray);
+  SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, oldState, newState, textureCoordArray);
 }
 
 
@@ -69,7 +69,7 @@ Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttribute
   DOUT("lost::gl::Context::Context()");
 
   // initialize state
-  state = newState();
+  stateStack.push_back(newState());
 }
 
 Context::~Context()
@@ -109,26 +109,32 @@ boost::shared_ptr<State> Context::newState()
       
 boost::shared_ptr<State> Context::copyState()
 {
-  return boost::shared_ptr<State>(new State(*(state.get())));
+  return boost::shared_ptr<State>(new State(*(stateStack.back().get())));
 }
       
-void Context::pushState()
+/*void Context::pushState()
 {
   pushState(state);
-}
+}*/
 
 void Context::pushState(const boost::shared_ptr<State>& inState)
 {
-  if (state) stateStack.push_back(state);
-  state = copyState();
-  if (inState) setState(inState);
+//  if (state) stateStack.push_back(state);
+//  state = copyState();
+  if (inState) setState(stateStack.back(), inState);
 }
 
 void Context::popState()
 {
-  if (stateStack.size() > 0)
+  if (stateStack.size() > 1)
   {
-    setState(stateStack.back());
+      std::list<boost::shared_ptr<State> >::iterator pos = stateStack.end();
+      pos--;
+      boost::shared_ptr<State> last = *pos;
+      pos--;
+      boost::shared_ptr<State> prev = *pos;
+      
+    setState(last, prev);
     stateStack.pop_back();
   }
 }

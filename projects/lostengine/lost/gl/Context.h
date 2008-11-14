@@ -1,7 +1,7 @@
 #ifndef LOST_GL_CONTEXT_H
 #define LOST_GL_CONTEXT_H
 
-#include <vector>
+#include <list>
 #include <boost/shared_ptr.hpp>
 #include "lost/gl/State.h"
 
@@ -19,12 +19,11 @@ namespace lost
     struct Context
     {
     private:
-      std::vector<boost::shared_ptr<State> > stateStack;
+      std::list<boost::shared_ptr<State> > stateStack;
       boost::shared_ptr<common::DisplayAttributes> displayAttributes;
-      void setState(const boost::shared_ptr<State>& newState);
 
     public:
-      boost::shared_ptr<State> state;
+//      boost::shared_ptr<State> state;
 
       /** creates a new gl::Context object.
        *
@@ -36,8 +35,9 @@ namespace lost
 
       static boost::shared_ptr<State> newState();
       boost::shared_ptr<State> copyState();
-      void pushState();
-      void pushState(const boost::shared_ptr<State>& inState);
+//      void pushState();
+        void Context::pushState(const boost::shared_ptr<State>& inState);        
+        void setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState);
       void popState();
       void clear(GLbitfield flags);
       
