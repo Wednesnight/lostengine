@@ -79,8 +79,8 @@ LostAppController* lostAppController = NULL; // global instance so LostApplicati
 	[window makeKeyAndVisible];
 	
 	//Configure and start accelerometer
-	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
-	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
+//	[[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+//	[[UIAccelerometer sharedAccelerometer] setDelegate:self];
   lostApplicationHelpers_preinit();
   lostApplicationHelpers_init();
   lostApplicationHelpers_resize(rect.size.width, rect.size.height);
