@@ -52,7 +52,7 @@ function lost.application.Application:init(event)
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
 
-  globals.timer = lost.application.Timer("luarender", 1/60)
+  globals.timer = lost.application.Timer("luarender", 1/30)
   globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
 end
 
