@@ -366,6 +366,45 @@
 		EA6711C20E3E89DB00B961EC /* Repository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B95040E04639D00B6423B /* Repository.h */; };
 		EA6D04090E8300EE002C8DD3 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04020E8300D1002C8DD3 /* liblua.a */; };
 		EA6D045A0E8302D7002C8DD3 /* libboost.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04530E8302C3002C8DD3 /* libboost.a */; };
+		EA70F8F60ED08713000AA8CB /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F30ED08713000AA8CB /* Debug.h */; };
+		EA70F8F70ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
+		EA70F8F80ED08713000AA8CB /* al.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F50ED08713000AA8CB /* al.h */; };
+		EA70F8F90ED08713000AA8CB /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F30ED08713000AA8CB /* Debug.h */; };
+		EA70F8FA0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
+		EA70F8FB0ED08713000AA8CB /* al.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F50ED08713000AA8CB /* al.h */; };
+		EA70F8FC0ED08713000AA8CB /* Debug.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F30ED08713000AA8CB /* Debug.h */; };
+		EA70F8FD0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
+		EA70F8FE0ED08713000AA8CB /* al.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F8F50ED08713000AA8CB /* al.h */; };
+		EA70F9360ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
+		EA70F9370ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
+		EA70F9380ED08E99000AA8CB /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9340ED08E99000AA8CB /* Buffer.h */; };
+		EA70F9390ED08E99000AA8CB /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9350ED08E99000AA8CB /* Context.h */; };
+		EA70F93A0ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
+		EA70F93B0ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
+		EA70F93C0ED08E99000AA8CB /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9340ED08E99000AA8CB /* Buffer.h */; };
+		EA70F93D0ED08E99000AA8CB /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9350ED08E99000AA8CB /* Context.h */; };
+		EA70F93E0ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
+		EA70F93F0ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
+		EA70F9400ED08E99000AA8CB /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9340ED08E99000AA8CB /* Buffer.h */; };
+		EA70F9410ED08E99000AA8CB /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9350ED08E99000AA8CB /* Context.h */; };
+		EA70F9460ED08EA0000AA8CB /* Device.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9420ED08EA0000AA8CB /* Device.h */; };
+		EA70F9470ED08EA0000AA8CB /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9430ED08EA0000AA8CB /* Source.h */; };
+		EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
+		EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
+		EA70F94A0ED08EA0000AA8CB /* Device.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9420ED08EA0000AA8CB /* Device.h */; };
+		EA70F94B0ED08EA0000AA8CB /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9430ED08EA0000AA8CB /* Source.h */; };
+		EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
+		EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
+		EA70F94E0ED08EA0000AA8CB /* Device.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9420ED08EA0000AA8CB /* Device.h */; };
+		EA70F94F0ED08EA0000AA8CB /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9430ED08EA0000AA8CB /* Source.h */; };
+		EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
+		EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
+		EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
+		EA70F9C10ED0A092000AA8CB /* Listener.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9BF0ED0A092000AA8CB /* Listener.h */; };
+		EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
+		EA70F9C30ED0A092000AA8CB /* Listener.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9BF0ED0A092000AA8CB /* Listener.h */; };
+		EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
+		EA70F9C50ED0A092000AA8CB /* Listener.h in Headers */ = {isa = PBXBuildFile; fileRef = EA70F9BF0ED0A092000AA8CB /* Listener.h */; };
 		EA7116690E2942D000279E0B /* DefaultLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116670E2942D000279E0B /* DefaultLoader.h */; };
 		EA71166A0E2942D000279E0B /* ApplicationResourceRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */; };
 		EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
@@ -1023,6 +1062,19 @@
 		EA6711250E3E885300B961EC /* libLostEngine-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6D03F80E8300D1002C8DD3 /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_4/xcode/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA6D04490E8302C3002C8DD3 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_36_0/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA70F8F30ED08713000AA8CB /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = al/Debug.h; sourceTree = "<group>"; };
+		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
+		EA70F8F50ED08713000AA8CB /* al.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = al.h; path = al/al.h; sourceTree = "<group>"; };
+		EA70F9320ED08E99000AA8CB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = al/Context.cpp; sourceTree = "<group>"; };
+		EA70F9330ED08E99000AA8CB /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = al/Buffer.cpp; sourceTree = "<group>"; };
+		EA70F9340ED08E99000AA8CB /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = al/Buffer.h; sourceTree = "<group>"; };
+		EA70F9350ED08E99000AA8CB /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Context.h; path = al/Context.h; sourceTree = "<group>"; };
+		EA70F9420ED08EA0000AA8CB /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = al/Device.h; sourceTree = "<group>"; };
+		EA70F9430ED08EA0000AA8CB /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = al/Source.h; sourceTree = "<group>"; };
+		EA70F9440ED08EA0000AA8CB /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = al/Source.cpp; sourceTree = "<group>"; };
+		EA70F9450ED08EA0000AA8CB /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = al/Device.cpp; sourceTree = "<group>"; };
+		EA70F9BE0ED0A092000AA8CB /* Listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Listener.cpp; path = al/Listener.cpp; sourceTree = "<group>"; };
+		EA70F9BF0ED0A092000AA8CB /* Listener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Listener.h; path = al/Listener.h; sourceTree = "<group>"; };
 		EA7116670E2942D000279E0B /* DefaultLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLoader.h; sourceTree = "<group>"; };
 		EA7116680E2942D000279E0B /* ApplicationResourceRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationResourceRepository.h; sourceTree = "<group>"; };
 		EA7163B00EBE17E0005DB902 /* Packer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packer.cpp; sourceTree = "<group>"; };
@@ -1494,6 +1546,7 @@
 		EA3B94630E04639D00B6423B /* lost */ = {
 			isa = PBXGroup;
 			children = (
+				EA70F8F20ED08707000AA8CB /* al */,
 				EA3B94640E04639D00B6423B /* application */,
 				EA3B94690E04639D00B6423B /* bitmap */,
 				3EB93D760E38042200FF10C9 /* camera */,
@@ -1760,6 +1813,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EA70F8F20ED08707000AA8CB /* al */ = {
+			isa = PBXGroup;
+			children = (
+				EA70F8F50ED08713000AA8CB /* al.h */,
+				EA70F9340ED08E99000AA8CB /* Buffer.h */,
+				EA70F9330ED08E99000AA8CB /* Buffer.cpp */,
+				EA70F9350ED08E99000AA8CB /* Context.h */,
+				EA70F9320ED08E99000AA8CB /* Context.cpp */,
+				EA70F8F30ED08713000AA8CB /* Debug.h */,
+				EA70F8F40ED08713000AA8CB /* Debug.cpp */,
+				EA70F9420ED08EA0000AA8CB /* Device.h */,
+				EA70F9450ED08EA0000AA8CB /* Device.cpp */,
+				EA70F9BF0ED0A092000AA8CB /* Listener.h */,
+				EA70F9BE0ED0A092000AA8CB /* Listener.cpp */,
+				EA70F9430ED08EA0000AA8CB /* Source.h */,
+				EA70F9440ED08EA0000AA8CB /* Source.cpp */,
+			);
+			name = al;
+			sourceTree = "<group>";
+		};
 		EA7BE0F40E6F38470017B031 /* bindings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1974,6 +2047,13 @@
 				3E2062580E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 				3EFF944C0EA74E35005C9288 /* lua.h in Headers */,
 				EAAC57320ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
+				EA70F8FC0ED08713000AA8CB /* Debug.h in Headers */,
+				EA70F8FE0ED08713000AA8CB /* al.h in Headers */,
+				EA70F9400ED08E99000AA8CB /* Buffer.h in Headers */,
+				EA70F9410ED08E99000AA8CB /* Context.h in Headers */,
+				EA70F94E0ED08EA0000AA8CB /* Device.h in Headers */,
+				EA70F94F0ED08EA0000AA8CB /* Source.h in Headers */,
+				EA70F9C50ED0A092000AA8CB /* Listener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2107,6 +2187,13 @@
 				EA1D54F00EB34E0400591811 /* Engine.h in Headers */,
 				EA7163B30EBE17E0005DB902 /* Packer.h in Headers */,
 				EAAC572E0ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
+				EA70F8F60ED08713000AA8CB /* Debug.h in Headers */,
+				EA70F8F80ED08713000AA8CB /* al.h in Headers */,
+				EA70F9380ED08E99000AA8CB /* Buffer.h in Headers */,
+				EA70F9390ED08E99000AA8CB /* Context.h in Headers */,
+				EA70F9460ED08EA0000AA8CB /* Device.h in Headers */,
+				EA70F9470ED08EA0000AA8CB /* Source.h in Headers */,
+				EA70F9C10ED0A092000AA8CB /* Listener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2240,6 +2327,13 @@
 				3E2062570E9E1C3B0042BC53 /* ErrorHandler.h in Headers */,
 				3EFF944D0EA74E35005C9288 /* lua.h in Headers */,
 				EAAC57300ECBAE71004AD566 /* TrueTypeFont.h in Headers */,
+				EA70F8F90ED08713000AA8CB /* Debug.h in Headers */,
+				EA70F8FB0ED08713000AA8CB /* al.h in Headers */,
+				EA70F93C0ED08E99000AA8CB /* Buffer.h in Headers */,
+				EA70F93D0ED08E99000AA8CB /* Context.h in Headers */,
+				EA70F94A0ED08EA0000AA8CB /* Device.h in Headers */,
+				EA70F94B0ED08EA0000AA8CB /* Source.h in Headers */,
+				EA70F9C30ED0A092000AA8CB /* Listener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2574,6 +2668,12 @@
 				3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
+				EA70F8FD0ED08713000AA8CB /* Debug.cpp in Sources */,
+				EA70F93E0ED08E99000AA8CB /* Context.cpp in Sources */,
+				EA70F93F0ED08E99000AA8CB /* Buffer.cpp in Sources */,
+				EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */,
+				EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */,
+				EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2653,6 +2753,12 @@
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
+				EA70F8F70ED08713000AA8CB /* Debug.cpp in Sources */,
+				EA70F9360ED08E99000AA8CB /* Context.cpp in Sources */,
+				EA70F9370ED08E99000AA8CB /* Buffer.cpp in Sources */,
+				EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */,
+				EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */,
+				EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2728,6 +2834,12 @@
 				3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
+				EA70F8FA0ED08713000AA8CB /* Debug.cpp in Sources */,
+				EA70F93A0ED08E99000AA8CB /* Context.cpp in Sources */,
+				EA70F93B0ED08E99000AA8CB /* Buffer.cpp in Sources */,
+				EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */,
+				EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */,
+				EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
