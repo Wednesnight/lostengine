@@ -3,13 +3,6 @@
 
 #include "lost/platform/Platform.h"
 
-#if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
-  #import <OpenGLES/ES1/gl.h>
-  #import <OpenGLES/ES1/glext.h>
-#else
-  #include "GLee.h"
-#endif
-
 #if defined WIN32
     // include windows al headers here
 #elif defined linux
