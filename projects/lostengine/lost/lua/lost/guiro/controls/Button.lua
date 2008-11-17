@@ -74,7 +74,7 @@ function Button:handleInput(event)
       end
       self.down = false
       self.pressed = false
-      self.hovered = false
+      self.hovered = info.rect:contains(info.location)
 
     -- move
     elseif info.which == Control.InputType.move then

@@ -21,6 +21,11 @@ namespace lost
           .def(constructor<>()) 
           .def(constructor<float, float, float>())
           .def(constructor<float, float, float, float>())
+          .def(constructor<const Color&>())
+          .property("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
+          .property("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)
+          .property("b", (float(Color::*)() const)&Color::b, (void(Color::*)(float))&Color::b)
+          .property("a", (float(Color::*)() const)&Color::a, (void(Color::*)(float))&Color::a)
         ]
       ];
 /*
