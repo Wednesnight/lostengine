@@ -20,34 +20,28 @@ function Slider:__init() super()
   self.button = lost.guiro.controls.Button()
   self.button.id = "sliderButton"
   self.button.bounds = lost.math.Rect(0,0,25,25)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonPressed, function(event) self.lastDragPos = event.pos self.dragging = true end)
+  self.button:addEventListener(lost.guiro.controls.Button.ButtonPressed, function(event) self.lastDragPos = lost.math.Vec2(event.pos) self.dragging = true end)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonReleased, function(event) self.dragging = false end)
   self:appendChild(self.button)
 
-  self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleMouse(event) end)
-  self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:handleTouch(event) end)
+  self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleInput(event) end)
+  self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:handleInput(event) end)
 end
 
-function Slider:handleMouse(event)
+function Slider:handleInput(event)
   if self.dragging then
-    local mouseEvent = lost.application.MouseEvent.cast(event)
+    local location = lost.math.Vec2(0,0)
     local globalRect = self:globalRect()
-
-    local delta = mouseEvent.pos - self.lastDragPos
-    delta.x = self.button.bounds.x + delta.x
-    if (delta.x >= 0 and delta.x <= self.bounds.width - self.button.bounds.width) then
-      self.button.bounds.x = delta.x
-      self.lastDragPos = mouseEvent.pos
+    if event.type == lost.application.MouseEvent.MOUSE_MOVE then
+      local mouseEvent = lost.application.MouseEvent.cast(event)
+      location = lost.math.Vec2(mouseEvent.pos)
+    elseif event.type == lost.application.TouchEvent.TOUCHES_MOVED then
+      local touchEvent = lost.application.TouchEvent.cast(event)
+      if touchEvent:size() == 1 then
+        local touch = touchEvent:get(0)
+        location = lost.math.Vec2(touch.location)
+      end
     end
-  end
-end
-
-function Slider:handleTouch(event)
-  if self.dragging then
-    local touchEvent = lost.application.TouchEvent.cast(event)
-    local globalRect = self:globalRect()
-    local touch = touchEvent:get(0)
-    local location = lost.math.Vec2(touch.location)
 
     local delta = location - self.lastDragPos
     delta.x = self.button.bounds.x + delta.x
