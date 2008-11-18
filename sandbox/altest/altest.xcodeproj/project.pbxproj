@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
-		8DD76F6A0486A84900D96B5E /* altest.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* altest.1 */; };
+		EA4143DB0ED10C1A00712F45 /* sketch008.ogg in Resources */ = {isa = PBXBuildFile; fileRef = EA4143CB0ED10B8F00712F45 /* sketch008.ogg */; };
 		EA70F8790ED082D7000AA8CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8780ED082D7000AA8CB /* OpenAL.framework */; };
 		EA70F8B10ED083A0000AA8CB /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */; };
 		EA70F8C90ED084CC000AA8CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */; };
@@ -19,49 +19,36 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		EA70F8AB0ED0838A000AA8CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
 			remoteInfo = "LostEngine-iphone";
 		};
 		EA70F8AD0ED0838A000AA8CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
 			remoteInfo = "LostEngine-simulator";
 		};
 		EA70F8AF0ED08396000AA8CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		8DD76F690486A84900D96B5E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-				8DD76F6A0486A84900D96B5E /* altest.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* altest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = altest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6859E8B029090EE04C91782 /* altest.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = altest.1; sourceTree = "<group>"; };
+		EA4143CB0ED10B8F00712F45 /* sketch008.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = sketch008.ogg; sourceTree = "<group>"; };
 		EA70F8780ED082D7000AA8CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
 		EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
@@ -84,8 +71,8 @@
 		08FB7794FE84155DC02AAC07 /* altest */ = {
 			isa = PBXGroup;
 			children = (
+				EA4143D70ED10BF600712F45 /* Resources */,
 				08FB7795FE84155DC02AAC07 /* Source */,
-				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				EA70F8720ED082B6000AA8CB /* Libraries */,
 			);
@@ -108,12 +95,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C6859E8C029090F304C91782 /* Documentation */ = {
+		EA4143D70ED10BF600712F45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C6859E8B029090EE04C91782 /* altest.1 */,
+				EA4143CB0ED10B8F00712F45 /* sketch008.ogg */,
 			);
-			name = Documentation;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		EA70F8720ED082B6000AA8CB /* Libraries */ = {
@@ -145,7 +132,7 @@
 			buildPhases = (
 				8DD76F640486A84900D96B5E /* Sources */,
 				8DD76F660486A84900D96B5E /* Frameworks */,
-				8DD76F690486A84900D96B5E /* CopyFiles */,
+				EA4143D80ED10BF600712F45 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -205,6 +192,17 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXResourcesBuildPhase section */
+		EA4143D80ED10BF600712F45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4143DB0ED10C1A00712F45 /* sketch008.ogg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8DD76F640486A84900D96B5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -237,7 +235,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = altest;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_7/include\" \"$(SRCROOT)/../../thirdparty/glee/glee_5_21/include\" \"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/include\" \"$(SRCROOT)/../../thirdparty/hashlib++/hashlib++_0_3_1\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\" \"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_7/include\" \"$(SRCROOT)/../../thirdparty/glee/glee_5_21/include\" \"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/include\" \"$(SRCROOT)/../../thirdparty/hashlib++/hashlib++_0_3_1\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\" \"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\" \"$(SRCROOT)/../../thirdparty/stb/stb_vorbis_0_99996\"";
 			};
 			name = Debug;
 		};
