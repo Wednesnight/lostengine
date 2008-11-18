@@ -277,6 +277,9 @@
 		EA3BF7560E845A1A005AB137 /* libboost-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04550E8302C3002C8DD3 /* libboost-iphone.a */; };
 		EA3BF75D0E845A61005AB137 /* libboost-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04570E8302C3002C8DD3 /* libboost-simulator.a */; };
 		EA3BF75F0E845A6B005AB137 /* liblua-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04060E8300D1002C8DD3 /* liblua-simulator.a */; };
+		EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
+		EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
+		EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA54FA6B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
 		EA54FA6C0E676E2200605409 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA640E676E2200605409 /* Renderer.cpp */; };
 		EA54FA6D0E676E2200605409 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA54FA650E676E2200605409 /* Renderer.h */; };
@@ -1048,6 +1051,7 @@
 		EA3B96790E046C5400B6423B /* Vec3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3.h; sourceTree = "<group>"; };
 		EA3B967A0E046C5400B6423B /* Vec4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec4.h; sourceTree = "<group>"; };
 		EA3B990A0E04903700B6423B /* lmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lmath.h; sourceTree = "<group>"; };
+		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA640E676E2200605409 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		EA54FA650E676E2200605409 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
@@ -1531,6 +1535,7 @@
 			isa = PBXGroup;
 			children = (
 				EA3B944F0E0462E200B6423B /* stb_image.c */,
+				EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */,
 			);
 			name = stb;
 			sourceTree = "<group>";
@@ -2674,6 +2679,7 @@
 				EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */,
+				EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2759,6 +2765,7 @@
 				EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */,
+				EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2840,6 +2847,7 @@
 				EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */,
+				EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2998,6 +3006,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_vorbis_0_99996\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
