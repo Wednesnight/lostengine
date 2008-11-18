@@ -1,0 +1,23 @@
+# Copyright (C) 2008 the authors.
+#
+# This file is part of the Fhtagn! C++ Library, and may be distributed under
+# the following license terms and conditions as set forth in the COPYING file
+# included in this source distribution.
+Import('env')
+import os.path
+
+SOURCES = [
+  'tasklet.cpp',
+]
+
+HEADERS = [
+  'tasklet.h',
+  'lock_policy.h',
+  os.path.join('detail', 'mutex_concepts.h'),
+  os.path.join('detail', 'fake_mutex.h'),
+  os.path.join('detail', 'pseudo_mutex.h'),
+]
+
+env.addSources('fhtagn', SOURCES)
+env.addHeaders('fhtagn', HEADERS)
+env.addLibs('fhtagn', [('boost', 'thread'), ('boost', 'signals')])

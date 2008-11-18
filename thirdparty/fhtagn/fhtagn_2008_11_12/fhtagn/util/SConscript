@@ -1,0 +1,23 @@
+# Copyright (C) 2008 the authors.
+#
+# This file is part of the Fhtagn! C++ Library, and may be distributed under
+# the following license terms and conditions as set forth in the COPYING file
+# included in this source distribution.
+Import('env')
+
+SOURCES = []
+
+HEADERS = []
+
+if env.has_key('FHTAGN_CPPUNIT_VERSION'):
+  SOURCES += [
+    'cppunit_output.cpp',
+  ]
+
+  HEADERS += [
+    'cppunit_output.h',
+  ]
+
+
+env.addSources('fhtagn_util', SOURCES)
+env.addHeaders('fhtagn_util', HEADERS)

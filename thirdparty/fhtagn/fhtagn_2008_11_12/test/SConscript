@@ -1,0 +1,26 @@
+# Copyright (C) 2008 the authors.
+#
+# This file is part of the Fhtagn! C++ Library, and may be distributed under
+# the following license terms and conditions as set forth in the COPYING file
+# included in this source distribution.
+Import('env')
+
+if env.has_key('FHTAGN_CPPUNIT_VERSION'):
+  SOURCES = [
+    'pointers_test.cpp',
+    'enhanced_types_test.cpp',
+    'transcoding_test.cpp',
+    'misc_test.cpp',
+    'testdriver.cpp',
+  ]
+
+  if env.has_key('FHTAGN_BOOST_VERSION'):
+    SOURCES += [
+      'variant_test.cpp',
+      'threads_test.cpp',
+    ]
+
+  env.addSources('testsuite', SOURCES)
+  env.addLibs('testsuite', ['fhtagn', 'fhtagn_util', 'cppunit'])
+  if env.has_key('FHTAGN_BOOST_VERSION'):
+    env.addLibs('testsuite', [('boost', 'signals'), ('boost', 'thread')])
