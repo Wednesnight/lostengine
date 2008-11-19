@@ -42,8 +42,16 @@ struct TrueTypeFont
   renderGlyphToBitmap(uint32_t inSizeInPoints,
                       char c);
     
-    
-  boost::shared_ptr<Model> render(const std::string& inText);
+  /** renders the given string with this font and returns it as a textured mesh that
+   *  has it's origin at 0,0.
+   *
+   *  @param inText         the text to render.
+   *  @param inSizeInPoints pointsize for the rendered text.
+   *
+   */
+  boost::shared_ptr<Model> render(const std::string& inText,
+                                  uint32_t inSizeInPoints);
+  
   
   boost::shared_ptr<freetype::Face> face;
   boost::shared_ptr<freetype::Library> library;

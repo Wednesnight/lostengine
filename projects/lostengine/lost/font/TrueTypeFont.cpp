@@ -43,16 +43,16 @@ TrueTypeFont::renderGlyphToBitmap(uint32_t inSizeInPoints,
                                        face->face()->glyph->bitmap.rows,
                                        Bitmap::COMPONENTS_RGBA,
                                        Bitmap::COMPONENTS_ALPHA,
-                                       face->face()->glyph->bitmap.buffer));
-  
-  
+                                       face->face()->glyph->bitmap.buffer));  
+  result->flip();  
   return result;
 }
   
   
-shared_ptr<Model> TrueTypeFont::render(const std::string& inText)
+shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
+                                       uint32_t inSizeInPoints)
 {
-  shared_ptr<Model>  result;
+  shared_ptr<Model>  result(new Model);
   
   // --- add characters of incoming string to current character buffer
   // --- create bitmaps for characters that don't have one yet
