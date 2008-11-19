@@ -284,7 +284,7 @@ void Bitmap::flip()
 uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
 {
   uint32_t bpp = bytesPerPixelFromComponents(format);
-  uint8_t* target = data+((x+(((height-1)-y)*width))*bpp);
+  uint8_t* target = data+((x+(y*width))*bpp);
   return target;
 }
 
