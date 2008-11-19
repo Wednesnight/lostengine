@@ -112,15 +112,8 @@ boost::shared_ptr<State> Context::copyState()
   return boost::shared_ptr<State>(new State(*(stateStack.back().get())));
 }
       
-/*void Context::pushState()
-{
-  pushState(state);
-}*/
-
 void Context::pushState(const boost::shared_ptr<State>& inState)
 {
-//  if (state) stateStack.push_back(state);
-//  state = copyState();
   if (inState) setState(stateStack.back(), inState);
 }
 
@@ -157,14 +150,6 @@ void Context::set3DProjection(const lost::math::Vec3& eye,
                               const float& fovy,
                               const lost::math::Vec2& depth)
 {
-/*  lost::gl::utils::set3DProjection(displayAttributes->width,
-                                   displayAttributes->height,
-                                   eye,
-                                   at,
-                                   up,
-                                   fovy,
-                                   depth.min,
-                                   depth.max);*/
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   double screenAspectRatio = (double)displayAttributes->width/(double)displayAttributes->height;

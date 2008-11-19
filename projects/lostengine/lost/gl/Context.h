@@ -23,8 +23,6 @@ namespace lost
       boost::shared_ptr<common::DisplayAttributes> displayAttributes;
 
     public:
-//      boost::shared_ptr<State> state;
-
       /** creates a new gl::Context object.
        *
        * @param inDisplayAttributes displayAttrbutes object that is maintained and updated by application.
@@ -35,9 +33,8 @@ namespace lost
 
       static boost::shared_ptr<State> newState();
       boost::shared_ptr<State> copyState();
-//      void pushState();
-        void Context::pushState(const boost::shared_ptr<State>& inState);        
-        void setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState);
+      void Context::pushState(const boost::shared_ptr<State>& inState);        
+      void setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState);
       void popState();
       void clear(GLbitfield flags);
       
