@@ -42,7 +42,7 @@ Engine::renderGlyphToBitmap(boost::shared_ptr<freetype::Face> face,
                                     Bitmap::COMPONENTS_ALPHA,
                                     face->face()->glyph->bitmap.buffer));
   
-  
+  result->flip();
   return result;
 }
   
