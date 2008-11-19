@@ -4,7 +4,6 @@ namespace lost
 {
 namespace font
 {
-
   Model::Model()
   {
   }
@@ -13,5 +12,8 @@ namespace font
   {
   }
 
+  void Model::render()
+  {
+  }
 }
 }
