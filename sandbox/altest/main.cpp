@@ -32,7 +32,7 @@ int main (int argc, char* const argv[]) {
   context->suspend();
   
   int error = 0;
-  stb_vorbis* oggfile = stb_vorbis_open_filename("sketch008.ogg", &error, NULL);
+  stb_vorbis* oggfile = stb_vorbis_open_filename("wannabill.ogg", &error, NULL);
   stb_vorbis_info info = stb_vorbis_get_info(oggfile);
   stb_vorbis_close(oggfile);
   

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
-		EA4143DB0ED10C1A00712F45 /* sketch008.ogg in Resources */ = {isa = PBXBuildFile; fileRef = EA4143CB0ED10B8F00712F45 /* sketch008.ogg */; };
+		EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */ = {isa = PBXBuildFile; fileRef = EA054B730ED4A03800E41D83 /* wannabill.ogg */; };
 		EA70F8790ED082D7000AA8CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8780ED082D7000AA8CB /* OpenAL.framework */; };
 		EA70F8B10ED083A0000AA8CB /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */; };
 		EA70F8C90ED084CC000AA8CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */; };
@@ -48,7 +48,7 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* altest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = altest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA4143CB0ED10B8F00712F45 /* sketch008.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = sketch008.ogg; sourceTree = "<group>"; };
+		EA054B730ED4A03800E41D83 /* wannabill.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = wannabill.ogg; sourceTree = "<group>"; };
 		EA70F8780ED082D7000AA8CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
 		EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
@@ -98,7 +98,7 @@
 		EA4143D70ED10BF600712F45 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EA4143CB0ED10B8F00712F45 /* sketch008.ogg */,
+				EA054B730ED4A03800E41D83 /* wannabill.ogg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA4143DB0ED10C1A00712F45 /* sketch008.ogg in Resources */,
+				EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
