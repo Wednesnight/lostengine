@@ -76,18 +76,21 @@ void Controller::init(shared_ptr<Event> event)
   renderState->vertexArray = true;  
   renderState->textureCoordArray = true;  
 
-  pic.reset(new Bitmap(640, 480, Bitmap::COMPONENTS_RGBA));
+  pic.reset(new Bitmap(100, 100, Bitmap::COMPONENTS_RGBA));
   pic->clear(blackColor);
-  pic->hline(50, 0, pic->width, redColor);
-//  pic->write("/Users/tony/test.tga");
+  pic->hline(10, 0, pic->width, redColor);
+  pic->vline(10, 0, pic->height, greenColor);
+  tex.reset(new Texture(pic));
 
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
-//  createCharacterMap();
   updateCharacterAtlas();
+  
+  
+  
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
@@ -127,11 +130,14 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   context->pushState(renderState);
   context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
+  
+
   if(characterTexture)
   {
     context->setColor(whiteColor);
-    context->drawRectTextured(Rect(0,0,characterTexture->width, characterTexture->height), characterTexture);
+    context->drawRectTextured(Rect(0,0,characterTexture->width, characterTexture->height), characterTexture, false);
   //  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
+    context->drawRectTextured(Rect(300,300,pic->width, pic->height), tex, false);
     context->popState();
   }
 
