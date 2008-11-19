@@ -12,7 +12,15 @@ namespace lost
 {
 namespace font
 {
-    
+
+TrueTypeFont::Glyph::Glyph()
+{
+}
+
+TrueTypeFont::Glyph::~Glyph()
+{
+}
+
 TrueTypeFont::TrueTypeFont(boost::shared_ptr<freetype::Library> inLibrary,
              boost::shared_ptr<resource::File> inFile)
 {
@@ -24,8 +32,8 @@ TrueTypeFont::~TrueTypeFont()
 }
 
 boost::shared_ptr<bitmap::Bitmap>
-TrueTypeFont::renderGlyphToBitmap(uint32_t inSizeInPoints,
-                                  char c)
+TrueTypeFont::renderGlyphToBitmap(char c,
+                                  uint32_t inSizeInPoints)
 {
   FT_Error error = FT_Set_Char_Size(face->face(), 0, inSizeInPoints*64, 72, 72);
   if(error) { throw std::runtime_error("FT_Set_Char_Size error: " + boost::lexical_cast<std::string>(error));}
@@ -48,17 +56,44 @@ TrueTypeFont::renderGlyphToBitmap(uint32_t inSizeInPoints,
   return result;
 }
   
-  
+bool TrueTypeFont::renderGlyph(char c,
+                               uint32_t inSizeInPoints)
+{
+    bool result = false;
+    boost::shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
+    if(!glyph) 
+    {
+      result = true;
+      glyph.reset(new Glyph);
+      glyph->bitmap = renderGlyphToBitmap(c, inSizeInPoints);
+      
+      glyph->xoffset = face->face()->glyph->bitmap_left;
+      glyph->yoffset = face->face()->glyph->bitmap_top - (face->face()->glyph->metrics.height >> 6);
+      glyph->advance = (face->face()->glyph->advance.x >> 6);
+      
+    }
+    return result;
+}
+
+void TrueTypeFont::rebuildTextureAtlas()
+{
+}
+
 shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
                                        uint32_t inSizeInPoints)
 {
   shared_ptr<Model>  result(new Model);
   
-  // --- add characters of incoming string to current character buffer
-  // --- create bitmaps for characters that don't have one yet
-  // --- stuff new bitmaps into atlas, reshuffle atlas if necessary
-  // --- 
+  // two passes: 1.) render glyphs 2.) create meshes with proper geometry and kerning
+  uint32_t renderedGlyphs = 0;
+  for(int i=0; i<inText.length(); ++i)
+  {
+    if(renderGlyph(inText[i], inSizeInPoints))
+      ++renderedGlyphs;
+  }
   
+  if(renderedGlyphs > 0)
+    rebuildTextureAtlas();
   
   return result;
 }

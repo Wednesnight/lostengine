@@ -41,7 +41,8 @@ struct RectPacker
    */
   void pack(const lost::math::Rect& targetArea,
             const std::vector<lost::math::Rect>& rects,
-            bool rotate);
+            bool rotate,
+            bool sort = true);
   
   std::vector<Node> nodes; // holds the packed rects. rectid is the index of the rect in the incoming vector
   

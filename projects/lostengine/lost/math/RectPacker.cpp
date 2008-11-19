@@ -43,7 +43,8 @@ bool compareRects(const RectPacker::SourceRect& r1, const RectPacker::SourceRect
 
 void RectPacker::pack(const lost::math::Rect& targetArea,
           const std::vector<lost::math::Rect>& rects,
-          bool rotate)
+          bool rotate,
+          bool sort)
 {
   // clear stats
   sumIter = 0;
@@ -65,7 +66,8 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   }
   
   // sort the source rects by size for better fitting
-  sort(sourceRects.begin(), sourceRects.end(), compareRects);
+  if(sort)
+    std::sort(sourceRects.begin(), sourceRects.end(), compareRects);
     
   // pack all source rects into the target area
   for(int32_t i=0; i<numRects; ++i)

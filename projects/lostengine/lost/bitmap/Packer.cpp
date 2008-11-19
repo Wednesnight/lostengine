@@ -29,13 +29,15 @@ void Packer::pack(Packer::Result& outResult,
         const lost::math::Vec2& targetSize,
         std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
         Bitmap::Components format,
-        bool rotate)
+        bool rotate,
+        bool sort)
 {
   outResult.clear();
   buildRectsFromBitmaps(outResult.rects, bitmaps);
   rectPacker.pack(Rect(0,0,targetSize.width, targetSize.height),
                   outResult.rects,
-                  rotate); 
+                  rotate,
+                  sort); 
   // extract missing infos from rectpacker
   // build final bitmap
   outResult.packedBitmap.reset(new Bitmap(targetSize.width, targetSize.height, format));

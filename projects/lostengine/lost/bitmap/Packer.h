@@ -39,7 +39,8 @@ struct Packer
             const lost::math::Vec2& targetSize,
             std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
             Bitmap::Components format = Bitmap::COMPONENTS_RGBA,
-            bool rotate = false);  // won't do anything for now, so you can leave it at false
+            bool rotate = false,  /* won't do anything for now, so you can leave it at false */
+            bool sort = true); // use sorting for best packing density 
 
 private:
   void buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
