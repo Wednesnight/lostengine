@@ -32,6 +32,7 @@ struct Controller
   lost::bitmap::Packer::Result                    packerResult;
   
   boost::shared_ptr<lost::font::TrueTypeFont>     ttf;
+  boost::shared_ptr<lost::font::Model>            renderedText;
   
   void renderCharacterBitmaps(); // renders a character range for the given size into the characterBitmaps array
   void updateCharacterAtlas();

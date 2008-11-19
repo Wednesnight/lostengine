@@ -36,7 +36,6 @@ void Controller::renderCharacterBitmaps()
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
-  ttf.reset(new TrueTypeFont(ftlib, file));
   uint8_t maxc = 254;
   for(uint8_t c=0; c<=maxc; ++c)
   {
@@ -85,12 +84,10 @@ void Controller::init(shared_ptr<Event> event)
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
-  
+  ttf.reset(new TrueTypeFont(ftlib, file));  
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
+  renderedText = ttf->render("Hoschi!", fontSize);
   updateCharacterAtlas();
-  
-  
-  
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )
