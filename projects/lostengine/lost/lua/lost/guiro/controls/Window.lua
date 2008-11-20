@@ -35,6 +35,7 @@ function Window:handleInput(event)
     if info.which == Control.InputType.down then
       self.dragging = headerRect:contains(info.location)
       self.lastDragPos = info.location
+--      self.dragOffset = lost.math.Vec2(info.location.x - headerRect.x, info.location.y - headerRect.y)
 
     -- release
     elseif info.which == Control.InputType.up then
@@ -49,13 +50,14 @@ function Window:handleInput(event)
         end
         local newBounds = lost.math.Vec2(self.bounds.x + (info.location.x - self.lastDragPos.x),
                                          self.bounds.y + (info.location.y - self.lastDragPos.y))
-        if not parentRect or (parentRect:contains(newBounds) and 
-                              parentRect:contains(lost.math.Vec2(newBounds.x + self.bounds.width, newBounds.y + self.bounds.height)))
-        then
-          self.bounds.x = newBounds.x
-          self.bounds.y = newBounds.y
-          self.lastDragPos = info.location
+        if parentRect then
+          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - self.bounds.width), 1)
+          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - self.bounds.height), 1)
         end
+
+        self.bounds.x = newBounds.x
+        self.bounds.y = newBounds.y
+        self.lastDragPos = info.location
       end
     end
   end
