@@ -8,7 +8,7 @@
 namespace lost
 {
   
-namespace gl{ struct State; }
+namespace gl{ struct State; struct Context;}
   
 namespace font
 {
@@ -18,10 +18,12 @@ struct Model
   Model();
   virtual ~Model();
   
-  void render();
+  void render(boost::shared_ptr<gl::Context> context);
   
   uint32_t vertexCount;
+  uint32_t indexCount;
   boost::shared_array<float>    vertices;
+  boost::shared_array<float>    texcoords;
   boost::shared_array<uint8_t>  indices;
   boost::shared_ptr<gl::State>  renderState;
 };

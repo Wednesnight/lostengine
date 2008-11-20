@@ -132,9 +132,10 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   if(characterTexture)
   {
     context->setColor(whiteColor);
-    context->drawRectTextured(Rect(0,0,characterTexture->width, characterTexture->height), characterTexture, false);
+    context->drawRectTextured(Rect(50,50,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
   //  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
     context->drawRectTextured(Rect(300,300,pic->width, pic->height), tex, false);
+    renderedText->render(context);
     context->popState();
   }
 

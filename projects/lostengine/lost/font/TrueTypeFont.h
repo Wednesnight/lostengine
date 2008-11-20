@@ -3,6 +3,7 @@
 
 #include <boost/shared_ptr.hpp>
 #include <list>
+#include <vector>
 #include <string>
 #include <map>
 #include "lost/font/freetype/Library.h"
@@ -12,6 +13,7 @@
 #include "lost/gl/Texture.h"
 #include "lost/math/Vec2.h"
 #include "lost/bitmap/Bitmap.h"
+#include "lost/gl/Texture.h"
 
 namespace lost
 {
@@ -35,7 +37,6 @@ struct TrueTypeFont
     int32_t advance;
     
     boost::shared_ptr<bitmap::Bitmap> bitmap;
-    boost::shared_ptr<gl::Texture> texture; // the texture that holds the rendered glyph    
   };
   
   TrueTypeFont(boost::shared_ptr<freetype::Library> inLibrary,
@@ -81,6 +82,10 @@ struct TrueTypeFont
   lost::math::Vec2  atlasSize;
   
   std::map<char, std::map<uint32_t, boost::shared_ptr<Glyph> > > char2size2glyph; 
+  std::vector<boost::shared_ptr<Glyph> > glyphs; // this list of glyphs contains the glyphs in the order they were rendered
+                                                 // this is important to preserve the ordering fo rth packing of the atlas
+
+  boost::shared_ptr<gl::Texture> atlas;
 };
 }  
 }
