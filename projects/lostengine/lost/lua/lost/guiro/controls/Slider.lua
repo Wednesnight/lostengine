@@ -112,9 +112,7 @@ function Slider:value(value)
   end
 
   if value ~= nil then
-    log.debug(self.button.bounds[coord])
     self.button.bounds[coord] = ((self.bounds[size] - self.button.bounds[size]) / math.abs(self.max - self.min)) * value
-    log.debug(self.button.bounds[coord])
     self:updatePosition(lost.math.Vec2(self.button.bounds.x + globalRect.x, self.button.bounds.y + globalRect.y))
   end
 
