@@ -169,12 +169,12 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   
   model->vertices[coordOffset+0] = tr.x;
   model->vertices[coordOffset+1] = tr.y;
-  model->vertices[coordOffset+2] = tr.maxX();
+  model->vertices[coordOffset+2] = tr.maxX()+1;
   model->vertices[coordOffset+3] = tr.y;
-  model->vertices[coordOffset+4] = tr.maxX();
-  model->vertices[coordOffset+5] = tr.maxY();
+  model->vertices[coordOffset+4] = tr.maxX()+1;
+  model->vertices[coordOffset+5] = tr.maxY()+1;
   model->vertices[coordOffset+6] = tr.x;
-  model->vertices[coordOffset+7] = tr.maxY();
+  model->vertices[coordOffset+7] = tr.maxY()+1;
   
   model->texcoords[coordOffset+0] = glyph->bl.x;
   model->texcoords[coordOffset+1] = glyph->bl.y;
