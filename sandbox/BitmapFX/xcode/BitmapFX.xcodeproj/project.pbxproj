@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0312010ED5ADD9003A5853 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0312000ED5ADD9003A5853 /* suigeneris.ttf */; };
 		EA2ECA300EB922A90062B593 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2ECA2F0EB922A90062B593 /* Application.lua */; };
 		EA57CA800EBD3AF6000E3D01 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */; };
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0312000ED5ADD9003A5853 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../suigeneris.ttf; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2ECA2F0EB922A90062B593 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
@@ -110,6 +112,7 @@
 			children = (
 				EAC026640E96AF8C00067FC5 /* init */,
 				EA2ECA2F0EB922A90062B593 /* Application.lua */,
+				3E0312000ED5ADD9003A5853 /* suigeneris.ttf */,
 				EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */,
 				EA9137DF0E997F6B006884D7 /* stubs.jpg */,
 				EA9136A50E995BDD006884D7 /* kitten+tits.jpg */,
@@ -229,6 +232,7 @@
 				EA9137E00E997F6B006884D7 /* stubs.jpg in Resources */,
 				EA2ECA300EB922A90062B593 /* Application.lua in Resources */,
 				EA57CA800EBD3AF6000E3D01 /* Vera.ttf in Resources */,
+				3E0312010ED5ADD9003A5853 /* suigeneris.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

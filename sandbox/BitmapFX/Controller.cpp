@@ -47,15 +47,15 @@ void Controller::init(shared_ptr<Event> event)
   renderState->textureCoordArray = true;  
 
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
+  shared_ptr<File> file = appInstance->loader->load("suigeneris.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
     ttf->atlasSize = Vec2(128,128);
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
   string text ="Hoschi!gnjVAfiglrby";
-  renderedText1 = ttf->render(text, 8);
-  renderedText2 = ttf->render(text, 16);
-  renderedText3 = ttf->render(text, 24);
+  renderedText1 = ttf->render(text, 16);
+  renderedText2 = ttf->render(text, 24);
+  renderedText3 = ttf->render(text, 32);
     
 }
 
@@ -85,11 +85,14 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  glTranslatef(0,10,0);    
+  glTranslatef(0,10,0);
+  context->setColor(redColor);
   renderedText1->render(context);
-  glTranslatef(0,30,0);    
+  glTranslatef(0,30,0);
+  context->setColor(Color(0,1,0,0.75));
   renderedText2->render(context);
-  glTranslatef(0,60,0);    
+  glTranslatef(0,60,0);
+  context->setColor(Color(0,0,1,0.5));
   renderedText3->render(context);
   context->popState();
 
