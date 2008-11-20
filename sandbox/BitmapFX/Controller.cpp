@@ -85,8 +85,13 @@ void Controller::init(shared_ptr<Event> event)
   shared_ptr<File> file = appInstance->loader->load("Vera.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
+    ttf->atlasSize = Vec2(128,128);
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
-  renderedText = ttf->render("Hoschi!", fontSize);
+  string text ="Hoschi!gnjVAfiglrby";
+  renderedText1 = ttf->render(text, 8);
+  renderedText2 = ttf->render(text, 16);
+  renderedText3 = ttf->render(text, 24);
+    
   updateCharacterAtlas();
 }
 
@@ -132,10 +137,17 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
   if(characterTexture)
   {
     context->setColor(whiteColor);
-    context->drawRectTextured(Rect(50,50,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
+    context->drawRectTextured(Rect(300,0,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
   //  context->drawRectTextured(Rect(50,50,tex2->width, tex2->height), tex2);
-    context->drawRectTextured(Rect(300,300,pic->width, pic->height), tex, false);
-    renderedText->render(context);
+//    context->drawRectTextured(Rect(300,300,pic->width, pic->height), tex, false);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(0,10,0);    
+    renderedText1->render(context);
+    glTranslatef(0,30,0);    
+    renderedText2->render(context);
+    glTranslatef(0,60,0);    
+    renderedText3->render(context);
     context->popState();
   }
 

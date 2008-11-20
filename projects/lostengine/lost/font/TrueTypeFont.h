@@ -74,10 +74,18 @@ struct TrueTypeFont
    */
   void rebuildTextureAtlas();
   
+
+    /** sets up internal model data structures so they can contain the given number of characters.
+     */
+    void resetModel(boost::shared_ptr<Model> model, uint32_t numChars);  
+
+  void addGlyph(boost::shared_ptr<Model> model,
+                              uint32_t index,
+                boost::shared_ptr<Glyph> glyph,
+                float xoffset);
   
   boost::shared_ptr<freetype::Face> face;
   boost::shared_ptr<freetype::Library> library;
-  std::list<font::Model> models; // the font knows all models that have been rendered with it
 
   lost::math::Vec2  atlasSize;
   

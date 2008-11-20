@@ -123,12 +123,69 @@ void TrueTypeFont::rebuildTextureAtlas()
     float tw = atlas->dataWidth;
     float th = atlas->dataHeight;
     g->bl = Vec2(g->rect.x/tw, g->rect.y/th);
-    g->br = Vec2(g->rect.maxX()/tw, g->rect.y/th);
-    g->tl = Vec2(g->rect.x/tw, g->rect.maxY()/th);
-    g->tr = Vec2(g->rect.maxX()/tw, g->rect.maxY()/th);
+    g->br = Vec2((g->rect.maxX()+1)/tw, g->rect.y/th);
+    g->tl = Vec2(g->rect.x/tw, (g->rect.maxY()+1)/th);
+    g->tr = Vec2((g->rect.maxX()+1)/tw, (g->rect.maxY()+1)/th);
   }
 }
 
+void TrueTypeFont::resetModel(boost::shared_ptr<Model> model, uint32_t numChars)
+{
+  uint32_t numVertsPerChar = 4;
+  model->vertexCount = numChars*numVertsPerChar;
+  uint32_t numCoordsPerVert = 2;
+  model->vertices.reset(new float[model->vertexCount*numCoordsPerVert]); 
+  model->texcoords.reset(new float[model->vertexCount*numCoordsPerVert]); 
+  uint32_t trisPerChar = 2;
+  uint32_t vertsPerTri = 3;
+  model->indexCount = trisPerChar*vertsPerTri*numChars;
+  model->indices.reset(new uint8_t[model->indexCount]);
+  model->texture = atlas;
+}
+
+void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
+                            uint32_t index,
+                            shared_ptr<Glyph> glyph,
+                            float xoffset)
+{
+  Rect tr = glyph->rect; 
+  tr.x = xoffset+glyph->xoffset;
+  tr.y = glyph->yoffset;
+  
+  uint32_t indicesPerChar = 6; // 2 tris a 3 points
+  uint32_t indexOffset = indicesPerChar*index;
+  uint32_t vertsPerChar = 4;
+  uint32_t vertsOffset = vertsPerChar*index;
+  
+  model->indices[indexOffset+0] = vertsOffset+0;
+  model->indices[indexOffset+1] = vertsOffset+2;
+  model->indices[indexOffset+2] = vertsOffset+3;
+  model->indices[indexOffset+3] = vertsOffset+0;
+  model->indices[indexOffset+4] = vertsOffset+1;
+  model->indices[indexOffset+5] = vertsOffset+2;
+  
+  uint32_t coordsPerChar = 8; // 4 verts a 2 coords
+  uint32_t coordOffset = coordsPerChar*index;
+  
+  model->vertices[coordOffset+0] = tr.x;
+  model->vertices[coordOffset+1] = tr.y;
+  model->vertices[coordOffset+2] = tr.maxX();
+  model->vertices[coordOffset+3] = tr.y;
+  model->vertices[coordOffset+4] = tr.maxX();
+  model->vertices[coordOffset+5] = tr.maxY();
+  model->vertices[coordOffset+6] = tr.x;
+  model->vertices[coordOffset+7] = tr.maxY();
+  
+  model->texcoords[coordOffset+0] = glyph->bl.x;
+  model->texcoords[coordOffset+1] = glyph->bl.y;
+  model->texcoords[coordOffset+2] = glyph->br.x;
+  model->texcoords[coordOffset+3] = glyph->br.y;
+  model->texcoords[coordOffset+4] = glyph->tr.x;
+  model->texcoords[coordOffset+5] = glyph->tr.y;
+  model->texcoords[coordOffset+6] = glyph->tl.x;
+  model->texcoords[coordOffset+7] = glyph->tl.y;  
+}
+  
 shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
                                        uint32_t inSizeInPoints)
 {
@@ -147,41 +204,15 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     rebuildTextureAtlas();
   
   // build model from scratch with the infos gathered 
-  
-  boost::shared_ptr<Glyph> g = char2size2glyph[inText[0]][inSizeInPoints];
-  Rect tr = g->rect; 
-  tr.x = 0;
-  tr.y = 0;
-  
-  result->vertexCount = 4;
-  result->vertices.reset(new float[result->vertexCount*2]); // x/y coord per vertex
-  result->texcoords.reset(new float[result->vertexCount*2]); // u/v coord per vertex
-  result->indexCount = 6; // 2 tris for a start
-  result->indices.reset(new uint8_t[result->indexCount]);
-  result->indices[0] = 0;
-  result->indices[1] = 2;
-  result->indices[2] = 3;
-  result->indices[3] = 0;
-  result->indices[4] = 1;
-  result->indices[5] = 2;
-
-  result->vertices[0] = tr.x;
-  result->vertices[1] = tr.y;
-  result->vertices[2] = tr.maxX();
-  result->vertices[3] = tr.y;
-  result->vertices[4] = tr.maxX();
-  result->vertices[5] = tr.maxY();
-  result->vertices[6] = tr.x;
-  result->vertices[7] = tr.maxY();
-
-  result->texcoords[0] = g->bl.x;
-  result->texcoords[1] = g->bl.y;
-  result->texcoords[2] = g->br.x;
-  result->texcoords[3] = g->br.y;
-  result->texcoords[4] = g->tr.x;
-  result->texcoords[5] = g->tr.y;
-  result->texcoords[6] = g->tl.x;
-  result->texcoords[7] = g->tl.y;
+  uint32_t numChars = inText.length();
+  resetModel(result, numChars);
+  float xoffset = 0;
+  for(int i=0; i<numChars; ++i)
+  {
+    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
+    addGlyph(result, i, glyph, xoffset);
+    xoffset+=glyph->advance;
+  }
     
   return result;
 }

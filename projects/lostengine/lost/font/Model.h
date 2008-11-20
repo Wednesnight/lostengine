@@ -8,7 +8,7 @@
 namespace lost
 {
   
-namespace gl{ struct State; struct Context;}
+    namespace gl{ struct State; struct Context; struct Texture; }
   
 namespace font
 {
@@ -26,6 +26,7 @@ struct Model
   boost::shared_array<float>    texcoords;
   boost::shared_array<uint8_t>  indices;
   boost::shared_ptr<gl::State>  renderState;
+  boost::shared_ptr<gl::Texture>  texture;
 };
 
 }
