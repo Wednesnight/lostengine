@@ -207,9 +207,27 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   uint32_t numChars = inText.length();
   resetModel(result, numChars);
   float xoffset = 0;
+  
+  // kerning setup
+  bool hasKerning = FT_HAS_KERNING(face->face());
+  FT_UInt previousGlyphIndex, currentGlyphIndex;
+  previousGlyphIndex = 0;
+  FT_Vector kerningDelta;
+  
   for(int i=0; i<numChars; ++i)
   {
-    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
+    char c = inText[i];
+    
+    if(hasKerning)
+    {
+      currentGlyphIndex = FT_Get_Char_Index(face->face(), c);
+      FT_Get_Kerning(face->face(), previousGlyphIndex, currentGlyphIndex, FT_KERNING_DEFAULT, &kerningDelta);
+      signed long kerningoffset = kerningDelta.x>>6;
+      xoffset+=kerningoffset;
+      previousGlyphIndex = currentGlyphIndex;
+    }
+    
+    shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
     addGlyph(result, i, glyph, xoffset);
     xoffset+=glyph->advance;
   }
