@@ -13,7 +13,9 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/event/Event.h"
 #include "lost/gl/Context.h"
+#include "lost/gl/FrameBuffer.h"
 #include "lost/gl/State.h"
+#include "lost/gl/Texture.h"
 #include "lost/lsystem/LSystem.h"
 #include "lost/lua/State.h"
 #include "lost/math/Rect.h"
@@ -53,8 +55,9 @@ namespace luabind
   GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
   GET_POINTER(lost::gl::Context);
+  GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::State);
-//  GET_POINTER(lost::guiro::Screen);
+  GET_POINTER(lost::gl::Texture);
   GET_POINTER(lost::lsystem::LSystem);
   GET_POINTER(lost::lsystem::LSystemState);
   GET_POINTER(lost::lua::State);

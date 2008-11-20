@@ -37,6 +37,7 @@ namespace lost
           .def("setColor",  &Context::setColor)
           .def("drawRectOutline",  &Context::drawRectOutline)
           .def("drawRectFilled",  &Context::drawRectFilled)
+          .def("drawRectTextured",  &Context::drawRectTextured)
         ]
       ];
     }

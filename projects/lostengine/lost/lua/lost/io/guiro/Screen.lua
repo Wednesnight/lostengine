@@ -11,7 +11,7 @@ function Loader:loadScreen(filename)
   log.debug("Loader:load()")
   local result = {}
   local guiro = self
-  guiro.Screen = function(self, definition) result = self:applyDefinitionToView(lost.guiro.Screen(), definition) end
-  self:executeScript(filename, {guiro = guiro, lost = lost})
+  guiro.Screen = function(self, definition) result = self:applyDefinitionToView(lost.guiro.Screen(), definition) return result end
+  self:executeScript(filename, {guiro = guiro, lost = lost, log = log, gl = gl})
   return result
 end

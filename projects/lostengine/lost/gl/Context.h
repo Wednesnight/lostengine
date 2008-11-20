@@ -47,8 +47,9 @@ namespace lost
                            const lost::math::Vec3& up,
                            const float& fovy,
                            const lost::math::Vec2& depth);      
+
       boost::shared_ptr<State>& defaultVertexState();
-      
+      boost::shared_ptr<State>& defaultTextureState();
       
       // drawing
       void drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end);

@@ -187,6 +187,18 @@
 		3EE57C9C0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
 		3EE57C9D0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
 		3EE57C9E0E82572E00066396 /* MouseButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE57C9B0E82572E00066396 /* MouseButton.h */; };
+		3EF7AE9E0ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
+		3EF7AE9F0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
+		3EF7AEA00ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
+		3EF7AEA10ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
+		3EF7AEA20ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
+		3EF7AEA30ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
+		3EF7AEC20ED29DAD00CDB78A /* LostGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */; };
+		3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
+		3EF7AEC40ED29DAD00CDB78A /* LostGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */; };
+		3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
+		3EF7AEC60ED29DAD00CDB78A /* LostGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */; };
+		3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EFEC1000E62C4670053EB12 /* Material.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FD0E62C4670053EB12 /* Material.h */; };
 		3EFEC1010E62C4670053EB12 /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FE0E62C4670053EB12 /* Parser.h */; };
 		3EFEC1020E62C4670053EB12 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC0FF0E62C4670053EB12 /* Renderer.h */; };
@@ -976,6 +988,10 @@
 		3EE9AB1C0EB90D7400E832CA /* Window.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Window.lua; path = styles/default/Window.lua; sourceTree = "<group>"; };
 		3EE9AB480EB915F200E832CA /* Renderer.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Renderer.lua; path = io/guiro/Renderer.lua; sourceTree = "<group>"; };
 		3EE9AB500EB91D8600E832CA /* Control.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Control.lua; sourceTree = "<group>"; };
+		3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLFrameBuffer.h; path = bindings/LostGLFrameBuffer.h; sourceTree = "<group>"; };
+		3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLFrameBuffer.cpp; path = bindings/LostGLFrameBuffer.cpp; sourceTree = "<group>"; };
+		3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLTexture.h; path = bindings/LostGLTexture.h; sourceTree = "<group>"; };
+		3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLTexture.cpp; path = bindings/LostGLTexture.cpp; sourceTree = "<group>"; };
 		3EF9B8D80EB21532009094A7 /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Button.lua; path = io/guiro/Button.lua; sourceTree = "<group>"; };
 		3EF9B8D90EB21532009094A7 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Screen.lua; path = io/guiro/Screen.lua; sourceTree = "<group>"; };
 		3EF9B8DA0EB21532009094A7 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = UserInterface.lua; path = io/guiro/UserInterface.lua; sourceTree = "<group>"; };
@@ -1881,8 +1897,12 @@
 				EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */,
 				EA7BE1E70E6F41700017B031 /* LostGLGL.h */,
 				EA7BE10F0E6F38A10017B031 /* LostGLGL.cpp */,
+				3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */,
+				3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */,
 				3E6510000E7F92C700DE5AFE /* LostGLState.h */,
 				3E6510010E7F92C700DE5AFE /* LostGLState.cpp */,
+				3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */,
+				3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */,
 				EA7BE1EE0E6F41C00017B031 /* LostGLUtils.h */,
 				EA7BE1100E6F38A10017B031 /* LostGLUtils.cpp */,
 				EA7BE29F0E6F48490017B031 /* LostLSystemLSystem.h */,
@@ -2059,6 +2079,8 @@
 				EA70F94E0ED08EA0000AA8CB /* Device.h in Headers */,
 				EA70F94F0ED08EA0000AA8CB /* Source.h in Headers */,
 				EA70F9C50ED0A092000AA8CB /* Listener.h in Headers */,
+				3EF7AEA00ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */,
+				3EF7AEC40ED29DAD00CDB78A /* LostGLTexture.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2199,6 +2221,8 @@
 				EA70F9460ED08EA0000AA8CB /* Device.h in Headers */,
 				EA70F9470ED08EA0000AA8CB /* Source.h in Headers */,
 				EA70F9C10ED0A092000AA8CB /* Listener.h in Headers */,
+				3EF7AE9E0ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */,
+				3EF7AEC20ED29DAD00CDB78A /* LostGLTexture.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2339,6 +2363,8 @@
 				EA70F94A0ED08EA0000AA8CB /* Device.h in Headers */,
 				EA70F94B0ED08EA0000AA8CB /* Source.h in Headers */,
 				EA70F9C30ED0A092000AA8CB /* Listener.h in Headers */,
+				3EF7AEA20ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */,
+				3EF7AEC60ED29DAD00CDB78A /* LostGLTexture.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2679,6 +2705,8 @@
 				EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */,
+				3EF7AEA10ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */,
+				3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2765,6 +2793,8 @@
 				EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */,
+				3EF7AE9F0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */,
+				3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2847,6 +2877,8 @@
 				EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */,
+				3EF7AEA30ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */,
+				3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,7 +4,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/signal.hpp>
 #include "lost/gl/gl.h"
-#include "lost/gl/Draw.h"
 #include "lost/gl/Utils.h"
 #include "lost/common/Color.h"
 #include "lost/math/Vec2.h"
@@ -22,27 +21,45 @@
 #include "lost/gl/PushAttrib.h"
 #include "lost/math/Rect.h"
 #include "lost/application/Application.h"
+#include "lost/application/Timer.h"
+#include "lost/application/TimerEvent.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/event/Receive.h"
+
+using namespace boost;
+using namespace lost::application;
+using namespace lost::common;
+using namespace lost::event;
+using namespace lost::gl;
+using namespace lost::gl::utils;
+using namespace lost::math;
+using namespace lost::resource;
 
 struct Buff0r
 {
-  lost::math::Vec3        eye;
-  lost::math::Vec3        at;
-  lost::math::Vec3        up;
-  float                   fovy;
-  float                   znear;
-  float                   zfar;
-  float                   passed;
+  Vec3  eye;
+  Vec3  at;
+  Vec3  up;
+  float fovy;
+  float znear;
+  float zfar;
+  float passed;
 
-  boost::shared_ptr<lost::gl::ShaderProgram>      program;
-  boost::shared_ptr<lost::gl::FrameBuffer> frameBuffer;
-  boost::shared_ptr<lost::gl::Texture> depthTexture;
-  boost::shared_ptr<lost::gl::Texture> colorTexture;
+  shared_ptr<ShaderProgram> program;
+  shared_ptr<FrameBuffer>   frameBuffer;
+  shared_ptr<Texture>       depthTexture;
+  shared_ptr<Texture>       colorTexture;
+
   int frameBufferWidth;
   int frameBufferHeight;
-  boost::shared_ptr<lost::resource::Loader> loader;
-  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+
+  shared_ptr<Loader>   loader;
+  shared_ptr<FpsMeter> fpsMeter;
+  shared_ptr<Timer>    redrawTimer;
+  shared_ptr<State>    bufferState;
+  shared_ptr<State>    renderState;
   
-  Buff0r(lost::common::DisplayAttributes& inDisplayAttributes, boost::shared_ptr<lost::resource::Loader> inLoader)
+  Buff0r(DisplayAttributes& inDisplayAttributes, shared_ptr<Loader> inLoader)
   : eye(0,0,-5),
     at(0,0,0),
     up(0,1,0),
@@ -53,21 +70,59 @@ struct Buff0r
     znear = 1;
     zfar = 100;
     passed = 0;    
+
+    appInstance->addEventListener(ApplicationEvent::INIT(), receive<Event>(bind(&Buff0r::init, this, _1)));
   }
 
-  void init(boost::shared_ptr<lost::event::Event> event)
+  void init(shared_ptr<Event> event)
   {
-    frameBuffer.reset(new lost::gl::FrameBuffer);
-    depthTexture.reset(new lost::gl::Texture);
-    colorTexture.reset(new lost::gl::Texture);
-    fpsMeter.reset(new lost::common::FpsMeter(lost::application::appInstance->context));
+    frameBuffer.reset(new FrameBuffer);
+    depthTexture.reset(new Texture);
+    colorTexture.reset(new Texture);
+    fpsMeter.reset(new FpsMeter(appInstance->context));
 
     frameBufferInit();
     shaderInit();
     if(GLEE_EXT_framebuffer_object)
-    {  DOUT("Framebuffer objects OK");}
+    {
+      DOUT("Framebuffer objects OK");
+    }
     else
+    {
       DOUT("NO framebuffer objects");
+    }
+
+    renderState = appInstance->context->copyState();
+    renderState->alphaTest = true;
+    renderState->clearColor = blackColor;
+    renderState->depthTest = false;
+    renderState->blend = true;
+    renderState->blendSrc = GL_SRC_ALPHA;
+    renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    renderState->texture2D = true;
+    renderState->normalArray = false;  
+    renderState->vertexArray = true;  
+    renderState->textureCoordArray = true;
+    
+    bufferState = appInstance->context->copyState();
+    bufferState->alphaTest = true;
+    bufferState->clearColor = blackColor;
+    bufferState->depthTest = true;
+    bufferState->blend = false;
+    bufferState->blendSrc = GL_SRC_ALPHA;
+    bufferState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    bufferState->texture2D = false;
+    bufferState->normalArray = false;  
+    bufferState->vertexArray = true;  
+    bufferState->textureCoordArray = false;
+    
+    appInstance->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Buff0r::keyboard, this, _1)));
+    appInstance->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Buff0r::keyboard, this, _1)));
+    appInstance->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&Buff0r::resetViewPort, this, _1)));
+    quit.connect(bind(&Application::quit, appInstance));
+    
+    redrawTimer.reset(new Timer("redrawTimer", 1.0/60.0));
+    redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Buff0r::redraw, this, _1)));
   }
   
   void frameBufferInit()
@@ -88,13 +143,13 @@ struct Buff0r
     colorTexture->wrap(GL_CLAMP);
 
     if(!frameBuffer->status() == GL_FRAMEBUFFER_COMPLETE_EXT)
-      throw std::runtime_error("FrameBuffer status: "+lost::gl::utils::enum2string(frameBuffer->status()));
+      throw std::runtime_error("FrameBuffer status: "+ enum2string(frameBuffer->status()));
     frameBuffer->disable();
   }
 
   void shaderInit()
   {
-    program = lost::gl::loadShader(loader, "lattice");
+    program = loadShader(loader, "lattice");
     program->enable();
     program->validate();
     if(!program->validated())
@@ -105,29 +160,29 @@ struct Buff0r
     {
       DOUT("Program validated OK");
     }
-    (*program)["LightPosition"] = lost::math::Vec3(0,5,-5);
-    (*program)["LightColor"]    = lost::common::Color(1,1,1);
+    (*program)["LightPosition"] = Vec3(0,5,-5);
+    (*program)["LightColor"]    = Color(1,1,1);
     (*program)["EyePosition"]   = eye;
-    (*program)["Specular"]      = lost::common::Color(1,1,.1);
-    (*program)["Ambient"]       = lost::common::Color(.1,.5,1);
+    (*program)["Specular"]      = Color(1,1,.1);
+    (*program)["Ambient"]       = Color(.1,.5,1);
     (*program)["Kd"]            = 0.8f;
-    (*program)["Scale"]         = lost::math::Vec2(0.7, 3.7);
-    (*program)["Threshold"]     = lost::math::Vec2(.3, .2);
-    (*program)["SurfaceColor"]  = lost::common::Color(1,.1,.1);
+    (*program)["Scale"]         = Vec2(0.7, 3.7);
+    (*program)["Threshold"]     = Vec2(.3, .2);
+    (*program)["SurfaceColor"]  = Color(1,.1,.1);
     program->disable();
   }
 
-  void resetViewPort(boost::shared_ptr<lost::application::ResizeEvent> event)
+  void resetViewPort(shared_ptr<ResizeEvent> event)
   {
-    glViewport(0, 0, event->width-1, event->height-1);GLDEBUG;
-    lost::gl::utils::set3DProjection(displayAttributes.width, displayAttributes.height, eye, at, up, fovy, znear, zfar);
+    glViewport(0, 0, event->width, event->height);
+    appInstance->context->set3DProjection(eye, at, up, fovy, Vec2(znear, zfar));
   }
 
-  void keyboard(boost::shared_ptr<lost::application::KeyEvent> inEvent )
+  void keyboard(shared_ptr<KeyEvent> inEvent )
   {
     switch (inEvent->key)
     {
-      case lost::application::K_ESCAPE :
+      case K_ESCAPE :
         if (!inEvent->pressed)
         {
           quit();
@@ -138,25 +193,23 @@ struct Buff0r
     }
   }
 
-  void redraw(boost::shared_ptr<lost::application::TimerEvent> event)
+  void redraw(shared_ptr<TimerEvent> event)
   {
-      glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-      glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
-      glEnable(GL_DEPTH_TEST);GLDEBUG;
-      glEnable(GL_BLEND);GLDEBUG;
-      glDisable(GL_TEXTURE_2D);GLDEBUG;
     // enable framebuffer and set viewport
     {
       frameBuffer->enable();
-      glClearColor( 0.0, 0.0, 0.0, 0.0 );GLDEBUG;
-      glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );GLDEBUG;
-      lost::gl::PushAttrib pushAttrib(GL_VIEWPORT_BIT);
+
+      appInstance->context->pushState(bufferState);
+      appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      PushAttrib pushAttrib(GL_VIEWPORT_BIT);
       glViewport(0, 0, frameBufferWidth, frameBufferHeight);
-      
-      lost::gl::utils::set3DProjection(frameBufferWidth, frameBufferHeight, eye, at, up, fovy, znear, zfar);
-      glColor3f(1, 1, 0);
+
+      appInstance->context->set3DProjection(eye, at, up, fovy, Vec2(znear, zfar));
+      appInstance->context->setColor(Color(1,1,0));
       program->enable();
       passed += event->passedSec;
+
       glMatrixMode(GL_MODELVIEW);GLDEBUG;
       glLoadIdentity();GLDEBUG;
       glRotatef(180*sin(passed), 0,1,0);
@@ -168,50 +221,37 @@ struct Buff0r
       glutSolidCube(1);
 
       program->disable();
+
+      appInstance->context->popState();
       frameBuffer->disable();
     }
     
-  
+    appInstance->context->pushState(renderState);
+    appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // this leaves projection matrix on
-    lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(displayAttributes.width, displayAttributes.height));
-    glMatrixMode(GL_MODELVIEW);GLDEBUG; // whis is why we need to switch back to modelview here
+    appInstance->context->set2DProjection(Vec2(0,0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
+    glMatrixMode(GL_MODELVIEW);GLDEBUG; // this is why we need to switch back to modelview here
     glLoadIdentity();GLDEBUG;
-    glDisable(GL_DEPTH_TEST);GLDEBUG;
 
-    glEnable(GL_TEXTURE_2D);GLDEBUG;
-
-//    glRotatef(15, 0,0,1);
-    glColor3f(1, 1, 1);
-    lost::math::Rect rect(50, 50, 512, 512);
-    colorTexture->bind();
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0);glVertex2f(rect.x, rect.y);
-    glTexCoord2f(1, 0);glVertex2f(rect.x+rect.width-1, rect.y);
-    glTexCoord2f(1, 1);glVertex2f(rect.x+rect.width-1, rect.y+rect.height-1);
-    glTexCoord2f(0, 1);glVertex2f(rect.x, rect.y+rect.height-1);
-    glEnd();
+    appInstance->context->setColor(whiteColor);
+    Rect rect(50, 50, 512, 512);
+    appInstance->context->drawRectTextured(rect, colorTexture, false);
 
     glTranslatef(50, -100, 0);
 
-    glColor4f(1, 1, 1, .5);
-    rect = lost::math::Rect(60, 50, 512, 512);
-    colorTexture->bind();
-    glBegin(GL_QUADS);
-    glTexCoord2f(0, 0);glVertex2f(rect.x, rect.y);
-    glTexCoord2f(1, 0);glVertex2f(rect.x+rect.width-1, rect.y);
-    glTexCoord2f(1, 1);glVertex2f(rect.x+rect.width-1, rect.y+rect.height-1);
-    glTexCoord2f(0, 1);glVertex2f(rect.x, rect.y+rect.height-1);
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);GLDEBUG;
+    appInstance->context->setColor(Color(1,1,1,0.5));
+    rect = Rect(60, 50, 512, 512);
+    appInstance->context->drawRectTextured(rect, colorTexture, false);
 
     glLoadIdentity();GLDEBUG;
-    fpsMeter->render(1, 0, event->passedSec);
-    glfwSwapBuffers();
+    fpsMeter->render(appInstance->displayAttributes->width - fpsMeter->width, 0, event->passedSec);
+                                   
+    appInstance->context->popState();
+    appInstance->swapBuffers();
   }
 
-  lost::common::DisplayAttributes& displayAttributes;
+  DisplayAttributes& displayAttributes;
   boost::signal<void(void)> quit;
 };
 

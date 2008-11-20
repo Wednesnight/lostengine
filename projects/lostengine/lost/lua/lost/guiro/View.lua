@@ -13,6 +13,16 @@ View = _G["lost.guiro.View"]
 View.bases = { "View" }
 
 --[[ 
+    constructor
+  ]]
+function View:__init() super()
+  self.bounds = lost.math.Rect(0,0,0,0)
+  self.children = {}
+  self.isView = true
+  self.listeners = {}
+end
+
+--[[ 
     adds className to class.bases
     a derived class MUST use its direct base to call this method because class.bases is extended from self.bases
   ]]
@@ -53,16 +63,6 @@ function View:className()
 end
 
 --[[ 
-    constructor
-  ]]
-function View:__init() super()
-  self.bounds = lost.math.Rect(0,0,0,0)
-  self.children = {}
-  self.isView = true
-  self.listeners = {}
-end
-
---[[ 
     inserts child into self.children and sets child.parent to self
   ]]
 function View:appendChild(child)
@@ -91,6 +91,14 @@ function View:removeChild(child)
     end
     idx = idx+1
   end
+end
+
+--[[
+    returns child with given childId
+    nil if childId is invalid
+  ]]
+function View:__call(childId)
+  return self.children[childId]
 end
 
 --[[ 

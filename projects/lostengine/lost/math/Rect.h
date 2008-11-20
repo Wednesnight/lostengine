@@ -23,6 +23,19 @@ namespace math
       y += parentPos.y;
     }
 
+    bool operator ==(const Rect& rect)
+    {
+      return (x == rect.x &&
+              y == rect.y &&
+              width == rect.width &&
+              height == rect.height);
+    }
+    
+    bool operator !=(const Rect& rect)
+    {
+      return !(*this == rect);
+    }
+    
     lost::math::Vec2 pos() const
     {
       return lost::math::Vec2( x, y );

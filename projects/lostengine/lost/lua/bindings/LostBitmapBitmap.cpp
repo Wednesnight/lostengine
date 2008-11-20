@@ -18,9 +18,10 @@ namespace lost
         namespace_("bitmap")
         [
           class_<Bitmap, boost::shared_ptr<Bitmap> >("Bitmap")
-            .def(constructor<>())    
-             .def_readwrite("width",     &Bitmap::width)
-             .def_readwrite("height",     &Bitmap::height)
+            .def(constructor<>())
+            .def(constructor<boost::shared_ptr<lost::resource::File> >())
+            .def_readwrite("width", &Bitmap::width)
+            .def_readwrite("height", &Bitmap::height)
         ]
       ];
     }

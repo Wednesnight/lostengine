@@ -1,4 +1,4 @@
-guiro:Screen
+screen = guiro:Screen
 {
   id = "screen",
   bounds = lost.math.Rect(0, 0, 800, 600),
@@ -11,24 +11,77 @@ guiro:Screen
     guiro:Window
     {
       id = "window",
-      bounds = lost.math.Rect(10, 200, 300, 200),
+      bounds = lost.math.Rect(100, 180, 400, 300),
       style = guiro:StyleFromFile("lost/guiro/styles/default/Window.lua"),
       renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Window.lua"),
 
       guiro:Button
       {
         id = "button",
-        bounds = lost.math.Rect(240, 10, 50, 25),
+        bounds = lost.math.Rect(340, 10, 50, 25),
         style = guiro:StyleFromFile("lost/guiro/styles/default/Button.lua"),
-        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Button.lua"),
+        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Button.lua")
       },
 
       guiro:Slider
       {
         id = "slider",
-        bounds = lost.math.Rect(10, 125, 150, 25),
+        bounds = lost.math.Rect(10, 115, 25, 150),
+        orientation = lost.guiro.controls.Slider.Orientation.vertical,
+        min = 0,
+        max = 1,
+        steps = 0,
+        value = 1,
         style = guiro:StyleFromFile("lost/guiro/styles/default/Slider.lua"),
         renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Slider.lua"),
+        listeners =
+        {
+          [lost.guiro.controls.Slider.SliderChange] = function(event)
+            screen("ui")("window")("image").alpha = event.value
+          end
+        }
+      },
+
+      guiro:Slider
+      {
+        id = "slider2",
+        bounds = lost.math.Rect(50, 240, 150, 25),
+        orientation = lost.guiro.controls.Slider.Orientation.horizontal,
+        min = 0,
+        max = 1,
+        steps = 1,
+        value = 1,
+        style = guiro:StyleFromFile("lost/guiro/styles/default/Slider.lua"),
+        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Slider.lua"),
+        listeners =
+        {
+          [lost.guiro.controls.Slider.SliderChange] = function(event)
+            if event.value == screen("ui")("window")("slider2").min then
+              screen("ui")("window")("image").renderer.texture:filter(gl.GL_NEAREST)
+            elseif event.value == screen("ui")("window")("slider2").max then
+              screen("ui")("window")("image").renderer.texture:filter(gl.GL_LINEAR)
+            end
+          end
+        }
+      },
+
+      guiro:Image
+      {
+        id = "image",
+        bounds = lost.math.Rect(50, 25, 250, 200),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        style = guiro:StyleFromFile("lost/guiro/styles/default/Image.lua"),
+        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Image.lua"),
+        listeners =
+        {
+          [lost.application.MouseEvent.MOUSE_DOWN] = function(event)
+            local mouseEvent = lost.application.MouseEvent.cast(event)
+            if screen("ui")("window")("image"):globalRect():contains(mouseEvent.pos) then
+              screen("ui")("window")("image").stretch = not screen("ui")("window")("image").stretch
+            end
+          end
+
+        }
       }
     }
   }

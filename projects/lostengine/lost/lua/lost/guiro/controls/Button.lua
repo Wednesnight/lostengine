@@ -13,9 +13,11 @@ lost.guiro.controls.Control:addBase(Button, "Button")
 --[[
     button events
   ]]
-Button.ButtonPressed  = "BUTTON_PRESSED"
-Button.ButtonReleased = "BUTTON_RELEASED"
-Button.ButtonClicked  = "BUTTON_CLICKED"
+Button.ButtonPress   = "BUTTON_PRESS"
+Button.ButtonRelease = "BUTTON_RELEASE"
+Button.ButtonClick   = "BUTTON_CLICK"
+Button.ButtonEnter   = "BUTTON_ENTER"
+Button.ButtonLeave   = "BUTTON_LEAVE"
 
 class "lost.guiro.controls.Button.ButtonEvent" (lost.event.Event)
 Button.ButtonEvent = _G["lost.guiro.controls.Button.ButtonEvent"]
@@ -61,16 +63,16 @@ function Button:handleInput(event)
       self.down = info.rect:contains(info.location)
       self.pressed = self.down
       if self.down then
-        self:dispatchEvent(Button.ButtonEvent(Button.ButtonPressed, info.location))
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonPress, info.location))
       end
 
     -- release
     elseif info.which == Control.InputType.up then
       if self.down then
         if self.hovered then
-          self:dispatchEvent(Button.ButtonEvent(Button.ButtonClicked, info.location))
+          self:dispatchEvent(Button.ButtonEvent(Button.ButtonClick, info.location))
         end
-        self:dispatchEvent(Button.ButtonEvent(Button.ButtonReleased, info.location))
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonRelease, info.location))
       end
       self.down = false
       self.pressed = false
@@ -78,7 +80,13 @@ function Button:handleInput(event)
 
     -- move
     elseif info.which == Control.InputType.move then
+      local wasHovered = self.hovered
       self.hovered = info.rect:contains(info.location)
+      if not wasHovered and self.hovered then
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonEnter, info.location))
+      elseif wasHovered and not self.hovered then
+        self:dispatchEvent(Button.ButtonEvent(Button.ButtonLeave, info.location))
+      end
       self.pressed = self.down and self.hovered
     end
     

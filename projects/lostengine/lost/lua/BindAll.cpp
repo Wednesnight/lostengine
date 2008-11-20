@@ -36,6 +36,8 @@
 #include "lost/lua/bindings/LostPlatformPlatform.h"
 #include "lost/lua/bindings/LostGLContext.h"
 #include "lost/lua/bindings/LostGLState.h"
+#include "lost/lua/bindings/LostGLFrameBuffer.h"
+#include "lost/lua/bindings/LostGLTexture.h"
 
 namespace lost
 {
@@ -78,6 +80,8 @@ namespace lost
       LostPlatformPlatform(state);
       LostGLContext(state);
       LostGLState(state);
+      LostGLFrameBuffer(state);
+      LostGLTexture(state);
       
       luabind::bind_class_info(state);
     }

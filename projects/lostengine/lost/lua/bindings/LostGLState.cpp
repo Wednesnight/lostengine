@@ -22,6 +22,9 @@ namespace lost
 
           // server-side attributes
           .def_readwrite("alphaTest", &lost::gl::State::alphaTest)
+          .def_readwrite("blend", &lost::gl::State::blend)
+          .def_readwrite("blendSrc", &lost::gl::State::blendSrc)
+          .def_readwrite("blendDest", &lost::gl::State::blendDest)
           .def_readwrite("depthTest", &lost::gl::State::depthTest)
           .def_readwrite("texture2D", &lost::gl::State::texture2D)
 
@@ -29,6 +32,7 @@ namespace lost
            
           // client-side attributes
           .def_readwrite("normalArray", &lost::gl::State::normalArray)
+          .def_readwrite("textureCoordArray", &lost::gl::State::textureCoordArray)
           .def_readwrite("vertexArray", &lost::gl::State::vertexArray)
         ]
       ];

@@ -10,6 +10,15 @@ View = { indices = {} }
 
 function Loader:applyDefinitionToView(view, definition)
   local hasId = false
+
+  -- apply listeners
+  if definition.listeners then
+    for name,value in next,definition.listeners do
+      view:addEventListener(name, value)
+    end
+    definition.listeners = nil
+  end
+
   -- apply properties
   if (view and definition) then
     for name,value in next,definition do

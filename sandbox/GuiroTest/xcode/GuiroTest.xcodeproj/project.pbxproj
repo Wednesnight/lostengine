@@ -24,6 +24,9 @@
 		3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */; };
 		3E485AD90ECD7512003AAEAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB60ECD73E5003AAEAB /* UIKit.framework */; };
 		3E485AE10ECD7528003AAEAB /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */; };
+		3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
@@ -93,6 +96,7 @@
 		3E7706CB0EC1B15900D0DA42 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
 		3E7B27D90EA77E6800F70E7C /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.lua; sourceTree = "<group>"; };
 		3E7B27DC0EA77E6800F70E7C /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.lua; sourceTree = "<group>"; };
+		3E7BF9520ED4CB890017AEBA /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		3EE2E8940EA8AD4900BA12BB /* Loader.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Loader.lua; path = io/Loader.lua; sourceTree = "<group>"; };
 		3EE9AAFB0EB90A6E00E832CA /* Style.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Style.lua; path = io/guiro/Style.lua; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */,
 				3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */,
+				3E7BF9520ED4CB890017AEBA /* stubs.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 			files = (
 				3E485A610ECD729E003AAEAB /* init in Resources */,
 				3E485A620ECD729E003AAEAB /* screen in Resources */,
+				3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +445,7 @@
 			files = (
 				3E485AD00ECD7512003AAEAB /* init in Resources */,
 				3E485AD10ECD7512003AAEAB /* screen in Resources */,
+				3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +455,7 @@
 			files = (
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
 				3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */,
+				3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

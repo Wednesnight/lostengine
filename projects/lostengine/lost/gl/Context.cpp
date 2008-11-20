@@ -160,7 +160,7 @@ void Context::set3DProjection(const lost::math::Vec3& eye,
                                    
 }
 
-boost::shared_ptr<State>& Context::defaultVertexState()
+void Context::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
 {
   static boost::shared_ptr<State> newState;
   if (!newState)
@@ -168,12 +168,7 @@ boost::shared_ptr<State>& Context::defaultVertexState()
     newState = copyState();
     newState->vertexArray = true;
   }
-  return newState;
-}
-
-void Context::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
-{
-  pushState(defaultVertexState());
+  pushState(newState);
   
   float p[4];
   p[0] = start.x;
@@ -189,7 +184,13 @@ void Context::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& en
 
 void Context::drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
 {
-  pushState(defaultVertexState());
+  static boost::shared_ptr<State> newState;
+  if (!newState)
+  {
+    newState = copyState();
+    newState->vertexArray = true;
+  }
+  pushState(newState);
 
   float p[6];
   p[0] = start.x;
@@ -212,12 +213,21 @@ void Context::setColor(const lost::common::Color& col)
 
 void Context::drawPoint(const lost::math::Vec2& point)
 {
+  static boost::shared_ptr<State> newState;
+  if (!newState)
+  {
+    newState = copyState();
+    newState->vertexArray = true;
+  }
+  pushState(newState);
+
   float p[2];
   p[0] = point.x;
   p[1] = point.y;
   
   glVertexPointer(2, GL_FLOAT, 0, p);
   glDrawArrays(GL_POINTS, 0, 1);    
+  popState();
 }
 
 void Context::drawRectOutline(const lost::math::Rect& rect)
@@ -230,6 +240,17 @@ void Context::drawRectOutline(const lost::math::Rect& rect)
 
 void Context::drawRectFilled(const lost::math::Rect& rect)
 {
+  static boost::shared_ptr<State> newState;
+  if (!newState)
+  {
+    newState = copyState();
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->vertexArray = true;
+  }
+  pushState(newState);
+
   // points
   lost::math::Vec2 bl(rect.x, rect.y);
   lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
@@ -242,6 +263,7 @@ void Context::drawRectFilled(const lost::math::Rect& rect)
 
   glVertexPointer(2,GL_FLOAT,0,verts);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx);    
+  popState();
 }
 
 // don't forget glEnable(GL_TEXTURE_2D);
@@ -252,6 +274,23 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
                              boost::shared_ptr<const lost::gl::Texture> tex,
                              bool flip)
 {
+  static boost::shared_ptr<State> newState;
+  if (!newState)
+  {
+    newState = copyState();
+    newState->alphaTest = true;
+    newState->clearColor = lost::common::blackColor;
+    newState->depthTest = false;
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = true;
+    newState->normalArray = false;  
+    newState->vertexArray = true;  
+    newState->textureCoordArray = true;
+  }
+  pushState(newState);
+
   tex->bind();
 
   // points
@@ -280,6 +319,7 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
     glTexCoordPointer(2,GL_FLOAT,0,texcoordsNormal);
     
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx);    
+  popState();
 }
 
 void Context::drawAABB(const lost::math::AABB& box)
