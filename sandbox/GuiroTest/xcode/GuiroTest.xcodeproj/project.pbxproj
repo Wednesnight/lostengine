@@ -24,9 +24,6 @@
 		3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */; };
 		3E485AD90ECD7512003AAEAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB60ECD73E5003AAEAB /* UIKit.framework */; };
 		3E485AE10ECD7528003AAEAB /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */; };
-		3E48F5AD0ED6DC79003CFD2F /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5AC0ED6DC79003CFD2F /* button.jpg */; };
-		3E48F5AE0ED6DC79003CFD2F /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5AC0ED6DC79003CFD2F /* button.jpg */; };
-		3E48F5AF0ED6DC79003CFD2F /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5AC0ED6DC79003CFD2F /* button.jpg */; };
 		3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
 		3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
 		3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
@@ -97,7 +94,6 @@
 		3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = /System/Library/Frameworks/OpenGLES.framework; sourceTree = "<absolute>"; };
 		3E485AB60ECD73E5003AAEAB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = /System/Library/Frameworks/UIKit.framework; sourceTree = "<absolute>"; };
 		3E485ADE0ECD7512003AAEAB /* GuiroTest-simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuiroTest-simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E48F5AC0ED6DC79003CFD2F /* button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = button.jpg; path = ../button.jpg; sourceTree = SOURCE_ROOT; };
 		3E48F5BD0ED6DD3D003CFD2F /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../button.png; sourceTree = SOURCE_ROOT; };
 		3E7706910EC1AC9000D0DA42 /* View.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = View.lua; sourceTree = "<group>"; };
 		3E7706BC0EC1AF5A00D0DA42 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserInterface.lua; sourceTree = "<group>"; };
@@ -204,7 +200,6 @@
 				3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */,
 				3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */,
 				3E7BF9520ED4CB890017AEBA /* stubs.jpg */,
-				3E48F5AC0ED6DC79003CFD2F /* button.jpg */,
 				3E48F5BD0ED6DD3D003CFD2F /* button.png */,
 			);
 			name = Resources;
@@ -446,7 +441,6 @@
 				3E485A610ECD729E003AAEAB /* init in Resources */,
 				3E485A620ECD729E003AAEAB /* screen in Resources */,
 				3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */,
-				3E48F5AD0ED6DC79003CFD2F /* button.jpg in Resources */,
 				3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +452,6 @@
 				3E485AD00ECD7512003AAEAB /* init in Resources */,
 				3E485AD10ECD7512003AAEAB /* screen in Resources */,
 				3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */,
-				3E48F5AF0ED6DC79003CFD2F /* button.jpg in Resources */,
 				3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +463,6 @@
 				3ED935CA0E4756B700AABFAB /* init in Resources */,
 				3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */,
 				3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */,
-				3E48F5AE0ED6DC79003CFD2F /* button.jpg in Resources */,
 				3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

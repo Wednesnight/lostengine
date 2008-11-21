@@ -5,11 +5,13 @@ guiro:Renderer
     
     if not self.texture then
       self.textureParams = lost.gl.Texture.Params()
-      self.textureParams.minFilter = gl.GL_LINEAR
-      self.textureParams.magFilter = gl.GL_LINEAR
+      self.textureParams.minFilter = image.filter
+      self.textureParams.magFilter = image.filter
       self.texture = lost.gl.Texture()
       self.texture:init(image.bitmap, self.textureParams)
     end
+    self.texture:bind()
+    self.texture:filter(image.filter)
 
     context:setColor(lost.common.Color(image.color.r, image.color.g, image.color.b, image.alpha))
     if image.cornerBounds then

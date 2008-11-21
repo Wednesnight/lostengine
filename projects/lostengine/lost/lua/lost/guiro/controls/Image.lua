@@ -16,4 +16,5 @@ lost.guiro.controls.Control:addBase(Image, "Image")
 function Image:__init() super()
   self.alpha = 1.0
   self.color = lost.common.Color(1,1,1)
+  self.filter = gl.GL_LINEAR
 end

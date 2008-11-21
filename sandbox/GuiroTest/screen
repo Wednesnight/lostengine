@@ -224,9 +224,9 @@ screen = guiro:Screen
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
             if event.value == screen("ui")("window")("slider2").min then
-              screen("ui")("window")("image").renderer.texture:filter(gl.GL_NEAREST)
+              screen("ui")("window")("image").filter = gl.GL_NEAREST
             elseif event.value == screen("ui")("window")("slider2").max then
-              screen("ui")("window")("image").renderer.texture:filter(gl.GL_LINEAR)
+              screen("ui")("window")("image").filter = gl.GL_LINEAR
             end
           end
         }
