@@ -10,6 +10,7 @@
 #include "lost/gl/Texture.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/lgl/lglu.h"
+#include "lost/gl/Mesh.h"
 
 using namespace lost::bitmap;
 
@@ -322,6 +323,32 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
   popState();
 }
 
+void Context::drawMesh2D(const boost::shared_ptr<Mesh2D>& mesh, GLenum mode)
+{
+  static boost::shared_ptr<State> newState;
+  if (!newState)
+  {
+    newState = copyState();
+    newState->alphaTest = false;
+    newState->depthTest = false;
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = true;
+    newState->normalArray = false;
+    newState->vertexArray = true;
+    newState->textureCoordArray = true;
+  }
+  pushState(newState);
+  mesh->texture->bind();
+  
+  glVertexPointer(2, GL_FLOAT, 0, mesh->vertices.get());
+  glTexCoordPointer(2, GL_FLOAT, 0, mesh->texcoords.get());
+  glDrawElements(mode, mesh->faceCount, GL_UNSIGNED_BYTE, mesh->faces.get());
+
+  popState();
+}
+  
 void Context::drawAABB(const lost::math::AABB& box)
 {
   drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z), math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z));    

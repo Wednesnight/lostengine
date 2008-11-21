@@ -1,7 +1,7 @@
 #ifndef LOST_LUA_LOSTAPPLICATIONKEYEVENT_H
 #define LOST_LUA_LOSTAPPLICATIONKEYEVENT_H
 
-#include "lost/forward/lost/lua/lua.h"
+#include "lost/forward/lost/lua"
 
 namespace lost
 {

@@ -11,16 +11,187 @@ screen = guiro:Screen
     guiro:Window
     {
       id = "window",
-      bounds = lost.math.Rect(100, 180, 400, 300),
-      style = guiro:StyleFromFile("lost/guiro/styles/default/Window.lua"),
-      renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Window.lua"),
+      bounds = lost.math.Rect(200, 150, 400, 300),
 
       guiro:Button
       {
         id = "button",
         bounds = lost.math.Rect(340, 10, 50, 25),
-        style = guiro:StyleFromFile("lost/guiro/styles/default/Button.lua"),
-        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Button.lua")
+        fadeStates = true,
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 50, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          hovered = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 50, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          pressed = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 50, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          }
+        }
+      },
+
+      guiro:Button
+      {
+        bounds = lost.math.Rect(290, 40, 100, 50),
+        fadeStates = true,
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 50),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          hovered = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 50),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          pressed = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 50),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          }
+        }
+      },
+
+      guiro:Button
+      {
+        bounds = lost.math.Rect(290, 95, 100, 25),
+        fadeStates = true,
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          hovered = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          pressed = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 100, 25),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          }
+        }
+      },
+
+      guiro:Button
+      {
+        bounds = lost.math.Rect(240, 125, 150, 75),
+        fadeStates = true,
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 150, 75),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          hovered = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 150, 75),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          },
+          pressed = guiro:Image
+          {
+            bounds = lost.math.Rect(0, 0, 150, 75),
+            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
+            cornerBounds =
+            {
+              left = 5,
+              right = 5,
+              top = 5,
+              bottom = 5
+            }
+          }
+        }
       },
 
       guiro:Slider
@@ -32,8 +203,6 @@ screen = guiro:Screen
         max = 1,
         steps = 0,
         value = 1,
-        style = guiro:StyleFromFile("lost/guiro/styles/default/Slider.lua"),
-        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Slider.lua"),
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
@@ -51,8 +220,6 @@ screen = guiro:Screen
         max = 1,
         steps = 1,
         value = 1,
-        style = guiro:StyleFromFile("lost/guiro/styles/default/Slider.lua"),
-        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Slider.lua"),
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
@@ -68,10 +235,8 @@ screen = guiro:Screen
       guiro:Image
       {
         id = "image",
-        bounds = lost.math.Rect(50, 25, 250, 200),
+        bounds = lost.math.Rect(50, 25, 200, 200),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
-        style = guiro:StyleFromFile("lost/guiro/styles/default/Image.lua"),
-        renderer = guiro:RendererFromFile("lost/guiro/renderer/default/Image.lua"),
         listeners =
         {
           [lost.application.MouseEvent.MOUSE_DOWN] = function(event)

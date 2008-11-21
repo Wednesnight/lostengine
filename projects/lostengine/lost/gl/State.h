@@ -1,7 +1,7 @@
 #ifndef LOST_GL_STATE_H
 #define LOST_GL_STATE_H
 
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include "lost/gl/gl.h"
 #include "lost/common/Color.h"
 

@@ -1,7 +1,7 @@
 #ifndef LOST_EVENT_EVENTDISPATCHER_H
 #define LOST_EVENT_EVENTDISPATCHER_H
 
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
 #include "lost/event/Event.h"

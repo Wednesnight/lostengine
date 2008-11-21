@@ -1,8 +1,7 @@
 #ifndef LOST_LUA_MODULELOADER_H
 #define LOST_LUA_MODULELOADER_H
 
-#include "lost/forward/lost/lua/lua.h"
-#include "lost/forward/lost/lua/State.h"
+#include "lost/forward/lost/lua"
 #include "lost/resource/Loader.h"
 
 namespace lost

@@ -38,6 +38,7 @@
 #include "lost/lua/bindings/LostGLState.h"
 #include "lost/lua/bindings/LostGLFrameBuffer.h"
 #include "lost/lua/bindings/LostGLTexture.h"
+#include "lost/lua/bindings/LostGLMesh.h"
 
 namespace lost
 {
@@ -82,6 +83,7 @@ namespace lost
       LostGLState(state);
       LostGLFrameBuffer(state);
       LostGLTexture(state);
+      LostGLMesh(state);
       
       luabind::bind_class_info(state);
     }

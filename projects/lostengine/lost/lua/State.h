@@ -2,7 +2,7 @@
 #define LOST_LUA_STATE_H
 
 #include "lost/lua/lua.h"
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include <string>
 #include <map>
 #include "lost/resource/File.h"

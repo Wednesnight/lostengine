@@ -2,7 +2,7 @@
 #define LOST_APPLICATION_TIMER_H
 
 #include <string>
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/TimerEvent.h"
 

@@ -10,6 +10,6 @@ function Loader:RendererFromFile(filename)
   local result
   local guiro = self
   guiro.Renderer = function(self, table) result = table end
-  self:executeScript(filename, {guiro = guiro, lost = lost, math = math, log = log, gl = gl})
+  self:executeScript(filename, {guiro = guiro, lost = lost, math = math, log = log, gl = gl, tostring = tostring})
   return result
 end

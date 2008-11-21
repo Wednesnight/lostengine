@@ -1,7 +1,7 @@
 #ifndef LOST_EVENT_RECEIVE_H
 #define LOST_EVENT_RECEIVE_H
 
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include <boost/function.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>

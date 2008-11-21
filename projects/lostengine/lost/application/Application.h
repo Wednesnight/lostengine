@@ -1,7 +1,7 @@
 #ifndef LOST_APPLICATION_APPLICATION
 #define LOST_APPLICATION_APPLICATION
 
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/lua/State.h"

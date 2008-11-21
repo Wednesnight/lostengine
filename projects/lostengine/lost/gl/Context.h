@@ -4,9 +4,10 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "lost/gl/State.h"
+#include "lost/gl/Mesh.h"
 
 namespace lost { namespace common{ struct DisplayAttributes;}}
-namespace lost { namespace gl{ struct State;}}
+namespace lost { namespace gl{ struct State; }}
 namespace lost{ namespace math{ struct Vec3; struct Vec2;  struct AABB; struct Rect;} }
 namespace common{ struct Color; };
 
@@ -66,6 +67,9 @@ namespace lost
       void drawRectTextured(const lost::math::Rect& rect,
                                    boost::shared_ptr<const lost::gl::Texture> tex,
                                    bool flip=true);
+
+      void drawMesh2D(const boost::shared_ptr<lost::gl::Mesh2D>& mesh, GLenum mode);
+
       void drawAABB(const lost::math::AABB& box);
       void drawAxes(const lost::math::Vec3& length);  
 
