@@ -81,13 +81,13 @@ screen = guiro:Screen
           {
             bounds = lost.math.Rect(0, 0, 100, 50),
             bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            cornerBounds =
-            {
-              left = 5,
-              right = 5,
-              top = 5,
-              bottom = 5
-            }
+--            cornerBounds =
+--            {
+--              left = 5,
+--              right = 5,
+--              top = 5,
+--              bottom = 5
+--            }
           },
           pressed = guiro:Image
           {
@@ -126,13 +126,14 @@ screen = guiro:Screen
           {
             bounds = lost.math.Rect(0, 0, 100, 25),
             bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            cornerBounds =
-            {
-              left = 5,
-              right = 5,
-              top = 5,
-              bottom = 5
-            }
+            stretch = true,
+--            cornerBounds =
+--            {
+--              left = 5,
+--              right = 5,
+--              top = 5,
+--              bottom = 5
+--            }
           },
           pressed = guiro:Image
           {
@@ -171,13 +172,13 @@ screen = guiro:Screen
           {
             bounds = lost.math.Rect(0, 0, 150, 75),
             bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            cornerBounds =
-            {
-              left = 5,
-              right = 5,
-              top = 5,
-              bottom = 5
-            }
+--            cornerBounds =
+--            {
+--              left = 5,
+--              right = 5,
+--              top = 5,
+--              bottom = 5
+--            }
           },
           pressed = guiro:Image
           {
