@@ -1,0 +1,10 @@
+#ifndef LOST_FORWARD_BOOST_H
+#define LOST_FORWARD_BOOST_H
+
+namespace boost
+{
+  template <class T> class shared_ptr;
+  template <class T> class shared_array;
+}
+
+#endif

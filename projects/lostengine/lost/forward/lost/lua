@@ -1,0 +1,14 @@
+#ifndef LOST_FORWARD_LOST_LUA_H
+#define LOST_FORWARD_LOST_LUA_H
+
+struct lua_State;
+
+namespace lost
+{
+  namespace lua
+  {
+    struct State;
+  }
+}
+
+#endif
