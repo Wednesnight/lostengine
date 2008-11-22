@@ -37,6 +37,7 @@
 		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
 		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
 		EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4C0DD87EE200552F5E /* Carbon.framework */; };
+		EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EA27DE4C0DD87EE200552F5E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EACFE1220ED8AD5300F9459E /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EACFE1220ED8AD5300F9459E /* Vera.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */,
 				3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */,
@@ -464,6 +467,7 @@
 				3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */,
 				3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */,
 				3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */,
+				EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

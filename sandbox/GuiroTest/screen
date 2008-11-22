@@ -1,3 +1,6 @@
+ftlib = lost.font.freetype.Library.create()
+defaultFont = lost.font.TrueTypeFont.create(ftlib, guiro:File("Vera.ttf"))
+
 screen = guiro:Screen
 {
   id = "screen",
@@ -254,7 +257,9 @@ screen = guiro:Screen
       {
         id="label",
         bounds = lost.math.Rect(0,0,100,30),
-        text="Hello World!"
+        text="Hello World!",
+        font = defaultFont,
+        fontSize = 16
       }
     }
   }

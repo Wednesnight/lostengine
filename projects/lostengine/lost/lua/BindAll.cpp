@@ -41,6 +41,7 @@
 #include "lost/lua/bindings/LostGLMesh.h"
 #include "lost/lua/bindings/LostFontTrueTypeFont.h"
 #include "lost/lua/bindings/LostFontModel.h"
+#include "lost/lua/bindings/LostFontFreetypeLibrary.h"
 
 namespace lost
 {
@@ -88,6 +89,7 @@ namespace lost
       LostGLMesh(state);
       LostFontTrueTypeFont(state);
       LostFontModel(state);
+      LostFontFreetypeLibrary(state);
       
       luabind::bind_class_info(state);
     }

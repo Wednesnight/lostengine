@@ -31,7 +31,8 @@ namespace lost
        def("glViewport", &glViewport),
        def("glLineWidth", &glLineWidth),
        def("glPushAttrib", &glPushAttrib),
-       def("glPopAttrib", &glPopAttrib)
+       def("glPopAttrib", &glPopAttrib),
+       def("glTranslate", &glTranslatef)
        ];
 
       globals(state)["gl"]["GL_CLAMP"] = GL_CLAMP;
@@ -57,6 +58,7 @@ namespace lost
       globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
       globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
       globals(state)["gl"]["GL_VIEWPORT_BIT"] = GL_VIEWPORT_BIT;
+      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
     }
   }
 }

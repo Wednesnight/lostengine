@@ -662,6 +662,12 @@
 		EACFE0AB0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
 		EACFE0AC0ED8A09B00F9459E /* LostFontModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE0A00ED8A09B00F9459E /* LostFontModel.h */; };
 		EACFE0AD0ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
+		EACFE10B0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */; };
+		EACFE10C0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE10A0ED8A90100F9459E /* LostFontFreetypeLibrary.h */; };
+		EACFE10D0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */; };
+		EACFE10E0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE10A0ED8A90100F9459E /* LostFontFreetypeLibrary.h */; };
+		EACFE10F0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */; };
+		EACFE1100ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE10A0ED8A90100F9459E /* LostFontFreetypeLibrary.h */; };
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
@@ -1198,6 +1204,8 @@
 		EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontTrueTypeFont.cpp; path = bindings/LostFontTrueTypeFont.cpp; sourceTree = "<group>"; };
 		EACFE0A00ED8A09B00F9459E /* LostFontModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostFontModel.h; path = bindings/LostFontModel.h; sourceTree = "<group>"; };
 		EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontModel.cpp; path = bindings/LostFontModel.cpp; sourceTree = "<group>"; };
+		EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontFreetypeLibrary.cpp; path = bindings/LostFontFreetypeLibrary.cpp; sourceTree = "<group>"; };
+		EACFE10A0ED8A90100F9459E /* LostFontFreetypeLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostFontFreetypeLibrary.h; path = bindings/LostFontFreetypeLibrary.h; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
@@ -1887,6 +1895,8 @@
 				EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */,
 				3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */,
 				EA7BE1220E6F38A10017B031 /* LostEventEventDispatcher.cpp */,
+				EACFE10A0ED8A90100F9459E /* LostFontFreetypeLibrary.h */,
+				EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */,
 				EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */,
 				EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */,
 				EACFE0A00ED8A09B00F9459E /* LostFontModel.h */,
@@ -2086,6 +2096,7 @@
 				3E48F4F90ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
 				EACFE0AA0ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0AC0ED8A09B00F9459E /* LostFontModel.h in Headers */,
+				EACFE1100ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2230,6 +2241,7 @@
 				3E48F4F70ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
 				EACFE0A20ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0A40ED8A09B00F9459E /* LostFontModel.h in Headers */,
+				EACFE10C0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2375,6 +2387,7 @@
 				3E48F4F50ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
 				EACFE0A60ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0A80ED8A09B00F9459E /* LostFontModel.h in Headers */,
+				EACFE10E0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2721,6 +2734,7 @@
 				3E48F4FA0ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
 				EACFE0AB0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0AD0ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
+				EACFE10F0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2809,6 +2823,7 @@
 				3E48F4F80ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
 				EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
+				EACFE10B0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2896,6 +2911,7 @@
 				3E48F4F60ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
 				EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0A90ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
+				EACFE10D0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

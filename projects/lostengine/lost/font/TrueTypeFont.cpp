@@ -86,10 +86,21 @@ void TrueTypeFont::rebuildTextureAtlas()
   lost::bitmap::Packer::Result  packerResult;
 
   std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > characterBitmaps;
+  std::vector<uint32_t> glyphIndex; // because we might not use all bitmaps, need to preserve the original indices of the glyphs
   std::vector<boost::shared_ptr<Glyph> >::iterator i;
+  uint32_t counter = 0;
   for(i=glyphs.begin(); i!=glyphs.end(); ++i)
   {
-    characterBitmaps.push_back((*i)->bitmap);
+    // only use bitmaps that have width and height != 0
+    // spaces might be rendered as 0/0 bitmaps, but have a valid advance value
+    // that we need to render the string correctly.
+    shared_ptr<Bitmap> bmp = (*i)->bitmap;
+    if((bmp->width != 0) && (bmp->height != 0))
+    {
+      characterBitmaps.push_back(bmp);
+      glyphIndex.push_back(counter);
+    }
+    counter++;
   }
 
   bitmap::Packer bitmapPacker;
@@ -112,7 +123,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   // the rects are reordered in the result, but the bitmapids are preserved in the vector of the same name
   for(uint32_t j=0; j<packerResult.rects.size(); ++j)
   {
-    glyphs[packerResult.bitmapIds[j]]->rect = packerResult.rects[j];
+    glyphs[glyphIndex[packerResult.bitmapIds[j]]]->rect = packerResult.rects[j];
   }
   
   // recalculate glyph texture coords
@@ -197,6 +208,7 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
 shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
                                        uint32_t inSizeInPoints)
 {
+  DOUT("rendering "<<inText<<" with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   shared_ptr<Model>  result(new Model);
   
   // render glyphs if required

@@ -52,7 +52,7 @@ void Controller::init(shared_ptr<Event> event)
   ttf.reset(new TrueTypeFont(ftlib, file));  
     ttf->atlasSize = Vec2(128,128);
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
-  string text ="Hoschi!gnjVAfiglrby";
+  string text ="Hoschi!gnj   VAfiglrby";
   renderedText1 = ttf->render(text, 16);
   DOUT("16pt string size: "<<renderedText1->size);
   renderedText2 = ttf->render(text, 24);

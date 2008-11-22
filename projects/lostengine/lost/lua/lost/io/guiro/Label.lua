@@ -15,5 +15,11 @@ function Loader:Label(definition)
     definition.renderer = self:RendererFromFile("lost/guiro/renderer/default/Label.lua")
   end
 
-  return self:applyDefinitionToView(lost.guiro.controls.Image(), definition)
+  label = self:applyDefinitionToView(lost.guiro.controls.Label(), definition)
+	if definition.text then
+		log.debug("SETTING TEXT");
+		label:setText(definition.text) -- renders the text 
+	end
+	
+	return label
 end

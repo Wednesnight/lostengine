@@ -17,3 +17,8 @@ function Label:__init() super()
   self.alpha = 1.0
   self.color = lost.common.Color(1,1,1)
 end
+
+function Label:setText(txt)
+	self.text = txt
+	self.renderedText = self.font:render(self.text, self.fontSize)
+end
