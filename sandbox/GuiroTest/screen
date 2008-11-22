@@ -248,6 +248,13 @@ screen = guiro:Screen
           end
 
         }
+      },
+      
+      guiro:Label
+      {
+        id="label",
+        bounds = lost.math.Rect(0,0,100,30),
+        text="Hello World!"
       }
     }
   }
