@@ -39,6 +39,8 @@
 #include "lost/lua/bindings/LostGLFrameBuffer.h"
 #include "lost/lua/bindings/LostGLTexture.h"
 #include "lost/lua/bindings/LostGLMesh.h"
+#include "lost/lua/bindings/LostFontTrueTypeFont.h"
+#include "lost/lua/bindings/LostFontModel.h"
 
 namespace lost
 {
@@ -84,6 +86,8 @@ namespace lost
       LostGLFrameBuffer(state);
       LostGLTexture(state);
       LostGLMesh(state);
+      LostFontTrueTypeFont(state);
+      LostFontModel(state);
       
       luabind::bind_class_info(state);
     }

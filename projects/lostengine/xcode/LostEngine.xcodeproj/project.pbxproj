@@ -650,6 +650,18 @@
 		EAAF984A0E15DB9100B28BF6 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
 		EAB343170E4F3A6400C89299 /* AccelerometerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */; };
 		EAB343190E4F3A6C00C89299 /* TouchEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB343180E4F3A6C00C89299 /* TouchEvent.h */; };
+		EACFE0A20ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */; };
+		EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
+		EACFE0A40ED8A09B00F9459E /* LostFontModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE0A00ED8A09B00F9459E /* LostFontModel.h */; };
+		EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
+		EACFE0A60ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */; };
+		EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
+		EACFE0A80ED8A09B00F9459E /* LostFontModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE0A00ED8A09B00F9459E /* LostFontModel.h */; };
+		EACFE0A90ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
+		EACFE0AA0ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */; };
+		EACFE0AB0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
+		EACFE0AC0ED8A09B00F9459E /* LostFontModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EACFE0A00ED8A09B00F9459E /* LostFontModel.h */; };
+		EACFE0AD0ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
@@ -1182,6 +1194,10 @@
 		EAAF98480E15DB9100B28BF6 /* TimerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerEvent.h; sourceTree = "<group>"; };
 		EAB343160E4F3A6400C89299 /* AccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerEvent.h; sourceTree = "<group>"; };
 		EAB343180E4F3A6C00C89299 /* TouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchEvent.h; sourceTree = "<group>"; };
+		EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostFontTrueTypeFont.h; path = bindings/LostFontTrueTypeFont.h; sourceTree = "<group>"; };
+		EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontTrueTypeFont.cpp; path = bindings/LostFontTrueTypeFont.cpp; sourceTree = "<group>"; };
+		EACFE0A00ED8A09B00F9459E /* LostFontModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostFontModel.h; path = bindings/LostFontModel.h; sourceTree = "<group>"; };
+		EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontModel.cpp; path = bindings/LostFontModel.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
@@ -1871,6 +1887,10 @@
 				EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */,
 				3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */,
 				EA7BE1220E6F38A10017B031 /* LostEventEventDispatcher.cpp */,
+				EACFE09E0ED8A09B00F9459E /* LostFontTrueTypeFont.h */,
+				EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */,
+				EACFE0A00ED8A09B00F9459E /* LostFontModel.h */,
+				EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */,
 				3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */,
 				3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */,
 				EA7BE2500E6F45380017B031 /* LostGLDraw.h */,
@@ -2064,6 +2084,8 @@
 				3E48F4870ED6A42E003CFD2F /* gl in Headers */,
 				3E48F4AB0ED6A806003CFD2F /* math in Headers */,
 				3E48F4F90ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
+				EACFE0AA0ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
+				EACFE0AC0ED8A09B00F9459E /* LostFontModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2206,6 +2228,8 @@
 				3E48F4860ED6A42E003CFD2F /* gl in Headers */,
 				3E48F4AA0ED6A806003CFD2F /* math in Headers */,
 				3E48F4F70ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
+				EACFE0A20ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
+				EACFE0A40ED8A09B00F9459E /* LostFontModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2349,6 +2373,8 @@
 				3E48F4850ED6A42E003CFD2F /* gl in Headers */,
 				3E48F4A90ED6A806003CFD2F /* math in Headers */,
 				3E48F4F50ED6AD60003CFD2F /* LostGLMesh.h in Headers */,
+				EACFE0A60ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
+				EACFE0A80ED8A09B00F9459E /* LostFontModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2693,6 +2719,8 @@
 				3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				3E48F4FA0ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
+				EACFE0AB0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
+				EACFE0AD0ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2779,6 +2807,8 @@
 				3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				3E48F4F80ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
+				EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
+				EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2864,6 +2894,8 @@
 				3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				3E48F4F60ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
+				EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
+				EACFE0A90ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
