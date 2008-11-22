@@ -1,5 +1,4 @@
-ftlib = lost.font.freetype.Library.create()
-defaultFont = lost.font.TrueTypeFont.create(ftlib, guiro:File("Vera.ttf"))
+defaultFont = guiro:Font("Vera.ttf")
 
 screen = guiro:Screen
 {
