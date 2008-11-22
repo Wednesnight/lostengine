@@ -111,8 +111,7 @@ bool RectPacker::pack(int32_t sourceRectId)
     DOUT("rejecting degenerate rect");
     return false;
   }
-
-  DOUT("------------------ "<<sourceRectId<<" "<<currentSourceRect.rect);
+//  DOUT("------------------ "<<sourceRectId<<" "<<currentSourceRect.rect);
 
 
   // loop while we haven't found a match and still have space
@@ -158,7 +157,7 @@ bool RectPacker::pack(int32_t sourceRectId)
       }
     }
   }  
-  DOUT("iterations: "<<iterations<<" nodes: "<<nodes.size());
+//  DOUT("iterations: "<<iterations<<" nodes: "<<nodes.size());
   sumIter += iterations;
   sumNodes += nodes.size();
   return foundNode;

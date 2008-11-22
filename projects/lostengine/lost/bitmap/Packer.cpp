@@ -55,7 +55,6 @@ void Packer::pack(Packer::Result& outResult,
       Rect r = rectPacker.nodes[i].rect;
       shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
       bmp->draw(r.x, r.y, outResult.packedBitmap);
-      DOUT("drawing "<<r);
     }
   }
 }
@@ -70,7 +69,6 @@ void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
   {
     outRects.push_back(Rect(0,0,inBitmaps[i]->width, inBitmaps[i]->height));
   }
-  DOUT("created "<<inBitmaps.size()<<" rects");
 }
   
   
