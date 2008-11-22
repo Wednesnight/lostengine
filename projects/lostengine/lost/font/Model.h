@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
+#include "lost/math/Vec2.h"
 
 namespace lost
 {
@@ -27,6 +28,7 @@ struct Model
   boost::shared_array<uint8_t>  indices;
   boost::shared_ptr<gl::State>  renderState;
   boost::shared_ptr<gl::Texture>  texture;
+  lost::math::Vec2              size; // width and height in pixel of the rendered string. baseline is at y=0
 };
 
 }

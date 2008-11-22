@@ -54,9 +54,11 @@ void Controller::init(shared_ptr<Event> event)
   fontSize = appInstance->config["fontSize"].as<uint32_t>();
   string text ="Hoschi!gnjVAfiglrby";
   renderedText1 = ttf->render(text, 16);
+  DOUT("16pt string size: "<<renderedText1->size);
   renderedText2 = ttf->render(text, 24);
+  DOUT("24pt string size: "<<renderedText2->size);
   renderedText3 = ttf->render(text, 32);
-    
+  DOUT("32pt string size: "<<renderedText3->size);    
 }
 
 void Controller::keyboard( shared_ptr<KeyEvent> event )

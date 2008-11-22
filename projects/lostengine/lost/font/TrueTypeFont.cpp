@@ -146,11 +146,19 @@ void TrueTypeFont::resetModel(boost::shared_ptr<Model> model, uint32_t numChars)
 void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
                             uint32_t index,
                             shared_ptr<Glyph> glyph,
-                            float xoffset)
+                            float xoffset,
+                            lost::math::Vec2& pmin,
+                            lost::math::Vec2& pmax)
 {
   Rect tr = glyph->rect; 
   tr.x = xoffset+glyph->xoffset;
   tr.y = glyph->yoffset;
+  
+  pmin.x = min(pmin.x, tr.x);
+  pmin.y = min(pmin.y, tr.y);
+
+  pmax.x = max(pmax.x, tr.maxX());
+  pmax.y = max(pmax.y, tr.maxY());
   
   uint32_t indicesPerChar = 6; // 2 tris a 3 points
   uint32_t indexOffset = indicesPerChar*index;
@@ -214,6 +222,8 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   previousGlyphIndex = 0;
   FT_Vector kerningDelta;
   
+  // size calculation 
+  Vec2 pmin, pmax; 
   for(int i=0; i<numChars; ++i)
   {
     char c = inText[i];
@@ -228,10 +238,11 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     }
     
     shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
-    addGlyph(result, i, glyph, xoffset);
+    addGlyph(result, i, glyph, xoffset, pmin, pmax);
     xoffset+=glyph->advance;
   }
-    
+  result->size.width = (pmax.x-pmin.x)+1;  
+  result->size.height = (pmax.y-pmin.y)+1;  
   return result;
 }
 

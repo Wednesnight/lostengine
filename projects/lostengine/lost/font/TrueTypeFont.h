@@ -82,7 +82,9 @@ struct TrueTypeFont
   void addGlyph(boost::shared_ptr<Model> model,
                               uint32_t index,
                 boost::shared_ptr<Glyph> glyph,
-                float xoffset);
+                float xoffset,
+                lost::math::Vec2& pmin,
+                lost::math::Vec2& pmax);
   
   boost::shared_ptr<freetype::Face> face;
   boost::shared_ptr<freetype::Library> library;
