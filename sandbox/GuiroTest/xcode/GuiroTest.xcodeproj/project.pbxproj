@@ -11,6 +11,9 @@
 		3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
 		3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
 		3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
+		3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
+		3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
+		3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
 		3E485A610ECD729E003AAEAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3E485A620ECD729E003AAEAB /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
 		3E485A640ECD729E003AAEAB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
@@ -91,6 +94,7 @@
 /* Begin PBXFileReference section */
 		3E1EE3FC0ECC7CA400E86C94 /* screen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screen; path = ../screen; sourceTree = SOURCE_ROOT; };
 		3E2C5C4D0EDB097300BA9626 /* explosion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = explosion.jpg; path = ../explosion.jpg; sourceTree = SOURCE_ROOT; };
+		3E2C5C680EDB13C100BA9626 /* fugly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fugly.png; path = ../fugly.png; sourceTree = SOURCE_ROOT; };
 		3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iphone.plist"; sourceTree = "<group>"; };
 		3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-simulator.plist"; sourceTree = "<group>"; };
 		3E485A6F0ECD729E003AAEAB /* GuiroTest-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuiroTest-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +213,7 @@
 				3E7BF9520ED4CB890017AEBA /* stubs.jpg */,
 				3E48F5BD0ED6DD3D003CFD2F /* button.png */,
 				3E2C5C4D0EDB097300BA9626 /* explosion.jpg */,
+				3E2C5C680EDB13C100BA9626 /* fugly.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */,
 				3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */,
 				3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +469,7 @@
 				3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */,
 				3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */,
 				3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +483,7 @@
 				3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */,
 				EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */,
 				3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

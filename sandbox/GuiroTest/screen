@@ -185,11 +185,11 @@ screen = guiro:Screen
 
       guiro:AnimatedImage
       {
-        id = "explosion",
+        id = "fugly",
         bounds = lost.math.Rect(240, 185, 80, 80),
-        bitmap = lost.bitmap.Bitmap(guiro:File("explosion.jpg")),
-        frameSize = lost.math.Rect(0,0,80,80),
-        interval = 0.02
+        bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
+        frameSize = lost.math.Rect(0,0,153,184),
+        interval = 0.1
       },
       
       guiro:Slider
