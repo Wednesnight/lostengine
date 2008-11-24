@@ -88,12 +88,13 @@ function lost.application.Application:renderHandler(event)
   self.context:pushState(self.renderState)
   self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
 
-  controls.screen:render(self.context)
-
   self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
 
+  controls.screen:render(self.context)
+
+  gl.glLoadIdentity()
   controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
 
   self.context:popState()

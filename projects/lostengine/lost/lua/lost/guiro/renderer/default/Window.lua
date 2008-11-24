@@ -12,6 +12,9 @@ guiro:Renderer
                                           window.header.height))
 
     if window.label then
+      if not window.label.parent then
+        window.label:setParent(window)
+      end
       window.label.color = style.header.fontColor
       window.label.renderer:render(context, window.label, window.label.style)
     end

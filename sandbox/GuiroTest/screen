@@ -18,13 +18,13 @@ screen = guiro:Screen
       {
         height = 25
       },
---      label = guiro:Label
---      {
---        bounds = lost.math.Rect(5,282,390,25),
---        text = "Funky window",
---        font = defaultFont,
---        fontSize = 12
---      },
+      label = guiro:Label
+      {
+        bounds = lost.math.Rect(5,282,390,25),
+        text = "Funky window",
+        font = defaultFont,
+        fontSize = 12
+      },
 
       guiro:Button
       {

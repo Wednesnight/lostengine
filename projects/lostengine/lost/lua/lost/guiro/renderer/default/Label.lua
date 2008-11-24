@@ -5,7 +5,7 @@ guiro:Renderer
 		--context:drawRectFilled(label:globalRect())
 		gl.glMatrixMode(gl.GL_MODELVIEW)
 		gl.glLoadIdentity()
-		gr = label:globalRect()
+		local gr = label:globalRect()
 		gl.glTranslate(gr.x, gr.y, 0)
 		label.renderedText:render(context)
 		gl.glLoadIdentity()

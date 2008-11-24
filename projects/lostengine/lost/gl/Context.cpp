@@ -167,6 +167,10 @@ void Context::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& en
   if (!newState)
   {
     newState = copyState();
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = false;
     newState->vertexArray = true;
   }
   pushState(newState);
@@ -189,6 +193,10 @@ void Context::drawLine(const lost::math::Vec3& start, const lost::math::Vec3& en
   if (!newState)
   {
     newState = copyState();
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = false;
     newState->vertexArray = true;
   }
   pushState(newState);
@@ -218,6 +226,10 @@ void Context::drawPoint(const lost::math::Vec2& point)
   if (!newState)
   {
     newState = copyState();
+    newState->blend = true;
+    newState->blendSrc = GL_SRC_ALPHA;
+    newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = false;
     newState->vertexArray = true;
   }
   pushState(newState);
@@ -248,6 +260,7 @@ void Context::drawRectFilled(const lost::math::Rect& rect)
     newState->blend = true;
     newState->blendSrc = GL_SRC_ALPHA;
     newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+    newState->texture2D = false;
     newState->vertexArray = true;
   }
   pushState(newState);

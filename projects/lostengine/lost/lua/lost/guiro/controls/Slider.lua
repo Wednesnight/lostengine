@@ -3,6 +3,7 @@ module("lost.guiro.controls", package.seeall)
 --[[
      Slider control
   ]]
+require("lost.guiro.View")
 require("lost.guiro.controls.Control")
 require("lost.guiro.controls.Button")
 
@@ -48,10 +49,18 @@ function Slider:__init() super()
   self.button.bounds = lost.math.Rect(0,0,25,25)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
-  self:appendChild(self.button)
+  self.button:setParent(self)
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleInput(event) end)
   self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:handleInput(event) end)
+end
+
+--[[
+    forward to button
+  ]]
+function Slider:dispatchEvent(event)
+  self.button:dispatchEvent(event)
+  lost.guiro.View.dispatchEvent(self, event)
 end
 
 function Slider:handleInput(event)

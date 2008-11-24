@@ -35,6 +35,7 @@ namespace lost
         renderState->blend = true;
         renderState->blendSrc = GL_SRC_ALPHA;
         renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+        renderState->texture2D = false;
         renderState->vertexArray = true;
       }
 

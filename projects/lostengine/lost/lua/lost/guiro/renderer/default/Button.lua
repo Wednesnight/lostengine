@@ -34,6 +34,9 @@ guiro:Renderer
     end
 
     if button.label then
+      if not button.label.parent then
+        button.label:setParent(button)
+      end
       button.label.color = self.fontColor
       button.label.renderer:render(context, button.label, button.label.style)
     end

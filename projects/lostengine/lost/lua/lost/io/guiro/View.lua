@@ -42,8 +42,7 @@ function Loader:applyDefinitionToView(view, definition)
   -- apply children
   if (view and definition) then
     for name,object in next,definition do
-      if (type(object) == "userdata" and object.isView) then
-        local info = class_info(object)
+      if (type(name) == "number" and type(object) == "userdata" and object.isView) then
         view:appendChild(object)
       end
     end
