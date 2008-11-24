@@ -65,6 +65,13 @@ namespace lost
       // requires vertex arrays, texture arrays, index arrays
       // FIXME: needs serious optimisation/rethinking, but at least it works
       void drawRectTextured(const lost::math::Rect& rect,
+                            boost::shared_ptr<const lost::gl::Texture> tex,
+                            const lost::math::Vec2& bottomLeft,
+                            const lost::math::Vec2& bottomRight,
+                            const lost::math::Vec2& topLeft,
+                            const lost::math::Vec2& topRight,
+                            bool flip=true);
+      void drawRectTextured(const lost::math::Rect& rect,
                                    boost::shared_ptr<const lost::gl::Texture> tex,
                                    bool flip=true);
 

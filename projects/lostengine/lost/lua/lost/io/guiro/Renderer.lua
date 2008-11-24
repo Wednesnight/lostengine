@@ -11,7 +11,7 @@ function Loader:RendererFromFile(filename)
   local result
   local guiro = self
   guiro.Renderer = function(self, definition) result = self:applyDefinitionToRenderer(lost.guiro.renderer.Renderer(), definition) end
-  self:executeScript(filename, {guiro = guiro, lost = lost, math = math, log = log, gl = gl, tostring = tostring})
+  self:executeScript(filename, {guiro = guiro, lost = lost, math = math, log = log, gl = gl, tostring = tostring, os = os, print = print})
   return result
 end
 

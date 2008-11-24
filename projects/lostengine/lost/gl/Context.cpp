@@ -13,6 +13,7 @@
 #include "lost/gl/Mesh.h"
 
 using namespace lost::bitmap;
+using namespace lost::math;
 
 namespace lost
 {
@@ -285,8 +286,12 @@ void Context::drawRectFilled(const lost::math::Rect& rect)
 // requires vertex arrays, texture arrays, index arrays
 // FIXME: needs serious optimisation/rethinking, but at least it works
 void Context::drawRectTextured(const lost::math::Rect& rect,
-                             boost::shared_ptr<const lost::gl::Texture> tex,
-                             bool flip)
+                               boost::shared_ptr<const lost::gl::Texture> tex,
+                               const lost::math::Vec2& bottomLeft,
+                               const lost::math::Vec2& bottomRight,
+                               const lost::math::Vec2& topLeft,
+                               const lost::math::Vec2& topRight,
+                               bool flip)
 {
   static boost::shared_ptr<State> newState;
   if (!newState)
@@ -304,25 +309,19 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
     newState->textureCoordArray = true;
   }
   pushState(newState);
-
+  
   tex->bind();
-
+  
   // points
   lost::math::Vec2 bl(rect.x, rect.y);
   lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
   lost::math::Vec2 tr(rect.x+rect.width-1, rect.y+rect.height-1);
   lost::math::Vec2 tl(rect.x, rect.y+rect.height-1);
   
-  // texcoords
-  lost::math::Vec2 tbl(0,0);
-  lost::math::Vec2 tbr(1,0);
-  lost::math::Vec2 ttr(1,1);
-  lost::math::Vec2 ttl(0,1);
-
   // build arrays
   float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
-  float texcoordsNormal[] = {tbl.x, tbl.y, tbr.x, tbr.y, ttr.x, ttr.y, ttl.x, ttl.y};
-  float texcoordsFlipped[] = {ttl.x, ttl.y, ttr.x, ttr.y, tbr.x, tbr.y, tbl.x, tbl.y};
+  float texcoordsNormal[] = {bottomLeft.x, bottomLeft.y, bottomRight.x, bottomRight.y, topRight.x, topRight.y, topLeft.x, topLeft.y};
+  float texcoordsFlipped[] = {topLeft.x, topLeft.y, topRight.x, topRight.y, bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y};
   // indices for 2 triangles, first upper left, then lower right
   GLubyte idx[] = {0,2,3,0,1,2};
   
@@ -331,9 +330,16 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
     glTexCoordPointer(2,GL_FLOAT,0,texcoordsFlipped);
   else
     glTexCoordPointer(2,GL_FLOAT,0,texcoordsNormal);
-    
+  
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx);    
   popState();
+}
+
+void Context::drawRectTextured(const lost::math::Rect& rect,
+                               boost::shared_ptr<const lost::gl::Texture> tex,
+                               bool flip)
+{
+  drawRectTextured(rect, tex, Vec2(0,0), Vec2(1,0), Vec2(0,1), Vec2(1,1), flip);
 }
 
 void Context::drawMesh2D(const boost::shared_ptr<Mesh2D>& mesh, GLenum mode)

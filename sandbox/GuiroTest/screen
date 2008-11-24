@@ -133,60 +133,7 @@ screen = guiro:Screen
 
       guiro:Button
       {
-        bounds = lost.math.Rect(290, 95, 100, 25),
-        fadeStates = true,
-        label = guiro:Label
-        {
-          bounds = lost.math.Rect(32,8,100,25),
-          text = "SMALL",
-          font = defaultFont,
-          fontSize = 12
-        },
-        images =
-        {
-          released = guiro:Image
-          {
-            bounds = lost.math.Rect(0, 0, 100, 25),
-            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            cornerBounds =
-            {
-              left = 5,
-              right = 5,
-              top = 5,
-              bottom = 5
-            }
-          },
-          hovered = guiro:Image
-          {
-            bounds = lost.math.Rect(0, 0, 100, 25),
-            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            stretch = true,
---            cornerBounds =
---            {
---              left = 5,
---              right = 5,
---              top = 5,
---              bottom = 5
---            }
-          },
-          pressed = guiro:Image
-          {
-            bounds = lost.math.Rect(0, 0, 100, 25),
-            bitmap = lost.bitmap.Bitmap(guiro:File("button.png")),
-            cornerBounds =
-            {
-              left = 5,
-              right = 5,
-              top = 5,
-              bottom = 5
-            }
-          }
-        }
-      },
-
-      guiro:Button
-      {
-        bounds = lost.math.Rect(240, 125, 150, 75),
+        bounds = lost.math.Rect(240, 100, 150, 75),
         fadeStates = true,
         label = guiro:Label
         {
@@ -236,6 +183,15 @@ screen = guiro:Screen
         }
       },
 
+      guiro:AnimatedImage
+      {
+        id = "explosion",
+        bounds = lost.math.Rect(240, 185, 80, 80),
+        bitmap = lost.bitmap.Bitmap(guiro:File("explosion.jpg")),
+        frameSize = lost.math.Rect(0,0,80,80),
+        interval = 0.02
+      },
+      
       guiro:Slider
       {
         id = "slider",
@@ -277,7 +233,7 @@ screen = guiro:Screen
       guiro:Image
       {
         id = "image",
-        bounds = lost.math.Rect(50, 25, 200, 200),
+        bounds = lost.math.Rect(50, 25, 180, 200),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
         listeners =
         {

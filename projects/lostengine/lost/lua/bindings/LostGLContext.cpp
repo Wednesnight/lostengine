@@ -9,8 +9,10 @@
 
 #include "lost/lua/bindings/LostGLContext.h"
 
+using namespace boost;
 using namespace luabind;
 using namespace lost::gl;
+using namespace lost::math;
 
 namespace lost
 {
@@ -37,7 +39,8 @@ namespace lost
             .def("setColor",  &Context::setColor)
             .def("drawRectOutline",  &Context::drawRectOutline)
             .def("drawRectFilled",  &Context::drawRectFilled)
-            .def("drawRectTextured",  &Context::drawRectTextured)
+            .def("drawRectTextured",  (void(Context::*)(const Rect&, shared_ptr<const Texture>, bool))&Context::drawRectTextured)
+            .def("drawRectTextured",  (void(Context::*)(const Rect&, shared_ptr<const Texture>, const Vec2&, const Vec2&, const Vec2&, const Vec2&, bool))&Context::drawRectTextured)
             .def("drawMesh2D",  &Context::drawMesh2D)
         ]
       ];
