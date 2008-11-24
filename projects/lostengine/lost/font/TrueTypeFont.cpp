@@ -18,6 +18,10 @@ namespace font
 
 TrueTypeFont::Glyph::Glyph()
 {
+  drawable = true;
+  xoffset = 0;
+  yoffset = 0;
+  advance = 0;
 }
 
 TrueTypeFont::Glyph::~Glyph()
@@ -204,6 +208,30 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   model->texcoords[coordOffset+6] = glyph->tl.x;
   model->texcoords[coordOffset+7] = glyph->tl.y;  
 }
+
+uint32_t TrueTypeFont::countAndFlagDrawableChars(const std::string& inText,
+                                            uint32_t inSizeInPoints)
+{
+  uint32_t result = 0;
+  
+  for(uint32_t i=0; i<inText.size(); ++i)
+  {
+    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
+    if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
+    {
+      result++;
+      glyph->drawable = true;
+    }
+    else
+    {
+      if(glyph)
+        glyph->drawable = false;
+    }
+  }
+  
+  return result;
+}
+
   
 shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
                                        uint32_t inSizeInPoints)
@@ -224,8 +252,8 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     rebuildTextureAtlas();
   
   // build model from scratch with the infos gathered 
-  uint32_t numChars = inText.length();
-  resetModel(result, numChars);
+  uint32_t drawableChars = countAndFlagDrawableChars(inText, inSizeInPoints);
+  resetModel(result, drawableChars);
   float xoffset = 0;
   
   // kerning setup
@@ -236,6 +264,9 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   
   // size calculation 
   Vec2 pmin, pmax; 
+  uint32_t numChars = inText.size();
+  uint32_t addIndex=0; // we iterate over all chracters, but not all of them might be drawable
+                       // so we need a separate index for the actual insertion of a character into the mesh
   for(int i=0; i<numChars; ++i)
   {
     char c = inText[i];
@@ -250,9 +281,14 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     }
     
     shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
-    addGlyph(result, i, glyph, xoffset, pmin, pmax);
+    if(glyph && glyph->drawable)
+    {
+      addGlyph(result, addIndex, glyph, xoffset, pmin, pmax);
+      addIndex++;
+    }
     xoffset+=glyph->advance;
   }
+  
   result->size.width = (pmax.x-pmin.x)+1;  
   result->size.height = (pmax.y-pmin.y)+1;  
   return result;

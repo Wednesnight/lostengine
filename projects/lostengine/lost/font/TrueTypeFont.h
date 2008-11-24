@@ -36,6 +36,8 @@ struct TrueTypeFont
     int32_t yoffset;
     int32_t advance;
     
+    bool drawable;
+    
     boost::shared_ptr<bitmap::Bitmap> bitmap;
   };
   
@@ -85,6 +87,13 @@ struct TrueTypeFont
                 float xoffset,
                 lost::math::Vec2& pmin,
                 lost::math::Vec2& pmax);
+  /** returns the number of characters that are actually displayable 
+   * and have a non-degenerate bitmap.
+   * E.g. spaces will not be rendered as a mesh, but the following mesh segment
+   * will simply be moved further.
+   * Drawables will be flagged true, other will be flagged with drawable = false
+   */
+  uint32_t countAndFlagDrawableChars(const std::string& inText, uint32_t inSizeInPoints);
   
   boost::shared_ptr<freetype::Face> face;
   boost::shared_ptr<freetype::Library> library;
