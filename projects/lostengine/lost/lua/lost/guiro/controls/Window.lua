@@ -11,6 +11,8 @@ Window = _G["lost.guiro.controls.Window"]
 lost.guiro.controls.Control:addBase(Window, "Window")
 
 function Window:__init() super()
+  self.header = {height = 25}
+
   self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:handleInput(event) end)
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:handleInput(event) end)
   self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleInput(event) end)
@@ -27,9 +29,9 @@ function Window:handleInput(event)
   local info = self:initializeInput(event)
   if info then
     local headerRect = lost.math.Rect(info.rect.x, 
-                                      info.rect.y + (info.rect.height - self.style.header.height),
+                                      info.rect.y + (info.rect.height - self.header.height),
                                       info.rect.width,
-                                      self.style.header.height)
+                                      self.header.height)
 
     -- click
     if info.which == Control.InputType.down then

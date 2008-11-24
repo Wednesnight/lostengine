@@ -7,9 +7,15 @@ guiro:Renderer
     context:drawRectFilled(globalRect)
     context:setColor(style.header.color)
     context:drawRectFilled(lost.math.Rect(globalRect.x, 
-                                          globalRect.y + (globalRect.height - style.header.height),
+                                          globalRect.y + (globalRect.height - window.header.height),
                                           globalRect.width,
-                                          style.header.height))
+                                          window.header.height))
+
+    if window.label then
+      window.label.color = style.header.fontColor
+      window.label.renderer:render(context, window.label, window.label.style)
+    end
+
     context:setColor(style.lineColor)
     context:drawRectOutline(globalRect)
   end

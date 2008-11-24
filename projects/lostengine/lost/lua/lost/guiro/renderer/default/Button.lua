@@ -8,11 +8,21 @@ guiro:Renderer
         self.color = lost.common.Color(style[button.state].color)
       end
       self:fade(self.color, style[button.state].color)
-      context:setColor(self.color)
+      if not self.fontColor then
+        self.fontColor = lost.common.Color(style[button.state].fontColor)
+      end
+      self:fade(self.fontColor, style[button.state].fontColor)
+      if not self.lineColor then
+        self.lineColor = lost.common.Color(style[button.state].lineColor)
+      end
+      self:fade(self.lineColor, style[button.state].lineColor)
     else
-      context:setColor(style[button.state].color)
+      self.color = lost.common.Color(style[button.state].color)
+      self.fontColor = lost.common.Color(style[button.state].fontColor)
+      self.lineColor = lost.common.Color(style[button.state].lineColor)
     end
 
+    context:setColor(self.color)
     if button.images and button.images[button.state] then
       if not button.images[button.state].parent then
         button.images[button.state]:setParent(button)
@@ -22,7 +32,13 @@ guiro:Renderer
     else
       context:drawRectFilled(globalRect)
     end
-    context:setColor(style[button.state].lineColor)
+
+    if button.label then
+      button.label.color = self.fontColor
+      button.label.renderer:render(context, button.label, button.label.style)
+    end
+
+    context:setColor(self.lineColor)
     context:drawRectOutline(globalRect)
   end
 }

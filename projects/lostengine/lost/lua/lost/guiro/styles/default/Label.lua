@@ -1,4 +1,3 @@
 guiro:Style
 {
-	
 }

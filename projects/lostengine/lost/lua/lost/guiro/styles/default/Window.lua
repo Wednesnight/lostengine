@@ -5,6 +5,6 @@ guiro:Style
   header =
   {
     color = lost.common.Color(0.5,0,0,1),
-    height = 25
+    fontColor = lost.common.Color(1,1,1,1),
   }
 }
