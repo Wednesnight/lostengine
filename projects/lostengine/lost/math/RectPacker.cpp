@@ -36,6 +36,24 @@ RectPacker::~RectPacker()
 {
 }
 
+void RectPacker::checkOverlap()
+{
+  for(uint32_t i=0; i<nodes.size(); ++i)
+  {
+    Rect& curRect = nodes[i].rect;
+    for(uint32_t j=0; j<nodes.size(); ++j)
+    {
+      if(i!=j)
+      {
+        if(curRect.intersects(nodes[j].rect))
+        {
+          DOUT("OVERLAP");
+        }
+      }
+    }    
+  }
+}
+
 bool compareRects(const RectPacker::SourceRect& r1, const RectPacker::SourceRect& r2)
 {
   return (r1.rect.area() > r2.rect.area());
@@ -108,7 +126,7 @@ bool RectPacker::pack(int32_t sourceRectId)
   // check if current rect is degenerate and abort immediately
   if((currentSourceRect.rect.width == 0) || (currentSourceRect.rect.height == 0))
   {
-    DOUT("rejecting degenerate rect");
+//    DOUT("rejecting degenerate rect");
     return false;
   }
 //  DOUT("------------------ "<<sourceRectId<<" "<<currentSourceRect.rect);
@@ -125,12 +143,12 @@ bool RectPacker::pack(int32_t sourceRectId)
 //    DOUT("currentNodeIndex: "<<currentNodeIndex<<" stack size: "<<recursionStack.size()<<" rect: "<<currentNode.rect);
     
     // terminate if the currentNode is not in use yet and matches exactly
-    if((currentNode.rectid == -1) && exactMatch(currentNode, currentSourceRect))
+    if(!currentNode.hasBitmap() && !currentNode.hasChildren() && exactMatch(currentNode, currentSourceRect))
     {
         foundNode = true;
 //        currentNode.rect = currentSourceRect.rect;
         currentNode.rectid = currentSourceRect.id;
-//        DOUT("found match, stack size: "<<recursionStack.size());
+//        DOUT("///////////////////////////////////////// found match, stack size: "<<recursionStack.size());
         nodes[currentNodeIndex] = currentNode;
     }
     else
@@ -160,6 +178,7 @@ bool RectPacker::pack(int32_t sourceRectId)
 //  DOUT("iterations: "<<iterations<<" nodes: "<<nodes.size());
   sumIter += iterations;
   sumNodes += nodes.size();
+  checkOverlap();
   return foundNode;
 }
 

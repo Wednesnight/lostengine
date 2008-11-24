@@ -54,14 +54,14 @@ namespace math
       if(maxY() > parent.maxY()) { height = (parent.maxY() - y)+1.0f;}
     }
 
-    float maxX() const
+    inline float maxX() const
     {
       float result = (x + width)-1.0f;
       if(result < x) {result = x; }
       return result;
     }
 
-    float maxY() const
+    inline float maxY() const
     {
       float result = (y + height)-1.0f;
       if(result < y) {result = y; }
@@ -90,6 +90,21 @@ namespace math
         result = true;
       }
       return result;
+    }
+
+    inline float left() const {return x;} 
+    inline float right() const {return maxX();}
+    inline float top() const {return maxY();}
+    inline float bottom() const {return y;}
+
+    bool intersects(const Rect& r2) const
+    {
+      return !(
+          r2.left() > right() 
+            || r2.right() < left() 
+            || r2.top() > bottom() 
+            || r2.bottom() < top()
+        );
     }
 
     void reset( float inX = 0, float inY = 0, float inWidth = 0, float inHeight = 0 )

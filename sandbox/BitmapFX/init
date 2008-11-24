@@ -8,9 +8,9 @@ function lost.application.Application:configure(event)
 end
 
 function lost.application.Application:init(event)
-	testlib = lost.font.freetype.Library.create()
-	fontfile = globals.app.loader:load("Vera.ttf")
-	testfont = lost.font.TrueTypeFont.create(testlib, fontfile)
-  stuff = {}
-	stuff.renderedText = testfont:render("Hello World!", 16)
+--	testlib = lost.font.freetype.Library.create()
+--	fontfile = globals.app.loader:load("Vera.ttf")
+--	testfont = lost.font.TrueTypeFont.create(testlib, fontfile)
+--  stuff = {}
+--	stuff.renderedText = testfont:render("Hello World!", 16)
 end

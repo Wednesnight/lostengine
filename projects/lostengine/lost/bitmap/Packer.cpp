@@ -55,6 +55,7 @@ void Packer::pack(Packer::Result& outResult,
       Rect r = rectPacker.nodes[i].rect;
       shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
       bmp->draw(r.x, r.y, outResult.packedBitmap);
+//      DOUT("drawing "<<r);
     }
   }
 }
