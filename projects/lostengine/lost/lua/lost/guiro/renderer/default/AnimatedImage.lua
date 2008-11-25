@@ -26,11 +26,14 @@ guiro:Renderer
       end
     end
 
-    if self.currentStep == nil or self.currentStep == image.bitmap.width / image.frameSize.width then
+    if self.currentStep == nil then
       self.currentStep = 0
     end
     if self.lastTimestamp == nil or os.clock() - self.lastTimestamp >= image.interval then
       self.currentStep = self.currentStep + 1
+      if self.currentStep == image.bitmap.width / image.frameSize.width then
+        self.currentStep = 0
+      end
       self.lastTimestamp = os.clock()
     end
     local tmpRect = lost.math.Rect(image.frameSize)
