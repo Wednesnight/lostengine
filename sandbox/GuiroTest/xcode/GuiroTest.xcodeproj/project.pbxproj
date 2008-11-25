@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
+		3E0CF97D0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
+		3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
 		3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
 		3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
 		3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
@@ -92,6 +95,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0CF97B0EDC4C57001A2922 /* defaultButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultButton.png; path = ../defaultButton.png; sourceTree = SOURCE_ROOT; };
 		3E1EE3FC0ECC7CA400E86C94 /* screen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screen; path = ../screen; sourceTree = SOURCE_ROOT; };
 		3E2C5C4D0EDB097300BA9626 /* explosion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = explosion.jpg; path = ../explosion.jpg; sourceTree = SOURCE_ROOT; };
 		3E2C5C680EDB13C100BA9626 /* fugly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fugly.png; path = ../fugly.png; sourceTree = SOURCE_ROOT; };
@@ -214,6 +218,7 @@
 				3E48F5BD0ED6DD3D003CFD2F /* button.png */,
 				3E2C5C4D0EDB097300BA9626 /* explosion.jpg */,
 				3E2C5C680EDB13C100BA9626 /* fugly.png */,
+				3E0CF97B0EDC4C57001A2922 /* defaultButton.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 				3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */,
 				3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */,
 				3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +476,7 @@
 				3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */,
 				3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */,
 				3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +491,7 @@
 				EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */,
 				3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */,
 				3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97D0EDC4C57001A2922 /* defaultButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
