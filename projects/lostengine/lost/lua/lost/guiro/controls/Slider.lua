@@ -46,7 +46,7 @@ function Slider:__init() super()
 
   self.button = lost.guiro.controls.Button()
   self.button.id = "sliderButton"
-  self.button.bounds = lost.math.Rect(0,0,25,25)
+  self.button.bounds = lost.math.Rect(0,0,24,24)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
   self.button:setParent(self)

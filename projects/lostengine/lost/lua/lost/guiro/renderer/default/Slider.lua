@@ -9,10 +9,10 @@ guiro:Renderer
     context:drawRectOutline(globalRect)
     if (slider.orientation == lost.guiro.controls.Slider.Orientation.horizontal) then
       context:drawLine(lost.math.Vec2(globalRect.x, globalRect.y + globalRect.height / 2),
-                       lost.math.Vec2(globalRect.x + globalRect.width, globalRect.y + globalRect.height / 2))
+                       lost.math.Vec2(globalRect:maxX(), globalRect.y + globalRect.height / 2))
     elseif (slider.orientation == lost.guiro.controls.Slider.Orientation.vertical) then
       context:drawLine(lost.math.Vec2(globalRect.x + globalRect.width / 2, globalRect.y),
-                       lost.math.Vec2(globalRect.x + globalRect.width / 2, globalRect.y + globalRect.height))
+                       lost.math.Vec2(globalRect.x + globalRect.width / 2, globalRect:maxY()))
     end
 
     slider.style.button.renderer:render(context, slider.button, slider.style.button.style)

@@ -268,9 +268,9 @@ void Context::drawRectFilled(const lost::math::Rect& rect)
 
   // points
   lost::math::Vec2 bl(rect.x, rect.y);
-  lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
-  lost::math::Vec2 tr(rect.x+rect.width-1, rect.y+rect.height-1);
-  lost::math::Vec2 tl(rect.x, rect.y+rect.height-1);
+  lost::math::Vec2 br(rect.maxX(), rect.y);
+  lost::math::Vec2 tr(rect.maxX(), rect.maxY());
+  lost::math::Vec2 tl(rect.x, rect.maxY());
   
   float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
   // indices for 2 triangles, first upper left, then lower right
@@ -314,9 +314,9 @@ void Context::drawRectTextured(const lost::math::Rect& rect,
   
   // points
   lost::math::Vec2 bl(rect.x, rect.y);
-  lost::math::Vec2 br(rect.x+rect.width-1, rect.y);
-  lost::math::Vec2 tr(rect.x+rect.width-1, rect.y+rect.height-1);
-  lost::math::Vec2 tl(rect.x, rect.y+rect.height-1);
+  lost::math::Vec2 br(rect.maxX(), rect.y);
+  lost::math::Vec2 tr(rect.maxX(), rect.maxY());
+  lost::math::Vec2 tl(rect.x, rect.maxY());
   
   // build arrays
   float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};

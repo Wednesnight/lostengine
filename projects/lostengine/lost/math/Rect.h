@@ -116,9 +116,9 @@ namespace math
     }
 
     lost::math::Vec2 bottomLeft() const { return lost::math::Vec2(x, y); }
-    lost::math::Vec2 bottomRight() const { return lost::math::Vec2(x+width-1, y); }
-    lost::math::Vec2 topRight() const { return lost::math::Vec2(x+width-1, y+height-1); }
-    lost::math::Vec2 topLeft() const { return lost::math::Vec2(x, y+height-1); }
+    lost::math::Vec2 bottomRight() const { return lost::math::Vec2(maxX(), y); }
+    lost::math::Vec2 topRight() const { return lost::math::Vec2(maxX(), maxY()); }
+    lost::math::Vec2 topLeft() const { return lost::math::Vec2(x, maxY()); }
     
     float x;
     float y;

@@ -24,6 +24,8 @@ namespace lost
           .def(constructor<float, float, float, float>())
           .def("contains", &Rect::contains)
           .def(tostring(self))
+          .def("maxX", &Rect::maxX)
+          .def("maxY", &Rect::maxY)
           .def_readwrite("x", &Rect::x)
           .def_readwrite("y", &Rect::y)
           .def_readwrite("width", &Rect::width)
