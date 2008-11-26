@@ -1,4 +1,4 @@
-require("lost.guiro.defaults")
+require("lost.guiro.config")
 
 require("lost.io.guiro.Renderer")
 require("lost.io.guiro.Style")

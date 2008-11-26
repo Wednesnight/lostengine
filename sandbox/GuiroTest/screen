@@ -20,9 +20,7 @@ screen = guiro:Screen
       label = guiro:Label
       {
         bounds = lost.math.Rect(5,282,390,25),
-        text = "funky window",
-        font = defaultFont,
-        fontSize = 12
+        text = "funky window"
       },
 
       guiro:Button
@@ -33,9 +31,7 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = lost.math.Rect(10,15,50,40),
-          text = "Small",
-          font = defaultFont,
-          fontSize = 12
+          text = "Small"
         },
         images =
         {
@@ -85,9 +81,7 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = lost.math.Rect(30,20,100,50),
-          text = "Medium",
-          font = defaultFont,
-          fontSize = 12
+          text = "Medium"
         },
         images =
         {
@@ -137,9 +131,7 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = lost.math.Rect(60,30,150,75),
-          text = "Large",
-          font = defaultFont,
-          fontSize = 12
+          text = "Large"
         },
         images =
         {
@@ -256,7 +248,6 @@ screen = guiro:Screen
         id="label",
         bounds = lost.math.Rect(5,5,100,30),
         text="Hello World!",
-        font = defaultFont,
         fontSize = 16
       }
     }

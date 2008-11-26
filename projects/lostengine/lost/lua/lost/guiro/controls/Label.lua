@@ -1,10 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.config")
+require("lost.guiro.controls.Control")
+
 --[[
      Label control
   ]]
-require("lost.guiro.controls.Control")
-
 class "lost.guiro.controls.Label" (lost.guiro.controls.Control)
 Label = _G["lost.guiro.controls.Label"]
 
@@ -16,6 +17,8 @@ lost.guiro.controls.Control:addBase(Label, "Label")
 function Label:__init() super()
   self.alpha = 1.0
   self.color = lost.common.Color(1,1,1)
+  self.font = lost.guiro.config.theme.defaultFont
+  self.fontSize = 12
 end
 
 function Label:setText(txt)

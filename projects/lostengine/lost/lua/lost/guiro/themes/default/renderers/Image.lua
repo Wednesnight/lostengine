@@ -1,12 +1,12 @@
-module("lost.guiro.themes.default.renderer", package.seeall)
+module("lost.guiro.themes.default.renderers", package.seeall)
 
 --[[
      Image Renderer
   ]]
 require("lost.guiro.themes.Renderer")
 
-class "lost.guiro.themes.default.renderer.Image" (lost.guiro.themes.Renderer)
-Image = _G["lost.guiro.themes.default.renderer.Image"]
+class "lost.guiro.themes.default.renderers.Image" (lost.guiro.themes.Renderer)
+Image = _G["lost.guiro.themes.default.renderers.Image"]
 
 function Image:__init() super()
 end

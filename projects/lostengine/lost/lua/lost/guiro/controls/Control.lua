@@ -79,10 +79,10 @@ end
 
 function Control:render(context)
   if not self.theme then
-    self.theme = lost.guiro.defaults.theme
+    self.theme = lost.guiro.config.theme
   end
   if not self.renderer then
-    self.renderer = self.theme.renderer[self:className()]()
+    self.renderer = self.theme.renderers[self:className()]()
   end
   if not self.style then
     self.style = self.theme.styles[self:className()]()

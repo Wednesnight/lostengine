@@ -1,12 +1,12 @@
-module("lost.guiro.themes.default.renderer", package.seeall)
+module("lost.guiro.themes.default.renderers", package.seeall)
 
 --[[
      Button Renderer
   ]]
 require("lost.guiro.themes.Renderer")
 
-class "lost.guiro.themes.default.renderer.Button" (lost.guiro.themes.Renderer)
-Button = _G["lost.guiro.themes.default.renderer.Button"]
+class "lost.guiro.themes.default.renderers.Button" (lost.guiro.themes.Renderer)
+Button = _G["lost.guiro.themes.default.renderers.Button"]
 
 function Button:__init() super()
 end
