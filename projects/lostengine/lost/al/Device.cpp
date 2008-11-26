@@ -10,12 +10,23 @@ namespace al
     
 Device::Device(const std::string& inDeviceId)
 {
+  initWithDeviceId(inDeviceId);
+}
+
+Device::Device()
+{
+  initWithDeviceId(defaultDeviceId());
+}
+
+void Device::initWithDeviceId(const std::string& inDeviceId)
+{
   DOUT("opening device: "<<inDeviceId);
   device = alcOpenDevice(inDeviceId.c_str());ALDEBUG_THROW;
   if(!device)
     throw runtime_error("aclOpenDevice returned NULL for id: "+inDeviceId);
   deviceId = inDeviceId;
 }
+
   
 Device::~Device()
 {
@@ -39,5 +50,24 @@ std::vector<std::string> Device::allDeviceIds()
   return result;
 }
 
+std::string Device::defaultDeviceId()
+{
+  const ALCchar* res = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+  if(!res)
+    throw runtime_error("no default device found");
+  return string(res);
+}
+
+void Device::logAllDeviceIds()
+{
+  vector<string> ids = Device::allDeviceIds();
+  DOUT("found "<<ids.size()<<" devices");
+  for(int i=0; i<ids.size(); ++i)
+  {
+    DOUT("Device "<<i<<" : '"<<ids[i]<<"'");
+  }  
+}
+
+  
 }
 }

@@ -8,16 +8,26 @@ namespace lost
 {
 namespace al
 {
-    
+
 Context::Context(boost::shared_ptr<Device> inDevice)
+{
+  initWithDevice(inDevice);
+}
+
+Context::Context()
+{
+  initWithDevice(boost::shared_ptr<Device>(new Device));
+}
+
+void Context::initWithDevice(boost::shared_ptr<Device> inDevice)
 {
   DOUT("creating context");
   context = alcCreateContext(inDevice->device, NULL);ALDEBUG_THROW;
   if(!context)
     throw runtime_error("couldn't create context for device: "+inDevice->deviceId);
-  device = inDevice;
+  device = inDevice;  
 }
-
+  
 Context::~Context()
 {
   DOUT("destroying context");

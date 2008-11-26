@@ -12,31 +12,38 @@ using namespace std;
 using namespace boost;
 
 int main (int argc, char* const argv[]) {
-  LogLevel( log_all );
-  DOUT("check 1 2");
-
-  ALDEBUG; // clear last error
-  
-  vector<string> ids = Device::allDeviceIds();
-  DOUT("found "<<ids.size()<<" devices");
-  for(int i=0; i<ids.size(); ++i)
+  try
   {
-    DOUT("Device "<<i<<" : '"<<ids[i]<<"'");
+    LogLevel( log_all );
+
+    ALDEBUG; // clear last error
+    
+    Device::logAllDeviceIds();
+    shared_ptr<Context> context(new Context());
+    
+    context->makeCurrent();
+    context->process();
+    context->suspend();
+    
+    int error = 0;
+    string filename = "wannabill.ogg";
+    stb_vorbis* oggfile = stb_vorbis_open_filename(filename.c_str(), &error, NULL);
+    if(oggfile)
+    {
+      stb_vorbis_info info = stb_vorbis_get_info(oggfile);
+      stb_vorbis_close(oggfile);
+      DOUT("ok: "<<info.sample_rate);
+    }
+    else
+    {
+      EOUT("couldn't open file '"<<filename<<"'");
+    }
+    
+    return 0;
   }
-  
-  shared_ptr<Device> device(new Device(ids[0]));
-  shared_ptr<Context> context(new Context(device));
-  
-  context->makeCurrent();
-  context->process();
-  context->suspend();
-  
-  int error = 0;
-  stb_vorbis* oggfile = stb_vorbis_open_filename("wannabill.ogg", &error, NULL);
-  stb_vorbis_info info = stb_vorbis_get_info(oggfile);
-  stb_vorbis_close(oggfile);
-  
-  DOUT("ok: "<<info.sample_rate);
-  
-  return 0;
+  catch(std::exception& ex)
+  {
+    EOUT("caught execption: "<<ex.what());
+    return 1;
+  }
 }

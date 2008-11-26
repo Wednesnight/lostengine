@@ -211,7 +211,7 @@ extern "C" {
   // this must be the entire stream!). on failure, returns NULL and sets *error
   
 #ifndef STB_VORBIS_NO_STDIO
-  extern stb_vorbis * stb_vorbis_open_filename(char *filename,
+  extern stb_vorbis * stb_vorbis_open_filename(const char *filename,
                                                int *error, stb_vorbis_alloc *alloc_buffer);
   // create an ogg vorbis decoder from a filename via fopen(). on failure,
   // returns NULL and sets *error (possibly to VORBIS_file_open_failure).

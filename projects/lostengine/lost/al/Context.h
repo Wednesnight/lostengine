@@ -12,7 +12,10 @@ namespace al
 struct Context
 {
   Context(boost::shared_ptr<Device> device);
+  Context();
   virtual ~Context();
+  
+  void initWithDevice(boost::shared_ptr<Device> device);
   
   void makeCurrent();
 

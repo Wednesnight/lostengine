@@ -4631,7 +4631,7 @@ stb_vorbis * stb_vorbis_open_file(FILE *file, int close_on_free, int *error, stb
    return stb_vorbis_open_file_section(file, close_on_free, error, alloc, len);
 }
 
-stb_vorbis * stb_vorbis_open_filename(char *filename, int *error, stb_vorbis_alloc *alloc)
+stb_vorbis * stb_vorbis_open_filename(const char *filename, int *error, stb_vorbis_alloc *alloc)
 {
    FILE *f = fopen(filename, "rb");
    if (f) 

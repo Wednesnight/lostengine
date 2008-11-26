@@ -17,3 +17,5 @@ require("lost.guiro.themes.default.styles.Slider")
 
 require("lost.guiro.themes.default.renderer.Window")
 require("lost.guiro.themes.default.styles.Window")
+
+
