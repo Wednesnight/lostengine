@@ -44,7 +44,7 @@ namespace application
     displayAttributes.reset(new DisplayAttributes());
 
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
-    interpreter.reset(new lua::State); // init lua state with resource loader
+    interpreter.reset(new lua::State(true, true, true, loader)); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
 
     globals(*interpreter)["globals"]                   = newtable(*interpreter); // create globals table
