@@ -1,6 +1,6 @@
 module("lost.guiro", package.seeall)
 
-require("lost.guiro.themes.default.Theme")
+require("lost.guiro.themes.default.theme")
 
 config =
 {
