@@ -18,11 +18,6 @@ screen = guiro:Screen
       {
         height = 25
       },
-	  renderer = guiro:Renderer
-	  {
-	    render = function(renderer, context, object, style)
-		end
-	  },
 
       label = guiro:Label
       {
