@@ -1,3 +1,5 @@
+require("lost.guiro.defaults")
+
 require("lost.io.Loader")
 require("lost.io.guiro.File")
 require("lost.io.guiro.View")

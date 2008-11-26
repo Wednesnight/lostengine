@@ -8,13 +8,6 @@ require("lost.io.Loader")
 require("lost.guiro.controls.Slider")
 
 function Loader:Slider(definition)
-  if not definition.style then
-    definition.style = self:StyleFromFile("lost/guiro/styles/default/Slider.lua")
-  end
-  if not definition.renderer then
-    definition.renderer = self:RendererFromFile("lost/guiro/renderer/default/Slider.lua")
-  end
-
   local value = nil
   if (definition.value) then
     value = definition.value

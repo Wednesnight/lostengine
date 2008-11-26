@@ -153,9 +153,6 @@ end
     uses self.renderer and self.style to create visual representation
   ]]
 function View:render(context)
-  if (self.renderer and self.style) then
-    self.renderer:render(context, self, self.style)
-  end
   for k,view in next,self.children do
     view:render(context)
   end

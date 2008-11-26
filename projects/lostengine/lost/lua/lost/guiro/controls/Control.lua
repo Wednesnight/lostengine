@@ -20,6 +20,7 @@ Control.InputType =
   up      = "up",
   move    = "move"
 }
+
 function Control:initializeInput(event)
   local validTypes = {[lost.application.MouseEvent.MOUSE_DOWN]        = true,
                       [lost.application.MouseEvent.MOUSE_UP]          = true,
@@ -74,4 +75,19 @@ function Control:initializeInput(event)
     return info
   end
   return false
+end
+
+function Control:render(context)
+  if not self.theme then
+    self.theme = lost.guiro.defaults.theme
+  end
+  if not self.renderer then
+    self.renderer = self.theme.renderer[self:className()]()
+  end
+  if not self.style then
+    self.style = self.theme.styles[self:className()]()
+  end
+  self.renderer:render(context, self, self.style)
+  
+  lost.guiro.View.render(self, context)
 end
