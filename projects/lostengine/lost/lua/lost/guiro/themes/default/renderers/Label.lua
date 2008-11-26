@@ -12,6 +12,10 @@ function Label:__init() super()
 end
 
 function Label:render(context, label, style)
+	if label.textChanged then
+		label.renderedText = label.font:render(label.text, label.fontSize)		
+		label.textChanged = false
+	end
 	context:setColor(label.color)
 	--context:drawRectFilled(label:globalRect())
 	gl.glMatrixMode(gl.GL_MODELVIEW)

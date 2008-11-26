@@ -19,9 +19,10 @@ function Label:__init() super()
   self.color = lost.common.Color(1,1,1)
   self.font = lost.guiro.config.theme.defaultFont
   self.fontSize = 12
+	self.textChanged = false
 end
 
 function Label:setText(txt)
 	self.text = txt
-	self.renderedText = self.font:render(self.text, self.fontSize)
+	self.textChanged = true
 end
