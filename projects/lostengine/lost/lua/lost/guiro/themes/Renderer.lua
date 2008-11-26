@@ -1,10 +1,10 @@
-module("lost.guiro.renderer", package.seeall)
+module("lost.guiro.themes", package.seeall)
 
 --[[
      Renderer
   ]]
-class "lost.guiro.renderer.Renderer"
-Renderer = _G["lost.guiro.renderer.Renderer"]
+class "lost.guiro.themes.Renderer"
+Renderer = _G["lost.guiro.themes.Renderer"]
 
 function Renderer:__init()
 end
