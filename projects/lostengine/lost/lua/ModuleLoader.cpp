@@ -26,21 +26,17 @@ namespace ModuleLoader
     "module('lost.lua.module')\n"
     "\n"
     "mt={}\n"
-    "resourceLoader=nil\n"
     "\n"
     "function customLoader(moduleName)\n"
-    "  debug('trying to load module: '..moduleName)\n"
     "  local f = assert(globals.state:doResourceFile(moduleName..'.lua'))\n"
     "  return f\n"
     "end\n"
     "\n"
     "function customIndex(table, key)\n"
-    "  debug('package.preload accessed, returning custom module loader')\n"
     "  return customLoader\n"
     "end\n"
     "\n"
     "function install()\n"
-    "  debug('installing custom module loader')\n"
     "  mt.__index = customIndex\n"
     "  setmetatable(package.preload, mt)\n"
     "end\n"
@@ -53,7 +49,6 @@ namespace ModuleLoader
     object olost = globals(inState)["lost"];
     object olua = olost["lua"];
     object omodule = olua["module"];
-    omodule["resourceLoader"] = inLoader;
 
     // find install function and call it
     object oinstall = omodule["install"];

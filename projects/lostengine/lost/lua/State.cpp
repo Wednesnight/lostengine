@@ -6,13 +6,19 @@
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
 
+using namespace boost;
+using namespace std;
+
 namespace lost
 {
   namespace lua
   {
     
-    State::State(bool callLuabindOpen, bool doOpenLibs, bool doInitPackagePath)
-    : callstackSize(10)
+    State::State(bool callLuabindOpen,
+                 bool doOpenLibs,
+                 bool doInitPackagePath,
+                 boost::shared_ptr<resource::Loader> inLoader)
+    : callstackSize(10), loader(inLoader)
     {
       state = luaL_newstate();
       if(callLuabindOpen) luabind::open(state);
@@ -102,19 +108,15 @@ namespace lost
     // loads and executes a file from the resource directory
     int State::doResourceFile(const std::string& inRelativePath)
     {
-      // buildResourcePath doesn't work as expected
-      //return doFile(lost::platform::buildResourcePath(pathFromNamespace(inRelativePath)));
-      return doFile(lost::platform::getResourcePath() +"/"+ pathFromNamespace(inRelativePath));
+      return doFile(pathFromNamespace(inRelativePath));
     }
     
     // loads and executes a file
     int State::doFile(const std::string& inAbsolutePath)
     {
       std::ostringstream os;
-      std::ifstream file(inAbsolutePath.c_str());
-      if(!file) throw std::runtime_error("couldn't load file: '"+ inAbsolutePath +"'");
-      os << file.rdbuf();
-      std::string data = os.str();
+      shared_ptr<resource::File> file = loader->load(inAbsolutePath);
+      string data = file->str();
       md5wrapper md5;
       fileHashes[md5.getHashFromString(data)] = inAbsolutePath;
       return doString(data);

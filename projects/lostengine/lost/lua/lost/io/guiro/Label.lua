@@ -10,7 +10,6 @@ require("lost.guiro.controls.Label")
 function Loader:Label(definition)
   local label = self:applyDefinitionToView(lost.guiro.controls.Label(), definition)
 	if definition.text then
-		log.debug("SETTING TEXT");
 		label:setText(definition.text) -- renders the text 
 	end
 	return label

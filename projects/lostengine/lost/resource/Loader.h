@@ -42,7 +42,7 @@ namespace lost
         if(!result)
           throw std::runtime_error("couldn't load file: '"+inPath.string()+"'");
 		  
-        DOUT("Loader: loaded file '" << result->location << "' [" << result->size << " Bytes]");
+        DOUT("'"<<result->location << "' [" << result->size << " Bytes]");
         return result;
       }
 

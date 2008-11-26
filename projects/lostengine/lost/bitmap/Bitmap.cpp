@@ -177,7 +177,7 @@ uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
 void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
 {
   destroy();
-  DOUT("init image from memory: " << inFile->location);
+//  DOUT("init image from memory: " << inFile->location);
   int bytesPerPixel, w, h;
   data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(inFile->data.get()), inFile->size, &w, &h, &bytesPerPixel, 0);
   width = w;

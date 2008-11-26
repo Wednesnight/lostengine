@@ -246,7 +246,7 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     if(renderGlyph(inText[i], inSizeInPoints))
       ++renderedGlyphs;
   }
-  
+  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
   // rebuild atlas if any new glyphs were rendered
   if(renderedGlyphs > 0)
     rebuildTextureAtlas();

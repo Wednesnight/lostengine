@@ -26,7 +26,7 @@ struct ApplicationResourceRepository : public Repository
     boost::shared_ptr<lost::resource::File> result(new lost::resource::File);
     boost::filesystem::path absolutePath = applicationResourcePath / relativePath;
     std::string path = absolutePath.string();
-    DOUT("trying to load file: " << path);
+//    DOUT("loading: " << path);
     result->location = relativePath.string();
 
     std::ifstream ifs( path.c_str(), std::ios_base::in | std::ios_base::binary );

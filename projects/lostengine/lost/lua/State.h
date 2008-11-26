@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include "lost/resource/File.h"
+#include "lost/resource/DefaultLoader.h"
 
 namespace lost
 {
@@ -14,7 +15,10 @@ namespace lost
 
     struct State
     {
-      State(bool callLuabindOpen = true, bool doOpenLibs = true, bool doInitPackagePath = true);
+      State(bool callLuabindOpen = true,
+            bool doOpenLibs = true,
+            bool doInitPackagePath = true,
+            boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
       ~State();
 
       std::string getScriptSource(lua_Debug& debug);
@@ -56,6 +60,7 @@ namespace lost
       lua_State* state;
       int callstackSize;
       std::map<std::string, std::string> fileHashes;
+      boost::shared_ptr<resource::Loader> loader;
     };
 
   }
