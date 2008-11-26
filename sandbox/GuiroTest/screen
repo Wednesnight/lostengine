@@ -1,5 +1,3 @@
-defaultFont = guiro:Font("Vera.ttf")
-
 screen = guiro:Screen
 {
   id = "screen",
@@ -236,7 +234,8 @@ screen = guiro:Screen
         id = "image",
         bounds = lost.math.Rect(50, 25, 180, 200),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
-        style =
+        stretch = true,
+        style = guiro:Style
         {
           borderColor = lost.common.Color(0,0,0,1)
         },

@@ -2,7 +2,7 @@ module("lost.guiro", package.seeall)
 
 require("lost.guiro.themes.default.Theme")
 
-defaults =
+config =
 {
   theme = lost.guiro.themes.default
 }

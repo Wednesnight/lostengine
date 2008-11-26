@@ -27,3 +27,15 @@ function Loader:executeScript(filename, environment)
     log.error("error while loading '".. filename .."': ".. error)
   end
 end
+
+--[[
+    overwrite values in table "target" with values from table "source"
+  ]]
+function Loader:apply(target, source)
+  if (target and source) then
+    for key,value in next,source do
+      target[key] = value
+    end
+  end
+  return target
+end
