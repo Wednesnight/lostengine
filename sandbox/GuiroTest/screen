@@ -18,6 +18,12 @@ screen = guiro:Screen
       {
         height = 25
       },
+	  renderer = guiro:Renderer
+	  {
+	    render = function(renderer, context, object, style)
+		end
+	  },
+
       label = guiro:Label
       {
         bounds = lost.math.Rect(5,282,390,25),
