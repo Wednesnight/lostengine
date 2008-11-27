@@ -1,7 +1,7 @@
 #ifndef LOST_APPLICATION_IPHONE_LOSTAPPLICATIONHELPERS_H
 #define LOST_APPLICATION_IPHONE_LOSTAPPLICATIONHELPERS_H
 
-#include "lost/forward/boost/shared_ptr.hpp"
+#include "lost/forward/boost"
 #include "lost/event/Event.h"
 
 void* lostApplicationHelpers_linkHelper();
