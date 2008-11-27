@@ -2,12 +2,14 @@
 #include "lost/al/al.h"
 #include "lost/al/Device.h"
 #include "lost/al/Context.h"
+#include "lost/al/Listener.h"
 #include <boost/shared_ptr.hpp>
 
 #include "stb_vorbis.h"
 
 using namespace lost::common;
 using namespace lost::al;
+using namespace lost::math;
 using namespace std;
 using namespace boost;
 
@@ -19,9 +21,33 @@ int main (int argc, char* const argv[]) {
     ALDEBUG; // clear last error
     
     Device::logAllDeviceIds();
-    shared_ptr<Context> context(new Context());
-    
+    DOUT("default device: "<<Device::defaultDeviceId());
+
+    shared_ptr<Context> context(new Context());    
     context->makeCurrent();
+
+    DOUT("dopplerFactor: "<<Context::dopplerFactor());
+    DOUT("speed of sound: "<<Context::speedOfSound());
+    DOUT("distance model: "<<Context::distanceModel());
+    
+    DOUT("version: "<<Context::version());
+    DOUT("renderer: "<<Context::renderer());
+    DOUT("vendor: "<<Context::vendor());
+    DOUT("extensions: " <<Context::extensions());
+    
+    Context::distanceModel(AL_NONE);
+    
+    Listener::position(Vec3(1,2,3));
+    Listener::velocity(Vec3(4,5,6));
+    Listener::gain(.75);
+    Listener::orientation(Vec3(7,8,9), Vec3(0,1,0));
+    
+    DOUT("pos: "<<Listener::position());
+    DOUT("velocity: "<<Listener::velocity());
+    DOUT("gain: "<<Listener::gain());
+    Vec3 at, up;
+    Listener::getOrientation(at, up);
+    DOUT("orientation at: "<<at<<" up: "<<up);
     context->process();
     context->suspend();
     
