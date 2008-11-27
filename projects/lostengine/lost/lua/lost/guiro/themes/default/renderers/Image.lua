@@ -3,9 +3,9 @@ module("lost.guiro.themes.default.renderers", package.seeall)
 --[[
      Image Renderer
   ]]
-require("lost.guiro.themes.Renderer")
+require("lost.guiro.Renderer")
 
-class "lost.guiro.themes.default.renderers.Image" (lost.guiro.themes.Renderer)
+class "lost.guiro.themes.default.renderers.Image" (lost.guiro.Renderer)
 Image = _G["lost.guiro.themes.default.renderers.Image"]
 
 function Image:__init() super()

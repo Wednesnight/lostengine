@@ -3,9 +3,9 @@ module("lost.guiro.themes.default.styles", package.seeall)
 --[[
      AnimatedImage Style
   ]]
-require("lost.guiro.themes.Style")
+require("lost.guiro.Style")
 
-class "lost.guiro.themes.default.styles.AnimatedImage" (lost.guiro.themes.Style)
+class "lost.guiro.themes.default.styles.AnimatedImage" (lost.guiro.Style)
 AnimatedImage = _G["lost.guiro.themes.default.styles.AnimatedImage"]
 
 function AnimatedImage:__init() super()

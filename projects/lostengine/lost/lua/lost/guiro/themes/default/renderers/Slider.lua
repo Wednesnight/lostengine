@@ -3,9 +3,9 @@ module("lost.guiro.themes.default.renderers", package.seeall)
 --[[
      Slider Renderer
   ]]
-require("lost.guiro.themes.Renderer")
+require("lost.guiro.Renderer")
 
-class "lost.guiro.themes.default.renderers.Slider" (lost.guiro.themes.Renderer)
+class "lost.guiro.themes.default.renderers.Slider" (lost.guiro.Renderer)
 Slider = _G["lost.guiro.themes.default.renderers.Slider"]
 
 function Slider:__init() super()

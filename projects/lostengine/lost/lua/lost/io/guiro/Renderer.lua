@@ -5,8 +5,8 @@ module("lost.io", package.seeall)
   ]]
 
 require("lost.io.Loader")
-require("lost.guiro.themes.Renderer")
+require("lost.guiro.Renderer")
 
 function Loader:Renderer(definition)
-  return self:apply(lost.guiro.themes.Renderer(), definition)
+  return self:apply(lost.guiro.Renderer(), definition)
 end

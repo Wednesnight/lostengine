@@ -3,9 +3,9 @@ module("lost.guiro.themes.default.renderers", package.seeall)
 --[[
      Window Renderer
   ]]
-require("lost.guiro.themes.Renderer")
+require("lost.guiro.Renderer")
 
-class "lost.guiro.themes.default.renderers.Window" (lost.guiro.themes.Renderer)
+class "lost.guiro.themes.default.renderers.Window" (lost.guiro.Renderer)
 Window = _G["lost.guiro.themes.default.renderers.Window"]
 
 function Window:__init() super()

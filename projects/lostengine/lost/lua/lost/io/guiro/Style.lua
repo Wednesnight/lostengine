@@ -5,8 +5,8 @@ module("lost.io", package.seeall)
   ]]
 
 require("lost.io.Loader")
-require("lost.guiro.themes.Style")
+require("lost.guiro.Style")
 
 function Loader:Style(definition)
-  return self:apply(lost.guiro.themes.Style(), definition)
+  return self:apply(lost.guiro.Style(), definition)
 end
