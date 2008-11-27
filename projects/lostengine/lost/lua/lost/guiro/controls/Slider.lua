@@ -83,30 +83,31 @@ function Slider:handleInput(event)
 end
 
 function Slider:updatePosition(location)
-  local globalRect = self:globalRect()
   local coord = "x"
+  local coordFunc = lost.guiro.xabs
   local size  = "width"
   if (self.orientation == Slider.Orientation.vertical) then
     coord = "y"
+    coordFunc = lost.guiro.yabs
     size  = "height"
   end
 
   local oldValue = self:value()
-  local globalRect = self:globalRect()
-  local buttonRect = self.button:globalRect()
+  local localRect = self:localRect()
+  local buttonRect = self.button:localRect()
   if (self.steps > 0) then
-    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size])), 0)
-    local stepSize = ((globalRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
+    local position = math.max(math.min(location[coord] - localRect[coord] - buttonRect[size] / 2, (localRect[size] - buttonRect[size])), 0)
+    local stepSize = ((localRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
     local steps, fraction = math.modf(position / stepSize)
     if (fraction > 0.75) then
       steps = steps + 1
     end
-    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
+    position = math.max(math.min(steps * stepSize, (localRect[size] - buttonRect[size])), 0)
     if (position ~= buttonRect[coord]) then
-      buttonRect[coord] = position
+      self.button.bounds[coord] = coordFunc(position)
     end
   else
-    buttonRect[coord] = math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0)
+    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - localRect[coord], (localRect[size] - buttonRect[size])), 0))
   end
   local newValue = self:value()
   if (oldValue ~= newValue) then
@@ -115,19 +116,23 @@ function Slider:updatePosition(location)
 end
 
 function Slider:value(value)
-  local globalRect = self:globalRect()
-  local buttonRect = self.button:globalRect()
+  local localRect = self:localRect()
+  local buttonRect = self.button:localRect()
   local coord = "x"
+  local coordFunc = lost.guiro.xabs
   local size  = "width"
   if (self.orientation == Slider.Orientation.vertical) then
     coord = "y"
+    coordFunc = lost.guiro.yabs
     size  = "height"
   end
 
   if value ~= nil then
-    buttonRect[coord] = ((globalRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value
-    self:updatePosition(lost.math.Vec2(buttonRect.x + globalRect.x, buttonRect.y + globalRect.y))
+    self.button.bounds[coord] = coordFunc(((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value)
+    buttonRect = self.button:localRect()
+    self:updatePosition(lost.math.Vec2(buttonRect.x + localRect.x, buttonRect.y + localRect.y))
   end
 
-  return (buttonRect[coord] / ((globalRect[size] - buttonRect[size]) / (self.max - self.min))) + self.min
+  buttonRect = self.button:localRect()
+  return (buttonRect[coord] / ((localRect[size] - buttonRect[size]) / (self.max - self.min))) + self.min
 end

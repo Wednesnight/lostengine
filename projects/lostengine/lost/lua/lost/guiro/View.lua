@@ -212,6 +212,13 @@ function View:globalRect()
   end
 end
 
+--[[
+    returns the Views rect in relative (parent) coordinates
+  ]]
+function View:localRect()
+  return self.bounds:rect(lost.math.Rect(0,0,0,0))
+end
+
 
 --[[ 
     helper methods
