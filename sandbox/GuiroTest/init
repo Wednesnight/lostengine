@@ -1,3 +1,5 @@
+require("testing")
+
 require("lost.application.Application")
 
 function lost.application.Application:configure(event)

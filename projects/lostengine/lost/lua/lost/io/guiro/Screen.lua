@@ -12,6 +12,6 @@ function Loader:loadScreen(filename)
   local result = {}
   local guiro = self
   guiro.Screen = function(self, definition) result = self:applyDefinitionToView(lost.guiro.Screen(), definition) return result end
-  self:executeScript(filename, {guiro = guiro, lost = lost, log = log, gl = gl, tostring = tostring})
+  self:executeScript(filename, {guiro = guiro, lost = lost, log = log, gl = gl, tostring = tostring, require = require})
   return result
 end

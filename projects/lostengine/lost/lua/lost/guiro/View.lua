@@ -1,5 +1,7 @@
 module("lost.guiro", package.seeall)
 
+require("lost.guiro.Bounds")
+
 --[[
      View class
   ]]
@@ -16,10 +18,13 @@ View.bases = { "View" }
     constructor
   ]]
 function View:__init() super()
-  self.bounds = lost.math.Rect(0,0,0,0)
+  self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
   self.isView = true
   self.listeners = {}
+  self.setters = {}
+
+  self:addSetter("bounds", function(value) self:setBounds(value) end)
 end
 
 --[[ 
@@ -150,6 +155,37 @@ function View:dispatchEvent(event)
 end
 
 --[[ 
+    adds setter to the list of setters for property
+
+      i.e.
+
+      view:addSetter("bounds", function(value) self:setBounds(value) end)
+      
+      function View:setBounds(bounds)
+        self.bounds = bounds
+        self.needsLayout = true
+      end
+      
+  ]]
+function View:addSetter(property, setter)
+  if not self.setters[property] then
+    self.setters[property] = {}
+  end
+  table.insert(self.setters[property], setter)
+end
+
+--[[
+    calls registered setters for key when value is assigned to View.key
+  ]]
+function View:__newindex(key, value)
+  if self.setters[key] then
+    for which,setter in next,self.setters[key] do
+      setter(value)
+    end
+  end
+end
+
+--[[ 
     uses self.renderer and self.style to create visual representation
   ]]
 function View:render(context)
@@ -159,16 +195,21 @@ function View:render(context)
 end
 
 --[[
+    bounds setter
+  ]]
+function View:setBounds(bounds)
+  self.bounds = bounds
+end
+
+--[[
     returns the Views rect in absolute (screen) coordinates
   ]]
 function View:globalRect()
-  local result = lost.math.Rect(self.bounds)
   if self.parent then
-    local parentRect = self.parent:globalRect()
-    result.x = result.x + parentRect.x
-    result.y = result.y + parentRect.y
+    return self.bounds:rect(self.parent:globalRect())
+  else
+    return self.bounds:rect(lost.math.Rect(0,0,0,0))
   end
-  return result
 end
 
 

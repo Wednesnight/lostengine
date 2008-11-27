@@ -1,10 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.controls.Control")
+require("lost.guiro.Bounds")
+
 --[[
      Window control
   ]]
-require("lost.guiro.controls.Control")
-
 class "lost.guiro.controls.Window" (lost.guiro.controls.Control)
 Window = _G["lost.guiro.controls.Window"]
 
@@ -46,19 +47,20 @@ function Window:handleInput(event)
     -- move
     elseif info.which == Control.InputType.move then
       if self.dragging then
+        local globalRect = self:globalRect()
         local parentRect = nil
         if self.parent then
           parentRect = self.parent:globalRect()
         end
-        local newBounds = lost.math.Vec2(self.bounds.x + (info.location.x - self.lastDragPos.x),
-                                         self.bounds.y + (info.location.y - self.lastDragPos.y))
+        local newBounds = lost.math.Vec2(globalRect.x + (info.location.x - self.lastDragPos.x),
+                                         globalRect.y + (info.location.y - self.lastDragPos.y))
         if parentRect then
-          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - self.bounds.width), 1)
-          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - self.bounds.height), 1)
+          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - globalRect.width), 1)
+          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - globalRect.height), 1)
         end
 
-        self.bounds.x = newBounds.x
-        self.bounds.y = newBounds.y
+        self.bounds.x = lost.guiro.xabs(newBounds.x)
+        self.bounds.y = lost.guiro.yabs(newBounds.y)
         self.lastDragPos = info.location
       end
     end

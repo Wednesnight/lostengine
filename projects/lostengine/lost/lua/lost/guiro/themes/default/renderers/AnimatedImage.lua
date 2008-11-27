@@ -27,7 +27,7 @@ function AnimatedImage:render(context, image, style)
   context:setColor(lost.common.Color(image.color.r, image.color.g, image.color.b, image.alpha))
   local imageRect = lost.math.Rect(globalRect)
   if not image.stretch then
-    local ratio = lost.math.Vec2(image.bounds.width/image.frameSize.width, image.bounds.height/image.frameSize.height)
+    local ratio = lost.math.Vec2(globalRect.width/image.frameSize.width, globalRect.height/image.frameSize.height)
     if (ratio.x <= ratio.y) then
       imageRect.width  = math.min(imageRect.width, image.frameSize.width * ratio.x)
       imageRect.height = math.min(imageRect.height, image.frameSize.height * ratio.x)

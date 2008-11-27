@@ -4,6 +4,7 @@ module("lost.guiro.controls", package.seeall)
      Slider control
   ]]
 require("lost.guiro.View")
+require("lost.guiro.Bounds")
 require("lost.guiro.controls.Control")
 require("lost.guiro.controls.Button")
 
@@ -42,11 +43,10 @@ function Slider:__init() super()
   self.max         = 100
   self.steps       = 0
 
-  self.bounds = lost.math.Rect(0,0,100,25)
-
+  local g = lost.guiro
   self.button = lost.guiro.controls.Button()
   self.button.id = "sliderButton"
-  self.button.bounds = lost.math.Rect(0,0,24,24)
+  self.button.bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(24), g.habs(24))
   self.button.fadeStates = true
   self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
   self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
@@ -92,19 +92,21 @@ function Slider:updatePosition(location)
   end
 
   local oldValue = self:value()
+  local globalRect = self:globalRect()
+  local buttonRect = self.button:globalRect()
   if (self.steps > 0) then
-    local position = math.max(math.min(location[coord] - globalRect[coord] - self.button.bounds[size] / 2, (self.bounds[size] - self.button.bounds[size])), 0)
-    local stepSize = ((self.bounds[size] - self.button.bounds[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
+    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size])), 0)
+    local stepSize = ((globalRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
     local steps, fraction = math.modf(position / stepSize)
     if (fraction > 0.75) then
       steps = steps + 1
     end
-    position = math.max(math.min(steps * stepSize, (self.bounds[size] - self.button.bounds[size])), 0)
-    if (position ~= self.button.bounds[coord]) then
-      self.button.bounds[coord] = position
+    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
+    if (position ~= buttonRect[coord]) then
+      buttonRect[coord] = position
     end
   else
-    self.button.bounds[coord] = math.max(math.min(location[coord] - globalRect[coord], (self.bounds[size] - self.button.bounds[size])), 0)
+    buttonRect[coord] = math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0)
   end
   local newValue = self:value()
   if (oldValue ~= newValue) then
@@ -114,6 +116,7 @@ end
 
 function Slider:value(value)
   local globalRect = self:globalRect()
+  local buttonRect = self.button:globalRect()
   local coord = "x"
   local size  = "width"
   if (self.orientation == Slider.Orientation.vertical) then
@@ -122,9 +125,9 @@ function Slider:value(value)
   end
 
   if value ~= nil then
-    self.button.bounds[coord] = ((self.bounds[size] - self.button.bounds[size]) / math.abs(self.max - self.min)) * value
-    self:updatePosition(lost.math.Vec2(self.button.bounds.x + globalRect.x, self.button.bounds.y + globalRect.y))
+    buttonRect[coord] = ((globalRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value
+    self:updatePosition(lost.math.Vec2(buttonRect.x + globalRect.x, buttonRect.y + globalRect.y))
   end
 
-  return (self.button.bounds[coord] / ((self.bounds[size] - self.button.bounds[size]) / (self.max - self.min))) + self.min
+  return (buttonRect[coord] / ((globalRect[size] - buttonRect[size]) / (self.max - self.min))) + self.min
 end

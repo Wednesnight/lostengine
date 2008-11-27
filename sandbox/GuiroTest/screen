@@ -1,17 +1,54 @@
+require("lost.guiro.Bounds")
+g = lost.guiro
+
 screen = guiro:Screen
 {
   id = "screen",
-  bounds = lost.math.Rect(0, 0, 800, 600),
+  bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(800), g.habs(600)),
 
   guiro:UserInterface
   {
     id = "ui",
-    bounds = lost.math.Rect(0, 0, 800, 600),
+    bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(800), g.habs(600)),
+
+    guiro:Window
+    {
+      bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+      header =
+      {
+        height = 25
+      },
+
+      guiro:Image
+      {
+        bounds = g.Bounds(g.xleft(), g.ytop({abs=-25}), g.wrel(0.5), g.hrel(0.5, -25)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true
+      },
+      guiro:Image
+      {
+        bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(0.5), g.hrel(0.5)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true
+      },
+      guiro:Image
+      {
+        bounds = g.Bounds(g.xright(), g.ytop({abs=-25}), g.wrel(0.5), g.hrel(0.5, -25)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true
+      },
+      guiro:Image
+      {
+        bounds = g.Bounds(g.xright(), g.ybottom(), g.wrel(0.5), g.hrel(0.5)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true
+      }
+    },
 
     guiro:Window
     {
       id = "window",
-      bounds = lost.math.Rect(200, 150, 400, 300),
+      bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(0.5), g.hrel(0.5)),
       header =
       {
         height = 25
@@ -19,25 +56,25 @@ screen = guiro:Screen
 
       label = guiro:Label
       {
-        bounds = lost.math.Rect(5,282,390,25),
+        bounds = g.Bounds(g.xabs(5), g.yabs(282), g.wabs(390), g.habs(25)),
         text = "funky window"
       },
 
       guiro:Button
       {
         id = "button",
-        bounds = lost.math.Rect(340, 10, 50, 40),
+        bounds = g.Bounds(g.xabs(340), g.yabs(10), g.wabs(50), g.habs(40)),
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = lost.math.Rect(10,15,50,40),
+          bounds = g.Bounds(g.xabs(10), g.yabs(15), g.wabs(50), g.habs(40)),
           text = "Small"
         },
         images =
         {
           released = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 50, 40),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -49,7 +86,7 @@ screen = guiro:Screen
           },
           hovered = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 50, 40),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -61,7 +98,7 @@ screen = guiro:Screen
           },
           pressed = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 50, 40),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -76,18 +113,18 @@ screen = guiro:Screen
 
       guiro:Button
       {
-        bounds = lost.math.Rect(290, 50, 100, 50),
+        bounds = g.Bounds(g.xabs(290), g.yabs(50), g.wabs(100), g.habs(50)),
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = lost.math.Rect(30,20,100,50),
+          bounds = g.Bounds(g.xabs(30), g.yabs(20), g.wabs(100), g.habs(50)),
           text = "Medium"
         },
         images =
         {
           released = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 100, 50),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -99,7 +136,7 @@ screen = guiro:Screen
           },
           hovered = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 100, 50),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -111,7 +148,7 @@ screen = guiro:Screen
           },
           pressed = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 100, 50),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -126,18 +163,18 @@ screen = guiro:Screen
 
       guiro:Button
       {
-        bounds = lost.math.Rect(240, 100, 150, 75),
+        bounds = g.Bounds(g.xabs(240), g.yabs(100), g.wabs(150), g.habs(75)),
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = lost.math.Rect(60,30,150,75),
+          bounds = g.Bounds(g.xabs(60), g.yabs(30), g.wabs(150), g.habs(75)),
           text = "Large"
         },
         images =
         {
           released = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 150, 75),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -149,7 +186,7 @@ screen = guiro:Screen
           },
           hovered = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 150, 75),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -161,7 +198,7 @@ screen = guiro:Screen
           },
           pressed = guiro:Image
           {
-            bounds = lost.math.Rect(0, 0, 150, 75),
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
             cornerBounds =
             {
@@ -177,16 +214,16 @@ screen = guiro:Screen
       guiro:AnimatedImage
       {
         id = "fugly",
-        bounds = lost.math.Rect(320, 185, 80, 80),
+        bounds = g.Bounds(g.xabs(320), g.yabs(185), g.wabs(80), g.habs(80)),
         bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
-        frameSize = lost.math.Rect(0,0,153,184),
+        frameSize = lost.math.Rect(0, 0, 153, 184),
         interval = 0.05
       },
       
       guiro:Slider
       {
         id = "slider",
-        bounds = lost.math.Rect(10, 115, 25, 150),
+        bounds = g.Bounds(g.xabs(10), g.yabs(115), g.wabs(25), g.habs(150)),
         orientation = lost.guiro.controls.Slider.Orientation.vertical,
         min = 0,
         max = 1,
@@ -203,7 +240,7 @@ screen = guiro:Screen
       guiro:Slider
       {
         id = "slider2",
-        bounds = lost.math.Rect(50, 240, 150, 25),
+        bounds = g.Bounds(g.xabs(50), g.yabs(240), g.wabs(150), g.habs(25)),
         orientation = lost.guiro.controls.Slider.Orientation.horizontal,
         min = 0,
         max = 1,
@@ -224,7 +261,7 @@ screen = guiro:Screen
       guiro:Image
       {
         id = "image",
-        bounds = lost.math.Rect(50, 25, 180, 200),
+        bounds = g.Bounds(g.xabs(50), g.yabs(25), g.wabs(180), g.habs(200)),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
         stretch = true,
         style = guiro:Style
@@ -246,7 +283,7 @@ screen = guiro:Screen
       guiro:Label
       {
         id="label",
-        bounds = lost.math.Rect(5,5,100,30),
+        bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
         text="Hello World!",
         fontSize = 16
       }

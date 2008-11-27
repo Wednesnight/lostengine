@@ -141,7 +141,7 @@ function Image:render(context, image, style)
   else
     local imageRect = lost.math.Rect(globalRect)
     if not image.stretch then
-      local ratio = lost.math.Vec2(image.bounds.width/image.bitmap.width, image.bounds.height/image.bitmap.height)
+      local ratio = lost.math.Vec2(globalRect.width/image.bitmap.width, globalRect.height/image.bitmap.height)
       if (ratio.x <= ratio.y) then
         imageRect.width  = math.min(imageRect.width, image.bitmap.width * ratio.x)
         imageRect.height = math.min(imageRect.height, image.bitmap.height * ratio.x)
