@@ -28,7 +28,7 @@ end
   ]]
 function Window:handleInput(event)
   local info = self:initializeInput(event)
-  if info then
+  if info and (self.dragging or info.rect:contains(info.location)) then
     local headerRect = lost.math.Rect(info.rect.x, 
                                       info.rect.y + (info.rect.height - self.header.height),
                                       info.rect.width,
@@ -36,9 +36,17 @@ function Window:handleInput(event)
 
     -- click
     if info.which == Control.InputType.down then
-      self.dragging = headerRect:contains(info.location)
-      self.lastDragPos = info.location
---      self.dragOffset = lost.math.Vec2(info.location.x - headerRect.x, info.location.y - headerRect.y)
+      local topmost = nil
+      if self.parent then
+        topmost = self.parent:getViewAt(info.location)
+      end
+      if (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location) then
+        if self.parent then
+          self.parent:setFocus(self)
+        end
+        self.dragging = headerRect:contains(info.location)
+        self.lastDragPos = info.location
+      end
 
     -- release
     elseif info.which == Control.InputType.up then
@@ -47,16 +55,15 @@ function Window:handleInput(event)
     -- move
     elseif info.which == Control.InputType.move then
       if self.dragging then
-        local globalRect = self:globalRect()
         local parentRect = nil
         if self.parent then
           parentRect = self.parent:globalRect()
         end
-        local newBounds = lost.math.Vec2(globalRect.x + (info.location.x - self.lastDragPos.x),
-                                         globalRect.y + (info.location.y - self.lastDragPos.y))
+        local newBounds = lost.math.Vec2(info.rect.x + (info.location.x - self.lastDragPos.x),
+                                         info.rect.y + (info.location.y - self.lastDragPos.y))
         if parentRect then
-          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - globalRect.width), 1)
-          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - globalRect.height), 1)
+          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - info.rect.width), 1)
+          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - info.rect.height), 1)
         end
 
         self.bounds.x = lost.guiro.xabs(newBounds.x)

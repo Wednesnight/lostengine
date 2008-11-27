@@ -24,7 +24,7 @@ function Window:render(context, window, style)
 
   if window.label then
     if not window.label.parent then
-      window.label:setParent(window)
+      window:appendChild(window.label)
     end
     window.label.color = style.header.fontColor
     window.label:render(context)

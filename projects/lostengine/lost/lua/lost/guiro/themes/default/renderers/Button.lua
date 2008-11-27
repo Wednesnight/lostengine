@@ -36,7 +36,7 @@ function Button:render(context, button, style)
   context:setColor(self.color)
   if button.images and button.images[button.state] then
     if not button.images[button.state].parent then
-      button.images[button.state]:setParent(button)
+      button:appendChild(button.images[button.state])
     end
     button.images[button.state].color = self.color
     button.images[button.state]:render(context)
@@ -46,7 +46,7 @@ function Button:render(context, button, style)
 
   if button.label then
     if not button.label.parent then
-      button.label:setParent(button)
+      button:appendChild(button.label)
     end
     button.label.color = self.fontColor
     button.label:render(context)

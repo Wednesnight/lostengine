@@ -22,9 +22,6 @@ function View:__init() super()
   self.children = {}
   self.isView = true
   self.listeners = {}
-  self.setters = {}
-
-  self:addSetter("bounds", function(value) self:setBounds(value) end)
 end
 
 --[[ 
@@ -72,8 +69,8 @@ end
   ]]
 function View:appendChild(child)
   if (child.id) then
-    if (not self.children[child.id]) then
-      self.children[child.id] = child
+    if (self(child.id) == nil) then
+      table.insert(self.children, child)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
@@ -88,10 +85,10 @@ end
   ]]
 function View:removeChild(child)
   local idx = 1
-  for k,v in next,self.children do
-    if (v == child) then
+  for k,view in next,self.children do
+    if (view == child) then
       table.remove(self.children, idx)
-      child.setParent(nil)
+      child:setParent(nil)
       break
     end
     idx = idx+1
@@ -103,7 +100,14 @@ end
     nil if childId is invalid
   ]]
 function View:__call(childId)
-  return self.children[childId]
+  local result = nil
+  for k,view in next,self.children do
+    if (view.id == childId) then
+      result = view
+      break
+    end
+  end
+  return result
 end
 
 --[[ 
@@ -155,37 +159,6 @@ function View:dispatchEvent(event)
 end
 
 --[[ 
-    adds setter to the list of setters for property
-
-      i.e.
-
-      view:addSetter("bounds", function(value) self:setBounds(value) end)
-      
-      function View:setBounds(bounds)
-        self.bounds = bounds
-        self.needsLayout = true
-      end
-      
-  ]]
-function View:addSetter(property, setter)
-  if not self.setters[property] then
-    self.setters[property] = {}
-  end
-  table.insert(self.setters[property], setter)
-end
-
---[[
-    calls registered setters for key when value is assigned to View.key
-  ]]
-function View:__newindex(key, value)
-  if self.setters[key] then
-    for which,setter in next,self.setters[key] do
-      setter(value)
-    end
-  end
-end
-
---[[ 
     uses self.renderer and self.style to create visual representation
   ]]
 function View:render(context)
@@ -195,10 +168,47 @@ function View:render(context)
 end
 
 --[[
-    bounds setter
+    moves child to top of render list
   ]]
-function View:setBounds(bounds)
-  self.bounds = bounds
+function View:setFocus(child)
+  if self.parent then
+    self.parent:setFocus(self)
+  end
+
+  local idx = 1
+  for k,view in next,self.children do
+    if (view.id == child.id) then
+      table.remove(self.children, idx)
+      table.insert(self.children, child)
+      break
+    end
+    idx = idx+1
+  end
+end
+
+--[[
+    gets topmost child at given point
+  ]]
+function View:getViewAt(point)
+  local result = nil
+  if self.parent then
+    result = self.parent:getViewAt(point)
+  end
+  if (result == nil or rawequal(result, self)) then
+    local globalRect = self:globalRect()
+    if globalRect:contains(point) then
+      local idx = table.maxn(self.children)
+      while idx > 0 do
+        local childRect = self.children[idx]:globalRect()
+        if childRect:contains(point) then
+          result = self.children[idx]
+          break
+        end
+        idx = idx-1
+      end
+    end
+  end
+  return result
 end
 
 --[[

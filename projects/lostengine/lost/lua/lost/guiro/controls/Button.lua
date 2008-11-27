@@ -57,10 +57,15 @@ end
   ]]
 function Button:handleInput(event)
   local info = self:initializeInput(event)
-  if info then
+  if info and ((self.down or self.hovered) or info.rect:contains(info.location)) then
+    local topmost = nil
+    if self.parent then
+      topmost = self.parent:getViewAt(info.location)
+    end
+
     -- click
     if info.which == Control.InputType.down then
-      self.down = info.rect:contains(info.location)
+      self.down = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
       self.pressed = self.down
       if self.down then
         self:dispatchEvent(Button.ButtonEvent(Button.ButtonPress, info.location))
@@ -76,12 +81,12 @@ function Button:handleInput(event)
       end
       self.down = false
       self.pressed = false
-      self.hovered = info.rect:contains(info.location)
+      self.hovered = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
 
     -- move
     elseif info.which == Control.InputType.move then
       local wasHovered = self.hovered
-      self.hovered = info.rect:contains(info.location)
+      self.hovered = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
       if not wasHovered and self.hovered then
         self:dispatchEvent(Button.ButtonEvent(Button.ButtonEnter, info.location))
       elseif wasHovered and not self.hovered then

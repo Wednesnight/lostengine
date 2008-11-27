@@ -44,24 +44,22 @@ function Slider:__init() super()
   self.steps       = 0
 
   local g = lost.guiro
-  self.button = lost.guiro.controls.Button()
-  self.button.id = "sliderButton"
-  self.button.bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(24), g.habs(24))
-  self.button.fadeStates = true
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
-  self.button:setParent(self)
+  local button = lost.guiro.controls.Button()
+  button.id = "sliderButton"
+  button.bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(24), g.habs(24))
+  button.fadeStates = true
+  self:setButton(button)
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleInput(event) end)
   self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:handleInput(event) end)
 end
 
---[[
-    forward to button
-  ]]
-function Slider:dispatchEvent(event)
-  self.button:dispatchEvent(event)
-  lost.guiro.View.dispatchEvent(self, event)
+function Slider:setButton(newButton)
+  self:removeChild(self.button)
+  self.button = newButton
+  self:appendChild(self.button)
+  self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
+  self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
 end
 
 function Slider:handleInput(event)
@@ -93,21 +91,21 @@ function Slider:updatePosition(location)
   end
 
   local oldValue = self:value()
-  local localRect = self:localRect()
+  local globalRect = self:globalRect()
   local buttonRect = self.button:localRect()
   if (self.steps > 0) then
-    local position = math.max(math.min(location[coord] - localRect[coord] - buttonRect[size] / 2, (localRect[size] - buttonRect[size])), 0)
-    local stepSize = ((localRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
+    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size])), 0)
+    local stepSize = ((globalRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
     local steps, fraction = math.modf(position / stepSize)
     if (fraction > 0.75) then
       steps = steps + 1
     end
-    position = math.max(math.min(steps * stepSize, (localRect[size] - buttonRect[size])), 0)
+    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
     if (position ~= buttonRect[coord]) then
       self.button.bounds[coord] = coordFunc(position)
     end
   else
-    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - localRect[coord], (localRect[size] - buttonRect[size])), 0))
+    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0))
   end
   local newValue = self:value()
   if (oldValue ~= newValue) then
