@@ -23,6 +23,7 @@ namespace lost
             .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
             .def("doFile", (int(State::*)(const std::string&)) &State::doFile)
             .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
+            .def("getScriptFilename", &State::getScriptFilename)
             .def_readwrite("callstackSize", &State::callstackSize)
         ]
       ];

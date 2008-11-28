@@ -38,14 +38,18 @@ namespace lost
       lua_close(state);
     }
     
+    std::string State::getScriptFilename(const std::string& scriptContent, const std::string& defaultName)
+    {
+      md5wrapper  md5;
+      std::string file(md5.getHashFromString(scriptContent));
+      if (fileHashes.find(file) != fileHashes.end()) return fileHashes[file];
+        else return defaultName;
+    }
+    
     std::string State::getScriptSource(lua_Debug& debug)
     {
       std::string result("source: ");
-      md5wrapper  md5;
-      std::string file(md5.getHashFromString(debug.source));
-      if (fileHashes.find(file) != fileHashes.end()) result.append(fileHashes[file]);
-      else result.append(debug.short_src);
-      
+      result.append(getScriptFilename(debug.source, debug.short_src));
       return result;
     }
     
@@ -78,7 +82,9 @@ namespace lost
       }
       
       // lua error message
-      std::string error = lua_tostring(state, -1);
+      std::string error;
+      const char* errorc = lua_tostring(state, -1);
+      if (errorc != NULL) error = errorc;
       lua_pop(state, 1);
       EOUT(offset << error);
 
@@ -148,9 +154,18 @@ namespace lost
           case LUA_ERRERR:errcode="LUA_ERRERR";break;
           default:errcode="??";break;
         }
-        std::string errstring = lua_tostring(state, -1);
+        std::string errstring;
+        const char* errstringc = lua_tostring(state, -1);
         lua_pop(state,1);
-        throw std::runtime_error(errcode+" : "+errstring);
+        if (errstringc != NULL)
+        {
+          errstring = errstringc;
+          throw std::runtime_error(errcode +" : "+ errstring);
+        }
+        else
+        {
+          throw std::runtime_error(errcode);
+        }
       }
       return result;
     }

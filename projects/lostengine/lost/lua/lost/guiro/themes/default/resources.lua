@@ -5,7 +5,7 @@ module("lost.guiro.themes.default", package.seeall)
 ]]
 
 -- loader
-loader = globals.app.loader
+loader = lost.globals.app.loader
 
 -- fonts
 freetypeLibrary = lost.font.freetype.Library.create()

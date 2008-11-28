@@ -1,4 +1,4 @@
-lost.application.Application = globals.app
+lost.application.Application = lost.globals.app
 
 function lost.application.Application:fireEvent(name, event)
   if type(self[name]) == "function" then
@@ -18,7 +18,7 @@ function lost.application.Application:eventHandler(event)
   end
 end
 
-globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, function(event) lost.application.Application:eventHandler(event) end)
-globals.app:addEventListener(lost.application.ApplicationEvent.INIT,    function(event) lost.application.Application:eventHandler(event) end)
-globals.app:addEventListener(lost.application.ApplicationEvent.RUN,     function(event) lost.application.Application:eventHandler(event) end)
-globals.app:addEventListener(lost.application.ApplicationEvent.QUIT,    function(event) lost.application.Application:eventHandler(event) end)
+lost.globals.app:addEventListener(lost.application.ApplicationEvent.PREINIT, function(event) lost.application.Application:eventHandler(event) end)
+lost.globals.app:addEventListener(lost.application.ApplicationEvent.INIT,    function(event) lost.application.Application:eventHandler(event) end)
+lost.globals.app:addEventListener(lost.application.ApplicationEvent.RUN,     function(event) lost.application.Application:eventHandler(event) end)
+lost.globals.app:addEventListener(lost.application.ApplicationEvent.QUIT,    function(event) lost.application.Application:eventHandler(event) end)

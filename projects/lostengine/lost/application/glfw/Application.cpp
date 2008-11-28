@@ -41,9 +41,9 @@ namespace application
     interpreter.reset(new lua::State(true, true, true, loader)); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
 
-    globals(*interpreter)["globals"]                   = newtable(*interpreter); // create globals table
-    globals(*interpreter)["globals"]["app"]            = this; // map the app itself into the interpreter so scripts can attach to its events
-    luabind::globals(*interpreter)["globals"]["state"] = interpreter; // map the state itself into the interpreter so scripts can use it
+    globals(*interpreter)["lost"]["globals"]                   = newtable(*interpreter); // create globals table
+    globals(*interpreter)["lost"]["globals"]["app"]            = this; // map the app itself into the interpreter so scripts can attach to its events
+    luabind::globals(*interpreter)["lost"]["globals"]["state"] = interpreter; // map the state itself into the interpreter so scripts can use it
     
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     

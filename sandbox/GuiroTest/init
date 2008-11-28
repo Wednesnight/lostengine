@@ -1,6 +1,13 @@
 require("lost.application.Application")
+require("lost.common.Profiler")
+
+local profilerEnabled = false
 
 function lost.application.Application:configure(event)
+  if profilerEnabled then
+    self.profiler = lost.common.Profiler()
+  end
+
   self.config.displayAttributes = lost.common.DisplayAttributes()
   if lost.platform.isIPhone() then
     self.config.displayAttributes.width = 320
@@ -30,7 +37,7 @@ function lost.application.Application:init(event)
   controls.fpsMeter = lost.common.FpsMeter(self.context)
 
   require("lost.io.Guiro")
-  controls.loader = lost.io.Loader(globals.app.loader)
+  controls.loader = lost.io.Loader(lost.globals.app.loader)
   controls.screen = controls.loader:loadScreen("screen")
   self.screen = controls.screen
 
@@ -52,15 +59,24 @@ function lost.application.Application:init(event)
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
 
-  globals.timer = lost.application.Timer("luarender", 1/60)
-  globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
+  lost.globals.timer = lost.application.Timer("luarender", 1/60)
+  lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
 end
 
 function lost.application.Application:run(event)
   log.debug("run")
+  
+  if profilerEnabled then
+    self.profiler:enable()
+  end
 end
 
 function lost.application.Application:exit(event)
+  if profilerEnabled then
+    self.profiler:disable()
+    self.profiler:report()
+  end
+
   log.debug("exit")
 end
 
@@ -99,5 +115,5 @@ function lost.application.Application:renderHandler(event)
 
   self.context:popState()
   
-  globals.app:swapBuffers()
+  self:swapBuffers()
 end

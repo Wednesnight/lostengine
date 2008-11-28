@@ -21,6 +21,7 @@ namespace lost
             boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
       ~State();
 
+      std::string getScriptFilename(const std::string& scriptContent, const std::string& defaultName);
       std::string getScriptSource(lua_Debug& debug);
       int handleError();
       
