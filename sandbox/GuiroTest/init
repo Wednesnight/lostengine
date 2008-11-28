@@ -83,7 +83,7 @@ end
 function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
-  gl.glViewport(0, 0, resizeEvent.width-1, resizeEvent.height-1) gl.GLDEBUG()
+  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
 end
 
 function lost.application.Application:keyHandler(event)

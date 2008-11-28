@@ -45,7 +45,7 @@ end
 
 function xrel(x, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.width * x) + mod end
+  return function(self, parentRect) return (parentRect.x + (parentRect.width * x)) + mod end
 end
 
 function ycenter(mod)
@@ -76,7 +76,7 @@ end
 
 function yrel(y, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.height * y) + mod end
+  return function(self, parentRect) return (parentRect.y + (parentRect.height * y)) + mod end
 end
 
 function wabs(width, mod)

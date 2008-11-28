@@ -143,7 +143,7 @@ void Context::set2DProjection(const lost::math::Vec2& offset, const lost::math::
 {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  lgluOrtho2D(offset.x, dimension.width-1, offset.y, dimension.height-1);
+  lgluOrtho2D(offset.x, dimension.width, offset.y, dimension.height);
 }
       
 void Context::set3DProjection(const lost::math::Vec3& eye,
