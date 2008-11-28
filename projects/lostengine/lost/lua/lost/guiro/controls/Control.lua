@@ -77,7 +77,7 @@ function Control:initializeInput(event)
   return false
 end
 
-function Control:render(context)
+function Control:redraw(context)
   if not self.theme then
     self.theme = lost.guiro.config.theme
   end
@@ -88,6 +88,4 @@ function Control:render(context)
     self.style = self.theme.styles[self:className()]()
   end
   self.renderer:render(context, self, self.style)
-  
-  lost.guiro.View.render(self, context)
 end

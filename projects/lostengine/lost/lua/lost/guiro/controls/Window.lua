@@ -68,6 +68,7 @@ function Window:handleInput(event)
 
         self.bounds.x = lost.guiro.xabs(newBounds.x)
         self.bounds.y = lost.guiro.yabs(newBounds.y)
+        self:needsLayout()
         self.lastDragPos = info.location
       end
     end

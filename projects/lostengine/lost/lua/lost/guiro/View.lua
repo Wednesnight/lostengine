@@ -22,6 +22,15 @@ function View:__init() super()
   self.children = {}
   self.isView = true
   self.listeners = {}
+
+  -- layout state flags
+  self.dirtyLayout = true
+  self.dirtyChildLayout = false
+  self.currentGlobalRect = lost.math.Rect()
+  self.currentLocalRect = lost.math.Rect()
+
+  -- render state flags
+  self.dirty = true
 end
 
 --[[ 
@@ -158,15 +167,6 @@ function View:dispatchEvent(event)
   end
 end
 
---[[ 
-    uses self.renderer and self.style to create visual representation
-  ]]
-function View:render(context)
-  for k,view in next,self.children do
-    view:render(context)
-  end
-end
-
 --[[
     moves child to top of render list
   ]]
@@ -212,21 +212,108 @@ function View:getViewAt(point)
 end
 
 --[[
+    updates own and children's layout
+  ]]
+function View:updateLayout(forceUpdate)
+  -- view needs update
+  if forceUpdate or self.dirtyLayout then
+    self.dirtyLayout = false
+    self.dirtyChildLayout = false
+    if self.parent then
+      self.currentGlobalRect = self.bounds:rect(self.parent:globalRect())
+    else
+      self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
+    end
+    self.currentLocalRect = self.bounds:rect(lost.math.Rect())
+    for key,view in next,self.children do
+      view:updateLayout(true)
+    end
+
+  -- child needs update
+  elseif self.dirtyChildLayout then
+    self.dirtyChildLayout = false
+    for key,view in next,self.children do
+      if view.dirtyLayout or view.dirtyChildLayout then
+        view:updateLayout()
+      end
+    end
+  end
+  
+  return self.currentGlobalRect, self.currentLocalRect
+end
+
+--[[
     returns the Views rect in absolute (screen) coordinates
   ]]
 function View:globalRect()
-  if self.parent then
-    return self.bounds:rect(self.parent:globalRect())
-  else
-    return self.bounds:rect(lost.math.Rect(0,0,0,0))
-  end
+  local globalRect, localRect = self:updateLayout()
+  return globalRect
 end
 
 --[[
     returns the Views rect in relative (parent) coordinates
   ]]
 function View:localRect()
-  return self.bounds:rect(lost.math.Rect(0,0,0,0))
+  local globalRect, localRect = self:updateLayout()
+  return localRect
+end
+
+--[[
+    sets dirtyLayout and parent's dirtyChildLayout flags
+  ]]
+function View:needsLayout()
+  self:needsRedraw()
+  if not self.dirtyLayout then
+    self.dirtyLayout = true
+    if self.parent then
+      self.parent:needsChildLayout()
+    end
+  end
+end
+
+--[[
+    sets dirtyChildLayout flag
+  ]]
+function View:needsChildLayout()
+  if not self.dirtyChildLayout then
+    self.dirtyChildLayout = true
+    if self.parent then
+      self.parent:needsChildLayout()
+    end
+  end
+end
+
+--[[
+    redraw prototype
+  ]]
+function View:redraw(context)
+  -- empty
+end
+
+--[[
+    triggers redraw on children
+  ]]
+function View:render(context, forceRender)
+  if forceRender or self.dirty then
+    self.dirty = false
+    self:redraw(context)
+
+    for k,view in next,self.children do
+      view:render(context, true)
+    end
+  end
+end
+
+--[[
+    sets dirty flag to trigger redraw
+  ]]
+function View:needsRedraw()
+  if not self.dirty then
+    self.dirty = true
+    if self.parent then
+      self.parent:needsRedraw()
+    end
+  end
 end
 
 

@@ -27,4 +27,7 @@ function Slider:render(context, slider, style)
   end
 
   slider.button:render(context)
+
+  -- FIXME: currently we have to update every frame  
+  slider:needsRedraw()
 end

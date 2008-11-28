@@ -103,9 +103,11 @@ function Slider:updatePosition(location)
     position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
     if (position ~= buttonRect[coord]) then
       self.button.bounds[coord] = coordFunc(position)
+      self.button:needsLayout()
     end
   else
     self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0))
+    self.button:needsLayout()
   end
   local newValue = self:value()
   if (oldValue ~= newValue) then
@@ -127,6 +129,7 @@ function Slider:value(value)
 
   if value ~= nil then
     self.button.bounds[coord] = coordFunc(((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value)
+    self.button:needsLayout()
     buttonRect = self.button:localRect()
     self:updatePosition(lost.math.Vec2(buttonRect.x + localRect.x, buttonRect.y + localRect.y))
   end

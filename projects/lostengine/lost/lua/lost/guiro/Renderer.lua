@@ -44,6 +44,9 @@ function Renderer:fade(currentColor, targetColor)
   end
 end
 
+--[[
+    render prototype
+  ]]
 function Renderer:render(context, object, style)
   -- empty
 end
