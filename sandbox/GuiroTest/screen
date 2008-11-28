@@ -223,7 +223,7 @@ screen = guiro:Screen
       guiro:Slider
       {
         id = "slider",
-        bounds = g.Bounds(g.xabs(10), g.yabs(115), g.wabs(25), g.habs(150)),
+        bounds = g.Bounds(g.xabs(26), g.yabs(25), g.wabs(25), g.habs(200)),
         orientation = lost.guiro.controls.Slider.Orientation.vertical,
         min = 0,
         max = 1,
@@ -240,7 +240,7 @@ screen = guiro:Screen
       guiro:Slider
       {
         id = "slider2",
-        bounds = g.Bounds(g.xabs(50), g.yabs(240), g.wabs(150), g.habs(25)),
+        bounds = g.Bounds(g.xabs(50), g.yabs(224), g.wabs(180), g.habs(25)),
         orientation = lost.guiro.controls.Slider.Orientation.horizontal,
         min = 0,
         max = 1,

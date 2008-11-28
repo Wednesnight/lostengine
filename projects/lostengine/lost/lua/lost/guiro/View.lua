@@ -308,11 +308,9 @@ end
     sets dirty flag to trigger redraw
   ]]
 function View:needsRedraw()
-  if not self.dirty then
-    self.dirty = true
-    if self.parent then
-      self.parent:needsRedraw()
-    end
+  self.dirty = true
+  if self.parent then
+    self.parent.dirty = true
   end
 end
 

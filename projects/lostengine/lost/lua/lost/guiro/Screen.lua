@@ -23,3 +23,11 @@ function Screen:appendChild(child)
     log.error("Screen:appendChild() cannot append ".. child:className())
   end
 end
+
+--[[
+    Screen is always dirty
+  ]]
+function Screen:render(context, forceRender)
+  self.dirty = true
+  View.render(self, context, forceRender)
+end
