@@ -33,7 +33,6 @@ function Button:render(context, button, style)
     self.lineColor = lost.common.Color(style[button.state].lineColor)
   end
 
-  context:setColor(self.color)
   if button.images and button.images[button.state] then
     if not button.images[button.state].parent then
       button:appendChild(button.images[button.state])
@@ -41,6 +40,7 @@ function Button:render(context, button, style)
     button.images[button.state].color = self.color
     button.images[button.state]:render(context)
   else
+    context:setColor(self.color)
     context:drawRectFilled(globalRect)
   end
 

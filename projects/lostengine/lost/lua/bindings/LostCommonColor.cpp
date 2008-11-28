@@ -1,6 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/common/Color.h"
+#include <luabind/operator.hpp>
 
 #include "lost/lua/bindings/LostCommonColor.h"
 
@@ -22,6 +23,7 @@ namespace lost
           .def(constructor<float, float, float>())
           .def(constructor<float, float, float, float>())
           .def(constructor<const Color&>())
+          .def(tostring(self))
           .property("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
           .property("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)
           .property("b", (float(Color::*)() const)&Color::b, (void(Color::*)(float))&Color::b)

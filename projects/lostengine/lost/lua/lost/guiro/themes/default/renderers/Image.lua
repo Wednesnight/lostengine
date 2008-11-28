@@ -24,7 +24,7 @@ function Image:render(context, image, style)
   self.texture:bind()
   self.texture:filter(image.filter)
 
-  context:setColor(lost.common.Color(image.color.r, image.color.g, image.color.b, image.alpha))
+  context:setColor(lost.common.Color(image.color.r, image.color.g, image.color.b, image.color.a * image.alpha))
   if image.cornerBounds then
     if not self.mesh then
       self.mesh = lost.gl.Mesh2D(16, 16, 54, self.texture)
