@@ -25,7 +25,7 @@ function Loader:Slider(definition)
     slider:setButton(button)
   end
   if value then
-    slider:value(value)
+    slider:value(value, true)
   end
 
   return slider

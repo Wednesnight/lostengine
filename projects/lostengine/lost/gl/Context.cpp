@@ -246,7 +246,10 @@ void Context::drawPoint(const lost::math::Vec2& point)
 
 void Context::drawRectOutline(const lost::math::Rect& rect)
 {
-  drawLine(rect.bottomLeft(), rect.bottomRight());
+  // FIXME: bottomLeft is missing 1 pixel, this is just a workaround
+  Vec2 bottomLeft = rect.bottomLeft();
+  bottomLeft.x -= 1;
+  drawLine(bottomLeft, rect.bottomRight());
   drawLine(rect.bottomRight(), rect.topRight());
   drawLine(rect.topRight(), rect.topLeft());
   drawLine(rect.topLeft(), rect.bottomLeft());

@@ -80,7 +80,7 @@ function Slider:handleInput(event)
   end
 end
 
-function Slider:updatePosition(location)
+function Slider:updatePosition(location, silent)
   local coord = "x"
   local coordFunc = lost.guiro.xabs
   local size  = "width"
@@ -94,30 +94,31 @@ function Slider:updatePosition(location)
   local globalRect = self:globalRect()
   local buttonRect = self.button:localRect()
   if (self.steps > 0) then
-    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size])), 0)
-    local stepSize = ((globalRect[size] - buttonRect[size]) / (self.max - self.min)) * ((self.max - self.min) / self.steps)
+    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size] - 1)), 0)
+    local stepSize = ((globalRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min)) * (math.abs(self.max - self.min) / self.steps)
     local steps, fraction = math.modf(position / stepSize)
-    if (fraction > 0.75) then
+    if (fraction > 0.5) then
       steps = steps + 1
     end
-    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
+    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size] - 1)), 0)
     if (position ~= buttonRect[coord]) then
       self.button.bounds[coord] = coordFunc(position)
       self.button:needsLayout()
     end
   else
-    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0))
+    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size] - 1)), 0))
     self.button:needsLayout()
   end
   local newValue = self:value()
-  if (oldValue ~= newValue) then
+  if not silent and (oldValue ~= newValue) then
     self:dispatchEvent(Slider.SliderEvent(Slider.SliderChange, newValue))
   end
 end
 
-function Slider:value(value)
+function Slider:value(value, silent)
   local localRect = self:localRect()
-  local buttonRect = self.button:localRect()
+  local globalRect = self:globalRect()
+  local buttonRect = self.button:globalRect()
   local coord = "x"
   local coordFunc = lost.guiro.xabs
   local size  = "width"
@@ -128,12 +129,10 @@ function Slider:value(value)
   end
 
   if value ~= nil then
-    self.button.bounds[coord] = coordFunc(((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value)
-    self.button:needsLayout()
-    buttonRect = self.button:localRect()
-    self:updatePosition(lost.math.Vec2(buttonRect.x + localRect.x, buttonRect.y + localRect.y))
+    buttonRect[coord] = (((localRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min)) * value) + globalRect[coord]
+    self:updatePosition(lost.math.Vec2(buttonRect.x, buttonRect.y), silent)
   end
 
   buttonRect = self.button:localRect()
-  return (buttonRect[coord] / ((localRect[size] - buttonRect[size]) / (self.max - self.min))) + self.min
+  return (buttonRect[coord] / ((localRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min))) + self.min
 end

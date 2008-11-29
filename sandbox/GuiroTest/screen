@@ -48,7 +48,7 @@ screen = guiro:Screen
     guiro:Window
     {
       id = "window",
-      bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(0.5), g.hrel(0.5)),
+      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.5), g.hrel(0.5)),
       header =
       {
         height = 25
@@ -240,7 +240,7 @@ screen = guiro:Screen
       guiro:Slider
       {
         id = "slider2",
-        bounds = g.Bounds(g.xabs(50), g.yabs(224), g.wabs(180), g.habs(25)),
+        bounds = g.Bounds(g.xabs(180), g.yabs(224), g.wabs(50), g.habs(25)),
         orientation = lost.guiro.controls.Slider.Orientation.horizontal,
         min = 0,
         max = 1,
@@ -249,6 +249,7 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
+            log.debug(event.value)
             if event.value == screen("ui")("window")("slider2").min then
               screen("ui")("window")("image").filter = gl.GL_NEAREST
             elseif event.value == screen("ui")("window")("slider2").max then
