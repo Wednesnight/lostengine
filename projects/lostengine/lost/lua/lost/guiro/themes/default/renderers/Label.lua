@@ -24,7 +24,4 @@ function Label:render(context, label, style)
 	gl.glTranslate(gr.x, gr.y, 0)
 	label.renderedText:render(context)
 	gl.glLoadIdentity()
-
-  -- FIXME: currently we have to update every frame  
-  label:needsRedraw()
 end

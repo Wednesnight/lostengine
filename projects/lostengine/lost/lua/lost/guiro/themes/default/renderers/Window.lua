@@ -32,7 +32,4 @@ function Window:render(context, window, style)
 
   context:setColor(style.lineColor)
   context:drawRectOutline(globalRect)
-
-  -- FIXME: currently we have to update every frame  
-  window:needsRedraw()
 end

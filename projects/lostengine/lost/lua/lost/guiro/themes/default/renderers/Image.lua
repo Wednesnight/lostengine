@@ -155,7 +155,4 @@ function Image:render(context, image, style)
 
   context:setColor(style.borderColor)
   context:drawRectOutline(globalRect)
-
-  -- FIXME: currently we have to update every frame  
-  image:needsRedraw()
 end

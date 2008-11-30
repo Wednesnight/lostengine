@@ -28,6 +28,5 @@ end
     Screen is always dirty
   ]]
 function Screen:render(context, forceRender)
-  self.dirty = true
-  View.render(self, context, forceRender)
+  View.render(self, context, true)
 end

@@ -54,7 +54,4 @@ function Button:render(context, button, style)
 
   context:setColor(self.lineColor)
   context:drawRectOutline(globalRect)
-
-  -- FIXME: currently we have to update every frame  
-  button:needsRedraw()
 end

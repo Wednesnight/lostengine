@@ -9,7 +9,7 @@ screen = guiro:Screen
   guiro:UserInterface
   {
     id = "ui",
-    bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(800), g.habs(600)),
+    bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wrel(1.0), g.hrel(1.0)),
 
     guiro:Window
     {
