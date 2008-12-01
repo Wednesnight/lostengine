@@ -242,6 +242,18 @@
 		EA0E46790E5E30DC00B5EBF1 /* libzlib-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46740E5E30AD00B5EBF1 /* libzlib-simulator.a */; };
 		EA0F2DE20E37D68C0001F530 /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2DE10E37D68C0001F530 /* Context.h */; };
 		EA0F2E850E381C390001F530 /* ArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0F2E840E381C390001F530 /* ArrayBuffer.h */; };
+		EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
+		EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
+		EA15B4910EE31EB600672EF4 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48D0EE31EB600672EF4 /* Engine.h */; };
+		EA15B4920EE31EB600672EF4 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48E0EE31EB600672EF4 /* Source.h */; };
+		EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
+		EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
+		EA15B4950EE31EB600672EF4 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48D0EE31EB600672EF4 /* Engine.h */; };
+		EA15B4960EE31EB600672EF4 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48E0EE31EB600672EF4 /* Source.h */; };
+		EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
+		EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
+		EA15B4990EE31EB600672EF4 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48D0EE31EB600672EF4 /* Engine.h */; };
+		EA15B49A0EE31EB600672EF4 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48E0EE31EB600672EF4 /* Source.h */; };
 		EA1B779C0E9178F100004196 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77950E9178B000004196 /* libluabind.a */; };
 		EA1B779D0E9178F800004196 /* libluabind-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77970E9178B000004196 /* libluabind-iphone.a */; };
 		EA1B779E0E91790900004196 /* libluabind-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77990E9178B000004196 /* libluabind-simulator.a */; };
@@ -1038,6 +1050,10 @@
 		EA0E46660E5E30AD00B5EBF1 /* zlib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zlib.xcodeproj; path = ../../../thirdparty/zlib/zlib_1_2_3/xcode/zlib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA0F2DE10E37D68C0001F530 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
 		EA0F2E840E381C390001F530 /* ArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayBuffer.h; sourceTree = "<group>"; };
+		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
+		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
+		EA15B48D0EE31EB600672EF4 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Engine.h; path = audio/Engine.h; sourceTree = "<group>"; };
+		EA15B48E0EE31EB600672EF4 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = audio/Source.h; sourceTree = "<group>"; };
 		EA1B778B0E9178B000004196 /* luabind.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = luabind.xcodeproj; path = ../../../thirdparty/luabind/luabind_0_7_1/xcode/luabind.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA1D54EA0EB34E0400591811 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		EA1D54EB0EB34E0400591811 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
@@ -1506,6 +1522,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EA15B48A0EE31E9F00672EF4 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				EA15B48D0EE31EB600672EF4 /* Engine.h */,
+				EA15B48B0EE31EB600672EF4 /* Engine.cpp */,
+				EA15B48E0EE31EB600672EF4 /* Source.h */,
+				EA15B48C0EE31EB600672EF4 /* Source.cpp */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
 		EA1B778C0E9178B000004196 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,6 +1605,7 @@
 			children = (
 				EA70F8F20ED08707000AA8CB /* al */,
 				EA3B94640E04639D00B6423B /* application */,
+				EA15B48A0EE31E9F00672EF4 /* audio */,
 				EA3B94690E04639D00B6423B /* bitmap */,
 				3EB93D760E38042200FF10C9 /* camera */,
 				EA3B946C0E04639D00B6423B /* common */,
@@ -2097,6 +2125,8 @@
 				EACFE0AA0ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0AC0ED8A09B00F9459E /* LostFontModel.h in Headers */,
 				EACFE1100ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
+				EA15B4990EE31EB600672EF4 /* Engine.h in Headers */,
+				EA15B49A0EE31EB600672EF4 /* Source.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2242,6 +2272,8 @@
 				EACFE0A20ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0A40ED8A09B00F9459E /* LostFontModel.h in Headers */,
 				EACFE10C0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
+				EA15B4910EE31EB600672EF4 /* Engine.h in Headers */,
+				EA15B4920EE31EB600672EF4 /* Source.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2388,6 +2420,8 @@
 				EACFE0A60ED8A09B00F9459E /* LostFontTrueTypeFont.h in Headers */,
 				EACFE0A80ED8A09B00F9459E /* LostFontModel.h in Headers */,
 				EACFE10E0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
+				EA15B4950EE31EB600672EF4 /* Engine.h in Headers */,
+				EA15B4960EE31EB600672EF4 /* Source.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2735,6 +2769,8 @@
 				EACFE0AB0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0AD0ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 				EACFE10F0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
+				EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */,
+				EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2824,6 +2860,8 @@
 				EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 				EACFE10B0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
+				EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */,
+				EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2912,6 +2950,8 @@
 				EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */,
 				EACFE0A90ED8A09B00F9459E /* LostFontModel.cpp in Sources */,
 				EACFE10D0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
+				EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */,
+				EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

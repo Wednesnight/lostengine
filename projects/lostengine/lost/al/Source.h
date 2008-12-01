@@ -2,6 +2,8 @@
 #define LOST_AL_SOURCE_H
 
 #include "lost/math/Vec3.h"
+#include <boost/shared_ptr.hpp>
+#include "lost/al/Buffer.h"
 
 namespace lost
 {
@@ -23,7 +25,6 @@ struct Source
   void buffer(ALint buffer); // clears queue and sets this buffer as current head
   void minGain(float val);
   void maxGain(float val);
-  void referenceGain(float val);
   void referenceDistance(float val);
   void rolloffFactor(float val);
   void maxDistance(float val);
@@ -32,6 +33,9 @@ struct Source
   void coneInnerAngle(float val);
   void coneOuterAngle(float val);
   void coneOuterGain(float val);
+  void secOffset(float inSeconds);
+  void sampleOffset(ALint inSampleOffset);
+  void byteOffset(ALint inByteOffset);
 
   // getter
   math::Vec3 position();
@@ -40,11 +44,11 @@ struct Source
   bool relative();
   ALenum type(); // AL_UNDETERMINED, AL_STATIC, AL_STREAMING
   bool looping();
+  ALenum state();
   ALint queuedBuffers(); // returns the number of currebtly ququed buffers, includes played, playing, not played
   ALint processedBuffers(); // returns the number of processed buffers, indirectly the index of the currently playing buffer
   float minGain();
   float maxGain();
-  float referenceGain();
   float referenceDistance();
   float rolloffFactor();
   float maxDistance();
@@ -54,6 +58,17 @@ struct Source
   float coneOuterAngle();
   float coneOuterGain();
   
+  // playback
+  void play();
+  void pause();
+  void stop();
+  void rewind();
+  
+  // buffer queueing
+  void queue(ALuint inBufferId);
+  void unqueue(ALuint inBufferId);
+  void queue(boost::shared_ptr<Buffer> buffer);
+  void unqueue(boost::shared_ptr<Buffer> buffer);
   ALuint source;
 };
 }

@@ -33,7 +33,7 @@ void Listener::orientation(const math::Vec3& at,
 math::Vec3 Listener::position()
 {
   Vec3 result;
-  alGetListener3f(AL_POSITION, &(result.x), &(result.y), &(result.z));
+  alGetListener3f(AL_POSITION, &(result.x), &(result.y), &(result.z));ALDEBUG_THROW;
   return result;
 }
 

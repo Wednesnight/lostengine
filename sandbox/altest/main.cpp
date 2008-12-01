@@ -3,6 +3,8 @@
 #include "lost/al/Device.h"
 #include "lost/al/Context.h"
 #include "lost/al/Listener.h"
+#include "lost/al/Source.h"
+#include "lost/al/Buffer.h"
 #include <boost/shared_ptr.hpp>
 
 #include "stb_vorbis.h"
@@ -26,7 +28,7 @@ int main (int argc, char* const argv[]) {
     shared_ptr<Context> context(new Context());    
     context->makeCurrent();
 
-    DOUT("dopplerFactor: "<<Context::dopplerFactor());
+/*    DOUT("dopplerFactor: "<<Context::dopplerFactor());
     DOUT("speed of sound: "<<Context::speedOfSound());
     DOUT("distance model: "<<Context::distanceModel());
     
@@ -47,9 +49,9 @@ int main (int argc, char* const argv[]) {
     DOUT("gain: "<<Listener::gain());
     Vec3 at, up;
     Listener::getOrientation(at, up);
-    DOUT("orientation at: "<<at<<" up: "<<up);
+    DOUT("orientation at: "<<at<<" up: "<<up);*/
     context->process();
-    context->suspend();
+//    context->suspend();
     
     int error = 0;
     string filename = "wannabill.ogg";
@@ -59,6 +61,33 @@ int main (int argc, char* const argv[]) {
       stb_vorbis_info info = stb_vorbis_get_info(oggfile);
       stb_vorbis_close(oggfile);
       DOUT("ok: "<<info.sample_rate);
+      ifstream file(filename.c_str());
+      ostringstream os;
+      os << file.rdbuf();
+      string data = os.str();
+      short* decodedSamples;
+      int channels;
+      int numSamples = stb_vorbis_decode_memory((unsigned char*)(data.c_str()), data.size(), &channels, &decodedSamples);
+      DOUT("num decoded samples: "<<numSamples);
+      DOUT("channels: "<<channels);
+      Source src;
+      shared_ptr<Buffer> buffer(new Buffer);
+      buffer->bufferData((channels == 2) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16,
+                         decodedSamples,
+                         numSamples*2,
+                         info.sample_rate);
+      src.queue(buffer);
+      src.play();
+      // wait for the buffer to finish playing
+      while(src.processedBuffers() != src.queuedBuffers())
+      {
+        DOUT("processed: "<<src.processedBuffers());
+        DOUT("queued: "<<src.queuedBuffers());
+        sleep(1);
+      }
+      src.unqueue(buffer);
+      src.stop();
+      free(decodedSamples);
     }
     else
     {
