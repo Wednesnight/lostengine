@@ -1,7 +1,7 @@
 require("lost.application.Application")
 require("lost.common.Profiler")
 
-local profilerEnabled = false
+local profilerEnabled = true
 
 function lost.application.Application:configure(event)
   if profilerEnabled then
@@ -84,6 +84,10 @@ function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
   gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+  if controls and controls.screen then
+    local g = lost.guiro
+    controls.screen:resize(g.Bounds(g.xabs(0), g.yabs(0), g.wabs(resizeEvent.width), g.habs(resizeEvent.height)))
+  end
 end
 
 function lost.application.Application:keyHandler(event)

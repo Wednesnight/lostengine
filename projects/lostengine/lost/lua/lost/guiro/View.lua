@@ -284,6 +284,14 @@ function View:needsChildLayout()
 end
 
 --[[
+    resize and call needsLayout
+  ]]
+function View:resize(bounds)
+  self.bounds = bounds
+  self:needsLayout()
+end
+
+--[[
     redraw prototype
   ]]
 function View:redraw(context)
@@ -294,6 +302,7 @@ end
     triggers redraw on children
   ]]
 function View:render(context, forceRender)
+  self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
     self:redraw(context)

@@ -133,6 +133,7 @@
 				8DD76F640486A84900D96B5E /* Sources */,
 				8DD76F660486A84900D96B5E /* Frameworks */,
 				EA4143D80ED10BF600712F45 /* Resources */,
+				3E5FBA2D0EE3C929002B3C14 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -202,6 +203,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E5FBA2D0EE3C929002B3C14 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -f \"${BUILD_DIR}/${CONFIGURATION}/wannabill.ogg\"\ncp wannabill.ogg \"${BUILD_DIR}/${CONFIGURATION}/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DD76F640486A84900D96B5E /* Sources */ = {

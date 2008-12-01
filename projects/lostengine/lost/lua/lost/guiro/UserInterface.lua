@@ -129,3 +129,34 @@ function UserInterface:renderChildren(parent, context)
     end
   end
 end
+
+--[[
+    resize render buffer, textures
+  ]]
+function UserInterface:updateLayout(forceUpdate)
+  if forceUpdate or self.dirtyLayout then
+    local globalRect, localRect = lost.guiro.View.updateLayout(self, forceUpdate)
+    if self.renderBuffer then
+      self.renderBuffer:enable()
+      self.depthTexture = lost.gl.Texture()
+      self.depthTexture:bind()
+      self.depthTexture:init(0, gl.GL_DEPTH_COMPONENT32, globalRect.width, globalRect.height, 0, gl.GL_DEPTH_COMPONENT, gl.GL_FLOAT)
+      self.renderBuffer:attachDepth(self.depthTexture)
+
+      self.colorTexture = lost.gl.Texture()
+      self.colorTexture:bind()
+      self.colorTexture:init(0, gl.GL_RGBA8, globalRect.width, globalRect.height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE)
+      self.renderBuffer:attachColor(0, self.colorTexture)
+      self.colorTexture:filter(gl.GL_NEAREST)
+      self.colorTexture:wrap(gl.GL_CLAMP)
+
+      if (self.renderBuffer:status() ~= gl.GL_FRAMEBUFFER_COMPLETE_EXT) then
+        --log.error("FrameBuffer status: ".. lost.gl.enum2string(self.renderBuffer:status()))
+      end
+      self.renderBuffer:disable()
+    end
+    return globalRect, localRect
+  else
+    return lost.guiro.View.updateLayout(self, forceUpdate)
+  end
+end
