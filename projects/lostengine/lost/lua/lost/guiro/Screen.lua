@@ -28,5 +28,7 @@ end
     Screen is always dirty
   ]]
 function Screen:render(context, forceRender)
-  View.render(self, context, true)
+  for k,ui in next,self.children do
+    ui:render(context, forceRender)
+  end
 end

@@ -41,9 +41,6 @@ function Window:handleInput(event)
         topmost = self.parent:getViewAt(info.location)
       end
       if (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location) then
-        if self.parent then
-          self.parent:setFocus(self)
-        end
         self.dragging = headerRect:contains(info.location)
         self.lastDragPos = info.location
       end

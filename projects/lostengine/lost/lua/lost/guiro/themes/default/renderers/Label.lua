@@ -16,7 +16,7 @@ function Label:render(context, label, style)
 		label.renderedText = label.font:render(label.text, label.fontSize)		
 		label.textChanged = false
 	end
-	context:setColor(label.color)
+	context:setColor(label:color())
 	--context:drawRectFilled(label:globalRect())
 	gl.glMatrixMode(gl.GL_MODELVIEW)
 	gl.glLoadIdentity()

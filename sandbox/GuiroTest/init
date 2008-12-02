@@ -1,7 +1,7 @@
 require("lost.application.Application")
 require("lost.common.Profiler")
 
-local profilerEnabled = true
+local profilerEnabled = false
 
 function lost.application.Application:configure(event)
   if profilerEnabled then

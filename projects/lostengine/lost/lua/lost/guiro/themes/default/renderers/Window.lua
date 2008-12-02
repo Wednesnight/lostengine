@@ -26,7 +26,10 @@ function Window:render(context, window, style)
     if not window.label.parent then
       window:appendChild(window.label)
     end
-    window.label.color = style.header.fontColor
+    if window.label:color() ~= style.header.fontColor then
+      window.label:color(style.header.fontColor)
+      window.label:needsRedraw()
+    end
     window.label:render(context)
   end
 

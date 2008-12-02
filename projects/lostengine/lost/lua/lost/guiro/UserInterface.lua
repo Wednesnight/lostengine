@@ -101,7 +101,7 @@ function UserInterface:render(context, forceRender)
 
   if forceRender or self.dirty then
     context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
-    lost.guiro.View.render(self, context, forceRender)
+    lost.guiro.View.render(self, context, true)
   else
     self:renderChildren(self, context)
   end
@@ -122,6 +122,7 @@ end
   ]]
 function UserInterface:renderChildren(parent, context)
   for k,child in next,parent.children do
+    child:update(context)
     if child.dirty then
       child:render(context)
     else

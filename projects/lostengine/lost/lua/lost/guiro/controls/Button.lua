@@ -94,13 +94,17 @@ function Button:handleInput(event)
       end
       self.pressed = self.down and self.hovered
     end
-    
+
+    local oldState = self.state
     if self.pressed then
       self.state = Button.State.pressed
     elseif self.hovered then
       self.state = Button.State.hovered
     else
       self.state = Button.State.released
+    end
+    if oldState ~= self.state then
+      self:needsRedraw()
     end
   end
 end

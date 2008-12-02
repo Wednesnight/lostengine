@@ -33,11 +33,18 @@ function Button:render(context, button, style)
     self.lineColor = lost.common.Color(style[button.state].lineColor)
   end
 
+  if self.color ~= style[button.state].color or
+     self.fontColor ~= style[button.state].fontColor or
+     self.lineColor ~= style[button.state].lineColor
+  then
+    button:needsRedraw()
+  end
+
   if button.images and button.images[button.state] then
     if not button.images[button.state].parent then
       button:appendChild(button.images[button.state])
     end
-    button.images[button.state].color = self.color
+    button.images[button.state]:color(self.color)
     button.images[button.state]:render(context)
   else
     context:setColor(self.color)
@@ -48,7 +55,10 @@ function Button:render(context, button, style)
     if not button.label.parent then
       button:appendChild(button.label)
     end
-    button.label.color = self.fontColor
+    if button.label:color() ~= self.fontColor then
+      button.label:color(self.fontColor)
+      button.label:needsRedraw()
+    end
     button.label:render(context)
   end
 

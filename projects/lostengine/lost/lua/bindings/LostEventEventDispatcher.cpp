@@ -1,6 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/event/EventDispatcher.h"
+#include <luabind/operator.hpp>
 
 #include "lost/lua/bindings/LostEventEventDispatcher.h"
 
@@ -54,7 +55,7 @@ namespace lost
         return dispatcher->EventDispatcher::dispatchEvent(event);
       }
     };
-    
+
   }
 }
 

@@ -16,15 +16,16 @@ function Image:render(context, image, style)
   
   if not self.texture then
     self.textureParams = lost.gl.Texture.Params()
-    self.textureParams.minFilter = image.filter
-    self.textureParams.magFilter = image.filter
+    self.textureParams.minFilter = image:filter()
+    self.textureParams.magFilter = image:filter()
     self.texture = lost.gl.Texture()
     self.texture:init(image.bitmap, self.textureParams)
   end
   self.texture:bind()
-  self.texture:filter(image.filter)
+  self.texture:filter(image:filter())
 
-  context:setColor(lost.common.Color(image.color.r, image.color.g, image.color.b, image.color.a * image.alpha))
+  local imageColor = image:color()
+  context:setColor(lost.common.Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a * image:alpha()))
   if image.cornerBounds then
     if not self.mesh then
       self.mesh = lost.gl.Mesh2D(16, 16, 54, self.texture)
@@ -140,7 +141,7 @@ function Image:render(context, image, style)
 
   else
     local imageRect = lost.math.Rect(globalRect)
-    if not image.stretch then
+    if not image:stretch() then
       local ratio = lost.math.Vec2(globalRect.width/image.bitmap.width, globalRect.height/image.bitmap.height)
       if (ratio.x <= ratio.y) then
         imageRect.width  = math.min(imageRect.width, image.bitmap.width * ratio.x)

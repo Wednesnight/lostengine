@@ -163,7 +163,8 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xright(), g.ytop({abs=-30}), g.wabs(80), g.habs(80)),
         bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
         frameSize = lost.math.Rect(0, 0, 153, 184),
-        interval = 0.05
+        interval = 0.025,
+        stretch = true
       },
       
       guiro:Slider
@@ -178,7 +179,7 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
-            screen("ui")("window")("image").alpha = event.value
+            screen("ui")("window")("image"):alpha(event.value)
           end
         }
       },
@@ -197,9 +198,9 @@ screen = guiro:Screen
           [lost.guiro.controls.Slider.SliderChange] = function(event)
             log.debug(event.value)
             if event.value == screen("ui")("window")("slider2").min then
-              screen("ui")("window")("image").filter = gl.GL_NEAREST
+              screen("ui")("window")("image"):filter(gl.GL_NEAREST)
             elseif event.value == screen("ui")("window")("slider2").max then
-              screen("ui")("window")("image").filter = gl.GL_LINEAR
+              screen("ui")("window")("image"):filter(gl.GL_LINEAR)
             end
           end
         }
@@ -220,7 +221,7 @@ screen = guiro:Screen
           [lost.application.MouseEvent.MOUSE_DOWN] = function(event)
             local mouseEvent = lost.application.MouseEvent.cast(event)
             if screen("ui")("window")("image"):globalRect():contains(mouseEvent.pos) then
-              screen("ui")("window")("image").stretch = not screen("ui")("window")("image").stretch
+              screen("ui")("window")("image"):stretch(not screen("ui")("window")("image"):stretch())
             end
           end
 

@@ -16,13 +16,22 @@ lost.guiro.controls.Control:addBase(Label, "Label")
   ]]
 function Label:__init() super()
   self.alpha = 1.0
-  self.color = lost.common.Color(1,1,1)
+  self.currentColor = lost.common.Color(1,1,1)
   self.font = lost.guiro.config.theme.defaultFont
   self.fontSize = 12
 	self.textChanged = false
 end
 
+function Label:color(color)
+  if color and self.currentColor ~= color then
+    self.currentColor = lost.common.Color(color)
+    self:needsRedraw()
+  end
+  return self.currentColor
+end
+
 function Label:setText(txt)
 	self.text = txt
 	self.textChanged = true
+	self:needsRedraw()
 end

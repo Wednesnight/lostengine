@@ -23,6 +23,7 @@ namespace lost
           .def(constructor<float, float, float>())
           .def(constructor<float, float, float, float>())
           .def(constructor<const Color&>())
+          .def(self == other<Color>())
           .def(tostring(self))
           .property("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
           .property("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)

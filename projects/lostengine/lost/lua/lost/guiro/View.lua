@@ -168,25 +168,6 @@ function View:dispatchEvent(event)
 end
 
 --[[
-    moves child to top of render list
-  ]]
-function View:setFocus(child)
-  if self.parent then
-    self.parent:setFocus(self)
-  end
-
-  local idx = 1
-  for k,view in next,self.children do
-    if (view.id == child.id) then
-      table.remove(self.children, idx)
-      table.insert(self.children, child)
-      break
-    end
-    idx = idx+1
-  end
-end
-
---[[
     gets topmost child at given point
   ]]
 function View:getViewAt(point)
@@ -296,6 +277,15 @@ end
   ]]
 function View:redraw(context)
   -- empty
+end
+
+--[[
+    update method for render preparation
+  ]]
+function View:update(context)
+  for key,view in next,self.children do
+    view:update(context)
+  end
 end
 
 --[[
