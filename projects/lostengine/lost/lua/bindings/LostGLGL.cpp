@@ -33,7 +33,7 @@ namespace lost
        def("glTranslate", (void(*)(GLfloat,GLfloat,GLfloat))&glTranslatef),
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
        def("glPushAttrib", (void(*)(GLbitfield))&glPushAttrib),
-       def("glPopAttrib", (void(*)(GLbitfield))&glPopAttrib)
+       def("glPopAttrib", (void(*)(void))&glPopAttrib)
 #endif
        ];
 
