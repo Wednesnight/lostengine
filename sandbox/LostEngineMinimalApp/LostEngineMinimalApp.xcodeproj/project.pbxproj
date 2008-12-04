@@ -21,6 +21,8 @@
 		3E500A750E6404E2006C9028 /* sponza_tri_mtl.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E500A710E6404E2006C9028 /* sponza_tri_mtl.mtl */; };
 		3E500A7E0E6405A4006C9028 /* sponza_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E500A7D0E6405A4006C9028 /* sponza_tri.obj */; };
 		3E500A7F0E6405A4006C9028 /* sponza_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3E500A7D0E6405A4006C9028 /* sponza_tri.obj */; };
+		3E6C14510EE81C44002B0EA7 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E6C14500EE81C44002B0EA7 /* Application.lua */; };
+		3E6C14520EE81C44002B0EA7 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E6C14500EE81C44002B0EA7 /* Application.lua */; };
 		3E7326530E5CE549000FF838 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAF706C50E4B81B000EF62CB /* init */; };
 		3E7326540E5CE549000FF838 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0E04760E4E1AEB001556D6 /* stubs.jpg */; };
 		3E7326550E5CE549000FF838 /* kenny_tri.mtl in Resources */ = {isa = PBXBuildFile; fileRef = 3E398C4A0E5080A800D40DDE /* kenny_tri.mtl */; };
@@ -30,8 +32,6 @@
 		3E73265C0E5CE549000FF838 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		3E73265D0E5CE549000FF838 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		3E73265E0E5CE549000FF838 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
-		3EE3102C0E83C8D9006387C3 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3102B0E83C8D9006387C3 /* Application.lua */; };
-		3EE3102D0E83C8D9006387C3 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3102B0E83C8D9006387C3 /* Application.lua */; };
 		EA0E04770E4E1AEB001556D6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA0E04760E4E1AEB001556D6 /* stubs.jpg */; };
 		EA0E492A0E5E3F9F00B5EBF1 /* libLostEngine-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49270E5E3F9200B5EBF1 /* libLostEngine-iphone.a */; };
 		EA0E492D0E5E3FA600B5EBF1 /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49290E5E3F9200B5EBF1 /* libLostEngine-simulator.a */; };
@@ -89,8 +89,8 @@
 		3E500A700E6404E2006C9028 /* sponza_tri_mtl.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza_tri_mtl.obj; path = ../../data/obj/sponza_tri_mtl.obj; sourceTree = SOURCE_ROOT; };
 		3E500A710E6404E2006C9028 /* sponza_tri_mtl.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza_tri_mtl.mtl; path = ../../data/obj/sponza_tri_mtl.mtl; sourceTree = SOURCE_ROOT; };
 		3E500A7D0E6405A4006C9028 /* sponza_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sponza_tri.obj; path = ../../data/obj/sponza_tri.obj; sourceTree = SOURCE_ROOT; };
+		3E6C14500EE81C44002B0EA7 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		3E7326620E5CE549000FF838 /* LostEngineMinimalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineMinimalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EE3102B0E83C8D9006387C3 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA0E04760E4E1AEB001556D6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stubs.jpg; sourceTree = "<group>"; };
 		EA0E49030E5E3F9200B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -185,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				EAF706C50E4B81B000EF62CB /* init */,
-				3EE3102B0E83C8D9006387C3 /* Application.lua */,
+				3E6C14500EE81C44002B0EA7 /* Application.lua */,
 				3E251FEC0E5EC1C5002CDC21 /* iphone.lua */,
 			);
 			name = Scripts;
@@ -301,7 +301,7 @@
 				3E500A720E6404E2006C9028 /* sponza_tri_mtl.obj in Resources */,
 				3E500A730E6404E2006C9028 /* sponza_tri_mtl.mtl in Resources */,
 				3E500A7E0E6405A4006C9028 /* sponza_tri.obj in Resources */,
-				3EE3102C0E83C8D9006387C3 /* Application.lua in Resources */,
+				3E6C14510EE81C44002B0EA7 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +317,7 @@
 				3E500A740E6404E2006C9028 /* sponza_tri_mtl.obj in Resources */,
 				3E500A750E6404E2006C9028 /* sponza_tri_mtl.mtl in Resources */,
 				3E500A7F0E6405A4006C9028 /* sponza_tri.obj in Resources */,
-				3EE3102D0E83C8D9006387C3 /* Application.lua in Resources */,
+				3E6C14520EE81C44002B0EA7 /* Application.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,12 +367,10 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = LUABIND_NO_ERROR_CHECKING;
 				GCC_THUMB_SUPPORT = NO;
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngineMinimalApp;
 				SDKROOT = iphoneos2.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
 			};
 			name = Debug;
 		};
@@ -385,15 +383,6 @@
 				GCC_PREFIX_HEADER = LostEngineMinimalApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LOST_IPHONE;
 				GCC_THUMB_SUPPORT = NO;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/projects/lostengine\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/luabind/luabind_0_7/original\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/zlib/zlib_1_2_3/include\"",
-				);
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = LostEngineMinimalApp;
 			};
@@ -409,12 +398,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = LUABIND_NO_ERROR_CHECKING;
-				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngineMinimalApp;
 				SDKROOT = iphonesimulator2.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
 			};
 			name = Debug;
 		};
@@ -426,15 +413,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LostEngineMinimalApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LOST_IPHONE;
-				HEADER_SEARCH_PATHS = (
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/projects/lostengine\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/boost/boost_1_34_1/include\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/freetype2/freetype_2_3_7/include\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/lua/lua_5_1_3/include\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/luabind/luabind_0_7/original\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/stb/stb_image_1_14\\\"",
-					"\\\"$(SRCROOT)/../../development/lostgenius/lua-test-branch/thirdparty/zlib/zlib_1_2_3/include\\\"",
-				);
 				INFOPLIST_FILE = "/Users/tboll/coding/lostgenius.net-lua-test-branch/sandbox/LostEngineMinimalApp/Info copy.plist";
 				PRODUCT_NAME = LostEngineMinimalApp;
 			};
@@ -448,11 +426,17 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\"",
+					"\"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator2.0;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/boost/boost_1_34_1/include\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "i386 armv6";
 			};
 			name = Debug;
@@ -465,8 +449,16 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../../projects/lostengine\"",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\"",
+					"\"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\"",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos2.0;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

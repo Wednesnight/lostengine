@@ -13,7 +13,6 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/event/Event.h"
 #include "lost/gl/Context.h"
-#include "lost/gl/FrameBuffer.h"
 #include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 #include "lost/lsystem/LSystem.h"
@@ -28,6 +27,10 @@
 #include "lost/model/obj/Renderer.h"
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
+
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+  #include "lost/gl/FrameBuffer.h"
+#endif
 
 #define GET_POINTER(name) template name* get_pointer(boost::shared_ptr<name>&);\
                           template name const* get_pointer(boost::shared_ptr<name const>&);
@@ -55,7 +58,6 @@ namespace luabind
   GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
   GET_POINTER(lost::gl::Context);
-  GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::State);
   GET_POINTER(lost::gl::Texture);
   GET_POINTER(lost::lsystem::LSystem);
@@ -71,4 +73,8 @@ namespace luabind
   GET_POINTER(lost::model::obj::Renderer);
   GET_POINTER(lost::resource::File);
   GET_POINTER(lost::resource::Loader);
+
+#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+  GET_POINTER(lost::gl::FrameBuffer);
+#endif
 }

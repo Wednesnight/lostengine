@@ -11,7 +11,6 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
-#include "lost/gl/Draw.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/platform/Platform.h"
 #include "lost/application/KeySym.h"
@@ -101,13 +100,13 @@ struct Controller
   {
     appInstance->context->pushState(renderState);
     appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    appInstance->context->set3DProjection(appInstance->displayAttributes, camera->position(), camera->target(), camera->up(),
+    appInstance->context->set3DProjection(camera->position(), camera->target(), camera->up(),
                                           camera->fovY(), camera->depth());
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glLineWidth(10.0f);
-    setColor(lost::common::Color(0,0,1,0.5));
+    appInstance->context->setColor(lost::common::Color(0,0,1,0.5));
     dragonCurve->size = 0.3f;
     static float dragonCurveAngle(0.0f);
     if (animate)
@@ -121,7 +120,7 @@ struct Controller
     glLineWidth(1.0f);
     
     glLineWidth(3.0f);
-    setColor(lost::common::Color(1,0,0,0.5));
+    appInstance->context->setColor(lost::common::Color(1,0,0,0.5));
     tree->size = 0.1f;
     static float treeAngle(0.0f);
     if (animate)
@@ -177,7 +176,7 @@ struct Controller
     glEnable(GL_LIGHT0);
     glEnable(GL_RESCALE_NORMAL);
     
-    setColor(whiteColor);
+    appInstance->context->setColor(whiteColor);
     modelRenderer->render();
     
     glDisable(GL_LIGHT0);
@@ -187,9 +186,9 @@ struct Controller
     if (renderAABB) modelRenderer->renderAABB();
     
     glScalef(10.0f, 10.0f, 10.0f);
-    drawAxes(Vec3(10.0f, 10.0f, 10.0f));
+    appInstance->context->drawAxes(Vec3(10.0f, 10.0f, 10.0f));
 
-    lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+    appInstance->context->set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
     glMatrixMode(GL_MODELVIEW);GLDEBUG;
     glLoadIdentity();GLDEBUG;
     fpsMeter->render(2,2,event->passedSec);

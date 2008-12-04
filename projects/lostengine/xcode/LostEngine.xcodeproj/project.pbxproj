@@ -82,6 +82,10 @@
 		3E6510050E7F92C700DE5AFE /* LostGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6510010E7F92C700DE5AFE /* LostGLState.cpp */; };
 		3E6510060E7F92C700DE5AFE /* LostGLState.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E6510000E7F92C700DE5AFE /* LostGLState.h */; };
 		3E6510070E7F92C700DE5AFE /* LostGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E6510010E7F92C700DE5AFE /* LostGLState.cpp */; };
+		3E6C14AC0EE82B21002B0EA7 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
+		3E6C14AD0EE82B22002B0EA7 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
+		3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
+		3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
 		3E7324FE0E5CE3A4000FF838 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94660E04639D00B6423B /* Application.h */; };
 		3E7324FF0E5CE3A4000FF838 /* Timer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B94680E04639D00B6423B /* Timer.h */; };
 		3E7325000E5CE3A4000FF838 /* TimerEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAF98480E15DB9100B28BF6 /* TimerEvent.h */; };
@@ -205,9 +209,7 @@
 		3EF7AE9E0ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
 		3EF7AE9F0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
 		3EF7AEA00ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
-		3EF7AEA10ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
 		3EF7AEA20ED29ABD00CDB78A /* LostGLFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AE9C0ED29ABD00CDB78A /* LostGLFrameBuffer.h */; };
-		3EF7AEA30ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */; };
 		3EF7AEC20ED29DAD00CDB78A /* LostGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */; };
 		3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EF7AEC40ED29DAD00CDB78A /* LostGLTexture.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EF7AEC00ED29DAD00CDB78A /* LostGLTexture.h */; };
@@ -2762,7 +2764,6 @@
 				EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */,
-				3EF7AEA10ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */,
 				3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				3E48F4FA0ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
@@ -2771,6 +2772,8 @@
 				EACFE10F0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 				EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */,
 				EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */,
+				3E6C14AD0EE82B22002B0EA7 /* Model.cpp in Sources */,
+				3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2943,7 +2946,6 @@
 				EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */,
 				EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */,
 				EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */,
-				3EF7AEA30ED29ABD00CDB78A /* LostGLFrameBuffer.cpp in Sources */,
 				3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */,
 				EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				3E48F4F60ED6AD60003CFD2F /* LostGLMesh.cpp in Sources */,
@@ -2952,6 +2954,8 @@
 				EACFE10D0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 				EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */,
 				EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */,
+				3E6C14AC0EE82B21002B0EA7 /* Model.cpp in Sources */,
+				3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
