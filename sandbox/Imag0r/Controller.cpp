@@ -2,7 +2,6 @@
 #include "lost/application/Application.h"
 #include "lost/application/KeySym.h"
 #include "lost/gl/Utils.h"
-#include "lost/gl/Draw.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/event/Receive.h"
 
@@ -26,13 +25,13 @@ void Controller::redraw(shared_ptr<TimerEvent> event)
 
   appInstance->context->pushState(textureRenderState);
   appInstance->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  setColor(whiteColor);
-  drawRectTextured(Rect(10,10,texture->width,texture->height), texture);
+  appInstance->context->setColor(whiteColor);
+  appInstance->context->drawRectTextured(Rect(10,10,texture->width,texture->height), texture);
   appInstance->context->popState();  
   
   appInstance->context->pushState(vanillaRenderState);
-  setColor(whiteColor);
-  drawRectFilled(Rect(400,400,50,50));
+  appInstance->context->setColor(whiteColor);
+  appInstance->context->drawRectFilled(Rect(400,400,50,50));
   appInstance->context->popState();  
   
   fpsMeter->render(2,2,event->passedSec);
