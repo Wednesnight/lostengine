@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA044C040EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C050EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C060EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C070EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C080EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C090EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C0A0EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C0B0EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C0C0EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C0E0EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
+		EA044C0F0EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
+		EA044C100EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
 		EA0E42840E5E01E100B5EBF1 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */; };
 		EA0E42850E5E01E100B5EBF1 /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42690E5E012700B5EBF1 /* slot.cpp */; };
 		EA0E42860E5E01E100B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
@@ -31,6 +43,10 @@
 		3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7325860E5CE3B5000FF838 /* libboost-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libboost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libboost.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA044C010EE893E800D3EE10 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = ../source/libs/thread/src/pthread/thread.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C020EE893E800D3EE10 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../source/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C030EE893E800D3EE10 /* exceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exceptions.cpp; path = ../source/libs/thread/src/pthread/exceptions.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tss_null.cpp; path = ../source/libs/thread/src/tss_null.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = named_slot_map.cpp; path = ../source/libs/signals/src/named_slot_map.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E42690E5E012700B5EBF1 /* slot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slot.cpp; path = ../source/libs/signals/src/slot.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signal_base.cpp; path = ../source/libs/signals/src/signal_base.cpp; sourceTree = SOURCE_ROOT; };
@@ -69,6 +85,7 @@
 			children = (
 				EA6D04620E830300002C8DD3 /* system */,
 				EA7CF6D50E2ED939006E9E8A /* signals */,
+				EA044BFB0EE8936400D3EE10 /* thread */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = boost;
@@ -82,6 +99,17 @@
 				3E7325860E5CE3B5000FF838 /* libboost-simulator.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EA044BFB0EE8936400D3EE10 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				EA044C010EE893E800D3EE10 /* thread.cpp */,
+				EA044C020EE893E800D3EE10 /* once.cpp */,
+				EA044C030EE893E800D3EE10 /* exceptions.cpp */,
+				EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */,
+			);
+			name = thread;
 			sourceTree = "<group>";
 		};
 		EA6D04620E830300002C8DD3 /* system */ = {
@@ -212,6 +240,10 @@
 				EA0E428C0E5E01E100B5EBF1 /* trackable.cpp in Sources */,
 				EA0E428D0E5E01E100B5EBF1 /* connection.cpp in Sources */,
 				EA1B78B50E917EF300004196 /* error_code.cpp in Sources */,
+				EA044C0A0EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C0B0EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C0C0EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C100EE893EC00D3EE10 /* tss_null.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +257,10 @@
 				EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */,
 				EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */,
 				EA1B78B60E917EF400004196 /* error_code.cpp in Sources */,
+				EA044C070EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C080EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C090EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C0F0EE893EC00D3EE10 /* tss_null.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +274,10 @@
 				EA0E42870E5E01E100B5EBF1 /* trackable.cpp in Sources */,
 				EA0E42880E5E01E100B5EBF1 /* connection.cpp in Sources */,
 				EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */,
+				EA044C040EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C050EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C060EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C0E0EE893EC00D3EE10 /* tss_null.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
