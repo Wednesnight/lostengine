@@ -11,20 +11,20 @@ namespace math
 
 struct RectPacker::SourceRect
 {
-  SourceRect(const lost::math::Rect inRect, int32_t inId)
+  SourceRect(const lost::math::Rect inRect, boost::int32_t inId)
   :rect(inRect), id(inId)
   {
   }
   
   lost::math::Rect rect; // the original size
-  int32_t id; // it's index in the original incoming data
+  boost::int32_t id; // it's index in the original incoming data
 };
   
 RectPacker::Node::Node()
 {
   rectid = -1;
   rotated = false;
-  small = -1;
+  tiny = -1;
   large = -1;
 }
 
@@ -38,10 +38,10 @@ RectPacker::~RectPacker()
 
 void RectPacker::checkOverlap()
 {
-  for(uint32_t i=0; i<nodes.size(); ++i)
+  for(boost::uint32_t i=0; i<nodes.size(); ++i)
   {
     Rect& curRect = nodes[i].rect;
-    for(uint32_t j=0; j<nodes.size(); ++j)
+    for(boost::uint32_t j=0; j<nodes.size(); ++j)
     {
       if(i!=j)
       {
@@ -77,8 +77,8 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // create the source vector and preserve incming ids in the progress
   // by wrapping the incoming rects in the SourceRect struct
   sourceRects.clear();
-  int32_t numRects = rects.size();
-  for(int32_t i=0; i<numRects; ++i)
+  boost::int32_t numRects = rects.size();
+  for(boost::int32_t i=0; i<numRects; ++i)
   {
     sourceRects.push_back(SourceRect(rects[i], i));
   }
@@ -88,7 +88,7 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
     std::sort(sourceRects.begin(), sourceRects.end(), compareRects);
     
   // pack all source rects into the target area
-  for(int32_t i=0; i<numRects; ++i)
+  for(boost::int32_t i=0; i<numRects; ++i)
   {
     if(!pack(i))
     {
@@ -99,7 +99,7 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // clean up temporary data
   sourceRects.clear();
   recursionStack.clear();
-  DOUT("searched "<<(uint32_t)((sumIter/sumNodes)*100)<<"% of all nodes");
+  DOUT("searched "<<(boost::uint32_t)((sumIter/sumNodes)*100)<<"% of all nodes");
   DOUT(" iterations: "<<sumIter<<" nodes:"<<sumNodes);
 }
 
@@ -114,7 +114,7 @@ bool RectPacker::fits(const Node& n, const SourceRect& s)
 }
 
 
-bool RectPacker::pack(int32_t sourceRectId)
+bool RectPacker::pack(boost::int32_t sourceRectId)
 {
   // try to find an exactly matching node for the given sourceRectId
   // if there is none, we split the current node until we find one
@@ -134,11 +134,11 @@ bool RectPacker::pack(int32_t sourceRectId)
 
   // loop while we haven't found a match and still have space
   // the last entry in the stack will be the node we have to work with
-  uint32_t iterations = 0;
+  boost::uint32_t iterations = 0;
   while(!foundNode && (recursionStack.size() > 0))
   {
     iterations++;
-    int32_t currentNodeIndex = recursionStack.back();
+    boost::int32_t currentNodeIndex = recursionStack.back();
     Node currentNode = nodes[currentNodeIndex]; // currentNode needs to be copied since we change the vector and the memory might be moved
 //    DOUT("currentNodeIndex: "<<currentNodeIndex<<" stack size: "<<recursionStack.size()<<" rect: "<<currentNode.rect);
     
@@ -162,9 +162,9 @@ bool RectPacker::pack(int32_t sourceRectId)
         // add smaller child last so it will get checked first
         recursionStack.pop_back();
         if((currentNode.large != -1) && (nodes[currentNode.large].rectid==-1)) recursionStack.push_back(currentNode.large);
-        if((currentNode.small != -1) && (nodes[currentNode.small].rectid==-1)) recursionStack.push_back(currentNode.small);
+        if((currentNode.tiny != -1) && (nodes[currentNode.tiny].rectid==-1)) recursionStack.push_back(currentNode.tiny);
 //        DOUT("stack size after split: "<<recursionStack.size());
-//        DOUT("node ids after split: "<<currentNode.small << " " << currentNode.large);
+//        DOUT("node ids after split: "<<currentNode.tiny << " " << currentNode.large);
         nodes[currentNodeIndex] = currentNode;
       }
       else
@@ -182,11 +182,11 @@ bool RectPacker::pack(int32_t sourceRectId)
   return foundNode;
 }
 
-int32_t RectPacker::newNode(const lost::math::Rect& r)
+boost::int32_t RectPacker::newNode(const lost::math::Rect& r)
 {
 //  DOUT("creating node with rect: "<<r);
   nodes.push_back(Node(r));
-  int32_t newNodeIndex = nodes.size();
+  boost::int32_t newNodeIndex = nodes.size();
   newNodeIndex -= 1;
   return newNodeIndex;
 }
@@ -199,7 +199,7 @@ void RectPacker::split(Node& n, const SourceRect& s)
   float vsplitmax, hsplitmax;
   Rect vl, vr, ht, hb;
 
-  if((n.small != -1) || (n.large != -1))
+  if((n.tiny != -1) || (n.large != -1))
   {
 //    DOUT("already split");
     return;
@@ -241,12 +241,12 @@ void RectPacker::split(Node& n, const SourceRect& s)
   {
     if(vl.area() < vr.area())
     {
-      n.small = newNode(vl);
+      n.tiny = newNode(vl);
       n.large = newNode(vr);
     }
     else
     {
-      n.small = newNode(vr);
+      n.tiny = newNode(vr);
       n.large = newNode(vl);
     }
   }
@@ -254,12 +254,12 @@ void RectPacker::split(Node& n, const SourceRect& s)
   {
     if(hb.area() < ht.area())
     {
-      n.small = newNode(hb);
+      n.tiny = newNode(hb);
       n.large = newNode(ht);
     }
     else
     {
-      n.small = newNode(ht);
+      n.tiny = newNode(ht);
       n.large = newNode(hb);
     }
   }

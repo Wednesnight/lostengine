@@ -62,7 +62,7 @@ void Device::logAllDeviceIds()
 {
   vector<string> ids = Device::allDeviceIds();
   DOUT("found "<<ids.size()<<" devices");
-  for(int i=0; i<ids.size(); ++i)
+  for(unsigned int i = 0; i < ids.size(); ++i)
   {
     DOUT("Device "<<i<<" : '"<<ids[i]<<"'");
   }  

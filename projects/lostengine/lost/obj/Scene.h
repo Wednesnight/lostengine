@@ -1,5 +1,5 @@
-#ifndef _OBJ_SCENE_H
-#define _OBJ_SCENE_H
+#ifndef LOST_OBJ_SCENE_H
+#define LOST_OBJ_SCENE_H
 
 #include <vector>
 #include "lost/math/Vec4.h"

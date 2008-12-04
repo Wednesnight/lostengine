@@ -12,9 +12,6 @@ namespace lost
   {
       FpsMeter::FpsMeter(boost::shared_ptr<lost::gl::Context> inContext)
       : context(inContext)
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-        ,font(GLUT_BITMAP_TIMES_ROMAN_10)
-#endif
       {
         width = historylength;
         height = 100;
@@ -49,7 +46,7 @@ namespace lost
 
       void FpsMeter::addHistoryEntry(double timeSinceLastCallSec)
       {
-        float currentfps = 1.0/timeSinceLastCallSec;
+        float currentfps = (float)(1.0/timeSinceLastCallSec);
         history[historycurpos] = currentfps;
         historycurpos = (historycurpos+1)%historylength;
       }
@@ -61,7 +58,7 @@ namespace lost
         context->pushState(renderState);
         // background
         context->setColor(Color(.75, .75, .75, alpha));
-        context->drawRectFilled(math::Rect(x, y, width, height));
+        context->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
 
         // top caption
         context->setColor(Color(0, 0, 0, alpha));
@@ -70,7 +67,7 @@ namespace lost
         context->setColor(Color(0, 0, 0, alpha));
         for(unsigned long n=0; n<numlabels; ++n)
         {
-          context->drawLine(math::Vec2(x, y+10*(n+1)-1), math::Vec2(x+width-1, y+10*(n+1)-1));
+          context->drawLine(math::Vec2((float)x, (float)y+10*(n+1)-1), math::Vec2((float)x+width-1, (float)y+10*(n+1)-1));
         }
 
         // draw history ringbuffer
@@ -79,7 +76,7 @@ namespace lost
         for(unsigned long i=0; i<historylength-1; ++i)
         {
 //          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
-          context->drawLine(math::Vec2(x+i, y+history[curpos]), math::Vec2(x+i+1, y+history[(curpos+1)%historylength]));
+          context->drawLine(math::Vec2((float)x+i, (float)y+history[curpos]), math::Vec2((float)x+i+1, (float)y+history[(curpos+1)%historylength]));
           curpos = (curpos+1) % historylength;
         }
         context->popState();

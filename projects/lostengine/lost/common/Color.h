@@ -3,6 +3,7 @@
 
 #include "lost/common/Logger.h"
 #include <iostream>
+#include <boost/cstdint.hpp>
 
 namespace lost
 {
@@ -27,15 +28,15 @@ namespace lost
       inline void a(float v) { fv[3] = v; }
 
       // accessors for rgba values as usingned 8 bit integers
-      inline uint8_t ru8() const { return fv[0]*255.0; };
-      inline uint8_t gu8() const { return fv[1]*255.0; };
-      inline uint8_t bu8() const { return fv[2]*255.0; };
-      inline uint8_t au8() const { return fv[3]*255.0; };
+      inline boost::uint8_t ru8() const { return (boost::uint8_t)(fv[0]*255); };
+      inline boost::uint8_t gu8() const { return (boost::uint8_t)(fv[1]*255); };
+      inline boost::uint8_t bu8() const { return (boost::uint8_t)(fv[2]*255); };
+      inline boost::uint8_t au8() const { return (boost::uint8_t)(fv[3]*255); };
 
-      inline void ru8(uint8_t v) { fv[0] = float(v)/255.0; }
-      inline void gu8(uint8_t v) { fv[1] = float(v)/255.0; }
-      inline void bu8(uint8_t v) { fv[2] = float(v)/255.0; }
-      inline void au8(uint8_t v) { fv[3] = float(v)/255.0; }
+      inline void ru8(boost::uint8_t v) { fv[0] = float(v)/255.0f; }
+      inline void gu8(boost::uint8_t v) { fv[1] = float(v)/255.0f; }
+      inline void bu8(boost::uint8_t v) { fv[2] = float(v)/255.0f; }
+      inline void au8(boost::uint8_t v) { fv[3] = float(v)/255.0f; }
       
       float fv[4];
     };

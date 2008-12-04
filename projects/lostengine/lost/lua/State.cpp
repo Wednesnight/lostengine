@@ -1,10 +1,13 @@
 #include "lost/lua/State.h"
 #include "lost/lua/ErrorHandler.h"
-#include <hashlibpp.h>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
+
+// no deprecated warnings for hashlib++
+#pragma warning(disable:4996)
+#include <hashlibpp.h>
 
 using namespace boost;
 using namespace std;

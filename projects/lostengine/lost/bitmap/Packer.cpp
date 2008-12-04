@@ -40,7 +40,7 @@ void Packer::pack(Packer::Result& outResult,
                   sort); 
   // extract missing infos from rectpacker
   // build final bitmap
-  outResult.packedBitmap.reset(new Bitmap(targetSize.width, targetSize.height, format));
+  outResult.packedBitmap.reset(new Bitmap((boost::uint32_t)targetSize.width, (boost::uint32_t)targetSize.height, format));
   outResult.rects.clear();
   uint32_t numNodes = rectPacker.nodes.size();
   for(uint32_t i=0; i<numNodes; ++i)
@@ -54,7 +54,7 @@ void Packer::pack(Packer::Result& outResult,
       
       Rect r = rectPacker.nodes[i].rect;
       shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
-      bmp->draw(r.x, r.y, outResult.packedBitmap);
+      bmp->draw((boost::uint32_t)r.x, (boost::uint32_t)r.y, outResult.packedBitmap);
 //      DOUT("drawing "<<r);
     }
   }
@@ -68,7 +68,7 @@ void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
   uint32_t numBitmaps = inBitmaps.size();
   for(uint32_t i=0; i<numBitmaps; ++i)
   {
-    outRects.push_back(Rect(0,0,inBitmaps[i]->width, inBitmaps[i]->height));
+    outRects.push_back(Rect(0,0,(float)inBitmaps[i]->width, (float)inBitmaps[i]->height));
   }
 }
   

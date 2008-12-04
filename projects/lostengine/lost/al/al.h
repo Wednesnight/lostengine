@@ -4,7 +4,8 @@
 #include "lost/platform/Platform.h"
 
 #if defined WIN32
-    // include windows al headers here
+  #include <OpenAL/al.h>
+  #include <OpenAL/alc.h>
 #elif defined linux
     // include linux al headers here
 #elif defined __APPLE__

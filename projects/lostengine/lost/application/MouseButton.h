@@ -1,6 +1,9 @@
 #ifndef LOST_APPLICATION_MOUSEBUTTON_H
 #define LOST_APPLICATION_MOUSEBUTTON_H
 
+// windows consts get in our way here...
+#undef MB_RIGHT
+
 namespace lost
 {
   namespace application

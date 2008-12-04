@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9,00"
 	Name="luabind"
-	ProjectGUID="{72AFF6DF-90E6-4639-89E1-2EE9FA6A5A37}"
+	ProjectGUID="{1F9B63B5-87E5-452A-B2C8-231488E79FAE}"
 	RootNamespace="freetype"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

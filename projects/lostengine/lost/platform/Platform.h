@@ -1,6 +1,22 @@
 #ifndef LOST_PLATFORM_PLATFORM_H
 #define LOST_PLATFORM_PLATFORM_H
 
+#ifndef __FUNCTION__
+  #ifdef __func__
+    #define __FUNCTION__ __func__
+  #else
+    #define __FUNCTION__ "unknown"
+  #endif
+#endif
+
+#ifndef __PRETTY_FUNCTION__
+  #ifdef __FUNCDNAME__
+    #define __PRETTY_FUNCTION__ __FUNCDNAME__
+  #else
+    #define __PRETTY_FUNCTION__ "unknown"
+  #endif
+#endif
+
 // TargetConditionals defines the IPHONE Macros we require
 // this header is only present if we build on an apple platform
 #if defined __APPLE__
@@ -10,6 +26,7 @@
 #include <string>
 
 #if defined WIN32
+  #define NOMINMAX
   #include <windows.h>
 #endif
 

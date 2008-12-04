@@ -51,7 +51,7 @@ struct TrueTypeFont
    */
   boost::shared_ptr<bitmap::Bitmap>
   renderGlyphToBitmap(char c,
-                      uint32_t inSizeInPoints);
+                      boost::uint32_t inSizeInPoints);
     
   /** renders the given string with this font and returns it as a textured mesh that
    *  has it's origin at 0,0.
@@ -61,7 +61,7 @@ struct TrueTypeFont
    *
    */
   boost::shared_ptr<Model> render(const std::string& inText,
-                                  uint32_t inSizeInPoints);
+                                  boost::uint32_t inSizeInPoints);
   
   
   /** checks if the caches already contain the glyph for the given character 
@@ -69,7 +69,7 @@ struct TrueTypeFont
    *  @return true if the glyph was rendered, false if it was cached and didn't need to be rendered again.
    */
   bool renderGlyph(char c,
-                   uint32_t inSizeInPoints);
+                   boost::uint32_t inSizeInPoints);
   
   /** builds a new texture atlas from the current glyphs in the cache.
    *  
@@ -79,10 +79,10 @@ struct TrueTypeFont
 
     /** sets up internal model data structures so they can contain the given number of characters.
      */
-    void resetModel(boost::shared_ptr<Model> model, uint32_t numChars);  
+    void resetModel(boost::shared_ptr<Model> model, boost::uint32_t numChars);  
 
   void addGlyph(boost::shared_ptr<Model> model,
-                              uint32_t index,
+                boost::uint32_t index,
                 boost::shared_ptr<Glyph> glyph,
                 float xoffset,
                 lost::math::Vec2& pmin,
@@ -93,14 +93,14 @@ struct TrueTypeFont
    * will simply be moved further.
    * Drawables will be flagged true, other will be flagged with drawable = false
    */
-  uint32_t countAndFlagDrawableChars(const std::string& inText, uint32_t inSizeInPoints);
+  boost::uint32_t countAndFlagDrawableChars(const std::string& inText, boost::uint32_t inSizeInPoints);
   
   boost::shared_ptr<freetype::Face> face;
   boost::shared_ptr<freetype::Library> library;
 
   lost::math::Vec2  atlasSize;
   
-  std::map<char, std::map<uint32_t, boost::shared_ptr<Glyph> > > char2size2glyph; 
+  std::map<char, std::map<boost::uint32_t, boost::shared_ptr<Glyph> > > char2size2glyph; 
   std::vector<boost::shared_ptr<Glyph> > glyphs; // this list of glyphs contains the glyphs in the order they were rendered
                                                  // this is important to preserve the ordering fo rth packing of the atlas
 

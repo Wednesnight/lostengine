@@ -1,6 +1,9 @@
 #ifndef LOST_MODEL_OBJ_PARSER_H
 #define LOST_MODEL_OBJ_PARSER_H
 
+// spirit::real_p (double) assignment to float
+#pragma warning(disable:4244)
+
 #include <map>
 
 //#define BOOST_SPIRIT_DEBUG

@@ -4,15 +4,9 @@
 #include <string>
 #include <fstream>
 #include <boost/lexical_cast.hpp>
-//#include <boost/signal.hpp>
 #include "lost/platform/Platform.h"
 #include <iostream>
 #include <stdexcept>
-
-#ifndef __GNUC__
-  #define __FUNCTION__ "(unknown)"
-  #define __PRETTY_FUNCTION__ "(unknown)()"
-#endif
 
 #define __CALLER_FILE__ __FILE__ << ": "
 #define __CALLER_FUNCTION__ __FUNCTION__ << "(): "
@@ -50,7 +44,7 @@ namespace lost
     {
       static std::string fileNameFromFullPath(const char* fullPath)
       {
-        char* p = strrchr(fullPath, '/'); // FIXME: this might fail on windows due to different separators, we might need to use something like boost::fs here
+        const char* p = strrchr(fullPath, '/'); // FIXME: this might fail on windows due to different separators, we might need to use something like boost::fs here
         if(p)
         {
           return std::string(p+1); // add 1 to pointer to remove leading '/'

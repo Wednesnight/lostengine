@@ -141,14 +141,14 @@ void glfwKeyCallback( int keysym, int pressed, int repeat )
   
   shared_ptr<KeyEvent> ev(new KeyEvent(pressed ? KeyEvent::KEY_DOWN() : KeyEvent::KEY_UP()));
   ev->key = l_key;
-  ev->pressed = pressed;
-  ev->repeat = repeat;
+  ev->pressed = (pressed != 0);
+  ev->repeat = (repeat != 0);
   adapterInstance->target->dispatchEvent(ev);    
 }
 
 void glfwMouseMoveCallback( int x, int y )
 {
-  lost::math::Vec2 point(x,y);    
+  lost::math::Vec2 point((float)x,(float)y);    
   shared_ptr<MouseEvent> ev(new MouseEvent(MouseEvent::MOUSE_MOVE()));
   point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
@@ -168,7 +168,7 @@ void glfwMouseButtonCallback( int button, int action )
   
   bool pressed = (action == GLFW_PRESS);
   shared_ptr<MouseEvent> ev(new MouseEvent(pressed ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP()));
-  lost::math::Vec2 point(x,y);
+  lost::math::Vec2 point((float)x,(float)y);
   point.y = adapterInstance->state->displayHeight - point.y;
   ev->pos = point;
   ev->button = (button == GLFW_MOUSE_BUTTON_1)

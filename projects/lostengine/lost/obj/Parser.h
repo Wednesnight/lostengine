@@ -1,5 +1,5 @@
-#ifndef _OBJ_PARSER_H_
-#define _OBJ_PARSER_H_
+#ifndef LOST_OBJ_PARSER_H_
+#define LOST_OBJ_PARSER_H_
 
 #include <string>
 #include "lost/obj/Scene.h"

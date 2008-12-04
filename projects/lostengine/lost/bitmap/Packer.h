@@ -5,7 +5,7 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/math/Rect.h"
 #include "lost/math/RectPacker.h"
-#include <stdint.h>
+#include <boost/cstdint.hpp>
 
 namespace lost
 {
@@ -18,7 +18,7 @@ struct Packer
     
     boost::shared_ptr<lost::bitmap::Bitmap> packedBitmap; // the resulting bitmap
     std::vector<lost::math::Rect>           rects;        // the resulting rects. Size of this vector is number of bitmaps that fit into the target area
-    std::vector<int32_t>                    bitmapIds;    // the initial index of the bitmap in the incoming data
+    std::vector<boost::int32_t>                    bitmapIds;    // the initial index of the bitmap in the incoming data
     std::vector<bool>                       rotated;      // true if the bitmap was rotated
 
     void clear();

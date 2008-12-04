@@ -1,7 +1,7 @@
 #ifndef LOST_GL_MESH_H
 #define LOST_GL_MESH_H
 
-#include <stdint.h>
+#include <boost/cstdint.hpp>
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include "lost/gl/Texture.h"
@@ -16,7 +16,7 @@ namespace lost
     template <typename VertexType>
     struct Mesh
     {
-      Mesh(uint32_t inVertexCount, uint32_t inTexcoordCount, uint32_t inFaceCount, boost::shared_ptr<Texture> inTexture)
+      Mesh(boost::uint32_t inVertexCount, boost::uint32_t inTexcoordCount, boost::uint32_t inFaceCount, boost::shared_ptr<Texture> inTexture)
       : vertexCount(inVertexCount),
         texcoordCount(inTexcoordCount),
         faceCount(inFaceCount),
@@ -31,44 +31,44 @@ namespace lost
       {
       }
 
-      void setVertexCount(uint32_t inVertexCount)
+      void setVertexCount(boost::uint32_t inVertexCount)
       {
         vertices.reset(new VertexType[inVertexCount]);
       }
 
-      void setVertex(uint32_t index, const VertexType& value)
+      void setVertex(boost::uint32_t index, const VertexType& value)
       {
         if (index < vertexCount) vertices[index] = value;
       }
 
-      void setTexcoordCount(uint32_t inTexcoordCount)
+      void setTexcoordCount(boost::uint32_t inTexcoordCount)
       {
         texcoords.reset(new VertexType[inTexcoordCount]);
       }
 
-      void setTexcoord(uint32_t index, const VertexType& value)
+      void setTexcoord(boost::uint32_t index, const VertexType& value)
       {
         if (index < texcoordCount) texcoords[index] = value;
       }
 
-      void setFaceCount(uint32_t inFaceCount)
+      void setFaceCount(boost::uint32_t inFaceCount)
       {
-        faces.reset(new uint8_t[inFaceCount]);
+        faces.reset(new boost::uint8_t[inFaceCount]);
       }
 
-      void setFace(uint32_t index, const uint8_t value)
+      void setFace(boost::uint32_t index, const boost::uint8_t value)
       {
         if (index < faceCount) faces[index] = value;
       }
       
-      uint32_t vertexCount;
-      uint32_t texcoordCount;
-      uint32_t faceCount;
+      boost::uint32_t vertexCount;
+      boost::uint32_t texcoordCount;
+      boost::uint32_t faceCount;
 
-      boost::shared_array<VertexType> vertices;
-      boost::shared_array<VertexType> texcoords;
-      boost::shared_array<uint8_t>    faces;
-      boost::shared_ptr<gl::Texture>  texture;
+      boost::shared_array<VertexType>     vertices;
+      boost::shared_array<VertexType>     texcoords;
+      boost::shared_array<boost::uint8_t> faces;
+      boost::shared_ptr<gl::Texture>      texture;
     };
 
     typedef Mesh<math::Vec2> Mesh2D;

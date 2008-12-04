@@ -11,12 +11,12 @@ namespace lost
     struct ConfigValue : public luabind::object
     {
       ConfigValue()
-      : luabind::object::object()
+      : luabind::object()
       {
       }
       
       ConfigValue(const luabind::object& inObject)
-      : luabind::object::object(inObject)
+      : luabind::object(inObject)
       {
       }
       
@@ -41,7 +41,7 @@ namespace lost
           Type result = as<Type>();
           return result;
         }
-        catch (std::exception& e)
+        catch (std::exception&)
         {
           return inDefault;
         }

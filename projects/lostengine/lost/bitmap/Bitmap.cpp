@@ -281,7 +281,7 @@ void Bitmap::flip()
   }
 }
 
-uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
+boost::uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
 {
   uint32_t bpp = bytesPerPixelFromComponents(format);
   uint8_t* target = data+((x+(y*width))*bpp);
@@ -385,10 +385,10 @@ void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color
   float maxX = inRect.maxX();
   float maxY = inRect.maxY();
   
-  vline(minX, minY, maxY, inColor);
-  vline(maxX, minY, maxY, inColor);
-  hline(minY, minX, maxX, inColor);
-  hline(maxY, minX, maxX, inColor);
+  vline((uint32_t)minX, (uint32_t)minY, (uint32_t)maxY, inColor);
+  vline((uint32_t)maxX, (uint32_t)minY, (uint32_t)maxY, inColor);
+  hline((uint32_t)minY, (uint32_t)minX, (uint32_t)maxX, inColor);
+  hline((uint32_t)maxY, (uint32_t)minX, (uint32_t)maxX, inColor);
 }
 
 

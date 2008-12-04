@@ -3,6 +3,7 @@
 
 #include "lost/gl/gl.h"
 #include <boost/noncopyable.hpp>
+#include <boost/cstdint.hpp>
 
 namespace boost { template<typename T> class shared_ptr; }
 
@@ -75,10 +76,10 @@ namespace lost
                       
       GLuint        texture;
       // width and height of the texture object
-      uint32_t width;
-      uint32_t height;      
-      uint32_t dataWidth; 
-      uint32_t dataHeight;
+      boost::uint32_t width;
+      boost::uint32_t height;      
+      boost::uint32_t dataWidth; 
+      boost::uint32_t dataHeight;
     private:
       void create();
     };

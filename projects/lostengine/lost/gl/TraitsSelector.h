@@ -5,7 +5,7 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/model/Vertex.h"
-#include <stdint.h>
+#include <boost/cstdint.hpp>
 
 namespace lost
 {
@@ -54,7 +54,7 @@ namespace lost
     };
     
     template<>
-    struct TraitsSelector<uint8_t>
+    struct TraitsSelector<boost::uint8_t>
     {
       GLint size;
       GLenum type;
@@ -62,7 +62,7 @@ namespace lost
     };
 
     template<>
-    struct TraitsSelector<uint16_t>
+    struct TraitsSelector<boost::uint16_t>
     {
       GLint size;
       GLenum type;
@@ -71,7 +71,7 @@ namespace lost
 
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
     template<>
-    struct TraitsSelector<uint32_t>
+    struct TraitsSelector<boost::uint32_t>
     {
       GLint size;
       GLenum type;

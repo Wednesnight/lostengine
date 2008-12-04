@@ -1,5 +1,5 @@
-#ifndef _OBJ_FACE_H
-#define _OBJ_FACE_H
+#ifndef LOST_OBJ_FACE_H
+#define LOST_OBJ_FACE_H
 
 #include <vector>
 #include <lost/obj/Vertex.h>

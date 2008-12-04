@@ -155,7 +155,7 @@ void Context::set3DProjection(const lost::math::Vec3& eye,
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   double screenAspectRatio = (double)displayAttributes->width/(double)displayAttributes->height;
-  lgluPerspective(fovy, screenAspectRatio, depth.min, depth.max);
+  lgluPerspective(fovy, (GLfloat)screenAspectRatio, depth.min, depth.max);
   lgluLookAt(eye.x,  eye.y,  eye.z,
             at.x,   at.y,   at.z,
             up.x,   up.y,   up.z);

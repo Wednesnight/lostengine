@@ -24,7 +24,6 @@ namespace lost
       unsigned long labelstepping;
       float alpha;
       boost::shared_array<float> history;
-      void* font;
       std::vector<std::string> labels;
       boost::shared_ptr<lost::gl::Context> context;
       boost::shared_ptr<lost::gl::State> renderState;

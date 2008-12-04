@@ -135,8 +135,8 @@ void TrueTypeFont::rebuildTextureAtlas()
   for(uint32_t k=0; k<glyphs.size(); ++k)
   {
     boost::shared_ptr<Glyph> g = glyphs[k];
-    float tw = atlas->dataWidth;
-    float th = atlas->dataHeight;
+    float tw = (float)atlas->dataWidth;
+    float th = (float)atlas->dataHeight;
     g->bl = Vec2(g->rect.x/tw, g->rect.y/th);
     g->br = Vec2((g->rect.maxX()+1)/tw, g->rect.y/th);
     g->tl = Vec2(g->rect.x/tw, (g->rect.maxY()+1)/th);
@@ -167,7 +167,7 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
 {
   Rect tr = glyph->rect; 
   tr.x = xoffset+glyph->xoffset;
-  tr.y = glyph->yoffset;
+  tr.y = (float)glyph->yoffset;
   
   pmin.x = min(pmin.x, tr.x);
   pmin.y = min(pmin.y, tr.y);
@@ -180,12 +180,12 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   uint32_t vertsPerChar = 4;
   uint32_t vertsOffset = vertsPerChar*index;
   
-  model->indices[indexOffset+0] = vertsOffset+0;
-  model->indices[indexOffset+1] = vertsOffset+2;
-  model->indices[indexOffset+2] = vertsOffset+3;
-  model->indices[indexOffset+3] = vertsOffset+0;
-  model->indices[indexOffset+4] = vertsOffset+1;
-  model->indices[indexOffset+5] = vertsOffset+2;
+  model->indices[indexOffset+0] = (boost::uint8_t)vertsOffset+0;
+  model->indices[indexOffset+1] = (boost::uint8_t)vertsOffset+2;
+  model->indices[indexOffset+2] = (boost::uint8_t)vertsOffset+3;
+  model->indices[indexOffset+3] = (boost::uint8_t)vertsOffset+0;
+  model->indices[indexOffset+4] = (boost::uint8_t)vertsOffset+1;
+  model->indices[indexOffset+5] = (boost::uint8_t)vertsOffset+2;
   
   uint32_t coordsPerChar = 8; // 4 verts a 2 coords
   uint32_t coordOffset = coordsPerChar*index;
@@ -241,7 +241,7 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   
   // render glyphs if required
   uint32_t renderedGlyphs = 0;
-  for(int i=0; i<inText.length(); ++i)
+  for(unsigned int i=0; i<inText.length(); ++i)
   {
     if(renderGlyph(inText[i], inSizeInPoints))
       ++renderedGlyphs;
@@ -257,7 +257,7 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   float xoffset = 0;
   
   // kerning setup
-  bool hasKerning = FT_HAS_KERNING(face->face());
+  bool hasKerning = FT_HAS_KERNING(face->face()) != 0;
   FT_UInt previousGlyphIndex, currentGlyphIndex;
   previousGlyphIndex = 0;
   FT_Vector kerningDelta;
@@ -267,7 +267,7 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
   uint32_t numChars = inText.size();
   uint32_t addIndex=0; // we iterate over all chracters, but not all of them might be drawable
                        // so we need a separate index for the actual insertion of a character into the mesh
-  for(int i=0; i<numChars; ++i)
+  for(unsigned int i=0; i<numChars; ++i)
   {
     char c = inText[i];
     

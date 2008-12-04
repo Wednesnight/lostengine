@@ -1,5 +1,8 @@
 #include <iostream>
 
+// spirit::real_p (double) assignment to float
+#pragma warning(disable:4244)
+
 //#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/core.hpp>
 #include <boost/spirit/utility/lists.hpp>

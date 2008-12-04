@@ -1,5 +1,5 @@
-#ifndef _OBJ_VERTEX_H
-#define _OBJ_VERTEX_H
+#ifndef LOST_OBJ_VERTEX_H
+#define LOST_OBJ_VERTEX_H
 
 #include <iosfwd>
 

@@ -20,21 +20,21 @@ namespace lost
       module(state, "gl")
       [
        def("GLDEBUG", &glDebug),
-       def("glClearColor", &glClearColor),
-       def("glClear", &glClear),
-       def("glEnable", &glEnable),
-       def("glDisable", &glDisable),
-       def("glEnableClientState", &glEnableClientState),
-       def("glDisableClientState", &glDisableClientState),
-       def("glMatrixMode", &glMatrixMode),
-       def("glLoadIdentity", &glLoadIdentity),
-       def("glViewport", &glViewport),
-       def("glLineWidth", &glLineWidth),
+       def("glClearColor", (void(*)(GLclampf,GLclampf,GLclampf,GLclampf))&glClearColor),
+       def("glClear", (void(*)(GLbitfield))&glClear),
+       def("glEnable", (void(*)(GLenum))&glEnable),
+       def("glDisable", (void(*)(GLenum))&glDisable),
+       def("glEnableClientState", (void(*)(GLenum))&glEnableClientState),
+       def("glDisableClientState", (void(*)(GLenum))&glDisableClientState),
+       def("glMatrixMode", (void(*)(GLenum))&glMatrixMode),
+       def("glLoadIdentity", (void(*)(void))&glLoadIdentity),
+       def("glViewport", (void(*)(GLint,GLint,GLsizei,GLsizei))&glViewport),
+       def("glLineWidth", (void(*)(GLfloat))&glLineWidth),
+       def("glTranslate", (void(*)(GLfloat,GLfloat,GLfloat))&glTranslatef),
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-       def("glPushAttrib", &glPushAttrib),
-       def("glPopAttrib", &glPopAttrib),
+       def("glPushAttrib", (void(*)(GLbitfield))&glPushAttrib),
+       def("glPopAttrib", (void(*)(GLbitfield))&glPopAttrib)
 #endif
-       def("glTranslate", &glTranslatef)
        ];
 
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)

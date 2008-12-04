@@ -1,8 +1,8 @@
-#ifndef LOST_IMAGE_BITMAP_H
-#define LOST_IMAGE_BITMAP_H
+#ifndef LOST_BITMAP_BITMAP_H
+#define LOST_BITMAP_BITMAP_H
 
 #include <boost/noncopyable.hpp>
-#include <stdint.h>
+#include <boost/cstdint.hpp>
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 
@@ -25,9 +25,9 @@ namespace lost
         COMPONENTS_NUM
       };
       
-      uint8_t*    data;   // points to the raw pixel data
-      uint32_t    width;  // width in pixels
-      uint32_t    height; // height in pixels
+      boost::uint8_t*    data;   // points to the raw pixel data
+      boost::uint32_t    width;  // width in pixels
+      boost::uint32_t    height; // height in pixels
       Components  format; // format of bitmap as GL constant (e.g. rgb, rgba)
 
       /** creates an empty bitmap with zero size.
@@ -37,15 +37,15 @@ namespace lost
         
       /** creates a bitmap with the given size and format. The initial content is undefined.
        */
-      Bitmap(uint32_t inWidth,
-             uint32_t inHeight,
+      Bitmap(boost::uint32_t inWidth,
+             boost::uint32_t inHeight,
              Components format);
     
-      Bitmap(uint32_t inWidth,
-             uint32_t inHeight,
+      Bitmap(boost::uint32_t inWidth,
+             boost::uint32_t inHeight,
              Components destComponents,
              Components srcComponents,
-             uint8_t* data);
+             boost::uint8_t* data);
       Bitmap(boost::shared_ptr<lost::resource::File> inFile);
       void reset();
       virtual ~Bitmap();
@@ -59,11 +59,11 @@ namespace lost
        * @param srcComponents format of the source data
        * @param srcData source data from which the bitmap is constructed
        */
-      void init(uint32_t inWidth,
-                uint32_t inHeight,
+      void init(boost::uint32_t inWidth,
+                boost::uint32_t inHeight,
                 Components destComponents,
                 Components srcComponents,
-                uint8_t* srcData);
+                boost::uint8_t* srcData);
 
       /** initialises the bitmap with the given size and format. 
        * The initial contents are undefined.
@@ -73,8 +73,8 @@ namespace lost
        * @param format pixel format of the bitmap.
        *
        */
-      void init(uint32_t inWidth,
-                uint32_t inHeight,
+      void init(boost::uint32_t inWidth,
+                boost::uint32_t inHeight,
                 Components format);
 
       /** attempts to interpret a chunk ofmemory as a bitmap, with the help of the underlying image library.
@@ -84,7 +84,7 @@ namespace lost
       
       /** calculates the number of pixels for a given bitmap components constant.
        */
-      static uint32_t bytesPerPixelFromComponents(Components components);
+      static boost::uint32_t bytesPerPixelFromComponents(Components components);
 
       /** copies exctaly one pixel from src to dest, converting the format 
        * from srcComponents to destComponents.
@@ -98,9 +98,9 @@ namespace lost
        * rgb to alpha:      alpha is set 1 
        * rgba to alpha:     only the alpha channel is copied
        */
-      static void copyPixel(uint8_t* dest,
+      static void copyPixel(boost::uint8_t* dest,
                             Components destComponents, 
-                            uint8_t* src,
+                            boost::uint8_t* src,
                             Components srcComponents);
                             
                             
@@ -128,13 +128,13 @@ namespace lost
       void flip();
     
       /** returns a pointer to the data of the pixel at the given coordinates */
-      uint8_t* pixelPointer(uint32_t x, uint32_t y);
+      boost::uint8_t* pixelPointer(boost::uint32_t x, boost::uint32_t y);
         
       /** sets a pixel with the given color */
-      void pixel(uint32_t x, uint32_t y, const common::Color& inColor);
+      void pixel(boost::uint32_t x, boost::uint32_t y, const common::Color& inColor);
       
       /** reads a pixel from the given coordinates and returns it as a Color. */
-      common::Color pixel(uint32_t x, uint32_t y);
+      common::Color pixel(boost::uint32_t x, boost::uint32_t y);
       
       /** draws a horizontal line into the bitmap.
        * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
@@ -143,7 +143,7 @@ namespace lost
        * @param xr      the right x coordinate of the end point.
        * @param inColor color to draw the line in.
        */
-      void hline(uint32_t y, uint32_t xl, uint32_t xr, const common::Color& inColor);
+      void hline(boost::uint32_t y, boost::uint32_t xl, boost::uint32_t xr, const common::Color& inColor);
       
       /** draws a horizontal line into the bitmap.
        * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
@@ -152,7 +152,7 @@ namespace lost
        * @param yt        the top y coordinate of the end point.
        * @param inColor   color to draw the line in.
        */
-      void vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& inColor);
+      void vline(boost::uint32_t x, boost::uint32_t yb, boost::uint32_t yt, const common::Color& inColor);
 
       
         
@@ -164,10 +164,10 @@ namespace lost
       boost::shared_ptr<Bitmap> rotCW();
       
       /** returns the occupied are in pixels. */
-      float area() { return width*height; }
+      float area() { return (float)(width*height); }
       
       /** draws this bitmap into the specified target. */
-      void draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target);
+      void draw(boost::uint32_t x, boost::uint32_t y, boost::shared_ptr<Bitmap> target);
       
     private:
       void destroy();

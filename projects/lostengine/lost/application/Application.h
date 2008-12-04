@@ -1,5 +1,5 @@
-#ifndef LOST_APPLICATION_APPLICATION
-#define LOST_APPLICATION_APPLICATION
+#ifndef LOST_APPLICATION_APPLICATION_H
+#define LOST_APPLICATION_APPLICATION_H
 
 #include "lost/forward/boost"
 #include "lost/common/DisplayAttributes.h"

@@ -162,7 +162,7 @@ namespace lost
             for (unsigned int idx = 0; idx < mesh->normalCount; ++idx)
             {
               math::Vec3 offset(mesh->vertices[mesh->faces[idx*3]]);
-              math::Vec3 normal(offset + mesh->normals[idx] * .1);
+              math::Vec3 normal(offset + mesh->normals[idx] * 0.1f);
               context->drawLine(offset, normal);
             }
             glPopMatrix();
