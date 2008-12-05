@@ -1,6 +1,7 @@
 #include "lost/lua/lua.h"
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
+#include "lost/platform/Platform.h"
 
 #include "lost/lua/bindings/LostGLGL.h"
 
@@ -15,31 +16,107 @@ namespace lost
 {
   namespace lua
   {
+
+// stupid win32 __stdcall mapping
+#ifdef WIN32
+    #define LOST_LUA_GL_PREFIX(s) _##s
+
+    void _glClearColor(GLclampf p1,GLclampf p2,GLclampf p3, GLclampf p4)
+    {
+      glClearColor(p1, p2, p3, p4);
+    }
+
+    void _glClear(GLbitfield p1)
+    {
+      glClear(p1);
+    }
+
+    void _glEnable(GLenum p1)
+    {
+      glEnable(p1);
+    }
+
+    void _glDisable(GLenum p1)
+    {
+      glDisable(p1);
+    }
+
+    void _glEnableClientState(GLenum p1)
+    {
+      glEnableClientState(p1);
+    }
+
+    void _glDisableClientState(GLenum p1)
+    {
+      glDisableClientState(p1);
+    }
+
+    void _glMatrixMode(GLenum p1)
+    {
+      glMatrixMode(p1);
+    }
+
+    void _glLoadIdentity()
+    {
+      glLoadIdentity();
+    }
+
+    void _glViewport(GLint p1,GLint p2,GLsizei p3,GLsizei p4)
+    {
+      glViewport(p1, p2, p3, p4);
+    }
+
+    void _glLineWidth(GLfloat p1)
+    {
+      glLineWidth(p1);
+    }
+
+    void _glTranslatef(GLfloat p1,GLfloat p2,GLfloat p3)
+    {
+      glTranslatef(p1, p2, p3);
+    }
+
+    void _glPushAttrib(GLbitfield p1)
+    {
+      glPushAttrib(p1);
+    }
+
+    void _glPopAttrib()
+    {
+      glPopAttrib();
+    }
+#else
+    // not win32
+    #define LOST_LUA_GL_PREFIX(s) ##s
+#endif
+
     void LostGLGL(lua_State* state)
     {
       module(state, "gl")
       [
        def("GLDEBUG", &glDebug),
-       def("glClearColor", (void(*)(GLclampf,GLclampf,GLclampf,GLclampf))&glClearColor),
-       def("glClear", (void(*)(GLbitfield))&glClear),
-       def("glEnable", (void(*)(GLenum))&glEnable),
-       def("glDisable", (void(*)(GLenum))&glDisable),
-       def("glEnableClientState", (void(*)(GLenum))&glEnableClientState),
-       def("glDisableClientState", (void(*)(GLenum))&glDisableClientState),
-       def("glMatrixMode", (void(*)(GLenum))&glMatrixMode),
-       def("glLoadIdentity", (void(*)(void))&glLoadIdentity),
-       def("glViewport", (void(*)(GLint,GLint,GLsizei,GLsizei))&glViewport),
-       def("glLineWidth", (void(*)(GLfloat))&glLineWidth),
-       def("glTranslate", (void(*)(GLfloat,GLfloat,GLfloat))&glTranslatef),
+       def("glClearColor", &LOST_LUA_GL_PREFIX(glClearColor)),
+       def("glClear", &LOST_LUA_GL_PREFIX(glClear)),
+       def("glEnable", &LOST_LUA_GL_PREFIX(glEnable)),
+       def("glDisable", &LOST_LUA_GL_PREFIX(glDisable)),
+       def("glEnableClientState", &LOST_LUA_GL_PREFIX(glEnableClientState)),
+       def("glDisableClientState", &LOST_LUA_GL_PREFIX(glDisableClientState)),
+       def("glMatrixMode", &LOST_LUA_GL_PREFIX(glMatrixMode)),
+       def("glLoadIdentity", &LOST_LUA_GL_PREFIX(glLoadIdentity)),
+       def("glViewport", &LOST_LUA_GL_PREFIX(glViewport)),
+       def("glLineWidth", &LOST_LUA_GL_PREFIX(glLineWidth)),
+       def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef)),
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-       def("glPushAttrib", (void(*)(GLbitfield))&glPushAttrib),
-       def("glPopAttrib", (void(*)(void))&glPopAttrib)
+       def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
+       def("glPopAttrib", &LOST_LUA_GL_PREFIX(glPopAttrib))
 #endif
        ];
 
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
       globals(state)["gl"]["GL_CLAMP"] = GL_CLAMP;
       globals(state)["gl"]["GL_DEPTH_COMPONENT"] = GL_DEPTH_COMPONENT;
+      globals(state)["gl"]["GL_DEPTH_COMPONENT16"] = GL_DEPTH_COMPONENT16;
+      globals(state)["gl"]["GL_DEPTH_COMPONENT24"] = GL_DEPTH_COMPONENT24;
       globals(state)["gl"]["GL_DEPTH_COMPONENT32"] = GL_DEPTH_COMPONENT32;
       globals(state)["gl"]["GL_FRAMEBUFFER_COMPLETE_EXT"] = GL_FRAMEBUFFER_COMPLETE_EXT;
       globals(state)["gl"]["GL_RGBA8"] = GL_RGBA8;
