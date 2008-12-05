@@ -9,24 +9,29 @@
 
 #include "stb_vorbis.h"
 
+#include "lost/audio/Engine.h"
+#include "lost/audio/Source.h"
+#include "lost/resource/DefaultLoader.h"
+
 using namespace lost::common;
-using namespace lost::al;
+using namespace lost;
+using namespace lost::resource;
 using namespace lost::math;
 using namespace std;
 using namespace boost;
 
 int main (int argc, char* const argv[]) {
   try
-  {
+  {	
     LogLevel( log_all );
 
     ALDEBUG; // clear last error
     
-    Device::logAllDeviceIds();
+/*    Device::logAllDeviceIds();
     DOUT("default device: "<<Device::defaultDeviceId());
 
     shared_ptr<Context> context(new Context());    
-    context->makeCurrent();
+    context->makeCurrent();*/
 
 /*    DOUT("dopplerFactor: "<<Context::dopplerFactor());
     DOUT("speed of sound: "<<Context::speedOfSound());
@@ -50,10 +55,10 @@ int main (int argc, char* const argv[]) {
     Vec3 at, up;
     Listener::getOrientation(at, up);
     DOUT("orientation at: "<<at<<" up: "<<up);*/
-    context->process();
+//    context->process();
 //    context->suspend();
     
-    int error = 0;
+/*    int error = 0;
     string filename = "wannabill.ogg";
     stb_vorbis* oggfile = stb_vorbis_open_filename(filename.c_str(), &error, NULL);
     if(oggfile)
@@ -92,13 +97,19 @@ int main (int argc, char* const argv[]) {
     else
     {
       EOUT("couldn't open file '"<<filename<<"'");
-    }
+    }*/
     
+		lost::audio::Engine engine;
+		shared_ptr<audio::Source> src = engine.createSource();
+		resource::DefaultLoader loader;
+		shared_ptr<File> file = loader.load("wannabill.ogg");
+		src->initWithFile(file);
+		
     return 0;
   }
   catch(std::exception& ex)
   {
-    EOUT("caught execption: "<<ex.what());
+    EOUT("caught exception: "<<ex.what());
     return 1;
   }
 }

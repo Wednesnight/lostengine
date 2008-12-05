@@ -272,6 +272,11 @@ void Source::unqueue(boost::shared_ptr<Buffer> buffer)
   unqueue(buffer->buffer);
 }
 
+void Source::unqueueAllBuffers()
+{
+	queue(0);
+}
+
 void Source::play()
 {
   alSourcePlay(source);ALDEBUG_THROW;

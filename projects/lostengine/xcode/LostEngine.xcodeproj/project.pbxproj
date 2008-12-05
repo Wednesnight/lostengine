@@ -228,6 +228,12 @@
 		3EFEC13E0E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
 		3EFEC13F0E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
 		3EFEC1400E62CB500053EB12 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFEC13D0E62CB500053EB12 /* Config.h */; };
+		EA044CAE0EE8B09000D3EE10 /* VorbisFile.h in Headers */ = {isa = PBXBuildFile; fileRef = EA044CAD0EE8B09000D3EE10 /* VorbisFile.h */; };
+		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
+		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
+		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
+		EA044CB30EE8B09A00D3EE10 /* VorbisFile.h in Headers */ = {isa = PBXBuildFile; fileRef = EA044CAD0EE8B09000D3EE10 /* VorbisFile.h */; };
+		EA044CB40EE8B09B00D3EE10 /* VorbisFile.h in Headers */ = {isa = PBXBuildFile; fileRef = EA044CAD0EE8B09000D3EE10 /* VorbisFile.h */; };
 		EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
@@ -1044,6 +1050,8 @@
 		3EFF92D60EA724C6005C9288 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Application.lua; sourceTree = "<group>"; };
 		3EFF92D90EA724C6005C9288 /* Button.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.lua; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA044CAD0EE8B09000D3EE10 /* VorbisFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VorbisFile.h; path = audio/VorbisFile.h; sourceTree = "<group>"; };
+		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
 		EA0907210E6F4F7F00852256 /* LostPlatformPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostPlatformPlatform.h; path = bindings/LostPlatformPlatform.h; sourceTree = "<group>"; };
 		EA0E04050E4E0FC1001556D6 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
@@ -1531,6 +1539,8 @@
 				EA15B48B0EE31EB600672EF4 /* Engine.cpp */,
 				EA15B48E0EE31EB600672EF4 /* Source.h */,
 				EA15B48C0EE31EB600672EF4 /* Source.cpp */,
+				EA044CAD0EE8B09000D3EE10 /* VorbisFile.h */,
+				EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */,
 			);
 			name = audio;
 			sourceTree = "<group>";
@@ -2129,6 +2139,7 @@
 				EACFE1100ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 				EA15B4990EE31EB600672EF4 /* Engine.h in Headers */,
 				EA15B49A0EE31EB600672EF4 /* Source.h in Headers */,
+				EA044CB40EE8B09B00D3EE10 /* VorbisFile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2276,6 +2287,7 @@
 				EACFE10C0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 				EA15B4910EE31EB600672EF4 /* Engine.h in Headers */,
 				EA15B4920EE31EB600672EF4 /* Source.h in Headers */,
+				EA044CAE0EE8B09000D3EE10 /* VorbisFile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2424,6 +2436,7 @@
 				EACFE10E0ED8A90100F9459E /* LostFontFreetypeLibrary.h in Headers */,
 				EA15B4950EE31EB600672EF4 /* Engine.h in Headers */,
 				EA15B4960EE31EB600672EF4 /* Source.h in Headers */,
+				EA044CB30EE8B09A00D3EE10 /* VorbisFile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2774,6 +2787,7 @@
 				EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */,
 				3E6C14AD0EE82B22002B0EA7 /* Model.cpp in Sources */,
 				3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */,
+				EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2865,6 +2879,7 @@
 				EACFE10B0ED8A90100F9459E /* LostFontFreetypeLibrary.cpp in Sources */,
 				EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */,
 				EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */,
+				EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2956,6 +2971,7 @@
 				EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */,
 				3E6C14AC0EE82B21002B0EA7 /* Model.cpp in Sources */,
 				3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */,
+				EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

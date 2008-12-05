@@ -87,7 +87,7 @@ namespace lost
     }
 #else
     // not win32
-    #define LOST_LUA_GL_PREFIX(s) ##s
+    #define LOST_LUA_GL_PREFIX(s) s
 #endif
 
     void LostGLGL(lua_State* state)

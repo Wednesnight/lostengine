@@ -67,6 +67,7 @@ struct Source
   // buffer queueing
   void queue(ALuint inBufferId);
   void unqueue(ALuint inBufferId);
+	void unqueueAllBuffers();
   void queue(boost::shared_ptr<Buffer> buffer);
   void unqueue(boost::shared_ptr<Buffer> buffer);
   ALuint source;
