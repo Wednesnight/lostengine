@@ -21,7 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="1"
+			CharacterSet="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -82,7 +82,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="1"
+			CharacterSet="0"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -250,14 +250,6 @@
 			</File>
 			<File
 				RelativePath="..\..\source\src\ltm.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\src\lua.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\src\luac.c"
 				>
 			</File>
 			<File

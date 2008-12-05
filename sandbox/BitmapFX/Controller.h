@@ -20,7 +20,7 @@ struct Controller
   boost::shared_ptr<lost::font::Model>            renderedText2;
   boost::shared_ptr<lost::font::Model>            renderedText3;
   
-  uint32_t fontSize;
+  boost::uint32_t fontSize;
 
   Controller();
   void init(boost::shared_ptr<lost::event::Event> event);

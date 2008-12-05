@@ -21,7 +21,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="1"
+			CharacterSet="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,10 +40,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP3"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="true"
+				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;_DEBUG"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
@@ -61,6 +62,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				LinkLibraryDependencies="true"
+				AdditionalLibraryDirectories="$(OutDir)"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -83,7 +86,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="1"
+			CharacterSet="0"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -103,10 +106,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP3"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;NDEBUG"
+				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -124,6 +129,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				LinkLibraryDependencies="true"
+				AdditionalLibraryDirectories="$(OutDir)"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -167,6 +174,22 @@
 					<File
 						RelativePath="..\..\lost\application\glfw\Application.cpp"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\glfwApplication.obj"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\glfwApplication.obj"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\lost\application\glfw\ApplicationAdapter.cpp"
@@ -175,6 +198,22 @@
 					<File
 						RelativePath="..\..\lost\application\glfw\Timer.cpp"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\glfwTimer.obj"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)\glfwTimer.obj"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\lost\application\glfw\TimerManager.cpp"
@@ -204,6 +243,22 @@
 				<File
 					RelativePath="..\..\lost\lua\State.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\luaState.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\luaState.obj"
+						/>
+					</FileConfiguration>
 				</File>
 				<Filter
 					Name="bindings"
@@ -396,6 +451,22 @@
 				<File
 					RelativePath="..\..\lost\gl\State.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\glState.obj"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\glState.obj"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\lost\gl\Texture.cpp"
@@ -1238,6 +1309,118 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+		</Filter>
+		<Filter
+			Name="Debug"
+			>
+			<File
+				RelativePath=".\Debug\boost.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\freetype.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\glfw.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\hashlib++.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\lua.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\luabind.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Debug\zlib.lib"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="thirdparty"
+			>
+			<Filter
+				Name="stb"
+				>
+				<File
+					RelativePath="..\..\..\..\thirdparty\stb\stb_image_1_14\stb_image.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\thirdparty\stb\stb_vorbis_0_99996\stb_vorbis.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="glee"
+				>
+				<File
+					RelativePath="..\..\..\..\thirdparty\glee\glee_5_21\source\GLee.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

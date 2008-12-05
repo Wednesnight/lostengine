@@ -23,7 +23,7 @@ int main( int argc, char *argv[] )
   {
     Application app;
     Controller  controller;
-    Timer       redrawTimer("redraw", 1.0/60.0); 
+    Timer       redrawTimer("redraw", 1.0/100.0); 
 
     redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(bind(&Controller::redraw, &controller, _1)));
     app.addEventListener(ApplicationEvent::INIT(), bind(&Controller::init, &controller, _1));

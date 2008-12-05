@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="zlib"
-	ProjectGUID="{331F07ED-73E4-4CD1-990B-BB9F2626A69D}"
-	RootNamespace="zlib"
+	Name="BitmapFX"
+	ProjectGUID="{19F320BA-DC08-445D-A4D6-6AB44F7C901B}"
+	RootNamespace="BitmapFX"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -20,7 +20,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			CharacterSet="0"
 			>
 			<Tool
@@ -40,9 +40,11 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP2"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="true"
+				AdditionalIncludeDirectories="..\..\..\..\projects\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenGL\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
@@ -59,10 +61,20 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				UseLibraryDependencyInputs="false"
+				AdditionalDependencies="OpenGL32.Lib GlU32.Lib ShLwApi.Lib"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(OutDir)"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -74,6 +86,9 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -81,7 +96,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			CharacterSet="0"
 			WholeProgramOptimization="1"
 			>
@@ -102,12 +117,14 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP2"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				AdditionalIncludeDirectories="..\..\..\..\projects\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenGL\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -121,10 +138,22 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				UseLibraryDependencyInputs="false"
+				AdditionalDependencies="OpenGL32.Lib GlU32.Lib ShLwApi.Lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(OutDir)"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -134,6 +163,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -149,51 +181,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\source\adler32.c"
+				RelativePath="..\..\Controller.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\source\compress.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\crc32.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\deflate.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\gzio.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\infback.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inffast.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inflate.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inftrees.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\trees.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\uncompr.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\zutil.c"
+				RelativePath="..\..\main.cpp"
 				>
 			</File>
 		</Filter>
@@ -202,50 +194,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\..\source\crc32.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\deflate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inffast.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inffixed.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inflate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\inftrees.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\trees.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\zconf.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\zconf.in.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\zlib.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\source\zutil.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
