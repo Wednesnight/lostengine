@@ -193,6 +193,14 @@ function View:getViewAt(point)
 end
 
 --[[
+    checks if point is within view rect
+  ]]
+function View:containsCoord(point)
+  local globalRect = self:globalRect()
+  return globalRect:contains(point)
+end
+
+--[[
     updates own and children's layout
   ]]
 function View:updateLayout(forceUpdate)

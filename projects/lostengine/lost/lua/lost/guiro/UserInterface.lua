@@ -11,6 +11,7 @@ UserInterface = _G["lost.guiro.UserInterface"]
 lost.guiro.View:addBase(UserInterface, "UserInterface")
 
 function UserInterface:__init() super()
+  self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
 --[[
@@ -105,6 +106,10 @@ function UserInterface:render(context, forceRender)
   else
     self:renderChildren(self, context)
   end
+  local topWindow = self:topWindow()
+  if topWindow then
+    topWindow:render(context, true)
+  end
 
   gl.glPopAttrib()
   context:popState()
@@ -159,5 +164,32 @@ function UserInterface:updateLayout(forceUpdate)
     return globalRect, localRect
   else
     return lost.guiro.View.updateLayout(self, forceUpdate)
+  end
+end
+
+--[[
+    get focused window
+  ]]
+function UserInterface:topWindow()
+  return self.children[table.maxn(self.children)]
+end
+
+--[[
+    set focused window
+  ]]
+function UserInterface:updateFocus(event)
+  local mouseEvent = lost.application.MouseEvent.cast(event)
+  local topWindow = self:topWindow()
+  if not topWindow or not topWindow:containsCoord(mouseEvent.pos) then
+    local idx = table.maxn(self.children)
+    while idx > 0 do
+      local child = self.children[idx]
+      if child:containsCoord(mouseEvent.pos) then
+        table.remove(self.children, idx)
+        table.insert(self.children, child)
+        break
+      end
+      idx = idx-1
+    end
   end
 end
