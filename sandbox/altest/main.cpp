@@ -99,8 +99,8 @@ int main (int argc, char* const argv[]) {
       EOUT("couldn't open file '"<<filename<<"'");
     }*/
     
-		lost::audio::Engine engine;
-		shared_ptr<audio::Source> src = engine.createSource();
+		shared_ptr<lost::audio::Engine> engine(new audio::Engine);
+		shared_ptr<audio::Source> src = engine->createSource();
 		resource::DefaultLoader loader;
 		shared_ptr<File> file = loader.load("wannabill.ogg");
 		src->initWithFile(file);
