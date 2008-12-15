@@ -19,7 +19,10 @@ namespace application
     timerManagerInstance = this;
   }
 
-  TimerManager::~TimerManager() {}
+  TimerManager::~TimerManager()
+	{
+		timerManagerInstance = NULL;
+	}
 
   void TimerManager::updateTimers(double deltaSec)
   {

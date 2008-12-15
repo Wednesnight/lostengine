@@ -2,7 +2,7 @@
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
 #include "lost/application/glfw/TimerManager.h"
-
+#include "lost/common/Logger.h"
 using namespace boost;
 
 namespace lost
@@ -20,7 +20,10 @@ extern TimerManager* timerManagerInstance;
 
   Timer::~Timer()
   {
-    timerManagerInstance->removeTimer(this);
+		if(timerManagerInstance)
+			timerManagerInstance->removeTimer(this);
+		else
+			WOUT("can't delete timer, manager already gone");
   }
 }
 }
