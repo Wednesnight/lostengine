@@ -105,9 +105,9 @@ namespace lost
        def("glLoadIdentity", &LOST_LUA_GL_PREFIX(glLoadIdentity)),
        def("glViewport", &LOST_LUA_GL_PREFIX(glViewport)),
        def("glLineWidth", &LOST_LUA_GL_PREFIX(glLineWidth)),
-       def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef)),
+       def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef))
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-       def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
+       ,def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
        def("glPopAttrib", &LOST_LUA_GL_PREFIX(glPopAttrib))
 #endif
        ];
