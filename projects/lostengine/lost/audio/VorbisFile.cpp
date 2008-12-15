@@ -3,6 +3,7 @@
 #include "lost/resource/File.h"
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
+#include "lost/common/Logger.h"
 
 using namespace std;
 using namespace boost;
@@ -24,6 +25,7 @@ VorbisFile::VorbisFile(boost::shared_ptr<resource::File> inFile)
 	
 	sampleRate = info.sample_rate;
 	numSamples = stb_vorbis_decode_memory((unsigned char*)(inFile->data.get()), inFile->size, &channels, &data);
+	DOUT("decoded to "<<numSamples*2 <<" bytes");
 }
 
 VorbisFile::~VorbisFile()

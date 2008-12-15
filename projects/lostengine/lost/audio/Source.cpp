@@ -14,6 +14,7 @@ namespace audio
 
 Source::Source()
 {
+	DOUT("");
 	sourceType = ST_UNDEFINED;
 }
 
@@ -24,7 +25,7 @@ Source::~Source()
 	shared_ptr<Engine> ng = engine.lock();
 	if(ng)
 	{
-		ng->destroySource(shared_from_this());
+		ng->destroySource(this);
 	}
 }
 

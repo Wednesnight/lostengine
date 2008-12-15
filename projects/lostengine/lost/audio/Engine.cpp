@@ -26,30 +26,34 @@ Engine::Engine(const std::string& inDeviceId)
 Engine::~Engine()
 {
 	DOUT("sources: "<<sources.size());
+	sources.clear();
 }
 
 boost::shared_ptr<audio::Source> Engine::createSource()
 {
-	if(!selfshit)
-		selfshit = shared_from_this();
 	shared_ptr<Source> result(new Source);
 	
-	result->engine = selfshit;
+	result->engine = shared_from_this();;
 	sources.push_back(result);
 	
 	return result;
 }
 
-void Engine::destroySource(shared_ptr<audio::Source> source)
+void Engine::destroySource(audio::Source* source)
 {
 	DOUT("");
-	std::list<shared_ptr<Source> >::iterator i;
+	std::list<weak_ptr<Source> >::iterator i;
 	for(i=sources.begin(); i!= sources.end(); ++i)
 	{
-		if(*i == source)
+		shared_ptr<audio::Source> src = (*i).lock();
+		if(src && (src.get() == source)) // erase exact match
 		{
 			sources.erase(i);
 			break;
+		}
+		else if(!src)	// erase any pointers that aren't alive anymore
+		{
+			i = sources.erase(i);
 		}
 	}
 }
