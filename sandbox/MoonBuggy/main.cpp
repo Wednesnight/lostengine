@@ -10,12 +10,13 @@
 #include "lost/application/ApplicationEvent.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/gl/gl.h"
+#include "lost/lgl/lgl.h"
 #include "chipmunk.h"
 #include "moonbuggy.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/Utils.h"
-#include "lost/gl/Draw.h"
 #include "lost/math/Vec2.h"
+#include "lost/event/Receive.h"
 
 #define SLEEP_TICKS 16
 
@@ -32,8 +33,9 @@ extern cpBody *chassis;
 
 int ticks = 0;
 
-lost::common::FpsMeter fpsMeter;
-Timer redrawTimer("redraw", 0.016);
+shared_ptr<lost::common::FpsMeter> fpsMeter;
+
+shared_ptr<Timer> redrawTimer;
 
 void drawCircle(cpFloat x, cpFloat y, cpFloat r, cpFloat a)
 {
@@ -69,7 +71,7 @@ void drawSegmentShape(cpShape *shape)
 	cpSegmentShape *seg = (cpSegmentShape *)shape;
 	cpVect a = cpvadd(body->p, cpvrotate(seg->a, body->rot));
 	cpVect b = cpvadd(body->p, cpvrotate(seg->b, body->rot));
-  lost::gl::drawLine(lost::math::Vec2(a.x, a.y), lost::math::Vec2(b.x, b.y));
+  appInstance->context->drawLine(lost::math::Vec2(a.x, a.y), lost::math::Vec2(b.x, b.y));
 }
 
 void drawPolyShape(cpShape *shape)
@@ -203,10 +205,10 @@ void redraw(shared_ptr<TimerEvent> event)
   glColor4f(1.0, 0.0, 0.0, 1.0);GLDEBUG;
   cpArrayEach(space->arbiters, &drawCollisions, NULL);
 
-  lost::gl::utils::set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes.width, appInstance->displayAttributes.height));
+  appInstance->context->set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  fpsMeter.render(appInstance->displayAttributes.width - fpsMeter.width, 0, event->passedSec);
+  fpsMeter->render(appInstance->displayAttributes->width - fpsMeter->width, 0, event->passedSec);
 
   glDisableClientState(GL_VERTEX_ARRAY);GLDEBUG;
 
@@ -218,7 +220,9 @@ void redraw(shared_ptr<TimerEvent> event)
 
 void init(shared_ptr<Event> event)
 {
-  redrawTimer.addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));
+	fpsMeter.reset(new FpsMeter(appInstance->context));
+	redrawTimer.reset(new Timer("redraw", 0.016));
+  redrawTimer->addEventListener(TimerEvent::TIMER_FIRED(), receive<TimerEvent>(redraw));
 }
 
 int main(int argn, char** args)
@@ -243,7 +247,7 @@ int main(int argn, char** args)
     
     app.run();
   }
-  catch (exception& e)
+  catch (std::exception& e)
   {
     EOUT("exception: " << e.what());
   }
