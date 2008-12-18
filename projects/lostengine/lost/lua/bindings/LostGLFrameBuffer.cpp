@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/gl/FrameBuffer.h"
 
@@ -22,6 +23,7 @@ namespace lost
             .def("enable", &FrameBuffer::enable)
             .def("disable", &FrameBuffer::disable)
             .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<Texture>))&FrameBuffer::attachDepth)
+            .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<RenderBuffer>))&FrameBuffer::attachDepth)
             .def("attachColor", (void(FrameBuffer::*)(int, shared_ptr<Texture>))&FrameBuffer::attachColor)
             .def("status", &FrameBuffer::status)
         ]

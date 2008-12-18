@@ -15,22 +15,22 @@ struct FrameBuffer
 {
   FrameBuffer()
   {
-    glGenFramebuffersEXT(1, &buffer);GLDEBUG_THROW;
+    lglGenFramebuffers(1, &buffer);GLDEBUG_THROW;
   }
 
   virtual ~FrameBuffer()
   {
-    glDeleteFramebuffersEXT(1, &buffer);GLDEBUG;
+    lglDeleteFramebuffers(1, &buffer);GLDEBUG;
   }
 
   void enable()
   {
-    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, buffer);GLDEBUG_THROW;
+    lglBindFramebuffer(LGL_FRAMEBUFFER, buffer);GLDEBUG_THROW;
   }
 
   void disable()
   {
-    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+    lglBindFramebuffer(LGL_FRAMEBUFFER, 0);
   }
 
   // attach a color buffer to one of 16 slots, zero indexed
@@ -40,22 +40,24 @@ struct FrameBuffer
     GLenum target;
     switch(index)
     {
-      case 0:target=GL_COLOR_ATTACHMENT0_EXT;break;
-      case 1:target=GL_COLOR_ATTACHMENT1_EXT;break;
-      case 2:target=GL_COLOR_ATTACHMENT2_EXT;break;
-      case 3:target=GL_COLOR_ATTACHMENT3_EXT;break;
-      case 4:target=GL_COLOR_ATTACHMENT4_EXT;break;
-      case 5:target=GL_COLOR_ATTACHMENT5_EXT;break;
-      case 6:target=GL_COLOR_ATTACHMENT6_EXT;break;
-      case 7:target=GL_COLOR_ATTACHMENT7_EXT;break;
-      case 8:target=GL_COLOR_ATTACHMENT8_EXT;break;
-      case 9:target=GL_COLOR_ATTACHMENT9_EXT;break;
-      case 10:target=GL_COLOR_ATTACHMENT10_EXT;break;
-      case 11:target=GL_COLOR_ATTACHMENT11_EXT;break;
-      case 12:target=GL_COLOR_ATTACHMENT12_EXT;break;
-      case 13:target=GL_COLOR_ATTACHMENT13_EXT;break;
-      case 14:target=GL_COLOR_ATTACHMENT14_EXT;break;
-      case 15:target=GL_COLOR_ATTACHMENT15_EXT;break;
+      case 0:target=LGL_COLOR_ATTACHMENT0;break;
+/*
+      case 1:target=LGL_COLOR_ATTACHMENT1;break;
+      case 2:target=LGL_COLOR_ATTACHMENT2;break;
+      case 3:target=LGL_COLOR_ATTACHMENT3;break;
+      case 4:target=LGL_COLOR_ATTACHMENT4;break;
+      case 5:target=LGL_COLOR_ATTACHMENT5;break;
+      case 6:target=LGL_COLOR_ATTACHMENT6;break;
+      case 7:target=LGL_COLOR_ATTACHMENT7;break;
+      case 8:target=LGL_COLOR_ATTACHMENT8;break;
+      case 9:target=LGL_COLOR_ATTACHMENT9;break;
+      case 10:target=LGL_COLOR_ATTACHMENT10;break;
+      case 11:target=LGL_COLOR_ATTACHMENT11;break;
+      case 12:target=LGL_COLOR_ATTACHMENT12;break;
+      case 13:target=LGL_COLOR_ATTACHMENT13;break;
+      case 14:target=LGL_COLOR_ATTACHMENT14;break;
+      case 15:target=LGL_COLOR_ATTACHMENT15;break;
+*/
       default: throw std::runtime_error("attachColor: index out of range");
     }
     attach(target, inRenderBuffer);
@@ -63,18 +65,18 @@ struct FrameBuffer
 
   void attachStencil(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
-    attach(GL_STENCIL_ATTACHMENT_EXT, inRenderBuffer);
+    attach(LGL_STENCIL_ATTACHMENT, inRenderBuffer);
   }
 
   void attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
-    attach(GL_DEPTH_ATTACHMENT_EXT, inRenderBuffer);
+    attach(LGL_DEPTH_ATTACHMENT, inRenderBuffer);
   }
 
   // attaches the renderbuffer to the currently bound framebuffer at the specified attachment target
   void attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, target, GL_RENDERBUFFER_EXT, inRenderBuffer->buffer);GLDEBUG_THROW;
+    lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
   }
 
 
@@ -85,22 +87,24 @@ struct FrameBuffer
     GLenum target;
     switch(index)
     {
-      case 0:target=GL_COLOR_ATTACHMENT0_EXT;break;
-      case 1:target=GL_COLOR_ATTACHMENT1_EXT;break;
-      case 2:target=GL_COLOR_ATTACHMENT2_EXT;break;
-      case 3:target=GL_COLOR_ATTACHMENT3_EXT;break;
-      case 4:target=GL_COLOR_ATTACHMENT4_EXT;break;
-      case 5:target=GL_COLOR_ATTACHMENT5_EXT;break;
-      case 6:target=GL_COLOR_ATTACHMENT6_EXT;break;
-      case 7:target=GL_COLOR_ATTACHMENT7_EXT;break;
-      case 8:target=GL_COLOR_ATTACHMENT8_EXT;break;
-      case 9:target=GL_COLOR_ATTACHMENT9_EXT;break;
-      case 10:target=GL_COLOR_ATTACHMENT10_EXT;break;
-      case 11:target=GL_COLOR_ATTACHMENT11_EXT;break;
-      case 12:target=GL_COLOR_ATTACHMENT12_EXT;break;
-      case 13:target=GL_COLOR_ATTACHMENT13_EXT;break;
-      case 14:target=GL_COLOR_ATTACHMENT14_EXT;break;
-      case 15:target=GL_COLOR_ATTACHMENT15_EXT;break;
+      case 0:target=LGL_COLOR_ATTACHMENT0;break;
+/*
+      case 1:target=LGL_COLOR_ATTACHMENT1;break;
+      case 2:target=LGL_COLOR_ATTACHMENT2;break;
+      case 3:target=LGL_COLOR_ATTACHMENT3;break;
+      case 4:target=LGL_COLOR_ATTACHMENT4;break;
+      case 5:target=LGL_COLOR_ATTACHMENT5;break;
+      case 6:target=LGL_COLOR_ATTACHMENT6;break;
+      case 7:target=LGL_COLOR_ATTACHMENT7;break;
+      case 8:target=LGL_COLOR_ATTACHMENT8;break;
+      case 9:target=LGL_COLOR_ATTACHMENT9;break;
+      case 10:target=LGL_COLOR_ATTACHMENT10;break;
+      case 11:target=LGL_COLOR_ATTACHMENT11;break;
+      case 12:target=LGL_COLOR_ATTACHMENT12;break;
+      case 13:target=LGL_COLOR_ATTACHMENT13;break;
+      case 14:target=LGL_COLOR_ATTACHMENT14;break;
+      case 15:target=LGL_COLOR_ATTACHMENT15;break;
+*/
       default: throw std::runtime_error("attachColor: index out of range");
     }
     attach(target, inTexture);
@@ -108,23 +112,23 @@ struct FrameBuffer
 
   void attachStencil(boost::shared_ptr<lost::gl::Texture> inTexture)
   {
-    attach(GL_STENCIL_ATTACHMENT_EXT, inTexture);
+    attach(LGL_STENCIL_ATTACHMENT, inTexture);
   }
 
   void attachDepth(boost::shared_ptr<lost::gl::Texture> inTexture)
   {
-    attach(GL_DEPTH_ATTACHMENT_EXT, inTexture);
+    attach(LGL_DEPTH_ATTACHMENT, inTexture);
   }
 
   void attach(GLenum target, boost::shared_ptr<lost::gl::Texture> inTexture)
   {
     GLint mipmaplevel = 0;
-    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, target, GL_TEXTURE_2D, inTexture->texture, mipmaplevel);GLDEBUG_THROW;
+    lglFramebufferTexture2D(LGL_FRAMEBUFFER, target, GL_TEXTURE_2D, inTexture->texture, mipmaplevel);GLDEBUG_THROW;
   }
 
   GLenum status()
   {
-    return glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);GLDEBUG_THROW;
+    return lglCheckFramebufferStatus(LGL_FRAMEBUFFER);GLDEBUG_THROW;
   }
 
   GLuint buffer;

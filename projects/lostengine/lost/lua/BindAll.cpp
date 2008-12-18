@@ -7,6 +7,7 @@
 #include "lost/lua/bindings/LostCommonLog.h"
 #include "lost/lua/bindings/LostApplicationKeyEvent.h"
 #include "lost/lua/bindings/LostGLGL.h"
+#include "lost/lua/bindings/LostLGLLGL.h"
 #include "lost/lua/bindings/LostGLUtils.h"
 #include "lost/lua/bindings/LostCommonFpsMeter.h"
 #include "lost/lua/bindings/LostApplicationResizeEvent.h"
@@ -41,10 +42,8 @@
 #include "lost/lua/bindings/LostFontTrueTypeFont.h"
 #include "lost/lua/bindings/LostFontModel.h"
 #include "lost/lua/bindings/LostFontFreetypeLibrary.h"
-
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-  #include "lost/lua/bindings/LostGLFrameBuffer.h"
-#endif
+#include "lost/lua/bindings/LostGLRenderBuffer.h"
+#include "lost/lua/bindings/LostGLFrameBuffer.h"
 
 namespace lost
 {
@@ -82,6 +81,7 @@ namespace lost
       LostApplicationTimer(state);
       LostCommonFpsMeter(state);
       LostGLGL(state);
+      LostLGLLGL(state);
       LostGLDraw(state);
       LostGLUtils(state);
       LostPlatformPlatform(state);
@@ -92,10 +92,8 @@ namespace lost
       LostFontTrueTypeFont(state);
       LostFontModel(state);
       LostFontFreetypeLibrary(state);
-
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+      LostGLRenderBuffer(state);
       LostGLFrameBuffer(state);
-#endif
       
       luabind::bind_class_info(state);
     }

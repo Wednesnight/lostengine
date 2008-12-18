@@ -40,6 +40,8 @@
 		3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
 		3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
+		3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -363,6 +365,7 @@
 				3E485A620ECD729E003AAEAB /* screen in Resources */,
 				3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */,
 				3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */,
+				3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */,
 				3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */,
 				3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */,
 				3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */,
@@ -377,6 +380,7 @@
 				3E485AD10ECD7512003AAEAB /* screen in Resources */,
 				3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */,
 				3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */,
+				3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */,
 				3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */,
 				3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */,
 				3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */,

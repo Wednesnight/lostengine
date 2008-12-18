@@ -27,10 +27,8 @@
 #include "lost/model/obj/Renderer.h"
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
-
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
-  #include "lost/gl/FrameBuffer.h"
-#endif
+#include "lost/gl/RenderBuffer.h"
+#include "lost/gl/FrameBuffer.h"
 
 #define GET_POINTER(name) template name* get_pointer(boost::shared_ptr<name>&);\
                           template name const* get_pointer(boost::shared_ptr<name const>&);
@@ -73,8 +71,6 @@ namespace luabind
   GET_POINTER(lost::model::obj::Renderer);
   GET_POINTER(lost::resource::File);
   GET_POINTER(lost::resource::Loader);
-
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+  GET_POINTER(lost::gl::RenderBuffer);
   GET_POINTER(lost::gl::FrameBuffer);
-#endif
 }

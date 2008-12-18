@@ -1,5 +1,6 @@
 #include "lost/lua/lua.h"
 #include "lost/gl/gl.h"
+#include "lost/lgl/lgl.h"
 #include "lost/gl/Utils.h"
 #include "lost/platform/Platform.h"
 
