@@ -21,6 +21,7 @@ namespace lost
       globals(state)["lgl"]["LGL_RENDERBUFFER"] = LGL_RENDERBUFFER;
       globals(state)["lgl"]["LGL_DEPTH_COMPONENT16"] = LGL_DEPTH_COMPONENT16;
       globals(state)["lgl"]["LGL_DEPTH_COMPONENT24"] = LGL_DEPTH_COMPONENT24;
+      globals(state)["lgl"]["LGL_FRAMEBUFFER_COMPLETE"] = LGL_FRAMEBUFFER_COMPLETE;
     }
   }
 }

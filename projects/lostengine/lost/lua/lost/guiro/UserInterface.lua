@@ -39,26 +39,22 @@ function UserInterface:initialize(context)
     self.renderBuffer = lost.gl.FrameBuffer()
     self.renderBuffer:enable()
 
---    self.depthTexture = lost.gl.Texture()
---    self.depthTexture:bind()
---    self.depthTexture:init(0, gl.GL_DEPTH_COMPONENT32, globalRect.width, globalRect.height, 0, gl.GL_DEPTH_COMPONENT, gl.GL_FLOAT)
---    self.renderBuffer:attachDepth(self.depthTexture)
+    self.colorTextureParams = lost.gl.Texture.Params()
+    self.colorTexture = lost.gl.Texture()
+    self.colorTexture:bind()
+    self.colorTexture:init(lost.math.Vec2(globalRect.width, globalRect.height), self.colorTextureParams)
+    self.renderBuffer:attachColor(0, self.colorTexture)
+    self.colorTexture:filter(gl.GL_NEAREST)
+    self.colorTexture:wrap(gl.GL_CLAMP_TO_EDGE)
+
     self.depthBuffer = lost.gl.RenderBuffer()
     self.depthBuffer:enable()
-    self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT16, globalRect.width, globalRect.height)
+    self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT16, self.colorTexture.width, self.colorTexture.height)
     self.renderBuffer:attachDepth(self.depthBuffer)
     self.depthBuffer:disable()
 
-    self.colorTexture = lost.gl.Texture()
-    self.colorTexture:bind()
---    self.colorTexture:init(0, gl.GL_RGBA8, globalRect.width, globalRect.height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE)
-    self.colorTexture:init(0, gl.GL_RGBA, globalRect.width, globalRect.height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE)
-    self.renderBuffer:attachColor(0, self.colorTexture)
-    self.colorTexture:filter(gl.GL_NEAREST)
-    self.colorTexture:wrap(gl.GL_CLAMP)
-
-    if (self.renderBuffer:status() ~= gl.GL_FRAMEBUFFER_COMPLETE_EXT) then
-      --log.error("FrameBuffer status: ".. lost.gl.enum2string(self.renderBuffer:status()))
+    if (self.renderBuffer:status() ~= lgl.LGL_FRAMEBUFFER_COMPLETE) then
+      log.error("could not initialize FrameBuffer")
     end
     self.renderBuffer:disable()
 
@@ -98,14 +94,12 @@ function UserInterface:render(context, forceRender)
 
   -- update renderbuffer
   self.renderBuffer:enable()
+  self.bufferState.viewport = lost.math.Rect(0, 0, self.colorTexture.width, self.colorTexture.height)
   context:pushState(self.bufferState)
 
-  gl.glPushAttrib(gl.GL_VIEWPORT_BIT)
-  gl.glViewport(0, 0, globalRect.width, globalRect.height)
-  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(globalRect.width, globalRect.height))
+  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.colorTexture.width, self.colorTexture.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
   gl.glLoadIdentity()
-
   if forceRender or self.dirty then
     context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
     lost.guiro.View.render(self, context, true)
@@ -117,12 +111,15 @@ function UserInterface:render(context, forceRender)
     topWindow:render(context, true)
   end
 
-  gl.glPopAttrib()
   context:popState()
   self.renderBuffer:disable()
 
   -- draw renderbuffer
   context:pushState(self.renderState)
+  local displayAttributes = context:getDisplayAttributes()
+  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(displayAttributes.width, displayAttributes.height))
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
   context:setColor(lost.common.Color(1,1,1))
   context:drawRectTextured(lost.math.Rect(globalRect.x, globalRect.y, globalRect.width + 1, globalRect.height + 1), self.colorTexture, false)
   context:popState()
@@ -150,26 +147,22 @@ function UserInterface:updateLayout(forceUpdate)
     local globalRect, localRect = lost.guiro.View.updateLayout(self, forceUpdate)
     if self.renderBuffer then
       self.renderBuffer:enable()
---      self.depthTexture = lost.gl.Texture()
---      self.depthTexture:bind()
---      self.depthTexture:init(0, gl.GL_DEPTH_COMPONENT32, globalRect.width, globalRect.height, 0, gl.GL_DEPTH_COMPONENT, gl.GL_FLOAT)
---      self.renderBuffer:attachDepth(self.depthTexture)
-      self.depthBuffer = lost.gl.RenderBuffer()
-      self.depthBuffer:enable()
-      self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT16, globalRect.width, globalRect.height)
-      self.renderBuffer:attachDepth(self.depthBuffer)
-      self.depthBuffer:disable()
 
       self.colorTexture = lost.gl.Texture()
       self.colorTexture:bind()
---      self.colorTexture:init(0, gl.GL_RGBA8, globalRect.width, globalRect.height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE)
-      self.colorTexture:init(0, gl.GL_RGBA, globalRect.width, globalRect.height, 0, gl.GL_RGBA, gl.GL_UNSIGNED_BYTE)
+      self.colorTexture:init(lost.math.Vec2(globalRect.width, globalRect.height), self.colorTextureParams)
       self.renderBuffer:attachColor(0, self.colorTexture)
       self.colorTexture:filter(gl.GL_NEAREST)
-      self.colorTexture:wrap(gl.GL_CLAMP)
+      self.colorTexture:wrap(gl.GL_CLAMP_TO_EDGE)
 
-      if (self.renderBuffer:status() ~= gl.GL_FRAMEBUFFER_COMPLETE_EXT) then
-        --log.error("FrameBuffer status: ".. lost.gl.enum2string(self.renderBuffer:status()))
+      self.depthBuffer = lost.gl.RenderBuffer()
+      self.depthBuffer:enable()
+      self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT16, self.colorTexture.width, self.colorTexture.height)
+      self.renderBuffer:attachDepth(self.depthBuffer)
+      self.depthBuffer:disable()
+
+      if (self.renderBuffer:status() ~= lgl.LGL_FRAMEBUFFER_COMPLETE) then
+        log.error("could not initialize FrameBuffer")
       end
       self.renderBuffer:disable()
     end

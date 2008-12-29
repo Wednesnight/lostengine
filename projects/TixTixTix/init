@@ -26,11 +26,12 @@ end
 function lost.application.Application:init(event)
   log.debug("lost.application.Application:init()")
 
-  self.renderState = lost.application.Application.context:copyState()
+  self.renderState = self.context:copyState()
   self.renderState.clearColor = lost.common.Color(0,0,0)
   self.renderState.depthTest = false
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
+  self.renderState.viewport = lost.math.Rect(0, 0, self.config.displayAttributes.width, self.config.displayAttributes.height)
 
   controls = {}
   controls.fpsMeter = lost.common.FpsMeter(lost.application.Application.context)
@@ -88,7 +89,9 @@ function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
   self.config.FieldSize = lost.math.Vec2((resizeEvent.width / 3), (resizeEvent.height / 3))
-  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
+  if self.renderState then
+    self.renderState.viewport = lost.math.Rect(0, 0, resizeEvent.width, resizeEvent.height)
+  end
 end
 
 function lost.application.Application:renderHandler(event)

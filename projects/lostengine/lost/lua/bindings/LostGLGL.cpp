@@ -86,6 +86,11 @@ namespace lost
     {
       glPopAttrib();
     }
+
+    void _glScissor(GLint x, GLint y, GLsizei w, GLsizei h)
+    {
+      glScissor(x, y, w, h);
+    }
 #else
     // not win32
     #define LOST_LUA_GL_PREFIX(s) s
@@ -106,6 +111,7 @@ namespace lost
        def("glLoadIdentity", &LOST_LUA_GL_PREFIX(glLoadIdentity)),
        def("glViewport", &LOST_LUA_GL_PREFIX(glViewport)),
        def("glLineWidth", &LOST_LUA_GL_PREFIX(glLineWidth)),
+       def("glScissor", &LOST_LUA_GL_PREFIX(glScissor)),
        def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef))
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
        ,def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
@@ -124,6 +130,7 @@ namespace lost
       globals(state)["gl"]["GL_SCISSOR_BIT"] = GL_SCISSOR_BIT;
       globals(state)["gl"]["GL_VIEWPORT_BIT"] = GL_VIEWPORT_BIT;
 #endif
+      globals(state)["gl"]["GL_CLAMP_TO_EDGE"] = GL_CLAMP_TO_EDGE;
       globals(state)["gl"]["GL_COLOR_BUFFER_BIT"] = GL_COLOR_BUFFER_BIT;
       globals(state)["gl"]["GL_DEPTH_BUFFER_BIT"] = GL_DEPTH_BUFFER_BIT;
       globals(state)["gl"]["GL_DEPTH_TEST"] = GL_DEPTH_TEST;
@@ -135,6 +142,7 @@ namespace lost
       globals(state)["gl"]["GL_ONE_MINUS_SRC_ALPHA"] = GL_ONE_MINUS_SRC_ALPHA;
       globals(state)["gl"]["GL_POINT_SMOOTH"] = GL_POINT_SMOOTH;
       globals(state)["gl"]["GL_RGBA"] = GL_RGBA;
+      globals(state)["gl"]["GL_SCISSOR_TEST"] = GL_SCISSOR_TEST;
       globals(state)["gl"]["GL_SRC_ALPHA"] = GL_SRC_ALPHA;
       globals(state)["gl"]["GL_TEXTURE_2D"] = GL_TEXTURE_2D;
       globals(state)["gl"]["GL_TRIANGLES"] = GL_TRIANGLES;

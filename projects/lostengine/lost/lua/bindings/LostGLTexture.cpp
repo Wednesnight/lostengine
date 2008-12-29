@@ -37,9 +37,12 @@ namespace lost
             .def("bind", &Texture::bind)
             .def("init", (void(Texture::*)(shared_ptr<File>, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(shared_ptr<Bitmap>, const Texture::Params&))&Texture::init)
+            .def("init", (void(Texture::*)(const lost::math::Vec2&, const Texture::Params&))&Texture::init)
             .def("init", (void(*)(Texture*, GLint, GLenum, GLsizei, GLsizei, GLint, GLenum, GLenum))&TextureInit)
             .def("filter", &Texture::filter)
             .def("wrap", &Texture::wrap)
+            .def_readwrite("width", &Texture::width)
+            .def_readwrite("height", &Texture::height)
           .scope
           [
             class_<Texture::Params, shared_ptr<Texture::Params> >("Params")

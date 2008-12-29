@@ -10,9 +10,11 @@ function lost.application.Application:configure(event)
 
   self.config.displayAttributes = lost.common.DisplayAttributes()
   if lost.platform.isIPhone() then
+    log.debug("running on iPhone/iPod")
     self.config.displayAttributes.width = 320
     self.config.displayAttributes.height = 480
   else
+    log.debug("running on Desktop")
     self.config.displayAttributes.width = 800
     self.config.displayAttributes.height = 600
   end
@@ -38,7 +40,11 @@ function lost.application.Application:init(event)
 
   require("lost.io.Guiro")
   controls.loader = lost.io.Loader(lost.globals.app.loader)
-  controls.screen = controls.loader:loadScreen("screen")
+  if lost.platform.isIPhone() then
+    controls.screen = controls.loader:loadScreen("screen-iphone")
+  else
+    controls.screen = controls.loader:loadScreen("screen")
+  end
   self.screen = controls.screen
 
   -- print out class hierarchy
@@ -58,8 +64,14 @@ function lost.application.Application:init(event)
   self.renderState.depthTest = false
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
+  self.renderState.viewport = lost.math.Rect(0, 0, self.config.displayAttributes.width, self.config.displayAttributes.height)
 
-  lost.globals.timer = lost.application.Timer("luarender", 1/60)
+  if lost.platform.isIPhone() then
+    self.config.renderFrequency = 1/30
+  else
+    self.config.renderFrequency = 1/60
+  end
+  lost.globals.timer = lost.application.Timer("luarender", self.config.renderFrequency)
   lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
 end
 
@@ -83,11 +95,14 @@ end
 function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
-  gl.glViewport(0, 0, resizeEvent.width, resizeEvent.height) gl.GLDEBUG()
-  if controls and controls.screen then
-    local g = lost.guiro
-    controls.screen:resize(g.Bounds(g.xabs(0), g.yabs(0), g.wabs(resizeEvent.width), g.habs(resizeEvent.height)))
+  if self.renderState then
+    self.renderState.viewport = lost.math.Rect(0, 0, resizeEvent.width, resizeEvent.height)
   end
+
+--  if not lost.platform.isIPhone() and controls and controls.screen then
+--    local g = lost.guiro
+--    controls.screen:resize(g.Bounds(g.xabs(0), g.yabs(0), g.wabs(resizeEvent.width), g.habs(resizeEvent.height)))
+--  end
 end
 
 function lost.application.Application:keyHandler(event)
@@ -110,14 +125,13 @@ function lost.application.Application:renderHandler(event)
 
   self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
-  gl.glLoadIdentity()
 
+  gl.glLoadIdentity()
   controls.screen:render(self.context)
 
   gl.glLoadIdentity()
   controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 1, timerEvent.passedSec)
 
   self.context:popState()
-  
   self:swapBuffers()
 end

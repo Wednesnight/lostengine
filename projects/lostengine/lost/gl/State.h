@@ -4,6 +4,7 @@
 #include "lost/forward/boost"
 #include "lost/gl/gl.h"
 #include "lost/common/Color.h"
+#include "lost/math/Rect.h"
 
 namespace lost
 {
@@ -23,6 +24,7 @@ namespace lost
       bool blend;
       GLenum blendSrc;
       GLenum blendDest;
+      math::Rect viewport;
 
       lost::common::Color clearColor;
 

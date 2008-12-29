@@ -89,7 +89,7 @@ void Texture::init(boost::shared_ptr<lost::resource::File> inFile,  const Params
   init(bmp, inParams);
 }
 
-void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Texture::Params& inParams)
+void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inParams)
 {
   uint32_t texwidth, texheight;
   Texture::SizeHint sizeHint = inParams.sizeHint;
@@ -107,13 +107,13 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
   // then we calculate the size of the texture object
   if(sizeHint == Texture::SIZE_ORIGINAL)
   {
-    texwidth = inBitmap->width;
-    texheight = inBitmap->height;
+    texwidth = inSize.width;
+    texheight = inSize.height;
   }
   else if(sizeHint == Texture::SIZE_POWER_OF_TWO)
   {
-    texwidth = lost::math::nextPowerOf2(inBitmap->width);
-    texheight = lost::math::nextPowerOf2(inBitmap->height);
+    texwidth = lost::math::nextPowerOf2(inSize.width);
+    texheight = lost::math::nextPowerOf2(inSize.height);
   }
  
   // create an empty texture object, i.e. without data, to setup the desired size
@@ -122,10 +122,21 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
         texwidth,
         texheight,
         inParams.border ? 1 : 0,
-        bitmapComponents2GlFormat(inBitmap->format),
+        inParams.format,
         GL_UNSIGNED_BYTE,
         0);
-  
+
+  // memorize texture and raw data sizes for texture coordinate calculations
+  width = texwidth;
+  height = texheight;
+}
+
+void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Texture::Params& inParams)
+{
+  Texture::Params bitmapParams(inParams);
+  bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format);
+  init(lost::math::Vec2(inBitmap->width, inBitmap->height), bitmapParams);
+
   // then use texsubimage to upload the actual data. Strictly speaking, we only need this in the
   // case of power-of-two textures, but always creating textures like this saves us one branch
   // now we copy the actual data to the previsouly allocated texture
@@ -135,19 +146,16 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
                   0,
                   inBitmap->width,
                   inBitmap->height,
-                  bitmapComponents2GlFormat(inBitmap->format),
+                  bitmapParams.format,
                   GL_UNSIGNED_BYTE,
                   inBitmap->data);GLDEBUG_THROW;
   
   // set wrapping and filters
-  wrapS(inParams.wrapS);
-  wrapT(inParams.wrapT);
-  minFilter(inParams.minFilter);
-  magFilter(inParams.magFilter);
+  wrapS(bitmapParams.wrapS);
+  wrapT(bitmapParams.wrapT);
+  minFilter(bitmapParams.minFilter);
+  magFilter(bitmapParams.magFilter);
   
-  // memorize texture and raw data sizes for texture coordinate calculations
-  width = texwidth;
-  height = texheight;
   dataWidth = inBitmap->width;
   dataHeight = inBitmap->height;
   

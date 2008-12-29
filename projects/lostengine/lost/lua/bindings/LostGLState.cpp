@@ -29,6 +29,7 @@ namespace lost
           .def_readwrite("texture2D", &lost::gl::State::texture2D)
 
           .def_readwrite("clearColor", &lost::gl::State::clearColor)
+          .def_readwrite("viewport", &lost::gl::State::viewport)
            
           // client-side attributes
           .def_readwrite("normalArray", &lost::gl::State::normalArray)

@@ -33,7 +33,7 @@ function Control:initializeInput(event)
   -- valid event?
   if validTypes[event.type] then
     local info = {which    = Control.InputType.unknown,
-                  location = nil,
+                  location = lost.math.Vec2(0,0),
                   rect     = self:globalRect()}
 
     -- mouse event

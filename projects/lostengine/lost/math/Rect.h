@@ -36,6 +36,11 @@ namespace math
       return !(*this == rect);
     }
     
+    bool operator !()
+    {
+      return !(this->x || this->y || this->width || this->height);
+    }
+    
     lost::math::Vec2 pos() const
     {
       return lost::math::Vec2( x, y );

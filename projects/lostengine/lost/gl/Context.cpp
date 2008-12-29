@@ -27,51 +27,60 @@ std::string Context::getVersion()
 
 void Context::setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState)
 {
-#define SET_STATE_BOOL(which, target, source, attribute)\
-    if (target->attribute != source->attribute)\
-    {\
-      target->attribute = source->attribute;\
-      (target->attribute) ? glEnable(which) : glDisable(which);GLDEBUG;\
-    }
-    
-  SET_STATE_BOOL(GL_ALPHA_TEST, oldState, newState, alphaTest);
-  SET_STATE_BOOL(GL_DEPTH_TEST, oldState, newState, depthTest);
-  SET_STATE_BOOL(GL_TEXTURE_2D, oldState, newState, texture2D);
-  SET_STATE_BOOL(GL_BLEND, oldState, newState, blend);
-
-  if((oldState->blendSrc != newState->blendSrc) || (oldState->blendDest != newState->blendDest))
-  {
-    oldState->blendSrc = newState->blendSrc;
-    oldState->blendDest = newState->blendDest;
-    glBlendFunc(oldState->blendSrc, oldState->blendDest);GLDEBUG;
+#define SET_STATE_BOOL(which, current, new, attribute)\
+  if (new->attribute != current->attribute)\
+  {\
+    (new->attribute) ? glEnable(which) : glDisable(which);GLDEBUG;\
+  }
+  
+#define SET_CLIENT_STATE_BOOL(which, current, new, attribute)\
+  if (new->attribute != current->attribute)\
+  {\
+    (new->attribute) ? glEnableClientState(which) : glDisableClientState(which);GLDEBUG;\
   }
 
-  if (oldState->clearColor != newState->clearColor)
+  if (oldState != newState)
   {
-    oldState->clearColor = newState->clearColor;
-    glClearColor(oldState->clearColor.r(), oldState->clearColor.g(), oldState->clearColor.b(), oldState->clearColor.a());GLDEBUG;
-  }
+    SET_STATE_BOOL(GL_ALPHA_TEST, oldState, newState, alphaTest);
+    SET_STATE_BOOL(GL_DEPTH_TEST, oldState, newState, depthTest);
+    SET_STATE_BOOL(GL_TEXTURE_2D, oldState, newState, texture2D);
+    SET_STATE_BOOL(GL_BLEND, oldState, newState, blend);
 
-#define SET_CLIENT_STATE_BOOL(which, target, source, attribute)\
-    if (target->attribute != source->attribute)\
-    {\
-      target->attribute = source->attribute;\
-      (target->attribute) ? glEnableClientState(which) : glDisableClientState(which);GLDEBUG;\
+    if((oldState->blendSrc != newState->blendSrc) || (oldState->blendDest != newState->blendDest))
+    {
+      glBlendFunc(newState->blendSrc, newState->blendDest);GLDEBUG;
     }
 
-  SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, oldState, newState, normalArray);
-  SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, oldState, newState, vertexArray);
-  SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, oldState, newState, textureCoordArray);
+    if (oldState->clearColor != newState->clearColor)
+    {
+      glClearColor(newState->clearColor.r(), newState->clearColor.g(), newState->clearColor.b(), newState->clearColor.a());GLDEBUG;
+    }
+
+    SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, oldState, newState, normalArray);
+    SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, oldState, newState, vertexArray);
+    SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, oldState, newState, textureCoordArray);
+
+    if (oldState->viewport != newState->viewport)
+    {
+      if (!newState->viewport) newState->viewport = oldState->viewport;
+        else glViewport(newState->viewport.x, newState->viewport.y, newState->viewport.width, newState->viewport.height);GLDEBUG;
+    }
+  }
 }
 
 
 Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttributes)
-:displayAttributes(inDisplayAttributes)
+: displayAttributes(inDisplayAttributes)
 {
   DOUT("lost::gl::Context::Context()");
 
-  // initialize state
-  stateStack.push_back(newState());
+  // initialize basic state
+  boost::shared_ptr<State> state = newState();
+  boost::shared_ptr<State> dummyState(new State(*(state.get())));
+  state->viewport = math::Rect(0, 0, displayAttributes->width, displayAttributes->height);
+  // set state using an "empty" dummyState
+  setState(dummyState, state);
+  stateStack.push_back(state);
 }
 
 Context::~Context()
@@ -105,7 +114,7 @@ boost::shared_ptr<State> Context::newState()
   f = 0;
   glGetFloatv(GL_BLEND_DST, &f);GLDEBUG_THROW;
   result->blendDest = static_cast<GLenum>(f);
-    
+
   return result;
 }
       
@@ -116,18 +125,22 @@ boost::shared_ptr<State> Context::copyState()
       
 void Context::pushState(const boost::shared_ptr<State>& inState)
 {
-  if (inState) setState(stateStack.back(), inState);
+  if (inState)
+  {
+    setState(stateStack.back(), inState);
+    stateStack.push_back(inState);
+  }
 }
 
 void Context::popState()
 {
   if (stateStack.size() > 1)
   {
-      std::list<boost::shared_ptr<State> >::iterator pos = stateStack.end();
-      pos--;
-      boost::shared_ptr<State> last = *pos;
-      pos--;
-      boost::shared_ptr<State> prev = *pos;
+    std::list<boost::shared_ptr<State> >::iterator pos = stateStack.end();
+    pos--;
+    boost::shared_ptr<State> last = *pos;
+    pos--;
+    boost::shared_ptr<State> prev = *pos;
       
     setState(last, prev);
     stateStack.pop_back();

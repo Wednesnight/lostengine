@@ -300,7 +300,7 @@ end
     triggers redraw on children
   ]]
 function View:render(context, forceRender)
-  self:updateLayout()
+  local globalRect = self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
     self:redraw(context)

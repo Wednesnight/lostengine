@@ -25,12 +25,15 @@ struct FrameBuffer
 
   void enable()
   {
+    // we have to get the previous framebuffer because 0 is the default framebuffer
+    // and every other framebuffer bound previous to this one becomes invalid!
+    glGetIntegerv(LGL_FRAMEBUFFER_BINDING, &previousFramebuffer);GLDEBUG;
     lglBindFramebuffer(LGL_FRAMEBUFFER, buffer);GLDEBUG_THROW;
   }
 
   void disable()
   {
-    lglBindFramebuffer(LGL_FRAMEBUFFER, 0);
+    lglBindFramebuffer(LGL_FRAMEBUFFER, previousFramebuffer);GLDEBUG;
   }
 
   // attach a color buffer to one of 16 slots, zero indexed
@@ -132,6 +135,7 @@ struct FrameBuffer
   }
 
   GLuint buffer;
+  GLint  previousFramebuffer;
 };
 }
 }

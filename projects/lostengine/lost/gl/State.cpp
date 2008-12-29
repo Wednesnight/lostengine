@@ -16,7 +16,8 @@ namespace lost
       clearColor(lost::common::blackColor),
       normalArray(false),
       vertexArray(false),
-      textureCoordArray(false)
+      textureCoordArray(false),
+      viewport(math::Rect(0,0,0,0))
     {
     }
 

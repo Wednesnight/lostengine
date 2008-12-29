@@ -90,6 +90,7 @@ namespace lost
                           bool withAlphaChannel=false);
 
       std::string getVersion();
+      const boost::shared_ptr<common::DisplayAttributes> getDisplayAttributes() {return displayAttributes;}
     };
         
   }

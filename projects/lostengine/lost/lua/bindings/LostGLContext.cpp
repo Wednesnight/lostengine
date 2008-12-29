@@ -42,6 +42,7 @@ namespace lost
             .def("drawRectTextured",  (void(Context::*)(const Rect&, shared_ptr<const Texture>, bool))&Context::drawRectTextured)
             .def("drawRectTextured",  (void(Context::*)(const Rect&, shared_ptr<const Texture>, const Vec2&, const Vec2&, const Vec2&, const Vec2&, bool))&Context::drawRectTextured)
             .def("drawMesh2D",  &Context::drawMesh2D)
+            .def("getDisplayAttributes",  &Context::getDisplayAttributes)
         ]
       ];
     }

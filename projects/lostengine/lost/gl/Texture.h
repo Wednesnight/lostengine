@@ -4,6 +4,7 @@
 #include "lost/gl/gl.h"
 #include <boost/noncopyable.hpp>
 #include <boost/cstdint.hpp>
+#include "lost/math/Vec2.h"
 
 namespace boost { template<typename T> class shared_ptr; }
 
@@ -54,6 +55,7 @@ namespace lost
       
       void init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
       void init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());
+      void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
       
       void init(GLint level, // mipmap level
                  GLenum internalformat, // number of color components

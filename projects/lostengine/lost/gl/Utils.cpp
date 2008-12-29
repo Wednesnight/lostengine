@@ -35,6 +35,7 @@ namespace utils
         case GL_STACK_OVERFLOW:result="GL_STACK_OVERFLOW";break;
         case GL_STACK_UNDERFLOW:result="GL_STACK_UNDERFLOW";break;
         case GL_OUT_OF_MEMORY:result="GL_OUT_OF_MEMORY";break;
+        case GL_INVALID_FRAMEBUFFER_OPERATION_OES:result="GL_INVALID_FRAMEBUFFER_OPERATION_OES";break;
         default:
           std::ostringstream os;
           os << "error 0x" << std::hex << err;
