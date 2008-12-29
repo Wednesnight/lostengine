@@ -64,7 +64,6 @@ function lost.application.Application:init(event)
   self.renderState.depthTest = false
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
-  self.renderState.viewport = lost.math.Rect(0, 0, self.config.displayAttributes.width, self.config.displayAttributes.height)
 
   if lost.platform.isIPhone() then
     self.config.renderFrequency = 1/30
@@ -94,10 +93,6 @@ end
 
 function lost.application.Application:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
-
-  if self.renderState then
-    self.renderState.viewport = lost.math.Rect(0, 0, resizeEvent.width, resizeEvent.height)
-  end
 
 --  if not lost.platform.isIPhone() and controls and controls.screen then
 --    local g = lost.guiro

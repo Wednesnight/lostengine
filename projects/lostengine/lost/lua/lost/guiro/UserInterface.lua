@@ -92,9 +92,11 @@ function UserInterface:render(context, forceRender)
   -- helper vars
   local globalRect = self:globalRect()
 
+  -- fix viewport to fit texture size
+  context:pushViewport(lost.math.Rect(0, 0, self.colorTexture.width, self.colorTexture.height))
+
   -- update renderbuffer
   self.renderBuffer:enable()
-  self.bufferState.viewport = lost.math.Rect(0, 0, self.colorTexture.width, self.colorTexture.height)
   context:pushState(self.bufferState)
 
   context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.colorTexture.width, self.colorTexture.height))
@@ -123,6 +125,9 @@ function UserInterface:render(context, forceRender)
   context:setColor(lost.common.Color(1,1,1))
   context:drawRectTextured(lost.math.Rect(globalRect.x, globalRect.y, globalRect.width + 1, globalRect.height + 1), self.colorTexture, false)
   context:popState()
+
+  -- restore viewport
+  context:popViewport()
 end
 
 --[[

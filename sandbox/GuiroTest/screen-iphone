@@ -14,7 +14,7 @@ screen = guiro:Screen
     guiro:Window
     {
       id = "window",
-      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.5), g.hrel(0.5)),
+      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.9), g.hrel(0.65)),
       header =
       {
         height = 25
@@ -25,7 +25,7 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
         text = "funky window"
       },
-
+--[[
       guiro:Button
       {
         id = "button",
@@ -90,39 +90,7 @@ screen = guiro:Screen
           }
         }
       },
-
-      guiro:Button
-      {
-        bounds = g.Bounds(g.xright({abs=-5}), g.ytop({abs=-120}), g.wabs(150), g.habs(75)),
-        fadeStates = true,
-        label = guiro:Label
-        {
-          bounds = g.Bounds(g.xabs(60), g.yabs(30), g.wabs(150), g.habs(75)),
-          text = "Large"
-        },
-        images =
-        {
-          released = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          hovered = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          pressed = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          }
-        }
-      },
-
+]]
       guiro:Slider
       {
         id = "slider",
@@ -143,7 +111,7 @@ screen = guiro:Screen
       guiro:Slider
       {
         id = "slider2",
-        bounds = g.Bounds(g.xleft({abs=180}), g.ytop({abs=-30}), g.wabs(50), g.habs(25)),
+        bounds = g.Bounds(g.xleft({abs=120}), g.ytop({abs=-30}), g.wabs(50), g.habs(25)),
         orientation = lost.guiro.controls.Slider.Orientation.horizontal,
         min = 0,
         max = 1,
@@ -165,7 +133,7 @@ screen = guiro:Screen
       guiro:Image
       {
         id = "image",
-        bounds = g.Bounds(g.xleft({abs=50}), g.ytop({abs=-54}), g.wabs(180), g.habs(200)),
+        bounds = g.Bounds(g.xleft({abs=50}), g.ytop({abs=-54}), g.wabs(120), g.habs(200)),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
         stretch = true,
         style = guiro:Style
@@ -174,10 +142,13 @@ screen = guiro:Screen
         },
         listeners =
         {
-          [lost.application.MouseEvent.MOUSE_DOWN] = function(event)
-            local mouseEvent = lost.application.MouseEvent.cast(event)
-            if screen("ui")("window")("image"):globalRect():contains(mouseEvent.pos) then
-              screen("ui")("window")("image"):stretch(not screen("ui")("window")("image"):stretch())
+          [lost.application.TouchEvent.TOUCHES_BEGAN] = function(event)
+            local touchEvent = lost.application.TouchEvent.cast(event)
+            if touchEvent:size() == 1 then
+              local touch = touchEvent:get(0)
+              if screen("ui")("window")("image"):globalRect():contains(touch.location) then
+                screen("ui")("window")("image"):stretch(not screen("ui")("window")("image"):stretch())
+              end
             end
           end
 

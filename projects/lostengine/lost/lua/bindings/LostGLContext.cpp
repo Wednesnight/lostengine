@@ -31,6 +31,8 @@ namespace lost
             .def("pushState", (void(Context::*)())&Context::pushState)
             .def("pushState", (void(Context::*)(const boost::shared_ptr<lost::gl::State>&))&Context::pushState)
             .def("popState",  &Context::popState)
+            .def("pushViewport", &Context::pushViewport)
+            .def("popViewport",  &Context::popViewport)
             .def("clear",  &Context::clear)
             .def("set2DProjection",  &Context::set2DProjection)
             .def("set3DProjection",  &Context::set3DProjection)

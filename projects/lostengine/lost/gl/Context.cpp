@@ -59,12 +59,6 @@ void Context::setState(const boost::shared_ptr<State>& oldState, const boost::sh
     SET_CLIENT_STATE_BOOL(GL_NORMAL_ARRAY, oldState, newState, normalArray);
     SET_CLIENT_STATE_BOOL(GL_VERTEX_ARRAY, oldState, newState, vertexArray);
     SET_CLIENT_STATE_BOOL(GL_TEXTURE_COORD_ARRAY, oldState, newState, textureCoordArray);
-
-    if (oldState->viewport != newState->viewport)
-    {
-      if (!newState->viewport) newState->viewport = oldState->viewport;
-        else glViewport(newState->viewport.x, newState->viewport.y, newState->viewport.width, newState->viewport.height);GLDEBUG;
-    }
   }
 }
 
@@ -75,12 +69,11 @@ Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttribute
   DOUT("lost::gl::Context::Context()");
 
   // initialize basic state
-  boost::shared_ptr<State> state = newState();
-  boost::shared_ptr<State> dummyState(new State(*(state.get())));
-  state->viewport = math::Rect(0, 0, displayAttributes->width, displayAttributes->height);
-  // set state using an "empty" dummyState
-  setState(dummyState, state);
-  stateStack.push_back(state);
+  stateStack.push_back(newState());
+  // initialize viewport
+  math::Rect viewport = math::Rect(0, 0, displayAttributes->width, displayAttributes->height);
+  glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
+  viewportStack.push_back(viewport);
 }
 
 Context::~Context()
@@ -136,20 +129,31 @@ void Context::popState()
 {
   if (stateStack.size() > 1)
   {
-    std::list<boost::shared_ptr<State> >::iterator pos = stateStack.end();
-    pos--;
-    boost::shared_ptr<State> last = *pos;
-    pos--;
-    boost::shared_ptr<State> prev = *pos;
-      
-    setState(last, prev);
+    boost::shared_ptr<State> oldState = stateStack.back();
     stateStack.pop_back();
+    setState(oldState, stateStack.back());
   }
 }
 
 void Context::clear(GLbitfield flags)
 {
   glClear(flags);GLDEBUG;
+}
+
+void Context::pushViewport(const lost::math::Rect& viewport)
+{
+  if (viewportStack.back() != viewport) glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
+  viewportStack.push_back(viewport);
+}
+
+void Context::popViewport()
+{
+  if (viewportStack.size() > 1)
+  {
+    viewportStack.pop_back();
+    lost::math::Rect viewport = viewportStack.back();
+    glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
+  }
 }
 
 void Context::set2DProjection(const lost::math::Vec2& offset, const lost::math::Vec2& dimension)

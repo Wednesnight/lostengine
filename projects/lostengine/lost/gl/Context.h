@@ -21,6 +21,7 @@ namespace lost
     {
     private:
       std::list<boost::shared_ptr<State> > stateStack;
+      std::list<lost::math::Rect> viewportStack;
       boost::shared_ptr<common::DisplayAttributes> displayAttributes;
 
     public:
@@ -34,11 +35,14 @@ namespace lost
 
       static boost::shared_ptr<State> newState();
       boost::shared_ptr<State> copyState();
-      void Context::pushState(const boost::shared_ptr<State>& inState);        
+      void pushState(const boost::shared_ptr<State>& inState);        
       void setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState);
       void popState();
       void clear(GLbitfield flags);
-      
+
+      void pushViewport(const lost::math::Rect& viewport);
+      void popViewport();
+
       // set helpers
       void setColor(const lost::common::Color& col);
       

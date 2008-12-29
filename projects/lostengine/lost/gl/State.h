@@ -24,7 +24,6 @@ namespace lost
       bool blend;
       GLenum blendSrc;
       GLenum blendDest;
-      math::Rect viewport;
 
       lost::common::Color clearColor;
 
