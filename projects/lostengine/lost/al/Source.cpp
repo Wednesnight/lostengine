@@ -54,19 +54,19 @@ float Source::gain()
   return 1.0f;
 }
 
-void Source::relative(bool val) 
+void Source::relative(bool val)
 {
   alSourcei(source, AL_SOURCE_RELATIVE, (val ? AL_TRUE : AL_FALSE));ALDEBUG_THROW;
 }
 
 void Source::looping(bool val)
 {
-  alSourcei(source, AL_LOOPING, (val ? AL_TRUE : AL_FALSE));ALDEBUG_THROW;  
+  alSourcei(source, AL_LOOPING, (val ? AL_TRUE : AL_FALSE));ALDEBUG_THROW;
 }
 
 void Source::buffer(ALint buffer)
 {
-  alSourcei(source, AL_BUFFER, buffer);ALDEBUG_THROW;  
+  alSourcei(source, AL_BUFFER, buffer);ALDEBUG_THROW;
 }
 
 void Source::minGain(float val)
@@ -157,7 +157,7 @@ bool Source::looping()
   bool result;
   ALenum r;
   alGetSourcei(source, AL_LOOPING, &r);ALDEBUG_THROW;
-  result = r ? true : false;  
+  result = r ? true : false;
   return result;
 }
 
@@ -171,14 +171,14 @@ ALenum Source::state()
 ALint Source::queuedBuffers()
 {
   ALint result;
-  alGetSourcei(source, AL_BUFFERS_QUEUED, &result);ALDEBUG_THROW;  
+  alGetSourcei(source, AL_BUFFERS_QUEUED, &result);ALDEBUG_THROW;
   return result;
 }
 
 ALint Source::processedBuffers()
 {
   ALint result;
-  alGetSourcei(source, AL_BUFFERS_PROCESSED, &result);ALDEBUG_THROW;  
+  alGetSourcei(source, AL_BUFFERS_PROCESSED, &result);ALDEBUG_THROW;
   return result;
 }
 
@@ -192,35 +192,35 @@ float Source::minGain()
 float Source::maxGain()
 {
   float result;
-  alGetSourcef(source, AL_MAX_GAIN, &result);ALDEBUG_THROW;  
+  alGetSourcef(source, AL_MAX_GAIN, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::referenceDistance()
 {
   float result;
-  alGetSourcef(source, AL_REFERENCE_DISTANCE, &result);ALDEBUG_THROW;    
+  alGetSourcef(source, AL_REFERENCE_DISTANCE, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::rolloffFactor()
 {
   float result;
-  alGetSourcef(source, AL_ROLLOFF_FACTOR, &result);ALDEBUG_THROW;      
+  alGetSourcef(source, AL_ROLLOFF_FACTOR, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::maxDistance()
 {
   float result;
-  alGetSourcef(source, AL_MAX_DISTANCE, &result);ALDEBUG_THROW;        
+  alGetSourcef(source, AL_MAX_DISTANCE, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::pitch()
 {
   float result;
-  alGetSourcef(source, AL_PITCH, &result);ALDEBUG_THROW;          
+  alGetSourcef(source, AL_PITCH, &result);ALDEBUG_THROW;
   return result;
 }
 
@@ -234,21 +234,21 @@ math::Vec3 Source::direction()
 float Source::coneInnerAngle()
 {
   float result;
-  alGetSourcef(source, AL_CONE_INNER_ANGLE, &result);ALDEBUG_THROW;            
+  alGetSourcef(source, AL_CONE_INNER_ANGLE, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::coneOuterAngle()
 {
   float result;
-  alGetSourcef(source, AL_CONE_OUTER_ANGLE, &result);ALDEBUG_THROW;              
+  alGetSourcef(source, AL_CONE_OUTER_ANGLE, &result);ALDEBUG_THROW;
   return result;
 }
 
 float Source::coneOuterGain()
 {
   float result;
-  alGetSourcef(source, AL_CONE_OUTER_GAIN, &result);ALDEBUG_THROW;                
+  alGetSourcef(source, AL_CONE_OUTER_GAIN, &result);ALDEBUG_THROW;
   return result;
 }
 

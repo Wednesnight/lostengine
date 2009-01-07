@@ -14,9 +14,9 @@ struct Context
   Context(boost::shared_ptr<Device> device);
   Context();
   virtual ~Context();
-  
+
   void initWithDevice(boost::shared_ptr<Device> device);
-  
+
   void makeCurrent();
 
   void process();
@@ -28,12 +28,12 @@ struct Context
   static ALenum distanceModel();
 
   static void distanceModel(ALenum dm);
-  
+
   static std::string version();
   static std::string renderer();
   static std::string vendor();
   static std::string extensions();
-  
+
   ALCcontext* context;
   boost::shared_ptr<Device> device;
 };

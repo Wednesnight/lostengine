@@ -7,7 +7,8 @@
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>
 #elif defined linux
-    // include linux al headers here
+  #include <OpenAL/al.h>
+  #include <OpenAL/alc.h>
 #elif defined __APPLE__
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>

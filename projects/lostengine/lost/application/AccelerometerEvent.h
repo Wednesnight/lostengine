@@ -18,16 +18,16 @@ struct AccelerometerEvent : public event::Event
   double z;
   // FIXME: timestamp will probably be provided as CFAbsoluteTime with baseline at 2001
   // we must not mix this up with gettimeofday with baseline at 1970 and should unify
-  // the time api and maybe base lost::platform::currentTime on 
+  // the time api and maybe base lost::platform::currentTime on
   double timeStamp;
-  
-  static const event::Type& DEVICE_ACCELERATED() { static event::Type d = "deviceAccelerated";return d;}  
-  
+
+  static const event::Type& DEVICE_ACCELERATED() { static event::Type d = "deviceAccelerated";return d;}
+
   AccelerometerEvent(const event::Type& inType) : Event(inType) { }
   virtual ~AccelerometerEvent() {}
-  
+
 };
-  
+
 }
 }
 

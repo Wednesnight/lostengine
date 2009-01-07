@@ -18,18 +18,18 @@ namespace gl
 
 Texture::Params::Params()
 {
-  level = 0;   
+  level = 0;
   internalFormat = GL_RGBA;
-  border = 0;        
-  format = GL_RGBA;        
-  type = GL_UNSIGNED_BYTE;          
+  border = 0;
+  format = GL_RGBA;
+  type = GL_UNSIGNED_BYTE;
   wrapS = GL_CLAMP_TO_EDGE;
   wrapT = GL_CLAMP_TO_EDGE;
   minFilter = GL_NEAREST;
   magFilter = GL_NEAREST;
-  sizeHint = SIZE_DONT_CARE;  
+  sizeHint = SIZE_DONT_CARE;
 }
-  
+
 GLenum bitmapComponents2GlFormat(bitmap::Bitmap::Components components)
 {
   GLenum result = 0;
@@ -49,8 +49,8 @@ void Texture::create()
 {
   glGenTextures(1, &texture);GLDEBUG_THROW;
 }
-    
-  
+
+
 Texture::Texture()
 {
   create();
@@ -80,7 +80,7 @@ void Texture::destroy()
 
 void Texture::bind() const
 {
-  glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;       
+  glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;
 }
 
 void Texture::init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
@@ -115,10 +115,10 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
     texwidth = lost::math::nextPowerOf2((unsigned long)inSize.width);
     texheight = lost::math::nextPowerOf2((unsigned long)inSize.height);
   }
- 
+
   // create an empty texture object, i.e. without data, to setup the desired size
   init(inParams.level,
-        inParams.internalFormat, 
+        inParams.internalFormat,
         texwidth,
         texheight,
         inParams.border ? 1 : 0,
@@ -149,24 +149,24 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
                   bitmapParams.format,
                   GL_UNSIGNED_BYTE,
                   inBitmap->data);GLDEBUG_THROW;
-  
+
   // set wrapping and filters
   wrapS(bitmapParams.wrapS);
   wrapT(bitmapParams.wrapT);
   minFilter(bitmapParams.minFilter);
   magFilter(bitmapParams.magFilter);
-  
+
   dataWidth = inBitmap->width;
   dataHeight = inBitmap->height;
-  
+
 }
-  
+
 void Texture::init(GLint level, // mipmap level
            GLenum internalformat, // number of color components
            GLsizei width,
            GLsizei height,
-           GLint border, // must be 0 or 1 
-           GLenum format, // composition of each element in pixels 
+           GLint border, // must be 0 or 1
+           GLenum format, // composition of each element in pixels
            GLenum type, // numerical type of provided pixel data
            const GLvoid* data) // pointer to the data or 0 if you only want to reserve data for later usage
 {
@@ -179,7 +179,7 @@ void Texture::init(GLint level, // mipmap level
                  border,
                  format,
                  type,
-                 data);GLDEBUG_THROW;      
+                 data);GLDEBUG_THROW;
 }
 
 void Texture::wrap(GLint p)
@@ -217,7 +217,7 @@ void Texture::magFilter(GLint p)
 void Texture::param(GLenum pname, GLint p)
 {
   glTexParameteri(GL_TEXTURE_2D, pname, p);GLDEBUG_THROW;
-}      
+}
 
 }
 }

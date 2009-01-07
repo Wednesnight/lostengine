@@ -7,7 +7,7 @@ namespace lost
 {
 namespace gl
 {
-  
+
 // for element arrays, type must be one of these
 // GL_UNSIGNED_BYTE
 // GL_UNSIGNED_SHORT
@@ -19,7 +19,7 @@ struct ElementArrayBuffer : public TypedBuffer<T>
   {
     TypedBuffer<T>::target=GL_ELEMENT_ARRAY_BUFFER;
   }
-  
+
   virtual ~ElementArrayBuffer()
   {
   }

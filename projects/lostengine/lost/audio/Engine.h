@@ -22,11 +22,11 @@ struct Engine : public boost::enable_shared_from_this<Engine>
   Engine();
 	Engine(const std::string& inDeviceId);
   ~Engine();
-  
+
 	std::vector<std::string> deviceIds;
   boost::shared_ptr<audio::Source> createSource();
   void destroySource(audio::Source* source);
-	
+
   boost::shared_ptr<al::Context> context;
 	std::list<boost::weak_ptr<audio::Source> > sources;
 };

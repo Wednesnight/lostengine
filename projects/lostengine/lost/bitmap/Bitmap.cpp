@@ -45,7 +45,7 @@ Bitmap::Bitmap(uint32_t inWidth,
   reset();
   init(inWidth, inHeight, destComponents, srcComponents, data);
 }
-          
+
 Bitmap::Bitmap(boost::shared_ptr<lost::resource::File> inFile)
 {
   reset();
@@ -81,7 +81,7 @@ void Bitmap::init(uint32_t inWidth,
   uint32_t destBytesPerPixel = bytesPerPixelFromComponents(inFormat);
   uint32_t destSizeInBytes = destBytesPerPixel * inWidth * inHeight;
   data = new uint8_t[destSizeInBytes];
-  loaded = false; // prevent stb_image from freeing  
+  loaded = false; // prevent stb_image from freeing
 
   width = inWidth;
   height = inHeight;
@@ -98,7 +98,7 @@ void Bitmap::init(uint32_t inWidth,
   // basic initialisation of target area, size and flags
   init(inWidth, inHeight, destComponents);
   uint32_t destBytesPerPixel = bytesPerPixelFromComponents(format);
-  
+
   // setup stc values for loop
   uint32_t srcBytesPerPixel = bytesPerPixelFromComponents(srcComponents);
   uint8_t* destWriter = data;
@@ -111,7 +111,7 @@ void Bitmap::init(uint32_t inWidth,
     copyPixel(destWriter, destComponents, srcReader, srcComponents);
     destWriter+=destBytesPerPixel;
     srcReader+=srcBytesPerPixel;
-  }  
+  }
 }
 
 // FIXME: not endian safe, we need to fix this for big endian
@@ -120,11 +120,11 @@ void Bitmap::init(uint32_t inWidth,
 // BIG MESS ALERT!!!!!
 //
 // the whole conversion process from one component type to another should really be programmable, but I can't be bothered right now.
-// this thing was really only meant to convert alpha to rgba. This was tweaked to work for the fonts, everything else is an 
+// this thing was really only meant to convert alpha to rgba. This was tweaked to work for the fonts, everything else is an
 // untested bonus. Maybe we should really resort to using boost::gil, but this should be enough for now.
 //
 void Bitmap::copyPixel(uint8_t* dest,
-                Components destComponents, 
+                Components destComponents,
                 uint8_t* src,
                 Components srcComponents)
 {
@@ -137,7 +137,7 @@ void Bitmap::copyPixel(uint8_t* dest,
         case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=255;break;
         case COMPONENTS_ALPHA:dest[0]=255;dest[1]=255;dest[2]=255;dest[3]=src[0];break;
         default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
-      }      
+      }
       break;
     case COMPONENTS_RGB:
       switch(srcComponents)
@@ -160,7 +160,7 @@ void Bitmap::copyPixel(uint8_t* dest,
     default:throw runtime_error("can't copy pixel to destination with components: "+lexical_cast<string>(destComponents));
   }
 }
-  
+
 uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
 {
   uint32_t result = 0;
@@ -184,9 +184,9 @@ void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
   height = h;
   if(data == NULL)
   {
-      throw std::runtime_error("couldn't init image from memory: " + inFile->location);      
+      throw std::runtime_error("couldn't init image from memory: " + inFile->location);
   }
-      
+
   switch(bytesPerPixel)
   {
     case 3:format = COMPONENTS_RGB;break;
@@ -204,7 +204,7 @@ void Bitmap::clear(const lost::common::Color& inColor)
     case 1:clearA(inColor);break;
     case 3:clearRGB(inColor);break;
     case 4:clearRGBA(inColor);break;
-    default:throw std::runtime_error("couldn't clear image with bpp: "+boost::lexical_cast<std::string>(bpp));    
+    default:throw std::runtime_error("couldn't clear image with bpp: "+boost::lexical_cast<std::string>(bpp));
   }
 }
 
@@ -225,7 +225,7 @@ void Bitmap::clearRGB(const lost::common::Color& inColor)
   uint8_t g = static_cast<uint8_t>(inColor.g()*255.0f);
   uint8_t b = static_cast<uint8_t>(inColor.b()*255.0f);
   uint32_t bytesize = numpixels * bpp;
-  
+
   for(uint32_t i=0; i<bytesize; i+=bpp)
   {
     d[i+0] = r;
@@ -244,7 +244,7 @@ void Bitmap::clearRGBA(const lost::common::Color& inColor)
   uint8_t b = static_cast<uint8_t>(inColor.b()*255.0f);
   uint8_t a = static_cast<uint8_t>(inColor.a()*255.0f);
   uint32_t bytesize = numpixels * bpp;
-  
+
   for(uint32_t i=0; i<bytesize; i+=bpp)
   {
     d[i+0] = r;
@@ -288,7 +288,7 @@ boost::uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
   return target;
 }
 
-  
+
 void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
 {
   uint8_t* target = pixelPointer(x,y);
@@ -306,6 +306,8 @@ void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
       target[2]=inColor.bu8();
       target[3]=inColor.au8();
       break;
+    default:
+      break;
   }
 }
 
@@ -319,7 +321,7 @@ void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
     case COMPONENTS_ALPHA:
       result.r(1);
       result.g(1);
-      result.b(1);      
+      result.b(1);
       result.au8(target[0]);break;
     case COMPONENTS_RGB:
       result.ru8(target[0]);
@@ -333,11 +335,13 @@ void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
       result.bu8(target[2]);
       result.au8(target[3]);
       break;
-  }  
+    default:
+      break;
+  }
   return result;
 }
 
-  
+
 boost::shared_ptr<Bitmap> Bitmap::rotCW()
 {
   shared_ptr<Bitmap> result(new Bitmap(height, width, COMPONENTS_RGBA));
@@ -364,7 +368,7 @@ void Bitmap::vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& in
   for(uint32_t y=yb; y<yt; ++y)
   {
     pixel(x,y,inColor);
-  }  
+  }
 }
 
 void Bitmap::draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target)
@@ -384,7 +388,7 @@ void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color
   float minY = inRect.y;
   float maxX = inRect.maxX();
   float maxY = inRect.maxY();
-  
+
   vline((uint32_t)minX, (uint32_t)minY, (uint32_t)maxY, inColor);
   vline((uint32_t)maxX, (uint32_t)minY, (uint32_t)maxY, inColor);
   hline((uint32_t)minY, (uint32_t)minX, (uint32_t)maxX, inColor);
@@ -393,5 +397,5 @@ void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color
 
 
 
-} 
-} 
+}
+}

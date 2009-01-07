@@ -7,16 +7,16 @@ namespace lost
 {
 namespace bitmap
 {
- 
+
 void Packer::Result::clear()
 {
   packedBitmap.reset();
   rects.clear();
   bitmapIds.clear();
   rotated.clear();
-}    
-  
-  
+}
+
+
 Packer::Packer()
 {
 }
@@ -37,7 +37,7 @@ void Packer::pack(Packer::Result& outResult,
   rectPacker.pack(Rect(0,0,targetSize.width, targetSize.height),
                   outResult.rects,
                   rotate,
-                  sort); 
+                  sort);
   // extract missing infos from rectpacker
   // build final bitmap
   outResult.packedBitmap.reset(new Bitmap((boost::uint32_t)targetSize.width, (boost::uint32_t)targetSize.height, format));
@@ -51,7 +51,7 @@ void Packer::pack(Packer::Result& outResult,
       outResult.rects.push_back(rectPacker.nodes[i].rect);
       outResult.bitmapIds.push_back(rectPacker.nodes[i].rectid);
       outResult.rotated.push_back(rectPacker.nodes[i].rotated);
-      
+
       Rect r = rectPacker.nodes[i].rect;
       shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
       bmp->draw((boost::uint32_t)r.x, (boost::uint32_t)r.y, outResult.packedBitmap);
@@ -60,7 +60,7 @@ void Packer::pack(Packer::Result& outResult,
   }
 }
 
-  
+
 void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
                                    std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
 {
@@ -71,7 +71,7 @@ void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
     outRects.push_back(Rect(0,0,(float)inBitmaps[i]->width, (float)inBitmaps[i]->height));
   }
 }
-  
-  
+
+
 }
 }

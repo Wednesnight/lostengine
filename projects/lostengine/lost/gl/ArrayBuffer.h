@@ -11,16 +11,16 @@ template<typename T>
 struct ArrayBuffer : public TypedBuffer<T>
 {
 public:
-  
+
   ArrayBuffer()
-  {  
+  {
     TypedBuffer<T>::target = GL_ARRAY_BUFFER;
   }
-  
+
   virtual ~ArrayBuffer()
   {
   }
-  
+
 };
 }
 }

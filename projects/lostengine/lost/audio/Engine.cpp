@@ -13,13 +13,13 @@ namespace audio
 
 Engine::Engine()
 {
-	context.reset(new al::Context());    
+	context.reset(new al::Context());
 	context->makeCurrent();
 }
 
 Engine::Engine(const std::string& inDeviceId)
 {
-	context.reset(new al::Context(boost::shared_ptr<al::Device>(new al::Device(inDeviceId))));    
+	context.reset(new al::Context(boost::shared_ptr<al::Device>(new al::Device(inDeviceId))));
 	context->makeCurrent();
 }
 
@@ -32,10 +32,10 @@ Engine::~Engine()
 boost::shared_ptr<audio::Source> Engine::createSource()
 {
 	shared_ptr<Source> result(new Source);
-	
+
 	result->engine = shared_from_this();;
 	sources.push_back(result);
-	
+
 	return result;
 }
 

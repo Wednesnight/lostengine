@@ -25,9 +25,9 @@ void Context::initWithDevice(boost::shared_ptr<Device> inDevice)
   context = alcCreateContext(inDevice->device, NULL);ALDEBUG_THROW;
   if(!context)
     throw runtime_error("couldn't create context for device: "+inDevice->deviceId);
-  device = inDevice;  
+  device = inDevice;
 }
-  
+
 Context::~Context()
 {
   DOUT("destroying context");
@@ -68,7 +68,7 @@ ALfloat Context::speedOfSound()
 
 ALenum Context::distanceModel()
 {
-  ALenum result = alGetInteger(AL_DISTANCE_MODEL);ALDEBUG_THROW;  
+  ALenum result = alGetInteger(AL_DISTANCE_MODEL);ALDEBUG_THROW;
   return result;
 }
 
@@ -76,8 +76,8 @@ void Context::distanceModel(ALenum dm)
 {
   alDistanceModel(dm);ALDEBUG_THROW;
 }
-  
-  
+
+
 std::string Context::version()
 {
   const ALchar* result = alGetString(AL_VERSION);ALDEBUG_THROW;
@@ -109,6 +109,6 @@ std::string Context::extensions()
     throw runtime_error("alGetString returned NULL");
   return string(result);
 }
-  
+
 }
 }

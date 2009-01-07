@@ -22,22 +22,22 @@ static inline void lgluPerspective(GLfloat fovy,
                      GLfloat zFar)
 {
   float f = 1.0f/tan(fovy/2.0f); // cotangent
-  
+
   float m0 = f/aspect;
   float m5 = f;
   float m10 = (zFar+zNear)/(zNear-zFar);
   float m11 = -1;
   float m14 = (2*zFar*zNear)/(zNear-zFar);
-  
+
   lost::math::Matrix matrix;
   matrix.zero();
-  
+
   matrix.m[0] = m0;
   matrix.m[5] = m5;
   matrix.m[10] = m10;
   matrix.m[11] = m11;
   matrix.m[14] = m14;
-  
+
   glMultMatrixf(matrix.m);
 }
 
@@ -56,30 +56,30 @@ static inline void lgluLookAt(GLfloat eyeX,
   lost::math::Vec3 eye(eyeX, eyeY, eyeZ);
   lost::math::Vec3 center(centerX, centerY, centerZ);
   lost::math::Vec3 up(upX, upY, upZ);
-  
+
   lost::math::Vec3 f = center - eye;
   lost::math::normalise(f);
   lost::math::normalise(up);
   lost::math::Vec3 s = cross(f, up);
   lost::math::Vec3 u = cross(s, f);
-  
+
   lost::math::Matrix matrix;
   matrix.zero();
-  
+
   matrix.m[0] = s.x;
   matrix.m[1] = u.x;
   matrix.m[2] = -1.0f*f.x;
-  
+
   matrix.m[4] = s.y;
   matrix.m[5] = u.y;
   matrix.m[6] = -1.0f*f.y;
-  
+
   matrix.m[8] = s.z;
   matrix.m[9] = u.z;
   matrix.m[10] = -1.0f*f.z;
-  
+
   matrix.m[15] = 1;
-  
+
   glMultMatrixf(matrix.m);
   glTranslatef(-1.0f*eyeX, -1.0f*eyeY, -1.0f*eyeZ);
 }

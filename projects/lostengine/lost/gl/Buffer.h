@@ -13,18 +13,18 @@ struct Buffer
   GLuint buffer;
   GLenum target;
   GLint size;
-  GLenum type;  
+  GLenum type;
   unsigned long numElements; // number of verts/colors/texcoords in array
 
   Buffer()
   {
     glGenBuffers(1, &buffer);GLDEBUG_THROW;
-    numElements = 0;        
+    numElements = 0;
   }
-  
+
   virtual ~Buffer()
   {
-    glDeleteBuffers(1, &buffer);GLDEBUG;// must not throw    
+    glDeleteBuffers(1, &buffer);GLDEBUG;// must not throw
   }
 
   virtual void bind() { Buffer::bind(target); }
@@ -51,7 +51,7 @@ struct Buffer
       count = numElements;
     drawElements(mode, count, this->type, indices);
   }
-  
+
   virtual void drawElements(GLenum  	     mode,
                             GLsizei  	     count,
                             GLenum  	     inType,
@@ -59,7 +59,7 @@ struct Buffer
   {
     glDrawElements(mode, count, inType, indices);GLDEBUG_THROW;
   }
-  
+
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   // indices: used as byte offset into buffer when element array is bound
   virtual void drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count=-1, const GLvoid* indices = 0)
@@ -68,7 +68,7 @@ struct Buffer
       count = numElements;
     drawRangeElements(mode, start, end, count, this->type, indices);
   }
-  
+
   virtual void drawRangeElements(GLenum      	  mode,
                                  GLuint         start,
                                  GLuint         end,
@@ -79,7 +79,7 @@ struct Buffer
     glDrawRangeElements(mode, start, end, count, inType, indices);GLDEBUG_THROW;
   }
 #endif
-  
+
   /**
    * GL_ARRAY_BUFFER
    * GL_ELEMENT_ARRAY_BUFFER
@@ -90,7 +90,7 @@ struct Buffer
   {
     glBindBuffer(target, buffer);GLDEBUG_THROW;
   }
-  
+
   /**
    * target: same targets as bind
    * size size in bytes of objects new store
@@ -112,20 +112,20 @@ struct Buffer
    The data store contents will be modified once and used many times.
    DYNAMIC
    The data store contents will be modified repeatedly and used many times.
-   
+
    The nature of access may be one of these:
    DRAW
    The data store contents are modified by the application, and used as the source for GL drawing and image specification commands.
    READ
    The data store contents are modified by reading data from the GL, and used to return that data when queried by the application.
    COPY
-   The data store contents are modified by reading data from the GL, and used as the source for GL drawing and image specification commands.   
+   The data store contents are modified by reading data from the GL, and used as the source for GL drawing and image specification commands.
    */
   virtual void bufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage)
   {
     glBufferData(target, size, data, usage);GLDEBUG_THROW;
   }
-  
+
   /**
    * size: number of coords per vertex, must be 2, 3 or 4
    * type: data type of each coord in array: GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE
@@ -136,26 +136,26 @@ struct Buffer
   {
     glVertexPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
-  
+
   // size: 1,2,3 or 4
   virtual void texCoordPointer(GLint size, GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
   {
     glTexCoordPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
-  
+
   // always 3 coords?
   virtual void normalPointer(GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
   {
     glNormalPointer(type, stride, pointer);GLDEBUG_THROW;
   }
-  
+
   // size: 3 or 4
   // type: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE
   virtual void colorPointer(GLint size, GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
   {
     glColorPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
-  
+
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
   /**
    * index_ index of generic vertex attribute
@@ -165,10 +165,10 @@ struct Buffer
    */
   virtual void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride=0, const GLvoid* pointer=0)
   {
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);GLDEBUG_THROW; 
+    glVertexAttribPointer(index, size, type, normalized, stride, pointer);GLDEBUG_THROW;
   }
 #endif
-  
+
 };
 }
 }

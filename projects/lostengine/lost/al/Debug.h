@@ -12,7 +12,7 @@ namespace lost
   {
     void debug(const char* file, int line, const char* func);
     void debug_throw(const char* file, int line, const char* func);
-    
+
   }
 }
 

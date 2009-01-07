@@ -20,7 +20,7 @@ Face::Face(boost::shared_ptr<Library> inLibrary,
   {
     throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
   }
-  
+
   mFile = inFile;
   mLibrary = inLibrary;
 }

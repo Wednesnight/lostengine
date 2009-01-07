@@ -7,12 +7,12 @@ namespace lost
 {
 namespace al
 {
-  
+
 void Listener::position(const math::Vec3& val)
 {
   alListener3f(AL_POSITION, val.x, val.y, val.z);ALDEBUG_THROW;
 }
-  
+
 void Listener::velocity(const math::Vec3& val)
 {
   alListener3f(AL_VELOCITY, val.x, val.y, val.z);ALDEBUG_THROW;
@@ -62,7 +62,7 @@ void Listener::getOrientation(math::Vec3& at, math::Vec3& up)
   up.y = result[4];
   up.z = result[5];
 }
-  
-  
+
+
 }
 }

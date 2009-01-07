@@ -24,7 +24,7 @@ namespace lost
       std::string getScriptFilename(const std::string& scriptContent, const std::string& defaultName);
       std::string getScriptSource(lua_Debug& debug);
       int handleError();
-      
+
       // cast operator to original lua_State* value
       operator lua_State*() { return state; }
 
@@ -43,7 +43,7 @@ namespace lost
       void openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
 
       // convert naming convention "lost.lua..." to path "lost/lua/..."
-      std::string State::pathFromNamespace(const std::string& inNamespace);
+      std::string pathFromNamespace(const std::string& inNamespace);
 
       // loads and executes a file from the resource directory
       int doResourceFile(const std::string& inRelativePath);

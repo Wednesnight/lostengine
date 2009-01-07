@@ -26,23 +26,23 @@ struct Source : public boost::enable_shared_from_this<Source>
 		ST_STREAMING=2,
 		ST_NUM
 	};
-	
+
 	virtual ~Source();
-	
+
 	// initialises this source with a static chunk of data
 	// the source will decompress the audio if necessary and keep a copy
 	// so you can discard the file afterwards.
 	// NOTE: this currently only supports ogg files.
 	void initWithFile(boost::shared_ptr<resource::File> inFile);
-	
+
 	void play();
 	void stop();
 	void pause();
 	void rewind();
-	
+
 	boost::weak_ptr<Engine> engine;
 	boost::shared_ptr<al::Source> source;
-	
+
 	SourceType sourceType;
 
 	boost::shared_ptr<VorbisFile> vorbisFile; //  for static playback

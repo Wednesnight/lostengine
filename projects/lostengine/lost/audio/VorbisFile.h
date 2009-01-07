@@ -1,5 +1,5 @@
-#ifndef LOST_AUDIO_VORBISFILE:H
-#define LOST_AUDIO_VORBISFILE
+#ifndef LOST_AUDIO_VORBISFILE_H
+#define LOST_AUDIO_VORBISFILE_H
 
 #include <boost/shared_ptr.hpp>
 
@@ -13,7 +13,7 @@ struct VorbisFile
 {
 	VorbisFile(boost::shared_ptr<resource::File> inFile);
 	~VorbisFile();
-	
+
 	int sampleRate;
 	int channels;
 	int numSamples;

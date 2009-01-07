@@ -22,7 +22,7 @@ VorbisFile::VorbisFile(boost::shared_ptr<resource::File> inFile)
 		throw runtime_error(string("couldn't open ogg file '")+inFile->location+"' with error: "+lexical_cast<string>(err));
 	stb_vorbis_info info = stb_vorbis_get_info(oggfile);
 	stb_vorbis_close(oggfile);
-	
+
 	sampleRate = info.sample_rate;
 	numSamples = stb_vorbis_decode_memory((unsigned char*)(inFile->data.get()), inFile->size, &channels, &data);
 	DOUT("decoded to "<<numSamples*2 <<" bytes");

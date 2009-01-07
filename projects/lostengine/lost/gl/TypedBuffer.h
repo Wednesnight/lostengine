@@ -11,7 +11,7 @@ namespace gl
 template<typename T>
 struct TypedBuffer : public Buffer
 {
-public:  
+public:
   TypedBuffer()
   {
     TraitsSelector<T> traits;
@@ -22,17 +22,17 @@ public:
   virtual ~TypedBuffer()
   {
   }
-  
+
   virtual void bindBufferData(T* inData, unsigned long numElems, GLenum usage=GL_STATIC_DRAW)
   {
     GLsizeiptr sizeInBytes = sizeof(T)*numElems;
     Buffer::bindBufferData(sizeInBytes, inData, usage);
     numElements = numElems;
   }
-  
-  
-  
-  
+
+
+
+
 };
 }
 }

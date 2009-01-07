@@ -7,7 +7,7 @@ namespace lost
 {
 namespace al
 {
-    
+
 Device::Device(const std::string& inDeviceId)
 {
   initWithDeviceId(inDeviceId);
@@ -27,7 +27,7 @@ void Device::initWithDeviceId(const std::string& inDeviceId)
   deviceId = inDeviceId;
 }
 
-  
+
 Device::~Device()
 {
   DOUT("closing device: "<<deviceId);
@@ -46,7 +46,7 @@ std::vector<std::string> Device::allDeviceIds()
     result.push_back(string(res));
     res+=(strlen(res)+1);
   }
-  
+
   return result;
 }
 
@@ -65,9 +65,9 @@ void Device::logAllDeviceIds()
   for(unsigned int i = 0; i < ids.size(); ++i)
   {
     DOUT("Device "<<i<<" : '"<<ids[i]<<"'");
-  }  
+  }
 }
 
-  
+
 }
 }
