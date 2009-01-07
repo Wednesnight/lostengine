@@ -256,8 +256,8 @@
 		EA0907240E6F4F7F00852256 /* LostPlatformPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0907210E6F4F7F00852256 /* LostPlatformPlatform.h */; };
 		EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
 		EA0E44A50E5E24DC00B5EBF1 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A00E5E24D300B5EBF1 /* libfreetype.a */; };
-		EA0E44A60E5E24EA00B5EBF1 /* libfreetype-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A20E5E24D300B5EBF1 /* libfreetype-iphone.a */; };
-		EA0E44A70E5E24F800B5EBF1 /* libfreetype-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A40E5E24D300B5EBF1 /* libfreetype-simulator.a */; };
+		EA0E44A60E5E24EA00B5EBF1 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A20E5E24D300B5EBF1 /* libfreetype.a */; };
+		EA0E44A70E5E24F800B5EBF1 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44A40E5E24D300B5EBF1 /* libfreetype.a */; };
 		EA0E44EB0E5E281200B5EBF1 /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E44EA0E5E280C00B5EBF1 /* libglfw.a */; };
 		EA0E46770E5E30C600B5EBF1 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46700E5E30AD00B5EBF1 /* libzlib.a */; };
 		EA0E46780E5E30CF00B5EBF1 /* libzlib-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E46720E5E30AD00B5EBF1 /* libzlib-iphone.a */; };
@@ -277,8 +277,8 @@
 		EA15B4990EE31EB600672EF4 /* Engine.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48D0EE31EB600672EF4 /* Engine.h */; };
 		EA15B49A0EE31EB600672EF4 /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = EA15B48E0EE31EB600672EF4 /* Source.h */; };
 		EA1B779C0E9178F100004196 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77950E9178B000004196 /* libluabind.a */; };
-		EA1B779D0E9178F800004196 /* libluabind-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77970E9178B000004196 /* libluabind-iphone.a */; };
-		EA1B779E0E91790900004196 /* libluabind-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77990E9178B000004196 /* libluabind-simulator.a */; };
+		EA1B779D0E9178F800004196 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77970E9178B000004196 /* libluabind.a */; };
+		EA1B779E0E91790900004196 /* libluabind.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1B77990E9178B000004196 /* libluabind.a */; };
 		EA1D54EE0EB34E0400591811 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D54EA0EB34E0400591811 /* Model.h */; };
 		EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
 		EA2BC5260E3CA68E00C0A216 /* ElementArrayBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2BC5250E3CA68E00C0A216 /* ElementArrayBuffer.h */; };
@@ -331,7 +331,7 @@
 		EA3B990B0E04903700B6423B /* lmath.h in Headers */ = {isa = PBXBuildFile; fileRef = EA3B990A0E04903700B6423B /* lmath.h */; };
 		EA3BF7540E845A08005AB137 /* liblua-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04040E8300D1002C8DD3 /* liblua-iphone.a */; };
 		EA3BF7560E845A1A005AB137 /* libboost-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04550E8302C3002C8DD3 /* libboost-iphone.a */; };
-		EA3BF75D0E845A61005AB137 /* libboost-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04570E8302C3002C8DD3 /* libboost-simulator.a */; };
+		EA3BF75D0E845A61005AB137 /* libboost-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04570E8302C3002C8DD3 /* libboost-iphone.a */; };
 		EA3BF75F0E845A6B005AB137 /* liblua-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6D04060E8300D1002C8DD3 /* liblua-simulator.a */; };
 		EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
@@ -995,6 +995,8 @@
 		3E00028E0E9D7AFF00BD3455 /* Receive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receive.h; sourceTree = "<group>"; };
 		3E03001A0E791AE500DC26B8 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		3E04DFCF0E537F4500BFF964 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = camera/Camera.h; sourceTree = "<group>"; };
+		3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = xcconfig/debug.xcconfig; sourceTree = "<group>"; };
+		3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = release.xcconfig; path = xcconfig/release.xcconfig; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationAccelerometerEvent.h; path = bindings/LostApplicationAccelerometerEvent.h; sourceTree = "<group>"; };
 		3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostEventEventDispatcher.h; path = bindings/LostEventEventDispatcher.h; sourceTree = "<group>"; };
@@ -1268,11 +1270,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA1B779E0E91790900004196 /* libluabind-simulator.a in Frameworks */,
-				EA0E44A70E5E24F800B5EBF1 /* libfreetype-simulator.a in Frameworks */,
+				EA1B779E0E91790900004196 /* libluabind.a in Frameworks */,
+				EA0E44A70E5E24F800B5EBF1 /* libfreetype.a in Frameworks */,
 				EA0E46790E5E30DC00B5EBF1 /* libzlib-simulator.a in Frameworks */,
 				3EE0563F0E65545600E044A2 /* libhashlib++-simulator.a in Frameworks */,
-				EA3BF75D0E845A61005AB137 /* libboost-simulator.a in Frameworks */,
+				EA3BF75D0E845A61005AB137 /* libboost-iphone.a in Frameworks */,
 				EA3BF75F0E845A6B005AB137 /* liblua-simulator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1295,10 +1297,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA1B779D0E9178F800004196 /* libluabind-iphone.a in Frameworks */,
+				EA1B779D0E9178F800004196 /* libluabind.a in Frameworks */,
 				EA3BF7540E845A08005AB137 /* liblua-iphone.a in Frameworks */,
 				EA0E46780E5E30CF00B5EBF1 /* libzlib-iphone.a in Frameworks */,
-				EA0E44A60E5E24EA00B5EBF1 /* libfreetype-iphone.a in Frameworks */,
+				EA0E44A60E5E24EA00B5EBF1 /* libfreetype.a in Frameworks */,
 				3EE056400E65546200E044A2 /* libhashlib++-iphone.a in Frameworks */,
 				EA3BF7560E845A1A005AB137 /* libboost-iphone.a in Frameworks */,
 			);
@@ -1310,6 +1312,7 @@
 		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
 			isa = PBXGroup;
 			children = (
+				3E1EE3F70F14DF960056FF83 /* xcconfig */,
 				EA3B94630E04639D00B6423B /* lost */,
 				08FB7795FE84155DC02AAC07 /* thirdparty */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -1341,6 +1344,15 @@
 				3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3E1EE3F70F14DF960056FF83 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */,
+				3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */,
+			);
+			name = xcconfig;
 			sourceTree = "<group>";
 		};
 		3E2060B20E9E08990042BC53 /* lost */ = {
@@ -1526,8 +1538,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0E44A00E5E24D300B5EBF1 /* libfreetype.a */,
-				EA0E44A20E5E24D300B5EBF1 /* libfreetype-iphone.a */,
-				EA0E44A40E5E24D300B5EBF1 /* libfreetype-simulator.a */,
+				EA0E44A20E5E24D300B5EBF1 /* libfreetype.a */,
+				EA0E44A40E5E24D300B5EBF1 /* libfreetype.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1567,8 +1579,8 @@
 			isa = PBXGroup;
 			children = (
 				EA1B77950E9178B000004196 /* libluabind.a */,
-				EA1B77970E9178B000004196 /* libluabind-iphone.a */,
-				EA1B77990E9178B000004196 /* libluabind-simulator.a */,
+				EA1B77970E9178B000004196 /* libluabind.a */,
+				EA1B77990E9178B000004196 /* libluabind.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1891,7 +1903,7 @@
 			children = (
 				EA6D04530E8302C3002C8DD3 /* libboost.a */,
 				EA6D04550E8302C3002C8DD3 /* libboost-iphone.a */,
-				EA6D04570E8302C3002C8DD3 /* libboost-simulator.a */,
+				EA6D04570E8302C3002C8DD3 /* libboost-iphone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2619,17 +2631,17 @@
 			remoteRef = EA0E449F0E5E24D300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E44A20E5E24D300B5EBF1 /* libfreetype-iphone.a */ = {
+		EA0E44A20E5E24D300B5EBF1 /* libfreetype.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libfreetype-iphone.a";
+			path = libfreetype.a;
 			remoteRef = EA0E44A10E5E24D300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E44A40E5E24D300B5EBF1 /* libfreetype-simulator.a */ = {
+		EA0E44A40E5E24D300B5EBF1 /* libfreetype.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libfreetype-simulator.a";
+			path = libfreetype.a;
 			remoteRef = EA0E44A30E5E24D300B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -2668,17 +2680,17 @@
 			remoteRef = EA1B77940E9178B000004196 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA1B77970E9178B000004196 /* libluabind-iphone.a */ = {
+		EA1B77970E9178B000004196 /* libluabind.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libluabind-iphone.a";
+			path = libluabind.a;
 			remoteRef = EA1B77960E9178B000004196 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA1B77990E9178B000004196 /* libluabind-simulator.a */ = {
+		EA1B77990E9178B000004196 /* libluabind.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libluabind-simulator.a";
+			path = libluabind.a;
 			remoteRef = EA1B77980E9178B000004196 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -2717,10 +2729,10 @@
 			remoteRef = EA6D04540E8302C3002C8DD3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA6D04570E8302C3002C8DD3 /* libboost-simulator.a */ = {
+		EA6D04570E8302C3002C8DD3 /* libboost-iphone.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libboost-simulator.a";
+			path = "libboost-iphone.a";
 			remoteRef = EA6D04560E8302C3002C8DD3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -3114,35 +3126,16 @@
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../build/Debug\"",
-				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = LostEngine;
-				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/lib;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/mac\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
-					"\"$(SRCROOT)/../../../../build/Debug\"",
-				);
 				PRODUCT_NAME = LostEngine;
 			};
 			name = Release;
@@ -3183,22 +3176,26 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_VERSION = 4.2;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_5/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_head/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
+					"\"$(SRCROOT)/../../../thirdparty/stb/stb_vorbis_0_99996\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
-					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
+				VALID_ARCHS = "i386 armv6";
 			};
 			name = Release;
 		};
@@ -3256,7 +3253,6 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iphone";
 				SDKROOT = iphoneos2.0;
-				VALID_ARCHS = "armv6 i386";
 			};
 			name = Debug;
 		};
@@ -3273,6 +3269,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "LostEngine-iPhone";
+				SDKROOT = iphoneos2.0;
 				ZERO_LINK = NO;
 			};
 			name = Release;
