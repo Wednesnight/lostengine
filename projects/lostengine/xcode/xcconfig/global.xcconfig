@@ -1,14 +1,11 @@
-// User Data
+// base.xcconfig
 //
-// !! There has to be a user.xcconfig file in the xcconfig directory containing the following line (replace path matching subversion root):
-//    LOSTENGINE_ROOT = /Users/username/coding/lostengine
-//
-#include "user.xcconfig"
+// !! You have to define LOSTENGINE_ROOT in every project that uses this config !!
+// e.g. LOSTENGINE_ROOT = /Users/foo/path_to_lostengine_subversion_root
 
 // Architectures
 ARCHS = $(ARCHS_STANDARD_32_BIT)
 ONLY_ACTIVE_ARCH = NO
-SDKROOT = macosx10.5
 VALID_ARCHS = i386 armv6
 
 // Search Paths
@@ -17,8 +14,15 @@ HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/thirdparty/boost/boost_1_36_0/include"
 LIBRARY_SEARCH_PATHS = $(inherited) "$(LOSTENGINE_ROOT)/thirdparty/freetype2/freetype_2_3_5/lib/mac" "$(LOSTENGINE_ROOT)/thirdparty/glfw/glfw_2_6/lib/mac" "$(LOSTENGINE_ROOT)/thirdparty/zlib/zlib_1_2_3/mac" "$(LOSTENGINE_ROOT)/thirdparty/boost/boost_1_34_1/lib/mac"
 USER_HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine"
 
+// Compiler Version
+GCC_VERSION = 
+
 // GCC 4.0 - Code Generation
 GCC_OPTIMIZATION_LEVEL = 0
 
 // GCC 4.0 - Language
 GCC_C_LANGUAGE_STANDARD = c99
+
+// GCC 4.0 - Warnings
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+GCC_WARN_UNUSED_VARIABLE = YES

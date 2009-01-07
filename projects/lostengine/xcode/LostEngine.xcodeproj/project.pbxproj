@@ -995,8 +995,6 @@
 		3E00028E0E9D7AFF00BD3455 /* Receive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Receive.h; sourceTree = "<group>"; };
 		3E03001A0E791AE500DC26B8 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
 		3E04DFCF0E537F4500BFF964 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = camera/Camera.h; sourceTree = "<group>"; };
-		3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = xcconfig/debug.xcconfig; sourceTree = "<group>"; };
-		3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = release.xcconfig; path = xcconfig/release.xcconfig; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E2061A70E9E14E60042BC53 /* LostApplicationAccelerometerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostApplicationAccelerometerEvent.h; path = bindings/LostApplicationAccelerometerEvent.h; sourceTree = "<group>"; };
 		3E2061A80E9E14E60042BC53 /* LostEventEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostEventEventDispatcher.h; path = bindings/LostEventEventDispatcher.h; sourceTree = "<group>"; };
@@ -1022,11 +1020,17 @@
 		3E48F4A80ED6A806003CFD2F /* math */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = math; path = forward/lost/math; sourceTree = "<group>"; };
 		3E48F4F30ED6AD60003CFD2F /* LostGLMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLMesh.h; path = bindings/LostGLMesh.h; sourceTree = "<group>"; };
 		3E48F4F40ED6AD60003CFD2F /* LostGLMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLMesh.cpp; path = bindings/LostGLMesh.cpp; sourceTree = "<group>"; };
+		3E531D8E0F14EDEA00D7C8B4 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-debug.xcconfig"; sourceTree = "<group>"; };
+		3E531D8F0F14EDEA00D7C8B4 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-release.xcconfig"; sourceTree = "<group>"; };
+		3E531D900F14EDEA00D7C8B4 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = global.xcconfig; sourceTree = "<group>"; };
+		3E531D910F14EDEA00D7C8B4 /* iphone.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = iphone.xcconfig; sourceTree = "<group>"; };
+		3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = macosx.xcconfig; sourceTree = "<group>"; };
+		3E531D930F14EDEA00D7C8B4 /* simulator.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = simulator.xcconfig; sourceTree = "<group>"; };
 		3E650FEF0E7F914D00DE5AFE /* LostGLContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLContext.h; path = bindings/LostGLContext.h; sourceTree = "<group>"; };
 		3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLContext.cpp; path = bindings/LostGLContext.cpp; sourceTree = "<group>"; };
 		3E6510000E7F92C700DE5AFE /* LostGLState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LostGLState.h; path = bindings/LostGLState.h; sourceTree = "<group>"; };
 		3E6510010E7F92C700DE5AFE /* LostGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLState.cpp; path = bindings/LostGLState.cpp; sourceTree = "<group>"; };
-		3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E77068E0EC1AC2300D0DA42 /* View.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = View.lua; sourceTree = "<group>"; };
 		3E7706BB0EC1AF4900D0DA42 /* UserInterface.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UserInterface.lua; sourceTree = "<group>"; };
 		3E7706CA0EC1B14A00D0DA42 /* Screen.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screen.lua; sourceTree = "<group>"; };
@@ -1143,7 +1147,7 @@
 		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
 		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6710760E3E53B000B961EC /* TimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerManager.h; path = glfw/TimerManager.h; sourceTree = "<group>"; };
-		EA6711250E3E885300B961EC /* libLostEngine-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLostEngine-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6D03F80E8300D1002C8DD3 /* lua.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lua.xcodeproj; path = ../../../thirdparty/lua/lua_5_1_4/xcode/lua.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA6D04490E8302C3002C8DD3 /* boost.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = boost.xcodeproj; path = ../../../thirdparty/boost/boost_1_36_0/xcode/boost.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA70F8F30ED08713000AA8CB /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = al/Debug.h; sourceTree = "<group>"; };
@@ -1312,7 +1316,7 @@
 		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
 			isa = PBXGroup;
 			children = (
-				3E1EE3F70F14DF960056FF83 /* xcconfig */,
+				3E531D8D0F14EDEA00D7C8B4 /* xcconfig */,
 				EA3B94630E04639D00B6423B /* lost */,
 				08FB7795FE84155DC02AAC07 /* thirdparty */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -1340,19 +1344,10 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC046055464E500DB518D /* libLostEngine.a */,
-				EA6711250E3E885300B961EC /* libLostEngine-iphone.a */,
-				3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */,
+				EA6711250E3E885300B961EC /* libLostEngine.a */,
+				3E7325750E5CE3A5000FF838 /* libLostEngine.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		3E1EE3F70F14DF960056FF83 /* xcconfig */ = {
-			isa = PBXGroup;
-			children = (
-				3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */,
-				3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */,
-			);
-			name = xcconfig;
 			sourceTree = "<group>";
 		};
 		3E2060B20E9E08990042BC53 /* lost */ = {
@@ -1392,6 +1387,19 @@
 				3E48F3F70ED6A1F6003CFD2F /* boost */,
 			);
 			name = forward;
+			sourceTree = "<group>";
+		};
+		3E531D8D0F14EDEA00D7C8B4 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				3E531D8E0F14EDEA00D7C8B4 /* global-debug.xcconfig */,
+				3E531D8F0F14EDEA00D7C8B4 /* global-release.xcconfig */,
+				3E531D900F14EDEA00D7C8B4 /* global.xcconfig */,
+				3E531D910F14EDEA00D7C8B4 /* iphone.xcconfig */,
+				3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */,
+				3E531D930F14EDEA00D7C8B4 /* simulator.xcconfig */,
+			);
+			path = xcconfig;
 			sourceTree = "<group>";
 		};
 		3EB93D300E37FE0D00FF10C9 /* model */ = {
@@ -2503,7 +2511,7 @@
 			);
 			name = "LostEngine-simulator";
 			productName = "LostEngine-iPhone";
-			productReference = 3E7325750E5CE3A5000FF838 /* libLostEngine-simulator.a */;
+			productReference = 3E7325750E5CE3A5000FF838 /* libLostEngine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC045055464E500DB518D /* LostEngine */ = {
@@ -2550,7 +2558,7 @@
 			);
 			name = "LostEngine-iphone";
 			productName = "LostEngine-iPhone";
-			productReference = EA6711250E3E885300B961EC /* libLostEngine-iphone.a */;
+			productReference = EA6711250E3E885300B961EC /* libLostEngine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -3126,151 +3134,62 @@
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E1EE3FA0F14DFB30056FF83 /* debug.xcconfig */;
+			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = LostEngine;
 			};
 			name = Debug;
 		};
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E1EE3FB0F14DFB30056FF83 /* release.xcconfig */;
+			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = LostEngine;
 			};
 			name = Release;
 		};
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D8E0F14EDEA00D7C8B4 /* global-debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_vorbis_0_99996\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
-				VALID_ARCHS = "i386 armv6";
+				LOSTENGINE_ROOT = ../../..;
+				PRODUCT_NAME = LostEngine;
 			};
 			name = Debug;
 		};
 		1DEB91F108733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D8F0F14EDEA00D7C8B4 /* global-release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_vorbis_0_99996\"",
-					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
-				);
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/..\"";
-				VALID_ARCHS = "i386 armv6";
+				LOSTENGINE_ROOT = ../../..;
+				PRODUCT_NAME = LostEngine;
 			};
 			name = Release;
 		};
 		3E7325730E5CE3A5000FF838 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D930F14EDEA00D7C8B4 /* simulator.xcconfig */;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				PREBINDING = NO;
-				PRODUCT_NAME = "LostEngine-simulator";
-				SDKROOT = iphonesimulator2.0;
-				VALID_ARCHS = "armv6 i386";
 			};
 			name = Debug;
 		};
 		3E7325740E5CE3A5000FF838 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D930F14EDEA00D7C8B4 /* simulator.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(SRCROOT)/../../../../build/Debug-iphoneos\\\"",
-					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = "LostEngine-iPhone";
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
 		EA6711260E3E885300B961EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D910F14EDEA00D7C8B4 /* iphone.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_THUMB_SUPPORT = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
-				);
-				ONLY_ACTIVE_ARCH = NO;
-				PREBINDING = NO;
-				PRODUCT_NAME = "LostEngine-iphone";
-				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
 		};
 		EA6711270E3E885300B961EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D910F14EDEA00D7C8B4 /* iphone.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = "LostEngine-iPhone";
-				SDKROOT = iphoneos2.0;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};

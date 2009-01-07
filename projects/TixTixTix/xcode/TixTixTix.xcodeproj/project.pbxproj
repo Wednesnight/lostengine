@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E01666A0E6F28B2002528D5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3E01666C0E6F28B2002528D5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
-		3E01667B0E6F2918002528D5 /* libLostEngine-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */; };
+		3E01667B0E6F2918002528D5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */; };
 		3E0166AC0E6F29C4002528D5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A80E6F29C4002528D5 /* QuartzCore.framework */; };
 		3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
 		3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
@@ -23,7 +23,7 @@
 		3E7E609A0E6F35E800B61285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166A90E6F29C4002528D5 /* Foundation.framework */; };
 		3E7E609B0E6F35E800B61285 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AA0E6F29C4002528D5 /* OpenGLES.framework */; };
 		3E7E609C0E6F35E800B61285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0166AB0E6F29C4002528D5 /* UIKit.framework */; };
-		3E7E60A80E6F364500B61285 /* libLostEngine-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */; };
+		3E7E60A80E6F364500B61285 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine.a */; };
 		3E9B75D70EF9BEB800554168 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E9B75D60EF9BEB800554168 /* Application.lua */; };
 		3E9B75D80EF9BEB800554168 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E9B75D60EF9BEB800554168 /* Application.lua */; };
 		3E9B75D90EF9BEB800554168 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E9B75D60EF9BEB800554168 /* Application.lua */; };
@@ -108,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E01667B0E6F2918002528D5 /* libLostEngine-simulator.a in Frameworks */,
+				3E01667B0E6F2918002528D5 /* libLostEngine.a in Frameworks */,
 				3E0166AC0E6F29C4002528D5 /* QuartzCore.framework in Frameworks */,
 				3E0166AD0E6F29C4002528D5 /* Foundation.framework in Frameworks */,
 				3E0166AE0E6F29C4002528D5 /* OpenGLES.framework in Frameworks */,
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E7E60A80E6F364500B61285 /* libLostEngine-iphone.a in Frameworks */,
+				3E7E60A80E6F364500B61285 /* libLostEngine.a in Frameworks */,
 				3E7E60990E6F35E800B61285 /* QuartzCore.framework in Frameworks */,
 				3E7E609A0E6F35E800B61285 /* Foundation.framework in Frameworks */,
 				3E7E609B0E6F35E800B61285 /* OpenGLES.framework in Frameworks */,
@@ -213,8 +213,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0E49760E5E403800B5EBF1 /* libLostEngine.a */,
-				EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */,
-				EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */,
+				EA0E49780E5E403800B5EBF1 /* libLostEngine.a */,
+				EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,17 +312,17 @@
 			remoteRef = EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */ = {
+		EA0E49780E5E403800B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */ = {
+		EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
