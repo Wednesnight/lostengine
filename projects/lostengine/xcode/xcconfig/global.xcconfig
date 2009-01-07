@@ -1,7 +1,9 @@
 // base.xcconfig
 //
-// !! You have to define LOSTENGINE_ROOT in every project that uses this config !!
+// !! You have to define LOSTENGINE_ROOT in user.xcconfig !!
 // e.g. LOSTENGINE_ROOT = /Users/foo/path_to_lostengine_subversion_root
+
+#include "user.xcconfig"
 
 // Architectures
 ARCHS = $(ARCHS_STANDARD_32_BIT)
