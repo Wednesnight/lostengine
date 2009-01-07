@@ -2235,7 +2235,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D8E0F14EDEA00D7C8B4 /* global-debug.xcconfig */;
 			buildSettings = {
-				LOSTENGINE_ROOT = ../../..;
 				PRODUCT_NAME = LostEngine;
 			};
 			name = Debug;
@@ -2244,7 +2243,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D8F0F14EDEA00D7C8B4 /* global-release.xcconfig */;
 			buildSettings = {
-				LOSTENGINE_ROOT = ../../..;
 				PRODUCT_NAME = LostEngine;
 			};
 			name = Release;
