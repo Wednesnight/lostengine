@@ -130,8 +130,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E7322BE0E5CD341000FF838 /* libfreetype-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libfreetype-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E7326190E5CE3E6000FF838 /* libfreetype-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libfreetype-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7322BE0E5CD341000FF838 /* libfreetype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfreetype.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7326190E5CE3E6000FF838 /* libfreetype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfreetype.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libfreetype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfreetype.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E43850E5E22D400B5EBF1 /* psaux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psaux.c; path = ../source/src/psaux/psaux.c; sourceTree = SOURCE_ROOT; };
 		EA0E43870E5E22F400B5EBF1 /* ftlzw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlzw.c; path = ../source/src/lzw/ftlzw.c; sourceTree = SOURCE_ROOT; };
@@ -252,8 +252,8 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC046055464E500DB518D /* libfreetype.a */,
-				3E7322BE0E5CD341000FF838 /* libfreetype-iphone.a */,
-				3E7326190E5CE3E6000FF838 /* libfreetype-simulator.a */,
+				3E7322BE0E5CD341000FF838 /* libfreetype.a */,
+				3E7326190E5CE3E6000FF838 /* libfreetype.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 			);
 			name = "freetype-iphone";
 			productName = freetype;
-			productReference = 3E7322BE0E5CD341000FF838 /* libfreetype-iphone.a */;
+			productReference = 3E7322BE0E5CD341000FF838 /* libfreetype.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E7325EA0E5CE3E6000FF838 /* freetype-simulator */ = {
@@ -316,7 +316,7 @@
 			);
 			name = "freetype-simulator";
 			productName = freetype;
-			productReference = 3E7326190E5CE3E6000FF838 /* libfreetype-simulator.a */;
+			productReference = 3E7326190E5CE3E6000FF838 /* libfreetype.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC045055464E500DB518D /* freetype */ = {

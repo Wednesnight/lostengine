@@ -67,8 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E73231E0E5CD451000FF838 /* libluabind-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libluabind-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libluabind-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E73231E0E5CD451000FF838 /* libluabind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluabind.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7325E50E5CE3DB000FF838 /* libluabind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluabind.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libluabind.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libluabind.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E46900E5E337F00B5EBF1 /* open.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = open.cpp; path = ../source/src/open.cpp; sourceTree = SOURCE_ROOT; };
 		EA0E46910E5E337F00B5EBF1 /* pcall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pcall.cpp; path = ../source/src/pcall.cpp; sourceTree = SOURCE_ROOT; };
@@ -155,8 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC046055464E500DB518D /* libluabind.a */,
-				3E73231E0E5CD451000FF838 /* libluabind-iphone.a */,
-				3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */,
+				3E73231E0E5CD451000FF838 /* libluabind.a */,
+				3E7325E50E5CE3DB000FF838 /* libluabind.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			);
 			name = "luabind-iphone";
 			productName = luabind;
-			productReference = 3E73231E0E5CD451000FF838 /* libluabind-iphone.a */;
+			productReference = 3E73231E0E5CD451000FF838 /* libluabind.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		3E7325CB0E5CE3DB000FF838 /* luabind-simulator */ = {
@@ -219,7 +219,7 @@
 			);
 			name = "luabind-simulator";
 			productName = luabind;
-			productReference = 3E7325E50E5CE3DB000FF838 /* libluabind-simulator.a */;
+			productReference = 3E7325E50E5CE3DB000FF838 /* libluabind.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC045055464E500DB518D /* luabind */ = {

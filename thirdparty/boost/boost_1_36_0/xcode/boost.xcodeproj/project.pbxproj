@@ -41,7 +41,7 @@
 
 /* Begin PBXFileReference section */
 		3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E7325860E5CE3B5000FF838 /* libboost-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7325860E5CE3B5000FF838 /* libboost-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AAC046055464E500DB518D /* libboost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libboost.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044C010EE893E800D3EE10 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = ../source/libs/thread/src/pthread/thread.cpp; sourceTree = SOURCE_ROOT; };
 		EA044C020EE893E800D3EE10 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../source/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
@@ -96,7 +96,7 @@
 			children = (
 				D2AAC046055464E500DB518D /* libboost.a */,
 				3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */,
-				3E7325860E5CE3B5000FF838 /* libboost-simulator.a */,
+				3E7325860E5CE3B5000FF838 /* libboost-iphone.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 			);
 			name = "boost-simulator";
 			productName = "boost-iphone";
-			productReference = 3E7325860E5CE3B5000FF838 /* libboost-simulator.a */;
+			productReference = 3E7325860E5CE3B5000FF838 /* libboost-iphone.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		D2AAC045055464E500DB518D /* boost */ = {
