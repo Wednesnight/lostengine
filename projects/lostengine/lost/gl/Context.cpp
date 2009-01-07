@@ -72,7 +72,7 @@ Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttribute
   stateStack.push_back(newState());
   // initialize viewport
   math::Rect viewport = math::Rect(0, 0, displayAttributes->width, displayAttributes->height);
-  glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
+  glViewport((GLsizei)viewport.x, (GLsizei)viewport.y, (GLint)viewport.width, (GLint)viewport.height);
   viewportStack.push_back(viewport);
 }
 
@@ -142,7 +142,7 @@ void Context::clear(GLbitfield flags)
 
 void Context::pushViewport(const lost::math::Rect& viewport)
 {
-  if (viewportStack.back() != viewport) glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
+  if (viewportStack.back() != viewport) glViewport((GLsizei)viewport.x, (GLsizei)viewport.y, (GLint)viewport.width, (GLint)viewport.height);GLDEBUG;
   viewportStack.push_back(viewport);
 }
 
@@ -152,7 +152,7 @@ void Context::popViewport()
   {
     viewportStack.pop_back();
     lost::math::Rect viewport = viewportStack.back();
-    glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
+    glViewport((GLsizei)viewport.x, (GLsizei)viewport.y, (GLint)viewport.width, (GLint)viewport.height);GLDEBUG;
   }
 }
 

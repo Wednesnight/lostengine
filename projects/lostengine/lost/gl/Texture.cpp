@@ -107,13 +107,13 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   // then we calculate the size of the texture object
   if(sizeHint == Texture::SIZE_ORIGINAL)
   {
-    texwidth = inSize.width;
-    texheight = inSize.height;
+    texwidth = (uint32_t)inSize.width;
+    texheight = (uint32_t)inSize.height;
   }
   else if(sizeHint == Texture::SIZE_POWER_OF_TWO)
   {
-    texwidth = lost::math::nextPowerOf2(inSize.width);
-    texheight = lost::math::nextPowerOf2(inSize.height);
+    texwidth = lost::math::nextPowerOf2((unsigned long)inSize.width);
+    texheight = lost::math::nextPowerOf2((unsigned long)inSize.height);
   }
  
   // create an empty texture object, i.e. without data, to setup the desired size
@@ -135,7 +135,7 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
 {
   Texture::Params bitmapParams(inParams);
   bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format);
-  init(lost::math::Vec2(inBitmap->width, inBitmap->height), bitmapParams);
+  init(lost::math::Vec2((float)inBitmap->width, (float)inBitmap->height), bitmapParams);
 
   // then use texsubimage to upload the actual data. Strictly speaking, we only need this in the
   // case of power-of-two textures, but always creating textures like this saves us one branch

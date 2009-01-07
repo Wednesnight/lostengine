@@ -13,23 +13,23 @@
 #if defined WIN32
   #define NOMINMAX
   #include <windows.h>
+
+  #ifndef __FUNCTION__
+    #ifdef __func__
+      #define __FUNCTION__ __func__
+    #else
+      #define __FUNCTION__ "unknown"
+    #endif
+  #endif
+
+  #ifndef __PRETTY_FUNCTION__
+    #ifdef __FUNCDNAME__
+      #define __PRETTY_FUNCTION__ __FUNCDNAME__
+    #else
+      #define __PRETTY_FUNCTION__ "unknown"
+    #endif
+  #endif
 #endif
-
-/*#ifndef __FUNCTION__
-  #ifdef __func__
-    #define __FUNCTION__ __func__
-  #else
-    #define __FUNCTION__ "unknown"
-  #endif
-#endif*/
-
-/*#ifndef __PRETTY_FUNCTION__
-  #ifdef __FUNCDNAME__
-    #define __PRETTY_FUNCTION__ __FUNCDNAME__
-  #else
-    #define __PRETTY_FUNCTION__ "unknown"
-  #endif
-#endif*/
 
 namespace lost
 {
