@@ -617,6 +617,15 @@
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
+		EA9A67ED0F159C52007E8A3D /* prefix-shared.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A67EA0F159C51007E8A3D /* prefix-shared.h */; };
+		EA9A67F00F159C52007E8A3D /* prefix-shared.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A67EA0F159C51007E8A3D /* prefix-shared.h */; };
+		EA9A67F30F159C52007E8A3D /* prefix-shared.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A67EA0F159C51007E8A3D /* prefix-shared.h */; };
+		EA9A68180F15A170007E8A3D /* prefix-release.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68160F15A170007E8A3D /* prefix-release.pch */; };
+		EA9A68190F15A170007E8A3D /* prefix-debug.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68170F15A170007E8A3D /* prefix-debug.pch */; };
+		EA9A681A0F15A170007E8A3D /* prefix-release.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68160F15A170007E8A3D /* prefix-release.pch */; };
+		EA9A681B0F15A170007E8A3D /* prefix-debug.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68170F15A170007E8A3D /* prefix-debug.pch */; };
+		EA9A681C0F15A170007E8A3D /* prefix-release.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68160F15A170007E8A3D /* prefix-release.pch */; };
+		EA9A681D0F15A170007E8A3D /* prefix-debug.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68170F15A170007E8A3D /* prefix-debug.pch */; };
 		EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
@@ -883,6 +892,9 @@
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
+		EA9A67EA0F159C51007E8A3D /* prefix-shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-shared.h"; sourceTree = "<group>"; };
+		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-release.pch"; sourceTree = "<group>"; };
+		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-debug.pch"; sourceTree = "<group>"; };
 		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
@@ -933,6 +945,7 @@
 			children = (
 				3E5320410F1510EB00D7C8B4 /* lost */,
 				3E531D8D0F14EDEA00D7C8B4 /* Configurations */,
+				EA9A67E10F159C38007E8A3D /* precompiled headers */,
 				3E5321CA0F15112200D7C8B4 /* Sources */,
 				3E531F300F14FE9700D7C8B4 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -1455,6 +1468,16 @@
 			name = bindings;
 			sourceTree = "<group>";
 		};
+		EA9A67E10F159C38007E8A3D /* precompiled headers */ = {
+			isa = PBXGroup;
+			children = (
+				EA9A68160F15A170007E8A3D /* prefix-release.pch */,
+				EA9A68170F15A170007E8A3D /* prefix-debug.pch */,
+				EA9A67EA0F159C51007E8A3D /* prefix-shared.h */,
+			);
+			name = "precompiled headers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1462,6 +1485,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9A67ED0F159C52007E8A3D /* prefix-shared.h in Headers */,
+				EA9A68180F15A170007E8A3D /* prefix-release.pch in Headers */,
+				EA9A68190F15A170007E8A3D /* prefix-debug.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1495,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9A67F30F159C52007E8A3D /* prefix-shared.h in Headers */,
+				EA9A681C0F15A170007E8A3D /* prefix-release.pch in Headers */,
+				EA9A681D0F15A170007E8A3D /* prefix-debug.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,6 +1505,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9A67F00F159C52007E8A3D /* prefix-shared.h in Headers */,
+				EA9A681A0F15A170007E8A3D /* prefix-release.pch in Headers */,
+				EA9A681B0F15A170007E8A3D /* prefix-debug.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

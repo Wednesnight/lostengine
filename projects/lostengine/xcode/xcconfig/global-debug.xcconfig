@@ -1,1 +1,3 @@
 #include "global.xcconfig"
+
+GCC_PREFIX_HEADER = prefix-debug.pch
