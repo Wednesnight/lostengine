@@ -14,7 +14,7 @@ lost.guiro.controls.Control:addBase(Label, "Label")
 --[[
     constructor
   ]]
-function Label:__init() super()
+function Label:__init() lost.guiro.controls.Control.__init(self)
   self.alpha = 1.0
   self.currentColor = lost.common.Color(1,1,1)
   self.font = lost.guiro.config.theme.defaultFont

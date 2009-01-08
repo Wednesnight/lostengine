@@ -8,7 +8,7 @@ require("lost.guiro.Renderer")
 class "lost.guiro.themes.default.renderers.AnimatedImage" (lost.guiro.Renderer)
 AnimatedImage = _G["lost.guiro.themes.default.renderers.AnimatedImage"]
 
-function AnimatedImage:__init() super()
+function AnimatedImage:__init() lost.guiro.Renderer.__init(self)
 end
 
 function AnimatedImage:render(context, image, style)

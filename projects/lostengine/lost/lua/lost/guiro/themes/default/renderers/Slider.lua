@@ -8,7 +8,7 @@ require("lost.guiro.Renderer")
 class "lost.guiro.themes.default.renderers.Slider" (lost.guiro.Renderer)
 Slider = _G["lost.guiro.themes.default.renderers.Slider"]
 
-function Slider:__init() super()
+function Slider:__init() lost.guiro.Renderer.__init(self)
 end
 
 function Slider:render(context, slider, style)

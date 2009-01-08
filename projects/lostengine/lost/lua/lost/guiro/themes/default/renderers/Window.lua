@@ -8,7 +8,7 @@ require("lost.guiro.Renderer")
 class "lost.guiro.themes.default.renderers.Window" (lost.guiro.Renderer)
 Window = _G["lost.guiro.themes.default.renderers.Window"]
 
-function Window:__init() super()
+function Window:__init() lost.guiro.Renderer.__init(self)
 end
 
 function Window:render(context, window, style)

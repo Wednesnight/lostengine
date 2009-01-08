@@ -13,7 +13,7 @@ lost.guiro.controls.Control:addBase(Image, "Image")
 --[[
     constructor
   ]]
-function Image:__init() super()
+function Image:__init() lost.guiro.controls.Control.__init(self)
   self.currentAlpha = 1.0
   self.currentColor = lost.common.Color(1,1,1)
   self.currentFilter = gl.GL_LINEAR

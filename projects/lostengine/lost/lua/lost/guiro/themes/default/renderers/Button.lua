@@ -8,7 +8,7 @@ require("lost.guiro.Renderer")
 class "lost.guiro.themes.default.renderers.Button" (lost.guiro.Renderer)
 Button = _G["lost.guiro.themes.default.renderers.Button"]
 
-function Button:__init() super()
+function Button:__init() lost.guiro.Renderer.__init(self)
 end
 
 function Button:render(context, button, style)

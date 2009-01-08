@@ -8,7 +8,7 @@ require("lost.guiro.Style")
 class "lost.guiro.themes.default.styles.Button" (lost.guiro.Style)
 Button = _G["lost.guiro.themes.default.styles.Button"]
 
-function Button:__init() super()
+function Button:__init() lost.guiro.Style.__init(self)
   self.released =
   {
     color = lost.common.Color(0.5,0.5,0.5,1),

@@ -10,7 +10,7 @@ Control = _G["lost.guiro.controls.Control"]
 
 lost.guiro.View:addBase(Control, "Control")
 
-function Control:__init() super()
+function Control:__init() lost.guiro.View.__init(self)
 end
 
 Control.InputType =

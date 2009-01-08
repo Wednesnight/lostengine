@@ -10,7 +10,7 @@ Screen = _G["lost.guiro.Screen"]
 
 lost.guiro.View:addBase(Screen, "Screen")
 
-function Screen:__init() super()
+function Screen:__init() lost.guiro.View.__init(self)
 end
 
 --[[

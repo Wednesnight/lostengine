@@ -10,7 +10,7 @@ UserInterface = _G["lost.guiro.UserInterface"]
 
 lost.guiro.View:addBase(UserInterface, "UserInterface")
 
-function UserInterface:__init() super()
+function UserInterface:__init() lost.guiro.View.__init(self)
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 

@@ -11,7 +11,7 @@ Window = _G["lost.guiro.controls.Window"]
 
 lost.guiro.controls.Control:addBase(Window, "Window")
 
-function Window:__init() super()
+function Window:__init() lost.guiro.controls.Control.__init(self)
   self.header = {height = 25}
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:handleInput(event) end)

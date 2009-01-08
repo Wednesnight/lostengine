@@ -8,7 +8,7 @@ require("lost.guiro.fx.Effect")
 class "lost.guiro.fx.Size" (lost.guiro.fx.Effect)
 Size = _G["lost.guiro.fx.Size"]
 
-function Size:__init(view, params) super(view, params)
+function Size:__init(view, params) lost.guiro.fx.Effect.__init(self, view, params)
   if not self.params.factor then
     self.params.factor = 1.0
   end

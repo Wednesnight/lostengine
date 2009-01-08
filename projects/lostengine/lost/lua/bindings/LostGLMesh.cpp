@@ -9,6 +9,17 @@ using namespace lost::gl;
 
 namespace lost
 {
+  namespace gl
+  {
+    void Mesh2DSetFace(Mesh2D* mesh, unsigned int p1, unsigned int p2)
+    {
+      mesh->setFace(p1, p2);
+    }
+  }
+}
+
+namespace lost
+{
   namespace lua
   {
     void LostGLMesh(lua_State* state)
@@ -24,7 +35,7 @@ namespace lost
             .def("setTexcoordCount", &Mesh2D::setTexcoordCount)
             .def("setTexcoord", &Mesh2D::setTexcoord)
             .def("setFaceCount", &Mesh2D::setFaceCount)
-            .def("setFace", &Mesh2D::setFace),
+            .def("setFace", &Mesh2DSetFace),
 
           class_<Mesh3D, shared_ptr<Mesh3D> >("Mesh3D")
             .def(constructor<uint32_t, uint32_t, uint32_t, shared_ptr<Texture> >())

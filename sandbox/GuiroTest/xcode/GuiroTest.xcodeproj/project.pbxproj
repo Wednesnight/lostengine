@@ -646,7 +646,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/glm\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);

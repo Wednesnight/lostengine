@@ -13,7 +13,7 @@ lost.guiro.controls.Image:addBase(AnimatedImage, "AnimatedImage")
 --[[
     constructor
   ]]
-function AnimatedImage:__init() super()
+function AnimatedImage:__init() lost.guiro.controls.Image.__init(self)
   self.currentStep = 0
   self.frameSize = lost.math.Rect()
   self.interval = 0.5

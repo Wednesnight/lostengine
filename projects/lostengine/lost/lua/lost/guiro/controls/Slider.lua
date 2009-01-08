@@ -21,7 +21,7 @@ Slider.SliderChange = "SLIDER_CHANGE"
 class "lost.guiro.controls.Slider.SliderEvent" (lost.event.Event)
 Slider.SliderEvent = _G["lost.guiro.controls.Slider.SliderEvent"]
 
-function Slider.SliderEvent:__init(which, value) super(which)
+function Slider.SliderEvent:__init(which, value) lost.event.Event.__init(self, which)
   self.value = value
 end
 
@@ -37,7 +37,7 @@ Slider.Orientation =
 --[[
     constructor
   ]]
-function Slider:__init() super()
+function Slider:__init() lost.guiro.controls.Control.__init(self)
   self.orientation = Slider.Orientation.horizontal
   self.min         = 0
   self.max         = 100

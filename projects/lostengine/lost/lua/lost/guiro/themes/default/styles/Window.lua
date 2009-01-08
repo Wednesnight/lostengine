@@ -8,7 +8,7 @@ require("lost.guiro.Style")
 class "lost.guiro.themes.default.styles.Window" (lost.guiro.Style)
 Window = _G["lost.guiro.themes.default.styles.Window"]
 
-function Window:__init() super()
+function Window:__init() lost.guiro.Style.__init(self)
   self.color = lost.common.Color(0.2,0.2,0.2,1)
   self.lineColor = lost.common.Color(0.5,0.5,0.5,1)
   self.header =

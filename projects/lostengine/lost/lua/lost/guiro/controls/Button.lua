@@ -22,7 +22,7 @@ Button.ButtonLeave   = "BUTTON_LEAVE"
 class "lost.guiro.controls.Button.ButtonEvent" (lost.event.Event)
 Button.ButtonEvent = _G["lost.guiro.controls.Button.ButtonEvent"]
 
-function Button.ButtonEvent:__init(which, pos) super(which)
+function Button.ButtonEvent:__init(which, pos) lost.event.Event.__init(self, which)
   self.pos = pos
 end
 
@@ -39,7 +39,7 @@ Button.State =
 --[[
     constructor
   ]]
-function Button:__init() super()
+function Button:__init() lost.guiro.controls.Control.__init(self)
   self.state = Button.State.released
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:handleInput(event) end)

@@ -8,7 +8,7 @@ require("lost.guiro.Renderer")
 class "lost.guiro.themes.default.renderers.Image" (lost.guiro.Renderer)
 Image = _G["lost.guiro.themes.default.renderers.Image"]
 
-function Image:__init() super()
+function Image:__init() lost.guiro.Renderer.__init(self)
 end
 
 function Image:render(context, image, style)

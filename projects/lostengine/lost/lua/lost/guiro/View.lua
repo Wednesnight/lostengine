@@ -17,7 +17,7 @@ View.bases = { "View" }
 --[[ 
     constructor
   ]]
-function View:__init() super()
+function View:__init() lost.event.EventDispatcher.__init(self)
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
   self.isView = true
