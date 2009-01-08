@@ -44,7 +44,7 @@ namespace lost
     }
 
     // TODO: getApplicationFilename() not implemented
-    std::string getApplicationFilename( bool excludeExtension = false )
+    std::string getApplicationFilename( bool excludeExtension )
     {
       std::string result;
       return result;
