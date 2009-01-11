@@ -1,18 +1,35 @@
 #include "lost/common/Logger.h"
+#include "lost/platform/Platform.h"
 
-static unsigned logLevel = lost::common::log_info | lost::common::log_warning | lost::common::log_error;
-
-SpecializedLogger dout( (logLevel & lost::common::log_debug)   ? lost::common::log_debug   : lost::common::log_none );
-SpecializedLogger eout( (logLevel & lost::common::log_error)   ? lost::common::log_error   : lost::common::log_none );
-SpecializedLogger iout( (logLevel & lost::common::log_info)    ? lost::common::log_info    : lost::common::log_none );
-SpecializedLogger wout( (logLevel & lost::common::log_warning) ? lost::common::log_warning : lost::common::log_none );
-
-void LogLevel( unsigned level )
+namespace lost
 {
-  logLevel = level;
+  namespace common
+  {
+		namespace Logger
+		{			
 
-  dout.level = dout.currentLevel = (logLevel & lost::common::log_debug)   ? lost::common::log_debug   : lost::common::log_none;
-  eout.level = eout.currentLevel = (logLevel & lost::common::log_error)   ? lost::common::log_error   : lost::common::log_none;
-  iout.level = iout.currentLevel = (logLevel & lost::common::log_info)    ? lost::common::log_info    : lost::common::log_none;
-  wout.level = wout.currentLevel = (logLevel & lost::common::log_warning) ? lost::common::log_warning : lost::common::log_none;
+std::string fileNameFromFullPath(const char* fullPath)
+{
+	const char* p = strrchr(fullPath, '/'); // FIXME: this might fail on windows due to different separators, we might need to use something like boost::fs here
+	if(p)
+	{
+		return std::string(p+1); // add 1 to pointer to remove leading '/'
+	}
+	else
+	{
+		return std::string(fullPath);
+	}
+}
+
+void logMessage(const std::string& inLevel, const std::string& inLocation, const std::string& inMsg)
+{
+	std::string t;
+	std::cout << lost::platform::currentTimeFormat( t) << " \t " <<
+			inLevel                   << " \t " <<
+			inLocation                   << " \t " <<
+			inMsg                                       << std::endl;	
+}
+
+		}
+  }
 }

@@ -26,22 +26,22 @@ namespace lost
 
     void debug(luabind::object obj)
     {
-      dout << "(Lua) " << luabind_tostring(obj) << lendl;
+			lost::common::Logger::logMessage("DEBUG", "(Lua)", luabind_tostring(obj));
     }
 
     void info(luabind::object obj)
     {
-      iout << "(Lua) " << luabind_tostring(obj) << lendl;
+			lost::common::Logger::logMessage("INFO", "(Lua)", luabind_tostring(obj));
     }
 
     void warn(luabind::object obj)
     {
-      wout << "(Lua) " << luabind_tostring(obj) << lendl;
+			lost::common::Logger::logMessage("WARNING", "(Lua)", luabind_tostring(obj));
     }
 
     void error(luabind::object obj)
     {
-      eout << "(Lua) " << luabind_tostring(obj) << lendl;
+			lost::common::Logger::logMessage("ERROR", "(Lua)", luabind_tostring(obj));
     }
   }
 }

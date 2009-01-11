@@ -10,7 +10,6 @@ using namespace lost::event;
 
 int main(int argn, char** args)
 {
-  LogLevel( log_all );
   try
   {
     Application app;
