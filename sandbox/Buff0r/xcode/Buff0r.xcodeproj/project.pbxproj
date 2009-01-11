@@ -126,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0E48890E5E3E9100B5EBF1 /* libLostEngine.a */,
-				EA0E488B0E5E3E9100B5EBF1 /* libLostEngine-iphone.a */,
-				EA0E488D0E5E3E9100B5EBF1 /* libLostEngine-simulator.a */,
+				EA0E488B0E5E3E9100B5EBF1 /* libLostEngine.a */,
+				EA0E488D0E5E3E9100B5EBF1 /* libLostEngine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -194,17 +194,17 @@
 			remoteRef = EA0E48880E5E3E9100B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E488B0E5E3E9100B5EBF1 /* libLostEngine-iphone.a */ = {
+		EA0E488B0E5E3E9100B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E488A0E5E3E9100B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E488D0E5E3E9100B5EBF1 /* libLostEngine-simulator.a */ = {
+		EA0E488D0E5E3E9100B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E488C0E5E3E9100B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -311,7 +311,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;

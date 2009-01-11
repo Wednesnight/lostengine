@@ -193,6 +193,28 @@ struct Buff0r
     }
   }
 
+// lobotony: copied from freeglut
+void  glutSolidCube( GLdouble dSize )
+{
+    double size = dSize * 0.5;
+
+#   define V(a,b,c) glVertex3d( a size, b size, c size );
+#   define NN(a,b,c) glNormal3d( a, b, c );
+
+    /* PWO: Again, I dared to convert the code to use macros... */
+    glBegin( GL_QUADS );
+        NN( 1.0, 0.0, 0.0); V(+,-,+); V(+,-,-); V(+,+,-); V(+,+,+);
+        NN( 0.0, 1.0, 0.0); V(+,+,+); V(+,+,-); V(-,+,-); V(-,+,+);
+        NN( 0.0, 0.0, 1.0); V(+,+,+); V(-,+,+); V(-,-,+); V(+,-,+);
+        NN(-1.0, 0.0, 0.0); V(-,-,+); V(-,+,+); V(-,+,-); V(-,-,-);
+        NN( 0.0,-1.0, 0.0); V(-,-,+); V(-,-,-); V(+,-,-); V(+,-,+);
+        NN( 0.0, 0.0,-1.0); V(-,-,-); V(-,+,-); V(+,+,-); V(+,-,-);
+    glEnd();
+
+#   undef V
+#   undef NN
+}
+
   void redraw(shared_ptr<TimerEvent> event)
   {
     // enable framebuffer and set viewport
