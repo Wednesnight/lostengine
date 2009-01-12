@@ -49,7 +49,7 @@ function UserInterface:initialize(context)
 
     self.depthBuffer = lost.gl.RenderBuffer()
     self.depthBuffer:enable()
-    self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT24, self.colorTexture.width, self.colorTexture.height)
+    self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT, self.colorTexture.width, self.colorTexture.height)
     self.renderBuffer:attachDepth(self.depthBuffer)
     self.depthBuffer:disable()
 
@@ -162,7 +162,7 @@ function UserInterface:updateLayout(forceUpdate)
 
       self.depthBuffer = lost.gl.RenderBuffer()
       self.depthBuffer:enable()
-      self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT16, self.colorTexture.width, self.colorTexture.height)
+      self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT, self.colorTexture.width, self.colorTexture.height)
       self.renderBuffer:attachDepth(self.depthBuffer)
       self.depthBuffer:disable()
 
