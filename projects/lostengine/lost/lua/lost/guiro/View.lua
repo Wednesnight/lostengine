@@ -76,10 +76,13 @@ end
 --[[ 
     inserts child into self.children and sets child.parent to self
   ]]
-function View:appendChild(child)
+function View:appendChild(child, pos)
+  if (pos == nil) then
+    pos = table.maxn(self.children) + 1
+  end
   if (child.id) then
     if (self(child.id) == nil) then
-      table.insert(self.children, child)
+      table.insert(self.children, pos, child)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
@@ -95,7 +98,7 @@ end
 function View:removeChild(child)
   local idx = 1
   for k,view in next,self.children do
-    if (view == child) then
+    if rawequal(view, child) then
       table.remove(self.children, idx)
       child:setParent(nil)
       break

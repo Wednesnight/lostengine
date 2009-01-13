@@ -40,12 +40,22 @@ function Button:render(context, button, style)
     button:needsRedraw()
   end
 
-  if button.images and button.images[button.state] then
-    if not button.images[button.state].parent then
-      button:appendChild(button.images[button.state])
+  if self.currentImage then
+    if not button.images or not rawequal(self.currentImage, button.images[button.state]) then
+      button:removeChild(self.currentImage)
+      self.currentImage = nil
     end
-    button.images[button.state]:color(self.color)
-    button.images[button.state]:render(context)
+  end
+  if button.images and button.images[button.state] then
+    if not rawequal(self.currentImage, button.images[button.state]) then
+      self.currentImage = button.images[button.state]
+    end
+    if not self.currentImage.parent then
+      button:appendChild(self.currentImage, 1)
+      self.currentImage:needsLayout()
+      self.currentImage:needsRedraw()
+    end
+    self.currentImage:color(self.color)
   else
     context:setColor(self.color)
     context:drawRectFilled(globalRect)

@@ -5,11 +5,6 @@
 #include <iostream>
 #include <sstream>
 
-#define __CALLER_FILE__ __FILE__ << ": "
-#define __CALLER_FUNCTION__ __FUNCTION__ << "(): "
-#define __CALLER_INFO__ __FILE__ << ": " << __FUNCTION__ << "(): "
-#define __PRETTY_CALLER_INFO__ __FILE__ << ": " << __PRETTY_FUNCTION__ << ": "
-
 namespace lost
 {
   namespace common
@@ -26,11 +21,11 @@ namespace lost
 
 #define LOGLOG(m, s, fl) \
 { \
-	std::ostringstream msg; \
-	msg << s; \
-	std::ostringstream loc; \
-	loc << fl; \
-	lost::common::Logger::logMessage(m, loc.str(), msg.str()); \
+	std::ostringstream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg; \
+	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg << s; \
+	std::ostringstream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc; \
+	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc << fl; \
+	lost::common::Logger::logMessage(m, LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc.str(), LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg.str()); \
 }
 
 #define DOUT(s) LOGLOG("DEBUG", s, LOST_COMMON_LOGGER_FILE_LINE)

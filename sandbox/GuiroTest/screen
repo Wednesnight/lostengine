@@ -163,7 +163,7 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xright(), g.ytop({abs=-30}), g.wabs(80), g.habs(80)),
         bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
         frameSize = lost.math.Rect(0, 0, 153, 184),
-        interval = 0.025,
+        interval = 0.1,
         stretch = true
       },
       

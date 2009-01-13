@@ -25,6 +25,7 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
         text = "funky window"
       },
+
 --[[
       guiro:Button
       {
@@ -33,7 +34,7 @@ screen = guiro:Screen
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = g.Bounds(g.xabs(10), g.yabs(15), g.wabs(50), g.habs(40)),
+          bounds = g.Bounds(g.xabs(7), g.yabs(15), g.wabs(50), g.habs(40)),
           text = "Small"
         },
         images =
@@ -65,7 +66,7 @@ screen = guiro:Screen
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = g.Bounds(g.xabs(30), g.yabs(20), g.wabs(100), g.habs(50)),
+          bounds = g.Bounds(g.xabs(25), g.yabs(20), g.wabs(100), g.habs(50)),
           text = "Medium"
         },
         images =
@@ -91,6 +92,7 @@ screen = guiro:Screen
         }
       },
 ]]
+
       guiro:Slider
       {
         id = "slider",

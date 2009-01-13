@@ -72,7 +72,7 @@ namespace lost
           lua_getinfo(state, "Sln", &debug);
           msg << offset << "-> " << debug.what;
           if (debug.namewhat != "") msg << " " << debug.namewhat;
-          else msg << " unknown";
+            else msg << " unknown";
           if (debug.name != 0) msg << " " << debug.name;
           if (debug.currentline >= 0) msg  << " (" << getScriptSource(debug) << ", line " << debug.currentline << ")";
           
