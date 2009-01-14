@@ -1,1 +1,17 @@
-print("hello")
+require("lost.application.Application")
+
+function lost.application.Application:configure(event)
+  log.debug("configure")
+end
+
+function lost.application.Application:init(event)
+  log.debug("init")
+end
+
+function lost.application.Application:run(event)
+  log.debug("run")
+end
+
+function lost.application.Application:quit(event)
+  log.debug("quit")
+end
