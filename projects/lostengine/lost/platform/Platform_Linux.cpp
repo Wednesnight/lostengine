@@ -25,10 +25,9 @@ namespace lost
     // returns current time in microseconds
     double currentTimeMicroSeconds()
     {
-      struct timezone tz;
       struct timeval tv;
 
-      gettimeofday(&tv, &tz);
+      gettimeofday(&tv, NULL);
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
