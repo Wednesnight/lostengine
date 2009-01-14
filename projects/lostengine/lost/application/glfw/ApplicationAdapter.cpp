@@ -79,23 +79,43 @@ void ApplicationAdapter::init(const shared_ptr<DisplayAttributes>& displayAttrib
   glfwSetWindowSizeCallback(glfwWindowSizeCallback);    
 }
 
+void ApplicationAdapter::processEvents(double timeoutInSeconds)
+{ /* synchronized / locked
+  eventMutex.aquire();
+  ...
+  eventMutex.release();
+  */
+}
+
 void ApplicationAdapter::run()
 {
   state->running = true;
-  double lastTime = glfwGetTime();
+
+  // start the main loop
+  if(mainLoop)
+  {
+    mainLoopThread.reset(new boost::thread(boost::bind(&lost::application::MainLoop::run, mainLoop.get())));
+  }
+  else
+  {
+    WOUT("couldn't start mainLoopThread because no mainLoop function was provided");
+  }
+
   while(state->running)
   {
-    double now = glfwGetTime();
-    double delta = now - lastTime;
-    lastTime = now;
-    state->timerManager.updateTimers(delta);
-    glfwPollEvents();
-    glfwSleep(.001); // don't eat CPU time with a pure spin wait, sleep in intervals // FIXME: make this configurable?
+
+    { /* synchronized / locked
+      eventMutex.aquire();*/
+      glfwPollEvents();/*
+      eventMutex.release();
+      */
+    }
+
     if(!glfwGetWindowParam(GLFW_OPENED))
     {
       state->running = false;
     }
-  }  
+  }
 }
 
 void ApplicationAdapter::quit()

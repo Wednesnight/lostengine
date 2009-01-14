@@ -23,10 +23,10 @@ namespace application
 {
   Application* appInstance = NULL;
   
-  /** Constructs application 
-   *
-   */
-  Application::Application()
+//    app.mainLoop = mainLoop;
+//    app.addEventListener(lost::application::ApplicationEvent::QUIT(), quitEventHandler);
+    
+  void Application::init()
   {
     // make sure the global application pointer is set to a correct value
     if(appInstance != NULL)
@@ -36,7 +36,7 @@ namespace application
     appInstance = this;
     adapter.reset(new ApplicationAdapter(this));
     displayAttributes.reset(new DisplayAttributes());
-    
+
     loader.reset(new lost::resource::DefaultLoader);// init default resource loader
     interpreter.reset(new lua::State(true, true, true, loader)); // init lua state with resource loader
     lost::lua::bindAll(*interpreter); // bind lostengine lua mappings    
@@ -44,10 +44,27 @@ namespace application
     globals(*interpreter)["lost"]["globals"]                   = newtable(*interpreter); // create globals table
     globals(*interpreter)["lost"]["globals"]["app"]            = this; // map the app itself into the interpreter so scripts can attach to its events
     luabind::globals(*interpreter)["lost"]["globals"]["state"] = interpreter; // map the state itself into the interpreter so scripts can use it
-    
+
     lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
-    
+
     config.reset(new Config(interpreter)); // init config
+  }
+
+  Application::Application()
+  {
+    init();
+  }
+
+  Application::Application(boost::function<void (void)> mainLoopFunc)
+  {
+    mainLoop = boost::shared_ptr<MainLoop>(new FunctorMainLoop(mainLoopFunc));
+    init();
+  }
+  
+  Application::Application(boost::shared_ptr<MainLoop> inMainLoop)
+  {
+    mainLoop = inMainLoop;
+    init();
   }
 
   Application::~Application() {  }
@@ -91,8 +108,15 @@ namespace application
     appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
             
     appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
+    adapter->mainLoop = mainLoop;
+    boost::function<void (boost::shared_ptr<event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
+    addEventListener(ApplicationEvent::QUIT(), f);
     adapter->run();
     appEvent->type = ApplicationEvent::QUIT();dispatchEvent(appEvent);
+    if(adapter->mainLoopThread)
+    {
+      adapter->mainLoopThread->join();
+    }
     EventDispatcher::clear();
     adapter->terminate();    
   }
