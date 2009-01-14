@@ -9,6 +9,8 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/Config.h"
 #include "lost/gl/Context.h"
+#include "lost/application/MainLoop.h"
+#include <boost/function.hpp>
 
 struct ApplicationAdapter;
 
@@ -21,6 +23,8 @@ namespace lost
     {
     public:
       Application();
+      Application(boost::function<void (void)> mainLoopFunc);
+      Application(boost::shared_ptr<MainLoop> inMainLoop);
       virtual ~Application();
 
       void run();
@@ -38,7 +42,10 @@ namespace lost
 
       virtual void dispatchEvent(lost::event::EventPtr event);
       
+      boost::shared_ptr<MainLoop> mainLoop; 
+
     private:
+      void init();
       boost::shared_ptr<ApplicationAdapter> adapter;
       
     };

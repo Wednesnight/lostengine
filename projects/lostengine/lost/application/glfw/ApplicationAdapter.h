@@ -3,11 +3,13 @@
 
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/DisplayAttributes.h"
+#include <boost/thread/thread.hpp>
+#include "lost/application/MainLoop.h"
 
 struct ApplicationAdapterState;
 
 // this is the interface to the plattform specific part of the application.
-// each platform needs to implement a suitable ApplicationAdapter.cpp and link withe the project
+// each platform needs to implement a suitable ApplicationAdapter.cpp and link with the project
 struct ApplicationAdapter
 {
   lost::event::EventDispatcher* target;
@@ -20,6 +22,11 @@ struct ApplicationAdapter
   void swapBuffers(); // tell the current gl context to flip buffers
   void quit(); // quits the main loop
   void terminate(); // call this to shut the adapter down whe your application has quit
+
+  void processEvents(double timeoutInSeconds); // call this to signal queued events
+
+  boost::shared_ptr<lost::application::MainLoop> mainLoop; 
+  boost::shared_ptr<boost::thread> mainLoopThread;
 
   boost::shared_ptr<ApplicationAdapterState> state;
 };
