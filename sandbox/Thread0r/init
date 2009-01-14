@@ -6,6 +6,7 @@ end
 
 function lost.application.Application:init(event)
   log.debug("init")
+  self:setMainLoop(function() log.debug("asdasd") end)
 end
 
 function lost.application.Application:run(event)
