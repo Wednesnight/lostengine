@@ -33,6 +33,7 @@ void glfwWindowSizeCallback(int width, int height);
 void glfwMouseMoveCallback( int x, int y );
 void glfwMouseButtonCallback( int button, int action );
 void glfwKeyCallback( int key, int action, int repeat );
+int glfwWindowCloseCallback();
 
 
 ApplicationAdapter::ApplicationAdapter(EventDispatcher* inTarget)
@@ -76,7 +77,8 @@ void ApplicationAdapter::init(const shared_ptr<DisplayAttributes>& displayAttrib
   glfwSetKeyCallback( glfwKeyCallback );
   glfwSetMousePosCallback( glfwMouseMoveCallback );
   glfwSetMouseButtonCallback( glfwMouseButtonCallback );
-  glfwSetWindowSizeCallback(glfwWindowSizeCallback);    
+  glfwSetWindowSizeCallback(glfwWindowSizeCallback);
+  glfwSetWindowCloseCallback(glfwWindowCloseCallback);
 }
 
 void ApplicationAdapter::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
@@ -117,10 +119,6 @@ void ApplicationAdapter::run()
   while(state->running)
   {
     glfwPollEvents();
-    if(!glfwGetWindowParam(GLFW_OPENED))
-    {
-      state->running = false;
-    }
   }
 }
 
@@ -219,6 +217,17 @@ void glfwWindowSizeCallback(int width, int height)
   ev->height = height;
   //adapterInstance->target->dispatchEvent(ev);    
   adapterInstance->queueEvent(ev);
+}
+
+int glfwWindowCloseCallback()
+{
+  int result = GL_TRUE;
+  if (adapterInstance->state->running)
+  {
+    adapterInstance->state->running = false;
+    result = GL_FALSE;
+  }
+  return result;
 }
 
 void ApplicationAdapter::swapBuffers()
