@@ -19,7 +19,8 @@ namespace lost
           def("isWindows", &isWindows),
           def("isMac", &isMac),
           def("isLinux", &isLinux),
-          def("isIPhone", &isIPhone)
+          def("isIPhone", &isIPhone),
+          def("currentTimeSeconds", &currentTimeSeconds)
         ]
       ];
     }
