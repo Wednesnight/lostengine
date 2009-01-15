@@ -48,6 +48,7 @@ namespace lost
            .def("quit", &Application::quit)
            .def("swapBuffers", &Application::swapBuffers)
            .def("setMainLoop", &setMainLoop)
+           .def("processEvents", &Application::processEvents)
            .def_readonly("loader", &Application::loader)
            .def_readonly("displayAttributes", &Application::displayAttributes)
            .def_readonly("context", &Application::context)

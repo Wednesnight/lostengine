@@ -23,7 +23,10 @@ struct ApplicationAdapter
   void quit(); // quits the main loop
   void terminate(); // call this to shut the adapter down whe your application has quit
 
-  void processEvents(double timeoutInSeconds); // call this to signal queued events
+  boost::mutex queueMutex;
+  boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
+  void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
+  void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
 
   boost::shared_ptr<lost::application::MainLoop> mainLoop; 
   boost::shared_ptr<boost::thread> mainLoopThread;

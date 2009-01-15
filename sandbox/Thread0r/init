@@ -6,13 +6,18 @@ end
 
 function lost.application.Application:init(event)
   log.debug("init")
-  self:setMainLoop(function() log.debug("asdasd") end)
+  self:setMainLoop(function() self:mainLoop() end)
 end
 
 function lost.application.Application:run(event)
   log.debug("run")
 end
 
-function lost.application.Application:quit(event)
-  log.debug("quit")
+function lost.application.Application:exit(event)
+  log.debug("exit")
+end
+
+function lost.application.Application:mainLoop()
+  log.debug("asdasd")
+  self:processEvents(0)
 end
