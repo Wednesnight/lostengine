@@ -70,8 +70,10 @@ function lost.application.Application:init(event)
   else
     self.config.renderFrequency = 1/60
   end
-  lost.globals.timer = lost.application.Timer("luarender", self.config.renderFrequency)
-  lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
+--  lost.globals.timer = lost.application.Timer("luarender", self.config.renderFrequency)
+--  lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
+  self.passedSec = os.clock()
+  self:setMainLoop(function() self:mainLoop(os.clock() - self.passedSec) self.passedSec = os.clock() end)
 end
 
 function lost.application.Application:run(event)
@@ -112,9 +114,7 @@ function lost.application.Application:keyHandler(event)
   end
 end
 
-function lost.application.Application:renderHandler(event)
-  local timerEvent = lost.application.TimerEvent.cast(event)
-
+function lost.application.Application:mainLoop(passedSec)
   self.context:pushState(self.renderState)
   self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
 
@@ -125,7 +125,7 @@ function lost.application.Application:renderHandler(event)
   controls.screen:render(self.context)
 
   gl.glLoadIdentity()
-  controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 1, timerEvent.passedSec)
+  controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 1, passedSec)
 
   self.context:popState()
   self:swapBuffers()
