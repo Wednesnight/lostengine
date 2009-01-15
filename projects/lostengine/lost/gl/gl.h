@@ -31,6 +31,8 @@
       #include <OpenGL/gl.h>
       #include <OpenGL/glext.h>
 //      #include <GLUT/glut.h>
+      #include <OpenGL/CGLTypes.h>
+      #include <OpenGL/CGLCurrent.h>
     #endif
   // FIXME: do we really need to include GLFW here?
     #include "GL/glfw.h"

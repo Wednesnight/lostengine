@@ -27,6 +27,7 @@ std::string Context::getVersion()
 
 void Context::setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState)
 {
+  CGLSetCurrentContext(context);
 #define SET_STATE_BOOL(which, current, new, attribute)\
   if (new->attribute != current->attribute)\
   {\
@@ -67,6 +68,8 @@ Context::Context(boost::shared_ptr<common::DisplayAttributes> inDisplayAttribute
 : displayAttributes(inDisplayAttributes)
 {
   DOUT("lost::gl::Context::Context()");
+
+  context = CGLGetCurrentContext();
 
   // initialize basic state
   stateStack.push_back(newState());
