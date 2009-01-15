@@ -2275,6 +2275,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D8E0F14EDEA00D7C8B4 /* global-debug.xcconfig */;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"FT_CONFIG_H=\"<freetype/config/ftconfig.h>\"",
+					FT2_BUILD_LIBRARY,
+					__STDC_CONSTANT_MACROS,
+					PROFILER_ENABLED,
+				);
 				PRODUCT_NAME = LostEngine;
 			};
 			name = Debug;

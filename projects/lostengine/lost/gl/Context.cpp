@@ -11,6 +11,7 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/lgl/lglu.h"
 #include "lost/gl/Mesh.h"
+#include "lost/common/Profiler.h"
 
 using namespace lost::bitmap;
 using namespace lost::math;
@@ -27,13 +28,15 @@ namespace lost
 
     void Context::setState(const boost::shared_ptr<State>& oldState, const boost::shared_ptr<State>& newState)
     {
-    #define SET_STATE_BOOL(which, current, new, attribute)\
+      PROFILE_METHOD();
+
+      #define SET_STATE_BOOL(which, current, new, attribute)\
       if (new->attribute != current->attribute)\
       {\
         (new->attribute) ? glEnable(which) : glDisable(which);GLDEBUG;\
       }
       
-    #define SET_CLIENT_STATE_BOOL(which, current, new, attribute)\
+      #define SET_CLIENT_STATE_BOOL(which, current, new, attribute)\
       if (new->attribute != current->attribute)\
       {\
         (new->attribute) ? glEnableClientState(which) : glDisableClientState(which);GLDEBUG;\
@@ -67,6 +70,7 @@ namespace lost
     : glContext(lglGetCurrentContext()),
       displayAttributes(inDisplayAttributes)
     {
+      PROFILE_METHOD();
       DOUT("lost::gl::Context::Context()");
 
       // initialize basic state
@@ -79,10 +83,12 @@ namespace lost
 
     Context::~Context()
     {
+      PROFILE_METHOD();
     }
 
     boost::shared_ptr<State> Context::newState()
     {
+      PROFILE_METHOD();
       boost::shared_ptr<State> result(new State());
       
       glGetBooleanv(GL_ALPHA_TEST, (GLboolean*)&(result->alphaTest));GLDEBUG_THROW;
@@ -114,11 +120,13 @@ namespace lost
           
     boost::shared_ptr<State> Context::copyState()
     {
+      PROFILE_METHOD();
       return boost::shared_ptr<State>(new State(*(stateStack.back().get())));
     }
           
     void Context::pushState(const boost::shared_ptr<State>& inState)
     {
+      PROFILE_METHOD();
       if (inState)
       {
         setState(stateStack.back(), inState);
@@ -128,6 +136,7 @@ namespace lost
 
     void Context::popState()
     {
+      PROFILE_METHOD();
       if (stateStack.size() > 1)
       {
         boost::shared_ptr<State> oldState = stateStack.back();
@@ -138,17 +147,20 @@ namespace lost
 
     void Context::clear(GLbitfield flags)
     {
+      PROFILE_METHOD();
       glClear(flags);GLDEBUG;
     }
 
     void Context::pushViewport(const lost::math::Rect& viewport)
     {
+      PROFILE_METHOD();
       if (viewportStack.back() != viewport) glViewport((GLsizei)viewport.x, (GLsizei)viewport.y, (GLint)viewport.width, (GLint)viewport.height);GLDEBUG;
       viewportStack.push_back(viewport);
     }
 
     void Context::popViewport()
     {
+      PROFILE_METHOD();
       if (viewportStack.size() > 1)
       {
         viewportStack.pop_back();
@@ -159,6 +171,7 @@ namespace lost
 
     void Context::set2DProjection(const lost::math::Vec2& offset, const lost::math::Vec2& dimension)
     {
+      PROFILE_METHOD();
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
       lgluOrtho2D(offset.x, dimension.width, offset.y, dimension.height);
@@ -170,6 +183,7 @@ namespace lost
                                   const float& fovy,
                                   const lost::math::Vec2& depth)
     {
+      PROFILE_METHOD();
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
       double screenAspectRatio = (double)displayAttributes->width/(double)displayAttributes->height;
@@ -182,6 +196,7 @@ namespace lost
 
     void Context::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -208,6 +223,7 @@ namespace lost
 
     void Context::drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -236,11 +252,13 @@ namespace lost
 
     void Context::setColor(const lost::common::Color& col)
     {
+      PROFILE_METHOD();
       glColor4f(col.fv[0], col.fv[1], col.fv[2], col.fv[3]); // OpenGL ES compatible
     }
 
     void Context::drawPoint(const lost::math::Vec2& point)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -264,6 +282,7 @@ namespace lost
 
     void Context::drawRectOutline(const lost::math::Rect& rect)
     {
+      PROFILE_METHOD();
       // FIXME: bottomLeft is missing 1 pixel, this is just a workaround
       Vec2 bottomLeft = rect.bottomLeft();
       bottomLeft.x -= 1;
@@ -275,6 +294,7 @@ namespace lost
 
     void Context::drawRectFilled(const lost::math::Rect& rect)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -314,6 +334,7 @@ namespace lost
                                    const lost::math::Vec2& topRight,
                                    bool flip)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -360,11 +381,13 @@ namespace lost
                                    boost::shared_ptr<const lost::gl::Texture> tex,
                                    bool flip)
     {
+      PROFILE_METHOD();
       drawRectTextured(rect, tex, Vec2(0,0), Vec2(1,0), Vec2(0,1), Vec2(1,1), flip);
     }
 
     void Context::drawMesh2D(const boost::shared_ptr<Mesh2D>& mesh, GLenum mode)
     {
+      PROFILE_METHOD();
       static boost::shared_ptr<State> newState;
       if (!newState)
       {
@@ -391,6 +414,7 @@ namespace lost
       
     void Context::drawAABB(const lost::math::AABB& box)
     {
+      PROFILE_METHOD();
       drawLine(math::Vec3(box.origin.x, box.origin.y, box.origin.z), math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z));    
       drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y, box.origin.z), math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z));
       drawLine(math::Vec3(box.origin.x + box.size.x, box.origin.y + box.size.y, box.origin.z), math::Vec3(box.origin.x, box.origin.y + box.size.y, box.origin.z));    
@@ -407,6 +431,7 @@ namespace lost
 
     void Context::drawAxes(const lost::math::Vec3& length)
     {
+      PROFILE_METHOD();
       // Draw the positive side of the lines x,y,z
       setColor(lost::common::greenColor);         // Green for x axis
       drawLine(math::Vec3(0.0f, 0.0f, 0.0f), math::Vec3(length.x, 0.0f, 0.0f));
@@ -452,6 +477,7 @@ namespace lost
 
     bool Context::makeCurrent()
     {
+      PROFILE_METHOD();
       return lglSetCurrentContext(glContext);
     }
 
