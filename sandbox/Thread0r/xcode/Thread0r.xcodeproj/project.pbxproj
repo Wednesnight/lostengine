@@ -60,9 +60,9 @@
 		EAA785FF0F1E87B70038EF44 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAA786000F1E87B70038EF44 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EAA786010F1E87B70038EF44 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		EAA7860C0F1E880F0038EF44 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = "<group>"; };
-		EAA7860D0F1E880F0038EF44 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = "<group>"; };
-		EAA7860E0F1E880F0038EF44 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = "<group>"; };
+		EAA7860C0F1E880F0038EF44 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-debug.xcconfig"; sourceTree = "<group>"; };
+		EAA7860D0F1E880F0038EF44 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-release.xcconfig"; sourceTree = "<group>"; };
+		EAA7860E0F1E880F0038EF44 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = global.xcconfig; sourceTree = "<group>"; };
 		EAA7861B0F1E88A00038EF44 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -95,9 +95,6 @@
 			children = (
 				EAA785E90F1E876A0038EF44 /* main.cpp */,
 				EAA7860B0F1E880F0038EF44 /* xcconfig */,
-				EAA7860C0F1E880F0038EF44 /* global-debug.xcconfig */,
-				EAA7860D0F1E880F0038EF44 /* global-release.xcconfig */,
-				EAA7860E0F1E880F0038EF44 /* global.xcconfig */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -130,6 +127,9 @@
 		EAA7860B0F1E880F0038EF44 /* xcconfig */ = {
 			isa = PBXGroup;
 			children = (
+				EAA7860C0F1E880F0038EF44 /* global-debug.xcconfig */,
+				EAA7860D0F1E880F0038EF44 /* global-release.xcconfig */,
+				EAA7860E0F1E880F0038EF44 /* global.xcconfig */,
 			);
 			name = xcconfig;
 			path = ../../../projects/lostengine/xcode/xcconfig;

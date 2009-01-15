@@ -41,6 +41,7 @@ namespace lost
       void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
 
       virtual void dispatchEvent(lost::event::EventPtr event);
+      void processEvents(const double& timeoutInSeconds = 0);
       
       boost::shared_ptr<MainLoop> mainLoop; 
 
