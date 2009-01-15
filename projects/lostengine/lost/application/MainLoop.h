@@ -5,6 +5,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/event/Event.h"
 #include "lost/common/Logger.h"
+#include "lost/gl/Context.h"
 
 namespace lost
 {
@@ -13,8 +14,10 @@ namespace lost
     struct MainLoop
     {
       bool running;
-
-      MainLoop()
+      boost::shared_ptr<gl::Context> context;
+      
+      MainLoop(const boost::shared_ptr<gl::Context>& inContext)
+      : context(inContext)
       {
       }
 
@@ -29,6 +32,7 @@ namespace lost
 
       void run()
       {
+        context->makeCurrent();
         running = true;
         DOUT("starting mainLoop");
         while(running)
@@ -44,7 +48,11 @@ namespace lost
     {
       boost::function<void (void)> func;
 
-      FunctorMainLoop(const boost::function<void (void)>& f) : func(f) {}
+      FunctorMainLoop(const boost::shared_ptr<gl::Context>& inContext, const boost::function<void (void)>& f)
+      : MainLoop(inContext),
+        func(f)
+      {
+      }
 
       virtual void process()
       {

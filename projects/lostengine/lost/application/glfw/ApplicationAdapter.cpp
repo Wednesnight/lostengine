@@ -81,41 +81,9 @@ void ApplicationAdapter::init(const shared_ptr<DisplayAttributes>& displayAttrib
   glfwSetWindowCloseCallback(glfwWindowCloseCallback);
 }
 
-void ApplicationAdapter::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
-{
-  queueMutex.lock();
-  if (!eventQueue) eventQueue.reset(new std::list<boost::shared_ptr<lost::event::Event> >());
-  eventQueue->push_back(event);
-  queueMutex.unlock();
-}
-
-void ApplicationAdapter::processEvents(const double& timeoutInSeconds)
-{
-  if (eventQueue)
-  {
-    boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > currentQueue = eventQueue;
-    queueMutex.lock();
-    eventQueue.reset();
-    queueMutex.unlock();
-    for (std::list<boost::shared_ptr<lost::event::Event> >::iterator idx = currentQueue->begin(); idx != currentQueue->end(); ++idx)
-      target->dispatchEvent(*idx);
-  }
-}
-
 void ApplicationAdapter::run()
 {
   state->running = true;
-
-  // start the main loop
-  if(mainLoop)
-  {
-    mainLoopThread.reset(new boost::thread(boost::bind(&lost::application::MainLoop::run, mainLoop.get())));
-  }
-  else
-  {
-    WOUT("couldn't start mainLoopThread because no mainLoop function was provided");
-  }
-
   while(state->running)
   {
     glfwPollEvents();
@@ -168,7 +136,7 @@ void glfwKeyCallback( int keysym, int pressed, int repeat )
   ev->pressed = (pressed != 0);
   ev->repeat = (repeat != 0);
   //adapterInstance->target->dispatchEvent(ev);
-  adapterInstance->queueEvent(ev);
+  adapterInstance->eventQueueFunc(ev);
 }
 
 void glfwMouseMoveCallback( int x, int y )
@@ -183,7 +151,7 @@ void glfwMouseMoveCallback( int x, int y )
   if (glfwGetMouseButton(GLFW_MOUSE_BUTTON_3)) ev->button += MB_MIDDLE;
   ev->pressed = glfwGetMouseButton(GLFW_MOUSE_BUTTON_1) || glfwGetMouseButton(GLFW_MOUSE_BUTTON_2) || glfwGetMouseButton(GLFW_MOUSE_BUTTON_3);
   //adapterInstance->target->dispatchEvent(ev);
-  adapterInstance->queueEvent(ev);
+  adapterInstance->eventQueueFunc(ev);
 }
 
 void glfwMouseButtonCallback( int button, int action )
@@ -206,7 +174,7 @@ void glfwMouseButtonCallback( int button, int action )
         : MB_UNKNOWN));
   ev->pressed = pressed;
   //adapterInstance->target->dispatchEvent(ev);
-  adapterInstance->queueEvent(ev);
+  adapterInstance->eventQueueFunc(ev);
 }
 
 void glfwWindowSizeCallback(int width, int height)
@@ -216,7 +184,7 @@ void glfwWindowSizeCallback(int width, int height)
   ev->width = width;
   ev->height = height;
   //adapterInstance->target->dispatchEvent(ev);    
-  adapterInstance->queueEvent(ev);
+  adapterInstance->eventQueueFunc(ev);
 }
 
 int glfwWindowCloseCallback()

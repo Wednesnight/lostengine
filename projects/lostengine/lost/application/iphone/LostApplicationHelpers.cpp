@@ -13,10 +13,11 @@ using namespace lost::application;
 using namespace lost::gl;
 using namespace luabind;
 
+boost::shared_ptr<boost::thread> adapterMainLoopThread;
 
 void lostApplicationHelpers_dispatchEvent(boost::shared_ptr<lost::event::Event> event)
 {
-  appInstance->dispatchEvent(event);
+  appInstance->queueEvent(event);
 }
 
 void lostApplicationHelpers_preinit()
@@ -45,7 +46,7 @@ void lostApplicationHelpers_resize(unsigned short width, unsigned short height)
   shared_ptr<ResizeEvent> event(new ResizeEvent(ResizeEvent::MAIN_WINDOW_RESIZE()));
   event->width = width;
   event->height = height;
-  appInstance->dispatchEvent(event);
+  appInstance->queueEvent(event);
 }
 
 void lostApplicationHelpers_init()
@@ -68,12 +69,22 @@ void lostApplicationHelpers_run()
 {
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
   appEvent->type = ApplicationEvent::RUN();appInstance->dispatchEvent(appEvent);  
+  boost::function<void (boost::shared_ptr<event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, appInstance->mainLoop.get(), _1);
+  appInstance->addEventListener(ApplicationEvent::QUIT(), f);
+  // start the main loop
+  if(appInstance->mainLoop)
+  {
+    adapterMainLoopThread.reset(new boost::thread(boost::bind(&lost::application::MainLoop::run, appInstance->mainLoop.get())));
+  }
 }
 
 void lostApplicationHelpers_quit()
 {
   shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(""));
-  appEvent->type = ApplicationEvent::QUIT();appInstance->dispatchEvent(appEvent);
+  appEvent->type = ApplicationEvent::QUIT();appInstance->queueEvent(appEvent);
+  if(adapterMainLoopThread)
+  {
+    adapterMainLoopThread->join();
+  }
   appInstance->clear();
 }
-

@@ -26,3 +26,12 @@ void* lostApplicationHelpers_linkHelper()
   return (void*)[LostAppController alloc];
 }
 
+void* lglGetCurrentContext()
+{
+  return (void*)[EAGLContext currentContext];
+}
+
+bool lglSetCurrentContext(void* context)
+{
+  return [EAGLContext setCurrentContext:(EAGLContext*)context];
+}

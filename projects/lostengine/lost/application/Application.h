@@ -11,6 +11,8 @@
 #include "lost/gl/Context.h"
 #include "lost/application/MainLoop.h"
 #include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/thread/thread.hpp>
 
 struct ApplicationAdapter;
 
@@ -41,9 +43,14 @@ namespace lost
       void handleResize(boost::shared_ptr<lost::application::ResizeEvent> ev);      
 
       virtual void dispatchEvent(lost::event::EventPtr event);
-      void processEvents(const double& timeoutInSeconds = 0);
+
+      boost::mutex queueMutex;
+      boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
+      void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
+      void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
       
-      boost::shared_ptr<MainLoop> mainLoop; 
+      boost::shared_ptr<MainLoop> mainLoop;
+      boost::shared_ptr<boost::thread> mainLoopThread;
 
     private:
       void init();
