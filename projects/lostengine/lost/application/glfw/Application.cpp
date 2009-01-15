@@ -9,6 +9,7 @@
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
 #include "lost/event/Receive.h"
+#include "lost/common/Profiler.h"
 
 using namespace std;
 using namespace boost;
@@ -131,6 +132,7 @@ namespace lost
 
     void Application::swapBuffers()
     {
+      PROFILE_METHOD();
       adapter->swapBuffers();
     }
 

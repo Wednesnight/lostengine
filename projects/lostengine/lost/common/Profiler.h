@@ -53,7 +53,6 @@ namespace lost
     struct ProfilerStatistics
     {
     private:
-      SpecializedLogger logger;
       ProfilerList      profilers;
       CallCountList     callCountList;
       DurationList      durationList;
