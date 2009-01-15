@@ -72,8 +72,8 @@ function lost.application.Application:init(event)
   end
 --  lost.globals.timer = lost.application.Timer("luarender", self.config.renderFrequency)
 --  lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
-  self.passedSec = os.clock()
-  self:setMainLoop(function() self:mainLoop(os.clock() - self.passedSec) self.passedSec = os.clock() end)
+  self.passedSec = lost.platform.currentTimeSeconds()
+  self:setMainLoop(function() local currentSec = lost.platform.currentTimeSeconds() self:mainLoop(currentSec - self.passedSec) self.passedSec = currentSec end)
 end
 
 function lost.application.Application:run(event)
