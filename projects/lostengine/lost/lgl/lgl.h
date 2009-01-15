@@ -6,8 +6,8 @@
  * OpenGL ES.
  */
 
-#ifndef LOST_GL_LGL_H
-#define LOST_GL_LGL_H
+#ifndef LOST_LGL_LGL_H
+#define LOST_LGL_LGL_H
 
 #include "lost/gl/gl.h"
 
@@ -15,6 +15,32 @@
 # include "lost/lgl/lgl_gles.h"
 #else
 # include "lost/lgl/lgl_gl.h"
+#endif
+
+#if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+void* lglGetCurrentContext();
+#else
+static inline void* lglGetCurrentContext()
+{
+#if defined WIN32
+#elif defined linux
+#elif defined __APPLE__
+  return (void*)CGLGetCurrentContext();
+#endif
+}
+#endif
+
+#if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+bool lglSetCurrentContext(void* context);
+#else
+static inline bool lglSetCurrentContext(void* context)
+{
+#if defined WIN32
+#elif defined linux
+#elif defined __APPLE__
+  return CGLSetCurrentContext((_CGLContextObject*)context);
+#endif
+}
 #endif
 
 #endif

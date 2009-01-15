@@ -54,7 +54,7 @@ namespace lost
 
     Application::Application(boost::function<void (void)> mainLoopFunc)
     {
-      mainLoop = boost::shared_ptr<MainLoop>(new FunctorMainLoop(mainLoopFunc));
+      mainLoop = boost::shared_ptr<MainLoop>(new FunctorMainLoop(context, mainLoopFunc));
       init();
     }
     
@@ -96,6 +96,7 @@ namespace lost
       // connect resize callback to ourselves so we can keep track of the window size in the displayAttributes
       addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Application::handleResize, this, _1)));
 
+      adapter->eventQueueFunc = boost::bind(&Application::queueEvent, this, _1);
       // the gl context will be created here, so resize event needs to be connected before
       adapter->init(displayAttributes);
       // init gl context
@@ -105,24 +106,29 @@ namespace lost
       appEvent->type = ApplicationEvent::INIT();appInstance->dispatchEvent(appEvent);
               
       appEvent->type = ApplicationEvent::RUN();dispatchEvent(appEvent);
-      adapter->mainLoop = mainLoop;
-      boost::function<void (boost::shared_ptr<event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
-      addEventListener(ApplicationEvent::QUIT(), f);
-      adapter->run();
-      appEvent->type = ApplicationEvent::QUIT(); adapter->queueEvent(appEvent);
-      if(adapter->mainLoopThread)
+      // start the main loop
+      if(mainLoop)
       {
-        adapter->mainLoopThread->join();
+        boost::function<void (boost::shared_ptr<event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
+        addEventListener(ApplicationEvent::QUIT(), f);
+        mainLoopThread.reset(new boost::thread(boost::bind(&lost::application::MainLoop::run, mainLoop.get())));
+      }
+      else
+      {
+        WOUT("couldn't start mainLoopThread because no mainLoop function was provided");
+      }
+
+      adapter->run();
+
+      appEvent->type = ApplicationEvent::QUIT(); queueEvent(appEvent);
+      if(mainLoopThread)
+      {
+        mainLoopThread->join();
       }
       EventDispatcher::clear();
       adapter->terminate();    
     }
 
-    void Application::processEvents(const double& timeoutInSeconds)
-    {
-      adapter->processEvents();
-    }
-    
     void Application::swapBuffers()
     {
       adapter->swapBuffers();

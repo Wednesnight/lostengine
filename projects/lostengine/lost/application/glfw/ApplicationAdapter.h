@@ -3,8 +3,7 @@
 
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/DisplayAttributes.h"
-#include <boost/thread/thread.hpp>
-#include "lost/application/MainLoop.h"
+#include <boost/function.hpp>
 
 struct ApplicationAdapterState;
 
@@ -13,6 +12,7 @@ struct ApplicationAdapterState;
 struct ApplicationAdapter
 {
   lost::event::EventDispatcher* target;
+  boost::function<void (const boost::shared_ptr<lost::event::Event>&)> eventQueueFunc;
 
   ApplicationAdapter(lost::event::EventDispatcher* inTarget);
   virtual ~ApplicationAdapter();
@@ -22,14 +22,6 @@ struct ApplicationAdapter
   void swapBuffers(); // tell the current gl context to flip buffers
   void quit(); // quits the main loop
   void terminate(); // call this to shut the adapter down whe your application has quit
-
-  boost::mutex queueMutex;
-  boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
-  void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
-  void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
-
-  boost::shared_ptr<lost::application::MainLoop> mainLoop; 
-  boost::shared_ptr<boost::thread> mainLoopThread;
 
   boost::shared_ptr<ApplicationAdapterState> state;
 };

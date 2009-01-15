@@ -29,7 +29,7 @@ namespace lost
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua main loop"); }
       Application* app = object_cast<Application*>(inApp);
-      app->mainLoop.reset(new FunctorMainLoop(LuaMainLoop(func)));
+      app->mainLoop.reset(new FunctorMainLoop(app->context, LuaMainLoop(func)));
     }
   }
 }

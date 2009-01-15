@@ -20,7 +20,7 @@ namespace lost
     struct Context
     {
     private:
-      CGLContextObj context;
+      void* glContext;
       std::list<boost::shared_ptr<State> > stateStack;
       std::list<lost::math::Rect> viewportStack;
       boost::shared_ptr<common::DisplayAttributes> displayAttributes;
@@ -93,6 +93,9 @@ namespace lost
        */
       void writeScreenshot(const std::string& fullPathName,
                           bool withAlphaChannel=false);
+
+      // set this context as the active context
+      bool makeCurrent();
 
       std::string getVersion();
       const boost::shared_ptr<common::DisplayAttributes> getDisplayAttributes() {return displayAttributes;}
