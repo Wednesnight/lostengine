@@ -20,6 +20,7 @@ namespace lost
     struct Context
     {
     private:
+      CGLContextObj context;
       std::list<boost::shared_ptr<State> > stateStack;
       std::list<lost::math::Rect> viewportStack;
       boost::shared_ptr<common::DisplayAttributes> displayAttributes;

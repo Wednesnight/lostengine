@@ -129,4 +129,5 @@ function lost.application.Application:mainLoop(passedSec)
 
   self.context:popState()
   self:swapBuffers()
+  self:processEvents(0)
 end
