@@ -109,7 +109,6 @@ namespace lost
       boost::function<void (boost::shared_ptr<event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
       addEventListener(ApplicationEvent::QUIT(), f);
       adapter->run();
-      //appEvent->type = ApplicationEvent::QUIT(); dispatchEvent(appEvent);
       appEvent->type = ApplicationEvent::QUIT(); adapter->queueEvent(appEvent);
       if(adapter->mainLoopThread)
       {
