@@ -306,7 +306,7 @@ TEST_SOURCES = [
   'test/TestLostMathVec4.cpp',
   'test/TestCompileLostMathVec2.cpp',
 #  'test/TestGlUtils.cpp',
-
+  'test/TestPlatform.cpp',
   'test/main.cpp',
 ]
 

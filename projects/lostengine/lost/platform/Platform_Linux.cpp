@@ -38,23 +38,14 @@ namespace lost
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
-    // TODO: Needs some thought as to defaults/ LSB-behaviour, but kind of
-    // works.
     std::string getApplicationDirectory()
     {
-      // The best default thing to do is to assume LSB-paths, i.e.
-      // /usr/share/<appname>.
-      // XXX We'd need the Application to be a singleton  object and to have a
-      //     name, though - so we'll default to the current directory.
-      std::string default_path = std::string("./");
-
       boost::filesystem::path path = "/proc";
       struct stat info;
       if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
         // There's no /proc filesystem, we can't find out a lot about our
         // application.
-        std::cerr << "Can't find /proc filesystem, defaulting to '" << default_path << "'.";
-        return default_path;
+        throw std::runtime_error("Could not find /proc filesystem!");
       }
 
 
@@ -70,8 +61,7 @@ namespace lost
           sizeof(pathbuf));
 
       if (-1 == pathsize) {
-        std::cerr << "Could not determine application path, defaulting to '" << default_path << "'.";
-        return default_path;
+        throw std::runtime_error("Could not determine application path!");
       }
 
       path = std::string(pathbuf, pathsize);
