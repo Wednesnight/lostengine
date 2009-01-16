@@ -3,6 +3,13 @@
 
 #include <string>
 #include <sys/time.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#include <iostream>
+
+#include "boost/filesystem.hpp"
+#include "boost/lexical_cast.hpp"
 
 namespace lost
 {
@@ -31,11 +38,44 @@ namespace lost
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
-    // TODO: getApplicationDirectory() not implemented
+    // TODO: Needs some thought as to defaults/ LSB-behaviour, but kind of
+    // works.
     std::string getApplicationDirectory()
     {
-      std::string result;
-      return result;
+      // The best default thing to do is to assume LSB-paths, i.e.
+      // /usr/share/<appname>.
+      // XXX We'd need the Application to be a singleton  object and to have a
+      //     name, though - so we'll default to the current directory.
+      std::string default_path = std::string("./");
+
+      boost::filesystem::path path = "/proc";
+      struct stat info;
+      if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
+        // There's no /proc filesystem, we can't find out a lot about our
+        // application.
+        std::cerr << "Can't find /proc filesystem, defaulting to '" << default_path << "'.";
+        return default_path;
+      }
+
+
+      // Read the exe link in the /proc filesystem
+      path /= boost::lexical_cast<std::string>(getpid());
+      path /= "exe";
+
+      // There's no limit to how long a path in Linux can be, but let's assume
+      // it won't exceed 2k characters.
+      char pathbuf[2048];
+
+      ssize_t pathsize = readlink(path.string().c_str(), pathbuf,
+          sizeof(pathbuf));
+
+      if (-1 == pathsize) {
+        std::cerr << "Could not determine application path, defaulting to '" << default_path << "'.";
+        return default_path;
+      }
+
+      path = std::string(pathbuf, pathsize);
+      return path.branch_path().string();
     }
 
     // TODO: getApplicationFilename() not implemented
