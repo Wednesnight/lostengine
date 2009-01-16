@@ -1,3 +1,4 @@
+#include <string.h>
 #include <boost/thread/mutex.hpp>
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
