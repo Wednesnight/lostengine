@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "lost/resource/File.h"
 #include <boost/shared_ptr.hpp>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 using namespace boost;

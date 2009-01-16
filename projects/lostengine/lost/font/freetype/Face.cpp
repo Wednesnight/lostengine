@@ -1,3 +1,7 @@
+#include <stdexcept>
+
+#include <boost/lexical_cast.hpp>
+
 #include "lost/font/freetype/Face.h"
 #include "lost/common/Logger.h"
 

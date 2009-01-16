@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdexcept>
+
 #include "lost/al/Device.h"
 #include "lost/common/Logger.h"
 
