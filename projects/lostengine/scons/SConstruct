@@ -1,5 +1,33 @@
 EnsureSConsVersion(0, 98, 0)
 
+# FIXME Should get the project base in a more sensible fashion
+import os.path
+PROJECT_BASE = os.path.join('..')
+
+THIRDPARTY_BASE = os.path.join(PROJECT_BASE, '..', '..', 'thirdparty')
+
+
+class Env(Environment):
+  def __init__(self, *args, **kw):
+    self.INCLUDES = []
+    self.LIBPATHS = []
+    self.LIBS = []
+    Environment.__init__(self, *args, **kw)
+
+  def sconscript(self, thirdparty, **kw):
+    import os.path
+    thirdparty = [os.path.join(THIRDPARTY_BASE, p) for p in thirdparty]
+
+    sconscript_files = [os.path.join(p, 'scons', 'SConscript') for p in thirdparty]
+    SConscript(sconscript_files, **kw)
+
+  def appendPaths(self, scons, include_dir = '.'):
+    import os.path
+    self.LIBPATHS.append(scons)
+    self.INCLUDES.append(os.path.join(os.path.dirname(scons), include_dir))
+
+env = Env()
+
 SOURCES = [
   'al/Listener.cpp',
   'al/Buffer.cpp',
@@ -269,19 +297,31 @@ HEADERS = [
   'gl/TypedBuffer.h',
 ]
 
+TEST_SOURCES = [
+#  'test/TestEngine.cpp',
+  'test/TestProfiler.cpp',
+#  'test/TestEventDispatcher.cpp',
+  'test/TestLostMathMatrix.cpp',
+  'test/TestEvent.cpp',
+  'test/TestLostMathVec4.cpp',
+  'test/TestCompileLostMathVec2.cpp',
+#  'test/TestGlUtils.cpp',
 
-# FIXME Should get the project base in a more sensible fashion
-import os.path
-PROJECT_BASE = os.path.join('..')
+  'test/main.cpp',
+]
 
-THIRDPARTY_BASE = os.path.join(PROJECT_BASE, '..', '..', 'thirdparty')
+THIRDPARTY = [
+  os.path.join('boost', 'boost_1_36_0'),
+]
+
+
 
 SOURCES = [os.path.join(PROJECT_BASE, 'lost', s) for s in SOURCES]
 HEADERS = [os.path.join(PROJECT_BASE, 'lost', h) for h in HEADERS]
+TEST_SOURCES = [os.path.join(PROJECT_BASE, 'lost', s) for s in TEST_SOURCES]
 
 INCLUDES = [
   PROJECT_BASE,
-  os.path.join(THIRDPARTY_BASE, 'boost', 'boost_1_36_0', 'include'),
   os.path.join(THIRDPARTY_BASE, 'OpenAL', 'OpenAL_1_1', 'include'),
   os.path.join(THIRDPARTY_BASE, 'stb', 'stb_vorbis_0_99996'),
   os.path.join(THIRDPARTY_BASE, 'stb', 'stb_image_1_14'),
@@ -292,17 +332,57 @@ INCLUDES = [
   os.path.join(THIRDPARTY_BASE, 'lua', 'lua_5_1_4', 'include'),
   os.path.join(THIRDPARTY_BASE, 'luabind', 'luabind_0_8', 'include'),
   os.path.join(THIRDPARTY_BASE, 'hashlib++', 'hashlib++_0_3_1'),
+  os.path.join(THIRDPARTY_BASE, 'UnitTest++', 'include'),
 ]
 
-StaticLibrary('lostengine', SOURCES, CPPPATH=INCLUDES)
+env.sconscript(THIRDPARTY, exports = ['env'])
 
-#  test/TestEngine.cpp
-#  test/TestProfiler.cpp
-#  test/TestEventDispatcher.cpp
-#  test/TestLostMathMatrix.cpp
-#  test/TestEvent.cpp
-#  test/TestLostMathVec4.cpp
-#  test/TestCompileLostMathVec2.cpp
-#  test/main.cpp
-#  test/TestGlUtils.cpp
+lostengine = StaticLibrary('lostengine', SOURCES,
+    CPPPATH = [PROJECT_BASE] + env.INCLUDES + INCLUDES)
+
+unittestpp = StaticLibrary('unittestpp', [
+    # FIXME FUGLY, needs fix, but I don't care right now
+    '../../../thirdparty/UnitTest++/include/DeferredTestReporter.cpp',
+    '../../../thirdparty/UnitTest++/include/TimeConstraint.cpp',
+    '../../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp',
+    '../../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp',
+    '../../../thirdparty/UnitTest++/include/TestRunner.cpp',
+    '../../../thirdparty/UnitTest++/include/DeferredTestResult.cpp',
+    '../../../thirdparty/UnitTest++/include/TestReporter.cpp',
+    '../../../thirdparty/UnitTest++/include/XmlTestReporter.cpp',
+    '../../../thirdparty/UnitTest++/include/AssertException.cpp',
+    '../../../thirdparty/UnitTest++/include/ReportAssert.cpp',
+    '../../../thirdparty/UnitTest++/include/TestResults.cpp',
+    '../../../thirdparty/UnitTest++/include/TestReporterStdout.cpp',
+    '../../../thirdparty/UnitTest++/include/TestList.cpp',
+    '../../../thirdparty/UnitTest++/include/Test.cpp',
+    '../../../thirdparty/UnitTest++/include/MemoryOutStream.cpp',
+    '../../../thirdparty/UnitTest++/include/TestDetails.cpp',
+    '../../../thirdparty/UnitTest++/include/Checks.cpp',
+
+# dont' need the unit test lib's tests
+#    '../../../thirdparty/UnitTest++/include/tests/TestTimeConstraint.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestMemoryOutStream.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestChecks.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestAssertHandler.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTimeConstraintMacro.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/Main.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTestMacros.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestDeferredTestReporter.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTestSuite.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTestResults.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestXmlTestReporter.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTestRunner.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestCheckMacros.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTest.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestTestList.cpp',
+#    '../../../thirdparty/UnitTest++/include/tests/TestUnitTest++.cpp',
+
+  ])
+
+Program('tests', TEST_SOURCES,
+    CPPPATH = [PROJECT_BASE] + env.INCLUDES + INCLUDES,
+    LIBS = [lostengine, unittestpp] + env.LIBS)
+
+
 
