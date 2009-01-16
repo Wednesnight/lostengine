@@ -7,7 +7,7 @@ using namespace lost::common;
 
 int main()
 {
-  LogLevel( log_all );
+//  LogLevel( log_all );
 
   return UnitTest::RunAllTests();
 }
