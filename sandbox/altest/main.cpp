@@ -13,6 +13,8 @@
 #include "lost/audio/Source.h"
 #include "lost/resource/DefaultLoader.h"
 
+//---
+
 using namespace lost::common;
 using namespace lost;
 using namespace lost::resource;
