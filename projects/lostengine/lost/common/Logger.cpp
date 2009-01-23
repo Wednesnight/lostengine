@@ -23,10 +23,9 @@ namespace lost
         }
       }
 
-      static boost::mutex logMutex;
-
       void logMessage(const std::string& inLevel, const std::string& inLocation, const std::string& inMsg)
       {
+        static boost::mutex logMutex;
         std::string t;
         logMutex.lock();
         std::cout << lost::platform::currentTimeFormat(t) << " \t " <<
