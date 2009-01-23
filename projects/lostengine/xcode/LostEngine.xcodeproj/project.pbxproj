@@ -2279,7 +2279,6 @@
 					"FT_CONFIG_H=\"<freetype/config/ftconfig.h>\"",
 					FT2_BUILD_LIBRARY,
 					__STDC_CONSTANT_MACROS,
-					PROFILER_ENABLED,
 				);
 				PRODUCT_NAME = LostEngine;
 			};
