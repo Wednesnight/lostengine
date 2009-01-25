@@ -1,9 +1,10 @@
+#include "../Application.h"
+
 #include <iostream>
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#include "../Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
 
