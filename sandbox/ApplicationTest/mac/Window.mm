@@ -62,6 +62,16 @@
   parent = newParent;
 }
 
+- (void)keyDown: (NSEvent*)event
+{
+  DOUT("keyDown: " << [event keyCode]);
+}
+
+- (void)keyUp: (NSEvent*)event
+{
+  DOUT("keyUp: " << [event keyCode]);
+}
+
 @end
 
 struct Window::WindowHiddenMembers
