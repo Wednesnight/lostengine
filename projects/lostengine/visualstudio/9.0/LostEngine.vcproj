@@ -42,12 +42,13 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP3"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\glfw\glfw_2_6\source;..\..\..\..\thirdparty\glfw\glfw_2_6\source\win32;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include"
-				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;_DEBUG;FT_CONFIG_H=&lt;freetype/config/ftconfig.h&gt;;FT2_BUILD_LIBRARY"
+				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\glfw\glfw_2_6\source;..\..\..\..\thirdparty\glfw\glfw_2_6\source\win32;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include;..\..\..\..\thirdparty\pthreads\pthreads-w32-2-8-0-release"
+				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;_DEBUG;FT_CONFIG_H=&lt;freetype/config/ftconfig.h&gt;;FT2_BUILD_LIBRARY;BOOST_THREAD_BUILD_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -63,7 +64,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				LinkLibraryDependencies="true"
-				AdditionalLibraryDirectories="$(OutDir)"
+				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -109,12 +110,13 @@
 				AdditionalOptions="/MP3"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\glfw\glfw_2_6\source;..\..\..\..\thirdparty\glfw\glfw_2_6\source\win32;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include"
-				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;NDEBUG"
+				AdditionalIncludeDirectories="..\..\..\lostengine;..\..\..\..\thirdparty\boost\boost_1_36_0\include;..\..\..\..\thirdparty\freetype2\freetype_2_3_7\include;..\..\..\..\thirdparty\stb\stb_image_1_14;..\..\..\..\thirdparty\lua\lua_5_1_4\include;..\..\..\..\thirdparty\luabind\luabind_0_7_1\include;..\..\..\..\thirdparty\glee\glee_5_21\include;..\..\..\..\thirdparty\OpenAL\OpenAL_1_1\include;..\..\..\..\thirdparty\glfw\glfw_2_6\include;..\..\..\..\thirdparty\glfw\glfw_2_6\source;..\..\..\..\thirdparty\glfw\glfw_2_6\source\win32;&quot;..\..\..\..\thirdparty\hashlib++\hashlib++_0_3_1&quot;;..\..\..\..\thirdparty\OpenGL\include;..\..\..\..\thirdparty\pthreads\pthreads-w32-2-8-0-release"
+				PreprocessorDefinitions="WIN32;_LIB;_GLFW_NO_DLOAD_GDI32;NDEBUG;BOOST_THREAD_BUILD_LIB"
 				MinimalRebuild="false"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
+				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -130,7 +132,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				LinkLibraryDependencies="true"
-				AdditionalLibraryDirectories="$(OutDir)"
+				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -1321,16 +1323,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<Filter
-			Name="Debug"
-			>
-		</Filter>
-		<Filter
 			Name="thirdparty"
 			>
 			<Filter
@@ -1356,30 +1348,50 @@
 			<Filter
 				Name="boost"
 				>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\connection.cpp"
+				<Filter
+					Name="signals"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\system\src\error_code.cpp"
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\connection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\named_slot_map.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\signal_base.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\slot.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\trackable.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="thread"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\named_slot_map.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\signal_base.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\slot.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\signals\src\trackable.cpp"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\thread\src\win32\exceptions.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\thread\src\win32\thread.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\thread\src\tss_null.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\..\thirdparty\boost\boost_1_36_0\source\libs\thread\src\win32\tss_pe.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="glfw"
@@ -1929,6 +1941,14 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Precompiled Header"
+			>
+			<File
+				RelativePath=".\prefix.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
