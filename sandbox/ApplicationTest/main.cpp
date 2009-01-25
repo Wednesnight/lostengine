@@ -1,5 +1,5 @@
+#include "lost/gl/gl.h"
 #include "lost/gl/Context.h"
-#include <OpenGL/OpenGL.h>
 
 #include "Application.h"
 #include "lost/common/Logger.h"
@@ -21,18 +21,6 @@ void mainLoop()
   DOUT("mainLoop");
   double currentSec = lost::platform::currentTimeSeconds();
 
-  if (!displayAttributes) displayAttributes.reset(new lost::common::DisplayAttributes);
-  if (!context) context.reset(new lost::gl::Context(displayAttributes));
-  if (!state)
-  {
-    state = context->copyState();
-    state->clearColor = lost::common::Color(0,0,0,0);
-    state->depthTest = false;
-    state->texture2D = false;
-    state->vertexArray = true;
-  }
-  if (!fpsMeter) fpsMeter.reset(new lost::common::FpsMeter(context));
-
   mainWindow->context->makeCurrent();
   glViewport(0, 0, 800, 600);
   glClearColor(0,0,0,0);
@@ -53,9 +41,8 @@ void mainLoop()
   glColor4f(1.0, 0.0, 1.0, 1.0);
   glVertex3f(-0.5, 0.5, 0.0);
   glEnd();
-  
-  glRotatef(-0.5, 0.6, -0.6, 0.5);
 
+  glRotatef(-0.5, 0.6, -0.6, 0.5);
   mainWindow->context->swapBuffers();
 
   secondWindow->context->makeCurrent();
@@ -77,8 +64,19 @@ void mainLoop()
 int main (int argc, const char * argv[])
 {
   app.reset(new Application(mainLoop));
+
   mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Vec2(800, 600), lost::math::Vec2(100, 100)));
+
   secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Vec2(160, 100), lost::math::Vec2(100, 100)));
+  displayAttributes.reset(new lost::common::DisplayAttributes);
+  context.reset(new lost::gl::Context(displayAttributes));
+  state = context->copyState();
+  state->clearColor = lost::common::Color(0,0,0,0);
+  state->depthTest = false;
+  state->texture2D = false;
+  state->vertexArray = true;
+  fpsMeter.reset(new lost::common::FpsMeter(context));
+
   app->run();
 
   return 0;

@@ -1,6 +1,9 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+// FIXME: needed for NOMINMAX definition on windows
+#include "lost/platform/Platform.h"
+
 #include <list>
 #include <map>
 #include <string>

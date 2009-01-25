@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApplicationTest", "ApplicationTest.vcproj", "{1CC2CDF0-7EC2-47B6-ABBB-637A6005CA97}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D0478F0-14B0-4659-A273-A8418033BAC6} = {1D0478F0-14B0-4659-A273-A8418033BAC6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LostEngine", "..\..\..\projects\lostengine\visualstudio\9.0\LostEngine.vcproj", "{1D0478F0-14B0-4659-A273-A8418033BAC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CC2CDF0-7EC2-47B6-ABBB-637A6005CA97}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1CC2CDF0-7EC2-47B6-ABBB-637A6005CA97}.Debug|Win32.Build.0 = Debug|Win32
+		{1CC2CDF0-7EC2-47B6-ABBB-637A6005CA97}.Release|Win32.ActiveCfg = Release|Win32
+		{1CC2CDF0-7EC2-47B6-ABBB-637A6005CA97}.Release|Win32.Build.0 = Release|Win32
+		{1D0478F0-14B0-4659-A273-A8418033BAC6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1D0478F0-14B0-4659-A273-A8418033BAC6}.Debug|Win32.Build.0 = Debug|Win32
+		{1D0478F0-14B0-4659-A273-A8418033BAC6}.Release|Win32.ActiveCfg = Release|Win32
+		{1D0478F0-14B0-4659-A273-A8418033BAC6}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
