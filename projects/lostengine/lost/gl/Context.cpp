@@ -84,6 +84,10 @@ namespace lost
     Context::~Context()
     {
       PROFILE_METHOD();
+      // FIXME: really dirty hack but hopefully the Context will be replaced soon...
+      #if defined WIN32
+        delete glContext;
+      #endif
     }
 
     boost::shared_ptr<State> Context::newState()

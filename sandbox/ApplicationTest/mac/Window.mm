@@ -1,8 +1,9 @@
+#include "../Window.h"
+
 #import <AGL/AGL.h>
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#include "../Window.h"
 #include "lost/common/Logger.h"
 
 @interface GLView : NSOpenGLView
