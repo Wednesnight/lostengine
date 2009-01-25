@@ -18,7 +18,7 @@ double passedSec = lost::platform::currentTimeSeconds();
 
 void mainLoop()
 {
-  DOUT("mainLoop");
+//  DOUT("mainLoop");
   double currentSec = lost::platform::currentTimeSeconds();
 
   mainWindow->context->makeCurrent();
