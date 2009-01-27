@@ -111,8 +111,9 @@ void Window::initialize()
 void Window::finalize()
 {
   DOUT("Window::finalize()");
+  // FIXME: cleanup!
   [hiddenMembers->view dealloc];
-  [hiddenMembers->window dealloc];
+//  [hiddenMembers->window dealloc];
   delete hiddenMembers;
 }
 

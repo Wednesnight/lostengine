@@ -63,7 +63,8 @@ void Application::finalize()
 {
   DOUT("Application::finalize()");
   [NSApp release];
-  [hiddenMembers->pool release];
+  // FIXME: cleanup!
+//  [hiddenMembers->pool release];
   delete hiddenMembers;
 }
 
