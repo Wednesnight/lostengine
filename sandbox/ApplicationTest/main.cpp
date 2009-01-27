@@ -18,7 +18,6 @@ double passedSec = lost::platform::currentTimeSeconds();
 
 void mainLoop()
 {
-//  DOUT("mainLoop");
   double currentSec = lost::platform::currentTimeSeconds();
 
   mainWindow->context->makeCurrent();
@@ -72,9 +71,6 @@ int main (int argc, const char * argv[])
   context.reset(new lost::gl::Context(displayAttributes));
   state = context->copyState();
   state->clearColor = lost::common::Color(0,0,0,0);
-  state->depthTest = false;
-  state->texture2D = false;
-  state->vertexArray = true;
   fpsMeter.reset(new lost::common::FpsMeter(context));
 
   app->run();

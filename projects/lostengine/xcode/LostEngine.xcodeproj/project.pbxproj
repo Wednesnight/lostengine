@@ -665,6 +665,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E0F1B020F2F28CA00184FE8 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E2062370E9E1AFD0042BC53 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLRenderBuffer.cpp; path = bindings/LostGLRenderBuffer.cpp; sourceTree = "<group>"; };
@@ -900,7 +901,6 @@
 		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-debug.pch"; sourceTree = "<group>"; };
 		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
-		EAA788440F1E9FA40038EF44 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
 		EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontTrueTypeFont.cpp; path = bindings/LostFontTrueTypeFont.cpp; sourceTree = "<group>"; };
@@ -947,7 +947,7 @@
 		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
 			isa = PBXGroup;
 			children = (
-				EAA788440F1E9FA40038EF44 /* lost */,
+				3E0F1B020F2F28CA00184FE8 /* lost */,
 				3E531D8D0F14EDEA00D7C8B4 /* Configurations */,
 				EA9A67E10F159C38007E8A3D /* precompiled headers */,
 				3E5321CA0F15112200D7C8B4 /* Sources */,

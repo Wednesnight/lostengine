@@ -1,4 +1,5 @@
 #include <string.h>
+#include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
@@ -23,16 +24,24 @@ namespace lost
         }
       }
 
+      boost::mutex* logMutex    = NULL;
+      boost::once_flag initOnce = BOOST_ONCE_INIT;
+      void initLogMutex()
+      {
+        if (!logMutex) logMutex = new boost::mutex;
+      }
+      
       void logMessage(const std::string& inLevel, const std::string& inLocation, const std::string& inMsg)
       {
-        static boost::mutex logMutex;
+        boost::call_once(initOnce, &initLogMutex);
+
         std::string t;
-        logMutex.lock();
+        logMutex->lock();
         std::cout << lost::platform::currentTimeFormat(t) << " \t " <<
                      inLevel                              << " \t " <<
                      inLocation                           << " \t " <<
                      inMsg                                << std::endl;	
-        logMutex.unlock();
+        logMutex->unlock();
       }
 
 		}
