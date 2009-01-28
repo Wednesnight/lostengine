@@ -1,36 +1,19 @@
 #include "lost/application/Application.h"
 
+using namespace lost::event;
+
 namespace lost
 {
   namespace application
   {
-    
-    Application::Application()
-    {
-      initialize();
-    }
 
-    Application::Application(const boost::function<void (void)>& inRunLoopFunction)
+    void Application::dispatchEvent(EventPtr event)
     {
-      runLoop = boost::shared_ptr<RunLoop>(new RunLoopFunctor(inRunLoopFunction));
-      initialize();
-    }
-
-    Application::Application(const boost::shared_ptr<RunLoop>& inRunLoop)
-    {
-      runLoop = inRunLoop;
-      initialize();
-    }
-
-    Application::Application(const boost::filesystem::path& inRunLoopScript)
-    {
-      runLoop = boost::shared_ptr<RunLoop>(new RunLoopScript(inRunLoopScript));
-      initialize();
-    }
-
-    Application::~Application()
-    {
-      finalize();
+      EventDispatcher::dispatchEvent(event);
+      if (screen)
+      {
+        screen->dispatchEvent(event);
+      }
     }
 
     void Application::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
@@ -40,7 +23,7 @@ namespace lost
       eventQueue->push_back(event);
       queueMutex.unlock();
     }
-
+    
     void Application::processEvents(const double& timeoutInSeconds)
     {
       if (eventQueue)
@@ -53,6 +36,6 @@ namespace lost
           dispatchEvent(*idx);
       }
     }
-
+    
   }
 }
