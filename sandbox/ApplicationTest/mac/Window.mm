@@ -5,6 +5,7 @@
 #import <Cocoa/Cocoa.h>
 
 #include "lost/common/Logger.h"
+#include "lost/application/KeyEvent.h"
 
 @interface GLView : NSOpenGLView
 {
@@ -64,12 +65,17 @@
 
 - (void)keyDown: (NSEvent*)event
 {
-  DOUT("keyDown: " << [event keyCode]);
+  boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(lost::application::KeyEvent::KEY_DOWN()));
+  keyEvent->key       = [event keyCode];
+  keyEvent->character = *[[event characters] UTF8String];
+  keyEvent->pressed   = true;
+  keyEvent->repeat    = [event isARepeat];
+  DOUT("key: "<< keyEvent->key <<", character: "<< keyEvent->character <<", pressed: "<< keyEvent->pressed <<", repeat: "<< keyEvent->repeat);
 }
 
 - (void)keyUp: (NSEvent*)event
 {
-  DOUT("keyUp: " << [event keyCode]);
+  DOUT("keyUp: " << [event keyCode] <<", "<< [[event characters] UTF8String] <<", "<< (bool)[event isARepeat]);
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E4B61600F2F60B6002DD5FA /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E4B615F0F2F60B6002DD5FA /* State.cpp */; };
 		3E8E7D8E0F29D93700B11EE1 /* ApplicationMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E8E7D8D0F29D93700B11EE1 /* ApplicationMenu.xib */; };
 		3E8E7DA00F29DA7600B11EE1 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E7D9F0F29DA7600B11EE1 /* Window.mm */; };
 		3E8E7F6C0F2A0B2100B11EE1 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E7F6B0F2A0B2100B11EE1 /* Window.cpp */; };
@@ -57,6 +58,9 @@
 		29B97316FDCFA39411CA2CEA /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3E4B615E0F2F60B6002DD5FA /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = State.h; path = gl/State.h; sourceTree = "<group>"; };
+		3E4B615F0F2F60B6002DD5FA /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = gl/State.cpp; sourceTree = "<group>"; };
+		3E4B63210F2F690A002DD5FA /* Param.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Param.h; path = gl/Param.h; sourceTree = "<group>"; };
 		3E8E7D750F29D86500B11EE1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = mac/Info.plist; sourceTree = "<group>"; };
 		3E8E7D8D0F29D93700B11EE1 /* ApplicationMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ApplicationMenu.xib; path = mac/ApplicationMenu.xib; sourceTree = "<group>"; };
 		3E8E7D920F29D97E00B11EE1 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Context.h; path = gl/Context.h; sourceTree = "<group>"; };
@@ -160,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				3E8E7D920F29D97E00B11EE1 /* Context.h */,
+				3E4B63210F2F690A002DD5FA /* Param.h */,
+				3E4B615E0F2F60B6002DD5FA /* State.h */,
+				3E4B615F0F2F60B6002DD5FA /* State.cpp */,
 				3E8E80320F2A1C0A00B11EE1 /* mac */,
 			);
 			name = gl;
@@ -298,6 +305,7 @@
 				3E8E7F6C0F2A0B2100B11EE1 /* Window.cpp in Sources */,
 				3E8E80340F2A1C0A00B11EE1 /* Context.mm in Sources */,
 				3E8E80500F2A1FEE00B11EE1 /* Application.cpp in Sources */,
+				3E4B61600F2F60B6002DD5FA /* State.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

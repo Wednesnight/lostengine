@@ -71,7 +71,7 @@ void Application::finalize()
 boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
 {
   DOUT("Application::createWindow()");
-  boost::shared_ptr<Window> result(new Window(params));
+  boost::shared_ptr<Window> result(new Window(shared_from_this(), params));
   windows[uniqueId] = result;
   return result;
 }
