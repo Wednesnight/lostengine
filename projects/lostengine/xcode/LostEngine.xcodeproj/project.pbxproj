@@ -10,9 +10,6 @@
 		3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
-		3E2062380E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
-		3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
-		3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2062370E9E1AFD0042BC53 /* Timer.cpp */; };
 		3E27FE2E0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */; };
 		3E27FE300EFAAE5300DFF147 /* LostGLRenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */; };
 		3E27FE320EFAAE5300DFF147 /* LostGLRenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */; };
@@ -370,14 +367,7 @@
 		3E7325510E5CE3A4000FF838 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
-		3E7325640E5CE3A4000FF838 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF77F0E4A6C6F0003A334 /* Application.cpp */; };
-		3E7325650E5CE3A4000FF838 /* LostGlView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7790E4A6BA70003A334 /* LostGlView.mm */; };
-		3E7325660E5CE3A4000FF838 /* LostAppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7780E4A6BA70003A334 /* LostAppController.mm */; };
-		3E7325670E5CE3A4000FF838 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188A0E42983800504B0C /* Timer.cpp */; };
-		3E7325680E5CE3A4000FF838 /* LostApplicationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */; };
-		3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -456,13 +446,18 @@
 		3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
+		8DE56F670F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
+		8DE56F680F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
+		8DE56F690F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
+		8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6C0F31187E0072FB28 /* Application.mm */; };
+		8DE56F6F0F3118840072FB28 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6E0F3118840072FB28 /* Window.mm */; };
+		8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F8A0F31190A0072FB28 /* Context.mm */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
-		EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E04050E4E0FC1001556D6 /* Application.cpp */; };
 		EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
 		EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
@@ -485,8 +480,6 @@
 		EA54FA760E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA7B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
 		EA54FA7E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
-		EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710730E3E53B000B961EC /* TimerManager.cpp */; };
-		EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6710750E3E53B000B961EC /* Timer.cpp */; };
 		EA6711390E3E893C00B961EC /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
@@ -656,18 +649,11 @@
 		EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 		EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 		EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
-		EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF77F0E4A6C6F0003A334 /* Application.cpp */; };
-		EAEAF7F00E4A77F40003A334 /* LostGlView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7790E4A6BA70003A334 /* LostGlView.mm */; };
-		EAEAF7F10E4A77F40003A334 /* LostAppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF7780E4A6BA70003A334 /* LostAppController.mm */; };
-		EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9C188A0E42983800504B0C /* Timer.cpp */; };
-		EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */; };
-		EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3E0F1B020F2F28CA00184FE8 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
-		3E2062370E9E1AFD0042BC53 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLRenderBuffer.cpp; path = bindings/LostGLRenderBuffer.cpp; sourceTree = "<group>"; };
 		3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLGLLGL.cpp; path = bindings/LostLGLLGL.cpp; sourceTree = "<group>"; };
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
@@ -806,7 +792,6 @@
 		3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLContext.cpp; path = bindings/LostGLContext.cpp; sourceTree = "<group>"; };
 		3E6510010E7F92C700DE5AFE /* LostGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLState.cpp; path = bindings/LostGLState.cpp; sourceTree = "<group>"; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationAdapter.cpp; path = glfw/ApplicationAdapter.cpp; sourceTree = "<group>"; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EBDF5C50E8386D000F9E989 /* LostModelLSystemGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelLSystemGenerator.cpp; path = bindings/LostModelLSystemGenerator.cpp; sourceTree = "<group>"; };
 		3EBDF5CD0E8386E200F9E989 /* LostModelLSystemRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelLSystemRenderer.cpp; path = bindings/LostModelLSystemRenderer.cpp; sourceTree = "<group>"; };
@@ -833,10 +818,13 @@
 		3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
 		3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLFrameBuffer.cpp; path = bindings/LostGLFrameBuffer.cpp; sourceTree = "<group>"; };
 		3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLTexture.cpp; path = bindings/LostGLTexture.cpp; sourceTree = "<group>"; };
+		8DE56F660F3118600072FB28 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
+		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
+		8DE56F8A0F31190A0072FB28 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/mac/Context.mm; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
-		EA0E04050E4E0FC1001556D6 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = glfw/Application.cpp; sourceTree = "<group>"; };
 		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
 		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
 		EA1D54EB0EB34E0400591811 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
@@ -849,8 +837,6 @@
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
-		EA6710730E3E53B000B961EC /* TimerManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimerManager.cpp; path = glfw/TimerManager.cpp; sourceTree = "<group>"; };
-		EA6710750E3E53B000B961EC /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = glfw/Timer.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
 		EA70F9320ED08E99000AA8CB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = al/Context.cpp; sourceTree = "<group>"; };
@@ -899,7 +885,6 @@
 		EA9A67EA0F159C51007E8A3D /* prefix-shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-shared.h"; sourceTree = "<group>"; };
 		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-release.pch"; sourceTree = "<group>"; };
 		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-debug.pch"; sourceTree = "<group>"; };
-		EA9C188A0E42983800504B0C /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timer.cpp; path = iphone/Timer.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
@@ -909,11 +894,6 @@
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
-		EAEAF7780E4A6BA70003A334 /* LostAppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostAppController.mm; path = iphone/LostAppController.mm; sourceTree = "<group>"; };
-		EAEAF7790E4A6BA70003A334 /* LostGlView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostGlView.mm; path = iphone/LostGlView.mm; sourceTree = "<group>"; };
-		EAEAF77F0E4A6C6F0003A334 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = iphone/Application.cpp; sourceTree = "<group>"; };
-		EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LostApplicationHelpers.mm; path = iphone/LostApplicationHelpers.mm; sourceTree = "<group>"; };
-		EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationHelpers.cpp; path = iphone/LostApplicationHelpers.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1070,6 +1050,31 @@
 				3E531E600F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp */,
 			);
 			name = "hashlib++";
+			sourceTree = "<group>";
+		};
+		8DE56F6B0F31186F0072FB28 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				8DE56F6C0F31187E0072FB28 /* Application.mm */,
+				8DE56F6E0F3118840072FB28 /* Window.mm */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		8DE56F860F3118F00072FB28 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				8DE56F870F3118FF0072FB28 /* mac */,
+			);
+			name = gl;
+			sourceTree = "<group>";
+		};
+		8DE56F870F3118FF0072FB28 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				8DE56F8A0F31190A0072FB28 /* Context.mm */,
+			);
+			name = mac;
 			sourceTree = "<group>";
 		};
 		EA15B48A0EE31E9F00672EF4 /* audio */ = {
@@ -1278,10 +1283,10 @@
 		EA3B94640E04639D00B6423B /* application */ = {
 			isa = PBXGroup;
 			children = (
-				EA67106F0E3E539900B961EC /* iphone */,
-				EA67106E0E3E539200B961EC /* glfw */,
+				8DE56F860F3118F00072FB28 /* gl */,
+				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
-				3E2062370E9E1AFD0042BC53 /* Timer.cpp */,
+				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
 			path = application;
 			sourceTree = "<group>";
@@ -1382,30 +1387,6 @@
 				3E531EB10F14FDE500D7C8B4 /* system */,
 			);
 			name = boost;
-			sourceTree = "<group>";
-		};
-		EA67106E0E3E539200B961EC /* glfw */ = {
-			isa = PBXGroup;
-			children = (
-				3E94632C0E5173BB00F67187 /* ApplicationAdapter.cpp */,
-				EA0E04050E4E0FC1001556D6 /* Application.cpp */,
-				EA6710750E3E53B000B961EC /* Timer.cpp */,
-				EA6710730E3E53B000B961EC /* TimerManager.cpp */,
-			);
-			name = glfw;
-			sourceTree = "<group>";
-		};
-		EA67106F0E3E539900B961EC /* iphone */ = {
-			isa = PBXGroup;
-			children = (
-				EAEAF77F0E4A6C6F0003A334 /* Application.cpp */,
-				EAEAF7790E4A6BA70003A334 /* LostGlView.mm */,
-				EAEAF7780E4A6BA70003A334 /* LostAppController.mm */,
-				EA9C188A0E42983800504B0C /* Timer.cpp */,
-				EAEAF78C0E4A6E4F0003A334 /* LostApplicationHelpers.mm */,
-				EAF706B20E4B804E00EF62CB /* LostApplicationHelpers.cpp */,
-			);
-			name = iphone;
 			sourceTree = "<group>";
 		};
 		EA70F8F20ED08707000AA8CB /* al */ = {
@@ -1601,12 +1582,6 @@
 				3E7325510E5CE3A4000FF838 /* ModuleLoader.cpp in Sources */,
 				3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */,
 				3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */,
-				3E7325640E5CE3A4000FF838 /* Application.cpp in Sources */,
-				3E7325650E5CE3A4000FF838 /* LostGlView.mm in Sources */,
-				3E7325660E5CE3A4000FF838 /* LostAppController.mm in Sources */,
-				3E7325670E5CE3A4000FF838 /* Timer.cpp in Sources */,
-				3E7325680E5CE3A4000FF838 /* LostApplicationHelpers.mm in Sources */,
-				3E7325690E5CE3A4000FF838 /* LostApplicationHelpers.cpp in Sources */,
 				3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */,
 				3EC9CFD00E673182003CED66 /* State.cpp in Sources */,
 				EA54FA7B0E676E2200605409 /* Library.cpp in Sources */,
@@ -1658,7 +1633,6 @@
 				3E3B3D8C0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E430E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
-				3E20623A0E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
@@ -1802,6 +1776,7 @@
 				3EF4BF2C0F15F183008C7702 /* stack_content_by_name.cpp in Sources */,
 				3EF4BF2D0F15F183008C7702 /* weak_ref.cpp in Sources */,
 				3EF4BF2E0F15F183008C7702 /* wrapper_base.cpp in Sources */,
+				8DE56F690F3118600072FB28 /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1817,10 +1792,6 @@
 				EA3B95AE0E04639D00B6423B /* Platform_Mac.cpp in Sources */,
 				EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */,
 				EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */,
-				EA6710790E3E53B000B961EC /* TimerManager.cpp in Sources */,
-				EA67107B0E3E53B000B961EC /* Timer.cpp in Sources */,
-				EA0E04220E4E11A2001556D6 /* Application.cpp in Sources */,
-				3E94632E0E5173BB00F67187 /* ApplicationAdapter.cpp in Sources */,
 				3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */,
 				3EC9CFCF0E673182003CED66 /* State.cpp in Sources */,
 				EA54FA6B0E676E2200605409 /* Library.cpp in Sources */,
@@ -1872,7 +1843,6 @@
 				3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E420E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
-				3E2062380E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */,
 				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
@@ -2036,6 +2006,10 @@
 				3EF4BF040F15F183008C7702 /* stack_content_by_name.cpp in Sources */,
 				3EF4BF050F15F183008C7702 /* weak_ref.cpp in Sources */,
 				3EF4BF060F15F183008C7702 /* wrapper_base.cpp in Sources */,
+				8DE56F670F3118600072FB28 /* Window.cpp in Sources */,
+				8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */,
+				8DE56F6F0F3118840072FB28 /* Window.mm in Sources */,
+				8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2050,12 +2024,6 @@
 				EA6711970E3E89DB00B961EC /* ModuleLoader.cpp in Sources */,
 				EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */,
 				EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */,
-				EAEAF7EE0E4A77F40003A334 /* Application.cpp in Sources */,
-				EAEAF7F00E4A77F40003A334 /* LostGlView.mm in Sources */,
-				EAEAF7F10E4A77F40003A334 /* LostAppController.mm in Sources */,
-				EAEAF7F40E4A77F40003A334 /* Timer.cpp in Sources */,
-				EAEAF7F80E4A77F40003A334 /* LostApplicationHelpers.mm in Sources */,
-				EAF706B30E4B804E00EF62CB /* LostApplicationHelpers.cpp in Sources */,
 				3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */,
 				3EC9CFD10E673182003CED66 /* State.cpp in Sources */,
 				EA54FA730E676E2200605409 /* Library.cpp in Sources */,
@@ -2107,7 +2075,6 @@
 				3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E410E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
-				3E2062390E9E1AFD0042BC53 /* Timer.cpp in Sources */,
 				3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
@@ -2251,6 +2218,7 @@
 				3EF4BF180F15F183008C7702 /* stack_content_by_name.cpp in Sources */,
 				3EF4BF190F15F183008C7702 /* weak_ref.cpp in Sources */,
 				3EF4BF1A0F15F183008C7702 /* wrapper_base.cpp in Sources */,
+				8DE56F680F3118600072FB28 /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

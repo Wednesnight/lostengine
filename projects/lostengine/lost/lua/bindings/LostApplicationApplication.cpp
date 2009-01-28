@@ -1,6 +1,6 @@
 #include "lost/lua/lua.h"
 #include "lost/application/Application.h"
-#include "lost/application/MainLoop.h"
+#include "lost/application/RunLoop.h"
 
 #include "lost/lua/bindings/LostApplicationApplication.h"
 
@@ -29,7 +29,7 @@ namespace lost
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua main loop"); }
       Application* app = object_cast<Application*>(inApp);
-      app->mainLoop.reset(new FunctorMainLoop(app->context, LuaMainLoop(func)));
+      app->runLoop.reset(new RunLoopFunctor(LuaMainLoop(func)));
     }
   }
 }
@@ -46,13 +46,13 @@ namespace lost
         [
           class_<Application, EventDispatcher>("Application")
            .def("quit", &Application::quit)
-           .def("swapBuffers", &Application::swapBuffers)
+//           .def("swapBuffers", &Application::swapBuffers)
            .def("setMainLoop", &setMainLoop)
            .def("processEvents", &Application::processEvents)
-           .def_readonly("loader", &Application::loader)
-           .def_readonly("displayAttributes", &Application::displayAttributes)
-           .def_readonly("context", &Application::context)
-           .def_readwrite("screen", &Application::screen)
+//           .def_readonly("loader", &Application::loader)
+//           .def_readonly("displayAttributes", &Application::displayAttributes)
+//           .def_readonly("context", &Application::context)
+//           .def_readwrite("screen", &Application::screen)
         ]
       ];
     }

@@ -1,11 +1,12 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/Context.h"
-#include "Application.h"
+#include "lost/application/Application.h"
 #include "lost/common/Logger.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/platform/Platform.h"
-#include "gl/State.h"
+
+using namespace lost::application;
 
 struct MyAppController
 {
@@ -75,9 +76,9 @@ public:
   : passedSec(lost::platform::currentTimeSeconds())
   {
     app.reset(new Application(boost::bind(&MyAppController::mainLoop, this)));
-    
+
     mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Vec2(800, 600), lost::math::Vec2(100, 100)));
-    
+
     secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Vec2(160, 100), lost::math::Vec2(100, 100)));
     displayAttributes.reset(new lost::common::DisplayAttributes);
     context.reset(new lost::gl::Context(displayAttributes));
@@ -95,8 +96,6 @@ public:
 
 int main (int argc, const char * argv[])
 {
-  State state(Blend::create(true), VertexArray::create(true), ClearColor::create(), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-
   MyAppController controller;
   return controller.run();
 }
