@@ -5,6 +5,7 @@
 
 #include "gl/Context.h"
 #include "lost/math/Vec2.h"
+#include "lost/event/EventDispatcher.h"
 
 struct WindowParams
 {
@@ -31,9 +32,11 @@ private:
 protected:
   WindowParams params;
 public:
+  boost::shared_ptr<lost::event::EventDispatcher> dispatcher;
   boost::shared_ptr<Context> context;
 
-  Window(const WindowParams& inParams);
+  Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+         const WindowParams& inParams);
   ~Window();
 
   void initialize();

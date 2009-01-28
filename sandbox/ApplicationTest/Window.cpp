@@ -1,7 +1,9 @@
 #include "Window.h"
 
-Window::Window(const WindowParams& inParams)
-: params(inParams)
+Window::Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+               const WindowParams& inParams)
+: dispatcher(inDispatcher),
+  params(inParams)
 {
   initialize();
 }

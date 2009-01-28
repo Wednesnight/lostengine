@@ -9,12 +9,13 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/thread.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #include "MainLoop.h"
 #include "Window.h"
 #include "lost/event/EventDispatcher.h"
 
-struct Application : public lost::event::EventDispatcher
+struct Application : public lost::event::EventDispatcher, public boost::enable_shared_from_this<Application>
 {
 private:
   struct ApplicationHiddenMembers;

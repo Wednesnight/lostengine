@@ -22,7 +22,8 @@ namespace application
       return d;
     }
   
-    int key;
+    int  key;
+    char character;
     bool pressed;
     bool repeat;
 
