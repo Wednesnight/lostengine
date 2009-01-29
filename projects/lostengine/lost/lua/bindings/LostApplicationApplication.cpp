@@ -1,6 +1,5 @@
 #include "lost/lua/lua.h"
 #include "lost/application/Application.h"
-#include "lost/application/RunLoop.h"
 
 #include "lost/lua/bindings/LostApplicationApplication.h"
 

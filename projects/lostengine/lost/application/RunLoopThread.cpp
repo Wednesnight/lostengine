@@ -1,5 +1,5 @@
 #include "lost/application/Application.h"
-#include "lost/application/RunLoop.h"
+#include "lost/application/RunLoopThread.h"
 
 namespace lost
 {
