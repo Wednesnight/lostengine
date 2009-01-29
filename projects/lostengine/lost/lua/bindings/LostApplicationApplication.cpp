@@ -15,21 +15,21 @@ namespace lost
   {
     struct LuaRunLoop
     {
-      luabind::object func;
+      luabind::object runLoop;
       
-      LuaRunLoop(luabind::object inFunction) : func(inFunction) {}
+      LuaRunLoop(luabind::object inRunLoop) : runLoop(inRunLoop) {}
       
-      void operator()()
+      void operator()(const boost::shared_ptr<Application>& sender)
       {
-        luabind::call_function<void>(func);
+        luabind::call_function<void>(runLoop, sender);
       }
     };
 
-    void setRunLoop(object inApp, object func)
+    void setRunLoop(object inApplication, object inRunLoop)
     {
-      if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua main loop"); }
-      Application* app = object_cast<Application*>(inApp);
-      app->runLoop.reset(new RunLoopFunctor(LuaRunLoop(func)));
+      if(luabind::type(inRunLoop) != LUA_TFUNCTION) throw std::runtime_error("can't set non-function as runloop");
+      Application* application = object_cast<Application*>(inApplication);
+      application->setRunLoop(LuaRunLoop(inRunLoop));
     }
   }
 }
@@ -44,7 +44,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Application, EventDispatcher>("Application")
+          class_<Application, EventDispatcher, boost::shared_ptr<Application> >("Application")
            .def("quit", &Application::quit)
 //           .def("swapBuffers", &Application::swapBuffers)
            .def("setRunLoop", &setRunLoop)

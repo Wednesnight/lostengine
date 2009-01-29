@@ -8,41 +8,44 @@
 #include <map>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include <boost/thread.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/filesystem.hpp>
 
 #include "lost/application/RunLoop.h"
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/application/ApplicationEvent.h"
 
 namespace lost
 {
   namespace application
   {
 
-    struct Application : public lost::event::EventDispatcher, public boost::enable_shared_from_this<Application>
+    struct Application : public boost::enable_shared_from_this<Application>, public lost::event::EventDispatcher
     {
     private:
       struct ApplicationHiddenMembers;
       ApplicationHiddenMembers* hiddenMembers;
 
-      boost::shared_ptr<boost::thread> runLoopThread;
+      boost::shared_ptr<RunLoopThread> runLoopThread;
 
       std::map<std::string, boost::shared_ptr<Window> > windows;
 
       void initialize();
       void finalize();
-    public:
-      boost::shared_ptr<RunLoop> runLoop;
 
       Application();
-      Application(const boost::function<void (void)>& inRunLoopFunction);
-      Application(const boost::shared_ptr<RunLoop>& inRunLoop);
-      Application(const boost::filesystem::path& inRunLoopScript);
+      Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+      Application(const boost::filesystem::path& inScript);
+    public:
+      static boost::shared_ptr<Application> create();
+      static boost::shared_ptr<Application> create(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+      static boost::shared_ptr<Application> create(const boost::filesystem::path& inScript);
 
       ~Application();
-      
+
+      void setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+
       boost::shared_ptr<Window> createWindow(const std::string& uniqueId, const WindowParams& params);
       void run();
       void quit();

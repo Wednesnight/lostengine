@@ -91,33 +91,23 @@ namespace lost
     void Application::run()
     {
       DOUT("Application::run()");
-
-      boost::function<void (boost::shared_ptr<lost::event::Event>)> f = boost::bind(&RunLoop::quitEventHandler, runLoop.get(), _1);
-      addEventListener(lost::application::ApplicationEvent::QUIT(), f);
-      // start the main loop
-      if(runLoop)
-      {
-        runLoopThread.reset(new boost::thread(boost::bind(&RunLoop::run, runLoop.get())));
-      }
+      runLoopThread->run(shared_from_this());
       [NSApp run];
     }
 
     void Application::quit()
     {
       DOUT("Application::quit()");
+      boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
+      appEvent->type = lost::application::ApplicationEvent::QUIT();
+      queueEvent(appEvent);
       [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
     }
     
     void Application::terminate()
     {
       DOUT("Application::terminate()");
-      boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
-      appEvent->type = lost::application::ApplicationEvent::QUIT();
-      queueEvent(appEvent);
-      if(runLoopThread && runLoopThread->get_id() != boost::this_thread::get_id())
-      {
-        runLoopThread->join();
-      }
+      runLoopThread->join();
     }
     
   }

@@ -6,43 +6,47 @@ namespace lost
   {
     
     Application::Application()
+    : runLoopThread(new RunLoopThread)
     {
       initialize();
     }
 
-    Application::Application(const boost::function<void (void)>& inRunLoopFunction)
+    Application::Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    : runLoopThread(new RunLoopThread(inRunLoop))
     {
-      runLoop = boost::shared_ptr<RunLoop>(new RunLoopFunctor(inRunLoopFunction));
       initialize();
     }
 
-    Application::Application(const boost::shared_ptr<RunLoop>& inRunLoop)
+    Application::Application(const boost::filesystem::path& inScript)
+    : runLoopThread(new RunLoopThreadLua(inScript))
     {
-      runLoop = inRunLoop;
       initialize();
     }
 
-    Application::Application(const boost::filesystem::path& inRunLoopScript)
+    boost::shared_ptr<Application> Application::create()
     {
-      boost::shared_ptr<RunLoopScript> runLoopScript = boost::shared_ptr<RunLoopScript>(new RunLoopScript(inRunLoopScript));
-      luabind::globals(*(runLoopScript->interpreter))["lost"]["globals"]["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
-      // try to load lua script
-      try
-      {
-        boost::shared_ptr<lost::resource::File> initScript = runLoopScript->loader->load(inRunLoopScript);
-        runLoopScript->interpreter->doFile(initScript);
-      }
-      catch(std::exception& ex)
-      {
-        EOUT("couldn't load script <"+ inRunLoopScript.native_file_string() +">: "+ std::string(ex.what()));
-      }
-      initialize();
+      return boost::shared_ptr<Application>(new Application);
     }
 
+    boost::shared_ptr<Application> Application::create(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    {
+      return boost::shared_ptr<Application>(new Application(inRunLoop));
+    }
+
+    boost::shared_ptr<Application> Application::create(const boost::filesystem::path& inScript)
+    {
+      return boost::shared_ptr<Application>(new Application(inScript));
+    }
+    
     Application::~Application()
     {
       finalize();
     }
 
+    void Application::setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    {
+      if (runLoopThread) runLoopThread->setRunLoop(inRunLoop);
+    }
+    
   }
 }
