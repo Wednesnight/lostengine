@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E1328410F31E21000EA849F /* RunLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1328400F31E21000EA849F /* RunLoop.cpp */; };
+		3E1328420F31E21000EA849F /* RunLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1328400F31E21000EA849F /* RunLoop.cpp */; };
+		3E1328430F31E21000EA849F /* RunLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1328400F31E21000EA849F /* RunLoop.cpp */; };
 		3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
@@ -650,6 +653,7 @@
 
 /* Begin PBXFileReference section */
 		3E0F1B020F2F28CA00184FE8 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
+		3E1328400F31E21000EA849F /* RunLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunLoop.cpp; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLRenderBuffer.cpp; path = bindings/LostGLRenderBuffer.cpp; sourceTree = "<group>"; };
 		3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLGLLGL.cpp; path = bindings/LostLGLLGL.cpp; sourceTree = "<group>"; };
@@ -1282,6 +1286,7 @@
 				8DE56F860F3118F00072FB28 /* gl */,
 				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
+				3E1328400F31E21000EA849F /* RunLoop.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
 			path = application;
@@ -1771,6 +1776,7 @@
 				3EF4BF2E0F15F183008C7702 /* wrapper_base.cpp in Sources */,
 				8DE56F690F3118600072FB28 /* Window.cpp in Sources */,
 				8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
+				3E1328410F31E21000EA849F /* RunLoop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2003,6 +2009,7 @@
 				8DE56F6F0F3118840072FB28 /* Window.mm in Sources */,
 				8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */,
 				8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
+				3E1328430F31E21000EA849F /* RunLoop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2211,6 +2218,7 @@
 				3EF4BF1A0F15F183008C7702 /* wrapper_base.cpp in Sources */,
 				8DE56F680F3118600072FB28 /* Window.cpp in Sources */,
 				8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
+				3E1328420F31E21000EA849F /* RunLoop.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

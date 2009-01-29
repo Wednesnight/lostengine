@@ -83,7 +83,7 @@ public:
   MyAppController()
   : passedSec(lost::platform::currentTimeSeconds())
   {
-    app.reset(new Application(boost::bind(&MyAppController::mainLoop, this)));
+    app = Application::create(boost::bind(&MyAppController::mainLoop, this));
 
     mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Vec2(800, 600), lost::math::Vec2(100, 100)));
 
@@ -112,8 +112,8 @@ int testingCPP()
 
 int testingLUA()
 {
-  Application app(boost::filesystem::path("init.lua"));
-  app.run();
+  boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init.lua"));
+  app->run();
   return 0;
 }
 
