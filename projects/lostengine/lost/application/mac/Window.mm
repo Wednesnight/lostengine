@@ -126,7 +126,7 @@ namespace lost
       [hiddenMembers->window setDelegate: hiddenMembers->window];
 
       [[hiddenMembers->view openGLContext] makeCurrentContext];
-      context.reset(new Context);
+      context.reset(new gl::Context);
       
       open();
     }

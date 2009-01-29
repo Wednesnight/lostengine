@@ -7,20 +7,23 @@ namespace lost
 {
   namespace application
   {
-    
-    struct Context
+    namespace gl
     {
-    private:
-      struct ContextHiddenMembers;
-      ContextHiddenMembers* hiddenMembers;
-    public:
-      Context();
-      ~Context();
+    
+      struct Context
+      {
+      private:
+        struct ContextHiddenMembers;
+        ContextHiddenMembers* hiddenMembers;
+      public:
+        Context();
+        ~Context();
 
-      void makeCurrent();
-      void swapBuffers();
-    };
+        void makeCurrent();
+        void swapBuffers();
+      };
 
+    }
   }
 }
 

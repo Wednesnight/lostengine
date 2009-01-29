@@ -41,7 +41,7 @@ namespace lost
       void finalize();
     public:
       boost::shared_ptr<lost::event::EventDispatcher> dispatcher;
-      boost::shared_ptr<Context> context;
+      boost::shared_ptr<gl::Context> context;
 
       Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
              const WindowParams& inParams);
