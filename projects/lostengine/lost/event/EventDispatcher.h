@@ -4,6 +4,7 @@
 #include "lost/forward/boost"
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
+#include <boost/thread/mutex.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
 
@@ -26,6 +27,12 @@ namespace lost
       void removeEventListener(const boost::signals::connection& connection);
       virtual void dispatchEvent(EventPtr event);
       void clear();
+
+      boost::mutex queueMutex;
+      boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
+
+      void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
+      void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
     };
   }
 }

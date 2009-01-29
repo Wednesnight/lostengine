@@ -72,12 +72,16 @@
 
 - (void)keyDown: (NSEvent*)event
 {
-  boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(lost::application::KeyEvent::KEY_DOWN()));
-  keyEvent->key       = [event keyCode];
-  keyEvent->character = *[[event characters] UTF8String];
-  keyEvent->pressed   = true;
-  keyEvent->repeat    = [event isARepeat];
-  DOUT("key: "<< keyEvent->key <<", character: "<< keyEvent->character <<", pressed: "<< keyEvent->pressed <<", repeat: "<< keyEvent->repeat);
+  if (parent)
+  {
+    boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(lost::application::KeyEvent::KEY_DOWN()));
+    keyEvent->key       = [event keyCode];
+    // TODO: UTF character
+  //  keyEvent->character = *[[event characters] UTF8String];
+    keyEvent->pressed   = true;
+    keyEvent->repeat    = [event isARepeat];
+    parent->dispatcher->queueEvent(keyEvent);
+  }  
 }
 
 - (void)keyUp: (NSEvent*)event

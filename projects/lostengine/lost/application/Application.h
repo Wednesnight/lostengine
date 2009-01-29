@@ -29,9 +29,6 @@ namespace lost
 
       boost::shared_ptr<boost::thread> runLoopThread;
 
-      boost::mutex queueMutex;
-      boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
-
       std::map<std::string, boost::shared_ptr<Window> > windows;
 
       void initialize();
@@ -49,9 +46,7 @@ namespace lost
       boost::shared_ptr<Window> createWindow(const std::string& uniqueId, const WindowParams& params);
       void run();
       void quit();
-
-      void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
-      void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
+      void terminate();
     };
 
   }

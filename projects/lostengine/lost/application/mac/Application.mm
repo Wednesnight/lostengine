@@ -24,12 +24,17 @@
 - (void)applicationWillTerminate: (NSNotification *)notification
 {
   DOUT("applicationWillTerminate");
-  if (parent) parent->quit();
+  if (parent) parent->terminate();
 }
 
 - (void)setParent: (lost::application::Application*)newParent
 {
   parent = newParent;
+}
+
+- (void)terminate
+{
+  [[NSApplication sharedApplication] terminate: nil];
 }
 
 @end
@@ -55,13 +60,14 @@ namespace lost
       // init pool
       hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
 
+      // TODO: init menu
+
       // init delegate
       hiddenMembers->delegate = [ApplicationDelegate alloc];
       [hiddenMembers->delegate setParent: this];
-
-      // Need this to init AppKit and NSApp
+      
+      // set application delegate
       [[NSApplication sharedApplication] setDelegate: hiddenMembers->delegate];
-      [NSBundle loadNibNamed:@"ApplicationMenu" owner:NSApp];
     }
 
     void Application::finalize()
@@ -99,14 +105,20 @@ namespace lost
     void Application::quit()
     {
       DOUT("Application::quit()");
+      [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
+    }
+    
+    void Application::terminate()
+    {
+      DOUT("Application::terminate()");
       boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
       appEvent->type = lost::application::ApplicationEvent::QUIT();
       queueEvent(appEvent);
-      if(runLoopThread)
+      if(runLoopThread && runLoopThread->get_id() != boost::this_thread::get_id())
       {
         runLoopThread->join();
       }
     }
-
+    
   }
 }

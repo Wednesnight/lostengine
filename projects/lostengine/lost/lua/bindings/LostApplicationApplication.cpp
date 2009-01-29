@@ -13,11 +13,11 @@ namespace lost
 {
   namespace lua
   {
-    struct LuaMainLoop
+    struct LuaRunLoop
     {
       luabind::object func;
       
-      LuaMainLoop(luabind::object inFunction) : func(inFunction) {}
+      LuaRunLoop(luabind::object inFunction) : func(inFunction) {}
       
       void operator()()
       {
@@ -25,11 +25,11 @@ namespace lost
       }
     };
 
-    void setMainLoop(object inApp, object func)
+    void setRunLoop(object inApp, object func)
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua main loop"); }
       Application* app = object_cast<Application*>(inApp);
-      app->runLoop.reset(new RunLoopFunctor(LuaMainLoop(func)));
+      app->runLoop.reset(new RunLoopFunctor(LuaRunLoop(func)));
     }
   }
 }
@@ -47,8 +47,9 @@ namespace lost
           class_<Application, EventDispatcher>("Application")
            .def("quit", &Application::quit)
 //           .def("swapBuffers", &Application::swapBuffers)
-           .def("setMainLoop", &setMainLoop)
+           .def("setRunLoop", &setRunLoop)
            .def("processEvents", &Application::processEvents)
+           .def("createWindow", &Application::createWindow)
 //           .def_readonly("loader", &Application::loader)
 //           .def_readonly("displayAttributes", &Application::displayAttributes)
 //           .def_readonly("context", &Application::context)
