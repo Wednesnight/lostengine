@@ -22,12 +22,13 @@ namespace application
       return d;
     }
   
-    int  key;
-    char character;
-    bool pressed;
-    bool repeat;
+    int         key;
+    // FIXME: this will work for the moment, replace with more efficient type
+    std::string character;
+    bool        pressed;
+    bool        repeat;
 
-    KeyEvent(const event::Type inType) : Event(inType), key(0), pressed(false) { }
+    KeyEvent(const event::Type inType) : Event(inType), key(0), pressed(false), repeat(false) { }
     virtual ~KeyEvent() {}
   };
 

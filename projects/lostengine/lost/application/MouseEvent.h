@@ -30,6 +30,7 @@ namespace application
     }
   
     lost::math::Vec2 pos;
+    lost::math::Vec2 absPos;
     int              button;
     bool             pressed;
 

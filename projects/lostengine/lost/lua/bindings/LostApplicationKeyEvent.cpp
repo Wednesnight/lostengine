@@ -23,7 +23,9 @@ namespace lost
           class_<KeyEvent, Event, boost::shared_ptr<KeyEvent> >("KeyEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("key", &KeyEvent::key)
+          .def_readwrite("character", &KeyEvent::character)
           .def_readwrite("pressed", &KeyEvent::pressed)
+          .def_readwrite("repeat", &KeyEvent::repeat)
           .scope
           [
             def("cast", &lost::lua::cast<KeyEvent>)

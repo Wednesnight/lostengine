@@ -6,6 +6,7 @@
 
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 
 @interface GLView : NSOpenGLView
 {
@@ -70,23 +71,59 @@
   parent = newParent;
 }
 
-- (void)keyDown: (NSEvent*)event
+- (BOOL)acceptsMouseMovedEvents
 {
+  return YES;
+}
+
+- (void)keyEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
+{
+  // FIXME: virtual keycode translation!
   if (parent)
   {
-    boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(lost::application::KeyEvent::KEY_DOWN()));
+    boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
     keyEvent->key       = [event keyCode];
     // TODO: UTF character
-  //  keyEvent->character = *[[event characters] UTF8String];
-    keyEvent->pressed   = true;
+    keyEvent->character = [[event characters] UTF8String];
+    keyEvent->pressed   = pressed;
     keyEvent->repeat    = [event isARepeat];
     parent->dispatcher->queueEvent(keyEvent);
   }  
 }
 
+- (void)keyDown: (NSEvent*)event
+{
+  [self keyEvent: event type:lost::application::KeyEvent::KEY_DOWN() pressed: YES];
+}
+
 - (void)keyUp: (NSEvent*)event
 {
-  DOUT("keyUp: " << [event keyCode] <<", "<< [[event characters] UTF8String] <<", "<< (bool)[event isARepeat]);
+  [self keyEvent: event type:lost::application::KeyEvent::KEY_UP() pressed: NO];
+}
+
+- (void)mouseEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
+{
+  if (parent)
+  {
+    boost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
+    NSPoint rel = [self mouseLocationOutsideOfEventStream];
+    NSPoint abs = [NSEvent mouseLocation];
+    mouseEvent->pos     = lost::math::Vec2(rel.x, rel.y);
+    mouseEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
+    mouseEvent->button  = [event buttonNumber];
+    mouseEvent->pressed = pressed;
+    parent->dispatcher->queueEvent(mouseEvent);
+  }  
+}
+
+- (void)mouseDown: (NSEvent*)event
+{
+  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_DOWN() pressed: YES];
+}
+
+- (void)mouseUp: (NSEvent*)event
+{
+  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_UP() pressed: NO];
 }
 
 @end
