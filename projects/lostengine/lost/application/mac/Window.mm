@@ -71,11 +71,6 @@
   parent = newParent;
 }
 
-- (BOOL)acceptsMouseMovedEvents
-{
-  return YES;
-}
-
 - (void)keyEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
 {
   // FIXME: virtual keycode translation!
@@ -126,6 +121,11 @@
   [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_UP() pressed: NO];
 }
 
+- (void)mouseMoved: (NSEvent*)event
+{
+  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_MOVE() pressed: NO];
+}
+
 @end
 
 namespace lost
@@ -158,7 +158,8 @@ namespace lost
       // set params
       [hiddenMembers->window setParent: this];
       [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:params.caption.c_str()]];
-    //  [hiddenMembers->window center];
+      [hiddenMembers->window setAcceptsMouseMovedEvents: YES];
+//      [hiddenMembers->window center];
       [hiddenMembers->window setContentView: hiddenMembers->view];
       [hiddenMembers->window setDelegate: hiddenMembers->window];
 
