@@ -11,7 +11,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/filesystem.hpp>
 
-#include "lost/application/RunLoop.h"
+#include "lost/application/RunLoopThread.h"
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/ApplicationEvent.h"
