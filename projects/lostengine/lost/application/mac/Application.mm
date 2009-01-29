@@ -137,34 +137,14 @@ namespace lost
       delete hiddenMembers;
     }
 
-    boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
+    void Application::doRun()
     {
-      DOUT("Application::createWindow()");
-      boost::shared_ptr<Window> result(new Window(shared_from_this(), params));
-      windows[uniqueId] = result;
-      return result;
-    }
-
-    void Application::run()
-    {
-      DOUT("Application::run()");
-      runLoopThread->run(shared_from_this());
       [NSApp run];
     }
 
-    void Application::quit()
+    void Application::doQuit()
     {
-      DOUT("Application::quit()");
-      boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
-      appEvent->type = lost::application::ApplicationEvent::QUIT();
-      queueEvent(appEvent);
       [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
-    }
-    
-    void Application::terminate()
-    {
-      DOUT("Application::terminate()");
-      runLoopThread->join();
     }
     
   }
