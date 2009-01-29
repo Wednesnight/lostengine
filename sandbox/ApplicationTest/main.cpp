@@ -5,6 +5,9 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/platform/Platform.h"
+#include "lost/application/KeySym.h"
+#include "lost/application/KeyEvent.h"
+#include "lost/event/Receive.h"
 
 using namespace lost::application;
 
@@ -71,6 +74,11 @@ private:
     passedSec = currentSec;
   }
 
+  void keyHandler(boost::shared_ptr<KeyEvent> event)
+  {
+    if (event->key == 53) app->quit();
+  }
+
 public:
   MyAppController()
   : passedSec(lost::platform::currentTimeSeconds())
@@ -85,6 +93,8 @@ public:
     state = context->copyState();
     state->clearColor = lost::common::Color(0,0,0,0);
     fpsMeter.reset(new lost::common::FpsMeter(context));
+
+    app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), lost::event::receive<KeyEvent>(boost::bind(&MyAppController::keyHandler, this, _1)));
   }
 
   int run()
@@ -94,8 +104,21 @@ public:
   }
 };
 
-int main (int argc, const char * argv[])
+int testingCPP()
 {
   MyAppController controller;
   return controller.run();
+}
+
+int testingLUA()
+{
+  Application app(boost::filesystem::path("init.lua"));
+  app.run();
+  return 0;
+}
+
+int main (int argc, const char * argv[])
+{
+//  return testingCPP();
+  return testingLUA();
 }

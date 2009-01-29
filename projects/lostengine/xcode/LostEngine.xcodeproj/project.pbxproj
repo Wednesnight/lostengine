@@ -452,6 +452,9 @@
 		8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6C0F31187E0072FB28 /* Application.mm */; };
 		8DE56F6F0F3118840072FB28 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6E0F3118840072FB28 /* Window.mm */; };
 		8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F8A0F31190A0072FB28 /* Context.mm */; };
+		8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
+		8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
+		8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
@@ -822,6 +825,7 @@
 		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
 		8DE56F8A0F31190A0072FB28 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/mac/Context.mm; sourceTree = "<group>"; };
+		8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationWindow.cpp; path = bindings/LostApplicationWindow.cpp; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
@@ -1414,6 +1418,7 @@
 				EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */,
 				EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */,
 				EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */,
+				8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */,
 				EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */,
 				EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */,
 				EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */,
@@ -1777,6 +1782,7 @@
 				3EF4BF2D0F15F183008C7702 /* weak_ref.cpp in Sources */,
 				3EF4BF2E0F15F183008C7702 /* wrapper_base.cpp in Sources */,
 				8DE56F690F3118600072FB28 /* Window.cpp in Sources */,
+				8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2010,6 +2016,7 @@
 				8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */,
 				8DE56F6F0F3118840072FB28 /* Window.mm in Sources */,
 				8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */,
+				8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2219,6 +2226,7 @@
 				3EF4BF190F15F183008C7702 /* weak_ref.cpp in Sources */,
 				3EF4BF1A0F15F183008C7702 /* wrapper_base.cpp in Sources */,
 				8DE56F680F3118600072FB28 /* Window.cpp in Sources */,
+				8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

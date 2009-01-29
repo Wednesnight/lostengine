@@ -24,34 +24,24 @@ namespace lost
 
     Application::Application(const boost::filesystem::path& inRunLoopScript)
     {
-      runLoop = boost::shared_ptr<RunLoop>(new RunLoopScript(inRunLoopScript));
+      boost::shared_ptr<RunLoopScript> runLoopScript = boost::shared_ptr<RunLoopScript>(new RunLoopScript(inRunLoopScript));
+      luabind::globals(*(runLoopScript->interpreter))["lost"]["globals"]["app"] = this; // map the app itself into the interpreter so scripts can attach to its events
+      // try to load lua script
+      try
+      {
+        boost::shared_ptr<lost::resource::File> initScript = runLoopScript->loader->load(inRunLoopScript);
+        runLoopScript->interpreter->doFile(initScript);
+      }
+      catch(std::exception& ex)
+      {
+        EOUT("couldn't load script <"+ inRunLoopScript.native_file_string() +">: "+ std::string(ex.what()));
+      }
       initialize();
     }
 
     Application::~Application()
     {
       finalize();
-    }
-
-    void Application::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
-    {
-      queueMutex.lock();
-      if (!eventQueue) eventQueue.reset(new std::list<boost::shared_ptr<lost::event::Event> >());
-      eventQueue->push_back(event);
-      queueMutex.unlock();
-    }
-
-    void Application::processEvents(const double& timeoutInSeconds)
-    {
-      if (eventQueue)
-      {
-        boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > currentQueue = eventQueue;
-        queueMutex.lock();
-        eventQueue.reset();
-        queueMutex.unlock();
-        for (std::list<boost::shared_ptr<lost::event::Event> >::iterator idx = currentQueue->begin(); idx != currentQueue->end(); ++idx)
-          dispatchEvent(*idx);
-      }
     }
 
   }

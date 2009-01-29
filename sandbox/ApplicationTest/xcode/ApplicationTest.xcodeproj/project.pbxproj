@@ -13,6 +13,7 @@
 		8D11072D0486CEB800E47090 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		8DE572500F311CCD0072FB28 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE5722A0F311B980072FB28 /* libLostEngine.a */; };
+		8DE573B00F3149330072FB28 /* init.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8DE573AA0F3148940072FB28 /* init.lua */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		3E8E7FDC0F2A142600B11EE1 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* Application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Application.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE572200F311B980072FB28 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8DE573AA0F3148940072FB28 /* init.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init.lua; path = ../init.lua; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				3E8E7D8D0F29D93700B11EE1 /* ApplicationMenu.xib */,
 				3E8E7D750F29D86500B11EE1 /* Info.plist */,
+				8DE573AA0F3148940072FB28 /* init.lua */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE573B00F3149330072FB28 /* init.lua in Resources */,
 				3E8E7D8E0F29D93700B11EE1 /* ApplicationMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +303,8 @@
 					../../../projects/lostengine,
 					../../../thirdparty/glee/glee_5_21/include,
 					../../../thirdparty/glfw/glfw_2_6/include,
+					../../../thirdparty/lua/lua_5_1_4/include,
+					../../../thirdparty/luabind/luabind_0_8/include,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
@@ -318,6 +324,8 @@
 					../../../projects/lostengine,
 					../../../thirdparty/glee/glee_5_21/include,
 					../../../thirdparty/glfw/glfw_2_6/include,
+					../../../thirdparty/lua/lua_5_1_4/include,
+					../../../thirdparty/luabind/luabind_0_8/include,
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
