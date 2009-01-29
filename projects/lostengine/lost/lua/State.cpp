@@ -58,19 +58,20 @@ namespace lost
     
     int State::handleError()
     {
+			EOUT("////////////////// ERROR");
       lua_Debug debug;
       lua_getstack(state, 1, &debug);
       lua_getinfo(state, "Sln", &debug);
       
       // get call stack
-      std::string offset;
+//      std::string offset;
       for (unsigned int idx = callstackSize; idx > 0; --idx)
       {
         std::stringstream msg;
         if (lua_getstack(state, idx, &debug) == 1)
         {
           lua_getinfo(state, "Sln", &debug);
-          msg << offset << "-> " << debug.what;
+          msg << "-> " << debug.what;
           if (debug.namewhat != "") msg << " " << debug.namewhat;
             else msg << " unknown";
           if (debug.name != 0) msg << " " << debug.name;
@@ -80,7 +81,7 @@ namespace lost
           EOUT(msg.str());
 
           // format next message
-          offset.append("  ");
+//          offset.append("  ");
         }
       }
       
@@ -89,7 +90,7 @@ namespace lost
       const char* errorc = lua_tostring(state, -1);
       if (errorc != NULL) error = errorc;
       lua_pop(state, 1);
-      EOUT(offset << error);
+      EOUT(error);
 
       return 1;
     }
