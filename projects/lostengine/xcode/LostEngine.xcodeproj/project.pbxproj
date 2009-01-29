@@ -515,7 +515,6 @@
 		EA7BE1040E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
 		EA7BE1060E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
 		EA7BE1080E6F38890017B031 /* ErrorHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */; };
-		EA7BE12A0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
 		EA7BE12B0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */; };
 		EA7BE12C0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */; };
 		EA7BE12D0E6F38A10017B031 /* LostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */; };
@@ -526,7 +525,6 @@
 		EA7BE1320E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */; };
 		EA7BE1330E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */; };
 		EA7BE1340E6F38A10017B031 /* LostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */; };
-		EA7BE1350E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */; };
 		EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */; };
 		EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */; };
 		EA7BE1380E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
@@ -547,7 +545,6 @@
 		EA7BE1470E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */; };
 		EA7BE1490E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */; };
 		EA7BE14A0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */; };
-		EA7BE14B0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
 		EA7BE14C0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */; };
 		EA7BE14D0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */; };
 		EA7BE14E0E6F38A10017B031 /* LostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */; };
@@ -558,7 +555,6 @@
 		EA7BE1530E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */; };
 		EA7BE1540E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */; };
 		EA7BE1550E6F38A10017B031 /* LostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */; };
-		EA7BE1560E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */; };
 		EA7BE1570E6F38A10017B031 /* LostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */; };
 		EA7BE1580E6F38A10017B031 /* LostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */; };
 		EA7BE1590E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
@@ -579,7 +575,6 @@
 		EA7BE1680E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */; };
 		EA7BE16A0E6F38A10017B031 /* LostCommonDisplayAttributes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1280E6F38A10017B031 /* LostCommonDisplayAttributes.cpp */; };
 		EA7BE16B0E6F38A10017B031 /* LostBitmapBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */; };
-		EA7BE16C0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */; };
 		EA7BE16D0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */; };
 		EA7BE16E0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */; };
 		EA7BE16F0E6F38A10017B031 /* LostEventEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */; };
@@ -590,7 +585,6 @@
 		EA7BE1740E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */; };
 		EA7BE1750E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */; };
 		EA7BE1760E6F38A10017B031 /* LostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */; };
-		EA7BE1770E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */; };
 		EA7BE1780E6F38A10017B031 /* LostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */; };
 		EA7BE1790E6F38A10017B031 /* LostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */; };
 		EA7BE17A0E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
@@ -851,7 +845,6 @@
 		EA7163B00EBE17E0005DB902 /* Packer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packer.cpp; sourceTree = "<group>"; };
 		EA7BE0F50E6F38760017B031 /* BindAll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindAll.cpp; sourceTree = "<group>"; };
 		EA7BE1020E6F38890017B031 /* ErrorHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ErrorHandler.cpp; sourceTree = "<group>"; };
-		EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationTimer.cpp; path = bindings/LostApplicationTimer.cpp; sourceTree = "<group>"; };
 		EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationApplicationEvent.cpp; path = bindings/LostApplicationApplicationEvent.cpp; sourceTree = "<group>"; };
 		EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationTouchEvent.cpp; path = bindings/LostApplicationTouchEvent.cpp; sourceTree = "<group>"; };
 		EA7BE10C0E6F38A10017B031 /* LostEventEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostEventEvent.cpp; path = bindings/LostEventEvent.cpp; sourceTree = "<group>"; };
@@ -862,7 +855,6 @@
 		EA7BE1110E6F38A10017B031 /* LostCommonFpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommonFpsMeter.cpp; path = bindings/LostCommonFpsMeter.cpp; sourceTree = "<group>"; };
 		EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationResizeEvent.cpp; path = bindings/LostApplicationResizeEvent.cpp; sourceTree = "<group>"; };
 		EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommonColor.cpp; path = bindings/LostCommonColor.cpp; sourceTree = "<group>"; };
-		EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationTimerEvent.cpp; path = bindings/LostApplicationTimerEvent.cpp; sourceTree = "<group>"; };
 		EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMathVec2.cpp; path = bindings/LostMathVec2.cpp; sourceTree = "<group>"; };
 		EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMathRect.cpp; path = bindings/LostMathRect.cpp; sourceTree = "<group>"; };
 		EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelObjParser.cpp; path = bindings/LostModelObjParser.cpp; sourceTree = "<group>"; };
@@ -1415,8 +1407,6 @@
 				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
 				EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */,
 				EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */,
-				EA7BE1090E6F38A10017B031 /* LostApplicationTimer.cpp */,
-				EA7BE1140E6F38A10017B031 /* LostApplicationTimerEvent.cpp */,
 				EA7BE10B0E6F38A10017B031 /* LostApplicationTouchEvent.cpp */,
 				8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */,
 				EA7BE1290E6F38A10017B031 /* LostBitmapBitmap.cpp */,
@@ -1593,7 +1583,6 @@
 				EA54FA7E0E676E2200605409 /* Face.cpp in Sources */,
 				EA7BE0FE0E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1080E6F38890017B031 /* ErrorHandler.cpp in Sources */,
-				EA7BE16C0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE16D0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE16E0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
 				EA7BE16F0E6F38A10017B031 /* LostEventEvent.cpp in Sources */,
@@ -1604,7 +1593,6 @@
 				EA7BE1740E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */,
 				EA7BE1750E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */,
 				EA7BE1760E6F38A10017B031 /* LostCommonColor.cpp in Sources */,
-				EA7BE1770E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */,
 				EA7BE1780E6F38A10017B031 /* LostMathVec2.cpp in Sources */,
 				EA7BE1790E6F38A10017B031 /* LostMathRect.cpp in Sources */,
 				EA7BE17A0E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,
@@ -1804,7 +1792,6 @@
 				EA54FA6E0E676E2200605409 /* Face.cpp in Sources */,
 				EA7BE0F80E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1040E6F38890017B031 /* ErrorHandler.cpp in Sources */,
-				EA7BE12A0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE12B0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE12C0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
 				EA7BE12D0E6F38A10017B031 /* LostEventEvent.cpp in Sources */,
@@ -1815,7 +1802,6 @@
 				EA7BE1320E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */,
 				EA7BE1330E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */,
 				EA7BE1340E6F38A10017B031 /* LostCommonColor.cpp in Sources */,
-				EA7BE1350E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */,
 				EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */,
 				EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */,
 				EA7BE1380E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,
@@ -2037,7 +2023,6 @@
 				EA54FA760E676E2200605409 /* Face.cpp in Sources */,
 				EA7BE0FB0E6F38760017B031 /* BindAll.cpp in Sources */,
 				EA7BE1060E6F38890017B031 /* ErrorHandler.cpp in Sources */,
-				EA7BE14B0E6F38A10017B031 /* LostApplicationTimer.cpp in Sources */,
 				EA7BE14C0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp in Sources */,
 				EA7BE14D0E6F38A10017B031 /* LostApplicationTouchEvent.cpp in Sources */,
 				EA7BE14E0E6F38A10017B031 /* LostEventEvent.cpp in Sources */,
@@ -2048,7 +2033,6 @@
 				EA7BE1530E6F38A10017B031 /* LostCommonFpsMeter.cpp in Sources */,
 				EA7BE1540E6F38A10017B031 /* LostApplicationResizeEvent.cpp in Sources */,
 				EA7BE1550E6F38A10017B031 /* LostCommonColor.cpp in Sources */,
-				EA7BE1560E6F38A10017B031 /* LostApplicationTimerEvent.cpp in Sources */,
 				EA7BE1570E6F38A10017B031 /* LostMathVec2.cpp in Sources */,
 				EA7BE1580E6F38A10017B031 /* LostMathRect.cpp in Sources */,
 				EA7BE1590E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,

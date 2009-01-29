@@ -5,7 +5,6 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
-#include "lost/application/TimerEvent.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera.h"
@@ -47,7 +46,6 @@ namespace luabind
   GET_POINTER(lost::application::KeyEvent);
   GET_POINTER(lost::application::MouseEvent);
   GET_POINTER(lost::application::ResizeEvent);
-  GET_POINTER(lost::application::TimerEvent);
   GET_POINTER(lost::application::TouchEvent);
   GET_POINTER(lost::application::TouchEvent::Touch);
   GET_POINTER(lost::bitmap::Bitmap);
