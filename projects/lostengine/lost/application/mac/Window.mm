@@ -129,9 +129,21 @@
   }
 }
 
+- (bool)validEvent: (NSEvent*)event type:(std::string)type
+{
+  bool result = true;
+  if (type == lost::application::MouseEvent::MOUSE_MOVE())
+  {
+    NSPoint rel  = [self mouseLocationOutsideOfEventStream];
+    NSRect  rect = [self frame];
+    result = rel.x >= 0 && rel.x <= rect.size.width && rel.y >= 0 && rel.y <= rect.size.height;
+  }
+  return result;
+}
+
 - (void)mouseEvent: (NSEvent*)event type:(std::string)type
 {
-  if (parent)
+  if (parent && [self validEvent: event type:type])
   {
     boost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];

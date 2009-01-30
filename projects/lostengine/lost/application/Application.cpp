@@ -1,4 +1,5 @@
 #include "lost/application/Application.h"
+#include "lost/resource/DefaultLoader.h"
 
 namespace lost
 {
@@ -6,19 +7,22 @@ namespace lost
   {
     
     Application::Application()
-    : runLoopThread(new RunLoopThread)
+    : loader(new lost::resource::DefaultLoader),
+      runLoopThread(new RunLoopThread)
     {
       initialize();
     }
 
     Application::Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
-    : runLoopThread(new RunLoopThread(inRunLoop))
+    : loader(new lost::resource::DefaultLoader),
+      runLoopThread(new RunLoopThread(inRunLoop))
     {
       initialize();
     }
 
     Application::Application(const boost::filesystem::path& inScript)
-    : runLoopThread(new RunLoopThreadLua(inScript))
+    : loader(new lost::resource::DefaultLoader),
+      runLoopThread(new RunLoopThreadLua(inScript))
     {
       initialize();
     }

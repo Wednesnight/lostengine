@@ -15,6 +15,7 @@
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/resource/Loader.h"
 
 namespace lost
 {
@@ -61,6 +62,8 @@ namespace lost
       Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       Application(const boost::filesystem::path& inScript);
     public:
+      boost::shared_ptr<lost::resource::Loader> loader;
+      
       /**
        * static ctor helpers, make sure that we're held by a boost::shared_ptr
        */

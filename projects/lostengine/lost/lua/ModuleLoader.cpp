@@ -28,7 +28,7 @@ namespace ModuleLoader
     "mt={}\n"
     "\n"
     "function customLoader(moduleName)\n"
-    "  local f = assert(lost.globals.state:doResourceFile(moduleName..'.lua'))\n"
+    "  local f = assert(lost.lua.currentState:doResourceFile(moduleName..'.lua'))\n"
     "  return f\n"
     "end\n"
     "\n"

@@ -6,18 +6,18 @@
 
 namespace lost
 {
-namespace resource
-{
-  struct DefaultLoader : public Loader
-{
-  DefaultLoader()
+  namespace resource
   {
-    addRepository(boost::shared_ptr<Repository>(new ApplicationResourceRepository));
-  }
+    struct DefaultLoader : public Loader
+    {
+      DefaultLoader()
+      {
+        addRepository(boost::shared_ptr<Repository>(new ApplicationResourceRepository));
+      }
 
-  virtual ~DefaultLoader() {}
-};
-}
+      virtual ~DefaultLoader() {}
+    };
+  }
 }
 
 #endif

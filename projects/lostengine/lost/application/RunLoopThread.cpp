@@ -54,23 +54,26 @@ namespace lost
     RunLoopThreadLua::RunLoopThreadLua(const boost::filesystem::path& inFilename)
     : filename(inFilename)
     {
-      loader.reset(new lost::resource::DefaultLoader);              // init default resource loader
-      interpreter.reset(new lua::State(true, true, true, loader));  // init lua state with resource loader
-      lost::lua::bindAll(*interpreter);                             // bind lostengine lua mappings    
-      
-      luabind::globals(*interpreter)["lost"]["lua"]["currentState"] = interpreter;  // map the state itself into the interpreter so that
-                                                                                    //   - error handling is working and
-                                                                                    //   - scripts can use it
-      
-      lost::lua::ModuleLoader::install(*interpreter, loader); // install custom module loader so require goes through resourceLoader
     }    
 
     void RunLoopThreadLua::run(const boost::shared_ptr<Application>& inApplication)
     {
+      interpreter.reset(new lua::State(true, true, true, inApplication->loader));  // init lua state with resource loader
+      lost::lua::bindAll(*interpreter);                                            // bind lostengine lua mappings    
+
+      // map the state itself into the interpreter so that
+      //   - error handling is working and
+      //   - scripts can use it
+      luabind::globals(*interpreter)["lost"]["lua"]["currentState"] = interpreter;
+      // map the loader into the interpreter so that scripts can load resources
+      luabind::globals(*interpreter)["lost"]["resource"]["currentLoader"] = inApplication->loader;
+
+      lost::lua::ModuleLoader::install(*interpreter, inApplication->loader); // install custom module loader so require goes through resourceLoader
+
       // try to load lua script
       try
       {
-        boost::shared_ptr<lost::resource::File> initScript = loader->load(filename);
+        boost::shared_ptr<lost::resource::File> initScript = inApplication->loader->load(filename);
         interpreter->doFile(initScript);
         luabind::object main = luabind::globals(*interpreter)["main"];
         if (luabind::type(main) != LUA_TFUNCTION) throw std::runtime_error("main() is not defined");

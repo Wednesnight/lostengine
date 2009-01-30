@@ -1,51 +1,48 @@
-require("lost.application.Application")
 require("lost.common.Profiler")
 
-local profilerEnabled = false
+function main(application)
+  GuiroTestController:initialize(application)
+end
 
-function lost.application.Application:configure(event)
-  if profilerEnabled then
+GuiroTestController =
+{
+  profilerEnabled = false
+}
+
+function GuiroTestController:initialize(application)
+  self.app = application
+
+  if self.profilerEnabled then
     self.profiler = lost.common.Profiler()
   end
 
-  self.config.displayAttributes = lost.common.DisplayAttributes()
-  if lost.platform.isIPhone() then
-    log.debug("running on iPhone/iPod")
-    self.config.displayAttributes.width = 320
-    self.config.displayAttributes.height = 480
-  else
-    log.debug("running on Desktop")
-    self.config.displayAttributes.width = 800
-    self.config.displayAttributes.height = 600
-  end
-  self.config.displayAttributes.redbits = 8;
-  self.config.displayAttributes.bluebits = 8;
-  self.config.displayAttributes.greenbits = 8;
-  self.config.displayAttributes.alphabits = 8;
-  self.config.displayAttributes.depthbits = 24;
-  self.config.displayAttributes.stencilbits = 0;
-  self.config.displayAttributes.fullscreen = false;
-  self.config.displayAttributes.title = "GuiroTest";
+  self.app:addEventListener(lost.application.ApplicationEvent.RUN, function(event) self:run(event) end)
+  self.app:addEventListener(lost.application.ApplicationEvent.QUIT, function(event) self:quit(event) end)
+  self.app:addEventListener(lost.application.ApplicationEvent.TERMINATE, function(event) self:terminate(event) end)
 
-  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
-  self:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
-  self:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
-end
+--  self.app:addEventListener(lost.application.ResizeEvent.WINDOW_RESIZE, function(event) self:resizeHandler(event) end)
 
-function lost.application.Application:init(event)
-  log.debug("init")
+  self.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
+  self.app:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
 
-  controls = {}
-  controls.fpsMeter = lost.common.FpsMeter(self.context)
+  self.window = self.app:createWindow("MainWindow", lost.application.WindowParams("GuiroTest", lost.math.Vec2(800, 600), lost.math.Vec2(100, 100)))
+
+  self.displayAttributes = lost.common.DisplayAttributes()
+  self.displayAttributes.width = 800
+  self.displayAttributes.height = 600
+  self.context = lost.gl.Context(self.displayAttributes)
+
+  self.controls = {}
+  self.controls.fpsMeter = lost.common.FpsMeter(self.context)
 
   require("lost.io.Guiro")
-  controls.loader = lost.io.Loader(lost.globals.app.loader)
+  self.loader = lost.io.Loader(self.app.loader)
   if lost.platform.isIPhone() then
-    controls.screen = controls.loader:loadScreen("screen-iphone")
+    self.controls.screen = self.loader:loadScreen("screen-iphone")
   else
-    controls.screen = controls.loader:loadScreen("screen")
+    self.controls.screen = self.loader:loadScreen("screen")
   end
-  self.screen = controls.screen
+  self.controls.screen:setEventDispatcher(self.app)
 
   -- print out class hierarchy
   log.debug("class hierarchy:")
@@ -57,7 +54,7 @@ function lost.application.Application:init(event)
   lost.guiro.controls.Window:printBases()
   -- print out view hierarchy
   log.debug("view hierarchy:")
-  controls.screen:printChildren()
+  self.controls.screen:printChildren()
   
   self.renderState = self.context:copyState()
   self.renderState.clearColor = lost.common.Color(0,0,0)
@@ -65,27 +62,24 @@ function lost.application.Application:init(event)
   self.renderState.texture2D = false
   self.renderState.vertexArray = true
 
-  if lost.platform.isIPhone() then
-    self.config.renderFrequency = 1/30
-  else
-    self.config.renderFrequency = 1/60
-  end
---  lost.globals.timer = lost.application.Timer("luarender", self.config.renderFrequency)
---  lost.globals.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self:renderHandler(event) end)
   self.passedSec = lost.platform.currentTimeSeconds()
-  self:setMainLoop(function() local currentSec = lost.platform.currentTimeSeconds() self:mainLoop(currentSec - self.passedSec) self.passedSec = currentSec end)
+  self.app:setRunLoop(function(sender) local currentSec = lost.platform.currentTimeSeconds() self:runLoop(sender, currentSec - self.passedSec) self.passedSec = currentSec end)
 end
 
-function lost.application.Application:run(event)
+function GuiroTestController:run(event)
   log.debug("run")
   
-  if profilerEnabled then
+  if self.profilerEnabled then
     self.profiler:enable()
   end
 end
 
-function lost.application.Application:exit(event)
-  if profilerEnabled then
+function GuiroTestController:quit(event)
+  log.debug("beforeExit")
+end
+
+function GuiroTestController:terminate(event)
+  if self.profilerEnabled then
     self.profiler:disable()
     self.profiler:report()
   end
@@ -93,7 +87,7 @@ function lost.application.Application:exit(event)
   log.debug("exit")
 end
 
-function lost.application.Application:resizeHandler(event)
+function GuiroTestController:resizeHandler(event)
   local resizeEvent = lost.application.ResizeEvent.cast(event)
 
 --  if not lost.platform.isIPhone() and controls and controls.screen then
@@ -102,32 +96,32 @@ function lost.application.Application:resizeHandler(event)
 --  end
 end
 
-function lost.application.Application:keyHandler(event)
+function GuiroTestController:keyHandler(event)
   keyEvent = lost.application.KeyEvent.cast(event)
   
   if (keyEvent.pressed) then
   
     if (keyEvent.key == lost.application.K_ESCAPE) then
-      self:quit()
+      self.app:quit()
     end
   
   end
 end
 
-function lost.application.Application:mainLoop(passedSec)
+function GuiroTestController:runLoop(sender, passedSec)
+  self.window.context:makeCurrent()
   self.context:pushState(self.renderState)
   self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
 
-  self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
+  self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.displayAttributes.width, self.displayAttributes.height))
   gl.glMatrixMode(gl.GL_MODELVIEW)
 
   gl.glLoadIdentity()
-  controls.screen:render(self.context)
+  self.controls.screen:render(self.context)
 
   gl.glLoadIdentity()
-  controls.fpsMeter:render(self.displayAttributes.width - controls.fpsMeter.width, 1, passedSec)
+  self.controls.fpsMeter:render(self.displayAttributes.width - self.controls.fpsMeter.width, 1, passedSec)
 
   self.context:popState()
-  self:swapBuffers()
-  self:processEvents(0)
+  self.window.context:swapBuffers()
 end
