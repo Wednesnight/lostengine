@@ -40,11 +40,10 @@
 		3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
 		3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
 		3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E9CA02D0F332E7B00E34312 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9CA02C0F332E7B00E34312 /* Cocoa.framework */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
-		3EF63D8B0F16038000CF8022 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF63D8A0F16038000CF8022 /* libLostEngine.a */; };
-		3EF63D8D0F16039500CF8022 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF63D8C0F16039500CF8022 /* libLostEngine.a */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -115,9 +114,8 @@
 		3E485ADE0ECD7512003AAEAB /* GuiroTest-simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuiroTest-simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E48F5BD0ED6DD3D003CFD2F /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../button.png; sourceTree = SOURCE_ROOT; };
 		3E7BF9520ED4CB890017AEBA /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
+		3E9CA02C0F332E7B00E34312 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
-		3EF63D8A0F16038000CF8022 /* libLostEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLostEngine.a; path = "../../../../build/Debug-iphoneos/libLostEngine.a"; sourceTree = SOURCE_ROOT; };
-		3EF63D8C0F16039500CF8022 /* libLostEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLostEngine.a; path = "../../../../build/Debug-iphonesimulator/libLostEngine.a"; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -138,7 +136,6 @@
 				3E485AB80ECD73E5003AAEAB /* Foundation.framework in Frameworks */,
 				3E485AB90ECD73E5003AAEAB /* OpenGLES.framework in Frameworks */,
 				3E485ABA0ECD73E5003AAEAB /* UIKit.framework in Frameworks */,
-				3EF63D8B0F16038000CF8022 /* libLostEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +147,6 @@
 				3E485AD70ECD7512003AAEAB /* Foundation.framework in Frameworks */,
 				3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */,
 				3E485AD90ECD7512003AAEAB /* UIKit.framework in Frameworks */,
-				3EF63D8D0F16039500CF8022 /* libLostEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +159,7 @@
 				EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */,
 				EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */,
 				EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */,
+				3E9CA02D0F332E7B00E34312 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,8 +179,6 @@
 		29B97314FDCFA39411CA2CEA /* Object0r */ = {
 			isa = PBXGroup;
 			children = (
-				3EF63D8C0F16039500CF8022 /* libLostEngine.a */,
-				3EF63D8A0F16038000CF8022 /* libLostEngine.a */,
 				29B97323FDCFA39411CA2CEA /* Libraries */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -221,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */,
+				3E9CA02C0F332E7B00E34312 /* Cocoa.framework */,
 				EA27DE490DD87EE200552F5E /* AGL.framework */,
 				EA27DE4A0DD87EE200552F5E /* OpenGL.framework */,
 				EA27DE4B0DD87EE200552F5E /* GLUT.framework */,

@@ -12,8 +12,8 @@ int main(int argn, char** args)
 {
   try
   {
-    Application app;
-    app.run();
+    boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
+    app->run();
   }
   catch (std::exception& e)
   {

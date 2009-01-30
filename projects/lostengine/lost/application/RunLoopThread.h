@@ -41,9 +41,8 @@ namespace lost
     struct RunLoopThreadLua : public RunLoopThread
     {
     protected:
-      boost::filesystem::path                   filename;
-      boost::shared_ptr<lost::resource::Loader> loader;
-      boost::shared_ptr<lost::lua::State>       interpreter;
+      boost::filesystem::path             filename;
+      boost::shared_ptr<lost::lua::State> interpreter;
     public:
       RunLoopThreadLua(const boost::filesystem::path& inFilename);
       virtual void run(const boost::shared_ptr<Application>& inApplication);

@@ -44,3 +44,11 @@ function Screen:render(context, forceRender)
     ui:render(context, forceRender)
   end
 end
+
+function Screen:setEventDispatcher(dispatcher)
+  dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:dispatchEvent(event) end)
+  dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:dispatchEvent(event) end)
+  dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:dispatchEvent(event) end)
+  dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:dispatchEvent(event) end)
+  dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:dispatchEvent(event) end)
+end
