@@ -61,12 +61,18 @@ namespace lost
       interpreter.reset(new lua::State(true, true, true, inApplication->loader));  // init lua state with resource loader
       lost::lua::bindAll(*interpreter);                                            // bind lostengine lua mappings    
 
+      /**
+       * each runloop interpreter has got its own environment reference including the following objects:
+       *   - interpreter
+       *   - application
+       */
+      luabind::globals(*interpreter)["environment"] = luabind::newtable(*interpreter);
       // map the state itself into the interpreter so that
       //   - error handling is working and
       //   - scripts can use it
-      luabind::globals(*interpreter)["lost"]["lua"]["currentState"] = interpreter;
+      luabind::globals(*interpreter)["environment"]["interpreter"] = interpreter;
       // map the loader into the interpreter so that scripts can load resources
-      luabind::globals(*interpreter)["lost"]["resource"]["currentLoader"] = inApplication->loader;
+      luabind::globals(*interpreter)["environment"]["application"] = inApplication;
 
       lost::lua::ModuleLoader::install(*interpreter, inApplication->loader); // install custom module loader so require goes through resourceLoader
 

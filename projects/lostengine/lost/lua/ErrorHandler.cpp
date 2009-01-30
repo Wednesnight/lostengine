@@ -20,7 +20,7 @@ namespace lost
       int result = 0;
       try
       {
-        shared_ptr<State> interpreter = object_cast<shared_ptr<State> >(globals(state)["lost"]["lua"]["currentState"]);
+        shared_ptr<State> interpreter = object_cast<shared_ptr<State> >(globals(state)["environment"]["interpreter"]);
         result = interpreter->handleError();
       }
       catch (std::exception& e)
