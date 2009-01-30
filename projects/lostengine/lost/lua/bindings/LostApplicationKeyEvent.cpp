@@ -1,7 +1,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/KeyEvent.h"
-#include "lost/application/KeySym.h"
+#include "lost/application/KeyCode.h"
 #include "lost/lua/EventCast.h"
 
 #include "lost/lua/bindings/LostApplicationKeyEvent.h"
@@ -20,8 +20,8 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<KeyEvent, Event, boost::shared_ptr<KeyEvent> >("KeyEvent")
-          .def(constructor<std::string>()) 
+          class_<KeyEvent, InputEvent, boost::shared_ptr<KeyEvent> >("KeyEvent")
+          .def(constructor<std::string>())
           .def_readwrite("key", &KeyEvent::key)
           .def_readwrite("character", &KeyEvent::character)
           .def_readwrite("pressed", &KeyEvent::pressed)

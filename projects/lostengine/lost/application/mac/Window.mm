@@ -7,33 +7,19 @@
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
-
-@interface GLView : NSOpenGLView
-{
-}
-@end
-
-@implementation GLView
-
-- (id)initWithFrame: (NSRect)frame
-{
-  NSOpenGLPixelFormatAttribute windowedAttributes[] =
-  {
-    NSOpenGLPFADoubleBuffer,
-    NSOpenGLPFAAccelerated,
-    NSOpenGLPFAColorSize, [[[NSUserDefaults standardUserDefaults] objectForKey:@"colorDepth"] intValue],
-    NSOpenGLPFAAlphaSize, 16,
-    NSOpenGLPFADepthSize, 16,
-    0
-  };
-  return [super initWithFrame: frame pixelFormat: [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes]];
-}
-
-@end
+#include "lost/application/KeyCode.h"
 
 @interface ApplicationWindow : NSWindow
 {
   lost::application::Window* parent;
+
+  bool leftButtonDown;
+  bool rightButtonDown;
+}
+@end
+
+@interface GLView : NSOpenGLView
+{
 }
 @end
 
@@ -44,10 +30,11 @@
 	self = [super initWithContentRect: contentRect styleMask: aStyle backing: bufferingType defer: flag];
 	if(self != nil)
 	{
-    //
+    // TODO: init window params
 	}
 	return self;
 }
+// TODO: is screen of any use for us?
 //- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
 
 - (BOOL)isReleasedWhenClosed
@@ -71,13 +58,28 @@
   parent = newParent;
 }
 
+- (GLView*)contentView
+{
+  return (GLView*)[super contentView];
+}
+
+- (lost::application::KeyCode)translateKeyCode: (NSInteger)nativeKeyCode
+{
+  switch (nativeKeyCode)
+  {
+    case 53 : return lost::application::K_ESCAPE;
+    default : return lost::application::K_UNKNOWN;
+  }
+}
+
 - (void)keyEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
 {
   // FIXME: virtual keycode translation!
   if (parent)
   {
     boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
-    keyEvent->key       = [event keyCode];
+    keyEvent->window    = parent->shared_from_this();
+    keyEvent->key       = [self translateKeyCode: [event keyCode]];
     // TODO: UTF character
     keyEvent->character = [[event characters] UTF8String];
     keyEvent->pressed   = pressed;
@@ -88,42 +90,117 @@
 
 - (void)keyDown: (NSEvent*)event
 {
-  [self keyEvent: event type:lost::application::KeyEvent::KEY_DOWN() pressed: YES];
+  [self keyEvent: event type: lost::application::KeyEvent::KEY_DOWN() pressed: YES];
 }
 
 - (void)keyUp: (NSEvent*)event
 {
-  [self keyEvent: event type:lost::application::KeyEvent::KEY_UP() pressed: NO];
+  [self keyEvent: event type: lost::application::KeyEvent::KEY_UP() pressed: NO];
 }
 
-- (void)mouseEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
+- (lost::application::MouseButton)translateMouseButton: (NSInteger)nativeButton
+{
+  switch (nativeButton)
+  {
+    case 0  : return lost::application::MB_LEFT;
+    case 1  : return lost::application::MB_RIGHT;
+    default : return lost::application::MB_UNKNOWN;
+  }
+}
+
+- (bool)mouseButtonPressed: (std::string)eventType button: (lost::application::MouseButton)button
+{
+  if (eventType == lost::application::MouseEvent::MOUSE_DOWN())
+  {
+    if (button == lost::application::MB_LEFT) leftButtonDown = true;
+      else if (button == lost::application::MB_RIGHT) rightButtonDown = true;
+  }
+  else if (eventType == lost::application::MouseEvent::MOUSE_UP())
+  {
+    if (button == lost::application::MB_LEFT) leftButtonDown = false;
+      else if (button == lost::application::MB_RIGHT) rightButtonDown = false;
+  }
+
+  switch (button)
+  {
+    case lost::application::MB_LEFT  : return leftButtonDown;
+    case lost::application::MB_RIGHT : return rightButtonDown;
+    default                          : return false;
+  }
+}
+
+- (void)mouseEvent: (NSEvent*)event type:(std::string)type
 {
   if (parent)
   {
     boost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];
     NSPoint abs = [NSEvent mouseLocation];
+    mouseEvent->window  = parent->shared_from_this();
     mouseEvent->pos     = lost::math::Vec2(rel.x, rel.y);
     mouseEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
-    mouseEvent->button  = [event buttonNumber];
-    mouseEvent->pressed = pressed;
+    mouseEvent->button  = [self translateMouseButton: [event buttonNumber]];
+    mouseEvent->pressed = [self mouseButtonPressed: type button: mouseEvent->button];
     parent->dispatcher->queueEvent(mouseEvent);
   }  
 }
 
+- (void)mouseMoved: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+}
+
+- (void)mouseDragged: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+}
+
+- (void)rightMouseDragged: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+}
+
+@end
+
+@implementation GLView
+
+- (id)initWithFrame: (NSRect)frame
+{
+  NSOpenGLPixelFormatAttribute windowedAttributes[] =
+  {
+    NSOpenGLPFADoubleBuffer,
+    NSOpenGLPFAAccelerated,
+    NSOpenGLPFAColorSize, [[[NSUserDefaults standardUserDefaults] objectForKey:@"colorDepth"] intValue],
+    NSOpenGLPFAAlphaSize, 16,
+    NSOpenGLPFADepthSize, 16,
+    0
+  };
+  return [super initWithFrame: frame pixelFormat: [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes]];
+}
+
+- (id)window
+{
+  return (ApplicationWindow*)[super window];
+}
+
 - (void)mouseDown: (NSEvent*)event
 {
-  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_DOWN() pressed: YES];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
 }
 
 - (void)mouseUp: (NSEvent*)event
 {
-  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_UP() pressed: NO];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
 }
 
-- (void)mouseMoved: (NSEvent*)event
+- (void)rightMouseDown: (NSEvent*)event
 {
-  [self mouseEvent: event type:lost::application::MouseEvent::MOUSE_MOVE() pressed: NO];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
+}
+
+- (void)rightMouseUp: (NSEvent*)event
+{
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
 }
 
 @end
@@ -159,7 +236,6 @@ namespace lost
       [hiddenMembers->window setParent: this];
       [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:params.caption.c_str()]];
       [hiddenMembers->window setAcceptsMouseMovedEvents: YES];
-//      [hiddenMembers->window center];
       [hiddenMembers->window setContentView: hiddenMembers->view];
       [hiddenMembers->window setDelegate: hiddenMembers->window];
 

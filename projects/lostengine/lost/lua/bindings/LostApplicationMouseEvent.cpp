@@ -20,7 +20,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<MouseEvent, Event, boost::shared_ptr<MouseEvent> >("MouseEvent")
+          class_<MouseEvent, InputEvent, boost::shared_ptr<MouseEvent> >("MouseEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("pos", &MouseEvent::pos)
           .def_readwrite("absPos", &MouseEvent::absPos)

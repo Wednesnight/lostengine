@@ -51,7 +51,7 @@ namespace lost
     boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
     {
       DOUT("Application::createWindow()");
-      boost::shared_ptr<Window> result(new Window(shared_from_this(), params));
+      boost::shared_ptr<Window> result = Window::create(shared_from_this(), params);
       windows[uniqueId] = result;
       return result;
     }
@@ -59,6 +59,8 @@ namespace lost
     void Application::run()
     {
       DOUT("Application::run()");
+      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
+      dispatchEvent(appEvent);
       runLoopThread->run(shared_from_this());
       doRun();
     }
@@ -66,8 +68,7 @@ namespace lost
     void Application::quit()
     {
       DOUT("Application::quit()");
-      boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
-      appEvent->type = lost::application::ApplicationEvent::QUIT();
+      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::QUIT()));
       queueEvent(appEvent);
       doQuit();
     }
@@ -75,6 +76,8 @@ namespace lost
     void Application::terminate()
     {
       DOUT("Application::terminate()");
+      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::TERMINATE()));
+      queueEvent(appEvent);
       runLoopThread->join();
     }
 

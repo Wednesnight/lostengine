@@ -5,7 +5,6 @@
 #include "lost/common/FpsMeter.h"
 #include "lost/common/DisplayAttributes.h"
 #include "lost/platform/Platform.h"
-#include "lost/application/KeySym.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/event/Receive.h"
 

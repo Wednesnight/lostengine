@@ -17,6 +17,9 @@ function MyController:init(application)
 
   -- add event listeners
   application:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
+  application:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
+  application:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:mouseHandler(event) end)
+  application:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:mouseHandler(event) end)
   application:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:mouseHandler(event) end)
 
   -- set our runloop
@@ -25,16 +28,22 @@ end
 
 function MyController:keyHandler(event)
   local keyEvent = lost.application.KeyEvent.cast(event)
-  log.debug(keyEvent.character)
-  if (keyEvent.key == 53) then
+  log.debug("type: ".. keyEvent.type)
+  log.debug("key: ".. keyEvent.key)
+  log.debug("character: ".. keyEvent.character)
+
+  if (keyEvent.key == lost.application.K_ESCAPE) then
     self.app:quit()
   end
 end
 
 function MyController:mouseHandler(event)
   local mouseEvent = lost.application.MouseEvent.cast(event)
+  log.debug("type: ".. mouseEvent.type)
+  log.debug("button: ".. tostring(mouseEvent.button))
   log.debug("pos: ".. tostring(mouseEvent.pos))
   log.debug("absPos: ".. tostring(mouseEvent.absPos))
+  log.debug("pressed: ".. tostring(mouseEvent.pressed))
 end
 
 function MyController:run(application)
