@@ -2,6 +2,7 @@
 #define LOST_APPLICATION_WINDOW_H
 
 #include <boost/shared_ptr.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #include "lost/application/gl/Context.h"
 #include "lost/math/Vec2.h"
@@ -29,7 +30,7 @@ namespace lost
       }
     };
 
-    struct Window
+    struct Window : public boost::enable_shared_from_this<Window>
     {
     private:
       /**
@@ -49,6 +50,13 @@ namespace lost
        */
       void initialize();
       void finalize();
+
+      /**
+       * don't use ctors directly! leave them private since we need to be held by a boost::shared_ptr,
+       * otherwise shared_from_this() will fail!
+       */
+      Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+             const WindowParams& inParams);
     public:
       /**
        * the target for all events received by the window (typically key/mouse events)
@@ -61,8 +69,11 @@ namespace lost
       // FIXME: should probably be read-only
       boost::shared_ptr<gl::Context> context;
 
-      Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
-             const WindowParams& inParams);
+      /**
+       * static ctor helpers, make sure that we're held by a boost::shared_ptr
+       */
+      static boost::shared_ptr<Window> create(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+                                              const WindowParams& inParams);
       ~Window();
 
       /**

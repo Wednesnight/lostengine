@@ -356,6 +356,9 @@
 		3E5323690F15185000D7C8B4 /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323120F15185000D7C8B4 /* lapi.c */; };
 		3E53236A0F15185000D7C8B4 /* lcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323130F15185000D7C8B4 /* lcode.c */; };
 		3E53236B0F15185000D7C8B4 /* lgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323140F15185000D7C8B4 /* lgc.c */; };
+		3E55444F0F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */; };
+		3E5544500F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */; };
+		3E5544510F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */; };
 		3E650FF20E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
 		3E650FF40E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
 		3E650FF60E7F914D00DE5AFE /* LostGLContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */; };
@@ -794,6 +797,7 @@
 		3E5323120F15185000D7C8B4 /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lapi.c; sourceTree = SOURCE_ROOT; };
 		3E5323130F15185000D7C8B4 /* lcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcode.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lcode.c; sourceTree = SOURCE_ROOT; };
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
+		3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationInputEvent.cpp; path = bindings/LostApplicationInputEvent.cpp; sourceTree = "<group>"; };
 		3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLContext.cpp; path = bindings/LostGLContext.cpp; sourceTree = "<group>"; };
 		3E6510010E7F92C700DE5AFE /* LostGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLState.cpp; path = bindings/LostGLState.cpp; sourceTree = "<group>"; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1414,6 +1418,7 @@
 				EA7BE11E0E6F38A10017B031 /* LostApplicationApplication.cpp */,
 				EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */,
 				3E1329850F31FC1A00EA849F /* LostApplicationGLContext.cpp */,
+				3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */,
 				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
 				EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */,
 				EA7BE1120E6F38A10017B031 /* LostApplicationResizeEvent.cpp */,
@@ -1783,6 +1788,7 @@
 				8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 				3E1329690F31F26900EA849F /* RunLoopThread.cpp in Sources */,
 				3E1329870F31FC1A00EA849F /* LostApplicationGLContext.cpp in Sources */,
+				3E55444F0F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,6 +2023,7 @@
 				8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 				3E13296B0F31F26900EA849F /* RunLoopThread.cpp in Sources */,
 				3E13298B0F31FC1A00EA849F /* LostApplicationGLContext.cpp in Sources */,
+				3E5544510F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2227,6 +2234,7 @@
 				8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 				3E13296A0F31F26900EA849F /* RunLoopThread.cpp in Sources */,
 				3E1329890F31FC1A00EA849F /* LostApplicationGLContext.cpp in Sources */,
+				3E5544500F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

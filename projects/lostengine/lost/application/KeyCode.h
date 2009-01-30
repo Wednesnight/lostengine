@@ -1,12 +1,12 @@
-#ifndef LOST_APPLICATION_KEYSYM_H
-#define LOST_APPLICATION_KEYSYM_H
+#ifndef LOST_APPLICATION_KEYCODE_H
+#define LOST_APPLICATION_KEYCODE_H
 
 namespace lost
 {
   namespace application
   {
 
-    enum KeySym
+    enum KeyCode
     {
       K_UNKNOWN = 0,
 
