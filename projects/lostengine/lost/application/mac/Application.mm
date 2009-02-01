@@ -132,7 +132,6 @@ namespace lost
       DOUT("Application::finalize()");
       [NSApp release];
       [hiddenMembers->delegate release];
-      // FIXME: cleanup!
       [hiddenMembers->pool release];
       delete hiddenMembers;
     }

@@ -28,8 +28,13 @@ function GuiroTestController:initialize(application)
   self.window = self.app:createWindow("MainWindow", lost.application.WindowParams("GuiroTest", lost.math.Vec2(800, 600), lost.math.Vec2(100, 100)))
 
   self.displayAttributes = lost.common.DisplayAttributes()
-  self.displayAttributes.width = 800
-  self.displayAttributes.height = 600
+  if (lost.platform.isIPhone()) then
+    self.displayAttributes.width = 320
+    self.displayAttributes.height = 480
+  else
+    self.displayAttributes.width = 800
+    self.displayAttributes.height = 600
+  end
   self.context = lost.gl.Context(self.displayAttributes)
 
   self.controls = {}

@@ -34,6 +34,8 @@ namespace lost
       RunLoopThread(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
 
       void setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+
+      virtual void initialize(const boost::shared_ptr<Application>& inApplication);
       virtual void run(const boost::shared_ptr<Application>& inApplication);
       void join();
     };
@@ -45,7 +47,7 @@ namespace lost
       boost::shared_ptr<lost::lua::State> interpreter;
     public:
       RunLoopThreadLua(const boost::filesystem::path& inFilename);
-      virtual void run(const boost::shared_ptr<Application>& inApplication);
+      virtual void initialize(const boost::shared_ptr<Application>& inApplication);
     };
 
   }

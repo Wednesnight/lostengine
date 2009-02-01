@@ -36,10 +36,14 @@ namespace lost
       runLoop = inRunLoop;
     }
 
-    void RunLoopThread::run(const boost::shared_ptr<Application>& inApplication)
+    void RunLoopThread::initialize(const boost::shared_ptr<Application>& inApplication)
     {
       application = inApplication;
       application->addEventListener(ApplicationEvent::QUIT(), boost::bind(&RunLoopThread::quit, this, _1));
+    }
+    
+    void RunLoopThread::run(const boost::shared_ptr<Application>& inApplication)
+    {
       thread.reset(new boost::thread(boost::bind(&RunLoopThread::loop, this)));
     }
 
@@ -56,11 +60,13 @@ namespace lost
     {
     }    
 
-    void RunLoopThreadLua::run(const boost::shared_ptr<Application>& inApplication)
+    void RunLoopThreadLua::initialize(const boost::shared_ptr<Application>& inApplication)
     {
+      RunLoopThread::initialize(inApplication);
+
       interpreter.reset(new lua::State(true, true, true, inApplication->loader));  // init lua state with resource loader
       lost::lua::bindAll(*interpreter);                                            // bind lostengine lua mappings    
-
+      
       /**
        * each runloop interpreter has got its own environment reference including the following objects:
        *   - interpreter
@@ -73,9 +79,9 @@ namespace lost
       luabind::globals(*interpreter)["environment"]["interpreter"] = interpreter;
       // map the loader into the interpreter so that scripts can load resources
       luabind::globals(*interpreter)["environment"]["application"] = inApplication;
-
+      
       lost::lua::ModuleLoader::install(*interpreter, inApplication->loader); // install custom module loader so require goes through resourceLoader
-
+      
       // try to load lua script
       try
       {
@@ -89,7 +95,6 @@ namespace lost
       {
         EOUT("couldn't load script <"+ filename.native_file_string() +">: "+ std::string(ex.what()));
       }
-      RunLoopThread::run(inApplication);
     }
 
   }
