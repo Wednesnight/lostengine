@@ -63,9 +63,10 @@ namespace lost
     void Application::run()
     {
       DOUT("Application::run()");
+      if (runLoopThread) runLoopThread->initialize(shared_from_this());
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
       dispatchEvent(appEvent);
-      runLoopThread->run(shared_from_this());
+      if (runLoopThread) runLoopThread->run(shared_from_this());
       doRun();
     }
     
@@ -82,7 +83,7 @@ namespace lost
       DOUT("Application::terminate()");
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::TERMINATE()));
       queueEvent(appEvent);
-      runLoopThread->join();
+      if (runLoopThread) runLoopThread->join();
     }
 
   }

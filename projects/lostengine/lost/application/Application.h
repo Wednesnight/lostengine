@@ -38,11 +38,6 @@ namespace lost
       boost::shared_ptr<RunLoopThread> runLoopThread;
 
       /**
-       * applications windows are created using a unique id (named windows), this list maps uniqueId -> window
-       */
-      std::map<std::string, boost::shared_ptr<Window> > windows;
-
-      /**
        * hidden ctor/dtor utility methods for platform specific stuff
        */
       void initialize();
@@ -62,6 +57,11 @@ namespace lost
       Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       Application(const boost::filesystem::path& inScript);
     public:
+      /**
+       * applications windows are created using a unique id (named windows), this list maps uniqueId -> window
+       */
+      std::map<std::string, boost::shared_ptr<Window> > windows;
+      
       boost::shared_ptr<lost::resource::Loader> loader;
       
       /**

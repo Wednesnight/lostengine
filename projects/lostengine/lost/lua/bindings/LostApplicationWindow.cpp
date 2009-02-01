@@ -18,6 +18,8 @@ namespace lost
         namespace_("application")
         [
           class_<Window, boost::shared_ptr<Window> >("Window")
+            .def("open", &Window::open)
+            .def("close", &Window::close)
             .def_readonly("context", &Window::context),
           class_<WindowParams, boost::shared_ptr<WindowParams> >("WindowParams")
             .def(constructor<const std::string&, const lost::math::Vec2&, const lost::math::Vec2&>()) 

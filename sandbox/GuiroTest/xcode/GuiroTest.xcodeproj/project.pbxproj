@@ -44,6 +44,8 @@
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine.a */; };
+		8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -132,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */,
 				3E485AB70ECD73E5003AAEAB /* QuartzCore.framework in Frameworks */,
 				3E485AB80ECD73E5003AAEAB /* Foundation.framework in Frameworks */,
 				3E485AB90ECD73E5003AAEAB /* OpenGLES.framework in Frameworks */,
@@ -143,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */,
 				3E485AD60ECD7512003AAEAB /* QuartzCore.framework in Frameworks */,
 				3E485AD70ECD7512003AAEAB /* Foundation.framework in Frameworks */,
 				3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */,
