@@ -66,8 +66,13 @@ namespace lost
       if (runLoopThread) runLoopThread->initialize(shared_from_this());
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
       dispatchEvent(appEvent);
-      if (runLoopThread) runLoopThread->run(shared_from_this());
       doRun();
+    }
+    
+    void Application::startRunLoop()
+    {
+      DOUT("Application::startRunLoop()");
+      if (runLoopThread) runLoopThread->run(shared_from_this());
     }
     
     void Application::quit()

@@ -91,6 +91,11 @@ namespace lost
       void run();
 
       /**
+       * don't call this directly, it should only be called from the platform specific implementation when the application is set up and ready to run
+       */
+      void startRunLoop();
+
+      /**
        * queues a quit event and calls terminate
        */
       void quit();

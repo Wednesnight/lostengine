@@ -1,8 +1,9 @@
 #include "lost/application/Window.h"
 
 #import <UIKit/UIKit.h>
-#import <OpenGLES/EAGL.h>
 #import <QuartzCore/QuartzCore.h>
+
+#import "lost/application/gl/iphone/GLContext.h"
 
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
@@ -23,14 +24,8 @@
   GLint backingWidth;
   GLint backingHeight;
   
-  EAGLContext* openGLContext;
+  GLContext* openGLContext;
   
-  /* OpenGL names for the renderbuffer and framebuffers used to render to this view */
-  GLuint viewRenderbuffer, viewFramebuffer;
-  
-  /* OpenGL name for the depth buffer that is attached to viewFramebuffer, if it exists (0 if it does not exist) */
-  GLuint depthRenderbuffer;
-
   lost::application::Window* parent;
 }
 
@@ -38,7 +33,7 @@
 
 @implementation GLView
 
-- (EAGLContext*)openGLContext
+- (GLContext*)openGLContext
 {
   return openGLContext;
 }
@@ -65,7 +60,7 @@
     eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
     
-    openGLContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    openGLContext = [[GLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
     if (!openGLContext || ![EAGLContext setCurrentContext:openGLContext])
     {
@@ -78,21 +73,21 @@
 
 - (BOOL)createFramebuffer
 {
-  glGenFramebuffersOES(1, &viewFramebuffer);
-  glGenRenderbuffersOES(1, &viewRenderbuffer);
+  glGenFramebuffersOES(1, &openGLContext->viewFramebuffer);
+  glGenRenderbuffersOES(1, &openGLContext->viewRenderbuffer);
   
-  glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
+  glBindFramebufferOES(GL_FRAMEBUFFER_OES, openGLContext->viewFramebuffer);
+  glBindRenderbufferOES(GL_RENDERBUFFER_OES, openGLContext->viewRenderbuffer);
   [openGLContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:(CAEAGLLayer*)self.layer];
-  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, viewRenderbuffer);
+  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, openGLContext->viewRenderbuffer);
   
   glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
   glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
   
-  glGenRenderbuffersOES(1, &depthRenderbuffer);
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
+  glGenRenderbuffersOES(1, &openGLContext->depthRenderbuffer);
+  glBindRenderbufferOES(GL_RENDERBUFFER_OES, openGLContext->depthRenderbuffer);
   glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
-  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
+  glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, openGLContext->depthRenderbuffer);
   
   if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
   {
@@ -105,21 +100,12 @@
 
 - (void)destroyFramebuffer
 {
-  glDeleteFramebuffersOES(1, &viewFramebuffer);
-  viewFramebuffer = 0;
-  glDeleteRenderbuffersOES(1, &viewRenderbuffer);
-  viewRenderbuffer = 0;
-  glDeleteRenderbuffersOES(1, &depthRenderbuffer);
-  depthRenderbuffer = 0;
-}
-
-- (void)drawView
-{
-	// Make sure that you are drawing to the current context
-	[EAGLContext setCurrentContext: openGLContext];
-	glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
-  glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
-  if (parent) parent->context->swapBuffers();
+  glDeleteFramebuffersOES(1, &openGLContext->viewFramebuffer);
+  openGLContext->viewFramebuffer = 0;
+  glDeleteRenderbuffersOES(1, &openGLContext->viewRenderbuffer);
+  openGLContext->viewRenderbuffer = 0;
+  glDeleteRenderbuffersOES(1, &openGLContext->depthRenderbuffer);
+  openGLContext->depthRenderbuffer = 0;
 }
 
 - (void)layoutSubviews
@@ -164,7 +150,7 @@ namespace lost
       hiddenMembers->window = [[ApplicationWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 
       // set params
-//      hiddenMembers->window.backgroundColor = [UIColor whiteColor];  
+      hiddenMembers->window.backgroundColor = [UIColor whiteColor];  
 //      open();
 
       // create view
