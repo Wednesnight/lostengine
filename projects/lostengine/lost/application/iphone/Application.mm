@@ -18,7 +18,6 @@ lost::application::Application* currentApplication;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-  DOUT("applicationDidFinishLaunching");
   parent = currentApplication;
   for (std::map<std::string, boost::shared_ptr<lost::application::Window> >::iterator idx = parent->windows.begin(); idx != parent->windows.end(); ++idx)
   {
@@ -29,12 +28,20 @@ lost::application::Application* currentApplication;
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-  DOUT("applicationWillResignActive");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-  DOUT("applicationDidBecomeActive");
+}
+
+- (void)applicationWillTerminate: (UIApplication *)application
+{
+  if (parent) parent->terminate();
+}
+
+- (void)terminate
+{
+  // FIXME: implement ApplicationDelegate::terminate
 }
 
 @end
@@ -52,7 +59,6 @@ namespace lost
 
     void Application::initialize()
     {
-      DOUT("Application::initialize()");
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
       
@@ -65,7 +71,6 @@ namespace lost
 
     void Application::finalize()
     {
-      DOUT("Application::finalize()");
       [hiddenMembers->pool release];
       delete hiddenMembers;
     }
