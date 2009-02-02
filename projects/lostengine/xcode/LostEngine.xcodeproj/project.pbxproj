@@ -131,26 +131,6 @@
 		3E531F260F14FE6F00D7C8B4 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F230F14FE6F00D7C8B4 /* AGL.framework */; };
 		3E531F270F14FE6F00D7C8B4 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */; };
 		3E531F280F14FE6F00D7C8B4 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F250F14FE6F00D7C8B4 /* Carbon.framework */; };
-		3E531F4D0F14FEBE00D7C8B4 /* macosx_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F360F14FEBE00D7C8B4 /* macosx_window.c */; };
-		3E531F4E0F14FEBE00D7C8B4 /* macosx_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F370F14FEBE00D7C8B4 /* macosx_time.c */; };
-		3E531F4F0F14FEBE00D7C8B4 /* macosx_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F380F14FEBE00D7C8B4 /* macosx_thread.c */; };
-		3E531F500F14FEBE00D7C8B4 /* macosx_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F390F14FEBE00D7C8B4 /* macosx_init.c */; };
-		3E531F510F14FEBE00D7C8B4 /* macosx_glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3A0F14FEBE00D7C8B4 /* macosx_glext.c */; };
-		3E531F520F14FEBE00D7C8B4 /* macosx_fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3B0F14FEBE00D7C8B4 /* macosx_fullscreen.c */; };
-		3E531F530F14FEBE00D7C8B4 /* macosx_enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3C0F14FEBE00D7C8B4 /* macosx_enable.c */; };
-		3E531F540F14FEBE00D7C8B4 /* macosx_joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3D0F14FEBE00D7C8B4 /* macosx_joystick.c */; };
-		3E531F550F14FEBE00D7C8B4 /* enable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3E0F14FEBE00D7C8B4 /* enable.c */; };
-		3E531F560F14FEBE00D7C8B4 /* fullscreen.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F3F0F14FEBE00D7C8B4 /* fullscreen.c */; };
-		3E531F570F14FEBE00D7C8B4 /* glext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F400F14FEBE00D7C8B4 /* glext.c */; };
-		3E531F580F14FEBE00D7C8B4 /* image.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F410F14FEBE00D7C8B4 /* image.c */; };
-		3E531F590F14FEBE00D7C8B4 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F420F14FEBE00D7C8B4 /* init.c */; };
-		3E531F5A0F14FEBE00D7C8B4 /* input.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F430F14FEBE00D7C8B4 /* input.c */; };
-		3E531F5C0F14FEBE00D7C8B4 /* joystick.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F450F14FEBE00D7C8B4 /* joystick.c */; };
-		3E531F5D0F14FEBE00D7C8B4 /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F460F14FEBE00D7C8B4 /* stream.c */; };
-		3E531F5E0F14FEBE00D7C8B4 /* tga.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F470F14FEBE00D7C8B4 /* tga.c */; };
-		3E531F5F0F14FEBE00D7C8B4 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F480F14FEBE00D7C8B4 /* thread.c */; };
-		3E531F600F14FEBE00D7C8B4 /* time.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F490F14FEBE00D7C8B4 /* time.c */; };
-		3E531F610F14FEBE00D7C8B4 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531F4A0F14FEBE00D7C8B4 /* window.c */; };
 		3E5322240F1514FA00D7C8B4 /* psnames.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5321FC0F1514FA00D7C8B4 /* psnames.c */; };
 		3E5322250F1514FA00D7C8B4 /* psaux.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5321FD0F1514FA00D7C8B4 /* psaux.c */; };
 		3E5322260F1514FA00D7C8B4 /* ftlzw.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5321FE0F1514FA00D7C8B4 /* ftlzw.c */; };
@@ -717,26 +697,6 @@
 		3E531F230F14FE6F00D7C8B4 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		3E531F250F14FE6F00D7C8B4 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		3E531F360F14FEBE00D7C8B4 /* macosx_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_window.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_window.c; sourceTree = SOURCE_ROOT; };
-		3E531F370F14FEBE00D7C8B4 /* macosx_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_time.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_time.c; sourceTree = SOURCE_ROOT; };
-		3E531F380F14FEBE00D7C8B4 /* macosx_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_thread.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_thread.c; sourceTree = SOURCE_ROOT; };
-		3E531F390F14FEBE00D7C8B4 /* macosx_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_init.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_init.c; sourceTree = SOURCE_ROOT; };
-		3E531F3A0F14FEBE00D7C8B4 /* macosx_glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_glext.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_glext.c; sourceTree = SOURCE_ROOT; };
-		3E531F3B0F14FEBE00D7C8B4 /* macosx_fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_fullscreen.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_fullscreen.c; sourceTree = SOURCE_ROOT; };
-		3E531F3C0F14FEBE00D7C8B4 /* macosx_enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_enable.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_enable.c; sourceTree = SOURCE_ROOT; };
-		3E531F3D0F14FEBE00D7C8B4 /* macosx_joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = macosx_joystick.c; path = ../../../thirdparty/glfw/glfw_2_6/source/macosx/macosx_joystick.c; sourceTree = SOURCE_ROOT; };
-		3E531F3E0F14FEBE00D7C8B4 /* enable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = enable.c; path = ../../../thirdparty/glfw/glfw_2_6/source/enable.c; sourceTree = SOURCE_ROOT; };
-		3E531F3F0F14FEBE00D7C8B4 /* fullscreen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fullscreen.c; path = ../../../thirdparty/glfw/glfw_2_6/source/fullscreen.c; sourceTree = SOURCE_ROOT; };
-		3E531F400F14FEBE00D7C8B4 /* glext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = glext.c; path = ../../../thirdparty/glfw/glfw_2_6/source/glext.c; sourceTree = SOURCE_ROOT; };
-		3E531F410F14FEBE00D7C8B4 /* image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = image.c; path = ../../../thirdparty/glfw/glfw_2_6/source/image.c; sourceTree = SOURCE_ROOT; };
-		3E531F420F14FEBE00D7C8B4 /* init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = init.c; path = ../../../thirdparty/glfw/glfw_2_6/source/init.c; sourceTree = SOURCE_ROOT; };
-		3E531F430F14FEBE00D7C8B4 /* input.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = input.c; path = ../../../thirdparty/glfw/glfw_2_6/source/input.c; sourceTree = SOURCE_ROOT; };
-		3E531F450F14FEBE00D7C8B4 /* joystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = joystick.c; path = ../../../thirdparty/glfw/glfw_2_6/source/joystick.c; sourceTree = SOURCE_ROOT; };
-		3E531F460F14FEBE00D7C8B4 /* stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stream.c; path = ../../../thirdparty/glfw/glfw_2_6/source/stream.c; sourceTree = SOURCE_ROOT; };
-		3E531F470F14FEBE00D7C8B4 /* tga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tga.c; path = ../../../thirdparty/glfw/glfw_2_6/source/tga.c; sourceTree = SOURCE_ROOT; };
-		3E531F480F14FEBE00D7C8B4 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = thread.c; path = ../../../thirdparty/glfw/glfw_2_6/source/thread.c; sourceTree = SOURCE_ROOT; };
-		3E531F490F14FEBE00D7C8B4 /* time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = time.c; path = ../../../thirdparty/glfw/glfw_2_6/source/time.c; sourceTree = SOURCE_ROOT; };
-		3E531F4A0F14FEBE00D7C8B4 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../../../thirdparty/glfw/glfw_2_6/source/window.c; sourceTree = SOURCE_ROOT; };
 		3E5321FC0F1514FA00D7C8B4 /* psnames.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psnames.c; path = ../../../thirdparty/freetype2/freetype_2_3_7/source/src/psnames/psnames.c; sourceTree = SOURCE_ROOT; };
 		3E5321FD0F1514FA00D7C8B4 /* psaux.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = psaux.c; path = ../../../thirdparty/freetype2/freetype_2_3_7/source/src/psaux/psaux.c; sourceTree = SOURCE_ROOT; };
 		3E5321FE0F1514FA00D7C8B4 /* ftlzw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftlzw.c; path = ../../../thirdparty/freetype2/freetype_2_3_7/source/src/lzw/ftlzw.c; sourceTree = SOURCE_ROOT; };
@@ -964,7 +924,6 @@
 				EA3B96FA0E047B7400B6423B /* boost */,
 				EA3B94510E0462F400B6423B /* zlib */,
 				EA3B944E0E0462DB00B6423B /* stb */,
-				EA3B944B0E0462BB00B6423B /* GLFW */,
 				EA3B94480E0462A600B6423B /* GLee */,
 				EA3B94450E04628C00B6423B /* freetype2 */,
 				EA3B94310E04623600B6423B /* luabind */,
@@ -1242,33 +1201,6 @@
 				EA3B94490E0462B200B6423B /* GLee.c */,
 			);
 			name = GLee;
-			sourceTree = "<group>";
-		};
-		EA3B944B0E0462BB00B6423B /* GLFW */ = {
-			isa = PBXGroup;
-			children = (
-				3E531F360F14FEBE00D7C8B4 /* macosx_window.c */,
-				3E531F370F14FEBE00D7C8B4 /* macosx_time.c */,
-				3E531F380F14FEBE00D7C8B4 /* macosx_thread.c */,
-				3E531F390F14FEBE00D7C8B4 /* macosx_init.c */,
-				3E531F3A0F14FEBE00D7C8B4 /* macosx_glext.c */,
-				3E531F3B0F14FEBE00D7C8B4 /* macosx_fullscreen.c */,
-				3E531F3C0F14FEBE00D7C8B4 /* macosx_enable.c */,
-				3E531F3D0F14FEBE00D7C8B4 /* macosx_joystick.c */,
-				3E531F3E0F14FEBE00D7C8B4 /* enable.c */,
-				3E531F3F0F14FEBE00D7C8B4 /* fullscreen.c */,
-				3E531F400F14FEBE00D7C8B4 /* glext.c */,
-				3E531F410F14FEBE00D7C8B4 /* image.c */,
-				3E531F420F14FEBE00D7C8B4 /* init.c */,
-				3E531F430F14FEBE00D7C8B4 /* input.c */,
-				3E531F450F14FEBE00D7C8B4 /* joystick.c */,
-				3E531F460F14FEBE00D7C8B4 /* stream.c */,
-				3E531F470F14FEBE00D7C8B4 /* tga.c */,
-				3E531F480F14FEBE00D7C8B4 /* thread.c */,
-				3E531F490F14FEBE00D7C8B4 /* time.c */,
-				3E531F4A0F14FEBE00D7C8B4 /* window.c */,
-			);
-			name = GLFW;
 			sourceTree = "<group>";
 		};
 		EA3B944E0E0462DB00B6423B /* stb */ = {
@@ -1943,26 +1875,6 @@
 				3E531EF90F14FE2C00D7C8B4 /* gzio.c in Sources */,
 				3E531EFA0F14FE2C00D7C8B4 /* crc32.c in Sources */,
 				3E531EFB0F14FE2C00D7C8B4 /* inftrees.c in Sources */,
-				3E531F4D0F14FEBE00D7C8B4 /* macosx_window.c in Sources */,
-				3E531F4E0F14FEBE00D7C8B4 /* macosx_time.c in Sources */,
-				3E531F4F0F14FEBE00D7C8B4 /* macosx_thread.c in Sources */,
-				3E531F500F14FEBE00D7C8B4 /* macosx_init.c in Sources */,
-				3E531F510F14FEBE00D7C8B4 /* macosx_glext.c in Sources */,
-				3E531F520F14FEBE00D7C8B4 /* macosx_fullscreen.c in Sources */,
-				3E531F530F14FEBE00D7C8B4 /* macosx_enable.c in Sources */,
-				3E531F540F14FEBE00D7C8B4 /* macosx_joystick.c in Sources */,
-				3E531F550F14FEBE00D7C8B4 /* enable.c in Sources */,
-				3E531F560F14FEBE00D7C8B4 /* fullscreen.c in Sources */,
-				3E531F570F14FEBE00D7C8B4 /* glext.c in Sources */,
-				3E531F580F14FEBE00D7C8B4 /* image.c in Sources */,
-				3E531F590F14FEBE00D7C8B4 /* init.c in Sources */,
-				3E531F5A0F14FEBE00D7C8B4 /* input.c in Sources */,
-				3E531F5C0F14FEBE00D7C8B4 /* joystick.c in Sources */,
-				3E531F5D0F14FEBE00D7C8B4 /* stream.c in Sources */,
-				3E531F5E0F14FEBE00D7C8B4 /* tga.c in Sources */,
-				3E531F5F0F14FEBE00D7C8B4 /* thread.c in Sources */,
-				3E531F600F14FEBE00D7C8B4 /* time.c in Sources */,
-				3E531F610F14FEBE00D7C8B4 /* window.c in Sources */,
 				3E5322240F1514FA00D7C8B4 /* psnames.c in Sources */,
 				3E5322250F1514FA00D7C8B4 /* psaux.c in Sources */,
 				3E5322260F1514FA00D7C8B4 /* ftlzw.c in Sources */,

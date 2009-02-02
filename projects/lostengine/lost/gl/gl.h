@@ -22,17 +22,18 @@
     #if defined WIN32
       #include <GL/gl.h>
       #include <GL/glext.h>
+      #include <GL/glu.h>
       #include <wingdi.h>
     #elif defined linux
       #include <GL/gl.h>
       #include <GL/glext.h>
+      #include <GL/glu.h>
     #elif defined __APPLE__
       #include <OpenGL/gl.h>
       #include <OpenGL/glext.h>
       #include <OpenGL/CGLTypes.h>
       #include <OpenGL/CGLCurrent.h>
+      #include <OpenGL/glu.h>
     #endif
-    // FIXME: do we really need to include GLFW here?
-    #include "GL/glfw.h"
   #endif
 #endif
