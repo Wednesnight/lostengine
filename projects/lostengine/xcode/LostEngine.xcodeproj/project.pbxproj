@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E08511A0F371CF900641BE1 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E0851190F371CF900641BE1 /* GLContext.mm */; };
+		3E08511B0F371CF900641BE1 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E0851190F371CF900641BE1 /* GLContext.mm */; };
 		3E1329690F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
 		3E13296A0F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
 		3E13296B0F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
@@ -664,6 +666,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E0851190F371CF900641BE1 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = gl/iphone/GLContext.mm; sourceTree = "<group>"; };
 		3E0F1B020F2F28CA00184FE8 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E1329680F31F26900EA849F /* RunLoopThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunLoopThread.cpp; sourceTree = "<group>"; };
 		3E1329850F31FC1A00EA849F /* LostApplicationGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLContext.cpp; path = bindings/LostApplicationGLContext.cpp; sourceTree = "<group>"; };
@@ -1082,6 +1085,7 @@
 			isa = PBXGroup;
 			children = (
 				8D77F0600F34DC2900C86FFD /* Context.mm */,
+				3E0851190F371CF900641BE1 /* GLContext.mm */,
 			);
 			name = iphone;
 			sourceTree = "<group>";
@@ -1820,6 +1824,7 @@
 				8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D77F0620F34DC2900C86FFD /* Context.mm in Sources */,
+				3E08511B0F371CF900641BE1 /* GLContext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2269,6 +2274,7 @@
 				8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D77F0610F34DC2900C86FFD /* Context.mm in Sources */,
+				3E08511A0F371CF900641BE1 /* GLContext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

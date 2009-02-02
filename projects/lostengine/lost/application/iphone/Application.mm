@@ -6,6 +6,8 @@
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
 
+lost::application::Application* currentApplication;
+
 @interface ApplicationDelegate : NSObject <UIApplicationDelegate>
 {
   lost::application::Application* parent;
@@ -14,16 +16,15 @@
 
 @implementation ApplicationDelegate
 
-- (void)setParent: (lost::application::Application*)newParent
-{
-  parent = newParent;
-}
-
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
   DOUT("applicationDidFinishLaunching");
+  parent = currentApplication;
   for (std::map<std::string, boost::shared_ptr<lost::application::Window> >::iterator idx = parent->windows.begin(); idx != parent->windows.end(); ++idx)
+  {
     (*idx).second->open();
+  }
+  parent->startRunLoop();
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -71,6 +72,7 @@ namespace lost
 
     void Application::doRun()
     {
+      currentApplication = this;
       UIApplicationMain(0, NULL, @"UIApplication", @"ApplicationDelegate");
     }
 

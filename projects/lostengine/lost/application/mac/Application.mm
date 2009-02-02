@@ -19,6 +19,7 @@
 - (void)applicationDidFinishLaunching: (NSNotification *)notification
 {
   DOUT("applicationDidFinishLaunching");
+  if (parent) parent->startRunLoop();
 }
 
 - (void)applicationWillTerminate: (NSNotification *)notification
