@@ -6,9 +6,7 @@
 #import "lost/application/gl/iphone/GLContext.h"
 
 #include "lost/common/Logger.h"
-#include "lost/application/KeyEvent.h"
-#include "lost/application/MouseEvent.h"
-#include "lost/application/KeyCode.h"
+#include "lost/application/TouchEvent.h"
 
 @interface ApplicationWindow : UIWindow
 {
@@ -27,6 +25,10 @@
   GLContext* openGLContext;
   
   lost::application::Window* parent;
+
+  boost::shared_ptr<lost::application::TouchEvent>* touchEvent; 
+  std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >* touches;
+  NSUInteger maxNumTouches;
 }
 
 @end
@@ -53,6 +55,16 @@
 {
   if ((self = [super initWithFrame:frame]))
   {
+    touchEvent = new boost::shared_ptr<lost::application::TouchEvent>;
+    touchEvent->reset(new lost::application::TouchEvent(""));
+    
+    touches = new std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >;
+    maxNumTouches = 10;
+    for(NSUInteger i=0; i<maxNumTouches; ++i)
+    {
+      touches->push_back(boost::shared_ptr<lost::application::TouchEvent::Touch>(new lost::application::TouchEvent::Touch));
+    }
+
     // Get the layer
     CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
     
@@ -117,6 +129,8 @@
 
 - (void)dealloc
 {
+  if(touchEvent) delete touchEvent;
+  if(touches) delete touches;
   if ([EAGLContext currentContext] == openGLContext)
   {
     [EAGLContext setCurrentContext:nil];
@@ -124,6 +138,50 @@
   
   [openGLContext release];  
   [super dealloc];
+}
+
+-(void) convertTouches:(UIEvent*)event
+{
+  if([[event allTouches] count] > maxNumTouches)
+  {
+    EOUT("too many touches, dropping all");
+    return;
+  }
+  
+  (*touchEvent)->touches.clear();
+  std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >::iterator i = touches->begin();
+  for(UITouch* touch in [event allTouches])
+  {
+    (*i)->tapCount = touch.tapCount;
+    (*i)->timeStamp = touch.timestamp;
+    CGPoint loc = [touch locationInView:self];
+    (*i)->location = lost::math::Vec2(loc.x, backingHeight - loc.y);
+    (*touchEvent)->touches.push_back(*i);
+  }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_BEGAN();
+  [self convertTouches:event];
+  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_MOVED();
+  [self convertTouches:event];
+  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_ENDED();
+  [self convertTouches:event];
+  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_CANCELLED();
+  [self convertTouches:event];
+  if (parent) parent->dispatcher->queueEvent(*touchEvent);
 }
 
 @end
@@ -141,8 +199,6 @@ namespace lost
 
     void Window::initialize()
     {
-      DOUT("Window::initialize()");
-
       // initialize hiddenMembers
       hiddenMembers = new WindowHiddenMembers;
 
@@ -150,7 +206,7 @@ namespace lost
       hiddenMembers->window = [[ApplicationWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
 
       // set params
-      hiddenMembers->window.backgroundColor = [UIColor whiteColor];  
+//      hiddenMembers->window.backgroundColor = [UIColor whiteColor];  
 //      open();
 
       // create view
@@ -164,8 +220,6 @@ namespace lost
 
     void Window::finalize()
     {
-      DOUT("Window::finalize()");
-      // FIXME: cleanup!
       [hiddenMembers->view release];
       [hiddenMembers->window release];
       delete hiddenMembers;
