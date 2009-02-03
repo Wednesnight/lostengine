@@ -54,12 +54,7 @@
 {
   if ((self = [super initWithFrame:frame]))
   {
-    touches = new std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >;
     maxNumTouches = 10;
-    for(NSUInteger i=0; i<maxNumTouches; ++i)
-    {
-      touches->push_back(boost::shared_ptr<lost::application::TouchEvent::Touch>(new lost::application::TouchEvent::Touch));
-    }
 
     // Get the layer
     CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
@@ -125,7 +120,6 @@
 
 - (void)dealloc
 {
-  if(touches) delete touches;
   if ([EAGLContext currentContext] == openGLContext)
   {
     [EAGLContext setCurrentContext:nil];
@@ -140,15 +134,15 @@
   if (parent)
   {
     boost::shared_ptr<lost::application::TouchEvent> touchEvent(new lost::application::TouchEvent(type));
-    std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >::iterator i = touches->begin();
     unsigned int count = 0;
     for(UITouch* touch in [event allTouches])
     {    
-      (*i)->tapCount = touch.tapCount;
-      (*i)->timeStamp = touch.timestamp;
+      boost::shared_ptr<lost::application::TouchEvent::Touch> newTouch(new lost::application::TouchEvent::Touch);
+      newTouch->tapCount = touch.tapCount;
+      newTouch->timeStamp = touch.timestamp;
       CGPoint loc = [touch locationInView:self];
-      (*i)->location = lost::math::Vec2(loc.x, backingHeight - loc.y);
-      touchEvent->touches.push_back(*i);
+      newTouch->location = lost::math::Vec2(loc.x, backingHeight - loc.y);
+      touchEvent->touches.push_back(newTouch);
       if (count++ >= maxNumTouches)
       {
         EOUT("too many touches, dropping remaining");
