@@ -32,7 +32,7 @@ namespace lost
       ApplicationHiddenMembers* hiddenMembers;
 
       /**
-       * the RunLoopThread is as wrapper for boost::thread plus application specific runloop implementation
+       * the RunLoopThread is a wrapper for boost::thread plus application specific runloop implementation
        * have a look at lost/application/RunLoopThread.h for details
        */
       boost::shared_ptr<RunLoopThread> runLoopThread;
@@ -76,7 +76,7 @@ namespace lost
 
       /**
        * set the application's runloop, has to be set before run() is invoked!
-       * will be started in a seperate thread, so please use the synchronized EventDispatcher methods (queueEvent, processEvents)
+       * will be started in a seperate thread, so please use the asynchronous EventDispatcher methods (queueEvent, processEvents)
        */
       void setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
 
