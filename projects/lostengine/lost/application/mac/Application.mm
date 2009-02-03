@@ -16,6 +16,22 @@
 
 @implementation ApplicationDelegate
 
+- (void) dummyThread:(id)arg;
+{
+}
+
+-(id)init
+{
+    if(self = [super init])
+    {
+        // make this application multithreaded by spawning a dummy thread that exits immediately
+      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
+     [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
+      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);        
+    }
+    return self;
+}
+
 - (void)applicationDidFinishLaunching: (NSNotification *)notification
 {
   DOUT("applicationDidFinishLaunching");
@@ -82,7 +98,7 @@ namespace lost
       hiddenMembers->application = [NSApplication sharedApplication];
 
       // init delegate
-      hiddenMembers->delegate = [ApplicationDelegate alloc];
+      hiddenMembers->delegate = [[ApplicationDelegate alloc] init];
       [hiddenMembers->delegate setParent: this];
       
       // set application delegate

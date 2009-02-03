@@ -16,6 +16,21 @@ lost::application::Application* currentApplication;
 
 @implementation ApplicationDelegate
 
+- (void) dummyThread:(id)arg;
+{
+}
+
+-(id)init
+{
+    if(self = [super init])
+    {
+      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
+     [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
+      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);        
+    }
+    return self;
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
   parent = currentApplication;
@@ -24,6 +39,7 @@ lost::application::Application* currentApplication;
     (*idx).second->open();
   }
   parent->startRunLoop();
+  NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
