@@ -24,9 +24,10 @@ lost::application::Application* currentApplication;
 {
     if(self = [super init])
     {
-      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
-     [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
-      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);        
+      // make this application multithreaded by spawning a dummy thread that exits immediately
+      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
+      [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
+      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
     }
     return self;
 }
@@ -39,7 +40,6 @@ lost::application::Application* currentApplication;
     (*idx).second->open();
   }
   parent->startRunLoop();
-  NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -52,12 +52,15 @@ lost::application::Application* currentApplication;
 
 - (void)applicationWillTerminate: (UIApplication *)application
 {
-  if (parent) parent->terminate();
+  if (parent)
+  {
+    parent->quit();
+    parent->terminate();
+  }
 }
 
 - (void)terminate
 {
-  // FIXME: implement ApplicationDelegate::terminate
 }
 
 @end
