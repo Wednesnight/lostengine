@@ -24,10 +24,10 @@
 {
     if(self = [super init])
     {
-        // make this application multithreaded by spawning a dummy thread that exits immediately
-      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);
-     [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
-      NSLog(@"isMultiThreaded %d", [NSThread isMultiThreaded]);        
+      // make this application multithreaded by spawning a dummy thread that exits immediately
+      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
+      [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
+      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
     }
     return self;
 }
