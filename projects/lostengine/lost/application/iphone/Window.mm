@@ -26,7 +26,6 @@
   
   lost::application::Window* parent;
 
-  boost::shared_ptr<lost::application::TouchEvent>* touchEvent; 
   std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >* touches;
   NSUInteger maxNumTouches;
 }
@@ -55,9 +54,6 @@
 {
   if ((self = [super initWithFrame:frame]))
   {
-    touchEvent = new boost::shared_ptr<lost::application::TouchEvent>;
-    touchEvent->reset(new lost::application::TouchEvent(""));
-    
     touches = new std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >;
     maxNumTouches = 10;
     for(NSUInteger i=0; i<maxNumTouches; ++i)
@@ -129,7 +125,6 @@
 
 - (void)dealloc
 {
-  if(touchEvent) delete touchEvent;
   if(touches) delete touches;
   if ([EAGLContext currentContext] == openGLContext)
   {
@@ -140,48 +135,48 @@
   [super dealloc];
 }
 
--(void) convertTouches:(UIEvent*)event
+-(void) convertTouches: (UIEvent*)event type: (lost::event::Type)type
 {
-  if([[event allTouches] count] > maxNumTouches)
+  if (parent)
   {
-    EOUT("too many touches, dropping all");
-    return;
+    boost::shared_ptr<lost::application::TouchEvent> touchEvent(new lost::application::TouchEvent(type));
+    std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >::iterator i = touches->begin();
+    unsigned int count = 0;
+    for(UITouch* touch in [event allTouches])
+    {    
+      (*i)->tapCount = touch.tapCount;
+      (*i)->timeStamp = touch.timestamp;
+      CGPoint loc = [touch locationInView:self];
+      (*i)->location = lost::math::Vec2(loc.x, backingHeight - loc.y);
+      touchEvent->touches.push_back(*i);
+      if (count++ >= maxNumTouches)
+      {
+        EOUT("too many touches, dropping remaining");
+        break;
+      }
+    }
+    parent->dispatcher->queueEvent(touchEvent);
   }
-  
-  (*touchEvent)->touches.clear();
-  std::list<boost::shared_ptr<lost::application::TouchEvent::Touch> >::iterator i = touches->begin();
-  for(UITouch* touch in [event allTouches])
-  {
-    (*i)->tapCount = touch.tapCount;
-    (*i)->timeStamp = touch.timestamp;
-    CGPoint loc = [touch locationInView:self];
-    (*i)->location = lost::math::Vec2(loc.x, backingHeight - loc.y);
-    (*touchEvent)->touches.push_back(*i);
-  }
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_BEGAN();
-  [self convertTouches:event];
-  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self convertTouches:event type: lost::application::TouchEvent::TOUCHES_BEGAN()];
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_MOVED();
-  [self convertTouches:event];
-  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self convertTouches:event type: lost::application::TouchEvent::TOUCHES_MOVED()];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_ENDED();
-  [self convertTouches:event];
-  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self convertTouches:event type: lost::application::TouchEvent::TOUCHES_ENDED()];
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-  (*touchEvent)->type = lost::application::TouchEvent::TOUCHES_CANCELLED();
-  [self convertTouches:event];
-  if (parent) parent->dispatcher->queueEvent(*touchEvent);
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self convertTouches:event type: lost::application::TouchEvent::TOUCHES_CANCELLED()];
 }
 
 @end
