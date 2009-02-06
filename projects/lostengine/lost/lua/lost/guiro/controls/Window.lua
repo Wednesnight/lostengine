@@ -71,3 +71,10 @@ function Window:handleInput(event)
     end
   end
 end
+
+function Window:needsRedraw()
+  lost.guiro.View.needsRedraw(self)
+  if self.parent then
+    self.parent.dirty = true
+  end
+end

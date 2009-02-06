@@ -319,9 +319,6 @@ end
   ]]
 function View:needsRedraw()
   self.dirty = true
-  if self.parent then
-    self.parent.dirty = true
-  end
 end
 
 

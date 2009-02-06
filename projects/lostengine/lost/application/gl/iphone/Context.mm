@@ -36,10 +36,7 @@ namespace lost
 
       void Context::swapBuffers()
       {
-        makeCurrent();
-        glBindFramebufferOES(GL_FRAMEBUFFER_OES, hiddenMembers->glContext->viewFramebuffer);
-        glBindRenderbufferOES(GL_RENDERBUFFER_OES, hiddenMembers->glContext->viewRenderbuffer);
-        [hiddenMembers->glContext presentRenderbuffer: GL_RENDERBUFFER_OES];
+        [hiddenMembers->glContext swapBuffers];
       }
 
     }
