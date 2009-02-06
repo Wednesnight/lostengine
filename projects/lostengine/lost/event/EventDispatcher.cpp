@@ -63,7 +63,7 @@ namespace lost
     
     void EventDispatcher::processEvents(const double& timeoutInSeconds)
     {
-      if (eventQueue)
+      if (eventQueue && eventQueue->size() > 0)
       {
         boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > currentQueue = eventQueue;
         queueMutex.lock();

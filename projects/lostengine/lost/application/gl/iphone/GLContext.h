@@ -15,6 +15,7 @@
   /* OpenGL names for the renderbuffer, framebuffer and depthbuffer used to render to the view */
   GLuint viewRenderbuffer, viewFramebuffer, depthRenderbuffer;
 }
+- (void)swapBuffers;
 @end
 
 #endif

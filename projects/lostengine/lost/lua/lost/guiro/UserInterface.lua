@@ -11,6 +11,7 @@ UserInterface = _G["lost.guiro.UserInterface"]
 lost.guiro.View:addBase(UserInterface, "UserInterface")
 
 function UserInterface:__init() lost.guiro.View.__init(self)
+  self.trackRedraws = true
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -106,11 +107,9 @@ function UserInterface:render(context, forceRender)
     context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
     lost.guiro.View.render(self, context, true)
   else
+    gl.glEnable(gl.GL_SCISSOR_TEST)
     self:renderChildren(self, context)
-  end
-  local topWindow = self:topWindow()
-  if topWindow then
-    topWindow:render(context, true)
+    gl.glDisable(gl.GL_SCISSOR_TEST)
   end
 
   context:popState()
@@ -134,10 +133,20 @@ end
     checks children for redraw flag
   ]]
 function UserInterface:renderChildren(parent, context)
+  local topWindow = self:topWindow()
   for k,child in next,parent.children do
     child:update(context)
     if child.dirty then
+      local childRect = child:globalRect()
+      gl.glScissor(childRect.x, childRect.y, childRect.width, childRect.height)
       child:render(context)
+      if topWindow then
+        topWindow:render(context, true)
+      end
+      if self.trackRedraws then
+        context:setColor(lost.common.Color(1,0,0))
+        context:drawRectOutline(lost.math.Rect(childRect.x + 1, childRect.y + 1, childRect.width - 1, childRect.height - 1))
+      end
     else
       self:renderChildren(child, context)
     end
@@ -197,6 +206,7 @@ function UserInterface:updateFocus(event)
       if child:containsCoord(mouseEvent.pos) then
         table.remove(self.children, idx)
         table.insert(self.children, child)
+        child:needsRedraw()
         break
       end
       idx = idx-1
