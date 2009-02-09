@@ -21,8 +21,9 @@ namespace lost
       running = true;
       while (running)
       {
+        const double startTime = lost::platform::currentTimeMilliSeconds();
         if (runLoop) runLoop(application);
-        application->processEvents();
+        application->processEvents(fmax(0, 1.0/60.0 - lost::platform::currentTimeMilliSeconds() - startTime));
       }
     }
 

@@ -31,8 +31,14 @@ namespace lost
       boost::mutex queueMutex;
       boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
 
-      void queueEvent(const boost::shared_ptr<lost::event::Event>& event); // call this to queue the given event. will be dispatched when processEvents() is called
-      void processEvents(const double& timeoutInSeconds = 0); // call this to signal queued events
+      /**
+       * call this to queue the given event. will be dispatched when processEvents() is called
+       */
+      void queueEvent(const boost::shared_ptr<lost::event::Event>& event);
+      /**
+       * call this to signal queued events
+       */
+      void processEvents(const double& timeoutInMilliSeconds = 0);
     };
   }
 }
