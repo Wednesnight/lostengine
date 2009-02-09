@@ -61,16 +61,18 @@ namespace lost
       queueMutex.unlock();
     }
     
-    void EventDispatcher::processEvents(const double& timeoutInSeconds)
+    void EventDispatcher::processEvents(const double& timeoutInMilliSeconds)
     {
       if (eventQueue && eventQueue->size() > 0)
       {
-        boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > currentQueue = eventQueue;
-        queueMutex.lock();
-        eventQueue.reset();
-        queueMutex.unlock();
-        for (std::list<boost::shared_ptr<lost::event::Event> >::iterator idx = currentQueue->begin(); idx != currentQueue->end(); ++idx)
-          dispatchEvent(*idx);
+        const double startTime = lost::platform::currentTimeMilliSeconds();
+        do
+        {
+          dispatchEvent(eventQueue->front());
+          queueMutex.lock();
+          eventQueue->pop_front();
+          queueMutex.unlock();
+        } while(eventQueue->size() > 0 && (timeoutInMilliSeconds == 0 || lost::platform::currentTimeMilliSeconds() - startTime < timeoutInMilliSeconds));
       }
     }
     
