@@ -36,13 +36,11 @@
 		3ED935A70E47516800AABFAB /* cube_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935A60E47516800AABFAB /* cube_tri.obj */; };
 		3ED935CA0E4756B700AABFAB /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* init */; };
 		3EF2ABE90E43484A005624C3 /* cessna_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3EF2ABE80E43484A005624C3 /* cessna_tri.obj */; };
+		8D0CC5910F44BC9F00ADE728 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0CC5900F44BC9F00ADE728 /* Cocoa.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
-		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
 		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
-		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
-		EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4C0DD87EE200552F5E /* Carbon.framework */; };
 		EA27DEB60DD88F4400552F5E /* lattice.vs in Resources */ = {isa = PBXBuildFile; fileRef = EA27DEB40DD88F4400552F5E /* lattice.vs */; };
 		EAA5004C0DE0FD4F0046F2B5 /* lattice.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAA5004B0DE0FD4F0046F2B5 /* lattice.fs */; };
 /* End PBXBuildFile section */
@@ -110,15 +108,13 @@
 		3ED935A60E47516800AABFAB /* cube_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_tri.obj; path = ../../../data/obj/cube_tri.obj; sourceTree = SOURCE_ROOT; };
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		3EF2ABE80E43484A005624C3 /* cessna_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cessna_tri.obj; path = ../../../data/obj/cessna_tri.obj; sourceTree = SOURCE_ROOT; };
+		8D0CC5900F44BC9F00ADE728 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Object0r.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Object0r.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA27DE3A0DD87DA100552F5E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA27DE3D0DD87E7A00552F5E /* Object0r.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Object0r.h; path = ../Object0r.h; sourceTree = SOURCE_ROOT; };
-		EA27DE490DD87EE200552F5E /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		EA27DE4C0DD87EE200552F5E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		EA27DEB40DD88F4400552F5E /* lattice.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lattice.vs; path = ../lattice.vs; sourceTree = SOURCE_ROOT; };
 		EAA5004B0DE0FD4F0046F2B5 /* lattice.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lattice.fs; path = ../lattice.fs; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -129,10 +125,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */,
-				EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */,
 				EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */,
-				EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */,
-				EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */,
+				8D0CC5910F44BC9F00ADE728 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,10 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */,
-				EA27DE490DD87EE200552F5E /* AGL.framework */,
+				8D0CC5900F44BC9F00ADE728 /* Cocoa.framework */,
 				EA27DE4A0DD87EE200552F5E /* OpenGL.framework */,
-				EA27DE4B0DD87EE200552F5E /* GLUT.framework */,
-				EA27DE4C0DD87EE200552F5E /* Carbon.framework */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -232,8 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0E49760E5E403800B5EBF1 /* libLostEngine.a */,
-				EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */,
-				EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */,
+				EA0E49780E5E403800B5EBF1 /* libLostEngine.a */,
+				EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,17 +284,17 @@
 			remoteRef = EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E49780E5E403800B5EBF1 /* libLostEngine-iphone.a */ = {
+		EA0E49780E5E403800B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA0E497A0E5E403800B5EBF1 /* libLostEngine-simulator.a */ = {
+		EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -448,11 +440,10 @@
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
 					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
@@ -472,14 +463,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/glm\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_3/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7/original\"",
-					"\"$(SRCROOT)/../../../thirdparty/dhpo/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/hashlib++/hashlib++_0_3_1\"",
 				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;

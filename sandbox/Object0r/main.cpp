@@ -2,17 +2,16 @@
 
 int main(int argn, char** args)
 {
-  LogLevel( log_all );
+  int result = 0;
   try
   {
-    Application app;
-    Object0r    object0r(app);
-    app.run();
+    Object0r controller;
+    result = controller.run();
   }
   catch (std::exception& e)
   {
     EOUT("exception: " << e.what());
   }
   
-  return 0;
+  return result;
 }

@@ -81,6 +81,7 @@ namespace lost
                                    bool flip=true);
 
       void drawMesh2D(const boost::shared_ptr<lost::gl::Mesh2D>& mesh, GLenum mode);
+      void drawMesh3D(const boost::shared_ptr<lost::gl::Mesh3D>& mesh, GLenum mode);
 
       void drawAABB(const lost::math::AABB& box);
       void drawAxes(const lost::math::Vec3& length);  

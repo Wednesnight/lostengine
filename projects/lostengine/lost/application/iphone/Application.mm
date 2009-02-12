@@ -22,14 +22,15 @@ lost::application::Application* currentApplication;
 
 -(id)init
 {
-    if(self = [super init])
-    {
-      // make this application multithreaded by spawning a dummy thread that exits immediately
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
-      [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
-    }
-    return self;
+  [NSThread setThreadPriority: 0.1];
+  if(self = [super init])
+  {
+    // make this application multithreaded by spawning a dummy thread that exits immediately
+    DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
+    [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
+    DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
+  }
+  return self;
 }
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
@@ -84,6 +85,9 @@ namespace lost
       // init pool
       hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
       
+      [[UIAccelerometer sharedAccelerometer] setUpdateInterval: 0];
+      [[UIAccelerometer sharedAccelerometer] setDelegate: nil];
+
       // init app
       hiddenMembers->application = [UIApplication sharedApplication];
     }
