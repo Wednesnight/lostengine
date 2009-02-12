@@ -412,10 +412,35 @@ namespace lost
       glVertexPointer(2, GL_FLOAT, 0, mesh->vertices.get());
       glTexCoordPointer(2, GL_FLOAT, 0, mesh->texcoords.get());
       glDrawElements(mode, mesh->faceCount, GL_UNSIGNED_BYTE, mesh->faces.get());
-
+      
       popState();
     }
+    
+    void Context::drawMesh3D(const boost::shared_ptr<Mesh3D>& mesh, GLenum mode)
+    {
+      PROFILE_METHOD();
+      static boost::shared_ptr<State> newState;
+      if (!newState)
+      {
+        newState = copyState();
+        newState->alphaTest = false;
+        newState->depthTest = false;
+        newState->blend = true;
+        newState->blendSrc = GL_SRC_ALPHA;
+        newState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+        newState->texture2D = false;
+        newState->normalArray = false;
+        newState->vertexArray = true;
+        newState->textureCoordArray = false;
+      }
+      pushState(newState);
       
+      glVertexPointer(3, GL_FLOAT, 0, mesh->vertices.get());
+      glDrawElements(mode, mesh->faceCount, GL_UNSIGNED_BYTE, mesh->faces.get());
+      
+      popState();
+    }
+    
     void Context::drawAABB(const lost::math::AABB& box)
     {
       PROFILE_METHOD();

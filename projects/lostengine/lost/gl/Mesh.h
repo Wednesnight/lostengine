@@ -16,17 +16,25 @@ namespace lost
     template <typename VertexType>
     struct Mesh
     {
+      Mesh(boost::uint32_t inVertexCount, boost::uint32_t inFaceCount)
+      : vertexCount(inVertexCount),
+        faceCount(inFaceCount)
+      {
+        setVertexCount(vertexCount);
+        setFaceCount(faceCount);
+      }
+
       Mesh(boost::uint32_t inVertexCount, boost::uint32_t inTexcoordCount, boost::uint32_t inFaceCount, boost::shared_ptr<Texture> inTexture)
       : vertexCount(inVertexCount),
-        texcoordCount(inTexcoordCount),
-        faceCount(inFaceCount),
-        texture(inTexture)
+      texcoordCount(inTexcoordCount),
+      faceCount(inFaceCount),
+      texture(inTexture)
       {
         setVertexCount(vertexCount);
         setTexcoordCount(texcoordCount);
         setFaceCount(faceCount);
       }
-
+      
       virtual ~Mesh()
       {
       }

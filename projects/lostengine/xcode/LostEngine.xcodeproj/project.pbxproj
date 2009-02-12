@@ -437,6 +437,9 @@
 		3EF7AEC30ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EF7AEC50ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
 		3EF7AEC70ED29DAD00CDB78A /* LostGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */; };
+		8D0CC5DE0F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
+		8D0CC5DF0F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
+		8D0CC5E00F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
 		8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
 		8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
@@ -796,6 +799,7 @@
 		3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
 		3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLFrameBuffer.cpp; path = bindings/LostGLFrameBuffer.cpp; sourceTree = "<group>"; };
 		3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLTexture.cpp; path = bindings/LostGLTexture.cpp; sourceTree = "<group>"; };
+		8D0CC5DD0F44C36700ADE728 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = obj/Parser.cpp; sourceTree = "<group>"; };
 		8D77F0480F34DC1000C86FFD /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
 		8D77F0490F34DC1000C86FFD /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = iphone/Window.mm; sourceTree = "<group>"; };
 		8D77F0600F34DC2900C86FFD /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/iphone/Context.mm; sourceTree = "<group>"; };
@@ -1031,6 +1035,14 @@
 			name = "hashlib++";
 			sourceTree = "<group>";
 		};
+		8D0CC5E10F44C37200ADE728 /* obj */ = {
+			isa = PBXGroup;
+			children = (
+				8D0CC5DD0F44C36700ADE728 /* Parser.cpp */,
+			);
+			name = obj;
+			sourceTree = "<group>";
+		};
 		8D77F0410F34DBF600C86FFD /* iphone */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1257,7 @@
 				EA3B949C0E04639D00B6423B /* gl */,
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
+				8D0CC5E10F44C37200ADE728 /* obj */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 			);
 			name = lost;
@@ -1757,6 +1770,7 @@
 				8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D77F0620F34DC2900C86FFD /* Context.mm in Sources */,
 				3E08511B0F371CF900641BE1 /* GLContext.mm in Sources */,
+				8D0CC5DF0F44C36700ADE728 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1972,6 +1986,7 @@
 				3E13296B0F31F26900EA849F /* RunLoopThread.cpp in Sources */,
 				3E13298B0F31FC1A00EA849F /* LostApplicationGLContext.cpp in Sources */,
 				3E5544510F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
+				8D0CC5E00F44C36700ADE728 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2187,6 +2202,7 @@
 				8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D77F0610F34DC2900C86FFD /* Context.mm in Sources */,
 				3E08511A0F371CF900641BE1 /* GLContext.mm in Sources */,
+				8D0CC5DE0F44C36700ADE728 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
