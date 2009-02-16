@@ -197,7 +197,7 @@ end
     set focused window
   ]]
 function UserInterface:updateFocus(event)
-  local mouseEvent = lost.application.MouseEvent.cast(event)
+  local mouseEvent = event
   local topWindow = self:topWindow()
   if not topWindow or not topWindow:containsCoord(mouseEvent.pos) then
     local idx = table.maxn(self.children)
