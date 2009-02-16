@@ -1,0 +1,68 @@
+require("lost.guiro.Bounds")
+g = lost.guiro
+
+screen = guiro:Screen
+{
+  id = "screen",
+  bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(800), g.habs(600)),
+  guiro:UserInterface
+  {
+    id = "ui",
+    bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wrel(1.0), g.hrel(1.0)),
+
+		listeners =
+		{
+			viewMouseEnter = function(event)
+				log.debug("--- mouse entered view: "..event.target.id)
+			end,
+			viewMouseLeave = function(event)
+				log.debug("--- mouse left view: "..event.target.id)
+			end
+		},
+
+    guiro:Window
+    {
+			id = "window1",
+      bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+      header =
+      {
+        height = 25
+      }
+      
+			,label = guiro:Label
+      {
+				id="Label1",
+        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
+        text = "window1",
+				receivesEvents = false
+      }
+			--[[
+			,
+			listeners =
+			{
+				mouseMove = function(event)
+					log.debug("--- catching mouseMove in "..event.currentTarget.id)
+				end
+			}]]
+    }
+		,
+
+    guiro:Window
+    {
+      id = "window2",
+      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.5), g.hrel(0.5)),
+      header =
+      {
+        height = 25
+      },
+      label = guiro:Label
+      {
+				id="Label2",
+        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
+        text = "window2"
+      }
+    }
+  }
+}
+
+

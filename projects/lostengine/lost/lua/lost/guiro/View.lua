@@ -1,27 +1,33 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro", package.seeall) -- View
 
 require("lost.guiro.Bounds")
-
+require("lost.guiro.event.EventDispatcher")
+require("lost.common.Object")
 --[[
      View class
   ]]
-class "lost.guiro.View" (lost.event.EventDispatcher)
+class "lost.guiro.View" (lost.common.Object)
 View = _G["lost.guiro.View"]
 
---[[ 
-    class (not instance) based table holding the list of class names
-    must be extended through View:addBase()
-  ]]
-View.bases = { "View" }
+lost.common.Object:addBase(View, "View")
+
+View.uniqueId = 0 -- unfortunately we need this for the equality operator FIXME is there a better way?
 
 --[[ 
     constructor
   ]]
-function View:__init() lost.event.EventDispatcher.__init(self)
+function View:__init() lost.common.Object.__init(self)
+  self.uniqueId = View.uniqueId
+  log.debug("created View with uniqueId: "..tostring(self.uniqueId))
+  View.uniqueId = View.uniqueId + 1
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
   self.isView = true
-  self.listeners = {}
+	self.parent = nil
+  self.hidden = false
+  self.receivesEvents = true
+  self.mouseInside = false
+--  self.sendsEvents = true ????
 
   -- layout state flags
   self.dirtyLayout = true
@@ -31,61 +37,57 @@ function View:__init() lost.event.EventDispatcher.__init(self)
 
   -- render state flags
   self.dirty = true
-end
-
---[[ 
-    adds className to class.bases
-    a derived class MUST use its direct base to call this method because class.bases is extended from self.bases
-  ]]
-function View:addBase(class, className)
-  class.bases = {}
-  for k,v in next,self.bases do
-    class.bases[k] = v
-  end
-  class.addBase = self.addBase
-  table.insert(class.bases, className)
-end
-
---[[ 
-    checks if self is a or derived from className
-  ]]
-function View:is(className)
-  local result = self.bases
-  if result then
-    for k,base in next,self.bases do
-      result = base == className
-      if result then
-        break
+  self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
+  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
+  
+  -- event handlers
+  self.mouseMoveHandler = function(event)
+--    log.debug(self.id.." : "..event.type)
+--    log.debug("mouse")
+--    log.debug(tostring(event))
+--    log.debug(tostring(event.target))
+--    log.debug(tostring(type(event.target)))
+    if (event.target == self) or (self:containsCoord(event.pos)) then
+      if not self.mouseInside then
+        self.mouseInside  = true
+        log.debug(self.id..": mouse enter")
+        self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoveHandler)
       end
+    elseif (self.mouseInside == true) and ((event.target ~= self) and (not self:containsCoord(event.pos)))then
+      self.mouseInside = false
+      log.debug(self.id..": mouse leave")
+      self:screen():removeEventListener(self.mouseMoveHandler)
     end
   end
-  return result
+  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoveHandler)
+  
+end
+
+function View:__tostring()
+  return "View: "..self.id
+end
+
+function View:__eq(other)
+--  log.debug("----------------------------- EQ")
+  return (self.uniqueId == other.uniqueId)
 end
 
 --[[ 
-    returns the last entry in self.bases
-  ]]
-function View:className()
-  local result = "nil"
-  if self.bases then
-    result = self.bases[table.maxn(self.bases)]
-  end
-  return result
-end
-
---[[ 
-    inserts child into self.children and sets child.parent to self
+    inserts child into self.children 
   ]]
 function View:appendChild(child, pos)
+	log.debug("trying to add "..child.id)
   if (pos == nil) then
     pos = table.maxn(self.children) + 1
   end
   if (child.id) then
     if (self(child.id) == nil) then
       table.insert(self.children, pos, child)
+      log.debug("inserting view "..child.id.." into "..self.id)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
+			error("child already exists")
     end
   else
     log.error("cannot append child without id")
@@ -135,39 +137,62 @@ function View:setParent(parent)
 end
 
 --[[ 
-    overrides lost.event.EventDispatcher.addEventListener to preserve lua event types
+    basically same functionality as EventDispatcher:addEventListener.
+    if capture is true, the listener is only added to the capture event listeners
+    if capture is false, the listener is only added to the default listeners (target and bubble)
   ]]
-function View:addEventListener(which, listener)
-  if not self.listeners[which] then
-    self.listeners[which] = {}
+function View:addEventListener(which, listener, capture)
+--  log.debug(tostring(self.id)..": adding listener for "..which)
+  if capture then 
+    self.captureEventDispatcher:addEventListener(which, listener)
+  else
+    self.defaultEventDispatcher:addEventListener(which, listener)
   end
-  table.insert(self.listeners[which], listener)
 end
 
---[[ 
-    derived from EventDispatcher, routes all events to self.children
-  ]]
+-- calling dispatchEvent on a view notifies all target listeners and bubbles the event if event.bubbles is enabled
 function View:dispatchEvent(event)
-  --[[
-      first we iterate through the "lua" event handlers
-    ]]
-  if self.listeners[event.type] then
-    for k,listener in next,self.listeners[event.type] do
-      listener(event)
+  if event then
+    if not event.stopDispatch then
+      self:dispatchTargetEvent(event) 
+    end
+    if event.bubbles and (not event.stopPropagation) then
+      self:bubbleEvent(event)
     end
   end
+end
 
-  --[[
-      then the native ones
-    ]]
-  lost.event.EventDispatcher.dispatchEvent(self, event)
-
-  --[[
-      and now the children
-    ]]
-  for k,view in next,self.children do
-    view:dispatchEvent(event)
+-- helper function to bubble an event up the parent view hierarchy
+function View:bubbleEvent(event)
+  local currentView = self.parent
+  while currentView and (not event.stopPropagation) do
+    currentView:dispatchBubbleEvent(event)
+    currentView = currentView.parent
   end
+end
+
+function View:removeEventListener(which, listener, capture)
+  if capture then
+    self.captureEventDispatcher:removeEventListener(which, listener)
+  else
+    self.defaultEventDispatcher:removeEventListener(which, listener)
+  end
+end
+
+-- called by EventManager, don't call directly
+function View:dispatchCaptureEvent(event)
+  self.captureEventDispatcher:dispatchEvent(event)
+end
+
+-- called by EventManager, don't call directly
+function View:dispatchTargetEvent(event)
+--  log.debug(self.id..": targetting")
+  self.defaultEventDispatcher:dispatchEvent(event)
+end
+
+-- called by EventManager, don't call directly
+function View:dispatchBubbleEvent(event)
+  self.defaultEventDispatcher:dispatchEvent(event)
 end
 
 --[[
@@ -326,18 +351,6 @@ end
     helper methods
   ]]
 
-
---[[ 
-    prints self.bases hierarchy
-  ]]
-function View:printBases()
-  local prefix = ""
-  for k,v in next,self.bases do
-    log.debug(prefix .."|-- ".. v)
-    prefix = prefix .."    "
-  end
-end
-
 --[[ 
     prints self.children hierarchy
   ]]
@@ -348,5 +361,13 @@ function View:printChildren(prefix)
   log.debug(prefix .."|-- ".. self.id)
   for k,view in next,self.children do
     view:printChildren(prefix .."    ")
+  end
+end
+
+function View:screen()
+  if self.parent then
+    return self.parent:screen()
+  else
+    return nil
   end
 end

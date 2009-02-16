@@ -45,7 +45,7 @@ function GuiroTestController:initialize(application)
   if lost.platform.isIPhone() then
     self.controls.screen = self.loader:loadScreen("screen-iphone")
   else
-    self.controls.screen = self.loader:loadScreen("screen")
+    self.controls.screen = self.loader:loadScreen("screen-evtest")
   end
   self.controls.screen:setEventDispatcher(self.app)
 
@@ -62,7 +62,7 @@ function GuiroTestController:initialize(application)
   self.controls.screen:printChildren()
   
   self.renderState = self.context:copyState()
-  self.renderState.clearColor = lost.common.Color(0,0,0)
+  self.renderState.clearColor = lost.common.Color(1,0,0)
   self.renderState.depthTest = false
   self.renderState.texture2D = false
   self.renderState.vertexArray = true

@@ -52,6 +52,7 @@
 		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
 		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
 		EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4C0DD87EE200552F5E /* Carbon.framework */; };
+		EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */ = {isa = PBXBuildFile; fileRef = EAC17FAB0F4255DC003D0F6F /* screen-evtest */; };
 		EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,7 @@
 		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
 		EA27DE4C0DD87EE200552F5E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		EAC17FAB0F4255DC003D0F6F /* screen-evtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "screen-evtest"; path = "../screen-evtest"; sourceTree = SOURCE_ROOT; };
 		EACFE1220ED8AD5300F9459E /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -239,6 +241,7 @@
 				3ED935C90E4756B700AABFAB /* init */,
 				3E1EE3FC0ECC7CA400E86C94 /* screen */,
 				3E2447780F08C7200023E6B8 /* screen-iphone */,
+				EAC17FAB0F4255DC003D0F6F /* screen-evtest */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */,
 				3E0CF97D0EDC4C57001A2922 /* defaultButton.png in Resources */,
 				3E24477A0F08C7200023E6B8 /* screen-iphone in Resources */,
+				EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
