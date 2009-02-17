@@ -129,4 +129,5 @@ function GuiroTestController:runLoop(sender, passedSec)
 
   self.context:popState()
   self.window.context:swapBuffers()
+--	log.debug("interpreter memory usage in kb: "..environment.interpreter:memUsage())
 end
