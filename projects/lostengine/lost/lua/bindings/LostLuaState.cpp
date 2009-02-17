@@ -25,6 +25,7 @@ namespace lost
             .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
             .def("getScriptFilename", &State::getScriptFilename)
             .def_readwrite("callstackSize", &State::callstackSize)
+						.def("memUsage", &State::memUsage)
         ]
       ];
     }
