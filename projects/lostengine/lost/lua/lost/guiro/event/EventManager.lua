@@ -1,7 +1,6 @@
 module("lost.guiro.event", package.seeall)
 
 require("lost.guiro.event.MouseEvent")
-require("lost.guiro.event.ViewEvent")
 
 class "lost.guiro.event.EventManager"
 EventManager = _G["lost.guiro.event.EventManager"]
@@ -132,9 +131,9 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
   -- no previous stack means the each view is the target for an enter event
   if not self.previousMouseMoveStack then 
     self.previousMouseMoveStack = viewStack
-    local enterEvent = lost.guiro.event.ViewEvent(lost.guiro.event.ViewEvent.MOUSE_ENTER)
     for k,v in ipairs(viewStack) do
-      enterEvent.target = viewStack[k]
+      event.target = viewStack[k]
+      event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
       self:propagateEvent(viewStack, enterEvent, k)
     end
   else -- leave events for old views, enter events for new views
@@ -144,8 +143,6 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
     local oldView = nil
     local newView = nil
     local i = 1
-    local enterEvent = lost.guiro.event.ViewEvent(lost.guiro.event.ViewEvent.MOUSE_ENTER)
-    local leaveEvent = lost.guiro.event.ViewEvent(lost.guiro.event.ViewEvent.MOUSE_LEAVE)
     while i <= maxi do
       if i <= #self.previousMouseMoveStack then
         oldView = self.previousMouseMoveStack[i]
@@ -159,12 +156,14 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
       end  
       if oldView ~= newView then
         if oldView then
-          leaveEvent.target = oldView
-          self:propagateEvent(self.previousMouseMoveStack, leaveEvent, i)
+          event.target = oldView
+          event.type = lost.guiro.event.MouseEvent.MOUSE_LEAVE
+          self:propagateEvent(self.previousMouseMoveStack, event, i)
         end
         if newView then
-          enterEvent.target = newView
-          self:propagateEvent(viewStack, enterEvent, i)
+          event.target = newView
+          event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
+          self:propagateEvent(viewStack, event, i)
         end
       end
       i = i + 1
@@ -180,18 +179,15 @@ function EventManager:propagateMouseEvent(rootView, event)
 --  log.debug("propagateEvent: " .. event.type)
   local mouseevent = lost.guiro.event.MouseEvent(event) 
   viewStack = self:findViewStack(rootView, mouseevent)
-  -- reset target and currentTarget
+
   mouseevent.currentTarget = nil -- will be set to the receiving view upon dispatch
   mouseevent.target = viewStack[#viewStack] -- the lowermost view is the target of the click 
---  self:logViewStack(viewStack)
-  
-  -- first enter/leave events
+
+  self:propagateEvent(viewStack, mouseevent, #viewStack)
+
   if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then
     self:propagateEnterLeaveEvents(viewStack, mouseevent)
-  end
-  -- then up/down/move
-  self:propagateEvent(viewStack, mouseevent, #viewStack)
-  
+  end  
   
   return viewStack
 end

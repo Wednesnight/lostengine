@@ -12,10 +12,10 @@ screen = guiro:Screen
 
 		listeners =
 		{
-			viewMouseEnter = function(event)
+			mouseEnter = function(event)
 				log.debug("--- mouse entered view: "..event.target.id)
 			end,
-			viewMouseLeave = function(event)
+			mouseLeave = function(event)
 				log.debug("--- mouse left view: "..event.target.id)
 			end
 		},
