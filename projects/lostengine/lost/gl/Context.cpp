@@ -343,8 +343,6 @@ namespace lost
       if (!newState)
       {
         newState = copyState();
-        newState->alphaTest = true;
-        newState->clearColor = lost::common::blackColor;
         newState->depthTest = false;
         newState->blend = true;
         newState->blendSrc = GL_SRC_ALPHA;
@@ -396,7 +394,6 @@ namespace lost
       if (!newState)
       {
         newState = copyState();
-        newState->alphaTest = false;
         newState->depthTest = false;
         newState->blend = true;
         newState->blendSrc = GL_SRC_ALPHA;
@@ -423,7 +420,6 @@ namespace lost
       if (!newState)
       {
         newState = copyState();
-        newState->alphaTest = false;
         newState->depthTest = false;
         newState->blend = true;
         newState->blendSrc = GL_SRC_ALPHA;
