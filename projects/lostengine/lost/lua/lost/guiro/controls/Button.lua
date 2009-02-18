@@ -1,6 +1,7 @@
 module("lost.guiro.controls", package.seeall)
 
 require("lost.guiro.View")
+require("lost.guiro.event.Event")
 
 --[[
      Button control
@@ -8,7 +9,7 @@ require("lost.guiro.View")
 Button = lost.common.Class("lost.guiro.controls.Button", lost.guiro.View)
 
 --[[
-    button events
+    button event types
   ]]
 Button.ButtonPress   = "BUTTON_PRESS"
 Button.ButtonRelease = "BUTTON_RELEASE"
@@ -16,10 +17,9 @@ Button.ButtonClick   = "BUTTON_CLICK"
 Button.ButtonEnter   = "BUTTON_ENTER"
 Button.ButtonLeave   = "BUTTON_LEAVE"
 
-class "lost.guiro.controls.Button.ButtonEvent" (lost.event.Event)
-Button.ButtonEvent = _G["lost.guiro.controls.Button.ButtonEvent"]
+Button.ButtonEvent = lost.common.Class("lost.guiro.controls.Button.ButtonEvent", lost.guiro.event.Event)
 
-function Button.ButtonEvent:__init(which, pos) lost.event.Event.__init(self, which)
+function Button.ButtonEvent:__init(which, pos) lost.guiro.event.Event.__init(self, which)
   self.pos = pos
 end
 

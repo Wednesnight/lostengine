@@ -3,6 +3,7 @@ module("lost.guiro.controls", package.seeall)
 require("lost.guiro.View")
 require("lost.guiro.Bounds")
 require("lost.guiro.controls.Button")
+require("lost.guiro.event.Event")
 
 --[[
      Slider control
@@ -14,10 +15,9 @@ Slider = lost.common.Class("lost.guiro.controls.Slider", lost.guiro.View)
   ]]
 Slider.SliderChange = "SLIDER_CHANGE"
 
-class "lost.guiro.controls.Slider.SliderEvent" (lost.event.Event)
-Slider.SliderEvent = _G["lost.guiro.controls.Slider.SliderEvent"]
+Slider.SliderEvent = lost.common.Class("lost.guiro.controls.Slider.SliderEvent", lost.guiro.event.Event)
 
-function Slider.SliderEvent:__init(which, value) lost.event.Event.__init(self, which)
+function Slider.SliderEvent:__init(which, value) lost.guiro.event.Event.__init(self, which)
   self.value = value
 end
 
