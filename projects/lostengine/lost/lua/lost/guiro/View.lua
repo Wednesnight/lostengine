@@ -10,15 +10,10 @@ require("lost.guiro.event.EventDispatcher")
   ]]
 View = lost.common.Class("lost.guiro.View", lost.common.Object)
 
-View.uniqueId = 0 -- unfortunately we need this for the equality operator FIXME is there a better way?
-
 --[[ 
     constructor
   ]]
 function View:__init() lost.common.Object.__init(self)
-  self.uniqueId = View.uniqueId
-  log.debug("created View with uniqueId: "..tostring(self.uniqueId))
-  View.uniqueId = View.uniqueId + 1
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
   self.isView = true
@@ -71,8 +66,7 @@ function View:__tostring()
 end
 
 function View:__eq(other)
---  log.debug("----------------------------- EQ")
-  return (self.uniqueId == other.uniqueId)
+  return rawequal(self, other)
 end
 
 --[[ 

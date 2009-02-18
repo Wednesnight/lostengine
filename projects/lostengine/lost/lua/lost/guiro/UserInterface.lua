@@ -57,8 +57,6 @@ function UserInterface:initialize(context)
     self.renderBuffer:disable()
 
     self.renderState = context:copyState()
-    self.renderState.alphaTest = true
-    self.renderState.clearColor = lost.common.Color(0,0,0)
     self.renderState.depthTest = false
     self.renderState.blend = true
     self.renderState.blendSrc = gl.GL_SRC_ALPHA
@@ -69,8 +67,6 @@ function UserInterface:initialize(context)
     self.renderState.textureCoordArray = true
 
     self.bufferState = context:copyState()
-    self.bufferState.alphaTest = true
-    self.bufferState.clearColor = lost.common.Color(0,0,0)
     self.bufferState.depthTest = false
     self.bufferState.blend = false
     self.bufferState.texture2D = false
