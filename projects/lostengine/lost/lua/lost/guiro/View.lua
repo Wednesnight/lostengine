@@ -37,28 +37,7 @@ function View:__init() lost.common.Object.__init(self)
 
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
-  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
-  
-  -- event handlers
-  self.mouseMoveHandler = function(event)
---    log.debug(self.id.." : "..event.type)
---    log.debug("mouse")
---    log.debug(tostring(event))
---    log.debug(tostring(event.target))
---    log.debug(tostring(type(event.target)))
-    if (event.target == self) or (self:containsCoord(event.pos)) then
-      if not self.mouseInside then
-        self.mouseInside  = true
-        log.debug(self.id..": mouse enter")
-        self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoveHandler)
-      end
-    elseif (self.mouseInside == true) and ((event.target ~= self) and (not self:containsCoord(event.pos)))then
-      self.mouseInside = false
-      log.debug(self.id..": mouse leave")
-      self:screen():removeEventListener(self.mouseMoveHandler)
-    end
-  end
-  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoveHandler)
+  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()  
 end
 
 function View:__tostring()
