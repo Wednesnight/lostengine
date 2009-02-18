@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.styles", package.seeall)
 
+require("lost.guiro.Style")
+
 --[[
      Button Style
   ]]
-require("lost.guiro.Style")
-
-class "lost.guiro.themes.default.styles.Button" (lost.guiro.Style)
-Button = _G["lost.guiro.themes.default.styles.Button"]
+Button = lost.common.Class("lost.guiro.themes.default.styles.Button", lost.guiro.Style)
 
 function Button:__init() lost.guiro.Style.__init(self)
   self.released =

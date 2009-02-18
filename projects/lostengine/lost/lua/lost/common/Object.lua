@@ -1,6 +1,7 @@
 module("lost.common", package.seeall)
 
 require("lost.common.Class")
+
 --[[
      Common base class for Lua classes that provides some more structure
   ]]
@@ -14,8 +15,9 @@ Object.bases = { "lost.common.Object" }
 
 
 function Object:__init()
---  log.debug("initializing object of type: "..self:className())
+  log.debug("initializing object of type: "..self:className())
 end
+
 --[[ 
     adds className to class.bases
     a derived class MUST use its direct base to call this method because class.bases is extended from self.bases

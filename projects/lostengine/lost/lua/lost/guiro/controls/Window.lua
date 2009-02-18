@@ -1,17 +1,14 @@
 module("lost.guiro.controls", package.seeall)
 
-require("lost.guiro.controls.Control")
+require("lost.guiro.View")
 require("lost.guiro.Bounds")
 
 --[[
      Window control
   ]]
-class "lost.guiro.controls.Window" (lost.guiro.controls.Control)
-Window = _G["lost.guiro.controls.Window"]
+Window = lost.common.Class("lost.guiro.controls.Window", lost.guiro.View)
 
-lost.guiro.controls.Control:addBase(Window, "Window")
-
-function Window:__init() lost.guiro.controls.Control.__init(self)
+function Window:__init() lost.guiro.View.__init(self)
   self.header = {height = 25}
 end
 
@@ -27,7 +24,7 @@ function Window:handleInput(event)
                                       self.header.height)
 
     -- click
-    if info.which == Control.InputType.down then
+    if info.which == View.InputType.down then
       local topmost = nil
       if self.parent then
         topmost = self.parent:getViewAt(info.location)
@@ -38,11 +35,11 @@ function Window:handleInput(event)
       end
 
     -- release
-    elseif info.which == Control.InputType.up then
+    elseif info.which == View.InputType.up then
       self.dragging = false
 
     -- move
-    elseif info.which == Control.InputType.move then
+    elseif info.which == View.InputType.move then
       if self.dragging then
         local parentRect = nil
         if self.parent then

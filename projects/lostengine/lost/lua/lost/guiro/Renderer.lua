@@ -1,12 +1,14 @@
 module("lost.guiro", package.seeall)
 
+require("lost.common.Class")
+require("lost.common.Object")
+
 --[[
      Renderer
   ]]
-class "lost.guiro.Renderer"
-Renderer = _G["lost.guiro.Renderer"]
+Renderer = lost.common.Class("lost.guiro.Renderer", lost.common.Object)
 
-function Renderer:__init()
+function Renderer:__init() lost.common.Object.__init(self)
 end
 
 function Renderer:fade(currentColor, targetColor)

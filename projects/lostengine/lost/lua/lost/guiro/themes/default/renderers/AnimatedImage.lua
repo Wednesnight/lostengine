@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.renderers", package.seeall)
 
+require("lost.guiro.Renderer")
+
 --[[
      AnimatedImage Renderer
   ]]
-require("lost.guiro.Renderer")
-
-class "lost.guiro.themes.default.renderers.AnimatedImage" (lost.guiro.Renderer)
-AnimatedImage = _G["lost.guiro.themes.default.renderers.AnimatedImage"]
+AnimatedImage = lost.common.Class("lost.guiro.themes.default.renderers.AnimatedImage", lost.guiro.Renderer)
 
 function AnimatedImage:__init() lost.guiro.Renderer.__init(self)
 end

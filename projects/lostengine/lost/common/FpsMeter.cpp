@@ -46,7 +46,7 @@ namespace lost
 
       void FpsMeter::addHistoryEntry(double timeSinceLastCallSec)
       {
-        float currentfps = (float)(1.0/timeSinceLastCallSec);
+        float currentfps = (float)(1.0/timeSinceLastCallSec)/10.0f;
         history[historycurpos] = currentfps;
         historycurpos = (historycurpos+1)%historylength;
       }

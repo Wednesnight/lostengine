@@ -1,15 +1,12 @@
 module("lost.guiro", package.seeall)
 
---[[
-     Screen class
-  ]]
 require("lost.guiro.View")
 require("lost.guiro.event.EventManager")
 
-class "lost.guiro.Screen" (lost.guiro.View)
-Screen = _G["lost.guiro.Screen"]
-
-lost.guiro.View:addBase(Screen, "Screen")
+--[[
+     Screen class
+  ]]
+Screen = lost.common.Class("lost.guiro.Screen", lost.guiro.View)
 
 function Screen:propagateMouseEvent(event)
   self.eventManager:propagateMouseEvent(self, event)
@@ -33,7 +30,7 @@ end
     only accepts lost.guiro.UserInterface
   ]]
 function Screen:appendChild(child)
-  if child:is("UserInterface") then
+  if child:is("lost.guiro.UserInterface") then
     lost.guiro.View.appendChild(self, child)
 		child:setParent(self)
   else

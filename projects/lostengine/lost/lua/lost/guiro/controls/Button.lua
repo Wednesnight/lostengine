@@ -1,14 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.View")
+
 --[[
      Button control
   ]]
-require("lost.guiro.controls.Control")
-
-class "lost.guiro.controls.Button" (lost.guiro.controls.Control)
-Button = _G["lost.guiro.controls.Button"]
-
-lost.guiro.controls.Control:addBase(Button, "Button")
+Button = lost.common.Class("lost.guiro.controls.Button", lost.guiro.View)
 
 --[[
     button events
@@ -39,7 +36,7 @@ Button.State =
 --[[
     constructor
   ]]
-function Button:__init() lost.guiro.controls.Control.__init(self)
+function Button:__init() lost.guiro.View.__init(self)
   self.state = Button.State.released
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:handleInput(event) end)
@@ -64,7 +61,7 @@ function Button:handleInput(event)
     end
 
     -- click
-    if info.which == Control.InputType.down then
+    if info.which == View.InputType.down then
       self.down = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
       self.pressed = self.down
       if self.down then
@@ -72,7 +69,7 @@ function Button:handleInput(event)
       end
 
     -- release
-    elseif info.which == Control.InputType.up then
+    elseif info.which == View.InputType.up then
       if self.down then
         if self.hovered then
           self:dispatchEvent(Button.ButtonEvent(Button.ButtonClick, info.location))
@@ -84,7 +81,7 @@ function Button:handleInput(event)
       self.hovered = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
 
     -- move
-    elseif info.which == Control.InputType.move then
+    elseif info.which == View.InputType.move then
       local wasHovered = self.hovered
       self.hovered = (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location)
       if not wasHovered and self.hovered then

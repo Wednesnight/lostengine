@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.styles", package.seeall)
 
+require("lost.guiro.Style")
+
 --[[
      Slider Style
   ]]
-require("lost.guiro.Style")
-
-class "lost.guiro.themes.default.styles.Slider" (lost.guiro.Style)
-Slider = _G["lost.guiro.themes.default.styles.Slider"]
+Slider = lost.common.Class("lost.guiro.themes.default.styles.Slider", lost.guiro.Style)
 
 function Slider:__init() lost.guiro.Style.__init(self)
   self.color = lost.common.Color(0.2,0.2,0.2,1)

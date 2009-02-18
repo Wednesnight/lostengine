@@ -1,15 +1,14 @@
 module("lost.guiro", package.seeall) -- View
 
+require("lost.common.Class")
+require("lost.common.Object")
 require("lost.guiro.Bounds")
 require("lost.guiro.event.EventDispatcher")
-require("lost.common.Object")
+
 --[[
      View class
   ]]
-class "lost.guiro.View" (lost.common.Object)
-View = _G["lost.guiro.View"]
-
-lost.common.Object:addBase(View, "View")
+View = lost.common.Class("lost.guiro.View", lost.common.Object)
 
 View.uniqueId = 0 -- unfortunately we need this for the equality operator FIXME is there a better way?
 
@@ -35,8 +34,13 @@ function View:__init() lost.common.Object.__init(self)
   self.currentGlobalRect = lost.math.Rect()
   self.currentLocalRect = lost.math.Rect()
 
-  -- render state flags
+  -- render state
   self.dirty = true
+  self.theme = lost.guiro.config.theme
+  self.renderer = self.theme.renderers[self:className()]()
+  self.style = self.theme.styles[self:className()]()
+
+  -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
   
@@ -60,7 +64,6 @@ function View:__init() lost.common.Object.__init(self)
     end
   end
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoveHandler)
-  
 end
 
 function View:__tostring()
@@ -309,13 +312,6 @@ function View:resize(bounds)
 end
 
 --[[
-    redraw prototype
-  ]]
-function View:redraw(context)
-  -- empty
-end
-
---[[
     update method for render preparation
   ]]
 function View:update(context)
@@ -325,13 +321,16 @@ function View:update(context)
 end
 
 --[[
-    triggers redraw on children
+    triggers render on children
   ]]
 function View:render(context, forceRender)
   local globalRect = self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
-    self:redraw(context)
+
+    if self.renderer then
+      self.renderer:render(context, self, self.style)
+    end
 
     for k,view in next,self.children do
       view:render(context, true)
@@ -340,10 +339,74 @@ function View:render(context, forceRender)
 end
 
 --[[
-    sets dirty flag to trigger redraw
+    sets dirty flag to trigger render
   ]]
 function View:needsRedraw()
   self.dirty = true
+end
+
+View.InputType =
+{
+  unknown = "unknown",
+  down    = "down",
+  up      = "up",
+  move    = "move"
+}
+
+function View:initializeInput(event)
+  local validTypes = {[lost.application.MouseEvent.MOUSE_DOWN]        = true,
+                      [lost.application.MouseEvent.MOUSE_UP]          = true,
+                      [lost.application.MouseEvent.MOUSE_MOVE]        = true,
+                      [lost.application.TouchEvent.TOUCHES_BEGAN]     = true,
+                      [lost.application.TouchEvent.TOUCHES_ENDED]     = true,
+                      [lost.application.TouchEvent.TOUCHES_CANCELLED] = true,
+                      [lost.application.TouchEvent.TOUCHES_MOVED]     = true}
+
+  -- valid event?
+  if validTypes[event.type] then
+    local info = {which    = View.InputType.unknown,
+                  location = lost.math.Vec2(0,0),
+                  rect     = self:globalRect()}
+
+    -- mouse event
+    if event.type == lost.application.MouseEvent.MOUSE_DOWN or
+       event.type == lost.application.MouseEvent.MOUSE_UP or
+       event.type == lost.application.MouseEvent.MOUSE_MOVE
+    then
+      local mouseEvent = lost.application.MouseEvent.cast(event)
+      info.location = lost.math.Vec2(mouseEvent.pos)
+      if event.type == lost.application.MouseEvent.MOUSE_DOWN then
+        info.which = View.InputType.down
+      elseif event.type == lost.application.MouseEvent.MOUSE_UP then
+        info.which = View.InputType.up
+      elseif event.type == lost.application.MouseEvent.MOUSE_MOVE then
+        info.which = View.InputType.move
+      end
+
+    -- touch event
+    elseif event.type == lost.application.TouchEvent.TOUCHES_BEGAN or
+           event.type == lost.application.TouchEvent.TOUCHES_ENDED or
+           event.type == lost.application.TouchEvent.TOUCHES_CANCELLED or
+           event.type == lost.application.TouchEvent.TOUCHES_MOVED
+    then
+      local touchEvent = lost.application.TouchEvent.cast(event)
+      if touchEvent:size() == 1 then
+        local touch = touchEvent:get(0)
+        info.location = lost.math.Vec2(touch.location)
+        if event.type == lost.application.TouchEvent.TOUCHES_BEGAN then
+          info.which = View.InputType.down
+        elseif event.type == lost.application.TouchEvent.TOUCHES_ENDED or
+               event.type == lost.application.TouchEvent.TOUCHES_CANCELLED
+        then
+          info.which = View.InputType.up
+        elseif event.type == lost.application.TouchEvent.TOUCHES_MOVED then
+          info.which = View.InputType.move
+        end
+      end
+    end
+    return info
+  end
+  return false
 end
 
 
