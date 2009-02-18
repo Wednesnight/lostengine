@@ -1,14 +1,11 @@
 module("lost.guiro", package.seeall)
 
+require("lost.guiro.View")
+
 --[[
      UserInterface class
   ]]
-require("lost.guiro.View")
-
-class "lost.guiro.UserInterface" (lost.guiro.View)
-UserInterface = _G["lost.guiro.UserInterface"]
-
-lost.guiro.View:addBase(UserInterface, "UserInterface")
+UserInterface = lost.common.Class("lost.guiro.UserInterface", lost.guiro.View)
 
 function UserInterface:__init() lost.guiro.View.__init(self)
   self.trackRedraws = true
@@ -19,7 +16,7 @@ end
     only accepts lost.guiro.controls.Window
   ]]
 function UserInterface:appendChild(child)
-  if child:is("Window") then
+  if child:is("lost.guiro.controls.Window") then
     lost.guiro.View.appendChild(self, child)
   else
     log.error("UserInterface:appendChild() cannot append ".. child:className())

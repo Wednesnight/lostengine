@@ -1,19 +1,16 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.View")
+
 --[[
      Image control
   ]]
-require("lost.guiro.controls.Control")
-
-class "lost.guiro.controls.Image" (lost.guiro.controls.Control)
-Image = _G["lost.guiro.controls.Image"]
-
-lost.guiro.controls.Control:addBase(Image, "Image")
+Image = lost.common.Class("lost.guiro.controls.Image", lost.guiro.View)
 
 --[[
     constructor
   ]]
-function Image:__init() lost.guiro.controls.Control.__init(self)
+function Image:__init() lost.guiro.View.__init(self)
   self.currentAlpha = 1.0
   self.currentColor = lost.common.Color(1,1,1)
   self.currentFilter = gl.GL_LINEAR

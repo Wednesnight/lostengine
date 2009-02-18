@@ -1,14 +1,11 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.controls.Image")
+
 --[[
      AnimatedImage control
   ]]
-require("lost.guiro.controls.Image")
-
-class "lost.guiro.controls.AnimatedImage" (lost.guiro.controls.Image)
-AnimatedImage = _G["lost.guiro.controls.AnimatedImage"]
-
-lost.guiro.controls.Image:addBase(AnimatedImage, "AnimatedImage")
+AnimatedImage = lost.common.Class("lost.guiro.controls.AnimatedImage", lost.guiro.controls.Image)
 
 --[[
     constructor

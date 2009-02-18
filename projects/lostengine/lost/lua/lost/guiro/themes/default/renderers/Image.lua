@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.renderers", package.seeall)
 
+require("lost.guiro.Renderer")
+
 --[[
      Image Renderer
   ]]
-require("lost.guiro.Renderer")
-
-class "lost.guiro.themes.default.renderers.Image" (lost.guiro.Renderer)
-Image = _G["lost.guiro.themes.default.renderers.Image"]
+Image = lost.common.Class("lost.guiro.themes.default.renderers.Image", lost.guiro.Renderer)
 
 function Image:__init() lost.guiro.Renderer.__init(self)
 end

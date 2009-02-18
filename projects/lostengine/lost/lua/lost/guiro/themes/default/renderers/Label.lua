@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.renderers", package.seeall)
 
+require("lost.guiro.Renderer")
+
 --[[
      Label Renderer
   ]]
-require("lost.guiro.Renderer")
-
-class "lost.guiro.themes.default.renderers.Label" (lost.guiro.Renderer)
-Label = _G["lost.guiro.themes.default.renderers.Label"]
+Label = lost.common.Class("lost.guiro.themes.default.renderers.Label", lost.guiro.Renderer)
 
 function Label:__init() lost.guiro.Renderer.__init(self)
 end

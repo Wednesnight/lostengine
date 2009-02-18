@@ -1,17 +1,13 @@
 module("lost.guiro.controls", package.seeall)
 
+require("lost.guiro.View")
+require("lost.guiro.Bounds")
+require("lost.guiro.controls.Button")
+
 --[[
      Slider control
   ]]
-require("lost.guiro.View")
-require("lost.guiro.Bounds")
-require("lost.guiro.controls.Control")
-require("lost.guiro.controls.Button")
-
-class "lost.guiro.controls.Slider" (lost.guiro.controls.Control)
-Slider = _G["lost.guiro.controls.Slider"]
-
-lost.guiro.controls.Control:addBase(Slider, "Slider")
+Slider = lost.common.Class("lost.guiro.controls.Slider", lost.guiro.View)
 
 --[[
     slider events
@@ -37,7 +33,7 @@ Slider.Orientation =
 --[[
     constructor
   ]]
-function Slider:__init() lost.guiro.controls.Control.__init(self)
+function Slider:__init() lost.guiro.View.__init(self)
   self.orientation = Slider.Orientation.horizontal
   self.min         = 0
   self.max         = 100

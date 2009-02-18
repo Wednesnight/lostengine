@@ -1,12 +1,11 @@
 module("lost.guiro.themes.default.renderers", package.seeall)
 
+require("lost.guiro.Renderer")
+
 --[[
      Window Renderer
   ]]
-require("lost.guiro.Renderer")
-
-class "lost.guiro.themes.default.renderers.Window" (lost.guiro.Renderer)
-Window = _G["lost.guiro.themes.default.renderers.Window"]
+Window = lost.common.Class("lost.guiro.themes.default.renderers.Window", lost.guiro.Renderer)
 
 function Window:__init() lost.guiro.Renderer.__init(self)
 end

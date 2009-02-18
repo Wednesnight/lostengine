@@ -1,10 +1,12 @@
 module("lost.guiro", package.seeall)
 
+require("lost.common.Class")
+require("lost.common.Object")
+
 --[[
      Bounds class
   ]]
-class "lost.guiro.Bounds"
-Bounds = _G["lost.guiro.Bounds"]
+Bounds = lost.common.Class("lost.guiro.Bounds", lost.common.Object)
 
 function Bounds:__init(x, y, width, height)
   self.x = x

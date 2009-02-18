@@ -54,7 +54,6 @@ function GuiroTestController:initialize(application)
   lost.guiro.View:printBases()
   lost.guiro.Screen:printBases()
   lost.guiro.UserInterface:printBases()
-  lost.guiro.controls.Control:printBases()
   lost.guiro.controls.Button:printBases()
   lost.guiro.controls.Window:printBases()
   -- print out view hierarchy
