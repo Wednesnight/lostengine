@@ -19,8 +19,8 @@ end
 --
 function EventManager:__init()
   log.debug("EventManager:__init")
-  self.previousMouseMoveStack = nil
-  self.previousMouseClickStack = nil
+  self.previousMouseMoveStack = {}
+  self.previousMouseClickStack = {}
 end
 
 
@@ -128,24 +128,51 @@ end
 
 
 function EventManager:propagateEnterLeaveEvents(viewStack, event)
-  -- no previous stack means the each view is the target for an enter event
-  if not self.previousMouseMoveStack then 
-    self.previousMouseMoveStack = viewStack
-    for k,v in ipairs(viewStack) do
-      event.target = viewStack[k]
-      event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
-      self:propagateEvent(viewStack, event, k)
+  -- leave events for old views, enter events for new views
+  -- iterate over both stacks, send appropriate events to old or new views
+  local maxi = math.max(#viewStack, #(self.previousMouseMoveStack))
+  local oldView = nil
+  local newView = nil
+  local i = 1
+  while i <= maxi do
+    if i <= #self.previousMouseMoveStack then
+      oldView = self.previousMouseMoveStack[i]
+    else
+      oldView = nil
     end
-  else -- leave events for old views, enter events for new views
-    -- find the index from where the viewstacks differ
-    -- build a safe maximum for the initial search  
-    local maxi = math.max(#viewStack, #(self.previousMouseMoveStack))
+    if i <= #viewStack then
+      newView = viewStack[i]
+    else
+      newView = nil
+    end  
+    if oldView ~= newView then
+      if oldView then
+        event.target = oldView
+        event.type = lost.guiro.event.MouseEvent.MOUSE_LEAVE
+        self:propagateEvent(self.previousMouseMoveStack, event, i)
+      end
+      if newView then
+        event.target = newView
+        event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
+        self:propagateEvent(viewStack, event, i)
+      end
+    end
+    i = i + 1
+  end
+  self.previousMouseMoveStack = viewStack    
+end
+
+function EventManager:propagateUpDownEvents(viewStack, event)
+  if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
+    self.previousMouseClickStack = viewStack
+  elseif event.type == lost.guiro.event.MouseEvent.MOUSE_UP then
+    local maxi = math.max(#viewStack, #(self.previousMouseClickStack))
     local oldView = nil
     local newView = nil
     local i = 1
     while i <= maxi do
-      if i <= #self.previousMouseMoveStack then
-        oldView = self.previousMouseMoveStack[i]
+      if i <= #self.previousMouseClickStack then
+        oldView = self.previousMouseClickStack[i]
       else
         oldView = nil
       end
@@ -157,20 +184,21 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
       if oldView ~= newView then
         if oldView then
           event.target = oldView
-          event.type = lost.guiro.event.MouseEvent.MOUSE_LEAVE
-          self:propagateEvent(self.previousMouseMoveStack, event, i)
+          event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
+          self:propagateEvent(self.previousMouseClickStack, event, i)
         end
         if newView then
           event.target = newView
-          event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
+          event.type = lost.guiro.event.MouseEvent.MOUSE_UP
           self:propagateEvent(viewStack, event, i)
         end
       end
       i = i + 1
     end
-    self.previousMouseMoveStack = viewStack    
+    self.previousMouseClickStack = {}
   end
 end
+
 
 -- propagates an event down the tree of views starting from (and including) the given rootView
 -- expects the incoming event type to be lost.application.MouseEvent 
@@ -180,13 +208,16 @@ function EventManager:propagateMouseEvent(rootView, event)
   local mouseevent = lost.guiro.event.MouseEvent(event) 
   viewStack = self:findViewStack(rootView, mouseevent)
 
-  mouseevent.currentTarget = nil -- will be set to the receiving view upon dispatch
+--  mouseevent.currentTarget = nil -- will be set to the receiving view upon dispatch
   mouseevent.target = viewStack[#viewStack] -- the lowermost view is the target of the click 
-
   self:propagateEvent(viewStack, mouseevent, #viewStack)
 
   if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then
     self:propagateEnterLeaveEvents(viewStack, mouseevent)
+  end  
+
+  if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
+    self:propagateUpDownEvents(viewStack, mouseevent)
   end  
   
   return viewStack
