@@ -70,6 +70,104 @@ screen = guiro:Screen
         }
       },
 
+      guiro:Button
+      {
+        bounds = g.Bounds(g.xright({abs=-5}), g.ytop({abs=-195}), g.wabs(100), g.habs(50)),
+        fadeStates = true,
+        label = guiro:Label
+        {
+          bounds = g.Bounds(g.xabs(30), g.yabs(20), g.wabs(100), g.habs(50)),
+          text = "Medium"
+        },
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          },
+          hovered = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          },
+          pressed = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          }
+        }
+      },
+
+      guiro:Button
+      {
+        bounds = g.Bounds(g.xright({abs=-5}), g.ytop({abs=-120}), g.wabs(150), g.habs(75)),
+        fadeStates = true,
+        label = guiro:Label
+        {
+          bounds = g.Bounds(g.xabs(60), g.yabs(30), g.wabs(150), g.habs(75)),
+          text = "Large"
+        },
+        images =
+        {
+          released = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          },
+          hovered = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          },
+          pressed = guiro:Image
+          {
+            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
+            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+          }
+        }
+      },
+
+      guiro:Slider
+      {
+        id = "slider",
+        bounds = g.Bounds(g.xleft({abs=26}), g.ytop({abs=-54}), g.wabs(25), g.habs(200)),
+        orientation = lost.guiro.controls.Slider.Orientation.vertical,
+        min = 0,
+        max = 1,
+        steps = 0,
+        value = 1,
+        listeners =
+        {
+          [lost.guiro.controls.Slider.SliderChange] = function(event)
+            log.debug(event.value)
+          end
+        }
+      },
+
+      guiro:Slider
+      {
+        id = "slider2",
+        bounds = g.Bounds(g.xleft({abs=180}), g.ytop({abs=-30}), g.wabs(50), g.habs(25)),
+        orientation = lost.guiro.controls.Slider.Orientation.horizontal,
+        min = 0,
+        max = 1,
+        steps = 1,
+        value = 1,
+        listeners =
+        {
+          [lost.guiro.controls.Slider.SliderChange] = function(event)
+            log.debug(event.value)
+          end
+        }
+      },
+
 			--[[
 			listeners =
 			{

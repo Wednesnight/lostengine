@@ -4,6 +4,7 @@ require("lost.guiro.View")
 require("lost.guiro.Bounds")
 require("lost.guiro.controls.Button")
 require("lost.guiro.event.Event")
+require("lost.guiro.event.MouseEvent")
 
 --[[
      Slider control
@@ -46,33 +47,28 @@ function Slider:__init() lost.guiro.View.__init(self)
   button.fadeStates = true
   self:setButton(button)
 
-  self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:handleInput(event) end)
-  self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:handleInput(event) end)
+  self.mouseMoved = function(event)
+    if self.dragging then
+      self:updatePosition(event.pos)
+    end
+  end
+  
 end
 
 function Slider:setButton(newButton)
   self:removeChild(self.button)
   self.button = newButton
   self:appendChild(self.button)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self.dragging = true end)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self.dragging = false end)
+  self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self:toggleDragging(true) end)
+  self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self:toggleDragging(false) end)
 end
 
-function Slider:handleInput(event)
+function Slider:toggleDragging(dragging)
+  self.dragging = dragging
   if self.dragging then
-    local location = lost.math.Vec2(0,0)
-    if event.type == lost.application.MouseEvent.MOUSE_MOVE then
-      local mouseEvent = lost.application.MouseEvent.cast(event)
-      location = lost.math.Vec2(mouseEvent.pos)
-    elseif event.type == lost.application.TouchEvent.TOUCHES_MOVED then
-      local touchEvent = lost.application.TouchEvent.cast(event)
-      if touchEvent:size() == 1 then
-        local touch = touchEvent:get(0)
-        location = lost.math.Vec2(touch.location)
-      end
-    end
-
-    self:updatePosition(location)
+    self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoved)
+  else
+    self:screen():removeEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoved)
   end
 end
 
@@ -106,8 +102,11 @@ function Slider:updatePosition(location, silent)
     self.button:needsLayout()
   end
   local newValue = self:value()
-  if not silent and (oldValue ~= newValue) then
-    self:dispatchEvent(Slider.SliderEvent(Slider.SliderChange, newValue))
+  if (oldValue ~= newValue) then
+    self:needsRedraw()
+    if not silent then
+      self:dispatchEvent(Slider.SliderEvent(Slider.SliderChange, newValue))
+    end
   end
 end
 
