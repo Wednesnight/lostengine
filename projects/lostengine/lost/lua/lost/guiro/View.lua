@@ -59,7 +59,6 @@ function View:appendChild(child, pos)
   if (child.id) then
     if (self(child.id) == nil) then
       table.insert(self.children, pos, child)
-      log.debug("inserting view "..child.id.." into "..self.id)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
