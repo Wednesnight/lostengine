@@ -159,7 +159,7 @@ function UserInterface:updateLayout(forceUpdate)
       self.colorTexture:bind()
       self.colorTexture:init(lost.math.Vec2(globalRect.width, globalRect.height), self.colorTextureParams)
       self.renderBuffer:attachColor(0, self.colorTexture)
-      self.colorTexture:filter(gl.GL_NEAREST)
+      self.colorTexture:filter(gl.GL_LINEAR)
       self.colorTexture:wrap(gl.GL_CLAMP_TO_EDGE)
 
       self.depthBuffer = lost.gl.RenderBuffer()
