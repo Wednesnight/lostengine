@@ -10,54 +10,59 @@ Window = lost.common.Class("lost.guiro.controls.Window", lost.guiro.View)
 
 function Window:__init() lost.guiro.View.__init(self)
   self.header = {height = 25}
+  
+  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:updateDragging(event, true) end)
+  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:updateDragging(event, false) end)
+  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE, function(event) self:updateDragging(event, false) end)
+end
+
+function Window:updateDragging(event, dragging)
+  self.dragging = dragging
+
+  --[[
+    check header bounds
+  ]]
+  if dragging then
+    local rect = self:globalRect()
+    local headerRect = lost.math.Rect(rect.x, 
+                                      rect.y + (rect.height - self.header.height),
+                                      rect.width,
+                                      self.header.height)
+    if not headerRect:contains(event.pos) then self.dragging = false
+      else self.lastDragPos = event.pos end
+  end
+
+  --[[
+    update listeners
+  ]]
+  if self.dragging then
+    self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, function(event) self:updatePosition(event) end)
+  else
+    self:screen():removeEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, function(event) self:updatePosition(event) end)
+  end
 end
 
 --[[
-    input handler for dragging
+    dragging
   ]]
-function Window:handleInput(event)
-  local info = self:initializeInput(event)
-  if info and (self.dragging or info.rect:contains(info.location)) then
-    local headerRect = lost.math.Rect(info.rect.x, 
-                                      info.rect.y + (info.rect.height - self.header.height),
-                                      info.rect.width,
-                                      self.header.height)
-
-    -- click
-    if info.which == View.InputType.down then
-      local topmost = nil
-      if self.parent then
-        topmost = self.parent:getViewAt(info.location)
-      end
-      if (topmost == nil or rawequal(topmost, self)) and info.rect:contains(info.location) then
-        self.dragging = headerRect:contains(info.location)
-        self.lastDragPos = info.location
-      end
-
-    -- release
-    elseif info.which == View.InputType.up then
-      self.dragging = false
-
-    -- move
-    elseif info.which == View.InputType.move then
-      if self.dragging then
-        local parentRect = nil
-        if self.parent then
-          parentRect = self.parent:globalRect()
-        end
-        local newBounds = lost.math.Vec2(info.rect.x + (info.location.x - self.lastDragPos.x),
-                                         info.rect.y + (info.location.y - self.lastDragPos.y))
-        if parentRect then
-          newBounds.x = math.max(math.min(newBounds.x, parentRect.width - info.rect.width), 1)
-          newBounds.y = math.max(math.min(newBounds.y, parentRect.height - info.rect.height), 1)
-        end
-
-        self.bounds.x = lost.guiro.xabs(newBounds.x)
-        self.bounds.y = lost.guiro.yabs(newBounds.y)
-        self:needsLayout()
-        self.lastDragPos = info.location
-      end
+function Window:updatePosition(event)
+  if self.dragging then
+    local rect = self:globalRect()
+    local parentRect = nil
+    if self.parent then
+      parentRect = self.parent:globalRect()
     end
+    local newBounds = lost.math.Vec2(rect.x + (event.pos.x - self.lastDragPos.x),
+                                     rect.y + (event.pos.y - self.lastDragPos.y))
+    if parentRect then
+      newBounds.x = math.max(math.min(newBounds.x, parentRect.width - rect.width), 1)
+      newBounds.y = math.max(math.min(newBounds.y, parentRect.height - rect.height), 1)
+    end
+
+    self.bounds.x = lost.guiro.xabs(newBounds.x)
+    self.bounds.y = lost.guiro.yabs(newBounds.y)
+    self:needsLayout()
+    self.lastDragPos = event.pos
   end
 end
 
