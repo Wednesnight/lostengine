@@ -4,31 +4,38 @@
 #include <map>
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
-#include "Param.h"
+#include "lost/application/gl/StateParam.h"
 
-struct State
+namespace lost
 {
-private:
-  std::map<GLenum, SharedParam> params;
-public:
-  State(const SharedParam& p1)
+  namespace application
   {
-  }
-  State(const SharedParam& p1, const SharedParam& p2)
-  {
-  }
-  State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3)
-  {
-  }
-  State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4)
-  {
-  }
+    namespace gl
+    {
+      
+      struct State;
+      typedef boost::shared_ptr<State> SharedState;
 
-  void param(const SharedParam& inParam)
-  {
-    if (params.find(inParam->which) != params.end()) throw std::runtime_error("duplicate state param");
-    params[inParam->which] = inParam;
+      struct State
+      {
+      private:
+        std::map<GLenum, SharedParam> params;
+
+        State(const SharedParam& p1);
+        State(const SharedParam& p1, const SharedParam& p2);
+        State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
+        State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4);
+      public:
+        static SharedState create(const SharedParam& p1);
+        static SharedState create(const SharedParam& p1, const SharedParam& p2);
+        static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
+        static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4);
+        
+        void param(const SharedParam& inParam);
+      };
+
+    }
   }
-};
+}
 
 #endif

@@ -7,6 +7,7 @@
 #include "lost/platform/Platform.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/event/Receive.h"
+#include "lost/application/gl/State.h"
 
 using namespace lost::application;
 
@@ -118,6 +119,8 @@ int testingLUA()
 
 int main (int argc, const char * argv[])
 {
+  gl::SharedState state = gl::State::create(gl::BlendFunc::create(GL_BLEND_SRC, GL_BLEND_DST));
+
 //  return testingCPP();
   return testingLUA();
 }

@@ -14,7 +14,9 @@
 #ifndef LOST_APPLICATION_GL_CONTEXT_H
 #define LOST_APPLICATION_GL_CONTEXT_H
 
+#include <list>
 #include "lost/gl/gl.h"
+#include "lost/application/gl/State.h"
 
 namespace lost
 {
@@ -31,6 +33,8 @@ namespace lost
          */
         struct ContextHiddenMembers;
         ContextHiddenMembers* hiddenMembers;
+
+        std::list<SharedState> stateStack;
       public:
         Context();
         ~Context();
@@ -44,6 +48,9 @@ namespace lost
          * swaps buffers :)
          */
         void swapBuffers();
+
+        void pushState(const SharedState& newState);
+        void popState();
       };
 
     }

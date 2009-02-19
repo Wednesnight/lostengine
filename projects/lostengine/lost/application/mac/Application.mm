@@ -86,8 +86,6 @@ namespace lost
 
     void Application::initialize()
     {
-      DOUT("Application::initialize()");
-
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
 
