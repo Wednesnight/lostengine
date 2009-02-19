@@ -17,6 +17,15 @@ screen = guiro:Screen
 			end,
 			mouseLeave = function(event)
 				log.debug("--- mouse left view: "..event.target.id)
+			end,
+			mouseDown = function(event)
+				log.debug("--- mouse down view: "..event.target.id)
+			end,
+			mouseUp = function(event)
+				log.debug("--- mouse up view: "..event.target.id)
+			end,
+			mouseUpOutside = function(event)
+				log.debug("--- mouse upoutside view: "..event.target.id)
 			end
 		},
 

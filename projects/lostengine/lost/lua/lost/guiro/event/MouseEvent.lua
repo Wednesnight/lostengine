@@ -6,6 +6,7 @@ MouseEvent = lost.common.Class("lost.guiro.event.MouseEvent",lost.guiro.event.Ev
 
 MouseEvent.MOUSE_MOVE = "mouseMove"
 MouseEvent.MOUSE_UP = "mouseUp"
+MouseEvent.MOUSE_UP_OUTSIDE = "mouseUpOutside"
 MouseEvent.MOUSE_DOWN = "mouseDown"
 MouseEvent.MOUSE_ENTER = "mouseEnter"
 MouseEvent.MOUSE_LEAVE = "mouseLeave"
