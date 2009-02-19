@@ -24,5 +24,4 @@ function MouseEvent:__init(laMouseEvent) lost.guiro.event.Event.__init(self)
   self.type = typeConvert[self.lostAppMouseEvent.type]
   self.stopDispatch = false
   self.stopPropagation = false
-  self.pos = self.lostAppMouseEvent.pos
 end
