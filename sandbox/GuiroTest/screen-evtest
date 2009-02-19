@@ -54,7 +54,8 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = g.Bounds(g.xabs(10), g.yabs(15), g.wabs(50), g.habs(40)),
-          text = "Small"
+          text = "Small",
+					receivesEvents = false					
         },
         images =
         {
@@ -62,19 +63,22 @@ screen = guiro:Screen
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false
           },
           hovered = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false
           },
           pressed = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false						
           }
         }
       },
@@ -86,7 +90,8 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = g.Bounds(g.xabs(30), g.yabs(20), g.wabs(100), g.habs(50)),
-          text = "Medium"
+          text = "Medium",
+					receivesEvents = false					
         },
         images =
         {
@@ -94,19 +99,22 @@ screen = guiro:Screen
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false					
           },
           hovered = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false					
           },
           pressed = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false					
           }
         }
       },
@@ -118,7 +126,8 @@ screen = guiro:Screen
         label = guiro:Label
         {
           bounds = g.Bounds(g.xabs(60), g.yabs(30), g.wabs(150), g.habs(75)),
-          text = "Large"
+          text = "Large",
+					receivesEvents = false											
         },
         images =
         {
@@ -126,19 +135,22 @@ screen = guiro:Screen
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false											
           },
           hovered = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false											
           },
           pressed = guiro:Image
           {
             bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(150), g.habs(75)),
             bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
+            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
+						receivesEvents = false											
           }
         }
       },
@@ -199,7 +211,8 @@ screen = guiro:Screen
       {
 				id="Label2",
         bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
-        text = "window2"
+        text = "window2",
+				receivesEvents = false									
       }
     }
   }
