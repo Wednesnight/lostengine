@@ -14,8 +14,6 @@ Button = lost.common.Class("lost.guiro.controls.Button", lost.guiro.View)
 Button.ButtonPress   = "BUTTON_PRESS"
 Button.ButtonRelease = "BUTTON_RELEASE"
 Button.ButtonClick   = "BUTTON_CLICK"
-Button.ButtonEnter   = "BUTTON_ENTER"
-Button.ButtonLeave   = "BUTTON_LEAVE"
 
 Button.ButtonEvent = lost.common.Class("lost.guiro.controls.Button.ButtonEvent", lost.guiro.event.Event)
 
@@ -47,8 +45,6 @@ end
 
 function Button:hover(event, hovered)
   self.hovered = hovered
-  if self.hovered then self:dispatchEvent(Button.ButtonEvent(Button.ButtonEnter, event.pos))
-    else self:dispatchEvent(Button.ButtonEvent(Button.ButtonLeave, event.pos)) end
   self:updateState()
 end
 
