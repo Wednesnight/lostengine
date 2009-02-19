@@ -17,22 +17,17 @@ function EventDispatcher:addEventListener(which, listener)
   end
   table.insert(l, listener)
   self.listeners[which] = l
---  log.debug("added listener "..tostring(listener).."for "..which.." "..tostring(#l).." "..tostring(l))
 end
 
 --[[ 
     calls all listener functions for the specific event type
   ]]
 function EventDispatcher:dispatchEvent(event)
---  log.debug("dispatching event: "..event.type)
   if self.listeners[event.type] then
---    log.debug("found "..tostring(#self.listeners[event.type]).." listeners")
     for k,listener in next,self.listeners[event.type] do
       listener(event)
---      log.debug("calling listeners for event:"..event.type)   
     end
   else
---    log.debug("found no listeners")
   end
 end
 
