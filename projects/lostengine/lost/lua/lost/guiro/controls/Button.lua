@@ -39,6 +39,7 @@ function Button:__init() lost.guiro.View.__init(self)
 
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:click(event, true) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:click(event, false) end)
+  self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE, function(event) self:click(event, false) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_ENTER, function(event) self:hover(event, true) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_LEAVE, function(event) self:hover(event, false) end)
 end
