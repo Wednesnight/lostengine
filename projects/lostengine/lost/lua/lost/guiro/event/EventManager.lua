@@ -134,7 +134,7 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
     for k,v in ipairs(viewStack) do
       event.target = viewStack[k]
       event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
-      self:propagateEvent(viewStack, enterEvent, k)
+      self:propagateEvent(viewStack, event, k)
     end
   else -- leave events for old views, enter events for new views
     -- find the index from where the viewstacks differ
