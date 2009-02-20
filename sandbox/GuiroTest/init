@@ -1,3 +1,68 @@
+-- CLASS TEST
+
+class "Class"
+function Class:__init(instance, args)
+  print("Class:__init()")
+  args = args or {}
+  if instance then
+    self.instance = getmetatable(instance)
+  end
+  if self.instance and self.instance["__init"] then
+    self.instance["__init"](self.instance, unpack(args))
+  end
+end
+function Class:__finalize()
+  print("Class:__finalize()")
+  if self.instance and self.instance["__finalize"] then
+    self.instance["__finalize"](self.instance)
+  end
+end
+
+function defineClass(namespace, relativeClassName, definition)
+  local namespaceClass = namespace[relativeClassName.."_mt"]
+  namespaceClass = {}
+  for k,v in next,definition do
+    namespaceClass[k] = v
+  end
+  namespace[relativeClassName] = function(...)
+    local result = {}
+    setmetatable(result, namespaceClass)
+    result["__holder"] = Class(result, args)
+    return result
+  end
+end
+
+function _class(className)
+ local namespaceClass = _G
+ local namespace = _G
+ local relativeClassName = ""
+ for name in string.gmatch(className, "[^%.]+") do
+   if not namespaceClass[name] then
+     namespaceClass[name] = {}
+   end
+   namespace = namespaceClass
+   relativeClassName = name
+   namespaceClass = namespaceClass[name]
+ end
+ return function(definition) defineClass(namespace, relativeClassName, definition) end
+end
+
+_class "just.a.test"
+{
+  __init = function(self)
+    print("__init()")
+  end,
+  
+  __finalize = function(self)
+    print("__finalize()")
+  end
+}
+
+local t = just.a.test()
+t = nil
+
+-- CLASS TEST END
+
 require("lost.common.Profiler")
 
 function main(application)
