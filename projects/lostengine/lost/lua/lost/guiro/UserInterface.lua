@@ -47,7 +47,7 @@ function UserInterface:initialize(context)
 
     self.depthBuffer = lost.gl.RenderBuffer()
     self.depthBuffer:enable()
-    self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT, self.colorTexture.width, self.colorTexture.height)
+    self.depthBuffer:storage(gl.GL_DEPTH_COMPONENT24, self.colorTexture.width, self.colorTexture.height)
     self.renderBuffer:attachDepth(self.depthBuffer)
     self.depthBuffer:disable()
 
@@ -81,7 +81,7 @@ end
   ]]
 function UserInterface:render(context, forceRender)
   -- initialize renderbuffer
-  self:initialize(context)
+--[[  self:initialize(context)
 
   -- helper vars
   local globalRect = self:globalRect()
@@ -119,7 +119,26 @@ function UserInterface:render(context, forceRender)
   context:popState()
 
   -- restore viewport
+  context:popViewport() ]]
+
+  self:initialize(context)
+  local displayAttributes = context:getDisplayAttributes()
+  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(displayAttributes.width, displayAttributes.height))
+  context:pushViewport(lost.math.Rect(0, 0, displayAttributes.width, displayAttributes.height))
+  context:pushState(self.bufferState)
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
+  forceRender = true
+  if forceRender or self.dirty then
+    context:clear(gl.GL_COLOR_BUFFER_BIT)
+    lost.guiro.View.render(self, context, true)
+  else
+    gl.glEnable(gl.GL_SCISSOR_TEST)
+    self:renderChildren(self, context)
+    gl.glDisable(gl.GL_SCISSOR_TEST)
+  end
   context:popViewport()
+  context:popState()
 end
 
 --[[
