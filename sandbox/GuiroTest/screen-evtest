@@ -155,6 +155,16 @@ screen = guiro:Screen
         }
       },
 
+      guiro:AnimatedImage
+      {
+        id = "fugly",
+        bounds = g.Bounds(g.xright(), g.ytop({abs=-30}), g.wabs(80), g.habs(80)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
+        frameSize = lost.math.Rect(0, 0, 153, 184),
+        interval = 0.1,
+        stretch = true
+      },
+      
       guiro:Slider
       {
         id = "slider",
@@ -167,7 +177,7 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
-            log.debug(event.value)
+            screen("ui")("window1")("image"):alpha(event.value)
           end
         }
       },
@@ -184,20 +194,41 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
-            log.debug(event.value)
+            if event.value == screen("ui")("window1")("slider2").min then
+              screen("ui")("window1")("image"):filter(gl.GL_NEAREST)
+            elseif event.value == screen("ui")("window1")("slider2").max then
+              screen("ui")("window1")("image"):filter(gl.GL_LINEAR)
+            end
           end
         }
       },
 
-			--[[
-			listeners =
-			{
-				mouseMove = function(event)
-					log.debug("--- catching mouseMove in "..event.currentTarget.id)
-				end
-			}]]
-    }
-		,
+      guiro:Image
+      {
+        id = "image",
+        bounds = g.Bounds(g.xleft({abs=50}), g.ytop({abs=-54}), g.wabs(180), g.habs(200)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true,
+        style = guiro:Style
+        {
+          borderColor = lost.common.Color(0,0,0,1)
+        },
+        listeners =
+        {
+          mouseDown = function(event)
+            event.target:stretch(not event.target:stretch())
+          end
+        }
+      },
+      
+      guiro:Label
+      {
+        id="label",
+        bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
+        text="Hello World!",
+        fontSize = 16
+      }
+    },
 
     guiro:Window
     {
@@ -213,9 +244,14 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
         text = "window2",
 				receivesEvents = false									
+      },
+      guiro:Image
+      {
+        id = "centeredImage",
+        bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+        stretch = true
       }
     }
   }
 }
-
-

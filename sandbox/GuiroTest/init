@@ -116,7 +116,7 @@ function GuiroTestController:initialize(application)
   log.debug("view hierarchy:")
   self.controls.screen:printChildren()
   
-  self.renderState = lost.gl.State.create(lost.gl.ClearColor.create(lost.common.Color(0,0,0)),
+  self.renderState = lost.gl.State.create(lost.gl.ClearColor.create(lost.common.Color(1,0,0)),
                                           lost.gl.DepthTest.create(false),
                                           lost.gl.Texture2D.create(false),
                                           lost.gl.VertexArray.create(true))

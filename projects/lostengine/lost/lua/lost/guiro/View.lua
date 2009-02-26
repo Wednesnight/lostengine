@@ -284,12 +284,9 @@ function View:resize(bounds)
 end
 
 --[[
-    update method for render preparation
+    update method for render preparation, called before renderer gets active
   ]]
 function View:update(canvas)
-  for key,view in next,self.children do
-    view:update(canvas)
-  end
 end
 
 --[[
@@ -299,6 +296,8 @@ function View:render(canvas, forceRender)
   local globalRect = self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
+
+    self:update(canvas)
 
     if self.renderer then
       self.renderer:render(canvas, self, self.style)
