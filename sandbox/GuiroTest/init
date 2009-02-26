@@ -92,16 +92,6 @@ function GuiroTestController:initialize(application)
 
   self.window = self.app:createWindow("MainWindow", lost.application.WindowParams("GuiroTest", lost.math.Rect(100, 100, 800, 600)))
 
-  self.displayAttributes = lost.common.DisplayAttributes()
-  if (lost.platform.isIPhone()) then
-    self.displayAttributes.width = 320
-    self.displayAttributes.height = 480
-  else
-    self.displayAttributes.width = 800
-    self.displayAttributes.height = 600
-  end
-  self.context = lost.gl.Context(self.displayAttributes)
-
   self.controls = {}
   self.controls.fpsMeter = lost.common.FpsMeter()
 
@@ -126,11 +116,10 @@ function GuiroTestController:initialize(application)
   log.debug("view hierarchy:")
   self.controls.screen:printChildren()
   
-  self.renderState = self.context:copyState()
-  self.renderState.clearColor = lost.common.Color(0,0,0)
-  self.renderState.depthTest = false
-  self.renderState.texture2D = false
-  self.renderState.vertexArray = true
+  self.renderState = lost.gl.State.create(lost.gl.ClearColor.create(lost.common.Color(0,0,0)),
+                                          lost.gl.DepthTest.create(false),
+                                          lost.gl.Texture2D.create(false),
+                                          lost.gl.VertexArray.create(true))
 
   self.passedSec = lost.platform.currentTimeSeconds()
   self.app:setRunLoop(function(sender) local currentSec = lost.platform.currentTimeSeconds() self:runLoop(sender, currentSec - self.passedSec) self.passedSec = currentSec end)
@@ -180,21 +169,19 @@ end
 
 function GuiroTestController:runLoop(sender, passedSec)
   self.window.context:makeCurrent()
-  self.context:pushState(self.renderState)
-  self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+  self.window.context:pushState(self.renderState)
+  self.window.canvas:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
 
-  gl.glViewport(0, 0, self.displayAttributes.width, self.displayAttributes.height)
---  self.context:set2DProjection(lost.math.Vec2(-0.5,-0.5), lost.math.Vec2(self.displayAttributes.width-0.5, self.displayAttributes.height-0.5))
-  self.context:set2DProjection(lost.math.Vec2(-0.5,-0.5), lost.math.Vec2(self.displayAttributes.width-0.5, self.displayAttributes.height-0.5))
+  self.window.canvas.camera:apply()
   gl.glMatrixMode(gl.GL_MODELVIEW)
 
   gl.glLoadIdentity()
   self.controls.screen:render(self.window.canvas, true)
 
   gl.glLoadIdentity()
-  self.controls.fpsMeter:render(self.displayAttributes.width - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)
+  self.controls.fpsMeter:render(800 - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)
 
-  self.context:popState()
+  self.window.context:popState()
   self.window.context:swapBuffers()
 --	log.debug("interpreter memory usage in kb: "..environment.interpreter:memUsage())
 end

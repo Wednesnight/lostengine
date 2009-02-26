@@ -5,10 +5,10 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/math/Vec2.h"
-#include "lost/application/gl/Canvas.h"
-#include "lost/application/gl/State.h"
+#include "lost/gl/Canvas.h"
+#include "lost/gl/State.h"
 
-using namespace lost::application::gl;
+using namespace lost::gl;
 
 namespace lost
 {

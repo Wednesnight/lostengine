@@ -1,6 +1,6 @@
 #include "lost/font/Model.h"
 
-using namespace lost::application::gl;
+using namespace lost::gl;
 
 namespace lost
 {
@@ -8,8 +8,8 @@ namespace lost
   {
     Model::Model()
     {
-      renderState = application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
-                                                   DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), VertexArray::create(true), TextureArray::create(true));
+      renderState = State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                  DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), VertexArray::create(true), TextureArray::create(true));
         
       vertexCount = 0;
       indexCount = 0;
@@ -19,7 +19,7 @@ namespace lost
     {
     }
 
-    void Model::render(const boost::shared_ptr<application::gl::Canvas>& canvas)
+    void Model::render(const boost::shared_ptr<Canvas>& canvas)
     {
       // don't do anything if model is empty
       if((vertexCount==0) || (indexCount==0))

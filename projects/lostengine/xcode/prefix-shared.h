@@ -6,6 +6,11 @@
 #include "stb_vorbis.h"
 //#include <CoreFoundation/CoreFoundation.h>
 #include "lost/gl/gl.h"
+#include "lost/gl/Canvas.h"
+#include "lost/gl/Context.h"
+#include "lost/gl/State.h"
+#include "lost/gl/Param.h"
+#include "lost/gl/StateParam.h"
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <boost/cstdint.hpp>

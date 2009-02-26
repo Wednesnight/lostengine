@@ -1,43 +1,40 @@
-#include "lost/application/gl/Context.h"
+#include "lost/gl/Context.h"
 
 #import <AppKit/NSOpenGL.h>
 
 namespace lost
 {
-  namespace application
+  namespace gl
   {
-    namespace gl
-    {
-        
-      struct Context::ContextHiddenMembers
-      {
-        NSOpenGLContext* glContext;
-      };
       
-      void Context::initialize()
-      {
-        hiddenMembers = new ContextHiddenMembers;
-        hiddenMembers->glContext = [NSOpenGLContext currentContext];
-      }
-
-      void Context::finalize()
-      {
-        delete hiddenMembers;
-      }
-
-      void Context::makeCurrent()
-      {
-        if ([NSOpenGLContext currentContext] != hiddenMembers->glContext)
-        {
-          [hiddenMembers->glContext makeCurrentContext];
-        }
-      }
-
-      void Context::swapBuffers()
-      {
-        [hiddenMembers->glContext flushBuffer];
-      }
-
+    struct Context::ContextHiddenMembers
+    {
+      NSOpenGLContext* glContext;
+    };
+    
+    void Context::initialize()
+    {
+      hiddenMembers = new ContextHiddenMembers;
+      hiddenMembers->glContext = [NSOpenGLContext currentContext];
     }
+
+    void Context::finalize()
+    {
+      delete hiddenMembers;
+    }
+
+    void Context::makeCurrent()
+    {
+      if ([NSOpenGLContext currentContext] != hiddenMembers->glContext)
+      {
+        [hiddenMembers->glContext makeCurrentContext];
+      }
+    }
+
+    void Context::swapBuffers()
+    {
+      [hiddenMembers->glContext flushBuffer];
+    }
+
   }
 }

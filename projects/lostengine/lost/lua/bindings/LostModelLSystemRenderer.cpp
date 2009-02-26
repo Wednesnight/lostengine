@@ -21,7 +21,7 @@ namespace lost
           namespace_("lsystem")
           [
             class_<Renderer, boost::shared_ptr<Renderer> >("Renderer")
-            .def(constructor<const boost::shared_ptr<lost::gl::Context>&, const boost::shared_ptr<Mesh>&>()) 
+            .def(constructor<const boost::shared_ptr<lost::gl::Canvas>&, const boost::shared_ptr<Mesh>&>()) 
             .def("render", &Renderer::render)
             .def_readwrite("size", &Renderer::size)
           ]

@@ -6,6 +6,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Matrix.h"
+#include "lost/gl/Context.h"
 
 namespace lost
 {
@@ -30,7 +31,7 @@ namespace lost
       bool       mStickToTarget;
     public:
       // constructor
-      Camera3D(const boost::shared_ptr<application::gl::Context>& inContext, const lost::math::Rect& inViewport);
+      Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
 
       // getters
       math::Vec2& depth();

@@ -10,7 +10,7 @@ using namespace boost;
 using namespace luabind;
 using namespace lost::camera;
 using namespace lost::math;
-using namespace lost::application::gl;
+using namespace lost::gl;
 
 namespace lost
 {
@@ -24,7 +24,8 @@ namespace lost
         [
          class_<Camera, shared_ptr<Camera> >("Camera")
           .def(constructor<const shared_ptr<Context>&, const Rect&>())
-          .def("apply", &Camera::apply),
+          .def("apply", &Camera::apply)
+          .def_readonly("viewport", &Camera::viewport),
          class_<Camera2D, shared_ptr<Camera2D>, Camera>("Camera2D")
           .def(constructor<const shared_ptr<Context>&, const Rect&>()),
          class_<Camera3D, shared_ptr<Camera3D>, Camera>("Camera3D")
