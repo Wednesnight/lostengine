@@ -8,7 +8,6 @@ require("lost.guiro.View")
 UserInterface = lost.common.Class("lost.guiro.UserInterface", lost.guiro.View)
 
 function UserInterface:__init() lost.guiro.View.__init(self)
-  self.trackRedraws = true
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -24,7 +23,7 @@ function UserInterface:appendChild(child)
 end
 
 --[[
-    initializes renderbuffer, texures, states
+    initialization
   ]]
 function UserInterface:initialize(context)
   if not self.initialized then
@@ -33,69 +32,26 @@ function UserInterface:initialize(context)
     -- helper vars
     local globalRect = self:globalRect()
 
-    -- initialize render buffer
-    self.renderBuffer = lost.gl.FrameBuffer()
-    self.renderBuffer:enable()
-
-    self.colorTextureParams = lost.gl.Texture.Params()
-    self.colorTexture = lost.gl.Texture()
-    self.colorTexture:bind()
-    self.colorTexture:init(lost.math.Vec2(globalRect.width, globalRect.height), self.colorTextureParams)
-    self.renderBuffer:attachColor(0, self.colorTexture)
-    self.colorTexture:filter(gl.GL_NEAREST)
-    self.colorTexture:wrap(gl.GL_CLAMP_TO_EDGE)
-
-    self.depthBuffer = lost.gl.RenderBuffer()
-    self.depthBuffer:enable()
-    self.depthBuffer:storage(gl.GL_DEPTH_COMPONENT24, self.colorTexture.width, self.colorTexture.height)
-    self.renderBuffer:attachDepth(self.depthBuffer)
-    self.depthBuffer:disable()
-
-    if (self.renderBuffer:status() ~= lgl.LGL_FRAMEBUFFER_COMPLETE) then
-      log.error("could not initialize FrameBuffer")
-    end
-    self.renderBuffer:disable()
-
     self.renderState = context:copyState()
     self.renderState.depthTest = false
-    self.renderState.blend = true
-    self.renderState.blendSrc = gl.GL_SRC_ALPHA
-    self.renderState.blendDest = gl.GL_ONE_MINUS_SRC_ALPHA
-    self.renderState.texture2D = true
+    self.renderState.blend = false
+    self.renderState.texture2D = false
     self.renderState.normalArray = false
     self.renderState.vertexArray = true
-    self.renderState.textureCoordArray = true
-
-    self.bufferState = context:copyState()
-    self.bufferState.depthTest = false
-    self.bufferState.blend = false
-    self.bufferState.texture2D = false
-    self.bufferState.normalArray = false
-    self.bufferState.vertexArray = true
-    self.bufferState.textureCoordArray = false
+    self.renderState.textureCoordArray = false
   end
 end
 
 --[[
-    activates renderbuffer and checks children for redraw flag
+    render
   ]]
 function UserInterface:render(context, forceRender)
-  -- initialize renderbuffer
---[[  self:initialize(context)
+  self:initialize(context)
 
   -- helper vars
   local globalRect = self:globalRect()
 
-  -- fix viewport to fit texture size
-  context:pushViewport(lost.math.Rect(0, 0, self.colorTexture.width, self.colorTexture.height))
-
-  -- update renderbuffer
-  self.renderBuffer:enable()
-  context:pushState(self.bufferState)
-
-  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.colorTexture.width, self.colorTexture.height))
-  gl.glMatrixMode(gl.GL_MODELVIEW)
-  gl.glLoadIdentity()
+  context:pushState(self.renderState)
   if forceRender or self.dirty then
     context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
     lost.guiro.View.render(self, context, true)
@@ -104,40 +60,6 @@ function UserInterface:render(context, forceRender)
     self:renderChildren(self, context)
     gl.glDisable(gl.GL_SCISSOR_TEST)
   end
-
-  context:popState()
-  self.renderBuffer:disable()
-
-  -- draw renderbuffer
-  context:pushState(self.renderState)
-  local displayAttributes = context:getDisplayAttributes()
-  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(displayAttributes.width, displayAttributes.height))
-  gl.glMatrixMode(gl.GL_MODELVIEW)
-  gl.glLoadIdentity()
-  context:setColor(lost.common.Color(1,1,1))
-  context:drawRectTextured(lost.math.Rect(globalRect.x, globalRect.y, globalRect.width + 1, globalRect.height + 1), self.colorTexture, false)
-  context:popState()
-
-  -- restore viewport
-  context:popViewport() ]]
-
-  self:initialize(context)
-  local displayAttributes = context:getDisplayAttributes()
-  context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(displayAttributes.width, displayAttributes.height))
-  context:pushViewport(lost.math.Rect(0, 0, displayAttributes.width, displayAttributes.height))
-  context:pushState(self.bufferState)
-  gl.glMatrixMode(gl.GL_MODELVIEW)
-  gl.glLoadIdentity()
-  forceRender = true
-  if forceRender or self.dirty then
-    context:clear(gl.GL_COLOR_BUFFER_BIT)
-    lost.guiro.View.render(self, context, true)
-  else
-    gl.glEnable(gl.GL_SCISSOR_TEST)
-    self:renderChildren(self, context)
-    gl.glDisable(gl.GL_SCISSOR_TEST)
-  end
-  context:popViewport()
   context:popState()
 end
 
@@ -155,46 +77,9 @@ function UserInterface:renderChildren(parent, context)
       if topWindow then
         topWindow:render(context, true)
       end
-      if self.trackRedraws then
-        context:setColor(lost.common.Color(1,0,0))
-        context:drawRectOutline(lost.math.Rect(childRect.x + 1, childRect.y + 1, childRect.width - 1, childRect.height - 1))
-      end
     else
       self:renderChildren(child, context)
     end
-  end
-end
-
---[[
-    resize render buffer, textures
-  ]]
-function UserInterface:updateLayout(forceUpdate)
-  if forceUpdate or self.dirtyLayout then
-    local globalRect, localRect = lost.guiro.View.updateLayout(self, forceUpdate)
-    if self.renderBuffer then
-      self.renderBuffer:enable()
-
-      self.colorTexture = lost.gl.Texture()
-      self.colorTexture:bind()
-      self.colorTexture:init(lost.math.Vec2(globalRect.width, globalRect.height), self.colorTextureParams)
-      self.renderBuffer:attachColor(0, self.colorTexture)
-      self.colorTexture:filter(gl.GL_LINEAR)
-      self.colorTexture:wrap(gl.GL_CLAMP_TO_EDGE)
-
-      self.depthBuffer = lost.gl.RenderBuffer()
-      self.depthBuffer:enable()
-      self.depthBuffer:storage(lgl.LGL_DEPTH_COMPONENT, self.colorTexture.width, self.colorTexture.height)
-      self.renderBuffer:attachDepth(self.depthBuffer)
-      self.depthBuffer:disable()
-
-      if (self.renderBuffer:status() ~= lgl.LGL_FRAMEBUFFER_COMPLETE) then
-        log.error("could not initialize FrameBuffer")
-      end
-      self.renderBuffer:disable()
-    end
-    return globalRect, localRect
-  else
-    return lost.guiro.View.updateLayout(self, forceUpdate)
   end
 end
 
