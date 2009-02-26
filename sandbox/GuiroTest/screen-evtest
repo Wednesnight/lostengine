@@ -202,7 +202,7 @@ screen = guiro:Screen
     guiro:Window
     {
       id = "window2",
-      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.5), g.hrel(0.5)),
+      bounds = g.Bounds(g.xleft({abs=0}), g.ybottom({abs=0}), g.wrel(0.5), g.hrel(0.5)),
       header =
       {
         height = 25

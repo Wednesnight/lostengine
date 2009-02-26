@@ -236,7 +236,7 @@ namespace lost
       hiddenMembers = new WindowHiddenMembers;
 
       // create view
-      hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(params.position.x, params.position.y, params.size.width, params.size.height)];
+      hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(params.rect.x, params.rect.y, params.rect.width, params.rect.height)];
 
       // create window
       hiddenMembers->window = [[ApplicationWindow alloc]

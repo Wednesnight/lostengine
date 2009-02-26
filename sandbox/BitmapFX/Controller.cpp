@@ -5,7 +5,7 @@
 #include "lost/math/Rect.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
-#include "lost/application/KeySym.h"
+#include "lost/event/Receive.h"
 
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
@@ -19,39 +19,32 @@ using namespace lost::font;
 using namespace lost::common;
 using namespace lost::resource;
 using namespace lost::application;
+using namespace lost::application::gl;
 using namespace lost::math;
 using namespace lost::event;
 using namespace lost::gl;
 using namespace lost::gl::utils;
-using namespace lost::application;
 
 Controller::Controller()
 {
-}
+  app = Application::create(bind(&Controller::runLoop, this));
+  
+  window = app->createWindow("window", WindowParams("BitmapFX", lost::math::Rect(100, 100, 800, 600)));
+  
+  app->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyboard, this, _1)));
+  app->addEventListener(KeyEvent::KEY_UP(), receive<KeyEvent>(bind(&Controller::keyboard, this, _1)));
 
-void Controller::init(shared_ptr<Event> event)
-{
-  context = appInstance->context;
-  fpsMeter.reset(new FpsMeter(context));
-
-  renderState = appInstance->context->copyState();
-  renderState->texture2D = true;
-  renderState->blend = true;
-  renderState->blendSrc = GL_SRC_ALPHA;
-  renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-  renderState->clearColor = blackColor;
-  renderState->depthTest = false;  
-  renderState->alphaTest = false;  
-  renderState->normalArray = false;  
-  renderState->vertexArray = true;  
-  renderState->textureCoordArray = true;  
-
+  fpsMeter.reset(new FpsMeter());
+  
+  renderState = lost::application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), ClearColor::create(blackColor), DepthTest::create(false),
+                                                     AlphaTest::create(false), NormalArray::create(false), VertexArray::create(true), TextureArray::create(true));
+  
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = appInstance->loader->load("suigeneris.ttf");
+  shared_ptr<File> file = app->loader->load("suigeneris.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
-    ttf->atlasSize = Vec2(128,128);
-  fontSize = appInstance->config["fontSize"].as<uint32_t>();
+  ttf->atlasSize = Vec2(128,128);
+  fontSize = 22;//appInstance->config["fontSize"].as<uint32_t>();
   string text ="Hoschi!gnj   VAfiglrby";
   renderedText1 = ttf->render(text, 16);
   DOUT("16pt string size: "<<renderedText1->size);
@@ -61,12 +54,17 @@ void Controller::init(shared_ptr<Event> event)
   DOUT("32pt string size: "<<renderedText3->size);    
 }
 
+void Controller::run()
+{
+  app->run();
+}
+
 void Controller::keyboard( shared_ptr<KeyEvent> event )
 {
   switch (event->key)
   {
     case K_ESCAPE :
-      if (!event->pressed) appInstance->quit();
+      if (!event->pressed) app->quit();
       break;
     case K_SPACE :
       break;
@@ -75,29 +73,34 @@ void Controller::keyboard( shared_ptr<KeyEvent> event )
   }
 }
 
-void Controller::redraw(shared_ptr<TimerEvent> event)
+void Controller::render(const shared_ptr<Canvas>& canvas)
 {
-  glViewport(0, 0, display.width, display.height);GLDEBUG;
-  context->set2DProjection(Vec2(0, 0), Vec2(appInstance->displayAttributes->width, appInstance->displayAttributes->height));
-  context->pushState(renderState);
-  context->clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-  context->setColor(whiteColor);
-  context->drawRectTextured(Rect(300,0,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
-
+  canvas->context->makeCurrent();
+  canvas->context->pushState(renderState);
+  canvas->camera->apply();
+  canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  
+  canvas->setColor(whiteColor);
+  canvas->drawRectTextured(Rect(300,0,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
+  
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glTranslatef(0,10,0);
-  context->setColor(redColor);
-  renderedText1->render(context);
+  canvas->setColor(redColor);
+  renderedText1->render(canvas);
   glTranslatef(0,30,0);
-  context->setColor(Color(0,1,0,0.75));
-  renderedText2->render(context);
+  canvas->setColor(Color(0,1,0,0.75));
+  renderedText2->render(canvas);
   glTranslatef(0,60,0);
-  context->setColor(Color(0,0,1,0.5));
-  renderedText3->render(context);
-  context->popState();
+  canvas->setColor(Color(0,0,1,0.5));
+  renderedText3->render(canvas);
+  canvas->context->popState();
+  
+  fpsMeter->render(canvas->camera->viewport.width - fpsMeter->width + 10, 0, canvas, 1/100);
+  canvas->context->swapBuffers();
+}
 
-  fpsMeter->render( appInstance->displayAttributes->width - (fpsMeter->width + 10), 0, event->passedSec );
-  appInstance->swapBuffers();
+void Controller::runLoop()
+{
+  render(window->canvas);
 }

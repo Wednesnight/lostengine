@@ -287,10 +287,7 @@ namespace lost
     void Context::drawRectOutline(const lost::math::Rect& rect)
     {
       PROFILE_METHOD();
-      // FIXME: bottomLeft is missing 1 pixel, this is just a workaround
-      Vec2 bottomLeft = rect.bottomLeft();
-      bottomLeft.x -= 1;
-      drawLine(bottomLeft, rect.bottomRight());
+      drawLine(rect.bottomLeft(), rect.bottomRight());
       drawLine(rect.bottomRight(), rect.topRight());
       drawLine(rect.topRight(), rect.topLeft());
       drawLine(rect.topLeft(), rect.bottomLeft());

@@ -446,6 +446,15 @@
 		8D0CC5DE0F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
 		8D0CC5DF0F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
 		8D0CC5E00F44C36700ADE728 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D0CC5DD0F44C36700ADE728 /* Parser.cpp */; };
+		8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
+		8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
+		8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
+		8D5348230F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
+		8D5348240F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
+		8D5348250F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
+		8D53491A0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
+		8D53491B0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
+		8D53491C0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
 		8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
 		8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
@@ -808,6 +817,9 @@
 		3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLFrameBuffer.cpp; path = bindings/LostGLFrameBuffer.cpp; sourceTree = "<group>"; };
 		3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLTexture.cpp; path = bindings/LostGLTexture.cpp; sourceTree = "<group>"; };
 		8D0CC5DD0F44C36700ADE728 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = obj/Parser.cpp; sourceTree = "<group>"; };
+		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
+		8D5348220F5599EE005C39BF /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Canvas.cpp; path = gl/Canvas.cpp; sourceTree = "<group>"; };
+		8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLCanvas.cpp; path = bindings/LostApplicationGLCanvas.cpp; sourceTree = "<group>"; };
 		8D77F0480F34DC1000C86FFD /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
 		8D77F0490F34DC1000C86FFD /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = iphone/Window.mm; sourceTree = "<group>"; };
 		8D77F0600F34DC2900C86FFD /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/iphone/Context.mm; sourceTree = "<group>"; };
@@ -1023,6 +1035,7 @@
 			children = (
 				3E376F4A0E543F6F0050A5DF /* Camera.cpp */,
 				3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */,
+				8D5347AC0F558582005C39BF /* Camera3D.cpp */,
 			);
 			name = camera;
 			sourceTree = "<group>";
@@ -1081,6 +1094,7 @@
 		8DE56F860F3118F00072FB28 /* gl */ = {
 			isa = PBXGroup;
 			children = (
+				8D5348220F5599EE005C39BF /* Canvas.cpp */,
 				3E2A807B0F4970ED00BA4398 /* Context.cpp */,
 				3E2A80300F49655400BA4398 /* State.cpp */,
 				8D77F04E0F34DC1500C86FFD /* iphone */,
@@ -1404,6 +1418,7 @@
 				EA7BE1260E6F38A10017B031 /* LostApplicationAccelerometerEvent.cpp */,
 				EA7BE11E0E6F38A10017B031 /* LostApplicationApplication.cpp */,
 				EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */,
+				8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */,
 				3E1329850F31FC1A00EA849F /* LostApplicationGLContext.cpp */,
 				3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */,
 				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
@@ -1783,6 +1798,9 @@
 				8D0CC5DF0F44C36700ADE728 /* Parser.cpp in Sources */,
 				3E2A80320F49655400BA4398 /* State.cpp in Sources */,
 				3E2A807D0F4970ED00BA4398 /* Context.cpp in Sources */,
+				8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */,
+				8D5348240F5599EE005C39BF /* Canvas.cpp in Sources */,
+				8D53491B0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2001,6 +2019,9 @@
 				8D0CC5E00F44C36700ADE728 /* Parser.cpp in Sources */,
 				3E2A80330F49655400BA4398 /* State.cpp in Sources */,
 				3E2A807E0F4970ED00BA4398 /* Context.cpp in Sources */,
+				8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */,
+				8D5348250F5599EE005C39BF /* Canvas.cpp in Sources */,
+				8D53491C0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2219,6 +2240,9 @@
 				8D0CC5DE0F44C36700ADE728 /* Parser.cpp in Sources */,
 				3E2A80310F49655400BA4398 /* State.cpp in Sources */,
 				3E2A807C0F4970ED00BA4398 /* Context.cpp in Sources */,
+				8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */,
+				8D5348230F5599EE005C39BF /* Canvas.cpp in Sources */,
+				8D53491A0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,13 +5,16 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/math/Vec2.h"
+#include "lost/application/gl/Canvas.h"
+#include "lost/application/gl/State.h"
+
+using namespace lost::application::gl;
 
 namespace lost
 {
   namespace common
   {
-      FpsMeter::FpsMeter(boost::shared_ptr<lost::gl::Context> inContext)
-      : context(inContext)
+      FpsMeter::FpsMeter()
       {
         width = historylength;
         height = 100;
@@ -27,13 +30,11 @@ namespace lost
           labels.push_back(boost::lexical_cast<std::string>((i+1)*labelstepping));
         }
         
-        renderState = context->copyState();
-        renderState->depthTest = false;
-        renderState->blend = true;
-        renderState->blendSrc = GL_SRC_ALPHA;
-        renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-        renderState->texture2D = false;
-        renderState->vertexArray = true;
+        renderState = State::create(DepthTest::create(false),
+                                    Blend::create(true),
+                                    BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                    Texture2D::create(false),
+                                    VertexArray::create(true));
       }
 
       void FpsMeter::resetHistory()
@@ -51,35 +52,39 @@ namespace lost
         historycurpos = (historycurpos+1)%historylength;
       }
 
-      void FpsMeter::render(unsigned long x, unsigned long y, double timeSinceLastCallSec)
+      void FpsMeter::render(unsigned long x, unsigned long y, const boost::shared_ptr<Canvas>& canvas, double timeSinceLastCallSec)
       {
         // FIXME: coordinates are off somehow ... we need to figure out the definitve way to draw precise coords. Somehow, OpenGL offsets things for a pixel sometimes
         addHistoryEntry(timeSinceLastCallSec);
-        context->pushState(renderState);
+
+        canvas->context->makeCurrent();
+        canvas->context->pushState(renderState);
+
         // background
-        context->setColor(Color(.75, .75, .75, alpha));
-        context->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
+        canvas->setColor(Color(.75, .75, .75, alpha));
+        canvas->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
 
         // top caption
-        context->setColor(Color(0, 0, 0, alpha));
+        canvas->setColor(Color(0, 0, 0, alpha));
 
         // horizontal stripes
-        context->setColor(Color(0, 0, 0, alpha));
+        canvas->setColor(Color(0, 0, 0, alpha));
         for(unsigned long n=0; n<numlabels; ++n)
         {
-          context->drawLine(math::Vec2((float)x, (float)y+10*(n+1)-1), math::Vec2((float)x+width-1, (float)y+10*(n+1)-1));
+          canvas->drawLine(math::Vec2((float)x, (float)y+10*(n+1)-1), math::Vec2((float)x+width-1, (float)y+10*(n+1)-1));
         }
 
         // draw history ringbuffer
-        context->setColor(Color(0, 0, 0, alpha));
+        canvas->setColor(Color(0, 0, 0, alpha));
         unsigned long curpos = historycurpos;
         for(unsigned long i=0; i<historylength-1; ++i)
         {
 //          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
-          context->drawLine(math::Vec2((float)x+i, (float)y+history[curpos]), math::Vec2((float)x+i+1, (float)y+history[(curpos+1)%historylength]));
+          canvas->drawLine(math::Vec2((float)x+i, (float)y+history[curpos]), math::Vec2((float)x+i+1, (float)y+history[(curpos+1)%historylength]));
           curpos = (curpos+1) % historylength;
         }
-        context->popState();
+
+        canvas->context->popState();
       }
   }
 }

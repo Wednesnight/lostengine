@@ -4,8 +4,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
+#include "lost/application/gl/Canvas.h"
 #include "lost/application/gl/Context.h"
-#include "lost/math/Vec2.h"
+#include "lost/math/Rect.h"
 #include "lost/event/EventDispatcher.h"
 
 namespace lost
@@ -17,15 +18,12 @@ namespace lost
     {
     public:
       std::string      caption;
-      lost::math::Vec2 size;
-      lost::math::Vec2 position;
+      lost::math::Rect rect;
 
       WindowParams(const std::string& inCaption,
-                   const lost::math::Vec2& inSize,
-                   const lost::math::Vec2& inPosition)
+                   const lost::math::Rect& inRect)
       : caption(inCaption),
-        size(inSize),
-        position(inPosition)
+        rect(inRect)
       {
       }
     };
@@ -38,12 +36,6 @@ namespace lost
        */
       struct WindowHiddenMembers;
       WindowHiddenMembers* hiddenMembers;
-
-      /**
-       * holds generic window params
-       */
-      // FIXME: make this configurable
-      WindowParams params;
 
       /**
        * hidden ctor/dtor utility methods for platform specific stuff
@@ -69,6 +61,17 @@ namespace lost
       // FIXME: should probably be read-only
       boost::shared_ptr<gl::Context> context;
 
+      /**
+       * canvas for drawing operations
+       */
+      // FIXME: should probably be read-only
+      boost::shared_ptr<gl::Canvas> canvas;
+      
+      /**
+       * holds generic window params
+       */
+      WindowParams params;
+      
       /**
        * static ctor helpers, make sure that we're held by a boost::shared_ptr
        */

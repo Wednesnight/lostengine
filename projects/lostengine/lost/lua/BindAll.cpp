@@ -44,6 +44,7 @@
 #include "lost/lua/bindings/LostGLFrameBuffer.h"
 #include "lost/lua/bindings/LostApplicationWindow.h"
 #include "lost/lua/bindings/LostApplicationGLContext.h"
+#include "lost/lua/bindings/LostApplicationGLCanvas.h"
 #include "lost/lua/bindings/LostApplicationInputEvent.h"
 
 namespace lost
@@ -95,6 +96,7 @@ namespace lost
       LostGLRenderBuffer(state);
       LostGLFrameBuffer(state);
       LostApplicationWindow(state);
+      LostApplicationGLCanvas(state);
       LostApplicationGLContext(state);
       
       luabind::bind_class_info(state);

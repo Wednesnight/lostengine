@@ -141,6 +141,7 @@ namespace lost
       globals(state)["gl"]["GL_NEAREST"] = GL_NEAREST;
       globals(state)["gl"]["GL_ONE_MINUS_SRC_ALPHA"] = GL_ONE_MINUS_SRC_ALPHA;
       globals(state)["gl"]["GL_POINT_SMOOTH"] = GL_POINT_SMOOTH;
+      globals(state)["gl"]["GL_RGB"] = GL_RGB;
       globals(state)["gl"]["GL_RGBA"] = GL_RGBA;
       globals(state)["gl"]["GL_SCISSOR_TEST"] = GL_SCISSOR_TEST;
       globals(state)["gl"]["GL_SRC_ALPHA"] = GL_SRC_ALPHA;

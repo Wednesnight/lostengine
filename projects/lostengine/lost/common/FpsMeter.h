@@ -8,7 +8,7 @@
 
 namespace lost
 {
-  namespace gl { struct Context; struct State; };
+  namespace application { namespace gl { struct Canvas; struct State; } };
 
   namespace common
   {
@@ -25,13 +25,13 @@ namespace lost
       float alpha;
       boost::shared_array<float> history;
       std::vector<std::string> labels;
-      boost::shared_ptr<lost::gl::Context> context;
-      boost::shared_ptr<lost::gl::State> renderState;
+      boost::shared_ptr<application::gl::Canvas> canvas;
+      boost::shared_ptr<application::gl::State> renderState;
 
-      FpsMeter(boost::shared_ptr<lost::gl::Context> inContext);
+      FpsMeter();
       void resetHistory();
       void addHistoryEntry(double timeSinceLastCallSec);
-      void render(unsigned long x, unsigned long y, double timeSinceLastCallSec);
+      void render(unsigned long x, unsigned long y, const boost::shared_ptr<application::gl::Canvas>& canvas, double timeSinceLastCallSec);
     };
   }
 }

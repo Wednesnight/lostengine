@@ -2,18 +2,21 @@
 #define CONTROLLER_H
 
 #include <boost/shared_ptr.hpp>
-#include "lost/common/DisplayAttributes.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/application/KeyEvent.h"
-#include "lost/application/TimerEvent.h"
 #include "lost/font/TrueTypeFont.h"
+#include "lost/application/gl/Context.h"
+#include "lost/application/gl/State.h"
+#include "lost/application/gl/Canvas.h"
+#include "lost/application/Application.h"
+#include "lost/application/Window.h"
 
 struct Controller 
 {
-  lost::common::DisplayAttributes                 display;
-  boost::shared_ptr<lost::common::FpsMeter>       fpsMeter;
-  boost::shared_ptr<lost::gl::Context>            context;
-  boost::shared_ptr<lost::gl::State>              renderState;
+  boost::shared_ptr<lost::application::Application> app;
+  boost::shared_ptr<lost::application::Window> window;
+  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  lost::application::gl::SharedState        renderState;
   
   boost::shared_ptr<lost::font::TrueTypeFont>     ttf;
   boost::shared_ptr<lost::font::Model>            renderedText1;
@@ -23,10 +26,10 @@ struct Controller
   boost::uint32_t fontSize;
 
   Controller();
-  void init(boost::shared_ptr<lost::event::Event> event);
   void keyboard(boost::shared_ptr<lost::application::KeyEvent> event );
-  void redraw(boost::shared_ptr<lost::application::TimerEvent> event);
-
+  void run();
+  void runLoop();
+  void render(const boost::shared_ptr<lost::application::gl::Canvas>& canvas);
 };
 
 #endif

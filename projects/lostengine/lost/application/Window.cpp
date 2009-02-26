@@ -10,7 +10,10 @@ namespace lost
     : dispatcher(inDispatcher),
       params(inParams)
     {
+      // platform specific initialization
       initialize();
+      
+      canvas.reset(new gl::Canvas(context, lost::math::Rect(0, 0, params.rect.width, params.rect.height)));
     }
 
     boost::shared_ptr<Window> Window::create(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
