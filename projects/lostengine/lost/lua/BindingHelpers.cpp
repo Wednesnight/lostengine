@@ -1,17 +1,23 @@
 #include <boost/shared_ptr.hpp>
 
 #include "lost/application/AccelerometerEvent.h"
+#include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/TouchEvent.h"
+#include "lost/application/gl/Canvas.h"
+#include "lost/application/gl/Context.h"
+#include "lost/application/gl/State.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/Color.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/event/Event.h"
 #include "lost/gl/Context.h"
+#include "lost/gl/FrameBuffer.h"
+#include "lost/gl/RenderBuffer.h"
 #include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 #include "lost/lsystem/LSystem.h"
@@ -26,8 +32,6 @@
 #include "lost/model/obj/Renderer.h"
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
-#include "lost/gl/RenderBuffer.h"
-#include "lost/gl/FrameBuffer.h"
 
 #define GET_POINTER(name) template name* get_pointer(boost::shared_ptr<name>&);\
                           template name const* get_pointer(boost::shared_ptr<name const>&);
@@ -42,18 +46,24 @@ namespace luabind
   }
   
   GET_POINTER(lost::application::AccelerometerEvent);
+  GET_POINTER(lost::application::Application);
   GET_POINTER(lost::application::ApplicationEvent);
   GET_POINTER(lost::application::KeyEvent);
   GET_POINTER(lost::application::MouseEvent);
   GET_POINTER(lost::application::ResizeEvent);
   GET_POINTER(lost::application::TouchEvent);
   GET_POINTER(lost::application::TouchEvent::Touch);
+  GET_POINTER(lost::application::gl::Canvas);
+  GET_POINTER(lost::application::gl::Context);
+  GET_POINTER(lost::application::gl::State);
   GET_POINTER(lost::bitmap::Bitmap);
   GET_POINTER(lost::camera::Camera);
   GET_POINTER(lost::common::Color);
   GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
   GET_POINTER(lost::gl::Context);
+  GET_POINTER(lost::gl::FrameBuffer);
+  GET_POINTER(lost::gl::RenderBuffer);
   GET_POINTER(lost::gl::State);
   GET_POINTER(lost::gl::Texture);
   GET_POINTER(lost::lsystem::LSystem);
@@ -69,6 +79,4 @@ namespace luabind
   GET_POINTER(lost::model::obj::Renderer);
   GET_POINTER(lost::resource::File);
   GET_POINTER(lost::resource::Loader);
-  GET_POINTER(lost::gl::RenderBuffer);
-  GET_POINTER(lost::gl::FrameBuffer);
 }

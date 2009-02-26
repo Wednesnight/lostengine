@@ -10,13 +10,13 @@ Window = lost.common.Class("lost.guiro.themes.default.renderers.Window", lost.gu
 function Window:__init() lost.guiro.Renderer.__init(self)
 end
 
-function Window:render(context, window, style)
+function Window:render(canvas, window, style)
   local globalRect = window:globalRect()
 
-  context:setColor(style.color)
-  context:drawRectFilled(globalRect)
-  context:setColor(style.header.color)
-  context:drawRectFilled(lost.math.Rect(globalRect.x, 
+  canvas:setColor(style.color)
+  canvas:drawRectFilled(globalRect)
+  canvas:setColor(style.header.color)
+  canvas:drawRectFilled(lost.math.Rect(globalRect.x, 
                                         globalRect.y + (globalRect.height - window.header.height),
                                         globalRect.width,
                                         window.header.height))
@@ -29,9 +29,9 @@ function Window:render(context, window, style)
       window.label:color(style.header.fontColor)
       window.label:needsRedraw()
     end
-    window.label:render(context)
+    window.label:render(canvas)
   end
 
-  context:setColor(style.lineColor)
-  context:drawRectOutline(globalRect)
+  canvas:setColor(style.lineColor)
+  canvas:drawRectOutline(globalRect)
 end

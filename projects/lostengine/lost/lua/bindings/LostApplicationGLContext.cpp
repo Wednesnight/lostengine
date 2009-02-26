@@ -22,6 +22,8 @@ namespace lost
             class_<Context, boost::shared_ptr<Context> >("Context")
               .def("makeCurrent", &Context::makeCurrent)
               .def("swapBuffers", &Context::swapBuffers)
+              .def("pushState", &Context::pushState)
+              .def("popState", &Context::popState)
           ]
         ]
       ];

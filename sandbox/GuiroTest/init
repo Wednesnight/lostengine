@@ -189,7 +189,7 @@ function GuiroTestController:runLoop(sender, passedSec)
   gl.glMatrixMode(gl.GL_MODELVIEW)
 
   gl.glLoadIdentity()
-  self.controls.screen:render(self.context, true)
+  self.controls.screen:render(self.window.canvas, true)
 
   gl.glLoadIdentity()
   self.controls.fpsMeter:render(self.displayAttributes.width - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)

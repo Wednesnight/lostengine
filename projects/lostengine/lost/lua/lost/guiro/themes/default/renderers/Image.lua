@@ -10,7 +10,7 @@ Image = lost.common.Class("lost.guiro.themes.default.renderers.Image", lost.guir
 function Image:__init() lost.guiro.Renderer.__init(self)
 end
 
-function Image:render(context, image, style)
+function Image:render(canvas, image, style)
   local globalRect = image:globalRect()
   
   if not self.texture then
@@ -24,7 +24,7 @@ function Image:render(context, image, style)
   self.texture:filter(image:filter())
 
   local imageColor = image:color()
-  context:setColor(lost.common.Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a * image:alpha()))
+  canvas:setColor(lost.common.Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a * image:alpha()))
   if image.cornerBounds then
     if not self.mesh then
       self.mesh = lost.gl.Mesh2D(16, 16, 54, self.texture)
@@ -136,7 +136,7 @@ function Image:render(context, image, style)
     self.mesh:setTexcoord(14, lost.math.Vec2(1 - topRight.width / image.bitmap.width, 1))
     self.mesh:setTexcoord(15, lost.math.Vec2(1, 1))
 
-    context:drawMesh2D(self.mesh, gl.GL_TRIANGLES)
+    canvas:drawMesh2D(self.mesh, gl.GL_TRIANGLES)
 
   else
     local imageRect = lost.math.Rect(globalRect)
@@ -150,9 +150,9 @@ function Image:render(context, image, style)
         imageRect.height = math.min(imageRect.height, image.bitmap.height * ratio.y)
       end
     end
-    context:drawRectTextured(imageRect, self.texture, true)
+    canvas:drawRectTextured(imageRect, self.texture, true)
   end
 
-  context:setColor(style.borderColor)
-  context:drawRectOutline(globalRect)
+  canvas:setColor(style.borderColor)
+  canvas:drawRectOutline(globalRect)
 end

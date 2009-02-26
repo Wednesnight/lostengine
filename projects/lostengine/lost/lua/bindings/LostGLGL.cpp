@@ -87,6 +87,16 @@ namespace lost
       glPopAttrib();
     }
 
+    void _glPushMatrix()
+    {
+      glPushMatrix();
+    }
+    
+    void _glPopMatrix()
+    {
+      glPopMatrix();
+    }
+    
     void _glScissor(GLint x, GLint y, GLsizei w, GLsizei h)
     {
       glScissor(x, y, w, h);
@@ -112,7 +122,9 @@ namespace lost
        def("glViewport", &LOST_LUA_GL_PREFIX(glViewport)),
        def("glLineWidth", &LOST_LUA_GL_PREFIX(glLineWidth)),
        def("glScissor", &LOST_LUA_GL_PREFIX(glScissor)),
-       def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef))
+       def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef)),
+       def("glPushMatrix", &LOST_LUA_GL_PREFIX(glPushMatrix)),
+       def("glPopMatrix", &LOST_LUA_GL_PREFIX(glPopMatrix))
 #if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
        ,def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
        def("glPopAttrib", &LOST_LUA_GL_PREFIX(glPopAttrib))

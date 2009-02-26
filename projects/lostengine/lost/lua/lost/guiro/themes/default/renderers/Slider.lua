@@ -10,20 +10,20 @@ Slider = lost.common.Class("lost.guiro.themes.default.renderers.Slider", lost.gu
 function Slider:__init() lost.guiro.Renderer.__init(self)
 end
 
-function Slider:render(context, slider, style)
+function Slider:render(canvas, slider, style)
   local globalRect = slider:globalRect()
   
-  context:setColor(style.color)
-  context:drawRectFilled(globalRect)
-  context:setColor(style.lineColor)
-  context:drawRectOutline(globalRect)
+  canvas:setColor(style.color)
+  canvas:drawRectFilled(globalRect)
+  canvas:setColor(style.lineColor)
+  canvas:drawRectOutline(globalRect)
   if (slider.orientation == lost.guiro.controls.Slider.Orientation.horizontal) then
-    context:drawLine(lost.math.Vec2(globalRect.x, globalRect:maxY() - globalRect.height / 2),
+    canvas:drawLine(lost.math.Vec2(globalRect.x, globalRect:maxY() - globalRect.height / 2),
                      lost.math.Vec2(globalRect:maxX(), globalRect:maxY() - globalRect.height / 2))
   elseif (slider.orientation == lost.guiro.controls.Slider.Orientation.vertical) then
-    context:drawLine(lost.math.Vec2(globalRect:maxX() - globalRect.width / 2, globalRect.y),
+    canvas:drawLine(lost.math.Vec2(globalRect:maxX() - globalRect.width / 2, globalRect.y),
                      lost.math.Vec2(globalRect:maxX() - globalRect.width / 2, globalRect:maxY()))
   end
 
-  slider.button:render(context)
+  slider.button:render(canvas)
 end

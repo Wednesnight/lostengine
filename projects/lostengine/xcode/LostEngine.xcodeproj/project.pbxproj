@@ -470,6 +470,9 @@
 		8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
+		8DFDE4EC0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
+		8DFDE4ED0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
+		8DFDE4EE0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
@@ -828,6 +831,7 @@
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
 		8DE56F8A0F31190A0072FB28 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/mac/Context.mm; sourceTree = "<group>"; };
 		8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationWindow.cpp; path = bindings/LostApplicationWindow.cpp; sourceTree = "<group>"; };
+		8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLState.cpp; path = bindings/LostApplicationGLState.cpp; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
@@ -1420,6 +1424,7 @@
 				EA7BE10A0E6F38A10017B031 /* LostApplicationApplicationEvent.cpp */,
 				8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */,
 				3E1329850F31FC1A00EA849F /* LostApplicationGLContext.cpp */,
+				8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */,
 				3E55444E0F32E97000E07AC0 /* LostApplicationInputEvent.cpp */,
 				EA7BE10E0E6F38A10017B031 /* LostApplicationKeyEvent.cpp */,
 				EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */,
@@ -1801,6 +1806,7 @@
 				8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */,
 				8D5348240F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491B0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
+				8DFDE4ED0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2022,6 +2028,7 @@
 				8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */,
 				8D5348250F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491C0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
+				8DFDE4EE0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2243,6 +2250,7 @@
 				8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */,
 				8D5348230F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491A0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
+				8DFDE4EC0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,60 +25,60 @@ end
 --[[
     initialization
   ]]
-function UserInterface:initialize(context)
+function UserInterface:initialize()
   if not self.initialized then
     self.initialized = true
 
     -- helper vars
     local globalRect = self:globalRect()
 
-    self.renderState = context:copyState()
-    self.renderState.depthTest = false
-    self.renderState.blend = false
-    self.renderState.texture2D = false
-    self.renderState.normalArray = false
-    self.renderState.vertexArray = true
-    self.renderState.textureCoordArray = false
+    local g = lost.application.gl
+    self.renderState = g.State.create(g.DepthTest.create(false),
+                                      g.Blend.create(false),
+                                      g.Texture2D.create(false),
+                                      g.NormalArray.create(false),
+                                      g.VertexArray.create(false),
+                                      g.TextureArray.create(false))
   end
 end
 
 --[[
     render
   ]]
-function UserInterface:render(context, forceRender)
-  self:initialize(context)
+function UserInterface:render(canvas, forceRender)
+  self:initialize()
 
   -- helper vars
   local globalRect = self:globalRect()
 
-  context:pushState(self.renderState)
+  canvas.context:pushState(self.renderState)
   if forceRender or self.dirty then
-    context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
-    lost.guiro.View.render(self, context, true)
+    canvas:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+    lost.guiro.View.render(self, canvas, true)
   else
     gl.glEnable(gl.GL_SCISSOR_TEST)
-    self:renderChildren(self, context)
+    self:renderChildren(self, canvas)
     gl.glDisable(gl.GL_SCISSOR_TEST)
   end
-  context:popState()
+  canvas.context:popState()
 end
 
 --[[
     checks children for redraw flag
   ]]
-function UserInterface:renderChildren(parent, context)
+function UserInterface:renderChildren(parent, canvas)
   local topWindow = self:topWindow()
   for k,child in next,parent.children do
-    child:update(context)
+    child:update(canvas)
     if child.dirty then
       local childRect = child:globalRect()
       gl.glScissor(childRect.x, childRect.y, childRect.width, childRect.height)
-      child:render(context)
+      child:render(canvas)
       if topWindow then
-        topWindow:render(context, true)
+        topWindow:render(canvas, true)
       end
     else
-      self:renderChildren(child, context)
+      self:renderChildren(child, canvas)
     end
   end
 end

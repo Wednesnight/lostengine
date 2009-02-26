@@ -36,11 +36,12 @@ Controller::Controller()
 
   fpsMeter.reset(new FpsMeter());
   
-  renderState = lost::application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), ClearColor::create(blackColor), DepthTest::create(false),
-                                                     AlphaTest::create(false), NormalArray::create(false), VertexArray::create(true), TextureArray::create(true));
+  renderState = lost::application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), 
+                                                     ClearColor::create(blackColor), DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), 
+                                                     VertexArray::create(true), TextureArray::create(true));
   
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = app->loader->load("suigeneris.ttf");
+  shared_ptr<File> file = app->loader->load("Vera.ttf");//"suigeneris.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
   ttf->atlasSize = Vec2(128,128);
@@ -77,26 +78,32 @@ void Controller::render(const shared_ptr<Canvas>& canvas)
 {
   canvas->context->makeCurrent();
   canvas->context->pushState(renderState);
+
   canvas->camera->apply();
   canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   canvas->setColor(whiteColor);
-  canvas->drawRectTextured(Rect(300,0,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
+  canvas->drawRectTextured(Rect(350,150,ttf->atlas->width, ttf->atlas->height), ttf->atlas, false);
   
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
   glTranslatef(0,10,0);
   canvas->setColor(redColor);
   renderedText1->render(canvas);
+
   glTranslatef(0,30,0);
   canvas->setColor(Color(0,1,0,0.75));
   renderedText2->render(canvas);
+
   glTranslatef(0,60,0);
   canvas->setColor(Color(0,0,1,0.5));
   renderedText3->render(canvas);
-  canvas->context->popState();
   
-  fpsMeter->render(canvas->camera->viewport.width - fpsMeter->width + 10, 0, canvas, 1/100);
+  glLoadIdentity();
+  fpsMeter->render(canvas->camera->viewport.width - fpsMeter->width, 0, canvas, 1/100);
+
+  canvas->context->popState();
   canvas->context->swapBuffers();
 }
 
