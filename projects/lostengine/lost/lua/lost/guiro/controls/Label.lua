@@ -20,7 +20,8 @@ function Label:__init() lost.guiro.View.__init(self)
 end
 
 function Label:color(color)
-  if color and self.currentColor ~= color then
+  color = color or self.currentColor
+  if self.currentColor ~= color then
     self.currentColor = lost.common.Color(color)
     self:needsRedraw()
   end

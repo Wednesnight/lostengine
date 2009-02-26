@@ -18,8 +18,8 @@ end
 
 function AnimatedImage:update(canvas)
   local oldStep = self.currentStep
-  if self.lastTimestamp == nil or os.clock() - self.lastTimestamp >= self.interval then
-    self.lastTimestamp = os.clock()
+  if self.lastTimestamp == nil or lost.platform.currentTimeSeconds() - self.lastTimestamp >= self.interval then
+    self.lastTimestamp = lost.platform.currentTimeSeconds()
     self.currentStep = self.currentStep + 1
     if self.currentStep == self.bitmap.width / self.frameSize.width then
       self.currentStep = 0
