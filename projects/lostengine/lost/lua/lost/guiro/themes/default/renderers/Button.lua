@@ -10,7 +10,7 @@ Button = lost.common.Class("lost.guiro.themes.default.renderers.Button", lost.gu
 function Button:__init() lost.guiro.Renderer.__init(self)
 end
 
-function Button:render(context, button, style)
+function Button:render(canvas, button, style)
   local globalRect = button:globalRect()
 
   if button.fadeStates then
@@ -56,8 +56,8 @@ function Button:render(context, button, style)
     end
     self.currentImage:color(self.color)
   else
-    context:setColor(self.color)
-    context:drawRectFilled(globalRect)
+    canvas:setColor(self.color)
+    canvas:drawRectFilled(globalRect)
   end
 
   if button.label then
@@ -68,9 +68,9 @@ function Button:render(context, button, style)
       button.label:color(self.fontColor)
       button.label:needsRedraw()
     end
-    button.label:render(context)
+    button.label:render(canvas)
   end
 
-  context:setColor(self.lineColor)
-  context:drawRectOutline(globalRect)
+  canvas:setColor(self.lineColor)
+  canvas:drawRectOutline(globalRect)
 end

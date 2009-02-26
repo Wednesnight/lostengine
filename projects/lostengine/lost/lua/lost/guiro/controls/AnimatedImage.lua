@@ -16,7 +16,7 @@ function AnimatedImage:__init() lost.guiro.controls.Image.__init(self)
   self.interval = 0.5
 end
 
-function AnimatedImage:update(context)
+function AnimatedImage:update(canvas)
   local oldStep = self.currentStep
   if self.lastTimestamp == nil or os.clock() - self.lastTimestamp >= self.interval then
     self.lastTimestamp = os.clock()
@@ -28,9 +28,9 @@ function AnimatedImage:update(context)
   if oldStep ~= self.currentStep then
     self:needsRedraw()
   end
-  lost.guiro.View.update(self, context)
+  lost.guiro.View.update(self, canvas)
 end
 
-function AnimatedImage:render(context, force)
-  lost.guiro.View.render(self, context, force)
+function AnimatedImage:render(canvas, force)
+  lost.guiro.View.render(self, canvas, force)
 end

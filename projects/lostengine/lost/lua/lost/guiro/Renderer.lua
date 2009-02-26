@@ -49,6 +49,6 @@ end
 --[[
     render prototype
   ]]
-function Renderer:render(context, object, style)
+function Renderer:render(canvas, object, style)
   -- empty
 end

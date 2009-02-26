@@ -137,10 +137,10 @@ void TrueTypeFont::rebuildTextureAtlas()
     boost::shared_ptr<Glyph> g = glyphs[k];
     float tw = (float)atlas->dataWidth;
     float th = (float)atlas->dataHeight;
-    g->bl = Vec2(g->rect.x/tw, g->rect.y/th);
-    g->br = Vec2((g->rect.maxX()+1)/tw, g->rect.y/th);
-    g->tl = Vec2(g->rect.x/tw, (g->rect.maxY()+1)/th);
-    g->tr = Vec2((g->rect.maxX()+1)/tw, (g->rect.maxY()+1)/th);
+    g->bl = Vec2((g->rect.x+0.5)/tw, (g->rect.y+0.5)/th);
+    g->br = Vec2((g->rect.maxX()+1.5)/tw, (g->rect.y+0.5)/th);
+    g->tl = Vec2((g->rect.x+0.5)/tw, (g->rect.maxY()+1.5)/th);
+    g->tr = Vec2((g->rect.maxX()+1.5)/tw, (g->rect.maxY()+1.5)/th);
   }
 }
 

@@ -286,26 +286,26 @@ end
 --[[
     update method for render preparation
   ]]
-function View:update(context)
+function View:update(canvas)
   for key,view in next,self.children do
-    view:update(context)
+    view:update(canvas)
   end
 end
 
 --[[
     triggers render on children
   ]]
-function View:render(context, forceRender)
+function View:render(canvas, forceRender)
   local globalRect = self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
 
     if self.renderer then
-      self.renderer:render(context, self, self.style)
+      self.renderer:render(canvas, self, self.style)
     end
 
     for k,view in next,self.children do
-      view:render(context, true)
+      view:render(canvas, true)
     end
   end
 end

@@ -10,7 +10,7 @@ AnimatedImage = lost.common.Class("lost.guiro.themes.default.renderers.AnimatedI
 function AnimatedImage:__init() lost.guiro.Renderer.__init(self)
 end
 
-function AnimatedImage:render(context, image, style)
+function AnimatedImage:render(canvas, image, style)
   local globalRect = image:globalRect()
 
   if not self.texture then
@@ -24,7 +24,7 @@ function AnimatedImage:render(context, image, style)
   self.texture:filter(image:filter())
 
   local imageColor = image:color()
-  context:setColor(lost.common.Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a * image:alpha()))
+  canvas:setColor(lost.common.Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a * image:alpha()))
   local imageRect = lost.math.Rect(globalRect)
   if not image:stretch() then
     local ratio = lost.math.Vec2(globalRect.width/image.frameSize.width, globalRect.height/image.frameSize.height)
@@ -43,8 +43,8 @@ function AnimatedImage:render(context, image, style)
   local bottomRight = lost.math.Vec2((tmpRect.x + tmpRect.width)/image.bitmap.width, 0)
   local topLeft = lost.math.Vec2(tmpRect.x/image.bitmap.width, 1)
   local topRight = lost.math.Vec2((tmpRect.x + tmpRect.width)/image.bitmap.width, 1)
-  context:drawRectTextured(imageRect, self.texture, bottomLeft, bottomRight, topLeft, topRight, true)
+  canvas:drawRectTextured(imageRect, self.texture, bottomLeft, bottomRight, topLeft, topRight, true)
 
-  context:setColor(style.borderColor)
-  context:drawRectOutline(globalRect)
+  canvas:setColor(style.borderColor)
+  canvas:drawRectOutline(globalRect)
 end

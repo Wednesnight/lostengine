@@ -41,9 +41,9 @@ end
 --[[
     Screen is always dirty
   ]]
-function Screen:render(context, forceRender)
+function Screen:render(canvas, forceRender)
   for k,ui in next,self.children do
-    ui:render(context, forceRender)
+    ui:render(canvas, forceRender)
   end
 end
 
