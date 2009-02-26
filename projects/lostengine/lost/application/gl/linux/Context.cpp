@@ -9,7 +9,7 @@ struct Context::ContextHiddenMembers
   GLXContext  glContext;
 };
 
-Context::Context()
+void Context::initialize()
 {
   hiddenMembers = new ContextHiddenMembers;
   hiddenMembers->glDisplay  = glXGetCurrentDisplay();
@@ -17,14 +17,19 @@ Context::Context()
   hiddenMembers->glContext  = glXGetCurrentContext();
 }
 
-Context::~Context()
+void Context::finalize()
 {
   delete hiddenMembers;
 }
 
 void Context::makeCurrent()
 {
-  glXMakeCurrent(hiddenMembers->glDisplay, hiddenMembers->glDrawable, hiddenMembers->glContext);
+  if (glXGetCurrentDisplay() != hiddenMembers->glDisplay ||
+      glXGetCurrentDrawable() != hiddenMembers->glDrawable ||
+      glXGetCurrentContext() != hiddenMembers->glContext)
+  {
+    glXMakeCurrent(hiddenMembers->glDisplay, hiddenMembers->glDrawable, hiddenMembers->glContext);
+  }
 }
 
 void Context::swapBuffers()

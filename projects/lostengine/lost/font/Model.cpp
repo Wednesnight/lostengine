@@ -1,46 +1,38 @@
 #include "lost/font/Model.h"
-#include "lost/gl/Context.h"
-#include "lost/gl/Texture.h"
+
+using namespace lost::application::gl;
+
 namespace lost
 {
-namespace font
-{
-  Model::Model()
+  namespace font
   {
-    renderState.reset(new gl::State);
+    Model::Model()
+    {
+      renderState = application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                                   DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), VertexArray::create(true), TextureArray::create(true));
+        
+      vertexCount = 0;
+      indexCount = 0;
+    }
 
-    renderState->texture2D = true;
-    renderState->blend = true;
-    renderState->blendSrc = GL_SRC_ALPHA;
-    renderState->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-    renderState->depthTest = false;  
-    renderState->alphaTest = false;  
-    renderState->normalArray = false;  
-    renderState->vertexArray = true;  
-    renderState->textureCoordArray = true;      
+    Model::~Model()
+    {
+    }
+
+    void Model::render(const boost::shared_ptr<application::gl::Canvas>& canvas)
+    {
+      // don't do anything if model is empty
+      if((vertexCount==0) || (indexCount==0))
+        return;
+      canvas->context->makeCurrent();
+      canvas->context->pushState(renderState);
       
-    vertexCount = 0;
-    indexCount = 0;
-      
-  }
+      texture->bind();
+      glVertexPointer(2,GL_FLOAT,0,vertices.get()); GLDEBUG;
+      glTexCoordPointer(2,GL_FLOAT,0,texcoords.get()); GLDEBUG;
+      glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_BYTE, indices.get()); GLDEBUG;
 
-  Model::~Model()
-  {
+      canvas->context->popState();
+    }
   }
-
-  void Model::render(boost::shared_ptr<gl::Context> context)
-  {
-    // don't do nything if model is empty
-    if((vertexCount==0) || (indexCount==0))
-      return;
-    context->pushState(renderState);
-    
-    texture->bind();
-    glVertexPointer(2,GL_FLOAT,0,vertices.get());
-    glTexCoordPointer(2,GL_FLOAT,0,texcoords.get());
-    glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_BYTE, indices.get());    
-
-    context->popState();
-  }
-}
 }

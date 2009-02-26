@@ -1,11 +1,16 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/camera/Camera.h"
+#include "lost/camera/Camera2D.h"
+#include "lost/camera/Camera3D.h"
 
 #include "lost/lua/bindings/LostCameraCamera.h"
 
+using namespace boost;
 using namespace luabind;
 using namespace lost::camera;
+using namespace lost::math;
+using namespace lost::application::gl;
 
 namespace lost
 {
@@ -17,24 +22,29 @@ namespace lost
       [
         namespace_("camera")
         [
-          class_<Camera, boost::shared_ptr<Camera> >("Camera")
-          .def(constructor<>())
-          .def("depth", (math::Vec2&(Camera::*)()) &Camera::depth)
-          .def("depth", (void(Camera::*)(const math::Vec2&)) &Camera::depth)
-          .def("fovY", (float&(Camera::*)()) &Camera::fovY)
-          .def("fovY", (void(Camera::*)(const float)) &Camera::fovY)
-          .def("position", (math::Vec3(Camera::*)()) &Camera::position)
-          .def("position", (void(Camera::*)(const math::Vec3&)) &Camera::position)
-          .def("direction", (math::Vec3(Camera::*)()) &Camera::direction)
-          .def("direction", (void(Camera::*)(const math::Vec3&)) &Camera::direction)
-          .def("stickToTarget", (bool(Camera::*)()) &Camera::stickToTarget)
-          .def("stickToTarget", (void(Camera::*)(const bool)) &Camera::stickToTarget)
-          .def("rotation", (math::Vec3&(Camera::*)()) &Camera::rotation)
-          .def("rotation", (void(Camera::*)(const math::Vec3&)) &Camera::rotation)
-          .def("target", (math::Vec3(Camera::*)()) &Camera::target)
-          .def("target", (void(Camera::*)(const math::Vec3&)) &Camera::target)
-          .def("move", &Camera::move)
-          .def("rotate", &Camera::rotate)
+         class_<Camera, shared_ptr<Camera> >("Camera")
+          .def(constructor<const shared_ptr<Context>&, const Rect&>())
+          .def("apply", &Camera::apply),
+         class_<Camera2D, shared_ptr<Camera2D>, Camera>("Camera2D")
+          .def(constructor<const shared_ptr<Context>&, const Rect&>()),
+         class_<Camera3D, shared_ptr<Camera3D>, Camera>("Camera3D")
+          .def(constructor<const shared_ptr<Context>&, const Rect&>())
+          .def("depth", (Vec2&(Camera3D::*)()) &Camera3D::depth)
+          .def("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
+          .def("fovY", (float&(Camera3D::*)()) &Camera3D::fovY)
+          .def("fovY", (void(Camera3D::*)(const float)) &Camera3D::fovY)
+          .def("position", (Vec3(Camera3D::*)()) &Camera3D::position)
+          .def("position", (void(Camera3D::*)(const Vec3&)) &Camera3D::position)
+          .def("direction", (Vec3(Camera3D::*)()) &Camera3D::direction)
+          .def("direction", (void(Camera3D::*)(const Vec3&)) &Camera3D::direction)
+          .def("stickToTarget", (bool(Camera3D::*)()) &Camera3D::stickToTarget)
+          .def("stickToTarget", (void(Camera3D::*)(const bool)) &Camera3D::stickToTarget)
+          .def("rotation", (Vec3&(Camera3D::*)()) &Camera3D::rotation)
+          .def("rotation", (void(Camera3D::*)(const Vec3&)) &Camera3D::rotation)
+          .def("target", (Vec3(Camera3D::*)()) &Camera3D::target)
+          .def("target", (void(Camera3D::*)(const Vec3&)) &Camera3D::target)
+          .def("move", &Camera3D::move)
+          .def("rotate", &Camera3D::rotate)
         ]
       ];
     }

@@ -40,15 +40,22 @@ namespace lost
       protected:
         lost::common::Color color;
       public:
-        ColorParam(const lost::common::Color& inColor = lost::common::Color(0,0,0,0))
+        ColorParam(const lost::common::Color& inColor)
         : Param(inWhich),
           color(inColor)
         {
         }
         
-        static SharedParam create(const lost::common::Color& inColor = lost::common::Color(0,0,0,0))
+        static SharedParam create(const lost::common::Color& inColor)
         {
           return SharedParam(new ColorParam(inColor));
+        }
+        
+        static SharedParam create()
+        {
+          lost::common::Color color;
+          glGetFloatv(inWhich, (GLfloat*)color.fv); GLDEBUG_THROW;
+          return SharedParam(new ColorParam(color));
         }
         
         virtual void set()
@@ -88,7 +95,14 @@ namespace lost
         {
           return SharedParam(new ClientStateParam(inEnable));
         }
-          
+        
+        static SharedParam create()
+        {
+          bool flag;
+          glGetBooleanv(inWhich, (GLboolean*)&flag); GLDEBUG_THROW;
+          return SharedParam(new ClientStateParam(flag));
+        }
+        
         virtual void set()
         {
           if (enable) glEnableClientState(which);
@@ -105,6 +119,13 @@ namespace lost
         static SharedParam create(const bool inEnable)
         {
           return SharedParam(new ServerStateParam(inEnable));
+        }
+        
+        static SharedParam create()
+        {
+          bool flag;
+          glGetBooleanv(inWhich, (GLboolean*)&flag); GLDEBUG_THROW;
+          return SharedParam(new ServerStateParam(flag));
         }
         
         virtual void set()
@@ -131,6 +152,14 @@ namespace lost
         static SharedParam create(const GLenum inSource, const GLenum inDestination)
         {
           return SharedParam(new BlendFunc(inSource, inDestination));
+        }
+        
+        static SharedParam create()
+        {
+          GLfloat src, dest = 0;
+          glGetFloatv(GL_BLEND_SRC, &src); GLDEBUG_THROW;
+          glGetFloatv(GL_BLEND_DST, &dest); GLDEBUG_THROW;
+          return SharedParam(new BlendFunc(static_cast<GLenum>(src), static_cast<GLenum>(dest)));
         }
         
         virtual void set()

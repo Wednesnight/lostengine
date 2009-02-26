@@ -14,20 +14,23 @@ namespace lost
         NSOpenGLContext* glContext;
       };
       
-      Context::Context()
+      void Context::initialize()
       {
         hiddenMembers = new ContextHiddenMembers;
         hiddenMembers->glContext = [NSOpenGLContext currentContext];
       }
 
-      Context::~Context()
+      void Context::finalize()
       {
         delete hiddenMembers;
       }
 
       void Context::makeCurrent()
       {
-        [hiddenMembers->glContext makeCurrentContext];
+        if ([NSOpenGLContext currentContext] != hiddenMembers->glContext)
+        {
+          [hiddenMembers->glContext makeCurrentContext];
+        }
       }
 
       void Context::swapBuffers()

@@ -20,9 +20,10 @@ namespace lost
           class_<Window, boost::shared_ptr<Window> >("Window")
             .def("open", &Window::open)
             .def("close", &Window::close)
-            .def_readonly("context", &Window::context),
+            .def_readonly("context", &Window::context)
+            .def_readonly("canvas", &Window::canvas),
           class_<WindowParams, boost::shared_ptr<WindowParams> >("WindowParams")
-            .def(constructor<const std::string&, const lost::math::Vec2&, const lost::math::Vec2&>()) 
+            .def(constructor<const std::string&, const lost::math::Rect&>()) 
         ]
       ];
     }

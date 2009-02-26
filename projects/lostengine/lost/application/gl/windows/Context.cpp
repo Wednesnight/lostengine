@@ -6,21 +6,25 @@ struct Context::ContextHiddenMembers
   HGLRC glContext;
 };
 
-Context::Context()
+void Context::initialize()
 {
   hiddenMembers = new ContextHiddenMembers;
   hiddenMembers->glDeviceContext = wglGetCurrentDC();
   hiddenMembers->glContext = wglGetCurrentContext();
 }
 
-Context::~Context()
+void Context::finalize()
 {
   delete hiddenMembers;
 }
 
 void Context::makeCurrent()
 {
-  wglMakeCurrent(hiddenMembers->glDeviceContext, hiddenMembers->glContext);
+  if (wglGetCurrentDC() != hiddenMembers->glDeviceContext ||
+      wglGetCurrentContext() != hiddenMembers->glContext)
+  {
+    wglMakeCurrent(hiddenMembers->glDeviceContext, hiddenMembers->glContext);
+  }
 }
 
 void Context::swapBuffers()

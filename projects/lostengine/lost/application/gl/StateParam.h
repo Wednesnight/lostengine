@@ -19,7 +19,7 @@ namespace lost
       typedef ClientStateParam<GL_VERTEX_ARRAY>        VertexArray;
       typedef ClientStateParam<GL_TEXTURE_COORD_ARRAY> TextureArray;
 
-      typedef ColorParam<GL_CLEAR> ClearColor;
+      typedef ColorParam<GL_COLOR_CLEAR_VALUE> ClearColor;
 
       typedef BlendFunc BlendFunc;
 

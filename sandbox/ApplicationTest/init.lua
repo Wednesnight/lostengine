@@ -5,7 +5,7 @@ function MyController:init(application)
   self.app = application
 
   -- create our main window
-  self.window = application:createWindow("window", lost.application.WindowParams("Application", lost.math.Vec2(800, 600), lost.math.Vec2(100, 100)))
+  self.window = application:createWindow("window", lost.application.WindowParams("Application", lost.math.Rect(100, 100, 800, 600)))
 
   -- member setup
   self.passedSec = lost.platform.currentTimeSeconds()

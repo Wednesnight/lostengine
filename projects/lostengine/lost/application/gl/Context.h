@@ -34,7 +34,15 @@ namespace lost
         struct ContextHiddenMembers;
         ContextHiddenMembers* hiddenMembers;
 
+        /**
+         * hidden ctor/dtor utility methods for platform specific stuff
+         */
+        void initialize();
+        void finalize();
+
+        SharedState currentState;
         std::list<SharedState> stateStack;
+        void apply(const SharedState& newState);
       public:
         Context();
         ~Context();

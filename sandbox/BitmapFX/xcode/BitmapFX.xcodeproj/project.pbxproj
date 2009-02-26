@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E0312010ED5ADD9003A5853 /* suigeneris.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E0312000ED5ADD9003A5853 /* suigeneris.ttf */; };
+		8DFDE4100F56A261005D3927 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DFDE40F0F56A261005D3927 /* Cocoa.framework */; };
 		EA2ECA300EB922A90062B593 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2ECA2F0EB922A90062B593 /* Application.lua */; };
 		EA57CA800EBD3AF6000E3D01 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */; };
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
@@ -16,10 +17,7 @@
 		EAC026680E96AF8C00067FC5 /* init in Resources */ = {isa = PBXBuildFile; fileRef = EAC026640E96AF8C00067FC5 /* init */; };
 		EAC026690E96AF8C00067FC5 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC026660E96AF8C00067FC5 /* Controller.cpp */; };
 		EAC0267A0E96B11600067FC5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC026750E96B10F00067FC5 /* libLostEngine.a */; };
-		EAD2E8330E940009000535DB /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8320E940009000535DB /* AGL.framework */; };
 		EAD2E8370E940011000535DB /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E8360E940011000535DB /* OpenGL.framework */; };
-		EAD2E83E0E94001A000535DB /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E83C0E94001A000535DB /* GLUT.framework */; };
-		EAD2E83F0E94001A000535DB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD2E83D0E94001A000535DB /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +55,7 @@
 		3E0312000ED5ADD9003A5853 /* suigeneris.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = suigeneris.ttf; path = ../suigeneris.ttf; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BitmapFX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmapFX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DFDE40F0F56A261005D3927 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		EA2ECA2F0EB922A90062B593 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
@@ -66,10 +65,7 @@
 		EAC026650E96AF8C00067FC5 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
 		EAC026660E96AF8C00067FC5 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
 		EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		EAD2E8320E940009000535DB /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EAD2E8360E940011000535DB /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		EAD2E83C0E94001A000535DB /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		EAD2E83D0E94001A000535DB /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +74,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAC0267A0E96B11600067FC5 /* libLostEngine.a in Frameworks */,
-				EAD2E8330E940009000535DB /* AGL.framework in Frameworks */,
 				EAD2E8370E940011000535DB /* OpenGL.framework in Frameworks */,
-				EAD2E83E0E94001A000535DB /* GLUT.framework in Frameworks */,
-				EAD2E83F0E94001A000535DB /* Carbon.framework in Frameworks */,
+				8DFDE4100F56A261005D3927 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,11 +118,9 @@
 		29B97323FDCFA39411CA2CEA /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8DFDE40F0F56A261005D3927 /* Cocoa.framework */,
 				EAC0266E0E96B10F00067FC5 /* LostEngine.xcodeproj */,
-				EAD2E83C0E94001A000535DB /* GLUT.framework */,
-				EAD2E83D0E94001A000535DB /* Carbon.framework */,
 				EAD2E8360E940011000535DB /* OpenGL.framework */,
-				EAD2E8320E940009000535DB /* AGL.framework */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -137,8 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				EAC026750E96B10F00067FC5 /* libLostEngine.a */,
-				EAC026770E96B10F00067FC5 /* libLostEngine-iphone.a */,
-				EAC026790E96B10F00067FC5 /* libLostEngine-simulator.a */,
+				EAC026770E96B10F00067FC5 /* libLostEngine.a */,
+				EAC026790E96B10F00067FC5 /* libLostEngine.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,17 +198,17 @@
 			remoteRef = EAC026740E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EAC026770E96B10F00067FC5 /* libLostEngine-iphone.a */ = {
+		EAC026770E96B10F00067FC5 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = EAC026760E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EAC026790E96B10F00067FC5 /* libLostEngine-simulator.a */ = {
+		EAC026790E96B10F00067FC5 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = EAC026780E96B10F00067FC5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -305,7 +297,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
@@ -331,7 +323,7 @@
 					"\"$(SRCROOT)/../../../thirdparty/freetype2/freetype_2_3_7/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
+					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_8/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
 					"\"$(SRCROOT)/../../../thirdparty/zlib/zlib_1_2_3/include\"",
 					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",

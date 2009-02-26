@@ -18,7 +18,7 @@ namespace lost
         namespace_("common")
         [
           class_<FpsMeter, boost::shared_ptr<FpsMeter> >("FpsMeter")
-          .def(constructor<boost::shared_ptr<lost::gl::Context> >()) 
+          .def(constructor<>()) 
           .def("render", &FpsMeter::render)
           .def_readwrite("width", &FpsMeter::width)
           .def_readwrite("height", &FpsMeter::height)

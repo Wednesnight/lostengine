@@ -8,8 +8,29 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/event/Receive.h"
 #include "lost/application/gl/State.h"
+#include "lost/camera/Camera.h"
 
 using namespace lost::application;
+
+struct MeteredFunction
+{
+private:
+  boost::function<void (const double deltaSec)> function;
+  double passedSec;
+public:
+  MeteredFunction(const boost::function<void (const double deltaSec)> inFunction)
+  : function(inFunction),
+    passedSec(lost::platform::currentTimeSeconds())
+  {
+  }
+  
+  inline void operator()()
+  {
+    double currentSec = lost::platform::currentTimeSeconds();
+    function(currentSec - passedSec);
+    passedSec = currentSec;
+  }
+};
 
 struct MyAppController
 {
@@ -17,82 +38,70 @@ private:
   boost::shared_ptr<Application> app;
   boost::shared_ptr<Window> mainWindow;
   boost::shared_ptr<Window> secondWindow;
-  boost::shared_ptr<lost::gl::Context> context;
-  boost::shared_ptr<lost::gl::State> state;
+  gl::SharedState renderState;
   boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
-  boost::shared_ptr<lost::common::DisplayAttributes> displayAttributes;
-  double passedSec;
 
-  void drawWindow1()
+  void drawScene(const boost::shared_ptr<gl::Canvas>& canvas)
   {
-    mainWindow->context->makeCurrent();
-    glViewport(0, 0, 800, 600);
-    glClearColor(0,0,0,0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    canvas->context->makeCurrent();
+    canvas->context->pushState(renderState);
+
+    canvas->camera->apply();
+    canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
-    glBegin(GL_QUADS);
-    glColor4f(1.0, 0.0, 0.0, 1.0);
-    glVertex3f(-0.5, -0.5, 0.0);
-    
-    glColor4f(0.0, 1.0, 0.0, 1.0);
-    glVertex3f(0.5, -0.5, 0.0);
-    
-    glColor4f(0.0, 0.0, 1.0, 1.0);
-    glVertex3f(0.5, 0.5, 0.0);
-    
-    glColor4f(1.0, 0.0, 1.0, 1.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-    glEnd();
-    
-    glRotatef(-0.5, 0.6, -0.6, 0.5);
-    mainWindow->context->swapBuffers();
+    canvas->drawLine(lost::math::Vec2(0,0), lost::math::Vec2(canvas->camera->viewport.width, canvas->camera->viewport.height));
+
+    canvas->context->popState();
+    canvas->context->swapBuffers();
   }
 
-  void drawWindow2(const double& deltaSec)
+  void drawFPSMeter(const boost::shared_ptr<gl::Canvas>& canvas, const double& deltaSec)
   {
-    secondWindow->context->makeCurrent();
-    glViewport(0, 0, 160, 100);
-    context->pushState(state);
-    context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    context->set2DProjection(lost::math::Vec2(0,0), lost::math::Vec2(160,100));
+    canvas->context->makeCurrent();
+    canvas->context->pushState(renderState);
+
+    canvas->camera->apply();
+    canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
-    fpsMeter->render(0, 0, deltaSec);
-    context->popState();
-    secondWindow->context->swapBuffers();
+    fpsMeter->render(0, 0, canvas, deltaSec);
+
+    canvas->context->popState();
+    canvas->context->swapBuffers();
+  }
+
+  void render(const double deltaSec)
+  {
+    drawScene(mainWindow->canvas);
+    drawFPSMeter(secondWindow->canvas, deltaSec);
   }
 
   void mainLoop()
   {
-    double currentSec = lost::platform::currentTimeSeconds();
-    drawWindow1();
-    drawWindow2(currentSec - passedSec);
+    static MeteredFunction meteredRender(boost::bind(&MyAppController::render, this, _1));
+    meteredRender();
     app->processEvents();
-    passedSec = currentSec;
   }
 
   void keyHandler(boost::shared_ptr<KeyEvent> event)
   {
-    if (event->key == 53) app->quit();
+    if (event->key == K_ESCAPE) app->quit();
   }
 
 public:
   MyAppController()
-  : passedSec(lost::platform::currentTimeSeconds())
   {
     app = Application::create(boost::bind(&MyAppController::mainLoop, this));
 
-    mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Vec2(800, 600), lost::math::Vec2(100, 100)));
+    mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Rect(100, 100, 800, 600)));
+    secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Rect(100, 100, 160, 100)));
 
-    secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Vec2(160, 100), lost::math::Vec2(100, 100)));
-    displayAttributes.reset(new lost::common::DisplayAttributes);
-    context.reset(new lost::gl::Context(displayAttributes));
-    state = context->copyState();
-    state->clearColor = lost::common::Color(0,0,0,0);
-    fpsMeter.reset(new lost::common::FpsMeter(context));
+    renderState = gl::State::create(gl::ClearColor::create(lost::common::blackColor));
+
+    fpsMeter.reset(new lost::common::FpsMeter());
 
     app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), lost::event::receive<KeyEvent>(boost::bind(&MyAppController::keyHandler, this, _1)));
   }
@@ -119,8 +128,6 @@ int testingLUA()
 
 int main (int argc, const char * argv[])
 {
-  gl::SharedState state = gl::State::create(gl::BlendFunc::create(GL_BLEND_SRC, GL_BLEND_DST));
-
-//  return testingCPP();
-  return testingLUA();
+  return testingCPP();
+//  return testingLUA();
 }

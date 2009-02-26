@@ -17,21 +17,23 @@ namespace lost
         GLContext* glContext;
       };
       
-      Context::Context()
+      void Context::initialize()
       {
         hiddenMembers = new ContextHiddenMembers;
         hiddenMembers->glContext = (GLContext*)[EAGLContext currentContext];
       }
 
-      Context::~Context()
+      void Context::finalize()
       {
         delete hiddenMembers;
       }
 
       void Context::makeCurrent()
       {
-        // Make sure that you are drawing to the current context
-        [EAGLContext setCurrentContext: hiddenMembers->glContext];
+        if ((GLContext*)[EAGLContext currentContext] != hiddenMembers->glContext)
+        {
+          [EAGLContext setCurrentContext: hiddenMembers->glContext];
+        }
       }
 
       void Context::swapBuffers()
