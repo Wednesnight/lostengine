@@ -38,7 +38,7 @@ function Image:render(context, image, style)
           12 13 14 15
       ]]
     local topLeft = lost.math.Rect(globalRect.x,
-                                   (globalRect.y + globalRect.height - 1) - image.cornerBounds.top,
+                                   globalRect:maxY() - image.cornerBounds.top,
                                    image.cornerBounds.left,
                                    image.cornerBounds.top)
     local middleLeft = lost.math.Rect(globalRect.x,
@@ -50,7 +50,7 @@ function Image:render(context, image, style)
                                       image.cornerBounds.left,
                                       image.cornerBounds.bottom)
     local topCenter = lost.math.Rect(globalRect.x + image.cornerBounds.left,
-                                     (globalRect.y + globalRect.height - 1) - image.cornerBounds.top,
+                                     globalRect:maxY() - image.cornerBounds.top,
                                      (globalRect.width - 1 - image.cornerBounds.left) - image.cornerBounds.right,
                                      image.cornerBounds.top)
     local middleCenter = lost.math.Rect(globalRect.x + image.cornerBounds.left,
@@ -61,15 +61,15 @@ function Image:render(context, image, style)
                                         globalRect.y,
                                         (globalRect.width - 1 - image.cornerBounds.left) - image.cornerBounds.right,
                                         image.cornerBounds.bottom)
-    local topRight = lost.math.Rect((globalRect.x + globalRect.width - 1) - image.cornerBounds.right,
-                                    (globalRect.y + globalRect.height - 1) - image.cornerBounds.top,
+    local topRight = lost.math.Rect(globalRect:maxX() - image.cornerBounds.right,
+                                    globalRect:maxY() - image.cornerBounds.top,
                                     image.cornerBounds.right,
                                     image.cornerBounds.top)
-    local middleRight = lost.math.Rect((globalRect.x + globalRect.width - 1) - image.cornerBounds.right,
+    local middleRight = lost.math.Rect(globalRect:maxX() - image.cornerBounds.right,
                                        globalRect.y + image.cornerBounds.bottom,
                                        image.cornerBounds.right,
                                        (globalRect.height - 1 - image.cornerBounds.top) - image.cornerBounds.bottom)
-    local bottomRight = lost.math.Rect((globalRect.x + globalRect.width - 1) - image.cornerBounds.right,
+    local bottomRight = lost.math.Rect(globalRect:maxX() - image.cornerBounds.right,
                                        globalRect.y,
                                        image.cornerBounds.right,
                                        image.cornerBounds.bottom)

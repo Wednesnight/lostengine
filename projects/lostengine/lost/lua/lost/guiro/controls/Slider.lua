@@ -43,7 +43,7 @@ function Slider:__init() lost.guiro.View.__init(self)
   local g = lost.guiro
   local button = lost.guiro.controls.Button()
   button.id = "sliderButton"
-  button.bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(24), g.habs(24))
+  button.bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
   button.fadeStates = true
   self:setButton(button)
 
@@ -86,19 +86,19 @@ function Slider:updatePosition(location, silent)
   local globalRect = self:globalRect()
   local buttonRect = self.button:localRect()
   if (self.steps > 0) then
-    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size] - 1)), 0)
-    local stepSize = ((globalRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min)) * (math.abs(self.max - self.min) / self.steps)
+    local position = math.max(math.min(location[coord] - globalRect[coord] - buttonRect[size] / 2, (globalRect[size] - buttonRect[size])), 0)
+    local stepSize = ((globalRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * (math.abs(self.max - self.min) / self.steps)
     local steps, fraction = math.modf(position / stepSize)
     if (fraction > 0.5) then
       steps = steps + 1
     end
-    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size] - 1)), 0)
+    position = math.max(math.min(steps * stepSize, (globalRect[size] - buttonRect[size])), 0)
     if (position ~= buttonRect[coord]) then
       self.button.bounds[coord] = coordFunc(position)
       self.button:needsLayout()
     end
   else
-    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size] - 1)), 0))
+    self.button.bounds[coord] = coordFunc(math.max(math.min(location[coord] - globalRect[coord], (globalRect[size] - buttonRect[size])), 0))
     self.button:needsLayout()
   end
   local newValue = self:value()
@@ -124,10 +124,10 @@ function Slider:value(value, silent)
   end
 
   if value ~= nil then
-    buttonRect[coord] = (((localRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min)) * value) + globalRect[coord]
+    buttonRect[coord] = (((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min)) * value) + globalRect[coord]
     self:updatePosition(lost.math.Vec2(buttonRect.x, buttonRect.y), silent)
   end
 
   buttonRect = self.button:localRect()
-  return (buttonRect[coord] / ((localRect[size] - buttonRect[size] - 1) / math.abs(self.max - self.min))) + self.min
+  return (buttonRect[coord] / ((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min))) + self.min
 end
