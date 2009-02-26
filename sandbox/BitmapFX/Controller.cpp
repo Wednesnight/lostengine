@@ -19,7 +19,6 @@ using namespace lost::font;
 using namespace lost::common;
 using namespace lost::resource;
 using namespace lost::application;
-using namespace lost::application::gl;
 using namespace lost::math;
 using namespace lost::event;
 using namespace lost::gl;
@@ -36,9 +35,9 @@ Controller::Controller()
 
   fpsMeter.reset(new FpsMeter());
   
-  renderState = lost::application::gl::State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), 
-                                                     ClearColor::create(blackColor), DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), 
-                                                     VertexArray::create(true), TextureArray::create(true));
+  renderState = State::create(Texture2D::create(true), Blend::create(true), BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), 
+                              ClearColor::create(blackColor), DepthTest::create(false), AlphaTest::create(false), NormalArray::create(false), 
+                              VertexArray::create(true), TextureArray::create(true));
   
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
   shared_ptr<File> file = app->loader->load("Vera.ttf");//"suigeneris.ttf");
