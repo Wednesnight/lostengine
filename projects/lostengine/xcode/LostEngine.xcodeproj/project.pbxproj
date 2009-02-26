@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E08511A0F371CF900641BE1 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E0851190F371CF900641BE1 /* GLContext.mm */; };
-		3E08511B0F371CF900641BE1 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3E0851190F371CF900641BE1 /* GLContext.mm */; };
 		3E1329690F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
 		3E13296A0F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
 		3E13296B0F31F26900EA849F /* RunLoopThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E1329680F31F26900EA849F /* RunLoopThread.cpp */; };
@@ -24,12 +22,6 @@
 		3E27FE640EFAB09C00DFF147 /* LostLGLLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */; };
 		3E27FE660EFAB09C00DFF147 /* LostLGLLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */; };
 		3E27FE680EFAB09C00DFF147 /* LostLGLLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */; };
-		3E2A80310F49655400BA4398 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A80300F49655400BA4398 /* State.cpp */; };
-		3E2A80320F49655400BA4398 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A80300F49655400BA4398 /* State.cpp */; };
-		3E2A80330F49655400BA4398 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A80300F49655400BA4398 /* State.cpp */; };
-		3E2A807C0F4970ED00BA4398 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A807B0F4970ED00BA4398 /* Context.cpp */; };
-		3E2A807D0F4970ED00BA4398 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A807B0F4970ED00BA4398 /* Context.cpp */; };
-		3E2A807E0F4970ED00BA4398 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A807B0F4970ED00BA4398 /* Context.cpp */; };
 		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */; };
@@ -449,9 +441,6 @@
 		8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
 		8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
 		8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
-		8D5348230F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
-		8D5348240F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
-		8D5348250F5599EE005C39BF /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5348220F5599EE005C39BF /* Canvas.cpp */; };
 		8D53491A0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
 		8D53491B0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
 		8D53491C0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */; };
@@ -459,20 +448,25 @@
 		8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
 		8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
-		8D77F0610F34DC2900C86FFD /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0600F34DC2900C86FFD /* Context.mm */; };
-		8D77F0620F34DC2900C86FFD /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0600F34DC2900C86FFD /* Context.mm */; };
 		8DE56F670F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
 		8DE56F680F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
 		8DE56F690F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
 		8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6C0F31187E0072FB28 /* Application.mm */; };
 		8DE56F6F0F3118840072FB28 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6E0F3118840072FB28 /* Window.mm */; };
-		8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F8A0F31190A0072FB28 /* Context.mm */; };
 		8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DFDE4EC0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
 		8DFDE4ED0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
 		8DFDE4EE0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */; };
+		8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
+		8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
+		8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
+		8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
+		8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5AA0F56D45E005D3927 /* GLContext.mm */; };
+		8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
+		8DFDE5AE0F56D45E005D3927 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5AA0F56D45E005D3927 /* GLContext.mm */; };
+		8DFDE6150F56D477005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE6140F56D477005D3927 /* Context.mm */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
@@ -667,15 +661,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E0851190F371CF900641BE1 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = gl/iphone/GLContext.mm; sourceTree = "<group>"; };
 		3E0F1B020F2F28CA00184FE8 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E1329680F31F26900EA849F /* RunLoopThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunLoopThread.cpp; sourceTree = "<group>"; };
 		3E1329850F31FC1A00EA849F /* LostApplicationGLContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLContext.cpp; path = bindings/LostApplicationGLContext.cpp; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E27FE2C0EFAAE5300DFF147 /* LostGLRenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLRenderBuffer.cpp; path = bindings/LostGLRenderBuffer.cpp; sourceTree = "<group>"; };
 		3E27FE620EFAB09C00DFF147 /* LostLGLLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLGLLGL.cpp; path = bindings/LostLGLLGL.cpp; sourceTree = "<group>"; };
-		3E2A80300F49655400BA4398 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = gl/State.cpp; sourceTree = "<group>"; };
-		3E2A807B0F4970ED00BA4398 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = gl/Context.cpp; sourceTree = "<group>"; };
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
 		3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera2D.cpp; path = camera/Camera2D.cpp; sourceTree = "<group>"; };
 		3E3B3E400E9D6E6500DD2D4E /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventDispatcher.cpp; sourceTree = "<group>"; };
@@ -821,17 +812,18 @@
 		3EF7AEC10ED29DAD00CDB78A /* LostGLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLTexture.cpp; path = bindings/LostGLTexture.cpp; sourceTree = "<group>"; };
 		8D0CC5DD0F44C36700ADE728 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = obj/Parser.cpp; sourceTree = "<group>"; };
 		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
-		8D5348220F5599EE005C39BF /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Canvas.cpp; path = gl/Canvas.cpp; sourceTree = "<group>"; };
 		8D5349190F559DC0005C39BF /* LostApplicationGLCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLCanvas.cpp; path = bindings/LostApplicationGLCanvas.cpp; sourceTree = "<group>"; };
 		8D77F0480F34DC1000C86FFD /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
 		8D77F0490F34DC1000C86FFD /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = iphone/Window.mm; sourceTree = "<group>"; };
-		8D77F0600F34DC2900C86FFD /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/iphone/Context.mm; sourceTree = "<group>"; };
 		8DE56F660F3118600072FB28 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
-		8DE56F8A0F31190A0072FB28 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = gl/mac/Context.mm; sourceTree = "<group>"; };
 		8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationWindow.cpp; path = bindings/LostApplicationWindow.cpp; sourceTree = "<group>"; };
 		8DFDE4EB0F56C3E9005D3927 /* LostApplicationGLState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationGLState.cpp; path = bindings/LostApplicationGLState.cpp; sourceTree = "<group>"; };
+		8DFDE5980F56D43C005D3927 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
+		8DFDE5A90F56D45E005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = iphone/Context.mm; sourceTree = "<group>"; };
+		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
+		8DFDE6140F56D477005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = mac/Context.mm; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
@@ -1077,15 +1069,6 @@
 			name = iphone;
 			sourceTree = "<group>";
 		};
-		8D77F04E0F34DC1500C86FFD /* iphone */ = {
-			isa = PBXGroup;
-			children = (
-				8D77F0600F34DC2900C86FFD /* Context.mm */,
-				3E0851190F371CF900641BE1 /* GLContext.mm */,
-			);
-			name = iphone;
-			sourceTree = "<group>";
-		};
 		8DE56F6B0F31186F0072FB28 /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,22 +1078,19 @@
 			name = mac;
 			sourceTree = "<group>";
 		};
-		8DE56F860F3118F00072FB28 /* gl */ = {
+		8DFDE59D0F56D440005D3927 /* iphone */ = {
 			isa = PBXGroup;
 			children = (
-				8D5348220F5599EE005C39BF /* Canvas.cpp */,
-				3E2A807B0F4970ED00BA4398 /* Context.cpp */,
-				3E2A80300F49655400BA4398 /* State.cpp */,
-				8D77F04E0F34DC1500C86FFD /* iphone */,
-				8DE56F870F3118FF0072FB28 /* mac */,
+				8DFDE5A90F56D45E005D3927 /* Context.mm */,
+				8DFDE5AA0F56D45E005D3927 /* GLContext.mm */,
 			);
-			name = gl;
+			name = iphone;
 			sourceTree = "<group>";
 		};
-		8DE56F870F3118FF0072FB28 /* mac */ = {
+		8DFDE59E0F56D446005D3927 /* mac */ = {
 			isa = PBXGroup;
 			children = (
-				8DE56F8A0F31190A0072FB28 /* Context.mm */,
+				8DFDE6140F56D477005D3927 /* Context.mm */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -1295,7 +1275,6 @@
 		EA3B94640E04639D00B6423B /* application */ = {
 			isa = PBXGroup;
 			children = (
-				8DE56F860F3118F00072FB28 /* gl */,
 				8D77F0410F34DBF600C86FFD /* iphone */,
 				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
@@ -1354,6 +1333,9 @@
 		EA3B949C0E04639D00B6423B /* gl */ = {
 			isa = PBXGroup;
 			children = (
+				8DFDE59D0F56D440005D3927 /* iphone */,
+				8DFDE59E0F56D446005D3927 /* mac */,
+				8DFDE5980F56D43C005D3927 /* Canvas.cpp */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
@@ -1798,15 +1780,13 @@
 				3E55444F0F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 				8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */,
-				8D77F0620F34DC2900C86FFD /* Context.mm in Sources */,
-				3E08511B0F371CF900641BE1 /* GLContext.mm in Sources */,
 				8D0CC5DF0F44C36700ADE728 /* Parser.cpp in Sources */,
-				3E2A80320F49655400BA4398 /* State.cpp in Sources */,
-				3E2A807D0F4970ED00BA4398 /* Context.cpp in Sources */,
 				8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8D5348240F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491B0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 				8DFDE4ED0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
+				8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */,
+				8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */,
+				8DFDE5AE0F56D45E005D3927 /* GLContext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,18 +1997,16 @@
 				8DE56F670F3118600072FB28 /* Window.cpp in Sources */,
 				8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */,
 				8DE56F6F0F3118840072FB28 /* Window.mm in Sources */,
-				8DE56F8B0F31190A0072FB28 /* Context.mm in Sources */,
 				8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */,
 				3E13296B0F31F26900EA849F /* RunLoopThread.cpp in Sources */,
 				3E13298B0F31FC1A00EA849F /* LostApplicationGLContext.cpp in Sources */,
 				3E5544510F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 				8D0CC5E00F44C36700ADE728 /* Parser.cpp in Sources */,
-				3E2A80330F49655400BA4398 /* State.cpp in Sources */,
-				3E2A807E0F4970ED00BA4398 /* Context.cpp in Sources */,
 				8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8D5348250F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491C0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 				8DFDE4EE0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
+				8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */,
+				8DFDE6150F56D477005D3927 /* Context.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2242,15 +2220,13 @@
 				3E5544500F32E97000E07AC0 /* LostApplicationInputEvent.cpp in Sources */,
 				8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */,
-				8D77F0610F34DC2900C86FFD /* Context.mm in Sources */,
-				3E08511A0F371CF900641BE1 /* GLContext.mm in Sources */,
 				8D0CC5DE0F44C36700ADE728 /* Parser.cpp in Sources */,
-				3E2A80310F49655400BA4398 /* State.cpp in Sources */,
-				3E2A807C0F4970ED00BA4398 /* Context.cpp in Sources */,
 				8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8D5348230F5599EE005C39BF /* Canvas.cpp in Sources */,
 				8D53491A0F559DC0005C39BF /* LostApplicationGLCanvas.cpp in Sources */,
 				8DFDE4EC0F56C3E9005D3927 /* LostApplicationGLState.cpp in Sources */,
+				8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */,
+				8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */,
+				8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
