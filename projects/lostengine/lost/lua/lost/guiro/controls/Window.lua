@@ -55,8 +55,8 @@ function Window:updatePosition(event)
     local newBounds = lost.math.Vec2(rect.x + (event.pos.x - self.lastDragPos.x),
                                      rect.y + (event.pos.y - self.lastDragPos.y))
     if parentRect then
-      newBounds.x = math.max(math.min(newBounds.x, parentRect.width - rect.width), 1)
-      newBounds.y = math.max(math.min(newBounds.y, parentRect.height - rect.height), 1)
+      newBounds.x = math.max(math.min(newBounds.x, parentRect.width - rect.width), 0)
+      newBounds.y = math.max(math.min(newBounds.y, parentRect.height - rect.height), 0)
     end
 
     self.bounds.x = lost.guiro.xabs(newBounds.x)

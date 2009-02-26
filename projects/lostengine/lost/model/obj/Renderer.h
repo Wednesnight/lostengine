@@ -9,6 +9,7 @@
 
 #include "lost/gl/gl.h"
 #include "lost/gl/ArrayBuffer.h"
+#include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/math/Vec3.h"
@@ -23,7 +24,7 @@ namespace lost
       typedef std::map<boost::shared_ptr<MaterialGroup>, boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > > ElementBuffers;
       struct Renderer
       {
-        boost::shared_ptr<lost::gl::Context> context;
+        boost::shared_ptr<lost::gl::Canvas> canvas;
 
         boost::shared_ptr<Mesh>     mesh;
         boost::shared_ptr<Material> material;
@@ -42,8 +43,8 @@ namespace lost
         GLenum renderModeBack;
 #endif
 
-        Renderer(const boost::shared_ptr<lost::gl::Context>& inContext, boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
-        : context(inContext),
+        Renderer(const boost::shared_ptr<lost::gl::Canvas>& inCanvas, boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
+        : canvas(inCanvas),
           mesh(inMesh),
           material(inMaterial),
           size(1.0f)
@@ -107,10 +108,8 @@ namespace lost
 
         void render()
         {
-          boost::shared_ptr<lost::gl::State> newState = context->copyState();
-          newState->normalArray = true;
-          newState->vertexArray = true;
-          context->pushState(newState);
+          static gl::SharedState newState = gl::State::create(gl::NormalArray::create(true), gl::VertexArray::create(true));
+          canvas->context->pushState(newState);
           glPushMatrix();
           glScalef(size, size, size);
           vertexBuffer->bindVertexPointer();
@@ -149,7 +148,7 @@ namespace lost
           normalBuffer->unbind();
           vertexBuffer->unbind();
           glPopMatrix();
-          context->popState();
+          canvas->context->popState();
         }
         
         void renderNormals()
@@ -158,12 +157,12 @@ namespace lost
           {
             glPushMatrix();
             glScalef(size, size, size);
-            context->setColor(common::redColor);
+            canvas->setColor(common::redColor);
             for (unsigned int idx = 0; idx < mesh->normalCount; ++idx)
             {
               math::Vec3 offset(mesh->vertices[mesh->faces[idx*3]]);
               math::Vec3 normal(offset + mesh->normals[idx] * 0.1f);
-              context->drawLine(offset, normal);
+              canvas->drawLine(offset, normal);
             }
             glPopMatrix();
           }
@@ -173,8 +172,8 @@ namespace lost
         {
           glPushMatrix();
           glScalef(size, size, size);
-          context->setColor(common::whiteColor);
-          context->drawAABB(mesh->box);
+          canvas->setColor(common::whiteColor);
+          canvas->drawAABB(mesh->box);
           glPopMatrix();
         }
       };

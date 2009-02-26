@@ -4,8 +4,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
-#include "lost/application/gl/Canvas.h"
-#include "lost/application/gl/Context.h"
+#include "lost/gl/Canvas.h"
+#include "lost/gl/Context.h"
 #include "lost/math/Rect.h"
 #include "lost/event/EventDispatcher.h"
 

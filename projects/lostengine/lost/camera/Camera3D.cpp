@@ -12,7 +12,7 @@ namespace lost
     const math::Vec2 depthBase(0.1f, 100.0f);
     const math::Vec3 upBase(0.0f, 1.0f, 0.0f);
     
-    Camera3D::Camera3D(const boost::shared_ptr<application::gl::Context>& inContext, const lost::math::Rect& inViewport)
+    Camera3D::Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport)
     : Camera::Camera(inContext, inViewport),
       mPosition(positionBase),
       mDirection(directionBase),

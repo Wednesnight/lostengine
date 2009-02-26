@@ -13,7 +13,7 @@ namespace lost
     private:
       lost::math::Rect space;
     public:
-      Camera2D(const boost::shared_ptr<application::gl::Context>& inContext, const lost::math::Rect& inViewport);
+      Camera2D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
 
       virtual void apply();
     };

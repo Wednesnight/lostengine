@@ -4,7 +4,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/model/Mesh.h"
 #include "lost/model/Vertex.h"
-#include "lost/gl/Context.h"
+#include "lost/gl/Canvas.h"
 #include "lost/gl/ArrayBuffer.h"
 
 namespace lost
@@ -16,15 +16,15 @@ namespace lost
 
       struct Renderer
       {
-        boost::shared_ptr<lost::gl::Context> context;
+        boost::shared_ptr<lost::gl::Canvas> canvas;
 
         boost::shared_ptr<Mesh> mesh;
         boost::shared_ptr<gl::ArrayBuffer<Vertex> > vertexBuffer;
 
         float size;
 
-        Renderer(const boost::shared_ptr<lost::gl::Context>& inContext, const boost::shared_ptr<Mesh>& inMesh)
-        : context(inContext),
+        Renderer(const boost::shared_ptr<lost::gl::Canvas>& inCanvas, const boost::shared_ptr<Mesh>& inMesh)
+        : canvas(inCanvas),
           mesh(inMesh),
           size(1.0f)
         {
@@ -35,16 +35,15 @@ namespace lost
         
         void render()
         {
-          boost::shared_ptr<lost::gl::State> newState = context->copyState();
-          newState->vertexArray = true;
-          context->pushState(newState);
+          static gl::SharedState newState = gl::State::create(gl::VertexArray::create(true));
+          canvas->context->pushState(newState);
           glPushMatrix();GLDEBUG;
           glScalef(size, size, size);
           vertexBuffer->bindVertexPointer();
           vertexBuffer->drawArrays(GL_LINES);
           vertexBuffer->unbind();
           glPopMatrix();GLDEBUG;
-          context->popState();
+          canvas->context->popState();
         }
         
       };

@@ -7,18 +7,16 @@
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/TouchEvent.h"
-#include "lost/application/gl/Canvas.h"
-#include "lost/application/gl/Context.h"
-#include "lost/application/gl/State.h"
+#include "lost/gl/Canvas.h"
+#include "lost/gl/Context.h"
+#include "lost/gl/State.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/Color.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/event/Event.h"
-#include "lost/gl/Context.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
-#include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 #include "lost/lsystem/LSystem.h"
 #include "lost/lua/State.h"
@@ -53,14 +51,12 @@ namespace luabind
   GET_POINTER(lost::application::ResizeEvent);
   GET_POINTER(lost::application::TouchEvent);
   GET_POINTER(lost::application::TouchEvent::Touch);
-  GET_POINTER(lost::application::gl::Canvas);
-  GET_POINTER(lost::application::gl::Context);
-  GET_POINTER(lost::application::gl::State);
   GET_POINTER(lost::bitmap::Bitmap);
   GET_POINTER(lost::camera::Camera);
   GET_POINTER(lost::common::Color);
   GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
+  GET_POINTER(lost::gl::Canvas);
   GET_POINTER(lost::gl::Context);
   GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::RenderBuffer);

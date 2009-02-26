@@ -16,52 +16,49 @@
 
 #include <list>
 #include "lost/gl/gl.h"
-#include "lost/application/gl/State.h"
+#include "lost/gl/State.h"
 
 namespace lost
 {
-  namespace application
+  namespace gl
   {
-    namespace gl
+  
+    struct Context
     {
-    
-      struct Context
-      {
-      private:
-        /**
-         * forward declaration for platform specific stuff
-         */
-        struct ContextHiddenMembers;
-        ContextHiddenMembers* hiddenMembers;
+    private:
+      /**
+       * forward declaration for platform specific stuff
+       */
+      struct ContextHiddenMembers;
+      ContextHiddenMembers* hiddenMembers;
 
-        /**
-         * hidden ctor/dtor utility methods for platform specific stuff
-         */
-        void initialize();
-        void finalize();
+      /**
+       * hidden ctor/dtor utility methods for platform specific stuff
+       */
+      void initialize();
+      void finalize();
 
-        SharedState currentState;
-        std::list<SharedState> stateStack;
-        void apply(const SharedState& newState);
-      public:
-        Context();
-        ~Context();
+      SharedState currentState;
+      std::list<SharedState> stateStack;
+      void apply(const SharedState& newState);
+    public:
+      Context();
+      ~Context();
 
-        /**
-         * sets this OpenGL context as the thread's current context
-         */
-        void makeCurrent();
+      /**
+       * sets this OpenGL context as the thread's current context
+       */
+      void makeCurrent();
 
-        /**
-         * swaps buffers :)
-         */
-        void swapBuffers();
+      /**
+       * swaps buffers :)
+       */
+      void swapBuffers();
 
-        void pushState(const SharedState& newState);
-        void popState();
-      };
+      void pushState(const SharedState& newState);
+      void popState();
+    };
 
-    }
   }
 }
 

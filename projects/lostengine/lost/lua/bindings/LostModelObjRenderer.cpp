@@ -21,7 +21,7 @@ namespace lost
           namespace_("obj")
           [
             class_<Renderer, boost::shared_ptr<Renderer> >("Renderer")
-            .def(constructor<boost::shared_ptr<lost::gl::Context>, boost::shared_ptr<Mesh>, boost::shared_ptr<Material> >()) 
+            .def(constructor<boost::shared_ptr<lost::gl::Canvas>, boost::shared_ptr<Mesh>, boost::shared_ptr<Material> >()) 
             .def_readwrite("size", &Renderer::size)
           ]
         ]

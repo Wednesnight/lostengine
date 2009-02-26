@@ -32,13 +32,12 @@ function UserInterface:initialize()
     -- helper vars
     local globalRect = self:globalRect()
 
-    local g = lost.application.gl
-    self.renderState = g.State.create(g.DepthTest.create(false),
-                                      g.Blend.create(false),
-                                      g.Texture2D.create(false),
-                                      g.NormalArray.create(false),
-                                      g.VertexArray.create(false),
-                                      g.TextureArray.create(false))
+    self.renderState = lost.gl.State.create(lost.gl.DepthTest.create(false),
+                                            lost.gl.Blend.create(false),
+                                            lost.gl.Texture2D.create(false),
+                                            lost.gl.NormalArray.create(false),
+                                            lost.gl.VertexArray.create(false),
+                                            lost.gl.TextureArray.create(false))
   end
 end
 
