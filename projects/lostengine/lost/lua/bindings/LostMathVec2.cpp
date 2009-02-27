@@ -26,6 +26,8 @@ namespace lost
         .def("zero", (void(Vec2::*)()) &Vec2::zero)
         .def_readwrite("x", &Vec2::x)
         .def_readwrite("y", &Vec2::y)
+        .def_readwrite("width", &Vec2::width)
+        .def_readwrite("height", &Vec2::height)
         .def(self * float())
         .def(self * other<Vec2>())
         .def(self + other<Vec2>())

@@ -265,7 +265,7 @@ function View:updateLayout(forceUpdate)
     end
   end
   
-  return self.currentGlobalRect, self.currentLocalRect
+  return lost.math.Rect(self.currentGlobalRect), lost.math.Rect(self.currentLocalRect)
 end
 
 --[[
@@ -318,20 +318,12 @@ function View:resize(bounds)
 end
 
 --[[
-    update method for render preparation, called before renderer gets active
-  ]]
-function View:update(canvas)
-end
-
---[[
     triggers render on children
   ]]
 function View:render(canvas, forceRender)
   local globalRect = self:updateLayout()
   if forceRender or self.dirty then
     self.dirty = false
-
-    self:update(canvas)
 
     if self.renderer then
       self.renderer:render(canvas, self, self.style)

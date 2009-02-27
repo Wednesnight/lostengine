@@ -12,7 +12,6 @@ require("lost.io.guiro.Button")
 require("lost.io.guiro.Slider")
 require("lost.io.guiro.Image")
 require("lost.io.guiro.Label")
-require("lost.io.guiro.AnimatedImage")
 
 require("lost.io.guiro.Renderer")
 require("lost.io.guiro.Style")

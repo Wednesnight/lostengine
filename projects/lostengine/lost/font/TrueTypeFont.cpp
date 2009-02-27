@@ -288,7 +288,9 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     }
     xoffset+=glyph->advance;
   }
-  
+
+  result->min = pmin;
+  result->max = pmax;
   result->size.width = (pmax.x-pmin.x)+1;  
   result->size.height = (pmax.y-pmin.y)+1;  
   return result;

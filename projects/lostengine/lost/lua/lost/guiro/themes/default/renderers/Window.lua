@@ -26,10 +26,6 @@ function Window:render(canvas, window, style)
     if not window.label.parent then
       window:appendChild(window.label)
     end
-    if window.label:color() ~= style.header.fontColor then
-      window.label:color(style.header.fontColor)
-      window.label:needsRedraw()
-    end
     window.label:render(canvas)
   end
 

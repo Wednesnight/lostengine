@@ -15,6 +15,5 @@ function Window:__init(properties) lost.guiro.Style.__init(self, properties)
   self.header = properties.header or
   {
     color = lost.common.Color(0.1,0.1,0.1),
-    fontColor = lost.common.Color(1,1,1)
   }
 end
