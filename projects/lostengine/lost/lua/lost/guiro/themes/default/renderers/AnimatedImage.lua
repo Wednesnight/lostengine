@@ -7,7 +7,8 @@ require("lost.guiro.Renderer")
   ]]
 AnimatedImage = lost.common.Class("lost.guiro.themes.default.renderers.AnimatedImage", lost.guiro.Renderer)
 
-function AnimatedImage:__init() lost.guiro.Renderer.__init(self)
+function AnimatedImage:__init(properties) lost.guiro.Renderer.__init(self, properties)
+  properties = properties or {}
 end
 
 function AnimatedImage:render(canvas, image, style)

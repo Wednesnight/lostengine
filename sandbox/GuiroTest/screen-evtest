@@ -177,7 +177,7 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
-            screen("ui")("window1")("image"):alpha(event.value)
+            event.target.parent("image"):alpha(event.value)
           end
         }
       },
@@ -194,10 +194,11 @@ screen = guiro:Screen
         listeners =
         {
           [lost.guiro.controls.Slider.SliderChange] = function(event)
-            if event.value == screen("ui")("window1")("slider2").min then
-              screen("ui")("window1")("image"):filter(gl.GL_NEAREST)
-            elseif event.value == screen("ui")("window1")("slider2").max then
-              screen("ui")("window1")("image"):filter(gl.GL_LINEAR)
+            local image = event.target.parent("image")
+            if event.value == event.target.min then
+              image:filter(gl.GL_NEAREST)
+            elseif event.value == event.target.max then
+              image:filter(gl.GL_LINEAR)
             end
           end
         }
@@ -209,7 +210,7 @@ screen = guiro:Screen
         bounds = g.Bounds(g.xleft({abs=50}), g.ytop({abs=-54}), g.wabs(180), g.habs(200)),
         bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
         stretch = true,
-        style = guiro:Style
+        style =
         {
           borderColor = lost.common.Color(0,0,0,1)
         },
@@ -223,9 +224,8 @@ screen = guiro:Screen
       
       guiro:Label
       {
-        id="label",
         bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
-        text="Hello World!",
+        text = "Hello World!",
         fontSize = 16
       }
     },

@@ -7,7 +7,8 @@ require("lost.guiro.Renderer")
   ]]
 Label = lost.common.Class("lost.guiro.themes.default.renderers.Label", lost.guiro.Renderer)
 
-function Label:__init() lost.guiro.Renderer.__init(self)
+function Label:__init(properties) lost.guiro.Renderer.__init(self, properties)
+  properties = properties or {}
 end
 
 function Label:render(canvas, label, style)

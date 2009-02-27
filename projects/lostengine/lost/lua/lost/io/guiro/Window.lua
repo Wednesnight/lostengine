@@ -8,5 +8,5 @@ require("lost.io.Loader")
 require("lost.guiro.controls.Window")
 
 function Loader:Window(definition)
-  return self:applyDefinitionToView(lost.guiro.controls.Window(), definition)
+  return lost.guiro.controls.Window(definition)
 end

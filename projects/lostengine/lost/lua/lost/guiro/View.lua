@@ -10,11 +10,31 @@ require("lost.guiro.event.EventDispatcher")
   ]]
 View = lost.common.Class("lost.guiro.View", lost.common.Object)
 
+View.indices = {}
+
 --[[ 
     constructor
   ]]
-function View:__init() lost.common.Object.__init(self)
-  self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
+function View:__init(properties) lost.common.Object.__init(self)
+  -- initialize properties param
+  properties = properties or {}
+
+  -- initialize id
+  if not properties.id then
+    local name = self:className()
+    if (not self.indices[name]) then
+      self.indices[name] = 1
+    else
+      self.indices[name] = self.indices[name]+1
+    end
+
+    self.id = name .. self.indices[name]
+    print(self.id)
+  else
+    self.id = properties.id
+  end
+
+  self.bounds = properties.bounds or Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
   self.isView = true
 	self.parent = nil
@@ -31,13 +51,27 @@ function View:__init() lost.common.Object.__init(self)
 
   -- render state
   self.dirty = true
-  self.theme = lost.guiro.config.theme
-  self.renderer = self.theme.renderers[self:className()]()
-  self.style = self.theme.styles[self:className()]()
+  self.theme = properties.theme or lost.guiro.config.theme
+  self.renderer = self.theme.renderers[self:className()](properties.renderer)
+  self.style = self.theme.styles[self:className()](properties.style)
 
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
-  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()  
+  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
+
+  -- apply listeners from properties param
+  if properties.listeners then
+    for name,value in next,properties.listeners do
+      self:addEventListener(name, value)
+    end
+  end
+
+  -- apply children from properties param
+  for key,value in next,properties do
+    if type(key) == "number" and type(value) == "userdata" and value.isView then
+      self:appendChild(value)
+    end
+  end
 end
 
 function View:__tostring()

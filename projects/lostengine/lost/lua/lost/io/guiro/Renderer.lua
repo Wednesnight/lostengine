@@ -8,5 +8,5 @@ require("lost.io.Loader")
 require("lost.guiro.Renderer")
 
 function Loader:Renderer(definition)
-  return self:apply(lost.guiro.Renderer(), definition)
+  return lost.guiro.Renderer(definition)
 end
