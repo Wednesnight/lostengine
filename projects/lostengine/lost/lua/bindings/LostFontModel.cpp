@@ -20,6 +20,9 @@ namespace lost
           class_<Model, boost::shared_ptr<Model> >("Model")
             .def(constructor<>())
             .def("render", &Model::render)
+            .def_readonly("min", &Model::min)
+            .def_readonly("max", &Model::max)
+            .def_readonly("size", &Model::size)
         ]
       ];
     }

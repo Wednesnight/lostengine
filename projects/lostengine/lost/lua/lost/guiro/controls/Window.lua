@@ -15,6 +15,8 @@ function Window:__init(properties) lost.guiro.View.__init(self, properties)
   {
     height = 25
   }
+
+  self.label = properties.label
   
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:updateDragging(event, true) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:updateDragging(event, false) end)

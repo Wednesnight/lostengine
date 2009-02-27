@@ -41,9 +41,15 @@ screen = guiro:Screen
 			label = guiro:Label
       {
 				id="Label1",
-        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
-        text = "window1",
-				receivesEvents = false
+        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-4}), g.wrel(1.0, -10), g.habs(15)),
+        text = "window1 ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
+				receivesEvents = false,
+        style =
+        {
+          color = lost.common.Color(0,0,0),
+          backgroundColor = lost.common.Color(0,1,0),
+          align = "left"
+        }
       },
 
       guiro:Button
@@ -53,9 +59,9 @@ screen = guiro:Screen
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = g.Bounds(g.xabs(10), g.yabs(15), g.wabs(50), g.habs(40)),
+          bounds = g.Bounds(g.xcenter(), g.ycenter({abs=2}), g.wrel(1.0), g.hrel(1.0)),
           text = "Small",
-					receivesEvents = false					
+					receivesEvents = false
         },
         images =
         {
@@ -89,7 +95,7 @@ screen = guiro:Screen
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = g.Bounds(g.xabs(30), g.yabs(20), g.wabs(100), g.habs(50)),
+          bounds = g.Bounds(g.xcenter({abs=2}), g.ycenter({abs=2}), g.wrel(1.0), g.hrel(1.0)),
           text = "Medium",
 					receivesEvents = false					
         },
@@ -125,8 +131,8 @@ screen = guiro:Screen
         fadeStates = true,
         label = guiro:Label
         {
-          bounds = g.Bounds(g.xabs(60), g.yabs(30), g.wabs(150), g.habs(75)),
-          text = "Large",
+          bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(1.0), g.hrel(1.0)),
+          text = "Large foobar foobar foobar foobar foobar",
 					receivesEvents = false											
         },
         images =
@@ -155,16 +161,6 @@ screen = guiro:Screen
         }
       },
 
-      guiro:AnimatedImage
-      {
-        id = "fugly",
-        bounds = g.Bounds(g.xright(), g.ytop({abs=-30}), g.wabs(80), g.habs(80)),
-        bitmap = lost.bitmap.Bitmap(guiro:File("fugly.png")),
-        frameSize = lost.math.Rect(0, 0, 153, 184),
-        interval = 0.1,
-        stretch = true
-      },
-      
       guiro:Slider
       {
         id = "slider",
@@ -226,7 +222,10 @@ screen = guiro:Screen
       {
         bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
         text = "Hello World!",
-        fontSize = 16
+        style =
+        {
+          fontSize = 16
+        }
       }
     },
 
@@ -241,9 +240,15 @@ screen = guiro:Screen
       label = guiro:Label
       {
 				id="Label2",
-        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
+        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-4}), g.wrel(1.0, -10), g.habs(15)),
         text = "window2",
-				receivesEvents = false									
+				receivesEvents = false,
+        style =
+        {
+          color = lost.common.Color(0,0,0),
+          backgroundColor = lost.common.Color(0,1,0),
+          align = "center"
+        }
       },
       guiro:Image
       {

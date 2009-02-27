@@ -10,4 +10,7 @@ Style = lost.common.Class("lost.guiro.Style", lost.common.Object)
 
 function Style:__init(properties) lost.common.Object.__init(self)
   properties = properties or {}
+
+  self.backgroundColor = properties.backgroundColor
+  self.borderColor = properties.borderColor
 end

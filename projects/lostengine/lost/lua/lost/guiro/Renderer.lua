@@ -12,6 +12,23 @@ function Renderer:__init(properties) lost.common.Object.__init(self)
   properties = properties or {}
 end
 
+--[[
+    render
+  ]]
+function Renderer:render(canvas, view, style)
+  local globalRect = view:globalRect()
+
+  if style.backgroundColor then
+    canvas:setColor(style.backgroundColor)
+    canvas:drawRectFilled(globalRect)
+  end
+
+  if style.borderColor then
+    canvas:setColor(style.borderColor)
+    canvas:drawRectOutline(globalRect)
+  end
+end
+
 function Renderer:fade(currentColor, targetColor)
   if (currentColor.r - targetColor.r) > -0.05 and
      (currentColor.r - targetColor.r) < 0.05 then
@@ -45,11 +62,4 @@ function Renderer:fade(currentColor, targetColor)
   elseif currentColor.a > targetColor.a then
     currentColor.a = currentColor.a - 0.05
   end
-end
-
---[[
-    render prototype
-  ]]
-function Renderer:render(canvas, object, style)
-  -- empty
 end
