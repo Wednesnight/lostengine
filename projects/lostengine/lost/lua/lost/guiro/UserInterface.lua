@@ -7,7 +7,16 @@ require("lost.guiro.View")
   ]]
 UserInterface = lost.common.Class("lost.guiro.UserInterface", lost.guiro.View)
 
-function UserInterface:__init() lost.guiro.View.__init(self)
+function UserInterface:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
+
+  self.renderState = lost.gl.State.create(lost.gl.DepthTest.create(false),
+                                          lost.gl.Blend.create(false),
+                                          lost.gl.Texture2D.create(false),
+                                          lost.gl.NormalArray.create(false),
+                                          lost.gl.VertexArray.create(false),
+                                          lost.gl.TextureArray.create(false))
+
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -23,30 +32,9 @@ function UserInterface:appendChild(child)
 end
 
 --[[
-    initialization
-  ]]
-function UserInterface:initialize()
-  if not self.initialized then
-    self.initialized = true
-
-    -- helper vars
-    local globalRect = self:globalRect()
-
-    self.renderState = lost.gl.State.create(lost.gl.DepthTest.create(false),
-                                            lost.gl.Blend.create(false),
-                                            lost.gl.Texture2D.create(false),
-                                            lost.gl.NormalArray.create(false),
-                                            lost.gl.VertexArray.create(false),
-                                            lost.gl.TextureArray.create(false))
-  end
-end
-
---[[
     render
   ]]
 function UserInterface:render(canvas, forceRender)
-  self:initialize()
-
   -- helper vars
   local globalRect = self:globalRect()
 

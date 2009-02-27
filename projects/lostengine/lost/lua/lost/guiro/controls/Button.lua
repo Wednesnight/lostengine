@@ -34,8 +34,13 @@ Button.State =
 --[[
     constructor
   ]]
-function Button:__init() lost.guiro.View.__init(self)
-  self.state = Button.State.released
+function Button:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
+
+  self.state = properties.state or Button.State.released
+  self.label = properties.label
+  self.images = properties.images
+  self.fadeStates = properties.fadeStates or false
 
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:click(event, true) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:click(event, false) end)

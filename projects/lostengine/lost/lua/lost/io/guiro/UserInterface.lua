@@ -8,5 +8,5 @@ require("lost.io.Loader")
 require("lost.guiro.UserInterface")
 
 function Loader:UserInterface(definition)
-  return self:applyDefinitionToView(lost.guiro.UserInterface(), definition)
+  return lost.guiro.UserInterface(definition)
 end

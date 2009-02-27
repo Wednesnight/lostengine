@@ -7,7 +7,8 @@ require("lost.guiro.Renderer")
   ]]
 Slider = lost.common.Class("lost.guiro.themes.default.renderers.Slider", lost.guiro.Renderer)
 
-function Slider:__init() lost.guiro.Renderer.__init(self)
+function Slider:__init(properties) lost.guiro.Renderer.__init(self, properties)
+  properties = properties or {}
 end
 
 function Slider:render(canvas, slider, style)

@@ -8,5 +8,5 @@ require("lost.io.Loader")
 require("lost.guiro.controls.Button")
 
 function Loader:Button(definition)
-  return self:applyDefinitionToView(lost.guiro.controls.Button(), definition)
+  return lost.guiro.controls.Button(definition)
 end

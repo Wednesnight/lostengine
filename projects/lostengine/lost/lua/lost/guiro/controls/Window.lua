@@ -8,8 +8,13 @@ require("lost.guiro.Bounds")
   ]]
 Window = lost.common.Class("lost.guiro.controls.Window", lost.guiro.View)
 
-function Window:__init() lost.guiro.View.__init(self)
-  self.header = {height = 25}
+function Window:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
+
+  self.header = properties.header or
+  {
+    height = 25
+  }
   
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:updateDragging(event, true) end)
   self:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:updateDragging(event, false) end)

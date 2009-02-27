@@ -8,10 +8,23 @@ require("lost.io.Loader")
 require("lost.guiro.Screen")
 
 function Loader:loadScreen(filename)
-  log.debug("Loader:load()")
+  log.debug("Loader:loadScreen()")
+  
+  -- holds the screen object
   local result = {}
-  local guiro = self
-  guiro.Screen = function(self, definition) result = self:applyDefinitionToView(lost.guiro.Screen(), definition) return result end
-  self:executeScript(filename, {guiro = guiro, lost = lost, log = log, gl = gl, tostring = tostring, require = require, print = print, type = type})
+  
+  -- create screen object and set result
+  self.Screen = function(self, definition) result = lost.guiro.Screen(definition) return result end
+
+  -- copy global environment and map env.guiro to self
+  local env = {}
+  for k,v in next,_G do
+    env[k] = v
+  end
+  env.guiro = self
+
+  -- execute screen definition
+  self:executeScript(filename, env)
+
   return result
 end

@@ -8,22 +8,26 @@ require("lost.guiro.event.EventManager")
   ]]
 Screen = lost.common.Class("lost.guiro.Screen", lost.guiro.View)
 
-function Screen:propagateMouseEvent(event)
-  self.eventManager:propagateMouseEvent(self, event)
-end
+function Screen:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
 
-function Screen:__init() lost.guiro.View.__init(self)
   log.debug("----------------------------------------------------------")
   self.eventManager = lost.guiro.event.EventManager()
   log.debug("----------------------------------------------------------")
+
 --  self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
 --  self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
 --  self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
+
 	self.parent = nil
 end
 
 function Screen:__finalize()
   log.debug("-------------- Screen finalize")
+end
+
+function Screen:propagateMouseEvent(event)
+  self.eventManager:propagateMouseEvent(self, event)
 end
 
 --[[

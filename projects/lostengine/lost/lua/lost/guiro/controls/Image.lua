@@ -10,11 +10,15 @@ Image = lost.common.Class("lost.guiro.controls.Image", lost.guiro.View)
 --[[
     constructor
   ]]
-function Image:__init() lost.guiro.View.__init(self)
-  self.currentAlpha = 1.0
-  self.currentColor = lost.common.Color(1,1,1)
-  self.currentFilter = gl.GL_LINEAR
-  self.currentStretch = false
+function Image:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
+
+  self.bitmap = properties.bitmap
+  self.cornerBounds = properties.cornerBounds
+  self.currentAlpha = properties.alpha or 1.0
+  self.currentColor = properties.color or lost.common.Color(1,1,1)
+  self.currentFilter = properties.filter or gl.GL_LINEAR
+  self.currentStretch = properties.stretch or false
 end
 
 function Image:alpha(alpha)

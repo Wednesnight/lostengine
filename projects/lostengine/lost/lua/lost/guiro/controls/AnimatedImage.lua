@@ -10,10 +10,12 @@ AnimatedImage = lost.common.Class("lost.guiro.controls.AnimatedImage", lost.guir
 --[[
     constructor
   ]]
-function AnimatedImage:__init() lost.guiro.controls.Image.__init(self)
+function AnimatedImage:__init(properties) lost.guiro.controls.Image.__init(self, properties)
+  properties = properties or {}
+
   self.currentStep = 0
-  self.frameSize = lost.math.Rect()
-  self.interval = 0.5
+  self.frameSize = properties.frameSize or lost.math.Rect()
+  self.interval = properties.interval or 0.5
 end
 
 function AnimatedImage:update(canvas)

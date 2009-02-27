@@ -1,11 +1,10 @@
 require("lost.guiro.config")
 
-require("lost.io.guiro.Renderer")
-require("lost.io.guiro.Style")
-
 require("lost.io.Loader")
+
 require("lost.io.guiro.File")
-require("lost.io.guiro.View")
+require("lost.io.guiro.Font")
+
 require("lost.io.guiro.Screen")
 require("lost.io.guiro.UserInterface")
 require("lost.io.guiro.Window")
@@ -13,5 +12,7 @@ require("lost.io.guiro.Button")
 require("lost.io.guiro.Slider")
 require("lost.io.guiro.Image")
 require("lost.io.guiro.Label")
-require("lost.io.guiro.Font")
 require("lost.io.guiro.AnimatedImage")
+
+require("lost.io.guiro.Renderer")
+require("lost.io.guiro.Style")

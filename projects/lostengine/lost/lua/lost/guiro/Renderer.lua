@@ -8,7 +8,8 @@ require("lost.common.Object")
   ]]
 Renderer = lost.common.Class("lost.guiro.Renderer", lost.common.Object)
 
-function Renderer:__init() lost.common.Object.__init(self)
+function Renderer:__init(properties) lost.common.Object.__init(self)
+  properties = properties or {}
 end
 
 function Renderer:fade(currentColor, targetColor)

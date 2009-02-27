@@ -18,7 +18,8 @@ Slider.SliderChange = "SLIDER_CHANGE"
 
 Slider.SliderEvent = lost.common.Class("lost.guiro.controls.Slider.SliderEvent", lost.guiro.event.Event)
 
-function Slider.SliderEvent:__init(which, value) lost.guiro.event.Event.__init(self, which)
+function Slider.SliderEvent:__init(which, target, value) lost.guiro.event.Event.__init(self, which)
+  self.target = target
   self.value = value
 end
 
@@ -34,25 +35,34 @@ Slider.Orientation =
 --[[
     constructor
   ]]
-function Slider:__init() lost.guiro.View.__init(self)
-  self.orientation = Slider.Orientation.horizontal
-  self.min         = 0
-  self.max         = 100
-  self.steps       = 0
+function Slider:__init(properties) lost.guiro.View.__init(self, properties)
+  properties = properties or {}
 
-  local g = lost.guiro
-  local button = lost.guiro.controls.Button()
-  button.id = "sliderButton"
-  button.bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
-  button.fadeStates = true
-  self:setButton(button)
+  self.orientation = properties.orientation or Slider.Orientation.horizontal
+  self.min         = properties.min or 0
+  self.max         = properties.max or 100
+  self.steps       = properties.steps or 0
+
+  if not properties.button then
+    local g = lost.guiro
+    local button = lost.guiro.controls.Button()
+    button.id = "sliderButton"
+    button.bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
+    button.fadeStates = true
+    self:setButton(button)
+  else
+    self:setButton(properties.button)
+  end
 
   self.mouseMoved = function(event)
     if self.dragging then
       self:updatePosition(event.pos)
     end
   end
-  
+
+  if properties.value then
+    self:value(properties.value, true)
+  end  
 end
 
 function Slider:setButton(newButton)
@@ -105,7 +115,7 @@ function Slider:updatePosition(location, silent)
   if (oldValue ~= newValue) then
     self:needsRedraw()
     if not silent then
-      self:dispatchEvent(Slider.SliderEvent(Slider.SliderChange, newValue))
+      self:dispatchEvent(Slider.SliderEvent(Slider.SliderChange, self, newValue))
     end
   end
 end
