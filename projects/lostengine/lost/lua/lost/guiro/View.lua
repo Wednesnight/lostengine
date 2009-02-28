@@ -29,7 +29,6 @@ function View:__init(properties) lost.common.Object.__init(self)
     end
 
     self.id = name .. self.indices[name]
-    print(self.id)
   else
     self.id = properties.id
   end

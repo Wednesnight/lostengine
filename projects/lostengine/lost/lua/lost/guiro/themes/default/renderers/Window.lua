@@ -11,24 +11,5 @@ function Window:__init(properties) lost.guiro.Renderer.__init(self, properties)
   properties = properties or {}
 end
 
-function Window:render(canvas, window, style)
-  local globalRect = window:globalRect()
-
-  canvas:setColor(style.color)
-  canvas:drawRectFilled(globalRect)
-  canvas:setColor(style.header.color)
-  canvas:drawRectFilled(lost.math.Rect(globalRect.x, 
-                                        globalRect.y + (globalRect.height - window.header.height),
-                                        globalRect.width,
-                                        window.header.height))
-
-  if window.label then
-    if not window.label.parent then
-      window:appendChild(window.label)
-    end
-    window.label:render(canvas)
-  end
-
-  canvas:setColor(style.lineColor)
-  canvas:drawRectOutline(globalRect)
+function Window:render(canvas, window, style) lost.guiro.Renderer.render(self, canvas, window, style)
 end
