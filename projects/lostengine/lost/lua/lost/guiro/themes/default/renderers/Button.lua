@@ -11,7 +11,7 @@ function Button:__init(properties) lost.guiro.Renderer.__init(self, properties)
   properties = properties or {}
 end
 
-function Button:render(canvas, button, style)
+function Button:render(canvas, button, style) lost.guiro.Renderer.render(self, canvas, button, style)
   local globalRect = button:globalRect()
 
   if button.fadeStates then
