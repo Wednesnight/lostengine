@@ -72,6 +72,9 @@ function View:__init(properties) lost.common.Object.__init(self)
       self:appendChild(value)
     end
   end
+  
+  -- initialize scissor state
+  self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(true))
 end
 
 function View:__tostring()
@@ -321,10 +324,12 @@ end
     triggers render on children
   ]]
 function View:render(canvas, forceRender)
-  local globalRect = self:updateLayout()
+  local globalRect = self:globalRect()
   if forceRender or self.dirty then
     self.dirty = false
 
+    self.scissorState:param(lost.gl.ScissorBox.create(globalRect))
+    canvas.context:pushState(self.scissorState)
     if self.renderer then
       self.renderer:render(canvas, self, self.style)
     end
@@ -332,6 +337,7 @@ function View:render(canvas, forceRender)
     for k,view in next,self.children do
       view:render(canvas, true)
     end
+    canvas.context:popState()
   end
 end
 

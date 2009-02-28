@@ -8,10 +8,11 @@ namespace lost
   namespace gl
   {
     
-    typedef ServerStateParam<GL_ALPHA_TEST> AlphaTest;
-    typedef ServerStateParam<GL_DEPTH_TEST> DepthTest;
-    typedef ServerStateParam<GL_TEXTURE_2D> Texture2D;
-    typedef ServerStateParam<GL_BLEND>      Blend;
+    typedef ServerStateParam<GL_ALPHA_TEST>   AlphaTest;
+    typedef ServerStateParam<GL_DEPTH_TEST>   DepthTest;
+    typedef ServerStateParam<GL_TEXTURE_2D>   Texture2D;
+    typedef ServerStateParam<GL_BLEND>        Blend;
+    typedef ServerStateParam<GL_SCISSOR_TEST> Scissor;
 
     typedef ClientStateParam<GL_NORMAL_ARRAY>        NormalArray;
     typedef ClientStateParam<GL_VERTEX_ARRAY>        VertexArray;
@@ -19,7 +20,9 @@ namespace lost
 
     typedef ColorParam<GL_COLOR_CLEAR_VALUE> ClearColor;
 
-    typedef BlendFunc BlendFunc;
+    // just for the listing...
+    typedef BlendFunc  BlendFunc;
+    typedef ScissorBox ScissorBox;
 
   }
 }

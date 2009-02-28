@@ -17,6 +17,7 @@ namespace lost
     struct State
     {
     private:
+      State();
       State(const SharedParam& p1);
       State(const SharedParam& p1, const SharedParam& p2);
       State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
@@ -26,9 +27,11 @@ namespace lost
       State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7);
       State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8);
       State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9);
+      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10);
     public:
       std::map<GLenum, SharedParam> params;
       
+      static SharedState create();
       static SharedState create(const SharedParam& p1);
       static SharedState create(const SharedParam& p1, const SharedParam& p2);
       static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
@@ -38,6 +41,7 @@ namespace lost
       static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7);
       static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8);
       static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9);
+      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10);
       
       void param(const SharedParam& inParam);
     };

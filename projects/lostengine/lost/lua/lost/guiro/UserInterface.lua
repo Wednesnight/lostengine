@@ -43,9 +43,7 @@ function UserInterface:render(canvas, forceRender)
     canvas:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
     lost.guiro.View.render(self, canvas, true)
   else
-    gl.glEnable(gl.GL_SCISSOR_TEST)
     self:renderChildren(self, canvas)
-    gl.glDisable(gl.GL_SCISSOR_TEST)
   end
   canvas.context:popState()
 end
@@ -58,8 +56,6 @@ function UserInterface:renderChildren(parent, canvas)
   for k,child in next,parent.children do
     child:update(canvas)
     if child.dirty then
-      local childRect = child:globalRect()
-      gl.glScissor(childRect.x, childRect.y, childRect.width, childRect.height)
       child:render(canvas)
       if topWindow then
         topWindow:render(canvas, true)
