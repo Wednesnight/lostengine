@@ -20,12 +20,28 @@ function Renderer:render(canvas, view, style)
 
   if style.backgroundColor then
     canvas:setColor(style.backgroundColor)
-    canvas:drawRectFilled(globalRect)
+    if style.corners.size then
+      if style.corners.steps then
+        canvas:drawRectFilledRounded(globalRect, style.corners.size, style.corners.steps)
+      else
+        canvas:drawRectFilledRounded(globalRect, style.corners.size, 25)
+      end
+    else
+      canvas:drawRectFilled(globalRect)
+    end
   end
 
   if style.borderColor then
     canvas:setColor(style.borderColor)
-    canvas:drawRectOutline(globalRect)
+    if style.corners.size then
+      if style.corners.steps then
+        canvas:drawRectOutlineRounded(globalRect, style.corners.size, style.corners.steps)
+      else
+        canvas:drawRectOutlineRounded(globalRect, style.corners.size, 25)
+      end
+    else
+      canvas:drawRectOutline(globalRect)
+    end
   end
 end
 

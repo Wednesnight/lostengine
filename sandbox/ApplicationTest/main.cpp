@@ -64,11 +64,18 @@ private:
     canvas->drawLine(p3, p4);
 
     canvas->setColor(common::whiteColor);
-    canvas->drawBezierCurve(p1, p2, p3, p4, 0.025f);
+    canvas->drawBezierCurve(p1, p2, p3, p4, 100);
 
     canvas->setColor(common::greenColor);
     canvas->drawRectOutlineRounded(math::Rect(100, 100, 200, 200), math::Vec2(50, 75));
 
+    canvas->setColor(common::whiteColor);
+    canvas->drawRectOutline(math::Rect(100, 500, 50, 50));
+    canvas->setColor(common::redColor);
+    canvas->drawRectFilled(math::Rect(100, 500, 50, 50));
+
+    canvas->setColor(common::whiteColor);
+    canvas->drawRectFilled(math::Rect(125, 125, 150, 150));
     canvas->setColor(common::redColor);
     canvas->drawRectFilledRounded(math::Rect(125, 125, 150, 150), math::Vec2(25, 50));
 

@@ -60,13 +60,24 @@ guiro:Screen
     {
 			id = "window1",
       bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+      style =
+      {
+        corners =
+        {
+          size = lost.math.Vec2(10, 10)
+        }
+      },
 			header =
       {
         text = "window1 ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
         style =
         {
           color = lost.common.Color(0,0,0),
-          backgroundColor = lost.common.Color(0,1,0)
+          backgroundColor = lost.common.Color(0,1,0),
+          corners =
+          {
+            size = lost.math.Vec2(10, 10)
+          }
         }
       },
       content =

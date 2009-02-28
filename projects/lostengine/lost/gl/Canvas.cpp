@@ -79,7 +79,7 @@ namespace lost
         see: http://nehe.gamedev.net/data/lessons/lesson.asp?lesson=28
     **/
     void Canvas::drawBezierCurve(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
-                                 const float stepSize)
+                                 const unsigned int steps)
     {
       static SharedState state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
@@ -89,36 +89,28 @@ namespace lost
       context->makeCurrent();
       context->pushState(state);
 
-      float t = 0.0;
-      int length = (int)(1.0/stepSize) * 4 + 4;
+      float stepSize = 1.0/steps;
+      int length = steps * 2 + 2;
       float p[length];
       int idx = 0;
       
-      Vec2 pStart = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
-      for (t = stepSize; t <= 1.0; t += stepSize)
+      for (float t = 0.0f; t <= 1.0; t += stepSize)
       {
-        Vec2 pEnd = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
-
+        Vec2 pStart = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
         p[idx++] = pStart.x;
         p[idx++] = pStart.y;
-        p[idx++] = pEnd.x;
-        p[idx++] = pEnd.y;
-
-        pStart = pEnd;
       }
-      p[idx++] = pStart.x;
-      p[idx++] = pStart.y;
       p[idx++] = p1.x;
       p[idx++] = p1.y;
       
       glVertexPointer(2, GL_FLOAT, 0, p); GLDEBUG;
-      glDrawArrays(GL_LINES, 0, length/2); GLDEBUG;
+      glDrawArrays(GL_LINE_STRIP, 0, length/2); GLDEBUG;
 
       context->popState();
     }
 
     void Canvas::drawBezierCurveFilled(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
-                                       const Vec2& basePoint, const float stepSize)
+                                       const Vec2& basePoint, const unsigned int steps)
     {
       static SharedState state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
@@ -128,7 +120,8 @@ namespace lost
       context->makeCurrent();
       context->pushState(state);
 
-      int length = (int)(1.0/stepSize) * 4 + 6;
+      float stepSize = 1.0/steps;
+      int length = steps * 4 + 2;
       float p[length];
       int idx = 0;
       
@@ -181,7 +174,7 @@ namespace lost
       drawLine(rect.topLeft(), rect.bottomLeft());
     }
     
-    void Canvas::drawRectOutlineRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize)
+    void Canvas::drawRectOutlineRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const unsigned int steps)
     {
       // bottom line
       Vec2 bottomLeft(rect.x + cornerSize.x, rect.y);
@@ -222,10 +215,10 @@ namespace lost
       Vec2 topRight3 = rect.topRight();
       Vec2 topRight4 = topRight;
 
-      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, stepSize);
-      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, stepSize);
-      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, stepSize);
-      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, stepSize);
+      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, steps);
+      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, steps);
+      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, steps);
+      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, steps);
     }
     
     void Canvas::drawRectFilled(const lost::math::Rect& rect)
@@ -238,22 +231,19 @@ namespace lost
       context->pushState(state);
       
       // points
-      lost::math::Vec2 bl(rect.x, rect.y);
-      lost::math::Vec2 br(rect.maxX(), rect.y);
-      lost::math::Vec2 tr(rect.maxX(), rect.maxY());
-      lost::math::Vec2 tl(rect.x, rect.maxY());
+      lost::math::Vec2 bl = rect.bottomLeft();
+      lost::math::Vec2 br = rect.bottomRight();
+      lost::math::Vec2 tr = rect.topRight();
+      lost::math::Vec2 tl = rect.topLeft();
       
-      float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
-      // indices for 2 triangles, first upper left, then lower right
-      GLubyte idx[] = {0,2,3,0,1,2};
-      
-      glVertexPointer(2,GL_FLOAT,0,verts); GLDEBUG;
-      glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx); GLDEBUG;
+      float verts[] = {br.x, br.y, bl.x, bl.y, tr.x, tr.y, tl.x, tl.y};
+      glVertexPointer(2, GL_FLOAT, 0, verts); GLDEBUG;
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4); GLDEBUG;
 
       context->popState();
     }
     
-    void Canvas::drawRectFilledRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize)
+    void Canvas::drawRectFilledRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const unsigned int steps)
     {
       // middle rect
       Rect middleRect(rect.x + cornerSize.x, rect.y + cornerSize.y, rect.width - cornerSize.x*2, rect.height - cornerSize.y*2);
@@ -266,6 +256,9 @@ namespace lost
       // bottom rect
       Rect bottomRect(rect.x + cornerSize.x, rect.y, rect.width - cornerSize.x*2, cornerSize.y + 1);
 
+      /**
+          draw the "cross" lacking rounded edges
+      **/
       drawRectFilled(middleRect);
       drawRectFilled(leftRect);
       drawRectFilled(rightRect);
@@ -310,14 +303,17 @@ namespace lost
       Vec2 topRight4 = topRight;
       Vec2 topRightBase(topRight.x, rightTop.y);
       
-      drawBezierCurveFilled(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, bottomLeftBase, stepSize);
-      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, stepSize);
-      drawBezierCurveFilled(bottomRight1, bottomRight2, bottomRight3, bottomRight4, bottomRightBase, stepSize);
-      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, stepSize);
-      drawBezierCurveFilled(topLeft1, topLeft2, topLeft3, topLeft4, topLeftBase, stepSize);
-      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, stepSize);
-      drawBezierCurveFilled(topRight1, topRight2, topRight3, topRight4, topRightBase, stepSize);
-      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, stepSize);
+      /**
+          simple but effective hack: draw antialiased lines over the edges to get rid of pitches
+      **/
+      drawBezierCurveFilled(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, bottomLeftBase, steps);
+      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, steps);
+      drawBezierCurveFilled(bottomRight1, bottomRight2, bottomRight3, bottomRight4, bottomRightBase, steps);
+      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, steps);
+      drawBezierCurveFilled(topLeft1, topLeft2, topLeft3, topLeft4, topLeftBase, steps);
+      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, steps);
+      drawBezierCurveFilled(topRight1, topRight2, topRight3, topRight4, topRightBase, steps);
+      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, steps);
     }
     
     // rect is drawn counterclockwise

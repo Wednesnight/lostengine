@@ -13,4 +13,8 @@ function Style:__init(properties) lost.common.Object.__init(self)
 
   self.backgroundColor = properties.backgroundColor
   self.borderColor = properties.borderColor
+  properties.corners = properties.corners or {}
+  self.corners =  properties.corners
+  self.corners.size = properties.corners.size
+  self.corners.steps = properties.corners.steps
 end
