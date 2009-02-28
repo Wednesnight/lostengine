@@ -37,7 +37,7 @@ function xright(mod)
   mod = mod or {}
   mod.abs = mod.abs or 0
   mod.rel = mod.rel or 0
-  return function(self, parentRect) return (parentRect:maxX() - self:width(parentRect)) + (mod.abs + (parentRect.width * mod.rel)) end
+  return function(self, parentRect) return (parentRect:maxX() - self:width(parentRect) + 1) + (mod.abs + (parentRect.width * mod.rel)) end
 end
 
 function xabs(x, mod)
@@ -68,7 +68,7 @@ function ytop(mod)
   mod = mod or {}
   mod.abs = mod.abs or 0
   mod.rel = mod.rel or 0
-  return function(self, parentRect) return (parentRect:maxY() - self:height(parentRect)) + (mod.abs + (parentRect.height * mod.rel)) end
+  return function(self, parentRect) return (parentRect:maxY() - self:height(parentRect) + 1) + (mod.abs + (parentRect.height * mod.rel)) end
 end
 
 function yabs(y, mod)
