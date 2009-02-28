@@ -7,10 +7,12 @@
 #include "lost/platform/Platform.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/event/Receive.h"
-#include "lost/application/gl/State.h"
+#include "lost/gl/State.h"
 #include "lost/camera/Camera.h"
 
+using namespace lost;
 using namespace lost::application;
+using namespace lost::gl;
 
 struct MeteredFunction
 {
@@ -51,7 +53,21 @@ private:
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    canvas->drawLine(lost::math::Vec2(0,0), lost::math::Vec2(canvas->camera->viewport.width, canvas->camera->viewport.height));
+
+    math::Vec2 p1(415, 215);
+    math::Vec2 p2(415, 240);
+    math::Vec2 p3(520, 550);
+    math::Vec2 p4(620, 320);
+
+    canvas->setColor(common::redColor);
+    canvas->drawLine(p1, p2);
+    canvas->drawLine(p3, p4);
+
+    canvas->setColor(common::whiteColor);
+    canvas->drawBezierCurve(p1, p2, p3, p4, 0.025f);
+
+    canvas->setColor(common::greenColor);
+    canvas->drawRectOutlineRounded(math::Rect(100, 100, 200, 200), math::Vec2(50, 75));
 
     canvas->context->popState();
     canvas->context->swapBuffers();
@@ -97,7 +113,7 @@ public:
     app = Application::create(boost::bind(&MyAppController::mainLoop, this));
 
     mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Rect(100, 100, 800, 600)));
-    secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Rect(100, 100, 160, 100)));
+    secondWindow = app->createWindow("window2", WindowParams("FPSMeter", lost::math::Rect(740, 100, 160, 100)));
 
     renderState = gl::State::create(gl::ClearColor::create(lost::common::blackColor));
 

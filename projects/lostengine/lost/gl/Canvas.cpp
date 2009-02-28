@@ -71,7 +71,52 @@ namespace lost
       
       context->popState();
     }
-    
+
+    /**
+        using this formula:
+          Pnew = P1 * t^3 + P2 * 3 * t^2 * (1-t) + P3 * 3 * t * (1-t)^2 + P4 * (1-t)^3
+
+        see: http://nehe.gamedev.net/data/lessons/lesson.asp?lesson=28
+    **/
+    void Canvas::drawBezierCurve(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
+                                 const float stepSize)
+    {
+      static SharedState state = State::create(Blend::create(true),
+                                               BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                               Texture2D::create(false),
+                                               VertexArray::create(true),
+                                               LineSmooth::create(true));
+      context->makeCurrent();
+      context->pushState(state);
+
+      float t = 0.0;
+      int length = (int)(1.0/stepSize) * 4 + 4;
+      float p[length];
+      int idx = 0;
+      
+      Vec2 pStart = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
+      for (t = stepSize; t <= 1.0; t += stepSize)
+      {
+        Vec2 pEnd = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
+        
+        p[idx++] = pStart.x;
+        p[idx++] = pStart.y;
+        p[idx++] = pEnd.x;
+        p[idx++] = pEnd.y;
+        
+        pStart = pEnd;
+      }
+      p[idx++] = pStart.x;
+      p[idx++] = pStart.y;
+      p[idx++] = p1.x;
+      p[idx++] = p1.y;
+      
+      glVertexPointer(2, GL_FLOAT, 0, p); GLDEBUG;
+      glDrawArrays(GL_LINES, 0, length/2); GLDEBUG;
+
+      context->popState();
+    }
+
     void Canvas::setColor(const lost::common::Color& color)
     {
       glColor4f(color.fv[0], color.fv[1], color.fv[2], color.fv[3]); GLDEBUG; // OpenGL ES compatible
@@ -102,6 +147,53 @@ namespace lost
       drawLine(rect.bottomRight(), rect.topRight());
       drawLine(rect.topRight(), rect.topLeft());
       drawLine(rect.topLeft(), rect.bottomLeft());
+    }
+    
+    void Canvas::drawRectOutlineRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize)
+    {
+      // bottom line
+      Vec2 bottomLeft(rect.x + cornerSize.x, rect.y);
+      Vec2 bottomRight(rect.maxX() - cornerSize.x, rect.y);
+      // top line
+      Vec2 topLeft(rect.x + cornerSize.x, rect.maxY());
+      Vec2 topRight(rect.maxX() - cornerSize.x, rect.maxY());
+      // left line
+      Vec2 leftBottom(rect.x, rect.y + cornerSize.y);
+      Vec2 leftTop(rect.x, rect.maxY() - cornerSize.y);
+      // right line
+      Vec2 rightBottom(rect.maxX(), rect.y + cornerSize.y);
+      Vec2 rightTop(rect.maxX(), rect.maxY() - cornerSize.y);
+      
+      drawLine(bottomLeft, bottomRight);
+      drawLine(topLeft, topRight);
+      drawLine(leftBottom, leftTop);
+      drawLine(rightBottom, rightTop);
+
+      // bottom-left corner
+      Vec2 bottomLeft1 = leftBottom;
+      Vec2 bottomLeft2 = rect.bottomLeft();
+      Vec2 bottomLeft3 = rect.bottomLeft();
+      Vec2 bottomLeft4 = bottomLeft;
+      // bottom-right corner
+      Vec2 bottomRight1 = rightBottom;
+      Vec2 bottomRight2 = rect.bottomRight();
+      Vec2 bottomRight3 = rect.bottomRight();
+      Vec2 bottomRight4 = bottomRight;
+      // top-left corner
+      Vec2 topLeft1 = leftTop;
+      Vec2 topLeft2 = rect.topLeft();
+      Vec2 topLeft3 = rect.topLeft();
+      Vec2 topLeft4 = topLeft;
+      // top-right corner
+      Vec2 topRight1 = rightTop;
+      Vec2 topRight2 = rect.topRight();
+      Vec2 topRight3 = rect.topRight();
+      Vec2 topRight4 = topRight;
+
+      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4);
+      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4);
+      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4);
+      drawBezierCurve(topRight1, topRight2, topRight3, topRight4);
     }
     
     void Canvas::drawRectFilled(const lost::math::Rect& rect)
