@@ -98,12 +98,12 @@ namespace lost
       for (t = stepSize; t <= 1.0; t += stepSize)
       {
         Vec2 pEnd = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
-        
+
         p[idx++] = pStart.x;
         p[idx++] = pStart.y;
         p[idx++] = pEnd.x;
         p[idx++] = pEnd.y;
-        
+
         pStart = pEnd;
       }
       p[idx++] = pStart.x;
@@ -117,6 +117,38 @@ namespace lost
       context->popState();
     }
 
+    void Canvas::drawBezierCurveFilled(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
+                                       const Vec2& basePoint, const float stepSize)
+    {
+      static SharedState state = State::create(Blend::create(true),
+                                               BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                               Texture2D::create(false),
+                                               VertexArray::create(true),
+                                               LineSmooth::create(true));
+      context->makeCurrent();
+      context->pushState(state);
+
+      int length = (int)(1.0/stepSize) * 4 + 6;
+      float p[length];
+      int idx = 0;
+      
+      for (float t = 0.0f; t <= 1.0; t += stepSize)
+      {
+        Vec2 pStart = p1 * powf(t, 3.0) + p2 * 3.0 * powf(t, 2.0) * (1-t) + p3 * 3.0 * t * powf(1-t, 2.0) + p4 * powf(1-t, 3.0);
+        p[idx++] = pStart.x;
+        p[idx++] = pStart.y;
+        p[idx++] = basePoint.x;
+        p[idx++] = basePoint.y;
+      }
+      p[idx++] = p1.x;
+      p[idx++] = p1.y;
+
+      glVertexPointer(2, GL_FLOAT, 0, p); GLDEBUG;
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, length/2); GLDEBUG;
+
+      context->popState();
+    }
+    
     void Canvas::setColor(const lost::common::Color& color)
     {
       glColor4f(color.fv[0], color.fv[1], color.fv[2], color.fv[3]); GLDEBUG; // OpenGL ES compatible
@@ -190,10 +222,10 @@ namespace lost
       Vec2 topRight3 = rect.topRight();
       Vec2 topRight4 = topRight;
 
-      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4);
-      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4);
-      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4);
-      drawBezierCurve(topRight1, topRight2, topRight3, topRight4);
+      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, stepSize);
+      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, stepSize);
+      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, stepSize);
+      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, stepSize);
     }
     
     void Canvas::drawRectFilled(const lost::math::Rect& rect)
@@ -219,6 +251,73 @@ namespace lost
       glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, idx); GLDEBUG;
 
       context->popState();
+    }
+    
+    void Canvas::drawRectFilledRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize)
+    {
+      // middle rect
+      Rect middleRect(rect.x + cornerSize.x, rect.y + cornerSize.y, rect.width - cornerSize.x*2, rect.height - cornerSize.y*2);
+      // left rect
+      Rect leftRect(rect.x, rect.y + cornerSize.y, cornerSize.x + 1, rect.height - cornerSize.y*2);
+      // right rect
+      Rect rightRect(rect.maxX() - cornerSize.x, rect.y + cornerSize.y, cornerSize.x + 2, rect.height - cornerSize.y*2);
+      // top rect
+      Rect topRect(rect.x + cornerSize.x, rect.maxY() - cornerSize.y, rect.width - cornerSize.x*2, cornerSize.y + 2);
+      // bottom rect
+      Rect bottomRect(rect.x + cornerSize.x, rect.y, rect.width - cornerSize.x*2, cornerSize.y + 1);
+
+      drawRectFilled(middleRect);
+      drawRectFilled(leftRect);
+      drawRectFilled(rightRect);
+      drawRectFilled(topRect);
+      drawRectFilled(bottomRect);
+
+      // bottom line
+      Vec2 bottomLeft(rect.x + cornerSize.x, rect.y);
+      Vec2 bottomRight(rect.maxX() - cornerSize.x, rect.y);
+      // top line
+      Vec2 topLeft(rect.x + cornerSize.x, rect.maxY());
+      Vec2 topRight(rect.maxX() - cornerSize.x, rect.maxY());
+      // left line
+      Vec2 leftBottom(rect.x, rect.y + cornerSize.y);
+      Vec2 leftTop(rect.x, rect.maxY() - cornerSize.y);
+      // right line
+      Vec2 rightBottom(rect.maxX(), rect.y + cornerSize.y);
+      Vec2 rightTop(rect.maxX(), rect.maxY() - cornerSize.y);
+      
+      // bottom-left corner
+      Vec2 bottomLeft1 = leftBottom;
+      Vec2 bottomLeft2 = rect.bottomLeft();
+      Vec2 bottomLeft3 = rect.bottomLeft();
+      Vec2 bottomLeft4 = bottomLeft;
+      Vec2 bottomLeftBase(bottomLeft.x, leftBottom.y);
+      // bottom-right corner
+      Vec2 bottomRight1 = rightBottom;
+      Vec2 bottomRight2 = rect.bottomRight();
+      Vec2 bottomRight3 = rect.bottomRight();
+      Vec2 bottomRight4 = bottomRight;
+      Vec2 bottomRightBase(bottomRight.x, rightBottom.y);
+      // top-left corner
+      Vec2 topLeft1 = leftTop;
+      Vec2 topLeft2 = rect.topLeft();
+      Vec2 topLeft3 = rect.topLeft();
+      Vec2 topLeft4 = topLeft;
+      Vec2 topLeftBase(topLeft.x, leftTop.y);
+      // top-right corner
+      Vec2 topRight1 = rightTop;
+      Vec2 topRight2 = rect.topRight();
+      Vec2 topRight3 = rect.topRight();
+      Vec2 topRight4 = topRight;
+      Vec2 topRightBase(topRight.x, rightTop.y);
+      
+      drawBezierCurveFilled(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, bottomLeftBase, stepSize);
+      drawBezierCurve(bottomLeft1, bottomLeft2, bottomLeft3, bottomLeft4, stepSize);
+      drawBezierCurveFilled(bottomRight1, bottomRight2, bottomRight3, bottomRight4, bottomRightBase, stepSize);
+      drawBezierCurve(bottomRight1, bottomRight2, bottomRight3, bottomRight4, stepSize);
+      drawBezierCurveFilled(topLeft1, topLeft2, topLeft3, topLeft4, topLeftBase, stepSize);
+      drawBezierCurve(topLeft1, topLeft2, topLeft3, topLeft4, stepSize);
+      drawBezierCurveFilled(topRight1, topRight2, topRight3, topRight4, topRightBase, stepSize);
+      drawBezierCurve(topRight1, topRight2, topRight3, topRight4, stepSize);
     }
     
     // rect is drawn counterclockwise

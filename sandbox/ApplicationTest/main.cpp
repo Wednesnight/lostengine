@@ -69,6 +69,14 @@ private:
     canvas->setColor(common::greenColor);
     canvas->drawRectOutlineRounded(math::Rect(100, 100, 200, 200), math::Vec2(50, 75));
 
+    canvas->setColor(common::redColor);
+    canvas->drawRectFilledRounded(math::Rect(125, 125, 150, 150), math::Vec2(25, 50));
+
+    canvas->setColor(common::redColor);
+    canvas->drawBezierCurveFilled(math::Vec2(10, 10), math::Vec2(10, 100), math::Vec2(10, 100), math::Vec2(100, 100), math::Vec2(100, 10));
+    canvas->setColor(common::whiteColor);
+    canvas->drawBezierCurve(math::Vec2(10, 10), math::Vec2(10, 100), math::Vec2(10, 100), math::Vec2(100, 100));
+
     canvas->context->popState();
     canvas->context->swapBuffers();
   }
