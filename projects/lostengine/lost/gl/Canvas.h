@@ -35,10 +35,13 @@ namespace lost
 
       void drawBezierCurve(const lost::math::Vec2& p1, const lost::math::Vec2& p2, const lost::math::Vec2& p3, const lost::math::Vec2& p4,
                            const float stepSize = 0.1f);
+      void drawBezierCurveFilled(const lost::math::Vec2& p1, const lost::math::Vec2& p2, const lost::math::Vec2& p3, const lost::math::Vec2& p4,
+                                 const lost::math::Vec2& basePoint, const float stepSize = 0.1f);
 
       void drawRectOutline(const lost::math::Rect& rect);
       void drawRectOutlineRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize = 0.025f);
       void drawRectFilled(const lost::math::Rect& rect);
+      void drawRectFilledRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const float stepSize = 0.025f);
       void drawRectTextured(const lost::math::Rect& rect, boost::shared_ptr<const lost::gl::Texture> tex, const lost::math::Vec2& bottomLeft,
                             const lost::math::Vec2& bottomRight, const lost::math::Vec2& topLeft, const lost::math::Vec2& topRight,
                             bool flip);
