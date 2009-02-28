@@ -16,6 +16,8 @@ namespace lost
       currentState->param(Texture2D::create());
       currentState->param(Blend::create());
       currentState->param(Scissor::create());
+      currentState->param(PointSmooth::create());
+      currentState->param(LineSmooth::create());
       currentState->param(NormalArray::create());
       currentState->param(VertexArray::create());
       currentState->param(TextureArray::create());
