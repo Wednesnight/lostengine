@@ -13,6 +13,8 @@ namespace lost
     typedef ServerStateParam<GL_TEXTURE_2D>   Texture2D;
     typedef ServerStateParam<GL_BLEND>        Blend;
     typedef ServerStateParam<GL_SCISSOR_TEST> Scissor;
+    typedef ServerStateParam<GL_POINT_SMOOTH> PointSmooth;
+    typedef ServerStateParam<GL_LINE_SMOOTH>  LineSmooth;
 
     typedef ClientStateParam<GL_NORMAL_ARRAY>        NormalArray;
     typedef ClientStateParam<GL_VERTEX_ARRAY>        VertexArray;
