@@ -220,11 +220,14 @@ screen = guiro:Screen
       
       guiro:Label
       {
-        bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
+        bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(200), g.habs(30)),
         text = "Hello World!",
         style =
         {
-          fontSize = 16
+          fontSize = 12,
+          font = lost.font.TrueTypeFont.create(lost.guiro.config.theme.freetypeLibrary, lost.guiro.config.theme.loader:load("Monaco.ttf")),
+          backgroundColor = lost.common.Color(1,1,0),
+          color = lost.common.Color(0,0,0)
         }
       }
     },

@@ -10,15 +10,18 @@ namespace lost
       initialize();
       
       // push back initial state
-      currentState = State::create(AlphaTest::create(),
-                                   DepthTest::create(),
-                                   Texture2D::create(),
-                                   Blend::create(),
-                                   NormalArray::create(),
-                                   VertexArray::create(),
-                                   TextureArray::create(),
-                                   ClearColor::create(),
-                                   BlendFunc::create());
+      currentState = State::create();
+      currentState->param(AlphaTest::create());
+      currentState->param(DepthTest::create());
+      currentState->param(Texture2D::create());
+      currentState->param(Blend::create());
+      currentState->param(Scissor::create());
+      currentState->param(NormalArray::create());
+      currentState->param(VertexArray::create());
+      currentState->param(TextureArray::create());
+      currentState->param(ClearColor::create());
+      currentState->param(BlendFunc::create());
+      currentState->param(ScissorBox::create());
       pushState(currentState);
     }
     

@@ -19,8 +19,10 @@ namespace lost
         namespace_("gl")
         [
           class_<gl::State, SharedState>("State")
+          .def("param", &gl::State::param)
           .scope
           [
+            def("create", (SharedState(*)())&gl::State::create),
             def("create", (SharedState(*)(const SharedParam&))&gl::State::create),
             def("create", (SharedState(*)(const SharedParam&, const SharedParam&))&gl::State::create),
             def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create),
@@ -53,7 +55,13 @@ namespace lost
             def("create", (SharedParam(*)(bool))&gl::Blend::create)
           ],
           
-          class_<gl::NormalArray, SharedParam>("NormalArray")
+          class_<gl::Scissor, SharedParam>("Scissor")
+          .scope
+          [
+            def("create", (SharedParam(*)(bool))&gl::Scissor::create)
+          ],
+         
+         class_<gl::NormalArray, SharedParam>("NormalArray")
           .scope
           [
             def("create", (SharedParam(*)(bool))&gl::NormalArray::create)
@@ -81,6 +89,12 @@ namespace lost
           .scope
           [
             def("create", (SharedParam(*)(GLenum, GLenum))&gl::BlendFunc::create)
+          ],
+
+          class_<gl::ScissorBox, SharedParam>("ScissorBox")
+          .scope
+          [
+            def("create", (SharedParam(*)(const math::Rect&))&gl::ScissorBox::create)
           ]
         ]
       ];

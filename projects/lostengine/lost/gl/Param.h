@@ -4,6 +4,7 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 #include "lost/common/Color.h"
+#include "lost/math/Rect.h"
 
 namespace lost
 {
@@ -171,6 +172,40 @@ namespace lost
       }
     };
 
+    struct ScissorBox : public Param
+    {
+    private:
+      math::Rect box;
+    public:
+      ScissorBox(const math::Rect& inBox)
+      : Param(GL_SCISSOR_BOX),
+        box(inBox)
+      {
+      }
+      
+      static SharedParam create(const math::Rect& inBox)
+      {
+        return SharedParam(new ScissorBox(inBox));
+      }
+      
+      static SharedParam create()
+      {
+        GLint box[4];
+        glGetIntegerv(GL_SCISSOR_BOX, box); GLDEBUG_THROW;
+        return SharedParam(new ScissorBox(math::Rect(box[0], box[1], box[2], box[3])));
+      }
+      
+      virtual void set()
+      {
+        glScissor(box.x, box.y, box.width, box.height); GLDEBUG;
+      }
+      
+      virtual bool operator ==(ScissorBox& other)
+      {
+        return Param::operator ==(other) && (this->box == other.box);
+      }
+    };
+    
   }
 }
 
