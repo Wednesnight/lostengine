@@ -80,7 +80,7 @@ private:
     canvas->drawRectFilledRounded(math::Rect(125, 125, 150, 150), math::Vec2(25, 50));
 
     canvas->setColor(common::redColor);
-    canvas->drawBezierCurveFilled(math::Vec2(10, 10), math::Vec2(10, 100), math::Vec2(10, 100), math::Vec2(100, 100), math::Vec2(100, 10));
+    canvas->drawBezierCurveFilled(math::Vec2(10, 10), math::Vec2(10, 100), math::Vec2(10, 100), math::Vec2(100, 100), math::Vec2(100.5, 9.5));
     canvas->setColor(common::whiteColor);
     canvas->drawBezierCurve(math::Vec2(10, 10), math::Vec2(10, 100), math::Vec2(10, 100), math::Vec2(100, 100));
 
