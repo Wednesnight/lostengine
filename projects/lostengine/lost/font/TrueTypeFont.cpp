@@ -137,10 +137,10 @@ void TrueTypeFont::rebuildTextureAtlas()
     boost::shared_ptr<Glyph> g = glyphs[k];
     float tw = (float)atlas->dataWidth;
     float th = (float)atlas->dataHeight;
-    g->bl = Vec2((g->rect.x+0.5)/tw, (g->rect.y+0.5)/th);
-    g->br = Vec2((g->rect.maxX()+1.5)/tw, (g->rect.y+0.5)/th);
-    g->tl = Vec2((g->rect.x+0.5)/tw, (g->rect.maxY()+1.5)/th);
-    g->tr = Vec2((g->rect.maxX()+1.5)/tw, (g->rect.maxY()+1.5)/th);
+    g->bl = Vec2((g->rect.x)/tw, (g->rect.y)/th);
+    g->br = Vec2((g->rect.maxX()+1.0f)/tw, (g->rect.y)/th);
+    g->tl = Vec2((g->rect.x)/tw, (g->rect.maxY()+1.0f)/th);
+    g->tr = Vec2((g->rect.maxX()+1.0f)/tw, (g->rect.maxY()+1.0f)/th);
   }
 }
 
@@ -169,11 +169,11 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   tr.x = xoffset+glyph->xoffset;
   tr.y = (float)glyph->yoffset;
   
-  pmin.x = min(pmin.x, tr.x);
-  pmin.y = min(pmin.y, tr.y);
+  pmin.x = min(pmin.x, tr.x-0.5f);
+  pmin.y = min(pmin.y, tr.y-0.5f);
 
-  pmax.x = max(pmax.x, tr.maxX());
-  pmax.y = max(pmax.y, tr.maxY());
+  pmax.x = max(pmax.x, tr.maxX()+0.5f);
+  pmax.y = max(pmax.y, tr.maxY()+0.5f);
   
   uint32_t indicesPerChar = 6; // 2 tris a 3 points
   uint32_t indexOffset = indicesPerChar*index;
@@ -190,14 +190,14 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   uint32_t coordsPerChar = 8; // 4 verts a 2 coords
   uint32_t coordOffset = coordsPerChar*index;
   
-  model->vertices[coordOffset+0] = tr.x;
-  model->vertices[coordOffset+1] = tr.y;
-  model->vertices[coordOffset+2] = tr.maxX()+1;
-  model->vertices[coordOffset+3] = tr.y;
-  model->vertices[coordOffset+4] = tr.maxX()+1;
-  model->vertices[coordOffset+5] = tr.maxY()+1;
-  model->vertices[coordOffset+6] = tr.x;
-  model->vertices[coordOffset+7] = tr.maxY()+1;
+  model->vertices[coordOffset+0] = tr.x-0.5f;
+  model->vertices[coordOffset+1] = tr.y-0.5f;
+  model->vertices[coordOffset+2] = tr.maxX()+0.5f;
+  model->vertices[coordOffset+3] = tr.y-0.5f;
+  model->vertices[coordOffset+4] = tr.maxX()+0.5f;
+  model->vertices[coordOffset+5] = tr.maxY()+0.5f;
+  model->vertices[coordOffset+6] = tr.x-0.5f;
+  model->vertices[coordOffset+7] = tr.maxY()+0.5f;
   
   model->texcoords[coordOffset+0] = glyph->bl.x;
   model->texcoords[coordOffset+1] = glyph->bl.y;
