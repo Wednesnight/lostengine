@@ -236,7 +236,7 @@ namespace lost
       lost::math::Vec2 tr = rect.topRight();
       lost::math::Vec2 tl = rect.topLeft();
       
-      float verts[] = {br.x, br.y, bl.x, bl.y, tr.x, tr.y, tl.x, tl.y};
+      float verts[] = {br.x+0.5, br.y-0.5, bl.x-0.5, bl.y-0.5, tr.x+0.5, tr.y+0.5, tl.x-0.5, tl.y+0.5};
       glVertexPointer(2, GL_FLOAT, 0, verts); GLDEBUG;
       glDrawArrays(GL_TRIANGLE_STRIP, 0, 4); GLDEBUG;
 
@@ -250,9 +250,9 @@ namespace lost
       // left rect
       Rect leftRect(rect.x, rect.y + cornerSize.y, cornerSize.x + 1, rect.height - cornerSize.y*2);
       // right rect
-      Rect rightRect(rect.maxX() - cornerSize.x, rect.y + cornerSize.y, cornerSize.x + 2, rect.height - cornerSize.y*2);
+      Rect rightRect(rect.maxX() - cornerSize.x, rect.y + cornerSize.y, cornerSize.x + 1, rect.height - cornerSize.y*2);
       // top rect
-      Rect topRect(rect.x + cornerSize.x, rect.maxY() - cornerSize.y, rect.width - cornerSize.x*2, cornerSize.y + 2);
+      Rect topRect(rect.x + cornerSize.x, rect.maxY() - cornerSize.y, rect.width - cornerSize.x*2, cornerSize.y + 1);
       // bottom rect
       Rect bottomRect(rect.x + cornerSize.x, rect.y, rect.width - cornerSize.x*2, cornerSize.y + 1);
 
@@ -283,25 +283,25 @@ namespace lost
       Vec2 bottomLeft2 = rect.bottomLeft();
       Vec2 bottomLeft3 = rect.bottomLeft();
       Vec2 bottomLeft4 = bottomLeft;
-      Vec2 bottomLeftBase(bottomLeft.x, leftBottom.y);
+      Vec2 bottomLeftBase(bottomLeft.x-0.5, leftBottom.y-0.5);
       // bottom-right corner
       Vec2 bottomRight1 = rightBottom;
       Vec2 bottomRight2 = rect.bottomRight();
       Vec2 bottomRight3 = rect.bottomRight();
       Vec2 bottomRight4 = bottomRight;
-      Vec2 bottomRightBase(bottomRight.x, rightBottom.y);
+      Vec2 bottomRightBase(bottomRight.x+0.5, rightBottom.y-0.5);
       // top-left corner
       Vec2 topLeft1 = leftTop;
       Vec2 topLeft2 = rect.topLeft();
       Vec2 topLeft3 = rect.topLeft();
       Vec2 topLeft4 = topLeft;
-      Vec2 topLeftBase(topLeft.x, leftTop.y);
+      Vec2 topLeftBase(topLeft.x-0.5, leftTop.y+0.5);
       // top-right corner
       Vec2 topRight1 = rightTop;
       Vec2 topRight2 = rect.topRight();
       Vec2 topRight3 = rect.topRight();
       Vec2 topRight4 = topRight;
-      Vec2 topRightBase(topRight.x, rightTop.y);
+      Vec2 topRightBase(topRight.x+0.5, rightTop.y+0.5);
       
       /**
           simple but effective hack: draw antialiased lines over the edges to get rid of pitches
@@ -345,7 +345,7 @@ namespace lost
       lost::math::Vec2 tl(rect.x, rect.maxY());
       
       // build arrays
-      float verts[] = {bl.x, bl.y, br.x, br.y, tr.x, tr.y, tl.x, tl.y};
+      float verts[] = {bl.x-0.5, bl.y-0.5, br.x+0.5, br.y-0.5, tr.x+0.5, tr.y+0.5, tl.x-0.5, tl.y+0.5};
       float texcoordsNormal[] = {bottomLeft.x, bottomLeft.y, bottomRight.x, bottomRight.y, topRight.x, topRight.y, topLeft.x, topLeft.y};
       float texcoordsFlipped[] = {topLeft.x, topLeft.y, topRight.x, topRight.y, bottomRight.x, bottomRight.y, bottomLeft.x, bottomLeft.y};
       // indices for 2 triangles, first upper left, then lower right
