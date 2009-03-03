@@ -2,28 +2,22 @@
 local g = lost.guiro
 
 -- button states
-local buttonStates =
+local buttonStyle =
 {
   released =
   {
-    bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0)),
-    bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-    cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
-    receivesEvents = false
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
   },
   hovered =
   {
-    bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0)),
-    bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-    cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
-    receivesEvents = false
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
   },
   pressed =
   {
-    bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0)),
-    bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-    cornerBounds = {left = 10, right = 10, top = 10, bottom = 10},
-    receivesEvents = false						
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
   }
 }
 
@@ -72,8 +66,8 @@ guiro:Screen
         text = "window1 ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
         style =
         {
-          color = lost.common.Color(0,0,0),
           backgroundColor = lost.common.Color(0,1,0),
+          color = lost.common.Color(0,0,0),
           corners =
           {
             size = lost.math.Vec2(10, 10)
@@ -92,12 +86,7 @@ guiro:Screen
             text = "Small",
             receivesEvents = false
           },
-          images =
-          {
-            released = guiro:Image(buttonStates.released),
-            hovered = guiro:Image(buttonStates.hovered),
-            pressed = guiro:Image(buttonStates.pressed)
-          }
+          style = buttonStyle
         },
 
         guiro:Button
@@ -109,12 +98,7 @@ guiro:Screen
             text = "Medium",
             receivesEvents = false					
           },
-          images =
-          {
-            released = guiro:Image(buttonStates.released),
-            hovered = guiro:Image(buttonStates.hovered),
-            pressed = guiro:Image(buttonStates.pressed)
-          }
+          style = buttonStyle
         },
 
         guiro:Button
@@ -126,12 +110,7 @@ guiro:Screen
             text = "Large foobar foobar foobar foobar foobar",
             receivesEvents = false											
           },
-          images =
-          {
-            released = guiro:Image(buttonStates.released),
-            hovered = guiro:Image(buttonStates.hovered),
-            pressed = guiro:Image(buttonStates.pressed)
-          }
+          style = buttonStyle
         },
 
         guiro:Slider
@@ -146,7 +125,7 @@ guiro:Screen
           listeners =
           {
             [lost.guiro.controls.Slider.SliderChange] = function(event)
-              event.target.parent("image"):alpha(event.value)
+              event.target.parent("image").style.backgroundColor.a = event.value
             end
           }
         },
@@ -165,9 +144,9 @@ guiro:Screen
             [lost.guiro.controls.Slider.SliderChange] = function(event)
               local image = event.target.parent("image")
               if event.value == event.target.min then
-                image:filter(gl.GL_NEAREST)
+                image.style.backgroundImageFilter = gl.GL_NEAREST
               elseif event.value == event.target.max then
-                image:filter(gl.GL_LINEAR)
+                image.style.backgroundImageFilter = gl.GL_LINEAR
               end
             end
           }
@@ -177,16 +156,15 @@ guiro:Screen
         {
           id = "image",
           bounds = g.Bounds(g.xleft({abs=50}), g.ybottom({abs=45}), g.wabs(180), g.habs(200)),
-          bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
-          stretch = true,
           style =
           {
-            borderColor = lost.common.Color(0,0,0,1)
+            borderColor = lost.common.Color(0,0,0,1),
+            backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
           },
           listeners =
           {
             mouseDown = function(event)
-              event.target:stretch(not event.target:stretch())
+              event.target.style.backgroundImageStretched = not event.target.style.backgroundImageStretched
             end
           }
         },
@@ -225,8 +203,7 @@ guiro:Screen
         {
           id = "centeredImage",
           bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
-          bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
-          stretch = true
+          bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
         }
       }
     }
