@@ -19,15 +19,6 @@ function Label:__init(properties) lost.guiro.View.__init(self, properties)
 	end
 end
 
-function Label:color(color)
-  color = color or self.style.color
-  if self.style.color ~= color then
-    self.style.color = lost.common.Color(color)
-    self:needsRedraw()
-  end
-  return self.style.color
-end
-
 function Label:setText(text)
 	self.text = text
 	self.textChanged = true
