@@ -45,10 +45,10 @@ function Slider:__init(properties) lost.guiro.View.__init(self, properties)
 
   if not properties.button then
     local g = lost.guiro
-    local button = lost.guiro.controls.Button()
-    button.id = "sliderButton"
-    button.bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
-    button.fadeStates = true
+    local button = lost.guiro.controls.Button {
+      id = "sliderButton",
+      bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
+    }
     self:setButton(button)
   else
     self:setButton(properties.button)
