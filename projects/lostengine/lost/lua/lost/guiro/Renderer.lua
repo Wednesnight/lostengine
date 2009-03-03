@@ -160,25 +160,25 @@ function Renderer:renderBackgroundImagePreserveCorners(canvas, view, style)
   --[[
       set vertices
     ]]
-  self.backgroundMesh:setVertex(0, lost.math.Vec2(topLeft.x, topLeft.y + topLeft.height))
-  self.backgroundMesh:setVertex(1, lost.math.Vec2(topLeft.x + topLeft.width, topLeft.y + topLeft.height))
-  self.backgroundMesh:setVertex(2, lost.math.Vec2(topCenter.x + topCenter.width, topCenter.y + topCenter.height))
-  self.backgroundMesh:setVertex(3, lost.math.Vec2(topRight.x + topRight.width, topRight.y + topRight.height))
+  self.backgroundMesh:setVertex(0, lost.math.Vec2(topLeft.x - 0.5, topLeft.y + topLeft.height + 0.5))
+  self.backgroundMesh:setVertex(1, lost.math.Vec2(topLeft.x + topLeft.width + 0.5, topLeft.y + topLeft.height + 0.5))
+  self.backgroundMesh:setVertex(2, lost.math.Vec2(topCenter.x + topCenter.width + 0.5, topCenter.y + topCenter.height + 0.5))
+  self.backgroundMesh:setVertex(3, lost.math.Vec2(topRight.x + topRight.width + 0.5, topRight.y + topRight.height + 0.5))
 
-  self.backgroundMesh:setVertex(4, lost.math.Vec2(topLeft.x, topLeft.y))
-  self.backgroundMesh:setVertex(5, lost.math.Vec2(topCenter.x, topCenter.y))
-  self.backgroundMesh:setVertex(6, lost.math.Vec2(topRight.x, topRight.y))
-  self.backgroundMesh:setVertex(7, lost.math.Vec2(topRight.x + topRight.width, topRight.y))
+  self.backgroundMesh:setVertex(4, lost.math.Vec2(topLeft.x - 0.5, topLeft.y - 0.5))
+  self.backgroundMesh:setVertex(5, lost.math.Vec2(topCenter.x - 0.5, topCenter.y - 0.5))
+  self.backgroundMesh:setVertex(6, lost.math.Vec2(topRight.x - 0.5, topRight.y - 0.5))
+  self.backgroundMesh:setVertex(7, lost.math.Vec2(topRight.x + topRight.width + 0.5, topRight.y - 0.5))
 
-  self.backgroundMesh:setVertex(8, lost.math.Vec2(middleLeft.x, middleLeft.y))
-  self.backgroundMesh:setVertex(9, lost.math.Vec2(middleCenter.x, middleCenter.y))
-  self.backgroundMesh:setVertex(10, lost.math.Vec2(middleRight.x, middleRight.y))
-  self.backgroundMesh:setVertex(11, lost.math.Vec2(middleRight.x + middleRight.width, middleRight.y))
+  self.backgroundMesh:setVertex(8, lost.math.Vec2(middleLeft.x - 0.5, middleLeft.y - 0.5))
+  self.backgroundMesh:setVertex(9, lost.math.Vec2(middleCenter.x - 0.5, middleCenter.y - 0.5))
+  self.backgroundMesh:setVertex(10, lost.math.Vec2(middleRight.x - 0.5, middleRight.y - 0.5))
+  self.backgroundMesh:setVertex(11, lost.math.Vec2(middleRight.x + middleRight.width + 0.5, middleRight.y - 0.5))
 
-  self.backgroundMesh:setVertex(12, lost.math.Vec2(bottomLeft.x, bottomLeft.y))
-  self.backgroundMesh:setVertex(13, lost.math.Vec2(bottomCenter.x, bottomCenter.y))
-  self.backgroundMesh:setVertex(14, lost.math.Vec2(bottomRight.x, bottomRight.y))
-  self.backgroundMesh:setVertex(15, lost.math.Vec2(bottomRight.x + bottomRight.width, bottomRight.y))
+  self.backgroundMesh:setVertex(12, lost.math.Vec2(bottomLeft.x - 0.5, bottomLeft.y - 0.5))
+  self.backgroundMesh:setVertex(13, lost.math.Vec2(bottomCenter.x - 0.5, bottomCenter.y - 0.5))
+  self.backgroundMesh:setVertex(14, lost.math.Vec2(bottomRight.x - 0.5, bottomRight.y - 0.5))
+  self.backgroundMesh:setVertex(15, lost.math.Vec2(bottomRight.x + bottomRight.width + 0.5, bottomRight.y - 0.5))
 
   --[[
       set faces
