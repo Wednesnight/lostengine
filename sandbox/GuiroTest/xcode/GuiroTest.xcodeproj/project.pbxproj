@@ -46,6 +46,9 @@
 		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 		8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine.a */; };
 		8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */; };
+		B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
+		B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
+		B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
 		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
 		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
@@ -122,6 +125,7 @@
 		3ED935C90E4756B700AABFAB /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B41267450F5EF919001CCC23 /* Arial Unicode.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arial Unicode.ttf"; path = "../Arial Unicode.ttf"; sourceTree = SOURCE_ROOT; };
 		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA27DE3A0DD87DA100552F5E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA27DE490DD87EE200552F5E /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -207,6 +211,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B41267450F5EF919001CCC23 /* Arial Unicode.ttf */,
 				EA779A340F4F773500E69486 /* Monaco.ttf */,
 				EACFE1220ED8AD5300F9459E /* Vera.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -385,6 +390,7 @@
 				3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */,
 				3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */,
 				3E2447790F08C7200023E6B8 /* screen-iphone in Resources */,
+				B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +407,7 @@
 				3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */,
 				3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */,
 				3E24477B0F08C7200023E6B8 /* screen-iphone in Resources */,
+				B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +426,7 @@
 				3E24477A0F08C7200023E6B8 /* screen-iphone in Resources */,
 				EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */,
 				EA779A350F4F773500E69486 /* Monaco.ttf in Resources */,
+				B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,11 +63,12 @@ guiro:Screen
       },
 			header =
       {
-        text = "window1 ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
+        text = "window1 <こんにちは世界> ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
         style =
         {
           backgroundColor = lost.common.Color(0,1,0),
           color = lost.common.Color(0,0,0),
+          font = lost.font.TrueTypeFont.create(lost.guiro.config.theme.freetypeLibrary, lost.guiro.config.theme.loader:load("Arial Unicode.ttf")),
           corners =
           {
             size = lost.math.Vec2(10, 10)
