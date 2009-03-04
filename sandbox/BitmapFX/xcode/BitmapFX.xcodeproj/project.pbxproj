@@ -15,6 +15,7 @@
 		8DC4D3850F5F061B000818BF /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DC4D37F0F5F061B000818BF /* macosx.xcconfig */; };
 		8DC4D3860F5F061B000818BF /* simulator.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DC4D3800F5F061B000818BF /* simulator.xcconfig */; };
 		8DFDE4100F56A261005D3927 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DFDE40F0F56A261005D3927 /* Cocoa.framework */; };
+		B41267B30F5F0A97001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267B20F5F0A97001CCC23 /* Arial Unicode.ttf */; };
 		EA2ECA300EB922A90062B593 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2ECA2F0EB922A90062B593 /* Application.lua */; };
 		EA57CA800EBD3AF6000E3D01 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */; };
 		EA9136A60E995BDD006884D7 /* kitten+tits.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EA9136A50E995BDD006884D7 /* kitten+tits.jpg */; };
@@ -68,6 +69,7 @@
 		8DC4D37F0F5F061B000818BF /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = macosx.xcconfig; sourceTree = "<group>"; };
 		8DC4D3800F5F061B000818BF /* simulator.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = simulator.xcconfig; sourceTree = "<group>"; };
 		8DFDE40F0F56A261005D3927 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		B41267B20F5F0A97001CCC23 /* Arial Unicode.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arial Unicode.ttf"; path = "../../GuiroTest/Arial Unicode.ttf"; sourceTree = SOURCE_ROOT; };
 		EA2ECA2F0EB922A90062B593 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/lua/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		EA57CA7F0EBD3AF6000E3D01 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EA9136A50E995BDD006884D7 /* kitten+tits.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "kitten+tits.jpg"; path = "../kitten+tits.jpg"; sourceTree = SOURCE_ROOT; };
@@ -117,6 +119,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B41267B20F5F0A97001CCC23 /* Arial Unicode.ttf */,
 				EAC026640E96AF8C00067FC5 /* init */,
 				EA2ECA2F0EB922A90062B593 /* Application.lua */,
 				3E0312000ED5ADD9003A5853 /* suigeneris.ttf */,
@@ -258,6 +261,7 @@
 				8DC4D3840F5F061B000818BF /* iphone.xcconfig in Resources */,
 				8DC4D3850F5F061B000818BF /* macosx.xcconfig in Resources */,
 				8DC4D3860F5F061B000818BF /* simulator.xcconfig in Resources */,
+				B41267B30F5F0A97001CCC23 /* Arial Unicode.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

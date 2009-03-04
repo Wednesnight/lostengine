@@ -40,12 +40,12 @@ Controller::Controller()
                               VertexArray::create(true), TextureArray::create(true));
   
   shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = app->loader->load("Vera.ttf");//"suigeneris.ttf");
+  shared_ptr<File> file = app->loader->load("Arial Unicode.ttf");//"suigeneris.ttf");
   shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
-  ttf->atlasSize = Vec2(128,128);
+  ttf->atlasSize = Vec2(512,512);
   fontSize = 22;//appInstance->config["fontSize"].as<uint32_t>();
-  string text ="Hoschi!gnj   VAfiglrby";
+  string text ="guiroは驚くばかりである!";
   renderedText1 = ttf->render(text, 16);
   DOUT("16pt string size: "<<renderedText1->size);
   renderedText2 = ttf->render(text, 24);
