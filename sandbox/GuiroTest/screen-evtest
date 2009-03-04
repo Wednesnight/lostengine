@@ -204,7 +204,10 @@ guiro:Screen
         {
           id = "centeredImage",
           bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
-          bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
+          style =
+          {
+            backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
+          }
         }
       }
     }
