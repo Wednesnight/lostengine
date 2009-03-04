@@ -13,6 +13,8 @@ shared_ptr<TrueTypeFont> create(shared_ptr<freetype::Library> lib, shared_ptr<lo
   return shared_ptr<TrueTypeFont>(new TrueTypeFont(lib, file));
 }
 
+typedef boost::shared_ptr<Model> (TrueTypeFont::*render_func_t)(const std::string &, boost::uint32_t);
+
 namespace lost
 {
   namespace lua
@@ -25,7 +27,7 @@ namespace lost
         [
           class_<TrueTypeFont, shared_ptr<TrueTypeFont> >("TrueTypeFont")
             .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
-            .def("render", &TrueTypeFont::render)
+            .def("render", static_cast<render_func_t>(&TrueTypeFont::render))
             .scope
             [
               def("create", create)

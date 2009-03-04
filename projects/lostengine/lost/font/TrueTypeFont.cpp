@@ -11,6 +11,8 @@ using namespace lost::bitmap;
 using namespace lost::font::freetype;
 using namespace lost::math;
 
+namespace ftxt = fhtagn::text;
+
 namespace lost
 {
 namespace font
@@ -41,7 +43,7 @@ TrueTypeFont::~TrueTypeFont()
 }
 
 boost::shared_ptr<bitmap::Bitmap>
-TrueTypeFont::renderGlyphToBitmap(char c,
+TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
                                   uint32_t inSizeInPoints)
 {
   FT_Error error = FT_Set_Char_Size(face->face(), 0, inSizeInPoints*64, 72, 72);
@@ -65,7 +67,7 @@ TrueTypeFont::renderGlyphToBitmap(char c,
   return result;
 }
   
-bool TrueTypeFont::renderGlyph(char c,
+bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
                                uint32_t inSizeInPoints)
 {
     bool result = false;
@@ -209,7 +211,7 @@ void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
   model->texcoords[coordOffset+7] = glyph->tl.y;  
 }
 
-uint32_t TrueTypeFont::countAndFlagDrawableChars(const std::string& inText,
+uint32_t TrueTypeFont::countAndFlagDrawableChars(const ftxt::utf32_string& inText,
                                             uint32_t inSizeInPoints)
 {
   uint32_t result = 0;
@@ -232,11 +234,28 @@ uint32_t TrueTypeFont::countAndFlagDrawableChars(const std::string& inText,
   return result;
 }
 
+
+boost::shared_ptr<Model> TrueTypeFont::render(const std::string & inText,
+                                boost::uint32_t inSizeInPoints)
+{
+  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+
+  // Assume std::string is always utf8 encoded.
+  ftxt::utf32_string target;
+
+  ftxt::utf8_decoder decoder;
+  ftxt::decode(decoder, inText.begin(), inText.end(),
+         std::back_insert_iterator<ftxt::utf32_string>(target));
+
+  return render(target, inSizeInPoints);
+}
   
-shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
+
+  
+shared_ptr<Model> TrueTypeFont::render(const ftxt::utf32_string& inText,
                                        uint32_t inSizeInPoints)
 {
-  DOUT("rendering "<<inText<<" with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   shared_ptr<Model>  result(new Model);
   
   // render glyphs if required
@@ -269,7 +288,7 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
                        // so we need a separate index for the actual insertion of a character into the mesh
   for(unsigned int i=0; i<numChars; ++i)
   {
-    char c = inText[i];
+    ftxt::utf32_char_t c = inText[i];
     
     if(hasKerning)
     {
@@ -281,7 +300,9 @@ shared_ptr<Model> TrueTypeFont::render(const std::string& inText,
     }
     
     shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
-    if(glyph && glyph->drawable)
+    if (!glyph) continue;
+
+    if (glyph->drawable)
     {
       addGlyph(result, addIndex, glyph, xoffset, pmin, pmax);
       addIndex++;
