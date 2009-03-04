@@ -461,6 +461,24 @@
 		8DFDE6780F56D560005D3927 /* LostGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE6770F56D560005D3927 /* LostGLCanvas.cpp */; };
 		8DFDE6790F56D560005D3927 /* LostGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE6770F56D560005D3927 /* LostGLCanvas.cpp */; };
 		8DFDE67A0F56D560005D3927 /* LostGLCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE6770F56D560005D3927 /* LostGLCanvas.cpp */; };
+		B41266B50F5EE7CD001CCC23 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B412668E0F5EE7CC001CCC23 /* decoders.cpp */; };
+		B41266B80F5EE7CD001CCC23 /* encoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266930F5EE7CC001CCC23 /* encoders.cpp */; };
+		B41266BA0F5EE7CD001CCC23 /* transcoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266960F5EE7CC001CCC23 /* transcoding.cpp */; };
+		B41266C10F5EE7CD001CCC23 /* tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A00F5EE7CC001CCC23 /* tasklet.cpp */; };
+		B41266C50F5EE7CD001CCC23 /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A60F5EE7CC001CCC23 /* variant.cpp */; };
+		B41266C70F5EE7CD001CCC23 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A80F5EE7CC001CCC23 /* version.cpp */; };
+		B41266D40F5EE7CD001CCC23 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B412668E0F5EE7CC001CCC23 /* decoders.cpp */; };
+		B41266D70F5EE7CD001CCC23 /* encoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266930F5EE7CC001CCC23 /* encoders.cpp */; };
+		B41266D90F5EE7CD001CCC23 /* transcoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266960F5EE7CC001CCC23 /* transcoding.cpp */; };
+		B41266E00F5EE7CD001CCC23 /* tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A00F5EE7CC001CCC23 /* tasklet.cpp */; };
+		B41266E40F5EE7CD001CCC23 /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A60F5EE7CC001CCC23 /* variant.cpp */; };
+		B41266E60F5EE7CD001CCC23 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A80F5EE7CC001CCC23 /* version.cpp */; };
+		B41266F30F5EE7CD001CCC23 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B412668E0F5EE7CC001CCC23 /* decoders.cpp */; };
+		B41266F60F5EE7CD001CCC23 /* encoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266930F5EE7CC001CCC23 /* encoders.cpp */; };
+		B41266F80F5EE7CD001CCC23 /* transcoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266960F5EE7CC001CCC23 /* transcoding.cpp */; };
+		B41266FF0F5EE7CD001CCC23 /* tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A00F5EE7CC001CCC23 /* tasklet.cpp */; };
+		B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A60F5EE7CC001CCC23 /* variant.cpp */; };
+		B41267050F5EE7CD001CCC23 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A80F5EE7CC001CCC23 /* version.cpp */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
@@ -816,6 +834,12 @@
 		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
 		8DFDE6140F56D477005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = mac/Context.mm; sourceTree = "<group>"; };
 		8DFDE6770F56D560005D3927 /* LostGLCanvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLCanvas.cpp; path = bindings/LostGLCanvas.cpp; sourceTree = "<group>"; };
+		B412668E0F5EE7CC001CCC23 /* decoders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = decoders.cpp; sourceTree = "<group>"; };
+		B41266930F5EE7CC001CCC23 /* encoders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = encoders.cpp; sourceTree = "<group>"; };
+		B41266960F5EE7CC001CCC23 /* transcoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transcoding.cpp; sourceTree = "<group>"; };
+		B41266A00F5EE7CC001CCC23 /* tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tasklet.cpp; sourceTree = "<group>"; };
+		B41266A60F5EE7CC001CCC23 /* variant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = variant.cpp; path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/variant.cpp; sourceTree = SOURCE_ROOT; };
+		B41266A80F5EE7CC001CCC23 /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = version.cpp; path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/version.cpp; sourceTree = SOURCE_ROOT; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
@@ -932,6 +956,7 @@
 		08FB7795FE84155DC02AAC07 /* thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				B41266770F5EE69B001CCC23 /* fhtagn */,
 				3EE056120E6552D000E044A2 /* hashlib++ */,
 				EA3B96FA0E047B7400B6423B /* boost */,
 				EA3B94510E0462F400B6423B /* zlib */,
@@ -1086,6 +1111,80 @@
 			);
 			name = mac;
 			sourceTree = "<group>";
+		};
+		B41266770F5EE69B001CCC23 /* fhtagn */ = {
+			isa = PBXGroup;
+			children = (
+				B412667E0F5EE7CC001CCC23 /* detail */,
+				B41266860F5EE7CC001CCC23 /* restrictions */,
+				B412668D0F5EE7CC001CCC23 /* text */,
+				B41266990F5EE7CC001CCC23 /* threads */,
+				B41266A20F5EE7CC001CCC23 /* util */,
+				B41266A60F5EE7CC001CCC23 /* variant.cpp */,
+				B41266A80F5EE7CC001CCC23 /* version.cpp */,
+			);
+			name = fhtagn;
+			sourceTree = "<group>";
+		};
+		B412667E0F5EE7CC001CCC23 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = detail;
+			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/detail;
+			sourceTree = SOURCE_ROOT;
+		};
+		B41266860F5EE7CC001CCC23 /* restrictions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = restrictions;
+			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/restrictions;
+			sourceTree = SOURCE_ROOT;
+		};
+		B412668D0F5EE7CC001CCC23 /* text */ = {
+			isa = PBXGroup;
+			children = (
+				B412668E0F5EE7CC001CCC23 /* decoders.cpp */,
+				B41266900F5EE7CC001CCC23 /* detail */,
+				B41266930F5EE7CC001CCC23 /* encoders.cpp */,
+				B41266960F5EE7CC001CCC23 /* transcoding.cpp */,
+			);
+			name = text;
+			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/text;
+			sourceTree = SOURCE_ROOT;
+		};
+		B41266900F5EE7CC001CCC23 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		B41266990F5EE7CC001CCC23 /* threads */ = {
+			isa = PBXGroup;
+			children = (
+				B412669A0F5EE7CC001CCC23 /* detail */,
+				B41266A00F5EE7CC001CCC23 /* tasklet.cpp */,
+			);
+			name = threads;
+			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/threads;
+			sourceTree = SOURCE_ROOT;
+		};
+		B412669A0F5EE7CC001CCC23 /* detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = detail;
+			sourceTree = "<group>";
+		};
+		B41266A20F5EE7CC001CCC23 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = util;
+			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/util;
+			sourceTree = SOURCE_ROOT;
 		};
 		EA15B48A0EE31E9F00672EF4 /* audio */ = {
 			isa = PBXGroup;
@@ -1775,6 +1874,12 @@
 				8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */,
 				8DFDE5AE0F56D45E005D3927 /* GLContext.mm in Sources */,
 				8DFDE67A0F56D560005D3927 /* LostGLCanvas.cpp in Sources */,
+				B41266F30F5EE7CD001CCC23 /* decoders.cpp in Sources */,
+				B41266F60F5EE7CD001CCC23 /* encoders.cpp in Sources */,
+				B41266F80F5EE7CD001CCC23 /* transcoding.cpp in Sources */,
+				B41266FF0F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
+				B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */,
+				B41267050F5EE7CD001CCC23 /* version.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1993,6 +2098,12 @@
 				8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */,
 				8DFDE6150F56D477005D3927 /* Context.mm in Sources */,
 				8DFDE6780F56D560005D3927 /* LostGLCanvas.cpp in Sources */,
+				B41266B50F5EE7CD001CCC23 /* decoders.cpp in Sources */,
+				B41266B80F5EE7CD001CCC23 /* encoders.cpp in Sources */,
+				B41266BA0F5EE7CD001CCC23 /* transcoding.cpp in Sources */,
+				B41266C10F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
+				B41266C50F5EE7CD001CCC23 /* variant.cpp in Sources */,
+				B41266C70F5EE7CD001CCC23 /* version.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2211,6 +2322,12 @@
 				8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */,
 				8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */,
 				8DFDE6790F56D560005D3927 /* LostGLCanvas.cpp in Sources */,
+				B41266D40F5EE7CD001CCC23 /* decoders.cpp in Sources */,
+				B41266D70F5EE7CD001CCC23 /* encoders.cpp in Sources */,
+				B41266D90F5EE7CD001CCC23 /* transcoding.cpp in Sources */,
+				B41266E00F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
+				B41266E40F5EE7CD001CCC23 /* variant.cpp in Sources */,
+				B41266E60F5EE7CD001CCC23 /* version.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
