@@ -10,12 +10,22 @@ ARCHS = $(ARCHS_STANDARD_32_BIT)
 ONLY_ACTIVE_ARCH = NO
 VALID_ARCHS = i386 armv6
 
+// thirdparty defines
+THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"
+BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_36_0"
+FHTAGN_ROOT = "$(THIRDPARTY_ROOT)/fhtagn/fhtagn_2008_11_12"
+FREETYPE_ROOT = "$(THIRDPARTY_ROOT)/freetype2/freetype_2_3_7"
+GLEE_ROOT = "$(THIRDPARTY_ROOT)/glee/glee_5_21"
+HASHLIB_ROOT = "$(THIRDPARTY_ROOT)/hashlib++/hashlib++_0_3_1"
+LUA_ROOT = "$(THIRDPARTY_ROOT)/lua/lua_5_1_4"
+LUABIND_ROOT = "$(THIRDPARTY_ROOT)/luabind/luabind_0_8"
+STBIMAGE_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_image_1_14"
+STBVORBIS_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_vorbis_0_99996"
+ZLIB_ROOT = "$(THIRDPARTY_ROOT)/zlib/zlib_1_2_3"
+
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
-FHTAGN_ROOT = "$(LOSTENGINE_ROOT)/thirdparty/fhtagn/fhtagn_2008_11_12"
-HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/thirdparty/boost/boost_1_36_0/include" "$(LOSTENGINE_ROOT)/thirdparty/freetype2/freetype_2_3_7/include" "$(LOSTENGINE_ROOT)/thirdparty/glee/glee_5_21/include" "$(LOSTENGINE_ROOT)/thirdparty/lua/lua_5_1_4/include" "$(LOSTENGINE_ROOT)/thirdparty/luabind/luabind_0_8/include" "$(LOSTENGINE_ROOT)/thirdparty/stb/stb_image_1_14" "$(LOSTENGINE_ROOT)/thirdparty/stb/stb_vorbis_0_99996" "$(LOSTENGINE_ROOT)/thirdparty/zlib/zlib_1_2_3/include" "$(LOSTENGINE_ROOT)/thirdparty/hashlib++/hashlib++_0_3_1" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
-LIBRARY_SEARCH_PATHS = $(inherited) "$(LOSTENGINE_ROOT)/thirdparty/freetype2/freetype_2_3_5/lib/mac" "$(LOSTENGINE_ROOT)/thirdparty/zlib/zlib_1_2_3/mac" "$(LOSTENGINE_ROOT)/thirdparty/boost/boost_1_34_1/lib/mac"
-USER_HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine"
+HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include" "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
 
 // Compiler Version
 GCC_VERSION = 
