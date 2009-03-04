@@ -35,23 +35,23 @@ Slider.Orientation =
 --[[
     constructor
   ]]
-function Slider:__init(properties) lost.guiro.View.__init(self, properties)
+function Slider:__init(properties)
   properties = properties or {}
 
-  self.orientation = properties.orientation or Slider.Orientation.horizontal
-  self.min         = properties.min or 0
-  self.max         = properties.max or 100
-  self.steps       = properties.steps or 0
+  -- initialize defaults
+  properties.orientation = properties.orientation or Slider.Orientation.horizontal
+  properties.min         = properties.min or 0
+  properties.max         = properties.max or 100
+  properties.steps       = properties.steps or 0
+
+  properties.borderColor = properties.borderColor or lost.common.Color(0,0,0,1)
 
   if not properties.button then
     local g = lost.guiro
-    local button = lost.guiro.controls.Button {
+    properties.button = lost.guiro.controls.Button {
       id = "sliderButton",
       bounds = g.Bounds(g.xabs(1), g.yabs(1), g.wabs(24), g.habs(24))
     }
-    self:setButton(button)
-  else
-    self:setButton(properties.button)
   end
 
   self.mouseMoved = function(event)
@@ -60,9 +60,27 @@ function Slider:__init(properties) lost.guiro.View.__init(self, properties)
     end
   end
 
-  if properties.value then
-    self:value(properties.value, true)
-  end  
+  lost.guiro.View.__init(self, properties)
+end
+
+function Slider:set(properties)
+  lost.guiro.View.set(self,properties)
+
+  -- the value() setter needs a valid button, so we overwrite set() and modify the value after we've merged the properties
+  properties.value = properties.value or self:value()
+  self:value(properties.value, true)
+end
+
+function Slider:setProperty(key, value)
+  if key == "button" then
+    self:setButton(value)
+    return true
+
+  -- the value() setter needs a valid button, so we overwrite set() and modify the value after we've merged the properties
+  elseif key == "value" then
+    return true
+  end
+  return false
 end
 
 function Slider:setButton(newButton)
@@ -140,4 +158,18 @@ function Slider:value(value, silent)
 
   buttonRect = self.button:localRect()
   return (buttonRect[coord] / ((localRect[size] - buttonRect[size]) / math.abs(self.max - self.min))) + self.min
+end
+
+function Slider:redraw(canvas)
+  lost.guiro.View.redraw(self, canvas)
+  
+  local globalRect = self:globalRect()
+  canvas:setColor(self.borderColor)
+  if (self.orientation == lost.guiro.controls.Slider.Orientation.horizontal) then
+    canvas:drawLine(lost.math.Vec2(globalRect.x, globalRect:maxY() - globalRect.height / 2 - 0.5),
+                     lost.math.Vec2(globalRect:maxX(), globalRect:maxY() - globalRect.height / 2 - 0.5))
+  elseif (self.orientation == lost.guiro.controls.Slider.Orientation.vertical) then
+    canvas:drawLine(lost.math.Vec2(globalRect:maxX() - globalRect.width / 2 + 0.5, globalRect.y),
+                     lost.math.Vec2(globalRect:maxX() - globalRect.width / 2 + 0.5, globalRect:maxY()))
+  end
 end
