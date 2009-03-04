@@ -46,12 +46,31 @@
 #include "lost/lua/bindings/LostGLCanvas.h"
 #include "lost/lua/bindings/LostApplicationInputEvent.h"
 
+
+void openBaseLib(lua_State* state) { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
+void openDebugLib(lua_State* state) { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
+void openIoLib(lua_State* state) { lua_pushcfunction(state, luaopen_io);lua_pushstring(state, "io");lua_call(state, 1, 0);}
+void openMathLib(lua_State* state) { lua_pushcfunction(state, luaopen_math);lua_pushstring(state, "math");lua_call(state, 1, 0); }
+void openPackageLib(lua_State* state) { lua_pushcfunction(state, luaopen_package);lua_pushstring(state, "package");lua_call(state, 1, 0); }
+void openStringLib(lua_State* state) { lua_pushcfunction(state, luaopen_string);lua_pushstring(state, "string");lua_call(state, 1, 0); }
+void openTableLib(lua_State* state) { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
+void openOsLib(lua_State* state) { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
+
 namespace lost
 {
   namespace lua
   {
     void bindAll(lua_State* state)
     {
+      openBaseLib(state);
+      openDebugLib(state);
+      openIoLib(state);
+      openMathLib(state);
+      openPackageLib(state);
+      openStringLib(state);
+      openTableLib(state);
+      openOsLib(state);		
+		
       LostCommonDisplayAttributes(state);
       LostBitmapBitmap(state);
       LostCommonLog(state);

@@ -65,7 +65,7 @@ namespace lost
     {
       RunLoopThread::initialize(inApplication);
 
-      interpreter.reset(new lua::State(true, true, true, inApplication->loader));  // init lua state with resource loader
+      interpreter.reset(new lua::State(inApplication->loader));  // init lua state with resource loader
       lost::lua::bindAll(*interpreter);                                            // bind lostengine lua mappings    
       
       /**

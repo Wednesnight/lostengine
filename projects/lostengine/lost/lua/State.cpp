@@ -17,21 +17,11 @@ namespace lost
   namespace lua
   {
     
-    State::State(bool callLuabindOpen,
-                 bool doOpenLibs,
-                 bool doInitPackagePath,
-                 boost::shared_ptr<resource::Loader> inLoader)
+    State::State(boost::shared_ptr<resource::Loader> inLoader)
     : callstackSize(10), loader(inLoader)
     {
       state = luaL_newstate();
-      if(callLuabindOpen) luabind::open(state);
-      if(doOpenLibs) openLibs();
-      if(doInitPackagePath)
-      {
-        openPackageLib(); // we need to make sure the package library is loaded otherwise we'll crash
-        initPackagePath();
-      }
-      
+      luabind::open(state);      
       // set our own error callback
       luabind::set_pcall_callback(lost::lua::errorHandler);
     }
@@ -93,14 +83,6 @@ namespace lost
       EOUT(error);
 
       return 1;
-    }
-    
-    // replaces package load path with path to resource dir
-    void State::initPackagePath()
-    {
-      std::string basePath=lost::platform::getResourcePath()+"/";
-      std::string packageSearchPattern = basePath+"?;"+basePath+"?.lua";
-      luabind::globals(state)["package"]["path"] = packageSearchPattern;
     }
 
     std::string State::pathFromNamespace(const std::string& inNamespace)
