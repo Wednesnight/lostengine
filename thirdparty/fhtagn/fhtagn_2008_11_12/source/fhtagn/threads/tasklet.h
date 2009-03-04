@@ -45,6 +45,7 @@
 
 #include <boost/signal.hpp>
 #include <boost/thread.hpp>
+#include <boost/thread/condition.hpp>
 #include <boost/noncopyable.hpp>
 
 namespace fhtagn {
