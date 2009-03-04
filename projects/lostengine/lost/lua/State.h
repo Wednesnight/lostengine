@@ -15,10 +15,7 @@ namespace lost
 
     struct State
     {
-      State(bool callLuabindOpen = true,
-            bool doOpenLibs = true,
-            bool doInitPackagePath = true,
-            boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
+      State(boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
       ~State();
 
       std::string getScriptFilename(const std::string& scriptContent, const std::string& defaultName);
@@ -28,8 +25,6 @@ namespace lost
       // cast operator to original lua_State* value
       operator lua_State*() { return state; }
 
-      // replaces package load path with path to resource dir
-      void initPackagePath();
       // adds all standard libs to the state of the interpreter
       void openLibs()  { luaL_openlibs(state);  }
       // or fine grained functions if you only want to add single libs
