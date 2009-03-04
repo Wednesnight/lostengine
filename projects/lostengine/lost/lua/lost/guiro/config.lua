@@ -1,8 +1,12 @@
 module("lost.guiro", package.seeall)
 
-require("lost.guiro.themes.default.theme")
+config = {}
 
-config =
-{
-  theme = lost.guiro.themes.default
-}
+-- loader
+config.loader = environment.application.loader
+
+-- font lib
+config.freetypeLibrary = lost.font.freetype.Library.create()
+
+-- default font
+config.defaultFont = lost.font.TrueTypeFont.create(config.freetypeLibrary, config.loader:load("Vera.ttf"))

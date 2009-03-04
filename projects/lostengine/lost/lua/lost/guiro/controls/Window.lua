@@ -8,8 +8,12 @@ require("lost.guiro.Bounds")
   ]]
 Window = lost.common.Class("lost.guiro.controls.Window", lost.guiro.View)
 
-function Window:__init(properties) lost.guiro.View.__init(self, properties)
+function Window:__init(properties)
   properties = properties or {}
+
+  -- initialize defaults
+  properties.backgroundColor = properties.backgroundColor or lost.common.Color(0.2,0.2,0.2)
+  properties.borderColor = properties.borderColor or lost.common.Color(0.5,0.5,0.5)
 
   -- namespace alias
   local g = lost.guiro
@@ -17,19 +21,55 @@ function Window:__init(properties) lost.guiro.View.__init(self, properties)
   -- set header
   properties.header = properties.header or {}
   properties.header.bounds = properties.header.bounds or g.Bounds(g.xleft(), g.ytop(), g.wrel(1.0), g.habs(25))
-  self.header = g.controls.Label(properties.header)
-  self:appendChild(self.header)
 
-  -- set header drag listeners
-  self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, function(event) self:updateDragging(event, true) end)
-  self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, function(event) self:updateDragging(event, false) end)
-  self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE, function(event) self:updateDragging(event, false) end)
+  self.windowMouseDown = function(event) self:updateDragging(event, true) end
+  self.windowMouseUp = function(event) self:updateDragging(event, false) end
+  self.windowMouseUpOutside = function(event) self:updateDragging(event, false) end
 
-  -- set content view
-  properties.content = properties.content or {}
-  properties.content.bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0, -self.header:globalRect().height))
-  self.content = g.View(properties.content)
-  self:appendChild(self.content)
+  lost.guiro.View.__init(self, properties)
+end
+
+function Window:setProperty(key, value)
+  -- namespace alias
+  local g = lost.guiro
+
+  if key == "header" then
+    if self.header then
+      self.header:removeEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, self.windowMouseDown)
+      self.header:removeEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, self.windowMouseUp)
+      self.header:removeEventListener(lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE, self.windowMouseUpOutside)
+      self:removeChild(self.header)
+    end
+    self.header = g.controls.Label(value)
+    self:appendChild(self.header)
+
+    -- set header drag listeners
+    self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, self.windowMouseDown)
+    self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, self.windowMouseUp)
+    self.header:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE, self.windowMouseUpOutside)
+
+    -- update content bounds
+    if self.content then
+      self.content.bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0, -self.header:globalRect().height))
+    end
+
+    return true
+  
+  elseif key == "content" then
+    if self.content then
+      self:removeChild(self.content)
+    end
+    self.content = g.View(value)
+    self:appendChild(self.content)
+
+    -- update content bounds
+    if self.header then
+      self.content.bounds = g.Bounds(g.xleft(), g.ybottom(), g.wrel(1.0), g.hrel(1.0, -self.header:globalRect().height))
+    end
+
+    return true
+  end
+  return false
 end
 
 function Window:updateDragging(event, dragging)
