@@ -11,14 +11,15 @@ MouseEvent.MOUSE_DOWN = "mouseDown"
 MouseEvent.MOUSE_ENTER = "mouseEnter"
 MouseEvent.MOUSE_LEAVE = "mouseLeave"
 
-
-typeConvert = {}
+local typeConvert = {}
 typeConvert[lost.application.MouseEvent.MOUSE_MOVE] = MouseEvent.MOUSE_MOVE
 typeConvert[lost.application.MouseEvent.MOUSE_UP] = MouseEvent.MOUSE_UP
 typeConvert[lost.application.MouseEvent.MOUSE_DOWN] = MouseEvent.MOUSE_DOWN
 
 -- initialise it with an uncast lost.application.MouseEvent
-function MouseEvent:__init(laMouseEvent) lost.guiro.event.Event.__init(self)
+function MouseEvent:__init(laMouseEvent)
+  lost.guiro.event.Event.__init(self)
+
   self.bubbles = true
   self.lostAppMouseEvent = lost.application.MouseEvent.cast(laMouseEvent)
   self.pos = self.lostAppMouseEvent.pos

@@ -53,6 +53,12 @@ guiro:Screen
 			end,
 			focusLost = function(event)
 				log.debug("--- focus lost view: "..event.target.id)
+			end,
+			keyDown = function(event)
+				log.debug("--- key down view: ".. event.target.id .." (".. event.character ..")")
+			end,
+			keyUp = function(event)
+				log.debug("--- key up view: ".. event.target.id .." (".. event.character ..")")
 			end
 		},
 

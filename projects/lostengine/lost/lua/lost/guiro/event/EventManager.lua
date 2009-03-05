@@ -2,6 +2,7 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
+require("lost.guiro.event.KeyEvent")
 
 class "lost.guiro.event.EventManager"
 EventManager = _G["lost.guiro.event.EventManager"]
@@ -18,11 +19,14 @@ end
 -- 
 --
 --
-function EventManager:__init()
+function EventManager:__init(rootView)
   log.debug("EventManager:__init")
+  self.rootView = rootView
   self.previousMouseMoveStack = {}
   self.previousMouseClickStack = {}
-  self.previousFocusStack = {}
+  self.previousFocusStack = { self.rootView }
+  self.focusChanged = false
+  self.currentFocusedView = self.rootView
 end
 
 
@@ -196,12 +200,15 @@ function EventManager:propagateFocusEvents(viewStack, event)
       oldView = self.previousFocusStack[i]
       newView = viewStack[i]
       if oldView ~= newView then
+        self.focusChanged = true
         if oldView and oldView.focusable then
+          oldView.focused = false
           focusEvent.target = oldView
           focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
           self:propagateEvent(self.previousFocusStack, focusEvent, i)
         end
         if newView and newView.focusable then
+          newView.focused = true
           focusEvent.target = newView
           focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_RECEIVED
           self:propagateEvent(viewStack, focusEvent, i)
@@ -216,11 +223,11 @@ end
 
 -- propagates an event down the tree of views starting from (and including) the given rootView
 -- expects the incoming event type to be lost.application.MouseEvent 
--- wraps it to lst.guiro.MouseEvent
+-- wraps it to lost.guiro.event.MouseEvent
 function EventManager:propagateMouseEvent(rootView, event)
 --  log.debug("propagateEvent: " .. event.type)
   local mouseevent = lost.guiro.event.MouseEvent(event) 
-  viewStack = self:findViewStack(rootView, mouseevent)
+  local viewStack = self:findViewStack(rootView, mouseevent)
 
 --  mouseevent.currentTarget = nil -- will be set to the receiving view upon dispatch
   mouseevent.target = viewStack[#viewStack] -- the lowermost view is the target of the click 
@@ -238,4 +245,32 @@ function EventManager:propagateMouseEvent(rootView, event)
   end  
   
   return viewStack
+end
+
+
+-- propagates a key event down the tree of views to the currently focused view
+-- expects the incoming event type to be lost.application.KeyEvent
+-- wraps it to lost.guiro.event.KeyEvent
+function EventManager:propagateKeyEvent(event)
+--  log.debug("propagateEvent: " .. event.type)
+  local keyevent = lost.guiro.event.KeyEvent(event) 
+
+--  keyevent.currentTarget = nil -- will be set to the receiving view upon dispatch
+  keyevent.target = self:focusedView() -- the currently focused view is the target of the click
+  self:propagateEvent(self.previousFocusStack, keyevent, #self.previousFocusStack)
+end
+
+function EventManager:focusedView()
+  if self.focusChanged then
+    local idx = #self.previousFocusStack
+    while idx > 0 do
+      if self.previousFocusStack[idx].focusable then
+        self.currentFocusedView = self.previousFocusStack[idx]
+        break
+      end
+      idx = idx - 1
+    end
+    self.focusChanged = false
+  end
+  return self.currentFocusedView
 end
