@@ -47,6 +47,12 @@ guiro:Screen
 			end,
 			mouseUpOutside = function(event)
 				log.debug("--- mouse upoutside view: "..event.target.id)
+			end,
+			focusReceived = function(event)
+				log.debug("--- focus received view: "..event.target.id)
+			end,
+			focusLost = function(event)
+				log.debug("--- focus lost view: "..event.target.id)
 			end
 		},
 

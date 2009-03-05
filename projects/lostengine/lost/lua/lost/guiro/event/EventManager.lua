@@ -1,6 +1,7 @@
 module("lost.guiro.event", package.seeall)
 
 require("lost.guiro.event.MouseEvent")
+require("lost.guiro.event.FocusEvent")
 
 class "lost.guiro.event.EventManager"
 EventManager = _G["lost.guiro.event.EventManager"]
@@ -21,6 +22,7 @@ function EventManager:__init()
   log.debug("EventManager:__init")
   self.previousMouseMoveStack = {}
   self.previousMouseClickStack = {}
+  self.previousFocusStack = {}
 end
 
 
@@ -135,16 +137,8 @@ function EventManager:propagateEnterLeaveEvents(viewStack, event)
   local newView = nil
   local i = 1
   while i <= maxi do
-    if i <= #self.previousMouseMoveStack then
-      oldView = self.previousMouseMoveStack[i]
-    else
-      oldView = nil
-    end
-    if i <= #viewStack then
-      newView = viewStack[i]
-    else
-      newView = nil
-    end  
+    oldView = self.previousMouseMoveStack[i]
+    newView = viewStack[i]
     if oldView ~= newView then
       if oldView then
         event.target = oldView
@@ -171,16 +165,8 @@ function EventManager:propagateUpDownEvents(viewStack, event)
     local newView = nil
     local i = 1
     while i <= maxi do
-      if i <= #self.previousMouseClickStack then
-        oldView = self.previousMouseClickStack[i]
-      else
-        oldView = nil
-      end
-      if i <= #viewStack then
-        newView = viewStack[i]
-      else
-        newView = nil
-      end  
+      oldView = self.previousMouseClickStack[i]
+      newView = viewStack[i]
       if oldView ~= newView then
         if oldView then
           event.target = oldView
@@ -196,6 +182,34 @@ function EventManager:propagateUpDownEvents(viewStack, event)
       i = i + 1
     end
     self.previousMouseClickStack = {}
+  end
+end
+
+function EventManager:propagateFocusEvents(viewStack, event)
+  if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
+    local focusEvent = lost.guiro.event.FocusEvent()
+    local maxi = math.max(#viewStack, #(self.previousFocusStack))
+    local oldView = nil
+    local newView = nil
+    local i = 1
+    while i <= maxi do
+      oldView = self.previousFocusStack[i]
+      newView = viewStack[i]
+      if oldView ~= newView then
+        if oldView and oldView.focusable then
+          focusEvent.target = oldView
+          focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
+          self:propagateEvent(self.previousFocusStack, focusEvent, i)
+        end
+        if newView and newView.focusable then
+          focusEvent.target = newView
+          focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_RECEIVED
+          self:propagateEvent(viewStack, focusEvent, i)
+        end
+      end
+      i = i + 1
+    end
+    self.previousFocusStack = viewStack
   end
 end
 
@@ -218,6 +232,9 @@ function EventManager:propagateMouseEvent(rootView, event)
 
   if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
     self:propagateUpDownEvents(viewStack, mouseevent)
+    if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
+      self:propagateFocusEvents(viewStack, mouseevent)
+    end  
   end  
   
   return viewStack

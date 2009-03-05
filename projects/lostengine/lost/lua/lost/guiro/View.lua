@@ -37,6 +37,7 @@ function View:__init(properties)
   self.receivesEvents = true
   self.mouseInside = false
 --  self.sendsEvents = true ????
+  self.focusable = false
 
   -- layout state flags
   self.dirtyLayout = true
