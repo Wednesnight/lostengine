@@ -52,6 +52,8 @@ function Button:__init(properties)
 
   properties.label = lost.guiro.controls.Label(properties.label)
 
+  properties.focusable = true
+
   lost.guiro.View.__init(self, properties)
 
   -- initialize state

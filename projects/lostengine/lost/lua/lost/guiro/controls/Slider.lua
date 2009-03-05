@@ -46,6 +46,8 @@ function Slider:__init(properties)
 
   properties.borderColor = properties.borderColor or lost.common.Color(0,0,0,1)
 
+  properties.focusable = true
+
   if not properties.button then
     local g = lost.guiro
     properties.button = lost.guiro.controls.Button {
