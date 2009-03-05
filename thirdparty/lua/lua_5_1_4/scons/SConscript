@@ -1,0 +1,39 @@
+Import('env')
+
+SOURCES = [
+  '../source/src/lapi.c',
+  '../source/src/lauxlib.c',
+  '../source/src/lbaselib.c',
+  '../source/src/lcode.c',
+  '../source/src/ldblib.c',
+  '../source/src/ldebug.c',
+  '../source/src/ldo.c',
+  '../source/src/ldump.c',
+  '../source/src/lfunc.c',
+  '../source/src/lgc.c',
+  '../source/src/linit.c',
+  '../source/src/liolib.c',
+  '../source/src/llex.c',
+  '../source/src/lmathlib.c',
+  '../source/src/lmem.c',
+  '../source/src/loadlib.c',
+  '../source/src/lobject.c',
+  '../source/src/lopcodes.c',
+  '../source/src/loslib.c',
+  '../source/src/lparser.c',
+  '../source/src/lstate.c',
+  '../source/src/lstring.c',
+  '../source/src/lstrlib.c',
+  '../source/src/ltable.c',
+  '../source/src/ltablib.c',
+  '../source/src/ltm.c',
+  '../source/src/lundump.c',
+  '../source/src/lvm.c',
+  '../source/src/lzio.c',
+]
+
+import os
+env.appendPaths(os.getcwd(), include_dir = 'include')
+env.LIB_OBJECTS.extend([StaticObject(s,
+  CPPPATH = env.INCLUDES + ['../source'])
+    for s in SOURCES])

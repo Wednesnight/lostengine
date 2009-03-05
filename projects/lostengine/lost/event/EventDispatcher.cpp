@@ -2,6 +2,7 @@
 #include <boost/shared_ptr.hpp>
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/Logger.h"
+#include "lost/platform/Platform.h"
 
 namespace lost
 {
