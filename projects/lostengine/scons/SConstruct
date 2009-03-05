@@ -12,6 +12,7 @@ class Env(Environment):
     self.INCLUDES = []
     self.LIBPATHS = []
     self.LIBS = []
+    self.LIB_OBJECTS = []
     Environment.__init__(self, *args, **kw)
 
   def sconscript(self, thirdparty, **kw):
@@ -68,7 +69,6 @@ SOURCES = [
   'lua/bindings/LostMathVec4.cpp',
   'lua/bindings/LostEventEventDispatcher.cpp',
   'lua/bindings/LostModelObjRenderer.cpp',
-  'lua/bindings/LostApplicationTimer.cpp',
   'lua/bindings/LostModelObjMaterial.cpp',
   'lua/bindings/LostApplicationApplication.cpp',
   'lua/bindings/LostCommonLog.cpp',
@@ -78,7 +78,6 @@ SOURCES = [
   'lua/bindings/LostMathVec3.cpp',
   'lua/bindings/LostApplicationTouchEvent.cpp',
   'lua/bindings/LostGLGL.cpp',
-  'lua/bindings/LostApplicationTimerEvent.cpp',
   'lua/bindings/LostModelMesh.cpp',
   'lua/bindings/LostGLMesh.cpp',
   'lua/bindings/LostBitmapBitmap.cpp',
@@ -103,11 +102,6 @@ SOURCES = [
   'lua/BindingHelpers.cpp',
   'lua/ModuleLoader.cpp',
 
-  'application/Timer.cpp',
-  'application/glfw/TimerManager.cpp',
-  'application/glfw/Timer.cpp',
-  'application/glfw/Application.cpp',
-  'application/glfw/ApplicationAdapter.cpp',
   'application/Application.cpp',
 
   'obj/Parser.cpp',
@@ -203,7 +197,6 @@ HEADERS = [
   'lua/bindings/LostMathVec3.h',
   'lua/bindings/LostResourceFile.h',
   'lua/bindings/LostApplicationAccelerometerEvent.h',
-  'lua/bindings/LostApplicationTimer.h',
   'lua/bindings/LostFontFreetypeLibrary.h',
   'lua/bindings/LostFontTrueTypeFont.h',
   'lua/bindings/LostEventEvent.h',
@@ -219,7 +212,6 @@ HEADERS = [
   'lua/bindings/LostApplicationResizeEvent.h',
   'lua/bindings/LostGLFrameBuffer.h',
   'lua/bindings/LostFontModel.h',
-  'lua/bindings/LostApplicationTimerEvent.h',
   'lua/bindings/LostModelMesh.h',
   'lua/bindings/LostGLGL.h',
   'lua/bindings/LostEventEventDispatcher.h',
@@ -234,17 +226,13 @@ HEADERS = [
   'application/KeySym.h',
   'application/MouseEvent.h',
   'application/Application.h',
-  'application/Timer.h',
   'application/iphone/LostApplicationHelpers.h',
   'application/iphone/LostAppController.h',
   'application/iphone/LostGlView.h',
   'application/AccelerometerEvent.h',
   'application/ApplicationEvent.h',
   'application/MouseButton.h',
-  'application/TimerEvent.h',
   'application/KeyEvent.h',
-  'application/glfw/TimerManager.h',
-  'application/glfw/ApplicationAdapter.h',
   'application/ResizeEvent.h',
   'application/TouchEvent.h',
   'application/MainLoop.h',
@@ -312,6 +300,14 @@ TEST_SOURCES = [
 
 THIRDPARTY = [
   os.path.join('boost', 'boost_1_36_0'),
+  os.path.join('fhtagn', 'fhtagn_2008_11_12'),
+  os.path.join('hashlib++', 'hashlib++_0_3_1'),
+  os.path.join('zlib', 'zlib_1_2_3'),
+  'stb',
+  os.path.join('glee', 'glee_5_21'),
+  os.path.join('freetype2', 'freetype_2_3_7'),
+  os.path.join('lua', 'lua_5_1_4'),
+  os.path.join('luabind', 'luabind_0_8'),
 ]
 
 
@@ -323,21 +319,13 @@ TEST_SOURCES = [os.path.join(PROJECT_BASE, 'lost', s) for s in TEST_SOURCES]
 INCLUDES = [
   PROJECT_BASE,
   os.path.join(THIRDPARTY_BASE, 'OpenAL', 'OpenAL_1_1', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'stb', 'stb_vorbis_0_99996'),
-  os.path.join(THIRDPARTY_BASE, 'stb', 'stb_image_1_14'),
-  os.path.join(THIRDPARTY_BASE, 'freetype2', 'freetype_2_3_7', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'glee', 'glee_5_21', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'OpenGL', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'glfw', 'glfw_2_6', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'lua', 'lua_5_1_4', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'luabind', 'luabind_0_8', 'include'),
-  os.path.join(THIRDPARTY_BASE, 'hashlib++', 'hashlib++_0_3_1'),
+#  os.path.join(THIRDPARTY_BASE, 'OpenGL', 'include'),
   os.path.join(THIRDPARTY_BASE, 'UnitTest++', 'include'),
 ]
 
 env.sconscript(THIRDPARTY, exports = ['env'])
 
-lostengine = StaticLibrary('lostengine', SOURCES,
+lostengine = StaticLibrary('lostengine', SOURCES + env.LIB_OBJECTS,
     CPPPATH = [PROJECT_BASE] + env.INCLUDES + INCLUDES)
 
 unittestpp = StaticLibrary('unittestpp', [
@@ -359,30 +347,11 @@ unittestpp = StaticLibrary('unittestpp', [
     '../../../thirdparty/UnitTest++/include/MemoryOutStream.cpp',
     '../../../thirdparty/UnitTest++/include/TestDetails.cpp',
     '../../../thirdparty/UnitTest++/include/Checks.cpp',
-
-# dont' need the unit test lib's tests
-#    '../../../thirdparty/UnitTest++/include/tests/TestTimeConstraint.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestMemoryOutStream.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestChecks.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestAssertHandler.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTimeConstraintMacro.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/Main.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTestMacros.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestDeferredTestReporter.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTestSuite.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTestResults.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestXmlTestReporter.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTestRunner.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestCheckMacros.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTest.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestTestList.cpp',
-#    '../../../thirdparty/UnitTest++/include/tests/TestUnitTest++.cpp',
-
-  ])
+])
 
 Program('tests', TEST_SOURCES,
     CPPPATH = [PROJECT_BASE] + env.INCLUDES + INCLUDES,
-    LIBS = [lostengine, unittestpp] + env.LIBS)
+    LIBS = [lostengine, unittestpp])
 
 
 

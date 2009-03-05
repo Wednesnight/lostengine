@@ -1,0 +1,13 @@
+Import('env')
+
+SOURCES = [
+  '../stb_vorbis_0_99996/stb_vorbis.c',
+  '../stb_image_1_14/stb_image.c',
+]
+
+import os
+env.appendPaths(os.getcwd(), include_dir = 'stb_vorbis_0_99996')
+env.appendPaths(os.getcwd(), include_dir = 'stb_image_1_14')
+env.LIB_OBJECTS.extend([StaticObject(s,
+  CPPPATH = env.INCLUDES + ['../stb_vorbis_0_99996', '../stb_image_1_14'])
+    for s in SOURCES])
