@@ -71,6 +71,9 @@ function View:__init(properties)
 
   -- initialize scissor state
   self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(true))
+
+  -- focus handling (set from lost.guiro.event.EventManager)
+  self.focused = false
   
   self:set(properties)
 end

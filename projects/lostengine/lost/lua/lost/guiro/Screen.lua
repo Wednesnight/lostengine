@@ -8,11 +8,16 @@ require("lost.guiro.event.EventManager")
   ]]
 Screen = lost.common.Class("lost.guiro.Screen", lost.guiro.View)
 
-function Screen:__init(properties) lost.guiro.View.__init(self, properties)
+function Screen:__init(properties)
   properties = properties or {}
 
+  -- initialize defaults
+  properties.focusable = true
+
+  lost.guiro.View.__init(self, properties)
+
   log.debug("----------------------------------------------------------")
-  self.eventManager = lost.guiro.event.EventManager()
+  self.eventManager = lost.guiro.event.EventManager(self)
   log.debug("----------------------------------------------------------")
 
 --  self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
@@ -28,6 +33,10 @@ end
 
 function Screen:propagateMouseEvent(event)
   self.eventManager:propagateMouseEvent(self, event)
+end
+
+function Screen:propagateKeyEvent(event)
+  self.eventManager:propagateKeyEvent(event)
 end
 
 --[[
@@ -55,8 +64,8 @@ function Screen:setEventDispatcher(dispatcher)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
---  dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:dispatchEvent(event) end)
---  dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:dispatchEvent(event) end)
+  dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:propagateKeyEvent(event) end)
+  dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
 --  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self:dispatchEvent(event) end)
 --  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:dispatchEvent(event) end)
 --  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:dispatchEvent(event) end)
