@@ -116,7 +116,7 @@ function GuiroTestController:initialize(application)
   log.debug("view hierarchy:")
   self.controls.screen:printChildren()
   
-  self.renderState = lost.gl.State.create(lost.gl.ClearColor.create(lost.common.Color(1,0,0)),
+  self.renderState = lost.gl.State.create(lost.gl.ClearColor.create(lost.common.Color(1,1,0)),
                                           lost.gl.DepthTest.create(false),
                                           lost.gl.Texture2D.create(false),
                                           lost.gl.VertexArray.create(true))
@@ -170,7 +170,7 @@ end
 function GuiroTestController:runLoop(sender, passedSec)
   self.window.context:makeCurrent()
   self.window.context:pushState(self.renderState)
-  self.window.canvas:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+  self.window.canvas:clear(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT)
 
   self.window.canvas.camera:apply()
   gl.glMatrixMode(gl.GL_MODELVIEW)
