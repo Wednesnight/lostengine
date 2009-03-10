@@ -2,6 +2,8 @@ module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
 require("lost.guiro.event.EventManager")
+require("lost.guiro.MouseManager")
+
 
 --[[
      Screen class
@@ -18,11 +20,7 @@ function Screen:__init(properties)
 
   log.debug("----------------------------------------------------------")
   self.eventManager = lost.guiro.event.EventManager(self)
-  log.debug("----------------------------------------------------------")
-
---  self:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
---  self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
---  self:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
+  self.mouseManager = lost.guiro.MouseManager(self)
 
 	self.parent = nil
 end
@@ -58,6 +56,10 @@ function Screen:render(canvas, forceRender)
   for k,ui in next,self.children do
     ui:render(canvas, forceRender)
   end
+  -- always draw mouse on top if a custom one exists
+  if self.mouseManager.currentMouse then
+    self.mouseManager.currentMouse:render(canvas, forceRender)
+  end
 end
 
 function Screen:setEventDispatcher(dispatcher)
@@ -66,10 +68,6 @@ function Screen:setEventDispatcher(dispatcher)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:propagateKeyEvent(event) end)
   dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
---  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self:dispatchEvent(event) end)
---  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:dispatchEvent(event) end)
---  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:dispatchEvent(event) end)
---  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self:dispatchEvent(event) end)
 end
 
 function Screen:screen()
