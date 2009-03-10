@@ -49,6 +49,7 @@ namespace lost
            .def("setRunLoop", &setRunLoop)
            .def("processEvents", &Application::processEvents)
            .def("createWindow", &Application::createWindow)
+           .def("showMouse", &Application::showMouse)
            .def_readonly("loader", &Application::loader)
 //           .def_readonly("displayAttributes", &Application::displayAttributes)
 //           .def_readonly("context", &Application::context)
