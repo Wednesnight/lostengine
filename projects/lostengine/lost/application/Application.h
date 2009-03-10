@@ -56,6 +56,7 @@ namespace lost
       Application();
       Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       Application(const boost::filesystem::path& inScript);
+        
     public:
       /**
        * applications windows are created using a unique id (named windows), this list maps uniqueId -> window
@@ -105,6 +106,9 @@ namespace lost
        */
       // FIXME: make this private (currently needed by Cocoa NSApp delegate)
       void terminate();
+      
+      // call this to show/hide the OS mouse
+      void showMouse(bool visible);      
     };
 
   }
