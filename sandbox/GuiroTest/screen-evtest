@@ -21,6 +21,12 @@ local buttonStyle =
   }
 }
 
+local pmouse = guiro:MouseCursor
+{
+  backgroundImage = lost.bitmap.Bitmap(guiro:File("pimmel.png")),
+  hotspot = lost.math.Vec2(11,44)
+}
+
 -- screen definition
 guiro:Screen
 {
@@ -101,12 +107,21 @@ guiro:Screen
           label =
           {
             bounds = g.Bounds(g.xcenter({abs=2}), g.ycenter({abs=2}), g.wrel(1.0), g.hrel(1.0)),
-            text = "Medium",
+            text = "MOUSE",
             receivesEvents = false					
           },
           released = buttonStyle.released,
           hovered = buttonStyle.hovered,
-          pressed = buttonStyle.pressed
+          pressed = buttonStyle.pressed,
+          listeners =
+          {
+            mouseDown = function(event)
+              log.debug("---------- CLICK")
+              local mm = event.target:screen().mouseManager
+              mm:showOsMouse(false)
+              mm:setMouse(pmouse)
+            end
+          }
         },
 
         guiro:Button
