@@ -161,5 +161,12 @@ namespace lost
       [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
     }
     
+    void Application::showMouse(bool visible)
+    {
+      if(visible)
+        [NSCursor unhide];
+      else
+        [NSCursor hide];
+    }
   }
 }
