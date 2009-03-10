@@ -58,6 +58,7 @@
 		EA779A350F4F773500E69486 /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
 		EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */ = {isa = PBXBuildFile; fileRef = EAC17FAB0F4255DC003D0F6F /* screen-evtest */; };
 		EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		EAD70A940F5F41220034D05A /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		EA779A340F4F773500E69486 /* Monaco.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Monaco.ttf; path = ../Monaco.ttf; sourceTree = SOURCE_ROOT; };
 		EAC17FAB0F4255DC003D0F6F /* screen-evtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "screen-evtest"; path = "../screen-evtest"; sourceTree = SOURCE_ROOT; };
 		EACFE1220ED8AD5300F9459E /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
+		EAD70A930F5F41220034D05A /* pimmel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pimmel.png; path = ../pimmel.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				3E2C5C4D0EDB097300BA9626 /* explosion.jpg */,
 				3E2C5C680EDB13C100BA9626 /* fugly.png */,
 				3E0CF97B0EDC4C57001A2922 /* defaultButton.png */,
+				EAD70A930F5F41220034D05A /* pimmel.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */,
 				EA779A350F4F773500E69486 /* Monaco.ttf in Resources */,
 				B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				EAD70A940F5F41220034D05A /* pimmel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
