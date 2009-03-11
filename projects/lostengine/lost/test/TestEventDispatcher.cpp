@@ -4,6 +4,7 @@
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
+#include "lost/event/Receive.h"
 #include <boost/function.hpp>
 
 using namespace lost::event;
@@ -13,7 +14,7 @@ using namespace boost;
 TEST(eventmanager)
 {
   lost::event::EventDispatcher dispatcher;
-  CHECK(dispatcher.listeners.size() == 0);
+  CHECK(dispatcher.numListeners() == 0);
 }
 
 struct EventListener
@@ -35,7 +36,7 @@ TEST(eventmanager_listener)
   dispatcher.addEventListener( lost::application::KeyEvent::KEY_DOWN(), EventListener(&signalFired));
   dispatcher.dispatchEvent(EventPtr(new KeyEvent(KeyEvent::KEY_DOWN())));
 
-  CHECK(dispatcher.listeners.size() == 1);
+  CHECK(dispatcher.numListeners() == 1);
   CHECK(signalFired);
 }
 
@@ -58,6 +59,6 @@ TEST(event_cast)
   dispatcher.addEventListener( MouseEvent::MOUSE_DOWN(), receive<MouseEvent>(MouseListener(&signalFired)));
   dispatcher.dispatchEvent(EventPtr(new MouseEvent(MouseEvent::MOUSE_DOWN())));
 
-  CHECK(dispatcher.listeners.size() == 1);
+  CHECK(dispatcher.numListeners() == 1);
   CHECK(signalFired);
 }

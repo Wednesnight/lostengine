@@ -27,7 +27,8 @@ namespace lost
       void removeEventListener(const boost::signals::connection& connection);
       virtual void dispatchEvent(EventPtr event);
       void clear();
-
+      uint32_t numListeners(); // for debugging purposes
+      
       boost::mutex queueMutex;
       boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
 
