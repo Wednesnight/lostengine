@@ -23,6 +23,9 @@ function Screen:__init(properties)
   self.mouseManager = lost.guiro.MouseManager(self)
 
 	self.parent = nil
+
+  -- initialize scissor state - we need to make sure that scissoring is disabled when done
+  self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(false))
 end
 
 function Screen:__finalize()
@@ -53,6 +56,7 @@ end
     Screen is always dirty
   ]]
 function Screen:render(canvas, forceRender)
+  canvas.context:pushState(self.scissorState)
   for k,ui in next,self.children do
     ui:render(canvas, forceRender)
   end
@@ -60,6 +64,7 @@ function Screen:render(canvas, forceRender)
   if self.mouseManager.currentMouse then
     self.mouseManager.currentMouse:render(canvas, forceRender)
   end
+  canvas.context:popState()
 end
 
 function Screen:setEventDispatcher(dispatcher)
