@@ -15,7 +15,8 @@ function UserInterface:__init(properties) lost.guiro.View.__init(self, propertie
                                           lost.gl.Texture2D.create(false),
                                           lost.gl.NormalArray.create(false),
                                           lost.gl.VertexArray.create(false),
-                                          lost.gl.TextureArray.create(false))
+                                          lost.gl.TextureArray.create(false),
+                                          lost.gl.Scissor.create(false))
 
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end

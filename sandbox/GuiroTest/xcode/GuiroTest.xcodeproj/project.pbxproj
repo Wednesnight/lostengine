@@ -107,7 +107,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
 			remoteInfo = LostEngineUnittests;
 		};
 /* End PBXContainerItemProxy section */
