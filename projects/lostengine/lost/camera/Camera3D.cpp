@@ -1,4 +1,5 @@
 #include "lost/camera/Camera3D.h"
+#include "lost/lgl/lglu.h"
 
 namespace lost
 {
@@ -149,6 +150,25 @@ namespace lost
       else if (newRotation.z > 360) newRotation.z -= 360;
       mRotation = newRotation;
     }
-    
+
+    void set3DProjection(int windowWidth, int windowHeight,
+                             const lost::math::Vec3& eye,
+                             const lost::math::Vec3& at,
+                             const lost::math::Vec3& up,
+                             float fovy, float znear, float zfar)
+    {
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        double screenAspectRatio = (double)windowWidth/(double)windowHeight;
+        lgluPerspective(fovy, screenAspectRatio, znear, zfar);
+        lgluLookAt(eye.x,  eye.y,  eye.z,
+                  at.x,   at.y,   at.z,
+                  up.x,   up.y,   up.z);
+    }
+
+    void Camera3D::apply()
+    {
+      set3DProjection(viewport.width, viewport.height, position(), target(), up(), mFovY, mDepth.min, mDepth.max);    
+    }
   }
 }

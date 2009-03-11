@@ -55,6 +55,8 @@ namespace lost
       // methods
       void move(const math::Vec3& deltaMove);
       void rotate(const math::Vec3& deltaRotate);
+      
+      void apply();
     };
 
   }
