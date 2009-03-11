@@ -471,5 +471,30 @@ namespace lost
       bmp.write(fullPathName);
     } 
 
+    // lobotony: copied from freeglut
+    //void  glutSolidCube( GLdouble dSize )
+    // FIXME: not iphone compatible yet
+    void  Canvas::drawSolidCube( GLfloat dSize )
+    {
+        float size = dSize * 0.5;
+
+    #   define V(a,b,c) glVertex3f( a size, b size, c size );
+    #   define NN(a,b,c) glNormal3f( a, b, c );
+
+        /* PWO: Again, I dared to convert the code to use macros... */
+        glBegin( GL_QUADS );
+            NN( 1.0, 0.0, 0.0); V(+,-,+); V(+,-,-); V(+,+,-); V(+,+,+);
+            NN( 0.0, 1.0, 0.0); V(+,+,+); V(+,+,-); V(-,+,-); V(-,+,+);
+            NN( 0.0, 0.0, 1.0); V(+,+,+); V(-,+,+); V(-,-,+); V(+,-,+);
+            NN(-1.0, 0.0, 0.0); V(-,-,+); V(-,+,+); V(-,+,-); V(-,-,-);
+            NN( 0.0,-1.0, 0.0); V(-,-,+); V(-,-,-); V(+,-,-); V(+,-,+);
+            NN( 0.0, 0.0,-1.0); V(-,-,-); V(-,+,-); V(+,+,-); V(+,-,-);
+        glEnd();
+
+    #   undef V
+    #   undef NN
+    }
+
+
   }
 }
