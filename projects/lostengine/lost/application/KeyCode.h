@@ -20,6 +20,10 @@ namespace lost
       K_LEFT = 37,
       K_UP, K_RIGHT, K_DOWN,
 
+      K_CIRCUMFLEX = 41,
+      K_HELP = 42,
+      K_APOSTROPHE = 43,
+
       K_0 = 48,
       K_1, K_2, K_3, K_4, K_5, K_6, K_7,
       K_8, K_9,
