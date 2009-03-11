@@ -54,7 +54,6 @@
 		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
 		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
 		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
-		EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4C0DD87EE200552F5E /* Carbon.framework */; };
 		EA779A350F4F773500E69486 /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
 		EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */ = {isa = PBXBuildFile; fileRef = EAC17FAB0F4255DC003D0F6F /* screen-evtest */; };
 		EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
@@ -104,6 +103,13 @@
 			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
 			remoteInfo = "LostEngine-simulator";
 		};
+		EA1BF6690F67343F00862B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteInfo = LostEngineUnittests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -132,7 +138,6 @@
 		EA27DE490DD87EE200552F5E /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		EA27DE4C0DD87EE200552F5E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		EA779A340F4F773500E69486 /* Monaco.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Monaco.ttf; path = ../Monaco.ttf; sourceTree = SOURCE_ROOT; };
 		EAC17FAB0F4255DC003D0F6F /* screen-evtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "screen-evtest"; path = "../screen-evtest"; sourceTree = SOURCE_ROOT; };
 		EACFE1220ED8AD5300F9459E /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
@@ -172,7 +177,6 @@
 				EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */,
 				EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */,
 				EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */,
-				EA27DE530DD87EE200552F5E /* Carbon.framework in Frameworks */,
 				3E9CA02D0F332E7B00E34312 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,7 +241,6 @@
 				EA27DE490DD87EE200552F5E /* AGL.framework */,
 				EA27DE4A0DD87EE200552F5E /* OpenGL.framework */,
 				EA27DE4B0DD87EE200552F5E /* GLUT.framework */,
-				EA27DE4C0DD87EE200552F5E /* Carbon.framework */,
 				3E485AB30ECD73E5003AAEAB /* QuartzCore.framework */,
 				3E485AB40ECD73E5003AAEAB /* Foundation.framework */,
 				3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */,
@@ -263,6 +266,7 @@
 				EA0E49760E5E403800B5EBF1 /* libLostEngine.a */,
 				EA0E49780E5E403800B5EBF1 /* libLostEngine.a */,
 				EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */,
+				EA1BF66A0F67343F00862B2F /* LostEngineUnittests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +379,13 @@
 			fileType = archive.ar;
 			path = libLostEngine.a;
 			remoteRef = EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA1BF66A0F67343F00862B2F /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA1BF6690F67343F00862B2F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

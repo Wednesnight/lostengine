@@ -1,9 +1,9 @@
 #include "lost/platform/Platform.h"
 #include "UnitTest++.h"
 
-TEST(application_directory)
+TEST(resource_directory)
 {
   using namespace lost::platform;
-  CHECK(getApplicationDirectory() != "");
+  CHECK(getResourcePath() != "");
 }
 

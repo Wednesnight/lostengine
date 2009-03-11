@@ -21,11 +21,12 @@ LUA_ROOT = "$(THIRDPARTY_ROOT)/lua/lua_5_1_4"
 LUABIND_ROOT = "$(THIRDPARTY_ROOT)/luabind/luabind_0_8"
 STBIMAGE_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_image_1_14"
 STBVORBIS_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_vorbis_0_99996"
+UNITTESTPP_ROOT = "$(THIRDPARTY_ROOT)/UnitTest++"
 ZLIB_ROOT = "$(THIRDPARTY_ROOT)/zlib/zlib_1_2_3"
 
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
-HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include" "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
+HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include" "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
 
 // Compiler Version
 GCC_VERSION = 
