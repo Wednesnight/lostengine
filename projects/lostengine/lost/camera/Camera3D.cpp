@@ -151,24 +151,20 @@ namespace lost
       mRotation = newRotation;
     }
 
-    void set3DProjection(int windowWidth, int windowHeight,
-                             const lost::math::Vec3& eye,
-                             const lost::math::Vec3& at,
-                             const lost::math::Vec3& up,
-                             float fovy, float znear, float zfar)
-    {
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        double screenAspectRatio = (double)windowWidth/(double)windowHeight;
-        lgluPerspective(fovy, screenAspectRatio, znear, zfar);
-        lgluLookAt(eye.x,  eye.y,  eye.z,
-                  at.x,   at.y,   at.z,
-                  up.x,   up.y,   up.z);
-    }
-
     void Camera3D::apply()
     {
-      set3DProjection(viewport.width, viewport.height, position(), target(), up(), mFovY, mDepth.min, mDepth.max);    
+      Camera::apply();
+
+      double screenAspectRatio = (double)viewport.width/(double)viewport.height;
+      math::Vec3 currentEye = position();
+      math::Vec3 currentTarget = target();
+      math::Vec3 currentUp = up();
+
+      lgluPerspective(mFovY, screenAspectRatio, mDepth.min, mDepth.max);
+      lgluLookAt(currentEye.x,    currentEye.y,    currentEye.z,
+                 currentTarget.x, currentTarget.y, currentTarget.z,
+                 currentUp.x,     currentUp.y,     currentUp.z);
     }
+
   }
 }
