@@ -478,6 +478,9 @@
 		B41266FF0F5EE7CD001CCC23 /* tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A00F5EE7CC001CCC23 /* tasklet.cpp */; };
 		B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A60F5EE7CC001CCC23 /* variant.cpp */; };
 		B41267050F5EE7CD001CCC23 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A80F5EE7CC001CCC23 /* version.cpp */; };
+		B47550680F690E2700B04249 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47550670F690E2700B04249 /* Parser.cpp */; };
+		B47550690F690E2700B04249 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47550670F690E2700B04249 /* Parser.cpp */; };
+		B475506A0F690E2700B04249 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47550670F690E2700B04249 /* Parser.cpp */; };
 		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
@@ -875,6 +878,7 @@
 		B41266A00F5EE7CC001CCC23 /* tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tasklet.cpp; sourceTree = "<group>"; };
 		B41266A60F5EE7CC001CCC23 /* variant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = variant.cpp; path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/variant.cpp; sourceTree = SOURCE_ROOT; };
 		B41266A80F5EE7CC001CCC23 /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = version.cpp; path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/version.cpp; sourceTree = SOURCE_ROOT; };
+		B47550670F690E2700B04249 /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = model/obj/Parser.cpp; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
@@ -1258,6 +1262,14 @@
 			path = ../../../thirdparty/fhtagn/fhtagn_2008_11_12/source/fhtagn/util;
 			sourceTree = SOURCE_ROOT;
 		};
+		B47550660F690E0900B04249 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B47550670F690E2700B04249 /* Parser.cpp */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 		EA15B48A0EE31E9F00672EF4 /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1457,6 +1469,7 @@
 		EA3B94630E04639D00B6423B /* lost */ = {
 			isa = PBXGroup;
 			children = (
+				B47550660F690E0900B04249 /* model */,
 				EA70F8F20ED08707000AA8CB /* al */,
 				EA3B94640E04639D00B6423B /* application */,
 				EA15B48A0EE31E9F00672EF4 /* audio */,
@@ -2022,6 +2035,7 @@
 				B41266FF0F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
 				B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41267050F5EE7CD001CCC23 /* version.cpp in Sources */,
+				B475506A0F690E2700B04249 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2246,6 +2260,7 @@
 				B41266C10F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
 				B41266C50F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41266C70F5EE7CD001CCC23 /* version.cpp in Sources */,
+				B47550680F690E2700B04249 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2503,6 +2518,7 @@
 				B41266E00F5EE7CD001CCC23 /* tasklet.cpp in Sources */,
 				B41266E40F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41266E60F5EE7CD001CCC23 /* version.cpp in Sources */,
+				B47550690F690E2700B04249 /* Parser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

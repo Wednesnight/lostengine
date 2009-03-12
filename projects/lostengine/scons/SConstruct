@@ -39,6 +39,8 @@ SOURCES = [
 
   'math/RectPacker.cpp',
 
+  'model/obj/Parser.cpp',
+
   'platform/Platform_Linux.cpp',
   'platform/Platform.cpp',
 
