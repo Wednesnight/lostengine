@@ -76,7 +76,7 @@ MyAppController::MyAppController()
   fullscreen3dCam.reset(new Camera3D(mainWindow->canvas->context, Rect(0,0,screenWidth, screenHeight)));
   fullscreen3dCanvas.reset(new Canvas(mainWindow->context, fullscreen3dCam));
   fullscreen3dCam->position(Vec3(0,0,2));
-  fullscreen3dCam->fovY(110);
+  fullscreen3dCam->fovY(90);
   shaderInit(); // load shaders here cos they need cam pos
 
   modelRenderState = State::create(ClearColor::create(whiteColor), Blend::create(false), DepthTest::create(true));
