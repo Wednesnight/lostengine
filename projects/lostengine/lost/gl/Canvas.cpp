@@ -166,6 +166,26 @@ namespace lost
       context->popState();
     }
     
+    void Canvas::drawPoint(const lost::math::Vec3& point)
+    {
+      static SharedState state = State::create(Blend::create(true),
+                                               BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
+                                               Texture2D::create(false),
+                                               VertexArray::create(true));
+      context->makeCurrent();
+      context->pushState(state);
+      
+      float p[3];
+      p[0] = point.x;
+      p[1] = point.y;
+      p[2] = point.z;
+      
+      glVertexPointer(3, GL_FLOAT, 0, p); GLDEBUG;
+      glDrawArrays(GL_POINTS, 0, 1); GLDEBUG;
+      
+      context->popState();
+    }
+    
     void Canvas::drawRectOutline(const lost::math::Rect& rect)
     {
       drawLine(rect.bottomLeft(), rect.bottomRight());

@@ -75,11 +75,13 @@ MyAppController::MyAppController()
 
   fullscreen3dCam.reset(new Camera3D(mainWindow->canvas->context, Rect(0,0,screenWidth, screenHeight)));
   fullscreen3dCanvas.reset(new Canvas(mainWindow->context, fullscreen3dCam));
-  fullscreen3dCam->position(Vec3(0,0,2));
+  fullscreen3dCam->position(Vec3(2,3,5));
+  fullscreen3dCam->target(Vec3(1,1,0));
+  fullscreen3dCam->stickToTarget(true);
   fullscreen3dCam->fovY(90);
   shaderInit(); // load shaders here cos they need cam pos
 
-  modelRenderState = State::create(ClearColor::create(whiteColor), Blend::create(false), DepthTest::create(true));
+  modelRenderState = State::create(ClearColor::create(blackColor), Blend::create(false), DepthTest::create(true));
   angle = 0;
   
   lib.reset(new freetype::Library());
@@ -118,12 +120,16 @@ void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canva
   program->disable();
   canvas->context->popState();
 
-  glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  canvas->setColor(blackColor);
+  math::Vec3 target = fullscreen3dCam->target();
+  glTranslatef(target.x, target.y, target.z);
+  canvas->drawAxes(math::Vec3(1,1,1));
+
+  glLoadIdentity();
+  canvas->setColor(whiteColor);
+  glTranslatef(1,0,0);
   float scale = .01; //.01;
   glScalef(scale,scale,scale);
-//  glTranslatef(100,0,0);
   logo->render(canvas);
 
   canvas->context->popState();
@@ -196,12 +202,16 @@ void MyAppController::mainLoop()
 void MyAppController::keyHandler(boost::shared_ptr<KeyEvent> event)
 {
   if (event->key == K_ESCAPE) app->quit();
-  float stepsize = .25;
+  float stepsize = 2.0;
   switch(event->key)
   {
     case K_ESCAPE:app->quit();break;
-    case K_LEFT:fullscreen3dCam->move(Vec3(-stepsize,0,0));break;
-    case K_RIGHT:fullscreen3dCam->move(Vec3(stepsize,0,0));break;
+    case K_A:fullscreen3dCam->rotate(Vec3(0,stepsize,0));break;
+    case K_D:fullscreen3dCam->rotate(Vec3(0,-stepsize,0));break;
+    case K_W:fullscreen3dCam->rotate(Vec3(stepsize,0,0));break;
+    case K_S:fullscreen3dCam->rotate(Vec3(-stepsize,0,0));break;
+    case K_Q:fullscreen3dCam->move(Vec3(0,0,-stepsize/8));break;
+    case K_E:fullscreen3dCam->move(Vec3(0,0,stepsize/8));break;
   }
 }
 

@@ -29,6 +29,7 @@ namespace lost
       void setColor(const lost::common::Color& color);
 
       void drawPoint(const lost::math::Vec2& point);
+      void drawPoint(const lost::math::Vec3& point);
 
       void drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end);
       void drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end);
