@@ -17,7 +17,6 @@ namespace lost
     extern const math::Vec3 directionBase;
     extern const math::Vec3 rotationBase;
     extern const float      fovYBase;
-    extern const math::Vec2 depthBase;
     extern const math::Vec3 upBase;
 
     struct Camera3D : public Camera
@@ -29,6 +28,7 @@ namespace lost
       float      mFovY;
       math::Vec2 mDepth;
       bool       mStickToTarget;
+      math::Vec3 mPlane;
     public:
       // constructor
       Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
@@ -44,6 +44,7 @@ namespace lost
       math::Vec3 up();
 
       // setters
+      void plane(const math::Vec3& inPlane);
       void depth(const math::Vec2& newDepth);
       void fovY(const float newFovY);
       void position(const math::Vec3& newPosition);

@@ -9,8 +9,6 @@ namespace lost
     const math::Vec3 positionBase(0.0f, 0.0f, 0.0f);
     const math::Vec3 directionBase(0.0f, 0.0f, -1.0f);
     const math::Vec3 rotationBase(0.0f, 0.0f, 0.0f);
-    const float      fovYBase(120.0f);
-    const math::Vec2 depthBase(0.1f, 100.0f);
     const math::Vec3 upBase(0.0f, 1.0f, 0.0f);
     
     Camera3D::Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport)
@@ -18,23 +16,21 @@ namespace lost
       mPosition(positionBase),
       mDirection(directionBase),
       mRotation(rotationBase),
-      mFovY(fovYBase),
-      mDepth(depthBase),
+      mPlane(inViewport.width, inViewport.height, 100.0f),
+      mFovY(120.0f),
       mStickToTarget(false)
     {
       DOUT("Camera3D::Camera3D()");
+      plane(mPlane);
     }
     
-    math::Vec2& Camera3D::depth()
+    void Camera3D::plane(const math::Vec3& inPlane)
     {
-      return mDepth;
+      mPlane = inPlane;
+      double radFovY = tan((double)mPlane.z / (double)(mPlane.y / 2));
+      mFovY = math::rad2deg(radFovY);
     }
-    
-    float& Camera3D::fovY()
-    {
-      return mFovY;
-    }
-    
+
     math::Vec3 Camera3D::position()
     {
       math::Vec3 result = mPosition;
@@ -82,16 +78,6 @@ namespace lost
       math::MatrixRotY rotY(mRotation.y);
       math::MatrixRotZ rotZ(mRotation.z);
       return rotZ * rotY * rotX * upBase;
-    }
-    
-    void Camera3D::fovY(const float newFovY)
-    {
-      mFovY = newFovY;
-    }
-    
-    void Camera3D::depth(const math::Vec2& newDepth)
-    {
-      mDepth = newDepth;
     }
     
     void Camera3D::position(const math::Vec3& newPosition)
@@ -155,12 +141,12 @@ namespace lost
     {
       Camera::apply();
 
-      double screenAspectRatio = (double)viewport.width/(double)viewport.height;
+      double aspectRatio = (double)mPlane.x / (double)mPlane.y;
       math::Vec3 currentEye = position();
       math::Vec3 currentTarget = target();
       math::Vec3 currentUp = up();
 
-      lgluPerspective(mFovY, screenAspectRatio, mDepth.min, mDepth.max);
+      lgluPerspective(mFovY, aspectRatio, 0.1f, mPlane.z);
       lgluLookAt(currentEye.x,    currentEye.y,    currentEye.z,
                  currentTarget.x, currentTarget.y, currentTarget.z,
                  currentUp.x,     currentUp.y,     currentUp.z);

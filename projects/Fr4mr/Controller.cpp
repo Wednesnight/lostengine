@@ -75,10 +75,9 @@ MyAppController::MyAppController()
 
   fullscreen3dCam.reset(new Camera3D(mainWindow->canvas->context, Rect(0,0,screenWidth, screenHeight)));
   fullscreen3dCanvas.reset(new Canvas(mainWindow->context, fullscreen3dCam));
-  fullscreen3dCam->position(Vec3(2,3,5));
+  fullscreen3dCam->position(Vec3(2,3,6));
   fullscreen3dCam->target(Vec3(1,1,0));
   fullscreen3dCam->stickToTarget(true);
-  fullscreen3dCam->fovY(90);
   shaderInit(); // load shaders here cos they need cam pos
 
   modelRenderState = State::create(ClearColor::create(blackColor), Blend::create(false), DepthTest::create(true));
@@ -100,7 +99,7 @@ void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canva
 
   canvas->camera->apply();
   canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+  
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
