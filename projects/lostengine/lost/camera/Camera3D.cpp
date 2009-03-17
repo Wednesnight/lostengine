@@ -6,29 +6,16 @@ namespace lost
   namespace camera
   {
     
-    const math::Vec3 positionBase(0.0f, 0.0f, 0.0f);
-    const math::Vec3 directionBase(0.0f, 0.0f, -1.0f);
-    const math::Vec3 rotationBase(0.0f, 0.0f, 0.0f);
-    const math::Vec3 upBase(0.0f, 1.0f, 0.0f);
-    
     Camera3D::Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport)
     : Camera::Camera(inContext, inViewport),
-      mPosition(positionBase),
-      mDirection(directionBase),
-      mRotation(rotationBase),
-      mPlane(inViewport.width, inViewport.height, 100.0f),
-      mFovY(120.0f),
+      mPosition(0.0f, 0.0f, 0.0f),
+      mDirection(0.0f, 0.0f, -1.0f),
+      mRotation(0.0f, 0.0f, 0.0f),
+      mFovY(45.0f),
+      mDepth(1.0f, 100.0f),
       mStickToTarget(false)
     {
       DOUT("Camera3D::Camera3D()");
-      plane(mPlane);
-    }
-    
-    void Camera3D::plane(const math::Vec3& inPlane)
-    {
-      mPlane = inPlane;
-      double radFovY = tan((double)mPlane.z / (double)(mPlane.y / 2));
-      mFovY = math::rad2deg(radFovY);
     }
 
     math::Vec3 Camera3D::position()
@@ -62,7 +49,7 @@ namespace lost
       return mStickToTarget;
     }
 
-    math::Vec3& Camera3D::rotation()
+    math::Vec3 Camera3D::rotation()
     {
       return mRotation;
     }
@@ -77,9 +64,19 @@ namespace lost
       math::MatrixRotX rotX(mRotation.x);
       math::MatrixRotY rotY(mRotation.y);
       math::MatrixRotZ rotZ(mRotation.z);
-      return rotZ * rotY * rotX * upBase;
+      return rotZ * rotY * rotX * math::Vec3(0.0f, 1.0f, 0.0f);
     }
     
+    float Camera3D::fovY()
+    {
+      return mFovY;
+    }
+    
+    math::Vec2 Camera3D::depth()
+    {
+      return mDepth;
+    }
+
     void Camera3D::position(const math::Vec3& newPosition)
     {
       mPosition = newPosition;
@@ -125,6 +122,16 @@ namespace lost
       }
     }
     
+    void Camera3D::fovY(const float inFovY)
+    {
+      mFovY = inFovY;
+    }
+    
+    void Camera3D::depth(const math::Vec2& inDepth)
+    {
+      mDepth = inDepth;
+    }
+    
     void Camera3D::rotate(const math::Vec3& deltaRotate)
     {
       math::Vec3 newRotation = mRotation + deltaRotate;
@@ -141,12 +148,12 @@ namespace lost
     {
       Camera::apply();
 
-      double aspectRatio = (double)mPlane.x / (double)mPlane.y;
+      double aspectRatio = (double)viewport.width / (double)viewport.height;
       math::Vec3 currentEye = position();
       math::Vec3 currentTarget = target();
       math::Vec3 currentUp = up();
 
-      lgluPerspective(mFovY, aspectRatio, 0.1f, mPlane.z);
+      lgluPerspective(mFovY, aspectRatio, mDepth.min, mDepth.max);
       lgluLookAt(currentEye.x,    currentEye.y,    currentEye.z,
                  currentTarget.x, currentTarget.y, currentTarget.z,
                  currentUp.x,     currentUp.y,     currentUp.z);

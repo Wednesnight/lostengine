@@ -74,10 +74,14 @@ MyAppController::MyAppController()
   app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), lost::event::receive<KeyEvent>(boost::bind(&MyAppController::keyHandler, this, _1)));
 
   fullscreen3dCam.reset(new Camera3D(mainWindow->canvas->context, Rect(0,0,screenWidth, screenHeight)));
-  fullscreen3dCanvas.reset(new Canvas(mainWindow->context, fullscreen3dCam));
+  fullscreen3dCam->fovY(45.0f);
+  fullscreen3dCam->depth(Vec2(1.0f, 100.0f));
   fullscreen3dCam->position(Vec3(2,3,6));
   fullscreen3dCam->target(Vec3(1,1,0));
   fullscreen3dCam->stickToTarget(true);
+
+  fullscreen3dCanvas.reset(new Canvas(mainWindow->context, fullscreen3dCam));
+
   shaderInit(); // load shaders here cos they need cam pos
 
   modelRenderState = State::create(ClearColor::create(blackColor), Blend::create(false), DepthTest::create(true));
@@ -99,7 +103,7 @@ void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canva
 
   canvas->camera->apply();
   canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
@@ -134,7 +138,6 @@ void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canva
   canvas->context->popState();
   canvas->context->swapBuffers();
 }
-
 
 void MyAppController::drawScene(const boost::shared_ptr<gl::Canvas>& canvas, double deltaSec)
 {

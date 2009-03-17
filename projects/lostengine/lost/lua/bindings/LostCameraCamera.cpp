@@ -36,7 +36,7 @@ namespace lost
           .def("direction", (void(Camera3D::*)(const Vec3&)) &Camera3D::direction)
           .def("stickToTarget", (bool(Camera3D::*)()) &Camera3D::stickToTarget)
           .def("stickToTarget", (void(Camera3D::*)(const bool)) &Camera3D::stickToTarget)
-          .def("rotation", (Vec3&(Camera3D::*)()) &Camera3D::rotation)
+          .def("rotation", (Vec3(Camera3D::*)()) &Camera3D::rotation)
           .def("rotation", (void(Camera3D::*)(const Vec3&)) &Camera3D::rotation)
           .def("target", (Vec3(Camera3D::*)()) &Camera3D::target)
           .def("target", (void(Camera3D::*)(const Vec3&)) &Camera3D::target)

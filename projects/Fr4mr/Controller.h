@@ -24,6 +24,7 @@ private:
   boost::shared_ptr<lost::gl::ShaderProgram> program;
 
   void drawModel(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
+  void drawModel2(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
   void drawScene(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
   void render(const double deltaSec);
   void mainLoop();

@@ -21,13 +21,15 @@ static inline void lgluPerspective(GLfloat fovy,
                      GLfloat zNear,
                      GLfloat zFar)
 {
-  float f = 1.0f/tan(fovy/2.0f); // cotangent
+  float radFovY = lost::math::deg2rad(fovy / 2.0f);
+  float f = cos(radFovY) / sin(radFovY);
+  float deltaZ = zFar - zNear;
 
-  float m0 = f/aspect;
+  float m0 = f / aspect;
   float m5 = f;
-  float m10 = (zFar+zNear)/(zNear-zFar);
+  float m10 = - (zFar + zNear) / deltaZ;
   float m11 = -1;
-  float m14 = (2*zFar*zNear)/(zNear-zFar);
+  float m14 = (-2 * zNear * zFar) / deltaZ;
 
   lost::math::Matrix matrix;
   matrix.zero();

@@ -13,12 +13,6 @@ namespace lost
   namespace camera
   {
 
-    extern const math::Vec3 positionBase;
-    extern const math::Vec3 directionBase;
-    extern const math::Vec3 rotationBase;
-    extern const float      fovYBase;
-    extern const math::Vec3 upBase;
-
     struct Camera3D : public Camera
     {
     private:
@@ -34,19 +28,19 @@ namespace lost
       Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
 
       // getters
-      math::Vec2& depth();
-      float& fovY();
+      math::Vec2 depth();
+      float fovY();
       math::Vec3 position();
       math::Vec3 direction();
-      math::Vec3& rotation();
+      math::Vec3 rotation();
       bool stickToTarget();
       math::Vec3 target();
       math::Vec3 up();
 
       // setters
       void plane(const math::Vec3& inPlane);
-      void depth(const math::Vec2& newDepth);
-      void fovY(const float newFovY);
+      void depth(const math::Vec2& inDepth);
+      void fovY(const float inFovY);
       void position(const math::Vec3& newPosition);
       void direction(const math::Vec3& newDirection);
       void stickToTarget(const bool newStickToTarget);
