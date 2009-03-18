@@ -580,8 +580,6 @@
 		EA7BE1340E6F38A10017B031 /* LostCommonColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1130E6F38A10017B031 /* LostCommonColor.cpp */; };
 		EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */; };
 		EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */; };
-		EA7BE1380E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
-		EA7BE1390E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */; };
 		EA7BE13A0E6F38A10017B031 /* LostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */; };
 		EA7BE13B0E6F38A10017B031 /* LostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */; };
 		EA7BE13C0E6F38A10017B031 /* LostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */; };
@@ -590,7 +588,6 @@
 		EA7BE13F0E6F38A10017B031 /* LostApplicationApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11E0E6F38A10017B031 /* LostApplicationApplication.cpp */; };
 		EA7BE1400E6F38A10017B031 /* LostResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11F0E6F38A10017B031 /* LostResourceLoader.cpp */; };
 		EA7BE1410E6F38A10017B031 /* LostResourceFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1200E6F38A10017B031 /* LostResourceFile.cpp */; };
-		EA7BE1420E6F38A10017B031 /* LostModelObjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1210E6F38A10017B031 /* LostModelObjRenderer.cpp */; };
 		EA7BE1430E6F38A10017B031 /* LostEventEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1220E6F38A10017B031 /* LostEventEventDispatcher.cpp */; };
 		EA7BE1440E6F38A10017B031 /* LostApplicationMouseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1230E6F38A10017B031 /* LostApplicationMouseEvent.cpp */; };
 		EA7BE1450E6F38A10017B031 /* LostLuaState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLuaState.cpp */; };
@@ -699,6 +696,9 @@
 		EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 		EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 		EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
+		EAFF077C0F71B26E00001316 /* LostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */; };
+		EAFF077D0F71B26E00001316 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
+		EAFF077E0F71B26F00001316 /* LostModelObjRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1210E6F38A10017B031 /* LostModelObjRenderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2069,8 +2069,6 @@
 				EA7BE1340E6F38A10017B031 /* LostCommonColor.cpp in Sources */,
 				EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */,
 				EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */,
-				EA7BE1380E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,
-				EA7BE1390E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */,
 				EA7BE13A0E6F38A10017B031 /* LostModelMesh.cpp in Sources */,
 				EA7BE13B0E6F38A10017B031 /* LostGLDraw.cpp in Sources */,
 				EA7BE13C0E6F38A10017B031 /* LostMathVec4.cpp in Sources */,
@@ -2079,7 +2077,6 @@
 				EA7BE13F0E6F38A10017B031 /* LostApplicationApplication.cpp in Sources */,
 				EA7BE1400E6F38A10017B031 /* LostResourceLoader.cpp in Sources */,
 				EA7BE1410E6F38A10017B031 /* LostResourceFile.cpp in Sources */,
-				EA7BE1420E6F38A10017B031 /* LostModelObjRenderer.cpp in Sources */,
 				EA7BE1430E6F38A10017B031 /* LostEventEventDispatcher.cpp in Sources */,
 				EA7BE1440E6F38A10017B031 /* LostApplicationMouseEvent.cpp in Sources */,
 				EA7BE1450E6F38A10017B031 /* LostLuaState.cpp in Sources */,
@@ -2261,6 +2258,9 @@
 				B41266C50F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41266C70F5EE7CD001CCC23 /* version.cpp in Sources */,
 				B47550680F690E2700B04249 /* Parser.cpp in Sources */,
+				EAFF077C0F71B26E00001316 /* LostModelObjMaterial.cpp in Sources */,
+				EAFF077D0F71B26E00001316 /* LostModelObjParser.cpp in Sources */,
+				EAFF077E0F71B26F00001316 /* LostModelObjRenderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
