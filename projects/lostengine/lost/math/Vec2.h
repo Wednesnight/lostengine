@@ -107,7 +107,7 @@ namespace lost
       return result;
     }
     
-    // compares two vectors, taking epsilong into account for rounding errors
+    // compares two vectors, taking epsilon into account for rounding errors
     inline bool compare(const Vec2& l, const Vec2& r, float epsilon)
     {
       if(   compare(l.x, r.x, epsilon)
