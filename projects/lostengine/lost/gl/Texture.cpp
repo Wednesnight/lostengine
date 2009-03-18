@@ -139,7 +139,7 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
 
   // then use texsubimage to upload the actual data. Strictly speaking, we only need this in the
   // case of power-of-two textures, but always creating textures like this saves us one branch
-  // now we copy the actual data to the previsouly allocated texture
+  // now we copy the actual data to the previously allocated texture
   glTexSubImage2D(GL_TEXTURE_2D,
                   0,
                   0,
@@ -159,6 +159,19 @@ void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textu
   dataWidth = inBitmap->width;
   dataHeight = inBitmap->height;
 
+}
+
+void Texture::subImage(const lost::math::Vec2& targetPos, boost::shared_ptr<lost::bitmap::Bitmap> inBitmap)
+{
+  glTexSubImage2D(GL_TEXTURE_2D,
+                  0,
+                  targetPos.x,
+                  targetPos.y,
+                  inBitmap->width,
+                  inBitmap->height,
+                  bitmapComponents2GlFormat(inBitmap->format),
+                  GL_UNSIGNED_BYTE,
+                  inBitmap->data);GLDEBUG_THROW;  
 }
 
 void Texture::init(GLint level, // mipmap level

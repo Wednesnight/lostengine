@@ -66,6 +66,8 @@ namespace lost
                  GLenum type, // numerical type of provided pixel data
                  const GLvoid* data); // pointer to the data or 0 if you only want to reserve data for later usage
 
+      void subImage(const lost::math::Vec2& targetPos, boost::shared_ptr<lost::bitmap::Bitmap> bmp);
+
       void wrap(GLint p);
       void wrapS(GLint p);
       void wrapT(GLint p);
