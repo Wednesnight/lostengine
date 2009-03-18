@@ -60,6 +60,10 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Lasershark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lasershark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA26F1820F7180E300B2E8CB /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Light.h; path = ../Light.h; sourceTree = SOURCE_ROOT; };
+		EA26F1830F7180E300B2E8CB /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../Camera.h; sourceTree = SOURCE_ROOT; };
+		EA26F1840F7180E800B2E8CB /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sphere.h; path = ../Sphere.h; sourceTree = SOURCE_ROOT; };
+		EA26F1850F7180E800B2E8CB /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ray.h; path = ../Ray.h; sourceTree = SOURCE_ROOT; };
 		EA938D6F0F714CE7001D2D12 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA938D710F714CEB001D2D12 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA938DA30F714E49001D2D12 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -95,6 +99,10 @@
 		29B97314FDCFA39411CA2CEA /* Lasershark */ = {
 			isa = PBXGroup;
 			children = (
+				EA26F1820F7180E300B2E8CB /* Light.h */,
+				EA26F1830F7180E300B2E8CB /* Camera.h */,
+				EA26F1840F7180E800B2E8CB /* Sphere.h */,
+				EA26F1850F7180E800B2E8CB /* Ray.h */,
 				EA938D6F0F714CE7001D2D12 /* main.cpp */,
 				EA938E0C0F71562C001D2D12 /* config */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
