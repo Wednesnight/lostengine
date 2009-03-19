@@ -41,14 +41,12 @@ namespace lost
         
         // create static lines
         uint32_t curpos = 0;
-        uint32_t offset = 4; // one line = 2 vertices * 2 coords = 4 floats
         for(uint32_t n=0; n<numlabels; ++n)
         {
-            labelArray[curpos+0] = 0;
-            labelArray[curpos+1] = (10*(n+1))-1;
-            labelArray[curpos+2] = width-1;
-            labelArray[curpos+3] = (10*(n+1))-1;
-            curpos += offset;
+            labelArray[curpos++] = 0;
+            labelArray[curpos++] = (10*(n+1))-1;
+            labelArray[curpos++] = width-1;
+            labelArray[curpos++] = (10*(n+1))-1;
         }
         
         // create actual line data buffer
@@ -88,7 +86,6 @@ namespace lost
                             const boost::shared_ptr<Canvas>& canvas,
                             double timeSinceLastCallSec)
       {
-        // FIXME: coordinates are off somehow ... we need to figure out the definitve way to draw precise coords. Somehow, OpenGL offsets things for a pixel sometimes
         addHistoryEntry(timeSinceLastCallSec);
 
         canvas->context->makeCurrent();
@@ -112,25 +109,7 @@ namespace lost
         }
 
         glVertexPointer(2, GL_FLOAT, 0, linesArray.get()); GLDEBUG;
-        glDrawArrays(GL_LINE_STRIP, 0,historylength); GLDEBUG;
-
-
-/*        // horizontal stripes
-        canvas->setColor(Color(0, 0, 0, alpha));
-        for(uint32_t n=0; n<numlabels; ++n)
-        {
-          canvas->drawLine(math::Vec2((float)x, (float)y+10*(n+1)-1), math::Vec2((float)x+width-1, (float)y+10*(n+1)-1));
-        }
-
-        // draw history ringbuffer
-        canvas->setColor(Color(0, 0, 0, alpha));
-        uint32_t curpos = historycurpos;
-        for(uint32_t i=0; i<historylength-1; ++i)
-        {
-//          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
-          canvas->drawLine(math::Vec2((float)x+i, (float)y+history[curpos]), math::Vec2((float)x+i+1, (float)y+history[(curpos+1)%historylength]));
-          curpos = (curpos+1) % historylength;
-        }*/
+        glDrawArrays(GL_LINE_STRIP, 0, historylength/2); GLDEBUG;
 
         canvas->context->popState();
       }
