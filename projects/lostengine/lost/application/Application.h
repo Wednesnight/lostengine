@@ -73,6 +73,13 @@ namespace lost
       static boost::shared_ptr<Application> create(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       static boost::shared_ptr<Application> create(const boost::filesystem::path& inScript);
 
+      // if you set this to true, the runLoop will only be called if there are any low level events that will be dispatched
+      // through the application (mouse move, key press). The application will behave conservatively and save cpu time.
+      // if you set this to false, the runLoop will be called constantly, resulting in a realtime application that
+      // constantly taxes the cpu.
+      // Call this AFTER you set the runLoop/thread or initialise the thread appropriately.
+      void runLoopWaitsForEvents(bool flag);  
+
       ~Application();
 
       /**

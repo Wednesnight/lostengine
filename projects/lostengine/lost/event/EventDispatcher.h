@@ -5,6 +5,7 @@
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/condition.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
 
@@ -31,6 +32,10 @@ namespace lost
       
       boost::mutex queueMutex;
       boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
+
+      boost::mutex waitEventMutex;
+      boost::condition waitEventCondition;
+      void waitForEvents(); // returns if at least one event was queued
 
       /**
        * call this to queue the given event. will be dispatched when processEvents() is called

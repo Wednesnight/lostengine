@@ -139,7 +139,7 @@ public:
   MyAppController()
   {
     app = Application::create(boost::bind(&MyAppController::mainLoop, this));
-
+    app->runLoopWaitsForEvents(true);
     windowWidth = 512;
     windowHeight = 512;
     ds = 0;
