@@ -34,6 +34,7 @@
 #include <iostream>
 #include <iostream>
 #include <list>
+#include <luaconf.h>
 #include <luabind/luabind.hpp>
 #include "luabind/class_info.hpp"
 #include <map>

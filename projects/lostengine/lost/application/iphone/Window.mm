@@ -3,7 +3,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import "lost/application/gl/iphone/GLContext.h"
+#import "lost/gl/iphone/GLContext.h"
 
 #include "lost/common/Logger.h"
 #include "lost/application/TouchEvent.h"
