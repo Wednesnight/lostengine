@@ -16,22 +16,27 @@ namespace lost
     {
       const static unsigned long historylength = 160;
 
-      unsigned long width;
-      unsigned long height;
-      unsigned long historycurpos;
-      unsigned long maxfps;
-      unsigned long numlabels;
-      unsigned long labelstepping;
+      uint32_t width;
+      uint32_t height;
+      uint32_t historycurpos;
+      uint32_t maxfps;
+      uint32_t numlabels;
+      uint32_t labelstepping;
       float alpha;
       boost::shared_array<float> history;
-      std::vector<std::string> labels;
+      boost::shared_array<float> labelArray;
+      boost::shared_array<float> linesArray;
       boost::shared_ptr<gl::Canvas> canvas;
       boost::shared_ptr<gl::State> renderState;
 
       FpsMeter();
+      ~FpsMeter();
       void resetHistory();
       void addHistoryEntry(double timeSinceLastCallSec);
-      void render(unsigned long x, unsigned long y, const boost::shared_ptr<gl::Canvas>& canvas, double timeSinceLastCallSec);
+      void render(uint32_t x,
+                  uint32_t y,
+                  const boost::shared_ptr<gl::Canvas>& canvas,
+                  double timeSinceLastCallSec);
     };
   }
 }
