@@ -24,22 +24,53 @@ namespace lost
         resetHistory();
         maxfps = height;
         labelstepping = 10;
-        numlabels = maxfps / labelstepping;
-        for(unsigned long i=0; i<numlabels; ++i)
-        {
-          labels.push_back(boost::lexical_cast<std::string>((i+1)*labelstepping));
-        }
-        
+        numlabels = maxfps / labelstepping;        
         renderState = State::create(DepthTest::create(false),
                                     Blend::create(true),
                                     BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                     Texture2D::create(false),
                                     VertexArray::create(true));
+
+        // create vertex array buffers from static sizes
+        
+        // label lines will be drawn with GL_LINES which means we must specify 2 vertices per line
+        uint32_t numLines = numlabels;
+        uint32_t numVertices = numLines * 2; 
+        uint32_t numCoords = numVertices * 2;
+        labelArray.reset(new float[numCoords]);
+        
+        // create static lines
+        uint32_t curpos = 0;
+        uint32_t offset = 4; // one line = 2 vertices * 2 coords = 4 floats
+        for(uint32_t n=0; n<numlabels; ++n)
+        {
+            labelArray[curpos+0] = 0;
+            labelArray[curpos+1] = (10*(n+1))-1;
+            labelArray[curpos+2] = width-1;
+            labelArray[curpos+3] = (10*(n+1))-1;
+            curpos += offset;
+        }
+        
+        // create actual line data buffer
+        // this will be draw with GL_LINE_STRIP, which means we have one vertex per history entry
+        numVertices = historylength; 
+        numCoords = numVertices * 2;
+        linesArray.reset(new float[numCoords]);
+        // reset the coords to x = num and y = 0. y will be set later on during an update run to the current history value
+        for(uint32_t i=0; i<numVertices; ++i)
+        {
+            linesArray[i+0] = i; // set x to [0,historylength-1]
+            linesArray[i+1] = 0; // and current values to zero
+        }
+      }
+
+      FpsMeter::~FpsMeter()
+      {
       }
 
       void FpsMeter::resetHistory()
       {
-        for(unsigned long i =0; i<historylength; ++i)
+        for(uint32_t i =0; i<historylength; ++i)
         {
           history[i] = 0;
         }
@@ -52,7 +83,10 @@ namespace lost
         historycurpos = (historycurpos+1)%historylength;
       }
 
-      void FpsMeter::render(unsigned long x, unsigned long y, const boost::shared_ptr<Canvas>& canvas, double timeSinceLastCallSec)
+      void FpsMeter::render(uint32_t x,
+                            uint32_t y,
+                            const boost::shared_ptr<Canvas>& canvas,
+                            double timeSinceLastCallSec)
       {
         // FIXME: coordinates are off somehow ... we need to figure out the definitve way to draw precise coords. Somehow, OpenGL offsets things for a pixel sometimes
         addHistoryEntry(timeSinceLastCallSec);
@@ -60,29 +94,43 @@ namespace lost
         canvas->context->makeCurrent();
         canvas->context->pushState(renderState);
 
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
         // background
         canvas->setColor(Color(.75, .75, .75, alpha));
         canvas->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
 
-        // top caption
         canvas->setColor(Color(0, 0, 0, alpha));
+        glTranslatef(x,y,0);
+        glVertexPointer(2, GL_FLOAT, 0, labelArray.get()); GLDEBUG;
+        glDrawArrays(GL_LINES, 0,numlabels*2); GLDEBUG;
+    
+        for(uint32_t i=0; i<historylength; ++i)
+        {
+            linesArray[(i*2)+1] = history[(historycurpos+i)%historylength]; // update y values of the lines for display
+        }
 
-        // horizontal stripes
+        glVertexPointer(2, GL_FLOAT, 0, linesArray.get()); GLDEBUG;
+        glDrawArrays(GL_LINE_STRIP, 0,historylength); GLDEBUG;
+
+
+/*        // horizontal stripes
         canvas->setColor(Color(0, 0, 0, alpha));
-        for(unsigned long n=0; n<numlabels; ++n)
+        for(uint32_t n=0; n<numlabels; ++n)
         {
           canvas->drawLine(math::Vec2((float)x, (float)y+10*(n+1)-1), math::Vec2((float)x+width-1, (float)y+10*(n+1)-1));
         }
 
         // draw history ringbuffer
         canvas->setColor(Color(0, 0, 0, alpha));
-        unsigned long curpos = historycurpos;
-        for(unsigned long i=0; i<historylength-1; ++i)
+        uint32_t curpos = historycurpos;
+        for(uint32_t i=0; i<historylength-1; ++i)
         {
 //          gl::drawLine(math::Vec2(x+i, y), math::Vec2(x+i, y+history[curpos]));
           canvas->drawLine(math::Vec2((float)x+i, (float)y+history[curpos]), math::Vec2((float)x+i+1, (float)y+history[(curpos+1)%historylength]));
           curpos = (curpos+1) % historylength;
-        }
+        }*/
 
         canvas->context->popState();
       }
