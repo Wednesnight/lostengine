@@ -41,6 +41,11 @@ namespace lost
     {
       return boost::shared_ptr<Application>(new Application(inScript));
     }
+
+    void Application::runLoopWaitsForEvents(bool flag)
+    {
+      runLoopThread->waitForEvents = flag;
+    }
     
     Application::~Application()
     {
@@ -49,7 +54,7 @@ namespace lost
 
     void Application::setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
     {
-      if (runLoopThread) runLoopThread->setRunLoop(inRunLoop);
+      runLoopThread->setRunLoop(inRunLoop);
     }
     
     boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
@@ -61,7 +66,7 @@ namespace lost
     
     void Application::run()
     {
-      if (runLoopThread) runLoopThread->initialize(shared_from_this());
+      runLoopThread->initialize(shared_from_this());
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
       dispatchEvent(appEvent);
       doRun();
@@ -69,7 +74,7 @@ namespace lost
     
     void Application::startRunLoop()
     {
-      if (runLoopThread) runLoopThread->run(shared_from_this());
+      runLoopThread->run(shared_from_this());
     }
     
     void Application::quit()
@@ -83,7 +88,7 @@ namespace lost
     {
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::TERMINATE()));
       queueEvent(appEvent);
-      if (runLoopThread) runLoopThread->join();
+      runLoopThread->join();
     }
 
   }

@@ -38,6 +38,7 @@ namespace lost
       virtual void initialize(const boost::shared_ptr<Application>& inApplication);
       virtual void run(const boost::shared_ptr<Application>& inApplication);
       void join();
+      bool waitForEvents; // if true, only runs the loop once a low level event arrives
     };
 
     struct RunLoopThreadLua : public RunLoopThread

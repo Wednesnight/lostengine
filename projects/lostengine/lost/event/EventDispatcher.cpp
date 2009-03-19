@@ -58,6 +58,18 @@ namespace lost
     {
       (*listeners).clear();
     }
+
+    boost::mutex waitEventMutex;
+    boost::condition waitEventCondition;
+    void EventDispatcher::waitForEvents()
+    {
+      boost::unique_lock<boost::mutex> lock(waitEventMutex);
+      while(!eventQueue || !(eventQueue->size() > 0))
+      {
+        waitEventCondition.wait(lock);
+      }
+    }
+
     
     void EventDispatcher::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
     {
@@ -65,6 +77,7 @@ namespace lost
       if (!eventQueue) eventQueue.reset(new std::list<boost::shared_ptr<lost::event::Event> >());
       eventQueue->push_back(event);
       queueMutex.unlock();
+      waitEventCondition.notify_one();      
     }
     
     void EventDispatcher::processEvents(const double& timeoutInMilliSeconds)
