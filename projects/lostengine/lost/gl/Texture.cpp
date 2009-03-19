@@ -96,7 +96,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   // if sizehint is dontcare we try to choose non-power-of-two, unless the platform doesn't allow it
   if(sizeHint == Texture::SIZE_DONT_CARE)
   {
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
     if(GLEE_ARB_texture_non_power_of_two)
       sizeHint = Texture::SIZE_ORIGINAL;
     else

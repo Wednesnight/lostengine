@@ -14,9 +14,17 @@
   // in case of iphone, this header includes the OpenGL ES interfaces
   // every other platform gets the standard gl headers plus helpers provided 
   // by GLee (extension handling) and GLFW (platform abstraction)
-  #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+  #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
     #import <OpenGLES/ES1/gl.h>
     #import <OpenGLES/ES1/glext.h>
+
+    #define OPENGL_ES_1_1 11
+    #define OPENGL_ES_2_0 20
+
+    #define TARGET_OPENGL    0
+    #define TARGET_OPENGL_ES 1
+
+    #define VERSION_OPENGL_ES OPENGL_ES_1_1
   #else
     #include "GLee.h"
     #if defined WIN32
@@ -35,5 +43,8 @@
       #include <OpenGL/CGLCurrent.h>
       #include <OpenGL/glu.h>
     #endif
+
+    #define TARGET_OPENGL    1
+    #define TARGET_OPENGL_ES 0
   #endif
 #endif

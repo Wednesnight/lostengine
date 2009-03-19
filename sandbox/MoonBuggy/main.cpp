@@ -168,7 +168,7 @@ void redraw(shared_ptr<TimerEvent> event)
 	glMatrixMode(GL_PROJECTION);GLDEBUG;
 	glLoadIdentity();GLDEBUG;
 	lglOrtho(-1000.0f, 1000.0f, -750.0, 750.0, -1.0, 1.0);GLDEBUG;
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
 	glScalef(2.0, 2.0, 1.0);GLDEBUG;
 #else
 	glScalef(4.0, 2.0, 1.0);GLDEBUG;

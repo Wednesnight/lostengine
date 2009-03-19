@@ -6,6 +6,9 @@
 // this header is only present if we build on an apple platform
 #if defined __APPLE__
   #include <TargetConditionals.h>
+#else
+  #define TARGET_OS_IPHONE        0
+  #define TARGET_IPHONE_SIMULATOR 0
 #endif
 
 #include <string>

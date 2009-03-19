@@ -23,7 +23,7 @@ namespace utils
   std::string getGlErrorAsString(GLenum err)
   {
     // FIXME: we need a cleaner way to handle this, maybe move error handling/debugging to a dedicated header
-    #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+    #if TARGET_OPENGL_ES
       // there are only a handful of error codes in OpenGL ES, so we switch them by hand
       std::string result;
       switch(err)
@@ -57,8 +57,7 @@ namespace utils
     #endif
   }
 
-#if defined(TARGET_IPHONE) || defined(TARGET_IPHONE_SIMULATOR)
-#else
+#if TARGET_OPENGL
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
 
     std::string enum2string(GLenum inVal)

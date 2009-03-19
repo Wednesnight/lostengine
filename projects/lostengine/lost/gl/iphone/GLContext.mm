@@ -1,4 +1,4 @@
-#import "lost/application/gl/iphone/GLContext.h"
+#import "lost/gl/iphone/GLContext.h"
 
 @implementation GLContext
 

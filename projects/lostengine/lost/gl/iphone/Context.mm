@@ -1,4 +1,4 @@
-#include "lost/application/gl/Context.h"
+#include "lost/gl/Context.h"
 
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>

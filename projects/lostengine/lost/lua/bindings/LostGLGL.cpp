@@ -125,13 +125,13 @@ namespace lost
        def("glTranslate", &LOST_LUA_GL_PREFIX(glTranslatef)),
        def("glPushMatrix", &LOST_LUA_GL_PREFIX(glPushMatrix)),
        def("glPopMatrix", &LOST_LUA_GL_PREFIX(glPopMatrix))
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
        ,def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
        def("glPopAttrib", &LOST_LUA_GL_PREFIX(glPopAttrib))
 #endif
        ];
 
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
       globals(state)["gl"]["GL_CLAMP"] = GL_CLAMP;
       globals(state)["gl"]["GL_DEPTH_COMPONENT"] = GL_DEPTH_COMPONENT;
       globals(state)["gl"]["GL_DEPTH_COMPONENT16"] = GL_DEPTH_COMPONENT16;

@@ -491,6 +491,7 @@ namespace lost
       bmp.write(fullPathName);
     } 
 
+#if TARGET_OPENGL
     // lobotony: copied from freeglut
     //void  glutSolidCube( GLdouble dSize )
     // FIXME: not iphone compatible yet
@@ -514,7 +515,7 @@ namespace lost
     #   undef V
     #   undef NN
     }
-
+#endif
 
   }
 }

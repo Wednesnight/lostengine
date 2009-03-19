@@ -54,7 +54,9 @@ namespace lost
       void drawAABB(const lost::math::AABB& box);
       void drawAxes(const lost::math::Vec3& length);
 
+#if TARGET_OPENGL
       void drawSolidCube(GLfloat size);
+#endif
 
       void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
     };

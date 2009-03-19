@@ -38,7 +38,7 @@ namespace lost
         ElementBuffers elementBuffers;
 
         float  size;
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
         GLenum renderModeFront;
         GLenum renderModeBack;
 #endif
@@ -48,7 +48,7 @@ namespace lost
           mesh(inMesh),
           material(inMaterial),
           size(1.0f)
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
           ,renderModeFront(GL_FILL)
           ,renderModeBack(GL_FILL)
 #endif
@@ -115,7 +115,7 @@ namespace lost
           vertexBuffer->bindVertexPointer();
           normalBuffer->bindNormalPointer();
           // draw mesh faces as triangles
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
           glPolygonMode(GL_FRONT, renderModeFront);
           glPolygonMode(GL_BACK, renderModeBack);
 #endif
@@ -142,7 +142,7 @@ namespace lost
             elementBuffer->drawElements(GL_TRIANGLES);
             elementBuffer->unbind();
           }
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if TARGET_OPENGL
           glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 #endif
           normalBuffer->unbind();

@@ -22,7 +22,7 @@ namespace lost
       #if defined WIN32
         return platform_windows;
       #elif defined __APPLE__
-        #if defined(TARGET_IPHONE_SIMULATOR) || defined(TARGET_IPHONE)
+        #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
           return platform_iphone;
         #else
           return platform_mac;

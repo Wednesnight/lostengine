@@ -12,7 +12,7 @@ int main(int argn, char** args)
 {
   try
   {
-    boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
+    static boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
     app->run();
   }
   catch (std::exception& e)
