@@ -168,7 +168,10 @@ function GuiroTestController:keyHandler(event)
 end
 
 function GuiroTestController:runLoop(sender, passedSec)
-  self.window.context:makeCurrent()
+  if not self.contextOk then
+    self.window.context:makeCurrent()
+    self.contextOk = true
+  end
   self.window.context:pushState(self.renderState)
   self.window.canvas:clear(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT)
 
