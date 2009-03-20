@@ -26,22 +26,30 @@ namespace lost
 
     void debug(luabind::object obj)
     {
+#if defined(LOST_LOGGER_ENABLE_DOUT)
 			lost::common::Logger::logMessage("DEBUG", "(Lua)", luabind_tostring(obj));
+#endif
     }
 
     void info(luabind::object obj)
     {
+#if defined(LOST_LOGGER_ENABLE_IOUT)
 			lost::common::Logger::logMessage("INFO", "(Lua)", luabind_tostring(obj));
+#endif
     }
 
     void warn(luabind::object obj)
     {
+#if defined(LOST_LOGGER_ENABLE_WOUT)
 			lost::common::Logger::logMessage("WARNING", "(Lua)", luabind_tostring(obj));
+#endif
     }
 
     void error(luabind::object obj)
     {
+#if defined(LOST_LOGGER_ENABLE_EOUT)
 			lost::common::Logger::logMessage("ERROR", "(Lua)", luabind_tostring(obj));
+#endif
     }
   }
 }
