@@ -16,7 +16,6 @@ namespace lost
    
     void Camera::apply()
     {
-      context->makeCurrent();
       glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
