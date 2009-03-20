@@ -1,1 +1,3 @@
+#define LOST_GL_ENABLE_DEBUG
+#define LOST_GL_ENABLE_DEBUG_THROW
 #include "prefix-shared.h"
