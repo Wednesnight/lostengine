@@ -41,7 +41,6 @@ function UserInterface:render(canvas, forceRender)
 
   canvas.context:pushState(self.renderState)
   if forceRender or self.dirty then
-    canvas:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
     lost.guiro.View.render(self, canvas, true)
   else
     self:renderChildren(self, canvas)
