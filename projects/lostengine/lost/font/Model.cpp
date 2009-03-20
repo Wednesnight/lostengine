@@ -24,7 +24,6 @@ namespace lost
       // don't do anything if model is empty
       if((vertexCount==0) || (indexCount==0))
         return;
-      canvas->context->makeCurrent();
       canvas->context->pushState(renderState);
       
       texture->bind();
