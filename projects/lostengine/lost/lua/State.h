@@ -7,13 +7,14 @@
 #include <map>
 #include "lost/resource/File.h"
 #include "lost/resource/DefaultLoader.h"
+#include <boost/utility.hpp>
 
 namespace lost
 {
   namespace lua
   {
 
-    struct State
+    struct State : boost::noncopyable
     {
       State(boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
       ~State();

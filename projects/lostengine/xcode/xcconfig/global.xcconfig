@@ -31,8 +31,6 @@ HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/in
 // Compiler Version
 GCC_VERSION = 
 
-// GCC 4.0 - Code Generation
-GCC_OPTIMIZATION_LEVEL = 0
 
 // GCC 4.0 - Language
 GCC_C_LANGUAGE_STANDARD = c99

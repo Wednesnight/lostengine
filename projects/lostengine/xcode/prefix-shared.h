@@ -1,3 +1,5 @@
+//#define LUABIND_NOT_THREADSAFE
+
 
 #include "ft2build.h"
 #include <stdint.h>

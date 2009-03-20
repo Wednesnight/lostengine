@@ -1,3 +1,6 @@
 #include "global.xcconfig"
 
+// GCC 4.0 - Code Generation
+GCC_OPTIMIZATION_LEVEL = 3
+
 GCC_PREFIX_HEADER = prefix-release.pch
