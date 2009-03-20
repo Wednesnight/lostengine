@@ -393,11 +393,11 @@ function View:redraw(canvas)
       self.backgroundTextureParams = lost.gl.Texture.Params()
       self.backgroundTexture = lost.gl.Texture()
       self.backgroundTexture:init(self.backgroundImage, self.backgroundTextureParams)
+      if self.backgroundImageFilter then
+        self.backgroundTexture:filter(self.backgroundImageFilter)
+      end
     end
     self.backgroundTexture:bind()
-    if self.backgroundImageFilter then
-      self.backgroundTexture:filter(self.backgroundImageFilter)
-    end
 
     -- valid image corner bounds
     if self.backgroundImageBounds then
