@@ -88,7 +88,6 @@ namespace lost
       {
         addHistoryEntry(timeSinceLastCallSec);
 
-        canvas->context->makeCurrent();
         canvas->context->pushState(renderState);
 
         glMatrixMode(GL_MODELVIEW);
