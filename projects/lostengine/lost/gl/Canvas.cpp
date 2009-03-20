@@ -34,7 +34,6 @@ namespace lost
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
-      context->makeCurrent();
       context->pushState(state);
       
       float p[4];
@@ -55,7 +54,6 @@ namespace lost
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
-      context->makeCurrent();
       context->pushState(state);
       
       float p[6];
@@ -86,7 +84,6 @@ namespace lost
                                                Texture2D::create(false),
                                                VertexArray::create(true),
                                                LineSmooth::create(true));
-      context->makeCurrent();
       context->pushState(state);
 
       float stepSize = 1.0/steps;
@@ -117,7 +114,6 @@ namespace lost
                                                Texture2D::create(false),
                                                VertexArray::create(true),
                                                LineSmooth::create(true));
-      context->makeCurrent();
       context->pushState(state);
 
       float stepSize = 1.0/steps;
@@ -153,7 +149,6 @@ namespace lost
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
-      context->makeCurrent();
       context->pushState(state);
       
       float p[2];
@@ -172,7 +167,6 @@ namespace lost
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
-      context->makeCurrent();
       context->pushState(state);
       
       float p[3];
@@ -247,7 +241,6 @@ namespace lost
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
-      context->makeCurrent();
       context->pushState(state);
       
       // points
@@ -353,7 +346,7 @@ namespace lost
                                                Texture2D::create(true),
                                                VertexArray::create(true),
                                                TextureArray::create(true));
-      context->makeCurrent();
+//      context->makeCurrent();
       context->pushState(state);
       
       tex->bind();
@@ -401,7 +394,7 @@ namespace lost
                                                Texture2D::create(true),
                                                VertexArray::create(true),
                                                TextureArray::create(true));
-      context->makeCurrent();
+//      context->makeCurrent();
       context->pushState(state);
 
       mesh->texture->bind();
@@ -421,7 +414,7 @@ namespace lost
                                                Texture2D::create(false),
                                                VertexArray::create(true),
                                                TextureArray::create(false));
-      context->makeCurrent();
+//      context->makeCurrent();
       context->pushState(state);
       
       glVertexPointer(3, GL_FLOAT, 0, mesh->vertices.get()); GLDEBUG;
