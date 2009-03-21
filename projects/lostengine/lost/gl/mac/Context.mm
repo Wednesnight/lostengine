@@ -36,5 +36,11 @@ namespace lost
       [hiddenMembers->glContext flushBuffer];
     }
 
+    void Context::vsync(bool enable)
+    {
+      GLint f = enable ? 1 : 0;
+      [hiddenMembers->glContext setValues:&f forParameter:NSOpenGLCPSwapInterval];
+    }
+
   }
 }
