@@ -23,6 +23,7 @@ namespace lost
             .def("pushState", &Context::pushState)
             .def("popState", &Context::popState)
             .def("vsync", &Context::vsync)
+            .def("multithreaded", &Context::multithreaded)
         ]
       ];
     }

@@ -59,6 +59,7 @@ namespace lost
       void popState();
       
       void vsync(bool enable); // true to enable vsync to prevent tearing
+      void multithreaded(bool enable); // true to enable multithreaded OpenGL execution on Mac
     };
 
   }
