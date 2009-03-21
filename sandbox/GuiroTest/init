@@ -170,6 +170,7 @@ end
 function GuiroTestController:runLoop(sender, passedSec)
   if not self.contextOk then
     self.window.context:makeCurrent()
+--    self.window.context:vsync(true)
     self.contextOk = true
   end
   self.window.context:pushState(self.renderState)
