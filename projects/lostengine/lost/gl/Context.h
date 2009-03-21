@@ -57,6 +57,8 @@ namespace lost
 
       void pushState(const SharedState& newState);
       void popState();
+      
+      void vsync(bool enable); // true to enable vsync to prevent tearing
     };
 
   }

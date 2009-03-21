@@ -22,6 +22,7 @@ namespace lost
             .def("swapBuffers", &Context::swapBuffers)
             .def("pushState", &Context::pushState)
             .def("popState", &Context::popState)
+            .def("vsync", &Context::vsync)
         ]
       ];
     }
