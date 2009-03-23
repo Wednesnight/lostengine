@@ -47,6 +47,7 @@ namespace lost
       };
     
       Texture();
+      Texture(lost::math::Vec2 inSize, const Params& inParams = Params());
       Texture(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
       Texture(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());      
       ~Texture();    

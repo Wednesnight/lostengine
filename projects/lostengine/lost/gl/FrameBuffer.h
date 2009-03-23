@@ -134,6 +134,11 @@ struct FrameBuffer
     return lglCheckFramebufferStatus(LGL_FRAMEBUFFER);GLDEBUG_THROW;
   }
 
+  bool isComplete()
+  {
+    return (GL_FRAMEBUFFER_COMPLETE_EXT == status());
+  }
+
   GLuint buffer;
   GLint  previousFramebuffer;
 };
