@@ -56,6 +56,11 @@ Texture::Texture()
   create();
 }
 
+Texture::Texture(lost::math::Vec2 inSize, const Params& inParams)
+{
+    init(inSize, inParams);
+}
+
 Texture::Texture(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
 {
   create();
@@ -129,6 +134,8 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   // memorize texture and raw data sizes for texture coordinate calculations
   width = texwidth;
   height = texheight;
+  dataWidth = 0;
+  dataHeight = 0;
 }
 
 void Texture::init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Texture::Params& inParams)
