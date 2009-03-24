@@ -14,6 +14,7 @@
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
+		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
+		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				EA26A84B0F77B1DE00490D18 /* main.cpp */,
+				EAF8EB370F784873005BE1B3 /* Filt3rz.h */,
+				EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */,
 				EA26A8490F77B1D000490D18 /* config */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -234,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */,
+				EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
