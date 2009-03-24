@@ -20,7 +20,7 @@ Filt3rz::Filt3rz()
   window->context->makeCurrent();
   setupFBOs();  
   contextOk = false;
-  renderState = State::create(ClearColor::create(blackColor));
+  renderState = State::create(ClearColor::create(redColor));
 }
 
 Filt3rz::~Filt3rz()
@@ -48,6 +48,7 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   window->canvas->context->pushState(renderState);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   window->canvas->context->popState();
+  window->context->swapBuffers();
 }
 
 void Filt3rz::keyHandler(boost::shared_ptr<lost::application::KeyEvent> event)
