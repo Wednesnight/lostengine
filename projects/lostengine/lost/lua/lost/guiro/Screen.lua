@@ -40,6 +40,10 @@ function Screen:propagateKeyEvent(event)
   self.eventManager:propagateKeyEvent(event)
 end
 
+function Screen:propagateTouchEvent(event)
+  self.eventManager:propagateTouchEvent(self, event)
+end
+
 --[[
     only accepts lost.guiro.UserInterface
   ]]
@@ -73,6 +77,10 @@ function Screen:setEventDispatcher(dispatcher)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:propagateKeyEvent(event) end)
   dispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
+  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self:propagateTouchEvent(event) end)
+  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self:propagateTouchEvent(event) end)
+  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:propagateTouchEvent(event) end)
+  dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
 end
 
 function Screen:screen()

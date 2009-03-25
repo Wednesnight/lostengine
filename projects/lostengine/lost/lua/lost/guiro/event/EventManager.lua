@@ -3,6 +3,7 @@ module("lost.guiro.event", package.seeall)
 require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
+require("lost.guiro.event.TouchEvent")
 
 class "lost.guiro.event.EventManager"
 EventManager = _G["lost.guiro.event.EventManager"]
@@ -258,6 +259,15 @@ function EventManager:propagateKeyEvent(event)
 --  keyevent.currentTarget = nil -- will be set to the receiving view upon dispatch
   keyevent.target = self:focusedView() -- the currently focused view is the target of the click
   self:propagateEvent(self.previousFocusStack, keyevent, #self.previousFocusStack)
+end
+
+function EventManager:propagateTouchEvent(rootView, event)
+  local touchEvent = lost.guiro.event.TouchEvent(event)
+
+  log.debug("received ".. touchEvent.size .." touches")
+  for touch in touchEvent.touches do
+    log.debug(tostring(touch.location))
+  end
 end
 
 function EventManager:focusedView()

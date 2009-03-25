@@ -20,10 +20,11 @@ typeConvert[lost.application.MouseEvent.MOUSE_DOWN] = MouseEvent.MOUSE_DOWN
 function MouseEvent:__init(laMouseEvent)
   lost.guiro.event.Event.__init(self)
 
+  local lostAppMouseEvent = lost.application.MouseEvent.cast(laMouseEvent)
+
   self.bubbles = true
-  self.lostAppMouseEvent = lost.application.MouseEvent.cast(laMouseEvent)
-  self.pos = self.lostAppMouseEvent.pos
-  self.type = typeConvert[self.lostAppMouseEvent.type]
+  self.pos = lostAppMouseEvent.pos
+  self.type = typeConvert[lostAppMouseEvent.type]
   self.stopDispatch = false
   self.stopPropagation = false
 end

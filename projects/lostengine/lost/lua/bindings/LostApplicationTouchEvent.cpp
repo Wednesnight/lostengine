@@ -2,6 +2,7 @@
 #include "lost/lua/lua.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/lua/EventCast.h"
+#include <luabind/iterator_policy.hpp>
 
 #include "lost/lua/bindings/LostApplicationTouchEvent.h"
 
@@ -22,8 +23,7 @@ namespace lost
           class_<TouchEvent, Event, boost::shared_ptr<TouchEvent> >("TouchEvent")
             .def(constructor<std::string>()) 
             .def("size", &TouchEvent::size) 
-            .def("get", &TouchEvent::get) 
-//            .def_readwrite("touches", &TouchEvent::touches)
+            .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)
             .scope
             [
               class_<TouchEvent::Touch, boost::shared_ptr<TouchEvent::Touch> >("Touch")
