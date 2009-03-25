@@ -2634,7 +2634,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D910F14EDEA00D7C8B4 /* iphone.xcconfig */;
 			buildSettings = {
-				GCC_THUMB_SUPPORT = NO;
 			};
 			name = Debug;
 		};

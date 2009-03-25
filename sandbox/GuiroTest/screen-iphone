@@ -1,168 +1,227 @@
-require("lost.guiro.Bounds")
-g = lost.guiro
+-- namespace alias
+local g = lost.guiro
 
-screen = guiro:Screen
+-- button states
+local buttonStyle =
+{
+  released =
+  {
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
+  },
+  hovered =
+  {
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
+  },
+  pressed =
+  {
+    backgroundImage = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
+    backgroundImageBounds = {left = 10, right = 10, top = 10, bottom = 10}
+  }
+}
+
+local pmouse = guiro:MouseCursor
+{
+  backgroundImage = lost.bitmap.Bitmap(guiro:File("pimmel.png")),
+  hotspot = lost.math.Vec2(11,44)
+}
+
+-- screen definition
+guiro:Screen
 {
   id = "screen",
   bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(320), g.habs(480)),
-
   guiro:UserInterface
   {
     id = "ui",
     bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wrel(1.0), g.hrel(1.0)),
 
+		listeners =
+		{
+			mouseEnter = function(event)
+				log.debug("--- mouse entered view: "..event.target.id)
+			end,
+			mouseLeave = function(event)
+				log.debug("--- mouse left view: "..event.target.id)
+			end,
+			mouseDown = function(event)
+				log.debug("--- mouse down view: "..event.target.id)
+			end,
+			mouseUp = function(event)
+				log.debug("--- mouse up view: "..event.target.id)
+			end,
+			mouseUpOutside = function(event)
+				log.debug("--- mouse upoutside view: "..event.target.id)
+			end,
+			focusReceived = function(event)
+				log.debug("--- focus received view: "..event.target.id)
+			end,
+			focusLost = function(event)
+				log.debug("--- focus lost view: "..event.target.id)
+			end,
+			keyDown = function(event)
+				log.debug("--- key down view, code: ".. event.target.id .." (".. event.key ..")")
+				log.debug("--- key down view, character: ".. event.target.id .." (".. event.character ..")")
+			end,
+			keyUp = function(event)
+				log.debug("--- key up view: ".. event.target.id .." (".. event.character ..")")
+			end
+		},
+
     guiro:Window
     {
-      id = "window",
-      bounds = g.Bounds(g.xleft({abs=1}), g.ybottom({abs=1}), g.wrel(0.9), g.hrel(0.65)),
-      header =
+			id = "window1",
+      bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+      corners = { size = lost.math.Vec2(10, 10) },
+			header =
       {
-        height = 25
-      },
-
-      label = guiro:Label
-      {
-        bounds = g.Bounds(g.xleft({abs=5}), g.ytop({abs=-2}), g.wrel(1.0, 10), g.habs(15)),
-        text = "funky window"
-      },
-
---[[
-      guiro:Button
-      {
-        id = "button",
-        bounds = g.Bounds(g.xright({abs=-5}), g.ytop({abs=-245}), g.wabs(50), g.habs(40)),
-        fadeStates = true,
-        label = guiro:Label
+        text = "window1 <こんにちは世界> ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
+        backgroundColor = lost.common.Color(0,1,0),
+        corners =
         {
-          bounds = g.Bounds(g.xabs(7), g.yabs(15), g.wabs(50), g.habs(40)),
-          text = "Small"
+          size = lost.math.Vec2(10, 10)
         },
-        images =
-        {
-          released = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          hovered = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          pressed = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(50), g.habs(40)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          }
-        }
+        font = lost.font.TrueTypeFont.create(lost.guiro.config.freetypeLibrary, lost.guiro.config.loader:load("Arial Unicode.ttf")),
+        fontColor = lost.common.Color(0,0,0)
       },
-
-      guiro:Button
+      content =
       {
-        bounds = g.Bounds(g.xright({abs=-5}), g.ytop({abs=-195}), g.wabs(100), g.habs(50)),
-        fadeStates = true,
-        label = guiro:Label
+        guiro:Button
         {
-          bounds = g.Bounds(g.xabs(25), g.yabs(20), g.wabs(100), g.habs(50)),
-          text = "Medium"
+          id = "button",
+          bounds = g.Bounds(g.xright({abs=-5}), g.ybottom({abs=25}), g.wabs(50), g.habs(40)),
+          label =
+          {
+            bounds = g.Bounds(g.xcenter(), g.ycenter({abs=2}), g.wrel(1.0), g.hrel(1.0)),
+            text = "Small",
+            receivesEvents = false
+          },
+          released = buttonStyle.released,
+          hovered = buttonStyle.hovered,
+          pressed = buttonStyle.pressed
         },
-        images =
-        {
-          released = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          hovered = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          },
-          pressed = guiro:Image
-          {
-            bounds = g.Bounds(g.xabs(0), g.yabs(0), g.wabs(100), g.habs(50)),
-            bitmap = lost.bitmap.Bitmap(guiro:File("defaultButton.png")),
-            cornerBounds = {left = 10, right = 10, top = 10, bottom = 10}
-          }
-        }
-      },
-]]
 
-      guiro:Slider
-      {
-        id = "slider",
-        bounds = g.Bounds(g.xleft({abs=26}), g.ytop({abs=-54}), g.wabs(25), g.habs(200)),
-        orientation = lost.guiro.controls.Slider.Orientation.vertical,
-        min = 0,
-        max = 1,
-        steps = 0,
-        value = 1,
-        listeners =
+        guiro:Button
         {
-          [lost.guiro.controls.Slider.SliderChange] = function(event)
-            screen("ui")("window")("image"):alpha(event.value)
-          end
-        }
-      },
-
-      guiro:Slider
-      {
-        id = "slider2",
-        bounds = g.Bounds(g.xleft({abs=120}), g.ytop({abs=-30}), g.wabs(50), g.habs(25)),
-        orientation = lost.guiro.controls.Slider.Orientation.horizontal,
-        min = 0,
-        max = 1,
-        steps = 1,
-        value = 1,
-        listeners =
-        {
-          [lost.guiro.controls.Slider.SliderChange] = function(event)
-            log.debug(event.value)
-            if event.value == screen("ui")("window")("slider2").min then
-              screen("ui")("window")("image"):filter(gl.GL_NEAREST)
-            elseif event.value == screen("ui")("window")("slider2").max then
-              screen("ui")("window")("image"):filter(gl.GL_LINEAR)
+          bounds = g.Bounds(g.xright({abs=-5}), g.ybottom({abs=75}), g.wabs(100), g.habs(50)),
+          label =
+          {
+            bounds = g.Bounds(g.xcenter({abs=2}), g.ycenter({abs=2}), g.wrel(1.0), g.hrel(1.0)),
+            text = "MOUSE",
+            receivesEvents = false					
+          },
+          released = buttonStyle.released,
+          hovered = buttonStyle.hovered,
+          pressed = buttonStyle.pressed,
+          listeners =
+          {
+            mouseDown = function(event)
+              log.debug("---------- CLICK")
+              local mm = event.target:screen().mouseManager
+              mm:showOsMouse(false)
+              mm:setMouse(pmouse)
             end
-          end
-        }
-      },
-
-      guiro:Image
-      {
-        id = "image",
-        bounds = g.Bounds(g.xleft({abs=50}), g.ytop({abs=-54}), g.wabs(120), g.habs(200)),
-        bitmap = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
-        stretch = true,
-        style = guiro:Style
-        {
-          borderColor = lost.common.Color(0,0,0,1)
+          }
         },
-        listeners =
+
+        guiro:Button
         {
-          [lost.application.TouchEvent.TOUCHES_BEGAN] = function(event)
-            local touchEvent = lost.application.TouchEvent.cast(event)
-            if touchEvent:size() == 1 then
-              local touch = touchEvent:get(0)
-              if screen("ui")("window")("image"):globalRect():contains(touch.location) then
-                screen("ui")("window")("image"):stretch(not screen("ui")("window")("image"):stretch())
+          bounds = g.Bounds(g.xright({abs=-5}), g.ybottom({abs=135}), g.wabs(150), g.habs(75)),
+          label =
+          {
+            bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(1.0), g.hrel(1.0)),
+            text = "Large foobar foobar foobar foobar foobar",
+            receivesEvents = false											
+          },
+          released = buttonStyle.released,
+          hovered = buttonStyle.hovered,
+          pressed = buttonStyle.pressed
+        },
+
+        guiro:Slider
+        {
+          id = "slider",
+          bounds = g.Bounds(g.xleft({abs=26}), g.ybottom({abs=45}), g.wabs(25), g.habs(200)),
+          orientation = lost.guiro.controls.Slider.Orientation.vertical,
+          min = 0,
+          max = 1,
+          steps = 0,
+          value = 1,
+          listeners =
+          {
+            [lost.guiro.controls.Slider.SliderChange] = function(event)
+              event.target.parent("image").backgroundColor.a = event.value
+            end
+          }
+        },
+
+        guiro:Slider
+        {
+          id = "slider2",
+          bounds = g.Bounds(g.xleft({abs=180}), g.ybottom({abs=244}), g.wabs(50), g.habs(25)),
+          orientation = lost.guiro.controls.Slider.Orientation.horizontal,
+          min = 0,
+          max = 1,
+          steps = 1,
+          value = 1,
+          listeners =
+          {
+            [lost.guiro.controls.Slider.SliderChange] = function(event)
+              local image = event.target.parent("image")
+              if event.value == event.target.min then
+                image.backgroundImageFilter = gl.GL_NEAREST
+              elseif event.value == event.target.max then
+                image.backgroundImageFilter = gl.GL_LINEAR
               end
             end
-          end
+          }
+        },
 
+        guiro:Image
+        {
+          id = "image",
+          bounds = g.Bounds(g.xleft({abs=50}), g.ybottom({abs=45}), g.wabs(180), g.habs(200)),
+          borderColor = lost.common.Color(0,0,0,1),
+          backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+          listeners =
+          {
+            mouseDown = function(event)
+              event.target.backgroundImageStretched = not event.target.backgroundImageStretched
+            end
+          }
+        },
+        
+        guiro:Label
+        {
+          bounds = g.Bounds(g.xleft({abs=5}), g.ybottom({abs=5}), g.wabs(200), g.habs(30)),
+          text = "Hello World!",
+          backgroundColor = lost.common.Color(1,1,0),
+          font = lost.font.TrueTypeFont.create(lost.guiro.config.freetypeLibrary, lost.guiro.config.loader:load("Monaco.ttf")),
+          fontColor = lost.common.Color(0,0,0),
+          fontSize = 12
         }
-      },
-      
-      guiro:Label
+      }
+    },
+
+    guiro:Window
+    {
+      id = "window2",
+      bounds = g.Bounds(g.xleft({abs=0}), g.ybottom({abs=0}), g.wrel(0.5), g.hrel(0.5)),
+      header =
       {
-        id="label",
-        bounds = g.Bounds(g.xabs(5), g.yabs(5), g.wabs(100), g.habs(30)),
-        text="Hello World!",
-        fontSize = 16
+        text = "window2",
+        fontColor = lost.common.Color(0,0,0),
+        backgroundColor = lost.common.Color(0,1,0)
+      },
+      content =
+      {
+        guiro:Image
+        {
+          id = "centeredImage",
+          bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
+          backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
+        }
       }
     }
   }

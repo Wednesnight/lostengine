@@ -6,3 +6,6 @@ PREBINDING = NO
 
 // User-Defined
 ZERO_LINK = NO
+
+// Do not compile for THUMB
+GCC_THUMB_SUPPORT = NO

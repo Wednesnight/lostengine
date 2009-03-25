@@ -136,7 +136,7 @@ struct FrameBuffer
 
   bool isComplete()
   {
-    return (GL_FRAMEBUFFER_COMPLETE_EXT == status());
+    return (LGL_FRAMEBUFFER_COMPLETE == status());
   }
 
   GLuint buffer;
