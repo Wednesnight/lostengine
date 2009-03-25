@@ -46,6 +46,10 @@
 		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
 		8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine.a */; };
 		8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */; };
+		8DBCC4860F74404B003C3E3F /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
+		8DBCC4870F74404C003C3E3F /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
+		8DBCC48A0F74405E003C3E3F /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
+		8DBCC48B0F74405F003C3E3F /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
 		B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
 		B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
 		B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
@@ -405,6 +409,8 @@
 				3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */,
 				3E2447790F08C7200023E6B8 /* screen-iphone in Resources */,
 				B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				8DBCC4860F74404B003C3E3F /* pimmel.png in Resources */,
+				8DBCC48A0F74405E003C3E3F /* Monaco.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +428,8 @@
 				3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */,
 				3E24477B0F08C7200023E6B8 /* screen-iphone in Resources */,
 				B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				8DBCC4870F74404C003C3E3F /* pimmel.png in Resources */,
+				8DBCC48B0F74405F003C3E3F /* Monaco.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +557,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "Info-iphone.plist";
+				INFOPLIST_FILE = "info-iphone.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -570,7 +578,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "/Users/tboll/coding/lostgenius.net-lua-test-branch/sandbox/GuiroTest/xcode/Info-iphone.plist";
+				INFOPLIST_FILE = "info-iphone.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -617,7 +625,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
-				INFOPLIST_FILE = "/Users/tboll/coding/lostgenius.net-lua-test-branch/sandbox/GuiroTest/xcode/Info-simulator.plist";
+				INFOPLIST_FILE = "Info-simulator.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

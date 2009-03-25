@@ -109,18 +109,10 @@ namespace lost
       [hiddenMembers->application performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
     }
     
+    void Application::showMouse(bool visible)
+    {
+      // FIXME: we probably don't need this
+    }
+
   }
-}
-
-// FIXME: remove this old stuff
-#import <OpenGLES/EAGL.h>
-
-void* lglGetCurrentContext()
-{
-  return (void*)[EAGLContext currentContext];
-}
-
-bool lglSetCurrentContext(void* context)
-{
-  return [EAGLContext setCurrentContext:(EAGLContext*)context];
 }

@@ -90,7 +90,12 @@ function GuiroTestController:initialize(application)
   self.app:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:keyHandler(event) end)
   self.app:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:keyHandler(event) end)
 
-  self.window = self.app:createWindow("MainWindow", lost.application.WindowParams("GuiroTest", lost.math.Rect(100, 100, 800, 600)))
+  if lost.platform.isIPhone() then
+    self.windowSize = lost.math.Vec2(320, 480)
+  else
+    self.windowSize = lost.math.Vec2(800, 600)
+  end
+  self.window = self.app:createWindow("MainWindow", lost.application.WindowParams("GuiroTest", lost.math.Rect(100, 100, self.windowSize.x, self.windowSize.y)))
 
   self.controls = {}
   self.controls.fpsMeter = lost.common.FpsMeter()
@@ -184,7 +189,7 @@ function GuiroTestController:runLoop(sender, passedSec)
   self.controls.screen:render(self.window.canvas, true)
 
   gl.glLoadIdentity()
-  self.controls.fpsMeter:render(800 - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)
+  self.controls.fpsMeter:render(self.windowSize.x - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)
 
   self.window.context:popState()
   self.window.context:swapBuffers()
