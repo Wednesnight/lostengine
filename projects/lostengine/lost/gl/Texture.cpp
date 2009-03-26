@@ -96,6 +96,8 @@ void Texture::init(boost::shared_ptr<lost::resource::File> inFile,  const Params
 
 void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inParams)
 {
+  bind();
+  
   uint32_t texwidth, texheight;
   Texture::SizeHint sizeHint = inParams.sizeHint;
   // if sizehint is dontcare we try to choose non-power-of-two, unless the platform doesn't allow it

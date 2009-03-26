@@ -13,6 +13,14 @@ namespace gl
 {
 struct FrameBuffer
 {
+private:
+  // attaches the renderbuffer to the currently bound framebuffer at the specified attachment target
+  void attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
+  {
+    lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
+  }
+
+public:
   FrameBuffer()
   {
     lglGenFramebuffers(1, &buffer);GLDEBUG_THROW;
@@ -74,12 +82,6 @@ struct FrameBuffer
   void attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
   {
     attach(LGL_DEPTH_ATTACHMENT, inRenderBuffer);
-  }
-
-  // attaches the renderbuffer to the currently bound framebuffer at the specified attachment target
-  void attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
-  {
-    lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
   }
 
 

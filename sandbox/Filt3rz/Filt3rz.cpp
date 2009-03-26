@@ -32,7 +32,7 @@ void Filt3rz::setupFBOs()
     framebuffer.reset(new FrameBuffer());
     framebuffer->enable();
     tex.reset(new Texture(Vec2(256, 256)));
-    framebuffer->attach(0, tex);
+    framebuffer->attachColor(0, tex);
     DOUT("FBO complete: "<<framebuffer->isComplete());
     framebuffer->disable();
 }
