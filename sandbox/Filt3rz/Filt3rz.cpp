@@ -39,7 +39,7 @@ void Filt3rz::setupBlurShader()
 
 void Filt3rz::setupTestBitmap()
 {
-  testPic.reset(new Texture(app->loader->load("lobotomy.jpg")));
+  testPic.reset(new Texture(app->loader->load("zim.jpg")));
 }
 
 void Filt3rz::setupFBOs()
@@ -101,6 +101,8 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   glActiveTexture(GL_TEXTURE0);
   tex->bind();
   (*blurShader)["colorMap"] = (GLuint)0;
+  (*blurShader)["width"] = (float)fboSize.width;
+  (*blurShader)["height"] = (float)fboSize.height;
   window->canvas->drawRectTextured(Rect(testPic->dataWidth+10,0,fboSize.width, fboSize.height), tex, false);  
   blurShader->disable();
 
