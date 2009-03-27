@@ -4,7 +4,7 @@ int main(int argn, char** args)
 {
   try
   {
-    Filt3rz filt3rz;
+    static Filt3rz filt3rz;
     filt3rz.run();
   }
   catch (std::exception& e)

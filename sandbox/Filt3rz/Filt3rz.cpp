@@ -5,6 +5,7 @@
 using namespace std;
 using namespace boost;
 using namespace lost::common;
+using namespace lost::camera;
 using namespace lost::application;
 using namespace lost::event;
 using namespace lost::math;
@@ -19,34 +20,68 @@ Filt3rz::Filt3rz()
   window = app->createWindow("window", WindowParams("Filt3rz", Rect(0,0,800,600)));
   window->context->makeCurrent();
   setupFBOs();  
-  contextOk = false;
   renderState = State::create(ClearColor::create(redColor));
+  fboRenderState = State::create(ClearColor::create(whiteColor));
 }
 
 Filt3rz::~Filt3rz()
 {
+  DOUT("shutting down");
 }
 
 void Filt3rz::setupFBOs()
 {
+    fboSize.width = 256;
+    fboSize.height = 256;
+
+    fboViewport.x = 0;
+    fboViewport.y = 0;
+    fboViewport.width = fboSize.width;
+    fboViewport.height = fboSize.height;
+
     framebuffer.reset(new FrameBuffer());
     framebuffer->enable();
-    tex.reset(new Texture(Vec2(256, 256)));
+    tex.reset(new Texture(fboSize));
     framebuffer->attachColor(0, tex);
     DOUT("FBO complete: "<<framebuffer->isComplete());
     framebuffer->disable();
+    
+    fboCam.reset(new Camera2D(window->context, fboViewport));
+    fboCanvas.reset(new Canvas(window->context, fboCam));
+}
+
+void Filt3rz::renderFbo()
+{
+  framebuffer->enable();
+  fboCanvas->camera->apply();
+  fboCanvas->context->pushState(fboRenderState);
+  fboCanvas->clear(GL_COLOR_BUFFER_BIT);
+  fboCanvas->setColor(blackColor);
+  glMatrixMode(GL_MODELVIEW);GLDEBUG;
+  glLoadIdentity();GLDEBUG;
+  fboCanvas->drawLine(Vec2(0,0), Vec2(100,100));
+  fboCanvas->drawPoint(Vec2(128,128));
+  fboCanvas->context->popState();
+  framebuffer->disable();
 }
 
 void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
 {
-  if(!contextOk)
-  {
-    window->context->makeCurrent();
-    contextOk = true;
-  }
+  // don't call this everywhere! call it at the beginning of the draw method.
+  // makeCurrent won't perform unnecessary context switches
+  window->context->makeCurrent(); 
+  
+  renderFbo();
+
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderState);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  window->canvas->setColor(whiteColor);
+  glMatrixMode(GL_MODELVIEW);GLDEBUG;
+  glLoadIdentity();GLDEBUG;
+  window->canvas->drawRectTextured(Rect(400,300,fboSize.width, fboSize.height), tex, false);  
+  fboCanvas->drawLine(Vec2(0,0), Vec2(100,100));
+  fboCanvas->drawPoint(Vec2(128,128));
   window->canvas->context->popState();
   window->context->swapBuffers();
 }
