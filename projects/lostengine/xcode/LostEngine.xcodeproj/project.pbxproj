@@ -536,6 +536,9 @@
 		EA54FA760E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA7B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
 		EA54FA7E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
+		EA5D3C560F7C650B002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
+		EA5D3C570F7C650C002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
+		EA5D3C580F7C650D002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
 		EA6711390E3E893C00B961EC /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
@@ -922,6 +925,7 @@
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
+		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
 		EA70F9320ED08E99000AA8CB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = al/Context.cpp; sourceTree = "<group>"; };
@@ -1554,6 +1558,7 @@
 				8DFDE59E0F56D446005D3927 /* mac */,
 				8DFDE5980F56D43C005D3927 /* Canvas.cpp */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
+				EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */,
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
@@ -2036,6 +2041,7 @@
 				B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41267050F5EE7CD001CCC23 /* version.cpp in Sources */,
 				B475506A0F690E2700B04249 /* Parser.cpp in Sources */,
+				EA5D3C580F7C650D002804E4 /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2261,6 +2267,7 @@
 				EAFF077C0F71B26E00001316 /* LostModelObjMaterial.cpp in Sources */,
 				EAFF077D0F71B26E00001316 /* LostModelObjParser.cpp in Sources */,
 				EAFF077E0F71B26F00001316 /* LostModelObjRenderer.cpp in Sources */,
+				EA5D3C560F7C650B002804E4 /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2519,6 +2526,7 @@
 				B41266E40F5EE7CD001CCC23 /* variant.cpp in Sources */,
 				B41266E60F5EE7CD001CCC23 /* version.cpp in Sources */,
 				B47550690F690E2700B04249 /* Parser.cpp in Sources */,
+				EA5D3C570F7C650C002804E4 /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
