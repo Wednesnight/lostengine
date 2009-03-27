@@ -18,33 +18,69 @@ function Class:__finalize()
   end
 end
 
-function defineClass(namespace, relativeClassName, definition)
-  local namespaceClass = namespace[relativeClassName.."_mt"]
-  namespaceClass = {}
+function defineClass(namespace, definition)
   for k,v in next,definition do
-    namespaceClass[k] = v
+    namespace[k] = v
   end
-  namespace[relativeClassName] = function(...)
-    local result = {}
-    setmetatable(result, namespaceClass)
-    result["__holder"] = Class(result, args)
-    return result
-  end
+  local ctor =
+  {
+    __call = function(...)
+      local result = {}
+      for k,v in next,namespace do
+        result[k] = v
+      end
+      setmetatable(result, namespace)
+      result["__holder"] = Class(result, args)
+      return result
+    end
+  }
+  setmetatable(namespace, ctor)
 end
 
+function declareClass(className)
+  local namespace = _G
+  for name in string.gmatch(className, "[^%.]+") do
+    if not namespace[name] then
+      namespace[name] = {}
+    end
+    namespace = namespace[name]
+  end
+  return namespace
+end
+--[[
+function _class(class)
+  if type(class) == "string" then
+    -- new class
+    local namespace = declareClass(class)
+    return function(definition) defineClass(namespace, definition) end
+  else
+    -- derived class
+    return function (className)
+             local namespace = declareClass(className)
+             return function(definition) defineClass(namespace, definition) end
+           end
+  end
+end
+]]
+
 function _class(className)
- local namespaceClass = _G
- local namespace = _G
- local relativeClassName = ""
- for name in string.gmatch(className, "[^%.]+") do
-   if not namespaceClass[name] then
-     namespaceClass[name] = {}
-   end
-   namespace = namespaceClass
-   relativeClassName = name
-   namespaceClass = namespaceClass[name]
- end
- return function(definition) defineClass(namespace, relativeClassName, definition) end
+  local namespace = declareClass(className)
+  local definition = {}
+  _class_derived = function(className)
+    if type(className) == "string" then
+      local ancestor = declareClass(className)
+      for k,v in next,ancestor do
+        definition[k] = v
+      end
+      return _class_derived
+    else
+      for k,v in next,className do
+        definition[k] = v
+      end
+      return defineClass(namespace, definition)
+    end
+  end
+  return _class_derived
 end
 
 _class "just.a.test"
@@ -58,7 +94,28 @@ _class "just.a.test"
   end
 }
 
-local t = just.a.test()
+function just.a.test:foo(bar)
+  --
+end
+
+function just.a.test:__call(foo)
+  log.debug(foo)
+end
+
+_class "another.test" "just.a.test"
+{
+  testing = function(self, what)
+    log.debug(what)
+  end
+}
+
+_class "funky.test" "another.test" "just.a.test"
+{
+}
+
+local t = funky.test()
+t("yay")
+t:testing("yay2")
 t = nil
 
 -- CLASS TEST END
