@@ -31,23 +31,24 @@ Filt3rz::~Filt3rz()
 
 void Filt3rz::setupFBOs()
 {
-    fboSize.width = 256;
-    fboSize.height = 256;
+  fboSize.width = 256;
+  fboSize.height = 256;
 
-    fboViewport.x = 0;
-    fboViewport.y = 0;
-    fboViewport.width = fboSize.width;
-    fboViewport.height = fboSize.height;
+  fboViewport.x = 0;
+  fboViewport.y = 0;
+  fboViewport.width = fboSize.width;
+  fboViewport.height = fboSize.height;
 
-    framebuffer.reset(new FrameBuffer());
-    framebuffer->enable();
-    tex.reset(new Texture(fboSize));
-    framebuffer->attachColor(0, tex);
-    DOUT("FBO complete: "<<framebuffer->isComplete());
-    framebuffer->disable();
-    
-    fboCam.reset(new Camera2D(window->context, fboViewport));
-    fboCanvas.reset(new Canvas(window->context, fboCam));
+  framebuffer.reset(new FrameBuffer());
+  framebuffer->enable();
+  tex.reset(new Texture(fboSize));
+  framebuffer->attachColor(0, tex);
+  tex->filter(GL_NEAREST);
+  DOUT("FBO complete: "<<framebuffer->isComplete());
+  framebuffer->disable();
+  
+  fboCam.reset(new Camera2D(window->context, fboViewport));
+  fboCanvas.reset(new Canvas(window->context, fboCam));
 }
 
 void Filt3rz::renderFbo()
