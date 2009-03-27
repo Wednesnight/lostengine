@@ -14,6 +14,9 @@ namespace lost
 
   namespace bitmap
   {
+    struct Bitmap;
+    typedef boost::shared_ptr<Bitmap> BitmapPtr;
+  
     struct Bitmap : private boost::noncopyable
     {
       enum Components

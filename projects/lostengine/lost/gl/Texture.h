@@ -15,6 +15,9 @@ namespace lost
 
   namespace gl
   {
+    struct Texture;
+    typedef boost::shared_ptr<Texture> TexturePtr;
+  
     /** a 2D Texture helper class.
      *
      */
