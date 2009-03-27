@@ -20,13 +20,26 @@ Filt3rz::Filt3rz()
   window = app->createWindow("window", WindowParams("Filt3rz", Rect(0,0,800,600)));
   window->context->makeCurrent();
   setupFBOs();  
-  renderState = State::create(ClearColor::create(redColor));
-  fboRenderState = State::create(ClearColor::create(whiteColor));
+  setupBlurShader();
+  setupTestBitmap();
+  renderState = State::create(ClearColor::create(whiteColor));
+  fboRenderState = State::create(ClearColor::create(blueColor));
 }
 
 Filt3rz::~Filt3rz()
 {
   DOUT("shutting down");
+}
+
+void Filt3rz::setupBlurShader()
+{
+  blurShader = loadShader(app->loader, "convolute");
+}
+
+
+void Filt3rz::setupTestBitmap()
+{
+  testPic.reset(new Texture(app->loader->load("lobotomy.jpg")));
 }
 
 void Filt3rz::setupFBOs()
@@ -57,11 +70,13 @@ void Filt3rz::renderFbo()
   fboCanvas->camera->apply();
   fboCanvas->context->pushState(fboRenderState);
   fboCanvas->clear(GL_COLOR_BUFFER_BIT);
-  fboCanvas->setColor(blackColor);
+  fboCanvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  fboCanvas->drawLine(Vec2(0,0), Vec2(100,100));
-  fboCanvas->drawPoint(Vec2(128,128));
+  glMatrixMode(GL_TEXTURE);GLDEBUG;
+  glLoadIdentity();
+//  fboCanvas->drawLine(Vec2(0,0), Vec2(256,256));
+  fboCanvas->drawRectTextured(Rect(0,0,testPic->dataWidth, testPic->dataHeight), testPic, true);
   fboCanvas->context->popState();
   framebuffer->disable();
 }
@@ -80,9 +95,17 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   window->canvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  window->canvas->drawRectTextured(Rect(400,300,fboSize.width, fboSize.height), tex, false);  
-  fboCanvas->drawLine(Vec2(0,0), Vec2(100,100));
-  fboCanvas->drawPoint(Vec2(128,128));
+  
+  // activate and configure the blur shader here so the texture of the following rect will be postprocessed
+  blurShader->enable();
+  glActiveTexture(GL_TEXTURE0);
+  tex->bind();
+  (*blurShader)["colorMap"] = (GLuint)0;
+  window->canvas->drawRectTextured(Rect(testPic->dataWidth+10,0,fboSize.width, fboSize.height), tex, false);  
+  blurShader->disable();
+
+  
+  window->canvas->drawRectTextured(Rect(0,0,testPic->dataWidth, testPic->dataHeight), testPic, true);
   window->canvas->context->popState();
   window->context->swapBuffers();
 }
