@@ -13,6 +13,10 @@
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
+		EAA4B6D20F7D81E000D8B111 /* convolute.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B6D00F7D81E000D8B111 /* convolute.fs */; };
+		EAA4B6D30F7D81E000D8B111 /* convolute.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B6D10F7D81E000D8B111 /* convolute.vs */; };
+		EAA4B6EA0F7D927A00D8B111 /* zim.png in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B6E90F7D927A00D8B111 /* zim.png */; };
+		EAA4B8900F7D966600D8B111 /* lobotomy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 /* End PBXBuildFile section */
@@ -64,6 +68,10 @@
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAA4B6D00F7D81E000D8B111 /* convolute.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = convolute.fs; path = ../convolute.fs; sourceTree = SOURCE_ROOT; };
+		EAA4B6D10F7D81E000D8B111 /* convolute.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = convolute.vs; path = ../convolute.vs; sourceTree = SOURCE_ROOT; };
+		EAA4B6E90F7D927A00D8B111 /* zim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zim.png; path = ../zim.png; sourceTree = SOURCE_ROOT; };
+		EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lobotomy.jpg; path = ../lobotomy.jpg; sourceTree = SOURCE_ROOT; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
 		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
@@ -108,7 +116,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */,
+				EAA4B6E90F7D927A00D8B111 /* zim.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				EAA4B6D00F7D81E000D8B111 /* convolute.fs */,
+				EAA4B6D10F7D81E000D8B111 /* convolute.vs */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -228,6 +240,10 @@
 				EA26A8450F77B1B800490D18 /* global-debug.xcconfig in Resources */,
 				EA26A8460F77B1B800490D18 /* global-release.xcconfig in Resources */,
 				EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */,
+				EAA4B6D20F7D81E000D8B111 /* convolute.fs in Resources */,
+				EAA4B6D30F7D81E000D8B111 /* convolute.vs in Resources */,
+				EAA4B6EA0F7D927A00D8B111 /* zim.png in Resources */,
+				EAA4B8900F7D966600D8B111 /* lobotomy.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

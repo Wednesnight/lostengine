@@ -6,6 +6,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/camera/Camera2D.h"
+#include "lost/gl/ShaderHelper.h"
 
 struct Filt3rz
 {
@@ -19,16 +20,20 @@ private:
   boost::shared_ptr<lost::application::Application> app;
   boost::shared_ptr<lost::application::Window>      window;
   boost::shared_ptr<lost::gl::FrameBuffer>          framebuffer;
-  boost::shared_ptr<lost::gl::Texture>              tex;
+  lost::gl::TexturePtr                              tex;
   boost::shared_ptr<lost::gl::State>                renderState;
   boost::shared_ptr<lost::gl::State>                fboRenderState;
   boost::shared_ptr<lost::camera::Camera2D>         fboCam;
   boost::shared_ptr<lost::gl::Canvas>               fboCanvas;
+  boost::shared_ptr<lost::gl::ShaderProgram>        blurShader;
+  lost::gl::TexturePtr                              testPic;
   
   void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
   void update(boost::shared_ptr<lost::application::Application> app);
 
   void setupFBOs();
+  void setupBlurShader();
+  void setupTestBitmap();
   void renderFbo();
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
