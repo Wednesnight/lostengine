@@ -13,6 +13,9 @@ namespace lost
 {
 namespace gl
 {
+struct ShaderProgram;
+typedef boost::shared_ptr<ShaderProgram> ShaderProgramPtr;
+
 struct ShaderProgram
 {
 public:
