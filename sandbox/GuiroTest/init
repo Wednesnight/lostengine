@@ -1,43 +1,37 @@
--- CLASS TEST
+-- ANOTHER CLASS TEST
 
-class "Class"
-function Class:__init(instance, args)
-  print("Class:__init()")
-  args = args or {}
-  if instance then
-    self.instance = getmetatable(instance)
-  end
-  if self.instance and self.instance["__init"] then
-    self.instance["__init"](self.instance, unpack(args))
-  end
+-- just a helper class to verify that free/destroy trigger the garbage collector
+class "foobar"
+function foobar:__init()
+  print("foobar:__init()")
 end
-function Class:__finalize()
-  print("Class:__finalize()")
-  if self.instance and self.instance["__finalize"] then
-    self.instance["__finalize"](self.instance)
-  end
+function foobar:__finalize()
+  print("foobar:__finalize()")
 end
 
-function defineClass(namespace, definition)
-  for k,v in next,definition do
-    namespace[k] = v
-  end
-  local ctor =
-  {
-    __call = function(...)
-      local result = {}
-      for k,v in next,namespace do
-        result[k] = v
+function _class(class)
+  local namespace = expandNamespace(class)
+  local definition = {}
+  _class_derived = function(class)
+    if type(class) == "string" then
+      local ancestor = expandNamespace(class)
+      for k,v in next,ancestor do
+        definition[k] = v
       end
-      setmetatable(result, namespace)
-      result["__holder"] = Class(result, args)
-      return result
+      return _class_derived
+    elseif type(class) == "table" then
+      for k,v in next,class do
+        definition[k] = v
+      end
+      return declareClass(namespace, definition)
+    else
+      log.error("_class: invalid param of type ".. type(class))
     end
-  }
-  setmetatable(namespace, ctor)
+  end
+  return _class_derived
 end
 
-function declareClass(className)
+function expandNamespace(className)
   local namespace = _G
   for name in string.gmatch(className, "[^%.]+") do
     if not namespace[name] then
@@ -47,50 +41,45 @@ function declareClass(className)
   end
   return namespace
 end
---[[
-function _class(class)
-  if type(class) == "string" then
-    -- new class
-    local namespace = declareClass(class)
-    return function(definition) defineClass(namespace, definition) end
-  else
-    -- derived class
-    return function (className)
-             local namespace = declareClass(className)
-             return function(definition) defineClass(namespace, definition) end
-           end
-  end
-end
-]]
 
-function _class(className)
-  local namespace = declareClass(className)
-  local definition = {}
-  _class_derived = function(className)
-    if type(className) == "string" then
-      local ancestor = declareClass(className)
-      for k,v in next,ancestor do
-        definition[k] = v
-      end
-      return _class_derived
-    else
-      for k,v in next,className do
-        definition[k] = v
-      end
-      return defineClass(namespace, definition)
-    end
+function declareClass(namespace, definition)
+  for k,v in next,definition do
+    namespace[k] = v
   end
-  return _class_derived
+  local metatable =
+  {
+    __call = function(self, ...)
+      local object = {}
+      -- assign members, methods
+      for key,value in next,self do
+        object[key] = value
+      end
+      -- assign operators
+      setmetatable(object, self)
+      -- make sure that free is our cleanup function
+      object.free = function(self)
+        if self and type(self.destroy) == "function" then
+          self:destroy()
+        end
+        self = nil
+      end
+      if type(object.create) == "function" then
+        object:create(args)
+      end
+      return object
+    end
+  }
+  setmetatable(namespace, metatable)
 end
 
 _class "just.a.test"
 {
-  __init = function(self)
-    print("__init()")
+  create = function(self)
+    print("create()")
   end,
   
-  __finalize = function(self)
-    print("__finalize()")
+  destroy = function(self)
+    print("destroy()")
   end
 }
 
@@ -114,11 +103,12 @@ _class "funky.test" "another.test" "just.a.test"
 }
 
 local t = funky.test()
+t.fgfg = "eflkjn"
 t("yay")
 t:testing("yay2")
-t = nil
+t:free()
 
--- CLASS TEST END
+-- ANOTHER CLASS TEST END
 
 require("lost.common.Profiler")
 
