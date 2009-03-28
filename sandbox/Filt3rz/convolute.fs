@@ -37,22 +37,11 @@ void main(void)
    kernel[6] = 1.0/16.0;   	kernel[7] = 2.0/16.0;	kernel[8] = 1.0/16.0;
    
    
-   if(gl_TexCoord[0].s<0.495)
+   for( i=0; i<KERNEL_SIZE; i++ )
    {
-	   for( i=0; i<KERNEL_SIZE; i++ )
-	   {
-			vec4 tmp = texture2D(colorMap, gl_TexCoord[0].st + offset[i]);
-			sum += tmp * kernel[i];
-	   }
+    vec4 tmp = texture2D(colorMap, gl_TexCoord[0].st + offset[i]);
+    sum += tmp * kernel[i];
    }
-   else if( gl_TexCoord[0].s>0.505 )
-   {
-		sum = texture2D(colorMap, gl_TexCoord[0].xy);
-   }
-   else
-   {
-		sum = vec4(1.0, 0.0, 0.0, 1.0);
-	}
 
    gl_FragColor = sum;
 }
