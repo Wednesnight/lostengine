@@ -27,7 +27,6 @@ Filt3rz::Filt3rz()
   window->context->makeCurrent();
   setupFBOs();  
   setupBlurShader();
-  setupTestBitmap();
   setupLightShader();
   renderState = State::create(ClearColor::create(blackColor));
   
@@ -40,12 +39,12 @@ Filt3rz::~Filt3rz()
 
 void Filt3rz::setupBlurShader()
 {
-  blurShader = loadShader(app->loader, "convolute");
+  blurShader = loadShader(app->loader, "blur");
 }
 
 void Filt3rz::setupLightShader()
 {
-  lightShader = loadShader(app->loader, "lattice");
+  lightShader = loadShader(app->loader, "light");
   lightShader->enable();
   lightShader->validate();
   if(!lightShader->validated())
@@ -68,10 +67,6 @@ void Filt3rz::setupLightShader()
   lightShader->disable();
 }
 
-void Filt3rz::setupTestBitmap()
-{
-  testPic.reset(new Texture(app->loader->load("zim.jpg")));
-}
 
 void Filt3rz::setupFBOs()
 {
