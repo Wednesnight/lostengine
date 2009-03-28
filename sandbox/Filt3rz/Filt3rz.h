@@ -28,6 +28,9 @@ private:
   boost::shared_ptr<lost::gl::Canvas>               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
+  lost::gl::ShaderProgramPtr                        edgeShader;
+  lost::gl::ShaderProgramPtr                        embossShader;
+  lost::gl::ShaderProgramPtr                        sharpenShader;
   boost::shared_ptr<lost::camera::Camera3D>         cubeCam;  
   
   void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
@@ -35,14 +38,22 @@ private:
 
   void setupFBOs();
   void setupBlurShader();
+  void setupEdgeShader();
+  void setupEmbossShader();
+  void setupSharpenShader();
   void setupLightShader();
-  void renderFbo();
+  void renderFbo(double dt);
+
+  void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex);
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
   lost::math::Rect fboViewport;
   uint16_t  gapWidth;
   uint16_t  numPanels;
   lost::math::Vec2  screenSize;
+  
+  double passedSec;  
+  float angle;
 };
 
 #endif

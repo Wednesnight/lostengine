@@ -15,7 +15,7 @@ Filt3rz::Filt3rz()
 {
   fboSize.width = 256;
   fboSize.height = 256;
-  numPanels = 4;
+  numPanels = 5;
   gapWidth = 10;
   screenSize.width = fboSize.width*numPanels + (numPanels-1)*gapWidth;
   screenSize.height = fboSize.width;
@@ -27,9 +27,13 @@ Filt3rz::Filt3rz()
   window->context->makeCurrent();
   setupFBOs();  
   setupBlurShader();
+  setupEdgeShader();
+  setupEmbossShader();
+  setupSharpenShader();
   setupLightShader();
-  renderState = State::create(ClearColor::create(blackColor));
-  
+  renderState = State::create(ClearColor::create(Color(.3,.2,0,1)));
+  passedSec = lost::platform::currentTimeSeconds();
+  angle = 0;
 }
 
 Filt3rz::~Filt3rz()
@@ -40,6 +44,41 @@ Filt3rz::~Filt3rz()
 void Filt3rz::setupBlurShader()
 {
   blurShader = loadShader(app->loader, "blur");
+  blurShader->enable();
+  (*blurShader)["width"] = (float)fboSize.width;
+  (*blurShader)["height"] = (float)fboSize.height;
+  (*blurShader)["colorMap"] = (GLuint)0;
+  blurShader->disable();
+}
+
+void Filt3rz::setupEdgeShader()
+{
+  edgeShader = loadShader(app->loader, "edge");
+  edgeShader->enable();
+  (*edgeShader)["width"] = (float)fboSize.width;
+  (*edgeShader)["height"] = (float)fboSize.height;
+  (*edgeShader)["colorMap"] = (GLuint)0;
+  edgeShader->disable();
+}
+
+void Filt3rz::setupEmbossShader()
+{
+  embossShader = loadShader(app->loader, "emboss");
+  embossShader->enable();
+  (*embossShader)["width"] = (float)fboSize.width;
+  (*embossShader)["height"] = (float)fboSize.height;
+  (*embossShader)["colorMap"] = (GLuint)0;
+  embossShader->disable();
+}
+
+void Filt3rz::setupSharpenShader()
+{
+  sharpenShader = loadShader(app->loader, "sharpen");
+  sharpenShader->enable();
+  (*sharpenShader)["width"] = (float)fboSize.width;
+  (*sharpenShader)["height"] = (float)fboSize.height;
+  (*sharpenShader)["colorMap"] = (GLuint)0;
+  sharpenShader->disable();
 }
 
 void Filt3rz::setupLightShader()
@@ -92,7 +131,7 @@ void Filt3rz::setupFBOs()
     throw runtime_error("couldn't create FBO");
   framebuffer->disable();
   
-  fboCam.reset(new Camera2D(window->context, fboViewport));
+//  fboCam.reset(new Camera2D(window->context, fboViewport));
   cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
   cubeCam->fovY(45.0f);
   cubeCam->depth(Vec2(1.0f, 100.0f));
@@ -106,7 +145,7 @@ void Filt3rz::setupFBOs()
 
 }
 
-void Filt3rz::renderFbo()
+void Filt3rz::renderFbo(double dt)
 {
   framebuffer->enable();
   fboCanvas->camera->apply();
@@ -115,13 +154,14 @@ void Filt3rz::renderFbo()
   fboCanvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  glMatrixMode(GL_TEXTURE);GLDEBUG;
-  glLoadIdentity();
 //  fboCanvas->drawLine(Vec2(0,0), Vec2(256,256));
 //  fboCanvas->drawRectTextured(Rect(0,0,testPic->dataWidth, testPic->dataHeight), testPic, true);
   float cubeSize = 1;
-  glTranslatef(-1, .2,0);
-  glRotatef(/*angle*/13, 0,1, 0);
+  glTranslatef(0, .2,0);
+  angle = fmod(dt*50+angle, 360);  
+  DOUT(angle);
+  glRotatef(angle, 0,1, 0);
+  glRotatef(angle*.3, 1,0, 0);
   lightShader->enable();
   fboCanvas->drawSolidCube(cubeSize);
   lightShader->disable();
@@ -129,34 +169,58 @@ void Filt3rz::renderFbo()
   framebuffer->disable();
 }
 
+void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex)
+{
+  shader->enable();
+  glActiveTexture(GL_TEXTURE0);
+  tex->bind();
+  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width+panelIndex*10,0,fboSize.width, fboSize.height), tex, false);  
+  shader->disable();
+}
+
 void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
 {
+  double currentSec = lost::platform::currentTimeSeconds();
+  double delta = currentSec - passedSec;
   // don't call this everywhere! call it at the beginning of the draw method.
   // makeCurrent won't perform unnecessary context switches
   window->context->makeCurrent(); 
   
-  renderFbo();
-
+  renderFbo(delta);
+  tex->bind();
+  tex->filter(GL_LINEAR);
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderState);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   window->canvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  
-  // activate and configure the blur shader here so the texture of the following rect will be postprocessed
+
+  // draw original buffer texture
+  window->canvas->drawRectTextured(Rect(0,0,fboSize.width, fboSize.height), tex, false);
+  drawPanel(blurShader, 1);
+  drawPanel(edgeShader, 2);
+  drawPanel(embossShader, 3);
+  drawPanel(sharpenShader, 4);
+/*  // activate and configure the blur shader here so the texture of the following rect will be postprocessed
   blurShader->enable();
   glActiveTexture(GL_TEXTURE0);
   tex->bind();
-  (*blurShader)["colorMap"] = (GLuint)0;
-  (*blurShader)["width"] = (float)fboSize.width;
-  (*blurShader)["height"] = (float)fboSize.height;
-  window->canvas->drawRectTextured(Rect(fboSize.width+10,0,fboSize.width, fboSize.height), tex, false);  
+  window->canvas->drawRectTextured(Rect(1*fboSize.width+10,0,fboSize.width, fboSize.height), tex, false);  
   blurShader->disable();
-  
-  window->canvas->drawRectTextured(Rect(0,0,fboSize.width, fboSize.height), tex, false);
+
+  blurShader->enable();
+  glActiveTexture(GL_TEXTURE0);
+  tex->bind();
+  window->canvas->drawRectTextured(Rect(1*fboSize.width+10,0,fboSize.width, fboSize.height), tex, false);  
+  blurShader->disable();*/
+  tex->bind();
+  tex->filter(GL_NEAREST);
+
   window->canvas->context->popState();
   window->context->swapBuffers();
+  
+  passedSec = currentSec;
 }
 
 void Filt3rz::keyHandler(boost::shared_ptr<lost::application::KeyEvent> event)
