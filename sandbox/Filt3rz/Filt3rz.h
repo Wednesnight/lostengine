@@ -28,7 +28,6 @@ private:
   boost::shared_ptr<lost::gl::Canvas>               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
-  lost::gl::TexturePtr                              testPic;
   boost::shared_ptr<lost::camera::Camera3D>         cubeCam;  
   
   void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
@@ -37,7 +36,6 @@ private:
   void setupFBOs();
   void setupBlurShader();
   void setupLightShader();
-  void setupTestBitmap();
   void renderFbo();
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer

@@ -13,14 +13,12 @@
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
-		EAA4B6D20F7D81E000D8B111 /* convolute.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B6D00F7D81E000D8B111 /* convolute.fs */; };
-		EAA4B6D30F7D81E000D8B111 /* convolute.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B6D10F7D81E000D8B111 /* convolute.vs */; };
-		EAA4B8900F7D966600D8B111 /* lobotomy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */; };
-		EAA4B8BC0F7D9D5D00D8B111 /* zim.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAA4B8BB0F7D9D5D00D8B111 /* zim.jpg */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
-		EAFA0FE40F7DA91300CEAF99 /* lattice.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA0FE20F7DA91300CEAF99 /* lattice.fs */; };
-		EAFA0FE50F7DA91300CEAF99 /* lattice.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA0FE30F7DA91300CEAF99 /* lattice.vs */; };
+		EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10520F7DAFEB00CEAF99 /* light.vs */; };
+		EAFA10550F7DAFEB00CEAF99 /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10530F7DAFEB00CEAF99 /* light.fs */; };
+		EAFA10580F7DAFF500CEAF99 /* blur.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10560F7DAFF500CEAF99 /* blur.vs */; };
+		EAFA10590F7DAFF500CEAF99 /* blur.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10570F7DAFF500CEAF99 /* blur.fs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,15 +68,13 @@
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
-		EAA4B6D00F7D81E000D8B111 /* convolute.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = convolute.fs; path = ../convolute.fs; sourceTree = SOURCE_ROOT; };
-		EAA4B6D10F7D81E000D8B111 /* convolute.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = convolute.vs; path = ../convolute.vs; sourceTree = SOURCE_ROOT; };
-		EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lobotomy.jpg; path = ../lobotomy.jpg; sourceTree = SOURCE_ROOT; };
-		EAA4B8BB0F7D9D5D00D8B111 /* zim.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = zim.jpg; path = ../zim.jpg; sourceTree = SOURCE_ROOT; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
 		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
-		EAFA0FE20F7DA91300CEAF99 /* lattice.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lattice.fs; path = ../lattice.fs; sourceTree = SOURCE_ROOT; };
-		EAFA0FE30F7DA91300CEAF99 /* lattice.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lattice.vs; path = ../lattice.vs; sourceTree = SOURCE_ROOT; };
+		EAFA10520F7DAFEB00CEAF99 /* light.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.vs; path = ../light.vs; sourceTree = SOURCE_ROOT; };
+		EAFA10530F7DAFEB00CEAF99 /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.fs; path = ../light.fs; sourceTree = SOURCE_ROOT; };
+		EAFA10560F7DAFF500CEAF99 /* blur.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = blur.vs; path = ../blur.vs; sourceTree = SOURCE_ROOT; };
+		EAFA10570F7DAFF500CEAF99 /* blur.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = blur.fs; path = ../blur.fs; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,13 +116,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EAA4B8BB0F7D9D5D00D8B111 /* zim.jpg */,
-				EAA4B88F0F7D966600D8B111 /* lobotomy.jpg */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				EAA4B6D00F7D81E000D8B111 /* convolute.fs */,
-				EAA4B6D10F7D81E000D8B111 /* convolute.vs */,
-				EAFA0FE20F7DA91300CEAF99 /* lattice.fs */,
-				EAFA0FE30F7DA91300CEAF99 /* lattice.vs */,
+				EAFA10560F7DAFF500CEAF99 /* blur.vs */,
+				EAFA10570F7DAFF500CEAF99 /* blur.fs */,
+				EAFA10520F7DAFEB00CEAF99 /* light.vs */,
+				EAFA10530F7DAFEB00CEAF99 /* light.fs */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -246,12 +240,10 @@
 				EA26A8450F77B1B800490D18 /* global-debug.xcconfig in Resources */,
 				EA26A8460F77B1B800490D18 /* global-release.xcconfig in Resources */,
 				EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */,
-				EAA4B6D20F7D81E000D8B111 /* convolute.fs in Resources */,
-				EAA4B6D30F7D81E000D8B111 /* convolute.vs in Resources */,
-				EAA4B8900F7D966600D8B111 /* lobotomy.jpg in Resources */,
-				EAA4B8BC0F7D9D5D00D8B111 /* zim.jpg in Resources */,
-				EAFA0FE40F7DA91300CEAF99 /* lattice.fs in Resources */,
-				EAFA0FE50F7DA91300CEAF99 /* lattice.vs in Resources */,
+				EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */,
+				EAFA10550F7DAFEB00CEAF99 /* light.fs in Resources */,
+				EAFA10580F7DAFF500CEAF99 /* blur.vs in Resources */,
+				EAFA10590F7DAFF500CEAF99 /* blur.fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
