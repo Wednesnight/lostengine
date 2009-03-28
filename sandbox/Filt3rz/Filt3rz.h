@@ -8,6 +8,7 @@
 #include "lost/camera/Camera2D.h"
 #include "lost/camera/Camera3D.h"
 #include "lost/gl/ShaderHelper.h"
+#include "lost/font/TrueTypeFont.h"
 
 struct Filt3rz
 {
@@ -32,6 +33,13 @@ private:
   lost::gl::ShaderProgramPtr                        embossShader;
   lost::gl::ShaderProgramPtr                        sharpenShader;
   boost::shared_ptr<lost::camera::Camera3D>         cubeCam;  
+
+  boost::shared_ptr<lost::font::TrueTypeFont>     ttf;
+  boost::shared_ptr<lost::font::Model>            labelOriginal;
+  boost::shared_ptr<lost::font::Model>            labelBlur;
+  boost::shared_ptr<lost::font::Model>            labelEdge;
+  boost::shared_ptr<lost::font::Model>            labelEmboss;
+  boost::shared_ptr<lost::font::Model>            labelSharpen;
   
   void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
   void update(boost::shared_ptr<lost::application::Application> app);
@@ -45,6 +53,9 @@ private:
   void renderFbo(double dt);
 
   void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex);
+  void drawLabel(boost::shared_ptr<lost::font::Model> label,
+                 const lost::common::Color& col,
+                 uint32_t panelIndex);
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
   lost::math::Rect fboViewport;
@@ -54,6 +65,8 @@ private:
   
   double passedSec;  
   float angle;
+  uint32_t fontSize;
+  uint32_t yinset;
 };
 
 #endif

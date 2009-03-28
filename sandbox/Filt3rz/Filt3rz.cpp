@@ -10,6 +10,8 @@ using namespace lost::application;
 using namespace lost::event;
 using namespace lost::math;
 using namespace lost::gl;
+using namespace lost::font;
+using namespace lost::resource;
 
 Filt3rz::Filt3rz()
 {
@@ -34,6 +36,20 @@ Filt3rz::Filt3rz()
   renderState = State::create(ClearColor::create(Color(.3,.2,0,1)));
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
+  
+  shared_ptr<freetype::Library> ftlib(new freetype::Library);
+  shared_ptr<File> file = app->loader->load("miserable.ttf");
+  shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
+  ttf.reset(new TrueTypeFont(ftlib, file));  
+  ttf->atlasSize = Vec2(512,512);  
+  
+  uint32_t fontSize = 30;
+  yinset = fontSize+3;
+  labelOriginal = ttf->render("Original", fontSize);
+  labelBlur = ttf->render("Blur", fontSize);
+  labelEdge = ttf->render("Edge Detect", fontSize);
+  labelEmboss = ttf->render("Emboss", fontSize);
+  labelSharpen = ttf->render("Sharpen", fontSize);
 }
 
 Filt3rz::~Filt3rz()
@@ -159,7 +175,6 @@ void Filt3rz::renderFbo(double dt)
   float cubeSize = 1;
   glTranslatef(0, .2,0);
   angle = fmod(dt*50+angle, 360);  
-  DOUT(angle);
   glRotatef(angle, 0,1, 0);
   glRotatef(angle*.3, 1,0, 0);
   lightShader->enable();
@@ -178,6 +193,20 @@ void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex)
   shader->disable();
 }
 
+void Filt3rz::drawLabel(boost::shared_ptr<lost::font::Model> label,
+                       const lost::common::Color& col,
+                       uint32_t panelIndex)
+{
+    float xOffset = panelIndex*fboSize.width + panelIndex*gapWidth + (fboSize.width - label->size.width)/2.0f;
+    float yOffset = fboSize.height - yinset;
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(xOffset, yOffset, 0);
+    window->canvas->setColor(col);
+    label->render(window->canvas);
+}              
+
 void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
 {
   double currentSec = lost::platform::currentTimeSeconds();
@@ -187,8 +216,6 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   window->context->makeCurrent(); 
   
   renderFbo(delta);
-  tex->bind();
-  tex->filter(GL_LINEAR);
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderState);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -202,20 +229,12 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   drawPanel(edgeShader, 2);
   drawPanel(embossShader, 3);
   drawPanel(sharpenShader, 4);
-/*  // activate and configure the blur shader here so the texture of the following rect will be postprocessed
-  blurShader->enable();
-  glActiveTexture(GL_TEXTURE0);
-  tex->bind();
-  window->canvas->drawRectTextured(Rect(1*fboSize.width+10,0,fboSize.width, fboSize.height), tex, false);  
-  blurShader->disable();
 
-  blurShader->enable();
-  glActiveTexture(GL_TEXTURE0);
-  tex->bind();
-  window->canvas->drawRectTextured(Rect(1*fboSize.width+10,0,fboSize.width, fboSize.height), tex, false);  
-  blurShader->disable();*/
-  tex->bind();
-  tex->filter(GL_NEAREST);
+  drawLabel(labelOriginal, blackColor, 0);
+  drawLabel(labelBlur, blackColor, 1);
+  drawLabel(labelEdge, whiteColor, 2);
+  drawLabel(labelEmboss, whiteColor, 3);
+  drawLabel(labelSharpen, blackColor, 4);
 
   window->canvas->context->popState();
   window->context->swapBuffers();
