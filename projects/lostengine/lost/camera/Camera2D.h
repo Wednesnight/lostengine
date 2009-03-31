@@ -7,6 +7,8 @@ namespace lost
 {
   namespace camera
   {
+    struct Camera2D;
+    typedef boost::shared_ptr<Camera2D> Camera2DPtr;
 
     struct Camera2D : public Camera
     {
