@@ -30,7 +30,7 @@ namespace lost
 
     void Canvas::drawLine(const lost::math::Vec2& start, const lost::math::Vec2& end)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
@@ -50,7 +50,7 @@ namespace lost
 
     void Canvas::drawLine(const lost::math::Vec3& start, const lost::math::Vec3& end)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
@@ -79,7 +79,7 @@ namespace lost
     void Canvas::drawBezierCurve(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
                                  const unsigned int steps)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true),
@@ -109,7 +109,7 @@ namespace lost
     void Canvas::drawBezierCurveFilled(const Vec2& p1, const Vec2& p2, const Vec2& p3, const Vec2& p4,
                                        const Vec2& basePoint, const unsigned int steps)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true),
@@ -145,7 +145,7 @@ namespace lost
     
     void Canvas::drawPoint(const lost::math::Vec2& point)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
@@ -163,7 +163,7 @@ namespace lost
     
     void Canvas::drawPoint(const lost::math::Vec3& point)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
@@ -237,7 +237,7 @@ namespace lost
     
     void Canvas::drawRectFilled(const lost::math::Rect& rect)
     {
-      static SharedState state = State::create(Blend::create(true),
+      static StatePtr state = State::create(Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),
                                                VertexArray::create(true));
@@ -340,7 +340,7 @@ namespace lost
                                   const lost::math::Vec2& topRight,
                                   bool flip)
     {
-      static SharedState state = State::create(DepthTest::create(false),
+      static StatePtr state = State::create(DepthTest::create(false),
                                                Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(true),
@@ -388,7 +388,7 @@ namespace lost
     
     void Canvas::drawMesh2D(const boost::shared_ptr<Mesh2D>& mesh, GLenum mode)
     {
-      static SharedState state = State::create(DepthTest::create(false),
+      static StatePtr state = State::create(DepthTest::create(false),
                                                Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(true),
@@ -408,7 +408,7 @@ namespace lost
     
     void Canvas::drawMesh3D(const boost::shared_ptr<Mesh3D>& mesh, GLenum mode)
     {
-      static SharedState state = State::create(DepthTest::create(false),
+      static StatePtr state = State::create(DepthTest::create(false),
                                                Blend::create(true),
                                                BlendFunc::create(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA),
                                                Texture2D::create(false),

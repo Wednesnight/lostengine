@@ -108,7 +108,7 @@ namespace lost
 
         void render()
         {
-          static gl::SharedState newState = gl::State::create(gl::NormalArray::create(true), gl::VertexArray::create(true));
+          static gl::StatePtr newState = gl::State::create(gl::NormalArray::create(true), gl::VertexArray::create(true));
           canvas->context->pushState(newState);
           glPushMatrix();
           glScalef(size, size, size);

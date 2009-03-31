@@ -30,7 +30,7 @@ namespace lost
       boost::shared_array<float>    vertices;
       boost::shared_array<float>    texcoords;
       boost::shared_array<boost::uint8_t>  indices;
-      gl::SharedState renderState;
+      gl::StatePtr renderState;
       gl::TexturePtr  texture;
       lost::math::Vec2 min; // min in pixel of the rendered string. baseline is at y=0
       lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0

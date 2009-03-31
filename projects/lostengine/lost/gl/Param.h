@@ -12,7 +12,7 @@ namespace lost
   {
     
     struct Param;
-    typedef boost::shared_ptr<Param> SharedParam;
+    typedef boost::shared_ptr<Param> ParamPtr;
 
     struct Param
     {
@@ -45,16 +45,16 @@ namespace lost
       {
       }
       
-      static SharedParam create(const lost::common::Color& inColor)
+      static ParamPtr create(const lost::common::Color& inColor)
       {
-        return SharedParam(new ColorParam(inColor));
+        return ParamPtr(new ColorParam(inColor));
       }
       
-      static SharedParam create()
+      static ParamPtr create()
       {
         lost::common::Color color;
         glGetFloatv(inWhich, (GLfloat*)color.fv); GLDEBUG_THROW;
-        return SharedParam(new ColorParam(color));
+        return ParamPtr(new ColorParam(color));
       }
       
       virtual void set()
@@ -90,16 +90,16 @@ namespace lost
     {
       ClientStateParam(const bool inEnable) : StateParam(inWhich, inEnable) {}
 
-      static SharedParam create(const bool inEnable)
+      static ParamPtr create(const bool inEnable)
       {
-        return SharedParam(new ClientStateParam(inEnable));
+        return ParamPtr(new ClientStateParam(inEnable));
       }
       
-      static SharedParam create()
+      static ParamPtr create()
       {
         bool flag;
         glGetBooleanv(inWhich, (GLboolean*)&flag); GLDEBUG_THROW;
-        return SharedParam(new ClientStateParam(flag));
+        return ParamPtr(new ClientStateParam(flag));
       }
       
       virtual void set()
@@ -115,16 +115,16 @@ namespace lost
     {
       ServerStateParam(const bool inEnable) : StateParam(inWhich, inEnable) {}
 
-      static SharedParam create(const bool inEnable)
+      static ParamPtr create(const bool inEnable)
       {
-        return SharedParam(new ServerStateParam(inEnable));
+        return ParamPtr(new ServerStateParam(inEnable));
       }
       
-      static SharedParam create()
+      static ParamPtr create()
       {
         bool flag;
         glGetBooleanv(inWhich, (GLboolean*)&flag); GLDEBUG_THROW;
-        return SharedParam(new ServerStateParam(flag));
+        return ParamPtr(new ServerStateParam(flag));
       }
       
       virtual void set()
@@ -148,17 +148,17 @@ namespace lost
       {
       }
       
-      static SharedParam create(const GLenum inSource, const GLenum inDestination)
+      static ParamPtr create(const GLenum inSource, const GLenum inDestination)
       {
-        return SharedParam(new BlendFunc(inSource, inDestination));
+        return ParamPtr(new BlendFunc(inSource, inDestination));
       }
       
-      static SharedParam create()
+      static ParamPtr create()
       {
         GLfloat src, dest = 0;
         glGetFloatv(GL_BLEND_SRC, &src); GLDEBUG_THROW;
         glGetFloatv(GL_BLEND_DST, &dest); GLDEBUG_THROW;
-        return SharedParam(new BlendFunc(static_cast<GLenum>(src), static_cast<GLenum>(dest)));
+        return ParamPtr(new BlendFunc(static_cast<GLenum>(src), static_cast<GLenum>(dest)));
       }
       
       virtual void set()
@@ -183,16 +183,16 @@ namespace lost
       {
       }
       
-      static SharedParam create(const math::Rect& inBox)
+      static ParamPtr create(const math::Rect& inBox)
       {
-        return SharedParam(new ScissorBox(inBox));
+        return ParamPtr(new ScissorBox(inBox));
       }
       
-      static SharedParam create()
+      static ParamPtr create()
       {
         GLint box[4];
         glGetIntegerv(GL_SCISSOR_BOX, box); GLDEBUG_THROW;
-        return SharedParam(new ScissorBox(math::Rect(box[0], box[1], box[2], box[3])));
+        return ParamPtr(new ScissorBox(math::Rect(box[0], box[1], box[2], box[3])));
       }
       
       virtual void set()

@@ -40,9 +40,9 @@ namespace lost
       void initialize();
       void finalize();
 
-      SharedState currentState;
-      std::list<SharedState> stateStack;
-      void apply(const SharedState& newState);
+      StatePtr currentState;
+      std::list<StatePtr> stateStack;
+      void apply(const StatePtr& newState);
     public:
       Context();
       ~Context();
@@ -57,7 +57,7 @@ namespace lost
        */
       void swapBuffers();
 
-      void pushState(const SharedState& newState);
+      void pushState(const StatePtr& newState);
       void popState();
       
       void vsync(bool enable); // true to enable vsync to prevent tearing
