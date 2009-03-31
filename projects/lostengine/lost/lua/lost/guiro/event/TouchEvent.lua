@@ -2,7 +2,7 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.guiro.event.Event")
 
-TouchEvent = lost.common.Class("lost.guiro.event.TouchEvent",lost.guiro.event.Event)
+lost.common.Class "lost.guiro.event.TouchEvent" "lost.guiro.event.Event" {}
 
 TouchEvent.TOUCHES_BEGAN = "touchesBegan"
 TouchEvent.TOUCHES_CANCELLED = "touchesCancelled"
@@ -16,8 +16,8 @@ typeConvert[lost.application.TouchEvent.TOUCHES_ENDED] = TouchEvent.TOUCHES_ENDE
 typeConvert[lost.application.TouchEvent.TOUCHES_MOVED] = TouchEvent.TOUCHES_MOVED
 
 -- initialise it with an uncast lost.application.TouchEvent
-function TouchEvent:__init(laTouchEvent)
-  lost.guiro.event.Event.__init(self)
+function TouchEvent:create(laTouchEvent)
+  lost.guiro.event.Event.create(self)
 
   local lostAppTouchEvent = lost.application.TouchEvent.cast(laTouchEvent)
 

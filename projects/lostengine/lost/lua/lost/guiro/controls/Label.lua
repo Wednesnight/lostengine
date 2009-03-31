@@ -5,12 +5,12 @@ require("lost.guiro.View")
 --[[
      Label control
   ]]
-Label = lost.common.Class("lost.guiro.controls.Label", lost.guiro.View)
+lost.common.Class "lost.guiro.controls.Label" "lost.guiro.View" {}
 
 --[[
     constructor
   ]]
-function Label:__init(properties)
+function Label:create(properties)
   properties = properties or {}
 
   -- initialize private members
@@ -22,7 +22,7 @@ function Label:__init(properties)
   properties.font = properties.font or lost.guiro.config.defaultFont
   properties.fontSize = properties.fontSize or 12
 
-  lost.guiro.View.__init(self, properties)
+  lost.guiro.View.create(self, properties)
 end
 
 function Label:setProperty(key, value)

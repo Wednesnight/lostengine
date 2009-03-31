@@ -1,12 +1,12 @@
 module("lost.guiro", package.seeall) --MouseManager
 
-require("lost.common.Object")
+require("lost.common.Class")
 require("lost.guiro.event.MouseEvent")
 
-MouseManager = lost.common.Class("lost.guiro.MouseManager", lost.common.Object)
+lost.common.Class "lost.guiro.MouseManager" {}
 
-function MouseManager:__init(screen)
-  log.debug("MouseManager:__init")
+function MouseManager:create(screen)
+  log.debug("MouseManager:create")
   self.screen = screen
   self.currentMouse = nil
   

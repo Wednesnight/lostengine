@@ -2,7 +2,7 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.guiro.event.Event")
 
-KeyEvent = lost.common.Class("lost.guiro.event.KeyEvent",lost.guiro.event.Event)
+lost.common.Class "lost.guiro.event.KeyEvent" "lost.guiro.event.Event" {}
 
 KeyEvent.KEY_UP   = "keyUp"
 KeyEvent.KEY_DOWN = "keyDown"
@@ -12,8 +12,8 @@ typeConvert[lost.application.KeyEvent.KEY_UP] = KeyEvent.KEY_UP
 typeConvert[lost.application.KeyEvent.KEY_DOWN] = KeyEvent.KEY_DOWN
 
 -- initialise it with an uncast lost.application.KeyEvent
-function KeyEvent:__init(laKeyEvent)
-  lost.guiro.event.Event.__init(self)
+function KeyEvent:create(laKeyEvent)
+  lost.guiro.event.Event.create(self)
 
   self.bubbles = true
   self.lostAppKeyEvent = lost.application.KeyEvent.cast(laKeyEvent)

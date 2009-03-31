@@ -6,7 +6,7 @@ require("lost.guiro.event.Event")
 --[[
      Button control
   ]]
-Button = lost.common.Class("lost.guiro.controls.Button", lost.guiro.View)
+lost.common.Class "lost.guiro.controls.Button" "lost.guiro.View" {}
 
 --[[
     button event types
@@ -15,9 +15,10 @@ Button.ButtonPress   = "BUTTON_PRESS"
 Button.ButtonRelease = "BUTTON_RELEASE"
 Button.ButtonClick   = "BUTTON_CLICK"
 
-Button.ButtonEvent = lost.common.Class("lost.guiro.controls.Button.ButtonEvent", lost.guiro.event.Event)
+lost.common.Class "lost.guiro.controls.Button.ButtonEvent" "lost.guiro.event.Event" {}
 
-function Button.ButtonEvent:__init(which, pos) lost.guiro.event.Event.__init(self, which)
+function Button.ButtonEvent:create(which, pos)
+  lost.guiro.event.Event.create(self, which)
   self.pos = pos
 end
 
@@ -34,7 +35,7 @@ Button.State =
 --[[
     constructor
   ]]
-function Button:__init(properties)
+function Button:create(properties)
   properties = properties or {}
   
   -- initialize defaults
@@ -54,7 +55,7 @@ function Button:__init(properties)
 
   properties.focusable = true
 
-  lost.guiro.View.__init(self, properties)
+  lost.guiro.View.create(self, properties)
 
   -- initialize state
   self:updateState()

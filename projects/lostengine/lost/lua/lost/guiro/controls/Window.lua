@@ -6,9 +6,9 @@ require("lost.guiro.Bounds")
 --[[
      Window control
   ]]
-Window = lost.common.Class("lost.guiro.controls.Window", lost.guiro.View)
+lost.common.Class "lost.guiro.controls.Window" "lost.guiro.View" {}
 
-function Window:__init(properties)
+function Window:create(properties)
   properties = properties or {}
 
   -- initialize defaults
@@ -26,7 +26,7 @@ function Window:__init(properties)
   self.windowMouseUp = function(event) self:updateDragging(event, false) end
   self.windowMouseUpOutside = function(event) self:updateDragging(event, false) end
 
-  lost.guiro.View.__init(self, properties)
+  lost.guiro.View.create(self, properties)
 end
 
 function Window:setProperty(key, value)

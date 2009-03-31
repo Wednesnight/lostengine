@@ -1,12 +1,13 @@
 module("lost.common", package.seeall)
 
+require("lost.common.Class")
+
 --[[
      Profiler
   ]]
-class "lost.common.Profiler"
-Profiler = _G["lost.common.Profiler"]
+lost.common.Class "lost.common.Profiler"
 
-function Profiler:__init()
+function Profiler:create()
   self.calls = {}
 end
 

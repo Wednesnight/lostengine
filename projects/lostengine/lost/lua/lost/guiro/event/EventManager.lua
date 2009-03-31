@@ -1,16 +1,12 @@
 module("lost.guiro.event", package.seeall)
 
+require("lost.common.Class")
 require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
 require("lost.guiro.event.TouchEvent")
 
-class "lost.guiro.event.EventManager"
-EventManager = _G["lost.guiro.event.EventManager"]
-
-function pack(...)
-  return arg
-end
+lost.common.Class "lost.guiro.event.EventManager" {}
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -20,8 +16,8 @@ end
 -- 
 --
 --
-function EventManager:__init(rootView)
-  log.debug("EventManager:__init")
+function EventManager:create(rootView)
+  log.debug("EventManager:create")
   self.rootView = rootView
   self.previousMouseMoveStack = {}
   self.previousMouseClickStack = {}
