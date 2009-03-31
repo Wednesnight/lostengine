@@ -3,11 +3,14 @@
 
 #include "lost/application/InputEvent.h"
 #include "lost/application/KeyCode.h"
+#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
   namespace application
   {
+    struct KeyEvent;
+    typedef boost::shared_ptr<KeyEvent> KeyEventPtr;
 
     struct KeyEvent : public InputEvent
     {

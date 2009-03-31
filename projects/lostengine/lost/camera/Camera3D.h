@@ -12,6 +12,8 @@ namespace lost
 {
   namespace camera
   {
+    struct Camera3D;
+    typedef boost::shared_ptr<Camera3D> Camera3DPtr;
 
     struct Camera3D : public Camera
     {
@@ -25,7 +27,7 @@ namespace lost
       math::Vec3 mPlane;
     public:
       // constructor
-      Camera3D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
+      Camera3D(gl::ContextPtr inContext, const lost::math::Rect& inViewport);
 
       // getters
       math::Vec2 depth();
