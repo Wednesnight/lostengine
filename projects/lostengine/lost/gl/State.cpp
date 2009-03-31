@@ -9,25 +9,25 @@ namespace lost
     {
     }
     
-    State::State(const SharedParam& p1)
+    State::State(const ParamPtr& p1)
     {
       param(p1);
     }
 
-    State::State(const SharedParam& p1, const SharedParam& p2)
+    State::State(const ParamPtr& p1, const ParamPtr& p2)
     {
       param(p1);
       param(p2);
     }
 
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3)
     {
       param(p1);
       param(p2);
       param(p3);
     }
 
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4)
     {
       param(p1);
       param(p2);
@@ -35,7 +35,7 @@ namespace lost
       param(p4);
     }
 
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5)
     {
       param(p1);
       param(p2);
@@ -44,8 +44,8 @@ namespace lost
       param(p5);
     }
     
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                 const SharedParam& p6)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                 const ParamPtr& p6)
     {
       param(p1);
       param(p2);
@@ -55,8 +55,8 @@ namespace lost
       param(p6);
     }
     
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                 const SharedParam& p6, const SharedParam& p7)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                 const ParamPtr& p6, const ParamPtr& p7)
     {
       param(p1);
       param(p2);
@@ -67,8 +67,8 @@ namespace lost
       param(p7);
     }
     
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                 const SharedParam& p6, const SharedParam& p7, const SharedParam& p8)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                 const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8)
     {
       param(p1);
       param(p2);
@@ -80,8 +80,8 @@ namespace lost
       param(p8);
     }
     
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                 const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                 const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9)
     {
       param(p1);
       param(p2);
@@ -94,8 +94,8 @@ namespace lost
       param(p9);
     }
     
-    State::State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                 const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10)
+    State::State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                 const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9, const ParamPtr& p10)
     {
       param(p1);
       param(p2);
@@ -109,67 +109,67 @@ namespace lost
       param(p10);
     }
     
-    SharedState State::create()
+    StatePtr State::create()
     {
-      return SharedState(new State());
+      return StatePtr(new State());
     }
     
-    SharedState State::create(const SharedParam& p1)
+    StatePtr State::create(const ParamPtr& p1)
     {
-      return SharedState(new State(p1));
+      return StatePtr(new State(p1));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2)
     {
-      return SharedState(new State(p1, p2));
+      return StatePtr(new State(p1, p2));
     }
 
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3)
     {
-      return SharedState(new State(p1, p2, p3));
+      return StatePtr(new State(p1, p2, p3));
     }
 
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4)
     {
-      return SharedState(new State(p1, p2, p3, p4));
+      return StatePtr(new State(p1, p2, p3, p4));
     }
 
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5));
+      return StatePtr(new State(p1, p2, p3, p4, p5));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                              const SharedParam& p6)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                              const ParamPtr& p6)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5, p6));
+      return StatePtr(new State(p1, p2, p3, p4, p5, p6));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                              const SharedParam& p6, const SharedParam& p7)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                              const ParamPtr& p6, const ParamPtr& p7)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5, p6, p7));
+      return StatePtr(new State(p1, p2, p3, p4, p5, p6, p7));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                              const SharedParam& p6, const SharedParam& p7, const SharedParam& p8)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                              const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5, p6, p7, p8));
+      return StatePtr(new State(p1, p2, p3, p4, p5, p6, p7, p8));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                              const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                              const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5, p6, p7, p8, p9));
+      return StatePtr(new State(p1, p2, p3, p4, p5, p6, p7, p8, p9));
     }
     
-    SharedState State::create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5,
-                              const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10)
+    StatePtr State::create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5,
+                              const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9, const ParamPtr& p10)
     {
-      return SharedState(new State(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
+      return StatePtr(new State(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
     }
     
-    void State::param(const SharedParam& inParam)
+    void State::param(const ParamPtr& inParam)
     {
       // we want to overwrite previous values, so don't check for duplicates
       params[inParam->which] = inParam;

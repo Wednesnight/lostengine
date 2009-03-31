@@ -32,9 +32,9 @@ namespace lost
       finalize();
     }
 
-    void Context::apply(const SharedState& newState)
+    void Context::apply(const StatePtr& newState)
     {
-      for (std::map<GLenum, SharedParam>::iterator idx = newState->params.begin(); idx != newState->params.end(); ++idx)
+      for (std::map<GLenum, ParamPtr>::iterator idx = newState->params.begin(); idx != newState->params.end(); ++idx)
       {
         if (currentState->params.find(idx->first) == currentState->params.end() ||
             currentState->params[idx->first].get() != idx->second.get())
@@ -45,7 +45,7 @@ namespace lost
       }
     }
     
-    void Context::pushState(const SharedState& newState)
+    void Context::pushState(const StatePtr& newState)
     {
       if (stateStack.size() > 0)
       {
@@ -58,7 +58,7 @@ namespace lost
     {
       if (stateStack.size() > 1)
       {
-        SharedState state = stateStack.back();
+        StatePtr state = stateStack.back();
         apply(state);
         stateStack.pop_back();
       }

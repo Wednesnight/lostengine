@@ -12,38 +12,38 @@ namespace lost
   {
     
     struct State;
-    typedef boost::shared_ptr<State> SharedState;
+    typedef boost::shared_ptr<State> StatePtr;
 
     struct State
     {
     private:
       State();
-      State(const SharedParam& p1);
-      State(const SharedParam& p1, const SharedParam& p2);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9);
-      State(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10);
+      State(const ParamPtr& p1);
+      State(const ParamPtr& p1, const ParamPtr& p2);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9);
+      State(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9, const ParamPtr& p10);
     public:
-      std::map<GLenum, SharedParam> params;
+      std::map<GLenum, ParamPtr> params;
       
-      static SharedState create();
-      static SharedState create(const SharedParam& p1);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9);
-      static SharedState create(const SharedParam& p1, const SharedParam& p2, const SharedParam& p3, const SharedParam& p4, const SharedParam& p5, const SharedParam& p6, const SharedParam& p7, const SharedParam& p8, const SharedParam& p9, const SharedParam& p10);
+      static StatePtr create();
+      static StatePtr create(const ParamPtr& p1);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9);
+      static StatePtr create(const ParamPtr& p1, const ParamPtr& p2, const ParamPtr& p3, const ParamPtr& p4, const ParamPtr& p5, const ParamPtr& p6, const ParamPtr& p7, const ParamPtr& p8, const ParamPtr& p9, const ParamPtr& p10);
       
-      void param(const SharedParam& inParam);
+      void param(const ParamPtr& inParam);
     };
 
   }

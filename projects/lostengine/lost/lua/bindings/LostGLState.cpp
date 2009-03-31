@@ -18,83 +18,83 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<gl::State, SharedState>("State")
+          class_<gl::State, StatePtr>("State")
           .def("param", &gl::State::param)
           .scope
           [
-            def("create", (SharedState(*)())&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create),
-            def("create", (SharedState(*)(const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&, const SharedParam&))&gl::State::create)
+            def("create", (StatePtr(*)())&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
+            def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create)
           ],
-          class_<gl::AlphaTest, SharedParam>("AlphaTest")
+          class_<gl::AlphaTest, ParamPtr>("AlphaTest")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::AlphaTest::create)
-          ],
-
-          class_<gl::DepthTest, SharedParam>("DepthTest")
-          .scope
-          [
-            def("create", (SharedParam(*)(bool))&gl::DepthTest::create)
+            def("create", (ParamPtr(*)(bool))&gl::AlphaTest::create)
           ],
 
-          class_<gl::Texture2D, SharedParam>("Texture2D")
+          class_<gl::DepthTest, ParamPtr>("DepthTest")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::Texture2D::create)
+            def("create", (ParamPtr(*)(bool))&gl::DepthTest::create)
           ],
 
-          class_<gl::Blend, SharedParam>("Blend")
+          class_<gl::Texture2D, ParamPtr>("Texture2D")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::Blend::create)
+            def("create", (ParamPtr(*)(bool))&gl::Texture2D::create)
+          ],
+
+          class_<gl::Blend, ParamPtr>("Blend")
+          .scope
+          [
+            def("create", (ParamPtr(*)(bool))&gl::Blend::create)
           ],
           
-          class_<gl::Scissor, SharedParam>("Scissor")
+          class_<gl::Scissor, ParamPtr>("Scissor")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::Scissor::create)
+            def("create", (ParamPtr(*)(bool))&gl::Scissor::create)
           ],
          
-         class_<gl::NormalArray, SharedParam>("NormalArray")
+         class_<gl::NormalArray, ParamPtr>("NormalArray")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::NormalArray::create)
+            def("create", (ParamPtr(*)(bool))&gl::NormalArray::create)
           ],
           
-          class_<gl::VertexArray, SharedParam>("VertexArray")
+          class_<gl::VertexArray, ParamPtr>("VertexArray")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::VertexArray::create)
+            def("create", (ParamPtr(*)(bool))&gl::VertexArray::create)
           ],
           
-          class_<gl::TextureArray, SharedParam>("TextureArray")
+          class_<gl::TextureArray, ParamPtr>("TextureArray")
           .scope
           [
-            def("create", (SharedParam(*)(bool))&gl::TextureArray::create)
+            def("create", (ParamPtr(*)(bool))&gl::TextureArray::create)
           ],
           
-          class_<gl::ClearColor, SharedParam>("ClearColor")
+          class_<gl::ClearColor, ParamPtr>("ClearColor")
           .scope
           [
-            def("create", (SharedParam(*)(const lost::common::Color&))&gl::ClearColor::create)
+            def("create", (ParamPtr(*)(const lost::common::Color&))&gl::ClearColor::create)
           ],
           
-          class_<gl::BlendFunc, SharedParam>("BlendFunc")
+          class_<gl::BlendFunc, ParamPtr>("BlendFunc")
           .scope
           [
-            def("create", (SharedParam(*)(GLenum, GLenum))&gl::BlendFunc::create)
+            def("create", (ParamPtr(*)(GLenum, GLenum))&gl::BlendFunc::create)
           ],
 
-          class_<gl::ScissorBox, SharedParam>("ScissorBox")
+          class_<gl::ScissorBox, ParamPtr>("ScissorBox")
           .scope
           [
-            def("create", (SharedParam(*)(const math::Rect&))&gl::ScissorBox::create)
+            def("create", (ParamPtr(*)(const math::Rect&))&gl::ScissorBox::create)
           ]
         ]
       ];
