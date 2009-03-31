@@ -21,6 +21,9 @@ namespace lost
 {
 namespace font
 {
+struct TrueTypeFont;
+typedef boost::shared_ptr<TrueTypeFont> TrueTypeFontPtr;
+
 struct TrueTypeFont
 {
   struct Glyph
@@ -42,16 +45,18 @@ struct TrueTypeFont
     
     boost::shared_ptr<bitmap::Bitmap> bitmap;
   };
+
+  typedef boost::shared_ptr<Glyph> GlyphPtr;
   
-  TrueTypeFont(boost::shared_ptr<freetype::Library> inLibrary,
-               boost::shared_ptr<resource::File> inFile);
+  TrueTypeFont(freetype::LibraryPtr inLibrary,
+               resource::FilePtr inFile);
   virtual ~TrueTypeFont();
 
   /** lets freetype render the specified glyph.
    * All memory management is performed by freetype. The result is placed in the
    * face->glyph->bitmap structure.
    */
-  boost::shared_ptr<bitmap::Bitmap>
+  bitmap::BitmapPtr
   renderGlyphToBitmap(fhtagn::text::utf32_char_t c,
                       boost::uint32_t inSizeInPoints);
     
@@ -62,11 +67,11 @@ struct TrueTypeFont
    *  @param inSizeInPoints pointsize for the rendered text.
    *
    */
-  boost::shared_ptr<Model> render(const fhtagn::text::utf32_string& inText,
-                                  boost::uint32_t inSizeInPoints);
+  ModelPtr render(const fhtagn::text::utf32_string& inText,
+                  boost::uint32_t inSizeInPoints);
 
-  boost::shared_ptr<Model> render(const std::string & inText,
-                                  boost::uint32_t inSizeInPoints);
+  ModelPtr render(const std::string & inText,
+                  boost::uint32_t inSizeInPoints);
   
   
   /** checks if the caches already contain the glyph for the given character 
@@ -82,34 +87,36 @@ struct TrueTypeFont
   void rebuildTextureAtlas();
   
 
-    /** sets up internal model data structures so they can contain the given number of characters.
-     */
-    void resetModel(boost::shared_ptr<Model> model, boost::uint32_t numChars);  
+  /** sets up internal model data structures so they can contain the given number of characters.
+   */
+  void resetModel(ModelPtr model, boost::uint32_t numChars);  
 
-  void addGlyph(boost::shared_ptr<Model> model,
+  void addGlyph(ModelPtr model,
                 boost::uint32_t index,
-                boost::shared_ptr<Glyph> glyph,
+                GlyphPtr glyph,
                 float xoffset,
                 lost::math::Vec2& pmin,
                 lost::math::Vec2& pmax);
+
   /** returns the number of characters that are actually displayable 
    * and have a non-degenerate bitmap.
    * E.g. spaces will not be rendered as a mesh, but the following mesh segment
    * will simply be moved further.
    * Drawables will be flagged true, other will be flagged with drawable = false
    */
-  boost::uint32_t countAndFlagDrawableChars(const fhtagn::text::utf32_string& inText, boost::uint32_t inSizeInPoints);
+  boost::uint32_t countAndFlagDrawableChars(const fhtagn::text::utf32_string& inText,
+                                            boost::uint32_t inSizeInPoints);
   
-  boost::shared_ptr<freetype::Face> face;
-  boost::shared_ptr<freetype::Library> library;
+  freetype::FacePtr face;
+  freetype::LibraryPtr library;
 
   lost::math::Vec2  atlasSize;
   
-  std::map<fhtagn::text::utf32_char_t, std::map<boost::uint32_t, boost::shared_ptr<Glyph> > > char2size2glyph; 
-  std::vector<boost::shared_ptr<Glyph> > glyphs; // this list of glyphs contains the glyphs in the order they were rendered
-                                                 // this is important to preserve the ordering fo rth packing of the atlas
+  std::map<fhtagn::text::utf32_char_t, std::map<boost::uint32_t, GlyphPtr> > char2size2glyph; 
+  std::vector<GlyphPtr> glyphs; // this list of glyphs contains the glyphs in the order they were rendered
+                                // this is important to preserve the ordering fo rth packing of the atlas
 
-  boost::shared_ptr<gl::Texture> atlas;
+  gl::TexturePtr atlas;
 };
 }  
 }

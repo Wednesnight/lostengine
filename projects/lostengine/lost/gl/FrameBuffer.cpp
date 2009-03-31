@@ -5,7 +5,7 @@ namespace lost
 namespace gl
 {
 
-void FrameBuffer::attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
+void FrameBuffer::attach(GLenum target, RenderBufferPtr inRenderBuffer)
 {
   lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
 }
@@ -35,7 +35,7 @@ void FrameBuffer::disable()
 
 // attach a color buffer to one of 16 slots, zero indexed
 // no need to proivde GLenum ,just index them
-void FrameBuffer::attachColor(int index, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
+void FrameBuffer::attachColor(int index, RenderBufferPtr inRenderBuffer)
 {
   GLenum target;
   switch(index)
@@ -63,12 +63,12 @@ void FrameBuffer::attachColor(int index, boost::shared_ptr<lost::gl::RenderBuffe
   attach(target, inRenderBuffer);
 }
 
-void FrameBuffer::attachStencil(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
+void FrameBuffer::attachStencil(RenderBufferPtr inRenderBuffer)
 {
   attach(LGL_STENCIL_ATTACHMENT, inRenderBuffer);
 }
 
-void FrameBuffer::attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer)
+void FrameBuffer::attachDepth(RenderBufferPtr inRenderBuffer)
 {
   attach(LGL_DEPTH_ATTACHMENT, inRenderBuffer);
 }
@@ -76,7 +76,7 @@ void FrameBuffer::attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRender
 
 // attach a color buffer to one of 16 slots, zero indexed
 // no need to proivde GLenum ,just index them
-void FrameBuffer::attachColor(int index, boost::shared_ptr<lost::gl::Texture> inTexture)
+void FrameBuffer::attachColor(int index, TexturePtr inTexture)
 {
   GLenum target;
   switch(index)
@@ -104,17 +104,17 @@ void FrameBuffer::attachColor(int index, boost::shared_ptr<lost::gl::Texture> in
   attach(target, inTexture);
 }
 
-void FrameBuffer::attachStencil(boost::shared_ptr<lost::gl::Texture> inTexture)
+void FrameBuffer::attachStencil(TexturePtr inTexture)
 {
   attach(LGL_STENCIL_ATTACHMENT, inTexture);
 }
 
-void FrameBuffer::attachDepth(boost::shared_ptr<lost::gl::Texture> inTexture)
+void FrameBuffer::attachDepth(TexturePtr inTexture)
 {
   attach(LGL_DEPTH_ATTACHMENT, inTexture);
 }
 
-void FrameBuffer::attach(GLenum target, boost::shared_ptr<lost::gl::Texture> inTexture)
+void FrameBuffer::attach(GLenum target, TexturePtr inTexture)
 {
   GLint mipmaplevel = 0;
   lglFramebufferTexture2D(LGL_FRAMEBUFFER, target, GL_TEXTURE_2D, inTexture->texture, mipmaplevel);GLDEBUG_THROW;

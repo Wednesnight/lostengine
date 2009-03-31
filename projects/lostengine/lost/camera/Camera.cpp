@@ -7,7 +7,7 @@ namespace lost
   namespace camera
   {
     
-    Camera::Camera(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport)
+    Camera::Camera(gl::ContextPtr inContext, const lost::math::Rect& inViewport)
     : context(inContext),
       viewport(inViewport)
     {

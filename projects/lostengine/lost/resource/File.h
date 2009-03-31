@@ -9,6 +9,9 @@ namespace lost
 {
 namespace resource
 {
+  struct File;
+  typedef boost::shared_ptr<File> FilePtr;
+
   struct File
   {
     boost::shared_array<char> data;

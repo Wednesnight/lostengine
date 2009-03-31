@@ -15,13 +15,15 @@ namespace lost
 
   namespace font
   {
-
+    struct Model;
+    typedef boost::shared_ptr<Model> ModelPtr;
+    
     struct Model
     {
       Model();
       virtual ~Model();
 
-      void render(const boost::shared_ptr<gl::Canvas>& canvas);
+      void render(gl::CanvasPtr canvas);
 
       boost::uint32_t vertexCount;
       boost::uint32_t indexCount;
@@ -29,7 +31,7 @@ namespace lost
       boost::shared_array<float>    texcoords;
       boost::shared_array<boost::uint8_t>  indices;
       gl::SharedState renderState;
-      boost::shared_ptr<gl::Texture>  texture;
+      gl::TexturePtr  texture;
       lost::math::Vec2 min; // min in pixel of the rendered string. baseline is at y=0
       lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0
       lost::math::Vec2 size; // min, max, width and height in pixel of the rendered string. baseline is at y=0

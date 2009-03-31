@@ -11,13 +11,16 @@ namespace lost
 {
 namespace gl
 {
+struct FrameBuffer;
+typedef boost::shared_ptr<FrameBuffer> FrameBufferPtr;
+
 struct FrameBuffer
 {
 private:
   // attaches the renderbuffer to the currently bound framebuffer at the specified attachment target
-  void attach(GLenum target, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer);
+  void attach(GLenum target, RenderBufferPtr inRenderBuffer);
 
-  void attach(GLenum target, boost::shared_ptr<lost::gl::Texture> inTexture);
+  void attach(GLenum target, TexturePtr inTexture);
 
 
 public:
@@ -29,15 +32,15 @@ public:
 
   // attach a color buffer to one of 16 slots, zero indexed
   // no need to proivde GLenum ,just index them
-  void attachColor(int index, boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer);
-  void attachStencil(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer);
-  void attachDepth(boost::shared_ptr<lost::gl::RenderBuffer> inRenderBuffer);
+  void attachColor(int index, RenderBufferPtr inRenderBuffer);
+  void attachStencil(RenderBufferPtr inRenderBuffer);
+  void attachDepth(RenderBufferPtr inRenderBuffer);
 
   // attach a color buffer to one of 16 slots, zero indexed
   // no need to proivde GLenum ,just index them
-  void attachColor(int index, boost::shared_ptr<lost::gl::Texture> inTexture);
-  void attachStencil(boost::shared_ptr<lost::gl::Texture> inTexture);
-  void attachDepth(boost::shared_ptr<lost::gl::Texture> inTexture);
+  void attachColor(int index, TexturePtr inTexture);
+  void attachStencil(TexturePtr inTexture);
+  void attachDepth(TexturePtr inTexture);
   GLenum status();
   bool isComplete();
 

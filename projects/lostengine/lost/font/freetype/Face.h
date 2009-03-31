@@ -13,10 +13,13 @@ namespace lost
   {
     namespace freetype
     {
+      struct Face;
+      typedef boost::shared_ptr<Face> FacePtr;
+    
       struct Face
       {
-        Face(boost::shared_ptr<freetype::Library> inLibrary,
-             boost::shared_ptr<resource::File> inFile);
+        Face(LibraryPtr inLibrary,
+             resource::FilePtr inFile);
         virtual ~Face();
 
         FT_Face face() { return mFace; }
@@ -26,12 +29,12 @@ namespace lost
         
         // font faces are only valid as long as the loaded data stays alive
         // so every font face object takes care of its own data
-        boost::shared_ptr<lost::resource::File> mFile;
+        resource::FilePtr mFile;
         
         // the freetype Library must ony be destroyed after all fonts were removed.
         // in order to avoid crashes and keep the fonts alive as long as possible,
         // we keep a reference to the library inside the font.
-        boost::shared_ptr<Library> mLibrary;
+        LibraryPtr mLibrary;
       };
     }
   }
