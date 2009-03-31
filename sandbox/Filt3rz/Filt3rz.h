@@ -19,14 +19,14 @@ public:
   void run();
 
 private:
-  boost::shared_ptr<lost::application::Application> app;
-  boost::shared_ptr<lost::application::Window>      window;
-  boost::shared_ptr<lost::gl::FrameBuffer>          framebuffer;
+  lost::application::ApplicationPtr                 app;
+  lost::application::WindowPtr                      window;
+  lost::gl::FrameBufferPtr                          framebuffer;
   lost::gl::TexturePtr                              tex;
   boost::shared_ptr<lost::gl::State>                renderState;
   boost::shared_ptr<lost::gl::State>                fboRenderState;
   boost::shared_ptr<lost::camera::Camera2D>         fboCam;
-  boost::shared_ptr<lost::gl::Canvas>               fboCanvas;
+  lost::gl::CanvasPtr                               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
   lost::gl::ShaderProgramPtr                        edgeShader;
@@ -34,12 +34,12 @@ private:
   lost::gl::ShaderProgramPtr                        sharpenShader;
   boost::shared_ptr<lost::camera::Camera3D>         cubeCam;  
 
-  boost::shared_ptr<lost::font::TrueTypeFont>     ttf;
-  boost::shared_ptr<lost::font::Model>            labelOriginal;
-  boost::shared_ptr<lost::font::Model>            labelBlur;
-  boost::shared_ptr<lost::font::Model>            labelEdge;
-  boost::shared_ptr<lost::font::Model>            labelEmboss;
-  boost::shared_ptr<lost::font::Model>            labelSharpen;
+  lost::font::TrueTypeFontPtr                       ttf;
+  lost::font::ModelPtr                              labelOriginal;
+  lost::font::ModelPtr                              labelBlur;
+  lost::font::ModelPtr                              labelEdge;
+  lost::font::ModelPtr                              labelEmboss;
+  lost::font::ModelPtr                              labelSharpen;
   
   void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
   void update(boost::shared_ptr<lost::application::Application> app);
