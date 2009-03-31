@@ -19,7 +19,7 @@ namespace lost
     {
     }
 
-    void Model::render(const boost::shared_ptr<Canvas>& canvas)
+    void Model::render(CanvasPtr canvas)
     {
       // don't do anything if model is empty
       if((vertexCount==0) || (indexCount==0))

@@ -3,32 +3,23 @@
 
 #include "lost/lgl/lgl.h"
 #include "lost/gl/Utils.h"
+#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
 namespace gl
 {
+struct RenderBuffer;
+typedef boost::shared_ptr<RenderBuffer> RenderBufferPtr;
+
 struct RenderBuffer
 {
-  RenderBuffer()
-  {
-    lglGenRenderbuffers(1, &buffer);GLDEBUG_THROW;
-  }
+  RenderBuffer();
+  virtual ~RenderBuffer();
 
-  void enable()
-  {
-    lglBindRenderbuffer(LGL_RENDERBUFFER, buffer);GLDEBUG_THROW;
-  }
-
-  void disable()
-  {
-    lglBindRenderbuffer(LGL_RENDERBUFFER, 0);GLDEBUG_THROW;
-  }
-
-  void storage(GLenum inInternalFormat, GLsizei inWidth, GLsizei inHeight)
-  {
-    lglRenderbufferStorage(LGL_RENDERBUFFER, inInternalFormat, inWidth, inHeight);GLDEBUG_THROW;
-  }
+  void enable();
+  void disable();
+  void storage(GLenum inInternalFormat, GLsizei inWidth, GLsizei inHeight);
 
   GLint width() { return param(LGL_RENDERBUFFER_WIDTH); }
   GLint height() { return param(LGL_RENDERBUFFER_HEIGHT); }
@@ -40,17 +31,7 @@ struct RenderBuffer
   GLint depthSize() { return param(LGL_RENDERBUFFER_DEPTH_SIZE); }
   GLint stencilSize() { return param(LGL_RENDERBUFFER_STENCIL_SIZE); }
 
-  GLint param(GLenum paramName)
-  {
-    GLint result;
-    lglGetRenderbufferParameteriv(buffer, paramName, &result);GLDEBUG_THROW;
-    return result;
-  }
-
-  virtual ~RenderBuffer()
-  {
-    lglDeleteRenderbuffers(1, &buffer);GLDEBUG;
-  }
+  GLint param(GLenum paramName);
 
   GLuint  buffer;
 };

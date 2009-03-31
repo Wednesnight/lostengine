@@ -487,6 +487,7 @@
 		EA09071E0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA09071F0E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
 		EA0907200E6F4F7A00852256 /* LostPlatformPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */; };
+		EA09B0880F81F4A500266854 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
 		EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
@@ -681,6 +682,9 @@
 		EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
+		EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
+		EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
 		EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
 		EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
@@ -885,6 +889,7 @@
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatformPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatformPlatform.cpp; path = bindings/LostPlatformPlatform.cpp; sourceTree = "<group>"; };
+		EA09B0870F81F4A500266854 /* RenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderBuffer.cpp; sourceTree = "<group>"; };
 		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
 		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
 		EA1BF6620F67342000862B2F /* LostEngineUnittests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineUnittests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1559,6 +1564,7 @@
 				8DFDE5980F56D43C005D3927 /* Canvas.cpp */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */,
+				EA09B0870F81F4A500266854 /* RenderBuffer.cpp */,
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
@@ -2042,6 +2048,7 @@
 				B41267050F5EE7CD001CCC23 /* version.cpp in Sources */,
 				B475506A0F690E2700B04249 /* Parser.cpp in Sources */,
 				EA5D3C580F7C650D002804E4 /* FrameBuffer.cpp in Sources */,
+				EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2268,6 +2275,7 @@
 				EAFF077D0F71B26E00001316 /* LostModelObjParser.cpp in Sources */,
 				EAFF077E0F71B26F00001316 /* LostModelObjRenderer.cpp in Sources */,
 				EA5D3C560F7C650B002804E4 /* FrameBuffer.cpp in Sources */,
+				EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2301,6 +2309,7 @@
 				EA1BF6E10F67445300862B2F /* Checks.cpp in Sources */,
 				EA1BF6E40F67445D00862B2F /* TimeHelpers.cpp in Sources */,
 				EA1BF6E50F67445D00862B2F /* SignalTranslator.cpp in Sources */,
+				EA09B0880F81F4A500266854 /* RenderBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2527,6 +2536,7 @@
 				B41266E60F5EE7CD001CCC23 /* version.cpp in Sources */,
 				B47550690F690E2700B04249 /* Parser.cpp in Sources */,
 				EA5D3C570F7C650C002804E4 /* FrameBuffer.cpp in Sources */,
+				EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,13 +11,13 @@ namespace lost
   namespace gl
   {
 
-    Canvas::Canvas(const boost::shared_ptr<Context>& inContext, const lost::math::Rect& inViewport)
+    Canvas::Canvas(ContextPtr inContext, const lost::math::Rect& inViewport)
     : context(inContext)
     {
       camera.reset(new camera::Camera2D(context, inViewport));
     }
 
-    Canvas::Canvas(const boost::shared_ptr<Context>& inContext, const boost::shared_ptr<camera::Camera>& inCamera)
+    Canvas::Canvas(ContextPtr inContext, camera::CameraPtr inCamera)
     : context(inContext),
       camera(inCamera)
     {

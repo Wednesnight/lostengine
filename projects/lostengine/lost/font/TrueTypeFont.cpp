@@ -30,8 +30,8 @@ TrueTypeFont::Glyph::~Glyph()
 {
 }
 
-TrueTypeFont::TrueTypeFont(boost::shared_ptr<freetype::Library> inLibrary,
-             boost::shared_ptr<resource::File> inFile)
+TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
+                           resource::FilePtr inFile)
 {
   face.reset(new Face(inLibrary, inFile));
   atlasSize.width = 256;
@@ -42,7 +42,7 @@ TrueTypeFont::~TrueTypeFont()
 {
 }
 
-boost::shared_ptr<bitmap::Bitmap>
+bitmap::BitmapPtr
 TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
                                   uint32_t inSizeInPoints)
 {
@@ -58,11 +58,11 @@ TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
   error = FT_Render_Glyph(face->face()->glyph, render_mode);
   if(error) {WOUT("FT_Render_Glyph error: " << error);}
   
-  shared_ptr<Bitmap> result(new Bitmap(face->face()->glyph->bitmap.width,
-                                       face->face()->glyph->bitmap.rows,
-                                       Bitmap::COMPONENTS_RGBA,
-                                       Bitmap::COMPONENTS_ALPHA,
-                                       face->face()->glyph->bitmap.buffer));  
+  BitmapPtr result(new Bitmap(face->face()->glyph->bitmap.width,
+                               face->face()->glyph->bitmap.rows,
+                               Bitmap::COMPONENTS_RGBA,
+                               Bitmap::COMPONENTS_ALPHA,
+                               face->face()->glyph->bitmap.buffer));  
   result->flip();  
   return result;
 }
@@ -71,7 +71,7 @@ bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
                                uint32_t inSizeInPoints)
 {
     bool result = false;
-    boost::shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
+    GlyphPtr glyph = char2size2glyph[c][inSizeInPoints];
     if(!glyph) 
     {
       result = true;
@@ -91,9 +91,9 @@ void TrueTypeFont::rebuildTextureAtlas()
 {
   lost::bitmap::Packer::Result  packerResult;
 
-  std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > characterBitmaps;
-  std::vector<uint32_t> glyphIndex; // because we might not use all bitmaps, need to preserve the original indices of the glyphs
-  std::vector<boost::shared_ptr<Glyph> >::iterator i;
+  vector<BitmapPtr> characterBitmaps;
+  vector<uint32_t> glyphIndex; // because we might not use all bitmaps, need to preserve the original indices of the glyphs
+  vector<GlyphPtr>::iterator i;
   uint32_t counter = 0;
   for(i=glyphs.begin(); i!=glyphs.end(); ++i)
   {
@@ -146,7 +146,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   }
 }
 
-void TrueTypeFont::resetModel(boost::shared_ptr<Model> model, uint32_t numChars)
+void TrueTypeFont::resetModel(ModelPtr model, uint32_t numChars)
 {
   uint32_t numVertsPerChar = 4;
   model->vertexCount = numChars*numVertsPerChar;
@@ -160,9 +160,9 @@ void TrueTypeFont::resetModel(boost::shared_ptr<Model> model, uint32_t numChars)
   model->texture = atlas;
 }
 
-void TrueTypeFont::addGlyph(boost::shared_ptr<Model> model,
+void TrueTypeFont::addGlyph(ModelPtr model,
                             uint32_t index,
-                            shared_ptr<Glyph> glyph,
+                            GlyphPtr glyph,
                             float xoffset,
                             lost::math::Vec2& pmin,
                             lost::math::Vec2& pmax)
@@ -235,7 +235,7 @@ uint32_t TrueTypeFont::countAndFlagDrawableChars(const ftxt::utf32_string& inTex
 }
 
 
-boost::shared_ptr<Model> TrueTypeFont::render(const std::string & inText,
+ModelPtr TrueTypeFont::render(const std::string & inText,
                                 boost::uint32_t inSizeInPoints)
 {
   DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
@@ -252,11 +252,11 @@ boost::shared_ptr<Model> TrueTypeFont::render(const std::string & inText,
   
 
   
-shared_ptr<Model> TrueTypeFont::render(const ftxt::utf32_string& inText,
-                                       uint32_t inSizeInPoints)
+ModelPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
+                              uint32_t inSizeInPoints)
 {
   DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
-  shared_ptr<Model>  result(new Model);
+  ModelPtr  result(new Model);
   
   // render glyphs if required
   uint32_t renderedGlyphs = 0;
@@ -299,7 +299,7 @@ shared_ptr<Model> TrueTypeFont::render(const ftxt::utf32_string& inText,
       previousGlyphIndex = currentGlyphIndex;
     }
     
-    shared_ptr<Glyph> glyph = char2size2glyph[c][inSizeInPoints];
+    GlyphPtr glyph = char2size2glyph[c][inSizeInPoints];
     if (!glyph) continue;
 
     if (glyph->drawable)

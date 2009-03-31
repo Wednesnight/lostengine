@@ -22,7 +22,9 @@ namespace lost
 {
   namespace gl
   {
-  
+    struct Context;
+    typedef boost::shared_ptr<Context> ContextPtr;
+    
     struct Context
     {
     private:

@@ -12,8 +12,8 @@ namespace font
 namespace freetype
 {
 
-Face::Face(boost::shared_ptr<Library> inLibrary,
-           boost::shared_ptr<resource::File> inFile)
+Face::Face(LibraryPtr inLibrary,
+           resource::FilePtr inFile)
 {
   FT_Error error  = FT_New_Memory_Face(inLibrary->library,
                                        reinterpret_cast<FT_Byte*>(inFile->data.get()),

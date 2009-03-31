@@ -13,6 +13,9 @@ namespace lost
 {
   namespace application
   {
+    struct Window;
+    typedef boost::shared_ptr<Window> WindowPtr;
+      
     
     struct WindowParams
     {

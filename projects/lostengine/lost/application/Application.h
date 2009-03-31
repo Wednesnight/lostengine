@@ -21,7 +21,8 @@ namespace lost
 {
   namespace application
   {
-
+    struct Application;
+    typedef boost::shared_ptr<Application> ApplicationPtr;
     struct Application : public boost::enable_shared_from_this<Application>, public lost::event::EventDispatcher
     {
     private:

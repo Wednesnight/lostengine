@@ -14,15 +14,17 @@ namespace lost
 {
   namespace gl
   {
+    struct Canvas;
+    typedef boost::shared_ptr<Canvas> CanvasPtr;
   
     struct Canvas
     {
     public:
-      boost::shared_ptr<Context> context;
-      boost::shared_ptr<camera::Camera> camera;
+      ContextPtr context;
+      camera::CameraPtr camera;
 
-      Canvas(const boost::shared_ptr<Context>& inContext, const lost::math::Rect& inViewport);
-      Canvas(const boost::shared_ptr<Context>& inContext, const boost::shared_ptr<camera::Camera>& inCamera);
+      Canvas(ContextPtr inContext, const lost::math::Rect& inViewport);
+      Canvas(ContextPtr inContext, camera::CameraPtr inCamera);
 
       void clear(GLbitfield flags);
 
