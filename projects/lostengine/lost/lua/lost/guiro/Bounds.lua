@@ -1,14 +1,13 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.common.Object")
 
 --[[
      Bounds class
   ]]
-Bounds = lost.common.Class("lost.guiro.Bounds", lost.common.Object)
+lost.common.Class "lost.guiro.Bounds" {}
 
-function Bounds:__init(x, y, width, height)
+function Bounds:create(x, y, width, height)
   self.x = x
   self.y = y
   self.width = width

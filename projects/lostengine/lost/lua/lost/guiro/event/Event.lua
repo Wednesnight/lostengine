@@ -1,14 +1,14 @@
 module("lost.guiro.event", package.seeall) -- Event
 
-require("lost.common.Object")
+require("lost.common.Class")
 
-Event = lost.common.Class("lost.guiro.event.Event", lost.common.Object)
+lost.common.Class "lost.guiro.event.Event" {}
 
 lost.guiro.event.Event.PHASE_CAPTURE = 0
 lost.guiro.event.Event.PHASE_TARGET = 1
 lost.guiro.event.Event.PHASE_BUBBLE = 2
 
-function Event:__init(inType) lost.common.Object.__init(self)
+function Event:create(inType) 
   self.type = inType                                -- identifies the event type
   self.bubbles = false                              -- set this to true if the event should bubble
   self.stopDispatch = false                         -- set this to false if you want to stop the dispatching of this event

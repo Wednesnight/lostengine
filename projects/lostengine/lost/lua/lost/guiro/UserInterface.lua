@@ -5,9 +5,11 @@ require("lost.guiro.View")
 --[[
      UserInterface class
   ]]
-UserInterface = lost.common.Class("lost.guiro.UserInterface", lost.guiro.View)
+lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
 
-function UserInterface:__init(properties) lost.guiro.View.__init(self, properties)
+function UserInterface:create(properties)
+  lost.guiro.View.create(self, properties)
+
   properties = properties or {}
 
   self.renderState = lost.gl.State.create(lost.gl.DepthTest.create(false),

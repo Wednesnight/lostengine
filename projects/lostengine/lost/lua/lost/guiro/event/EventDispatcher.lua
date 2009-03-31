@@ -1,9 +1,10 @@
 module("lost.guiro.event", package.seeall)
 
-class "lost.guiro.event.EventDispatcher"
-EventDispatcher = _G["lost.guiro.event.EventDispatcher"]
+require("lost.common.Class")
 
-function EventDispatcher:__init() 
+lost.common.Class "lost.guiro.event.EventDispatcher" {}
+
+function EventDispatcher:create()
   self.listeners = {}
 end
 

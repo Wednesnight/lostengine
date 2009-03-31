@@ -1,14 +1,15 @@
 module("lost.io", package.seeall)
 
+require("lost.common.Class")
+
 --[[
      Loader
   ]]
 
-class "lost.io.Loader"
-Loader = _G["lost.io.Loader"]
+lost.common.Class "lost.io.Loader" {}
 
-function Loader:__init(loader)
-  log.debug("Loader:__init()")
+function Loader:create(loader)
+  log.debug("Loader:create()")
   self.loader = loader
 end
 

@@ -9,16 +9,17 @@ require("lost.guiro.event.MouseEvent")
 --[[
      Slider control
   ]]
-Slider = lost.common.Class("lost.guiro.controls.Slider", lost.guiro.View)
+lost.common.Class "lost.guiro.controls.Slider" "lost.guiro.View" {}
 
 --[[
     slider events
   ]]
 Slider.SliderChange = "SLIDER_CHANGE"
 
-Slider.SliderEvent = lost.common.Class("lost.guiro.controls.Slider.SliderEvent", lost.guiro.event.Event)
+lost.common.Class "lost.guiro.controls.Slider.SliderEvent" "lost.guiro.event.Event" {}
 
-function Slider.SliderEvent:__init(which, target, value) lost.guiro.event.Event.__init(self, which)
+function Slider.SliderEvent:create(which, target, value)
+  lost.guiro.event.Event.create(self, which)
   self.target = target
   self.value = value
 end
@@ -35,7 +36,7 @@ Slider.Orientation =
 --[[
     constructor
   ]]
-function Slider:__init(properties)
+function Slider:create(properties)
   properties = properties or {}
 
   -- initialize defaults
@@ -62,7 +63,7 @@ function Slider:__init(properties)
     end
   end
 
-  lost.guiro.View.__init(self, properties)
+  lost.guiro.View.create(self, properties)
 end
 
 function Slider:set(properties)

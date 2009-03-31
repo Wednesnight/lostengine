@@ -8,15 +8,15 @@ require("lost.guiro.MouseManager")
 --[[
      Screen class
   ]]
-Screen = lost.common.Class("lost.guiro.Screen", lost.guiro.View)
+lost.common.Class "lost.guiro.Screen" "lost.guiro.View" {}
 
-function Screen:__init(properties)
+function Screen:create(properties)
   properties = properties or {}
 
   -- initialize defaults
   properties.focusable = true
 
-  lost.guiro.View.__init(self, properties)
+  lost.guiro.View.create(self, properties)
 
   log.debug("----------------------------------------------------------")
   self.eventManager = lost.guiro.event.EventManager(self)

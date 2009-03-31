@@ -1,7 +1,6 @@
 module("lost.guiro", package.seeall) -- View
 
 require("lost.common.Class")
-require("lost.common.Object")
 require("lost.guiro.Bounds")
 require("lost.guiro.event.EventDispatcher")
 
@@ -10,16 +9,14 @@ require("lost.guiro.config")
 --[[
      View class
   ]]
-View = lost.common.Class("lost.guiro.View", lost.common.Object)
+lost.common.Class "lost.guiro.View" {}
 
 View.indices = {}
 
 --[[ 
     constructor
   ]]
-function View:__init(properties)
-  lost.common.Object.__init(self)
-
+function View:create(properties)
   -- initialize id
   local name = self:className()
   if (not self.indices[name]) then
@@ -92,7 +89,7 @@ function View:set(properties)
       end
 
     -- apply children from properties param
-    elseif type(k) == "number" and type(v) == "userdata" and v.isView then
+    elseif type(k) == "number" and type(v) == "table" and v.isView then
       self:appendChild(v)
 
     else
