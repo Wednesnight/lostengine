@@ -23,16 +23,16 @@ private:
   lost::application::WindowPtr                      window;
   lost::gl::FrameBufferPtr                          framebuffer;
   lost::gl::TexturePtr                              tex;
-  boost::shared_ptr<lost::gl::State>                renderState;
-  boost::shared_ptr<lost::gl::State>                fboRenderState;
-  boost::shared_ptr<lost::camera::Camera2D>         fboCam;
+  lost::gl::StatePtr                                renderState;
+  lost::gl::StatePtr                                fboRenderState;
+  lost::camera::Camera2DPtr                         fboCam;
   lost::gl::CanvasPtr                               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
   lost::gl::ShaderProgramPtr                        edgeShader;
   lost::gl::ShaderProgramPtr                        embossShader;
   lost::gl::ShaderProgramPtr                        sharpenShader;
-  boost::shared_ptr<lost::camera::Camera3D>         cubeCam;  
+  lost::camera::Camera3DPtr                         cubeCam;  
 
   lost::font::TrueTypeFontPtr                       ttf;
   lost::font::ModelPtr                              labelOriginal;
@@ -41,8 +41,8 @@ private:
   lost::font::ModelPtr                              labelEmboss;
   lost::font::ModelPtr                              labelSharpen;
   
-  void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
-  void update(boost::shared_ptr<lost::application::Application> app);
+  void keyHandler(lost::application::KeyEventPtr event);
+  void update(lost::application::ApplicationPtr app);
 
   void setupFBOs();
   void setupBlurShader();
@@ -53,7 +53,7 @@ private:
   void renderFbo(double dt);
 
   void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex);
-  void drawLabel(boost::shared_ptr<lost::font::Model> label,
+  void drawLabel(lost::font::ModelPtr label,
                  const lost::common::Color& col,
                  uint32_t panelIndex);
   
