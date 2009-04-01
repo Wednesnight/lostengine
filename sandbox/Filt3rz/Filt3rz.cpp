@@ -130,24 +130,10 @@ void Filt3rz::setupFBOs()
   fboViewport.y = 0;
   fboViewport.width = fboSize.width;
   fboViewport.height = fboSize.height;
-
-  framebuffer.reset(new FrameBuffer());
-  framebuffer->enable();
-  tex.reset(new Texture(fboSize));
-  framebuffer->attachColor(0, tex);
-  tex->filter(GL_NEAREST);
-  DOUT("FBO complete: "<<framebuffer->isComplete());
-
-  TexturePtr depthBuffer(new Texture());
-  depthBuffer->bind();
-  depthBuffer->init(0,GL_DEPTH_COMPONENT24, fboSize.width, fboSize.height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-  framebuffer->attachDepth(depthBuffer);
-  DOUT("FBO complete: "<<framebuffer->isComplete());
-  if(!framebuffer->isComplete())
-    throw runtime_error("couldn't create FBO");
-  framebuffer->disable();
   
-//  fboCam.reset(new Camera2D(window->context, fboViewport));
+  framebuffer = FrameBuffer::createFrameBuffer(fboSize, GL_RGBA, 24);
+  tex = framebuffer->colorTextures[0];
+
   cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
   cubeCam->fovY(45.0f);
   cubeCam->depth(Vec2(1.0f, 100.0f));
@@ -170,8 +156,6 @@ void Filt3rz::renderFbo(double dt)
   fboCanvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-//  fboCanvas->drawLine(Vec2(0,0), Vec2(256,256));
-//  fboCanvas->drawRectTextured(Rect(0,0,testPic->dataWidth, testPic->dataHeight), testPic, true);
   float cubeSize = 1;
   glTranslatef(0, .2,0);
   angle = fmod(dt*50+angle, 360);  

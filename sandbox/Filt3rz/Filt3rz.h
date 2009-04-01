@@ -25,7 +25,6 @@ private:
   lost::gl::TexturePtr                              tex;
   lost::gl::StatePtr                                renderState;
   lost::gl::StatePtr                                fboRenderState;
-  lost::camera::Camera2DPtr                         fboCam;
   lost::gl::CanvasPtr                               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
