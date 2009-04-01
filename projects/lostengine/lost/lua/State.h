@@ -14,6 +14,9 @@ namespace lost
   namespace lua
   {
 
+    struct State;
+    typedef boost::shared_ptr<State> StatePtr;
+
     struct State : boost::noncopyable
     {
       State(boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));

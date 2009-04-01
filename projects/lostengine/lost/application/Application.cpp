@@ -1,6 +1,8 @@
 #include "lost/application/Application.h"
 #include "lost/resource/DefaultLoader.h"
 
+#include <boost/program_options.hpp>
+
 namespace lost
 {
   namespace application
@@ -27,6 +29,30 @@ namespace lost
       initialize();
     }
 
+    Application::Application(int argn, char** args)
+    : loader(new lost::resource::DefaultLoader)
+    {
+      using namespace boost::program_options;
+
+      // Declare the supported options.
+      options_description desc;
+      desc.add_options()
+        ("script", value<std::string>())
+      ;
+      positional_options_description p;
+      p.add("script", -1);
+      
+      variables_map vm;
+      store(command_line_parser(argn, args).options(desc).positional(p).run(), vm);
+      notify(vm);
+      
+      if (vm.count("script"))
+      {
+        runLoopThread.reset(new RunLoopThreadLua(vm["script"].as<std::string>()));
+      }
+      initialize();
+    }
+    
     boost::shared_ptr<Application> Application::create()
     {
       return boost::shared_ptr<Application>(new Application);
@@ -42,6 +68,11 @@ namespace lost
       return boost::shared_ptr<Application>(new Application(inScript));
     }
 
+    boost::shared_ptr<Application> Application::create(int argn, char** args)
+    {
+      return boost::shared_ptr<Application>(new Application(argn, args));
+    }
+    
     void Application::runLoopWaitsForEvents(bool flag)
     {
       runLoopThread->waitForEvents = flag;
@@ -66,6 +97,7 @@ namespace lost
     
     void Application::run()
     {
+      if (!runLoopThread) throw std::runtime_error("you have to set a runloop");
       runLoopThread->initialize(shared_from_this());
       boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
       dispatchEvent(appEvent);

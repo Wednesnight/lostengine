@@ -19,24 +19,27 @@ namespace lost
   {
 
     struct Application;
+    typedef boost::shared_ptr<Application> ApplicationPtr;
+    typedef boost::function<void (const ApplicationPtr& sender)> RunLoopFunction;
+
     struct RunLoopThread
     {
     protected:
       bool running;
-      boost::shared_ptr<Application> application;
+      ApplicationPtr application;
       boost::shared_ptr<boost::thread> thread;
-      boost::function<void (const boost::shared_ptr<Application>& sender)> runLoop;
+      boost::function<void (const ApplicationPtr& sender)> runLoop;
 
       virtual void loop();
-      void quit(boost::shared_ptr<event::Event> event);
+      void quit(event::EventPtr event);
     public:
       RunLoopThread();
-      RunLoopThread(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+      RunLoopThread(const RunLoopFunction& inRunLoop);
 
-      void setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
+      void setRunLoop(const RunLoopFunction& inRunLoop);
 
-      virtual void initialize(const boost::shared_ptr<Application>& inApplication);
-      virtual void run(const boost::shared_ptr<Application>& inApplication);
+      virtual void initialize(const ApplicationPtr& inApplication);
+      virtual void run(const ApplicationPtr& inApplication);
       void join();
       bool waitForEvents; // if true, only runs the loop once a low level event arrives
     };
@@ -44,11 +47,11 @@ namespace lost
     struct RunLoopThreadLua : public RunLoopThread
     {
     protected:
-      boost::filesystem::path             filename;
-      boost::shared_ptr<lost::lua::State> interpreter;
+      boost::filesystem::path filename;
+      lost::lua::StatePtr     interpreter;
     public:
       RunLoopThreadLua(const boost::filesystem::path& inFilename);
-      virtual void initialize(const boost::shared_ptr<Application>& inApplication);
+      virtual void initialize(const ApplicationPtr& inApplication);
     };
 
   }
