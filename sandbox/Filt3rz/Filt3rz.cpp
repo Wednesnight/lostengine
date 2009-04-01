@@ -37,9 +37,9 @@ Filt3rz::Filt3rz()
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
   
-  shared_ptr<freetype::Library> ftlib(new freetype::Library);
-  shared_ptr<File> file = app->loader->load("miserable.ttf");
-  shared_ptr<freetype::Face> fnt(new freetype::Face(ftlib, file));
+  freetype::LibraryPtr ftlib(new freetype::Library);
+  FilePtr file = app->loader->load("miserable.ttf");
+  freetype::FacePtr fnt(new freetype::Face(ftlib, file));
   ttf.reset(new TrueTypeFont(ftlib, file));  
   ttf->atlasSize = Vec2(512,512);  
   
@@ -193,7 +193,7 @@ void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex)
   shader->disable();
 }
 
-void Filt3rz::drawLabel(boost::shared_ptr<lost::font::Model> label,
+void Filt3rz::drawLabel(lost::font::ModelPtr label,
                        const lost::common::Color& col,
                        uint32_t panelIndex)
 {
@@ -207,7 +207,7 @@ void Filt3rz::drawLabel(boost::shared_ptr<lost::font::Model> label,
     label->render(window->canvas);
 }              
 
-void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
+void Filt3rz::update(lost::application::ApplicationPtr app)
 {
   double currentSec = lost::platform::currentTimeSeconds();
   double delta = currentSec - passedSec;
@@ -242,7 +242,7 @@ void Filt3rz::update(boost::shared_ptr<lost::application::Application> app)
   passedSec = currentSec;
 }
 
-void Filt3rz::keyHandler(boost::shared_ptr<lost::application::KeyEvent> event)
+void Filt3rz::keyHandler(lost::application::KeyEventPtr event)
 {
     if (event->key == K_ESCAPE) app->quit();
 }
