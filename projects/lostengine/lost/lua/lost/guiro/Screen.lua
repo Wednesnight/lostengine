@@ -28,10 +28,6 @@ function Screen:create(properties)
   self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(false))
 end
 
-function Screen:__finalize()
-  log.debug("-------------- Screen finalize")
-end
-
 function Screen:propagateMouseEvent(event)
   self.eventManager:propagateMouseEvent(self, event)
 end

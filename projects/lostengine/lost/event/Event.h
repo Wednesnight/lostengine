@@ -8,6 +8,9 @@ namespace lost
 {
   namespace event
   {
+    struct Event;
+    typedef boost::shared_ptr<Event> EventPtr;
+
     typedef std::string Type;
 
 		/** low-level event class.

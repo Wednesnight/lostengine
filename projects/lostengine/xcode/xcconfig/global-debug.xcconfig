@@ -3,4 +3,4 @@
 // GCC 4.0 - Code Generation
 GCC_OPTIMIZATION_LEVEL = 0
 
-GCC_PREFIX_HEADER = prefix-debug.pch
+GCC_PREFIX_HEADER = $(LOSTENGINE_ROOT)/projects/lostengine/xcode/prefix-debug.pch

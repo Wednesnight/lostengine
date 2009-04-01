@@ -57,7 +57,8 @@ namespace lost
       Application();
       Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       Application(const boost::filesystem::path& inScript);
-        
+      Application(int argn, char** args);
+
     public:
       /**
        * applications windows are created using a unique id (named windows), this list maps uniqueId -> window
@@ -73,6 +74,7 @@ namespace lost
       static boost::shared_ptr<Application> create();
       static boost::shared_ptr<Application> create(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop);
       static boost::shared_ptr<Application> create(const boost::filesystem::path& inScript);
+      static boost::shared_ptr<Application> create(int argn, char** args);
 
       // if you set this to true, the runLoop will only be called if there are any low level events that will be dispatched
       // through the application (mouse move, key press). The application will behave conservatively and save cpu time.

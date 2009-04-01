@@ -1,6 +1,13 @@
 #include "lost/application/Application.h"
 #include "lost/application/RunLoopThread.h"
 
+using namespace lost::event;
+using namespace lost::lua;
+using namespace lost::platform;
+using namespace lost::resource;
+using namespace luabind;
+using namespace std;
+
 namespace lost
 {
   namespace application
@@ -10,7 +17,7 @@ namespace lost
     {
     }
 
-    RunLoopThread::RunLoopThread(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    RunLoopThread::RunLoopThread(const RunLoopFunction& inRunLoop)
     : running(false), waitForEvents(false)
     {
       setRunLoop(inRunLoop);
@@ -22,11 +29,11 @@ namespace lost
       running = true;
       while (running)
       {
-        const double startTime = lost::platform::currentTimeMilliSeconds();
+        const double startTime = currentTimeMilliSeconds();
         if(!waitForEvents)
         {
           if (runLoop) runLoop(application);
-          application->processEvents(fmax(0, 1.0/60.0 - lost::platform::currentTimeMilliSeconds() - startTime));
+          application->processEvents(fmax(0, 1.0/60.0 - currentTimeMilliSeconds() - startTime));
         }
         else
         {
@@ -37,23 +44,23 @@ namespace lost
       }
     }
 
-    void RunLoopThread::quit(boost::shared_ptr<event::Event> event)
+    void RunLoopThread::quit(EventPtr event)
     {
       running = false;
     }
 
-    void RunLoopThread::setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    void RunLoopThread::setRunLoop(const RunLoopFunction& inRunLoop)
     {
       runLoop = inRunLoop;
     }
 
-    void RunLoopThread::initialize(const boost::shared_ptr<Application>& inApplication)
+    void RunLoopThread::initialize(const ApplicationPtr& inApplication)
     {
       application = inApplication;
       application->addEventListener(ApplicationEvent::QUIT(), boost::bind(&RunLoopThread::quit, this, _1));
     }
     
-    void RunLoopThread::run(const boost::shared_ptr<Application>& inApplication)
+    void RunLoopThread::run(const ApplicationPtr& inApplication)
     {
       thread.reset(new boost::thread(boost::bind(&RunLoopThread::loop, this)));
     }
@@ -71,40 +78,40 @@ namespace lost
     {
     }    
 
-    void RunLoopThreadLua::initialize(const boost::shared_ptr<Application>& inApplication)
+    void RunLoopThreadLua::initialize(const ApplicationPtr& inApplication)
     {
       RunLoopThread::initialize(inApplication);
 
-      interpreter.reset(new lua::State(inApplication->loader));  // init lua state with resource loader
-      lost::lua::bindAll(*interpreter);                                            // bind lostengine lua mappings    
+      interpreter.reset(new State(inApplication->loader));  // init lua state with resource loader
+      bindAll(*interpreter);                                // bind lostengine lua mappings    
       
       /**
        * each runloop interpreter has got its own environment reference including the following objects:
        *   - interpreter
        *   - application
        */
-      luabind::globals(*interpreter)["environment"] = luabind::newtable(*interpreter);
+      globals(*interpreter)["environment"] = newtable(*interpreter);
       // map the state itself into the interpreter so that
       //   - error handling is working and
       //   - scripts can use it
-      luabind::globals(*interpreter)["environment"]["interpreter"] = interpreter;
+      globals(*interpreter)["environment"]["interpreter"] = interpreter;
       // map the loader into the interpreter so that scripts can load resources
-      luabind::globals(*interpreter)["environment"]["application"] = inApplication;
+      globals(*interpreter)["environment"]["application"] = inApplication;
       
-      lost::lua::ModuleLoader::install(*interpreter, inApplication->loader); // install custom module loader so require goes through resourceLoader
+      ModuleLoader::install(*interpreter, inApplication->loader); // install custom module loader so require goes through resourceLoader
       
       // try to load lua script
       try
       {
-        boost::shared_ptr<lost::resource::File> initScript = inApplication->loader->load(filename);
+        FilePtr initScript = inApplication->loader->load(filename);
         interpreter->doFile(initScript);
-        luabind::object main = luabind::globals(*interpreter)["main"];
-        if (luabind::type(main) != LUA_TFUNCTION) throw std::runtime_error("main() is not defined");
-        luabind::call_function<void>(main, inApplication);
+        object main = globals(*interpreter)["main"];
+        if (type(main) != LUA_TFUNCTION) throw runtime_error("main() is not defined");
+        call_function<void>(main, inApplication);
       }
-      catch(std::exception& ex)
+      catch(exception& ex)
       {
-        EOUT("couldn't load script <"+ filename.native_file_string() +">: "+ std::string(ex.what()));
+        EOUT("couldn't load script <"+ filename.native_file_string() +">: "+ string(ex.what()));
       }
     }
 
