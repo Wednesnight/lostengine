@@ -7,6 +7,7 @@
 #include "lost/gl/Texture.h"
 #include <boost/shared_ptr.hpp>
 #include <map>
+#include "lost/gl/Context.h"
 
 namespace lost
 {
@@ -46,12 +47,13 @@ public:
    * @return complete FBO    
    * @throws runtime_error if the FBO couldn't be constructed.
    */
-  static FrameBufferPtr createFrameBuffer(const math::Vec2& size,
+  static FrameBufferPtr createFrameBuffer(ContextPtr ctx,
+                                          const math::Vec2& size,
                                           GLenum colorFormat=GL_RGBA, // internal format of color attachment
                                           uint8_t bitDepth=24); // desired bitdepth of depth attachment
                                                              // lower resolutions will be tried if 
 
-  FrameBuffer();
+  FrameBuffer(ContextPtr ctx);
   virtual ~FrameBuffer();
 
   void enable();
@@ -88,6 +90,9 @@ public:
   std::map<uint8_t, RenderBufferPtr> colorBuffers; // index them with the integer, NOT the GLenum
   RenderBufferPtr depthBuffer;
   RenderBufferPtr stencilBuffer;
+  
+  // context is used for switching and tracking framebuffers
+  ContextPtr context;
 };
 }
 }

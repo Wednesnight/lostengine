@@ -1,5 +1,6 @@
 #include "lost/gl/FrameBuffer.h"
 #include <stdexcept>
+#include "lost/gl/gl.h"
 
 using namespace std;
 
@@ -66,13 +67,14 @@ uint8_t lowerBitDepth(uint8_t bitDepth)
   return result;
 }
 
-FrameBufferPtr FrameBuffer::createFrameBuffer(const math::Vec2& size,
-                                        GLenum colorFormat, 
-                                        uint8_t bitDepth)
+FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr ctx,
+                                              const math::Vec2& size,
+                                              GLenum colorFormat, 
+                                              uint8_t bitDepth)
 {
   FrameBufferPtr result;
   
-  result.reset(new FrameBuffer());
+  result.reset(new FrameBuffer(ctx));
   result->enable();
 
   // first the color attachment
@@ -111,7 +113,8 @@ void FrameBuffer::attach(GLenum target, RenderBufferPtr inRenderBuffer)
   lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
 }
 
-FrameBuffer::FrameBuffer()
+FrameBuffer::FrameBuffer(ContextPtr ctx)
+: context(ctx)
 {
   lglGenFramebuffers(1, &buffer);GLDEBUG_THROW;
 }
@@ -123,15 +126,12 @@ FrameBuffer::~FrameBuffer()
 
 void FrameBuffer::enable()
 {
-  // we have to get the previous framebuffer because 0 is the default framebuffer
-  // and every other framebuffer bound previous to this one becomes invalid!
-  glGetIntegerv(LGL_FRAMEBUFFER_BINDING, &previousFramebuffer);GLDEBUG;
-  lglBindFramebuffer(LGL_FRAMEBUFFER, buffer);GLDEBUG_THROW;
+    context->bindFramebuffer(buffer);
 }
 
 void FrameBuffer::disable()
 {
-  lglBindFramebuffer(LGL_FRAMEBUFFER, previousFramebuffer);GLDEBUG;
+    context->bindDefaultFramebuffer();
 }
 
 // attach a color buffer to one of 16 slots, zero indexed

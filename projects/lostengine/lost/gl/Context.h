@@ -43,6 +43,9 @@ namespace lost
       StatePtr currentState;
       std::list<StatePtr> stateStack;
       void apply(const StatePtr& newState);
+      
+      GLuint defaultFrameBuffer;
+      
     public:
       Context();
       ~Context();
@@ -62,6 +65,13 @@ namespace lost
       
       void vsync(bool enable); // true to enable vsync to prevent tearing
       void multithreaded(bool enable); // true to enable multithreaded OpenGL execution on Mac
+      
+      void defaultFramebuffer(GLuint fbo);
+      GLuint defaultFramebuffer();
+      
+      // used by FrameBuffer class for switching
+      void bindFramebuffer(GLuint fbo);
+      void bindDefaultFramebuffer();
     };
 
   }
