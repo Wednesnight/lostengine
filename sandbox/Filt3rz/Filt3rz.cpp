@@ -131,7 +131,7 @@ void Filt3rz::setupFBOs()
   fboViewport.width = fboSize.width;
   fboViewport.height = fboSize.height;
   
-  framebuffer = FrameBuffer::createFrameBuffer(fboSize, GL_RGBA, 24);
+  framebuffer = FrameBuffer::createFrameBuffer(window->context, fboSize, GL_RGBA, 24);
   tex = framebuffer->colorTextures[0];
 
   cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
