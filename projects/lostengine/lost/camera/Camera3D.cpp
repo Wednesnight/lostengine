@@ -15,7 +15,6 @@ namespace lost
       mDepth(1.0f, 100.0f),
       mStickToTarget(false)
     {
-      DOUT("Camera3D::Camera3D()");
     }
 
     math::Vec3 Camera3D::position()

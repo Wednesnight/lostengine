@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0BA1CE0E81011600A49C49 /* libLostEngine.a */; };
 		3E0BA1E90E8102A300A49C49 /* init in Resources */ = {isa = PBXBuildFile; fileRef = 3E0BA1E80E8102A300A49C49 /* init */; };
-		3E0BA1EC0E8102CC00A49C49 /* Application.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E0BA1EB0E8102CC00A49C49 /* Application.lua */; };
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		EA45F5B50DE52D08001B4889 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AE0DE52D08001B4889 /* AGL.framework */; };
+		8DCDB6C60F876D4E00149088 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */; };
+		8DCDB6C70F876D4E00149088 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C30F876D4E00149088 /* global.xcconfig */; };
+		8DCDB6C80F876D4E00149088 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */; };
+		8DCDB6C90F876D4E00149088 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C50F876D4E00149088 /* global-release.xcconfig */; };
+		8DCDB6E10F876E0D00149088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCDB6DF0F876E0D00149088 /* Cocoa.framework */; };
+		8DCDB6E20F876E0D00149088 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCDB6E00F876E0D00149088 /* Foundation.framework */; };
+		8DCDB89A0F87702200149088 /* FunkyFractals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDB8990F87702200149088 /* FunkyFractals.cpp */; };
 		EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AF0DE52D08001B4889 /* OpenGL.framework */; };
-		EA45F5B70DE52D09001B4889 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5B00DE52D08001B4889 /* GLUT.framework */; };
-		EA45F5B80DE52D09001B4889 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5B10DE52D08001B4889 /* Carbon.framework */; };
 		EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA45F5E60DE52DF9001B4889 /* main.cpp */; };
 		EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = EA45F6050DE52EE3001B4889 /* lighting.vs */; };
 		EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = EA45F6060DE52EE3001B4889 /* lighting.fs */; };
@@ -49,20 +51,29 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
+		8DCDB69B0F876B0100149088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
+			remoteInfo = LostEngineUnittests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		3E0BA1E80E8102A300A49C49 /* init */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = init; path = ../init; sourceTree = SOURCE_ROOT; };
-		3E0BA1EB0E8102CC00A49C49 /* Application.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.lua; path = ../../../projects/lostengine/lost/application/Application.lua; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* funkyfractals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = funkyfractals.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA45F5AE0DE52D08001B4889 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		8DCDB6A60F876C0900149088 /* FunkyFractals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunkyFractals.h; path = ../FunkyFractals.h; sourceTree = SOURCE_ROOT; };
+		8DCDB6C20F876D4E00149088 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
+		8DCDB6C30F876D4E00149088 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
+		8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		8DCDB6C50F876D4E00149088 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
+		8DCDB6DF0F876E0D00149088 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		8DCDB6E00F876E0D00149088 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8DCDB8990F87702200149088 /* FunkyFractals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FunkyFractals.cpp; path = ../FunkyFractals.cpp; sourceTree = SOURCE_ROOT; };
 		EA45F5AF0DE52D08001B4889 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		EA45F5B00DE52D08001B4889 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
-		EA45F5B10DE52D08001B4889 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		EA45F5CA0DE52DA1001B4889 /* FunkyFractals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunkyFractals.h; path = ../FunkyFractals.h; sourceTree = SOURCE_ROOT; };
 		EA45F5E60DE52DF9001B4889 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA45F6050DE52EE3001B4889 /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
 		EA45F6060DE52EE3001B4889 /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
@@ -74,10 +85,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */,
-				EA45F5B50DE52D08001B4889 /* AGL.framework in Frameworks */,
 				EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */,
-				EA45F5B70DE52D09001B4889 /* GLUT.framework in Frameworks */,
-				EA45F5B80DE52D09001B4889 /* Carbon.framework in Frameworks */,
+				8DCDB6E10F876E0D00149088 /* Cocoa.framework in Frameworks */,
+				8DCDB6E20F876E0D00149088 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,9 +105,10 @@
 		29B97314FDCFA39411CA2CEA /* funkyfractals */ = {
 			isa = PBXGroup;
 			children = (
+				8DCDB6CA0F876D5100149088 /* Config */,
 				EA45F57D0DE52C7E001B4889 /* Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97323FDCFA39411CA2CEA /* Libraries */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = funkyfractals;
@@ -107,42 +118,52 @@
 			isa = PBXGroup;
 			children = (
 				3E0BA1E80E8102A300A49C49 /* init */,
-				3E0BA1EB0E8102CC00A49C49 /* Application.lua */,
 				EA45F6050DE52EE3001B4889 /* lighting.vs */,
 				EA45F6060DE52EE3001B4889 /* lighting.fs */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		29B97323FDCFA39411CA2CEA /* Libraries */ = {
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */,
-				EA45F5AE0DE52D08001B4889 /* AGL.framework */,
+				8DCDB6DF0F876E0D00149088 /* Cocoa.framework */,
+				8DCDB6E00F876E0D00149088 /* Foundation.framework */,
 				EA45F5AF0DE52D08001B4889 /* OpenGL.framework */,
-				EA45F5B00DE52D08001B4889 /* GLUT.framework */,
-				EA45F5B10DE52D08001B4889 /* Carbon.framework */,
 			);
-			name = Libraries;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3E0BA1C80E81011600A49C49 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				3E0BA1CE0E81011600A49C49 /* libLostEngine.a */,
-				3E0BA1D00E81011600A49C49 /* libLostEngine-iphone.a */,
-				3E0BA1D20E81011600A49C49 /* libLostEngine-simulator.a */,
+				3E0BA1D00E81011600A49C49 /* libLostEngine.a */,
+				3E0BA1D20E81011600A49C49 /* libLostEngine.a */,
+				8DCDB69C0F876B0100149088 /* LostEngineUnittests.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8DCDB6CA0F876D5100149088 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				8DCDB6C20F876D4E00149088 /* macosx.xcconfig */,
+				8DCDB6C30F876D4E00149088 /* global.xcconfig */,
+				8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */,
+				8DCDB6C50F876D4E00149088 /* global-release.xcconfig */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 		EA45F57D0DE52C7E001B4889 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				EA45F5E60DE52DF9001B4889 /* main.cpp */,
-				EA45F5CA0DE52DA1001B4889 /* FunkyFractals.h */,
+				8DCDB6A60F876C0900149088 /* FunkyFractals.h */,
+				8DCDB8990F87702200149088 /* FunkyFractals.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -200,18 +221,25 @@
 			remoteRef = 3E0BA1CD0E81011600A49C49 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3E0BA1D00E81011600A49C49 /* libLostEngine-iphone.a */ = {
+		3E0BA1D00E81011600A49C49 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = 3E0BA1CF0E81011600A49C49 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3E0BA1D20E81011600A49C49 /* libLostEngine-simulator.a */ = {
+		3E0BA1D20E81011600A49C49 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = 3E0BA1D10E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8DCDB69C0F876B0100149088 /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = 8DCDB69B0F876B0100149088 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -221,11 +249,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */,
 				EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */,
 				3E0BA1E90E8102A300A49C49 /* init in Resources */,
-				3E0BA1EC0E8102CC00A49C49 /* Application.lua in Resources */,
+				8DCDB6C60F876D4E00149088 /* macosx.xcconfig in Resources */,
+				8DCDB6C70F876D4E00149088 /* global.xcconfig in Resources */,
+				8DCDB6C80F876D4E00149088 /* global-debug.xcconfig in Resources */,
+				8DCDB6C90F876D4E00149088 /* global-release.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */,
+				8DCDB89A0F87702200149088 /* FunkyFractals.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,20 +281,10 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -282,6 +303,7 @@
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -303,46 +325,15 @@
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_36_0/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14\"",
-					"\"$(SRCROOT)/../../../thirdparty/lua/lua_5_1_4/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/luabind/luabind_0_7_1/include\"",
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C50F876D4E00149088 /* global-release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/include\"",
-					"\"$(SRCROOT)/../../../projects/lostengine\"",
-					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/glee/glee_5_21/include\"",
-					"\"$(SRCROOT)/../../../thirdparty/stb/stb_image_1_14",
-				);
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};

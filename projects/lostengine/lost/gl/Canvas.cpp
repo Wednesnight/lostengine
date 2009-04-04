@@ -484,31 +484,50 @@ namespace lost
       bmp.write(fullPathName);
     } 
 
-#if TARGET_OPENGL
-    // lobotony: copied from freeglut
-    //void  glutSolidCube( GLdouble dSize )
-    // FIXME: not iphone compatible yet
+    // jomanto: copied from http://www.songho.ca/opengl/gl_vertexarray.html
     void  Canvas::drawSolidCube( GLfloat dSize )
     {
-        float size = dSize * 0.5;
+      float size = dSize * 0.5;
+      
+      //    v6----- v5
+      //   /|      /|
+      //  v1------v0|
+      //  | |     | |
+      //  | |v7---|-|v4
+      //  |/      |/
+      //  v2------v3
 
-    #   define V(a,b,c) glVertex3f( a size, b size, c size );
-    #   define NN(a,b,c) glNormal3f( a, b, c );
+      #define V(a,b,c) a size, b size, c size
+      GLfloat vertices[] = { V(+,+,+),  V(-,+,+),  V(-,-,+),  V(+,-,+),         // v0 - v1 - v2 - v3
+                             V(+,+,+),  V(+,-,+),  V(+,-,-),  V(+,+,-),         // v0 - v3 - v4 - v5
+                             V(+,+,+),  V(+,+,-),  V(-,+,-),  V(-,+,+),         // v0 - v5 - v6 - v1
+                             V(-,+,+),  V(-,+,-),  V(-,-,-),  V(-,-,+),         // v1 - v6 - v7 - v2
+                             V(-,-,-),  V(+,-,-),  V(+,-,+),  V(-,-,+),         // v7 - v4 - v3 - v2
+                             V(+,-,-),  V(-,-,-),  V(-,+,-),  V(+,+,-) };       // v4 - v7 - v6 - v5
+      #undef V
 
-        /* PWO: Again, I dared to convert the code to use macros... */
-        glBegin( GL_QUADS );
-            NN( 1.0, 0.0, 0.0); V(+,-,+); V(+,-,-); V(+,+,-); V(+,+,+);
-            NN( 0.0, 1.0, 0.0); V(+,+,+); V(+,+,-); V(-,+,-); V(-,+,+);
-            NN( 0.0, 0.0, 1.0); V(+,+,+); V(-,+,+); V(-,-,+); V(+,-,+);
-            NN(-1.0, 0.0, 0.0); V(-,-,+); V(-,+,+); V(-,+,-); V(-,-,-);
-            NN( 0.0,-1.0, 0.0); V(-,-,+); V(-,-,-); V(+,-,-); V(+,-,+);
-            NN( 0.0, 0.0,-1.0); V(-,-,-); V(-,+,-); V(+,+,-); V(+,-,-);
-        glEnd();
+      static GLfloat normals[] = {  0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,         // v0 - v1 - v2 - v3
+                                    1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,         // v0 - v3 - v4 - v5
+                                    0, 1, 0,   0, 1, 0,   0, 1, 0,   0, 1, 0,         // v0 - v5 - v6 - v1
+                                   -1, 0, 0,  -1, 0, 0,  -1, 0, 0,  -1, 0, 0,         // v1 - v6 - v7 - v2
+                                    0,-1, 0,   0,-1, 0,   0,-1, 0,   0,-1, 0,         // v7 - v4 - v3 - v2
+                                    0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1};        // v4 - v7 - v6 - v5
 
-    #   undef V
-    #   undef NN
+      static GLubyte indices[] = { 0,   1,  2,  3,
+                                   4,   5,  6,  7,
+                                   8,   9, 10, 11,
+                                   12, 13, 14, 15,
+                                   16, 17, 18, 19,
+                                   20, 21, 22, 23 };
+
+      static StatePtr state = State::create(VertexArray::create(true),
+                                            NormalArray::create(true));
+      context->pushState(state);
+      glNormalPointer(GL_FLOAT, 0, normals); GLDEBUG;
+      glVertexPointer(3, GL_FLOAT, 0, vertices); GLDEBUG;
+      glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, indices); GLDEBUG;
+      context->popState();
     }
-#endif
 
   }
 }

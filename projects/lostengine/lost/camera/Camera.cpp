@@ -11,7 +11,6 @@ namespace lost
     : context(inContext),
       viewport(inViewport)
     {
-      DOUT("Camera::Camera()");
     }
    
     void Camera::apply()
