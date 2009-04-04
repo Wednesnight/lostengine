@@ -7,11 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8DAE68570F852DBB00A770C1 /* test_config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8DAE68560F852DAF00A770C1 /* test_config.lua */; };
 		8DDF4BD90F8379BC001654DE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DDF4BD80F8379BC001654DE /* main.cpp */; };
-		8DDF4C080F837AE8001654DE /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF4C040F837AE8001654DE /* global-debug.xcconfig */; };
-		8DDF4C090F837AE8001654DE /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF4C050F837AE8001654DE /* global-release.xcconfig */; };
-		8DDF4C0A0F837AE8001654DE /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF4C060F837AE8001654DE /* global.xcconfig */; };
-		8DDF4C0B0F837AE8001654DE /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF4C070F837AE8001654DE /* macosx.xcconfig */; };
 		8DDF4C330F837CA1001654DE /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF4BFC0F837AB5001654DE /* libLostEngine.a */; };
 		8DDF4C3B0F837D48001654DE /* test_runloop.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8DDF4C3A0F837D48001654DE /* test_runloop.lua */; };
 		8DDF4C3F0F837DC7001654DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF4C3E0F837DC7001654DE /* OpenGL.framework */; };
@@ -60,6 +57,7 @@
 /* Begin PBXFileReference section */
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* LuaTestbed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LuaTestbed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DAE68560F852DAF00A770C1 /* test_config.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_config.lua; path = ../test_config.lua; sourceTree = SOURCE_ROOT; };
 		8DDF4BD80F8379BC001654DE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		8DDF4BF40F837AB5001654DE /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8DDF4C040F837AE8001654DE /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -118,8 +116,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8DDF4C3A0F837D48001654DE /* test_runloop.lua */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				8DDF4C3A0F837D48001654DE /* test_runloop.lua */,
+				8DAE68560F852DAF00A770C1 /* test_config.lua */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -238,11 +237,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DDF4C080F837AE8001654DE /* global-debug.xcconfig in Resources */,
-				8DDF4C090F837AE8001654DE /* global-release.xcconfig in Resources */,
-				8DDF4C0A0F837AE8001654DE /* global.xcconfig in Resources */,
-				8DDF4C0B0F837AE8001654DE /* macosx.xcconfig in Resources */,
 				8DDF4C3B0F837D48001654DE /* test_runloop.lua in Resources */,
+				8DAE68570F852DBB00A770C1 /* test_config.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +266,7 @@
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DDF4C070F837AE8001654DE /* macosx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -285,6 +282,7 @@
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DDF4C070F837AE8001654DE /* macosx.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
