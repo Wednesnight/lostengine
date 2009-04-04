@@ -12,6 +12,9 @@ namespace lost
 
   namespace common
   {
+    struct FpsMeter;
+    typedef boost::shared_ptr<FpsMeter> FpsMeterPtr;
+
     struct FpsMeter
     {
       const static unsigned long historylength = 160;
