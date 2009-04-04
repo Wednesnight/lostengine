@@ -9,13 +9,36 @@ require("lost.guiro.event.MouseEvent")
 --[[
      Slider control
   ]]
-lost.common.Class "lost.guiro.controls.Slider" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.controls.Slider" "lost.guiro.View"
+{
+
+  --[[
+      slider event types
+    ]]
+  SliderChange = "SLIDER_CHANGE",
+
+  --[[
+      slider orientation
+    ]]
+  Orientation =
+  {
+    horizontal = "horizontal",
+    vertical   = "vertical"
+  },
+
+  -- focus manager flags
+  focusable = true,
+
+  -- slider specific stuff
+  min   = 0,
+  max   = 100,
+  steps = 0
+
+}
 
 --[[
-    slider events
+    slider event
   ]]
-Slider.SliderChange = "SLIDER_CHANGE"
-
 lost.common.Class "lost.guiro.controls.Slider.SliderEvent" "lost.guiro.event.Event" {}
 
 function Slider.SliderEvent:create(which, target, value)
@@ -24,14 +47,6 @@ function Slider.SliderEvent:create(which, target, value)
   self.value = value
 end
 
---[[
-    slider orientation
-  ]]
-Slider.Orientation =
-{
-  horizontal = "horizontal",
-  vertical   = "vertical"
-}
 
 --[[
     constructor
@@ -39,15 +54,9 @@ Slider.Orientation =
 function Slider:create(properties)
   properties = properties or {}
 
-  -- initialize defaults
-  properties.orientation = properties.orientation or Slider.Orientation.horizontal
-  properties.min         = properties.min or 0
-  properties.max         = properties.max or 100
-  properties.steps       = properties.steps or 0
-
   properties.borderColor = properties.borderColor or lost.common.Color(0,0,0,1)
 
-  properties.focusable = true
+  properties.orientation = properties.orientation or Slider.Orientation.horizontal
 
   if not properties.button then
     local g = lost.guiro
@@ -75,23 +84,22 @@ function Slider:set(properties)
 end
 
 function Slider:setProperty(key, value)
-  if key == "button" then
-    self:setButton(value)
-    return true
-
   -- the value() setter needs a valid button, so we overwrite set() and modify the value after we've merged the properties
-  elseif key == "value" then
+  if key == "value" then
     return true
   end
   return false
 end
 
 function Slider:setButton(newButton)
-  self:removeChild(self.button)
-  self.button = newButton
-  self:appendChild(self.button)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self:toggleDragging(true) end)
-  self.button:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self:toggleDragging(false) end)
+  if self.button then
+    self:removeChild(self.button)
+  end
+  if newButton then
+    self:appendChild(newButton)
+    newButton:addEventListener(lost.guiro.controls.Button.ButtonPress, function(event) self:toggleDragging(true) end)
+    newButton:addEventListener(lost.guiro.controls.Button.ButtonRelease, function(event) self:toggleDragging(false) end)
+  end
 end
 
 function Slider:toggleDragging(dragging)

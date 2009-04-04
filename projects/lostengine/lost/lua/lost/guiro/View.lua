@@ -9,9 +9,48 @@ require("lost.guiro.config")
 --[[
      View class
   ]]
-lost.common.Class "lost.guiro.View" {}
+lost.common.Class "lost.guiro.View"
+{
 
-View.indices = {}
+  -- helper for auto-generated view ids
+  indices = {},
+
+  -- view specific stuff
+  isView = true,
+	parent = nil,
+
+  -- event states and flags
+  focusable = false,
+  hidden = false,
+  mouseInside = false,
+  receivesEvents = true,
+--  sendsEvents = true ????
+
+  -- layout state flags
+  dirtyLayout = true,
+  dirtyChildLayout = false,
+  currentGlobalRect = lost.math.Rect(),
+  currentLocalRect = lost.math.Rect(),
+
+  -- render state
+  dirty = true,
+
+  -- background color
+  backgroundColor = nil,
+  
+  -- background image
+  backgroundImage = nil,
+  backgroundImageBounds = nil,
+  backgroundImageFilter = nil,
+  backgroundImageStretched = true,
+    
+  -- border color
+  borderColor = nil,
+  
+  -- focus handling (set from lost.guiro.event.EventManager)
+  focused = false
+  
+}
 
 --[[ 
     constructor
@@ -28,35 +67,7 @@ function View:create(properties)
 
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
-  self.isView = true
-	self.parent = nil
-  self.hidden = false
-  self.receivesEvents = true
-  self.mouseInside = false
---  self.sendsEvents = true ????
-  self.focusable = false
 
-  -- layout state flags
-  self.dirtyLayout = true
-  self.dirtyChildLayout = false
-  self.currentGlobalRect = lost.math.Rect()
-  self.currentLocalRect = lost.math.Rect()
-
-  -- render state
-  self.dirty = true
-
-  -- background color
-  self.backgroundColor = nil
-  
-  -- background image
-  self.backgroundImage = nil
-  self.backgroundImageBounds = nil
-  self.backgroundImageFilter = nil
-  self.backgroundImageStretched = true
-    
-  -- border color
-  self.borderColor = nil
-  
   -- round corners
   self.corners =  {}
   self.corners.size = nil
@@ -69,9 +80,6 @@ function View:create(properties)
   -- initialize scissor state
   self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(true))
 
-  -- focus handling (set from lost.guiro.event.EventManager)
-  self.focused = false
-  
   self:set(properties)
 end
 
@@ -105,6 +113,23 @@ end
 
 function View:setProperty(key, value)
   return false
+end
+
+function View:__newindex(member, value)
+  local handled = false
+
+  if not rawget(self, "__newindexIgnore") and type(member) == "string" then
+    local setterName = "set" .. string.upper(string.sub(member, 1, 1)) .. string.sub(member, 2)
+    if type(rawget(self, setterName)) == "function" then
+      rawset(self, "__newindexIgnore", true)
+      handled = rawget(self, setterName)(self, value) or false
+      rawset(self, "__newindexIgnore", false)
+    end
+  end
+
+  if not handled then
+    rawset(self, member, value)
+  end
 end
 
 function View:__tostring()
