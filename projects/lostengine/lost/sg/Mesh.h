@@ -1,14 +1,14 @@
-#ifndef LOST_BATCH_MESH
-#define LOST_BATCH_MESH
+#ifndef LOST_SG_MESH
+#define LOST_SG_MESH
 
-#include "lost/batch/Primitive.h"
-#include "lost/batch/Material.h"
+#include "lost/sg/Primitive.h"
+#include "lost/sg/Material.h"
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
 
 template<

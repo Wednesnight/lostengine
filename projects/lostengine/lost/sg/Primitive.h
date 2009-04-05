@@ -1,11 +1,11 @@
-#ifndef LOST_BATCH_PRIMITIVE_H
-#define LOST_BATCH_PRIMITIVE_H
+#ifndef LOST_SG_PRIMITIVE_H
+#define LOST_SG_PRIMITIVE_H
 
 #include "lost/gl/Context.h"
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
 
   struct Primitive;
