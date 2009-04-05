@@ -1,7 +1,7 @@
 #ifndef LOST_BATCH_PRIMITIVE_H
 #define LOST_BATCH_PRIMITIVE_H
 
-#include <boost/shared_ptr.hpp>
+#include "lost/gl/Context.h"
 
 namespace lost
 {
@@ -62,7 +62,7 @@ public:
   }  
   
   // issue the appropriate GL calls to draw the data
-  virtual void render()
+  virtual void render(gl::ContextPtr ctx)
   {
   }
 };

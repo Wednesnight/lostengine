@@ -2,6 +2,9 @@
 #define LOST_BATCH_BATCH
 
 #include "lost/batch/Primitive.h"
+#include "lost/camera/Camera.h"
+#include "lost/gl/FrameBuffer.h"
+#include "lost/gl/Context.h"
 #include <list>
 
 namespace lost
@@ -18,8 +21,11 @@ struct Batch : public Primitive
   virtual ~Batch();
 
   void add(PrimitivePtr primitive);
+  void render(gl::ContextPtr ctx);
 
   std::list<PrimitivePtr> primitives;
+  camera::CameraPtr       camera;
+  gl::FrameBuffer         framebuffer;
 };
 
 }
