@@ -25,7 +25,7 @@ struct Batch : public Primitive
 
   std::list<PrimitivePtr> primitives;
   camera::CameraPtr       camera;
-  gl::FrameBuffer         framebuffer;
+  gl::FrameBufferPtr         framebuffer;
 };
 
 }

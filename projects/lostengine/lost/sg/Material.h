@@ -1,11 +1,11 @@
-#ifndef LOST_BATCH_MATERIAL_H
-#define LOST_BATCH_MATERIAL_H
+#ifndef LOST_SG_MATERIAL_H
+#define LOST_SG_MATERIAL_H
 
 #include "lost/gl/Texture.h"
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
   
 struct Material;

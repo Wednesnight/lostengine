@@ -1,9 +1,11 @@
-#ifndef LOST_BATCH_LINE
-#define LOST_BATCH_LINE
+#ifndef LOST_SG_LINE
+#define LOST_SG_LINE
+
+#include "lost/sg/Mehs.h"
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
 namespace Line : public Mesh
 {
