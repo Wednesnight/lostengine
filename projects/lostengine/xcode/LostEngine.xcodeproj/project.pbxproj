@@ -571,6 +571,15 @@
 		EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
+		EA4F21AE0F88339A00521EAB /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AB0F88339A00521EAB /* Batch.cpp */; };
+		EA4F21AF0F88339A00521EAB /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AC0F88339A00521EAB /* Line.cpp */; };
+		EA4F21B00F88339A00521EAB /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
+		EA4F21B10F88339A00521EAB /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AB0F88339A00521EAB /* Batch.cpp */; };
+		EA4F21B20F88339A00521EAB /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AC0F88339A00521EAB /* Line.cpp */; };
+		EA4F21B30F88339A00521EAB /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
+		EA4F21B40F88339A00521EAB /* Batch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AB0F88339A00521EAB /* Batch.cpp */; };
+		EA4F21B50F88339A00521EAB /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AC0F88339A00521EAB /* Line.cpp */; };
+		EA4F21B60F88339A00521EAB /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
 		EA54FA6B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
 		EA54FA6E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA730E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
@@ -978,6 +987,9 @@
 		EA3B94FB0E04639D00B6423B /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
+		EA4F21AB0F88339A00521EAB /* Batch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Batch.cpp; path = sg/Batch.cpp; sourceTree = "<group>"; };
+		EA4F21AC0F88339A00521EAB /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Line.cpp; path = sg/Line.cpp; sourceTree = "<group>"; };
+		EA4F21AD0F88339A00521EAB /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Renderer.cpp; path = sg/Renderer.cpp; sourceTree = "<group>"; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
@@ -1559,6 +1571,7 @@
 				EA3B96730E046C5400B6423B /* math */,
 				8D0CC5E10F44C37200ADE728 /* obj */,
 				EA3B94FA0E04639D00B6423B /* platform */,
+				EA8A228B0F87B15400A6EB8B /* sg */,
 				EA1BF6700F6734F400862B2F /* test */,
 			);
 			name = lost;
@@ -1745,6 +1758,16 @@
 				EA7BE11F0E6F38A10017B031 /* LostResourceLoader.cpp */,
 			);
 			name = bindings;
+			sourceTree = "<group>";
+		};
+		EA8A228B0F87B15400A6EB8B /* sg */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F21AB0F88339A00521EAB /* Batch.cpp */,
+				EA4F21AC0F88339A00521EAB /* Line.cpp */,
+				EA4F21AD0F88339A00521EAB /* Renderer.cpp */,
+			);
+			name = sg;
 			sourceTree = "<group>";
 		};
 		EA9A67E10F159C38007E8A3D /* precompiled headers */ = {
@@ -2127,6 +2150,9 @@
 				8DDF50240F8390F6001654DE /* winmain.cpp in Sources */,
 				8DDF50250F8390F6001654DE /* variables_map.cpp in Sources */,
 				8DDF50260F8390F6001654DE /* config_file.cpp in Sources */,
+				EA4F21B40F88339A00521EAB /* Batch.cpp in Sources */,
+				EA4F21B50F88339A00521EAB /* Line.cpp in Sources */,
+				EA4F21B60F88339A00521EAB /* Renderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2364,6 +2390,9 @@
 				8DDF50100F8390F6001654DE /* winmain.cpp in Sources */,
 				8DDF50110F8390F6001654DE /* variables_map.cpp in Sources */,
 				8DDF50120F8390F6001654DE /* config_file.cpp in Sources */,
+				EA4F21AE0F88339A00521EAB /* Batch.cpp in Sources */,
+				EA4F21AF0F88339A00521EAB /* Line.cpp in Sources */,
+				EA4F21B00F88339A00521EAB /* Renderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2645,6 +2674,9 @@
 				8DDF501A0F8390F6001654DE /* winmain.cpp in Sources */,
 				8DDF501B0F8390F6001654DE /* variables_map.cpp in Sources */,
 				8DDF501C0F8390F6001654DE /* config_file.cpp in Sources */,
+				EA4F21B10F88339A00521EAB /* Batch.cpp in Sources */,
+				EA4F21B20F88339A00521EAB /* Line.cpp in Sources */,
+				EA4F21B30F88339A00521EAB /* Renderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
