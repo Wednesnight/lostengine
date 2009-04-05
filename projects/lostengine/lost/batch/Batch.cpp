@@ -20,5 +20,11 @@ void Batch::add(PrimitivePtr primitive)
   primitives.push_back(primitive);
 }
 
+void render(gl::ContextPtr ctx)
+{
+  
+}
+
+
 }
 }
