@@ -5,6 +5,7 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/model/Vertex.h"
+#include "lost/common/Color.h"
 #include <boost/cstdint.hpp>
 
 namespace lost
@@ -39,6 +40,14 @@ namespace lost
 
     template<>
     struct TraitsSelector<lost::math::Vec4>
+    {
+      GLint size;
+      GLenum type;
+      TraitsSelector() : size(4), type(GL_FLOAT) {}
+    };
+
+    template<>
+    struct TraitsSelector<lost::common::Color>
     {
       GLint size;
       GLenum type;
