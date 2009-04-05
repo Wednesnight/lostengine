@@ -1,7 +1,7 @@
-#ifndef LOST_BATCH_BATCH
-#define LOST_BATCH_BATCH
+#ifndef LOST_SG_BATCH
+#define LOST_SG_BATCH
 
-#include "lost/batch/Primitive.h"
+#include "lost/sg/Primitive.h"
 #include "lost/camera/Camera.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/Context.h"
@@ -9,7 +9,7 @@
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
 
 struct Batch;

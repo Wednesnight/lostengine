@@ -1,8 +1,8 @@
-#include "lost/batch/Batch.h"
+#include "lost/sg/Batch.h"
 
 namespace lost
 {
-namespace batch
+namespace sg
 {
 
 Batch::Batch()
