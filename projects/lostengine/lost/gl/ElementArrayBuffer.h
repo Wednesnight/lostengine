@@ -24,6 +24,11 @@ struct ElementArrayBuffer : public TypedBuffer<T>
   {
   }
 };
+// these are the common use cases, also handy for lua bindings.
+typedef ElementArrayBuffer<uint8_t>  ElementArrayBufferU8;
+typedef ElementArrayBuffer<uint16_t> ElementArrayBufferU16;
+typedef ElementArrayBuffer<uint32_t> ElementArrayBufferU32;
+
 }
 }
 
