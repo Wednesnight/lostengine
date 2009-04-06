@@ -13,6 +13,8 @@
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
+		EA3309A30F852B710022412D /* initShaders.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA3309A20F852B710022412D /* initShaders.lua */; };
+		EA8A22C30F87D5EB00A6EB8B /* batchtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A22C20F87D5EB00A6EB8B /* batchtest.cpp */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 		EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10520F7DAFEB00CEAF99 /* light.vs */; };
@@ -75,6 +77,8 @@
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA3309A20F852B710022412D /* initShaders.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = initShaders.lua; path = ../initShaders.lua; sourceTree = SOURCE_ROOT; };
+		EA8A22C20F87D5EB00A6EB8B /* batchtest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = batchtest.cpp; sourceTree = "<group>"; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
 		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
@@ -117,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				EA26A84B0F77B1DE00490D18 /* main.cpp */,
+				EA8A22C20F87D5EB00A6EB8B /* batchtest.cpp */,
 				EAF8EB370F784873005BE1B3 /* Filt3rz.h */,
 				EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */,
 				EA26A8490F77B1D000490D18 /* config */,
@@ -130,6 +135,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA3309A20F852B710022412D /* initShaders.lua */,
 				EAFA11600F7DC65800CEAF99 /* miserable.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EAFA10560F7DAFF500CEAF99 /* blur.vs */,
@@ -272,6 +278,7 @@
 				EAFA10740F7DB1F800CEAF99 /* sharpen.vs in Resources */,
 				EAFA10750F7DB1F800CEAF99 /* sharpen.fs in Resources */,
 				EAFA11610F7DC65800CEAF99 /* miserable.ttf in Resources */,
+				EA3309A30F852B710022412D /* initShaders.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +291,7 @@
 			files = (
 				EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */,
 				EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */,
+				EA8A22C30F87D5EB00A6EB8B /* batchtest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

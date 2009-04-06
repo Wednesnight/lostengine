@@ -24,7 +24,7 @@ Filt3rz::Filt3rz()
   app = Application::create(bind(&Filt3rz::update, this, _1));
 //  app->runLoopWaitsForEvents(true);
   app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
-    
+//  app->doResourceFile("initShaders.lua");
   window = app->createWindow("window", WindowParams("Filt3rz", Rect(50,200,screenSize.width,screenSize.height)));
   window->context->makeCurrent();
   setupFBOs();  
@@ -54,7 +54,7 @@ Filt3rz::Filt3rz()
 
 Filt3rz::~Filt3rz()
 {
-  DOUT("shutting down");
+//  DOUT("shutting down, use_counts: app:"<<app.use_count()<<" rlt:"<<app->runLoopThread.use_count());
 }
 
 void Filt3rz::setupBlurShader()
