@@ -31,6 +31,9 @@ struct Buffer
   virtual void unbind() { glBindBuffer(target, 0); }
   virtual void bufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW) {Buffer::bufferData(target, size, data, usage);}
   virtual void bindBufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW) {bind();Buffer::bufferData(target, size, data, usage);}
+  virtual void bufferSubData(GLintptr offset,GLsizeiptr sizeInBytes,	const GLvoid* data) {Buffer::bufferSubData(target, offset, size, data);};
+  virtual void bindBufferSubData(GLintptr offset,GLsizeiptr size,	const GLvoid* data) {bind(); Buffer::bufferSubData(target, offset, size, data);};
+
 
   virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();vertexPointer(size, type, stride, pointer);}
   virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();texCoordPointer(size, type, stride, pointer);}
@@ -124,6 +127,14 @@ struct Buffer
   virtual void bufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage)
   {
     glBufferData(target, size, data, usage);GLDEBUG_THROW;
+  }
+
+  virtual void bufferSubData(GLenum  	target,
+                             GLintptr  	offset,
+                             GLsizeiptr  	size,
+                             const GLvoid *  	data)
+  {
+    glBufferSubData(target, offset, size, data);GLDEBUG_THROW;
   }
 
   /**
