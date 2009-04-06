@@ -38,6 +38,10 @@
 #include <fhtagn/threads/tasklet.h>
 
 
+#define IS_ALIVE \
+    (RUNNING == m_state || SLEEPING == m_state || STOPPED == m_state)
+
+
 namespace fhtagn {
 namespace threads {
 
@@ -78,7 +82,9 @@ tasklet::stop()
     if (!m_thread) {
         return false;
     }
-    m_state = STOPPED;
+    if (IS_ALIVE) {
+        m_state = STOPPED;
+    }
     lock.unlock();
 
     m_finish.notify_all();
@@ -95,7 +101,7 @@ tasklet::wait()
         return false;
     }
 
-    while (m_state == RUNNING || m_state == SLEEPING || m_state == STOPPED) {
+    while (IS_ALIVE) {
         m_finish.wait(lock);
     }
 
@@ -125,6 +131,7 @@ tasklet::reset()
 
       case RUNNING:
       case STOPPED:
+      case SLEEPING:
         return false;
         break;
 
@@ -151,7 +158,7 @@ bool
 tasklet::alive() const
 {
     boost::mutex::scoped_lock lock(m_mutex);
-    return (m_state == RUNNING || m_state == SLEEPING || m_state == STOPPED);
+    return IS_ALIVE;
 }
 
 
@@ -254,7 +261,7 @@ tasklet::thread_runner()
 
     {
         boost::mutex::scoped_lock lock(m_mutex);
-        if (m_state != ABORTED) {
+        if (IS_ALIVE) {
             m_state = FINISHED;
         }
     }

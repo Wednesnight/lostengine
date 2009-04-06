@@ -472,6 +472,7 @@ private:
         CPPUNIT_ASSERT(task.get_state() == th::tasklet::RUNNING
                 || task.get_state() == th::tasklet::ABORTED);
 
+        CPPUNIT_ASSERT(task.stop());
         CPPUNIT_ASSERT(task.wait());
         CPPUNIT_ASSERT_EQUAL((int) th::tasklet::ABORTED, (int) task.get_state());
 
@@ -487,6 +488,7 @@ private:
         CPPUNIT_ASSERT(task.get_state() == th::tasklet::RUNNING
                 || task.get_state() == th::tasklet::ABORTED);
 
+        CPPUNIT_ASSERT(task.stop());
         CPPUNIT_ASSERT(task.wait());
         CPPUNIT_ASSERT_EQUAL((int) th::tasklet::ABORTED, (int) task.get_state());
 
