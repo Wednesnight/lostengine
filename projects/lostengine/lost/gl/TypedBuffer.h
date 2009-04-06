@@ -23,7 +23,7 @@ public:
   {
   }
 
-  virtual void bindBufferData(T* inData, unsigned long numElems, GLenum usage=GL_STATIC_DRAW)
+  virtual void bindBufferData(T* inData, uint32_t numElems, GLenum usage=GL_STATIC_DRAW)
   {
     GLsizeiptr sizeInBytes = sizeof(T)*numElems;
     Buffer::bindBufferData(sizeInBytes, inData, usage);

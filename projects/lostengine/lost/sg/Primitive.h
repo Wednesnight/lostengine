@@ -59,12 +59,7 @@ public:
   virtual void  update()
   {
     needsUpdate(false);
-  }  
-  
-  // issue the appropriate GL calls to draw the data
-  virtual void render(gl::ContextPtr ctx)
-  {
-  }
+  }    
 };
 
 }

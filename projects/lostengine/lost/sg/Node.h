@@ -1,5 +1,5 @@
-#ifndef LOST_SG_BATCH
-#define LOST_SG_BATCH
+#ifndef LOST_SG_NODE
+#define LOST_SG_NODE
 
 #include "lost/sg/Primitive.h"
 #include "lost/camera/Camera.h"
@@ -12,20 +12,19 @@ namespace lost
 namespace sg
 {
 
-struct Batch;
-typedef boost::shared_ptr<Batch> BatchPtr;
+struct Node;
+typedef boost::shared_ptr<Node> NodePtr;
   
-struct Batch : public Primitive
+struct Node : public Primitive
 {
-  Batch();
-  virtual ~Batch();
+  Node();
+  virtual ~Node();
 
   void add(PrimitivePtr primitive);
-  void render(gl::ContextPtr ctx);
 
   std::list<PrimitivePtr> primitives;
   camera::CameraPtr       camera;
-  gl::FrameBufferPtr         framebuffer;
+  gl::FrameBufferPtr      framebuffer;
 };
 
 }
