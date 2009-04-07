@@ -17,6 +17,8 @@ using namespace lost::common;
 
 void batchtest()
 {
+  gl::ElementArrayBuffer<Vec2> eb;
+
   Mesh2D mesh1;
   Mesh3D mesh2;
 

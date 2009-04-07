@@ -15,9 +15,5 @@ Node::~Node()
   
 }
 
-void Node::add(PrimitivePtr primitive)
-{
-  primitives.push_back(primitive);
-}
 }
 }

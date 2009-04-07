@@ -42,7 +42,6 @@ namespace lost
 
       StatePtr currentState;
       std::list<StatePtr> stateStack;
-      void apply(const StatePtr& newState);
       
       GLuint defaultFrameBuffer;
       
@@ -60,6 +59,7 @@ namespace lost
        */
       void swapBuffers();
 
+      void apply(const StatePtr& newState);
       void pushState(const StatePtr& newState);
       void popState();
       
