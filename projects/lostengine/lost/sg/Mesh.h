@@ -1,24 +1,27 @@
 #ifndef LOST_SG_MESH
 #define LOST_SG_MESH
 
-#include "lost/sg/Primitive.h"
-#include "lost/sg/Material.h"
+#include <boost/shared_ptr.hpp>
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
+#include "lost/common/Logger.h"
+#include "lost/gl/Context.h"
 
 namespace lost
 {
 namespace sg
 {
 
-/** Basic Mesh type for usage in scene graph.
- * Basic usage: 
- * * initialize size once in constructor
- * * create/Delete feature arrays as required (color, texcoord etc.)
- * * shadow data by keeping a copy in CPU RAM, sending it as an update to the buffer if required
- * * for small amounts of data, send updates to buffers using bufferSubData
- * * for large amounts, use mapBufferData, but watch the performance, as bufferSubData might still be faster, even for large updates
- * 
+// Mesh base class, provides a render() method that applies the relevant minimal state 
+// and issues the gl calls for drawing
+struct Mesh
+{
+  virtual void render(gl::ContextPtr ctx) = 0;
+};
+
+typedef boost::shared_ptr<Mesh> MeshPtr;
+
+/** Mesh that stores it's data in GL buffer objects.
  */ 
 template<
   typename IT,  // indextype
@@ -26,7 +29,7 @@ template<
   typename NT,  // normaltype
   typename CT,  // colortype
   typename TCT> // texcoordtype
-struct Mesh : public Primitive
+struct BufferedMesh : public Mesh
 {
   boost::shared_ptr<gl::ElementArrayBuffer<IT> >  indices; 
   boost::shared_ptr<gl::ArrayBuffer<VT> >         vertices;
@@ -39,22 +42,24 @@ struct Mesh : public Primitive
   typedef NT NormalType;
   typedef CT ColorType;
   typedef TCT TexCoordType;
-  
-  MaterialPtr material; // texture, gl lighting material, shader with resources
-  
-  common::Color color; // this is the global color that will be set before drawing
-  
-  Mesh()
+      
+  BufferedMesh()
   {
   }
   
-  virtual ~Mesh()
+  virtual ~BufferedMesh()
   {
   }
+  
+  virtual void render(gl::ContextPtr ctx)
+  {
+    DOUT("render mesh");
+  }
+  
 };
 
-typedef Mesh<uint32_t, math::Vec3, math::Vec2, common::Color, math::Vec2> Mesh3D;
-typedef Mesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
+typedef BufferedMesh<uint32_t, math::Vec3, math::Vec2, common::Color, math::Vec2> Mesh3D;
+typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
 
 }
 }
