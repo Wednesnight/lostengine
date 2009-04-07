@@ -1,5 +1,5 @@
-#ifndef LOST_SG_MESH
-#define LOST_SG_MESH
+#ifndef LOST_MESH_MESH
+#define LOST_MESH_MESH
 
 #include <boost/shared_ptr.hpp>
 #include "lost/gl/ArrayBuffer.h"
@@ -9,7 +9,7 @@
 
 namespace lost
 {
-namespace sg
+namespace mesh
 {
 
 // Mesh base class, provides a render() method that applies the relevant minimal state 

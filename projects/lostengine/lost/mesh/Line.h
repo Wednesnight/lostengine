@@ -1,11 +1,11 @@
-#ifndef LOST_SG_LINE
-#define LOST_SG_LINE
+#ifndef LOST_MESH_LINE
+#define LOST_MESH_LINE
 
-#include "lost/sg/Mesh.h"
+#include "lost/mesh/Mesh.h"
 
 namespace lost
 {
-namespace sg
+namespace mesh
 {
 
 template<typename MESHTYPE>

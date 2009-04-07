@@ -4,7 +4,7 @@
 #include "lost/camera/Camera.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/sg/Material.h"
-#include "lost/sg/Mesh.h"
+#include "lost/mesh/Mesh.h"
 #include <list>
 #include <string>
 
@@ -43,7 +43,7 @@ struct Node
   sg::MaterialPtr         material;
 //  sg::TransformPtr        transform;  FIXME: probably only a matrix
 
-  std::list<MeshPtr>      meshes;
+  std::list<mesh::MeshPtr>      meshes;
 
 };
 

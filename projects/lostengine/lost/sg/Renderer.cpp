@@ -59,7 +59,7 @@ void Renderer::render(gl::ContextPtr ctx, NodePtr node)
   // meshes
   if(node->meshes.size() > 0)
   {
-    for(std::list<MeshPtr>::iterator i = node->meshes.begin();
+    for(std::list<mesh::MeshPtr>::iterator i = node->meshes.begin();
         i != node->meshes.end();
         ++i)
     {

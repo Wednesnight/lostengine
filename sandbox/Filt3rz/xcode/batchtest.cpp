@@ -7,13 +7,13 @@
  *
  */
 
-#include "lost/sg/Mesh.h"
-#include "lost/sg/Line.h"
+#include "lost/mesh/Mesh.h"
+#include "lost/mesh/Line.h"
 
 using namespace lost;
 using namespace lost::math;
-using namespace lost::sg;
 using namespace lost::common;
+using namespace lost::mesh;
 
 void batchtest()
 {
