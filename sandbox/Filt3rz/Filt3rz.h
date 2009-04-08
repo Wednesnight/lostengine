@@ -10,14 +10,11 @@
 #include "lost/gl/ShaderHelper.h"
 #include "lost/font/TrueTypeFont.h"
 
-struct Filt3rz
+struct Filt3rz : public lost::application::Tasklet
 {
 public:
   Filt3rz();
   ~Filt3rz();
-
-  void run();
-
 private:
   lost::application::ApplicationPtr                 app;
   lost::application::WindowPtr                      window;
@@ -41,7 +38,10 @@ private:
   lost::font::ModelPtr                              labelSharpen;
   
   void keyHandler(lost::application::KeyEventPtr event);
-  void update(lost::application::ApplicationPtr app);
+
+  virtual bool startup();
+  virtual bool main();
+  virtual bool shutdown();
 
   void setupFBOs();
   void setupBlurShader();
@@ -49,6 +49,8 @@ private:
   void setupEmbossShader();
   void setupSharpenShader();
   void setupLightShader();
+  void setupLabels();
+
   void renderFbo(double dt);
 
   void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex);
