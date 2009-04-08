@@ -513,19 +513,12 @@ namespace lost
                                     0,-1, 0,   0,-1, 0,   0,-1, 0,   0,-1, 0,         // v7 - v4 - v3 - v2
                                     0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1};        // v4 - v7 - v6 - v5
 
-      static GLubyte indices[] = { 0,   1,  2,  3,
-                                   4,   5,  6,  7,
-                                   8,   9, 10, 11,
-                                   12, 13, 14, 15,
-                                   16, 17, 18, 19,
-                                   20, 21, 22, 23 };
-
       static StatePtr state = State::create(VertexArray::create(true),
                                             NormalArray::create(true));
       context->pushState(state);
       glNormalPointer(GL_FLOAT, 0, normals); GLDEBUG;
       glVertexPointer(3, GL_FLOAT, 0, vertices); GLDEBUG;
-      glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, indices); GLDEBUG;
+      glDrawArrays(GL_QUADS, 0, 24); GLDEBUG;
       context->popState();
     }
 
