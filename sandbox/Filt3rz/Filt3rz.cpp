@@ -14,52 +14,88 @@ using namespace lost::font;
 using namespace lost::resource;
 
 Filt3rz::Filt3rz()
+: Tasklet::Tasklet()
 {
+  /**
+   * initialize instance based members
+   */
+
   fboSize.width = 256;
   fboSize.height = 256;
   numPanels = 5;
   gapWidth = 10;
   screenSize.width = fboSize.width*numPanels + (numPanels-1)*gapWidth;
   screenSize.height = fboSize.width;
-  app = Application::create(bind(&Filt3rz::update, this, _1));
-//  app->runLoopWaitsForEvents(true);
-  app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
-//  app->doResourceFile("initShaders.lua");
-  window = app->createWindow("window", WindowParams("Filt3rz", Rect(50,200,screenSize.width,screenSize.height)));
-  window->context->makeCurrent();
+
+  //  waitsForEvents = true;
+  eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
+
+  passedSec = lost::platform::currentTimeSeconds();
+  angle = 0;
+}
+
+Filt3rz::~Filt3rz()
+{
+}
+
+bool Filt3rz::startup()
+{
+  /**
+   * initialize thread based members
+   */
+
+  DOUT("startup");
+
+  window = Window::create(eventDispatcher, WindowParams("Filt3rz", Rect(50,200,screenSize.width,screenSize.height)));
+  renderState = State::create(ClearColor::create(Color(.3,.2,0,1)));
+  
   setupFBOs();  
   setupBlurShader();
   setupEdgeShader();
   setupEmbossShader();
   setupSharpenShader();
   setupLightShader();
-  renderState = State::create(ClearColor::create(Color(.3,.2,0,1)));
-  passedSec = lost::platform::currentTimeSeconds();
-  angle = 0;
-  
-  freetype::LibraryPtr ftlib(new freetype::Library);
-  FilePtr file = app->loader->load("miserable.ttf");
-  freetype::FacePtr fnt(new freetype::Face(ftlib, file));
-  ttf.reset(new TrueTypeFont(ftlib, file));  
-  ttf->atlasSize = Vec2(512,512);  
-  
-  uint32_t fontSize = 30;
-  yinset = fontSize+3;
-  labelOriginal = ttf->render("Original", fontSize);
-  labelBlur = ttf->render("Blur", fontSize);
-  labelEdge = ttf->render("Edge Detect", fontSize);
-  labelEmboss = ttf->render("Emboss", fontSize);
-  labelSharpen = ttf->render("Sharpen", fontSize);
+  setupLabels();
+
+  return true;
 }
 
-Filt3rz::~Filt3rz()
+bool Filt3rz::shutdown()
 {
-//  DOUT("shutting down, use_counts: app:"<<app.use_count()<<" rlt:"<<app->runLoopThread.use_count());
+  /**
+   * cleanup thread based members
+   */
+
+  DOUT("shutdown");
+
+  ttf.reset();
+  labelOriginal.reset();
+  labelBlur.reset();
+  labelEdge.reset();
+  labelEmboss.reset();
+  labelSharpen.reset();
+  
+  framebuffer.reset();
+  tex.reset();
+  renderState.reset();
+  fboRenderState.reset();
+  fboCanvas.reset();
+  lightShader.reset();
+  blurShader.reset();
+  edgeShader.reset();
+  embossShader.reset();
+  sharpenShader.reset();
+  cubeCam.reset();
+
+  renderState.reset();
+  window.reset();
+
+  return true;
 }
 
 void Filt3rz::setupBlurShader()
 {
-  blurShader = loadShader(app->loader, "blur");
+  blurShader = loadShader(loader, "blur");
   blurShader->enable();
   (*blurShader)["width"] = (float)fboSize.width;
   (*blurShader)["height"] = (float)fboSize.height;
@@ -69,7 +105,7 @@ void Filt3rz::setupBlurShader()
 
 void Filt3rz::setupEdgeShader()
 {
-  edgeShader = loadShader(app->loader, "edge");
+  edgeShader = loadShader(loader, "edge");
   edgeShader->enable();
   (*edgeShader)["width"] = (float)fboSize.width;
   (*edgeShader)["height"] = (float)fboSize.height;
@@ -79,7 +115,7 @@ void Filt3rz::setupEdgeShader()
 
 void Filt3rz::setupEmbossShader()
 {
-  embossShader = loadShader(app->loader, "emboss");
+  embossShader = loadShader(loader, "emboss");
   embossShader->enable();
   (*embossShader)["width"] = (float)fboSize.width;
   (*embossShader)["height"] = (float)fboSize.height;
@@ -89,7 +125,7 @@ void Filt3rz::setupEmbossShader()
 
 void Filt3rz::setupSharpenShader()
 {
-  sharpenShader = loadShader(app->loader, "sharpen");
+  sharpenShader = loadShader(loader, "sharpen");
   sharpenShader->enable();
   (*sharpenShader)["width"] = (float)fboSize.width;
   (*sharpenShader)["height"] = (float)fboSize.height;
@@ -99,7 +135,7 @@ void Filt3rz::setupSharpenShader()
 
 void Filt3rz::setupLightShader()
 {
-  lightShader = loadShader(app->loader, "light");
+  lightShader = loadShader(loader, "light");
   lightShader->enable();
   lightShader->validate();
   if(!lightShader->validated())
@@ -147,6 +183,23 @@ void Filt3rz::setupFBOs()
 
 }
 
+void Filt3rz::setupLabels()
+{
+  freetype::LibraryPtr ftlib(new freetype::Library);
+  FilePtr file = loader->load("miserable.ttf");
+  freetype::FacePtr fnt(new freetype::Face(ftlib, file));
+  ttf.reset(new TrueTypeFont(ftlib, file));  
+  ttf->atlasSize = Vec2(512,512);  
+  
+  uint32_t fontSize = 30;
+  yinset = fontSize+3;
+  labelOriginal = ttf->render("Original", fontSize);
+  labelBlur = ttf->render("Blur", fontSize);
+  labelEdge = ttf->render("Edge Detect", fontSize);
+  labelEmboss = ttf->render("Emboss", fontSize);
+  labelSharpen = ttf->render("Sharpen", fontSize);
+}
+
 void Filt3rz::renderFbo(double dt)
 {
   framebuffer->enable();
@@ -191,7 +244,7 @@ void Filt3rz::drawLabel(lost::font::ModelPtr label,
     label->render(window->canvas);
 }              
 
-void Filt3rz::update(lost::application::ApplicationPtr app)
+bool Filt3rz::main()
 {
   double currentSec = lost::platform::currentTimeSeconds();
   double delta = currentSec - passedSec;
@@ -224,14 +277,10 @@ void Filt3rz::update(lost::application::ApplicationPtr app)
   window->context->swapBuffers();
   
   passedSec = currentSec;
+  return true;
 }
 
 void Filt3rz::keyHandler(lost::application::KeyEventPtr event)
 {
-    if (event->key == K_ESCAPE) app->quit();
-}
-
-void Filt3rz::run()
-{
-  app->run();
+  if (event->key == K_ESCAPE) eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
 }

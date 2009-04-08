@@ -1,14 +1,13 @@
 #include "Filt3rz.h"
 
-void batchtest();
+using namespace lost::application;
 
 int main(int argn, char** args)
 {
   try
   {
-    static Filt3rz filt3rz;
-    batchtest();
-    filt3rz.run();
+    static ApplicationPtr app = Application::create(TaskletPtr(new Filt3rz));
+    app->run();
   }
   catch (std::exception& e)
   {
@@ -17,4 +16,3 @@ int main(int argn, char** args)
   
   return 0;
 }
-
