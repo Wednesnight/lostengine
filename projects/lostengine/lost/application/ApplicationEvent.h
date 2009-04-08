@@ -7,11 +7,13 @@ namespace lost
 {
   namespace application
   {
+    struct ApplicationEvent;
+    typedef boost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
+
     struct ApplicationEvent : public event::Event
     {
         static const event::Type& RUN()       { static event::Type d = "applicationRun";return d;}
         static const event::Type& QUIT()      { static event::Type d = "applicationQuit";return d;}
-        static const event::Type& TERMINATE() { static event::Type d = "applicationTerminate";return d;}
 
         ApplicationEvent(const event::Type& inType) : Event(inType) { }
         virtual ~ApplicationEvent() {}

@@ -8,6 +8,8 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeyCode.h"
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
 
 @interface ApplicationWindow : NSWindow
 {
@@ -293,6 +295,7 @@ namespace lost
         
     struct Window::WindowHiddenMembers
     {
+      NSAutoreleasePool* pool;
       ApplicationWindow* window;
       GLView*            view;
     };
@@ -304,6 +307,9 @@ namespace lost
       // initialize hiddenMembers
       hiddenMembers = new WindowHiddenMembers;
 
+      // init pool
+      hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
+      
       // create view
       hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(params.rect.x, params.rect.y, params.rect.width, params.rect.height)];
 
@@ -330,8 +336,9 @@ namespace lost
     {
       DOUT("Window::finalize()");
       // FIXME: cleanup!
-      [hiddenMembers->view release];
       [hiddenMembers->window release];
+      [hiddenMembers->view release];
+      [hiddenMembers->pool release];
       delete hiddenMembers;
     }
 

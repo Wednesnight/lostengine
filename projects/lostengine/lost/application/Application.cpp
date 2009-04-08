@@ -1,5 +1,6 @@
 #include "lost/application/Application.h"
 #include "lost/resource/DefaultLoader.h"
+#include "lost/event/Receive.h"
 
 #include <boost/program_options.hpp>
 
@@ -9,35 +10,21 @@ namespace lost
   {
     
     Application::Application()
-    : loader(new lost::resource::DefaultLoader),
-      runLoopThread(new RunLoopThread)
     {
-      initialize();
-    }
-
-    Application::Application(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
-    : loader(new lost::resource::DefaultLoader),
-      runLoopThread(new RunLoopThread(inRunLoop))
-    {
-      initialize();
-    }
-
-    Application::Application(const boost::filesystem::path& inScript)
-    : loader(new lost::resource::DefaultLoader),
-      runLoopThread(new RunLoopThreadLua(inScript))
-    {
+      initApplication();
       initialize();
     }
 
     Application::Application(int argn, char** args)
-    : loader(new lost::resource::DefaultLoader)
     {
-      using namespace boost::program_options;
+      initApplication();
 
+      using namespace boost::program_options;
+      
       // Declare the supported options.
       options_description desc;
       desc.add_options()
-        ("script", value<std::string>())
+      ("script", value<std::string>())
       ;
       positional_options_description p;
       p.add("script", -1);
@@ -48,9 +35,46 @@ namespace lost
       
       if (vm.count("script"))
       {
-        runLoopThread.reset(new RunLoopThreadLua(vm["script"].as<std::string>()));
+        TaskletPtr tasklet(new Tasklet(loader));
+        tasklet->script = vm["script"].as<std::string>();
+        tasklets.push_back(tasklet);
       }
+
       initialize();
+    }
+    
+    Application::Application(const TaskletPtr& tasklet)
+    {
+      initApplication();
+      tasklets.push_back(tasklet);
+      initialize();
+    }
+
+    Application::Application(const std::string& inScript)
+    {
+      initApplication();
+      TaskletPtr tasklet(new Tasklet(loader));
+      tasklet->script = inScript;
+      tasklets.push_back(tasklet);
+      initialize();
+    }
+
+    void Application::initApplication()
+    {
+      loader.reset(new lost::resource::DefaultLoader);
+
+      eventDispatcher.reset(new lost::event::EventDispatcher());
+      eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
+      eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
+    }
+
+    void Application::startup(ApplicationEventPtr& event)
+    {
+      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      {
+        (*tasklet)->eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
+        (*tasklet)->start();
+      }
     }
     
     boost::shared_ptr<Application> Application::create()
@@ -58,70 +82,60 @@ namespace lost
       return boost::shared_ptr<Application>(new Application);
     }
 
-    boost::shared_ptr<Application> Application::create(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
-    {
-      return boost::shared_ptr<Application>(new Application(inRunLoop));
-    }
-
-    boost::shared_ptr<Application> Application::create(const boost::filesystem::path& inScript)
-    {
-      return boost::shared_ptr<Application>(new Application(inScript));
-    }
-
     boost::shared_ptr<Application> Application::create(int argn, char** args)
     {
       return boost::shared_ptr<Application>(new Application(argn, args));
     }
     
-    void Application::runLoopWaitsForEvents(bool flag)
+    boost::shared_ptr<Application> Application::create(const TaskletPtr& tasklet)
     {
-      runLoopThread->waitForEvents = flag;
+      return boost::shared_ptr<Application>(new Application(tasklet));
     }
-    
+
+    boost::shared_ptr<Application> Application::create(const std::string& inScript)
+    {
+      return boost::shared_ptr<Application>(new Application(inScript));
+    }
+
     Application::~Application()
     {
       finalize();
     }
 
-    void Application::setRunLoop(const boost::function<void (const boost::shared_ptr<Application>& sender)>& inRunLoop)
+    void Application::addTasklet(const TaskletPtr& tasklet)
     {
-      runLoopThread->setRunLoop(inRunLoop);
-    }
-    
-    boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
-    {
-      boost::shared_ptr<Window> result = Window::create(shared_from_this(), params);
-      windows[uniqueId] = result;
-      return result;
-    }
-    
-    void Application::run()
-    {
-      if (!runLoopThread) throw std::runtime_error("you have to set a runloop");
-      runLoopThread->initialize(shared_from_this());
-      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::RUN()));
-      dispatchEvent(appEvent);
-      doRun();
-    }
-    
-    void Application::startRunLoop()
-    {
-      runLoopThread->run(shared_from_this());
-    }
-    
-    void Application::quit()
-    {
-      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::QUIT()));
-      queueEvent(appEvent);
-      doQuit();
-    }
-    
-    void Application::terminate()
-    {
-      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(ApplicationEvent::TERMINATE()));
-      queueEvent(appEvent);
-      runLoopThread->join();
+      tasklets.push_back(tasklet);
     }
 
+    void Application::dispatchApplicationEvent(const lost::event::Type& which)
+    {
+      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(which));
+      eventDispatcher->dispatchEvent(appEvent);
+      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      {
+        if ((*tasklet)->alive())
+        {
+          (*tasklet)->eventDispatcher->queueEvent(appEvent);
+        }
+      }
+    }
+
+    void Application::quit()
+    {
+      dispatchApplicationEvent(ApplicationEvent::QUIT());
+    }
+
+    void Application::terminate()
+    {
+      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      {
+        if ((*tasklet)->alive())
+        {
+          (*tasklet)->stop();
+          (*tasklet)->wait();
+        }
+      }
+    }
+    
   }
 }

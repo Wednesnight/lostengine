@@ -35,7 +35,10 @@
 - (void)applicationDidFinishLaunching: (NSNotification *)notification
 {
   DOUT("applicationDidFinishLaunching");
-  if (parent) parent->startRunLoop();
+  if (parent)
+  {
+    parent->dispatchApplicationEvent(lost::application::ApplicationEvent::RUN());
+  }
 }
 
 - (void)applicationWillTerminate: (NSNotification *)notification
@@ -145,28 +148,25 @@ namespace lost
     void Application::finalize()
     {
       DOUT("Application::finalize()");
-      [NSApp release];
       [hiddenMembers->delegate release];
       [hiddenMembers->pool release];
       delete hiddenMembers;
     }
 
-    void Application::doRun()
+    void Application::run()
     {
       [NSApp run];
     }
 
-    void Application::doQuit()
+    void Application::shutdown(ApplicationEventPtr& event)
     {
       [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
     }
     
     void Application::showMouse(bool visible)
     {
-      if(visible)
-        [NSCursor unhide];
-      else
-        [NSCursor hide];
+      if(visible) [NSCursor unhide];
+        else [NSCursor hide];
     }
   }
 }
