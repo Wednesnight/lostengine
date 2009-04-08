@@ -12,6 +12,8 @@ namespace lost
 {
   namespace resource
   {
+    struct Loader;
+    typedef boost::shared_ptr<Loader> LoaderPtr;
 
     struct Loader
     {
