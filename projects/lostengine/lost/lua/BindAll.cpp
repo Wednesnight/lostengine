@@ -45,6 +45,7 @@
 #include "lost/lua/bindings/LostApplicationWindow.h"
 #include "lost/lua/bindings/LostGLCanvas.h"
 #include "lost/lua/bindings/LostApplicationInputEvent.h"
+#include "lost/lua/bindings/LostApplicationTasklet.h"
 
 
 void openBaseLib(lua_State* state) { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
@@ -115,6 +116,7 @@ namespace lost
       LostGLFrameBuffer(state);
       LostApplicationWindow(state);
       LostGLCanvas(state);
+      LostApplicationTasklet(state);
       
       luabind::bind_class_info(state);
     }

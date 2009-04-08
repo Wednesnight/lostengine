@@ -83,6 +83,7 @@ namespace lost
             .def("addEventListener", (boost::signals::connection(*)(object, const std::string&, object))&addEventListener)
             .def("removeEventListener", &EventDispatcher::removeEventListener)
             .def("dispatchEvent", &EventDispatcher::dispatchEvent, &LuaEventDispatcher::dispatchEventBase)
+            .def("processEvents", &EventDispatcher::processEvents)
         ]
       ];
     }  
