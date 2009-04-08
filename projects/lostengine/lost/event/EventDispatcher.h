@@ -16,6 +16,9 @@ namespace lost
     typedef boost::shared_ptr<lost::event::Event> EventPtr;
     typedef boost::function<void (EventPtr)>      EventListenerFunc;
 
+    struct EventDispatcher;
+    typedef boost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+
     struct EventSignalPtrMap;
     struct EventDispatcher
     {
@@ -26,16 +29,26 @@ namespace lost
       
       boost::signals::connection addEventListener(const lost::event::Type& type, EventListenerFunc callback);
       void removeEventListener(const boost::signals::connection& connection);
+
       virtual void dispatchEvent(EventPtr event);
+
       void clear();
-      uint32_t numListeners(); // for debugging purposes
+
+      /**
+       * for debugging purposes
+       */
+      uint32_t numListeners();
       
       boost::mutex queueMutex;
       boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
 
       boost::mutex waitEventMutex;
       boost::condition waitEventCondition;
-      void waitForEvents(); // returns if at least one event was queued
+
+      /**
+       * returns if at least one event was queued
+       */
+      void waitForEvents();
 
       /**
        * call this to queue the given event. will be dispatched when processEvents() is called
