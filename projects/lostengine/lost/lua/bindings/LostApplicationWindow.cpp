@@ -22,7 +22,11 @@ namespace lost
             .def("close", &Window::close)
             .def_readonly("context", &Window::context)
             .def_readonly("canvas", &Window::canvas)
-            .def_readonly("params", &Window::params),
+            .def_readonly("params", &Window::params)
+            .scope
+            [
+              def("create", &Window::create)
+            ],
           class_<WindowParams, boost::shared_ptr<WindowParams> >("WindowParams")
             .def(constructor<const std::string&, const lost::math::Rect&>())
             .def_readwrite("caption", &WindowParams::caption)
