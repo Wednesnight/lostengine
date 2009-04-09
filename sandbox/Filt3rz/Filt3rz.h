@@ -28,6 +28,7 @@ private:
   lost::gl::ShaderProgramPtr                        edgeShader;
   lost::gl::ShaderProgramPtr                        embossShader;
   lost::gl::ShaderProgramPtr                        sharpenShader;
+  lost::gl::ShaderProgramPtr                        radialShader;
   lost::camera::Camera3DPtr                         cubeCam;  
 
   lost::font::TrueTypeFontPtr                       ttf;
@@ -36,6 +37,7 @@ private:
   lost::font::ModelPtr                              labelEdge;
   lost::font::ModelPtr                              labelEmboss;
   lost::font::ModelPtr                              labelSharpen;
+  lost::font::ModelPtr                              labelRadial;
   
   void keyHandler(lost::application::KeyEventPtr event);
 
@@ -48,20 +50,22 @@ private:
   void setupEdgeShader();
   void setupEmbossShader();
   void setupSharpenShader();
+  void setupRadialShader();
   void setupLightShader();
   void setupLabels();
 
   void renderFbo(double dt);
 
-  void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex);
+  void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex);
   void drawLabel(lost::font::ModelPtr label,
                  const lost::common::Color& col,
-                 uint32_t panelIndex);
+                 uint32_t panelIndex,
+                 uint32_t rowIndex);
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
   lost::math::Rect fboViewport;
-  uint16_t  gapWidth;
   uint16_t  numPanels;
+  uint16_t  numRows;
   lost::math::Vec2  screenSize;
   
   double passedSec;  
