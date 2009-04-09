@@ -63,7 +63,7 @@ void Renderer::render(gl::ContextPtr ctx, NodePtr node)
         i != node->meshes.end();
         ++i)
     {
-      (*i)->render(ctx);
+      (*i)->draw(ctx);
     }
   }
   

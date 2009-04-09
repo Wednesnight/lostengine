@@ -4,6 +4,8 @@
 #include "lost/application/Application.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/event/Receive.h"
+#include "lost/mesh/Line.h"
+#include <stdlib.h>
 
 using namespace std;
 using namespace lost;
@@ -16,6 +18,8 @@ using namespace lost::application;
 ApplicationPtr  app;
 WindowPtr       window;
 StatePtr        renderstate;
+StatePtr        linestate;
+mesh::Line2D*    line;
 
 void update(ApplicationPtr app)
 {
@@ -26,8 +30,22 @@ void update(ApplicationPtr app)
   window->canvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
+  
+  try
+  {
+    line->update(Vec2(0,0), Vec2(400,400));
+    line->draw(window->context);
+    
+  }
+  catch(std::exception& ex)
+  {
+    EOUT("caught error: "<<ex.what());
+  }
+  
   window->canvas->context->popState();
-  window->context->swapBuffers();    
+  window->context->swapBuffers();   
+  
+//  ::exit(EXIT_SUCCESS);
 }
 
 
@@ -45,7 +63,10 @@ int main(int argn, char** args)
     app->addEventListener(lost::application::KeyEvent::KEY_DOWN(), receive<KeyEvent>(keyHandler));
     window = app->createWindow("window", WindowParams("Filt3rz", Rect(50,200,640,480)));
     window->context->makeCurrent();
-    renderstate = State::create();
+    renderstate = State::create(ClearColor::create(blackColor), DepthTest::create(false));
+    linestate = State::create();
+    line = new mesh::Line2D;
+    
     app->run();      
   }
   catch (std::exception& e)

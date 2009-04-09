@@ -16,6 +16,7 @@ namespace lost
     typedef ServerStateParam<GL_POINT_SMOOTH> PointSmooth;
     typedef ServerStateParam<GL_LINE_SMOOTH>  LineSmooth;
 
+    typedef ClientStateParam<GL_COLOR_ARRAY>        ColorArray;
     typedef ClientStateParam<GL_NORMAL_ARRAY>        NormalArray;
     typedef ClientStateParam<GL_VERTEX_ARRAY>        VertexArray;
     typedef ClientStateParam<GL_TEXTURE_COORD_ARRAY> TextureArray;

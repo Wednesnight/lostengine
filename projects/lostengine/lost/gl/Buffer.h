@@ -35,10 +35,11 @@ struct Buffer
   virtual void bindBufferSubData(GLintptr offset,GLsizeiptr size,	const GLvoid* data) {bind(); Buffer::bufferSubData(target, offset, size, data);};
 
 
-  virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();vertexPointer(size, type, stride, pointer);}
-  virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();texCoordPointer(size, type, stride, pointer);}
-  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();normalPointer(type, stride, pointer);}
-  virtual void bindColorPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();colorPointer(size, type, stride, pointer);}
+//  virtual void bindIndexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();indexPointer(stride, pointer);}
+  virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();vertexPointer(stride, pointer);}
+  virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();texCoordPointer(stride, pointer);}
+  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();normalPointer(stride, pointer);}
+  virtual void bindColorPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();colorPointer(stride, pointer);}
 
   virtual void drawArrays(GLenum mode, GLint first=0, GLsizei count=-1)
   {
@@ -137,32 +138,39 @@ struct Buffer
     glBufferSubData(target, offset, size, data);GLDEBUG_THROW;
   }
 
+
+/*  void indexPointer(GLsizei  	stride=0,
+                    const GLvoid *  	pointer=0)
+  {
+    glIndexPointer(type, stride, pointer);GLDEBUG_THROW;
+  }*/
+
   /**
    * size: number of coords per vertex, must be 2, 3 or 4
    * type: data type of each coord in array: GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE
    * stride: byte offset between consecutive vertices, default 0
    * pointer to first coord in array, default 0
    */
-  virtual void vertexPointer(GLint size, GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
+  virtual void vertexPointer(GLsizei stride=0, const GLvoid* pointer=0)
   {
     glVertexPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
 
   // size: 1,2,3 or 4
-  virtual void texCoordPointer(GLint size, GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
+  virtual void texCoordPointer(GLsizei stride=0, const GLvoid* pointer=0)
   {
     glTexCoordPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }
 
   // always 3 coords?
-  virtual void normalPointer(GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
+  virtual void normalPointer(GLsizei stride=0, const GLvoid* pointer=0)
   {
     glNormalPointer(type, stride, pointer);GLDEBUG_THROW;
   }
 
   // size: 3 or 4
   // type: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE
-  virtual void colorPointer(GLint size, GLenum type, GLsizei stride=0, const GLvoid* pointer=0)
+  virtual void colorPointer(GLsizei stride=0, const GLvoid* pointer=0)
   {
     glColorPointer(size, type, stride, pointer);GLDEBUG_THROW;
   }

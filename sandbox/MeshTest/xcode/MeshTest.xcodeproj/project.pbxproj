@@ -285,6 +285,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"FT_CONFIG_H=\"<freetype/config/ftconfig.h>\"",
+					FT2_BUILD_LIBRARY,
+					__STDC_CONSTANT_MACROS,
+				);
 			};
 			name = Debug;
 		};

@@ -51,21 +51,16 @@ struct BufferedMesh : public Mesh
   typedef gl::ArrayBuffer<CT>         ColorBufferType;
   typedef gl::ArrayBuffer<TCT>        TexCoordBufferType;
 
-  gl::StateParamPtr  vertexParam;
-  gl::StateParamPtr  normalParam;
-  gl::StateParamPtr  colorParam;
-  gl::StateParamPtr  texCoordParam;
+  gl::ParamPtr  vertexParam;
+  gl::ParamPtr  normalParam;
+  gl::ParamPtr  colorParam;
+  gl::ParamPtr  texCoordParam;
   gl::StatePtr  meshState;
 
   GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
       
   BufferedMesh()
   {
-    vertexParam = gl::VertexArray::create(false);
-    normalParam = gl::NormalArray::create(false);
-    colorParam = gl::ColorArray::create(false);
-    texCoordParam = gl::TextureArray::create(false);
-    meshState = gl::State::create(vertexParam, normalParam, colorParam, texCoordParam);
   }
   
   virtual ~BufferedMesh()
@@ -73,10 +68,19 @@ struct BufferedMesh : public Mesh
   }
   
   void indices(bool v) { if(v) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
-  void vertices(bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); vertexParam->enable=v; }
-  void normals(bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); normalParam->enable=v;}
-  void colors(bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset(); colorParam->enable=v; }
-  void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); texCoordParam->enable=v;}
+  void vertices(bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); updateRenderState(); }
+  void normals(bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); updateRenderState();}
+  void colors(bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset(); updateRenderState(); }
+  void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); updateRenderState();}
+
+  void updateRenderState()
+  {
+    vertexParam = gl::VertexArray::create(vertexBuffer ? true : false);
+    normalParam = gl::NormalArray::create(normalBuffer ? true : false);
+    colorParam = gl::ColorArray::create(colorBuffer ? true : false);
+    texCoordParam = gl::TextureArray::create(texCoordBuffer ? true : false);
+    meshState = gl::State::create(vertexParam, normalParam, colorParam, texCoordParam);
+  }
   
   virtual void draw(gl::ContextPtr ctx)
   {
