@@ -79,7 +79,7 @@ namespace lost
       TraitsSelector() : size(2), type(GL_UNSIGNED_SHORT) {}
     };
 
-#if !defined(TARGET_IPHONE_SIMULATOR) && !defined(TARGET_IPHONE)
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_IPHONE
     template<>
     struct TraitsSelector<boost::uint32_t>
     {
