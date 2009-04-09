@@ -23,9 +23,9 @@ Filt3rz::Filt3rz()
   fboSize.width = 256;
   fboSize.height = 256;
   numPanels = 5;
-  gapWidth = 10;
-  screenSize.width = fboSize.width*numPanels + (numPanels-1)*gapWidth;
-  screenSize.height = fboSize.width;
+  numRows = 2;
+  screenSize.width = fboSize.width * numPanels;
+  screenSize.height = fboSize.height * numRows;
 
   //  waitsForEvents = true;
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
@@ -46,14 +46,15 @@ bool Filt3rz::startup()
 
   DOUT("startup");
 
-  window = Window::create(eventDispatcher, WindowParams("Filt3rz", Rect(50,200,screenSize.width,screenSize.height)));
-  renderState = State::create(ClearColor::create(Color(.3,.2,0,1)));
+  window = Window::create(eventDispatcher, WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height)));
+  renderState = State::create(ClearColor::create(grayColor));
   
   setupFBOs();  
   setupBlurShader();
   setupEdgeShader();
   setupEmbossShader();
   setupSharpenShader();
+  setupRadialShader();
   setupLightShader();
   setupLabels();
 
@@ -74,6 +75,7 @@ bool Filt3rz::shutdown()
   labelEdge.reset();
   labelEmboss.reset();
   labelSharpen.reset();
+  labelRadial.reset();
   
   framebuffer.reset();
   tex.reset();
@@ -85,6 +87,7 @@ bool Filt3rz::shutdown()
   edgeShader.reset();
   embossShader.reset();
   sharpenShader.reset();
+  radialShader.reset();
   cubeCam.reset();
 
   renderState.reset();
@@ -131,6 +134,14 @@ void Filt3rz::setupSharpenShader()
   (*sharpenShader)["height"] = (float)fboSize.height;
   (*sharpenShader)["colorMap"] = (GLuint)0;
   sharpenShader->disable();
+}
+
+void Filt3rz::setupRadialShader()
+{
+  radialShader = loadShader(loader, "radial");
+  radialShader->enable();
+  (*radialShader)["colorMap"] = (GLuint)0;
+  radialShader->disable();
 }
 
 void Filt3rz::setupLightShader()
@@ -194,10 +205,11 @@ void Filt3rz::setupLabels()
   uint32_t fontSize = 30;
   yinset = fontSize+3;
   labelOriginal = ttf->render("Original", fontSize);
-  labelBlur = ttf->render("Blur", fontSize);
+  labelBlur = ttf->render("Gaussian Blur", fontSize);
   labelEdge = ttf->render("Edge Detect", fontSize);
   labelEmboss = ttf->render("Emboss", fontSize);
   labelSharpen = ttf->render("Sharpen", fontSize);
+  labelRadial = ttf->render("Radial Blur", fontSize);
 }
 
 void Filt3rz::renderFbo(double dt)
@@ -210,10 +222,9 @@ void Filt3rz::renderFbo(double dt)
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
   float cubeSize = 1;
-  glTranslatef(0, .2,0);
   angle = fmod(dt*50+angle, 360);  
-  glRotatef(angle, 0,1, 0);
-  glRotatef(angle*.3, 1,0, 0);
+  glRotatef(angle, 0, 1, 0);
+  glRotatef(angle, 1, 0, 0);
   lightShader->enable();
   fboCanvas->drawSolidCube(cubeSize);
   lightShader->disable();
@@ -221,21 +232,22 @@ void Filt3rz::renderFbo(double dt)
   framebuffer->disable();
 }
 
-void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex)
+void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex)
 {
   shader->enable();
   glActiveTexture(GL_TEXTURE0);
   tex->bind();
-  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width+panelIndex*10,0,fboSize.width, fboSize.height), tex, false);  
+  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width, rowIndex*fboSize.height, fboSize.width, fboSize.height), tex, false);
   shader->disable();
 }
 
 void Filt3rz::drawLabel(lost::font::ModelPtr label,
                        const lost::common::Color& col,
-                       uint32_t panelIndex)
+                       uint32_t panelIndex,
+                       uint32_t rowIndex)
 {
-    float xOffset = panelIndex*fboSize.width + panelIndex*gapWidth + (fboSize.width - label->size.width)/2.0f;
-    float yOffset = fboSize.height - yinset;
+    float xOffset = panelIndex * fboSize.width + (fboSize.width - label->size.width) / 2.0f;
+    float yOffset = (rowIndex+1) * fboSize.height - yinset;
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -256,22 +268,34 @@ bool Filt3rz::main()
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderState);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  window->canvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
 
   // draw original buffer texture
-  window->canvas->drawRectTextured(Rect(0,0,fboSize.width, fboSize.height), tex, false);
-  drawPanel(blurShader, 1);
-  drawPanel(edgeShader, 2);
-  drawPanel(embossShader, 3);
-  drawPanel(sharpenShader, 4);
+  window->canvas->setColor(whiteColor);
+  window->canvas->drawRectTextured(Rect(0, fboSize.height, fboSize.width, fboSize.height), tex, false);
+  drawPanel(blurShader, 1, 1);
+  drawPanel(edgeShader, 2, 1);
+  drawPanel(embossShader, 3, 1);
+  drawPanel(sharpenShader, 4, 1);
+  drawPanel(radialShader, 0, 0);
 
-  drawLabel(labelOriginal, blackColor, 0);
-  drawLabel(labelBlur, blackColor, 1);
-  drawLabel(labelEdge, whiteColor, 2);
-  drawLabel(labelEmboss, whiteColor, 3);
-  drawLabel(labelSharpen, blackColor, 4);
+  // draw outlines
+  window->canvas->setColor(grayColor);
+  for (unsigned int row = 0; row < numRows; row++)
+  {
+    for (unsigned int idx = 0; idx < numPanels; idx++)
+    {
+      window->canvas->drawRectOutline(Rect(idx*fboSize.width, row*fboSize.height, fboSize.width, fboSize.height));
+    }
+  }
+
+  drawLabel(labelOriginal, blackColor, 0, 1);
+  drawLabel(labelBlur, blackColor, 1, 1);
+  drawLabel(labelEdge, whiteColor, 2, 1);
+  drawLabel(labelEmboss, whiteColor, 3, 1);
+  drawLabel(labelSharpen, blackColor, 4, 1);
+  drawLabel(labelRadial, blackColor, 0, 0);
 
   window->canvas->context->popState();
   window->context->swapBuffers();

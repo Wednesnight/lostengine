@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8DF4820B0F8DD8D900DBFB9E /* radial.vs in Resources */ = {isa = PBXBuildFile; fileRef = 8DF482090F8DD8D900DBFB9E /* radial.vs */; };
+		8DF4820C0F8DD8D900DBFB9E /* radial.fs in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4820A0F8DD8D900DBFB9E /* radial.fs */; };
 		EA26A8450F77B1B800490D18 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8420F77B1B800490D18 /* global-debug.xcconfig */; };
 		EA26A8460F77B1B800490D18 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8430F77B1B800490D18 /* global-release.xcconfig */; };
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
 		EA3309A30F852B710022412D /* initShaders.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA3309A20F852B710022412D /* initShaders.lua */; };
-		EA8A22C30F87D5EB00A6EB8B /* batchtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A22C20F87D5EB00A6EB8B /* batchtest.cpp */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 		EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10520F7DAFEB00CEAF99 /* light.vs */; };
@@ -72,6 +73,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Filt3rz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filt3rz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DF482090F8DD8D900DBFB9E /* radial.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = radial.vs; path = ../radial.vs; sourceTree = SOURCE_ROOT; };
+		8DF4820A0F8DD8D900DBFB9E /* radial.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = radial.fs; path = ../radial.fs; sourceTree = SOURCE_ROOT; };
 		EA26A6A70F77B1A500490D18 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA26A8420F77B1B800490D18 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -143,11 +146,13 @@
 				EAFA10520F7DAFEB00CEAF99 /* light.vs */,
 				EAFA10530F7DAFEB00CEAF99 /* light.fs */,
 				EAFA106A0F7DB1F300CEAF99 /* edge.vs */,
+				EAFA106D0F7DB1F300CEAF99 /* edge.fs */,
 				EAFA106B0F7DB1F300CEAF99 /* emboss.fs */,
 				EAFA106C0F7DB1F300CEAF99 /* emboss.vs */,
-				EAFA106D0F7DB1F300CEAF99 /* edge.fs */,
 				EAFA10720F7DB1F800CEAF99 /* sharpen.vs */,
 				EAFA10730F7DB1F800CEAF99 /* sharpen.fs */,
+				8DF482090F8DD8D900DBFB9E /* radial.vs */,
+				8DF4820A0F8DD8D900DBFB9E /* radial.fs */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -279,6 +284,8 @@
 				EAFA10750F7DB1F800CEAF99 /* sharpen.fs in Resources */,
 				EAFA11610F7DC65800CEAF99 /* miserable.ttf in Resources */,
 				EA3309A30F852B710022412D /* initShaders.lua in Resources */,
+				8DF4820B0F8DD8D900DBFB9E /* radial.vs in Resources */,
+				8DF4820C0F8DD8D900DBFB9E /* radial.fs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +298,6 @@
 			files = (
 				EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */,
 				EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */,
-				EA8A22C30F87D5EB00A6EB8B /* batchtest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
