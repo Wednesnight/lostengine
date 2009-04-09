@@ -15,6 +15,7 @@
 		EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */; };
 		EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */; };
 		EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F9C840F8B6E1D00967F8D /* main.cpp */; };
+		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C840F8B6E1D00967F8D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				EA4F9C840F8B6E1D00967F8D /* main.cpp */,
+				EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */,
 				EA4F9C760F8B6D6E00967F8D /* Configurations */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */,
+				EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
