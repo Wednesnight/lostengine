@@ -43,6 +43,9 @@ namespace lost
       virtual bool startup();
       virtual bool main();
       virtual bool shutdown();
+
+      virtual bool start();
+      virtual bool stop();
     };
 
   }

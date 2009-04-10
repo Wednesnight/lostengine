@@ -16,7 +16,7 @@ struct UiTasklet : public Tasklet
             lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
   virtual ~UiTasklet();
   
-  bool start();
+  virtual bool start();
   
   WindowParams windowParams;
   WindowPtr window;
