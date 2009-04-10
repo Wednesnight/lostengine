@@ -9,15 +9,13 @@
 #include "lost/camera/Camera3D.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/font/TrueTypeFont.h"
+#include "lost/application/UiTasklet.h"
 
-struct Filt3rz : public lost::application::Tasklet
+struct Filt3rz : public lost::application::UiTasklet
 {
 public:
   Filt3rz();
-  ~Filt3rz();
 private:
-  lost::application::ApplicationPtr                 app;
-  lost::application::WindowPtr                      window;
   lost::gl::FrameBufferPtr                          framebuffer;
   lost::gl::TexturePtr                              tex;
   lost::gl::StatePtr                                renderState;

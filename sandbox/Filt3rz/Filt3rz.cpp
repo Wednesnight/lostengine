@@ -1,6 +1,7 @@
 #include "Filt3rz.h"
 #include "lost/event/Receive.h"
 #include "lost/gl/StateParam.h"
+#include "lost/application/Window.h"
 
 using namespace std;
 using namespace boost;
@@ -14,18 +15,17 @@ using namespace lost::font;
 using namespace lost::resource;
 
 Filt3rz::Filt3rz()
-: Tasklet::Tasklet()
 {
   /**
    * initialize instance based members
    */
-
   fboSize.width = 256;
   fboSize.height = 256;
   numPanels = 5;
   numRows = 2;
   screenSize.width = fboSize.width * numPanels;
   screenSize.height = fboSize.height * numRows;
+  windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height));
 
   //  waitsForEvents = true;
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
@@ -34,19 +34,14 @@ Filt3rz::Filt3rz()
   angle = 0;
 }
 
-Filt3rz::~Filt3rz()
-{
-}
-
 bool Filt3rz::startup()
 {
   /**
    * initialize thread based members
    */
-
+  window->context->makeCurrent();
   DOUT("startup");
 
-  window = Window::create(eventDispatcher, WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height)));
   renderState = State::create(ClearColor::create(grayColor));
   
   setupFBOs();  
