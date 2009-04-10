@@ -17,6 +17,7 @@ struct MeshTest : public lost::application::Tasklet
   lost::gl::StatePtr            renderstate;
   lost::gl::StatePtr            linestate;
   lost::mesh::Line2D*           line;
+  lost::mesh::MeshPtr           cube;
 
 };
 

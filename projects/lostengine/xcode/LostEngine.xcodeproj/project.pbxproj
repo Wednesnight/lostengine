@@ -507,6 +507,16 @@
 		8DE574620F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574630F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
 		8DE574640F314FA00072FB28 /* LostApplicationWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */; };
+		8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
+		8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
+		8DF927E10F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
+		8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
+		8DF927E30F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
+		8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
+		8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
+		8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
+		8DF928260F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
+		8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
 		8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
 		8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
 		8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
@@ -947,6 +957,7 @@
 		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
 		8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationWindow.cpp; path = bindings/LostApplicationWindow.cpp; sourceTree = "<group>"; };
+		8DF928230F8EA7BD007A771A /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = model/Loader.cpp; sourceTree = "<group>"; };
 		8DFDE5980F56D43C005D3927 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
 		8DFDE5A90F56D45E005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = iphone/Context.mm; sourceTree = "<group>"; };
 		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
@@ -1376,6 +1387,7 @@
 		B47550660F690E0900B04249 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				8DF928230F8EA7BD007A771A /* Loader.cpp */,
 				B47550670F690E2700B04249 /* Parser.cpp */,
 			);
 			name = model;
@@ -1580,7 +1592,6 @@
 		EA3B94630E04639D00B6423B /* lost */ = {
 			isa = PBXGroup;
 			children = (
-				B47550660F690E0900B04249 /* model */,
 				EA70F8F20ED08707000AA8CB /* al */,
 				EA3B94640E04639D00B6423B /* application */,
 				EA15B48A0EE31E9F00672EF4 /* audio */,
@@ -1593,6 +1604,7 @@
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
 				EA4F9C110F8B6A5C00967F8D /* mesh */,
+				B47550660F690E0900B04249 /* model */,
 				8D0CC5E10F44C37200ADE728 /* obj */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 				EA8A228B0F87B15400A6EB8B /* sg */,
@@ -2188,6 +2200,9 @@
 				8DA5853A0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA5853C0F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA5853D0F8A4F7000A568E1 /* path.cpp in Sources */,
+				8DF927E30F8EA560007A771A /* Node.cpp in Sources */,
+				8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */,
+				8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2430,6 +2445,9 @@
 				8DA5853E0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585400F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585410F8A4F7000A568E1 /* path.cpp in Sources */,
+				8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */,
+				8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */,
+				8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2477,6 +2495,7 @@
 				8DA585460F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585480F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585490F8A4F7000A568E1 /* path.cpp in Sources */,
+				8DF928260F8EA7BD007A771A /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2719,6 +2738,9 @@
 				8DA585420F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585440F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585450F8A4F7000A568E1 /* path.cpp in Sources */,
+				8DF927E10F8EA560007A771A /* Node.cpp in Sources */,
+				8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */,
+				8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

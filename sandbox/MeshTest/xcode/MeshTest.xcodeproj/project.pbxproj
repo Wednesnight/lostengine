@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8DF928EA0F8EC1B4007A771A /* cube_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8DF928E90F8EC1B4007A771A /* cube_tri.obj */; };
 		EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */; };
 		EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */; };
 		EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */; };
@@ -60,6 +61,8 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MeshTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeshTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DF928E90F8EC1B4007A771A /* cube_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_tri.obj; path = ../../../data/obj/cube_tri.obj; sourceTree = SOURCE_ROOT; };
+		8DF928EC0F8EC1D0007A771A /* MeshTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshTest.h; path = ../MeshTest.h; sourceTree = SOURCE_ROOT; };
 		EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -96,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				EA4F9C840F8B6E1D00967F8D /* main.cpp */,
+				8DF928EC0F8EC1D0007A771A /* MeshTest.h */,
 				EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */,
 				EA4F9C760F8B6D6E00967F8D /* Configurations */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -108,6 +112,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8DF928E90F8EC1B4007A771A /* cube_tri.obj */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
@@ -230,6 +235,7 @@
 				EA4F9C7F0F8B6D8900967F8D /* global.xcconfig in Resources */,
 				EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */,
 				EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */,
+				8DF928EA0F8EC1B4007A771A /* cube_tri.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
