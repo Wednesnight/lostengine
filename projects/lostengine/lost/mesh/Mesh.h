@@ -96,8 +96,10 @@ struct BufferedMesh : public Mesh
   
 };
 
-typedef BufferedMesh<uint32_t, math::Vec3, math::Vec2, common::Color, math::Vec2> Mesh3D;
+typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2> Mesh3D;
+typedef boost::shared_ptr<Mesh3D> Mesh3DPtr;
 typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
+typedef boost::shared_ptr<Mesh2D> Mesh2DPtr;
 
 }
 }

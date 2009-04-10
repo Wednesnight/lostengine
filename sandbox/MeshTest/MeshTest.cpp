@@ -2,6 +2,7 @@
 #include "lost/event/Receive.h"
 #include "lost/common/Logger.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/model/Loader.h"
 
 using namespace std;
 using namespace lost;
@@ -21,6 +22,8 @@ bool MeshTest::startup()
   renderstate = State::create(ClearColor::create(blackColor), DepthTest::create(false));
   linestate = State::create();
   line = new mesh::Line2D;
+  cube = lost::model::Loader::obj(loader, "cube_tri.obj");
+  
   return true;
 }
 
@@ -39,7 +42,8 @@ bool MeshTest::main()
   {
     line->update(Vec2(0,0), Vec2(400,400));
     line->draw(window->context);
-    
+
+    cube->draw(window->context);
   }
   catch(std::exception& ex)
   {

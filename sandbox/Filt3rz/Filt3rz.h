@@ -38,7 +38,7 @@ private:
   lost::font::ModelPtr                              labelEmboss;
   lost::font::ModelPtr                              labelSharpen;
   lost::font::ModelPtr                              labelRadial;
-  
+
   void keyHandler(lost::application::KeyEventPtr event);
 
   virtual bool startup();
