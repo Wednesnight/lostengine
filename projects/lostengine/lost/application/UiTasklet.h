@@ -10,6 +10,8 @@ namespace application
 {
 struct UiTasklet : public Tasklet
 {
+  // if you call this constructor, you have to set the WindowParams sometime before calling start() on the tasklet
+  UiTasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
   UiTasklet(const WindowParams& params,
             lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
   virtual ~UiTasklet();

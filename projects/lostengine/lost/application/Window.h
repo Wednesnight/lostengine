@@ -23,6 +23,10 @@ namespace lost
       std::string      caption;
       lost::math::Rect rect;
 
+      WindowParams()
+      {
+      }
+
       WindowParams(const std::string& inCaption,
                    const lost::math::Rect& inRect)
       : caption(inCaption),

@@ -5,6 +5,10 @@ namespace lost
 namespace application
 {
 
+UiTasklet::UiTasklet(lost::resource::LoaderPtr inLoader)
+{
+}
+
 UiTasklet::UiTasklet(const WindowParams& params,
             lost::resource::LoaderPtr inLoader)
 : windowParams(params)
