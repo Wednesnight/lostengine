@@ -590,6 +590,9 @@
 		EA1BF6E40F67445D00862B2F /* TimeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */; };
 		EA1BF6E50F67445D00862B2F /* SignalTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */; };
 		EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
+		EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
+		EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
+		EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
 		EA3B94500E0462E200B6423B /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA3B95380E04639D00B6423B /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
@@ -1005,6 +1008,7 @@
 		EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeHelpers.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SignalTranslator.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1D54EB0EB34E0400591811 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		EA296C430F8F91B800213B73 /* UiTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiTasklet.cpp; sourceTree = "<group>"; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
 		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EA3B94720E04639D00B6423B /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
@@ -1621,6 +1625,7 @@
 				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
 				8D40911A0F89322D00163B63 /* Tasklet.cpp */,
+				EA296C430F8F91B800213B73 /* UiTasklet.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 				8DA57FC30F89EAEC00A568E1 /* Config.cpp */,
 			);
@@ -2203,6 +2208,7 @@
 				8DF927E30F8EA560007A771A /* Node.cpp in Sources */,
 				8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */,
 				8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */,
+				EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2448,6 +2454,7 @@
 				8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */,
 				8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */,
 				8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */,
+				EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2741,6 +2748,7 @@
 				8DF927E10F8EA560007A771A /* Node.cpp in Sources */,
 				8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */,
 				8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */,
+				EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

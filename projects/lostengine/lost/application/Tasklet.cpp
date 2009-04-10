@@ -19,7 +19,7 @@ namespace lost
   namespace application
   {
     
-    Tasklet::Tasklet(const LoaderPtr& inLoader)
+    Tasklet::Tasklet(LoaderPtr inLoader)
     : tasklet::tasklet(bind(&Tasklet::run, this, _1)),
       executeScript(true),
       loader(inLoader),
