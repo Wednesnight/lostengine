@@ -106,5 +106,15 @@ namespace lost
       return runScript("shutdown");
     }
 
+    bool Tasklet::start()
+    {
+      return ::fhtagn::threads::tasklet::start();
+    }
+
+    bool Tasklet::stop()
+    {
+      return ::fhtagn::threads::tasklet::stop();
+    }
+
   }
 }
