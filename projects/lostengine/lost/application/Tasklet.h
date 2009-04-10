@@ -37,7 +37,7 @@ namespace lost
       // script filename
       std::string script;
 
-      Tasklet(const lost::resource::LoaderPtr& inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
+      Tasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
       virtual ~Tasklet();
 
       virtual bool startup();

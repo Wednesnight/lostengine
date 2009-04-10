@@ -139,7 +139,7 @@ public:
      *
      * @return see above.
      **/
-    bool start();
+    virtual bool start();
 
     /**
      * If started(), will set a stopped flag on the tasklet, which the bound
