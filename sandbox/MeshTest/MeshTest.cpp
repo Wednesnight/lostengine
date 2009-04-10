@@ -13,11 +13,17 @@ using namespace lost::math;
 using namespace lost::event;
 using namespace lost::application;
 
+MeshTest::MeshTest()
+: UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
+{
+  
+}
+
+
 bool MeshTest::startup()
 {
   DOUT("");
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
-  window = Window::create(eventDispatcher, WindowParams("MeshTest", Rect(50,200,640,480)));
   window->context->makeCurrent();
   renderstate = State::create(ClearColor::create(blackColor), DepthTest::create(false));
   linestate = State::create();
@@ -29,7 +35,6 @@ bool MeshTest::startup()
 
 bool MeshTest::main()
 {
-  DOUT("");
   window->context->makeCurrent();
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderstate);
@@ -43,7 +48,7 @@ bool MeshTest::main()
     line->update(Vec2(0,0), Vec2(400,400));
     line->draw(window->context);
 
-    cube->draw(window->context);
+//    cube->draw(window->context);
   }
   catch(std::exception& ex)
   {
@@ -63,6 +68,7 @@ bool MeshTest::shutdown()
 
 void MeshTest::keyHandler(KeyEventPtr event)
 {
+  DOUT("");
   if (event->key == K_ESCAPE) 
     eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
 }
