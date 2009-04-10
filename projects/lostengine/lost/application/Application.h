@@ -50,15 +50,15 @@ namespace lost
        * don't use ctors directly! leave them private since we need to be held by a boost::shared_ptr,
        * otherwise shared_from_this() will fail!
        */
-      Application();
-      Application(int argn, char** args);
-      Application(const TaskletPtr& tasklet);
-      Application(const std::string& inScript);
+      Application(resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
+      Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
+      Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
+      Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
 
       /**
        * ctor helper
        */
-      void initApplication();
+      void initApplication(resource::LoaderPtr inLoader);
 
       /**
        * listener for ApplicationEvent.RUN()

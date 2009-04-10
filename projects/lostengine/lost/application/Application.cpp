@@ -9,15 +9,15 @@ namespace lost
   namespace application
   {
     
-    Application::Application()
+    Application::Application(resource::LoaderPtr inLoader)
     {
-      initApplication();
+      initApplication(inLoader);
       initialize();
     }
 
-    Application::Application(int argn, char** args)
+    Application::Application(int argn, char** args, resource::LoaderPtr inLoader)
     {
-      initApplication();
+      initApplication(inLoader);
 
       using namespace boost::program_options;
       
@@ -43,25 +43,25 @@ namespace lost
       initialize();
     }
     
-    Application::Application(const TaskletPtr& tasklet)
+    Application::Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader)
     {
-      initApplication();
+      initApplication(inLoader);
       tasklets.push_back(tasklet);
       initialize();
     }
 
-    Application::Application(const std::string& inScript)
+    Application::Application(const std::string& inScript, resource::LoaderPtr inLoader)
     {
-      initApplication();
+      initApplication(inLoader);
       TaskletPtr tasklet(new Tasklet(loader));
       tasklet->script = inScript;
       tasklets.push_back(tasklet);
       initialize();
     }
 
-    void Application::initApplication()
+    void Application::initApplication(resource::LoaderPtr inLoader)
     {
-      loader.reset(new lost::resource::DefaultLoader);
+      loader = inLoader;
 
       eventDispatcher.reset(new lost::event::EventDispatcher());
       eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
