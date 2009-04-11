@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/camera/Camera2D.h"
 #include "lost/lgl/lglu.h"
 

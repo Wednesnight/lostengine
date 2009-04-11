@@ -6,7 +6,6 @@
 #include "lost/gl/VertexShader.h"
 #include <stdexcept>
 #include <string>
-#include <boost/shared_ptr.hpp>
 #include "lost/resource/Loader.h"
 
 namespace lost

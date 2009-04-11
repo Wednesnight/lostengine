@@ -1,14 +1,15 @@
 #ifndef LOST_AL_SOURCE_H
 #define LOST_AL_SOURCE_H
 
+#include "lost/al/al.h"
 #include "lost/math/Vec3.h"
-#include <boost/shared_ptr.hpp>
-#include "lost/al/Buffer.h"
 
 namespace lost
 {
 namespace al
 {
+
+struct Buffer;
 
 // since there's only one listener, all the functions are static
 struct Source

@@ -6,8 +6,6 @@
 #include <list>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include "lost/math/Matrix.h"
 #include "lost/math/Vec3.h"
 

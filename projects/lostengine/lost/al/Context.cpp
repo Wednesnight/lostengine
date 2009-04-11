@@ -1,6 +1,8 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/al/Context.h"
 #include <stdexcept>
 #include "lost/common/Logger.h"
+#include "lost/al/Device.h"
 
 using namespace std;
 

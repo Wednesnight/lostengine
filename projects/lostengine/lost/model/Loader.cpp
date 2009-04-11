@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "Loader.h"
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"

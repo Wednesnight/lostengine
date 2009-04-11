@@ -3,7 +3,6 @@
 
 #include "ft2build.h"
 #include FT_FREETYPE_H
-#include <boost/shared_ptr.hpp>
 
 namespace lost
 {

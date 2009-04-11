@@ -2,18 +2,18 @@
 #define LOST_APPLICATION_TASKLET_H
 
 #include "fhtagn/threads/tasklet.h"
-#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
-#include "lost/lua/State.h"
 #include "lost/application/Config.h"
 #include <list>
-#include "lost/event/EventDispatcher.h"
 #include "lost/resource/DefaultLoader.h"
 
 namespace lost
 {
+  namespace event {    struct EventDispatcher; }
+  namespace lua { struct State; }
   namespace application
   {
+  
     struct Tasklet;
     typedef boost::shared_ptr<Tasklet> TaskletPtr;
 

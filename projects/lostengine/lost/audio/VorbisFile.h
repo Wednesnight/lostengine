@@ -1,8 +1,6 @@
 #ifndef LOST_AUDIO_VORBISFILE_H
 #define LOST_AUDIO_VORBISFILE_H
 
-#include <boost/shared_ptr.hpp>
-
 namespace lost
 {
 namespace resource { struct File; };

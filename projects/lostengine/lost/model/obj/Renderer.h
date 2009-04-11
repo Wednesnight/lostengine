@@ -2,7 +2,6 @@
 #define LOST_MODEL_OBJ_RENDERER_H
 
 #include <map>
-#include <boost/shared_ptr.hpp>
 
 #include "lost/model/Mesh.h"
 #include "lost/model/obj/Material.h"

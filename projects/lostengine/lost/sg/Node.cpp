@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/sg/Node.h"
 
 namespace lost

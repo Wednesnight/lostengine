@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/model/obj/Parser.h"
 
 //#define BOOST_SPIRIT_DEBUG

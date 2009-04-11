@@ -1,7 +1,6 @@
 #ifndef LOST_RESOURCE_REPOSITORY_H
 #define LOST_RESOURCE_REPOSITORY_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/resource/File.h"
 #include <boost/filesystem.hpp>
 

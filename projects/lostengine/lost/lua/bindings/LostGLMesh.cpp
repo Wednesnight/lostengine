@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/gl/Mesh.h"
 

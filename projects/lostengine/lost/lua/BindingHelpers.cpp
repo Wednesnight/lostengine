@@ -1,4 +1,6 @@
 #include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
+#include "lost/resource/DefaultLoader.h"
 
 #include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
@@ -30,7 +32,7 @@
 #include "lost/model/obj/Parser.h"
 #include "lost/model/obj/Renderer.h"
 #include "lost/resource/File.h"
-#include "lost/resource/Loader.h"
+//#include "lost/resource/Loader.h"
 
 #define GET_POINTER(name) template name* get_pointer(boost::shared_ptr<name>&);\
                           template name const* get_pointer(boost::shared_ptr<name const>&);

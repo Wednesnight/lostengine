@@ -2,8 +2,6 @@
 #define LOST_MODEL_MESH_H
 
 #include <vector>
-#include <boost/shared_array.hpp>
-#include <boost/shared_ptr.hpp>
 #include "lost/common/Logger.h"
 #include "lost/math/AABB.h"
 #include "lost/model/Vertex.h"

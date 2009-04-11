@@ -1,5 +1,5 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/bitmap/Packer.h"
-
 using namespace boost;
 using namespace lost::math;
 

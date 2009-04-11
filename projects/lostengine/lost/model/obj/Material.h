@@ -2,7 +2,6 @@
 #define LOST_MODEL_OBJ_MATERIAL_H
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
 #include "lost/math/Vec4.h"
 
 namespace lost

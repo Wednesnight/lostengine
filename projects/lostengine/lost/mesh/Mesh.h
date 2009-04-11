@@ -1,7 +1,6 @@
 #ifndef LOST_MESH_MESH
 #define LOST_MESH_MESH
 
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/common/Logger.h"

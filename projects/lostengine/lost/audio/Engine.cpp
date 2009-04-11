@@ -1,5 +1,6 @@
 #include "lost/audio/Engine.h"
 #include "lost/al/Context.h"
+#include "lost/al/Device.h"
 #include "lost/audio/Source.h"
 #include "lost/common/Logger.h"
 

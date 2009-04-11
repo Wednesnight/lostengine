@@ -1,29 +1,32 @@
 #ifndef LOST_APPLICATION_APPLICATION_H
 #define LOST_APPLICATION_APPLICATION_H
 
-// FIXME: needed for NOMINMAX definition on windows
-#include "lost/platform/Platform.h"
 
 #include <list>
 #include <map>
 #include <string>
-#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
-#include <boost/filesystem.hpp>
-
-#include "lost/application/Window.h"
-#include "lost/event/EventDispatcher.h"
-#include "lost/application/ApplicationEvent.h"
 #include "lost/resource/Loader.h"
-#include "lost/application/Tasklet.h"
-#include "lost/application/ApplicationEvent.h"
+#include "lost/event/Event.h"
 
 namespace lost
 {
+  namespace event
+  {
+    struct EventDispatcher;
+    typedef boost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+  }
+
   namespace application
   {
+    struct Tasklet;
+    typedef boost::shared_ptr<Tasklet> TaskletPtr;
+    
     struct Application;
     typedef boost::shared_ptr<Application> ApplicationPtr;
+
+    struct ApplicationEvent;
+    typedef boost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
     struct Application : public boost::enable_shared_from_this<Application>
     {
@@ -50,10 +53,10 @@ namespace lost
        * don't use ctors directly! leave them private since we need to be held by a boost::shared_ptr,
        * otherwise shared_from_this() will fail!
        */
-      Application(resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
-      Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
-      Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
-      Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
+      Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr());
 
       /**
        * ctor helper

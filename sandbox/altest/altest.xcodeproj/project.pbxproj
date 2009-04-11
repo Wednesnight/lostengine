@@ -43,6 +43,13 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
+		EA7F01950F7F03E500CE0B02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteInfo = LostEngineUnittests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -117,8 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */,
-				EA70F8AC0ED0838A000AA8CB /* libLostEngine-iphone.a */,
-				EA70F8AE0ED0838A000AA8CB /* libLostEngine-simulator.a */,
+				EA70F8AC0ED0838A000AA8CB /* libLostEngine.a */,
+				EA70F8AE0ED0838A000AA8CB /* libLostEngine.a */,
+				EA7F01960F7F03E500CE0B02 /* LostEngineUnittests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,18 +185,25 @@
 			remoteRef = EA70F8A90ED0838A000AA8CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA70F8AC0ED0838A000AA8CB /* libLostEngine-iphone.a */ = {
+		EA70F8AC0ED0838A000AA8CB /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-iphone.a";
+			path = libLostEngine.a;
 			remoteRef = EA70F8AB0ED0838A000AA8CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EA70F8AE0ED0838A000AA8CB /* libLostEngine-simulator.a */ = {
+		EA70F8AE0ED0838A000AA8CB /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libLostEngine-simulator.a";
+			path = libLostEngine.a;
 			remoteRef = EA70F8AD0ED0838A000AA8CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA7F01960F7F03E500CE0B02 /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA7F01950F7F03E500CE0B02 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

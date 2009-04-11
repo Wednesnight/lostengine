@@ -5,7 +5,6 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
-#include <boost/shared_ptr.hpp>
 #include <map>
 #include "lost/gl/Context.h"
 

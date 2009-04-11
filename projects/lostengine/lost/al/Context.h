@@ -2,13 +2,13 @@
 #define LOST_AL_CONTEXT_H
 
 #include "lost/al/al.h"
-#include "lost/al/Device.h"
-#include <boost/shared_ptr.hpp>
 
 namespace lost
 {
 namespace al
 {
+struct Device;
+
 struct Context
 {
   Context(boost::shared_ptr<Device> device);

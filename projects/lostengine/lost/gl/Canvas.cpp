@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/gl/Canvas.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera2D.h"

@@ -1,3 +1,5 @@
+#include <boost/shared_array.hpp>
+#include <boost/shared_ptr.hpp>
 #include "lost/font/Model.h"
 
 using namespace lost::gl;

@@ -1,5 +1,5 @@
+#include <boost/shared_array.hpp>
 #include "lost/application/Config.h"
-
 using namespace boost;
 using namespace luabind;
 using namespace std;

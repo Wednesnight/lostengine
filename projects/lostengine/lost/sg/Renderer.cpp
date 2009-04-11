@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/sg/Renderer.h"
 
 namespace lost

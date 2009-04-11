@@ -1,7 +1,6 @@
 #ifndef LOST_FONT_TRUETYPEFONT_H
 #define LOST_FONT_TRUETYPEFONT_H
 
-#include <boost/shared_ptr.hpp>
 #include <list>
 #include <vector>
 #include <string>

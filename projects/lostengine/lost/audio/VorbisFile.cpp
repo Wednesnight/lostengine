@@ -1,3 +1,5 @@
+#include <boost/shared_array.hpp>
+#include <boost/shared_ptr.hpp>
 #include "lost/audio/VorbisFile.h"
 #include "stb_vorbis.h"
 #include "lost/resource/File.h"
