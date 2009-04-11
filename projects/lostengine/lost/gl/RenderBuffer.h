@@ -3,7 +3,6 @@
 
 #include "lost/lgl/lgl.h"
 #include "lost/gl/Utils.h"
-#include <boost/shared_ptr.hpp>
 
 namespace lost
 {

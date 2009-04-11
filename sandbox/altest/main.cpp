@@ -25,7 +25,6 @@ using namespace boost;
 int main (int argc, char* const argv[]) {
   try
   {	
-    LogLevel( log_all );
 
     ALDEBUG; // clear last error
     

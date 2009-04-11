@@ -58,6 +58,13 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
+		EA1BF72F0F6779CD00862B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DE572200F311B980072FB28 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteInfo = LostEngineUnittests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +191,7 @@
 				8DE5722A0F311B980072FB28 /* libLostEngine.a */,
 				8DE5722C0F311B980072FB28 /* libLostEngine.a */,
 				8DE5722E0F311B980072FB28 /* libLostEngine.a */,
+				EA1BF7300F6779CD00862B2F /* LostEngineUnittests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -272,6 +280,13 @@
 			fileType = archive.ar;
 			path = libLostEngine.a;
 			remoteRef = 8DE5722D0F311B980072FB28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA1BF7300F6779CD00862B2F /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA1BF72F0F6779CD00862B2F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -1,7 +1,6 @@
 #ifndef LOST_AUDIO_ENGINE_H
 #define LOST_AUDIO_ENGINE_H
 
-#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include "lost/al/al.h"
 #include <list>

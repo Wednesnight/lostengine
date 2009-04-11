@@ -4,7 +4,6 @@
 #include "ft2build.h"
 #include FT_FREETYPE_H
 #include "lost/resource/File.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/font/freetype/Library.h"
 
 namespace lost

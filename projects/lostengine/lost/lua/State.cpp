@@ -1,9 +1,10 @@
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "lost/lua/State.h"
 #include "lost/lua/ErrorHandler.h"
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include <boost/shared_ptr.hpp>
 
 // no deprecated warnings for hashlib++
 #pragma warning(disable:4996)

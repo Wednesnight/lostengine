@@ -3,7 +3,6 @@
 
 #include "lost/event/Event.h"
 #include "lost/math/Vec2.h"
-#include <boost/shared_ptr.hpp>
 #include <vector>
 
 namespace lost

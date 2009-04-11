@@ -1,8 +1,16 @@
+// FIXME: needed for NOMINMAX definition on windows
+#include "lost/platform/Platform.h"
+
+#include "lost/event/EventDispatcher.h"
+#include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/event/Receive.h"
+#include "lost/application/ApplicationEvent.h"
 
 #include <boost/program_options.hpp>
+
+using namespace lost::resource;
 
 namespace lost
 {
@@ -11,12 +19,16 @@ namespace lost
     
     Application::Application(resource::LoaderPtr inLoader)
     {
+      if(!inLoader)
+        inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
       initialize();
     }
 
     Application::Application(int argn, char** args, resource::LoaderPtr inLoader)
     {
+      if(!inLoader)
+        inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
 
       using namespace boost::program_options;
@@ -45,6 +57,8 @@ namespace lost
     
     Application::Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader)
     {
+      if(!inLoader)
+        inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
       tasklets.push_back(tasklet);
       initialize();
@@ -52,6 +66,8 @@ namespace lost
 
     Application::Application(const std::string& inScript, resource::LoaderPtr inLoader)
     {
+      if(!inLoader)
+        inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
       TaskletPtr tasklet(new Tasklet(loader));
       tasklet->script = inScript;

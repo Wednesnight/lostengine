@@ -1,9 +1,13 @@
+#include <boost/shared_array.hpp>
+#include "lost/lua/State.h"
+#include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include <boost/bind.hpp>
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
 #include <algorithm>
 #include "lost/platform/Platform.h"
+#include "lost/common/Logger.h"
 
 using namespace boost;
 using namespace fhtagn::threads;

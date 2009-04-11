@@ -1,7 +1,6 @@
 #ifndef LOST_MODEL_LSYSTEM_RENDERER_H
 #define LOST_MODEL_LSYSTEM_RENDERER_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/model/Mesh.h"
 #include "lost/model/Vertex.h"
 #include "lost/gl/Canvas.h"

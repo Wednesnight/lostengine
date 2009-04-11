@@ -3,7 +3,6 @@
 
 #include "lost/application/InputEvent.h"
 #include "lost/application/KeyCode.h"
-#include <boost/shared_ptr.hpp>
 
 namespace lost
 {

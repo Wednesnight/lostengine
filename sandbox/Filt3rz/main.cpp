@@ -1,3 +1,5 @@
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "Filt3rz.h"
 
 using namespace lost::application;

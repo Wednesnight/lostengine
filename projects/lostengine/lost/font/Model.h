@@ -2,8 +2,6 @@
 #define LOST_FONT_MODEL
 
 #include <boost/cstdint.hpp>
-#include <boost/shared_array.hpp>
-#include <boost/shared_ptr.hpp>
 #include "lost/math/Vec2.h"
 #include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"

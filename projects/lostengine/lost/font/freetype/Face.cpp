@@ -1,7 +1,8 @@
 #include <stdexcept>
 
 #include <boost/lexical_cast.hpp>
-
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "lost/font/freetype/Face.h"
 #include "lost/common/Logger.h"
 

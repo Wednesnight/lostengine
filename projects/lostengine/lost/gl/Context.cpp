@@ -1,3 +1,4 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/gl/Context.h"
 #include "lost/lgl/lgl.h"
 

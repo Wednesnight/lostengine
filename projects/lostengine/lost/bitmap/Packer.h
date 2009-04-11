@@ -1,7 +1,6 @@
 #ifndef LOST_BITMAP_PACKER_H
 #define LOST_BITMAP_PACKER_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/bitmap/Bitmap.h"
 #include "lost/math/Rect.h"
 #include "lost/math/RectPacker.h"

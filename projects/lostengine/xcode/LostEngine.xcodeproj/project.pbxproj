@@ -590,6 +590,18 @@
 		EA1BF6E40F67445D00862B2F /* TimeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */; };
 		EA1BF6E50F67445D00862B2F /* SignalTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */; };
 		EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
+		EA26B90F0F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
+		EA26B9100F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
+		EA26B9110F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
+		EA26B91A0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
+		EA26B91B0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
+		EA26B91C0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
+		EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9270F91498E00318279 /* DefaultLoader.cpp */; };
+		EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9270F91498E00318279 /* DefaultLoader.cpp */; };
+		EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9270F91498E00318279 /* DefaultLoader.cpp */; };
+		EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
+		EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
+		EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
 		EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
@@ -1008,6 +1020,10 @@
 		EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeHelpers.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SignalTranslator.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1D54EB0EB34E0400591811 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		EA26B90E0F91481A00318279 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = resource/File.cpp; sourceTree = "<group>"; };
+		EA26B9190F91494400318279 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = resource/Loader.cpp; sourceTree = "<group>"; };
+		EA26B9270F91498E00318279 /* DefaultLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLoader.cpp; path = resource/DefaultLoader.cpp; sourceTree = "<group>"; };
+		EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationResourceRepository.cpp; path = resource/ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
 		EA296C430F8F91B800213B73 /* UiTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiTasklet.cpp; sourceTree = "<group>"; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
 		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
@@ -1447,6 +1463,17 @@
 			name = "UnitTest++";
 			sourceTree = "<group>";
 		};
+		EA26B90B0F91480C00318279 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				EA26B9190F91494400318279 /* Loader.cpp */,
+				EA26B90E0F91481A00318279 /* File.cpp */,
+				EA26B9270F91498E00318279 /* DefaultLoader.cpp */,
+				EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */,
+			);
+			name = resource;
+			sourceTree = "<group>";
+		};
 		EA3B94300E04622D00B6423B /* lua */ = {
 			isa = PBXGroup;
 			children = (
@@ -1611,6 +1638,7 @@
 				B47550660F690E0900B04249 /* model */,
 				8D0CC5E10F44C37200ADE728 /* obj */,
 				EA3B94FA0E04639D00B6423B /* platform */,
+				EA26B90B0F91480C00318279 /* resource */,
 				EA8A228B0F87B15400A6EB8B /* sg */,
 				EA1BF6700F6734F400862B2F /* test */,
 			);
@@ -2209,6 +2237,10 @@
 				8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */,
 				8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */,
+				EA26B9110F91481A00318279 /* File.cpp in Sources */,
+				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
+				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
+				EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2455,6 +2487,10 @@
 				8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */,
 				8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */,
+				EA26B90F0F91481A00318279 /* File.cpp in Sources */,
+				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
+				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
+				EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2749,6 +2785,10 @@
 				8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */,
 				8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */,
+				EA26B9100F91481A00318279 /* File.cpp in Sources */,
+				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
+				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,
+				EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

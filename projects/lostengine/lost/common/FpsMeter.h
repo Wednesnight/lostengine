@@ -2,8 +2,6 @@
 #define LOST_COMMON_FPSMETER_h
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include <string>
 
 namespace lost

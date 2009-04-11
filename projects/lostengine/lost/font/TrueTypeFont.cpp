@@ -1,5 +1,6 @@
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "lost/font/TrueTypeFont.h"
-#include <stdexcept>
 #include <boost/lexical_cast.hpp>
 #include "lost/common/Logger.h"
 #include "lost/bitmap/Packer.h"

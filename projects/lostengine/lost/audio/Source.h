@@ -2,7 +2,6 @@
 #define LOST_AUDIO_SOURCE_H
 
 #include "lost/al/Source.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/audio/Engine.h"
 #include <boost/enable_shared_from_this.hpp>
 

@@ -1,5 +1,7 @@
+#include <boost/shared_ptr.hpp>
 #include "lost/al/al.h"
 #include "lost/al/Source.h"
+#include "lost/al/Buffer.h"
 
 using namespace lost::math;
 

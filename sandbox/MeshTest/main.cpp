@@ -1,8 +1,10 @@
 #include <iostream>
 #include <stdexcept>
+#include <boost/shared_array.hpp>
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "MeshTest.h"
+
 
 using namespace std;
 using namespace lost;

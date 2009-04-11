@@ -33,29 +33,38 @@ bool MeshTest::startup()
   return true;
 }
 
-bool MeshTest::main()
+void MeshTest::draw2D()
 {
-  window->context->makeCurrent();
   window->canvas->camera->apply();
   window->canvas->context->pushState(renderstate);
   window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   window->canvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
+  line->update(Vec2(0,0), Vec2(400,400));
+  line->draw(window->context);
+  window->canvas->context->popState();
+}
+
+void MeshTest::draw3D()
+{
+  cube->draw(window->context);
+}
+
+bool MeshTest::main()
+{
+  window->context->makeCurrent();
   
   try
   {
-    line->update(Vec2(0,0), Vec2(400,400));
-    line->draw(window->context);
-
-//    cube->draw(window->context);
+    draw2D();
+    draw3D();
   }
   catch(std::exception& ex)
   {
     EOUT("caught error: "<<ex.what());
   }
   
-  window->canvas->context->popState();
   window->context->swapBuffers();   
   return true;
 }

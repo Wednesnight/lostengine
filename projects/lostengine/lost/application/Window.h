@@ -1,7 +1,6 @@
 #ifndef LOST_APPLICATION_WINDOW_H
 #define LOST_APPLICATION_WINDOW_H
 
-#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
 #include "lost/gl/Canvas.h"

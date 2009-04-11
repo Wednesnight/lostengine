@@ -1,8 +1,6 @@
 #ifndef LOST_AL_DEBUG_H
 #define LOST_AL_DEBUG_H
 
-#include "lost/platform/Platform.h"
-
 // debug functions and convenience macros
 // place the macros after each call to AL to detect errors
 

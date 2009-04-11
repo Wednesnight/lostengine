@@ -1,3 +1,5 @@
+#include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/State.h"
 #include <boost/lexical_cast.hpp>

@@ -2,7 +2,6 @@
 #define LOST_MODEL_LSYSTEM_GENERATOR_H
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
 #include "lost/lsystem/LSystem.h"
 #include "lost/model/Mesh.h"

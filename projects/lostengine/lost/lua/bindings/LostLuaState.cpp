@@ -1,4 +1,5 @@
 #include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/resource/File.h"
