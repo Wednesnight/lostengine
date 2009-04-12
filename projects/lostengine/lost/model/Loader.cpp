@@ -3,13 +3,13 @@
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
 
-#define BOOST_SPIRIT_DEBUG
+//#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/core.hpp>
-//#include <boost/spirit/utility/lists.hpp>
 #include <boost/spirit/actor/increment_actor.hpp>
 #include <boost/spirit/actor/decrement_actor.hpp>
 #include <boost/spirit/phoenix/binders.hpp>
 //#include <boost/spirit/attribute.hpp>
+//#include <boost/spirit/utility/lists.hpp>
 
 using namespace boost;
 using namespace boost::spirit;
@@ -22,6 +22,31 @@ namespace lost
 {
   namespace model
   {
+
+    /**
+     * spirit actions for OBJ parsing
+     */
+    struct OBJActions
+    {
+      template <typename Type>
+      struct SetArray
+      {
+        Type* array;
+        Type& value;
+        SetArray(Type* inArray, Type& inValue)
+        : array(inArray),
+          value(inValue)
+        {
+        }
+
+        template<typename IteratorT>
+        void operator()(IteratorT first, IteratorT last) const
+        {
+          static unsigned int idx = 0;
+          array[idx++] = value;
+        }
+      };
+    };
 
     /**
      * load obj model from fileName through loader, returns lost::mesh::MeshPtr
@@ -83,22 +108,27 @@ namespace lost
 
         if (parse(objData.c_str(), count_p).full)
         {
+#ifdef BOOST_SPIRIT_DEBUG
+          /**
+           * debug output
+           */
           DOUT("vertexCount      : " << vertexCount);
           DOUT("normalCount      : " << normalCount);
           DOUT("indexCount       : " << indexCount);
+#endif
 
           /**
            * init data arrays
            */
-          Mesh3D::VertexType vertices[vertexCount];
-          Mesh3D::NormalType normals[normalCount];
-          Mesh3D::IndexType indices[indexCount];
+          Mesh3D::VertexType* vertices = new Mesh3D::VertexType[vertexCount];
+          Mesh3D::NormalType* normals  = new Mesh3D::NormalType[normalCount];
+          Mesh3D::IndexType*  indices  = new Mesh3D::IndexType[indexCount];
 
           /**
            * load vec3 type
            */
           Vec3 vec3;
-          rule<> vec3_p  = 
+          rule<> vec3_p = 
             real_p[assign_a(vec3.x)] >> +space_p >>
             real_p[assign_a(vec3.y)] >> +space_p >>
             real_p[assign_a(vec3.z)] >> !(+space_p >> real_p) >> *(space_p-eol_p);
@@ -106,43 +136,60 @@ namespace lost
           /**
            * load vertices
            */
-          unsigned int vertexIdx = 0;
-          rule<> vertex_p  = 
+          rule<> vertex_p = 
             ch_p('v') >> +space_p >> 
-              vec3_p[assign_a(vertices[vertexIdx++], vec3)] >>
+              vec3_p[OBJActions::SetArray<Mesh3D::VertexType>(vertices, vec3)] >>
             eol_p;
           BOOST_SPIRIT_DEBUG_NODE(vertex_p);
 
           /**
            * load normals
            */
-          unsigned int normalIdx = 0;
-          rule<> normal_p  = 
+          rule<> normal_p = 
             str_p("vn") >> +space_p >> 
-              vec3_p[assign_a(normals[normalIdx++], vec3)] >>
+              vec3_p[OBJActions::SetArray<Mesh3D::NormalType>(normals, vec3)] >>
             eol_p;
           BOOST_SPIRIT_DEBUG_NODE(normal_p);
 
           /**
            * load indices
            */
-          unsigned int indexIdx = 0;
-          rule<> index_p  = 
-            ch_p('f') >> +space_p >> 
-              int_p[assign_a(indices[indexIdx])][decrement_a(indices[indexIdx++])] >> +space_p >>
-              int_p[assign_a(indices[indexIdx])][decrement_a(indices[indexIdx++])] >> +space_p >>
-              int_p[assign_a(indices[indexIdx])][decrement_a(indices[indexIdx++])] >> *(space_p-eol_p) >>
-            eol_p;
+          Mesh3D::IndexType index;
+          rule<> index_p = int_p[assign_a(index)][decrement_a(index)] >> !('/' >> !(int_p) >> !('/' >> !(int_p)));
           BOOST_SPIRIT_DEBUG_NODE(index_p);
-
+          rule<> indexAssign_p = index_p[OBJActions::SetArray<Mesh3D::IndexType>(indices, index)];
+          BOOST_SPIRIT_DEBUG_NODE(indexAssign_p);
+          rule<> face_p =
+            ch_p('f') >> +space_p >>
+              indexAssign_p >> +space_p >>
+              indexAssign_p >> +space_p >>
+              indexAssign_p >> *(space_p-eol_p) >>
+            eol_p;
+          BOOST_SPIRIT_DEBUG_NODE(face_p);
+          
           /**
            * load vec3 type, vertices, normals, indices
            */
-          rule<> assign_p = *(vertex_p | normal_p | index_p | unknown_p);
+          rule<> assign_p = *(vertex_p | normal_p | face_p | unknown_p);
           BOOST_SPIRIT_DEBUG_NODE(assign_p);
 
           if (parse(objData.c_str(), assign_p).full)
           {
+#ifdef BOOST_SPIRIT_DEBUG
+            /**
+             * debug output
+             */
+            DOUT("vertices:");
+            for (unsigned int idx = 0; idx < vertexCount; idx++)
+              DOUT(vertices[idx]);
+            DOUT("normals:");
+            for (unsigned int idx = 0; idx < normalCount; idx++)
+              DOUT(normals[idx]);
+            DOUT("indices:");
+            for (unsigned int idx = 0; idx < indexCount; idx++)
+              DOUT(indices[idx]);
+#endif
+
             /**
              * init drawing mode
              */
@@ -175,6 +222,9 @@ namespace lost
               mesh->indexBuffer->bindBufferData(indices, indexCount);
             }
           }
+          delete indices;
+          delete normals;
+          delete vertices;
         }
       }
 

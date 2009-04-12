@@ -5,6 +5,7 @@
 #include "lost/event/Receive.h"
 #include "lost/gl/StateParam.h"
 #include "lost/application/Window.h"
+#include "lost/model/Loader.h"
 
 using namespace std;
 using namespace boost;
@@ -75,6 +76,7 @@ bool Filt3rz::shutdown()
   labelSharpen.reset();
   labelRadial.reset();
   
+  mesh.reset();
   framebuffer.reset();
   tex.reset();
   renderState.reset();
@@ -190,6 +192,9 @@ void Filt3rz::setupFBOs()
   fboRenderState = State::create(ClearColor::create(whiteColor),
                                  DepthTest::create(true));
 
+//  mesh = lost::model::Loader::obj(loader, "cessna_tri.obj");
+//  mesh = lost::model::Loader::obj(loader, "cube_tri.obj");
+  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
 }
 
 void Filt3rz::setupLabels()
@@ -219,12 +224,13 @@ void Filt3rz::renderFbo(double dt)
   fboCanvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  float cubeSize = 1;
   angle = fmod(dt*50+angle, 360);  
   glRotatef(angle, 0, 1, 0);
   glRotatef(angle, 1, 0, 0);
   lightShader->enable();
-  fboCanvas->drawSolidCube(cubeSize);
+  glScalef(1.5, 1.5, 1.5);
+  mesh->draw(fboCanvas->context);
+  glScalef(1.0, 1.0, 1.0);
   lightShader->disable();
   fboCanvas->context->popState();
   framebuffer->disable();

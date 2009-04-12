@@ -4,6 +4,7 @@
 #include "lost/application/UiTasklet.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/mesh/Line.h"
+#include "lost/camera/Camera3D.h"
 
 struct MeshTest : public lost::application::UiTasklet
 {  
@@ -21,6 +22,7 @@ struct MeshTest : public lost::application::UiTasklet
   lost::gl::StatePtr            linestate;
   lost::mesh::Line2D*           line;
   lost::mesh::MeshPtr           cube;
+  lost::camera::Camera3DPtr     camera3D;
 
 };
 

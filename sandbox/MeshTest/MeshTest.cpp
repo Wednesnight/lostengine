@@ -12,6 +12,7 @@ using namespace lost::common;
 using namespace lost::math;
 using namespace lost::event;
 using namespace lost::application;
+using namespace lost::camera;
 
 MeshTest::MeshTest()
 : UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
@@ -29,6 +30,12 @@ bool MeshTest::startup()
   linestate = State::create();
   line = new mesh::Line2D;
   cube = lost::model::Loader::obj(loader, "cube_tri.obj");
+  camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
+  camera3D->fovY(45.0f);
+  camera3D->depth(Vec2(1.0f, 100.0f));
+  camera3D->position(Vec3(1,2,2));
+  camera3D->target(Vec3(0,0,0));
+  camera3D->stickToTarget(true);  
   
   return true;
 }
@@ -48,6 +55,10 @@ void MeshTest::draw2D()
 
 void MeshTest::draw3D()
 {
+  camera3D->apply();
+  glMatrixMode(GL_MODELVIEW); GLDEBUG;
+  glLoadIdentity(); GLDEBUG;
+  window->canvas->setColor(whiteColor);
   cube->draw(window->context);
 }
 
