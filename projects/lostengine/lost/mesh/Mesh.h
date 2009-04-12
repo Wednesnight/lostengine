@@ -90,6 +90,11 @@ struct BufferedMesh : public Mesh
     if(colorBuffer) colorBuffer->bindColorPointer();
     if(texCoordBuffer) texCoordBuffer->bindTexCoordPointer();
     indexBuffer->drawElements(drawMode);
+    if(texCoordBuffer) texCoordBuffer->unbind();
+    if(colorBuffer) colorBuffer->unbind();
+    if(normalBuffer) normalBuffer->unbind();
+    indexBuffer->unbind();
+    vertexBuffer->unbind();
     ctx->popState();
   }
   

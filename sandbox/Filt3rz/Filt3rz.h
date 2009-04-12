@@ -10,6 +10,7 @@
 #include "lost/gl/ShaderHelper.h"
 #include "lost/font/TrueTypeFont.h"
 #include "lost/application/UiTasklet.h"
+#include "lost/mesh/Mesh.h"
 
 struct Filt3rz : public lost::application::UiTasklet
 {
@@ -36,6 +37,8 @@ private:
   lost::font::ModelPtr                              labelEmboss;
   lost::font::ModelPtr                              labelSharpen;
   lost::font::ModelPtr                              labelRadial;
+
+  lost::mesh::MeshPtr mesh;
 
   void keyHandler(lost::application::KeyEventPtr event);
 
