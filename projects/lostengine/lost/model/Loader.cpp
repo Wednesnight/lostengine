@@ -78,7 +78,11 @@ namespace lost
          * count vertices
          */
         unsigned int vertexCount = 0;
-        rule<> vertexCount_p = (ch_p('v') >> +space_p >> *(anychar_p - eol_p) >> eol_p)[increment_a(vertexCount)];
+        rule<> vertexCount_p = (ch_p('v') >> +space_p >>
+                                  real_p >> +space_p >>
+                                  real_p >> +space_p >>
+                                  real_p >> !(+space_p >> real_p) >> *(space_p - eol_p) >> 
+                                eol_p)[increment_a(vertexCount)];
         BOOST_SPIRIT_DEBUG_NODE(vertexCount_p);
 
         /**
@@ -94,9 +98,9 @@ namespace lost
         unsigned int indexCount = 0;
         rule<> indexCount_p = 
           ch_p('f') >> +space_p >> 
-            int_p[increment_a(indexCount)] >> +space_p >>
-            int_p[increment_a(indexCount)] >> +space_p >>
-            int_p[increment_a(indexCount)] >> *(space_p-eol_p) >>
+            int_p[increment_a(indexCount)] >> !('/' >> !(int_p) >> !('/' >> !(int_p))) >> +space_p >>
+            int_p[increment_a(indexCount)] >> !('/' >> !(int_p) >> !('/' >> !(int_p))) >> +space_p >>
+            int_p[increment_a(indexCount)] >> !('/' >> !(int_p) >> !('/' >> !(int_p))) >> *(space_p-eol_p) >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(indexCount_p);
         
