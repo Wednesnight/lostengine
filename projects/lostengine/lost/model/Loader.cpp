@@ -216,6 +216,39 @@ namespace lost
               mesh->normals(true);
               mesh->normalBuffer->bindBufferData(normals, normalCount);
             }
+            else
+            {
+              // assuming triangles
+              DOUT("no normals");
+              Mesh3D::NormalType* vertexNormals  = new Mesh3D::NormalType[vertexCount];
+              Vec3 p1, p2, p3;
+              Vec3 v1, v2;
+              Vec3 n;
+              // caluclate tri normals, add to vertex normals
+              for(int i=0; i<vertexCount; i+=3)
+              {
+                int i1 = indices[i];
+                int i2 = indices[i+1];
+                int i3 = indices[i+2];
+                p1 = vertices[i1];
+                p2 = vertices[i2];
+                p3 = vertices[i3];
+                v1 = p2-p1;
+                v2 = p3-p2;
+                n = cross(v1, v2);
+                normalise(n);
+                vertexNormals[i1] += n;
+                vertexNormals[i2] += n;
+                vertexNormals[i3] += n;
+              }
+              // normalize all vertex normals to create final vnormal from sum of tri normals
+              for(int i=0; i<vertexCount; ++i)
+              {
+                normalise(vertexNormals[i]);
+              }
+              mesh->normals(true);
+              mesh->normalBuffer->bindBufferData(vertexNormals, vertexCount);
+            }
 
             /**
              * set mesh indices
