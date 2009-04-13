@@ -157,7 +157,7 @@ void Filt3rz::setupLightShader()
   {
     DOUT("Program validated OK");
   }
-  (*lightShader)["LightPosition"] = Vec3(-1,.7,10);
+  (*lightShader)["LightPosition"] = cubeCam->position();
   (*lightShader)["LightColor"]    = Color(1,1,1);
   (*lightShader)["EyePosition"]   = cubeCam->position();
   (*lightShader)["Specular"]      = Color(1,1,.1);
