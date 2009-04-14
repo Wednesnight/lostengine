@@ -173,14 +173,14 @@ void Filt3rz::setupLightShader()
     DOUT("Program validated OK");
   }
   (*lightShader)["LightPosition"] = cubeCam->position();
-  (*lightShader)["LightColor"]    = Color(1,1,1);
+  (*lightShader)["LightColor"]    = Color(1, 1, 1);
   (*lightShader)["EyePosition"]   = cubeCam->position();
-  (*lightShader)["Specular"]      = Color(1,1,.1);
-  (*lightShader)["Ambient"]       = Color(.1,.5,1);
+  (*lightShader)["Specular"]      = Color(.75, .75, .5);
+  (*lightShader)["Ambient"]       = Color(.1, .1, .1);
   (*lightShader)["Kd"]            = 0.8f;
   (*lightShader)["Scale"]         = Vec2(0.7, 3.7);
   (*lightShader)["Threshold"]     = Vec2(.3, .2);
-  (*lightShader)["SurfaceColor"]  = Color(1,.1,.1);
+  (*lightShader)["SurfaceColor"]  = Color(1,1,1);
   lightShader->disable();
 }
 
@@ -199,8 +199,12 @@ void Filt3rz::setupFBOs()
   cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
   cubeCam->fovY(45.0f);
   cubeCam->depth(Vec2(1.0f, 100.0f));
+  cubeCam->position(Vec3(1,2,2));
+  cubeCam->target(Vec3(0,0,0));
+/* sponza
   cubeCam->position(Vec3(0,0,0));
   cubeCam->target(Vec3(1,2,2));
+*/
   cubeCam->stickToTarget(true);  
   fboCanvas.reset(new Canvas(window->context, cubeCam));
   
@@ -209,8 +213,8 @@ void Filt3rz::setupFBOs()
 
 //  mesh = lost::model::Loader::obj(loader, "cessna_tri.obj");
 //  mesh = lost::model::Loader::obj(loader, "cube_tri.obj");
-//  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
-  mesh = lost::model::Loader::obj(loader, "sponza_tri.obj");
+  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
+//  mesh = lost::model::Loader::obj(loader, "sponza_tri.obj");
 }
 
 void Filt3rz::setupLabels()
@@ -246,11 +250,15 @@ void Filt3rz::renderFbo(double dt)
     angle = fmod(dt*50+angle, 360);
   }
   glRotatef(angle, 0, 1, 0);
-//  glRotatef(angle, 1, 0, 0);
+  glRotatef(angle, 1, 0, 0);
   lightShader->enable();
+  glEnable(GL_RESCALE_NORMAL);
+  glEnable(GL_NORMALIZE);
   glScalef(10.0, 10.0, 10.0);
   mesh->draw(fboCanvas->context);
   glScalef(1.0, 1.0, 1.0);
+  glDisable(GL_NORMALIZE);
+  glDisable(GL_RESCALE_NORMAL);
   lightShader->disable();
   fboCanvas->context->popState();
   framebuffer->disable();
