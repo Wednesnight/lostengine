@@ -17,6 +17,10 @@
 		8D501F470F94AA15003A3FDF /* ladybird_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8D501F460F94AA15003A3FDF /* ladybird_tri.obj */; };
 		8DF4820B0F8DD8D900DBFB9E /* radial.vs in Resources */ = {isa = PBXBuildFile; fileRef = 8DF482090F8DD8D900DBFB9E /* radial.vs */; };
 		8DF4820C0F8DD8D900DBFB9E /* radial.fs in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4820A0F8DD8D900DBFB9E /* radial.fs */; };
+		8DFF97030F94E8F300EB04B5 /* sepia.fs in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF97010F94E8F300EB04B5 /* sepia.fs */; };
+		8DFF97040F94E8F300EB04B5 /* sepia.vs in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF97020F94E8F300EB04B5 /* sepia.vs */; };
+		8DFF970C0F94E9DA00EB04B5 /* heatsig.fs in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF970A0F94E9DA00EB04B5 /* heatsig.fs */; };
+		8DFF970D0F94E9DA00EB04B5 /* heatsig.vs in Resources */ = {isa = PBXBuildFile; fileRef = 8DFF970B0F94E9DA00EB04B5 /* heatsig.vs */; };
 		EA26A8450F77B1B800490D18 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8420F77B1B800490D18 /* global-debug.xcconfig */; };
 		EA26A8460F77B1B800490D18 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8430F77B1B800490D18 /* global-release.xcconfig */; };
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
@@ -89,6 +93,10 @@
 		8D501F460F94AA15003A3FDF /* ladybird_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ladybird_tri.obj; path = ../../../data/obj/ladybird_tri.obj; sourceTree = SOURCE_ROOT; };
 		8DF482090F8DD8D900DBFB9E /* radial.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = radial.vs; path = ../radial.vs; sourceTree = SOURCE_ROOT; };
 		8DF4820A0F8DD8D900DBFB9E /* radial.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = radial.fs; path = ../radial.fs; sourceTree = SOURCE_ROOT; };
+		8DFF97010F94E8F300EB04B5 /* sepia.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sepia.fs; path = ../sepia.fs; sourceTree = SOURCE_ROOT; };
+		8DFF97020F94E8F300EB04B5 /* sepia.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sepia.vs; path = ../sepia.vs; sourceTree = SOURCE_ROOT; };
+		8DFF970A0F94E9DA00EB04B5 /* heatsig.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = heatsig.fs; path = ../heatsig.fs; sourceTree = SOURCE_ROOT; };
+		8DFF970B0F94E9DA00EB04B5 /* heatsig.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = heatsig.vs; path = ../heatsig.vs; sourceTree = SOURCE_ROOT; };
 		EA26A6A70F77B1A500490D18 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA26A8420F77B1B800490D18 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -168,6 +176,10 @@
 				EAFA106D0F7DB1F300CEAF99 /* edge.fs */,
 				EAFA106B0F7DB1F300CEAF99 /* emboss.fs */,
 				EAFA106C0F7DB1F300CEAF99 /* emboss.vs */,
+				8DFF970A0F94E9DA00EB04B5 /* heatsig.fs */,
+				8DFF970B0F94E9DA00EB04B5 /* heatsig.vs */,
+				8DFF97010F94E8F300EB04B5 /* sepia.fs */,
+				8DFF97020F94E8F300EB04B5 /* sepia.vs */,
 				EAFA10720F7DB1F800CEAF99 /* sharpen.vs */,
 				EAFA10730F7DB1F800CEAF99 /* sharpen.fs */,
 				3E4169640F9494420037C3B7 /* ssao.vs */,
@@ -314,6 +326,10 @@
 				3E4169670F9494420037C3B7 /* ssao.fs in Resources */,
 				3E416B410F949CA80037C3B7 /* sponza_tri.obj in Resources */,
 				8D501F470F94AA15003A3FDF /* ladybird_tri.obj in Resources */,
+				8DFF97030F94E8F300EB04B5 /* sepia.fs in Resources */,
+				8DFF97040F94E8F300EB04B5 /* sepia.vs in Resources */,
+				8DFF970C0F94E9DA00EB04B5 /* heatsig.fs in Resources */,
+				8DFF970D0F94E9DA00EB04B5 /* heatsig.vs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,6 +29,8 @@ private:
   lost::gl::ShaderProgramPtr                        sharpenShader;
   lost::gl::ShaderProgramPtr                        radialShader;
   lost::gl::ShaderProgramPtr                        ssaoShader;
+  lost::gl::ShaderProgramPtr                        sepiaShader;
+  lost::gl::ShaderProgramPtr                        heatsigShader;
   lost::camera::Camera3DPtr                         cubeCam;
 
   lost::font::TrueTypeFontPtr                       ttf;
@@ -39,6 +41,8 @@ private:
   lost::font::ModelPtr                              labelSharpen;
   lost::font::ModelPtr                              labelRadial;
   lost::font::ModelPtr                              labelSSAO;
+  lost::font::ModelPtr                              labelSepia;
+  lost::font::ModelPtr                              labelHeatSig;
 
   lost::mesh::MeshPtr mesh;
 
@@ -55,6 +59,8 @@ private:
   void setupSharpenShader();
   void setupRadialShader();
   void setupSSAOShader();
+  void setupSepiaShader();
+  void setupHeatSigShader();
   void setupLightShader();
   void setupLabels();
 
