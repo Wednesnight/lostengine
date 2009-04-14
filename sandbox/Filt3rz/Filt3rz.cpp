@@ -213,6 +213,7 @@ void Filt3rz::setupFBOs()
 
 //  mesh = lost::model::Loader::obj(loader, "cessna_tri.obj");
 //  mesh = lost::model::Loader::obj(loader, "cube_tri.obj");
+//  mesh = lost::model::Loader::obj(loader, "ladybird_tri.obj");
   mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
 //  mesh = lost::model::Loader::obj(loader, "sponza_tri.obj");
 }
@@ -254,7 +255,7 @@ void Filt3rz::renderFbo(double dt)
   lightShader->enable();
   glEnable(GL_RESCALE_NORMAL);
   glEnable(GL_NORMALIZE);
-  glScalef(10.0, 10.0, 10.0);
+  glScalef(2.0, 2.0, 2.0);
   mesh->draw(fboCanvas->context);
   glScalef(1.0, 1.0, 1.0);
   glDisable(GL_NORMALIZE);
@@ -330,13 +331,13 @@ bool Filt3rz::main()
     }
   }
 
-  drawLabel(labelOriginal, whiteColor, 0, 1);
-  drawLabel(labelBlur, whiteColor, 1, 1);
+  drawLabel(labelOriginal, blackColor, 0, 1);
+  drawLabel(labelBlur, blackColor, 1, 1);
   drawLabel(labelEdge, whiteColor, 2, 1);
   drawLabel(labelEmboss, whiteColor, 3, 1);
-  drawLabel(labelSharpen, whiteColor, 4, 1);
-  drawLabel(labelRadial, whiteColor, 0, 0);
-  drawLabel(labelSSAO, whiteColor, 1, 0);
+  drawLabel(labelSharpen, blackColor, 4, 1);
+  drawLabel(labelRadial, blackColor, 0, 0);
+  drawLabel(labelSSAO, blackColor, 1, 0);
 
   window->canvas->context->popState();
   window->context->swapBuffers();
