@@ -28,7 +28,8 @@ private:
   lost::gl::ShaderProgramPtr                        embossShader;
   lost::gl::ShaderProgramPtr                        sharpenShader;
   lost::gl::ShaderProgramPtr                        radialShader;
-  lost::camera::Camera3DPtr                         cubeCam;  
+  lost::gl::ShaderProgramPtr                        ssaoShader;
+  lost::camera::Camera3DPtr                         cubeCam;
 
   lost::font::TrueTypeFontPtr                       ttf;
   lost::font::ModelPtr                              labelOriginal;
@@ -37,6 +38,7 @@ private:
   lost::font::ModelPtr                              labelEmboss;
   lost::font::ModelPtr                              labelSharpen;
   lost::font::ModelPtr                              labelRadial;
+  lost::font::ModelPtr                              labelSSAO;
 
   lost::mesh::MeshPtr mesh;
 
@@ -52,6 +54,7 @@ private:
   void setupEmbossShader();
   void setupSharpenShader();
   void setupRadialShader();
+  void setupSSAOShader();
   void setupLightShader();
   void setupLabels();
 
@@ -73,6 +76,7 @@ private:
   float angle;
   uint32_t fontSize;
   uint32_t yinset;
+  bool animated;
 };
 
 #endif

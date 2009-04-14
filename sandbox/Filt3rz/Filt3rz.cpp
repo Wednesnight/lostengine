@@ -36,6 +36,7 @@ Filt3rz::Filt3rz()
 
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
+  animated = true;
 }
 
 bool Filt3rz::startup()
@@ -54,6 +55,7 @@ bool Filt3rz::startup()
   setupEmbossShader();
   setupSharpenShader();
   setupRadialShader();
+  setupSSAOShader();
   setupLightShader();
   setupLabels();
 
@@ -75,6 +77,7 @@ bool Filt3rz::shutdown()
   labelEmboss.reset();
   labelSharpen.reset();
   labelRadial.reset();
+  labelSSAO.reset();
   
   mesh.reset();
   framebuffer.reset();
@@ -88,6 +91,7 @@ bool Filt3rz::shutdown()
   embossShader.reset();
   sharpenShader.reset();
   radialShader.reset();
+  ssaoShader.reset();
   cubeCam.reset();
 
   renderState.reset();
@@ -144,6 +148,17 @@ void Filt3rz::setupRadialShader()
   radialShader->disable();
 }
 
+void Filt3rz::setupSSAOShader()
+{
+  ssaoShader = loadShader(loader, "ssao");
+  ssaoShader->enable();
+  (*ssaoShader)["texture0"]    = (GLuint)1;
+  (*ssaoShader)["texture1"]    = (GLuint)0;
+  (*ssaoShader)["camerarange"] = cubeCam->depth();
+  (*ssaoShader)["screensize"]  = fboSize;
+  ssaoShader->disable();
+}
+
 void Filt3rz::setupLightShader()
 {
   lightShader = loadShader(loader, "light");
@@ -184,8 +199,8 @@ void Filt3rz::setupFBOs()
   cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
   cubeCam->fovY(45.0f);
   cubeCam->depth(Vec2(1.0f, 100.0f));
-  cubeCam->position(Vec3(1,2,2));
-  cubeCam->target(Vec3(0,0,0));
+  cubeCam->position(Vec3(0,0,0));
+  cubeCam->target(Vec3(1,2,2));
   cubeCam->stickToTarget(true);  
   fboCanvas.reset(new Canvas(window->context, cubeCam));
   
@@ -194,7 +209,8 @@ void Filt3rz::setupFBOs()
 
 //  mesh = lost::model::Loader::obj(loader, "cessna_tri.obj");
 //  mesh = lost::model::Loader::obj(loader, "cube_tri.obj");
-  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
+//  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
+  mesh = lost::model::Loader::obj(loader, "sponza_tri.obj");
 }
 
 void Filt3rz::setupLabels()
@@ -213,6 +229,7 @@ void Filt3rz::setupLabels()
   labelEmboss = ttf->render("Emboss", fontSize);
   labelSharpen = ttf->render("Sharpen", fontSize);
   labelRadial = ttf->render("Radial Blur", fontSize);
+  labelSSAO = ttf->render("SSAO", fontSize);
 }
 
 void Filt3rz::renderFbo(double dt)
@@ -224,11 +241,14 @@ void Filt3rz::renderFbo(double dt)
   fboCanvas->setColor(whiteColor);
   glMatrixMode(GL_MODELVIEW);GLDEBUG;
   glLoadIdentity();GLDEBUG;
-  angle = fmod(dt*50+angle, 360);  
+  if (animated)
+  {
+    angle = fmod(dt*50+angle, 360);
+  }
   glRotatef(angle, 0, 1, 0);
-  glRotatef(angle, 1, 0, 0);
+//  glRotatef(angle, 1, 0, 0);
   lightShader->enable();
-  glScalef(1.5, 1.5, 1.5);
+  glScalef(10.0, 10.0, 10.0);
   mesh->draw(fboCanvas->context);
   glScalef(1.0, 1.0, 1.0);
   lightShader->disable();
@@ -241,8 +261,15 @@ void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t r
   shader->enable();
   glActiveTexture(GL_TEXTURE0);
   tex->bind();
+  /**
+   * depth tex required by SSAO shader
+   */
+  glActiveTexture(GL_TEXTURE1);
+  framebuffer->depthTexture->bind();
   window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width, rowIndex*fboSize.height, fboSize.width, fboSize.height), tex, false);
   shader->disable();
+  // FIXME: seems like we need to reset active texture
+  glActiveTexture(GL_TEXTURE0);
 }
 
 void Filt3rz::drawLabel(lost::font::ModelPtr label,
@@ -283,6 +310,7 @@ bool Filt3rz::main()
   drawPanel(embossShader, 3, 1);
   drawPanel(sharpenShader, 4, 1);
   drawPanel(radialShader, 0, 0);
+  drawPanel(ssaoShader, 1, 0);
 
   // draw outlines
   window->canvas->setColor(grayColor);
@@ -294,12 +322,13 @@ bool Filt3rz::main()
     }
   }
 
-  drawLabel(labelOriginal, blackColor, 0, 1);
-  drawLabel(labelBlur, blackColor, 1, 1);
+  drawLabel(labelOriginal, whiteColor, 0, 1);
+  drawLabel(labelBlur, whiteColor, 1, 1);
   drawLabel(labelEdge, whiteColor, 2, 1);
   drawLabel(labelEmboss, whiteColor, 3, 1);
-  drawLabel(labelSharpen, blackColor, 4, 1);
-  drawLabel(labelRadial, blackColor, 0, 0);
+  drawLabel(labelSharpen, whiteColor, 4, 1);
+  drawLabel(labelRadial, whiteColor, 0, 0);
+  drawLabel(labelSSAO, whiteColor, 1, 0);
 
   window->canvas->context->popState();
   window->context->swapBuffers();
@@ -311,4 +340,5 @@ bool Filt3rz::main()
 void Filt3rz::keyHandler(lost::application::KeyEventPtr event)
 {
   if (event->key == K_ESCAPE) eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+  if (event->key == K_SPACE) animated = !animated;
 }
