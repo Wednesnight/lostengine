@@ -225,7 +225,7 @@ namespace lost
               Vec3 v1, v2;
               Vec3 n;
               // caluclate tri normals, add to vertex normals
-              for(int i=0; i<vertexCount; i+=3)
+              for(int i=0; i<indexCount; i+=3)
               {
                 int i1 = indices[i];
                 int i2 = indices[i+1];
