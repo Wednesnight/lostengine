@@ -56,6 +56,8 @@ bool Filt3rz::startup()
   setupSharpenShader();
   setupRadialShader();
   setupSSAOShader();
+  setupSepiaShader();
+  setupHeatSigShader();
   setupLightShader();
   setupLabels();
 
@@ -78,6 +80,8 @@ bool Filt3rz::shutdown()
   labelSharpen.reset();
   labelRadial.reset();
   labelSSAO.reset();
+  labelSepia.reset();
+  labelHeatSig.reset();
   
   mesh.reset();
   framebuffer.reset();
@@ -92,6 +96,8 @@ bool Filt3rz::shutdown()
   sharpenShader.reset();
   radialShader.reset();
   ssaoShader.reset();
+  sepiaShader.reset();
+  heatsigShader.reset();
   cubeCam.reset();
 
   renderState.reset();
@@ -157,6 +163,22 @@ void Filt3rz::setupSSAOShader()
   (*ssaoShader)["camerarange"] = cubeCam->depth();
   (*ssaoShader)["screensize"]  = fboSize;
   ssaoShader->disable();
+}
+
+void Filt3rz::setupSepiaShader()
+{
+  sepiaShader = loadShader(loader, "sepia");
+  sepiaShader->enable();
+  (*sepiaShader)["tex"] = (GLuint)0;
+  sepiaShader->disable();
+}
+
+void Filt3rz::setupHeatSigShader()
+{
+  heatsigShader = loadShader(loader, "heatsig");
+  heatsigShader->enable();
+  (*heatsigShader)["tex"] = (GLuint)0;
+  heatsigShader->disable();
 }
 
 void Filt3rz::setupLightShader()
@@ -235,6 +257,8 @@ void Filt3rz::setupLabels()
   labelSharpen = ttf->render("Sharpen", fontSize);
   labelRadial = ttf->render("Radial Blur", fontSize);
   labelSSAO = ttf->render("SSAO", fontSize);
+  labelSepia = ttf->render("Sepia", fontSize);
+  labelHeatSig = ttf->render("Heat Signature", fontSize);
 }
 
 void Filt3rz::renderFbo(double dt)
@@ -320,6 +344,8 @@ bool Filt3rz::main()
   drawPanel(sharpenShader, 4, 1);
   drawPanel(radialShader, 0, 0);
   drawPanel(ssaoShader, 1, 0);
+  drawPanel(sepiaShader, 2, 0);
+  drawPanel(heatsigShader, 3, 0);
 
   // draw outlines
   window->canvas->setColor(grayColor);
@@ -338,6 +364,8 @@ bool Filt3rz::main()
   drawLabel(labelSharpen, blackColor, 4, 1);
   drawLabel(labelRadial, blackColor, 0, 0);
   drawLabel(labelSSAO, blackColor, 1, 0);
+  drawLabel(labelSepia, blackColor, 2, 0);
+  drawLabel(labelHeatSig, blackColor, 3, 0);
 
   window->canvas->context->popState();
   window->context->swapBuffers();
