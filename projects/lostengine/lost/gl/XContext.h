@@ -23,7 +23,8 @@ struct XContext
   
   void vertexArray(bool enable);
   void normalArray(bool enable);
-  void texCoodArray(bool enable);
+  void colorArray(bool enable);
+  void texCoordArray(bool enable);
   void indexArray(bool enable);
   void depthTest(bool enable);
   void blend(bool enable);
@@ -35,18 +36,23 @@ struct XContext
   
   void frameBuffer(FrameBufferPtr buffer); // sets buffer as the currently active framebuffer
   void defaultFrameBuffer(); // sets the deafut framebuffer as the cutrrently active framebuffer
-  
-  void vertexPointer(void* p, int stride = 0);
-  
+    
   void camera(camera::CameraPtr cam);
+  void modelTransform(const math::Matrix& inTransform);
 
   void clear(GLbitfield flags);    
   void swapBuffers();
   void makeCurrent();
+  
+  // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
+  void draw(mesh::MeshPtr mesh);
+  
+  
 // private for now, deliberately no getters, 
 private:  
   bool vertexArrayEnabled;
   bool normalArrayEnabled;
+  bool colorArrayEnabled;
   bool texCoordArrayEnabled;
   bool indexArrayEnabled;
   bool depthTestEnabled;
@@ -58,13 +64,7 @@ private:
   ContextPtr ctx;  
   camera::CameraPtr currentCam;
   
-  // these are void* since we only need them for quick comparisons, no ownership required
-  // also, the real shared_ptr buffer types can be pretty arbitrary, since mesh can be 
-  // typed in too many ways.
-  void* currentVertexPtr;
-  void* currentNormalPtr;
-  void* currentTexCoordPtr;
-  void* currentIndexPtr;
+  math::Matrix currentModelTransform;
 };
 }
 }
