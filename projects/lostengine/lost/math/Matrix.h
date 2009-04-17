@@ -205,6 +205,12 @@ namespace math
     return result;
   }
 
+  inline bool operator!=(const lost::math::Matrix& lhs, const lost::math::Matrix& rhs)
+  {
+    return !(lhs == rhs);
+  }
+
+
   inline std::ostream& operator<<(std::ostream& s, const lost::math::Matrix& m)
   {
     s << m.m[0] << " " << m.m[4] << " " << m.m[8] << " " << m.m[12] << std::endl;
