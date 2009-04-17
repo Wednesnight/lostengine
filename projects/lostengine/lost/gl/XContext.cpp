@@ -3,6 +3,8 @@
 #include "lost/gl/gl.h"
 
 
+using namespace lost::mesh;
+
 bool getBoolParam(GLenum pname)
 {
   GLboolean result;
@@ -69,6 +71,8 @@ XContext::XContext(ContextPtr inCtx)
   blendEnabled = getParam<bool>(GL_BLEND);
   scissorEnabled = getParam<bool>(GL_SCISSOR_TEST);
   texture2DEnabled = getParam<bool>(GL_TEXTURE_2D);
+  
+  currentModelTransform.initIdentity();
 }
 
 XContext::~XContext()
@@ -78,7 +82,8 @@ XContext::~XContext()
 // FIXME: replace macros by dedficated functions that operate on member reference
 void XContext::vertexArray(bool enable) { CLIENTSTATE(vertexArrayEnabled, enable, GL_VERTEX_ARRAY); }
 void XContext::normalArray(bool enable) { CLIENTSTATE(normalArrayEnabled, enable, GL_NORMAL_ARRAY); }
-void XContext::texCoodArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
+void XContext::colorArray(bool enable) { CLIENTSTATE(colorArrayEnabled, enable, GL_COLOR_ARRAY); }
+void XContext::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
 void XContext::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
 void XContext::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
 void XContext::blend(bool enable) {SERVERSTATE(blendEnabled, enable, GL_BLEND);}
@@ -119,9 +124,67 @@ void XContext::camera(camera::CameraPtr cam)
 //  }
 } // FIXME: remove context reference from cam
 
+void XContext::modelTransform(const math::Matrix& inTransform)
+{
+  if(currentModelTransform != inTransform)
+  {
+    glMatrixMode(GL_MODELVIEW);
+    glLoadMatrixf(inTransform.m);
+  }
+}
+
 void XContext::clear(GLbitfield flags) { glClear(flags);GLDEBUG; }
 void XContext::swapBuffers() { ctx->swapBuffers(); }
 void XContext::makeCurrent() { ctx->makeCurrent(); }
+
+void XContext::draw(MeshPtr mesh)
+{
+  gl::Buffer* ib = mesh->getIndexBuffer();
+  gl::Buffer* vb = mesh->getVertexBuffer();
+  gl::Buffer* nb = mesh->getNormalBuffer();
+  gl::Buffer* cb = mesh->getColorBuffer();
+  gl::Buffer* tcb = mesh->getTexCoordBuffer();
+  
+  vertexArray(true);
+  vb->bindVertexPointer();
+  indexArray(true);
+  ib->bind();
+  if(nb)
+  {
+    normalArray(true);
+    nb->bindNormalPointer();
+  }
+  else
+  {
+    normalArray(false);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+  }
+  
+  if(cb)
+  {
+    colorArray(true);
+    cb->bindColorPointer();
+  }
+  else
+  {
+    colorArray(false);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+  }
+  
+  if(tcb)
+  {
+    texCoordArray(true);
+    tcb->bindTexCoordPointer();
+  }
+  else
+  {
+    texCoordArray(false);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);    
+  }
+  color(mesh->color);
+  modelTransform(mesh->modelTransform);
+  ib->drawElements(mesh->drawMode);
+}
 
 }
 }
