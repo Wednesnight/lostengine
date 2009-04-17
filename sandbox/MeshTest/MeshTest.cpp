@@ -26,10 +26,17 @@ bool MeshTest::startup()
   DOUT("");
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
   window->context->makeCurrent();
-  renderstate = State::create(ClearColor::create(blackColor), DepthTest::create(false));
-  linestate = State::create();
-  line = new mesh::Line2D;
+  ctx.reset(new XContext(window->context));
+  ctx->makeCurrent();
+  ctx->clearColor(blackColor);
+  line.reset(new mesh::Line2D);
+  line->update(Vec2(0,0), Vec2(400,400));  
+  line->color = yellowColor;
   cube = lost::model::Loader::obj(loader, "cube_tri.obj");
+  cube->color = greenColor;
+  lineTransform.initIdentity();
+  cubeTransform.initIdentity();
+  camera2D = window->canvas->camera;
   camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
   camera3D->fovY(45.0f);
   camera3D->depth(Vec2(1.0f, 100.0f));
@@ -42,41 +49,33 @@ bool MeshTest::startup()
 
 void MeshTest::draw2D()
 {
-  window->canvas->camera->apply();
-  window->canvas->context->pushState(renderstate);
-  window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  window->canvas->setColor(whiteColor);
-  glMatrixMode(GL_MODELVIEW);GLDEBUG;
-  glLoadIdentity();GLDEBUG;
-  line->update(Vec2(0,0), Vec2(400,400));
-  line->draw(window->context);
-  window->canvas->context->popState();
+  ctx->camera(camera2D);
+  ctx->depthTest(false);
+  ctx->draw(line);
 }
 
 void MeshTest::draw3D()
 {
-  camera3D->apply();
-  glMatrixMode(GL_MODELVIEW); GLDEBUG;
-  glLoadIdentity(); GLDEBUG;
-  window->canvas->setColor(whiteColor);
-  cube->draw(window->context);
+  ctx->camera(camera3D);
+  ctx->depthTest(true);
+  ctx->draw(cube);
 }
 
 bool MeshTest::main()
 {
-  window->context->makeCurrent();
+  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
   try
   {
-    draw2D();
     draw3D();
+    draw2D();
   }
   catch(std::exception& ex)
   {
     EOUT("caught error: "<<ex.what());
   }
   
-  window->context->swapBuffers();   
+  ctx->swapBuffers();   
   return true;
 }
 

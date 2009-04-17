@@ -5,6 +5,8 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/mesh/Line.h"
 #include "lost/camera/Camera3D.h"
+#include "lost/camera/Camera2D.h"
+#include "lost/gl/XContext.h"
 
 struct MeshTest : public lost::application::UiTasklet
 {  
@@ -18,10 +20,14 @@ struct MeshTest : public lost::application::UiTasklet
   void draw2D();
   void draw3D();
 
+  lost::gl::XContextPtr ctx;
+
   lost::gl::StatePtr            renderstate;
-  lost::gl::StatePtr            linestate;
-  lost::mesh::Line2D*           line;
+  lost::mesh::Line2DPtr           line;
+  lost::math::Matrix                  lineTransform;
   lost::mesh::MeshPtr           cube;
+  lost::math::Matrix                  cubeTransform;
+  lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
 
 };
