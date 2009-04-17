@@ -90,6 +90,7 @@ public:
   RenderBufferPtr depthBuffer;
   RenderBufferPtr stencilBuffer;
   
+  // FIXME: remove the context reference once the context is refactored, enable/disable should be called on the context, NOT on the FBO
   // context is used for switching and tracking framebuffers
   ContextPtr context;
 };
