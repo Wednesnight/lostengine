@@ -8,6 +8,7 @@
 #include <algorithm>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
+#include "lost/application/mac/ThreadAutoreleasePoolHack.h"
 
 using namespace boost;
 using namespace fhtagn::threads;
@@ -59,6 +60,7 @@ namespace lost
 
       if (startup())
       {
+        threadAutoreleasePoolHack_createPool();
         while (get_state() == RUNNING && main())
         {
           const double startTime = currentTimeMilliSeconds();
@@ -72,7 +74,9 @@ namespace lost
             // no event processing timeout since we probably don't have that many events
             eventDispatcher->processEvents(0);
           }
+          threadAutoreleasePoolHack_drainAndRecreatePool();
         }
+        threadAutoreleasePoolHack_drainPool();        
         shutdown();
       }
     }
