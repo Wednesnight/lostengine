@@ -22,11 +22,8 @@ struct MeshTest : public lost::application::UiTasklet
 
   lost::gl::XContextPtr ctx;
 
-  lost::gl::StatePtr            renderstate;
   lost::mesh::Line2DPtr           line;
-  lost::math::Matrix                  lineTransform;
   lost::mesh::MeshPtr           cube;
-  lost::math::Matrix                  cubeTransform;
   lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
 
