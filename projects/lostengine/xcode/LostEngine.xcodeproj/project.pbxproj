@@ -630,6 +630,9 @@
 		EA6711970E3E89DB00B961EC /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
+		EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
+		EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
+		EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
 		EA70F8F70ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F8FA0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F8FD0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
@@ -768,6 +771,10 @@
 		EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
+		EAC0B1570F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
+		EAC0B1580F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
+		EAC0B1590F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
+		EAC0B2610F9830B200A524D9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */; };
 		EACFE0A30ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
 		EACFE0A50ED8A09B00F9459E /* LostFontModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */; };
 		EACFE0A70ED8A09B00F9459E /* LostFontTrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */; };
@@ -1037,6 +1044,7 @@
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadAutoreleasePoolHack.m; path = mac/ThreadAutoreleasePoolHack.m; sourceTree = "<group>"; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
 		EA70F9320ED08E99000AA8CB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = al/Context.cpp; sourceTree = "<group>"; };
 		EA70F9330ED08E99000AA8CB /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = al/Buffer.cpp; sourceTree = "<group>"; };
@@ -1086,6 +1094,7 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
+		EAC0B1560F97B2A300A524D9 /* XContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XContext.cpp; sourceTree = "<group>"; };
 		EACFE09F0ED8A09B00F9459E /* LostFontTrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontTrueTypeFont.cpp; path = bindings/LostFontTrueTypeFont.cpp; sourceTree = "<group>"; };
 		EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontModel.cpp; path = bindings/LostFontModel.cpp; sourceTree = "<group>"; };
 		EACFE1090ED8A90100F9459E /* LostFontFreetypeLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFontFreetypeLibrary.cpp; path = bindings/LostFontFreetypeLibrary.cpp; sourceTree = "<group>"; };
@@ -1116,6 +1125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1BF66D0F67349200862B2F /* libLostEngine.a in Frameworks */,
+				EAC0B2610F9830B200A524D9 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,6 +1319,7 @@
 			children = (
 				8DE56F6C0F31187E0072FB28 /* Application.mm */,
 				8DE56F6E0F3118840072FB28 /* Window.mm */,
+				EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -1718,6 +1729,7 @@
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
+				EAC0B1560F97B2A300A524D9 /* XContext.cpp */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -2241,6 +2253,8 @@
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
+				EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
+				EAC0B1590F97B2A300A524D9 /* XContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2491,6 +2505,8 @@
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
+				EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
+				EAC0B1570F97B2A300A524D9 /* XContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2789,6 +2805,8 @@
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
+				EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
+				EAC0B1580F97B2A300A524D9 /* XContext.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
