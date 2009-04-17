@@ -34,8 +34,6 @@ bool MeshTest::startup()
   line->color = yellowColor;
   cube = lost::model::Loader::obj(loader, "cube_tri.obj");
   cube->color = greenColor;
-  lineTransform.initIdentity();
-  cubeTransform.initIdentity();
   camera2D = window->canvas->camera;
   camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
   camera3D->fovY(45.0f);
