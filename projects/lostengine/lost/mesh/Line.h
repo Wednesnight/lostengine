@@ -53,7 +53,9 @@ struct Line : public MESHTYPE
 };
 
 typedef Line<Mesh2D> Line2D;
+typedef boost::shared_ptr<Line2D> Line2DPtr;
 typedef Line<Mesh3D> Line3D;
+typedef boost::shared_ptr<Line3D> Line3DPtr;
 
 }
 }

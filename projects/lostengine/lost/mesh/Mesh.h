@@ -17,7 +17,25 @@ namespace mesh
 // and issues the gl calls for drawing
 struct Mesh
 {
+  math::Matrix modelTransform;
+
+  Mesh()
+  {
+    modelTransform.initIdentity();
+  }
+
+  virtual ~Mesh() {}
+
   virtual void draw(gl::ContextPtr ctx) = 0;
+  
+  virtual gl::Buffer* getIndexBuffer() = 0;
+  virtual gl::Buffer* getVertexBuffer() = 0;
+  virtual gl::Buffer* getNormalBuffer() = 0;
+  virtual gl::Buffer* getColorBuffer() = 0;
+  virtual gl::Buffer* getTexCoordBuffer() = 0;  
+  
+  GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
+  common::Color color;
 };
 
 typedef boost::shared_ptr<Mesh> MeshPtr;
@@ -38,6 +56,12 @@ struct BufferedMesh : public Mesh
   boost::shared_ptr<gl::ArrayBuffer<CT> >         colorBuffer;
   boost::shared_ptr<gl::ArrayBuffer<TCT> >        texCoordBuffer;
   
+  gl::Buffer* getIndexBuffer() { return indexBuffer.get(); }
+  gl::Buffer* getVertexBuffer() { return vertexBuffer.get(); };
+  gl::Buffer* getNormalBuffer() { return normalBuffer.get(); };
+  gl::Buffer* getColorBuffer() { return colorBuffer.get(); };
+  gl::Buffer* getTexCoordBuffer() {return texCoordBuffer.get(); };  
+  
   typedef IT IndexType;
   typedef VT VertexType;
   typedef NT NormalType;
@@ -55,8 +79,6 @@ struct BufferedMesh : public Mesh
   gl::ParamPtr  colorParam;
   gl::ParamPtr  texCoordParam;
   gl::StatePtr  meshState;
-
-  GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
       
   BufferedMesh()
   {
