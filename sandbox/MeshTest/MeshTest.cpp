@@ -26,19 +26,28 @@ MeshTest::MeshTest()
 bool MeshTest::startup()
 {
   DOUT("");
+  // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
+  // context
   window->context->makeCurrent();
   ctx.reset(new XContext(window->context));
   ctx->makeCurrent();
   ctx->clearColor(blackColor);
+  // line
   line.reset(new mesh::Line2D);
   line->update(Vec2(0,0), Vec2(400,400));
   line->material.reset(new Material);
   line->material->color = yellowColor;
+  // Quad
+//  quad.reset(new Quad2D(loader->load("stubs.jpg")));
+  quad.reset(new Quad2D(loader->load("zim.png")));
+  // cube
   cube = lost::model::Loader::obj(loader, "cube_tri.obj");
   cube->material.reset(new Material);
   cube->material->color = greenColor;
+  // cam 2D
   camera2D = window->canvas->camera;
+  // cam 3D
   camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
   camera3D->fovY(45.0f);
   camera3D->depth(Vec2(1.0f, 100.0f));
@@ -53,6 +62,7 @@ void MeshTest::draw2D()
 {
   ctx->camera(camera2D);
   ctx->depthTest(false);
+  ctx->draw(quad);
   ctx->draw(line);
 }
 

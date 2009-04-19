@@ -17,6 +17,8 @@
 		EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */; };
 		EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F9C840F8B6E1D00967F8D /* main.cpp */; };
 		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
+		EAF7FB1D0F9BD3B80065F8B6 /* zim.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FB1C0F9BD3B80065F8B6 /* zim.png */; };
+		EAF7FBA70F9BDF5A0065F8B6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C840F8B6E1D00967F8D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
+		EAF7FB1C0F9BD3B80065F8B6 /* zim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zim.png; path = ../zim.png; sourceTree = SOURCE_ROOT; };
+		EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EAF7FB1C0F9BD3B80065F8B6 /* zim.png */,
+				EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */,
 				8DF928E90F8EC1B4007A771A /* cube_tri.obj */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
@@ -236,6 +242,8 @@
 				EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */,
 				EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */,
 				8DF928EA0F8EC1B4007A771A /* cube_tri.obj in Resources */,
+				EAF7FB1D0F9BD3B80065F8B6 /* zim.png in Resources */,
+				EAF7FBA70F9BDF5A0065F8B6 /* stubs.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
