@@ -178,6 +178,15 @@ void XContext::bindActiveTextures(const std::vector<TexturePtr>& textures)
 void XContext::material(MaterialPtr mat)
 {
   color(mat->color);
+  if(mat->textures.size()>0)
+  {
+    bindActiveTextures(mat->textures);
+    texture2D(true);
+  }
+  else
+  {
+    texture2D(false);
+  }
 }
 
 
@@ -201,7 +210,6 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     normalArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;
   }
   
   if(cb)
@@ -212,7 +220,6 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     colorArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;
   }
   
   if(tcb)
@@ -223,7 +230,6 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     texCoordArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;   
   }
   
   if(mesh->material)
