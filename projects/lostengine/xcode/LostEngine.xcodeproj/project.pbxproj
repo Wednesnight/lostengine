@@ -671,7 +671,6 @@
 		EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */; };
 		EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMathRect.cpp */; };
 		EA7BE13A0E6F38A10017B031 /* LostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */; };
-		EA7BE13B0E6F38A10017B031 /* LostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */; };
 		EA7BE13C0E6F38A10017B031 /* LostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */; };
 		EA7BE13D0E6F38A10017B031 /* LostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */; };
 		EA7BE13E0E6F38A10017B031 /* LostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */; };
@@ -700,7 +699,6 @@
 		EA7BE1590E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
 		EA7BE15A0E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */; };
 		EA7BE15B0E6F38A10017B031 /* LostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */; };
-		EA7BE15C0E6F38A10017B031 /* LostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */; };
 		EA7BE15D0E6F38A10017B031 /* LostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */; };
 		EA7BE15E0E6F38A10017B031 /* LostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */; };
 		EA7BE15F0E6F38A10017B031 /* LostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */; };
@@ -730,7 +728,6 @@
 		EA7BE17A0E6F38A10017B031 /* LostModelObjParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */; };
 		EA7BE17B0E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */; };
 		EA7BE17C0E6F38A10017B031 /* LostModelMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */; };
-		EA7BE17D0E6F38A10017B031 /* LostGLDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */; };
 		EA7BE17E0E6F38A10017B031 /* LostMathVec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */; };
 		EA7BE17F0E6F38A10017B031 /* LostMathVec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */; };
 		EA7BE1800E6F38A10017B031 /* LostCameraCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */; };
@@ -1069,7 +1066,6 @@
 		EA7BE1170E6F38A10017B031 /* LostModelObjParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelObjParser.cpp; path = bindings/LostModelObjParser.cpp; sourceTree = "<group>"; };
 		EA7BE1180E6F38A10017B031 /* LostModelObjMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelObjMaterial.cpp; path = bindings/LostModelObjMaterial.cpp; sourceTree = "<group>"; };
 		EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostModelMesh.cpp; path = bindings/LostModelMesh.cpp; sourceTree = "<group>"; };
-		EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGLDraw.cpp; path = bindings/LostGLDraw.cpp; sourceTree = "<group>"; };
 		EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMathVec4.cpp; path = bindings/LostMathVec4.cpp; sourceTree = "<group>"; };
 		EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMathVec3.cpp; path = bindings/LostMathVec3.cpp; sourceTree = "<group>"; };
 		EA7BE11D0E6F38A10017B031 /* LostCameraCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCameraCamera.cpp; path = bindings/LostCameraCamera.cpp; sourceTree = "<group>"; };
@@ -1823,7 +1819,6 @@
 				EACFE0A10ED8A09B00F9459E /* LostFontModel.cpp */,
 				8DFDE6770F56D560005D3927 /* LostGLCanvas.cpp */,
 				3E650FF00E7F914D00DE5AFE /* LostGLContext.cpp */,
-				EA7BE11A0E6F38A10017B031 /* LostGLDraw.cpp */,
 				EA7BE10F0E6F38A10017B031 /* LostGLGL.cpp */,
 				3EF7AE9D0ED29ABD00CDB78A /* LostGLFrameBuffer.cpp */,
 				3E48F4F40ED6AD60003CFD2F /* LostGLMesh.cpp */,
@@ -2038,7 +2033,6 @@
 				EA7BE17A0E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,
 				EA7BE17B0E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */,
 				EA7BE17C0E6F38A10017B031 /* LostModelMesh.cpp in Sources */,
-				EA7BE17D0E6F38A10017B031 /* LostGLDraw.cpp in Sources */,
 				EA7BE17E0E6F38A10017B031 /* LostMathVec4.cpp in Sources */,
 				EA7BE17F0E6F38A10017B031 /* LostMathVec3.cpp in Sources */,
 				EA7BE1800E6F38A10017B031 /* LostCameraCamera.cpp in Sources */,
@@ -2289,7 +2283,6 @@
 				EA7BE1360E6F38A10017B031 /* LostMathVec2.cpp in Sources */,
 				EA7BE1370E6F38A10017B031 /* LostMathRect.cpp in Sources */,
 				EA7BE13A0E6F38A10017B031 /* LostModelMesh.cpp in Sources */,
-				EA7BE13B0E6F38A10017B031 /* LostGLDraw.cpp in Sources */,
 				EA7BE13C0E6F38A10017B031 /* LostMathVec4.cpp in Sources */,
 				EA7BE13D0E6F38A10017B031 /* LostMathVec3.cpp in Sources */,
 				EA7BE13E0E6F38A10017B031 /* LostCameraCamera.cpp in Sources */,
@@ -2590,7 +2583,6 @@
 				EA7BE1590E6F38A10017B031 /* LostModelObjParser.cpp in Sources */,
 				EA7BE15A0E6F38A10017B031 /* LostModelObjMaterial.cpp in Sources */,
 				EA7BE15B0E6F38A10017B031 /* LostModelMesh.cpp in Sources */,
-				EA7BE15C0E6F38A10017B031 /* LostGLDraw.cpp in Sources */,
 				EA7BE15D0E6F38A10017B031 /* LostMathVec4.cpp in Sources */,
 				EA7BE15E0E6F38A10017B031 /* LostMathVec3.cpp in Sources */,
 				EA7BE15F0E6F38A10017B031 /* LostCameraCamera.cpp in Sources */,

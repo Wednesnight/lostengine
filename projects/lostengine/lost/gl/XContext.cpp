@@ -69,9 +69,11 @@ XContext::XContext(ContextPtr inCtx)
   indexArrayEnabled = getParam<bool>(GL_INDEX_ARRAY);
   depthTestEnabled = getParam<bool>(GL_DEPTH_TEST);  
   blendEnabled = getParam<bool>(GL_BLEND);
+  currentBlendFuncSource = getParam<int>(GL_BLEND_SRC);
+  currentBlendFuncDestination = getParam<int>(GL_BLEND_DST);
   scissorEnabled = getParam<bool>(GL_SCISSOR_TEST);
   texture2DEnabled = getParam<bool>(GL_TEXTURE_2D);
-  
+  currentActiveTexture = getParam<int>(GL_ACTIVE_TEXTURE);
   currentModelTransform.initIdentity();
 }
 
@@ -87,6 +89,19 @@ void XContext::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, ena
 void XContext::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
 void XContext::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
 void XContext::blend(bool enable) {SERVERSTATE(blendEnabled, enable, GL_BLEND);}
+void XContext::blendFunc(GLenum src, GLenum dest)
+{
+  if((currentBlendFuncSource != src)
+     ||
+     (currentBlendFuncDestination != dest)
+    )
+  {
+    glBlendFunc(src, dest);
+    currentBlendFuncSource = src;
+    currentBlendFuncDestination = dest;
+  }
+}
+
 void XContext::scissor(bool enable) {SERVERSTATE(scissorEnabled, enable, GL_SCISSOR_TEST);}
 void XContext::texture2D(bool enable) {SERVERSTATE(texture2DEnabled, enable, GL_TEXTURE_2D);}
 
@@ -128,14 +143,43 @@ void XContext::modelTransform(const math::Matrix& inTransform)
 {
   if(currentModelTransform != inTransform)
   {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadMatrixf(inTransform.m);
+    glMatrixMode(GL_MODELVIEW);GLDEBUG;
+    glLoadMatrixf(inTransform.m);GLDEBUG;
   }
 }
 
 void XContext::clear(GLbitfield flags) { glClear(flags);GLDEBUG; }
 void XContext::swapBuffers() { ctx->swapBuffers(); }
 void XContext::makeCurrent() { ctx->makeCurrent(); }
+
+void XContext::activeTexture(GLenum tex)
+{
+  if(currentActiveTexture != tex)
+  {
+    glActiveTexture(tex);GLDEBUG;
+    currentActiveTexture = tex;
+  }
+}
+
+void XContext::bindActiveTextures(const std::vector<TexturePtr>& textures)
+{
+  if(textures.size() > 0)
+  {
+    uint32_t num = textures.size();
+    for(uint32_t i=0; i<num; ++i)
+    {
+      activeTexture(GL_TEXTURE0+i); // the standard guarantees GL_TEXTUREi = GL_TEXTURE0+i
+      textures[0]->bind();
+    }
+    activeTexture(GL_TEXTURE0); // reset 
+  }
+}
+
+void XContext::material(MaterialPtr mat)
+{
+  color(mat->color);
+}
+
 
 void XContext::draw(MeshPtr mesh)
 {
@@ -157,7 +201,7 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     normalArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;
   }
   
   if(cb)
@@ -168,7 +212,7 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     colorArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;
   }
   
   if(tcb)
@@ -179,9 +223,12 @@ void XContext::draw(MeshPtr mesh)
   else
   {
     texCoordArray(false);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);GLDEBUG;   
   }
-  color(mesh->color);
+  
+  if(mesh->material)
+    material(mesh->material);
+
   modelTransform(mesh->modelTransform);
   ib->drawElements(mesh->drawMode);
 }

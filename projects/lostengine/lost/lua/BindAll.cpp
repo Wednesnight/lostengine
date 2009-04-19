@@ -18,7 +18,6 @@
 #include "lost/lua/bindings/LostModelObjParser.h"
 #include "lost/lua/bindings/LostModelObjMaterial.h"
 #include "lost/lua/bindings/LostModelMesh.h"
-#include "lost/lua/bindings/LostGLDraw.h"
 #include "lost/lua/bindings/LostCameraCamera.h"
 #include "lost/lua/bindings/LostApplicationApplication.h"
 #include "lost/lua/bindings/LostResourceLoader.h"
@@ -102,7 +101,6 @@ namespace lost
       LostCommonFpsMeter(state);
       LostGLGL(state);
       LostLGLLGL(state);
-      LostGLDraw(state);
       LostGLUtils(state);
       LostPlatformPlatform(state);
       LostGLContext(state);
