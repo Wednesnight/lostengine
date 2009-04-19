@@ -1,5 +1,4 @@
-
-  #ifndef LOST_MESH_LINE
+#ifndef LOST_MESH_LINE
 #define LOST_MESH_LINE
 
 #include "lost/mesh/Mesh.h"
