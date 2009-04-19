@@ -5,7 +5,6 @@
 #include "lost/application/Application.h"
 #include "MeshTest.h"
 
-
 using namespace std;
 using namespace lost;
 using namespace lost::application;
