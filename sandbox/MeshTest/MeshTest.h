@@ -4,6 +4,7 @@
 #include "lost/application/UiTasklet.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/mesh/Line.h"
+#include "lost/mesh/Quad.h"
 #include "lost/camera/Camera3D.h"
 #include "lost/camera/Camera2D.h"
 #include "lost/gl/XContext.h"
@@ -22,8 +23,9 @@ struct MeshTest : public lost::application::UiTasklet
 
   lost::gl::XContextPtr ctx;
 
-  lost::mesh::Line2DPtr           line;
+  lost::mesh::Line2DPtr         line;
   lost::mesh::MeshPtr           cube;
+  lost::mesh::Quad2DPtr         quad;
   lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
 
