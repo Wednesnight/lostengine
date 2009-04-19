@@ -113,17 +113,18 @@ struct Quad : public MESHTYPE
       // TexCoordType::maxX instead of 1 etc., but it'll work for now
       // i.e. the values might have to be converted from normalised float texture coordinates 
       // to something else like uint8_t etc.
+      // FIXME: needs texcoord flip switch
       texcoords[0].x = 0;
-      texcoords[0].y = 0;
+      texcoords[0].y = 1;
 
       texcoords[1].x = 1;
-      texcoords[1].y = 0;
+      texcoords[1].y = 1;
 
       texcoords[2].x = 1;
-      texcoords[2].y = 1;
+      texcoords[2].y = 0;
 
       texcoords[3].x = 0;
-      texcoords[3].y = 1;
+      texcoords[3].y = 0;
       MESHTYPE::texCoordBuffer->bindBufferData(texcoords, numVertices); // don't need to subBufferData
     }
     else
