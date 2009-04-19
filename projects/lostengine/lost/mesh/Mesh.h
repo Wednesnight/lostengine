@@ -7,6 +7,7 @@
 #include "lost/gl/Context.h"
 #include "lost/gl/State.h"
 #include "lost/gl/StateParam.h"
+#include "lost/mesh/Material.h"
 
 namespace lost
 {
@@ -35,7 +36,7 @@ struct Mesh
   virtual gl::Buffer* getTexCoordBuffer() = 0;  
   
   GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
-  common::Color color;
+  MaterialPtr material;
 };
 
 typedef boost::shared_ptr<Mesh> MeshPtr;

@@ -28,6 +28,7 @@ struct XContext
   void indexArray(bool enable);
   void depthTest(bool enable);
   void blend(bool enable);
+  void blendFunc(GLenum src, GLenum dest);
   void scissor(bool enable);
   void texture2D(bool enable);
   
@@ -38,11 +39,15 @@ struct XContext
   void defaultFrameBuffer(); // sets the deafut framebuffer as the cutrrently active framebuffer
     
   void camera(camera::CameraPtr cam);
-  void modelTransform(const math::Matrix& inTransform);
+  void modelTransform(const math::Matrix& inTransform); // sets the GL_MODEL_VIEW matrix to inTransform if the new one is != old one
 
   void clear(GLbitfield flags);    
   void swapBuffers();
   void makeCurrent();
+  
+  void activeTexture(GLenum tex);
+  void bindActiveTextures(const std::vector<TexturePtr>& textures);
+  void material(mesh::MaterialPtr mat);
   
   // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
   void draw(mesh::MeshPtr mesh);
@@ -57,12 +62,15 @@ private:
   bool indexArrayEnabled;
   bool depthTestEnabled;
   bool blendEnabled;
+  GLenum currentBlendFuncSource;
+  GLenum currentBlendFuncDestination;
   bool scissorEnabled;
   bool texture2DEnabled;
   common::Color currentColor;
   common::Color currentClearColor;
   ContextPtr ctx;  
   camera::CameraPtr currentCam;
+  GLenum currentActiveTexture;
   
   math::Matrix currentModelTransform;
 };
