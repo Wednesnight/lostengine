@@ -13,6 +13,8 @@ using namespace lost::math;
 using namespace lost::event;
 using namespace lost::application;
 using namespace lost::camera;
+using namespace lost::mesh;
+
 
 MeshTest::MeshTest()
 : UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
@@ -30,10 +32,12 @@ bool MeshTest::startup()
   ctx->makeCurrent();
   ctx->clearColor(blackColor);
   line.reset(new mesh::Line2D);
-  line->update(Vec2(0,0), Vec2(400,400));  
-  line->color = yellowColor;
+  line->update(Vec2(0,0), Vec2(400,400));
+  line->material.reset(new Material);
+  line->material->color = yellowColor;
   cube = lost::model::Loader::obj(loader, "cube_tri.obj");
-  cube->color = greenColor;
+  cube->material.reset(new Material);
+  cube->material->color = greenColor;
   camera2D = window->canvas->camera;
   camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
   camera3D->fovY(45.0f);
