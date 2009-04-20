@@ -175,6 +175,16 @@ void XContext::bindActiveTextures(const std::vector<TexturePtr>& textures)
   }
 }
 
+void XContext::shader(ShaderProgramPtr prog)
+{
+  if(currentShader)
+    currentShader->disable();
+  currentShader = prog;
+  if(currentShader)
+    currentShader->enable();
+}
+
+
 void XContext::material(MaterialPtr mat)
 {
   color(mat->color);
@@ -187,6 +197,7 @@ void XContext::material(MaterialPtr mat)
   {
     texture2D(false);
   }
+  shader(mat->shader);
 }
 
 
