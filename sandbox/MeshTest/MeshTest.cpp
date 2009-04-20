@@ -55,7 +55,7 @@ bool MeshTest::startup()
   camera3D->target(Vec3(0,0,0));
   camera3D->stickToTarget(true);  
 
-  lost::gl::ShaderProgramPtr                        lightShader;
+  lost::gl::ShaderProgramPtr lightShader;
   lightShader = loadShader(loader, "light");
   lightShader->enable();
   lightShader->validate();
@@ -68,14 +68,6 @@ bool MeshTest::startup()
     DOUT("Program validated OK");
   }
   (*lightShader)["LightPosition"] = camera3D->position();
-  (*lightShader)["LightColor"]    = Color(1, 1, 1);
-  (*lightShader)["EyePosition"]   = camera3D->position();
-  (*lightShader)["Specular"]      = Color(.75, .75, .5);
-  (*lightShader)["Ambient"]       = Color(.1, .1, .1);
-  (*lightShader)["Kd"]            = 0.8f;
-  (*lightShader)["Scale"]         = Vec2(0.7, 3.7);
-  (*lightShader)["Threshold"]     = Vec2(.3, .2);
-  (*lightShader)["SurfaceColor"]  = Color(1,1,1);
   lightShader->disable();
 
   cube->material->shader = lightShader;
