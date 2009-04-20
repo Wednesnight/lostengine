@@ -8,6 +8,7 @@
 #include "lost/camera/Camera3D.h"
 #include "lost/camera/Camera2D.h"
 #include "lost/gl/XContext.h"
+#include "lost/gl/ShaderHelper.h"
 
 struct MeshTest : public lost::application::UiTasklet
 {  
@@ -28,7 +29,6 @@ struct MeshTest : public lost::application::UiTasklet
   lost::mesh::Quad2DPtr         quad;
   lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
-
 };
 
 #endif
