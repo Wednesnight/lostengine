@@ -2,6 +2,7 @@
 #include "lost/lua/State.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
+#include "lost/application/Application.h"
 #include <boost/bind.hpp>
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
@@ -82,6 +83,8 @@ namespace lost
         threadAutoreleasePoolHack_drainPool();        
         shutdown();
       }
+
+      application->notifyTaskletDeath(this);
     }
 
     bool Tasklet::runScript(const string& stage)
@@ -105,6 +108,7 @@ namespace lost
     void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
     {
       EOUT(exception.what());
+      application->notifyTaskletDeath(this, exception);
     }
 
     bool Tasklet::startup()

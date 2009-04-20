@@ -7,6 +7,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/event/Receive.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/common/Logger.h"
 
 #include <boost/program_options.hpp>
 
@@ -49,7 +50,7 @@ namespace lost
       {
         TaskletPtr tasklet(new Tasklet(loader));
         tasklet->script = vm["script"].as<std::string>();
-        tasklets.push_back(tasklet);
+        addTasklet(tasklet);
       }
 
       initialize();
@@ -60,7 +61,7 @@ namespace lost
       if(!inLoader)
         inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
-      tasklets.push_back(tasklet);
+      addTasklet(tasklet);
       initialize();
     }
 
@@ -71,7 +72,7 @@ namespace lost
       initApplication(inLoader);
       TaskletPtr tasklet(new Tasklet(loader));
       tasklet->script = inScript;
-      tasklets.push_back(tasklet);
+      addTasklet(tasklet);
       initialize();
     }
 
@@ -120,6 +121,7 @@ namespace lost
 
     void Application::addTasklet(const TaskletPtr& tasklet)
     {
+      tasklet->application = this;
       tasklets.push_back(tasklet);
     }
 
@@ -153,5 +155,46 @@ namespace lost
       }
     }
     
+
+
+    void Application::removeTasklet(Tasklet * tasklet)
+    {
+      std::list<TaskletPtr>::iterator t_end = tasklets.end();
+      std::list<TaskletPtr>::iterator t_iter = tasklets.begin();
+      for ( ; t_iter != t_end ; ++t_iter)
+      {
+        if (tasklet == t_iter->get()) {
+          break;
+        }
+      }
+
+      if (tasklets.end() == t_iter) {
+        EOUT("Oops, unknown tasklet notified us. That's not good.");
+        return;
+      }
+
+      tasklets.erase(t_iter);
+    }
+
+
+    void Application::notifyTaskletDeath(Tasklet * tasklet)
+    {
+      DOUT("Graceful end of tasklet: " << tasklet->script);
+      removeTasklet(tasklet);
+      if (tasklets.empty()) {
+        DOUT("Last tasklet died, terminating.");
+        quit();
+      }
+    }
+
+    void Application::notifyTaskletDeath(Tasklet * tasklet, std::exception const & exception)
+    {
+      DOUT("Exception ended tasklet: " << tasklet->script);
+      removeTasklet(tasklet);
+      if (tasklets.empty()) {
+        DOUT("Last tasklet died, terminating.");
+        quit();
+      }
+    }
   }
 }

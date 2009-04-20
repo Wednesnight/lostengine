@@ -13,6 +13,7 @@ namespace lost
   namespace lua { struct State; }
   namespace application
   {
+    struct Application;
   
     struct Tasklet;
     typedef boost::shared_ptr<Tasklet> TaskletPtr;
@@ -28,10 +29,11 @@ namespace lost
 
       void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
     public:
-      lost::resource::LoaderPtr       loader;
-      lost::lua::StatePtr             interpreter;
-      lost::application::ConfigPtr    config;
-      lost::event::EventDispatcherPtr eventDispatcher;
+      lost::resource::LoaderPtr         loader;
+      lost::lua::StatePtr               interpreter;
+      lost::application::ConfigPtr      config;
+      lost::event::EventDispatcherPtr   eventDispatcher;
+      lost::application::Application *  application;
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;
