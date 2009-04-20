@@ -179,9 +179,14 @@ namespace lost
 
     void Application::notifyTaskletDeath(Tasklet * tasklet)
     {
-      DOUT("Graceful end of tasklet: " << tasklet->script);
-      removeTasklet(tasklet);
-      if (tasklets.empty()) {
+      DOUT("End of tasklet: " << tasklet->script);
+      // FIXME: we need a mechanism to determine if a Tasklet wants a cleanup after a single execution
+      //removeTasklet(tasklet);
+      bool running = false;
+      for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
+        running = (idx->get() != tasklet) && (*idx)->alive();
+      if (!running)
+      {
         DOUT("Last tasklet died, terminating.");
         quit();
       }
@@ -190,11 +195,7 @@ namespace lost
     void Application::notifyTaskletDeath(Tasklet * tasklet, std::exception const & exception)
     {
       DOUT("Exception ended tasklet: " << tasklet->script);
-      removeTasklet(tasklet);
-      if (tasklets.empty()) {
-        DOUT("Last tasklet died, terminating.");
-        quit();
-      }
+      notifyTaskletDeath(tasklet);
     }
   }
 }
