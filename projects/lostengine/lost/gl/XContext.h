@@ -7,6 +7,7 @@
 #include "lost/gl/FrameBuffer.h"
 #include "lost/common/Color.h"
 #include "lost/camera/Camera.h"
+#include "lost/gl/ShaderProgram.h"
 
 namespace lost
 {
@@ -52,7 +53,7 @@ struct XContext
   // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
   void draw(mesh::MeshPtr mesh);
   
-  
+  void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
 // private for now, deliberately no getters, 
 private:  
   bool vertexArrayEnabled;
@@ -71,7 +72,7 @@ private:
   ContextPtr ctx;  
   camera::CameraPtr currentCam;
   GLenum currentActiveTexture;
-  
+  ShaderProgramPtr currentShader;
   math::Matrix currentModelTransform;
 };
 }
