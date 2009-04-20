@@ -64,6 +64,12 @@ namespace lost
       void initApplication(resource::LoaderPtr inLoader);
 
       /**
+       * Removes the specified tasklet.
+       */
+      void removeTasklet(Tasklet * tasklet);
+
+
+      /**
        * listener for ApplicationEvent.RUN()
        * handled in generic code
        * raised from platform specific code
@@ -120,6 +126,12 @@ namespace lost
        * call this to show/hide the OS mouse
        */
       void showMouse(bool visible);      
+
+      /**
+       * Called by Tasklets.
+       **/
+      void notifyTaskletDeath(Tasklet * tasklet);
+      void notifyTaskletDeath(Tasklet * tasklet, std::exception const & exception);
     };
 
   }
