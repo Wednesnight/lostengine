@@ -34,6 +34,9 @@ namespace lost
       waitForEvents(false),
       script("main.lua")
     {
+      // set error handler
+      add_error_handler(bind(&Tasklet::error, this, _1, _2));
+
       // bind lostengine lua mappings
       bindAll(*interpreter);
       // install custom module loader so require goes through resourceLoader
@@ -97,6 +100,11 @@ namespace lost
         }
       }
       return result;
+    }
+
+    void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
+    {
+      EOUT(exception.what());
     }
 
     bool Tasklet::startup()

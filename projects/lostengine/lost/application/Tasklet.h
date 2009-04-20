@@ -26,6 +26,7 @@ namespace lost
       void run(fhtagn::threads::tasklet& tasklet);
       bool runScript(const std::string& stage);
 
+      void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
     public:
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             interpreter;
