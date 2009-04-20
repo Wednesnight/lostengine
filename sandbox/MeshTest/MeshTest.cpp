@@ -68,6 +68,9 @@ bool MeshTest::startup()
     DOUT("Program validated OK");
   }
   (*lightShader)["LightPosition"] = camera3D->position();
+  (*lightShader)["LightDiffuse"]  = Color(0.5, 0.5, 0.5);
+  (*lightShader)["LightAmbient"]  = Color(0.3, 0.3, 0.3);
+  (*lightShader)["LightSpecular"] = Color(0.1, 0.1, 0.1);
   lightShader->disable();
 
   cube->material->shader = lightShader;
