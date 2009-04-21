@@ -18,12 +18,9 @@ namespace lost
       [
         namespace_("gl")
         [
+          def("loadShader", loadShader),
           class_<ShaderProgram, ShaderProgramPtr >("ShaderProgram")
             .def(constructor<>())
-          .scope
-          [
-            def("loadShader", loadShader)
-          ]
         ]
       ];
     }    
