@@ -34,6 +34,7 @@
 #include "lost/lua/bindings/LostPlatformPlatform.h"
 #include "lost/lua/bindings/LostGLContext.h"
 #include "lost/lua/bindings/LostGLState.h"
+#include "lost/lua/bindings/LostGLShaderProgram.h"
 #include "lost/lua/bindings/LostGLTexture.h"
 #include "lost/lua/bindings/LostGLMesh.h"
 #include "lost/lua/bindings/LostFontTrueTypeFont.h"
@@ -107,6 +108,7 @@ namespace lost
       LostGLState(state);
       LostGLTexture(state);
       LostGLMesh(state);
+      LostGLShaderProgram(state);
       LostFontTrueTypeFont(state);
       LostFontModel(state);
       LostFontFreetypeLibrary(state);
