@@ -107,7 +107,6 @@ struct Quad : public MESHTYPE
   {
     if(MESHTYPE::material && MESHTYPE::material->textures.size() > 0)
     {
-      DOUT("");
       MESHTYPE::texCoords(true);
       // FIXME: since texcoords can have any type, we'd probably need something like 
       // TexCoordType::maxX instead of 1 etc., but it'll work for now
@@ -129,8 +128,7 @@ struct Quad : public MESHTYPE
     }
     else
     {
-      DOUT("");
-   //   MESHTYPE::texCoords(false);
+      MESHTYPE::texCoords(false);
     }
   }
 };
