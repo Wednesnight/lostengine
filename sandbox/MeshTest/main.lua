@@ -6,7 +6,7 @@ function initShaders(loader)
   shader:enable()
   shader:validate()
   if not shader:validated() then
-    log.debug("Problem found during validation: \n"..lightShader:log())
+    log.debug("Problem found during validation: \n"..shader:log())
   else
     log.debug("Program validated OK")
   end
