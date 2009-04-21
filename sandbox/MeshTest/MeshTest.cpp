@@ -25,7 +25,6 @@ MeshTest::MeshTest()
 
 bool MeshTest::startup()
 {
-  DOUT("");
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
   // context
