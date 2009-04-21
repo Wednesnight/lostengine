@@ -21,6 +21,17 @@ namespace lost
           def("loadShader", loadShader),
           class_<ShaderProgram, ShaderProgramPtr >("ShaderProgram")
             .def(constructor<>())
+            .def("enable", &ShaderProgram::enable)
+            .def("disable", &ShaderProgram::disable)
+            .def("log", &ShaderProgram::log)
+            .def("validate", &ShaderProgram::validate)
+            .def("validated", &ShaderProgram::validated)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, GLuint inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, float inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)            
         ]
       ];
     }    
