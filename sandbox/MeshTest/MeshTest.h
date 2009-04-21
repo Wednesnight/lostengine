@@ -19,9 +19,6 @@ struct MeshTest : public lost::application::UiTasklet
 
   void keyHandler(lost::application::KeyEventPtr event);
 
-  void draw2D();
-  void draw3D();
-
   lost::gl::XContextPtr ctx;
 
   lost::mesh::Line2DPtr         line;

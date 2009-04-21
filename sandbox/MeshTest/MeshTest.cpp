@@ -2,7 +2,6 @@
 #include "lost/event/Receive.h"
 #include "lost/common/Logger.h"
 #include "lost/application/ApplicationEvent.h"
-#include "lost/model/Loader.h"
 
 using namespace std;
 using namespace lost;
@@ -51,34 +50,19 @@ bool MeshTest::startup()
   return true;
 }
 
-void MeshTest::draw2D()
-{
-  ctx->camera(camera2D);
-  ctx->depthTest(false);
-  ctx->draw(quad);
-  ctx->draw(line);
-}
-
-void MeshTest::draw3D()
-{
-  ctx->camera(camera3D);
-  ctx->depthTest(true);
-  ctx->draw(cube);
-}
-
 bool MeshTest::main()
 {
   ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
-  try
-  {
-    draw3D();
-    draw2D();
-  }
-  catch(std::exception& ex)
-  {
-    EOUT("caught error: "<<ex.what());
-  }
+  // draw 3D
+  ctx->camera(camera3D);
+  ctx->depthTest(true);
+  ctx->draw(cube);
+  // draw 2D over 3D scene
+  ctx->camera(camera2D);
+  ctx->depthTest(false);
+  ctx->draw(quad);
+  ctx->draw(line);
   
   ctx->swapBuffers();   
   return true;
