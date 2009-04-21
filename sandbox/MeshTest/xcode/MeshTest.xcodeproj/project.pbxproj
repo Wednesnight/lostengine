@@ -19,6 +19,7 @@
 		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
 		EABDD1640F9BF71100A5AB6B /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1620F9BF71100A5AB6B /* light.fs */; };
 		EABDD1650F9BF71100A5AB6B /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1630F9BF71100A5AB6B /* light.vs */; };
+		EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD616910F9CF8C400EBEDA6 /* main.lua */; };
 		EAF7FB1D0F9BD3B80065F8B6 /* zim.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FB1C0F9BD3B80065F8B6 /* zim.png */; };
 		EAF7FBA70F9BDF5A0065F8B6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
 		EABDD1620F9BF71100A5AB6B /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.fs; path = ../light.fs; sourceTree = SOURCE_ROOT; };
 		EABDD1630F9BF71100A5AB6B /* light.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.vs; path = ../light.vs; sourceTree = SOURCE_ROOT; };
+		EAD616910F9CF8C400EBEDA6 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
 		EAF7FB1C0F9BD3B80065F8B6 /* zim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zim.png; path = ../zim.png; sourceTree = SOURCE_ROOT; };
 		EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -120,6 +122,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EAD616910F9CF8C400EBEDA6 /* main.lua */,
 				EABDD1620F9BF71100A5AB6B /* light.fs */,
 				EABDD1630F9BF71100A5AB6B /* light.vs */,
 				EAF7FB1C0F9BD3B80065F8B6 /* zim.png */,
@@ -252,6 +255,7 @@
 				EAF7FBA70F9BDF5A0065F8B6 /* stubs.jpg in Resources */,
 				EABDD1640F9BF71100A5AB6B /* light.fs in Resources */,
 				EABDD1650F9BF71100A5AB6B /* light.vs in Resources */,
+				EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

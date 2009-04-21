@@ -55,8 +55,8 @@ bool MeshTest::startup()
   camera3D->target(Vec3(0,0,0));
   camera3D->stickToTarget(true);  
 
-  lost::gl::ShaderProgramPtr lightShader;
-  lightShader = loadShader(loader, "light");
+  luabind::object func = luabind::globals(*interpreter)["initShaders"];
+  ShaderProgramPtr lightShader = luabind::call_function<ShaderProgramPtr>(func, loader);  
   lightShader->enable();
   lightShader->validate();
   if(!lightShader->validated())
@@ -112,7 +112,6 @@ bool MeshTest::main()
 
 bool MeshTest::shutdown()
 {
-  DOUT("");
   return true;
 }
 
