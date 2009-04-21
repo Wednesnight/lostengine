@@ -14,7 +14,7 @@ using namespace lost::event;
 using namespace lost::application;
 using namespace lost::camera;
 using namespace lost::mesh;
-
+using namespace luabind;
 
 MeshTest::MeshTest()
 : UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
@@ -32,18 +32,6 @@ bool MeshTest::startup()
   ctx.reset(new XContext(window->context));
   ctx->makeCurrent();
   ctx->clearColor(blackColor);
-  // line
-  line.reset(new mesh::Line2D);
-  line->update(Vec2(0,0), Vec2(400,400));
-  line->material.reset(new Material);
-  line->material->color = yellowColor;
-  // Quad
-//  quad.reset(new Quad2D(loader->load("stubs.jpg")));
-  quad.reset(new Quad2D(loader->load("zim.png")));
-  // cube
-  cube = lost::model::Loader::obj(loader, "cube_tri.obj");
-  cube->material.reset(new Material);
-  cube->material->color = greenColor;
   // cam 2D
   camera2D = window->canvas->camera;
   // cam 3D
@@ -55,8 +43,11 @@ bool MeshTest::startup()
   camera3D->stickToTarget(true);  
 
   luabind::globals(*interpreter)["camera3D"] = camera3D;
-  luabind::object func = luabind::globals(*interpreter)["initShaders"];
-  cube->material->shader = luabind::call_function<ShaderProgramPtr>(func, loader);  
+  luabind::object func = luabind::globals(*interpreter)["init"];
+  call_function<void>(func, loader);
+  quad = object_cast<Quad2DPtr>(globals(*interpreter)["quad"]);
+  line = object_cast<Line2DPtr>(globals(*interpreter)["line"]);
+  cube = object_cast<Mesh3DPtr>(globals(*interpreter)["cube"]);
   return true;
 }
 

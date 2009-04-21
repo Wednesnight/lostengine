@@ -1,7 +1,12 @@
 local Color = lost.common.Color
+local Quad2D = lost.mesh.Quad2D
+local Line2D = lost.mesh.Line2D
+local Material = lost.mesh.Material
+local Vec2 = lost.math.Vec2
+
 
 -- requires camera3D to be set from C++
-function initShaders(loader)
+function init(loader)
   local shader = lost.gl.loadShader(loader, "light")
   shader:enable()
   shader:validate()
@@ -11,9 +16,18 @@ function initShaders(loader)
     log.debug("Program validated OK")
   end
   shader:set("LightPosition", camera3D:position());
-  shader:set("LightDiffuse",  Color(1.0, 0.0, 0.0));
-  shader:set("LightAmbient",  Color(1.0, 0.0, 0.0));
-  shader:set("LightSpecular", Color(1.0, 0.0, 0.0));  
+  shader:set("LightDiffuse",  Color(1.0, 1.0, 1.0));
+  shader:set("LightAmbient",  Color(1.0, 1.0, 1.0));
+  shader:set("LightSpecular", Color(1.0, 1.0, 1.0));  
   shader:disable()
-  return shader
+  
+  -- these are deliberately global, so the C++ part can fetch the easier from the interpreter
+  quad = Quad2D.create(loader:load("zim.png"))
+  line = Line2D.create(Vec2(0,0), Vec2(400,400))
+  line.material = Material.create()
+  line.material.color = Color(1,1,0)
+  cube = lost.mesh.createFromOBJ(loader:load("cube_tri.obj"));
+  cube.material = Material.create()
+  cube.material.color = Color(0,1,0)
+  cube.material.shader = shader
 end
