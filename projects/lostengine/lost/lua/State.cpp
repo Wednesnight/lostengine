@@ -1,7 +1,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/shared_array.hpp>
 #include "lost/lua/State.h"
-#include "lost/lua/ErrorHandler.h"
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
@@ -13,6 +12,8 @@
 using namespace boost;
 using namespace std;
 
+static std::map<lua_State*, lost::lua::State*> stateMap;
+
 namespace lost
 {
   namespace lua
@@ -23,13 +24,19 @@ namespace lost
     {
       state = luaL_newstate();
       luabind::open(state);      
+      stateMap[state] = this;
       // set our own error callback
-      luabind::set_pcall_callback(lost::lua::errorHandler);
+      luabind::set_pcall_callback(errorHandler);
     }
     
     State::~State()
     {
       lua_close(state);
+      std::map<lua_State*, lost::lua::State*>::iterator pos;
+      pos = stateMap.find(state);
+      if(pos != stateMap.end())
+        stateMap.erase(pos);
+      DOUT("stateMap size: "<<stateMap.size());
     }
     
     std::string State::getScriptFilename(const std::string& scriptContent, const std::string& defaultName)
@@ -44,6 +51,14 @@ namespace lost
     {
       std::string result("source: ");
       result.append(getScriptFilename(debug.source, debug.short_src));
+      return result;
+    }
+
+    int State::errorHandler(lua_State* state)
+    {
+      int result = 0;
+      State* s = stateMap[state];
+      result = s->handleError();
       return result;
     }
     
