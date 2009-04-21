@@ -19,12 +19,12 @@ void main(void)
   /**
    * diffuse
    */
-  vec4 diffuse = max(0.0, dot(fragLight, fragNormal)) * gl_FrontMaterial.diffuse * LightDiffuse;
+  vec4 diffuse = max(0.0, dot(fragLight, fragNormal)) * gl_FrontMaterial.diffuse * normalize(LightDiffuse + gl_Color);
 
   /**
    * ambient
    */
-  vec4 ambient = gl_FrontMaterial.ambient * LightAmbient;
+  vec4 ambient = gl_FrontMaterial.ambient * normalize(LightAmbient + gl_Color);
 
   /**
    * specular
@@ -32,9 +32,9 @@ void main(void)
   vec4 specular = vec4(0.0, 0.0, 0.0, 1.0);
   if (dot(fragLight, fragView) > 0.0)
   {
-    specular = pow(max(0.0, dot(fragNormal, fragHalf)), gl_FrontMaterial.shininess) * gl_FrontMaterial.specular * LightSpecular;
+    specular = pow(max(0.0, dot(fragNormal, fragHalf)), gl_FrontMaterial.shininess) * gl_FrontMaterial.specular * normalize(LightSpecular + gl_Color);
   }
 
-  vec3 color = clamp(vec3(diffuse + ambient + specular), 0.0, 1.0);
-  gl_FragColor = vec4(color, 1.0) * gl_Color;
+  vec3 color = clamp(vec3(diffuse.rgb + ambient.rgb + specular.rgb), 0.0, 1.0);
+  gl_FragColor = vec4(color, 1.0);
 }
