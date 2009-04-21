@@ -25,7 +25,7 @@ namespace lost
       bool executeScript;
 
       void run(fhtagn::threads::tasklet& tasklet);
-      bool runScript(const std::string& stage);
+      bool callScriptFunction(const std::string& funcname); // calls the given function with tasklet as parameter
 
       void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
     public:
