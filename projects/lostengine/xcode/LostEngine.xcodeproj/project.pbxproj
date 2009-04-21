@@ -513,10 +513,6 @@
 		8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
 		8DF927E30F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
 		8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
-		8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
-		8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
-		8DF928260F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
-		8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF928230F8EA7BD007A771A /* Loader.cpp */; };
 		8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
 		8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
 		8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
@@ -605,6 +601,21 @@
 		EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
+		EA2E6ACA0F9E45E300696425 /* LostMeshMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC60F9E45E300696425 /* LostMeshMesh.cpp */; };
+		EA2E6ACB0F9E45E300696425 /* LostMeshMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC70F9E45E300696425 /* LostMeshMaterial.cpp */; };
+		EA2E6ACC0F9E45E300696425 /* LostMeshQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC80F9E45E300696425 /* LostMeshQuad.cpp */; };
+		EA2E6ACD0F9E45E300696425 /* LostMeshLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMeshLine.cpp */; };
+		EA2E6ACE0F9E45E300696425 /* LostMeshMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC60F9E45E300696425 /* LostMeshMesh.cpp */; };
+		EA2E6ACF0F9E45E300696425 /* LostMeshMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC70F9E45E300696425 /* LostMeshMaterial.cpp */; };
+		EA2E6AD00F9E45E300696425 /* LostMeshQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC80F9E45E300696425 /* LostMeshQuad.cpp */; };
+		EA2E6AD10F9E45E300696425 /* LostMeshLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMeshLine.cpp */; };
+		EA2E6AD20F9E45E300696425 /* LostMeshMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC60F9E45E300696425 /* LostMeshMesh.cpp */; };
+		EA2E6AD30F9E45E300696425 /* LostMeshMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC70F9E45E300696425 /* LostMeshMaterial.cpp */; };
+		EA2E6AD40F9E45E300696425 /* LostMeshQuad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC80F9E45E300696425 /* LostMeshQuad.cpp */; };
+		EA2E6AD50F9E45E300696425 /* LostMeshLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMeshLine.cpp */; };
+		EA2E6B3D0F9E66CA00696425 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6B3C0F9E66CA00696425 /* Mesh.cpp */; };
+		EA2E6B3E0F9E66CA00696425 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6B3C0F9E66CA00696425 /* Mesh.cpp */; };
+		EA2E6B3F0F9E66CA00696425 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6B3C0F9E66CA00696425 /* Mesh.cpp */; };
 		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
 		EA3B94500E0462E200B6423B /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA3B95380E04639D00B6423B /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
@@ -976,7 +987,6 @@
 		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
 		8DE574610F314FA00072FB28 /* LostApplicationWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplicationWindow.cpp; path = bindings/LostApplicationWindow.cpp; sourceTree = "<group>"; };
-		8DF928230F8EA7BD007A771A /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = model/Loader.cpp; sourceTree = "<group>"; };
 		8DFDE5980F56D43C005D3927 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
 		8DFDE5A90F56D45E005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = iphone/Context.mm; sourceTree = "<group>"; };
 		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
@@ -1029,6 +1039,11 @@
 		EA26B9270F91498E00318279 /* DefaultLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLoader.cpp; path = resource/DefaultLoader.cpp; sourceTree = "<group>"; };
 		EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationResourceRepository.cpp; path = resource/ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
 		EA296C430F8F91B800213B73 /* UiTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiTasklet.cpp; sourceTree = "<group>"; };
+		EA2E6AC60F9E45E300696425 /* LostMeshMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMeshMesh.cpp; path = bindings/LostMeshMesh.cpp; sourceTree = "<group>"; };
+		EA2E6AC70F9E45E300696425 /* LostMeshMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMeshMaterial.cpp; path = bindings/LostMeshMaterial.cpp; sourceTree = "<group>"; };
+		EA2E6AC80F9E45E300696425 /* LostMeshQuad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMeshQuad.cpp; path = bindings/LostMeshQuad.cpp; sourceTree = "<group>"; };
+		EA2E6AC90F9E45E300696425 /* LostMeshLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMeshLine.cpp; path = bindings/LostMeshLine.cpp; sourceTree = "<group>"; };
+		EA2E6B3C0F9E66CA00696425 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = mesh/Mesh.cpp; sourceTree = "<group>"; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
 		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EA3B94720E04639D00B6423B /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
@@ -1414,7 +1429,6 @@
 		B47550660F690E0900B04249 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				8DF928230F8EA7BD007A771A /* Loader.cpp */,
 				B47550670F690E2700B04249 /* Parser.cpp */,
 			);
 			name = model;
@@ -1775,6 +1789,7 @@
 		EA4F9C110F8B6A5C00967F8D /* mesh */ = {
 			isa = PBXGroup;
 			children = (
+				EA2E6B3C0F9E66CA00696425 /* Mesh.cpp */,
 			);
 			name = mesh;
 			sourceTree = "<group>";
@@ -1832,6 +1847,10 @@
 				EA7BE1150E6F38A10017B031 /* LostMathVec2.cpp */,
 				EA7BE11C0E6F38A10017B031 /* LostMathVec3.cpp */,
 				EA7BE11B0E6F38A10017B031 /* LostMathVec4.cpp */,
+				EA2E6AC60F9E45E300696425 /* LostMeshMesh.cpp */,
+				EA2E6AC70F9E45E300696425 /* LostMeshMaterial.cpp */,
+				EA2E6AC80F9E45E300696425 /* LostMeshQuad.cpp */,
+				EA2E6AC90F9E45E300696425 /* LostMeshLine.cpp */,
 				3EBDF5C50E8386D000F9E989 /* LostModelLSystemGenerator.cpp */,
 				3EBDF5CD0E8386E200F9E989 /* LostModelLSystemRenderer.cpp */,
 				EA7BE1190E6F38A10017B031 /* LostModelMesh.cpp */,
@@ -2240,7 +2259,6 @@
 				8DA5853D0F8A4F7000A568E1 /* path.cpp in Sources */,
 				8DF927E30F8EA560007A771A /* Node.cpp in Sources */,
 				8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */,
-				8DF928250F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9110F91481A00318279 /* File.cpp in Sources */,
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
@@ -2249,6 +2267,11 @@
 				EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EAC0B1590F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EAD618430F9CFA6300EBEDA6 /* LostGLShaderProgram.cpp in Sources */,
+				EA2E6AD20F9E45E300696425 /* LostMeshMesh.cpp in Sources */,
+				EA2E6AD30F9E45E300696425 /* LostMeshMaterial.cpp in Sources */,
+				EA2E6AD40F9E45E300696425 /* LostMeshQuad.cpp in Sources */,
+				EA2E6AD50F9E45E300696425 /* LostMeshLine.cpp in Sources */,
+				EA2E6B3F0F9E66CA00696425 /* Mesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2491,7 +2514,6 @@
 				8DA585410F8A4F7000A568E1 /* path.cpp in Sources */,
 				8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */,
 				8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */,
-				8DF928270F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B90F0F91481A00318279 /* File.cpp in Sources */,
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
@@ -2500,6 +2522,11 @@
 				EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EAC0B1570F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EAD618410F9CFA6300EBEDA6 /* LostGLShaderProgram.cpp in Sources */,
+				EA2E6ACA0F9E45E300696425 /* LostMeshMesh.cpp in Sources */,
+				EA2E6ACB0F9E45E300696425 /* LostMeshMaterial.cpp in Sources */,
+				EA2E6ACC0F9E45E300696425 /* LostMeshQuad.cpp in Sources */,
+				EA2E6ACD0F9E45E300696425 /* LostMeshLine.cpp in Sources */,
+				EA2E6B3D0F9E66CA00696425 /* Mesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2547,7 +2574,6 @@
 				8DA585460F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585480F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585490F8A4F7000A568E1 /* path.cpp in Sources */,
-				8DF928260F8EA7BD007A771A /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2790,7 +2816,6 @@
 				8DA585450F8A4F7000A568E1 /* path.cpp in Sources */,
 				8DF927E10F8EA560007A771A /* Node.cpp in Sources */,
 				8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */,
-				8DF928240F8EA7BD007A771A /* Loader.cpp in Sources */,
 				EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9100F91481A00318279 /* File.cpp in Sources */,
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
@@ -2799,6 +2824,11 @@
 				EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EAC0B1580F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EAD618420F9CFA6300EBEDA6 /* LostGLShaderProgram.cpp in Sources */,
+				EA2E6ACE0F9E45E300696425 /* LostMeshMesh.cpp in Sources */,
+				EA2E6ACF0F9E45E300696425 /* LostMeshMaterial.cpp in Sources */,
+				EA2E6AD00F9E45E300696425 /* LostMeshQuad.cpp in Sources */,
+				EA2E6AD10F9E45E300696425 /* LostMeshLine.cpp in Sources */,
+				EA2E6B3E0F9E66CA00696425 /* Mesh.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

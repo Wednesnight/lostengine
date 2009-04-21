@@ -38,6 +38,16 @@ struct Line : public MESHTYPE
   {
     init();
   }
+
+  static boost::shared_ptr<Line<MESHTYPE> > create()
+  {
+    return boost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>());
+  }
+  
+  static boost::shared_ptr<Line<MESHTYPE> > create(const VertexType& start, const VertexType& end)
+  {
+    return boost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>(start, end));
+  }
   
   virtual ~Line()
   {

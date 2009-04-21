@@ -4,13 +4,18 @@
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/common/Logger.h"
-#include "lost/gl/Context.h"
-#include "lost/gl/State.h"
-#include "lost/gl/StateParam.h"
+//#include "lost/gl/Context.h"
+//#include "lost/gl/State.h"
+//#include "lost/gl/StateParam.h"
 #include "lost/mesh/Material.h"
 
 namespace lost
 {
+namespace resource
+{
+struct File;
+typedef boost::shared_ptr<File> FilePtr;
+}
 namespace mesh
 {
 
@@ -27,13 +32,13 @@ struct Mesh
 
   virtual ~Mesh() {}
 
-  virtual void draw(gl::ContextPtr ctx) = 0;
+//  virtual void draw(gl::ContextPtr ctx) {};
   
-  virtual gl::Buffer* getIndexBuffer() = 0;
-  virtual gl::Buffer* getVertexBuffer() = 0;
-  virtual gl::Buffer* getNormalBuffer() = 0;
-  virtual gl::Buffer* getColorBuffer() = 0;
-  virtual gl::Buffer* getTexCoordBuffer() = 0;  
+  virtual gl::Buffer* getIndexBuffer() { return NULL; };
+  virtual gl::Buffer* getVertexBuffer() { return NULL; };
+  virtual gl::Buffer* getNormalBuffer() { return NULL; };
+  virtual gl::Buffer* getColorBuffer() { return NULL; };
+  virtual gl::Buffer* getTexCoordBuffer() { return NULL; };  
   
   GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
   MaterialPtr material;
@@ -75,11 +80,11 @@ struct BufferedMesh : public Mesh
   typedef gl::ArrayBuffer<CT>         ColorBufferType;
   typedef gl::ArrayBuffer<TCT>        TexCoordBufferType;
 
-  gl::ParamPtr  vertexParam;
+/*  gl::ParamPtr  vertexParam;
   gl::ParamPtr  normalParam;
   gl::ParamPtr  colorParam;
   gl::ParamPtr  texCoordParam;
-  gl::StatePtr  meshState;
+  gl::StatePtr  meshState;*/
       
   BufferedMesh()
   {
@@ -90,12 +95,12 @@ struct BufferedMesh : public Mesh
   }
   
   void indices(bool v) { if(v) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
-  void vertices(bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); updateRenderState(); }
-  void normals(bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); updateRenderState();}
-  void colors(bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset(); updateRenderState(); }
-  void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); updateRenderState();}
+  void vertices(bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); /*updateRenderState();*/ }
+  void normals(bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); /*updateRenderState();*/}
+  void colors(bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset(); /*updateRenderState();*/ }
+  void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); /*updateRenderState();*/}
 
-  void updateRenderState()
+/*  void updateRenderState()
   {
     vertexParam = gl::VertexArray::create(vertexBuffer ? true : false);
     normalParam = gl::NormalArray::create(normalBuffer ? true : false);
@@ -119,7 +124,7 @@ struct BufferedMesh : public Mesh
     indexBuffer->unbind();
     vertexBuffer->unbind();
     ctx->popState();
-  }
+  }*/
   
 };
 
@@ -127,6 +132,8 @@ typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2
 typedef boost::shared_ptr<Mesh3D> Mesh3DPtr;
 typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
 typedef boost::shared_ptr<Mesh2D> Mesh2DPtr;
+
+Mesh3DPtr createFromOBJ(resource::FilePtr objFile);
 
 }
 }

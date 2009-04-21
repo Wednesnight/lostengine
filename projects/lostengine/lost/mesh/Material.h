@@ -19,7 +19,14 @@ struct Material
   std::vector<gl::TexturePtr> textures;
   common::Color               color;
   gl::ShaderProgramPtr        shader;
-  // FIXME: shaders will probably need dedicated parameter sets that can bes associated with a certin material
+  // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
+  
+  static MaterialPtr create()
+  {
+    MaterialPtr result;
+    result.reset(new Material);
+    return result;
+  }
 };
 }
 }
