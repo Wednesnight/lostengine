@@ -18,7 +18,8 @@ using namespace luabind;
 MeshTest::MeshTest()
 : UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
 {
-  
+  passedSec = lost::platform::currentTimeSeconds();
+  angle = 0;
 }
 
 
@@ -36,7 +37,7 @@ bool MeshTest::startup()
   // cam 3D
   camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
   camera3D->fovY(45.0f);
-  camera3D->depth(Vec2(1.0f, 100.0f));
+  camera3D->depth(Vec2(1.0f, 1000.0f));
   camera3D->position(Vec3(1,2,2));
   camera3D->target(Vec3(0,0,0));
   camera3D->stickToTarget(true);  
@@ -47,10 +48,19 @@ bool MeshTest::startup()
   quad = object_cast<Quad2DPtr>(globals(*interpreter)["quad"]);
   line = object_cast<Line2DPtr>(globals(*interpreter)["line"]);
   cube = object_cast<Mesh3DPtr>(globals(*interpreter)["cube"]);
+  
+  quad->modelTransform.initIdentity();
+  line->modelTransform.initIdentity();
   return true;
 }
 
-bool MeshTest::main()
+void MeshTest::update(double dt)
+{
+  angle = fmod(dt*50+angle, 360);
+  cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+}
+
+void MeshTest::draw()
 {
   ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
@@ -64,7 +74,17 @@ bool MeshTest::main()
   ctx->draw(quad);
   ctx->draw(line);
   
-  ctx->swapBuffers();   
+  ctx->swapBuffers();  
+}
+
+bool MeshTest::main()
+{
+  double currentSec = lost::platform::currentTimeSeconds();
+  double delta = currentSec - passedSec;
+  update(delta);
+  draw();
+  
+  passedSec = currentSec; 
   return true;
 }
 

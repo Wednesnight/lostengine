@@ -17,6 +17,9 @@ struct MeshTest : public lost::application::UiTasklet
   bool main();
   bool shutdown();
 
+  void update(double dt);
+  void draw();
+
   void keyHandler(lost::application::KeyEventPtr event);
 
   lost::gl::XContextPtr ctx;
@@ -26,6 +29,9 @@ struct MeshTest : public lost::application::UiTasklet
   lost::mesh::Quad2DPtr         quad;
   lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
+  
+  double passedSec;  
+  float angle;
 };
 
 #endif
