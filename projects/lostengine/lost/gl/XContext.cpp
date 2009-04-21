@@ -145,6 +145,7 @@ void XContext::modelTransform(const math::Matrix& inTransform)
   {
     glMatrixMode(GL_MODELVIEW);GLDEBUG;
     glLoadMatrixf(inTransform.m);GLDEBUG;
+    currentModelTransform = inTransform;
   }
 }
 
