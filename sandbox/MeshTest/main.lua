@@ -11,9 +11,9 @@ function initShaders(loader)
     log.debug("Program validated OK")
   end
   shader:set("LightPosition", camera3D:position());
-  shader:set("LightDiffuse", Color(1, 0.5, 0.5));
-  shader:set("LightAmbient", Color(1, 0.3, 0.3));
-  shader:set("LightSpecular", Color(1, 0.1, 0.1));  
+  shader:set("LightDiffuse",  Color(1.0, 0.0, 0.0));
+  shader:set("LightAmbient",  Color(1.0, 0.0, 0.0));
+  shader:set("LightSpecular", Color(1.0, 0.0, 0.0));  
   shader:disable()
   return shader
 end
