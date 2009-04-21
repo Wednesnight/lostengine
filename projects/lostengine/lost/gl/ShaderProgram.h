@@ -177,7 +177,7 @@ public:
     glDeleteProgram(program);
   }
 
-  Parameter& operator[](const std::string& inName)
+  Parameter& param(const std::string& inName)
   {
     ParameterMap::iterator pos = name2param.find(inName);
     if(pos != name2param.end())
@@ -188,6 +188,11 @@ public:
     {
       throw std::runtime_error("couldn't find parameter with name: '"+inName+"'");
     }
+  }
+
+  Parameter& operator[](const std::string& inName)
+  {
+    return param(inName);
   }
 
   void attach(boost::shared_ptr<Shader> inShader)
@@ -262,6 +267,13 @@ public:
   {
     return (param(GL_VALIDATE_STATUS) == GL_TRUE) ? true : false;
   }
+
+  void set(const std::string& inName, GLuint inVal) {param(inName).set(inVal);}
+  void set(const std::string& inName, float inVal) {param(inName).set(inVal);}
+  void set(const std::string& inName, const lost::common::Color& inVal) {param(inName).set(inVal);}
+  void set(const std::string& inName, const lost::math::Vec4& inVal) {param(inName).set(inVal);}
+  void set(const std::string& inName, const lost::math::Vec2& inVal) {param(inName).set(inVal);}
+  void set(const std::string& inName, const lost::math::Vec3& inVal) {param(inName).set(inVal);}
 
 private:
   void buildParamMap()
