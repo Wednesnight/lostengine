@@ -87,15 +87,15 @@ namespace lost
       application->notifyTaskletDeath(this);
     }
 
-    bool Tasklet::runScript(const string& stage)
+    bool Tasklet::callScriptFunction(const string& funcname)
     {
       bool result = true;
       if (executeScript) 
       {
-        object func = globals(*interpreter)[stage];
+        object func = globals(*interpreter)[funcname];
         if (luabind::type(func) != LUA_TFUNCTION)
         {
-          WOUT("no " << stage << "() found in <" << script << ">");
+          WOUT("no " << funcname << "() found in <" << script << ">");
         }
         else
         {
@@ -113,17 +113,17 @@ namespace lost
 
     bool Tasklet::startup()
     {
-      return runScript("startup");
+      return callScriptFunction("startup");
     }
 
     bool Tasklet::main()
     {
-      return runScript("main");
+      return callScriptFunction("main");
     }
 
     bool Tasklet::shutdown()
     {
-      return runScript("shutdown");
+      return callScriptFunction("shutdown");
     }
 
     bool Tasklet::start()
