@@ -6,6 +6,7 @@
 #include "lost/gl/Texture.h"
 #include <boost/shared_ptr.hpp>
 #include <boost/shared_array.hpp>
+#include "lost/math/Rect.h"
 
 namespace lost
 {
@@ -58,6 +59,11 @@ struct Quad : public MESHTYPE
     updateVertices(rect);
     updateTexCoords();
   }
+  
+  static boost::shared_ptr<Quad<MESHTYPE> > create() { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
+  static boost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
+  static boost::shared_ptr<Quad<MESHTYPE> > create(resource::FilePtr data) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data)); }
+  static boost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex)); }
   
   virtual ~Quad() {}
   
