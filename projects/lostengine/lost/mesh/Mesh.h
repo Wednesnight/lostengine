@@ -23,10 +23,10 @@ namespace mesh
 // and issues the gl calls for drawing
 struct Mesh
 {
-  math::Matrix modelTransform;
 
   Mesh()
   {
+    material = Material::create();
     modelTransform.initIdentity();
   }
 
@@ -42,6 +42,7 @@ struct Mesh
   
   GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
   MaterialPtr material;
+  math::Matrix modelTransform;
 };
 
 typedef boost::shared_ptr<Mesh> MeshPtr;
