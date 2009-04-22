@@ -1,7 +1,7 @@
+#include "lost/lua/bindings/LostBitmap.h"
 #include "lost/lua/lua.h"
-#include "lost/bitmap/Bitmap.h"
 
-#include "lost/lua/bindings/LostBitmapBitmap.h"
+#include "lost/bitmap/Bitmap.h"
 
 using namespace luabind;
 using namespace lost::bitmap;
@@ -10,6 +10,7 @@ namespace lost
 {
   namespace lua
   {
+
     void LostBitmapBitmap(lua_State* state)
     {
       module(state, "lost")
@@ -23,6 +24,11 @@ namespace lost
             .def_readwrite("height", &Bitmap::height)
         ]
       ];
+    }
+
+    void LostBitmap(lua_State* state)
+    {
+      LostBitmapBitmap(state);
     }
   }
 }
