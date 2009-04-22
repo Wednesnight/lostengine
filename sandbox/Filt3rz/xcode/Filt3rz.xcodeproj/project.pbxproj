@@ -26,7 +26,7 @@
 		EA26A8470F77B1B800490D18 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA26A8440F77B1B800490D18 /* global.xcconfig */; };
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
-		EA3309A30F852B710022412D /* initShaders.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA3309A20F852B710022412D /* initShaders.lua */; };
+		EA2E6BB40F9E71FE00696425 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2E6BB30F9E71FE00696425 /* main.lua */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 		EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10520F7DAFEB00CEAF99 /* light.vs */; };
@@ -102,7 +102,7 @@
 		EA26A8430F77B1B800490D18 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
-		EA3309A20F852B710022412D /* initShaders.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = initShaders.lua; path = ../initShaders.lua; sourceTree = SOURCE_ROOT; };
+		EA2E6BB30F9E71FE00696425 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
 		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
@@ -158,12 +158,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA2E6BB30F9E71FE00696425 /* main.lua */,
 				3E32FE6D0F920F750095BFCC /* cessna_tri.obj */,
 				3E32FE4F0F920D3D0095BFCC /* cube_tri.obj */,
 				8D501F460F94AA15003A3FDF /* ladybird_tri.obj */,
 				3E32FE680F920EC60095BFCC /* magnolia_tri.obj */,
 				3E416B400F949CA80037C3B7 /* sponza_tri.obj */,
-				EA3309A20F852B710022412D /* initShaders.lua */,
 				EAFA11600F7DC65800CEAF99 /* miserable.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EAFA10560F7DAFF500CEAF99 /* blur.vs */,
@@ -314,7 +314,6 @@
 				EAFA10740F7DB1F800CEAF99 /* sharpen.vs in Resources */,
 				EAFA10750F7DB1F800CEAF99 /* sharpen.fs in Resources */,
 				EAFA11610F7DC65800CEAF99 /* miserable.ttf in Resources */,
-				EA3309A30F852B710022412D /* initShaders.lua in Resources */,
 				8DF4820B0F8DD8D900DBFB9E /* radial.vs in Resources */,
 				8DF4820C0F8DD8D900DBFB9E /* radial.fs in Resources */,
 				3E32FE500F920D3D0095BFCC /* cube_tri.obj in Resources */,
@@ -328,6 +327,7 @@
 				8DFF97040F94E8F300EB04B5 /* sepia.vs in Resources */,
 				8DFF970C0F94E9DA00EB04B5 /* heatsig.fs in Resources */,
 				8DFF970D0F94E9DA00EB04B5 /* heatsig.vs in Resources */,
+				EA2E6BB40F9E71FE00696425 /* main.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

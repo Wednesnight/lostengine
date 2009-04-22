@@ -11,17 +11,18 @@
 #include "lost/font/TrueTypeFont.h"
 #include "lost/application/UiTasklet.h"
 #include "lost/mesh/Mesh.h"
+#include "lost/gl/XContext.h"
+#include "lost/mesh/Quad.h"
+#include "lost/mesh/Line.h"
 
 struct Filt3rz : public lost::application::UiTasklet
 {
 public:
   Filt3rz();
 private:
+  lost::gl::XContextPtr                             ctx;
   lost::gl::FrameBufferPtr                          framebuffer;
   lost::gl::TexturePtr                              tex;
-  lost::gl::StatePtr                                renderState;
-  lost::gl::StatePtr                                fboRenderState;
-  lost::gl::CanvasPtr                               fboCanvas;
   lost::gl::ShaderProgramPtr                        lightShader;
   lost::gl::ShaderProgramPtr                        blurShader;
   lost::gl::ShaderProgramPtr                        edgeShader;
@@ -31,7 +32,8 @@ private:
   lost::gl::ShaderProgramPtr                        ssaoShader;
   lost::gl::ShaderProgramPtr                        sepiaShader;
   lost::gl::ShaderProgramPtr                        heatsigShader;
-  lost::camera::Camera3DPtr                         cubeCam;
+  lost::camera::Camera3DPtr                         cam3D;
+  lost::camera::CameraPtr                           cam2D;
 
   lost::font::TrueTypeFontPtr                       ttf;
   lost::font::ModelPtr                              labelOriginal;
@@ -44,7 +46,12 @@ private:
   lost::font::ModelPtr                              labelSepia;
   lost::font::ModelPtr                              labelHeatSig;
 
-  lost::mesh::MeshPtr mesh;
+  lost::mesh::MeshPtr                               mesh;
+  lost::mesh::Quad2DPtr                             normalPanel;
+  lost::mesh::Quad2DPtr                             blurPanel;
+  lost::mesh::Quad2DPtr                             edgePanel;
+  lost::mesh::Quad2DPtr                             embossPanel;
+  lost::mesh::Quad2DPtr                             sharpenPanel;
 
   void keyHandler(lost::application::KeyEventPtr event);
 
@@ -52,19 +59,10 @@ private:
   virtual bool main();
   virtual bool shutdown();
 
-  void setupFBOs();
-  void setupBlurShader();
-  void setupEdgeShader();
-  void setupEmbossShader();
-  void setupSharpenShader();
-  void setupRadialShader();
-  void setupSSAOShader();
-  void setupSepiaShader();
-  void setupHeatSigShader();
-  void setupLightShader();
-  void setupLabels();
+  void update(double dt);
+  void draw();
 
-  void renderFbo(double dt);
+  void setupLabels();
 
   void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex);
   void drawLabel(lost::font::ModelPtr label,
