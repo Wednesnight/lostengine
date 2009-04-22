@@ -67,20 +67,19 @@ bool Filt3rz::startup()
 
   cam2D = window->canvas->camera;
 
-  globals(*interpreter)["fboSize"] = fboSize;
-  globals(*interpreter)["cubeCam"] = cam3D;
-  luabind::object func = luabind::globals(*interpreter)["init"];
-  call_function<void>(func, loader);
+  lua->globals["fboSize"] = fboSize;
+  lua->globals["cubeCam"] = cam3D;
+  call_function<void>(lua->globals["init"], loader);
       
-  blurShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["blurShader"]);
-  lightShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["lightShader"]);
-  edgeShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["edgeShader"]);
-  embossShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["embossShader"]);
-  sharpenShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["sharpenShader"]);
-  radialShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["radialShader"]);
-  ssaoShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["ssaoShader"]);
-  sepiaShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["sepiaShader"]);
-  heatsigShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["heatsigShader"]);
+  blurShader = object_cast<ShaderProgramPtr>(lua->globals["blurShader"]);
+  lightShader = object_cast<ShaderProgramPtr>(lua->globals["lightShader"]);
+  edgeShader = object_cast<ShaderProgramPtr>(lua->globals["edgeShader"]);
+  embossShader = object_cast<ShaderProgramPtr>(lua->globals["embossShader"]);
+  sharpenShader = object_cast<ShaderProgramPtr>(lua->globals["sharpenShader"]);
+  radialShader = object_cast<ShaderProgramPtr>(lua->globals["radialShader"]);
+  ssaoShader = object_cast<ShaderProgramPtr>(lua->globals["ssaoShader"]);
+  sepiaShader = object_cast<ShaderProgramPtr>(lua->globals["sepiaShader"]);
+  heatsigShader = object_cast<ShaderProgramPtr>(lua->globals["heatsigShader"]);
     
 //  setupLabels();
   mesh = mesh::createFromOBJ(loader->load("magnolia_tri.obj"));

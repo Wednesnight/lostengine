@@ -8,6 +8,7 @@
 //#include "lost/gl/State.h"
 //#include "lost/gl/StateParam.h"
 #include "lost/mesh/Material.h"
+#include "lost/math/Matrix.h"
 
 namespace lost
 {
