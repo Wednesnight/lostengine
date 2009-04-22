@@ -45,14 +45,14 @@ public:
     : name(inName), index(inIndex), glType(inGlType), size(inSize), paramType(inParamType)
     {}
 
-    void operator=(float v) { set(v); }
+    void operator=(float v) { setFloat(v); }
     void operator=(const lost::common::Color& inCol) { set(inCol); }
     void operator=(const lost::math::Vec2& vec) { set(vec); }
     void operator=(const lost::math::Vec3& vec) { set(vec); }
     void operator=(const lost::math::Vec4& vec) { set(vec); }
-    void operator=(GLuint v) { set(v); }
+    void operator=(GLint v) { setInt(v); }
 
-    void set(GLuint inVal)
+    void setInt(GLint inVal)
     {
       if(paramType == UNIFORM)
       {  glUniform1i(index, inVal);GLDEBUG_THROW;}
@@ -60,7 +60,7 @@ public:
       {  throw std::runtime_error("paramType undefined for: '"+name+"'");}
     }
 
-    void set(float inVal)
+    void setFloat(float inVal)
     {
       if(paramType == UNIFORM)
       {  glUniform1f(index, inVal);GLDEBUG_THROW;}
@@ -268,8 +268,8 @@ public:
     return (param(GL_VALIDATE_STATUS) == GL_TRUE) ? true : false;
   }
 
-  void set(const std::string& inName, GLuint inVal) {param(inName).set(inVal);}
-  void set(const std::string& inName, float inVal) {param(inName).set(inVal);}
+  void setInt(const std::string& inName, GLint inVal) {param(inName).setInt(inVal);}
+  void setFloat(const std::string& inName, float inVal) {param(inName).setFloat(inVal);}
   void set(const std::string& inName, const lost::common::Color& inVal) {param(inName).set(inVal);}
   void set(const std::string& inName, const lost::math::Vec4& inVal) {param(inName).set(inVal);}
   void set(const std::string& inName, const lost::math::Vec2& inVal) {param(inName).set(inVal);}
