@@ -178,7 +178,7 @@ void XContext::bindActiveTextures(const std::vector<TexturePtr>& textures)
 
 void XContext::shader(ShaderProgramPtr prog)
 {
-  if(currentShader)
+  if(currentShader && !prog)
     currentShader->disable();
   currentShader = prog;
   if(currentShader)
