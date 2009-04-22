@@ -49,8 +49,6 @@ bool MeshTest::startup()
   line = object_cast<Line2DPtr>(globals(*interpreter)["line"]);
   cube = object_cast<Mesh3DPtr>(globals(*interpreter)["cube"]);
   
-  quad->modelTransform.initIdentity();
-  line->modelTransform.initIdentity();
   return true;
 }
 
