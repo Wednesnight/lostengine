@@ -107,6 +107,22 @@ bool Filt3rz::startup()
   sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
   sharpenPanel->material->shader = sharpenShader;
   
+  radialPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  radialPanel->modelTransform = MatrixTranslation(Vec3(0,0,0));  
+  radialPanel->material->shader = radialShader;
+  
+  ssaoPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  ssaoPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,0,0));  
+  ssaoPanel->material->shader = ssaoShader;
+  
+  sepiaPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  sepiaPanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,0,0));  
+  sepiaPanel->material->shader = sepiaShader;
+  
+  heatsigPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  heatsigPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,0,0));  
+  heatsigPanel->material->shader = heatsigShader;
+  
   return true;
 }
 
@@ -142,6 +158,16 @@ bool Filt3rz::shutdown()
   sepiaShader.reset();
   heatsigShader.reset();
   cam3D.reset();
+
+  normalPanel.reset();
+  blurPanel.reset();
+  edgePanel.reset();
+  embossPanel.reset();
+  sharpenPanel.reset();
+  radialPanel.reset();
+  ssaoPanel.reset();
+  sepiaPanel.reset();
+  heatsigPanel.reset();
 
   window.reset();
 
@@ -229,6 +255,10 @@ void Filt3rz::draw()
   ctx->draw(edgePanel);
   ctx->draw(embossPanel);
   ctx->draw(sharpenPanel);
+  ctx->draw(radialPanel);
+  ctx->draw(ssaoPanel);
+  ctx->draw(sepiaPanel);
+  ctx->draw(heatsigPanel);
 
   // draw original buffer texture
 /*  window->canvas->setColor(whiteColor);

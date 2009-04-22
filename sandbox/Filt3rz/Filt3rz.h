@@ -52,6 +52,10 @@ private:
   lost::mesh::Quad2DPtr                             edgePanel;
   lost::mesh::Quad2DPtr                             embossPanel;
   lost::mesh::Quad2DPtr                             sharpenPanel;
+  lost::mesh::Quad2DPtr                             radialPanel;
+  lost::mesh::Quad2DPtr                             ssaoPanel;
+  lost::mesh::Quad2DPtr                             sepiaPanel;
+  lost::mesh::Quad2DPtr                             heatsigPanel;
 
   void keyHandler(lost::application::KeyEventPtr event);
 
