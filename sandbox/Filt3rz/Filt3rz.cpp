@@ -5,10 +5,11 @@
 #include "lost/event/Receive.h"
 #include "lost/gl/StateParam.h"
 #include "lost/application/Window.h"
-#include "lost/model/Loader.h"
 
 using namespace std;
 using namespace boost;
+using namespace lost;
+using namespace luabind;
 using namespace lost::common;
 using namespace lost::camera;
 using namespace lost::application;
@@ -17,6 +18,7 @@ using namespace lost::math;
 using namespace lost::gl;
 using namespace lost::font;
 using namespace lost::resource;
+using namespace lost::mesh;
 
 Filt3rz::Filt3rz()
 {
@@ -44,23 +46,67 @@ bool Filt3rz::startup()
   /**
    * initialize thread based members
    */
-  window->context->makeCurrent();
   DOUT("startup");
+  window->context->makeCurrent(); // FIXME: MUST be called before XContext construction or we will crash because NO context is current 
+  ctx.reset(new XContext(window->context)); 
+  ctx->makeCurrent();
 
-  renderState = State::create(ClearColor::create(grayColor));
+  fboViewport.x = 0;
+  fboViewport.y = 0;
+  fboViewport.width = fboSize.width;
+  fboViewport.height = fboSize.height;
   
-  setupFBOs();  
-  setupBlurShader();
-  setupEdgeShader();
-  setupEmbossShader();
-  setupSharpenShader();
-  setupRadialShader();
-  setupSSAOShader();
-  setupSepiaShader();
-  setupHeatSigShader();
-  setupLightShader();
-  setupLabels();
+  framebuffer = FrameBuffer::createFrameBuffer(window->context, fboSize, GL_RGBA, 24);
+  tex = framebuffer->colorTextures[0];
 
+  cam3D.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
+  cam3D->fovY(45.0f);
+  cam3D->depth(Vec2(1.0f, 1000.0f));
+  cam3D->position(Vec3(1,2,2));
+  cam3D->target(Vec3(0,0,0));
+  cam3D->stickToTarget(true);  
+
+  cam2D = window->canvas->camera;
+
+  globals(*interpreter)["fboSize"] = fboSize;
+  globals(*interpreter)["cubeCam"] = cam3D;
+  luabind::object func = luabind::globals(*interpreter)["init"];
+  call_function<void>(func, loader);
+      
+  blurShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["blurShader"]);
+  lightShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["lightShader"]);
+  edgeShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["edgeShader"]);
+  embossShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["embossShader"]);
+  sharpenShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["sharpenShader"]);
+  radialShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["radialShader"]);
+  ssaoShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["ssaoShader"]);
+  sepiaShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["sepiaShader"]);
+  heatsigShader = object_cast<ShaderProgramPtr>(globals(*interpreter)["heatsigShader"]);
+    
+//  setupLabels();
+  mesh = mesh::createFromOBJ(loader->load("magnolia_tri.obj"));
+  mesh->material = Material::create();
+  mesh->material->shader = lightShader;
+
+  normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
+
+  blurPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  blurPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,fboSize.height,0));  
+  blurPanel->material->shader = blurShader;
+
+  edgePanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  edgePanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,fboSize.height,0));  
+  edgePanel->material->shader = edgeShader;
+
+  embossPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  embossPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,fboSize.height,0));  
+  embossPanel->material->shader = embossShader;
+
+  sharpenPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
+  sharpenPanel->material->shader = sharpenShader;
+  
   return true;
 }
 
@@ -86,9 +132,6 @@ bool Filt3rz::shutdown()
   mesh.reset();
   framebuffer.reset();
   tex.reset();
-  renderState.reset();
-  fboRenderState.reset();
-  fboCanvas.reset();
   lightShader.reset();
   blurShader.reset();
   edgeShader.reset();
@@ -98,146 +141,11 @@ bool Filt3rz::shutdown()
   ssaoShader.reset();
   sepiaShader.reset();
   heatsigShader.reset();
-  cubeCam.reset();
+  cam3D.reset();
 
-  renderState.reset();
   window.reset();
 
   return true;
-}
-
-void Filt3rz::setupBlurShader()
-{
-  blurShader = loadShader(loader, "blur");
-  blurShader->enable();
-  (*blurShader)["width"] = (float)fboSize.width;
-  (*blurShader)["height"] = (float)fboSize.height;
-  (*blurShader)["colorMap"] = (GLuint)0;
-  blurShader->disable();
-}
-
-void Filt3rz::setupEdgeShader()
-{
-  edgeShader = loadShader(loader, "edge");
-  edgeShader->enable();
-  (*edgeShader)["width"] = (float)fboSize.width;
-  (*edgeShader)["height"] = (float)fboSize.height;
-  (*edgeShader)["colorMap"] = (GLuint)0;
-  edgeShader->disable();
-}
-
-void Filt3rz::setupEmbossShader()
-{
-  embossShader = loadShader(loader, "emboss");
-  embossShader->enable();
-  (*embossShader)["width"] = (float)fboSize.width;
-  (*embossShader)["height"] = (float)fboSize.height;
-  (*embossShader)["colorMap"] = (GLuint)0;
-  embossShader->disable();
-}
-
-void Filt3rz::setupSharpenShader()
-{
-  sharpenShader = loadShader(loader, "sharpen");
-  sharpenShader->enable();
-  (*sharpenShader)["width"] = (float)fboSize.width;
-  (*sharpenShader)["height"] = (float)fboSize.height;
-  (*sharpenShader)["colorMap"] = (GLuint)0;
-  sharpenShader->disable();
-}
-
-void Filt3rz::setupRadialShader()
-{
-  radialShader = loadShader(loader, "radial");
-  radialShader->enable();
-  (*radialShader)["colorMap"] = (GLuint)0;
-  radialShader->disable();
-}
-
-void Filt3rz::setupSSAOShader()
-{
-  ssaoShader = loadShader(loader, "ssao");
-  ssaoShader->enable();
-  (*ssaoShader)["texture0"]    = (GLuint)1;
-  (*ssaoShader)["texture1"]    = (GLuint)0;
-  (*ssaoShader)["camerarange"] = cubeCam->depth();
-  (*ssaoShader)["screensize"]  = fboSize;
-  ssaoShader->disable();
-}
-
-void Filt3rz::setupSepiaShader()
-{
-  sepiaShader = loadShader(loader, "sepia");
-  sepiaShader->enable();
-  (*sepiaShader)["tex"] = (GLuint)0;
-  sepiaShader->disable();
-}
-
-void Filt3rz::setupHeatSigShader()
-{
-  heatsigShader = loadShader(loader, "heatsig");
-  heatsigShader->enable();
-  (*heatsigShader)["tex"] = (GLuint)0;
-  heatsigShader->disable();
-}
-
-void Filt3rz::setupLightShader()
-{
-  lightShader = loadShader(loader, "light");
-  lightShader->enable();
-  lightShader->validate();
-  if(!lightShader->validated())
-  {
-    DOUT("Problem found during validation: \n"<<lightShader->log())
-  }
-  else
-  {
-    DOUT("Program validated OK");
-  }
-  (*lightShader)["LightPosition"] = cubeCam->position();
-  (*lightShader)["LightColor"]    = Color(1, 1, 1);
-  (*lightShader)["EyePosition"]   = cubeCam->position();
-  (*lightShader)["Specular"]      = Color(.75, .75, .5);
-  (*lightShader)["Ambient"]       = Color(.1, .1, .1);
-  (*lightShader)["Kd"]            = 0.8f;
-  (*lightShader)["Scale"]         = Vec2(0.7, 3.7);
-  (*lightShader)["Threshold"]     = Vec2(.3, .2);
-  (*lightShader)["SurfaceColor"]  = Color(1,1,1);
-  lightShader->disable();
-}
-
-
-void Filt3rz::setupFBOs()
-{
-
-  fboViewport.x = 0;
-  fboViewport.y = 0;
-  fboViewport.width = fboSize.width;
-  fboViewport.height = fboSize.height;
-  
-  framebuffer = FrameBuffer::createFrameBuffer(window->context, fboSize, GL_RGBA, 24);
-  tex = framebuffer->colorTextures[0];
-
-  cubeCam.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
-  cubeCam->fovY(45.0f);
-  cubeCam->depth(Vec2(1.0f, 100.0f));
-  cubeCam->position(Vec3(1,2,2));
-  cubeCam->target(Vec3(0,0,0));
-/* sponza
-  cubeCam->position(Vec3(0,0,0));
-  cubeCam->target(Vec3(1,2,2));
-*/
-  cubeCam->stickToTarget(true);  
-  fboCanvas.reset(new Canvas(window->context, cubeCam));
-  
-  fboRenderState = State::create(ClearColor::create(whiteColor),
-                                 DepthTest::create(true));
-
-//  mesh = lost::model::Loader::obj(loader, "cessna_tri.obj");
-//  mesh = lost::model::Loader::obj(loader, "cube_tri.obj");
-//  mesh = lost::model::Loader::obj(loader, "ladybird_tri.obj");
-  mesh = lost::model::Loader::obj(loader, "magnolia_tri.obj");
-//  mesh = lost::model::Loader::obj(loader, "sponza_tri.obj");
 }
 
 void Filt3rz::setupLabels()
@@ -261,32 +169,13 @@ void Filt3rz::setupLabels()
   labelHeatSig = ttf->render("Heat Signature", fontSize);
 }
 
-void Filt3rz::renderFbo(double dt)
+void Filt3rz::update(double dt)
 {
-  framebuffer->enable();
-  fboCanvas->camera->apply();
-  fboCanvas->context->pushState(fboRenderState);
-  fboCanvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  fboCanvas->setColor(whiteColor);
-  glMatrixMode(GL_MODELVIEW);GLDEBUG;
-  glLoadIdentity();GLDEBUG;
   if (animated)
   {
     angle = fmod(dt*50+angle, 360);
+    mesh->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
   }
-  glRotatef(angle, 0, 1, 0);
-  glRotatef(angle, 1, 0, 0);
-  lightShader->enable();
-  glEnable(GL_RESCALE_NORMAL);
-  glEnable(GL_NORMALIZE);
-  glScalef(2.0, 2.0, 2.0);
-  mesh->draw(fboCanvas->context);
-  glScalef(1.0, 1.0, 1.0);
-  glDisable(GL_NORMALIZE);
-  glDisable(GL_RESCALE_NORMAL);
-  lightShader->disable();
-  fboCanvas->context->popState();
-  framebuffer->disable();
 }
 
 void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex)
@@ -320,23 +209,29 @@ void Filt3rz::drawLabel(lost::font::ModelPtr label,
     label->render(window->canvas);
 }              
 
-bool Filt3rz::main()
+void Filt3rz::draw()
 {
-  double currentSec = lost::platform::currentTimeSeconds();
-  double delta = currentSec - passedSec;
-  // don't call this everywhere! call it at the beginning of the draw method.
-  // makeCurrent won't perform unnecessary context switches
-  window->context->makeCurrent(); 
-  
-  renderFbo(delta);
-  window->canvas->camera->apply();
-  window->canvas->context->pushState(renderState);
-  window->canvas->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glMatrixMode(GL_MODELVIEW);GLDEBUG;
-  glLoadIdentity();GLDEBUG;
+  // draw 3D cube into framebuffer, lightShader on white
+  ctx->frameBuffer(framebuffer);
+  ctx->camera(cam3D);
+  ctx->clearColor(whiteColor);
+  ctx->depthTest(true);
+  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  ctx->draw(mesh);
+  ctx->defaultFrameBuffer();
+    
+  ctx->camera(cam2D);
+  ctx->depthTest(false);
+  ctx->clearColor(grayColor);
+  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  ctx->draw(normalPanel);
+  ctx->draw(blurPanel);
+  ctx->draw(edgePanel);
+  ctx->draw(embossPanel);
+  ctx->draw(sharpenPanel);
 
   // draw original buffer texture
-  window->canvas->setColor(whiteColor);
+/*  window->canvas->setColor(whiteColor);
   window->canvas->drawRectTextured(Rect(0, fboSize.height, fboSize.width, fboSize.height), tex, false);
   drawPanel(blurShader, 1, 1);
   drawPanel(edgeShader, 2, 1);
@@ -345,19 +240,19 @@ bool Filt3rz::main()
   drawPanel(radialShader, 0, 0);
   drawPanel(ssaoShader, 1, 0);
   drawPanel(sepiaShader, 2, 0);
-  drawPanel(heatsigShader, 3, 0);
+  drawPanel(heatsigShader, 3, 0);*/
 
   // draw outlines
-  window->canvas->setColor(grayColor);
+/*  window->canvas->setColor(grayColor);
   for (unsigned int row = 0; row < numRows; row++)
   {
     for (unsigned int idx = 0; idx < numPanels; idx++)
     {
       window->canvas->drawRectOutline(Rect(idx*fboSize.width, row*fboSize.height, fboSize.width, fboSize.height));
     }
-  }
+  }*/
 
-  drawLabel(labelOriginal, blackColor, 0, 1);
+/*  drawLabel(labelOriginal, blackColor, 0, 1);
   drawLabel(labelBlur, blackColor, 1, 1);
   drawLabel(labelEdge, whiteColor, 2, 1);
   drawLabel(labelEmboss, whiteColor, 3, 1);
@@ -365,10 +260,18 @@ bool Filt3rz::main()
   drawLabel(labelRadial, blackColor, 0, 0);
   drawLabel(labelSSAO, blackColor, 1, 0);
   drawLabel(labelSepia, blackColor, 2, 0);
-  drawLabel(labelHeatSig, blackColor, 3, 0);
+  drawLabel(labelHeatSig, blackColor, 3, 0);*/
 
-  window->canvas->context->popState();
-  window->context->swapBuffers();
+  ctx->swapBuffers();
+}
+
+bool Filt3rz::main()
+{
+  double currentSec = lost::platform::currentTimeSeconds();
+  double delta = currentSec - passedSec;
+  
+  update(delta);
+  draw();
   
   passedSec = currentSec;
   return true;
