@@ -89,29 +89,29 @@ void Application::buildUI()
     // set UI area first or nothign will draw properly, width/height relastive to screen
     mUI.setArea(make_area(dim::xabs(0), dim::yabs(0), dim::wrel(1.0), dim::hrel(1.0)));
 
-/*    boost::shared_ptr<guiro::Font> zigfont = mResourceLoader.loadFont("suigeneris.ttf", 20);
-    boost::shared_ptr<guiro::Quad> renderedText = zigfont->render("Cancel", guiro::whiteColor);
+/*    lost::shared_ptr<guiro::Font> zigfont = mResourceLoader.loadFont("suigeneris.ttf", 20);
+    lost::shared_ptr<guiro::Quad> renderedText = zigfont->render("Cancel", guiro::whiteColor);
     renderedText->setArea(make_area(dim::xcenter(), dim::ycenter(), dim::wabs(renderedText->getTextureWidth()), dim::habs(renderedText->getTextureHeight())));
     
     guiro::Area full = make_area(dim::xabs(0), dim::yabs(0), dim::wrel(1), dim::hrel(1));
     
     guiro::Color maincol = guiro::Color(.4, .4, .4, 1);
 
-    boost::shared_ptr<guiro::Quad> testback(new guiro::Quad());
+    lost::shared_ptr<guiro::Quad> testback(new guiro::Quad());
     testback->setArea(make_area(dim::xabs(0), dim::yabs(0), dim::wrel(1), dim::hrel(1)));
     testback->setColor(guiro::Color(1.0, 0, 0, .8));
 
-    boost::shared_ptr<guiro::View> mainWindowBackview(new guiro::View());
-    boost::shared_ptr<guiro::Image> mainWindowBackImage = mVanillaFactory.buildRoundRectangle(mVanillaFactory.grey1);
+    lost::shared_ptr<guiro::View> mainWindowBackview(new guiro::View());
+    lost::shared_ptr<guiro::Image> mainWindowBackImage = mVanillaFactory.buildRoundRectangle(mVanillaFactory.grey1);
     mainWindowBackImage->add(renderedText);
     mainWindowBackview->setBack(mainWindowBackImage);
     mainWindowBackview->setArea(full);
         
-    boost::shared_ptr<guiro::Caption> caption = mVanillaFactory.buildCaption();
+    lost::shared_ptr<guiro::Caption> caption = mVanillaFactory.buildCaption();
     caption->setText("asdkjlj");
     caption->setArea(make_area(dim::xabs(0), dim::yabs(0), dim::wabs(100), dim::habs(100)));
 
-    boost::shared_ptr<guiro::Caption> caption2 = mVanillaFactory.buildCaption();
+    lost::shared_ptr<guiro::Caption> caption2 = mVanillaFactory.buildCaption();
     caption2->setText("knuff");
     caption2->setArea(make_area(dim::xalignright(), dim::yaligntop(), dim::wabs(100), dim::habs(100)));
 
@@ -119,14 +119,14 @@ void Application::buildUI()
     mainWindowBackview->add(caption);
     mainWindowBackview->add(caption2);
 
-    boost::shared_ptr<guiro::Window> mainWindow(new guiro::Window());
+    lost::shared_ptr<guiro::Window> mainWindow(new guiro::Window());
     mainWindow->setArea(make_area(dim::xabs(300), dim::yabs(100), dim::wabs(200), dim::habs(200)));
     mainWindow->setName("mainWindow");
     mainWindow->setBack(mainWindowBackview);
 
-    boost::shared_ptr<guiro::Window> testWindow = mVanillaFactory.buildWindow();
+    lost::shared_ptr<guiro::Window> testWindow = mVanillaFactory.buildWindow();
     testWindow->setArea(make_area(dim::xabs(30), dim::yabs(30), dim::wabs(200), dim::habs(100)));
-    boost::shared_ptr<guiro::View> testWindowContent(new guiro::View());
+    lost::shared_ptr<guiro::View> testWindowContent(new guiro::View());
     testWindowContent->setName("testWindowContent");
     shared_ptr<guiro::Button> okButton = mVanillaFactory.buildButton();
     okButton->setText("Ok");
@@ -141,12 +141,12 @@ void Application::buildUI()
     testWindowContent->add(cancelButton);
 */
 //    testWindow->setFront(testWindowContent);
-    boost::shared_ptr<guiro::Window> testWindow = mVanillaFactory.buildWindow();
+    lost::shared_ptr<guiro::Window> testWindow = mVanillaFactory.buildWindow();
     testWindow->setArea(make_area(dim::xabs(30), dim::yabs(30), dim::wabs(200), dim::habs(100)));
     testWindow->setName("testWindow");
     testWindow->setTitle("testWindow gnöGg");
     
-    boost::shared_ptr<guiro::Window> testWindow2 = mVanillaFactory.buildWindow();
+    lost::shared_ptr<guiro::Window> testWindow2 = mVanillaFactory.buildWindow();
     testWindow2->setArea(make_area(dim::xabs(60), dim::yabs(60), dim::wabs(200), dim::habs(100)));
     testWindow2->setName("testWindow2");
     testWindow2->setTitle("testWindow2");

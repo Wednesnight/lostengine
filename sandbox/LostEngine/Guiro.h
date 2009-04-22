@@ -18,34 +18,34 @@
 struct Guiro : public Visual
 {
   const lost::DisplayAttributes&                display;
-  boost::shared_ptr<lost::guiro::UserInterface> ui;
-  boost::shared_ptr<lost::guiro::ProgressBar>   progress;
+  lost::shared_ptr<lost::guiro::UserInterface> ui;
+  lost::shared_ptr<lost::guiro::ProgressBar>   progress;
   double                                        progressTime;
   lost::guiro::ResourceLoader                   resourceLoader;
-  boost::shared_ptr<lost::guiro::Label>         sliderValue;
+  lost::shared_ptr<lost::guiro::Label>         sliderValue;
 
   Guiro(const lost::DisplayAttributes& attr, lost::guiro::ResourceLoader& inResourceLoader)
   : display(attr), progressTime(0), resourceLoader(inResourceLoader)
   {
     ui.reset( new lost::guiro::UserInterface( "Guiro", display ) );
 
-    boost::shared_ptr<lost::guiro::Window> window;
-    boost::shared_ptr<lost::guiro::View>   title;
-    boost::shared_ptr<lost::guiro::View>   titleDrag;
-    boost::shared_ptr<lost::guiro::View>   content;
-    boost::shared_ptr<lost::guiro::Label>  label;
-    boost::shared_ptr<lost::guiro::Button> button;
-    boost::shared_ptr<lost::guiro::Button> button2;
+    lost::shared_ptr<lost::guiro::Window> window;
+    lost::shared_ptr<lost::guiro::View>   title;
+    lost::shared_ptr<lost::guiro::View>   titleDrag;
+    lost::shared_ptr<lost::guiro::View>   content;
+    lost::shared_ptr<lost::guiro::Label>  label;
+    lost::shared_ptr<lost::guiro::Button> button;
+    lost::shared_ptr<lost::guiro::Button> button2;
 
-    boost::shared_ptr<lost::guiro::Slider> slider;
-    boost::shared_ptr<lost::guiro::Image>  sliderBackground;
-    boost::shared_ptr<lost::guiro::Image>  sliderHandle;
+    lost::shared_ptr<lost::guiro::Slider> slider;
+    lost::shared_ptr<lost::guiro::Image>  sliderBackground;
+    lost::shared_ptr<lost::guiro::Image>  sliderHandle;
 
-    boost::shared_ptr<lost::guiro::Edit>  edit;
-    boost::shared_ptr<lost::guiro::Image> image;
+    lost::shared_ptr<lost::guiro::Edit>  edit;
+    lost::shared_ptr<lost::guiro::Image> image;
 
-    boost::shared_ptr<lost::fonts::Font> font1;
-    boost::shared_ptr<lost::fonts::Font> font2;
+    lost::shared_ptr<lost::fonts::Font> font1;
+    lost::shared_ptr<lost::fonts::Font> font2;
 
     font1.reset(new lost::fonts::BitmapFont(GLUT_BITMAP_8_BY_13));
     font2 = resourceLoader.loadFont("suigeneris.ttf", 18);

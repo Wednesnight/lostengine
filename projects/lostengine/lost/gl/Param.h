@@ -5,6 +5,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
+#include "lost/platform/shared_ptr.h"
 
 namespace lost
 {
@@ -12,7 +13,7 @@ namespace lost
   {
     
     struct Param;
-    typedef boost::shared_ptr<Param> ParamPtr;
+    typedef lost::shared_ptr<Param> ParamPtr;
 
     struct Param
     {

@@ -5,7 +5,6 @@
 #include "lost/al/Listener.h"
 #include "lost/al/Source.h"
 #include "lost/al/Buffer.h"
-#include <boost/shared_ptr.hpp>
 
 #include "stb_vorbis.h"
 

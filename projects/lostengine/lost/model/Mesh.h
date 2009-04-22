@@ -98,7 +98,7 @@ namespace lost
       
     };
     
-    inline std::ostream& operator << (std::ostream& stream, const boost::shared_ptr<Mesh>& m)
+    inline std::ostream& operator << (std::ostream& stream, const lost::shared_ptr<Mesh>& m)
     {
       stream << "Mesh:" << std::endl;
       stream << std::endl;

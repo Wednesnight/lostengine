@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/resource/DefaultLoader.h"
 
 #include "lost/application/AccelerometerEvent.h"
@@ -34,14 +32,14 @@
 #include "lost/resource/File.h"
 //#include "lost/resource/Loader.h"
 
-#define GET_POINTER(name) template name* get_pointer(boost::shared_ptr<name>&);\
-                          template name const* get_pointer(boost::shared_ptr<name const>&);
+#define GET_POINTER(name) template name* get_pointer(lost::shared_ptr<name>&);\
+                          template name const* get_pointer(lost::shared_ptr<name const>&);
 
-// this block is essential for correct luabind handling of boost::shared_ptr
+// this block is essential for correct luabind handling of lost::shared_ptr
 namespace luabind
 {
   template<class T>
-  T* get_pointer(boost::shared_ptr<T>& p)
+  T* get_pointer(lost::shared_ptr<T>& p)
   {
     return p.get();
   }

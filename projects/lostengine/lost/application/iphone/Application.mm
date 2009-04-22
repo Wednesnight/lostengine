@@ -36,7 +36,7 @@ lost::application::Application* currentApplication;
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
   parent = currentApplication;
-  for (std::map<std::string, boost::shared_ptr<lost::application::Window> >::iterator idx = parent->windows.begin(); idx != parent->windows.end(); ++idx)
+  for (std::map<std::string, lost::shared_ptr<lost::application::Window> >::iterator idx = parent->windows.begin(); idx != parent->windows.end(); ++idx)
   {
     (*idx).second->open();
   }

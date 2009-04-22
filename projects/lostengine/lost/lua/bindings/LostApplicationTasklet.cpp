@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/event/EventDispatcher.h"
 #include "lost/lua/lua.h"
 #include "lost/application/Tasklet.h"

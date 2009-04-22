@@ -148,7 +148,7 @@
   // FIXME: virtual keycode translation!
   if (parent)
   {
-    boost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
+    lost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
     keyEvent->window    = parent->shared_from_this();
     keyEvent->key       = [self translateKeyCode: [event keyCode]];
     // TODO: UTF character
@@ -216,7 +216,7 @@
 {
   if (parent && [self validEvent: event type:type])
   {
-    boost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
+    lost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];
     NSPoint abs = [NSEvent mouseLocation];
     mouseEvent->window  = parent->shared_from_this();

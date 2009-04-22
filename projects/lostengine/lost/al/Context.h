@@ -11,11 +11,11 @@ struct Device;
 
 struct Context
 {
-  Context(boost::shared_ptr<Device> device);
+  Context(lost::shared_ptr<Device> device);
   Context();
   virtual ~Context();
 
-  void initWithDevice(boost::shared_ptr<Device> device);
+  void initWithDevice(lost::shared_ptr<Device> device);
 
   void makeCurrent();
 
@@ -35,7 +35,7 @@ struct Context
   static std::string extensions();
 
   ALCcontext* context;
-  boost::shared_ptr<Device> device;
+  lost::shared_ptr<Device> device;
 };
 }
 }

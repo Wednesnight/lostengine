@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/math/Vec4.h"
 
@@ -17,7 +16,7 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Vec4, boost::shared_ptr<Vec4> >("Vec4")
+          class_<Vec4, lost::shared_ptr<Vec4> >("Vec4")
             .def(constructor<>())
             .def(constructor<const Vec4&>())
             .def(constructor<float, float, float, float>())

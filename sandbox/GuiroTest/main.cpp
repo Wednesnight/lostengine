@@ -12,7 +12,7 @@ int main(int argn, char** args)
 {
   try
   {
-    static boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
+    static lost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
 //    app->runLoopWaitsForEvents(true);
     app->run();
   }

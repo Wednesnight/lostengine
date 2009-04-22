@@ -7,7 +7,6 @@
 #include "generator.h"
 #include "RenderEnvironment.h"
 #include "Effect.h"
-#include <boost/shared_ptr.hpp>
 #include "RenderStats.h"
 
 class MainRenderer
@@ -30,7 +29,7 @@ private:
 	SDL_Surface* screen;	
     RenderEnvironment& renderenv;
     RenderStats stats;
-    boost::shared_ptr<Effect> currentEffect;
+    lost::shared_ptr<Effect> currentEffect;
 };
 
 #endif

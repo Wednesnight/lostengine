@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/model/obj/Parser.h"
 
 //#define BOOST_SPIRIT_DEBUG
@@ -8,7 +7,6 @@
 #include <boost/spirit/actor/decrement_actor.hpp>
 #include <boost/spirit/phoenix/binders.hpp>
 #include <boost/spirit/attribute.hpp>
-#include <boost/shared_ptr.hpp>
 
 
 namespace lost {
@@ -22,11 +20,11 @@ namespace {
  **/
 struct MaterialAttributesNext
 {
-  std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
+  std::map<std::string, lost::shared_ptr<MaterialAttributes> >& materials;
   std::string&                                                   name;
-  boost::shared_ptr<MaterialAttributes>&                         attributes;
+  lost::shared_ptr<MaterialAttributes>&                         attributes;
 
-  MaterialAttributesNext(std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials, std::string& inName, boost::shared_ptr<MaterialAttributes>& inAttributes)
+  MaterialAttributesNext(std::map<std::string, lost::shared_ptr<MaterialAttributes> >& inMaterials, std::string& inName, lost::shared_ptr<MaterialAttributes>& inAttributes)
   : materials(inMaterials),
     name(inName),
     attributes(inAttributes)
@@ -57,10 +55,10 @@ struct MaterialAttributesAssign
   } AssignType;
 
   AssignType                             type;
-  boost::shared_ptr<MaterialAttributes>& attributes;
+  lost::shared_ptr<MaterialAttributes>& attributes;
   math::Vec4&                            vec;
 
-  MaterialAttributesAssign(AssignType inType, boost::shared_ptr<MaterialAttributes>& inAttributes, math::Vec4& inVec)
+  MaterialAttributesAssign(AssignType inType, lost::shared_ptr<MaterialAttributes>& inAttributes, math::Vec4& inVec)
   : type(inType),
     attributes(inAttributes),
     vec(inVec)
@@ -94,10 +92,10 @@ struct MaterialAttributesAssign
 struct MaterialParser
 {
   std::string&                                                   filename;
-  boost::shared_ptr<resource::Loader>&                           loader;
-  std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
+  lost::shared_ptr<resource::Loader>&                           loader;
+  std::map<std::string, lost::shared_ptr<MaterialAttributes> >& materials;
 
-  MaterialParser(std::string& inFilename, boost::shared_ptr<resource::Loader>& inLoader, std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials)
+  MaterialParser(std::string& inFilename, lost::shared_ptr<resource::Loader>& inLoader, std::map<std::string, lost::shared_ptr<MaterialAttributes> >& inMaterials)
   : filename(inFilename),
     loader(inLoader),
     materials(inMaterials)
@@ -108,13 +106,13 @@ struct MaterialParser
   void operator()(IteratorT first, IteratorT last) const
   {
     DOUT("loading");
-    boost::shared_ptr<resource::File> file = loader->load(filename);
+    lost::shared_ptr<resource::File> file = loader->load(filename);
     if (file)
     {
       DOUT("file is valid");
       std::string currentName;
 
-      boost::shared_ptr<MaterialAttributes> currentAttributes;
+      lost::shared_ptr<MaterialAttributes> currentAttributes;
 
       math::Vec4 ambient;
       math::Vec4 diffuse;
@@ -169,9 +167,9 @@ struct MaterialParser
  **/
 struct MaterialInit
 {
-  boost::shared_ptr<Material>& material;
+  lost::shared_ptr<Material>& material;
 
-  MaterialInit(boost::shared_ptr<Material>& inMaterial)
+  MaterialInit(lost::shared_ptr<Material>& inMaterial)
   : material(inMaterial)
   {
   }
@@ -190,17 +188,17 @@ struct MaterialInit
  **/
 struct MaterialAssign
 {
-  boost::shared_ptr<Material>& material;
-  std::map<std::string, boost::shared_ptr<MaterialAttributes> >& materials;
+  lost::shared_ptr<Material>& material;
+  std::map<std::string, lost::shared_ptr<MaterialAttributes> >& materials;
   std::string& materialName;
   unsigned short& materialFaceOffset;
-  boost::shared_ptr<MaterialGroup>& group;
+  lost::shared_ptr<MaterialGroup>& group;
 
-  MaterialAssign(boost::shared_ptr<Material>& inMaterial,
-                 std::map<std::string, boost::shared_ptr<MaterialAttributes> >& inMaterials,
+  MaterialAssign(lost::shared_ptr<Material>& inMaterial,
+                 std::map<std::string, lost::shared_ptr<MaterialAttributes> >& inMaterials,
                  std::string& inMaterialName,
                  unsigned short& inMaterialFaceOffset,
-                 boost::shared_ptr<MaterialGroup>& inGroup)
+                 lost::shared_ptr<MaterialGroup>& inGroup)
   : material(inMaterial),
     materials(inMaterials),
     materialName(inMaterialName),
@@ -217,7 +215,7 @@ struct MaterialAssign
     if (materialName.size() && materials.find(materialName) != materials.end())
     {
       DOUT("adding material group: " << materialName);
-      boost::shared_ptr<MaterialAttributes> attributes = materials[materialName];
+      lost::shared_ptr<MaterialAttributes> attributes = materials[materialName];
       DOUT("resetting group");
       group.reset(new MaterialGroup(materialFaceOffset, 0, attributes->ambient, attributes->diffuse, attributes->specular));
       DOUT("adding group to material");
@@ -233,9 +231,9 @@ struct MaterialAssign
  **/
 struct MaterialGroupIncrement
 {
-  boost::shared_ptr<MaterialGroup>& group;
+  lost::shared_ptr<MaterialGroup>& group;
 
-  MaterialGroupIncrement(boost::shared_ptr<MaterialGroup>& inGroup)
+  MaterialGroupIncrement(lost::shared_ptr<MaterialGroup>& inGroup)
   : group(inGroup)
   {
   }
@@ -307,7 +305,7 @@ struct MeshAssignFacePoint
 /*****************************************************************************
  * Parser
  **/
-Parser::Parser(boost::shared_ptr<resource::Loader> inLoader)
+Parser::Parser(lost::shared_ptr<resource::Loader> inLoader)
   : loader(inLoader)
 {
 }
@@ -328,10 +326,10 @@ Parser::getExtension()
 
 
 
-boost::shared_ptr<lost::model::Mesh>
+lost::shared_ptr<lost::model::Mesh>
 Parser::initMesh(const std::string& inData)
 {
-  boost::shared_ptr<lost::model::Mesh> result;
+  lost::shared_ptr<lost::model::Mesh> result;
 
   unsigned short vertexCount = 0;
   unsigned short faceCount   = 0;
@@ -374,10 +372,10 @@ Parser::initMesh(const std::string& inData)
 
 
 bool
-Parser::parseMesh(const std::string& inFilename, boost::shared_ptr<Mesh>& outMesh, boost::shared_ptr<Material>& outMaterial)
+Parser::parseMesh(const std::string& inFilename, lost::shared_ptr<Mesh>& outMesh, lost::shared_ptr<Material>& outMaterial)
 {
   bool result = false;
-  boost::shared_ptr<resource::File> file = loader->load(inFilename);
+  lost::shared_ptr<resource::File> file = loader->load(inFilename);
   if (file)
   {
     std::string data = file->str();
@@ -397,7 +395,7 @@ Parser::parseMesh(const std::string& inFilename, boost::shared_ptr<Mesh>& outMes
       std::string    materialName;
       unsigned short materialFaceOffset;
 
-      boost::shared_ptr<MaterialGroup> currentGroup;
+      lost::shared_ptr<MaterialGroup> currentGroup;
 
       boost::spirit::rule<> mtllib_p = boost::spirit::str_p("mtllib")
                                        >> +boost::spirit::space_p >> (+(boost::spirit::anychar_p-boost::spirit::space_p))[boost::spirit::assign_a(materialFile)][MaterialParser(materialFile, loader, materials)]

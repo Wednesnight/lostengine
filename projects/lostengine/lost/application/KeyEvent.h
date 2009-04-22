@@ -9,7 +9,7 @@ namespace lost
   namespace application
   {
     struct KeyEvent;
-    typedef boost::shared_ptr<KeyEvent> KeyEventPtr;
+    typedef lost::shared_ptr<KeyEvent> KeyEventPtr;
 
     struct KeyEvent : public InputEvent
     {

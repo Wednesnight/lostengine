@@ -1,5 +1,4 @@
 #include <iostream>
-#include <boost/shared_ptr.hpp>
 
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/xml_oarchive.hpp>
@@ -61,7 +60,7 @@ struct LostEngine : tech::Engine
     VanillaUIBuilder    vanillaUIbuilder;
     FuglyUIBuilder      fuglyUIbuilder;
 
-    LostEngine( boost::shared_ptr<Config> inConfig )
+    LostEngine( lost::shared_ptr<Config> inConfig )
       : tech::Engine::Engine(inConfig),
         display(*inConfig),
         vanillaUIbuilder(inConfig),

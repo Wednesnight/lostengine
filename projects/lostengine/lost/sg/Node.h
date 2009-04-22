@@ -14,7 +14,7 @@ namespace sg
 {
 
 struct Node;
-typedef boost::shared_ptr<Node> NodePtr;
+typedef lost::shared_ptr<Node> NodePtr;
   
 /** A container for state information, geometry, transforms and materials.
  * The render order:

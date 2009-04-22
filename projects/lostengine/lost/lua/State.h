@@ -2,7 +2,6 @@
 #define LOST_LUA_STATE_H
 
 #include "lost/lua/lua.h"
-#include "lost/forward/boost"
 #include <string>
 #include <map>
 #include "lost/resource/File.h"
@@ -15,11 +14,11 @@ namespace lost
   {
 
     struct State;
-    typedef boost::shared_ptr<State> StatePtr;
+    typedef lost::shared_ptr<State> StatePtr;
 
     struct State : boost::noncopyable
     {
-      State(boost::shared_ptr<resource::Loader> inLoader = boost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
+      State(lost::shared_ptr<resource::Loader> inLoader = lost::shared_ptr<resource::Loader>(new resource::DefaultLoader));
       ~State();
 
       std::string getScriptFilename(const std::string& scriptContent, const std::string& defaultName);
@@ -50,7 +49,7 @@ namespace lost
 
       // loads and executes a file
       int doFile(const std::string& inAbsolutePath);
-      int doFile(const boost::shared_ptr<lost::resource::File>& inFile);
+      int doFile(const lost::shared_ptr<lost::resource::File>& inFile);
 
       // executes the given string as a lua program
       int doString(const std::string& inData);
@@ -61,7 +60,7 @@ namespace lost
       lua_State* state;
       int callstackSize;
       std::map<std::string, std::string> fileHashes;
-      boost::shared_ptr<resource::Loader> loader;
+      lost::shared_ptr<resource::Loader> loader;
     };
 
   }

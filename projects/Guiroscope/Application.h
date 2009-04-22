@@ -3,7 +3,6 @@
 #define __APPLICATION_H__
 
 #include "MainRenderer.h"
-#include <boost/shared_ptr.hpp>
 #include "guiro/ResourceLoader.h"
 #include "guiro/FontFactory.h"
 #include "guiro/VanillaFactory.h"
@@ -38,7 +37,7 @@ private:
     void clicky(guiro::Entity* inEntity);
 
 
-	boost::shared_ptr<MainRenderer>	renderer;
+	lost::shared_ptr<MainRenderer>	renderer;
    	SDL_TimerID		renderTimerId;
     Uint32          lasttick;
     guiro::Screen   mScreen;

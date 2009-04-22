@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/XContext.h"
 #include "lost/gl/gl.h"
 

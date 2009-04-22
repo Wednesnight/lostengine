@@ -15,7 +15,6 @@
 #include "Pfonts.h"
 #include "Imagombies.h"
 #include "Guiro.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/util/FpsMeter.h"
 #include "lost/platform/Platform.h"
 
@@ -27,19 +26,19 @@ namespace tech = glfw;
 struct LostEngine : tech::Engine
 {
     DisplayAttributes           display;
-    boost::shared_ptr<Visual>   currentVisual;
+    lost::shared_ptr<Visual>   currentVisual;
     bool                        showHelp;
     Cock::Line                  mouseOrigin;
 
-    boost::shared_ptr<Visual>   cock;
-    boost::shared_ptr<Visual>   dots;
-    boost::shared_ptr<Visual>   mouse;
-    boost::shared_ptr<Visual>   zombong;
-    boost::shared_ptr<Visual>   pfonts;
-    boost::shared_ptr<Visual>   imagombies;
-    boost::shared_ptr<Visual>   guirotest;
+    lost::shared_ptr<Visual>   cock;
+    lost::shared_ptr<Visual>   dots;
+    lost::shared_ptr<Visual>   mouse;
+    lost::shared_ptr<Visual>   zombong;
+    lost::shared_ptr<Visual>   pfonts;
+    lost::shared_ptr<Visual>   imagombies;
+    lost::shared_ptr<Visual>   guirotest;
 
-    std::vector<boost::shared_ptr<Visual> > visuals;
+    std::vector<lost::shared_ptr<Visual> > visuals;
     unsigned long visualindex;
     lost::util::FpsMeter        fpsmeter;
     lost::guiro::ResourceLoader resourceLoader;
@@ -71,13 +70,13 @@ struct LostEngine : tech::Engine
       timer.add("redraw", 0.015);
       timer["redraw"].connect(boost::bind(&LostEngine::redraw, this, _1));
 
-      visuals.push_back(boost::shared_ptr<Visual>(new StupidDots(display)));
-      visuals.push_back(boost::shared_ptr<Visual>(new Cock(display)));
-      visuals.push_back(boost::shared_ptr<Visual>(new MouseFuxx0r(display)));
-      visuals.push_back(boost::shared_ptr<Visual>(new Zombong(display)));
-      visuals.push_back(boost::shared_ptr<Visual>(new Pfonts(display, resourceLoader)));
-      visuals.push_back(boost::shared_ptr<Visual>(new Imagombies(display, resourceLoader)));
-      visuals.push_back(boost::shared_ptr<Visual>(new Guiro(display, resourceLoader)));
+      visuals.push_back(lost::shared_ptr<Visual>(new StupidDots(display)));
+      visuals.push_back(lost::shared_ptr<Visual>(new Cock(display)));
+      visuals.push_back(lost::shared_ptr<Visual>(new MouseFuxx0r(display)));
+      visuals.push_back(lost::shared_ptr<Visual>(new Zombong(display)));
+      visuals.push_back(lost::shared_ptr<Visual>(new Pfonts(display, resourceLoader)));
+      visuals.push_back(lost::shared_ptr<Visual>(new Imagombies(display, resourceLoader)));
+      visuals.push_back(lost::shared_ptr<Visual>(new Guiro(display, resourceLoader)));
       visualindex = 0;
       currentVisual = visuals[visualindex];
 

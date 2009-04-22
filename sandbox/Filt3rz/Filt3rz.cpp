@@ -1,7 +1,6 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
-#include "lost/application/Applicationevent.h"
 #include "Filt3rz.h"
+
+#include "lost/application/Applicationevent.h"
 #include "lost/event/Receive.h"
 #include "lost/gl/StateParam.h"
 #include "lost/application/Window.h"

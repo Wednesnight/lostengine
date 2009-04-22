@@ -1,7 +1,6 @@
 #ifndef EVENTQUEUE_H
 #define EVENTQUEUE_H
 
-#include <boost/shared_ptr.hpp>
 #include "Event.h"
 #include <list>
 
@@ -10,12 +9,12 @@ struct EventQueue
 {
   std::size_t size() { return eventqueue.size(); }
 
-  void push(boost::shared_ptr<Event> event){eventqueue.push_back(event); }
-  boost::shared_ptr<Event> pop()
+  void push(lost::shared_ptr<Event> event){eventqueue.push_back(event); }
+  lost::shared_ptr<Event> pop()
   {
     if(size() > 0)
     {
-      boost::shared_ptr<Event> result = eventqueue.front();
+      lost::shared_ptr<Event> result = eventqueue.front();
       eventqueue.pop_front();
       return result;
     }
@@ -24,7 +23,7 @@ struct EventQueue
   }
 
 private:
-  std::list<boost::shared_ptr<Event> > eventqueue;
+  std::list<lost::shared_ptr<Event> > eventqueue;
 };
 
 #endif

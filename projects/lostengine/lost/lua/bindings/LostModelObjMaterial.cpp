@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/model/obj/Material.h"
 
@@ -19,7 +18,7 @@ namespace lost
         [
           namespace_("obj")
           [
-            class_<Material, boost::shared_ptr<Material> >("Material")
+            class_<Material, lost::shared_ptr<Material> >("Material")
             .def(constructor<>()) 
           ]
         ]

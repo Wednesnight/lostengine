@@ -41,16 +41,7 @@
       #define __PRETTY_FUNCTION__ "unknown"
     #endif
   #endif
-
-  // May not actually be correct, but at least it'll fail loudly and early
-  // if anyone uses lost::shared_ptr.
-  #define HAVE_BOOST_SHARED_PTR
-#else
-  // Assuming this is a GCC-based platform, we'll expect tr1 to exist.
-  #define HAVE_TR1_SHARED_PTR
 #endif
-
-#include "lost/platform/shared_ptr.h"
 
 namespace lost
 {

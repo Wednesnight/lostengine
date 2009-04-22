@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/common/FpsMeter.h"
 
@@ -18,7 +16,7 @@ namespace lost
       [
         namespace_("common")
         [
-          class_<FpsMeter, boost::shared_ptr<FpsMeter> >("FpsMeter")
+          class_<FpsMeter, lost::shared_ptr<FpsMeter> >("FpsMeter")
           .def(constructor<>()) 
           .def("render", &FpsMeter::render)
           .def_readwrite("width", &FpsMeter::width)

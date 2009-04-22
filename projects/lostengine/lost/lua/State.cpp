@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/State.h"
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
@@ -19,7 +17,7 @@ namespace lost
   namespace lua
   {
     
-    State::State(boost::shared_ptr<resource::Loader> inLoader)
+    State::State(lost::shared_ptr<resource::Loader> inLoader)
     : callstackSize(10), loader(inLoader)
     {
       state = luaL_newstate();
@@ -130,7 +128,7 @@ namespace lost
       return doString(data);
     }
     
-    int State::doFile(const boost::shared_ptr<lost::resource::File>& inFile)
+    int State::doFile(const lost::shared_ptr<lost::resource::File>& inFile)
     {
       std::string data(inFile->str());
       md5wrapper  md5;

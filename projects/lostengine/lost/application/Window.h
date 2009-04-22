@@ -1,8 +1,6 @@
 #ifndef LOST_APPLICATION_WINDOW_H
 #define LOST_APPLICATION_WINDOW_H
 
-#include <boost/enable_shared_from_this.hpp>
-
 #include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"
 #include "lost/math/Rect.h"
@@ -13,7 +11,7 @@ namespace lost
   namespace application
   {
     struct Window;
-    typedef boost::shared_ptr<Window> WindowPtr;
+    typedef lost::shared_ptr<Window> WindowPtr;
       
     
     struct WindowParams
@@ -34,7 +32,7 @@ namespace lost
       }
     };
 
-    struct Window : public boost::enable_shared_from_this<Window>
+    struct Window : public lost::enable_shared_from_this<Window>
     {
     private:
       /**
@@ -50,28 +48,28 @@ namespace lost
       void finalize();
 
       /**
-       * don't use ctors directly! leave them private since we need to be held by a boost::shared_ptr,
+       * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
        * otherwise shared_from_this() will fail!
        */
-      Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+      Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
              const WindowParams& inParams);
     public:
       /**
        * the target for all events received by the window (typically key/mouse events)
        */
       // FIXME: should be private
-      boost::shared_ptr<lost::event::EventDispatcher> dispatcher;
+      lost::shared_ptr<lost::event::EventDispatcher> dispatcher;
       /**
        * generic interface to the window's OpenGL context
        */
       // FIXME: should probably be read-only
-      boost::shared_ptr<gl::Context> context;
+      lost::shared_ptr<gl::Context> context;
 
       /**
        * canvas for drawing operations
        */
       // FIXME: should probably be read-only
-      boost::shared_ptr<gl::Canvas> canvas;
+      lost::shared_ptr<gl::Canvas> canvas;
       
       /**
        * holds generic window params
@@ -79,9 +77,9 @@ namespace lost
       WindowParams params;
       
       /**
-       * static ctor helpers, make sure that we're held by a boost::shared_ptr
+       * static ctor helpers, make sure that we're held by a lost::shared_ptr
        */
-      static boost::shared_ptr<Window> create(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+      static lost::shared_ptr<Window> create(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
                                               const WindowParams& inParams);
       ~Window();
 

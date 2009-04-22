@@ -7,14 +7,14 @@ using namespace luabind;
 // required for shared_ptr management of Events by Lua/luabind
 namespace luabind {
     template<class Event>
-    KeyEvent* get_pointer(boost::shared_ptr<KeyEvent>& p) 
+    KeyEvent* get_pointer(lost::shared_ptr<KeyEvent>& p) 
     {
         return p.get(); 
     }
 
     template<class Event>
-    boost::shared_ptr<const Event>* 
-    get_const_holder(boost::shared_ptr<Event>*)
+    lost::shared_ptr<const Event>* 
+    get_const_holder(lost::shared_ptr<Event>*)
     {
         return 0;
     }
@@ -24,7 +24,7 @@ void bindKeyEvent(lost::lua::State& state)
 {
   module(state)
   [
-    class_<KeyEvent, Event, boost::shared_ptr<Event> >("KeyEvent")
+    class_<KeyEvent, Event, lost::shared_ptr<Event> >("KeyEvent")
       .def(constructor<string>())      
       .def_readwrite("keycode", &KeyEvent::keycode)
   ];

@@ -23,27 +23,27 @@ namespace lost
 
       struct MaterialAttributes
       {
-        boost::shared_ptr<math::Vec4> ambient;
-        boost::shared_ptr<math::Vec4> diffuse;
-        boost::shared_ptr<math::Vec4> specular;
+        lost::shared_ptr<math::Vec4> ambient;
+        lost::shared_ptr<math::Vec4> diffuse;
+        lost::shared_ptr<math::Vec4> specular;
       };
 
       struct Parser
       {
       private:
-        boost::shared_ptr<resource::Loader> loader;
+        lost::shared_ptr<resource::Loader> loader;
 
-        std::map<std::string, boost::shared_ptr<MaterialAttributes> > materials;
+        std::map<std::string, lost::shared_ptr<MaterialAttributes> > materials;
 
-        boost::shared_ptr<lost::model::Mesh> initMesh(const std::string& inData);
+        lost::shared_ptr<lost::model::Mesh> initMesh(const std::string& inData);
 
       public:
-        Parser(boost::shared_ptr<resource::Loader> inLoader);
+        Parser(lost::shared_ptr<resource::Loader> inLoader);
         virtual ~Parser();
 
         virtual std::string getExtension();
 
-        bool parseMesh(const std::string& inFilename, boost::shared_ptr<Mesh>& outMesh, boost::shared_ptr<Material>& outMaterial);
+        bool parseMesh(const std::string& inFilename, lost::shared_ptr<Mesh>& outMesh, lost::shared_ptr<Material>& outMaterial);
       };
     }
   }

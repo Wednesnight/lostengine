@@ -39,14 +39,14 @@ struct Line : public MESHTYPE
     init();
   }
 
-  static boost::shared_ptr<Line<MESHTYPE> > create()
+  static lost::shared_ptr<Line<MESHTYPE> > create()
   {
-    return boost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>());
+    return lost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>());
   }
   
-  static boost::shared_ptr<Line<MESHTYPE> > create(const VertexType& start, const VertexType& end)
+  static lost::shared_ptr<Line<MESHTYPE> > create(const VertexType& start, const VertexType& end)
   {
-    return boost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>(start, end));
+    return lost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>(start, end));
   }
   
   virtual ~Line()
@@ -62,9 +62,9 @@ struct Line : public MESHTYPE
 };
 
 typedef Line<Mesh2D> Line2D;
-typedef boost::shared_ptr<Line2D> Line2DPtr;
+typedef lost::shared_ptr<Line2D> Line2DPtr;
 typedef Line<Mesh3D> Line3D;
-typedef boost::shared_ptr<Line3D> Line3DPtr;
+typedef lost::shared_ptr<Line3D> Line3DPtr;
 
 }
 }

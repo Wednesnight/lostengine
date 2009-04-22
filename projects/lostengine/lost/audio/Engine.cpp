@@ -20,7 +20,7 @@ Engine::Engine()
 
 Engine::Engine(const std::string& inDeviceId)
 {
-	context.reset(new al::Context(boost::shared_ptr<al::Device>(new al::Device(inDeviceId))));
+	context.reset(new al::Context(lost::shared_ptr<al::Device>(new al::Device(inDeviceId))));
 	context->makeCurrent();
 }
 
@@ -30,7 +30,7 @@ Engine::~Engine()
 	sources.clear();
 }
 
-boost::shared_ptr<audio::Source> Engine::createSource()
+lost::shared_ptr<audio::Source> Engine::createSource()
 {
 	shared_ptr<Source> result(new Source);
 

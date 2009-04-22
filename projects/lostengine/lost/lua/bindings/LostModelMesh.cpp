@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/model/Mesh.h"
 
@@ -17,7 +16,7 @@ namespace lost
       [
         namespace_("model")
         [
-          class_<Mesh, boost::shared_ptr<Mesh> >("Mesh")
+          class_<Mesh, lost::shared_ptr<Mesh> >("Mesh")
           .def(constructor<>()) 
           .def(constructor<unsigned int, unsigned int>()) 
           //.def("get", &TouchEvent::get) 

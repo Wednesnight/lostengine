@@ -38,10 +38,10 @@ void Application::finalize()
   delete hiddenMembers;
 }
 
-boost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
+lost::shared_ptr<Window> Application::createWindow(const std::string& uniqueId, const WindowParams& params)
 {
   DOUT("Application::createWindow()");
-  boost::shared_ptr<Window> result(new Window(params));
+  lost::shared_ptr<Window> result(new Window(params));
   windows[uniqueId] = result;
   return result;
 }
@@ -50,7 +50,7 @@ void Application::run()
 {
   DOUT("Application::run()");
 
-  boost::function<void (boost::shared_ptr<lost::event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
+  boost::function<void (lost::shared_ptr<lost::event::Event>)> f = boost::bind(&MainLoop::quitEventHandler, mainLoop.get(), _1);
   addEventListener(lost::application::ApplicationEvent::QUIT(), f);
   // start the main loop
   if(mainLoop)
@@ -82,7 +82,7 @@ void Application::run()
 void Application::quit()
 {
   DOUT("Application::quit()");
-  boost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
+  lost::shared_ptr<lost::application::ApplicationEvent> appEvent(new lost::application::ApplicationEvent(""));
   appEvent->type = lost::application::ApplicationEvent::QUIT();
   queueEvent(appEvent);
   if(mainLoopThread)

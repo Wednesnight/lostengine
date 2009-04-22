@@ -16,12 +16,12 @@ namespace lost
         unsigned int faceOffset;
         unsigned int faceLength;
         
-        boost::shared_ptr<math::Vec4> ambient;
-        boost::shared_ptr<math::Vec4> diffuse;
-        boost::shared_ptr<math::Vec4> specular;
+        lost::shared_ptr<math::Vec4> ambient;
+        lost::shared_ptr<math::Vec4> diffuse;
+        lost::shared_ptr<math::Vec4> specular;
         
         MaterialGroup(unsigned int inFaceOffset, unsigned int inFaceLength, 
-                      boost::shared_ptr<math::Vec4> inAmbient, boost::shared_ptr<math::Vec4> inDiffuse, boost::shared_ptr<math::Vec4> inSpecular)
+                      lost::shared_ptr<math::Vec4> inAmbient, lost::shared_ptr<math::Vec4> inDiffuse, lost::shared_ptr<math::Vec4> inSpecular)
         : faceOffset(inFaceOffset),
         faceLength(inFaceLength)
         {
@@ -30,7 +30,7 @@ namespace lost
           if (inSpecular) specular = inSpecular;
         }
       };
-      typedef std::vector<boost::shared_ptr<MaterialGroup> > MaterialGroups;
+      typedef std::vector<lost::shared_ptr<MaterialGroup> > MaterialGroups;
 
       struct Material
       {

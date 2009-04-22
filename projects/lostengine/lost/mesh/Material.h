@@ -1,7 +1,6 @@
 #ifndef LOST_MESH_MATERIAL_H
 #define LOST_MESH_MATERIAL_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/Texture.h"
 #include <vector>
@@ -12,7 +11,7 @@ namespace mesh
 {
 
 struct Material;
-typedef boost::shared_ptr<Material> MaterialPtr;
+typedef lost::shared_ptr<Material> MaterialPtr;
 
 struct Material
 {

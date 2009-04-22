@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/gl/Canvas.h"
 
@@ -21,7 +20,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<Canvas, boost::shared_ptr<Canvas> >("Canvas")
+          class_<Canvas, lost::shared_ptr<Canvas> >("Canvas")
             .def(constructor<const shared_ptr<Context>&, const Rect&>())
             .def(constructor<const shared_ptr<Context>&, const shared_ptr<Camera>&>())
             .def_readonly("context", &Canvas::context)

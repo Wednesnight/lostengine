@@ -2,7 +2,6 @@
 #define MOUSEEVENT_H
 
 #include "Event.h"
-#include <boost/shared_ptr.hpp>
 
 struct MouseEvent : public Event
 {
@@ -13,23 +12,23 @@ struct MouseEvent : public Event
   MouseEvent(const std::string& inType) : Event(inType) {}
   virtual ~MouseEvent() {}
 
-  static boost::shared_ptr<MouseEvent> createMouseEvent(const std::string inType)
+  static lost::shared_ptr<MouseEvent> createMouseEvent(const std::string inType)
   {
-    boost::shared_ptr<MouseEvent> result =  boost::shared_ptr<MouseEvent>(new MouseEvent(inType));
+    lost::shared_ptr<MouseEvent> result =  lost::shared_ptr<MouseEvent>(new MouseEvent(inType));
     return result;
   }
 
-  static boost::shared_ptr<MouseEvent> createMouseDownEvent()
+  static lost::shared_ptr<MouseEvent> createMouseDownEvent()
   {
     return createMouseEvent(MOUSE_DOWN);
   }
 
-  static boost::shared_ptr<MouseEvent> createMouseUpEvent()
+  static lost::shared_ptr<MouseEvent> createMouseUpEvent()
   {
     return createMouseEvent(MOUSE_UP);
   }
 
-  static boost::shared_ptr<MouseEvent> createMouseMoveEvent()
+  static lost::shared_ptr<MouseEvent> createMouseMoveEvent()
   {
     return createMouseEvent(MOUSE_MOVE);
   }

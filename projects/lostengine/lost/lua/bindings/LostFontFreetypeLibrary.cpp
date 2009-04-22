@@ -1,10 +1,9 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/bindings/LostFontFreetypeLibrary.h"
 #include "lost/font/freetype/Library.h"
 
 using namespace luabind;
-using namespace boost;
+using namespace lost;
 using namespace lost::font::freetype;
 
 shared_ptr<Library> create()
@@ -24,7 +23,7 @@ namespace lost
         [
           namespace_("freetype")
           [
-            class_<Library, boost::shared_ptr<Library> >("Library")
+            class_<Library, lost::shared_ptr<Library> >("Library")
               .def(constructor<>())
               .scope
               [

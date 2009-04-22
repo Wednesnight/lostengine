@@ -1,5 +1,4 @@
 #include "VanillaUIBuilder.h"
-#include <boost/shared_ptr.hpp>
 
 #include "lost/guiro/factory/VanillaFactory.h"
 
@@ -11,18 +10,18 @@ using namespace lost::guiro::control;
 using namespace lost::guiro::common;
 using namespace lost::guiro::factory;
 
-VanillaUIBuilder::VanillaUIBuilder(boost::shared_ptr<lost::common::Config> inConfig)
+VanillaUIBuilder::VanillaUIBuilder(lost::shared_ptr<lost::common::Config> inConfig)
 : UserInterfaceBuilder(inConfig)
 {
 }
 
 
-shared_ptr<ControlFactory> VanillaUIBuilder::createControlFactory(boost::shared_ptr<Config> inConfig)
+shared_ptr<ControlFactory> VanillaUIBuilder::createControlFactory(lost::shared_ptr<Config> inConfig)
 {
   return shared_ptr<VanillaFactory>(new VanillaFactory(inConfig));
 }
 
-void VanillaUIBuilder::addControls(boost::shared_ptr<UserInterface> ui, boost::shared_ptr<ControlFactory> factory)
+void VanillaUIBuilder::addControls(lost::shared_ptr<UserInterface> ui, lost::shared_ptr<ControlFactory> factory)
 {
   // demo objects
   shared_ptr<Button>     simpleButton;

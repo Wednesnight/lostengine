@@ -1,7 +1,7 @@
 #ifndef FILT3RZ_H
 #define FILT3RZ_H
 
-#include <boost/shared_ptr.hpp>
+#include "lost/platform/shared_ptr.h"
 #include "lost/application/Application.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/gl/FrameBuffer.h"

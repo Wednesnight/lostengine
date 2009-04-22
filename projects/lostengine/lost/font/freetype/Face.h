@@ -13,7 +13,7 @@ namespace lost
     namespace freetype
     {
       struct Face;
-      typedef boost::shared_ptr<Face> FacePtr;
+      typedef lost::shared_ptr<Face> FacePtr;
     
       struct Face
       {

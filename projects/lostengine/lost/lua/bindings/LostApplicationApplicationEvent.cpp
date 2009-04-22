@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/lua/EventCast.h"
@@ -19,7 +18,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ApplicationEvent, Event, boost::shared_ptr<ApplicationEvent> >("ApplicationEvent")
+          class_<ApplicationEvent, Event, lost::shared_ptr<ApplicationEvent> >("ApplicationEvent")
           .def(constructor<std::string>()) 
           .scope
           [

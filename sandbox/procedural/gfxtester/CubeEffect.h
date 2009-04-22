@@ -4,17 +4,16 @@
 #include "Effect.h"
 #include <GLUT/glut.h>
 #include "../lib/generator.h"
-#include <boost/shared_ptr.hpp>
 
 
 struct CubeEffect : public Effect
 {
-    boost::shared_ptr<generator> anglegen;
-    boost::shared_ptr<generator> xgen;
-    boost::shared_ptr<generator> ygen;
-    boost::shared_ptr<generator> rgen;
-    boost::shared_ptr<generator> ggen;
-    boost::shared_ptr<generator> bgen;
+    lost::shared_ptr<generator> anglegen;
+    lost::shared_ptr<generator> xgen;
+    lost::shared_ptr<generator> ygen;
+    lost::shared_ptr<generator> rgen;
+    lost::shared_ptr<generator> ggen;
+    lost::shared_ptr<generator> bgen;
 //    GLfloat mat_specular[] = {1.0, 1.0, 1.0, 1.0};
 
     float globalx;
@@ -25,30 +24,30 @@ struct CubeEffect : public Effect
     CubeEffect(RenderEnvironment& renv)
     : Effect(renv)
     {
-        anglegen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(100)),
-                                   boost::shared_ptr<generator>(new constgen(2000))));
+        anglegen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(100)),
+                                   lost::shared_ptr<generator>(new constgen(2000))));
                             
         circletime = 7000;                    
                                    
-        xgen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(5)),
-                                   boost::shared_ptr<generator>(new constgen(circletime))));
-        ygen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(5)),
-                                   boost::shared_ptr<generator>(new constgen(circletime*1.0f))));
+        xgen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(5)),
+                                   lost::shared_ptr<generator>(new constgen(circletime))));
+        ygen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(5)),
+                                   lost::shared_ptr<generator>(new constgen(circletime*1.0f))));
 
-        rgen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(.5)),
-                                   boost::shared_ptr<generator>(new constgen(.5)),
-                                   boost::shared_ptr<generator>(new constgen(3000))));
+        rgen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(.5)),
+                                   lost::shared_ptr<generator>(new constgen(.5)),
+                                   lost::shared_ptr<generator>(new constgen(3000))));
 
-        ggen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(.7)),
-                                   boost::shared_ptr<generator>(new constgen(.2)),
-                                   boost::shared_ptr<generator>(new constgen(5000))));
+        ggen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(.7)),
+                                   lost::shared_ptr<generator>(new constgen(.2)),
+                                   lost::shared_ptr<generator>(new constgen(5000))));
 
-        bgen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(.1)),
-                                   boost::shared_ptr<generator>(new constgen(2)),
-                                   boost::shared_ptr<generator>(new constgen(7000))));
+        bgen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(.1)),
+                                   lost::shared_ptr<generator>(new constgen(2)),
+                                   lost::shared_ptr<generator>(new constgen(7000))));
 
         globalx;
         globaly;

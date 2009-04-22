@@ -15,7 +15,7 @@ namespace lost
        * NOTE: call this only after you're initialised your resource loader,
        * your state AND bound all lostengine classes to your state.
        */
-      void install(State& inState, boost::shared_ptr<resource::Loader> inLoader);
+      void install(State& inState, lost::shared_ptr<resource::Loader> inLoader);
     }
   }
 }

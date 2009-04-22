@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/Window.h"
 
@@ -17,7 +16,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Window, boost::shared_ptr<Window> >("Window")
+          class_<Window, lost::shared_ptr<Window> >("Window")
             .def("open", &Window::open)
             .def("close", &Window::close)
             .def_readonly("context", &Window::context)
@@ -27,7 +26,7 @@ namespace lost
             [
               def("create", &Window::create)
             ],
-          class_<WindowParams, boost::shared_ptr<WindowParams> >("WindowParams")
+          class_<WindowParams, lost::shared_ptr<WindowParams> >("WindowParams")
             .def(constructor<const std::string&, const lost::math::Rect&>())
             .def_readwrite("caption", &WindowParams::caption)
             .def_readwrite("rect", &WindowParams::rect)

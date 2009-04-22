@@ -6,14 +6,13 @@
 #include "lost/fonts/TrueTypeFont.h"
 #include "lost/math/Generator.h"
 #include "lost/guiro/ResourceLoader.h"
-#include <boost/shared_ptr.hpp>
 
 struct Imagombies : public Visual
 {
   const lost::DisplayAttributes& display;
   lost::image::ImageLoader loader;
-  boost::shared_ptr<lost::fonts::TrueTypeFont> blindfold;
-  boost::shared_ptr<lost::image::Image> zombie;
+  lost::shared_ptr<lost::fonts::TrueTypeFont> blindfold;
+  lost::shared_ptr<lost::image::Image> zombie;
   lost::math::generator::sine xgen;
 
   float curx;

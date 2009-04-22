@@ -13,7 +13,6 @@
 #include "lost/gl/VertexShader.h"
 #include "lost/gl/FragmentShader.h"
 #include "lost/gl/ShaderProgram.h"
-#include <boost/shared_ptr.hpp>
 #include <fstream>
 #include "lost/common/FileHelpers.h"
 #include "lost/gl/Shader.h"
@@ -22,7 +21,7 @@
 struct Shad0r
 {
   lost::common::FpsMeter fpsMeter;
-  boost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram;
+  lost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram;
 
   Shad0r(lost::common::DisplayAttributes& inDisplayAttributes)
   : displayAttributes(inDisplayAttributes)

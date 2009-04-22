@@ -1,7 +1,6 @@
 #ifndef LOST_EVENT_EVENTDISPATCHER_H
 #define LOST_EVENT_EVENTDISPATCHER_H
 
-#include "lost/forward/boost"
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
 #include <boost/thread/mutex.hpp>
@@ -13,11 +12,11 @@ namespace lost
 {
   namespace event
   {
-    typedef boost::shared_ptr<lost::event::Event> EventPtr;
+    typedef lost::shared_ptr<lost::event::Event> EventPtr;
     typedef boost::function<void (EventPtr)>      EventListenerFunc;
 
     struct EventDispatcher;
-    typedef boost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+    typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
 
     struct EventSignalPtrMap;
     struct EventDispatcher
@@ -40,7 +39,7 @@ namespace lost
       uint32_t numListeners();
       
       boost::mutex queueMutex;
-      boost::shared_ptr<std::list<boost::shared_ptr<lost::event::Event> > > eventQueue;
+      lost::shared_ptr<std::list<lost::shared_ptr<lost::event::Event> > > eventQueue;
 
       boost::mutex waitEventMutex;
       boost::condition waitEventCondition;
@@ -53,7 +52,7 @@ namespace lost
       /**
        * call this to queue the given event. will be dispatched when processEvents() is called
        */
-      void queueEvent(const boost::shared_ptr<lost::event::Event>& event);
+      void queueEvent(const lost::shared_ptr<lost::event::Event>& event);
       /**
        * call this to signal queued events
        */

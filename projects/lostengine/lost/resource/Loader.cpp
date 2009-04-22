@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/resource/Loader.h"
 #include "lost/resource/File.h"
 #include "lost/resource/Repository.h"
@@ -18,9 +16,9 @@ Loader::~Loader()
 {
 }
 
-boost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::path& inPath)
+lost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::path& inPath)
 {
-  boost::shared_ptr<lost::resource::File> result;
+  lost::shared_ptr<lost::resource::File> result;
 
   // FIXME: determine failed loads by counting load attempts.
   //        if we finish the loops with zero successful loads, throw an exception.
@@ -46,7 +44,7 @@ boost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::p
   return result;
 }
 
-void Loader::addRepository( boost::shared_ptr<Repository> inRepository )
+void Loader::addRepository( lost::shared_ptr<Repository> inRepository )
 {
   repositories.push_back( inRepository );
 }

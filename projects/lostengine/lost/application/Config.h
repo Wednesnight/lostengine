@@ -39,13 +39,13 @@ namespace lost
     struct Config : public luabind::object
     {
     private:
-      boost::shared_ptr<lua::State> interpreter;
+      lost::shared_ptr<lua::State> interpreter;
 
     public:
-      Config(const boost::shared_ptr<lua::State>& inInterpreter);
+      Config(const lost::shared_ptr<lua::State>& inInterpreter);
     };
 
-    struct ConfigPtr : public boost::shared_ptr<Config>
+    struct ConfigPtr : public lost::shared_ptr<Config>
     {
       ConfigPtr();
       ConfigPtr(Config* inConfig);

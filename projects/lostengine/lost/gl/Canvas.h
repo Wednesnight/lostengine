@@ -15,7 +15,7 @@ namespace lost
   namespace gl
   {
     struct Canvas;
-    typedef boost::shared_ptr<Canvas> CanvasPtr;
+    typedef lost::shared_ptr<Canvas> CanvasPtr;
   
     struct Canvas
     {
@@ -45,13 +45,13 @@ namespace lost
       void drawRectOutlineRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const unsigned int steps = 25);
       void drawRectFilled(const lost::math::Rect& rect);
       void drawRectFilledRounded(const lost::math::Rect& rect, const lost::math::Vec2& cornerSize, const unsigned int steps = 25);
-      void drawRectTextured(const lost::math::Rect& rect, boost::shared_ptr<const lost::gl::Texture> tex, const lost::math::Vec2& bottomLeft,
+      void drawRectTextured(const lost::math::Rect& rect, lost::shared_ptr<const lost::gl::Texture> tex, const lost::math::Vec2& bottomLeft,
                             const lost::math::Vec2& bottomRight, const lost::math::Vec2& topLeft, const lost::math::Vec2& topRight,
                             bool flip);
-      void drawRectTextured(const lost::math::Rect& rect, boost::shared_ptr<const lost::gl::Texture> tex, bool flip);
+      void drawRectTextured(const lost::math::Rect& rect, lost::shared_ptr<const lost::gl::Texture> tex, bool flip);
 
-      void drawMesh2D(const boost::shared_ptr<lost::gl::Mesh2D>& mesh, GLenum mode);
-      void drawMesh3D(const boost::shared_ptr<lost::gl::Mesh3D>& mesh, GLenum mode);
+      void drawMesh2D(const lost::shared_ptr<lost::gl::Mesh2D>& mesh, GLenum mode);
+      void drawMesh3D(const lost::shared_ptr<lost::gl::Mesh3D>& mesh, GLenum mode);
 
       void drawAABB(const lost::math::AABB& box);
       void drawAxes(const lost::math::Vec3& length);

@@ -83,7 +83,7 @@ private:
     passedSec = currentSec;
   }
   
-  void keyHandler(boost::shared_ptr<KeyEvent> event)
+  void keyHandler(lost::shared_ptr<KeyEvent> event)
   {
     if (event->key == K_ESCAPE) app->quit();
 
@@ -95,7 +95,7 @@ private:
     else if (event->character == "e") camera->move(Vec3(0, 0.25, 0));
   }
   
-  void mouseHandler(boost::shared_ptr<MouseEvent> event)
+  void mouseHandler(lost::shared_ptr<MouseEvent> event)
   {
     if (!moveInitialized)
     {

@@ -13,7 +13,7 @@ namespace lost
 namespace gl
 {
 struct FrameBuffer;
-typedef boost::shared_ptr<FrameBuffer> FrameBufferPtr;
+typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
 
 struct FrameBuffer
 {

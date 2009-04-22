@@ -1,4 +1,3 @@
-#include <boost/shared_array.hpp>
 #include "lost/resource/File.h"
 
 namespace lost

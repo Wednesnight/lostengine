@@ -15,14 +15,14 @@ namespace lost
 
       struct Renderer
       {
-        boost::shared_ptr<lost::gl::Canvas> canvas;
+        lost::shared_ptr<lost::gl::Canvas> canvas;
 
-        boost::shared_ptr<Mesh> mesh;
-        boost::shared_ptr<gl::ArrayBuffer<Vertex> > vertexBuffer;
+        lost::shared_ptr<Mesh> mesh;
+        lost::shared_ptr<gl::ArrayBuffer<Vertex> > vertexBuffer;
 
         float size;
 
-        Renderer(const boost::shared_ptr<lost::gl::Canvas>& inCanvas, const boost::shared_ptr<Mesh>& inMesh)
+        Renderer(const lost::shared_ptr<lost::gl::Canvas>& inCanvas, const lost::shared_ptr<Mesh>& inMesh)
         : canvas(inCanvas),
           mesh(inMesh),
           size(1.0f)

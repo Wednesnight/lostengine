@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/resource/Loader.h"
 
@@ -12,7 +10,7 @@ namespace lost
 {
   namespace lua
   {
-    boost::shared_ptr<lost::resource::File> load(object inLoader, const std::string& inRelativePath)
+    lost::shared_ptr<lost::resource::File> load(object inLoader, const std::string& inRelativePath)
     {
       Loader* loader = object_cast<Loader*>(inLoader);
       return loader->load(inRelativePath);
@@ -30,7 +28,7 @@ namespace lost
       [
         namespace_("resource")
         [
-          class_<Loader, boost::shared_ptr<Loader> >("Loader")
+          class_<Loader, lost::shared_ptr<Loader> >("Loader")
             .def(constructor<>())
             .def("load", &load)
         ]

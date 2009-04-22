@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/bitmap/Packer.h"
 using namespace boost;
 using namespace lost::math;
@@ -27,7 +26,7 @@ Packer::~Packer()
 
 void Packer::pack(Packer::Result& outResult,
         const lost::math::Vec2& targetSize,
-        std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
+        std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
         Bitmap::Components format,
         bool rotate,
         bool sort)
@@ -62,7 +61,7 @@ void Packer::pack(Packer::Result& outResult,
 
 
 void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
-                                   std::vector<boost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
+                                   std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
 {
   outRects.clear();
   uint32_t numBitmaps = inBitmaps.size();

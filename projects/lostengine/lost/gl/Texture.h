@@ -16,7 +16,7 @@ namespace lost
   namespace gl
   {
     struct Texture;
-    typedef boost::shared_ptr<Texture> TexturePtr;
+    typedef lost::shared_ptr<Texture> TexturePtr;
   
     /** a 2D Texture helper class.
      *
@@ -51,14 +51,14 @@ namespace lost
     
       Texture();
       Texture(lost::math::Vec2 inSize, const Params& inParams = Params());
-      Texture(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
-      Texture(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());      
+      Texture(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
+      Texture(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());      
       ~Texture();    
       void destroy();  
       void bind() const;      
       
-      void init(boost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
-      void init(boost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());
+      void init(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
+      void init(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
       
       void init(GLint level, // mipmap level
@@ -70,7 +70,7 @@ namespace lost
                  GLenum type, // numerical type of provided pixel data
                  const GLvoid* data); // pointer to the data or 0 if you only want to reserve data for later usage
 
-      void subImage(const lost::math::Vec2& targetPos, boost::shared_ptr<lost::bitmap::Bitmap> bmp);
+      void subImage(const lost::math::Vec2& targetPos, lost::shared_ptr<lost::bitmap::Bitmap> bmp);
 
       void wrap(GLint p);
       void wrapS(GLint p);

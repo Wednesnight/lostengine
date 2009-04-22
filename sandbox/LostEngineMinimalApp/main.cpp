@@ -37,7 +37,7 @@ using namespace boost;
 
 struct Controller
 {
-  boost::shared_ptr<lost::gl::State> renderState;
+  lost::shared_ptr<lost::gl::State> renderState;
 
   Timer* redrawTimer;
 
@@ -64,13 +64,13 @@ struct Controller
 
   lost::lsystem::LSystem                            lsystem;
   lost::model::lsystem::Generator                   lsystemGenerator;
-  boost::shared_ptr<lost::lsystem::LSystemState>    lsystemState;
+  lost::shared_ptr<lost::lsystem::LSystemState>    lsystemState;
   
-  boost::shared_ptr<lost::model::Mesh>              dragonCurveMesh;
-  boost::shared_ptr<lost::model::lsystem::Renderer> dragonCurve;
+  lost::shared_ptr<lost::model::Mesh>              dragonCurveMesh;
+  lost::shared_ptr<lost::model::lsystem::Renderer> dragonCurve;
   
-  boost::shared_ptr<lost::model::Mesh>              treeMesh;
-  boost::shared_ptr<lost::model::lsystem::Renderer> tree;
+  lost::shared_ptr<lost::model::Mesh>              treeMesh;
+  lost::shared_ptr<lost::model::lsystem::Renderer> tree;
   
   bool animate;
   

@@ -42,14 +42,14 @@ public:
 struct MyAppController
 {
 private:
-  boost::shared_ptr<Application> app;
-  boost::shared_ptr<Window> mainWindow;
+  lost::shared_ptr<Application> app;
+  lost::shared_ptr<Window> mainWindow;
   gl::SharedState renderState;
-  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  lost::shared_ptr<lost::common::FpsMeter> fpsMeter;
 
   double ds;
 
-  void drawScene(const boost::shared_ptr<gl::Canvas>& canvas, double deltaSec)
+  void drawScene(const lost::shared_ptr<gl::Canvas>& canvas, double deltaSec)
   {
     canvas->context->makeCurrent();
     canvas->context->pushState(renderState);
@@ -85,7 +85,7 @@ private:
     app->processEvents();
   }
 
-  void keyHandler(boost::shared_ptr<KeyEvent> event)
+  void keyHandler(lost::shared_ptr<KeyEvent> event)
   {
     if (event->key == K_ESCAPE) app->quit();
   }

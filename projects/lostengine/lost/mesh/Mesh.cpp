@@ -1,6 +1,5 @@
 #include "lost/mesh/Mesh.h"
 
-#include <boost/shared_ptr.hpp>
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
 #include "lost/resource/File.h"

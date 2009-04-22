@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/model/lsystem/Generator.h"
 
@@ -20,7 +19,7 @@ namespace lost
         [
           namespace_("lsystem")
           [
-            class_<Generator, boost::shared_ptr<Generator> >("Generator")
+            class_<Generator, lost::shared_ptr<Generator> >("Generator")
             .def(constructor<>()) 
             .def("generate", &Generator::generate)
           ]

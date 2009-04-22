@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
@@ -16,9 +14,9 @@ ApplicationResourceRepository::ApplicationResourceRepository()
 
 ApplicationResourceRepository::~ApplicationResourceRepository() {}
 
-boost::shared_ptr<lost::resource::File> ApplicationResourceRepository::load( const boost::filesystem::path& relativePath)
+lost::shared_ptr<lost::resource::File> ApplicationResourceRepository::load( const boost::filesystem::path& relativePath)
 {
-  boost::shared_ptr<lost::resource::File> result(new lost::resource::File);
+  lost::shared_ptr<lost::resource::File> result(new lost::resource::File);
   boost::filesystem::path absolutePath = applicationResourcePath / relativePath;
   std::string path = absolutePath.string();
   result->location = relativePath.string();

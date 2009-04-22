@@ -5,7 +5,6 @@
 #include <list>
 #include <map>
 #include <string>
-#include <boost/enable_shared_from_this.hpp>
 #include "lost/resource/Loader.h"
 #include "lost/event/Event.h"
 
@@ -14,21 +13,21 @@ namespace lost
   namespace event
   {
     struct EventDispatcher;
-    typedef boost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+    typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
   }
 
   namespace application
   {
     struct Tasklet;
-    typedef boost::shared_ptr<Tasklet> TaskletPtr;
+    typedef lost::shared_ptr<Tasklet> TaskletPtr;
     
     struct Application;
-    typedef boost::shared_ptr<Application> ApplicationPtr;
+    typedef lost::shared_ptr<Application> ApplicationPtr;
 
     struct ApplicationEvent;
-    typedef boost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
+    typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
-    struct Application : public boost::enable_shared_from_this<Application>
+    struct Application : public lost::enable_shared_from_this<Application>
     {
     private:
       /**
@@ -50,7 +49,7 @@ namespace lost
       void finalize();
 
       /**
-       * don't use ctors directly! leave them private since we need to be held by a boost::shared_ptr,
+       * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
        * otherwise shared_from_this() will fail!
        */
       Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
@@ -87,12 +86,12 @@ namespace lost
       lost::event::EventDispatcherPtr eventDispatcher;
       
       /**
-       * static ctor helpers, make sure that we're held by a boost::shared_ptr
+       * static ctor helpers, make sure that we're held by a lost::shared_ptr
        */
-      static boost::shared_ptr<Application> create();
-      static boost::shared_ptr<Application> create(int argn, char** args);
-      static boost::shared_ptr<Application> create(const TaskletPtr& tasklet);
-      static boost::shared_ptr<Application> create(const std::string& inScript);
+      static lost::shared_ptr<Application> create();
+      static lost::shared_ptr<Application> create(int argn, char** args);
+      static lost::shared_ptr<Application> create(const TaskletPtr& tasklet);
+      static lost::shared_ptr<Application> create(const std::string& inScript);
 
       ~Application();
 

@@ -96,7 +96,7 @@ MyAppController::MyAppController()
 
 }
 
-void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec)
+void MyAppController::drawModel(const lost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec)
 {
   canvas->context->makeCurrent();
   canvas->context->pushState(modelRenderState);
@@ -139,7 +139,7 @@ void MyAppController::drawModel(const boost::shared_ptr<lost::gl::Canvas>& canva
   canvas->context->swapBuffers();
 }
 
-void MyAppController::drawScene(const boost::shared_ptr<gl::Canvas>& canvas, double deltaSec)
+void MyAppController::drawScene(const lost::shared_ptr<gl::Canvas>& canvas, double deltaSec)
 {
   canvas->context->makeCurrent();
   canvas->context->pushState(renderState);
@@ -201,7 +201,7 @@ void MyAppController::mainLoop()
   app->processEvents();
 }
 
-void MyAppController::keyHandler(boost::shared_ptr<KeyEvent> event)
+void MyAppController::keyHandler(lost::shared_ptr<KeyEvent> event)
 {
   if (event->key == K_ESCAPE) app->quit();
   float stepsize = 2.0;

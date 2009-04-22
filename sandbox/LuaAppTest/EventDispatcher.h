@@ -5,13 +5,12 @@
 #include <boost/function.hpp>
 #include <map>
 #include <iostream>
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 
 // Asynchronous EventDispatcher
 struct EventDispatcher
 {
-  typedef boost::shared_ptr<Event> EventPtr;
+  typedef lost::shared_ptr<Event> EventPtr;
   typedef boost::function<void(EventPtr)> HandlerFuncType;
   typedef std::map<std::string, HandlerFuncType > HandlerMap;
 
@@ -35,7 +34,7 @@ struct EventDispatcher
   
   // only queues events until the runloop decides it's time to really dispatch events 
   // and calls doDispatch
-  void dispatchEvent(boost::shared_ptr<Event> event)
+  void dispatchEvent(lost::shared_ptr<Event> event)
   {
     eventQueue.push(event);
   }

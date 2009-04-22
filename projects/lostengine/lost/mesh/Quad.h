@@ -4,8 +4,6 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/resource/File.h"
 #include "lost/gl/Texture.h"
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/math/Rect.h"
 
 namespace lost
@@ -60,10 +58,10 @@ struct Quad : public MESHTYPE
     updateTexCoords(flip);
   }
   
-  static boost::shared_ptr<Quad<MESHTYPE> > create() { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
-  static boost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
-  static boost::shared_ptr<Quad<MESHTYPE> > create(resource::FilePtr data, bool flip=true) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
-  static boost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex, bool flip=true) { return boost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex, flip)); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create(resource::FilePtr data, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex, flip)); }
   
   virtual ~Quad() {}
   
@@ -157,9 +155,9 @@ struct Quad : public MESHTYPE
 };
 
 typedef Quad<Mesh2D> Quad2D;
-typedef boost::shared_ptr<Quad2D> Quad2DPtr;
+typedef lost::shared_ptr<Quad2D> Quad2DPtr;
 typedef Quad<Mesh3D> Quad3D;
-typedef boost::shared_ptr<Quad3D> Quad3DPtr;
+typedef lost::shared_ptr<Quad3D> Quad3DPtr;
 
 }
 }

@@ -15,11 +15,11 @@ namespace lost
   {
 
     struct LSystem;
-    typedef boost::shared_ptr<LSystem> LSystemPtr;
+    typedef lost::shared_ptr<LSystem> LSystemPtr;
     struct LSystemState;
-    typedef boost::shared_ptr<LSystemState> LSystemStatePtr;
+    typedef lost::shared_ptr<LSystemState> LSystemStatePtr;
     struct LSystemResult;
-    typedef boost::shared_ptr<LSystemResult> LSystemResultPtr;
+    typedef lost::shared_ptr<LSystemResult> LSystemResultPtr;
 
     struct LSystemResult
     {

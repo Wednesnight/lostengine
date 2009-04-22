@@ -14,7 +14,7 @@ namespace lost
   namespace font
   {
     struct Model;
-    typedef boost::shared_ptr<Model> ModelPtr;
+    typedef lost::shared_ptr<Model> ModelPtr;
     
     struct Model
     {
