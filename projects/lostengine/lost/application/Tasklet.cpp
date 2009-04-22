@@ -51,6 +51,7 @@ namespace lost
     
     void Tasklet::run(tasklet& tasklet)
     {
+      threadAutoreleasePoolHack_createPool();
       try
       {
         executeScript = true;
@@ -64,7 +65,6 @@ namespace lost
 
       if (startup())
       {
-        threadAutoreleasePoolHack_createPool();
         while (get_state() == RUNNING && main())
         {
           const double startTime = currentTimeMilliSeconds();
@@ -80,10 +80,9 @@ namespace lost
           }
           threadAutoreleasePoolHack_drainAndRecreatePool();
         }
-        threadAutoreleasePoolHack_drainPool();        
         shutdown();
       }
-
+      threadAutoreleasePoolHack_drainPool();        
       application->notifyTaskletDeath(this);
     }
 
