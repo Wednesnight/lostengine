@@ -2,6 +2,8 @@
 #define LOST_RESOURCE_FILE_H
 
 #include <string>
+#include "lost/platform/shared_ptr.h"
+#include <boost/shared_array.hpp>
 #include <boost/cstdint.hpp>
 
 namespace lost
@@ -9,7 +11,7 @@ namespace lost
 namespace resource
 {
   struct File;
-  typedef boost::shared_ptr<File> FilePtr;
+  typedef lost::shared_ptr<File> FilePtr;
 
   struct File
   {

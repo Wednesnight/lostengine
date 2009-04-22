@@ -1,4 +1,3 @@
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/application/Application.h"

@@ -10,7 +10,7 @@ namespace resource
 {
 
 struct File;
-typedef boost::shared_ptr<File> FilePtr;
+typedef lost::shared_ptr<File> FilePtr;
 
 struct ApplicationResourceRepository : public Repository
 {

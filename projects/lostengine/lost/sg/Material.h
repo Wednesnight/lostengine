@@ -10,7 +10,7 @@ namespace sg
 {
   
 struct Material;
-typedef boost::shared_ptr<Material> MaterialPtr;
+typedef lost::shared_ptr<Material> MaterialPtr;
 
 struct Material
 {

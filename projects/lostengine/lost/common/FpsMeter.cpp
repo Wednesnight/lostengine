@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/State.h"
 #include <boost/lexical_cast.hpp>
@@ -85,7 +83,7 @@ namespace lost
 
       void FpsMeter::render(uint32_t x,
                             uint32_t y,
-                            const boost::shared_ptr<Canvas>& canvas,
+                            const lost::shared_ptr<Canvas>& canvas,
                             double timeSinceLastCallSec)
       {
         addHistoryEntry(timeSinceLastCallSec);

@@ -16,7 +16,7 @@ using namespace luabind;
 using namespace lost::common;
 
 
-void genericHandler(boost::shared_ptr<Event> event)
+void genericHandler(lost::shared_ptr<Event> event)
 {
   cout << "got event: " << event->type << endl;
 }

@@ -7,14 +7,14 @@ using namespace luabind;
 // required for shared_ptr management of Events by Lua/luabind
 namespace luabind {
     template<class Event>
-    Event* get_pointer(boost::shared_ptr<Event>& p) 
+    Event* get_pointer(lost::shared_ptr<Event>& p) 
     {
         return p.get(); 
     }
 
     template<class Event>
-    boost::shared_ptr<const Event>* 
-    get_const_holder(boost::shared_ptr<Event>*)
+    lost::shared_ptr<const Event>* 
+    get_const_holder(lost::shared_ptr<Event>*)
     {
         return 0;
     }
@@ -24,7 +24,7 @@ void bindMouseEvent(lost::lua::State& state)
 {
   module(state)
   [
-    class_<MouseEvent, Event, boost::shared_ptr<Event> >("MouseEvent")
+    class_<MouseEvent, Event, lost::shared_ptr<Event> >("MouseEvent")
       .def(constructor<string>())      
       .def_readwrite("x", &MouseEvent::x)
       .def_readwrite("y", &MouseEvent::y)

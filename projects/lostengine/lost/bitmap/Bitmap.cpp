@@ -4,7 +4,6 @@
 #include "lost/common/Logger.h"
 #include <stdexcept>
 #include "lost/resource/File.h"
-#include <boost/shared_ptr.hpp>
 #include <boost/lexical_cast.hpp>
 
 using namespace std;
@@ -47,7 +46,7 @@ Bitmap::Bitmap(uint32_t inWidth,
   init(inWidth, inHeight, destComponents, srcComponents, data);
 }
 
-Bitmap::Bitmap(boost::shared_ptr<lost::resource::File> inFile)
+Bitmap::Bitmap(lost::shared_ptr<lost::resource::File> inFile)
 {
   reset();
   init(inFile);
@@ -175,7 +174,7 @@ uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
   return result;
 }
 
-void Bitmap::init(boost::shared_ptr<lost::resource::File> inFile)
+void Bitmap::init(lost::shared_ptr<lost::resource::File> inFile)
 {
   destroy();
 //  DOUT("init image from memory: " << inFile->location);
@@ -343,7 +342,7 @@ void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
 }
 
 
-boost::shared_ptr<Bitmap> Bitmap::rotCW()
+lost::shared_ptr<Bitmap> Bitmap::rotCW()
 {
   shared_ptr<Bitmap> result(new Bitmap(height, width, COMPONENTS_RGBA));
   for(uint32_t y=0; y<height; ++y)
@@ -372,7 +371,7 @@ void Bitmap::vline(uint32_t x, uint32_t yb, uint32_t yt, const common::Color& in
   }
 }
 
-void Bitmap::draw(uint32_t x, uint32_t y, boost::shared_ptr<Bitmap> target)
+void Bitmap::draw(uint32_t x, uint32_t y, lost::shared_ptr<Bitmap> target)
 {
   for(uint32_t cy=0; cy<height; ++cy)
   {

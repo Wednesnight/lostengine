@@ -1,7 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include <boost/shared_ptr.hpp>
 #include "lost/application/Timer.h"
 #include "lost/application/TimerEvent.h"
 #include "lost/application/KeyEvent.h"
@@ -13,14 +12,14 @@
 struct Controller
 {
   lost::application::Timer* redrawTimer;
-  boost::shared_ptr<lost::gl::Texture> texture;
-  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
-  boost::shared_ptr<lost::gl::State> textureRenderState;
-  boost::shared_ptr<lost::gl::State> vanillaRenderState;
+  lost::shared_ptr<lost::gl::Texture> texture;
+  lost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  lost::shared_ptr<lost::gl::State> textureRenderState;
+  lost::shared_ptr<lost::gl::State> vanillaRenderState;
       
-  void redraw(boost::shared_ptr<lost::application::TimerEvent> event);
-  void keyboard(boost::shared_ptr<lost::application::KeyEvent> inEvent);
-  void init(boost::shared_ptr<lost::application::ApplicationEvent> event);
+  void redraw(lost::shared_ptr<lost::application::TimerEvent> event);
+  void keyboard(lost::shared_ptr<lost::application::KeyEvent> inEvent);
+  void init(lost::shared_ptr<lost::application::ApplicationEvent> event);
 };
 
 #endif

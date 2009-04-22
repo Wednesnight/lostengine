@@ -8,9 +8,9 @@ namespace lost
   namespace lua
   {
     template <class Class>
-    boost::shared_ptr<Class> cast(boost::shared_ptr<lost::event::Event>& inEvent)
+    lost::shared_ptr<Class> cast(lost::shared_ptr<lost::event::Event>& inEvent)
     {
-      return boost::dynamic_pointer_cast<Class>(inEvent);
+      return lost::dynamic_pointer_cast<Class>(inEvent);
     }
   }
 }

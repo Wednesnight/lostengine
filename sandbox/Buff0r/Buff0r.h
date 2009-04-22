@@ -1,7 +1,6 @@
 #ifndef BUFF0R_H
 #define BUFF0R_H
 
-#include <boost/shared_ptr.hpp>
 #include <boost/signal.hpp>
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"

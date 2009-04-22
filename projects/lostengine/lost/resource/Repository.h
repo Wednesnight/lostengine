@@ -14,7 +14,7 @@ namespace lost
       Repository() {}
       virtual ~Repository() {}
 
-      virtual boost::shared_ptr<lost::resource::File> load( const boost::filesystem::path& inPath) = 0;
+      virtual lost::shared_ptr<lost::resource::File> load( const boost::filesystem::path& inPath) = 0;
     };
   }
 }

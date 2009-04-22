@@ -1,7 +1,6 @@
 #ifndef LOST_EVENT_RECEIVE_H
 #define LOST_EVENT_RECEIVE_H
 
-#include "lost/forward/boost"
 #include <boost/function.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
@@ -23,11 +22,11 @@ namespace lost
     template<typename TO>
     struct receive
     {
-      boost::function<void(boost::shared_ptr<TO>)> func;
-      receive(boost::function<void(boost::shared_ptr<TO>)> f) : func(f) {}
-      void operator()(boost::shared_ptr<Event> ev)
+      boost::function<void(lost::shared_ptr<TO>)> func;
+      receive(boost::function<void(lost::shared_ptr<TO>)> f) : func(f) {}
+      void operator()(lost::shared_ptr<Event> ev)
       {
-        boost::shared_ptr<TO> p = boost::dynamic_pointer_cast<TO>(ev);
+        lost::shared_ptr<TO> p = lost::dynamic_pointer_cast<TO>(ev);
         if(!p) {throw std::runtime_error("couldn't cast event pointers");}
         func(p);
       }  

@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/InputEvent.h"
 #include "lost/lua/EventCast.h"
@@ -19,7 +18,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<InputEvent, Event, boost::shared_ptr<InputEvent> >("InputEvent")
+          class_<InputEvent, Event, lost::shared_ptr<InputEvent> >("InputEvent")
           .def(constructor<std::string>()) 
           .def_readonly("window", &InputEvent::window)
           .scope

@@ -29,7 +29,7 @@ Source::~Source()
 	}
 }
 
-void Source::initWithFile(boost::shared_ptr<resource::File> inFile)
+void Source::initWithFile(lost::shared_ptr<resource::File> inFile)
 {
 	sourceType = ST_STATIC;
 	vorbisFile.reset(new VorbisFile(inFile));

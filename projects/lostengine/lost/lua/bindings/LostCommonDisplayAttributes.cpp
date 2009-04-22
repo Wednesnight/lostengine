@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/common/DisplayAttributes.h"
 
@@ -17,7 +16,7 @@ namespace lost
       [
         namespace_("common")
         [
-          class_<DisplayAttributes, boost::shared_ptr<DisplayAttributes> >("DisplayAttributes")
+          class_<DisplayAttributes, lost::shared_ptr<DisplayAttributes> >("DisplayAttributes")
             .def(constructor<>())    
             .def_readwrite("width",     &DisplayAttributes::width)
             .def_readwrite("height",     &DisplayAttributes::height)

@@ -7,6 +7,26 @@ extern "C" {
   #include "lualib.h"
 }
 
+// get_pointer and get_const_holder are defined for boost::shared_ptr, but not
+// for std::tr1::shared_ptr - they're easily defined here, though.
+#if defined(HAVE_TR1_SHARED_PTR)
+namespace luabind {
+
+template<class T>
+T * get_pointer(::lost::shared_ptr<T> const & p)
+{
+  return p.get();
+}
+
+template <class T>
+::lost::shared_ptr<T const> * get_const_holder(::lost::shared_ptr<T> *)
+{
+  return 0;
+}
+
+};
+#endif
+
 #include <luabind/luabind.hpp>
 #include "lost/platform/Platform.h"
 

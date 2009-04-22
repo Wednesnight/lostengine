@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/font/TrueTypeFont.h"
 #include <boost/lexical_cast.hpp>
 #include "lost/common/Logger.h"
@@ -137,7 +135,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   // origin is bottom left corner, (0/0), for both bitmap and texture
   for(uint32_t k=0; k<glyphs.size(); ++k)
   {
-    boost::shared_ptr<Glyph> g = glyphs[k];
+    lost::shared_ptr<Glyph> g = glyphs[k];
     float tw = (float)atlas->dataWidth;
     float th = (float)atlas->dataHeight;
     g->bl = Vec2((g->rect.x)/tw, (g->rect.y)/th);

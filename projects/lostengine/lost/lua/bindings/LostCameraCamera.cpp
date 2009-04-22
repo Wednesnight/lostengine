@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/camera/Camera.h"
 #include "lost/camera/Camera2D.h"

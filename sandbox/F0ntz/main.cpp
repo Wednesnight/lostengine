@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/enable_shared_from_this.hpp>
 #include "lost/common/Logger.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
@@ -27,15 +25,15 @@ struct B
 {
   B() { DOUT("B::B()"); a_ptr.reset(new A()); }
   A a;
-  boost::shared_ptr<A> a_ptr;
+  lost::shared_ptr<A> a_ptr;
 };
 
-boost::shared_ptr<A> get_a(B* instance)
+lost::shared_ptr<A> get_a(B* instance)
 {
-  return boost::shared_ptr<A>(&instance->a);
+  return lost::shared_ptr<A>(&instance->a);
 }
 
-void set_a(B* instance, boost::shared_ptr<A> a)
+void set_a(B* instance, lost::shared_ptr<A> a)
 {
   instance->a = *(a.get());
 }
@@ -73,14 +71,14 @@ int main( int argc, char *argv[] )
     [
       luabind::def("test_a", &test_a),
       luabind::def("test_b", &test_b),
-      luabind::class_<A, boost::shared_ptr<A> >("A")
+      luabind::class_<A, lost::shared_ptr<A> >("A")
         .def(luabind::constructor<>())
         .def_readwrite("s", &A::s)
      ];
     
     luabind::module(*app.interpreter)
     [
-      luabind::class_<B, boost::shared_ptr<B> >("B")
+      luabind::class_<B, lost::shared_ptr<B> >("B")
         .def(luabind::constructor<>())
 //        .def_readwrite("a", &B::a)
         .property("a", &get_a, &set_a)

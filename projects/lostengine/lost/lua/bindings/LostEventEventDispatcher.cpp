@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/event/EventDispatcher.h"
 #include <luabind/operator.hpp>
@@ -78,7 +77,7 @@ namespace lost
       [
         namespace_("event")
         [
-          class_<EventDispatcher, LuaEventDispatcher, boost::shared_ptr<EventDispatcher> >("EventDispatcher")
+          class_<EventDispatcher, LuaEventDispatcher, lost::shared_ptr<EventDispatcher> >("EventDispatcher")
             .def(constructor<>())
             .def("addEventListener", (boost::signals::connection(*)(object, const std::string&, object))&addEventListener)
             .def("removeEventListener", &EventDispatcher::removeEventListener)

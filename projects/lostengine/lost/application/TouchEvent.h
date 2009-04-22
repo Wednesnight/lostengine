@@ -36,14 +36,14 @@ namespace lost
         return touches.size();
       }
 
-      boost::shared_ptr<lost::application::TouchEvent::Touch> get(unsigned int idx)
+      lost::shared_ptr<lost::application::TouchEvent::Touch> get(unsigned int idx)
       {
         return touches[idx];
       }
 
       // contains all touches for the current event. Might contain more than one, depending
       // on how many fingers the user applied to the screen
-      std::vector<boost::shared_ptr<lost::application::TouchEvent::Touch> > touches;
+      std::vector<lost::shared_ptr<lost::application::TouchEvent::Touch> > touches;
 
       // should only be used for delta calculation, since the baseline might differ from the rest of the framework.
       double timestamp;

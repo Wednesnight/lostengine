@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/camera/Camera3D.h"
 #include "lost/lgl/lglu.h"
 

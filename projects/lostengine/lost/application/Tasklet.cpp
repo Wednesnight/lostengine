@@ -1,4 +1,3 @@
-#include <boost/shared_array.hpp>
 #include "lost/lua/State.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"

@@ -14,7 +14,7 @@ namespace lost
 namespace resource
 {
 struct File;
-typedef boost::shared_ptr<File> FilePtr;
+typedef lost::shared_ptr<File> FilePtr;
 }
 namespace mesh
 {
@@ -45,7 +45,7 @@ struct Mesh
   math::Matrix modelTransform;
 };
 
-typedef boost::shared_ptr<Mesh> MeshPtr;
+typedef lost::shared_ptr<Mesh> MeshPtr;
 
 /** Mesh that stores it's data in GL buffer objects.
  */ 
@@ -57,11 +57,11 @@ template<
   typename TCT> // texcoordtype
 struct BufferedMesh : public Mesh
 {
-  boost::shared_ptr<gl::ElementArrayBuffer<IT> >  indexBuffer; 
-  boost::shared_ptr<gl::ArrayBuffer<VT> >         vertexBuffer;
-  boost::shared_ptr<gl::ArrayBuffer<NT> >         normalBuffer;
-  boost::shared_ptr<gl::ArrayBuffer<CT> >         colorBuffer;
-  boost::shared_ptr<gl::ArrayBuffer<TCT> >        texCoordBuffer;
+  lost::shared_ptr<gl::ElementArrayBuffer<IT> >  indexBuffer; 
+  lost::shared_ptr<gl::ArrayBuffer<VT> >         vertexBuffer;
+  lost::shared_ptr<gl::ArrayBuffer<NT> >         normalBuffer;
+  lost::shared_ptr<gl::ArrayBuffer<CT> >         colorBuffer;
+  lost::shared_ptr<gl::ArrayBuffer<TCT> >        texCoordBuffer;
   
   gl::Buffer* getIndexBuffer() { return indexBuffer.get(); }
   gl::Buffer* getVertexBuffer() { return vertexBuffer.get(); };
@@ -130,9 +130,9 @@ struct BufferedMesh : public Mesh
 };
 
 typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2> Mesh3D;
-typedef boost::shared_ptr<Mesh3D> Mesh3DPtr;
+typedef lost::shared_ptr<Mesh3D> Mesh3DPtr;
 typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
-typedef boost::shared_ptr<Mesh2D> Mesh2DPtr;
+typedef lost::shared_ptr<Mesh2D> Mesh2DPtr;
 
 Mesh3DPtr createFromOBJ(resource::FilePtr objFile);
 

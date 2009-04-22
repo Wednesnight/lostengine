@@ -37,13 +37,13 @@ public:
 struct MyAppController
 {
 private:
-  boost::shared_ptr<Application> app;
-  boost::shared_ptr<Window> mainWindow;
-  boost::shared_ptr<Window> secondWindow;
+  lost::shared_ptr<Application> app;
+  lost::shared_ptr<Window> mainWindow;
+  lost::shared_ptr<Window> secondWindow;
   gl::SharedState renderState;
-  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  lost::shared_ptr<lost::common::FpsMeter> fpsMeter;
 
-  void drawScene(const boost::shared_ptr<gl::Canvas>& canvas)
+  void drawScene(const lost::shared_ptr<gl::Canvas>& canvas)
   {
     canvas->context->makeCurrent();
     canvas->context->pushState(renderState);
@@ -88,7 +88,7 @@ private:
     canvas->context->swapBuffers();
   }
 
-  void drawFPSMeter(const boost::shared_ptr<gl::Canvas>& canvas, const double& deltaSec)
+  void drawFPSMeter(const lost::shared_ptr<gl::Canvas>& canvas, const double& deltaSec)
   {
     canvas->context->makeCurrent();
     canvas->context->pushState(renderState);
@@ -117,7 +117,7 @@ private:
     app->processEvents();
   }
 
-  void keyHandler(boost::shared_ptr<KeyEvent> event)
+  void keyHandler(lost::shared_ptr<KeyEvent> event)
   {
     if (event->key == K_ESCAPE) app->quit();
   }
@@ -152,7 +152,7 @@ int testingCPP()
 
 int testingLUA()
 {
-  boost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init.lua"));
+  lost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init.lua"));
   app->run();
   return 0;
 }

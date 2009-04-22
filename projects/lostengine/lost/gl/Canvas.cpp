@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/Canvas.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera2D.h"
@@ -334,7 +333,7 @@ namespace lost
     // requires vertex arrays, texture arrays, index arrays
     // FIXME: needs serious optimisation/rethinking, but at least it works
     void Canvas::drawRectTextured(const lost::math::Rect& rect,
-                                  boost::shared_ptr<const lost::gl::Texture> tex,
+                                  lost::shared_ptr<const lost::gl::Texture> tex,
                                   const lost::math::Vec2& bottomLeft,
                                   const lost::math::Vec2& bottomRight,
                                   const lost::math::Vec2& topLeft,
@@ -381,13 +380,13 @@ namespace lost
     }
     
     void Canvas::drawRectTextured(const lost::math::Rect& rect,
-                                  boost::shared_ptr<const lost::gl::Texture> tex,
+                                  lost::shared_ptr<const lost::gl::Texture> tex,
                                   bool flip)
     {
       drawRectTextured(rect, tex, Vec2(0,0), Vec2(1,0), Vec2(0,1), Vec2(1,1), flip);
     }
     
-    void Canvas::drawMesh2D(const boost::shared_ptr<Mesh2D>& mesh, GLenum mode)
+    void Canvas::drawMesh2D(const lost::shared_ptr<Mesh2D>& mesh, GLenum mode)
     {
       static StatePtr state = State::create(DepthTest::create(false),
                                                Blend::create(true),
@@ -407,7 +406,7 @@ namespace lost
       context->popState();
     }
     
-    void Canvas::drawMesh3D(const boost::shared_ptr<Mesh3D>& mesh, GLenum mode)
+    void Canvas::drawMesh3D(const lost::shared_ptr<Mesh3D>& mesh, GLenum mode)
     {
       static StatePtr state = State::create(DepthTest::create(false),
                                                Blend::create(true),

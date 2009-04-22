@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/resource/File.h"
@@ -19,9 +17,9 @@ namespace lost
       [
         namespace_("lua")
         [
-          class_<State, boost::shared_ptr<State> >("State")
+          class_<State, lost::shared_ptr<State> >("State")
             .def(constructor<>())
-            .def("doFile", (int(State::*)(const boost::shared_ptr<lost::resource::File>&)) &State::doFile)
+            .def("doFile", (int(State::*)(const lost::shared_ptr<lost::resource::File>&)) &State::doFile)
             .def("doFile", (int(State::*)(const std::string&)) &State::doFile)
             .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
             .def("getScriptFilename", &State::getScriptFilename)

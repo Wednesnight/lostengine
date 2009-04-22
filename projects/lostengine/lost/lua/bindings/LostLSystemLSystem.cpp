@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lsystem/LSystem.h"
 
@@ -11,7 +10,7 @@ namespace lost
 {
   namespace lua
   {
-    boost::shared_ptr<lost::lsystem::LSystemState> createLSystemState(const std::string& Axiom, const object& Map, const math::Vec3& Vec)
+    lost::shared_ptr<lost::lsystem::LSystemState> createLSystemState(const std::string& Axiom, const object& Map, const math::Vec3& Vec)
     {
       std::map<char, std::string> newMap;
       for (luabind::iterator i(Map), end; i != end; ++i)
@@ -21,7 +20,7 @@ namespace lost
         if (key.size()) newMap[key[0]] = value;
         std::cout << key << " = " << value << std::endl;
       }
-      boost::shared_ptr<lsystem::LSystemState> result(new lsystem::LSystemState(Axiom, newMap, Vec));
+      lost::shared_ptr<lsystem::LSystemState> result(new lsystem::LSystemState(Axiom, newMap, Vec));
       return result;
     }
   }
@@ -37,13 +36,13 @@ namespace lost
       [
         namespace_("lsystem")
         [
-          class_<LSystem, boost::shared_ptr<LSystem> >("LSystem")
+          class_<LSystem, lost::shared_ptr<LSystem> >("LSystem")
           .def(constructor<>())
-          .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::advance)
-          .def("advance", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::advance)
-          .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::regress)
-          .def("regress", (void(LSystem::*)(boost::shared_ptr<lsystem::LSystemState>&)) &LSystem::regress)
-          .def("walk", (void(LSystem::*)(const boost::shared_ptr<lsystem::LSystemState>&, const lost::math::Matrix&, const boost::function<void (lost::math::Matrix&, LSystemResult&)>)) &LSystem::walk)
+          .def("advance", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::advance)
+          .def("advance", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&)) &LSystem::advance)
+          .def("regress", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::regress)
+          .def("regress", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&)) &LSystem::regress)
+          .def("walk", (void(LSystem::*)(const lost::shared_ptr<lsystem::LSystemState>&, const lost::math::Matrix&, const boost::function<void (lost::math::Matrix&, LSystemResult&)>)) &LSystem::walk)
         ]
       ];
 
@@ -51,7 +50,7 @@ namespace lost
       [
         namespace_("lsystem")
         [
-          class_<lsystem::LSystemState, boost::shared_ptr<lsystem::LSystemState> >("LSystemState")
+          class_<lsystem::LSystemState, lost::shared_ptr<lsystem::LSystemState> >("LSystemState")
           .def("reset", &LSystemState::reset),
           def("LSystemState", &createLSystemState)
         ]

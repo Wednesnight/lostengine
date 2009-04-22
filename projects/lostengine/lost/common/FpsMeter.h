@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <boost/shared_array.hpp>
 
 namespace lost
 {
@@ -11,7 +12,7 @@ namespace lost
   namespace common
   {
     struct FpsMeter;
-    typedef boost::shared_ptr<FpsMeter> FpsMeterPtr;
+    typedef lost::shared_ptr<FpsMeter> FpsMeterPtr;
 
     struct FpsMeter
     {
@@ -27,8 +28,8 @@ namespace lost
       boost::shared_array<float> history;
       boost::shared_array<float> labelArray;
       boost::shared_array<float> linesArray;
-      boost::shared_ptr<gl::Canvas> canvas;
-      boost::shared_ptr<gl::State> renderState;
+      lost::shared_ptr<gl::Canvas> canvas;
+      lost::shared_ptr<gl::State> renderState;
 
       FpsMeter();
       ~FpsMeter();
@@ -36,7 +37,7 @@ namespace lost
       void addHistoryEntry(double timeSinceLastCallSec);
       void render(uint32_t x,
                   uint32_t y,
-                  const boost::shared_ptr<gl::Canvas>& canvas,
+                  const lost::shared_ptr<gl::Canvas>& canvas,
                   double timeSinceLastCallSec);
     };
   }

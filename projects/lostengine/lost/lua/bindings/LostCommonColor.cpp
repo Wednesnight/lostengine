@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/common/Color.h"
 #include <luabind/operator.hpp>
@@ -18,7 +17,7 @@ namespace lost
       [
         namespace_("common")
         [
-          class_<Color, boost::shared_ptr<Color> >("Color")
+          class_<Color, lost::shared_ptr<Color> >("Color")
           .def(constructor<>()) 
           .def(constructor<float, float, float>())
           .def(constructor<float, float, float, float>())

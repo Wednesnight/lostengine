@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/KeyCode.h"
@@ -20,7 +19,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<KeyEvent, InputEvent, boost::shared_ptr<KeyEvent> >("KeyEvent")
+          class_<KeyEvent, InputEvent, lost::shared_ptr<KeyEvent> >("KeyEvent")
           .def(constructor<std::string>())
           .def_readwrite("key", &KeyEvent::key)
           .def_readwrite("character", &KeyEvent::character)

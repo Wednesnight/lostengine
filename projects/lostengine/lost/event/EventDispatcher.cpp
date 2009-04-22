@@ -1,5 +1,4 @@
 #include <boost/signal.hpp>
-#include <boost/shared_ptr.hpp>
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
@@ -9,7 +8,7 @@ namespace lost
   namespace event
   {
     typedef boost::signal<void (EventPtr)>             EventSignal;
-    typedef boost::shared_ptr<EventSignal>             EventSignalPtr;    
+    typedef lost::shared_ptr<EventSignal>             EventSignalPtr;    
 //    typedef std::map<lost::event::Type,EventSignalPtr> EventSignalPtrMap;
     struct EventSignalPtrMap : public std::map<lost::event::Type,EventSignalPtr> {};
     
@@ -71,10 +70,10 @@ namespace lost
     }
 
     
-    void EventDispatcher::queueEvent(const boost::shared_ptr<lost::event::Event>& event)
+    void EventDispatcher::queueEvent(const lost::shared_ptr<lost::event::Event>& event)
     {
       queueMutex.lock();
-      if (!eventQueue) eventQueue.reset(new std::list<boost::shared_ptr<lost::event::Event> >());
+      if (!eventQueue) eventQueue.reset(new std::list<lost::shared_ptr<lost::event::Event> >());
       eventQueue->push_back(event);
       queueMutex.unlock();
       waitEventCondition.notify_one();      

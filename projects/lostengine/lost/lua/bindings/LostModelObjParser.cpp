@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/model/obj/Parser.h"
 
@@ -19,8 +18,8 @@ namespace lost
         [
           namespace_("obj")
           [
-            class_<Parser, boost::shared_ptr<Parser> >("Parser")
-            .def(constructor<boost::shared_ptr<resource::Loader> >())
+            class_<Parser, lost::shared_ptr<Parser> >("Parser")
+            .def(constructor<lost::shared_ptr<resource::Loader> >())
             .def("parseMesh", &Parser::parseMesh)
           ]
         ]

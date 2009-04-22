@@ -11,7 +11,7 @@ namespace lost
   {
     
     struct State;
-    typedef boost::shared_ptr<State> StatePtr;
+    typedef lost::shared_ptr<State> StatePtr;
 
     struct State
     {

@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/resource/File.h"
 
@@ -18,7 +16,7 @@ namespace lost
       [
         namespace_("resource")
         [
-          class_<File, boost::shared_ptr<File> >("File")
+          class_<File, lost::shared_ptr<File> >("File")
             .def(constructor<>())    
              .def_readwrite("size",     &File::size)
              .def_readwrite("location",     &File::location)

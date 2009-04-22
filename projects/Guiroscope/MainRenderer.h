@@ -4,7 +4,6 @@
 #include <string>
 #include <GL/GL.h>
 #include <SDL/SDL.h>
-#include <boost/shared_ptr.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <SDL/SDL_ttf.h>
 #include "lostbase/RenderStats.h"

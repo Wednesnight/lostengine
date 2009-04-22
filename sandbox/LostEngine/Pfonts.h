@@ -6,23 +6,22 @@
 #include "lost/fonts/BitmapFont.h"
 #include "lost/fonts/TrueTypeFont.h"
 #include "lost/guiro/ResourceLoader.h"
-#include <boost/shared_ptr.hpp>
 
 struct Pfonts : public Visual
 {
   const lost::DisplayAttributes& display;
-  boost::shared_ptr<lost::fonts::BitmapFont> bitmap9x15;
-  boost::shared_ptr<lost::fonts::BitmapFont> bitmap8x13;
-  boost::shared_ptr<lost::fonts::BitmapFont> timesRoman10;
-  boost::shared_ptr<lost::fonts::BitmapFont> timesRoman24;
-  boost::shared_ptr<lost::fonts::BitmapFont> helvetica10;
-  boost::shared_ptr<lost::fonts::BitmapFont> helvetica12;
-  boost::shared_ptr<lost::fonts::BitmapFont> helvetica18;
+  lost::shared_ptr<lost::fonts::BitmapFont> bitmap9x15;
+  lost::shared_ptr<lost::fonts::BitmapFont> bitmap8x13;
+  lost::shared_ptr<lost::fonts::BitmapFont> timesRoman10;
+  lost::shared_ptr<lost::fonts::BitmapFont> timesRoman24;
+  lost::shared_ptr<lost::fonts::BitmapFont> helvetica10;
+  lost::shared_ptr<lost::fonts::BitmapFont> helvetica12;
+  lost::shared_ptr<lost::fonts::BitmapFont> helvetica18;
 
-  boost::shared_ptr<lost::fonts::TrueTypeFont> zig;
-  boost::shared_ptr<lost::fonts::TrueTypeFont> blindfold;
-  boost::shared_ptr<lost::fonts::TrueTypeFont> slaytanic;
-  boost::shared_ptr<lost::fonts::TrueTypeFont> suigeneris;
+  lost::shared_ptr<lost::fonts::TrueTypeFont> zig;
+  lost::shared_ptr<lost::fonts::TrueTypeFont> blindfold;
+  lost::shared_ptr<lost::fonts::TrueTypeFont> slaytanic;
+  lost::shared_ptr<lost::fonts::TrueTypeFont> suigeneris;
 
   lost::guiro::ResourceLoader&                  resourceLoader;
 

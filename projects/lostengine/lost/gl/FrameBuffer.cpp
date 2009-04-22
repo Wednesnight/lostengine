@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/FrameBuffer.h"
 #include <stdexcept>
 #include "lost/gl/gl.h"

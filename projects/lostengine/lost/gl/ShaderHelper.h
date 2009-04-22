@@ -22,19 +22,19 @@ namespace gl
  *
  *  throws if one of the compile stages or the link stage fail.
  */
-static inline boost::shared_ptr<lost::gl::ShaderProgram> loadShader(boost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
+static inline lost::shared_ptr<lost::gl::ShaderProgram> loadShader(lost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
 {
-  boost::shared_ptr<lost::gl::FragmentShader> fragmentShader(new lost::gl::FragmentShader());
-  boost::shared_ptr<lost::gl::VertexShader>   vertexShader(new lost::gl::VertexShader());
-  boost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram(new lost::gl::ShaderProgram());
+  lost::shared_ptr<lost::gl::FragmentShader> fragmentShader(new lost::gl::FragmentShader());
+  lost::shared_ptr<lost::gl::VertexShader>   vertexShader(new lost::gl::VertexShader());
+  lost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram(new lost::gl::ShaderProgram());
 
-  boost::shared_ptr<resource::File> vsfile = loader->load(inName+".vs");
+  lost::shared_ptr<resource::File> vsfile = loader->load(inName+".vs");
   vertexShader->source(vsfile->str());
   vertexShader->compile();
   if(!vertexShader->compiled())
     throw std::runtime_error(vertexShader->log());
 
-  boost::shared_ptr<resource::File> fsfile = loader->load(inName+".fs");
+  lost::shared_ptr<resource::File> fsfile = loader->load(inName+".fs");
   fragmentShader->source(fsfile->str());
   fragmentShader->compile();
   if(!fragmentShader->compiled())

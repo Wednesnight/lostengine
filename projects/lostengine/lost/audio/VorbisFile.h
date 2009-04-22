@@ -9,7 +9,7 @@ namespace audio
 
 struct VorbisFile
 {
-	VorbisFile(boost::shared_ptr<resource::File> inFile);
+	VorbisFile(lost::shared_ptr<resource::File> inFile);
 	~VorbisFile();
 
 	int sampleRate;

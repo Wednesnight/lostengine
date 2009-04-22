@@ -3,7 +3,6 @@
 
 #include "Effect.h"
 #include <iostream>
-#include <boost/shared_ptr.hpp>
 
 struct CircleEffect : public Effect
 {
@@ -17,10 +16,10 @@ struct CircleEffect : public Effect
     unsigned long scaling;
         
     // generator instances
-    boost::shared_ptr<sinegen> xg;
-    boost::shared_ptr<cosgen> yg;
-    boost::shared_ptr<sinegen> psg;
-    boost::shared_ptr<sinegen> wg;
+    lost::shared_ptr<sinegen> xg;
+    lost::shared_ptr<cosgen> yg;
+    lost::shared_ptr<sinegen> psg;
+    lost::shared_ptr<sinegen> wg;
 
     // screen pos of whole animation
     unsigned long posx;
@@ -32,20 +31,20 @@ struct CircleEffect : public Effect
         float xtime = 3000;
         float ytime = xtime * 1.f;
 
-        wg.reset(new sinegen(boost::shared_ptr<generator>(new constgen(100)),
-                             boost::shared_ptr<generator>(new constgen(50)),
-                             boost::shared_ptr<generator>(new constgen(xtime*1.0))));
+        wg.reset(new sinegen(lost::shared_ptr<generator>(new constgen(100)),
+                             lost::shared_ptr<generator>(new constgen(50)),
+                             lost::shared_ptr<generator>(new constgen(xtime*1.0))));
 
                 
-        xg.reset(new sinegen(boost::shared_ptr<generator>(new constgen(0)),
-                             boost::shared_ptr<generator>(new constgen(100)),
-                             boost::shared_ptr<generator>(new constgen(xtime))));
-        yg.reset(new cosgen(boost::shared_ptr<generator>(new constgen(0)),
-                            boost::shared_ptr<generator>(new constgen(100)),
-                            boost::shared_ptr<generator>(new constgen(ytime*.9))));
-        psg.reset(new sinegen(boost::shared_ptr<generator>(new constgen(8)), 
-                              boost::shared_ptr<generator>(new constgen(8)),
-                              boost::shared_ptr<generator>(new constgen(1700))));
+        xg.reset(new sinegen(lost::shared_ptr<generator>(new constgen(0)),
+                             lost::shared_ptr<generator>(new constgen(100)),
+                             lost::shared_ptr<generator>(new constgen(xtime))));
+        yg.reset(new cosgen(lost::shared_ptr<generator>(new constgen(0)),
+                            lost::shared_ptr<generator>(new constgen(100)),
+                            lost::shared_ptr<generator>(new constgen(ytime*.9))));
+        psg.reset(new sinegen(lost::shared_ptr<generator>(new constgen(8)), 
+                              lost::shared_ptr<generator>(new constgen(8)),
+                              lost::shared_ptr<generator>(new constgen(1700))));
 
 
         numsteps = 40;

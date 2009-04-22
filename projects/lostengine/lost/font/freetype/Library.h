@@ -4,6 +4,8 @@
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
+#include "lost/platform/shared_ptr.h"
+
 namespace lost
 {
   namespace font
@@ -11,7 +13,7 @@ namespace lost
     namespace freetype
     {
       struct Library;
-      typedef boost::shared_ptr<Library> LibraryPtr;
+      typedef lost::shared_ptr<Library> LibraryPtr;
     
       // exactly one instance required for font creation.
       struct Library

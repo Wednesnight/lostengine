@@ -9,7 +9,7 @@ namespace lost
 namespace gl
 {
 struct RenderBuffer;
-typedef boost::shared_ptr<RenderBuffer> RenderBufferPtr;
+typedef lost::shared_ptr<RenderBuffer> RenderBufferPtr;
 
 struct RenderBuffer
 {

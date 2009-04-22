@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/model/lsystem/Renderer.h"
 
@@ -20,8 +19,8 @@ namespace lost
         [
           namespace_("lsystem")
           [
-            class_<Renderer, boost::shared_ptr<Renderer> >("Renderer")
-            .def(constructor<const boost::shared_ptr<lost::gl::Canvas>&, const boost::shared_ptr<Mesh>&>()) 
+            class_<Renderer, lost::shared_ptr<Renderer> >("Renderer")
+            .def(constructor<const lost::shared_ptr<lost::gl::Canvas>&, const lost::shared_ptr<Mesh>&>()) 
             .def("render", &Renderer::render)
             .def_readwrite("size", &Renderer::size)
           ]

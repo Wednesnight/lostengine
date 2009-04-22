@@ -5,6 +5,7 @@
 #include <boost/cstdint.hpp>
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
+#include "lost/platform/shared_ptr.h"
 
 namespace boost { template<typename T> class shared_ptr; }
 
@@ -15,7 +16,7 @@ namespace lost
   namespace bitmap
   {
     struct Bitmap;
-    typedef boost::shared_ptr<Bitmap> BitmapPtr;
+    typedef lost::shared_ptr<Bitmap> BitmapPtr;
   
     struct Bitmap : private boost::noncopyable
     {
@@ -49,7 +50,7 @@ namespace lost
              Components destComponents,
              Components srcComponents,
              boost::uint8_t* data);
-      Bitmap(boost::shared_ptr<lost::resource::File> inFile);
+      Bitmap(lost::shared_ptr<lost::resource::File> inFile);
       void reset();
       virtual ~Bitmap();
 
@@ -83,7 +84,7 @@ namespace lost
       /** attempts to interpret a chunk ofmemory as a bitmap, with the help of the underlying image library.
        * An exception is thrown if an error occurs.
        */
-      void init(boost::shared_ptr<lost::resource::File> inFile);
+      void init(lost::shared_ptr<lost::resource::File> inFile);
       
       /** calculates the number of pixels for a given bitmap components constant.
        */
@@ -164,13 +165,13 @@ namespace lost
       void drawRectOutline(const lost::math::Rect& inRect, const common::Color& inColor);  
         
       /** rotates the bitmap clock wise and returns it as a new bitmap*/
-      boost::shared_ptr<Bitmap> rotCW();
+      lost::shared_ptr<Bitmap> rotCW();
       
       /** returns the occupied are in pixels. */
       float area() { return (float)(width*height); }
       
       /** draws this bitmap into the specified target. */
-      void draw(boost::uint32_t x, boost::uint32_t y, boost::shared_ptr<Bitmap> target);
+      void draw(boost::uint32_t x, boost::uint32_t y, lost::shared_ptr<Bitmap> target);
       
     private:
       void destroy();

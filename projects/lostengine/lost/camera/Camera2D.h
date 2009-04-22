@@ -8,14 +8,14 @@ namespace lost
   namespace camera
   {
     struct Camera2D;
-    typedef boost::shared_ptr<Camera2D> Camera2DPtr;
+    typedef lost::shared_ptr<Camera2D> Camera2DPtr;
 
     struct Camera2D : public Camera
     {
     private:
       lost::math::Rect space;
     public:
-      Camera2D(const boost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
+      Camera2D(const lost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
 
       virtual void apply();
     };

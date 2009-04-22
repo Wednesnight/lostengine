@@ -14,7 +14,7 @@ namespace lost
 namespace gl
 {
 struct ShaderProgram;
-typedef boost::shared_ptr<ShaderProgram> ShaderProgramPtr;
+typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
 
 struct ShaderProgram
 {
@@ -165,7 +165,7 @@ public:
   };
 
   typedef std::map<std::string, ShaderProgram::Parameter> ParameterMap;
-  typedef std::list<boost::shared_ptr<Shader> >           ShaderList;
+  typedef std::list<lost::shared_ptr<Shader> >           ShaderList;
 
   ShaderProgram()
   {
@@ -195,7 +195,7 @@ public:
     return param(inName);
   }
 
-  void attach(boost::shared_ptr<Shader> inShader)
+  void attach(lost::shared_ptr<Shader> inShader)
   {
     glAttachShader(program, inShader->shader);GLDEBUG_THROW;
     shaders.push_back(inShader);

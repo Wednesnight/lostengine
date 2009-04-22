@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/bitmap/Bitmap.h"
 
@@ -17,9 +16,9 @@ namespace lost
       [
         namespace_("bitmap")
         [
-          class_<Bitmap, boost::shared_ptr<Bitmap> >("Bitmap")
+          class_<Bitmap, lost::shared_ptr<Bitmap> >("Bitmap")
             .def(constructor<>())
-            .def(constructor<boost::shared_ptr<lost::resource::File> >())
+            .def(constructor<lost::shared_ptr<lost::resource::File> >())
             .def_readwrite("width", &Bitmap::width)
             .def_readwrite("height", &Bitmap::height)
         ]

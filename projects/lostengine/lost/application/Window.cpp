@@ -5,7 +5,7 @@ namespace lost
   namespace application
   {
     
-    Window::Window(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+    Window::Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
                    const WindowParams& inParams)
     : dispatcher(inDispatcher),
       params(inParams)
@@ -16,10 +16,10 @@ namespace lost
       canvas.reset(new gl::Canvas(context, lost::math::Rect(0, 0, params.rect.width, params.rect.height)));
     }
 
-    boost::shared_ptr<Window> Window::create(const boost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+    lost::shared_ptr<Window> Window::create(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
                                              const WindowParams& inParams)
     {
-      return boost::shared_ptr<Window>(new Window(inDispatcher, inParams));
+      return lost::shared_ptr<Window>(new Window(inDispatcher, inParams));
     }
 
     Window::~Window()

@@ -20,19 +20,19 @@ namespace lost
     namespace obj
     {
 
-      typedef std::map<boost::shared_ptr<MaterialGroup>, boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > > ElementBuffers;
+      typedef std::map<lost::shared_ptr<MaterialGroup>, lost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > > ElementBuffers;
       struct Renderer
       {
-        boost::shared_ptr<lost::gl::Canvas> canvas;
+        lost::shared_ptr<lost::gl::Canvas> canvas;
 
-        boost::shared_ptr<Mesh>     mesh;
-        boost::shared_ptr<Material> material;
+        lost::shared_ptr<Mesh>     mesh;
+        lost::shared_ptr<Material> material;
 
-        boost::shared_ptr<gl::ArrayBuffer<math::Vec3> > vertexBuffer;
-        boost::shared_ptr<gl::ArrayBuffer<math::Vec3> > normalBuffer;
+        lost::shared_ptr<gl::ArrayBuffer<math::Vec3> > vertexBuffer;
+        lost::shared_ptr<gl::ArrayBuffer<math::Vec3> > normalBuffer;
         
         // without material
-        boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > elementBuffer;
+        lost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > elementBuffer;
         // with material
         ElementBuffers elementBuffers;
 
@@ -42,7 +42,7 @@ namespace lost
         GLenum renderModeBack;
 #endif
 
-        Renderer(const boost::shared_ptr<lost::gl::Canvas>& inCanvas, boost::shared_ptr<Mesh> inMesh, boost::shared_ptr<Material> inMaterial)
+        Renderer(const lost::shared_ptr<lost::gl::Canvas>& inCanvas, lost::shared_ptr<Mesh> inMesh, lost::shared_ptr<Material> inMaterial)
         : canvas(inCanvas),
           mesh(inMesh),
           material(inMaterial),
@@ -87,7 +87,7 @@ namespace lost
             unsigned short* faces = mesh->faces.get();
             for (MaterialGroups::iterator idx = material->groups.begin(); idx != material->groups.end(); ++idx)
             {
-              boost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > buffer(new gl::ElementArrayBuffer<unsigned short>);
+              lost::shared_ptr<gl::ElementArrayBuffer<unsigned short> > buffer(new gl::ElementArrayBuffer<unsigned short>);
               buffer->bindBufferData(&faces[(*idx)->faceOffset], (*idx)->faceLength);
               elementBuffers[*idx] = buffer;
               buffer->unbind();

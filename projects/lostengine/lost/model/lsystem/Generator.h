@@ -17,7 +17,7 @@ namespace lost
 
       struct Generator
       {
-        boost::shared_ptr<lost::lsystem::LSystem> lsystem;
+        lost::shared_ptr<lost::lsystem::LSystem> lsystem;
 
         std::vector<lost::model::Vertex> lines;
 
@@ -26,9 +26,9 @@ namespace lost
           lsystem.reset(new lost::lsystem::LSystem());
         }
 
-        boost::shared_ptr<lost::model::Mesh> generate(const boost::shared_ptr<lost::lsystem::LSystemState>& state)
+        lost::shared_ptr<lost::model::Mesh> generate(const lost::shared_ptr<lost::lsystem::LSystemState>& state)
         {
-          boost::shared_ptr<lost::model::Mesh> result(new lost::model::Mesh());
+          lost::shared_ptr<lost::model::Mesh> result(new lost::model::Mesh());
 
           // reset result coordinates
           lines.clear();

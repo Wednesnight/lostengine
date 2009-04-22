@@ -2,21 +2,20 @@
 #define LOST_EVENT_EVENT_H
 
 #include <string>
-#include <boost/enable_shared_from_this.hpp>
 
 namespace lost
 {
   namespace event
   {
     struct Event;
-    typedef boost::shared_ptr<Event> EventPtr;
+    typedef lost::shared_ptr<Event> EventPtr;
 
     typedef std::string Type;
 
 		/** low-level event class.
 		 *	Any event that should be dispatched via the EventDispatcher must be derived from this class.
 		 */
-    struct Event : public boost::enable_shared_from_this<Event>
+    struct Event : public lost::enable_shared_from_this<Event>
     {    
       Type type;					// the type of the event
 

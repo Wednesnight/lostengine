@@ -22,7 +22,7 @@ namespace lost
         setFaceCount(faceCount);
       }
 
-      Mesh(boost::uint32_t inVertexCount, boost::uint32_t inTexcoordCount, boost::uint32_t inFaceCount, boost::shared_ptr<Texture> inTexture)
+      Mesh(boost::uint32_t inVertexCount, boost::uint32_t inTexcoordCount, boost::uint32_t inFaceCount, lost::shared_ptr<Texture> inTexture)
       : vertexCount(inVertexCount),
       texcoordCount(inTexcoordCount),
       faceCount(inFaceCount),
@@ -74,7 +74,7 @@ namespace lost
       boost::shared_array<VertexType>     vertices;
       boost::shared_array<VertexType>     texcoords;
       boost::shared_array<boost::uint8_t> faces;
-      boost::shared_ptr<gl::Texture>      texture;
+      lost::shared_ptr<gl::Texture>      texture;
     };
 
     typedef Mesh<math::Vec2> Mesh2D;

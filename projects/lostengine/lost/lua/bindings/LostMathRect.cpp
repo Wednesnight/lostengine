@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/math/Rect.h"
 #include <luabind/operator.hpp>
@@ -18,7 +17,7 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Rect, boost::shared_ptr<Rect> >("Rect")
+          class_<Rect, lost::shared_ptr<Rect> >("Rect")
           .def(constructor<>()) 
           .def(constructor<const Rect&>()) 
           .def(constructor<float, float, float, float>())

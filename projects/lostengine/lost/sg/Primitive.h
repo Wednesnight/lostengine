@@ -9,7 +9,7 @@ namespace sg
 {
 
   struct Primitive;
-  typedef boost::shared_ptr<Primitive> PrimitivePtr;
+  typedef lost::shared_ptr<Primitive> PrimitivePtr;
 
 /** Base class for all objects that can be rendered in batches and contained in
  *  batches.

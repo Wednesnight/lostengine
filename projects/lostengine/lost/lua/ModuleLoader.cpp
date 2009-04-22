@@ -1,5 +1,4 @@
 #include <string>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 
@@ -14,7 +13,7 @@ namespace lua
 {
 namespace ModuleLoader
 {
-  void install(State& inState, boost::shared_ptr<resource::Loader> inLoader)
+  void install(State& inState, lost::shared_ptr<resource::Loader> inLoader)
   {
     const static string script =
     "local debug = _G.log.debug\n"

@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/AccelerometerEvent.h"
 #include "lost/lua/EventCast.h"
@@ -19,7 +18,7 @@ namespace lost
       [
        namespace_("application")
        [
-         class_<AccelerometerEvent, Event, boost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
+         class_<AccelerometerEvent, Event, lost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
            .def(constructor<std::string>()) 
            .def_readwrite("x", &AccelerometerEvent::x)
            .def_readwrite("y", &AccelerometerEvent::y)

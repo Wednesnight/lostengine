@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/lua/EventCast.h"
@@ -20,13 +19,13 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<TouchEvent, Event, boost::shared_ptr<TouchEvent> >("TouchEvent")
+          class_<TouchEvent, Event, lost::shared_ptr<TouchEvent> >("TouchEvent")
             .def(constructor<std::string>()) 
             .def("size", &TouchEvent::size) 
             .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)
             .scope
             [
-              class_<TouchEvent::Touch, boost::shared_ptr<TouchEvent::Touch> >("Touch")
+              class_<TouchEvent::Touch, lost::shared_ptr<TouchEvent::Touch> >("Touch")
                 .def(constructor<>()) 
                 .def_readwrite("location", &TouchEvent::Touch::location)
                 .def_readwrite("tapCount", &TouchEvent::Touch::tapCount)

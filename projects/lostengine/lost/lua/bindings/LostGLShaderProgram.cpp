@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/shared_array.hpp>
 #include "lost/lua/lua.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/lua/bindings/LostGLShaderProgram.h"

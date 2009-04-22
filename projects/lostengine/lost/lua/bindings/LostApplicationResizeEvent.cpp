@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/lua/EventCast.h"
@@ -19,7 +18,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ResizeEvent, Event, boost::shared_ptr<ResizeEvent> >("ResizeEvent")
+          class_<ResizeEvent, Event, lost::shared_ptr<ResizeEvent> >("ResizeEvent")
           .def(constructor<std::string>()) 
           .def_readwrite("width", &ResizeEvent::width)
           .def_readwrite("height", &ResizeEvent::height)

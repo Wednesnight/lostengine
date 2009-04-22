@@ -2,7 +2,6 @@
 #define LOST_APPLICATION_TASKLET_H
 
 #include "fhtagn/threads/tasklet.h"
-#include <boost/enable_shared_from_this.hpp>
 #include "lost/application/Config.h"
 #include <list>
 #include "lost/resource/DefaultLoader.h"
@@ -16,9 +15,9 @@ namespace lost
     struct Application;
   
     struct Tasklet;
-    typedef boost::shared_ptr<Tasklet> TaskletPtr;
+    typedef lost::shared_ptr<Tasklet> TaskletPtr;
 
-    struct Tasklet : public fhtagn::threads::tasklet, public boost::enable_shared_from_this<Tasklet>
+    struct Tasklet : public fhtagn::threads::tasklet, public lost::enable_shared_from_this<Tasklet>
     {
     private:
       // internal flag to check if we have a valid script

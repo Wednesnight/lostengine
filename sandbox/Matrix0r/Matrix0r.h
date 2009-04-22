@@ -10,7 +10,6 @@
 #include "lost/common/DisplayAttributes.h"
 #include "lost/engine/KeySym.h"
 #include "lost/common/FpsMeter.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 

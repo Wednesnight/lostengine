@@ -10,13 +10,13 @@ namespace lost
   namespace resource
   {
     struct Loader;
-    typedef boost::shared_ptr<Loader> LoaderPtr;
+    typedef lost::shared_ptr<Loader> LoaderPtr;
 
     struct File;
-    typedef boost::shared_ptr<File> FilePtr;
+    typedef lost::shared_ptr<File> FilePtr;
 
     struct Repository;
-    typedef boost::shared_ptr<Repository> RepositoryPtr;
+    typedef lost::shared_ptr<Repository> RepositoryPtr;
 
     struct Loader
     {
@@ -24,11 +24,11 @@ namespace lost
       virtual ~Loader();
 
       FilePtr load( const boost::filesystem::path& inPath);
-      void addRepository( boost::shared_ptr<Repository> inRepository );
+      void addRepository( lost::shared_ptr<Repository> inRepository );
 
     private:
       // resource repositories
-      std::vector<boost::shared_ptr<Repository> > repositories;
+      std::vector<lost::shared_ptr<Repository> > repositories;
     };
 
   }

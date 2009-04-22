@@ -21,7 +21,7 @@ namespace lost
 namespace font
 {
 struct TrueTypeFont;
-typedef boost::shared_ptr<TrueTypeFont> TrueTypeFontPtr;
+typedef lost::shared_ptr<TrueTypeFont> TrueTypeFontPtr;
 
 struct TrueTypeFont
 {
@@ -42,10 +42,10 @@ struct TrueTypeFont
     
     bool drawable;
     
-    boost::shared_ptr<bitmap::Bitmap> bitmap;
+    lost::shared_ptr<bitmap::Bitmap> bitmap;
   };
 
-  typedef boost::shared_ptr<Glyph> GlyphPtr;
+  typedef lost::shared_ptr<Glyph> GlyphPtr;
   
   TrueTypeFont(freetype::LibraryPtr inLibrary,
                resource::FilePtr inFile);

@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/al/al.h"
 #include "lost/al/Source.h"
 #include "lost/al/Buffer.h"
@@ -264,12 +263,12 @@ void Source::unqueue(ALuint inBufferId)
   alSourceUnqueueBuffers(source, 1, &inBufferId);ALDEBUG_THROW;
 }
 
-void Source::queue(boost::shared_ptr<Buffer> buffer)
+void Source::queue(lost::shared_ptr<Buffer> buffer)
 {
   queue(buffer->buffer);
 }
 
-void Source::unqueue(boost::shared_ptr<Buffer> buffer)
+void Source::unqueue(lost::shared_ptr<Buffer> buffer)
 {
   unqueue(buffer->buffer);
 }

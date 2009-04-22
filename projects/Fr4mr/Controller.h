@@ -14,32 +14,32 @@
 struct MyAppController
 {
 private:
-  boost::shared_ptr<lost::application::Application> app;
-  boost::shared_ptr<lost::application::Window> mainWindow;
+  lost::shared_ptr<lost::application::Application> app;
+  lost::shared_ptr<lost::application::Window> mainWindow;
   lost::gl::SharedState renderState;
-  boost::shared_ptr<lost::common::FpsMeter> fpsMeter;
+  lost::shared_ptr<lost::common::FpsMeter> fpsMeter;
 
 
   void shaderInit();
-  boost::shared_ptr<lost::gl::ShaderProgram> program;
+  lost::shared_ptr<lost::gl::ShaderProgram> program;
 
-  void drawModel(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
-  void drawModel2(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
-  void drawScene(const boost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
+  void drawModel(const lost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
+  void drawModel2(const lost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
+  void drawScene(const lost::shared_ptr<lost::gl::Canvas>& canvas, double deltaSec);
   void render(const double deltaSec);
   void mainLoop();
-  void keyHandler(boost::shared_ptr<lost::application::KeyEvent> event);
+  void keyHandler(lost::shared_ptr<lost::application::KeyEvent> event);
 
   // all canvases will operate on the same context, so we don't have to constantly set the current context
-  boost::shared_ptr<lost::gl::Canvas> fullscreen3dCanvas;
-  boost::shared_ptr<lost::camera::Camera3D> fullscreen3dCam;  
+  lost::shared_ptr<lost::gl::Canvas> fullscreen3dCanvas;
+  lost::shared_ptr<lost::camera::Camera3D> fullscreen3dCam;  
   lost::gl::SharedState modelRenderState;  
   float angle;
   
   // font stuff
-  boost::shared_ptr<lost::font::freetype::Library> lib;
-  boost::shared_ptr<lost::font::TrueTypeFont> fnt;
-  boost::shared_ptr<lost::font::Model> logo;
+  lost::shared_ptr<lost::font::freetype::Library> lib;
+  lost::shared_ptr<lost::font::TrueTypeFont> fnt;
+  lost::shared_ptr<lost::font::Model> logo;
 public:
   MyAppController();
   int run();

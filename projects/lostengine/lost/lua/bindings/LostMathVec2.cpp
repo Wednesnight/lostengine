@@ -1,4 +1,3 @@
-//#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/math/Vec2.h"
 #include <luabind/operator.hpp>
@@ -18,7 +17,7 @@ namespace lost
       [
        namespace_("math")
        [
-//        class_<Vec2, boost::shared_ptr<Vec2> >("Vec2")
+//        class_<Vec2, lost::shared_ptr<Vec2> >("Vec2")
         class_<Vec2>("Vec2")
         .def(constructor<>())
         .def(constructor<const Vec2&>())

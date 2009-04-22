@@ -4,16 +4,15 @@
 #include "Effect.h"
 #include <GLUT/glut.h>
 #include "../lib/generator.h"
-#include <boost/shared_ptr.hpp>
 
 struct Ring
 {
-    boost::shared_ptr<generator> anglegen;
-    boost::shared_ptr<generator> xgen;
-    boost::shared_ptr<generator> ygen;
-    boost::shared_ptr<generator> rgen;
-    boost::shared_ptr<generator> ggen;
-    boost::shared_ptr<generator> bgen;
+    lost::shared_ptr<generator> anglegen;
+    lost::shared_ptr<generator> xgen;
+    lost::shared_ptr<generator> ygen;
+    lost::shared_ptr<generator> rgen;
+    lost::shared_ptr<generator> ggen;
+    lost::shared_ptr<generator> bgen;
 
     float globalx;
     float globaly;
@@ -22,30 +21,30 @@ struct Ring
 
     Ring(float rspeed, float gspeed, float bspeed)
     {
-        anglegen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(100)),
-                                   boost::shared_ptr<generator>(new constgen(2000))));
+        anglegen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(100)),
+                                   lost::shared_ptr<generator>(new constgen(2000))));
                             
         circletime = 7000;                    
                                    
-        xgen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(5)),
-                                   boost::shared_ptr<generator>(new constgen(circletime))));
-        ygen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(5)),
-                                   boost::shared_ptr<generator>(new constgen(circletime*1.0f))));
+        xgen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(5)),
+                                   lost::shared_ptr<generator>(new constgen(circletime))));
+        ygen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(5)),
+                                   lost::shared_ptr<generator>(new constgen(circletime*1.0f))));
 
-        rgen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(.5)),
-                                   boost::shared_ptr<generator>(new constgen(.5)),
-                                   boost::shared_ptr<generator>(new constgen(rspeed))));
+        rgen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(.5)),
+                                   lost::shared_ptr<generator>(new constgen(.5)),
+                                   lost::shared_ptr<generator>(new constgen(rspeed))));
 
-        ggen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(.7)),
-                                   boost::shared_ptr<generator>(new constgen(.2)),
-                                   boost::shared_ptr<generator>(new constgen(gspeed))));
+        ggen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(.7)),
+                                   lost::shared_ptr<generator>(new constgen(.2)),
+                                   lost::shared_ptr<generator>(new constgen(gspeed))));
 
-        bgen.reset(new cosgen(boost::shared_ptr<generator>(new constgen(.1)),
-                                   boost::shared_ptr<generator>(new constgen(2)),
-                                   boost::shared_ptr<generator>(new constgen(bspeed))));
+        bgen.reset(new cosgen(lost::shared_ptr<generator>(new constgen(.1)),
+                                   lost::shared_ptr<generator>(new constgen(2)),
+                                   lost::shared_ptr<generator>(new constgen(bspeed))));
 
         globalx = 0.0;
         globaly = 0.0;    
@@ -122,8 +121,8 @@ struct RingsEffect : public Effect
     Ring* ring2;
     Ring* ring3;
 
-    boost::shared_ptr<generator> yanglegen;
-    boost::shared_ptr<generator> xanglegen;
+    lost::shared_ptr<generator> yanglegen;
+    lost::shared_ptr<generator> xanglegen;
     
     RingsEffect(RenderEnvironment& renv)
     : Effect(renv)
@@ -132,13 +131,13 @@ struct RingsEffect : public Effect
         ring2 = new Ring(5000, 3000, 7000);
         ring3 = new Ring(7000, 3000, 5000);
         
-        yanglegen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(-45)),
-                                   boost::shared_ptr<generator>(new constgen(0)),
-                                   boost::shared_ptr<generator>(new constgen(2000))));        
+        yanglegen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(-45)),
+                                   lost::shared_ptr<generator>(new constgen(0)),
+                                   lost::shared_ptr<generator>(new constgen(2000))));        
 
-        xanglegen.reset(new sinegen(boost::shared_ptr<generator>(new constgen(-45)),
-                                   boost::shared_ptr<generator>(new constgen(15)),
-                                   boost::shared_ptr<generator>(new constgen(5000))));        
+        xanglegen.reset(new sinegen(lost::shared_ptr<generator>(new constgen(-45)),
+                                   lost::shared_ptr<generator>(new constgen(15)),
+                                   lost::shared_ptr<generator>(new constgen(5000))));        
 
     }
     

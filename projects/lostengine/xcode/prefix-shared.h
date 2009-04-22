@@ -15,15 +15,12 @@
 #include <algorithm>
 /*#include <boost/bind.hpp>
 #include <boost/cstdint.hpp>
-#include <boost/enable_shared_from_this.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/function.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_array.hpp>
 #include <boost/scoped_ptr.hpp>
-#include <boost/shared_array.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/signal.hpp>*/
 //#include <boost/spirit/actor/decrement_actor.hpp>
 //#include <boost/spirit/actor/increment_actor.hpp>
@@ -47,4 +44,4 @@
 #include <sys/time.h>
 #include <time.h>
 #include <vector>
-#include "lost/forward/boost"
+#include "lost/platform/shared_ptr.h"

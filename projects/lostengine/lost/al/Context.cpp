@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/al/Context.h"
 #include <stdexcept>
 #include "lost/common/Logger.h"
@@ -11,17 +10,17 @@ namespace lost
 namespace al
 {
 
-Context::Context(boost::shared_ptr<Device> inDevice)
+Context::Context(lost::shared_ptr<Device> inDevice)
 {
   initWithDevice(inDevice);
 }
 
 Context::Context()
 {
-  initWithDevice(boost::shared_ptr<Device>(new Device));
+  initWithDevice(lost::shared_ptr<Device>(new Device));
 }
 
-void Context::initWithDevice(boost::shared_ptr<Device> inDevice)
+void Context::initWithDevice(lost::shared_ptr<Device> inDevice)
 {
   DOUT("creating context");
   context = alcCreateContext(inDevice->device, NULL);ALDEBUG_THROW;

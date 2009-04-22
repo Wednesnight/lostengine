@@ -15,7 +15,7 @@ namespace gl
 {
 
 struct XContext;
-typedef boost::shared_ptr<XContext> XContextPtr;
+typedef lost::shared_ptr<XContext> XContextPtr;
 
 struct XContext
 {  

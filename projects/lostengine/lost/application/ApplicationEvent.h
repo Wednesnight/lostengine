@@ -8,7 +8,7 @@ namespace lost
   namespace application
   {
     struct ApplicationEvent;
-    typedef boost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
+    typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
     struct ApplicationEvent : public event::Event
     {

@@ -94,24 +94,24 @@ namespace lost
       }
     }
     
-    boost::shared_ptr<Application> Application::create()
+    lost::shared_ptr<Application> Application::create()
     {
-      return boost::shared_ptr<Application>(new Application);
+      return lost::shared_ptr<Application>(new Application);
     }
 
-    boost::shared_ptr<Application> Application::create(int argn, char** args)
+    lost::shared_ptr<Application> Application::create(int argn, char** args)
     {
-      return boost::shared_ptr<Application>(new Application(argn, args));
+      return lost::shared_ptr<Application>(new Application(argn, args));
     }
     
-    boost::shared_ptr<Application> Application::create(const TaskletPtr& tasklet)
+    lost::shared_ptr<Application> Application::create(const TaskletPtr& tasklet)
     {
-      return boost::shared_ptr<Application>(new Application(tasklet));
+      return lost::shared_ptr<Application>(new Application(tasklet));
     }
 
-    boost::shared_ptr<Application> Application::create(const std::string& inScript)
+    lost::shared_ptr<Application> Application::create(const std::string& inScript)
     {
-      return boost::shared_ptr<Application>(new Application(inScript));
+      return lost::shared_ptr<Application>(new Application(inScript));
     }
 
     Application::~Application()
@@ -127,7 +127,7 @@ namespace lost
 
     void Application::dispatchApplicationEvent(const lost::event::Type& which)
     {
-      boost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(which));
+      lost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(which));
       eventDispatcher->dispatchEvent(appEvent);
       for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {

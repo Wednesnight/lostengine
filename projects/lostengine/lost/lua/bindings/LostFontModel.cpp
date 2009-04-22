@@ -1,4 +1,3 @@
-#include <boost/shared_ptr.hpp>
 #include "lost/lua/lua.h"
 #include "lost/font/Model.h"
 
@@ -17,7 +16,7 @@ namespace lost
       [
         namespace_("font")
         [
-          class_<Model, boost::shared_ptr<Model> >("Model")
+          class_<Model, lost::shared_ptr<Model> >("Model")
             .def(constructor<>())
             .def("render", &Model::render)
             .def_readonly("min", &Model::min)

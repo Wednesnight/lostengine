@@ -3,7 +3,6 @@
 
 #include "lost/al/Source.h"
 #include "lost/audio/Engine.h"
-#include <boost/enable_shared_from_this.hpp>
 
 namespace lost
 {
@@ -16,7 +15,7 @@ struct VorbisFile;
 
 // Sources are basically OpenAL sources with additional helper code
 // for playing static and streaming audio.
-struct Source : public boost::enable_shared_from_this<Source>
+struct Source : public lost::enable_shared_from_this<Source>
 {
 	enum SourceType
 	{
@@ -32,19 +31,19 @@ struct Source : public boost::enable_shared_from_this<Source>
 	// the source will decompress the audio if necessary and keep a copy
 	// so you can discard the file afterwards.
 	// NOTE: this currently only supports ogg files.
-	void initWithFile(boost::shared_ptr<resource::File> inFile);
+	void initWithFile(lost::shared_ptr<resource::File> inFile);
 
 	void play();
 	void stop();
 	void pause();
 	void rewind();
 
-	boost::weak_ptr<Engine> engine;
-	boost::shared_ptr<al::Source> source;
+	lost::weak_ptr<Engine> engine;
+	lost::shared_ptr<al::Source> source;
 
 	SourceType sourceType;
 
-	boost::shared_ptr<VorbisFile> vorbisFile; //  for static playback
+	lost::shared_ptr<VorbisFile> vorbisFile; //  for static playback
 private:
 	friend struct Engine;
 	Source(); // use the audio engine to create sources

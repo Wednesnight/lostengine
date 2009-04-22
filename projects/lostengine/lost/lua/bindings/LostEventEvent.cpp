@@ -1,5 +1,3 @@
-#include <boost/shared_ptr.hpp>
-#include <boost/enable_shared_from_this.hpp>
 #include "lost/lua/lua.h"
 #include "lost/event/Event.h"
 
@@ -12,7 +10,7 @@ namespace lost
 {
   namespace lua
   {
-    boost::shared_ptr<Event> asSharedPtr(Event* event)
+    lost::shared_ptr<Event> asSharedPtr(Event* event)
     {
       return event->shared_from_this();
     }
@@ -23,7 +21,7 @@ namespace lost
       [
         namespace_("event")
         [
-          class_<Event, boost::shared_ptr<Event> >("Event")
+          class_<Event, lost::shared_ptr<Event> >("Event")
            .def(constructor<std::string>()) 
            .def("asSharedPtr", &asSharedPtr)
            .def_readwrite("type", &Event::type)

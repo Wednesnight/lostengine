@@ -1,4 +1,3 @@
-#include <boost/shared_array.hpp>
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
 
