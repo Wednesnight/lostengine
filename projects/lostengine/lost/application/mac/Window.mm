@@ -308,7 +308,7 @@ namespace lost
       hiddenMembers = new WindowHiddenMembers;
 
       // init pool
-      hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
+//      hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
       
       // create view
       hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(params.rect.x, params.rect.y, params.rect.width, params.rect.height)];
@@ -338,7 +338,7 @@ namespace lost
       // FIXME: cleanup!
       [hiddenMembers->window release];
       [hiddenMembers->view release];
-      [hiddenMembers->pool release];
+//      [hiddenMembers->pool release];
       delete hiddenMembers;
     }
 
