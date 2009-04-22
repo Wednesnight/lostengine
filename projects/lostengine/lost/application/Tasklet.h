@@ -2,14 +2,13 @@
 #define LOST_APPLICATION_TASKLET_H
 
 #include "fhtagn/threads/tasklet.h"
-#include "lost/application/Config.h"
 #include <list>
 #include "lost/resource/DefaultLoader.h"
+#include "lost/lua/State.h"
 
 namespace lost
 {
   namespace event {    struct EventDispatcher; }
-  namespace lua { struct State; }
   namespace application
   {
     struct Application;
@@ -29,8 +28,7 @@ namespace lost
       void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
     public:
       lost::resource::LoaderPtr         loader;
-      lost::lua::StatePtr               interpreter;
-      lost::application::ConfigPtr      config;
+      lost::lua::StatePtr               lua;
       lost::event::EventDispatcherPtr   eventDispatcher;
       lost::application::Application *  application;
       

@@ -29,8 +29,7 @@ namespace lost
       executeScript(true),
       loader(inLoader),
       eventDispatcher(new EventDispatcher()),
-      interpreter(new State(loader)),
-      config(new Config(interpreter)),
+      lua(new State(loader)),
       waitForEvents(false),
       script("main.lua")
     {
@@ -38,9 +37,9 @@ namespace lost
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
 
       // bind lostengine lua mappings
-      bindAll(*interpreter);
+      bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
-      ModuleLoader::install(*interpreter, loader);
+      ModuleLoader::install(*lua, loader);
     }
     
     Tasklet::~Tasklet()
@@ -54,7 +53,7 @@ namespace lost
       try
       {
         executeScript = true;
-        interpreter->doFile(script);
+        lua->doFile(script);
       }
       catch(std::exception& ex)
       {
@@ -90,7 +89,7 @@ namespace lost
       bool result = true;
       if (executeScript) 
       {
-        object func = globals(*interpreter)[funcname];
+        object func = globals(*lua)[funcname];
         if (luabind::type(func) != LUA_TFUNCTION)
         {
           WOUT("no " << funcname << "() found in <" << script << ">");

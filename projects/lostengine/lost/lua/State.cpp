@@ -18,9 +18,11 @@ namespace lost
   {
     
     State::State(lost::shared_ptr<resource::Loader> inLoader)
-    : callstackSize(10), loader(inLoader)
+    : callstackSize(10), 
+      loader(inLoader),
+      state(luaL_newstate()),
+      globals(luabind::globals(state))
     {
-      state = luaL_newstate();
       luabind::open(state);      
       stateMap[state] = this;
       // set our own error callback

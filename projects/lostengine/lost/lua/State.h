@@ -61,6 +61,7 @@ namespace lost
       int callstackSize;
       std::map<std::string, std::string> fileHashes;
       lost::shared_ptr<resource::Loader> loader;
+      luabind::object globals;
     };
 
   }

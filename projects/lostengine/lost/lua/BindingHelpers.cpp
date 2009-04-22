@@ -25,12 +25,8 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
-#include "lost/model/Mesh.h"
-#include "lost/model/obj/Material.h"
-#include "lost/model/obj/Parser.h"
-#include "lost/model/obj/Renderer.h"
 #include "lost/resource/File.h"
-//#include "lost/resource/Loader.h"
+#include "lost/resource/Loader.h"
 
 #define GET_POINTER(name) template name* get_pointer(lost::shared_ptr<name>&);\
                           template name const* get_pointer(lost::shared_ptr<name const>&);
@@ -71,10 +67,6 @@ namespace luabind
   GET_POINTER(lost::math::Vec2);
   GET_POINTER(lost::math::Vec3);
   GET_POINTER(lost::math::Vec4);
-  GET_POINTER(lost::model::Mesh);
-  GET_POINTER(lost::model::obj::Material);
-  GET_POINTER(lost::model::obj::Parser);
-  GET_POINTER(lost::model::obj::Renderer);
   GET_POINTER(lost::resource::File);
   GET_POINTER(lost::resource::Loader);
 }
