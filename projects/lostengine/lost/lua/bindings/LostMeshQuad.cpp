@@ -22,8 +22,8 @@ namespace lost
           [
            def("create", (Quad2DPtr(*)()) &Quad2D::create),
            def("create", (Quad2DPtr(*)(const math::Rect& inRect)) &Quad2D::create),
-           def("create", (Quad2DPtr(*)(resource::FilePtr data)) &Quad2D::create),
-           def("create", (Quad2DPtr(*)(gl::TexturePtr tex)) &Quad2D::create)
+           def("create", (Quad2DPtr(*)(resource::FilePtr data, bool)) &Quad2D::create),
+           def("create", (Quad2DPtr(*)(gl::TexturePtr tex, bool)) &Quad2D::create)
           ]
         ]
       ];
