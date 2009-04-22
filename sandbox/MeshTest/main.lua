@@ -22,7 +22,7 @@ function init(loader)
   shader:disable()
   
   -- these are deliberately global, so the C++ part can fetch the easier from the interpreter
-  quad = Quad2D.create(loader:load("zim.png"))
+  quad = Quad2D.create(loader:load("zim.png"), true)
   line = Line2D.create(Vec2(0,0), Vec2(400,400))
   line.material = Material.create()
   line.material.color = Color(1,1,0)
