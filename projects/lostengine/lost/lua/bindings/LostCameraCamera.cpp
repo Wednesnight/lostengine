@@ -42,6 +42,7 @@ namespace lost
           .def("target", (void(Camera3D::*)(const Vec3&)) &Camera3D::target)
           .def("move", &Camera3D::move)
           .def("rotate", &Camera3D::rotate)
+          .def("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
         ]
       ];
     }
