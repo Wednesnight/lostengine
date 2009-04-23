@@ -4,6 +4,7 @@
 #include "lost/event/Receive.h"
 #include "lost/gl/StateParam.h"
 #include "lost/application/Window.h"
+#include "lost/mesh/Loader.h"
 
 using namespace std;
 using namespace boost;
@@ -82,9 +83,7 @@ bool Filt3rz::startup()
   heatsigShader = object_cast<ShaderProgramPtr>(lua->globals["heatsigShader"]);
     
 //  setupLabels();
-  mesh = mesh::createFromOBJ(loader->load("magnolia_tri.obj"));
-  mesh->material = Material::create();
-  mesh->material->shader = lightShader;
+  mesh = object_cast<Mesh3DPtr>(lua->globals["mesh"]);
 
   normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
   normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  

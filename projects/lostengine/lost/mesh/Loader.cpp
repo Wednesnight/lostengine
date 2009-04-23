@@ -1,4 +1,4 @@
-#include "lost/mesh/Mesh.h"
+#include "lost/mesh/Loader.h"
 
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
@@ -9,8 +9,6 @@
 #include <boost/spirit/actor/increment_actor.hpp>
 #include <boost/spirit/actor/decrement_actor.hpp>
 #include <boost/spirit/phoenix/binders.hpp>
-//#include <boost/spirit/attribute.hpp>
-//#include <boost/spirit/utility/lists.hpp>
 
 using namespace boost;
 using namespace boost::spirit;
@@ -21,8 +19,8 @@ using namespace lost::resource;
 
 namespace lost
 {
-namespace mesh
-{
+  namespace mesh
+  {
 
     /**
      * spirit actions for OBJ parsing
@@ -52,7 +50,7 @@ namespace mesh
     /**
      * load obj model from fileName through loader, returns lost::mesh::MeshPtr
      */
-    Mesh3DPtr createFromOBJ(resource::FilePtr objFile)
+    Mesh3DPtr Loader::obj(resource::FilePtr objFile)
     {
       /**
        * init resulting mesh
@@ -260,6 +258,7 @@ namespace mesh
       }
 
       return mesh;
+    }
+
   }
-}
 }

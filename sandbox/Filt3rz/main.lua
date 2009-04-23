@@ -78,4 +78,7 @@ function init(loader)
   lightShader:set("SurfaceColor", Color(1,1,1))
   lightShader:disable()
   
+  mesh = lost.mesh.Loader.obj(loader:load("magnolia_tri.obj"))
+  mesh.material = lost.mesh.Material.create()
+  mesh.material.shader = lightShader
 end
