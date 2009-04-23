@@ -8,6 +8,7 @@
 #include "lost/event/Receive.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
+#include "lost/application/TaskletEvent.h"
 
 #include <boost/program_options.hpp>
 
@@ -78,6 +79,7 @@ namespace lost
 
     void Application::initApplication(resource::LoaderPtr inLoader)
     {
+      running = false;
       loader = inLoader;
 
       eventDispatcher.reset(new lost::event::EventDispatcher());
@@ -85,15 +87,6 @@ namespace lost
       eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
     }
 
-    void Application::startup(ApplicationEventPtr& event)
-    {
-      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
-      {
-        (*tasklet)->eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
-        (*tasklet)->start();
-      }
-    }
-    
     lost::shared_ptr<Application> Application::create()
     {
       return lost::shared_ptr<Application>(new Application);
@@ -118,10 +111,24 @@ namespace lost
     {
     }
 
+    void Application::startup(ApplicationEventPtr& event)
+    {
+      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      {
+        (*tasklet)->start();
+      }
+      running = true;
+    }
+    
     void Application::addTasklet(const TaskletPtr& tasklet)
     {
-      tasklet->application = this;
+      tasklet->eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
+      tasklet->eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
       tasklets.push_back(tasklet);
+      if (running)
+      {
+        tasklet->start();
+      }
     }
 
     void Application::dispatchApplicationEvent(const lost::event::Type& which)
@@ -139,6 +146,7 @@ namespace lost
 
     void Application::quit()
     {
+      running = false;
       dispatchApplicationEvent(ApplicationEvent::QUIT());
     }
 
@@ -178,25 +186,28 @@ namespace lost
     }
 
 
-    void Application::notifyTaskletDeath(Tasklet * tasklet)
+    void Application::taskletDone(TaskletEventPtr& event)
     {
-      DOUT("End of tasklet: " << tasklet->script);
-      // FIXME: we need a mechanism to determine if a Tasklet wants a cleanup after a single execution
-      //removeTasklet(tasklet);
-      bool running = false;
-      for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
-        running = (idx->get() != tasklet) && (*idx)->alive();
-      if (!running)
+      DOUT("End of tasklet: " << event->tasklet->script);
+      // FIXME: we need error handling before we restart tasklets
+      if (running && event->tasklet->shouldRestart)
       {
-        DOUT("Last tasklet died, terminating.");
-        quit();
+        event->tasklet->reset();
+        event->tasklet->start();
       }
-    }
-
-    void Application::notifyTaskletDeath(Tasklet * tasklet, std::exception const & exception)
-    {
-      DOUT("Exception ended tasklet: " << tasklet->script);
-      notifyTaskletDeath(tasklet);
+      else
+      {
+        // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
+        //removeTasklet(tasklet);
+        bool haveActiveTasklets = false;
+        for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
+          haveActiveTasklets = (idx->get() != event->tasklet) && (*idx)->alive();
+        if (!haveActiveTasklets)
+        {
+          DOUT("Last tasklet died, terminating.");
+          quit();
+        }
+      }
     }
 
   }

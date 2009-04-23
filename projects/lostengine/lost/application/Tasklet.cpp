@@ -9,6 +9,7 @@
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include "lost/application/mac/ThreadAutoreleasePoolHack.h"
+#include "lost/application/TaskletEvent.h"
 
 using namespace boost;
 using namespace fhtagn::threads;
@@ -31,7 +32,8 @@ namespace lost
       eventDispatcher(new EventDispatcher()),
       lua(new State(loader)),
       waitForEvents(false),
-      script("main.lua")
+      script("main.lua"),
+      shouldRestart(false)
     {
       // set error handler
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
@@ -81,7 +83,7 @@ namespace lost
         shutdown();
       }
       threadAutoreleasePoolHack_drainPool();        
-      application->notifyTaskletDeath(this);
+      eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
     bool Tasklet::callScriptFunction(const string& funcname)
@@ -105,7 +107,7 @@ namespace lost
     void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
     {
       EOUT(exception.what());
-      application->notifyTaskletDeath(this, exception);
+      eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
     bool Tasklet::startup()
