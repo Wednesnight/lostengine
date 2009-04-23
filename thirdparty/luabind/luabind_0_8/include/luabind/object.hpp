@@ -560,6 +560,9 @@ namespace detail
  
 } // namespace detail
 
+template<class T, class ValueWrapper>
+T object_cast(ValueWrapper const& value_wrapper);
+
 namespace adl
 {
  
@@ -604,6 +607,12 @@ namespace adl
       // This is non-const to prevent conversion on lvalues.
       operator object();
 
+      template <typename T>
+      operator T() const
+      {
+        return object_cast<T>(*this);
+      }
+    
 		// this will set the value to nil
 		this_type& operator=(luabind::detail::nil_type)
 		{
