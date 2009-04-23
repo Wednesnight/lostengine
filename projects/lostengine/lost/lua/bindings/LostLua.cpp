@@ -1,8 +1,7 @@
+#include "lost/lua/bindings/LostLua.h"
 #include "lost/lua/lua.h"
-#include "lost/lua/State.h"
-#include "lost/resource/File.h"
 
-#include "lost/lua/bindings/LostLuaState.h"
+#include "lost/lua/State.h"
 
 using namespace luabind;
 using namespace lost::lua;
@@ -11,6 +10,7 @@ namespace lost
 {
   namespace lua
   {
+
     void LostLuaState(lua_State* state)
     {
       module(state, "lost")
@@ -28,5 +28,11 @@ namespace lost
         ]
       ];
     }
+
+    void LostLua(lua_State* state)
+    {
+      LostLuaState(state);
+    }
+
   }
 }

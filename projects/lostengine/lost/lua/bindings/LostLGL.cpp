@@ -1,7 +1,7 @@
+#include "lost/lua/bindings/LostLGL.h"
 #include "lost/lua/lua.h"
-#include "lost/lgl/lgl.h"
 
-#include "lost/lua/bindings/LostLGLLGL.h"
+#include "lost/lgl/lgl.h"
 
 using namespace luabind;
 
@@ -24,5 +24,11 @@ namespace lost
       globals(state)["lgl"]["LGL_DEPTH_COMPONENT24"] = LGL_DEPTH_COMPONENT24;
       globals(state)["lgl"]["LGL_FRAMEBUFFER_COMPLETE"] = LGL_FRAMEBUFFER_COMPLETE;
     }
+
+    void LostLGL(lua_State* state)
+    {
+      LostLGLLGL(state);
+    }
+
   }
 }
