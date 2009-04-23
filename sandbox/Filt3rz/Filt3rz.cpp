@@ -72,18 +72,18 @@ bool Filt3rz::startup()
   lua->globals["cubeCam"] = cam3D;
   call_function<void>(lua->globals["init"], loader);
 
-  blurShader << lua->globals["blurShader"];
-  lightShader << lua->globals["lightShader"];
-  edgeShader << lua->globals["edgeShader"];
-  embossShader << lua->globals["embossShader"];
-  sharpenShader << lua->globals["sharpenShader"];
-  radialShader << lua->globals["radialShader"];
-  ssaoShader << lua->globals["ssaoShader"];
-  sepiaShader << lua->globals["sepiaShader"];
-  heatsigShader << lua->globals["heatsigShader"];
+  blurShader = lua->globals["blurShader"];
+  lightShader = lua->globals["lightShader"];
+  edgeShader = lua->globals["edgeShader"];
+  embossShader = lua->globals["embossShader"];
+  sharpenShader = lua->globals["sharpenShader"];
+  radialShader = lua->globals["radialShader"];
+  ssaoShader = lua->globals["ssaoShader"];
+  sepiaShader = lua->globals["sepiaShader"];
+  heatsigShader = lua->globals["heatsigShader"];
 
 //  setupLabels();
-  mesh << lua->globals["mesh"];
+  mesh = lua->globals["mesh"];
 
   normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
   normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
