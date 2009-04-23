@@ -83,18 +83,17 @@ namespace lost
     
     struct Application::ApplicationHiddenMembers
     {
-      NSAutoreleasePool*   pool;
       NSApplication*       application;
       ApplicationDelegate* delegate;
     };
 
     void Application::initialize()
     {
+      // Cocoas needs a NSAutoreleasePool in place
+      [[NSAutoreleasePool alloc] init];
+
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
-
-      // init pool
-      hiddenMembers->pool = [[NSAutoreleasePool alloc] init];
 
       // init app
       hiddenMembers->application = [NSApplication sharedApplication];
@@ -150,7 +149,6 @@ namespace lost
     {
       DOUT("Application::finalize()");
       [hiddenMembers->delegate release];
-      [hiddenMembers->pool release];
       delete hiddenMembers;
     }
 

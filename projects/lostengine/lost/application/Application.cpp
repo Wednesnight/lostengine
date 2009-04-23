@@ -116,7 +116,6 @@ namespace lost
 
     Application::~Application()
     {
-      finalize();
     }
 
     void Application::addTasklet(const TaskletPtr& tasklet)
@@ -153,6 +152,8 @@ namespace lost
           (*tasklet)->wait();
         }
       }
+      tasklets.clear();
+      finalize();
     }
     
 
@@ -197,5 +198,6 @@ namespace lost
       DOUT("Exception ended tasklet: " << tasklet->script);
       notifyTaskletDeath(tasklet);
     }
+
   }
 }

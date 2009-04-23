@@ -6,7 +6,7 @@ int main(int argn, char** args)
 {
   try
   {
-    static ApplicationPtr app = Application::create(TaskletPtr(new Filt3rz()));
+    ApplicationPtr app = Application::create(TaskletPtr(new Filt3rz()));
     app->run();
   }
   catch (std::exception& e)

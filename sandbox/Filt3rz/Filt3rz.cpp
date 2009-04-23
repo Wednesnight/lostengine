@@ -71,19 +71,19 @@ bool Filt3rz::startup()
   lua->globals["fboSize"] = fboSize;
   lua->globals["cubeCam"] = cam3D;
   call_function<void>(lua->globals["init"], loader);
-      
-  blurShader = object_cast<ShaderProgramPtr>(lua->globals["blurShader"]);
-  lightShader = object_cast<ShaderProgramPtr>(lua->globals["lightShader"]);
-  edgeShader = object_cast<ShaderProgramPtr>(lua->globals["edgeShader"]);
-  embossShader = object_cast<ShaderProgramPtr>(lua->globals["embossShader"]);
-  sharpenShader = object_cast<ShaderProgramPtr>(lua->globals["sharpenShader"]);
-  radialShader = object_cast<ShaderProgramPtr>(lua->globals["radialShader"]);
-  ssaoShader = object_cast<ShaderProgramPtr>(lua->globals["ssaoShader"]);
-  sepiaShader = object_cast<ShaderProgramPtr>(lua->globals["sepiaShader"]);
-  heatsigShader = object_cast<ShaderProgramPtr>(lua->globals["heatsigShader"]);
-    
+
+  blurShader << lua->globals["blurShader"];
+  lightShader << lua->globals["lightShader"];
+  edgeShader << lua->globals["edgeShader"];
+  embossShader << lua->globals["embossShader"];
+  sharpenShader << lua->globals["sharpenShader"];
+  radialShader << lua->globals["radialShader"];
+  ssaoShader << lua->globals["ssaoShader"];
+  sepiaShader << lua->globals["sepiaShader"];
+  heatsigShader << lua->globals["heatsigShader"];
+
 //  setupLabels();
-  mesh = object_cast<Mesh3DPtr>(lua->globals["mesh"]);
+  mesh << lua->globals["mesh"];
 
   normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
   normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  

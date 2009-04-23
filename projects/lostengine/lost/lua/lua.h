@@ -48,4 +48,11 @@ template <class T>
   #define LUA_NUMBER_FMT		"%.14g"
 #endif
 
+template <typename T>
+inline T& operator << (T& other, const luabind::object& object)
+{
+  other = luabind::object_cast<T>(object);
+  return other;
+}
+
 #endif
