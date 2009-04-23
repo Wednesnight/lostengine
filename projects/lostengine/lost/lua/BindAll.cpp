@@ -8,22 +8,15 @@
 #include "lost/lua/bindings/LostEvent.h"
 #include "lost/lua/bindings/LostFont.h"
 #include "lost/lua/bindings/LostGL.h"
+#include "lost/lua/bindings/LostLGL.h"
+#include "lost/lua/bindings/LostLSystem.h"
+#include "lost/lua/bindings/LostLua.h"
+#include "lost/lua/bindings/LostMath.h"
+#include "lost/lua/bindings/LostMesh.h"
+#include "lost/lua/bindings/LostPlatform.h"
+#include "lost/lua/bindings/LostResource.h"
 
-#include "lost/lua/bindings/LostLGLLGL.h"
-#include "lost/lua/bindings/LostMathVec2.h"
-#include "lost/lua/bindings/LostMathVec3.h"
-#include "lost/lua/bindings/LostMathVec4.h"
-#include "lost/lua/bindings/LostMathRect.h"
-#include "lost/lua/bindings/LostResourceLoader.h"
-#include "lost/lua/bindings/LostResourceFile.h"
-#include "lost/lua/bindings/LostLuaState.h"
-#include "lost/lua/bindings/LostLSystemLSystem.h"
 #include "luabind/class_info.hpp"
-#include "lost/lua/bindings/LostPlatformPlatform.h"
-#include "lost/lua/bindings/LostMeshMesh.h"
-#include "lost/lua/bindings/LostMeshLine.h"
-#include "lost/lua/bindings/LostMeshQuad.h"
-#include "lost/lua/bindings/LostMeshMaterial.h"
 
 
 void BaseLib(lua_State* state) { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
@@ -58,21 +51,13 @@ namespace lost
       LostCommon(state);
       LostFont(state);
       LostGL(state);
-
-      LostResourceFile(state);
-      LostResourceLoader(state);
-      LostLSystemLSystem(state);
-      LostMathVec2(state);
-      LostMathVec3(state);
-      LostMathVec4(state);
-      LostLuaState(state);
-      LostMathRect(state);
-      LostLGLLGL(state);
-      LostPlatformPlatform(state);
-      LostMeshMaterial(state);
-      LostMeshMesh(state);
-      LostMeshLine(state);
-      LostMeshQuad(state);
+      LostLGL(state);
+      LostLSystem(state);
+      LostLua(state);
+      LostMath(state);
+      LostPlatform(state);
+      LostResource(state);
+      LostMesh(state);
       
       luabind::bind_class_info(state);
     }
