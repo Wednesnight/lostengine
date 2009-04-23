@@ -25,7 +25,7 @@ struct MeshTest : public lost::application::UiTasklet
   lost::gl::XContextPtr ctx;
 
   lost::mesh::Line2DPtr         line;
-  lost::mesh::MeshPtr           cube;
+  lost::mesh::Mesh3DPtr         cube;
   lost::mesh::Quad2DPtr         quad;
   lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
