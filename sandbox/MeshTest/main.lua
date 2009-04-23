@@ -25,7 +25,11 @@ function init(loader)
   quad = Quad2D.create(loader:load("zim.png"), true)
   line = Line2D.create(Vec2(0,0), Vec2(400,400))
   line.material.color = Color(1,1,0)
-  cube = lost.mesh.createFromOBJ(loader:load("cube_tri.obj"));
+  log.debug("loading file")
+  filedata = loader:load("cube_tri.obj")
+  log.debug("parsing file")
+  cube = lost.mesh.Loader.obj(filedata);
   cube.material.color = Color(0,1,0)
   cube.material.shader = shader
+  log.debug("init ok")
 end

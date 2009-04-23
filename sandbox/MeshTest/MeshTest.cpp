@@ -42,12 +42,11 @@ bool MeshTest::startup()
   camera3D->target(Vec3(0,0,0));
   camera3D->stickToTarget(true);  
 
-  luabind::globals(*interpreter)["camera3D"] = camera3D;
-  luabind::object func = luabind::globals(*interpreter)["init"];
-  call_function<void>(func, loader);
-  quad = object_cast<Quad2DPtr>(globals(*interpreter)["quad"]);
-  line = object_cast<Line2DPtr>(globals(*interpreter)["line"]);
-  cube = object_cast<Mesh3DPtr>(globals(*interpreter)["cube"]);
+  lua->globals["camera3D"] = camera3D;
+  call_function<void>(lua->globals["init"], loader);
+  quad = lua->globals["quad"];
+  line = lua->globals["line"];
+  cube = lua->globals["cube"];
   
   return true;
 }
