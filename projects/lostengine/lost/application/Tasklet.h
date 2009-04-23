@@ -11,8 +11,6 @@ namespace lost
   namespace event {    struct EventDispatcher; }
   namespace application
   {
-    struct Application;
-  
     struct Tasklet;
     typedef lost::shared_ptr<Tasklet> TaskletPtr;
 
@@ -27,15 +25,16 @@ namespace lost
 
       void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
     public:
-      lost::resource::LoaderPtr         loader;
-      lost::lua::StatePtr               lua;
-      lost::event::EventDispatcherPtr   eventDispatcher;
-      lost::application::Application *  application;
+      lost::resource::LoaderPtr       loader;
+      lost::lua::StatePtr             lua;
+      lost::event::EventDispatcherPtr eventDispatcher;
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;
       // script filename
       std::string script;
+      // auto-restart flag
+      bool shouldRestart;
 
       Tasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
       virtual ~Tasklet();

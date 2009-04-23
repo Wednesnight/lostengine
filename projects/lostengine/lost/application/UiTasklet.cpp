@@ -2,30 +2,28 @@
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-UiTasklet::UiTasklet(lost::resource::LoaderPtr inLoader)
-{
-}
+    UiTasklet::UiTasklet(lost::resource::LoaderPtr inLoader)
+    {
+    }
 
-UiTasklet::UiTasklet(const WindowParams& params,
-            lost::resource::LoaderPtr inLoader)
-: windowParams(params)
-{
-}
+    UiTasklet::UiTasklet(const WindowParams& params, lost::resource::LoaderPtr inLoader)
+    : windowParams(params)
+    {
+    }
 
-bool UiTasklet::start()
-{
-  window = Window::create(eventDispatcher, windowParams);
-  window->open();
-  return Tasklet::start();
-}
+    bool UiTasklet::start()
+    {
+      window = Window::create(eventDispatcher, windowParams);
+      window->open();
+      return Tasklet::start();
+    }
 
+    UiTasklet::~UiTasklet()
+    {
+    }
 
-UiTasklet::~UiTasklet()
-{
-}
-
-}
+  }
 }

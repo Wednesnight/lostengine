@@ -21,6 +21,9 @@ namespace lost
     struct Tasklet;
     typedef lost::shared_ptr<Tasklet> TaskletPtr;
     
+    struct TaskletEvent;
+    typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
+
     struct Application;
     typedef lost::shared_ptr<Application> ApplicationPtr;
 
@@ -41,6 +44,11 @@ namespace lost
        * have a look at lost/application/Tasklet.h for details
        */
       std::list<TaskletPtr> tasklets;
+
+      /**
+       * running flag
+       */
+      bool running;
 
       /**
        * hidden ctor/dtor utility methods for platform specific stuff
@@ -127,10 +135,9 @@ namespace lost
       void showMouse(bool visible);      
 
       /**
-       * Called by Tasklets.
+       * Called through Tasklet events
        **/
-      void notifyTaskletDeath(Tasklet * tasklet);
-      void notifyTaskletDeath(Tasklet * tasklet, std::exception const & exception);
+      void Application::taskletDone(TaskletEventPtr& event);
     };
 
   }
