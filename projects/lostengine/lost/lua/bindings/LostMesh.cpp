@@ -71,13 +71,13 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Mesh, MeshPtr >("Mesh")
+          class_<Mesh, MeshPtr>("Mesh")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("modelTransform", &Mesh::modelTransform)
             .def_readwrite("drawMode", &Mesh::drawMode),
 
-          class_<Mesh3D, Mesh3DPtr >("Mesh3D")
+          class_<Mesh3D, Mesh, Mesh3DPtr>("Mesh3D")
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("modelTransform", &Mesh::modelTransform)
             .def_readwrite("drawMode", &Mesh::drawMode)
