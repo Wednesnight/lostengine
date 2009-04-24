@@ -26,7 +26,7 @@ struct MeshTest : public lost::application::UiTasklet
   lost::mesh::Quad2DPtr         quad;
   lost::mesh::Quad2DPtr         quad2;
   lost::mesh::Quad2DPtr         quad3;
-  lost::camera::CameraPtr       camera2D;
+  lost::camera::CameraPtr     camera2D;
   lost::camera::Camera3DPtr     camera3D;
   
   double passedSec;  

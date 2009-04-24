@@ -6,48 +6,49 @@
 
 namespace lost
 {
-namespace resource
-{
-Loader::Loader()
-{
-}
-
-Loader::~Loader()
-{
-}
-
-lost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::path& inPath)
-{
-  lost::shared_ptr<lost::resource::File> result;
-
-  // FIXME: determine failed loads by counting load attempts.
-  //        if we finish the loops with zero successful loads, throw an exception.
-  //        returned file size of zero is NOT a valid reason for throwing an exception.
-  for (unsigned int idx = 0; idx < repositories.size(); ++idx)
+  namespace resource
   {
-    try
+
+    Loader::Loader()
     {
-      result = repositories[idx]->load( inPath);
-      break;
     }
-    catch (std::exception& e)
+
+    Loader::~Loader()
     {
-      DOUT("trying next repository: " << e.what());
     }
+
+    lost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::path& inPath)
+    {
+      lost::shared_ptr<lost::resource::File> result;
+
+      // FIXME: determine failed loads by counting load attempts.
+      //        if we finish the loops with zero successful loads, throw an exception.
+      //        returned file size of zero is NOT a valid reason for throwing an exception.
+      for (unsigned int idx = 0; idx < repositories.size(); ++idx)
+      {
+        try
+        {
+          result = repositories[idx]->load( inPath);
+          break;
+        }
+        catch (std::exception& e)
+        {
+          DOUT("trying next repository: " << e.what());
+        }
+      }
+
+      // we have to throw here, otherwise the following checks will segfault
+      if(!result)
+        throw LoaderError("couldn't load file: '"+inPath.string()+"'");
+
+      DOUT("'"<<result->location << "' [" << result->size << " Bytes]");
+      return result;
+    }
+
+    void Loader::addRepository( lost::shared_ptr<Repository> inRepository )
+    {
+      repositories.push_back( inRepository );
+    }
+
   }
-
-  // we have to throw here, otherwise the following checks will segfault
-  if(!result)
-    throw std::runtime_error("couldn't load file: '"+inPath.string()+"'");
-
-  DOUT("'"<<result->location << "' [" << result->size << " Bytes]");
-  return result;
-}
-
-void Loader::addRepository( lost::shared_ptr<Repository> inRepository )
-{
-  repositories.push_back( inRepository );
-}
-
-}
 }
