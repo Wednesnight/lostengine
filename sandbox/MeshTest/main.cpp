@@ -12,7 +12,7 @@ int main(int argn, char** args)
 {
   try
   {
-    ApplicationPtr app = Application::create(TaskletPtr(new MeshTest));
+    static ApplicationPtr app = Application::create(TaskletPtr(new MeshTest));
     app->run();      
   }
   catch (std::exception& e)
