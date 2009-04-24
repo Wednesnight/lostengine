@@ -88,20 +88,30 @@ struct Quad : public MESHTYPE
     MESHTYPE::material.reset(new Material);
     MESHTYPE::material->color = common::whiteColor;
   }
-      
+
+  void updateSize(const math::Vec2& size, bool flip = true)
+  {
+    math::Rect rect(0, 0, size.width, size.height);
+    updateVertices(rect);
+    updateTexCoords(flip);
+  }
+
   void updateVertices(const math::Rect& inRect)
   {
-    vertices[0].x = inRect.x-.5;
-    vertices[0].y = inRect.y-.5;
+    float voffsetx = MESHTYPE::OffsetVectorType::x();
+    float voffsety = MESHTYPE::OffsetVectorType::y();  
+  
+    vertices[0].x = inRect.x-voffsetx;
+    vertices[0].y = inRect.y-voffsety;
     
-    vertices[1].x = inRect.maxX()+.5;
-    vertices[1].y = inRect.y-.5;
+    vertices[1].x = inRect.maxX()+voffsetx;
+    vertices[1].y = inRect.y-voffsety;
 
-    vertices[2].x = inRect.maxX()+.5;
-    vertices[2].y = inRect.maxY()+.5;
+    vertices[2].x = inRect.maxX()+voffsetx;
+    vertices[2].y = inRect.maxY()+voffsety;
 
-    vertices[3].x = inRect.x-.5;
-    vertices[3].y = inRect.maxY()+.5;
+    vertices[3].x = inRect.x-voffsetx;
+    vertices[3].y = inRect.maxY()+voffsety;
     
     MESHTYPE::vertexBuffer->bindBufferSubData(0, vertexBufferSizeBytes, vertices);
   }
@@ -117,33 +127,45 @@ struct Quad : public MESHTYPE
       // i.e. the values might have to be converted from normalised float texture coordinates 
       // to something else like uint8_t etc.
       // FIXME: needs texcoord flip switch
+      
+      float texWidth = MESHTYPE::material->textures[0]->dataWidth; 
+      float texHeight = MESHTYPE::material->textures[0]->dataHeight; 
+      float maxTexX = texWidth-1;
+      float maxTexY = texHeight-1;
+      float xtexstep = .5f/texWidth;
+      float ytexstep = .5f/texHeight;
+      float minXTexCoord = xtexstep;
+      float minYTexCoord = ytexstep;
+      float maxXTexCoord = xtexstep + maxTexX/texWidth;
+      float maxYTexCoord = ytexstep + maxTexY/texHeight;
+      
       if(flip)
       {
-        texcoords[0].x = 0;
-        texcoords[0].y = 1;
+        texcoords[0].x = minXTexCoord;
+        texcoords[0].y = maxYTexCoord;
 
-        texcoords[1].x = 1;
-        texcoords[1].y = 1;
+        texcoords[1].x = maxXTexCoord;
+        texcoords[1].y = maxYTexCoord;
 
-        texcoords[2].x = 1;
-        texcoords[2].y = 0;
+        texcoords[2].x = maxXTexCoord;
+        texcoords[2].y = minYTexCoord;
 
-        texcoords[3].x = 0;
-        texcoords[3].y = 0;
+        texcoords[3].x = minXTexCoord;
+        texcoords[3].y = minYTexCoord;
       }
       else
       {
-        texcoords[0].x = 0;
-        texcoords[0].y = 0;
+        texcoords[0].x = minXTexCoord;
+        texcoords[0].y = minYTexCoord;
 
-        texcoords[1].x = 1;
-        texcoords[1].y = 0;
+        texcoords[1].x = maxXTexCoord;
+        texcoords[1].y = minYTexCoord;
 
-        texcoords[2].x = 1;
-        texcoords[2].y = 1;
+        texcoords[2].x = maxXTexCoord;
+        texcoords[2].y = maxYTexCoord;
 
-        texcoords[3].x = 0;
-        texcoords[3].y = 1;        
+        texcoords[3].x = minXTexCoord;
+        texcoords[3].y = maxYTexCoord;        
       }
       MESHTYPE::texCoordBuffer->bindBufferData(texcoords, numVertices); // don't need to subBufferData
     }

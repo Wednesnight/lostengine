@@ -4,16 +4,28 @@
 #include "lost/gl/ArrayBuffer.h"
 #include "lost/gl/ElementArrayBuffer.h"
 #include "lost/common/Logger.h"
-//#include "lost/gl/Context.h"
-//#include "lost/gl/State.h"
-//#include "lost/gl/StateParam.h"
 #include "lost/mesh/Material.h"
 #include "lost/math/Matrix.h"
+#include "lost/math/Vec2.h"
 
 namespace lost
 {
   namespace mesh
   {
+    // used for piexl perfect 2D positioning
+    // this one does nothing since Vec2 constructor defaults to 0/0
+    struct VertexOffsetVectorZero
+    {
+      static inline float x() { return 0.0f; }
+      static inline float y() { return 0.0f; }
+    };
+  
+    // this one moves pixels by .5 to center a logical pixel on the physical one.
+    struct VertexOffsetVector2D 
+    {
+      static inline float x() { return .5f; }
+      static inline float y() { return .5f; }      
+    };
 
     // Mesh base class, provides a render() method that applies the relevant minimal state 
     // and issues the gl calls for drawing
@@ -27,8 +39,6 @@ namespace lost
       }
 
       virtual ~Mesh() {}
-
-//      virtual void draw(gl::ContextPtr ctx) {};
       
       virtual gl::Buffer* getIndexBuffer() { return NULL; };
       virtual gl::Buffer* getVertexBuffer() { return NULL; };
@@ -50,7 +60,8 @@ namespace lost
       typename VT,  // vertextype
       typename NT,  // normaltype
       typename CT,  // colortype
-      typename TCT> // texcoordtype
+      typename TCT, // texcoordtype
+      typename OFFV> // vertex offset vector for 2D pixex corrections
     struct BufferedMesh : public Mesh
     {
       lost::shared_ptr<gl::ElementArrayBuffer<IT> >  indexBuffer; 
@@ -70,18 +81,13 @@ namespace lost
       typedef NT NormalType;
       typedef CT ColorType;
       typedef TCT TexCoordType;
+      typedef OFFV OffsetVectorType;
       
       typedef gl::ElementArrayBuffer<IT>  IndexBufferType;
       typedef gl::ArrayBuffer<VT>         VertexBufferType;
       typedef gl::ArrayBuffer<NT>         NormalBufferType;
       typedef gl::ArrayBuffer<CT>         ColorBufferType;
       typedef gl::ArrayBuffer<TCT>        TexCoordBufferType;
-
-    /*  gl::ParamPtr  vertexParam;
-      gl::ParamPtr  normalParam;
-      gl::ParamPtr  colorParam;
-      gl::ParamPtr  texCoordParam;
-      gl::StatePtr  meshState;*/
           
       BufferedMesh()
       {
@@ -91,45 +97,17 @@ namespace lost
       {
       }
       
-      void indices(bool v) { if(v) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
-      void vertices(bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); /*updateRenderState();*/ }
-      void normals(bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); /*updateRenderState();*/}
-      void colors(bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset(); /*updateRenderState();*/ }
-      void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); /*updateRenderState();*/}
-
-/*
-      void updateRenderState()
-      {
-        vertexParam = gl::VertexArray::create(vertexBuffer ? true : false);
-        normalParam = gl::NormalArray::create(normalBuffer ? true : false);
-        colorParam = gl::ColorArray::create(colorBuffer ? true : false);
-        texCoordParam = gl::TextureArray::create(texCoordBuffer ? true : false);
-        meshState = gl::State::create(vertexParam, normalParam, colorParam, texCoordParam);
-      }
-      
-      virtual void draw(gl::ContextPtr ctx)
-      {
-        ctx->pushState(meshState);
-        vertexBuffer->bindVertexPointer();
-        indexBuffer->bind();
-        if(normalBuffer) normalBuffer->bindNormalPointer();
-        if(colorBuffer) colorBuffer->bindColorPointer();
-        if(texCoordBuffer) texCoordBuffer->bindTexCoordPointer();
-        indexBuffer->drawElements(drawMode);
-        if(texCoordBuffer) texCoordBuffer->unbind();
-        if(colorBuffer) colorBuffer->unbind();
-        if(normalBuffer) normalBuffer->unbind();
-        indexBuffer->unbind();
-        vertexBuffer->unbind();
-        ctx->popState();
-      }
-*/
+      void indices  (bool v) { if(v) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
+      void vertices (bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); }
+      void normals  (bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); }
+      void colors   (bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset();  }
+      void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); }
       
     };
 
-    typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2> Mesh3D;
+    typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2, VertexOffsetVectorZero> Mesh3D;
     typedef lost::shared_ptr<Mesh3D> Mesh3DPtr;
-    typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
+    typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2, VertexOffsetVector2D> Mesh2D;
     typedef lost::shared_ptr<Mesh2D> Mesh2DPtr;
 
   }
