@@ -92,6 +92,9 @@ namespace lost
         namespace_("mesh")
         [
           class_<Quad2D, Quad2DPtr >("Quad2D")
+            .def("updateSize", &Quad2D::updateSize)
+            .def_readwrite("material", &Quad2D::material)
+            .def_readwrite("modelTransform", &Quad2D::modelTransform)
             .scope
             [
               def("create", (Quad2DPtr(*)()) &Quad2D::create),
