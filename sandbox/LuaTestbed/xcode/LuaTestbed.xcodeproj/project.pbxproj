@@ -14,6 +14,7 @@
 		8DDF4C3F0F837DC7001654DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF4C3E0F837DC7001654DE /* OpenGL.framework */; };
 		8DDF4C420F837DD5001654DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF4C410F837DD5001654DE /* Foundation.framework */; };
 		8DDF4C450F837DE5001654DE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DDF4C440F837DE5001654DE /* Cocoa.framework */; };
+		EA8B53C00FA2408D008D5057 /* luabindtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B53BF0FA2408D008D5057 /* luabindtest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		8DDF4C3E0F837DC7001654DE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		8DDF4C410F837DD5001654DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8DDF4C440F837DE5001654DE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		EA8B53BF0FA2408D008D5057 /* luabindtest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = luabindtest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDF4BD80F8379BC001654DE /* main.cpp */,
+				EA8B53BF0FA2408D008D5057 /* luabindtest.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DDF4BD90F8379BC001654DE /* main.cpp in Sources */,
+				EA8B53C00FA2408D008D5057 /* luabindtest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
