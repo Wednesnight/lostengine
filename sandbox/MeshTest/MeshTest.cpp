@@ -3,6 +3,10 @@
 #include "lost/common/Logger.h"
 #include "lost/application/ApplicationEvent.h"
 
+#include "lost/rg/Draw.h"
+#include "lost/rg/DepthTest.h"
+#include "lost/rg/Camera.h"
+
 using namespace std;
 using namespace lost;
 using namespace lost::gl;
@@ -40,6 +44,17 @@ bool MeshTest::startup()
     quad3 = lua->globals["quad3"];
     line = lua->globals["line"];
     cube = lua->globals["cube"];
+    
+    scene = rg::Node::create();
+    scene->add(rg::Camera::create(camera2D));
+    scene->add(rg::DepthTest::create(false));
+    scene->add(rg::Draw::create(quad));
+    scene->add(rg::Draw::create(quad2));
+    scene->add(rg::Draw::create(quad3));
+    scene->add(rg::Draw::create(line));
+    scene->add(rg::Camera::create(camera3D));
+    scene->add(rg::DepthTest::create(true));
+    scene->add(rg::Draw::create(cube));
   }
   
   return result;
@@ -55,24 +70,7 @@ void MeshTest::draw()
 {
   window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
-  // draw 2D over 3D scene
-  window->context->camera(camera2D);
-  window->context->depthTest(false);
-  window->context->draw(quad);
-  window->context->draw(quad2);
-  window->context->draw(quad3);
-  window->context->draw(line);
-
-  // draw 3D
-  window->context->camera(camera3D);
-  window->context->depthTest(true);
-  window->context->draw(cube);
-
-/*ctx->color(redColor);
-glBegin(GL_POINTS);
-  glVertex2f(0, 0);
-  glVertex2f(639, 479);
-glEnd();*/
+  scene->process(window->context);
 
   window->context->swapBuffers();  
 }
