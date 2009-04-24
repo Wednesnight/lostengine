@@ -189,24 +189,15 @@ namespace lost
     void Application::taskletDone(TaskletEventPtr& event)
     {
       DOUT("End of tasklet: " << event->tasklet->script);
-      // FIXME: we need error handling before we restart tasklets
-      if (running && event->tasklet->shouldRestart)
+      // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
+      //removeTasklet(tasklet);
+      bool haveActiveTasklets = false;
+      for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
+        haveActiveTasklets = (idx->get() != event->tasklet) && (*idx)->alive();
+      if (!haveActiveTasklets)
       {
-        event->tasklet->reset();
-        event->tasklet->start();
-      }
-      else
-      {
-        // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
-        //removeTasklet(tasklet);
-        bool haveActiveTasklets = false;
-        for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
-          haveActiveTasklets = (idx->get() != event->tasklet) && (*idx)->alive();
-        if (!haveActiveTasklets)
-        {
-          DOUT("Last tasklet died, terminating.");
-          quit();
-        }
+        DOUT("Last tasklet died, terminating.");
+        quit();
       }
     }
 

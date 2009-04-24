@@ -1,6 +1,8 @@
 #ifndef LOST_GL_SHADERPROGRAM_H
 #define LOST_GL_SHADERPROGRAM_H
 
+#include <map>
+#include <list>
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 #include "lost/gl/Shader.h"
@@ -8,6 +10,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
+#include "lost/platform/shared_ptr.h"
 
 namespace lost
 {

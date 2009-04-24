@@ -14,12 +14,16 @@
 #ifndef LOST_APPLICATION_GL_CONTEXT_H
 #define LOST_APPLICATION_GL_CONTEXT_H
 
-#include <list>
 #include "lost/gl/gl.h"
-#include "lost/gl/State.h"
+#include "lost/mesh/Mesh.h"
+#include "lost/gl/Context.h"
+#include "lost/gl/FrameBuffer.h"
+#include "lost/common/Color.h"
+#include "lost/gl/ShaderProgram.h"
 
 namespace lost
 {
+  namespace camera { struct Camera; typedef lost::shared_ptr<Camera> CameraPtr; }
   namespace gl
   {
     struct Context;
@@ -27,7 +31,27 @@ namespace lost
     
     struct Context
     {
-    private:
+    // private for now, deliberately no getters
+    private:  
+      bool vertexArrayEnabled;
+      bool normalArrayEnabled;
+      bool colorArrayEnabled;
+      bool texCoordArrayEnabled;
+      bool indexArrayEnabled;
+      bool depthTestEnabled;
+      bool blendEnabled;
+      GLenum currentBlendFuncSource;
+      GLenum currentBlendFuncDestination;
+      bool scissorEnabled;
+      bool texture2DEnabled;
+      common::Color currentColor;
+      common::Color currentClearColor;
+      ContextPtr ctx;  
+      camera::CameraPtr currentCam;
+      GLenum currentActiveTexture;
+      ShaderProgramPtr currentShader;
+      math::Matrix currentModelTransform;
+
       /**
        * forward declaration for platform specific stuff
        */
@@ -40,10 +64,7 @@ namespace lost
       void initialize();
       void finalize();
 
-      StatePtr currentState;
-      std::list<StatePtr> stateStack;
-      
-      GLuint defaultFrameBuffer;
+      GLuint m_defaultFrameBuffer;
       
     public:
       Context();
@@ -59,19 +80,45 @@ namespace lost
        */
       void swapBuffers();
 
-      void apply(const StatePtr& newState);
-      void pushState(const StatePtr& newState);
-      void popState();
-      
       void vsync(bool enable); // true to enable vsync to prevent tearing
       void multithreaded(bool enable); // true to enable multithreaded OpenGL execution on Mac
       
       void defaultFramebuffer(GLuint fbo);
       GLuint defaultFramebuffer();
       
-      // used by FrameBuffer class for switching
       void bindFramebuffer(GLuint fbo);
       void bindDefaultFramebuffer();
+
+      void frameBuffer(FrameBufferPtr& fbo);
+      void defaultFrameBuffer();
+
+      void vertexArray(bool enable);
+      void normalArray(bool enable);
+      void colorArray(bool enable);
+      void texCoordArray(bool enable);
+      void indexArray(bool enable);
+      void depthTest(bool enable);
+      void blend(bool enable);
+      void blendFunc(GLenum src, GLenum dest);
+      void scissor(bool enable);
+      void texture2D(bool enable);
+      
+      void color(const common::Color& col); // sets the current drawing color to col
+      void clearColor(const common::Color& col); // sets the current clear color to col
+      
+      void camera(camera::CameraPtr cam);
+      void modelTransform(const math::Matrix& inTransform); // sets the GL_MODEL_VIEW matrix to inTransform if the new one is != old one
+      
+      void clear(GLbitfield flags);    
+      
+      void activeTexture(GLenum tex);
+      void bindActiveTextures(const std::vector<TexturePtr>& textures);
+      void material(mesh::MaterialPtr mat);
+      
+      // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
+      void draw(mesh::MeshPtr mesh);
+      
+      void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
     };
 
   }

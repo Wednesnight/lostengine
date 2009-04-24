@@ -12,12 +12,9 @@ namespace lost
 
     struct Camera2D : public Camera
     {
-    private:
-      lost::math::Rect space;
-    public:
-      Camera2D(const lost::shared_ptr<gl::Context>& inContext, const lost::math::Rect& inViewport);
+      Camera2D(const lost::math::Rect& inViewport);
 
-      virtual void apply();
+      lost::math::Matrix& matrix();
     };
 
   }

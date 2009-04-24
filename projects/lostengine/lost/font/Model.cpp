@@ -19,19 +19,19 @@ namespace lost
     {
     }
 
-    void Model::render(CanvasPtr canvas)
+    void Model::render()
     {
       // don't do anything if model is empty
       if((vertexCount==0) || (indexCount==0))
         return;
-      canvas->context->pushState(renderState);
+//      canvas->context->pushState(renderState);
       
       texture->bind();
       glVertexPointer(2,GL_FLOAT,0,vertices.get()); GLDEBUG;
       glTexCoordPointer(2,GL_FLOAT,0,texcoords.get()); GLDEBUG;
       glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_BYTE, indices.get()); GLDEBUG;
 
-      canvas->context->popState();
+//      canvas->context->popState();
     }
   }
 }

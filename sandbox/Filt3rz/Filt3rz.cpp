@@ -25,13 +25,13 @@ Filt3rz::Filt3rz()
   /**
    * initialize instance based members
    */
-  fboSize.width = 256;
-  fboSize.height = 256;
-  numPanels = 5;
-  numRows = 2;
-  screenSize.width = fboSize.width * numPanels;
-  screenSize.height = fboSize.height * numRows;
-  windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height));
+
+  call_function<void>(lua->globals["init"]);
+
+  fboSize = lua->globals["fboSize"];
+  numPanels = lua->globals["numPanels"];
+  numRows = lua->globals["numRows"];
+  windowParams = lua->globals["windowParams"];
 
   //  waitsForEvents = true;
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
@@ -47,80 +47,66 @@ bool Filt3rz::startup()
    * initialize thread based members
    */
   DOUT("startup");
-  window->context->makeCurrent(); // FIXME: MUST be called before XContext construction or we will crash because NO context is current 
-  ctx.reset(new XContext(window->context)); 
-  ctx->makeCurrent();
 
-  fboViewport.x = 0;
-  fboViewport.y = 0;
-  fboViewport.width = fboSize.width;
-  fboViewport.height = fboSize.height;
-  
   framebuffer = FrameBuffer::createFrameBuffer(window->context, fboSize, GL_RGBA, 24);
   tex = framebuffer->colorTextures[0];
 
-  cam3D.reset(new Camera3D(window->canvas->context, Rect(0,0,fboSize.width, fboSize.height)));
-  cam3D->fovY(45.0f);
-  cam3D->depth(Vec2(1.0f, 1000.0f));
-  cam3D->position(Vec3(1,2,2));
-  cam3D->target(Vec3(0,0,0));
-  cam3D->stickToTarget(true);  
+  // calls "main" in main.lua
+  bool result = UiTasklet::startup();
+  if (result)
+  {
+    cam2D = lua->globals["cam2D"];
+    cam3D = lua->globals["cam3D"];
 
-  cam2D = window->canvas->camera;
+    blurShader = lua->globals["blurShader"];
+    lightShader = lua->globals["lightShader"];
+    edgeShader = lua->globals["edgeShader"];
+    embossShader = lua->globals["embossShader"];
+    sharpenShader = lua->globals["sharpenShader"];
+    radialShader = lua->globals["radialShader"];
+    ssaoShader = lua->globals["ssaoShader"];
+    sepiaShader = lua->globals["sepiaShader"];
+    heatsigShader = lua->globals["heatsigShader"];
 
-  lua->globals["fboSize"] = fboSize;
-  lua->globals["cubeCam"] = cam3D;
-  call_function<void>(lua->globals["init"], loader);
+//    setupLabels();
+    mesh = lua->globals["mesh"];
 
-  blurShader = lua->globals["blurShader"];
-  lightShader = lua->globals["lightShader"];
-  edgeShader = lua->globals["edgeShader"];
-  embossShader = lua->globals["embossShader"];
-  sharpenShader = lua->globals["sharpenShader"];
-  radialShader = lua->globals["radialShader"];
-  ssaoShader = lua->globals["ssaoShader"];
-  sepiaShader = lua->globals["sepiaShader"];
-  heatsigShader = lua->globals["heatsigShader"];
+    normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
 
-//  setupLabels();
-  mesh = lua->globals["mesh"];
+    blurPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    blurPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,fboSize.height,0));  
+    blurPanel->material->shader = blurShader;
 
-  normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
+    edgePanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    edgePanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,fboSize.height,0));  
+    edgePanel->material->shader = edgeShader;
 
-  blurPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  blurPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,fboSize.height,0));  
-  blurPanel->material->shader = blurShader;
+    embossPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    embossPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,fboSize.height,0));  
+    embossPanel->material->shader = embossShader;
 
-  edgePanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  edgePanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,fboSize.height,0));  
-  edgePanel->material->shader = edgeShader;
-
-  embossPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  embossPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,fboSize.height,0));  
-  embossPanel->material->shader = embossShader;
-
-  sharpenPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
-  sharpenPanel->material->shader = sharpenShader;
-  
-  radialPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  radialPanel->modelTransform = MatrixTranslation(Vec3(0,0,0));  
-  radialPanel->material->shader = radialShader;
-  
-  ssaoPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  ssaoPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,0,0));  
-  ssaoPanel->material->shader = ssaoShader;
-  
-  sepiaPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  sepiaPanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,0,0));  
-  sepiaPanel->material->shader = sepiaShader;
-  
-  heatsigPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-  heatsigPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,0,0));  
-  heatsigPanel->material->shader = heatsigShader;
-  
-  return true;
+    sharpenPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
+    sharpenPanel->material->shader = sharpenShader;
+    
+    radialPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    radialPanel->modelTransform = MatrixTranslation(Vec3(0,0,0));  
+    radialPanel->material->shader = radialShader;
+    
+    ssaoPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    ssaoPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,0,0));  
+    ssaoPanel->material->shader = ssaoShader;
+    
+    sepiaPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    sepiaPanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,0,0));  
+    sepiaPanel->material->shader = sepiaShader;
+    
+    heatsigPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+    heatsigPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,0,0));  
+    heatsigPanel->material->shader = heatsigShader;
+  }
+  return result;
 }
 
 bool Filt3rz::shutdown()
@@ -211,7 +197,7 @@ void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t r
    */
   glActiveTexture(GL_TEXTURE1);
   framebuffer->depthTexture->bind();
-  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width, rowIndex*fboSize.height, fboSize.width, fboSize.height), tex, false);
+//  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width, rowIndex*fboSize.height, fboSize.width, fboSize.height), tex, false);
   shader->disable();
   // FIXME: seems like we need to reset active texture
   glActiveTexture(GL_TEXTURE0);
@@ -228,34 +214,34 @@ void Filt3rz::drawLabel(lost::font::ModelPtr label,
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(xOffset, yOffset, 0);
-    window->canvas->setColor(col);
-    label->render(window->canvas);
+    window->context->color(col);
+//    label->render(window->canvas);
 }              
 
 void Filt3rz::draw()
 {
   // draw 3D cube into framebuffer, lightShader on white
-  ctx->frameBuffer(framebuffer);
-  ctx->camera(cam3D);
-  ctx->clearColor(whiteColor);
-  ctx->depthTest(true);
-  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  ctx->draw(mesh);
-  ctx->defaultFrameBuffer();
+  window->context->frameBuffer(framebuffer);
+  window->context->camera(cam3D);
+  window->context->clearColor(whiteColor);
+  window->context->depthTest(true);
+  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  window->context->draw(mesh);
+  window->context->defaultFrameBuffer();
     
-  ctx->camera(cam2D);
-  ctx->depthTest(false);
-  ctx->clearColor(grayColor);
-  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  ctx->draw(normalPanel);
-  ctx->draw(blurPanel);
-  ctx->draw(edgePanel);
-  ctx->draw(embossPanel);
-  ctx->draw(sharpenPanel);
-  ctx->draw(radialPanel);
-  ctx->draw(ssaoPanel);
-  ctx->draw(sepiaPanel);
-  ctx->draw(heatsigPanel);
+  window->context->camera(cam2D);
+  window->context->depthTest(false);
+  window->context->clearColor(grayColor);
+  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  window->context->draw(normalPanel);
+  window->context->draw(blurPanel);
+  window->context->draw(edgePanel);
+  window->context->draw(embossPanel);
+  window->context->draw(sharpenPanel);
+  window->context->draw(radialPanel);
+  window->context->draw(ssaoPanel);
+  window->context->draw(sepiaPanel);
+  window->context->draw(heatsigPanel);
 
   // draw original buffer texture
 /*  window->canvas->setColor(whiteColor);
@@ -289,7 +275,7 @@ void Filt3rz::draw()
   drawLabel(labelSepia, blackColor, 2, 0);
   drawLabel(labelHeatSig, blackColor, 3, 0);*/
 
-  ctx->swapBuffers();
+  window->context->swapBuffers();
 }
 
 bool Filt3rz::main()

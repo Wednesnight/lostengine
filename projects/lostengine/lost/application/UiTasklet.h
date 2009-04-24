@@ -15,8 +15,11 @@ struct UiTasklet : public Tasklet
   UiTasklet(const WindowParams& params,
             lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
   virtual ~UiTasklet();
-  
+
+  // initializes resources on the mainthread
   virtual bool start();
+  // initializes resources on the tasklet thread
+  virtual void init();
   
   WindowParams windowParams;
   WindowPtr window;

@@ -1,7 +1,6 @@
 #ifndef LOST_APPLICATION_WINDOW_H
 #define LOST_APPLICATION_WINDOW_H
 
-#include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"
 #include "lost/math/Rect.h"
 #include "lost/event/EventDispatcher.h"
@@ -65,12 +64,6 @@ namespace lost
       // FIXME: should probably be read-only
       lost::shared_ptr<gl::Context> context;
 
-      /**
-       * canvas for drawing operations
-       */
-      // FIXME: should probably be read-only
-      lost::shared_ptr<gl::Canvas> canvas;
-      
       /**
        * holds generic window params
        */

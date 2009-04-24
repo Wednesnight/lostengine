@@ -264,6 +264,7 @@ namespace lost
         [
           class_<Tasklet, TaskletPtr>("Tasklet")
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
+            .def_readonly("loader", &Tasklet::loader)
         ]
       ];
     }
@@ -306,7 +307,6 @@ namespace lost
             .def("open", &Window::open)
             .def("close", &Window::close)
             .def_readonly("context", &Window::context)
-            .def_readonly("canvas", &Window::canvas)
             .def_readonly("params", &Window::params)
             .scope
             [

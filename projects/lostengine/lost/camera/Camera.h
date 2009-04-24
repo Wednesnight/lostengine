@@ -1,8 +1,8 @@
 #ifndef LOST_CAMERA_CAMERA_H
 #define LOST_CAMERA_CAMERA_H
 
-#include "lost/gl/Context.h"
 #include "lost/math/Rect.h"
+#include "lost/math/Matrix.h"
 
 namespace lost
 {
@@ -12,13 +12,18 @@ namespace lost
     typedef lost::shared_ptr<Camera> CameraPtr;
     struct Camera
     {
+    protected:
+      lost::math::Matrix m_matrix;
+      lost::math::Rect   m_viewport;
     public:
-      gl::ContextPtr context;
-      lost::math::Rect viewport;
+      bool needsUpdate;
 
-      Camera(gl::ContextPtr inContext, const lost::math::Rect& inViewport);
-      
-      virtual void apply();
+      Camera(const lost::math::Rect& inViewport);
+
+      virtual lost::math::Matrix& matrix() = 0;
+
+      lost::math::Rect& viewport(const lost::math::Rect& inViewport);
+      lost::math::Rect& viewport();
     };
 
   }

@@ -498,9 +498,6 @@
 		8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
 		8DF927E30F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
 		8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
-		8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
-		8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
-		8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5980F56D43C005D3927 /* Canvas.cpp */; };
 		8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
 		8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5AA0F56D45E005D3927 /* GLContext.mm */; };
 		8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
@@ -677,9 +674,6 @@
 		EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
-		EAC0B1570F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
-		EAC0B1580F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
-		EAC0B1590F97B2A300A524D9 /* XContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAC0B1560F97B2A300A524D9 /* XContext.cpp */; };
 		EAC0B2610F9830B200A524D9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */; };
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
@@ -866,7 +860,6 @@
 		8DE56F660F3118600072FB28 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		8DE56F6C0F31187E0072FB28 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = mac/Application.mm; sourceTree = "<group>"; };
 		8DE56F6E0F3118840072FB28 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = mac/Window.mm; sourceTree = "<group>"; };
-		8DFDE5980F56D43C005D3927 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
 		8DFDE5A90F56D45E005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = iphone/Context.mm; sourceTree = "<group>"; };
 		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
 		8DFDE6140F56D477005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = mac/Context.mm; sourceTree = "<group>"; };
@@ -954,7 +947,6 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
-		EAC0B1560F97B2A300A524D9 /* XContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XContext.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
@@ -1559,14 +1551,12 @@
 			children = (
 				8DFDE59D0F56D440005D3927 /* iphone */,
 				8DFDE59E0F56D446005D3927 /* mac */,
-				8DFDE5980F56D43C005D3927 /* Canvas.cpp */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */,
 				EA09B0870F81F4A500266854 /* RenderBuffer.cpp */,
 				EAD2E8920E94132F000535DB /* State.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
-				EAC0B1560F97B2A300A524D9 /* XContext.cpp */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -1981,7 +1971,6 @@
 				8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8DFDE59A0F56D43C005D3927 /* Canvas.cpp in Sources */,
 				8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */,
 				8DFDE5AE0F56D45E005D3927 /* GLContext.mm in Sources */,
 				B41266F30F5EE7CD001CCC23 /* decoders.cpp in Sources */,
@@ -2014,7 +2003,6 @@
 				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 				EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
-				EAC0B1590F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EA2E6AD50F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496ED0F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB499230F9FA2B100F3036A /* LostCommon.cpp in Sources */,
@@ -2197,7 +2185,6 @@
 				8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */,
 				8DE56F6F0F3118840072FB28 /* Window.mm in Sources */,
 				8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8DFDE59B0F56D43C005D3927 /* Canvas.cpp in Sources */,
 				8DFDE6150F56D477005D3927 /* Context.mm in Sources */,
 				B41266B50F5EE7CD001CCC23 /* decoders.cpp in Sources */,
 				B41266B80F5EE7CD001CCC23 /* encoders.cpp in Sources */,
@@ -2229,7 +2216,6 @@
 				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 				EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
-				EAC0B1570F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EA2E6ACD0F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496E90F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB499210F9FA2B100F3036A /* LostCommon.cpp in Sources */,
@@ -2464,7 +2450,6 @@
 				8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */,
 				8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */,
 				8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */,
-				8DFDE5990F56D43C005D3927 /* Canvas.cpp in Sources */,
 				8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */,
 				8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */,
 				B41266D40F5EE7CD001CCC23 /* decoders.cpp in Sources */,
@@ -2497,7 +2482,6 @@
 				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
 				EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
-				EAC0B1580F97B2A300A524D9 /* XContext.cpp in Sources */,
 				EA2E6AD10F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496EB0F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB4991F0F9FA2B100F3036A /* LostCommon.cpp in Sources */,

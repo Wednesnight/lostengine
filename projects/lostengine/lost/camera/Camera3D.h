@@ -27,7 +27,7 @@ namespace lost
       math::Vec3 mPlane;
     public:
       // constructor
-      Camera3D(gl::ContextPtr inContext, const lost::math::Rect& inViewport);
+      Camera3D(const lost::math::Rect& inViewport);
 
       // getters
       math::Vec2 depth();
@@ -52,8 +52,8 @@ namespace lost
       // methods
       void move(const math::Vec3& deltaMove);
       void rotate(const math::Vec3& deltaRotate);
-      
-      void apply();
+
+      lost::math::Matrix& matrix();
     };
 
   }

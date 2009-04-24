@@ -7,6 +7,7 @@
 #include "lost/mesh/Mesh.h"
 #include <list>
 #include <string>
+#include "lost/gl/State.h"
 
 namespace lost
 {

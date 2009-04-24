@@ -37,13 +37,13 @@ void Renderer::render(gl::ContextPtr ctx, NodePtr node)
   // apply camera
   if(node->camera)
   {
-    node->camera->apply();
+//    node->camera->apply();
   }
   
   // apply additional state
   if(node->state)
   {
-    ctx->apply(node->state);
+//    ctx->apply(node->state);
   }
   
   // apply material
