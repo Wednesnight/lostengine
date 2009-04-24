@@ -6,6 +6,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
+#include "lost/math/Matrix.h"
 
 using namespace luabind;
 using namespace lost::math;
@@ -112,12 +113,32 @@ namespace lost
       ];
     }
 
+    void LostMathMatrix(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("math")
+        [
+          class_<Matrix>("Matrix"),
+          class_<MatrixRotX, Matrix>("MatrixRotX")
+            .def(constructor<float>()),
+          class_<MatrixRotY, Matrix>("MatrixRotY")
+            .def(constructor<float>()),
+          class_<MatrixRotZ, Matrix>("MatrixRotZ")
+            .def(constructor<float>()),
+          class_<MatrixTranslation, Matrix>("MatrixTranslation")
+            .def(constructor<const lost::math::Vec3&>())
+        ]
+      ];
+    }
+
     void LostMath(lua_State* state)
     {
       LostMathRect(state);
       LostMathVec2(state);
       LostMathVec3(state);
       LostMathVec4(state);
+      LostMathMatrix(state);
     }
 
   }
