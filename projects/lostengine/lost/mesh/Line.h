@@ -25,7 +25,7 @@ struct Line : public MESHTYPE
     idx[1] = 1;
     MESHTYPE::indexBuffer->bindBufferData(idx, 2);
     dataSize = sizeof(vertices);
-    MESHTYPE::drawMode = GL_LINE_STRIP;
+    MESHTYPE::drawMode = GL_LINES;
   }
 
   Line(const VertexType& start, const VertexType& end)
@@ -55,8 +55,13 @@ struct Line : public MESHTYPE
   
   void update(const VertexType& inStart, const VertexType& inEnd)
   {
-    vertices[0]=inStart;
-    vertices[1] = inEnd;
+//    float voffsetx = MESHTYPE::OffsetVectorType::x();
+//    float voffsety = MESHTYPE::OffsetVectorType::y();
+  
+    vertices[0].x = inStart.x;
+    vertices[0].y = inStart.y;
+    vertices[1].x = inEnd.x;
+    vertices[1].y = inEnd.y;
     MESHTYPE::vertexBuffer->bindBufferSubData(0,dataSize, vertices);
   }
 };
