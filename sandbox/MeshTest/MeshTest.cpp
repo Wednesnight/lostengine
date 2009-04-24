@@ -28,14 +28,11 @@ bool MeshTest::startup()
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
   // context
-  window->context->makeCurrent();
-  ctx.reset(new XContext(window->context));
-  ctx->makeCurrent();
-  ctx->clearColor(blackColor);
+  window->context->clearColor(blackColor);
   // cam 2D
-  camera2D = window->canvas->camera;
+  camera2D.reset(new Camera2D(Rect(0,0,window->params.rect.width, window->params.rect.height)));
   // cam 3D
-  camera3D.reset(new Camera3D(window->context, Rect(0, 0, window->canvas->camera->viewport.width, window->canvas->camera->viewport.height)));
+  camera3D.reset(new Camera3D(Rect(0, 0, window->params.rect.width, window->params.rect.height)));
   camera3D->fovY(45.0f);
   camera3D->depth(Vec2(1.0f, 1000.0f));
   camera3D->position(Vec3(1,2,2));
@@ -45,6 +42,8 @@ bool MeshTest::startup()
   lua->globals["camera3D"] = camera3D;
   call_function<void>(lua->globals["init"], loader);
   quad = lua->globals["quad"];
+  quad2 = lua->globals["quad2"];
+  quad3 = lua->globals["quad3"];
   line = lua->globals["line"];
   cube = lua->globals["cube"];
   
@@ -59,19 +58,28 @@ void MeshTest::update(double dt)
 
 void MeshTest::draw()
 {
-  ctx->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   
-  // draw 3D
-  ctx->camera(camera3D);
-  ctx->depthTest(true);
-  ctx->draw(cube);
   // draw 2D over 3D scene
-  ctx->camera(camera2D);
-  ctx->depthTest(false);
-  ctx->draw(quad);
-  ctx->draw(line);
-  
-  ctx->swapBuffers();  
+  window->context->camera(camera2D);
+  window->context->depthTest(false);
+  window->context->draw(quad);
+  window->context->draw(quad2);
+  window->context->draw(quad3);
+  window->context->draw(line);
+
+  // draw 3D
+  window->context->camera(camera3D);
+  window->context->depthTest(true);
+  window->context->draw(cube);
+
+/*ctx->color(redColor);
+glBegin(GL_POINTS);
+  glVertex2f(0, 0);
+  glVertex2f(639, 479);
+glEnd();*/
+
+  window->context->swapBuffers();  
 }
 
 bool MeshTest::main()
