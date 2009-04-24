@@ -1,3 +1,4 @@
+#include "lost/gl/Context.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/Logger.h"
 #include "lost/gl/gl.h"
@@ -7,17 +8,26 @@ namespace lost
   namespace camera
   {
     
-    Camera::Camera(gl::ContextPtr inContext, const lost::math::Rect& inViewport)
-    : context(inContext),
-      viewport(inViewport)
+    Camera::Camera(const lost::math::Rect& inViewport)
+    : m_viewport(inViewport),
+      needsUpdate(true)
     {
+      m_matrix.zero();
     }
-   
-    void Camera::apply()
+    
+    lost::math::Rect& Camera::viewport(const lost::math::Rect& inViewport)
     {
-      glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
-      glMatrixMode(GL_PROJECTION);
-      glLoadIdentity();
+      if (m_viewport != inViewport)
+      {
+        m_viewport = inViewport;
+        needsUpdate = true;
+      }
+      return m_viewport;
+    }
+
+    lost::math::Rect& Camera::viewport()
+    {
+      return m_viewport;
     }
     
   }

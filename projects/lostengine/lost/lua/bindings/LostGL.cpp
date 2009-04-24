@@ -1,7 +1,6 @@
 #include "lost/lua/bindings/LostGL.h"
 #include "lost/lua/lua.h"
 
-#include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/gl.h"
@@ -25,40 +24,6 @@ namespace lost
   namespace lua
   {
 
-    void LostGLCanvas(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Canvas, lost::shared_ptr<Canvas> >("Canvas")
-            .def(constructor<const shared_ptr<Context>&, const Rect&>())
-            .def(constructor<const shared_ptr<Context>&, const shared_ptr<Camera>&>())
-            .def_readonly("context", &Canvas::context)
-            .def_readonly("camera", &Canvas::camera)
-            .def("clear", &Canvas::clear)
-            .def("setColor", &Canvas::setColor)
-            .def("drawPoint", (void(Canvas::*)(const Vec2&))&Canvas::drawPoint)
-            .def("drawPoint", (void(Canvas::*)(const Vec3&))&Canvas::drawPoint)
-            .def("drawLine", (void(Canvas::*)(const Vec2&, const Vec2&))&Canvas::drawLine)
-            .def("drawLine", (void(Canvas::*)(const Vec3&, const Vec3&))&Canvas::drawLine)
-            .def("drawBezierCurve", &Canvas::drawBezierCurve)
-            .def("drawBezierCurveFilled", &Canvas::drawBezierCurveFilled)
-            .def("drawRectOutline", &Canvas::drawRectOutline)
-            .def("drawRectOutlineRounded", &Canvas::drawRectOutlineRounded)
-            .def("drawRectFilled", &Canvas::drawRectFilled)
-            .def("drawRectFilledRounded", &Canvas::drawRectFilledRounded)
-            .def("drawRectTextured", (void(Canvas::*)(const Rect&, shared_ptr<const Texture>, const Vec2&, const Vec2&, const Vec2&, const Vec2&, bool))&Canvas::drawRectTextured)
-            .def("drawRectTextured", (void(Canvas::*)(const Rect&, shared_ptr<const Texture>, bool))&Canvas::drawRectTextured)
-            .def("drawMesh2D", &Canvas::drawMesh2D)
-            .def("drawMesh3D", &Canvas::drawMesh3D)
-            .def("drawAABB", &Canvas::drawAABB)
-            .def("drawAxes", &Canvas::drawAxes)
-            .def("writeScreenshot", &Canvas::writeScreenshot)
-        ]
-      ];
-    }
-
     void LostGLContext(lua_State* state)
     {
       module(state, "lost")
@@ -68,8 +33,6 @@ namespace lost
           class_<Context, lost::shared_ptr<Context> >("Context")
             .def("makeCurrent", &Context::makeCurrent)
             .def("swapBuffers", &Context::swapBuffers)
-            .def("pushState", &Context::pushState)
-            .def("popState", &Context::popState)
             .def("vsync", &Context::vsync)
             .def("multithreaded", &Context::multithreaded)
         ]
@@ -83,9 +46,7 @@ namespace lost
         namespace_("gl")
         [
           class_<FrameBuffer, shared_ptr<FrameBuffer> >("FrameBuffer")
-            .def(constructor<ContextPtr>())
-            .def("enable", &FrameBuffer::enable)
-            .def("disable", &FrameBuffer::disable)
+            .def(constructor<>())
             .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<Texture>))&FrameBuffer::attachDepth)
             .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<RenderBuffer>))&FrameBuffer::attachDepth)
             .def("attachColor", (void(FrameBuffer::*)(int, shared_ptr<Texture>))&FrameBuffer::attachColor)
@@ -449,7 +410,6 @@ namespace lost
 
     void LostGL(lua_State* state)
     {
-      LostGLCanvas(state);
       LostGLContext(state);
       LostGLFrameBuffer(state);
       LostGLGL(state);

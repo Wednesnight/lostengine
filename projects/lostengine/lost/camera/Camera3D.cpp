@@ -6,8 +6,8 @@ namespace lost
   namespace camera
   {
     
-    Camera3D::Camera3D(gl::ContextPtr inContext, const lost::math::Rect& inViewport)
-    : Camera::Camera(inContext, inViewport),
+    Camera3D::Camera3D(const lost::math::Rect& inViewport)
+    : Camera::Camera(inViewport),
       mPosition(0.0f, 0.0f, 0.0f),
       mDirection(0.0f, 0.0f, -1.0f),
       mRotation(0.0f, 0.0f, 0.0f),
@@ -79,26 +79,31 @@ namespace lost
     void Camera3D::position(const math::Vec3& newPosition)
     {
       mPosition = newPosition;
+      needsUpdate = true;
     }
     
     void Camera3D::direction(const math::Vec3& newDirection)
     {
       mDirection = newDirection;
+      needsUpdate = true;
     }
 
     void Camera3D::stickToTarget(const bool newStickToTarget)
     {
       mStickToTarget = newStickToTarget;
+      needsUpdate = true;
     }
 
     void Camera3D::rotation(const math::Vec3& newRotation)
     {
       mRotation = newRotation;
+      needsUpdate = true;
     }
     
     void Camera3D::target(const math::Vec3& newTarget)
     {
       mDirection = newTarget - mPosition;
+      needsUpdate = true;
     }
     
     void Camera3D::move(const math::Vec3& deltaMove)
@@ -119,16 +124,19 @@ namespace lost
         math::MatrixTranslation translationMatrix(newDelta);
         position(translationMatrix * mPosition);
       }
+      needsUpdate = true;
     }
     
     void Camera3D::fovY(const float inFovY)
     {
       mFovY = inFovY;
+      needsUpdate = true;
     }
     
     void Camera3D::depth(const math::Vec2& inDepth)
     {
       mDepth = inDepth;
+      needsUpdate = true;
     }
     
     void Camera3D::rotate(const math::Vec3& deltaRotate)
@@ -141,21 +149,18 @@ namespace lost
       if (newRotation.z < 0) newRotation.z += 360;
       else if (newRotation.z > 360) newRotation.z -= 360;
       mRotation = newRotation;
+      needsUpdate = true;
     }
 
-    void Camera3D::apply()
+    lost::math::Matrix& Camera3D::matrix()
     {
-      Camera::apply();
-
-      double aspectRatio = (double)viewport.width / (double)viewport.height;
-      math::Vec3 currentEye = position();
-      math::Vec3 currentTarget = target();
-      math::Vec3 currentUp = up();
-
-      lgluPerspective(mFovY, aspectRatio, mDepth.min, mDepth.max);
-      lgluLookAt(currentEye.x,    currentEye.y,    currentEye.z,
-                 currentTarget.x, currentTarget.y, currentTarget.z,
-                 currentUp.x,     currentUp.y,     currentUp.z);
+      if (needsUpdate)
+      {
+        double aspectRatio = (double)m_viewport.width / (double)m_viewport.height;
+        m_matrix = lost::math::MatrixPerspective(mFovY, aspectRatio, mDepth) * lost::math::MatrixLookAt(position(), target(), up());
+        needsUpdate = false;
+      }
+      return m_matrix;
     }
 
   }

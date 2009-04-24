@@ -8,7 +8,6 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
-#include "lost/gl/Canvas.h"
 #include "lost/gl/Context.h"
 #include "lost/gl/State.h"
 #include "lost/bitmap/Bitmap.h"
@@ -54,7 +53,6 @@ namespace luabind
   GET_POINTER(lost::common::Color);
   GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
-  GET_POINTER(lost::gl::Canvas);
   GET_POINTER(lost::gl::Context);
   GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::RenderBuffer);

@@ -33,11 +33,12 @@ namespace lost
       bool waitForEvents;
       // script filename
       std::string script;
-      // auto-restart flag
-      bool shouldRestart;
 
       Tasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
       virtual ~Tasklet();
+
+      // initializes resources on the tasklet thread
+      virtual void init();
 
       virtual bool startup();
       virtual bool main();

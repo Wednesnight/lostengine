@@ -12,8 +12,6 @@ namespace lost
     {
       // platform specific initialization
       initialize();
-      
-      canvas.reset(new gl::Canvas(context, lost::math::Rect(0, 0, params.rect.width, params.rect.height)));
     }
 
     lost::shared_ptr<Window> Window::create(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,

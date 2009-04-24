@@ -22,13 +22,14 @@ namespace lost
         namespace_("camera")
         [
           class_<Camera, shared_ptr<Camera> >("Camera")
-            .def(constructor<const shared_ptr<Context>&, const Rect&>())
-            .def("apply", &Camera::apply)
-            .def_readonly("viewport", &Camera::viewport),
+            .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
+            .def("viewport", (Rect&(Camera::*)())&Camera::viewport),
           class_<Camera2D, shared_ptr<Camera2D>, Camera>("Camera2D")
-            .def(constructor<const shared_ptr<Context>&, const Rect&>()),
+            .def(constructor<const Rect&>()),
           class_<Camera3D, shared_ptr<Camera3D>, Camera>("Camera3D")
-            .def(constructor<const shared_ptr<Context>&, const Rect&>())
+            .def(constructor<const Rect&>())
+            .def("fovY", (float(Camera3D::*)()) &Camera3D::fovY)
+            .def("fovY", (void(Camera3D::*)(const float)) &Camera3D::fovY)
             .def("position", (Vec3(Camera3D::*)()) &Camera3D::position)
             .def("position", (void(Camera3D::*)(const Vec3&)) &Camera3D::position)
             .def("direction", (Vec3(Camera3D::*)()) &Camera3D::direction)
@@ -42,6 +43,7 @@ namespace lost
             .def("move", &Camera3D::move)
             .def("rotate", &Camera3D::rotate)
             .def("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
+            .def("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
         ]
       ];
     }

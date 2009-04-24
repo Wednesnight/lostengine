@@ -13,9 +13,10 @@ namespace lost
     {
         union
         {
-            struct {float x,y;};
-            struct {float width,height;};
-            struct {float min,max;};
+          struct {float x,y;};
+          struct {float width,height;};
+          struct {float min,max;};
+          struct {float near,far;};
         };
 
         Vec2(float a, float b) : x(a), y(b) {}

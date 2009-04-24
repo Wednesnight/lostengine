@@ -27,13 +27,11 @@ namespace lost
     
     Tasklet::Tasklet(LoaderPtr inLoader)
     : tasklet::tasklet(bind(&Tasklet::run, this, _1)),
-      executeScript(true),
       loader(inLoader),
       eventDispatcher(new EventDispatcher()),
       lua(new State(loader)),
       waitForEvents(false),
-      script("main.lua"),
-      shouldRestart(false)
+      script("main.lua")
     {
       // set error handler
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
@@ -42,16 +40,7 @@ namespace lost
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua, loader);
-    }
-    
-    Tasklet::~Tasklet()
-    {
-      eventDispatcher->clear();
-    }
-    
-    void Tasklet::run(tasklet& tasklet)
-    {
-      threadAutoreleasePoolHack_createPool();
+
       try
       {
         executeScript = true;
@@ -62,6 +51,23 @@ namespace lost
         DOUT("couldn't load script <"+ script +">: "+ string(ex.what()));
         executeScript = false;
       }
+    }
+    
+    Tasklet::~Tasklet()
+    {
+      eventDispatcher->clear();
+    }
+
+    void Tasklet::init()
+    {
+    }
+
+    void Tasklet::run(tasklet& tasklet)
+    {
+      threadAutoreleasePoolHack_createPool();
+
+      // init tasklet thread resources
+      init();
 
       if (startup())
       {

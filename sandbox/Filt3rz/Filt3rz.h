@@ -11,7 +11,6 @@
 #include "lost/font/TrueTypeFont.h"
 #include "lost/application/UiTasklet.h"
 #include "lost/mesh/Mesh.h"
-#include "lost/gl/XContext.h"
 #include "lost/mesh/Quad.h"
 #include "lost/mesh/Line.h"
 
@@ -20,7 +19,6 @@ struct Filt3rz : public lost::application::UiTasklet
 public:
   Filt3rz();
 private:
-  lost::gl::XContextPtr                             ctx;
   lost::gl::FrameBufferPtr                          framebuffer;
   lost::gl::TexturePtr                              tex;
   lost::gl::ShaderProgramPtr                        lightShader;
@@ -33,7 +31,7 @@ private:
   lost::gl::ShaderProgramPtr                        sepiaShader;
   lost::gl::ShaderProgramPtr                        heatsigShader;
   lost::camera::Camera3DPtr                         cam3D;
-  lost::camera::CameraPtr                           cam2D;
+  lost::camera::Camera2DPtr                         cam2D;
 
   lost::font::TrueTypeFontPtr                       ttf;
   lost::font::ModelPtr                              labelOriginal;
@@ -75,7 +73,6 @@ private:
                  uint32_t rowIndex);
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
-  lost::math::Rect fboViewport;
   uint16_t  numPanels;
   uint16_t  numRows;
   lost::math::Vec2  screenSize;

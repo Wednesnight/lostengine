@@ -1,6 +1,7 @@
 #include "lost/gl/FrameBuffer.h"
 #include <stdexcept>
 #include "lost/gl/gl.h"
+#include "lost/gl/Context.h"
 
 using namespace std;
 
@@ -67,15 +68,15 @@ uint8_t lowerBitDepth(uint8_t bitDepth)
   return result;
 }
 
-FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr ctx,
+FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr& ctx,
                                               const math::Vec2& size,
                                               GLenum colorFormat, 
                                               uint8_t bitDepth)
 {
   FrameBufferPtr result;
   
-  result.reset(new FrameBuffer(ctx));
-  result->enable();
+  result.reset(new FrameBuffer());
+  ctx->bindFramebuffer(result->buffer);
 
   // first the color attachment
   TexturePtr tex = createColorTexture(size, colorFormat);
@@ -104,7 +105,6 @@ FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr ctx,
     throw runtime_error("couldn't create FBO"); // FIXME: maybe ouput more diagnostics
   }
   
-  result->disable();
   return result;
 }                                        
 
@@ -113,8 +113,7 @@ void FrameBuffer::attach(GLenum target, RenderBufferPtr inRenderBuffer)
   lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
 }
 
-FrameBuffer::FrameBuffer(ContextPtr ctx)
-: context(ctx)
+FrameBuffer::FrameBuffer()
 {
   lglGenFramebuffers(1, &buffer);GLDEBUG_THROW;
 }
@@ -122,16 +121,6 @@ FrameBuffer::FrameBuffer(ContextPtr ctx)
 FrameBuffer::~FrameBuffer()
 {
   lglDeleteFramebuffers(1, &buffer);GLDEBUG;
-}
-
-void FrameBuffer::enable()
-{
-    context->bindFramebuffer(buffer);
-}
-
-void FrameBuffer::disable()
-{
-    context->bindDefaultFramebuffer();
 }
 
 // attach a color buffer to one of 16 slots, zero indexed

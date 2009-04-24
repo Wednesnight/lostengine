@@ -21,6 +21,12 @@ namespace lost
       return Tasklet::start();
     }
 
+    void UiTasklet::init()
+    {
+      // make sure that our GL context is the current context
+      window->context->makeCurrent();
+    }
+
     UiTasklet::~UiTasklet()
     {
     }

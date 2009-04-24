@@ -5,7 +5,6 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/math/Vec2.h"
-#include "lost/gl/Canvas.h"
 #include "lost/gl/State.h"
 
 using namespace lost::gl;
@@ -88,16 +87,16 @@ namespace lost
       {
         addHistoryEntry(timeSinceLastCallSec);
 
-        canvas->context->pushState(renderState);
+//        canvas->context->pushState(renderState);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
         // background
-        canvas->setColor(Color(.75, .75, .75, alpha));
-        canvas->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
+//        canvas->setColor(Color(.75, .75, .75, alpha));
+//        canvas->drawRectFilled(math::Rect((float)x, (float)y, (float)width, (float)height));
 
-        canvas->setColor(Color(0, 0, 0, alpha));
+//        canvas->setColor(Color(0, 0, 0, alpha));
         glTranslatef(x,y,0);
         glVertexPointer(2, GL_FLOAT, 0, labelArray.get()); GLDEBUG;
         glDrawArrays(GL_LINES, 0,numlabels*2); GLDEBUG;
@@ -110,7 +109,7 @@ namespace lost
         glVertexPointer(2, GL_FLOAT, 0, linesArray.get()); GLDEBUG;
         glDrawArrays(GL_LINE_STRIP, 0, historylength/2); GLDEBUG;
 
-        canvas->context->popState();
+//        canvas->context->popState();
       }
   }
 }

@@ -3,8 +3,6 @@
 
 #include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
-#include "lost/gl/Canvas.h"
-#include "lost/gl/Context.h"
 #include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 
@@ -21,7 +19,7 @@ namespace lost
       Model();
       virtual ~Model();
 
-      void render(gl::CanvasPtr canvas);
+      void render();
 
       boost::uint32_t vertexCount;
       boost::uint32_t indexCount;
