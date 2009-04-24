@@ -57,7 +57,8 @@ Texture::Texture()
 
 Texture::Texture(lost::math::Vec2 inSize, const Params& inParams)
 {
-    init(inSize, inParams);
+  create();
+  init(inSize, inParams);
 }
 
 Texture::Texture(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
