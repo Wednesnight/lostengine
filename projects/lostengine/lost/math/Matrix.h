@@ -294,7 +294,7 @@ namespace math
   
   struct MatrixRotX : public Matrix
   {
-    MatrixRotX(const float inAngle)
+    MatrixRotX(float inAngle)
     {
       initRotateX(inAngle);
     }
@@ -302,7 +302,7 @@ namespace math
   
   struct MatrixRotY : public Matrix
   {
-    MatrixRotY(const float inAngle)
+    MatrixRotY(float inAngle)
     {
       initRotateY(inAngle);
     }
@@ -310,7 +310,7 @@ namespace math
   
   struct MatrixRotZ : public Matrix
   {
-    MatrixRotZ(const float inAngle)
+    MatrixRotZ(float inAngle)
     {
       initRotateZ(inAngle);
     }
