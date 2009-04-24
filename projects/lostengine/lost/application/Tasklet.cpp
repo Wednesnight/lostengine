@@ -46,10 +46,14 @@ namespace lost
         executeScript = true;
         lua->doFile(script);
       }
-      catch(std::exception& ex)
+      catch(resource::LoaderError& ex)
       {
         DOUT("couldn't load script <"+ script +">: "+ string(ex.what()));
         executeScript = false;
+      }
+      catch(std::exception&)
+      {
+        throw;
       }
     }
     

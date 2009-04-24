@@ -29,25 +29,20 @@ bool MeshTest::startup()
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
   // context
   window->context->clearColor(blackColor);
-  // cam 2D
-  camera2D.reset(new Camera2D(Rect(0,0,window->params.rect.width, window->params.rect.height)));
-  // cam 3D
-  camera3D.reset(new Camera3D(Rect(0, 0, window->params.rect.width, window->params.rect.height)));
-  camera3D->fovY(45.0f);
-  camera3D->depth(Vec2(1.0f, 1000.0f));
-  camera3D->position(Vec3(1,2,2));
-  camera3D->target(Vec3(0,0,0));
-  camera3D->stickToTarget(true);  
 
-  lua->globals["camera3D"] = camera3D;
-  call_function<void>(lua->globals["init"], loader);
-  quad = lua->globals["quad"];
-  quad2 = lua->globals["quad2"];
-  quad3 = lua->globals["quad3"];
-  line = lua->globals["line"];
-  cube = lua->globals["cube"];
+  bool result = Tasklet::startup();
+  if (result)
+  {
+    camera2D = (Camera2DPtr)lua->globals["camera2D"];
+    camera3D = lua->globals["camera3D"];
+    quad = lua->globals["quad"];
+    quad2 = lua->globals["quad2"];
+    quad3 = lua->globals["quad3"];
+    line = lua->globals["line"];
+    cube = lua->globals["cube"];
+  }
   
-  return true;
+  return result;
 }
 
 void MeshTest::update(double dt)

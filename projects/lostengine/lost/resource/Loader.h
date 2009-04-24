@@ -18,6 +18,8 @@ namespace lost
     struct Repository;
     typedef lost::shared_ptr<Repository> RepositoryPtr;
 
+    struct LoaderError : public std::runtime_error { LoaderError(const std::string& error) : runtime_error(error) {} };
+
     struct Loader
     {
       Loader();

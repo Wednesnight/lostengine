@@ -162,11 +162,11 @@ namespace lost
         if (errstringc != NULL)
         {
           errstring = errstringc;
-          throw std::runtime_error(errcode +" : "+ errstring);
+          throw std::runtime_error(errcode +" ("+ getScriptFilename(inData, inData) +"): "+ errstring);
         }
         else
         {
-          throw std::runtime_error(errcode);
+          throw std::runtime_error(errcode +" ("+ getScriptFilename(inData, inData) +")");
         }
       }
       return result;
