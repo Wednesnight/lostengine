@@ -492,12 +492,6 @@
 		8DE56F690F3118600072FB28 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F660F3118600072FB28 /* Window.cpp */; };
 		8DE56F6D0F31187E0072FB28 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6C0F31187E0072FB28 /* Application.mm */; };
 		8DE56F6F0F3118840072FB28 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DE56F6E0F3118840072FB28 /* Window.mm */; };
-		8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
-		8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
-		8DF927E10F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
-		8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
-		8DF927E30F8EA560007A771A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8B63EA0F88E42C001DAA27 /* Node.cpp */; };
-		8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F21AD0F88339A00521EAB /* Renderer.cpp */; };
 		8DFDE5AB0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
 		8DFDE5AC0F56D45E005D3927 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5AA0F56D45E005D3927 /* GLContext.mm */; };
 		8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
@@ -534,6 +528,9 @@
 		EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
 		EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
+		EA18C3210FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
+		EA18C3220FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
+		EA18C3230FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
 		EA1BF66D0F67349200862B2F /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libLostEngine.a */; };
 		EA1BF67B0F67350D00862B2F /* TestCompileLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6710F67350D00862B2F /* TestCompileLostMathVec2.cpp */; };
 		EA1BF67D0F67350D00862B2F /* TestEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6730F67350D00862B2F /* TestEvent.cpp */; };
@@ -875,6 +872,7 @@
 		EA09B0870F81F4A500266854 /* RenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderBuffer.cpp; sourceTree = "<group>"; };
 		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
 		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
+		EA18C3200FA25C5600C2652A /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = rg/Node.cpp; sourceTree = "<group>"; };
 		EA1BF6620F67342000862B2F /* LostEngineUnittests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineUnittests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1BF6640F67342000862B2F /* LostEngineUnittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LostEngineUnittests-Info.plist"; sourceTree = "<group>"; };
 		EA1BF6710F67350D00862B2F /* TestCompileLostMathVec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostMathVec2.cpp; path = test/TestCompileLostMathVec2.cpp; sourceTree = "<group>"; };
@@ -917,7 +915,6 @@
 		EA3B94FB0E04639D00B6423B /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
-		EA4F21AD0F88339A00521EAB /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Renderer.cpp; path = sg/Renderer.cpp; sourceTree = "<group>"; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
@@ -937,7 +934,6 @@
 		EA7BE1240E6F38A10017B031 /* LostLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLua.cpp; path = bindings/LostLua.cpp; sourceTree = "<group>"; };
 		EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLSystem.cpp; path = bindings/LostLSystem.cpp; sourceTree = "<group>"; };
 		EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostBitmap.cpp; path = bindings/LostBitmap.cpp; sourceTree = "<group>"; };
-		EA8B63EA0F88E42C001DAA27 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = sg/Node.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
@@ -1480,7 +1476,7 @@
 				EA4F9C110F8B6A5C00967F8D /* mesh */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 				EA26B90B0F91480C00318279 /* resource */,
-				EA8A228B0F87B15400A6EB8B /* sg */,
+				EA8A228B0F87B15400A6EB8B /* rg */,
 				EA1BF6700F6734F400862B2F /* test */,
 			);
 			name = lost;
@@ -1645,13 +1641,12 @@
 			name = bindings;
 			sourceTree = "<group>";
 		};
-		EA8A228B0F87B15400A6EB8B /* sg */ = {
+		EA8A228B0F87B15400A6EB8B /* rg */ = {
 			isa = PBXGroup;
 			children = (
-				EA8B63EA0F88E42C001DAA27 /* Node.cpp */,
-				EA4F21AD0F88339A00521EAB /* Renderer.cpp */,
+				EA18C3200FA25C5600C2652A /* Node.cpp */,
 			);
-			name = sg;
+			name = rg;
 			sourceTree = "<group>";
 		};
 		EA9A67E10F159C38007E8A3D /* precompiled headers */ = {
@@ -1995,8 +1990,6 @@
 				8DA5853A0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA5853C0F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA5853D0F8A4F7000A568E1 /* path.cpp in Sources */,
-				8DF927E30F8EA560007A771A /* Node.cpp in Sources */,
-				8DF927E40F8EA560007A771A /* Renderer.cpp in Sources */,
 				EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9110F91481A00318279 /* File.cpp in Sources */,
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
@@ -2010,6 +2003,7 @@
 				3EB499D20F9FA4F700F3036A /* LostFont.cpp in Sources */,
 				3EB499DB0F9FA50600F3036A /* LostGL.cpp in Sources */,
 				3E35F5BF0FA04F65007DDAB1 /* Loader.cpp in Sources */,
+				EA18C3230FA25C5600C2652A /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2208,8 +2202,6 @@
 				8DA5853E0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585400F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585410F8A4F7000A568E1 /* path.cpp in Sources */,
-				8DF927DF0F8EA55F007A771A /* Node.cpp in Sources */,
-				8DF927E00F8EA55F007A771A /* Renderer.cpp in Sources */,
 				EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B90F0F91481A00318279 /* File.cpp in Sources */,
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
@@ -2223,6 +2215,7 @@
 				3EB499D00F9FA4F700F3036A /* LostFont.cpp in Sources */,
 				3EB499D90F9FA50600F3036A /* LostGL.cpp in Sources */,
 				3E35F5C10FA04F65007DDAB1 /* Loader.cpp in Sources */,
+				EA18C3210FA25C5600C2652A /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2474,8 +2467,6 @@
 				8DA585420F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585440F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585450F8A4F7000A568E1 /* path.cpp in Sources */,
-				8DF927E10F8EA560007A771A /* Node.cpp in Sources */,
-				8DF927E20F8EA560007A771A /* Renderer.cpp in Sources */,
 				EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9100F91481A00318279 /* File.cpp in Sources */,
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
@@ -2489,6 +2480,7 @@
 				3EB499CE0F9FA4F700F3036A /* LostFont.cpp in Sources */,
 				3EB499D70F9FA50600F3036A /* LostGL.cpp in Sources */,
 				3E35F5BD0FA04F65007DDAB1 /* Loader.cpp in Sources */,
+				EA18C3220FA25C5600C2652A /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

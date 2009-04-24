@@ -1,8 +1,8 @@
-#include "lost/sg/Node.h"
+#include "lost/rg/Node.h"
 
 namespace lost
 {
-namespace sg
+namespace rg
 {
 
 Node::Node()
