@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E03585A0FA24F5600EE43A8 /* TestLostMathQuat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */; };
 		3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060800E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
 		3E2060810E9E066D0042BC53 /* BindingHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */; };
@@ -345,23 +346,18 @@
 		3EB496E90F9F99DE00F3036A /* LostApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB496E70F9F99DE00F3036A /* LostApplication.cpp */; };
 		3EB496EB0F9F99DE00F3036A /* LostApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB496E70F9F99DE00F3036A /* LostApplication.cpp */; };
 		3EB496ED0F9F99DE00F3036A /* LostApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB496E70F9F99DE00F3036A /* LostApplication.cpp */; };
-		3EB496EE0F9F99DE00F3036A /* LostApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB496E70F9F99DE00F3036A /* LostApplication.cpp */; };
 		3EB4991F0F9FA2B100F3036A /* LostCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */; };
 		3EB499210F9FA2B100F3036A /* LostCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */; };
 		3EB499230F9FA2B100F3036A /* LostCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */; };
-		3EB499240F9FA2B100F3036A /* LostCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */; };
 		3EB499C50F9FA4E800F3036A /* LostEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499C30F9FA4E800F3036A /* LostEvent.cpp */; };
 		3EB499C70F9FA4E800F3036A /* LostEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499C30F9FA4E800F3036A /* LostEvent.cpp */; };
 		3EB499C90F9FA4E800F3036A /* LostEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499C30F9FA4E800F3036A /* LostEvent.cpp */; };
-		3EB499CA0F9FA4E800F3036A /* LostEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499C30F9FA4E800F3036A /* LostEvent.cpp */; };
 		3EB499CE0F9FA4F700F3036A /* LostFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499CC0F9FA4F700F3036A /* LostFont.cpp */; };
 		3EB499D00F9FA4F700F3036A /* LostFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499CC0F9FA4F700F3036A /* LostFont.cpp */; };
 		3EB499D20F9FA4F700F3036A /* LostFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499CC0F9FA4F700F3036A /* LostFont.cpp */; };
-		3EB499D30F9FA4F700F3036A /* LostFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499CC0F9FA4F700F3036A /* LostFont.cpp */; };
 		3EB499D70F9FA50600F3036A /* LostGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499D50F9FA50600F3036A /* LostGL.cpp */; };
 		3EB499D90F9FA50600F3036A /* LostGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499D50F9FA50600F3036A /* LostGL.cpp */; };
 		3EB499DB0F9FA50600F3036A /* LostGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499D50F9FA50600F3036A /* LostGL.cpp */; };
-		3EB499DC0F9FA50600F3036A /* LostGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EB499D50F9FA50600F3036A /* LostGL.cpp */; };
 		3EC9CFCF0E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD00E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD10E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
@@ -703,6 +699,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostMathQuat.cpp; path = test/TestLostMathQuat.cpp; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLGL.cpp; path = bindings/LostLGL.cpp; sourceTree = "<group>"; };
 		3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = mesh/Loader.cpp; sourceTree = "<group>"; };
@@ -1286,6 +1283,7 @@
 				EA1BF6780F67350D00862B2F /* TestPlatform.cpp */,
 				EA1BF6790F67350D00862B2F /* TestProfiler.cpp */,
 				EA1BF67A0F67350D00862B2F /* main.cpp */,
+				3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -2284,12 +2282,8 @@
 				8DA585460F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585480F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585490F8A4F7000A568E1 /* path.cpp in Sources */,
-				3EB496EE0F9F99DE00F3036A /* LostApplication.cpp in Sources */,
-				3EB499240F9FA2B100F3036A /* LostCommon.cpp in Sources */,
-				3EB499CA0F9FA4E800F3036A /* LostEvent.cpp in Sources */,
-				3EB499D30F9FA4F700F3036A /* LostFont.cpp in Sources */,
-				3EB499DC0F9FA50600F3036A /* LostGL.cpp in Sources */,
 				3E35F5C20FA04F65007DDAB1 /* Loader.cpp in Sources */,
+				3E03585A0FA24F5600EE43A8 /* TestLostMathQuat.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

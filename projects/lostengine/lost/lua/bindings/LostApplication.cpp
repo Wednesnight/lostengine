@@ -29,7 +29,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<AccelerometerEvent, Event, lost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
+          class_<AccelerometerEvent, Event, AccelerometerEventPtr>("AccelerometerEvent")
             .def(constructor<std::string>()) 
             .def_readwrite("x", &AccelerometerEvent::x)
             .def_readwrite("y", &AccelerometerEvent::y)

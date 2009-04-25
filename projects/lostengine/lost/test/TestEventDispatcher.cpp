@@ -44,7 +44,7 @@ struct MouseListener
 {
   bool* dest;
   MouseListener(bool* inDest) : dest(inDest) {}
-  void operator()(shared_ptr<MouseEvent> event)
+  void operator()(MouseEventPtr event)
   {
     IOUT("EventListener fired for : "+ event->type);
     (*dest) = true;

@@ -1,5 +1,6 @@
 #include "lost/resource/DefaultLoader.h"
 
+#include "lost/platform/shared_ptr.h"
 #include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"

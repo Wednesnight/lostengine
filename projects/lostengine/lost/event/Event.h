@@ -2,6 +2,7 @@
 #define LOST_EVENT_EVENT_H
 
 #include <string>
+#include "lost/platform/shared_ptr.h"
 
 namespace lost
 {
