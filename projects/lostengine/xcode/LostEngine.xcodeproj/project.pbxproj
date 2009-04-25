@@ -650,6 +650,9 @@
 		EA8A152F0FA26D7600E42FBE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15230FA26D7600E42FBE /* Camera.cpp */; };
 		EA8A15310FA26D7600E42FBE /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15250FA26D7600E42FBE /* Draw.cpp */; };
 		EA8A15320FA26D7600E42FBE /* DepthTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15260FA26D7600E42FBE /* DepthTest.cpp */; };
+		EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
+		EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
+		EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
 		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
@@ -943,6 +946,7 @@
 		EA8A15230FA26D7600E42FBE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = rg/Camera.cpp; sourceTree = "<group>"; };
 		EA8A15250FA26D7600E42FBE /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Draw.cpp; path = rg/Draw.cpp; sourceTree = "<group>"; };
 		EA8A15260FA26D7600E42FBE /* DepthTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthTest.cpp; path = rg/DepthTest.cpp; sourceTree = "<group>"; };
+		EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostRg.cpp; path = bindings/LostRg.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
@@ -1647,6 +1651,7 @@
 				EA2E6AC90F9E45E300696425 /* LostMesh.cpp */,
 				EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */,
 				EA7BE1200E6F38A10017B031 /* LostResource.cpp */,
+				EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */,
 			);
 			name = bindings;
 			sourceTree = "<group>";
@@ -2020,6 +2025,7 @@
 				EA8A152F0FA26D7600E42FBE /* Camera.cpp in Sources */,
 				EA8A15310FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A15320FA26D7600E42FBE /* DepthTest.cpp in Sources */,
+				EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2235,6 +2241,7 @@
 				EA8A15270FA26D7600E42FBE /* Camera.cpp in Sources */,
 				EA8A15290FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152A0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
+				EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2499,6 +2506,7 @@
 				EA8A152B0FA26D7600E42FBE /* Camera.cpp in Sources */,
 				EA8A152D0FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152E0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
+				EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

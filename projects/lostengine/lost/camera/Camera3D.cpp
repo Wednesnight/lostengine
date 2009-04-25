@@ -17,6 +17,11 @@ namespace lost
     {
     }
 
+    Camera3DPtr Camera3D::create(const lost::math::Rect& inViewport)
+    {
+      return Camera3DPtr(new Camera3D(inViewport));
+    }
+
     math::Vec3 Camera3D::position()
     {
       math::Vec3 result = mPosition;

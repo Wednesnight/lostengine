@@ -15,6 +15,7 @@
 #include "lost/lua/bindings/LostMesh.h"
 #include "lost/lua/bindings/LostPlatform.h"
 #include "lost/lua/bindings/LostResource.h"
+#include "lost/lua/bindings/LostRg.h"
 
 #include "luabind/class_info.hpp"
 
@@ -58,6 +59,7 @@ namespace lost
       LostPlatform(state);
       LostResource(state);
       LostMesh(state);
+      LostRg(state);
       
       luabind::bind_class_info(state);
     }

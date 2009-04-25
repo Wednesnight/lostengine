@@ -12,6 +12,11 @@ namespace lost
     {
     }
 
+    Camera2DPtr Camera2D::create(const lost::math::Rect& inViewport)
+    {
+      return Camera2DPtr(new Camera2D(inViewport));
+    }
+
     lost::math::Matrix& Camera2D::matrix()
     {
       if (needsUpdate)
