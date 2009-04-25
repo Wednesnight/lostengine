@@ -6,6 +6,8 @@
 
 namespace lost
 {
+template <typename T>
+struct shared_ptr;
 namespace gl
 {
 struct RenderBuffer;

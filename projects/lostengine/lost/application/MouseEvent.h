@@ -9,6 +9,9 @@ namespace lost
 {
   namespace application
   {
+    struct MouseEvent;
+    typedef lost::shared_ptr<MouseEvent> MouseEventPtr;
+
     struct MouseEvent : public InputEvent
     {
       static const event::Type& MOUSE_UP()   { static const event::Type d = "mouseUp"; return d; }

@@ -5,8 +5,12 @@
 
 namespace lost
 {
+template <typename T>
+struct shared_ptr;
 namespace application
 {
+struct AccelerometerEvent;
+typedef lost::shared_ptr<AccelerometerEvent> AccelerometerEventPtr;  
 
 // sent on iphone/ipod touch when accelerometer is active and the device is moved
 struct AccelerometerEvent : public event::Event
