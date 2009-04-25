@@ -40,8 +40,8 @@ void LostRg(lua_State* state)
       .scope
       [
         def("create", (NodePtr(*)(camera::CameraPtr))&Camera::create),
-        def("create", (NodePtr(*)(camera::Camera2DPtr))&DepthTest::create),
-        def("create", (NodePtr(*)(camera::Camera3DPtr))&DepthTest::create)
+        def("create", (NodePtr(*)(camera::Camera2DPtr))&Camera::create),
+        def("create", (NodePtr(*)(camera::Camera3DPtr))&Camera::create)
       ],
       class_<DepthTest, NodePtr>("DepthTest")
       .def_readwrite("name", &DepthTest::name)
