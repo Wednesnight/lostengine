@@ -36,26 +36,9 @@ bool MeshTest::startup()
 
   bool result = Tasklet::startup();
   if (result)
-  {
-    camera2D = (Camera2DPtr)lua->globals["camera2D"];
-    camera3D = lua->globals["camera3D"];
-    quad = lua->globals["quad"];
-    quad2 = lua->globals["quad2"];
-    quad3 = lua->globals["quad3"];
-    line = lua->globals["line"];
-    cube = lua->globals["cube"];
-    
-    scene = rg::Node::create();
-    scene->add(rg::Camera::create(camera2D));
-    scene->add(rg::DepthTest::create(false));
-    scene->add(rg::Draw::create(quad));
-    scene->add(rg::Draw::create(quad2));
-    scene->add(rg::Draw::create(quad3));
-    scene->add(rg::Draw::create(line));
-    scene->add(rg::Camera::create(camera3D));
-    scene->add(rg::DepthTest::create(true));
-    scene->add(rg::Draw::create(cube));
-//    scene = lua->globals["scene"];
+  {    
+    cube = lua->globals["cube"]; // required for updates    
+    scene = lua->globals["scene"]; // required for drawing
   }
   
   return result;
@@ -70,9 +53,7 @@ void MeshTest::update(double dt)
 void MeshTest::draw()
 {
   window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  
   scene->process(window->context);
-
   window->context->swapBuffers();  
 }
 

@@ -54,6 +54,8 @@ function startup(tasklet)
   cube.material.color = Color(0,1,0)
   cube.material.shader = shader
 
+--  dt = rg.DepthTest.create(false)
+
   scene = rg.Node.create()
   scene:add(rg.Camera.create(camera2D));
   scene:add(rg.DepthTest.create(false));
