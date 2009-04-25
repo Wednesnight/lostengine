@@ -8,13 +8,15 @@ local Rect = lost.math.Rect
 local MatrixTranslation = lost.math.MatrixTranslation
 local Camera2D = lost.camera.Camera2D
 local Camera3D = lost.camera.Camera3D
+local rg = lost.rg;
+local castmesh = lost.mesh.castmesh
 
 function startup(tasklet)
   -- cam 2D
-  camera2D = Camera2D(Rect(0, 0, 640, 480))
+  camera2D = Camera2D.create(Rect(0, 0, 640, 480))
 
   -- cam 3D
-  camera3D = Camera3D(Rect(0, 0, 640, 480))
+  camera3D = Camera3D.create(Rect(0, 0, 640, 480))
   camera3D:fovY(45.0)
   camera3D:depth(Vec2(1.0, 1000.0))
   camera3D:position(Vec3(1,2,2))
@@ -51,6 +53,17 @@ function startup(tasklet)
   cube = lost.mesh.Loader.obj(filedata);
   cube.material.color = Color(0,1,0)
   cube.material.shader = shader
+
+  scene = rg.Node.create()
+  scene:add(rg.Camera.create(camera2D));
+  scene:add(rg.DepthTest.create(false));
+  scene:add(rg.Draw.create(castmesh(quad)));
+  scene:add(rg.Draw.create(castmesh(quad2)));
+  scene:add(rg.Draw.create(castmesh(quad3)));
+  scene:add(rg.Draw.create(castmesh(line)));
+  scene:add(rg.Camera.create(camera3D));
+  scene:add(rg.DepthTest.create(true));
+  scene:add(rg.Draw.create(castmesh(cube)));
   
   return true
 end

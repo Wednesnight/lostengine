@@ -12,7 +12,7 @@ DepthTest::DepthTest(bool inEnable)
   name = "depthTest";
 }
 
-DepthTestPtr DepthTest::create(bool inEnable)
+NodePtr DepthTest::create(bool inEnable)
 {
   return DepthTestPtr(new DepthTest(inEnable));
 }

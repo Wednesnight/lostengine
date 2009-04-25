@@ -55,6 +55,7 @@ bool MeshTest::startup()
     scene->add(rg::Camera::create(camera3D));
     scene->add(rg::DepthTest::create(true));
     scene->add(rg::Draw::create(cube));
+//    scene = lua->globals["scene"];
   }
   
   return result;

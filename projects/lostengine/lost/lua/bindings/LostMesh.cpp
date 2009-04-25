@@ -6,6 +6,7 @@
 #include "lost/mesh/Material.h"
 #include "lost/mesh/Mesh.h"
 #include "lost/mesh/Quad.h"
+#include "lost/platform/shared_ptr.h"
 
 using namespace luabind;
 using namespace lost::mesh;
@@ -14,6 +15,13 @@ namespace lost
 {
   namespace lua
   {
+    // hack because of missing luabind downcasts  
+    MeshPtr castmesh(Line2DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
+    MeshPtr castmesh(Line3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
+    MeshPtr castmesh(Quad2DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
+    MeshPtr castmesh(Quad3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
+    MeshPtr castmesh(Mesh3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
+
 
     void LostMeshLine(lua_State* state)
     {
@@ -71,6 +79,12 @@ namespace lost
       [
         namespace_("mesh")
         [
+          // hack because of missing luabind downcasts
+          def("castmesh", (MeshPtr(*)(Line2DPtr))castmesh),
+          def("castmesh", (MeshPtr(*)(Line3DPtr))castmesh),
+          def("castmesh", (MeshPtr(*)(Quad2DPtr))castmesh),
+          def("castmesh", (MeshPtr(*)(Quad3DPtr))castmesh),
+          def("castmesh", (MeshPtr(*)(Mesh3DPtr))castmesh),
           class_<Mesh, MeshPtr>("Mesh")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
@@ -91,7 +105,7 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Quad2D, Quad2DPtr >("Quad2D")
+          class_<Quad2D, Mesh, Quad2DPtr>("Quad2D")
             .def("updateSize", &Quad2D::updateSize)
             .def_readwrite("material", &Quad2D::material)
             .def_readwrite("modelTransform", &Quad2D::modelTransform)

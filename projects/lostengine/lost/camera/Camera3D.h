@@ -28,7 +28,7 @@ namespace lost
     public:
       // constructor
       Camera3D(const lost::math::Rect& inViewport);
-
+      static Camera3DPtr create(const lost::math::Rect& inViewport);
       // getters
       math::Vec2 depth();
       float fovY();

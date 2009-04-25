@@ -13,7 +13,7 @@ namespace lost
     struct Camera2D : public Camera
     {
       Camera2D(const lost::math::Rect& inViewport);
-
+      static Camera2DPtr create(const lost::math::Rect& inViewport);
       lost::math::Matrix& matrix();
     };
 

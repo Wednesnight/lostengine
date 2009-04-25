@@ -13,7 +13,7 @@ Draw::Draw(mesh::MeshPtr inMesh)
   name = "draw";
 }
 
-DrawPtr Draw::create(mesh::MeshPtr inMesh)
+NodePtr Draw::create(mesh::MeshPtr inMesh)
 {
   return DrawPtr(new Draw(inMesh));
 }

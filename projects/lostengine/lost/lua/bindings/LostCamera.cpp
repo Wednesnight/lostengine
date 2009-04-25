@@ -25,7 +25,12 @@ namespace lost
             .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
             .def("viewport", (Rect&(Camera::*)())&Camera::viewport),
           class_<Camera2D, shared_ptr<Camera2D>, Camera>("Camera2D")
-            .def(constructor<const Rect&>()),
+            .def(constructor<const Rect&>())
+            .scope
+            [
+              def("create", &Camera2D::create)
+            ]
+            ,
           class_<Camera3D, shared_ptr<Camera3D>, Camera>("Camera3D")
             .def(constructor<const Rect&>())
             .def("fovY", (float(Camera3D::*)()) &Camera3D::fovY)
@@ -44,6 +49,10 @@ namespace lost
             .def("rotate", &Camera3D::rotate)
             .def("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
             .def("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
+            .scope
+            [
+              def("create", &Camera3D::create)
+            ]
         ]
       ];
     }

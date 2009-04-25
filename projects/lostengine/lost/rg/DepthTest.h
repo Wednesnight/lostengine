@@ -17,7 +17,7 @@ struct DepthTest : public Node
 {
   bool enable;
   DepthTest(bool inEnable);
-  static DepthTestPtr create(bool inEnable);
+  static NodePtr create(bool inEnable);
   
   void process(gl::ContextPtr ctx);
 };
