@@ -23,11 +23,11 @@ struct MeshTest : public lost::application::UiTasklet
   void keyHandler(lost::application::KeyEventPtr event);
 
   lost::mesh::Line2DPtr         line;
-  lost::mesh::Mesh3DPtr         cube;
+  lost::mesh::MeshPtr           cube;
   lost::mesh::Quad2DPtr         quad;
   lost::mesh::Quad2DPtr         quad2;
   lost::mesh::Quad2DPtr         quad3;
-  lost::camera::CameraPtr     camera2D;
+  lost::camera::CameraPtr       camera2D;
   lost::camera::Camera3DPtr     camera3D;
   
   lost::rg::NodePtr             scene;
