@@ -24,7 +24,6 @@ namespace lost
       float      mFovY;
       math::Vec2 mDepth;
       bool       mStickToTarget;
-      math::Vec3 mPlane;
     public:
       // constructor
       Camera3D(const lost::math::Rect& inViewport);
