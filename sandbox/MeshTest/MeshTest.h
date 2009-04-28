@@ -9,6 +9,7 @@
 #include "lost/camera/Camera2D.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/rg/Node.h"
+#include "lost/meter/Meter.h"
 
 struct MeshTest : public lost::application::UiTasklet
 {  
@@ -32,6 +33,8 @@ struct MeshTest : public lost::application::UiTasklet
   
   lost::rg::NodePtr             scene;
   
+  lost::meter::MeterPtr meter;
+
   double passedSec;  
   float angle;
 };

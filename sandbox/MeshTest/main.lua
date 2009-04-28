@@ -63,6 +63,7 @@ function startup(tasklet)
   scene:add(rg.Draw.create(quad2));
   scene:add(rg.Draw.create(quad3));
   scene:add(rg.Draw.create(line));
+  scene:add(rg.Draw.create(meter));
   scene:add(rg.Camera.create(camera3D));
   scene:add(rg.DepthTest.create(true));
   scene:add(rg.Draw.create(cube));

@@ -243,8 +243,6 @@ namespace lost
       
       vertexArray(true);
       vb->bindVertexPointer();
-      indexArray(true);
-      ib->bind();
       if(nb)
       {
         normalArray(true);
@@ -279,7 +277,17 @@ namespace lost
         material(mesh->material);
       
       modelTransform(mesh->modelTransform);
-      ib->drawElements(mesh->drawMode);
+      if (ib)
+      {
+        indexArray(true);
+        ib->bind();
+        ib->drawElements(mesh->drawMode);
+      }
+      else
+      {
+        indexArray(false);
+        vb->drawArrays(mesh->drawMode);
+      }
     }
 
   }

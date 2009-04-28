@@ -361,6 +361,9 @@
 		3EC9CFCF0E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD00E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD10E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
+		3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
+		3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
+		3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
 		3EF4BEF30F15F183008C7702 /* class_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEDF0F15F183008C7702 /* class_info.cpp */; };
 		3EF4BEF40F15F183008C7702 /* class_registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEE00F15F183008C7702 /* class_registry.cpp */; };
 		3EF4BEF50F15F183008C7702 /* class_rep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEE10F15F183008C7702 /* class_rep.cpp */; };
@@ -826,6 +829,7 @@
 		3EB499CC0F9FA4F700F3036A /* LostFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFont.cpp; path = bindings/LostFont.cpp; sourceTree = "<group>"; };
 		3EB499D50F9FA50600F3036A /* LostGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGL.cpp; path = bindings/LostGL.cpp; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		3EE13E7D0FA58D6300F2603E /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Meter.cpp; path = meter/Meter.cpp; sourceTree = "<group>"; };
 		3EF4BEDF0F15F183008C7702 /* class_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_info.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/class_info.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEE00F15F183008C7702 /* class_registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_registry.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/class_registry.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEE10F15F183008C7702 /* class_rep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_rep.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/class_rep.cpp; sourceTree = SOURCE_ROOT; };
@@ -1126,6 +1130,14 @@
 				3E531E600F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp */,
 			);
 			name = "hashlib++";
+			sourceTree = "<group>";
+		};
+		3EE13E7C0FA58D4400F2603E /* meter */ = {
+			isa = PBXGroup;
+			children = (
+				3EE13E7D0FA58D6300F2603E /* Meter.cpp */,
+			);
+			name = meter;
 			sourceTree = "<group>";
 		};
 		8D77F0410F34DBF600C86FFD /* iphone */ = {
@@ -1488,6 +1500,7 @@
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
 				EA4F9C110F8B6A5C00967F8D /* mesh */,
+				3EE13E7C0FA58D4400F2603E /* meter */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 				EA26B90B0F91480C00318279 /* resource */,
 				EA8A228B0F87B15400A6EB8B /* rg */,
@@ -2026,6 +2039,7 @@
 				EA8A15310FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A15320FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */,
+				3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2242,6 +2256,7 @@
 				EA8A15290FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152A0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */,
+				3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2507,6 +2522,7 @@
 				EA8A152D0FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152E0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */,
+				3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
