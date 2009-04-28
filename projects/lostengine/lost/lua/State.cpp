@@ -54,6 +54,11 @@ namespace lost
       return result;
     }
 
+    State* State::stateFromState(lua_State* state)
+    {
+        return stateMap[state];
+    }
+
     int State::errorHandler(lua_State* state)
     {
       int result = 0;
