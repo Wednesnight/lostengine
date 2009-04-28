@@ -19,7 +19,7 @@ namespace lost
 
     struct Loader
     {
-      static Mesh3DPtr obj(resource::FilePtr objFile);
+      static MeshPtr obj(resource::FilePtr objFile);
     };
 
   }

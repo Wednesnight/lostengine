@@ -50,7 +50,7 @@ namespace lost
     /**
      * load obj model from fileName through loader, returns lost::mesh::MeshPtr
      */
-    Mesh3DPtr Loader::obj(resource::FilePtr objFile)
+    MeshPtr Loader::obj(resource::FilePtr objFile)
     {
       /**
        * init resulting mesh
