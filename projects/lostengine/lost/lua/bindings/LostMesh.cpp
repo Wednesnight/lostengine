@@ -15,6 +15,7 @@ namespace lost
 {
   namespace lua
   {
+    MeshPtr castmesh(Mesh2DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
 
     void LostMeshLine(lua_State* state)
     {
@@ -80,7 +81,13 @@ namespace lost
             .def_readwrite("modelTransform", &Mesh::modelTransform)
             .def_readwrite("drawMode", &Mesh::drawMode),
 
-          class_<Mesh3D, Mesh, MeshPtr>("Mesh3D")
+          class_<Mesh2D, Mesh, MeshPtr>("Mesh2D")
+            .def(constructor<>())
+            .def_readwrite("material", &Mesh::material)
+            .def_readwrite("modelTransform", &Mesh::modelTransform)
+            .def_readwrite("drawMode", &Mesh::drawMode),
+
+         class_<Mesh3D, Mesh, MeshPtr>("Mesh3D")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("modelTransform", &Mesh::modelTransform)

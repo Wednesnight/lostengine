@@ -6,35 +6,33 @@
 
 namespace lost
 {
-namespace gl
-{
-template<typename T>
-struct TypedBuffer : public Buffer
-{
-public:
-  TypedBuffer()
+  namespace gl
   {
-    TraitsSelector<T> traits;
-    size = traits.size;
-    type = traits.type;
+
+    template<typename T>
+    struct TypedBuffer : public Buffer
+    {
+    public:
+      TypedBuffer()
+      {
+        TraitsSelector<T> traits;
+        size = traits.size;
+        type = traits.type;
+      }
+
+      virtual ~TypedBuffer()
+      {
+      }
+
+      virtual void bindBufferData(T* inData, uint32_t numElems, GLenum usage=GL_STATIC_DRAW)
+      {
+        Buffer::bindBufferData(sizeof(T)*numElems, inData, usage);
+        numElements = numElems;
+      }
+
+    };
+
   }
-
-  virtual ~TypedBuffer()
-  {
-  }
-
-  virtual void bindBufferData(T* inData, uint32_t numElems, GLenum usage=GL_STATIC_DRAW)
-  {
-    GLsizeiptr sizeInBytes = sizeof(T)*numElems;
-    Buffer::bindBufferData(sizeInBytes, inData, usage);
-    numElements = numElems;
-  }
-
-
-
-
-};
-}
 }
 
 #endif

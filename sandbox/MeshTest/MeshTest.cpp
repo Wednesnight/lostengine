@@ -17,6 +17,7 @@ using namespace lost::event;
 using namespace lost::application;
 using namespace lost::camera;
 using namespace lost::mesh;
+using namespace lost::meter;
 using namespace luabind;
 
 MeshTest::MeshTest()
@@ -33,6 +34,9 @@ bool MeshTest::startup()
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
   // context
   window->context->clearColor(blackColor);
+
+  meter.reset(new Meter());
+  lua->globals["meter"] = MeshPtr(meter->mesh);
 
   bool result = Tasklet::startup();
   if (result)
@@ -64,6 +68,7 @@ bool MeshTest::main()
   update(delta);
   draw();
   
+  meter->update(1.0f/delta);
   passedSec = currentSec; 
   return true;
 }
