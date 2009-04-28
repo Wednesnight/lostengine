@@ -1,7 +1,7 @@
 module("lost.io", package.seeall)
 
 require("lost.io.Loader")
-require("lost.io.Node")
+require("lost.io.rg.Node")
 
 
 -- Scene is loaded with the usual function environment magic, but is only a 
