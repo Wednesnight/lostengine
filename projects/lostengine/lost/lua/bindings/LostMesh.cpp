@@ -15,13 +15,6 @@ namespace lost
 {
   namespace lua
   {
-    // hack because of missing luabind downcasts  
-    MeshPtr castmesh(Line2DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
-    MeshPtr castmesh(Line3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
-    MeshPtr castmesh(Quad2DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
-    MeshPtr castmesh(Quad3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
-    MeshPtr castmesh(Mesh3DPtr m) { return lost::static_pointer_cast<Mesh>(m);}
-
 
     void LostMeshLine(lua_State* state)
     {
@@ -29,7 +22,9 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Line2D, Line2DPtr >("Line2D")
+          class_<Line2D, Mesh, MeshPtr>("Line2D")
+            .def(constructor<>())
+            .def(constructor<const math::Vec2&, const math::Vec2&>())
             .def_readwrite("material", &Line2D::material)
             .scope
             [
@@ -79,19 +74,14 @@ namespace lost
       [
         namespace_("mesh")
         [
-          // hack because of missing luabind downcasts
-          def("castmesh", (MeshPtr(*)(Line2DPtr))castmesh),
-          def("castmesh", (MeshPtr(*)(Line3DPtr))castmesh),
-          def("castmesh", (MeshPtr(*)(Quad2DPtr))castmesh),
-          def("castmesh", (MeshPtr(*)(Quad3DPtr))castmesh),
-          def("castmesh", (MeshPtr(*)(Mesh3DPtr))castmesh),
           class_<Mesh, MeshPtr>("Mesh")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("modelTransform", &Mesh::modelTransform)
             .def_readwrite("drawMode", &Mesh::drawMode),
 
-          class_<Mesh3D, Mesh, Mesh3DPtr>("Mesh3D")
+          class_<Mesh3D, Mesh, MeshPtr>("Mesh3D")
+            .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("modelTransform", &Mesh::modelTransform)
             .def_readwrite("drawMode", &Mesh::drawMode)
@@ -105,7 +95,11 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Quad2D, Mesh, Quad2DPtr>("Quad2D")
+          class_<Quad2D, Mesh, MeshPtr>("Quad2D")
+            .def(constructor<>())
+            .def(constructor<const math::Rect&>())
+            .def(constructor<resource::FilePtr, bool>())
+            .def(constructor<gl::TexturePtr, bool>())
             .def("updateSize", &Quad2D::updateSize)
             .def_readwrite("material", &Quad2D::material)
             .def_readwrite("modelTransform", &Quad2D::modelTransform)
@@ -122,10 +116,11 @@ namespace lost
 
     void LostMesh(lua_State* state)
     {
+      // mesh first because following classes are based on it
+      LostMeshMesh(state);
       LostMeshLine(state);
       LostMeshLoader(state);
       LostMeshMaterial(state);
-      LostMeshMesh(state);
       LostMeshQuad2D(state);
     }
 
