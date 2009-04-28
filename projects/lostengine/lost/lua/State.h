@@ -23,6 +23,7 @@ namespace lost
 
       std::string getScriptFilename(const std::string& scriptContent, const std::string& defaultName);
       std::string getScriptSource(lua_Debug& debug);
+      static State* stateFromState(lua_State* state);
       static int errorHandler(lua_State* state);
       int handleError();
 

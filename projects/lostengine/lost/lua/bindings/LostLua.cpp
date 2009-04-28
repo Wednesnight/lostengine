@@ -11,12 +11,23 @@ namespace lost
   namespace lua
   {
 
+    int doResourceFile(const std::string& inRelativePath, lua_State* ls)
+    {
+        lua::State* s = lua::State::stateFromState(ls);
+        return s->doResourceFile(inRelativePath);
+    }
+
     void LostLuaState(lua_State* state)
     {
+/*      module(state)
+      [
+      ];*/
+    
       module(state, "lost")
       [
         namespace_("lua")
         [
+            def("doResourceFile", &doResourceFile, raw(_2)),
           class_<State, lost::shared_ptr<State> >("State")
             .def(constructor<>())
             .def("doFile", (int(State::*)(const lost::shared_ptr<lost::resource::File>&)) &State::doFile)
