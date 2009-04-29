@@ -68,5 +68,8 @@ function startup(tasklet)
   scene:add(rg.DepthTest.create(true));
   scene:add(rg.Draw.create(cube));
   
+  local l = lost.io.Loader(tasklet.loader)
+  local scene2 = l:loadScene("testscene.lua")
+--  scene = scene2
   return true
 end
