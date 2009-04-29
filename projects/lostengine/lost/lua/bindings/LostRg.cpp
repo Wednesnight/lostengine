@@ -22,6 +22,7 @@ void LostRg(lua_State* state)
     [
       class_<Node, NodePtr>("Node")
       .def_readwrite("name", &Node::name)
+      .def_readwrite("active", &Node::active)
       .def("add", &Node::add)
       .scope
       [
@@ -29,6 +30,7 @@ void LostRg(lua_State* state)
       ],
       class_<Draw, NodePtr>("Draw")
       .def_readwrite("name", &Draw::name)
+      .def_readwrite("active", &Draw::active)
       .def_readwrite("mesh", &Draw::mesh)
       .scope
       [
@@ -36,6 +38,7 @@ void LostRg(lua_State* state)
       ],
       class_<Camera, NodePtr>("Camera")
       .def_readwrite("name", &Camera::name)
+      .def_readwrite("active", &Camera::active)
       .def_readwrite("cam", &Camera::cam)
       .scope
       [
@@ -45,6 +48,7 @@ void LostRg(lua_State* state)
       ],
       class_<DepthTest, NodePtr>("DepthTest")
       .def_readwrite("name", &DepthTest::name)
+      .def_readwrite("active", &DepthTest::active)
       .def_readwrite("enable", &DepthTest::enable)
       .scope
       [

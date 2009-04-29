@@ -1,12 +1,19 @@
+-- lost.io.rg.Camera.lua
 module("lost.io", package.seeall)
 
 require("lost.io.Loader")
-
 -- excepects a table with the following key-value pairs
 -- viewport = Rect() with viewport definition: x,y,w,h
 function Loader:Camera2D(definition)
   local vp = definition["viewport"]
-  local result = lost.rg.Camera2D.create(vp)
+  local cam = lost.camera.Camera2D.create(vp)
+  local result = lost.rg.Camera.create(cam)
+  if definition["name"] then
+    result.name = definition["name"]
+  end
+  if definition["active"] then
+    result.active = definition["active"]
+  end  
   return result
 end
 
@@ -21,24 +28,34 @@ end
 -- stickToTarget = bool (true if camera should automatically be repointed at target)
 function Loader:Camera3D(definition)
   local vp = definition["viewport"]
-  local result = lost.rg.Camera3D.create(vp) -- viewport is mandatory for creation
+  if not vp then
+    error("viewport parameter is required for Camera3D")
+  end
+  local cam = lost.camera.Camera3D.create(vp) -- viewport is mandatory for creation
+  local result = lost.rg.Camera.create(cam)
   if definition["position"] then
-    result:position(definition["position"])
+    cam:position(definition["position"])
   end
   if definition["direction"] then
-    result:direction(definition["direction"])
+    cam:direction(definition["direction"])
   end
   if definition["rotation"] then
-    result:rotation(definition["rotation"])
+    cam:rotation(definition["rotation"])
   end
   if definition["fovY"] then
-    result:fovY(definition["fovY"])
+    cam:fovY(definition["fovY"])
   end
   if definition["depth"] then
-    result:depth(definition["depth"])
+    cam:depth(definition["depth"])
   end
   if definition["stickToTarget"] then
-    result:stickToTarget(definition["stickToTarget"])
+    cam:stickToTarget(definition["stickToTarget"])
+  end
+  if definition["name"] then
+    result.name = definition["name"]
+  end
+  if definition["active"] then
+    result.active = definition["active"]
   end
   return result
 end

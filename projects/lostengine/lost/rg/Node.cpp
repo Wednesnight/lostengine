@@ -8,6 +8,7 @@ namespace rg
 Node::Node()
 {
   name = "node"; 
+  active = true;
 }
 
 Node::~Node()
@@ -22,6 +23,8 @@ void Node::add(NodePtr child)
 
 void Node::process(gl::ContextPtr ctx)
 {
+  if(!active) return; 
+  
   for(std::list<NodePtr>::iterator i=children.begin(); i!=children.end(); ++i)
   {
     (*i)->process(ctx);

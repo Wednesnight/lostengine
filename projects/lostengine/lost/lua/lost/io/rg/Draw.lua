@@ -11,6 +11,14 @@ function Loader:Draw(definition)
   if definition["modelTransform"] then
     result.modelTransform = definition["modelTransform"]
   end
+
+  if definition["name"] then
+    result.name = definition["name"]
+  end
+
+  if definition["active"] then
+    result.active = definition["active"]
+  end
   
   if definition["material"] then
     local mat = definition["material"]

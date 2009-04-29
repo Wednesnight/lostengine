@@ -23,7 +23,7 @@ typedef lost::shared_ptr<Node> NodePtr;
 struct Node 
 {
   std::string name;
-
+  bool active;
   Node();
   virtual ~Node();
   
