@@ -70,6 +70,6 @@ function startup(tasklet)
   
   local l = lost.io.Loader(tasklet.loader)
   local scene2 = l:loadScene("testscene.lua")
---  scene = scene2
+  scene = scene2
   return true
 end
