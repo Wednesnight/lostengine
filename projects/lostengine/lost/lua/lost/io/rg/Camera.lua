@@ -6,6 +6,9 @@ require("lost.io.Loader")
 -- viewport = Rect() with viewport definition: x,y,w,h
 function Loader:Camera2D(definition)
   local vp = definition["viewport"]
+  if not vp then
+    error("viewport parameter is required for Camera2D")
+  end  
   local cam = lost.camera.Camera2D.create(vp)
   local result = lost.rg.Camera.create(cam)
   if definition["name"] then

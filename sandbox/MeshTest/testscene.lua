@@ -21,7 +21,7 @@ rg:Scene
     rg:Draw
     {
       name = "big zim",
-      active = false,
+      active = true,
       mesh = mesh:Quad2D
       {
         filename = "zim.png",

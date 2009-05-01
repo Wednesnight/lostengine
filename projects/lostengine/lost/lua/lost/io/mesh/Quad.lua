@@ -33,14 +33,10 @@ function Loader:Quad2D(definition)
   end
 
   if definition["material"] ~= nil then
-		log.debug("ASSIGNING MATERIAL");
     local mat = definition["material"]
     for k,v in pairs(mat) do
-			log.debug("assigning material parameter: "..k)
       result.material[k] = v
     end
-  else
-		log.debug("NO ADDITIONAL MATERIAL FOUND");
 	end
 
   return result
