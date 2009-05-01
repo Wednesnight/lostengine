@@ -9,11 +9,6 @@ require("lost.io.Loader")
 function Loader:Draw(definition)
   local result = lost.rg.Draw.create(definition["mesh"])
   
-	log.debug("--- DRAW")
-	for k,v in pairs(definition) do
-		print("material "..k.." "..type(v))
-	end
-
   if definition["modelTransform"] then
     result.modelTransform = definition["modelTransform"]
   end
@@ -23,7 +18,6 @@ function Loader:Draw(definition)
   end
 
   if definition["active"] ~= nil then
-		log.debug("SETTING ACTIVE")
     result.active = definition["active"]
   end		
   

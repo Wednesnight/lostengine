@@ -4,6 +4,12 @@ require("lost.io.Loader")
 require("lost.io.rg.Node")
 
 
+-- This is the root loader function for scenes defined/constructed via rg.
+-- rg:Scene creates the function environment and makes sure that the result
+-- of the construction can be resturned from loadScene. This is also the 
+-- reason why self.Scene is defined inline and not externally: this way, "result"
+-- can be taken form the loadScene function context and reused within 
+-- self.Scene.
 -- Scene is loaded with the usual function environment magic, but is only a 
 -- Node apart from that, no special attributes allowed
 function Loader:loadScene(filename)

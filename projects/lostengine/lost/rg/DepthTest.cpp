@@ -19,6 +19,7 @@ NodePtr DepthTest::create(bool inEnable)
 
 void DepthTest::process(gl::ContextPtr ctx)
 {
+  if(!active) return;
   ctx->depthTest(enable);
 }
 

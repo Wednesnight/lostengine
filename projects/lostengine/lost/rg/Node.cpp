@@ -27,7 +27,8 @@ void Node::process(gl::ContextPtr ctx)
   
   for(std::list<NodePtr>::iterator i=children.begin(); i!=children.end(); ++i)
   {
-    (*i)->process(ctx);
+    if((*i)->active)
+      (*i)->process(ctx);
   }
 }
 

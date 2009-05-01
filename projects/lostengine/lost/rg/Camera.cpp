@@ -32,6 +32,7 @@ NodePtr Camera::create(camera::Camera3DPtr inCam)
 
 void Camera::process(gl::ContextPtr ctx)
 {
+  if(!active) return;
   ctx->camera(cam); 
 }
 
