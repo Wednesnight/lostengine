@@ -5,6 +5,10 @@
 #include "lost/rg/Draw.h"
 #include "lost/rg/DepthTest.h"
 #include "lost/rg/Camera.h"
+#include "lost/rg/Clear.h"
+#include "lost/rg/ClearColor.h"
+#include "lost/rg/DefaultFrameBuffer.h"
+#include "lost/rg/FrameBuffer.h"
 
 
 using namespace luabind;
@@ -53,6 +57,37 @@ void LostRg(lua_State* state)
       .scope
       [
         def("create", &DepthTest::create)
+      ],
+      class_<Clear, NodePtr>("Clear")
+      .def_readwrite("name", &Clear::name)
+      .def_readwrite("active", &Clear::active)
+      .def_readwrite("mask", &Clear::mask)
+      .scope
+      [
+        def("create", &Clear::create)
+      ],
+      class_<ClearColor, NodePtr>("ClearColor")
+      .def_readwrite("name", &ClearColor::name)
+      .def_readwrite("active", &ClearColor::active)
+      .def_readwrite("col", &ClearColor::col)
+      .scope
+      [
+        def("create", &ClearColor::create)
+      ],
+      class_<DefaultFrameBuffer, NodePtr>("DefaultFrameBuffer")
+      .def_readwrite("name", &DefaultFrameBuffer::name)
+      .def_readwrite("active", &DefaultFrameBuffer::active)
+      .scope
+      [
+        def("create", &DefaultFrameBuffer::create)
+      ],
+      class_<FrameBuffer, NodePtr>("FrameBuffer")
+      .def_readwrite("name", &FrameBuffer::name)
+      .def_readwrite("active", &FrameBuffer::active)
+      .def_readwrite("fb", &FrameBuffer::fb)
+      .scope
+      [
+        def("create", &FrameBuffer::create)
       ]
       
     ]
