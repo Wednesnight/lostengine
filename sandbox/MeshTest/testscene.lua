@@ -10,7 +10,7 @@ local lightShader = gl:Shader
   filename = "light",
   params = gl:ShaderParams
   {
-    LightPosition = camera3D:position(),
+    LightPosition = cam3dPosition,
     LightDiffuse = Color(1.0, 1.0, 1.0),
     LightAmbient = Color(1.0, 1.0, 1.0),
     LightSpecular = Color(1.0, 1.0, 1.0)
