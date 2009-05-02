@@ -41,7 +41,7 @@ bool MeshTest::startup()
   bool result = Tasklet::startup();
   if (result)
   {    
-    cube = lua->globals["cube"]; // required for updates    
+//    cube = lua->globals["cube"]; // required for updates    
     scene = lua->globals["scene"]; // required for drawing
   }
   
@@ -51,7 +51,7 @@ bool MeshTest::startup()
 void MeshTest::update(double dt)
 {
   angle = fmod(dt*50+angle, 360);
-  cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+//  cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
 }
 
 void MeshTest::draw()

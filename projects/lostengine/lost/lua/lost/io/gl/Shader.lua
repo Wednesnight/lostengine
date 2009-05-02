@@ -19,9 +19,9 @@ end
 function Loader:Shader(definition)
   -- "name" is the mandatory basename from which vertex/fragment shader names
   -- are derived for the actual load process
-  local shaderBaseName = definition["name"]
+  local shaderBaseName = definition["filename"]
   if not shaderBaseName then
-    error("name is required for gl:Shader")
+    error("filename is required for gl:Shader")
   end
   local shaderProgram = lost.gl.loadShader(self.loader, shaderBaseName)
 
@@ -43,4 +43,6 @@ function Loader:Shader(definition)
     end
     shaderProgram:disable()
   end
+  
+  return shaderProgram
 end

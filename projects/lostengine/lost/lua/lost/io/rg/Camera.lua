@@ -36,28 +36,25 @@ function Loader:Camera3D(definition)
   end
   local cam = lost.camera.Camera3D.create(vp) -- viewport is mandatory for creation
   local result = lost.rg.Camera.create(cam)
-  if definition["position"] then
-    cam:position(definition["position"])
-  end
-  if definition["direction"] then
-    cam:direction(definition["direction"])
-  end
-  if definition["rotation"] then
-    cam:rotation(definition["rotation"])
-  end
   if definition["fovY"] then
     cam:fovY(definition["fovY"])
   end
   if definition["depth"] then
     cam:depth(definition["depth"])
   end
-  if definition["stickToTarget"] then
+  if definition["position"] then
+    cam:position(definition["position"])
+  end
+  if definition["target"] then
+    cam:target(definition["target"])
+  end
+  if definition["stickToTarget"] ~= nil then
     cam:stickToTarget(definition["stickToTarget"])
   end
   if definition["name"] then
     result.name = definition["name"]
   end
-  if definition["active"] then
+  if definition["active"] ~= nil then
     result.active = definition["active"]
   end
   return result
