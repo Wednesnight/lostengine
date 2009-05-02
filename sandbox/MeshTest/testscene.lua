@@ -2,6 +2,7 @@ local Rect = lost.math.Rect
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
+local MatrixTranslation = lost.math.MatrixTranslation
 
 local cam3dPosition = Vec3(1,2,2)
 
@@ -41,6 +42,17 @@ rg:Scene
         filename = "zim.png",
         flip = true,
         size = Vec2(640,480)
+      }
+    },
+    rg:Draw
+    {
+      name = "little zim",
+      active = true,
+      mesh = mesh:Quad2D
+      {
+        filename = "zim.png",
+        flip = true,
+        transform = MatrixTranslation(Vec3(400, 370, 0))
       }
     },
     rg:Draw
