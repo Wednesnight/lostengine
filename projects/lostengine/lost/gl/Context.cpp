@@ -1,6 +1,9 @@
 #include "lost/gl/Context.h"
 #include "lost/lgl/lgl.h"
 #include "lost/camera/Camera.h"
+#include "lost/gl/ShaderProgram.h"
+#include "lost/mesh/Mesh.h"
+#include "lost/gl/FrameBuffer.h"
 
 using namespace lost::mesh;
 

@@ -1,5 +1,4 @@
 #include "lost/camera/Camera3D.h"
-#include "lost/lgl/lglu.h"
 
 namespace lost
 {

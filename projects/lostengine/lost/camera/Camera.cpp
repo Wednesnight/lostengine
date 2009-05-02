@@ -1,7 +1,4 @@
-#include "lost/gl/Context.h"
 #include "lost/camera/Camera.h"
-#include "lost/common/Logger.h"
-#include "lost/gl/gl.h"
 
 namespace lost
 {

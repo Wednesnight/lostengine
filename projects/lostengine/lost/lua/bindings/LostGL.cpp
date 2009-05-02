@@ -10,7 +10,6 @@
 #include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 
-using namespace boost;
 using namespace luabind;
 using namespace lost::bitmap;
 using namespace lost::camera;
@@ -349,7 +348,8 @@ namespace lost
         [
           class_<Texture, shared_ptr<Texture> >("Texture")
             .def(constructor<>())
-            .def(constructor<shared_ptr<lost::bitmap::Bitmap> >())
+            .def(constructor<lost::bitmap::BitmapPtr, const Texture::Params&>())
+            .def(constructor<lost::resource::FilePtr, const Texture::Params&>())
             .def("bind", &Texture::bind)
             .def("init", (void(Texture::*)(shared_ptr<File>, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(shared_ptr<Bitmap>, const Texture::Params&))&Texture::init)
@@ -361,7 +361,7 @@ namespace lost
             .def_readwrite("height", &Texture::height)
             .scope
             [
-              class_<Texture::Params, shared_ptr<Texture::Params> >("Params")
+              class_<Texture::Params>("Params")
                 .def(constructor<>())
                 .def_readwrite("level", &Texture::Params::level)
                 .def_readwrite("internalFormat", &Texture::Params::internalFormat)

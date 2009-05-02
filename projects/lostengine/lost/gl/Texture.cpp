@@ -61,13 +61,13 @@ Texture::Texture(lost::math::Vec2 inSize, const Params& inParams)
   init(inSize, inParams);
 }
 
-Texture::Texture(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
+Texture::Texture(resource::FilePtr inFile,  const Params& inParams)
 {
   create();
   init(inFile, inParams);
 }
 
-Texture::Texture(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams)
+Texture::Texture(bitmap::BitmapPtr inBitmap, const Params& inParams)
 {
   create();
   init(inBitmap, inParams);
@@ -88,7 +88,7 @@ void Texture::bind() const
   glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;
 }
 
-void Texture::init(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams)
+void Texture::init(resource::FilePtr inFile,  const Params& inParams)
 {
   shared_ptr<Bitmap> bmp(new Bitmap(inFile));
   init(bmp, inParams);
@@ -140,7 +140,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   dataHeight = inSize.height;
 }
 
-void Texture::init(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Texture::Params& inParams)
+void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
 {
   Texture::Params bitmapParams(inParams);
   bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format);
@@ -170,7 +170,7 @@ void Texture::init(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Textur
 
 }
 
-void Texture::subImage(const lost::math::Vec2& targetPos, lost::shared_ptr<lost::bitmap::Bitmap> inBitmap)
+void Texture::subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr inBitmap)
 {
   glTexSubImage2D(GL_TEXTURE_2D,
                   0,
