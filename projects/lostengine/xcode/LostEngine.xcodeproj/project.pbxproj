@@ -644,6 +644,18 @@
 		EA7BE1870E6F38A10017B031 /* LostLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLua.cpp */; };
 		EA7BE1880E6F38A10017B031 /* LostLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */; };
 		EA7BE18C0E6F38A10017B031 /* LostBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */; };
+		EA7CEB170FACC446005F7AAB /* ClearColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB150FACC446005F7AAB /* ClearColor.cpp */; };
+		EA7CEB180FACC446005F7AAB /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB160FACC446005F7AAB /* Clear.cpp */; };
+		EA7CEB190FACC446005F7AAB /* ClearColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB150FACC446005F7AAB /* ClearColor.cpp */; };
+		EA7CEB1A0FACC446005F7AAB /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB160FACC446005F7AAB /* Clear.cpp */; };
+		EA7CEB1B0FACC446005F7AAB /* ClearColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB150FACC446005F7AAB /* ClearColor.cpp */; };
+		EA7CEB1C0FACC446005F7AAB /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB160FACC446005F7AAB /* Clear.cpp */; };
+		EA7CEB1E0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB1D0FACC451005F7AAB /* DefaultFrameBuffer.cpp */; };
+		EA7CEB1F0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB1D0FACC451005F7AAB /* DefaultFrameBuffer.cpp */; };
+		EA7CEB200FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB1D0FACC451005F7AAB /* DefaultFrameBuffer.cpp */; };
+		EA7CEB220FACC455005F7AAB /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB210FACC455005F7AAB /* FrameBuffer.cpp */; };
+		EA7CEB230FACC455005F7AAB /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB210FACC455005F7AAB /* FrameBuffer.cpp */; };
+		EA7CEB240FACC455005F7AAB /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB210FACC455005F7AAB /* FrameBuffer.cpp */; };
 		EA8A15270FA26D7600E42FBE /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15230FA26D7600E42FBE /* Camera.cpp */; };
 		EA8A15290FA26D7600E42FBE /* Draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15250FA26D7600E42FBE /* Draw.cpp */; };
 		EA8A152A0FA26D7600E42FBE /* DepthTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15260FA26D7600E42FBE /* DepthTest.cpp */; };
@@ -947,6 +959,10 @@
 		EA7BE1240E6F38A10017B031 /* LostLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLua.cpp; path = bindings/LostLua.cpp; sourceTree = "<group>"; };
 		EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLSystem.cpp; path = bindings/LostLSystem.cpp; sourceTree = "<group>"; };
 		EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostBitmap.cpp; path = bindings/LostBitmap.cpp; sourceTree = "<group>"; };
+		EA7CEB150FACC446005F7AAB /* ClearColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ClearColor.cpp; path = rg/ClearColor.cpp; sourceTree = "<group>"; };
+		EA7CEB160FACC446005F7AAB /* Clear.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Clear.cpp; path = rg/Clear.cpp; sourceTree = "<group>"; };
+		EA7CEB1D0FACC451005F7AAB /* DefaultFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultFrameBuffer.cpp; path = rg/DefaultFrameBuffer.cpp; sourceTree = "<group>"; };
+		EA7CEB210FACC455005F7AAB /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameBuffer.cpp; path = rg/FrameBuffer.cpp; sourceTree = "<group>"; };
 		EA8A15230FA26D7600E42FBE /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = rg/Camera.cpp; sourceTree = "<group>"; };
 		EA8A15250FA26D7600E42FBE /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Draw.cpp; path = rg/Draw.cpp; sourceTree = "<group>"; };
 		EA8A15260FA26D7600E42FBE /* DepthTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthTest.cpp; path = rg/DepthTest.cpp; sourceTree = "<group>"; };
@@ -1676,6 +1692,10 @@
 				EA8A15230FA26D7600E42FBE /* Camera.cpp */,
 				EA8A15250FA26D7600E42FBE /* Draw.cpp */,
 				EA8A15260FA26D7600E42FBE /* DepthTest.cpp */,
+				EA7CEB150FACC446005F7AAB /* ClearColor.cpp */,
+				EA7CEB160FACC446005F7AAB /* Clear.cpp */,
+				EA7CEB1D0FACC451005F7AAB /* DefaultFrameBuffer.cpp */,
+				EA7CEB210FACC455005F7AAB /* FrameBuffer.cpp */,
 			);
 			name = rg;
 			sourceTree = "<group>";
@@ -2040,6 +2060,10 @@
 				EA8A15320FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 				3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */,
+				EA7CEB1B0FACC446005F7AAB /* ClearColor.cpp in Sources */,
+				EA7CEB1C0FACC446005F7AAB /* Clear.cpp in Sources */,
+				EA7CEB200FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
+				EA7CEB240FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2257,6 +2281,10 @@
 				EA8A152A0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 				3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */,
+				EA7CEB170FACC446005F7AAB /* ClearColor.cpp in Sources */,
+				EA7CEB180FACC446005F7AAB /* Clear.cpp in Sources */,
+				EA7CEB1E0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
+				EA7CEB220FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2523,6 +2551,10 @@
 				EA8A152E0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */,
 				3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */,
+				EA7CEB190FACC446005F7AAB /* ClearColor.cpp in Sources */,
+				EA7CEB1A0FACC446005F7AAB /* Clear.cpp in Sources */,
+				EA7CEB1F0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
+				EA7CEB230FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
