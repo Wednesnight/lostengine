@@ -39,8 +39,17 @@ bool MeshTest::startup()
   bool result = Tasklet::startup();
   if (result)
   {    
-//    cube = lua->globals["cube"]; // required for updates    
     scene = lua->globals["scene"]; // required for drawing
+    rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(scene->recursiveFindByName("cube"));
+    if(cubeDrawNode) // required for updates
+    {
+      cube = cubeDrawNode->mesh;
+    }
+    else
+    {
+      EOUT("CUBE NOT FOUND !!!!");
+    }
+    
   }
   
   return result;
@@ -49,12 +58,14 @@ bool MeshTest::startup()
 void MeshTest::update(double dt)
 {
   angle = fmod(dt*50+angle, 360);
-//  cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+  if(cube)
+  {
+    cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+  }
 }
 
 void MeshTest::draw()
 {
-//  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   scene->process(window->context);
   window->context->swapBuffers();  
 }
@@ -65,7 +76,7 @@ bool MeshTest::main()
   double delta = currentSec - passedSec;
   update(delta);
   draw();
-  
+    
   meter->update(1.0f/delta);
   passedSec = currentSec; 
   return true;
