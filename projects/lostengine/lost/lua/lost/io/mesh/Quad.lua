@@ -17,6 +17,7 @@ function Loader:Quad2D(definition)
   local filename = definition["filename"]
   local tex = definition["texture"]
   local result = nil
+  local transform = definition["transform"]
   
   -- create an instance depending on parameterization
   if filename then
@@ -30,6 +31,9 @@ function Loader:Quad2D(definition)
   end
   if size then
     result:updateSize(size, flip)
+  end
+  if transform ~= nil then
+    result.modelTransform = transform
   end
 
   if definition["material"] ~= nil then
