@@ -31,6 +31,8 @@ struct Node
   void add(NodePtr child);
   static NodePtr create();
   std::list<NodePtr> children;
+  
+  NodePtr recursiveFindByName(const std::string& inName);
 };
 
 }

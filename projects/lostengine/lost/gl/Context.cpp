@@ -4,8 +4,10 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
+#include "lost/bitmap/Bitmap.h"
 
 using namespace lost::mesh;
+using namespace lost::bitmap;
 
 bool getBoolParam(GLenum pname)
 {
@@ -293,5 +295,29 @@ namespace lost
       }
     }
 
+    /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
+     * as a tga file to the specified file path.
+     *
+     * @param fullPathName full path name of file to be saved. You must ensure that the location is writable.
+     *        
+     */
+    void Context::writeScreenshot(const std::string& fullPathName,
+                                 bool withAlphaChannel)
+    {
+      GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;
+      Bitmap::Components bitmapFormat = withAlphaChannel ? Bitmap::COMPONENTS_RGBA : Bitmap::COMPONENTS_RGB;
+      Bitmap bmp(currentCam->viewport().width,
+                 currentCam->viewport().height,
+                 bitmapFormat);
+      glReadPixels(0,
+                   0,
+                   bmp.width,
+                   bmp.height,
+                   format,
+                   GL_UNSIGNED_BYTE,                        
+                   bmp.data); GLDEBUG_THROW;
+      bmp.flip();
+      bmp.write(fullPathName);
+    } 
   }
 }

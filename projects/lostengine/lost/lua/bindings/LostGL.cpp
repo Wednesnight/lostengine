@@ -33,6 +33,7 @@ namespace lost
             .def("swapBuffers", &Context::swapBuffers)
             .def("vsync", &Context::vsync)
             .def("multithreaded", &Context::multithreaded)
+            .def("writeScreenshot", &Context::writeScreenshot)
         ]
       ];
     }

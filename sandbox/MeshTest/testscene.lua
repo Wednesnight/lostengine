@@ -87,6 +87,10 @@ lostrg:Scene
       target = Vec3(0,0,0),
       stickToTarget = true
     },
+    lostrg:DepthTest
+    {
+      true
+    },    
     lostrg:Draw
     {
       name = "cube",

@@ -131,8 +131,10 @@ namespace lost
       void draw(mesh::MeshPtr mesh);
       
       void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
-    };
 
+      // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
+      void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
+    };
   }
 }
 
