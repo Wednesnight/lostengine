@@ -4,7 +4,6 @@
 #include "lost/gl/Context.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/gl.h"
-#include "lost/gl/Mesh.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
@@ -204,38 +203,8 @@ namespace lost
       globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
       globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
       globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
-    }
-
-    void Mesh2DSetFace(Mesh2D* mesh, unsigned int p1, unsigned int p2)
-    {
-      mesh->setFace(p1, p2);
-    }
-
-    void LostGLMesh(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Mesh2D, shared_ptr<Mesh2D> >("Mesh2D")
-            .def(constructor<uint32_t, uint32_t, uint32_t, shared_ptr<Texture> >())
-            .def("setVertexCount", &Mesh2D::setVertexCount)
-            .def("setVertex", &Mesh2D::setVertex)
-            .def("setTexcoordCount", &Mesh2D::setTexcoordCount)
-            .def("setTexcoord", &Mesh2D::setTexcoord)
-            .def("setFaceCount", &Mesh2D::setFaceCount)
-            .def("setFace", &Mesh2DSetFace),
-          
-          class_<Mesh3D, shared_ptr<Mesh3D> >("Mesh3D")
-            .def(constructor<uint32_t, uint32_t, uint32_t, shared_ptr<Texture> >())
-            .def("setVertexCount", &Mesh3D::setVertexCount)
-            .def("setVertex", &Mesh3D::setVertex)
-            .def("setTexcoordCount", &Mesh3D::setTexcoordCount)
-            .def("setTexcoord", &Mesh3D::setTexcoord)
-            .def("setFaceCount", &Mesh3D::setFaceCount)
-            .def("setFace", &Mesh3D::setFace)
-        ]
-      ];
+      globals(state)["gl"]["GL_FLOAT"] = GL_FLOAT;
+      globals(state)["gl"]["GL_INT"] = GL_INT;
     }
 
     void LostGLRenderBuffer(lua_State* state)
@@ -267,6 +236,7 @@ namespace lost
             .def("log", &ShaderProgram::log)
             .def("validate", &ShaderProgram::validate)
             .def("validated", &ShaderProgram::validated)
+            .def("numericalType", &ShaderProgram::numericalType)
             .def("setInt", (void(ShaderProgram::*)(const std::string& inName, GLint inVal)) &ShaderProgram::setInt)
             .def("setFloat", (void(ShaderProgram::*)(const std::string& inName, float inVal)) &ShaderProgram::setFloat)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
@@ -413,7 +383,6 @@ namespace lost
       LostGLContext(state);
       LostGLFrameBuffer(state);
       LostGLGL(state);
-      LostGLMesh(state);
       LostGLRenderBuffer(state);
       LostGLShaderProgram(state);
       LostGLState(state);
