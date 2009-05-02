@@ -2,11 +2,9 @@
 #define LOST_CAMERA_CAMERA3D_H
 
 #include "lost/camera/Camera.h"
-
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Matrix.h"
-#include "lost/gl/Context.h"
 
 namespace lost
 {

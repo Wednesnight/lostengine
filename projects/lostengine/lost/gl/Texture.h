@@ -1,17 +1,15 @@
 #ifndef LOST_GL_TEXTURE_H
 #define LOST_GL_TEXTURE_H
-
+ 
 #include "lost/gl/gl.h"
 #include <boost/noncopyable.hpp>
 #include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
 
-namespace boost { template<typename T> class shared_ptr; }
-
 namespace lost
 {
-  namespace bitmap { struct Bitmap; };
-  namespace resource { struct File; };
+  namespace bitmap { struct Bitmap; typedef lost::shared_ptr<Bitmap> BitmapPtr; };
+  namespace resource { struct File; typedef lost::shared_ptr<File> FilePtr; };
 
   namespace gl
   {
@@ -51,14 +49,14 @@ namespace lost
     
       Texture();
       Texture(lost::math::Vec2 inSize, const Params& inParams = Params());
-      Texture(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
-      Texture(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());      
+      Texture(resource::FilePtr inFile,  const Params& inParams = Params());
+      Texture(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());      
       ~Texture();    
       void destroy();  
       void bind() const;      
       
-      void init(lost::shared_ptr<lost::resource::File> inFile,  const Params& inParams = Params());
-      void init(lost::shared_ptr<lost::bitmap::Bitmap> inBitmap, const Params& inParams = Params());
+      void init(resource::FilePtr inFile,  const Params& inParams = Params());
+      void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
       
       void init(GLint level, // mipmap level
@@ -70,7 +68,7 @@ namespace lost
                  GLenum type, // numerical type of provided pixel data
                  const GLvoid* data); // pointer to the data or 0 if you only want to reserve data for later usage
 
-      void subImage(const lost::math::Vec2& targetPos, lost::shared_ptr<lost::bitmap::Bitmap> bmp);
+      void subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr bmp);
 
       void wrap(GLint p);
       void wrapS(GLint p);
@@ -81,7 +79,7 @@ namespace lost
       void magFilter(GLint p);
   
       void param(GLenum pname, GLint p);
-                      
+
       GLuint        texture;
       // width and height of the texture object
       boost::uint32_t width;

@@ -5,6 +5,11 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local cam3dPosition = Vec3(1,2,2)
 
+local zimtex = lostgl:Texture
+{
+  filename = "zim.png"
+}
+
 local lightShader = lostgl:Shader
 {
   filename = "light",
@@ -40,7 +45,7 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Quad2D
       {
-        filename = "zim.png",
+        texture = zimtex,
         flip = true,
         size = Vec2(640,480)
       }
@@ -51,7 +56,7 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Quad2D
       {
-        filename = "zim.png",
+        texture = zimtex,
         flip = true,
         transform = MatrixTranslation(Vec3(400, 370, 0))
       }

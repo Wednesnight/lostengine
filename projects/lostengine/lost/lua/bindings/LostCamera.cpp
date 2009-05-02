@@ -9,7 +9,6 @@ using namespace boost;
 using namespace luabind;
 using namespace lost::camera;
 using namespace lost::math;
-using namespace lost::gl;
 
 namespace lost
 {
