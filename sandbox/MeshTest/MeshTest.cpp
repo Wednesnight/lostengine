@@ -32,8 +32,6 @@ bool MeshTest::startup()
 {
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
-  // context
-  window->context->clearColor(blackColor);
 
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
@@ -56,7 +54,7 @@ void MeshTest::update(double dt)
 
 void MeshTest::draw()
 {
-  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   scene->process(window->context);
   window->context->swapBuffers();  
 }

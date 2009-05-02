@@ -26,9 +26,9 @@ function Loader:loadScene(filename)
   for k,v in next,_G do
     env[k] = v
   end
-  env.rg = self
-  env.mesh = self -- FIXME we need to pull these subloaders apart
-  env.gl = self -- FIXME we need to pull these subloaders apart
+  env.lostrg = self
+  env.lostmesh = self -- FIXME we need to pull these subloaders apart
+  env.lostgl = self -- FIXME we need to pull these subloaders apart
 
   -- execute screen definition
   self:executeScript(filename, env)
