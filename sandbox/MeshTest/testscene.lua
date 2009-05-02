@@ -3,6 +3,20 @@ local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 
+local cam3dPosition = Vec3(1,2,2)
+
+local lightShader = gl:Shader
+{
+  name = "light",
+  params = gl:ShaderParams
+  {
+    LightPosition = camera3D:position(),
+    LightDiffuse = Color(1.0, 1.0, 1.0),
+    LightAmbient = Color(1.0, 1.0, 1.0),
+    LightSpecular = Color(1.0, 1.0, 1.0)
+  }
+}
+
 rg:Scene
 {
   name = "rootNode",
@@ -51,7 +65,7 @@ rg:Scene
       viewport = Rect(0,0,640,480), -- make this dependant on window size from config file
       fovY = 45,
       depth = Vec2(1,1000),
-      position = Vec3(1,2,2),
+      position = cam3dPosition,
       target = Vec3(0,0,0),
       stickToTarget = true
     }

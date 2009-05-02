@@ -22,7 +22,7 @@ namespace gl
  *
  *  throws if one of the compile stages or the link stage fail.
  */
-static inline lost::shared_ptr<lost::gl::ShaderProgram> loadShader(lost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
+static inline ShaderProgramPtr loadShader(lost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
 {
   lost::shared_ptr<lost::gl::FragmentShader> fragmentShader(new lost::gl::FragmentShader());
   lost::shared_ptr<lost::gl::VertexShader>   vertexShader(new lost::gl::VertexShader());

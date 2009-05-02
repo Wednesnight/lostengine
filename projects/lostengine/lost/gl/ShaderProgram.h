@@ -271,6 +271,8 @@ public:
     return (param(GL_VALIDATE_STATUS) == GL_TRUE) ? true : false;
   }
 
+  GLenum numericalType(const std::string& inName) { return param(inName).glType; } 
+
   void setInt(const std::string& inName, GLint inVal) {param(inName).setInt(inVal);}
   void setFloat(const std::string& inName, float inVal) {param(inName).setFloat(inVal);}
   void set(const std::string& inName, const lost::common::Color& inVal) {param(inName).set(inVal);}
