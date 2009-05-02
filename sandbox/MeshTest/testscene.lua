@@ -3,13 +3,12 @@ local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
-
 local cam3dPosition = Vec3(1,2,2)
 
-local lightShader = gl:Shader
+local lightShader = lostgl:Shader
 {
   filename = "light",
-  params = gl:ShaderParams
+  params = lostgl:ShaderParams
   {
     LightPosition = cam3dPosition,
     LightDiffuse = Color(1.0, 1.0, 1.0),
@@ -18,47 +17,49 @@ local lightShader = gl:Shader
   }
 }
 
-rg:Scene
+lostrg:Scene
 {
   name = "rootNode",
-  rg:Node
+  lostrg:ClearColor{color = Color(0,0,0,1)},
+  lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
+  lostrg:Node
   {
     name="2D Background",
-    rg:Camera2D
+    lostrg:Camera2D
     {
       name = "2D Cam",
       viewport = Rect(0,0,640,480) -- make this dependant on window size from config file
     },
-    rg:DepthTest
+    lostrg:DepthTest
     {
       false
     },
-    rg:Draw
+    lostrg:Draw
     {
       name = "big zim",
       active = true,
-      mesh = mesh:Quad2D
+      mesh = lostmesh:Quad2D
       {
         filename = "zim.png",
         flip = true,
         size = Vec2(640,480)
       }
     },
-    rg:Draw
+    lostrg:Draw
     {
       name = "little zim",
       active = true,
-      mesh = mesh:Quad2D
+      mesh = lostmesh:Quad2D
       {
         filename = "zim.png",
         flip = true,
         transform = MatrixTranslation(Vec3(400, 370, 0))
       }
     },
-    rg:Draw
+    lostrg:Draw
     {
       name = "little red test quad",
-      mesh = mesh:Quad2D
+      mesh = lostmesh:Quad2D
       {
         rect = Rect(0,0,3,3),
         material =
@@ -68,10 +69,10 @@ rg:Scene
       }
     }    
   },
-  rg:Node
+  lostrg:Node
   {
     name="3D Foreground",
-    rg:Camera3D
+    lostrg:Camera3D
     {
       name = "3D Cam",
       viewport = Rect(0,0,640,480), -- make this dependant on window size from config file
@@ -81,10 +82,10 @@ rg:Scene
       target = Vec3(0,0,0),
       stickToTarget = true
     },
-    rg:Draw
+    lostrg:Draw
     {
       name = "cube",
-      mesh = mesh:Obj
+      mesh = lostmesh:Obj
       {
         filename = "cube_tri.obj",
         material = 

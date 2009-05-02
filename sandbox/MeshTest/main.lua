@@ -14,6 +14,7 @@ local rg = lost.rg;
 
 
 function startup(tasklet)
+--[[
   -- cam 2D
   camera2D = Camera2D.create(Rect(0, 0, 640, 480))
 
@@ -67,7 +68,7 @@ function startup(tasklet)
   scene:add(rg.Camera.create(camera3D));
   scene:add(rg.DepthTest.create(true));
 --  scene:add(rg.Draw.create(cube));
-  
+]]--
   local l = lost.io.Loader(tasklet.loader)
   local scene2 = l:loadScene("testscene.lua")
   scene = scene2
