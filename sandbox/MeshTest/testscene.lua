@@ -7,7 +7,7 @@ local cam3dPosition = Vec3(1,2,2)
 
 local lightShader = gl:Shader
 {
-  name = "light",
+  filename = "light",
   params = gl:ShaderParams
   {
     LightPosition = camera3D:position(),
@@ -68,6 +68,19 @@ rg:Scene
       position = cam3dPosition,
       target = Vec3(0,0,0),
       stickToTarget = true
+    },
+    rg:Draw
+    {
+      name = "cube",
+      mesh = mesh:Obj
+      {
+        filename = "cube_tri.obj",
+        material = 
+        {
+          color = Color(0,1,0),
+          shader = lightShader
+        }
+      }
     }
   }
 }

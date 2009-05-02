@@ -52,9 +52,9 @@ function startup(tasklet)
   log.debug("loading file")
   filedata = tasklet.loader:load("cube_tri.obj")
   log.debug("parsing file")
-  cube = lost.mesh.Loader.obj(filedata);
-  cube.material.color = Color(0,1,0)
-  cube.material.shader = shader
+--  cube = lost.mesh.Loader.obj(filedata);
+--  cube.material.color = Color(0,1,0)
+--  cube.material.shader = shader
 
   scene = rg.Node.create()
   scene:add(rg.Camera.create(camera2D));
@@ -66,7 +66,7 @@ function startup(tasklet)
   scene:add(rg.Draw.create(meter));
   scene:add(rg.Camera.create(camera3D));
   scene:add(rg.DepthTest.create(true));
-  scene:add(rg.Draw.create(cube));
+--  scene:add(rg.Draw.create(cube));
   
   local l = lost.io.Loader(tasklet.loader)
   local scene2 = l:loadScene("testscene.lua")
