@@ -27,6 +27,7 @@
 		EA26A84C0F77B1DE00490D18 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26A84B0F77B1DE00490D18 /* main.cpp */; };
 		EA26A8540F77B24F00490D18 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA26A6AF0F77B1A500490D18 /* libLostEngine.a */; };
 		EA2E6BB40F9E71FE00696425 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA2E6BB30F9E71FE00696425 /* main.lua */; };
+		EAD6745E0FADEB500092CA8F /* panels.scene in Resources */ = {isa = PBXBuildFile; fileRef = EAD6745D0FADEB500092CA8F /* panels.scene */; };
 		EAEC1A160F77BAE900032853 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEC1A150F77BAE900032853 /* OpenGL.framework */; };
 		EAF8EB390F784873005BE1B3 /* Filt3rz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */; };
 		EAFA10540F7DAFEB00CEAF99 /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAFA10520F7DAFEB00CEAF99 /* light.vs */; };
@@ -103,6 +104,7 @@
 		EA26A8440F77B1B800490D18 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
 		EA26A84B0F77B1DE00490D18 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
 		EA2E6BB30F9E71FE00696425 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
+		EAD6745D0FADEB500092CA8F /* panels.scene */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = panels.scene; path = ../panels.scene; sourceTree = SOURCE_ROOT; };
 		EAEC1A150F77BAE900032853 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EAF8EB370F784873005BE1B3 /* Filt3rz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filt3rz.h; path = ../Filt3rz.h; sourceTree = SOURCE_ROOT; };
 		EAF8EB380F784873005BE1B3 /* Filt3rz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Filt3rz.cpp; path = ../Filt3rz.cpp; sourceTree = SOURCE_ROOT; };
@@ -158,6 +160,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EAD6745D0FADEB500092CA8F /* panels.scene */,
 				EA2E6BB30F9E71FE00696425 /* main.lua */,
 				3E32FE6D0F920F750095BFCC /* cessna_tri.obj */,
 				3E32FE4F0F920D3D0095BFCC /* cube_tri.obj */,
@@ -328,6 +331,7 @@
 				8DFF970C0F94E9DA00EB04B5 /* heatsig.fs in Resources */,
 				8DFF970D0F94E9DA00EB04B5 /* heatsig.vs in Resources */,
 				EA2E6BB40F9E71FE00696425 /* main.lua in Resources */,
+				EAD6745E0FADEB500092CA8F /* panels.scene in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
