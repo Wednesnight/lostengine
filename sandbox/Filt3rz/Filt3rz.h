@@ -44,7 +44,7 @@ private:
   lost::font::ModelPtr                              labelSepia;
   lost::font::ModelPtr                              labelHeatSig;
 
-  lost::mesh::Mesh3DPtr                             mesh;
+  lost::mesh::MeshPtr                             mesh;
   lost::mesh::Quad2DPtr                             normalPanel;
   lost::mesh::Quad2DPtr                             blurPanel;
   lost::mesh::Quad2DPtr                             edgePanel;
