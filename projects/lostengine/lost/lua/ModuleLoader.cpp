@@ -9,51 +9,32 @@ using namespace luabind;
 
 namespace lost
 {
-namespace lua
-{
-namespace ModuleLoader
-{
-  void install(State& inState, lost::shared_ptr<resource::Loader> inLoader)
+  namespace lua
   {
-    const static string script =
-    "local debug = _G.log.debug\n"
-    "local setmetatable = _G.setmetatable\n"
-    "local package = _G.package\n"
-    "local loadstring = _G.loadstring\n"
-    "local assert = _G.assert\n"
-    "local drf = lost.lua.doResourceFile"
-    "\n"    
-    "module('lost.lua.module')\n"
-    "\n"
-    "mt={}\n"
-    "\n"
-    "function customLoader(moduleName)\n"
-    "  local f = assert(drf(moduleName..'.lua'))\n"
-    "  return f\n"
-    "end\n"
-    "\n"
-    "function customIndex(table, key)\n"
-    "  return customLoader\n"
-    "end\n"
-    "\n"
-    "function install()\n"
-    "  mt.__index = customIndex\n"
-    "  setmetatable(package.preload, mt)\n"
-    "end\n"
-    ;
-    
-    // execute script first so all vars are setup
-    inState.doString(script);
+    namespace ModuleLoader
+    {
 
-    // setup loader
-    object olost = globals(inState)["lost"];
-    object olua = olost["lua"];
-    object omodule = olua["module"];
+      void install(State& inState, lost::shared_ptr<resource::Loader> inLoader)
+      {
+        const static string script = "local mt = "
+                                     "{ "
+                                     "  __index = function(self, key) "
+                                     "    local mt = getmetatable(self) or {} "
+                                     "    return mt.load "
+                                     "  end, "
+                                     " "
+                                     "  load = function(moduleName) "
+                                     "    return assert(lost.lua.doResourceFile(moduleName..'.lua')) "
+                                     "  end "
+                                     "} "
+                                     "setmetatable(package.preload, mt)";
+        
+        // setup loader
+        inState.globals["loader"] = inLoader;
+        // execute script fragment
+        inState.doString(script);
+      }
 
-    // find install function and call it
-    object oinstall = omodule["install"];
-    luabind::call_function<void>(oinstall);
+    }
   }
-};
-}
 }
