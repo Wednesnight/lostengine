@@ -30,6 +30,9 @@ namespace lost
     struct ApplicationEvent;
     typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
+    void runTasklet(Tasklet* t);
+
+
     struct Application : public lost::enable_shared_from_this<Application>
     {
     private:

@@ -18,6 +18,20 @@ namespace lost
 {
   namespace application
   {
+
+    void runTasklet(Tasklet* t)
+    {
+      try
+      {
+        static ApplicationPtr app = Application::create(TaskletPtr(t));
+        app->run();      
+      }
+      catch (std::exception& e)
+      {
+        EOUT("exception: " << e.what());
+      }        
+    }
+
     
     Application::Application(resource::LoaderPtr inLoader)
     {
