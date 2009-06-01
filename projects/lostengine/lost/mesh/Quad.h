@@ -126,9 +126,8 @@ struct Quad : public MESHTYPE
       // TexCoordType::maxX instead of 1 etc., but it'll work for now
       // i.e. the values might have to be converted from normalised float texture coordinates 
       // to something else like uint8_t etc.
-      // FIXME: needs texcoord flip switch
       
-      float texWidth = MESHTYPE::material->textures[0]->dataWidth; 
+/*      float texWidth = MESHTYPE::material->textures[0]->dataWidth; 
       float texHeight = MESHTYPE::material->textures[0]->dataHeight; 
       float maxTexX = texWidth-1;
       float maxTexY = texHeight-1;
@@ -137,35 +136,38 @@ struct Quad : public MESHTYPE
       float minXTexCoord = xtexstep;
       float minYTexCoord = ytexstep;
       float maxXTexCoord = xtexstep + maxTexX/texWidth;
-      float maxYTexCoord = ytexstep + maxTexY/texHeight;
+      float maxYTexCoord = ytexstep + maxTexY/texHeight;*/
       
+      math::Vec2 bl = MESHTYPE::material->textures[0]->bottomLeftTexCoord();
+      math::Vec2 tr = MESHTYPE::material->textures[0]->topRightTexCoord();
+
       if(flip)
       {
-        texcoords[0].x = minXTexCoord;
-        texcoords[0].y = maxYTexCoord;
+        texcoords[0].x = bl.x;
+        texcoords[0].y = tr.y;
 
-        texcoords[1].x = maxXTexCoord;
-        texcoords[1].y = maxYTexCoord;
+        texcoords[1].x = tr.x;
+        texcoords[1].y = tr.y;
 
-        texcoords[2].x = maxXTexCoord;
-        texcoords[2].y = minYTexCoord;
+        texcoords[2].x = tr.x;
+        texcoords[2].y = bl.y;
 
-        texcoords[3].x = minXTexCoord;
-        texcoords[3].y = minYTexCoord;
+        texcoords[3].x = bl.x;
+        texcoords[3].y = bl.y;
       }
       else
       {
-        texcoords[0].x = minXTexCoord;
-        texcoords[0].y = minYTexCoord;
+        texcoords[0].x = bl.x;
+        texcoords[0].y = bl.y;
 
-        texcoords[1].x = maxXTexCoord;
-        texcoords[1].y = minYTexCoord;
+        texcoords[1].x = tr.x;
+        texcoords[1].y = bl.y;
 
-        texcoords[2].x = maxXTexCoord;
-        texcoords[2].y = maxYTexCoord;
+        texcoords[2].x = tr.x;
+        texcoords[2].y = bl.y;
 
-        texcoords[3].x = minXTexCoord;
-        texcoords[3].y = maxYTexCoord;        
+        texcoords[3].x = bl.x;
+        texcoords[3].y = tr.y;        
       }
       MESHTYPE::texCoordBuffer->bindBufferData(texcoords, numVertices); // don't need to subBufferData
     }
