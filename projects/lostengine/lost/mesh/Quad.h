@@ -5,6 +5,7 @@
 #include "lost/resource/File.h"
 #include "lost/gl/Texture.h"
 #include "lost/math/Rect.h"
+#include <vector>
 
 namespace lost
 {
@@ -18,6 +19,7 @@ template<typename MESHTYPE>
 struct Quad : public MESHTYPE
 {
   typedef typename MESHTYPE::VertexType VertexType;
+  typedef typename MESHTYPE::IndexType IndexType;
   typedef typename MESHTYPE::TexCoordType TexCoordType;
 
   VertexType vertices[4];
@@ -25,6 +27,7 @@ struct Quad : public MESHTYPE
   uint32_t  vertexBufferSizeBytes;
   uint32_t  texcoordBufferSizeBytes;
   
+  uint32_t numQuads;
   uint32_t numVertices;
   uint32_t numIndices;
     
@@ -65,6 +68,65 @@ struct Quad : public MESHTYPE
   
   virtual ~Quad() {}
   
+  // writes the indices for a given quad into the provided buffer
+  // two triangles, counterclockwise
+  void createQuadIndices(IndexType* idx, boost::uint32_t quadNum)
+  { 
+    const boost::uint32_t numIndicesPerQuad = 6;
+    boost::uint32_t indexOffset = quadNum*numIndicesPerQuad;
+    idx[indexOffset+0] = 0;
+    idx[indexOffset+1] = 1;
+    idx[indexOffset+2] = 2;
+    idx[indexOffset+3] = 2;
+    idx[indexOffset+4] = 3;
+    idx[indexOffset+5] = 0;    
+  }
+  
+  void createVertices(VertexType* vtx, uint32_t quadNum, const math::Rect& inRect)
+  {
+    float voffsetx = MESHTYPE::OffsetVectorType::x();
+    float voffsety = MESHTYPE::OffsetVectorType::y();  
+  
+    vtx[0].x = inRect.x-voffsetx;
+    vtx[0].y = inRect.y-voffsety;
+    
+    vtx[1].x = inRect.maxX()+voffsetx;
+    vtx[1].y = inRect.y-voffsety;
+
+    vtx[2].x = inRect.maxX()+voffsetx;
+    vtx[2].y = inRect.maxY()+voffsety;
+
+    vtx[3].x = inRect.x-voffsetx;
+    vtx[3].y = inRect.maxY()+voffsety;    
+  }
+    
+  void createQuads(std::vector<math::Rect> quadCoords)
+  {
+    numQuads = quadCoords.size();
+    numVertices = numQuads*4;
+    numIndices = numQuads*6;
+    // temp buffers for initial creation of geometry
+    lost::shared_array<VertexType> vb(new VertexType[numVertices]); 
+    lost::shared_array<IndexType> ib(new IndexType[numIndices]);
+    MESHTYPE::vertices(true);
+    MESHTYPE::indices(true);
+    // create geometry
+    for(uint32_t i=0; i<numQuads; ++i)
+    {
+      createVertices(vb.get(), i, quadCoords[i]);
+    }
+    
+    // create indices
+    for(uint32_t i=0; i<numQuads; ++i)
+    {
+      createQuadIndices(ib.get(), i);
+    }
+    
+    // upoad data to buffers
+    MESHTYPE::vertexBuffer->bindBufferSubData(0, numVertices*sizeof(VertexType), vb.get());
+    
+  }
+          
   void init()
   {
     numVertices = 4;
@@ -73,14 +135,8 @@ struct Quad : public MESHTYPE
     MESHTYPE::vertices(true);
     MESHTYPE::indices(true);
     MESHTYPE::vertexBuffer->bindBufferData(NULL, numVertices); // create empty buffer
-    typename MESHTYPE::IndexType idx[numIndices];
-    // two triangles, counterclockwise
-    idx[0] = 0;
-    idx[1] = 1;
-    idx[2] = 2;
-    idx[3] = 2;
-    idx[4] = 3;
-    idx[5] = 0;
+    IndexType idx[numIndices];
+    createQuadIndices(idx, 0);
     MESHTYPE::indexBuffer->bindBufferData(idx, numIndices);
     vertexBufferSizeBytes = sizeof(vertices);
     texcoordBufferSizeBytes = sizeof(texcoords);
@@ -89,6 +145,8 @@ struct Quad : public MESHTYPE
     MESHTYPE::material->color = common::whiteColor;
   }
 
+  // FIXME: needs to be specialized to access a certain rectangle inside the buffer
+  // OR assume implicit index 0 into mapped vertex buffer
   void updateSize(const math::Vec2& size, bool flip = true)
   {
     math::Rect rect(0, 0, size.width, size.height);
@@ -126,18 +184,7 @@ struct Quad : public MESHTYPE
       // TexCoordType::maxX instead of 1 etc., but it'll work for now
       // i.e. the values might have to be converted from normalised float texture coordinates 
       // to something else like uint8_t etc.
-      
-/*      float texWidth = MESHTYPE::material->textures[0]->dataWidth; 
-      float texHeight = MESHTYPE::material->textures[0]->dataHeight; 
-      float maxTexX = texWidth-1;
-      float maxTexY = texHeight-1;
-      float xtexstep = .5f/texWidth;
-      float ytexstep = .5f/texHeight;
-      float minXTexCoord = xtexstep;
-      float minYTexCoord = ytexstep;
-      float maxXTexCoord = xtexstep + maxTexX/texWidth;
-      float maxYTexCoord = ytexstep + maxTexY/texHeight;*/
-      
+            
       math::Vec2 bl = MESHTYPE::material->textures[0]->bottomLeftTexCoord();
       math::Vec2 tr = MESHTYPE::material->textures[0]->topRightTexCoord();
 
