@@ -11,6 +11,7 @@
   #define HAVE_TR1_SHARED_PTR
 #endif
 
+#include <boost/shared_array.hpp>
 
 // Use tr1::shared_ptr if available.
 #if defined(HAVE_TR1_SHARED_PTR)
@@ -18,6 +19,7 @@
 #include <tr1/memory>
 namespace lost {
 using std::tr1::shared_ptr;
+using boost::shared_array;
 using std::tr1::weak_ptr;
 using std::tr1::enable_shared_from_this;
 
@@ -38,6 +40,7 @@ using std::tr1::const_pointer_cast;
 
 namespace lost {
 using boost::shared_ptr;
+using boost::shared_array;
 using boost::weak_ptr;
 using boost::enable_shared_from_this;
 
