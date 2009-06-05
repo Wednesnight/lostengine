@@ -9,6 +9,7 @@
 #include "lost/rg/ClearColor.h"
 #include "lost/rg/DefaultFrameBuffer.h"
 #include "lost/rg/FrameBuffer.h"
+#include "lost/rg/Blend.h"
 
 
 using namespace luabind;
@@ -88,8 +89,16 @@ void LostRg(lua_State* state)
       .scope
       [
         def("create", &FrameBuffer::create)
+      ],
+      class_<Blend, NodePtr>("Blend")
+      .def_readwrite("name", &Blend::name)
+      .def_readwrite("active", &Blend::active)
+      .def_readwrite("enable", &Blend::enable)
+      .scope
+      [
+        def("create", &Blend::create)
       ]
-      
+     
     ]
   ];
 }

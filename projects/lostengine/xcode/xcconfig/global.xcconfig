@@ -26,7 +26,9 @@ ZLIB_ROOT = "$(THIRDPARTY_ROOT)/zlib/zlib_1_2_3"
 
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
-HEADER_SEARCH_PATHS = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include" "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
+HEADERS1 = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include"
+HEADERS2 = "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
+HEADER_SEARCH_PATHS = $(HEADERS1) $(HEADERS2)
 
 // Compiler Version
 GCC_VERSION = 

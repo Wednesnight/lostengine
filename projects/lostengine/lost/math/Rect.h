@@ -104,12 +104,10 @@ namespace math
 
     bool intersects(const Rect& r2) const
     {
-      return !(
-          r2.left() > right() 
-            || r2.right() < left() 
-            || r2.top() > bottom() 
-            || r2.bottom() < top()
-        );
+      return (contains(r2.bottomLeft()) || contains(r2.bottomRight()) ||
+              contains(r2.topRight()) || contains(r2.topLeft()) ||
+              r2.contains(bottomLeft()) || r2.contains(bottomRight()) ||
+              r2.contains(topRight()) || r2.contains(topLeft()));
     }
 
     void reset( float inX = 0, float inY = 0, float inWidth = 0, float inHeight = 0 )
