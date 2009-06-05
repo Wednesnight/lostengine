@@ -195,6 +195,7 @@ lostrg:Scene
       name = "flashlight",
       active = true,
       mesh = gameState.light.mesh
-    }
+    },
+    lostrg:Blend{enable = false}
   }
 }
