@@ -424,6 +424,11 @@
 		3EF4BF2C0F15F183008C7702 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF00F15F183008C7702 /* stack_content_by_name.cpp */; };
 		3EF4BF2D0F15F183008C7702 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF10F15F183008C7702 /* weak_ref.cpp */; };
 		3EF4BF2E0F15F183008C7702 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */; };
+		8D13D8020FD800F800CEC1AF /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 8D13D6C30FD800F800CEC1AF /* lost */; };
+		8D13D8050FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
+		8D13D8060FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
+		8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
+		8D13D8080FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D40911B0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
 		8D40911C0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
 		8D40911D0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
@@ -834,7 +839,6 @@
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
-		3EB495B60F9F962900F3036A /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3EB496E70F9F99DE00F3036A /* LostApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplication.cpp; path = bindings/LostApplication.cpp; sourceTree = "<group>"; };
 		3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommon.cpp; path = bindings/LostCommon.cpp; sourceTree = "<group>"; };
 		3EB499C30F9FA4E800F3036A /* LostEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostEvent.cpp; path = bindings/LostEvent.cpp; sourceTree = "<group>"; };
@@ -862,6 +866,8 @@
 		3EF4BEF00F15F183008C7702 /* stack_content_by_name.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stack_content_by_name.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/stack_content_by_name.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEF10F15F183008C7702 /* weak_ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = weak_ref.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/weak_ref.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
+		8D13D6C30FD800F800CEC1AF /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
+		8D13D8040FD8011A00CEC1AF /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Blend.cpp; path = rg/Blend.cpp; sourceTree = "<group>"; };
 		8D40911A0F89322D00163B63 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
 		8D77F0480F34DC1000C86FFD /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
@@ -1020,7 +1026,7 @@
 		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
 			isa = PBXGroup;
 			children = (
-				3EB495B60F9F962900F3036A /* lost */,
+				8D13D6C30FD800F800CEC1AF /* lost */,
 				3E531D8D0F14EDEA00D7C8B4 /* Configurations */,
 				EA9A67E10F159C38007E8A3D /* precompiled headers */,
 				3E5321CA0F15112200D7C8B4 /* Sources */,
@@ -1688,6 +1694,7 @@
 		EA8A228B0F87B15400A6EB8B /* rg */ = {
 			isa = PBXGroup;
 			children = (
+				8D13D8040FD8011A00CEC1AF /* Blend.cpp */,
 				EA18C3200FA25C5600C2652A /* Node.cpp */,
 				EA8A15230FA26D7600E42FBE /* Camera.cpp */,
 				EA8A15250FA26D7600E42FBE /* Draw.cpp */,
@@ -1840,6 +1847,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D13D8020FD800F800CEC1AF /* lost in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2064,6 +2072,7 @@
 				EA7CEB1C0FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB200FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
 				EA7CEB240FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
+				8D13D8060FD8011A00CEC1AF /* Blend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2285,6 +2294,7 @@
 				EA7CEB180FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB1E0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
 				EA7CEB220FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
+				8D13D8080FD8011A00CEC1AF /* Blend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2334,6 +2344,7 @@
 				8DA585490F8A4F7000A568E1 /* path.cpp in Sources */,
 				3E35F5C20FA04F65007DDAB1 /* Loader.cpp in Sources */,
 				3E03585A0FA24F5600EE43A8 /* TestLostMathQuat.cpp in Sources */,
+				8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2555,6 +2566,7 @@
 				EA7CEB1A0FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB1F0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
 				EA7CEB230FACC455005F7AAB /* FrameBuffer.cpp in Sources */,
+				8D13D8050FD8011A00CEC1AF /* Blend.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

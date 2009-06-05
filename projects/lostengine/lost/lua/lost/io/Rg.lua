@@ -1,4 +1,5 @@
 require("lost.io.Loader")
+require("lost.io.rg.Blend")
 require("lost.io.rg.Camera")
 require("lost.io.rg.DepthTest")
 require("lost.io.rg.Draw")
