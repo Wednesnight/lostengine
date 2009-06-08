@@ -15,7 +15,7 @@ local thingTex = lostgl:Texture
   filename = "thing.png"
 }
 
-local sceneColor = Color(0.1,0.1,0.1)
+local sceneColor = Color(0.3,0.3,0.3)
 
 gameState.light =
 {

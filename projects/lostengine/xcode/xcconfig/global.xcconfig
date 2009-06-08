@@ -13,6 +13,7 @@ VALID_ARCHS = i386 armv6
 // thirdparty defines
 THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"
 BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_36_0"
+BULLET_ROOT = "$(THIRDPARTY_ROOT)/bullet/bullet_2_74"
 FHTAGN_ROOT = "$(THIRDPARTY_ROOT)/fhtagn/fhtagn_2008_11_12"
 FREETYPE_ROOT = "$(THIRDPARTY_ROOT)/freetype2/freetype_2_3_7"
 GLEE_ROOT = "$(THIRDPARTY_ROOT)/glee/glee_5_21"
@@ -27,7 +28,7 @@ ZLIB_ROOT = "$(THIRDPARTY_ROOT)/zlib/zlib_1_2_3"
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
 HEADERS1 = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)/include"
-HEADERS2 = "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source"
+HEADERS2 = "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source" "$(BULLET_ROOT)/src"
 HEADER_SEARCH_PATHS = $(HEADERS1) $(HEADERS2)
 
 // Compiler Version
