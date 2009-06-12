@@ -207,7 +207,7 @@ void btConvexConvexAlgorithm ::processCollision (btCollisionObject* body0,btColl
 	input.m_transformB = body1->getWorldTransform();
 
 	gjkPairDetector.getClosestPoints(input,*resultOut,dispatchInfo.m_debugDraw);
-	btScalar sepDist = gjkPairDetector.getCachedSeparatingDistance()+dispatchInfo.m_convexConservativeDistanceThreshold;
+//	btScalar sepDist = gjkPairDetector.getCachedSeparatingDistance()+dispatchInfo.m_convexConservativeDistanceThreshold;
 
 	//now perturbe directions to get multiple contact points
 	btVector3 v0,v1;
