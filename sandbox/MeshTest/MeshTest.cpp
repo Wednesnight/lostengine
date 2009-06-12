@@ -36,6 +36,14 @@ bool MeshTest::startup()
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
 
+  std::vector<Rect> rects;
+  float s = 10;
+  for(uint32_t i=0; i<10; ++i)
+  {
+    rects.push_back(Rect(i*s*1.5, 13, s, s));
+  }
+  Quad2DPtr quads = Quad2D::create(rects);
+
   bool result = Tasklet::startup();
   if (result)
   {    
@@ -49,7 +57,8 @@ bool MeshTest::startup()
     {
       EOUT("CUBE NOT FOUND !!!!");
     }
-    
+    rg::NodePtr bg = scene->recursiveFindByName("2D Background");
+    bg->add(rg::Draw::create(quads));
   }
   
   return result;
