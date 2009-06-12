@@ -108,8 +108,30 @@ struct Quad : public MESHTYPE
     this->transferTexCoords();    
   }
   
+  // creates a group of independent rects, all insdide one mesh
+  Quad(const std::vector<math::Rect>& rects)
+  {
+    this->drawMode = GL_TRIANGLES;
+    createDefaultMaterial();
+    boost::uint32_t numQuads = rects.size();
+    boost::uint32_t numVertices = numQuads*4;
+    boost::uint32_t numIndices = numQuads*6;
+    this->indices(true);
+    this->vertices(true);
+    this->resetIndices(numIndices);
+    this->resetVertices(numVertices);
+    for(boost::uint32_t i=0; i<numQuads; ++i)
+    {
+      createIndices(i);
+      createVertices(i,rects[i]);
+    }
+    this->transferIndices();
+    this->transferVertices();
+  }
+  
   static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create(const std::vector<math::Rect>& rects) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(rects)); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(resource::FilePtr data, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex, flip)); }
   
@@ -121,13 +143,14 @@ struct Quad : public MESHTYPE
   { 
     const boost::uint32_t numIndicesPerQuad = 6;
     boost::uint32_t indexOffset = quadNum*numIndicesPerQuad;
+    boost::uint32_t vertexOffset = quadNum*4;
     IndexType* idx = this->indexData.get();
-    idx[indexOffset+0] = indexOffset + 0;
-    idx[indexOffset+1] = indexOffset + 1;
-    idx[indexOffset+2] = indexOffset + 2;
-    idx[indexOffset+3] = indexOffset + 2;
-    idx[indexOffset+4] = indexOffset + 3;
-    idx[indexOffset+5] = indexOffset + 0;    
+    idx[indexOffset+0] = vertexOffset + 0;
+    idx[indexOffset+1] = vertexOffset + 1;
+    idx[indexOffset+2] = vertexOffset + 2;
+    idx[indexOffset+3] = vertexOffset + 2;
+    idx[indexOffset+4] = vertexOffset + 3;
+    idx[indexOffset+5] = vertexOffset + 0;    
   }
   
   void createVertices(boost::uint32_t quadNum, const math::Rect& inRect)
