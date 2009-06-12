@@ -95,7 +95,7 @@ void btSequentialImpulseConstraintSolver::resolveSingleConstraintRowGenericSIMD(
 	const btScalar deltaVel1Dotn	=	c.m_contactNormal.dot(body1.m_deltaLinearVelocity) 	+ c.m_relpos1CrossNormal.dot(body1.m_deltaAngularVelocity);
 	const btScalar deltaVel2Dotn	=	-c.m_contactNormal.dot(body2.m_deltaLinearVelocity) + c.m_relpos2CrossNormal.dot(body2.m_deltaAngularVelocity);
 
-	const btScalar delta_rel_vel	=	deltaVel1Dotn-deltaVel2Dotn;
+//	const btScalar delta_rel_vel	=	deltaVel1Dotn-deltaVel2Dotn;
 	deltaImpulse	-=	deltaVel1Dotn*c.m_jacDiagABInv;
 	deltaImpulse	-=	deltaVel2Dotn*c.m_jacDiagABInv;
 
@@ -337,7 +337,7 @@ btSolverConstraint&	btSequentialImpulseConstraintSolver::addFrictionConstraint(c
 
 		rel_vel = vel1Dotn+vel2Dotn;
 
-		btScalar positionalError = 0.f;
+//		btScalar positionalError = 0.f;
 
 		btSimdScalar velocityError =  - rel_vel;
 		btSimdScalar	velocityImpulse = velocityError * btSimdScalar(solverConstraint.m_jacDiagABInv);
@@ -792,7 +792,7 @@ btScalar btSequentialImpulseConstraintSolver::solveGroupCacheFriendlySetup(btCol
 		{
 			int i;
 			btPersistentManifold* manifold = 0;
-			btCollisionObject* colObj0=0,*colObj1=0;
+//			btCollisionObject* colObj0=0,*colObj1=0;
 
 
 			for (i=0;i<numManifolds;i++)
