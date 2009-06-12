@@ -22,32 +22,51 @@ struct Quad : public MESHTYPE
   typedef typename MESHTYPE::IndexType IndexType;
   typedef typename MESHTYPE::TexCoordType TexCoordType;
 
-  VertexType vertices[4];
-  TexCoordType texcoords[4];
-  uint32_t  vertexBufferSizeBytes;
-  uint32_t  texcoordBufferSizeBytes;
-  
-  uint32_t numQuads;
-  uint32_t numVertices;
-  uint32_t numIndices;
-    
+  // doesn't create any data or buffers, only a quad with a default drawMode and Material
   Quad()
   {
     init();
   }
   
+  // creates a white rectangle with the given size and position.
   Quad(const math::Rect& inRect)
   {
     init();
+    boost::uint32_t numQuads = 1;
+    boost::uint32_t numVertices = numQuads*4;
+    boost::uint32_t numIndices = numQuads*6;
+    this->indices(true);
+    this->vertices(true);
+    this->resetIndices(numIndices);
+    this->resetVertices(numVertices);
     updateVertices(inRect);
+    createQuadIndices(0);
+    this->transferIndices();
   }
   
+  // tries to build a texture from the provided file data and 
+  // builds a quad with the size of the data the texture was created with,
+  // flipping the texture coords vertically if required.
+  // This is essentially a shortcut for creating quads with the same extents as 
+  // a loaded bitmap. The default Material has a white draw color.
   Quad(resource::FilePtr data, bool flip=true)
   {
     init();
     gl::TexturePtr tex(new gl::Texture(data));
     math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
-    MESHTYPE::material->textures.push_back(tex);
+    this->material->textures.push_back(tex);
+    boost::uint32_t numQuads = 1;
+    boost::uint32_t numVertices = numQuads*4;
+    boost::uint32_t numIndices = numQuads*6;
+    boost::uint32_t numTexCoords = numVertices;
+    this->indices(true);
+    this->vertices(true);
+    this->texCoords(true);
+    this->resetIndices(numIndices);
+    this->resetVertices(numVertices);
+    this->resetTexCoords(numTexCoords);
+    createQuadIndices(0);
+    this->transferIndices();
     updateVertices(rect);
     updateTexCoords(flip);
   }
@@ -56,7 +75,19 @@ struct Quad : public MESHTYPE
   {
     init();
     math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
-    MESHTYPE::material->textures.push_back(tex);
+    this->material->textures.push_back(tex);
+    boost::uint32_t numQuads = 1;
+    boost::uint32_t numVertices = numQuads*4;
+    boost::uint32_t numIndices = numQuads*6;
+    boost::uint32_t numTexCoords = numVertices;
+    this->indices(true);
+    this->vertices(true);
+    this->texCoords(true);
+    this->resetIndices(numIndices);
+    this->resetVertices(numVertices);
+    this->resetTexCoords(numTexCoords);
+    createQuadIndices(0);
+    this->transferIndices();
     updateVertices(rect);
     updateTexCoords(flip);
   }
@@ -70,76 +101,72 @@ struct Quad : public MESHTYPE
   
   // writes the indices for a given quad into the provided buffer
   // two triangles, counterclockwise
-  void createQuadIndices(IndexType* idx, boost::uint32_t quadNum)
+  void createQuadIndices(boost::uint32_t quadNum)
   { 
     const boost::uint32_t numIndicesPerQuad = 6;
     boost::uint32_t indexOffset = quadNum*numIndicesPerQuad;
-    idx[indexOffset+0] = 0;
-    idx[indexOffset+1] = 1;
-    idx[indexOffset+2] = 2;
-    idx[indexOffset+3] = 2;
-    idx[indexOffset+4] = 3;
-    idx[indexOffset+5] = 0;    
+    IndexType* idx = this->indexData.get();
+    idx[indexOffset+0] = indexOffset + 0;
+    idx[indexOffset+1] = indexOffset + 1;
+    idx[indexOffset+2] = indexOffset + 2;
+    idx[indexOffset+3] = indexOffset + 2;
+    idx[indexOffset+4] = indexOffset + 3;
+    idx[indexOffset+5] = indexOffset + 0;    
   }
   
-  void createVertices(VertexType* vtx, uint32_t quadNum, const math::Rect& inRect)
+  void createVertices(uint32_t quadNum, const math::Rect& inRect)
   {
     float voffsetx = MESHTYPE::OffsetVectorType::x();
     float voffsety = MESHTYPE::OffsetVectorType::y();  
   
-    vtx[0].x = inRect.x-voffsetx;
-    vtx[0].y = inRect.y-voffsety;
+    VertexType* vtx = this->vertexData.get();
+    boost::uint32_t verticesPerQuad = 4;
+    boost::uint32_t offset = quadNum*verticesPerQuad;
+  
+    vtx[offset+0].x = inRect.x-voffsetx;
+    vtx[offset+0].y = inRect.y-voffsety;
     
-    vtx[1].x = inRect.maxX()+voffsetx;
-    vtx[1].y = inRect.y-voffsety;
+    vtx[offset+1].x = inRect.maxX()+voffsetx;
+    vtx[offset+1].y = inRect.y-voffsety;
 
-    vtx[2].x = inRect.maxX()+voffsetx;
-    vtx[2].y = inRect.maxY()+voffsety;
+    vtx[offset+2].x = inRect.maxX()+voffsetx;
+    vtx[offset+2].y = inRect.maxY()+voffsety;
 
-    vtx[3].x = inRect.x-voffsetx;
-    vtx[3].y = inRect.maxY()+voffsety;    
+    vtx[offset+3].x = inRect.x-voffsetx;
+    vtx[offset+3].y = inRect.maxY()+voffsety;    
   }
     
   void createQuads(std::vector<math::Rect> quadCoords)
   {
-    numQuads = quadCoords.size();
-    numVertices = numQuads*4;
-    numIndices = numQuads*6;
-    // temp buffers for initial creation of geometry
-    lost::shared_array<VertexType> vb(new VertexType[numVertices]); 
-    lost::shared_array<IndexType> ib(new IndexType[numIndices]);
-    MESHTYPE::vertices(true);
-    MESHTYPE::indices(true);
+    boost::uint32_t nq = quadCoords.size();
+    boost::uint32_t nv = nq*4;
+    boost::uint32_t ni = nq*6;
+    
+    // create host data arrays
+    this->resetVertices(nv);
+    this->resetIndices(ni);
+    
+    // create hardware buffer objects
+    this->vertices(true);
+    this->indices(true);
+
     // create geometry
-    for(uint32_t i=0; i<numQuads; ++i)
+    for(uint32_t i=0; i<nq; ++i)
     {
-      createVertices(vb.get(), i, quadCoords[i]);
+      createVertices(i, quadCoords[i]);
     }
     
     // create indices
-    for(uint32_t i=0; i<numQuads; ++i)
+    for(uint32_t i=0; i<nq; ++i)
     {
-      createQuadIndices(ib.get(), i);
-    }
-    
-    // upoad data to buffers
-    MESHTYPE::vertexBuffer->bindBufferSubData(0, numVertices*sizeof(VertexType), vb.get());
-    
+      createQuadIndices(i);
+    }    
   }
           
   void init()
   {
-    numVertices = 4;
-    numIndices = 6;
+    // since Quad represents a (non)textured solid quad, drawMode is always GL_TRIANGLES
     MESHTYPE::drawMode = GL_TRIANGLES;
-    MESHTYPE::vertices(true);
-    MESHTYPE::indices(true);
-    MESHTYPE::vertexBuffer->bindBufferData(NULL, numVertices); // create empty buffer
-    IndexType idx[numIndices];
-    createQuadIndices(idx, 0);
-    MESHTYPE::indexBuffer->bindBufferData(idx, numIndices);
-    vertexBufferSizeBytes = sizeof(vertices);
-    texcoordBufferSizeBytes = sizeof(texcoords);
     // material defaults to white color without texture
     MESHTYPE::material.reset(new Material);
     MESHTYPE::material->color = common::whiteColor;
@@ -159,6 +186,8 @@ struct Quad : public MESHTYPE
     float voffsetx = MESHTYPE::OffsetVectorType::x();
     float voffsety = MESHTYPE::OffsetVectorType::y();  
   
+    VertexType* vertices = this->vertexData.get();
+  
     vertices[0].x = inRect.x-voffsetx;
     vertices[0].y = inRect.y-voffsety;
     
@@ -171,57 +200,51 @@ struct Quad : public MESHTYPE
     vertices[3].x = inRect.x-voffsetx;
     vertices[3].y = inRect.maxY()+voffsety;
     
-    MESHTYPE::vertexBuffer->bindBufferSubData(0, vertexBufferSizeBytes, vertices);
+    this->transferVertices();
   }
   
   // recalculates the texture coordinates from textures[0] if present
   void updateTexCoords(bool flip=true)
   {
-    if(MESHTYPE::material && MESHTYPE::material->textures.size() > 0)
+    // FIXME: since texcoords can have any type, we'd probably need something like 
+    // TexCoordType::maxX instead of 1 etc., but it'll work for now
+    // i.e. the values might have to be converted from normalised float texture coordinates 
+    // to something else like uint8_t etc.
+          
+    math::Vec2 bl = this->material->textures[0]->bottomLeftTexCoord();
+    math::Vec2 tr = this->material->textures[0]->topRightTexCoord();
+
+    TexCoordType* texcoords = this->texCoordData.get();
+
+    if(flip)
     {
-      MESHTYPE::texCoords(true);
-      // FIXME: since texcoords can have any type, we'd probably need something like 
-      // TexCoordType::maxX instead of 1 etc., but it'll work for now
-      // i.e. the values might have to be converted from normalised float texture coordinates 
-      // to something else like uint8_t etc.
-            
-      math::Vec2 bl = MESHTYPE::material->textures[0]->bottomLeftTexCoord();
-      math::Vec2 tr = MESHTYPE::material->textures[0]->topRightTexCoord();
+      texcoords[0].x = bl.x;
+      texcoords[0].y = tr.y;
 
-      if(flip)
-      {
-        texcoords[0].x = bl.x;
-        texcoords[0].y = tr.y;
+      texcoords[1].x = tr.x;
+      texcoords[1].y = tr.y;
 
-        texcoords[1].x = tr.x;
-        texcoords[1].y = tr.y;
+      texcoords[2].x = tr.x;
+      texcoords[2].y = bl.y;
 
-        texcoords[2].x = tr.x;
-        texcoords[2].y = bl.y;
-
-        texcoords[3].x = bl.x;
-        texcoords[3].y = bl.y;
-      }
-      else
-      {
-        texcoords[0].x = bl.x;
-        texcoords[0].y = bl.y;
-
-        texcoords[1].x = tr.x;
-        texcoords[1].y = bl.y;
-
-        texcoords[2].x = tr.x;
-        texcoords[2].y = bl.y;
-
-        texcoords[3].x = bl.x;
-        texcoords[3].y = tr.y;        
-      }
-      MESHTYPE::texCoordBuffer->bindBufferData(texcoords, numVertices); // don't need to subBufferData
+      texcoords[3].x = bl.x;
+      texcoords[3].y = bl.y;
     }
     else
     {
-      MESHTYPE::texCoords(false);
+      texcoords[0].x = bl.x;
+      texcoords[0].y = bl.y;
+
+      texcoords[1].x = tr.x;
+      texcoords[1].y = bl.y;
+
+      texcoords[2].x = tr.x;
+      texcoords[2].y = bl.y;
+
+      texcoords[3].x = bl.x;
+      texcoords[3].y = tr.y;        
     }
+    this->transferTexCoords();
   }
 };
 
