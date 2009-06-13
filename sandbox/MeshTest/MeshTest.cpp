@@ -18,6 +18,7 @@ using namespace lost::application;
 using namespace lost::camera;
 using namespace lost::mesh;
 using namespace lost::meter;
+using namespace lost::font;
 using namespace luabind;
 
 MeshTest::MeshTest()
@@ -32,6 +33,9 @@ bool MeshTest::startup()
 {
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
+
+  // initialize font
+  ttf = TrueTypeFontPtr(new TrueTypeFont(font::freetype::Library::create(), loader->load("Vera.ttf")));
 
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
