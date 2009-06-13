@@ -10,6 +10,7 @@
 #include "lost/gl/ShaderHelper.h"
 #include "lost/rg/Node.h"
 #include "lost/meter/Meter.h"
+#include "lost/font/TrueTypeFont.h"
 
 struct MeshTest : public lost::application::UiTasklet
 {  
@@ -25,7 +26,7 @@ struct MeshTest : public lost::application::UiTasklet
 
   lost::mesh::MeshPtr           cube;  
   lost::rg::NodePtr             scene;
-  
+  lost::font::TrueTypeFontPtr   ttf;
   lost::meter::MeterPtr meter;
 
   double passedSec;  
