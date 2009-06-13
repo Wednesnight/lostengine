@@ -21,6 +21,8 @@ namespace lost
         Library();
         virtual ~Library();
 
+        static LibraryPtr create() { return LibraryPtr(new Library); }
+
         FT_Library    library;
       };
     }

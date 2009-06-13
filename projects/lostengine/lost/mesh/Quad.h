@@ -108,7 +108,7 @@ struct Quad : public MESHTYPE
     this->transferTexCoords();    
   }
   
-  // creates a group of independent rects, all insdide one mesh
+  // creates a group of independent rects, all inside one mesh
   Quad(const std::vector<math::Rect>& rects)
   {
     this->drawMode = GL_TRIANGLES;
@@ -127,6 +127,42 @@ struct Quad : public MESHTYPE
     }
     this->transferIndices();
     this->transferVertices();
+  }
+  
+  // tries to create rects.size() number of quads, texturing them with tex, using the provided 
+  // pixelCoords to calculate texture cooridnates.
+  // rects.size() must be equal to pixelCoords.size() or it will throw.
+  Quad(const std::vector<math::Rect>& rects,
+       gl::TexturePtr tex,
+       const std::vector<math::Rect>& pixelCoords,
+       bool flip)
+  {
+    if(rects.size() != pixelCoords.size())
+    {
+      throw std::runtime_error("size of rects and pixelCoords must match");
+    }
+    this->drawMode = GL_TRIANGLES;
+    createDefaultMaterial();
+    this->material->textures.push_back(tex);
+    boost::uint32_t numQuads = rects.size();
+    boost::uint32_t numVertices = numQuads*4;
+    boost::uint32_t numIndices = numQuads*6;
+    boost::uint32_t numTexCoords = numVertices;
+    this->indices(true);
+    this->vertices(true);
+    this->texCoords(true);
+    this->resetIndices(numIndices);
+    this->resetVertices(numVertices);
+    this->resetTexCoords(numTexCoords);
+    for(boost::uint32_t i=0; i<numQuads; ++i)
+    {
+      createIndices(i);
+      createVertices(i, rects[i]);
+      createTexCoords(i, 0, pixelCoords[i], flip);
+    }
+    this->transferIndices();
+    this->transferVertices();
+    this->transferTexCoords();        
   }
   
   static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
