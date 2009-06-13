@@ -124,43 +124,21 @@ void TrueTypeFont::rebuildTextureAtlas()
   // glyphs that were rendered in a previous pass should end up in the same spot in the atlas since we forced the packer to omit sorting
   atlas.reset(new gl::Texture(packerResult.packedBitmap));
   
+  ///-----DEBUG
+  packerResult.packedBitmap->write("/Users/tony/atlas.tga");
+  ///-----DEBUG
+  
+  
   // tell the glyphs where they are in the atlas texture in tex coords
   // the rects are reordered in the result, but the bitmapids are preserved in the vector of the same name
   for(uint32_t j=0; j<packerResult.rects.size(); ++j)
   {
     glyphs[glyphIndex[packerResult.bitmapIds[j]]]->rect = packerResult.rects[j];
-  }
-  
-  // recalculate glyph texture coords
-  // origin is bottom left corner, (0/0), for both bitmap and texture
-  for(uint32_t k=0; k<glyphs.size(); ++k)
-  {
-    lost::shared_ptr<Glyph> g = glyphs[k];
-    float tw = (float)atlas->dataWidth;
-    float th = (float)atlas->dataHeight;
-    g->bl = Vec2((g->rect.x)/tw, (g->rect.y)/th);
-    g->br = Vec2((g->rect.maxX()+1.0f)/tw, (g->rect.y)/th);
-    g->tl = Vec2((g->rect.x)/tw, (g->rect.maxY()+1.0f)/th);
-    g->tr = Vec2((g->rect.maxX()+1.0f)/tw, (g->rect.maxY()+1.0f)/th);
-  }
+  }  
 }
 
-void TrueTypeFont::resetModel(ModelPtr model, uint32_t numChars)
-{
-  uint32_t numVertsPerChar = 4;
-  model->vertexCount = numChars*numVertsPerChar;
-  uint32_t numCoordsPerVert = 2;
-  model->vertices.reset(new float[model->vertexCount*numCoordsPerVert]); 
-  model->texcoords.reset(new float[model->vertexCount*numCoordsPerVert]); 
-  uint32_t trisPerChar = 2;
-  uint32_t vertsPerTri = 3;
-  model->indexCount = trisPerChar*vertsPerTri*numChars;
-  model->indices.reset(new uint8_t[model->indexCount]);
-  model->texture = atlas;
-}
-
-void TrueTypeFont::addGlyph(ModelPtr model,
-                            uint32_t index,
+void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects, 
+                            std::vector<math::Rect>& pixelCoordRects,
                             GlyphPtr glyph,
                             float xoffset,
                             lost::math::Vec2& pmin,
@@ -170,71 +148,17 @@ void TrueTypeFont::addGlyph(ModelPtr model,
   tr.x = xoffset+glyph->xoffset;
   tr.y = (float)glyph->yoffset;
   
-  pmin.x = min(pmin.x, tr.x-0.5f);
-  pmin.y = min(pmin.y, tr.y-0.5f);
+  characterRects.push_back(tr);
+  pixelCoordRects.push_back(glyph->rect);
+  
+  pmin.x = min(pmin.x, tr.x);
+  pmin.y = min(pmin.y, tr.y);
 
-  pmax.x = max(pmax.x, tr.maxX()+0.5f);
-  pmax.y = max(pmax.y, tr.maxY()+0.5f);
-  
-  uint32_t indicesPerChar = 6; // 2 tris a 3 points
-  uint32_t indexOffset = indicesPerChar*index;
-  uint32_t vertsPerChar = 4;
-  uint32_t vertsOffset = vertsPerChar*index;
-  
-  model->indices[indexOffset+0] = (boost::uint8_t)vertsOffset+0;
-  model->indices[indexOffset+1] = (boost::uint8_t)vertsOffset+2;
-  model->indices[indexOffset+2] = (boost::uint8_t)vertsOffset+3;
-  model->indices[indexOffset+3] = (boost::uint8_t)vertsOffset+0;
-  model->indices[indexOffset+4] = (boost::uint8_t)vertsOffset+1;
-  model->indices[indexOffset+5] = (boost::uint8_t)vertsOffset+2;
-  
-  uint32_t coordsPerChar = 8; // 4 verts a 2 coords
-  uint32_t coordOffset = coordsPerChar*index;
-  
-  model->vertices[coordOffset+0] = tr.x-0.5f;
-  model->vertices[coordOffset+1] = tr.y-0.5f;
-  model->vertices[coordOffset+2] = tr.maxX()+0.5f;
-  model->vertices[coordOffset+3] = tr.y-0.5f;
-  model->vertices[coordOffset+4] = tr.maxX()+0.5f;
-  model->vertices[coordOffset+5] = tr.maxY()+0.5f;
-  model->vertices[coordOffset+6] = tr.x-0.5f;
-  model->vertices[coordOffset+7] = tr.maxY()+0.5f;
-  
-  model->texcoords[coordOffset+0] = glyph->bl.x;
-  model->texcoords[coordOffset+1] = glyph->bl.y;
-  model->texcoords[coordOffset+2] = glyph->br.x;
-  model->texcoords[coordOffset+3] = glyph->br.y;
-  model->texcoords[coordOffset+4] = glyph->tr.x;
-  model->texcoords[coordOffset+5] = glyph->tr.y;
-  model->texcoords[coordOffset+6] = glyph->tl.x;
-  model->texcoords[coordOffset+7] = glyph->tl.y;  
+  pmax.x = max(pmax.x, tr.maxX());
+  pmax.y = max(pmax.y, tr.maxY());
 }
 
-uint32_t TrueTypeFont::countAndFlagDrawableChars(const ftxt::utf32_string& inText,
-                                            uint32_t inSizeInPoints)
-{
-  uint32_t result = 0;
-  
-  for(uint32_t i=0; i<inText.size(); ++i)
-  {
-    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
-    if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
-    {
-      result++;
-      glyph->drawable = true;
-    }
-    else
-    {
-      if(glyph)
-        glyph->drawable = false;
-    }
-  }
-  
-  return result;
-}
-
-
-ModelPtr TrueTypeFont::render(const std::string & inText,
+RenderedTextPtr TrueTypeFont::render(const std::string & inText,
                                 boost::uint32_t inSizeInPoints)
 {
   DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
@@ -251,11 +175,15 @@ ModelPtr TrueTypeFont::render(const std::string & inText,
   
 
   
-ModelPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
+RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
                               uint32_t inSizeInPoints)
 {
   DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
-  ModelPtr  result(new Model);
+  // these arrays will receive the character geometry in space, relative to a 0,0 baseline
+  // and the corresponding pixel coordinates of the subtexture within the font texture atlas
+  // used to draw the character
+  std::vector<math::Rect> characterRects;
+  std::vector<math::Rect> pixelCoordRects;
   
   // render glyphs if required
   uint32_t renderedGlyphs = 0;
@@ -270,8 +198,7 @@ ModelPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
     rebuildTextureAtlas();
   
   // build model from scratch with the infos gathered 
-  uint32_t drawableChars = countAndFlagDrawableChars(inText, inSizeInPoints);
-  resetModel(result, drawableChars);
+//  uint32_t drawableChars = countAndFlagDrawableChars(inText, inSizeInPoints);
   float xoffset = 0;
   
   // kerning setup
@@ -303,16 +230,20 @@ ModelPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
 
     if (glyph->drawable)
     {
-      addGlyph(result, addIndex, glyph, xoffset, pmin, pmax);
+      addGlyph(characterRects, pixelCoordRects, glyph, xoffset, pmin, pmax);
       addIndex++;
     }
     xoffset+=glyph->advance;
   }
 
+  RenderedTextPtr result(new RenderedText(characterRects, atlas, pixelCoordRects));
   result->min = pmin;
   result->max = pmax;
   result->size.width = (pmax.x-pmin.x)+1;  
-  result->size.height = (pmax.y-pmin.y)+1;  
+  result->size.height = (pmax.y-pmin.y)+1;
+  result->material->blend = true;
+  result->material->blendSrc = GL_SRC_ALPHA;
+  result->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
   return result;
 }
 

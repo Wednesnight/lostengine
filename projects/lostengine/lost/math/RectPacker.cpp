@@ -178,7 +178,7 @@ bool RectPacker::pack(boost::int32_t sourceRectId)
 //  DOUT("iterations: "<<iterations<<" nodes: "<<nodes.size());
   sumIter += iterations;
   sumNodes += nodes.size();
-  checkOverlap();
+//  checkOverlap();
   return foundNode;
 }
 

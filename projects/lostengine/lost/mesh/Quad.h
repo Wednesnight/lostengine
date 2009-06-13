@@ -279,7 +279,7 @@ struct Quad : public MESHTYPE
       texcoords[offset+1].y = bl.y;
 
       texcoords[offset+2].x = tr.x;
-      texcoords[offset+2].y = bl.y;
+      texcoords[offset+2].y = tr.y;
 
       texcoords[offset+3].x = bl.x;
       texcoords[offset+3].y = tr.y;        

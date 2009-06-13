@@ -27,7 +27,8 @@ struct MeshTest : public lost::application::UiTasklet
   lost::mesh::MeshPtr           cube;  
   lost::rg::NodePtr             scene;
   lost::font::TrueTypeFontPtr   ttf;
-  lost::meter::MeterPtr meter;
+  lost::font::RenderedTextPtr   txt;
+  lost::meter::MeterPtr         meter;
 
   double passedSec;  
   float angle;

@@ -17,8 +17,23 @@ struct Material
 {
   std::vector<gl::TexturePtr> textures;
   common::Color               color;
+  bool                        blend;
+  GLenum                      blendSrc;
+  GLenum                      blendDest;
   gl::ShaderProgramPtr        shader;
   // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
+  
+  Material()
+  {
+    // only initialise scalar values, all others will be set by their respective constructors
+    blend = false;
+    blendSrc = GL_SRC_ALPHA;
+    blendDest = GL_ONE_MINUS_SRC_ALPHA; 
+  }
+  
+  virtual ~Material()
+  {
+  }
   
   static MaterialPtr create()
   {

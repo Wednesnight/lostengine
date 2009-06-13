@@ -328,8 +328,6 @@
 		3E5323690F15185000D7C8B4 /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323120F15185000D7C8B4 /* lapi.c */; };
 		3E53236A0F15185000D7C8B4 /* lcode.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323130F15185000D7C8B4 /* lcode.c */; };
 		3E53236B0F15185000D7C8B4 /* lgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323140F15185000D7C8B4 /* lgc.c */; };
-		3E6C14AC0EE82B21002B0EA7 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
-		3E6C14AD0EE82B22002B0EA7 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
 		3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
 		3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
 		3E73254D0E5CE3A4000FF838 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
@@ -970,7 +968,6 @@
 		EA1BF6E10F67445300862B2F /* Checks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6D20F67445300862B2F /* Checks.cpp */; };
 		EA1BF6E40F67445D00862B2F /* TimeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */; };
 		EA1BF6E50F67445D00862B2F /* SignalTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */; };
-		EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1D54EB0EB34E0400591811 /* Model.cpp */; };
 		EA26B90F0F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
 		EA26B9100F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
 		EA26B9110F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
@@ -1442,7 +1439,6 @@
 		EA1BF6D20F67445300862B2F /* Checks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Checks.cpp; path = "../../../thirdparty/UnitTest++/include/Checks.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeHelpers.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SignalTranslator.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp"; sourceTree = SOURCE_ROOT; };
-		EA1D54EB0EB34E0400591811 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
 		EA26B90E0F91481A00318279 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = resource/File.cpp; sourceTree = "<group>"; };
 		EA26B9190F91494400318279 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = resource/Loader.cpp; sourceTree = "<group>"; };
 		EA26B9270F91498E00318279 /* DefaultLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLoader.cpp; path = resource/DefaultLoader.cpp; sourceTree = "<group>"; };
@@ -2228,7 +2224,6 @@
 			isa = PBXGroup;
 			children = (
 				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
-				EA1D54EB0EB34E0400591811 /* Model.cpp */,
 				EA3B94970E04639D00B6423B /* freetype */,
 			);
 			path = font;
@@ -2549,7 +2544,6 @@
 				EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */,
 				EA15B4980EE31EB600672EF4 /* Source.cpp in Sources */,
-				3E6C14AD0EE82B22002B0EA7 /* Model.cpp in Sources */,
 				3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */,
 				EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 				3E27FE640EFAB09C00DFF147 /* LostLGL.cpp in Sources */,
@@ -2862,7 +2856,6 @@
 				3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
 				3E3B3E420E9D6E6500DD2D4E /* EventDispatcher.cpp in Sources */,
 				3E20607F0E9E066D0042BC53 /* BindingHelpers.cpp in Sources */,
-				EA1D54EF0EB34E0400591811 /* Model.cpp in Sources */,
 				EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */,
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
@@ -3349,7 +3342,6 @@
 				EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
 				EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */,
 				EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */,
-				3E6C14AC0EE82B21002B0EA7 /* Model.cpp in Sources */,
 				3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */,
 				EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 				3E27FE680EFAB09C00DFF147 /* LostLGL.cpp in Sources */,

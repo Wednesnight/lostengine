@@ -46,7 +46,7 @@ lostrg:Scene
       mesh = lostmesh:Quad2D
       {
         texture = zimtex,
-        flip = true,
+        flip = false,
         size = Vec2(640,480)
       }
     },
