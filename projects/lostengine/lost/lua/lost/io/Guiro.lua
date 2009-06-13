@@ -2,7 +2,7 @@ require("lost.guiro.config")
 
 require("lost.io.Loader")
 
-require("lost.io.guiro.File")
+--require("lost.io.guiro.File")
 require("lost.io.guiro.Font")
 
 require("lost.io.guiro.Screen")
