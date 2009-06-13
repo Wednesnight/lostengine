@@ -13,30 +13,18 @@ struct Line : public MESHTYPE
 {
   typedef typename MESHTYPE::VertexType VertexType;
 
-  VertexType vertices[2];
-  uint32_t    dataSize;
-  void init()
-  {
-    MESHTYPE::vertices(true); // create vertex array
-    MESHTYPE::indices(true);  // create index array
-    MESHTYPE::vertexBuffer->bindBufferData(NULL, 2); // create empty buffer    
-    typename MESHTYPE::IndexType idx[2];
-    idx[0] = 0;
-    idx[1] = 1;
-    MESHTYPE::indexBuffer->bindBufferData(idx, 2);
-    dataSize = sizeof(vertices);
-    MESHTYPE::drawMode = GL_LINES;
-  }
-
   Line(const VertexType& start, const VertexType& end)
   {
-    init();
-    update(start, end);
+    this->drawMode = GL_LINES;
   }
   
   Line()
   {
-    init();
+    this->drawMode = GL_LINES;
+  }
+
+  virtual ~Line()
+  {
   }
 
   static lost::shared_ptr<Line<MESHTYPE> > create()
@@ -49,21 +37,6 @@ struct Line : public MESHTYPE
     return lost::shared_ptr<Line<MESHTYPE> >(new Line<MESHTYPE>(start, end));
   }
   
-  virtual ~Line()
-  {
-  }
-  
-  void update(const VertexType& inStart, const VertexType& inEnd)
-  {
-//    float voffsetx = MESHTYPE::OffsetVectorType::x();
-//    float voffsety = MESHTYPE::OffsetVectorType::y();
-  
-    vertices[0].x = inStart.x;
-    vertices[0].y = inStart.y;
-    vertices[1].x = inEnd.x;
-    vertices[1].y = inEnd.y;
-    MESHTYPE::vertexBuffer->bindBufferSubData(0,dataSize, vertices);
-  }
 };
 
 typedef Line<Mesh2D> Line2D;

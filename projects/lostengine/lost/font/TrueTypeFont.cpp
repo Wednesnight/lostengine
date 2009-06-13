@@ -122,7 +122,15 @@ void TrueTypeFont::rebuildTextureAtlas()
     
   // recreate atlas texture from current packed bitmap
   // glyphs that were rendered in a previous pass should end up in the same spot in the atlas since we forced the packer to omit sorting
-  atlas.reset(new gl::Texture(packerResult.packedBitmap));
+  if(!atlas)
+  {
+    atlas.reset(new gl::Texture(packerResult.packedBitmap));
+  }
+  else
+  {
+    DOUT("reinitialising bitmap");
+    atlas->init(packerResult.packedBitmap);
+  }
   
   // tell the glyphs where they are in the atlas texture in tex coords
   // the rects are reordered in the result, but the bitmapids are preserved in the vector of the same name
