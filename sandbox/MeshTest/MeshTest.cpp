@@ -71,6 +71,20 @@ bool MeshTest::startup()
     atlas->material->blend = true;
     atlas->modelTransform = MatrixTranslation(Vec3(50,100,0));
     bg->add(rg::Draw::create(atlas));
+    MeshPtr testLine = Line2D::create(Vec2(0,0), Vec2(639,479));
+    testLine->material->color = common::greenColor;
+    bg->add(rg::Draw::create(testLine));
+    
+    std::vector<Vec2> v;
+    v.push_back(Vec2(10,100));
+    v.push_back(Vec2(20,150));
+    v.push_back(Vec2(30,90));
+    v.push_back(Vec2(45,400));
+    v.push_back(Vec2(47,190));
+    MeshPtr multiLines = Line2D::create(v);
+    multiLines->material->color = common::yellowColor;
+    bg->add(rg::Draw::create(multiLines));
+    
   }
   
   return result;
