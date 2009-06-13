@@ -168,7 +168,23 @@ RenderedTextPtr TrueTypeFont::render(const std::string & inText,
   return render(target, inSizeInPoints);
 }
   
-
+void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText,
+                                     uint32_t inSizeInPoints)
+{
+  for(uint32_t i=0; i<inText.size(); ++i)
+  {
+    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
+    if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
+    {
+      glyph->drawable = true;
+    }
+    else
+    {
+      if(glyph)
+        glyph->drawable = false;
+    }
+  }
+}
   
 RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
                               uint32_t inSizeInPoints)
@@ -179,7 +195,7 @@ RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
   // used to draw the character
   std::vector<math::Rect> characterRects;
   std::vector<math::Rect> pixelCoordRects;
-  
+    
   // render glyphs if required
   uint32_t renderedGlyphs = 0;
   for(unsigned int i=0; i<inText.length(); ++i)
@@ -191,9 +207,11 @@ RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
   // rebuild atlas if any new glyphs were rendered
   if(renderedGlyphs > 0)
     rebuildTextureAtlas();
-  
-  // build model from scratch with the infos gathered 
-//  uint32_t drawableChars = countAndFlagDrawableChars(inText, inSizeInPoints);
+
+  // flag drawable characters AFTER the bitmaps have been created so we can distinguish between
+  // drawables and non-darwables. This is important so we don't create geometry for characters
+  // that don't need any (spaces)
+  flagDrawableChars(inText, inSizeInPoints);
   float xoffset = 0;
   
   // kerning setup

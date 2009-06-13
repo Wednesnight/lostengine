@@ -81,6 +81,9 @@ struct TrueTypeFont
    *  
    */
   void rebuildTextureAtlas();
+
+  void flagDrawableChars(const fhtagn::text::utf32_string& inText,
+                         uint32_t inSizeInPoints);
   
   void addGlyph(std::vector<math::Rect>& characterRects, // receives a rect that describes character quad geometry 
                 std::vector<math::Rect>& pixelCoordRects, // receives a rect that describes the character quads subtexture inside the font texture atlas
