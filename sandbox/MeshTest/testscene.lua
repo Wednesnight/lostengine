@@ -5,10 +5,9 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local cam3dPosition = Vec3(1,2,2)
 
-local ttflib = lost.font.freetype.Library.create()
-local ttf = lost.font.TrueTypeFont.create(ttflib, lostresource:File("Vera.ttf"))
-local renderedText = ttf:render("Hello from Lua!", 12)
+local renderedText = verattf:render("Hello from Lua!", 12)
 renderedText.modelTransform = MatrixTranslation(Vec3(200,10,0))
+
 local zimtex = lostgl:Texture
 {
   filename = "zim.png"

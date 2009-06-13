@@ -31,11 +31,13 @@ MeshTest::MeshTest()
 
 bool MeshTest::startup()
 {
+  bool result = Tasklet::startup();
+
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
 
   // initialize font
-  ttf = TrueTypeFontPtr(new TrueTypeFont(font::freetype::Library::create(), loader->load("Vera.ttf")));
+  ttf = lua->globals["verattf"];
   txt = ttf->render("   Subbele, VA filrgb Meine Fresse, es geht! blö", 20);
 
   meter.reset(new Meter());
@@ -49,7 +51,6 @@ bool MeshTest::startup()
   }
   Quad2DPtr quads = Quad2D::create(rects);
 
-  bool result = Tasklet::startup();
   if (result)
   {    
     scene = lua->globals["scene"]; // required for drawing

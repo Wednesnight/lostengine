@@ -29,6 +29,7 @@ struct Material
     blend = false;
     blendSrc = GL_SRC_ALPHA;
     blendDest = GL_ONE_MINUS_SRC_ALPHA; 
+    color = common::whiteColor;
   }
   
   virtual ~Material()
