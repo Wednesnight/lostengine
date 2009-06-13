@@ -22,25 +22,16 @@ struct Quad : public MESHTYPE
   typedef typename MESHTYPE::IndexType IndexType;
   typedef typename MESHTYPE::TexCoordType TexCoordType;
 
-  void createDefaultMaterial()
-  {
-    // material defaults to white color without texture
-    this->material.reset(new Material);
-    this->material->color = common::whiteColor;  
-  }
-
   // doesn't create any data or buffers, only a quad with a default drawMode and Material
   Quad()
   {
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
   }
   
   // creates a white rectangle with the given size and position.
   Quad(const math::Rect& inRect)
   {
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
     boost::uint32_t numQuads = 1;
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
@@ -62,7 +53,6 @@ struct Quad : public MESHTYPE
   Quad(resource::FilePtr data, bool flip=true)
   {
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
     gl::TexturePtr tex(new gl::Texture(data));
     math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
     this->material->textures.push_back(tex);
@@ -87,7 +77,6 @@ struct Quad : public MESHTYPE
   Quad(gl::TexturePtr tex, bool flip=true)
   {
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
     math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
     this->material->textures.push_back(tex);
     boost::uint32_t numQuads = 1;
@@ -112,7 +101,6 @@ struct Quad : public MESHTYPE
   Quad(const std::vector<math::Rect>& rects)
   {
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
     boost::uint32_t numQuads = rects.size();
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
@@ -142,7 +130,6 @@ struct Quad : public MESHTYPE
       throw std::runtime_error("size of rects and pixelCoords must match");
     }
     this->drawMode = GL_TRIANGLES;
-    createDefaultMaterial();
     this->material->textures.push_back(tex);
     boost::uint32_t numQuads = rects.size();
     boost::uint32_t numVertices = numQuads*4;
