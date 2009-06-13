@@ -36,6 +36,7 @@ bool MeshTest::startup()
 
   // initialize font
   ttf = TrueTypeFontPtr(new TrueTypeFont(font::freetype::Library::create(), loader->load("Vera.ttf")));
+  txt = ttf->render("Subbele, VA filrgb Meine Fresse, es geht! blö", 20);
 
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
@@ -63,6 +64,12 @@ bool MeshTest::startup()
     }
     rg::NodePtr bg = scene->recursiveFindByName("2D Background");
     bg->add(rg::Draw::create(quads));
+    txt->modelTransform = MatrixTranslation(Vec3(50,50,0));
+    bg->add(rg::Draw::create(txt));
+    MeshPtr atlas = Quad2D::create(ttf->atlas, false);
+    atlas->material->blend = true;
+    atlas->modelTransform = MatrixTranslation(Vec3(50,100,0));
+    bg->add(rg::Draw::create(atlas));
   }
   
   return result;

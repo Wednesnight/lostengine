@@ -10,7 +10,7 @@
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
 #include "lost/resource/File.h"
-#include "lost/font/Model.h"
+#include "lost/font/RenderedText.h"
 #include "lost/gl/Texture.h"
 #include "lost/math/Vec2.h"
 #include "lost/bitmap/Bitmap.h"
@@ -30,11 +30,6 @@ struct TrueTypeFont
     Glyph();
     ~Glyph();
     lost::math::Rect  rect; // the glyphs bitmaps rect inside the atlas texture
-    // texture coordinates for drawing a quad
-    lost::math::Vec2  bl;
-    lost::math::Vec2  br;
-    lost::math::Vec2  tl;
-    lost::math::Vec2  tr;
     
     int32_t xoffset;
     int32_t yoffset;
@@ -65,11 +60,13 @@ struct TrueTypeFont
    *  @param inText         the text to render.
    *  @param inSizeInPoints pointsize for the rendered text.
    *
+   *  @return a Mesh 
+   *
    */
-  ModelPtr render(const fhtagn::text::utf32_string& inText,
+  RenderedTextPtr render(const fhtagn::text::utf32_string& inText,
                   boost::uint32_t inSizeInPoints);
 
-  ModelPtr render(const std::string & inText,
+  RenderedTextPtr render(const std::string & inText,
                   boost::uint32_t inSizeInPoints);
   
   
@@ -85,26 +82,12 @@ struct TrueTypeFont
    */
   void rebuildTextureAtlas();
   
-
-  /** sets up internal model data structures so they can contain the given number of characters.
-   */
-  void resetModel(ModelPtr model, boost::uint32_t numChars);  
-
-  void addGlyph(ModelPtr model,
-                boost::uint32_t index,
-                GlyphPtr glyph,
-                float xoffset,
-                lost::math::Vec2& pmin,
-                lost::math::Vec2& pmax);
-
-  /** returns the number of characters that are actually displayable 
-   * and have a non-degenerate bitmap.
-   * E.g. spaces will not be rendered as a mesh, but the following mesh segment
-   * will simply be moved further.
-   * Drawables will be flagged true, other will be flagged with drawable = false
-   */
-  boost::uint32_t countAndFlagDrawableChars(const fhtagn::text::utf32_string& inText,
-                                            boost::uint32_t inSizeInPoints);
+  void addGlyph(std::vector<math::Rect>& characterRects, // receives a rect that describes character quad geometry 
+                std::vector<math::Rect>& pixelCoordRects, // receives a rect that describes the character quads subtexture inside the font texture atlas
+                GlyphPtr glyph, // the glyph from which to build the new character
+                float xoffset, // horizontal offset of the new character within the rendered string
+                lost::math::Vec2& pmin, // will be updated with new min values
+                lost::math::Vec2& pmax); // will be updated with new max values
   
   freetype::FacePtr face;
   freetype::LibraryPtr library;

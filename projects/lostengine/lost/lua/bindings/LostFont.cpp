@@ -2,7 +2,6 @@
 #include "lost/lua/lua.h"
 
 #include "lost/font/freetype/Library.h"
-#include "lost/font/Model.h"
 #include "lost/font/TrueTypeFont.h"
 
 using namespace luabind;
@@ -39,7 +38,7 @@ namespace lost
       ];
     }
 
-    void LostFontModel(lua_State* state)
+/*    void LostFontModel(lua_State* state)
     {
       module(state, "lost")
       [
@@ -53,14 +52,14 @@ namespace lost
             .def_readonly("size", &Model::size)
         ]
       ];
-    }
+    }*/
 
     shared_ptr<TrueTypeFont> createTTF(shared_ptr<freetype::Library> lib, shared_ptr<lost::resource::File> file)
     {
       return shared_ptr<TrueTypeFont>(new TrueTypeFont(lib, file));
     }
 
-    typedef lost::shared_ptr<Model> (TrueTypeFont::*render_func_t)(const std::string &, boost::uint32_t);
+//    typedef lost::shared_ptr<Model> (TrueTypeFont::*render_func_t)(const std::string &, boost::uint32_t);
 
     void LostFontTrueTypeFont(lua_State* state)
     {
@@ -70,7 +69,7 @@ namespace lost
         [
           class_<TrueTypeFont, shared_ptr<TrueTypeFont> >("TrueTypeFont")
             .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
-            .def("render", static_cast<render_func_t>(&TrueTypeFont::render))
+  //          .def("render", static_cast<render_func_t>(&TrueTypeFont::render))
             .scope
             [
               def("create", createTTF)
@@ -82,7 +81,7 @@ namespace lost
     void LostFont(lua_State* state)
     {
       LostFontFreetypeLibrary(state);
-      LostFontModel(state);
+//      LostFontModel(state);
       LostFontTrueTypeFont(state);
     }
 

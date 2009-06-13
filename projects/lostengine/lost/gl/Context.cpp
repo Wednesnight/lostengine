@@ -234,6 +234,15 @@ namespace lost
       {
         texture2D(false);
       }
+      if(mat->blend)
+      {
+        blend(true);
+        blendFunc(mat->blendSrc, mat->blendDest);
+      }
+      else
+      {
+        blend(false);
+      }
       shader(mat->shader);
     }
     
