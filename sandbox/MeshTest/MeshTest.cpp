@@ -36,7 +36,7 @@ bool MeshTest::startup()
 
   // initialize font
   ttf = TrueTypeFontPtr(new TrueTypeFont(font::freetype::Library::create(), loader->load("Vera.ttf")));
-  txt = ttf->render("Subbele, VA filrgb Meine Fresse, es geht! blö", 20);
+  txt = ttf->render("   Subbele, VA filrgb Meine Fresse, es geht! blö", 20);
 
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
