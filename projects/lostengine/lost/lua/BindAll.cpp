@@ -50,6 +50,7 @@ namespace lost
       LostBitmap(state);
       LostCamera(state);
       LostCommon(state);
+      LostMesh(state); // must bind mesh before font since font already requires the binding for inheritance
       LostFont(state);
       LostGL(state);
       LostLGL(state);
@@ -58,7 +59,6 @@ namespace lost
       LostMath(state);
       LostPlatform(state);
       LostResource(state);
-      LostMesh(state);
       LostRg(state);
       
       luabind::bind_class_info(state);

@@ -28,3 +28,7 @@ function Loader:executeScript(filename, environment)
     log.error("error while loading '".. filename .."': ".. error)
   end
 end
+
+function Loader:File(filename)
+  return self.loader:load(filename)
+end
