@@ -1,3 +1,5 @@
+require("settings")
+
 local Rect = lost.math.Rect
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
@@ -5,8 +7,6 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local cam3dPosition = Vec3(1,2,2)
 
-local renderedText = verattf:render("Hello from Lua!", 12)
-renderedText.modelTransform = MatrixTranslation(Vec3(200,10,0))
 
 local zimtex = lostgl:Texture
 {
@@ -75,11 +75,6 @@ lostrg:Scene
           color = Color(1,0,0)
         }
       }
-    },
-    lostrg:Draw
-    {
-      name = "text rendered fro lua script",
-      mesh = renderedText
     }    
   },
   lostrg:Node

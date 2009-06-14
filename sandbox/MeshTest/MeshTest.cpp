@@ -32,13 +32,13 @@ MeshTest::MeshTest()
 bool MeshTest::startup()
 {
   bool result = Tasklet::startup();
-
+  if(!result)
+  {
+    EOUT("Tasklet::startup() failed, aborting");
+    return false;
+  }
   // key handlers
-  eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyHandler, this, _1)));
-
-  // initialize font
-  ttf = lua->globals["verattf"];
-  txt = ttf->render("   Subbele, VA filrgb Meine Fresse, es geht! blö", 20);
+  eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyDownHandler, this, _1)));
 
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
@@ -51,41 +51,35 @@ bool MeshTest::startup()
   }
   Quad2DPtr quads = Quad2D::create(rects);
 
-  if (result)
-  {    
-    scene = lua->globals["scene"]; // required for drawing
-    rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(scene->recursiveFindByName("cube"));
-    if(cubeDrawNode) // required for updates
-    {
-      cube = cubeDrawNode->mesh;
-    }
-    else
-    {
-      EOUT("CUBE NOT FOUND !!!!");
-    }
-    rg::NodePtr bg = scene->recursiveFindByName("2D Background");
-    bg->add(rg::Draw::create(quads));
-    txt->modelTransform = MatrixTranslation(Vec3(50,50,0));
-    bg->add(rg::Draw::create(txt));
-    MeshPtr atlas = Quad2D::create(ttf->atlas, false);
-    atlas->material->blend = true;
-    atlas->modelTransform = MatrixTranslation(Vec3(50,100,0));
-    bg->add(rg::Draw::create(atlas));
-    MeshPtr testLine = Line2D::create(Vec2(0,0), Vec2(639,479));
-    testLine->material->color = common::greenColor;
-    bg->add(rg::Draw::create(testLine));
-    
-    std::vector<Vec2> v;
-    v.push_back(Vec2(10,100));
-    v.push_back(Vec2(20,150));
-    v.push_back(Vec2(30,90));
-    v.push_back(Vec2(45,400));
-    v.push_back(Vec2(47,190));
-    MeshPtr multiLines = Line2D::create(v);
-    multiLines->material->color = common::yellowColor;
-    bg->add(rg::Draw::create(multiLines));
-    
+  scene = lua->globals["scene"]; // required for drawing
+  threedScene = lua->globals["threedScene"];
+  textScene = lua->globals["textScene"];
+  rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(scene->recursiveFindByName("cube"));
+  if(cubeDrawNode) // required for updates
+  {
+    cube = cubeDrawNode->mesh;
   }
+  else
+  {
+    EOUT("CUBE NOT FOUND !!!!");
+  }
+  rg::NodePtr bg = scene->recursiveFindByName("2D Background");
+  bg->add(rg::Draw::create(quads));
+  MeshPtr testLine = Line2D::create(Vec2(0,0), Vec2(639,479));
+  testLine->material->color = common::greenColor;
+  bg->add(rg::Draw::create(testLine));
+  
+  std::vector<Vec2> v;
+  v.push_back(Vec2(10,100));
+  v.push_back(Vec2(20,150));
+  v.push_back(Vec2(30,90));
+  v.push_back(Vec2(45,400));
+  v.push_back(Vec2(47,190));
+  MeshPtr multiLines = Line2D::create(v);
+  multiLines->material->color = common::yellowColor;
+  bg->add(rg::Draw::create(multiLines));
+  
+  activeScene = scene;
   
   return result;
 }
@@ -101,7 +95,10 @@ void MeshTest::update(double dt)
 
 void MeshTest::draw()
 {
-  scene->process(window->context);
+  if(activeScene)
+    activeScene->process(window->context);
+  else
+    DOUT("scene is NULL!");
   window->context->swapBuffers();  
 }
 
@@ -112,7 +109,7 @@ bool MeshTest::main()
   update(delta);
   draw();
     
-  meter->update(1.0f/delta);
+//  meter->update(1.0f/delta);
   passedSec = currentSec; 
   return true;
 }
@@ -122,9 +119,15 @@ bool MeshTest::shutdown()
   return true;
 }
 
-void MeshTest::keyHandler(KeyEventPtr event)
+void MeshTest::keyDownHandler(KeyEventPtr event)
 {
-  DOUT("");
   if (event->key == K_ESCAPE) 
     eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+
+  switch(event->key)
+  {
+    case K_1:activeScene = scene;break;
+    case K_2:activeScene = threedScene;break;
+    case K_3:activeScene = textScene;break;
+  }
 }

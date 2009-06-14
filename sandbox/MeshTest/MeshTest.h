@@ -22,12 +22,13 @@ struct MeshTest : public lost::application::UiTasklet
   void update(double dt);
   void draw();
 
-  void keyHandler(lost::application::KeyEventPtr event);
+  void keyDownHandler(lost::application::KeyEventPtr event);
 
   lost::mesh::MeshPtr           cube;  
   lost::rg::NodePtr             scene;
-  lost::font::TrueTypeFontPtr   ttf;
-  lost::font::RenderedTextPtr   txt;
+  lost::rg::NodePtr             threedScene;
+  lost::rg::NodePtr             textScene;
+  lost::rg::NodePtr             activeScene;
   lost::meter::MeterPtr         meter;
 
   double passedSec;  

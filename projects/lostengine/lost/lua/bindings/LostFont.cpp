@@ -73,6 +73,7 @@ namespace lost
           class_<TrueTypeFont, shared_ptr<TrueTypeFont> >("TrueTypeFont")
             .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
             .def("render", renderCrippled)
+            .def_readonly("atlas", &TrueTypeFont::atlas)
             .scope
             [
               def("create", createTTF)
