@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		8DF928EA0F8EC1B4007A771A /* cube_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8DF928E90F8EC1B4007A771A /* cube_tri.obj */; };
+		EA1D2E200FE47B230067A1C9 /* textScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E1F0FE47B230067A1C9 /* textScene.lua */; };
+		EA1D2E220FE47B280067A1C9 /* 3dScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E210FE47B280067A1C9 /* 3dScene.lua */; };
+		EA1D2E280FE47B680067A1C9 /* settings.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E270FE47B680067A1C9 /* settings.lua */; };
 		EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */; };
 		EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */; };
 		EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */; };
@@ -70,6 +73,9 @@
 		8D1107320486CEB800E47090 /* MeshTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeshTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF928E90F8EC1B4007A771A /* cube_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube_tri.obj; path = ../../../data/obj/cube_tri.obj; sourceTree = SOURCE_ROOT; };
 		8DF928EC0F8EC1D0007A771A /* MeshTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeshTest.h; path = ../MeshTest.h; sourceTree = SOURCE_ROOT; };
+		EA1D2E1F0FE47B230067A1C9 /* textScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = textScene.lua; path = ../textScene.lua; sourceTree = SOURCE_ROOT; };
+		EA1D2E210FE47B280067A1C9 /* 3dScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 3dScene.lua; path = ../3dScene.lua; sourceTree = SOURCE_ROOT; };
+		EA1D2E270FE47B680067A1C9 /* settings.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = settings.lua; path = ../settings.lua; sourceTree = SOURCE_ROOT; };
 		EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -127,6 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				EACC7A300FA7B61D006762F0 /* testscene.lua */,
+				EA1D2E1F0FE47B230067A1C9 /* textScene.lua */,
+				EA1D2E210FE47B280067A1C9 /* 3dScene.lua */,
+				EA1D2E270FE47B680067A1C9 /* settings.lua */,
 				EAD616910F9CF8C400EBEDA6 /* main.lua */,
 				EABDD1620F9BF71100A5AB6B /* light.fs */,
 				EABDD1630F9BF71100A5AB6B /* light.vs */,
@@ -265,6 +274,9 @@
 				EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */,
 				EACC7A310FA7B61D006762F0 /* testscene.lua in Resources */,
 				EAAA8B120FE3242500285E96 /* Vera.ttf in Resources */,
+				EA1D2E200FE47B230067A1C9 /* textScene.lua in Resources */,
+				EA1D2E220FE47B280067A1C9 /* 3dScene.lua in Resources */,
+				EA1D2E280FE47B680067A1C9 /* settings.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

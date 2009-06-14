@@ -7,6 +7,7 @@ function startup(tasklet)
 
   local l = lost.io.Loader(tasklet.loader)
   scene = l:loadScene("testscene.lua")
-
+  threedScene = l:loadScene("3dScene.lua")
+  textScene = l:loadScene("textScene.lua")
   return true
 end

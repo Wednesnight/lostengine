@@ -30,6 +30,7 @@ function Loader:loadScene(filename)
   env.lostmesh = self -- FIXME we need to pull these subloaders apart
   env.lostgl = self -- FIXME we need to pull these subloaders apart
   env.lostresource = self -- FIXME we need to pull these subloaders apart
+  env.lostfont = self -- FIXME we need to pull these subloaders apart
 
   -- execute screen definition
   self:executeScript(filename, env)

@@ -61,6 +61,9 @@ namespace lost
             .def(constructor<>())
             .def_readwrite("shader", &Material::shader)
             .def_readwrite("color", &Material::color)
+            .def_readwrite("blend", &Material::blend)
+            .def_readwrite("blendSrc", &Material::blendSrc)
+            .def_readwrite("blendDest", &Material::blendDest)
             .scope
             [
               def("create", (MaterialPtr(*)())&Material::create)
