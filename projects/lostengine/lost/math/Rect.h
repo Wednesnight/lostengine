@@ -102,6 +102,13 @@ namespace math
     inline float top() const {return maxY();}
     inline float bottom() const {return y;}
 
+    inline Vec2 center() const
+    {
+      float cx = width / 2;
+      float cy = height / 2;
+      return Vec2(x+cx, y+cy);
+    }
+
     bool intersects(const Rect& r2) const
     {
       return (contains(r2.bottomLeft()) || contains(r2.bottomRight()) ||
