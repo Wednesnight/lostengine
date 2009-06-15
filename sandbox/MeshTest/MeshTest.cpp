@@ -7,6 +7,8 @@
 #include "lost/rg/DepthTest.h"
 #include "lost/rg/Camera.h"
 
+#include "lost/math/Bezier.h"
+
 using namespace std;
 using namespace lost;
 using namespace lost::gl;
@@ -26,6 +28,7 @@ MeshTest::MeshTest()
 {
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
+  animate = true;
 }
 
 
@@ -68,6 +71,36 @@ bool MeshTest::startup()
   MeshPtr testLine = Line2D::create(Vec2(0,0), Vec2(639,479));
   testLine->material->color = common::greenColor;
   bg->add(rg::Draw::create(testLine));
+
+  MeshPtr line = Line2D::create(Vec2(110,100), Vec2(120,150));
+  line->material->color = common::redColor;
+  bg->add(rg::Draw::create(line));
+  BezierPtr linearBezier = LinearBezier::create(Vec2(110,100), Vec2(120, 150));
+  MeshPtr linearBezierMesh = Line2D::create(linearBezier->points);
+  linearBezierMesh->material->color = common::whiteColor;
+  bg->add(rg::Draw::create(linearBezierMesh));
+  
+  line = Line2D::create(Vec2(160,100), Vec2(180,150));
+  line->material->color = common::redColor;
+  bg->add(rg::Draw::create(line));
+  line = Line2D::create(Vec2(180,150), Vec2(190,90));
+  line->material->color = common::redColor;
+  bg->add(rg::Draw::create(line));
+  BezierPtr quadraticBezier = QuadraticBezier::create(Vec2(160,100), Vec2(180, 150), Vec2(190, 90));
+  MeshPtr quadraticBezierMesh = Line2D::create(quadraticBezier->points);
+  quadraticBezierMesh->material->color = common::whiteColor;
+  bg->add(rg::Draw::create(quadraticBezierMesh));
+  
+  line = Line2D::create(Vec2(210,100), Vec2(220,150));
+  line->material->color = common::redColor;
+  bg->add(rg::Draw::create(line));
+  line = Line2D::create(Vec2(230,90), Vec2(245,120));
+  line->material->color = common::redColor;
+  bg->add(rg::Draw::create(line));
+  BezierPtr cubicBezier = CubicBezier::create(Vec2(210,100), Vec2(220, 150), Vec2(230, 90), Vec2(245, 120));
+  MeshPtr cubicBezierMesh = Line2D::create(cubicBezier->points);
+  cubicBezierMesh->material->color = common::whiteColor;
+  bg->add(rg::Draw::create(cubicBezierMesh));
   
   std::vector<Vec2> v;
   v.push_back(Vec2(10,100));
@@ -86,10 +119,13 @@ bool MeshTest::startup()
 
 void MeshTest::update(double dt)
 {
-  angle = fmod(dt*50+angle, 360);
-  if(cube)
+  if (animate)
   {
-    cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+    angle = fmod(dt*50+angle, 360);
+    if(cube)
+    {
+      cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+    }
   }
 }
 
@@ -129,5 +165,7 @@ void MeshTest::keyDownHandler(KeyEventPtr event)
     case K_1:activeScene = scene;break;
     case K_2:activeScene = threedScene;break;
     case K_3:activeScene = textScene;break;
+    case K_SPACE:animate = !animate;break;
   }
+  if (event->key != K_SPACE) animate = activeScene == scene;
 }

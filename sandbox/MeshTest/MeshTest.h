@@ -33,6 +33,7 @@ struct MeshTest : public lost::application::UiTasklet
 
   double passedSec;  
   float angle;
+  bool animate;
 };
 
 #endif
