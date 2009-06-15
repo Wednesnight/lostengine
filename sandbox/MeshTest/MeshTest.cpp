@@ -72,35 +72,51 @@ bool MeshTest::startup()
   testLine->material->color = common::greenColor;
   bg->add(rg::Draw::create(testLine));
 
+  /**
+     linear bezier curve including control points
+   */
   MeshPtr line = Line2D::create(Vec2(110,100), Vec2(120,150));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
-  BezierPtr linearBezier = LinearBezier::create(Vec2(110,100), Vec2(120, 150));
-  MeshPtr linearBezierMesh = Line2D::create(linearBezier->points);
-  linearBezierMesh->material->color = common::whiteColor;
-  bg->add(rg::Draw::create(linearBezierMesh));
+  LinearBezierPtr linearBezier = LinearBezier::create(Vec2(110,100), Vec2(120, 150));
+  bg->add(rg::Draw::create(Line2D::create(linearBezier->points)));
   
+  /**
+   quadratic bezier curve including control points
+   */
   line = Line2D::create(Vec2(160,100), Vec2(180,150));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
   line = Line2D::create(Vec2(180,150), Vec2(190,90));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
-  BezierPtr quadraticBezier = QuadraticBezier::create(Vec2(160,100), Vec2(180, 150), Vec2(190, 90));
-  MeshPtr quadraticBezierMesh = Line2D::create(quadraticBezier->points);
-  quadraticBezierMesh->material->color = common::whiteColor;
-  bg->add(rg::Draw::create(quadraticBezierMesh));
+  QuadraticBezierPtr quadraticBezier = QuadraticBezier::create(Vec2(160,100), Vec2(180, 150), Vec2(190, 90));
+  bg->add(rg::Draw::create(Line2D::create(quadraticBezier->points)));
   
+  /**
+   cubic bezier curve including control points
+   */
   line = Line2D::create(Vec2(210,100), Vec2(220,150));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
   line = Line2D::create(Vec2(230,90), Vec2(245,120));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
-  BezierPtr cubicBezier = CubicBezier::create(Vec2(210,100), Vec2(220, 150), Vec2(230, 90), Vec2(245, 120));
-  MeshPtr cubicBezierMesh = Line2D::create(cubicBezier->points);
-  cubicBezierMesh->material->color = common::whiteColor;
-  bg->add(rg::Draw::create(cubicBezierMesh));
+  CubicBezierPtr cubicBezier = CubicBezier::create(Vec2(210,100), Vec2(220, 150), Vec2(230, 90), Vec2(245, 120));
+  bg->add(rg::Draw::create(Line2D::create(cubicBezier->points)));
+
+  /**
+   standardized bezier curve, used to define rounded corners
+   */
+  Rect rect(300, 50, 100, 100);
+  QuadraticBezierPtr roundCorner = QuadraticBezier::create(rect.bottomLeft(), Vec2(1,1), 25);
+  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
+  roundCorner->update(rect.bottomRight(), Vec2(-1,1), 25);
+  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
+  roundCorner->update(rect.topRight(), Vec2(-1,-1), 25);
+  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
+  roundCorner->update(rect.topLeft(), Vec2(1,-1), 25);
+  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
   
   std::vector<Vec2> v;
   v.push_back(Vec2(10,100));
