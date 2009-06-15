@@ -13,11 +13,22 @@ namespace lost
 
     struct Bezier;
     typedef shared_ptr<Bezier> BezierPtr;
+    struct LinearBezier;
+    typedef shared_ptr<LinearBezier> LinearBezierPtr;
+    struct QuadraticBezier;
+    typedef shared_ptr<QuadraticBezier> QuadraticBezierPtr;
+    struct CubicBezier;
+    typedef shared_ptr<CubicBezier> CubicBezierPtr;
 
     struct Bezier
     {
     public:
       std::vector<Vec2> points;
+
+      static double defaultSteps()
+      {
+        return 10;
+      }
 
       // add methods like scale, ...
     };
@@ -25,8 +36,20 @@ namespace lost
     struct LinearBezier : public Bezier
     {
     private:
-      LinearBezier(const Vec2& p0, const Vec2& p1, const unsigned int steps = 10)
+      LinearBezier(const Vec2& p0, const Vec2& p1, const unsigned int steps = Bezier::defaultSteps())
       {
+        update(p0, p1, steps);
+      }
+
+    public:
+      static LinearBezierPtr create(const Vec2& p0, const Vec2& p1, const unsigned int steps = Bezier::defaultSteps())
+      {
+        return LinearBezierPtr(new LinearBezier(p0, p1, steps));
+      }
+
+      void update(const Vec2& p0, const Vec2& p1, const unsigned int steps = Bezier::defaultSteps())
+      {
+        points.clear();
         double stepSize = 1.0 / steps;
         double t = 0.0;
         Vec2 point;
@@ -39,19 +62,44 @@ namespace lost
         }
       }
 
-    public:
-      static BezierPtr create(const Vec2& p0, const Vec2& p1, const unsigned int steps = 10)
-      {
-        return BezierPtr(new LinearBezier(p0, p1, steps));
-      }
-
     };
 
     struct QuadraticBezier : public Bezier
     {
     private:
-      QuadraticBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const unsigned int steps = 10)
+      QuadraticBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const unsigned int steps = Bezier::defaultSteps())
       {
+        update(p0, p1, p2, steps);
+      }
+      
+      QuadraticBezier(const Vec2& corner, const Vec2& direction, const double radius, const unsigned int steps = Bezier::defaultSteps())
+      {
+        update(corner, direction, radius, steps);
+      }
+
+    public:
+      static QuadraticBezierPtr create(const Vec2& p0, const Vec2& p1, const Vec2& p2, const unsigned int steps = Bezier::defaultSteps())
+      {
+        return QuadraticBezierPtr(new QuadraticBezier(p0, p1, p2, steps));
+      }
+      
+      static QuadraticBezierPtr create(const Vec2& corner, const Vec2& direction, const double radius, const unsigned int steps = Bezier::defaultSteps())
+      {
+        return QuadraticBezierPtr(new QuadraticBezier(corner, direction, radius, steps));
+      }
+      
+      void update(const Vec2& corner, const Vec2& direction, const double radius, const unsigned int steps = Bezier::defaultSteps())
+      {
+        Vec2 p1 = corner;
+        double length = sin(45.0)*radius;
+        Vec2 p0(p1.x, p1.y+direction.y*length);
+        Vec2 p2(p1.x+direction.x*length, p1.y);
+        update(p0, p1, p2, steps);        
+      }
+      
+      void update(const Vec2& p0, const Vec2& p1, const Vec2& p2, const unsigned int steps = Bezier::defaultSteps())
+      {
+        points.clear();
         double stepSize = 1.0 / steps;
         double t = 0.0;
         Vec2 point;
@@ -64,19 +112,25 @@ namespace lost
         }
       }
       
-    public:
-      static BezierPtr create(const Vec2& p0, const Vec2& p1, const Vec2& p2, const unsigned int steps = 10)
-      {
-        return BezierPtr(new QuadraticBezier(p0, p1, p2, steps));
-      }
-      
     };
     
     struct CubicBezier : public Bezier
     {
     private:
-      CubicBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, const unsigned int steps = 10)
+      CubicBezier(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, const unsigned int steps = Bezier::defaultSteps())
       {
+        update(p0, p1, p2, p3, steps);
+      }
+      
+    public:
+      static CubicBezierPtr create(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, const unsigned int steps = Bezier::defaultSteps())
+      {
+        return CubicBezierPtr(new CubicBezier(p0, p1, p2, p3, steps));
+      }
+    
+      void update(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, const unsigned int steps = Bezier::defaultSteps())
+      {
+        points.clear();
         double stepSize = 1.0 / steps;
         double t = 0.0;
         Vec2 point;
@@ -88,13 +142,7 @@ namespace lost
           t += stepSize;
         }
       }
-      
-    public:
-      static BezierPtr create(const Vec2& p0, const Vec2& p1, const Vec2& p2, const Vec2& p3, const unsigned int steps = 10)
-      {
-        return BezierPtr(new CubicBezier(p0, p1, p2, p3, steps));
-      }
-      
+
     };
     
   }
