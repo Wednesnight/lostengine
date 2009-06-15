@@ -8,6 +8,7 @@
 #include "lost/rg/Camera.h"
 
 #include "lost/math/Bezier.h"
+#include "lost/mesh/Rect.h"
 
 using namespace std;
 using namespace lost;
@@ -61,6 +62,8 @@ bool MeshTest::startup()
   if(cubeDrawNode) // required for updates
   {
     cube = cubeDrawNode->mesh;
+    // disabled for the moment
+    cubeDrawNode->active = false;
   }
   else
   {
@@ -73,14 +76,14 @@ bool MeshTest::startup()
   bg->add(rg::Draw::create(testLine));
 
   /**
-     linear bezier curve including control points
+   linear bezier curve including control points
    */
   MeshPtr line = Line2D::create(Vec2(110,100), Vec2(120,150));
   line->material->color = common::redColor;
   bg->add(rg::Draw::create(line));
   LinearBezierPtr linearBezier = LinearBezier::create(Vec2(110,100), Vec2(120, 150));
   bg->add(rg::Draw::create(Line2D::create(linearBezier->points)));
-  
+
   /**
    quadratic bezier curve including control points
    */
@@ -92,7 +95,7 @@ bool MeshTest::startup()
   bg->add(rg::Draw::create(line));
   QuadraticBezierPtr quadraticBezier = QuadraticBezier::create(Vec2(160,100), Vec2(180, 150), Vec2(190, 90));
   bg->add(rg::Draw::create(Line2D::create(quadraticBezier->points)));
-  
+
   /**
    cubic bezier curve including control points
    */
@@ -117,6 +120,34 @@ bool MeshTest::startup()
   bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
   roundCorner->update(rect.topLeft(), Vec2(1,-1), 25);
   bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
+
+  /**
+   rect
+   */
+  Rect2DPtr rectMesh = Rect2D::create(Rect(450, 50, 100, 100));
+  rectMesh->material->color = common::greenColor;
+  bg->add(rg::Draw::create(rectMesh));
+
+  /**
+   filled rect
+   */
+  FilledRect2DPtr filledRectMesh = FilledRect2D::create(Rect(450, 200, 100, 100));
+  filledRectMesh->material->color = common::greenColor;
+  bg->add(rg::Draw::create(filledRectMesh));
+  
+  /**
+   rounded rect
+   */
+  RoundedRect2DPtr roundedRectMesh = RoundedRect2D::create(Rect(300, 200, 100, 100), 25, 25);
+  roundedRectMesh->material->color = common::greenColor;
+  bg->add(rg::Draw::create(roundedRectMesh));
+  
+  /**
+   filled rounded rect
+   */
+  FilledRoundedRect2DPtr filledRoundedRectMesh = FilledRoundedRect2D::create(Rect(150, 200, 100, 100), 25, 25);
+  filledRoundedRectMesh->material->color = common::greenColor;
+  bg->add(rg::Draw::create(filledRoundedRectMesh));
   
   std::vector<Vec2> v;
   v.push_back(Vec2(10,100));
@@ -127,9 +158,9 @@ bool MeshTest::startup()
   MeshPtr multiLines = Line2D::create(v);
   multiLines->material->color = common::yellowColor;
   bg->add(rg::Draw::create(multiLines));
-  
+
   activeScene = scene;
-  
+
   return result;
 }
 
