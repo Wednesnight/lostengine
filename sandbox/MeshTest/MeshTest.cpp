@@ -9,6 +9,7 @@
 
 #include "lost/math/Bezier.h"
 #include "lost/mesh/Rect.h"
+#include "lost/mesh/Circular.h"
 
 using namespace std;
 using namespace lost;
@@ -148,6 +149,38 @@ bool MeshTest::startup()
   FilledRoundedRect2DPtr filledRoundedRectMesh = FilledRoundedRect2D::create(Rect(150, 200, 100, 100), 25, 25);
   filledRoundedRectMesh->material->color = common::greenColor;
   bg->add(rg::Draw::create(filledRoundedRectMesh));
+  
+  /**
+   circle
+   */
+  Circle2DPtr circleMesh = Circle2D::create(25);
+  circleMesh->material->color = common::redColor;
+  circleMesh->modelTransform = MatrixTranslation(Vec3(450, 350, 0));
+  bg->add(rg::Draw::create(circleMesh));
+  
+  /**
+   filled circle
+   */
+  FilledCircle2DPtr filledCircleMesh = FilledCircle2D::create(25);
+  filledCircleMesh->material->color = common::redColor;
+  filledCircleMesh->modelTransform = MatrixTranslation(Vec3(375, 350, 0));
+  bg->add(rg::Draw::create(filledCircleMesh));
+  
+  /**
+   ellipse
+   */
+  Ellipse2DPtr ellipseMesh = Ellipse2D::create(Vec2(15,50));
+  ellipseMesh->material->color = common::redColor;
+  ellipseMesh->modelTransform = MatrixTranslation(Vec3(300, 350, 0));
+  bg->add(rg::Draw::create(ellipseMesh));
+  
+  /**
+   filled ellipse
+   */
+  FilledEllipse2DPtr filledEllipseMesh = FilledEllipse2D::create(Vec2(35, 15));
+  filledEllipseMesh->material->color = common::redColor;
+  filledEllipseMesh->modelTransform = MatrixTranslation(Vec3(225, 350, 0));
+  bg->add(rg::Draw::create(filledEllipseMesh));
   
   std::vector<Vec2> v;
   v.push_back(Vec2(10,100));
