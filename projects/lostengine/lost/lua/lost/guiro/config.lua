@@ -3,7 +3,7 @@ module("lost.guiro", package.seeall)
 config = {}
 
 -- loader
-config.loader = environment.application.loader
+config.loader = loader
 
 -- font lib
 config.freetypeLibrary = lost.font.freetype.Library.create()

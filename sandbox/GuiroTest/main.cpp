@@ -1,26 +1,30 @@
 #include "lost/application/Application.h"
-#include "lost/application/ApplicationEvent.h"
-#include "lost/event/Receive.h"
+#include "lost/application/UiTasklet.h"
 
-using namespace std;
-using namespace boost;
-using namespace lost::common;
+using namespace lost;
 using namespace lost::application;
-using namespace lost::event;
+using namespace lost::math;
+
+struct GuiroTest : public UiTasklet
+{
+  GuiroTest()
+  : UiTasklet(WindowParams("GuiroTest", Rect(50,200,640,480)))
+  {
+  }
+
+  bool main()
+  {
+    bool result = UiTasklet::main();
+    if (result)
+    {
+      window->context->swapBuffers();
+    }
+    return result;
+  }
+};
 
 int main(int argn, char** args)
 {
-  try
-  {
-    static lost::shared_ptr<Application> app = Application::create(boost::filesystem::path("init"));
-//    app->runLoopWaitsForEvents(true);
-    app->run();
-  }
-  catch (std::exception& e)
-  {
-    EOUT("exception: " << e.what());
-  }
-  
+  runTasklet(new GuiroTest);
   return 0;
 }
-
