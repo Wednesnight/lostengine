@@ -29,6 +29,7 @@ void LostRg(lua_State* state)
       .def_readwrite("name", &Node::name)
       .def_readwrite("active", &Node::active)
       .def("add", &Node::add)
+      .def("remove", &Node::remove)
       .scope
       [
         def("create", &Node::create)

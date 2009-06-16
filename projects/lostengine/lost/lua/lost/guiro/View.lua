@@ -48,10 +48,8 @@ lost.common.Class "lost.guiro.View"
   borderColor = nil,
   
   -- focus handling (set from lost.guiro.event.EventManager)
-  focused = false,
+  focused = false
 
-  -- RenderGraph node
-  renderNode = lost.rg.Node.create()
 }
 
 --[[ 
@@ -66,6 +64,9 @@ function View:create(properties)
     self.indices[name] = self.indices[name]+1
   end
   self.id = name .. self.indices[name]
+
+  -- RenderGraph node
+  self.renderNode = lost.rg.Node.create()
   self.renderNode.name = self.id
 
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
@@ -154,6 +155,7 @@ function View:appendChild(child, pos)
   if (child.id) then
     if (self(child.id) == nil) then
       table.insert(self.children, pos, child)
+      self.renderNode:add(child.renderNode)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
@@ -172,6 +174,7 @@ function View:removeChild(child)
   for k,view in next,self.children do
     if rawequal(view, child) then
       table.remove(self.children, idx)
+      self.renderNode:remove(child.renderNode)
       child:setParent(nil)
       break
     end

@@ -29,6 +29,7 @@ struct Node
   
   virtual void process(gl::ContextPtr ctx);
   void add(NodePtr child);
+  void remove(NodePtr child);
   static NodePtr create();
   std::list<NodePtr> children;
   
