@@ -1,4 +1,3 @@
-require("settings")
 local Rect = lost.math.Rect
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
@@ -13,7 +12,7 @@ lostrg:Scene
   lostrg:Camera2D
   {
     name = "2D Cam",
-    viewport = Rect(0,0,screenSize.width,screenSize.height) -- make this dependant on window size from config file
+    viewport = Rect(0,0,screenSize.width,screenSize.height)
   },
   lostrg:DepthTest
   {

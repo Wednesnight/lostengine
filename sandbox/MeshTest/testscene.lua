@@ -1,28 +1,12 @@
-require("settings")
-
 local Rect = lost.math.Rect
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
-local cam3dPosition = Vec3(1,2,2)
-
 
 local zimtex = lostgl:Texture
 {
   filename = "zim.png"
-}
-
-local lightShader = lostgl:Shader
-{
-  filename = "light",
-  params = lostgl:ShaderParams
-  {
-    LightPosition = cam3dPosition,
-    LightDiffuse = Color(1.0, 1.0, 1.0),
-    LightAmbient = Color(1.0, 1.0, 1.0),
-    LightSpecular = Color(1.0, 1.0, 1.0)
-  }
 }
 
 lostrg:Scene
@@ -36,7 +20,7 @@ lostrg:Scene
     lostrg:Camera2D
     {
       name = "2D Cam",
-      viewport = Rect(0,0,640,480) -- make this dependant on window size from config file
+      viewport = Rect(0,0,screenSize.x,screenSize.y)
     },
     lostrg:DepthTest
     {
@@ -50,7 +34,7 @@ lostrg:Scene
       {
         texture = zimtex,
         flip = true,
-        size = Vec2(640,480),
+        size = Vec2(screenSize.x, screenSize.y),
         material = 
         {
           blend = true
@@ -80,36 +64,5 @@ lostrg:Scene
         }
       }
     }    
-  },
-  lostrg:Node
-  {
-    name="3D Foreground",
-    lostrg:Camera3D
-    {
-      name = "3D Cam",
-      viewport = Rect(0,0,640,480), -- make this dependant on window size from config file
-      fovY = 45,
-      depth = Vec2(1,1000),
-      position = cam3dPosition,
-      target = Vec3(0,0,0),
-      stickToTarget = true
-    },
-    lostrg:DepthTest
-    {
-      true
-    },    
-    lostrg:Draw
-    {
-      name = "cube",
-      mesh = lostmesh:Obj
-      {
-        filename = "cube_tri.obj",
-        material = 
-        {
-          color = Color(0,1,0),
-          shader = lightShader
-        }
-      }
-    }
   }
 }
