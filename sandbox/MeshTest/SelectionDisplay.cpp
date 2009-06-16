@@ -3,9 +3,13 @@
 #include "lost/mesh/Quad.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Matrix.h"
+#include "lost/camera/Camera2D.h"
+#include "lost/rg/Camera.h"
+#include "lost/rg/DepthTest.h"
 
 using namespace std;
 using namespace lost;
+using namespace lost::camera;
 using namespace lost::math;
 using namespace lost::mesh;
 using namespace lost::font;
@@ -67,8 +71,8 @@ void SelectionDisplay::addLed(int i)
 }
 
 void SelectionDisplay::build(const lost::math::Vec2& sz,
-           const std::vector<std::string>& inTitles,
-           const std::vector<std::string>& inDescriptions)
+                             const std::vector<std::string>& inTitles,
+                             const std::vector<std::string>& inDescriptions)
 {
   titles = inTitles;
   descriptions = inDescriptions;
@@ -123,6 +127,9 @@ void SelectionDisplay::build(const lost::math::Vec2& sz,
 
   // create root node
   rootNode = rg::Node::create();
+  CameraPtr camera = Camera2D::create(Rect(0,0,screenSize.width,screenSize.height));
+  rootNode->add(rg::Camera::create(camera));
+  rootNode->add(rg::DepthTest::create(false));
   // translucent black background
   MeshPtr m = Quad2D::create(displayRect);
   m->material->color = Color(0,0,0,.6);

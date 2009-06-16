@@ -1,5 +1,3 @@
-require("settings")
-
 local Rect = lost.math.Rect
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3

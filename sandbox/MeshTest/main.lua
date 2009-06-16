@@ -1,4 +1,5 @@
 require("lost.io.Rg")
+require("settings")
 
 function startup(tasklet)
 

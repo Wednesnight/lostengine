@@ -56,7 +56,7 @@ bool MeshTest::startup()
 
   vector<string> descriptions;
   descriptions.push_back("tests various 2D building blocks");
-  descriptions.push_back("shows all 3D meshes");
+  descriptions.push_back("tests various 3D meshes");
   descriptions.push_back("test text and atlas for all text renders");
 
   TrueTypeFontPtr fnt = lua->globals["verattf"];
@@ -78,12 +78,10 @@ bool MeshTest::startup()
   threedScene = lua->globals["threedScene"];
   textScene = lua->globals["textScene"];
   tunaScene = lua->globals["tunaScene"];
-  rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(scene->recursiveFindByName("cube"));
+  rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(threedScene->recursiveFindByName("cube"));
   if(cubeDrawNode) // required for updates
   {
     cube = cubeDrawNode->mesh;
-    // disabled for the moment
-    cubeDrawNode->active = false;
   }
   else
   {
@@ -213,7 +211,8 @@ bool MeshTest::startup()
 
 
   // FIXME: each scene needs a dedicated 2dforeground node where the selectiondisplay can be added
-  bg->add(selectionDisplay->rootNode);
+  scene->add(selectionDisplay->rootNode);
+  threedScene->add(selectionDisplay->rootNode);
   textScene->add(selectionDisplay->rootNode);
 /*  TextureAtlasPtr textureAtlas = TextureAtlas::create();
   TexturePtr tunatex(new Texture(loader->load("tuna.png")));
@@ -270,9 +269,9 @@ void MeshTest::keyDownHandler(KeyEventPtr event)
   switch(event->key)
   {
     case K_1:activeScene = scene;selectionDisplay->highlight(0);break;
-    case K_2:activeScene = threedScene; selectionDisplay->highlight(1);threedScene;break;
-    case K_3:activeScene = textScene; selectionDisplay->highlight(2);textScene;break;
+    case K_2:activeScene = threedScene; selectionDisplay->highlight(1);break;
+    case K_3:activeScene = textScene; selectionDisplay->highlight(2);break;
     case K_SPACE:animate = !animate;break;
   }
-  if (event->key != K_SPACE) animate = activeScene == scene;
+  if (event->key != K_SPACE) animate = activeScene == threedScene;
 }
