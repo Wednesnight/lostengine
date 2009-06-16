@@ -7,6 +7,7 @@
 #include "lost/rg/DepthTest.h"
 #include "lost/rg/Camera.h"
 
+#include "lost/gl/TextureAtlas.h"
 #include "lost/math/Bezier.h"
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Circular.h"
@@ -25,8 +26,10 @@ using namespace lost::meter;
 using namespace lost::font;
 using namespace luabind;
 
+const static Vec2 screenSize(640,480);
+
 MeshTest::MeshTest()
-: UiTasklet(WindowParams("MeshTest", Rect(50,200,640,480)))
+: UiTasklet(WindowParams("MeshTest", Rect(50,200,screenSize.width, screenSize.height)))
 {
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
@@ -45,6 +48,21 @@ bool MeshTest::startup()
   // key handlers
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&MeshTest::keyDownHandler, this, _1)));
 
+  // build the display
+  vector<string> titles;
+  titles.push_back("Primitives");
+  titles.push_back("3D");
+  titles.push_back("Text");
+
+  vector<string> descriptions;
+  descriptions.push_back("tests various 2D building blocks");
+  descriptions.push_back("shows all 3D meshes");
+  descriptions.push_back("test text and atlas for all text renders");
+
+  TrueTypeFontPtr fnt = lua->globals["verattf"];
+  selectionDisplay.reset(new SelectionDisplay(fnt));
+  selectionDisplay->build(screenSize, titles, descriptions);
+
   meter.reset(new Meter());
   lua->globals["meter"] = MeshPtr(meter->mesh);
 
@@ -59,6 +77,7 @@ bool MeshTest::startup()
   scene = lua->globals["scene"]; // required for drawing
   threedScene = lua->globals["threedScene"];
   textScene = lua->globals["textScene"];
+  tunaScene = lua->globals["tunaScene"];
   rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(scene->recursiveFindByName("cube"));
   if(cubeDrawNode) // required for updates
   {
@@ -192,8 +211,16 @@ bool MeshTest::startup()
   multiLines->material->color = common::yellowColor;
   bg->add(rg::Draw::create(multiLines));
 
-  activeScene = scene;
 
+  // FIXME: each scene needs a dedicated 2dforeground node where the selectiondisplay can be added
+  bg->add(selectionDisplay->rootNode);
+  textScene->add(selectionDisplay->rootNode);
+/*  TextureAtlasPtr textureAtlas = TextureAtlas::create();
+  TexturePtr tunatex(new Texture(loader->load("tuna.png")));
+  textureAtlas->tex = tunatex;*/
+
+  activeScene = scene;
+  selectionDisplay->highlight(0);
   return result;
 }
 
@@ -242,9 +269,9 @@ void MeshTest::keyDownHandler(KeyEventPtr event)
 
   switch(event->key)
   {
-    case K_1:activeScene = scene;break;
-    case K_2:activeScene = threedScene;break;
-    case K_3:activeScene = textScene;break;
+    case K_1:activeScene = scene;selectionDisplay->highlight(0);break;
+    case K_2:activeScene = threedScene; selectionDisplay->highlight(1);threedScene;break;
+    case K_3:activeScene = textScene; selectionDisplay->highlight(2);textScene;break;
     case K_SPACE:animate = !animate;break;
   }
   if (event->key != K_SPACE) animate = activeScene == scene;
