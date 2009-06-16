@@ -48,8 +48,10 @@ lost.common.Class "lost.guiro.View"
   borderColor = nil,
   
   -- focus handling (set from lost.guiro.event.EventManager)
-  focused = false
-  
+  focused = false,
+
+  -- RenderGraph node
+  renderNode = lost.rg.Node.create()
 }
 
 --[[ 
@@ -64,6 +66,7 @@ function View:create(properties)
     self.indices[name] = self.indices[name]+1
   end
   self.id = name .. self.indices[name]
+  self.renderNode.name = self.id
 
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}

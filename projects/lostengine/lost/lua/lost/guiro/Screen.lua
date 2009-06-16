@@ -24,8 +24,17 @@ function Screen:create(properties)
 
 	self.parent = nil
 
+--[[ FIXME: we need to move this stuff into the RenderGraph
   -- initialize scissor state - we need to make sure that scissoring is disabled when done
   self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(false))
+]]
+
+  local globalRect = self:globalRect()
+  local camera = lost.camera.Camera2D.create(lost.math.Rect(globalRect.x, globalRect.y, globalRect.width, globalRect.height))
+
+  self.renderNode:add(lost.rg.ClearColor.create(lost.common.Color(0,0,0,1)))
+  self.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT))
+  self.renderNode:add(lost.rg.Camera.create(camera))
 end
 
 function Screen:propagateMouseEvent(event)
