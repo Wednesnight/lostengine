@@ -65,7 +65,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ApplicationEvent, Event, lost::shared_ptr<ApplicationEvent> >("ApplicationEvent")
+          class_<ApplicationEvent, Event, lost::shared_ptr<Event> >("ApplicationEvent")
             .def(constructor<std::string>()) 
             .scope
             [
