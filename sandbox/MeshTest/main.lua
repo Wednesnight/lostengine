@@ -9,5 +9,6 @@ function startup(tasklet)
   scene = l:loadScene("testscene.lua")
   threedScene = l:loadScene("3dScene.lua")
   textScene = l:loadScene("textScene.lua")
+  tunaScene = l:loadScene("tunaScene.lua")
   return true
 end

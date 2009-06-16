@@ -19,12 +19,16 @@
 		EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */; };
 		EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */; };
 		EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F9C840F8B6E1D00967F8D /* main.cpp */; };
+		EAA20F7F0FE6D79600C9A523 /* SelectionDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */; };
 		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
 		EAAA8B120FE3242500285E96 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAAA8B110FE3242500285E96 /* Vera.ttf */; };
 		EABDD1640F9BF71100A5AB6B /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1620F9BF71100A5AB6B /* light.fs */; };
 		EABDD1650F9BF71100A5AB6B /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1630F9BF71100A5AB6B /* light.vs */; };
 		EACC7A310FA7B61D006762F0 /* testscene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EACC7A300FA7B61D006762F0 /* testscene.lua */; };
 		EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD616910F9CF8C400EBEDA6 /* main.lua */; };
+		EADE1AB10FE577E40004EE08 /* tuna.png in Resources */ = {isa = PBXBuildFile; fileRef = EADE1AB00FE577E40004EE08 /* tuna.png */; };
+		EADE1B040FE58FB20004EE08 /* tunabg.png in Resources */ = {isa = PBXBuildFile; fileRef = EADE1B030FE58FB20004EE08 /* tunabg.png */; };
+		EADE1B0E0FE592440004EE08 /* tunaScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EADE1B0D0FE592440004EE08 /* tunaScene.lua */; };
 		EAF7FB1D0F9BD3B80065F8B6 /* zim.png in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FB1C0F9BD3B80065F8B6 /* zim.png */; };
 		EAF7FBA70F9BDF5A0065F8B6 /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */; };
 /* End PBXBuildFile section */
@@ -83,12 +87,17 @@
 		EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C840F8B6E1D00967F8D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectionDisplay.cpp; path = ../SelectionDisplay.cpp; sourceTree = SOURCE_ROOT; };
+		EAA20F7E0FE6D79600C9A523 /* SelectionDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionDisplay.h; path = ../SelectionDisplay.h; sourceTree = SOURCE_ROOT; };
 		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
 		EAAA8B110FE3242500285E96 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 		EABDD1620F9BF71100A5AB6B /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.fs; path = ../light.fs; sourceTree = SOURCE_ROOT; };
 		EABDD1630F9BF71100A5AB6B /* light.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.vs; path = ../light.vs; sourceTree = SOURCE_ROOT; };
 		EACC7A300FA7B61D006762F0 /* testscene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testscene.lua; path = ../testscene.lua; sourceTree = SOURCE_ROOT; };
 		EAD616910F9CF8C400EBEDA6 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
+		EADE1AB00FE577E40004EE08 /* tuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tuna.png; path = ../tuna.png; sourceTree = SOURCE_ROOT; };
+		EADE1B030FE58FB20004EE08 /* tunabg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tunabg.png; path = ../tunabg.png; sourceTree = SOURCE_ROOT; };
+		EADE1B0D0FE592440004EE08 /* tunaScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tunaScene.lua; path = ../tunaScene.lua; sourceTree = SOURCE_ROOT; };
 		EAF7FB1C0F9BD3B80065F8B6 /* zim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zim.png; path = ../zim.png; sourceTree = SOURCE_ROOT; };
 		EAF7FBA60F9BDF5A0065F8B6 /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -121,6 +130,8 @@
 				EA4F9C840F8B6E1D00967F8D /* main.cpp */,
 				8DF928EC0F8EC1D0007A771A /* MeshTest.h */,
 				EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */,
+				EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */,
+				EAA20F7E0FE6D79600C9A523 /* SelectionDisplay.h */,
 				EA4F9C760F8B6D6E00967F8D /* Configurations */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -132,6 +143,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EADE1B0D0FE592440004EE08 /* tunaScene.lua */,
 				EACC7A300FA7B61D006762F0 /* testscene.lua */,
 				EA1D2E1F0FE47B230067A1C9 /* textScene.lua */,
 				EA1D2E210FE47B280067A1C9 /* 3dScene.lua */,
@@ -144,6 +156,8 @@
 				8DF928E90F8EC1B4007A771A /* cube_tri.obj */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EAAA8B110FE3242500285E96 /* Vera.ttf */,
+				EADE1AB00FE577E40004EE08 /* tuna.png */,
+				EADE1B030FE58FB20004EE08 /* tunabg.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -277,6 +291,9 @@
 				EA1D2E200FE47B230067A1C9 /* textScene.lua in Resources */,
 				EA1D2E220FE47B280067A1C9 /* 3dScene.lua in Resources */,
 				EA1D2E280FE47B680067A1C9 /* settings.lua in Resources */,
+				EADE1AB10FE577E40004EE08 /* tuna.png in Resources */,
+				EADE1B040FE58FB20004EE08 /* tunabg.png in Resources */,
+				EADE1B0E0FE592440004EE08 /* tunaScene.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +322,7 @@
 			files = (
 				EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */,
 				EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */,
+				EAA20F7F0FE6D79600C9A523 /* SelectionDisplay.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
