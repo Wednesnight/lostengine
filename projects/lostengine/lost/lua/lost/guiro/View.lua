@@ -431,6 +431,15 @@ function View:initialize()
           borderMesh = lost.mesh.Ellipse2D.create(lost.math.Vec2(myRect.width, myRect.height))
         end
 
+      elseif string.lower(self.style.type) == "image" then
+        self.style.color = self.style.color or lost.common.Color(1,1,1)
+        backgroundMesh = lost.mesh.Quad2D.create(self.style.image, true)
+        backgroundMesh:updateSize(lost.math.Vec2(myRect.width, myRect.height), true)
+        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
+        if self.style.borderColor ~= nil then
+          borderMesh = lost.mesh.Rect2D.create(myRect)
+        end
+
       end
 
       if backgroundMesh ~= nil then
