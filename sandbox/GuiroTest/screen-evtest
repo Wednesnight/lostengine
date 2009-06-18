@@ -190,8 +190,12 @@ guiro:Screen
         {
           id = "image",
           bounds = g.Bounds(g.xleft({abs=50}), g.ybottom({abs=45}), g.wabs(180), g.habs(200)),
-          borderColor = lost.common.Color(0,0,0,1),
-          backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg")),
+          style =
+          {
+            type = "image",
+            image = guiro:File("stubs.jpg"),
+            borderColor = lost.common.Color(0,0,0,1)
+          },
           listeners =
           {
             mouseDown = function(event)
@@ -241,7 +245,11 @@ guiro:Screen
         {
           id = "centeredImage",
           bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
-          backgroundImage = lost.bitmap.Bitmap(guiro:File("stubs.jpg"))
+          style =
+          {
+            type = "image",
+            image = guiro:File("stubs.jpg")
+          }
         }
       }
     }
