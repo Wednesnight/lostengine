@@ -44,7 +44,7 @@ namespace lost
       [
         namespace_("font")
         [
-          class_<RenderedText, Mesh, MeshPtr >("RenderedText")
+          class_<RenderedText, Mesh, RenderedTextPtr>("RenderedText")
             .def_readonly("min", &RenderedText::min)
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
@@ -57,7 +57,7 @@ namespace lost
       return shared_ptr<TrueTypeFont>(new TrueTypeFont(lib, file));
     }
 
-    MeshPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, boost::uint32_t sz)
+    RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, boost::uint32_t sz)
     {
       return ttf->render(str, sz);
     }
