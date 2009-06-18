@@ -9,6 +9,7 @@ namespace rg
 ClearColor::ClearColor(const common::Color& inCol)
 {
   col = inCol;
+  name = "clearColor";
 }
 
 NodePtr ClearColor::create(const common::Color& inCol)

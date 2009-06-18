@@ -35,17 +35,8 @@ lost.common.Class "lost.guiro.View"
   -- render state
   dirty = true,
 
-  -- background color
-  backgroundColor = nil,
-  
-  -- background image
-  backgroundImage = nil,
-  backgroundImageBounds = nil,
-  backgroundImageFilter = nil,
-  backgroundImageStretched = true,
-    
-  -- border color
-  borderColor = nil,
+  -- style
+  style = nil,
   
   -- focus handling (set from lost.guiro.event.EventManager)
   focused = false
@@ -66,23 +57,24 @@ function View:create(properties)
   self.id = name .. self.indices[name]
 
   -- RenderGraph node
+  self.rootNode = lost.rg.Node.create()
+  self.rootNode.name = self.id
   self.renderNode = lost.rg.Node.create()
-  self.renderNode.name = self.id
+  self.renderNode.name = "renderNode"
+  self.childNodes = lost.rg.Node.create()
+  self.childNodes.name = "childNodes"
+  self.rootNode:add(self.renderNode)
+  self.rootNode:add(self.childNodes)
+
+  -- mesh container
+  self.meshes = {}
 
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
   self.children = {}
 
-  -- round corners
-  self.corners =  {}
-  self.corners.size = nil
-  self.corners.steps = nil
-
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
-
-  -- initialize scissor state
-  self.scissorState = lost.gl.State.create(lost.gl.Scissor.create(true))
 
   self:set(properties)
 end
@@ -117,6 +109,12 @@ end
 
 function View:setProperty(key, value)
   return false
+end
+
+function View:setId(id)
+  if self.rootNode then
+    self.rootNode.name = id
+  end
 end
 
 function View:__newindex(member, value)
@@ -155,7 +153,7 @@ function View:appendChild(child, pos)
   if (child.id) then
     if (self(child.id) == nil) then
       table.insert(self.children, pos, child)
-      self.renderNode:add(child.renderNode)
+      self.childNodes:add(child.rootNode)
       child:setParent(self)
     else
       log.error("child '".. child.id .."' already exists")
@@ -174,7 +172,7 @@ function View:removeChild(child)
   for k,view in next,self.children do
     if rawequal(view, child) then
       table.remove(self.children, idx)
-      self.renderNode:remove(child.renderNode)
+      self.childNodes:remove(child.rootNode)
       child:setParent(nil)
       break
     end
@@ -315,6 +313,11 @@ function View:updateLayout(forceUpdate)
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
     self.currentLocalRect = self.bounds:rect(lost.math.Rect())
+
+    for name,mesh in next,self.meshes do
+      mesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
+    end
+
     for key,view in next,self.children do
       view:updateLayout(true)
     end
@@ -382,237 +385,85 @@ function View:resize(bounds)
 end
 
 --[[
-    triggers render on children
-  ]]
-function View:render(canvas, forceRender)
-  local globalRect = self:globalRect()
-  if forceRender or self.dirty then
-    self.dirty = false
-
-    self.scissorState:param(lost.gl.ScissorBox.create(globalRect))
-    canvas.context:pushState(self.scissorState)
-
-    self:redraw(canvas)
-
-    for k,view in next,self.children do
-      view:render(canvas, true)
-    end
-    canvas.context:popState()
-  end
-end
-
---[[
     sets dirty flag to trigger render
   ]]
 function View:needsRedraw()
   self.dirty = true
 end
 
-function View:redraw(canvas)
-  -- draw background with image
-  if self.backgroundImage then
-    -- initialize background color
-    if not self.backgroundColor then
-      self.backgroundColor = lost.common.Color(1,1,1)
-    end
+function View:initialize()
+  if not self.initialized then
+    self.initialized = true
 
-    -- initialize backgroundTexture
-    if not self.backgroundTexture then
-      self.backgroundTextureParams = lost.gl.Texture.Params()
-      self.backgroundTexture = lost.gl.Texture()
-      self.backgroundTexture:init(self.backgroundImage, self.backgroundTextureParams)
-      if self.backgroundImageFilter then
-        self.backgroundTexture:filter(self.backgroundImageFilter)
+    -- init style
+    if type(self.style) == "table" then
+      self.style.type = self.style.type or "none"
+      local myRect = self:globalRect()
+
+      log.debug("initialize: ".. self.style.type)
+      local backgroundMesh = nil
+      local borderMesh = nil
+      if string.lower(self.style.type) == "rect" then
+        backgroundMesh = lost.mesh.FilledRect2D.create(myRect)
+        if self.style.borderColor ~= nil then
+          borderMesh = lost.mesh.Rect2D.create(myRect)
+        end
+
+      elseif string.lower(self.style.type) == "roundrect" then
+        self.style.radius = self.style.radius or math.min(math.min(myRect.width, myRect.height) / 3, 25)
+        self.style.steps = self.style.steps or 25
+        backgroundMesh = lost.mesh.FilledRoundedRect2D.create(myRect, self.style.radius, self.style.steps)
+        if self.style.borderColor ~= nil then
+          borderMesh = lost.mesh.RoundedRect2D.create(myRect, self.style.radius, self.style.steps)
+        end
+
+      elseif string.lower(self.style.type) == "circle" then
+        backgroundMesh = lost.mesh.FilledCircle2D.create(math.min(myRect.width, myRect.height))
+        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
+        if self.style.borderColor ~= nil then
+          borderMesh = lost.mesh.Circle2D.create(math.min(myRect.width, myRect.height))
+        end
+
+      elseif string.lower(self.style.type) == "ellipse" then
+        backgroundMesh = lost.mesh.FilledEllipse2D.create(lost.math.Vec2(myRect.width, myRect.height))
+        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
+        if self.style.borderColor ~= nil then
+          borderMesh = lost.mesh.Ellipse2D.create(lost.math.Vec2(myRect.width, myRect.height))
+        end
+
+      end
+
+      if backgroundMesh ~= nil then
+        self.style.color = self.style.color or lost.common.Color(0,0,0)
+        backgroundMesh.material.color = self.style.color
+        self.meshes["background"] = backgroundMesh
+      end
+      if borderMesh ~= nil then
+        self.style.borderColor = self.style.borderColor or lost.common.Color(0,0,0)
+        borderMesh.material.color = self.style.borderColor
+        self.meshes["border"] = borderMesh
       end
     end
-    self.backgroundTexture:bind()
 
-    -- valid image corner bounds
-    if self.backgroundImageBounds then
-      -- draw background image and preserve corners
-      self:renderBackgroundImagePreserveCorners(canvas)
-    else
-      -- draw background image
-      self:renderBackgroundImage(canvas)
+    for name,mesh in next,self.meshes do
+      self.renderNode:add(lost.rg.Draw.create(mesh))
     end
-  else
-    -- valid background color
-    if self.backgroundColor then
-      -- draw background filled
-      self:renderBackgroundFilled(canvas)
-    end
-  end
 
-  -- valid border color
-  if self.borderColor then
-    -- draw background outline
-    self:renderBackgroundOutline(canvas)
+    for k,view in next,self.children do
+      view:initialize()
+    end
   end
 end
 
-function View:renderBackgroundOutline(canvas)
-  local globalRect = self:globalRect()
-
-  canvas:setColor(self.borderColor)
-  if self.corners.size then
-    if self.corners.steps then
-      canvas:drawRectOutlineRounded(globalRect, self.corners.size, self.corners.steps)
-    else
-      canvas:drawRectOutlineRounded(globalRect, self.corners.size, 25)
-    end
-  else
-    canvas:drawRectOutline(globalRect)
-  end
-end
-
-function View:renderBackgroundFilled(canvas)
-  local globalRect = self:globalRect()
-
-  canvas:setColor(self.backgroundColor)
-  if self.corners.size then
-    if self.corners.steps then
-      canvas:drawRectFilledRounded(globalRect, self.corners.size, self.corners.steps)
-    else
-      canvas:drawRectFilledRounded(globalRect, self.corners.size, 25)
-    end
-  else
-    canvas:drawRectFilled(globalRect)
-  end
-end
-
-function View:renderBackgroundImage(canvas)
-  local globalRect = self:globalRect()
-  local imageRect = lost.math.Rect(globalRect)
-
-  canvas:setColor(self.backgroundColor)
-  if not self.backgroundImageStretched then
-    local ratio = lost.math.Vec2(globalRect.width/self.backgroundImage.width, globalRect.height/self.backgroundImage.height)
-    if (ratio.x <= ratio.y) then
-      imageRect.width  = math.min(imageRect.width, self.backgroundImage.width * ratio.x)
-      imageRect.height = math.min(imageRect.height, self.backgroundImage.height * ratio.x)
-    else
-      imageRect.width  = math.min(imageRect.width, self.backgroundImage.width * ratio.y)
-      imageRect.height = math.min(imageRect.height, self.backgroundImage.height * ratio.y)
-    end
-  end
-  canvas:drawRectTextured(imageRect, self.backgroundTexture, true)
-end
-
-function View:renderBackgroundImagePreserveCorners(canvas)
-  local globalRect = self:globalRect()
-
-  canvas:setColor(self.backgroundColor)
-  if not self.backgroundMesh then
-    self.backgroundMesh = lost.gl.Mesh2D(16, 16, 54, self.backgroundTexture)
+function View:update()
+  self:updateLayout()
+  if dirty then
+    self.dirty = false
   end
 
-  --[[
-      calculate raster:
-         0  1  2  3
-         4  5  6  7
-         8  9 10 11
-        12 13 14 15
-    ]]
-  local topLeft = lost.math.Rect(globalRect.x,
-                                 globalRect:maxY() - self.backgroundImageBounds.top,
-                                 self.backgroundImageBounds.left,
-                                 self.backgroundImageBounds.top)
-  local middleLeft = lost.math.Rect(globalRect.x,
-                                    globalRect.y + self.backgroundImageBounds.bottom,
-                                    self.backgroundImageBounds.left,
-                                    (globalRect.height - 1 - self.backgroundImageBounds.top) - self.backgroundImageBounds.bottom)
-  local bottomLeft = lost.math.Rect(globalRect.x,
-                                    globalRect.y,
-                                    self.backgroundImageBounds.left,
-                                    self.backgroundImageBounds.bottom)
-  local topCenter = lost.math.Rect(globalRect.x + self.backgroundImageBounds.left,
-                                   globalRect:maxY() - self.backgroundImageBounds.top,
-                                   (globalRect.width - 1 - self.backgroundImageBounds.left) - self.backgroundImageBounds.right,
-                                   self.backgroundImageBounds.top)
-  local middleCenter = lost.math.Rect(globalRect.x + self.backgroundImageBounds.left,
-                                      globalRect.y + self.backgroundImageBounds.bottom,
-                                      (globalRect.width - 1 - self.backgroundImageBounds.left) - self.backgroundImageBounds.right,
-                                      (globalRect.height - 1 - self.backgroundImageBounds.top) - self.backgroundImageBounds.bottom)
-  local bottomCenter = lost.math.Rect(globalRect.x + self.backgroundImageBounds.left,
-                                      globalRect.y,
-                                      (globalRect.width - 1 - self.backgroundImageBounds.left) - self.backgroundImageBounds.right,
-                                      self.backgroundImageBounds.bottom)
-  local topRight = lost.math.Rect(globalRect:maxX() - self.backgroundImageBounds.right,
-                                  globalRect:maxY() - self.backgroundImageBounds.top,
-                                  self.backgroundImageBounds.right,
-                                  self.backgroundImageBounds.top)
-  local middleRight = lost.math.Rect(globalRect:maxX() - self.backgroundImageBounds.right,
-                                     globalRect.y + self.backgroundImageBounds.bottom,
-                                     self.backgroundImageBounds.right,
-                                     (globalRect.height - 1 - self.backgroundImageBounds.top) - self.backgroundImageBounds.bottom)
-  local bottomRight = lost.math.Rect(globalRect:maxX() - self.backgroundImageBounds.right,
-                                     globalRect.y,
-                                     self.backgroundImageBounds.right,
-                                     self.backgroundImageBounds.bottom)
-
-  --[[
-      set vertices
-    ]]
-  self.backgroundMesh:setVertex(0, lost.math.Vec2(topLeft.x - 0.5, topLeft.y + topLeft.height + 0.5))
-  self.backgroundMesh:setVertex(1, lost.math.Vec2(topLeft.x + topLeft.width + 0.5, topLeft.y + topLeft.height + 0.5))
-  self.backgroundMesh:setVertex(2, lost.math.Vec2(topCenter.x + topCenter.width + 0.5, topCenter.y + topCenter.height + 0.5))
-  self.backgroundMesh:setVertex(3, lost.math.Vec2(topRight.x + topRight.width + 0.5, topRight.y + topRight.height + 0.5))
-
-  self.backgroundMesh:setVertex(4, lost.math.Vec2(topLeft.x - 0.5, topLeft.y - 0.5))
-  self.backgroundMesh:setVertex(5, lost.math.Vec2(topCenter.x - 0.5, topCenter.y - 0.5))
-  self.backgroundMesh:setVertex(6, lost.math.Vec2(topRight.x - 0.5, topRight.y - 0.5))
-  self.backgroundMesh:setVertex(7, lost.math.Vec2(topRight.x + topRight.width + 0.5, topRight.y - 0.5))
-
-  self.backgroundMesh:setVertex(8, lost.math.Vec2(middleLeft.x - 0.5, middleLeft.y - 0.5))
-  self.backgroundMesh:setVertex(9, lost.math.Vec2(middleCenter.x - 0.5, middleCenter.y - 0.5))
-  self.backgroundMesh:setVertex(10, lost.math.Vec2(middleRight.x - 0.5, middleRight.y - 0.5))
-  self.backgroundMesh:setVertex(11, lost.math.Vec2(middleRight.x + middleRight.width + 0.5, middleRight.y - 0.5))
-
-  self.backgroundMesh:setVertex(12, lost.math.Vec2(bottomLeft.x - 0.5, bottomLeft.y - 0.5))
-  self.backgroundMesh:setVertex(13, lost.math.Vec2(bottomCenter.x - 0.5, bottomCenter.y - 0.5))
-  self.backgroundMesh:setVertex(14, lost.math.Vec2(bottomRight.x - 0.5, bottomRight.y - 0.5))
-  self.backgroundMesh:setVertex(15, lost.math.Vec2(bottomRight.x + bottomRight.width + 0.5, bottomRight.y - 0.5))
-
-  --[[
-      set faces
-    ]]
-  local vertex = 0
-  local idx = 0
-  for idx = 0, 53, 18 do
-    local colIdx = idx
-    for col = 1, 3, 1 do
-      self.backgroundMesh:setFace(colIdx, vertex) self.backgroundMesh:setFace(colIdx+1, vertex+4) self.backgroundMesh:setFace(colIdx+2, vertex+5)
-      self.backgroundMesh:setFace(colIdx+3, vertex) self.backgroundMesh:setFace(colIdx+4, vertex+1) self.backgroundMesh:setFace(colIdx+5, vertex+5)
-      vertex = vertex + 1
-      colIdx = colIdx + 6
-    end
-    vertex = vertex + 1
+  for k,view in next,self.children do
+    view:update()
   end
-
-  --[[
-      set texcoords
-    ]]
-  self.backgroundMesh:setTexcoord(0, lost.math.Vec2(0, 0))
-  self.backgroundMesh:setTexcoord(1, lost.math.Vec2(topLeft.width / self.backgroundImage.width, 0))
-  self.backgroundMesh:setTexcoord(2, lost.math.Vec2(1 - topRight.width / self.backgroundImage.width, 0))
-  self.backgroundMesh:setTexcoord(3, lost.math.Vec2(1, 0))
-
-  self.backgroundMesh:setTexcoord(4, lost.math.Vec2(0, self.backgroundImageBounds.top / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(5, lost.math.Vec2(topLeft.width / self.backgroundImage.width, self.backgroundImageBounds.top / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(6, lost.math.Vec2(1 - topRight.width / self.backgroundImage.width, self.backgroundImageBounds.top / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(7, lost.math.Vec2(1, self.backgroundImageBounds.top / self.backgroundImage.height))
-
-  self.backgroundMesh:setTexcoord(8, lost.math.Vec2(0, 1 - self.backgroundImageBounds.bottom / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(9, lost.math.Vec2(topLeft.width / self.backgroundImage.width, 1 - self.backgroundImageBounds.bottom / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(10, lost.math.Vec2(1 - topRight.width / self.backgroundImage.width, 1 - self.backgroundImageBounds.bottom / self.backgroundImage.height))
-  self.backgroundMesh:setTexcoord(11, lost.math.Vec2(1, 1 - self.backgroundImageBounds.bottom / self.backgroundImage.height))
-
-  self.backgroundMesh:setTexcoord(12, lost.math.Vec2(0, 1))
-  self.backgroundMesh:setTexcoord(13, lost.math.Vec2(topLeft.width / self.backgroundImage.width, 1))
-  self.backgroundMesh:setTexcoord(14, lost.math.Vec2(1 - topRight.width / self.backgroundImage.width, 1))
-  self.backgroundMesh:setTexcoord(15, lost.math.Vec2(1, 1))
-
-  canvas:drawMesh2D(self.backgroundMesh, gl.GL_TRIANGLES)
 end
 
 

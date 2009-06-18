@@ -12,8 +12,17 @@ struct GuiroTest : public UiTasklet
   NodePtr screen;
 
   GuiroTest()
-  : UiTasklet(WindowParams("GuiroTest", Rect(50,200,640,480)))
+  : UiTasklet(WindowParams("GuiroTest", Rect(200,200,800,600)))
   {
+  }
+
+  void printRG(NodePtr node, std::string prefix = "")
+  {
+    for (std::list<NodePtr>::iterator idx = node->children.begin(); idx != node->children.end(); ++idx)
+    {
+      DOUT(prefix << (*idx)->name);
+      printRG((*idx), prefix +"  ");
+    }
   }
 
   bool startup()
@@ -21,7 +30,8 @@ struct GuiroTest : public UiTasklet
     bool result = UiTasklet::startup();
     if (result)
     {
-      screen = lua->globals["GuiroTestController"]["controls"]["screen"]["renderNode"];
+      screen = lua->globals["GuiroTestController"]["controls"]["screen"]["rootNode"];
+      printRG(screen);
     }
     return result;
   }
@@ -31,7 +41,10 @@ struct GuiroTest : public UiTasklet
     bool result = UiTasklet::main();
     if (result)
     {
-      if (screen) screen->process(window->context);
+      if (screen)
+      {
+        screen->process(window->context);
+      }
       window->context->swapBuffers();
     }
     return result;

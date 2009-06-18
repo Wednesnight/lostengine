@@ -66,6 +66,9 @@ function GuiroTestController:main(tasklet)
 --  self.controls.screen:render(self.window.canvas, true)
 --  self.controls.fpsMeter:render(self.windowSize.x - self.controls.fpsMeter.width, 1, self.window.canvas, passedSec)
 
+  -- recursive update
+  self.controls.screen:update()
+
 --[[ FIXME: can only be called within C++ because we loose type information for UiTasklet
   self.tasklet.window.context:swapBuffers()
 ]]

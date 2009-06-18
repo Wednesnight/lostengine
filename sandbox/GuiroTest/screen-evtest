@@ -73,17 +73,25 @@ guiro:Screen
     {
 			id = "window1",
       bounds = g.Bounds(g.xcenter(), g.ycenter(), g.wrel(0.5), g.hrel(0.5)),
-      corners = { size = lost.math.Vec2(10, 10) },
+      style =
+      {
+        type = "roundRect",
+        radius = 10,
+        color = lost.common.Color(0.5,0.5,0.5),
+        borderColor = lost.common.Color(0,0,0)
+      },
 			header =
       {
         text = "window1 <こんにちは世界> ijkjhsdfbjhdbnkashkjsdvnksdbflkafhbvkjsdbvncklxybxjklyjxbfvn",
-        backgroundColor = lost.common.Color(0,1,0),
-        corners =
+        style =
         {
-          size = lost.math.Vec2(10, 10)
+          type = "roundRect",
+          radius = 10,
+          color = lost.common.Color(0,1,0),
+          borderColor = lost.common.Color(0,0,0),
+          font = lost.font.TrueTypeFont.create(lost.guiro.config.freetypeLibrary, lost.guiro.config.loader:load("Arial Unicode.ttf")),
+          fontColor = lost.common.Color(0,0,0)
         },
-        font = lost.font.TrueTypeFont.create(lost.guiro.config.freetypeLibrary, lost.guiro.config.loader:load("Arial Unicode.ttf")),
-        fontColor = lost.common.Color(0,0,0)
       },
       content =
       {
@@ -208,11 +216,24 @@ guiro:Screen
     {
       id = "window2",
       bounds = g.Bounds(g.xleft({abs=0}), g.ybottom({abs=0}), g.wrel(0.5), g.hrel(0.5)),
+      style =
+      {
+        type = "roundRect",
+        radius = 10,
+        color = lost.common.Color(0.5,0.5,0.5),
+        borderColor = lost.common.Color(0,0,0)
+      },
       header =
       {
         text = "window2",
-        fontColor = lost.common.Color(0,0,0),
-        backgroundColor = lost.common.Color(0,1,0)
+        style =
+        {
+          type = "roundRect",
+          radius = 10,
+          color = lost.common.Color(0,1,0),
+          borderColor = lost.common.Color(0,0,0),
+          fontColor = lost.common.Color(0,0,0)
+        }
       },
       content =
       {

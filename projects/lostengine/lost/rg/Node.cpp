@@ -22,19 +22,28 @@ namespace lost
       children.push_back(child);
     }
 
+    void Node::addFront(NodePtr child)
+    {
+      children.push_front(child);
+    }
+    
     void Node::remove(NodePtr child)
     {
       children.remove(child);
     }
       
-      void Node::process(gl::ContextPtr ctx)
+    void Node::process(gl::ContextPtr ctx)
     {
-      if(!active) return; 
+      if(!active) return;
+//      DOUT(name);
       
       for(std::list<NodePtr>::iterator i=children.begin(); i!=children.end(); ++i)
       {
         if((*i)->active)
+        {
+//          DOUT("  " << (*i)->name);
           (*i)->process(ctx);
+        }
       }
     }
 
