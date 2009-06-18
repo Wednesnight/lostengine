@@ -46,7 +46,6 @@ function Label:update()
 	  self.textChanged = false
   	self.meshes["text"] = self.style.font:render(self.text, self.style.fontSize)
 
---[[ FIXME: we have to push real types, not bases. until then we're not able to position stuff
     -- get the label rect
   	local gr = self:globalRect()
 
@@ -56,16 +55,6 @@ function Label:update()
   		self.meshes["text"] = self.style.font:render(text, self.style.fontSize)
     end
 
-    -- text should be vertically centered
-  	gr.y = math.modf(gr.y + ((gr.height - self.meshes["text"].size.height - self.meshes["text"].min.y + 1) / 2))
-
-    -- alignment
-    if self.style.align == "center" then
-      gr.x = math.modf(gr.x + ((gr.width - self.meshes["text"].size.width - self.meshes["text"].min.x - 1) / 2))
-    elseif self.style.align == "right" then
-      gr.x = gr.x + (gr.width - self.meshes["text"].size.width - self.meshes["text"].min.x - 1)
-    end
-]]
     -- update nodes
     if self.textNode then
       self.renderNode:remove(self.textNode)
@@ -77,4 +66,28 @@ function Label:update()
     self:needsRedraw()
   end
   lost.guiro.View.update(self)
+end
+
+function Label:updateLayout(forceUpdate)
+  local gr = self.currentGlobalRect
+  local lr = self.currentLocalRect
+
+  if forceUpdate or self.dirtyLayout then
+    gr, lr = lost.guiro.View.updateLayout(self, forceUpdate)
+
+    if self.meshes["text"] ~= nil then
+      -- text should be vertically centered
+      gr.y = math.modf(gr.y + ((gr.height - self.meshes["text"].size.height - self.meshes["text"].min.y + 1) / 2))
+
+      -- alignment
+      if self.style.align == "center" then
+        gr.x = math.modf(gr.x + ((gr.width - self.meshes["text"].size.width - self.meshes["text"].min.x - 1) / 2))
+      elseif self.style.align == "right" then
+        gr.x = gr.x + (gr.width - self.meshes["text"].size.width - self.meshes["text"].min.x - 1)
+      end
+
+      self.meshes["text"].modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(gr.x, gr.y, 0))
+    end
+  end
+  return gr, lr
 end

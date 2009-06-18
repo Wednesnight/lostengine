@@ -25,7 +25,7 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Line2D, Mesh, MeshPtr>("Line2D")
+          class_<Line2D, Mesh, Line2DPtr>("Line2D")
             .def(constructor<>())
             .def(constructor<const math::Vec2&, const math::Vec2&>())
             .def_readwrite("material", &Line2D::material)
@@ -44,33 +44,33 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Rect2D, Mesh, MeshPtr>("Rect2D")
+          class_<Rect2D, Mesh, Rect2DPtr>("Rect2D")
             .def(constructor<const math::Rect&>())
             .def_readwrite("material", &Rect2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Rect&)) &Rect2D::create)
+              def("create", &Rect2D::create)
             ],
-          class_<FilledRect2D, Mesh, MeshPtr>("FilledRect2D")
+          class_<FilledRect2D, Mesh, FilledRect2DPtr>("FilledRect2D")
             .def(constructor<const math::Rect&>())
             .def_readwrite("material", &FilledRect2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Rect&)) &FilledRect2D::create)
+              def("create", &FilledRect2D::create)
             ],
-          class_<RoundedRect2D, Mesh, MeshPtr>("RoundedRect2D")
+          class_<RoundedRect2D, Mesh, RoundedRect2DPtr>("RoundedRect2D")
             .def(constructor<const math::Rect&, const double, const unsigned int>())
             .def_readwrite("material", &RoundedRect2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Rect&, const double, const unsigned int)) &RoundedRect2D::create)
+              def("create", &RoundedRect2D::create)
             ],
-          class_<FilledRoundedRect2D, Mesh, MeshPtr>("FilledRoundedRect2D")
+          class_<FilledRoundedRect2D, Mesh, FilledRoundedRect2DPtr>("FilledRoundedRect2D")
             .def(constructor<const math::Rect&, const double, const unsigned int>())
             .def_readwrite("material", &FilledRoundedRect2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Rect&, const double, const unsigned int)) &FilledRoundedRect2D::create)
+              def("create", &FilledRoundedRect2D::create)
             ]
         ]
       ];
@@ -82,33 +82,33 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Circle2D, Mesh, MeshPtr>("Circle2D")
+          class_<Circle2D, Mesh, Circle2DPtr>("Circle2D")
             .def(constructor<const double>())
             .def_readwrite("material", &Circle2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const double)) &Circle2D::create)
+              def("create", &Circle2D::create)
             ],
-          class_<FilledCircle2D, Mesh, MeshPtr>("FilledCircle2D")
+          class_<FilledCircle2D, Mesh, FilledCircle2DPtr>("FilledCircle2D")
             .def(constructor<const double>())
             .def_readwrite("material", &FilledCircle2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const double)) &FilledCircle2D::create)
+              def("create", &FilledCircle2D::create)
             ],
-          class_<Ellipse2D, Mesh, MeshPtr>("Ellipse2D")
+          class_<Ellipse2D, Mesh, Ellipse2DPtr>("Ellipse2D")
             .def(constructor<const math::Vec2&>())
             .def_readwrite("material", &Ellipse2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Vec2&)) &Ellipse2D::create)
+              def("create", &Ellipse2D::create)
             ],
-          class_<FilledEllipse2D, Mesh, MeshPtr>("FilledEllipse2D")
+          class_<FilledEllipse2D, Mesh, FilledEllipse2DPtr>("FilledEllipse2D")
             .def(constructor<const math::Vec2&>())
             .def_readwrite("material", &FilledEllipse2D::material)
             .scope
             [
-              def("create", (MeshPtr(*)(const math::Vec2&)) &FilledEllipse2D::create)
+              def("create", &FilledEllipse2D::create)
             ]
         ]
       ];
@@ -183,7 +183,7 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Quad2D, Mesh, MeshPtr>("Quad2D")
+          class_<Quad2D, Mesh, Quad2DPtr>("Quad2D")
             .def(constructor<>())
             .def(constructor<const math::Rect&>())
             .def(constructor<resource::FilePtr, bool>())
