@@ -8,6 +8,7 @@ namespace rg
 
 FrameBuffer::FrameBuffer(gl::FrameBufferPtr inFb)
 {
+  name = "frameBuffer";
   fb = inFb;
 }
 

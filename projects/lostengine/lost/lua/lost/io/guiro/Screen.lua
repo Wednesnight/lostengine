@@ -26,5 +26,8 @@ function Loader:loadScreen(filename)
   -- execute screen definition
   self:executeScript(filename, env)
 
+  -- trigger hierarchy initialization
+  result:initialize()
+
   return result
 end

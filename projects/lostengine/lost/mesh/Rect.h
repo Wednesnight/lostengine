@@ -50,10 +50,17 @@ namespace lost
 
       void createVertices(const math::Rect& rect)
       {
-        this->vertexData[0] = rect.bottomLeft();
-        this->vertexData[1] = rect.bottomRight();
-        this->vertexData[2] = rect.topRight();
-        this->vertexData[3] = rect.topLeft();
+        math::Rect relativeRect(0, 0, rect.width, rect.height);
+
+        this->vertexData[0] = relativeRect.bottomLeft();
+        this->vertexData[1] = relativeRect.bottomRight();
+        this->vertexData[2] = relativeRect.topRight();
+        this->vertexData[3] = relativeRect.topLeft();
+
+        if (rect.x != 0 || rect.y != 0)
+        {
+          this->modelTransform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
+        }
       }
 
       static lost::shared_ptr<Rectangle<MESHTYPE, RectType> > create(const math::Rect& rect)
@@ -108,13 +115,20 @@ namespace lost
 
       void createVertices(const math::Rect& rect, const double radius, const unsigned int steps)
       {
+        math::Rect relativeRect(0, 0, rect.width, rect.height);
         unsigned int offset = (RectType == GL_TRIANGLE_FAN) ? 1 : 0;
-        math::QuadraticBezier::create(this->vertexData.get(), offset, rect.bottomLeft(), math::Vec2(1,1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps+offset, rect.bottomRight(), math::Vec2(-1,1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps*2+offset, rect.topRight(), math::Vec2(-1,-1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps*3+offset, rect.topLeft(), math::Vec2(1,-1), radius, steps);
+
+        math::QuadraticBezier::create(this->vertexData.get(), offset, relativeRect.bottomLeft(), math::Vec2(1,1), radius, steps);
+        math::QuadraticBezier::create(this->vertexData.get(), steps+offset, relativeRect.bottomRight(), math::Vec2(-1,1), radius, steps);
+        math::QuadraticBezier::create(this->vertexData.get(), steps*2+offset, relativeRect.topRight(), math::Vec2(-1,-1), radius, steps);
+        math::QuadraticBezier::create(this->vertexData.get(), steps*3+offset, relativeRect.topLeft(), math::Vec2(1,-1), radius, steps);
         // add index for center point
-        if (RectType == GL_TRIANGLE_FAN) this->vertexData[0] = rect.center();
+        if (RectType == GL_TRIANGLE_FAN) this->vertexData[0] = relativeRect.center();
+
+        if (rect.x != 0 || rect.y != 0)
+        {
+          this->modelTransform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
+        }
       }
       
       static lost::shared_ptr<RoundedRectangle<MESHTYPE, RectType> > create(const math::Rect& rect, const double radius, 

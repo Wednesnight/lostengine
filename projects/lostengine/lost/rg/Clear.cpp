@@ -8,6 +8,7 @@ namespace rg
 
 Clear::Clear(GLbitfield inMask)
 {
+  name = "clear";
   mask = inMask;
 }
 

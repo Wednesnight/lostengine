@@ -86,8 +86,8 @@ function UserInterface:updateFocus(event)
     while idx > 0 do
       local child = self.children[idx]
       if child:containsCoord(mouseEvent.pos) then
-        table.remove(self.children, idx)
-        table.insert(self.children, child)
+        self:removeChild(child)
+        self:appendChild(child)
         child:needsRedraw()
         break
       end

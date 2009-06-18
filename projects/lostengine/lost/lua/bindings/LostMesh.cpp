@@ -6,6 +6,8 @@
 #include "lost/mesh/Material.h"
 #include "lost/mesh/Mesh.h"
 #include "lost/mesh/Quad.h"
+#include "lost/mesh/Rect.h"
+#include "lost/mesh/Circular.h"
 #include "lost/platform/shared_ptr.h"
 
 using namespace luabind;
@@ -36,6 +38,82 @@ namespace lost
       ];
     }
 
+    void LostMeshRect(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<Rect2D, Mesh, MeshPtr>("Rect2D")
+            .def(constructor<const math::Rect&>())
+            .def_readwrite("material", &Rect2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Rect&)) &Rect2D::create)
+            ],
+          class_<FilledRect2D, Mesh, MeshPtr>("FilledRect2D")
+            .def(constructor<const math::Rect&>())
+            .def_readwrite("material", &FilledRect2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Rect&)) &FilledRect2D::create)
+            ],
+          class_<RoundedRect2D, Mesh, MeshPtr>("RoundedRect2D")
+            .def(constructor<const math::Rect&, const double, const unsigned int>())
+            .def_readwrite("material", &RoundedRect2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Rect&, const double, const unsigned int)) &RoundedRect2D::create)
+            ],
+          class_<FilledRoundedRect2D, Mesh, MeshPtr>("FilledRoundedRect2D")
+            .def(constructor<const math::Rect&, const double, const unsigned int>())
+            .def_readwrite("material", &FilledRoundedRect2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Rect&, const double, const unsigned int)) &FilledRoundedRect2D::create)
+            ]
+        ]
+      ];
+    }
+    
+    void LostMeshCircular(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<Circle2D, Mesh, MeshPtr>("Circle2D")
+            .def(constructor<const double>())
+            .def_readwrite("material", &Circle2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const double)) &Circle2D::create)
+            ],
+          class_<FilledCircle2D, Mesh, MeshPtr>("FilledCircle2D")
+            .def(constructor<const double>())
+            .def_readwrite("material", &FilledCircle2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const double)) &FilledCircle2D::create)
+            ],
+          class_<Ellipse2D, Mesh, MeshPtr>("Ellipse2D")
+            .def(constructor<const math::Vec2&>())
+            .def_readwrite("material", &Ellipse2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Vec2&)) &Ellipse2D::create)
+            ],
+          class_<FilledEllipse2D, Mesh, MeshPtr>("FilledEllipse2D")
+            .def(constructor<const math::Vec2&>())
+            .def_readwrite("material", &FilledEllipse2D::material)
+            .scope
+            [
+              def("create", (MeshPtr(*)(const math::Vec2&)) &FilledEllipse2D::create)
+            ]
+        ]
+      ];
+    }
+    
     void LostMeshLoader(lua_State* state)
     {
       module(state, "lost")
@@ -129,6 +207,8 @@ namespace lost
       // mesh first because following classes are based on it
       LostMeshMesh(state);
       LostMeshLine(state);
+      LostMeshRect(state);
+      LostMeshCircular(state);
       LostMeshLoader(state);
       LostMeshMaterial(state);
       LostMeshQuad2D(state);
