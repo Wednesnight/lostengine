@@ -84,7 +84,7 @@ namespace lost
       typedef typename MESHTYPE::VertexType VertexType;
       typedef typename MESHTYPE::IndexType IndexType;
       
-      RoundedRectangle(const math::Rect& rect, const double radius, const unsigned int steps = math::Bezier::defaultSteps())
+      RoundedRectangle(const math::Rect& rect, const double radius, const unsigned int steps = math::Bezier<VertexType>::defaultSteps())
       {
         this->drawMode = RectType;
         unsigned int offset = (RectType == GL_TRIANGLE_FAN) ? 1 : 0;
@@ -118,10 +118,10 @@ namespace lost
         math::Rect relativeRect(0, 0, rect.width, rect.height);
         unsigned int offset = (RectType == GL_TRIANGLE_FAN) ? 1 : 0;
 
-        math::QuadraticBezier::create(this->vertexData.get(), offset, relativeRect.bottomLeft(), math::Vec2(1,1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps+offset, relativeRect.bottomRight(), math::Vec2(-1,1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps*2+offset, relativeRect.topRight(), math::Vec2(-1,-1), radius, steps);
-        math::QuadraticBezier::create(this->vertexData.get(), steps*3+offset, relativeRect.topLeft(), math::Vec2(1,-1), radius, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), offset, relativeRect.bottomLeft(), math::Vec2(1,1), radius, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps+offset, relativeRect.bottomRight(), math::Vec2(-1,1), radius, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*2+offset, relativeRect.topRight(), math::Vec2(-1,-1), radius, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*3+offset, relativeRect.topLeft(), math::Vec2(1,-1), radius, steps);
         // add index for center point
         if (RectType == GL_TRIANGLE_FAN) this->vertexData[0] = relativeRect.center();
 
@@ -132,7 +132,7 @@ namespace lost
       }
       
       static lost::shared_ptr<RoundedRectangle<MESHTYPE, RectType> > create(const math::Rect& rect, const double radius, 
-                                                                            const unsigned int steps = math::Bezier::defaultSteps())
+                                                                            const unsigned int steps = math::Bezier<VertexType>::defaultSteps())
       {
         return lost::shared_ptr<RoundedRectangle<MESHTYPE, RectType> >(new RoundedRectangle<MESHTYPE, RectType>(rect, radius, steps));
       }
