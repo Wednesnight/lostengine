@@ -62,6 +62,11 @@ namespace lost
       return result;
     }
 
+    inline Vec2 operator*(float v, const Vec2& inOp1)
+    {
+      return inOp1*v;
+    }
+
     inline float operator*(const Vec2& inOp1, const Vec2& inOp2)
     {
       return (inOp1.x*inOp2.x + inOp1.y*inOp2.y);
