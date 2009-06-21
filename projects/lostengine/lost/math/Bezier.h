@@ -83,8 +83,7 @@ namespace lost
                                    float t)
       {
         VEC result;
-        result.x = (1 - t) * p0.x + t * p1.x;
-        result.y = (1 - t) * p0.y + t * p1.y;
+        result = (p0*(1.0f - t)) + (p1*t);
         return result;
       }
 
@@ -203,8 +202,7 @@ namespace lost
                                    float t)
       {
         VEC result;
-        result.x = ((1 - t) * (1 - t)) * p0.x + (2*t) * (1-t) * p1.x + (t*t) * p2.x;
-        result.y = ((1 - t) * (1 - t)) * p0.y + (2*t) * (1-t) * p1.y + (t*t) * p2.y;
+        result = (p0*((1.0f-t)*(1.0f-t))) + (p1*((2.0f*t)*(1.0f-t))) + (p2*(t*t));
         return result;
       }
 
@@ -276,8 +274,7 @@ namespace lost
                                    float t)
       {
         VEC result;
-        result.x = (-p0.x + 3*p1.x - 3*p2.x + p3.x) * (t*t*t) + (3*p0.x - 6*p1.x + 3*p2.x) * (t*t) + (-3*p0.x + 3*p1.x) * t + p0.x;
-        result.y = (-p0.y + 3*p1.y - 3*p2.y + p3.y) * (t*t*t) + (3*p0.y - 6*p1.y + 3*p2.y) * (t*t) + (-3*p0.y + 3*p1.y) * t + p0.y;
+        result = ((-1.0f*p0) + 3*p1 - 3*p2 + p3) * (t*t*t) + (3*p0 - 6*p1 + 3*p2) * (t*t) + (-3*p0 + 3*p1) * t + p0;
         return result;
       }
     };
