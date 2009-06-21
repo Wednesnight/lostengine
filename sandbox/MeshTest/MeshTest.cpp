@@ -10,6 +10,7 @@
 #include "lost/gl/TextureAtlas.h"
 #include "lost/math/Bezier.h"
 #include "lost/mesh/Rect.h"
+#include "lost/mesh/Axes.h"
 #include "lost/mesh/Circular.h"
 
 using namespace std;
@@ -218,6 +219,8 @@ bool MeshTest::startup()
   TexturePtr tunatex(new Texture(loader->load("tuna.png")));
   textureAtlas->tex = tunatex;*/
 
+  threedScene->add(rg::Draw::create(mesh::Axes3D::create()));
+
   activeScene = scene;
   selectionDisplay->highlight(0);
   return result;
@@ -230,7 +233,10 @@ void MeshTest::update(double dt)
     angle = fmod(dt*50+angle, 360);
     if(cube)
     {
-      cube->modelTransform = MatrixRotX(angle) * MatrixRotY(angle);
+      cube->modelTransform =   MatrixTranslation(Vec3(-1, 0, 0))
+                             * MatrixRotX(angle)
+                             * MatrixRotY(angle)
+                             * MatrixTranslation(Vec3(-.5, 0, 0));
     }
   }
 }
