@@ -102,14 +102,6 @@ namespace lost
         update(p0, p1, p2, steps);
       }
       
-      QuadraticBezier(const VEC& corner,
-                      const VEC& direction,
-                      float radius,
-                      boost::uint32_t steps = Bezier<VEC>::defaultSteps())
-      {
-        update(corner, direction, radius, steps);
-      }
-
     public:
       static lost::shared_ptr<QuadraticBezier<VEC> > create(const VEC& p0,
                                        const VEC& p1,
@@ -117,14 +109,6 @@ namespace lost
                                        boost::uint32_t steps = Bezier<VEC>::defaultSteps())
       {
         return lost::shared_ptr<QuadraticBezier<VEC> >(new QuadraticBezier(p0, p1, p2, steps));
-      }
-      
-      static lost::shared_ptr<QuadraticBezier<VEC> > create(const VEC& corner,
-                                       const VEC& direction,
-                                       float radius,
-                                       boost::uint32_t steps = Bezier<VEC>::defaultSteps())
-      {
-        return lost::shared_ptr<QuadraticBezier<VEC> >(new QuadraticBezier(corner, direction, radius, steps));
       }
       
       static VEC* create(VEC* array,
@@ -143,42 +127,6 @@ namespace lost
           t += stepSize;
         }
         return array;
-      }
-      
-      static VEC* create(VEC* array,
-                          boost::uint32_t offset,
-                          const VEC& corner,
-                          const VEC& direction,
-                          float radius,
-                          boost::uint32_t steps = Bezier<VEC>::defaultSteps())
-      {
-        VEC p1 = corner;
-        float length = sin(45.0)*radius;
-        VEC p0;
-        VEC p2;
-        if ((direction.x < 0 && direction.y > 0) || (direction.x > 0 && direction.y < 0))
-        {
-          p0 = VEC(p1.x+direction.x*length, p1.y);
-          p2 = VEC(p1.x, p1.y+direction.y*length);
-        }
-        else
-        {
-          p0 = VEC(p1.x, p1.y+direction.y*length);
-          p2 = VEC(p1.x+direction.x*length, p1.y);
-        }
-        return create(array, offset, p0, p1, p2, steps);
-      }
-
-      void update(const VEC& corner,
-                  const VEC& direction,
-                  float radius,
-                  boost::uint32_t steps = Bezier<VEC>::defaultSteps())
-      {
-        VEC p1 = corner;
-        float length = sin(45.0)*radius;
-        VEC p0(p1.x, p1.y+direction.y*length);
-        VEC p2(p1.x+direction.x*length, p1.y);
-        update(p0, p1, p2, steps);        
       }
       
       void update(const VEC& p0,

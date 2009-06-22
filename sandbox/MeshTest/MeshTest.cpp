@@ -128,19 +128,6 @@ bool MeshTest::startup()
   bg->add(rg::Draw::create(Line2D::create(cubicBezier->points)));
 
   /**
-   standardized bezier curve, used to define rounded corners
-   */
-  Rect rect(300, 50, 100, 100);
-  QuadraticBezier2DPtr roundCorner = QuadraticBezier2D::create(rect.bottomLeft(), Vec2(1,1), 25);
-  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
-  roundCorner->update(rect.bottomRight(), Vec2(-1,1), 25);
-  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
-  roundCorner->update(rect.topRight(), Vec2(-1,-1), 25);
-  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
-  roundCorner->update(rect.topLeft(), Vec2(1,-1), 25);
-  bg->add(rg::Draw::create(Line2D::create(roundCorner->points)));
-
-  /**
    rect
    */
   Rect2DPtr rectMesh = Rect2D::create(Rect(450, 50, 100, 100));
