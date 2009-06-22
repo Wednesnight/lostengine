@@ -118,10 +118,19 @@ namespace lost
         math::Rect relativeRect(0, 0, rect.width, rect.height);
         unsigned int offset = (RectType == GL_TRIANGLE_FAN) ? 1 : 0;
 
-        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), offset, relativeRect.bottomLeft(), math::Vec2(1,1), radius, steps);
-        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps+offset, relativeRect.bottomRight(), math::Vec2(-1,1), radius, steps);
-        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*2+offset, relativeRect.topRight(), math::Vec2(-1,-1), radius, steps);
-        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*3+offset, relativeRect.topLeft(), math::Vec2(1,-1), radius, steps);
+        // calculate bezier control points
+        float length = sin(45.0)*radius;
+        VertexType bl1 = relativeRect.bottomLeft(); VertexType bl0(bl1.x, bl1.y+length); VertexType bl2(bl1.x+length, bl1.y);
+        VertexType br1 = relativeRect.bottomRight(); VertexType br0(br1.x-length, br1.y); VertexType br2(br1.x, br1.y+length);
+        VertexType tr1 = relativeRect.topRight(); VertexType tr0(tr1.x, tr1.y-length); VertexType tr2(tr1.x-length, tr1.y);
+        VertexType tl1 = relativeRect.topLeft(); VertexType tl0(tl1.x+length, tl1.y); VertexType tl2(tl1.x, tl1.y-length);
+
+        // create bezier curves
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), offset, bl0, bl1, bl2, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps+offset, br0, br1, br2, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*2+offset, tr0, tr1, tr2, steps);
+        math::QuadraticBezier<VertexType>::create(this->vertexData.get(), steps*3+offset, tl0, tl1, tl2, steps);
+
         // add index for center point
         if (RectType == GL_TRIANGLE_FAN) this->vertexData[0] = relativeRect.center();
 
