@@ -3,6 +3,7 @@
 
 #include <string>
 #include <list>
+#include "lost/platform/shared_ptr.h"
 
 namespace lost
 {
