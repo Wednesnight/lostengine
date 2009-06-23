@@ -197,16 +197,14 @@ bool MeshTest::startup()
   multiLines->material->color = common::yellowColor;
   bg->add(rg::Draw::create(multiLines));
 
+  threedScene->add(rg::Draw::create(mesh::Axes3D::create()));
 
-  // FIXME: each scene needs a dedicated 2dforeground node where the selectiondisplay can be added
   scene->add(selectionDisplay->rootNode);
   threedScene->add(selectionDisplay->rootNode);
   textScene->add(selectionDisplay->rootNode);
 /*  TextureAtlasPtr textureAtlas = TextureAtlas::create();
   TexturePtr tunatex(new Texture(loader->load("tuna.png")));
   textureAtlas->tex = tunatex;*/
-
-  threedScene->add(rg::Draw::create(mesh::Axes3D::create()));
 
   activeScene = scene;
   selectionDisplay->highlight(0);
