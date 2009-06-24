@@ -12,6 +12,7 @@
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Axes.h"
 #include "lost/mesh/Circular.h"
+#include "lost/mesh/AABB.h"
 
 using namespace std;
 using namespace lost;
@@ -197,7 +198,12 @@ bool MeshTest::startup()
   multiLines->material->color = common::yellowColor;
   bg->add(rg::Draw::create(multiLines));
 
-  threedScene->add(rg::Draw::create(mesh::Axes3D::create()));
+  axes = mesh::Axes3D::create();
+  axes->material->blend = true;
+  threedScene->add(rg::Draw::create(axes));
+
+  aabb = mesh::AABB3D::create(math::AABB(Vec3(-.5f,-1,-.5f), Vec3(1,2,1)));
+  threedScene->add(rg::Draw::create(aabb));  
 
   scene->add(selectionDisplay->rootNode);
   threedScene->add(selectionDisplay->rootNode);
@@ -218,10 +224,24 @@ void MeshTest::update(double dt)
     angle = fmod(dt*50+angle, 360);
     if(cube)
     {
-      cube->modelTransform =   MatrixTranslation(Vec3(-1, 0, 0))
+      cube->modelTransform =   MatrixTranslation(Vec3(-3, 1, 0))
                              * MatrixRotX(angle)
                              * MatrixRotY(angle)
-                             * MatrixTranslation(Vec3(-.5, 0, 0));
+                             * MatrixTranslation(Vec3(-1, -1, -1));
+    }
+    if(axes)
+    {
+      axes->modelTransform = MatrixTranslation(Vec3(0, 1, 0))
+                             * MatrixRotX(angle)
+                             * MatrixRotY(angle);
+    }
+
+    if(aabb)
+    {
+      aabb->modelTransform = MatrixTranslation(Vec3(2, 1, 0))
+                             * MatrixRotX(angle)
+                             * MatrixRotY(angle);;
+//                             * MatrixTranslation(Vec3(1, 0, 0));
     }
   }
 }
