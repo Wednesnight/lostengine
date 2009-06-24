@@ -22,6 +22,7 @@
 		EAA20F7F0FE6D79600C9A523 /* SelectionDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */; };
 		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
 		EAAA8B120FE3242500285E96 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAAA8B110FE3242500285E96 /* Vera.ttf */; };
+		EAB88BB20FF2E89B0014F523 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EAB88BB10FF2E89B0014F523 /* defaultButton.png */; };
 		EABDD1640F9BF71100A5AB6B /* light.fs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1620F9BF71100A5AB6B /* light.fs */; };
 		EABDD1650F9BF71100A5AB6B /* light.vs in Resources */ = {isa = PBXBuildFile; fileRef = EABDD1630F9BF71100A5AB6B /* light.vs */; };
 		EACC7A310FA7B61D006762F0 /* testscene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EACC7A300FA7B61D006762F0 /* testscene.lua */; };
@@ -91,6 +92,7 @@
 		EAA20F7E0FE6D79600C9A523 /* SelectionDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionDisplay.h; path = ../SelectionDisplay.h; sourceTree = SOURCE_ROOT; };
 		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
 		EAAA8B110FE3242500285E96 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
+		EAB88BB10FF2E89B0014F523 /* defaultButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultButton.png; path = ../defaultButton.png; sourceTree = SOURCE_ROOT; };
 		EABDD1620F9BF71100A5AB6B /* light.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.fs; path = ../light.fs; sourceTree = SOURCE_ROOT; };
 		EABDD1630F9BF71100A5AB6B /* light.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = light.vs; path = ../light.vs; sourceTree = SOURCE_ROOT; };
 		EACC7A300FA7B61D006762F0 /* testscene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = testscene.lua; path = ../testscene.lua; sourceTree = SOURCE_ROOT; };
@@ -143,6 +145,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EAB88BB10FF2E89B0014F523 /* defaultButton.png */,
 				EADE1B0D0FE592440004EE08 /* tunaScene.lua */,
 				EACC7A300FA7B61D006762F0 /* testscene.lua */,
 				EA1D2E1F0FE47B230067A1C9 /* textScene.lua */,
@@ -294,6 +297,7 @@
 				EADE1AB10FE577E40004EE08 /* tuna.png in Resources */,
 				EADE1B040FE58FB20004EE08 /* tunabg.png in Resources */,
 				EADE1B0E0FE592440004EE08 /* tunaScene.lua in Resources */,
+				EAB88BB20FF2E89B0014F523 /* defaultButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

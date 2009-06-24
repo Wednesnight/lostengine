@@ -11,6 +11,7 @@
 #include "lost/math/Bezier.h"
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Axes.h"
+#include "lost/mesh/ScaleGrid.h"
 #include "lost/mesh/Circular.h"
 #include "lost/mesh/AABB.h"
 
@@ -188,6 +189,9 @@ bool MeshTest::startup()
   filledEllipseMesh->modelTransform = MatrixTranslation(Vec3(225, 350, 0));
   bg->add(rg::Draw::create(filledEllipseMesh));
   
+  /**
+   Quad array
+   */
   std::vector<Vec2> v;
   v.push_back(Vec2(10,100));
   v.push_back(Vec2(20,150));
@@ -198,13 +202,34 @@ bool MeshTest::startup()
   multiLines->material->color = common::yellowColor;
   bg->add(rg::Draw::create(multiLines));
 
+  /**
+  Axes
+   */
   axes = mesh::Axes3D::create();
   axes->material->blend = true;
   threedScene->add(rg::Draw::create(axes));
 
+  /**
+  AABB
+   */
   aabb = mesh::AABB3D::create(math::AABB(Vec3(-.5f,-1,-.5f), Vec3(1,2,1)));
   threedScene->add(rg::Draw::create(aabb));  
 
+  /**
+  ScaleGrid
+   */
+  TexturePtr tex(new Texture(loader->load("defaultButton.png")));
+  ScaleGrid2DPtr scaler = ScaleGrid2D::create(tex, math::Rect(20,20,100,100), 7, 52, 51,7);
+  scaler->material->blend = false;
+  bg->add(rg::Draw::create(scaler));
+
+  /// !!! 
+  ///
+  /// Add 3D objects to the scenes before adding the selection display or you'll
+  /// end up trying to draw 3d, but the selectiondisplay 2D camera will still be active!
+  ///
+  /// !!!
+  
   scene->add(selectionDisplay->rootNode);
   threedScene->add(selectionDisplay->rootNode);
   textScene->add(selectionDisplay->rootNode);
