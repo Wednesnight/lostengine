@@ -21,6 +21,9 @@ struct Axes : public MESHTYPE
     float len = 1;
     this->drawMode = GL_LINES;
     boost::uint32_t numLines = 6;
+    // since we use a color array to specify the colorof the lines,
+    // and the color should be constant over a half axis, we need
+    // toconstruct the lines with two vertices each.
     boost::uint32_t numVertices = numLines*2;
     boost::uint32_t numIndices = numVertices;
     boost::uint32_t numColors = numVertices;
@@ -30,6 +33,8 @@ struct Axes : public MESHTYPE
     this->resetIndices(numIndices);
     this->resetVertices(numVertices);
     this->resetColors(numColors);
+    
+    float a = .2f;
     
     // X red positive
     this->vertexData[0] = VertexType(0,0,0);
@@ -41,10 +46,10 @@ struct Axes : public MESHTYPE
 
     // X red negative alpha
     this->vertexData[2] = VertexType(0,0,0);
-    this->colorData[2] = common::Color(1,0,0,.5f);
+    this->colorData[2] = common::Color(1,0,0,a);
     this->indexData[2] = 2;
     this->vertexData[3] = VertexType(-len,0,0);
-    this->colorData[3] = common::Color(1,0,0,.5f);
+    this->colorData[3] = common::Color(1,0,0,a);
     this->indexData[3] = 3;
     
     // Y green positive
@@ -57,10 +62,10 @@ struct Axes : public MESHTYPE
 
     // Y green negative
     this->vertexData[6] = VertexType(0,0,0);
-    this->colorData[6] = common::Color(0,1,0,.5f);
+    this->colorData[6] = common::Color(0,1,0,a);
     this->indexData[6] = 6;
     this->vertexData[7] = VertexType(0,-len,0);
-    this->colorData[7] = common::Color(0,1,0,.5f);
+    this->colorData[7] = common::Color(0,1,0,a);
     this->indexData[7] = 7;
 
     // Z blue positive
@@ -73,10 +78,10 @@ struct Axes : public MESHTYPE
     
     // Z blue negative
     this->vertexData[10] = VertexType(0,0,0);
-    this->colorData[10] = common::Color(0,0,1,.5f);
+    this->colorData[10] = common::Color(0,0,1,a);
     this->indexData[10] = 10;
     this->vertexData[11] = VertexType(0,0,-len);
-    this->colorData[11] = common::Color(0,0,1,.5f );
+    this->colorData[11] = common::Color(0,0,1,a);
     this->indexData[11] = 11;
     
     this->transferVertices();
