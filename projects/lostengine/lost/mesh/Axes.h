@@ -91,7 +91,7 @@ struct Axes : public MESHTYPE
   
   static lost::shared_ptr<Axes<MESHTYPE> > create()
   {
-    return lost::shared_ptr<Axes<MESHTYPE> >(new Axes);
+    return lost::shared_ptr<Axes<MESHTYPE> >(new Axes<MESHTYPE>);
   }
   
 };
