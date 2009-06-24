@@ -3,7 +3,7 @@ local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
-local cam3dPosition = Vec3(1,2,2)
+local cam3dPosition = Vec3(0,0,10)
 
 local lightShader = lostgl:Shader
 {
@@ -30,7 +30,7 @@ lostrg:Scene
       name = "3D Cam",
       viewport = Rect(0,0,screenSize.x,screenSize.y),
       fovY = 45,
-      depth = Vec2(1,1000),
+      depth = Vec2(.1,100),
       position = cam3dPosition,
       target = Vec3(0,0,0),
       stickToTarget = true

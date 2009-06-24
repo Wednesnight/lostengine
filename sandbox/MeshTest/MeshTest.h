@@ -26,6 +26,8 @@ struct MeshTest : public lost::application::UiTasklet
   void keyDownHandler(lost::application::KeyEventPtr event);
 
   lost::mesh::MeshPtr           cube;  
+  lost::mesh::MeshPtr           axes;  
+  lost::mesh::MeshPtr           aabb;  
   lost::rg::NodePtr             scene;
   lost::rg::NodePtr             threedScene;
   lost::rg::NodePtr             textScene;
