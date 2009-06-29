@@ -87,6 +87,8 @@ struct Axes : public MESHTYPE
     this->transferVertices();
     this->transferIndices();
     this->transferColors();
+    
+    this->material->blend = true;
   }
   
   static lost::shared_ptr<Axes<MESHTYPE> > create()
