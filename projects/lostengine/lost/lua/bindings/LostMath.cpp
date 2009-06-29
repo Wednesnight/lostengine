@@ -22,7 +22,7 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Rect, lost::shared_ptr<Rect> >("Rect")
+          class_<Rect>("Rect")
             .def(constructor<>()) 
             .def(constructor<const Rect&>()) 
             .def(constructor<float, float, float, float>())
@@ -78,7 +78,7 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Vec3, lost::shared_ptr<Vec3> >("Vec3")
+          class_<Vec3>("Vec3")
             .def(constructor<>())
             .def(constructor<const Vec3&>())
             .def(constructor<float, float, float>())
@@ -105,7 +105,7 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Vec4, lost::shared_ptr<Vec4> >("Vec4")
+          class_<Vec4>("Vec4")
             .def(constructor<>())
             .def(constructor<const Vec4&>())
             .def(constructor<float, float, float, float>())
