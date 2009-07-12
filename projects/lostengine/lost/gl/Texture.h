@@ -87,6 +87,8 @@ namespace lost
       boost::uint32_t dataWidth; 
       boost::uint32_t dataHeight;
 
+      inline boost::uint32_t dataMaxY() { return dataHeight ? dataHeight-1 : dataHeight; }
+      inline boost::uint32_t dataMaxX() { return dataWidth ? dataWidth-1 : dataWidth; }
 
       // texture coordinate helpers
       // returns a normalised texture coordinate for the given pixel X coordinate in the range [0,1]

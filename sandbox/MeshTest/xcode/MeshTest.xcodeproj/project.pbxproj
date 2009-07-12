@@ -12,6 +12,7 @@
 		EA1D2E200FE47B230067A1C9 /* textScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E1F0FE47B230067A1C9 /* textScene.lua */; };
 		EA1D2E220FE47B280067A1C9 /* 3dScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E210FE47B280067A1C9 /* 3dScene.lua */; };
 		EA1D2E280FE47B680067A1C9 /* settings.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA1D2E270FE47B680067A1C9 /* settings.lua */; };
+		EA3507A9100A72CE001959A8 /* scalegridTest.png in Resources */ = {isa = PBXBuildFile; fileRef = EA3507A8100A72CE001959A8 /* scalegridTest.png */; };
 		EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */; };
 		EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */; };
 		EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */; };
@@ -81,6 +82,7 @@
 		EA1D2E1F0FE47B230067A1C9 /* textScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = textScene.lua; path = ../textScene.lua; sourceTree = SOURCE_ROOT; };
 		EA1D2E210FE47B280067A1C9 /* 3dScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 3dScene.lua; path = ../3dScene.lua; sourceTree = SOURCE_ROOT; };
 		EA1D2E270FE47B680067A1C9 /* settings.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = settings.lua; path = ../settings.lua; sourceTree = SOURCE_ROOT; };
+		EA3507A8100A72CE001959A8 /* scalegridTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = scalegridTest.png; path = ../scalegridTest.png; sourceTree = SOURCE_ROOT; };
 		EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -145,6 +147,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA3507A8100A72CE001959A8 /* scalegridTest.png */,
 				EAB88BB10FF2E89B0014F523 /* defaultButton.png */,
 				EADE1B0D0FE592440004EE08 /* tunaScene.lua */,
 				EACC7A300FA7B61D006762F0 /* testscene.lua */,
@@ -298,6 +301,7 @@
 				EADE1B040FE58FB20004EE08 /* tunabg.png in Resources */,
 				EADE1B0E0FE592440004EE08 /* tunaScene.lua in Resources */,
 				EAB88BB20FF2E89B0014F523 /* defaultButton.png in Resources */,
+				EA3507A9100A72CE001959A8 /* scalegridTest.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
