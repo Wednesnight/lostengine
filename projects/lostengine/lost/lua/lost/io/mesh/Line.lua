@@ -5,8 +5,8 @@ require("lost.io.Loader")
 
 -- create a line by specifying start/end Vec2
 function Loader:Line2D(definition)
-  local pointStart = definition["pointStart"]
-  local pointEnd = definition["pointEnd"]
+  local pointStart = definition["start"]
+  local pointEnd = definition["finish"]
   
   result = lost.mesh.Line2D(pointStart, pointEnd)
 
