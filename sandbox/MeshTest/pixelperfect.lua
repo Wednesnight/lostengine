@@ -4,11 +4,13 @@ local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 
-local zimtex = lostgl:Texture
-{
-  filename = "zim.png"
-}
-
+local lines = lost.rg.Node.create()
+for i=0,screenSize.x-1,6 do
+  lines:add(lost.rg.Draw.create(lost.mesh.Line2D.create(Vec2(i,0), Vec2(i,screenSize.y-1))))
+end
+for i=0,screenSize.y-1,6 do
+  lines:add(lost.rg.Draw.create(lost.mesh.Line2D.create(Vec2(0,i), Vec2(screenSize.x-1,i))))
+end
 
 lostrg:Scene
 {
@@ -24,15 +26,5 @@ lostrg:Scene
   {
     false
   },
-  lostrg:Draw
-  {
-    name = "little zim",
-    active = true,
-    mesh = lostmesh:Quad2D
-    {
-      texture = zimtex,
-      flip = true,
-      transform = MatrixTranslation(Vec3(400, 370, 0))
-    }
-  }  
+  lines
 }
