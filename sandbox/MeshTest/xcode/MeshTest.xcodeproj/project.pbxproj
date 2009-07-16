@@ -20,6 +20,7 @@
 		EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */; };
 		EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */; };
 		EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F9C840F8B6E1D00967F8D /* main.cpp */; };
+		EA60CB18100F4FDF007F6B12 /* pixelperfect.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA60CB17100F4FDF007F6B12 /* pixelperfect.lua */; };
 		EAA20F7F0FE6D79600C9A523 /* SelectionDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */; };
 		EAA6BEED0F8EA75D00DC4A71 /* MeshTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */; };
 		EAAA8B120FE3242500285E96 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAAA8B110FE3242500285E96 /* Vera.ttf */; };
@@ -90,6 +91,7 @@
 		EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		EA4F9C840F8B6E1D00967F8D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA60CB17100F4FDF007F6B12 /* pixelperfect.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pixelperfect.lua; path = ../pixelperfect.lua; sourceTree = SOURCE_ROOT; };
 		EAA20F7D0FE6D79600C9A523 /* SelectionDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectionDisplay.cpp; path = ../SelectionDisplay.cpp; sourceTree = SOURCE_ROOT; };
 		EAA20F7E0FE6D79600C9A523 /* SelectionDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionDisplay.h; path = ../SelectionDisplay.h; sourceTree = SOURCE_ROOT; };
 		EAA6BEEC0F8EA75D00DC4A71 /* MeshTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MeshTest.cpp; path = ../MeshTest.cpp; sourceTree = SOURCE_ROOT; };
@@ -149,6 +151,7 @@
 			children = (
 				EA3507A8100A72CE001959A8 /* scalegridTest.png */,
 				EAB88BB10FF2E89B0014F523 /* defaultButton.png */,
+				EA60CB17100F4FDF007F6B12 /* pixelperfect.lua */,
 				EADE1B0D0FE592440004EE08 /* tunaScene.lua */,
 				EACC7A300FA7B61D006762F0 /* testscene.lua */,
 				EA1D2E1F0FE47B230067A1C9 /* textScene.lua */,
@@ -302,6 +305,7 @@
 				EADE1B0E0FE592440004EE08 /* tunaScene.lua in Resources */,
 				EAB88BB20FF2E89B0014F523 /* defaultButton.png in Resources */,
 				EA3507A9100A72CE001959A8 /* scalegridTest.png in Resources */,
+				EA60CB18100F4FDF007F6B12 /* pixelperfect.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
