@@ -33,6 +33,7 @@ struct MeshTest : public lost::application::UiTasklet
   lost::rg::NodePtr             textScene;
   lost::rg::NodePtr             tunaScene;
   lost::rg::NodePtr             activeScene;
+  lost::rg::NodePtr             pixelperfectScene;
   lost::meter::MeterPtr         meter;
 
   lost::shared_ptr<SelectionDisplay>              selectionDisplay;

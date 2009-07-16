@@ -56,11 +56,13 @@ bool MeshTest::startup()
   titles.push_back("Primitives");
   titles.push_back("3D");
   titles.push_back("Text");
+  titles.push_back("Pixel Perfect");
 
   vector<string> descriptions;
   descriptions.push_back("tests various 2D building blocks");
   descriptions.push_back("tests various 3D meshes");
   descriptions.push_back("test text and atlas for all text renders");
+  descriptions.push_back("test pixel perfect drawing");
 
   TrueTypeFontPtr fnt = lua->globals["verattf"];
   selectionDisplay.reset(new SelectionDisplay(fnt));
@@ -81,6 +83,7 @@ bool MeshTest::startup()
   threedScene = lua->globals["threedScene"];
   textScene = lua->globals["textScene"];
   tunaScene = lua->globals["tunaScene"];
+  pixelperfectScene = lua->globals["pixelperfectScene"];
   rg::DrawPtr cubeDrawNode = static_pointer_cast<rg::Draw>(threedScene->recursiveFindByName("cube"));
   if(cubeDrawNode) // required for updates
   {
@@ -239,6 +242,7 @@ bool MeshTest::startup()
   scene->add(selectionDisplay->rootNode);
   threedScene->add(selectionDisplay->rootNode);
   textScene->add(selectionDisplay->rootNode);
+  pixelperfectScene->add(selectionDisplay->rootNode);
 /*  TextureAtlasPtr textureAtlas = TextureAtlas::create();
   TexturePtr tunatex(new Texture(loader->load("tuna.png")));
   textureAtlas->tex = tunatex;*/
@@ -313,6 +317,7 @@ void MeshTest::keyDownHandler(KeyEventPtr event)
     case K_1:activeScene = scene;selectionDisplay->highlight(0);break;
     case K_2:activeScene = threedScene; selectionDisplay->highlight(1);break;
     case K_3:activeScene = textScene; selectionDisplay->highlight(2);break;
+    case K_4:activeScene = pixelperfectScene; selectionDisplay->highlight(3);break;
     case K_SPACE:animate = !animate;break;
   }
   if (event->key != K_SPACE) animate = activeScene == threedScene;

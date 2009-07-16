@@ -11,5 +11,6 @@ function startup(tasklet)
   threedScene = l:loadScene("3dScene.lua")
   textScene = l:loadScene("textScene.lua")
   tunaScene = l:loadScene("tunaScene.lua")
+  pixelperfectScene = l:loadScene("pixelperfect.lua")
   return true
 end
