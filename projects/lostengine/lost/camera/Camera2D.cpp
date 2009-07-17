@@ -12,7 +12,7 @@ namespace lost
     : Camera::Camera(inViewport)
     {
       hasModelViewMatrix = true;
-      float offset = .5f;
+      float offset = .375f;
       mModelViewMatrix = MatrixTranslation(Vec3(offset, offset, .0f));
     }
 
