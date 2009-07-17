@@ -5,12 +5,17 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 
 local lines = lost.rg.Node.create()
-for i=0,screenSize.x-1,6 do
+for i=0,screenSize.x-1,3 do
   lines:add(lost.rg.Draw.create(lost.mesh.Line2D.create(Vec2(i,0), Vec2(i,screenSize.y-1))))
 end
-for i=0,screenSize.y-1,6 do
+for i=0,screenSize.y-1,3 do
   lines:add(lost.rg.Draw.create(lost.mesh.Line2D.create(Vec2(0,i), Vec2(screenSize.x-1,i))))
 end
+
+local frame = lost.rg.Node.create()
+local l=lost.mesh.Line2D.create(Vec2(0,0), Vec2(0,480))
+l.material.color = Color(1,0,0)
+frame:add(lost.rg.Draw.create(l))
 
 lostrg:Scene
 {
@@ -26,5 +31,6 @@ lostrg:Scene
   {
     false
   },
-  lines
+  lines,
+  frame
 }

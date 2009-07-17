@@ -287,6 +287,7 @@ void MeshTest::draw()
     activeScene->process(window->context);
   else
     DOUT("scene is NULL!");
+        
   window->context->swapBuffers();  
 }
 
@@ -296,9 +297,26 @@ bool MeshTest::main()
   double delta = currentSec - passedSec;
   update(delta);
   draw();
-    
-//  meter->update(1.0f/delta);
   passedSec = currentSec; 
+
+/*  window->context->clearColor(blackColor);
+  window->context->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  window->context->depthTest(false);
+  
+  Camera2DPtr cam(new Camera2D(Rect(0,0,640,480)));
+  cam->hasModelViewMatrix = true;
+  window->context->color(redColor);
+  window->context->camera(cam);
+  Matrix m;
+  m.initIdentity();
+  window->context->modelTransform(m);
+  glBegin(GL_LINES);
+    glVertex2f(0,0);
+    glVertex2f(639,479);
+    glVertex2f(0,0);
+    glVertex2f(0,100);
+  glEnd();
+  window->context->swapBuffers();*/
   return true;
 }
 
