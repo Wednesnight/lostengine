@@ -98,7 +98,7 @@ namespace lost
         float result = 0.0f;
         if(width > 0)
         {
-          result = (((float)pixelXCoord+.5f))/((float)width);
+          result = (((float)pixelXCoord))/((float)width);
         }
         
         return result;
@@ -111,7 +111,7 @@ namespace lost
         float result = 0.0f;
         if(height > 0)
         {
-          result = (((float)pixelYCoord+.5f))/((float)height);
+          result = (((float)pixelYCoord))/((float)height);
         }
         
         return result;
@@ -135,9 +135,9 @@ namespace lost
       {
         boost::uint32_t maxX = std::min(dataWidth, width);
         boost::uint32_t maxY = std::min(dataHeight, height);
-        float fMaxX = maxX ? (float)(maxX-1) : (float)maxX;
-        float fMaxY = maxY ? (float)(maxY-1) : (float)maxY;
-        return normalisedCoord(math::Vec2(fMaxX, fMaxY));
+//        float fMaxX = maxX ? (float)(maxX-1) : (float)maxX;
+//        float fMaxY = maxY ? (float)(maxY-1) : (float)maxY;
+        return normalisedCoord(math::Vec2(maxX, maxY));
       }
       
     private:
