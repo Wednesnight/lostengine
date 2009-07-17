@@ -115,8 +115,8 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Line2D
       {
-        pointStart = Vec2(320, 96),
-        pointEnd = Vec2(640, 96),
+        start = Vec2(320, 96),
+        finish = Vec2(640, 96),
         material =
         {
           color = Color(1,1,1)*sceneColor
@@ -129,8 +129,8 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Line2D
       {
-        pointStart = Vec2(0, 192),
-        pointEnd = Vec2(320, 192),
+        start = Vec2(0, 192),
+        finish = Vec2(320, 192),
         material =
         {
           color = Color(1,1,1)*sceneColor
@@ -143,8 +143,8 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Line2D
       {
-        pointStart = Vec2(320, 288),
-        pointEnd = Vec2(640, 288),
+        start = Vec2(320, 288),
+        finish = Vec2(640, 288),
         material =
         {
           color = Color(1,1,1)*sceneColor
@@ -157,8 +157,8 @@ lostrg:Scene
       active = true,
       mesh = lostmesh:Line2D
       {
-        pointStart = Vec2(0, 384),
-        pointEnd = Vec2(320, 384),
+        start = Vec2(0, 384),
+        finish = Vec2(320, 384),
         material =
         {
           color = Color(1,1,1)*sceneColor
