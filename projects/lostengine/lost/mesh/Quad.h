@@ -178,8 +178,8 @@ struct Quad : public MESHTYPE
   
   void createVertices(boost::uint32_t quadNum, const math::Rect& inRect)
   {
-    float voffsetx = MESHTYPE::OffsetVectorType::x();
-    float voffsety = MESHTYPE::OffsetVectorType::y();  
+    float voffsetx = 0; //MESHTYPE::OffsetVectorType::x();
+    float voffsety = 0; //MESHTYPE::OffsetVectorType::y();  
   
     VertexType* vtx = this->vertexData.get();
     boost::uint32_t verticesPerQuad = 4;
@@ -188,14 +188,14 @@ struct Quad : public MESHTYPE
     vtx[offset+0].x = inRect.x-voffsetx;
     vtx[offset+0].y = inRect.y-voffsety;
     
-    vtx[offset+1].x = inRect.maxX()+voffsetx;
+    vtx[offset+1].x = inRect.x+inRect.width+voffsetx;
     vtx[offset+1].y = inRect.y-voffsety;
 
-    vtx[offset+2].x = inRect.maxX()+voffsetx;
-    vtx[offset+2].y = inRect.maxY()+voffsety;
+    vtx[offset+2].x = inRect.x+inRect.width+voffsetx;
+    vtx[offset+2].y = inRect.y+inRect.height+voffsety;
 
     vtx[offset+3].x = inRect.x-voffsetx;
-    vtx[offset+3].y = inRect.maxY()+voffsety;    
+    vtx[offset+3].y = inRect.y+inRect.height+voffsety;    
   }
               
   void updateSize(const math::Vec2& size, bool flip = true)
@@ -237,7 +237,7 @@ struct Quad : public MESHTYPE
     gl::TexturePtr tex = this->material->textures[texNum];
 
     math::Vec2 bl = tex->normalisedCoord(pixelRect.bottomLeft());
-    math::Vec2 tr = tex->normalisedCoord(pixelRect.topRight());
+    math::Vec2 tr = tex->normalisedCoord(math::Vec2(pixelRect.x+pixelRect.width, pixelRect.y+pixelRect.height)/*pixelRect.topRight()*/);
     
     TexCoordType* texcoords = this->texCoordData.get();
     const boost::uint32_t texCoordsPerQuad = 4; 

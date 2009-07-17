@@ -98,7 +98,7 @@ namespace lost
         float result = 0.0f;
         if(width > 0)
         {
-          result = (((float)pixelXCoord)+.5f)/((float)width);
+          result = (((float)pixelXCoord+.5f))/((float)width);
         }
         
         return result;
@@ -111,7 +111,7 @@ namespace lost
         float result = 0.0f;
         if(height > 0)
         {
-          result = (((float)pixelYCoord)+.5f)/((float)height);
+          result = (((float)pixelYCoord+.5f))/((float)height);
         }
         
         return result;
