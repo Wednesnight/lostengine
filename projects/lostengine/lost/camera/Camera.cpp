@@ -6,25 +6,26 @@ namespace lost
   {
     
     Camera::Camera(const lost::math::Rect& inViewport)
-    : m_viewport(inViewport),
+    : mViewport(inViewport),
       needsUpdate(true)
     {
-      m_matrix.zero();
+      mProjectionMatrix.zero();
+      hasModelViewMatrix = false;
     }
     
     lost::math::Rect& Camera::viewport(const lost::math::Rect& inViewport)
     {
-      if (m_viewport != inViewport)
+      if (mViewport != inViewport)
       {
-        m_viewport = inViewport;
+        mViewport = inViewport;
         needsUpdate = true;
       }
-      return m_viewport;
+      return mViewport;
     }
 
     lost::math::Rect& Camera::viewport()
     {
-      return m_viewport;
+      return mViewport;
     }
     
   }

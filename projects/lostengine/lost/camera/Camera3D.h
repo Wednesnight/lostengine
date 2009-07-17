@@ -50,7 +50,7 @@ namespace lost
       void move(const math::Vec3& deltaMove);
       void rotate(const math::Vec3& deltaRotate);
 
-      lost::math::Matrix& matrix();
+      lost::math::Matrix& projectionMatrix();
     };
 
   }

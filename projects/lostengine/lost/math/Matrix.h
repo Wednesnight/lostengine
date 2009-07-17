@@ -99,7 +99,7 @@ namespace math
       m[1]=-1.0f*sin(ar); m[5]=cos(ar);
     }
 
-    void initProjection(const Rect& rect, const Vec2& nearAndFar)
+    void initOrtho(const Rect& rect, const Vec2& nearAndFar)
     {
       zero();
       m[0] = 2 / (rect.width - rect.x);
@@ -324,11 +324,11 @@ namespace math
     }
   };
 
-  struct MatrixProjection : public Matrix
+  struct MatrixOrtho : public Matrix
   {
-    MatrixProjection(const Rect& rect, const Vec2& nearAndFar)
+    MatrixOrtho(const Rect& rect, const Vec2& nearAndFar)
     {
-      initProjection(rect, nearAndFar);
+      initOrtho(rect, nearAndFar);
     }
   };
 

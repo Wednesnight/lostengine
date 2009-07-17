@@ -156,15 +156,15 @@ namespace lost
       needsUpdate = true;
     }
 
-    lost::math::Matrix& Camera3D::matrix()
+    lost::math::Matrix& Camera3D::projectionMatrix()
     {
       if (needsUpdate)
       {
-        double aspectRatio = (double)m_viewport.width / (double)m_viewport.height;
-        m_matrix = lost::math::MatrixPerspective(mFovY, aspectRatio, mDepth) * lost::math::MatrixLookAt(position(), target(), up());
+        double aspectRatio = (double)mViewport.width / (double)mViewport.height;
+        mProjectionMatrix = lost::math::MatrixPerspective(mFovY, aspectRatio, mDepth) * lost::math::MatrixLookAt(position(), target(), up());
         needsUpdate = false;
       }
-      return m_matrix;
+      return mProjectionMatrix;
     }
 
   }

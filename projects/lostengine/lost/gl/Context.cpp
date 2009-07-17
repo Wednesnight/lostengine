@@ -172,17 +172,25 @@ namespace lost
         math::Rect viewport = cam->viewport();
         glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
         glMatrixMode(GL_PROJECTION);GLDEBUG;
-        glLoadMatrixf(cam->matrix().m);GLDEBUG;
+        glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
         if (currentCam != cam) currentCam = cam;
       }
     }
     
     void Context::modelTransform(const math::Matrix& inTransform)
     {
-      if(currentModelTransform != inTransform)
+//      if(currentModelTransform != inTransform)
       {
         glMatrixMode(GL_MODELVIEW);GLDEBUG;
-        glLoadMatrixf(inTransform.m);GLDEBUG;
+        if(currentCam && currentCam->hasModelViewMatrix)
+        {
+          glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
+          glMultMatrixf(inTransform.m);GLDEBUG;
+        }
+        else
+        {
+          glLoadMatrixf(inTransform.m);GLDEBUG;
+        }
         currentModelTransform = inTransform;
       }
     }
