@@ -34,7 +34,7 @@ private:
   lost::camera::Camera2DPtr                         cam2D;
 
   lost::font::TrueTypeFontPtr                       ttf;
-  lost::font::ModelPtr                              labelOriginal;
+/*  lost::font::ModelPtr                              labelOriginal;
   lost::font::ModelPtr                              labelBlur;
   lost::font::ModelPtr                              labelEdge;
   lost::font::ModelPtr                              labelEmboss;
@@ -42,7 +42,7 @@ private:
   lost::font::ModelPtr                              labelRadial;
   lost::font::ModelPtr                              labelSSAO;
   lost::font::ModelPtr                              labelSepia;
-  lost::font::ModelPtr                              labelHeatSig;
+  lost::font::ModelPtr                              labelHeatSig;*/
 
   lost::mesh::MeshPtr                             mesh;
   lost::mesh::Quad2DPtr                             normalPanel;
@@ -66,11 +66,11 @@ private:
 
   void setupLabels();
 
-  void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex);
+/*  void drawPanel(lost::gl::ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex);
   void drawLabel(lost::font::ModelPtr label,
                  const lost::common::Color& col,
                  uint32_t panelIndex,
-                 uint32_t rowIndex);
+                 uint32_t rowIndex);*/
   
   lost::math::Vec2 fboSize; // width and height of the offscreen buffer
   uint16_t  numPanels;

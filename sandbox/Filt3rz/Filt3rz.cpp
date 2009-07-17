@@ -118,7 +118,7 @@ bool Filt3rz::shutdown()
   DOUT("shutdown");
 
   ttf.reset();
-  labelOriginal.reset();
+/*  labelOriginal.reset();
   labelBlur.reset();
   labelEdge.reset();
   labelEmboss.reset();
@@ -126,7 +126,7 @@ bool Filt3rz::shutdown()
   labelRadial.reset();
   labelSSAO.reset();
   labelSepia.reset();
-  labelHeatSig.reset();
+  labelHeatSig.reset();*/
   
   mesh.reset();
   framebuffer.reset();
@@ -156,7 +156,7 @@ bool Filt3rz::shutdown()
 
   return true;
 }
-
+/*
 void Filt3rz::setupLabels()
 {
   freetype::LibraryPtr ftlib(new freetype::Library);
@@ -176,7 +176,7 @@ void Filt3rz::setupLabels()
   labelSSAO = ttf->render("SSAO", fontSize);
   labelSepia = ttf->render("Sepia", fontSize);
   labelHeatSig = ttf->render("Heat Signature", fontSize);
-}
+}*/
 
 void Filt3rz::update(double dt)
 {
@@ -187,23 +187,20 @@ void Filt3rz::update(double dt)
   }
 }
 
-void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex)
+/*void Filt3rz::drawPanel(ShaderProgramPtr shader, uint16_t panelIndex, uint16_t rowIndex)
 {
   shader->enable();
   glActiveTexture(GL_TEXTURE0);
   tex->bind();
-  /**
-   * depth tex required by SSAO shader
-   */
   glActiveTexture(GL_TEXTURE1);
   framebuffer->depthTexture->bind();
 //  window->canvas->drawRectTextured(Rect(panelIndex*fboSize.width, rowIndex*fboSize.height, fboSize.width, fboSize.height), tex, false);
   shader->disable();
   // FIXME: seems like we need to reset active texture
   glActiveTexture(GL_TEXTURE0);
-}
+}*/
 
-void Filt3rz::drawLabel(lost::font::ModelPtr label,
+/*void Filt3rz::drawLabel(lost::font::ModelPtr label,
                        const lost::common::Color& col,
                        uint32_t panelIndex,
                        uint32_t rowIndex)
@@ -216,7 +213,7 @@ void Filt3rz::drawLabel(lost::font::ModelPtr label,
     glTranslatef(xOffset, yOffset, 0);
     window->context->color(col);
 //    label->render(window->canvas);
-}              
+}*/              
 
 void Filt3rz::draw()
 {
