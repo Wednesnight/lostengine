@@ -1,18 +1,7 @@
 #include "Filt3rz.h"
 
-using namespace lost::application;
-
 int main(int argn, char** args)
 {
-  try
-  {
-    ApplicationPtr app = Application::create(TaskletPtr(new Filt3rz()));
-    app->run();
-  }
-  catch (std::exception& e)
-  {
-    EOUT("exception: " << e.what());
-  }
-  
+  lost::application::runTasklet(new Filt3rz);  
   return 0;
 }
