@@ -19,6 +19,7 @@ end
 
 function startup(tasklet)
   log.debug("startup")
+  framebuffer = lost.gl.FrameBuffer.createFrameBuffer(tasklet.window.context, fboSize, gl.GL_RGBA, 24)
 
   cam2D = Camera2D(Rect(0, 0, screenSize.width, screenSize.height))
 

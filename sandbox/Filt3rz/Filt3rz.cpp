@@ -48,65 +48,66 @@ bool Filt3rz::startup()
    */
   DOUT("startup");
 
-  framebuffer = FrameBuffer::createFrameBuffer(window->context, fboSize, GL_RGBA, 24);
+
+  // calls "main" in main.lua, aborts here if startup failed
+  if(!UiTasklet::startup()) return false;
+
+  framebuffer = lua->globals["framebuffer"];
   tex = framebuffer->colorTextures[0];
 
-  // calls "main" in main.lua
-  bool result = UiTasklet::startup();
-  if (result)
-  {
-    cam2D = lua->globals["cam2D"];
-    cam3D = lua->globals["cam3D"];
 
-    blurShader = lua->globals["blurShader"];
-    lightShader = lua->globals["lightShader"];
-    edgeShader = lua->globals["edgeShader"];
-    embossShader = lua->globals["embossShader"];
-    sharpenShader = lua->globals["sharpenShader"];
-    radialShader = lua->globals["radialShader"];
-    ssaoShader = lua->globals["ssaoShader"];
-    sepiaShader = lua->globals["sepiaShader"];
-    heatsigShader = lua->globals["heatsigShader"];
+  // once the Lua startup function is done we can get the globals from the imterpreter
+  cam2D = lua->globals["cam2D"];
+  cam3D = lua->globals["cam3D"];
 
-//    setupLabels();
-    mesh = lua->globals["mesh"];
+  blurShader = lua->globals["blurShader"];
+  lightShader = lua->globals["lightShader"];
+  edgeShader = lua->globals["edgeShader"];
+  embossShader = lua->globals["embossShader"];
+  sharpenShader = lua->globals["sharpenShader"];
+  radialShader = lua->globals["radialShader"];
+  ssaoShader = lua->globals["ssaoShader"];
+  sepiaShader = lua->globals["sepiaShader"];
+  heatsigShader = lua->globals["heatsigShader"];
 
-    normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
+  mesh = lua->globals["mesh"];
 
-    blurPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    blurPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,fboSize.height,0));  
-    blurPanel->material->shader = blurShader;
+  normalPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  normalPanel->modelTransform = MatrixTranslation(Vec3(0,fboSize.height,0));  
 
-    edgePanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    edgePanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,fboSize.height,0));  
-    edgePanel->material->shader = edgeShader;
+  blurPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  blurPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,fboSize.height,0));  
+  blurPanel->material->shader = blurShader;
 
-    embossPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    embossPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,fboSize.height,0));  
-    embossPanel->material->shader = embossShader;
+  edgePanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  edgePanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,fboSize.height,0));  
+  edgePanel->material->shader = edgeShader;
 
-    sharpenPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
-    sharpenPanel->material->shader = sharpenShader;
-    
-    radialPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    radialPanel->modelTransform = MatrixTranslation(Vec3(0,0,0));  
-    radialPanel->material->shader = radialShader;
-    
-    ssaoPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    ssaoPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,0,0));  
-    ssaoPanel->material->shader = ssaoShader;
-    
-    sepiaPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    sepiaPanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,0,0));  
-    sepiaPanel->material->shader = sepiaShader;
-    
-    heatsigPanel = Quad2D::create(framebuffer->colorTextures[0], false);
-    heatsigPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,0,0));  
-    heatsigPanel->material->shader = heatsigShader;
-  }
-  return result;
+  embossPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  embossPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,fboSize.height,0));  
+  embossPanel->material->shader = embossShader;
+
+  sharpenPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  sharpenPanel->modelTransform = MatrixTranslation(Vec3(4*fboSize.width,fboSize.height,0));  
+  sharpenPanel->material->shader = sharpenShader;
+  
+  radialPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  radialPanel->modelTransform = MatrixTranslation(Vec3(0,0,0));  
+  radialPanel->material->shader = radialShader;
+  
+  ssaoPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  ssaoPanel->modelTransform = MatrixTranslation(Vec3(fboSize.width,0,0));  
+  ssaoPanel->material->shader = ssaoShader;
+  
+  sepiaPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  sepiaPanel->modelTransform = MatrixTranslation(Vec3(2*fboSize.width,0,0));  
+  sepiaPanel->material->shader = sepiaShader;
+  
+  heatsigPanel = Quad2D::create(framebuffer->colorTextures[0], false);
+  heatsigPanel->modelTransform = MatrixTranslation(Vec3(3*fboSize.width,0,0));  
+  heatsigPanel->material->shader = heatsigShader;
+
+  return true;
 }
 
 bool Filt3rz::shutdown()
