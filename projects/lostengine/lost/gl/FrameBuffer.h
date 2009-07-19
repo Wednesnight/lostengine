@@ -35,7 +35,7 @@ namespace lost
       static TexturePtr createColorTexture(const math::Vec2& size, // size in pixels, result might vary
                                            GLenum internalFormat); // format of data as stored on gfx card
       static TexturePtr createDepthTexture(const math::Vec2& size, // size in pixels, result might vary
-                                           uint8_t bitDepth);      // desired bit depth, throws if bitdepth can'T be mapped to enum
+                                           uint32_t bitDepth);      // desired bit depth, throws if bitdepth can'T be mapped to enum
 
       /** creates a FBO with texture attachments for color 0 and depth.
        *
@@ -51,7 +51,7 @@ namespace lost
       static FrameBufferPtr createFrameBuffer(ContextPtr& ctx,
                                               const math::Vec2& size,
                                               GLenum colorFormat=GL_RGBA, // internal format of color attachment
-                                              uint8_t bitDepth=24); // desired bitdepth of depth attachment
+                                              uint32_t bitDepth=24); // desired bitdepth of depth attachment
                                                                  // lower resolutions will be tried if 
 
       FrameBuffer();

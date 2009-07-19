@@ -23,7 +23,7 @@ TexturePtr FrameBuffer::createColorTexture(const math::Vec2& size,
   return result;
 }
 
-GLenum bitDepthToEnum(uint8_t bitDepth)
+GLenum bitDepthToEnum(uint32_t bitDepth)
 {
   GLenum bitDepthEnum;
   switch(bitDepth)
@@ -38,7 +38,7 @@ GLenum bitDepthToEnum(uint8_t bitDepth)
 
 
 TexturePtr FrameBuffer::createDepthTexture(const math::Vec2& size, // size in pixels, result might vary
-                                           uint8_t bitDepth)      // desired bit depth
+                                           uint32_t bitDepth)      // desired bit depth
 {
   TexturePtr result;
 
@@ -53,9 +53,9 @@ TexturePtr FrameBuffer::createDepthTexture(const math::Vec2& size, // size in pi
 
 
 
-uint8_t lowerBitDepth(uint8_t bitDepth)
+uint32_t lowerBitDepth(uint32_t bitDepth)
 {
-  uint8_t result = 0;
+  uint32_t result = 0;
   
   switch(bitDepth)
   {
@@ -71,7 +71,7 @@ uint8_t lowerBitDepth(uint8_t bitDepth)
 FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr& ctx,
                                               const math::Vec2& size,
                                               GLenum colorFormat, 
-                                              uint8_t bitDepth)
+                                              uint32_t bitDepth)
 {
   FrameBufferPtr result;
   

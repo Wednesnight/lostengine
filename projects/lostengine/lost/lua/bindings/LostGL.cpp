@@ -7,7 +7,6 @@
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
-#include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 
 using namespace luabind;
@@ -28,7 +27,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<Context, lost::shared_ptr<Context> >("Context")
+          class_<Context, ContextPtr >("Context")
             .def("makeCurrent", &Context::makeCurrent)
             .def("swapBuffers", &Context::swapBuffers)
             .def("vsync", &Context::vsync)
@@ -46,10 +45,14 @@ namespace lost
         [
           class_<FrameBuffer, FrameBufferPtr >("FrameBuffer")
             .def(constructor<>())
-            .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<Texture>))&FrameBuffer::attachDepth)
-            .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<RenderBuffer>))&FrameBuffer::attachDepth)
-            .def("attachColor", (void(FrameBuffer::*)(int, shared_ptr<Texture>))&FrameBuffer::attachColor)
+            .def("attachDepth", (void(FrameBuffer::*)(TexturePtr))&FrameBuffer::attachDepth)
+            .def("attachDepth", (void(FrameBuffer::*)(RenderBufferPtr))&FrameBuffer::attachDepth)
+            .def("attachColor", (void(FrameBuffer::*)(int, TexturePtr))&FrameBuffer::attachColor)
             .def("status", &FrameBuffer::status)
+            .scope
+            [
+              def("createFrameBuffer", &FrameBuffer::createFrameBuffer)
+            ]
         ]
       ];
     }
@@ -247,95 +250,6 @@ namespace lost
       ];
     }    
 
-    void LostGLState(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<gl::State, StatePtr>("State")
-            .def("param", &gl::State::param)
-            .scope
-            [
-              def("create", (StatePtr(*)())&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create),
-              def("create", (StatePtr(*)(const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&, const ParamPtr&))&gl::State::create)
-            ],
-
-          class_<gl::AlphaTest, ParamPtr>("AlphaTest")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::AlphaTest::create)
-            ],
-          
-          class_<gl::DepthTest, ParamPtr>("DepthTest")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::DepthTest::create)
-            ],
-          
-          class_<gl::Texture2D, ParamPtr>("Texture2D")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::Texture2D::create)
-            ],
-          
-          class_<gl::Blend, ParamPtr>("Blend")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::Blend::create)
-            ],
-          
-          class_<gl::Scissor, ParamPtr>("Scissor")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::Scissor::create)
-            ],
-          
-          class_<gl::NormalArray, ParamPtr>("NormalArray")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::NormalArray::create)
-            ],
-          
-          class_<gl::VertexArray, ParamPtr>("VertexArray")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::VertexArray::create)
-            ],
-          
-          class_<gl::TextureArray, ParamPtr>("TextureArray")
-            .scope
-            [
-              def("create", (ParamPtr(*)(bool))&gl::TextureArray::create)
-            ],
-          
-          class_<gl::ClearColor, ParamPtr>("ClearColor")
-            .scope
-            [
-              def("create", (ParamPtr(*)(const lost::common::Color&))&gl::ClearColor::create)
-            ],
-          
-          class_<gl::BlendFunc, ParamPtr>("BlendFunc")
-            .scope
-            [
-              def("create", (ParamPtr(*)(GLenum, GLenum))&gl::BlendFunc::create)
-            ],
-          
-          class_<gl::ScissorBox, ParamPtr>("ScissorBox")
-            .scope
-            [
-              def("create", (ParamPtr(*)(const math::Rect&))&gl::ScissorBox::create)
-            ]
-        ]
-      ];
-    }
-
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
     {
       texture->init(p1, p2, p3, p4, p5, p6, p7, 0);
@@ -386,7 +300,6 @@ namespace lost
       LostGLGL(state);
       LostGLRenderBuffer(state);
       LostGLShaderProgram(state);
-      LostGLState(state);
       LostGLTexture(state);
     }
 
