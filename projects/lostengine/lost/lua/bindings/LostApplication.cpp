@@ -265,6 +265,7 @@ namespace lost
           class_<Tasklet, TaskletPtr>("Tasklet")
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
             .def_readonly("loader", &Tasklet::loader)
+            .def_readonly("window", &Tasklet::window)
         ]
       ];
     }

@@ -22,7 +22,6 @@ struct UiTasklet : public Tasklet
   virtual void init();
   
   WindowParams windowParams;
-  WindowPtr window;
 };
 }
 }

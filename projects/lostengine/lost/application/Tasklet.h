@@ -14,6 +14,9 @@ namespace lost
     struct Tasklet;
     typedef lost::shared_ptr<Tasklet> TaskletPtr;
 
+    struct Window;
+    typedef lost::shared_ptr<Window> WindowPtr;
+  
     struct Tasklet : public fhtagn::threads::tasklet, public lost::enable_shared_from_this<Tasklet>
     {
     private:
@@ -28,6 +31,7 @@ namespace lost
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;
+      WindowPtr                       window;
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;
