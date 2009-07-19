@@ -44,7 +44,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<FrameBuffer, shared_ptr<FrameBuffer> >("FrameBuffer")
+          class_<FrameBuffer, FrameBufferPtr >("FrameBuffer")
             .def(constructor<>())
             .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<Texture>))&FrameBuffer::attachDepth)
             .def("attachDepth", (void(FrameBuffer::*)(shared_ptr<RenderBuffer>))&FrameBuffer::attachDepth)

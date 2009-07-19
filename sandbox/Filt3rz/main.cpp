@@ -2,6 +2,5 @@
 
 int main(int argn, char** args)
 {
-  lost::application::runTasklet(new Filt3rz);  
-  return 0;
+  return lost::application::runTasklet(new Filt3rz);  
 }
