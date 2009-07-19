@@ -37,6 +37,11 @@ namespace lost
       ];
     }
 
+    gl::TexturePtr colorTexture(gl::FrameBufferPtr fb, int num)
+    {
+      return fb->colorTextures[num];
+    }
+
     void LostGLFrameBuffer(lua_State* state)
     {
       module(state, "lost")
@@ -49,6 +54,7 @@ namespace lost
             .def("attachDepth", (void(FrameBuffer::*)(RenderBufferPtr))&FrameBuffer::attachDepth)
             .def("attachColor", (void(FrameBuffer::*)(int, TexturePtr))&FrameBuffer::attachColor)
             .def("status", &FrameBuffer::status)
+            .def("colorTexture", &colorTexture)
             .scope
             [
               def("createFrameBuffer", &FrameBuffer::createFrameBuffer)

@@ -57,9 +57,7 @@ namespace lost
           [
             def("create", &Node::create)
           ],
-          class_<Draw, NodePtr>("Draw")
-          .def_readwrite("name", &Draw::name)
-          .def_readwrite("active", &Draw::active)
+          class_<Draw, Node, NodePtr>("Draw")
           .def_readwrite("mesh", &Draw::mesh)
           .scope
           [
@@ -77,9 +75,7 @@ namespace lost
             def("create", &DrawCreateQuad2DPtr),
             def("create", &DrawCreateRenderedTextPtr)
           ],
-          class_<Camera, NodePtr>("Camera")
-          .def_readwrite("name", &Camera::name)
-          .def_readwrite("active", &Camera::active)
+          class_<Camera, Node, NodePtr>("Camera")
           .def_readwrite("cam", &Camera::cam)
           .scope
           [
@@ -87,48 +83,36 @@ namespace lost
             def("create", (NodePtr(*)(camera::Camera2DPtr))&Camera::create),
             def("create", (NodePtr(*)(camera::Camera3DPtr))&Camera::create)
           ],
-          class_<DepthTest, NodePtr>("DepthTest")
-          .def_readwrite("name", &DepthTest::name)
-          .def_readwrite("active", &DepthTest::active)
+          class_<DepthTest,Node,  NodePtr>("DepthTest")
           .def_readwrite("enable", &DepthTest::enable)
           .scope
           [
             def("create", &DepthTest::create)
           ],
-          class_<Clear, NodePtr>("Clear")
-          .def_readwrite("name", &Clear::name)
-          .def_readwrite("active", &Clear::active)
+          class_<Clear, Node, NodePtr>("Clear")
           .def_readwrite("mask", &Clear::mask)
           .scope
           [
             def("create", &Clear::create)
           ],
-          class_<ClearColor, NodePtr>("ClearColor")
-          .def_readwrite("name", &ClearColor::name)
-          .def_readwrite("active", &ClearColor::active)
+          class_<ClearColor, Node, NodePtr>("ClearColor")
           .def_readwrite("col", &ClearColor::col)
           .scope
           [
             def("create", &ClearColor::create)
           ],
-          class_<DefaultFrameBuffer, NodePtr>("DefaultFrameBuffer")
-          .def_readwrite("name", &DefaultFrameBuffer::name)
-          .def_readwrite("active", &DefaultFrameBuffer::active)
+          class_<DefaultFrameBuffer, Node, NodePtr>("DefaultFrameBuffer")
           .scope
           [
             def("create", &DefaultFrameBuffer::create)
           ],
-          class_<FrameBuffer, NodePtr>("FrameBuffer")
-          .def_readwrite("name", &FrameBuffer::name)
-          .def_readwrite("active", &FrameBuffer::active)
+          class_<FrameBuffer, Node, NodePtr>("FrameBuffer")
           .def_readwrite("fb", &FrameBuffer::fb)
           .scope
           [
             def("create", &FrameBuffer::create)
           ],
-          class_<Blend, NodePtr>("Blend")
-          .def_readwrite("name", &Blend::name)
-          .def_readwrite("active", &Blend::active)
+          class_<Blend, Node, NodePtr>("Blend")
           .def_readwrite("enable", &Blend::enable)
           .scope
           [
