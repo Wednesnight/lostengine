@@ -19,8 +19,9 @@ namespace lost
   namespace application
   {
 
-    void runTasklet(Tasklet* t)
+    int runTasklet(Tasklet* t)
     {
+      int result = EXIT_SUCCESS;
       try
       {
         static ApplicationPtr app = Application::create(TaskletPtr(t));
@@ -29,7 +30,9 @@ namespace lost
       catch (std::exception& e)
       {
         EOUT("exception: " << e.what());
+        result = EXIT_FAILURE;
       }        
+      return result;
     }
 
     

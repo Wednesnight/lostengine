@@ -100,7 +100,7 @@ function startup(tasklet)
   lightShader:disable()
 
   mesh = lost.mesh.Loader.obj(tasklet.loader:load("magnolia_tri.obj"))
-  mesh.material = lost.mesh.Material.create()
+--  mesh.material = lost.mesh.Material.create()
   mesh.material.shader = lightShader
 
   return true;
