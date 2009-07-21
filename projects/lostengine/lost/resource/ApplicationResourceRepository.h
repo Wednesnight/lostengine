@@ -1,25 +1,16 @@
 #ifndef LOST_RESOURCE_APPLICATIONRESOURCEREPOSITORY_H
 #define LOST_RESOURCE_APPLICATIONRESOURCEREPOSITORY_H
 
-#include <boost/filesystem.hpp>
-#include "lost/resource/Repository.h"
+#include "lost/resource/FilesystemRepository.h"
 
 namespace lost
 {
 namespace resource
 {
 
-struct File;
-typedef lost::shared_ptr<File> FilePtr;
-
-struct ApplicationResourceRepository : public Repository
+struct ApplicationResourceRepository : public FilesystemRepository
 {
-  boost::filesystem::path applicationResourcePath;
-
   ApplicationResourceRepository();
-  virtual ~ApplicationResourceRepository();
-
-  virtual FilePtr load( const boost::filesystem::path& relativePath);
 };
 }
 }
