@@ -33,7 +33,7 @@
 	self = [super initWithContentRect: contentRect styleMask: aStyle backing: bufferingType defer: flag];
 	if(self != nil)
 	{
-    [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType,nil]];
+    [self registerForDraggedTypes:[NSArray arrayWithObject:NSURLPboardType]];
 	}
 	return self;
 }
@@ -42,12 +42,16 @@
 
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
 {
-  id pb = [sender draggingPasteboard];
-  NSString* sft = [pb stringForType: NSFilenamesPboardType];
-  const char* c = [sft cStringUsingEncoding: NSUTF8StringEncoding];
-  std::string filename(c);
-  lost::shared_ptr<lost::application::DropEvent> dropEvent(new lost::application::DropEvent(filename));
-  parent->dispatcher->queueEvent(dropEvent);
+  NSPasteboard* pboard = [sender draggingPasteboard];
+  if ([[pboard types] containsObject:NSURLPboardType])
+  {
+    NSURL *fileURL = [NSURL URLFromPasteboard:pboard];
+    NSString* relativePath = [fileURL relativePath];
+    const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
+    std::string filename(cString);
+    lost::shared_ptr<lost::application::DropEvent> dropEvent(new lost::application::DropEvent(filename));
+    parent->dispatcher->queueEvent(dropEvent);
+  }
   return YES;
 }
 
