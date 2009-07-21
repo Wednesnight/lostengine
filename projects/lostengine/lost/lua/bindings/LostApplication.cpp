@@ -6,6 +6,7 @@
 #include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/DropEvent.h"
 #include "lost/application/InputEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
@@ -77,6 +78,24 @@ namespace lost
       globals(state)["lost"]["application"]["ApplicationEvent"]["QUIT"] = ApplicationEvent::QUIT();
     }
 
+    void LostApplicationDropEvent(lua_State* state)
+    {
+      module(state, "lost")
+      [
+       namespace_("application")
+       [
+        class_<DropEvent, Event, lost::shared_ptr<DropEvent> >("DropEvent")
+        .def(constructor<const std::string&>())
+        .def_readonly("filename", &DropEvent::filename)
+        .scope
+        [
+          def("cast", &lost::lua::cast<DropEvent>)
+        ]
+       ]
+      ];
+      globals(state)["lost"]["application"]["DropEvent"]["DROPPED_FILE"] = DropEvent::DROPPED_FILE();
+    }
+    
     void LostApplicationInputEvent(lua_State* state)
     {
       module(state, "lost")
@@ -327,6 +346,7 @@ namespace lost
       LostApplicationApplication(state);
       LostApplicationAccelerometerEvent(state);
       LostApplicationApplicationEvent(state);
+      LostApplicationDropEvent(state);
       LostApplicationInputEvent(state);
       LostApplicationKeyEvent(state);
       LostApplicationMouseEvent(state);
