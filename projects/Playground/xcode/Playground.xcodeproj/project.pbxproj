@@ -1,0 +1,366 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E8736A11015BF56002BEE13 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E87369F1015BF56002BEE13 /* Controller.cpp */; };
+		3E8736CC1015C187002BEE13 /* textScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E8736CA1015C187002BEE13 /* textScene.lua */; };
+		3E8736CD1015C187002BEE13 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E8736CB1015C187002BEE13 /* Vera.ttf */; };
+		3E8736D81015C22C002BEE13 /* settings.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E8736D71015C22C002BEE13 /* settings.lua */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */; };
+		EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */; };
+		EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */; };
+		EA4F9C7F0F8B6D8900967F8D /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7B0F8B6D8900967F8D /* global.xcconfig */; };
+		EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */; };
+		EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */; };
+		EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F9C840F8B6E1D00967F8D /* main.cpp */; };
+		EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD616910F9CF8C400EBEDA6 /* main.lua */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA4F9C6A0F8B6D4E00967F8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA4F9C6C0F8B6D4E00967F8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA4F9C6E0F8B6D4E00967F8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA4F9C700F8B6D4E00967F8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
+			remoteInfo = LostEngineUnittests;
+		};
+		EA4F9C720F8B6D5900967F8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		3E87369F1015BF56002BEE13 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
+		3E8736A01015BF56002BEE13 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
+		3E8736CA1015C187002BEE13 /* textScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = textScene.lua; path = ../textScene.lua; sourceTree = SOURCE_ROOT; };
+		3E8736CB1015C187002BEE13 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
+		3E8736D71015C22C002BEE13 /* settings.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = settings.lua; path = ../settings.lua; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
+		EA4F9C7B0F8B6D8900967F8D /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
+		EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
+		EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		EA4F9C840F8B6E1D00967F8D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EAD616910F9CF8C400EBEDA6 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Playground.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* MeshTest */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F9C840F8B6E1D00967F8D /* main.cpp */,
+				3E8736A01015BF56002BEE13 /* Controller.h */,
+				3E87369F1015BF56002BEE13 /* Controller.cpp */,
+				EA4F9C760F8B6D6E00967F8D /* Configurations */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = MeshTest;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAD616910F9CF8C400EBEDA6 /* main.lua */,
+				3E8736D71015C22C002BEE13 /* settings.lua */,
+				3E8736CA1015C187002BEE13 /* textScene.lua */,
+				3E8736CB1015C187002BEE13 /* Vera.ttf */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */,
+				EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA4F9C640F8B6D4E00967F8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */,
+				EA4F9C6D0F8B6D4E00967F8D /* libLostEngine.a */,
+				EA4F9C6F0F8B6D4E00967F8D /* libLostEngine.a */,
+				EA4F9C710F8B6D4E00967F8D /* LostEngineUnittests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA4F9C760F8B6D6E00967F8D /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */,
+				EA4F9C7B0F8B6D8900967F8D /* global.xcconfig */,
+				EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */,
+				EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Playground */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Playground" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				EA2922920FA4BA370084E689 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA4F9C730F8B6D5900967F8D /* PBXTargetDependency */,
+			);
+			name = Playground;
+			productInstallPath = "$(HOME)/Applications";
+			productName = MeshTest;
+			productReference = 8D1107320486CEB800E47090 /* Playground.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Playground" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* MeshTest */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA4F9C640F8B6D4E00967F8D /* Products */;
+					ProjectRef = EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Playground */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA4F9C6A0F8B6D4E00967F8D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA4F9C6D0F8B6D4E00967F8D /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA4F9C6C0F8B6D4E00967F8D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA4F9C6F0F8B6D4E00967F8D /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA4F9C6E0F8B6D4E00967F8D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA4F9C710F8B6D4E00967F8D /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA4F9C700F8B6D4E00967F8D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */,
+				EA4F9C7F0F8B6D8900967F8D /* global.xcconfig in Resources */,
+				EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */,
+				EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */,
+				EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */,
+				3E8736CC1015C187002BEE13 /* textScene.lua in Resources */,
+				3E8736CD1015C187002BEE13 /* Vera.ttf in Resources */,
+				3E8736D81015C22C002BEE13 /* settings.lua in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA2922920FA4BA370084E689 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4F9C850F8B6E1D00967F8D /* main.cpp in Sources */,
+				3E8736A11015BF56002BEE13 /* Controller.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA4F9C730F8B6D5900967F8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EA4F9C720F8B6D5900967F8D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Playground;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Playground;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4F9C7D0F8B6D8900967F8D /* global-debug.xcconfig */;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"FT_CONFIG_H=\"<freetype/config/ftconfig.h>\"",
+					FT2_BUILD_LIBRARY,
+					__STDC_CONSTANT_MACROS,
+				);
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA4F9C7C0F8B6D8900967F8D /* global-release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Playground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Playground" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

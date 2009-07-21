@@ -338,6 +338,11 @@
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
+		3E8738DC1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
+		3E8738DD1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
+		3E8738DE1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
+		3E8738DF1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
+		3E8738EC1015D91A002BEE13 /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 3E8738EB1015D91A002BEE13 /* lost */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -422,7 +427,6 @@
 		3EF4BF2C0F15F183008C7702 /* stack_content_by_name.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF00F15F183008C7702 /* stack_content_by_name.cpp */; };
 		3EF4BF2D0F15F183008C7702 /* weak_ref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF10F15F183008C7702 /* weak_ref.cpp */; };
 		3EF4BF2E0F15F183008C7702 /* wrapper_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */; };
-		8D13D8020FD800F800CEC1AF /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 8D13D6C30FD800F800CEC1AF /* lost */; };
 		8D13D8050FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8060FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
@@ -1243,6 +1247,8 @@
 		3E5323130F15185000D7C8B4 /* lcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcode.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lcode.c; sourceTree = SOURCE_ROOT; };
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbsoluteResourceRepository.cpp; path = resource/AbsoluteResourceRepository.cpp; sourceTree = "<group>"; };
+		3E8738EB1015D91A002BEE13 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EB496E70F9F99DE00F3036A /* LostApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplication.cpp; path = bindings/LostApplication.cpp; sourceTree = "<group>"; };
 		3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommon.cpp; path = bindings/LostCommon.cpp; sourceTree = "<group>"; };
@@ -1271,7 +1277,6 @@
 		3EF4BEF00F15F183008C7702 /* stack_content_by_name.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stack_content_by_name.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/stack_content_by_name.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEF10F15F183008C7702 /* weak_ref.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = weak_ref.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/weak_ref.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEF20F15F183008C7702 /* wrapper_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper_base.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/wrapper_base.cpp; sourceTree = SOURCE_ROOT; };
-		8D13D6C30FD800F800CEC1AF /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		8D13D8040FD8011A00CEC1AF /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Blend.cpp; path = rg/Blend.cpp; sourceTree = "<group>"; };
 		8D40911A0F89322D00163B63 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
@@ -1532,7 +1537,7 @@
 		08FB7794FE84155DC02AAC07 /* LostEngine */ = {
 			isa = PBXGroup;
 			children = (
-				8D13D6C30FD800F800CEC1AF /* lost */,
+				3E8738EB1015D91A002BEE13 /* lost */,
 				3E531D8D0F14EDEA00D7C8B4 /* Configurations */,
 				EA9A67E10F159C38007E8A3D /* precompiled headers */,
 				3E5321CA0F15112200D7C8B4 /* Sources */,
@@ -2005,6 +2010,7 @@
 				EA26B90E0F91481A00318279 /* File.cpp */,
 				EA26B9270F91498E00318279 /* DefaultLoader.cpp */,
 				EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */,
+				3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */,
 			);
 			name = resource;
 			sourceTree = "<group>";
@@ -2494,7 +2500,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D13D8020FD800F800CEC1AF /* lost in Resources */,
+				3E8738EC1015D91A002BEE13 /* lost in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2821,6 +2827,7 @@
 				8DB8AAE50FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAE60FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAE70FDD50170013614E /* btGeometryUtil.cpp in Sources */,
+				3E8738DE1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3144,6 +3151,7 @@
 				8DB8AAED0FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAEE0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEF0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
+				3E8738DC1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3296,6 +3304,7 @@
 				8DB8AAE90FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAEA0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEB0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
+				3E8738DF1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3619,6 +3628,7 @@
 				8DB8AAE10FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAE20FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAE30FDD50170013614E /* btGeometryUtil.cpp in Sources */,
+				3E8738DD1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
