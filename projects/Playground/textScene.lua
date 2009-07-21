@@ -4,10 +4,19 @@ local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 
+require("settings")
+
+local txtx = screenSize.width-250
+local txty = (screenSize.height-13)/2
+
+log.debug("---------- x: "..txtx.." y: "..txty)
+
+local c = 254/255
+
 lostrg:Scene
 {
   name = "rootNode",
-  lostrg:ClearColor{color = Color(0,0,0,1)},
+  lostrg:ClearColor{color = Color(c,c,c,1)},
   lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
   lostrg:Camera2D
   {
@@ -20,12 +29,24 @@ lostrg:Scene
   },
   lostrg:Draw
   {
+    mesh = lostmesh:Quad2D
+    {
+      filename = "down_arrow.png",
+      flip = true
+    }
+  },
+  lostrg:Draw
+  {
     mesh = lostfont:Text
     {
       font = verattf,
       text = "Drop tasklet directory to get started!",
       size =  12,
-      transform = MatrixTranslation(Vec3(200,50,0))
+      transform = MatrixTranslation(Vec3(txtx,txty,0)),
+      material = 
+      {
+          color = Color(0,0,0,1)
+      }
     }
   }
 }
