@@ -38,6 +38,8 @@ Controller::Controller(const ApplicationPtr& inApplication)
 : UiTasklet(WindowParams("Playground", Rect(50,200,screenSize.width, screenSize.height))),
   application(inApplication)
 {
+  waitForEvents = true;
+  running = true;
 }
 
 
@@ -67,7 +69,7 @@ void Controller::draw()
 bool Controller::main()
 {
   draw();
-  return true;
+  return running;
 }
 
 bool Controller::shutdown()
@@ -77,8 +79,7 @@ bool Controller::shutdown()
 
 void Controller::keyDownHandler(KeyEventPtr event)
 {
-  if (event->key == K_ESCAPE) 
-    eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+  if (event->key == K_ESCAPE) running = false;
 }
 
 void Controller::fileDropHandler(DropEventPtr event)

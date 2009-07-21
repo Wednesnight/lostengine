@@ -26,6 +26,7 @@ struct Controller : public lost::application::UiTasklet
   void keyDownHandler(lost::application::KeyEventPtr event);
   void fileDropHandler(lost::application::DropEventPtr event);
 
+  bool running;
   lost::application::ApplicationPtr application;
   lost::rg::NodePtr textScene;
 };
