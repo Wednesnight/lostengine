@@ -338,10 +338,6 @@
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E8738DC1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
-		3E8738DD1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
-		3E8738DE1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
-		3E8738DF1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */; };
 		3E8738EC1015D91A002BEE13 /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 3E8738EB1015D91A002BEE13 /* lost */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -1112,6 +1108,9 @@
 		EACF1C6110164CB100753144 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C6010164CB100753144 /* Helper.cpp */; };
 		EACF1C6210164CB100753144 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C6010164CB100753144 /* Helper.cpp */; };
 		EACF1C6310164CB100753144 /* Helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C6010164CB100753144 /* Helper.cpp */; };
+		EACF1C7D1016517400753144 /* FilesystemRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C7C1016517400753144 /* FilesystemRepository.cpp */; };
+		EACF1C7E1016517400753144 /* FilesystemRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C7C1016517400753144 /* FilesystemRepository.cpp */; };
+		EACF1C7F1016517400753144 /* FilesystemRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACF1C7C1016517400753144 /* FilesystemRepository.cpp */; };
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
@@ -1250,7 +1249,6 @@
 		3E5323130F15185000D7C8B4 /* lcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcode.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lcode.c; sourceTree = SOURCE_ROOT; };
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbsoluteResourceRepository.cpp; path = resource/AbsoluteResourceRepository.cpp; sourceTree = "<group>"; };
 		3E8738EB1015D91A002BEE13 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EB496E70F9F99DE00F3036A /* LostApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplication.cpp; path = bindings/LostApplication.cpp; sourceTree = "<group>"; };
@@ -1497,6 +1495,7 @@
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
 		EACF1C6010164CB100753144 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = resource/Helper.cpp; sourceTree = "<group>"; };
+		EACF1C7C1016517400753144 /* FilesystemRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilesystemRepository.cpp; path = resource/FilesystemRepository.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
@@ -2013,8 +2012,8 @@
 				EA26B9190F91494400318279 /* Loader.cpp */,
 				EA26B90E0F91481A00318279 /* File.cpp */,
 				EA26B9270F91498E00318279 /* DefaultLoader.cpp */,
+				EACF1C7C1016517400753144 /* FilesystemRepository.cpp */,
 				EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */,
-				3E8738DB1015D901002BEE13 /* AbsoluteResourceRepository.cpp */,
 				EACF1C6010164CB100753144 /* Helper.cpp */,
 			);
 			name = resource;
@@ -2832,8 +2831,8 @@
 				8DB8AAE50FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAE60FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAE70FDD50170013614E /* btGeometryUtil.cpp in Sources */,
-				3E8738DE1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 				EACF1C6310164CB100753144 /* Helper.cpp in Sources */,
+				EACF1C7F1016517400753144 /* FilesystemRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3157,8 +3156,8 @@
 				8DB8AAED0FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAEE0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEF0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
-				3E8738DC1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 				EACF1C6110164CB100753144 /* Helper.cpp in Sources */,
+				EACF1C7D1016517400753144 /* FilesystemRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3311,7 +3310,6 @@
 				8DB8AAE90FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAEA0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEB0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
-				3E8738DF1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3635,8 +3633,8 @@
 				8DB8AAE10FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAE20FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAE30FDD50170013614E /* btGeometryUtil.cpp in Sources */,
-				3E8738DD1015D901002BEE13 /* AbsoluteResourceRepository.cpp in Sources */,
 				EACF1C6210164CB100753144 /* Helper.cpp in Sources */,
+				EACF1C7E1016517400753144 /* FilesystemRepository.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <string>
 #include "lost/resource/Loader.h"
+#include "lost/resource/File.h"
 
 namespace lost
 {
