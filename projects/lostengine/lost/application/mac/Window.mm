@@ -8,6 +8,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeyCode.h"
+#include "lost/application/DropEvent.h"
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 
@@ -32,12 +33,28 @@
 	self = [super initWithContentRect: contentRect styleMask: aStyle backing: bufferingType defer: flag];
 	if(self != nil)
 	{
-    // TODO: init window params
+    [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType,nil]];
 	}
 	return self;
 }
 // TODO: is screen of any use for us?
 //- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
+
+- (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
+{
+  id pb = [sender draggingPasteboard];
+  NSString* sft = [pb stringForType: NSFilenamesPboardType];
+  const char* c = [sft cStringUsingEncoding: NSUTF8StringEncoding];
+  std::string filename(c);
+  lost::shared_ptr<lost::application::DropEvent> dropEvent(new lost::application::DropEvent(filename));
+  parent->dispatcher->queueEvent(dropEvent);
+  return YES;
+}
+
+- (NSDragOperation) draggingEntered:(id <NSDraggingInfo>)sender
+{
+  return NSDragOperationCopy;
+}
 
 - (BOOL)isReleasedWhenClosed
 {

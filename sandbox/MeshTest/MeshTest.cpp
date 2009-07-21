@@ -242,7 +242,7 @@ bool MeshTest::startup()
   scene->add(selectionDisplay->rootNode);
   threedScene->add(selectionDisplay->rootNode);
   textScene->add(selectionDisplay->rootNode);
-//  pixelperfectScene->add(selectionDisplay->rootNode);
+  pixelperfectScene->add(selectionDisplay->rootNode);
 /*  TextureAtlasPtr textureAtlas = TextureAtlas::create();
   TexturePtr tunatex(new Texture(loader->load("tuna.png")));
   textureAtlas->tex = tunatex;*/

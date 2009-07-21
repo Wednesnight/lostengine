@@ -25,6 +25,7 @@ namespace lost
         [
           class_<Event, lost::shared_ptr<Event> >("Event")
             .def(constructor<std::string>()) 
+            .def(constructor<const Event&>()) 
 //            .def("asSharedPtr", &asSharedPtr)
             .def_readwrite("type", &Event::type)
         ]

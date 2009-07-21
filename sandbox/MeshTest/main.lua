@@ -12,5 +12,13 @@ function startup(tasklet)
   textScene = l:loadScene("textScene.lua")
   tunaScene = l:loadScene("tunaScene.lua")
   pixelperfectScene = l:loadScene("pixelperfect.lua")
+  
+  tasklet.eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE,
+    function(event)
+      local dropEvent = lost.application.DropEvent.cast(event)
+      log.debug(dropEvent.filename)
+    end
+  )
+  
   return true
 end
