@@ -31,7 +31,7 @@ namespace lost
       eventDispatcher(new EventDispatcher()),
       lua(new State(loader)),
       waitForEvents(false),
-      script("main.lua")
+      scriptname("main.lua")
     {
       // set error handler
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
@@ -40,6 +40,18 @@ namespace lost
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua, loader);
+
+      // try to load the main script and memorize result in a flag
+      scriptLoaded = false;
+      try
+      {
+        lua->doFile(scriptname);
+        scriptLoaded = true;
+      }
+      catch(resource::LoaderError& ex)
+      {
+        DOUT("couldn't load script <"+ scriptname +">: "+ string(ex.what()));
+      }      
     }
     
     Tasklet::~Tasklet()
@@ -48,19 +60,45 @@ namespace lost
     }
 
     void Tasklet::init()
-    {
+    {      
+      // try to extract window params and flag from interpreter
+      // the values are optional and set as globals
+      luabind::object obj = lua->globals["hasWindow"];
+      if(obj) {hasWindow = object_cast<bool>(obj);}
+      obj = lua->globals["windowParams"];
+      if(obj) {windowParams=object_cast<WindowParams>(obj);}
+      
+      // create window if flag is set
+      if(hasWindow)
+      {
+        window = Window::create(eventDispatcher, windowParams);
+        window->open();        
+      }
+      
+      // get lua functions if they are present
+      hasLuaStartup = false;
+      hasLuaUpdate = false;
+      hasLuaShutdown = false;
+      luaStartup = lua->globals["startup"];
+      if(luabind::type(luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
+      luaUpdate = lua->globals["update"];
+      if(luabind::type(luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
+      luaShutdown = lua->globals["shutdown"];
+      if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
     }
 
     void Tasklet::run(tasklet& tasklet)
     {
       threadAutoreleasePoolHack_createPool();
-
-      // init tasklet thread resources
-      init();
-
+      // make sure that our GL context is the current context
+      if(hasWindow)
+      {
+        window->context->makeCurrent();      
+      }
+        
       if (startup())
       {
-        while (get_state() == RUNNING && main())
+        while (get_state() == RUNNING && update())
         {
           const double startTime = currentTimeMilliSeconds();
           if(!waitForEvents)
@@ -81,24 +119,6 @@ namespace lost
       eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
-    bool Tasklet::callScriptFunction(const string& funcname)
-    {
-      bool result = true;
-      if (executeScript) 
-      {
-        object func = globals(*lua)[funcname];
-        if (luabind::type(func) != LUA_TFUNCTION)
-        {
-          WOUT("no " << funcname << "() found in <" << script << ">");
-        }
-        else
-        {
-          result = call_function<bool>(func, shared_from_this());
-        }
-      }
-      return result;
-    }
-
     void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
     {
       EOUT(exception.what());
@@ -106,36 +126,38 @@ namespace lost
     }
 
     bool Tasklet::startup()
-    {
-      return callScriptFunction("startup");
+    {    
+      bool result = true;
+      if(hasLuaStartup)
+      {
+        result = call_function<bool>(luaStartup, shared_from_this());
+      }
+      return  result;
     }
 
-    bool Tasklet::main()
+    bool Tasklet::update()
     {
-      return callScriptFunction("main");
+      bool result = true;
+      if(hasLuaUpdate)
+      {
+        result = call_function<bool>(luaUpdate, shared_from_this());
+      }
+      return  result;      
     }
 
     bool Tasklet::shutdown()
     {
-      return callScriptFunction("shutdown");
+      bool result = true;
+      if(hasLuaShutdown)
+      {
+        result = call_function<bool>(luaShutdown, shared_from_this());
+      }
+      return  result;      
     }
 
     bool Tasklet::start()
     {
-      try
-      {
-        executeScript = true;
-        lua->doFile(script);
-      }
-      catch(resource::LoaderError& ex)
-      {
-        DOUT("couldn't load script <"+ script +">: "+ string(ex.what()));
-        executeScript = false;
-      }
-      catch(std::exception&)
-      {
-        throw;
-      }
+      // init must've been called before this by application or some other external code
       return ::fhtagn::threads::tasklet::start();
     }
 

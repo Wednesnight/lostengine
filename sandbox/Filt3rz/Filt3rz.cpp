@@ -28,7 +28,7 @@ Filt3rz::Filt3rz()
 bool Filt3rz::startup()
 {
   DOUT("startup");
-  if(!UiTasklet::startup()) return false;
+  if(!Tasklet::startup()) return false;
   model = lua->globals["mesh"];
   scene = lua->globals["scene"];
   return true;
@@ -65,7 +65,7 @@ void Filt3rz::draw()
   window->context->swapBuffers();
 }
 
-bool Filt3rz::main()
+bool Filt3rz::update()
 {
   double currentSec = lost::platform::currentTimeSeconds();
   double delta = currentSec - passedSec;

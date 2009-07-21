@@ -1,6 +1,7 @@
 #ifndef LOST_APPLICATION_TASKLET_H
 #define LOST_APPLICATION_TASKLET_H
 
+#include "lost/application/Window.h"
 #include "fhtagn/threads/tasklet.h"
 #include <list>
 #include "lost/resource/DefaultLoader.h"
@@ -20,35 +21,41 @@ namespace lost
     struct Tasklet : public fhtagn::threads::tasklet, public lost::enable_shared_from_this<Tasklet>
     {
     private:
-      // internal flag to check if we have a valid script
-      bool executeScript;
+      bool scriptLoaded; // tru if 'main.lua' was successfully loaded
 
       void run(fhtagn::threads::tasklet& tasklet);
-      bool callScriptFunction(const std::string& funcname); // calls the given function with tasklet as parameter
 
       void error(fhtagn::threads::tasklet& tasklet, std::exception const& exception);
+      
+      bool hasLuaStartup;
+      luabind::object luaStartup;
+      bool hasLuaUpdate;
+      luabind::object luaUpdate;
+      bool hasLuaShutdown;
+      luabind::object luaShutdown;
+      
     public:
+      std::string                     scriptname;
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;
-      WindowPtr                       window;
+      bool                            hasWindow; // set this to true if you want a window to be constructed from windowParams
+      WindowParams                    windowParams; // fill this structure with the necessary params and set hasWindow to true if you want a window with GL context
+      WindowPtr                       window; // contains the window pointer after init() if it could be created
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;
-      // script filename
-      std::string script;
 
       Tasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
       virtual ~Tasklet();
 
-      // initializes resources on the tasklet thread
-      virtual void init();
+      virtual void init(); // runs on main thread: reads main.lua if present and creates a window if desired
 
-      virtual bool startup();
-      virtual bool main();
-      virtual bool shutdown();
+      virtual bool startup(); // called once on worker thread, return false if startup fails
+      virtual bool update(); // called repeatedly on worker thread, return false if you want to shutdown
+      virtual bool shutdown(); // called once on worker thread, return false if shutdown failed
 
-      virtual bool start();
+      virtual bool start(); 
       virtual bool stop();
     };
 
