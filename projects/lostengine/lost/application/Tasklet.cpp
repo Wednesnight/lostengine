@@ -40,21 +40,6 @@ namespace lost
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua, loader);
-
-      try
-      {
-        executeScript = true;
-        lua->doFile(script);
-      }
-      catch(resource::LoaderError& ex)
-      {
-        DOUT("couldn't load script <"+ script +">: "+ string(ex.what()));
-        executeScript = false;
-      }
-      catch(std::exception&)
-      {
-        throw;
-      }
     }
     
     Tasklet::~Tasklet()
@@ -137,6 +122,20 @@ namespace lost
 
     bool Tasklet::start()
     {
+      try
+      {
+        executeScript = true;
+        lua->doFile(script);
+      }
+      catch(resource::LoaderError& ex)
+      {
+        DOUT("couldn't load script <"+ script +">: "+ string(ex.what()));
+        executeScript = false;
+      }
+      catch(std::exception&)
+      {
+        throw;
+      }
       return ::fhtagn::threads::tasklet::start();
     }
 
