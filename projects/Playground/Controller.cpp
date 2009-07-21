@@ -32,7 +32,7 @@ using namespace lost::font;
 using namespace luabind;
 using namespace boost;
 
-const static Vec2 screenSize(640,480);
+const static Vec2 screenSize(400,128);
 
 Controller::Controller(const ApplicationPtr& inApplication)
 : UiTasklet(WindowParams("Playground", Rect(50,200,screenSize.width, screenSize.height))),

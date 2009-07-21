@@ -1,3 +1,7 @@
+windowWidth = 640
+windowHeight = 480
+windowTitle = "fuxx0r"
+
 function startup(tasklet)
   log.debug("startup")
   return true

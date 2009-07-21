@@ -1,1 +1,1 @@
-screenSize = lost.math.Vec2(640,480)
+screenSize = lost.math.Vec2(400,128)
