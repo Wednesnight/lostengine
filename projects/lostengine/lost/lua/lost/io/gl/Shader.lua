@@ -32,7 +32,7 @@ function Loader:Shader(definition)
     for k,v in pairs(params) do
       local nt = shaderProgram:numericalType(k)
       -- since Lua only knows floats/doubles, we need to disambiguate here by
-      -- numerical type of the paraeter and call the appropriate setter
+      -- numerical type of the parameter and call the appropriate setter
       if k == gl.GL_INT then
         shaderProgram:setInt(k, v)
       elseif k == gl.GL_FLOAT then
