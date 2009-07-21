@@ -28,6 +28,12 @@ T getParam(GLenum pname);
 
 template<> bool getParam(GLenum pname) { return getBoolParam(pname);GLDEBUG; }
 template<> int getParam(GLenum pname) { return getIntParam(pname);GLDEBUG; }
+template<> lost::common::Color getParam(GLenum pname)
+{
+  lost::common::Color result;
+  glGetFloatv(pname, result.fv);GLDEBUG;
+  return result;
+}
 
 
 #define CLIENTSTATE(member, newstate, pname)  \
@@ -84,6 +90,7 @@ namespace lost
       texture2DEnabled = getParam<bool>(GL_TEXTURE_2D);
       currentActiveTexture = getParam<int>(GL_ACTIVE_TEXTURE);
       currentModelTransform.initIdentity();
+      currentClearColor = getParam<lost::common::Color>(GL_COLOR_CLEAR_VALUE);
     }
     
     Context::~Context()

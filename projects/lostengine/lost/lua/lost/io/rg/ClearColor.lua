@@ -9,7 +9,6 @@ function Loader:ClearColor(definition)
     error("color is required for rg:ClearColor")
   end
   local result = lost.rg.ClearColor.create(color)
-  
   local active = definition["active"]
   local name = definition["name"]
   if active ~= nil then
