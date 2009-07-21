@@ -35,10 +35,9 @@ using namespace boost;
 const static Vec2 screenSize(400,128);
 
 Controller::Controller(const ApplicationPtr& inApplication)
-: UiTasklet(WindowParams("Playground", Rect(50,200,screenSize.width, screenSize.height))),
-  application(inApplication)
+:  application(inApplication)
 {
-  waitForEvents = true;
+  waitForEvents = false;
   running = true;
 }
 
@@ -66,7 +65,7 @@ void Controller::draw()
   window->context->swapBuffers();  
 }
 
-bool Controller::main()
+bool Controller::update()
 {
   draw();
   return running;
@@ -90,9 +89,10 @@ void Controller::fileDropHandler(DropEventPtr event)
     filesystem::path currentDir = filesystem::current_path();
     filesystem::path newDir(event->filename);
     filesystem::current_path(newDir);
-    TaskletPtr tasklet = TaskletPtr(new UiTasklet(WindowParams(event->filename, Rect(50,200,screenSize.width, screenSize.height))));
+/*    TaskletPtr tasklet = TaskletPtr(new Tasklet(WindowParams(event->filename, Rect(50,200,screenSize.width, screenSize.height))));
+    tasklet->
     tasklet->script = (newDir / "main.lua").native_file_string();
     application->addTasklet(tasklet);
-    filesystem::current_path(currentDir);
+    filesystem::current_path(currentDir);*/
   }
 }

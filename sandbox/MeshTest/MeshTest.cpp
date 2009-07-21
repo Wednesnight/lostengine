@@ -29,10 +29,9 @@ using namespace lost::meter;
 using namespace lost::font;
 using namespace luabind;
 
-const static Vec2 screenSize(640,480);
+static Vec2 screenSize;
 
 MeshTest::MeshTest()
-: UiTasklet(WindowParams("MeshTest", Rect(50,200,screenSize.width, screenSize.height)))
 {
   passedSec = lost::platform::currentTimeSeconds();
   angle = 0;
@@ -66,6 +65,7 @@ bool MeshTest::startup()
 
   TrueTypeFontPtr fnt = lua->globals["verattf"];
   selectionDisplay.reset(new SelectionDisplay(fnt));
+  screenSize = Vec2(windowParams.rect.width, windowParams.rect.height);
   selectionDisplay->build(screenSize, titles, descriptions);
 
   meter.reset(new Meter());
@@ -291,7 +291,7 @@ void MeshTest::draw()
   window->context->swapBuffers();  
 }
 
-bool MeshTest::main()
+bool MeshTest::update()
 {
   double currentSec = lost::platform::currentTimeSeconds();
   double delta = currentSec - passedSec;

@@ -1,7 +1,7 @@
 #ifndef MESHTEST_H
 #define MESHTEST_H
 
-#include "lost/application/UiTasklet.h"
+#include "lost/application/Tasklet.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/mesh/Line.h"
 #include "lost/mesh/Quad.h"
@@ -13,11 +13,11 @@
 #include "lost/font/TrueTypeFont.h"
 #include "SelectionDisplay.h"
 
-struct MeshTest : public lost::application::UiTasklet
+struct MeshTest : public lost::application::Tasklet
 {  
   MeshTest();
   bool startup();
-  bool main();
+  bool update();
   bool shutdown();
 
   void update(double dt);

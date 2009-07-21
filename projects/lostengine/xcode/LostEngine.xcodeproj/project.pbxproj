@@ -980,9 +980,6 @@
 		EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
 		EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
 		EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */; };
-		EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
-		EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
-		EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA296C430F8F91B800213B73 /* UiTasklet.cpp */; };
 		EA2E6ACD0F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA2E6AD10F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA2E6AD50F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
@@ -1449,7 +1446,6 @@
 		EA26B9190F91494400318279 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = resource/Loader.cpp; sourceTree = "<group>"; };
 		EA26B9270F91498E00318279 /* DefaultLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLoader.cpp; path = resource/DefaultLoader.cpp; sourceTree = "<group>"; };
 		EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationResourceRepository.cpp; path = resource/ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
-		EA296C430F8F91B800213B73 /* UiTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UiTasklet.cpp; sourceTree = "<group>"; };
 		EA2E6AC90F9E45E300696425 /* LostMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMesh.cpp; path = bindings/LostMesh.cpp; sourceTree = "<group>"; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
 		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
@@ -2197,7 +2193,6 @@
 				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
 				8D40911A0F89322D00163B63 /* Tasklet.cpp */,
-				EA296C430F8F91B800213B73 /* UiTasklet.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
 			path = application;
@@ -2705,7 +2700,6 @@
 				8DA5853A0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA5853C0F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA5853D0F8A4F7000A568E1 /* path.cpp in Sources */,
-				EA296C460F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9110F91481A00318279 /* File.cpp in Sources */,
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
@@ -3030,7 +3024,6 @@
 				8DA5853E0F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585400F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585410F8A4F7000A568E1 /* path.cpp in Sources */,
-				EA296C440F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B90F0F91481A00318279 /* File.cpp in Sources */,
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
@@ -3507,7 +3500,6 @@
 				8DA585420F8A4F7000A568E1 /* operations.cpp in Sources */,
 				8DA585440F8A4F7000A568E1 /* portability.cpp in Sources */,
 				8DA585450F8A4F7000A568E1 /* path.cpp in Sources */,
-				EA296C450F8F91B800213B73 /* UiTasklet.cpp in Sources */,
 				EA26B9100F91481A00318279 /* File.cpp in Sources */,
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,

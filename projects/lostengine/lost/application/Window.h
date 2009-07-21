@@ -20,6 +20,7 @@ namespace lost
       lost::math::Rect rect;
 
       WindowParams()
+      : caption("<unset>"), rect(0,0,640,480)
       {
       }
 

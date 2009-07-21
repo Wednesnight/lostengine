@@ -8,14 +8,17 @@ local Camera3D = lost.camera.Camera3D
 local WindowParams = lost.application.WindowParams
 local MatrixTranslation = lost.math.MatrixTranslation
 
+fboSize = Vec2(256, 256)
+numPanels = 5
+numRows = 2
+screenSize = Vec2(fboSize.width * numPanels, fboSize.height * numRows)
+
+hasWindow = true
+windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height))
+
 function init()
   log.debug("init")
 
-  fboSize = Vec2(256, 256)
-  numPanels = 5
-  numRows = 2
-  screenSize = Vec2(fboSize.width * numPanels, fboSize.height * numRows)
-  windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height))
   ftlib = lost.font.freetype.Library()
   fontSize = 30
   yinset = fontSize+3  

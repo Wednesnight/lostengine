@@ -55,19 +55,19 @@ namespace lost
       // Declare the supported options.
       options_description desc;
       desc.add_options()
-      ("script", value<std::string>())
+      ("scriptname", value<std::string>())
       ;
       positional_options_description p;
-      p.add("script", -1);
+      p.add("scriptname", -1);
       
       variables_map vm;
       store(command_line_parser(argn, args).options(desc).positional(p).run(), vm);
       notify(vm);
       
-      if (vm.count("script"))
+      if (vm.count("scriptname"))
       {
         TaskletPtr tasklet(new Tasklet(loader));
-        tasklet->script = vm["script"].as<std::string>();
+        tasklet->scriptname = vm["scriptname"].as<std::string>();
         addTasklet(tasklet);
       }
 
@@ -89,7 +89,7 @@ namespace lost
         inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
       TaskletPtr tasklet(new Tasklet(loader));
-      tasklet->script = inScript;
+      tasklet->scriptname = inScript;
       addTasklet(tasklet);
       initialize();
     }
@@ -132,6 +132,7 @@ namespace lost
     {
       for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
+        (*tasklet)->init();
         (*tasklet)->start();
       }
       running = true;
@@ -144,6 +145,7 @@ namespace lost
       tasklets.push_back(tasklet);
       if (running)
       {
+        tasklet->init();
         tasklet->start();
       }
     }
@@ -205,7 +207,7 @@ namespace lost
 
     void Application::taskletDone(TaskletEventPtr& event)
     {
-      DOUT("End of tasklet: " << event->tasklet->script);
+      DOUT("End of tasklet: " << event->tasklet->scriptname);
       // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
       //removeTasklet(tasklet);
       bool haveActiveTasklets = false;
