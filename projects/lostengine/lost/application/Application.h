@@ -30,6 +30,15 @@ namespace lost
     struct ApplicationEvent;
     typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
+    struct SpawnTaskletEvent;
+    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
+    
+    struct QueueEvent;
+    typedef lost::shared_ptr<QueueEvent> QueueEventPtr;
+    
+    struct ProcessEvent;
+    typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
+    
     int runTasklet(Tasklet* t);
 
 
@@ -41,6 +50,8 @@ namespace lost
        */
       struct ApplicationHiddenMembers;
       ApplicationHiddenMembers* hiddenMembers;
+
+      lost::resource::LoaderPtr loader;
 
       /**
        * list of tasklets
@@ -87,15 +98,19 @@ namespace lost
       void startup(ApplicationEventPtr& event);
 
       /**
-       * listener for ApplicationEvent.QUIT(), implemented in platform specific parts
+       * listener for ApplicationEvent.QUIT()
+       */
+      void quitHandler(ApplicationEventPtr& event);
+
+      /**
        * handled in platform specific code
        * raised from generic code
+       * should be executed on main thread!
        */
-      void shutdown(ApplicationEventPtr& event);
+      void shutdown();
     public:
-      lost::resource::LoaderPtr loader;
       lost::event::EventDispatcherPtr eventDispatcher;
-      
+
       /**
        * static ctor helpers, make sure that we're held by a lost::shared_ptr
        */
@@ -113,24 +128,14 @@ namespace lost
       void addTasklet(const TaskletPtr& tasklet);
 
       /**
-       * dispatches application events into all active tasklets
-       */
-      void dispatchApplicationEvent(const lost::event::Type& which);
-      
-      /**
        * starts all tasklets and queues a run event
        */
       void run();
 
       /**
-       * queues a quit event
+       * quits the app
        */
       void quit();
-
-      /**
-       * terminates all tasklets, called from platform specific code when shutdown is complete
-       */
-      void terminate();
 
       /**
        * call this to show/hide the OS mouse
@@ -138,9 +143,24 @@ namespace lost
       void showMouse(bool visible);      
 
       /**
-       * Called through Tasklet events
+       * Tasklet spawn handler
        **/
-      void Application::taskletDone(TaskletEventPtr& event);
+      void taskletSpawn(const SpawnTaskletEventPtr& event);
+
+      /**
+       * Tasklet done handler
+       **/
+      void taskletDone(const TaskletEventPtr& event);
+
+      /**
+       * listener for QueueEvent.QUEUE()
+       */
+      void queueEvent(const QueueEventPtr& event);
+
+      /**
+       * should be executed on main thread!
+       */
+      void processEvents(const ProcessEventPtr& event);
     };
 
   }

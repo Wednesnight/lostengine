@@ -2,6 +2,7 @@
 #include "lost/event/Receive.h"
 #include "lost/common/Logger.h"
 #include "lost/application/ApplicationEvent.h"
+#include "lost/application/SpawnTaskletEvent.h"
 
 #include "lost/rg/Draw.h"
 #include "lost/rg/DepthTest.h"
@@ -14,8 +15,8 @@
 #include "lost/mesh/ScaleGrid.h"
 #include "lost/mesh/Circular.h"
 #include "lost/mesh/AABB.h"
-
-#include <boost/filesystem.hpp>
+#include "lost/resource/Loader.h"
+#include "lost/resource/FilesystemRepository.h"
 
 using namespace std;
 using namespace lost;
@@ -29,16 +30,15 @@ using namespace lost::camera;
 using namespace lost::mesh;
 using namespace lost::meter;
 using namespace lost::font;
+using namespace lost::resource;
 using namespace luabind;
 using namespace boost;
 
 const static Vec2 screenSize(400,128);
 
-Controller::Controller(const ApplicationPtr& inApplication)
-:  application(inApplication)
+Controller::Controller()
 {
-  waitForEvents = false;
-  running = true;
+  waitForEvents = true;
 }
 
 
@@ -68,7 +68,7 @@ void Controller::draw()
 bool Controller::update()
 {
   draw();
-  return running;
+  return true;
 }
 
 bool Controller::shutdown()
@@ -78,7 +78,7 @@ bool Controller::shutdown()
 
 void Controller::keyDownHandler(KeyEventPtr event)
 {
-  if (event->key == K_ESCAPE) running = false;
+  if (event->key == K_ESCAPE) dispatchApplicationEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
 }
 
 void Controller::fileDropHandler(DropEventPtr event)
@@ -86,13 +86,9 @@ void Controller::fileDropHandler(DropEventPtr event)
   DOUT("executing tasklet: " << event->filename);
   if (filesystem::is_directory(event->filename))
   {
-    filesystem::path currentDir = filesystem::current_path();
-    filesystem::path newDir(event->filename);
-    filesystem::current_path(newDir);
-/*    TaskletPtr tasklet = TaskletPtr(new Tasklet(WindowParams(event->filename, Rect(50,200,screenSize.width, screenSize.height))));
-    tasklet->
-    tasklet->script = (newDir / "main.lua").native_file_string();
-    application->addTasklet(tasklet);
-    filesystem::current_path(currentDir);*/
+    LoaderPtr loader(new Loader);
+    loader->addRepository(lost::shared_ptr<FilesystemRepository>(new FilesystemRepository(event->filename)));
+    SpawnTaskletEventPtr event(new SpawnTaskletEvent(loader));
+    dispatchApplicationEvent(event);
   }
 }

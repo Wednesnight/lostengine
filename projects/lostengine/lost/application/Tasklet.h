@@ -9,7 +9,7 @@
 
 namespace lost
 {
-  namespace event {    struct EventDispatcher; }
+  namespace event { struct EventDispatcher; }
   namespace application
   {
     struct Tasklet;
@@ -57,6 +57,10 @@ namespace lost
 
       virtual bool start(); 
       virtual bool stop();
+
+      void queueApplicationEvent(event::EventPtr event);
+      void dispatchApplicationEvent(event::EventPtr event);
+      void processApplicationEvents();
     };
 
   }

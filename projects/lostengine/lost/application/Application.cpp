@@ -9,6 +9,9 @@
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/application/TaskletEvent.h"
+#include "lost/application/SpawnTaskletEvent.h"
+#include "lost/application/QueueEvent.h"
+#include "lost/application/ProcessEvent.h"
 
 #include <boost/program_options.hpp>
 
@@ -101,7 +104,9 @@ namespace lost
 
       eventDispatcher.reset(new lost::event::EventDispatcher());
       eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
-      eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
+      eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::quitHandler, this, _1)));
+      eventDispatcher->addEventListener(SpawnTaskletEvent::SPAWN_TASKLET(), event::receive<SpawnTaskletEvent>(bind(&Application::taskletSpawn, this, _1)));
+      eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
     }
 
     lost::shared_ptr<Application> Application::create()
@@ -140,8 +145,8 @@ namespace lost
     
     void Application::addTasklet(const TaskletPtr& tasklet)
     {
-      tasklet->eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::shutdown, this, _1)));
-      tasklet->eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
+      tasklet->eventDispatcher->addEventListener(QueueEvent::QUEUE(), event::receive<QueueEvent>(bind(&Application::queueEvent, this, _1)));
+      tasklet->eventDispatcher->addEventListener(ProcessEvent::PROCESS(), event::receive<ProcessEvent>(bind(&Application::processEvents, this, _1)));
       tasklets.push_back(tasklet);
       if (running)
       {
@@ -150,40 +155,21 @@ namespace lost
       }
     }
 
-    void Application::dispatchApplicationEvent(const lost::event::Type& which)
-    {
-      lost::shared_ptr<ApplicationEvent> appEvent(new ApplicationEvent(which));
-      eventDispatcher->dispatchEvent(appEvent);
-      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
-      {
-        if ((*tasklet)->alive())
-        {
-          (*tasklet)->eventDispatcher->queueEvent(appEvent);
-        }
-      }
-    }
-
-    void Application::quit()
+    void Application::quitHandler(ApplicationEventPtr& event)
     {
       running = false;
-      dispatchApplicationEvent(ApplicationEvent::QUIT());
-    }
-
-    void Application::terminate()
-    {
       for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         if ((*tasklet)->alive())
         {
           (*tasklet)->stop();
+          (*tasklet)->eventDispatcher->queueEvent(event);
           (*tasklet)->wait();
         }
       }
       tasklets.clear();
-      finalize();
+      shutdown();
     }
-    
-
 
     void Application::removeTasklet(Tasklet * tasklet)
     {
@@ -205,7 +191,12 @@ namespace lost
     }
 
 
-    void Application::taskletDone(TaskletEventPtr& event)
+    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
+    {
+      addTasklet(TaskletPtr(new Tasklet(event->loader)));
+    }
+
+    void Application::taskletDone(const TaskletEventPtr& event)
     {
       DOUT("End of tasklet: " << event->tasklet->scriptname);
       // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
@@ -216,8 +207,20 @@ namespace lost
       if (!haveActiveTasklets)
       {
         DOUT("Last tasklet died, terminating.");
-        quit();
+        shutdown();
       }
+    }
+
+    void Application::queueEvent(const QueueEventPtr& event)
+    {
+      eventDispatcher->queueEvent(event->event);
+    }
+
+    void Application::quit()
+    {
+      // just to make sure that we're running on the main thread
+      queueEvent(QueueEventPtr(new QueueEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())))));
+      processEvents(ProcessEventPtr());
     }
 
   }

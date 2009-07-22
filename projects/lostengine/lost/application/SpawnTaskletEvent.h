@@ -7,26 +7,26 @@
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-struct SpawnTaskletEvent;
-typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
+    struct SpawnTaskletEvent;
+    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
 
-struct SpawnTaskletEvent : public event::Event
-{
-    resource::LoaderPtr loader;
-    static const event::Type& SPAWN_TASKLET()   { static const event::Type d = "spawnTasklet"; return d; }
-
-    SpawnTaskletEvent(resource::LoaderPtr inLoader)
-    : loader(inLoader), Event(SPAWN_TASKLET())
+    struct SpawnTaskletEvent : public event::Event
     {
-    }
-    virtual ~SpawnTaskletEvent() {}
+        resource::LoaderPtr loader;
+        static const event::Type& SPAWN_TASKLET() { static const event::Type d = "spawnTasklet"; return d; }
 
-};
+        SpawnTaskletEvent(resource::LoaderPtr inLoader)
+        : loader(inLoader), Event(SPAWN_TASKLET())
+        {
+        }
+        virtual ~SpawnTaskletEvent() {}
 
-}
+    };
+
+  }
 }
 
 #endif
