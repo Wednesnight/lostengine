@@ -52,9 +52,7 @@ namespace lost
         namespace_("application")
         [
           class_<Application, ApplicationPtr>("Application")
-            .def("quit", &Application::quit)
             .def("showMouse", &Application::showMouse)
-            .def_readonly("loader", &Application::loader)
             .def_readonly("eventDispatcher", &Application::eventDispatcher)
         ]
       ];

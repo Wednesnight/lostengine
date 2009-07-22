@@ -8,6 +8,7 @@
 
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
+#include "lost/event/EventDispatcher.h"
 
 @interface ApplicationDelegate : NSObject
 {
@@ -38,14 +39,14 @@
   DOUT("applicationDidFinishLaunching");
   if (parent)
   {
-    parent->dispatchApplicationEvent(lost::application::ApplicationEvent::RUN());
+    lost::shared_ptr<lost::application::ApplicationEvent> event(new lost::application::ApplicationEvent(lost::application::ApplicationEvent::RUN()));
+    parent->eventDispatcher->dispatchEvent(event);
   }
 }
 
 - (void)applicationWillTerminate: (NSNotification *)notification
 {
   DOUT("applicationWillTerminate");
-  if (parent) parent->terminate();
 }
 
 - (void)setParent: (lost::application::Application*)newParent
@@ -60,7 +61,15 @@
 
 - (void) quitAction: (id)sender
 {
-  if (parent) parent->quit();
+  if (parent)
+  {
+    parent->quit();
+  }
+}
+
+- (void)processApplicationEvents
+{
+  if (parent) parent->eventDispatcher->processEvents();
 }
 
 @end
@@ -157,7 +166,7 @@ namespace lost
       [NSApp run];
     }
 
-    void Application::shutdown(ApplicationEventPtr& event)
+    void Application::shutdown()
     {
       [hiddenMembers->delegate performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
     }
@@ -167,5 +176,11 @@ namespace lost
       if(visible) [NSCursor unhide];
         else [NSCursor hide];
     }
+
+    void Application::processEvents(const ProcessEventPtr& event)
+    {
+      [hiddenMembers->delegate performSelectorOnMainThread: @selector(processApplicationEvents) withObject: nil waitUntilDone: NO];
+    }
+
   }
 }

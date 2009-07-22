@@ -16,7 +16,7 @@
 
 struct Controller : public lost::application::Tasklet
 {  
-  Controller(const lost::application::ApplicationPtr& inApplication);
+  Controller();
   bool startup();
   bool update();
   bool shutdown();
@@ -26,8 +26,6 @@ struct Controller : public lost::application::Tasklet
   void keyDownHandler(lost::application::KeyEventPtr event);
   void fileDropHandler(lost::application::DropEventPtr event);
 
-  bool running;
-  lost::application::ApplicationPtr application;
   lost::rg::NodePtr textScene;
 };
 

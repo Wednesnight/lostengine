@@ -7,25 +7,25 @@
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-struct ProcessEvent;
-typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
+    struct ProcessEvent;
+    typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
 
-struct ProcessEvent : public event::Event
-{
-    static const event::Type& PROCESS()   { static const event::Type d = "processEvent"; return d; }
-
-    ProcessEvent()
-    : Event(PROCESS())
+    struct ProcessEvent : public event::Event
     {
-    }
-    virtual ~ProcessEvent() {}
+        static const event::Type& PROCESS() { static const event::Type d = "processEvent"; return d; }
 
-};
+        ProcessEvent()
+        : Event(PROCESS())
+        {
+        }
+        virtual ~ProcessEvent() {}
 
-}
+    };
+
+  }
 }
 
 #endif

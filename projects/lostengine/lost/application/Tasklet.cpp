@@ -10,6 +10,8 @@
 #include "lost/common/Logger.h"
 #include "lost/application/mac/ThreadAutoreleasePoolHack.h"
 #include "lost/application/TaskletEvent.h"
+#include "lost/application/QueueEvent.h"
+#include "lost/application/ProcessEvent.h"
 
 using namespace boost;
 using namespace fhtagn::threads;
@@ -40,7 +42,15 @@ namespace lost
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua, loader);
+    }
+    
+    Tasklet::~Tasklet()
+    {
+      eventDispatcher->clear();
+    }
 
+    void Tasklet::init()
+    {      
       // try to load the main script and memorize result in a flag
       scriptLoaded = false;
       try
@@ -52,15 +62,7 @@ namespace lost
       {
         DOUT("couldn't load script <"+ scriptname +">: "+ string(ex.what()));
       }      
-    }
-    
-    Tasklet::~Tasklet()
-    {
-      eventDispatcher->clear();
-    }
 
-    void Tasklet::init()
-    {      
       // try to extract window params and flag from interpreter
       // the values are optional and set as globals
       luabind::object obj = lua->globals["hasWindow"];
@@ -90,6 +92,7 @@ namespace lost
     void Tasklet::run(tasklet& tasklet)
     {
       threadAutoreleasePoolHack_createPool();
+
       // make sure that our GL context is the current context
       if(hasWindow)
       {
@@ -166,5 +169,23 @@ namespace lost
       return ::fhtagn::threads::tasklet::stop();
     }
 
+    void Tasklet::queueApplicationEvent(EventPtr event)
+    {
+      QueueEventPtr queue(new QueueEvent(event));
+      eventDispatcher->dispatchEvent(queue);
+    }
+
+    void Tasklet::dispatchApplicationEvent(EventPtr event)
+    {
+      queueApplicationEvent(event);
+      processApplicationEvents();
+    }
+    
+    void Tasklet::processApplicationEvents()
+    {
+      ProcessEventPtr process(new ProcessEvent());
+      eventDispatcher->dispatchEvent(process);
+    }
+    
   }
 }

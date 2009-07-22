@@ -1,14 +1,13 @@
-windowWidth = 640
-windowHeight = 480
-windowTitle = "fuxx0r"
+hasWindow = true
+windowParams = lost.application.WindowParams("fuxx0r", lost.math.Rect(50,200,640,480))
 
 function startup(tasklet)
   log.debug("startup")
   return true
 end
 
-function main(tasklet)
-  log.debug("main")
+function update(tasklet)
+  log.debug("update")
   return true
 end
 
