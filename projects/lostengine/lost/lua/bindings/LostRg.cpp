@@ -41,9 +41,10 @@ namespace lost
     NodePtrDowncastDraw(RenderedTextPtr);
     #undef NodePtrDowncastDraw
 
-    DrawPtr castDraw(NodePtr node)
+    template <typename ResultType, typename NodeType>
+    lost::shared_ptr<ResultType> castNode(lost::shared_ptr<NodeType> node)
     {
-        return dynamic_pointer_cast<rg::Draw>(node);
+        return dynamic_pointer_cast<ResultType>(node);
     }
 
     void LostRg(lua_State* state)
@@ -64,8 +65,9 @@ namespace lost
           [
             def("create", &Node::create)
           ],
-          class_<Draw, Node, NodePtr>("Draw")
+          class_<Draw, Node, DrawPtr>("Draw")
           .def_readwrite("mesh", &Draw::mesh)
+          .def("asNodePtr", &castNode<Node, Draw>)
           .scope
           [
             def("create", &Draw::create),
@@ -81,50 +83,64 @@ namespace lost
             def("create", &DrawCreateLine2DPtr),
             def("create", &DrawCreateQuad2DPtr),
             def("create", &DrawCreateRenderedTextPtr),
-            def("cast", castDraw)
+            def("cast", &castNode<Draw, Node>)
           ],
-          class_<Camera, Node, NodePtr>("Camera")
+          class_<Camera, Node, CameraPtr>("Camera")
           .def_readwrite("cam", &Camera::cam)
+          .def("asNodePtr", &castNode<Node, Camera>)
           .scope
           [
             def("create", (NodePtr(*)(camera::CameraPtr))&Camera::create),
             def("create", (NodePtr(*)(camera::Camera2DPtr))&Camera::create),
-            def("create", (NodePtr(*)(camera::Camera3DPtr))&Camera::create)
+            def("create", (NodePtr(*)(camera::Camera3DPtr))&Camera::create),
+            def("cast", &castNode<Camera, Node>)
           ],
-          class_<DepthTest,Node,  NodePtr>("DepthTest")
+          class_<DepthTest,Node,  DepthTestPtr>("DepthTest")
           .def_readwrite("enable", &DepthTest::enable)
+          .def("asNodePtr", &castNode<Node, DepthTest>)
           .scope
           [
-            def("create", &DepthTest::create)
+            def("create", &DepthTest::create),
+            def("cast", &castNode<DepthTest, Node>)
           ],
-          class_<Clear, Node, NodePtr>("Clear")
+          class_<Clear, Node, ClearPtr>("Clear")
           .def_readwrite("mask", &Clear::mask)
+          .def("asNodePtr", &castNode<Node, Clear>)
           .scope
           [
-            def("create", &Clear::create)
+            def("create", &Clear::create),
+            def("cast", &castNode<Clear, Node>)
           ],
-          class_<ClearColor, Node, NodePtr>("ClearColor")
+          class_<ClearColor, Node, ClearColorPtr>("ClearColor")
           .def_readwrite("col", &ClearColor::col)
+          .def("asNodePtr", &castNode<Node, ClearColor>)
           .scope
           [
-            def("create", &ClearColor::create)
+            def("create", &ClearColor::create),
+            def("cast", &castNode<ClearColor, Node>)
           ],
-          class_<DefaultFrameBuffer, Node, NodePtr>("DefaultFrameBuffer")
+          class_<DefaultFrameBuffer, Node, DefaultFrameBufferPtr>("DefaultFrameBuffer")
+          .def("asNodePtr", &castNode<Node, DefaultFrameBuffer>)
           .scope
           [
-            def("create", &DefaultFrameBuffer::create)
+            def("create", &DefaultFrameBuffer::create),
+            def("cast", &castNode<DefaultFrameBuffer, Node>)
           ],
-          class_<FrameBuffer, Node, NodePtr>("FrameBuffer")
+          class_<FrameBuffer, Node, FrameBufferPtr>("FrameBuffer")
           .def_readwrite("fb", &FrameBuffer::fb)
+          .def("asNodePtr", &castNode<Node, FrameBuffer>)
           .scope
           [
-            def("create", &FrameBuffer::create)
+            def("create", &FrameBuffer::create),
+            def("cast", &castNode<FrameBuffer, Node>)
           ],
-          class_<Blend, Node, NodePtr>("Blend")
+          class_<Blend, Node, BlendPtr>("Blend")
           .def_readwrite("enable", &Blend::enable)
+          .def("asNodePtr", &castNode<Node, Blend>)
           .scope
           [
-            def("create", &Blend::create)
+            def("create", &Blend::create),
+            def("cast", &castNode<Blend, Node>)
           ]
          
         ]
