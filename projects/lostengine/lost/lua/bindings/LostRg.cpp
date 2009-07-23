@@ -41,6 +41,11 @@ namespace lost
     NodePtrDowncastDraw(RenderedTextPtr);
     #undef NodePtrDowncastDraw
 
+    DrawPtr castDraw(NodePtr node)
+    {
+        return dynamic_pointer_cast<rg::Draw>(node);
+    }
+
     void LostRg(lua_State* state)
     {
       module(state, "lost")
@@ -54,6 +59,7 @@ namespace lost
           .def("addFront", &Node::addFront)
           .def("remove", &Node::remove)
           .def("process", &Node::process)
+          .def("recursiveFindByName", &Node::recursiveFindByName)
           .scope
           [
             def("create", &Node::create)
@@ -74,7 +80,8 @@ namespace lost
             def("create", &DrawCreateFilledEllipse2DPtr),
             def("create", &DrawCreateLine2DPtr),
             def("create", &DrawCreateQuad2DPtr),
-            def("create", &DrawCreateRenderedTextPtr)
+            def("create", &DrawCreateRenderedTextPtr),
+            def("cast", castDraw)
           ],
           class_<Camera, Node, NodePtr>("Camera")
           .def_readwrite("cam", &Camera::cam)

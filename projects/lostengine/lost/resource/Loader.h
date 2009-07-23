@@ -26,11 +26,11 @@ namespace lost
       virtual ~Loader();
 
       FilePtr load( const boost::filesystem::path& inPath);
-      void addRepository( lost::shared_ptr<Repository> inRepository );
+      void addRepository( RepositoryPtr inRepository );
 
     private:
       // resource repositories
-      std::vector<lost::shared_ptr<Repository> > repositories;
+      std::vector<RepositoryPtr> repositories;
     };
 
   }
