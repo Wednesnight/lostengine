@@ -91,7 +91,7 @@ namespace lost
 
     void Tasklet::run(tasklet& tasklet)
     {
-      threadAutoreleasePoolHack_createPool();
+      void* pool = threadAutoreleasePoolHack_createPool();
 
       // make sure that our GL context is the current context
       if(hasWindow)
@@ -114,11 +114,11 @@ namespace lost
             // no event processing timeout since we probably don't have that many events
             eventDispatcher->processEvents(0);
           }
-          threadAutoreleasePoolHack_drainAndRecreatePool();
+          pool = threadAutoreleasePoolHack_drainAndRecreatePool(pool);
         }
         shutdown();
       }
-      threadAutoreleasePoolHack_drainPool();        
+      threadAutoreleasePoolHack_drainPool(pool);        
       eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
