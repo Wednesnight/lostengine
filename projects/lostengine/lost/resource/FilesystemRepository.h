@@ -8,6 +8,9 @@ namespace lost
 {
 namespace resource
 {
+struct FilesystemRepository;
+typedef lost::shared_ptr<FilesystemRepository> FilesystemRepositoryPtr;
+
 struct FilesystemRepository : Repository
 {
   boost::filesystem::path rootDirectory;

@@ -120,7 +120,8 @@ namespace lost
       [
         namespace_("math")
         [
-          class_<Matrix>("Matrix"),
+          class_<Matrix>("Matrix")
+          .def(const_self*Matrix()),
           class_<MatrixRotX, Matrix>("MatrixRotX")
             .def(constructor<float>()),
           class_<MatrixRotY, Matrix>("MatrixRotY")
