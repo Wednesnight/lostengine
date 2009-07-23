@@ -17,6 +17,7 @@
 #include "lost/mesh/AABB.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/FilesystemRepository.h"
+#include "lost/resource/ApplicationResourceRepository.h"
 
 using namespace std;
 using namespace lost;
@@ -28,8 +29,6 @@ using namespace lost::event;
 using namespace lost::application;
 using namespace lost::camera;
 using namespace lost::mesh;
-using namespace lost::meter;
-using namespace lost::font;
 using namespace lost::resource;
 using namespace luabind;
 using namespace boost;
@@ -87,7 +86,8 @@ void Controller::fileDropHandler(DropEventPtr event)
   if (filesystem::is_directory(event->filename))
   {
     LoaderPtr loader(new Loader);
-    loader->addRepository(lost::shared_ptr<FilesystemRepository>(new FilesystemRepository(event->filename)));
+    loader->addRepository(RepositoryPtr(new FilesystemRepository(event->filename)));
+    loader->addRepository(RepositoryPtr(new ApplicationResourceRepository()));
     SpawnTaskletEventPtr event(new SpawnTaskletEvent(loader));
     dispatchApplicationEvent(event);
   }
