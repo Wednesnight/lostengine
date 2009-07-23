@@ -33,7 +33,7 @@ namespace lost
         }
         catch (std::exception& e)
         {
-          DOUT("trying next repository: " << e.what());
+//          DOUT("trying next repository: " << e.what());
         }
       }
 
