@@ -16,14 +16,6 @@ screenSize = Vec2(fboSize.width * numPanels, fboSize.height * numRows)
 hasWindow = true
 windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height))
 
-function init()
-  log.debug("init")
-
-  ftlib = lost.font.freetype.Library()
-  fontSize = 30
-  yinset = fontSize+3  
-end
-
 -- blur edge emboss sharpen
 -- radial ssao sepia heatsig
 function addTextNode(rootNode, panelText, colIndex, rowIndex, col)
@@ -45,10 +37,23 @@ function addPanelNode(rootNode, tex, colIndex, rowIndex, theShader)
 end
 
 function startup(tasklet)
+  log.debug("startup")
+
+  running = true
+  filterzTasklet = tasklet
+  passedSec = lost.platform.currentTimeSeconds()
+  angle = 0
+  animated = true
+
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+
+  ftlib = lost.font.freetype.Library()
+  fontSize = 30
+  yinset = fontSize+3  
+
   fontData = tasklet.loader:load("miserable.ttf")
   ttf = lost.font.TrueTypeFont(ftlib, fontData)
 
-  log.debug("startup")
   framebuffer = lost.gl.FrameBuffer.createFrameBuffer(tasklet.window.context, fboSize, gl.GL_RGBA, 24)
 
   cam2D = Camera2D(Rect(0, 0, screenSize.width, screenSize.height))
@@ -185,4 +190,30 @@ function startup(tasklet)
   scene:add(rootTextNode)
   
   return true;
+end
+
+function update(tasklet)
+  local currentSec = lost.platform.currentTimeSeconds()
+  local delta = currentSec - passedSec
+  
+  if animated then
+    angle = math.fmod(delta*50+angle, 360)
+    mesh.modelTransform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle)
+  end
+
+  scene:process(tasklet.window.context)
+  tasklet.window.context:swapBuffers()
+  
+  passedSec = currentSec
+  return running
+end
+
+function keyHandler(event)
+  local keyEvent = lost.application.KeyEvent.cast(event)
+
+  if (keyEvent.key == lost.application.K_ESCAPE) then
+    running = false
+  elseif (keyEvent.key == lost.application.K_SPACE) then
+    animated = not animated
+  end
 end

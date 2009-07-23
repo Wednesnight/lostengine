@@ -10,13 +10,6 @@ using namespace lost::event;
 
 Filt3rz::Filt3rz()
 {
-  call_function<void>(lua->globals["init"]);
-
-  fboSize = lua->globals["fboSize"];
-  numPanels = lua->globals["numPanels"];
-  numRows = lua->globals["numRows"];
-  windowParams = lua->globals["windowParams"];
-
   //  waitsForEvents = true;
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Filt3rz::keyHandler, this, _1)));
 
@@ -28,6 +21,13 @@ Filt3rz::Filt3rz()
 bool Filt3rz::startup()
 {
   DOUT("startup");
+  call_function<void>(lua->globals["init"]);
+  
+  fboSize = lua->globals["fboSize"];
+  numPanels = lua->globals["numPanels"];
+  numRows = lua->globals["numRows"];
+  windowParams = lua->globals["windowParams"];
+  
   if(!Tasklet::startup()) return false;
   model = lua->globals["mesh"];
   scene = lua->globals["scene"];
@@ -79,6 +79,6 @@ bool Filt3rz::update()
 
 void Filt3rz::keyHandler(lost::application::KeyEventPtr event)
 {
-  if (event->key == K_ESCAPE) eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+  if (event->key == K_ESCAPE) dispatchApplicationEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
   if (event->key == K_SPACE) animated = !animated;
 }
