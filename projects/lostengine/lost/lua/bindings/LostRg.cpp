@@ -53,6 +53,7 @@ namespace lost
           .def("add", &Node::add)
           .def("addFront", &Node::addFront)
           .def("remove", &Node::remove)
+          .def("process", &Node::process)
           .scope
           [
             def("create", &Node::create)

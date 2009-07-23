@@ -1,20 +1,20 @@
 #include <Foundation/NSAutoreleasePool.h>
 
-static NSAutoreleasePool* pool = NULL;
-
-void threadAutoreleasePoolHack_createPool()
+void* threadAutoreleasePoolHack_createPool()
 {
-  pool = [[NSAutoreleasePool alloc] init];
+  return [[NSAutoreleasePool alloc] init];
 }
 
-void threadAutoreleasePoolHack_drainAndRecreatePool()
+void* threadAutoreleasePoolHack_drainAndRecreatePool(void* p)
 {
+  NSAutoreleasePool* pool = (NSAutoreleasePool*)p;
   [pool drain];
-  pool = [[NSAutoreleasePool alloc] init];  
+  return [[NSAutoreleasePool alloc] init];  
 }
 
-void threadAutoreleasePoolHack_drainPool()       
+void threadAutoreleasePoolHack_drainPool(void* p)       
 {
+  NSAutoreleasePool* pool = (NSAutoreleasePool*)p;
   [pool drain];
 }
 
