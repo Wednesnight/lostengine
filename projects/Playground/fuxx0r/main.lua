@@ -20,10 +20,11 @@ end
 function update(tasklet)
 	local currentTime = lost.platform.currentTimeMilliSeconds() 
 	local dt = currentTime - lastUpdate
-  angle = math.fmod(dt*50+angle, 360);
+  angle = math.fmod(dt*.05+angle, 360);
   cubeMesh.modelTransform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle);
   threedScene:process(tasklet.window.context)
 	tasklet.window.context:swapBuffers()
+	lastUpdate = currentTime
   return true
 end
 
