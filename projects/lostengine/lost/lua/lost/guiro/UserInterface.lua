@@ -11,15 +11,7 @@ function UserInterface:create(properties)
   lost.guiro.View.create(self, properties)
 
   properties = properties or {}
-
-  self.renderState = lost.gl.State.create(lost.gl.DepthTest.create(false),
-                                          lost.gl.Blend.create(false),
-                                          lost.gl.Texture2D.create(false),
-                                          lost.gl.NormalArray.create(false),
-                                          lost.gl.VertexArray.create(false),
-                                          lost.gl.TextureArray.create(false),
-                                          lost.gl.Scissor.create(false))
-
+  
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -41,7 +33,6 @@ function UserInterface:render(canvas, forceRender)
   -- helper vars
   local globalRect = self:globalRect()
 
-  canvas.context:pushState(self.renderState)
   if forceRender or self.dirty then
     lost.guiro.View.render(self, canvas, true)
   else
