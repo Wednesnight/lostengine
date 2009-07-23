@@ -32,8 +32,10 @@ namespace lost
       {
         Type* array;
         Type& value;
-        SetArray(Type* inArray, Type& inValue)
-        : array(inArray),
+        unsigned int& idx;
+        SetArray(unsigned int& inIdx, Type* inArray, Type& inValue)
+        : idx(inIdx),
+          array(inArray),
           value(inValue)
         {
         }
@@ -41,7 +43,6 @@ namespace lost
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
-          static unsigned int idx = 0;
           array[idx++] = value;
         }
       };
@@ -52,6 +53,9 @@ namespace lost
      */
     MeshPtr Loader::obj(resource::FilePtr objFile)
     {
+      unsigned int vtxCount = 0;
+      unsigned int nrmCount = 0;
+      unsigned int idxCount = 0;
       /**
        * init resulting mesh
        */
@@ -135,7 +139,7 @@ namespace lost
          */
         rule<> vertex_p = 
           ch_p('v') >> +space_p >> 
-            vec3_p[OBJActions::SetArray<Mesh3D::VertexType>(vertices, vec3)] >>
+            vec3_p[OBJActions::SetArray<Mesh3D::VertexType>(vtxCount, vertices, vec3)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(vertex_p);
 
@@ -144,7 +148,7 @@ namespace lost
          */
         rule<> normal_p = 
           str_p("vn") >> +space_p >> 
-            vec3_p[OBJActions::SetArray<Mesh3D::NormalType>(normals, vec3)] >>
+            vec3_p[OBJActions::SetArray<Mesh3D::NormalType>(nrmCount, normals, vec3)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(normal_p);
 
@@ -154,7 +158,7 @@ namespace lost
         Mesh3D::IndexType index;
         rule<> index_p = int_p[assign_a(index)][decrement_a(index)] >> !('/' >> !(int_p) >> !('/' >> !(int_p)));
         BOOST_SPIRIT_DEBUG_NODE(index_p);
-        rule<> indexAssign_p = index_p[OBJActions::SetArray<Mesh3D::IndexType>(indices, index)];
+        rule<> indexAssign_p = index_p[OBJActions::SetArray<Mesh3D::IndexType>(idxCount, indices, index)];
         BOOST_SPIRIT_DEBUG_NODE(indexAssign_p);
         rule<> face_p =
           ch_p('f') >> +space_p >>
