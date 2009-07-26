@@ -178,24 +178,21 @@ struct Quad : public MESHTYPE
   
   void createVertices(boost::uint32_t quadNum, const math::Rect& inRect)
   {
-    float voffsetx = 0; //MESHTYPE::OffsetVectorType::x();
-    float voffsety = 0; //MESHTYPE::OffsetVectorType::y();  
-  
     VertexType* vtx = this->vertexData.get();
     boost::uint32_t verticesPerQuad = 4;
     boost::uint32_t offset = quadNum*verticesPerQuad;
   
-    vtx[offset+0].x = inRect.x-voffsetx;
-    vtx[offset+0].y = inRect.y-voffsety;
+    vtx[offset+0].x = inRect.x;
+    vtx[offset+0].y = inRect.y;
     
-    vtx[offset+1].x = inRect.x+inRect.width+voffsetx;
-    vtx[offset+1].y = inRect.y-voffsety;
+    vtx[offset+1].x = inRect.x+inRect.width;
+    vtx[offset+1].y = inRect.y;
 
-    vtx[offset+2].x = inRect.x+inRect.width+voffsetx;
-    vtx[offset+2].y = inRect.y+inRect.height+voffsety;
+    vtx[offset+2].x = inRect.x+inRect.width;
+    vtx[offset+2].y = inRect.y+inRect.height;
 
-    vtx[offset+3].x = inRect.x-voffsetx;
-    vtx[offset+3].y = inRect.y+inRect.height+voffsety;    
+    vtx[offset+3].x = inRect.x;
+    vtx[offset+3].y = inRect.y+inRect.height;    
   }
               
   void updateSize(const math::Vec2& size, bool flip = true)

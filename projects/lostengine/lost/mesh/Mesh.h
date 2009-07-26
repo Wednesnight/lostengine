@@ -12,21 +12,6 @@ namespace lost
 {
   namespace mesh
   {
-    // used for piexl perfect 2D positioning
-    // this one does nothing since Vec2 constructor defaults to 0/0
-    struct VertexOffsetVectorZero
-    {
-      static inline float x() { return 0.0f; }
-      static inline float y() { return 0.0f; }
-    };
-  
-    // this one moves pixels by .5 to center a logical pixel on the physical one.
-    struct VertexOffsetVector2D 
-    {
-      static inline float x() { return .5f; }
-      static inline float y() { return .5f; }      
-    };
-
     // Mesh base class, provides a render() method that applies the relevant minimal state 
     // and issues the gl calls for drawing
     struct Mesh
@@ -85,8 +70,7 @@ namespace lost
       typename VT,  // vertextype
       typename NT,  // normaltype
       typename CT,  // colortype
-      typename TCT, // texcoordtype
-      typename OFFV> // vertex offset vector for 2D pixex corrections
+      typename TCT> // texcoordtype
     struct BufferedMesh : public Mesh
     {
       // these are the actual hardware buffer objects, wrapped in our own helper classes, managed by shared ptrs
@@ -145,7 +129,6 @@ namespace lost
       typedef NT NormalType;
       typedef CT ColorType;
       typedef TCT TexCoordType;
-      typedef OFFV OffsetVectorType;
       
       typedef gl::ElementArrayBuffer<IT>  IndexBufferType;
       typedef gl::ArrayBuffer<VT>         VertexBufferType;
@@ -184,9 +167,9 @@ namespace lost
     // You might want to adjust index type and/or other types depending on the size of your data or the plattform
     // you're on. On the iPhone, buffer objects with indices in the 32bit range might not even be possible, and
     // 8 bit normal vectors feasible. Do your research.
-    typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2, VertexOffsetVectorZero> Mesh3D;
+    typedef BufferedMesh<uint32_t, math::Vec3, math::Vec3, common::Color, math::Vec2> Mesh3D;
     typedef lost::shared_ptr<Mesh3D> Mesh3DPtr;
-    typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2, VertexOffsetVector2D> Mesh2D;
+    typedef BufferedMesh<uint32_t, math::Vec2, math::Vec2, common::Color, math::Vec2> Mesh2D;
     typedef lost::shared_ptr<Mesh2D> Mesh2DPtr;
 
   }
