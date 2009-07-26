@@ -3,6 +3,7 @@
 
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
+#include "lost/resource/FilesystemRepository.h"
 
 using namespace luabind;
 using namespace lost::resource;
@@ -39,9 +40,35 @@ namespace lost
       [
         namespace_("resource")
         [
-          class_<Loader, lost::shared_ptr<Loader> >("Loader")
+          class_<Loader, LoaderPtr >("Loader")
             .def(constructor<>())
             .def("load", &LostResourceLoader_load)
+            .def("addRepository", &Loader::addRepository)
+            .scope
+            [
+              def("create", &Loader::create)
+            ]
+        ]
+      ];
+    }
+
+    RepositoryPtr fsrepo_create(const std::string& path)
+    {
+      return RepositoryPtr(new FilesystemRepository(path));
+    }
+
+    void LostFilesystemRepository(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("resource")
+        [
+          // FIXME: should be help by FilesystemRepositoryPtr, but luabind ...
+          class_<FilesystemRepository, RepositoryPtr>("FilesystemRepository")
+            .scope
+            [
+              def("create", &fsrepo_create)
+            ]
         ]
       ];
     }
@@ -49,6 +76,7 @@ namespace lost
     void LostResource(lua_State* state)
     {
       LostResourceFile(state);
+      LostFilesystemRepository(state);
       LostResourceLoader(state);
     }
 

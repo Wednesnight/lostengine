@@ -20,5 +20,10 @@ FilePtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
   return result;
 }
 
+FilesystemRepositoryPtr FilesystemRepository::create(const boost::filesystem::path& inRootDir)
+{
+  return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
+}
+
 }
 }

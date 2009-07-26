@@ -28,6 +28,8 @@ namespace lost
       FilePtr load( const boost::filesystem::path& inPath);
       void addRepository( RepositoryPtr inRepository );
 
+
+      static LoaderPtr create() { return LoaderPtr(new Loader); }
     private:
       // resource repositories
       std::vector<RepositoryPtr> repositories;

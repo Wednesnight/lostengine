@@ -283,6 +283,7 @@ namespace lost
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
             .def_readonly("loader", &Tasklet::loader)
             .def_readonly("window", &Tasklet::window)
+            .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
         ]
       ];
