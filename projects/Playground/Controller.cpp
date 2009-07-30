@@ -53,20 +53,19 @@ bool Controller::startup()
   eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&Controller::keyDownHandler, this, _1)));
   eventDispatcher->addEventListener(DropEvent::DROPPED_FILE(), receive<DropEvent>(bind(&Controller::fileDropHandler, this, _1)));
 
-  textScene = lua->globals["textScene"];
+  rootNode = lua->globals["ui"];
+  if(!rootNode)
+  {
+    throw std::runtime_error("couldn't find ui rootNode");
+  }
 
   return result;
 }
 
-void Controller::draw()
-{
-  textScene->process(window->context);
-  window->context->swapBuffers();  
-}
-
 bool Controller::update()
 {
-  draw();
+  rootNode->process(window->context);
+  window->context->swapBuffers();  
   return true;
 }
 
@@ -82,13 +81,17 @@ void Controller::keyDownHandler(KeyEventPtr event)
 
 void Controller::fileDropHandler(DropEventPtr event)
 {
-  DOUT("executing tasklet: " << event->filename);
   if (filesystem::is_directory(event->filename))
   {
+    DOUT("starting tasklet: " << event->filename);
     LoaderPtr loader(new Loader);
     loader->addRepository(RepositoryPtr(new FilesystemRepository(event->filename)));
     loader->addRepository(RepositoryPtr(new ApplicationResourceRepository()));
     SpawnTaskletEventPtr event(new SpawnTaskletEvent(loader));
     dispatchApplicationEvent(event);
+  }
+  else
+  {
+    EOUT("couldn't start tasklet: you need to drop a directory that contains a file called main.lua")
   }
 }

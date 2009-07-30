@@ -1,7 +1,11 @@
--- lost.io.gl.Shader
-module("lost.io", package.seeall)
+-- lost.declarative.Gl
+module("lost.declarative", package.seeall)
 
-require("lost.io.Loader")
+lost.common.Class "lost.declarative.Gl" {}
+
+function Gl:create(loader)
+  self.loader = loader
+end
 
 -- NOTE: this Shader/ShaderParams construct is really a bit misleading since it forces 
 -- you to construct and parametrise a shader in one go, which is NOT the common use case.
@@ -12,21 +16,21 @@ require("lost.io.Loader")
 
 -- ShaderParams are really only a table containing arbitrary key/value pairs
 -- these pairs are evaluated and applied in the Shader load function if they are present
-function Loader:ShaderParams(definition)
-  return definition
+function Gl:ShaderParams(def)
+  return def
 end
 
-function Loader:Shader(definition)
+function Gl:Shader(def)
   -- "name" is the mandatory basename from which vertex/fragment shader names
   -- are derived for the actual load process
-  local shaderBaseName = definition["filename"]
+  local shaderBaseName = def["filename"]
   if not shaderBaseName then
-    error("filename is required for gl:Shader")
+    error("filename is required for gl:Shader",2)
   end
   local shaderProgram = lost.gl.loadShader(self.loader, shaderBaseName)
 
   -- apply params if present
-  local params = definition["params"]
+  local params = def["params"]
   if params ~= nil then
     shaderProgram:enable()
     for k,v in pairs(params) do
@@ -45,4 +49,40 @@ function Loader:Shader(definition)
   end
   
   return shaderProgram
+end
+
+-- we can't pass through the actual definition here, because def is a lua table, but
+-- the Texture Constructor requires a C++ object. So, we simply instantiate the object here
+-- and iterate over all the members of def that are set and copy them over to the target param
+-- object
+function Gl:TextureParams(def)
+  local result = lost.gl.Texture.Params()
+  
+  for k,v in pairs(def) do
+    result[k] = v
+  end
+  
+  return result
+end
+
+function Gl:Texture(def)
+  local filename = def["filename"]
+  local bitmap = def["bitmap"]
+  local params = def["params"] or lost.gl.Texture.Params()
+  
+  if filename and bitmap then
+    error("you cannot specify both filename and bitmap for the creation of a texture",2)
+  end
+  
+  local result = nil
+  
+  if filename ~= nil then
+    result = lost.gl.Texture(self.loader:load(filename), params)
+  elseif bitmap ~= nil then
+    result = lost.gl.Texture(bitmap, params)
+  else
+    error("filename or bitmap required for construction of Texture", 2)
+  end
+  
+  return result
 end
