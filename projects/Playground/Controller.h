@@ -19,7 +19,7 @@ struct Controller : public lost::application::Tasklet
   void keyDownHandler(lost::application::KeyEventPtr event);
   void fileDropHandler(lost::application::DropEventPtr event);
 
-  lost::rg::NodePtr textScene;
+  lost::rg::NodePtr rootNode;
 };
 
 #endif
