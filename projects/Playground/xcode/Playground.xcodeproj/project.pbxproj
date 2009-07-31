@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3E8736A11015BF56002BEE13 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E87369F1015BF56002BEE13 /* Controller.cpp */; };
-		3E8736CC1015C187002BEE13 /* textScene.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3E8736CA1015C187002BEE13 /* textScene.lua */; };
 		3E8736CD1015C187002BEE13 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E8736CB1015C187002BEE13 /* Vera.ttf */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		EA08D6A91023206A00CA587F /* ui.lua in Resources */ = {isa = PBXBuildFile; fileRef = EA08D6A81023206A00CA587F /* ui.lua */; };
 		EA4F9C620F8B6D4A00967F8D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */; };
 		EA4F9C740F8B6D6400967F8D /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA4F9C6B0F8B6D4E00967F8D /* libLostEngine.a */; };
 		EA4F9C7E0F8B6D8900967F8D /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */; };
@@ -64,10 +64,10 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		3E87369F1015BF56002BEE13 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = ../Controller.cpp; sourceTree = SOURCE_ROOT; };
 		3E8736A01015BF56002BEE13 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = ../Controller.h; sourceTree = SOURCE_ROOT; };
-		3E8736CA1015C187002BEE13 /* textScene.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = textScene.lua; path = ../textScene.lua; sourceTree = SOURCE_ROOT; };
 		3E8736CB1015C187002BEE13 /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA08D6A81023206A00CA587F /* ui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.lua; path = ../ui.lua; sourceTree = SOURCE_ROOT; };
 		EA4F9C610F8B6D4A00967F8D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		EA4F9C630F8B6D4E00967F8D /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		EA4F9C7A0F8B6D8900967F8D /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD616910F9CF8C400EBEDA6 /* main.lua */,
-				3E8736CA1015C187002BEE13 /* textScene.lua */,
+				EA08D6A81023206A00CA587F /* ui.lua */,
 				3E8736CB1015C187002BEE13 /* Vera.ttf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				EACF1C4A1016457100753144 /* down_arrow.png */,
@@ -246,9 +246,9 @@
 				EA4F9C800F8B6D8900967F8D /* global-release.xcconfig in Resources */,
 				EA4F9C810F8B6D8900967F8D /* global-debug.xcconfig in Resources */,
 				EAD616920F9CF8C400EBEDA6 /* main.lua in Resources */,
-				3E8736CC1015C187002BEE13 /* textScene.lua in Resources */,
 				3E8736CD1015C187002BEE13 /* Vera.ttf in Resources */,
 				EACF1C4B1016457100753144 /* down_arrow.png in Resources */,
+				EA08D6A91023206A00CA587F /* ui.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
