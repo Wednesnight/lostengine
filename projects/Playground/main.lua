@@ -9,6 +9,6 @@ windowParams = WindowParams("Playground",
 
 function startup(tasklet)
   dcl = lost.declarative.Context(tasklet.loader)
-  ui = require("textScene")
+  ui = require("ui")
   return true
 end
