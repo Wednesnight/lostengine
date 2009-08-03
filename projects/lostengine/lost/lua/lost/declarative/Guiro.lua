@@ -1,9 +1,9 @@
--- lost.declarative.Guiro2
+-- lost.declarative.Guiro
 module("lost.declarative", package.seeall)
 
-lost.common.Class "lost.declarative.Guiro2" {}
+lost.common.Class "lost.declarative.Guiro" {}
 
-function Guiro2:create(loader)
+function Guiro:create(loader)
   self.loader = loader
 end
 
