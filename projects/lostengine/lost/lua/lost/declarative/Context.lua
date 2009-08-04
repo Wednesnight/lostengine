@@ -13,7 +13,7 @@ lost.common.Class "lost.declarative.Context"
 {
 }
 
-function Context:create(loader)
+function Context:constructor(loader)
   self.loader = loader
   self.rg = lost.declarative.Rg(self.loader)
   self.font = lost.declarative.Font(self.loader)

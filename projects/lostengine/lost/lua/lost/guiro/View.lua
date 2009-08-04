@@ -1,60 +1,55 @@
-module("lost.guiro", package.seeall) -- View
+-- lost.guiro.View
+module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.Bounds")
 require("lost.guiro.event.EventDispatcher")
 
-require("lost.guiro.config")
-
---[[
-     View class
-  ]]
 lost.common.Class "lost.guiro.View"
 {
 
   -- helper for auto-generated view ids
   indices = {},
 
-  -- view specific stuff
   isView = true,
 	parent = nil,
 
-  -- event states and flags
   focusable = false,
   hidden = false,
   mouseInside = false,
   receivesEvents = true,
 --  sendsEvents = true ????
 
-  -- layout state flags
   dirtyLayout = true,
   dirtyChildLayout = false,
+
+  -- geometry cache
   currentGlobalRect = lost.math.Rect(),
   currentLocalRect = lost.math.Rect(),
 
-  -- render state
   dirty = true,
-
-  -- style
-  style = nil,
-  
-  -- focus handling (set from lost.guiro.event.EventManager)
   focused = false
-
 }
 
---[[ 
-    constructor
-  ]]
-function View:create(properties)
-  -- initialize id
+function View:createDefaultId()
+  local result = nil
   local name = self:className()
   if (not self.indices[name]) then
     self.indices[name] = 1
   else
     self.indices[name] = self.indices[name]+1
   end
-  self.id = name .. self.indices[name]
+  result = name .. self.indices[name]
+  return result
+end
+
+--[[ 
+    constructor
+  ]]
+function View:constructor()
+  -- all views and derived classes receive a default id in the
+  -- constructor so they can be uniquely identified
+  self.id = self:createDefaultId()
 
   -- RenderGraph node
   self.rootNode = lost.rg.Node.create()
@@ -70,68 +65,11 @@ function View:create(properties)
   self.meshes = {}
 
   self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
-  self.children = {}
+  self.subviews = {}
 
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
-
-  self:set(properties)
-end
-
-function View:set(properties)
-  -- initialize properties param
-  properties = properties or {}
-
-  -- set values
-  for k,v in next,properties do
-
-    -- apply listeners from properties param
-    if k == "listeners" then
-      for name,value in next,v do
-        self:addEventListener(name, value)
-      end
-
-    -- apply children from properties param
-    elseif type(k) == "number" and type(v) == "table" and v.isView then
-      self:appendChild(v)
-
-    else
-      if not self:setProperty(k, v) then
-        self[k] = v
-      end
-    end
-  end
-
-  self:needsLayout()
-  self:needsRedraw()
-end
-
-function View:setProperty(key, value)
-  return false
-end
-
-function View:setId(id)
-  if self.rootNode then
-    self.rootNode.name = id
-  end
-end
-
-function View:__newindex(member, value)
-  local handled = false
-
-  if not rawget(self, "__newindexIgnore") and type(member) == "string" then
-    local setterName = "set" .. string.upper(string.sub(member, 1, 1)) .. string.sub(member, 2)
-    if type(rawget(self, setterName)) == "function" then
-      rawset(self, "__newindexIgnore", true)
-      handled = rawget(self, setterName)(self, value) or false
-      rawset(self, "__newindexIgnore", false)
-    end
-  end
-
-  if not handled then
-    rawset(self, member, value)
-  end
 end
 
 function View:__tostring()
@@ -165,7 +103,7 @@ function View:addSubview(newview, pos)
 end
 
 --[[ 
-    removes child from self.children and sets child.parent to nil
+    removes child from self.subviews and sets child.parent to nil
   ]]
 function View:removeSubview(subview)
   local idx = 1
@@ -181,13 +119,13 @@ function View:removeSubview(subview)
 end
 
 --[[
-    returns child with given childId
-    nil if childId is invalid
+    returns subview with given subviewId
+    nil if subviewId is invalid
   ]]
-function View:__call(childId)
+function View:__call(subviewId)
   local result = nil
-  for k,view in next,self.children do
-    if (view.id == childId) then
+  for k,view in next,self.subviews do
+    if (view.id == subviewId) then
       result = view
       break
     end
@@ -245,22 +183,6 @@ function View:removeEventListener(which, listener, capture)
   end
 end
 
--- called by EventManager, don't call directly
-function View:dispatchCaptureEvent(event)
-  self.captureEventDispatcher:dispatchEvent(event)
-end
-
--- called by EventManager, don't call directly
-function View:dispatchTargetEvent(event)
---  log.debug(self.id..": targetting")
-  self.defaultEventDispatcher:dispatchEvent(event)
-end
-
--- called by EventManager, don't call directly
-function View:dispatchBubbleEvent(event)
-  self.defaultEventDispatcher:dispatchEvent(event)
-end
-
 --[[
     checks if point is within view rect
   ]]
@@ -270,7 +192,7 @@ function View:containsCoord(point)
 end
 
 --[[
-    updates own and children's layout
+    updates own and subviews's layout
   ]]
 function View:updateLayout(forceUpdate)
   -- view needs update
@@ -288,14 +210,14 @@ function View:updateLayout(forceUpdate)
       mesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
     end
 
-    for key,view in next,self.children do
+    for key,view in next,self.subviews do
       view:updateLayout(true)
     end
 
   -- child needs update
   elseif self.dirtyChildLayout then
     self.dirtyChildLayout = false
-    for key,view in next,self.children do
+    for key,view in next,self.subviews do
       if view.dirtyLayout or view.dirtyChildLayout then
         view:updateLayout()
       end
@@ -361,105 +283,13 @@ function View:needsRedraw()
   self.dirty = true
 end
 
-function View:initialize()
-  if not self.initialized then
-    self.initialized = true
-
-    -- init style
-    if type(self.style) == "table" then
-      self.style.type = self.style.type or "none"
-      local myRect = self:globalRect()
-
-      log.debug("initialize: ".. self.style.type)
-      local backgroundMesh = nil
-      local borderMesh = nil
-      if string.lower(self.style.type) == "rect" then
-        backgroundMesh = lost.mesh.FilledRect2D.create(myRect)
-        if self.style.borderColor ~= nil then
-          borderMesh = lost.mesh.Rect2D.create(myRect)
-        end
-
-      elseif string.lower(self.style.type) == "roundrect" then
-        self.style.radius = self.style.radius or math.min(math.min(myRect.width, myRect.height) / 3, 25)
-        self.style.steps = self.style.steps or 25
-        backgroundMesh = lost.mesh.FilledRoundedRect2D.create(myRect, self.style.radius, self.style.steps)
-        if self.style.borderColor ~= nil then
-          borderMesh = lost.mesh.RoundedRect2D.create(myRect, self.style.radius, self.style.steps)
-        end
-
-      elseif string.lower(self.style.type) == "circle" then
-        backgroundMesh = lost.mesh.FilledCircle2D.create(math.min(myRect.width, myRect.height))
-        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
-        if self.style.borderColor ~= nil then
-          borderMesh = lost.mesh.Circle2D.create(math.min(myRect.width, myRect.height))
-        end
-
-      elseif string.lower(self.style.type) == "ellipse" then
-        backgroundMesh = lost.mesh.FilledEllipse2D.create(lost.math.Vec2(myRect.width, myRect.height))
-        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
-        if self.style.borderColor ~= nil then
-          borderMesh = lost.mesh.Ellipse2D.create(lost.math.Vec2(myRect.width, myRect.height))
-        end
-
-      elseif string.lower(self.style.type) == "image" then
-        self.style.color = self.style.color or lost.common.Color(1,1,1)
-        backgroundMesh = lost.mesh.Quad2D.create(self.style.image, true)
-        backgroundMesh:updateSize(lost.math.Vec2(myRect.width, myRect.height), true)
-        backgroundMesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(myRect.x, myRect.y, 0))
-        if self.style.borderColor ~= nil then
-          borderMesh = lost.mesh.Rect2D.create(myRect)
-        end
-
-      end
-
-      if backgroundMesh ~= nil then
-        self.style.color = self.style.color or lost.common.Color(0,0,0)
-        backgroundMesh.material.color = self.style.color
-        self.meshes["background"] = backgroundMesh
-      end
-      if borderMesh ~= nil then
-        self.style.borderColor = self.style.borderColor or lost.common.Color(0,0,0)
-        borderMesh.material.color = self.style.borderColor
-        self.meshes["border"] = borderMesh
-      end
-    end
-
-    for name,mesh in next,self.meshes do
-      self.renderNode:add(lost.rg.Draw.create(mesh))
-    end
-
-    for k,view in next,self.children do
-      view:initialize()
-    end
-  end
-end
-
 function View:update()
   self:updateLayout()
   if dirty then
     self.dirty = false
   end
-
-  for k,view in next,self.children do
+  for k,view in next,self.subviews do
     view:update()
-  end
-end
-
-
---[[ 
-    helper methods
-  ]]
-
---[[ 
-    prints self.children hierarchy
-  ]]
-function View:printChildren(prefix)
-  if not prefix then
-    prefix = ""
-  end
-  log.debug(prefix .."|-- ".. self.id)
-  for k,view in next,self.children do
-    view:printChildren(prefix .."    ")
   end
 end
 
@@ -470,3 +300,36 @@ function View:screen()
     return nil
   end
 end
+
+--[[ 
+    prints self.subviews hierarchy
+  ]]
+function View:printSubviews(prefix)
+  if not prefix then
+    prefix = ""
+  end
+  log.debug(prefix .."|-- ".. self.id)
+  for k,view in next,self.subviews do
+    view:printSubviews(prefix .."    ")
+  end
+end
+
+--[[
+    the following three functions exist in order to hide some View implementation
+    details from the EventManager and to prettify the calling code in the EventManager.
+    If the structure proves to be viable, we can remove these methods and call the
+    appropriate dispatchers directly from the EventManager.
+  ]]
+-- !!!!!!!!! DO NOT CALL DIRECTLY, ONLY USED BY EVENTMANAGER
+function View:dispatchCaptureEvent(event)
+  self.captureEventDispatcher:dispatchEvent(event)
+end
+function View:dispatchTargetEvent(event)
+--  log.debug(self.id..": targetting")
+  self.defaultEventDispatcher:dispatchEvent(event)
+end
+-- called by EventManager, don't call directly
+function View:dispatchBubbleEvent(event)
+  self.defaultEventDispatcher:dispatchEvent(event)
+end
+-- ^^^^^^^^^ DO NOT CALL DIRECTLY, ONLY USED BY EVENTMANAGER

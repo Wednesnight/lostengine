@@ -2,21 +2,24 @@ module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
 require("lost.guiro.event.EventManager")
-require("lost.guiro.MouseManager")
+--require("lost.guiro.MouseManager")
 
 
 --[[
-     Screen class
+     Screen
+     Holds only UserInterfaces.
+     Sets up basic 2D camera and other flags for rendering.
+     Sets up event handlers for low level events arriving from tasklet/application.
   ]]
 lost.common.Class "lost.guiro.Screen" "lost.guiro.View" {}
 
-function Screen:create(properties)
+function Screen:constructor()
   self.focusable = true
-  lost.guiro.View.create(self, properties)
+  lost.guiro.View.constructor(self)
 
   log.debug("----------------------------------------------------------")
   self.eventManager = lost.guiro.event.EventManager(self)
-  self.mouseManager = lost.guiro.MouseManager(self)
+--  self.mouseManager = lost.guiro.MouseManager(self)
 
 	self.parent = nil
 
@@ -40,17 +43,18 @@ end
 
 --[[
     only accepts lost.guiro.UserInterface
+    will fail if subview is not a lost.common.Class
   ]]
-function Screen:addSubview(child)
-  if child:is("lost.guiro.UserInterface") then
-    lost.guiro.View.addSubview(self, child)
-		child:setParent(self)
+function Screen:addSubview(subview)
+  if subview:isDerivedFrom("lost.guiro.UserInterface") then
+    lost.guiro.View.addSubview(self, subview)
+		subview:setParent(self)
   else
-    log.error("Screen:addSubview() can only add subviews of type UserInterface".. child:className())
+    error("Screen:addSubview() can only add subviews of type UserInterface : ".. subview:className(), 2)
   end
 end
 
-function Screen:setEventDispatcher(dispatcher)
+function Screen:listenTo(dispatcher)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
@@ -62,6 +66,9 @@ function Screen:setEventDispatcher(dispatcher)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
 end
 
+--[[
+    screen is overridden and called by all other subviews on parent
+  ]]
 function Screen:screen()
   return self
 end

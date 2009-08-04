@@ -3,7 +3,7 @@ module("lost.declarative", package.seeall)
 
 lost.common.Class "lost.declarative.Gl" {}
 
-function Gl:create(loader)
+function Gl:constructor(loader)
   self.loader = loader
 end
 

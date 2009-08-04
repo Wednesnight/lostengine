@@ -3,7 +3,7 @@ module("lost.declarative", package.seeall)
 
 lost.common.Class "lost.declarative.Resource" {}
 
-function Resource:create(loader)
+function Resource:constructor(loader)
   self.loader = loader
 end
 

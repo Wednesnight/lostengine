@@ -8,8 +8,8 @@ FocusEvent.FOCUS_RECEIVED = "focusReceived"
 FocusEvent.FOCUS_LOST     = "focusLost"
 
 -- you may initialize it with the proper type
-function FocusEvent:create(type)
-  lost.guiro.event.Event.create(self)
+function FocusEvent:constructor(type)
+  lost.guiro.event.Event.constructor(self)
 
   self.bubbles = true
   self.type = type

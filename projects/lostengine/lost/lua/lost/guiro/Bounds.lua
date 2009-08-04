@@ -7,7 +7,7 @@ require("lost.common.Class")
   ]]
 lost.common.Class "lost.guiro.Bounds" {}
 
-function Bounds:create(x, y, width, height)
+function Bounds:constructor(x, y, width, height)
   self.x = x
   self.y = y
   self.width = width

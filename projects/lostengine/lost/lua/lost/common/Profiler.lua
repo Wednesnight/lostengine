@@ -7,7 +7,7 @@ require("lost.common.Class")
   ]]
 lost.common.Class "lost.common.Profiler"
 
-function Profiler:create()
+function Profiler:constructor()
   self.calls = {}
 end
 
