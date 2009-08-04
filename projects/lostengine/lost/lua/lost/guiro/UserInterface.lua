@@ -7,10 +7,8 @@ require("lost.guiro.View")
   ]]
 lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
 
-function UserInterface:create(properties)
-  lost.guiro.View.create(self, properties)
-
-  properties = properties or {}
+function UserInterface:constructor()
+  lost.guiro.View.constructor(self)
   
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
@@ -18,44 +16,11 @@ end
 --[[
     only accepts lost.guiro.controls.Window
   ]]
-function UserInterface:appendChild(child)
-  if child:is("lost.guiro.controls.Window") then
-    lost.guiro.View.appendChild(self, child)
+function UserInterface:addSubview(subview)
+  if subview:isDerivedFrom("lost.guiro.Window") then
+    lost.guiro.View.addSubview(self, subview)
   else
-    log.error("UserInterface:appendChild() cannot append ".. child:className())
-  end
-end
-
---[[
-    render
-  ]]
-function UserInterface:render(canvas, forceRender)
-  -- helper vars
-  local globalRect = self:globalRect()
-
-  if forceRender or self.dirty then
-    lost.guiro.View.render(self, canvas, true)
-  else
-    self:renderChildren(self, canvas)
-  end
-  canvas.context:popState()
-end
-
---[[
-    checks children for redraw flag
-  ]]
-function UserInterface:renderChildren(parent, canvas)
-  local topWindow = self:topWindow()
-  for k,child in next,parent.children do
-    child:update(canvas)
-    if child.dirty then
-      child:render(canvas)
-      if topWindow then
-        topWindow:render(canvas, true)
-      end
-    else
-      self:renderChildren(child, canvas)
-    end
+    error("UserInterface:addSubview() can only add subviews of type Window : ".. subview:className(), 2)    
   end
 end
 
@@ -63,23 +28,23 @@ end
     get focused window
   ]]
 function UserInterface:topWindow()
-  return self.children[table.maxn(self.children)]
+  return self.subviews[table.maxn(self.subviews)]
 end
 
 --[[
-    set focused window
+    reorders windows by bringing focused window to front
   ]]
 function UserInterface:updateFocus(event)
   local mouseEvent = event
   local topWindow = self:topWindow()
   if not topWindow or not topWindow:containsCoord(mouseEvent.pos) then
-    local idx = table.maxn(self.children)
+    local idx = table.maxn(self.subviews)
     while idx > 0 do
-      local child = self.children[idx]
-      if child:containsCoord(mouseEvent.pos) then
-        self:removeChild(child)
-        self:appendChild(child)
-        child:needsRedraw()
+      local subview = self.subviews[idx]
+      if subview:containsCoord(mouseEvent.pos) then
+        self:removeSubview(subview)
+        self:addSubview(subview)
+        subview:needsRedraw()
         break
       end
       idx = idx-1

@@ -17,8 +17,8 @@ typeConvert[lost.application.MouseEvent.MOUSE_UP] = MouseEvent.MOUSE_UP
 typeConvert[lost.application.MouseEvent.MOUSE_DOWN] = MouseEvent.MOUSE_DOWN
 
 -- initialise it with an uncast lost.application.MouseEvent
-function MouseEvent:create(laMouseEvent)
-  lost.guiro.event.Event.create(self)
+function MouseEvent:constructor(laMouseEvent)
+  lost.guiro.event.Event.constructor(self)
 
   local lostAppMouseEvent = lost.application.MouseEvent.cast(laMouseEvent)
 

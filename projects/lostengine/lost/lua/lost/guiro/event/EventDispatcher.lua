@@ -4,7 +4,7 @@ require("lost.common.Class")
 
 lost.common.Class "lost.guiro.event.EventDispatcher" {}
 
-function EventDispatcher:create()
+function EventDispatcher:constructor()
   self.listeners = {}
 end
 

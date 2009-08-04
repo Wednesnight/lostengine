@@ -12,8 +12,8 @@ typeConvert[lost.application.KeyEvent.KEY_UP] = KeyEvent.KEY_UP
 typeConvert[lost.application.KeyEvent.KEY_DOWN] = KeyEvent.KEY_DOWN
 
 -- initialise it with an uncast lost.application.KeyEvent
-function KeyEvent:create(laKeyEvent)
-  lost.guiro.event.Event.create(self)
+function KeyEvent:constructor(laKeyEvent)
+  lost.guiro.event.Event.constructor(self)
 
   self.bubbles = true
   self.lostAppKeyEvent = lost.application.KeyEvent.cast(laKeyEvent)

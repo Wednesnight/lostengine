@@ -12,6 +12,7 @@ function Class(class)
   local definition = {}
   _class_derived = function(class)
     if type(class) == "string" then
+--      log.debug("expanding class "..class);
       local ancestor = expandNamespace(class)
       for k,v in next,ancestor do
         definition[k] = v
@@ -21,6 +22,7 @@ function Class(class)
       end
       return _class_derived
     elseif type(class) == "table" then
+--      log.debug("declaring class "..bases[#bases])
       for k,v in next,class do
         definition[k] = v
       end
@@ -33,8 +35,14 @@ function Class(class)
 end
 
 --[[
-    expands the given namespace
-    initializes an empty table (if not existent) for each name in className, seperated by "."
+    Expects a string that contains a dot delimited fully qualified class name.
+    Splits the string at the dots and creates tables for each namespace level, 
+    placing the result in the global namespace _G.
+    Example:
+    'lost.guiro.View' would be split into 'lost', 'guiro', 'View'
+    Tables would be created to enable the following expression:
+    _G["lost"]["guiro"]["View"]
+    Initially, the result of this expression is an empty table.
   ]]
 function expandNamespace(className)
   local namespace = _G
@@ -59,12 +67,14 @@ function declareClass(namespace, bases, definition)
   end
   namespace.bases = bases
 
-  -- checks if self is a or derived from className
-  namespace.is = function (self, className)
+  -- checks if self is an instance or is derived from fullyQualifiedClassname
+  -- the function iterates over all fully qualified base class names and compares
+  -- them against provided string
+  namespace.isDerivedFrom = function (self, fullyQualifiedClassname)
     local result = self.bases or false
     if result then
       for k,base in next,self.bases do
-        result = base == className
+        result = (base == fullyQualifiedClassname)
         if result then
           break
         end
@@ -90,7 +100,6 @@ function declareClass(namespace, bases, definition)
       prefix = prefix .."    "
     end
   end
-
   
   -- init class metatable
   local metatable =
@@ -108,14 +117,9 @@ function declareClass(namespace, bases, definition)
       -- assign operators
       setmetatable(object, self)
 
-      -- make sure that free is our cleanup function
-      object.free = function(self)
-        self = nil
-      end
-
       -- call the ctor
-      if type(object.create) == "function" then
-        object:create(unpack(arg))
+      if type(object.constructor) == "function" then
+        object:constructor(unpack(arg))
       end
 
       -- return the new instance

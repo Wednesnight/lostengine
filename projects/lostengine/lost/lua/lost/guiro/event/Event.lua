@@ -8,7 +8,7 @@ lost.guiro.event.Event.PHASE_CAPTURE = 0
 lost.guiro.event.Event.PHASE_TARGET = 1
 lost.guiro.event.Event.PHASE_BUBBLE = 2
 
-function Event:create(inType) 
+function Event:constructor(inType) 
   self.type = inType                                -- identifies the event type
   self.bubbles = false                              -- set this to true if the event should bubble
   self.stopDispatch = false                         -- set this to false if you want to stop the dispatching of this event

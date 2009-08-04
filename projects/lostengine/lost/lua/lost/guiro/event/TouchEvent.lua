@@ -16,8 +16,8 @@ typeConvert[lost.application.TouchEvent.TOUCHES_ENDED] = TouchEvent.TOUCHES_ENDE
 typeConvert[lost.application.TouchEvent.TOUCHES_MOVED] = TouchEvent.TOUCHES_MOVED
 
 -- initialise it with an uncast lost.application.TouchEvent
-function TouchEvent:create(laTouchEvent)
-  lost.guiro.event.Event.create(self)
+function TouchEvent:constructor(laTouchEvent)
+  lost.guiro.event.Event.constructor(self)
 
   local lostAppTouchEvent = lost.application.TouchEvent.cast(laTouchEvent)
 

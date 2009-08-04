@@ -3,7 +3,7 @@ module("lost.declarative", package.seeall)
 
 lost.common.Class "lost.declarative.Mesh" {}
 
-function Mesh:create(loader)
+function Mesh:constructor(loader)
   self.loader = loader
 end
 

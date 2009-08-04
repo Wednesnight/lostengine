@@ -3,7 +3,7 @@ module("lost.declarative", package.seeall)
 
 lost.common.Class "lost.declarative.Font" {}
 
-function Font:create(loader)
+function Font:constructor(loader)
   self.loader = loader
 end
 
