@@ -20,7 +20,7 @@ namespace lost
       Mesh()
       {
         material = Material::create();
-        modelTransform.initIdentity();
+        transform.initIdentity();
       }
 
       virtual ~Mesh() {}
@@ -33,7 +33,7 @@ namespace lost
       
       GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
       MaterialPtr material;
-      math::Matrix modelTransform;
+      math::Matrix transform;
     };
 
     typedef lost::shared_ptr<Mesh> MeshPtr;

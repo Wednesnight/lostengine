@@ -29,14 +29,14 @@ SelectionDisplay::~SelectionDisplay()
 void SelectionDisplay::description(const std::string& str)
 {
   MeshPtr txt = fnt->render(str, descriptionFontSize);
-  txt->modelTransform = MatrixTranslation(Vec3(descriptionRect.x, descriptionRect.y, 0));
+  txt->transform = MatrixTranslation(Vec3(descriptionRect.x, descriptionRect.y, 0));
   descriptionNode->mesh = txt;
 }
 
 void SelectionDisplay::title(const std::string& str)
 {
   MeshPtr txt = fnt->render(str, titleFontSize);
-  txt->modelTransform = MatrixTranslation(Vec3(titleRect.x, titleRect.y, 0));
+  txt->transform = MatrixTranslation(Vec3(titleRect.x, titleRect.y, 0));
   titleNode->mesh = txt;
 }
 
@@ -66,7 +66,7 @@ void SelectionDisplay::addLed(int i)
   Vec3 translation(current.x+((current.width-txt->size.width)/2),
                    current.y+((current.height-txt->size.height)/2),
                    0);
-  txt->modelTransform = MatrixTranslation(translation);
+  txt->transform = MatrixTranslation(translation);
   rootNode->add(rg::Draw::create(txt));
 }
 

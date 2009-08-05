@@ -68,7 +68,7 @@ function Mesh:Quad2D(def)
     result:updateSize(size, flip)
   end
   if transform ~= nil then
-    result.modelTransform = transform
+    result.transform = transform
   end
 
   self:applyMaterial(result, def)

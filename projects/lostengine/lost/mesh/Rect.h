@@ -59,7 +59,7 @@ namespace lost
 
         if (rect.x != 0 || rect.y != 0)
         {
-          this->modelTransform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
+          this->transform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
         }
       }
 
@@ -136,7 +136,7 @@ namespace lost
 
         if (rect.x != 0 || rect.y != 0)
         {
-          this->modelTransform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
+          this->transform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
         }
       }
       

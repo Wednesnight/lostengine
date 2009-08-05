@@ -207,7 +207,7 @@ function View:updateLayout(forceUpdate)
     self.currentLocalRect = self.bounds:rect(lost.math.Rect())
 
     for name,mesh in next,self.meshes do
-      mesh.modelTransform = lost.math.MatrixTranslation(lost.math.Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
+      mesh.transform = lost.math.MatrixTranslation(lost.math.Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
     end
 
     for key,view in next,self.subviews do

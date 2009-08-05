@@ -23,13 +23,13 @@ function addTextNode(rootNode, panelText, colIndex, rowIndex, col)
     local xOffset = (colIndex * fboSize.width) + (fboSize.width - txt.size.width) / 2
     local yOffset = (rowIndex+1) * fboSize.height - yinset
     txt.material.color = col;
-    txt.modelTransform = MatrixTranslation(Vec3(xOffset, yOffset, 0))
+    txt.transform = MatrixTranslation(Vec3(xOffset, yOffset, 0))
     rootNode:add(lost.rg.Draw.create(txt))
 end
 
 function addPanelNode(rootNode, tex, colIndex, rowIndex, theShader)
   local quad = lost.mesh.Quad2D.create(tex, false)
-  quad.modelTransform = MatrixTranslation(Vec3(colIndex*fboSize.width,rowIndex*fboSize.height,0));  
+  quad.transform = MatrixTranslation(Vec3(colIndex*fboSize.width,rowIndex*fboSize.height,0));  
   if theShader then
     quad.material.shader = theShader
   end
@@ -198,7 +198,7 @@ function update(tasklet)
   
   if animated then
     angle = math.fmod(delta*50+angle, 360)
-    mesh.modelTransform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle)
+    mesh.transform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle)
   end
 
   scene:process(tasklet.window.context)
