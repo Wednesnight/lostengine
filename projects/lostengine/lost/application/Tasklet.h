@@ -39,8 +39,7 @@ namespace lost
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;
-      bool                            hasWindow; // set this to true if you want a window to be constructed from windowParams
-      WindowParams                    windowParams; // fill this structure with the necessary params and set hasWindow to true if you want a window with GL context
+      WindowParams                    windowParams; // fill this structure with the necessary params if you want a window with GL context
       WindowPtr                       window; // contains the window pointer after init() if it could be created
       
       // if true, only runs the main loop once a low level event arrives

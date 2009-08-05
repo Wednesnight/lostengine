@@ -11,7 +11,6 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotZ = lost.math.MatrixRotZ
 
-hasWindow = true
 windowRect = Rect(200,200,640,480)
 windowParams = WindowParams("logo test", windowRect)
 

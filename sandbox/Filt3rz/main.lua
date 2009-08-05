@@ -13,7 +13,6 @@ numPanels = 5
 numRows = 2
 screenSize = Vec2(fboSize.width * numPanels, fboSize.height * numRows)
 
-hasWindow = true
 windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height))
 
 -- blur edge emboss sharpen

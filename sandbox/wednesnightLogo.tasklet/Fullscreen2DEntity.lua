@@ -9,8 +9,8 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotZ = lost.math.MatrixRotZ
 
-function Fullscreen2DEntity:create(bgcol)
-  Entity.create(self)
+function Fullscreen2DEntity:constructor(bgcol)
+  Entity.constructor(self)
   self.backgroundColor = bgcol
   self.rootNode = dcl.rg:Node
   {

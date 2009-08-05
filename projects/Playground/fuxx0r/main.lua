@@ -1,7 +1,6 @@
 require("lost.io.Rg")
 
 
-hasWindow = true
 windowParams = lost.application.WindowParams("fuxx0r", lost.math.Rect(50,200,640,480))
 
 angle = 0

@@ -65,18 +65,14 @@ namespace lost
 
       // try to extract window params and flag from interpreter
       // the values are optional and set as globals
-      luabind::object obj = lua->globals["hasWindow"];
-      if(obj) {hasWindow = object_cast<bool>(obj);}
-      obj = lua->globals["windowParams"];
-      if(obj) {windowParams=object_cast<WindowParams>(obj);}
-      
-      // create window if flag is set
-      if(hasWindow)
+      luabind::object obj = lua->globals["windowParams"];
+      if(obj)
       {
+        windowParams=object_cast<WindowParams>(obj);
         window = Window::create(eventDispatcher, windowParams);
         window->open();        
       }
-      
+            
       // get lua functions if they are present
       hasLuaStartup = false;
       hasLuaUpdate = false;
@@ -94,7 +90,7 @@ namespace lost
       void* pool = threadAutoreleasePoolHack_createPool();
 
       // make sure that our GL context is the current context
-      if(hasWindow)
+      if(window)
       {
         window->context->makeCurrent();      
       }

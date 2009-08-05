@@ -5,7 +5,7 @@ lost.common.Class "Entity" {}
 -- animatable entity, can hold other entities
 -- has an update method
 -- has an rg node
-function Entity:create()
+function Entity:constructor()
   self.children = {}
   self.rootNode = lost.rg.Node.create()
 end
