@@ -3,7 +3,6 @@ local Rect = lost.math.Rect
 
 require("lost.declarative.Context")
 
-hasWindow = true
 windowParams = WindowParams("Guiroscope", Rect(300,300,640,480))
 
 ui = nil

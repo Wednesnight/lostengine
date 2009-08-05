@@ -1,6 +1,5 @@
 require("lost.declarative.Context")
 
-hasWindow = true
 windowParams = lost.application.WindowParams("testing", lost.math.Rect(200,200,600,128))
 
 function startup(tasklet)

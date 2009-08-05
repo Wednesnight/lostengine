@@ -9,8 +9,8 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotZ = lost.math.MatrixRotZ
 
-function LogoEntity:create()
-  Entity.create(self)
+function LogoEntity:constructor()
+  Entity.constructor(self)
   self.font = dcl.font:TrueTypeFont
   {
     filename = "miserable.ttf",

@@ -9,7 +9,7 @@ has got two modes
     and calls update with these values on the given entity
 2.) dump mode: calls update with a fixed frequency and writes screenshots to a given directory
 ]]
-function Animator:create()
+function Animator:constructor()
   self.lastUpdate = 0
   self.startTime = 0
 end

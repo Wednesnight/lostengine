@@ -4,7 +4,6 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local Vec3 = lost.math.Vec3
 local Rect = lost.math.Rect
 
-hasWindow = true
 windowParams = lost.application.WindowParams("Ivy", lost.math.Rect(200,200,640,480))
 
 rootNode = nil
