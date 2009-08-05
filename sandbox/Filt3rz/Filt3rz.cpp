@@ -45,7 +45,7 @@ void Filt3rz::update(double dt)
   if (animated)
   {
     angle = fmod(dt*50+angle, 360);
-    model->modelTransform = math::MatrixRotX(angle) * math::MatrixRotY(angle);
+    model->transform = math::MatrixRotX(angle) * math::MatrixRotY(angle);
   }
 }
 

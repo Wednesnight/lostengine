@@ -159,19 +159,19 @@ namespace lost
           class_<Mesh, MeshPtr>("Mesh")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
-            .def_readwrite("modelTransform", &Mesh::modelTransform)
+            .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode),
 
           class_<Mesh2D, Mesh, MeshPtr>("Mesh2D")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
-            .def_readwrite("modelTransform", &Mesh::modelTransform)
+            .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode),
 
          class_<Mesh3D, Mesh, MeshPtr>("Mesh3D")
             .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
-            .def_readwrite("modelTransform", &Mesh::modelTransform)
+            .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode)
         ]
       ];
@@ -190,7 +190,7 @@ namespace lost
             .def(constructor<gl::TexturePtr, bool>())
             .def("updateSize", &Quad2D::updateSize)
             .def_readwrite("material", &Quad2D::material)
-            .def_readwrite("modelTransform", &Quad2D::modelTransform)
+            .def_readwrite("transform", &Quad2D::transform)
             .scope
             [
               def("create", (Quad2DPtr(*)()) &Quad2D::create),

@@ -62,7 +62,7 @@ namespace lost
       camera::CameraPtr currentCam;
       GLenum currentActiveTexture;
       ShaderProgramPtr currentShader;
-      math::Matrix currentModelTransform;
+      math::Matrix currentTransform;
 
       /**
        * forward declaration for platform specific stuff
@@ -119,7 +119,7 @@ namespace lost
       void clearColor(const common::Color& col); // sets the current clear color to col
       
       void camera(camera::CameraPtr cam);
-      void modelTransform(const math::Matrix& inTransform); // sets the GL_MODEL_VIEW matrix to inTransform if the new one is != old one
+      void transform(const math::Matrix& inTransform); // sets the GL_MODEL_VIEW matrix to inTransform if the new one is != old one
       
       void clear(GLbitfield flags);    
       

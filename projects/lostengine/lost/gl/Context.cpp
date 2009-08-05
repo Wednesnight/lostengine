@@ -89,7 +89,7 @@ namespace lost
       scissorEnabled = getParam<bool>(GL_SCISSOR_TEST);
       texture2DEnabled = getParam<bool>(GL_TEXTURE_2D);
       currentActiveTexture = getParam<int>(GL_ACTIVE_TEXTURE);
-      currentModelTransform.initIdentity();
+      currentTransform.initIdentity();
       currentClearColor = getParam<lost::common::Color>(GL_COLOR_CLEAR_VALUE);
     }
     
@@ -184,9 +184,9 @@ namespace lost
       }
     }
     
-    void Context::modelTransform(const math::Matrix& inTransform)
+    void Context::transform(const math::Matrix& inTransform)
     {
-//      if(currentModelTransform != inTransform)
+//      if(currentTransform != inTransform)
       {
         glMatrixMode(GL_MODELVIEW);GLDEBUG;
         if(currentCam && currentCam->hasModelViewMatrix)
@@ -198,7 +198,7 @@ namespace lost
         {
           glLoadMatrixf(inTransform.m);GLDEBUG;
         }
-        currentModelTransform = inTransform;
+        currentTransform = inTransform;
       }
     }
     
@@ -305,7 +305,7 @@ namespace lost
       if(mesh->material)
         material(mesh->material);
       
-      modelTransform(mesh->modelTransform);
+      transform(mesh->transform);
       if (ib)
       {
         indexArray(true);

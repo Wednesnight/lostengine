@@ -32,5 +32,5 @@ end
 
 function LogoEntity:update(tasklet, dt, at)
   self.angle = math.fmod(dt*.3+self.angle, 360)
-  self.mesh.modelTransform = self.logoTranslationMatrix*MatrixRotZ(self.angle)
+  self.mesh.transform = self.logoTranslationMatrix*MatrixRotZ(self.angle)
 end

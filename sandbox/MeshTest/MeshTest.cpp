@@ -165,7 +165,7 @@ bool MeshTest::startup()
    */
   Circle2DPtr circleMesh = Circle2D::create(25);
   circleMesh->material->color = common::redColor;
-  circleMesh->modelTransform = MatrixTranslation(Vec3(450, 350, 0));
+  circleMesh->transform = MatrixTranslation(Vec3(450, 350, 0));
   bg->add(rg::Draw::create(circleMesh));
   
   /**
@@ -173,7 +173,7 @@ bool MeshTest::startup()
    */
   FilledCircle2DPtr filledCircleMesh = FilledCircle2D::create(25);
   filledCircleMesh->material->color = common::redColor;
-  filledCircleMesh->modelTransform = MatrixTranslation(Vec3(375, 350, 0));
+  filledCircleMesh->transform = MatrixTranslation(Vec3(375, 350, 0));
   bg->add(rg::Draw::create(filledCircleMesh));
   
   /**
@@ -181,7 +181,7 @@ bool MeshTest::startup()
    */
   Ellipse2DPtr ellipseMesh = Ellipse2D::create(Vec2(15,50));
   ellipseMesh->material->color = common::redColor;
-  ellipseMesh->modelTransform = MatrixTranslation(Vec3(300, 350, 0));
+  ellipseMesh->transform = MatrixTranslation(Vec3(300, 350, 0));
   bg->add(rg::Draw::create(ellipseMesh));
   
   /**
@@ -189,7 +189,7 @@ bool MeshTest::startup()
    */
   FilledEllipse2DPtr filledEllipseMesh = FilledEllipse2D::create(Vec2(35, 15));
   filledEllipseMesh->material->color = common::redColor;
-  filledEllipseMesh->modelTransform = MatrixTranslation(Vec3(225, 350, 0));
+  filledEllipseMesh->transform = MatrixTranslation(Vec3(225, 350, 0));
   bg->add(rg::Draw::create(filledEllipseMesh));
   
   /**
@@ -259,21 +259,21 @@ void MeshTest::update(double dt)
     angle = fmod(dt*50+angle, 360);
     if(cube)
     {
-      cube->modelTransform =   MatrixTranslation(Vec3(-3, 1, 0))
+      cube->transform =   MatrixTranslation(Vec3(-3, 1, 0))
                              * MatrixRotX(angle)
                              * MatrixRotY(angle)
                              * MatrixTranslation(Vec3(-1, -1, -1));
     }
     if(axes)
     {
-      axes->modelTransform = MatrixTranslation(Vec3(0, 1, 0))
+      axes->transform = MatrixTranslation(Vec3(0, 1, 0))
                              * MatrixRotX(angle)
                              * MatrixRotY(angle);
     }
 
     if(aabb)
     {
-      aabb->modelTransform = MatrixTranslation(Vec3(2, 1, 0))
+      aabb->transform = MatrixTranslation(Vec3(2, 1, 0))
                              * MatrixRotX(angle)
                              * MatrixRotY(angle);;
 //                             * MatrixTranslation(Vec3(1, 0, 0));
@@ -309,7 +309,7 @@ bool MeshTest::update()
   window->context->camera(cam);
   Matrix m;
   m.initIdentity();
-  window->context->modelTransform(m);
+  window->context->transform(m);
   glBegin(GL_LINES);
     glVertex2f(0,0);
     glVertex2f(639,479);

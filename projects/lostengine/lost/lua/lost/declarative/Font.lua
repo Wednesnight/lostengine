@@ -19,7 +19,7 @@ function Font:Text(def)
   end   
   local result = def.font:render(def.text, def.size)
   if def.transform ~= nil then
-    result.modelTransform = def.transform
+    result.transform = def.transform
   end
 
   if def["material"] ~= nil then

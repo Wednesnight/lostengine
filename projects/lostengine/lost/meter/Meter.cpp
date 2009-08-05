@@ -64,7 +64,7 @@ namespace lost
       mesh->vertices(true);
       mesh->vertexBuffer->bindBufferData(vertices, numEntries);
       mesh->material->color = whiteColor;
-      mesh->modelTransform = MatrixTranslation(Vec3(bounds.x, bounds.y, 0));
+      mesh->transform = MatrixTranslation(Vec3(bounds.x, bounds.y, 0));
     }
 
     void Meter::updateByEvent(MeterEventPtr event)
