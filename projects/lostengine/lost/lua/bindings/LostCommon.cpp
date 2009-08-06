@@ -20,7 +20,7 @@ namespace lost
       [
         namespace_("common")
         [
-          class_<Color, lost::shared_ptr<Color> >("Color")
+          class_<Color>("Color")
             .def(constructor<>()) 
             .def(constructor<float, float, float>())
             .def(constructor<float, float, float, float>())

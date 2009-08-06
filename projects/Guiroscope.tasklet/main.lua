@@ -7,6 +7,7 @@ windowParams = WindowParams("Guiroscope", Rect(300,300,640,480))
 
 ui = nil
 
+
 function startup(tasklet)
   log.debug("starting up")
   tasklet.waitForEvents = true
@@ -27,8 +28,13 @@ function startup(tasklet)
     }
   }
 
+  local c = lost.common.Color(1,2,3,4)
+  log.debug("color : "..tostring(c))
+
   screen:printSubviews()
   screen:listenTo(tasklet.eventDispatcher)
+  screen.currentGlobalRect = lost.math.Rect(0,0,windowParams.rect.width, windowParams.rect.height)
+  screen:updateLayout() --force update of layout
   return true
 end
 
