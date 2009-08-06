@@ -37,10 +37,10 @@ function EventManager:findViewStack(rootView, mouseEvent)
   while containsPoint and (not view.hidden) and view.receivesEvents do
     viewStack[#viewStack+1] = view
     containsPoint = false
-    local i = #(view.children)
+    local i = #(view.subviews)
     local v = nil
     while i > 0 do
-      v = view.children[i]
+      v = view.subviews[i]
 --      log.debug(" --- "..v.id)
       if v:containsCoord(pos) then
         containsPoint = true;

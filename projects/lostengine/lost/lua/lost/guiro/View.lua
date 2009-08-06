@@ -70,6 +70,7 @@ function View:constructor()
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
+  self.currentGlobalRect = lost.math.Rect()
 end
 
 function View:__tostring()
@@ -200,15 +201,14 @@ function View:updateLayout(forceUpdate)
     self.dirtyLayout = false
     self.dirtyChildLayout = false
     if self.parent then
-      self.currentGlobalRect = self.bounds:rect(self.parent:globalRect())
+      log.debug("fetching parents globalRect")
+      local pgr = self.parent:globalRect()
+      log.debug("pgr "..pgr.x.." "..pgr.y.." "..pgr.width.." "..pgr.height)
+      self.currentGlobalRect = self.bounds:rect(pgr)
     else
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
     self.currentLocalRect = self.bounds:rect(lost.math.Rect())
-
-    for name,mesh in next,self.meshes do
-      mesh.transform = lost.math.MatrixTranslation(lost.math.Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
-    end
 
     for key,view in next,self.subviews do
       view:updateLayout(true)
@@ -224,7 +224,8 @@ function View:updateLayout(forceUpdate)
     end
   end
   
-  return lost.math.Rect(self.currentGlobalRect), lost.math.Rect(self.currentLocalRect)
+--  return lost.math.Rect(self.currentGlobalRect), lost.math.Rect(self.currentLocalRect)
+  return self.currentGlobalRect, self.currentLocalRect
 end
 
 --[[
