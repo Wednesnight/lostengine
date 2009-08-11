@@ -4,23 +4,23 @@ local Vec3 = lost.math.Vec3
 local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 
-lostrg:Scene
+return dcl.rg:Node
 {
   name = "rootNode",
-  lostrg:ClearColor{color = Color(0,0,0,1)},
-  lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
-  lostrg:Camera2D
+  dcl.rg:ClearColor{color = Color(0,0,0,1)},
+  dcl.rg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
+  dcl.rg:Camera2D
   {
     name = "2D Cam",
     viewport = Rect(0,0,screenSize.width,screenSize.height)
   },
-  lostrg:DepthTest
+  dcl.rg:DepthTest
   {
     false
   },
-  lostrg:Draw
+  dcl.rg:Draw
   {
-    mesh = lostfont:Text
+    mesh = dcl.font:Text
     {
       font = verattf,
       text = "Hello from Lua!",
@@ -28,9 +28,9 @@ lostrg:Scene
       transform = MatrixTranslation(Vec3(200,50,0))
     }
   },      
-  lostrg:Draw
+  dcl.rg:Draw
   {
-    mesh = lostfont:Text
+    mesh = dcl.font:Text
     {
       font = verattf,
       text = "   Subbele, VA filrgb Meine Fresse, es geht! blö",
@@ -38,11 +38,11 @@ lostrg:Scene
       transform = MatrixTranslation(Vec3(10,300,0))
     }
   },      
-  lostrg:Draw
+  dcl.rg:Draw
   {
     name = "font atlas",
     active = true,
-    mesh = lostmesh:Quad2D
+    mesh = dcl.mesh:Quad2D
     {
       texture = verattf.atlas,
       flip = false,

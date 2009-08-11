@@ -5,10 +5,10 @@ local Color = lost.common.Color
 local MatrixTranslation = lost.math.MatrixTranslation
 local cam3dPosition = Vec3(0,0,10)
 
-local lightShader = lostgl:Shader
+local lightShader = dcl.gl:Shader
 {
   filename = "light",
-  params = lostgl:ShaderParams
+  params = dcl.gl:ShaderParams
   {
     LightPosition = cam3dPosition,
     LightDiffuse = Color(1.0, 1.0, 1.0),
@@ -17,15 +17,15 @@ local lightShader = lostgl:Shader
   }
 }
 
-lostrg:Scene
+return dcl.rg:Node
 {
   name = "3D Scene",
-  lostrg:ClearColor{color = Color(0,0,0,1)},
-  lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
-  lostrg:Node
+  dcl.rg:ClearColor{color = Color(0,0,0,1)},
+  dcl.rg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
+  dcl.rg:Node
   {
     name="3D Foreground",
-    lostrg:Camera3D
+    dcl.rg:Camera3D
     {
       name = "3D Cam",
       viewport = Rect(0,0,screenSize.x,screenSize.y),
@@ -35,14 +35,14 @@ lostrg:Scene
       target = Vec3(0,0,0),
       stickToTarget = true
     },
-    lostrg:DepthTest
+    dcl.rg:DepthTest
     {
       true
     },    
-    lostrg:Draw
+    dcl.rg:Draw
     {
       name = "cube",
-      mesh = lostmesh:Obj
+      mesh = dcl.mesh:Obj
       {
         filename = "cube_tri.obj",
         material = 

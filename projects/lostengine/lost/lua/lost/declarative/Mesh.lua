@@ -34,7 +34,7 @@ function Mesh:Obj(def)
   end
   local filedata = self.loader:load(filename)
   local objmesh = lost.mesh.Loader.obj(filedata)
-  self:applyMaterial(result, def)
+  self:applyMaterial(objmesh, def)
 	return objmesh
 end
 
