@@ -327,8 +327,10 @@ bool MeshTest::shutdown()
 
 void MeshTest::keyDownHandler(KeyEventPtr event)
 {
-  if (event->key == K_ESCAPE) 
-    eventDispatcher->dispatchEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+  if (event->key == K_ESCAPE)
+  {
+    dispatchApplicationEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())));
+  }
 
   switch(event->key)
   {

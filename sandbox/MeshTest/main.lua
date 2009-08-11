@@ -1,26 +1,24 @@
-require("lost.io.Rg")
+require("lost.declarative.Context")
 require("settings")
 
-windowParams = lost.application.WindowParams("MeshTest", lost.math.Rect(50,200,screenSize.width, screenSize.height))
+local WindowParams = lost.application.WindowParams
+local Rect = lost.math.Rect
+
+windowParams = WindowParams("MeshTest", Rect(50,200,screenSize.width, screenSize.height))
 
 function startup(tasklet)
 
   local ttflib = lost.font.freetype.Library.create()
   verattf = lost.font.TrueTypeFont.create(ttflib, tasklet.loader:load("Vera.ttf"))
   verattf.atlasSize = lost.math.Vec2(128,64);
-  local l = lost.io.Loader(tasklet.loader)
-  scene = l:loadScene("testscene.lua")
-  threedScene = l:loadScene("3dScene.lua")
-  textScene = l:loadScene("textScene.lua")
-  tunaScene = l:loadScene("tunaScene.lua")
-  pixelperfectScene = l:loadScene("pixelperfect.lua")
-  
-  tasklet.eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE,
-    function(event)
-      local dropEvent = lost.application.DropEvent.cast(event)
-      log.debug(dropEvent.filename)
-    end
-  )
+
+  dcl = lost.declarative.Context(tasklet.loader)
+
+  scene = require("testscene")
+  threedScene = require("3dScene")
+  textScene = require("textScene")
+  tunaScene = require("tunaScene")
+  pixelperfectScene = require("pixelperfect")
   
   return true
 end

@@ -6,30 +6,30 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local cam3dPosition = Vec3(1,2,2)
 
 
-local zimtex = lostgl:Texture
+local zimtex = dcl.gl:Texture
 {
   filename = "zim.png"
 }
 
-lostrg:Scene
+return dcl.rg:Node
 {
   name = "rootNode",
-  lostrg:ClearColor{ color = Color(0,0,0,1) },
-  lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
-  lostrg:Node
+  dcl.rg:ClearColor{ color = Color(0,0,0,1) },
+  dcl.rg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
+  dcl.rg:Node
   {
     name="2D Background",
-    lostrg:Camera2D
+    dcl.rg:Camera2D
     {
       name = "2D Cam",
       viewport = Rect(0,0,640,480) -- make this dependant on window size from config file
     },
-    lostrg:DepthTest{false},
-    lostrg:Draw
+    dcl.rg:DepthTest{false},
+    dcl.rg:Draw
     {
       name = "little zim",
       active = true,
-      mesh = lostmesh:Quad2D
+      mesh = dcl.mesh:Quad2D
       {
         filename = "tunabg.png",
         flip = true

@@ -17,17 +17,17 @@ local l=lost.mesh.Line2D.create(Vec2(0,0), Vec2(0,480))
 l.material.color = Color(1,0,0)
 frame:add(lost.rg.Draw.create(l))
 
-lostrg:Scene
+return dcl.rg:Node
 {
 	name = "rootNode",
-  lostrg:ClearColor{ color = Color(0,0,0,1) },
-  lostrg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
-	lostrg:Camera2D
+  dcl.rg:ClearColor{ color = Color(0,0,0,1) },
+  dcl.rg:Clear{mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT},
+	dcl.rg:Camera2D
   {
     name = "2D Cam",
     viewport = Rect(0,0,screenSize.x,screenSize.y)
   },
-  lostrg:DepthTest
+  dcl.rg:DepthTest
   {
     false
   },
