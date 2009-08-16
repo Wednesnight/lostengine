@@ -41,6 +41,7 @@ function Screen:constructor()
   self.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT))
   self.renderNode:add(lost.rg.Camera.create(self.camera))
   self.renderNode:add(lost.rg.DepthTest.create(false))
+  self.backgroundNode.active = false -- disable background drawing for screen
 end
 
 function Screen:propagateMouseEvent(event)
