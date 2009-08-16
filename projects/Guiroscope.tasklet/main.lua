@@ -14,6 +14,7 @@ local wabs = lost.guiro.wabs
 local habs = lost.guiro.habs
 local wrel = lost.guiro.wrel
 local hrel = lost.guiro.hrel
+local Color = lost.common.Color
 
 -- these are deliberately global so we can access them from startup/update/shutdown
 dcl = nil
@@ -34,12 +35,20 @@ function startup(tasklet)
       dcl.guiro:Window
       {
         id = "window1",
-        bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5))
+        bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5)),
+        showFrame = false,
+        frameColor = Color(1,1,1),
+        showBackground = true,
+        backgroundColor = Color(1,1,0)
       },
       dcl.guiro:Window
       {
         id = "window2",
-        bounds = Bounds(xrel(.5), yrel(.5), wrel(.5), hrel(.5))        
+        bounds = Bounds(xrel(.5), yrel(.5), wrel(.5), hrel(.5)),
+        showFrame = true,
+        frameColor = Color(0,1,0),
+        showBackground = false,
+        backgroundColor = Color(1,0,0)
       }
     }
   }

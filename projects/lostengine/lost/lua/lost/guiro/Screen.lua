@@ -42,6 +42,7 @@ function Screen:constructor()
   self.renderNode:add(lost.rg.Camera.create(self.camera))
   self.renderNode:add(lost.rg.DepthTest.create(false))
   self.backgroundNode.active = false -- disable background drawing for screen
+  self.frameNode.active = false
 end
 
 function Screen:propagateMouseEvent(event)

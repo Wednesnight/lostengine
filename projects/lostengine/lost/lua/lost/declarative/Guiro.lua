@@ -25,11 +25,21 @@ end
 function Guiro:assignViewAttributes(target, source)
   if source.bounds ~= nil then
     target.bounds = source.bounds
-    log.debug("assigning bounds")
   end
   if source.id ~= nil then
     target.id = source.id
-    log.debug("assigning id")
+  end
+  if source.showFrame ~= nil then
+    target:showFrame(source.showFrame)
+  end
+  if source.frameColor ~= nil then
+    target:frameColor(source.frameColor)
+  end
+  if source.showBackground ~= nil then
+    target:showBackground(source.showBackground)
+  end
+  if source.backgroundColor ~= nil then
+    target:backgroundColor(source.backgroundColor)
   end
   target:needsLayout()
 end

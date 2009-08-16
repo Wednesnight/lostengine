@@ -77,13 +77,52 @@ function View:constructor()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
   self.currentGlobalRect = lost.math.Rect()
 
-  -- mesh and draw node
+  -- meshes and draw nodes
   self.backgroundMesh = lost.mesh.Quad2D.create(self.currentGlobalRect)
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "viewBackground"
+
+  self.frameMesh = lost.mesh.Rect2D.create(self.currentGlobalRect)
+  self.frameMesh.material.color = lost.common.Color(1,1,1,1)
+  self.frameNode = lost.rg.Draw.create(self.frameMesh)
+  self.frameNode.name = "viewFrame"
+
   self.renderNode:add(self.backgroundNode)
+  self.renderNode:add(self.frameNode)
   
+end
+
+function View:showFrame(flag)
+  if flag ~= nil then
+    self.frameNode.active = flag
+  else
+    return self.frameNode.active
+  end
+end
+
+function View:frameColor(col)
+  if col ~= nil then
+    self.frameMesh.material.color = col
+  else
+    return self.frameMesh.material.color
+  end
+end
+
+function View:showBackground(flag)
+  if flag ~= nil then
+    self.backgroundNode.active = flag
+  else
+    return self.backgroundNode.active
+  end
+end
+
+function View:backgroundColor(col)
+  if col ~= nil then
+    self.backgroundMesh.material.color = col
+  else
+    return self.backgroundMesh.material.color
+  end
 end
 
 function View:__tostring()
@@ -223,6 +262,8 @@ function View:updateLayout(forceUpdate)
       log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
       self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height), false)
       self.backgroundMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
+      self.frameMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
+      self.frameMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
     else
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
