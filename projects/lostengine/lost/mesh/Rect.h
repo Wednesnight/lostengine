@@ -28,6 +28,7 @@ namespace lost
         this->createIndices();
         this->transferVertices();
         this->transferIndices();
+        this->transform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
       }
 
       void createIndices()
@@ -48,19 +49,20 @@ namespace lost
         }
       }
 
-      void createVertices(const math::Rect& rect)
+      void createVertices(const math::Rect& r)
       {
-        math::Rect relativeRect(0, 0, rect.width, rect.height);
+        math::Rect rect(0,0,r.width, r.height);
+        this->vertexData[0] = rect.bottomLeft();
+        this->vertexData[1] = rect.bottomRight();
+        this->vertexData[2] = rect.topRight();
+        this->vertexData[3] = rect.topLeft();
+        
+      }
 
-        this->vertexData[0] = relativeRect.bottomLeft();
-        this->vertexData[1] = relativeRect.bottomRight();
-        this->vertexData[2] = relativeRect.topRight();
-        this->vertexData[3] = relativeRect.topLeft();
-
-        if (rect.x != 0 || rect.y != 0)
-        {
-          this->transform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
-        }
+      void updateSize(const math::Vec2& newSize)
+      {
+        this->createVertices(math::Rect(0,0,newSize.x, newSize.y));
+        this->transferVertices();
       }
 
       static lost::shared_ptr<Rectangle<MESHTYPE, RectType> > create(const math::Rect& rect)

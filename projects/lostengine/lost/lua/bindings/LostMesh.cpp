@@ -28,7 +28,6 @@ namespace lost
           class_<Line2D, Mesh, Line2DPtr>("Line2D")
             .def(constructor<>())
             .def(constructor<const math::Vec2&, const math::Vec2&>())
-            .def_readwrite("material", &Line2D::material)
             .scope
             [
               def("create", (Line2DPtr(*)()) &Line2D::create),
@@ -46,28 +45,25 @@ namespace lost
         [
           class_<Rect2D, Mesh, Rect2DPtr>("Rect2D")
             .def(constructor<const math::Rect&>())
-            .def_readwrite("material", &Rect2D::material)
+            .def("updateSize", &Rect2D::updateSize)
             .scope
             [
               def("create", &Rect2D::create)
             ],
           class_<FilledRect2D, Mesh, FilledRect2DPtr>("FilledRect2D")
             .def(constructor<const math::Rect&>())
-            .def_readwrite("material", &FilledRect2D::material)
             .scope
             [
               def("create", &FilledRect2D::create)
             ],
           class_<RoundedRect2D, Mesh, RoundedRect2DPtr>("RoundedRect2D")
             .def(constructor<const math::Rect&, const double, const unsigned int>())
-            .def_readwrite("material", &RoundedRect2D::material)
             .scope
             [
               def("create", &RoundedRect2D::create)
             ],
           class_<FilledRoundedRect2D, Mesh, FilledRoundedRect2DPtr>("FilledRoundedRect2D")
             .def(constructor<const math::Rect&, const double, const unsigned int>())
-            .def_readwrite("material", &FilledRoundedRect2D::material)
             .scope
             [
               def("create", &FilledRoundedRect2D::create)
