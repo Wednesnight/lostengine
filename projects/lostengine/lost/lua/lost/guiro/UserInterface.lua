@@ -9,7 +9,7 @@ lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
 
 function UserInterface:constructor()
   lost.guiro.View.constructor(self)
-  
+  self.backgroundNode.active = false -- disable background drawing
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
