@@ -5,6 +5,10 @@ require("lost.common.Class")
 require("lost.guiro.Bounds")
 require("lost.guiro.event.EventDispatcher")
 
+local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
+local MatrixTranslation = lost.math.MatrixTranslation
+
 lost.common.Class "lost.guiro.View"
 {
 
@@ -21,7 +25,7 @@ lost.common.Class "lost.guiro.View"
 --  sendsEvents = true ????
 
   dirtyLayout = true,
-  dirtyChildLayout = false,
+  dirtySubviewLayout = false,
 
   -- geometry cache
   currentGlobalRect = lost.math.Rect(),
@@ -56,21 +60,30 @@ function View:constructor()
   self.rootNode.name = self.id
   self.renderNode = lost.rg.Node.create()
   self.renderNode.name = "renderNode"
-  self.childNodes = lost.rg.Node.create()
-  self.childNodes.name = "childNodes"
+  self.subviewNodes = lost.rg.Node.create()
+  self.subviewNodes.name = "subviewNodes"
+
   self.rootNode:add(self.renderNode)
-  self.rootNode:add(self.childNodes)
+  self.rootNode:add(self.subviewNodes)
 
   -- mesh container
   self.meshes = {}
 
-  self.bounds = Bounds(xabs(0), yabs(0), wabs(0), habs(0))
+  self.bounds = Bounds(xabs(0), yabs(0), wabs(10), habs(10))
   self.subviews = {}
 
   -- setup event dispatchers
   self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
   self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
   self.currentGlobalRect = lost.math.Rect()
+
+  -- mesh and draw node
+  self.backgroundMesh = lost.mesh.Quad2D.create(self.currentGlobalRect)
+  self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
+  self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
+  self.backgroundNode.name = "viewBackground"
+  self.renderNode:add(self.backgroundNode)
+  
 end
 
 function View:__tostring()
@@ -92,7 +105,7 @@ function View:addSubview(newview, pos)
   if (newview.id) then
     if (self(newview.id) == nil) then
       table.insert(self.subviews, pos, newview)
-      self.childNodes:add(newview.rootNode)
+      self.subviewNodes:add(newview.rootNode)
       newview:setParent(self)
     else
       log.error("subview '".. newview.id .."' already exists")
@@ -104,14 +117,14 @@ function View:addSubview(newview, pos)
 end
 
 --[[ 
-    removes child from self.subviews and sets child.parent to nil
+    removes subview from self.subviews and sets subview.parent to nil
   ]]
 function View:removeSubview(subview)
   local idx = 1
   for k,view in next,self.subviews do
     if rawequal(view, subview) then
       table.remove(self.subviews, idx)
-      self.childNodes:remove(subview.rootNode)
+      self.subviewNodes:remove(subview.rootNode)
       subview:setParent(nil)
       break
     end
@@ -198,13 +211,18 @@ end
 function View:updateLayout(forceUpdate)
   -- view needs update
   if forceUpdate or self.dirtyLayout then
+    log.debug("updating layout for "..self.id)
     self.dirtyLayout = false
-    self.dirtyChildLayout = false
+    self.dirtySubviewLayout = false
     if self.parent then
-      log.debug("fetching parents globalRect")
+--      log.debug("fetching parents globalRect")
       local pgr = self.parent:globalRect()
-      log.debug("pgr "..pgr.x.." "..pgr.y.." "..pgr.width.." "..pgr.height)
+--      log.debug("pgr "..pgr.x.." "..pgr.y.." "..pgr.width.." "..pgr.height)
       self.currentGlobalRect = self.bounds:rect(pgr)
+      local cgr = self.currentGlobalRect
+      log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
+      self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height), false)
+      self.backgroundMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
     else
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
@@ -214,11 +232,11 @@ function View:updateLayout(forceUpdate)
       view:updateLayout(true)
     end
 
-  -- child needs update
-  elseif self.dirtyChildLayout then
-    self.dirtyChildLayout = false
+  -- subview needs update
+  elseif self.dirtySubviewLayout then
+    self.dirtySubviewLayout = false
     for key,view in next,self.subviews do
-      if view.dirtyLayout or view.dirtyChildLayout then
+      if view.dirtyLayout or view.dirtySubviewLayout then
         view:updateLayout()
       end
     end
@@ -245,26 +263,26 @@ function View:localRect()
 end
 
 --[[
-    sets dirtyLayout and parent's dirtyChildLayout flags
+    sets dirtyLayout and parent's dirtySubviewLayout flags
   ]]
 function View:needsLayout()
   self:needsRedraw()
   if not self.dirtyLayout then
     self.dirtyLayout = true
     if self.parent then
-      self.parent:needsChildLayout()
+      self.parent:needsSubviewLayout()
     end
   end
 end
 
 --[[
-    sets dirtyChildLayout flag
+    sets dirtySubviewLayout flag
   ]]
-function View:needsChildLayout()
-  if not self.dirtyChildLayout then
-    self.dirtyChildLayout = true
+function View:needsSubviewLayout()
+  if not self.dirtySubviewLayout then
+    self.dirtySubviewLayout = true
     if self.parent then
-      self.parent:needsChildLayout()
+      self.parent:needsSubviewLayout()
     end
   end
 end
