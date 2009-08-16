@@ -5,8 +5,19 @@ require("lost.declarative.Context")
 
 windowParams = WindowParams("Guiroscope", Rect(300,300,640,480))
 
-ui = nil
+local Bounds = lost.guiro.Bounds
+local xabs = lost.guiro.xabs
+local yabs = lost.guiro.yabs
+local xrel = lost.guiro.xrel
+local yrel = lost.guiro.yrel
+local wabs = lost.guiro.wabs
+local habs = lost.guiro.habs
+local wrel = lost.guiro.wrel
+local hrel = lost.guiro.hrel
 
+-- these are deliberately global so we can access them from startup/update/shutdown
+dcl = nil
+screen = nil
 
 function startup(tasklet)
   log.debug("starting up")
@@ -15,30 +26,35 @@ function startup(tasklet)
 
   screen = dcl.guiro:Screen
   {
+    id = "screen",
     dcl.guiro:UserInterface
     {
+      id = "mainUi",
+      bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1)),
       dcl.guiro:Window
       {
-        
+        id = "window1",
+        bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5))
       },
       dcl.guiro:Window
       {
-        
+        id = "window2",
+        bounds = Bounds(xrel(.5), yrel(.5), wrel(.5), hrel(.5))        
       }
     }
   }
-
-  local c = lost.common.Color(1,2,3,4)
-  log.debug("color : "..tostring(c))
 
   screen:printSubviews()
   screen:listenTo(tasklet.eventDispatcher)
   screen.currentGlobalRect = lost.math.Rect(0,0,windowParams.rect.width, windowParams.rect.height)
   screen:updateLayout() --force update of layout
+  screen.rootNode:print()
   return true
 end
 
 function update(tasklet)
+  screen.rootNode:process(tasklet.window.context)
+  tasklet.window.context:swapBuffers()
   return true
 end
 
