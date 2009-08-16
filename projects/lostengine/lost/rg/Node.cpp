@@ -1,10 +1,20 @@
 #include "lost/rg/Node.h"
 #include "lost/common/Logger.h"
+#include "lost/common/NullDeleter.h"
 
 namespace lost
 {
   namespace rg
   {
+
+    void printNode(NodePtr n, const std::string prefix)
+    {
+      DOUT(prefix << "|-- " << n->name);
+      for(std::list<NodePtr>::iterator i=n->children.begin(); i!=n->children.end(); ++i)
+      {
+        printNode(*i, prefix+"    ");
+      }      
+    }
 
     Node::Node()
     {
@@ -15,6 +25,11 @@ namespace lost
     Node::~Node()
     {
       
+    }
+
+    void Node::print()
+    {
+      printNode(shared_ptr<Node>(this, common::NullDeleter()), std::string(""));
     }
 
     void Node::add(NodePtr child)

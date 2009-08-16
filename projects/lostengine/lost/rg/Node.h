@@ -36,6 +36,8 @@ struct Node
   std::list<NodePtr> children;
   
   NodePtr recursiveFindByName(const std::string& inName);
+  
+  void print(); // prints the whole rendergraph from the current node on recursively using DOUT
 };
 
 }
