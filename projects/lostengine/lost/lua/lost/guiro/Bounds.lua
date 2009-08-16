@@ -7,6 +7,15 @@ require("lost.common.Class")
   ]]
 lost.common.Class "lost.guiro.Bounds" {}
 
+--[[
+  choose the functions below to build a bounds object
+  all values are functions!
+  use rect to conert a bounds object to a lost.math.Rect
+  
+  example: 
+  local b = lost.guiro.Bounds
+  local mybounds = b.Bounds(b.xabs(0), b.xabs(0))
+]]
 function Bounds:constructor(x, y, width, height)
   self.x = x
   self.y = y
@@ -41,12 +50,16 @@ end
 
 function xabs(x, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.x + x) + (parentRect.width * mod) end
+  return function(self, parentRect) 
+    return (parentRect.x + x) + (parentRect.width * mod)
+  end
 end
 
 function xrel(x, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.x + (parentRect.width * x)) + mod end
+  return function(self, parentRect)
+    return (parentRect.x + (parentRect.width * x)) + mod
+  end
 end
 
 function ycenter(mod)
@@ -72,30 +85,42 @@ end
 
 function yabs(y, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.y + y) + (parentRect.width * mod) end
+  return function(self, parentRect)
+    return (parentRect.y + y) + (parentRect.width * mod)
+  end
 end
 
 function yrel(y, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.y + (parentRect.height * y)) + mod end
+  return function(self, parentRect)
+    return (parentRect.y + (parentRect.height * y)) + mod
+  end
 end
 
 function wabs(width, mod)
   mod = mod or 0
-  return function(self, parentRect) return width + (parentRect.width * mod) end
+  return function(self, parentRect)
+    return width + (parentRect.width * mod)
+  end
 end
 
 function wrel(width, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.width * width) + mod end
+  return function(self, parentRect)
+    return (parentRect.width * width) + mod
+  end
 end
 
 function habs(height, mod)
   mod = mod or 0
-  return function(self, parentRect) return height + (parentRect.height * mod) end
+  return function(self, parentRect)
+    return height + (parentRect.height * mod)
+  end
 end
 
 function hrel(height, mod)
   mod = mod or 0
-  return function(self, parentRect) return (parentRect.height * height) + mod end
+  return function(self, parentRect)
+    return (parentRect.height * height) + mod
+  end
 end
