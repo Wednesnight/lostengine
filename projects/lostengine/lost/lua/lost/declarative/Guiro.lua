@@ -22,26 +22,42 @@ function Guiro:searchAndAddSubviews(target, source)
   end
 end
 
+function Guiro:assignViewAttributes(target, source)
+  if source.bounds ~= nil then
+    target.bounds = source.bounds
+    log.debug("assigning bounds")
+  end
+  if source.id ~= nil then
+    target.id = source.id
+    log.debug("assigning id")
+  end
+  target:needsLayout()
+end
+
 function Guiro:Screen(def)
   local result = lost.guiro.Screen()
-  self:searchAndAddSubviews(result, def)  
+  self:searchAndAddSubviews(result, def) 
+  self:assignViewAttributes(result, def) 
   return result
 end
 
 function Guiro:View(def)
   local result = lost.guiro.View()
   self:searchAndAddSubviews(result, def)    
+  self:assignViewAttributes(result, def) 
   return result
 end
 
 function Guiro:UserInterface(def)
   local result = lost.guiro.UserInterface()
   self:searchAndAddSubviews(result, def)      
+  self:assignViewAttributes(result, def) 
   return result
 end
 
 function Guiro:Window(def)
   local result = lost.guiro.Window()
   self:searchAndAddSubviews(result, def)  
+  self:assignViewAttributes(result, def) 
   return result
 end
