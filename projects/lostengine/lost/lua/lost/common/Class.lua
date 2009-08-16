@@ -12,7 +12,6 @@ function Class(class)
   local definition = {}
   _class_derived = function(class)
     if type(class) == "string" then
---      log.debug("expanding class "..class);
       local ancestor = expandNamespace(class)
       for k,v in next,ancestor do
         definition[k] = v
@@ -22,7 +21,6 @@ function Class(class)
       end
       return _class_derived
     elseif type(class) == "table" then
---      log.debug("declaring class "..bases[#bases])
       for k,v in next,class do
         definition[k] = v
       end
