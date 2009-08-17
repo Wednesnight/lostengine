@@ -17,6 +17,10 @@ namespace lost
     
     struct RenderedText : mesh::Quad2D
     {
+      RenderedText() : mesh::Quad2D()
+      {
+      }
+    
       RenderedText(const std::vector<math::Rect>& rects,
                    gl::TexturePtr tex,
                    const std::vector<math::Rect>& pixelCoords) : mesh::Quad2D(rects, tex, pixelCoords, false)

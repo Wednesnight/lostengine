@@ -68,6 +68,15 @@ struct TrueTypeFont
 
   RenderedTextPtr render(const std::string & inText,
                   boost::uint32_t inSizeInPoints);
+
+  // same as above ,but the provided mesh is reused 
+  void render(const fhtagn::text::utf32_string& inText,
+              boost::uint32_t inSizeInPoints,
+              RenderedTextPtr target);
+
+  void render(const std::string & inText,
+              boost::uint32_t inSizeInPoints,
+              RenderedTextPtr target);
   
   
   /** checks if the caches already contain the glyph for the given character 
