@@ -153,11 +153,11 @@ namespace lost
       }
       
       // use these functions to create/destroy gpu buffer objects.
-      void indices  (bool v) { if(v) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
-      void vertices (bool v) { if(v) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); }
-      void normals  (bool v) { if(v) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); }
-      void colors   (bool v) { if(v) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset();  }
-      void texCoords(bool v) { if(v) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); }
+      void indices  (bool v) { if(v && !indexBuffer) indexBuffer.reset(new IndexBufferType); else indexBuffer.reset(); }
+      void vertices (bool v) { if(v && !vertexBuffer) vertexBuffer.reset(new VertexBufferType); else vertexBuffer.reset(); }
+      void normals  (bool v) { if(v && !normalBuffer) normalBuffer.reset(new NormalBufferType); else normalBuffer.reset(); }
+      void colors   (bool v) { if(v && !colorBuffer) colorBuffer.reset(new ColorBufferType); else colorBuffer.reset();  }
+      void texCoords(bool v) { if(v && !texCoordBuffer) texCoordBuffer.reset(new TexCoordBufferType); else texCoordBuffer.reset(); }
       
     };
 
