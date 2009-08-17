@@ -167,13 +167,29 @@ RenderedTextPtr TrueTypeFont::render(const std::string & inText,
   DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
   // Assume std::string is always utf8 encoded.
-  ftxt::utf32_string target;
+  ftxt::utf32_string decodedString;
 
   ftxt::utf8_decoder decoder;
   ftxt::decode(decoder, inText.begin(), inText.end(),
-         std::back_insert_iterator<ftxt::utf32_string>(target));
+         std::back_insert_iterator<ftxt::utf32_string>(decodedString));
 
-  return render(target, inSizeInPoints);
+  return render(decodedString, inSizeInPoints);
+}
+
+void TrueTypeFont::render(const std::string & inText,
+            boost::uint32_t inSizeInPoints,
+            RenderedTextPtr target)
+{
+  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+
+  // Assume std::string is always utf8 encoded.
+  ftxt::utf32_string decodedString;
+
+  ftxt::utf8_decoder decoder;
+  ftxt::decode(decoder, inText.begin(), inText.end(),
+         std::back_insert_iterator<ftxt::utf32_string>(decodedString));
+
+  render(decodedString, inSizeInPoints, target);
 }
   
 void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText,
@@ -196,6 +212,16 @@ void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText,
   
 RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
                               uint32_t inSizeInPoints)
+{
+
+  RenderedTextPtr result(new RenderedText);
+  render(inText, inSizeInPoints, result);
+  return result;
+}
+
+void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
+            boost::uint32_t inSizeInPoints,
+            RenderedTextPtr target)
 {
   DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
@@ -257,16 +283,16 @@ RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
     xoffset+=glyph->advance;
   }
 
-  RenderedTextPtr result(new RenderedText(characterRects, atlas, pixelCoordRects));
-  result->min = pmin;
-  result->max = pmax;
-  result->size.width = (pmax.x-pmin.x)+1;  
-  result->size.height = (pmax.y-pmin.y)+1;
-  result->material->blend = true;
-  result->material->blendSrc = GL_SRC_ALPHA;
-  result->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-  return result;
+  target->init(characterRects, atlas, pixelCoordRects, false);
+  target->min = pmin;
+  target->max = pmax;
+  target->size.width = (pmax.x-pmin.x)+1;  
+  target->size.height = (pmax.y-pmin.y)+1;
+  target->material->blend = true;
+  target->material->blendSrc = GL_SRC_ALPHA;
+  target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
 }
+
 
 }  
 }
