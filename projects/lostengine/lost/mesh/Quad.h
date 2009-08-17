@@ -138,6 +138,7 @@ struct Quad : public MESHTYPE
       throw std::runtime_error("size of rects and pixelCoords must match");
     }
     this->drawMode = GL_TRIANGLES;
+    this->material->textures.clear();
     this->material->textures.push_back(tex);
     boost::uint32_t numQuads = rects.size();
     boost::uint32_t numVertices = numQuads*4;
