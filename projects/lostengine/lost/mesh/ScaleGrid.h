@@ -14,7 +14,7 @@ namespace mesh
  * The l/r/t/b measurements should be within the range of the raw pixel data of the texture to
  * achieve meaningful results. Everything else is undefined and will probably look messed up.
  * The specified rect is treated as pixel coordinates in a 2d coordinate system.
- * l,r,t,b are absolue pixel coordinates in the bitmap pixel coord space, zero based with origin at lower left.
+ * l,r,t,b are cap sizes in pixels.
  * 0,0 is the bottom left corner.
  */
 template<typename MESHTYPE>
