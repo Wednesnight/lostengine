@@ -204,6 +204,7 @@ namespace lost
         namespace_("mesh")
         [
           class_<ScaleGrid2D, Mesh, ScaleGrid2DPtr>("ScaleGrid2D")
+          .def("updateSize", &ScaleGrid2D::updateSize)
           .scope
           [
             def("create", &ScaleGrid2D::create)            

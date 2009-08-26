@@ -64,7 +64,8 @@ struct ScaleGrid : public MESHTYPE
         
     // first, we calculate the vertex coordinates relative to 0,0 since these are the pixel coordinates 
     // we need to calculate the texel coordinates from the texture.
-    math::Rect zr(0,0,rect.width, rect.height); // zero based rect for the first pass of the calculations
+    this->createVertices(math::Vec2(rect.width, rect.height), left, right, top, bottom);
+/*    math::Rect zr(0,0,rect.width, rect.height); // zero based rect for the first pass of the calculations
     float h = rect.height;
     float w = rect.width;
     this->vertexData[0] = VertexType(0,h);
@@ -85,7 +86,7 @@ struct ScaleGrid : public MESHTYPE
     this->vertexData[12] = VertexType(0,0);
     this->vertexData[13] = VertexType(left, 0);
     this->vertexData[14] = VertexType(w-right, 0);
-    this->vertexData[15] = VertexType(w,0);
+    this->vertexData[15] = VertexType(w,0);*/
 
 
     float tw = std::min(tex->dataWidth, tex->width);
@@ -192,6 +193,45 @@ struct ScaleGrid : public MESHTYPE
     this->transferVertices();
     this->transferIndices();
     this->transferTexCoords();
+  }
+  
+  void createVertices(const math::Vec2& inSize,
+                      float left,
+                      float right,
+                      float top,
+                      float bottom)
+  {
+    float h = inSize.x;
+    float w = inSize.y;
+    this->vertexData[0] = VertexType(0,h);
+    this->vertexData[1] = VertexType(left, h);
+    this->vertexData[2] = VertexType(w-right, h);
+    this->vertexData[3] = VertexType(w,h);
+    
+    this->vertexData[4] = VertexType(0, h-top);
+    this->vertexData[5] = VertexType(left, h-top);
+    this->vertexData[6] = VertexType(w-right, h-top);
+    this->vertexData[7] = VertexType(w, h-top);
+
+    this->vertexData[8] = VertexType(0, bottom);
+    this->vertexData[9] = VertexType(left, bottom);
+    this->vertexData[10] = VertexType(w-right, bottom);
+    this->vertexData[11] = VertexType(w, bottom);
+
+    this->vertexData[12] = VertexType(0,0);
+    this->vertexData[13] = VertexType(left, 0);
+    this->vertexData[14] = VertexType(w-right, 0);
+    this->vertexData[15] = VertexType(w,0);  
+  }
+
+  void updateSize(const math::Vec2& inSize,
+                      float left,
+                      float right,
+                      float top,
+                      float bottom)
+  {
+    this->createVertices(inSize, left, right, top, bottom);
+    this->transferVertices();
   }
 
   static lost::shared_ptr<ScaleGrid<MESHTYPE> > create(gl::TexturePtr tex,
