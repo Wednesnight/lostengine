@@ -6,6 +6,7 @@
 #include "lost/mesh/Material.h"
 #include "lost/mesh/Mesh.h"
 #include "lost/mesh/Quad.h"
+#include "lost/mesh/ScaleGrid.h"
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Circular.h"
 #include "lost/platform/shared_ptr.h"
@@ -185,8 +186,6 @@ namespace lost
             .def(constructor<resource::FilePtr, bool>())
             .def(constructor<gl::TexturePtr, bool>())
             .def("updateSize", &Quad2D::updateSize)
-            .def_readwrite("material", &Quad2D::material)
-            .def_readwrite("transform", &Quad2D::transform)
             .scope
             [
               def("create", (Quad2DPtr(*)()) &Quad2D::create),
@@ -194,6 +193,21 @@ namespace lost
               def("create", (Quad2DPtr(*)(resource::FilePtr data, bool)) &Quad2D::create),
               def("create", (Quad2DPtr(*)(gl::TexturePtr tex, bool)) &Quad2D::create)
             ]
+        ]
+      ];
+    }
+
+    void LostMeshScaleGrid2D(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<ScaleGrid2D, Mesh, ScaleGrid2DPtr>("ScaleGrid2D")
+          .scope
+          [
+            def("create", &ScaleGrid2D::create)            
+          ]
         ]
       ];
     }
@@ -208,6 +222,7 @@ namespace lost
       LostMeshLoader(state);
       LostMeshMaterial(state);
       LostMeshQuad2D(state);
+      LostMeshScaleGrid2D(state);
     }
 
   }
