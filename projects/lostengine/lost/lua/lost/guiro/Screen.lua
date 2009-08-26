@@ -41,8 +41,8 @@ function Screen:constructor()
   self.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT))
   self.renderNode:add(lost.rg.Camera.create(self.camera))
   self.renderNode:add(lost.rg.DepthTest.create(false))
-  self.showBackground(false)
-  self.showFrame(false)
+  self:showBackground(false)
+  self:showFrame(false)
 end
 
 function Screen:propagateMouseEvent(event)

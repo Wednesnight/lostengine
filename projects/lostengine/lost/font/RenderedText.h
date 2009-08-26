@@ -29,6 +29,8 @@ namespace lost
       
       virtual ~RenderedText() {};
 
+      static RenderedTextPtr create() { return RenderedTextPtr(new RenderedText); };
+
       lost::math::Vec2 min; // min in pixel of the rendered string. baseline is at y=0
       lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0
       lost::math::Vec2 size; // min, max, width and height in pixel of the rendered string. baseline is at y=0

@@ -9,7 +9,7 @@ namespace lost
 
     void printNode(NodePtr n, const std::string prefix)
     {
-      DOUT(prefix << "|-- " << n->name);
+      DOUT(prefix << "|-- " << (n->active ? "(+)" : "(-)") << n->name);
       for(std::list<NodePtr>::iterator i=n->children.begin(); i!=n->children.end(); ++i)
       {
         printNode(*i, prefix+"    ");
