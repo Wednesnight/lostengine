@@ -13,6 +13,7 @@
 
 #include "lost/mesh/Line.h"
 #include "lost/mesh/Quad.h"
+#include "lost/mesh/ScaleGrid.h"
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Circular.h"
 #include "lost/font/RenderedText.h"
@@ -39,6 +40,7 @@ namespace lost
     NodePtrDowncastDraw(FilledCircle2DPtr);
     NodePtrDowncastDraw(FilledEllipse2DPtr);
     NodePtrDowncastDraw(RenderedTextPtr);
+    NodePtrDowncastDraw(ScaleGrid2DPtr);
     #undef NodePtrDowncastDraw
 
     template <typename ResultType, typename NodeType>
@@ -83,6 +85,7 @@ namespace lost
             def("create", &DrawCreateFilledEllipse2DPtr),
             def("create", &DrawCreateLine2DPtr),
             def("create", &DrawCreateQuad2DPtr),
+            def("create", &DrawCreateScaleGrid2DPtr),
             def("create", &DrawCreateRenderedTextPtr),
             def("cast", &castNode<Draw, Node>)
           ],

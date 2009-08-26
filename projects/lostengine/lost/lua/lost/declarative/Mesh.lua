@@ -75,3 +75,21 @@ function Mesh:Quad2D(def)
 
   return result
 end
+
+function Mesh:ScaleGrid2D(def)
+  if def.texture == nil then error("needs texture", 2) end
+  if def.rect == nil then error("needs rect",2) end
+  if def.left == nil then error("needs left",2) end
+  if def.right == nil then error("needs right",2) end
+  if def.top == nil then error("needs top",2) end
+  if def.bottom == nil then error("needs bottom",2) end
+
+  local result = lost.mesh.ScaleGrid2D.create(def.texture, def.rect, def.left, def.right, def.top, def.bottom)
+  if def.transform ~= nil then
+    result.transform = def.transform
+  end
+  self:applyMaterial(result, def)
+
+  return result
+end
+
