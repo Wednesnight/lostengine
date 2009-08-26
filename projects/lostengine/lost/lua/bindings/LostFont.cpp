@@ -48,6 +48,10 @@ namespace lost
             .def_readonly("min", &RenderedText::min)
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
+            .scope
+            [
+              def("create", &RenderedText::create)
+            ]
         ]
       ];
     }
@@ -62,6 +66,15 @@ namespace lost
       return ttf->render(str, sz);
     }
 
+    void renderToTarget(TrueTypeFontPtr ttf, 
+                        const std::string & inText,
+                        boost::uint32_t inSizeInPoints,
+                        RenderedTextPtr target)
+    {
+      ttf->render(inText, inSizeInPoints, target);
+    }
+
+
     typedef RenderedTextPtr (TrueTypeFont::*render_func_t)(const std::string &, boost::uint32_t);
 
     void LostFontTrueTypeFont(lua_State* state)
@@ -73,6 +86,7 @@ namespace lost
           class_<TrueTypeFont, shared_ptr<TrueTypeFont> >("TrueTypeFont")
             .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
             .def("render", renderCrippled)
+            .def("render", renderToTarget)
             .def_readwrite("atlasSize", &TrueTypeFont::atlasSize)
             .def_readonly("atlas", &TrueTypeFont::atlas)
             .scope

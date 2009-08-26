@@ -129,13 +129,13 @@ struct Quad : public MESHTYPE
   }
   
   void init(const std::vector<math::Rect>& rects,
-       gl::TexturePtr tex,
-       const std::vector<math::Rect>& pixelCoords,
-       bool flip)
+            gl::TexturePtr tex,
+            const std::vector<math::Rect>& pixelCoords,
+            bool flip)
   {
     if(rects.size() != pixelCoords.size())
     {
-      throw std::runtime_error("size of rects and pixelCoords must match");
+      throw std::runtime_error("number of rects and pixelCoords must match");
     }
     this->drawMode = GL_TRIANGLES;
     this->material->textures.clear();
