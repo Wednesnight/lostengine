@@ -221,14 +221,14 @@ bool MeshTest::startup()
   /**
   ScaleGrid
    */
-  TexturePtr tex(new Texture(loader->load("defaultButton.png")));
-  ScaleGrid2DPtr scaler = ScaleGrid2D::create(tex, math::Rect(20,20,100,100), 8, 48, 48,8);
+/*  TexturePtr tex(new Texture(loader->load("defaultButton.png")));
+  ScaleGrid2DPtr scaler = ScaleGrid2D::create(tex, math::Rect(20,20,100,100), 3, 3, 3,3);
   scaler->material->blend = false;
-  bg->add(rg::Draw::create(scaler));
+  bg->add(rg::Draw::create(scaler));*/
 
   TexturePtr tex2(new Texture(loader->load("scalegridTest.png")));
-  ScaleGrid2DPtr scaler2 = ScaleGrid2D::create(tex2, math::Rect(150,20,40,40), 2, 17, 17,2);
-  scaler->material->blend = false;
+  ScaleGrid2DPtr scaler2 = ScaleGrid2D::create(tex2, math::Rect(150,20,40,40), 3, 3, 3,3);
+  scaler2->material->blend = false;
   bg->add(rg::Draw::create(scaler2));
 
 
