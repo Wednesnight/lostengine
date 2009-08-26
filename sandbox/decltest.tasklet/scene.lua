@@ -68,6 +68,26 @@ return dcl.rg:Node
           color = fontColor
       }
     }
+  },
+  dcl.rg:Draw
+  {
+    mesh = dcl.mesh:ScaleGrid2D
+    {
+      texture = dcl.gl:Texture
+      {
+        filename = "scalegridTest.png"
+      },
+      rect = Rect(0,0,20,20),
+      left = 3,
+      right = 3,
+      top = 3,
+      bottom = 3,
+      transform = MatrixTranslation(Vec3(120,20,0)),
+      material = 
+      {
+        color = Color(1,0,0)
+      }
+    }
   }
 }
 
