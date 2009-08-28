@@ -6,6 +6,7 @@ require("lost.guiro.UserInterface")
 require("lost.guiro.Window")
 require("lost.guiro.View")
 require("lost.guiro.Label")
+require("lost.guiro.Image")
 
 lost.common.Class "lost.declarative.Guiro" {}
 
@@ -57,6 +58,20 @@ function Guiro:assignLabelAttributes(target, source)
   if source.valign then target:valign(source.valign) end
 end
 
+function Guiro:assignImageAttributes(target, source)
+  if (source.bitmap and source.texture) or (source.bitmap and source.filename) or
+     (source.texture and source.filename)
+  then
+    error("you can only specify bitmap, texture OR filename for the creation of a guiro Image", 2)
+  end
+
+  if source.bitmap then target:bitmap(source.bitmap) end
+  if source.filename then target:bitmap(self.loader:load(source.filename)) end
+  if source.texture then target:texture(source.texture) end
+  if source.scale then target:scale(source.scale) end
+  if source.caps then target:caps(source.caps) end
+end
+
 -- if source contains a key 'listeners' with a table as value
 -- the keys in that table are event names and the values are handlers.
 -- the handlers are then registered as target/bubble listeners.
@@ -104,6 +119,15 @@ function Guiro:Label(def)
   -- don't allow label subviews
   self:assignViewAttributes(result, def) 
   self:assignLabelAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:Image(def)
+  local result = lost.guiro.Image()
+  -- don't allow image subviews
+  self:assignViewAttributes(result, def) 
+  self:assignImageAttributes(result, def)   
   self:addEventListeners(result, def)
   return result
 end

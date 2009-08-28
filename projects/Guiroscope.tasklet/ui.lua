@@ -33,7 +33,21 @@ return dcl.guiro:Screen
       showFrame = false,
       frameColor = Color(1,1,1),
       showBackground = true,
-      backgroundColor = Color(1,1,0)
+      backgroundColor = Color(1,1,0),
+      dcl.guiro:Image
+      {
+        id = "image1",
+        bounds = Bounds(xcenter(), ycenter(), wabs(150), habs(75)),
+        filename = "stubs.jpg",
+        scale = "stretch",
+        caps =
+        {
+          left = 5,
+          right = 5,
+          top = 5,
+          bottom = 5
+        }
+      }
     },
     dcl.guiro:Window
     {
