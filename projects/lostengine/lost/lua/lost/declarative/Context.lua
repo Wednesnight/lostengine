@@ -8,6 +8,7 @@ require("lost.declarative.Mesh")
 require("lost.declarative.Gl")
 require("lost.declarative.Resource")
 require("lost.declarative.Guiro")
+require("lost.declarative.Bitmap")
 
 lost.common.Class "lost.declarative.Context"
 {
@@ -21,6 +22,5 @@ function Context:constructor(loader)
   self.gl = lost.declarative.Gl(self.loader)
   self.resource = lost.declarative.Resource(self.loader)
   self.guiro = lost.declarative.Guiro(self.loader)
+  self.bitmap = lost.declarative.Bitmap(self.loader)
 end
-
-
