@@ -77,22 +77,26 @@ function Image:render()
 end
 
 function Image:updateLayout(forceUpdate)
+  local doUpdateLayout = forceUpdate or self.dirtyLayout
+
   local gr, lr = lost.guiro.View.updateLayout(self, forceUpdate)
 
-  -- update mesh bounds and dimension
-  if self._scale == "stretch" then
-    self._textureMesh:updateSize(Vec2(gr.width, gr.height), true)
+  if doUpdateLayout then
+    -- update mesh bounds and dimension
+    if self._scale == "stretch" then
+      self._textureMesh:updateSize(Vec2(gr.width, gr.height), true)
 
-  elseif self._scale == "aspect" then
-    local w, h = gr.width / self._texture.width, gr.height / self._texture.height
-    self._textureMesh:updateSize(Vec2(self._texture.width * math.min(w, h), self._texture.height * math.min(w, h)), true)
+    elseif self._scale == "aspect" then
+      local w, h = gr.width / self._texture.width, gr.height / self._texture.height
+      self._textureMesh:updateSize(Vec2(self._texture.width * math.min(w, h), self._texture.height * math.min(w, h)), true)
 
-  elseif self._scale == "scalegrid" then
-    self._textureMesh:updateSize(Vec2(gr.width, gr.height),
-        self._caps.left, self._caps.right, self._caps.top, self._caps.bottom)
+    elseif self._scale == "scalegrid" then
+      self._textureMesh:updateSize(Vec2(gr.width, gr.height),
+          self._caps.left, self._caps.right, self._caps.top, self._caps.bottom)
+    end
+    log.debug(tostring(gr))
+    self._textureMesh.transform = MatrixTranslation(Vec3(gr.x, gr.y, 0))
   end
-  log.debug(tostring(gr))
-  self._textureMesh.transform = MatrixTranslation(Vec3(gr.x, gr.y, 0))
 
   return gr, lr
 end
