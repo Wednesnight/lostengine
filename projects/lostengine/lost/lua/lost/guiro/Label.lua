@@ -56,33 +56,37 @@ function Label:constructor()
 end
 
 function Label:updateLayout(forceUpdate)
+  local doUpdateLayout = forceUpdate or self.dirtyLayout
+
   local gr, lr = lost.guiro.View.updateLayout(self, forceUpdate)
 
-  -- initially, the text is aligned to the lower left border
-  -- if any of the alignment strings are borked, the text will still display,
-  -- but the alignment will be only off inside the label's bounds
-  local textPos = Vec3(gr.x, gr.y, 0)
+  if doUpdateLayout then
+    -- initially, the text is aligned to the lower left border
+    -- if any of the alignment strings are borked, the text will still display,
+    -- but the alignment will be only off inside the label's bounds
+    local textPos = Vec3(gr.x, gr.y, 0)
 
-  if self._halign == "center" then
-    textPos.x = gr.x + (gr.width-self.textMesh.size.width)/2
-  elseif self._halign == "left" then
-    textPos.x = gr.x
-  elseif self._halign == "right" then
-    textPos.x = gr.x+gr.width - self.textMesh.size.width
+    if self._halign == "center" then
+      textPos.x = gr.x + (gr.width-self.textMesh.size.width)/2
+    elseif self._halign == "left" then
+      textPos.x = gr.x
+    elseif self._halign == "right" then
+      textPos.x = gr.x+gr.width - self.textMesh.size.width
+    end
+
+    if self._valign == "center" then
+      textPos.y = gr.y+((gr.height-self.textMesh.size.height)/2)+(-1*self.textMesh.min.y)
+    elseif self._valign == "top" then
+      textPos.y = gr.y+gr.height-self.textMesh.size.height
+    elseif self._valign == "bottom" then
+      textPos.y = gr.y+(-1*self.textMesh.min.y)
+    end
+
+    local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
+
+    self.textMesh.transform = MatrixTranslation(textPos)
+    self.shadowMesh.transform = MatrixTranslation(shadowPos)
   end
-
-  if self._valign == "center" then
-    textPos.y = gr.y+((gr.height-self.textMesh.size.height)/2)+(-1*self.textMesh.min.y)
-  elseif self._valign == "top" then
-    textPos.y = gr.y+gr.height-self.textMesh.size.height
-  elseif self._valign == "bottom" then
-    textPos.y = gr.y+(-1*self.textMesh.min.y)
-  end
-
-  local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
-
-  self.textMesh.transform = MatrixTranslation(textPos)
-  self.shadowMesh.transform = MatrixTranslation(shadowPos)
   
   return gr, lr
 end
