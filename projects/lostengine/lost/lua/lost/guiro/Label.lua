@@ -40,7 +40,7 @@ function Label:constructor()
   self.renderNode:add(self.textNode)
 
   -- _text is interpreted as UTF-8 character data
-  self._text = nil -- label is empty by default since we can't load a default font from here and prerender something
+  self._text = "" -- label is empty by default since we can't load a default font from here and prerender something
   -- textColor is managed inside textMesh.material.color
   self.textMesh.material.color = lost.common.Color(0,0,0,1)
   self._shadowOffset = Vec2(1,-1)
@@ -93,14 +93,11 @@ end
 -- call this after a param change to update the appearance of text and shadow Mesh
 -- will recreate the mesh data (but not the meshes)
 function Label:render()
-  log.debug("render enter")
   if self._font == nil then
     log.warn("can't update Label because font is nil")
     return
   end
-  log.debug("trying to render textMesh")
   self._font:render(self._text, self._fontSize, self.textMesh)
-  log.debug("trying to render shadowMesh")
   self._font:render(self._text, self._fontSize, self.shadowMesh)
   self:updateLayout(false)
 end

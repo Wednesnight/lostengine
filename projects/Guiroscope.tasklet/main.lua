@@ -20,11 +20,11 @@ function startup(tasklet)
 
   screen = require("ui")
 
-  screen:printSubviews()
   screen:listenTo(tasklet.eventDispatcher)
   screen.currentGlobalRect = lost.math.Rect(0,0,windowParams.rect.width, windowParams.rect.height)
   screen:updateLayout() --force update of layout
-  screen.rootNode:print()
+--  screen:printSubviews()
+--  screen.rootNode:print()
   return true
 end
 

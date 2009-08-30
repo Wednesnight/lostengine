@@ -17,7 +17,6 @@ lost.common.Class "lost.guiro.event.EventManager" {}
 --
 --
 function EventManager:constructor(rootView)
-  log.debug("EventManager:create")
   self.rootView = rootView
   self.previousMouseMoveStack = {}
   self.previousMouseClickStack = {}

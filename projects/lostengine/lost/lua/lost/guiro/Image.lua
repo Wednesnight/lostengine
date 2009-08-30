@@ -47,6 +47,11 @@ function Image:constructor()
 end
 
 function Image:render()
+  if not self._texture then
+    log.warn("can't render image beacuse texture is nil")
+    return
+  end
+
   if self._scale == "scalegrid" then
     -- call View directly, otherwise our states get mixed up
     local gr = lost.guiro.View.updateLayout(self, false)
