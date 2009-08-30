@@ -16,6 +16,9 @@ function Class(class)
       for k,v in next,ancestor do
         definition[k] = v
       end
+      if not ancestor.bases then
+        error("can't find class hierarchy for '"..class.."', you might have forgotten a require or misspelled the class name.",3)
+      end
       for k,v in next,ancestor.bases do
         table.insert(bases, 1, v)
       end

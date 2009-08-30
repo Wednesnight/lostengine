@@ -137,7 +137,7 @@ end
     inserts child into self.subviews 
   ]]
 function View:addSubview(newview, pos)
-	log.debug("trying to add "..newview.id)
+--	log.debug("trying to add "..newview.id)
   if (pos == nil) then
     pos = table.maxn(self.subviews) + 1
   end

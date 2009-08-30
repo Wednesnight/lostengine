@@ -7,11 +7,13 @@ require("lost.guiro.Window")
 require("lost.guiro.View")
 require("lost.guiro.Label")
 require("lost.guiro.Image")
+require("lost.guiro.ThemeManager")
 
 lost.common.Class "lost.declarative.Guiro" {}
 
-function Guiro:constructor(loader)
+function Guiro:constructor(loader, themeManager)
   self.loader = loader
+  self.themeManager = themeManager or lost.guiro.ThemeManager(loader)
 end
 
 -- searches i ntable "source" for classes derived from View and adds
@@ -72,6 +74,12 @@ function Guiro:assignImageAttributes(target, source)
   if source.caps then target:caps(source.caps) end
 end
 
+function Guiro:applyStyle(target, def)
+  local themeName = def.theme or self.themeManager.defaultTheme
+  local styleName = def.style or self.themeManager.defaultStyle
+  self.themeManager:apply(target, themeName, styleName)
+end
+
 -- if source contains a key 'listeners' with a table as value
 -- the keys in that table are event names and the values are handlers.
 -- the handlers are then registered as target/bubble listeners.
@@ -84,6 +92,7 @@ end
 
 function Guiro:Screen(def)
   local result = lost.guiro.Screen()
+  self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def) 
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
@@ -92,6 +101,7 @@ end
 
 function Guiro:View(def)
   local result = lost.guiro.View()
+  self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)    
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
@@ -100,6 +110,7 @@ end
 
 function Guiro:UserInterface(def)
   local result = lost.guiro.UserInterface()
+  self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)      
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
@@ -108,6 +119,7 @@ end
 
 function Guiro:Window(def)
   local result = lost.guiro.Window()
+  self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
@@ -116,6 +128,7 @@ end
 
 function Guiro:Label(def)
   local result = lost.guiro.Label()
+  self:applyStyle(result, def)
   -- don't allow label subviews
   self:assignViewAttributes(result, def) 
   self:assignLabelAttributes(result, def)   
@@ -125,6 +138,7 @@ end
 
 function Guiro:Image(def)
   local result = lost.guiro.Image()
+  self:applyStyle(result, def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
   self:assignImageAttributes(result, def)   

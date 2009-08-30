@@ -30,61 +30,26 @@ return dcl.guiro:Screen
     {
       id = "window1",
       bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5)),
-      showFrame = false,
-      frameColor = Color(1,1,1),
-      showBackground = true,
-      backgroundColor = Color(1,1,0),
       dcl.guiro:Image
       {
         id = "image1",
         bounds = Bounds(xcenter(), ycenter(), wabs(150), habs(75)),
         filename = "stubs.jpg",
-        scale = "stretch",
-        caps =
-        {
-          left = 5,
-          right = 5,
-          top = 5,
-          bottom = 5
-        }
       }
     },
     dcl.guiro:Window
     {
       id = "window2",
       bounds = Bounds(xrel(.5), yrel(.5), wrel(.5), hrel(.5)),
-      showFrame = true,
-      frameColor = Color(0,1,0),
-      showBackground = true,
-      backgroundColor = Color(1,0,0),
       dcl.guiro:Label
       {
         id="label1",
         bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
-        showFrame=false,
-        text="Hello World",
-        font = dcl.font:TrueTypeFont
-        {
-          filename = "Vera.ttf",
-          atlasSize = Vec2(256,256)
-        },
-        fontSize = 24,
-        textColor = Color(1,1,1,1),
-        showShadow = true,
-        shadowOffset = Vec2(1,-1),
-        shadowColor = Color(1,1,1,.3),
-        halign = "center",
-        valign = "center",
+        text = "Chello!",
         listeners = 
         {
-          mouseEnter = function(event)
-                         event.target:showFrame(true)
-                         log.debug(event.target:className())
-                       end,
-          mouseLeave = function(event)
-                         event.target:showFrame(false)
-                         log.debug(event.target:className())
-                       end
+          mouseEnter = function(event) event.target:showFrame(true) end,
+          mouseLeave = function(event) event.target:showFrame(false) end
         }          
       }
     }
