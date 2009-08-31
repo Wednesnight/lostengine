@@ -4,16 +4,21 @@
 -- you also don't have to type lost.comm.CallLater.callLater(myFunc) all the time.
 
 callLaterQueue = {}
+callLaterCheck = {} -- functions are keys here so we can check quickly if a function was already queued
 
 function callLater(func)
-  callLaterQueue[func] = true
+  if callLaterCheck[func] == nil then
+    callLaterQueue[#callLaterQueue+1] = func
+    callLaterCheck[func] = true
+  end
 end
 
 function processCallLaterQueue()
   local num = 0
-  for func, v in pairs(callLaterQueue) do
+  for k, func in pairs(callLaterQueue) do
     func()
-    callLaterQueue[func] = nil
+    callLaterQueue[k] = nil
+    callLaterCheck[func] = nil
     num = num +1
   end
   if num > 0 then
