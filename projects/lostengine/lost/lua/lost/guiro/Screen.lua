@@ -22,10 +22,8 @@ require("lost.guiro.event.EventManager")
 lost.common.Class "lost.guiro.Screen" "lost.guiro.View" {}
 
 function Screen:constructor()
-  self.focusable = true
   lost.guiro.View.constructor(self)
-
-  log.debug("----------------------------------------------------------")
+  self.focusable = true
   self.eventManager = lost.guiro.event.EventManager(self)
 --  self.mouseManager = lost.guiro.MouseManager(self)
 
