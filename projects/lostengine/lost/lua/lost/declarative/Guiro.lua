@@ -7,6 +7,7 @@ require("lost.guiro.Window")
 require("lost.guiro.View")
 require("lost.guiro.Label")
 require("lost.guiro.Image")
+require("lost.guiro.Button")
 require("lost.guiro.ThemeManager")
 
 lost.common.Class "lost.declarative.Guiro" {}
@@ -72,6 +73,10 @@ function Guiro:assignImageAttributes(target, source)
   if source.texture then target:texture(source.texture) end
   if source.scale then target:scale(source.scale) end
   if source.caps then target:caps(source.caps) end
+end
+
+function Guiro:assignButtonAttributes(target, source)
+	
 end
 
 function Guiro:applyStyle(target, def)
@@ -142,6 +147,16 @@ function Guiro:Image(def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
   self:assignImageAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:Button(def)
+  local result = lost.guiro.Button()
+  self:applyStyle(result, def)
+  -- don't allow image subviews
+  self:assignViewAttributes(result, def) 
+  self:assignButtonAttributes(result, def)   
   self:addEventListeners(result, def)
   return result
 end
