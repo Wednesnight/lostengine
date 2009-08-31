@@ -83,6 +83,8 @@ namespace lost
       if(luabind::type(luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
       luaShutdown = lua->globals["shutdown"];
       if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
+      luaProcessCallLater = lua->globals["processCallLaterQueue"];
+      if(luabind::type(luaProcessCallLater)==LUA_TFUNCTION) hasLuaProcessCallLater=true; else DOUT("no processCallLaterQueue() found in Lua");
     }
 
     void Tasklet::run(tasklet& tasklet)
@@ -110,6 +112,10 @@ namespace lost
             // no event processing timeout since we probably don't have that many events
             eventDispatcher->processEvents(0);
           }
+          if(hasLuaProcessCallLater)
+          {
+            call_function<void>(luaProcessCallLater);
+          }          
           pool = threadAutoreleasePoolHack_drainAndRecreatePool(pool);
         }
         shutdown();

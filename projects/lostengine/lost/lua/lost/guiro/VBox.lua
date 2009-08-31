@@ -10,6 +10,8 @@ function VBox:constructor()
 	self._valign = "top" -- only used if mode != spread
 	self._halign = "center"
 	self._spacing = 0 -- only used when mode is stacked
+	
+	self.deferredRecalculate = function() self:recalculateSubviewPositions() end
 end
 
 function VBox:recalculateSubviewPositions()
@@ -24,13 +26,15 @@ function VBox:recalculateSubviewPositions()
 		view.bounds.y = lost.guiro.ycenter{rel=f}		
 		f = f- relfactor
 		view.bounds.x = lost.guiro.xcenter()
+		view:needsLayout()
 	end
 --	log.debug("end ---")
 end
 
 function VBox:addSubview(newview, pos)
 	lost.guiro.View.addSubview(self, newview, pos)
-	self:recalculateSubviewPositions()
+--	self:recalculateSubviewPositions()
+  callLater(self.deferredRecalculate)
 end
 
 function VBox:mode(val)
