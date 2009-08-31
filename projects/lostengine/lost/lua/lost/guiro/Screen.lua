@@ -94,10 +94,6 @@ end
 function Screen:globalRect()
   return self.currentGlobalRect
 end
--- same rules apply for local rect
-function Screen:localRect()
-  return self.currentGlobalRect
-end
 
 -- every time the screens layout is updated we MUST reset the viewport 
 -- so we first call update on the base class, then use the resulting 
