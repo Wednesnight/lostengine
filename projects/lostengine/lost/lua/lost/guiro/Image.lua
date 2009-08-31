@@ -48,7 +48,7 @@ end
 
 function Image:render()
   if not self._texture then
-    log.warn("can't render image beacuse texture is nil")
+--    log.warn("can't render image beacuse texture is nil")
     return
   end
 
@@ -101,7 +101,7 @@ function Image:updateLayout(forceUpdate)
       self._textureMesh:updateSize(Vec2(gr.width, gr.height),
           self._caps.left, self._caps.right, self._caps.top, self._caps.bottom)
     end
-    log.debug(tostring(gr))
+--    log.debug(tostring(gr))
     self._textureMesh.transform = MatrixTranslation(Vec3(gr.x, gr.y, 0))
   end
 end

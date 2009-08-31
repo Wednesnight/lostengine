@@ -53,6 +53,9 @@ function Label:constructor()
   -- suppress background and frame by default
   self:showFrame(false)
   self:showBackground(false)
+  
+  self.deferredUpdateLayout = function() log.debug("deferredUpdateLayout "..self.id); self:updateLayout(false) end
+  self.deferredRender = function() log.debug("deferredRender "..self.id); self:render() end
 end
 
 function Label:updateLayout(forceUpdate)
@@ -93,7 +96,7 @@ end
 -- will recreate the mesh data (but not the meshes)
 function Label:render()
   if self._font == nil then
-    log.warn("can't update Label because font is nil")
+--    log.warn("can't update Label because font is nil")
     return
   end
   self._font:render(self._text, self._fontSize, self.textMesh)
@@ -104,7 +107,7 @@ end
 function Label:text(s)
   if s~= nil then
     self._text = s
-    self:render()
+    callLater(self.deferredRender)
   else
     return self._text
   end
@@ -113,7 +116,7 @@ end
 function Label:font(v)
   if v ~= nil then
     self._font = v
-    self:render()
+    callLater(self.deferredRender)
   else
     return self._font
   end
@@ -122,7 +125,7 @@ end
 function Label:fontSize(v)
   if v ~= nil then
     self._fontSize = v
-    self:render()
+    callLater(self.deferredRender)
   else
     return self._fontSize
   end
@@ -147,7 +150,7 @@ end
 function Label:shadowOffset(v)
   if v ~= nil then
     self._shadowOffset = v
-    self:updateLayout(false)
+    callLater(self.deferredUpdateLayout)
   else
     return self._shadowOffset
   end
@@ -164,7 +167,7 @@ end
 function Label:halign(v)
   if v ~= nil then
     self._halign = v
-    self:updateLayout(false)
+    callLater(self.deferredUpdateLayout)
   else
     return self.__halign
   end
@@ -173,7 +176,7 @@ end
 function Label:valign(v)
   if v ~= nil then
     self._valign = v
-    self:updateLayout(false)
+    callLater(self.deferredUpdateLayout)
   else
     return self._valign
   end
