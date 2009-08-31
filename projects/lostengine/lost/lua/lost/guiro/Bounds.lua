@@ -30,8 +30,8 @@ end
 function xcenter(mod)
   mod = mod or {}
   mod.abs = mod.abs or 0
-  mod.rel = mod.rel or 0
-  return function(self, parentRect) return parentRect.x + ((parentRect.width - self:width(parentRect)) * 0.5) + (mod.abs + (parentRect.width * mod.rel)) end
+  mod.rel = mod.rel or .5
+  return function(self, parentRect) return parentRect.x + ((parentRect.width - self:width(parentRect)) * mod.rel) + mod.abs end
 end
 
 function xleft(mod)
@@ -65,8 +65,8 @@ end
 function ycenter(mod)
   mod = mod or {}
   mod.abs = mod.abs or 0
-  mod.rel = mod.rel or 0
-  return function(self, parentRect) return parentRect.y + ((parentRect.height - self:height(parentRect)) * 0.5) + (mod.abs + (parentRect.height * mod.rel)) end
+  mod.rel = mod.rel or .5
+  return function(self, parentRect) return parentRect.y + ((parentRect.height - self:height(parentRect)) * mod.rel) + mod.abs end
 end
 
 function ybottom(mod)
