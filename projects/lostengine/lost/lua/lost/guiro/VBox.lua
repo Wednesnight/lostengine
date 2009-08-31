@@ -6,10 +6,10 @@ lost.common.Class "lost.guiro.VBox" "lost.guiro.View" {}
 
 function VBox:constructor()
 	lost.guiro.View.constructor(self)
-	self.mode = "spread" -- spread or stack
-	self.valign = "top" -- only used if mode != spread
-	self.halign = "center"
-	self.spacing = 0 -- only used when mode is stacked
+	self._mode = "spread" -- spread or stack
+	self._valign = "top" -- only used if mode != spread
+	self._halign = "center"
+	self._spacing = 0 -- only used when mode is stacked
 end
 
 function VBox:recalculateSubviewPositions()
@@ -33,3 +33,34 @@ function VBox:addSubview(newview, pos)
 	self:recalculateSubviewPositions()
 end
 
+function VBox:mode(val)
+	if val ~= nil then
+		self._mode = val
+	else
+		return self._mode
+	end
+end
+
+function VBox:valign(val)
+	if val ~= nil then
+		self._valign = val
+	else
+		return self._valign
+	end
+end
+
+function VBox:halign(val)
+	if val ~= nil then
+		self._halign = val
+	else
+		return self._halign
+	end
+end
+
+function VBox:spacing(val)
+	if val ~= nil then
+		self._spacing = val
+	else
+		return self._spacing
+	end
+end
