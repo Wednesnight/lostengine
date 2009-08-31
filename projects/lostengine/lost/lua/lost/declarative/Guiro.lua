@@ -8,6 +8,7 @@ require("lost.guiro.View")
 require("lost.guiro.Label")
 require("lost.guiro.Image")
 require("lost.guiro.Button")
+require("lost.guiro.VBox")
 require("lost.guiro.ThemeManager")
 
 lost.common.Class "lost.declarative.Guiro" {}
@@ -28,37 +29,25 @@ function Guiro:searchAndAddSubviews(target, source)
 end
 
 function Guiro:assignViewAttributes(target, source)
-  if source.bounds ~= nil then
-    target.bounds = source.bounds
-  end
-  if source.id ~= nil then
-    target.id = source.id
-  end
-  if source.showFrame ~= nil then
-    target:showFrame(source.showFrame)
-  end
-  if source.frameColor ~= nil then
-    target:frameColor(source.frameColor)
-  end
-  if source.showBackground ~= nil then
-    target:showBackground(source.showBackground)
-  end
-  if source.backgroundColor ~= nil then
-    target:backgroundColor(source.backgroundColor)
-  end
+  if source.bounds ~= nil then target.bounds = source.bounds end
+  if source.id  ~= nil then target.id = source.id end
+  if source.showFrame  ~= nil then target:showFrame(source.showFrame)	end
+  if source.frameColor  ~= nil then target:frameColor(source.frameColor) end
+  if source.showBackground  ~= nil then	target:showBackground(source.showBackground)	end
+  if source.backgroundColor  ~= nil then target:backgroundColor(source.backgroundColor) end
   target:needsLayout()
 end
 
 function Guiro:assignLabelAttributes(target, source)
-  if source.text then target:text(source.text) end
-  if source.textColor then target:textColor(source.textColor) end
-  if source.font then target:font(source.font) end
-  if source.fontSize then target:fontSize(source.fontSize) end
-  if source.showShadow then target:showShadow(source.showShadow) end
-  if source.shadowOffset then target:shadowOffset(source.shadowOffset) end
-  if source.shadowColor then target:shadowColor(source.shadowColor) end
-  if source.halign then target:halign(source.halign) end
-  if source.valign then target:valign(source.valign) end
+  if source.text  ~= nil then target:text(source.text) end
+  if source.textColor  ~= nil then target:textColor(source.textColor) end
+  if source.font  ~= nil then target:font(source.font) end
+  if source.fontSize  ~= nil then target:fontSize(source.fontSize) end
+  if source.showShadow  ~= nil then target:showShadow(source.showShadow) end
+  if source.shadowOffset  ~= nil then target:shadowOffset(source.shadowOffset) end
+  if source.shadowColor  ~= nil then target:shadowColor(source.shadowColor) end
+  if source.halign  ~= nil then target:halign(source.halign) end
+  if source.valign  ~= nil then target:valign(source.valign) end
 end
 
 function Guiro:assignImageAttributes(target, source)
@@ -68,14 +57,18 @@ function Guiro:assignImageAttributes(target, source)
     error("you can only specify bitmap, texture OR filename for the creation of a guiro Image", 2)
   end
 
-  if source.bitmap then target:bitmap(source.bitmap) end
-  if source.filename then target:bitmap(self.loader:load(source.filename)) end
-  if source.texture then target:texture(source.texture) end
-  if source.scale then target:scale(source.scale) end
-  if source.caps then target:caps(source.caps) end
+  if source.bitmap  ~= nil then target:bitmap(source.bitmap) end
+  if source.filename  ~= nil then target:bitmap(self.loader:load(source.filename)) end
+  if source.texture  ~= nil then target:texture(source.texture) end
+  if source.scale  ~= nil then target:scale(source.scale) end
+  if source.caps  ~= nil then target:caps(source.caps) end
 end
 
 function Guiro:assignButtonAttributes(target, source)
+	
+end
+
+function Guiro:assignVBoxAttributes(target, source)
 	
 end
 
@@ -157,6 +150,16 @@ function Guiro:Button(def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
   self:assignButtonAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:VBox(def)
+  local result = lost.guiro.VBox()
+  self:applyStyle(result, def)
+  self:searchAndAddSubviews(result, def)  
+  self:assignViewAttributes(result, def) 
+  self:assignVBoxAttributes(result, def)   
   self:addEventListeners(result, def)
   return result
 end
