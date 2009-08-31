@@ -112,10 +112,6 @@ namespace lost
             // no event processing timeout since we probably don't have that many events
             eventDispatcher->processEvents(0);
           }
-          if(hasLuaProcessCallLater)
-          {
-            call_function<void>(luaProcessCallLater);
-          }          
           pool = threadAutoreleasePoolHack_drainAndRecreatePool(pool);
         }
         shutdown();
@@ -137,6 +133,10 @@ namespace lost
       {
         result = call_function<bool>(luaStartup, shared_from_this());
       }
+      if(hasLuaProcessCallLater)
+      {
+        call_function<void>(luaProcessCallLater);
+      }                
       return  result;
     }
 
@@ -147,6 +147,10 @@ namespace lost
       {
         result = call_function<bool>(luaUpdate, shared_from_this());
       }
+      if(hasLuaProcessCallLater)
+      {
+        call_function<void>(luaProcessCallLater);
+      }                      
       return  result;      
     }
 
@@ -157,6 +161,10 @@ namespace lost
       {
         result = call_function<bool>(luaShutdown, shared_from_this());
       }
+      if(hasLuaProcessCallLater)
+      {
+        call_function<void>(luaProcessCallLater);
+      }                      
       return  result;      
     }
 
