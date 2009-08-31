@@ -33,6 +33,8 @@ namespace lost
       luabind::object luaUpdate;
       bool hasLuaShutdown;
       luabind::object luaShutdown;
+      bool hasLuaProcessCallLater;
+      luabind::object luaProcessCallLater;
       
     public:
       std::string                     scriptname;

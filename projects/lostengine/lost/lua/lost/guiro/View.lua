@@ -2,6 +2,7 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
+require("lost.common.CallLater")
 require("lost.guiro.Bounds")
 require("lost.guiro.event.EventDispatcher")
 
