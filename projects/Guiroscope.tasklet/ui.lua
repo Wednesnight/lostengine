@@ -3,6 +3,8 @@ local xabs = lost.guiro.xabs
 local yabs = lost.guiro.yabs
 local xrel = lost.guiro.xrel
 local yrel = lost.guiro.yrel
+local xright = lost.guiro.xright
+local ytop = lost.guiro.ytop
 local xcenter = lost.guiro.xcenter
 local ycenter = lost.guiro.ycenter
 local wabs = lost.guiro.wabs
@@ -33,14 +35,14 @@ return dcl.guiro:Screen
       dcl.guiro:Image
       {
         id = "image1",
-        bounds = Bounds(xcenter(), ycenter(), wabs(150), habs(75)),
+        bounds = Bounds(xabs(10), yabs(10), wabs(150), habs(75)),
         filename = "stubs.jpg",
       }
     },
     dcl.guiro:Window
     {
       id = "window2",
-      bounds = Bounds(xrel(.5), yrel(.5), wrel(.5), hrel(.5)),
+      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
       dcl.guiro:Label
       {
         id="label1",

@@ -29,7 +29,6 @@ lost.common.Class "lost.guiro.View"
 
   -- geometry cache
   currentGlobalRect = lost.math.Rect(),
-  currentLocalRect = lost.math.Rect(),
 
   dirty = true,
   focused = false
@@ -267,7 +266,6 @@ function View:updateLayout(forceUpdate)
     else
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
-    self.currentLocalRect = self.bounds:rect(lost.math.Rect())
 
     for key,view in next,self.subviews do
       view:updateLayout(true)
@@ -281,26 +279,15 @@ function View:updateLayout(forceUpdate)
         view:updateLayout()
       end
     end
-  end
-  
---  return lost.math.Rect(self.currentGlobalRect), lost.math.Rect(self.currentLocalRect)
-  return self.currentGlobalRect, self.currentLocalRect
+  end  
 end
 
 --[[
     returns the Views rect in absolute (screen) coordinates
   ]]
 function View:globalRect()
-  local globalRect, localRect = self:updateLayout()
-  return globalRect
-end
-
---[[
-    returns the Views rect in relative (parent) coordinates
-  ]]
-function View:localRect()
-  local globalRect, localRect = self:updateLayout()
-  return localRect
+	self:updateLayout()
+  return self.currentGlobalRect
 end
 
 --[[

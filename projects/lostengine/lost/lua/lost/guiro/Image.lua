@@ -54,7 +54,8 @@ function Image:render()
 
   if self._scale == "scalegrid" then
     -- call View directly, otherwise our states get mixed up
-    local gr = lost.guiro.View.updateLayout(self, false)
+		lost.guiro.View.updateLayout(self, false)
+    local gr = self.currentGlobalRect
     -- copy global rect since we don't want to modify the view member
     gr = Rect(gr.x, gr.y, gr.width, gr.height)
     -- set to 0 since we move the image through mesh.transform
@@ -84,7 +85,8 @@ end
 function Image:updateLayout(forceUpdate)
   local doUpdateLayout = forceUpdate or self.dirtyLayout
 
-  local gr, lr = lost.guiro.View.updateLayout(self, forceUpdate)
+  lost.guiro.View.updateLayout(self, forceUpdate)
+	local gr = self.currentGlobalRect
 
   if doUpdateLayout then
     -- update mesh bounds and dimension
@@ -102,8 +104,6 @@ function Image:updateLayout(forceUpdate)
     log.debug(tostring(gr))
     self._textureMesh.transform = MatrixTranslation(Vec3(gr.x, gr.y, 0))
   end
-
-  return gr, lr
 end
 
 function Image:bitmap(b)

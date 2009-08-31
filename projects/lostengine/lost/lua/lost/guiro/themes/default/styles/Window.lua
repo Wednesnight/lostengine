@@ -15,8 +15,10 @@ function Window:constructor()
 end
 
 function Window:apply(target)
+	local c = .27843
+	local windowGray = Color(c,c,c,1);
   target:showFrame(true)
   target:showBackground(true)
-  target:backgroundColor(Color(.5,.5,.5,1))
+  target:backgroundColor(windowGray)
   target:frameColor(Color(1,1,1,1))
 end

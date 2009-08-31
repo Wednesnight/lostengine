@@ -58,7 +58,8 @@ end
 function Label:updateLayout(forceUpdate)
   local doUpdateLayout = forceUpdate or self.dirtyLayout
 
-  local gr, lr = lost.guiro.View.updateLayout(self, forceUpdate)
+	lost.guiro.View.updateLayout(self, forceUpdate)
+	local gr = self.currentGlobalRect
 
   if doUpdateLayout then
     -- initially, the text is aligned to the lower left border
@@ -87,8 +88,6 @@ function Label:updateLayout(forceUpdate)
     self.textMesh.transform = MatrixTranslation(textPos)
     self.shadowMesh.transform = MatrixTranslation(shadowPos)
   end
-  
-  return gr, lr
 end
 -- call this after a param change to update the appearance of text and shadow Mesh
 -- will recreate the mesh data (but not the meshes)
