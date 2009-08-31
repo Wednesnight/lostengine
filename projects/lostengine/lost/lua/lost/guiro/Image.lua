@@ -44,6 +44,9 @@ function Image:constructor()
   self:showFrame(true)
   -- suppress background by default
   self:showBackground(false)
+  
+  self.deferredRender = function() self:render() end
+  self.deferredUpdateLayout = function() self:updateLayout(false) end
 end
 
 function Image:render()
@@ -114,7 +117,7 @@ end
 function Image:texture(t)
   if t ~= nil then
     self._texture = t
-    self:render()
+    callLater(self.deferredRender)
   else
     return self._texture
   end
@@ -123,7 +126,7 @@ end
 function Image:scale(s)
   if s ~= nil then
     self._scale = s
-    self:render()
+    callLater(self.deferredRender)
   else
     return self._scale
   end
@@ -132,7 +135,7 @@ end
 function Image:caps(c)
   if c ~= nil then
     self._caps = c
-    self:updateLayout(false)
+    callLater(self.deferredUpdateLayout)
   else
     return self._caps
   end
