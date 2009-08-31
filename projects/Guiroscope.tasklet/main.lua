@@ -20,9 +20,15 @@ function startup(tasklet)
 
   screen = require("ui")
 
+  -- FIXME: the following few lines could be put into a helpfer function in Screen
+  -- that associates a Screen instance with a tasklet and performs some final updates and an initial redraw
+  -- then again a redraw might not be what you want in all use cases
   screen:listenTo(tasklet.eventDispatcher)
   screen.currentGlobalRect = lost.math.Rect(0,0,windowParams.rect.width, windowParams.rect.height)
-  screen:updateLayout() --force update of layout
+  -- update needs to be called later since the ui loader code triggers quite a few deferred updates
+  callLater(function() screen:updateLayout() end) 
+
+-- DEBUG    
 --  screen:printSubviews()
 --  screen.rootNode:print()
   return true
