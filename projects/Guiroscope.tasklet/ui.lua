@@ -47,9 +47,6 @@ return dcl.guiro:Screen
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
 			dcl.guiro:VBox
 			{
-				showBackground = false,
---				backgroundColor = Color(0,1,0,1),
-				showFrame = true,
 				bounds = Bounds(xleft(), ybottom(), wrel(1), habs(170)),
 	      dcl.guiro:Label
 	      {
