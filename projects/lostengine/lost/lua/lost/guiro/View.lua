@@ -250,7 +250,7 @@ end
 function View:updateLayout(forceUpdate)
   -- view needs update
   if forceUpdate or self.dirtyLayout then
-    log.debug("updating layout for "..self.id)
+--    log.debug("updating layout for "..self.id)
     self.dirtyLayout = false
     self.dirtySubviewLayout = false
     if self.parent then
@@ -259,7 +259,7 @@ function View:updateLayout(forceUpdate)
 --      log.debug("pgr "..pgr.x.." "..pgr.y.." "..pgr.width.." "..pgr.height)
       self.currentGlobalRect = self.bounds:rect(pgr)
       local cgr = self.currentGlobalRect
-      log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
+--      log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
       self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height), false)
       self.backgroundMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
       self.frameMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
