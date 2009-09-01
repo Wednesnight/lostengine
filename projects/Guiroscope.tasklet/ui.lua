@@ -23,7 +23,7 @@ return dcl.guiro:Screen
   id = "screen",
   listeners = 
   {
-    mouseEnter = function(event) log.debug("enter "..event.target.id) end,
+    mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target:globalRect())) end,
     mouseLeave = function(event) log.debug("leave "..event.target.id) end
   },
   dcl.guiro:UserInterface
@@ -45,11 +45,40 @@ return dcl.guiro:Screen
     {
       id = "window2",
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
-			dcl.guiro:VBox
+--[[			dcl.guiro:Label
+			{
+				bounds = Bounds(xabs(10), yabs(10), wabs(50),habs(20)),
+				text = "hello",
+				showFrame = true
+			},]]
+			dcl.guiro:HBox
+			{
+				bounds = Bounds(xleft(), ytop(), wrel(1), habs(100)),
+				halign = "center",
+				valign = "center",
+				mode = "stack",
+				backgroundColor = Color(1,0,0),
+				showBackground = false,
+				dcl.guiro:Label
+				{
+					id="hlabel1",
+					showFrame = true,
+	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+					text="noch eins"
+				},
+				dcl.guiro:Label
+				{
+					id="hlabel2",
+					showFrame = true,
+	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+					text="und noch eins"
+				}				
+			},
+--[[			dcl.guiro:VBox
 			{
 				bounds = Bounds(xleft(), ybottom(), wrel(1), habs(270)),
 				halign = "center",
-				valign = "bottom",
+				valign = "center",
 				mode = "stack",
 				showBackground = true,
 	      dcl.guiro:Label
@@ -87,7 +116,7 @@ return dcl.guiro:Screen
 	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
 					text="und noch eins"
 				}
-			}
+			}]]
     }
   }
 }

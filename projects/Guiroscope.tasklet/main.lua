@@ -35,6 +35,7 @@ function startup(tasklet)
 end
 
 function update(tasklet)
+--	screen:updateLayout(false)
   screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
   return true
