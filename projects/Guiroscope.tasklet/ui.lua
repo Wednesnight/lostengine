@@ -45,12 +45,6 @@ return dcl.guiro:Screen
     {
       id = "window2",
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
---[[			dcl.guiro:Label
-			{
-				bounds = Bounds(xabs(10), yabs(10), wabs(50),habs(20)),
-				text = "hello",
-				showFrame = true
-			},]]
 			dcl.guiro:HBox
 			{
 				bounds = Bounds(xleft(), ytop(), wrel(1), habs(100)),
@@ -58,7 +52,8 @@ return dcl.guiro:Screen
 				valign = "center",
 				mode = "stack",
 				backgroundColor = Color(1,0,0),
-				showBackground = false,
+				showBackground = true,
+				showFrame = true,
 				dcl.guiro:Label
 				{
 					id="hlabel1",
@@ -74,13 +69,13 @@ return dcl.guiro:Screen
 					text="und noch eins"
 				}				
 			},
---[[			dcl.guiro:VBox
+			dcl.guiro:VBox
 			{
-				bounds = Bounds(xleft(), ybottom(), wrel(1), habs(270)),
+				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
 				halign = "center",
 				valign = "center",
 				mode = "stack",
-				showBackground = true,
+				showFrame = true,
 	      dcl.guiro:Label
 	      {
 	        id="label1",
@@ -116,7 +111,7 @@ return dcl.guiro:Screen
 	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
 					text="und noch eins"
 				}
-			}]]
+			}
     }
   }
 }

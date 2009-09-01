@@ -7,7 +7,7 @@ local Color = lost.common.Color
 
 require("lost.declarative.Context")
 
-windowParams = WindowParams("Guiroscope", Rect(300,300,640,480))
+windowParams = WindowParams("Guiroscope", Rect(300,300,800,600))
 
 -- these are deliberately global so we can access them from startup/update/shutdown
 dcl = nil
