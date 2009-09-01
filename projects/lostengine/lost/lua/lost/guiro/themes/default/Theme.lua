@@ -10,6 +10,7 @@ require("lost.guiro.themes.default.styles.Screen")
 require("lost.guiro.themes.default.styles.UserInterface")
 require("lost.guiro.themes.default.styles.View")
 require("lost.guiro.themes.default.styles.VBox")
+require("lost.guiro.themes.default.styles.HBox")
 require("lost.guiro.themes.default.styles.Window")
 
 local Vec2 = lost.math.Vec2
@@ -25,6 +26,7 @@ function Theme:constructor(loader)
   self.styles = {} -- FIXME why is styles not properly initialised from base class constructor?
   self:addStyle(lost.guiro.themes.default.styles.View())
   self:addStyle(lost.guiro.themes.default.styles.VBox())
+  self:addStyle(lost.guiro.themes.default.styles.HBox())
   self:addStyle(lost.guiro.themes.default.styles.Screen())
   self:addStyle(lost.guiro.themes.default.styles.Window())
   self:addStyle(lost.guiro.themes.default.styles.Image())

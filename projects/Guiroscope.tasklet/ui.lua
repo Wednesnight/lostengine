@@ -47,70 +47,124 @@ return dcl.guiro:Screen
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
 			dcl.guiro:HBox
 			{
-				bounds = Bounds(xleft(), ytop(), wrel(1), habs(100)),
+				bounds = Bounds(xleft(), ytop(), wrel(1), habs(300)),
 				halign = "center",
 				valign = "center",
-				mode = "stack",
-				backgroundColor = Color(1,0,0),
-				showBackground = true,
-				showFrame = true,
-				dcl.guiro:Label
-				{
-					id="hlabel1",
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
-					text="noch eins"
-				},
-				dcl.guiro:Label
-				{
-					id="hlabel2",
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
-					text="und noch eins"
-				}				
-			},
-			dcl.guiro:VBox
-			{
-				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
-				halign = "center",
-				valign = "center",
-				mode = "stack",
-				showFrame = true,
-	      dcl.guiro:Label
-	      {
-	        id="label1",
-	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
-	        text = "Chello!",
-	        listeners = 
-	        {
-	          mouseEnter = function(event) event.target:showFrame(true) end,
-	          mouseLeave = function(event) event.target:showFrame(false) end
-	        }          
-	      },
-				dcl.guiro:Label
-				{
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
-					text="noch eins"
-				},
-				dcl.guiro:Label
-				{
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
-					text="und noch eins"
-				},
-				dcl.guiro:Label
-				{
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
-					text="noch eins"
-				},
-				dcl.guiro:Label
-				{
-					showFrame = true,
-	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
-					text="und noch eins"
-				}
+				mode = "spread",
+  			dcl.guiro:VBox
+  			{
+  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				halign = "center",
+  				valign = "center",
+  				mode = "stack",
+  	      dcl.guiro:Label
+  	      {
+  	        id="label1",
+  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        text = "Hello!",
+  	        listeners = 
+  	        {
+  	          mouseEnter = function(event) event.target:showFrame(true) end,
+  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	        }          
+  	      },
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				}
+  			},
+  			dcl.guiro:VBox
+  			{
+  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				halign = "center",
+  				valign = "center",
+  				mode = "stack",
+  	      dcl.guiro:Label
+  	      {
+  	        id="label1",
+  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        text = "Hello!",
+  	        listeners = 
+  	        {
+  	          mouseEnter = function(event) event.target:showFrame(true) end,
+  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	        }          
+  	      },
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				}
+  			},
+  			dcl.guiro:VBox
+  			{
+  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				halign = "center",
+  				valign = "center",
+  				mode = "stack",
+  	      dcl.guiro:Label
+  	      {
+  	        id="label1",
+  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        text = "Hello!",
+  	        listeners = 
+  	        {
+  	          mouseEnter = function(event) event.target:showFrame(true) end,
+  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	        }          
+  	      },
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  					text="noch eins"
+  				},
+  				dcl.guiro:Label
+  				{
+  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  					text="und noch eins"
+  				}
+  			}				
 			}
     }
   }
