@@ -69,7 +69,10 @@ function Guiro:assignButtonAttributes(target, source)
 end
 
 function Guiro:assignVBoxAttributes(target, source)
-	
+	if source.mode ~= nil then target:mode(source.mode) end
+	if source.halign ~= nil then target:halign(source.halign) end
+	if source.valign ~= nil then target:valign(source.valign) end
+	if source.spacing ~= nil then target:spacing(source.spacing) end
 end
 
 function Guiro:applyStyle(target, def)
