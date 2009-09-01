@@ -96,7 +96,6 @@ end
 -- every time the screens layout is updated we MUST reset the viewport 
 -- so we first call update on the base class, then use the resulting 
 function Screen:updateLayout()
-	log.debug("--- Screen:updateLayout")
   for key,view in pairs(self.subviews) do
       view:updateLayout(true)
   end

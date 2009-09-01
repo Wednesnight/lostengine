@@ -54,8 +54,8 @@ function Label:constructor()
   self:showFrame(false)
   self:showBackground(false)
   
-  self.deferredUpdateLayout = function() log.debug("deferredUpdateLayout "..self.id); self:updateLayout(true) end
-  self.deferredRender = function() log.debug("deferredRender "..self.id); self:render() end
+  self.deferredUpdateLayout = function() self:updateLayout(true) end
+  self.deferredRender = function() self:render() end
 end
 
 function Label:updateLayout(forceUpdate)
@@ -68,7 +68,6 @@ function Label:updateLayout(forceUpdate)
     -- initially, the text is aligned to the lower left border
     -- if any of the alignment strings are borked, the text will still display,
     -- but the alignment will be only off inside the label's bounds
-		log.debug("updateLayout and Mesh "..self.id)
     local textPos = Vec3(gr.x, gr.y, 0)
 
     if self._halign == "center" then
@@ -88,7 +87,6 @@ function Label:updateLayout(forceUpdate)
     end
 
     local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
-
     self.textMesh.transform = MatrixTranslation(textPos)
     self.shadowMesh.transform = MatrixTranslation(shadowPos)
   end
@@ -97,7 +95,6 @@ end
 -- will recreate the mesh data (but not the meshes)
 function Label:render()
   if self._font == nil then
---    log.warn("can't update Label because font is nil")
     return
   end
   self._font:render(self._text, self._fontSize, self.textMesh)

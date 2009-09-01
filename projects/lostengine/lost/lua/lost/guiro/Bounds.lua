@@ -50,9 +50,7 @@ end
 
 function xabs(x, mod)
   mod = mod or 0
-  return function(self, parentRect) 
-    return (parentRect.x + x) + (parentRect.width * mod)
-  end
+  return function(self, parentRect) return (parentRect.x + x) + (parentRect.width * mod) end
 end
 
 function xrel(x, mod)
