@@ -54,7 +54,7 @@ function Label:constructor()
   self:showFrame(false)
   self:showBackground(false)
   
-  self.deferredUpdateLayout = function() log.debug("deferredUpdateLayout "..self.id); self:updateLayout(false) end
+  self.deferredUpdateLayout = function() log.debug("deferredUpdateLayout "..self.id); self:updateLayout(true) end
   self.deferredRender = function() log.debug("deferredRender "..self.id); self:render() end
 end
 
@@ -68,6 +68,7 @@ function Label:updateLayout(forceUpdate)
     -- initially, the text is aligned to the lower left border
     -- if any of the alignment strings are borked, the text will still display,
     -- but the alignment will be only off inside the label's bounds
+		log.debug("updateLayout and Mesh "..self.id)
     local textPos = Vec3(gr.x, gr.y, 0)
 
     if self._halign == "center" then
@@ -101,7 +102,7 @@ function Label:render()
   end
   self._font:render(self._text, self._fontSize, self.textMesh)
   self._font:render(self._text, self._fontSize, self.shadowMesh)
-  self:updateLayout(false)
+  self:updateLayout(true)
 end
 
 function Label:text(s)

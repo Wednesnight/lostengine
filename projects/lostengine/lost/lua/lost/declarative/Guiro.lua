@@ -9,6 +9,7 @@ require("lost.guiro.Label")
 require("lost.guiro.Image")
 require("lost.guiro.Button")
 require("lost.guiro.VBox")
+require("lost.guiro.HBox")
 require("lost.guiro.ThemeManager")
 
 lost.common.Class "lost.declarative.Guiro" {}
@@ -69,6 +70,14 @@ function Guiro:assignButtonAttributes(target, source)
 end
 
 function Guiro:assignVBoxAttributes(target, source)
+	if source.mode ~= nil then target:mode(source.mode) end
+	if source.halign ~= nil then target:halign(source.halign) end
+	if source.valign ~= nil then target:valign(source.valign) end
+	if source.spacing ~= nil then target:spacing(source.spacing) end
+end
+
+function Guiro:assignHBoxAttributes(target, source)
+	log.debug("--------------- buidling HBOX")
 	if source.mode ~= nil then target:mode(source.mode) end
 	if source.halign ~= nil then target:halign(source.halign) end
 	if source.valign ~= nil then target:valign(source.valign) end
@@ -163,6 +172,16 @@ function Guiro:VBox(def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:assignVBoxAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:HBox(def)
+  local result = lost.guiro.HBox()
+  self:applyStyle(result, def)
+  self:searchAndAddSubviews(result, def)  
+  self:assignViewAttributes(result, def) 
+  self:assignHBoxAttributes(result, def)   
   self:addEventListeners(result, def)
   return result
 end

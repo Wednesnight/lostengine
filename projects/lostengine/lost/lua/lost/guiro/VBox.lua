@@ -40,7 +40,6 @@ function VBox:updateSpread()
 --	log.debug("start ---")
 	local numViews = #(self.subviews)
 	local relfactor = 1/(numViews-1)
-	local yoffset = 0
 --	log.debug("relfactor "..relfactor)
 	local f = 1
 	for k,view in pairs(self.subviews) do
