@@ -4,6 +4,7 @@
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/FilesystemRepository.h"
+#include "lost/resource/ApplicationResourceRepository.h"
 
 using namespace luabind;
 using namespace lost::resource;
@@ -63,7 +64,7 @@ namespace lost
       [
         namespace_("resource")
         [
-          // FIXME: should be help by FilesystemRepositoryPtr, but luabind ...
+          // FIXME: should be held by FilesystemRepositoryPtr, but luabind ...
           class_<FilesystemRepository, RepositoryPtr>("FilesystemRepository")
             .scope
             [
@@ -73,10 +74,32 @@ namespace lost
       ];
     }
 
+    RepositoryPtr arepo_create()
+    {
+      return RepositoryPtr(new ApplicationResourceRepository());
+    }
+    
+    void LostApplicationResourceRepository(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("resource")
+        [
+          // FIXME: should be held by ApplicationResourceRepositoryPtr, but luabind ...
+          class_<ApplicationResourceRepository, RepositoryPtr>("ApplicationResourceRepository")
+            .scope
+            [
+              def("create", &arepo_create)
+            ]
+        ]
+      ];
+    }
+    
     void LostResource(lua_State* state)
     {
       LostResourceFile(state);
       LostFilesystemRepository(state);
+      LostApplicationResourceRepository(state);
       LostResourceLoader(state);
     }
 

@@ -338,7 +338,6 @@
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E8738EC1015D91A002BEE13 /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 3E8738EB1015D91A002BEE13 /* lost */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -433,6 +432,14 @@
 		8D5347AD0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
 		8D5347AE0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
 		8D5347AF0F558582005C39BF /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5347AC0F558582005C39BF /* Camera3D.cpp */; };
+		8D607DC7104F0665004818BA /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libLostEngine.a */; };
+		8D607DC8104F0665004818BA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */; };
+		8D607DDA104F06FE004818BA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D607DD7104F06FE004818BA /* main.cpp */; };
+		8D607DDB104F06FE004818BA /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8D607DD8104F06FE004818BA /* main.lua */; };
+		8D607DDC104F06FE004818BA /* ui.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8D607DD9104F06FE004818BA /* ui.lua */; };
+		8D607E05104F0860004818BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D607E04104F0860004818BA /* Cocoa.framework */; };
+		8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D607F5D104F0B0F004818BA /* down_arrow.png */; };
+		8D607F60104F0B48004818BA /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 8D607F5F104F0B48004818BA /* lost */; };
 		8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
 		8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
@@ -1120,6 +1127,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8D607D31104F0665004818BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
 		EA1BF66B0F67348A00862B2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -1278,6 +1292,14 @@
 		8D13D8040FD8011A00CEC1AF /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Blend.cpp; path = rg/Blend.cpp; sourceTree = "<group>"; };
 		8D40911A0F89322D00163B63 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
+		8D607DCC104F0665004818BA /* LostEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D607DCE104F0665004818BA /* LostEngineLauncher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LostEngineLauncher-Info.plist"; sourceTree = "<group>"; };
+		8D607DD7104F06FE004818BA /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		8D607DD8104F06FE004818BA /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
+		8D607DD9104F06FE004818BA /* ui.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.lua; path = ../ui.lua; sourceTree = SOURCE_ROOT; };
+		8D607E04104F0860004818BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		8D607F5D104F0B0F004818BA /* down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down_arrow.png; path = ../down_arrow.png; sourceTree = SOURCE_ROOT; };
+		8D607F5F104F0B48004818BA /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost/lua/lost; sourceTree = SOURCE_ROOT; };
 		8D77F0480F34DC1000C86FFD /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
 		8D77F0490F34DC1000C86FFD /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = iphone/Window.mm; sourceTree = "<group>"; };
 		8DA585360F8A4F7000A568E1 /* operations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operations.cpp; path = ../../../thirdparty/boost/boost_1_36_0/source/libs/filesystem/src/operations.cpp; sourceTree = SOURCE_ROOT; };
@@ -1505,6 +1527,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D607DC6104F0665004818BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D607DC7104F0665004818BA /* libLostEngine.a in Frameworks */,
+				8D607DC8104F0665004818BA /* OpenGL.framework in Frameworks */,
+				8D607E05104F0860004818BA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D289987405E68DCB004EDB86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1538,11 +1570,13 @@
 			children = (
 				3E8738EB1015D91A002BEE13 /* lost */,
 				3E531D8D0F14EDEA00D7C8B4 /* Configurations */,
-				EA9A67E10F159C38007E8A3D /* precompiled headers */,
+				EA9A67E10F159C38007E8A3D /* Precompiled Headers */,
 				3E5321CA0F15112200D7C8B4 /* Sources */,
+				8D607ED7104F0A98004818BA /* Resources */,
 				3E531F300F14FE9700D7C8B4 /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				EA1BF6640F67342000862B2F /* LostEngineUnittests-Info.plist */,
+				8D607DCE104F0665004818BA /* LostEngineLauncher-Info.plist */,
 			);
 			name = LostEngine;
 			sourceTree = "<group>";
@@ -1572,6 +1606,7 @@
 				EA6711250E3E885300B961EC /* libLostEngine.a */,
 				3E7325750E5CE3A5000FF838 /* libLostEngine.a */,
 				EA1BF6620F67342000862B2F /* LostEngineUnittests.app */,
+				8D607DCC104F0665004818BA /* LostEngine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1626,6 +1661,7 @@
 			children = (
 				3E531F230F14FE6F00D7C8B4 /* AGL.framework */,
 				3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */,
+				8D607E04104F0860004818BA /* Cocoa.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1633,6 +1669,7 @@
 		3E5321CA0F15112200D7C8B4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				8D607DD7104F06FE004818BA /* main.cpp */,
 				EA3B94630E04639D00B6423B /* lost */,
 				08FB7795FE84155DC02AAC07 /* thirdparty */,
 			);
@@ -1671,6 +1708,17 @@
 				3EE13E7D0FA58D6300F2603E /* Meter.cpp */,
 			);
 			name = meter;
+			sourceTree = "<group>";
+		};
+		8D607ED7104F0A98004818BA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D607F5F104F0B48004818BA /* lost */,
+				8D607DD8104F06FE004818BA /* main.lua */,
+				8D607DD9104F06FE004818BA /* ui.lua */,
+				8D607F5D104F0B0F004818BA /* down_arrow.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		8D77F0410F34DBF600C86FFD /* iphone */ = {
@@ -2359,14 +2407,14 @@
 			name = rg;
 			sourceTree = "<group>";
 		};
-		EA9A67E10F159C38007E8A3D /* precompiled headers */ = {
+		EA9A67E10F159C38007E8A3D /* Precompiled Headers */ = {
 			isa = PBXGroup;
 			children = (
 				EA9A68160F15A170007E8A3D /* prefix-release.pch */,
 				EA9A68170F15A170007E8A3D /* prefix-debug.pch */,
 				EA9A67EA0F159C51007E8A3D /* prefix-shared.h */,
 			);
-			name = "precompiled headers";
+			name = "Precompiled Headers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2422,6 +2470,24 @@
 			productReference = 3E7325750E5CE3A5000FF838 /* libLostEngine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		8D607D2F104F0665004818BA /* LostEngineLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D607DC9104F0665004818BA /* Build configuration list for PBXNativeTarget "LostEngineLauncher" */;
+			buildPhases = (
+				8D607D32104F0665004818BA /* Resources */,
+				8D607D34104F0665004818BA /* Sources */,
+				8D607DC6104F0665004818BA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D607D30104F0665004818BA /* PBXTargetDependency */,
+			);
+			name = LostEngineLauncher;
+			productName = LostEngineUnittests;
+			productReference = 8D607DCC104F0665004818BA /* LostEngine.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D2AAC045055464E500DB518D /* LostEngine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "LostEngine" */;
@@ -2443,7 +2509,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA1BF6670F67342100862B2F /* Build configuration list for PBXNativeTarget "LostEngineUnittests" */;
 			buildPhases = (
-				EA1BF65E0F67342000862B2F /* Resources */,
 				EA1BF65F0F67342000862B2F /* Sources */,
 				EA1BF6600F67342000862B2F /* Frameworks */,
 			);
@@ -2490,16 +2555,20 @@
 				EA6711240E3E885300B961EC /* LostEngine-iphone */,
 				3E7324F20E5CE3A4000FF838 /* LostEngine-simulator */,
 				EA1BF6610F67342000862B2F /* LostEngineUnittests */,
+				8D607D2F104F0665004818BA /* LostEngineLauncher */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		EA1BF65E0F67342000862B2F /* Resources */ = {
+		8D607D32104F0665004818BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E8738EC1015D91A002BEE13 /* lost in Resources */,
+				8D607F60104F0B48004818BA /* lost in Resources */,
+				8D607DDB104F06FE004818BA /* main.lua in Resources */,
+				8D607DDC104F06FE004818BA /* ui.lua in Resources */,
+				8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2827,6 +2896,14 @@
 				8DB8AAE70FDD50170013614E /* btGeometryUtil.cpp in Sources */,
 				EACF1C6310164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7F1016517400753144 /* FilesystemRepository.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D607D34104F0665004818BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D607DDA104F06FE004818BA /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3633,6 +3710,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8D607D30104F0665004818BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC045055464E500DB518D /* LostEngine */;
+			targetProxy = 8D607D31104F0665004818BA /* PBXContainerItemProxy */;
+		};
 		EA1BF66C0F67348A00862B2F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2AAC045055464E500DB518D /* LostEngine */;
@@ -3687,6 +3769,24 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D930F14EDEA00D7C8B4 /* simulator.xcconfig */;
 			buildSettings = {
+			};
+			name = Release;
+		};
+		8D607DCA104F0665004818BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "LostEngineLauncher-Info.plist";
+				PRODUCT_NAME = LostEngine;
+			};
+			name = Debug;
+		};
+		8D607DCB104F0665004818BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "LostEngineLauncher-Info.plist";
+				PRODUCT_NAME = LostEngine;
 			};
 			name = Release;
 		};
@@ -3778,6 +3878,15 @@
 			buildConfigurations = (
 				3E7325730E5CE3A5000FF838 /* Debug */,
 				3E7325740E5CE3A5000FF838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D607DC9104F0665004818BA /* Build configuration list for PBXNativeTarget "LostEngineLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D607DCA104F0665004818BA /* Debug */,
+				8D607DCB104F0665004818BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -11,6 +11,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/SpawnTaskletEvent.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/application/Window.h"
@@ -30,7 +31,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<AccelerometerEvent, Event, AccelerometerEventPtr>("AccelerometerEvent")
+          class_<AccelerometerEvent, Event, lost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
             .def(constructor<std::string>()) 
             .def_readwrite("x", &AccelerometerEvent::x)
             .def_readwrite("y", &AccelerometerEvent::y)
@@ -289,6 +290,22 @@ namespace lost
       ];
     }
 
+    void LostApplicationSpawnTaskletEvent(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("application")
+        [
+          class_<SpawnTaskletEvent, Event, lost::shared_ptr<Event> >("SpawnTaskletEvent")
+            .def(constructor<resource::LoaderPtr>()) 
+            .scope
+            [
+              def("cast", &lost::lua::cast<SpawnTaskletEvent>)
+            ]
+        ]
+      ];
+    }
+    
     void LostApplicationTouchEvent(lua_State* state)
     {
       module(state, "lost")
@@ -348,6 +365,7 @@ namespace lost
       LostApplicationMouseEvent(state);
       LostApplicationResizeEvent(state);
       LostApplicationTasklet(state);
+      LostApplicationSpawnTaskletEvent(state);
       LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
     }
