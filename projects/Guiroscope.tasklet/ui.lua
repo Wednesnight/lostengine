@@ -64,8 +64,14 @@ return dcl.guiro:Screen
   	        text = "Hello!",
   	        listeners = 
   	        {
-  	          mouseEnter = function(event) event.target:showFrame(true) end,
-  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	          mouseEnter = function(event)
+															event.target:showFrame(true)
+															event.target:screen()("mainUi")("window1"):hidden(true)
+													 end,
+  	          mouseLeave = function(event)
+													 	 event.target:showFrame(false)
+															event.target:screen()("mainUi")("window1"):hidden(false)
+												   end
   	        }          
   	      },
   				dcl.guiro:Label
