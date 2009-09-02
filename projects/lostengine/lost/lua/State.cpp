@@ -35,6 +35,7 @@ namespace lost
       luabind::object nil;
       luabind::object _G = luabind::globals(state);
       _G = nil;
+      globals = nil;
       lua_gc(state, LUA_GCCOLLECT, 0);
 
       // close state
