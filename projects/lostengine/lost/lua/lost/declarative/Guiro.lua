@@ -159,6 +159,7 @@ function Guiro:Image(def)
 end
 
 function Guiro:Button(def)
+  log.debug("------------------ BUILDING BUTTON")
   local result = lost.guiro.Button()
   self:applyStyle(result, def)
   -- don't allow image subviews

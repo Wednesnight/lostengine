@@ -24,7 +24,8 @@ return dcl.guiro:Screen
   listeners = 
   {
     mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target:globalRect())) end,
-    mouseLeave = function(event) log.debug("leave "..event.target.id) end
+    mouseLeave = function(event) log.debug("leave "..event.target.id) end,
+    buttonClick = function(event) log.debug("CLICKED "..event.target.id) end
   },
   dcl.guiro:UserInterface
   {
@@ -37,18 +38,27 @@ return dcl.guiro:Screen
       dcl.guiro:Image
       {
         id = "image1",
-        bounds = Bounds(xabs(10), yabs(100), wabs(150), habs(75)),
-        filename = "stubs.jpg",
+        bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
+        filename = "lost/guiro/themes/default/resources/ButtonHover.png",
+        scale="scalegrid",
+        showFrame = false,
+        caps = 
+        {
+          left = 3,
+          right=3,
+          top=3,
+          bottom=3
+        },
         flip = true,
         filter = true,
       },
       dcl.guiro:Button
       {
         id="button1",
-        bounds = Bounds(xabs(10), yabs(200), wabs(50), habs(30))
+        bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30))
       }
     },
-    dcl.guiro:Window
+--[[    dcl.guiro:Window
     {
       id = "window2",
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
@@ -180,6 +190,7 @@ return dcl.guiro:Screen
   			}				
 			}
     }
+    ]]
   }
 }
 

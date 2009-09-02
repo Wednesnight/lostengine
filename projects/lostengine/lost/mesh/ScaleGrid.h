@@ -199,8 +199,8 @@ struct ScaleGrid : public MESHTYPE
                       float top,
                       float bottom)
   {
-    float h = inSize.x;
-    float w = inSize.y;
+    float w = inSize.x;
+    float h = inSize.y;
     this->vertexData[0] = VertexType(0,h);
     this->vertexData[1] = VertexType(left, h);
     this->vertexData[2] = VertexType(w-right, h);

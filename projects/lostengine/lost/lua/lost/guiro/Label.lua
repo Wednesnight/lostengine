@@ -95,8 +95,10 @@ end
 -- will recreate the mesh data (but not the meshes)
 function Label:render()
   if self._font == nil then
+    log.warn("--------- NO FONT")
     return
   end
+  log.debug("--- HAS FONT")
   self._font:render(self._text, self._fontSize, self.textMesh)
   self._font:render(self._text, self._fontSize, self.shadowMesh)
   self:updateLayout(true)
