@@ -33,13 +33,13 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
 -- DEBUG    
---  screen:printSubviews()
---  screen.rootNode:print()
+--  callLater(function() screen:printSubviews() end)
+--  callLater(function() screen.rootNode:print()  end)
   return true
 end
 
 function update(tasklet)
---	screen:updateLayout(false)
+  processCallLaterQueue()
   screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
   return running

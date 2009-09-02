@@ -170,6 +170,12 @@ function View:removeSubview(subview)
   end
 end
 
+function View:removeAllSubviews()
+  for k,v in pairs(self.subviews) do 
+    self:removeSubview(v)
+  end
+end
+
 --[[
     returns subview with given subviewId
     nil if subviewId is invalid
@@ -364,7 +370,9 @@ end
 function View:hidden(val)
 	if val ~= nil then
 		if self.rootNode then
-			self.rootNode.active = val
+			self.rootNode.active = not val
+		else
+      log.warn("------ can't set hidden, no root node")
 		end
 	else
 		return not self.rootNode.active

@@ -78,7 +78,6 @@ function Image:render()
     -- set to 0 since we move the image through mesh.transform
     gr.x = 0
     gr.y = 0
-
     self._textureMesh = lost.mesh.ScaleGrid2D.create(self._texture, gr,
         self._caps.left, self._caps.right, self._caps.top, self._caps.bottom, self._flip)
   else
@@ -86,6 +85,11 @@ function Image:render()
     -- but we'll forget that for now
     self._textureMesh = lost.mesh.Quad2D.create(self._texture, self._flip)
   end
+  
+  if self._textureMesh then
+    self._textureMesh.material.blend = true
+  end
+  
   -- attach mesh to draw node, remove the node if it's already in the hierarchy
   if self._textureNode ~= nil then
     self.renderNode:remove(self._textureNode)
@@ -105,7 +109,7 @@ function Image:updateLayout(forceUpdate)
   lost.guiro.View.updateLayout(self, forceUpdate)
 	local gr = self.currentGlobalRect
 
-  if doUpdateLayout then
+  if doUpdateLayout and self._textureMesh then
     -- update mesh bounds and dimension
     if self._scale == "stretch" then
       self._textureMesh:updateSize(Vec2(gr.width, gr.height), true)
@@ -118,7 +122,6 @@ function Image:updateLayout(forceUpdate)
       self._textureMesh:updateSize(Vec2(gr.width, gr.height),
           self._caps.left, self._caps.right, self._caps.top, self._caps.bottom)
     end
---    log.debug(tostring(gr))
     self._textureMesh.transform = MatrixTranslation(Vec3(gr.x, gr.y, 0))
   end
 end
