@@ -39,6 +39,8 @@ return dcl.guiro:Screen
         id = "image1",
         bounds = Bounds(xabs(10), yabs(100), wabs(150), habs(75)),
         filename = "stubs.jpg",
+        flip = true,
+        filter = true,
       },
       dcl.guiro:Button
       {

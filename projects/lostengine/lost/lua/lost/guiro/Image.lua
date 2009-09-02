@@ -29,7 +29,8 @@ function Image:constructor()
   self._texture = nil
   self._textureMesh = nil
   self._textureNode = nil
-
+  self._filter = false -- if true, GL_LINEAR is set for min/max filter
+  self._flip = false -- if true, texture coordinates are vertically flipped, resulting in an image mirrored at the x axis
   self._scale = "stretch" -- possible values: stretch, aspect, scalegrid
 
   self._caps = -- used for scalegrid
@@ -47,6 +48,19 @@ function Image:constructor()
   
   self.deferredRender = function() self:render() end
   self.deferredUpdateLayout = function() self:updateLayout(false) end
+  self.deferredFilterUpdate = function()
+    if self._texture then
+      if self._filter then
+        --FIXME: binding the texture here is actually a bad idea because it might throw the gl.Context of guard 
+        -- and mess up the shadowed state
+        self._texture:bind()
+        self._texture:filter(gl.GL_LINEAR)
+      else
+        self._texture:bind()
+        self._texture:filter(gl.GL_NEAREST)
+      end
+    end
+  end
 end
 
 function Image:render()
@@ -66,11 +80,11 @@ function Image:render()
     gr.y = 0
 
     self._textureMesh = lost.mesh.ScaleGrid2D.create(self._texture, gr,
-        self._caps.left, self._caps.right, self._caps.top, self._caps.bottom)
+        self._caps.left, self._caps.right, self._caps.top, self._caps.bottom, self._flip)
   else
     -- recreate mesh, we could optimize this to just recreate the texture and attach that to the mesh
     -- but we'll forget that for now
-    self._textureMesh = lost.mesh.Quad2D.create(self._texture, true)
+    self._textureMesh = lost.mesh.Quad2D.create(self._texture, self._flip)
   end
   -- attach mesh to draw node, remove the node if it's already in the hierarchy
   if self._textureNode ~= nil then
@@ -138,5 +152,23 @@ function Image:caps(c)
     callLater(self.deferredUpdateLayout)
   else
     return self._caps
+  end
+end
+
+function Image:filter(flag)
+  if flag ~= nil then
+    self._filter = flag
+    callLater(self.deferredFilterUpdate)
+  else
+    return self._filter
+  end
+end
+
+function Image:flip(flag)
+  if flag ~= nil then
+    self._flip = flag
+    callLater(self.deferredRender)
+  else
+    return self._flip
   end
 end
