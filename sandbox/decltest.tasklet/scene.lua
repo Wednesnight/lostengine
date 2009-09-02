@@ -77,15 +77,16 @@ return dcl.rg:Node
       {
         filename = "scalegridTest.png"
       },
-      rect = Rect(0,0,20,20),
+      rect = Rect(0,0,43,47),
       left = 3,
       right = 3,
       top = 3,
       bottom = 3,
       transform = MatrixTranslation(Vec3(120,20,0)),
+      flip = true,
       material = 
       {
-        color = Color(1,0,0)
+        color = Color(1,1,1)
       }
     }
   }

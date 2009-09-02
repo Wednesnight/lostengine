@@ -31,7 +31,8 @@ struct ScaleGrid : public MESHTYPE
             float left,
             float right,
             float top,
-            float bottom)
+            float bottom,
+            bool flip) // flips texture coordinates vertically if true
   {
     this->drawMode = GL_TRIANGLES;
 
@@ -65,52 +66,56 @@ struct ScaleGrid : public MESHTYPE
     // first, we calculate the vertex coordinates relative to 0,0 since these are the pixel coordinates 
     // we need to calculate the texel coordinates from the texture.
     this->createVertices(math::Vec2(rect.width, rect.height), left, right, top, bottom);
-/*    math::Rect zr(0,0,rect.width, rect.height); // zero based rect for the first pass of the calculations
-    float h = rect.height;
-    float w = rect.width;
-    this->vertexData[0] = VertexType(0,h);
-    this->vertexData[1] = VertexType(left, h);
-    this->vertexData[2] = VertexType(w-right, h);
-    this->vertexData[3] = VertexType(w,h);
-    
-    this->vertexData[4] = VertexType(0, h-top);
-    this->vertexData[5] = VertexType(left, h-top);
-    this->vertexData[6] = VertexType(w-right, h-top);
-    this->vertexData[7] = VertexType(w, h-top);
-
-    this->vertexData[8] = VertexType(0, bottom);
-    this->vertexData[9] = VertexType(left, bottom);
-    this->vertexData[10] = VertexType(w-right, bottom);
-    this->vertexData[11] = VertexType(w, bottom);
-
-    this->vertexData[12] = VertexType(0,0);
-    this->vertexData[13] = VertexType(left, 0);
-    this->vertexData[14] = VertexType(w-right, 0);
-    this->vertexData[15] = VertexType(w,0);*/
 
 
     float tw = std::min(tex->dataWidth, tex->width);
     float th = std::min(tex->dataHeight, tex->height);
-
-    this->texCoordData[0] = tex->normalisedCoord(VertexType(0,th));
-    this->texCoordData[1] = tex->normalisedCoord(VertexType(left, th));
-    this->texCoordData[2] = tex->normalisedCoord(VertexType(tw-right, th));
-    this->texCoordData[3] = tex->normalisedCoord(VertexType(tw, th));
+  
+    if(flip)
+    {
+      this->texCoordData[0] = tex->normalisedCoord(VertexType(0,0));
+      this->texCoordData[1] = tex->normalisedCoord(VertexType(left, 0));
+      this->texCoordData[2] = tex->normalisedCoord(VertexType(tw-right, 0));
+      this->texCoordData[3] = tex->normalisedCoord(VertexType(tw, 0));
+      
+      this->texCoordData[4] = tex->normalisedCoord(VertexType(0,bottom));
+      this->texCoordData[5] = tex->normalisedCoord(VertexType(left,bottom));
+      this->texCoordData[6] = tex->normalisedCoord(VertexType(tw-right,bottom));
+      this->texCoordData[7] = tex->normalisedCoord(VertexType(tw,bottom));
+      
+      this->texCoordData[8] = tex->normalisedCoord(VertexType(0,th-top));
+      this->texCoordData[9] = tex->normalisedCoord(VertexType(left,th-top));
+      this->texCoordData[10] = tex->normalisedCoord(VertexType(tw-right, th-top));
+      this->texCoordData[11] = tex->normalisedCoord(VertexType(tw, th-top));
+      
+      this->texCoordData[12] = tex->normalisedCoord(VertexType(0,th));
+      this->texCoordData[13] = tex->normalisedCoord(VertexType(left,th));
+      this->texCoordData[14] = tex->normalisedCoord(VertexType(tw-right,th));
+      this->texCoordData[15] = tex->normalisedCoord(VertexType(tw, th));
+    }
+    else
+    {
+      this->texCoordData[0] = tex->normalisedCoord(VertexType(0,th));
+      this->texCoordData[1] = tex->normalisedCoord(VertexType(left, th));
+      this->texCoordData[2] = tex->normalisedCoord(VertexType(tw-right, th));
+      this->texCoordData[3] = tex->normalisedCoord(VertexType(tw, th));
+      
+      this->texCoordData[4] = tex->normalisedCoord(VertexType(0,th-top));
+      this->texCoordData[5] = tex->normalisedCoord(VertexType(left,th-top));
+      this->texCoordData[6] = tex->normalisedCoord(VertexType(tw-right, th-top));
+      this->texCoordData[7] = tex->normalisedCoord(VertexType(tw, th-top));
+      
+      this->texCoordData[8] = tex->normalisedCoord(VertexType(0,bottom));
+      this->texCoordData[9] = tex->normalisedCoord(VertexType(left,bottom));
+      this->texCoordData[10] = tex->normalisedCoord(VertexType(tw-right, bottom));
+      this->texCoordData[11] = tex->normalisedCoord(VertexType(tw, bottom));
+      
+      this->texCoordData[12] = tex->normalisedCoord(VertexType(0,0));
+      this->texCoordData[13] = tex->normalisedCoord(VertexType(left,0));
+      this->texCoordData[14] = tex->normalisedCoord(VertexType(tw-right,0));
+      this->texCoordData[15] = tex->normalisedCoord(VertexType(tw, 0));
+    }
     
-    this->texCoordData[4] = tex->normalisedCoord(VertexType(0,th-top));
-    this->texCoordData[5] = tex->normalisedCoord(VertexType(left,th-top));
-    this->texCoordData[6] = tex->normalisedCoord(VertexType(tw-right, th-top));
-    this->texCoordData[7] = tex->normalisedCoord(VertexType(tw, th-top));
-    
-    this->texCoordData[8] = tex->normalisedCoord(VertexType(0,bottom));
-    this->texCoordData[9] = tex->normalisedCoord(VertexType(left,bottom));
-    this->texCoordData[10] = tex->normalisedCoord(VertexType(tw-right, bottom));
-    this->texCoordData[11] = tex->normalisedCoord(VertexType(tw, bottom));
-    
-    this->texCoordData[12] = tex->normalisedCoord(VertexType(0,0));
-    this->texCoordData[13] = tex->normalisedCoord(VertexType(left,0));
-    this->texCoordData[14] = tex->normalisedCoord(VertexType(tw-right,0));
-    this->texCoordData[15] = tex->normalisedCoord(VertexType(tw, 0));
     
     // and since the input rect defines the geometry and we built it zero based up to here,
     // we need to add the origin of the input rect to all previously calculated vertices
@@ -127,14 +132,7 @@ struct ScaleGrid : public MESHTYPE
     // first the top left tri, then the bottom right one
     // top left starts with top left corner of quad,
     // bottom right starts with bottom left corner of the quad
-    // all tris counterclockwise
-/*    this->indexData[0] = 0;
-    this->indexData[1] = 4;
-    this->indexData[2] = 1;
-    this->indexData[3] = 4;
-    this->indexData[4] = 5;
-    this->indexData[5] = 1;*/
-        
+    // all tris counterclockwise        
     this->indexData[0] = 0;
     this->indexData[1] = 4;
     this->indexData[2] = 1;
@@ -239,9 +237,10 @@ struct ScaleGrid : public MESHTYPE
                                                        float left,
                                                        float right,
                                                        float top,
-                                                       float bottom)
+                                                       float bottom,
+                                                       bool flip)
   {
-    return lost::shared_ptr<ScaleGrid<MESHTYPE> >(new ScaleGrid<MESHTYPE>(tex, rect, left, right, top, bottom));
+    return lost::shared_ptr<ScaleGrid<MESHTYPE> >(new ScaleGrid<MESHTYPE>(tex, rect, left, right, top, bottom, flip));
   }
 };
 

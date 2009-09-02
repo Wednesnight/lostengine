@@ -37,8 +37,13 @@ return dcl.guiro:Screen
       dcl.guiro:Image
       {
         id = "image1",
-        bounds = Bounds(xabs(10), yabs(10), wabs(150), habs(75)),
+        bounds = Bounds(xabs(10), yabs(100), wabs(150), habs(75)),
         filename = "stubs.jpg",
+      },
+      dcl.guiro:Button
+      {
+        id="button1",
+        bounds = Bounds(xabs(10), yabs(200), wabs(50), habs(30))
       }
     },
     dcl.guiro:Window

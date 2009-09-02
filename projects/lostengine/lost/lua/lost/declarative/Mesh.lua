@@ -83,8 +83,10 @@ function Mesh:ScaleGrid2D(def)
   if def.right == nil then error("needs right",2) end
   if def.top == nil then error("needs top",2) end
   if def.bottom == nil then error("needs bottom",2) end
+  local flip = false
+  if def.flip ~= nil then flip = def.flip end
 
-  local result = lost.mesh.ScaleGrid2D.create(def.texture, def.rect, def.left, def.right, def.top, def.bottom)
+  local result = lost.mesh.ScaleGrid2D.create(def.texture, def.rect, def.left, def.right, def.top, def.bottom, flip)
   if def.transform ~= nil then
     result.transform = def.transform
   end
