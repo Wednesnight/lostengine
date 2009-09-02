@@ -6,9 +6,9 @@
 #include "user.xcconfig"
 
 // Architectures
-ARCHS = $(ARCHS_STANDARD_32_BIT)
-ONLY_ACTIVE_ARCH = NO
-VALID_ARCHS = i386 armv6
+ARCHS = $(NATIVE_ARCH_ACTUAL)
+ONLY_ACTIVE_ARCH = YES
+VALID_ARCHS = x86_64 armv6
 
 // thirdparty defines
 THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"

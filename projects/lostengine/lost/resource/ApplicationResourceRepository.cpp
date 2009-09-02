@@ -4,12 +4,17 @@
 
 namespace lost
 {
-namespace resource
-{
-ApplicationResourceRepository::ApplicationResourceRepository()
-: FilesystemRepository(platform::getResourcePath())
-{
-}
+  namespace resource
+  {
+    ApplicationResourceRepository::ApplicationResourceRepository()
+    : FilesystemRepository(platform::getResourcePath())
+    {
+    }
 
-}
+    ApplicationResourceRepositoryPtr ApplicationResourceRepository::create()
+    {
+      return ApplicationResourceRepositoryPtr(new ApplicationResourceRepository());
+    }
+    
+  }
 }

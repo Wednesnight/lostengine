@@ -37,7 +37,7 @@ return dcl.rg:Node
     {
       font = dcl.font:TrueTypeFont
              {
-                filename = "Vera.ttf",
+                filename = "lost/guiro/themes/default/resources/Vera.ttf",
                 atlasSize = Vec2(128,64)
              },
       text = "Drop tasklet directory to get started!",

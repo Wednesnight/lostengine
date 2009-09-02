@@ -5,14 +5,17 @@
 
 namespace lost
 {
-namespace resource
-{
+  namespace resource
+  {
+    struct ApplicationResourceRepository;
+    typedef lost::shared_ptr<ApplicationResourceRepository> ApplicationResourceRepositoryPtr;
 
-struct ApplicationResourceRepository : public FilesystemRepository
-{
-  ApplicationResourceRepository();
-};
-}
+    struct ApplicationResourceRepository : public FilesystemRepository
+    {
+      ApplicationResourceRepository();
+      static ApplicationResourceRepositoryPtr create();
+    };
+  }
 }
 
 #endif
