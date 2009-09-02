@@ -27,7 +27,7 @@ namespace lost
       int result = EXIT_SUCCESS;
       try
       {
-        static ApplicationPtr app = Application::create(TaskletPtr(t));
+        static ApplicationPtr app = Application::create(t);
         app->run();      
       }
       catch (std::exception& e)
@@ -69,7 +69,7 @@ namespace lost
       
       if (vm.count("scriptname"))
       {
-        TaskletPtr tasklet(new Tasklet(loader));
+        Tasklet* tasklet = new Tasklet(loader);
         tasklet->scriptname = vm["scriptname"].as<std::string>();
         addTasklet(tasklet);
       }
@@ -77,7 +77,7 @@ namespace lost
       initialize();
     }
     
-    Application::Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader)
+    Application::Application(Tasklet* tasklet, resource::LoaderPtr inLoader)
     {
       if(!inLoader)
         inLoader.reset(new DefaultLoader());
@@ -91,7 +91,7 @@ namespace lost
       if(!inLoader)
         inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
-      TaskletPtr tasklet(new Tasklet(loader));
+      Tasklet* tasklet = new Tasklet(loader);
       tasklet->scriptname = inScript;
       addTasklet(tasklet);
       initialize();
@@ -119,7 +119,7 @@ namespace lost
       return lost::shared_ptr<Application>(new Application(argn, args));
     }
     
-    lost::shared_ptr<Application> Application::create(const TaskletPtr& tasklet)
+    lost::shared_ptr<Application> Application::create(Tasklet* tasklet)
     {
       return lost::shared_ptr<Application>(new Application(tasklet));
     }
@@ -131,11 +131,16 @@ namespace lost
 
     Application::~Application()
     {
+      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      {
+        delete *tasklet;
+      }
+      tasklets.clear();
     }
 
     void Application::startup(ApplicationEventPtr& event)
     {
-      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         (*tasklet)->init();
         (*tasklet)->start();
@@ -143,7 +148,7 @@ namespace lost
       running = true;
     }
     
-    void Application::addTasklet(const TaskletPtr& tasklet)
+    void Application::addTasklet(Tasklet* tasklet)
     {
       tasklet->eventDispatcher->addEventListener(QueueEvent::QUEUE(), event::receive<QueueEvent>(bind(&Application::queueEvent, this, _1)));
       tasklet->eventDispatcher->addEventListener(ProcessEvent::PROCESS(), event::receive<ProcessEvent>(bind(&Application::processEvents, this, _1)));
@@ -158,7 +163,7 @@ namespace lost
     void Application::quitHandler(ApplicationEventPtr& event)
     {
       running = false;
-      for (std::list<TaskletPtr>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         if ((*tasklet)->alive())
         {
@@ -167,17 +172,16 @@ namespace lost
           (*tasklet)->wait();
         }
       }
-      tasklets.clear();
       shutdown();
     }
 
     void Application::removeTasklet(Tasklet * tasklet)
     {
-      std::list<TaskletPtr>::iterator t_end = tasklets.end();
-      std::list<TaskletPtr>::iterator t_iter = tasklets.begin();
+      std::list<Tasklet*>::iterator t_end = tasklets.end();
+      std::list<Tasklet*>::iterator t_iter = tasklets.begin();
       for ( ; t_iter != t_end ; ++t_iter)
       {
-        if (tasklet == t_iter->get()) {
+        if (tasklet == *t_iter) {
           break;
         }
       }
@@ -187,23 +191,26 @@ namespace lost
         return;
       }
 
+      delete *t_iter;
       tasklets.erase(t_iter);
     }
 
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
     {
-      addTasklet(TaskletPtr(new Tasklet(event->loader)));
+      addTasklet(new Tasklet(event->loader));
     }
 
     void Application::taskletDone(const TaskletEventPtr& event)
     {
       DOUT("End of tasklet: " << event->tasklet->scriptname);
-      // FIXME: we have to do this on the mainthread, otherwise the thread blocks on its own signal
-      //removeTasklet(tasklet);
+      removeTasklet(event->tasklet);
       bool haveActiveTasklets = false;
-      for (std::list<TaskletPtr>::iterator idx = tasklets.begin(); !running && idx != tasklets.end(); ++idx)
-        haveActiveTasklets = (idx->get() != event->tasklet) && (*idx)->alive();
+      for (std::list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)
+      {
+        haveActiveTasklets = (*idx)->alive();
+        if (haveActiveTasklets) break;
+      }
       if (!haveActiveTasklets)
       {
         DOUT("Last tasklet died, terminating.");

@@ -17,7 +17,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Tasklet, TaskletPtr>("Tasklet")
+          class_<Tasklet>("Tasklet")
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
         ]
       ];

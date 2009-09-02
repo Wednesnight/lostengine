@@ -14,12 +14,6 @@ namespace lost
       initialize();
     }
 
-    lost::shared_ptr<Window> Window::create(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
-                                             const WindowParams& inParams)
-    {
-      return lost::shared_ptr<Window>(new Window(inDispatcher, inParams));
-    }
-
     Window::~Window()
     {
       finalize();

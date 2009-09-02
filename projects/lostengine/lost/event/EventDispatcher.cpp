@@ -69,6 +69,11 @@ namespace lost
       }
     }
 
+    void EventDispatcher::wakeup()
+    {
+      // queue dummy event to get waitForEvents() to return
+      queueEvent(EventPtr(new Event("")));
+    }
     
     void EventDispatcher::queueEvent(const lost::shared_ptr<lost::event::Event>& event)
     {

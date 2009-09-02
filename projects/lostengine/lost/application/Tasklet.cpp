@@ -12,6 +12,8 @@
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
+#include "lost/application/WindowEvent.h"
+#include "lost/event/Receive.h"
 
 using namespace boost;
 using namespace fhtagn::threads;
@@ -46,7 +48,17 @@ namespace lost
     
     Tasklet::~Tasklet()
     {
+      // first: clear the dispatcher/callbacks and cleanup all lua callback resources
       eventDispatcher->clear();
+      luabind::object nil;
+      luaStartup = nil;
+      luaUpdate = nil;
+      luaShutdown = nil;
+      luaProcessCallLater = nil;
+      // second: reset lua state to cleanup all references back into native code
+      lua.reset();
+      // third: cleanup remaining resources
+      if (window) delete window;
     }
 
     void Tasklet::init()
@@ -69,7 +81,8 @@ namespace lost
       if(obj)
       {
         windowParams=object_cast<WindowParams>(obj);
-        window = Window::create(eventDispatcher, windowParams);
+        window = new Window(eventDispatcher, windowParams);
+        window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(bind(&Tasklet::closeWindow, this, _1)));
         window->open();        
       }
             
@@ -117,13 +130,13 @@ namespace lost
         shutdown();
       }
       threadAutoreleasePoolHack_drainPool(pool);        
-      eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
     void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
     {
       EOUT(exception.what());
-      eventDispatcher->dispatchEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
     }
 
     bool Tasklet::startup()
@@ -131,7 +144,7 @@ namespace lost
       bool result = true;
       if(hasLuaStartup)
       {
-        result = call_function<bool>(luaStartup, shared_from_this());
+        result = call_function<bool>(luaStartup, this);
       }
       if(hasLuaProcessCallLater)
       {
@@ -145,7 +158,7 @@ namespace lost
       bool result = true;
       if(hasLuaUpdate)
       {
-        result = call_function<bool>(luaUpdate, shared_from_this());
+        result = call_function<bool>(luaUpdate, this);
       }
       if(hasLuaProcessCallLater)
       {
@@ -159,7 +172,7 @@ namespace lost
       bool result = true;
       if(hasLuaShutdown)
       {
-        result = call_function<bool>(luaShutdown, shared_from_this());
+        result = call_function<bool>(luaShutdown, this);
       }
       if(hasLuaProcessCallLater)
       {
@@ -176,7 +189,17 @@ namespace lost
 
     bool Tasklet::stop()
     {
-      return ::fhtagn::threads::tasklet::stop();
+      bool result = ::fhtagn::threads::tasklet::stop();
+      if (result)
+      {
+        eventDispatcher->wakeup();
+      }
+      return result;
+    }
+
+    void Tasklet::closeWindow(WindowEventPtr event)
+    {
+      stop();
     }
 
     void Tasklet::queueApplicationEvent(EventPtr event)

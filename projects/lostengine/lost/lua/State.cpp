@@ -31,7 +31,15 @@ namespace lost
     
     State::~State()
     {
+      // cleanup all resource, that is set _G to nil and perform a full garbage collection cycle
+      luabind::object nil;
+      luabind::object _G = luabind::globals(state);
+      _G = nil;
+      lua_gc(state, LUA_GCCOLLECT, 0);
+
+      // close state
       lua_close(state);
+
       std::map<lua_State*, lost::lua::State*>::iterator pos;
       pos = stateMap.find(state);
       if(pos != stateMap.end())

@@ -279,7 +279,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Tasklet, TaskletPtr>("Tasklet")
+          class_<Tasklet>("Tasklet")
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
             .def_readonly("loader", &Tasklet::loader)
             .def_readonly("window", &Tasklet::window)
@@ -323,15 +323,11 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Window, lost::shared_ptr<Window> >("Window")
+          class_<Window>("Window")
             .def("open", &Window::open)
             .def("close", &Window::close)
             .def_readonly("context", &Window::context)
-            .def_readonly("params", &Window::params)
-            .scope
-            [
-              def("create", &Window::create)
-            ],
+            .def_readonly("params", &Window::params),
 
           class_<WindowParams, lost::shared_ptr<WindowParams> >("WindowParams")
             .def(constructor<const std::string&, const lost::math::Rect&>())

@@ -17,7 +17,7 @@
 struct FunkyFractals
 {
   lost::application::ApplicationPtr application;
-  lost::application::WindowPtr      window;
+  lost::application::Window*        window;
   lost::camera::Camera3DPtr         camera;
   lost::gl::CanvasPtr               canvas;
 

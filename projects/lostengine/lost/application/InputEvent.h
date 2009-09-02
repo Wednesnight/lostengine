@@ -10,7 +10,7 @@ namespace lost
   {
     struct InputEvent : public event::Event
     {
-      lost::shared_ptr<Window> window;
+      Window* window;
 
       InputEvent(const event::Type& inType) : Event(inType) {}
       virtual ~InputEvent() {}

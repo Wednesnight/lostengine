@@ -35,7 +35,7 @@ int main(int argn, char** args)
 {
   try
   {
-    static ApplicationPtr app = Application::create(TaskletPtr(new MyFunkyTasklet()));
+    static ApplicationPtr app = Application::create(new MyFunkyTasklet());
     app->run();  
   }
   catch (std::exception& e)
