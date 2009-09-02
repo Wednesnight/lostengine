@@ -16,7 +16,6 @@
 		3E27FE680EFAB09C00DFF147 /* LostLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */; };
 		3E35F5BD0FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		3E35F5BF0FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
-		3E35F5C10FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		3E35F5C20FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		3E376F4B0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
 		3E376F4C0E543F6F0050A5DF /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
@@ -439,11 +438,11 @@
 		8D607DDC104F06FE004818BA /* ui.lua in Resources */ = {isa = PBXBuildFile; fileRef = 8D607DD9104F06FE004818BA /* ui.lua */; };
 		8D607E05104F0860004818BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D607E04104F0860004818BA /* Cocoa.framework */; };
 		8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D607F5D104F0B0F004818BA /* down_arrow.png */; };
-		8D607F60104F0B48004818BA /* lost in Resources */ = {isa = PBXBuildFile; fileRef = 8D607F5F104F0B48004818BA /* lost */; };
 		8D77F04A0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04B0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
 		8D77F04C0F34DC1000C86FFD /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0480F34DC1000C86FFD /* Application.mm */; };
 		8D77F04D0F34DC1000C86FFD /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D77F0490F34DC1000C86FFD /* Window.mm */; };
+		8D9AB7A6104F10560036A784 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		8DA5853A0F8A4F7000A568E1 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DA585360F8A4F7000A568E1 /* operations.cpp */; };
 		8DA5853C0F8A4F7000A568E1 /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DA585380F8A4F7000A568E1 /* portability.cpp */; };
 		8DA5853D0F8A4F7000A568E1 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DA585390F8A4F7000A568E1 /* path.cpp */; };
@@ -2477,6 +2476,7 @@
 				8D607D32104F0665004818BA /* Resources */,
 				8D607D34104F0665004818BA /* Sources */,
 				8D607DC6104F0665004818BA /* Frameworks */,
+				8D9AB7C9104F16880036A784 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2565,7 +2565,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D607F60104F0B48004818BA /* lost in Resources */,
 				8D607DDB104F06FE004818BA /* main.lua in Resources */,
 				8D607DDC104F06FE004818BA /* ui.lua in Resources */,
 				8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */,
@@ -2573,6 +2572,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8D9AB7C9104F16880036A784 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3E73254C0E5CE3A4000FF838 /* Sources */ = {
@@ -3112,7 +3127,6 @@
 				3EB499C70F9FA4E800F3036A /* LostEvent.cpp in Sources */,
 				3EB499D00F9FA4F700F3036A /* LostFont.cpp in Sources */,
 				3EB499D90F9FA50600F3036A /* LostGL.cpp in Sources */,
-				3E35F5C10FA04F65007DDAB1 /* Loader.cpp in Sources */,
 				EA18C3210FA25C5600C2652A /* Node.cpp in Sources */,
 				EA8A15270FA26D7600E42FBE /* Camera.cpp in Sources */,
 				EA8A15290FA26D7600E42FBE /* Draw.cpp in Sources */,
@@ -3228,6 +3242,7 @@
 				8DB8AAEF0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
 				EACF1C6110164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7D1016517400753144 /* FilesystemRepository.cpp in Sources */,
+				8D9AB7A6104F10560036A784 /* Loader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
