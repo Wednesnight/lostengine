@@ -19,7 +19,6 @@ namespace lost
   namespace application
   {
     struct Tasklet;
-    typedef lost::shared_ptr<Tasklet> TaskletPtr;
     
     struct TaskletEvent;
     typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
@@ -57,7 +56,7 @@ namespace lost
        * list of tasklets
        * have a look at lost/application/Tasklet.h for details
        */
-      std::list<TaskletPtr> tasklets;
+      std::list<Tasklet*> tasklets;
 
       /**
        * running flag
@@ -76,7 +75,7 @@ namespace lost
        */
       Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
       Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr());
-      Application(const TaskletPtr& tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(Tasklet* tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
       Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr());
 
       /**
@@ -116,7 +115,7 @@ namespace lost
        */
       static lost::shared_ptr<Application> create();
       static lost::shared_ptr<Application> create(int argn, char** args);
-      static lost::shared_ptr<Application> create(const TaskletPtr& tasklet);
+      static lost::shared_ptr<Application> create(Tasklet* tasklet);
       static lost::shared_ptr<Application> create(const std::string& inScript);
 
       ~Application();
@@ -125,7 +124,7 @@ namespace lost
        * adds the specified tasklet
        * if the application is already running you have to take care of starting the tasklet yourself
        */
-      void addTasklet(const TaskletPtr& tasklet);
+      void addTasklet(Tasklet* tasklet);
 
       /**
        * starts all tasklets and queues a run event

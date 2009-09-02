@@ -28,6 +28,10 @@ function startup(tasklet)
   -- update needs to be called later since the ui loader code triggers quite a few deferred updates
   callLater(function() screen:updateLayout() end) 
 
+  -- running state
+  running = true
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+
 -- DEBUG    
 --  screen:printSubviews()
 --  screen.rootNode:print()
@@ -38,10 +42,17 @@ function update(tasklet)
 --	screen:updateLayout(false)
   screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
-  return true
+  return running
 end
 
 function shutdown(tasklet)
   log.debug("shutting down")
   return true
+end
+
+function keyHandler(event)
+  local keyEvent = lost.application.KeyEvent.cast(event)
+  if keyEvent.key == lost.application.K_ESCAPE then
+    running = false
+  end
 end

@@ -12,13 +12,12 @@ namespace lost
   namespace event { struct EventDispatcher; }
   namespace application
   {
-    struct Tasklet;
-    typedef lost::shared_ptr<Tasklet> TaskletPtr;
-
     struct Window;
-    typedef lost::shared_ptr<Window> WindowPtr;
+
+    struct WindowEvent;
+    typedef lost::shared_ptr<WindowEvent> WindowEventPtr;
   
-    struct Tasklet : public fhtagn::threads::tasklet, public lost::enable_shared_from_this<Tasklet>
+    struct Tasklet : public fhtagn::threads::tasklet
     {
     private:
       bool scriptLoaded; // tru if 'main.lua' was successfully loaded
@@ -42,7 +41,7 @@ namespace lost
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;
       WindowParams                    windowParams; // fill this structure with the necessary params if you want a window with GL context
-      WindowPtr                       window; // contains the window pointer after init() if it could be created
+      Window*                         window; // contains the window pointer after init() if it could be created
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;
@@ -58,6 +57,8 @@ namespace lost
 
       virtual bool start(); 
       virtual bool stop();
+
+      void closeWindow(WindowEventPtr event);
 
       void queueApplicationEvent(event::EventPtr event);
       void dispatchApplicationEvent(event::EventPtr event);

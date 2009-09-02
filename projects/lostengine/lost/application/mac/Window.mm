@@ -9,6 +9,7 @@
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeyCode.h"
 #include "lost/application/DropEvent.h"
+#include "lost/application/WindowEvent.h"
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 
@@ -43,7 +44,7 @@
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
 {
   NSPasteboard* pboard = [sender draggingPasteboard];
-  if ([[pboard types] containsObject:NSURLPboardType])
+  if ([[pboard types] containsObject:NSURLPboardType] && parent)
   {
     NSURL *fileURL = [NSURL URLFromPasteboard:pboard];
     NSString* relativePath = [fileURL relativePath];
@@ -73,7 +74,12 @@
 
 - (void) windowWillClose: (NSNotification *)notification
 {
-  // TODO: add windowWillClose event
+  if (parent)
+  {
+    lost::shared_ptr<lost::application::WindowEvent> windowEvent(new lost::application::WindowEvent(
+        lost::application::WindowEvent::CLOSE(), parent));
+    parent->dispatcher->queueEvent(windowEvent);
+  }
 }
 
 - (void)setParent: (lost::application::Window*)newParent
@@ -170,7 +176,7 @@
   if (parent)
   {
     lost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
-    keyEvent->window    = parent->shared_from_this();
+    keyEvent->window    = parent;
     keyEvent->key       = [self translateKeyCode: [event keyCode]];
     // TODO: UTF character
     keyEvent->character = [[event characters] UTF8String];
@@ -240,7 +246,7 @@
     lost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];
     NSPoint abs = [NSEvent mouseLocation];
-    mouseEvent->window  = parent->shared_from_this();
+    mouseEvent->window  = parent;
     mouseEvent->pos     = lost::math::Vec2(rel.x, rel.y);
     mouseEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
     mouseEvent->button  = [self translateMouseButton: [event buttonNumber]];
@@ -336,6 +342,7 @@ namespace lost
                                styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
                                backing: NSBackingStoreBuffered
                                defer: NO];
+
       // set params
       [hiddenMembers->window setParent: this];
       [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:params.caption.c_str()]];
@@ -352,9 +359,11 @@ namespace lost
     void Window::finalize()
     {
       DOUT("Window::finalize()");
-      // FIXME: cleanup!
-      [hiddenMembers->window release];
+      [hiddenMembers->window setParent: NULL];
+      
+      context.reset();
       [hiddenMembers->view release];
+      [hiddenMembers->window release];
       delete hiddenMembers;
     }
 

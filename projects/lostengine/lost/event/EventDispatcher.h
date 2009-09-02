@@ -48,6 +48,10 @@ namespace lost
        * returns if at least one event was queued
        */
       void waitForEvents();
+      /**
+       * cancells waitForEvents()
+       */
+      void wakeup();
 
       /**
        * call this to queue the given event. will be dispatched when processEvents() is called

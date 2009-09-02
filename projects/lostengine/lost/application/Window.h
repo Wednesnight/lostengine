@@ -9,9 +9,6 @@ namespace lost
 {
   namespace application
   {
-    struct Window;
-    typedef lost::shared_ptr<Window> WindowPtr;
-      
     
     struct WindowParams
     {
@@ -32,7 +29,7 @@ namespace lost
       }
     };
 
-    struct Window : public lost::enable_shared_from_this<Window>
+    struct Window
     {
     private:
       /**
@@ -47,12 +44,6 @@ namespace lost
       void initialize();
       void finalize();
 
-      /**
-       * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
-       * otherwise shared_from_this() will fail!
-       */
-      Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
-             const WindowParams& inParams);
     public:
       /**
        * the target for all events received by the window (typically key/mouse events)
@@ -70,11 +61,8 @@ namespace lost
        */
       WindowParams params;
       
-      /**
-       * static ctor helpers, make sure that we're held by a lost::shared_ptr
-       */
-      static lost::shared_ptr<Window> create(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
-                                              const WindowParams& inParams);
+      Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+             const WindowParams& inParams);
       ~Window();
 
       /**
