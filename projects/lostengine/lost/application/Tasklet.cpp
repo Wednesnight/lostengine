@@ -90,6 +90,7 @@ namespace lost
       hasLuaStartup = false;
       hasLuaUpdate = false;
       hasLuaShutdown = false;
+      hasLuaProcessCallLater = false;
       luaStartup = lua->globals["startup"];
       if(luabind::type(luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
       luaUpdate = lua->globals["update"];
