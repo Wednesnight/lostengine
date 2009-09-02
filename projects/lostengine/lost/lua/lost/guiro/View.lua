@@ -20,7 +20,6 @@ lost.common.Class "lost.guiro.View"
 	parent = nil,
 
   focusable = false,
-  hidden = false,
   mouseInside = false,
   receivesEvents = true,
 --  sendsEvents = true ????
@@ -360,6 +359,16 @@ function View:printSubviews(prefix)
   for k,view in next,self.subviews do
     view:printSubviews(prefix .."    ")
   end
+end
+
+function View:hidden(val)
+	if val ~= nil then
+		if self.rootNode then
+			self.rootNode.active = val
+		end
+	else
+		return not self.rootNode.active
+	end
 end
 
 --[[
