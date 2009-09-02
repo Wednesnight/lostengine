@@ -56,5 +56,4 @@ function fileDropHandler(event)
   loader:addRepository(FilesystemRepository.create(event.filename))
   loader:addRepository(ApplicationResourceRepository.create())
   lostengineTasklet:dispatchApplicationEvent(SpawnTaskletEvent(loader))
-  log.debug("done")
 end
