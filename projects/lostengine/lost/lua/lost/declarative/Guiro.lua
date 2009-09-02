@@ -63,6 +63,8 @@ function Guiro:assignImageAttributes(target, source)
   if source.texture  ~= nil then target:texture(source.texture) end
   if source.scale  ~= nil then target:scale(source.scale) end
   if source.caps  ~= nil then target:caps(source.caps) end
+  if source.filter  ~= nil then target:filter(source.filter) end
+  if source.flip  ~= nil then target:flip(source.flip) end
 end
 
 function Guiro:assignButtonAttributes(target, source)
