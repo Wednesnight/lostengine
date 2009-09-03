@@ -8,6 +8,7 @@ require("lost.guiro.View")
 require("lost.guiro.Label")
 require("lost.guiro.Image")
 require("lost.guiro.Button")
+require("lost.guiro.Scrollbar")
 require("lost.guiro.VBox")
 require("lost.guiro.HBox")
 require("lost.guiro.ThemeManager")
@@ -69,6 +70,10 @@ end
 
 function Guiro:assignButtonAttributes(target, source)
 	if source.title ~= nil then target:title(source.title) end
+end
+
+function Guiro:assignScrollbarAttributes(target, source)
+  if source.orientation ~= nil then target:orientation(source.orientation) end
 end
 
 function Guiro:assignVBoxAttributes(target, source)
@@ -185,6 +190,16 @@ function Guiro:HBox(def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:assignHBoxAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:Scrollbar(def)
+  local result = lost.guiro.Scrollbar()
+  self:applyStyle(result, def)
+  -- don't allow scrollbar subviews
+  self:assignViewAttributes(result, def) 
+  self:assignScrollbarAttributes(result, def)   
   self:addEventListeners(result, def)
   return result
 end
