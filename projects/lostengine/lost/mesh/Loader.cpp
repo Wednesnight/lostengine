@@ -75,10 +75,10 @@ namespace lost
        * count vertices
        */
       unsigned int vertexCount = 0;
-      rule<> vertexCount_p = (ch_p('v') >> +space_p >>
-                                real_p >> +space_p >>
-                                real_p >> +space_p >>
-                                real_p >> !(+space_p >> real_p) >> *(space_p - eol_p) >> 
+      rule<> realTriple =  real_p >> +space_p >> real_p >> +space_p >> real_p;
+      rule<> optionalReal = !(+space_p >> real_p);
+      rule<> zeroOrMoreSpacesToEol = *(space_p - eol_p);
+      rule<> vertexCount_p = (ch_p('v') >> +space_p >> realTriple >> optionalReal >> zeroOrMoreSpacesToEol >> 
                               eol_p)[increment_a(vertexCount)];
       BOOST_SPIRIT_DEBUG_NODE(vertexCount_p);
 
