@@ -20,5 +20,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleIconFile</key>
+	<string>LostEngine.icns</string>
 </dict>
 </plist>

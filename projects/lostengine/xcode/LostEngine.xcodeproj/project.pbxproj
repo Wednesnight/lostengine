@@ -1085,6 +1085,7 @@
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
+		EA98BCA4104FEB94006CACA8 /* LostEngine.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA98BCA3104FEB94006CACA8 /* LostEngine.icns */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		EA9A67ED0F159C52007E8A3D /* prefix-shared.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A67EA0F159C51007E8A3D /* prefix-shared.h */; };
 		EA9A67F00F159C52007E8A3D /* prefix-shared.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9A67EA0F159C51007E8A3D /* prefix-shared.h */; };
@@ -1504,6 +1505,7 @@
 		EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostRg.cpp; path = bindings/LostRg.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
+		EA98BCA3104FEB94006CACA8 /* LostEngine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = LostEngine.icns; path = ../LostEngine.icns; sourceTree = SOURCE_ROOT; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
 		EA9A67EA0F159C51007E8A3D /* prefix-shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-shared.h"; sourceTree = "<group>"; };
 		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-release.pch"; sourceTree = "<group>"; };
@@ -1716,6 +1718,7 @@
 				8D607DD8104F06FE004818BA /* main.lua */,
 				8D607DD9104F06FE004818BA /* ui.lua */,
 				8D607F5D104F0B0F004818BA /* down_arrow.png */,
+				EA98BCA3104FEB94006CACA8 /* LostEngine.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2568,6 +2571,7 @@
 				8D607DDB104F06FE004818BA /* main.lua in Resources */,
 				8D607DDC104F06FE004818BA /* ui.lua in Resources */,
 				8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */,
+				EA98BCA4104FEB94006CACA8 /* LostEngine.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
