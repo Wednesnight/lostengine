@@ -68,7 +68,7 @@ function Guiro:assignImageAttributes(target, source)
 end
 
 function Guiro:assignButtonAttributes(target, source)
-	
+	if source.title ~= nil then target:title(source.title) end
 end
 
 function Guiro:assignVBoxAttributes(target, source)
