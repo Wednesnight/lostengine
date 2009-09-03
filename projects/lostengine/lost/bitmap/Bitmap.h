@@ -7,8 +7,6 @@
 #include "lost/math/Rect.h"
 #include "lost/platform/shared_ptr.h"
 
-namespace boost { template<typename T> class shared_ptr; }
-
 namespace lost
 {
   namespace resource{ struct File; };

@@ -17,9 +17,9 @@ namespace lost
     {
     }
 
-    lost::shared_ptr<lost::resource::File> Loader::load( const boost::filesystem::path& inPath)
+    FilePtr Loader::load( const boost::filesystem::path& inPath)
     {
-      lost::shared_ptr<lost::resource::File> result;
+      FilePtr result;
 
       // FIXME: determine failed loads by counting load attempts.
       //        if we finish the loops with zero successful loads, throw an exception.
