@@ -21,7 +21,7 @@ function processCallLaterQueue()
     callLaterCheck[func] = nil
     num = num +1
   end
-  if num > 0 then
+--[[  if num > 0 then
     log.debug("processed "..num.." functions in callLaterQueue")
-  end
+  end]]
 end

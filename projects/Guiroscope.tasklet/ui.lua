@@ -54,11 +54,21 @@ return dcl.guiro:Screen
       },
       dcl.guiro:Button
       {
-        id="button1",
-        bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30))
+        bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30)),
+        title = "klein",
+      },
+      dcl.guiro:Button
+      {
+        bounds = Bounds(xabs(50), yabs(240), wabs(100), habs(25)),
+        title = "riesig",
+        listeners = 
+        {
+          mouseEnter = function(event) event.target:title("RIESIG") end,
+          mouseLeave = function(event) event.target:title("riesig") end
+        }
       }
     },
---[[    dcl.guiro:Window
+    dcl.guiro:Window
     {
       id = "window2",
       bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
@@ -190,7 +200,7 @@ return dcl.guiro:Screen
   			}				
 			}
     }
-    ]]
+    
   }
 }
 

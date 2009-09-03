@@ -21,7 +21,7 @@ function Button:constructor()
 	self._states[Button.STATE_PUSHED] = {}
 	self._states[Button.STATE_DISABLED] = {}
 	self._disabled = false
-	
+	self._title = ""
 	self.deferredUpdateViewOrder = function() 
 	  self:updateViewOrder()
 	end
@@ -53,7 +53,6 @@ function Button:mouseDown(event)
 end
 
 function Button:mouseUp(event)
-  log.debug("----------- sending event")
   self._state = Button.STATE_HOVER
   callLater(self.deferredUpdateViewVisibility)  
   local clickEvent = lost.guiro.event.Event("buttonClick")
@@ -135,5 +134,16 @@ function Button:state(newState)
     callLater(self.deferredUpdateViewVisibility)
   else
     return self._state
+  end
+end
+
+function Button:title(txt)
+  if txt ~= nil then
+    for k,stateName in pairs(self._allStates) do
+      local l = self._states[stateName].label
+      if l then l:text(txt) end
+    end
+  else
+    return self._title
   end
 end
