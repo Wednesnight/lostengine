@@ -1,6 +1,7 @@
 #include "lost/resource/File.h"
 #include "lost/resource/Helper.h"
 #include <fstream>
+#include <stdexcept>
 
 namespace lost
 {
