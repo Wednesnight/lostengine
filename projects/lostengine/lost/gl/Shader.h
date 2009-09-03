@@ -3,8 +3,6 @@
 
 #include "lost/gl/gl.h"
 #include <string>
-#include <boost/scoped_ptr.hpp>
-#include <boost/scoped_array.hpp>
 
 namespace lost
 {
@@ -46,11 +44,10 @@ struct Shader
   std::string log()
   {
     GLint size = param(GL_INFO_LOG_LENGTH);
-    boost::scoped_array<char> buffer;
     std::string result;
     if(size > 0)
     {
-      boost::scoped_array<char> buffer(new char[size]);
+      shared_array<char> buffer(new char[size]);
       GLsizei length = 0;
       glGetShaderInfoLog(shader, size, &length, buffer.get());GLDEBUG_THROW;
       result = std::string(buffer.get(), buffer.get()+length);

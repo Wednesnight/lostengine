@@ -4,8 +4,6 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "stb_image.h"
-#include <boost/scoped_ptr.hpp>
-#include <boost/scoped_array.hpp>
 #include "lost/common/DisplayAttributes.h"
 #include "lost/lgl/lglu.h"
 #include "lost/bitmap/Bitmap.h"

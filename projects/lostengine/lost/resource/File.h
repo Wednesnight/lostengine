@@ -3,7 +3,6 @@
 
 #include <string>
 #include "lost/platform/shared_ptr.h"
-#include <boost/shared_array.hpp>
 #include <boost/cstdint.hpp>
 
 namespace lost
@@ -15,7 +14,7 @@ namespace resource
 
   struct File
   {
-    boost::shared_array<char> data;
+    lost::shared_array<char> data;
     boost::uint32_t           size;
     std::string               location;
     

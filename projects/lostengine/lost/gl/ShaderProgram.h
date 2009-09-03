@@ -249,11 +249,10 @@ public:
   std::string log()
   {
     GLint size = param(GL_INFO_LOG_LENGTH);
-    boost::scoped_array<char> buffer;
     std::string result;
     if(size > 0)
     {
-      boost::scoped_array<char> buffer(new char[size]);
+      shared_array<char> buffer(new char[size]);
       GLsizei length = 0;
       glGetProgramInfoLog(program, size, &length, buffer.get());GLDEBUG_THROW;
       result = std::string(buffer.get(), buffer.get()+length);
@@ -292,7 +291,7 @@ private:
   {
     GLint numAttributes = param(GL_ACTIVE_ATTRIBUTES);
     int bufferSize = param(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);;
-    boost::scoped_ptr<char> buffer(new char[bufferSize]);
+    shared_array<char> buffer(new char[bufferSize]);
     GLint writtenBytes = 0;
     GLenum type;
     GLint size;
@@ -310,7 +309,7 @@ private:
   {
     GLint numAttributes = param(GL_ACTIVE_UNIFORMS);
     int bufferSize = param(GL_ACTIVE_UNIFORM_MAX_LENGTH);
-    boost::scoped_ptr<char> buffer(new char[bufferSize]);
+    shared_array<char> buffer(new char[bufferSize]);
     GLint writtenBytes = 0;
     GLenum type;
     GLint size;
