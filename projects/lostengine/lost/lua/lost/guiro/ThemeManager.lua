@@ -14,6 +14,7 @@ function ThemeManager:constructor(loader)
 end
 
 function ThemeManager:addTheme(theme)
+  theme.themeManager = self
   self.themes[theme.name] = theme
 end
 
