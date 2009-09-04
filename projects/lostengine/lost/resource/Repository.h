@@ -11,6 +11,9 @@ namespace lost
   struct File;
   typedef lost::shared_ptr<File> FilePtr;
 
+    struct Repository;
+    typedef lost::shared_ptr<Repository> RepositoryPtr;
+
     struct Repository
     {
       Repository() {}

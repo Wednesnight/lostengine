@@ -3,8 +3,14 @@
 
 #include <iostream>
 
-#import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
+#include <Foundation/NSThread.h>
+#include <Foundation/NSBundle.h>
+#include <Foundation/NSAutoreleasePool.h>
+#include <AppKit/NSNibLoading.h>
+#include <AppKit/NSApplication.h>
+#include <AppKit/NSMenu.h>
+#include <AppKit/NSEvent.h>
+#include <AppKit/NSCursor.h>
 
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"

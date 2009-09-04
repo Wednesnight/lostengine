@@ -9,7 +9,7 @@ namespace gl
 {
 struct VertexShader : public Shader
 {
-  VertexShader() : Shader(GL_VERTEX_SHADER) {}
+  VertexShader();
 };
 }
 }

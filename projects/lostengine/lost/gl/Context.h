@@ -14,11 +14,11 @@
 #ifndef LOST_APPLICATION_GL_CONTEXT_H
 #define LOST_APPLICATION_GL_CONTEXT_H
 
-#include "lost/gl/gl.h"
 #include "lost/math/Matrix.h"
 #include "lost/common/Color.h"
 #include "lost/platform/shared_ptr.h"
 #include <vector>
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {

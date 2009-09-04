@@ -1,8 +1,12 @@
 #include "lost/application/Window.h"
 
-#import <AGL/AGL.h>
-#import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
+//#import <Cocoa/Cocoa.h>
+#import <AppKit/NSWindow.h>
+#import <AppKit/NSOpenGL.h>
+#import <AppKit/NSOpenGLView.h>
+#import <AppKit/NSPasteBoard.h>
+#import <AppKit/NSDragging.h>
+#import <AppKit/NSEvent.h>
 
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
@@ -10,8 +14,7 @@
 #include "lost/application/KeyCode.h"
 #include "lost/application/DropEvent.h"
 #include "lost/application/WindowEvent.h"
-#include <boost/bind.hpp>
-#include <boost/function.hpp>
+#include "lost/application/ResizeEvent.h"
 
 @interface ApplicationWindow : NSWindow
 {
@@ -79,6 +82,16 @@
     lost::shared_ptr<lost::application::WindowEvent> windowEvent(new lost::application::WindowEvent(
         lost::application::WindowEvent::CLOSE(), parent));
     parent->dispatcher->queueEvent(windowEvent);
+  }
+}
+
+- (void)windowDidResize:(NSNotification *)notification
+{
+  if (parent)
+  {
+    NSRect curFrame = [self frame];
+    lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(new lost::application::ResizeEvent(curFrame.size.width, curFrame.size.height));
+    parent->dispatcher->queueEvent(resizeEvent);
   }
 }
 

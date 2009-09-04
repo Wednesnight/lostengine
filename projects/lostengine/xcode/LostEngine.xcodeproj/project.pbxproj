@@ -942,6 +942,24 @@
 		EA09071F0E6F4F7A00852256 /* LostPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */; };
 		EA0907200E6F4F7A00852256 /* LostPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */; };
 		EA09B0880F81F4A500266854 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
+		EA0F5C4A1051BB6C00545DCC /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5C491051BB6C00545DCC /* Buffer.cpp */; };
+		EA0F5C4B1051BB6C00545DCC /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5C491051BB6C00545DCC /* Buffer.cpp */; };
+		EA0F5C4C1051BB6C00545DCC /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5C491051BB6C00545DCC /* Buffer.cpp */; };
+		EA0F5CAB1051C10600545DCC /* FragmentShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */; };
+		EA0F5CAC1051C10600545DCC /* FragmentShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */; };
+		EA0F5CAD1051C10600545DCC /* FragmentShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */; };
+		EA0F5CBC1051C19600545DCC /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CBB1051C19600545DCC /* Shader.cpp */; };
+		EA0F5CBD1051C19600545DCC /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CBB1051C19600545DCC /* Shader.cpp */; };
+		EA0F5CBE1051C19600545DCC /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CBB1051C19600545DCC /* Shader.cpp */; };
+		EA0F5CC51051C24300545DCC /* ShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */; };
+		EA0F5CC61051C24300545DCC /* ShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */; };
+		EA0F5CC71051C24300545DCC /* ShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */; };
+		EA0F5CCB1051C35A00545DCC /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */; };
+		EA0F5CCC1051C35A00545DCC /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */; };
+		EA0F5CCD1051C35A00545DCC /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */; };
+		EA0F5CE01051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
+		EA0F5CE11051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
+		EA0F5CE21051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
 		EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
 		EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
@@ -1122,12 +1140,6 @@
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
-		EAD2E8930E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
-		EAD2E8940E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
-		EAD2E8950E94132F000535DB /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8920E94132F000535DB /* State.cpp */; };
-		EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
-		EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
-		EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8B40E941880000535DB /* FpsMeter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1438,6 +1450,12 @@
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatform.cpp; path = bindings/LostPlatform.cpp; sourceTree = "<group>"; };
 		EA09B0870F81F4A500266854 /* RenderBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderBuffer.cpp; sourceTree = "<group>"; };
+		EA0F5C491051BB6C00545DCC /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Buffer.cpp; sourceTree = "<group>"; };
+		EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FragmentShader.cpp; sourceTree = "<group>"; };
+		EA0F5CBB1051C19600545DCC /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderHelper.cpp; sourceTree = "<group>"; };
+		EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
+		EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexShader.cpp; sourceTree = "<group>"; };
 		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
 		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
 		EA18C3200FA25C5600C2652A /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = rg/Node.cpp; sourceTree = "<group>"; };
@@ -1521,8 +1539,6 @@
 		EACF1C6010164CB100753144 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = resource/Helper.cpp; sourceTree = "<group>"; };
 		EACF1C7C1016517400753144 /* FilesystemRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilesystemRepository.cpp; path = resource/FilesystemRepository.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
-		EAD2E8920E94132F000535DB /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		EAD2E8B40E941880000535DB /* FpsMeter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FpsMeter.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2265,7 +2281,6 @@
 		EA3B946C0E04639D00B6423B /* common */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2E8B40E941880000535DB /* FpsMeter.cpp */,
 				EA3B94720E04639D00B6423B /* Logger.cpp */,
 				EA3B94750E04639D00B6423B /* Profiler.cpp */,
 			);
@@ -2303,12 +2318,17 @@
 			children = (
 				8DFDE59D0F56D440005D3927 /* iphone */,
 				8DFDE59E0F56D446005D3927 /* mac */,
+				EA0F5C491051BB6C00545DCC /* Buffer.cpp */,
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
+				EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */,
 				EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */,
 				EA09B0870F81F4A500266854 /* RenderBuffer.cpp */,
-				EAD2E8920E94132F000535DB /* State.cpp */,
+				EA0F5CBB1051C19600545DCC /* Shader.cpp */,
+				EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */,
+				EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
+				EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */,
 			);
 			path = gl;
 			sourceTree = "<group>";
@@ -2624,8 +2644,6 @@
 				EA7BE18C0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA0907200E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87E0E94104F000535DB /* Context.cpp in Sources */,
-				EAD2E8950E94132F000535DB /* State.cpp in Sources */,
-				EAD2E8B70E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA9136400E994F18006884D7 /* Texture.cpp in Sources */,
 				EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D8C0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
@@ -2922,6 +2940,12 @@
 				EACF1C6310164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7F1016517400753144 /* FilesystemRepository.cpp in Sources */,
 				3EDEE3B61050158B0079BBB3 /* Scissor.cpp in Sources */,
+				EA0F5C4C1051BB6C00545DCC /* Buffer.cpp in Sources */,
+				EA0F5CAD1051C10600545DCC /* FragmentShader.cpp in Sources */,
+				EA0F5CBE1051C19600545DCC /* Shader.cpp in Sources */,
+				EA0F5CC71051C24300545DCC /* ShaderHelper.cpp in Sources */,
+				EA0F5CCD1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
+				EA0F5CE21051C6E000545DCC /* VertexShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2958,8 +2982,6 @@
 				EA7BE14A0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA09071E0E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87C0E94104F000535DB /* Context.cpp in Sources */,
-				EAD2E8930E94132F000535DB /* State.cpp in Sources */,
-				EAD2E8B50E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363E0E994F18006884D7 /* Texture.cpp in Sources */,
 				EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D8A0E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
@@ -3255,6 +3277,12 @@
 				EACF1C7D1016517400753144 /* FilesystemRepository.cpp in Sources */,
 				8D9AB7A6104F10560036A784 /* Loader.cpp in Sources */,
 				3EDEE3B41050158B0079BBB3 /* Scissor.cpp in Sources */,
+				EA0F5C4A1051BB6C00545DCC /* Buffer.cpp in Sources */,
+				EA0F5CAB1051C10600545DCC /* FragmentShader.cpp in Sources */,
+				EA0F5CBC1051C19600545DCC /* Shader.cpp in Sources */,
+				EA0F5CC51051C24300545DCC /* ShaderHelper.cpp in Sources */,
+				EA0F5CCB1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
+				EA0F5CE01051C6E000545DCC /* VertexShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3435,8 +3463,6 @@
 				EA7BE16B0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA09071F0E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87D0E94104F000535DB /* Context.cpp in Sources */,
-				EAD2E8940E94132F000535DB /* State.cpp in Sources */,
-				EAD2E8B60E941880000535DB /* FpsMeter.cpp in Sources */,
 				EA91363F0E994F18006884D7 /* Texture.cpp in Sources */,
 				EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */,
 				3E3B3D880E9D5E2800DD2D4E /* Camera2D.cpp in Sources */,
@@ -3733,6 +3759,12 @@
 				EACF1C6210164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7E1016517400753144 /* FilesystemRepository.cpp in Sources */,
 				3EDEE3B51050158B0079BBB3 /* Scissor.cpp in Sources */,
+				EA0F5C4B1051BB6C00545DCC /* Buffer.cpp in Sources */,
+				EA0F5CAC1051C10600545DCC /* FragmentShader.cpp in Sources */,
+				EA0F5CBD1051C19600545DCC /* Shader.cpp in Sources */,
+				EA0F5CC61051C24300545DCC /* ShaderHelper.cpp in Sources */,
+				EA0F5CCC1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
+				EA0F5CE11051C6E000545DCC /* VertexShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

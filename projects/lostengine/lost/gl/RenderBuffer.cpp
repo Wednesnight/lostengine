@@ -1,4 +1,7 @@
-#include "lost/gl/RenderBuffer.h"#ifndef LOST_GL_RENDERBUFFER_H
+#include "lost/gl/RenderBuffer.h"
+
+#include "lost/lgl/lgl.h"
+#include "lost/gl/Utils.h"
 
 namespace lost
 {
@@ -9,6 +12,16 @@ RenderBuffer::RenderBuffer()
 {
   lglGenRenderbuffers(1, &buffer);GLDEBUG_THROW;
 }
+
+GLint RenderBuffer::width() { return param(LGL_RENDERBUFFER_WIDTH); }
+GLint RenderBuffer::height() { return param(LGL_RENDERBUFFER_HEIGHT); }
+GLint RenderBuffer::internalFormat() { return param(LGL_RENDERBUFFER_INTERNAL_FORMAT); }
+GLint RenderBuffer::redSize() { return param(LGL_RENDERBUFFER_RED_SIZE); }
+GLint RenderBuffer::greenSize() { return param(LGL_RENDERBUFFER_GREEN_SIZE); }
+GLint RenderBuffer::blueSize() { return param(LGL_RENDERBUFFER_BLUE_SIZE); }
+GLint RenderBuffer::alphaSize() { return param(LGL_RENDERBUFFER_ALPHA_SIZE); }
+GLint RenderBuffer::depthSize() { return param(LGL_RENDERBUFFER_DEPTH_SIZE); }
+GLint RenderBuffer::stencilSize() { return param(LGL_RENDERBUFFER_STENCIL_SIZE); }
 
 void RenderBuffer::enable()
 {

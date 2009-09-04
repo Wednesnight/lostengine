@@ -1,12 +1,11 @@
 #ifndef LOST_GL_UTILS_H
 #define LOST_GL_UTILS_H
 
-#include "lost/gl/gl.h"
 #include <string>
 #include <boost/lexical_cast.hpp>
 #include <stdexcept>
 #include "lost/common/Logger.h"
-
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {

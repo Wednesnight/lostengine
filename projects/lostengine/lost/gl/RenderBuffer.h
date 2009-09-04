@@ -1,8 +1,7 @@
 #ifndef LOST_GL_RENDERBUFFER_H
 #define LOST_GL_RENDERBUFFER_H
 
-#include "lost/lgl/lgl.h"
-#include "lost/gl/Utils.h"
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {
@@ -22,15 +21,15 @@ struct RenderBuffer
   void disable();
   void storage(GLenum inInternalFormat, GLsizei inWidth, GLsizei inHeight);
 
-  GLint width() { return param(LGL_RENDERBUFFER_WIDTH); }
-  GLint height() { return param(LGL_RENDERBUFFER_HEIGHT); }
-  GLint internalFormat() { return param(LGL_RENDERBUFFER_INTERNAL_FORMAT); }
-  GLint redSize() { return param(LGL_RENDERBUFFER_RED_SIZE); }
-  GLint greenSize() { return param(LGL_RENDERBUFFER_GREEN_SIZE); }
-  GLint blueSize() { return param(LGL_RENDERBUFFER_BLUE_SIZE); }
-  GLint alphaSize() { return param(LGL_RENDERBUFFER_ALPHA_SIZE); }
-  GLint depthSize() { return param(LGL_RENDERBUFFER_DEPTH_SIZE); }
-  GLint stencilSize() { return param(LGL_RENDERBUFFER_STENCIL_SIZE); }
+  GLint width();
+  GLint height();
+  GLint internalFormat();
+  GLint redSize();
+  GLint greenSize();
+  GLint blueSize();
+  GLint alphaSize();
+  GLint depthSize();
+  GLint stencilSize();
 
   GLint param(GLenum paramName);
 

@@ -1,7 +1,7 @@
 #ifndef LOST_GL_TRAITSSELECTOR_H
 #define LOST_GL_TRAITSSELECTOR_H
 
-#include "lost/gl/gl.h"
+#include "lost/gl/gltypes.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"

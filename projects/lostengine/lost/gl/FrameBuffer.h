@@ -1,8 +1,7 @@
 #ifndef LOST_GL_FRAMEBUFFER_H
 #define LOST_GL_FRAMEBUFFER_H
 
-#include "lost/gl/gl.h"
-#include "lost/gl/Utils.h"
+#include "lost/gl/gltypes.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
 #include <map>
@@ -50,8 +49,8 @@ namespace lost
        */
       static FrameBufferPtr createFrameBuffer(ContextPtr& ctx,
                                               const math::Vec2& size,
-                                              GLenum colorFormat=GL_RGBA, // internal format of color attachment
-                                              uint32_t bitDepth=24); // desired bitdepth of depth attachment
+                                              GLenum colorFormat, // internal format of color attachment
+                                              uint32_t bitDepth); // desired bitdepth of depth attachment
                                                                  // lower resolutions will be tried if 
 
       FrameBuffer();

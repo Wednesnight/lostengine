@@ -21,6 +21,7 @@ namespace application
     int height;
 
     ResizeEvent(const event::Type& inType) : Event(inType), width(0), height(0) { }
+    ResizeEvent(int w, int h) : Event(MAIN_WINDOW_RESIZE()), width(w), height(h) {}
     virtual ~ResizeEvent() {}
   };
 

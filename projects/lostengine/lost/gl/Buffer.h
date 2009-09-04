@@ -1,8 +1,7 @@
 #ifndef LOST_GL_BUFFER_H
 #define LOST_GL_BUFFER_H
 
-#include "lost/gl/gl.h"
-#include "lost/gl/Utils.h"
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {
@@ -16,72 +15,41 @@ struct Buffer
   GLenum type;
   unsigned long numElements; // number of verts/colors/texcoords in array
 
-  Buffer()
-  {
-    glGenBuffers(1, &buffer);GLDEBUG_THROW;
-    numElements = 0;
-  }
-
-  virtual ~Buffer()
-  {
-    glDeleteBuffers(1, &buffer);GLDEBUG;// must not throw
-  }
-
-  virtual void bind() { Buffer::bind(target); }
-  virtual void unbind() { glBindBuffer(target, 0); }
-  virtual void bufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW) {Buffer::bufferData(target, size, data, usage);}
-  virtual void bindBufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW) {bind();Buffer::bufferData(target, size, data, usage);}
-  virtual void bufferSubData(GLintptr offset,GLsizeiptr sizeInBytes,	const GLvoid* data) {Buffer::bufferSubData(target, offset, size, data);};
-  virtual void bindBufferSubData(GLintptr offset,GLsizeiptr size,	const GLvoid* data) {bind(); Buffer::bufferSubData(target, offset, size, data);};
+  Buffer();
+  virtual ~Buffer();
+  virtual void bind();
+  virtual void unbind() ;
+  virtual void bufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW) ;
+  virtual void bindBufferData(GLsizeiptr size, const GLvoid* data, GLenum usage=GL_STATIC_DRAW);
+  virtual void bufferSubData(GLintptr offset,GLsizeiptr sizeInBytes,	const GLvoid* data) ;
+  virtual void bindBufferSubData(GLintptr offset,GLsizeiptr size,	const GLvoid* data);
 
 
 //  virtual void bindIndexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();indexPointer(stride, pointer);}
-  virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();vertexPointer(stride, pointer);}
-  virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();texCoordPointer(stride, pointer);}
-  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();normalPointer(stride, pointer);}
-  virtual void bindColorPointer(GLsizei stride=0, const GLvoid* pointer=0) {bind();colorPointer(stride, pointer);}
+  virtual void bindVertexPointer(GLsizei stride=0, const GLvoid* pointer=0);
+  virtual void bindTexCoordPointer(GLsizei stride=0, const GLvoid* pointer=0);
+  virtual void bindNormalPointer(GLsizei stride=0, const GLvoid* pointer=0);
+  virtual void bindColorPointer(GLsizei stride=0, const GLvoid* pointer=0);
 
-  virtual void drawArrays(GLenum mode, GLint first=0, GLsizei count=-1)
-  {
-    if(count == -1)
-      count = numElements;
-    glDrawArrays(mode, first, count);GLDEBUG_THROW;
-  }
+  virtual void drawArrays(GLenum mode, GLint first=0, GLsizei count=-1);
 
   // indices: used as byte offset into buffer when element array is bound
-  virtual void drawElements(GLenum mode, GLsizei count=-1, const GLvoid* indices = 0)
-  {
-    if(count == -1)
-      count = numElements;
-    drawElements(mode, count, this->type, indices);
-  }
-
+  virtual void drawElements(GLenum mode, GLsizei count=-1, const GLvoid* indices = 0);
   virtual void drawElements(GLenum  	     mode,
                             GLsizei  	     count,
                             GLenum  	     inType,
-                            const GLvoid * indices)
-  {
-    glDrawElements(mode, count, inType, indices);GLDEBUG_THROW;
-  }
+                            const GLvoid * indices);
 
 #if TARGET_OPENGL
   // indices: used as byte offset into buffer when element array is bound
-  virtual void drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count=-1, const GLvoid* indices = 0)
-  {
-    if(count == -1)
-      count = numElements;
-    drawRangeElements(mode, start, end, count, this->type, indices);
-  }
+  virtual void drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count=-1, const GLvoid* indices = 0);
 
   virtual void drawRangeElements(GLenum      	  mode,
                                  GLuint         start,
                                  GLuint         end,
                                  GLsizei        count,
                                  GLenum  	      inType,
-                                 const GLvoid * indices)
-  {
-    glDrawRangeElements(mode, start, end, count, inType, indices);GLDEBUG_THROW;
-  }
+                                 const GLvoid * indices);
 #endif
 
   /**
@@ -90,10 +58,7 @@ struct Buffer
    * GL_PIXEL_PACK_BUFFER
    * GL_PIXEL_UNPACK_BUFFER
    */
-  virtual void bind(GLenum target)
-  {
-    glBindBuffer(target, buffer);GLDEBUG_THROW;
-  }
+  virtual void bind(GLenum target);
 
   /**
    * target: same targets as bind
@@ -125,18 +90,12 @@ struct Buffer
    COPY
    The data store contents are modified by reading data from the GL, and used as the source for GL drawing and image specification commands.
    */
-  virtual void bufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage)
-  {
-    glBufferData(target, size, data, usage);GLDEBUG_THROW;
-  }
+  virtual void bufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
 
   virtual void bufferSubData(GLenum  	target,
                              GLintptr  	offset,
                              GLsizeiptr  	size,
-                             const GLvoid *  	data)
-  {
-    glBufferSubData(target, offset, size, data);GLDEBUG_THROW;
-  }
+                             const GLvoid *  	data);
 
 
 /*  void indexPointer(GLsizei  	stride=0,
@@ -151,29 +110,17 @@ struct Buffer
    * stride: byte offset between consecutive vertices, default 0
    * pointer to first coord in array, default 0
    */
-  virtual void vertexPointer(GLsizei stride=0, const GLvoid* pointer=0)
-  {
-    glVertexPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  virtual void vertexPointer(GLsizei stride=0, const GLvoid* pointer=0);
 
   // size: 1,2,3 or 4
-  virtual void texCoordPointer(GLsizei stride=0, const GLvoid* pointer=0)
-  {
-    glTexCoordPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  virtual void texCoordPointer(GLsizei stride=0, const GLvoid* pointer=0);
 
   // always 3 coords?
-  virtual void normalPointer(GLsizei stride=0, const GLvoid* pointer=0)
-  {
-    glNormalPointer(type, stride, pointer);GLDEBUG_THROW;
-  }
+  virtual void normalPointer(GLsizei stride=0, const GLvoid* pointer=0);
 
   // size: 3 or 4
   // type: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE
-  virtual void colorPointer(GLsizei stride=0, const GLvoid* pointer=0)
-  {
-    glColorPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  virtual void colorPointer(GLsizei stride=0, const GLvoid* pointer=0);
 
 #if TARGET_OPENGL
   /**
@@ -182,10 +129,7 @@ struct Buffer
    * type: type of each component: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE
    * normalized: normalize fixed-point data (GL_TRUE) or directly convert to fixed point
    */
-  virtual void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride=0, const GLvoid* pointer=0)
-  {
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);GLDEBUG_THROW;
-  }
+  virtual void vertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride=0, const GLvoid* pointer=0);
 #endif
 
 };

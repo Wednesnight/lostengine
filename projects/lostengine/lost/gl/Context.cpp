@@ -1,4 +1,6 @@
 #include "lost/gl/Context.h"
+#include "lost/gl/gl.h"
+#include "lost/gl/Utils.h"
 #include "lost/lgl/lgl.h"
 #include "lost/camera/Camera.h"
 #include "lost/gl/ShaderProgram.h"
