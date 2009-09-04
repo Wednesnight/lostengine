@@ -98,7 +98,7 @@ function Label:render()
     log.warn("--------- NO FONT")
     return
   end
-  log.debug("--- HAS FONT")
+--  log.debug("--- HAS FONT")
   self._font:render(self._text, self._fontSize, self.textMesh)
   self._font:render(self._text, self._fontSize, self.shadowMesh)
   self:updateLayout(true)

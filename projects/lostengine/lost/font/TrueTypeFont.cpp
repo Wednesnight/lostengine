@@ -164,7 +164,7 @@ void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects,
 RenderedTextPtr TrueTypeFont::render(const std::string & inText,
                                 boost::uint32_t inSizeInPoints)
 {
-  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+//  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
   // Assume std::string is always utf8 encoded.
   ftxt::utf32_string decodedString;
@@ -180,7 +180,7 @@ void TrueTypeFont::render(const std::string & inText,
             boost::uint32_t inSizeInPoints,
             RenderedTextPtr target)
 {
-  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+//  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
   // Assume std::string is always utf8 encoded.
   ftxt::utf32_string decodedString;
@@ -223,7 +223,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
             boost::uint32_t inSizeInPoints,
             RenderedTextPtr target)
 {
-  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+//  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
   // used to draw the character
@@ -237,7 +237,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
     if(renderGlyph(inText[i], inSizeInPoints))
       ++renderedGlyphs;
   }
-  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
+//  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
   // rebuild atlas if any new glyphs were rendered
   if(renderedGlyphs > 0)
     rebuildTextureAtlas();

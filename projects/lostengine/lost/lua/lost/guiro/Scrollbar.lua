@@ -29,49 +29,27 @@ function Scrollbar:constructor()
 	lost.guiro.View.constructor(self)
 
   self.deferredUpdateLayout = function() self:updateLayout(true) end
-  self.deferredUpdateMoveButton = function() self:updateMoveButton() end
-  self.deferredUpdateViewHierarchy = function() self:updateViewHierarchy() end
 
-  self._upButtonClick = function(event)
-    self:value(self._value - self._stepping)
-  end
+  self.mouseMoved = function(event)
+	      if self._dragging then
+          local delta = nil
+          local boxRange = nil
+	        if self._orientation == "horizontal" then
+            delta = event.pos.x - self._dragStart.x
+	          boxRange = self._moveButtonContainer:globalRect().width
+	        elseif self._orientation == "vertical" then
+            delta = self._dragStart.y - event.pos.y
+            boxRange = self._moveButtonContainer:globalRect().height
+          else
+            error("invalid Scrollbar.orientation: ".. self._orientation)
+	        end
+          local range = math.max(1, math.abs(self._max - self._min))
+          local size = math.max(0.1, math.min(0.5, boxRange/range))
+          self:value(self._value + (((delta / boxRange) / (1 - size)) * range) + self._min)
+          self._dragStart = event.pos
+	      end
+	    end
 
-  self._moveButtonDown = function(event)
-    self._dragging = true
-    self._dragStart = event.pos
-    self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self._moveButtonMove)
-  end
-
-  self._moveButtonMove = function(event)
-    if self._dragging then
-      local delta = nil
-      local boxRange = nil
-      if self._orientation == "horizontal" then
-        delta = event.pos.x - self._dragStart.x
-        boxRange = self._moveButtonContainer:globalRect().width
-      elseif self._orientation == "vertical" then
-        delta = self._dragStart.y - event.pos.y
-        boxRange = self._moveButtonContainer:globalRect().height
-      else
-        error("invalid Scrollbar.orientation: ".. self._orientation)
-      end
-      local range = math.max(1, math.abs(self._max - self._min))
-      local size = math.max(0.1, math.min(0.5, boxRange/range))
-      self:value(self._value + (((delta / boxRange) / (1 - size)) * range) + self._min)
-      self._dragStart = event.pos
-    end
-  end
-
-  self._moveButtonUp = function(event)
-    self._dragging = false
-    self:screen():removeEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self._moveButtonMove)
-  end
-
-  self._downButtonClick = function(event)
-    self:value(self._value + self._stepping)
-  end
-
-  self._moveButtonContainer = lost.guiro.View()
 	self._orientation = "horizontal" -- possible values: "horizontal", "vertical"
   self._min = 0
   self._max = 100
@@ -80,98 +58,84 @@ function Scrollbar:constructor()
 end
 
 function Scrollbar:upButton(button)
-  if button ~= nil then
-    self._upButton = button
-    callLater(self.deferredUpdateViewHierarchy)
-  else
-    return self._upButton
-  end
+  self._upButton = button
+  self._upButton:addEventListener("buttonClick",
+      function(event)
+        self:value(self._value - self._stepping)
+      end)
 end
 
 function Scrollbar:moveButton(button)
-  if button ~= nil then
-    self._moveButton = button
-    callLater(self.deferredUpdateViewHierarchy)
-  else
-    return self._moveButton
+  if not self._moveButtonContainer then
+    self._moveButtonContainer = lost.guiro.View()
   end
+  self._moveButton = button
+  self._moveButtonContainer:addSubview(self._moveButton)
+  self._moveButton:addEventListener("mouseDown",
+      function(event)
+        self._dragging = true
+        self._dragStart = event.pos
+        self:screen():addEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoved)
+      end)
+  self._moveButton:addEventListener("mouseUp",
+      function(event)
+        self._dragging = false
+        self:screen():removeEventListener(lost.guiro.event.MouseEvent.MOUSE_MOVE, self.mouseMoved)
+      end)
 end
 
 function Scrollbar:downButton(button)
-  if button ~= nil then
-    self._downButton = button
-    callLater(self.deferredUpdateViewHierarchy)
-  else
-    return self._downButton
-  end
+  self._downButton = button
+  self._downButton:addEventListener("buttonClick",
+      function(event)
+        self:value(self._value + self._stepping)
+      end)
 end
 
 function Scrollbar:orientation(orientation)
   if orientation ~= nil then
     self._orientation = orientation
-    callLater(self.deferredUpdateViewHierarchy)
+
+    if self._box ~= nil then
+      self:removeSubview(self._box)
+      self._box = nil
+    end
+
+    if self._orientation == "horizontal" then
+    	self._downButton.bounds = Bounds(xleft(), ybottom(), wabs(15), hrel(1))
+    	self._moveButtonContainer.bounds = Bounds(xleft(), ybottom(), wrel(1, -30), hrel(1))
+    	self._upButton.bounds = Bounds(xleft(), ybottom(), wabs(15), hrel(1))
+    	self._box = lost.guiro.HBox()
+      self._box:addSubview(self._downButton)
+      self._box:addSubview(self._moveButtonContainer)
+      self._box:addSubview(self._upButton)
+    elseif self._orientation == "vertical" then
+    	self._downButton.bounds = Bounds(xleft(), ybottom(), wrel(1), habs(15))
+    	self._moveButtonContainer.bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1, -30))
+    	self._upButton.bounds = Bounds(xleft(), ybottom(), wrel(1), habs(15))
+    	self._box = lost.guiro.VBox()
+      self._box:addSubview(self._upButton)
+      self._box:addSubview(self._moveButtonContainer)
+      self._box:addSubview(self._downButton)
+    else
+      error("invalid Scrollbar.orientation: ".. self._orientation)
+    end
+
+  	self._box.bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1))
+  	self._box:halign("center")
+  	self._box:valign("center")
+  	self._box:mode("stack")
+    self:addSubview(self._box)
   else
     return self._orientation
   end
 end
 
-function Scrollbar:updateViewHierarchy()
-  -- upButton
-  self._upButton:removeEventListener("buttonClick", self._upButtonClick)
-  self._upButton:addEventListener("buttonClick", self._upButtonClick)
-
-  -- moveButton
-  self._moveButtonContainer:removeAllSubviews()
-  self._moveButtonContainer:addSubview(self._moveButton)
-  self._moveButton:removeEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, self._moveButtonDown)
-  self._moveButton:addEventListener(lost.guiro.event.MouseEvent.MOUSE_DOWN, self._moveButtonDown)
-  self._moveButton:removeEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, self._moveButtonUp)
-  self._moveButton:addEventListener(lost.guiro.event.MouseEvent.MOUSE_UP, self._moveButtonUp)
-
-  -- downButton
-  self._downButton:removeEventListener("buttonClick", self._downButtonClick)
-  self._downButton:addEventListener("buttonClick", self._downButtonClick)
-
-  -- orientation
-  if self._box ~= nil then
-    self:removeSubview(self._box)
-    self._box = nil
-  end
-
-  if self._orientation == "horizontal" then
-  	self._box = lost.guiro.HBox()
-    self._box:addSubview(self._downButton)
-  	self._downButton.bounds = Bounds(xleft(), ybottom(), wabs(15), hrel(1))
-    self._box:addSubview(self._moveButtonContainer)
-  	self._moveButtonContainer.bounds = Bounds(xleft(), ybottom(), wrel(1, -30), hrel(1))
-    self._box:addSubview(self._upButton)
-  	self._upButton.bounds = Bounds(xleft(), ybottom(), wabs(15), hrel(1))
-  elseif self._orientation == "vertical" then
-  	self._box = lost.guiro.VBox()
-    self._box:addSubview(self._upButton)
-  	self._upButton.bounds = Bounds(xleft(), ybottom(), wrel(1), habs(15))
-    self._box:addSubview(self._moveButtonContainer)
-  	self._moveButtonContainer.bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1, -30))
-    self._box:addSubview(self._downButton)
-  	self._downButton.bounds = Bounds(xleft(), ybottom(), wrel(1), habs(15))
-  else
-    error("invalid Scrollbar.orientation: ".. self._orientation)
-  end
-
-	self._box.bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1))
-	self._box:halign("center")
-	self._box:valign("center")
-	self._box:mode("stack")
-  self:addSubview(self._box)
-end
-
 function Scrollbar:min(min)
   if min ~= nil then
-    self._min = min
+    self._min = math.max(0, min)
     self:value(self:value())
-    callLater(self.deferredUpdateViewHierarchy)
     callLater(self.deferredUpdateLayout)
-    callLater(self.deferredUpdateMoveButton)
   else
     return self._min
   end
@@ -179,11 +143,9 @@ end
 
 function Scrollbar:max(max)
   if max ~= nil then
-    self._max = max
+    self._max = math.max(0, max)
     self:value(self:value())
-    callLater(self.deferredUpdateViewHierarchy)
     callLater(self.deferredUpdateLayout)
-    callLater(self.deferredUpdateMoveButton)
   else
     return self._max
   end
@@ -191,10 +153,15 @@ end
 
 function Scrollbar:value(value)
   if value ~= nil then
+    local oldValue = self._value
     self._value = math.max(self._min, math.min(self._max, value))
-    callLater(self.deferredUpdateViewHierarchy)
+    if oldValue ~= self._value then
+      local changeEvent = lost.guiro.event.Event("scrollbarChange")
+      changeEvent.bubbles = true
+      changeEvent.target = self
+      self:bubbleEvent(changeEvent)
+    end
     callLater(self.deferredUpdateLayout)
-    callLater(self.deferredUpdateMoveButton)
   else
     return self._value
   end
@@ -203,9 +170,7 @@ end
 function Scrollbar:stepping(stepping)
   if stepping ~= nil then
     self._stepping = stepping
-    callLater(self.deferredUpdateViewHierarchy)
     callLater(self.deferredUpdateLayout)
-    callLater(self.deferredUpdateMoveButton)
   else
     return self._stepping
   end
@@ -222,6 +187,9 @@ function Scrollbar:updateLayout(forceUpdate)
       boxRange = self._moveButtonContainer:globalRect().height
     end
     self:hidden(math.max(1, math.abs(self._max - self._min)) < boxRange)
+    if not self:hidden() then
+      self:updateMoveButton()
+    end
   end
 end
 
