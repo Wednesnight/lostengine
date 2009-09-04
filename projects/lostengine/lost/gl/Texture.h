@@ -1,8 +1,7 @@
 #ifndef LOST_GL_TEXTURE_H
 #define LOST_GL_TEXTURE_H
  
-#include "lost/gl/gl.h"
-#include <boost/noncopyable.hpp>
+#include "lost/gl/gltypes.h"
 #include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
 
@@ -19,7 +18,7 @@ namespace lost
     /** a 2D Texture helper class.
      *
      */
-    struct Texture : private boost::noncopyable
+    struct Texture 
     {
       enum SizeHint
       {
@@ -141,6 +140,7 @@ namespace lost
       }
       
     private:
+      Texture(const Texture&) {} // forbidden
       void create();
     };
   }

@@ -4,6 +4,7 @@
 #include "lost/gl/Context.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/gl.h"
+#include "lost/gl/Utils.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"

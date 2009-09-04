@@ -10,11 +10,9 @@
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/gl/Context.h"
-#include "lost/gl/State.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera.h"
 #include "lost/common/Color.h"
-#include "lost/common/FpsMeter.h"
 #include "lost/event/Event.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
@@ -52,12 +50,10 @@ namespace luabind
   GET_POINTER(lost::bitmap::Bitmap);
   GET_POINTER(lost::camera::Camera);
   GET_POINTER(lost::common::Color);
-  GET_POINTER(lost::common::FpsMeter);
   GET_POINTER(lost::event::Event);
   GET_POINTER(lost::gl::Context);
   GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::RenderBuffer);
-  GET_POINTER(lost::gl::State);
   GET_POINTER(lost::gl::Texture);
   GET_POINTER(lost::lsystem::LSystem);
   GET_POINTER(lost::lsystem::LSystemState);

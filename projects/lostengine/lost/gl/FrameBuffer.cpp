@@ -1,6 +1,8 @@
 #include "lost/gl/FrameBuffer.h"
 #include <stdexcept>
 #include "lost/gl/gl.h"
+#include "lost/lgl/lgl.h"
+#include "lost/gl/Utils.h"
 #include "lost/gl/Context.h"
 
 using namespace std;

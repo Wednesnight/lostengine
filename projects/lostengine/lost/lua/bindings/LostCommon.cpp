@@ -3,7 +3,6 @@
 #include <luabind/operator.hpp>
 
 #include "lost/common/Color.h"
-#include "lost/common/FpsMeter.h"
 #include "lost/common/Logger.h"
 
 using namespace luabind;
@@ -43,22 +42,6 @@ namespace lost
        globals(state)["lost"]["common"]["blueColor"]        = Color(blueColor);
        globals(state)["lost"]["common"]["yellowColor"]      = Color(yellowColor);
        */
-    }
-
-    void LostCommonFpsMeter(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          class_<FpsMeter, lost::shared_ptr<FpsMeter> >("FpsMeter")
-            .def(constructor<>()) 
-            .def("render", &FpsMeter::render)
-            .def_readwrite("width", &FpsMeter::width)
-            .def_readwrite("height", &FpsMeter::height)
-            .def_readwrite("alpha", &FpsMeter::alpha)      
-        ]
-      ];
     }
 
     // from: http://osdir.com/ml/lang.lua.bind.user/2005-12/msg00034.html
@@ -116,7 +99,6 @@ namespace lost
     void LostCommon(lua_State* state)
     {
       LostCommonColor(state);
-      LostCommonFpsMeter(state);
       LostCommonLog(state);
     }
 

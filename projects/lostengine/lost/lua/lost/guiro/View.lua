@@ -255,7 +255,6 @@ end
 function View:updateLayout(forceUpdate)
   -- view needs update
   if forceUpdate or self.dirtyLayout then
---    log.debug("updating layout for "..self.id)
     self.dirtyLayout = false
     self.dirtySubviewLayout = false
     if self.parent then

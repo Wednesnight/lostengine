@@ -1,6 +1,7 @@
 #include "lost/gl/Texture.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/gl/Utils.h"
+#include "lost/gl/gl.h"
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
 #include "lost/math/lmath.h"

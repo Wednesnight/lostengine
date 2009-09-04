@@ -103,11 +103,11 @@ function Button:updateViewVisibility()
     local bg = self._states[stateName].background
     local l = self._states[stateName].label
     if stateName == self._state then
-      if bg then bg:hidden(false) else log.debug("bg is nil") end
-      if l then l:hidden(false)   else log.debug("label is nil") end
+      if bg then bg:hidden(false) end
+      if l then l:hidden(false) end
     else
-      if bg then bg:hidden(true) else log.debug("bg is nil")  end
-      if l then l:hidden(true)  else log.debug("label is nil") end
+      if bg then bg:hidden(true) end
+      if l then l:hidden(true) end
     end
   end
 end

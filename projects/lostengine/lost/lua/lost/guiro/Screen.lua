@@ -78,6 +78,13 @@ function Screen:listenTo(dispatcher)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self:propagateTouchEvent(event) end)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:propagateTouchEvent(event) end)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
+  dispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
+        local resizeEvent = lost.application.ResizeEvent.cast(event)
+        self.currentGlobalRect.width = resizeEvent.width
+        self.currentGlobalRect.height = resizeEvent.height
+--        log.debug("window resized to "..resizeEvent.width.." "..resizeEvent.height)
+        self:updateLayout()
+      end)
 end
 
 --[[

@@ -3,7 +3,6 @@
 
 #include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
-#include "lost/gl/State.h"
 #include "lost/gl/Texture.h"
 #include "lost/mesh/Quad.h"
 

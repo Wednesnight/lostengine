@@ -53,8 +53,7 @@ namespace lost
       /**
        * generic interface to the window's OpenGL context
        */
-      // FIXME: should probably be read-only
-      lost::shared_ptr<gl::Context> context;
+      gl::ContextPtr context;
 
       /**
        * holds generic window params
