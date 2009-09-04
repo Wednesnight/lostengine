@@ -59,7 +59,7 @@ return dcl.guiro:Screen
       },
       dcl.guiro:Button
       {
-        bounds = Bounds(xabs(50), yabs(240), wabs(100), habs(25)),
+        bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
         title = "riesig",
         listeners = 
         {
@@ -70,11 +70,17 @@ return dcl.guiro:Screen
       dcl.guiro:Scrollbar
       {
         bounds = Bounds(xleft(), ybottom(), wrel(1, -15), habs(15)),
+        min = 0,
+        max = 1000,
+        stepping = 10,
         orientation = "horizontal"
       },
       dcl.guiro:Scrollbar
       {
         bounds = Bounds(xright(), ybottom({abs=15}), wabs(15), hrel(1, -15)),
+        min = 0,
+        max = 1000,
+        stepping = 10,
         orientation = "vertical"
       }
     },

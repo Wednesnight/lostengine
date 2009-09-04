@@ -56,6 +56,7 @@ namespace lost
       GLenum currentBlendFuncSource;
       GLenum currentBlendFuncDestination;
       bool scissorEnabled;
+      math::Rect currentScissorRect;
       bool texture2DEnabled;
       common::Color currentColor;
       common::Color currentClearColor;
@@ -115,6 +116,7 @@ namespace lost
       void scissor(bool enable);
       void texture2D(bool enable);
       
+      void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
       void color(const common::Color& col); // sets the current drawing color to col
       void clearColor(const common::Color& col); // sets the current clear color to col
       

@@ -73,6 +73,10 @@ function Guiro:assignButtonAttributes(target, source)
 end
 
 function Guiro:assignScrollbarAttributes(target, source)
+  if source.min ~= nil then target:min(source.min) end
+  if source.max ~= nil then target:max(source.max) end
+  if source.value ~= nil then target:value(source.value) end
+  if source.stepping ~= nil then target:stepping(source.stepping) end
   if source.orientation ~= nil then target:orientation(source.orientation) end
 end
 
@@ -84,7 +88,6 @@ function Guiro:assignVBoxAttributes(target, source)
 end
 
 function Guiro:assignHBoxAttributes(target, source)
-	log.debug("--------------- buidling HBOX")
 	if source.mode ~= nil then target:mode(source.mode) end
 	if source.halign ~= nil then target:halign(source.halign) end
 	if source.valign ~= nil then target:valign(source.valign) end
@@ -164,7 +167,6 @@ function Guiro:Image(def)
 end
 
 function Guiro:Button(def)
-  log.debug("------------------ BUILDING BUTTON")
   local result = lost.guiro.Button()
   self:applyStyle(result, def)
   -- don't allow image subviews

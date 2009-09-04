@@ -153,6 +153,21 @@ namespace lost
     void Context::scissor(bool enable) {SERVERSTATE(scissorEnabled, enable, GL_SCISSOR_TEST);}
     void Context::texture2D(bool enable) {SERVERSTATE(texture2DEnabled, enable, GL_TEXTURE_2D);}
     
+    void Context::scissorRect(const math::Rect& rect)
+    {
+      if(currentScissorRect != rect)
+      {
+        math::Rect newRect(rect);
+        if (scissorEnabled && !(!currentScissorRect))
+        {
+          newRect.clipTo(currentScissorRect);
+        }
+        DOUT("setting scissorRect: " << newRect);
+        glScissor(newRect.x, newRect.y, newRect.width, newRect.height);
+        currentScissorRect = newRect;
+      }
+    }
+
     void Context::color(const common::Color& col)
     {
       if(currentColor != col)

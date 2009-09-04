@@ -273,6 +273,21 @@ function View:updateLayout(forceUpdate)
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
 
+    if self.doScissor then
+      if not self.applyScissorNode then
+        self.applyScissorNode = lost.rg.Scissor.create(lost.math.Rect(0,0,0,0))
+        self.applyScissorNode.name = "applyScissor"
+        self.subviewNodes:addFront(self.applyScissorNode)
+      end
+      if not self.restoreScissorNode then
+        self.restoreScissorNode = lost.rg.Scissor.create(lost.math.Rect(0,0,0,0))
+        self.restoreScissorNode.name = "restoreScissor"
+        self.rootNode:add(self.restoreScissorNode)
+      end
+      local scissorNode = lost.rg.Scissor.cast(self.applyScissorNode)
+      scissorNode.rect = self.currentGlobalRect
+    end
+
     for key,view in next,self.subviews do
       view:updateLayout(true)
     end

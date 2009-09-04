@@ -18,4 +18,20 @@ function Scrollbar:apply(target)
   target:showBackground(false)
   target:backgroundColor(Color(.5,.5,.5,1))
   target:frameColor(Color(1,1,1,1))
+  
+  target:upButton(self:buildButton("upButton"))
+  target:moveButton(self:buildButton("moveButton"))
+  target:downButton(self:buildButton("downButton"))
+end
+
+function Scrollbar:buildButton(vid)
+  local result = lost.guiro.Button()
+  result.id = vid
+  self.theme.themeManager:apply(result, self.theme.name, self.name)
+  result:label(lost.guiro.Button.STATE_NORMAL, nil)
+  result:label(lost.guiro.Button.STATE_HOVER, nil)
+  result:label(lost.guiro.Button.STATE_PUSHED, nil)
+  result:label(lost.guiro.Button.STATE_DISABLED, nil)
+  result:needsLayout()
+  return result
 end
