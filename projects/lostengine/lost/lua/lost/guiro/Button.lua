@@ -50,7 +50,7 @@ end
 function Button:mouseDown(event)
   self._state = Button.STATE_PUSHED
   callLater(self.deferredUpdateViewVisibility)  
-  local pressEvent = lost.guiro.event.Event("buttonPress")
+  local pressEvent = lost.guiro.event.Event("buttonDown")
   pressEvent.bubbles = true
   pressEvent.target = self
   self:bubbleEvent(pressEvent)
@@ -63,7 +63,7 @@ function Button:mouseUp(event)
   clickEvent.bubbles = true
   clickEvent.target = self
   self:bubbleEvent(clickEvent)
-  local releaseEvent = lost.guiro.event.Event("buttonRelease")
+  local releaseEvent = lost.guiro.event.Event("buttonUp")
   releaseEvent.bubbles = true
   releaseEvent.target = self
   self:bubbleEvent(releaseEvent)
@@ -72,7 +72,7 @@ end
 function Button:mouseUpOutside(event)
   self._state = Button.STATE_NORMAL
   callLater(self.deferredUpdateViewVisibility)  
-  local releaseEvent = lost.guiro.event.Event("buttonRelease")
+  local releaseEvent = lost.guiro.event.Event("buttonUp")
   releaseEvent.bubbles = true
   releaseEvent.target = self
   self:bubbleEvent(releaseEvent)
