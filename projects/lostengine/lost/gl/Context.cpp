@@ -162,7 +162,6 @@ namespace lost
         {
           newRect.clipTo(currentScissorRect);
         }
-        DOUT("setting scissorRect: " << newRect);
         glScissor(newRect.x, newRect.y, newRect.width, newRect.height);
         currentScissorRect = newRect;
       }

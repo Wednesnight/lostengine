@@ -153,9 +153,13 @@ function EventManager:propagateUpDownEvents(viewStack, event)
           event.target = oldView
           event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
           self:propagateEvent(self.previousMouseClickStack, event, i)
+          event.type = lost.guiro.event.MouseEvent.MOUSE_UP
+          self:propagateEvent(self.previousMouseClickStack, event, i)
         end
         if newView then
           event.target = newView
+          event.type = lost.guiro.event.MouseEvent.MOUSE_UP_INSIDE
+          self:propagateEvent(viewStack, event, i)
           event.type = lost.guiro.event.MouseEvent.MOUSE_UP
           self:propagateEvent(viewStack, event, i)
         end
