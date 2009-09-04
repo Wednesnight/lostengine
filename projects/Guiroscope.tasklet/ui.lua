@@ -66,22 +66,6 @@ return dcl.guiro:Screen
           mouseEnter = function(event) event.target:title("RIESIG") end,
           mouseLeave = function(event) event.target:title("riesig") end
         }
-      },
-      dcl.guiro:Scrollbar
-      {
-        bounds = Bounds(xleft(), ybottom(), wrel(1, -15), habs(15)),
-        min = 0,
-        max = 1000,
-        stepping = 10,
-        orientation = "horizontal"
-      },
-      dcl.guiro:Scrollbar
-      {
-        bounds = Bounds(xright(), ybottom({abs=15}), wabs(15), hrel(1, -15)),
-        min = 0,
-        max = 1000,
-        stepping = 10,
-        orientation = "vertical"
       }
     },
     dcl.guiro:Window

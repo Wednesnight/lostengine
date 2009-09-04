@@ -9,6 +9,7 @@ require("lost.guiro.Label")
 require("lost.guiro.Image")
 require("lost.guiro.Button")
 require("lost.guiro.Scrollbar")
+require("lost.guiro.ScrollView")
 require("lost.guiro.VBox")
 require("lost.guiro.HBox")
 require("lost.guiro.ThemeManager")
@@ -202,6 +203,15 @@ function Guiro:Scrollbar(def)
   -- don't allow scrollbar subviews
   self:assignViewAttributes(result, def) 
   self:assignScrollbarAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:ScrollView(def)
+  local result = lost.guiro.ScrollView()
+  self:applyStyle(result, def)
+  self:searchAndAddSubviews(result, def)  
+  self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
 end
