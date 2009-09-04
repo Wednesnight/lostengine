@@ -226,7 +226,7 @@ end
 
 -- helper function to bubble an event up the parent view hierarchy
 function View:bubbleEvent(event)
-  local currentView = self.parent
+  local currentView = self
   while currentView and (not event.stopPropagation) do
     currentView:dispatchBubbleEvent(event)
     currentView = currentView.parent
