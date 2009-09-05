@@ -12,6 +12,10 @@ windowParams = WindowParams("Guiroscope", Rect(300,300,800,600))
 -- these are deliberately global so we can access them from startup/update/shutdown
 dcl = nil
 screen = nil
+numUpdateLayout = 0
+function incUp()
+  numUpdateLayout = numUpdateLayout + 1
+end
 
 function startup(tasklet)
   log.debug("starting up")
@@ -33,7 +37,11 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
 -- DEBUG    
---  callLater(function() screen:printSubviews() end)
+  callLater(function()
+      numUpdateLayout = 0
+      screen:printSubviews()
+      log.debug("number of views: "..numUpdateLayout)
+    end)
 --  callLater(function() screen.rootNode:print()  end)
   return true
 end
@@ -42,6 +50,10 @@ function update(tasklet)
   processCallLaterQueue()
   screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
+  if numUpdateLayout > 0 then
+    log.debug("--------- updates: "..numUpdateLayout)
+    numUpdateLayout = 0
+  end
   return running
 end
 

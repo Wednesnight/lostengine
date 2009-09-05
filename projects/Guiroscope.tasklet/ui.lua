@@ -24,8 +24,8 @@ return dcl.guiro:Screen
   listeners = 
   {
 --    mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target:globalRect())) end,
-    mouseLeave = function(event) log.debug("leave "..event.target.id) end,
-    buttonClick = function(event) log.debug("CLICKED "..event.target.id) end
+--    mouseLeave = function(event) log.debug("leave "..event.target.id) end,
+--    buttonClick = function(event) log.debug("CLICKED "..event.target.id) end
   },
   dcl.guiro:UserInterface
   {
