@@ -1,3 +1,4 @@
+#include <boost/filesystem.hpp>
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/Helper.h"
 #include "lost/resource/File.h"

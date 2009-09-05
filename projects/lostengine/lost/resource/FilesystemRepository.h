@@ -2,7 +2,6 @@
 #define LOST_RESOURCE_FILESYSTEMREPOSITORY_H
 
 #include "lost/resource/Repository.h"
-#include <boost/filesystem.hpp>
 
 namespace lost
 {

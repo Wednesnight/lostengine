@@ -2,6 +2,7 @@
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include <boost/filesystem.hpp>
 
 // no deprecated warnings for hashlib++
 #pragma warning(disable:4996)

@@ -3,6 +3,7 @@
 #include "lost/resource/Repository.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include <boost/filesystem.hpp>
 
 namespace lost
 {
