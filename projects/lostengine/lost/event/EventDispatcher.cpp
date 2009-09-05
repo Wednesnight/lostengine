@@ -1,3 +1,5 @@
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/condition.hpp>
 #include <boost/signal.hpp>
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/Logger.h"
@@ -10,10 +12,21 @@ namespace lost
     typedef boost::signal<void (EventPtr)>             EventSignal;
     typedef lost::shared_ptr<EventSignal>             EventSignalPtr;    
 //    typedef std::map<lost::event::Type,EventSignalPtr> EventSignalPtrMap;
+
+    struct EventDispatcherHiddenMembers
+    {
+      boost::mutex queueMutex;
+      lost::shared_ptr<std::list<lost::shared_ptr<lost::event::Event> > > eventQueue;
+
+      boost::mutex waitEventMutex;
+      boost::condition waitEventCondition;
+    };
+    
     struct EventSignalPtrMap : public std::map<lost::event::Type,EventSignalPtr> {};
     
     EventDispatcher::EventDispatcher()
     {
+      hiddenMembers.reset(new EventDispatcherHiddenMembers);
       listeners = new EventSignalPtrMap();
     }
     
@@ -63,7 +76,7 @@ namespace lost
     void EventDispatcher::waitForEvents()
     {
       boost::unique_lock<boost::mutex> lock(waitEventMutex);
-      while(!eventQueue || !(eventQueue->size() > 0))
+      while(!hiddenMembers->eventQueue || !(hiddenMembers->eventQueue->size() > 0))
       {
         waitEventCondition.wait(lock);
       }
@@ -77,25 +90,25 @@ namespace lost
     
     void EventDispatcher::queueEvent(const lost::shared_ptr<lost::event::Event>& event)
     {
-      queueMutex.lock();
-      if (!eventQueue) eventQueue.reset(new std::list<lost::shared_ptr<lost::event::Event> >());
-      eventQueue->push_back(event);
-      queueMutex.unlock();
+      hiddenMembers->queueMutex.lock();
+      if (!hiddenMembers->eventQueue) hiddenMembers->eventQueue.reset(new std::list<lost::shared_ptr<lost::event::Event> >());
+      hiddenMembers->eventQueue->push_back(event);
+      hiddenMembers->queueMutex.unlock();
       waitEventCondition.notify_one();      
     }
     
     void EventDispatcher::processEvents(const double& timeoutInMilliSeconds)
     {
-      if (eventQueue && eventQueue->size() > 0)
+      if (hiddenMembers->eventQueue && hiddenMembers->eventQueue->size() > 0)
       {
         const double startTime = lost::platform::currentTimeMilliSeconds();
         do
         {
-          dispatchEvent(eventQueue->front());
-          queueMutex.lock();
-          eventQueue->pop_front();
-          queueMutex.unlock();
-        } while(eventQueue->size() > 0 && (timeoutInMilliSeconds == 0 || lost::platform::currentTimeMilliSeconds() - startTime < timeoutInMilliSeconds));
+          dispatchEvent(hiddenMembers->eventQueue->front());
+          hiddenMembers->queueMutex.lock();
+          hiddenMembers->eventQueue->pop_front();
+          hiddenMembers->queueMutex.unlock();
+        } while(hiddenMembers->eventQueue->size() > 0 && (timeoutInMilliSeconds == 0 || lost::platform::currentTimeMilliSeconds() - startTime < timeoutInMilliSeconds));
       }
     }
     

@@ -1,3 +1,4 @@
+#include <boost/filesystem.hpp>
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/ApplicationResourceRepository.h"
 

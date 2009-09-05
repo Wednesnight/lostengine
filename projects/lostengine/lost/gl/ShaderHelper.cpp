@@ -3,6 +3,7 @@
 #include "lost/gl/VertexShader.h"
 #include <stdexcept>
 #include "lost/resource/File.h"
+#include <boost/filesystem.hpp>
 
 namespace lost
 {

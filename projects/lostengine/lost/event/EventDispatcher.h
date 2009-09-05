@@ -3,10 +3,15 @@
 
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
+
+namespace boost
+{
+struct mutex;
+struct condition_variable_any;
+typedef condition_variable_any condition;
+}
 
 namespace lost
 {
@@ -19,6 +24,7 @@ namespace lost
     typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
 
     struct EventSignalPtrMap;
+    struct EventDispatcherHiddenMembers;
     struct EventDispatcher
     {
       EventSignalPtrMap* listeners;
@@ -37,12 +43,6 @@ namespace lost
        * for debugging purposes
        */
       uint32_t numListeners();
-      
-      boost::mutex queueMutex;
-      lost::shared_ptr<std::list<lost::shared_ptr<lost::event::Event> > > eventQueue;
-
-      boost::mutex waitEventMutex;
-      boost::condition waitEventCondition;
 
       /**
        * returns if at least one event was queued
@@ -61,6 +61,8 @@ namespace lost
        * call this to signal queued events
        */
       void processEvents(const double& timeoutInMilliSeconds = 0);
+      
+      lost::shared_ptr<EventDispatcherHiddenMembers> hiddenMembers;
     };
   }
 }

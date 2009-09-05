@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "lost/resource/Repository.h"
-#include <boost/filesystem.hpp>
+#include <stdexcept>
 
 namespace lost
 {

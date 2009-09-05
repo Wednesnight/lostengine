@@ -1,6 +1,5 @@
 // FIXME: needed for NOMINMAX definition on windows
 #include "lost/platform/Platform.h"
-
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"

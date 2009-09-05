@@ -1,6 +1,6 @@
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/lua.h"
-
+#include <boost/filesystem.hpp>
 #include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/FilesystemRepository.h"
