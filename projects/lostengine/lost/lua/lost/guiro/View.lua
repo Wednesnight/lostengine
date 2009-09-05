@@ -275,7 +275,7 @@ function View:updateLayout(forceUpdate)
     for key,view in next,self.subviews do
       view:updateLayout(true)
     end
-
+    incUp()
   -- subview needs update
   elseif self.dirtySubviewLayout then
     self.dirtySubviewLayout = false
@@ -353,6 +353,7 @@ function View:screen()
   end
 end
 
+local subViewPrintNum = 0
 --[[ 
     prints self.subviews hierarchy
   ]]
@@ -361,6 +362,7 @@ function View:printSubviews(prefix)
     prefix = ""
   end
   log.debug(prefix .."|-- ".. self.id)
+  incUp()
   for k,view in next,self.subviews do
     view:printSubviews(prefix .."    ")
   end
