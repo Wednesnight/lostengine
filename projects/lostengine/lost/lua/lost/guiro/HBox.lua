@@ -95,6 +95,13 @@ function HBox:addSubview(newview, pos)
   callLater(self.deferredUpdate)
 end
 
+function HBox:updateLayout(forceUpdate)
+  local doUpdate = forceUpdate or self.dirtyLayout
+  lost.guiro.View.updateLayout(self, forceUpdate)
+  -- FIXME only own rect should be update here, subviews are managed by HBox update function
+  if doUpdate then callLater(self.deferredUpdate) end
+end
+
 function HBox:mode(val)
 	if val ~= nil then
 		self._mode = val
