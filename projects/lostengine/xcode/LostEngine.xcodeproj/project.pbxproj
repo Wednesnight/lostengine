@@ -337,6 +337,10 @@
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
+		3E8E330F1055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
+		3E8E33101055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
+		3E8E33111055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
+		3E8E33121055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -358,10 +362,10 @@
 		3EC9CFCF0E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD00E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
 		3EC9CFD10E673182003CED66 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC9CFCE0E673182003CED66 /* State.cpp */; };
-		3EDEE3B41050158B0079BBB3 /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* Scissor.cpp */; };
-		3EDEE3B51050158B0079BBB3 /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* Scissor.cpp */; };
-		3EDEE3B61050158B0079BBB3 /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* Scissor.cpp */; };
-		3EDEE3B71050158B0079BBB3 /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* Scissor.cpp */; };
+		3EDEE3B41050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
+		3EDEE3B51050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
+		3EDEE3B61050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
+		3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
 		3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
 		3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
 		3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
@@ -1277,6 +1281,7 @@
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8738EB1015D91A002BEE13 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
+		3E8E330E1055370E001F27FC /* Scissor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scissor.cpp; path = rg/Scissor.cpp; sourceTree = "<group>"; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EB496E70F9F99DE00F3036A /* LostApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplication.cpp; path = bindings/LostApplication.cpp; sourceTree = "<group>"; };
 		3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommon.cpp; path = bindings/LostCommon.cpp; sourceTree = "<group>"; };
@@ -1284,7 +1289,7 @@
 		3EB499CC0F9FA4F700F3036A /* LostFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostFont.cpp; path = bindings/LostFont.cpp; sourceTree = "<group>"; };
 		3EB499D50F9FA50600F3036A /* LostGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGL.cpp; path = bindings/LostGL.cpp; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
-		3EDEE3B31050158B0079BBB3 /* Scissor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scissor.cpp; path = rg/Scissor.cpp; sourceTree = "<group>"; };
+		3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScissorRect.cpp; path = rg/ScissorRect.cpp; sourceTree = "<group>"; };
 		3EE13E7D0FA58D6300F2603E /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Meter.cpp; path = meter/Meter.cpp; sourceTree = "<group>"; };
 		3EF4BEDF0F15F183008C7702 /* class_info.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_info.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/class_info.cpp; sourceTree = SOURCE_ROOT; };
 		3EF4BEE00F15F183008C7702 /* class_registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class_registry.cpp; path = ../../../thirdparty/luabind/luabind_0_8/source/src/class_registry.cpp; sourceTree = SOURCE_ROOT; };
@@ -2421,7 +2426,8 @@
 		EA8A228B0F87B15400A6EB8B /* rg */ = {
 			isa = PBXGroup;
 			children = (
-				3EDEE3B31050158B0079BBB3 /* Scissor.cpp */,
+				3E8E330E1055370E001F27FC /* Scissor.cpp */,
+				3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */,
 				8D13D8040FD8011A00CEC1AF /* Blend.cpp */,
 				EA18C3200FA25C5600C2652A /* Node.cpp */,
 				EA8A15230FA26D7600E42FBE /* Camera.cpp */,
@@ -2939,13 +2945,14 @@
 				8DB8AAE70FDD50170013614E /* btGeometryUtil.cpp in Sources */,
 				EACF1C6310164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7F1016517400753144 /* FilesystemRepository.cpp in Sources */,
-				3EDEE3B61050158B0079BBB3 /* Scissor.cpp in Sources */,
+				3EDEE3B61050158B0079BBB3 /* ScissorRect.cpp in Sources */,
 				EA0F5C4C1051BB6C00545DCC /* Buffer.cpp in Sources */,
 				EA0F5CAD1051C10600545DCC /* FragmentShader.cpp in Sources */,
 				EA0F5CBE1051C19600545DCC /* Shader.cpp in Sources */,
 				EA0F5CC71051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCD1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE21051C6E000545DCC /* VertexShader.cpp in Sources */,
+				3E8E33111055370E001F27FC /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3276,13 +3283,14 @@
 				EACF1C6110164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7D1016517400753144 /* FilesystemRepository.cpp in Sources */,
 				8D9AB7A6104F10560036A784 /* Loader.cpp in Sources */,
-				3EDEE3B41050158B0079BBB3 /* Scissor.cpp in Sources */,
+				3EDEE3B41050158B0079BBB3 /* ScissorRect.cpp in Sources */,
 				EA0F5C4A1051BB6C00545DCC /* Buffer.cpp in Sources */,
 				EA0F5CAB1051C10600545DCC /* FragmentShader.cpp in Sources */,
 				EA0F5CBC1051C19600545DCC /* Shader.cpp in Sources */,
 				EA0F5CC51051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCB1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE01051C6E000545DCC /* VertexShader.cpp in Sources */,
+				3E8E330F1055370E001F27FC /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3435,7 +3443,8 @@
 				8DB8AAE90FDD50170013614E /* btAlignedAllocator.cpp in Sources */,
 				8DB8AAEA0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEB0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
-				3EDEE3B71050158B0079BBB3 /* Scissor.cpp in Sources */,
+				3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */,
+				3E8E33121055370E001F27FC /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3758,13 +3767,14 @@
 				8DB8AAE30FDD50170013614E /* btGeometryUtil.cpp in Sources */,
 				EACF1C6210164CB100753144 /* Helper.cpp in Sources */,
 				EACF1C7E1016517400753144 /* FilesystemRepository.cpp in Sources */,
-				3EDEE3B51050158B0079BBB3 /* Scissor.cpp in Sources */,
+				3EDEE3B51050158B0079BBB3 /* ScissorRect.cpp in Sources */,
 				EA0F5C4B1051BB6C00545DCC /* Buffer.cpp in Sources */,
 				EA0F5CAC1051C10600545DCC /* FragmentShader.cpp in Sources */,
 				EA0F5CBD1051C19600545DCC /* Shader.cpp in Sources */,
 				EA0F5CC61051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCC1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE11051C6E000545DCC /* VertexShader.cpp in Sources */,
+				3E8E33101055370E001F27FC /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

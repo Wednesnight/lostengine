@@ -36,6 +36,12 @@ template<> lost::common::Color getParam(GLenum pname)
   glGetFloatv(pname, result.fv);GLDEBUG;
   return result;
 }
+template<> lost::math::Rect getParam(GLenum pname)
+{
+  float rect[4];
+  glGetFloatv(pname, rect);GLDEBUG;
+  return lost::math::Rect(rect[0], rect[1], rect[2], rect[3]);
+}
 
 
 #define CLIENTSTATE(member, newstate, pname)  \
@@ -93,6 +99,7 @@ namespace lost
       currentActiveTexture = getParam<int>(GL_ACTIVE_TEXTURE);
       currentTransform.initIdentity();
       currentClearColor = getParam<lost::common::Color>(GL_COLOR_CLEAR_VALUE);
+      currentScissorRect = getParam<lost::math::Rect>(GL_SCISSOR_BOX);
     }
     
     Context::~Context()
@@ -159,13 +166,8 @@ namespace lost
     {
       if(currentScissorRect != rect)
       {
-        math::Rect newRect(rect);
-        if (scissorEnabled && !(!currentScissorRect))
-        {
-          newRect.clipTo(currentScissorRect);
-        }
-        glScissor(newRect.x, newRect.y, newRect.width, newRect.height);
-        currentScissorRect = newRect;
+        glScissor(rect.x, rect.y, rect.width, rect.height);
+        currentScissorRect = rect;
       }
     }
 

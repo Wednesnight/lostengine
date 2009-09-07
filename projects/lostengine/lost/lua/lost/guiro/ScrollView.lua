@@ -24,13 +24,17 @@ lost.common.Class "lost.guiro.ScrollView" "lost.guiro.View" {}
 function ScrollView:constructor()
 	lost.guiro.View.constructor(self)
 
+  -- enable scissoring
+  self.scissorNode.active = true
+  self.scissorRectNode.active = true
+
   -- scroll handling
 	self:addEventListener(event.MouseEvent.MOUSE_SCROLL, function(event)
 	  if event.scrollDelta.x ~= 0 then
-	    self._horizontalScrollbar:value(self._horizontalScrollbar:value() - event.scrollDelta.x)
+	    self._horizontalScrollbar:value(self._horizontalScrollbar:value() - 5.0*event.scrollDelta.x)
 	  end
 	  if event.scrollDelta.y ~= 0 then
-	    self._verticalScrollbar:value(self._verticalScrollbar:value() - event.scrollDelta.y)
+	    self._verticalScrollbar:value(self._verticalScrollbar:value() - 5.0*event.scrollDelta.y)
 	  end
 	end)
 end
@@ -76,39 +80,18 @@ function ScrollView:addSubview(newview, pos)
   self._contentView:addSubview(newview, pos)
 end
 
-function ScrollView:updateLayout(forceUpdate)
-  local doUpdateLayout = forceUpdate or self.dirtyLayout
-  lost.guiro.View.updateLayout(self, forceUpdate)
+function ScrollView:applyLayout()
+  -- update scrollbars
+  local contentRect = self._contentView:globalRect()
+  self._horizontalScrollbar:max(contentRect.width - self.currentGlobalRect.width + self._verticalScrollbar:globalRect().width)
+  self._verticalScrollbar:max(contentRect.height - self.currentGlobalRect.height + self._horizontalScrollbar:globalRect().height)
 
-  if doUpdateLayout then
-    -- create scissor nodes
-    if not self.applyScissorNode then
-      self.applyScissorNode = lost.rg.Scissor.create(lost.math.Rect(0,0,0,0))
-      self.applyScissorNode.name = "applyScissor"
-      self._contentView.subviewNodes:addFront(self.applyScissorNode)
-    end
-    if not self.restoreScissorNode then
-      self.restoreScissorNode = lost.rg.Scissor.create(lost.math.Rect(0,0,0,0))
-      self.restoreScissorNode.name = "restoreScissor"
-      self._contentView.rootNode:add(self.restoreScissorNode)
-    end
-    
-    -- apply scissor rect
-    local scissorNode = lost.rg.Scissor.cast(self.applyScissorNode)
-    local gr = lost.math.Rect(self.currentGlobalRect.x, self.currentGlobalRect.y,
-        self.currentGlobalRect.width, self.currentGlobalRect.height)
-    if not self._horizontalScrollbar:hidden() then
-      gr.y = gr.y + self._horizontalScrollbar:globalRect().height
-      gr.height = gr.height - self._horizontalScrollbar:globalRect().height
-    end
-    if not self._verticalScrollbar:hidden() then
-      gr.width = gr.width - self._verticalScrollbar:globalRect().width
-    end
-    scissorNode.rect = gr
-    
-    -- update scrollbars
-    local contentRect = self._contentView:globalRect()
-    self._horizontalScrollbar:max(contentRect.width - self.currentGlobalRect.width + self._verticalScrollbar:globalRect().width)
-    self._verticalScrollbar:max(contentRect.height - self.currentGlobalRect.height + self._horizontalScrollbar:globalRect().height)
+  -- modify currentGlobalRect to exclude scrollbars
+  if not self._horizontalScrollbar:hidden() then
+    self.scissorBounds.height = hrel(1, -self._horizontalScrollbar:globalRect().height)
   end
+  if not self._verticalScrollbar:hidden() then
+    self.scissorBounds.width = wrel(1, -self._verticalScrollbar:globalRect().width)
+  end
+  lost.guiro.View.applyLayout(self)
 end
