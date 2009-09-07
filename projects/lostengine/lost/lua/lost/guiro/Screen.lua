@@ -80,10 +80,10 @@ function Screen:listenTo(dispatcher)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
   dispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
         local resizeEvent = lost.application.ResizeEvent.cast(event)
-        self.currentGlobalRect.width = resizeEvent.width
-        self.currentGlobalRect.height = resizeEvent.height
+        self.bounds.width = lost.guiro.wabs(resizeEvent.width)
+        self.bounds.height = lost.guiro.habs(resizeEvent.height)
 --        log.debug("window resized to "..resizeEvent.width.." "..resizeEvent.height)
-        self:updateLayout()
+        callLater(function() self:updateLayout(true) end)
       end)
 end
 
@@ -94,17 +94,13 @@ function Screen:screen()
   return self
 end
 
--- since the rect of the screen is directly dependant on the physical window size, it must
--- be set externally and cannot be sensibly derived from anything. So, we simply return cgr here
-function Screen:globalRect()
-  return self.currentGlobalRect
-end
-
 -- every time the screens layout is updated we MUST reset the viewport 
 -- so we first call update on the base class, then use the resulting 
-function Screen:updateLayout()
-  for key,view in pairs(self.subviews) do
-      view:updateLayout(true)
+function Screen:updateLayout(forceUpdate)
+  local doUpdateLayout = forceUpdate or self.dirtyLayout
+  lost.guiro.View.updateLayout(self, forceUpdate)
+  if doUpdateLayout then
+    log.debug("Screen:updateLayout()")
+    self.camera:viewport(self.currentGlobalRect)
   end
-  self.camera:viewport(self.currentGlobalRect)
 end
