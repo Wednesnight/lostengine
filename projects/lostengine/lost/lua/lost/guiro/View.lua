@@ -63,21 +63,26 @@ function View:constructor()
   self.subviewNodes.name = "subviewNodes"
 
   -- scissoring, initially enabled but inactive (will not be processed)
-  self.scissorBounds = lost.guiro.Bounds(lost.guiro.xabs(0), lost.guiro.yabs(0), lost.guiro.wrel(1), lost.guiro.hrel(1))
-  self.scissorNode = lost.rg.Scissor.create(true)
+  self.scissorBounds = lost.guiro.Bounds(lost.guiro.xleft(), lost.guiro.ytop(), lost.guiro.wrel(1), lost.guiro.hrel(1))
+  self.scissorNode = lost.rg.Scissor.cast(lost.rg.Scissor.create(true))
   self.scissorNode.active = false
   self.scissorNode.name = "scissorNode"
-  self.scissorRectNode = lost.rg.ScissorRect.create(lost.math.Rect())
+  self.scissorRectNode = lost.rg.ScissorRect.cast(lost.rg.ScissorRect.create(lost.math.Rect()))
   self.scissorRectNode.active = false
   self.scissorRectNode.name = "scissorRectNode"
+  self.disableScissorNode = lost.rg.Scissor.cast(lost.rg.Scissor.create(false))
+  self.disableScissorNode.active = false
+  self.disableScissorNode.name = "disableScissorNode"
 
   -- draw the view
   self.rootNode:add(self.renderNode)
   -- apply the views scissoring
-  self.rootNode:add(self.scissorNode)
-  self.rootNode:add(self.scissorRectNode)
+  self.rootNode:add(self.scissorNode:asNodePtr())
+  self.rootNode:add(self.scissorRectNode:asNodePtr())
   -- draw subviews
   self.rootNode:add(self.subviewNodes)
+  -- disable scissoring
+  self.rootNode:add(self.disableScissorNode:asNodePtr())
 
   -- mesh container
   self.meshes = {}
@@ -286,6 +291,7 @@ function View:updateLayout(forceUpdate)
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
 
+    -- apply layout
     self:applyLayout()
 
     for key,view in next,self.subviews do
@@ -308,9 +314,11 @@ end
     override this method if you want to modify stuff that needs currentGlobalRect
   ]]
 function View:applyLayout()
-  if self.scissorRectNode.active then
-    local scissorRectNode = lost.rg.ScissorRect.cast(self.scissorRectNode)
-    scissorRectNode.rect = self.scissorBounds:rect(self.currentGlobalRect)
+  -- apply scissoring
+  if self.scissorRect ~= nil then
+    self.scissorRectNode.rect = self.scissorRect
+  else
+    self.scissorRectNode.rect = self.currentGlobalRect
   end
 end
 

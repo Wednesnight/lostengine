@@ -24,10 +24,6 @@ lost.common.Class "lost.guiro.ScrollView" "lost.guiro.View" {}
 function ScrollView:constructor()
 	lost.guiro.View.constructor(self)
 
-  -- enable scissoring
-  self.scissorNode.active = true
-  self.scissorRectNode.active = true
-
   -- scroll handling
 	self:addEventListener(event.MouseEvent.MOUSE_SCROLL, function(event)
 	  if event.scrollDelta.x ~= 0 then
@@ -42,6 +38,12 @@ end
 function ScrollView:contentView(view)
   if view ~= nil then
   	self._contentView = view
+
+    -- enable scissoring
+    self._contentView.scissorNode.active = true
+    self._contentView.scissorRectNode.active = true
+    self._contentView.disableScissorNode.active = true
+
   	lost.guiro.View.addSubview(self, self._contentView)
   else
     return self._contentView
@@ -86,12 +88,17 @@ function ScrollView:applyLayout()
   self._horizontalScrollbar:max(contentRect.width - self.currentGlobalRect.width + self._verticalScrollbar:globalRect().width)
   self._verticalScrollbar:max(contentRect.height - self.currentGlobalRect.height + self._horizontalScrollbar:globalRect().height)
 
-  -- modify currentGlobalRect to exclude scrollbars
+  -- apply scissor rect
+  local gr = lost.math.Rect(self.currentGlobalRect.x, self.currentGlobalRect.y,
+      self.currentGlobalRect.width, self.currentGlobalRect.height)
   if not self._horizontalScrollbar:hidden() then
-    self.scissorBounds.height = hrel(1, -self._horizontalScrollbar:globalRect().height)
+    gr.y = gr.y + self._horizontalScrollbar:globalRect().height
+    gr.height = gr.height - self._horizontalScrollbar:globalRect().height
   end
   if not self._verticalScrollbar:hidden() then
-    self.scissorBounds.width = wrel(1, -self._verticalScrollbar:globalRect().width)
+    gr.width = gr.width - self._verticalScrollbar:globalRect().width
   end
+  self._contentView.scissorRect = gr
+
   lost.guiro.View.applyLayout(self)
 end

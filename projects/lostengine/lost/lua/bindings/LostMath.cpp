@@ -28,6 +28,7 @@ namespace lost
             .def(constructor<float, float, float, float>())
             .def("contains", &Rect::contains)
             .def("intersects", &Rect::intersects)
+            .def("clipTo", &Rect::clipTo)
             .def(tostring(self))
             .def("maxX", &Rect::maxX)
             .def("maxY", &Rect::maxY)
