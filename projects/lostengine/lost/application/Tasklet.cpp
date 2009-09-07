@@ -73,7 +73,7 @@ namespace lost
       catch(resource::LoaderError& ex)
       {
         DOUT("couldn't load script <"+ scriptname +">: "+ string(ex.what()));
-      }      
+      }
 
       // try to extract window params and flag from interpreter
       // the values are optional and set as globals

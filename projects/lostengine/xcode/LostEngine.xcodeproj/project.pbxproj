@@ -337,10 +337,6 @@
 		3E7325620E5CE3A4000FF838 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		3E7325630E5CE3A4000FF838 /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
 		3E73256A0E5CE3A4000FF838 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E376F4A0E543F6F0050A5DF /* Camera.cpp */; };
-		3E8E330F1055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
-		3E8E33101055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
-		3E8E33111055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
-		3E8E33121055370E001F27FC /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E8E330E1055370E001F27FC /* Scissor.cpp */; };
 		3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531320EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
 		3E9531330EC98D62003FCAF0 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9531300EC98D62003FCAF0 /* Application.cpp */; };
@@ -1110,6 +1106,9 @@
 		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
+		EA964E1D1055A7C000191DDD /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA964E1C1055A7C000191DDD /* Scissor.cpp */; };
+		EA964E1E1055A7C000191DDD /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA964E1C1055A7C000191DDD /* Scissor.cpp */; };
+		EA964E1F1055A7C000191DDD /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA964E1C1055A7C000191DDD /* Scissor.cpp */; };
 		EA97FC120E35ABD800851245 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA98BCA4104FEB94006CACA8 /* LostEngine.icns in Resources */ = {isa = PBXBuildFile; fileRef = EA98BCA3104FEB94006CACA8 /* LostEngine.icns */; };
 		EA9A36550E29A61D0090BAD0 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
@@ -1281,7 +1280,6 @@
 		3E5323140F15185000D7C8B4 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = ../../../thirdparty/lua/lua_5_1_4/source/src/lgc.c; sourceTree = SOURCE_ROOT; };
 		3E7325750E5CE3A5000FF838 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E8738EB1015D91A002BEE13 /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost; sourceTree = SOURCE_ROOT; };
-		3E8E330E1055370E001F27FC /* Scissor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scissor.cpp; path = rg/Scissor.cpp; sourceTree = "<group>"; };
 		3E9531300EC98D62003FCAF0 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		3EB496E70F9F99DE00F3036A /* LostApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostApplication.cpp; path = bindings/LostApplication.cpp; sourceTree = "<group>"; };
 		3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostCommon.cpp; path = bindings/LostCommon.cpp; sourceTree = "<group>"; };
@@ -1532,6 +1530,7 @@
 		EA8A15260FA26D7600E42FBE /* DepthTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthTest.cpp; path = rg/DepthTest.cpp; sourceTree = "<group>"; };
 		EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostRg.cpp; path = bindings/LostRg.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		EA964E1C1055A7C000191DDD /* Scissor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scissor.cpp; path = rg/Scissor.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
 		EA98BCA3104FEB94006CACA8 /* LostEngine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = LostEngine.icns; path = ../LostEngine.icns; sourceTree = SOURCE_ROOT; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
@@ -2426,7 +2425,7 @@
 		EA8A228B0F87B15400A6EB8B /* rg */ = {
 			isa = PBXGroup;
 			children = (
-				3E8E330E1055370E001F27FC /* Scissor.cpp */,
+				EA964E1C1055A7C000191DDD /* Scissor.cpp */,
 				3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */,
 				8D13D8040FD8011A00CEC1AF /* Blend.cpp */,
 				EA18C3200FA25C5600C2652A /* Node.cpp */,
@@ -2952,7 +2951,7 @@
 				EA0F5CC71051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCD1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE21051C6E000545DCC /* VertexShader.cpp in Sources */,
-				3E8E33111055370E001F27FC /* Scissor.cpp in Sources */,
+				EA964E1F1055A7C000191DDD /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3290,7 +3289,7 @@
 				EA0F5CC51051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCB1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE01051C6E000545DCC /* VertexShader.cpp in Sources */,
-				3E8E330F1055370E001F27FC /* Scissor.cpp in Sources */,
+				EA964E1D1055A7C000191DDD /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3444,7 +3443,6 @@
 				8DB8AAEA0FDD50170013614E /* btConvexHull.cpp in Sources */,
 				8DB8AAEB0FDD50170013614E /* btGeometryUtil.cpp in Sources */,
 				3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */,
-				3E8E33121055370E001F27FC /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3774,7 +3772,7 @@
 				EA0F5CC61051C24300545DCC /* ShaderHelper.cpp in Sources */,
 				EA0F5CCC1051C35A00545DCC /* ShaderProgram.cpp in Sources */,
 				EA0F5CE11051C6E000545DCC /* VertexShader.cpp in Sources */,
-				3E8E33101055370E001F27FC /* Scissor.cpp in Sources */,
+				EA964E1E1055A7C000191DDD /* Scissor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

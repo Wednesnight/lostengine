@@ -33,7 +33,6 @@ function Button:constructor(loader, df)
 end
 
 function Button:apply(target)
-  log.debug("----------------- APPLYING BUTTON STYLE")
   target:showFrame(false)
   target:showBackground(false)
   target:backgroundColor(Color(.5,.5,.5,1))

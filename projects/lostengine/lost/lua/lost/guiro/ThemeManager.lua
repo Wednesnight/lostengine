@@ -39,7 +39,7 @@ function ThemeManager:apply(target, themeName, styleName)
   
   local style = classStyles[styleName]
   if not style then 
-    log.warn("--- couldn't find style named '"..styleName.."' in theme '"..themeName.."' for class '"..targetClassName"'")
+    log.warn("--- couldn't find style named '"..tostring(styleName).."' in theme '"..themeName.."' for class '"..targetClassName.."'")
     return
   end
   

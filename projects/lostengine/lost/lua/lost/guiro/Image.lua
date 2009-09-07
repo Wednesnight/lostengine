@@ -7,6 +7,7 @@ local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Rect = lost.math.Rect
 local MatrixTranslation = lost.math.MatrixTranslation
+local Color = lost.common.Color
 
 lost.common.Class "lost.guiro.Image" "lost.guiro.View" {}
 
@@ -32,7 +33,7 @@ function Image:constructor()
   self._filter = false -- if true, GL_LINEAR is set for min/max filter
   self._flip = false -- if true, texture coordinates are vertically flipped, resulting in an image mirrored at the x axis
   self._scale = "stretch" -- possible values: stretch, aspect, scalegrid
-
+  self._color = Color(1,1,1,1)
   self._caps = -- used for scalegrid
   {
     left = 0,
@@ -59,6 +60,12 @@ function Image:constructor()
         self._texture:bind()
         self._texture:filter(gl.GL_NEAREST)
       end
+    end
+  end
+  
+  self.deferredUpdateColor = function()
+    if self._textureMesh then
+      self.textureMesh.material.color = self._color
     end
   end
 end
@@ -173,5 +180,14 @@ function Image:flip(flag)
     callLater(self.deferredRender)
   else
     return self._flip
+  end
+end
+
+function Image:color(col)
+  if col ~= nil then 
+    self._color = col
+    callLater(self.deferredUpdateColor)
+  else
+    return self._color
   end
 end

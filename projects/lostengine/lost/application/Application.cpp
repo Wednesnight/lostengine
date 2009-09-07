@@ -154,8 +154,15 @@ namespace lost
       tasklets.push_back(tasklet);
       if (running)
       {
-        tasklet->init();
-        tasklet->start();
+        try
+        {
+          tasklet->init();
+          tasklet->start();
+        }
+        catch(std::exception& ex)
+        {
+          EOUT("Tasklet failed with error: "<<ex.what())
+        }
       }
     }
 

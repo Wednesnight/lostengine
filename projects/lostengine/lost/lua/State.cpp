@@ -158,8 +158,12 @@ namespace lost
     int State::doString(const std::string& inData)
     {
       // execute the loaded file and handle errors
-      int result = luaL_loadstring(state, inData.c_str());
-      if (int err = (result || luabind::detail::pcall(state, 0, LUA_MULTRET)))
+      int err = luaL_loadstring(state, inData.c_str());
+      if(!err)
+      {
+        err = luabind::detail::pcall(state, 0, LUA_MULTRET);
+      }
+      if(err)
       {
         std::string errcode;
         switch(err)
@@ -184,7 +188,7 @@ namespace lost
           throw std::runtime_error(errcode +" ("+ getScriptFilename(inData, inData) +")");
         }
       }
-      return result;
+      return err;
     }
     
   }

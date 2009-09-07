@@ -217,7 +217,6 @@ function EventManager:propagateMouseEvent(rootView, event)
   if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then
     self:propagateEnterLeaveEvents(viewStack, mouseevent)
   end  
-
   if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
     self:propagateUpDownEvents(viewStack, mouseevent)
     if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then

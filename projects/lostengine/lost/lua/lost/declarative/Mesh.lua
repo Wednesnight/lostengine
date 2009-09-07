@@ -44,7 +44,7 @@ function Mesh:Quad2D(def)
   local size = def["size"]
   local rect = def["rect"]
   local flip = nil
-  if def["flip"] then
+  if def["flip"] ~= nil then
     flip = def["flip"]
   else
     flip = false
@@ -55,11 +55,11 @@ function Mesh:Quad2D(def)
   local transform = def["transform"]
   
   -- create an instance depending on parameterization
-  if filename then
+  if filename ~= nil then
     result = lost.mesh.Quad2D(self.loader:load(filename), flip)
-  elseif tex then 
+  elseif tex ~= nil then 
     result = lost.mesh.Quad2D(tex, flip)
-  elseif rect then
+  elseif rect ~= nil then
     result = lost.mesh.Quad2D(rect)
   else
     error("must specify at least one of [filename|tex|rect] for creation of quad")
