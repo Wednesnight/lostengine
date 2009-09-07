@@ -23,6 +23,16 @@ lost.common.Class "lost.guiro.ScrollView" "lost.guiro.View" {}
 
 function ScrollView:constructor()
 	lost.guiro.View.constructor(self)
+
+  -- scroll handling
+	self:addEventListener(event.MouseEvent.MOUSE_SCROLL, function(event)
+	  if event.scrollDelta.x ~= 0 then
+	    self._horizontalScrollbar:value(self._horizontalScrollbar:value() - event.scrollDelta.x)
+	  end
+	  if event.scrollDelta.y ~= 0 then
+	    self._verticalScrollbar:value(self._verticalScrollbar:value() - event.scrollDelta.y)
+	  end
+	end)
 end
 
 function ScrollView:contentView(view)
