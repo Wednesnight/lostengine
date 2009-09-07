@@ -11,11 +11,13 @@ MouseEvent.MOUSE_UP_OUTSIDE = "mouseUpOutside"
 MouseEvent.MOUSE_DOWN = "mouseDown"
 MouseEvent.MOUSE_ENTER = "mouseEnter"
 MouseEvent.MOUSE_LEAVE = "mouseLeave"
+MouseEvent.MOUSE_SCROLL = "mouseScroll"
 
 local typeConvert = {}
 typeConvert[lost.application.MouseEvent.MOUSE_MOVE] = MouseEvent.MOUSE_MOVE
 typeConvert[lost.application.MouseEvent.MOUSE_UP] = MouseEvent.MOUSE_UP
 typeConvert[lost.application.MouseEvent.MOUSE_DOWN] = MouseEvent.MOUSE_DOWN
+typeConvert[lost.application.MouseEvent.MOUSE_SCROLL] = MouseEvent.MOUSE_SCROLL
 
 -- initialise it with an uncast lost.application.MouseEvent
 function MouseEvent:constructor(laMouseEvent)
@@ -25,6 +27,10 @@ function MouseEvent:constructor(laMouseEvent)
 
   self.bubbles = true
   self.pos = lostAppMouseEvent.pos
+  self.absPos = lostAppMouseEvent.absPos
+  self.button = lostAppMouseEvent.button
+  self.pressed = lostAppMouseEvent.pressed
+  self.scrollDelta = lostAppMouseEvent.scrollDelta
   self.type = typeConvert[lostAppMouseEvent.type]
   self.stopDispatch = false
   self.stopPropagation = false

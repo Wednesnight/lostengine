@@ -238,6 +238,7 @@ namespace lost
             .def_readwrite("absPos", &MouseEvent::absPos)
             .def_readwrite("button", &MouseEvent::button)
             .def_readwrite("pressed", &MouseEvent::pressed)
+            .def_readwrite("scrollDelta", &MouseEvent::scrollDelta)
             .scope
             [
               def("cast", &lost::lua::cast<MouseEvent>)
@@ -247,6 +248,7 @@ namespace lost
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP"] = MouseEvent::MOUSE_UP();
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_DOWN"] = MouseEvent::MOUSE_DOWN();
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_MOVE"] = MouseEvent::MOUSE_MOVE();
+      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_SCROLL"] = MouseEvent::MOUSE_SCROLL();
       
       globals(state)["lost"]["application"]["MB_UNKNOWN"] = MB_UNKNOWN;
       

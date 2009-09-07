@@ -15,6 +15,8 @@
 #include "lost/application/DropEvent.h"
 #include "lost/application/WindowEvent.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
 
 @interface ApplicationWindow : NSWindow
 {
@@ -264,6 +266,7 @@
     mouseEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
     mouseEvent->button  = [self translateMouseButton: [event buttonNumber]];
     mouseEvent->pressed = [self mouseButtonPressed: type button: mouseEvent->button];
+    mouseEvent->scrollDelta = lost::math::Vec3([event deltaX], [event deltaY], [event deltaZ]);
     parent->dispatcher->queueEvent(mouseEvent);
   }  
 }
@@ -324,6 +327,11 @@
 - (void)rightMouseUp: (NSEvent*)event
 {
   [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
+}
+
+- (void)scrollWheel: (NSEvent*)event
+{
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL()];
 }
 
 @end
