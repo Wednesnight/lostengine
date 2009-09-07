@@ -11,6 +11,7 @@
 #include "lost/rg/FrameBuffer.h"
 #include "lost/rg/Blend.h"
 #include "lost/rg/Scissor.h"
+#include "lost/rg/ScissorRect.h"
 
 #include "lost/mesh/Line.h"
 #include "lost/mesh/Quad.h"
@@ -148,12 +149,20 @@ namespace lost
             def("cast", &castNode<Blend, Node>)
           ],
           class_<Scissor, Node, ScissorPtr>("Scissor")
-          .def_readwrite("rect", &Scissor::rect)
+          .def_readwrite("enable", &Scissor::enable)
           .def("asNodePtr", &castNode<Node, Scissor>)
           .scope
           [
             def("create", &Scissor::create),
             def("cast", &castNode<Scissor, Node>)
+          ],
+          class_<ScissorRect, Node, ScissorRectPtr>("ScissorRect")
+          .def_readwrite("rect", &ScissorRect::rect)
+          .def("asNodePtr", &castNode<Node, ScissorRect>)
+          .scope
+          [
+            def("create", &ScissorRect::create),
+            def("cast", &castNode<ScissorRect, Node>)
           ]
          
         ]

@@ -62,7 +62,21 @@ function View:constructor()
   self.subviewNodes = lost.rg.Node.create()
   self.subviewNodes.name = "subviewNodes"
 
+  -- scissoring, initially enabled but inactive (will not be processed)
+  self.scissorBounds = lost.guiro.Bounds(lost.guiro.xabs(0), lost.guiro.yabs(0), lost.guiro.wrel(1), lost.guiro.hrel(1))
+  self.scissorNode = lost.rg.Scissor.create(true)
+  self.scissorNode.active = false
+  self.scissorNode.name = "scissorNode"
+  self.scissorRectNode = lost.rg.ScissorRect.create(lost.math.Rect())
+  self.scissorRectNode.active = false
+  self.scissorRectNode.name = "scissorRectNode"
+
+  -- draw the view
   self.rootNode:add(self.renderNode)
+  -- apply the views scissoring
+  self.rootNode:add(self.scissorNode)
+  self.rootNode:add(self.scissorRectNode)
+  -- draw subviews
   self.rootNode:add(self.subviewNodes)
 
   -- mesh container
@@ -272,6 +286,8 @@ function View:updateLayout(forceUpdate)
       self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
     end
 
+    self:applyLayout()
+
     for key,view in next,self.subviews do
       view:updateLayout(true)
     end
@@ -285,6 +301,17 @@ function View:updateLayout(forceUpdate)
       end
     end
   end  
+end
+
+--[[
+    update scissoring and other post-update settings
+    override this method if you want to modify stuff that needs currentGlobalRect
+  ]]
+function View:applyLayout()
+  if self.scissorRectNode.active then
+    local scissorRectNode = lost.rg.ScissorRect.cast(self.scissorRectNode)
+    scissorRectNode.rect = self.scissorBounds:rect(self.currentGlobalRect)
+  end
 end
 
 --[[
