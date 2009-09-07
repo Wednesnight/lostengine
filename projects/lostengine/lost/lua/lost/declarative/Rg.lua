@@ -55,21 +55,21 @@ end
 -- stickToTarget = bool (true if camera should automatically be repointed at target)
 function Rg:Camera3D(def)
   local vp = def["viewport"]
-  if not vp then
+  if vp == nil then
     error("viewport parameter is required for Camera3D")
   end
   local cam = lost.camera.Camera3D.create(vp) -- viewport is mandatory for creation
   local result = lost.rg.Camera.create(cam)
-  if def["fovY"] then
+  if def["fovY"] ~= nil then
     cam:fovY(def["fovY"])
   end
-  if def["depth"] then
+  if def["depth"] ~= nil then
     cam:depth(def["depth"])
   end
-  if def["position"] then
+  if def["position"] ~= nil then
     cam:position(def["position"])
   end
-  if def["target"] then
+  if def["target"] ~= nil then
     cam:target(def["target"])
   end
   if def["stickToTarget"] ~= nil then

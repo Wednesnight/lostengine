@@ -57,6 +57,7 @@ function Button:mouseDown(event)
 end
 
 function Button:mouseUpInside(event)
+  log.debug("button up inside")
   self._state = Button.STATE_HOVER
   callLater(self.deferredUpdateViewVisibility)  
   local clickEvent = lost.guiro.event.Event("buttonClick")
