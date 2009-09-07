@@ -27,6 +27,11 @@ function Screen:constructor()
   self.eventManager = lost.guiro.event.EventManager(self)
 --  self.mouseManager = lost.guiro.MouseManager(self)
 
+  -- disable scissoring when drawing is done
+  local disableScissorNode = lost.rg.Scissor.create(false)
+  disableScissorNode.name = "disableScissorNode"
+  self.rootNode:add(disableScissorNode)
+
 	self.parent = nil
 
 --[[ FIXME: we need to move this stuff into the RenderGraph

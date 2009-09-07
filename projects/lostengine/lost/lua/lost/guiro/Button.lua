@@ -33,7 +33,7 @@ function Button:constructor()
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)	
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)	
   self:addEventListener("mouseDown", function(event) self:mouseDown(event) end)	
-  self:addEventListener("mouseUp", function(event) self:mouseUp(event) end)	
+  self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)	
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)	
 end
 
@@ -56,7 +56,7 @@ function Button:mouseDown(event)
   self:bubbleEvent(pressEvent)
 end
 
-function Button:mouseUp(event)
+function Button:mouseUpInside(event)
   self._state = Button.STATE_HOVER
   callLater(self.deferredUpdateViewVisibility)  
   local clickEvent = lost.guiro.event.Event("buttonClick")
