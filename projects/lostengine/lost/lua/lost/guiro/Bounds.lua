@@ -24,7 +24,8 @@ function Bounds:constructor(x, y, width, height)
 end
 
 function Bounds:rect(parentRect)
-  return lost.math.Rect(self:x(parentRect), self:y(parentRect), self:width(parentRect), self:height(parentRect))
+  return lost.math.Rect(math.floor(self:x(parentRect)), math.floor(self:y(parentRect)),
+      math.floor(self:width(parentRect)), math.floor(self:height(parentRect)))
 end
 
 function xcenter(mod)
