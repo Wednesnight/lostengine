@@ -88,7 +88,6 @@ function Screen:listenTo(dispatcher)
         local resizeEvent = lost.application.ResizeEvent.cast(event)
         self.bounds.width = lost.guiro.wabs(resizeEvent.width)
         self.bounds.height = lost.guiro.habs(resizeEvent.height)
---        log.debug("window resized to "..resizeEvent.width.." "..resizeEvent.height)
         callLater(function() self:updateLayout(true) end)
       end)
 end
@@ -106,7 +105,6 @@ function Screen:updateLayout(forceUpdate)
   local doUpdateLayout = forceUpdate or self.dirtyLayout
   lost.guiro.View.updateLayout(self, forceUpdate)
   if doUpdateLayout then
-    log.debug("Screen:updateLayout()")
     self.camera:viewport(self.currentGlobalRect)
   end
 end

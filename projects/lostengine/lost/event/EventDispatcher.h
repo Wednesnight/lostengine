@@ -3,6 +3,8 @@
 
 #include <boost/function.hpp>
 #include <boost/signal.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/condition.hpp>
 #include "lost/event/Event.h"
 #include <stdexcept>
 
@@ -61,8 +63,13 @@ namespace lost
        * call this to signal queued events
        */
       void processEvents(const double& timeoutInMilliSeconds = 0);
+
+    private:
+      boost::mutex queueMutex;
+      lost::shared_ptr<std::list<lost::shared_ptr<lost::event::Event> > > eventQueue;
       
-      lost::shared_ptr<EventDispatcherHiddenMembers> hiddenMembers;
+      boost::mutex waitEventMutex;
+      boost::condition waitEventCondition;
     };
   }
 }
