@@ -52,13 +52,9 @@ function startup(tasklet)
 end
 
 function update(tasklet)
-  log.debug("1")
   processCallLaterQueue()
-  log.debug("2")
   screen.rootNode:process(tasklet.window.context)
-  log.debug("3")
   tasklet.window.context:swapBuffers()
-  log.debug("4")
   if numUpdateLayout > 0 then
     log.debug("--------- updates: "..numUpdateLayout)
     numUpdateLayout = 0
