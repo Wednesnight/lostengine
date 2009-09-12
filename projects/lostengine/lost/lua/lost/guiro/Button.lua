@@ -48,7 +48,6 @@ function Button:mouseLeave(event)
 end
 
 function Button:mouseDown(event)
-  log.debug("button down")
   self._state = Button.STATE_PUSHED
   callLater(self.deferredUpdateViewVisibility)  
   local pressEvent = lost.guiro.event.Event("buttonDown")
@@ -58,7 +57,6 @@ function Button:mouseDown(event)
 end
 
 function Button:mouseUpInside(event)
-  log.debug("button up inside")
   self._state = Button.STATE_HOVER
   callLater(self.deferredUpdateViewVisibility)  
   local clickEvent = lost.guiro.event.Event("buttonClick")
@@ -72,7 +70,6 @@ function Button:mouseUpInside(event)
 end
 
 function Button:mouseUpOutside(event)
-  log.debug("button up outside")
   self._state = Button.STATE_NORMAL
   callLater(self.deferredUpdateViewVisibility)  
   local releaseEvent = lost.guiro.event.Event("buttonUp")

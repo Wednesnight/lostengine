@@ -1,6 +1,5 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/platform/Platform.h"
-#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -64,9 +63,7 @@ namespace lost
       boost::unique_lock<boost::mutex> lock(waitEventMutex);
       while(eventQueue->size() <= 0)
       {
-        DOUT("wait");
         waitEventCondition.wait(lock);
-        DOUT("done");
       }
     }
 
@@ -78,7 +75,6 @@ namespace lost
     
     void EventDispatcher::queueEvent(const lost::shared_ptr<lost::event::Event>& event)
     {
-      DOUT(event->type);
       queueMutex.lock();
       eventQueue->push_back(event);
       queueMutex.unlock();

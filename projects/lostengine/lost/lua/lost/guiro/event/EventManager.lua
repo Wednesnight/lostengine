@@ -139,19 +139,25 @@ end
 
 function EventManager:propagateUpDownEvents(viewStack, event)
   if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
+    event.target = viewStack[#viewStack] -- the lowermost view is the target
+    self:propagateEvent(viewStack, event, #viewStack)
     self.previousMouseClickStack = viewStack
   elseif event.type == lost.guiro.event.MouseEvent.MOUSE_UP then
     local idx = math.max(#viewStack, #(self.previousMouseClickStack))
-    local oldView = self.previousMouseClickStack[idx]
-    local newView = viewStack[idx]
+    local oldView = self.previousMouseClickStack[idx] -- the lowermost view is the target
+    local newView = viewStack[idx] -- the lowermost view is the target
     if oldView and oldView ~= newView then
       event.target = oldView
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
+      self:propagateEvent(self.previousMouseClickStack, event, idx)
+      event.type = lost.guiro.event.MouseEvent.MOUSE_UP
       self:propagateEvent(self.previousMouseClickStack, event, idx)
     end
     if newView then
       event.target = newView
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP_INSIDE
+      self:propagateEvent(viewStack, event, idx)
+      event.type = lost.guiro.event.MouseEvent.MOUSE_UP
       self:propagateEvent(viewStack, event, idx)
     end
     self.previousMouseClickStack = {}
@@ -198,17 +204,17 @@ function EventManager:propagateMouseEvent(rootView, event)
   local mouseevent = lost.guiro.event.MouseEvent(event) 
   local viewStack = self:findViewStack(rootView, mouseevent)
 
-  -- dispatch mouseUp, mouseDown
-  mouseevent.target = viewStack[#viewStack] -- the lowermost view is the target of the click 
-  self:propagateEvent(viewStack, mouseevent, #viewStack)
-
-  -- dispatch mouseUpInside, mouseUpOutside
+  -- dispatch up, down
   if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
     self:propagateUpDownEvents(viewStack, mouseevent)
     if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
       self:propagateFocusEvents(viewStack, mouseevent)
     end  
-  end  
+  -- scroll, move
+  else
+    mouseevent.target = viewStack[#viewStack] -- the lowermost view is the target
+    self:propagateEvent(viewStack, mouseevent, #viewStack)
+  end
   
   -- dispatch enter, leave
   if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then

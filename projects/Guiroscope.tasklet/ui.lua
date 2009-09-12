@@ -25,10 +25,10 @@ return dcl.guiro:Screen
   {
 --    mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target:globalRect())) end,
 --    mouseLeave = function(event) log.debug("leave "..event.target.id) end,
-    mouseDown = function(event) log.debug("down "..type(event)..event.target.id) end,
-    mouseUp = function(event) log.debug("up "..type(event)..event.target.id) end,
-    mouseUpInside = function(event) log.debug("up inside "..type(event)..event.target.id) end,
-    mouseUpOutside = function(event) log.debug("up outside "..type(event)..event.target.id) end,
+--    mouseDown = function(event) log.debug("down "..event.target.id) end,
+--    mouseUp = function(event) log.debug("up "..event.target.id) end,
+--    mouseUpInside = function(event) log.debug("up inside "..event.target.id) end,
+--    mouseUpOutside = function(event) log.debug("up outside "..event.target.id) end,
 --    buttonClick = function(event) log.debug("CLICKED "..event.target.id) end,
 --    mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
   },
