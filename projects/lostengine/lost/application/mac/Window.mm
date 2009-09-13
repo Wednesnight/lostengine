@@ -91,7 +91,7 @@
 {
   if (parent)
   {
-    NSRect curFrame = [self frame];
+    NSRect curFrame = [self contentRectForFrameRect:[self frame]];
     lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(new lost::application::ResizeEvent(curFrame.size.width, curFrame.size.height));
     parent->dispatcher->queueEvent(resizeEvent);
   }
