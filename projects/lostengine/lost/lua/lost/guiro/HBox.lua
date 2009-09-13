@@ -38,23 +38,18 @@ function HBox:updateVerticalAlignment(targetView)
 end
 
 function HBox:updateSpread()
---	log.debug("start ---")
 	local numViews = #(self.subviews)
 	local relfactor = 1/(numViews-1)
---	log.debug("relfactor "..relfactor)
 	local f = 1
 	for k,view in pairs(self.subviews) do
-		log.debug("f "..f)
 		view.bounds.x = lost.guiro.xcenter{rel=f}		
 		f = f- relfactor
 		self:updateVerticalAlignment(view)
 		view:needsLayout()
 	end
---	log.debug("end ---")
 end
 
 function HBox:updateStack()
-	log.debug("HBox updateStack")
   local subviewWidth = self:calculateSubviewWidth()
   local totalWidth = subviewWidth + (self._spacing*(#self.subviews-1))
   local xoffset = 0
@@ -74,6 +69,7 @@ function HBox:updateStack()
     gr = view:globalRect()
     currentOffset = currentOffset - gr.width
     view.bounds.x = lost.guiro.xabs(currentOffset)
+    view:needsLayout()
 		self:updateVerticalAlignment(view)    
     currentOffset = currentOffset - self._spacing
   end
@@ -87,7 +83,6 @@ function HBox:update()
   else
     log.warn("can't update HBox for mode '"..self._mode.."'")
   end
-	self:needsLayout()
 end
 
 function HBox:addSubview(newview, pos)
@@ -98,8 +93,7 @@ end
 function HBox:updateLayout(forceUpdate)
   local doUpdate = forceUpdate or self.dirtyLayout
   lost.guiro.View.updateLayout(self, forceUpdate)
-  -- FIXME only own rect should be update here, subviews are managed by HBox update function
---  if doUpdate then callLater(self.deferredUpdate) end
+  if doUpdate then callLater(self.deferredUpdate) end
 end
 
 function HBox:mode(val)

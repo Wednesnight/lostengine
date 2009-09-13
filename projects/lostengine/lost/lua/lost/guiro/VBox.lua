@@ -72,6 +72,7 @@ function VBox:updateStack()
     gr = view:globalRect()
     currentOffset = currentOffset - gr.height
     view.bounds.y = lost.guiro.yabs(currentOffset)
+    view:needsLayout()
 		self:updateHorizontalAlignment(view)    
     currentOffset = currentOffset - self._spacing
   end
@@ -95,7 +96,6 @@ end
 function VBox:updateLayout(forceUpdate)
   local doUpdate = forceUpdate or self.dirtyLayout
   lost.guiro.View.updateLayout(self, forceUpdate)
-  -- FIXME only own rect should be update here, subviews are managed by HBox update function
   if doUpdate then callLater(self.deferredUpdate) end
 end
 
