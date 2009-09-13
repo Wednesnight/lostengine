@@ -53,6 +53,7 @@ end
 
 function update(tasklet)
   processCallLaterQueue()
+  screen:updateLayout(false)
   screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
   if numUpdateLayout > 0 then
