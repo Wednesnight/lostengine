@@ -12,7 +12,7 @@ VALID_ARCHS = x86_64 armv6
 
 // thirdparty defines
 THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"
-BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_36_0"
+BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_40_0"
 BULLET_ROOT = "$(THIRDPARTY_ROOT)/bullet/bullet_2_74"
 FHTAGN_ROOT = "$(THIRDPARTY_ROOT)/fhtagn/fhtagn_2008_11_12"
 FREETYPE_ROOT = "$(THIRDPARTY_ROOT)/freetype2/freetype_2_3_7"
@@ -27,12 +27,12 @@ ZLIB_ROOT = "$(THIRDPARTY_ROOT)/zlib/zlib_1_2_3"
 
 // Search Paths
 ALWAYS_SEARCH_USER_PATHS = NO
-HEADERS1 = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)/include" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)"
+HEADERS1 = "$(LOSTENGINE_ROOT)/projects/lostengine" "$(BOOST_ROOT)" "$(FREETYPE_ROOT)/include" "$(GLEE_ROOT)/include" "$(LUA_ROOT)/include" "$(LUABIND_ROOT)"
 HEADERS2 = "$(STBIMAGE_ROOT)" "$(STBVORBIS_ROOT)" "$(UNITTESTPP_ROOT)/include" "$(ZLIB_ROOT)/include" "$(HASHLIB_ROOT)" "$(FHTAGN_ROOT)/include" "$(FHTAGN_ROOT)/source" "$(BULLET_ROOT)/src"
 HEADER_SEARCH_PATHS = $(HEADERS1) $(HEADERS2)
 
 // Compiler Version
-GCC_VERSION = 4.0
+GCC_VERSION = 4.2
 
 
 // GCC 4.0 - Language
@@ -50,4 +50,5 @@ GCC_WARN_UNUSED_VARIABLE = YES
 // specify the actual pch file in the debug/release configuration
 GCC_PRECOMPILE_PREFIX_HEADER = YES
 GCC_PFE_FILE_C_DIALECTS = c++
-GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
+GCC_SYMBOLS_PRIVATE_EXTERN = YES

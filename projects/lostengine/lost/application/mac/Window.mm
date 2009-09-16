@@ -254,7 +254,7 @@
   return result;
 }
 
-- (void)mouseEvent: (NSEvent*)event type:(std::string)type
+- (void)mouseEvent: (NSEvent*)event type:(const char*)type
 {
   if (parent && [self validEvent: event type:type])
   {
@@ -273,17 +273,17 @@
 
 - (void)mouseMoved: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
 }
 
 - (void)mouseDragged: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
 }
 
 - (void)rightMouseDragged: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
 }
 
 @end
@@ -311,27 +311,27 @@
 
 - (void)mouseDown: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
 }
 
 - (void)mouseUp: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
 }
 
 - (void)rightMouseDown: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
 }
 
 - (void)rightMouseUp: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
 }
 
 - (void)scrollWheel: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL()];
+  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
 }
 
 @end
