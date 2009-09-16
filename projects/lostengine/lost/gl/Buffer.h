@@ -1,7 +1,7 @@
 #ifndef LOST_GL_BUFFER_H
 #define LOST_GL_BUFFER_H
 
-#include "lost/gl/gltypes.h"
+#include "lost/gl/gl.h"
 
 namespace lost
 {
