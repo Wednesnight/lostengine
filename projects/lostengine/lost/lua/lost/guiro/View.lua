@@ -297,7 +297,7 @@ function View:updateLayout(forceUpdate)
     for key,view in next,self.subviews do
       view:updateLayout(true)
     end
-    incUp()
+--    incUp()
   -- subview needs update
   elseif self.dirtySubviewLayout then
     self.dirtySubviewLayout = false
