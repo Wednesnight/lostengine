@@ -1,0 +1,11 @@
+local Rect = lost.math.Rect
+local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
+local Color = lost.common.Color
+local MatrixTranslation = lost.math.MatrixTranslation
+local cam3dPosition = Vec3(1,2,2)
+
+local lightShader = lostgl:Shader
+{
+  filename = "light"
+}

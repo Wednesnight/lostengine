@@ -1,0 +1,22 @@
+Import('env')
+
+SOURCES = [
+  '../source/adler32.c',
+  '../source/compress.c',
+  '../source/crc32.c',
+  '../source/deflate.c',
+  '../source/gzio.c',
+  '../source/infback.c',
+  '../source/inffast.c',
+  '../source/inflate.c',
+  '../source/inftrees.c',
+  '../source/trees.c',
+  '../source/uncompr.c',
+  '../source/zutil.c',
+]
+
+import os
+env.appendPaths(os.getcwd(), include_dir = 'include')
+env.LIB_OBJECTS.extend([StaticObject(s,
+  CPPPATH = env.INCLUDES + ['../source'])
+    for s in SOURCES])

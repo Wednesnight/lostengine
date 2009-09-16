@@ -1,0 +1,335 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */ = {isa = PBXBuildFile; fileRef = EA054B730ED4A03800E41D83 /* wannabill.ogg */; };
+		EA70F8790ED082D7000AA8CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8780ED082D7000AA8CB /* OpenAL.framework */; };
+		EA70F8B10ED083A0000AA8CB /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */; };
+		EA70F8C90ED084CC000AA8CB /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA70F8A90ED0838A000AA8CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA70F8AB0ED0838A000AA8CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA70F8AD0ED0838A000AA8CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA70F8AF0ED08396000AA8CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA7F01950F7F03E500CE0B02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteInfo = LostEngineUnittests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* altest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = altest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA054B730ED4A03800E41D83 /* wannabill.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = wannabill.ogg; sourceTree = "<group>"; };
+		EA70F8780ED082D7000AA8CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
+		EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA70F8B10ED083A0000AA8CB /* libLostEngine.a in Frameworks */,
+				EA70F8790ED082D7000AA8CB /* OpenAL.framework in Frameworks */,
+				EA70F8C90ED084CC000AA8CB /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* altest */ = {
+			isa = PBXGroup;
+			children = (
+				EA4143D70ED10BF600712F45 /* Resources */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				EA70F8720ED082B6000AA8CB /* Libraries */,
+			);
+			name = altest;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7796FE84155DC02AAC07 /* main.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* altest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA4143D70ED10BF600712F45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA054B730ED4A03800E41D83 /* wannabill.ogg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA70F8720ED082B6000AA8CB /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EA70F8C80ED084CC000AA8CB /* CoreFoundation.framework */,
+				EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */,
+				EA70F8780ED082D7000AA8CB /* OpenAL.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		EA70F8840ED0838A000AA8CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */,
+				EA70F8AC0ED0838A000AA8CB /* libLostEngine.a */,
+				EA70F8AE0ED0838A000AA8CB /* libLostEngine.a */,
+				EA7F01960F7F03E500CE0B02 /* LostEngineUnittests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* altest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "altest" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				EA4143D80ED10BF600712F45 /* Resources */,
+				3E5FBA2D0EE3C929002B3C14 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA70F8B00ED08396000AA8CB /* PBXTargetDependency */,
+			);
+			name = altest;
+			productInstallPath = "$(HOME)/bin";
+			productName = altest;
+			productReference = 8DD76F6C0486A84900D96B5E /* altest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "altest" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* altest */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA70F8840ED0838A000AA8CB /* Products */;
+					ProjectRef = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* altest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA70F8A90ED0838A000AA8CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA70F8AC0ED0838A000AA8CB /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA70F8AB0ED0838A000AA8CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA70F8AE0ED0838A000AA8CB /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA70F8AD0ED0838A000AA8CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA7F01960F7F03E500CE0B02 /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA7F01950F7F03E500CE0B02 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA4143D80ED10BF600712F45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E5FBA2D0EE3C929002B3C14 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -f \"${BUILD_DIR}/${CONFIGURATION}/wannabill.ogg\"\ncp wannabill.ogg \"${BUILD_DIR}/${CONFIGURATION}/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA70F8B00ED08396000AA8CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = EA70F8AF0ED08396000AA8CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = altest;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_7/include\" \"$(SRCROOT)/../../thirdparty/glee/glee_5_21/include\" \"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/include\" \"$(SRCROOT)/../../thirdparty/hashlib++/hashlib++_0_3_1\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\" \"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\" \"$(SRCROOT)/../../thirdparty/stb/stb_vorbis_0_99996\"";
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = altest;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "altest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "altest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

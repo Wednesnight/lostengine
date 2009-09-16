@@ -11,7 +11,6 @@
 #include "lost/engine/KeySym.h"
 #include "lost/common/FpsMeter.h"
 #include "lost/gl/ShaderHelper.h"
-#include <boost/shared_ptr.hpp>
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
@@ -29,8 +28,8 @@ struct Occlud0r
   float                   zfar;
   float                   passed;
 
-  boost::shared_ptr<lost::gl::ShaderProgram>      lightingShader;
-  boost::shared_ptr<lost::gl::ShaderProgram>      ssaoShader;
+  lost::shared_ptr<lost::gl::ShaderProgram>      lightingShader;
+  lost::shared_ptr<lost::gl::ShaderProgram>      ssaoShader;
   lost::gl::FrameBuffer frameBuffer;
   lost::gl::Texture depthTexture;
   lost::gl::Texture colorTexture;

@@ -13,8 +13,10 @@ namespace lost
     {
         union
         {
-            struct {float x,y;};
-            struct {float w,h;};
+          struct {float x,y;};
+          struct {float width,height;};
+          struct {float min,max;};
+          struct {float near,far;};
         };
 
         Vec2(float a, float b) : x(a), y(b) {}
@@ -32,13 +34,14 @@ namespace lost
       return (inOp.x*inOp.x + inOp.y*inOp.y);
     }
 
-    inline void normalise(Vec2& ioOp)
+    inline Vec2& normalise(Vec2& ioOp)
     {
       float l = len(ioOp);
       float x0 = 1.0f/l;
 
       ioOp.x *= x0;
       ioOp.y *= x0;
+      return ioOp;
     }
 
     inline Vec2 perpendicular(Vec2& v)
@@ -59,6 +62,16 @@ namespace lost
       return result;
     }
 
+    inline Vec2 operator*(float v, const Vec2& inOp1)
+    {
+      return inOp1*v;
+    }
+
+    inline float operator*(const Vec2& inOp1, const Vec2& inOp2)
+    {
+      return (inOp1.x*inOp2.x + inOp1.y*inOp2.y);
+    }
+    
     inline Vec2 operator+(const Vec2& inOp1, const Vec2& inOp2)
     {
       Vec2 result;
@@ -92,7 +105,15 @@ namespace lost
       return stream;
     }
 
-    // compares two vectors, taking epsilong into account for rounding errors
+    inline float angle(const Vec2& inOp1, const Vec2& inOp2)
+    {
+      float result = 0.0f;
+      float length = (len(inOp1) * len(inOp2));
+      if (length > 0) result = rad2deg(acos((inOp1 * inOp2) / length));
+      return result;
+    }
+    
+    // compares two vectors, taking epsilon into account for rounding errors
     inline bool compare(const Vec2& l, const Vec2& r, float epsilon)
     {
       if(   compare(l.x, r.x, epsilon)

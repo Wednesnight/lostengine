@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3EE055790E6550E100E044A2 /* hashlibpp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055610E6550E100E044A2 /* hashlibpp.h */; };
+		3EE0557A0E6550E100E044A2 /* hl_exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055620E6550E100E044A2 /* hl_exception.h */; };
+		3EE0557B0E6550E100E044A2 /* hl_hashwrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055630E6550E100E044A2 /* hl_hashwrapper.h */; };
+		3EE0557C0E6550E100E044A2 /* hl_md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055640E6550E100E044A2 /* hl_md5.cpp */; };
+		3EE0557D0E6550E100E044A2 /* hl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055650E6550E100E044A2 /* hl_md5.h */; };
+		3EE0557E0E6550E100E044A2 /* hl_md5wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055660E6550E100E044A2 /* hl_md5wrapper.cpp */; };
+		3EE0557F0E6550E100E044A2 /* hl_md5wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055670E6550E100E044A2 /* hl_md5wrapper.h */; };
+		3EE055800E6550E100E044A2 /* hl_sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055680E6550E100E044A2 /* hl_sha1.cpp */; };
+		3EE055810E6550E100E044A2 /* hl_sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055690E6550E100E044A2 /* hl_sha1.h */; };
+		3EE055820E6550E100E044A2 /* hl_sha1wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556A0E6550E100E044A2 /* hl_sha1wrapper.cpp */; };
+		3EE055830E6550E100E044A2 /* hl_sha1wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556B0E6550E100E044A2 /* hl_sha1wrapper.h */; };
+		3EE055840E6550E100E044A2 /* hl_sha2ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556C0E6550E100E044A2 /* hl_sha2ext.cpp */; };
+		3EE055850E6550E100E044A2 /* hl_sha2ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556D0E6550E100E044A2 /* hl_sha2ext.h */; };
+		3EE055860E6550E100E044A2 /* hl_sha2mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556E0E6550E100E044A2 /* hl_sha2mac.h */; };
+		3EE055870E6550E100E044A2 /* hl_sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556F0E6550E100E044A2 /* hl_sha256.cpp */; };
+		3EE055880E6550E100E044A2 /* hl_sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055700E6550E100E044A2 /* hl_sha256.h */; };
+		3EE055890E6550E100E044A2 /* hl_sha256wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055710E6550E100E044A2 /* hl_sha256wrapper.cpp */; };
+		3EE0558A0E6550E100E044A2 /* hl_sha256wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055720E6550E100E044A2 /* hl_sha256wrapper.h */; };
+		3EE0558B0E6550E100E044A2 /* hl_sha384wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055730E6550E100E044A2 /* hl_sha384wrapper.cpp */; };
+		3EE0558C0E6550E100E044A2 /* hl_sha384wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055740E6550E100E044A2 /* hl_sha384wrapper.h */; };
+		3EE0558D0E6550E100E044A2 /* hl_sha512wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055750E6550E100E044A2 /* hl_sha512wrapper.cpp */; };
+		3EE0558E0E6550E100E044A2 /* hl_sha512wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055760E6550E100E044A2 /* hl_sha512wrapper.h */; };
+		3EE0558F0E6550E100E044A2 /* hl_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055770E6550E100E044A2 /* hl_types.h */; };
+		3EE055AB0E65519A00E044A2 /* hashlibpp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055610E6550E100E044A2 /* hashlibpp.h */; };
+		3EE055AC0E65519A00E044A2 /* hl_exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055620E6550E100E044A2 /* hl_exception.h */; };
+		3EE055AD0E65519A00E044A2 /* hl_hashwrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055630E6550E100E044A2 /* hl_hashwrapper.h */; };
+		3EE055AE0E65519A00E044A2 /* hl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055650E6550E100E044A2 /* hl_md5.h */; };
+		3EE055AF0E65519A00E044A2 /* hl_md5wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055670E6550E100E044A2 /* hl_md5wrapper.h */; };
+		3EE055B00E65519A00E044A2 /* hl_sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055690E6550E100E044A2 /* hl_sha1.h */; };
+		3EE055B10E65519A00E044A2 /* hl_sha1wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556B0E6550E100E044A2 /* hl_sha1wrapper.h */; };
+		3EE055B20E65519A00E044A2 /* hl_sha2ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556D0E6550E100E044A2 /* hl_sha2ext.h */; };
+		3EE055B30E65519A00E044A2 /* hl_sha2mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556E0E6550E100E044A2 /* hl_sha2mac.h */; };
+		3EE055B40E65519A00E044A2 /* hl_sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055700E6550E100E044A2 /* hl_sha256.h */; };
+		3EE055B50E65519A00E044A2 /* hl_sha256wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055720E6550E100E044A2 /* hl_sha256wrapper.h */; };
+		3EE055B60E65519A00E044A2 /* hl_sha384wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055740E6550E100E044A2 /* hl_sha384wrapper.h */; };
+		3EE055B70E65519A00E044A2 /* hl_sha512wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055760E6550E100E044A2 /* hl_sha512wrapper.h */; };
+		3EE055B80E65519A00E044A2 /* hl_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055770E6550E100E044A2 /* hl_types.h */; };
+		3EE055BA0E65519A00E044A2 /* hl_md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055640E6550E100E044A2 /* hl_md5.cpp */; };
+		3EE055BB0E65519A00E044A2 /* hl_md5wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055660E6550E100E044A2 /* hl_md5wrapper.cpp */; };
+		3EE055BC0E65519A00E044A2 /* hl_sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055680E6550E100E044A2 /* hl_sha1.cpp */; };
+		3EE055BD0E65519A00E044A2 /* hl_sha1wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556A0E6550E100E044A2 /* hl_sha1wrapper.cpp */; };
+		3EE055BE0E65519A00E044A2 /* hl_sha2ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556C0E6550E100E044A2 /* hl_sha2ext.cpp */; };
+		3EE055BF0E65519A00E044A2 /* hl_sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556F0E6550E100E044A2 /* hl_sha256.cpp */; };
+		3EE055C00E65519A00E044A2 /* hl_sha256wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055710E6550E100E044A2 /* hl_sha256wrapper.cpp */; };
+		3EE055C10E65519A00E044A2 /* hl_sha384wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055730E6550E100E044A2 /* hl_sha384wrapper.cpp */; };
+		3EE055C20E65519A00E044A2 /* hl_sha512wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055750E6550E100E044A2 /* hl_sha512wrapper.cpp */; };
+		3EE055CA0E65519D00E044A2 /* hashlibpp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055610E6550E100E044A2 /* hashlibpp.h */; };
+		3EE055CB0E65519D00E044A2 /* hl_exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055620E6550E100E044A2 /* hl_exception.h */; };
+		3EE055CC0E65519D00E044A2 /* hl_hashwrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055630E6550E100E044A2 /* hl_hashwrapper.h */; };
+		3EE055CD0E65519D00E044A2 /* hl_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055650E6550E100E044A2 /* hl_md5.h */; };
+		3EE055CE0E65519D00E044A2 /* hl_md5wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055670E6550E100E044A2 /* hl_md5wrapper.h */; };
+		3EE055CF0E65519D00E044A2 /* hl_sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055690E6550E100E044A2 /* hl_sha1.h */; };
+		3EE055D00E65519D00E044A2 /* hl_sha1wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556B0E6550E100E044A2 /* hl_sha1wrapper.h */; };
+		3EE055D10E65519D00E044A2 /* hl_sha2ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556D0E6550E100E044A2 /* hl_sha2ext.h */; };
+		3EE055D20E65519D00E044A2 /* hl_sha2mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE0556E0E6550E100E044A2 /* hl_sha2mac.h */; };
+		3EE055D30E65519D00E044A2 /* hl_sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055700E6550E100E044A2 /* hl_sha256.h */; };
+		3EE055D40E65519D00E044A2 /* hl_sha256wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055720E6550E100E044A2 /* hl_sha256wrapper.h */; };
+		3EE055D50E65519D00E044A2 /* hl_sha384wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055740E6550E100E044A2 /* hl_sha384wrapper.h */; };
+		3EE055D60E65519D00E044A2 /* hl_sha512wrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055760E6550E100E044A2 /* hl_sha512wrapper.h */; };
+		3EE055D70E65519D00E044A2 /* hl_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE055770E6550E100E044A2 /* hl_types.h */; };
+		3EE055D90E65519D00E044A2 /* hl_md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055640E6550E100E044A2 /* hl_md5.cpp */; };
+		3EE055DA0E65519D00E044A2 /* hl_md5wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055660E6550E100E044A2 /* hl_md5wrapper.cpp */; };
+		3EE055DB0E65519D00E044A2 /* hl_sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055680E6550E100E044A2 /* hl_sha1.cpp */; };
+		3EE055DC0E65519D00E044A2 /* hl_sha1wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556A0E6550E100E044A2 /* hl_sha1wrapper.cpp */; };
+		3EE055DD0E65519D00E044A2 /* hl_sha2ext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556C0E6550E100E044A2 /* hl_sha2ext.cpp */; };
+		3EE055DE0E65519D00E044A2 /* hl_sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0556F0E6550E100E044A2 /* hl_sha256.cpp */; };
+		3EE055DF0E65519D00E044A2 /* hl_sha256wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055710E6550E100E044A2 /* hl_sha256wrapper.cpp */; };
+		3EE055E00E65519D00E044A2 /* hl_sha384wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055730E6550E100E044A2 /* hl_sha384wrapper.cpp */; };
+		3EE055E10E65519D00E044A2 /* hl_sha512wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE055750E6550E100E044A2 /* hl_sha512wrapper.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3EE055610E6550E100E044A2 /* hashlibpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hashlibpp.h; path = ../hashlibpp.h; sourceTree = SOURCE_ROOT; };
+		3EE055620E6550E100E044A2 /* hl_exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_exception.h; path = ../hl_exception.h; sourceTree = SOURCE_ROOT; };
+		3EE055630E6550E100E044A2 /* hl_hashwrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_hashwrapper.h; path = ../hl_hashwrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE055640E6550E100E044A2 /* hl_md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_md5.cpp; path = ../hl_md5.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055650E6550E100E044A2 /* hl_md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_md5.h; path = ../hl_md5.h; sourceTree = SOURCE_ROOT; };
+		3EE055660E6550E100E044A2 /* hl_md5wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_md5wrapper.cpp; path = ../hl_md5wrapper.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055670E6550E100E044A2 /* hl_md5wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_md5wrapper.h; path = ../hl_md5wrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE055680E6550E100E044A2 /* hl_sha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha1.cpp; path = ../hl_sha1.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055690E6550E100E044A2 /* hl_sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha1.h; path = ../hl_sha1.h; sourceTree = SOURCE_ROOT; };
+		3EE0556A0E6550E100E044A2 /* hl_sha1wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha1wrapper.cpp; path = ../hl_sha1wrapper.cpp; sourceTree = SOURCE_ROOT; };
+		3EE0556B0E6550E100E044A2 /* hl_sha1wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha1wrapper.h; path = ../hl_sha1wrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE0556C0E6550E100E044A2 /* hl_sha2ext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha2ext.cpp; path = ../hl_sha2ext.cpp; sourceTree = SOURCE_ROOT; };
+		3EE0556D0E6550E100E044A2 /* hl_sha2ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha2ext.h; path = ../hl_sha2ext.h; sourceTree = SOURCE_ROOT; };
+		3EE0556E0E6550E100E044A2 /* hl_sha2mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha2mac.h; path = ../hl_sha2mac.h; sourceTree = SOURCE_ROOT; };
+		3EE0556F0E6550E100E044A2 /* hl_sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha256.cpp; path = ../hl_sha256.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055700E6550E100E044A2 /* hl_sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha256.h; path = ../hl_sha256.h; sourceTree = SOURCE_ROOT; };
+		3EE055710E6550E100E044A2 /* hl_sha256wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha256wrapper.cpp; path = ../hl_sha256wrapper.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055720E6550E100E044A2 /* hl_sha256wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha256wrapper.h; path = ../hl_sha256wrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE055730E6550E100E044A2 /* hl_sha384wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha384wrapper.cpp; path = ../hl_sha384wrapper.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055740E6550E100E044A2 /* hl_sha384wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha384wrapper.h; path = ../hl_sha384wrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE055750E6550E100E044A2 /* hl_sha512wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = hl_sha512wrapper.cpp; path = ../hl_sha512wrapper.cpp; sourceTree = SOURCE_ROOT; };
+		3EE055760E6550E100E044A2 /* hl_sha512wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_sha512wrapper.h; path = ../hl_sha512wrapper.h; sourceTree = SOURCE_ROOT; };
+		3EE055770E6550E100E044A2 /* hl_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hl_types.h; path = ../hl_types.h; sourceTree = SOURCE_ROOT; };
+		3EE055C70E65519A00E044A2 /* libhashlib++-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libhashlib++-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EE055E60E65519D00E044A2 /* libhashlib++-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libhashlib++-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libhashlib++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libhashlib++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3EE055C30E65519A00E044A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EE055E20E65519D00E044A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* hashlib++ */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = "hashlib++";
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3EE055610E6550E100E044A2 /* hashlibpp.h */,
+				3EE055620E6550E100E044A2 /* hl_exception.h */,
+				3EE055630E6550E100E044A2 /* hl_hashwrapper.h */,
+				3EE055640E6550E100E044A2 /* hl_md5.cpp */,
+				3EE055650E6550E100E044A2 /* hl_md5.h */,
+				3EE055660E6550E100E044A2 /* hl_md5wrapper.cpp */,
+				3EE055670E6550E100E044A2 /* hl_md5wrapper.h */,
+				3EE055680E6550E100E044A2 /* hl_sha1.cpp */,
+				3EE055690E6550E100E044A2 /* hl_sha1.h */,
+				3EE0556A0E6550E100E044A2 /* hl_sha1wrapper.cpp */,
+				3EE0556B0E6550E100E044A2 /* hl_sha1wrapper.h */,
+				3EE0556C0E6550E100E044A2 /* hl_sha2ext.cpp */,
+				3EE0556D0E6550E100E044A2 /* hl_sha2ext.h */,
+				3EE0556E0E6550E100E044A2 /* hl_sha2mac.h */,
+				3EE0556F0E6550E100E044A2 /* hl_sha256.cpp */,
+				3EE055700E6550E100E044A2 /* hl_sha256.h */,
+				3EE055710E6550E100E044A2 /* hl_sha256wrapper.cpp */,
+				3EE055720E6550E100E044A2 /* hl_sha256wrapper.h */,
+				3EE055730E6550E100E044A2 /* hl_sha384wrapper.cpp */,
+				3EE055740E6550E100E044A2 /* hl_sha384wrapper.h */,
+				3EE055750E6550E100E044A2 /* hl_sha512wrapper.cpp */,
+				3EE055760E6550E100E044A2 /* hl_sha512wrapper.h */,
+				3EE055770E6550E100E044A2 /* hl_types.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libhashlib++.a */,
+				3EE055C70E65519A00E044A2 /* libhashlib++-iphone.a */,
+				3EE055E60E65519D00E044A2 /* libhashlib++-simulator.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3EE055AA0E65519A00E044A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE055AB0E65519A00E044A2 /* hashlibpp.h in Headers */,
+				3EE055AC0E65519A00E044A2 /* hl_exception.h in Headers */,
+				3EE055AD0E65519A00E044A2 /* hl_hashwrapper.h in Headers */,
+				3EE055AE0E65519A00E044A2 /* hl_md5.h in Headers */,
+				3EE055AF0E65519A00E044A2 /* hl_md5wrapper.h in Headers */,
+				3EE055B00E65519A00E044A2 /* hl_sha1.h in Headers */,
+				3EE055B10E65519A00E044A2 /* hl_sha1wrapper.h in Headers */,
+				3EE055B20E65519A00E044A2 /* hl_sha2ext.h in Headers */,
+				3EE055B30E65519A00E044A2 /* hl_sha2mac.h in Headers */,
+				3EE055B40E65519A00E044A2 /* hl_sha256.h in Headers */,
+				3EE055B50E65519A00E044A2 /* hl_sha256wrapper.h in Headers */,
+				3EE055B60E65519A00E044A2 /* hl_sha384wrapper.h in Headers */,
+				3EE055B70E65519A00E044A2 /* hl_sha512wrapper.h in Headers */,
+				3EE055B80E65519A00E044A2 /* hl_types.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EE055C90E65519D00E044A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE055CA0E65519D00E044A2 /* hashlibpp.h in Headers */,
+				3EE055CB0E65519D00E044A2 /* hl_exception.h in Headers */,
+				3EE055CC0E65519D00E044A2 /* hl_hashwrapper.h in Headers */,
+				3EE055CD0E65519D00E044A2 /* hl_md5.h in Headers */,
+				3EE055CE0E65519D00E044A2 /* hl_md5wrapper.h in Headers */,
+				3EE055CF0E65519D00E044A2 /* hl_sha1.h in Headers */,
+				3EE055D00E65519D00E044A2 /* hl_sha1wrapper.h in Headers */,
+				3EE055D10E65519D00E044A2 /* hl_sha2ext.h in Headers */,
+				3EE055D20E65519D00E044A2 /* hl_sha2mac.h in Headers */,
+				3EE055D30E65519D00E044A2 /* hl_sha256.h in Headers */,
+				3EE055D40E65519D00E044A2 /* hl_sha256wrapper.h in Headers */,
+				3EE055D50E65519D00E044A2 /* hl_sha384wrapper.h in Headers */,
+				3EE055D60E65519D00E044A2 /* hl_sha512wrapper.h in Headers */,
+				3EE055D70E65519D00E044A2 /* hl_types.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE055790E6550E100E044A2 /* hashlibpp.h in Headers */,
+				3EE0557A0E6550E100E044A2 /* hl_exception.h in Headers */,
+				3EE0557B0E6550E100E044A2 /* hl_hashwrapper.h in Headers */,
+				3EE0557D0E6550E100E044A2 /* hl_md5.h in Headers */,
+				3EE0557F0E6550E100E044A2 /* hl_md5wrapper.h in Headers */,
+				3EE055810E6550E100E044A2 /* hl_sha1.h in Headers */,
+				3EE055830E6550E100E044A2 /* hl_sha1wrapper.h in Headers */,
+				3EE055850E6550E100E044A2 /* hl_sha2ext.h in Headers */,
+				3EE055860E6550E100E044A2 /* hl_sha2mac.h in Headers */,
+				3EE055880E6550E100E044A2 /* hl_sha256.h in Headers */,
+				3EE0558A0E6550E100E044A2 /* hl_sha256wrapper.h in Headers */,
+				3EE0558C0E6550E100E044A2 /* hl_sha384wrapper.h in Headers */,
+				3EE0558E0E6550E100E044A2 /* hl_sha512wrapper.h in Headers */,
+				3EE0558F0E6550E100E044A2 /* hl_types.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3EE055A90E65519A00E044A2 /* hashlib++-iphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EE055C40E65519A00E044A2 /* Build configuration list for PBXNativeTarget "hashlib++-iphone" */;
+			buildPhases = (
+				3EE055AA0E65519A00E044A2 /* Headers */,
+				3EE055B90E65519A00E044A2 /* Sources */,
+				3EE055C30E65519A00E044A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "hashlib++-iphone";
+			productName = "hashlib++";
+			productReference = 3EE055C70E65519A00E044A2 /* libhashlib++-iphone.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3EE055C80E65519D00E044A2 /* hashlib++-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EE055E30E65519D00E044A2 /* Build configuration list for PBXNativeTarget "hashlib++-simulator" */;
+			buildPhases = (
+				3EE055C90E65519D00E044A2 /* Headers */,
+				3EE055D80E65519D00E044A2 /* Sources */,
+				3EE055E20E65519D00E044A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "hashlib++-simulator";
+			productName = "hashlib++";
+			productReference = 3EE055E60E65519D00E044A2 /* libhashlib++-simulator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D2AAC045055464E500DB518D /* hashlib++ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "hashlib++" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "hashlib++";
+			productName = "hashlib++";
+			productReference = D2AAC046055464E500DB518D /* libhashlib++.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "hashlib++" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* hashlib++ */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* hashlib++ */,
+				3EE055A90E65519A00E044A2 /* hashlib++-iphone */,
+				3EE055C80E65519D00E044A2 /* hashlib++-simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3EE055B90E65519A00E044A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE055BA0E65519A00E044A2 /* hl_md5.cpp in Sources */,
+				3EE055BB0E65519A00E044A2 /* hl_md5wrapper.cpp in Sources */,
+				3EE055BC0E65519A00E044A2 /* hl_sha1.cpp in Sources */,
+				3EE055BD0E65519A00E044A2 /* hl_sha1wrapper.cpp in Sources */,
+				3EE055BE0E65519A00E044A2 /* hl_sha2ext.cpp in Sources */,
+				3EE055BF0E65519A00E044A2 /* hl_sha256.cpp in Sources */,
+				3EE055C00E65519A00E044A2 /* hl_sha256wrapper.cpp in Sources */,
+				3EE055C10E65519A00E044A2 /* hl_sha384wrapper.cpp in Sources */,
+				3EE055C20E65519A00E044A2 /* hl_sha512wrapper.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EE055D80E65519D00E044A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE055D90E65519D00E044A2 /* hl_md5.cpp in Sources */,
+				3EE055DA0E65519D00E044A2 /* hl_md5wrapper.cpp in Sources */,
+				3EE055DB0E65519D00E044A2 /* hl_sha1.cpp in Sources */,
+				3EE055DC0E65519D00E044A2 /* hl_sha1wrapper.cpp in Sources */,
+				3EE055DD0E65519D00E044A2 /* hl_sha2ext.cpp in Sources */,
+				3EE055DE0E65519D00E044A2 /* hl_sha256.cpp in Sources */,
+				3EE055DF0E65519D00E044A2 /* hl_sha256wrapper.cpp in Sources */,
+				3EE055E00E65519D00E044A2 /* hl_sha384wrapper.cpp in Sources */,
+				3EE055E10E65519D00E044A2 /* hl_sha512wrapper.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EE0557C0E6550E100E044A2 /* hl_md5.cpp in Sources */,
+				3EE0557E0E6550E100E044A2 /* hl_md5wrapper.cpp in Sources */,
+				3EE055800E6550E100E044A2 /* hl_sha1.cpp in Sources */,
+				3EE055820E6550E100E044A2 /* hl_sha1wrapper.cpp in Sources */,
+				3EE055840E6550E100E044A2 /* hl_sha2ext.cpp in Sources */,
+				3EE055870E6550E100E044A2 /* hl_sha256.cpp in Sources */,
+				3EE055890E6550E100E044A2 /* hl_sha256wrapper.cpp in Sources */,
+				3EE0558B0E6550E100E044A2 /* hl_sha384wrapper.cpp in Sources */,
+				3EE0558D0E6550E100E044A2 /* hl_sha512wrapper.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++";
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++";
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
+			};
+			name = Release;
+		};
+		3EE055C50E65519A00E044A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++-iphone";
+				SDKROOT = iphoneos2.0;
+			};
+			name = Debug;
+		};
+		3EE055C60E65519A00E044A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++-iphone";
+				SDKROOT = iphoneos2.0;
+			};
+			name = Release;
+		};
+		3EE055E40E65519D00E044A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Debug;
+		};
+		3EE055E50E65519D00E044A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "hashlib++-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "hashlib++" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "hashlib++" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EE055C40E65519A00E044A2 /* Build configuration list for PBXNativeTarget "hashlib++-iphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EE055C50E65519A00E044A2 /* Debug */,
+				3EE055C60E65519A00E044A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EE055E30E65519D00E044A2 /* Build configuration list for PBXNativeTarget "hashlib++-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EE055E40E65519D00E044A2 /* Debug */,
+				3EE055E50E65519D00E044A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

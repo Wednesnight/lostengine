@@ -1,0 +1,120 @@
+require("Application")
+--require("TixTixTix")
+
+function lost.application.Application:configure(event)
+  log.debug("lost.application.Application:configure()")
+  self.config.displayAttributes = lost.common.DisplayAttributes()
+  if lost.platform.isIPhone() then
+    log.debug("iPhone")
+    self.config.displayAttributes.width = 320
+    self.config.displayAttributes.height = 480
+  else
+    log.debug("Desktop")
+    self.config.displayAttributes.width = 800
+    self.config.displayAttributes.height = 600
+  end
+  self.config.displayAttributes.redbits = 8
+  self.config.displayAttributes.bluebits = 8
+  self.config.displayAttributes.greenbits = 8
+  self.config.displayAttributes.alphabits = 8
+  self.config.displayAttributes.depthbits = 24
+  self.config.displayAttributes.stencilbits = 0
+  self.config.displayAttributes.fullscreen = false
+  self.config.displayAttributes.title = "TixTixTix - The Combination of the beast"
+end
+
+function lost.application.Application:init(event)
+  log.debug("lost.application.Application:init()")
+
+  self.renderState = self.context:copyState()
+  self.renderState.clearColor = lost.common.Color(0,0,0)
+  self.renderState.depthTest = false
+  self.renderState.texture2D = false
+  self.renderState.vertexArray = true
+  self.renderState.viewport = lost.math.Rect(0, 0, self.config.displayAttributes.width, self.config.displayAttributes.height)
+
+  controls = {}
+  controls.fpsMeter = lost.common.FpsMeter(lost.application.Application.context)
+  controls.fpsMeter.alpha = 0.25
+
+  self.config.FieldSize = lost.math.Vec2((self.config.displayAttributes.width / 3), (self.config.displayAttributes.height / 3))
+
+--  game = TixTixTix(self)
+
+  self.delta = lost.math.Vec2(0,0)
+  self.move = lost.math.Vec2(0,0)
+
+  self.minOffset = lost.math.Vec2(50, 50)
+  self.maxSpeed     = 5.0
+  self.size      = lost.math.Vec2(25, 25)
+
+  self:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) self.resizeHandler(self, event) end)
+  self:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self.touchHandler(self, event) end)
+  self:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self.touchHandler(self, event) end)
+  self:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self.touchHandler(self, event) end)
+
+  self.timer = lost.application.Timer("TixTixTixRender", 1/30)
+  self.timer:addEventListener(lost.application.TimerEvent.TIMER_FIRED, function(event) self.renderHandler(self, event) end)
+end
+
+function lost.application.Application:touchHandler(event)
+  local touchEvent = lost.application.TouchEvent.cast(event)
+
+  if (event.type == lost.application.TouchEvent.TOUCHES_BEGAN and touchEvent:size() == 1) then
+      local touch = touchEvent:get(0)
+      self.touchOffset = lost.math.Vec2(touch.location)
+  elseif (event.type == lost.application.TouchEvent.TOUCHES_MOVED and touchEvent:size() == 1) then
+    local touch = touchEvent:get(0)
+    local offset = lost.math.Vec2(touch.location)
+    if offset.x - self.touchOffset.x >= 0.1 then
+      self.move.x = math.min(((offset.x - self.touchOffset.x) / self.minOffset.x) * self.maxSpeed, self.maxSpeed)
+    elseif offset.x - self.touchOffset.x <= -0.1 then
+      self.move.x = -math.min(math.abs(((offset.x - self.touchOffset.x) / self.minOffset.x) * self.maxSpeed), self.maxSpeed)
+    else
+      self.move.x = 0
+    end
+    if offset.y - self.touchOffset.y >= 0.1 then
+      self.move.y = math.min(((offset.y - self.touchOffset.y) / self.minOffset.y) * self.maxSpeed, self.maxSpeed)
+    elseif offset.y - self.touchOffset.y <= -0.1 then
+      self.move.y = -math.min(math.abs(((offset.y - self.touchOffset.y) / self.minOffset.y) * self.maxSpeed), self.maxSpeed)
+    else
+      self.move.y = 0
+    end
+  elseif (event.type == lost.application.TouchEvent.TOUCHES_ENDED) then
+    self.move = lost.math.Vec2(0,0)
+  end
+end
+
+function lost.application.Application:resizeHandler(event)
+  local resizeEvent = lost.application.ResizeEvent.cast(event)
+
+  self.config.FieldSize = lost.math.Vec2((resizeEvent.width / 3), (resizeEvent.height / 3))
+  if self.renderState then
+    self.renderState.viewport = lost.math.Rect(0, 0, resizeEvent.width, resizeEvent.height)
+  end
+end
+
+function lost.application.Application:renderHandler(event)
+  local timerEvent = lost.application.TimerEvent.cast(event)
+
+  self.context:pushState(self.renderState)
+  self.context:clear(gl.GL_COLOR_BUFFER_BIT or gl.GL_DEPTH_BUFFER_BIT)
+  self.context:set2DProjection(lost.math.Vec2(0,0), lost.math.Vec2(self.config.displayAttributes.width, self.config.displayAttributes.height))
+  gl.glMatrixMode(gl.GL_MODELVIEW)
+  gl.glLoadIdentity()
+
+  self.delta.x = self.delta.x + self.move.x
+  self.delta.y = self.delta.y + self.move.y
+  self.context:setColor(lost.common.Color(1,1,1))
+  self.context:drawRectFilled(lost.math.Rect((self.config.displayAttributes.width - self.size.x) / 2 + self.delta.x, (self.config.displayAttributes.height - self.size.y) / 2 + self.delta.y, self.size.x, self.size.y))
+
+  self.context:drawLine(lost.math.Vec2(self.config.displayAttributes.width / 2, self.config.displayAttributes.height - self.minOffset.y*2),
+                        lost.math.Vec2(self.config.displayAttributes.width / 2, self.config.displayAttributes.height))
+  self.context:drawLine(lost.math.Vec2((self.config.displayAttributes.width - self.minOffset.x*2) / 2, self.config.displayAttributes.height - self.minOffset.y),
+                        lost.math.Vec2((self.config.displayAttributes.width + self.minOffset.x*2) / 2, self.config.displayAttributes.height - self.minOffset.y))
+
+  controls.fpsMeter:render(self.config.displayAttributes.width - controls.fpsMeter.width, 0, timerEvent.passedSec)
+
+  self.context:popState()
+  self:swapBuffers()
+end

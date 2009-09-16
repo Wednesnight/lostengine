@@ -1,56 +1,37 @@
 #ifndef LOST_GL_RENDERBUFFER_H
 #define LOST_GL_RENDERBUFFER_H
 
-#include "lost/gl/gl.h"
-#include "lost/gl/Utils.h"
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {
+template <typename T>
+struct shared_ptr;
 namespace gl
 {
+struct RenderBuffer;
+typedef lost::shared_ptr<RenderBuffer> RenderBufferPtr;
+
 struct RenderBuffer
 {
-  RenderBuffer()
-  {
-    glGenRenderbuffersEXT(1, &buffer);GLDEBUG_THROW;
-  }
+  RenderBuffer();
+  virtual ~RenderBuffer();
 
-  void enable()
-  {
-    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, buffer);GLDEBUG_THROW;
-  }
+  void enable();
+  void disable();
+  void storage(GLenum inInternalFormat, GLsizei inWidth, GLsizei inHeight);
 
-  void disable()
-  {
-    glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);GLDEBUG_THROW;
-  }
+  GLint width();
+  GLint height();
+  GLint internalFormat();
+  GLint redSize();
+  GLint greenSize();
+  GLint blueSize();
+  GLint alphaSize();
+  GLint depthSize();
+  GLint stencilSize();
 
-  void storage(GLenum inInternalFormat, GLsizei inWidth, GLsizei inHeight)
-  {
-    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, inInternalFormat, inWidth, inHeight);GLDEBUG_THROW;
-  }
-
-  GLint width() { return param(GL_RENDERBUFFER_WIDTH_EXT); }
-  GLint height() { return param(GL_RENDERBUFFER_HEIGHT_EXT); }
-  GLint internalFormat() { return param(GL_RENDERBUFFER_INTERNAL_FORMAT_EXT); }
-  GLint redSize() { return param(GL_RENDERBUFFER_RED_SIZE_EXT); }
-  GLint greenSize() { return param(GL_RENDERBUFFER_GREEN_SIZE_EXT); }
-  GLint blueSize() { return param(GL_RENDERBUFFER_BLUE_SIZE_EXT); }
-  GLint alphaSize() { return param(GL_RENDERBUFFER_ALPHA_SIZE_EXT); }
-  GLint depthSize() { return param(GL_RENDERBUFFER_DEPTH_SIZE_EXT); }
-  GLint stencilSize() { return param(GL_RENDERBUFFER_STENCIL_SIZE_EXT); }
-
-  GLint param(GLenum paramName)
-  {
-    GLint result;
-    glGetRenderbufferParameterivEXT(buffer, paramName, &result);GLDEBUG_THROW;
-    return result;
-  }
-
-  virtual ~RenderBuffer()
-  {
-    glDeleteRenderbuffersEXT(1, &buffer);GLDEBUG;
-  }
+  GLint param(GLenum paramName);
 
   GLuint  buffer;
 };

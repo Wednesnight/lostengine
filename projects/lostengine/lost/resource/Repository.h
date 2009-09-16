@@ -1,27 +1,36 @@
 #ifndef LOST_RESOURCE_REPOSITORY_H
 #define LOST_RESOURCE_REPOSITORY_H
 
-#include <string>
-#include "lost/common/Config.h"
-#include <boost/shared_ptr.hpp>
-#include "lost/resource/File.h"
+#include "lost/platform/shared_ptr.h"
+
+// filesystem path foward declaration
+namespace boost
+{
+namespace filesystem
+{
+    template<typename S, typename PT> struct basic_path;
+    struct path_traits;
+    typedef basic_path< std::string, path_traits > path;
+}
+}
 
 namespace lost
 {
   namespace resource
   {
+  struct File;
+  typedef lost::shared_ptr<File> FilePtr;
+
+    struct Repository;
+    typedef lost::shared_ptr<Repository> RepositoryPtr;
 
     struct Repository
     {
-      boost::shared_ptr<common::Config> config;
-
-      Repository( boost::shared_ptr<common::Config> inConfig ) : config(inConfig) {}
+      Repository() {}
       virtual ~Repository() {}
 
-      virtual boost::shared_ptr<lost::resource::File> load( const std::string& inPath) = 0;
-
+      virtual FilePtr load( const boost::filesystem::path& inPath) = 0;
     };
-
   }
 }
 

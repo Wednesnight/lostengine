@@ -1,27 +1,34 @@
-#ifndef LOST_MATH_MATH_H
-#define LOST_MATH_MATH_H
+#ifndef LOST_MATH_LMATH_H
+#define LOST_MATH_LMATH_H
 
 // don't call this header "Math.h" or it might conflict with standard library "math.h" depending 
 // on the order of includes in your current build setting and result in confusing errors.
 
 #include <cmath>
+#include <math.h>
 #include <boost/shared_array.hpp>
 
 namespace lost
 {
   namespace math
   {
-    inline float max( const boost::shared_array<float> inArray, int inLength )
+#if defined WIN32
+    inline float fmaxf(const float& in1, const float& in2)
+    {
+      return (in1 > in2) ? in1 : in2;
+    }
+#endif
+	  inline float max(const boost::shared_array<float> inArray, int inLength)
     {
       float result = (inLength > 0) ? inArray[0] : 0;
       for (int idx = 1; idx < inLength; ++idx)
-        result = fmaxf( result, inArray[idx] );
+        result = fmaxf(result, inArray[idx]);
       return result;
     }
     
     /* PI */
 #ifndef M_PI
-#define M_PI 3.1415926535897932384626433832795
+#define M_PI (float)3.1415926535897932384626433832795
 #endif
     
     inline float deg2rad( float deg )
@@ -45,7 +52,20 @@ namespace lost
       else
         return false;
     }
-    
+
+    // calculate the next value that is >= inVal and also a power of two  
+    static inline unsigned long nextPowerOf2(unsigned long inVal)
+    {
+      unsigned long result = 1;
+
+      while(result < inVal)
+      {
+        result <<= 1;
+      }
+
+      return result;
+    }
+
   }
 }
 

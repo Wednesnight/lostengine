@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef LOST_MATH_MATRIX_H
+#define LOST_MATH_MATRIX_H
 
 #include <algorithm>
 #include "lost/math/Vec4.h"
@@ -7,11 +7,21 @@
 #include <stdexcept>
 #include "lost/math/lmath.h"
 #include "lost/common/Logger.h"
+#include "lost/math/Rect.h"
+#include "lost/math/Vec2.h"
 
 namespace lost
 {
 namespace math
 {
+  struct Matrix;
+  lost::math::Matrix operator*(const lost::math::Matrix& lhs, const lost::math::Matrix& rhs);
+  lost::math::Vec3 operator*(const lost::math::Matrix& lhs, const lost::math::Vec3& rhs);
+  lost::math::Vec4 operator*(const lost::math::Matrix& lhs, const lost::math::Vec4& rhs);
+  bool operator==(const lost::math::Matrix& lhs, const lost::math::Matrix& rhs);
+  bool operator!=(const lost::math::Matrix& lhs, const lost::math::Matrix& rhs);
+  std::ostream& operator<<(std::ostream& s, const lost::math::Matrix& m);
+  
   /* OpenGL compatible 4x4 matrix in column major order
    * From the blue book:
    *
@@ -87,6 +97,68 @@ namespace math
       float ar = lost::math::deg2rad(angleDeg);
       m[0]=cos(ar); m[4]=sin(ar);
       m[1]=-1.0f*sin(ar); m[5]=cos(ar);
+    }
+
+    void initOrtho(const Rect& rect, const Vec2& nearAndFar)
+    {
+      zero();
+      m[0] = 2 / (rect.width - rect.x);
+      m[5] = 2 / (rect.height - rect.y);
+      m[10] = -2 / (nearAndFar.far - nearAndFar.near);
+      m[12] = -((rect.width + rect.x) / (rect.width - rect.x));
+      m[13] = -((rect.height + rect.y) / (rect.height - rect.y));
+      m[14] = -((nearAndFar.far + nearAndFar.near) / (nearAndFar.far - nearAndFar.near));
+      m[15] = 1.0;
+    }
+
+    void initPerspective(const float& fovy, const float& aspect, const Vec2& nearAndFar)
+    {
+      float radFovY = lost::math::deg2rad(fovy / 2.0f);
+      float f = cos(radFovY) / sin(radFovY);
+      float deltaZ = nearAndFar.far - nearAndFar.near;
+      
+      float m0 = f / aspect;
+      float m5 = f;
+      float m10 = - (nearAndFar.far + nearAndFar.near) / deltaZ;
+      float m11 = -1;
+      float m14 = (-2 * nearAndFar.near * nearAndFar.far) / deltaZ;
+      
+      zero();
+      m[0] = m0;
+      m[5] = m5;
+      m[10] = m10;
+      m[11] = m11;
+      m[14] = m14;
+    }
+
+    void initLookAt(const Vec3& eye, const Vec3& center, const Vec3& up)
+    {
+      Vec3 upNormal = up;
+      Vec3 f = center - eye;
+      normalise(f);
+      normalise(upNormal);
+      Vec3 s = cross(f, upNormal);
+      Vec3 u = cross(s, f);
+
+      zero();
+
+      m[0] = s.x;
+      m[1] = u.x;
+      m[2] = -1.0f*f.x;
+
+      m[4] = s.y;
+      m[5] = u.y;
+      m[6] = -1.0f*f.y;
+
+      m[8] = s.z;
+      m[9] = u.z;
+      m[10] = -1.0f*f.z;
+
+      m[15] = 1;
+
+      Matrix translation;
+      translation.initTranslation(eye * -1.0f);
+      *this = *this * translation;
     }
 
     void transpose()
@@ -205,6 +277,12 @@ namespace math
     return result;
   }
 
+  inline bool operator!=(const lost::math::Matrix& lhs, const lost::math::Matrix& rhs)
+  {
+    return !(lhs == rhs);
+  }
+
+
   inline std::ostream& operator<<(std::ostream& s, const lost::math::Matrix& m)
   {
     s << m.m[0] << " " << m.m[4] << " " << m.m[8] << " " << m.m[12] << std::endl;
@@ -213,6 +291,63 @@ namespace math
     s << m.m[3] << " " << m.m[7] << " " << m.m[11] << " " << m.m[15] << std::endl;
     return s;
   }
+  
+  struct MatrixRotX : public Matrix
+  {
+    MatrixRotX(float inAngle)
+    {
+      initRotateX(inAngle);
+    }
+  };
+  
+  struct MatrixRotY : public Matrix
+  {
+    MatrixRotY(float inAngle)
+    {
+      initRotateY(inAngle);
+    }
+  };
+  
+  struct MatrixRotZ : public Matrix
+  {
+    MatrixRotZ(float inAngle)
+    {
+      initRotateZ(inAngle);
+    }
+  };
+
+  struct MatrixTranslation : public Matrix
+  {
+    MatrixTranslation(const lost::math::Vec3& inTranslation)
+    {
+      initTranslation(inTranslation);
+    }
+  };
+
+  struct MatrixOrtho : public Matrix
+  {
+    MatrixOrtho(const Rect& rect, const Vec2& nearAndFar)
+    {
+      initOrtho(rect, nearAndFar);
+    }
+  };
+
+  struct MatrixPerspective : public Matrix
+  {
+    MatrixPerspective(const float& fovy, const float& aspect, const Vec2& nearAndFar)
+    {
+      initPerspective(fovy, aspect, nearAndFar);
+    }
+  };
+  
+  struct MatrixLookAt : public Matrix
+  {
+    MatrixLookAt(const Vec3& eye, const Vec3& center, const Vec3& up)
+    {
+      initLookAt(eye, center, up);
+    }
+  };
+  
 }
 }
 

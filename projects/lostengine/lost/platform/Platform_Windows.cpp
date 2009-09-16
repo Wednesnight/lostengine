@@ -6,6 +6,7 @@
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -25,9 +26,9 @@ namespace lost
       char   l_filename[_MAX_FNAME];
       char   l_extension[_MAX_EXT];
 
-      if (GetModuleFileName( 0, l_executable, MAX_PATH ))
+      if (GetModuleFileNameA( 0, l_executable, MAX_PATH ))
       {
-        _splitpath( l_executable, l_drive, l_directory, l_filename, l_extension );
+        _splitpath_s( l_executable, l_drive, l_directory, l_filename, l_extension );
         if (drive)     *drive     = reinterpret_cast<char*>(l_drive);
         if (directory) *directory = reinterpret_cast<char*>(l_directory);
         if (filename)  *filename  = reinterpret_cast<char*>(l_filename);
@@ -42,10 +43,14 @@ namespace lost
     {
       char   timeformat[20];
       time_t timestamp;
+      tm     localtimestamp;
 
       timestamp = time( &timestamp );
-      if (strftime( timeformat, 20, "%Y/%m/%d %H:%M:%S", localtime( &timestamp ) ) > 0)
+      if (localtime_s(&localtimestamp, &timestamp) == 0 &&
+          strftime( timeformat, 20, "%Y/%m/%d %H:%M:%S", &localtimestamp ) > 0)
+      {
         sTime = timeformat;
+      }
 
       return sTime;
     }
@@ -60,7 +65,7 @@ namespace lost
       timevalue.LowPart  = filetime.dwLowDateTime;
       timevalue.HighPart = filetime.dwHighDateTime;
 
-      return timevalue.QuadPart / 10;
+      return (double)(timevalue.QuadPart / 10);
     }
 
     std::string getApplicationDirectory()
@@ -71,8 +76,8 @@ namespace lost
       char   l_path[MAX_PATH];
 
       splitApplicationPath( &l_drive, &l_directory, NULL, NULL );
-      _makepath( l_path, l_drive.c_str(), l_directory.c_str(), NULL, NULL );
-      PathAddBackslash( l_path );
+      _makepath_s( l_path, l_drive.c_str(), l_directory.c_str(), NULL, NULL );
+      PathAddBackslashA( l_path );
       result = reinterpret_cast<char*>(l_path);
 
       return result;
@@ -92,8 +97,7 @@ namespace lost
       std::string result( getApplicationDirectory().append( filename ) );
 
       FILE *l_filecheck;
-      l_filecheck = fopen( result.c_str(), "r" );
-      if (l_filecheck) fclose( l_filecheck );
+      if (fopen_s(&l_filecheck, result.c_str(), "r") == 0) fclose( l_filecheck );
         else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
 
       return result;
@@ -112,17 +116,16 @@ namespace lost
       char         l_filename[_MAX_FNAME];
       FILE        *l_filecheck;
 
-      if (SUCCEEDED( SHGetFolderPath( NULL, CSIDL_APPDATA, NULL, 0, l_path ) ) && GetModuleFileName( 0, l_executable, MAX_PATH ))
+      if (SUCCEEDED( SHGetFolderPathA( NULL, CSIDL_APPDATA, NULL, 0, l_path ) ) && GetModuleFileNameA( 0, l_executable, MAX_PATH ))
       {
-        _splitpath( l_executable, NULL, NULL, l_filename, NULL );
-        if (PathAppend( l_path, l_filename ) && PathAppend( l_path, result.c_str() ))
+        if (_splitpath_s( l_executable, NULL, 0, NULL, 0, l_filename, _MAX_FNAME, NULL, 0 ) == 0 &&
+            PathAppendA( l_path, l_filename ) && PathAppendA( l_path, result.c_str() ))
         {
           result = reinterpret_cast<char*>(l_path);
         }
       }
 
-      l_filecheck = fopen( result.c_str(), "r" );
-      if (l_filecheck) fclose( l_filecheck );
+      if (fopen_s(&l_filecheck, result.c_str(), "r") == 0) fclose( l_filecheck );
         else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your user data directory? Is the spelling correct?" );
 
       return result;

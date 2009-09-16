@@ -4,7 +4,6 @@
 
 #include "MainRenderer.h"
 #include "RenderEnvironment.h"
-#include <boost/shared_ptr.hpp>
 
 class Application
 {
@@ -35,7 +34,7 @@ private:
 
 	SDL_TimerID		renderTimerId;
 	RenderEnvironment		renderenv;
-	boost::shared_ptr<MainRenderer>	renderer;
+	lost::shared_ptr<MainRenderer>	renderer;
     Uint32          lasttick;
 };
 
