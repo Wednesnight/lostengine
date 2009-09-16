@@ -18,7 +18,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 
-@interface ApplicationWindow : NSWindow
+@interface ApplicationWindow : NSWindow<NSWindowDelegate>
 {
   lost::application::Window* parent;
 
@@ -311,27 +311,27 @@
 
 - (void)mouseDown: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
 }
 
 - (void)mouseUp: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
 }
 
 - (void)rightMouseDown: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
 }
 
 - (void)rightMouseUp: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
 }
 
 - (void)scrollWheel: (NSEvent*)event
 {
-  [[self window] mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
+  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
 }
 
 @end
