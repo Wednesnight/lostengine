@@ -81,6 +81,10 @@ function Guiro:assignScrollbarAttributes(target, source)
   if source.orientation ~= nil then target:orientation(source.orientation) end
 end
 
+function Guiro:assignScrollViewAttributes(target, source)
+  if source.contentViewBounds ~= nil then target:contentViewBounds(source.contentViewBounds) end
+end
+
 function Guiro:assignVBoxAttributes(target, source)
 	if source.mode ~= nil then target:mode(source.mode) end
 	if source.halign ~= nil then target:halign(source.halign) end
@@ -212,6 +216,7 @@ function Guiro:ScrollView(def)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
+  self:assignScrollViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
 end

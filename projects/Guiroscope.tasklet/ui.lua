@@ -40,37 +40,42 @@ return dcl.guiro:Screen
     {
       id = "window1",
       bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5)),
-      dcl.guiro:Image
+      dcl.guiro:ScrollView
       {
-        id = "image1",
-        bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
-        filename = "lost/guiro/themes/default/resources/ButtonHover.png",
-        scale="scalegrid",
-        showFrame = false,
-        caps = 
+        bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1)),
+        contentViewBounds = Bounds(xleft(), ytop(), wabs(550), habs(265)),
+        dcl.guiro:Image
         {
-          left = 3,
-          right=3,
-          top=3,
-          bottom=3
+          id = "image1",
+          bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
+          filename = "lost/guiro/themes/default/resources/ButtonHover.png",
+          scale="scalegrid",
+          showFrame = false,
+          caps = 
+          {
+            left = 3,
+            right=3,
+            top=3,
+            bottom=3
+          },
+          flip = true,
+          filter = true,
         },
-        flip = true,
-        filter = true,
-      },
-      dcl.guiro:Button
-      {
-        bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30)),
-        title = "klein",
-        style = "scrollbarHandle"
-      },
-      dcl.guiro:Button
-      {
-        bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
-        title = "riesig",
-        listeners = 
+        dcl.guiro:Button
         {
-          mouseEnter = function(event) event.target:title("RIESIG") end,
-          mouseLeave = function(event) event.target:title("riesig") end
+          bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30)),
+          title = "klein",
+          style = "scrollbarHandle"
+        },
+        dcl.guiro:Button
+        {
+          bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
+          title = "riesig",
+          listeners = 
+          {
+            mouseEnter = function(event) event.target:title("RIESIG") end,
+            mouseLeave = function(event) event.target:title("riesig") end
+          }
         }
       }
     },

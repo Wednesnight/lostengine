@@ -46,8 +46,6 @@ function ScrollView:buildContentView(vid)
   self.theme.themeManager:apply(result, self.theme.name, self.name)
   result:showFrame(false)
   result:showBackground(false)
-  -- FIXME: remove when we have FloatView
-  result.bounds = Bounds(xleft(), ytop(), wabs(2000), habs(2000))
   return result
 end
 

@@ -50,6 +50,17 @@ function ScrollView:contentView(view)
   end
 end
 
+function ScrollView:contentViewBounds(bounds)
+  if self._contentView ~= nil then
+    if bounds ~= nil then
+      self._contentView.bounds = bounds
+      self._contentView:needsLayout()
+    else
+      return self._contentView.bounds
+    end
+  end
+end
+
 function ScrollView:horizontalScrollbar(scrollbar)
   if scrollbar ~= nil then
     self._horizontalScrollbar = scrollbar
@@ -85,8 +96,20 @@ end
 function ScrollView:applyLayout()
   -- update scrollbars
   local contentRect = self._contentView:globalRect()
-  self._horizontalScrollbar:max(contentRect.width - self.currentGlobalRect.width + self._verticalScrollbar:globalRect().width)
-  self._verticalScrollbar:max(contentRect.height - self.currentGlobalRect.height + self._horizontalScrollbar:globalRect().height)
+  local size = contentRect.width - self.currentGlobalRect.width
+  self._horizontalScrollbar:max(size)
+  -- add scrollbar dimensions to scroll area
+  if not self._horizontalScrollbar:hidden() then
+    size = contentRect.height - self.currentGlobalRect.height + self._horizontalScrollbar:globalRect().height
+  else
+    size = contentRect.height - self.currentGlobalRect.height
+  end
+  self._verticalScrollbar:max(size)
+  -- add scrollbar dimensions to scroll area
+  if not self._verticalScrollbar:hidden() then
+    size = contentRect.width - self.currentGlobalRect.width + self._verticalScrollbar:globalRect().width
+    self._horizontalScrollbar:max(size)
+  end
 
   -- apply scissor rect
   local gr = lost.math.Rect(self.currentGlobalRect.x, self.currentGlobalRect.y,

@@ -180,13 +180,7 @@ function Scrollbar:updateLayout(forceUpdate)
   local doUpdateLayout = forceUpdate or self.dirtyLayout
 	lost.guiro.View.updateLayout(self, forceUpdate)
   if doUpdateLayout then
-    local boxRange = nil
-    if self._orientation == "horizontal" then
-      boxRange = self._moveButtonContainer:globalRect().width
-    elseif self._orientation == "vertical" then
-      boxRange = self._moveButtonContainer:globalRect().height
-    end
-    self:hidden(math.max(1, math.abs(self._max - self._min)) < boxRange)
+    self:hidden(self._max - self._min <= 0)
     if not self:hidden() then
       self:updateMoveButton()
     end
@@ -199,11 +193,11 @@ function Scrollbar:updateMoveButton()
 
   if self._orientation == "horizontal" then
     local boxRange = self._moveButtonContainer:globalRect().width
-    local size = math.max(0.1, math.min(0.9, boxRange/range))
+    local size = math.max(0.1, math.min(0.95, boxRange/range))
     self._moveButton.bounds = Bounds(xleft({abs=((1-size)*posFactor)*boxRange}), ybottom(), wrel(size), hrel(1))
   elseif self._orientation == "vertical" then
     local boxRange = self._moveButtonContainer:globalRect().height
-    local size = math.max(0.1, math.min(0.9, boxRange/range))
+    local size = math.max(0.1, math.min(0.99, boxRange/range))
     self._moveButton.bounds = Bounds(xleft(), ytop({abs=-((1-size)*posFactor)*boxRange}), wrel(1), hrel(size))
   else
     error("invalid Scrollbar.orientation: ".. self._orientation)
