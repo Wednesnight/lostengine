@@ -16,7 +16,7 @@
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
 
-@interface ApplicationDelegate : NSObject
+@interface ApplicationDelegate : NSObject<NSApplicationDelegate>
 {
   lost::application::Application* parent;
 }
