@@ -5,13 +5,14 @@
 #include "lost/resource/File.h"
 
 //#define BOOST_SPIRIT_DEBUG
-#include <boost/spirit/core.hpp>
-#include <boost/spirit/actor/increment_actor.hpp>
-#include <boost/spirit/actor/decrement_actor.hpp>
+#include <boost/spirit/include/classic_core.hpp>
+#include <boost/spirit/include/classic_increment_actor.hpp>
+#include <boost/spirit/include/classic_decrement_actor.hpp>
 //#include <boost/spirit/phoenix/binders.hpp>
 
 using namespace boost;
 using namespace boost::spirit;
+using namespace boost::spirit::classic;
 using namespace std;
 using namespace lost::math;
 using namespace lost::mesh;
