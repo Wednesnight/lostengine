@@ -26,11 +26,11 @@ function HBox:calculateSubviewWidth()
 end
 
 function HBox:updateVerticalAlignment(targetView)
-  if self._halign == "center" then
+  if self._valign == "center" then
     targetView.bounds.y = lost.guiro.ycenter()
-  elseif self._halign == "top" then
+  elseif self._valign == "top" then
     targetView.bounds.y = lost.guiro.ytop()
-  elseif self._halign == "bottom" then
+  elseif self._valign == "bottom" then
     targetView.bounds.y = lost.guiro.ybottom()
   else
     log.warn("unknown vertical alignment in HBox: '"..self._halign.."'")
@@ -41,7 +41,8 @@ function HBox:updateSpread()
 	local numViews = #(self.subviews)
 	local relfactor = 1/(numViews-1)
 	local f = 1
-	for k,view in pairs(self.subviews) do
+	for k = #self.subviews,1,-1 do
+	  local view = self.subviews[k]
 		view.bounds.x = lost.guiro.xcenter{rel=f}		
 		f = f- relfactor
 		self:updateVerticalAlignment(view)
@@ -54,18 +55,19 @@ function HBox:updateStack()
   local totalWidth = subviewWidth + (self._spacing*(#self.subviews-1))
   local xoffset = 0
   local gr = self:globalRect()
-  if self._valign == "center" then
+  if self._halign == "center" then
     xoffset = (gr.width - totalWidth)/2 + totalWidth
-  elseif self._valign == "bottom" then
+  elseif self._halign == "left" then
     xoffset = 0 + totalWidth
-  elseif self._valign == "top" then
+  elseif self._halign == "right" then
     xoffset = gr.width 
   else
-    log.warn("illegal horizontal alignment for HBox '"..self._valign.."'")
+    log.warn("illegal horizontal alignment for HBox '"..self._halign.."'")
   end
   
   local currentOffset = xoffset
-  for k,view in pairs(self.subviews) do
+	for k = #self.subviews,1,-1 do
+    local view = self.subviews[k]
     gr = view:globalRect()
     currentOffset = currentOffset - gr.width
     view.bounds.x = lost.guiro.xabs(currentOffset)
