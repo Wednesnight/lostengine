@@ -1,0 +1,5 @@
+#define LUABIND_NO_ERROR_CHECKING
+#define NDEBUG
+#include "prefix-shared.h"
+
+#undef DOUT

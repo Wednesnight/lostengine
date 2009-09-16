@@ -1,0 +1,741 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
+		3E0CF97D0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
+		3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CF97B0EDC4C57001A2922 /* defaultButton.png */; };
+		3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
+		3E2447790F08C7200023E6B8 /* screen-iphone in Resources */ = {isa = PBXBuildFile; fileRef = 3E2447780F08C7200023E6B8 /* screen-iphone */; };
+		3E24477A0F08C7200023E6B8 /* screen-iphone in Resources */ = {isa = PBXBuildFile; fileRef = 3E2447780F08C7200023E6B8 /* screen-iphone */; };
+		3E24477B0F08C7200023E6B8 /* screen-iphone in Resources */ = {isa = PBXBuildFile; fileRef = 3E2447780F08C7200023E6B8 /* screen-iphone */; };
+		3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
+		3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
+		3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C4D0EDB097300BA9626 /* explosion.jpg */; };
+		3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
+		3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
+		3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E2C5C680EDB13C100BA9626 /* fugly.png */; };
+		3E485A610ECD729E003AAEAB /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* main.lua */; };
+		3E485A620ECD729E003AAEAB /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
+		3E485A640ECD729E003AAEAB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		3E485AB70ECD73E5003AAEAB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB30ECD73E5003AAEAB /* QuartzCore.framework */; };
+		3E485AB80ECD73E5003AAEAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB40ECD73E5003AAEAB /* Foundation.framework */; };
+		3E485AB90ECD73E5003AAEAB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */; };
+		3E485ABA0ECD73E5003AAEAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB60ECD73E5003AAEAB /* UIKit.framework */; };
+		3E485AD00ECD7512003AAEAB /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* main.lua */; };
+		3E485AD10ECD7512003AAEAB /* screen in Resources */ = {isa = PBXBuildFile; fileRef = 3E1EE3FC0ECC7CA400E86C94 /* screen */; };
+		3E485AD30ECD7512003AAEAB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		3E485AD60ECD7512003AAEAB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB30ECD73E5003AAEAB /* QuartzCore.framework */; };
+		3E485AD70ECD7512003AAEAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB40ECD73E5003AAEAB /* Foundation.framework */; };
+		3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */; };
+		3E485AD90ECD7512003AAEAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E485AB60ECD73E5003AAEAB /* UIKit.framework */; };
+		3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
+		3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
+		3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E48F5BD0ED6DD3D003CFD2F /* button.png */; };
+		3E4CDD9B0FE7AAF700775101 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E4CDD970FE7AAF700775101 /* macosx.xcconfig */; };
+		3E4CDD9C0FE7AAF700775101 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E4CDD980FE7AAF700775101 /* global.xcconfig */; };
+		3E4CDD9D0FE7AAF700775101 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E4CDD990FE7AAF700775101 /* global-release.xcconfig */; };
+		3E4CDD9E0FE7AAF700775101 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3E4CDD9A0FE7AAF700775101 /* global-debug.xcconfig */; };
+		3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E7BF9520ED4CB890017AEBA /* stubs.jpg */; };
+		3E9CA02D0F332E7B00E34312 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9CA02C0F332E7B00E34312 /* Cocoa.framework */; };
+		3ED935CA0E4756B700AABFAB /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 3ED935C90E4756B700AABFAB /* main.lua */; };
+		3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49780E5E403800B5EBF1 /* libLostEngine.a */; };
+		8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */; };
+		8DBCC4860F74404B003C3E3F /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
+		8DBCC4870F74404C003C3E3F /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
+		8DBCC48A0F74405E003C3E3F /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
+		8DBCC48B0F74405F003C3E3F /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
+		B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
+		B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
+		B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B41267450F5EF919001CCC23 /* Arial Unicode.ttf */; };
+		EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0E49760E5E403800B5EBF1 /* libLostEngine.a */; };
+		EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA27DE3A0DD87DA100552F5E /* main.cpp */; };
+		EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE490DD87EE200552F5E /* AGL.framework */; };
+		EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4A0DD87EE200552F5E /* OpenGL.framework */; };
+		EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27DE4B0DD87EE200552F5E /* GLUT.framework */; };
+		EA779A350F4F773500E69486 /* Monaco.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA779A340F4F773500E69486 /* Monaco.ttf */; };
+		EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */ = {isa = PBXBuildFile; fileRef = EAC17FAB0F4255DC003D0F6F /* screen-evtest */; };
+		EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EACFE1220ED8AD5300F9459E /* Vera.ttf */; };
+		EAD70A940F5F41220034D05A /* pimmel.png in Resources */ = {isa = PBXBuildFile; fileRef = EAD70A930F5F41220034D05A /* pimmel.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3E531DC30F14F8DC00D7C8B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		3E531DC50F14F8E600D7C8B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EA6711240E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		3E531DC70F14F8ED00D7C8B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7324F20E5CE3A4000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		EA1BF6690F67343F00862B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
+			remoteInfo = LostEngineUnittests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3E0CF97B0EDC4C57001A2922 /* defaultButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultButton.png; path = ../defaultButton.png; sourceTree = SOURCE_ROOT; };
+		3E1EE3FC0ECC7CA400E86C94 /* screen */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = screen; path = ../screen; sourceTree = SOURCE_ROOT; };
+		3E2447780F08C7200023E6B8 /* screen-iphone */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "screen-iphone"; path = "../screen-iphone"; sourceTree = SOURCE_ROOT; };
+		3E2C5C4D0EDB097300BA9626 /* explosion.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = explosion.jpg; path = ../explosion.jpg; sourceTree = SOURCE_ROOT; };
+		3E2C5C680EDB13C100BA9626 /* fugly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fugly.png; path = ../fugly.png; sourceTree = SOURCE_ROOT; };
+		3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iphone.plist"; sourceTree = "<group>"; };
+		3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-simulator.plist"; sourceTree = "<group>"; };
+		3E485A6F0ECD729E003AAEAB /* GuiroTest-iphone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuiroTest-iphone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E485AB30ECD73E5003AAEAB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		3E485AB40ECD73E5003AAEAB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = /System/Library/Frameworks/OpenGLES.framework; sourceTree = "<absolute>"; };
+		3E485AB60ECD73E5003AAEAB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = /System/Library/Frameworks/UIKit.framework; sourceTree = "<absolute>"; };
+		3E485ADE0ECD7512003AAEAB /* GuiroTest-simulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GuiroTest-simulator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E48F5BD0ED6DD3D003CFD2F /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.png; path = ../button.png; sourceTree = SOURCE_ROOT; };
+		3E4CDD970FE7AAF700775101 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
+		3E4CDD980FE7AAF700775101 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
+		3E4CDD990FE7AAF700775101 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
+		3E4CDD9A0FE7AAF700775101 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		3E7BF9520ED4CB890017AEBA /* stubs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stubs.jpg; path = ../stubs.jpg; sourceTree = SOURCE_ROOT; };
+		3E9CA02C0F332E7B00E34312 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		3ED935C90E4756B700AABFAB /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.lua; path = ../main.lua; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* GuiroTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuiroTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B41267450F5EF919001CCC23 /* Arial Unicode.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arial Unicode.ttf"; path = "../Arial Unicode.ttf"; sourceTree = SOURCE_ROOT; };
+		EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		EA27DE3A0DD87DA100552F5E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA27DE490DD87EE200552F5E /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
+		EA27DE4A0DD87EE200552F5E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EA27DE4B0DD87EE200552F5E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		EA779A340F4F773500E69486 /* Monaco.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Monaco.ttf; path = ../Monaco.ttf; sourceTree = SOURCE_ROOT; };
+		EAC17FAB0F4255DC003D0F6F /* screen-evtest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "screen-evtest"; path = "../screen-evtest"; sourceTree = SOURCE_ROOT; };
+		EACFE1220ED8AD5300F9459E /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Vera.ttf; path = ../Vera.ttf; sourceTree = SOURCE_ROOT; };
+		EAD70A930F5F41220034D05A /* pimmel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pimmel.png; path = ../pimmel.png; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E485A650ECD729E003AAEAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D2397B00F35E9BC00FECFB5 /* libLostEngine.a in Frameworks */,
+				3E485AB70ECD73E5003AAEAB /* QuartzCore.framework in Frameworks */,
+				3E485AB80ECD73E5003AAEAB /* Foundation.framework in Frameworks */,
+				3E485AB90ECD73E5003AAEAB /* OpenGLES.framework in Frameworks */,
+				3E485ABA0ECD73E5003AAEAB /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E485AD40ECD7512003AAEAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D2397B10F35E9CD00FECFB5 /* libLostEngine.a in Frameworks */,
+				3E485AD60ECD7512003AAEAB /* QuartzCore.framework in Frameworks */,
+				3E485AD70ECD7512003AAEAB /* Foundation.framework in Frameworks */,
+				3E485AD80ECD7512003AAEAB /* OpenGLES.framework in Frameworks */,
+				3E485AD90ECD7512003AAEAB /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0E497B0E5E405500B5EBF1 /* libLostEngine.a in Frameworks */,
+				EA27DE500DD87EE200552F5E /* AGL.framework in Frameworks */,
+				EA27DE510DD87EE200552F5E /* OpenGL.framework in Frameworks */,
+				EA27DE520DD87EE200552F5E /* GLUT.framework in Frameworks */,
+				3E9CA02D0F332E7B00E34312 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* GuiroTest.app */,
+				3E485A6F0ECD729E003AAEAB /* GuiroTest-iphone.app */,
+				3E485ADE0ECD7512003AAEAB /* GuiroTest-simulator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Object0r */ = {
+			isa = PBXGroup;
+			children = (
+				3E4CDD960FE7AAE600775101 /* Configurations */,
+				29B97323FDCFA39411CA2CEA /* Libraries */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				3E75F0A60E52EFBB006179E4 /* Scripts */,
+				29B97315FDCFA39411CA2CEA /* Sources */,
+			);
+			name = Object0r;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EA27DE3A0DD87DA100552F5E /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B41267450F5EF919001CCC23 /* Arial Unicode.ttf */,
+				EA779A340F4F773500E69486 /* Monaco.ttf */,
+				EACFE1220ED8AD5300F9459E /* Vera.ttf */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				3E485A5A0ECD7291003AAEAB /* Info-iphone.plist */,
+				3E485A5B0ECD7291003AAEAB /* Info-simulator.plist */,
+				3E7BF9520ED4CB890017AEBA /* stubs.jpg */,
+				3E48F5BD0ED6DD3D003CFD2F /* button.png */,
+				3E2C5C4D0EDB097300BA9626 /* explosion.jpg */,
+				3E2C5C680EDB13C100BA9626 /* fugly.png */,
+				3E0CF97B0EDC4C57001A2922 /* defaultButton.png */,
+				EAD70A930F5F41220034D05A /* pimmel.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */,
+				3E9CA02C0F332E7B00E34312 /* Cocoa.framework */,
+				EA27DE490DD87EE200552F5E /* AGL.framework */,
+				EA27DE4A0DD87EE200552F5E /* OpenGL.framework */,
+				EA27DE4B0DD87EE200552F5E /* GLUT.framework */,
+				3E485AB30ECD73E5003AAEAB /* QuartzCore.framework */,
+				3E485AB40ECD73E5003AAEAB /* Foundation.framework */,
+				3E485AB50ECD73E5003AAEAB /* OpenGLES.framework */,
+				3E485AB60ECD73E5003AAEAB /* UIKit.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3E4CDD960FE7AAE600775101 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				3E4CDD970FE7AAF700775101 /* macosx.xcconfig */,
+				3E4CDD980FE7AAF700775101 /* global.xcconfig */,
+				3E4CDD990FE7AAF700775101 /* global-release.xcconfig */,
+				3E4CDD9A0FE7AAF700775101 /* global-debug.xcconfig */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
+		3E75F0A60E52EFBB006179E4 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3ED935C90E4756B700AABFAB /* main.lua */,
+				3E1EE3FC0ECC7CA400E86C94 /* screen */,
+				3E2447780F08C7200023E6B8 /* screen-iphone */,
+				EAC17FAB0F4255DC003D0F6F /* screen-evtest */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
+		EA0E49550E5E403800B5EBF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E49760E5E403800B5EBF1 /* libLostEngine.a */,
+				EA0E49780E5E403800B5EBF1 /* libLostEngine.a */,
+				EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */,
+				EA1BF66A0F67343F00862B2F /* LostEngineUnittests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3E485A5D0ECD729E003AAEAB /* GuiroTest-iphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E485A6C0ECD729E003AAEAB /* Build configuration list for PBXNativeTarget "GuiroTest-iphone" */;
+			buildPhases = (
+				3E485A600ECD729E003AAEAB /* Resources */,
+				3E485A630ECD729E003AAEAB /* Sources */,
+				3E485A650ECD729E003AAEAB /* Frameworks */,
+				3E485A6B0ECD729E003AAEAB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E531DC60F14F8E600D7C8B4 /* PBXTargetDependency */,
+			);
+			name = "GuiroTest-iphone";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 3E485A6F0ECD729E003AAEAB /* GuiroTest-iphone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3E485ACC0ECD7512003AAEAB /* GuiroTest-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E485ADB0ECD7512003AAEAB /* Build configuration list for PBXNativeTarget "GuiroTest-simulator" */;
+			buildPhases = (
+				3E485ACF0ECD7512003AAEAB /* Resources */,
+				3E485AD20ECD7512003AAEAB /* Sources */,
+				3E485AD40ECD7512003AAEAB /* Frameworks */,
+				3E485ADA0ECD7512003AAEAB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E531DC80F14F8ED00D7C8B4 /* PBXTargetDependency */,
+			);
+			name = "GuiroTest-simulator";
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 3E485ADE0ECD7512003AAEAB /* GuiroTest-simulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8D1107260486CEB800E47090 /* GuiroTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GuiroTest" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				3E7B27D60EA77E0000F70E7C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E531DC40F14F8DC00D7C8B4 /* PBXTargetDependency */,
+			);
+			name = GuiroTest;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Object0r;
+			productReference = 8D1107320486CEB800E47090 /* GuiroTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GuiroTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Object0r */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = EA0E49550E5E403800B5EBF1 /* Products */;
+					ProjectRef = EA0E49540E5E403800B5EBF1 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* GuiroTest */,
+				3E485A5D0ECD729E003AAEAB /* GuiroTest-iphone */,
+				3E485ACC0ECD7512003AAEAB /* GuiroTest-simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		EA0E49760E5E403800B5EBF1 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA0E49750E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E49780E5E403800B5EBF1 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA0E49770E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA0E497A0E5E403800B5EBF1 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = EA0E49790E5E403800B5EBF1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EA1BF66A0F67343F00862B2F /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = EA1BF6690F67343F00862B2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3E485A600ECD729E003AAEAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E485A610ECD729E003AAEAB /* main.lua in Resources */,
+				3E485A620ECD729E003AAEAB /* screen in Resources */,
+				3E7BF9530ED4CB890017AEBA /* stubs.jpg in Resources */,
+				3E48F5BE0ED6DD3D003CFD2F /* button.png in Resources */,
+				3EDEC7340EFA9A06008E2644 /* Vera.ttf in Resources */,
+				3E2C5C4E0EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C690EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97C0EDC4C57001A2922 /* defaultButton.png in Resources */,
+				3E2447790F08C7200023E6B8 /* screen-iphone in Resources */,
+				B41267470F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				8DBCC4860F74404B003C3E3F /* pimmel.png in Resources */,
+				8DBCC48A0F74405E003C3E3F /* Monaco.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E485ACF0ECD7512003AAEAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E485AD00ECD7512003AAEAB /* main.lua in Resources */,
+				3E485AD10ECD7512003AAEAB /* screen in Resources */,
+				3E7BF9550ED4CB890017AEBA /* stubs.jpg in Resources */,
+				3E48F5C00ED6DD3D003CFD2F /* button.png in Resources */,
+				3EDEC7350EFA9A0D008E2644 /* Vera.ttf in Resources */,
+				3E2C5C500EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C6B0EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97E0EDC4C57001A2922 /* defaultButton.png in Resources */,
+				3E24477B0F08C7200023E6B8 /* screen-iphone in Resources */,
+				B41267480F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				8DBCC4870F74404C003C3E3F /* pimmel.png in Resources */,
+				8DBCC48B0F74405F003C3E3F /* Monaco.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ED935CA0E4756B700AABFAB /* main.lua in Resources */,
+				3E1EE3FD0ECC7CA400E86C94 /* screen in Resources */,
+				3E7BF9540ED4CB890017AEBA /* stubs.jpg in Resources */,
+				3E48F5BF0ED6DD3D003CFD2F /* button.png in Resources */,
+				EACFE1230ED8AD5300F9459E /* Vera.ttf in Resources */,
+				3E2C5C4F0EDB097300BA9626 /* explosion.jpg in Resources */,
+				3E2C5C6A0EDB13C100BA9626 /* fugly.png in Resources */,
+				3E0CF97D0EDC4C57001A2922 /* defaultButton.png in Resources */,
+				3E24477A0F08C7200023E6B8 /* screen-iphone in Resources */,
+				EAC17FAC0F4255DC003D0F6F /* screen-evtest in Resources */,
+				EA779A350F4F773500E69486 /* Monaco.ttf in Resources */,
+				B41267460F5EF919001CCC23 /* Arial Unicode.ttf in Resources */,
+				EAD70A940F5F41220034D05A /* pimmel.png in Resources */,
+				3E4CDD9B0FE7AAF700775101 /* macosx.xcconfig in Resources */,
+				3E4CDD9C0FE7AAF700775101 /* global.xcconfig in Resources */,
+				3E4CDD9D0FE7AAF700775101 /* global-release.xcconfig in Resources */,
+				3E4CDD9E0FE7AAF700775101 /* global-debug.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3E485A6B0ECD729E003AAEAB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.app/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PRODUCT_NAME}.app/\"\n";
+		};
+		3E485ADA0ECD7512003AAEAB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.app/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.app/\"\n";
+		};
+		3E7B27D60EA77E0000F70E7C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../../../projects/lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E485A630ECD729E003AAEAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E485A640ECD729E003AAEAB /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E485AD20ECD7512003AAEAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E485AD30ECD7512003AAEAB /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA27DE3B0DD87DA100552F5E /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E531DC40F14F8DC00D7C8B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = 3E531DC30F14F8DC00D7C8B4 /* PBXContainerItemProxy */;
+		};
+		3E531DC60F14F8E600D7C8B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "LostEngine-iphone";
+			targetProxy = 3E531DC50F14F8E600D7C8B4 /* PBXContainerItemProxy */;
+		};
+		3E531DC80F14F8ED00D7C8B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "LostEngine-simulator";
+			targetProxy = 3E531DC70F14F8ED00D7C8B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3E485A6D0ECD729E003AAEAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_AUTO_VECTORIZATION = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = "info-iphone.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "GuiroTest-iphone";
+				SDKROOT = iphoneos2.1;
+			};
+			name = Debug;
+		};
+		3E485A6E0ECD729E003AAEAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = "info-iphone.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\\\"",
+					"\\\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\\\"",
+					"\\\"$(SRCROOT)/../../../../build/Debug\\\"",
+					"\"$(SRCROOT)/../../../../build/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "GuiroTest-iphone";
+				SDKROOT = iphoneos2.1;
+			};
+			name = Release;
+		};
+		3E485ADC0ECD7512003AAEAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-simulator.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/../../../../build/Debug-iphoneos\\\"",
+					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
+				);
+				PRODUCT_NAME = "GuiroTest-simulator";
+				SDKROOT = iphonesimulator2.1;
+			};
+			name = Debug;
+		};
+		3E485ADD0ECD7512003AAEAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Info-simulator.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\\\\\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\\\\\\\"",
+					"\\\\\\\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\\\\\\\"",
+					"\\\\\\\"$(SRCROOT)/../../../../build/Debug\\\\\\\"",
+					"\\\"$(SRCROOT)/../../../../build/Debug-iphoneos\\\"",
+					"\"$(SRCROOT)/../../../../build/Debug-iphonesimulator\"",
+				);
+				PRODUCT_NAME = "GuiroTest-simulator";
+				SDKROOT = iphonesimulator2.1;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E4CDD970FE7AAF700775101 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = GuiroTest;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E4CDD970FE7AAF700775101 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = GuiroTest;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E4CDD9A0FE7AAF700775101 /* global-debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E4CDD990FE7AAF700775101 /* global-release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E485A6C0ECD729E003AAEAB /* Build configuration list for PBXNativeTarget "GuiroTest-iphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E485A6D0ECD729E003AAEAB /* Debug */,
+				3E485A6E0ECD729E003AAEAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E485ADB0ECD7512003AAEAB /* Build configuration list for PBXNativeTarget "GuiroTest-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E485ADC0ECD7512003AAEAB /* Debug */,
+				3E485ADD0ECD7512003AAEAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GuiroTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GuiroTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

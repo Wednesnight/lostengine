@@ -1,5 +1,5 @@
-#ifndef LOST_GUIRO_RECT_H
-#define LOST_GUIRO_RECT_H
+#ifndef LOST_MATH_RECT_H
+#define LOST_MATH_RECT_H
 
 #include "lost/math/Vec2.h"
 #include <iostream>
@@ -23,6 +23,24 @@ namespace math
       y += parentPos.y;
     }
 
+    bool operator ==(const Rect& rect)
+    {
+      return (x == rect.x &&
+              y == rect.y &&
+              width == rect.width &&
+              height == rect.height);
+    }
+    
+    bool operator !=(const Rect& rect)
+    {
+      return !(*this == rect);
+    }
+    
+    bool operator !()
+    {
+      return !(this->x || this->y || this->width || this->height);
+    }
+    
     lost::math::Vec2 pos() const
     {
       return lost::math::Vec2( x, y );
@@ -41,20 +59,30 @@ namespace math
       if(maxY() > parent.maxY()) { height = (parent.maxY() - y)+1.0f;}
     }
 
-    float maxX() const
+    inline float maxX() const
     {
       float result = (x + width)-1.0f;
       if(result < x) {result = x; }
       return result;
     }
 
-    float maxY() const
+    inline float maxY() const
     {
       float result = (y + height)-1.0f;
       if(result < y) {result = y; }
       return result;
     }
 
+    float area() const { return width*height; } 
+    
+    bool fitsInto(const Rect& inTarget) const
+    {
+      if((width <= inTarget.width) &&(height <= inTarget.height))
+        return true;
+      else
+        return false;
+    }
+    
     bool contains(const lost::math::Vec2& inPoint) const
     {
       bool result = false;
@@ -69,6 +97,26 @@ namespace math
       return result;
     }
 
+    inline float left() const {return x;} 
+    inline float right() const {return maxX();}
+    inline float top() const {return maxY();}
+    inline float bottom() const {return y;}
+
+    inline Vec2 center() const
+    {
+      float cx = width / 2;
+      float cy = height / 2;
+      return Vec2(x+cx, y+cy);
+    }
+
+    bool intersects(const Rect& r2) const
+    {
+      return !((r2.left() > right()) ||
+               (r2.right() < left()) ||
+               (r2.top() < bottom()) ||
+               (r2.bottom() > top()));
+    }
+
     void reset( float inX = 0, float inY = 0, float inWidth = 0, float inHeight = 0 )
     {
       x      = inX;
@@ -78,9 +126,9 @@ namespace math
     }
 
     lost::math::Vec2 bottomLeft() const { return lost::math::Vec2(x, y); }
-    lost::math::Vec2 bottomRight() const { return lost::math::Vec2(x+width-1, y); }
-    lost::math::Vec2 topRight() const { return lost::math::Vec2(x+width-1, y+height-1); }
-    lost::math::Vec2 topLeft() const { return lost::math::Vec2(x, y+height-1); }
+    lost::math::Vec2 bottomRight() const { return lost::math::Vec2(maxX(), y); }
+    lost::math::Vec2 topRight() const { return lost::math::Vec2(maxX(), maxY()); }
+    lost::math::Vec2 topLeft() const { return lost::math::Vec2(x, maxY()); }
     
     float x;
     float y;

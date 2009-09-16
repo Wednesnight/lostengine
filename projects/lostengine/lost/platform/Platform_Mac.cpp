@@ -29,10 +29,9 @@ namespace lost
     // returns current time in microseconds
     double currentTimeMicroSeconds()
     {
-      struct timezone tz;
       struct timeval tv;
 
-      gettimeofday(&tv, &tz);
+      gettimeofday(&tv, NULL);
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
@@ -44,7 +43,7 @@ namespace lost
     }
 
     // TODO: getApplicationFilename() not implemented
-    std::string getApplicationFilename( bool excludeExtension = false )
+    std::string getApplicationFilename( bool excludeExtension )
     {
       std::string result;
       return result;
@@ -122,7 +121,8 @@ namespace lost
     // TODO: buildUserDataPath() not implemented
     std::string buildUserDataPath( const std::string& filename )
     {
-      std::string result( filename );
+      std::string home = std::getenv("HOME");
+      std::string result( home +"/"+ filename );
       return result;
     }
 

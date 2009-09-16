@@ -3,6 +3,7 @@
 
 #include "lost/common/Logger.h"
 #include <iostream>
+#include <boost/cstdint.hpp>
 
 namespace lost
 {
@@ -26,6 +27,17 @@ namespace lost
       inline void b(float v) { fv[2] = v; }
       inline void a(float v) { fv[3] = v; }
 
+      // accessors for rgba values as usingned 8 bit integers
+      inline boost::uint8_t ru8() const { return (boost::uint8_t)(fv[0]*255); };
+      inline boost::uint8_t gu8() const { return (boost::uint8_t)(fv[1]*255); };
+      inline boost::uint8_t bu8() const { return (boost::uint8_t)(fv[2]*255); };
+      inline boost::uint8_t au8() const { return (boost::uint8_t)(fv[3]*255); };
+
+      inline void ru8(boost::uint8_t v) { fv[0] = float(v)/255.0f; }
+      inline void gu8(boost::uint8_t v) { fv[1] = float(v)/255.0f; }
+      inline void bu8(boost::uint8_t v) { fv[2] = float(v)/255.0f; }
+      inline void au8(boost::uint8_t v) { fv[3] = float(v)/255.0f; }
+      
       float fv[4];
     };
 
@@ -41,6 +53,16 @@ namespace lost
       return result;
     }
 
+    static inline bool operator ==(const Color& l, const Color& r)
+    {
+      return (l.fv[0] == r.fv[0]) && (l.fv[1] == r.fv[1]) && (l.fv[2] == r.fv[2]) && (l.fv[3] == r.fv[3]);
+    }
+    
+    static inline bool operator !=(const Color& l, const Color& r)
+    {
+      return !(l==r);
+    }
+    
     static inline void operator+=(Color& l, const Color& r)
     {
       l.fv[0] = std::min( 1.0f, l.fv[0] + r.fv[0] );
@@ -70,6 +92,7 @@ namespace lost
     static const lost::common::Color greenColor      (0.0f, 1.0f, 0.0f, 1.0f);
     static const lost::common::Color blueColor       (0.0f, 0.0f, 1.0f, 1.0f);
     static const lost::common::Color yellowColor     (1.0f, 1.0f, 0.0f, 1.0f);
+    static const lost::common::Color grayColor       (0.5f, 0.5f, 0.5f, 1.0f);
 
   }
 }

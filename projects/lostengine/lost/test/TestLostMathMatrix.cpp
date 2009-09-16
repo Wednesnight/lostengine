@@ -103,4 +103,13 @@ TEST(rotatez)
   CHECK(compare(dest, correct, epsilon));
 }
 
+TEST(comparison)
+{
+  Matrix m1;m1.zero();
+  Matrix m2;m2.zero();
+  CHECK(m1 == m2);
+  m2.initIdentity();
+  CHECK(m1 != m2);
+}
+
 }

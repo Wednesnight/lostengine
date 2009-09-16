@@ -9,7 +9,7 @@ namespace gl
 {
 struct FragmentShader : public Shader
 {
-  FragmentShader() : Shader(GL_FRAGMENT_SHADER) {}
+  FragmentShader();
 };
 }
 }

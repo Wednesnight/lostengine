@@ -1,0 +1,444 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA044C040EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C050EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C060EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C070EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C080EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C090EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C0A0EE893E800D3EE10 /* thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C010EE893E800D3EE10 /* thread.cpp */; };
+		EA044C0B0EE893E800D3EE10 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C020EE893E800D3EE10 /* once.cpp */; };
+		EA044C0C0EE893E800D3EE10 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C030EE893E800D3EE10 /* exceptions.cpp */; };
+		EA044C0E0EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
+		EA044C0F0EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
+		EA044C100EE893EC00D3EE10 /* tss_null.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */; };
+		EA0E42840E5E01E100B5EBF1 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */; };
+		EA0E42850E5E01E100B5EBF1 /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42690E5E012700B5EBF1 /* slot.cpp */; };
+		EA0E42860E5E01E100B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
+		EA0E42870E5E01E100B5EBF1 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426B0E5E012700B5EBF1 /* trackable.cpp */; };
+		EA0E42880E5E01E100B5EBF1 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426C0E5E012700B5EBF1 /* connection.cpp */; };
+		EA0E42890E5E01E100B5EBF1 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */; };
+		EA0E428A0E5E01E100B5EBF1 /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42690E5E012700B5EBF1 /* slot.cpp */; };
+		EA0E428B0E5E01E100B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
+		EA0E428C0E5E01E100B5EBF1 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426B0E5E012700B5EBF1 /* trackable.cpp */; };
+		EA0E428D0E5E01E100B5EBF1 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426C0E5E012700B5EBF1 /* connection.cpp */; };
+		EA0E428E0E5E01E200B5EBF1 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */; };
+		EA0E428F0E5E01E200B5EBF1 /* slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E42690E5E012700B5EBF1 /* slot.cpp */; };
+		EA0E42900E5E01E200B5EBF1 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */; };
+		EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426B0E5E012700B5EBF1 /* trackable.cpp */; };
+		EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0E426C0E5E012700B5EBF1 /* connection.cpp */; };
+		EA1B78B50E917EF300004196 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
+		EA1B78B60E917EF400004196 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
+		EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA6D04630E83030E002C8DD3 /* error_code.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7325860E5CE3B5000FF838 /* libboost-iphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libboost-iphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC046055464E500DB518D /* libboost.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libboost.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA044C010EE893E800D3EE10 /* thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = thread.cpp; path = ../source/libs/thread/src/pthread/thread.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C020EE893E800D3EE10 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../source/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C030EE893E800D3EE10 /* exceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = exceptions.cpp; path = ../source/libs/thread/src/pthread/exceptions.cpp; sourceTree = SOURCE_ROOT; };
+		EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tss_null.cpp; path = ../source/libs/thread/src/tss_null.cpp; sourceTree = SOURCE_ROOT; };
+		EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = named_slot_map.cpp; path = ../source/libs/signals/src/named_slot_map.cpp; sourceTree = SOURCE_ROOT; };
+		EA0E42690E5E012700B5EBF1 /* slot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = slot.cpp; path = ../source/libs/signals/src/slot.cpp; sourceTree = SOURCE_ROOT; };
+		EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signal_base.cpp; path = ../source/libs/signals/src/signal_base.cpp; sourceTree = SOURCE_ROOT; };
+		EA0E426B0E5E012700B5EBF1 /* trackable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trackable.cpp; path = ../source/libs/signals/src/trackable.cpp; sourceTree = SOURCE_ROOT; };
+		EA0E426C0E5E012700B5EBF1 /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = ../source/libs/signals/src/connection.cpp; sourceTree = SOURCE_ROOT; };
+		EA6D04630E83030E002C8DD3 /* error_code.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_code.cpp; path = ../source/libs/system/src/error_code.cpp; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3E7320D90E5CC40B000FF838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7325820E5CE3B5000FF838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* boost */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D04620E830300002C8DD3 /* system */,
+				EA7CF6D50E2ED939006E9E8A /* signals */,
+				EA044BFB0EE8936400D3EE10 /* thread */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = boost;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libboost.a */,
+				3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */,
+				3E7325860E5CE3B5000FF838 /* libboost-iphone.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA044BFB0EE8936400D3EE10 /* thread */ = {
+			isa = PBXGroup;
+			children = (
+				EA044C010EE893E800D3EE10 /* thread.cpp */,
+				EA044C020EE893E800D3EE10 /* once.cpp */,
+				EA044C030EE893E800D3EE10 /* exceptions.cpp */,
+				EA044C0D0EE893EC00D3EE10 /* tss_null.cpp */,
+			);
+			name = thread;
+			sourceTree = "<group>";
+		};
+		EA6D04620E830300002C8DD3 /* system */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D04630E83030E002C8DD3 /* error_code.cpp */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
+		EA7CF6D50E2ED939006E9E8A /* signals */ = {
+			isa = PBXGroup;
+			children = (
+				EA0E42680E5E012700B5EBF1 /* named_slot_map.cpp */,
+				EA0E42690E5E012700B5EBF1 /* slot.cpp */,
+				EA0E426A0E5E012700B5EBF1 /* signal_base.cpp */,
+				EA0E426B0E5E012700B5EBF1 /* trackable.cpp */,
+				EA0E426C0E5E012700B5EBF1 /* connection.cpp */,
+			);
+			name = signals;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3E7320D70E5CC40B000FF838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E73257B0E5CE3B5000FF838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3E7320DA0E5CC40B000FF838 /* boost-iphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E7320E30E5CC434000FF838 /* Build configuration list for PBXNativeTarget "boost-iphone" */;
+			buildPhases = (
+				3E7320D70E5CC40B000FF838 /* Headers */,
+				3E7320D80E5CC40B000FF838 /* Sources */,
+				3E7320D90E5CC40B000FF838 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "boost-iphone";
+			productName = "boost-iphone";
+			productReference = 3E7320DB0E5CC40B000FF838 /* libboost-iphone.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3E73257A0E5CE3B5000FF838 /* boost-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E7325830E5CE3B5000FF838 /* Build configuration list for PBXNativeTarget "boost-simulator" */;
+			buildPhases = (
+				3E73257B0E5CE3B5000FF838 /* Headers */,
+				3E73257C0E5CE3B5000FF838 /* Sources */,
+				3E7325820E5CE3B5000FF838 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "boost-simulator";
+			productName = "boost-iphone";
+			productReference = 3E7325860E5CE3B5000FF838 /* libboost-iphone.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D2AAC045055464E500DB518D /* boost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "boost" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = boost;
+			productName = boost;
+			productReference = D2AAC046055464E500DB518D /* libboost.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "boost" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* boost */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* boost */,
+				3E7320DA0E5CC40B000FF838 /* boost-iphone */,
+				3E73257A0E5CE3B5000FF838 /* boost-simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3E7320D80E5CC40B000FF838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0E42890E5E01E100B5EBF1 /* named_slot_map.cpp in Sources */,
+				EA0E428A0E5E01E100B5EBF1 /* slot.cpp in Sources */,
+				EA0E428B0E5E01E100B5EBF1 /* signal_base.cpp in Sources */,
+				EA0E428C0E5E01E100B5EBF1 /* trackable.cpp in Sources */,
+				EA0E428D0E5E01E100B5EBF1 /* connection.cpp in Sources */,
+				EA1B78B50E917EF300004196 /* error_code.cpp in Sources */,
+				EA044C0A0EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C0B0EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C0C0EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C100EE893EC00D3EE10 /* tss_null.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E73257C0E5CE3B5000FF838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0E428E0E5E01E200B5EBF1 /* named_slot_map.cpp in Sources */,
+				EA0E428F0E5E01E200B5EBF1 /* slot.cpp in Sources */,
+				EA0E42900E5E01E200B5EBF1 /* signal_base.cpp in Sources */,
+				EA0E42910E5E01E200B5EBF1 /* trackable.cpp in Sources */,
+				EA0E42920E5E01E200B5EBF1 /* connection.cpp in Sources */,
+				EA1B78B60E917EF400004196 /* error_code.cpp in Sources */,
+				EA044C070EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C080EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C090EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C0F0EE893EC00D3EE10 /* tss_null.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA0E42840E5E01E100B5EBF1 /* named_slot_map.cpp in Sources */,
+				EA0E42850E5E01E100B5EBF1 /* slot.cpp in Sources */,
+				EA0E42860E5E01E100B5EBF1 /* signal_base.cpp in Sources */,
+				EA0E42870E5E01E100B5EBF1 /* trackable.cpp in Sources */,
+				EA0E42880E5E01E100B5EBF1 /* connection.cpp in Sources */,
+				EA6D04640E83030E002C8DD3 /* error_code.cpp in Sources */,
+				EA044C040EE893E800D3EE10 /* thread.cpp in Sources */,
+				EA044C050EE893E800D3EE10 /* once.cpp in Sources */,
+				EA044C060EE893E800D3EE10 /* exceptions.cpp in Sources */,
+				EA044C0E0EE893EC00D3EE10 /* tss_null.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ADDITIONAL_SDKS = "";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = boost;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		1DEB91ED08733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = boost;
+			};
+			name = Release;
+		};
+		1DEB91F008733DB70010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../include\"";
+				ONLY_ACTIVE_ARCH = NO;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				VALID_ARCHS = "i386 armv6";
+			};
+			name = Debug;
+		};
+		1DEB91F108733DB70010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../include\"";
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+		3E7320DC0E5CC40C000FF838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
+				PREBINDING = NO;
+				PRODUCT_NAME = "boost-iphone";
+				SDKROOT = iphoneos2.0;
+			};
+			name = Debug;
+		};
+		3E7320DD0E5CC40C000FF838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = "boost-iphone";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		3E7325840E5CE3B5000FF838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../include\"";
+				PREBINDING = NO;
+				PRODUCT_NAME = "boost-simulator";
+				SDKROOT = iphonesimulator2.0;
+			};
+			name = Debug;
+		};
+		3E7325850E5CE3B5000FF838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = "boost-iphone";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7320E30E5CC434000FF838 /* Build configuration list for PBXNativeTarget "boost-iphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7320DC0E5CC40C000FF838 /* Debug */,
+				3E7320DD0E5CC40C000FF838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7325830E5CE3B5000FF838 /* Build configuration list for PBXNativeTarget "boost-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7325840E5CE3B5000FF838 /* Debug */,
+				3E7325850E5CE3B5000FF838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

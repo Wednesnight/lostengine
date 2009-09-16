@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <stdint.h>
-#include <boost/shared_ptr.hpp>
 #include <iostream>
 static const float pi = 3.14159f;
 
@@ -28,9 +27,9 @@ struct periodicalgenerator : public generator
 {
     float currentTime;
     float previousTime;
-    boost::shared_ptr<generator>  period;
+    lost::shared_ptr<generator>  period;
     
-    periodicalgenerator(boost::shared_ptr<generator> inPeriod)
+    periodicalgenerator(lost::shared_ptr<generator> inPeriod)
     : period(inPeriod), generator(0.0f)
     {
         currentTime = 0;
@@ -60,9 +59,9 @@ struct periodicalgenerator : public generator
 
 struct trigogen : public periodicalgenerator
 {
-    trigogen(boost::shared_ptr<generator> inOffset,
-             boost::shared_ptr<generator> inRange,
-             boost::shared_ptr<generator> inPeriod)
+    trigogen(lost::shared_ptr<generator> inOffset,
+             lost::shared_ptr<generator> inRange,
+             lost::shared_ptr<generator> inPeriod)
     : offset(inOffset), range(inRange), periodicalgenerator(inPeriod)
     {
     }
@@ -82,15 +81,15 @@ struct trigogen : public periodicalgenerator
         range->rewind();
     }
     
-    boost::shared_ptr<generator> offset;
-    boost::shared_ptr<generator> range;
+    lost::shared_ptr<generator> offset;
+    lost::shared_ptr<generator> range;
 };
 
 struct sinegen : public trigogen
 {
-    sinegen(boost::shared_ptr<generator> inOffset, 
-            boost::shared_ptr<generator> inRange,
-            boost::shared_ptr<generator> inPeriod)
+    sinegen(lost::shared_ptr<generator> inOffset, 
+            lost::shared_ptr<generator> inRange,
+            lost::shared_ptr<generator> inPeriod)
     : trigogen(inOffset, inRange, inPeriod)
     {
     }
@@ -110,9 +109,9 @@ struct sinegen : public trigogen
 
 struct cosgen : public trigogen
 {
-    cosgen(boost::shared_ptr<generator> inOffset,
-           boost::shared_ptr<generator> inRange,
-           boost::shared_ptr<generator> inPeriod)
+    cosgen(lost::shared_ptr<generator> inOffset,
+           lost::shared_ptr<generator> inRange,
+           lost::shared_ptr<generator> inPeriod)
     : trigogen(inOffset, inRange, inPeriod)
     {
     }

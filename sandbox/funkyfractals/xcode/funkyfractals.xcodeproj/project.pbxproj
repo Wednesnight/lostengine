@@ -1,0 +1,360 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E0BA1CE0E81011600A49C49 /* libLostEngine.a */; };
+		8DCDB6C60F876D4E00149088 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */; };
+		8DCDB6C70F876D4E00149088 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C30F876D4E00149088 /* global.xcconfig */; };
+		8DCDB6C80F876D4E00149088 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */; };
+		8DCDB6C90F876D4E00149088 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8DCDB6C50F876D4E00149088 /* global-release.xcconfig */; };
+		8DCDB6E10F876E0D00149088 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCDB6DF0F876E0D00149088 /* Cocoa.framework */; };
+		8DCDB6E20F876E0D00149088 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCDB6E00F876E0D00149088 /* Foundation.framework */; };
+		8DCDB89A0F87702200149088 /* FunkyFractals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCDB8990F87702200149088 /* FunkyFractals.cpp */; };
+		EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA45F5AF0DE52D08001B4889 /* OpenGL.framework */; };
+		EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA45F5E60DE52DF9001B4889 /* main.cpp */; };
+		EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */ = {isa = PBXBuildFile; fileRef = EA45F6050DE52EE3001B4889 /* lighting.vs */; };
+		EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */ = {isa = PBXBuildFile; fileRef = EA45F6060DE52EE3001B4889 /* lighting.fs */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3E0BA1CD0E81011600A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		3E0BA1CF0E81011600A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		3E0BA1D10E81011600A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		3E0BA1D50E81013F00A49C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		8DCDB69B0F876B0100149088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
+			remoteInfo = LostEngineUnittests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* funkyfractals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = funkyfractals.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DCDB6A60F876C0900149088 /* FunkyFractals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FunkyFractals.h; path = ../FunkyFractals.h; sourceTree = SOURCE_ROOT; };
+		8DCDB6C20F876D4E00149088 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = macosx.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/macosx.xcconfig; sourceTree = SOURCE_ROOT; };
+		8DCDB6C30F876D4E00149088 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = global.xcconfig; path = ../../../projects/lostengine/xcode/xcconfig/global.xcconfig; sourceTree = SOURCE_ROOT; };
+		8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-debug.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-debug.xcconfig"; sourceTree = SOURCE_ROOT; };
+		8DCDB6C50F876D4E00149088 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "global-release.xcconfig"; path = "../../../projects/lostengine/xcode/xcconfig/global-release.xcconfig"; sourceTree = SOURCE_ROOT; };
+		8DCDB6DF0F876E0D00149088 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		8DCDB6E00F876E0D00149088 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8DCDB8990F87702200149088 /* FunkyFractals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FunkyFractals.cpp; path = ../FunkyFractals.cpp; sourceTree = SOURCE_ROOT; };
+		EA45F5AF0DE52D08001B4889 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		EA45F5E60DE52DF9001B4889 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../main.cpp; sourceTree = SOURCE_ROOT; };
+		EA45F6050DE52EE3001B4889 /* lighting.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.vs; path = ../lighting.vs; sourceTree = SOURCE_ROOT; };
+		EA45F6060DE52EE3001B4889 /* lighting.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = lighting.fs; path = ../lighting.fs; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E0BA1D70E81014E00A49C49 /* libLostEngine.a in Frameworks */,
+				EA45F5B60DE52D08001B4889 /* OpenGL.framework in Frameworks */,
+				8DCDB6E10F876E0D00149088 /* Cocoa.framework in Frameworks */,
+				8DCDB6E20F876E0D00149088 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* funkyfractals.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* funkyfractals */ = {
+			isa = PBXGroup;
+			children = (
+				8DCDB6CA0F876D5100149088 /* Config */,
+				EA45F57D0DE52C7E001B4889 /* Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = funkyfractals;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA45F6050DE52EE3001B4889 /* lighting.vs */,
+				EA45F6060DE52EE3001B4889 /* lighting.fs */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */,
+				8DCDB6DF0F876E0D00149088 /* Cocoa.framework */,
+				8DCDB6E00F876E0D00149088 /* Foundation.framework */,
+				EA45F5AF0DE52D08001B4889 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3E0BA1C80E81011600A49C49 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3E0BA1CE0E81011600A49C49 /* libLostEngine.a */,
+				3E0BA1D00E81011600A49C49 /* libLostEngine.a */,
+				3E0BA1D20E81011600A49C49 /* libLostEngine.a */,
+				8DCDB69C0F876B0100149088 /* LostEngineUnittests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8DCDB6CA0F876D5100149088 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				8DCDB6C20F876D4E00149088 /* macosx.xcconfig */,
+				8DCDB6C30F876D4E00149088 /* global.xcconfig */,
+				8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */,
+				8DCDB6C50F876D4E00149088 /* global-release.xcconfig */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		EA45F57D0DE52C7E001B4889 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				EA45F5E60DE52DF9001B4889 /* main.cpp */,
+				8DCDB6A60F876C0900149088 /* FunkyFractals.h */,
+				8DCDB8990F87702200149088 /* FunkyFractals.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* funkyfractals */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "funkyfractals" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E0BA1D60E81013F00A49C49 /* PBXTargetDependency */,
+			);
+			name = funkyfractals;
+			productInstallPath = "$(HOME)/Applications";
+			productName = funkyfractals;
+			productReference = 8D1107320486CEB800E47090 /* funkyfractals.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "funkyfractals" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* funkyfractals */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3E0BA1C80E81011600A49C49 /* Products */;
+					ProjectRef = 3E0BA1C70E81011600A49C49 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* funkyfractals */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3E0BA1CE0E81011600A49C49 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 3E0BA1CD0E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3E0BA1D00E81011600A49C49 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 3E0BA1CF0E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3E0BA1D20E81011600A49C49 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 3E0BA1D10E81011600A49C49 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8DCDB69C0F876B0100149088 /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = 8DCDB69B0F876B0100149088 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA45F6070DE52EE3001B4889 /* lighting.vs in Resources */,
+				EA45F6080DE52EE3001B4889 /* lighting.fs in Resources */,
+				8DCDB6C60F876D4E00149088 /* macosx.xcconfig in Resources */,
+				8DCDB6C70F876D4E00149088 /* global.xcconfig in Resources */,
+				8DCDB6C80F876D4E00149088 /* global-debug.xcconfig in Resources */,
+				8DCDB6C90F876D4E00149088 /* global-release.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA45F5E70DE52DF9001B4889 /* main.cpp in Sources */,
+				8DCDB89A0F87702200149088 /* FunkyFractals.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E0BA1D60E81013F00A49C49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = 3E0BA1D50E81013F00A49C49 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = funkyfractals;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C20F876D4E00149088 /* macosx.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+					"\"$(SRCROOT)/../../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/boost/boost_1_34_1/lib/mac\"",
+					"\"$(SRCROOT)/../../../thirdparty/glfw/glfw_2_6/lib/mac\"",
+				);
+				PRODUCT_NAME = funkyfractals;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C40F876D4E00149088 /* global-debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DCDB6C50F876D4E00149088 /* global-release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "funkyfractals" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "funkyfractals" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

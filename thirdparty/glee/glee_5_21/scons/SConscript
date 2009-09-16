@@ -1,0 +1,11 @@
+Import('env')
+
+SOURCES = [
+  '../source/GLee.c',
+]
+
+import os
+env.appendPaths(os.getcwd(), include_dir = 'include')
+env.LIB_OBJECTS.extend([StaticObject(s,
+  CPPPATH = env.INCLUDES + ['../include'])
+    for s in SOURCES])

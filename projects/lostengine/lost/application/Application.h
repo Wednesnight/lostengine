@@ -1,64 +1,168 @@
-#ifndef LOST_APPLICATION_APPLICATION
-#define LOST_APPLICATION_APPLICATION
+#ifndef LOST_APPLICATION_APPLICATION_H
+#define LOST_APPLICATION_APPLICATION_H
 
-#include "lost/common/DisplayAttributes.h"
-#include "lost/common/Config.h"
-#include <boost/signal.hpp>
-#include "lost/common/Logger.h"
-#include "lost/event/KeyEvent.h"
-#include "lost/event/MouseEvent.h"
+
 #include <list>
+#include <map>
+#include <string>
+#include "lost/resource/Loader.h"
+#include "lost/event/Event.h"
 
 namespace lost
 {
-namespace application
-{
+  namespace event
+  {
+    struct EventDispatcher;
+    typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+  }
 
-struct Timer;
+  namespace application
+  {
+    struct Tasklet;
+    
+    struct TaskletEvent;
+    typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
 
-struct Application
-{
-public:
-  Application();
-  Application(common::Config& config);
-  Application(const common::DisplayAttributes& attribs);
-  virtual ~Application();
+    struct Application;
+    typedef lost::shared_ptr<Application> ApplicationPtr;
 
-  void run();
-  void quit();
+    struct ApplicationEvent;
+    typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 
-  boost::signal<void(const lost::event::KeyEvent&)>     key;
-  boost::signal<void(const lost::event::MouseEvent&)>   mouseMove;
-  boost::signal<void(const lost::event::MouseEvent&)>   mouseButton;
-  boost::signal<void(int, int)>                         windowResize;
+    struct SpawnTaskletEvent;
+    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
+    
+    struct QueueEvent;
+    typedef lost::shared_ptr<QueueEvent> QueueEventPtr;
+    
+    struct ProcessEvent;
+    typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
+    
+    int runTasklet(Tasklet* t);
 
-  void resize(int width, int height); // FIXME: can we make this private?
 
-  common::DisplayAttributes displayAttributes;
-private:
-  void addTimer(Timer* timer);
-  void removeTimer(Timer* timer);
+    struct Application : public lost::enable_shared_from_this<Application>
+    {
+    private:
+      /**
+       * forward declaration for platform specific stuff
+       */
+      struct ApplicationHiddenMembers;
+      ApplicationHiddenMembers* hiddenMembers;
 
-  friend void glfwKeyCallback( int key, int action );
-  friend void glfwMouseButtonCallback( int button, int action );
-  friend void glfwMouseMoveCallback( int x, int y );
-  friend void glfwWindowSizeCallback(int width, int height);
-  friend struct lost::application::Timer;
+      lost::resource::LoaderPtr loader;
 
-  void injectKey(int key, int pressed);
-  void injectMouseMove(const lost::math::Vec2& pos);
-  void injectMouseButton(int button, bool pressed, const lost::math::Vec2& pos);
-  void injectWindowResize(int x, int y);
+      /**
+       * list of tasklets
+       * have a look at lost/application/Tasklet.h for details
+       */
+      std::list<Tasklet*> tasklets;
 
-  void init();
-  void initDisplay();
-  void initCallbacks();
+      /**
+       * running flag
+       */
+      bool running;
 
-  void updateTimers(double deltaSec);
-  bool running;
-  std::list<Timer*> timers;
-};
-}
+      /**
+       * hidden ctor/dtor utility methods for platform specific stuff
+       */
+      void initialize();
+      void finalize();
+
+      /**
+       * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
+       * otherwise shared_from_this() will fail!
+       */
+      Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(Tasklet* tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
+      Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr());
+
+      /**
+       * ctor helper
+       */
+      void initApplication(resource::LoaderPtr inLoader);
+
+      /**
+       * Removes the specified tasklet.
+       */
+      void removeTasklet(Tasklet * tasklet);
+
+
+      /**
+       * listener for ApplicationEvent.RUN()
+       * handled in generic code
+       * raised from platform specific code
+       */
+      void startup(ApplicationEventPtr& event);
+
+      /**
+       * listener for ApplicationEvent.QUIT()
+       */
+      void quitHandler(ApplicationEventPtr& event);
+
+      /**
+       * handled in platform specific code
+       * raised from generic code
+       * should be executed on main thread!
+       */
+      void shutdown();
+    public:
+      lost::event::EventDispatcherPtr eventDispatcher;
+
+      /**
+       * static ctor helpers, make sure that we're held by a lost::shared_ptr
+       */
+      static lost::shared_ptr<Application> create();
+      static lost::shared_ptr<Application> create(int argn, char** args);
+      static lost::shared_ptr<Application> create(Tasklet* tasklet);
+      static lost::shared_ptr<Application> create(const std::string& inScript);
+
+      ~Application();
+
+      /**
+       * adds the specified tasklet
+       * if the application is already running you have to take care of starting the tasklet yourself
+       */
+      void addTasklet(Tasklet* tasklet);
+
+      /**
+       * starts all tasklets and queues a run event
+       */
+      void run();
+
+      /**
+       * quits the app
+       */
+      void quit();
+
+      /**
+       * call this to show/hide the OS mouse
+       */
+      void showMouse(bool visible);      
+
+      /**
+       * Tasklet spawn handler
+       **/
+      void taskletSpawn(const SpawnTaskletEventPtr& event);
+
+      /**
+       * Tasklet done handler
+       **/
+      void taskletDone(const TaskletEventPtr& event);
+
+      /**
+       * listener for QueueEvent.QUEUE()
+       */
+      void queueEvent(const QueueEventPtr& event);
+
+      /**
+       * should be executed on main thread!
+       */
+      void processEvents(const ProcessEventPtr& event);
+    };
+
+  }
 }
 
 #endif

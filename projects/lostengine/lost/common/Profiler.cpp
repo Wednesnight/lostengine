@@ -25,8 +25,7 @@ void lost::common::Profiler::initialize()
 }
 
 lost::common::ProfilerStatistics::ProfilerStatistics()
-  : logger(log_info),
-    totalStart(lost::platform::currentTimeMilliSeconds())
+  : totalStart(lost::platform::currentTimeMilliSeconds())
 {
 }
 
@@ -34,23 +33,19 @@ lost::common::ProfilerStatistics::~ProfilerStatistics()
 {
   if (callCountList.size() > 0)
   {
-    logger << " " << lendl;
-    logger << "Profiler statistics:" << lendl;
-    logger << " " << lendl;
-    logger << "  total duration: " << (int)(lost::platform::currentTimeMilliSeconds() - totalStart) / 1000 << " seconds" << lendl;
-    logger << " " << lendl;
+    DOUT("Profiler statistics:");
+    DOUT("  total duration: " << (int)(lost::platform::currentTimeMilliSeconds() - totalStart) / 1000 << " seconds");
     for (CallCountList::iterator callCount = callCountList.begin(); callCount != callCountList.end(); ++callCount)
     {
-      logger << "  "+ callCount->first << lendl;
-      logger << "    calls          : " << callCount->second << lendl;
+      DOUT("  "+ callCount->first);
+      DOUT("    calls          : " << callCount->second);
 
       DurationList::iterator duration = durationList.find(callCount->first);
       if (duration != durationList.end())
       {
-        logger << "    avg. duration  : " << (duration->second / callCount->second) << "ms" << lendl;
-        logger << "    total duration : " << duration->second << "ms" << lendl;
+        DOUT("    avg. duration  : " << (duration->second / callCount->second) << "ms");
+        DOUT("    total duration : " << duration->second << "ms");
       }
-      logger << " " << lendl;
     }
   }
 }

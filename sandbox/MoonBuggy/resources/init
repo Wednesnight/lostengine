@@ -1,0 +1,7 @@
+log.debug("hello from lua");
+
+config = {}
+config.displayAttributes = lost.common.DisplayAttributes()
+config.displayAttributes.width = 320
+config.displayAttributes.height = 480
+config.displayAttributes.title = "Press mouse button to play"

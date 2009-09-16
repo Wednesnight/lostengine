@@ -1,7 +1,9 @@
 #include "lost/gl/Utils.h"
+#include "lost/math/lmath.h"
 #include "UnitTest++.h"
 
 using namespace lost::gl::utils;
+using namespace lost::math;
 
 TEST(gl_utils)
 {  

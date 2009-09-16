@@ -6,8 +6,6 @@
 #include <list>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include "lost/math/Matrix.h"
 #include "lost/math/Vec3.h"
 
@@ -15,6 +13,13 @@ namespace lost
 {
   namespace lsystem
   {
+
+    struct LSystem;
+    typedef lost::shared_ptr<LSystem> LSystemPtr;
+    struct LSystemState;
+    typedef lost::shared_ptr<LSystemState> LSystemStatePtr;
+    struct LSystemResult;
+    typedef lost::shared_ptr<LSystemResult> LSystemResultPtr;
 
     struct LSystemResult
     {
@@ -28,7 +33,7 @@ namespace lost
       {
       }
     };
-    typedef std::list<boost::shared_ptr<LSystemResult> > LSystemResultList;
+    typedef std::list<LSystemResultPtr> LSystemResultList;
 
     struct LSystemState
     {
@@ -49,7 +54,7 @@ namespace lost
           switch (inString[idx])
           {
             case 'f':
-              matrix.initTranslation( math::Vec3(1,1,1) );
+              matrix.initTranslation( math::Vec3(0,1,0) );
               break;
             case 'X':
               matrix.initRotateX( mAngle.x );
@@ -72,9 +77,9 @@ namespace lost
             case 'F':
             default :
               drawable = true;
-              matrix.initTranslation( math::Vec3(1,1,1) );
+              matrix.initTranslation( math::Vec3(0,1,0) );
           }
-          inResultList.push_back( boost::shared_ptr<LSystemResult>(new LSystemResult(inString[idx], matrix, drawable)) );
+          inResultList.push_back( LSystemResultPtr(new LSystemResult(inString[idx], matrix, drawable)) );
         }
       }
 
@@ -84,6 +89,7 @@ namespace lost
         mAxiom(inAxiom),
         mVariableMap(inVariableMap)
       {
+        reset();
       }
 
       math::Vec3& angle() { return mAngle; }
@@ -120,7 +126,7 @@ namespace lost
       LSystem() {}
 
       // advance given LSystemState (steps = iteration count from current state)
-      void advance( boost::shared_ptr<LSystemState>& state, unsigned int steps = 1 )
+      void advance( LSystemStatePtr& state, unsigned int steps )
       {
         for (unsigned int stepCount = 0; stepCount < steps; ++stepCount)
         {
@@ -141,14 +147,22 @@ namespace lost
           }
         }
       }
+      void advance( LSystemStatePtr& state )
+      {
+        advance(state, 1);
+      }
 
       // regress given LSystemState (steps = iteration count from current state)
-      void regress( boost::shared_ptr<LSystemState>& state, unsigned int steps = 1 )
+      void regress( LSystemStatePtr& state, unsigned int steps = 1 )
       {
         throw std::runtime_error( "lost::lsystem::LSystem::regress() : not implemented" );
       }
+      void regress( LSystemStatePtr& state )
+      {
+        regress(state, 1);
+      }
 
-      void walk( const boost::shared_ptr<LSystemState>& state, const lost::math::Matrix& startMatrix, const boost::function<void (lost::math::Matrix&, LSystemResult&)> callback )
+      void walk( const LSystemStatePtr& state, const lost::math::Matrix& startMatrix, const boost::function<void (lost::math::Matrix&, LSystemResult&)> callback )
       {
         std::list<lost::math::Matrix> stack;
         LSystemResultList& result = state->result();
