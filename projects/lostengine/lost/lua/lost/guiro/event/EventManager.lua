@@ -5,6 +5,7 @@ require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
 require("lost.guiro.event.TouchEvent")
+require("lost.guiro.event.DropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
 
@@ -222,6 +223,16 @@ function EventManager:propagateMouseEvent(rootView, event)
   end  
 
   return viewStack
+end
+
+-- propagates an event using the hovered View
+-- expects the incoming event type to be lost.application.DropEvent
+-- wraps it to lost.guiro.event.DropEvent
+function EventManager:propagateDropEvent(rootView, event)
+  local dropEvent = lost.guiro.event.DropEvent(event)
+  local viewStack = self:findViewStack(rootView, dropEvent)
+  dropEvent.target = viewStack[#viewStack]
+  self:propagateEvent(viewStack, dropEvent, #viewStack)
 end
 
 
