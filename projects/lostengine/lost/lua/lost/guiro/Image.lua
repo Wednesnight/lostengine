@@ -65,7 +65,7 @@ function Image:constructor()
   
   self.deferredUpdateColor = function()
     if self._textureMesh then
-      self.textureMesh.material.color = self._color
+      self._textureMesh.material.color = self._color
     end
   end
 end
