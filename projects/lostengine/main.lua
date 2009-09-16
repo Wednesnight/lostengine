@@ -1,59 +1,61 @@
+-- LostEngine main.lua
+
 require("lost.declarative.Context")
 
 local WindowParams = lost.application.WindowParams
 local Rect = lost.math.Rect
-local KeyEvent = lost.application.KeyEvent
+local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
+local Color = lost.common.Color
+local Bounds = lost.guiro.Bounds
+local xabs = lost.guiro.xabs
+local yabs = lost.guiro.yabs
+local wabs = lost.guiro.wabs
+local habs = lost.guiro.habs
 local ApplicationEvent = lost.application.ApplicationEvent
-local DropEvent = lost.application.DropEvent
-local K_ESCAPE = lost.application.K_ESCAPE
-local Loader = lost.resource.Loader
-local FilesystemRepository = lost.resource.FilesystemRepository
-local ApplicationResourceRepository = lost.resource.ApplicationResourceRepository
-local SpawnTaskletEvent = lost.application.SpawnTaskletEvent
 
-lostengineTasklet = nil
-windowParams = WindowParams("LostEngine",
-                            Rect(50,800,400, 128))
+windowParams = WindowParams("LostEngine", Rect(50,800,400,128))
 
-function receive(type, handler)
-  return function(event) handler(type.cast(event)) end
-end
+-- these are deliberately global so we can access them from startup/update/shutdown
+dcl = nil
+screen = nil
 
 function startup(tasklet)
+  log.debug("starting up")
 
+  -- global reference
   lostengineTasklet = tasklet
+
   tasklet.waitForEvents = true
 
-  tasklet.eventDispatcher:addEventListener(KeyEvent.KEY_DOWN, receive(KeyEvent, keyDownHandler))
-  tasklet.eventDispatcher:addEventListener(DropEvent.DROPPED_FILE, receive(DropEvent, fileDropHandler))
-
-  -- load UI
   dcl = lost.declarative.Context(tasklet.loader)
-  ui = require("ui")
+  screen = require("ui")
+  screen:listenTo(tasklet.eventDispatcher)
+  screen.bounds = Bounds(xabs(0), yabs(0), wabs(windowParams.rect.width), habs(windowParams.rect.height))
+  -- update needs to be called later since the ui loader code triggers quite a few deferred updates
+  callLater(function() screen:updateLayout(true) end) 
+
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
   return true
 end
 
 function update(tasklet)
-  ui:process(tasklet.window.context)
+  processCallLaterQueue()
+  screen:updateLayout(false)
+  screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
   return true
 end
 
 function shutdown(tasklet)
+  log.debug("shutting down")
   return true
 end
 
-function keyDownHandler(event)
-  if event.key == K_ESCAPE then
+function keyHandler(event)
+  local keyEvent = lost.application.KeyEvent.cast(event)
+  if keyEvent.key == lost.application.K_ESCAPE then
     lostengineTasklet:dispatchApplicationEvent(ApplicationEvent(ApplicationEvent.QUIT))
   end
-end
-
-function fileDropHandler(event)
-  log.debug("starting tasklet: ".. event.filename)
-  local loader = Loader()
-  loader:addRepository(FilesystemRepository.create(event.filename))
-  loader:addRepository(ApplicationResourceRepository.create())
-  lostengineTasklet:dispatchApplicationEvent(SpawnTaskletEvent(loader))
 end

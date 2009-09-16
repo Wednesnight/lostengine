@@ -86,6 +86,9 @@ namespace lost
         class_<DropEvent, Event, lost::shared_ptr<DropEvent> >("DropEvent")
         .def(constructor<const std::string&>())
         .def_readonly("filename", &DropEvent::filename)
+        .def_readonly("window", &DropEvent::window)
+        .def_readonly("pos", &DropEvent::pos)
+        .def_readonly("absPos", &DropEvent::absPos)
         .scope
         [
           def("cast", &lost::lua::cast<DropEvent>)

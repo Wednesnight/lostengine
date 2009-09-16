@@ -56,6 +56,11 @@
     const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
     std::string filename(cString);
     lost::shared_ptr<lost::application::DropEvent> dropEvent(new lost::application::DropEvent(filename));
+    NSPoint rel = [self mouseLocationOutsideOfEventStream];
+    NSPoint abs = [NSEvent mouseLocation];
+    dropEvent->window  = parent;
+    dropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
+    dropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
     parent->dispatcher->queueEvent(dropEvent);
   }
   return YES;

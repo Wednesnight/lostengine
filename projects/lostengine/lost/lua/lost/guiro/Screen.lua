@@ -48,6 +48,10 @@ function Screen:constructor()
   self:showFrame(false)
 end
 
+function Screen:propagateDropEvent(event)
+  self.eventManager:propagateDropEvent(self, event)
+end
+
 function Screen:propagateMouseEvent(event)
   self.eventManager:propagateMouseEvent(self, event)
 end
@@ -74,6 +78,7 @@ function Screen:addSubview(subview)
 end
 
 function Screen:listenTo(dispatcher)
+  dispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE, function(event) self:propagateDropEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
   dispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
