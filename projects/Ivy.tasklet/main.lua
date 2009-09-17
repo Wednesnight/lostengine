@@ -1,54 +1,47 @@
+-- Ivy main.lua
 require("lost.declarative.Context")
 
-local MatrixTranslation = lost.math.MatrixTranslation
-local Vec3 = lost.math.Vec3
-local Rect = lost.math.Rect
+local Bounds = lost.guiro.Bounds
+local xabs = lost.guiro.xabs
+local yabs = lost.guiro.yabs
+local wabs = lost.guiro.wabs
+local habs = lost.guiro.habs
+local wrel = lost.guiro.wrel
+local hrel = lost.guiro.hrel
+
+require("sizes")
 
 windowParams = lost.application.WindowParams("Ivy", lost.math.Rect(200,200,640,480))
+dcl = nil
+screen = nil
 
-rootNode = nil
-currentPicNode = nil -- receives a quad that draws the dropped bitmap at 0,0
--- create a custom loader that takes absolute filepaths 
-bitmapLoader = lost.resource.Loader.create()
-bitmapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
+function keyHandler(event)
+  local keyEvent = lost.application.KeyEvent.cast(event)
+  if keyEvent.key == lost.application.K_ESCAPE then
+    running = false
+  end
+end
 
 function startup(tasklet)
-  dcl = lost.declarative.Context(tasklet.loader)
-  tasklet.eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE, dropHandler)
-  rootNode = dcl.rg:Node
-  {
-    name = "rootNode",
-    dcl.rg:ClearColor{color=lost.common.Color(1,1,1,1)},
-    dcl.rg:Clear{mask=gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT},
-    dcl.rg:Camera2D
-    {
-      name = "2D Cam",
-      viewport = Rect(0,0,windowParams.rect.width,windowParams.rect.height)
-    },
-    dcl.rg:DepthTest{false}
-  }
   tasklet.waitForEvents = true
+  dcl = lost.declarative.Context(tasklet.loader)
+  screen = require("ui")
+  screen.bounds = Bounds(xabs(0), yabs(0), wabs(windowParams.rect.width), habs(windowParams.rect.height))
+  screen:listenTo(tasklet.eventDispatcher)
+  callLater(function() screen:updateLayout(true) end) 
+  running = true
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   return true
 end
 
 function update(tasklet)
-  rootNode:process(tasklet.window.context)
+  processCallLaterQueue()
+  screen:updateLayout(false)
+  screen.rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
-  return true
+  return running
 end
 
 function shutdown(tasklet)
   return true
-end
-
-function dropHandler(event)
-  local dropEvent = lost.application.DropEvent.cast(event)
-  local path = dropEvent.filename
-  log.debug("dropped file: '"..path.."'")
-  local data = bitmapLoader:load(path)
-  log.debug("loaded data of size: "..data.size)
-  rootNode:remove(currentPicNode)
-  local meshQuad = lost.mesh.Quad2D.create(data, true)
-  currentPicNode = lost.rg.Draw.create(meshQuad)
-  rootNode:add(currentPicNode)
 end
