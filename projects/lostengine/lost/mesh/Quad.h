@@ -4,6 +4,7 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/resource/File.h"
 #include "lost/gl/Texture.h"
+#include "lost/gl/TextureTile.h"
 #include "lost/math/Rect.h"
 #include <vector>
 
