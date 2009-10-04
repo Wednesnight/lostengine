@@ -116,7 +116,7 @@ namespace lost
         return result;
       }
 
-      inline math::Vec2 normalisedCoord(const math::Vec2 pixelCoord)
+      inline math::Vec2 normalisedCoord(const math::Vec2& pixelCoord)
       {
         return math::Vec2(normalisedXCoord(pixelCoord.x), normalisedYCoord(pixelCoord.y));
       }
