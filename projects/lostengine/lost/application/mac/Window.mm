@@ -18,7 +18,11 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+@interface ApplicationWindow : NSWindow
+#else
 @interface ApplicationWindow : NSWindow<NSWindowDelegate>
+#endif
 {
   lost::application::Window* parent;
 

@@ -16,7 +16,11 @@
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
 
+#if MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+@interface ApplicationDelegate : NSObject
+#else
 @interface ApplicationDelegate : NSObject<NSApplicationDelegate>
+#endif
 {
   lost::application::Application* parent;
 }
