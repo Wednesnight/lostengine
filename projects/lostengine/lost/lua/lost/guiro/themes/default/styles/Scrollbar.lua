@@ -14,10 +14,10 @@ function Scrollbar:constructor()
 end
 
 function Scrollbar:apply(target)
-  target:showFrame(true)
-  target:showBackground(false)
-  target:backgroundColor(Color(.5,.5,.5,1))
-  target:frameColor(Color(1,1,1,1))
+  target:showFrame(false)
+  target:showBackground(true)
+  target:backgroundColor(Color(.2,.2,.2,1))
+  target:frameColor(Color(.5,.5,.5,1))
   
   target:upButton(self:buildButton("upButton", self.name))
   target:moveButton(self:buildButton("moveButton", "scrollbarHandle"))

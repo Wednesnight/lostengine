@@ -75,11 +75,6 @@
   return NSDragOperationCopy;
 }
 
-- (BOOL)isReleasedWhenClosed
-{
-  return NO;
-}
-
 - (BOOL)windowShouldClose: (id)window
 {
   // TODO: add windowShouldClose event
@@ -379,6 +374,7 @@ namespace lost
       [hiddenMembers->window setAcceptsMouseMovedEvents: YES];
       [hiddenMembers->window setContentView: hiddenMembers->view];
       [hiddenMembers->window setDelegate: hiddenMembers->window];
+      [hiddenMembers->window setReleasedWhenClosed: NO];
 
       [[hiddenMembers->view openGLContext] makeCurrentContext];
       context.reset(new gl::Context);

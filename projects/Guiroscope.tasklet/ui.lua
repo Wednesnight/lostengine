@@ -63,12 +63,6 @@ return dcl.guiro:Screen
         },
         dcl.guiro:Button
         {
-          bounds = Bounds(xabs(50), yabs(200), wabs(50), habs(30)),
-          title = "klein",
-          style = "scrollbarHandle"
-        },
-        dcl.guiro:Button
-        {
           bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
           title = "riesig",
           listeners = 

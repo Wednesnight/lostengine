@@ -100,11 +100,13 @@ function View:constructor()
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
+  self.backgroundNode.active = false
 
   self.frameMesh = lost.mesh.Rect2D.create(self.currentGlobalRect)
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
   self.frameNode.name = "drawViewFrame"
+  self.frameNode.active = false
 
   self.renderNode:add(self.backgroundNode)
   self.renderNode:add(self.frameNode)

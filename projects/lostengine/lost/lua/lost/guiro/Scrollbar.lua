@@ -34,11 +34,15 @@ function Scrollbar:constructor()
 	      if self._dragging then
           local delta = nil
           local boxRange = nil
+          --[[
+              FIXME: We need to multiply the move delta by 10 to have
+                     pixel exact movement. WTF?
+            ]]
 	        if self._orientation == "horizontal" then
-            delta = event.pos.x - self._dragStart.x
+            delta = (event.pos.x - self._dragStart.x) * 10
 	          boxRange = self._moveButtonContainer:globalRect().width
 	        elseif self._orientation == "vertical" then
-            delta = self._dragStart.y - event.pos.y
+            delta = (self._dragStart.y - event.pos.y) * 10
             boxRange = self._moveButtonContainer:globalRect().height
           else
             error("invalid Scrollbar.orientation: ".. self._orientation)
@@ -191,14 +195,20 @@ function Scrollbar:updateMoveButton()
   local range = math.max(1, math.abs(self._max - self._min))
   local posFactor = (self._value - self._min) / range
 
+  --[[
+      FIXME: Scrollbar handle align is off by 1 pixel somehow, quickfix: modify horizontal size
+             and vertical size/position by 1. Fixes this problem in most cases, still b0rked
+             when vertical handle size is modified.
+    ]]
+
   if self._orientation == "horizontal" then
     local boxRange = self._moveButtonContainer:globalRect().width
     local size = math.max(0.1, math.min(0.95, boxRange/range))
-    self._moveButton.bounds = Bounds(xleft({abs=((1-size)*posFactor)*boxRange}), ybottom(), wrel(size), hrel(1))
+    self._moveButton.bounds = Bounds(xleft({abs=((1-size)*posFactor)*boxRange}), ybottom(), wrel(size, 1), hrel(1))
   elseif self._orientation == "vertical" then
     local boxRange = self._moveButtonContainer:globalRect().height
     local size = math.max(0.1, math.min(0.99, boxRange/range))
-    self._moveButton.bounds = Bounds(xleft(), ytop({abs=-((1-size)*posFactor)*boxRange}), wrel(1), hrel(size))
+    self._moveButton.bounds = Bounds(xleft(), ytop({abs=-((1-size)*posFactor)*boxRange+1}), wrel(1), hrel(size, 1))
   else
     error("invalid Scrollbar.orientation: ".. self._orientation)
   end
