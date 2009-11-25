@@ -514,7 +514,6 @@
 		B41266FF0F5EE7CD001CCC23 /* tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A00F5EE7CC001CCC23 /* tasklet.cpp */; };
 		B41267030F5EE7CD001CCC23 /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A60F5EE7CC001CCC23 /* variant.cpp */; };
 		B41267050F5EE7CD001CCC23 /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B41266A80F5EE7CC001CCC23 /* version.cpp */; };
-		EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA09071E0E6F4F7A00852256 /* LostPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */; };
@@ -539,8 +538,6 @@
 		EA0F5CE01051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
 		EA0F5CE11051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
 		EA0F5CE21051C6E000545DCC /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */; };
-		EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
-		EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4930EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
 		EA15B4940EE31EB600672EF4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
 		EA15B4970EE31EB600672EF4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
@@ -618,22 +615,16 @@
 		EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
 		EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
 		EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
-		EA70F8F70ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F8FA0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F8FD0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
-		EA70F9360ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
-		EA70F9370ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
 		EA70F93A0ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
 		EA70F93B0ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
 		EA70F93E0ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
 		EA70F93F0ED08E99000AA8CB /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
-		EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
-		EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
 		EA70F94C0ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
 		EA70F94D0ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
 		EA70F9500ED08EA0000AA8CB /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
 		EA70F9510ED08EA0000AA8CB /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
-		EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
 		EA70F9C20ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
 		EA70F9C40ED0A092000AA8CB /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
 		EA7163B20EBE17E0005DB902 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
@@ -2474,16 +2465,7 @@
 				3E9531310EC98D62003FCAF0 /* Application.cpp in Sources */,
 				EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */,
 				EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */,
-				EA70F8F70ED08713000AA8CB /* Debug.cpp in Sources */,
-				EA70F9360ED08E99000AA8CB /* Context.cpp in Sources */,
-				EA70F9370ED08E99000AA8CB /* Buffer.cpp in Sources */,
-				EA70F9480ED08EA0000AA8CB /* Source.cpp in Sources */,
-				EA70F9490ED08EA0000AA8CB /* Device.cpp in Sources */,
-				EA70F9C00ED0A092000AA8CB /* Listener.cpp in Sources */,
 				EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */,
-				EA15B48F0EE31EB600672EF4 /* Engine.cpp in Sources */,
-				EA15B4900EE31EB600672EF4 /* Source.cpp in Sources */,
-				EA044CB00EE8B09600D3EE10 /* VorbisFile.cpp in Sources */,
 				3E27FE660EFAB09C00DFF147 /* LostLGL.cpp in Sources */,
 				3E531E660F14FD7B00D7C8B4 /* hl_md5.cpp in Sources */,
 				3E531E680F14FD7B00D7C8B4 /* hl_md5wrapper.cpp in Sources */,
