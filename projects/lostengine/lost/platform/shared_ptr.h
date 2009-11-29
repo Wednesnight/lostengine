@@ -8,7 +8,7 @@
   #define HAVE_BOOST_SHARED_PTR
 #else
   // Assuming this is a GCC-based platform, we'll expect tr1 to exist.
-  #define HAVE_TR1_SHARED_PTR
+  #define HAVE_BOOST_SHARED_PTR
 #endif
 
 //#include <boost/shared_array.hpp>
@@ -46,6 +46,7 @@ struct shared_array : public std::tr1::shared_ptr<T>
 #if defined(HAVE_BOOST_SHARED_PTR)
 
 #include <boost/shared_ptr.hpp>
+#include <boost/shared_array.hpp>
 #include <boost/pointer_cast.hpp>
 #include <boost/enable_shared_from_this.hpp>
 

@@ -6,7 +6,7 @@ namespace lost
 namespace rg
 {
 
-NodePtr DefaultFrameBuffer::create()
+DefaultFrameBufferPtr DefaultFrameBuffer::create()
 {
   return DefaultFrameBufferPtr(new DefaultFrameBuffer);
 }

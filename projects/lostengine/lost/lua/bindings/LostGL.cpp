@@ -28,7 +28,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<Context, ContextPtr >("Context")
+          class_<Context>("Context")
             .def("makeCurrent", &Context::makeCurrent)
             .def("swapBuffers", &Context::swapBuffers)
             .def("vsync", &Context::vsync)
@@ -49,7 +49,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<FrameBuffer, FrameBufferPtr >("FrameBuffer")
+          class_<FrameBuffer>("FrameBuffer")
             .def(constructor<>())
             .def("attachDepth", (void(FrameBuffer::*)(TexturePtr))&FrameBuffer::attachDepth)
             .def("attachDepth", (void(FrameBuffer::*)(RenderBufferPtr))&FrameBuffer::attachDepth)
@@ -223,7 +223,7 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<RenderBuffer, shared_ptr<RenderBuffer> >("RenderBuffer")
+          class_<RenderBuffer>("RenderBuffer")
             .def(constructor<>())
             .def("enable", &RenderBuffer::enable)
             .def("disable", &RenderBuffer::disable)
@@ -239,7 +239,7 @@ namespace lost
         namespace_("gl")
         [
           def("loadShader", loadShader),
-          class_<ShaderProgram, ShaderProgramPtr >("ShaderProgram")
+          class_<ShaderProgram>("ShaderProgram")
             .def(constructor<>())
             .def("enable", &ShaderProgram::enable)
             .def("disable", &ShaderProgram::disable)
@@ -268,10 +268,16 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<Texture, shared_ptr<Texture> >("Texture")
+          class_<Texture>("Texture")
             .def(constructor<>())
             .def(constructor<lost::bitmap::BitmapPtr, const Texture::Params&>())
             .def(constructor<lost::resource::FilePtr, const Texture::Params&>())
+            .scope
+            [
+              def("create", (TexturePtr(*)(resource::FilePtr, const Texture::Params&))&Texture::create),
+              def("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create),
+              def("create", (TexturePtr(*)(bitmap::BitmapPtr, const Texture::Params&))&Texture::create)
+            ]
             .def("bind", &Texture::bind)
             .def("init", (void(Texture::*)(shared_ptr<File>, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(shared_ptr<Bitmap>, const Texture::Params&))&Texture::init)

@@ -15,6 +15,7 @@
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/application/Window.h"
+#include <luabind/shared_ptr_converter.hpp>
 
 using namespace luabind;
 using namespace lost::application;
@@ -31,16 +32,12 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<AccelerometerEvent, Event, lost::shared_ptr<AccelerometerEvent> >("AccelerometerEvent")
+          class_<AccelerometerEvent, Event>("AccelerometerEvent")
             .def(constructor<std::string>()) 
             .def_readwrite("x", &AccelerometerEvent::x)
             .def_readwrite("y", &AccelerometerEvent::y)
             .def_readwrite("z", &AccelerometerEvent::z)
             .def_readwrite("timeStamp", &AccelerometerEvent::timeStamp)
-            .scope
-            [
-              def("cast", &lost::lua::cast<AccelerometerEvent>)
-            ]
         ]
       ];
       globals(state)["lost"]["application"]["AccelerometerEvent"]["DEVICE_ACCELERATED"] = AccelerometerEvent::DEVICE_ACCELERATED();
@@ -52,7 +49,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<Application, ApplicationPtr>("Application")
+          class_<Application>("Application")
             .def("showMouse", &Application::showMouse)
             .def_readonly("eventDispatcher", &Application::eventDispatcher)
         ]
@@ -65,12 +62,8 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ApplicationEvent, Event, lost::shared_ptr<Event> >("ApplicationEvent")
+          class_<ApplicationEvent, Event>("ApplicationEvent")
             .def(constructor<std::string>()) 
-            .scope
-            [
-              def("cast", &lost::lua::cast<ApplicationEvent>)
-            ]
         ]
       ];
       globals(state)["lost"]["application"]["ApplicationEvent"]["RUN"] = ApplicationEvent::RUN();
@@ -83,16 +76,12 @@ namespace lost
       [
        namespace_("application")
        [
-        class_<DropEvent, Event, lost::shared_ptr<DropEvent> >("DropEvent")
+        class_<DropEvent, Event>("DropEvent")
         .def(constructor<const std::string&>())
         .def_readonly("filename", &DropEvent::filename)
         .def_readonly("window", &DropEvent::window)
         .def_readonly("pos", &DropEvent::pos)
         .def_readonly("absPos", &DropEvent::absPos)
-        .scope
-        [
-          def("cast", &lost::lua::cast<DropEvent>)
-        ]
        ]
       ];
       globals(state)["lost"]["application"]["DropEvent"]["DROPPED_FILE"] = DropEvent::DROPPED_FILE();
@@ -104,13 +93,9 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<InputEvent, Event, lost::shared_ptr<InputEvent> >("InputEvent")
+          class_<InputEvent, Event>("InputEvent")
             .def(constructor<std::string>()) 
             .def_readonly("window", &InputEvent::window)
-            .scope
-            [
-              def("cast", &lost::lua::cast<InputEvent>)
-            ]
         ]
       ];
     }
@@ -121,16 +106,12 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<KeyEvent, InputEvent, lost::shared_ptr<KeyEvent> >("KeyEvent")
+          class_<KeyEvent, InputEvent>("KeyEvent")
             .def(constructor<std::string>())
             .def_readwrite("key", &KeyEvent::key)
             .def_readwrite("character", &KeyEvent::character)
             .def_readwrite("pressed", &KeyEvent::pressed)
             .def_readwrite("repeat", &KeyEvent::repeat)
-            .scope
-            [
-              def("cast", &lost::lua::cast<KeyEvent>)
-            ]
         ]
       ];
       globals(state)["lost"]["application"]["KeyEvent"]["KEY_UP"] = KeyEvent::KEY_UP();
@@ -235,17 +216,13 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<MouseEvent, InputEvent, lost::shared_ptr<MouseEvent> >("MouseEvent")
+          class_<MouseEvent, InputEvent>("MouseEvent")
             .def(constructor<std::string>()) 
             .def_readwrite("pos", &MouseEvent::pos)
             .def_readwrite("absPos", &MouseEvent::absPos)
             .def_readwrite("button", &MouseEvent::button)
             .def_readwrite("pressed", &MouseEvent::pressed)
             .def_readwrite("scrollDelta", &MouseEvent::scrollDelta)
-            .scope
-            [
-              def("cast", &lost::lua::cast<MouseEvent>)
-            ]
         ]
       ];
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP"] = MouseEvent::MOUSE_UP();
@@ -266,14 +243,10 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<ResizeEvent, Event, lost::shared_ptr<ResizeEvent> >("ResizeEvent")
+          class_<ResizeEvent, Event>("ResizeEvent")
             .def(constructor<std::string>()) 
             .def_readwrite("width", &ResizeEvent::width)
             .def_readwrite("height", &ResizeEvent::height)
-            .scope
-            [
-              def("cast", &lost::lua::cast<ResizeEvent>)
-            ]
         ]
       ];
       globals(state)["lost"]["application"]["ResizeEvent"]["MAIN_WINDOW_RESIZE"] = ResizeEvent::MAIN_WINDOW_RESIZE();
@@ -301,11 +274,11 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<SpawnTaskletEvent, Event, lost::shared_ptr<Event> >("SpawnTaskletEvent")
+          class_<SpawnTaskletEvent, Event>("SpawnTaskletEvent")
             .def(constructor<resource::LoaderPtr>()) 
             .scope
             [
-              def("cast", &lost::lua::cast<SpawnTaskletEvent>)
+              def("create", &SpawnTaskletEvent::create)         
             ]
         ]
       ];
@@ -317,15 +290,13 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<TouchEvent, Event, lost::shared_ptr<TouchEvent> >("TouchEvent")
+          class_<TouchEvent, Event>("TouchEvent")
             .def(constructor<std::string>()) 
             .def("size", &TouchEvent::size) 
             .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)
             .scope
             [
-              def("cast", &lost::lua::cast<TouchEvent>),
-
-              class_<TouchEvent::Touch, lost::shared_ptr<TouchEvent::Touch> >("Touch")
+              class_<TouchEvent::Touch>("Touch")
                 .def(constructor<>()) 
                 .def_readwrite("location", &TouchEvent::Touch::location)
                 .def_readwrite("tapCount", &TouchEvent::Touch::tapCount)
@@ -351,7 +322,7 @@ namespace lost
             .def_readonly("context", &Window::context)
             .def_readonly("params", &Window::params),
 
-          class_<WindowParams, lost::shared_ptr<WindowParams> >("WindowParams")
+          class_<WindowParams>("WindowParams")
             .def(constructor<const std::string&, const lost::math::Rect&>())
             .def_readwrite("caption", &WindowParams::caption)
             .def_readwrite("rect", &WindowParams::rect)

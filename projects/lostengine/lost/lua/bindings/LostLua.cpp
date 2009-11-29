@@ -27,8 +27,8 @@ namespace lost
       [
         namespace_("lua")
         [
-            def("doResourceFile", &doResourceFile, raw(_2)),
-          class_<State, lost::shared_ptr<State> >("State")
+            def("doResourceFile", &doResourceFile),
+          class_<State>("State")
             .def(constructor<>())
             .def("doFile", (int(State::*)(const lost::shared_ptr<lost::resource::File>&)) &State::doFile)
             .def("doFile", (int(State::*)(const std::string&)) &State::doFile)

@@ -64,25 +64,25 @@ function View:constructor()
 
   -- scissoring, initially enabled but inactive (will not be processed)
   self.scissorBounds = lost.guiro.Bounds(lost.guiro.xleft(), lost.guiro.ytop(), lost.guiro.wrel(1), lost.guiro.hrel(1))
-  self.scissorNode = lost.rg.Scissor.cast(lost.rg.Scissor.create(true))
+  self.scissorNode = lost.rg.Scissor.create(true)
   self.scissorNode.active = false
   self.scissorNode.name = "scissorNode"
-  self.scissorRectNode = lost.rg.ScissorRect.cast(lost.rg.ScissorRect.create(lost.math.Rect()))
+  self.scissorRectNode = lost.rg.ScissorRect.create(lost.math.Rect())
   self.scissorRectNode.active = false
   self.scissorRectNode.name = "scissorRectNode"
-  self.disableScissorNode = lost.rg.Scissor.cast(lost.rg.Scissor.create(false))
+  self.disableScissorNode = lost.rg.Scissor.create(false)
   self.disableScissorNode.active = false
   self.disableScissorNode.name = "disableScissorNode"
 
   -- draw the view
   self.rootNode:add(self.renderNode)
   -- apply the views scissoring
-  self.rootNode:add(self.scissorNode:asNodePtr())
-  self.rootNode:add(self.scissorRectNode:asNodePtr())
+  self.rootNode:add(self.scissorNode)
+  self.rootNode:add(self.scissorRectNode)
   -- draw subviews
   self.rootNode:add(self.subviewNodes)
   -- disable scissoring
-  self.rootNode:add(self.disableScissorNode:asNodePtr())
+  self.rootNode:add(self.disableScissorNode)
 
   -- mesh container
   self.meshes = {}

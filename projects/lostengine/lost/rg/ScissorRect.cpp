@@ -12,7 +12,7 @@ namespace lost
       name = "scissorRect";
     }
     
-    NodePtr ScissorRect::create(const math::Rect& inRect)
+    ScissorRectPtr ScissorRect::create(const math::Rect& inRect)
     {
       return ScissorRectPtr(new ScissorRect(inRect));
     }

@@ -56,7 +56,7 @@ Texture::Texture()
   create();
 }
 
-Texture::Texture(lost::math::Vec2 inSize, const Params& inParams)
+Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
 {
   create();
   init(inSize, inParams);

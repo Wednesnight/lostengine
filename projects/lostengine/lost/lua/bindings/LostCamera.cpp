@@ -20,17 +20,17 @@ namespace lost
       [
         namespace_("camera")
         [
-          class_<Camera, shared_ptr<Camera> >("Camera")
+          class_<Camera>("Camera")
             .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
             .def("viewport", (Rect&(Camera::*)())&Camera::viewport),
-          class_<Camera2D, shared_ptr<Camera2D>, Camera>("Camera2D")
+          class_<Camera2D, Camera>("Camera2D")
             .def(constructor<const Rect&>())
             .scope
             [
               def("create", &Camera2D::create)
             ]
             ,
-          class_<Camera3D, shared_ptr<Camera3D>, Camera>("Camera3D")
+          class_<Camera3D, Camera>("Camera3D")
             .def(constructor<const Rect&>())
             .def("fovY", (float(Camera3D::*)()) &Camera3D::fovY)
             .def("fovY", (void(Camera3D::*)(const float)) &Camera3D::fovY)

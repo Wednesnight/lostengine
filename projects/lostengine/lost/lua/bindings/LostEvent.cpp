@@ -23,7 +23,7 @@ namespace lost
       [
         namespace_("event")
         [
-          class_<Event, lost::shared_ptr<Event> >("Event")
+          class_<Event>("Event")
             .def(constructor<std::string>()) 
             .def(constructor<const Event&>()) 
 //            .def("asSharedPtr", &asSharedPtr)
@@ -83,7 +83,7 @@ namespace lost
       [
         namespace_("event")
         [
-          class_<EventDispatcher, LuaEventDispatcher, lost::shared_ptr<EventDispatcher> >("EventDispatcher")
+          class_<EventDispatcher, LuaEventDispatcher>("EventDispatcher")
             .def(constructor<>())
             .def("addEventListener", (boost::signals::connection(*)(object, const std::string&, object))&addEventListener)
             .def("removeEventListener", &EventDispatcher::removeEventListener)

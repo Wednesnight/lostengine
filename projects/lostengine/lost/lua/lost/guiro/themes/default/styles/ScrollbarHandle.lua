@@ -23,10 +23,10 @@ function ScrollbarHandle:constructor(loader)
   local texParams = lost.gl.Texture.Params()
   texParams.minFilter = gl.GL_LINEAR
   texParams.magFilter = gl.GL_LINEAR
-  self.normalTex = lost.gl.Texture(loader:load("lost/guiro/themes/default/resources/ButtonNormal.png"), texParams)
-  self.hoverTex = lost.gl.Texture(loader:load("lost/guiro/themes/default/resources/ButtonHover.png"), texParams)
-  self.pushedTex = lost.gl.Texture(loader:load("lost/guiro/themes/default/resources/ButtonPushed.png"), texParams)
-  self.disabledTex = lost.gl.Texture(loader:load("lost/guiro/themes/default/resources/ButtonDisabled.png"), texParams)
+  self.normalTex = lost.gl.Texture.create(loader:load("lost/guiro/themes/default/resources/ButtonNormal.png"), texParams)
+  self.hoverTex = lost.gl.Texture.create(loader:load("lost/guiro/themes/default/resources/ButtonHover.png"), texParams)
+  self.pushedTex = lost.gl.Texture.create(loader:load("lost/guiro/themes/default/resources/ButtonPushed.png"), texParams)
+  self.disabledTex = lost.gl.Texture.create(loader:load("lost/guiro/themes/default/resources/ButtonDisabled.png"), texParams)
   self.name = "scrollbarHandle"
   self.targetClassName = "lost.guiro.Button"
 end

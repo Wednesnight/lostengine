@@ -54,8 +54,7 @@ function shutdown(tasklet)
 end
 
 function keyHandler(event)
-  local keyEvent = lost.application.KeyEvent.cast(event)
-  if keyEvent.key == lost.application.K_ESCAPE then
+  if event.key == lost.application.K_ESCAPE then
     lostengineTasklet:dispatchApplicationEvent(ApplicationEvent(ApplicationEvent.QUIT))
   end
 end

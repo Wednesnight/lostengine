@@ -12,7 +12,7 @@ FrameBuffer::FrameBuffer(gl::FrameBufferPtr inFb)
   fb = inFb;
 }
 
-NodePtr FrameBuffer::create(gl::FrameBufferPtr inFb)
+FrameBufferPtr FrameBuffer::create(gl::FrameBufferPtr inFb)
 {
   return FrameBufferPtr(new FrameBuffer(inFb));
 }

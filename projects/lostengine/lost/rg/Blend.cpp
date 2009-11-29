@@ -12,7 +12,7 @@ namespace lost
       name = "blend";
     }
     
-    NodePtr Blend::create(bool inEnable)
+    BlendPtr Blend::create(bool inEnable)
     {
       return BlendPtr(new Blend(inEnable));
     }

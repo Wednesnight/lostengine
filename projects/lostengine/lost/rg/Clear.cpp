@@ -12,7 +12,7 @@ Clear::Clear(GLbitfield inMask)
   mask = inMask;
 }
 
-NodePtr Clear::create(GLbitfield inMask)
+ClearPtr Clear::create(GLbitfield inMask)
 {
   return ClearPtr(new Clear(inMask));
 }

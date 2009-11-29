@@ -90,7 +90,7 @@ function Screen:listenTo(dispatcher)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:propagateTouchEvent(event) end)
   dispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
   dispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
-        local resizeEvent = lost.application.ResizeEvent.cast(event)
+        local resizeEvent = event
         self.bounds.width = lost.guiro.wabs(resizeEvent.width)
         self.bounds.height = lost.guiro.habs(resizeEvent.height)
         callLater(function() self:updateLayout(true) end)

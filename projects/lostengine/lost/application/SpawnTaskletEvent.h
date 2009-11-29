@@ -22,6 +22,9 @@ namespace lost
         : loader(inLoader), Event(SPAWN_TASKLET())
         {
         }
+        
+        static SpawnTaskletEventPtr create(resource::LoaderPtr inLoader) { return SpawnTaskletEventPtr(new SpawnTaskletEvent(inLoader)); }
+        
         virtual ~SpawnTaskletEvent() {}
 
     };

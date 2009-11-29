@@ -46,7 +46,6 @@ namespace lost
       [
         namespace_("math")
         [
-//        class_<Vec2, lost::shared_ptr<Vec2> >("Vec2")
           class_<Vec2>("Vec2")
             .def(constructor<>())
             .def(constructor<const Vec2&>())
