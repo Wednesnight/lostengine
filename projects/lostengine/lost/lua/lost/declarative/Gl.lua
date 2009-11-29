@@ -77,9 +77,9 @@ function Gl:Texture(def)
   local result = nil
   
   if filename ~= nil then
-    result = lost.gl.Texture(self.loader:load(filename), params)
+    result = lost.gl.Texture.create(self.loader:load(filename), params)
   elseif bitmap ~= nil then
-    result = lost.gl.Texture(bitmap, params)
+    result = lost.gl.Texture.create(bitmap, params)
   else
     error("filename or bitmap required for construction of Texture", 2)
   end

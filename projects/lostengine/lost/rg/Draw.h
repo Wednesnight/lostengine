@@ -23,7 +23,7 @@ struct Draw : public Node
   mesh::MeshPtr mesh;
   
   Draw(mesh::MeshPtr inMesh);
-  static NodePtr create(mesh::MeshPtr inMesh);
+  static DrawPtr create(mesh::MeshPtr inMesh);
   
   void process(gl::ContextPtr ctx);
 };

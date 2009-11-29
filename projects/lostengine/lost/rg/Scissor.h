@@ -17,7 +17,7 @@ namespace lost
     {
       bool enable;
       Scissor(bool inEnable);
-      static NodePtr create(bool inEnable);
+      static ScissorPtr create(bool inEnable);
       
       void process(gl::ContextPtr ctx);
     };

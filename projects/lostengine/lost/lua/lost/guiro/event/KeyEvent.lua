@@ -11,12 +11,12 @@ local typeConvert = {}
 typeConvert[lost.application.KeyEvent.KEY_UP] = KeyEvent.KEY_UP
 typeConvert[lost.application.KeyEvent.KEY_DOWN] = KeyEvent.KEY_DOWN
 
--- initialise it with an uncast lost.application.KeyEvent
+-- initialise it with an lost.application.KeyEvent
 function KeyEvent:constructor(laKeyEvent)
   lost.guiro.event.Event.constructor(self)
 
   self.bubbles = true
-  self.lostAppKeyEvent = lost.application.KeyEvent.cast(laKeyEvent)
+  self.lostAppKeyEvent = laKeyEvent
   self.key = self.lostAppKeyEvent.key
   self.character = self.lostAppKeyEvent.character
   self.pressed = self.lostAppKeyEvent.pressed

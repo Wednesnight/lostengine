@@ -32,6 +32,8 @@ namespace lost
     
     State::~State()
     {
+      // set loader to nil because it's usually contained in state
+      this->loader.reset();
       // cleanup all resource, that is set _G to nil and perform a full garbage collection cycle
       luabind::object nil;
       luabind::object _G = luabind::globals(state);

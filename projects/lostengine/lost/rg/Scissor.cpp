@@ -12,7 +12,7 @@ namespace lost
       name = "scissor";
     }
     
-    NodePtr Scissor::create(bool inEnable)
+    ScissorPtr Scissor::create(bool inEnable)
     {
       return ScissorPtr(new Scissor(inEnable));
     }

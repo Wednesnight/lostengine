@@ -31,7 +31,7 @@ namespace lost
       [
         namespace_("lsystem")
         [
-          class_<LSystem, lost::shared_ptr<LSystem> >("LSystem")
+          class_<LSystem>("LSystem")
             .def(constructor<>())
             .def("advance", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&, unsigned int)) &LSystem::advance)
             .def("advance", (void(LSystem::*)(lost::shared_ptr<lsystem::LSystemState>&)) &LSystem::advance)
@@ -45,7 +45,7 @@ namespace lost
       [
         namespace_("lsystem")
         [
-          class_<lsystem::LSystemState, lost::shared_ptr<lsystem::LSystemState> >("LSystemState")
+          class_<lsystem::LSystemState>("LSystemState")
             .def("reset", &LSystemState::reset),
   
           def("LSystemState", &createLSystemState)

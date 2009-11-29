@@ -15,17 +15,17 @@ Camera::Camera(camera::CameraPtr inCam)
   name = "camera"; 
 }
 
-NodePtr Camera::create(camera::CameraPtr inCam)
+CameraPtr Camera::create(camera::CameraPtr inCam)
 {
   return CameraPtr(new Camera(inCam));
 }
 
-NodePtr Camera::create(camera::Camera2DPtr inCam)
+CameraPtr Camera::create(camera::Camera2DPtr inCam)
 {
   return CameraPtr(new Camera(inCam));
 }
 
-NodePtr Camera::create(camera::Camera3DPtr inCam)
+CameraPtr Camera::create(camera::Camera3DPtr inCam)
 {
   return CameraPtr(new Camera(inCam));
 }

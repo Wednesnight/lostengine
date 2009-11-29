@@ -16,8 +16,8 @@ dcl = nil
 screen = nil
 
 function keyHandler(event)
-  local keyEvent = lost.application.KeyEvent.cast(event)
-  if keyEvent.key == lost.application.K_ESCAPE then
+  local event
+  if event.key == lost.application.K_ESCAPE then
     running = false
   end
 end

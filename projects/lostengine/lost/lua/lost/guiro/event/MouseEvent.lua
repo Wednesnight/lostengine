@@ -19,11 +19,11 @@ typeConvert[lost.application.MouseEvent.MOUSE_UP] = MouseEvent.MOUSE_UP
 typeConvert[lost.application.MouseEvent.MOUSE_DOWN] = MouseEvent.MOUSE_DOWN
 typeConvert[lost.application.MouseEvent.MOUSE_SCROLL] = MouseEvent.MOUSE_SCROLL
 
--- initialise it with an uncast lost.application.MouseEvent
+-- initialise it with an lost.application.MouseEvent
 function MouseEvent:constructor(laMouseEvent)
   lost.guiro.event.Event.constructor(self)
 
-  local lostAppMouseEvent = lost.application.MouseEvent.cast(laMouseEvent)
+  local lostAppMouseEvent = laMouseEvent
 
   self.bubbles = true
   self.pos = lostAppMouseEvent.pos

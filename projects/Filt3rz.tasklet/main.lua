@@ -47,18 +47,18 @@ function startup(tasklet)
 
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  ftlib = lost.font.freetype.Library()
+  ftlib = lost.font.freetype.Library.create()
   fontSize = 30
   yinset = fontSize+3  
 
   fontData = tasklet.loader:load("miserable.ttf")
-  ttf = lost.font.TrueTypeFont(ftlib, fontData)
+  ttf = lost.font.TrueTypeFont.create(ftlib, fontData)
 
   framebuffer = lost.gl.FrameBuffer.createFrameBuffer(tasklet.window.context, fboSize, gl.GL_RGBA, 24)
 
-  cam2D = Camera2D(Rect(0, 0, screenSize.width, screenSize.height))
+  cam2D = Camera2D.create(Rect(0, 0, screenSize.width, screenSize.height))
 
-  cam3D = Camera3D(Rect(0, 0, fboSize.width, fboSize.height))
+  cam3D = Camera3D.create(Rect(0, 0, fboSize.width, fboSize.height))
   cam3D:fovY(45.0)
   cam3D:depth(Vec2(1.0, 1000.0))
   cam3D:position(Vec3(1,2,2))
@@ -209,11 +209,9 @@ function update(tasklet)
 end
 
 function keyHandler(event)
-  local keyEvent = lost.application.KeyEvent.cast(event)
-
-  if (keyEvent.key == lost.application.K_ESCAPE) then
+  if (event.key == lost.application.K_ESCAPE) then
     running = false
-  elseif (keyEvent.key == lost.application.K_SPACE) then
+  elseif (event.key == lost.application.K_SPACE) then
     animated = not animated
   end
 end

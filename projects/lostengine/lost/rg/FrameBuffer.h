@@ -20,7 +20,7 @@ struct FrameBuffer : public Node
 {
   gl::FrameBufferPtr fb;
   FrameBuffer(gl::FrameBufferPtr inFb);
-  static NodePtr create(gl::FrameBufferPtr inFb);
+  static FrameBufferPtr create(gl::FrameBufferPtr inFb);
   void process(gl::ContextPtr ctx);
 };
 

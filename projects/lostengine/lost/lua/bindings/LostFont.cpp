@@ -27,7 +27,7 @@ namespace lost
         [
           namespace_("freetype")
           [
-            class_<Library, lost::shared_ptr<Library> >("Library")
+            class_<Library>("Library")
               .def(constructor<>())
               .scope
               [
@@ -44,7 +44,7 @@ namespace lost
       [
         namespace_("font")
         [
-          class_<RenderedText, Mesh, RenderedTextPtr>("RenderedText")
+          class_<RenderedText, Mesh>("RenderedText")
             .def_readonly("min", &RenderedText::min)
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
@@ -83,7 +83,7 @@ namespace lost
       [
         namespace_("font")
         [
-          class_<TrueTypeFont, shared_ptr<TrueTypeFont> >("TrueTypeFont")
+          class_<TrueTypeFont>("TrueTypeFont")
             .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
             .def("render", renderCrippled)
             .def("render", renderToTarget)

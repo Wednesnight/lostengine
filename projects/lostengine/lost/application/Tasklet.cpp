@@ -55,10 +55,10 @@ namespace lost
       luaUpdate = nil;
       luaShutdown = nil;
       luaProcessCallLater = nil;
-      // second: reset lua state to cleanup all references back into native code
-      lua.reset();
-      // third: cleanup remaining resources
       if (window) delete window;
+      loader.reset(); // loader is also present in lua state, so kill it first
+      eventDispatcher.reset(); 
+      lua.reset();
     }
 
     void Tasklet::init()

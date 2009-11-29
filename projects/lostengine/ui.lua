@@ -51,10 +51,10 @@ return dcl.guiro:Screen
             mouseEnter = function(event) event.target:showBackground(true) end,
             mouseLeave = function(event) event.target:showBackground(false) end,
             mouseDown = function(event)
-              local loader = Loader()
+              local loader = Loader.create()
               loader:addRepository(FilesystemRepository.create(event.target.id))
               loader:addRepository(ApplicationResourceRepository.create())
-              lostengineTasklet:dispatchApplicationEvent(SpawnTaskletEvent(loader))
+              lostengineTasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(loader))
             end
           }
         }

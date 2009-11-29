@@ -47,9 +47,14 @@ namespace lost
       };
     
       Texture();
-      Texture(lost::math::Vec2 inSize, const Params& inParams = Params());
+      Texture(const lost::math::Vec2& inSize, const Params& inParams = Params());
       Texture(resource::FilePtr inFile,  const Params& inParams = Params());
       Texture(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());      
+      
+      static TexturePtr create(const lost::math::Vec2& inSize, const Params& inParams = Params()) { return TexturePtr(new Texture(inSize, inParams)); };
+      static TexturePtr create(resource::FilePtr inFile,  const Params& inParams = Params()) { return TexturePtr(new Texture(inFile, inParams)); };
+      static TexturePtr create(bitmap::BitmapPtr inBitmap, const Params& inParams = Params()) { return TexturePtr(new Texture(inBitmap, inParams)); };
+      
       ~Texture();    
       void destroy();  
       void bind() const;      

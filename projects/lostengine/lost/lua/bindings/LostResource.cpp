@@ -20,7 +20,7 @@ namespace lost
       [
         namespace_("resource")
         [
-          class_<File, lost::shared_ptr<File> >("File")
+          class_<File>("File")
             .def(constructor<>())    
             .def_readwrite("size", &File::size)
             .def_readwrite("location", &File::location)
@@ -41,7 +41,7 @@ namespace lost
       [
         namespace_("resource")
         [
-          class_<Loader, LoaderPtr >("Loader")
+          class_<Loader>("Loader")
             .def(constructor<>())
             .def("load", &LostResourceLoader_load)
             .def("addRepository", &Loader::addRepository)
@@ -65,7 +65,7 @@ namespace lost
         namespace_("resource")
         [
           // FIXME: should be held by FilesystemRepositoryPtr, but luabind ...
-          class_<FilesystemRepository, RepositoryPtr>("FilesystemRepository")
+          class_<FilesystemRepository>("FilesystemRepository")
             .scope
             [
               def("create", &fsrepo_create)
@@ -86,7 +86,7 @@ namespace lost
         namespace_("resource")
         [
           // FIXME: should be held by ApplicationResourceRepositoryPtr, but luabind ...
-          class_<ApplicationResourceRepository, RepositoryPtr>("ApplicationResourceRepository")
+          class_<ApplicationResourceRepository>("ApplicationResourceRepository")
             .scope
             [
               def("create", &arepo_create)

@@ -9,12 +9,12 @@ DropEvent.DROPPED_FILE   = "droppedFile"
 local typeConvert = {}
 typeConvert[lost.application.DropEvent.DROPPED_FILE] = DropEvent.DROPPED_FILE
 
--- initialise it with an uncast lost.application.DropEvent
+-- initialise it with an lost.application.DropEvent
 function DropEvent:constructor(laDropEvent)
   lost.guiro.event.Event.constructor(self)
 
   self.bubbles = true
-  self.lostAppDropEvent = lost.application.DropEvent.cast(laDropEvent)
+  self.lostAppDropEvent = laDropEvent
   self.filename = self.lostAppDropEvent.filename
   self.window = self.lostAppDropEvent.window
   self.pos = self.lostAppDropEvent.pos

@@ -124,7 +124,7 @@ function Rg:DepthTest(def)
   return result
 end
 
--- mesh = (any meshPtr, will be cast to MeshPtr) (mandatory)
+-- mesh  (mandatory)
 -- material
 function Rg:Draw(def)
   local mesh = def["mesh"]

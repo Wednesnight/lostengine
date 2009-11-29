@@ -12,7 +12,7 @@ ClearColor::ClearColor(const common::Color& inCol)
   name = "clearColor";
 }
 
-NodePtr ClearColor::create(const common::Color& inCol)
+ClearColorPtr ClearColor::create(const common::Color& inCol)
 {
   return ClearColorPtr(new ClearColor(inCol));
 }

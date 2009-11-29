@@ -16,7 +16,7 @@ struct ClearColor : public Node
 {
   common::Color col;
   ClearColor(const common::Color& inCol);
-  static NodePtr create(const common::Color& inCol);
+  static ClearColorPtr create(const common::Color& inCol);
   void process(gl::ContextPtr ctx);  
 };
 

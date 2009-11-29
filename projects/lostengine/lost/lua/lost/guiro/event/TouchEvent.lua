@@ -15,11 +15,11 @@ typeConvert[lost.application.TouchEvent.TOUCHES_CANCELLED] = TouchEvent.TOUCHES_
 typeConvert[lost.application.TouchEvent.TOUCHES_ENDED] = TouchEvent.TOUCHES_ENDED
 typeConvert[lost.application.TouchEvent.TOUCHES_MOVED] = TouchEvent.TOUCHES_MOVED
 
--- initialise it with an uncast lost.application.TouchEvent
+-- initialise it with an lost.application.TouchEvent
 function TouchEvent:constructor(laTouchEvent)
   lost.guiro.event.Event.constructor(self)
 
-  local lostAppTouchEvent = lost.application.TouchEvent.cast(laTouchEvent)
+  local lostAppTouchEvent = laTouchEvent
 
   self.bubbles = true
 --  self.pos = lostAppTouchEvent.pos

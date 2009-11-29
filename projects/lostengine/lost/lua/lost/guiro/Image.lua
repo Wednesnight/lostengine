@@ -134,7 +134,7 @@ function Image:updateLayout(forceUpdate)
 end
 
 function Image:bitmap(b)
-  local texture = lost.gl.Texture(b, lost.gl.Texture.Params())
+  local texture = lost.gl.Texture.create(b, lost.gl.Texture.Params())
   self:texture(texture)
 end
 

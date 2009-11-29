@@ -13,7 +13,7 @@ typedef lost::shared_ptr<DefaultFrameBuffer> DefaultFrameBufferPtr;
 
 struct DefaultFrameBuffer : public Node
 {
-  static NodePtr create();
+  static DefaultFrameBufferPtr create();
   void process(gl::ContextPtr ctx);
 };
 
