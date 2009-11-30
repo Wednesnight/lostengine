@@ -2,7 +2,7 @@
 #define LOST_MESH_QUAD_H
 
 #include "lost/mesh/Mesh.h"
-#include "lost/resource/File.h"
+#include "lost/common/Data.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/TextureTile.h"
 #include "lost/math/Rect.h"
@@ -51,7 +51,7 @@ struct Quad : public MESHTYPE
   // flipping the texture coords vertically if required.
   // This is essentially a shortcut for creating quads with the same extents as 
   // a loaded bitmap. The default Material has a white draw color.
-  Quad(resource::FilePtr data, bool flip=true)
+  Quad(common::DataPtr data, bool flip=true)
   {
     this->drawMode = GL_TRIANGLES;
     gl::TexturePtr tex(new gl::Texture(data));
@@ -165,7 +165,7 @@ struct Quad : public MESHTYPE
   static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(const std::vector<math::Rect>& rects) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(rects)); }
-  static lost::shared_ptr<Quad<MESHTYPE> > create(resource::FilePtr data, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
+  static lost::shared_ptr<Quad<MESHTYPE> > create(common::DataPtr data, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
   static lost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex, flip)); }
   
   virtual ~Quad() {}

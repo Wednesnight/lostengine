@@ -22,7 +22,6 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
-#include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
 
 #define GET_POINTER(name) template name* get_pointer(lost::shared_ptr<name>&);\
@@ -61,6 +60,6 @@ namespace luabind
   GET_POINTER(lost::math::Vec2);
   GET_POINTER(lost::math::Vec3);
   GET_POINTER(lost::math::Vec4);
-  GET_POINTER(lost::resource::File);
+  GET_POINTER(lost::common::Data);
   GET_POINTER(lost::resource::Loader);
 }

@@ -1,5 +1,4 @@
 #include "lost/resource/Loader.h"
-#include "lost/resource/File.h"
 #include "lost/resource/Repository.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
@@ -18,9 +17,9 @@ namespace lost
     {
     }
 
-    FilePtr Loader::load( const boost::filesystem::path& inPath)
+    common::DataPtr Loader::load( const boost::filesystem::path& inPath)
     {
-      FilePtr result;
+      common::DataPtr result;
 
       // FIXME: determine failed loads by counting load attempts.
       //        if we finish the loops with zero successful loads, throw an exception.

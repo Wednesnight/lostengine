@@ -271,15 +271,15 @@ namespace lost
           class_<Texture>("Texture")
             .def(constructor<>())
             .def(constructor<lost::bitmap::BitmapPtr, const Texture::Params&>())
-            .def(constructor<lost::resource::FilePtr, const Texture::Params&>())
+            .def(constructor<common::DataPtr, const Texture::Params&>())
             .scope
             [
-              def("create", (TexturePtr(*)(resource::FilePtr, const Texture::Params&))&Texture::create),
+              def("create", (TexturePtr(*)(common::DataPtr, const Texture::Params&))&Texture::create),
               def("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create),
               def("create", (TexturePtr(*)(bitmap::BitmapPtr, const Texture::Params&))&Texture::create)
             ]
             .def("bind", &Texture::bind)
-            .def("init", (void(Texture::*)(shared_ptr<File>, const Texture::Params&))&Texture::init)
+            .def("init", (void(Texture::*)(common::DataPtr, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(shared_ptr<Bitmap>, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(const lost::math::Vec2&, const Texture::Params&))&Texture::init)
             .def("init", (void(*)(Texture*, GLint, GLenum, GLsizei, GLsizei, GLint, GLenum, GLenum))&TextureInit)

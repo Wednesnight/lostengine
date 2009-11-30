@@ -2,13 +2,11 @@
 
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
-#include "lost/resource/File.h"
 
 //#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_increment_actor.hpp>
 #include <boost/spirit/include/classic_decrement_actor.hpp>
-//#include <boost/spirit/phoenix/binders.hpp>
 
 using namespace boost;
 using namespace boost::spirit;
@@ -16,7 +14,6 @@ using namespace boost::spirit::classic;
 using namespace std;
 using namespace lost::math;
 using namespace lost::mesh;
-using namespace lost::resource;
 
 namespace lost
 {
@@ -52,7 +49,7 @@ namespace lost
     /**
      * load obj model from fileName through loader, returns lost::mesh::MeshPtr
      */
-    MeshPtr Loader::obj(resource::FilePtr objFile)
+    MeshPtr Loader::obj(common::DataPtr objFile)
     {
       unsigned int vtxCount = 0;
       unsigned int nrmCount = 0;

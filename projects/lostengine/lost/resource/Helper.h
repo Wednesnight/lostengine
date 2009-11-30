@@ -2,17 +2,15 @@
 #define LOST_RESOURCE_HELPER_H
 
 #include <string>
+#include "lost/common/Data.h"
 
 namespace lost
 {
 namespace resource
 {
 
-  struct File;
-  typedef lost::shared_ptr<File> FilePtr;
-
-// reads file from path into new File instance, leaves location member unset.
-FilePtr loadFromAbsolutePath(const std::string& inPath);
+// reads file from path into new Data instance, leaves location member unset.
+common::DataPtr loadFromAbsolutePath(const std::string& inPath);
 
 }
 }

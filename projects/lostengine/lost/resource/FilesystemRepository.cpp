@@ -1,7 +1,6 @@
 #include <boost/filesystem.hpp>
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/Helper.h"
-#include "lost/resource/File.h"
 
 namespace lost
 {
@@ -13,11 +12,10 @@ FilesystemRepository::FilesystemRepository(const boost::filesystem::path& inRoot
 {
 }
 
-FilePtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
+common::DataPtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
 {
   boost::filesystem::path absolutePath = rootDirectory / relativePath;
-  FilePtr result = loadFromAbsolutePath(absolutePath.string());
-  return result;
+  return loadFromAbsolutePath(absolutePath.string());;
 }
 
 FilesystemRepositoryPtr FilesystemRepository::create(const boost::filesystem::path& inRootDir)

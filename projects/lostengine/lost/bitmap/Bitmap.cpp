@@ -3,7 +3,6 @@
 #include "stb_image.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include "lost/resource/File.h"
 #include <boost/lexical_cast.hpp>
 
 using namespace std;
@@ -46,10 +45,10 @@ Bitmap::Bitmap(uint32_t inWidth,
   init(inWidth, inHeight, destComponents, srcComponents, data);
 }
 
-Bitmap::Bitmap(lost::shared_ptr<lost::resource::File> inFile)
+Bitmap::Bitmap(common::DataPtr inData)
 {
   reset();
-  init(inFile);
+  init(inData);
 }
 
 Bitmap::~Bitmap()
@@ -174,12 +173,12 @@ uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
   return result;
 }
 
-void Bitmap::init(lost::shared_ptr<lost::resource::File> inFile)
+void Bitmap::init(common::DataPtr inData)
 {
   destroy();
 //  DOUT("init image from memory: " << inFile->location);
   int bytesPerPixel, w, h;
-  data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(inFile->data.get()), inFile->size, &w, &h, &bytesPerPixel, 0);
+  data = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(inData->bytes.get()), inData->size, &w, &h, &bytesPerPixel, 0);
   width = w;
   height = h;
   if(data == NULL)

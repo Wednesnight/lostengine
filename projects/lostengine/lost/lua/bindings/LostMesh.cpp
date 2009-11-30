@@ -173,14 +173,14 @@ namespace lost
           class_<Quad2D, Mesh>("Quad2D")
             .def(constructor<>())
             .def(constructor<const math::Rect&>())
-            .def(constructor<resource::FilePtr, bool>())
+            .def(constructor<common::DataPtr, bool>())
             .def(constructor<gl::TexturePtr, bool>())
             .def("updateSize", &Quad2D::updateSize)
             .scope
             [
               def("create", (Quad2DPtr(*)()) &Quad2D::create),
               def("create", (Quad2DPtr(*)(const math::Rect& inRect)) &Quad2D::create),
-              def("create", (Quad2DPtr(*)(resource::FilePtr data, bool)) &Quad2D::create),
+              def("create", (Quad2DPtr(*)(common::DataPtr data, bool)) &Quad2D::create),
               def("create", (Quad2DPtr(*)(gl::TexturePtr tex, bool)) &Quad2D::create)
             ]
         ]

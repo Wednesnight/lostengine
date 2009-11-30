@@ -6,11 +6,10 @@
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/platform/shared_ptr.h"
+#include "lost/common/Data.h"
 
 namespace lost
 {
-  namespace resource{ struct File; };
-
   namespace bitmap
   {
     struct Bitmap;
@@ -48,7 +47,7 @@ namespace lost
              Components destComponents,
              Components srcComponents,
              boost::uint8_t* data);
-      Bitmap(lost::shared_ptr<lost::resource::File> inFile);
+      Bitmap(common::DataPtr inData);
       void reset();
       virtual ~Bitmap();
 
@@ -82,7 +81,7 @@ namespace lost
       /** attempts to interpret a chunk ofmemory as a bitmap, with the help of the underlying image library.
        * An exception is thrown if an error occurs.
        */
-      void init(lost::shared_ptr<lost::resource::File> inFile);
+      void init(common::DataPtr inData);
       
       /** calculates the number of pixels for a given bitmap components constant.
        */
