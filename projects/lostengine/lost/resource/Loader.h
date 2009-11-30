@@ -12,9 +12,6 @@ namespace lost
     struct Loader;
     typedef lost::shared_ptr<Loader> LoaderPtr;
 
-    struct File;
-    typedef lost::shared_ptr<File> FilePtr;
-
     struct LoaderError : public std::runtime_error { LoaderError(const std::string& error) : runtime_error(error) {} };
 
     struct Loader
@@ -22,7 +19,7 @@ namespace lost
       Loader();
       virtual ~Loader();
 
-      FilePtr load( const boost::filesystem::path& inPath);
+      common::DataPtr load( const boost::filesystem::path& inPath);
       void addRepository( RepositoryPtr inRepository );
 
 

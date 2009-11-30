@@ -2,6 +2,7 @@
 #define LOST_RESOURCE_REPOSITORY_H
 
 #include "lost/platform/shared_ptr.h"
+#include "lost/common/Data.h"
 
 // filesystem path foward declaration
 namespace boost
@@ -18,9 +19,6 @@ namespace lost
 {
   namespace resource
   {
-  struct File;
-  typedef lost::shared_ptr<File> FilePtr;
-
     struct Repository;
     typedef lost::shared_ptr<Repository> RepositoryPtr;
 
@@ -29,7 +27,7 @@ namespace lost
       Repository() {}
       virtual ~Repository() {}
 
-      virtual FilePtr load( const boost::filesystem::path& inPath) = 0;
+      virtual common::DataPtr load( const boost::filesystem::path& inPath) = 0;
     };
   }
 }

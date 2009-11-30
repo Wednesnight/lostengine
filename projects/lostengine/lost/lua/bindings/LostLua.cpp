@@ -30,7 +30,6 @@ namespace lost
             def("doResourceFile", &doResourceFile),
           class_<State>("State")
             .def(constructor<>())
-            .def("doFile", (int(State::*)(const lost::shared_ptr<lost::resource::File>&)) &State::doFile)
             .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
             .def("getScriptFilename", &State::getScriptFilename)
             .def_readwrite("callstackSize", &State::callstackSize)

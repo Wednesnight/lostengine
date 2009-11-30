@@ -9,7 +9,6 @@
 #include <fhtagn/text/decoders.h>
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
-#include "lost/resource/File.h"
 #include "lost/font/RenderedText.h"
 #include "lost/gl/Texture.h"
 #include "lost/math/Vec2.h"
@@ -43,7 +42,7 @@ struct TrueTypeFont
   typedef lost::shared_ptr<Glyph> GlyphPtr;
   
   TrueTypeFont(freetype::LibraryPtr inLibrary,
-               resource::FilePtr inFile);
+               common::DataPtr inData);
   virtual ~TrueTypeFont();
 
   /** lets freetype render the specified glyph.

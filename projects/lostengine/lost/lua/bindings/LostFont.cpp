@@ -56,9 +56,9 @@ namespace lost
       ];
     }
 
-    shared_ptr<TrueTypeFont> createTTF(shared_ptr<freetype::Library> lib, shared_ptr<lost::resource::File> file)
+    TrueTypeFontPtr createTTF(LibraryPtr lib, common::DataPtr data)
     {
-      return shared_ptr<TrueTypeFont>(new TrueTypeFont(lib, file));
+      return TrueTypeFontPtr(new TrueTypeFont(lib, data));
     }
 
     RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, boost::uint32_t sz)
@@ -84,7 +84,7 @@ namespace lost
         namespace_("font")
         [
           class_<TrueTypeFont>("TrueTypeFont")
-            .def(constructor<shared_ptr<freetype::Library>, shared_ptr<resource::File> >())
+            .def(constructor<LibraryPtr, common::DataPtr>())
             .def("render", renderCrippled)
             .def("render", renderToTarget)
             .def_readwrite("atlasSize", &TrueTypeFont::atlasSize)

@@ -512,9 +512,6 @@
 		EA1BF6E10F67445300862B2F /* Checks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6D20F67445300862B2F /* Checks.cpp */; };
 		EA1BF6E40F67445D00862B2F /* TimeHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */; };
 		EA1BF6E50F67445D00862B2F /* SignalTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */; };
-		EA26B90F0F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
-		EA26B9100F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
-		EA26B9110F91481A00318279 /* File.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B90E0F91481A00318279 /* File.cpp */; };
 		EA26B91A0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
 		EA26B91B0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
 		EA26B91C0F91494400318279 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA26B9190F91494400318279 /* Loader.cpp */; };
@@ -1037,7 +1034,6 @@
 		EA1BF6D20F67445300862B2F /* Checks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Checks.cpp; path = "../../../thirdparty/UnitTest++/include/Checks.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E20F67445D00862B2F /* TimeHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeHelpers.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp"; sourceTree = SOURCE_ROOT; };
 		EA1BF6E30F67445D00862B2F /* SignalTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SignalTranslator.cpp; path = "../../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp"; sourceTree = SOURCE_ROOT; };
-		EA26B90E0F91481A00318279 /* File.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = File.cpp; path = resource/File.cpp; sourceTree = "<group>"; };
 		EA26B9190F91494400318279 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = resource/Loader.cpp; sourceTree = "<group>"; };
 		EA26B9270F91498E00318279 /* DefaultLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLoader.cpp; path = resource/DefaultLoader.cpp; sourceTree = "<group>"; };
 		EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationResourceRepository.cpp; path = resource/ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
@@ -1647,7 +1643,6 @@
 			isa = PBXGroup;
 			children = (
 				EA26B9190F91494400318279 /* Loader.cpp */,
-				EA26B90E0F91481A00318279 /* File.cpp */,
 				EA26B9270F91498E00318279 /* DefaultLoader.cpp */,
 				EACF1C7C1016517400753144 /* FilesystemRepository.cpp */,
 				EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */,
@@ -2339,7 +2334,6 @@
 				EA5D3C580F7C650D002804E4 /* FrameBuffer.cpp in Sources */,
 				EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */,
 				8D40911D0F89322D00163B63 /* Tasklet.cpp in Sources */,
-				EA26B9110F91481A00318279 /* File.cpp in Sources */,
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
@@ -2565,7 +2559,6 @@
 				EA5D3C560F7C650B002804E4 /* FrameBuffer.cpp in Sources */,
 				EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */,
 				8D40911C0F89322D00163B63 /* Tasklet.cpp in Sources */,
-				EA26B90F0F91481A00318279 /* File.cpp in Sources */,
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
@@ -2830,7 +2823,6 @@
 				EA5D3C570F7C650C002804E4 /* FrameBuffer.cpp in Sources */,
 				EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */,
 				8D40911B0F89322D00163B63 /* Tasklet.cpp in Sources */,
-				EA26B9100F91481A00318279 /* File.cpp in Sources */,
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,

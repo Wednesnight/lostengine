@@ -4,7 +4,7 @@
 #include "lost/lua/lua.h"
 #include <string>
 #include <map>
-#include "lost/resource/File.h"
+#include "lost/common/Data.h"
 #include "lost/resource/DefaultLoader.h"
 #include <boost/utility.hpp>
 

@@ -3,6 +3,7 @@
 #include <luabind/operator.hpp>
 
 #include "lost/common/Color.h"
+#include "lost/common/Data.h"
 #include "lost/common/Logger.h"
 
 using namespace luabind;
@@ -12,6 +13,20 @@ namespace lost
 {
   namespace lua
   {
+
+    void LostCommonData(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("common")
+        [
+          class_<Data>("Data")
+            .def(constructor<>())    
+            .def_readwrite("size", &Data::size)
+            .def("str", &Data::str)
+        ]
+      ];
+    }
 
     void LostCommonColor(lua_State* state)
     {
@@ -100,6 +115,7 @@ namespace lost
     {
       LostCommonColor(state);
       LostCommonLog(state);
+      LostCommonData(state);
     }
 
   }

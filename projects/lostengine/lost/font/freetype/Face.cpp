@@ -12,11 +12,11 @@ namespace freetype
 {
 
 Face::Face(LibraryPtr inLibrary,
-           resource::FilePtr inFile)
+           common::DataPtr inData)
 {
   FT_Error error  = FT_New_Memory_Face(inLibrary->library,
-                                       reinterpret_cast<FT_Byte*>(inFile->data.get()),
-                                       inFile->size,
+                                       reinterpret_cast<FT_Byte*>(inData->bytes.get()),
+                                       inData->size,
                                        0,
                                        &mFace);
   if(error)
@@ -24,7 +24,7 @@ Face::Face(LibraryPtr inLibrary,
     throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
   }
 
-  mFile = inFile;
+  mFontData = inData;
   mLibrary = inLibrary;
 }
 

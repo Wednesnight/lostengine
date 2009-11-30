@@ -30,9 +30,9 @@ TrueTypeFont::Glyph::~Glyph()
 }
 
 TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
-                           resource::FilePtr inFile)
+                           common::DataPtr inData)
 {
-  face.reset(new Face(inLibrary, inFile));
+  face.reset(new Face(inLibrary, inData));
   atlasSize.width = 256;
   atlasSize.height = 256;
 }

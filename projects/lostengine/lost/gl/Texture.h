@@ -4,11 +4,11 @@
 #include "lost/gl/gltypes.h"
 #include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
+#include "lost/common/Data.h"
 
 namespace lost
 {
   namespace bitmap { struct Bitmap; typedef lost::shared_ptr<Bitmap> BitmapPtr; };
-  namespace resource { struct File; typedef lost::shared_ptr<File> FilePtr; };
 
   namespace gl
   {
@@ -48,18 +48,18 @@ namespace lost
     
       Texture();
       Texture(const lost::math::Vec2& inSize, const Params& inParams = Params());
-      Texture(resource::FilePtr inFile,  const Params& inParams = Params());
+      Texture(common::DataPtr inData,  const Params& inParams = Params());
       Texture(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());      
       
       static TexturePtr create(const lost::math::Vec2& inSize, const Params& inParams = Params()) { return TexturePtr(new Texture(inSize, inParams)); };
-      static TexturePtr create(resource::FilePtr inFile,  const Params& inParams = Params()) { return TexturePtr(new Texture(inFile, inParams)); };
+      static TexturePtr create(common::DataPtr inData,  const Params& inParams = Params()) { return TexturePtr(new Texture(inData, inParams)); };
       static TexturePtr create(bitmap::BitmapPtr inBitmap, const Params& inParams = Params()) { return TexturePtr(new Texture(inBitmap, inParams)); };
       
       ~Texture();    
       void destroy();  
       void bind() const;      
       
-      void init(resource::FilePtr inFile,  const Params& inParams = Params());
+      void init(common::DataPtr inData,  const Params& inParams = Params());
       void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
       

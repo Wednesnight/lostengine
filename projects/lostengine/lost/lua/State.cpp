@@ -140,8 +140,8 @@ namespace lost
     int State::doFile(const std::string& inAbsolutePath)
     {
       std::ostringstream os;
-      shared_ptr<resource::File> file = loader->load(inAbsolutePath);
-      string data = file->str();
+      shared_ptr<common::Data> rawData = loader->load(inAbsolutePath);
+      string data = rawData->str();
       md5wrapper md5;
       fileHashes[md5.getHashFromString(data)] = inAbsolutePath;
       return doString(data);

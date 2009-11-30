@@ -2,14 +2,10 @@
 #define LOST_MESH_LOADER_H
 
 #include "lost/mesh/Mesh.h"
+#include "lost/common/Data.h"
 
 namespace lost
 {
-  namespace resource
-  {
-    struct File;
-    typedef lost::shared_ptr<File> FilePtr;
-  }
 
   namespace mesh
   {
@@ -19,7 +15,7 @@ namespace lost
 
     struct Loader
     {
-      static MeshPtr obj(resource::FilePtr objFile);
+      static MeshPtr obj(common::DataPtr objFile);
     };
 
   }

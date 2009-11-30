@@ -45,11 +45,11 @@ namespace lost
       OsLib(state);		
 
       // other packages derive from Event package so register that first
+      LostCommon(state);
       LostEvent(state);
       LostApplication(state);
       LostBitmap(state);
       LostCamera(state);
-      LostCommon(state);
       LostMesh(state); // must bind mesh before font since font already requires the binding for inheritance
       LostFont(state);
       LostGL(state);

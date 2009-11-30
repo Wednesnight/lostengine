@@ -19,7 +19,7 @@ namespace lost
         [
           class_<Bitmap>("Bitmap")
             .def(constructor<>())
-            .def(constructor<lost::shared_ptr<lost::resource::File> >())
+            .def(constructor<common::DataPtr>())
             .def_readwrite("width", &Bitmap::width)
             .def_readwrite("height", &Bitmap::height)
         ]

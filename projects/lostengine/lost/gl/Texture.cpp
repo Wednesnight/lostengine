@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
 #include "lost/math/lmath.h"
-#include "lost/resource/File.h"
 
 using namespace std;
 using namespace boost;
@@ -62,10 +61,10 @@ Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
   init(inSize, inParams);
 }
 
-Texture::Texture(resource::FilePtr inFile,  const Params& inParams)
+Texture::Texture(common::DataPtr inData,  const Params& inParams)
 {
   create();
-  init(inFile, inParams);
+  init(inData, inParams);
 }
 
 Texture::Texture(bitmap::BitmapPtr inBitmap, const Params& inParams)
@@ -89,9 +88,9 @@ void Texture::bind() const
   glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;
 }
 
-void Texture::init(resource::FilePtr inFile,  const Params& inParams)
+void Texture::init(common::DataPtr inData,  const Params& inParams)
 {
-  shared_ptr<Bitmap> bmp(new Bitmap(inFile));
+  shared_ptr<Bitmap> bmp(new Bitmap(inData));
   init(bmp, inParams);
 }
 

@@ -1,7 +1,6 @@
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/lua.h"
 #include <boost/filesystem.hpp>
-#include "lost/resource/File.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
@@ -14,21 +13,8 @@ namespace lost
   namespace lua
   {
 
-    void LostResourceFile(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<File>("File")
-            .def(constructor<>())    
-            .def_readwrite("size", &File::size)
-            .def("str", &File::str)
-        ]
-      ];
-    }
 
-    FilePtr LostResourceLoader_load(object inLoader, const std::string& inRelativePath)
+    common::DataPtr LostResourceLoader_load(object inLoader, const std::string& inRelativePath)
     {
       Loader* loader = object_cast<Loader*>(inLoader);
       return loader->load(inRelativePath);
@@ -96,7 +82,6 @@ namespace lost
     
     void LostResource(lua_State* state)
     {
-      LostResourceFile(state);
       LostFilesystemRepository(state);
       LostApplicationResourceRepository(state);
       LostResourceLoader(state);
