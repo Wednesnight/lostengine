@@ -599,6 +599,9 @@
 		EA5D3C560F7C650B002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
 		EA5D3C570F7C650C002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
 		EA5D3C580F7C650D002804E4 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */; };
+		EA5FC5E610C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
+		EA5FC5E710C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
+		EA5FC5E810C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
 		EA6711390E3E893C00B961EC /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
@@ -1067,6 +1070,7 @@
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
+		EA5FC5E510C3D2D10078A9FD /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadAutoreleasePoolHack.m; path = mac/ThreadAutoreleasePoolHack.m; sourceTree = "<group>"; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
@@ -1847,6 +1851,7 @@
 			children = (
 				EA3B94720E04639D00B6423B /* Logger.cpp */,
 				EA3B94750E04639D00B6423B /* Profiler.cpp */,
+				EA5FC5E510C3D2D10078A9FD /* Data.cpp */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -2408,6 +2413,7 @@
 				EA4E2B7210BDEDC5008135E0 /* stack_content_by_name.cpp in Sources */,
 				EA4E2B7310BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B7410BDEDC5008135E0 /* object_rep.cpp in Sources */,
+				EA5FC5E810C3D2D10078A9FD /* Data.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2633,6 +2639,7 @@
 				EA4E2B4C10BDEDC5008135E0 /* stack_content_by_name.cpp in Sources */,
 				EA4E2B4D10BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B4E10BDEDC5008135E0 /* object_rep.cpp in Sources */,
+				EA5FC5E610C3D2D10078A9FD /* Data.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2897,6 +2904,7 @@
 				EA4E2B5F10BDEDC5008135E0 /* stack_content_by_name.cpp in Sources */,
 				EA4E2B6010BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B6110BDEDC5008135E0 /* object_rep.cpp in Sources */,
+				EA5FC5E710C3D2D10078A9FD /* Data.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

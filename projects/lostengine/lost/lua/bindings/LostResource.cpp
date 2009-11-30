@@ -23,7 +23,6 @@ namespace lost
           class_<File>("File")
             .def(constructor<>())    
             .def_readwrite("size", &File::size)
-            .def_readwrite("location", &File::location)
             .def("str", &File::str)
         ]
       ];

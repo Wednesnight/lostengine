@@ -50,7 +50,6 @@ namespace lost
 
       // loads and executes a file
       int doFile(const std::string& inAbsolutePath);
-      int doFile(const lost::shared_ptr<lost::resource::File>& inFile);
 
       // executes the given string as a lua program
       int doString(const std::string& inData);
