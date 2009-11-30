@@ -17,7 +17,6 @@ FilePtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
 {
   boost::filesystem::path absolutePath = rootDirectory / relativePath;
   FilePtr result = loadFromAbsolutePath(absolutePath.string());
-  result->location = relativePath.string();  
   return result;
 }
 

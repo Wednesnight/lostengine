@@ -146,16 +146,7 @@ namespace lost
       fileHashes[md5.getHashFromString(data)] = inAbsolutePath;
       return doString(data);
     }
-    
-    int State::doFile(const lost::shared_ptr<lost::resource::File>& inFile)
-    {
-      std::string data(inFile->str());
-      md5wrapper  md5;
-      
-      fileHashes[md5.getHashFromString(data)] = inFile->location;
-      return doString(data);
-    }
-    
+
     // executes the given string as a lua program
     int State::doString(const std::string& inData)
     {

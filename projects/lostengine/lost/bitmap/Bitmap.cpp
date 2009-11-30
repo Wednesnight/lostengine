@@ -184,14 +184,14 @@ void Bitmap::init(lost::shared_ptr<lost::resource::File> inFile)
   height = h;
   if(data == NULL)
   {
-      throw std::runtime_error("couldn't init image from memory: " + inFile->location);
+      throw std::runtime_error("couldn't init image from memory");
   }
 
   switch(bytesPerPixel)
   {
     case 3:format = COMPONENTS_RGB;break;
     case 4:format = COMPONENTS_RGBA;break;
-    default:throw std::runtime_error("couldn't init image: "+inFile->location+" don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
+    default:throw std::runtime_error("couldn't init image, don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
   }
   loaded = true;
 }

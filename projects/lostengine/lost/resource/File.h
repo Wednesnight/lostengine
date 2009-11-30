@@ -16,7 +16,6 @@ namespace resource
   {
     lost::shared_array<char> data;
     boost::uint32_t           size;
-    std::string               location;
     
     File();
     std::string str();
