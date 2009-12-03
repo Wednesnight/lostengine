@@ -299,7 +299,6 @@
 		3E53236B0F15185000D7C8B4 /* lgc.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E5323140F15185000D7C8B4 /* lgc.c */; };
 		3E6C14AF0EE82CB0002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
 		3E6C14B00EE82CB1002B0EA7 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7163B00EBE17E0005DB902 /* Packer.cpp */; };
-		3E73254D0E5CE3A4000FF838 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		3E73254E0E5CE3A4000FF838 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		3E73254F0E5CE3A4000FF838 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
 		3E7325500E5CE3A4000FF838 /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
@@ -525,7 +524,6 @@
 		EA2E6AD10F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA2E6AD50F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
-		EA3B94500E0462E200B6423B /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA3B95380E04639D00B6423B /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
 		EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
 		EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
@@ -599,7 +597,6 @@
 		EA5FC5E610C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
 		EA5FC5E710C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
 		EA5FC5E810C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
-		EA6711390E3E893C00B961EC /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B944F0E0462E200B6423B /* stb_image.c */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
 		EA6711720E3E89DB00B961EC /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
@@ -694,6 +691,9 @@
 		EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
+		EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
+		EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EABF8E090F81F83D000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0A0F81F83E000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
@@ -1039,7 +1039,6 @@
 		EA26B92B0F91499400318279 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationResourceRepository.cpp; path = resource/ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
 		EA2E6AC90F9E45E300696425 /* LostMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostMesh.cpp; path = bindings/LostMesh.cpp; sourceTree = "<group>"; };
 		EA3B94490E0462B200B6423B /* GLee.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = GLee.c; path = ../../../thirdparty/glee/glee_5_21/source/GLee.c; sourceTree = SOURCE_ROOT; };
-		EA3B944F0E0462E200B6423B /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_14/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EA3B94720E04639D00B6423B /* Logger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		EA3B94750E04639D00B6423B /* Profiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Profiler.cpp; sourceTree = "<group>"; };
 		EA3B94FB0E04639D00B6423B /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
@@ -1102,6 +1101,7 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
+		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EACF1C6010164CB100753144 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = resource/Helper.cpp; sourceTree = "<group>"; };
 		EACF1C7C1016517400753144 /* FilesystemRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilesystemRepository.cpp; path = resource/FilesystemRepository.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
@@ -1770,7 +1770,7 @@
 		EA3B944E0E0462DB00B6423B /* stb */ = {
 			isa = PBXGroup;
 			children = (
-				EA3B944F0E0462E200B6423B /* stb_image.c */,
+				EAB50A7A10C7FF9B00BEE727 /* stb_image.c */,
 				EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */,
 			);
 			name = stb;
@@ -2189,7 +2189,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E73254D0E5CE3A4000FF838 /* stb_image.c in Sources */,
 				3E73254E0E5CE3A4000FF838 /* Bitmap.cpp in Sources */,
 				3E73254F0E5CE3A4000FF838 /* Logger.cpp in Sources */,
 				3E7325500E5CE3A4000FF838 /* Profiler.cpp in Sources */,
@@ -2408,6 +2407,7 @@
 				EA4E2B7310BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B7410BDEDC5008135E0 /* object_rep.cpp in Sources */,
 				EA5FC5E810C3D2D10078A9FD /* Data.cpp in Sources */,
+				EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2424,7 +2424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3B944A0E0462B200B6423B /* GLee.c in Sources */,
-				EA3B94500E0462E200B6423B /* stb_image.c in Sources */,
 				EA3B95380E04639D00B6423B /* Logger.cpp in Sources */,
 				EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */,
 				EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */,
@@ -2633,6 +2632,7 @@
 				EA4E2B4D10BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B4E10BDEDC5008135E0 /* object_rep.cpp in Sources */,
 				EA5FC5E610C3D2D10078A9FD /* Data.cpp in Sources */,
+				EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2678,7 +2678,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA6711390E3E893C00B961EC /* stb_image.c in Sources */,
 				EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */,
 				EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */,
 				EA6711720E3E89DB00B961EC /* Profiler.cpp in Sources */,
@@ -2897,6 +2896,7 @@
 				EA4E2B6010BDEDC5008135E0 /* class_registry.cpp in Sources */,
 				EA4E2B6110BDEDC5008135E0 /* object_rep.cpp in Sources */,
 				EA5FC5E710C3D2D10078A9FD /* Data.cpp in Sources */,
+				EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
