@@ -205,7 +205,7 @@ struct Quad : public MESHTYPE
     vtx[offset+3].y = inRect.y+inRect.height;    
   }
               
-  void updateSize(const math::Vec2& size, bool flip = true)
+  void updateSize(const math::Vec2& size)
   {
     math::Rect rect(0, 0, size.width, size.height);
     createVertices(0, rect);

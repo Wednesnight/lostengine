@@ -119,11 +119,11 @@ function Image:updateLayout(forceUpdate)
   if doUpdateLayout and self._textureMesh then
     -- update mesh bounds and dimension
     if self._scale == "stretch" then
-      self._textureMesh:updateSize(Vec2(gr.width, gr.height), true)
+      self._textureMesh:updateSize(Vec2(gr.width, gr.height))
 
     elseif self._scale == "aspect" then
       local w, h = gr.width / self._texture.width, gr.height / self._texture.height
-      self._textureMesh:updateSize(Vec2(self._texture.width * math.min(w, h), self._texture.height * math.min(w, h)), true)
+      self._textureMesh:updateSize(Vec2(self._texture.width * math.min(w, h), self._texture.height * math.min(w, h)))
 
     elseif self._scale == "scalegrid" then
       self._textureMesh:updateSize(Vec2(gr.width, gr.height),
