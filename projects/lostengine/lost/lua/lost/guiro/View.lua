@@ -285,7 +285,7 @@ function View:updateLayout(forceUpdate)
       self.currentGlobalRect = self.bounds:rect(pgr)
       local cgr = self.currentGlobalRect
 --      log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
-      self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height), false)
+      self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
       self.backgroundMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
       self.frameMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
       self.frameMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
