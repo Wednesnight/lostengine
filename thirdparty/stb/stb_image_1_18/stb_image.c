@@ -3255,7 +3255,7 @@ int stbi_hdr_test_file(FILE *f)
 static char *hdr_gettoken(stbi *z, char *buffer)
 {
    int len=0;
-	char *s = buffer, c = '\0';
+	char c = '\0';
 
    c = get8(z);
 
