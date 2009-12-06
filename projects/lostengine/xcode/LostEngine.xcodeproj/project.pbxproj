@@ -1056,8 +1056,8 @@
 		EA98BCA3104FEB94006CACA8 /* LostEngine.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = LostEngine.icns; path = ../LostEngine.icns; sourceTree = SOURCE_ROOT; };
 		EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleLoader.cpp; sourceTree = "<group>"; };
 		EA9A67EA0F159C51007E8A3D /* prefix-shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-shared.h"; sourceTree = "<group>"; };
-		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-release.pch"; sourceTree = "<group>"; };
-		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prefix-debug.pch"; sourceTree = "<group>"; };
+		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = "prefix-release.pch"; sourceTree = "<group>"; };
+		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = "prefix-debug.pch"; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };

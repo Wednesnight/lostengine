@@ -49,6 +49,6 @@ GCC_WARN_UNUSED_VARIABLE = YES
 // enable precompiled headers
 // specify the actual pch file in the debug/release configuration
 GCC_PRECOMPILE_PREFIX_HEADER = YES
-GCC_PFE_FILE_C_DIALECTS = c++
+GCC_PFE_FILE_C_DIALECTS = c++ objective-c++
 GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES
 GCC_SYMBOLS_PRIVATE_EXTERN = YES
