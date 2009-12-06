@@ -47,7 +47,11 @@ namespace lost
              Components destComponents,
              Components srcComponents,
              boost::uint8_t* data);
-      Bitmap(common::DataPtr inData);
+      Bitmap(const common::DataPtr& inData);
+      
+      static BitmapPtr create() { return BitmapPtr(new Bitmap()); }
+      static BitmapPtr create(const common::DataPtr& inData) { return BitmapPtr(new Bitmap(inData)); }
+      
       void reset();
       virtual ~Bitmap();
 
@@ -81,7 +85,7 @@ namespace lost
       /** attempts to interpret a chunk ofmemory as a bitmap, with the help of the underlying image library.
        * An exception is thrown if an error occurs.
        */
-      void init(common::DataPtr inData);
+      void init(const common::DataPtr& inData);
       
       /** calculates the number of pixels for a given bitmap components constant.
        */

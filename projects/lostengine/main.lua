@@ -21,6 +21,7 @@ dcl = nil
 screen = nil
 
 function startup(tasklet)
+  tasklet.name = "LostEngine Launcher"
   log.debug("starting up")
 
   -- global reference

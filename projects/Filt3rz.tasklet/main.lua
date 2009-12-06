@@ -37,6 +37,7 @@ function addPanelNode(rootNode, tex, colIndex, rowIndex, theShader)
 end
 
 function startup(tasklet)
+  tasklet.name = "Filt3rz"
   log.debug("startup")
 
   running = true

@@ -12,8 +12,6 @@
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
 
-#include <boost/program_options.hpp>
-
 using namespace lost::resource;
 
 namespace lost
@@ -45,53 +43,12 @@ namespace lost
       initApplication(inLoader);
       initialize();
     }
-
-    Application::Application(int argn, char** args, resource::LoaderPtr inLoader)
-    {
-      if(!inLoader)
-        inLoader.reset(new DefaultLoader());
-      initApplication(inLoader);
-
-      using namespace boost::program_options;
-      
-      // Declare the supported options.
-      options_description desc;
-      desc.add_options()
-      ("scriptname", value<std::string>())
-      ;
-      positional_options_description p;
-      p.add("scriptname", -1);
-      
-      variables_map vm;
-      store(command_line_parser(argn, args).options(desc).positional(p).run(), vm);
-      notify(vm);
-      
-      if (vm.count("scriptname"))
-      {
-        Tasklet* tasklet = new Tasklet(loader);
-        tasklet->scriptname = vm["scriptname"].as<std::string>();
-        addTasklet(tasklet);
-      }
-
-      initialize();
-    }
     
     Application::Application(Tasklet* tasklet, resource::LoaderPtr inLoader)
     {
       if(!inLoader)
         inLoader.reset(new DefaultLoader());
       initApplication(inLoader);
-      addTasklet(tasklet);
-      initialize();
-    }
-
-    Application::Application(const std::string& inScript, resource::LoaderPtr inLoader)
-    {
-      if(!inLoader)
-        inLoader.reset(new DefaultLoader());
-      initApplication(inLoader);
-      Tasklet* tasklet = new Tasklet(loader);
-      tasklet->scriptname = inScript;
       addTasklet(tasklet);
       initialize();
     }
@@ -112,20 +69,10 @@ namespace lost
     {
       return lost::shared_ptr<Application>(new Application);
     }
-
-    lost::shared_ptr<Application> Application::create(int argn, char** args)
-    {
-      return lost::shared_ptr<Application>(new Application(argn, args));
-    }
     
     lost::shared_ptr<Application> Application::create(Tasklet* tasklet)
     {
       return lost::shared_ptr<Application>(new Application(tasklet));
-    }
-
-    lost::shared_ptr<Application> Application::create(const std::string& inScript)
-    {
-      return lost::shared_ptr<Application>(new Application(inScript));
     }
 
     Application::~Application()
@@ -196,7 +143,7 @@ namespace lost
         EOUT("Oops, unknown tasklet notified us. That's not good.");
         return;
       }
-
+    
       delete *t_iter;
       tasklets.erase(t_iter);
     }
@@ -209,7 +156,7 @@ namespace lost
 
     void Application::taskletDone(const TaskletEventPtr& event)
     {
-      DOUT("End of tasklet: " << event->tasklet->scriptname);
+      DOUT("End of tasklet: " << event->tasklet->name);
       removeTasklet(event->tasklet);
       bool haveActiveTasklets = false;
       for (std::list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)

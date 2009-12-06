@@ -54,5 +54,5 @@ return dcl.guiro:HBox
       halign="left",
       textColor = Color(.6, .6, .6)
     }
-  },
+  }
 }

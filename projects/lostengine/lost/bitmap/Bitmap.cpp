@@ -45,7 +45,7 @@ Bitmap::Bitmap(uint32_t inWidth,
   init(inWidth, inHeight, destComponents, srcComponents, data);
 }
 
-Bitmap::Bitmap(common::DataPtr inData)
+Bitmap::Bitmap(const common::DataPtr& inData)
 {
   reset();
   init(inData);
@@ -173,7 +173,7 @@ uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
   return result;
 }
 
-void Bitmap::init(common::DataPtr inData)
+void Bitmap::init(const common::DataPtr& inData)
 {
   destroy();
 //  DOUT("init image from memory: " << inFile->location);

@@ -64,12 +64,12 @@ namespace lost
       ];
     }
 
-    void glDebug()
+/*    void glDebug()
     {
       GLDEBUG;
-    }
+    }*/
 
-    // stupid win32 __stdcall mapping
+/*    // stupid win32 __stdcall mapping
 #ifdef WIN32
   #define LOST_LUA_GL_PREFIX(s) _##s
     
@@ -155,11 +155,11 @@ namespace lost
 #else
   // not win32
   #define LOST_LUA_GL_PREFIX(s) s
-#endif
+#endif*/
     
     void LostGLGL(lua_State* state)
     {
-      module(state, "gl")
+/*      module(state, "gl")
       [
         def("GLDEBUG", &glDebug),
         def("glClearColor", &LOST_LUA_GL_PREFIX(glClearColor)),
@@ -180,8 +180,8 @@ namespace lost
         ,def("glPushAttrib", &LOST_LUA_GL_PREFIX(glPushAttrib)),
         def("glPopAttrib", &LOST_LUA_GL_PREFIX(glPopAttrib))
 #endif
-      ];
-      
+      ];*/
+      globals(state)["gl"] = luabind::newtable(state);
 #if TARGET_OPENGL
       globals(state)["gl"]["GL_CLAMP"] = GL_CLAMP;
       globals(state)["gl"]["GL_DEPTH_COMPONENT"] = GL_DEPTH_COMPONENT;

@@ -36,7 +36,7 @@ namespace lost
       luabind::object luaProcessCallLater;
       
     public:
-      std::string                     scriptname;
+      std::string                     name;
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;

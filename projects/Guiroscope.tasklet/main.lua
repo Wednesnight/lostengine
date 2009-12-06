@@ -24,6 +24,7 @@ function incUp()
 end
 
 function startup(tasklet)
+  tasklet.name = "Guiroscope"
   log.debug("starting up")
   tasklet.waitForEvents = true
   dcl = lost.declarative.Context(tasklet.loader)

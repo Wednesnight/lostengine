@@ -212,6 +212,20 @@ function View:__call(subviewId)
   return result
 end
 
+--breadth-first search for subview with given id
+function View:recursiveFindById(viewId)
+  local result = self(viewId)
+  if result == nil then
+    for k,view in pairs(self.subviews) do
+      result = view:recursiveFindById(viewId)
+      if result ~= nil then
+        break
+      end
+    end
+  end
+  return result
+end
+
 --[[ 
     sets the parent
   ]]

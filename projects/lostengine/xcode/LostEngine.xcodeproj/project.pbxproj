@@ -365,36 +365,6 @@
 		8DCE44441061666900935781 /* operations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE443B1061666900935781 /* operations.cpp */; };
 		8DCE44451061666900935781 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE443C1061666900935781 /* path.cpp */; };
 		8DCE44461061666900935781 /* portability.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE443D1061666900935781 /* portability.cpp */; };
-		8DCE44511061669E00935781 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44471061669E00935781 /* cmdline.cpp */; };
-		8DCE44521061669E00935781 /* config_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44481061669E00935781 /* config_file.cpp */; };
-		8DCE44531061669E00935781 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44491061669E00935781 /* convert.cpp */; };
-		8DCE44541061669E00935781 /* options_description.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444A1061669E00935781 /* options_description.cpp */; };
-		8DCE44551061669E00935781 /* parsers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444B1061669E00935781 /* parsers.cpp */; };
-		8DCE44561061669E00935781 /* positional_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444C1061669E00935781 /* positional_options.cpp */; };
-		8DCE44571061669E00935781 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444D1061669E00935781 /* utf8_codecvt_facet.cpp */; };
-		8DCE44581061669E00935781 /* value_semantic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444E1061669E00935781 /* value_semantic.cpp */; };
-		8DCE44591061669E00935781 /* variables_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444F1061669E00935781 /* variables_map.cpp */; };
-		8DCE445A1061669E00935781 /* winmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44501061669E00935781 /* winmain.cpp */; };
-		8DCE445B1061669E00935781 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44471061669E00935781 /* cmdline.cpp */; };
-		8DCE445C1061669E00935781 /* config_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44481061669E00935781 /* config_file.cpp */; };
-		8DCE445D1061669E00935781 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44491061669E00935781 /* convert.cpp */; };
-		8DCE445E1061669E00935781 /* options_description.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444A1061669E00935781 /* options_description.cpp */; };
-		8DCE445F1061669E00935781 /* parsers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444B1061669E00935781 /* parsers.cpp */; };
-		8DCE44601061669E00935781 /* positional_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444C1061669E00935781 /* positional_options.cpp */; };
-		8DCE44611061669E00935781 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444D1061669E00935781 /* utf8_codecvt_facet.cpp */; };
-		8DCE44621061669E00935781 /* value_semantic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444E1061669E00935781 /* value_semantic.cpp */; };
-		8DCE44631061669E00935781 /* variables_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444F1061669E00935781 /* variables_map.cpp */; };
-		8DCE44641061669E00935781 /* winmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44501061669E00935781 /* winmain.cpp */; };
-		8DCE44651061669E00935781 /* cmdline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44471061669E00935781 /* cmdline.cpp */; };
-		8DCE44661061669E00935781 /* config_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44481061669E00935781 /* config_file.cpp */; };
-		8DCE44671061669E00935781 /* convert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44491061669E00935781 /* convert.cpp */; };
-		8DCE44681061669E00935781 /* options_description.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444A1061669E00935781 /* options_description.cpp */; };
-		8DCE44691061669E00935781 /* parsers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444B1061669E00935781 /* parsers.cpp */; };
-		8DCE446A1061669E00935781 /* positional_options.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444C1061669E00935781 /* positional_options.cpp */; };
-		8DCE446B1061669E00935781 /* utf8_codecvt_facet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444D1061669E00935781 /* utf8_codecvt_facet.cpp */; };
-		8DCE446C1061669E00935781 /* value_semantic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444E1061669E00935781 /* value_semantic.cpp */; };
-		8DCE446D1061669E00935781 /* variables_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE444F1061669E00935781 /* variables_map.cpp */; };
-		8DCE446E1061669E00935781 /* winmain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE44501061669E00935781 /* winmain.cpp */; };
 		8DCE4474106166D900935781 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE446F106166D900935781 /* connection.cpp */; };
 		8DCE4475106166D900935781 /* named_slot_map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE4470106166D900935781 /* named_slot_map.cpp */; };
 		8DCE4476106166D900935781 /* signal_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE4471106166D900935781 /* signal_base.cpp */; };
@@ -961,16 +931,6 @@
 		8DCE443B1061666900935781 /* operations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operations.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/filesystem/src/operations.cpp; sourceTree = SOURCE_ROOT; };
 		8DCE443C1061666900935781 /* path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = path.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/filesystem/src/path.cpp; sourceTree = SOURCE_ROOT; };
 		8DCE443D1061666900935781 /* portability.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = portability.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/filesystem/src/portability.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE44471061669E00935781 /* cmdline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmdline.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/cmdline.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE44481061669E00935781 /* config_file.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = config_file.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/config_file.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE44491061669E00935781 /* convert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = convert.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/convert.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444A1061669E00935781 /* options_description.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = options_description.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/options_description.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444B1061669E00935781 /* parsers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parsers.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/parsers.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444C1061669E00935781 /* positional_options.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = positional_options.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/positional_options.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444D1061669E00935781 /* utf8_codecvt_facet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utf8_codecvt_facet.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/utf8_codecvt_facet.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444E1061669E00935781 /* value_semantic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = value_semantic.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/value_semantic.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE444F1061669E00935781 /* variables_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = variables_map.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/variables_map.cpp; sourceTree = SOURCE_ROOT; };
-		8DCE44501061669E00935781 /* winmain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = winmain.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/program_options/src/winmain.cpp; sourceTree = SOURCE_ROOT; };
 		8DCE446F106166D900935781 /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/signals/src/connection.cpp; sourceTree = SOURCE_ROOT; };
 		8DCE4470106166D900935781 /* named_slot_map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = named_slot_map.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/signals/src/named_slot_map.cpp; sourceTree = SOURCE_ROOT; };
 		8DCE4471106166D900935781 /* signal_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = signal_base.cpp; path = ../../../thirdparty/boost/boost_1_40_0/libs/signals/src/signal_base.cpp; sourceTree = SOURCE_ROOT; };
@@ -1470,23 +1430,6 @@
 			name = LinearMath;
 			sourceTree = "<group>";
 		};
-		8DDF50320F8390FA001654DE /* program_options */ = {
-			isa = PBXGroup;
-			children = (
-				8DCE44471061669E00935781 /* cmdline.cpp */,
-				8DCE44481061669E00935781 /* config_file.cpp */,
-				8DCE44491061669E00935781 /* convert.cpp */,
-				8DCE444A1061669E00935781 /* options_description.cpp */,
-				8DCE444B1061669E00935781 /* parsers.cpp */,
-				8DCE444C1061669E00935781 /* positional_options.cpp */,
-				8DCE444D1061669E00935781 /* utf8_codecvt_facet.cpp */,
-				8DCE444E1061669E00935781 /* value_semantic.cpp */,
-				8DCE444F1061669E00935781 /* variables_map.cpp */,
-				8DCE44501061669E00935781 /* winmain.cpp */,
-			);
-			name = program_options;
-			sourceTree = "<group>";
-		};
 		8DE56F6B0F31186F0072FB28 /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -1931,7 +1874,6 @@
 			isa = PBXGroup;
 			children = (
 				8DA585350F8A4F4D00A568E1 /* filesystem */,
-				8DDF50320F8390FA001654DE /* program_options */,
 				3E531EB30F14FDE500D7C8B4 /* signals */,
 				3E531EB10F14FDE500D7C8B4 /* system */,
 				3E531EB90F14FDE500D7C8B4 /* thread */,
@@ -2368,16 +2310,6 @@
 				8DCE443E1061666900935781 /* operations.cpp in Sources */,
 				8DCE443F1061666900935781 /* path.cpp in Sources */,
 				8DCE44401061666900935781 /* portability.cpp in Sources */,
-				8DCE44511061669E00935781 /* cmdline.cpp in Sources */,
-				8DCE44521061669E00935781 /* config_file.cpp in Sources */,
-				8DCE44531061669E00935781 /* convert.cpp in Sources */,
-				8DCE44541061669E00935781 /* options_description.cpp in Sources */,
-				8DCE44551061669E00935781 /* parsers.cpp in Sources */,
-				8DCE44561061669E00935781 /* positional_options.cpp in Sources */,
-				8DCE44571061669E00935781 /* utf8_codecvt_facet.cpp in Sources */,
-				8DCE44581061669E00935781 /* value_semantic.cpp in Sources */,
-				8DCE44591061669E00935781 /* variables_map.cpp in Sources */,
-				8DCE445A1061669E00935781 /* winmain.cpp in Sources */,
 				8DCE4474106166D900935781 /* connection.cpp in Sources */,
 				8DCE4475106166D900935781 /* named_slot_map.cpp in Sources */,
 				8DCE4476106166D900935781 /* signal_base.cpp in Sources */,
@@ -2593,16 +2525,6 @@
 				8DCE44411061666900935781 /* operations.cpp in Sources */,
 				8DCE44421061666900935781 /* path.cpp in Sources */,
 				8DCE44431061666900935781 /* portability.cpp in Sources */,
-				8DCE445B1061669E00935781 /* cmdline.cpp in Sources */,
-				8DCE445C1061669E00935781 /* config_file.cpp in Sources */,
-				8DCE445D1061669E00935781 /* convert.cpp in Sources */,
-				8DCE445E1061669E00935781 /* options_description.cpp in Sources */,
-				8DCE445F1061669E00935781 /* parsers.cpp in Sources */,
-				8DCE44601061669E00935781 /* positional_options.cpp in Sources */,
-				8DCE44611061669E00935781 /* utf8_codecvt_facet.cpp in Sources */,
-				8DCE44621061669E00935781 /* value_semantic.cpp in Sources */,
-				8DCE44631061669E00935781 /* variables_map.cpp in Sources */,
-				8DCE44641061669E00935781 /* winmain.cpp in Sources */,
 				8DCE4479106166D900935781 /* connection.cpp in Sources */,
 				8DCE447A106166D900935781 /* named_slot_map.cpp in Sources */,
 				8DCE447B106166D900935781 /* signal_base.cpp in Sources */,
@@ -2857,16 +2779,6 @@
 				8DCE44441061666900935781 /* operations.cpp in Sources */,
 				8DCE44451061666900935781 /* path.cpp in Sources */,
 				8DCE44461061666900935781 /* portability.cpp in Sources */,
-				8DCE44651061669E00935781 /* cmdline.cpp in Sources */,
-				8DCE44661061669E00935781 /* config_file.cpp in Sources */,
-				8DCE44671061669E00935781 /* convert.cpp in Sources */,
-				8DCE44681061669E00935781 /* options_description.cpp in Sources */,
-				8DCE44691061669E00935781 /* parsers.cpp in Sources */,
-				8DCE446A1061669E00935781 /* positional_options.cpp in Sources */,
-				8DCE446B1061669E00935781 /* utf8_codecvt_facet.cpp in Sources */,
-				8DCE446C1061669E00935781 /* value_semantic.cpp in Sources */,
-				8DCE446D1061669E00935781 /* variables_map.cpp in Sources */,
-				8DCE446E1061669E00935781 /* winmain.cpp in Sources */,
 				8DCE447E106166D900935781 /* connection.cpp in Sources */,
 				8DCE447F106166D900935781 /* named_slot_map.cpp in Sources */,
 				8DCE4480106166D900935781 /* signal_base.cpp in Sources */,
