@@ -59,7 +59,7 @@ function shutdown(tasklet)
 end
 
 function loadHelper(path)
-  log.debug("trying to oad from path: "..path)
+  log.debug("trying to load from path: "..path)
   local data = rootLoader:load(path)
   local bmp = lost.bitmap.Bitmap.create(data)
   return bmp, data
