@@ -106,8 +106,7 @@ function Image:render()
   self._textureNode = lost.rg.Draw.create(self._textureMesh)
   -- inject into draw hierarchy
   self.renderNode:add(self._textureNode)
-
-  self:updateLayout(false)
+  self:updateLayout(true)
 end
 
 function Image:updateLayout(forceUpdate)

@@ -35,7 +35,7 @@ namespace lost
       eventDispatcher(new EventDispatcher()),
       lua(new State(loader)),
       waitForEvents(false),
-      scriptname("main.lua")
+      name("<unnamed tasklet>")
     {
       // set error handler
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
@@ -67,12 +67,12 @@ namespace lost
       scriptLoaded = false;
       try
       {
-        lua->doFile(scriptname);
+        lua->doFile("main.lua");
         scriptLoaded = true;
       }
       catch(resource::LoaderError& ex)
       {
-        DOUT("couldn't load script <"+ scriptname +">: "+ string(ex.what()));
+        DOUT("couldn't load script 'main.lua', reason: "+ string(ex.what()));
       }
 
       // try to extract window params and flag from interpreter

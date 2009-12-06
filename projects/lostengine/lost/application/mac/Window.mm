@@ -385,12 +385,12 @@ namespace lost
     void Window::finalize()
     {
       DOUT("Window::finalize()");
-      [hiddenMembers->window setParent: NULL];
+      if(hiddenMembers) [hiddenMembers->window setParent: NULL]; else EOUT("hiddenMembers is NULL!");
       
       context.reset();
-      [hiddenMembers->view release];
-      [hiddenMembers->window release];
-      delete hiddenMembers;
+      if(hiddenMembers) [hiddenMembers->view release]; else EOUT("hiddenMembers is NULL!");
+      if(hiddenMembers) [hiddenMembers->window release]; else EOUT("hiddenMembers is NULL!");
+      if(hiddenMembers) delete hiddenMembers; else EOUT("hiddenMembers is NULL!");
     }
 
     void Window::open()

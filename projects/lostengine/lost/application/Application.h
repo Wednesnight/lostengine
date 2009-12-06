@@ -74,9 +74,7 @@ namespace lost
        * otherwise shared_from_this() will fail!
        */
       Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
-      Application(int argn, char** args, resource::LoaderPtr inLoader = resource::LoaderPtr());
       Application(Tasklet* tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
-      Application(const std::string& inScript, resource::LoaderPtr inLoader = resource::LoaderPtr());
 
       /**
        * ctor helper
@@ -114,9 +112,7 @@ namespace lost
        * static ctor helpers, make sure that we're held by a lost::shared_ptr
        */
       static lost::shared_ptr<Application> create();
-      static lost::shared_ptr<Application> create(int argn, char** args);
       static lost::shared_ptr<Application> create(Tasklet* tasklet);
-      static lost::shared_ptr<Application> create(const std::string& inScript);
 
       ~Application();
 
