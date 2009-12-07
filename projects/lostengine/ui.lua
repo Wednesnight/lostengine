@@ -43,9 +43,9 @@ return dcl.guiro:Screen
         local newLabel = dcl.guiro:Label
         {
           id = event.filename,
-          bounds = Bounds(xcenter(), ycenter(), wrel(1), habs(labelHeight)),
+          bounds = Bounds(xleft(), ycenter(), wrel(1), habs(labelHeight)),
           text = event.filename,
-          backgroundColor = Color(1,0,0,1),
+          backgroundColor = Color(.5,.5,.5,1),
           listeners =
           {
             mouseEnter = function(event) event.target:showBackground(true) end,
@@ -60,10 +60,12 @@ return dcl.guiro:Screen
         }
         labelStack:addSubview(newLabel)
         labelStack.bounds.height = habs(#labelStack.subviews * labelHeight)
-        labelStack:needsLayout()
         labelStack.parent.bounds.height = labelStack.bounds.height
+        labelStack:needsLayout()
         labelStack.parent:needsLayout()
         labelStack.parent.parent:needsLayout()
+        labelStack.parent.parent.parent:needsLayout()
+        labelStack.parent.parent.parent.parent:needsLayout()
       end
     end
   },
@@ -81,12 +83,12 @@ return dcl.guiro:Screen
       {
         id = "content",
         bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1)),
-        contentViewBounds = Bounds(xleft(), ytop(), wabs(400), habs(128)),
+        contentViewBounds = Bounds(xleft(), ytop(), wrel(1, -15), hrel(1)),
         dcl.guiro:VBox
         {
           id = "labelStack",
-          bounds = Bounds(xleft(), ytop(), wabs(400), habs(128)),
-          halign = "center",
+          bounds = Bounds(xleft(), ytop(), wrel(1), hrel(1)),
+          halign = "left",
           valign = "center",
           mode = "spread",
           dcl.guiro:Label
