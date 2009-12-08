@@ -56,6 +56,6 @@ end
 
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    lostengineTasklet:dispatchApplicationEvent(ApplicationEvent(ApplicationEvent.QUIT))
+    lostengineTasklet:dispatchApplicationEvent(ApplicationEvent.create(ApplicationEvent.QUIT))
   end
 end
