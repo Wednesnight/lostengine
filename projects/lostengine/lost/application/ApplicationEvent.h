@@ -16,6 +16,7 @@ namespace lost
         static const event::Type& QUIT()      { static event::Type d = "applicationQuit";return d;}
 
         ApplicationEvent(const event::Type& inType) : Event(inType) { }
+        static ApplicationEventPtr create(const event::Type& inType) { return ApplicationEventPtr(new ApplicationEvent(inType)); }
         virtual ~ApplicationEvent() {}
     };
   }

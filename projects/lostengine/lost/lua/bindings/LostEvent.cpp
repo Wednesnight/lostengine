@@ -24,10 +24,11 @@ namespace lost
         namespace_("event")
         [
           class_<Event>("Event")
-            .def(constructor<std::string>()) 
-            .def(constructor<const Event&>()) 
-//            .def("asSharedPtr", &asSharedPtr)
             .def_readwrite("type", &Event::type)
+            .scope
+            [
+              def("create", &Event::create)
+            ]
         ]
       ];
     }

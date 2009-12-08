@@ -21,6 +21,7 @@ namespace lost
       Type type;					// the type of the event
 
       Event(const Type& inType) : type(inType) {}
+      static EventPtr create(const Type& inType) { return EventPtr(new Event(inType)); }
       virtual ~Event() {}
     };
 

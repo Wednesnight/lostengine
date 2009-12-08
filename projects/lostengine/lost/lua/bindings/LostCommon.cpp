@@ -21,7 +21,6 @@ namespace lost
         namespace_("common")
         [
           class_<Data>("Data")
-            .def(constructor<>())    
             .def_readwrite("size", &Data::size)
             .def("str", &Data::str)
         ]

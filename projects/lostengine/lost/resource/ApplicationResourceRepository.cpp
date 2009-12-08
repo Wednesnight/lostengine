@@ -12,7 +12,7 @@ namespace lost
     {
     }
 
-    ApplicationResourceRepositoryPtr ApplicationResourceRepository::create()
+    RepositoryPtr ApplicationResourceRepository::create()
     {
       return ApplicationResourceRepositoryPtr(new ApplicationResourceRepository());
     }

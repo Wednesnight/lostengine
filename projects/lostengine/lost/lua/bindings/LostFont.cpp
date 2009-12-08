@@ -28,7 +28,6 @@ namespace lost
           namespace_("freetype")
           [
             class_<Library>("Library")
-              .def(constructor<>())
               .scope
               [
                 def("create", createLib)
@@ -84,7 +83,6 @@ namespace lost
         namespace_("font")
         [
           class_<TrueTypeFont>("TrueTypeFont")
-            .def(constructor<LibraryPtr, common::DataPtr>())
             .def("render", renderCrippled)
             .def("render", renderToTarget)
             .def_readwrite("atlasSize", &TrueTypeFont::atlasSize)

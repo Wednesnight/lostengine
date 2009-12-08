@@ -18,8 +18,6 @@ namespace lost
         namespace_("bitmap")
         [
           class_<Bitmap>("Bitmap")
-            .def(constructor<>())
-            .def(constructor<const common::DataPtr&>())
             .def_readwrite("width", &Bitmap::width)
             .def_readwrite("height", &Bitmap::height)
             .scope

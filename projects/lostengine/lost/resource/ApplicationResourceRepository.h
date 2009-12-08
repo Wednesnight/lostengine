@@ -13,7 +13,7 @@ namespace lost
     struct ApplicationResourceRepository : public FilesystemRepository
     {
       ApplicationResourceRepository();
-      static ApplicationResourceRepositoryPtr create();
+      static RepositoryPtr create();
     };
   }
 }

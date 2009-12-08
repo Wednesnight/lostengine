@@ -2,6 +2,7 @@
 #define LOST_RESOURCE_FILESYSTEMREPOSITORY_H
 
 #include "lost/resource/Repository.h"
+#include <boost/filesystem/path.hpp>
 
 namespace lost
 {
@@ -18,7 +19,8 @@ struct FilesystemRepository : Repository
   virtual ~FilesystemRepository() {};
 
   virtual common::DataPtr load(const boost::filesystem::path& inRootDir);
-  static FilesystemRepositoryPtr create(const boost::filesystem::path& inRootDir);
+  static RepositoryPtr create(const std::string& inRootDir);
+//  static FilesystemRepositoryPtr create(const boost::filesystem::path& inRootDir);
   
 };
 }

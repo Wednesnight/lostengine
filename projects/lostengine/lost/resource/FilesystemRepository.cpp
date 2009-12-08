@@ -18,7 +18,7 @@ common::DataPtr FilesystemRepository::load( const boost::filesystem::path& relat
   return loadFromAbsolutePath(absolutePath.string());;
 }
 
-FilesystemRepositoryPtr FilesystemRepository::create(const boost::filesystem::path& inRootDir)
+RepositoryPtr FilesystemRepository::create(const std::string& inRootDir)
 {
   return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
 }

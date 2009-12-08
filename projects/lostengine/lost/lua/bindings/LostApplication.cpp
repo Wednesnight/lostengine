@@ -33,7 +33,6 @@ namespace lost
         namespace_("application")
         [
           class_<AccelerometerEvent, Event>("AccelerometerEvent")
-            .def(constructor<std::string>()) 
             .def_readwrite("x", &AccelerometerEvent::x)
             .def_readwrite("y", &AccelerometerEvent::y)
             .def_readwrite("z", &AccelerometerEvent::z)
@@ -63,7 +62,10 @@ namespace lost
         namespace_("application")
         [
           class_<ApplicationEvent, Event>("ApplicationEvent")
-            .def(constructor<std::string>()) 
+          .scope
+          [
+            def("create", &ApplicationEvent::create)
+          ]
         ]
       ];
       globals(state)["lost"]["application"]["ApplicationEvent"]["RUN"] = ApplicationEvent::RUN();
@@ -77,7 +79,6 @@ namespace lost
        namespace_("application")
        [
         class_<DropEvent, Event>("DropEvent")
-        .def(constructor<const std::string&>())
         .def_readonly("filename", &DropEvent::filename)
         .def_readonly("window", &DropEvent::window)
         .def_readonly("pos", &DropEvent::pos)
@@ -94,7 +95,6 @@ namespace lost
         namespace_("application")
         [
           class_<InputEvent, Event>("InputEvent")
-            .def(constructor<std::string>()) 
             .def_readonly("window", &InputEvent::window)
         ]
       ];
@@ -107,7 +107,6 @@ namespace lost
         namespace_("application")
         [
           class_<KeyEvent, InputEvent>("KeyEvent")
-            .def(constructor<std::string>())
             .def_readwrite("key", &KeyEvent::key)
             .def_readwrite("character", &KeyEvent::character)
             .def_readwrite("pressed", &KeyEvent::pressed)
@@ -217,7 +216,6 @@ namespace lost
         namespace_("application")
         [
           class_<MouseEvent, InputEvent>("MouseEvent")
-            .def(constructor<std::string>()) 
             .def_readwrite("pos", &MouseEvent::pos)
             .def_readwrite("absPos", &MouseEvent::absPos)
             .def_readwrite("button", &MouseEvent::button)
@@ -244,7 +242,6 @@ namespace lost
         namespace_("application")
         [
           class_<ResizeEvent, Event>("ResizeEvent")
-            .def(constructor<std::string>()) 
             .def_readwrite("width", &ResizeEvent::width)
             .def_readwrite("height", &ResizeEvent::height)
         ]
@@ -291,17 +288,20 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<TouchEvent, Event>("TouchEvent")
-            .def(constructor<std::string>()) 
-            .def("size", &TouchEvent::size) 
-            .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)
+          class_<Touch>("Touch")
+            .def_readwrite("location", &Touch::location)
+            .def_readwrite("tapCount", &Touch::tapCount)
+            .def_readwrite("timeStamp", &Touch::timeStamp)
             .scope
             [
-              class_<TouchEvent::Touch>("Touch")
-                .def(constructor<>()) 
-                .def_readwrite("location", &TouchEvent::Touch::location)
-                .def_readwrite("tapCount", &TouchEvent::Touch::tapCount)
-                .def_readwrite("timeStamp", &TouchEvent::Touch::timeStamp)
+              def("create", &Touch::create)
+            ],            
+          class_<TouchEvent, Event>("TouchEvent")
+            .def("size", &TouchEvent::size) 
+            .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)            
+            .scope
+            [
+              def("create", &Touch::create)
             ]
         ]
       ];
