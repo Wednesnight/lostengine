@@ -1,6 +1,4 @@
 #include "lost/gl/Context.h"
-#include <boost/thread/tss.hpp>
-
 #import <OpenGL/OpenGL.h>
 #import <AppKit/NSOpenGL.h>
 
@@ -9,17 +7,6 @@ namespace lost
 {
   namespace gl
   {
-    /**
-      Helper struct that holds the thread's currently active OpenGL context.
-      This helps us with optimizing the OpenGL state changes (CGLGetParameter)
-     **/
-    struct ThreadState
-    {
-      NSOpenGLContext* currentContext;
-      ThreadState() : currentContext([NSOpenGLContext currentContext]) {}
-    };
-    boost::thread_specific_ptr<ThreadState> threadState;
-
     struct Context::ContextHiddenMembers
     {
       NSOpenGLContext* glContext;
@@ -38,12 +25,7 @@ namespace lost
 
     void Context::makeCurrent()
     {
-      if (threadState.get() == 0) threadState.reset(new ThreadState);
-      if (threadState->currentContext != hiddenMembers->glContext)
-      {
-        threadState->currentContext = hiddenMembers->glContext;
         [hiddenMembers->glContext makeCurrentContext];
-      }
     }
 
     void Context::swapBuffers()
