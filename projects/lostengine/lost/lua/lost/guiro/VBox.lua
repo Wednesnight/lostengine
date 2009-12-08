@@ -43,7 +43,6 @@ function VBox:updateSpread()
 --	log.debug("relfactor "..relfactor)
 	local f = 1
 	for k,view in pairs(self.subviews) do
-		log.debug("f "..f)
 		view.bounds.y = lost.guiro.ycenter{rel=f}		
 		f = f- relfactor
 		self:updateHorizontalAlignment(view)
