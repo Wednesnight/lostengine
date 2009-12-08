@@ -23,6 +23,10 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/resource/Loader.h"
+#include "lost/resource/DefaultLoader.h"
+#include "lost/resource/Repository.h"
+#include "lost/resource/FilesystemRepository.h"
+#include "lost/resource/ApplicationResourceRepository.h"
 
 #define GET_POINTER(name) template name* get_pointer(lost::shared_ptr<name>&);\
                           template name const* get_pointer(lost::shared_ptr<name const>&);
@@ -44,7 +48,7 @@ namespace luabind
   GET_POINTER(lost::application::ResizeEvent);
   GET_POINTER(lost::application::Tasklet);
   GET_POINTER(lost::application::TouchEvent);
-  GET_POINTER(lost::application::TouchEvent::Touch);
+  GET_POINTER(lost::application::Touch);
   GET_POINTER(lost::bitmap::Bitmap);
   GET_POINTER(lost::camera::Camera);
   GET_POINTER(lost::common::Color);
@@ -56,10 +60,10 @@ namespace luabind
   GET_POINTER(lost::lsystem::LSystem);
   GET_POINTER(lost::lsystem::LSystemState);
   GET_POINTER(lost::lua::State);
-  GET_POINTER(lost::math::Rect);
-  GET_POINTER(lost::math::Vec2);
-  GET_POINTER(lost::math::Vec3);
-  GET_POINTER(lost::math::Vec4);
   GET_POINTER(lost::common::Data);
   GET_POINTER(lost::resource::Loader);
+  GET_POINTER(lost::resource::DefaultLoader);
+  GET_POINTER(lost::resource::Repository);
+  GET_POINTER(lost::resource::FilesystemRepository);
+  GET_POINTER(lost::resource::ApplicationResourceRepository);
 }

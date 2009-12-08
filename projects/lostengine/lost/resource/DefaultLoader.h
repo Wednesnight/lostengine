@@ -7,10 +7,15 @@ namespace lost
 {
   namespace resource
   {
+    struct DefaultLoader;
+    typedef lost::shared_ptr<DefaultLoader> DefaultLoaderPtr;
+  
     struct DefaultLoader : public Loader
     {
       DefaultLoader();
       virtual ~DefaultLoader();
+      
+      static DefaultLoaderPtr create() { return DefaultLoaderPtr(new DefaultLoader()); }
     };
   }
 }

@@ -2,6 +2,7 @@
 #include "lost/lua/lua.h"
 #include <boost/filesystem.hpp>
 #include "lost/resource/Loader.h"
+#include "lost/resource/DefaultLoader.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
 
@@ -12,6 +13,16 @@ namespace lost
 {
   namespace lua
   {
+    void LostResourceRepository(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("resource")
+        [
+          class_<Repository>("Repository")
+        ]
+      ];
+    }
 
 
     common::DataPtr LostResourceLoader_load(object inLoader, const std::string& inRelativePath)
@@ -27,7 +38,6 @@ namespace lost
         namespace_("resource")
         [
           class_<Loader>("Loader")
-            .def(constructor<>())
             .def("load", &LostResourceLoader_load)
             .def("addRepository", &Loader::addRepository)
             .scope
@@ -38,43 +48,46 @@ namespace lost
       ];
     }
 
-    RepositoryPtr fsrepo_create(const std::string& path)
-    {
-      return RepositoryPtr(new FilesystemRepository(path));
-    }
-
-    void LostFilesystemRepository(lua_State* state)
+    void LostResourceDefaultLoader(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("resource")
         [
-          // FIXME: should be held by FilesystemRepositoryPtr, but luabind ...
-          class_<FilesystemRepository>("FilesystemRepository")
+          class_<DefaultLoader, Loader>("DefaultLoader")
             .scope
             [
-              def("create", &fsrepo_create)
+              def("create", &DefaultLoader::create)
             ]
         ]
       ];
     }
 
-    RepositoryPtr arepo_create()
-    {
-      return RepositoryPtr(new ApplicationResourceRepository());
-    }
-    
-    void LostApplicationResourceRepository(lua_State* state)
+    void LostResourceFilesystemRepository(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("resource")
         [
-          // FIXME: should be held by ApplicationResourceRepositoryPtr, but luabind ...
-          class_<ApplicationResourceRepository>("ApplicationResourceRepository")
+          class_<FilesystemRepository, Repository>("FilesystemRepository")
             .scope
             [
-              def("create", &arepo_create)
+              def("create", &FilesystemRepository::create)
+            ]
+        ]
+      ];
+    }
+    
+    void LostResourceApplicationResourceRepository(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("resource")
+        [
+          class_<ApplicationResourceRepository, Repository>("ApplicationResourceRepository")
+            .scope
+            [
+              def("create", &ApplicationResourceRepository::create)
             ]
         ]
       ];
@@ -82,9 +95,11 @@ namespace lost
     
     void LostResource(lua_State* state)
     {
-      LostFilesystemRepository(state);
-      LostApplicationResourceRepository(state);
+      LostResourceRepository(state);
+      LostResourceFilesystemRepository(state);
+      LostResourceApplicationResourceRepository(state);
       LostResourceLoader(state);
+      LostResourceDefaultLoader(state);
     }
 
   }

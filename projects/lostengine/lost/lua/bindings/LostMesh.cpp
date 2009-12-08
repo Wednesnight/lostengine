@@ -25,8 +25,6 @@ namespace lost
         namespace_("mesh")
         [
           class_<Line2D, Mesh>("Line2D")
-            .def(constructor<>())
-            .def(constructor<const math::Vec2&, const math::Vec2&>())
             .scope
             [
               def("create", (Line2DPtr(*)()) &Line2D::create),
@@ -43,26 +41,22 @@ namespace lost
         namespace_("mesh")
         [
           class_<Rect2D, Mesh>("Rect2D")
-            .def(constructor<const math::Rect&>())
             .def("updateSize", &Rect2D::updateSize)
             .scope
             [
               def("create", &Rect2D::create)
             ],
           class_<FilledRect2D, Mesh>("FilledRect2D")
-            .def(constructor<const math::Rect&>())
             .scope
             [
               def("create", &FilledRect2D::create)
             ],
           class_<RoundedRect2D, Mesh>("RoundedRect2D")
-            .def(constructor<const math::Rect&, const double, const unsigned int>())
             .scope
             [
               def("create", &RoundedRect2D::create)
             ],
           class_<FilledRoundedRect2D, Mesh>("FilledRoundedRect2D")
-            .def(constructor<const math::Rect&, const double, const unsigned int>())
             .scope
             [
               def("create", &FilledRoundedRect2D::create)
@@ -78,28 +72,24 @@ namespace lost
         namespace_("mesh")
         [
           class_<Circle2D, Mesh>("Circle2D")
-            .def(constructor<const double>())
             .def_readwrite("material", &Circle2D::material)
             .scope
             [
               def("create", &Circle2D::create)
             ],
           class_<FilledCircle2D, Mesh>("FilledCircle2D")
-            .def(constructor<const double>())
             .def_readwrite("material", &FilledCircle2D::material)
             .scope
             [
               def("create", &FilledCircle2D::create)
             ],
           class_<Ellipse2D, Mesh>("Ellipse2D")
-            .def(constructor<const math::Vec2&>())
             .def_readwrite("material", &Ellipse2D::material)
             .scope
             [
               def("create", &Ellipse2D::create)
             ],
           class_<FilledEllipse2D, Mesh>("FilledEllipse2D")
-            .def(constructor<const math::Vec2&>())
             .def_readwrite("material", &FilledEllipse2D::material)
             .scope
             [
@@ -131,7 +121,6 @@ namespace lost
         namespace_("mesh")
         [
           class_<Material>("Material")
-            .def(constructor<>())
             .def_readwrite("shader", &Material::shader)
             .def_readwrite("color", &Material::color)
             .def_readwrite("blend", &Material::blend)
@@ -152,14 +141,11 @@ namespace lost
         namespace_("mesh")
         [
           class_<Mesh>("Mesh")
-            .def(constructor<>())
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode),
-          class_<Mesh2D, Mesh>("Mesh2D")
-            .def(constructor<>()),
+          class_<Mesh2D, Mesh>("Mesh2D"),
          class_<Mesh3D, Mesh>("Mesh3D")
-            .def(constructor<>())
         ]
       ];
     }
@@ -171,10 +157,6 @@ namespace lost
         namespace_("mesh")
         [
           class_<Quad2D, Mesh>("Quad2D")
-            .def(constructor<>())
-            .def(constructor<const math::Rect&>())
-            .def(constructor<common::DataPtr, bool>())
-            .def(constructor<gl::TexturePtr, bool>())
             .def("updateSize", &Quad2D::updateSize)
             .scope
             [
