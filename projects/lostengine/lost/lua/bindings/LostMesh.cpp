@@ -72,25 +72,21 @@ namespace lost
         namespace_("mesh")
         [
           class_<Circle2D, Mesh>("Circle2D")
-            .def_readwrite("material", &Circle2D::material)
             .scope
             [
               def("create", &Circle2D::create)
             ],
           class_<FilledCircle2D, Mesh>("FilledCircle2D")
-            .def_readwrite("material", &FilledCircle2D::material)
             .scope
             [
               def("create", &FilledCircle2D::create)
             ],
           class_<Ellipse2D, Mesh>("Ellipse2D")
-            .def_readwrite("material", &Ellipse2D::material)
             .scope
             [
               def("create", &Ellipse2D::create)
             ],
           class_<FilledEllipse2D, Mesh>("FilledEllipse2D")
-            .def_readwrite("material", &FilledEllipse2D::material)
             .scope
             [
               def("create", &FilledEllipse2D::create)
