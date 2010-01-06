@@ -504,7 +504,6 @@
 		EA4E2B3D10BDEDC5008135E0 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2A10BDEDC5008135E0 /* function.cpp */; };
 		EA4E2B3E10BDEDC5008135E0 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */; };
 		EA4E2B3F10BDEDC5008135E0 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2C10BDEDC5008135E0 /* error.cpp */; };
-		EA4E2B4010BDEDC5008135E0 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2D10BDEDC5008135E0 /* implicit_cast.cpp */; };
 		EA4E2B4110BDEDC5008135E0 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2E10BDEDC5008135E0 /* class.cpp */; };
 		EA4E2B4210BDEDC5008135E0 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2F10BDEDC5008135E0 /* open.cpp */; };
 		EA4E2B4310BDEDC5008135E0 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B3010BDEDC5008135E0 /* link_compatibility.cpp */; };
@@ -522,7 +521,6 @@
 		EA4E2B5010BDEDC5008135E0 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2A10BDEDC5008135E0 /* function.cpp */; };
 		EA4E2B5110BDEDC5008135E0 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */; };
 		EA4E2B5210BDEDC5008135E0 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2C10BDEDC5008135E0 /* error.cpp */; };
-		EA4E2B5310BDEDC5008135E0 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2D10BDEDC5008135E0 /* implicit_cast.cpp */; };
 		EA4E2B5410BDEDC5008135E0 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2E10BDEDC5008135E0 /* class.cpp */; };
 		EA4E2B5510BDEDC5008135E0 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2F10BDEDC5008135E0 /* open.cpp */; };
 		EA4E2B5610BDEDC5008135E0 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B3010BDEDC5008135E0 /* link_compatibility.cpp */; };
@@ -540,7 +538,6 @@
 		EA4E2B6310BDEDC5008135E0 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2A10BDEDC5008135E0 /* function.cpp */; };
 		EA4E2B6410BDEDC5008135E0 /* create_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */; };
 		EA4E2B6510BDEDC5008135E0 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2C10BDEDC5008135E0 /* error.cpp */; };
-		EA4E2B6610BDEDC5008135E0 /* implicit_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2D10BDEDC5008135E0 /* implicit_cast.cpp */; };
 		EA4E2B6710BDEDC5008135E0 /* class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2E10BDEDC5008135E0 /* class.cpp */; };
 		EA4E2B6810BDEDC5008135E0 /* open.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B2F10BDEDC5008135E0 /* open.cpp */; };
 		EA4E2B6910BDEDC5008135E0 /* link_compatibility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4E2B3010BDEDC5008135E0 /* link_compatibility.cpp */; };
@@ -1007,7 +1004,6 @@
 		EA4E2B2A10BDEDC5008135E0 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/function.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = create_class.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/create_class.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B2C10BDEDC5008135E0 /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/error.cpp; sourceTree = SOURCE_ROOT; };
-		EA4E2B2D10BDEDC5008135E0 /* implicit_cast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = implicit_cast.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/implicit_cast.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B2E10BDEDC5008135E0 /* class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = class.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/class.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B2F10BDEDC5008135E0 /* open.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = open.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/open.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B3010BDEDC5008135E0 /* link_compatibility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = link_compatibility.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/link_compatibility.cpp; sourceTree = SOURCE_ROOT; };
@@ -1636,7 +1632,6 @@
 				EA4E2B2A10BDEDC5008135E0 /* function.cpp */,
 				EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */,
 				EA4E2B2C10BDEDC5008135E0 /* error.cpp */,
-				EA4E2B2D10BDEDC5008135E0 /* implicit_cast.cpp */,
 				EA4E2B2E10BDEDC5008135E0 /* class.cpp */,
 				EA4E2B2F10BDEDC5008135E0 /* open.cpp */,
 				EA4E2B3010BDEDC5008135E0 /* link_compatibility.cpp */,
@@ -2323,7 +2318,6 @@
 				EA4E2B6310BDEDC5008135E0 /* function.cpp in Sources */,
 				EA4E2B6410BDEDC5008135E0 /* create_class.cpp in Sources */,
 				EA4E2B6510BDEDC5008135E0 /* error.cpp in Sources */,
-				EA4E2B6610BDEDC5008135E0 /* implicit_cast.cpp in Sources */,
 				EA4E2B6710BDEDC5008135E0 /* class.cpp in Sources */,
 				EA4E2B6810BDEDC5008135E0 /* open.cpp in Sources */,
 				EA4E2B6910BDEDC5008135E0 /* link_compatibility.cpp in Sources */,
@@ -2538,7 +2532,6 @@
 				EA4E2B3D10BDEDC5008135E0 /* function.cpp in Sources */,
 				EA4E2B3E10BDEDC5008135E0 /* create_class.cpp in Sources */,
 				EA4E2B3F10BDEDC5008135E0 /* error.cpp in Sources */,
-				EA4E2B4010BDEDC5008135E0 /* implicit_cast.cpp in Sources */,
 				EA4E2B4110BDEDC5008135E0 /* class.cpp in Sources */,
 				EA4E2B4210BDEDC5008135E0 /* open.cpp in Sources */,
 				EA4E2B4310BDEDC5008135E0 /* link_compatibility.cpp in Sources */,
@@ -2792,7 +2785,6 @@
 				EA4E2B5010BDEDC5008135E0 /* function.cpp in Sources */,
 				EA4E2B5110BDEDC5008135E0 /* create_class.cpp in Sources */,
 				EA4E2B5210BDEDC5008135E0 /* error.cpp in Sources */,
-				EA4E2B5310BDEDC5008135E0 /* implicit_cast.cpp in Sources */,
 				EA4E2B5410BDEDC5008135E0 /* class.cpp in Sources */,
 				EA4E2B5510BDEDC5008135E0 /* open.cpp in Sources */,
 				EA4E2B5610BDEDC5008135E0 /* link_compatibility.cpp in Sources */,

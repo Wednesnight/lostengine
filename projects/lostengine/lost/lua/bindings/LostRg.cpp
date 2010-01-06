@@ -2,7 +2,10 @@
 #include "lost/lua/lua.h"
 
 #include "lost/gl/FrameBuffer.h"
+#include "lost/gl/Context.h"
 #include "lost/camera/Camera.h"
+#include "lost/camera/Camera3D.h"
+#include "lost/camera/Camera2D.h"
 
 #include "lost/rg/Node.h"
 #include "lost/rg/Draw.h"
