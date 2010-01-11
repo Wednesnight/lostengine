@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <map>
+#include <sstream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -36,38 +39,36 @@ enum ElementType
   ET_mat4x4_f32 = 40
 };
 
-// these are the sizes of the elements in bytes
-enum ElementSize
+uint32_t elementSize(ElementType t)
 {
-  ES_i8 = 1,
-  ES_i16 = 2,
-  ES_i32 = 4,
-  ES_f32 = 4,
-  
-  ES_vec2_i8 = 2,
-  ES_vec2_i16 = 4,
-  ES_vec2_i32 = 8,
-  ES_vec2_f32 = 8,
-  
-  ES_vec3_i8 = 3,
-  ES_vec3_i16 = 6,
-  ES_vec3_i32 = 12,
-  ES_vec3_f32 = 12,
-  
-  ES_vec4_i8 = 4,
-  ES_vec4_i16 = 8,
-  ES_vec4_i32 = 16,
-  ES_vec4_f32 = 16,
-
-  ES_mat4x4_f32 = 64
-};
-
-// buffer types denote the intended usage of a buffer object when it is sent to the graphics hardware
-enum BufferType
-{
-  BT_vertex = 0, // the contained data is to be interpreted 
-  BT_index = 1
-};
+  uint32_t result = 0;
+  switch (t) {
+    case ET_i8:result=1;break;
+    case ET_i16:result=2;break;
+    case ET_i32:result=4;break;
+    case ET_f32:result=4;break;
+    case ET_vec2_i8:result=2;break;
+    case ET_vec2_i16:result=4;break;
+    case ET_vec2_i32:result=8;break;
+    case ET_vec2_f32:result=8;break;
+    case ET_vec3_i8:result=3;break;
+    case ET_vec3_i16:result=6;break;
+    case ET_vec3_i32:result=12;break;
+    case ET_vec3_f32:result=12;break;
+    case ET_vec4_i8:result=4;break;
+    case ET_vec4_i16:result=8;break;
+    case ET_vec4_i32:result=16;break;
+    case ET_vec4_f32:result=16;break;
+    case ET_mat4x4_f32:result=64;break;
+    
+    default:
+      ostringstream os;
+      os<<"can't find size for ElementType "<<t;
+      throw std::runtime_error(os.str());
+      break;
+  }
+  return result;
+}
 
 // each element or stride of a buffer needs to be marked with a usage type, so it can be mapped to a GL buffer and stride
 enum UsageType
@@ -92,36 +93,141 @@ enum UsageType
 };
 
 // elements must be paired with usage types
-struct ElementMapping
+struct HostBufferAttribute
 {
   ElementType elementType;
   UsageType   usageType;
+  uint32_t    partition;
   
-  ElementMapping(ElementType et, UsageType ut) : elementType(et), usageType(ut) {}
+  HostBufferAttribute(ElementType et, UsageType ut, uint32_t p) : elementType(et), usageType(ut), partition(p) {}
+  
+  uint32_t size() const { return elementSize(elementType);}
 };
 
-// in order to create a buffer, you must first create a BufferLayout which contains a number of elements that make up a struct. A buffer
-// ten contains an array of these structs. A StructLayout can contain any amount and type of elements, but always at least one. Just 
-// like with C structs, the order is relevant. 
-typedef vector<ElementMapping> StructLayout;
-
-
-struct Buffer
+struct HostBufferLayout
 {
-  StructLayout  layout;
-  BufferType    bufferType;
+  std::vector<HostBufferAttribute> attributes;
+  std::map<uint32_t, bool> partitions;
   
-  Buffer(const StructLayout& inLayout, BufferType inType) : layout(inLayout), bufferType(inType) {}
+  void add(ElementType et, UsageType ut, uint32_t p)
+  {
+    attributes.push_back(HostBufferAttribute(et, ut, p));
+    partitions[p] = true;
+  }
+
+  // number of partitions in this layout
+  uint32_t numPartitions() const
+  {
+    return partitions.size();
+  }
+
+  // size of a particular partition in bytes
+  uint32_t partitionSize(uint32_t partitionId) const
+  {
+    uint32_t result = 0;
+    
+    for(uint32_t i=0; i<attributes.size(); ++i)
+    {
+      if(attributes[i].partition==partitionId)
+      {
+        result += attributes[i].size();
+      }
+    }
+    
+    return result;
+  }
+   
+  // size of the whole layout in bytes, without taking partitioning into account, in bytes
+  uint32_t size() const
+  {
+    uint32_t result = 0;
+    for(uint32_t i=0; i<attributes.size(); ++i)
+    {
+      result += attributes[i].size();
+    }
+    return result;
+  }
+};
+
+struct HostBuffer
+{
+  HostBufferLayout  layout;
+  uint32_t numPartitions;
+  std::map<uint32_t, uint32_t> partitionSize;
+  std::vector<unsigned char*> partitions; // the actual physical buffers
+  
+  void init(const HostBufferLayout& inLayout)
+  {
+    layout = inLayout;
+    cout << "layout size: "<<layout.size() << endl;
+    uint32_t nump = layout.numPartitions();
+    cout << "partitions: "<< nump << endl;
+    for(uint32_t i=0; i<nump; ++i)
+    {
+      cout << "partition " << i << " size " << layout.partitionSize(i) << endl;
+    }    
+  }
+  
+  HostBuffer(const HostBufferLayout& inLayout)
+  {
+    init(inLayout);
+  }
+
+  HostBuffer(const HostBufferLayout& inLayout, uint32_t num)
+  {
+    init(inLayout);
+    resize(num);
+  }
+  
+  void deleteAllPartitions()
+  {
+    for(uint32_t i=0; i<partitions.size(); ++i)
+    {
+      cout << "deleting partition " << i << endl;
+      free(partitions[i]);
+    }
+    partitions.clear();
+  }  
+
+  // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
+  void resize(uint32_t num)
+  {
+    if(num == 0)
+    {
+      deleteAllPartitions();
+    }
+    else
+    {
+      deleteAllPartitions();
+      for(uint32_t i=0; i<layout.numPartitions(); ++i)
+      {
+        uint32_t s = layout.partitionSize(i)*num;
+        partitions.push_back((unsigned char*)malloc(s));
+        cout << "allocated p:"<<i<<" num:"<<num<<" bytes:"<<s<<endl;
+      }
+    }
+  }
+  
+  void set(uint32_t idx, UsageType ut, float val)
+  {
+    cout << "setting" << endl;
+  }
 };
 
 int main (int argc, char * const argv[]) {
+    HostBufferLayout layout;
+    layout.add(ET_vec4_f32, UT_vertex, 0);
+    layout.add(ET_vec3_f32, UT_normal, 0);
+    layout.add(ET_vec2_f32, UT_texcoord0, 0);
 
-    StructLayout layout;
-    layout.push_back(ElementMapping(ET_vec3_f32, UT_vertex));
-    layout.push_back(ElementMapping(ET_vec3_f32, UT_normal));
-    layout.push_back(ElementMapping(ET_vec2_f32, UT_texcoord0));
+    layout.add(ET_f32, UT_vertexAttrib0, 1);
+    layout.add(ET_f32, UT_vertexAttrib1, 1);
 
-    Buffer buffer(layout, BT_vertex);
-  
+    HostBuffer buffer1(layout);
+    HostBuffer buffer2(layout, 100);
+    HostBuffer buffer3(layout);
+
+    buffer3.resize(50);
+    buffer3.resize(0);
     return 0;
 }
