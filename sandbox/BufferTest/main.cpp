@@ -153,7 +153,6 @@ struct HostBuffer
 {
   HostBufferLayout  layout;
   uint32_t numPartitions;
-  std::map<uint32_t, uint32_t> partitionSize;
   std::vector<unsigned char*> partitions; // the actual physical buffers
   
   void init(const HostBufferLayout& inLayout)
@@ -176,7 +175,7 @@ struct HostBuffer
   HostBuffer(const HostBufferLayout& inLayout, uint32_t num)
   {
     init(inLayout);
-    resize(num);
+    reset(num);
   }
   
   void deleteAllPartitions()
@@ -190,7 +189,7 @@ struct HostBuffer
   }  
 
   // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
-  void resize(uint32_t num)
+  void reset(uint32_t num)
   {
     if(num == 0)
     {
@@ -227,7 +226,7 @@ int main (int argc, char * const argv[]) {
     HostBuffer buffer2(layout, 100);
     HostBuffer buffer3(layout);
 
-    buffer3.resize(50);
-    buffer3.resize(0);
+    buffer3.reset(50);
+    buffer3.reset(0);
     return 0;
 }
