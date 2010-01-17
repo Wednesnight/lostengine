@@ -21,7 +21,7 @@ function Mesh:Line2D(def)
   local pointStart = def["start"]
   local pointEnd = def["finish"]
   
-  result = lost.mesh.Line2D(pointStart, pointEnd)
+  result = lost.mesh.Line2D.create(pointStart, pointEnd)
 
   self:applyMaterial(result, def)
   return result
@@ -56,11 +56,11 @@ function Mesh:Quad2D(def)
   
   -- create an instance depending on parameterization
   if filename ~= nil then
-    result = lost.mesh.Quad2D(self.loader:load(filename), flip)
+    result = lost.mesh.Quad2D.create(self.loader:load(filename), flip)
   elseif tex ~= nil then 
-    result = lost.mesh.Quad2D(tex, flip)
+    result = lost.mesh.Quad2D.create(tex, flip)
   elseif rect ~= nil then
-    result = lost.mesh.Quad2D(rect)
+    result = lost.mesh.Quad2D.create(rect)
   else
     error("must specify at least one of [filename|tex|rect] for creation of quad")
   end
