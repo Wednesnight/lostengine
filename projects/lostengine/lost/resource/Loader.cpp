@@ -41,7 +41,7 @@ namespace lost
       if(!result)
         throw LoaderError("couldn't load file: '"+inPath.string()+"'");
 
-      DOUT("'"<<inPath << "' [" << result->size << " Bytes]");
+//      DOUT("'"<<inPath << "' [" << result->size << " Bytes]");
       return result;
     }
 
