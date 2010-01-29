@@ -143,8 +143,17 @@ namespace lost
         EOUT("Oops, unknown tasklet notified us. That's not good.");
         return;
       }
-    
+
+      Tasklet* t = *t_iter;
+      void* glctx = NULL;
+      if(t->window)
+      {
+        glctx = gl::Context::getCurrentOsSpecific();
+        t->window->context->makeCurrent();
+      }
       delete *t_iter;
+      if(glctx)
+        gl::Context::setCurrentOsSpecififc(glctx);
       tasklets.erase(t_iter);
     }
 
