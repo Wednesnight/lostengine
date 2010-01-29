@@ -16,7 +16,7 @@ namespace lost
 		/** low-level event class.
 		 *	Any event that should be dispatched via the EventDispatcher must be derived from this class.
 		 */
-    struct Event : public lost::enable_shared_from_this<Event>
+    struct Event 
     {    
       Type type;					// the type of the event
 
