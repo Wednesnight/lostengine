@@ -136,6 +136,9 @@ namespace lost
 
       // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
       void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
+      
+      static void* getCurrentOsSpecific();
+      static void setCurrentOsSpecififc(void* ctx);
     };
   }
 }

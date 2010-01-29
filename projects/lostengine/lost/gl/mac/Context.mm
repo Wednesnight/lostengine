@@ -54,5 +54,15 @@ namespace lost
       }          
     }
 
+    void* Context::getCurrentOsSpecific()
+    {
+      return [NSOpenGLContext currentContext];
+    }
+    
+    void Context::setCurrentOsSpecififc(void* ctx)
+    {
+      [((NSOpenGLContext*)ctx) makeCurrentContext];
+    }
+
   }
 }
