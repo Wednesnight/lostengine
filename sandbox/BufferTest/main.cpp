@@ -6,6 +6,36 @@
 
 using namespace std;
 
+// test types for setters/getters
+struct Vec2
+{
+  float x;
+  float y;
+};
+
+struct Vec3
+{
+  float x;
+  float y;
+  float z;
+};
+
+struct Vec4
+{
+  float x;
+  float y;
+  float z;
+  float w;  
+};
+
+struct Color
+{
+  float r;
+  float g;
+  float b;
+  float a;  
+};
+
 /** Framework for runtime creation of interleaved buffers.
  * These buffers are intended to be used with GL for efficient memory management and also efficient buffer usage.
  * Therefore, all information must be avaiilable at runtime, so it can be stuffed into the appropriate GL calls, but one of the 
@@ -106,13 +136,17 @@ struct HostBufferAttribute
 
 struct HostBufferLayout
 {
+  // FIXME: add caching for various size and partition parameters so we don'T have to recalculate on every set call
+  // add maps that hold these values. Update maps upon each add call.
   std::vector<HostBufferAttribute> attributes;
   std::map<uint32_t, bool> partitions;
+  std::map<UsageType, uint32_t> ut2pid; // usage type to partition id
   
   void add(ElementType et, UsageType ut, uint32_t p)
   {
     attributes.push_back(HostBufferAttribute(et, ut, p));
     partitions[p] = true;
+    ut2pid[ut] = p;
   }
 
   // number of partitions in this layout
@@ -147,12 +181,23 @@ struct HostBufferLayout
     }
     return result;
   }
+  
+  uint32_t partitionFromUsageType(UsageType ut)
+  {
+    std::map<UsageType, uint32_t>::const_iterator pos = ut2pid.find(ut);
+    if(pos == ut2pid.end())
+    {
+      ostringstream os;
+      os << "couldn't find partition for usage type: "<<ut;
+      throw runtime_error(os.str());
+    }
+    return pos->second;
+  }
 };
 
 struct HostBuffer
 {
   HostBufferLayout  layout;
-  uint32_t numPartitions;
   std::vector<unsigned char*> partitions; // the actual physical buffers
   
   void init(const HostBufferLayout& inLayout)
@@ -206,11 +251,57 @@ struct HostBuffer
       }
     }
   }
-  
+    
   void set(uint32_t idx, UsageType ut, float val)
   {
-    cout << "setting" << endl;
+    uint32_t pid = layout.partitionFromUsageType(ut);
+    unsigned char* p = partitions[pid];
+    uint32_t num = sizeof(val);
+    p = p+idx*num;
+    float* vp = (float*)p;
+    memcpy(vp, &val, num);
   }
+
+  void set(uint32_t idx, UsageType ut, const Vec2& val)
+  {
+    uint32_t pid = layout.partitionFromUsageType(ut);
+    unsigned char* p = partitions[pid];
+    uint32_t num = sizeof(val);
+    p = p+idx*num;
+    Vec2* vp = (Vec2*)p;
+    memcpy(vp, &val, num);
+  }
+
+  void set(uint32_t idx, UsageType ut, const Vec3& val)
+  {
+    uint32_t pid = layout.partitionFromUsageType(ut);
+    unsigned char* p = partitions[pid];
+    uint32_t num = sizeof(val);
+    p = p+idx*num;
+    Vec3* vp = (Vec3*)p;
+    memcpy(vp, &val, num);
+  }
+
+  void set(uint32_t idx, UsageType ut, const Vec4& val)
+  {
+    uint32_t pid = layout.partitionFromUsageType(ut);
+    unsigned char* p = partitions[pid];
+    uint32_t num = sizeof(val);
+    p = p+idx*num;
+    Vec4* vp = (Vec4*)p;
+    memcpy(vp, &val, num);
+  }
+
+  void set(uint32_t idx, UsageType ut, const Color& val)
+  {
+    uint32_t pid = layout.partitionFromUsageType(ut);
+    unsigned char* p = partitions[pid];
+    uint32_t num = sizeof(val);
+    p = p+idx*num;
+    Color* vp = (Color*)p;
+    memcpy(vp, &val, num);
+  }
+
 };
 
 int main (int argc, char * const argv[]) {
@@ -228,5 +319,11 @@ int main (int argc, char * const argv[]) {
 
     buffer3.reset(50);
     buffer3.reset(0);
+    
+    Vec4 v4;
+    buffer2.set(0, UT_vertex, v4);
+    buffer2.set(1, UT_vertex, v4);
+    buffer2.set(2, UT_vertex, v4);
+    
     return 0;
 }
