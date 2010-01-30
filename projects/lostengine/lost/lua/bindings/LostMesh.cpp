@@ -110,6 +110,11 @@ namespace lost
       ];
     }
 
+    void LostMeshMaterial_addTexture(Material* material, const gl::TexturePtr& texture)
+    {
+      material->textures.push_back(texture);
+    }
+
     void LostMeshMaterial(lua_State* state)
     {
       module(state, "lost")
@@ -117,6 +122,7 @@ namespace lost
         namespace_("mesh")
         [
           class_<Material>("Material")
+            .def("addTexture", &LostMeshMaterial_addTexture)
             .def_readwrite("shader", &Material::shader)
             .def_readwrite("color", &Material::color)
             .def_readwrite("blend", &Material::blend)
