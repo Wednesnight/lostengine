@@ -65,7 +65,7 @@ function Mesh:Quad2D(def)
     error("must specify at least one of [filename|tex|rect] for creation of quad")
   end
   if size then
-    result:updateSize(size, flip)
+    result:updateSize(size)
   end
   if transform ~= nil then
     result.transform = transform

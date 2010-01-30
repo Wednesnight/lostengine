@@ -239,7 +239,7 @@ namespace lost
         for(uint32_t i=0; i<num; ++i)
         {
           activeTexture(GL_TEXTURE0+i); // the standard guarantees GL_TEXTUREi = GL_TEXTURE0+i
-          textures[0]->bind();
+          textures[i]->bind();
         }
         activeTexture(GL_TEXTURE0); // reset 
       }
