@@ -68,6 +68,7 @@ namespace lost
       globals(state)["gl"] = luabind::newtable(state);
 #if TARGET_OPENGL
       globals(state)["gl"]["GL_CLAMP"] = GL_CLAMP;
+      globals(state)["gl"]["GL_CLAMP"] = GL_REPEAT;
       globals(state)["gl"]["GL_DEPTH_COMPONENT"] = GL_DEPTH_COMPONENT;
       globals(state)["gl"]["GL_DEPTH_COMPONENT16"] = GL_DEPTH_COMPONENT16;
       globals(state)["gl"]["GL_DEPTH_COMPONENT24"] = GL_DEPTH_COMPONENT24;
