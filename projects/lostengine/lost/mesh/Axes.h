@@ -1,6 +1,6 @@
 #ifndef LOST_MESH_AXES_H
 #define LOST_MESH_AXES_H
-
+/*
 #include "lost/mesh/Mesh.h"
 
 namespace lost
@@ -103,5 +103,5 @@ typedef lost::shared_ptr<Axes3D> Axes3DPtr;
   
 }
 }
-
+*/
 #endif

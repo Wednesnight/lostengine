@@ -80,7 +80,7 @@ namespace lost
 
 
 
-    template<typename MESHTYPE, GLenum RectType>
+/*    template<typename MESHTYPE, GLenum RectType>
     struct RoundedRectangle : public MESHTYPE
     {
       typedef typename MESHTYPE::VertexType VertexType;
@@ -155,7 +155,7 @@ namespace lost
     
     typedef RoundedRectangle<Mesh2D, GL_TRIANGLE_FAN> FilledRoundedRect2D;
     typedef lost::shared_ptr<FilledRoundedRect2D> FilledRoundedRect2DPtr;
-
+*/
   }
 }
 

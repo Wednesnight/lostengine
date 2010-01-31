@@ -1,6 +1,6 @@
 #ifndef LOST_MESH_LINE
 #define LOST_MESH_LINE
-
+/*
 #include "lost/mesh/Mesh.h"
 
 namespace lost
@@ -83,5 +83,5 @@ typedef lost::shared_ptr<Line3D> Line3DPtr;
 
 }
 }
-
+*/
 #endif
