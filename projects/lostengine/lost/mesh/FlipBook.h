@@ -1,6 +1,6 @@
 #ifndef LOST_MESH_FLIPBOOK_H
 #define LOST_MESH_FLIPBOOK_H
-
+/*
 #include "lost/mesh/Quad.h"
 #include "lost/gl/TextureAtlas.h"
 
@@ -22,5 +22,5 @@ struct FlipBook : QUAD
 };
 }
 }
-
+*/
 #endif

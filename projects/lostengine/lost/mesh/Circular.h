@@ -1,6 +1,6 @@
 #ifndef LOST_MESH_CIRCULAR_H
 #define LOST_MESH_CIRCULAR_H
-
+/*
 #include "lost/mesh/Mesh.h"
 #include "lost/math/lmath.h"
 
@@ -117,5 +117,5 @@ namespace lost
 
   }
 }
-
+*/
 #endif

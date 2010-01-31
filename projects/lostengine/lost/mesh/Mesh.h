@@ -7,6 +7,9 @@
 #include "lost/mesh/Material.h"
 #include "lost/math/Matrix.h"
 #include "lost/math/Vec2.h"
+#include "lost/gl/BufferLayout.h"
+#include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/HybridIndexBuffer.h"
 
 namespace lost
 {
@@ -17,13 +20,24 @@ namespace lost
     struct Mesh
     {
 
+      void resetBuffers(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
+      {
+        _vertexBuffer.reset(new gl::HybridVertexBuffer(vertexLayout));
+        _indexBuffer.reset(new gl::HybridIndexBuffer(indexType));
+      }
+
       Mesh()
       {
         material = Material::create();
         transform.initIdentity();
+        gl::BufferLayout layout;
+        layout.add(gl::ET_vec3_f32, gl::UT_vertex, 0);
+        layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+        resetBuffers(layout, gl::ET_u32);
+//        DOUT("creating mesh");
       }
 
-      virtual ~Mesh() {}
+      virtual ~Mesh() { /*DOUT("destroying mesh");*/ }
       
       virtual gl::Buffer* getIndexBuffer() { return NULL; };
       virtual gl::Buffer* getVertexBuffer() { return NULL; };
@@ -34,6 +48,8 @@ namespace lost
       GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
       MaterialPtr material;
       math::Matrix transform;
+      gl::HybridVertexBufferPtr _vertexBuffer;
+      gl::HybridIndexBufferPtr _indexBuffer;
     };
 
     typedef lost::shared_ptr<Mesh> MeshPtr;
@@ -102,8 +118,8 @@ namespace lost
       // setting a size of 0 destroys the data array.
       // Note that the actual hardware buffer objects are NOT automatically 
       // created/destroyed if you use these functions.
-      void resetIndices(boost::uint32_t n) { numIndices=n; if(n) {indexData.reset(new IT[n]);} else {indexData.reset();}}
-      void resetVertices(boost::uint32_t n) { numVertices=n; if(n) {vertexData.reset(new VT[n]);} else {vertexData.reset();}}
+      void resetIndices(boost::uint32_t n) { numIndices=n; if(n) {indexData.reset(new IT[n]);} else {indexData.reset();} _indexBuffer->reset(n);}
+      void resetVertices(boost::uint32_t n) { numVertices=n; if(n) {vertexData.reset(new VT[n]);} else {vertexData.reset();} _vertexBuffer->reset(n);}
       void resetNormals(boost::uint32_t n) { numNormals=n; if(n) {normalData.reset(new NT[n]);} else {normalData.reset();}}
       void resetColors(boost::uint32_t n) { numColors=n; if(n) {colorData.reset(new CT[n]);} else {colorData.reset();}}
       void resetTexCoords(boost::uint32_t n) { numTexCoords=n; if(n) {texCoordData.reset(new TCT[n]);} else {texCoordData.reset();}}
@@ -123,6 +139,27 @@ namespace lost
       gl::Buffer* getNormalBuffer() { return normalBuffer.get(); };
       gl::Buffer* getColorBuffer() { return colorBuffer.get(); };
       gl::Buffer* getTexCoordBuffer() {return texCoordBuffer.get(); };  
+      
+      void setIndex(uint32_t idx, uint32_t val)
+      {
+        IndexType* p = this->indexData.get();
+        p[idx] = val;
+        _indexBuffer->set(idx, gl::UT_index, val);
+      }
+      
+      void setVertex(uint32_t idx, const math::Vec2& val)
+      {
+        VertexType* vtx = this->vertexData.get();
+        vtx[idx] = val;
+        _vertexBuffer->set(idx, gl::UT_vertex, val);
+      }
+      
+      void setTexCoord(uint32_t idx, const math::Vec2& val)
+      {
+        TexCoordType* texcoords = this->texCoordData.get();
+        texcoords[idx] = val;
+        _vertexBuffer->set(idx, gl::UT_texcoord0, val);
+      }
       
       typedef IT IndexType;
       typedef VT VertexType;

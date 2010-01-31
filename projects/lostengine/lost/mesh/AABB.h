@@ -1,6 +1,6 @@
 #ifndef LOST_MESH_AABB_H
 #define LOST_MESH_AABB_H
-
+/*
 #include "lost/mesh/Mesh.h"
 #include "lost/math/AABB.h"
 
@@ -84,5 +84,5 @@ typedef lost::shared_ptr<AABB3D> AABB3DPtr;
 
 }
 }
-
+*/
 #endif

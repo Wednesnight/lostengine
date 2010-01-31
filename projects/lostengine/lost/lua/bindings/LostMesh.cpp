@@ -18,7 +18,7 @@ namespace lost
 {
   namespace lua
   {
-    void LostMeshLine(lua_State* state)
+/*    void LostMeshLine(lua_State* state)
     {
       module(state, "lost")
       [
@@ -32,7 +32,7 @@ namespace lost
             ]
         ]
       ];
-    }
+    }*/
 
     void LostMeshRect(lua_State* state)
     {
@@ -45,7 +45,8 @@ namespace lost
             .scope
             [
               def("create", &Rect2D::create)
-            ],
+            ]
+/*            ,
           class_<FilledRect2D, Mesh>("FilledRect2D")
             .scope
             [
@@ -60,12 +61,12 @@ namespace lost
             .scope
             [
               def("create", &FilledRoundedRect2D::create)
-            ]
+            ]*/
         ]
       ];
     }
     
-    void LostMeshCircular(lua_State* state)
+/*    void LostMeshCircular(lua_State* state)
     {
       module(state, "lost")
       [
@@ -93,7 +94,7 @@ namespace lost
             ]
         ]
       ];
-    }
+    }*/
     
     void LostMeshLoader(lua_State* state)
     {
@@ -191,9 +192,9 @@ namespace lost
     {
       // mesh first because following classes are based on it
       LostMeshMesh(state);
-      LostMeshLine(state);
+//      LostMeshLine(state);
       LostMeshRect(state);
-      LostMeshCircular(state);
+//      LostMeshCircular(state);
       LostMeshLoader(state);
       LostMeshMaterial(state);
       LostMeshQuad2D(state);
