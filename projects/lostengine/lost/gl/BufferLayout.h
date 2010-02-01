@@ -40,7 +40,7 @@ uint32_t elementSize(ElementType t);
 // each element or stride of a buffer needs to be marked with a usage type, so it can be mapped to a GL buffer and stride
 enum UsageType
 {
-  UT_unused = 0,  // elements marked with this usage type will be ignored, might be handy for testing 
+  UT_unused = 0,  // elements marked with this usage type will be ignored, handy for testing or padding to multiples of 32/64 bytes for performance optimisation
   UT_index,       // special case for IndexBuffers, the element is an index into a group of vertices, used for drawing
   UT_vertex,      // element is a vertex coordinate, usually a vec2/3/4 variant
   UT_texcoord0,   // element is a texture coordinate and should be mapped to texture unit 0
