@@ -8,6 +8,8 @@ namespace lost
 namespace gl
 {
 
+using namespace math;
+
 void HostBuffer::init(const BufferLayout& inLayout)
 {
   layout = inLayout;
@@ -63,6 +65,7 @@ void HostBuffer::reset(uint32_t num)
 //      DOUT("allocated p:"<<i<<" num:"<<num<<" bytes:"<<s);
     }
   }
+  count = num;
 }
 
 ElementType HostBuffer::elementTypeFromUsageType(UsageType ut)
@@ -213,6 +216,13 @@ void HostBuffer::set(uint32_t idx, UsageType ut, const lost::math::Vec4& val)
 void HostBuffer::set(uint32_t idx, UsageType ut, const lost::common::Color& val)
 {
   memcpy(elementAddress(idx, ut), &val, sizeof(val));
+}
+
+
+math::Vec2 HostBuffer::getAsVec2(uint32_t idx, UsageType ut)
+{
+  // FIXME: this is completely unsafe
+  return *((Vec2*)elementAddress(idx, ut));
 }
 
 }

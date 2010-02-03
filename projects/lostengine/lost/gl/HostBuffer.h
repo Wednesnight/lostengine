@@ -21,6 +21,7 @@ struct HostBuffer
 {
   BufferLayout  layout;
   std::vector<uint8_t*> partitions; // the actual physical buffers
+  uint32_t              count; // number of vertices/indices in this HostBuffer
   
   void init(const BufferLayout& inLayout);
   HostBuffer(const BufferLayout& inLayout);
@@ -36,11 +37,12 @@ struct HostBuffer
   void set(uint32_t idx, UsageType ut, uint16_t val);
   void set(uint32_t idx, UsageType ut, uint32_t val);
   void set(uint32_t idx, UsageType ut, float val);
-  void set(uint32_t idx, UsageType ut, const lost::math::Vec2& val);
-  void set(uint32_t idx, UsageType ut, const lost::math::Vec3& val);
-  void set(uint32_t idx, UsageType ut, const lost::math::Vec4& val);
-  void set(uint32_t idx, UsageType ut, const lost::common::Color& val);
-
+  void set(uint32_t idx, UsageType ut, const math::Vec2& val);
+  void set(uint32_t idx, UsageType ut, const math::Vec3& val);
+  void set(uint32_t idx, UsageType ut, const math::Vec4& val);
+  void set(uint32_t idx, UsageType ut, const common::Color& val);
+  
+  math::Vec2 getAsVec2(uint32_t idx, UsageType ut);
 };
 
 }

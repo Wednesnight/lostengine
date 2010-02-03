@@ -17,9 +17,17 @@ namespace lost
 
       Rectangle(const math::Rect& rect)
       {
+        gl::BufferLayout layout;
+        layout.add(gl::ET_vec2_f32, gl::UT_vertex, 0);
+        this->resetBuffers(layout, gl::ET_u32);      
+      
         this->drawMode = RectType;
         boost::uint32_t numVertices = 4;
         boost::uint32_t numIndices = numVertices;
+        
+        this->_vertexBuffer->reset(numVertices);
+        this->_indexBuffer->reset(numIndices);
+        
         this->vertices(true);
         this->indices(true);
         this->resetVertices(numVertices);
@@ -35,28 +43,42 @@ namespace lost
       {
         if (RectType == GL_LINE_LOOP)
         {
-          this->indexData[0] = 0;
+/*          this->indexData[0] = 0;
           this->indexData[1] = 1;
           this->indexData[2] = 2;
-          this->indexData[3] = 3;
+          this->indexData[3] = 3;*/
+          
+          this->setIndex(0,0);
+          this->setIndex(1,1);
+          this->setIndex(2,2);
+          this->setIndex(3,3);
         }
         else if (RectType == GL_TRIANGLE_STRIP)
         {
-          this->indexData[0] = 3;
+/*          this->indexData[0] = 3;
           this->indexData[1] = 0;
           this->indexData[2] = 2;
-          this->indexData[3] = 1;
+          this->indexData[3] = 1;*/
+
+          this->setIndex(0,3);
+          this->setIndex(1,0);
+          this->setIndex(2,2);
+          this->setIndex(3,1);
         }
       }
 
       void createVertices(const math::Rect& r)
       {
         math::Rect rect(0,0,r.width, r.height);
-        this->vertexData[0] = rect.bottomLeft();
+/*        this->vertexData[0] = rect.bottomLeft();
         this->vertexData[1] = rect.bottomRight();
         this->vertexData[2] = rect.topRight();
-        this->vertexData[3] = rect.topLeft();
+        this->vertexData[3] = rect.topLeft();*/
         
+        this->setVertex(0, rect.bottomLeft());
+        this->setVertex(1, rect.bottomRight());
+        this->setVertex(2, rect.topRight());
+        this->setVertex(3, rect.topLeft());        
       }
 
       void updateSize(const math::Vec2& newSize)

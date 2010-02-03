@@ -5,6 +5,8 @@ namespace lost
 namespace gl
 {
 
+using namespace math;
+
 HybridVertexBuffer::HybridVertexBuffer(const BufferLayout& inLayout)
 {
   hostBuffer.reset(new HostBuffer(inLayout));
@@ -70,9 +72,22 @@ void HybridVertexBuffer::set(uint32_t idx, UsageType ut, const lost::common::Col
   dirty = true;
 }
 
+Vec2 HybridVertexBuffer::getAsVec2(uint32_t idx, UsageType ut)
+{
+  return hostBuffer->getAsVec2(idx, ut);
+}
+
 void HybridVertexBuffer::upload()
 {
-  // FIXME: upload partition data to corresponding vertex buffers
+  for(uint32_t i=0; i<hostBuffer->partitions.size(); ++i)
+  {
+    VertexBuffer* vb = vertexBuffers[i].get();
+    vb->bind();
+    vb->bufferData(vb->target, 
+                  hostBuffer->count*hostBuffer->layout.partitionSize(i), 
+                  hostBuffer->partitions[i],
+                  GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
+  }
   dirty = false;
 }
 

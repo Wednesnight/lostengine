@@ -161,6 +161,11 @@ namespace lost
         _vertexBuffer->set(idx, gl::UT_texcoord0, val);
       }
       
+      math::Vec2 getVertex(uint32_t idx)
+      {
+        return _vertexBuffer->getAsVec2(idx, gl::UT_vertex);
+      }
+      
       typedef IT IndexType;
       typedef VT VertexType;
       typedef NT NormalType;
