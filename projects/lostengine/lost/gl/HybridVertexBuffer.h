@@ -28,6 +28,8 @@ struct HybridVertexBuffer
   void set(uint32_t idx, UsageType ut, const lost::math::Vec4& val);
   void set(uint32_t idx, UsageType ut, const lost::common::Color& val);  
   
+  math::Vec2 getAsVec2(uint32_t idx, UsageType ut);
+  
   void upload();
   
   bool dirty;

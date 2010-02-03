@@ -43,7 +43,11 @@ void HybridIndexBuffer::set(uint32_t idx, UsageType ut, uint32_t val)
 
 void HybridIndexBuffer::upload()
 {
-  // FIXME: upload data to corresponding gpu buffer
+  indexBuffer->bind();
+  indexBuffer->bufferData(indexBuffer->target, 
+                          hostBuffer->count*hostBuffer->layout.partitionSize(0),// indexbuffer only ever has one partition
+                          hostBuffer->partitions[0],
+                          GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
   dirty = false;
 }
 
