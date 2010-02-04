@@ -28,14 +28,8 @@ namespace lost
         this->_vertexBuffer->reset(numVertices);
         this->_indexBuffer->reset(numIndices);
         
-        this->vertices(true);
-        this->indices(true);
-        this->resetVertices(numVertices);
-        this->resetIndices(numIndices);
         this->createVertices(rect);
         this->createIndices();
-        this->transferVertices();
-        this->transferIndices();
         this->transform = math::MatrixTranslation(math::Vec3(rect.x, rect.y, 0));
       }
 
@@ -43,11 +37,6 @@ namespace lost
       {
         if (RectType == GL_LINE_LOOP)
         {
-/*          this->indexData[0] = 0;
-          this->indexData[1] = 1;
-          this->indexData[2] = 2;
-          this->indexData[3] = 3;*/
-          
           this->setIndex(0,0);
           this->setIndex(1,1);
           this->setIndex(2,2);
@@ -55,11 +44,6 @@ namespace lost
         }
         else if (RectType == GL_TRIANGLE_STRIP)
         {
-/*          this->indexData[0] = 3;
-          this->indexData[1] = 0;
-          this->indexData[2] = 2;
-          this->indexData[3] = 1;*/
-
           this->setIndex(0,3);
           this->setIndex(1,0);
           this->setIndex(2,2);
@@ -69,12 +53,7 @@ namespace lost
 
       void createVertices(const math::Rect& r)
       {
-        math::Rect rect(0,0,r.width, r.height);
-/*        this->vertexData[0] = rect.bottomLeft();
-        this->vertexData[1] = rect.bottomRight();
-        this->vertexData[2] = rect.topRight();
-        this->vertexData[3] = rect.topLeft();*/
-        
+        math::Rect rect(0,0,r.width, r.height);        
         this->setVertex(0, rect.bottomLeft());
         this->setVertex(1, rect.bottomRight());
         this->setVertex(2, rect.topRight());
@@ -84,7 +63,6 @@ namespace lost
       void updateSize(const math::Vec2& newSize)
       {
         this->createVertices(math::Rect(0,0,newSize.x, newSize.y));
-        this->transferVertices();
       }
 
       static lost::shared_ptr<Rectangle<MESHTYPE, RectType> > create(const math::Rect& rect)
