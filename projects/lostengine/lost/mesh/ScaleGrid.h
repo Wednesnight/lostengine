@@ -52,16 +52,6 @@ struct ScaleGrid : public MESHTYPE
 
     this->material->textures.push_back(tex);
 
-    // activate the mesh features we need
-    this->indices(true);
-    this->vertices(true);
-    this->texCoords(true);
-
-    // reserve host memory for data preparation
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
-    this->resetTexCoords(numTexCoords);
-
     // vertices are created in this order:
     // 0  1  2  3
     // 4  5  6  7
@@ -194,10 +184,6 @@ struct ScaleGrid : public MESHTYPE
     this->setIndex(51, 14);
     this->setIndex(52, 15);
     this->setIndex(53, 11);
-
-    this->transferVertices();
-    this->transferIndices();
-    this->transferTexCoords();
   }
   
   void createVertices(const math::Vec2& inSize,
@@ -236,7 +222,6 @@ struct ScaleGrid : public MESHTYPE
                       float bottom)
   {
     this->createVertices(inSize, left, right, top, bottom);
-    this->transferVertices();
   }
 
   static lost::shared_ptr<ScaleGrid<MESHTYPE> > create(gl::TexturePtr tex,

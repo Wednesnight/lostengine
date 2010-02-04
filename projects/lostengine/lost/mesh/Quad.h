@@ -44,14 +44,8 @@ struct Quad : public MESHTYPE
     this->_vertexBuffer->reset(numVertices);
     this->_indexBuffer->reset(numIndices);
     
-    this->indices(true);
-    this->vertices(true);
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
     createIndices(0);
     createVertices(0,inRect);
-    this->transferIndices();
-    this->transferVertices();
   }
   
   // tries to build a texture from the provided file data and 
@@ -73,23 +67,13 @@ struct Quad : public MESHTYPE
     boost::uint32_t numQuads = 1;
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
-    boost::uint32_t numTexCoords = numVertices;
     
     this->_vertexBuffer->reset(numVertices);
     this->_indexBuffer->reset(numIndices);
     
-    this->indices(true);
-    this->vertices(true);
-    this->texCoords(true);
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
-    this->resetTexCoords(numTexCoords);
     createIndices(0);
     createVertices(0, rect);
     createTexCoords(0,flip);
-    this->transferVertices();
-    this->transferIndices();
-    this->transferTexCoords();
   }
   
   Quad(gl::TexturePtr tex, bool flip=true)
@@ -105,23 +89,13 @@ struct Quad : public MESHTYPE
     boost::uint32_t numQuads = 1;
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
-    boost::uint32_t numTexCoords = numVertices;
 
     this->_vertexBuffer->reset(numVertices);
     this->_indexBuffer->reset(numIndices);
 
-    this->indices(true);
-    this->vertices(true);
-    this->texCoords(true);
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
-    this->resetTexCoords(numTexCoords);
     createIndices(0);
     createVertices(0, rect);
     createTexCoords(0,flip);    
-    this->transferIndices();
-    this->transferVertices();
-    this->transferTexCoords();    
   }
   
   // creates a group of independent rects, all inside one mesh
@@ -139,17 +113,11 @@ struct Quad : public MESHTYPE
     this->_vertexBuffer->reset(numVertices);
     this->_indexBuffer->reset(numIndices);
 
-    this->indices(true);
-    this->vertices(true);
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
     for(boost::uint32_t i=0; i<numQuads; ++i)
     {
       createIndices(i);
       createVertices(i,rects[i]);
     }
-    this->transferIndices();
-    this->transferVertices();
   }
   
   // tries to create rects.size() number of quads, texturing them with tex, using the provided 
@@ -184,26 +152,16 @@ struct Quad : public MESHTYPE
     boost::uint32_t numQuads = rects.size();
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
-    boost::uint32_t numTexCoords = numVertices;
     
     this->_vertexBuffer->reset(numVertices);
     this->_indexBuffer->reset(numIndices);
     
-    this->indices(true);
-    this->vertices(true);
-    this->texCoords(true);
-    this->resetIndices(numIndices);
-    this->resetVertices(numVertices);
-    this->resetTexCoords(numTexCoords);
     for(boost::uint32_t i=0; i<numQuads; ++i)
     {
       createIndices(i);
       createVertices(i, rects[i]);
       createTexCoords(i, 0, pixelCoords[i], flip);
     }
-    this->transferIndices();
-    this->transferVertices();
-    this->transferTexCoords();        
   }
   
   static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
@@ -231,22 +189,9 @@ struct Quad : public MESHTYPE
   
   void createVertices(boost::uint32_t quadNum, const math::Rect& inRect)
   {
-//    VertexType* vtx = this->vertexData.get();
     boost::uint32_t verticesPerQuad = 4;
     boost::uint32_t offset = quadNum*verticesPerQuad;
-  
-/*    vtx[offset+0].x = inRect.x;
-    vtx[offset+0].y = inRect.y;
-    
-    vtx[offset+1].x = inRect.x+inRect.width;
-    vtx[offset+1].y = inRect.y;
-
-    vtx[offset+2].x = inRect.x+inRect.width;
-    vtx[offset+2].y = inRect.y+inRect.height;
-
-    vtx[offset+3].x = inRect.x;
-    vtx[offset+3].y = inRect.y+inRect.height;    */
-    
+      
     this->setVertex(offset+0,math::Vec2(inRect.x,inRect.y));
     this->setVertex(offset+1,math::Vec2(inRect.x+inRect.width,inRect.y));
     this->setVertex(offset+2,math::Vec2(inRect.x+inRect.width,inRect.y+inRect.height));
@@ -257,7 +202,6 @@ struct Quad : public MESHTYPE
   {
     math::Rect rect(0, 0, size.width, size.height);
     createVertices(0, rect);
-    this->transferVertices();
   }
 
   // recalculates the texture coordinates for a given quad and texture 0 so the textures data stretechs over the
@@ -294,24 +238,11 @@ struct Quad : public MESHTYPE
     math::Vec2 bl = tex->normalisedCoord(pixelRect.bottomLeft());
     math::Vec2 tr = tex->normalisedCoord(math::Vec2(pixelRect.x+pixelRect.width, pixelRect.y+pixelRect.height)/*pixelRect.topRight()*/);
     
-//    TexCoordType* texcoords = this->texCoordData.get();
     const boost::uint32_t texCoordsPerQuad = 4; 
     boost::uint32_t offset = texCoordsPerQuad*quadNum;
     
     if(flip)
     {
-/*      texcoords[offset+0].x = bl.x;
-      texcoords[offset+0].y = tr.y;
-
-      texcoords[offset+1].x = tr.x;
-      texcoords[offset+1].y = tr.y;
-
-      texcoords[offset+2].x = tr.x;
-      texcoords[offset+2].y = bl.y;
-
-      texcoords[offset+3].x = bl.x;
-      texcoords[offset+3].y = bl.y;*/
-
       this->setTexCoord(offset+0, math::Vec2(bl.x,tr.y));
       this->setTexCoord(offset+1, math::Vec2(tr.x,tr.y));
       this->setTexCoord(offset+2, math::Vec2(tr.x,bl.y));
@@ -319,18 +250,6 @@ struct Quad : public MESHTYPE
     }
     else
     {
-/*      texcoords[offset+0].x = bl.x;
-      texcoords[offset+0].y = bl.y;
-
-      texcoords[offset+1].x = tr.x;
-      texcoords[offset+1].y = bl.y;
-
-      texcoords[offset+2].x = tr.x;
-      texcoords[offset+2].y = tr.y;
-
-      texcoords[offset+3].x = bl.x;
-      texcoords[offset+3].y = tr.y;        */
-
       this->setTexCoord(offset+0, math::Vec2(bl.x,bl.y));
       this->setTexCoord(offset+1, math::Vec2(tr.x,bl.y));
       this->setTexCoord(offset+2, math::Vec2(tr.x,tr.y));

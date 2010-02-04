@@ -289,71 +289,14 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       shader(mat->shader);
     }
-    
-    void Context::drawSeparateBuffers(MeshPtr mesh)
-    {
-      gl::Buffer* ib = mesh->getIndexBuffer();
-      gl::Buffer* vb = mesh->getVertexBuffer();
-      gl::Buffer* nb = mesh->getNormalBuffer();
-      gl::Buffer* cb = mesh->getColorBuffer();
-      gl::Buffer* tcb = mesh->getTexCoordBuffer();
-      
-      vertexArray(true);
-      vb->bindVertexPointer();
-      if(nb)
-      {
-        normalArray(true);
-        nb->bindNormalPointer();
-      }
-      else
-      {
-        normalArray(false);
-      }
-      
-      if(cb)
-      {
-        colorArray(true);
-        cb->bindColorPointer();
-      }
-      else
-      {
-        colorArray(false);
-      }
-      
-      if(tcb)
-      {
-        texCoordArray(true);
-        tcb->bindTexCoordPointer();
-      }
-      else
-      {
-        texCoordArray(false);
-      }
-      
-      if(mesh->material)
-        material(mesh->material);
-      
-      transform(mesh->transform);
-      if (ib)
-      {
-        indexArray(true);
-        ib->bind();
-        ib->drawElements(mesh->drawMode);
-      }
-      else
-      {
-        indexArray(false);
-        vb->drawArrays(mesh->drawMode);
-      }    
-    }
-    
-    void Context::drawInterleavedBuffers(MeshPtr mesh)
+        
+    void Context::draw(MeshPtr mesh)
     {
       HybridIndexBuffer* ib = mesh->_indexBuffer.get();
       HybridVertexBuffer* vb = mesh->_vertexBuffer.get();
 
-      if(ib->dirty) {ib->upload();DOUT("uploaded vtx");}
-      if(vb->dirty) {vb->upload();DOUT("uploaded idx")}
+      if(ib->dirty) {ib->upload();}
+      if(vb->dirty) {vb->upload();}
 
       VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_vertex);
       bind(gpuBuffer);
@@ -422,12 +365,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       transform(mesh->transform);
       bind(ib->indexBuffer.get());
       glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
-    }
-    
-    void Context::draw(MeshPtr mesh)
-    {
-//      drawSeparateBuffers(mesh);
-      drawInterleavedBuffers(mesh);
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it

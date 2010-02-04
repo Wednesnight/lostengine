@@ -37,6 +37,26 @@ namespace lost
 //        DOUT("creating mesh");
       }
 
+      void setIndex(uint32_t idx, uint32_t val)
+      {
+        _indexBuffer->set(idx, gl::UT_index, val);
+      }
+      
+      void setVertex(uint32_t idx, const math::Vec2& val)
+      {
+        _vertexBuffer->set(idx, gl::UT_vertex, val);
+      }
+      
+      void setTexCoord(uint32_t idx, const math::Vec2& val)
+      {
+        _vertexBuffer->set(idx, gl::UT_texcoord0, val);
+      }
+      
+      math::Vec2 getVertex(uint32_t idx)
+      {
+        return _vertexBuffer->getAsVec2(idx, gl::UT_vertex);
+      }
+
       virtual ~Mesh() { /*DOUT("destroying mesh");*/ }
       
       virtual gl::Buffer* getIndexBuffer() { return NULL; };
@@ -140,31 +160,6 @@ namespace lost
       gl::Buffer* getColorBuffer() { return colorBuffer.get(); };
       gl::Buffer* getTexCoordBuffer() {return texCoordBuffer.get(); };  
       
-      void setIndex(uint32_t idx, uint32_t val)
-      {
-        IndexType* p = this->indexData.get();
-        p[idx] = val;
-        _indexBuffer->set(idx, gl::UT_index, val);
-      }
-      
-      void setVertex(uint32_t idx, const math::Vec2& val)
-      {
-        VertexType* vtx = this->vertexData.get();
-        vtx[idx] = val;
-        _vertexBuffer->set(idx, gl::UT_vertex, val);
-      }
-      
-      void setTexCoord(uint32_t idx, const math::Vec2& val)
-      {
-        TexCoordType* texcoords = this->texCoordData.get();
-        texcoords[idx] = val;
-        _vertexBuffer->set(idx, gl::UT_texcoord0, val);
-      }
-      
-      math::Vec2 getVertex(uint32_t idx)
-      {
-        return _vertexBuffer->getAsVec2(idx, gl::UT_vertex);
-      }
       
       typedef IT IndexType;
       typedef VT VertexType;
