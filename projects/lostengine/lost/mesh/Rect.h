@@ -9,12 +9,9 @@ namespace lost
   namespace mesh
   {
 
-    template<typename MESHTYPE, GLenum RectType>
-    struct Rectangle : public MESHTYPE
+    template<GLenum RectType>
+    struct Rectangle : public Mesh
     {
-      typedef typename MESHTYPE::VertexType VertexType;
-      typedef typename MESHTYPE::IndexType IndexType;
-
       Rectangle(const math::Rect& rect)
       {
         gl::BufferLayout layout;
@@ -65,18 +62,18 @@ namespace lost
         this->createVertices(math::Rect(0,0,newSize.x, newSize.y));
       }
 
-      static lost::shared_ptr<Rectangle<MESHTYPE, RectType> > create(const math::Rect& rect)
+      static lost::shared_ptr<Rectangle<RectType> > create(const math::Rect& rect)
       {
-        return lost::shared_ptr<Rectangle<MESHTYPE, RectType> >(new Rectangle<MESHTYPE, RectType>(rect));
+        return lost::shared_ptr<Rectangle<RectType> >(new Rectangle<RectType>(rect));
       }
 
     };
 
-    typedef Rectangle<Mesh2D, GL_LINE_LOOP> Rect2D;
-    typedef lost::shared_ptr<Rect2D> Rect2DPtr;
+    typedef Rectangle<GL_LINE_LOOP> Rect;
+    typedef lost::shared_ptr<Rect> RectPtr;
 
-    typedef Rectangle<Mesh2D, GL_TRIANGLE_STRIP> FilledRect2D;
-    typedef lost::shared_ptr<FilledRect2D> FilledRect2DPtr;
+    typedef Rectangle<GL_TRIANGLE_STRIP> FilledRect;
+    typedef lost::shared_ptr<FilledRect> FilledRectPtr;
 
 
 

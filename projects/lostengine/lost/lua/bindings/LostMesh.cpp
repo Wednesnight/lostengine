@@ -40,19 +40,19 @@ namespace lost
       [
         namespace_("mesh")
         [
-          class_<Rect2D, Mesh>("Rect2D")
-            .def("updateSize", &Rect2D::updateSize)
+          class_<Rect, Mesh>("Rect")
+            .def("updateSize", &mesh::Rect::updateSize)
             .scope
             [
-              def("create", &Rect2D::create)
+              def("create", &mesh::Rect::create)
             ]
-/*            ,
-          class_<FilledRect2D, Mesh>("FilledRect2D")
+            ,
+          class_<FilledRect, Mesh>("FilledRect")
             .scope
             [
-              def("create", &FilledRect2D::create)
-            ],
-          class_<RoundedRect2D, Mesh>("RoundedRect2D")
+              def("create", &FilledRect::create)
+            ]
+/*          class_<RoundedRect2D, Mesh>("RoundedRect2D")
             .scope
             [
               def("create", &RoundedRect2D::create)
@@ -146,43 +146,41 @@ namespace lost
           class_<Mesh>("Mesh")
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("transform", &Mesh::transform)
-            .def_readwrite("drawMode", &Mesh::drawMode),
-          class_<Mesh2D, Mesh>("Mesh2D"),
-         class_<Mesh3D, Mesh>("Mesh3D")
+            .def_readwrite("drawMode", &Mesh::drawMode)
         ]
       ];
     }
 
-    void LostMeshQuad2D(lua_State* state)
+    void LostMeshQuad(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("mesh")
         [
-          class_<Quad2D, Mesh>("Quad2D")
-            .def("updateSize", &Quad2D::updateSize)
+          class_<Quad, Mesh>("Quad")
+            .def("updateSize", &Quad::updateSize)
             .scope
             [
-              def("create", (Quad2DPtr(*)()) &Quad2D::create),
-              def("create", (Quad2DPtr(*)(const math::Rect& inRect)) &Quad2D::create),
-              def("create", (Quad2DPtr(*)(common::DataPtr data, bool)) &Quad2D::create),
-              def("create", (Quad2DPtr(*)(gl::TexturePtr tex, bool)) &Quad2D::create)
+              def("create", (QuadPtr(*)()) &Quad::create),
+              def("create", (QuadPtr(*)(const math::Rect& inRect)) &Quad::create),
+              def("create", (QuadPtr(*)(common::DataPtr data, bool)) &Quad::create),
+              def("create", (QuadPtr(*)(gl::TexturePtr tex, bool)) &Quad::create)
             ]
         ]
       ];
     }
 
-    void LostMeshScaleGrid2D(lua_State* state)
+    void LostMeshScaleGrid(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("mesh")
         [
-          class_<ScaleGrid2D, Mesh>("ScaleGrid2D")
-          .def("updateSize", &ScaleGrid2D::updateSize)
+          class_<ScaleGrid, Mesh>("ScaleGrid")
+          .def("updateSize", &ScaleGrid::updateSize)
           .scope
           [
-            def("create", &ScaleGrid2D::create)            
+            def("create", &ScaleGrid::create)            
           ]
         ]
       ];
@@ -197,8 +195,8 @@ namespace lost
 //      LostMeshCircular(state);
       LostMeshLoader(state);
       LostMeshMaterial(state);
-      LostMeshQuad2D(state);
-      LostMeshScaleGrid2D(state);
+      LostMeshQuad(state);
+      LostMeshScaleGrid(state);
     }
 
   }

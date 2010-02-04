@@ -17,11 +17,11 @@ function Mesh:applyMaterial(target, def)
 end
 
 -- create a line by specifying start/end Vec2
-function Mesh:Line2D(def)
+function Mesh:Line(def)
   local pointStart = def["start"]
   local pointEnd = def["finish"]
   
-  result = lost.mesh.Line2D.create(pointStart, pointEnd)
+  result = lost.mesh.Line.create(pointStart, pointEnd)
 
   self:applyMaterial(result, def)
   return result
@@ -40,7 +40,7 @@ end
 
 -- create a quad by specifying texture
 -- specifying an additional Vec2 size parameter resizes the quad to the given extents
-function Mesh:Quad2D(def)
+function Mesh:Quad(def)
   local size = def["size"]
   local rect = def["rect"]
   local flip = nil
@@ -56,11 +56,11 @@ function Mesh:Quad2D(def)
   
   -- create an instance depending on parameterization
   if filename ~= nil then
-    result = lost.mesh.Quad2D.create(self.loader:load(filename), flip)
+    result = lost.mesh.Quad.create(self.loader:load(filename), flip)
   elseif tex ~= nil then 
-    result = lost.mesh.Quad2D.create(tex, flip)
+    result = lost.mesh.Quad.create(tex, flip)
   elseif rect ~= nil then
-    result = lost.mesh.Quad2D.create(rect)
+    result = lost.mesh.Quad.create(rect)
   else
     error("must specify at least one of [filename|tex|rect] for creation of quad")
   end
@@ -76,7 +76,7 @@ function Mesh:Quad2D(def)
   return result
 end
 
-function Mesh:ScaleGrid2D(def)
+function Mesh:ScaleGrid(def)
   if def.texture == nil then error("needs texture", 2) end
   if def.rect == nil then error("needs rect",2) end
   if def.left == nil then error("needs left",2) end
@@ -86,7 +86,7 @@ function Mesh:ScaleGrid2D(def)
   local flip = false
   if def.flip ~= nil then flip = def.flip end
 
-  local result = lost.mesh.ScaleGrid2D.create(def.texture, def.rect, def.left, def.right, def.top, def.bottom, flip)
+  local result = lost.mesh.ScaleGrid.create(def.texture, def.rect, def.left, def.right, def.top, def.bottom, flip)
   if def.transform ~= nil then
     result.transform = def.transform
   end

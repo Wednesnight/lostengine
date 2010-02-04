@@ -8,6 +8,9 @@ namespace lost
 namespace mesh
 {
 
+struct ScaleGrid;
+typedef lost::shared_ptr<ScaleGrid> ScaleGridPtr;
+
 /** A ScaleGrid is basically a 2D Quad comprised of a connected 3x3 quad matrix.
  * The corners defined by the left/right/top/bottom parameters are not scaled. Everything else is.
  * The outline of the 3x3 quads will be blown up to match the size of the provided rect.
@@ -17,11 +20,8 @@ namespace mesh
  * l,r,t,b are cap sizes in pixels.
  * 0,0 is the bottom left corner.
  */
-template<typename MESHTYPE>
-struct ScaleGrid : public MESHTYPE
+struct ScaleGrid : public Mesh
 {
-  typedef typename MESHTYPE::VertexType VertexType;
-
   boost::uint32_t numVertices;
   boost::uint32_t numIndices;
   boost::uint32_t numTexCoords;
@@ -70,54 +70,54 @@ struct ScaleGrid : public MESHTYPE
   
     if(flip)
     {
-      this->setTexCoord(0, tex->normalisedCoord(VertexType(0,0)));
-      this->setTexCoord(1, tex->normalisedCoord(VertexType(left, 0)));
-      this->setTexCoord(2, tex->normalisedCoord(VertexType(tw-right, 0)));
-      this->setTexCoord(3, tex->normalisedCoord(VertexType(tw, 0)));
+      this->setTexCoord(0, tex->normalisedCoord(math::Vec2(0,0)));
+      this->setTexCoord(1, tex->normalisedCoord(math::Vec2(left, 0)));
+      this->setTexCoord(2, tex->normalisedCoord(math::Vec2(tw-right, 0)));
+      this->setTexCoord(3, tex->normalisedCoord(math::Vec2(tw, 0)));
       
-      this->setTexCoord(4, tex->normalisedCoord(VertexType(0,bottom)));
-      this->setTexCoord(5, tex->normalisedCoord(VertexType(left,bottom)));
-      this->setTexCoord(6, tex->normalisedCoord(VertexType(tw-right,bottom)));
-      this->setTexCoord(7, tex->normalisedCoord(VertexType(tw,bottom)));
+      this->setTexCoord(4, tex->normalisedCoord(math::Vec2(0,bottom)));
+      this->setTexCoord(5, tex->normalisedCoord(math::Vec2(left,bottom)));
+      this->setTexCoord(6, tex->normalisedCoord(math::Vec2(tw-right,bottom)));
+      this->setTexCoord(7, tex->normalisedCoord(math::Vec2(tw,bottom)));
       
-      this->setTexCoord(8, tex->normalisedCoord(VertexType(0,th-top)));
-      this->setTexCoord(9, tex->normalisedCoord(VertexType(left,th-top)));
-      this->setTexCoord(10, tex->normalisedCoord(VertexType(tw-right, th-top)));
-      this->setTexCoord(11, tex->normalisedCoord(VertexType(tw, th-top)));
+      this->setTexCoord(8, tex->normalisedCoord(math::Vec2(0,th-top)));
+      this->setTexCoord(9, tex->normalisedCoord(math::Vec2(left,th-top)));
+      this->setTexCoord(10, tex->normalisedCoord(math::Vec2(tw-right, th-top)));
+      this->setTexCoord(11, tex->normalisedCoord(math::Vec2(tw, th-top)));
       
-      this->setTexCoord(12, tex->normalisedCoord(VertexType(0,th)));
-      this->setTexCoord(13, tex->normalisedCoord(VertexType(left,th)));
-      this->setTexCoord(14, tex->normalisedCoord(VertexType(tw-right,th)));
-      this->setTexCoord(15, tex->normalisedCoord(VertexType(tw, th)));
+      this->setTexCoord(12, tex->normalisedCoord(math::Vec2(0,th)));
+      this->setTexCoord(13, tex->normalisedCoord(math::Vec2(left,th)));
+      this->setTexCoord(14, tex->normalisedCoord(math::Vec2(tw-right,th)));
+      this->setTexCoord(15, tex->normalisedCoord(math::Vec2(tw, th)));
     }
     else
     {
-      this->setTexCoord(0, tex->normalisedCoord(VertexType(0,th)));
-      this->setTexCoord(1, tex->normalisedCoord(VertexType(left, th)));
-      this->setTexCoord(2, tex->normalisedCoord(VertexType(tw-right, th)));
-      this->setTexCoord(3, tex->normalisedCoord(VertexType(tw, th)));
+      this->setTexCoord(0, tex->normalisedCoord(math::Vec2(0,th)));
+      this->setTexCoord(1, tex->normalisedCoord(math::Vec2(left, th)));
+      this->setTexCoord(2, tex->normalisedCoord(math::Vec2(tw-right, th)));
+      this->setTexCoord(3, tex->normalisedCoord(math::Vec2(tw, th)));
       
-      this->setTexCoord(4, tex->normalisedCoord(VertexType(0,th-top)));
-      this->setTexCoord(5, tex->normalisedCoord(VertexType(left,th-top)));
-      this->setTexCoord(6, tex->normalisedCoord(VertexType(tw-right, th-top)));
-      this->setTexCoord(7, tex->normalisedCoord(VertexType(tw, th-top)));
+      this->setTexCoord(4, tex->normalisedCoord(math::Vec2(0,th-top)));
+      this->setTexCoord(5, tex->normalisedCoord(math::Vec2(left,th-top)));
+      this->setTexCoord(6, tex->normalisedCoord(math::Vec2(tw-right, th-top)));
+      this->setTexCoord(7, tex->normalisedCoord(math::Vec2(tw, th-top)));
       
-      this->setTexCoord(8, tex->normalisedCoord(VertexType(0,bottom)));
-      this->setTexCoord(9, tex->normalisedCoord(VertexType(left,bottom)));
-      this->setTexCoord(10, tex->normalisedCoord(VertexType(tw-right, bottom)));
-      this->setTexCoord(11, tex->normalisedCoord(VertexType(tw, bottom)));
+      this->setTexCoord(8, tex->normalisedCoord(math::Vec2(0,bottom)));
+      this->setTexCoord(9, tex->normalisedCoord(math::Vec2(left,bottom)));
+      this->setTexCoord(10, tex->normalisedCoord(math::Vec2(tw-right, bottom)));
+      this->setTexCoord(11, tex->normalisedCoord(math::Vec2(tw, bottom)));
       
-      this->setTexCoord(12, tex->normalisedCoord(VertexType(0,0)));
-      this->setTexCoord(13, tex->normalisedCoord(VertexType(left,0)));
-      this->setTexCoord(14, tex->normalisedCoord(VertexType(tw-right,0)));
-      this->setTexCoord(15, tex->normalisedCoord(VertexType(tw, 0)));
+      this->setTexCoord(12, tex->normalisedCoord(math::Vec2(0,0)));
+      this->setTexCoord(13, tex->normalisedCoord(math::Vec2(left,0)));
+      this->setTexCoord(14, tex->normalisedCoord(math::Vec2(tw-right,0)));
+      this->setTexCoord(15, tex->normalisedCoord(math::Vec2(tw, 0)));
     }
     
     
     // and since the input rect defines the geometry and we built it zero based up to here,
     // we need to add the origin of the input rect to all previously calculated vertices
     // to achieve the final geometry
-    VertexType origin(rect.bottomLeft()); 
+    math::Vec2 origin(rect.bottomLeft()); 
     for(uint32_t i=0; i<numVertices; ++i)
     {
       this->setVertex(i, this->getVertex(i) + origin);
@@ -194,25 +194,25 @@ struct ScaleGrid : public MESHTYPE
   {
     float w = inSize.x;
     float h = inSize.y;
-    this->setVertex(0, VertexType(0,h));
-    this->setVertex(1, VertexType(left, h));
-    this->setVertex(2, VertexType(w-right, h));
-    this->setVertex(3, VertexType(w,h));
+    this->setVertex(0, math::Vec2(0,h));
+    this->setVertex(1, math::Vec2(left, h));
+    this->setVertex(2, math::Vec2(w-right, h));
+    this->setVertex(3, math::Vec2(w,h));
     
-    this->setVertex(4, VertexType(0, h-top));
-    this->setVertex(5, VertexType(left, h-top));
-    this->setVertex(6, VertexType(w-right, h-top));
-    this->setVertex(7, VertexType(w, h-top));
+    this->setVertex(4, math::Vec2(0, h-top));
+    this->setVertex(5, math::Vec2(left, h-top));
+    this->setVertex(6, math::Vec2(w-right, h-top));
+    this->setVertex(7, math::Vec2(w, h-top));
 
-    this->setVertex(8, VertexType(0, bottom));
-    this->setVertex(9, VertexType(left, bottom));
-    this->setVertex(10, VertexType(w-right, bottom));
-    this->setVertex(11, VertexType(w, bottom));
+    this->setVertex(8, math::Vec2(0, bottom));
+    this->setVertex(9, math::Vec2(left, bottom));
+    this->setVertex(10, math::Vec2(w-right, bottom));
+    this->setVertex(11, math::Vec2(w, bottom));
 
-    this->setVertex(12, VertexType(0,0));
-    this->setVertex(13, VertexType(left, 0));
-    this->setVertex(14, VertexType(w-right, 0));
-    this->setVertex(15, VertexType(w,0));  
+    this->setVertex(12, math::Vec2(0,0));
+    this->setVertex(13, math::Vec2(left, 0));
+    this->setVertex(14, math::Vec2(w-right, 0));
+    this->setVertex(15, math::Vec2(w,0));  
   }
 
   void updateSize(const math::Vec2& inSize,
@@ -224,20 +224,17 @@ struct ScaleGrid : public MESHTYPE
     this->createVertices(inSize, left, right, top, bottom);
   }
 
-  static lost::shared_ptr<ScaleGrid<MESHTYPE> > create(gl::TexturePtr tex,
-                                                       const math::Rect& rect,
-                                                       float left,
-                                                       float right,
-                                                       float top,
-                                                       float bottom,
-                                                       bool flip)
+  static ScaleGridPtr create(gl::TexturePtr tex,
+                             const math::Rect& rect,
+                             float left,
+                             float right,
+                             float top,
+                             float bottom,
+                             bool flip)
   {
-    return lost::shared_ptr<ScaleGrid<MESHTYPE> >(new ScaleGrid<MESHTYPE>(tex, rect, left, right, top, bottom, flip));
+    return ScaleGridPtr(new ScaleGrid(tex, rect, left, right, top, bottom, flip));
   }
 };
-
-typedef ScaleGrid<Mesh2D> ScaleGrid2D;
-typedef lost::shared_ptr<ScaleGrid2D> ScaleGrid2DPtr;
 
 }
 }

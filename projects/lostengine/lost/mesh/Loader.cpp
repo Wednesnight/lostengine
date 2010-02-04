@@ -20,9 +20,6 @@ namespace lost
   namespace mesh
   {
 
-    /**
-     * spirit actions for OBJ parsing
-     */
     struct OBJActions
     {
       template <typename Type>
@@ -46,32 +43,17 @@ namespace lost
       };
     };
 
-    /**
-     * load obj model from fileName through loader, returns lost::mesh::MeshPtr
-     */
     MeshPtr Loader::obj(common::DataPtr objFile)
     {
-      unsigned int vtxCount = 0;
+      MeshPtr mesh(new Mesh);
+/*      unsigned int vtxCount = 0;
       unsigned int nrmCount = 0;
       unsigned int idxCount = 0;
-      /**
-       * init resulting mesh
-       */
-      Mesh3DPtr mesh(new Mesh3D);
 
-      /**
-       * init obj data
-       */
       std::string objData = objFile->str();
 
-      /**
-       * general spirit rules
-       */
       rule<> unknown_p = *(anychar_p - eol_p) >> eol_p;
 
-      /**
-       * count vertices
-       */
       unsigned int vertexCount = 0;
       rule<> realTriple =  real_p >> +space_p >> real_p >> +space_p >> real_p;
       rule<> optionalReal = !(+space_p >> real_p);
@@ -80,16 +62,10 @@ namespace lost
                               eol_p)[increment_a(vertexCount)];
       BOOST_SPIRIT_DEBUG_NODE(vertexCount_p);
 
-      /**
-       * count normals
-       */
       unsigned int normalCount = 0;
       rule<> normalCount_p = (str_p("vn") >> +space_p >> *(anychar_p - eol_p) >> eol_p)[increment_a(normalCount)];
       BOOST_SPIRIT_DEBUG_NODE(normalCount_p);
       
-      /**
-       * count indices
-       */
       unsigned int indexCount = 0;
       rule<> indexCount_p = 
         ch_p('f') >> +space_p >> 
@@ -99,60 +75,39 @@ namespace lost
         eol_p;
       BOOST_SPIRIT_DEBUG_NODE(indexCount_p);
       
-      /**
-       * count vertices, normals, indices
-       */
       rule<> count_p = *(vertexCount_p | normalCount_p | indexCount_p | unknown_p);
       BOOST_SPIRIT_DEBUG_NODE(count_p);
 
       if (parse(objData.c_str(), count_p).full)
       {
 #ifdef BOOST_SPIRIT_DEBUG
-        /**
-         * debug output
-         */
         DOUT("vertexCount      : " << vertexCount);
         DOUT("normalCount      : " << normalCount);
         DOUT("indexCount       : " << indexCount);
 #endif
 
-        /**
-         * init data arrays
-         */
         Mesh3D::VertexType* vertices = new Mesh3D::VertexType[vertexCount];
         Mesh3D::NormalType* normals  = new Mesh3D::NormalType[normalCount];
         Mesh3D::IndexType*  indices  = new Mesh3D::IndexType[indexCount];
 
-        /**
-         * load vec3 type
-         */
         Vec3 vec3;
         rule<> vec3_p = 
           real_p[assign_a(vec3.x)] >> +space_p >>
           real_p[assign_a(vec3.y)] >> +space_p >>
           real_p[assign_a(vec3.z)] >> !(+space_p >> real_p) >> *(space_p-eol_p);
 
-        /**
-         * load vertices
-         */
         rule<> vertex_p = 
           ch_p('v') >> +space_p >> 
             vec3_p[OBJActions::SetArray<Mesh3D::VertexType>(vtxCount, vertices, vec3)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(vertex_p);
 
-        /**
-         * load normals
-         */
         rule<> normal_p = 
           str_p("vn") >> +space_p >> 
             vec3_p[OBJActions::SetArray<Mesh3D::NormalType>(nrmCount, normals, vec3)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(normal_p);
 
-        /**
-         * load indices
-         */
         Mesh3D::IndexType index;
         rule<> index_p = int_p[assign_a(index)][decrement_a(index)] >> !('/' >> !(int_p) >> !('/' >> !(int_p)));
         BOOST_SPIRIT_DEBUG_NODE(index_p);
@@ -166,18 +121,12 @@ namespace lost
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(face_p);
         
-        /**
-         * load vec3 type, vertices, normals, indices
-         */
         rule<> assign_p = *(vertex_p | normal_p | face_p | unknown_p);
         BOOST_SPIRIT_DEBUG_NODE(assign_p);
 
         if (parse(objData.c_str(), assign_p).full)
         {
 #ifdef BOOST_SPIRIT_DEBUG
-          /**
-           * debug output
-           */
           DOUT("vertices:");
           for (unsigned int idx = 0; idx < vertexCount; idx++)
             DOUT(vertices[idx]);
@@ -189,23 +138,14 @@ namespace lost
             DOUT(indices[idx]);
 #endif
 
-          /**
-           * init drawing mode
-           */
           mesh->drawMode = GL_TRIANGLES;
 
-          /**
-           * set mesh vertices
-           */
           if (vertexCount)
           {
             mesh->vertices(true);
             mesh->vertexBuffer->bindBufferData(vertices, vertexCount);
           }
 
-          /**
-           * set mesh normals
-           */
           if (normalCount)
           {
             mesh->normals(true);
@@ -245,9 +185,6 @@ namespace lost
             mesh->normalBuffer->bindBufferData(vertexNormals, vertexCount);
           }
 
-          /**
-           * set mesh indices
-           */
           if (indexCount)
           {
             mesh->indices(true);
@@ -258,7 +195,7 @@ namespace lost
         delete normals;
         delete vertices;
       }
-
+      */
       return mesh;
     }
 

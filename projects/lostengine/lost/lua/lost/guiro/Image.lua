@@ -85,12 +85,12 @@ function Image:render()
     -- set to 0 since we move the image through mesh.transform
     gr.x = 0
     gr.y = 0
-    self._textureMesh = lost.mesh.ScaleGrid2D.create(self._texture, gr,
+    self._textureMesh = lost.mesh.ScaleGrid.create(self._texture, gr,
         self._caps.left, self._caps.right, self._caps.top, self._caps.bottom, self._flip)
   else
     -- recreate mesh, we could optimize this to just recreate the texture and attach that to the mesh
     -- but we'll forget that for now
-    self._textureMesh = lost.mesh.Quad2D.create(self._texture, self._flip)
+    self._textureMesh = lost.mesh.Quad.create(self._texture, self._flip)
   end
   
   if self._textureMesh then

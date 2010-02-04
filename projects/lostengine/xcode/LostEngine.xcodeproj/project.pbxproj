@@ -331,9 +331,6 @@
 		3EDEE3B51050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
 		3EDEE3B61050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
 		3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
-		3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
-		3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
-		3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EE13E7D0FA58D6300F2603E /* Meter.cpp */; };
 		8D13D8050FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8060FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
@@ -822,7 +819,6 @@
 		3EB499D50F9FA50600F3036A /* LostGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGL.cpp; path = bindings/LostGL.cpp; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScissorRect.cpp; path = rg/ScissorRect.cpp; sourceTree = "<group>"; };
-		3EE13E7D0FA58D6300F2603E /* Meter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Meter.cpp; path = meter/Meter.cpp; sourceTree = "<group>"; };
 		8D13D8040FD8011A00CEC1AF /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Blend.cpp; path = rg/Blend.cpp; sourceTree = "<group>"; };
 		8D40911A0F89322D00163B63 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		8D5347AC0F558582005C39BF /* Camera3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera3D.cpp; path = camera/Camera3D.cpp; sourceTree = "<group>"; };
@@ -1262,14 +1258,6 @@
 				3E531E600F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp */,
 			);
 			name = "hashlib++";
-			sourceTree = "<group>";
-		};
-		3EE13E7C0FA58D4400F2603E /* meter */ = {
-			isa = PBXGroup;
-			children = (
-				3EE13E7D0FA58D6300F2603E /* Meter.cpp */,
-			);
-			name = meter;
 			sourceTree = "<group>";
 		};
 		8D607ED7104F0A98004818BA /* Resources */ = {
@@ -1767,7 +1755,6 @@
 				EA3B94E30E04639D00B6423B /* lua */,
 				EA3B96730E046C5400B6423B /* math */,
 				EA4F9C110F8B6A5C00967F8D /* mesh */,
-				3EE13E7C0FA58D4400F2603E /* meter */,
 				EA3B94FA0E04639D00B6423B /* platform */,
 				EA26B90B0F91480C00318279 /* resource */,
 				EA8A228B0F87B15400A6EB8B /* rg */,
@@ -2309,7 +2296,6 @@
 				EA8A15310FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A15320FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */,
-				3EE13E7E0FA58D6300F2603E /* Meter.cpp in Sources */,
 				EA7CEB1B0FACC446005F7AAB /* ClearColor.cpp in Sources */,
 				EA7CEB1C0FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB200FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
@@ -2526,7 +2512,6 @@
 				EA8A15290FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152A0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */,
-				3EE13E800FA58D6300F2603E /* Meter.cpp in Sources */,
 				EA7CEB170FACC446005F7AAB /* ClearColor.cpp in Sources */,
 				EA7CEB180FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB1E0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
@@ -2785,7 +2770,6 @@
 				EA8A152D0FA26D7600E42FBE /* Draw.cpp in Sources */,
 				EA8A152E0FA26D7600E42FBE /* DepthTest.cpp in Sources */,
 				EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */,
-				3EE13E7F0FA58D6300F2603E /* Meter.cpp in Sources */,
 				EA7CEB190FACC446005F7AAB /* ClearColor.cpp in Sources */,
 				EA7CEB1A0FACC446005F7AAB /* Clear.cpp in Sources */,
 				EA7CEB1F0FACC451005F7AAB /* DefaultFrameBuffer.cpp in Sources */,
