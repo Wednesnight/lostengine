@@ -7,8 +7,6 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/bitmap/Bitmap.h"
-#include "lost/gl/IndexBuffer.h"
-#include "lost/gl/VertexBuffer.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;

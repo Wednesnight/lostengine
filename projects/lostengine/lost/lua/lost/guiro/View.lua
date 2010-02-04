@@ -96,13 +96,13 @@ function View:constructor()
   self.currentGlobalRect = lost.math.Rect()
 
   -- meshes and draw nodes
-  self.backgroundMesh = lost.mesh.Quad2D.create(self.currentGlobalRect)
+  self.backgroundMesh = lost.mesh.Quad.create(self.currentGlobalRect)
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
-  self.frameMesh = lost.mesh.Rect2D.create(self.currentGlobalRect)
+  self.frameMesh = lost.mesh.Rect.create(self.currentGlobalRect)
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
   self.frameNode.name = "drawViewFrame"

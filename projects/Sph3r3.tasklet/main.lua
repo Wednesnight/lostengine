@@ -51,7 +51,7 @@ function startup(tasklet)
     dcl.rg:Draw
     {
       name = "circle1",
-      mesh = dcl.mesh:Quad2D
+      mesh = dcl.mesh:Quad
       {
         filename = "quad.png", 
         material = 

@@ -14,15 +14,15 @@ namespace lost
     struct RenderedText;
     typedef lost::shared_ptr<RenderedText> RenderedTextPtr;
     
-    struct RenderedText : mesh::Quad2D
+    struct RenderedText : mesh::Quad
     {
-      RenderedText() : mesh::Quad2D()
+      RenderedText() : mesh::Quad()
       {
       }
     
       RenderedText(const std::vector<math::Rect>& rects,
                    gl::TexturePtr tex,
-                   const std::vector<math::Rect>& pixelCoords) : mesh::Quad2D(rects, tex, pixelCoords, false)
+                   const std::vector<math::Rect>& pixelCoords) : mesh::Quad(rects, tex, pixelCoords, false)
       {
       }
       

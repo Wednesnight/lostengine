@@ -13,16 +13,13 @@ namespace lost
 namespace mesh
 {
 
+struct Quad;
+typedef lost::shared_ptr<Quad> QuadPtr;
 // This class, even though it looks relatively flexible, is meant as a simple 2D Quad replacement.
 // it draws a quad with two triangles. Size is derived from a math::Rect. If a texture is provided, 
 // the texture coords are calculated and a buffer created for them.
-template<typename MESHTYPE>
-struct Quad : public MESHTYPE
+struct Quad : public Mesh
 {
-  typedef typename MESHTYPE::VertexType VertexType;
-  typedef typename MESHTYPE::IndexType IndexType;
-  typedef typename MESHTYPE::TexCoordType TexCoordType;
-
   // doesn't create any data or buffers, only a quad with a default drawMode and Material
   Quad()
   {
@@ -164,11 +161,11 @@ struct Quad : public MESHTYPE
     }
   }
   
-  static lost::shared_ptr<Quad<MESHTYPE> > create() { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>()); }
-  static lost::shared_ptr<Quad<MESHTYPE> > create(const math::Rect& inRect) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(inRect)); }
-  static lost::shared_ptr<Quad<MESHTYPE> > create(const std::vector<math::Rect>& rects) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(rects)); }
-  static lost::shared_ptr<Quad<MESHTYPE> > create(common::DataPtr data, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(data, flip)); }
-  static lost::shared_ptr<Quad<MESHTYPE> > create(gl::TexturePtr tex, bool flip=true) { return lost::shared_ptr<Quad<MESHTYPE> >(new Quad<MESHTYPE>(tex, flip)); }
+  static QuadPtr create() { return QuadPtr(new Quad()); }
+  static QuadPtr create(const math::Rect& inRect) { return QuadPtr(new Quad(inRect)); }
+  static QuadPtr create(const std::vector<math::Rect>& rects) { return QuadPtr(new Quad(rects)); }
+  static QuadPtr create(common::DataPtr data, bool flip=true) { return QuadPtr(new Quad(data, flip)); }
+  static QuadPtr create(gl::TexturePtr tex, bool flip=true) { return QuadPtr(new Quad(tex, flip)); }
   
   virtual ~Quad() {}
   
@@ -257,12 +254,6 @@ struct Quad : public MESHTYPE
     }
   }
 };
-
-typedef Quad<Mesh2D> Quad2D;
-typedef lost::shared_ptr<Quad2D> Quad2DPtr;
-typedef Quad<Mesh3D> Quad3D;
-typedef lost::shared_ptr<Quad3D> Quad3DPtr;
-
 }
 }
 
