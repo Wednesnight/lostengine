@@ -40,6 +40,59 @@ uint32_t elementSize(ElementType t)
   return result;
 }
 
+uint32_t numScalarsForElementType(ElementType et)
+{
+  uint32_t result = 0;
+  switch(et)
+  {
+    case ET_u8:result=1;break;
+    case ET_u16:result=1;break;
+    case ET_u32:result=1;break;
+    case ET_f32:result=1;break;
+    case ET_vec2_u8:result=2;break;
+    case ET_vec2_u16:result=2;break;
+    case ET_vec2_u32:result=2;break;
+    case ET_vec2_f32:result=2;break;
+    case ET_vec3_u8:result=3;break;
+    case ET_vec3_u16:result=3;break;
+    case ET_vec3_u32:result=3;break;
+    case ET_vec3_f32:result=3;break;
+    case ET_vec4_u8:result=4;break;
+    case ET_vec4_u16:result=4;break;
+    case ET_vec4_u32:result=4;break;
+    case ET_vec4_f32:result=4;break;
+    case ET_mat4x4_f32:result=16;break;
+  }
+  return result;
+}
+
+GLenum   glScalarTypeForElementType(ElementType et)
+{
+  GLenum result = 0;
+  switch(et)
+  {
+    case ET_u8:result=GL_UNSIGNED_BYTE;break;
+    case ET_u16:result=GL_UNSIGNED_SHORT;break;
+    case ET_u32:result=GL_UNSIGNED_INT;break;
+    case ET_f32:result=GL_FLOAT;break;
+    case ET_vec2_u8:result=GL_UNSIGNED_BYTE;break;
+    case ET_vec2_u16:result=GL_UNSIGNED_SHORT;break;
+    case ET_vec2_u32:result=GL_UNSIGNED_INT;break;
+    case ET_vec2_f32:result=GL_FLOAT;break;
+    case ET_vec3_u8:result=GL_UNSIGNED_BYTE;break;
+    case ET_vec3_u16:result=GL_UNSIGNED_SHORT;break;
+    case ET_vec3_u32:result=GL_UNSIGNED_INT;break;
+    case ET_vec3_f32:result=GL_FLOAT;break;
+    case ET_vec4_u8:result=GL_UNSIGNED_BYTE;break;
+    case ET_vec4_u16:result=GL_UNSIGNED_SHORT;break;
+    case ET_vec4_u32:result=GL_UNSIGNED_INT;break;
+    case ET_vec4_f32:result=GL_FLOAT;break;
+    case ET_mat4x4_f32:result=GL_FLOAT;break;    
+  }
+  return result;
+}
+
+
 void BufferLayout::add(ElementType et, UsageType ut, uint32_t p)
 {
   attributes.push_back(BufferLayoutAttribute(et, ut, p));
@@ -93,6 +146,38 @@ uint32_t BufferLayout::partitionFromUsageType(UsageType ut)
   return pos->second;
 }
 
+bool BufferLayout::hasUsageType(UsageType ut)
+{
+  std::map<UsageType, uint32_t>::iterator pos = ut2pid.find(ut);
+  return (pos != ut2pid.end());
+}
+
+GLenum BufferLayout::glScalarTypeFromUsageType(UsageType ut)
+{
+  return glScalarTypeForElementType(ut2et[ut]);
+}
+
+uint32_t BufferLayout::stride(UsageType ut)
+{
+  return partitionSize(ut2pid[ut]);// - elementSize(ut2et[ut]);
+}
+
+uint32_t BufferLayout::offset(UsageType ut)
+{
+  uint32_t result = 0;
+  
+  uint32_t pid = ut2pid[ut];
+  for(uint32_t i=0; i<attributes.size(); ++i)
+  {
+    if(attributes[i].usageType == ut) break;
+    if(attributes[i].partition==pid)
+    {
+      result += attributes[i].size();
+    }
+  }
+  
+  return result;
+}
 
 }
 }

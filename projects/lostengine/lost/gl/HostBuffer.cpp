@@ -75,27 +75,13 @@ ElementType HostBuffer::elementTypeFromUsageType(UsageType ut)
 
 uint8_t* HostBuffer::elementAddress(uint32_t idx, UsageType ut)
 {
+  if(!partitions.size()) {LOGTHROW(runtime_error("tried to call elementAddress without any partitions")); };
   uint8_t* result = 0;
   
   uint32_t pid = layout.partitionFromUsageType(ut);
-  uint32_t psize = layout.partitionSize(pid);
-  result = partitions[pid] + psize*idx; // this is the start of the vertex partition with the given index
-  // we now need to adjust the start to the actual position of the attribute within the partition
-  // for this, we iterate over all attributes and add any elemt size to the start until we hit the current one.
-  for(uint32_t i=0; i<layout.attributes.size(); ++i)
-  {
-    if(layout.attributes[i].partition == pid)
-    {
-      if(layout.attributes[i].usageType == ut)
-      {
-        break;
-      }
-      else
-      {
-        result += elementSize(layout.attributes[i].elementType);
-      }
-    }
-  }
+  uint32_t size = layout.partitionSize(pid);
+  uint32_t offset = layout.offset(ut);
+  result = partitions[pid] + size*idx +offset; // this is the start of the vertex partition with the given index
   
   return result;
 }
@@ -111,13 +97,13 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint8_t val)
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u16:break;
+    case ET_u16:
     {
       uint16_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u32:break;
+    case ET_u32:
     {
       uint32_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
@@ -142,13 +128,13 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint16_t val)
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u16:break;
+    case ET_u16:
     {
       uint16_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u32:break;
+    case ET_u32:
     {
       uint32_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
@@ -173,13 +159,13 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint32_t val)
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u16:break;
+    case ET_u16:
     {
       uint16_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }
-    case ET_u32:break;
+    case ET_u32:
     {
       uint32_t conv = val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
@@ -218,11 +204,26 @@ void HostBuffer::set(uint32_t idx, UsageType ut, const lost::common::Color& val)
   memcpy(elementAddress(idx, ut), &val, sizeof(val));
 }
 
-
 math::Vec2 HostBuffer::getAsVec2(uint32_t idx, UsageType ut)
 {
   // FIXME: this is completely unsafe
   return *((Vec2*)elementAddress(idx, ut));
+}
+
+uint32_t HostBuffer::getAsU32(uint32_t idx, UsageType ut)
+{
+  return *((uint32_t*)elementAddress(idx, ut));
+}
+
+bool HostBuffer::hasUsageType(UsageType ut)
+{
+  return layout.hasUsageType(ut);
+}
+
+uint32_t HostBuffer::numScalarsForUsageType(UsageType ut)
+{
+  ElementType et = layout.ut2et[ut];
+  return numScalarsForElementType(et);
 }
 
 }

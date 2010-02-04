@@ -564,6 +564,7 @@
 		EA5FC5E610C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
 		EA5FC5E710C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
 		EA5FC5E810C3D2D10078A9FD /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA5FC5E510C3D2D10078A9FD /* Data.cpp */; };
+		EA65F8EB111AFEC8005AB754 /* TestLostGlHostBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA65F8E7111AFEB8005AB754 /* TestLostGlHostBuffer.cpp */; };
 		EA6711660E3E89DB00B961EC /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA97FC110E35ABD800851245 /* Bitmap.cpp */; };
 		EA67116F0E3E89DB00B961EC /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
 		EA6711720E3E89DB00B961EC /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
@@ -1034,6 +1035,7 @@
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
 		EA5FC5E510C3D2D10078A9FD /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
+		EA65F8E7111AFEB8005AB754 /* TestLostGlHostBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostGlHostBuffer.cpp; path = test/TestLostGlHostBuffer.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadAutoreleasePoolHack.m; path = mac/ThreadAutoreleasePoolHack.m; sourceTree = "<group>"; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
@@ -1566,6 +1568,7 @@
 				EA1BF6790F67350D00862B2F /* TestProfiler.cpp */,
 				EA1BF67A0F67350D00862B2F /* main.cpp */,
 				3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */,
+				EA65F8E7111AFEB8005AB754 /* TestLostGlHostBuffer.cpp */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -2614,6 +2617,7 @@
 				3E03585A0FA24F5600EE43A8 /* TestLostMathQuat.cpp in Sources */,
 				8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */,
 				3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */,
+				EA65F8EB111AFEC8005AB754 /* TestLostGlHostBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

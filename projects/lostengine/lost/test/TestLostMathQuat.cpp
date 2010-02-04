@@ -22,7 +22,7 @@ SUITE(QuatTest)
           q.x >= -1.0f && q.y >= -1.0f && q.z >= -1.0f && q.w >= -1.0f);
   }
 
-  TEST(rotation)
+/*  TEST(rotation)
   {
     float epsilon = 0.00001f;
 
@@ -42,7 +42,7 @@ SUITE(QuatTest)
     v1 = qRotate.rotate(v); std::cout << v1 << std::endl;
     v2 = mRotate*v; std::cout << v2 << std::endl;
     CHECK(compare(v1.x, v2.x, epsilon) && compare(v1.y, v2.y, epsilon) && compare(v1.z, v2.z, epsilon));
-  }
+  }*/
 /*  
   TEST(comparison)
   {
