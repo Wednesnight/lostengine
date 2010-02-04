@@ -13,6 +13,11 @@ namespace gl
 struct HybridVertexBuffer;
 typedef lost::shared_ptr<HybridVertexBuffer> HybridVertexBufferPtr;
 
+// FIXME: tear out some of this class into a HybridBuffer class that can be a shared base for 
+// index/vertex buffer. Theres to much copying happening between these two classes.
+
+// FIXME: partitions need separate dirty flag, not a global one for the whole thing.
+
 struct HybridVertexBuffer
 {
   HybridVertexBuffer(const BufferLayout& inLayout);
@@ -31,6 +36,9 @@ struct HybridVertexBuffer
   math::Vec2 getAsVec2(uint32_t idx, UsageType ut);
   
   void upload();
+  
+  bool hasUsageType(UsageType ut);
+  VertexBuffer* bufferForUsageType(UsageType ut);
   
   bool dirty;
   HostBufferPtr hostBuffer;

@@ -43,6 +43,10 @@ struct HostBuffer
   void set(uint32_t idx, UsageType ut, const common::Color& val);
   
   math::Vec2 getAsVec2(uint32_t idx, UsageType ut);
+  uint32_t   getAsU32(uint32_t idx, UsageType ut);  
+  bool hasUsageType(UsageType ut); // true if there is an attribute with that usage type, false otherwise
+  
+  uint32_t numScalarsForUsageType(UsageType ut);
 };
 
 }

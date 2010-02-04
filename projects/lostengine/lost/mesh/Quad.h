@@ -40,6 +40,10 @@ struct Quad : public MESHTYPE
     boost::uint32_t numQuads = 1;
     boost::uint32_t numVertices = numQuads*4;
     boost::uint32_t numIndices = numQuads*6;
+    
+    this->_vertexBuffer->reset(numVertices);
+    this->_indexBuffer->reset(numIndices);
+    
     this->indices(true);
     this->vertices(true);
     this->resetIndices(numIndices);

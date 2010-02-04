@@ -25,10 +25,13 @@ struct HybridIndexBuffer
   void set(uint32_t idx, UsageType ut, uint32_t val);
   
   void upload();
+
+  bool hasUsageType(UsageType ut);
   
   bool dirty;
   HostBufferPtr hostBuffer;
   IndexBufferPtr indexBuffer;
+  GLenum type;
 };
 
 }

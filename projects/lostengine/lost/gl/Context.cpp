@@ -7,6 +7,8 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/bitmap/Bitmap.h"
+#include "lost/gl/IndexBuffer.h"
+#include "lost/gl/VertexBuffer.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
@@ -77,10 +79,12 @@ namespace lost
   namespace gl
   {
 
+std::map<void*, Context*> glContext2lostGlContext;
+
     Context::Context()
     {
       initialize();
-      
+      glContext2lostGlContext[getCurrentOsSpecific()] = this;
       // this is only true on desktop systems. 
       // on systems like the iPhone, where you have to create the default buffer yourself, you
       // have to set the default in the context, after creation
@@ -100,11 +104,18 @@ namespace lost
       currentTransform.initIdentity();
       currentClearColor = getParam<lost::common::Color>(GL_COLOR_CLEAR_VALUE);
       currentScissorRect = getParam<lost::math::Rect>(GL_SCISSOR_BOX);
+      currentBuffer = NULL;
     }
     
     Context::~Context()
     {
       finalize();
+      std::map<void*, Context*>::iterator pos;
+      pos = glContext2lostGlContext.find(Context::getCurrentOsSpecific());
+      if(pos != glContext2lostGlContext.end())
+      {
+        glContext2lostGlContext.erase(pos);      
+      }
     }
 
     void Context::bindFramebuffer(GLuint fbo)
@@ -279,8 +290,7 @@ namespace lost
       shader(mat->shader);
     }
     
-    
-    void Context::draw(MeshPtr mesh)
+    void Context::drawSeparateBuffers(MeshPtr mesh)
     {
       gl::Buffer* ib = mesh->getIndexBuffer();
       gl::Buffer* vb = mesh->getVertexBuffer();
@@ -334,7 +344,90 @@ namespace lost
       {
         indexArray(false);
         vb->drawArrays(mesh->drawMode);
+      }    
+    }
+    
+    void Context::drawInterleavedBuffers(MeshPtr mesh)
+    {
+      HybridIndexBuffer* ib = mesh->_indexBuffer.get();
+      HybridVertexBuffer* vb = mesh->_vertexBuffer.get();
+
+      if(ib->dirty) {ib->upload();DOUT("uploaded vtx");}
+      if(vb->dirty) {vb->upload();DOUT("uploaded idx")}
+
+      VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_vertex);
+      bind(gpuBuffer);
+      vertexArray(true);
+      // FIXME: preprocess and store the XXXpointer values in a helper struct in the hybrid buffer
+      
+      GLint size = vb->hostBuffer->numScalarsForUsageType(UT_vertex);
+      GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_vertex);
+      GLsizei stride = vb->hostBuffer->layout.stride(UT_vertex); 
+      GLvoid* offset = (GLvoid*)vb->hostBuffer->layout.offset(UT_vertex);
+            
+      glVertexPointer(size,
+                      type,
+                      stride,
+                      offset);GLDEBUG;
+
+      if(vb->hasUsageType(UT_normal))
+      {
+        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_normal);
+        bind(gpuBuffer);
+        normalArray(true);
+        glNormalPointer(vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_normal),
+                        vb->hostBuffer->layout.stride(UT_normal),
+                        (const GLvoid*)vb->hostBuffer->layout.offset(UT_normal));GLDEBUG;        
       }
+      else {
+        normalArray(false);
+      }
+
+      if(vb->hasUsageType(UT_color))
+      {
+        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_color);
+        bind(gpuBuffer);
+        colorArray(true);
+        glColorPointer(vb->hostBuffer->numScalarsForUsageType(UT_color),
+                        vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_color),
+                        vb->hostBuffer->layout.stride(UT_color),
+                        (const GLvoid*)vb->hostBuffer->layout.offset(UT_color));GLDEBUG;        
+      }
+      else {
+        colorArray(false);
+      }
+
+      if(vb->hasUsageType(UT_texcoord0))
+      {
+        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_texcoord0);
+        bind(gpuBuffer);
+        texCoordArray(true);
+
+        GLint size = vb->hostBuffer->numScalarsForUsageType(UT_texcoord0);
+        GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_texcoord0);
+        GLsizei stride = vb->hostBuffer->layout.stride(UT_texcoord0); 
+        const GLvoid* offset = (const GLvoid*)vb->hostBuffer->layout.offset(UT_texcoord0);
+        
+        glTexCoordPointer(size,
+                          type,
+                          stride,
+                          offset);GLDEBUG;        
+      }
+      else {
+        texCoordArray(false);
+      }
+      
+      if(mesh->material)
+        material(mesh->material);      
+      transform(mesh->transform);
+      bind(ib->indexBuffer.get());
+      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+    }
+    
+    void Context::draw(MeshPtr mesh)
+    {
+//      drawSeparateBuffers(mesh);
+      drawInterleavedBuffers(mesh);
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
@@ -361,5 +454,19 @@ namespace lost
       bmp.flip();
       bmp.write(fullPathName);
     } 
+
+    void Context::bind(Buffer* buffer)
+    {
+      if(buffer != currentBuffer)
+      {
+        glBindBuffer(buffer->target, buffer->buffer);GLDEBUG;
+        currentBuffer = buffer;
+      }
+    }
+
+    Context* Context::getCurrent()
+    {
+      return glContext2lostGlContext[getCurrentOsSpecific()];
+    }
   }
 }

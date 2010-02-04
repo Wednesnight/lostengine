@@ -42,6 +42,8 @@ namespace lost
     struct FrameBuffer;
     typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
     
+    struct Buffer;
+    
     struct Context
     {
     // private for now, deliberately no getters
@@ -64,7 +66,8 @@ namespace lost
       GLenum currentActiveTexture;
       ShaderProgramPtr currentShader;
       math::Matrix currentTransform;
-
+      Buffer* currentBuffer;
+      
       /**
        * forward declaration for platform specific stuff
        */
@@ -131,6 +134,8 @@ namespace lost
       
       // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
       void draw(mesh::MeshPtr mesh);
+      void drawSeparateBuffers(mesh::MeshPtr mesh);
+      void drawInterleavedBuffers(mesh::MeshPtr mesh);
       
       void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
 
@@ -139,6 +144,9 @@ namespace lost
       
       static void* getCurrentOsSpecific();
       static void setCurrentOsSpecififc(void* ctx);
+      static Context* getCurrent();
+      
+      void bind(Buffer* buffer);
     };
   }
 }

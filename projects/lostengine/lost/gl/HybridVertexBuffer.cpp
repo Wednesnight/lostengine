@@ -1,5 +1,5 @@
 #include "lost/gl/HybridVertexBuffer.h"
-
+#include "lost/gl/Context.h"
 namespace lost
 {
 namespace gl
@@ -82,13 +82,25 @@ void HybridVertexBuffer::upload()
   for(uint32_t i=0; i<hostBuffer->partitions.size(); ++i)
   {
     VertexBuffer* vb = vertexBuffers[i].get();
-    vb->bind();
+    Context::getCurrent()->bind(vb);
+//    vb->bind();
     vb->bufferData(vb->target, 
                   hostBuffer->count*hostBuffer->layout.partitionSize(i), 
                   hostBuffer->partitions[i],
                   GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
   }
   dirty = false;
+}
+
+bool HybridVertexBuffer::hasUsageType(UsageType ut)
+{
+  return hostBuffer->hasUsageType(ut);
+}
+
+VertexBuffer* HybridVertexBuffer::bufferForUsageType(UsageType ut)
+{
+  uint32_t pid = hostBuffer->layout.ut2pid[ut];
+  return vertexBuffers[pid].get();
 }
 
 }
