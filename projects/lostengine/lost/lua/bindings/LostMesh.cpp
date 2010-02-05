@@ -46,22 +46,6 @@ namespace lost
             [
               def("create", &mesh::Rect::create)
             ]
-            ,
-          class_<FilledRect, Mesh>("FilledRect")
-            .scope
-            [
-              def("create", &FilledRect::create)
-            ]
-/*          class_<RoundedRect2D, Mesh>("RoundedRect2D")
-            .scope
-            [
-              def("create", &RoundedRect2D::create)
-            ],
-          class_<FilledRoundedRect2D, Mesh>("FilledRoundedRect2D")
-            .scope
-            [
-              def("create", &FilledRoundedRect2D::create)
-            ]*/
         ]
       ];
     }
