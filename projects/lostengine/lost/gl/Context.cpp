@@ -290,8 +290,8 @@ std::map<void*, Context*> glContext2lostGlContext;
         
     void Context::draw(MeshPtr mesh)
     {
-      HybridIndexBuffer* ib = mesh->_indexBuffer.get();
-      HybridVertexBuffer* vb = mesh->_vertexBuffer.get();
+      HybridIndexBuffer* ib = mesh->indexBuffer.get();
+      HybridVertexBuffer* vb = mesh->vertexBuffer.get();
 
       if(ib->dirty) {ib->upload();}
       if(vb->dirty) {vb->upload();}

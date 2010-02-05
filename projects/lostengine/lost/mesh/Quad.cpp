@@ -22,8 +22,8 @@ Quad::Quad(const math::Rect& inRect)
   boost::uint32_t numVertices = numQuads*4;
   boost::uint32_t numIndices = numQuads*6;
   
-  this->_vertexBuffer->reset(numVertices);
-  this->_indexBuffer->reset(numIndices);
+  this->vertexBuffer->reset(numVertices);
+  this->indexBuffer->reset(numIndices);
   
   createIndices(0);
   createVertices(0,inRect);
@@ -49,8 +49,8 @@ Quad::Quad(common::DataPtr data, bool flip)
   boost::uint32_t numVertices = numQuads*4;
   boost::uint32_t numIndices = numQuads*6;
   
-  this->_vertexBuffer->reset(numVertices);
-  this->_indexBuffer->reset(numIndices);
+  this->vertexBuffer->reset(numVertices);
+  this->indexBuffer->reset(numIndices);
   
   createIndices(0);
   createVertices(0, rect);
@@ -71,8 +71,8 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
   boost::uint32_t numVertices = numQuads*4;
   boost::uint32_t numIndices = numQuads*6;
 
-  this->_vertexBuffer->reset(numVertices);
-  this->_indexBuffer->reset(numIndices);
+  this->vertexBuffer->reset(numVertices);
+  this->indexBuffer->reset(numIndices);
 
   createIndices(0);
   createVertices(0, rect);
@@ -91,8 +91,8 @@ Quad::Quad(const std::vector<math::Rect>& rects)
   boost::uint32_t numVertices = numQuads*4;
   boost::uint32_t numIndices = numQuads*6;
 
-  this->_vertexBuffer->reset(numVertices);
-  this->_indexBuffer->reset(numIndices);
+  this->vertexBuffer->reset(numVertices);
+  this->indexBuffer->reset(numIndices);
 
   for(boost::uint32_t i=0; i<numQuads; ++i)
   {
@@ -134,8 +134,8 @@ void Quad::init(const std::vector<math::Rect>& rects,
   boost::uint32_t numVertices = numQuads*4;
   boost::uint32_t numIndices = numQuads*6;
   
-  this->_vertexBuffer->reset(numVertices);
-  this->_indexBuffer->reset(numIndices);
+  this->vertexBuffer->reset(numVertices);
+  this->indexBuffer->reset(numIndices);
   
   for(boost::uint32_t i=0; i<numQuads; ++i)
   {
