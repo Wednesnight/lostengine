@@ -495,6 +495,9 @@
 		EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
 		EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		EA3B95AE0E04639D00B6423B /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
+		EA3D4590111C077300CB661C /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3D458F111C077300CB661C /* Quad.cpp */; };
+		EA3D4591111C077300CB661C /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3D458F111C077300CB661C /* Quad.cpp */; };
+		EA3D4592111C077300CB661C /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3D458F111C077300CB661C /* Quad.cpp */; };
 		EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
@@ -1009,6 +1012,7 @@
 		EA3B94750E04639D00B6423B /* Profiler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Profiler.cpp; sourceTree = "<group>"; };
 		EA3B94FB0E04639D00B6423B /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform.cpp; sourceTree = "<group>"; };
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
+		EA3D458F111C077300CB661C /* Quad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quad.cpp; path = mesh/Quad.cpp; sourceTree = "<group>"; };
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
 		EA4E2B2A10BDEDC5008135E0 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/function.cpp; sourceTree = SOURCE_ROOT; };
 		EA4E2B2B10BDEDC5008135E0 /* create_class.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = create_class.cpp; path = ../../../thirdparty/luabind/luabind_0_9/src/create_class.cpp; sourceTree = SOURCE_ROOT; };
@@ -1890,6 +1894,7 @@
 			isa = PBXGroup;
 			children = (
 				3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */,
+				EA3D458F111C077300CB661C /* Quad.cpp */,
 			);
 			name = mesh;
 			sourceTree = "<group>";
@@ -2347,6 +2352,7 @@
 				EAB67C771115F0ED00442904 /* HostBuffer.cpp in Sources */,
 				EAB67CEC111603D500442904 /* HybridIndexBuffer.cpp in Sources */,
 				EAB67CF0111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
+				EA3D4592111C077300CB661C /* Quad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2564,6 +2570,7 @@
 				EAB67C751115F0ED00442904 /* HostBuffer.cpp in Sources */,
 				EAB67CEA111603D500442904 /* HybridIndexBuffer.cpp in Sources */,
 				EAB67CEE111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
+				EA3D4590111C077300CB661C /* Quad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2821,6 +2828,7 @@
 				EAB67C761115F0ED00442904 /* HostBuffer.cpp in Sources */,
 				EAB67CEB111603D500442904 /* HybridIndexBuffer.cpp in Sources */,
 				EAB67CEF111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
+				EA3D4591111C077300CB661C /* Quad.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
