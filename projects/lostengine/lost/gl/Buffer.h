@@ -7,6 +7,10 @@ namespace lost
 {
 namespace gl
 {
+
+struct Buffer;
+typedef lost::shared_ptr<Buffer> BufferPtr;
+
 struct Buffer
 {
   GLuint buffer;
