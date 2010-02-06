@@ -296,7 +296,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       if(ib->dirty) {ib->upload();}
       if(vb->dirty) {vb->upload();}
 
-      VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_vertex);
+      Buffer* gpuBuffer = vb->bufferForUsageType(UT_vertex);
       bind(gpuBuffer);
       vertexArray(true);
       // FIXME: preprocess and store the XXXpointer values in a helper struct in the hybrid buffer
@@ -313,7 +313,7 @@ std::map<void*, Context*> glContext2lostGlContext;
 
       if(vb->hasUsageType(UT_normal))
       {
-        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_normal);
+        Buffer* gpuBuffer = vb->bufferForUsageType(UT_normal);
         bind(gpuBuffer);
         normalArray(true);
         glNormalPointer(vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_normal),
@@ -326,7 +326,7 @@ std::map<void*, Context*> glContext2lostGlContext;
 
       if(vb->hasUsageType(UT_color))
       {
-        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_color);
+        Buffer* gpuBuffer = vb->bufferForUsageType(UT_color);
         bind(gpuBuffer);
         colorArray(true);
         glColorPointer(vb->hostBuffer->numScalarsForUsageType(UT_color),
@@ -340,7 +340,7 @@ std::map<void*, Context*> glContext2lostGlContext;
 
       if(vb->hasUsageType(UT_texcoord0))
       {
-        VertexBuffer* gpuBuffer = vb->bufferForUsageType(UT_texcoord0);
+        Buffer* gpuBuffer = vb->bufferForUsageType(UT_texcoord0);
         bind(gpuBuffer);
         texCoordArray(true);
 
@@ -361,7 +361,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       if(mesh->material)
         material(mesh->material);      
       transform(mesh->transform);
-      bind(ib->indexBuffer.get());
+      bind(ib->gpuBuffers[0].get());
       glDrawRangeElements(mesh->drawMode, 0,ib->hostBuffer->count-1, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
     }
 
