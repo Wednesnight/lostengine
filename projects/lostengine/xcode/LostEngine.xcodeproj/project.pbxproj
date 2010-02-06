@@ -696,6 +696,9 @@
 		EAF56B40111CD794008D5A0D /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B3F111CD794008D5A0D /* Mesh.cpp */; };
 		EAF56B41111CD794008D5A0D /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B3F111CD794008D5A0D /* Mesh.cpp */; };
 		EAF56B42111CD794008D5A0D /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B3F111CD794008D5A0D /* Mesh.cpp */; };
+		EAF56D29111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56D28111DE4F8008D5A0D /* HybridBuffer.cpp */; };
+		EAF56D2A111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56D28111DE4F8008D5A0D /* HybridBuffer.cpp */; };
+		EAF56D2B111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56D28111DE4F8008D5A0D /* HybridBuffer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1091,6 +1094,7 @@
 		EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScaleGrid.cpp; path = mesh/ScaleGrid.cpp; sourceTree = "<group>"; };
 		EAF56B2C111CD694008D5A0D /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = mesh/Rect.cpp; sourceTree = "<group>"; };
 		EAF56B3F111CD794008D5A0D /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = mesh/Mesh.cpp; sourceTree = "<group>"; };
+		EAF56D28111DE4F8008D5A0D /* HybridBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HybridBuffer.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1844,6 +1848,7 @@
 				8DFDE59E0F56D446005D3927 /* mac */,
 				EA0F5C491051BB6C00545DCC /* Buffer.cpp */,
 				EAB67C611115EF6300442904 /* BufferLayout.cpp */,
+				EAF56D28111DE4F8008D5A0D /* HybridBuffer.cpp */,
 				EAB67CE9111603D500442904 /* HybridIndexBuffer.cpp */,
 				EAB67CED111603D800442904 /* HybridVertexBuffer.cpp */,
 				EAB67C741115F0ED00442904 /* HostBuffer.cpp */,
@@ -2371,6 +2376,7 @@
 				EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2F111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B42111CD794008D5A0D /* Mesh.cpp in Sources */,
+				EAF56D2B111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2592,6 +2598,7 @@
 				EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2D111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B40111CD794008D5A0D /* Mesh.cpp in Sources */,
+				EAF56D29111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2853,6 +2860,7 @@
 				EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2E111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B41111CD794008D5A0D /* Mesh.cpp in Sources */,
+				EAF56D2A111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
