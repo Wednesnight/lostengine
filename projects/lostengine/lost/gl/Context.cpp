@@ -362,7 +362,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         material(mesh->material);      
       transform(mesh->transform);
       bind(ib->indexBuffer.get());
-      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+      glDrawRangeElements(mesh->drawMode, 0,ib->hostBuffer->count-1, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
