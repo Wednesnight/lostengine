@@ -12,8 +12,8 @@ TEST(hostbuffer_strideoffset_vtx)
   HostBuffer buffer(layout);
   buffer.reset(10);
   
-  CHECK(buffer.layout.stride(UT_vertex) == 8);
-  CHECK(buffer.layout.stride(UT_texcoord0) == 8);
+  CHECK(buffer.layout.stride(UT_vertex) == 16);
+  CHECK(buffer.layout.stride(UT_texcoord0) == 16);
   CHECK(buffer.layout.offset(UT_vertex) == 0);
   CHECK(buffer.layout.offset(UT_texcoord0) == 8);
 }
@@ -45,7 +45,7 @@ TEST(hostbuffer_strideoffset_idx)
   HostBuffer buffer(layout);
   buffer.reset(10);
   
-  CHECK(buffer.layout.stride(UT_index) == 0);
+  CHECK(buffer.layout.stride(UT_index) == 4);
   CHECK(buffer.layout.offset(UT_index) == 0);
 }
 
