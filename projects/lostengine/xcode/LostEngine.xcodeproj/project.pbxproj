@@ -687,6 +687,10 @@
 		EAD2E87C0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87D0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
 		EAD2E87E0E94104F000535DB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E87B0E94104F000535DB /* Context.cpp */; };
+		EAD9DC87111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
+		EAD9DC88111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
+		EAD9DC89111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
+		EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */; };
 		EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
@@ -1091,6 +1095,8 @@
 		EACF1C6010164CB100753144 /* Helper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Helper.cpp; path = resource/Helper.cpp; sourceTree = "<group>"; };
 		EACF1C7C1016517400753144 /* FilesystemRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilesystemRepository.cpp; path = resource/FilesystemRepository.cpp; sourceTree = "<group>"; };
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
+		EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RangeManager.cpp; sourceTree = "<group>"; };
+		EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostGlRangeManager.cpp; path = test/TestLostGlRangeManager.cpp; sourceTree = "<group>"; };
 		EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScaleGrid.cpp; path = mesh/ScaleGrid.cpp; sourceTree = "<group>"; };
 		EAF56B2C111CD694008D5A0D /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = mesh/Rect.cpp; sourceTree = "<group>"; };
 		EAF56B3F111CD794008D5A0D /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = mesh/Mesh.cpp; sourceTree = "<group>"; };
@@ -1577,6 +1583,7 @@
 				EA1BF67A0F67350D00862B2F /* main.cpp */,
 				3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */,
 				EA65F8E7111AFEB8005AB754 /* TestLostGlHostBuffer.cpp */,
+				EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -1855,6 +1862,7 @@
 				EAD2E87B0E94104F000535DB /* Context.cpp */,
 				EA0F5CAA1051C10600545DCC /* FragmentShader.cpp */,
 				EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */,
+				EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */,
 				EA09B0870F81F4A500266854 /* RenderBuffer.cpp */,
 				EA0F5CBB1051C19600545DCC /* Shader.cpp */,
 				EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */,
@@ -2377,6 +2385,7 @@
 				EAF56B2F111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B42111CD794008D5A0D /* Mesh.cpp in Sources */,
 				EAF56D2B111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
+				EAD9DC89111E2F6200A21AC7 /* RangeManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2599,6 +2608,7 @@
 				EAF56B2D111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B40111CD794008D5A0D /* Mesh.cpp in Sources */,
 				EAF56D29111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
+				EAD9DC87111E2F6200A21AC7 /* RangeManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,6 +2648,7 @@
 				8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */,
 				3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */,
 				EA65F8EB111AFEC8005AB754 /* TestLostGlHostBuffer.cpp in Sources */,
+				EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2861,6 +2872,7 @@
 				EAF56B2E111CD694008D5A0D /* Rect.cpp in Sources */,
 				EAF56B41111CD794008D5A0D /* Mesh.cpp in Sources */,
 				EAF56D2A111DE4F8008D5A0D /* HybridBuffer.cpp in Sources */,
+				EAD9DC88111E2F6200A21AC7 /* RangeManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
