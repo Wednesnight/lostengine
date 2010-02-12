@@ -12,7 +12,7 @@ VALID_ARCHS = x86_64 armv6
 
 // thirdparty defines
 THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"
-BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_40_0"
+BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_42_0"
 BULLET_ROOT = "$(THIRDPARTY_ROOT)/bullet/bullet_2_74"
 FHTAGN_ROOT = "$(THIRDPARTY_ROOT)/fhtagn/fhtagn_2008_11_12"
 FREETYPE_ROOT = "$(THIRDPARTY_ROOT)/freetype2/freetype_2_3_7"
