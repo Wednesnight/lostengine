@@ -8,13 +8,15 @@ namespace mesh
 
 Mesh::Mesh()
 {
-  material = Material::create();
-  transform.initIdentity();
   gl::BufferLayout layout;
   layout.add(gl::ET_vec3_f32, gl::UT_vertex, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
-  resetBuffers(layout, gl::ET_u32);
-//  DOUT("creating mesh");
+  init(layout, gl::ET_u32);
+}
+
+Mesh::Mesh(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
+{
+  init(vertexLayout, indexType);
 }
 
 Mesh::~Mesh() 
@@ -22,10 +24,24 @@ Mesh::~Mesh()
 //  DOUT("destroying mesh");
 }
 
+void Mesh::init(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
+{
+//  DOUT("creating mesh");
+  material = Material::create();
+  transform.initIdentity();
+  resetBuffers(vertexLayout, indexType);
+}
+
 void Mesh::resetBuffers(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
 {
   vertexBuffer.reset(new gl::HybridVertexBuffer(vertexLayout));
   indexBuffer.reset(new gl::HybridIndexBuffer(indexType));
+}
+
+void Mesh::resetSize(uint32_t numVertices, uint32_t numIndices)
+{
+  vertexBuffer->reset(numVertices);
+  indexBuffer->reset(numIndices);
 }
 
 void Mesh::setIndex(uint32_t idx, uint32_t val)

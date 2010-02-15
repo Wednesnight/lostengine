@@ -14,39 +14,54 @@ using namespace boost::spirit::classic;
 using namespace std;
 using namespace lost::math;
 using namespace lost::mesh;
+using namespace lost::gl;
 
 namespace lost
 {
   namespace mesh
-  {
-
-    struct OBJActions
+  {    
+    template <typename Type>
+    struct MeshSet
     {
-      template <typename Type>
-      struct SetArray
+      MeshPtr mesh;
+      Type& value;
+      uint32_t& idx;
+      UsageType usageType;
+      MeshSet(uint32_t& inIdx, MeshPtr m, Type& inValue, UsageType ut)
+      : idx(inIdx),
+        mesh(m),
+        value(inValue),
+        usageType(ut)
       {
-        Type* array;
-        Type& value;
-        unsigned int& idx;
-        SetArray(unsigned int& inIdx, Type* inArray, Type& inValue)
-        : idx(inIdx),
-          array(inArray),
-          value(inValue)
-        {
-        }
+      }
 
-        template<typename IteratorT>
-        void operator()(IteratorT first, IteratorT last) const
+      template<typename IteratorT>
+      void operator()(IteratorT first, IteratorT last) const
+      {
+        switch(usageType)
         {
-          array[idx++] = value;
+          case UT_vertex:
+          case UT_normal:
+            mesh->vertexBuffer->set(idx, usageType, value);
+            break;
+          case UT_index:
+            mesh->indexBuffer->set(idx, usageType, value);
+            break;
+          default:
+            throw runtime_error("don't know what to do with usageType");
+            break;
         }
-      };
+      }
     };
+    
 
     MeshPtr Loader::obj(common::DataPtr objFile)
     {
-      MeshPtr mesh(new Mesh);
-/*      unsigned int vtxCount = 0;
+      BufferLayout layout;
+      layout.add(ET_vec3_f32, UT_vertex, 0);
+      layout.add(ET_vec3_f32, UT_normal, 0);
+      MeshPtr mesh(new Mesh(layout, ET_u32));
+      unsigned int vtxCount = 0;
       unsigned int nrmCount = 0;
       unsigned int idxCount = 0;
 
@@ -80,15 +95,12 @@ namespace lost
 
       if (parse(objData.c_str(), count_p).full)
       {
-#ifdef BOOST_SPIRIT_DEBUG
+        if(normalCount && (vertexCount != normalCount)) {throw runtime_error("number of normals doesn't match number of vertices");}
+        mesh->resetSize(vertexCount, indexCount);
         DOUT("vertexCount      : " << vertexCount);
         DOUT("normalCount      : " << normalCount);
         DOUT("indexCount       : " << indexCount);
-#endif
 
-        Mesh3D::VertexType* vertices = new Mesh3D::VertexType[vertexCount];
-        Mesh3D::NormalType* normals  = new Mesh3D::NormalType[normalCount];
-        Mesh3D::IndexType*  indices  = new Mesh3D::IndexType[indexCount];
 
         Vec3 vec3;
         rule<> vec3_p = 
@@ -98,20 +110,20 @@ namespace lost
 
         rule<> vertex_p = 
           ch_p('v') >> +space_p >> 
-            vec3_p[OBJActions::SetArray<Mesh3D::VertexType>(vtxCount, vertices, vec3)] >>
+            vec3_p[MeshSet<Vec3>(vtxCount, mesh, vec3, UT_vertex)][increment_a(vtxCount)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(vertex_p);
 
         rule<> normal_p = 
           str_p("vn") >> +space_p >> 
-            vec3_p[OBJActions::SetArray<Mesh3D::NormalType>(nrmCount, normals, vec3)] >>
+            vec3_p[MeshSet<Vec3>(nrmCount, mesh, vec3, UT_normal)][increment_a(nrmCount)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(normal_p);
 
-        Mesh3D::IndexType index;
+        uint32_t index;
         rule<> index_p = int_p[assign_a(index)][decrement_a(index)] >> !('/' >> !(int_p) >> !('/' >> !(int_p)));
         BOOST_SPIRIT_DEBUG_NODE(index_p);
-        rule<> indexAssign_p = index_p[OBJActions::SetArray<Mesh3D::IndexType>(idxCount, indices, index)];
+        rule<> indexAssign_p = index_p[MeshSet<uint32_t>(idxCount, mesh, index, UT_index)][increment_a(idxCount)];
         BOOST_SPIRIT_DEBUG_NODE(indexAssign_p);
         rule<> face_p =
           ch_p('f') >> +space_p >>
@@ -126,52 +138,30 @@ namespace lost
 
         if (parse(objData.c_str(), assign_p).full)
         {
-#ifdef BOOST_SPIRIT_DEBUG
-          DOUT("vertices:");
-          for (unsigned int idx = 0; idx < vertexCount; idx++)
-            DOUT(vertices[idx]);
-          DOUT("normals:");
-          for (unsigned int idx = 0; idx < normalCount; idx++)
-            DOUT(normals[idx]);
-          DOUT("indices:");
-          for (unsigned int idx = 0; idx < indexCount; idx++)
-            DOUT(indices[idx]);
-#endif
-
           mesh->drawMode = GL_TRIANGLES;
 
-          if (vertexCount)
-          {
-            mesh->vertices(true);
-            mesh->vertexBuffer->bindBufferData(vertices, vertexCount);
-          }
-
-          if (normalCount)
-          {
-            mesh->normals(true);
-            mesh->normalBuffer->bindBufferData(normals, normalCount);
-          }
-          else
+          if(!normalCount)
           {
             // assuming triangles
             DOUT("no normals");
-            Mesh3D::NormalType* vertexNormals  = new Mesh3D::NormalType[vertexCount];
+            Vec3* vertexNormals  = new Vec3[vertexCount];
             Vec3 p1, p2, p3;
             Vec3 v1, v2;
             Vec3 n;
             // caluclate tri normals, add to vertex normals
-            for(int i=0; i<indexCount; i+=3)
+            for(uint32_t i=0; i<indexCount; i+=3)
             {
-              int i1 = indices[i];
-              int i2 = indices[i+1];
-              int i3 = indices[i+2];
-              p1 = vertices[i1];
-              p2 = vertices[i2];
-              p3 = vertices[i3];
+              uint32_t i1 = mesh->indexBuffer->getAsU32(i, UT_index);
+              uint32_t i2 = mesh->indexBuffer->getAsU32(i+1, UT_index);
+              uint32_t i3 = mesh->indexBuffer->getAsU32(i+2, UT_index);
+              p1 = mesh->vertexBuffer->getAsVec3(i1, UT_vertex);
+              p2 = mesh->vertexBuffer->getAsVec3(i2, UT_vertex);
+              p3 = mesh->vertexBuffer->getAsVec3(i3, UT_vertex);
               v1 = p2-p1;
               v2 = p3-p2;
               n = cross(v1, v2);
               normalise(n);
+              // vertices were nulled in constructor so we can just add
               vertexNormals[i1] += n;
               vertexNormals[i2] += n;
               vertexNormals[i3] += n;
@@ -180,22 +170,12 @@ namespace lost
             for(int i=0; i<vertexCount; ++i)
             {
               normalise(vertexNormals[i]);
+              mesh->vertexBuffer->set(i, UT_normal, vertexNormals[i]);
             }
-            mesh->normals(true);
-            mesh->normalBuffer->bindBufferData(vertexNormals, vertexCount);
-          }
-
-          if (indexCount)
-          {
-            mesh->indices(true);
-            mesh->indexBuffer->bindBufferData(indices, indexCount);
+            delete [] vertexNormals;
           }
         }
-        delete indices;
-        delete normals;
-        delete vertices;
       }
-      */
       return mesh;
     }
 

@@ -92,6 +92,16 @@ Vec2 HybridBuffer::getAsVec2(uint32_t idx, UsageType ut)
   return hostBuffer->getAsVec2(idx, ut);
 }
 
+Vec3 HybridBuffer::getAsVec3(uint32_t idx, UsageType ut)
+{
+  return hostBuffer->getAsVec3(idx, ut);
+}
+
+uint32_t HybridBuffer::getAsU32(uint32_t idx, UsageType ut)
+{
+  return hostBuffer->getAsU32(idx, ut);
+}
+
 void HybridBuffer::upload()
 {
   for(uint32_t i=0; i<hostBuffer->partitions.size(); ++i)

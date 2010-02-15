@@ -28,7 +28,7 @@ function addTextNode(rootNode, panelText, colIndex, rowIndex, col)
 end
 
 function addPanelNode(rootNode, tex, colIndex, rowIndex, theShader)
-  local quad = lost.mesh.Quad2D.create(tex, false)
+  local quad = lost.mesh.Quad.create(tex, false)
   quad.transform = MatrixTranslation(Vec3(colIndex*fboSize.width,rowIndex*fboSize.height,0));  
   if theShader then
     quad.material.shader = theShader
