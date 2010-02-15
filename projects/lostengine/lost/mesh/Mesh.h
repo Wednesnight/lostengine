@@ -21,8 +21,16 @@ typedef lost::shared_ptr<Mesh> MeshPtr;
 struct Mesh
 {
   Mesh();
+  Mesh(const gl::BufferLayout& vertexLayout, gl::ElementType indexType);
+  // completely initializes the mesh object with default values. This is usually called from a constructor
+  void init(const gl::BufferLayout& vertexLayout, gl::ElementType indexType);
   virtual ~Mesh();
+  
+  // resets the buffer types, throwing away all previously stored/allocated data. you need to call resetSize after this one.
   void resetBuffers(const gl::BufferLayout& vertexLayout, gl::ElementType indexType);
+
+  // resets the size of vertex and index buffers
+  void resetSize(uint32_t numVertices, uint32_t numIndices);
 
   // helper functions that could easily be replaced by direct access of buffers but were needed for migration
   void setIndex(uint32_t idx, uint32_t val);

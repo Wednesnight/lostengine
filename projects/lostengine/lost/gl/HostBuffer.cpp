@@ -210,8 +210,15 @@ math::Vec2 HostBuffer::getAsVec2(uint32_t idx, UsageType ut)
   return *((Vec2*)elementAddress(idx, ut));
 }
 
+math::Vec3 HostBuffer::getAsVec3(uint32_t idx, UsageType ut)
+{
+  // FIXME: this is completely unsafe
+  return *((Vec3*)elementAddress(idx, ut));
+}
+
 uint32_t HostBuffer::getAsU32(uint32_t idx, UsageType ut)
 {
+  // FIXME: this is completely unsafe
   return *((uint32_t*)elementAddress(idx, ut));
 }
 
