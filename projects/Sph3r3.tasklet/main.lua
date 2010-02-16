@@ -24,7 +24,23 @@ angle = 0
 speed = 5
 lasttime = 0
 
+function createQuad()
+  log.debug("yay")
+  layout = lost.gl.BufferLayout()
+  layout:add(gl.ET_vec3_f32, gl.UT_vertex, 0)
+  layout:add(gl.ET_vec3_f32, gl.UT_texcoord0, 0)
+  layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
+  
+  m = lost.mesh.Mesh.create(layout, gl.ET_u32)
+  numVerts = 50
+  numIndices = 30
+  m:resetSize(numVerts, numIndices)
+  m:set(0, gl.UT_vertex, Vec3(1,2,3))
+end
+
+
 function startup(tasklet)
+  createQuad()
   tasklet.name = "Sphere"
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   dcl = lost.declarative.Context(tasklet.loader)

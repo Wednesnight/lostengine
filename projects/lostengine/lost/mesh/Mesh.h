@@ -26,6 +26,9 @@ struct Mesh
   void init(const gl::BufferLayout& vertexLayout, gl::ElementType indexType);
   virtual ~Mesh();
   
+  static MeshPtr create() { return MeshPtr(new Mesh); }
+  static MeshPtr create(const gl::BufferLayout& vertexLayout, gl::ElementType indexType) { return MeshPtr(new Mesh(vertexLayout, indexType)); }
+  
   // resets the buffer types, throwing away all previously stored/allocated data. you need to call resetSize after this one.
   void resetBuffers(const gl::BufferLayout& vertexLayout, gl::ElementType indexType);
 
@@ -33,10 +36,27 @@ struct Mesh
   void resetSize(uint32_t numVertices, uint32_t numIndices);
 
   // helper functions that could easily be replaced by direct access of buffers but were needed for migration
+  // FIXME: these are here for legacy reasons, should really be replaced with the versions below
   void setIndex(uint32_t idx, uint32_t val);
   void setVertex(uint32_t idx, const math::Vec2& val);
   void setTexCoord(uint32_t idx, const math::Vec2& val);
   math::Vec2 getVertex(uint32_t idx);
+
+  gl::HybridBufferPtr bufferFromUsageType(gl::UsageType ut);
+
+  void set(uint32_t idx, gl::UsageType ut, uint8_t val);
+  void set(uint32_t idx, gl::UsageType ut, uint16_t val);
+  void set(uint32_t idx, gl::UsageType ut, uint32_t val);
+  void set(uint32_t idx, gl::UsageType ut, float val);
+  void set(uint32_t idx, gl::UsageType ut, const math::Vec2& val);
+  void set(uint32_t idx, gl::UsageType ut, const math::Vec3& val);
+  void set(uint32_t idx, gl::UsageType ut, const math::Vec4& val);
+  void set(uint32_t idx, gl::UsageType ut, const common::Color& val);
+  
+  math::Vec2 getAsVec2(uint32_t idx, gl::UsageType ut);
+  math::Vec3 getAsVec3(uint32_t idx, gl::UsageType ut);
+  uint32_t   getAsU32(uint32_t idx, gl::UsageType ut);  
+
 
   GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
   MaterialPtr material;

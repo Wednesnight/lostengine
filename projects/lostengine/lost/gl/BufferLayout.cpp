@@ -93,12 +93,12 @@ GLenum   glScalarTypeForElementType(ElementType et)
 }
 
 
-void BufferLayout::add(ElementType et, UsageType ut, uint32_t p)
+void BufferLayout::add(ElementType elementType, UsageType usageType, uint32_t p)
 {
-  attributes.push_back(BufferLayoutAttribute(et, ut, p));
+  attributes.push_back(BufferLayoutAttribute(elementType, usageType, p));
   partitions[p] = true;
-  ut2pid[ut] = p;
-  ut2et[ut] = et;
+  ut2pid[usageType] = p;
+  ut2et[usageType] = elementType;
 }
 
 // number of partitions in this layout

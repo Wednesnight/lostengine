@@ -131,6 +131,24 @@ namespace lost
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode)
+            .def("resetBuffers", &Mesh::resetBuffers)
+            .def("resetSize", &Mesh::resetSize)
+            .def("set", (void(Mesh::*)(uint32_t, gl::UsageType, uint8_t))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint16_t val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint32_t val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, float val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec2& val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec3& val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec4& val))&Mesh::set)
+            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const common::Color& val))&Mesh::set)
+            .def("getAsVec2",&Mesh::getAsVec2)
+            .def("getAsVec3",&Mesh::getAsVec3)
+            .def("getAsU32",&Mesh::getAsU32)
+            .scope
+            [
+              def("create", (MeshPtr(*)())&Mesh::create),
+              def("create", (MeshPtr(*)(const gl::BufferLayout& vertexLayout, gl::ElementType indexType))&Mesh::create)
+            ]
         ]
       ];
     }

@@ -9,6 +9,8 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/gl/Texture.h"
+#include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/HybridIndexBuffer.h"
 
 using namespace luabind;
 using namespace lost::bitmap;
@@ -36,6 +38,56 @@ namespace lost
             .def("writeScreenshot", &Context::writeScreenshot)
         ]
       ];
+    }
+
+    void LostGLBuffer(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<BufferLayout>("BufferLayout")
+            .def(constructor<>())
+            .def("add", &BufferLayout::add)
+        ]
+      ];
+      globals(state)["gl"]["ET_u8"] =   ET_u8;
+      globals(state)["gl"]["ET_u16"] =   ET_u16;
+      globals(state)["gl"]["ET_u32"] =   ET_u32;
+      globals(state)["gl"]["ET_f32"] =   ET_f32;  
+      globals(state)["gl"]["ET_vec2_u8"] =   ET_vec2_u8;
+      globals(state)["gl"]["ET_vec2_u16"] =   ET_vec2_u16;
+      globals(state)["gl"]["ET_vec2_u32"] =   ET_vec2_u32;
+      globals(state)["gl"]["ET_vec2_f32"] =   ET_vec2_f32; 
+      globals(state)["gl"]["ET_vec3_u8"] =   ET_vec3_u8;
+      globals(state)["gl"]["ET_vec3_u16"] =   ET_vec3_u16;
+      globals(state)["gl"]["ET_vec3_u32"] =   ET_vec3_u32;
+      globals(state)["gl"]["ET_vec3_f32"] =   ET_vec3_f32; 
+      globals(state)["gl"]["ET_vec4_u8"] =   ET_vec4_u8;
+      globals(state)["gl"]["ET_vec4_u16"] =   ET_vec4_u16;
+      globals(state)["gl"]["ET_vec4_u32"] =   ET_vec4_u32;
+      globals(state)["gl"]["ET_vec4_f32"] =   ET_vec4_f32;
+      globals(state)["gl"]["ET_mat4x4_f32"] =   ET_mat4x4_f32;
+
+      globals(state)["gl"]["UT_unused"] = UT_unused;
+      globals(state)["gl"]["UT_index"] = UT_index;
+      globals(state)["gl"]["UT_vertex"] = UT_vertex;
+      globals(state)["gl"]["UT_texcoord0"] = UT_texcoord0;
+      globals(state)["gl"]["UT_texcoord1"] = UT_texcoord1;
+      globals(state)["gl"]["UT_texcoord2"] = UT_texcoord2;
+      globals(state)["gl"]["UT_texcoord3"] = UT_texcoord3;
+      globals(state)["gl"]["UT_normal"] = UT_normal;
+      globals(state)["gl"]["UT_color"] = UT_color;
+      globals(state)["gl"]["UT_vertexAttrib0"] = UT_vertexAttrib0;
+      globals(state)["gl"]["UT_vertexAttrib1"] = UT_vertexAttrib1;
+      globals(state)["gl"]["UT_vertexAttrib2"] = UT_vertexAttrib2;
+      globals(state)["gl"]["UT_vertexAttrib3"] = UT_vertexAttrib3;
+      globals(state)["gl"]["UT_vertexAttrib4"] = UT_vertexAttrib4;
+      globals(state)["gl"]["UT_vertexAttrib5"] = UT_vertexAttrib5;
+      globals(state)["gl"]["UT_vertexAttrib6"] = UT_vertexAttrib6;
+      globals(state)["gl"]["UT_vertexAttrib7"] = UT_vertexAttrib7;
+
+      
     }
 
     gl::TexturePtr colorTexture(gl::FrameBufferPtr fb, int num)
@@ -188,9 +240,10 @@ namespace lost
 
     void LostGL(lua_State* state)
     {
+      LostGLGL(state); // needs to come first since it creates the global gl table
+      LostGLBuffer(state);
       LostGLContext(state);
       LostGLFrameBuffer(state);
-      LostGLGL(state);
       LostGLRenderBuffer(state);
       LostGLShaderProgram(state);
       LostGLTexture(state);

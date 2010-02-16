@@ -9,6 +9,9 @@ namespace lost
 namespace gl
 {
 
+struct HybridBuffer;
+typedef lost::shared_ptr<HybridBuffer> HybridBufferPtr;
+
 /** base class for hybrid buffers that contain a hostbuffer as well as one or more
  *  gpu buffers.
  *  Only one type of gpu buffer can be managed by a hybrid buffer.
