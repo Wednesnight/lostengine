@@ -71,7 +71,7 @@ return dcl.guiro:Screen
     dcl.guiro:Window
     {
       id = "window2",
-      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1))--[[,
+      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
 			dcl.guiro:HBox
 			{
 				bounds = Bounds(xleft(), ytop(), wrel(1), habs(300)),
@@ -92,12 +92,16 @@ return dcl.guiro:Screen
   	        listeners = 
   	        {
   	          mouseEnter = function(event)
-															event.target:showFrame(true)
-															event.target:screen()("mainUi")("window1"):hidden(true)
+  	                          if event.currentTarget == event.target then
+  															event.target:showFrame(true)
+  															event.target:rootView()("mainUi")("window1"):hidden(true)
+  														end
 													 end,
   	          mouseLeave = function(event)
-													 	 event.target:showFrame(false)
-															event.target:screen()("mainUi")("window1"):hidden(false)
+                              if event.currentTarget == event.target then
+													 	    event.target:showFrame(false)
+															  event.target:rootView()("mainUi")("window1"):hidden(false)
+															end
 												   end
   	        }          
   	      },
@@ -135,8 +139,8 @@ return dcl.guiro:Screen
   	        text = "Hello!",
   	        listeners = 
   	        {
-  	          mouseEnter = function(event) event.target:showFrame(true) end,
-  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	          mouseEnter = function(event) if event.currentTarget == event.target then event.target:showFrame(true) end end,
+  	          mouseLeave = function(event) if event.currentTarget == event.target then event.target:showFrame(false) end end
   	        }          
   	      },
   				dcl.guiro:Label
@@ -173,8 +177,8 @@ return dcl.guiro:Screen
   	        text = "Hello!",
   	        listeners = 
   	        {
-  	          mouseEnter = function(event) event.target:showFrame(true) end,
-  	          mouseLeave = function(event) event.target:showFrame(false) end
+  	          mouseEnter = function(event) if event.currentTarget == event.target then event.target:showFrame(true) end end,
+  	          mouseLeave = function(event) if event.currentTarget == event.target then event.target:showFrame(false) end end
   	        }          
   	      },
   				dcl.guiro:Label
@@ -199,7 +203,6 @@ return dcl.guiro:Screen
   				}
   			}				
 			}
-]]
     }
     
   }
