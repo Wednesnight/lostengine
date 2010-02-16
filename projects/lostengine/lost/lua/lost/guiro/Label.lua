@@ -58,6 +58,7 @@ function Label:afterRedraw()
 end
 
 function Label:afterLayout()
+  lost.guiro.View.afterLayout(self)
   self:updateAlign()
 end
 
