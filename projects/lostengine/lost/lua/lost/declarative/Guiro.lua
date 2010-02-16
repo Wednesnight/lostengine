@@ -8,13 +8,14 @@ require("lost.guiro.View")
 require("lost.guiro.Label")
 require("lost.guiro.Image")
 require("lost.guiro.Button")
-require("lost.guiro.Scrollbar")
-require("lost.guiro.ScrollView")
 require("lost.guiro.VBox")
 require("lost.guiro.HBox")
 require("lost.guiro.ThemeManager")
+require("lost.guiro.event.Event")
 
 lost.common.Class "lost.declarative.Guiro" {}
+
+using "lost.guiro.event.Event"
 
 function Guiro:constructor(loader, themeManager)
   self.loader = loader
@@ -38,6 +39,7 @@ function Guiro:assignViewAttributes(target, source)
   if source.frameColor  ~= nil then target:frameColor(source.frameColor) end
   if source.showBackground  ~= nil then	target:showBackground(source.showBackground)	end
   if source.backgroundColor  ~= nil then target:backgroundColor(source.backgroundColor) end
+  target:needsRedraw()
   target:needsLayout()
 end
 
@@ -73,18 +75,6 @@ function Guiro:assignButtonAttributes(target, source)
 	if source.title ~= nil then target:title(source.title) end
 end
 
-function Guiro:assignScrollbarAttributes(target, source)
-  if source.min ~= nil then target:min(source.min) end
-  if source.max ~= nil then target:max(source.max) end
-  if source.value ~= nil then target:value(source.value) end
-  if source.stepping ~= nil then target:stepping(source.stepping) end
-  if source.orientation ~= nil then target:orientation(source.orientation) end
-end
-
-function Guiro:assignScrollViewAttributes(target, source)
-  if source.contentViewBounds ~= nil then target:contentViewBounds(source.contentViewBounds) end
-end
-
 function Guiro:assignVBoxAttributes(target, source)
 	if source.mode ~= nil then target:mode(source.mode) end
 	if source.halign ~= nil then target:halign(source.halign) end
@@ -109,25 +99,47 @@ end
 -- the keys in that table are event names and the values are handlers.
 -- the handlers are then registered as target/bubble listeners.
 function Guiro:addEventListeners(target, source)
-  if source.listeners == nil then return end
-  for k,v in pairs(source.listeners) do
-    target:addEventListener(k,v)
+  if source.listeners ~= nil then
+    -- capture listeners
+    if source.listeners.capture ~= nil then
+      for k,v in pairs(source.listeners.capture) do
+        target:addEventListener(k,v,Event.PHASE_CAPTURE)
+      end
+    end
+    -- target listeners (default)
+    if source.listeners.target ~= nil then
+      for k,v in pairs(source.listeners.target) do
+        target:addEventListener(k,v)
+      end
+    end
+    -- bubble listeners
+    if source.listeners.bubble ~= nil then
+      for k,v in pairs(source.listeners.bubble) do
+        target:addEventListener(k,v,Event.PHASE_BUBBLE)
+      end
+    end
+    -- default (target)
+    for k,v in pairs(source.listeners) do
+      if type(v) == "function" then
+        target:addEventListener(k,v)
+      end
+    end
   end
-end
-
-function Guiro:Screen(def)
-  local result = lost.guiro.Screen()
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def) 
-  self:assignViewAttributes(result, def) 
-  self:addEventListeners(result, def)
-  return result
 end
 
 function Guiro:View(def)
   local result = lost.guiro.View()
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)    
+  self:assignViewAttributes(result, def) 
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:Screen(def)
+  local result = lost.guiro.Screen()
+  self:applyStyle(result, def)
+  self:searchAndAddSubviews(result, def) 
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
@@ -197,26 +209,6 @@ function Guiro:HBox(def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:assignHBoxAttributes(result, def)   
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:Scrollbar(def)
-  local result = lost.guiro.Scrollbar()
-  self:applyStyle(result, def)
-  -- don't allow scrollbar subviews
-  self:assignViewAttributes(result, def) 
-  self:assignScrollbarAttributes(result, def)   
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:ScrollView(def)
-  local result = lost.guiro.ScrollView()
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def)  
-  self:assignViewAttributes(result, def) 
-  self:assignScrollViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
 end

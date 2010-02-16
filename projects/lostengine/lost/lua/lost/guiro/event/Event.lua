@@ -4,9 +4,9 @@ require("lost.common.Class")
 
 lost.common.Class "lost.guiro.event.Event" {}
 
-lost.guiro.event.Event.PHASE_CAPTURE = 0
-lost.guiro.event.Event.PHASE_TARGET = 1
-lost.guiro.event.Event.PHASE_BUBBLE = 2
+Event.PHASE_CAPTURE = 0
+Event.PHASE_TARGET = 1
+Event.PHASE_BUBBLE = 2
 
 function Event:constructor(inType) 
   self.type = inType                                -- identifies the event type

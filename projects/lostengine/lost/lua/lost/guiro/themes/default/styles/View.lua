@@ -15,8 +15,4 @@ function View:constructor()
 end
 
 function View:apply(target)
-  target:showFrame(false)
-  target:showBackground(false)
-  target:backgroundColor(Color(.5,.5,.5,1))
-  target:frameColor(Color(1,1,1,1))
 end

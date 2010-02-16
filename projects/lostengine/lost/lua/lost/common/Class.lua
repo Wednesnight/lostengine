@@ -102,6 +102,16 @@ function declareClass(namespace, bases, definition)
     end
   end
   
+  -- __tostring operator
+  namespace.__tostring = function(self)
+    return self:className()
+  end
+
+  -- __eq (equal) operator
+  namespace.__eq = function(self, other)
+    return rawequal(self, other)
+  end
+  
   -- init class metatable
   local metatable =
   {

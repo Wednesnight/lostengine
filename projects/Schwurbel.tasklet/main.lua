@@ -46,9 +46,9 @@ function startup(tasklet)
     dcl.rg:Draw
     {
       name = "original",
-      mesh = dcl.mesh:Quad2D
+      mesh = dcl.mesh:Quad
       {
-        filename = "magnum.jpg",
+        filename = "foo.jpg",
         size = imageSize,
         flip = true
       }
@@ -56,11 +56,11 @@ function startup(tasklet)
     dcl.rg:Draw
     {
       name = "shadered",
-      mesh = dcl.mesh:Quad2D
+      mesh = dcl.mesh:Quad
       {
         texture = dcl.gl:Texture
         {
-          filename = "magnum.jpg",
+          filename = "foo.jpg",
           params = dcl.gl:TextureParams
           {
             minFilter = gl.GL_LINEAR,

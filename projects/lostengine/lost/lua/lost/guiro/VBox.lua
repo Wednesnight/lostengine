@@ -10,15 +10,13 @@ function VBox:constructor()
 	self._valign = "top" -- only used if mode != spread, 'top' 'center' or 'bottom'
 	self._halign = "center"
 	self._spacing = 0 -- only used when mode is stacked
-	
-	self.deferredUpdate = function() self:update() end
 end
 
 -- returns the sum of the current heights of all subviews
 function VBox:calculateSubviewHeight()
   local result = 0
   for k,view in pairs(self.subviews) do
-    local gr = view:globalRect()
+    local gr = view.rect
     result = result + gr.height
   end
   return result
@@ -55,7 +53,7 @@ function VBox:updateStack()
   local subviewHeight = self:calculateSubviewHeight()
   local totalHeight = subviewHeight + (self._spacing*(#self.subviews-1))
   local yoffset = 0
-  local gr = self:globalRect()
+  local gr = self.rect
   if self._valign == "center" then
     yoffset = (gr.height - totalHeight)/2 + totalHeight
   elseif self._valign == "bottom" then
@@ -68,7 +66,7 @@ function VBox:updateStack()
   
   local currentOffset = yoffset
   for k,view in pairs(self.subviews) do
-    gr = view:globalRect()
+    gr = view.rect
     currentOffset = currentOffset - gr.height
     view.bounds.y = lost.guiro.yabs(currentOffset)
     view:needsLayout()
@@ -77,7 +75,7 @@ function VBox:updateStack()
   end
 end
 
-function VBox:update()
+function VBox:afterLayout()
   if self._mode == "spread" then
     self:updateSpread()
   elseif self._mode == "stack" then
@@ -87,21 +85,10 @@ function VBox:update()
   end
 end
 
-function VBox:addSubview(newview, pos)
-	lost.guiro.View.addSubview(self, newview, pos)
-  callLater(self.deferredUpdate)
-end
-
-function VBox:updateLayout(forceUpdate)
-  local doUpdate = forceUpdate or self.dirtyLayout
-  lost.guiro.View.updateLayout(self, forceUpdate)
-  if doUpdate then callLater(self.deferredUpdate) end
-end
-
 function VBox:mode(val)
 	if val ~= nil then
 		self._mode = val
-    callLater(self.deferredUpdate)
+    self:needsLayout()
 	else
 		return self._mode
 	end
@@ -110,7 +97,7 @@ end
 function VBox:valign(val)
 	if val ~= nil then
 		self._valign = val
-    callLater(self.deferredUpdate)
+    self:needsLayout()
 	else
 		return self._valign
 	end
@@ -119,7 +106,7 @@ end
 function VBox:halign(val)
 	if val ~= nil then
 		self._halign = val
-    callLater(self.deferredUpdate)
+    self:needsLayout()
 	else
 		return self._halign
 	end
@@ -128,7 +115,7 @@ end
 function VBox:spacing(val)
 	if val ~= nil then
 		self._spacing = val
-    callLater(self.deferredUpdate)
+    self:needsLayout()
 	else
 		return self._spacing
 	end

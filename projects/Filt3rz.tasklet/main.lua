@@ -1,12 +1,13 @@
-local loadShader = lost.gl.loadShader
-local Vec2 = lost.math.Vec2
-local Vec3 = lost.math.Vec3
-local Rect = lost.math.Rect
-local Color = lost.common.Color
-local Camera2D = lost.camera.Camera2D
-local Camera3D = lost.camera.Camera3D
-local WindowParams = lost.application.WindowParams
-local MatrixTranslation = lost.math.MatrixTranslation
+using "lost.gl.loadShader"
+using "lost.math.Vec2"
+using "lost.math.Vec3"
+using "lost.math.Rect"
+using "lost.common.Color"
+using "lost.camera.Camera2D"
+using "lost.camera.Camera3D"
+using "lost.application.WindowParams"
+using "lost.math.MatrixTranslation"
+using "lost.application.currentTasklet"
 
 fboSize = Vec2(256, 256)
 numPanels = 5
@@ -190,6 +191,9 @@ function startup(tasklet)
 
   scene:add(rootTextNode)
   
+  -- add to tasklet node
+  currentTasklet.renderNode:add(scene)
+
   return true;
 end
 
@@ -202,9 +206,6 @@ function update(tasklet)
     mesh.transform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle)
   end
 
-  scene:process(tasklet.window.context)
-  tasklet.window.context:swapBuffers()
-  
   passedSec = currentSec
   return running
 end

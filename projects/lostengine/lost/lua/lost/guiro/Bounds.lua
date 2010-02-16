@@ -110,6 +110,10 @@ function wrel(width, mod)
   end
 end
 
+function wfit()
+  return wrel(1)
+end
+
 function habs(height, mod)
   mod = mod or 0
   return function(self, parentRect)
@@ -122,4 +126,8 @@ function hrel(height, mod)
   return function(self, parentRect)
     return (parentRect.height * height) + mod
   end
+end
+
+function hfit()
+  return hrel(1)
 end

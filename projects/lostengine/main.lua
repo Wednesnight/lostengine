@@ -1,61 +1,47 @@
--- LostEngine main.lua
-
 require("lost.declarative.Context")
 
-local WindowParams = lost.application.WindowParams
-local Rect = lost.math.Rect
-local Vec2 = lost.math.Vec2
-local Vec3 = lost.math.Vec3
-local Color = lost.common.Color
-local Bounds = lost.guiro.Bounds
-local xabs = lost.guiro.xabs
-local yabs = lost.guiro.yabs
-local wabs = lost.guiro.wabs
-local habs = lost.guiro.habs
-local ApplicationEvent = lost.application.ApplicationEvent
+using "lost.application.WindowParams"
+using "lost.math.Rect"
+using "lost.application.ApplicationEvent"
+using "lost.declarative.Context"
 
+
+--[[
+    setup windowParams
+    this should be done in startup, fix this after implementing Window:setParams()
+  ]]
 windowParams = WindowParams("LostEngine", Rect(50,800,400,128))
 
--- these are deliberately global so we can access them from startup/update/shutdown
-dcl = nil
-screen = nil
 
+--[[
+    tasklet startup
+  ]]
 function startup(tasklet)
+
+  -- setup tasklet
   tasklet.name = "LostEngine Launcher"
-  log.debug("starting up")
-
-  -- global reference
-  lostengineTasklet = tasklet
-
   tasklet.waitForEvents = true
 
-  dcl = lost.declarative.Context(tasklet.loader)
-  screen = require("ui")
-  screen:listenTo(tasklet.eventDispatcher)
-  screen.bounds = Bounds(xabs(0), yabs(0), wabs(windowParams.rect.width), habs(windowParams.rect.height))
-  -- update needs to be called later since the ui loader code triggers quite a few deferred updates
-  callLater(function() screen:updateLayout(true) end) 
+  dcl = Context(tasklet.loader)
+  local screen = require("ui")
 
+  -- debug
+  tasklet.renderNode:print()
+  screen:printSubviews()
+
+  -- finally, setup events
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
   return true
 end
 
-function update(tasklet)
-  processCallLaterQueue()
-  screen:updateLayout(false)
-  screen.rootNode:process(tasklet.window.context)
-  tasklet.window.context:swapBuffers()
-  return true
-end
 
-function shutdown(tasklet)
-  log.debug("shutting down")
-  return true
-end
-
+--[[
+    key handler
+  ]]
 function keyHandler(event)
-  if event.key == lost.application.K_ESCAPE then
-    lostengineTasklet:dispatchApplicationEvent(ApplicationEvent.create(ApplicationEvent.QUIT))
+  local tasklet = lost.application.currentTasklet
+  if event.key == lost.application.K_ESCAPE and tasklet ~= nil then
+    tasklet:dispatchApplicationEvent(ApplicationEvent.create(ApplicationEvent.QUIT))
   end
 end

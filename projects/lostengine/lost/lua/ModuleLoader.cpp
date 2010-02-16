@@ -14,7 +14,7 @@ namespace lost
     namespace ModuleLoader
     {
 
-      void install(State& inState, lost::shared_ptr<resource::Loader> inLoader)
+      void install(State& inState)
       {
         const static string script = "local mt = "
                                      "{ "
@@ -29,8 +29,6 @@ namespace lost
                                      "} "
                                      "setmetatable(package.preload, mt)";
         
-        // setup loader
-        inState.globals["loader"] = inLoader;
         // execute script fragment
         inState.doString(script);
       }

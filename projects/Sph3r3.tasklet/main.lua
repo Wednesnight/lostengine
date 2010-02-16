@@ -69,6 +69,8 @@ function startup(tasklet)
   
   circleMesh = rootNode:recursiveFindByName("circle1").mesh
   lasttime = lost.platform.currentTimeMilliSeconds()
+  
+  lost.application.currentTasklet.renderNode:add(rootNode)
   return true
 end
 
@@ -77,8 +79,6 @@ function update(tasklet)
   local delta = now - lasttime
   angle = math.fmod(angle + (delta/speed), 360)
   circleMesh.transform = MatrixRotX(angle)
-  rootNode:process(tasklet.window.context)
-  tasklet.window.context:swapBuffers()
   lasttime = now
   return running
 end
