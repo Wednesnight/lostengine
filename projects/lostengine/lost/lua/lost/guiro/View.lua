@@ -205,7 +205,12 @@ function View:needsRedraw()
   end
 end
 
-function View:afterLayout()
+--[[
+    Internal layout, do not use! See also: HasLayout:beforeLayout(), HasLayout:afterLayout()
+  ]]
+function View:_layout(force)
+  lost.guiro.HasLayout._layout(self, force)
+
   -- update background mesh
   self.backgroundMesh:updateSize(Vec2(self.rect.width, self.rect.height))
   self.backgroundMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
