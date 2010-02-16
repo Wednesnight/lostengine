@@ -6,6 +6,8 @@ namespace lost
 namespace mesh
 {
 
+using namespace gl;
+
 Mesh::Mesh()
 {
   gl::BufferLayout layout;
@@ -44,6 +46,14 @@ void Mesh::resetSize(uint32_t numVertices, uint32_t numIndices)
   indexBuffer->reset(numIndices);
 }
 
+HybridBufferPtr Mesh::bufferFromUsageType(UsageType ut)
+{
+  if(ut == UT_index)
+    return indexBuffer;
+  else
+    return vertexBuffer;
+}
+
 void Mesh::setIndex(uint32_t idx, uint32_t val)
 {
   indexBuffer->set(idx, gl::UT_index, val);
@@ -63,6 +73,20 @@ math::Vec2 Mesh::getVertex(uint32_t idx)
 {
   return vertexBuffer->getAsVec2(idx, gl::UT_vertex);
 }
+
+void Mesh::set(uint32_t idx, UsageType ut, uint8_t val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, uint16_t val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, uint32_t val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, float val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, const math::Vec2& val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, const math::Vec3& val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, const math::Vec4& val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+void Mesh::set(uint32_t idx, UsageType ut, const common::Color& val) { bufferFromUsageType(ut)->set(idx, ut, val); }
+
+math::Vec2 Mesh::getAsVec2(uint32_t idx, UsageType ut) { return bufferFromUsageType(ut)->getAsVec2(idx, ut); }
+math::Vec3 Mesh::getAsVec3(uint32_t idx, UsageType ut) { return bufferFromUsageType(ut)->getAsVec3(idx, ut); }
+uint32_t   Mesh::getAsU32(uint32_t idx, UsageType ut) { return bufferFromUsageType(ut)->getAsU32(idx, ut); }
+
 
 }
 }
