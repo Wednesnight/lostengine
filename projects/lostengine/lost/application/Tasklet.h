@@ -6,6 +6,8 @@
 #include <list>
 #include "lost/resource/DefaultLoader.h"
 #include "lost/lua/State.h"
+#include "lost/application/Queue.h"
+#include "lost/rg/Node.h"
 
 namespace lost
 {
@@ -32,16 +34,16 @@ namespace lost
       luabind::object luaUpdate;
       bool hasLuaShutdown;
       luabind::object luaShutdown;
-      bool hasLuaProcessCallLater;
-      luabind::object luaProcessCallLater;
       
     public:
       std::string                     name;
       lost::resource::LoaderPtr       loader;
       lost::lua::StatePtr             lua;
       lost::event::EventDispatcherPtr eventDispatcher;
-      WindowParams                    windowParams; // fill this structure with the necessary params if you want a window with GL context
-      Window*                         window; // contains the window pointer after init() if it could be created
+      WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
+      Window*                         window;         // contains the window pointer after init() if it could be created
+      rg::NodePtr                     renderNode;     // render graph root node
+      QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
       
       // if true, only runs the main loop once a low level event arrives
       bool waitForEvents;

@@ -1,6 +1,7 @@
 module("lost.guiro.event", package.seeall)
 
 require("lost.common.Class")
+require("lost.guiro.event.Event")
 require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
@@ -8,6 +9,8 @@ require("lost.guiro.event.TouchEvent")
 require("lost.guiro.event.DropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
+
+using "lost.guiro.event.Event"
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -34,7 +37,7 @@ function EventManager:findViewStack(rootView, mouseEvent)
   local containsPoint  = rootView:containsCoord(pos)-- containsPoint designates if a view contained the point
   local view = rootView
   local k, v
-  while containsPoint and (not view:hidden()) and view.receivesEvents do
+  while containsPoint and view:isDerivedFrom("lost.guiro.HasEvents") do
     viewStack[#viewStack+1] = view
     containsPoint = false
     local i = #(view.subviews)
@@ -62,17 +65,18 @@ function EventManager:logViewStack(vs)
   end  
 end
 
--- calls dispatchCaptureEvent on all views in the stack from index [1,n)
+-- calls routeEvent with phase capture on all views in the stack from index [1,n]
 function EventManager:dispatchCaptureEvents(viewStack, event, targetIndex)
-  if viewStack and (targetIndex>1) and event then 
+  if viewStack and (targetIndex > 1) and event then 
     local maxv = targetIndex - 1
     local k = nil
     local v = nil
     for k,v in ipairs(viewStack) do
       if (k <= maxv) and (not event.stopDispatch) then
 --        log.debug("calling capture on "..v.id)
-          event.currentTarget = v
-          v:dispatchCaptureEvent(event)
+        event.currentTarget = v
+        event.phase = Event.PHASE_CAPTURE
+        v:routeEvent(event)
       else
         break
       end
@@ -80,24 +84,27 @@ function EventManager:dispatchCaptureEvents(viewStack, event, targetIndex)
   end
 end
 
--- calls dispatchTargetEvent on view n
+-- calls routeEvent with phase target on view n
 function EventManager:dispatchTargetEvent(viewStack, event, targetIndex)
-  if viewStack and (targetIndex>=1) and event and (not event.stopDispatch)then
+  if viewStack and (targetIndex >= 1) and event and (not event.stopDispatch)then
     local currentView = viewStack[targetIndex]
 --    log.debug("calling target on "..currentView.id)
-    currentView:dispatchTargetEvent(event)
+    event.currentTarget = event.target
+    event.phase = Event.PHASE_TARGET
+    currentView:routeEvent(event)
   end
 end
 
--- calls dispatchBubbleEvent on views [1, n) in reverse order
+-- calls routeEvent with phase bubble on views [1, n) in reverse order
 function EventManager:dispatchBubbleEvents(viewStack, event, targetIndex)
-  if viewStack and (targetIndex>1) and event then
+  if viewStack and (targetIndex > 1) and event then
     local i = targetIndex-1
     while (i > 0) and (not event.stopDispatch) do
       local currentView = viewStack[i]
 --      log.debug("calling bubble on "..currentView.id)
       event.currentTarget = currentView
-      currentView:dispatchBubbleEvent(event)
+      event.phase = Event.PHASE_BUBBLE
+      currentView:routeEvent(event)
       i = i -1 
     end
   end

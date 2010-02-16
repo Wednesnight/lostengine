@@ -1,30 +1,21 @@
--- lost.guiro.Label
 module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
 require("lost.guiro.Bounds")
 
-local Rect = lost.math.Rect
-local Vec2 =lost.math.Vec2
-local Vec3 =lost.math.Vec3
-local MatrixTranslation =lost.math.MatrixTranslation
-
 lost.common.Class "lost.guiro.Label" "lost.guiro.View" {}
 
--- render triggers
--- * text
--- * _fontSize
--- * font
+-- local shortcuts
+local Rect = lost.math.Rect
+local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
+local MatrixTranslation = lost.math.MatrixTranslation
 
--- layout triggers
--- * layout
--- * _shadowOffset
-
---[[  A Label displays one line of text inside it's bounds.
-  Text is rendered with the given font and _fontSize.
-  Optionally, a shadow can be drawn underneath the original text with a flexible offset
-  and different color.
-]]
+--[[
+    A Label displays one line of text inside it's bounds.
+    Text is rendered with the given font and _fontSize.
+    Optionally, a shadow can be drawn underneath the original text with a flexible offset and different color.
+  ]]
 function Label:constructor()
   lost.guiro.View.constructor(self)
 
@@ -53,61 +44,54 @@ function Label:constructor()
   -- suppress background and frame by default
   self:showFrame(false)
   self:showBackground(false)
-  
-  self.deferredUpdateLayout = function() self:updateLayout(true) end
-  self.deferredRender = function() self:render() end
 end
 
-function Label:updateLayout(forceUpdate)
-  local doUpdateLayout = forceUpdate or self.dirtyLayout
-
-	lost.guiro.View.updateLayout(self, forceUpdate)
-	local gr = self.currentGlobalRect
-
-  if doUpdateLayout then
-    -- initially, the text is aligned to the lower left border
-    -- if any of the alignment strings are borked, the text will still display,
-    -- but the alignment will be only off inside the label's bounds
-    local textPos = Vec3(gr.x, gr.y, 0)
-
-    if self._halign == "center" then
-      textPos.x = gr.x + (gr.width-self.textMesh.size.width)/2
-    elseif self._halign == "left" then
-      textPos.x = gr.x
-    elseif self._halign == "right" then
-      textPos.x = gr.x+gr.width - self.textMesh.size.width
-    end
-
-    if self._valign == "center" then
-      textPos.y = gr.y+((gr.height-self.textMesh.size.height)/2)+(-1*self.textMesh.min.y)
-    elseif self._valign == "top" then
-      textPos.y = gr.y+gr.height-self.textMesh.size.height
-    elseif self._valign == "bottom" then
-      textPos.y = gr.y+(-1*self.textMesh.min.y)
-    end
-
-    local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
-    self.textMesh.transform = MatrixTranslation(textPos)
-    self.shadowMesh.transform = MatrixTranslation(shadowPos)
-  end
-end
--- call this after a param change to update the appearance of text and shadow Mesh
--- will recreate the mesh data (but not the meshes)
-function Label:render()
+function Label:afterRedraw()
   if self._font == nil then
     log.warn("--------- NO FONT")
     return
   end
---  log.debug("--- HAS FONT")
+
   self._font:render(self._text, self._fontSize, self.textMesh)
   self._font:render(self._text, self._fontSize, self.shadowMesh)
-  self:updateLayout(true)
+  self:updateAlign()
+end
+
+function Label:afterLayout()
+  self:updateAlign()
+end
+
+function Label:updateAlign()
+  -- initially, the text is aligned to the lower left border
+  -- if any of the alignment strings are borked, the text will still display,
+  -- but the alignment will be only off inside the label's bounds
+  local textPos = Vec3(self.rect.x, self.rect.y, 0)
+
+  if self._halign == "center" then
+    textPos.x = self.rect.x + (self.rect.width-self.textMesh.size.width)/2
+  elseif self._halign == "left" then
+    textPos.x = self.rect.x
+  elseif self._halign == "right" then
+    textPos.x = self.rect.x+self.rect.width - self.textMesh.size.width
+  end
+
+  if self._valign == "center" then
+    textPos.y = self.rect.y+((self.rect.height-self.textMesh.size.height)/2)+(-1*self.textMesh.min.y)
+  elseif self._valign == "top" then
+    textPos.y = self.rect.y+self.rect.height-self.textMesh.size.height
+  elseif self._valign == "bottom" then
+    textPos.y = self.rect.y+(-1*self.textMesh.min.y)
+  end
+
+  local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
+  self.textMesh.transform = MatrixTranslation(textPos)
+  self.shadowMesh.transform = MatrixTranslation(shadowPos)
 end
 
 function Label:text(s)
   if s~= nil then
     self._text = s
-    callLater(self.deferredRender)
+    self:needsRedraw()
   else
     return self._text
   end
@@ -116,7 +100,7 @@ end
 function Label:font(v)
   if v ~= nil then
     self._font = v
-    callLater(self.deferredRender)
+    self:needsRedraw()
   else
     return self._font
   end
@@ -125,7 +109,7 @@ end
 function Label:fontSize(v)
   if v ~= nil then
     self._fontSize = v
-    callLater(self.deferredRender)
+    self:needsRedraw()
   else
     return self._fontSize
   end
@@ -150,7 +134,7 @@ end
 function Label:shadowOffset(v)
   if v ~= nil then
     self._shadowOffset = v
-    callLater(self.deferredUpdateLayout)
+    self:needsLayout()
   else
     return self._shadowOffset
   end
@@ -167,7 +151,7 @@ end
 function Label:halign(v)
   if v ~= nil then
     self._halign = v
-    callLater(self.deferredUpdateLayout)
+    self:needsLayout()
   else
     return self.__halign
   end
@@ -176,7 +160,7 @@ end
 function Label:valign(v)
   if v ~= nil then
     self._valign = v
-    callLater(self.deferredUpdateLayout)
+    self:needsLayout()
   else
     return self._valign
   end

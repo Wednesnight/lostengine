@@ -9,8 +9,6 @@ lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
 
 function UserInterface:constructor()
   lost.guiro.View.constructor(self)
-  self:showBackground(false)
-  self:showFrame(false)
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -43,9 +41,9 @@ function UserInterface:updateFocus(event)
     while idx > 0 do
       local subview = self.subviews[idx]
       if subview:containsCoord(mouseEvent.pos) then
-        self:removeSubview(subview)
-        self:addSubview(subview)
-        subview:needsRedraw()
+        table.remove(self.subviews, idx)
+        table.insert(self.subviews, subview)
+        self:needsRedraw()
         break
       end
       idx = idx-1

@@ -1,55 +1,48 @@
--- lost.guiro.View
+--[[
+    lost.guiro.View
+    
+    View is the base class of all Guiro objects, it also implements all drawing related functionality.
+    Example:
+
+      lost.common.Class "MyDrawable" "lost.guiro.View" {}
+      
+      function MyDrawable:beforeRedraw()
+        -- update meshes, colors, etc.
+      end
+      
+      function MyDrawable:afterRedraw()
+        -- update meshes, colors, etc.
+      end
+      
+      function MyDrawable:modifyingMethod()
+        -- modify members, colors, etc.
+        self:needsRedraw()
+      end
+  ]]
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.common.CallLater")
-require("lost.guiro.Bounds")
-require("lost.guiro.event.EventDispatcher")
+require("lost.guiro.HasLayout")
+require("lost.guiro.HasSubviews")
+require("lost.guiro.HasEvents")
 
-local Vec2 = lost.math.Vec2
-local Vec3 = lost.math.Vec3
-local MatrixTranslation = lost.math.MatrixTranslation
-
-lost.common.Class "lost.guiro.View"
+lost.common.Class "lost.guiro.View" "lost.guiro.HasLayout" "lost.guiro.HasSubviews" "lost.guiro.HasEvents"
 {
-
   -- helper for auto-generated view ids
-  indices = {},
-
-  isView = true,
-	parent = nil,
-
-  focusable = false,
-  mouseInside = false,
-  receivesEvents = true,
---  sendsEvents = true ????
-
-  dirtyLayout = true,
-  dirtySubviewLayout = false,
-
-  -- geometry cache
-  currentGlobalRect = lost.math.Rect(),
-
-  dirty = true,
-  focused = false
+  indices = {}
 }
 
-function View:createDefaultId()
-  local result = nil
-  local name = self:className()
-  if (not self.indices[name]) then
-    self.indices[name] = 1
-  else
-    self.indices[name] = self.indices[name]+1
-  end
-  result = name .. self.indices[name]
-  return result
-end
+using "lost.common.callLater"
+using "lost.math.Vec2"
+using "lost.math.Vec3"
+using "lost.math.MatrixTranslation"
 
---[[ 
-    constructor
-  ]]
 function View:constructor()
+  -- call interface ctors
+  lost.guiro.HasLayout.constructor(self)
+  lost.guiro.HasSubviews.constructor(self)
+  lost.guiro.HasEvents.constructor(self)
+
   -- all views and derived classes receive a default id in the
   -- constructor so they can be uniquely identified
   self.id = self:createDefaultId()
@@ -74,6 +67,9 @@ function View:constructor()
   self.disableScissorNode.active = false
   self.disableScissorNode.name = "disableScissorNode"
 
+  -- set scissor rect to enable scissoring for this view
+  self.scissorRect = nil
+
   -- draw the view
   self.rootNode:add(self.renderNode)
   -- apply the views scissoring
@@ -84,25 +80,14 @@ function View:constructor()
   -- disable scissoring
   self.rootNode:add(self.disableScissorNode)
 
-  -- mesh container
-  self.meshes = {}
-
-  self.bounds = Bounds(xabs(0), yabs(0), wabs(10), habs(10))
-  self.subviews = {}
-
-  -- setup event dispatchers
-  self.defaultEventDispatcher = lost.guiro.event.EventDispatcher()
-  self.captureEventDispatcher = lost.guiro.event.EventDispatcher()
-  self.currentGlobalRect = lost.math.Rect()
-
   -- meshes and draw nodes
-  self.backgroundMesh = lost.mesh.Quad.create(self.currentGlobalRect)
+  self.backgroundMesh = lost.mesh.Quad.create(self.rect)
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
-  self.frameMesh = lost.mesh.Rect.create(self.currentGlobalRect)
+  self.frameMesh = lost.mesh.Rect.create(self.rect)
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
   self.frameNode.name = "drawViewFrame"
@@ -110,7 +95,163 @@ function View:constructor()
 
   self.renderNode:add(self.backgroundNode)
   self.renderNode:add(self.frameNode)
-  
+
+  self.dirty = false
+end
+
+--[[
+    Called by lost.guiro.HasSubviews when attaching this View to another
+  ]]
+function View:onAttach(parent)
+  self:setParent(parent)
+end
+
+--[[
+    Called by lost.guiro.HasSubviews when detaching this View from its parent
+  ]]
+function View:onDetach(parent)
+  self:setParent(nil)
+end
+
+--[[
+    Re-/set parent view
+  ]]
+function View:setParent(parent)
+  if parent ~= nil then
+    if parent:isDerivedFrom("lost.guiro.View") then
+      self.parent = parent
+    else
+      local typeName = type(parent)
+      if type(parent.className) == "function" then
+        typeName = parent:className()
+      end
+      error("View:setParent() expected lost.guiro.View, got ".. typeName, 2)
+    end
+
+    local currentParent = parent
+    local node = nil
+    while currentParent ~= nil and node == nil do
+      node = currentParent.subviewNodes
+      currentParent = currentParent.parent
+    end
+    if node ~= nil then
+      node:add(self.rootNode)
+    end
+
+    self:needsRedraw()
+  else
+    self.parent = parent
+
+    local currentParent = parent
+    local node = nil
+    while currentParent ~= nil and node == nil do
+      node = currentParent.subviewNodes
+      currentParent = currentParent.parent
+    end
+    if node ~= nil then
+      node:remove(self.rootNode)
+    end
+  end
+end
+
+--[[
+    Get the root view of the view hierarchy
+  ]]
+function View:rootView()
+  if self.parent ~= nil then
+    return self.parent:rootView()
+  else
+    return self
+  end
+end
+
+--[[ 
+    prints self.subviews hierarchy
+  ]]
+function View:printSubviews(prefix)
+  if not prefix then
+    prefix = ""
+  end
+  log.debug(prefix .."|-- ".. self.id)
+  for k,view in next,self.subviews do
+    view:printSubviews(prefix .."    ")
+  end
+end
+
+--[[
+    Utility method for auto-generated ids
+  ]]
+function View:createDefaultId()
+  local result = nil
+  local name = self:className()
+  if (not View.indices[name]) then
+    View.indices[name] = 1
+  else
+    View.indices[name] = View.indices[name]+1
+  end
+  result = name .. View.indices[name]
+  return result
+end
+
+--[[
+    Updates dirty flag and inserts self into redraw queue
+  ]]
+function View:needsRedraw()
+  if not self.dirty then
+    self.dirty = true
+    
+    -- add to tasklet queue
+    callLater(View._redraw, self)
+  end
+end
+
+function View:afterLayout()
+  -- update background mesh
+  self.backgroundMesh:updateSize(Vec2(self.rect.width, self.rect.height))
+  self.backgroundMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+
+  -- update frame mesh
+  self.frameMesh:updateSize(Vec2(self.rect.width, self.rect.height))
+  self.frameMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+
+  -- update scissoring
+  if self.scissorRect ~= nil then
+    self.scissorRectNode.rect = self.scissorRect
+  else
+    self.scissorRectNode.rect = self.rect
+  end
+end
+
+--[[
+    Internal redraw, do not use! See also: View:beforeRedraw(), View:afterRedraw()
+  ]]
+function View:_redraw()
+  log.debug(tostring(self) .."(".. self.id .."):_redraw()")
+  self:beforeRedraw()
+  self.dirty = false
+
+  -- Call invisible _redraw() on all subviews
+  if type(self.subviews) == "table" then
+    for k,view in next,self.subviews do
+      if view:isDerivedFrom("lost.guiro.View") then
+        view:_redraw(true)
+      end
+    end
+  end
+
+  self:afterRedraw()
+end
+
+--[[
+    Override this method to implement your redraw code before base objects are updated
+  ]]
+function View:beforeRedraw()
+end
+
+--[[
+    Override this method to implement your redraw code after base objects were updated
+  ]]
+function View:afterRedraw()
 end
 
 function View:showFrame(flag)
@@ -145,308 +286,10 @@ function View:backgroundColor(col)
   end
 end
 
-function View:__tostring()
-  return "View: "..self.id
-end
-
-function View:__eq(other)
-  return rawequal(self, other)
-end
-
---[[ 
-    inserts child into self.subviews 
-  ]]
-function View:addSubview(newview, pos)
---	log.debug("trying to add "..newview.id)
-  if (pos == nil) then
-    pos = table.maxn(self.subviews) + 1
-  end
-  if (newview.id) then
-    if (self(newview.id) == nil) then
-      table.insert(self.subviews, pos, newview)
-      self.subviewNodes:add(newview.rootNode)
-      newview:setParent(self)
-    else
-      log.error("subview '".. newview.id .."' already exists")
-			error("subview already exists")
-    end
-  else
-    log.error("cannot append subview without id")
-  end
-end
-
---[[ 
-    removes subview from self.subviews and sets subview.parent to nil
-  ]]
-function View:removeSubview(subview)
-  local idx = 1
-  for k,view in next,self.subviews do
-    if rawequal(view, subview) then
-      table.remove(self.subviews, idx)
-      self.subviewNodes:remove(subview.rootNode)
-      subview:setParent(nil)
-      break
-    end
-    idx = idx+1
-  end
-end
-
-function View:removeAllSubviews()
-  for k,v in pairs(self.subviews) do 
-    self:removeSubview(v)
-  end
-end
-
---[[
-    returns subview with given subviewId
-    nil if subviewId is invalid
-  ]]
-function View:__call(subviewId)
-  local result = nil
-  for k,view in next,self.subviews do
-    if (view.id == subviewId) then
-      result = view
-      break
-    end
-  end
-  return result
-end
-
---breadth-first search for subview with given id
-function View:recursiveFindById(viewId)
-  local result = self(viewId)
-  if result == nil then
-    for k,view in pairs(self.subviews) do
-      result = view:recursiveFindById(viewId)
-      if result ~= nil then
-        break
-      end
-    end
-  end
-  return result
-end
-
---[[ 
-    sets the parent
-  ]]
-function View:setParent(parent)
-  self.parent = parent
-end
-
---[[ 
-    basically same functionality as EventDispatcher:addEventListener.
-    if capture is true, the listener is only added to the capture event listeners
-    if capture is false, the listener is only added to the default listeners (target and bubble)
-  ]]
-function View:addEventListener(which, listener, capture)
---  log.debug(tostring(self.id)..": adding listener for "..which)
-  if capture then 
-    self.captureEventDispatcher:addEventListener(which, listener)
-  else
-    self.defaultEventDispatcher:addEventListener(which, listener)
-  end
-end
-
--- calling dispatchEvent on a view notifies all target listeners and bubbles the event if event.bubbles is enabled
-function View:dispatchEvent(event)
-  if event then
-    if not event.stopDispatch then
-      self:dispatchTargetEvent(event) 
-    end
-    if event.bubbles and (not event.stopPropagation) then
-      self:bubbleEvent(event)
-    end
-  end
-end
-
--- helper function to bubble an event up the parent view hierarchy
-function View:bubbleEvent(event)
-  local currentView = self
-  while currentView and (not event.stopPropagation) do
-    currentView:dispatchBubbleEvent(event)
-    currentView = currentView.parent
-  end
-end
-
-function View:removeEventListener(which, listener, capture)
-  if capture then
-    self.captureEventDispatcher:removeEventListener(which, listener)
-  else
-    self.defaultEventDispatcher:removeEventListener(which, listener)
-  end
-end
-
---[[
-    checks if point is within view rect
-  ]]
-function View:containsCoord(point)
-  local globalRect = self:globalRect()
-  return globalRect:contains(point)
-end
-
---[[
-    updates own and subviews's layout
-  ]]
-function View:updateLayout(forceUpdate)
-  -- view needs update
-  if forceUpdate or self.dirtyLayout then
-    self.dirtyLayout = false
-    self.dirtySubviewLayout = false
-    if self.parent then
---      log.debug("fetching parents globalRect")
-      local pgr = self.parent:globalRect()
---      log.debug("pgr "..pgr.x.." "..pgr.y.." "..pgr.width.." "..pgr.height)
-      self.currentGlobalRect = self.bounds:rect(pgr)
-      local cgr = self.currentGlobalRect
---      log.debug(" -- "..cgr.x.." "..cgr.y.." "..cgr.width.." "..cgr.height)
-      self.backgroundMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
-      self.backgroundMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
-      self.frameMesh:updateSize(Vec2(self.currentGlobalRect.width, self.currentGlobalRect.height))
-      self.frameMesh.transform = MatrixTranslation(Vec3(self.currentGlobalRect.x, self.currentGlobalRect.y, 0))
-    else
-      self.currentGlobalRect = self.bounds:rect(lost.math.Rect())
-    end
-
-    -- apply layout
-    self:applyLayout()
-
-    for key,view in next,self.subviews do
-      view:updateLayout(true)
-    end
---    incUp()
-  -- subview needs update
-  elseif self.dirtySubviewLayout then
-    self.dirtySubviewLayout = false
-    for key,view in next,self.subviews do
-      if view.dirtyLayout or view.dirtySubviewLayout then
-        view:updateLayout()
-      end
-    end
-  end  
-end
-
---[[
-    update scissoring and other post-update settings
-    override this method if you want to modify stuff that needs currentGlobalRect
-  ]]
-function View:applyLayout()
-  -- apply scissoring
-  if self.scissorRect ~= nil then
-    self.scissorRectNode.rect = self.scissorRect
-  else
-    self.scissorRectNode.rect = self.currentGlobalRect
-  end
-end
-
---[[
-    returns the Views rect in absolute (screen) coordinates
-  ]]
-function View:globalRect()
-	self:updateLayout()
-  return self.currentGlobalRect
-end
-
---[[
-    sets dirtyLayout and parent's dirtySubviewLayout flags
-  ]]
-function View:needsLayout()
-  self:needsRedraw()
-  if not self.dirtyLayout then
-    self.dirtyLayout = true
-    if self.parent then
-      self.parent:needsSubviewLayout()
-    end
-  end
-end
-
---[[
-    sets dirtySubviewLayout flag
-  ]]
-function View:needsSubviewLayout()
-  if not self.dirtySubviewLayout then
-    self.dirtySubviewLayout = true
-    if self.parent then
-      self.parent:needsSubviewLayout()
-    end
-  end
-end
-
---[[
-    resize and call needsLayout
-  ]]
-function View:resize(bounds)
-  self.bounds = bounds
-  self:needsLayout()
-end
-
---[[
-    sets dirty flag to trigger render
-  ]]
-function View:needsRedraw()
-  self.dirty = true
-end
-
-function View:update()
-  self:updateLayout()
-  if dirty then
-    self.dirty = false
-  end
-  for k,view in next,self.subviews do
-    view:update()
-  end
-end
-
-function View:screen()
-  if self.parent then
-    return self.parent:screen()
-  else
-    return nil
-  end
-end
-
-local subViewPrintNum = 0
---[[ 
-    prints self.subviews hierarchy
-  ]]
-function View:printSubviews(prefix)
-  if not prefix then
-    prefix = ""
-  end
-  log.debug(prefix .."|-- ".. self.id)
-  incUp()
-  for k,view in next,self.subviews do
-    view:printSubviews(prefix .."    ")
-  end
-end
-
 function View:hidden(val)
 	if val ~= nil then
-		if self.rootNode then
-			self.rootNode.active = not val
-		else
-      log.warn("------ can't set hidden, no root node")
-		end
+		self.rootNode.active = not val
 	else
 		return not self.rootNode.active
 	end
 end
-
---[[
-    the following three functions exist in order to hide some View implementation
-    details from the EventManager and to prettify the calling code in the EventManager.
-    If the structure proves to be viable, we can remove these methods and call the
-    appropriate dispatchers directly from the EventManager.
-  ]]
--- !!!!!!!!! DO NOT CALL DIRECTLY, ONLY USED BY EVENTMANAGER
-function View:dispatchCaptureEvent(event)
-  self.captureEventDispatcher:dispatchEvent(event)
-end
-function View:dispatchTargetEvent(event)
---  log.debug(self.id..": targetting")
-  self.defaultEventDispatcher:dispatchEvent(event)
-end
--- called by EventManager, don't call directly
-function View:dispatchBubbleEvent(event)
-  self.defaultEventDispatcher:dispatchEvent(event)
-end
--- ^^^^^^^^^ DO NOT CALL DIRECTLY, ONLY USED BY EVENTMANAGER

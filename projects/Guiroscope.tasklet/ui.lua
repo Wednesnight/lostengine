@@ -1,22 +1,22 @@
-local Bounds = lost.guiro.Bounds
-local xabs = lost.guiro.xabs
-local yabs = lost.guiro.yabs
-local xrel = lost.guiro.xrel
-local yrel = lost.guiro.yrel
-local xright = lost.guiro.xright
-local xleft = lost.guiro.xleft
-local ytop = lost.guiro.ytop
-local ybottom = lost.guiro.ybottom
-local xcenter = lost.guiro.xcenter
-local ycenter = lost.guiro.ycenter
-local wabs = lost.guiro.wabs
-local habs = lost.guiro.habs
-local wrel = lost.guiro.wrel
-local hrel = lost.guiro.hrel
-local Color = lost.common.Color
-local Rect = lost.math.Rect
-local Vec2 = lost.math.Vec2
-local Vec3 = lost.math.Vec3
+using "lost.guiro.Bounds"
+using "lost.guiro.xabs"
+using "lost.guiro.yabs"
+using "lost.guiro.xrel"
+using "lost.guiro.yrel"
+using "lost.guiro.xright"
+using "lost.guiro.xleft"
+using "lost.guiro.ytop"
+using "lost.guiro.ybottom"
+using "lost.guiro.xcenter"
+using "lost.guiro.ycenter"
+using "lost.guiro.wabs"
+using "lost.guiro.habs"
+using "lost.guiro.wrel"
+using "lost.guiro.hrel"
+using "lost.common.Color"
+using "lost.math.Rect"
+using "lost.math.Vec2"
+using "lost.math.Vec3"
 
 return dcl.guiro:Screen
 {
@@ -40,43 +40,38 @@ return dcl.guiro:Screen
     {
       id = "window1",
       bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5)),
-      dcl.guiro:ScrollView
+      dcl.guiro:Image
       {
-        bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1)),
-        contentViewBounds = Bounds(xleft(), ytop(), wabs(550), habs(265)),
-        dcl.guiro:Image
+        id = "image1",
+        bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
+        filename = "lost/guiro/themes/default/resources/ButtonHover.png",
+        scale="scalegrid",
+        showFrame = false,
+        caps = 
         {
-          id = "image1",
-          bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
-          filename = "lost/guiro/themes/default/resources/ButtonHover.png",
-          scale="scalegrid",
-          showFrame = false,
-          caps = 
-          {
-            left = 3,
-            right=3,
-            top=3,
-            bottom=3
-          },
-          flip = true,
-          filter = true,
+          left = 3,
+          right=3,
+          top=3,
+          bottom=3
         },
-        dcl.guiro:Button
+        flip = true,
+        filter = true,
+      },
+      dcl.guiro:Button
+      {
+        bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
+        title = "riesig",
+        listeners = 
         {
-          bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
-          title = "riesig",
-          listeners = 
-          {
-            mouseEnter = function(event) event.target:title("RIESIG") end,
-            mouseLeave = function(event) event.target:title("riesig") end
-          }
+          mouseEnter = function(event) if event.currentTarget == event.target then event.target:title("RIESIG") end end,
+          mouseLeave = function(event) if event.currentTarget == event.target then event.target:title("riesig") end end
         }
       }
     },
     dcl.guiro:Window
     {
       id = "window2",
-      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
+      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1))--[[,
 			dcl.guiro:HBox
 			{
 				bounds = Bounds(xleft(), ytop(), wrel(1), habs(300)),
@@ -204,6 +199,7 @@ return dcl.guiro:Screen
   				}
   			}				
 			}
+]]
     }
     
   }

@@ -5,6 +5,7 @@
 #include <boost/bind.hpp>
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
+#include "lost/lua/GlobalFunctions.h"
 #include <algorithm>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
@@ -23,6 +24,7 @@ using namespace lost::event;
 using namespace lost::lua;
 using namespace lost::platform;
 using namespace lost::resource;
+using namespace lost::rg;
 
 namespace lost
 {
@@ -35,7 +37,9 @@ namespace lost
       eventDispatcher(new EventDispatcher()),
       lua(new State(loader)),
       waitForEvents(false),
-      name("<unnamed tasklet>")
+      name("<unnamed tasklet>"),
+      renderNode(new Node()),
+      updateQueue(new Queue())
     {
       // set error handler
       add_error_handler(bind(&Tasklet::error, this, _1, _2));
@@ -43,7 +47,9 @@ namespace lost
       // bind lostengine lua mappings
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
-      ModuleLoader::install(*lua, loader);
+      ModuleLoader::install(*lua);
+      // publish global utility functions
+      GlobalFunctions::install(*lua);
     }
     
     Tasklet::~Tasklet()
@@ -54,7 +60,8 @@ namespace lost
       luaStartup = nil;
       luaUpdate = nil;
       luaShutdown = nil;
-      luaProcessCallLater = nil;
+      renderNode.reset();
+      updateQueue.reset();
       if (window) delete window;
       loader.reset(); // loader is also present in lua state, so kill it first
       eventDispatcher.reset(); 
@@ -62,7 +69,10 @@ namespace lost
     }
 
     void Tasklet::init()
-    {      
+    {  
+      // populate self into lua context
+      lua->globals["lost"]["application"]["currentTasklet"] = this;
+
       // try to load the main script and memorize result in a flag
       scriptLoaded = false;
       try
@@ -90,15 +100,12 @@ namespace lost
       hasLuaStartup = false;
       hasLuaUpdate = false;
       hasLuaShutdown = false;
-      hasLuaProcessCallLater = false;
       luaStartup = lua->globals["startup"];
       if(luabind::type(luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
       luaUpdate = lua->globals["update"];
       if(luabind::type(luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
       luaShutdown = lua->globals["shutdown"];
       if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
-      luaProcessCallLater = lua->globals["processCallLaterQueue"];
-      if(luabind::type(luaProcessCallLater)==LUA_TFUNCTION) hasLuaProcessCallLater=true; else DOUT("no processCallLaterQueue() found in Lua");
     }
 
     void Tasklet::run(tasklet& tasklet)
@@ -108,13 +115,25 @@ namespace lost
       // make sure that our GL context is the current context
       if(window)
       {
-        window->context->makeCurrent();      
+        window->context->makeCurrent();
       }
         
       if (startup())
       {
+        // process run loop updates
+        updateQueue->process(this);
         while (get_state() == RUNNING && update())
         {
+          // process run loop updates
+          updateQueue->process(this);
+
+          // render
+          if(window)
+          {
+            renderNode->process(window->context);
+            window->context->swapBuffers();
+          }
+
           const double startTime = currentTimeMilliSeconds();
           if(!waitForEvents)
           {
@@ -147,10 +166,6 @@ namespace lost
       {
         result = call_function<bool>(luaStartup, this);
       }
-      if(hasLuaProcessCallLater)
-      {
-        call_function<void>(luaProcessCallLater);
-      }                
       return  result;
     }
 
@@ -161,10 +176,6 @@ namespace lost
       {
         result = call_function<bool>(luaUpdate, this);
       }
-      if(hasLuaProcessCallLater)
-      {
-        call_function<void>(luaProcessCallLater);
-      }                      
       return  result;      
     }
 
@@ -175,10 +186,6 @@ namespace lost
       {
         result = call_function<bool>(luaShutdown, this);
       }
-      if(hasLuaProcessCallLater)
-      {
-        call_function<void>(luaProcessCallLater);
-      }                      
       return  result;      
     }
 

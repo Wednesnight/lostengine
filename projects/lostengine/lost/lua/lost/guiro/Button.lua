@@ -1,10 +1,13 @@
 -- lost.guiro.Button
 module("lost.guiro", package.seeall)
 
+require("lost.guiro.View")
 require("lost.guiro.Label")
-require("lost.guiro.Image")
+require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.Button" "lost.guiro.View" {}
+
+using "lost.guiro.event.Event"
 
 Button.STATE_NORMAL = "normal"
 Button.STATE_HOVER = "hover"
@@ -13,6 +16,7 @@ Button.STATE_DISABLED = "disabled"
 
 function Button:constructor()
 	lost.guiro.View.constructor(self)
+
 	self._state = Button.STATE_NORMAL
   self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}
 	self._states = {}
@@ -22,60 +26,56 @@ function Button:constructor()
 	self._states[Button.STATE_DISABLED] = {}
 	self._disabled = false
 	self._title = ""
-	self.deferredUpdateViewOrder = function() 
-	  self:updateViewOrder()
-	end
-	
-	self.deferredUpdateViewVisibility = function()
-    self:updateViewVisibility()
-	end
 	
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)	
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)	
   self:addEventListener("mouseDown", function(event) self:mouseDown(event) end)	
+  self:addEventListener("mouseDown", function(event) self:mouseDown(event) end, Event.PHASE_BUBBLE)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)	
+  self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end, Event.PHASE_BUBBLE)	
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)	
+  self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end, Event.PHASE_BUBBLE)	
 end
 
 function Button:mouseEnter(event)
   self._state = Button.STATE_HOVER
-  callLater(self.deferredUpdateViewVisibility)  
+  callLater(self.updateViewVisibility, self)
 end
 
 function Button:mouseLeave(event)
   self._state = Button.STATE_NORMAL
-  callLater(self.deferredUpdateViewVisibility)  
+  callLater(self.updateViewVisibility, self)
 end
 
 function Button:mouseDown(event)
   self._state = Button.STATE_PUSHED
-  callLater(self.deferredUpdateViewVisibility)  
+  callLater(self.updateViewVisibility, self)
   local pressEvent = lost.guiro.event.Event("buttonDown")
   pressEvent.bubbles = true
   pressEvent.target = self
-  self:bubbleEvent(pressEvent)
+  self:dispatchEvent(pressEvent)
 end
 
 function Button:mouseUpInside(event)
   self._state = Button.STATE_HOVER
-  callLater(self.deferredUpdateViewVisibility)  
+  callLater(self.updateViewVisibility, self)
   local clickEvent = lost.guiro.event.Event("buttonClick")
   clickEvent.bubbles = true
   clickEvent.target = self
-  self:bubbleEvent(clickEvent)
+  self:dispatchEvent(clickEvent)
   local releaseEvent = lost.guiro.event.Event("buttonUp")
   releaseEvent.bubbles = true
   releaseEvent.target = self
-  self:bubbleEvent(releaseEvent)
+  self:dispatchEvent(releaseEvent)
 end
 
 function Button:mouseUpOutside(event)
   self._state = Button.STATE_NORMAL
-  callLater(self.deferredUpdateViewVisibility)  
+  callLater(self.updateViewVisibility, self)
   local releaseEvent = lost.guiro.event.Event("buttonUp")
   releaseEvent.bubbles = true
   releaseEvent.target = self
-  self:bubbleEvent(releaseEvent)
+  self:dispatchEvent(releaseEvent)
 end
 
 
@@ -123,8 +123,8 @@ function Button:background(stateName, view)
     self:removeSubview(oldView)
   end
   self._states[stateName].background = view
-  callLater(self.deferredUpdateViewOrder)
-  callLater(self.deferredUpdateViewVisibility)
+  callLater(self.updateViewOrder, self)
+  callLater(self.updateViewVisibility, self)
 end
 
 function Button:label(stateName, view)
@@ -136,14 +136,14 @@ function Button:label(stateName, view)
     self:removeSubview(oldView)
   end
   self._states[stateName].label = view
-  callLater(self.deferredUpdateViewOrder)
-  callLater(self.deferredUpdateViewVisibility)
+  callLater(self.updateViewOrder, self)
+  callLater(self.updateViewVisibility, self)
 end
 
 function Button:state(newState)
   if newState ~= nil then
     self._state = newState
-    callLater(self.deferredUpdateViewVisibility)
+    callLater(self.updateViewVisibility, self)
   else
     return self._state
   end

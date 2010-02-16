@@ -2,7 +2,6 @@
 #define LOST_LUA_MODULELOADER_H
 
 #include "lost/forward/lost/lua"
-#include "lost/resource/Loader.h"
 
 namespace lost
 {
@@ -10,12 +9,12 @@ namespace lost
   {
     namespace ModuleLoader
     {
-      /** installs a custom module loader for the lua package system, thats
+      /** installs a custom module loader for the lua package system, that
        * uses the provided resourceLoader to locate the module source files.
-       * NOTE: call this only after you're initialised your resource loader,
+       * NOTE: call this only after you've initialised your resource loader,
        * your state AND bound all lostengine classes to your state.
        */
-      void install(State& inState, lost::shared_ptr<resource::Loader> inLoader);
+      void install(State& inState);
     }
   }
 }

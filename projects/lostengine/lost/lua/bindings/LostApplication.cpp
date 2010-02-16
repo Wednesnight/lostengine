@@ -15,6 +15,9 @@
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/application/Window.h"
+#include "lost/application/Queue.h"
+#include "lost/application/QueueEntity.h"
+#include "lost/application/QueueEntityLua.h"
 #include <luabind/shared_ptr_converter.hpp>
 
 using namespace luabind;
@@ -261,6 +264,8 @@ namespace lost
             .def_readonly("loader", &Tasklet::loader)
             .def_readonly("window", &Tasklet::window)
             .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
+            .def_readonly("updateQueue", &Tasklet::updateQueue)
+            .def_readonly("renderNode", &Tasklet::renderNode)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
         ]
       ];
@@ -331,6 +336,23 @@ namespace lost
       ];
     }
 
+    void LostApplicationQueue_queue(Queue* queue, object targetMethod, object targetObject)
+    {
+      queue->queue(new QueueEntityLua(targetObject, targetMethod));
+    }
+
+    void LostApplicationQueue(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("application")
+        [
+          class_<Queue>("Queue")
+            .def("queue", &LostApplicationQueue_queue)
+        ]
+      ];
+    }
+    
     void LostApplication(lua_State* state)
     {
       LostApplicationApplication(state);
@@ -345,6 +367,7 @@ namespace lost
       LostApplicationSpawnTaskletEvent(state);
       LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
+      LostApplicationQueue(state);
     }
     
   }
