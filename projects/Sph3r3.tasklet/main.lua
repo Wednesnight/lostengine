@@ -25,53 +25,7 @@ speed = 20
 lasttime = 0
 
 -- creates a quad around 0,0,0 in xz plane with given side length
-function createQuad(sideLength)
-  log.debug("yay")
-  local layout = lost.gl.BufferLayout()
-  layout:add(gl.ET_vec3_f32, gl.UT_vertex, 0)
-  layout:add(gl.ET_vec2_f32, gl.UT_texcoord0, 0)
-  layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
-  
-  local m = lost.mesh.Mesh.create(layout, gl.ET_u32)
-  m.drawMode = gl.GL_TRIANGLES
-  local numVerts = 4
-  local numIndices = 6
-  m:resetSize(numVerts, numIndices)
-  -- xz plane means y = 0
-  local hl = sideLength / 2 -- precompute half side length to center plane around 0,0,0
-  m:set(0, gl.UT_vertex, Vec3(-hl,0,hl)) -- front left
-  m:set(1, gl.UT_vertex, Vec3(hl,0,hl)) -- front right
-  m:set(2, gl.UT_vertex, Vec3(hl,0,-hl)) -- back right
-  m:set(3, gl.UT_vertex, Vec3(-hl,0,-hl)) -- back left
-
-  m:set(0, gl.UT_texcoord0, Vec2(0,0))
-  m:set(1, gl.UT_texcoord0, Vec2(1,0))
-  m:set(2, gl.UT_texcoord0, Vec2(1,1))
-  m:set(3, gl.UT_texcoord0, Vec2(0,1))
-
-  m:set(0, gl.UT_normal, Vec3(0,1,0))
-  m:set(1, gl.UT_normal, Vec3(0,1,0))
-  m:set(2, gl.UT_normal, Vec3(0,1,0))
-  m:set(3, gl.UT_normal, Vec3(0,1,0))
-  
-  m:setU32(0, gl.UT_index, 0)
-  m:setU32(1, gl.UT_index, 1)
-  m:setU32(2, gl.UT_index, 2)
-  m:setU32(3, gl.UT_index, 2)
-  m:setU32(4, gl.UT_index, 3)
-  m:setU32(5, gl.UT_index, 0)
-  
-  m.material.shader = dcl.gl:Shader
-  {
-    filename = "disc"
-  }
-  m.material.color = Color(1,.5,0)
-  m.material.blend = true
-  m.material.shader:enable()
-  m.material.shader:set("lightPosition", Vec3(200,200,200))
-  m.material.shader:disable()
-  return m  
-end
+require("cube")
 
 function createDisc()
   return dcl.mesh:Quad
@@ -104,12 +58,13 @@ function startup(tasklet)
     {
       mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT
     },
+--    dcl.rg:DepthTest{true},
     dcl.rg:Camera3D
     {
       viewport = Rect(0,0,screensize.x,screensize.y),
       fovy=90,
       depth=Vec2(.01, 1000),
-      position = Vec3(0,0,400),
+      position = Vec3(0,0,600),
       target=Vec3(0,0,0),
       stickToTarget = true
     },
@@ -117,7 +72,7 @@ function startup(tasklet)
     {
       name = "circle1",
 --      mesh = createDisc()
-      mesh = createQuad(200)
+      mesh = cube.create(200, 11)
     }
   }
   
