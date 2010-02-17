@@ -1,3 +1,5 @@
+varying float lightIntensity;
+
 void main(void)
 {
   vec2 c = vec2(.5, .5);
@@ -16,5 +18,5 @@ void main(void)
     v = 1.0-smoothstep(srstart, r, currentR);
   }
   float f = v;
-  gl_FragColor = vec4(gl_Color.rgb,f);
+  gl_FragColor = vec4(gl_Color.rgb*lightIntensity,f);
 }
