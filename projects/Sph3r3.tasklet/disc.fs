@@ -3,7 +3,7 @@ varying float lightIntensity;
 void main(void)
 {
   vec2 c = vec2(.5, .5);
-  float r = .5;
+  float r = gl_TexCoord[0].z;
   float border = .01;
   float srstart = r-border;
   vec2 p = (gl_TexCoord[0]-vec4(c, 0, 0)).xy;
