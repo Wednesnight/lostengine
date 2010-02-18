@@ -37,9 +37,9 @@ function Gl:Shader(def)
       local nt = shaderProgram:numericalType(k)
       -- since Lua only knows floats/doubles, we need to disambiguate here by
       -- numerical type of the parameter and call the appropriate setter
-      if k == gl.GL_INT then
+      if nt == gl.GL_INT then
         shaderProgram:setInt(k, v)
-      elseif k == gl.GL_FLOAT then
+      elseif nt == gl.GL_FLOAT then
         shaderProgram:setFloat(k,v)
       else
         shaderProgram:set(k,v)
