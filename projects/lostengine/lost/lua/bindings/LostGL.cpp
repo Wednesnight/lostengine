@@ -11,7 +11,9 @@
 #include "lost/gl/Texture.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
+#include <stdexcept>
 
+using namespace std;
 using namespace luabind;
 using namespace lost::bitmap;
 using namespace lost::camera;
@@ -90,9 +92,16 @@ namespace lost
       
     }
 
-    gl::TexturePtr colorTexture(gl::FrameBufferPtr fb, int num)
+    TexturePtr FrameBuffer_colorTexture(FrameBufferPtr framebuffer, boost::uint8_t index)
     {
-      return fb->colorTextures[num];
+      if (framebuffer->colorBuffers.find(index) != framebuffer->colorBuffers.end())
+      {
+        return framebuffer->colorBuffers[index]->texture;
+      }
+      else
+      {
+        throw runtime_error("index out of range");
+      }
     }
 
     void LostGLFrameBuffer(lua_State* state)
@@ -102,15 +111,12 @@ namespace lost
         namespace_("gl")
         [
           class_<FrameBuffer>("FrameBuffer")
-            .def("attachDepth", (void(FrameBuffer::*)(TexturePtr))&FrameBuffer::attachDepth)
-            .def("attachDepth", (void(FrameBuffer::*)(RenderBufferPtr))&FrameBuffer::attachDepth)
-            .def("attachColor", (void(FrameBuffer::*)(int, TexturePtr))&FrameBuffer::attachColor)
-            .def("status", &FrameBuffer::status)
-            .def("colorTexture", &colorTexture)
             .scope
             [
-              def("createFrameBuffer", &FrameBuffer::createFrameBuffer)
+              def("create", &FrameBuffer::create)
             ]
+            .def("colorTexture", &FrameBuffer_colorTexture)
+            .def("resize", &FrameBuffer::resize)
         ]
       ];
     }
@@ -161,6 +167,7 @@ namespace lost
         namespace_("gl")
         [
           class_<RenderBuffer>("RenderBuffer")
+            .def(constructor<>())
             .def("enable", &RenderBuffer::enable)
             .def("disable", &RenderBuffer::disable)
             .def("storage", &RenderBuffer::storage)
