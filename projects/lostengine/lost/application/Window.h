@@ -4,31 +4,13 @@
 #include "lost/gl/Context.h"
 #include "lost/math/Rect.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/application/WindowParams.h"
 
 namespace lost
 {
   namespace application
   {
     
-    struct WindowParams
-    {
-    public:
-      std::string      caption;
-      lost::math::Rect rect;
-
-      WindowParams()
-      : caption("<unset>"), rect(0,0,640,480)
-      {
-      }
-
-      WindowParams(const std::string& inCaption,
-                   const lost::math::Rect& inRect)
-      : caption(inCaption),
-        rect(inRect)
-      {
-      }
-    };
-
     struct Window
     {
     private:

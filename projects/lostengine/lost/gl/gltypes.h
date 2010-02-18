@@ -36,4 +36,11 @@ typedef long GLsizeiptr;
 #define GL_4_BYTES                        0x1409
 #define GL_DOUBLE                         0x140A
 
+/* BlendingFactorDest */
+#define GL_SRC_ALPHA                      0x0302
+#define GL_ONE_MINUS_SRC_ALPHA            0x0303
+
+#define GL_FRAGMENT_SHADER                0x8B30
+#define GL_VERTEX_SHADER                  0x8B31
+
 #endif

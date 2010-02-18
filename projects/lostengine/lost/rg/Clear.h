@@ -2,6 +2,7 @@
 #define LOST_RG_CLEAR_H
 
 #include "lost/rg/Node.h"
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {

@@ -11,10 +11,13 @@
 #include "lost/common/Logger.h"
 #include "lost/application/mac/ThreadAutoreleasePoolHack.h"
 #include "lost/application/TaskletEvent.h"
+#include "lost/application/Queue.h"
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
 #include "lost/application/WindowEvent.h"
 #include "lost/event/Receive.h"
+#include "lost/rg/Node.h"
+#include "lost/application/Window.h"
 
 using namespace boost;
 using namespace fhtagn::threads;

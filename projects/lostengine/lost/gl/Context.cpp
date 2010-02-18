@@ -153,7 +153,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
     void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
     void Context::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
-    void Context::blend(bool enable) {SERVERSTATE(blendEnabled, enable, GL_BLEND);}
+    void Context::blend(bool enable) { SERVERSTATE(blendEnabled, enable, GL_BLEND);}
     
     void Context::blendFunc(GLenum src, GLenum dest)
     {

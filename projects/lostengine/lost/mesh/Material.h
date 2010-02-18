@@ -4,6 +4,7 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/Texture.h"
 #include <vector>
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {

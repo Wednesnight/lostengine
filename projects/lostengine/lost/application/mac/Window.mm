@@ -302,7 +302,7 @@
     NSOpenGLPFAAccelerated,
     NSOpenGLPFAColorSize, [[[NSUserDefaults standardUserDefaults] objectForKey:@"colorDepth"] intValue],
     NSOpenGLPFAAlphaSize, 16,
-    NSOpenGLPFADepthSize, 16,
+    NSOpenGLPFADepthSize, 32,
     0
   };
   return [super initWithFrame: frame pixelFormat: [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes]];
