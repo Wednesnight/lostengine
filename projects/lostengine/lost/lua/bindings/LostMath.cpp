@@ -28,6 +28,7 @@ namespace lost
             .def("contains", &Rect::contains)
             .def("intersects", &Rect::intersects)
             .def("clipTo", &Rect::clipTo)
+            .def(self == other<Rect>())
             .def(tostring(self))
             .def("maxX", &Rect::maxX)
             .def("maxY", &Rect::maxY)
