@@ -18,6 +18,7 @@
 #include "lost/application/Queue.h"
 #include "lost/application/QueueEntity.h"
 #include "lost/application/QueueEntityLua.h"
+#include "lost/rg/Node.h"
 #include <luabind/shared_ptr_converter.hpp>
 
 using namespace luabind;

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include "lost/gl/gltypes.h"
 
 namespace lost
 {

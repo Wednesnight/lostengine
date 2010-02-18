@@ -11,6 +11,8 @@
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
+#include "lost/gl/Context.h"
+#include "lost/application/Window.h"
 
 using namespace lost::resource;
 

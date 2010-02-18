@@ -1,19 +1,26 @@
 #ifndef LOST_APPLICATION_TASKLET_H
 #define LOST_APPLICATION_TASKLET_H
 
-#include "lost/application/Window.h"
 #include "fhtagn/threads/tasklet.h"
 #include <list>
 #include "lost/resource/DefaultLoader.h"
-#include "lost/lua/State.h"
-#include "lost/application/Queue.h"
-#include "lost/rg/Node.h"
+#include "lost/application/WindowParams.h"
+#include <luabind/luabind.hpp>
 
 namespace lost
 {
-  namespace event { struct EventDispatcher; }
+  namespace event 
+  { 
+    struct EventDispatcher; typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+    struct Event; typedef lost::shared_ptr<Event> EventPtr;    
+  }
+  namespace rg { struct Node; typedef lost::shared_ptr<Node> NodePtr; }
+  namespace lua { struct State; typedef lost::shared_ptr<State> StatePtr; }
   namespace application
   {
+    struct Queue;
+    typedef lost::shared_ptr<Queue> QueuePtr;  
+  
     struct Window;
 
     struct WindowEvent;
@@ -37,9 +44,9 @@ namespace lost
       
     public:
       std::string                     name;
-      lost::resource::LoaderPtr       loader;
-      lost::lua::StatePtr             lua;
-      lost::event::EventDispatcherPtr eventDispatcher;
+      resource::LoaderPtr             loader;
+      lua::StatePtr                   lua;
+      event::EventDispatcherPtr       eventDispatcher;
       WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
       Window*                         window;         // contains the window pointer after init() if it could be created
       rg::NodePtr                     renderNode;     // render graph root node
