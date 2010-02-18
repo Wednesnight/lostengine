@@ -99,14 +99,12 @@ namespace lost
       void vsync(bool enable); // true to enable vsync to prevent tearing
       void multithreaded(bool enable); // true to enable multithreaded OpenGL execution on Mac
       
+      void bindFramebuffer(FrameBufferPtr& fbo);
+      void bindFramebuffer(GLuint fbo);
+
+      void bindDefaultFramebuffer();
       void defaultFramebuffer(GLuint fbo);
       GLuint defaultFramebuffer();
-      
-      void bindFramebuffer(GLuint fbo);
-      void bindDefaultFramebuffer();
-
-      void frameBuffer(FrameBufferPtr& fbo);
-      void defaultFrameBuffer();
 
       void vertexArray(bool enable);
       void normalArray(bool enable);

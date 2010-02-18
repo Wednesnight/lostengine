@@ -116,14 +116,19 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
 
+    void Context::bindFramebuffer(FrameBufferPtr& fbo)
+    {
+      fbo->bind();
+    }
+
     void Context::bindFramebuffer(GLuint fbo)
     {
-      lglBindFramebuffer(LGL_FRAMEBUFFER, fbo);GLDEBUG_THROW;        
+      lglBindFramebuffer(LGL_FRAMEBUFFER, fbo); GLDEBUG_THROW;
     }
-    
+
     void Context::bindDefaultFramebuffer()
     {
-      bindFramebuffer(m_defaultFrameBuffer);
+      lglBindFramebuffer(LGL_FRAMEBUFFER, m_defaultFrameBuffer); GLDEBUG_THROW;
     }
 
     void Context::defaultFramebuffer(GLuint fbo)
@@ -134,16 +139,6 @@ std::map<void*, Context*> glContext2lostGlContext;
     GLuint Context::defaultFramebuffer()
     {
       return m_defaultFrameBuffer;
-    }
-
-    void Context::frameBuffer(FrameBufferPtr& fbo)
-    {
-      bindFramebuffer(fbo->buffer);
-    }
-
-    void Context::defaultFrameBuffer()
-    {
-      bindDefaultFramebuffer();
     }
 
     // FIXME: replace macros by dedficated functions that operate on member reference
