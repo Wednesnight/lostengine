@@ -55,9 +55,11 @@ namespace lost
       static TexturePtr create(common::DataPtr inData,  const Params& inParams = Params()) { return TexturePtr(new Texture(inData, inParams)); };
       static TexturePtr create(bitmap::BitmapPtr inBitmap, const Params& inParams = Params()) { return TexturePtr(new Texture(inBitmap, inParams)); };
       
-      ~Texture();    
-      void destroy();  
-      void bind() const;      
+      ~Texture();
+      void destroy();
+
+      void bind() const;
+      void unbind() const;
       
       void init(common::DataPtr inData,  const Params& inParams = Params());
       void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());
@@ -84,8 +86,8 @@ namespace lost
   
       void param(GLenum pname, GLint p);
 
-      GLuint        texture;
-      // width and height of the texture object
+      GLuint          texture;
+      GLenum          internalFormat;
       boost::uint32_t width;
       boost::uint32_t height;      
       boost::uint32_t dataWidth; 
