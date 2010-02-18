@@ -148,6 +148,10 @@ namespace lost
             // no event processing timeout since we probably don't have that many events
             eventDispatcher->processEvents(0);
           }
+
+          // process run loop updates again after dispatching events
+          updateQueue->process(this);
+
           pool = threadAutoreleasePoolHack_drainAndRecreatePool(pool);
         }
         shutdown();
