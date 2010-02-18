@@ -1,6 +1,7 @@
 local taskletName = "ShaderLab"
 
 require("lost.declarative.Context")
+require("lost.guiro.RenderView")
 
 using "lost.application.WindowParams"
 using "lost.math.Rect"
@@ -16,7 +17,8 @@ function startup(tasklet)
   tasklet.waitForEvents = true
   
   dcl = Context(tasklet.loader)
-  require("ui")
+  screen = require("ui")
+  screen("ui")("window")("renderView")._renderViewNode:print()
 
   return true
 end
