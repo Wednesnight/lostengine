@@ -58,12 +58,12 @@ function startup(tasklet)
     {
       mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT
     },
---    dcl.rg:DepthTest{true},
+    dcl.rg:DepthTest{true},
     dcl.rg:Camera3D
     {
       viewport = Rect(0,0,screensize.x,screensize.y),
       fovy=90,
-      depth=Vec2(.01, 1000),
+      depth=Vec2(.01, 4000),
       position = Vec3(0,0,600),
       target=Vec3(0,0,0),
       stickToTarget = true
@@ -72,7 +72,7 @@ function startup(tasklet)
     {
       name = "circle1",
 --      mesh = createDisc()
-      mesh = cube.create(200, 11)
+      mesh = cube.create(200, 3)
     }
   }
   

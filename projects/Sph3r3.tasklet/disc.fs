@@ -19,4 +19,5 @@ void main(void)
   }
   float f = v;
   gl_FragColor = vec4(gl_Color.rgb*lightIntensity,f);
+//gl_FragColor = vec4(f,f,f,1);
 }
