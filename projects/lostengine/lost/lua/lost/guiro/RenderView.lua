@@ -52,8 +52,8 @@ function RenderView:beforeLayout()
 end
 
 function RenderView:afterLayout()
-  -- update framebuffer on resize
-  if self._oldRect ~= self.rect then
+  -- update framebuffer on resize, check greater zero to filter setup calls
+  if self._oldRect ~= self.rect and self.rect.width > 0 and self.rect.height > 0 then
     self._framebuffer:resize(Vec2(self.rect.width, self.rect.height))
     local camera = self._renderGraphNode:recursiveFindByName("camera")
     if camera ~= nil then
