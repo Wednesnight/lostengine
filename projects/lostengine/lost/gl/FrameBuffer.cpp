@@ -1,232 +1,341 @@
 #include "lost/gl/FrameBuffer.h"
+#include "lost/math/Vec2.h"
+#include <sstream>
 #include <stdexcept>
+#include "lost/gl/Context.h"
 #include "lost/gl/gl.h"
 #include "lost/lgl/lgl.h"
 #include "lost/gl/Utils.h"
-#include "lost/gl/Context.h"
 
 using namespace std;
+using namespace lost::math;
 
 namespace lost
 {
-namespace gl
-{
-
-TexturePtr FrameBuffer::createColorTexture(const math::Vec2& size,
-                                           GLenum internalFormat)
-{
-  TexturePtr result;
-
-  Texture::Params params;
-  params.internalFormat = internalFormat;
-  result.reset(new Texture(size, params));
-  result->filter(GL_NEAREST); // filtering needs to be off for color attachments you want to write to.
-  
-  return result;
-}
-
-GLenum bitDepthToEnum(uint32_t bitDepth)
-{
-  GLenum bitDepthEnum;
-  switch(bitDepth)
+  namespace gl
   {
-    case 16:bitDepthEnum=GL_DEPTH_COMPONENT16;break;
-    case 24:bitDepthEnum=GL_DEPTH_COMPONENT24;break;
-    case 32:bitDepthEnum=GL_DEPTH_COMPONENT32;break;
-    default:throw runtime_error("bitDepth must be 16, 24 or 32");
-  }
-  return bitDepthEnum;
-}
 
+/**
+ *  FrameBuffer::Attachment
+ *
+ *  holds a framebuffer attachment, that is: a texture or renderbuffer
+ */
 
-TexturePtr FrameBuffer::createDepthTexture(const math::Vec2& size, // size in pixels, result might vary
-                                           uint32_t bitDepth)      // desired bit depth
-{
-  TexturePtr result;
-
-  GLenum bitDepthEnum = bitDepthToEnum(bitDepth);
-  
-  result.reset(new Texture());
-  result->bind();
-  result->init(0,bitDepthEnum, size.width, size.height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-
-  return result;
-}
-
-
-
-uint32_t lowerBitDepth(uint32_t bitDepth)
-{
-  uint32_t result = 0;
-  
-  switch(bitDepth)
-  {
-    case 32:result=24;break;
-    case 24:result=16;break;
-    case 16:result=0;break;
-    default:result=0;
-  }
-  
-  return result;
-}
-
-FrameBufferPtr FrameBuffer::createFrameBuffer(ContextPtr& ctx,
-                                              const math::Vec2& size,
-                                              GLenum colorFormat, 
-                                              uint32_t bitDepth)
-{
-  FrameBufferPtr result;
-  
-  result.reset(new FrameBuffer());
-  ctx->bindFramebuffer(result->buffer);
-
-  // first the color attachment
-  TexturePtr tex = createColorTexture(size, colorFormat);
-  result->attachColor(0, tex);
-  if(!result->isComplete()) // shoot ourselves if we already fail at the very first color attachment
-  {
-    throw runtime_error("FBO not complete after first color attachment");
-  }
-
-  // then try to find the correct depth buffer if desired
-  if(bitDepth>0)
-  {
-    do
+    FrameBuffer::AttachmentPtr FrameBuffer::Attachment::create(const math::Vec2& size, GLenum bitFormat, UsageType usageType)
     {
-      DOUT("trying bitdepth: "<<(uint32_t)bitDepth);
-      TexturePtr depthtex = createDepthTexture(size, bitDepth);
-      result->attachDepth(depthtex);
-      bitDepth = lowerBitDepth(bitDepth); // lower bitDepth should we need a next try
+      return FrameBuffer::AttachmentPtr(new Attachment(size, bitFormat, usageType));
     }
-    while((bitDepth>0) && !result->isComplete());
+
+    FrameBuffer::AttachmentPtr FrameBuffer::Attachment::create(const TexturePtr& texture)
+    {
+      return FrameBuffer::AttachmentPtr(new Attachment(texture));
+    }
+
+    FrameBuffer::AttachmentPtr FrameBuffer::Attachment::create(const RenderBufferPtr& renderBuffer)
+    {
+      return FrameBuffer::AttachmentPtr(new Attachment(renderBuffer));
+    }
+
+    FrameBuffer::Attachment::Attachment(const math::Vec2& size, GLenum bitFormat, UsageType usageType)
+    {
+      this->bitFormat = bitFormat;
+      this->size = size;
+      this->usageType = usageType;
+
+      switch (usageType)
+      {
+        case UT_texture:
+          createTexture();
+          break;
+
+        case UT_renderBuffer:
+          createRenderBuffer();
+          break;
+
+        default:
+          ostringstream os;
+          os << "invalid usage type: " << usageType;
+          throw std::runtime_error(os.str());
+      }
+    }
+
+    void FrameBuffer::Attachment::createTexture()
+    {
+      texture.reset(new Texture());
+      updateTexture();
+    }
+    
+    void FrameBuffer::Attachment::updateTexture()
+    {
+      texture->bind();
+      Texture::Params textureParams;
+      textureParams.internalFormat = bitFormat;
+      switch (bitFormat)
+      {
+        case LGL_DEPTH_COMPONENT16:
+        case LGL_DEPTH_COMPONENT24:
+        case LGL_DEPTH_COMPONENT32:
+          textureParams.format = GL_DEPTH_COMPONENT;
+          textureParams.type = GL_FLOAT;
+          break;
+      }
+      texture->init(size, textureParams);
+      texture->filter(GL_NEAREST);
+      texture->unbind();
+    }
+    
+    void FrameBuffer::Attachment::createRenderBuffer()
+    {
+      renderBuffer.reset(new RenderBuffer());
+      updateRenderBuffer();
+    }
+
+    void FrameBuffer::Attachment::updateRenderBuffer()
+    {
+      renderBuffer->enable();
+      renderBuffer->storage(bitFormat, size.width, size.height);
+      renderBuffer->disable();
+    }
+    
+    FrameBuffer::Attachment::Attachment(const TexturePtr& texture)
+    {
+      bitFormat = texture->internalFormat;
+      size = Vec2(texture->width, texture->height);
+      usageType = UT_texture;
+
+      this->texture = texture;
+      this->texture->bind();
+      this->texture->filter(GL_NEAREST);
+      this->texture->unbind();
+    }
+
+    FrameBuffer::Attachment::Attachment(const RenderBufferPtr& renderBuffer)
+    {
+      bitFormat = renderBuffer->internalFormat();
+      size = Vec2(renderBuffer->width(), renderBuffer->height());
+      usageType = UT_renderBuffer;
+      
+      this->renderBuffer = renderBuffer;
+    }
+
+    FrameBuffer::Attachment::~Attachment()
+    {
+      if (texture) texture.reset();
+      if (renderBuffer) renderBuffer.reset();
+    }
+
+    void FrameBuffer::Attachment::resize(const Vec2& size)
+    {
+      this->size = size;
+      switch (usageType)
+      {
+        case Attachment::UT_texture:
+          updateTexture();
+          break;
+          
+        case Attachment::UT_renderBuffer:
+          updateRenderBuffer();
+          break;
+          
+        default:
+          ostringstream os;
+          os << "invalid usage type: " << usageType;
+          throw std::runtime_error(os.str());
+      }
+    }
+
+    void FrameBuffer::Attachment::attach(GLenum target)
+    {
+      switch (usageType)
+      {
+        case Attachment::UT_texture:
+          texture->bind();
+          lglFramebufferTexture2D(LGL_FRAMEBUFFER, target, GL_TEXTURE_2D, texture->texture, 0); GLDEBUG_THROW;
+          texture->unbind();
+          break;
+          
+        case Attachment::UT_renderBuffer:
+          renderBuffer->enable();
+          lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, renderBuffer->buffer); GLDEBUG_THROW;
+          renderBuffer->disable();
+          break;
+          
+        default:
+          ostringstream os;
+          os << "invalid usage type: " << usageType;
+          throw std::runtime_error(os.str());
+      }
+    }
+
+    void FrameBuffer::Attachment::bind()
+    {
+      switch (usageType)
+      {
+        case Attachment::UT_texture:
+          texture->bind();
+          break;
+          
+        case Attachment::UT_renderBuffer:
+          renderBuffer->enable();
+          break;
+          
+        default:
+          ostringstream os;
+          os << "invalid usage type: " << usageType;
+          throw std::runtime_error(os.str());
+      }
+    }
+    
+    
+/**
+ *  FrameBuffer
+ *
+ *  the actual framebuffer implementation
+ */
+
+    FrameBufferPtr FrameBuffer::create(const math::Vec2& size, GLenum colorBits, GLenum depthBits, GLenum stencilBits)
+    {
+      return FrameBufferPtr(new FrameBuffer(size, colorBits, depthBits, stencilBits));
+    }
+
+    FrameBuffer::FrameBuffer(const math::Vec2& size, GLenum colorBits, GLenum depthBits, GLenum stencilBits)
+    {
+      this->size = size;
+
+      lglGenFramebuffers(1, &buffer); GLDEBUG_THROW;
+
+      bindFramebuffer();
+
+      bool doCheck = false;
+      if (colorBits != -1)
+      {
+        doCheck = true;
+        AttachmentPtr attachment = Attachment::create(size, colorBits, Attachment::UT_texture);
+        attachColorBuffer(0, attachment);
+      }
+      if (depthBits != -1)
+      {
+        AttachmentPtr attachment = Attachment::create(size, depthBits, Attachment::UT_renderBuffer);
+        attachDepthBuffer(attachment);
+      }
+      if (stencilBits != -1)
+      {
+        AttachmentPtr attachment = Attachment::create(size, stencilBits, Attachment::UT_renderBuffer);
+        attachStencilBuffer(attachment);
+      }
+      if (doCheck) check();
+
+      // reset
+      unbindFramebuffer();
+    }
+    
+    FrameBuffer::~FrameBuffer()
+    {
+      lglDeleteFramebuffers(1, &buffer); GLDEBUG;
+    }
+
+    void FrameBuffer::attachColorBuffer(boost::uint8_t index, const TexturePtr& buffer)
+    {
+      attachColorBuffer(index, Attachment::create(buffer));
+    }
+    
+    void FrameBuffer::attachColorBuffer(boost::uint8_t index, const AttachmentPtr& buffer)
+    {
+      colorBuffers[index] = buffer;
+      buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
+    }
+    
+    void FrameBuffer::attachDepthBuffer(const TexturePtr& buffer)
+    {
+      attachDepthBuffer(Attachment::create(buffer));
+    }
+    
+    void FrameBuffer::attachDepthBuffer(const AttachmentPtr& buffer)
+    {
+      depthBuffer = buffer;
+      buffer->attach(LGL_DEPTH_ATTACHMENT);
+    }
+    
+    void FrameBuffer::attachStencilBuffer(const TexturePtr& buffer)
+    {
+      attachStencilBuffer(Attachment::create(buffer));
+    }
+    
+    void FrameBuffer::attachStencilBuffer(const AttachmentPtr& buffer)
+    {
+      stencilBuffer = buffer;
+      buffer->attach(LGL_STENCIL_ATTACHMENT);
+    }
+    
+    GLenum FrameBuffer::status()
+    {
+      return lglCheckFramebufferStatus(LGL_FRAMEBUFFER); GLDEBUG_THROW;
+    }
+
+    bool FrameBuffer::isComplete()
+    {
+      return (LGL_FRAMEBUFFER_COMPLETE == status());
+    }
+
+    void FrameBuffer::check()
+    {
+      switch (status())
+      {
+        case LGL_FRAMEBUFFER_COMPLETE:
+          // ok
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+          throw runtime_error("FrameBuffer: invalid attachment");
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+          throw runtime_error("FrameBuffer: missing attachment");
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+          throw runtime_error("FrameBuffer: invalid dimensions");
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_FORMATS:
+          throw runtime_error("FrameBuffer: invalid format");
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
+          throw runtime_error("FrameBuffer: invalid draw buffer");
+          break;
+        case LGL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
+          throw runtime_error("FrameBuffer: invalid read buffer");
+          break;
+        case LGL_FRAMEBUFFER_UNSUPPORTED:
+          throw runtime_error("FrameBuffer: unsupported operation");
+          break;
+        default:
+          throw runtime_error("FrameBuffer: unknown error");
+      }
+    }
+
+    void FrameBuffer::bindFramebuffer()
+    {
+      Context::getCurrent()->bindFramebuffer(buffer);
+    }
+
+    void FrameBuffer::unbindFramebuffer()
+    {
+      Context::getCurrent()->bindDefaultFramebuffer();
+    }
+
+    void FrameBuffer::resize(const Vec2& size)
+    {
+      this->size = size;
+      for (std::map<boost::uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
+      {
+        idx->second->resize(size);
+      }
+      if (depthBuffer) depthBuffer->resize(size);
+      if (stencilBuffer) stencilBuffer->resize(size);
+    }
+
+    void FrameBuffer::bind()
+    {
+      bindFramebuffer();
+      check();
+    }
+
   }
-  
-  // one last check to see if we'Re complete or the depth stage failed
-  if(!result->isComplete())
-  {
-    throw runtime_error("couldn't create FBO"); // FIXME: maybe ouput more diagnostics
-  }
-  
-  return result;
-}                                        
-
-void FrameBuffer::attach(GLenum target, RenderBufferPtr inRenderBuffer)
-{
-  lglFramebufferRenderbuffer(LGL_FRAMEBUFFER, target, LGL_RENDERBUFFER, inRenderBuffer->buffer);GLDEBUG_THROW;
-}
-
-FrameBuffer::FrameBuffer()
-{
-  lglGenFramebuffers(1, &buffer);GLDEBUG_THROW;
-}
-
-FrameBuffer::~FrameBuffer()
-{
-  lglDeleteFramebuffers(1, &buffer);GLDEBUG;
-}
-
-// attach a color buffer to one of 16 slots, zero indexed
-// no need to proivde GLenum ,just index them
-void FrameBuffer::attachColor(int index, RenderBufferPtr inRenderBuffer)
-{
-  GLenum target;
-  switch(index)
-  {
-    case 0:target=LGL_COLOR_ATTACHMENT0;break;
-/*
-    case 1:target=LGL_COLOR_ATTACHMENT1;break;
-    case 2:target=LGL_COLOR_ATTACHMENT2;break;
-    case 3:target=LGL_COLOR_ATTACHMENT3;break;
-    case 4:target=LGL_COLOR_ATTACHMENT4;break;
-    case 5:target=LGL_COLOR_ATTACHMENT5;break;
-    case 6:target=LGL_COLOR_ATTACHMENT6;break;
-    case 7:target=LGL_COLOR_ATTACHMENT7;break;
-    case 8:target=LGL_COLOR_ATTACHMENT8;break;
-    case 9:target=LGL_COLOR_ATTACHMENT9;break;
-    case 10:target=LGL_COLOR_ATTACHMENT10;break;
-    case 11:target=LGL_COLOR_ATTACHMENT11;break;
-    case 12:target=LGL_COLOR_ATTACHMENT12;break;
-    case 13:target=LGL_COLOR_ATTACHMENT13;break;
-    case 14:target=LGL_COLOR_ATTACHMENT14;break;
-    case 15:target=LGL_COLOR_ATTACHMENT15;break;
-*/
-    default: throw std::runtime_error("attachColor: index out of range");
-  }
-  attach(target, inRenderBuffer);
-  colorBuffers[index] = inRenderBuffer;
-}
-
-void FrameBuffer::attachStencil(RenderBufferPtr inRenderBuffer)
-{
-  attach(LGL_STENCIL_ATTACHMENT, inRenderBuffer);
-  stencilBuffer = inRenderBuffer;
-}
-
-void FrameBuffer::attachDepth(RenderBufferPtr inRenderBuffer)
-{
-  attach(LGL_DEPTH_ATTACHMENT, inRenderBuffer);
-  depthBuffer = inRenderBuffer;
-}
-
-
-// attach a color buffer to one of 16 slots, zero indexed
-// no need to proivde GLenum ,just index them
-void FrameBuffer::attachColor(int index, TexturePtr inTexture)
-{
-  GLenum target;
-  switch(index)
-  {
-    case 0:target=LGL_COLOR_ATTACHMENT0;break;
-/*
-    case 1:target=LGL_COLOR_ATTACHMENT1;break;
-    case 2:target=LGL_COLOR_ATTACHMENT2;break;
-    case 3:target=LGL_COLOR_ATTACHMENT3;break;
-    case 4:target=LGL_COLOR_ATTACHMENT4;break;
-    case 5:target=LGL_COLOR_ATTACHMENT5;break;
-    case 6:target=LGL_COLOR_ATTACHMENT6;break;
-    case 7:target=LGL_COLOR_ATTACHMENT7;break;
-    case 8:target=LGL_COLOR_ATTACHMENT8;break;
-    case 9:target=LGL_COLOR_ATTACHMENT9;break;
-    case 10:target=LGL_COLOR_ATTACHMENT10;break;
-    case 11:target=LGL_COLOR_ATTACHMENT11;break;
-    case 12:target=LGL_COLOR_ATTACHMENT12;break;
-    case 13:target=LGL_COLOR_ATTACHMENT13;break;
-    case 14:target=LGL_COLOR_ATTACHMENT14;break;
-    case 15:target=LGL_COLOR_ATTACHMENT15;break;
-*/
-    default: throw std::runtime_error("attachColor: index out of range");
-  }
-  attach(target, inTexture);
-  colorTextures[index] = inTexture;
-}
-
-void FrameBuffer::attachStencil(TexturePtr inTexture)
-{
-  attach(LGL_STENCIL_ATTACHMENT, inTexture);
-  stencilTexture = inTexture;
-}
-
-void FrameBuffer::attachDepth(TexturePtr inTexture)
-{
-  attach(LGL_DEPTH_ATTACHMENT, inTexture);
-  depthTexture = inTexture;
-}
-
-void FrameBuffer::attach(GLenum target, TexturePtr inTexture)
-{
-  GLint mipmaplevel = 0;
-  lglFramebufferTexture2D(LGL_FRAMEBUFFER, target, GL_TEXTURE_2D, inTexture->texture, mipmaplevel);GLDEBUG_THROW;
-}
-
-GLenum FrameBuffer::status()
-{
-  return lglCheckFramebufferStatus(LGL_FRAMEBUFFER);GLDEBUG_THROW;
-}
-
-bool FrameBuffer::isComplete()
-{
-  return (LGL_FRAMEBUFFER_COMPLETE == status());
-}
-
-}
 }
