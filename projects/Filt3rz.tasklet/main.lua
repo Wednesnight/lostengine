@@ -56,8 +56,6 @@ function startup(tasklet)
   fontData = tasklet.loader:load("miserable.ttf")
   ttf = lost.font.TrueTypeFont.create(ftlib, fontData)
 
-  framebuffer = lost.gl.FrameBuffer.createFrameBuffer(tasklet.window.context, fboSize, gl.GL_RGBA, 24)
-
   cam2D = Camera2D.create(Rect(0, 0, screenSize.width, screenSize.height))
 
   cam3D = Camera3D.create(Rect(0, 0, fboSize.width, fboSize.height))
@@ -143,6 +141,7 @@ function startup(tasklet)
   -- create the node that actually does the drawing of the 3D object into the framebuffer
   scene = lost.rg.Node.create()
   
+  local framebuffer = lost.gl.FrameBuffer.create(fboSize, gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
   fbnode = lost.rg.Node.create()
   fbnode:add(lost.rg.FrameBuffer.create(framebuffer))
   fbnode:add(lost.rg.Camera.create(cam3D))
@@ -153,8 +152,6 @@ function startup(tasklet)
   fbnode:add(lost.rg.DefaultFrameBuffer.create())
   
   -- build the panels that render the framebuffer color attachment 0 wirh the appropriate shader for the panel
-  -- extract the texture first
-  local fbtex = framebuffer:colorTexture(0)
   
   panelsNode = lost.rg.Node.create()
   panelsNode:add(lost.rg.Camera.create(cam2D))
@@ -162,6 +159,7 @@ function startup(tasklet)
   panelsNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT))
   panelsNode:add(lost.rg.DepthTest.create(false))
 
+  local fbtex = framebuffer:colorTexture(0)
   addPanelNode(panelsNode, fbtex, 0,1)
   addPanelNode(panelsNode, fbtex, 1,1, blurShader)
   addPanelNode(panelsNode, fbtex, 2,1, edgeShader)
