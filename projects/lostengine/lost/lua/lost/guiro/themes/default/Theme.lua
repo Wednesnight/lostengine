@@ -13,6 +13,7 @@ require("lost.guiro.themes.default.styles.VBox")
 require("lost.guiro.themes.default.styles.HBox")
 require("lost.guiro.themes.default.styles.Window")
 require("lost.guiro.themes.default.styles.Button")
+require("lost.guiro.themes.default.styles.RenderView")
 
 local Vec2 = lost.math.Vec2
 
@@ -34,4 +35,5 @@ function Theme:constructor(loader)
   self:addStyle(lost.guiro.themes.default.styles.Image())
   self:addStyle(lost.guiro.themes.default.styles.UserInterface())
   self:addStyle(lost.guiro.themes.default.styles.Label(self.defaultFont))
+  self:addStyle(lost.guiro.themes.default.styles.RenderView())
 end

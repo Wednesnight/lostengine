@@ -10,6 +10,7 @@ require("lost.guiro.Image")
 require("lost.guiro.Button")
 require("lost.guiro.VBox")
 require("lost.guiro.HBox")
+require("lost.guiro.RenderView")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.event.Event")
 
@@ -87,6 +88,14 @@ function Guiro:assignHBoxAttributes(target, source)
 	if source.halign ~= nil then target:halign(source.halign) end
 	if source.valign ~= nil then target:valign(source.valign) end
 	if source.spacing ~= nil then target:spacing(source.spacing) end
+end
+
+function Guiro:assignRenderViewAttributes(target, source)
+  if type(source.rendergraph) == "table" then
+    for k,node in next,source.rendergraph do
+      target:renderGraph():add(node)
+    end
+  end
 end
 
 function Guiro:applyStyle(target, def)
@@ -209,6 +218,17 @@ function Guiro:HBox(def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:assignHBoxAttributes(result, def)   
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:RenderView(def)
+  local result = lost.guiro.RenderView()
+  self:applyStyle(result, def)
+  -- don't allow subviews
+  self:assignViewAttributes(result, def)
+  self:assignImageAttributes(result, def)
+  self:assignRenderViewAttributes(result, def)
   self:addEventListeners(result, def)
   return result
 end
