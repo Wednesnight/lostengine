@@ -20,7 +20,7 @@ FrameBufferPtr FrameBuffer::create(gl::FrameBufferPtr inFb)
 void FrameBuffer::process(gl::ContextPtr ctx)
 {
   if(!active) return;
-  ctx->frameBuffer(fb);
+  ctx->bindFramebuffer(fb);
 }
 
 }
