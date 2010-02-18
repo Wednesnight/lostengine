@@ -85,7 +85,13 @@ void Texture::destroy()
 
 void Texture::bind() const
 {
-  glBindTexture(GL_TEXTURE_2D, texture);GLDEBUG_THROW;
+  glBindTexture(GL_TEXTURE_2D, texture); GLDEBUG_THROW;
+}
+
+void Texture::unbind() const
+{
+  // reset to default texture
+  glBindTexture(GL_TEXTURE_2D, 0); GLDEBUG_THROW;
 }
 
 void Texture::init(common::DataPtr inData,  const Params& inParams)
@@ -130,7 +136,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
         texheight,
         inParams.border ? 1 : 0,
         inParams.format,
-        GL_UNSIGNED_BYTE,
+        inParams.type,
         0);
 
   // memorize texture and raw data sizes for texture coordinate calculations
@@ -156,7 +162,7 @@ void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
                   inBitmap->width,
                   inBitmap->height,
                   bitmapParams.format,
-                  GL_UNSIGNED_BYTE,
+                  inParams.type,
                   inBitmap->data);GLDEBUG_THROW;
 
   // set wrapping and filters
