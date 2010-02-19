@@ -156,11 +156,38 @@ namespace lost
       globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
       globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
       globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
-      globals(state)["gl"]["GL_FLOAT"] = GL_FLOAT;
-      globals(state)["gl"]["GL_INT"] = GL_INT;
       globals(state)["gl"]["GL_FRONT"] = GL_FRONT;
       globals(state)["gl"]["GL_BACK"] = GL_BACK;
       globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
+
+      // types
+      globals(state)["gl"]["GL_INT"]                = GL_BOOL;
+      globals(state)["gl"]["GL_BOOL_VEC2"]          = GL_BOOL_VEC2;
+      globals(state)["gl"]["GL_BOOL_VEC3"]          = GL_BOOL_VEC3;
+      globals(state)["gl"]["GL_BOOL_VEC4"]          = GL_BOOL_VEC4;
+      globals(state)["gl"]["GL_INT"]                = GL_INT;
+      globals(state)["gl"]["GL_INT_VEC2"]           = GL_INT_VEC2;
+      globals(state)["gl"]["GL_INT_VEC3"]           = GL_INT_VEC3;
+      globals(state)["gl"]["GL_INT_VEC4"]           = GL_INT_VEC4;
+      globals(state)["gl"]["GL_FLOAT"]              = GL_FLOAT;
+      globals(state)["gl"]["GL_FLOAT_VEC2"]         = GL_FLOAT_VEC2;
+      globals(state)["gl"]["GL_FLOAT_VEC3"]         = GL_FLOAT_VEC3;
+      globals(state)["gl"]["GL_FLOAT_VEC4"]         = GL_FLOAT_VEC4;
+      globals(state)["gl"]["GL_FLOAT_MAT2"]         = GL_FLOAT_MAT2;
+      globals(state)["gl"]["GL_FLOAT_MAT2x3"]       = GL_FLOAT_MAT2x3;
+      globals(state)["gl"]["GL_FLOAT_MAT2x4"]       = GL_FLOAT_MAT2x4;
+      globals(state)["gl"]["GL_FLOAT_MAT3"]         = GL_FLOAT_MAT3;
+      globals(state)["gl"]["GL_FLOAT_MAT3x2"]       = GL_FLOAT_MAT3x2;
+      globals(state)["gl"]["GL_FLOAT_MAT3x4"]       = GL_FLOAT_MAT3x4;
+      globals(state)["gl"]["GL_FLOAT_MAT4"]         = GL_FLOAT_MAT4;
+      globals(state)["gl"]["GL_FLOAT_MAT4x2"]       = GL_FLOAT_MAT4x2;
+      globals(state)["gl"]["GL_FLOAT_MAT4x3"]       = GL_FLOAT_MAT4x3;
+      globals(state)["gl"]["GL_SAMPLER_1D"]         = GL_SAMPLER_1D;
+      globals(state)["gl"]["GL_SAMPLER_2D"]         = GL_SAMPLER_2D;
+      globals(state)["gl"]["GL_SAMPLER_3D"]         = GL_SAMPLER_3D;
+      globals(state)["gl"]["GL_SAMPLER_CUBE"]       = GL_SAMPLER_CUBE;
+      globals(state)["gl"]["GL_SAMPLER_1D_SHADOW"]  = GL_SAMPLER_1D_SHADOW;
+      globals(state)["gl"]["GL_SAMPLER_2D_SHADOW"]  = GL_SAMPLER_2D_SHADOW;
     }
 
     void LostGLRenderBuffer(lua_State* state)
@@ -176,6 +203,21 @@ namespace lost
             .def("storage", &RenderBuffer::storage)
         ]
       ];
+    }
+
+    object ShaderProgram_parameterMap(object shaderProgramObj)
+    {
+      ShaderProgramPtr shaderProgram = object_cast<ShaderProgramPtr>(shaderProgramObj);
+      object result = newtable(shaderProgramObj.interpreter());
+      ShaderProgram::ParameterMap params = shaderProgram->parameterMap();
+      if (params.size() > 0)
+      {
+        for (ShaderProgram::ParameterMap::iterator idx = params.begin(); idx != params.end(); ++idx)
+        {
+          result[idx->first] = idx->second;
+        }
+      }
+      return result;
     }
 
     void LostGLShaderProgram(lua_State* state)
@@ -197,9 +239,22 @@ namespace lost
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)            
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
+            .def("parameterMap", &ShaderProgram_parameterMap)
+            .scope
+            [
+              class_<ShaderProgram::Parameter>("Parameter")
+                .def_readonly("name", &ShaderProgram::Parameter::name)
+                .def_readonly("index", &ShaderProgram::Parameter::index)
+                .def_readonly("glType", &ShaderProgram::Parameter::glType)
+                .def_readonly("size", &ShaderProgram::Parameter::size)
+                .def_readonly("paramType", &ShaderProgram::Parameter::paramType)
+            ]
         ]
       ];
+      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNDEFINED"] = (int)ShaderProgram::Parameter::UNDEFINED;
+      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["ATTRIBUTE"] = (int)ShaderProgram::Parameter::ATTRIBUTE;
+      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNIFORM"]   = (int)ShaderProgram::Parameter::UNIFORM;
     }    
 
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
