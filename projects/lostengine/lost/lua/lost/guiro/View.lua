@@ -127,30 +127,14 @@ function View:setParent(parent)
       end
       error("View:setParent() expected lost.guiro.View, got ".. typeName, 2)
     end
-
-    local currentParent = parent
-    local node = nil
-    while currentParent ~= nil and node == nil do
-      node = currentParent.subviewNodes
-      currentParent = currentParent.parent
-    end
-    if node ~= nil then
-      node:add(self.rootNode)
-    end
-
+    self.parent.subviewNodes:add(self.rootNode)
+    self:needsLayout()
     self:needsRedraw()
   else
+    if self.parent ~= nil then
+      self.parent.subviewNodes:remove(self.rootNode)
+    end
     self.parent = parent
-
-    local currentParent = parent
-    local node = nil
-    while currentParent ~= nil and node == nil do
-      node = currentParent.subviewNodes
-      currentParent = currentParent.parent
-    end
-    if node ~= nil then
-      node:remove(self.rootNode)
-    end
   end
 end
 

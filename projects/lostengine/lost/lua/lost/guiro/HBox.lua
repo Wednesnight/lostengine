@@ -13,6 +13,21 @@ function HBox:constructor()
 	self._spacing = 0 -- only used when mode is stacked
 end
 
+function HBox:addSubview(subview)
+  lost.guiro.View.addSubview(self, subview)
+  self:needsLayout()
+end
+
+function HBox:removeSubview(subview)
+  lost.guiro.View.removeSubview(self, subview)
+  self:needsLayout()
+end
+
+function HBox:removeAllSubviews()
+  lost.guiro.View.removeAllSubviews(self)
+  self:needsLayout()
+end
+
 -- returns the sum of the current width of all subviews
 function HBox:calculateSubviewWidth()
   local result = 0
