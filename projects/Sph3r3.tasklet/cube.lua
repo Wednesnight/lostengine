@@ -4,6 +4,14 @@ using "lost.math.Vec3"
 using "lost.math.Vec2"
 using "lost.common.Color"
 
+function calcRadius(minV,maxV,v)
+  local delta = maxV - minV
+  local current = ((maxV-math.abs(v))/delta)*math.pi+math.pi
+  local r = math.abs(math.sin(current)*.4)
+  log.debug("v "..v.." delta "..delta.." r "..r)
+  return r
+end
+
 function create(sideLength, numPlanes)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec3_f32, gl.UT_vertex, 0)
@@ -21,6 +29,8 @@ function create(sideLength, numPlanes)
   
   -- create ascending quads first, this is the "front" side
   local y = -math.floor(numPlanes/2)
+  local minY = y
+  local maxY = -y
   local planeIndex = 0
   local spacing = sideLength / (numPlanes-1)
   local vertexOffset = 0
@@ -31,7 +41,7 @@ function create(sideLength, numPlanes)
                y*spacing, 
                vertexOffset+numVertsPerQuad*planeIndex,
                indexOffset+numIndicesPerQuad*planeIndex,
-               .5,
+               calcRadius(minY, maxY, y),
                1)
     y = y+1
     planeIndex = planeIndex +1
@@ -48,7 +58,7 @@ function create(sideLength, numPlanes)
                y*spacing, 
                vertexOffset+numVertsPerQuad*planeIndex,
                indexOffset+numIndicesPerQuad*planeIndex,
-               .5,
+               calcRadius(minY, maxY, y),
                -1) -- reverses normal and winding for correct viewing form other side
     y = y-1
     planeIndex = planeIndex +1
