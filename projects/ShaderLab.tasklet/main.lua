@@ -1,4 +1,4 @@
-local taskletName = "ShaderLab"
+local taskletName = "Shader Lab"
 
 require("lost.declarative.Context")
 require("lost.guiro.RenderView")

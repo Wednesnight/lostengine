@@ -22,11 +22,8 @@ using "lost.resource.FilesystemRepository"
 using "lost.resource.ApplicationResourceRepository"
 using "lost.application.K_ESCAPE"
 
-local shaderLoader = Loader.create()
-shaderLoader:addRepository(FilesystemRepository.create("/"))
-shaderLoader:addRepository(ApplicationResourceRepository.create())
-
 local scene = require("scene")
+local controller = require("controller")
 
 return dcl.guiro:Screen
 {
@@ -75,7 +72,7 @@ return dcl.guiro:Screen
       dcl.guiro:View
       {
         id = "renderView",
-        bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -260), hrel(1, -50)),
+        bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -330), hrel(1, -50)),
         showFrame = true,
         dcl.guiro:RenderView
         {
@@ -92,16 +89,16 @@ return dcl.guiro:Screen
       dcl.guiro:VBox
       {
         id = "toolView",
-        bounds = Bounds(xright({abs = -10}), ybottom({abs = 10}), wabs(230), hrel(1, -50)),
+        bounds = Bounds(xright({abs = -10}), ybottom({abs = 40}), wabs(300), hrel(1, -80)),
         showFrame = true,
         halign = "left",
         mode = "stack",
         spacing = 5,
         dcl.guiro:Label
         {
-          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(15)),
+          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(20)),
           fontSize = 12,
-          text = "Shader:",
+          text = "Shader",
           halign = "left"
         },
         dcl.guiro:Label
@@ -113,29 +110,31 @@ return dcl.guiro:Screen
           showFrame = true,
           listeners =
           {
-            droppedFile = function(event)
-              if event.currentTarget == event.target then
-                local relativeName = string.match(event.filename, "([^/%.]*)%.[^/%.]*$")
-                if relativeName ~= nil then
-                  event.target:text(relativeName)
-                end
-              end
-            end
+            droppedFile = controller.droppedShader
           }
         },
-        dcl.guiro:Button
+        dcl.guiro:VBox
         {
-          id = "updateButton",
-          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(25)),
-          title = "Update",
-          listeners =
-          {
-            click = function(event)
-              if event.currentTarget == event.target then
-                --
-              end
+          id = "shaderParams",
+          bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1, -75)),
+          showFrame = true,
+          halign = "left",
+          mode = "stack",
+          spacing = 5
+        }
+      },
+      dcl.guiro:Button
+      {
+        id = "updateButton",
+        bounds = Bounds(xright({abs = -10}), ybottom({abs = 10}), wabs(300), habs(25)),
+        title = "Update",
+        listeners =
+        {
+          click = function(event)
+            if event.currentTarget == event.target then
+              --
             end
-          }
+          end
         }
       }
     }
