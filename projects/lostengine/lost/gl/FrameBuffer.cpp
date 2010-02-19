@@ -226,7 +226,7 @@ namespace lost
       }
       if (depthBits != -1)
       {
-        AttachmentPtr attachment = Attachment::create(size, depthBits, Attachment::UT_renderBuffer);
+        AttachmentPtr attachment = Attachment::create(size, depthBits, Attachment::UT_texture);
         attachDepthBuffer(attachment);
       }
       if (stencilBits != -1)
