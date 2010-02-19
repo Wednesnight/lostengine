@@ -40,7 +40,7 @@ namespace lost
 # define LOGTHROW(e) EOUT("throwing from here");throw e;
 #else
 # define EOUT(s)
-#define LOGTHROW(m,e) throw e;
+#define LOGTHROW(e) throw e;
 #endif
 
 #if defined(LOST_LOGGER_ENABLE_IOUT)
