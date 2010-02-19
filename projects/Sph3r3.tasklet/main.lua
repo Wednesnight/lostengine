@@ -28,6 +28,10 @@ lasttime = 0
 globalRadius = 200
 numSlices = 15
 
+accumulateFrames = 100
+currentFrameNum = 0
+frameTime = 0
+
 -- creates a quad around 0,0,0 in xz plane with given side length
 require("cube")
 
@@ -104,6 +108,16 @@ function update(tasklet)
   circleMesh1.transform = mm*MatrixRotX(0)
   circleMesh2.transform = mm*MatrixRotZ(-90)
   lasttime = now
+
+  frameTime = frameTime + delta
+  currentFrameNum = currentFrameNum + 1
+  if currentFrameNum == accumulateFrames then 
+    local fps = 1000/(frameTime/accumulateFrames)
+    log.debug("average fps over "..accumulateFrames.." frames: "..fps)
+    frameTime = 0
+    currentFrameNum = 0
+  end
+
   return running
 end
 

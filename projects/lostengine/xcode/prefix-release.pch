@@ -2,4 +2,4 @@
 #define NDEBUG
 #include "prefix-shared.h"
 
-#undef DOUT
+#define LOST_LOGGER_ENABLE_DOUT
