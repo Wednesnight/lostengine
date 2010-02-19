@@ -44,6 +44,8 @@ function RenderView:constructor()
   self._renderViewNode:add(self._framebufferNode)
   self._renderViewNode:add(self._renderGraphNode)
   self._renderViewNode:add(self._defaultFramebufferNode)
+  -- make sure depth test is disabled
+  self._renderViewNode:add(lost.rg.DepthTest.create(false))
 end
 
 function RenderView:beforeLayout()
@@ -59,6 +61,21 @@ function RenderView:afterLayout()
     if camera ~= nil then
       camera.cam:viewport(Rect(0, 0, self.rect.width, self.rect.height))
     end
+    local shader = self:shader()
+    if shader ~= nil then
+      shader:enable()
+      for k,v in next,shader:parameterMap() do
+        -- FIXME: some hard-coded values until we have edit controls
+        if v.name == "width" then
+          shader:setFloat(v.name, self.rect.width)
+        elseif v.name == "height" then
+          shader:setFloat(v.name, self.rect.height)
+        elseif v.name == "screensize" then
+          shader:setFloat(v.name, Vec2(self.rect.width, self.rect.height))
+        end
+      end
+      shader:disable()
+    end
     self:needsRedraw()
   end
   lost.guiro.Image.afterLayout(self)
@@ -66,9 +83,46 @@ end
 
 function RenderView:beforeRedraw()
   self._renderViewNode:process(currentTasklet.window.context)
+  self._oldShader = self:shader()
   lost.guiro.Image.beforeRedraw(self)
+end
+
+function RenderView:afterRedraw()
+  lost.guiro.Image.afterRedraw(self)
+  if self._oldShader ~= nil then
+    if self._textureMesh ~= nil and not rawequal(self._oldShader, self._textureMesh.material.shader) then
+      self._textureMesh.material.shader = self._oldShader
+    end
+    self._oldShader = nil
+  end
 end
 
 function RenderView:renderGraph()
   return self._renderGraphNode
+end
+
+function RenderView:shader(s)
+  if s ~= nil and self._textureMesh ~= nil then
+    s:enable()
+    for k,v in next,s:parameterMap() do
+      -- FIXME: some hard-coded values until we have edit controls
+      if v.name == "tex" or v.name == "colorMap" then
+        s:setInt(v.name, 0)
+      elseif v.name == "width" then
+        s:setFloat(v.name, self.rect.width)
+      elseif v.name == "height" then
+        s:setFloat(v.name, self.rect.height)
+      elseif v.name == "screensize" then
+        s:set(v.name, Vec2(self.rect.width, self.rect.height))
+      end
+    end
+    s:disable()
+
+    self._textureMesh.material.shader = s
+    self:needsRedraw()
+  elseif self._textureMesh ~= nil then
+    return self._textureMesh.material.shader
+  else
+    return nil
+  end
 end

@@ -30,6 +30,7 @@ return
   },
   dcl.rg:Draw
   {
+    name = "mesh",
     mesh = dcl.mesh:Obj
     {
       filename = "magnolia_tri.obj",

@@ -81,8 +81,9 @@ return dcl.guiro:Screen
           rendergraph = scene,
           listeners =
           {
---            angle = math.fmod(delta*50+angle, 360)
---            mesh.transform = lost.math.MatrixRotX(angle) * lost.math.MatrixRotY(angle)
+            mouseDown = controller.sceneMouseDown,
+            mouseMove = controller.sceneMouseMove,
+            mouseUp = controller.sceneMouseUp
           }
         }
       },

@@ -59,7 +59,7 @@ end
     Internal layout, do not use! See also: HasLayout:beforeLayout(), HasLayout:afterLayout()
   ]]
 function HasLayout:_layout(force)
-  log.debug(tostring(self) .."(".. self.id .."):_layout()")
+--  log.debug(tostring(self) .."(".. self.id .."):_layout()")
   if force or self.dirtyLayout then
     self:beforeLayout()
 
@@ -73,7 +73,7 @@ function HasLayout:_layout(force)
       parentRect = lost.math.Rect()
     end
     self.rect = self.bounds:rect(parentRect)
-    log.debug(tostring(self) ..": ".. tostring(self.rect))
+--    log.debug(tostring(self) ..": ".. tostring(self.rect))
     
     -- Call invisible _layout() on all subviews
     if type(self.subviews) == "table" then

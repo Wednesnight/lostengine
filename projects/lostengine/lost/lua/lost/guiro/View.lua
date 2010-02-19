@@ -212,7 +212,7 @@ end
     Internal redraw, do not use! See also: View:beforeRedraw(), View:afterRedraw()
   ]]
 function View:_redraw()
-  log.debug(tostring(self) .."(".. self.id .."):_redraw()")
+--  log.debug(tostring(self) .."(".. self.id .."):_redraw()")
   self:beforeRedraw()
   self.dirty = false
 
