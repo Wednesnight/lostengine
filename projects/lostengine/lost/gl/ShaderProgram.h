@@ -85,6 +85,8 @@ public:
   void set(const std::string& inName, const lost::math::Vec2& inVal);
   void set(const std::string& inName, const lost::math::Vec3& inVal);
 
+  ParameterMap parameterMap();
+
 private:
   void buildParamMap();
   void addAttributes();
