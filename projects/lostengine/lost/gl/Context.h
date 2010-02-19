@@ -67,6 +67,8 @@ namespace lost
       ShaderProgramPtr currentShader;
       math::Matrix currentTransform;
       Buffer* currentBuffer;
+      bool cullEnabled;
+      GLenum cullFaceMode;
       
       /**
        * forward declaration for platform specific stuff
@@ -116,6 +118,9 @@ namespace lost
       void blendFunc(GLenum src, GLenum dest);
       void scissor(bool enable);
       void texture2D(bool enable);
+
+      void cull(bool enable);
+      void cullFace(GLenum v);
       
       void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
       void color(const common::Color& col); // sets the current drawing color to col

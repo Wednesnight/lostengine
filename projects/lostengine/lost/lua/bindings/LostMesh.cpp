@@ -113,6 +113,8 @@ namespace lost
             .def_readwrite("blend", &Material::blend)
             .def_readwrite("blendSrc", &Material::blendSrc)
             .def_readwrite("blendDest", &Material::blendDest)
+            .def_readwrite("cull", &Material::cull)
+            .def_readwrite("cullMode", &Material::cullMode)
             .scope
             [
               def("create", (MaterialPtr(*)())&Material::create)

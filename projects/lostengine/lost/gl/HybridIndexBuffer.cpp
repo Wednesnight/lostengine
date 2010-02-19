@@ -1,7 +1,6 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include "lost/gl/Context.h"
 
 namespace lost
 {
