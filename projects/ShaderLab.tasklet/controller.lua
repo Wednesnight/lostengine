@@ -25,8 +25,11 @@ local controller =
 
 controller.droppedShader = function(event)
   if event.currentTarget == event.target then
-    local relativeName = string.match(event.filename, "([^/%.]*)%.[^/%.]*$")
-    local filePath = string.match(event.filename, "(.*)%.[^/%.]*$")
+
+    -- only accept vertex/fragment shader extensions
+    local relativeName = string.match(event.filename, "([^/%.]*)%.vs$") or string.match(event.filename, "([^/%.]*)%.fs$")
+    local filePath = string.match(event.filename, "(.*)%.vs$") or string.match(event.filename, "(.*)%.fs$")
+
     if relativeName ~= nil and filePath ~= nil then
 
       event.target:text(relativeName)
