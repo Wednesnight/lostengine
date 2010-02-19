@@ -26,7 +26,7 @@ speed = 20
 lasttime = 0
 
 globalRadius = 200
-numSlices = 31
+numSlices = 15
 
 -- creates a quad around 0,0,0 in xz plane with given side length
 require("cube")
@@ -69,7 +69,7 @@ function startup(tasklet)
       viewport = Rect(0,0,screensize.x,screensize.y),
       fovy=90,
       depth=Vec2(.01, 4000),
-      position = Vec3(0,0,600),
+      position = Vec3(0,0,270),
       target=Vec3(0,0,0),
       stickToTarget = true
     },
@@ -82,7 +82,8 @@ function startup(tasklet)
     dcl.rg:Draw
     {
       name = "circle2",
-      mesh = cube.create(globalRadius, numSlices)
+      mesh = cube.create(globalRadius, numSlices),
+      active = true
     }    
   }
   
@@ -112,6 +113,7 @@ function keyHandler(event)
   elseif (event.key == lost.application.K_A) then
     local v = cam:position()
     v.z = v.z-10
+    log.debug(v.z)
     cam:position(v)
   end
 end

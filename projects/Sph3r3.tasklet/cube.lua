@@ -5,10 +5,10 @@ using "lost.math.Vec2"
 using "lost.common.Color"
 
 function calcRadius(minV,maxV,v)
-  local delta = maxV - minV
-  local current = ((maxV-math.abs(v))/delta)*math.pi+math.pi
-  local r = math.abs(math.sin(current)*.4)
-  log.debug("v "..v.." delta "..delta.." r "..r)
+  local alpha = math.acos(math.abs(v)/maxV)
+  local r = (math.abs(v)/math.cos(alpha))*math.sin(alpha) -- in units of y
+  r = r/maxV -- assuming symetric range, this normalises the radius in range 0,1
+  r = r*.5 -- clamp it to max value
   return r
 end
 
