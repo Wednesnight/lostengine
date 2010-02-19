@@ -103,6 +103,8 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentClearColor = getParam<lost::common::Color>(GL_COLOR_CLEAR_VALUE);
       currentScissorRect = getParam<lost::math::Rect>(GL_SCISSOR_BOX);
       currentBuffer = NULL;
+      cullEnabled = getParam<bool>(GL_CULL_FACE);
+      cullFaceMode = getParam<int>(GL_CULL_FACE_MODE);
     }
     
     Context::~Context()
@@ -149,6 +151,16 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
     void Context::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
     void Context::blend(bool enable) { SERVERSTATE(blendEnabled, enable, GL_BLEND);}
+
+    void Context::cull(bool enable) { SERVERSTATE(cullEnabled, enable, GL_CULL_FACE);}
+    void Context::cullFace(GLenum mode)
+    {
+      if(mode != cullFaceMode)
+      {
+        glCullFace(mode);GLDEBUG;
+        cullFaceMode = mode;
+      }
+    }
     
     void Context::blendFunc(GLenum src, GLenum dest)
     {
@@ -279,6 +291,15 @@ std::map<void*, Context*> glContext2lostGlContext;
       else
       {
         blend(false);
+      }
+      if(mat->cull)
+      {
+        cull(true);
+        cullFace(mat->cullMode);
+      }
+      else
+      {
+        cull(false);
       }
       shader(mat->shader);
     }

@@ -158,6 +158,9 @@ namespace lost
       globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
       globals(state)["gl"]["GL_FLOAT"] = GL_FLOAT;
       globals(state)["gl"]["GL_INT"] = GL_INT;
+      globals(state)["gl"]["GL_FRONT"] = GL_FRONT;
+      globals(state)["gl"]["GL_BACK"] = GL_BACK;
+      globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
     }
 
     void LostGLRenderBuffer(lua_State* state)

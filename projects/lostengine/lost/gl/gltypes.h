@@ -43,4 +43,8 @@ typedef long GLsizeiptr;
 #define GL_FRAGMENT_SHADER                0x8B30
 #define GL_VERTEX_SHADER                  0x8B31
 
+#define GL_FRONT                          0x0404
+#define GL_BACK                           0x0405
+#define GL_FRONT_AND_BACK                 0x0408
+
 #endif

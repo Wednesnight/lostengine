@@ -21,8 +21,9 @@ struct Material
   bool                        blend;
   GLenum                      blendSrc;
   GLenum                      blendDest;
-  gl::ShaderProgramPtr        shader;
-  // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
+  gl::ShaderProgramPtr        shader; // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
+  bool                        cull;
+  GLenum                      cullMode;
   
   Material()
   {
@@ -31,6 +32,8 @@ struct Material
     blendSrc = GL_SRC_ALPHA;
     blendDest = GL_ONE_MINUS_SRC_ALPHA; 
     color = common::whiteColor;
+    cull= false;
+    cullMode = GL_BACK;
   }
   
   virtual ~Material()

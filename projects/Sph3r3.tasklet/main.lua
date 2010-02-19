@@ -38,7 +38,7 @@ function createDisc()
         filename = "disc"
       },
       color = Color(1,.5,0),
-      blend = true
+      blend = true,
     }
   }
 end

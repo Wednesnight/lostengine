@@ -1,5 +1,5 @@
 #include "lost/gl/HybridVertexBuffer.h"
-#include "lost/gl/Context.h"
+
 namespace lost
 {
 namespace gl
