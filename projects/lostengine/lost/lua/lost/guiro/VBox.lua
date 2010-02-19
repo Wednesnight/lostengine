@@ -12,6 +12,21 @@ function VBox:constructor()
 	self._spacing = 0 -- only used when mode is stacked
 end
 
+function VBox:addSubview(subview)
+  lost.guiro.View.addSubview(self, subview)
+  self:needsLayout()
+end
+
+function VBox:removeSubview(subview)
+  lost.guiro.View.removeSubview(self, subview)
+  self:needsLayout()
+end
+
+function VBox:removeAllSubviews()
+  lost.guiro.View.removeAllSubviews(self)
+  self:needsLayout()
+end
+
 -- returns the sum of the current heights of all subviews
 function VBox:calculateSubviewHeight()
   local result = 0
