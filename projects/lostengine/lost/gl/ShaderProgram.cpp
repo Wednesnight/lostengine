@@ -245,6 +245,11 @@ void ShaderProgram::set(const std::string& inName, const lost::math::Vec4& inVal
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec2& inVal) {param(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec3& inVal) {param(inName).set(inVal);}
 
+ShaderProgram::ParameterMap ShaderProgram::parameterMap()
+{
+  return name2param;
+}
+
 void ShaderProgram::buildParamMap()
 {
   name2param.clear();
