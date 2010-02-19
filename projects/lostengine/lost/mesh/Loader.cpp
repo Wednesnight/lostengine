@@ -97,9 +97,9 @@ namespace lost
       {
         if(normalCount && (vertexCount != normalCount)) {throw runtime_error("number of normals doesn't match number of vertices");}
         mesh->resetSize(vertexCount, indexCount);
-        DOUT("vertexCount      : " << vertexCount);
-        DOUT("normalCount      : " << normalCount);
-        DOUT("indexCount       : " << indexCount);
+//        DOUT("vertexCount      : " << vertexCount);
+//        DOUT("normalCount      : " << normalCount);
+//        DOUT("indexCount       : " << indexCount);
 
 
         Vec3 vec3;
@@ -143,7 +143,7 @@ namespace lost
           if(!normalCount)
           {
             // assuming triangles
-            DOUT("no normals");
+//            DOUT("no normals");
             Vec3* vertexNormals  = new Vec3[vertexCount];
             Vec3 p1, p2, p3;
             Vec3 v1, v2;

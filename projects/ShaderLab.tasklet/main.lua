@@ -18,7 +18,7 @@ function startup(tasklet)
   
   dcl = Context(tasklet.loader)
   screen = require("ui")
-  screen("ui")("window")("renderView")("scene")._renderViewNode:print()
+--  screen("ui")("window")("renderView")("scene")._renderViewNode:print()
 
   return true
 end

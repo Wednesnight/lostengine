@@ -128,7 +128,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   }
   else
   {
-    DOUT("reinitialising bitmap");
+//    DOUT("reinitialising bitmap");
     atlas->init(packerResult.packedBitmap);
   }
   

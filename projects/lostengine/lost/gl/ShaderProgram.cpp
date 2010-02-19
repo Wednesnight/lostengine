@@ -271,7 +271,7 @@ void ShaderProgram::addAttributes()
     glGetActiveAttrib(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
     Parameter param(buffer.get(), i, type, size, Parameter::ATTRIBUTE);
     name2param[param.name] = param;
-    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
+//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
   }
 }
 
@@ -289,7 +289,7 @@ void ShaderProgram::addUniforms()
     glGetActiveUniform(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
     Parameter param(buffer.get(), i, type, size, Parameter::UNIFORM);
     name2param[param.name] = param;
-    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
+//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
   }
 }
 

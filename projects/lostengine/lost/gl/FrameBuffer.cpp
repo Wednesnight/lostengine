@@ -254,6 +254,7 @@ namespace lost
     {
       colorBuffers[index] = buffer;
       buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
+      check();
     }
     
     void FrameBuffer::attachDepthBuffer(const TexturePtr& buffer)
@@ -286,6 +287,7 @@ namespace lost
         }
         depthBuffer->attach(LGL_DEPTH_ATTACHMENT);
       }
+      check();
     }
     
     void FrameBuffer::attachStencilBuffer(const TexturePtr& buffer)
@@ -297,6 +299,7 @@ namespace lost
     {
       stencilBuffer = buffer;
       buffer->attach(LGL_STENCIL_ATTACHMENT);
+      check();
     }
     
     GLenum FrameBuffer::status()
@@ -358,9 +361,12 @@ namespace lost
       for (map<boost::uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
       {
         idx->second->resize(size);
+        check();
       }
       if (depthBuffer) depthBuffer->resize(size);
+      check();
       if (stencilBuffer) stencilBuffer->resize(size);
+      check();
     }
 
     void FrameBuffer::bind()
