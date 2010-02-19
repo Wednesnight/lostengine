@@ -99,8 +99,8 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // clean up temporary data
   sourceRects.clear();
   recursionStack.clear();
-  DOUT("searched "<<(boost::uint32_t)((sumIter/sumNodes)*100)<<"% of all nodes");
-  DOUT(" iterations: "<<sumIter<<" nodes:"<<sumNodes);
+//  DOUT("searched "<<(boost::uint32_t)((sumIter/sumNodes)*100)<<"% of all nodes");
+//  DOUT(" iterations: "<<sumIter<<" nodes:"<<sumNodes);
 }
 
 bool RectPacker::exactMatch(const Node& n, const SourceRect& s)

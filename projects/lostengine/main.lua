@@ -26,8 +26,8 @@ function startup(tasklet)
   local screen = require("ui")
 
   -- debug
-  tasklet.renderNode:print()
-  screen:printSubviews()
+--  tasklet.renderNode:print()
+--  screen:printSubviews()
 
   -- finally, setup events
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
