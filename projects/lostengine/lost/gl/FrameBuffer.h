@@ -39,6 +39,8 @@ namespace lost
         void createRenderBuffer();
         void updateRenderBuffer();
 
+        void update();
+
       public:
         math::Vec2 size;
         GLenum     bitFormat;
@@ -60,6 +62,7 @@ namespace lost
         void attach(GLenum target);
 
         void resize(const math::Vec2& size);
+        void resetBitFormat(GLenum bitFormat);
 
         void bind();
         

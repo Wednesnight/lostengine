@@ -55,7 +55,7 @@ namespace lost
         default:
           ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw std::runtime_error(os.str());
+          throw runtime_error(os.str());
       }
     }
 
@@ -96,7 +96,26 @@ namespace lost
       renderBuffer->storage(bitFormat, size.width, size.height);
       renderBuffer->disable();
     }
-    
+
+    void FrameBuffer::Attachment::update()
+    {
+      switch (usageType)
+      {
+        case Attachment::UT_texture:
+          updateTexture();
+          break;
+          
+        case Attachment::UT_renderBuffer:
+          updateRenderBuffer();
+          break;
+          
+        default:
+          ostringstream os;
+          os << "invalid usage type: " << usageType;
+          throw runtime_error(os.str());
+      }
+    }
+
     FrameBuffer::Attachment::Attachment(const TexturePtr& texture)
     {
       bitFormat = texture->internalFormat;
@@ -127,21 +146,13 @@ namespace lost
     void FrameBuffer::Attachment::resize(const Vec2& size)
     {
       this->size = size;
-      switch (usageType)
-      {
-        case Attachment::UT_texture:
-          updateTexture();
-          break;
-          
-        case Attachment::UT_renderBuffer:
-          updateRenderBuffer();
-          break;
-          
-        default:
-          ostringstream os;
-          os << "invalid usage type: " << usageType;
-          throw std::runtime_error(os.str());
-      }
+      update();
+    }
+
+    void FrameBuffer::Attachment::resetBitFormat(GLenum bitFormat)
+    {
+      this->bitFormat = bitFormat;
+      update();
     }
 
     void FrameBuffer::Attachment::attach(GLenum target)
@@ -163,7 +174,7 @@ namespace lost
         default:
           ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw std::runtime_error(os.str());
+          throw runtime_error(os.str());
       }
     }
 
@@ -182,7 +193,7 @@ namespace lost
         default:
           ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw std::runtime_error(os.str());
+          throw runtime_error(os.str());
       }
     }
     
@@ -200,7 +211,7 @@ namespace lost
 
     FrameBuffer::FrameBuffer(const math::Vec2& size, GLenum colorBits, GLenum depthBits, GLenum stencilBits)
     {
-      this->size = size;
+      this->size = Vec2(nextPowerOf2((unsigned long)size.width), nextPowerOf2((unsigned long)size.height));
 
       lglGenFramebuffers(1, &buffer); GLDEBUG_THROW;
 
@@ -253,7 +264,28 @@ namespace lost
     void FrameBuffer::attachDepthBuffer(const AttachmentPtr& buffer)
     {
       depthBuffer = buffer;
-      buffer->attach(LGL_DEPTH_ATTACHMENT);
+      depthBuffer->attach(LGL_DEPTH_ATTACHMENT);
+
+      // try other bit formats if attaching fails
+      while (!isComplete())
+      {
+        switch (depthBuffer->bitFormat)
+        {
+          case LGL_DEPTH_COMPONENT16:
+            throw runtime_error("FrameBuffer: couldn't determine compatible depth buffer bit format");
+          case LGL_DEPTH_COMPONENT24:
+            depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT16);
+            break;
+          case LGL_DEPTH_COMPONENT32:
+            depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT24);
+            break;
+          default:
+            ostringstream os;
+            os << "invalid depth buffer bit format: " << depthBuffer->bitFormat;
+            throw runtime_error(os.str());
+        }
+        depthBuffer->attach(LGL_DEPTH_ATTACHMENT);
+      }
     }
     
     void FrameBuffer::attachStencilBuffer(const TexturePtr& buffer)
@@ -322,8 +354,8 @@ namespace lost
 
     void FrameBuffer::resize(const Vec2& size)
     {
-      this->size = size;
-      for (std::map<boost::uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
+      this->size = Vec2(nextPowerOf2((unsigned long)size.width), nextPowerOf2((unsigned long)size.height));
+      for (map<boost::uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
       {
         idx->second->resize(size);
       }
