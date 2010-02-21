@@ -11,6 +11,7 @@ require("lost.guiro.Button")
 require("lost.guiro.VBox")
 require("lost.guiro.HBox")
 require("lost.guiro.RenderView")
+require("lost.guiro.SpinEdit")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.event.Event")
 
@@ -96,6 +97,13 @@ function Guiro:assignRenderViewAttributes(target, source)
       target:renderGraph():add(node)
     end
   end
+end
+
+function Guiro:assignSpinEditAttributes(target, source)
+  if source.value ~= nil then target:value(source.value) end
+  if source.min ~= nil then target:min(source.min) end
+  if source.max ~= nil then target:max(source.max) end
+  if source.stepSize ~= nil then target:stepSize(source.stepSize) end
 end
 
 function Guiro:applyStyle(target, def)
@@ -229,6 +237,16 @@ function Guiro:RenderView(def)
   self:assignViewAttributes(result, def)
   self:assignImageAttributes(result, def)
   self:assignRenderViewAttributes(result, def)
+  self:addEventListeners(result, def)
+  return result
+end
+
+function Guiro:SpinEdit(def)
+  local result = lost.guiro.SpinEdit()
+  self:applyStyle(result, def)
+  -- don't allow subviews
+  self:assignViewAttributes(result, def)
+  self:assignSpinEditAttributes(result, def)
   self:addEventListeners(result, def)
   return result
 end
