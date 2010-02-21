@@ -30,11 +30,8 @@ function Button:constructor()
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)	
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)	
   self:addEventListener("mouseDown", function(event) self:mouseDown(event) end)	
-  self:addEventListener("mouseDown", function(event) self:mouseDown(event) end, Event.PHASE_BUBBLE)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)	
-  self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end, Event.PHASE_BUBBLE)	
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)	
-  self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end, Event.PHASE_BUBBLE)	
 end
 
 function Button:mouseEnter(event)

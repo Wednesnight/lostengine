@@ -119,24 +119,32 @@ controller.droppedShader = function(event)
           mode = "stack",
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.22), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.19), habs(10)),
             fontSize = 10,
             text = typeName(v.paramType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.22), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.19), habs(10)),
             fontSize = 10,
             text = valueTypeName(v.glType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.56), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.50), habs(10)),
             fontSize = 10,
             text = k,
             halign = "left"
+          },
+          dcl.guiro:SpinEdit
+          {
+            bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+            value = 0,
+            min = 0,
+            max = 15,
+            stepSize = 1
           }
         }
         event.target.parent("shaderParams"):addSubview(param)

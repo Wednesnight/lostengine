@@ -72,7 +72,7 @@ return dcl.guiro:Screen
       dcl.guiro:View
       {
         id = "renderView",
-        bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -330), hrel(1, -50)),
+        bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -380), hrel(1, -50)),
         showFrame = true,
         dcl.guiro:RenderView
         {
@@ -90,7 +90,7 @@ return dcl.guiro:Screen
       dcl.guiro:VBox
       {
         id = "toolView",
-        bounds = Bounds(xright({abs = -10}), ybottom({abs = 40}), wabs(300), hrel(1, -80)),
+        bounds = Bounds(xright({abs = -10}), ybottom({abs = 40}), wabs(350), hrel(1, -80)),
         showFrame = true,
         halign = "left",
         mode = "stack",

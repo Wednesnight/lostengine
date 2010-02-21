@@ -85,6 +85,7 @@ function HasEvents:dispatchEvent(event, phase)
     local bubble = (phase == nil or phase == Event.PHASE_BUBBLE)
 
     if capture then
+--      log.debug("dispatch capture")
       -- target == self since self dispatches the event
       event.target = self
       -- build capture hierarchy
@@ -105,10 +106,13 @@ function HasEvents:dispatchEvent(event, phase)
     end
 
     if target and not event.stopDispatch then
+--      log.debug("dispatch target")
+      event.currentTarget = self
       self.targetEventDispatcher:dispatchEvent(event)
     end
 
     if event.bubbles and not event.stopPropagation then
+--      log.debug("dispatch bubble")
       local currentTarget = self.parent
       while currentTarget ~= nil and not event.stopPropagation do
         event.currentTarget = currentTarget
