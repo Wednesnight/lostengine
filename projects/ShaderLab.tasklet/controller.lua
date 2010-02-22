@@ -128,7 +128,7 @@ controller.droppedShader = function(event)
         if readonly then
           editor = dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
             fontSize = 10,
             text = "(builtin)",
             halign = "left"
@@ -138,7 +138,7 @@ controller.droppedShader = function(event)
           if type:find("^sampler") or type == "int" or type == "float" then
             editor = dcl.guiro:SpinEdit
             {
-              bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+              bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
               value = 0,
               min = 0,
               max = 15,
@@ -147,7 +147,7 @@ controller.droppedShader = function(event)
           else
             editor = dcl.guiro:Label
             {
-              bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+              bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
               fontSize = 10,
               text = "",
               halign = "left"
@@ -157,27 +157,27 @@ controller.droppedShader = function(event)
 
         local param = dcl.guiro:HBox
         {
-          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(10)),
+          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(20)),
           showFrame = true,
           valign = "center",
           mode = "stack",
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.19), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.19), hrel(1)),
             fontSize = 10,
             text = typeName(v.paramType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.19), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.19), hrel(1)),
             fontSize = 10,
             text = valueTypeName(v.glType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.50), habs(10)),
+            bounds = Bounds(xabs(0), yabs(0), wrel(.50), hrel(1)),
             fontSize = 10,
             text = k,
             halign = "left"
