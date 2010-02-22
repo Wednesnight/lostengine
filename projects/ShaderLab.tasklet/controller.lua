@@ -108,8 +108,52 @@ controller.droppedShader = function(event)
         text = "Parameters",
         halign = "left"
       })
+
       shaderProgram:enable()
-      for k,v in next,shaderProgram:parameterMap() do
+
+      -- sort by param name
+      local paramMap = shaderProgram:parameterMap()
+      local paramNames = {}
+      for k in next,paramMap do
+        table.insert(paramNames, k)
+      end
+      table.sort(paramNames)
+
+      for i,k in next,paramNames do
+
+        local v = paramMap[k]
+        local readonly = string.find(k, "^gl_") ~= nil
+
+        local editor = nil
+        if readonly then
+          editor = dcl.guiro:Label
+          {
+            bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+            fontSize = 10,
+            text = "(builtin)",
+            halign = "left"
+          }
+        else
+          local type = valueTypeName(v.glType) or ""
+          if type:find("^sampler") or type == "int" or type == "float" then
+            editor = dcl.guiro:SpinEdit
+            {
+              bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+              value = 0,
+              min = 0,
+              max = 15,
+              stepSize = 1
+            }
+          else
+            editor = dcl.guiro:Label
+            {
+              bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
+              fontSize = 10,
+              text = "",
+              halign = "left"
+            }
+          end
+        end
 
         local param = dcl.guiro:HBox
         {
@@ -138,14 +182,7 @@ controller.droppedShader = function(event)
             text = k,
             halign = "left"
           },
-          dcl.guiro:SpinEdit
-          {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.12), habs(10)),
-            value = 0,
-            min = 0,
-            max = 15,
-            stepSize = 1
-          }
+          editor
         }
         event.target.parent("shaderParams"):addSubview(param)
       end
