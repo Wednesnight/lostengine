@@ -1,3 +1,7 @@
+using "lost.resource.Loader"
+using "lost.resource.FilesystemRepository"
+using "lost.resource.ApplicationResourceRepository"
+using "lost.application.K_ESCAPE"
 using "lost.guiro.Bounds"
 using "lost.guiro.xabs"
 using "lost.guiro.yabs"
@@ -13,6 +17,9 @@ using "lost.guiro.wabs"
 using "lost.guiro.habs"
 using "lost.guiro.wfit"
 using "lost.guiro.hfit"
+using "lost.math.Vec2"
+using "lost.math.Vec3"
+using "lost.math.Rect"
 
 local shaderLoader = Loader.create()
 shaderLoader:addRepository(FilesystemRepository.create("/"))
@@ -20,21 +27,28 @@ shaderLoader:addRepository(ApplicationResourceRepository.create())
 
 local controller =
 {
-  angle = Vec2(0,0)
+  angle = Vec2(0,0),
+  running = false
 }
+
+controller.keyHandler = function(event)
+  if event.key == K_ESCAPE then
+    controller.running = false
+  end
+end
 
 controller.droppedShader = function(event)
   if event.currentTarget == event.target then
 
     -- only accept vertex/fragment shader extensions
     local relativeName = string.match(event.filename, "([^/%.]*)%.vs$") or string.match(event.filename, "([^/%.]*)%.fs$")
-    local filePath = string.match(event.filename, "(.*)%.vs$") or string.match(event.filename, "(.*)%.fs$")
+    controller.shaderFilename = string.match(event.filename, "(.*)%.vs$") or string.match(event.filename, "(.*)%.fs$")
 
-    if relativeName ~= nil and filePath ~= nil then
+    if relativeName ~= nil and controller.shaderFilename ~= nil then
 
       event.target:text(relativeName)
 
-      local shaderProgram = lost.gl.loadShader(shaderLoader, filePath)
+      local shaderProgram = lost.gl.loadShader(shaderLoader, controller.shaderFilename)
 
       local typeName = function(paramType)
         if paramType == lost.gl.ShaderProgram.Parameter.ATTRIBUTE then
@@ -100,15 +114,10 @@ controller.droppedShader = function(event)
         end
       end
 
+      -- clear old params
       event.target.parent("shaderParams"):removeAllSubviews()
-      event.target.parent("shaderParams"):addSubview(dcl.guiro:Label
-      {
-        bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(20)),
-        fontSize = 12,
-        text = "Parameters",
-        halign = "left"
-      })
-
+      
+      -- read shader params
       shaderProgram:enable()
 
       -- sort by param name
@@ -142,7 +151,21 @@ controller.droppedShader = function(event)
               value = 0,
               min = 0,
               max = 15,
-              stepSize = 1
+              stepSize = 1,
+              listeners =
+              {
+                valueChanged = function(event)
+                  if event.currentTarget == event.target then
+                    shaderProgram:enable()
+                    if type == "float" then
+                      shaderProgram:setFloat(k, event.value)
+                    else
+                      shaderProgram:setInt(k, event.value)
+                    end
+                    shaderProgram:disable()
+                  end
+                end
+              }
             }
           else
             editor = dcl.guiro:Label
@@ -187,7 +210,7 @@ controller.droppedShader = function(event)
         event.target.parent("shaderParams"):addSubview(param)
       end
       shaderProgram:disable()
-      event.target.parent.parent("renderView")("scene"):shader(shaderProgram)
+      event.target.parent.parent.parent("renderView")("scene"):shader(shaderProgram)
     end
   end
 end
@@ -217,6 +240,13 @@ end
 controller.sceneMouseUp = function(event)
   controller.moving = false
 end
+
+controller.reloadShader = function(event)
+  if event.currentTarget == event.target then
+  --
+  end
+end
+
 
 -- this must be the last line!
 return controller
