@@ -1,5 +1,7 @@
 #import "LEGLView.h"
 #import <QuartzCore/CAEAGLLayer.h>
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
 
 @implementation LEGLView
 
@@ -31,11 +33,11 @@
     
     // configure framebuffer
     // FIXME: this needs to be configurable via WindowParams, has only colorbuffer for a start
-		glGenFramebuffersOES(1, &defaultFramebuffer);
-		glGenRenderbuffersOES(1, &colorRenderbuffer);
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
-		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);    
+		glGenFramebuffers(1, &_defaultFramebuffer);
+		glGenRenderbuffers(1, &_colorRenderbuffer);
+		glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderbuffer);    
   }
   return self;
 }
