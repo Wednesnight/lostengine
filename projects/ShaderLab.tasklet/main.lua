@@ -8,10 +8,11 @@ using "lost.math.Rect"
 using "lost.declarative.Context"
 
 windowParams = WindowParams(taskletName, Rect(200,200,640,480))
-running = false
+
+local controller = require("controller")
 
 function startup(tasklet)
-  running = true
+  controller.running = true
 
   tasklet.name = taskletName
   tasklet.waitForEvents = true
@@ -24,5 +25,5 @@ function startup(tasklet)
 end
 
 function update(tasklet)
-  return running
+  return controller.running
 end
