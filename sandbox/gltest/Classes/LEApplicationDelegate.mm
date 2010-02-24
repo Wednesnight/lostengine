@@ -20,14 +20,25 @@
   [_window.leglView.context presentRenderbuffer:GL_RENDERBUFFER];  
 }
 
+-(void)startDisplayLink
+{
+  _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
+  [_displayLink setFrameInterval:1];
+  [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];  
+}
+
+-(void)stopDisplayLink
+{
+  [_displayLink invalidate];
+  _displayLink = nil;
+}
+
 - (void) applicationDidFinishLaunching:(UIApplication *)application
 {
   NSLog(@"%s", __FUNCTION__);
   _window = [[LEWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   [_window makeKeyAndVisible];
-  _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
-  [_displayLink setFrameInterval:1];
-  [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];  
+  [self startDisplayLink];
 }
 
 - (void) applicationWillResignActive:(UIApplication *)application
@@ -43,6 +54,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
   NSLog(@"%s", __FUNCTION__);
+  [self stopDisplayLink];
 }
 
 - (void) dealloc
