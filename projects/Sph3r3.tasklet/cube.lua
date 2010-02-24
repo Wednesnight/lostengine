@@ -14,7 +14,7 @@ end
 
 function create(sideLength, numPlanes)
   local layout = lost.gl.BufferLayout()
-  layout:add(gl.ET_vec3_f32, gl.UT_vertex, 0)
+  layout:add(gl.ET_vec3_f32, gl.UT_position, 0)
   layout:add(gl.ET_vec3_f32, gl.UT_texcoord0, 0)
   layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
 
@@ -84,10 +84,10 @@ end
 function createQuad(m, sideLength, y, vertOffset, indexOffset, radius, up)
   -- xz plane means y = 0
   local hl = sideLength / 2 -- precompute half side length to center plane around 0,0,0
-  m:set(vertOffset+0, gl.UT_vertex, Vec3(-hl,y,hl)) -- front left
-  m:set(vertOffset+1, gl.UT_vertex, Vec3(hl,y,hl)) -- front right
-  m:set(vertOffset+2, gl.UT_vertex, Vec3(hl,y,-hl)) -- back right
-  m:set(vertOffset+3, gl.UT_vertex, Vec3(-hl,y,-hl)) -- back left
+  m:set(vertOffset+0, gl.UT_position, Vec3(-hl,y,hl)) -- front left
+  m:set(vertOffset+1, gl.UT_position, Vec3(hl,y,hl)) -- front right
+  m:set(vertOffset+2, gl.UT_position, Vec3(hl,y,-hl)) -- back right
+  m:set(vertOffset+3, gl.UT_position, Vec3(-hl,y,-hl)) -- back left
 
   m:set(vertOffset+0, gl.UT_texcoord0, Vec3(0,0, radius))
   m:set(vertOffset+1, gl.UT_texcoord0, Vec3(1,0, radius))

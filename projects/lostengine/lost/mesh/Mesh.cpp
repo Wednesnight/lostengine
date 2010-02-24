@@ -11,7 +11,7 @@ using namespace gl;
 Mesh::Mesh()
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec3_f32, gl::UT_vertex, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   init(layout, gl::ET_u32);
 }
@@ -61,7 +61,7 @@ void Mesh::setIndex(uint32_t idx, uint32_t val)
 
 void Mesh::setVertex(uint32_t idx, const math::Vec2& val)
 {
-  vertexBuffer->set(idx, gl::UT_vertex, val);
+  vertexBuffer->set(idx, gl::UT_position, val);
 }
 
 void Mesh::setTexCoord(uint32_t idx, const math::Vec2& val)
@@ -71,7 +71,7 @@ void Mesh::setTexCoord(uint32_t idx, const math::Vec2& val)
 
 math::Vec2 Mesh::getVertex(uint32_t idx)
 {
-  return vertexBuffer->getAsVec2(idx, gl::UT_vertex);
+  return vertexBuffer->getAsVec2(idx, gl::UT_position);
 }
 
 void Mesh::set(uint32_t idx, UsageType ut, uint8_t val) { bufferFromUsageType(ut)->set(idx, ut, val); }

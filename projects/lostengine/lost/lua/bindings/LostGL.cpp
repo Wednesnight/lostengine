@@ -73,7 +73,7 @@ namespace lost
 
       globals(state)["gl"]["UT_unused"] = UT_unused;
       globals(state)["gl"]["UT_index"] = UT_index;
-      globals(state)["gl"]["UT_vertex"] = UT_vertex;
+      globals(state)["gl"]["UT_position"] = UT_position;
       globals(state)["gl"]["UT_texcoord0"] = UT_texcoord0;
       globals(state)["gl"]["UT_texcoord1"] = UT_texcoord1;
       globals(state)["gl"]["UT_texcoord2"] = UT_texcoord2;
