@@ -40,7 +40,7 @@ namespace lost
       {
         switch(usageType)
         {
-          case UT_vertex:
+          case UT_position:
           case UT_normal:
             mesh->vertexBuffer->set(idx, usageType, value);
             break;
@@ -58,7 +58,7 @@ namespace lost
     MeshPtr Loader::obj(common::DataPtr objFile)
     {
       BufferLayout layout;
-      layout.add(ET_vec3_f32, UT_vertex, 0);
+      layout.add(ET_vec3_f32, UT_position, 0);
       layout.add(ET_vec3_f32, UT_normal, 0);
       MeshPtr mesh(new Mesh(layout, ET_u32));
       unsigned int vtxCount = 0;
@@ -110,7 +110,7 @@ namespace lost
 
         rule<> vertex_p = 
           ch_p('v') >> +space_p >> 
-            vec3_p[MeshSet<Vec3>(vtxCount, mesh, vec3, UT_vertex)][increment_a(vtxCount)] >>
+            vec3_p[MeshSet<Vec3>(vtxCount, mesh, vec3, UT_position)][increment_a(vtxCount)] >>
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(vertex_p);
 
@@ -154,9 +154,9 @@ namespace lost
               uint32_t i1 = mesh->indexBuffer->getAsU32(i, UT_index);
               uint32_t i2 = mesh->indexBuffer->getAsU32(i+1, UT_index);
               uint32_t i3 = mesh->indexBuffer->getAsU32(i+2, UT_index);
-              p1 = mesh->vertexBuffer->getAsVec3(i1, UT_vertex);
-              p2 = mesh->vertexBuffer->getAsVec3(i2, UT_vertex);
-              p3 = mesh->vertexBuffer->getAsVec3(i3, UT_vertex);
+              p1 = mesh->vertexBuffer->getAsVec3(i1, UT_position);
+              p2 = mesh->vertexBuffer->getAsVec3(i2, UT_position);
+              p3 = mesh->vertexBuffer->getAsVec3(i3, UT_position);
               v1 = p2-p1;
               v2 = p3-p2;
               n = cross(v1, v2);

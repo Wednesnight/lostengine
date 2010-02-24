@@ -312,15 +312,15 @@ std::map<void*, Context*> glContext2lostGlContext;
       if(ib->dirty) {ib->upload();}
       if(vb->dirty) {vb->upload();}
 
-      Buffer* gpuBuffer = vb->bufferForUsageType(UT_vertex);
+      Buffer* gpuBuffer = vb->bufferForUsageType(UT_position);
       bind(gpuBuffer);
       vertexArray(true);
       // FIXME: preprocess and store the XXXpointer values in a helper struct in the hybrid buffer
       
-      GLint size = vb->hostBuffer->numScalarsForUsageType(UT_vertex);
-      GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_vertex);
-      GLsizei stride = vb->hostBuffer->layout.stride(UT_vertex); 
-      GLvoid* offset = (GLvoid*)vb->hostBuffer->layout.offset(UT_vertex);
+      GLint size = vb->hostBuffer->numScalarsForUsageType(UT_position);
+      GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_position);
+      GLsizei stride = vb->hostBuffer->layout.stride(UT_position); 
+      GLvoid* offset = (GLvoid*)vb->hostBuffer->layout.offset(UT_position);
             
       glVertexPointer(size,
                       type,

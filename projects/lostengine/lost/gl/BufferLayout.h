@@ -44,7 +44,7 @@ GLenum   glScalarTypeForElementType(ElementType et);
 typedef uint32_t UsageType;
 const static UsageType UT_unused = 0;  // elements marked with this usage type will be ignored, handy for testing or padding to multiples of 32/64 bytes for performance optimisation
 const static UsageType UT_index = 1;       // special case for IndexBuffers, the element is an index into a group of vertices, used for drawing
-const static UsageType UT_vertex = 2;      // element is a vertex coordinate, usually a vec2/3/4 variant
+const static UsageType UT_position = 2;      // element is a vertex coordinate, usually a vec2/3/4 variant
 const static UsageType UT_texcoord0 = 3;   // element is a texture coordinate and should be mapped to texture unit 0
 const static UsageType UT_texcoord1 = 4;   // element is a texture coordinate and should be mapped to texture unit 1
 const static UsageType UT_texcoord2 = 5;   // element is a texture coordinate and should be mapped to texture unit 2

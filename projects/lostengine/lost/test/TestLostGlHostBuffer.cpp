@@ -7,34 +7,34 @@ using namespace lost::math;
 TEST(hostbuffer_strideoffset_vtx)
 {
   BufferLayout layout;
-  layout.add(ET_vec2_f32, UT_vertex, 0);
+  layout.add(ET_vec2_f32, UT_position, 0);
   layout.add(ET_vec2_f32, UT_texcoord0, 0);
   HostBuffer buffer(layout);
   buffer.reset(10);
   
-  CHECK(buffer.layout.stride(UT_vertex) == 16);
+  CHECK(buffer.layout.stride(UT_position) == 16);
   CHECK(buffer.layout.stride(UT_texcoord0) == 16);
-  CHECK(buffer.layout.offset(UT_vertex) == 0);
+  CHECK(buffer.layout.offset(UT_position) == 0);
   CHECK(buffer.layout.offset(UT_texcoord0) == 8);
 }
 
 TEST(hostbuffer_getsetVec2)
 {
   BufferLayout layout;
-  layout.add(ET_vec2_f32, UT_vertex, 0);
+  layout.add(ET_vec2_f32, UT_position, 0);
   layout.add(ET_vec2_f32, UT_texcoord0, 0);
   HostBuffer buffer(layout);
   buffer.reset(10);
 
-  buffer.set(0,UT_vertex, Vec2(0,1));
+  buffer.set(0,UT_position, Vec2(0,1));
   buffer.set(0,UT_texcoord0, Vec2(1,2));
 
-  buffer.set(7,UT_vertex, Vec2(0,7));
+  buffer.set(7,UT_position, Vec2(0,7));
   buffer.set(7,UT_texcoord0, Vec2(7,2));
   
-  CHECK(buffer.getAsVec2(0,UT_vertex) == Vec2(0,1));
+  CHECK(buffer.getAsVec2(0,UT_position) == Vec2(0,1));
   CHECK(buffer.getAsVec2(0,UT_texcoord0) == Vec2(1,2));
-  CHECK(buffer.getAsVec2(7,UT_vertex) == Vec2(0,7));
+  CHECK(buffer.getAsVec2(7,UT_position) == Vec2(0,7));
   CHECK(buffer.getAsVec2(7,UT_texcoord0) == Vec2(7,2));
 }
 
