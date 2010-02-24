@@ -338,6 +338,11 @@ namespace lost
           throw runtime_error("FrameBuffer: invalid read buffer");
           break;
         case LGL_FRAMEBUFFER_UNSUPPORTED:
+          /*
+           * see: http://www.cs.kent.edu/~zhao/gpu/lectures/OpenGL_FrameBuffer_Object.pdf - page 23
+           * if result is “FRAMEBUFFER_UNSUPPORTED”, application should try different
+           * format combinations until one succeeds
+           */
           throw runtime_error("FrameBuffer: unsupported operation");
           break;
         default:

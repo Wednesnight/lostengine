@@ -26,7 +26,7 @@ function RenderView:constructor()
   -- suppress background by default
   self:showBackground(false)
 
-  self._framebuffer = lost.gl.FrameBuffer.create(Vec2(1, 1), gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
+  self._framebuffer = lost.gl.FrameBuffer.create(Vec2(16,16), gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
   self:texture(self._framebuffer:colorTexture(0))
 
   self._renderViewNode = Node.create()
