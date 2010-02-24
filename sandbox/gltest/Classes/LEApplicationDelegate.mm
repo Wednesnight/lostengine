@@ -24,7 +24,7 @@
 {
   NSLog(@"%s", __FUNCTION__);
   _window = [[LEWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  
+  [_window makeKeyAndVisible];
   _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
   [_displayLink setFrameInterval:1];
   [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];  
