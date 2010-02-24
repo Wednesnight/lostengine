@@ -12,3 +12,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #endif
+
+#define GLDEBUG { GLenum err = glGetError(); if(err != GL_NO_ERROR) {NSLog(@"GL ERROR: %d",err);};}
