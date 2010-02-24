@@ -19,6 +19,12 @@ typedef unsigned int    GLuint;
   GLuint _colorRenderbuffer;
 }
 
--(id)initWithFrame:(CGRect)fr andApi:(EAGLRenderingAPI)api;
+-(id)initWithFrame:(CGRect)fr;
+
+@property(nonatomic, readonly)	EAGLContext* context;
+@property(nonatomic, readonly)	GLint backingWidth;
+@property(nonatomic, readonly)	GLint backingHeight;
+@property(nonatomic, readonly)	GLuint defaultFramebuffer;
+@property(nonatomic, readonly)  GLuint colorRenderbuffer;
 
 @end

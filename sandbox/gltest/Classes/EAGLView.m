@@ -111,7 +111,7 @@
 			// not be called in system versions earlier than 3.1.
 
 			displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self selector:@selector(drawView:)];
-			[displayLink setFrameInterval:animationFrameInterval];
+			[displayLink setFrameInterval:1];
 			[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 		}
 		else
