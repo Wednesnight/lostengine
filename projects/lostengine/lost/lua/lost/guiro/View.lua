@@ -279,3 +279,10 @@ function View:hidden(val)
 		return not self.rootNode.active
 	end
 end
+
+--[[
+    metatable methods
+  ]]
+function View:__tostring()
+  return self:className() .."(".. self.id ..")"
+end
