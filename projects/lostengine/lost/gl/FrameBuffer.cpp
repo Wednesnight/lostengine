@@ -314,6 +314,7 @@ namespace lost
 
     void FrameBuffer::check()
     {
+      ostringstream os;
       switch (status())
       {
         case LGL_FRAMEBUFFER_COMPLETE:
@@ -343,7 +344,19 @@ namespace lost
            * if result is “FRAMEBUFFER_UNSUPPORTED”, application should try different
            * format combinations until one succeeds
            */
-          throw runtime_error("FrameBuffer: unsupported operation");
+          os << "FrameBuffer: unsupported operation (size = " << size << "";
+          if (depthBuffer)
+          {
+            os << ", depthBits = ";
+            switch (depthBuffer->bitFormat)
+            {
+              case LGL_DEPTH_COMPONENT16: os << "16"; break;
+              case LGL_DEPTH_COMPONENT24: os << "24"; break;
+              case LGL_DEPTH_COMPONENT32: os << "32"; break;
+            }
+          }
+          os << ")";
+          throw runtime_error(os.str());
           break;
         default:
           throw runtime_error("FrameBuffer: unknown error");
