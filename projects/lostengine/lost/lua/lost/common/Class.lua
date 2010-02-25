@@ -103,13 +103,17 @@ function declareClass(namespace, bases, definition)
   end
   
   -- __tostring operator
-  namespace.__tostring = function(self)
-    return self:className()
+  if namespace.__tostring == nil then
+    namespace.__tostring = function(self)
+      return self:className()
+    end
   end
 
   -- __eq (equal) operator
-  namespace.__eq = function(self, other)
-    return rawequal(self, other)
+  if namespace.__eq == nil then
+    namespace.__eq = function(self, other)
+      return rawequal(self, other)
+    end
   end
   
   -- init class metatable

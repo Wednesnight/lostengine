@@ -47,9 +47,12 @@ function EventManager:findViewStack(rootView, mouseEvent)
       v = view.subviews[i]
 --      log.debug(" --- "..v.id)
       if v:containsCoord(pos) then
+--        log.debug("contains")
         containsPoint = true;
         view = v
         break
+      else
+--        log.debug("o noes")
       end
       i = i - 1
     end
@@ -122,6 +125,7 @@ end
 function EventManager:propagateEnterLeaveEvents(viewStack, oldViewStack, event, typeEnter, typeLeave)
   -- leave events for old views, enter events for new views
   -- iterate over both stacks, send appropriate events to old or new views
+--  log.debug(#viewStack ..", ".. #oldViewStack)
   local maxi = math.max(#viewStack, #oldViewStack)
   local oldView = nil
   local newView = nil
@@ -243,16 +247,16 @@ function EventManager:propagateDragNDropEvent(rootView, event)
   local dropEvent = lost.guiro.event.DragNDropEvent(event)
   local viewStack = self:findViewStack(rootView, dropEvent)
 
+  -- dispatch dragNdrop
+  dropEvent.target = viewStack[#viewStack]
+  self:propagateEvent(viewStack, dropEvent, #viewStack)
+
   -- dispatch enter, leave
   if dropEvent.type == lost.guiro.event.DragNDropEvent.DRAG_UPDATE then
     self:propagateEnterLeaveEvents(viewStack, self.previousDragUpdateStack, dropEvent,
       lost.guiro.event.DragNDropEvent.DRAG_ENTER, lost.guiro.event.DragNDropEvent.DRAG_LEAVE)
     self.previousDragUpdateStack = viewStack
-  end  
-
-  -- dispatch dragNdrop
-  dropEvent.target = viewStack[#viewStack]
-  self:propagateEvent(viewStack, dropEvent, #viewStack)
+  end
 end
 
 
