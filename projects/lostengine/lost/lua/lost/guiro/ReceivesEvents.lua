@@ -25,7 +25,10 @@ end
 
 function ReceivesEvents:setEventDispatcher(eventDispatcher)
   if eventDispatcher ~= nil then
-    eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE, function(event) self:propagateDropEvent(event) end)
+    eventDispatcher:addEventListener(lost.application.DragNDropEvent.DRAG_ENTER, function(event) self:propagateDragNDropEvent(event) end)
+    eventDispatcher:addEventListener(lost.application.DragNDropEvent.DRAG_UPDATE, function(event) self:propagateDragNDropEvent(event) end)
+    eventDispatcher:addEventListener(lost.application.DragNDropEvent.DRAG_LEAVE, function(event) self:propagateDragNDropEvent(event) end)
+    eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, function(event) self:propagateDragNDropEvent(event) end)
     eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:propagateMouseEvent(event) end)
     eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP, function(event) self:propagateMouseEvent(event) end)
     eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, function(event) self:propagateMouseEvent(event) end)
@@ -39,8 +42,8 @@ function ReceivesEvents:setEventDispatcher(eventDispatcher)
   end
 end
 
-function ReceivesEvents:propagateDropEvent(event)
-  self.eventManager:propagateDropEvent(self, event)
+function ReceivesEvents:propagateDragNDropEvent(event)
+  self.eventManager:propagateDragNDropEvent(self, event)
 end
 
 function ReceivesEvents:propagateMouseEvent(event)

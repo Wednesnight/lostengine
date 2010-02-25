@@ -12,7 +12,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/KeyCode.h"
-#include "lost/application/DropEvent.h"
+#include "lost/application/DragNDropEvent.h"
 #include "lost/application/WindowEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/math/Vec2.h"
@@ -50,7 +50,7 @@
 // TODO: is screen of any use for us?
 //- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
 
-- (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
+- (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(std::string)type
 {
   NSPasteboard* pboard = [sender draggingPasteboard];
   if ([[pboard types] containsObject:NSURLPboardType] && parent)
@@ -59,20 +59,37 @@
     NSString* relativePath = [fileURL relativePath];
     const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
     std::string filename(cString);
-    lost::shared_ptr<lost::application::DropEvent> dropEvent(new lost::application::DropEvent(filename));
+    lost::application::DragNDropEventPtr dragNDropEvent(new lost::application::DragNDropEvent(type, filename));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];
     NSPoint abs = [NSEvent mouseLocation];
-    dropEvent->window  = parent;
-    dropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
-    dropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
-    parent->dispatcher->queueEvent(dropEvent);
+    dragNDropEvent->window  = parent;
+    dragNDropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
+    dragNDropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
+    parent->dispatcher->queueEvent(dragNDropEvent);
   }
+}
+
+- (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
+{
+  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DROP()];
   return YES;
 }
 
 - (NSDragOperation) draggingEntered:(id <NSDraggingInfo>)sender
 {
-  return NSDragOperationCopy;
+  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_ENTER()];
+  return NSDragOperationLink;
+}
+
+- (void) draggingExited:(id <NSDraggingInfo>)sender
+{
+  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_LEAVE()];
+}
+
+- (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>)sender
+{
+  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_UPDATE()];
+  return NSDragOperationLink;
 }
 
 - (BOOL)windowShouldClose: (id)window

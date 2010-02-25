@@ -34,7 +34,10 @@ return dcl.guiro:View
       showFrame = true,
       listeners =
       {
-        droppedFile = controller.droppedShader
+        dragEnter = controller.dragEnter,
+        dragUpdate = controller.dragUpdate,
+        dragLeave = controller.dragLeave,
+        drop = controller.droppedShader
       }
     },
     dcl.guiro:VBox

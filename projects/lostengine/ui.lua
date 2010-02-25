@@ -15,7 +15,7 @@ return dcl.guiro:Screen
   {
     bubble =
     {
-      droppedFile = function(event)
+      drop = function(event)
         local loader = Loader.create()
         loader:addRepository(FilesystemRepository.create(event.filename))
         loader:addRepository(ApplicationResourceRepository.create())

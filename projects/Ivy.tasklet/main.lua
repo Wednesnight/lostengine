@@ -38,7 +38,7 @@ function startup(tasklet)
   sizeBytesLabel = screen:recursiveFindById("sizeBytesLabel")
   log.debug("imageView: "..tostring(imageView))
 
-  tasklet.eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE, dropHandler)
+  tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, dropHandler)
   
   return true
 end

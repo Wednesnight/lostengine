@@ -37,6 +37,33 @@ controller.keyHandler = function(event)
   end
 end
 
+controller.dragEnter = function(event)
+  if event.currentTarget == event.target then
+    log.debug("enter")
+    controller.hovered = true
+  end
+end
+
+controller.dragUpdate = function(event)
+  log.debug("update")
+  if controller.hovered == true then
+    local shaderName = string.match(event.filename, "([^/%.]*)%.vs$") or string.match(event.filename, "([^/%.]*)%.fs$")
+    if shaderName ~= nil then
+      event.target:backgroundColor(Color(.8,.8,.8))
+      event.target:showBackground(true)
+    end
+  end
+end
+
+controller.dragLeave = function(event)
+  if event.currentTarget == event.target then
+    log.debug("leave")
+    controller.hovered = false
+    event.target:backgroundColor(Color(.5,.5,.5))
+    event.target:showBackground(false)
+  end
+end
+
 controller.droppedShader = function(event)
   if event.currentTarget == event.target then
 
@@ -46,6 +73,8 @@ controller.droppedShader = function(event)
 
     if relativeName ~= nil and controller.shaderFilename ~= nil then
 
+      event.target:backgroundColor(Color(.5,.5,.5))
+      event.target:showBackground(false)
       event.target:text(relativeName)
 
       local shaderProgram = lost.gl.loadShader(shaderLoader, controller.shaderFilename)
