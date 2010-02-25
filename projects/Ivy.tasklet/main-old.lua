@@ -14,7 +14,7 @@ bitmapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
 
 function startup(tasklet)
   dcl = lost.declarative.Context(tasklet.loader)
-  tasklet.eventDispatcher:addEventListener(lost.application.DropEvent.DROPPED_FILE, dropHandler)
+  tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, dropHandler)
   rootNode = dcl.rg:Node
   {
     name = "rootNode",
@@ -42,7 +42,7 @@ function shutdown(tasklet)
 end
 
 function dropHandler(event)
-  local dropEvent = lost.application.DropEvent.cast(event)
+  local dropEvent = lost.application.DragNDropEvent.cast(event)
   local path = dropEvent.filename
   log.debug("dropped file: '"..path.."'")
   local data = bitmapLoader:load(path)

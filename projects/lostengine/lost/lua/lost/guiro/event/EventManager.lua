@@ -6,7 +6,7 @@ require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
 require("lost.guiro.event.TouchEvent")
-require("lost.guiro.event.DropEvent")
+require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
 
@@ -24,6 +24,7 @@ function EventManager:constructor(rootView)
   self.rootView = rootView
   self.previousMouseMoveStack = {}
   self.previousMouseClickStack = {}
+  self.previousDragUpdateStack = {}
   self.previousFocusStack = { self.rootView }
   self.focusChanged = false
   self.currentFocusedView = self.rootView
@@ -118,31 +119,32 @@ function EventManager:propagateEvent(viewStack, event, targetIndex)
 end
 
 
-function EventManager:propagateEnterLeaveEvents(viewStack, event)
+function EventManager:propagateEnterLeaveEvents(viewStack, oldViewStack, event, typeEnter, typeLeave)
   -- leave events for old views, enter events for new views
   -- iterate over both stacks, send appropriate events to old or new views
-  local maxi = math.max(#viewStack, #(self.previousMouseMoveStack))
+  local maxi = math.max(#viewStack, #oldViewStack)
   local oldView = nil
   local newView = nil
   local i = 1
   while i <= maxi do
-    oldView = self.previousMouseMoveStack[i]
+    oldView = oldViewStack[i]
     newView = viewStack[i]
     if oldView ~= newView then
       if oldView then
         event.target = oldView
-        event.type = lost.guiro.event.MouseEvent.MOUSE_LEAVE
-        self:propagateEvent(self.previousMouseMoveStack, event, i)
+        event.type = typeLeave
+--        log.debug("leave: ".. tostring(oldView))
+        self:propagateEvent(oldViewStack, event, i)
       end
       if newView then
         event.target = newView
-        event.type = lost.guiro.event.MouseEvent.MOUSE_ENTER
+        event.type = typeEnter
+--        log.debug("enter: ".. tostring(newView))
         self:propagateEvent(viewStack, event, i)
       end
     end
     i = i + 1
   end
-  self.previousMouseMoveStack = viewStack    
 end
 
 function EventManager:propagateUpDownEvents(viewStack, event)
@@ -226,18 +228,29 @@ function EventManager:propagateMouseEvent(rootView, event)
   
   -- dispatch enter, leave
   if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then
-    self:propagateEnterLeaveEvents(viewStack, mouseevent)
+    self:propagateEnterLeaveEvents(viewStack, self.previousMouseMoveStack, mouseevent,
+      lost.guiro.event.MouseEvent.MOUSE_ENTER, lost.guiro.event.MouseEvent.MOUSE_LEAVE)
+    self.previousMouseMoveStack = viewStack
   end  
 
   return viewStack
 end
 
 -- propagates an event using the hovered View
--- expects the incoming event type to be lost.application.DropEvent
--- wraps it to lost.guiro.event.DropEvent
-function EventManager:propagateDropEvent(rootView, event)
-  local dropEvent = lost.guiro.event.DropEvent(event)
+-- expects the incoming event type to be lost.application.DragNDropEvent
+-- wraps it to lost.guiro.event.DragNDropEvent
+function EventManager:propagateDragNDropEvent(rootView, event)
+  local dropEvent = lost.guiro.event.DragNDropEvent(event)
   local viewStack = self:findViewStack(rootView, dropEvent)
+
+  -- dispatch enter, leave
+  if dropEvent.type == lost.guiro.event.DragNDropEvent.DRAG_UPDATE then
+    self:propagateEnterLeaveEvents(viewStack, self.previousDragUpdateStack, dropEvent,
+      lost.guiro.event.DragNDropEvent.DRAG_ENTER, lost.guiro.event.DragNDropEvent.DRAG_LEAVE)
+    self.previousDragUpdateStack = viewStack
+  end  
+
+  -- dispatch dragNdrop
   dropEvent.target = viewStack[#viewStack]
   self:propagateEvent(viewStack, dropEvent, #viewStack)
 end

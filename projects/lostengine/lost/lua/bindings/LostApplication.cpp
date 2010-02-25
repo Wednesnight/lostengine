@@ -6,7 +6,7 @@
 #include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
-#include "lost/application/DropEvent.h"
+#include "lost/application/DragNDropEvent.h"
 #include "lost/application/InputEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
@@ -76,20 +76,23 @@ namespace lost
       globals(state)["lost"]["application"]["ApplicationEvent"]["QUIT"] = ApplicationEvent::QUIT();
     }
 
-    void LostApplicationDropEvent(lua_State* state)
+    void LostApplicationDragNDropEvent(lua_State* state)
     {
       module(state, "lost")
       [
        namespace_("application")
        [
-        class_<DropEvent, Event>("DropEvent")
-        .def_readonly("filename", &DropEvent::filename)
-        .def_readonly("window", &DropEvent::window)
-        .def_readonly("pos", &DropEvent::pos)
-        .def_readonly("absPos", &DropEvent::absPos)
+        class_<DragNDropEvent, Event>("DragNDropEvent")
+        .def_readonly("filename", &DragNDropEvent::filename)
+        .def_readonly("window", &DragNDropEvent::window)
+        .def_readonly("pos", &DragNDropEvent::pos)
+        .def_readonly("absPos", &DragNDropEvent::absPos)
        ]
       ];
-      globals(state)["lost"]["application"]["DropEvent"]["DROPPED_FILE"] = DropEvent::DROPPED_FILE();
+      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_ENTER"] = DragNDropEvent::DRAG_ENTER();
+      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_UPDATE"] = DragNDropEvent::DRAG_UPDATE();
+      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_LEAVE"] = DragNDropEvent::DRAG_LEAVE();
+      globals(state)["lost"]["application"]["DragNDropEvent"]["DROP"] = DragNDropEvent::DROP();
     }
     
     void LostApplicationInputEvent(lua_State* state)
@@ -359,7 +362,7 @@ namespace lost
       LostApplicationApplication(state);
       LostApplicationAccelerometerEvent(state);
       LostApplicationApplicationEvent(state);
-      LostApplicationDropEvent(state);
+      LostApplicationDragNDropEvent(state);
       LostApplicationInputEvent(state);
       LostApplicationKeyEvent(state);
       LostApplicationMouseEvent(state);
