@@ -394,6 +394,29 @@ void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color
   hline((uint32_t)maxY, (uint32_t)minX, (uint32_t)maxX, inColor);
 }
 
+void Bitmap::disc(float x, float y, float r)
+{
+  float w = width;
+  float h = height;
+  common::Color white(1,1,1,1);
+  common::Color black(0,0,0,0);
+  for(float cx=0; cx<w; cx+=1.0f)
+  {
+    for(float cy=0; cy<h; cy+=1.0f)
+    {
+      float dx = cx-x;
+      float dy = cy-y;
+      float cr = sqrtf(dx*dx+dy*dy);
+      pixel(cx,cy,(cr < r) ? white : black);
+      float dr = cr-r;
+      if(dr >= 0.0f && (dr < 1.0f))
+      {
+        float fract = 1.0f-(dr - floor(dr));
+        pixel(cx,cy,common::Color(1,1,1,fract));
+      }
+    }
+  }
+}
 
 
 }

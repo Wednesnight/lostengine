@@ -1,6 +1,5 @@
 #include "lost/lua/bindings/LostBitmap.h"
 #include "lost/lua/lua.h"
-
 #include "lost/bitmap/Bitmap.h"
 
 using namespace luabind;
@@ -20,12 +19,19 @@ namespace lost
           class_<Bitmap>("Bitmap")
             .def_readwrite("width", &Bitmap::width)
             .def_readwrite("height", &Bitmap::height)
+            .def("pixel", (void(Bitmap::*)(uint32_t, uint32_t, const common::Color&))&Bitmap::pixel)
+            .def("disc", &Bitmap::disc)
             .scope
             [
-              def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create)
+              def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create),
+              def("create", (BitmapPtr(*)(uint32_t, uint32_t, Bitmap::Components))&Bitmap::create)
             ]
         ]
       ];
+      globals(state)["lost"]["bitmap"]["COMPONENTS_UNDEFINED"] = lost::bitmap::Bitmap::COMPONENTS_UNDEFINED;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_ALPHA"] = lost::bitmap::Bitmap::COMPONENTS_ALPHA;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_RGB"] = lost::bitmap::Bitmap::COMPONENTS_RGB;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_RGBA"] = lost::bitmap::Bitmap::COMPONENTS_RGBA;
     }
 
     void LostBitmap(lua_State* state)
