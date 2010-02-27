@@ -401,7 +401,7 @@ namespace lost
       DOUT("Window::finalize()");
       if(hiddenMembers) [hiddenMembers->window setParent: NULL]; else EOUT("hiddenMembers is NULL!");
       
-      context.reset();
+      if(hiddenMembers) context.reset(); else EOUT("hiddenMembers is NULL!"); // prevents crash when it actually is null, dunno why it can become NULL 
       if(hiddenMembers) [hiddenMembers->view release]; else EOUT("hiddenMembers is NULL!");
       if(hiddenMembers) [hiddenMembers->window release]; else EOUT("hiddenMembers is NULL!");
       if(hiddenMembers) delete hiddenMembers; else EOUT("hiddenMembers is NULL!");
