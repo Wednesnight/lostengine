@@ -1,10 +1,10 @@
+require("lost.declarative.Context")
+
 using "lost.math.Vec2"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.common.Color"
---using "lost.bitmap.Bitmap"
-
-require("lost.declarative.Context")
+using "lost.bitmap.Bitmap"
 
 screensize = Vec2(640,480)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
@@ -18,7 +18,7 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
 
-  local bmp = lost.bitmap.Bitmap.create(512, 512, lost.bitmap.COMPONENTS_RGBA)
+  local bmp = Bitmap.create(512, 512, lost.bitmap.COMPONENTS_RGBA)
   bmp:disc(256,256,64)
   local defaultParams = lost.gl.Texture.Params()
   local tex = lost.gl.Texture.create(bmp, defaultParams)
