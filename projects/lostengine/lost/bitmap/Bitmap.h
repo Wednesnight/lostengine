@@ -19,7 +19,7 @@ namespace lost
     {
       enum Components
       {
-        COMPONENTS_UNDEFINED = 0, // for defined init, can't be used for anything
+        COMPONENTS_UNDEFINED = 0, // for undefined init, can't be used for anything else
         COMPONENTS_ALPHA = 1,     // 8 bit
         COMPONENTS_RGB = 3,       // 24 bit
         COMPONENTS_RGBA = 4,      // 32 bit
@@ -29,7 +29,7 @@ namespace lost
       boost::uint8_t*    data;   // points to the raw pixel data
       boost::uint32_t    width;  // width in pixels
       boost::uint32_t    height; // height in pixels
-      Components  format; // format of bitmap as GL constant (e.g. rgb, rgba)
+      Components  format; // format of bitmap (rgb, rgba)
 
       /** creates an empty bitmap with zero size.
        * Use init to resize it in a given format.
@@ -42,15 +42,25 @@ namespace lost
              boost::uint32_t inHeight,
              Components format);
     
+      /** creates a bitmap by reading the provided data with width*height pixels in source format
+       *  copying it to a new internal buffer, converting the components to destination format
+       * if necessary
+       */
       Bitmap(boost::uint32_t inWidth,
              boost::uint32_t inHeight,
              Components destComponents,
              Components srcComponents,
              boost::uint8_t* data);
+             
+      // tries to create a bitmap by interpreting the data as a bitmap format understood by
+      // the image library.       
       Bitmap(const common::DataPtr& inData);
       
       static BitmapPtr create() { return BitmapPtr(new Bitmap()); }
       static BitmapPtr create(const common::DataPtr& inData) { return BitmapPtr(new Bitmap(inData)); }
+      static BitmapPtr create(boost::uint32_t inWidth,
+             boost::uint32_t inHeight,
+             Components format) { return BitmapPtr(new Bitmap(inWidth, inHeight, format)); }
       
       void reset();
       virtual ~Bitmap();
@@ -159,7 +169,9 @@ namespace lost
        */
       void vline(boost::uint32_t x, boost::uint32_t yb, boost::uint32_t yt, const common::Color& inColor);
 
-      
+      // draws a filled disc at given center and radius
+      // the disc is drawn by evaluating all pixels of the bitmap and setting them accordingly
+      void disc(float x, float y, float r);
         
       /** draws the rect outline into the bitmap with the given color
        */
