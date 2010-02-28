@@ -17,9 +17,9 @@
 #include "lost/event/Receive.h"
 #include "lost/rg/Node.h"
 #include "lost/application/Window.h"
+#include "lost/event/EventDispatcher.h"
 
 using namespace boost;
-using namespace fhtagn::threads;
 using namespace luabind;
 using namespace std;
 using namespace lost::event;
@@ -34,7 +34,8 @@ namespace lost
   {
     
     Tasklet::Tasklet(LoaderPtr inLoader)
-    :  loader(inLoader),
+    : loader(inLoader),
+      eventDispatcher(new event::EventDispatcher()),
       lua(new State(loader)),
       name("<unnamed tasklet>"),
       renderNode(new Node()),
@@ -166,5 +167,24 @@ namespace lost
     {
       stop();
     }
+    
+    void Tasklet::queueApplicationEvent(EventPtr event)
+    {
+      QueueEventPtr queue(new QueueEvent(event));
+      eventDispatcher->dispatchEvent(queue);
+    }
+
+    void Tasklet::dispatchApplicationEvent(EventPtr event)
+    {
+      queueApplicationEvent(event);
+      processApplicationEvents();
+    }
+
+    void Tasklet::processApplicationEvents()
+    {
+      ProcessEventPtr process(new ProcessEvent());
+      eventDispatcher->dispatchEvent(process);
+    }
+    
   }
 }

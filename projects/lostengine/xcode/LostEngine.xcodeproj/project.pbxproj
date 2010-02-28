@@ -641,9 +641,6 @@
 		EAAD33A1113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
 		EAAD33A2113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
 		EAAD33A3113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
-		EAAD33AE113AFB7B001111C8 /* BasicTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33AD113AFB7B001111C8 /* BasicTasklet.cpp */; };
-		EAAD33AF113AFB7B001111C8 /* BasicTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33AD113AFB7B001111C8 /* BasicTasklet.cpp */; };
-		EAAD33B0113AFB7B001111C8 /* BasicTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33AD113AFB7B001111C8 /* BasicTasklet.cpp */; };
 		EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
@@ -1104,7 +1101,6 @@
 		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = mac/Runner.cpp; sourceTree = "<group>"; };
 		EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SingleThreadedTasklet.cpp; sourceTree = "<group>"; };
 		EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiThreadedTasklet.cpp; sourceTree = "<group>"; };
-		EAAD33AD113AFB7B001111C8 /* BasicTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicTasklet.cpp; sourceTree = "<group>"; };
 		EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EAB67C611115EF6300442904 /* BufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
@@ -1834,7 +1830,6 @@
 				8D40911A0F89322D00163B63 /* Tasklet.cpp */,
 				EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */,
 				EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */,
-				EAAD33AD113AFB7B001111C8 /* BasicTasklet.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
 			path = application;
@@ -2429,7 +2424,6 @@
 				EAAD3336113ADA0F001111C8 /* Runner.cpp in Sources */,
 				EAAD339F113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
 				EAAD33A3113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
-				EAAD33B0113AFB7B001111C8 /* BasicTasklet.cpp in Sources */,
 				EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2659,7 +2653,6 @@
 				EAAD3334113ADA0F001111C8 /* Runner.cpp in Sources */,
 				EAAD339D113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
 				EAAD33A1113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
-				EAAD33AE113AFB7B001111C8 /* BasicTasklet.cpp in Sources */,
 				EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2933,7 +2926,6 @@
 				EAAD3335113ADA0F001111C8 /* Runner.cpp in Sources */,
 				EAAD339E113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
 				EAAD33A2113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
-				EAAD33AF113AFB7B001111C8 /* BasicTasklet.cpp in Sources */,
 				EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
