@@ -33,9 +33,10 @@ namespace lost
     struct Context;
     typedef lost::shared_ptr<Context> ContextPtr;
 
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
     struct ShaderProgram;
     typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
-
+#endif
     struct Texture;
     typedef lost::shared_ptr<Texture> TexturePtr;
 
@@ -52,7 +53,7 @@ namespace lost
       bool normalArrayEnabled;
       bool colorArrayEnabled;
       bool texCoordArrayEnabled;
-      bool indexArrayEnabled;
+//      bool indexArrayEnabled;
       bool depthTestEnabled;
       bool blendEnabled;
       GLenum currentBlendFuncSource;
@@ -64,7 +65,9 @@ namespace lost
       common::Color currentClearColor;
       camera::CameraPtr currentCam;
       GLenum currentActiveTexture;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       ShaderProgramPtr currentShader;
+#endif
       math::Matrix currentTransform;
       Buffer* currentBuffer;
       bool cullEnabled;
@@ -112,7 +115,7 @@ namespace lost
       void normalArray(bool enable);
       void colorArray(bool enable);
       void texCoordArray(bool enable);
-      void indexArray(bool enable);
+//      void indexArray(bool enable);
       void depthTest(bool enable);
       void blend(bool enable);
       void blendFunc(GLenum src, GLenum dest);
@@ -139,9 +142,9 @@ namespace lost
       void draw(mesh::MeshPtr mesh);
       void drawSeparateBuffers(mesh::MeshPtr mesh);
       void drawInterleavedBuffers(mesh::MeshPtr mesh);
-      
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
       void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
-
+#endif
       // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
       void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
       

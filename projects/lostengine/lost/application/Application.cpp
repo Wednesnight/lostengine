@@ -20,23 +20,6 @@ namespace lost
 {
   namespace application
   {
-
-    int runTasklet(Tasklet* t)
-    {
-      int result = EXIT_SUCCESS;
-      try
-      {
-        static ApplicationPtr app = Application::create(t);
-        app->run();      
-      }
-      catch (std::exception& e)
-      {
-        EOUT("exception: " << e.what());
-        result = EXIT_FAILURE;
-      }        
-      return result;
-    }
-
     
     Application::Application(resource::LoaderPtr inLoader)
     {

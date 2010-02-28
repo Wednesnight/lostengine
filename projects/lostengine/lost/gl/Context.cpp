@@ -3,7 +3,11 @@
 #include "lost/gl/Utils.h"
 #include "lost/lgl/lgl.h"
 #include "lost/camera/Camera.h"
+
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
 #include "lost/gl/ShaderProgram.h"
+#endif
+
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/bitmap/Bitmap.h"
@@ -91,7 +95,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       vertexArrayEnabled = getParam<bool>(GL_VERTEX_ARRAY);
       normalArrayEnabled = getParam<bool>(GL_NORMAL_ARRAY);
       texCoordArrayEnabled = getParam<bool>(GL_TEXTURE_COORD_ARRAY);
-      indexArrayEnabled = getParam<bool>(GL_INDEX_ARRAY);
+//      indexArrayEnabled = getParam<bool>(GL_INDEX_ARRAY);
       depthTestEnabled = getParam<bool>(GL_DEPTH_TEST);  
       blendEnabled = getParam<bool>(GL_BLEND);
       currentBlendFuncSource = getParam<int>(GL_BLEND_SRC);
@@ -148,7 +152,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::normalArray(bool enable) { CLIENTSTATE(normalArrayEnabled, enable, GL_NORMAL_ARRAY); }
     void Context::colorArray(bool enable) { CLIENTSTATE(colorArrayEnabled, enable, GL_COLOR_ARRAY); }
     void Context::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
-    void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
+//    void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
     void Context::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
     void Context::blend(bool enable) { SERVERSTATE(blendEnabled, enable, GL_BLEND);}
 
@@ -261,6 +265,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
     void Context::shader(ShaderProgramPtr prog)
     {
       if(currentShader && !prog)
@@ -269,7 +274,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       if(currentShader)
         currentShader->enable();
     }
-    
+#endif    
     
     void Context::material(MaterialPtr mat)
     {
@@ -301,7 +306,9 @@ std::map<void*, Context*> glContext2lostGlContext;
       {
         cull(false);
       }
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       shader(mat->shader);
+#endif
     }
         
     void Context::draw(MeshPtr mesh)
@@ -378,7 +385,8 @@ std::map<void*, Context*> glContext2lostGlContext;
         material(mesh->material);      
       transform(mesh->transform);
       bind(ib->gpuBuffers[0].get());
-      glDrawRangeElements(mesh->drawMode, 0,ib->hostBuffer->count-1, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+//      glDrawRangeElements(mesh->drawMode, 0,ib->hostBuffer->count-1, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it

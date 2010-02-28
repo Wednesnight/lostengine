@@ -5,6 +5,7 @@
 
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
+#include "lost/application/Window.h"
 
 lost::application::Application* currentApplication;
 

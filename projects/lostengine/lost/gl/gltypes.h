@@ -1,6 +1,10 @@
 #ifndef LOST_GL_GLTYPES_H
 #define LOST_GL_GLTYPES_H
 
+#if defined __APPLE__
+  #include <TargetConditionals.h>
+#endif
+
 // keep this header as lean as possible.
 // It's a replacement for the includes where you only need a few GL typedefs.
 
@@ -20,8 +24,13 @@ typedef double GLdouble;
 typedef double GLclampd;
 typedef void GLvoid;
 
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+typedef int GLintptr;
+typedef int GLsizeiptr;
+#else
 typedef long GLintptr;
 typedef long GLsizeiptr;
+#endif
 
 /* DataType */
 #define GL_BYTE                           0x1400
