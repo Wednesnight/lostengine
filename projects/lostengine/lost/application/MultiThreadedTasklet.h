@@ -2,16 +2,16 @@
 #define LOST_APPLICATION_MULTITHREADEDTASKLET_H
 
 #include "fhtagn/threads/tasklet.h"
-#include "lost/application/BasicTasklet.h"
+#include "lost/application/Tasklet.h"
 
 namespace lost
 {
 namespace application
 {
 
-struct MultiThreadedTasklet : public fhtagn::threads::tasklet, public BasicTasklet
+struct MultiThreadedTasklet : public fhtagn::threads::tasklet, public Tasklet
 {
-  MultiThreadedTasklet();
+  MultiThreadedTasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
   virtual ~MultiThreadedTasklet();
   
   void run(fhtagn::threads::tasklet& tasklet);
@@ -20,6 +20,8 @@ struct MultiThreadedTasklet : public fhtagn::threads::tasklet, public BasicTaskl
 
   virtual bool start(); 
   virtual bool stop();
+  virtual bool alive();
+  virtual bool wait();
   
 };
 

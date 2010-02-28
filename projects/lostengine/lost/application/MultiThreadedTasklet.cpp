@@ -13,8 +13,8 @@ namespace application
 
 using namespace lost::event;
 
-MultiThreadedTasklet::MultiThreadedTasklet()
-: tasklet::tasklet(bind(&MultiThreadedTasklet::run, this, _1))
+MultiThreadedTasklet::MultiThreadedTasklet(lost::resource::LoaderPtr inLoader)
+: tasklet::tasklet(bind(&MultiThreadedTasklet::run, this, _1)), Tasklet(inLoader)
 {
   add_error_handler(bind(&MultiThreadedTasklet::error, this, _1, _2));
 
@@ -44,6 +44,16 @@ bool MultiThreadedTasklet::stop()
     eventDispatcher->wakeup();
   }
   return result;
+}
+
+bool MultiThreadedTasklet::alive()
+{
+  return ::fhtagn::threads::tasklet::alive();
+}
+
+bool MultiThreadedTasklet::wait()
+{
+  return ::fhtagn::threads::tasklet::wait();
 }
 
 void MultiThreadedTasklet::run(tasklet& tasklet)
