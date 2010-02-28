@@ -9,7 +9,11 @@
 #ifndef LOST_LGL_LGL_H
 #define LOST_LGL_LGL_H
 
-#if TARGET_OPENGL_ES
+#if defined __APPLE__
+  #include <TargetConditionals.h>
+#endif
+
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
   #include "lost/lgl/lgl_gles.h"
 #else
   #include "lost/lgl/lgl_gl.h"

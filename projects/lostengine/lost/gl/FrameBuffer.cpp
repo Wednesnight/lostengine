@@ -74,8 +74,10 @@ namespace lost
       {
         case LGL_DEPTH_COMPONENT16:
         case LGL_DEPTH_COMPONENT24:
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
         case LGL_DEPTH_COMPONENT32:
-          textureParams.format = GL_DEPTH_COMPONENT;
+#endif        
+          textureParams.format = LGL_DEPTH_COMPONENT; // FIXME: this is probably the wrong constant, jst a try for ES
           textureParams.type = GL_FLOAT;
           break;
       }
@@ -277,9 +279,11 @@ namespace lost
           case LGL_DEPTH_COMPONENT24:
             depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT16);
             break;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
           case LGL_DEPTH_COMPONENT32:
             depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT24);
             break;
+#endif            
           default:
             ostringstream os;
             os << "invalid depth buffer bit format: " << depthBuffer->bitFormat;
@@ -332,12 +336,15 @@ namespace lost
         case LGL_FRAMEBUFFER_INCOMPLETE_FORMATS:
           throw runtime_error("FrameBuffer: invalid format");
           break;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+
         case LGL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
           throw runtime_error("FrameBuffer: invalid draw buffer");
           break;
         case LGL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
           throw runtime_error("FrameBuffer: invalid read buffer");
           break;
+#endif          
         case LGL_FRAMEBUFFER_UNSUPPORTED:
           /*
            * see: http://www.cs.kent.edu/~zhao/gpu/lectures/OpenGL_FrameBuffer_Object.pdf - page 23

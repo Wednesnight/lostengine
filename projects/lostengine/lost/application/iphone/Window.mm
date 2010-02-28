@@ -26,7 +26,7 @@
   
   lost::application::Window* parent;
 
-  std::list<lost::shared_ptr<lost::application::TouchEvent::Touch> >* touches;
+  std::list<lost::shared_ptr<lost::application::Touch> >* touches;
   NSUInteger maxNumTouches;
 }
 
@@ -137,7 +137,7 @@
     unsigned int count = 0;
     for(UITouch* touch in [event allTouches])
     {    
-      lost::shared_ptr<lost::application::TouchEvent::Touch> newTouch(new lost::application::TouchEvent::Touch);
+      lost::shared_ptr<lost::application::Touch> newTouch(new lost::application::Touch);
       newTouch->tapCount = touch.tapCount;
       newTouch->timeStamp = touch.timestamp;
       CGPoint loc = [touch locationInView:self];

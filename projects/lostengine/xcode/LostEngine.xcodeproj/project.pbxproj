@@ -632,6 +632,9 @@
 		EAAC572D0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC572F0ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
 		EAAC57310ECBAE71004AD566 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */; };
+		EAAD3334113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
+		EAAD3335113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
+		EAAD3336113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
 		EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
@@ -1086,6 +1089,7 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
+		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = mac/Runner.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EAB67C611115EF6300442904 /* BufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
 		EAB67C741115F0ED00442904 /* HostBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostBuffer.cpp; sourceTree = "<group>"; };
@@ -1473,6 +1477,7 @@
 			children = (
 				8DE56F6C0F31187E0072FB28 /* Application.mm */,
 				8DE56F6E0F3118840072FB28 /* Window.mm */,
+				EAAD3333113ADA0F001111C8 /* Runner.cpp */,
 				EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */,
 			);
 			name = mac;
@@ -2401,6 +2406,7 @@
 				EABA969411260EF60025F788 /* thread.cpp in Sources */,
 				EABA969511260EF60025F788 /* once.cpp in Sources */,
 				EABA969911260EFB0025F788 /* tss_null.cpp in Sources */,
+				EAAD3336113ADA0F001111C8 /* Runner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2626,6 +2632,7 @@
 				EABA969011260EF60025F788 /* thread.cpp in Sources */,
 				EABA969111260EF60025F788 /* once.cpp in Sources */,
 				EABA969711260EFB0025F788 /* tss_null.cpp in Sources */,
+				EAAD3334113ADA0F001111C8 /* Runner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2895,6 +2902,7 @@
 				EABA969211260EF60025F788 /* thread.cpp in Sources */,
 				EABA969311260EF60025F788 /* once.cpp in Sources */,
 				EABA969811260EFB0025F788 /* tss_null.cpp in Sources */,
+				EAAD3335113ADA0F001111C8 /* Runner.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

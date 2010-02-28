@@ -161,6 +161,7 @@ namespace lost
       globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
 
       // types
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
       globals(state)["gl"]["GL_INT"]                = GL_BOOL;
       globals(state)["gl"]["GL_BOOL_VEC2"]          = GL_BOOL_VEC2;
       globals(state)["gl"]["GL_BOOL_VEC3"]          = GL_BOOL_VEC3;
@@ -188,6 +189,7 @@ namespace lost
       globals(state)["gl"]["GL_SAMPLER_CUBE"]       = GL_SAMPLER_CUBE;
       globals(state)["gl"]["GL_SAMPLER_1D_SHADOW"]  = GL_SAMPLER_1D_SHADOW;
       globals(state)["gl"]["GL_SAMPLER_2D_SHADOW"]  = GL_SAMPLER_2D_SHADOW;
+#endif
     }
 
     void LostGLRenderBuffer(lua_State* state)
@@ -204,7 +206,7 @@ namespace lost
         ]
       ];
     }
-
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
     object ShaderProgram_parameterMap(object shaderProgramObj)
     {
       ShaderProgramPtr shaderProgram = object_cast<ShaderProgramPtr>(shaderProgramObj);
@@ -255,8 +257,8 @@ namespace lost
       globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNDEFINED"] = (int)ShaderProgram::Parameter::UNDEFINED;
       globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["ATTRIBUTE"] = (int)ShaderProgram::Parameter::ATTRIBUTE;
       globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNIFORM"]   = (int)ShaderProgram::Parameter::UNIFORM;
-    }    
-
+    }
+#endif
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
     {
       texture->init(p1, p2, p3, p4, p5, p6, p7, 0);
@@ -310,7 +312,9 @@ namespace lost
       LostGLContext(state);
       LostGLFrameBuffer(state);
       LostGLRenderBuffer(state);
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE            
       LostGLShaderProgram(state);
+#endif
       LostGLTexture(state);
     }
 
