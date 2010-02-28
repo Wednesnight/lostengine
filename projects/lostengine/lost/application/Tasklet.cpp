@@ -93,10 +93,7 @@ namespace lost
       luabind::object obj = lua->globals["windowParams"];
       if(obj)
       {
-        windowParams=object_cast<WindowParams>(obj);
-        window = new Window(eventDispatcher, windowParams);
-        window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(bind(&Tasklet::closeWindow, this, _1)));
-        window->open();        
+        createWindow(object_cast<WindowParams>(obj));
       }
             
       // get lua functions if they are present
@@ -210,6 +207,13 @@ namespace lost
         eventDispatcher->wakeup();
       }
       return result;
+    }
+
+    void Tasklet::createWindow(const WindowParams& params)
+    {
+      window = new Window(eventDispatcher, params);
+      window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(bind(&Tasklet::closeWindow, this, _1)));
+      window->open();        
     }
 
     void Tasklet::closeWindow(WindowEventPtr event)

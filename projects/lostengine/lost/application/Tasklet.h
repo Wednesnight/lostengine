@@ -5,6 +5,7 @@
 #include <list>
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/WindowParams.h"
+#include "lost/application/Queue.h"
 #include <luabind/luabind.hpp>
 
 namespace lost
@@ -18,9 +19,6 @@ namespace lost
   namespace lua { struct State; typedef lost::shared_ptr<State> StatePtr; }
   namespace application
   {
-    struct Queue;
-    typedef lost::shared_ptr<Queue> QueuePtr;  
-  
     struct Window;
 
     struct WindowEvent;
@@ -67,6 +65,7 @@ namespace lost
       virtual bool start(); 
       virtual bool stop();
 
+      void createWindow(const WindowParams& params);
       void closeWindow(WindowEventPtr event);
 
       void queueApplicationEvent(event::EventPtr event);
