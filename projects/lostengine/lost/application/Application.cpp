@@ -144,7 +144,7 @@ namespace lost
 
     void Application::taskletDone(const TaskletEventPtr& event)
     {
-      Tasklet* currentTasklet = reinterpret_cast<Tasklet*>(event->tasklet);
+      Tasklet* currentTasklet = event->tasklet;
       DOUT("End of tasklet: " << currentTasklet->name);
       removeTasklet(currentTasklet);
       bool haveActiveTasklets = false;

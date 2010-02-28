@@ -2,23 +2,23 @@
 #define LOST_APPLICATION_TASKLETEVENT_H
 
 #include "lost/event/Event.h"
+#include "lost/application/Tasklet.h"
 
 namespace lost
 {
   namespace application
   {
+  
     struct TaskletEvent;
     typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
-
+  
     struct TaskletEvent : public event::Event
     {
       static const event::Type& DONE() { static event::Type d = "taskletDone"; return d; }
 
-      void* tasklet; // sender must guarantee this is a Tasklet* because it will be cast in application
-                     // we must use void* because of dependencies and complicated inheritance structure
-                     // due to complicated cross-platform Tasklet.
+      Tasklet* tasklet;
 
-      TaskletEvent(const event::Type& inType, void* inTasklet) : Event(inType), tasklet(inTasklet) {}
+      TaskletEvent(const event::Type& inType, Tasklet* inTasklet) : Event(inType), tasklet(inTasklet) {}
       virtual ~TaskletEvent() {}
     };
   }
