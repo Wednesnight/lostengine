@@ -359,7 +359,9 @@ namespace lost
             {
               case LGL_DEPTH_COMPONENT16: os << "16"; break;
               case LGL_DEPTH_COMPONENT24: os << "24"; break;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE                    
               case LGL_DEPTH_COMPONENT32: os << "32"; break;
+#endif
             }
           }
           os << ")";

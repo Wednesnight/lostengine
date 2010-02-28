@@ -1,3 +1,4 @@
+#include "lost/application/Runner.h"
 #include "lost/application/Application.h"
 #include "lost/application/Tasklet.h"
 #include "lost/common/Logger.h"

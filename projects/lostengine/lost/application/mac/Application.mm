@@ -1,8 +1,6 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
-
 #include <iostream>
-
 #include <Foundation/NSThread.h>
 #include <Foundation/NSBundle.h>
 #include <Foundation/NSAutoreleasePool.h>
@@ -11,7 +9,6 @@
 #include <AppKit/NSMenu.h>
 #include <AppKit/NSEvent.h>
 #include <AppKit/NSCursor.h>
-
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"

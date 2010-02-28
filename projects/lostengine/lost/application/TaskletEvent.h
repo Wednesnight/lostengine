@@ -2,7 +2,6 @@
 #define LOST_APPLICATION_TASKLETEVENT_H
 
 #include "lost/event/Event.h"
-#include "lost/application/Tasklet.h"
 
 namespace lost
 {
@@ -15,9 +14,11 @@ namespace lost
     {
       static const event::Type& DONE() { static event::Type d = "taskletDone"; return d; }
 
-      Tasklet* tasklet;
+      void* tasklet; // sender must guarantee this is a Tasklet* because it will be cast in application
+                     // we must use void* because of dependencies and complicated inheritance structure
+                     // due to complicated cross-platform Tasklet.
 
-      TaskletEvent(const event::Type& inType, Tasklet* inTasklet) : Event(inType), tasklet(inTasklet) {}
+      TaskletEvent(const event::Type& inType, void* inTasklet) : Event(inType), tasklet(inTasklet) {}
       virtual ~TaskletEvent() {}
     };
   }

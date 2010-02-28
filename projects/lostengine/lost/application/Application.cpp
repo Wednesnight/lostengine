@@ -142,16 +142,11 @@ namespace lost
       tasklets.erase(t_iter);
     }
 
-
-    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
-    {
-      addTasklet(new Tasklet(event->loader));
-    }
-
     void Application::taskletDone(const TaskletEventPtr& event)
     {
-      DOUT("End of tasklet: " << event->tasklet->name);
-      removeTasklet(event->tasklet);
+      Tasklet* currentTasklet = reinterpret_cast<Tasklet*>(event->tasklet);
+      DOUT("End of tasklet: " << currentTasklet->name);
+      removeTasklet(currentTasklet);
       bool haveActiveTasklets = false;
       for (std::list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)
       {

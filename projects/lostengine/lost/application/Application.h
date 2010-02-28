@@ -38,9 +38,6 @@ namespace lost
     struct ProcessEvent;
     typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
     
-    int runTasklet(Tasklet* t);
-
-
     struct Application : public lost::enable_shared_from_this<Application>
     {
     private:
@@ -58,9 +55,6 @@ namespace lost
        */
       std::list<Tasklet*> tasklets;
 
-      /**
-       * running flag
-       */
       bool running;
 
       /**
@@ -116,46 +110,14 @@ namespace lost
 
       ~Application();
 
-      /**
-       * adds the specified tasklet
-       * if the application is already running you have to take care of starting the tasklet yourself
-       */
-      void addTasklet(Tasklet* tasklet);
-
-      /**
-       * starts all tasklets and queues a run event
-       */
-      void run();
-
-      /**
-       * quits the app
-       */
-      void quit();
-
-      /**
-       * call this to show/hide the OS mouse
-       */
-      void showMouse(bool visible);      
-
-      /**
-       * Tasklet spawn handler
-       **/
-      void taskletSpawn(const SpawnTaskletEventPtr& event);
-
-      /**
-       * Tasklet done handler
-       **/
-      void taskletDone(const TaskletEventPtr& event);
-
-      /**
-       * listener for QueueEvent.QUEUE()
-       */
-      void queueEvent(const QueueEventPtr& event);
-
-      /**
-       * should be executed on main thread!
-       */
-      void processEvents(const ProcessEventPtr& event);
+      void addTasklet(Tasklet* tasklet); // adds the specified tasklet, calls it's init() and start() methods
+      void run(); // starts all tasklets and queues a run event
+      void quit(); // quits the app
+      void showMouse(bool visible); // call this to show/hide the OS mouse
+      void taskletSpawn(const SpawnTaskletEventPtr& event); // Tasklet spawn handler
+      void taskletDone(const TaskletEventPtr& event); // Tasklet done handler
+      void queueEvent(const QueueEventPtr& event); // listener for QueueEvent.QUEUE()
+      void processEvents(const ProcessEventPtr& event); // should be executed on main thread!
     };
 
   }

@@ -9,7 +9,6 @@
 #include <algorithm>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
-#include "lost/application/mac/ThreadAutoreleasePoolHack.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/Queue.h"
 #include "lost/application/QueueEvent.h"
@@ -35,18 +34,13 @@ namespace lost
   {
     
     Tasklet::Tasklet(LoaderPtr inLoader)
-    : tasklet::tasklet(bind(&Tasklet::run, this, _1)),
-      loader(inLoader),
-      eventDispatcher(new EventDispatcher()),
+    :  loader(inLoader),
       lua(new State(loader)),
-      waitForEvents(false),
       name("<unnamed tasklet>"),
       renderNode(new Node()),
       updateQueue(new Queue())
     {
-      // set error handler
-      add_error_handler(bind(&Tasklet::error, this, _1, _2));
-
+      waitForEvents = false;
       // bind lostengine lua mappings
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
@@ -108,68 +102,35 @@ namespace lost
       if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
     }
 
-    void Tasklet::run(tasklet& tasklet)
+    void Tasklet::render()
     {
-      void* pool = threadAutoreleasePoolHack_createPool();
-
-      // make sure that our GL context is the current context
+      // render
       if(window)
       {
-        window->context->makeCurrent();
-      }
-        
-      if (startup())
-      {
-        // process run loop updates
-        updateQueue->process(this);
-        while (get_state() == RUNNING && update())
-        {
-          // process run loop updates
-          updateQueue->process(this);
-
-          // render
-          if(window)
-          {
-            renderNode->process(window->context);
-            window->context->swapBuffers();
-          }
-
-          const double startTime = currentTimeMilliSeconds();
-          if(!waitForEvents)
-          {
-            eventDispatcher->processEvents(fmax(0, 1.0/60.0 - currentTimeMilliSeconds() - startTime));
-          }
-          else
-          {
-            eventDispatcher->waitForEvents();
-            // no event processing timeout since we probably don't have that many events
-            eventDispatcher->processEvents(0);
-          }
-
-          // process run loop updates again after dispatching events
-          updateQueue->process(this);
-
-          pool = threadAutoreleasePoolHack_drainAndRecreatePool(pool);
-        }
-        shutdown();
-      }
-      threadAutoreleasePoolHack_drainPool(pool);        
-      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+        renderNode->process(window->context);
+        window->context->swapBuffers();
+      }    
     }
-
-    void Tasklet::error(fhtagn::threads::tasklet& tasklet, std::exception const& exception)
+    
+    void Tasklet::processEvents()
     {
-      EOUT(exception.what());
-      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      eventDispatcher->processEvents();
+      updateQueue->process(this);      
     }
 
     bool Tasklet::startup()
     {    
       bool result = true;
+      // make sure that our GL context is the current context on startup of this thread
+      if(window)
+      {
+        window->context->makeCurrent();
+      }
       if(hasLuaStartup)
       {
         result = call_function<bool>(luaStartup, this);
       }
+      updateQueue->process(this);      
       return  result;
     }
 
@@ -180,6 +141,7 @@ namespace lost
       {
         result = call_function<bool>(luaUpdate, this);
       }
+      updateQueue->process(this);      
       return  result;      
     }
 
@@ -192,23 +154,7 @@ namespace lost
       }
       return  result;      
     }
-
-    bool Tasklet::start()
-    {
-      // init must've been called before this by application or some other external code
-      return ::fhtagn::threads::tasklet::start();
-    }
-
-    bool Tasklet::stop()
-    {
-      bool result = ::fhtagn::threads::tasklet::stop();
-      if (result)
-      {
-        eventDispatcher->wakeup();
-      }
-      return result;
-    }
-
+    
     void Tasklet::createWindow(const WindowParams& params)
     {
       window = new Window(eventDispatcher, params);
@@ -220,24 +166,5 @@ namespace lost
     {
       stop();
     }
-
-    void Tasklet::queueApplicationEvent(EventPtr event)
-    {
-      QueueEventPtr queue(new QueueEvent(event));
-      eventDispatcher->dispatchEvent(queue);
-    }
-
-    void Tasklet::dispatchApplicationEvent(EventPtr event)
-    {
-      queueApplicationEvent(event);
-      processApplicationEvents();
-    }
-    
-    void Tasklet::processApplicationEvents()
-    {
-      ProcessEventPtr process(new ProcessEvent());
-      eventDispatcher->dispatchEvent(process);
-    }
-    
   }
 }
