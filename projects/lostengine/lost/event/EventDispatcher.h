@@ -62,7 +62,7 @@ namespace lost
       /**
        * call this to signal queued events
        */
-      void processEvents(const double& timeoutInMilliSeconds = 0);
+      void processEvents();
 
     private:
       boost::mutex queueMutex;

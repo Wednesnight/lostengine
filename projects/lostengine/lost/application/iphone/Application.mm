@@ -36,12 +36,13 @@ lost::application::Application* currentApplication;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-  parent = currentApplication;
+/*  parent = currentApplication;
   for (std::map<std::string, lost::shared_ptr<lost::application::Window> >::iterator idx = parent->windows.begin(); idx != parent->windows.end(); ++idx)
   {
     (*idx).second->open();
   }
   parent->startRunLoop();
+*/
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -57,7 +58,7 @@ lost::application::Application* currentApplication;
   if (parent)
   {
     parent->quit();
-    parent->terminate();
+//    parent->terminate();
   }
 }
 
@@ -99,7 +100,7 @@ namespace lost
       delete hiddenMembers;
     }
 
-    void Application::doRun()
+/*    void Application::doRun()
     {
       currentApplication = this;
       UIApplicationMain(0, NULL, @"UIApplication", @"ApplicationDelegate");
@@ -108,7 +109,7 @@ namespace lost
     void Application::doQuit()
     {
       [hiddenMembers->application performSelectorOnMainThread: @selector(terminate) withObject: nil waitUntilDone: NO];
-    }
+    }*/
     
     void Application::showMouse(bool visible)
     {

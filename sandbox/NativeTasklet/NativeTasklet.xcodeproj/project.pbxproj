@@ -23,35 +23,35 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libLostEngine.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = LostEngine;
 		};
 		8D58689B113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA6711250E3E885300B961EC /* libLostEngine.a */;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
 			remoteInfo = "LostEngine-iphone";
 		};
 		8D58689D113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 3E7325750E5CE3A5000FF838 /* libLostEngine.a */;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
 			remoteInfo = "LostEngine-simulator";
 		};
 		8D58689F113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
 			remoteInfo = LostEngineUnittests;
 		};
 		8D5868A1113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8D607DCC104F0665004818BA /* LostEngine.app */;
+			remoteGlobalIDString = 8D607DCC104F0665004818BA;
 			remoteInfo = LostEngineLauncher;
 		};
 /* End PBXContainerItemProxy section */

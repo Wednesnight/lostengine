@@ -1,5 +1,4 @@
 #include "lost/event/EventDispatcher.h"
-#include "lost/platform/Platform.h"
 
 namespace lost
 {
@@ -81,18 +80,17 @@ namespace lost
       waitEventCondition.notify_one();
     }
     
-    void EventDispatcher::processEvents(const double& timeoutInMilliSeconds)
+    void EventDispatcher::processEvents()
     {
       if (eventQueue->size() > 0)
       {
-        const double startTime = lost::platform::currentTimeMilliSeconds();
         do
         {
           dispatchEvent(eventQueue->front());
           queueMutex.lock();
           eventQueue->pop_front();
           queueMutex.unlock();
-        } while(eventQueue->size() > 0 && (timeoutInMilliSeconds == 0 || lost::platform::currentTimeMilliSeconds() - startTime < timeoutInMilliSeconds));
+        } while(eventQueue->size() > 0);
       }
     }
     
