@@ -712,6 +712,8 @@
 		EAD9DC88111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
 		EAD9DC89111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
 		EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */; };
+		EADE515F113BC9A8005F7BB6 /* ApplicationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */; };
+		EADE5161113BC9B3005F7BB6 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EADE5160113BC9B3005F7BB6 /* GLView.mm */; };
 		EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
@@ -1124,6 +1126,8 @@
 		EAD2E87B0E94104F000535DB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RangeManager.cpp; sourceTree = "<group>"; };
 		EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostGlRangeManager.cpp; path = test/TestLostGlRangeManager.cpp; sourceTree = "<group>"; };
+		EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ApplicationWindow.mm; path = mac/ApplicationWindow.mm; sourceTree = "<group>"; };
+		EADE5160113BC9B3005F7BB6 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLView.mm; path = mac/GLView.mm; sourceTree = "<group>"; };
 		EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScaleGrid.cpp; path = mesh/ScaleGrid.cpp; sourceTree = "<group>"; };
 		EAF56B2C111CD694008D5A0D /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = mesh/Rect.cpp; sourceTree = "<group>"; };
 		EAF56B3F111CD794008D5A0D /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = mesh/Mesh.cpp; sourceTree = "<group>"; };
@@ -1489,6 +1493,8 @@
 			children = (
 				EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */,
 				8DE56F6C0F31187E0072FB28 /* Application.mm */,
+				EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */,
+				EADE5160113BC9B3005F7BB6 /* GLView.mm */,
 				8DE56F6E0F3118840072FB28 /* Window.mm */,
 				EAAD3333113ADA0F001111C8 /* Runner.cpp */,
 				EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */,
@@ -2654,6 +2660,8 @@
 				EAAD339D113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
 				EAAD33A1113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
 				EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
+				EADE515F113BC9A8005F7BB6 /* ApplicationWindow.mm in Sources */,
+				EADE5161113BC9B3005F7BB6 /* GLView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
