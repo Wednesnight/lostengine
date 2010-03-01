@@ -19,34 +19,4 @@
   return [super initWithFrame: frame pixelFormat: [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes]];
 }
 
-- (id)window
-{
-  return (ApplicationWindow*)[super window];
-}
-
-- (void)mouseDown: (NSEvent*)event
-{
-  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
-}
-
-- (void)mouseUp: (NSEvent*)event
-{
-  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
-}
-
-- (void)rightMouseDown: (NSEvent*)event
-{
-  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
-}
-
-- (void)rightMouseUp: (NSEvent*)event
-{
-  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
-}
-
-- (void)scrollWheel: (NSEvent*)event
-{
-  [((ApplicationWindow*)[self window]) mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
-}
-
 @end
