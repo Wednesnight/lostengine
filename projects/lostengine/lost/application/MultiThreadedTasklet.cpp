@@ -2,7 +2,7 @@
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/TaskletEvent.h"
-#include "lost/application/mac/ThreadAutoreleasePoolHack.h"
+#include "lost/application/ThreadAutoreleasePoolHack.h"
 
 using namespace std;
 
