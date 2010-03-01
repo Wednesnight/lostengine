@@ -9,6 +9,8 @@ namespace lost
 {
   namespace application
   {
+    struct Tasklet;
+  
     struct QueueEntityLua : public QueueEntity
     {
 

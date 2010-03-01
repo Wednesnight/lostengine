@@ -1,4 +1,3 @@
-#include "lost/application/Tasklet.h"
 #include "lost/application/Queue.h"
 
 using namespace std;

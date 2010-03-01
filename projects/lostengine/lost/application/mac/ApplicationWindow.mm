@@ -281,5 +281,31 @@
   [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
 }
 
+- (void)mouseDown: (NSEvent*)event
+{
+    [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+}
+
+- (void)mouseUp: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+}
+
+- (void)rightMouseDown: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+}
+
+- (void)rightMouseUp: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+}
+
+- (void)scrollWheel: (NSEvent*)event
+{
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
+}
+
+
 @end
 
