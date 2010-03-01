@@ -5,7 +5,8 @@ namespace lost
 namespace application
 {
 
-SingleThreadedTasklet::SingleThreadedTasklet()
+SingleThreadedTasklet::SingleThreadedTasklet(lost::resource::LoaderPtr inLoader)
+: Tasklet(inLoader)
 {
 }
 

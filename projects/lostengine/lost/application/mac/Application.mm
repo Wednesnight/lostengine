@@ -1,85 +1,15 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Application.h"
 #include <iostream>
-#include <Foundation/NSThread.h>
 #include <Foundation/NSBundle.h>
 #include <Foundation/NSAutoreleasePool.h>
 #include <AppKit/NSNibLoading.h>
-#include <AppKit/NSApplication.h>
 #include <AppKit/NSMenu.h>
 #include <AppKit/NSEvent.h>
 #include <AppKit/NSCursor.h>
-#include "lost/application/ApplicationEvent.h"
+#import "lost/application/mac/ApplicationDelegate.h"
 #include "lost/common/Logger.h"
-#include "lost/event/EventDispatcher.h"
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED < 1060
-@interface ApplicationDelegate : NSObject
-#else
-@interface ApplicationDelegate : NSObject<NSApplicationDelegate>
-#endif
-{
-  lost::application::Application* parent;
-}
-@end
-
-@implementation ApplicationDelegate
-
-- (void) dummyThread:(id)arg;
-{
-}
-
--(id)init
-{
-    if(self = [super init])
-    {
-      // make this application multithreaded by spawning a dummy thread that exits immediately
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
-      [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
-    }
-    return self;
-}
-
-- (void)applicationDidFinishLaunching: (NSNotification *)notification
-{
-  DOUT("applicationDidFinishLaunching");
-  if (parent)
-  {
-    lost::shared_ptr<lost::application::ApplicationEvent> event(new lost::application::ApplicationEvent(lost::application::ApplicationEvent::RUN()));
-    parent->eventDispatcher->dispatchEvent(event);
-  }
-}
-
-- (void)applicationWillTerminate: (NSNotification *)notification
-{
-  DOUT("applicationWillTerminate");
-}
-
-- (void)setParent: (lost::application::Application*)newParent
-{
-  parent = newParent;
-}
-
-- (void)terminate
-{
-  [[NSApplication sharedApplication] terminate: nil];
-}
-
-- (void) quitAction: (id)sender
-{
-  if (parent)
-  {
-    parent->quit();
-  }
-}
-
-- (void)processApplicationEvents
-{
-  if (parent) parent->eventDispatcher->processEvents();
-}
-
-@end
 
 /*************************************************************
  * taken from http://www.allegro.cc
