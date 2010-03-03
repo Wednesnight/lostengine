@@ -20,7 +20,7 @@ namespace lost
       delete listeners;
     }
 
-    uint32_t EventDispatcher::numListeners()
+	boost::uint32_t EventDispatcher::numListeners()
     {
       return listeners->size();
     }

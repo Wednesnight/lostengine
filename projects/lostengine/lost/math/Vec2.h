@@ -16,6 +16,9 @@ namespace lost
           struct {float x,y;};
           struct {float width,height;};
           struct {float min,max;};
+          // undef stupid WinDef.h defines
+          #undef near
+          #undef far
           struct {float near,far;};
         };
 

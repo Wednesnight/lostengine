@@ -1,6 +1,8 @@
 #ifndef LOST_AUDIO_VORBISFILE_H
 #define LOST_AUDIO_VORBISFILE_H
 
+#include "lost/platform/shared_ptr.h"
+
 namespace lost
 {
 namespace resource { struct File; };

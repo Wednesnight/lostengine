@@ -2,6 +2,7 @@
 #define LOST_AL_AL_H
 
 #include "lost/platform/Platform.h"
+#include "lost/platform/shared_ptr.h"
 
 #if defined WIN32
   #include <OpenAL/al.h>

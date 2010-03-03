@@ -1,0 +1,55 @@
+#
+# $Id: SConscript 321 2009-06-08 22:24:55Z unwesen $
+#
+# This file is part of the Fhtagn! C++ Library.
+# Copyright (C) 2009 Jens Finkhaeuser <unwesen@users.sourceforge.net>.
+#
+# Author: Jens Finkhaeuser <unwesen@users.sourceforge.net>
+#
+# This program is licensed as free software for personal, educational or
+# other non-commerical uses: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Alternatively, licenses for commercial purposes are available as well.
+# Please send your enquiries to the copyright holder's address above.
+Import('env')
+import os.path
+
+SOURCES = [
+]
+
+HEADERS = [
+  'allocator.h',
+  'defaults.h',
+  'utility.h',
+  'memory_pool.h',
+  'fixed_pool.h',
+  'throw_pool.h',
+  'block_pool.h',
+  'dynamic_pool.h',
+  'size_based_pool.h',
+  'pool_allocator.h',
+  'common.h',
+  os.path.join('detail', 'concepts.h'),
+  os.path.join('detail', 'allocator.tcc'),
+  os.path.join('detail', 'defaults.tcc'),
+  os.path.join('detail', 'memory_pool.tcc'),
+  os.path.join('detail', 'fixed_pool.tcc'),
+  os.path.join('detail', 'block_pool.tcc'),
+  os.path.join('detail', 'dynamic_pool.tcc'),
+  os.path.join('detail', 'size_based_pool.tcc'),
+  os.path.join('detail', 'pool_allocator.tcc'),
+]
+
+env.addSources('fhtagn', SOURCES)
+env.addHeaders('fhtagn', HEADERS)
