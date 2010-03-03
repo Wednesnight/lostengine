@@ -6,7 +6,7 @@ namespace lost
   {
     
     Camera3D::Camera3D(const lost::math::Rect& inViewport)
-    : Camera::Camera(inViewport),
+    : Camera(inViewport),
       mPosition(0.0f, 0.0f, 0.0f),
       mDirection(0.0f, 0.0f, -1.0f),
       mRotation(0.0f, 0.0f, 0.0f),

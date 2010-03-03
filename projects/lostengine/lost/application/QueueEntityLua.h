@@ -3,7 +3,7 @@
 
 #include "lost/application/QueueEntity.h"
 
-namespace luabind { struct object; }
+namespace luabind { class object; }
 
 namespace lost
 {

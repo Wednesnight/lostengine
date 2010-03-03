@@ -9,7 +9,7 @@ namespace lost
   {
 
     Camera2D::Camera2D(const lost::math::Rect& inViewport)
-    : Camera::Camera(inViewport)
+    : Camera(inViewport)
     {
       hasModelViewMatrix = true;
       float offset = .375f;

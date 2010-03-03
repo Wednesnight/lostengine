@@ -14,7 +14,7 @@ namespace application
 using namespace lost::event;
 
 MultiThreadedTasklet::MultiThreadedTasklet(lost::resource::LoaderPtr inLoader)
-: tasklet::tasklet(bind(&MultiThreadedTasklet::run, this, _1)), Tasklet(inLoader)
+: tasklet(bind(&MultiThreadedTasklet::run, this, _1)), Tasklet(inLoader)
 {
   add_error_handler(bind(&MultiThreadedTasklet::error, this, _1, _2));
 

@@ -10,8 +10,8 @@
 
 namespace boost
 {
-struct mutex;
-struct condition_variable_any;
+class mutex;
+class condition_variable_any;
 typedef condition_variable_any condition;
 }
 
@@ -44,7 +44,7 @@ namespace lost
       /**
        * for debugging purposes
        */
-      uint32_t numListeners();
+	  boost::uint32_t numListeners();
 
       /**
        * returns if at least one event was queued

@@ -36,7 +36,9 @@ Device::~Device()
   DOUT("closing device: "<<deviceId);
   ALCboolean result = alcCloseDevice(device);ALDEBUG; // don't throw in destructor
   if(!result)
+  {
     EOUT("failed to close device: "<<deviceId<<" , did you attach it to a context?");
+  }
 }
 
 std::vector<std::string> Device::allDeviceIds()
