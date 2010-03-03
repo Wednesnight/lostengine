@@ -92,7 +92,7 @@ namespace lost
       
     }
 
-    TexturePtr FrameBuffer_colorTexture(FrameBufferPtr framebuffer, boost::uint8_t index)
+    TexturePtr FrameBuffer_colorTexture(FrameBufferPtr framebuffer, uint8_t index)
     {
       if (framebuffer->colorBuffers.find(index) != framebuffer->colorBuffers.end())
       {

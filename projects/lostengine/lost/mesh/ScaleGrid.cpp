@@ -22,8 +22,8 @@ ScaleGrid::ScaleGrid(gl::TexturePtr tex,
   this->drawMode = GL_TRIANGLES;
 
   numVertices = 16; // draw it on paper and you'll see it's correct
-  boost::uint32_t numQuads = 9; // it's a 3x3 matrix of quads
-  boost::uint32_t numTris = numQuads*2; // each quad is drawn with two tris
+  uint32_t numQuads = 9; // it's a 3x3 matrix of quads
+  uint32_t numTris = numQuads*2; // each quad is drawn with two tris
   numIndices = numTris*3; // currently, each tri is drawn with 3 indices
   numTexCoords = numVertices; // each vertex receives one texcoord
 

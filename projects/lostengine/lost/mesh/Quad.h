@@ -58,24 +58,24 @@ struct Quad : public Mesh
   
   // writes the indices for a given quad into the provided buffer
   // two triangles, counterclockwise
-  void createIndices(boost::uint32_t quadNum);  
-  void createVertices(boost::uint32_t quadNum, const math::Rect& inRect);
+  void createIndices(uint32_t quadNum);  
+  void createVertices(uint32_t quadNum, const math::Rect& inRect);
   void updateSize(const math::Vec2& size);
 
   // recalculates the texture coordinates for a given quad and texture 0 so the textures data stretechs over the
   // whole quad.
-  void createTexCoords(boost::uint32_t quadNum,
+  void createTexCoords(uint32_t quadNum,
                        bool flip=true);
 
   // recalculates the texture coordinates for a given quad and texture so the textures data stretechs over the
   // whole quad.
-  void createTexCoords(boost::uint32_t quadNum,       // the index of the quad whose texture coordinates should be updated
-                       boost::uint32_t texNum,        // the texture to use fo rthe texcoord generation
+  void createTexCoords(uint32_t quadNum,       // the index of the quad whose texture coordinates should be updated
+                       uint32_t texNum,        // the texture to use fo rthe texcoord generation
                        bool flip=true);               // if flip 0 true, texture coordinates will be flipped vertically
   
   // recalculates the texture coordinates for a given quad
-  void createTexCoords(boost::uint32_t quadNum,       // the index of the quad whose texture coordinates should be updated
-                       boost::uint32_t texNum,        // the texture to use fo rthe texcoord generation
+  void createTexCoords(uint32_t quadNum,       // the index of the quad whose texture coordinates should be updated
+                       uint32_t texNum,        // the texture to use fo rthe texcoord generation
                        const math::Rect& pixelRect,   // a rect describing a section of the texture in pixel coordinates
                        bool flip=true);               // if flip 0 true, texture coordinates will be flipped vertically
 };

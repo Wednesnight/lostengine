@@ -12,8 +12,8 @@ Rectangle::Rectangle(const math::Rect& rect)
   this->resetBuffers(layout, gl::ET_u32);      
 
   this->drawMode = GL_LINE_LOOP;
-  boost::uint32_t numVertices = 4;
-  boost::uint32_t numIndices = numVertices;
+  uint32_t numVertices = 4;
+  uint32_t numIndices = numVertices;
   
   this->vertexBuffer->reset(numVertices);
   this->indexBuffer->reset(numIndices);

@@ -1,5 +1,4 @@
 #include "lost/bitmap/Packer.h"
-using namespace boost;
 using namespace lost::math;
 
 namespace lost
@@ -39,7 +38,7 @@ void Packer::pack(Packer::Result& outResult,
                   sort);
   // extract missing infos from rectpacker
   // build final bitmap
-  outResult.packedBitmap.reset(new Bitmap((boost::uint32_t)targetSize.width, (boost::uint32_t)targetSize.height, format));
+  outResult.packedBitmap.reset(new Bitmap((uint32_t)targetSize.width, (uint32_t)targetSize.height, format));
   outResult.rects.clear();
   uint32_t numNodes = rectPacker.nodes.size();
   for(uint32_t i=0; i<numNodes; ++i)
@@ -53,7 +52,7 @@ void Packer::pack(Packer::Result& outResult,
 
       Rect r = rectPacker.nodes[i].rect;
       shared_ptr<Bitmap> bmp = bitmaps[rectPacker.nodes[i].rectid];
-      bmp->draw((boost::uint32_t)r.x, (boost::uint32_t)r.y, outResult.packedBitmap);
+      bmp->draw((uint32_t)r.x, (uint32_t)r.y, outResult.packedBitmap);
 //      DOUT("drawing "<<r);
     }
   }

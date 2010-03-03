@@ -1,7 +1,6 @@
 #ifndef LOST_GL_FRAMEBUFFER_H
 #define LOST_GL_FRAMEBUFFER_H
 
-#include <boost/cstdint.hpp>
 #include <vector>
 #include <map>
 #include "lost/gl/Texture.h"
@@ -77,7 +76,7 @@ namespace lost
     public:
       math::Vec2 size;
 
-      std::map<boost::uint8_t, AttachmentPtr> colorBuffers;
+      std::map<uint8_t, AttachmentPtr> colorBuffers;
       AttachmentPtr                           depthBuffer;
       AttachmentPtr                           stencilBuffer;
 
@@ -86,8 +85,8 @@ namespace lost
       FrameBuffer(const math::Vec2& size, GLenum colorBits = -1, GLenum depthBits = -1, GLenum stencilBits = -1);
       ~FrameBuffer();
 
-      void attachColorBuffer(boost::uint8_t index, const TexturePtr& buffer);
-      void attachColorBuffer(boost::uint8_t index, const AttachmentPtr& buffer);
+      void attachColorBuffer(uint8_t index, const TexturePtr& buffer);
+      void attachColorBuffer(uint8_t index, const AttachmentPtr& buffer);
       void attachDepthBuffer(const TexturePtr& buffer);
       void attachDepthBuffer(const AttachmentPtr& buffer);
       void attachStencilBuffer(const TexturePtr& buffer);
