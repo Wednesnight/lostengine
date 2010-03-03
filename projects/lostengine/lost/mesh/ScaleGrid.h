@@ -22,9 +22,9 @@ typedef lost::shared_ptr<ScaleGrid> ScaleGridPtr;
  */
 struct ScaleGrid : public Mesh
 {
-  boost::uint32_t numVertices;
-  boost::uint32_t numIndices;
-  boost::uint32_t numTexCoords;
+  uint32_t numVertices;
+  uint32_t numIndices;
+  uint32_t numTexCoords;
 
   ScaleGrid(gl::TexturePtr tex,
             const math::Rect& rect,

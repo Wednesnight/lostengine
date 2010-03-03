@@ -1,4 +1,3 @@
-
 #include "lost/bitmap/Bitmap.h"
 #include "stb_image.h"
 #include "lost/common/Logger.h"
@@ -6,12 +5,14 @@
 #include <boost/lexical_cast.hpp>
 
 using namespace std;
-using namespace boost;
+//using namespace boost;
 
 namespace lost
 {
 namespace bitmap
 {
+
+using boost::lexical_cast;
 
 void Bitmap::reset()
 {
@@ -280,7 +281,7 @@ void Bitmap::flip()
   }
 }
 
-boost::uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
+uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
 {
   uint32_t bpp = bytesPerPixelFromComponents(format);
   uint8_t* target = data+((x+(y*width))*bpp);

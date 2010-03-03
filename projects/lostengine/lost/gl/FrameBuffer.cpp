@@ -247,12 +247,12 @@ namespace lost
       lglDeleteFramebuffers(1, &buffer); GLDEBUG;
     }
 
-    void FrameBuffer::attachColorBuffer(boost::uint8_t index, const TexturePtr& buffer)
+    void FrameBuffer::attachColorBuffer(uint8_t index, const TexturePtr& buffer)
     {
       attachColorBuffer(index, Attachment::create(buffer));
     }
     
-    void FrameBuffer::attachColorBuffer(boost::uint8_t index, const AttachmentPtr& buffer)
+    void FrameBuffer::attachColorBuffer(uint8_t index, const AttachmentPtr& buffer)
     {
       colorBuffers[index] = buffer;
       buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
@@ -385,7 +385,7 @@ namespace lost
     void FrameBuffer::resize(const Vec2& size)
     {
       this->size = Vec2(nextPowerOf2((unsigned long)size.width), nextPowerOf2((unsigned long)size.height));
-      for (map<boost::uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
+      for (map<uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
       {
         idx->second->resize(size);
         check();

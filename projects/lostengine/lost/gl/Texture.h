@@ -2,7 +2,6 @@
 #define LOST_GL_TEXTURE_H
  
 #include "lost/gl/gltypes.h"
-#include <boost/cstdint.hpp>
 #include "lost/math/Vec2.h"
 #include "lost/common/Data.h"
 
@@ -88,18 +87,18 @@ namespace lost
 
       GLuint          texture;
       GLenum          internalFormat;
-      boost::uint32_t width;
-      boost::uint32_t height;      
-      boost::uint32_t dataWidth; 
-      boost::uint32_t dataHeight;
+      uint32_t width;
+      uint32_t height;      
+      uint32_t dataWidth; 
+      uint32_t dataHeight;
 
-      inline boost::uint32_t dataMaxY() { return dataHeight ? dataHeight-1 : dataHeight; }
-      inline boost::uint32_t dataMaxX() { return dataWidth ? dataWidth-1 : dataWidth; }
+      inline uint32_t dataMaxY() { return dataHeight ? dataHeight-1 : dataHeight; }
+      inline uint32_t dataMaxX() { return dataWidth ? dataWidth-1 : dataWidth; }
 
       // texture coordinate helpers
       // returns a normalised texture coordinate for the given pixel X coordinate in the range [0,1]
       // the texcoord is correctly offset so that the coord is centered on a texel for pixel perfect 2D drawing.
-      inline float normalisedXCoord(boost::uint32_t pixelXCoord)
+      inline float normalisedXCoord(uint32_t pixelXCoord)
       {
         float result = 0.0f;
         if(width > 0)
@@ -112,7 +111,7 @@ namespace lost
 
       // returns a normalised texture coordinate for the given pixel Y coordinate in the range [0,1]
       // the texcoord is correctly offset so that the coord is centered on a texel for pixel perfect 2D drawing.
-      inline float normalisedYCoord(boost::uint32_t pixelYCoord)
+      inline float normalisedYCoord(uint32_t pixelYCoord)
       {
         float result = 0.0f;
         if(height > 0)
@@ -139,8 +138,8 @@ namespace lost
       // the uploaded data, so you can be sure to receive only the topright most bitmap pixel
       inline math::Vec2 topRightTexCoord()
       {
-        boost::uint32_t maxX = std::min(dataWidth, width);
-        boost::uint32_t maxY = std::min(dataHeight, height);
+        uint32_t maxX = std::min(dataWidth, width);
+        uint32_t maxY = std::min(dataHeight, height);
 //        float fMaxX = maxX ? (float)(maxX-1) : (float)maxX;
 //        float fMaxY = maxY ? (float)(maxY-1) : (float)maxY;
         return normalisedCoord(math::Vec2(maxX, maxY));

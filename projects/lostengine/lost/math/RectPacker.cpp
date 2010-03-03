@@ -11,13 +11,13 @@ namespace math
 
 struct RectPacker::SourceRect
 {
-  SourceRect(const lost::math::Rect inRect, boost::int32_t inId)
+  SourceRect(const lost::math::Rect inRect, int32_t inId)
   :rect(inRect), id(inId)
   {
   }
   
   lost::math::Rect rect; // the original size
-  boost::int32_t id; // it's index in the original incoming data
+  int32_t id; // it's index in the original incoming data
 };
   
 RectPacker::Node::Node()
@@ -38,10 +38,10 @@ RectPacker::~RectPacker()
 
 void RectPacker::checkOverlap()
 {
-  for(boost::uint32_t i=0; i<nodes.size(); ++i)
+  for(uint32_t i=0; i<nodes.size(); ++i)
   {
     Rect& curRect = nodes[i].rect;
-    for(boost::uint32_t j=0; j<nodes.size(); ++j)
+    for(uint32_t j=0; j<nodes.size(); ++j)
     {
       if(i!=j)
       {
@@ -77,8 +77,8 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // create the source vector and preserve incming ids in the progress
   // by wrapping the incoming rects in the SourceRect struct
   sourceRects.clear();
-  boost::int32_t numRects = rects.size();
-  for(boost::int32_t i=0; i<numRects; ++i)
+  int32_t numRects = rects.size();
+  for(int32_t i=0; i<numRects; ++i)
   {
     sourceRects.push_back(SourceRect(rects[i], i));
   }
@@ -88,7 +88,7 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
     std::sort(sourceRects.begin(), sourceRects.end(), compareRects);
     
   // pack all source rects into the target area
-  for(boost::int32_t i=0; i<numRects; ++i)
+  for(int32_t i=0; i<numRects; ++i)
   {
     if(!pack(i))
     {
@@ -114,7 +114,7 @@ bool RectPacker::fits(const Node& n, const SourceRect& s)
 }
 
 
-bool RectPacker::pack(boost::int32_t sourceRectId)
+bool RectPacker::pack(int32_t sourceRectId)
 {
   // try to find an exactly matching node for the given sourceRectId
   // if there is none, we split the current node until we find one
@@ -134,11 +134,11 @@ bool RectPacker::pack(boost::int32_t sourceRectId)
 
   // loop while we haven't found a match and still have space
   // the last entry in the stack will be the node we have to work with
-  boost::uint32_t iterations = 0;
+  uint32_t iterations = 0;
   while(!foundNode && (recursionStack.size() > 0))
   {
     iterations++;
-    boost::int32_t currentNodeIndex = recursionStack.back();
+    int32_t currentNodeIndex = recursionStack.back();
     Node currentNode = nodes[currentNodeIndex]; // currentNode needs to be copied since we change the vector and the memory might be moved
 //    DOUT("currentNodeIndex: "<<currentNodeIndex<<" stack size: "<<recursionStack.size()<<" rect: "<<currentNode.rect);
     
@@ -182,11 +182,11 @@ bool RectPacker::pack(boost::int32_t sourceRectId)
   return foundNode;
 }
 
-boost::int32_t RectPacker::newNode(const lost::math::Rect& r)
+int32_t RectPacker::newNode(const lost::math::Rect& r)
 {
 //  DOUT("creating node with rect: "<<r);
   nodes.push_back(Node(r));
-  boost::int32_t newNodeIndex = nodes.size();
+  int32_t newNodeIndex = nodes.size();
   newNodeIndex -= 1;
   return newNodeIndex;
 }
