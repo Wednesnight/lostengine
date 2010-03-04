@@ -1,5 +1,0 @@
-//#define LUABIND_NO_ERROR_CHECKING
-#define NDEBUG
-#include "prefix-shared.h"
-
-#define LOST_LOGGER_ENABLE_DOUT

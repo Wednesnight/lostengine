@@ -1,5 +1,12 @@
-#include "../Window.h"
+#include "lost/application/Window.h"
 #include "lost/common/Logger.h"
+#include "lost/gl/Context.h"
+#include <windows.h>
+
+namespace lost
+{
+namespace application
+{
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -47,10 +54,10 @@ void Window::initialize()
                                          L"LostEngineApplicationWindow",
                                          wTitle.c_str(),
                                          WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VISIBLE,
-                                         (int)params.size.x,
-                                         (int)params.size.y,
-                                         (int)params.size.width,
-                                         (int)params.size.height,
+                                         (int)params.rect.x,
+                                         (int)params.rect.y,
+                                         (int)params.rect.width,
+                                         (int)params.rect.height,
                                          NULL,
                                          NULL,
                                          GetModuleHandle(NULL),
@@ -81,7 +88,7 @@ void Window::initialize()
 
   // set pixel format
   GLuint pixelFormat = ChoosePixelFormat(hiddenMembers->deviceContext, &pfd);
-	SetPixelFormat(hiddenMembers->deviceContext, pixelFormat, &pfd);
+  SetPixelFormat(hiddenMembers->deviceContext, pixelFormat, &pfd);
 
   // get a rendering context
   hiddenMembers->glContext = wglCreateContext(hiddenMembers->deviceContext);
@@ -89,7 +96,7 @@ void Window::initialize()
   // activate the OpenGL rendering context
   wglMakeCurrent(hiddenMembers->deviceContext, hiddenMembers->glContext);
 
-  context.reset(new Context);
+  context.reset(new gl::Context);
 }
 
 void Window::finalize()
@@ -121,7 +128,16 @@ void Window::finalize()
   delete hiddenMembers;
 }
 
+void Window::open()
+{
+  DOUT("Window::open()");
+  ShowWindow(hiddenMembers->handle, SW_SHOW);
+}
+
 void Window::close()
 {
   DOUT("Window::close()");
+}
+
+}
 }

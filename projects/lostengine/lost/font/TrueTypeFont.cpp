@@ -5,7 +5,6 @@
 #include <stdexcept>
 
 using namespace std;
-using namespace boost;
 using namespace lost::bitmap;
 using namespace lost::font::freetype;
 using namespace lost::math;
@@ -161,8 +160,7 @@ void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects,
   pmax.y = max(pmax.y, tr.maxY());
 }
 
-RenderedTextPtr TrueTypeFont::render(const std::string & inText,
-                                boost::uint32_t inSizeInPoints)
+RenderedTextPtr TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints)
 {
 //  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
@@ -176,9 +174,7 @@ RenderedTextPtr TrueTypeFont::render(const std::string & inText,
   return render(decodedString, inSizeInPoints);
 }
 
-void TrueTypeFont::render(const std::string & inText,
-            boost::uint32_t inSizeInPoints,
-            RenderedTextPtr target)
+void TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints, RenderedTextPtr target)
 {
 //  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
@@ -220,7 +216,7 @@ RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
 }
 
 void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
-            boost::uint32_t inSizeInPoints,
+            uint32_t inSizeInPoints,
             RenderedTextPtr target)
 {
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);

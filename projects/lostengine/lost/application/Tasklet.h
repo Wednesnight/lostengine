@@ -5,7 +5,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/WindowParams.h"
 #include "lost/application/Queue.h"
-#include <luabind/luabind.hpp>
+#include "lost/lua/lua.h"
 
 namespace lost
 {

@@ -51,7 +51,7 @@ struct TrueTypeFont
    */
   bitmap::BitmapPtr
   renderGlyphToBitmap(fhtagn::text::utf32_char_t c,
-                      boost::uint32_t inSizeInPoints);
+                      uint32_t inSizeInPoints);
     
   /** renders the given string with this font and returns it as a textured mesh that
    *  has it's origin at 0,0.
@@ -63,18 +63,18 @@ struct TrueTypeFont
    *
    */
   RenderedTextPtr render(const fhtagn::text::utf32_string& inText,
-                  boost::uint32_t inSizeInPoints);
+                  uint32_t inSizeInPoints);
 
   RenderedTextPtr render(const std::string & inText,
-                  boost::uint32_t inSizeInPoints);
+                  uint32_t inSizeInPoints);
 
   // same as above ,but the provided mesh is reused 
   void render(const fhtagn::text::utf32_string& inText,
-              boost::uint32_t inSizeInPoints,
+              uint32_t inSizeInPoints,
               RenderedTextPtr target);
 
   void render(const std::string & inText,
-              boost::uint32_t inSizeInPoints,
+              uint32_t inSizeInPoints,
               RenderedTextPtr target);
   
   
@@ -83,7 +83,7 @@ struct TrueTypeFont
    *  @return true if the glyph was rendered, false if it was cached and didn't need to be rendered again.
    */
   bool renderGlyph(fhtagn::text::utf32_char_t c,
-                   boost::uint32_t inSizeInPoints);
+                   uint32_t inSizeInPoints);
   
   /** builds a new texture atlas from the current glyphs in the cache.
    *  
@@ -105,7 +105,7 @@ struct TrueTypeFont
 
   lost::math::Vec2  atlasSize;
   
-  std::map<fhtagn::text::utf32_char_t, std::map<boost::uint32_t, GlyphPtr> > char2size2glyph; 
+  std::map<fhtagn::text::utf32_char_t, std::map<uint32_t, GlyphPtr> > char2size2glyph; 
   std::vector<GlyphPtr> glyphs; // this list of glyphs contains the glyphs in the order they were rendered
                                 // this is important to preserve the ordering fo rth packing of the atlas
 

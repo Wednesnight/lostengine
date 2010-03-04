@@ -39,7 +39,8 @@ namespace lost
       lua(new State(loader)),
       name("<unnamed tasklet>"),
       renderNode(new Node()),
-      updateQueue(new Queue())
+      updateQueue(new Queue()),
+	  window(NULL)
     {
       waitForEvents = false;
       // bind lostengine lua mappings
@@ -106,7 +107,7 @@ namespace lost
     void Tasklet::render()
     {
       // render
-      if(window)
+      if(window != NULL)
       {
         renderNode->process(window->context);
         window->context->swapBuffers();
@@ -123,7 +124,7 @@ namespace lost
     {    
       bool result = true;
       // make sure that our GL context is the current context on startup of this thread
-      if(window)
+      if(window != NULL)
       {
         window->context->makeCurrent();
       }

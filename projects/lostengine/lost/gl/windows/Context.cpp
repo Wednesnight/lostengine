@@ -1,4 +1,5 @@
-#include "../Context.h"
+#include "lost/gl/Context.h"
+#include "lost/gl/gl.h"
 
 namespace lost
 {
@@ -33,7 +34,7 @@ namespace lost
 
     void Context::swapBuffers()
     {
-    //  wglSwapLayerBuffers(hiddenMembers->glDeviceContext, WGL_SWAP_MAIN_PLANE);
+      //wglSwapLayerBuffers(hiddenMembers->glDeviceContext, WGL_SWAP_MAIN_PLANE);
       SwapBuffers(hiddenMembers->glDeviceContext);
     }
 
@@ -45,6 +46,20 @@ namespace lost
     void Context::multithreaded(bool enable)
     {
       // FIXME: implement Context::multithreaded
+    }
+
+    void* Context::getCurrentOsSpecific()
+    {
+      Context::ContextHiddenMembers* members = new Context::ContextHiddenMembers;
+	  members->glDeviceContext = wglGetCurrentDC();
+	  members->glContext = wglGetCurrentContext();
+      return members;
+	}
+    
+    void Context::setCurrentOsSpecififc(void* ctx)
+    {
+      Context::ContextHiddenMembers* members = (Context::ContextHiddenMembers*)ctx;
+      wglMakeCurrent(members->glDeviceContext, members->glContext);
     }
 
   }
