@@ -104,10 +104,10 @@ namespace math
       zero();
       m[0] = 2 / (rect.width - rect.x);
       m[5] = 2 / (rect.height - rect.y);
-      m[10] = -2 / (nearAndFar.far - nearAndFar.near);
+      m[10] = -2 / (nearAndFar.max - nearAndFar.min);
       m[12] = -((rect.width + rect.x) / (rect.width - rect.x));
       m[13] = -((rect.height + rect.y) / (rect.height - rect.y));
-      m[14] = -((nearAndFar.far + nearAndFar.near) / (nearAndFar.far - nearAndFar.near));
+      m[14] = -((nearAndFar.max + nearAndFar.min) / (nearAndFar.max - nearAndFar.min));
       m[15] = 1.0;
     }
 
@@ -115,13 +115,13 @@ namespace math
     {
       float radFovY = lost::math::deg2rad(fovy / 2.0f);
       float f = cos(radFovY) / sin(radFovY);
-      float deltaZ = nearAndFar.far - nearAndFar.near;
+      float deltaZ = nearAndFar.max - nearAndFar.min;
       
       float m0 = f / aspect;
       float m5 = f;
-      float m10 = - (nearAndFar.far + nearAndFar.near) / deltaZ;
+      float m10 = - (nearAndFar.max + nearAndFar.min) / deltaZ;
       float m11 = -1;
-      float m14 = (-2 * nearAndFar.near * nearAndFar.far) / deltaZ;
+      float m14 = (-2 * nearAndFar.min * nearAndFar.max) / deltaZ;
       
       zero();
       m[0] = m0;

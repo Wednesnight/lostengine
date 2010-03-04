@@ -1,0 +1,14 @@
+#ifndef LOST_PREFIX_DEBUG_PCH
+#define LOST_PREFIX_DEBUG_PCH
+
+#ifdef __cplusplus
+  #define LOST_GL_ENABLE_DEBUG
+  #define LOST_GL_ENABLE_DEBUG_THROW
+  #define LOST_LOGGER_ENABLE_DOUT
+  #define LOST_LOGGER_ENABLE_EOUT
+  #define LOST_LOGGER_ENABLE_IOUT
+  #define LOST_LOGGER_ENABLE_WOUT
+  #include "prefix-shared.h"
+#endif
+
+#endif

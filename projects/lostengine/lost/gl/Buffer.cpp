@@ -21,7 +21,7 @@ namespace gl
   }
 
    void Buffer::bind() { Buffer::bind(target); }
-   void Buffer::Buffer::unbind() { glBindBuffer(target, 0); }
+   void Buffer::unbind() { glBindBuffer(target, 0); }
    void Buffer::bufferData(GLsizeiptr size, const GLvoid* data, GLenum usage) {Buffer::bufferData(target, size, data, usage);}
    void Buffer::bindBufferData(GLsizeiptr size, const GLvoid* data, GLenum usage) {bind();Buffer::bufferData(target, size, data, usage);}
    void Buffer::bufferSubData(GLintptr offset,GLsizeiptr sizeInBytes,	const GLvoid* data) {Buffer::bufferSubData(target, offset, size, data);};

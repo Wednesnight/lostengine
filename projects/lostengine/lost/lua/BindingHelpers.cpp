@@ -1,6 +1,4 @@
-#include "lost/resource/DefaultLoader.h"
-#include "lost/platform/shared_ptr.h"
-#include "lost/application/AccelerometerEvent.h"
+//#include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/KeyEvent.h"
@@ -11,17 +9,12 @@
 #include "lost/gl/Context.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/camera/Camera.h"
-#include "lost/common/Color.h"
 #include "lost/event/Event.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
 #include "lost/lsystem/LSystem.h"
 #include "lost/lua/State.h"
-#include "lost/math/Rect.h"
-#include "lost/math/Vec2.h"
-#include "lost/math/Vec3.h"
-#include "lost/math/Vec4.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/Repository.h"
@@ -40,7 +33,7 @@ namespace luabind
     return p.get();
   }
   
-  GET_POINTER(lost::application::AccelerometerEvent);
+//  GET_POINTER(lost::application::AccelerometerEvent);
   GET_POINTER(lost::application::Application);
   GET_POINTER(lost::application::ApplicationEvent);
   GET_POINTER(lost::application::KeyEvent);
@@ -51,7 +44,6 @@ namespace luabind
   GET_POINTER(lost::application::Touch);
   GET_POINTER(lost::bitmap::Bitmap);
   GET_POINTER(lost::camera::Camera);
-  GET_POINTER(lost::common::Color);
   GET_POINTER(lost::event::Event);
   GET_POINTER(lost::gl::Context);
   GET_POINTER(lost::gl::FrameBuffer);

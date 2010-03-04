@@ -24,7 +24,7 @@ typedef double GLdouble;
 typedef double GLclampd;
 typedef void GLvoid;
 
-#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32
 typedef int GLintptr;
 typedef int GLsizeiptr;
 #else
