@@ -2,11 +2,18 @@
 #define LOST_PREFIX_SHARED_H
 
 #ifdef __cplusplus
-  #include "lost/platform/stdint.h"
+
+  #if defined WIN32
+    #include "lost/platform/stdint.h"
+  #else
+    #include <stdint.h>
+  #endif
+
   #include "lost/platform/shared_ptr.h"
   //#include "lost/gl/gl.h"
 
   #include "ft2build.h"
+
 #endif
 
 #endif
