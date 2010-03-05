@@ -8,6 +8,7 @@
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
+#include "lost/math/Matrix.h"
 #include "lost/platform/shared_ptr.h"
 
 namespace lost
@@ -57,6 +58,7 @@ public:
     void set(const lost::math::Vec4& vec);
     void set(const lost::math::Vec2& inVec);
     void set(const lost::math::Vec3& inVec);
+    void set(const math::Matrix& mat);
   };
 
   typedef std::map<std::string, ShaderProgram::Parameter> ParameterMap;
@@ -86,10 +88,11 @@ public:
   void set(const std::string& inName, const lost::math::Vec4& inVal);
   void set(const std::string& inName, const lost::math::Vec2& inVal);
   void set(const std::string& inName, const lost::math::Vec3& inVal);
+  void set(const std::string& inName, const math::Matrix& inVal);
+  bool hasParam(const std::string& name);
 
   ParameterMap parameterMap();
 
-private:
   void buildParamMap();
   void addUniforms();
 

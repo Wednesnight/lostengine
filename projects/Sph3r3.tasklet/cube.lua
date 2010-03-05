@@ -72,6 +72,8 @@ function create(sideLength, numPlanes)
   m.material.color = Color(1,.5,0)
   m.material.blend = true
   m.material.shader:enable()
+  m.material.shader:set("modelViewMatrix", lost.math.MatrixRotX(13))
+  m.material.shader:set("projectionMatrix", lost.math.MatrixRotX(13))
   m.material.shader:set("lightPosition", Vec3(200,200,200))
 --  m.material.shader:setFloat("radius", .1)
   m.material.shader:disable()

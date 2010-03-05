@@ -16,6 +16,9 @@ RangeManager::~RangeManager()
 
 RangeManager::RangeId RangeManager::alloc(uint32_t num)
 {
+  RangeManager::RangeId result = 0;
+  
+  return result;
 }
 
 void RangeManager::free(RangeId range)
