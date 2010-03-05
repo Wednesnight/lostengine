@@ -35,6 +35,7 @@ void ToggleClearColor::process(const lost::application::Tasklet* sender) const
 NativeTasklet::NativeTasklet()
 {
   name = "NativeTasklet Demo";
+  waitForEvents = true;
 }
 
 void NativeTasklet::init()
