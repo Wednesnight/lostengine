@@ -15,9 +15,10 @@ ShaderProgram::Parameter::Parameter()
   paramType = UNDEFINED;
 }
 
-ShaderProgram::Parameter::Parameter(const std::string& inName, GLint inIndex, GLenum inGlType, GLint inSize, Parameter::Type inParamType)
-: name(inName), index(inIndex), glType(inGlType), size(inSize), paramType(inParamType)
-{}
+ShaderProgram::Parameter::Parameter(const std::string& inName, GLint inIndex, GLenum inGlType, GLint inSize, Parameter::Type inParamType, GLint loc)
+: name(inName), index(inIndex), glType(inGlType), size(inSize), paramType(inParamType), location(loc)
+{
+}
 
 void ShaderProgram::Parameter::operator=(float v) { setFloat(v); }
 void ShaderProgram::Parameter::operator=(const lost::common::Color& inCol) { set(inCol); }
@@ -28,112 +29,50 @@ void ShaderProgram::Parameter::operator=(GLint v) { setInt(v); }
 
 void ShaderProgram::Parameter::setInt(GLint inVal)
 {
-  if(paramType == UNIFORM)
-  {  glUniform1i(index, inVal);GLDEBUG_THROW;}
-  else
-  {  throw std::runtime_error("paramType undefined for: '"+name+"'");}
+  glUniform1i(location, inVal);GLDEBUG_THROW;
 }
 
 void ShaderProgram::Parameter::setFloat(float inVal)
 {
-  if(paramType == UNIFORM)
-  {  glUniform1f(index, inVal);GLDEBUG_THROW;}
-  else if(paramType == ATTRIBUTE)
-  {  glVertexAttrib1f(index, inVal);GLDEBUG_THROW;}
-  else
-  {  throw std::runtime_error("paramType undefined for: '"+name+"'");}
+  glUniform1f(location, inVal);GLDEBUG_THROW;
 }
 
 void ShaderProgram::Parameter::set(const lost::common::Color& inCol)
 {
-  if(paramType == UNIFORM)
-  {
     switch(glType)
     {
-      case GL_FLOAT_VEC3: glUniform3f(index, inCol.r(), inCol.g(), inCol.b());GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glUniform4f(index, inCol.r(), inCol.g(), inCol.b(), inCol.a());GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC3: glUniform3f(location, inCol.r(), inCol.g(), inCol.b());GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC4: glUniform4f(location, inCol.r(), inCol.g(), inCol.b(), inCol.a());GLDEBUG_THROW;break;
       default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Color'");
     }
-  }
-  else if(paramType == ATTRIBUTE)
-  {
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glVertexAttrib3f(index, inCol.r(), inCol.g(), inCol.b());GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glVertexAttrib4f(index, inCol.r(), inCol.g(), inCol.b(), inCol.a());GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Color'");
-    }
-  }
-  else
-    throw std::runtime_error("paramType undefined for: '"+name+"'");
 }
 
 void ShaderProgram::Parameter::set(const lost::math::Vec4& vec)
 {
-  if(paramType == UNIFORM)
-  {
     switch(glType)
     {
-      case GL_FLOAT_VEC3: glUniform3f(index, vec.x, vec.y, vec.z);GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glUniform4f(index, vec.x, vec.y, vec.z, vec.w);GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC3: glUniform3f(location, vec.x, vec.y, vec.z);GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC4: glUniform4f(location, vec.x, vec.y, vec.z, vec.w);GLDEBUG_THROW;break;
       default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec4'");
     }
-  }
-  else if(paramType == ATTRIBUTE)
-  {
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glVertexAttrib3f(index, vec.x, vec.y, vec.z);GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glVertexAttrib4f(index, vec.x, vec.y, vec.z, vec.w);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec4'");
-    }
-  }
-  else
-    throw std::runtime_error("paramType undefined for: '"+name+"'");
 }
 
 void ShaderProgram::Parameter::set(const lost::math::Vec2& inVec)
 {
-  if(paramType == UNIFORM)
-  {
     switch(glType)
     {
-      case GL_FLOAT_VEC2: glUniform2f(index, inVec.x, inVec.y);GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC2: glUniform2f(location, inVec.x, inVec.y);GLDEBUG_THROW;break;
       default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec2'");
     }
-  }
-  else if(paramType == ATTRIBUTE)
-  {
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glVertexAttrib2f(index, inVec.x, inVec.y);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec2'");
-    }
-  }
-  else
-    throw std::runtime_error("paramType undefined for: '"+name+"'");
 }
 
 void ShaderProgram::Parameter::set(const lost::math::Vec3& inVec)
 {
-  if(paramType == UNIFORM)
-  {
     switch(glType)
     {
-      case GL_FLOAT_VEC3: glUniform3f(index, inVec.x, inVec.y, inVec.z);GLDEBUG_THROW;break;
+      case GL_FLOAT_VEC3: glUniform3f(location, inVec.x, inVec.y, inVec.z);GLDEBUG_THROW;break;
       default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec3'");
     }
-  }
-  else if(paramType == ATTRIBUTE)
-  {
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glVertexAttrib3f(index, inVec.x, inVec.y, inVec.z);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec3'");
-    }
-  }
-  else
-    throw std::runtime_error("paramType undefined for: '"+name+"'");
 }
 
 ShaderProgram::ShaderProgram()
@@ -253,26 +192,7 @@ ShaderProgram::ParameterMap ShaderProgram::parameterMap()
 void ShaderProgram::buildParamMap()
 {
   name2param.clear();
-  addAttributes();
   addUniforms();
-}
-
-void ShaderProgram::addAttributes()
-{
-  GLint numAttributes = param(GL_ACTIVE_ATTRIBUTES);
-  int bufferSize = param(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);;
-  shared_array<char> buffer(new char[bufferSize]);
-  GLint writtenBytes = 0;
-  GLenum type;
-  GLint size;
-
-  for(GLint i=0; i<numAttributes; ++i)
-  {
-    glGetActiveAttrib(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
-    Parameter param(buffer.get(), i, type, size, Parameter::ATTRIBUTE);
-    name2param[param.name] = param;
-//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
-  }
 }
 
 void ShaderProgram::addUniforms()
@@ -287,7 +207,8 @@ void ShaderProgram::addUniforms()
   for(GLint i=0; i<numAttributes; ++i)
   {
     glGetActiveUniform(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
-    Parameter param(buffer.get(), i, type, size, Parameter::UNIFORM);
+    GLint loc = glGetUniformLocation(program, buffer.get());
+    Parameter param(buffer.get(), i, type, size, Parameter::UNIFORM, loc);
     name2param[param.name] = param;
 //    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
   }
