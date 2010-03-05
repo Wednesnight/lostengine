@@ -33,6 +33,7 @@ public:
     GLint           index;
     GLenum          glType;     // numerical data type (int, float, bool etc.)
     GLint           size;       // size of array
+    GLint           location;
     Parameter::Type paramType;  // shader program parameter type, i.e. attribute or uniform
 
     Parameter();
@@ -40,7 +41,8 @@ public:
               GLint inIndex,
               GLenum inGlType,
               GLint inSize,
-              Parameter::Type inParamType);
+              Parameter::Type inParamType,
+              GLint loc);
 
     void operator=(float v);
     void operator=(const lost::common::Color& inCol);
@@ -89,7 +91,6 @@ public:
 
 private:
   void buildParamMap();
-  void addAttributes();
   void addUniforms();
 
   GLuint        program;
