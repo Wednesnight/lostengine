@@ -1,12 +1,15 @@
-#include <iostream>
-
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/MultiThreadedTasklet.h"
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
+
 #include <windows.h>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
 
 namespace lost
 {
@@ -14,12 +17,27 @@ namespace application
 {
 struct Application::ApplicationHiddenMembers
 {
-  bool running;
+  boost::condition condition;
 };
+
+Application* currentApplication = NULL;
+BOOL WINAPI ConsoleHandler(DWORD event)
+{
+  if (currentApplication != NULL) currentApplication->quit();
+  return TRUE;
+}
 
 void Application::initialize()
 {
   DOUT("Application::initialize()");
+
+  // setup console handler
+  currentApplication = this;
+  if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)ConsoleHandler, TRUE) == FALSE)
+  {
+    // unable to install handler for console breaks
+    throw runtime_error("SetConsoleCtrlHandler() failed");
+  }
 
   // initialize hiddenMembers
   hiddenMembers = new ApplicationHiddenMembers;
@@ -38,29 +56,18 @@ void Application::run()
   ApplicationEventPtr event = ApplicationEvent::create(ApplicationEvent::RUN());
   eventDispatcher->dispatchEvent(event);
 
-  MSG msg;
-  hiddenMembers->running = true;
-  while (hiddenMembers->running)
+  boost::mutex applicationMutex;
+  boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
+  while (running)
   {
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
-    {
-      switch(msg.message)
-      {
-        case WM_QUIT:
-          hiddenMembers->running = false;
-          break;
-
-        default:
-          DispatchMessage( &msg );
-          break;
-      }
-    }
+    hiddenMembers->condition.wait(applicationLock);
+    eventDispatcher->processEvents();
   }
-  quit();
 }
 
 void Application::shutdown()
 {
+  hiddenMembers->condition.notify_one();
 }
 
 void Application::showMouse(bool visible)
@@ -69,6 +76,7 @@ void Application::showMouse(bool visible)
 
 void Application::processEvents(const ProcessEventPtr& event)
 {
+  hiddenMembers->condition.notify_one();
 }
 
 void Application::taskletSpawn(const SpawnTaskletEventPtr& event)

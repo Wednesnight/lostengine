@@ -48,7 +48,7 @@ namespace lost
       pos = stateMap.find(state);
       if(pos != stateMap.end())
         stateMap.erase(pos);
-      DOUT("stateMap size: "<<stateMap.size());
+//      DOUT("stateMap size: "<<stateMap.size());
     }
     
     std::string State::getScriptFilename(const std::string& scriptContent, const std::string& defaultName)

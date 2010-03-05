@@ -153,7 +153,9 @@ namespace lost
         haveActiveTasklets = (*idx)->alive();
         if (haveActiveTasklets) break;
       }
-      if (!haveActiveTasklets)
+
+      // if we're still running and there's no tasklet left we initialize a shutdown
+      if (running && !haveActiveTasklets)
       {
         DOUT("Last tasklet died, terminating.");
         shutdown();

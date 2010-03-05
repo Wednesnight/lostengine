@@ -28,6 +28,7 @@ namespace lost
       if (wglGetCurrentDC() != hiddenMembers->glDeviceContext ||
           wglGetCurrentContext() != hiddenMembers->glContext)
       {
+        DOUT("current");
         wglMakeCurrent(hiddenMembers->glDeviceContext, hiddenMembers->glContext);
       }
     }
