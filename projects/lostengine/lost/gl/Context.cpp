@@ -224,20 +224,17 @@ std::map<void*, Context*> glContext2lostGlContext;
     
     void Context::transform(const math::Matrix& inTransform)
     {
-//      if(currentTransform != inTransform)
+      glMatrixMode(GL_MODELVIEW);GLDEBUG;
+      if(currentCam && currentCam->hasModelViewMatrix)
       {
-        glMatrixMode(GL_MODELVIEW);GLDEBUG;
-        if(currentCam && currentCam->hasModelViewMatrix)
-        {
-          glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
-          glMultMatrixf(inTransform.m);GLDEBUG;
-        }
-        else
-        {
-          glLoadMatrixf(inTransform.m);GLDEBUG;
-        }
-        currentTransform = inTransform;
+        glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
+        glMultMatrixf(inTransform.m);GLDEBUG;
       }
+      else
+      {
+        glLoadMatrixf(inTransform.m);GLDEBUG;
+      }
+      currentTransform = inTransform;
     }
     
     void Context::clear(GLbitfield flags) { glClear(flags);GLDEBUG; }
@@ -272,7 +269,9 @@ std::map<void*, Context*> glContext2lostGlContext;
         currentShader->disable();
       currentShader = prog;
       if(currentShader)
+      {
         currentShader->enable();
+      }
     }
 #endif    
     
@@ -382,10 +381,29 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       
       if(mesh->material)
+      {
         material(mesh->material);      
+      }
       transform(mesh->transform);
       bind(ib->gpuBuffers[0].get());
-//      glDrawRangeElements(mesh->drawMode, 0,ib->hostBuffer->count-1, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+      
+      if(currentShader)
+      {
+        if(currentShader->hasParam("projectionMatrix"))
+        {
+          currentShader->set("projectionMatrix", currentCam->projectionMatrix());
+        }
+        if(currentShader->hasParam("modelViewMatrix"))
+        {
+          if(currentCam->hasModelViewMatrix)
+            currentShader->set("modelViewMatrix", currentCam->mModelViewMatrix*mesh->transform);
+          else
+          {
+            currentShader->set("modelViewMatrix", mesh->transform);
+          }
+        }
+      }
+      
       glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);
     }
 

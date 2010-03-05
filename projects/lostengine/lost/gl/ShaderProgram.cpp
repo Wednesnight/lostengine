@@ -75,6 +75,16 @@ void ShaderProgram::Parameter::set(const lost::math::Vec3& inVec)
     }
 }
 
+void ShaderProgram::Parameter::set(const math::Matrix& mat)
+{
+  switch(glType)
+  {
+    case GL_FLOAT_MAT4: glUniformMatrix4fv(location, 1, GL_FALSE, mat.m);GLDEBUG_THROW;break;
+    default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Matrix'");
+  }
+}
+
+
 ShaderProgram::ShaderProgram()
 {
   program = glCreateProgram();GLDEBUG_THROW;
@@ -183,6 +193,13 @@ void ShaderProgram::set(const std::string& inName, const lost::common::Color& in
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec4& inVal) {param(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec2& inVal) {param(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec3& inVal) {param(inName).set(inVal);}
+void ShaderProgram::set(const std::string& inName, const math::Matrix& inVal) {param(inName).set(inVal);}
+
+bool ShaderProgram::hasParam(const std::string& name)
+{
+  return (name2param.find(name) != name2param.end());
+}
+
 
 ShaderProgram::ParameterMap ShaderProgram::parameterMap()
 {

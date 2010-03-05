@@ -242,6 +242,7 @@ namespace lost
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
             .def("parameterMap", &ShaderProgram_parameterMap)
             .scope
             [
