@@ -64,7 +64,7 @@ function RenderView:afterLayout()
     local shader = self:shader()
     if shader ~= nil then
       shader:enable()
-      for k,v in next,shader:parameterMap() do
+      for k,v in next,shader:uniformMap() do
         -- FIXME: some hard-coded values until we have edit controls
         if v.name == "width" then
           shader:setFloat(v.name, self.rect.width)
@@ -104,7 +104,7 @@ end
 function RenderView:shader(s)
   if s ~= nil and self._textureMesh ~= nil then
     s:enable()
-    for k,v in next,s:parameterMap() do
+    for k,v in next,s:uniformMap() do
       -- FIXME: some hard-coded values until we have edit controls
       if v.name == "tex" or v.name == "colorMap" then
         s:setInt(v.name, 0)

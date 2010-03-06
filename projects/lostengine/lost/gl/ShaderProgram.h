@@ -21,28 +21,19 @@ typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
 struct ShaderProgram
 {
 public:
-  struct Parameter
+  struct Uniform
   {
-    enum Type
-    {
-      UNDEFINED = 0,
-      ATTRIBUTE = 1,
-      UNIFORM = 2
-    };
-
     std::string     name;
     GLint           index;
     GLenum          glType;     // numerical data type (int, float, bool etc.)
     GLint           size;       // size of array
     GLint           location;
-    Parameter::Type paramType;  // shader program parameter type, i.e. attribute or uniform
 
-    Parameter();
-    Parameter(const std::string& inName,
+    Uniform();
+    Uniform(const std::string& inName,
               GLint inIndex,
               GLenum inGlType,
               GLint inSize,
-              Parameter::Type inParamType,
               GLint loc);
 
     void operator=(float v);
@@ -61,13 +52,13 @@ public:
     void set(const math::Matrix& mat);
   };
 
-  typedef std::map<std::string, ShaderProgram::Parameter> ParameterMap;
+  typedef std::map<std::string, ShaderProgram::Uniform> UniformMap;
   typedef std::list<lost::shared_ptr<Shader> >           ShaderList;
 
   ShaderProgram();
   virtual ~ShaderProgram();
-  Parameter& param(const std::string& inName);
-  Parameter& operator[](const std::string& inName);
+  Uniform& uniform(const std::string& inName);
+  Uniform& operator[](const std::string& inName);
   void attach(lost::shared_ptr<Shader> inShader);
   // detaches shaders and clears all internal references as well as param map
   void detachAllShaders();
@@ -91,13 +82,13 @@ public:
   void set(const std::string& inName, const math::Matrix& inVal);
   bool hasParam(const std::string& name);
 
-  ParameterMap parameterMap();
+  UniformMap& uniformMap();
 
-  void buildParamMap();
+  void buildUniformMap();
   void addUniforms();
 
   GLuint        program;
-  ParameterMap  name2param;
+  UniformMap  name2uniform;
   ShaderList    shaders;
 };
 }
