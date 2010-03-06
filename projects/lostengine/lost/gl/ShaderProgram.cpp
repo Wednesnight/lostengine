@@ -1,5 +1,4 @@
 #include "lost/gl/ShaderProgram.h"
-
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
 
@@ -7,84 +6,6 @@ namespace lost
 {
 namespace gl
 {
-
-ShaderProgram::Uniform::Uniform()
-{
-  index = 0;
-  glType = 0;
-  size = 0;
-  location = 0;
-}
-
-ShaderProgram::Uniform::Uniform(const std::string& inName, GLint inIndex, GLenum inGlType, GLint inSize, GLint loc)
-: name(inName), index(inIndex), glType(inGlType), size(inSize), location(loc)
-{
-}
-
-void ShaderProgram::Uniform::operator=(float v) { setFloat(v); }
-void ShaderProgram::Uniform::operator=(const lost::common::Color& inCol) { set(inCol); }
-void ShaderProgram::Uniform::operator=(const lost::math::Vec2& vec) { set(vec); }
-void ShaderProgram::Uniform::operator=(const lost::math::Vec3& vec) { set(vec); }
-void ShaderProgram::Uniform::operator=(const lost::math::Vec4& vec) { set(vec); }
-void ShaderProgram::Uniform::operator=(GLint v) { setInt(v); }
-
-void ShaderProgram::Uniform::setInt(GLint inVal)
-{
-  glUniform1i(location, inVal);GLDEBUG_THROW;
-}
-
-void ShaderProgram::Uniform::setFloat(float inVal)
-{
-  glUniform1f(location, inVal);GLDEBUG_THROW;
-}
-
-void ShaderProgram::Uniform::set(const lost::common::Color& inCol)
-{
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glUniform3f(location, inCol.r(), inCol.g(), inCol.b());GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glUniform4f(location, inCol.r(), inCol.g(), inCol.b(), inCol.a());GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Color'");
-    }
-}
-
-void ShaderProgram::Uniform::set(const lost::math::Vec4& vec)
-{
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glUniform3f(location, vec.x, vec.y, vec.z);GLDEBUG_THROW;break;
-      case GL_FLOAT_VEC4: glUniform4f(location, vec.x, vec.y, vec.z, vec.w);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec4'");
-    }
-}
-
-void ShaderProgram::Uniform::set(const lost::math::Vec2& inVec)
-{
-    switch(glType)
-    {
-      case GL_FLOAT_VEC2: glUniform2f(location, inVec.x, inVec.y);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec2'");
-    }
-}
-
-void ShaderProgram::Uniform::set(const lost::math::Vec3& inVec)
-{
-    switch(glType)
-    {
-      case GL_FLOAT_VEC3: glUniform3f(location, inVec.x, inVec.y, inVec.z);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec3'");
-    }
-}
-
-void ShaderProgram::Uniform::set(const math::Matrix& mat)
-{
-  switch(glType)
-  {
-    case GL_FLOAT_MAT4: glUniformMatrix4fv(location, 1, GL_FALSE, mat.m);GLDEBUG_THROW;break;
-    default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Matrix'");
-  }
-}
-
 
 ShaderProgram::ShaderProgram()
 {
@@ -96,9 +17,9 @@ ShaderProgram::~ShaderProgram()
   glDeleteProgram(program);
 }
 
-ShaderProgram::Uniform& ShaderProgram::uniform(const std::string& inName)
+Uniform& ShaderProgram::uniform(const std::string& inName)
 {
-  UniformMap::iterator pos = name2uniform.find(inName);
+  ShaderProgram::UniformMap::iterator pos = name2uniform.find(inName);
   if(pos != name2uniform.end())
   {
     return pos->second;
@@ -109,7 +30,7 @@ ShaderProgram::Uniform& ShaderProgram::uniform(const std::string& inName)
   }
 }
 
-ShaderProgram::Uniform& ShaderProgram::operator[](const std::string& inName)
+Uniform& ShaderProgram::operator[](const std::string& inName)
 {
   return uniform(inName);
 }

@@ -640,6 +640,7 @@
 		EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
+		EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB235E31142AD89009578A9 /* Uniform.cpp */; };
 		EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
@@ -1015,6 +1016,7 @@
 		EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SingleThreadedTasklet.cpp; sourceTree = "<group>"; };
 		EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiThreadedTasklet.cpp; sourceTree = "<group>"; };
 		EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
+		EAB235E31142AD89009578A9 /* Uniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Uniform.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EAB67C611115EF6300442904 /* BufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
 		EAB67C741115F0ED00442904 /* HostBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostBuffer.cpp; sourceTree = "<group>"; };
@@ -1650,6 +1652,7 @@
 				EA0F5CC41051C24300545DCC /* ShaderHelper.cpp */,
 				EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
+				EAB235E31142AD89009578A9 /* Uniform.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
 				EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */,
 			);
@@ -2414,6 +2417,7 @@
 				8DBDEEEF113EDF7500F39BD5 /* tasklet.cpp in Sources */,
 				8DBDEEF6113EDF8300F39BD5 /* variant.cpp in Sources */,
 				8DBDEEF7113EDF8300F39BD5 /* version.cpp in Sources */,
+				EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
