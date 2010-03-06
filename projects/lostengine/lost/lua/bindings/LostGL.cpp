@@ -7,6 +7,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
+#include "lost/gl/Uniform.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/HybridVertexBuffer.h"
@@ -244,14 +245,21 @@ namespace lost
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
             .def("uniformMap", &ShaderProgram_uniformMap)
-            .scope
-            [
-              class_<ShaderProgram::Uniform>("Uniform")
-                .def_readonly("name", &ShaderProgram::Uniform::name)
-                .def_readonly("index", &ShaderProgram::Uniform::index)
-                .def_readonly("glType", &ShaderProgram::Uniform::glType)
-                .def_readonly("size", &ShaderProgram::Uniform::size)
-            ]
+        ]
+      ];
+    }
+        
+    void LostGLUniform(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<Uniform>("Uniform")
+            .def_readonly("name", &Uniform::name)
+            .def_readonly("index", &Uniform::index)
+            .def_readonly("glType", &Uniform::glType)
+            .def_readonly("size", &Uniform::size)
         ]
       ];
     }
@@ -311,6 +319,7 @@ namespace lost
       LostGLRenderBuffer(state);
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE            
       LostGLShaderProgram(state);
+      LostGLUniform(state);
 #endif
       LostGLTexture(state);
     }
