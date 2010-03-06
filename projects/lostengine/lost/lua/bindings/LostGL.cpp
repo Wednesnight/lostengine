@@ -207,14 +207,14 @@ namespace lost
       ];
     }
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
-    object ShaderProgram_parameterMap(object shaderProgramObj)
+    object ShaderProgram_uniformMap(object shaderProgramObj)
     {
       ShaderProgramPtr shaderProgram = object_cast<ShaderProgramPtr>(shaderProgramObj);
       object result = newtable(shaderProgramObj.interpreter());
-      ShaderProgram::ParameterMap params = shaderProgram->parameterMap();
-      if (params.size() > 0)
+      ShaderProgram::UniformMap& uniformMap = shaderProgram->uniformMap();
+      if (uniformMap.size() > 0)
       {
-        for (ShaderProgram::ParameterMap::iterator idx = params.begin(); idx != params.end(); ++idx)
+        for (ShaderProgram::UniformMap::iterator idx = uniformMap.begin(); idx != uniformMap.end(); ++idx)
         {
           result[idx->first] = idx->second;
         }
@@ -243,21 +243,17 @@ namespace lost
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
-            .def("parameterMap", &ShaderProgram_parameterMap)
+            .def("uniformMap", &ShaderProgram_uniformMap)
             .scope
             [
-              class_<ShaderProgram::Parameter>("Parameter")
-                .def_readonly("name", &ShaderProgram::Parameter::name)
-                .def_readonly("index", &ShaderProgram::Parameter::index)
-                .def_readonly("glType", &ShaderProgram::Parameter::glType)
-                .def_readonly("size", &ShaderProgram::Parameter::size)
-                .def_readonly("paramType", &ShaderProgram::Parameter::paramType)
+              class_<ShaderProgram::Uniform>("Uniform")
+                .def_readonly("name", &ShaderProgram::Uniform::name)
+                .def_readonly("index", &ShaderProgram::Uniform::index)
+                .def_readonly("glType", &ShaderProgram::Uniform::glType)
+                .def_readonly("size", &ShaderProgram::Uniform::size)
             ]
         ]
       ];
-      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNDEFINED"] = (int)ShaderProgram::Parameter::UNDEFINED;
-      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["ATTRIBUTE"] = (int)ShaderProgram::Parameter::ATTRIBUTE;
-      globals(state)["lost"]["gl"]["ShaderProgram"]["Parameter"]["UNIFORM"]   = (int)ShaderProgram::Parameter::UNIFORM;
     }
 #endif
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)

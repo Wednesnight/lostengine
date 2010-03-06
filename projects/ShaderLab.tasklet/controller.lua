@@ -77,13 +77,7 @@ controller.droppedShader = function(event)
       local shaderProgram = lost.gl.loadShader(shaderLoader, controller.shaderFilename)
 
       local typeName = function(paramType)
-        if paramType == lost.gl.ShaderProgram.Parameter.ATTRIBUTE then
-          return "attribute"
-        elseif paramType == lost.gl.ShaderProgram.Parameter.UNIFORM then
-          return "uniform"
-        else
-          return "undefined"
-        end
+        return "uniform"
       end
 
       local valueTypeName = function(paramType)
@@ -147,7 +141,7 @@ controller.droppedShader = function(event)
       shaderProgram:enable()
 
       -- sort by param name
-      local paramMap = shaderProgram:parameterMap()
+      local paramMap = shaderProgram:uniformMap()
       local paramNames = {}
       for k in next,paramMap do
         table.insert(paramNames, k)
