@@ -10,6 +10,8 @@
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Circular.h"
 #include "lost/platform/shared_ptr.h"
+#include "lost/gl/Texture.h"
+#include "lost/gl/ShaderProgram.h"
 
 using namespace luabind;
 using namespace lost::mesh;

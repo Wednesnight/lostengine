@@ -11,6 +11,8 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/bitmap/Bitmap.h"
+#include "lost/gl/HybridIndexBuffer.h"
+#include "lost/gl/HybridVertexBuffer.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;

@@ -644,6 +644,7 @@
 		EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
+		EAB61FD31142ED0100295C1B /* VertexAttribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB61FD21142ED0100295C1B /* VertexAttribute.cpp */; };
 		EAB67C621115EF6300442904 /* BufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB67C611115EF6300442904 /* BufferLayout.cpp */; };
 		EAB67C631115EF6300442904 /* BufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB67C611115EF6300442904 /* BufferLayout.cpp */; };
 		EAB67C641115EF6300442904 /* BufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB67C611115EF6300442904 /* BufferLayout.cpp */; };
@@ -1018,6 +1019,7 @@
 		EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EAB235E31142AD89009578A9 /* Uniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Uniform.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
+		EAB61FD21142ED0100295C1B /* VertexAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexAttribute.cpp; sourceTree = "<group>"; };
 		EAB67C611115EF6300442904 /* BufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
 		EAB67C741115F0ED00442904 /* HostBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HostBuffer.cpp; sourceTree = "<group>"; };
 		EAB67CE9111603D500442904 /* HybridIndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HybridIndexBuffer.cpp; sourceTree = "<group>"; };
@@ -1654,6 +1656,7 @@
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAB235E31142AD89009578A9 /* Uniform.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
+				EAB61FD21142ED0100295C1B /* VertexAttribute.cpp */,
 				EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */,
 			);
 			path = gl;
@@ -2418,6 +2421,7 @@
 				8DBDEEF6113EDF8300F39BD5 /* variant.cpp in Sources */,
 				8DBDEEF7113EDF8300F39BD5 /* version.cpp in Sources */,
 				EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */,
+				EAB61FD31142ED0100295C1B /* VertexAttribute.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

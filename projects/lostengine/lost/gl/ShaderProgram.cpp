@@ -35,13 +35,12 @@ Uniform& ShaderProgram::operator[](const std::string& inName)
   return uniform(inName);
 }
 
-void ShaderProgram::attach(lost::shared_ptr<Shader> inShader)
+void ShaderProgram::attach(const ShaderPtr& inShader)
 {
   glAttachShader(program, inShader->shader);GLDEBUG_THROW;
   shaders.push_back(inShader);
 }
 
-// detaches shaders and clears all internal references as well as param map
 void ShaderProgram::detachAllShaders()
 {
   for(ShaderList::iterator i=shaders.begin(); i!=shaders.end(); ++i)
@@ -49,13 +48,11 @@ void ShaderProgram::detachAllShaders()
     glDetachShader(program, (*i)->shader);GLDEBUG_THROW;
   }
   shaders.clear();
-  name2uniform.clear();
 }
 
 void ShaderProgram::link()
 {
   glLinkProgram(program);GLDEBUG_THROW;
-  name2uniform.clear();
 }
 
 bool ShaderProgram::linked()
@@ -66,8 +63,6 @@ bool ShaderProgram::linked()
 void ShaderProgram::enable()
 {
   glUseProgram(program);GLDEBUG_THROW;
-  if(name2uniform.size() == 0)
-    buildUniformMap();
 }
 
 void ShaderProgram::disable()
@@ -131,25 +126,42 @@ ShaderProgram::UniformMap& ShaderProgram::uniformMap()
 void ShaderProgram::buildUniformMap()
 {
   name2uniform.clear();
-  addUniforms();
-}
-
-void ShaderProgram::addUniforms()
-{
-  GLint numAttributes = param(GL_ACTIVE_UNIFORMS);
+  GLint numUniforms = param(GL_ACTIVE_UNIFORMS);
   int bufferSize = param(GL_ACTIVE_UNIFORM_MAX_LENGTH);
   shared_array<char> buffer(new char[bufferSize]);
   GLint writtenBytes = 0;
   GLenum type;
   GLint size;
 
-  for(GLint i=0; i<numAttributes; ++i)
+  DOUT("--- Uniforms");
+  for(GLint i=0; i<numUniforms; ++i)
   {
     glGetActiveUniform(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
     GLint loc = glGetUniformLocation(program, buffer.get());
     Uniform uniform(buffer.get(), i, type, size, loc);
     name2uniform[uniform.name] = uniform;
-//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type));
+    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
+  }
+}
+
+void ShaderProgram::buildVertexAttributeMap()
+{
+  name2vertexAttribute.clear();
+  GLint numAttributes = param(GL_ACTIVE_ATTRIBUTES);
+  int bufferSize = param(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
+  shared_array<char> buffer(new char[bufferSize]);
+  GLint writtenBytes = 0;
+  GLenum type;
+  GLint size;
+
+  DOUT("--- Attributes");
+  for(GLint i=0; i<numAttributes; ++i)
+  {
+    glGetActiveAttrib(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
+    GLint loc = glGetAttribLocation(program, buffer.get());
+    VertexAttribute attribute(buffer.get(), i, type, size, loc);
+    name2vertexAttribute[attribute.name] = attribute;
+    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
   }
 }
 
