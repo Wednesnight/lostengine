@@ -2,7 +2,6 @@ uniform vec3 lightPosition;
 varying float lightIntensity;  // will becalculated per vertex and interpolated per fragment
 uniform mat4 modelViewMatrix;  // mesh transform
 uniform mat4 projectionMatrix; // from camera
-uniform vec4 color; // same semantics as gl_Color
 
 attribute vec3 position;
 attribute vec3 normal;
