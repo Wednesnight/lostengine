@@ -323,26 +323,17 @@ std::map<void*, Context*> glContext2lostGlContext;
       Buffer* gpuBuffer = vb->bufferForUsageType(UT_position);
       bind(gpuBuffer);
       vertexArray(true);
-      // FIXME: preprocess and store the XXXpointer values in a helper struct in the hybrid buffer
       
-      GLint size = vb->hostBuffer->numScalarsForUsageType(UT_position);
-      GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_position);
-      GLsizei stride = vb->hostBuffer->layout.stride(UT_position); 
-      GLvoid* offset = (GLvoid*)vb->hostBuffer->layout.offset(UT_position);
-            
-      glVertexPointer(size,
-                      type,
-                      stride,
-                      offset);GLDEBUG;
+      const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_position);
+      glVertexPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;
 
       if(vb->hasUsageType(UT_normal))
       {
+        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_normal);
         Buffer* gpuBuffer = vb->bufferForUsageType(UT_normal);
         bind(gpuBuffer);
         normalArray(true);
-        glNormalPointer(vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_normal),
-                        vb->hostBuffer->layout.stride(UT_normal),
-                        (const GLvoid*)vb->hostBuffer->layout.offset(UT_normal));GLDEBUG;        
+        glNormalPointer(apc.type,apc.stride,apc.offset);GLDEBUG;        
       }
       else {
         normalArray(false);
@@ -353,10 +344,8 @@ std::map<void*, Context*> glContext2lostGlContext;
         Buffer* gpuBuffer = vb->bufferForUsageType(UT_color);
         bind(gpuBuffer);
         colorArray(true);
-        glColorPointer(vb->hostBuffer->numScalarsForUsageType(UT_color),
-                        vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_color),
-                        vb->hostBuffer->layout.stride(UT_color),
-                        (const GLvoid*)vb->hostBuffer->layout.offset(UT_color));GLDEBUG;        
+        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_color);
+        glColorPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;        
       }
       else {
         colorArray(false);
@@ -367,16 +356,8 @@ std::map<void*, Context*> glContext2lostGlContext;
         Buffer* gpuBuffer = vb->bufferForUsageType(UT_texcoord0);
         bind(gpuBuffer);
         texCoordArray(true);
-
-        GLint size = vb->hostBuffer->numScalarsForUsageType(UT_texcoord0);
-        GLenum type = vb->hostBuffer->layout.glScalarTypeFromUsageType(UT_texcoord0);
-        GLsizei stride = vb->hostBuffer->layout.stride(UT_texcoord0); 
-        const GLvoid* offset = (const GLvoid*)vb->hostBuffer->layout.offset(UT_texcoord0);
-        
-        glTexCoordPointer(size,
-                          type,
-                          stride,
-                          offset);GLDEBUG;        
+        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_texcoord0);
+        glTexCoordPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;        
       }
       else {
         texCoordArray(false);

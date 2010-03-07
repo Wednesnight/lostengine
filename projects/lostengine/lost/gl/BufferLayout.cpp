@@ -92,6 +92,26 @@ GLenum   glScalarTypeForElementType(ElementType et)
   return result;
 }
 
+uint32_t BufferLayout::numScalarsForUsageType(UsageType ut)
+{
+  ElementType et = ut2et[ut];
+  return numScalarsForElementType(et);
+}
+
+void BufferLayout::updatePointerConfigs()
+{
+  ut2apc.clear();
+  for(uint32_t i=0; i<attributes.size(); ++i)
+  {
+    UsageType ut = attributes[i].usageType;
+    AttributePointerConfig apc;
+    apc.size = numScalarsForUsageType(ut);
+    apc.type = glScalarTypeFromUsageType(ut);
+    apc.stride = stride(ut);
+    apc.offset = (GLvoid*)offset(ut);
+    ut2apc[ut] = apc;
+  }
+}
 
 void BufferLayout::add(ElementType elementType, UsageType usageType, uint32_t p)
 {
@@ -99,6 +119,7 @@ void BufferLayout::add(ElementType elementType, UsageType usageType, uint32_t p)
   partitions[p] = true;
   ut2pid[usageType] = p;
   ut2et[usageType] = elementType;
+  updatePointerConfigs();
 }
 
 // number of partitions in this layout

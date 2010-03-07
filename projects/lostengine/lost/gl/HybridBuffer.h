@@ -44,7 +44,7 @@ struct HybridBuffer
   
   bool hasUsageType(UsageType ut);
   Buffer* bufferForUsageType(UsageType ut);  
-  
+  const AttributePointerConfig& pointerConfigForUsageType(UsageType ut);
   
   GLenum gpuBufferType; // should be either GL_ARRAY_BUFFER or GL_ELEMENT_ARRAY_BUFFER
   bool dirty;

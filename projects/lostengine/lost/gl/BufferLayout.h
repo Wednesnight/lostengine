@@ -66,10 +66,20 @@ struct BufferLayoutAttribute
   ElementType elementType;
   UsageType   usageType;
   uint32_t    partition;
+  bool        normalise;
   
-  BufferLayoutAttribute(ElementType et, UsageType ut, uint32_t p) : elementType(et), usageType(ut), partition(p) {}
+  BufferLayoutAttribute(ElementType et, UsageType ut, uint32_t p) : elementType(et), usageType(ut), partition(p), normalise(false) {}
+  BufferLayoutAttribute(ElementType et, UsageType ut, uint32_t p, bool inNormalise) : elementType(et), usageType(ut), partition(p), normalise(inNormalise) {}
   
   uint32_t size() const { return elementSize(elementType);}
+};
+
+struct AttributePointerConfig
+{
+  GLint   size;
+  GLenum  type;
+  GLsizei stride;
+  GLvoid* offset;
 };
 
 struct BufferLayout
@@ -80,7 +90,9 @@ struct BufferLayout
   std::map<uint32_t, bool> partitions;
   std::map<UsageType, uint32_t> ut2pid; // usage type to partition id
   std::map<UsageType, ElementType> ut2et;
+  std::map<UsageType, AttributePointerConfig> ut2apc;
   
+  void updatePointerConfigs();
   void add(ElementType elementType, UsageType usageType, uint32_t p);
 
   // number of partitions in this layout
@@ -93,6 +105,9 @@ struct BufferLayout
   uint32_t size() const;
   
   uint32_t partitionFromUsageType(UsageType ut);
+  uint32_t numScalarsForUsageType(UsageType ut);
+  
+  const AttributePointerConfig& pointerConfigForUsageType(UsageType ut) { return ut2apc[ut]; };
   
   bool hasUsageType(UsageType ut);
   GLenum glScalarTypeFromUsageType(UsageType ut);

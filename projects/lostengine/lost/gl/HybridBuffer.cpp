@@ -128,6 +128,10 @@ Buffer* HybridBuffer::bufferForUsageType(UsageType ut)
   return gpuBuffers[pid].get();
 }
 
+const AttributePointerConfig& HybridBuffer::pointerConfigForUsageType(UsageType ut)
+{
+  return hostBuffer->layout.pointerConfigForUsageType(ut);
+}
 
 }
 }
