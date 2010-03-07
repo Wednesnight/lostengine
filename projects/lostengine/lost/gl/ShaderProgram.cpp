@@ -112,7 +112,7 @@ void ShaderProgram::set(const std::string& inName, const lost::math::Vec2& inVal
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec3& inVal) {uniform(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const math::Matrix& inVal) {uniform(inName).set(inVal);}
 
-bool ShaderProgram::hasParam(const std::string& name)
+bool ShaderProgram::hasUniform(const std::string& name)
 {
   return (name2uniform.find(name) != name2uniform.end());
 }

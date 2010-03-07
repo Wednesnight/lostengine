@@ -372,11 +372,11 @@ std::map<void*, Context*> glContext2lostGlContext;
       
       if(currentShader)
       {
-        if(currentShader->hasParam("projectionMatrix"))
+        if(currentShader->hasUniform("projectionMatrix"))
         {
           currentShader->set("projectionMatrix", currentCam->projectionMatrix());
         }
-        if(currentShader->hasParam("modelViewMatrix"))
+        if(currentShader->hasUniform("modelViewMatrix"))
         {
           if(currentCam->hasModelViewMatrix)
             currentShader->set("modelViewMatrix", currentCam->mModelViewMatrix*mesh->transform);

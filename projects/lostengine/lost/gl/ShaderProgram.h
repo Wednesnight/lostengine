@@ -49,7 +49,7 @@ typedef std::list<ShaderPtr>                    ShaderList;
   void set(const std::string& inName, const lost::math::Vec2& inVal);
   void set(const std::string& inName, const lost::math::Vec3& inVal);
   void set(const std::string& inName, const math::Matrix& inVal);
-  bool hasParam(const std::string& name);
+  bool hasUniform(const std::string& name);
 
   UniformMap& uniformMap();
 
