@@ -5,6 +5,9 @@ namespace lost
 {
   namespace gl
   {
+    // set to the current context in makeCurrent
+    void* currentContext;
+
     struct Context::ContextHiddenMembers
     {
       HDC   glDeviceContext;
@@ -30,6 +33,7 @@ namespace lost
       {
         DOUT("current");
         wglMakeCurrent(hiddenMembers->glDeviceContext, hiddenMembers->glContext);
+        currentContext = hiddenMembers;
       }
     }
 
@@ -51,10 +55,7 @@ namespace lost
 
     void* Context::getCurrentOsSpecific()
     {
-      Context::ContextHiddenMembers* members = new Context::ContextHiddenMembers;
-	  members->glDeviceContext = wglGetCurrentDC();
-	  members->glContext = wglGetCurrentContext();
-      return members;
+	    return currentContext;
 	}
     
     void Context::setCurrentOsSpecififc(void* ctx)

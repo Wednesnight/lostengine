@@ -151,7 +151,7 @@ namespace lost
       if (running && !haveActiveTasklets)
       {
         DOUT("Last tasklet died, terminating.");
-        shutdown();
+        quit();
       }
     }
 
