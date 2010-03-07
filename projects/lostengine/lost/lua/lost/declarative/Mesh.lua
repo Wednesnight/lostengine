@@ -1,5 +1,13 @@
 -- lost.declarative.Mesh
+
+--[[
+  common Shaders should be set BEFORE the material is applied so the common Shader can be overwritten with a custom
+  one in the material definition.
+]]
+
 module("lost.declarative", package.seeall)
+
+require("lost.common.Shaders")
 
 lost.common.Class "lost.declarative.Mesh" {}
 
@@ -22,6 +30,7 @@ function Mesh:Line(def)
   local pointEnd = def["finish"]
   
   result = lost.mesh.Line.create(pointStart, pointEnd)
+  result.material.shader = lost.common.Shaders.colorShader()
 
   self:applyMaterial(result, def)
   return result
@@ -34,7 +43,8 @@ function Mesh:Obj(def)
   end
   local filedata = self.loader:load(filename)
   local objmesh = lost.mesh.Loader.obj(filedata)
-  self:applyMaterial(objmesh, def)
+  objmesh.material.shader = lost.common.Shaders.colorShader()
+  self:applyMaterial(objmesh, def) 
 	return objmesh
 end
 
@@ -57,10 +67,13 @@ function Mesh:Quad(def)
   -- create an instance depending on parameterization
   if filename ~= nil then
     result = lost.mesh.Quad.create(self.loader:load(filename), flip)
+    result.material.shader = lost.common.Shaders.textureShader()
   elseif tex ~= nil then 
     result = lost.mesh.Quad.create(tex, flip)
+    result.material.shader = lost.common.Shaders.textureShader()
   elseif rect ~= nil then
     result = lost.mesh.Quad.create(rect)
+    result.material.shader = lost.common.Shaders.colorShader()
   else
     error("must specify at least one of [filename|tex|rect] for creation of quad")
   end
@@ -90,6 +103,7 @@ function Mesh:ScaleGrid(def)
   if def.transform ~= nil then
     result.transform = def.transform
   end
+  result.material.shader = lost.common.Shaders.textureShader()
   self:applyMaterial(result, def)
 
   return result

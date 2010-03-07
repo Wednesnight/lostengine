@@ -228,7 +228,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       if (currentCam != cam || currentCam->needsUpdate)
       {
         math::Rect viewport = cam->viewport();
-        glViewport(viewport.x, viewport.y, viewport.width, viewport.height);
+        glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
         glMatrixMode(GL_PROJECTION);GLDEBUG;
         glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
         if (currentCam != cam) currentCam = cam;
@@ -335,7 +335,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       bind(gpuBuffer);
       vertexArray(true);
       
-      const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_position);
+/*      const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_position);
       glVertexPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;
 
       if(vb->hasUsageType(UT_normal))
@@ -373,7 +373,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       else {
         texCoordArray(false);
       }
-      
+*/      
       if(mesh->material)
       {
         material(mesh->material);      
@@ -396,6 +396,7 @@ std::map<void*, Context*> glContext2lostGlContext;
           }
         }
         if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
+        if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
 
         // map vertex attributes from buffer to shader according to the vertex buffers attribute map
         VertexAttributeMap::iterator i = vb->vertexAttributeMap.begin();

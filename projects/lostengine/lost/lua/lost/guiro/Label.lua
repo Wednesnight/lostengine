@@ -2,6 +2,7 @@ module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
 require("lost.guiro.Bounds")
+require("lost.common.Shaders")
 
 lost.common.Class "lost.guiro.Label" "lost.guiro.View" {}
 
@@ -22,7 +23,9 @@ function Label:constructor()
   self._font = nil
   self._fontSize = 12
   self.textMesh = lost.font.RenderedText.create()
+  self.textMesh.material.shader = lost.common.Shaders.textureShader()
   self.shadowMesh = lost.font.RenderedText.create()
+  self.shadowMesh.material.shader = lost.common.Shaders.textureShader()
   self.textNode = lost.rg.Draw.create(self.textMesh)
   self.textNode.name = "drawText"
   self.shadowNode = lost.rg.Draw.create(self.shadowMesh)

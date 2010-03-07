@@ -25,6 +25,7 @@ require("lost.common.Class")
 require("lost.guiro.HasLayout")
 require("lost.guiro.HasSubviews")
 require("lost.guiro.HasEvents")
+require("lost.common.Shaders")
 
 lost.common.Class "lost.guiro.View" "lost.guiro.HasLayout" "lost.guiro.HasSubviews" "lost.guiro.HasEvents"
 {
@@ -82,12 +83,14 @@ function View:constructor()
 
   -- meshes and draw nodes
   self.backgroundMesh = lost.mesh.Quad.create(self.rect)
+  self.backgroundMesh.material.shader = lost.common.Shaders.colorShader()
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
   self.frameMesh = lost.mesh.Rect.create(self.rect)
+  self.frameMesh.material.shader = lost.common.Shaders.colorShader()
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
   self.frameNode.name = "drawViewFrame"
