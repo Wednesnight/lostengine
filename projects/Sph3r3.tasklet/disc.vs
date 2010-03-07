@@ -8,12 +8,13 @@ attribute vec3 position;
 attribute vec3 normal;
 attribute vec3 texcoord0;
 
+varying vec3 texcoord;
+
 // gl_TexCoord, gl_FrontColor and gl_Position are built-in output variables and cannot be changed
 
 void main(void)
 {
-  gl_TexCoord[0] = vec4(texcoord0, 1.0); 
-	gl_FrontColor = color;
+  texcoord = texcoord0; 
   vec4 pos = vec4(position, 1.0);
   gl_Position = projectionMatrix*modelViewMatrix*pos; // equivalent to builtin function ftransform()
 

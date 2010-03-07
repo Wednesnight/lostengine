@@ -1,12 +1,14 @@
 varying float lightIntensity;
+varying vec3 texcoord;
+uniform vec4 color; // same semantics as gl_Color
 
 void main(void)
 {
   vec2 c = vec2(.5, .5);
-  float r = gl_TexCoord[0].z;
+  float r = texcoord.z;
   float border = .01;
   float srstart = r-border;
-  vec2 p = (gl_TexCoord[0]-vec4(c, 0, 0)).xy;
+  vec2 p = (texcoord-vec3(c, 0)).xy;
   float currentR = sqrt(p.x*p.x+p.y*p.y);
   float v = 0.0;
   if(currentR < srstart)
@@ -18,6 +20,6 @@ void main(void)
     v = 1.0-smoothstep(srstart, r, currentR);
   }
   float f = v;
-  gl_FragColor = vec4(gl_Color.rgb*lightIntensity,f);
+  gl_FragColor = vec4(color.rgb*lightIntensity,f);
 //gl_FragColor = vec4(f,f,f,1);
 }
