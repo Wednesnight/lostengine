@@ -117,6 +117,10 @@ bool ShaderProgram::hasUniform(const std::string& name)
   return (name2uniform.find(name) != name2uniform.end());
 }
 
+bool ShaderProgram::hasAttribute(const std::string& name)
+{
+  return (name2vertexAttribute.find(name) != name2vertexAttribute.end());
+}
 
 ShaderProgram::UniformMap& ShaderProgram::uniformMap()
 {

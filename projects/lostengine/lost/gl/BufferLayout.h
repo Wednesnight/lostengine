@@ -76,10 +76,13 @@ struct BufferLayoutAttribute
 
 struct AttributePointerConfig
 {
+  AttributePointerConfig() : size(0), type(0), stride(0), offset(0), normalise(0) {}
+
   GLint   size;
   GLenum  type;
   GLsizei stride;
   GLvoid* offset;
+  GLboolean normalise;
 };
 
 struct BufferLayout

@@ -22,7 +22,7 @@ running = true
 dcl = nil
 rootNode = nil
 angle = 0
-speed = 20
+speed = 50
 lasttime = 0
 
 globalRadius = 200

@@ -31,6 +31,9 @@ void HybridBuffer::init(GLenum inGpuBufferType,
     gpuBuffers.push_back(buffer);
   }
   dirty = false;  
+  vertexAttributeMap[UT_position] = "position";
+  vertexAttributeMap[UT_normal] = "normal";
+  vertexAttributeMap[UT_texcoord0] = "texcoord0";
 }
 
 void HybridBuffer::reset(uint32_t num)
