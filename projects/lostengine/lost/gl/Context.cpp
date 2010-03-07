@@ -3,6 +3,7 @@
 #include "lost/gl/Utils.h"
 #include "lost/lgl/lgl.h"
 #include "lost/camera/Camera.h"
+#include <algorithm>
 
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
 #include "lost/gl/ShaderProgram.h"
@@ -111,6 +112,16 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentBuffer = NULL;
       cullEnabled = getParam<bool>(GL_CULL_FACE);
       cullFaceMode = getParam<int>(GL_CULL_FACE_MODE);
+      
+      uint32_t maxNumVertexAttribs = getParam<int>(GL_MAX_VERTEX_ATTRIBS);
+      DOUT("------------ max num vertex attributes: "<<maxNumVertexAttribs);
+      // enable all, but not more than 16
+      uint32_t arbitraryLimit = 16;
+      uint32_t numEnabledVertexAttribs = std::min(maxNumVertexAttribs, arbitraryLimit);
+      for(uint32_t i=0; i<numEnabledVertexAttribs; ++i)
+      {
+        glEnableVertexAttribArray(i);GLDEBUG;
+      }
     }
     
     Context::~Context()
@@ -370,12 +381,11 @@ std::map<void*, Context*> glContext2lostGlContext;
       transform(mesh->transform);
       bind(ib->gpuBuffers[0].get());
       
+      // don't do anything if there's no shader
       if(currentShader)
       {
-        if(currentShader->hasUniform("projectionMatrix"))
-        {
-          currentShader->set("projectionMatrix", currentCam->projectionMatrix());
-        }
+        // set automatic uniforms if the shader wants them
+        if(currentShader->hasUniform("projectionMatrix")) { currentShader->set("projectionMatrix", currentCam->projectionMatrix()); }
         if(currentShader->hasUniform("modelViewMatrix"))
         {
           if(currentCam->hasModelViewMatrix)
@@ -383,6 +393,22 @@ std::map<void*, Context*> glContext2lostGlContext;
           else
           {
             currentShader->set("modelViewMatrix", mesh->transform);
+          }
+        }
+        if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
+
+        // map vertex attributes from buffer to shader according to the vertex buffers attribute map
+        VertexAttributeMap::iterator i = vb->vertexAttributeMap.begin();
+        VertexAttributeMap::iterator end = vb->vertexAttributeMap.end();
+        for(i = vb->vertexAttributeMap.begin(); i!= end; ++i)
+        {
+          const std::string& attributeName = i->second;
+          UsageType ut = i->first;
+          if(currentShader->hasAttribute(attributeName))
+          {
+            const VertexAttribute& va = currentShader->name2vertexAttribute[attributeName];
+            const AttributePointerConfig apc = vb->pointerConfigForUsageType(ut);
+            glVertexAttribPointer(va.location, apc.size, apc.type, apc.normalise, apc.stride, apc.offset);GLDEBUG;
           }
         }
       }

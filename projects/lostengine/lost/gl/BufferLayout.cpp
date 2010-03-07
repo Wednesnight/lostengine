@@ -109,6 +109,7 @@ void BufferLayout::updatePointerConfigs()
     apc.type = glScalarTypeFromUsageType(ut);
     apc.stride = stride(ut);
     apc.offset = (GLvoid*)offset(ut);
+    apc.normalise = attributes[i].normalise;
     ut2apc[ut] = apc;
   }
 }

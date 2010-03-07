@@ -50,6 +50,7 @@ typedef std::list<ShaderPtr>                    ShaderList;
   void set(const std::string& inName, const lost::math::Vec3& inVal);
   void set(const std::string& inName, const math::Matrix& inVal);
   bool hasUniform(const std::string& name);
+  bool hasAttribute(const std::string& name);
 
   UniformMap& uniformMap();
 
