@@ -1,17 +1,18 @@
 #include "lost/application/Runner.h"
 #include "lost/application/Application.h"
-#include "lost/application/MultiThreadedTasklet.h"
+#include "lost/application/Tasklet.h"
 #include "lost/common/Logger.h"
 
 namespace lost
 {
-namespace application
-{
-    int runDefaultTasklet()
+  namespace application
+  {
+
+    int runTasklet()
     {
-      return runTasklet(new MultiThreadedTasklet);
+      return runTasklet(new Tasklet);
     }
-  
+    
 
     int runTasklet(Tasklet* t)
     {
@@ -29,5 +30,5 @@ namespace application
       return result;
     }
 
-}
+  }
 }

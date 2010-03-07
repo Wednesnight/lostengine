@@ -34,15 +34,18 @@ namespace lost
   {
     
     Tasklet::Tasklet(LoaderPtr inLoader)
-    : loader(inLoader),
-      eventDispatcher(new event::EventDispatcher()),
-      lua(new State(loader)),
-      name("<unnamed tasklet>"),
-      renderNode(new Node()),
-      updateQueue(new Queue()),
-	  window(NULL)
     {
+      isAlive = false;
       waitForEvents = false;
+      name = "<unnamed tasklet>";
+	    window = NULL;
+
+      loader = inLoader;
+      eventDispatcher.reset(new event::EventDispatcher());
+      lua.reset(new State(loader));
+      renderNode.reset(new Node());
+      updateQueue.reset(new Queue());
+
       // bind lostengine lua mappings
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
@@ -133,7 +136,7 @@ namespace lost
         result = call_function<bool>(luaStartup, this);
       }
       updateQueue->process(this);      
-      return  result;
+      return result;
     }
 
     bool Tasklet::update()
@@ -187,5 +190,9 @@ namespace lost
       eventDispatcher->dispatchEvent(process);
     }
     
+    bool Tasklet::alive()
+    {
+      return isAlive;
+    }
   }
 }

@@ -361,6 +361,10 @@
 		8D607E05104F0860004818BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D607E04104F0860004818BA /* Cocoa.framework */; };
 		8D607F5E104F0B0F004818BA /* down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D607F5D104F0B0F004818BA /* down_arrow.png */; };
 		8D9AB7A6104F10560036A784 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
+		8DA63E2D1143C1FE00BACF61 /* Tasklet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DA63E2C1143C1FE00BACF61 /* Tasklet.mm */; };
+		8DA63E2E1143C1FE00BACF61 /* Tasklet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DA63E2C1143C1FE00BACF61 /* Tasklet.mm */; };
+		8DA741B41142D5A30057ACC0 /* Tasklet.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DA741B31142D5A30057ACC0 /* Tasklet.mm */; };
+		8DA741C61142D6F80057ACC0 /* TaskletThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DA741C51142D6F80057ACC0 /* TaskletThread.cpp */; };
 		8DBDEEE3113EDF6700F39BD5 /* decoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDEEE0113EDF6700F39BD5 /* decoders.cpp */; };
 		8DBDEEE4113EDF6700F39BD5 /* encoders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDEEE1113EDF6700F39BD5 /* encoders.cpp */; };
 		8DBDEEE5113EDF6700F39BD5 /* transcoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DBDEEE2113EDF6700F39BD5 /* transcoding.cpp */; };
@@ -540,9 +544,6 @@
 		EA6711970E3E89DB00B961EC /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */; };
 		EA6711BB0E3E89DB00B961EC /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
 		EA6711BD0E3E89DB00B961EC /* Platform_Mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */; };
-		EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
-		EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
-		EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */; };
 		EA70F8FA0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F8FD0ED08713000AA8CB /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
 		EA70F93A0ED08E99000AA8CB /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
@@ -631,12 +632,6 @@
 		EAAD3334113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
 		EAAD3335113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
 		EAAD3336113ADA0F001111C8 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3333113ADA0F001111C8 /* Runner.cpp */; };
-		EAAD339D113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */; };
-		EAAD339E113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */; };
-		EAAD339F113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */; };
-		EAAD33A1113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
-		EAAD33A2113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
-		EAAD33A3113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */; };
 		EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
@@ -698,15 +693,11 @@
 		EABF8E0B0F81F83F000856B3 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09B0870F81F4A500266854 /* RenderBuffer.cpp */; };
 		EAC0B2610F9830B200A524D9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */; };
 		EACB3E32113C7D5F00A65E63 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2D113C7D5F00A65E63 /* Window.mm */; };
-		EACB3E33113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2E113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m */; };
 		EACB3E34113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2F113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp */; };
 		EACB3E35113C7D5F00A65E63 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E30113C7D5F00A65E63 /* Application.mm */; };
-		EACB3E36113C7D5F00A65E63 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E31113C7D5F00A65E63 /* Runner.cpp */; };
 		EACB3E37113C7D5F00A65E63 /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2D113C7D5F00A65E63 /* Window.mm */; };
-		EACB3E38113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2E113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m */; };
 		EACB3E39113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E2F113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp */; };
 		EACB3E3A113C7D5F00A65E63 /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E30113C7D5F00A65E63 /* Application.mm */; };
-		EACB3E3B113C7D5F00A65E63 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E31113C7D5F00A65E63 /* Runner.cpp */; };
 		EACB3E3E113C7E0E00A65E63 /* ApplicationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E3D113C7E0E00A65E63 /* ApplicationDelegate.mm */; };
 		EACB3E51113C840000A65E63 /* LEApplicationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E4D113C840000A65E63 /* LEApplicationDelegate.mm */; };
 		EACB3E52113C840000A65E63 /* LEGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EACB3E4E113C840000A65E63 /* LEGLView.mm */; };
@@ -892,6 +883,9 @@
 		8D607E04104F0860004818BA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D607F5D104F0B0F004818BA /* down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down_arrow.png; path = ../down_arrow.png; sourceTree = SOURCE_ROOT; };
 		8D607F5F104F0B48004818BA /* lost */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lost; path = ../lost/lua/lost; sourceTree = SOURCE_ROOT; };
+		8DA63E2C1143C1FE00BACF61 /* Tasklet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Tasklet.mm; path = iphone/Tasklet.mm; sourceTree = "<group>"; };
+		8DA741B31142D5A30057ACC0 /* Tasklet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Tasklet.mm; path = mac/Tasklet.mm; sourceTree = "<group>"; };
+		8DA741C51142D6F80057ACC0 /* TaskletThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskletThread.cpp; sourceTree = "<group>"; };
 		8DBDEEE0113EDF6700F39BD5 /* decoders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = decoders.cpp; path = "../../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/decoders.cpp"; sourceTree = SOURCE_ROOT; };
 		8DBDEEE1113EDF6700F39BD5 /* encoders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = encoders.cpp; path = "../../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/encoders.cpp"; sourceTree = SOURCE_ROOT; };
 		8DBDEEE2113EDF6700F39BD5 /* transcoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = transcoding.cpp; path = "../../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/transcoding.cpp"; sourceTree = SOURCE_ROOT; };
@@ -979,7 +973,6 @@
 		EA5FC5E510C3D2D10078A9FD /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
 		EA65F8E7111AFEB8005AB754 /* TestLostGlHostBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostGlHostBuffer.cpp; path = test/TestLostGlHostBuffer.cpp; sourceTree = "<group>"; };
 		EA6711250E3E885300B961EC /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadAutoreleasePoolHack.m; path = mac/ThreadAutoreleasePoolHack.m; sourceTree = "<group>"; };
 		EA70F8F40ED08713000AA8CB /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = al/Debug.cpp; sourceTree = "<group>"; };
 		EA70F9320ED08E99000AA8CB /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = al/Context.cpp; sourceTree = "<group>"; };
 		EA70F9330ED08E99000AA8CB /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = al/Buffer.cpp; sourceTree = "<group>"; };
@@ -1013,9 +1006,7 @@
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
-		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = mac/Runner.cpp; sourceTree = "<group>"; };
-		EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SingleThreadedTasklet.cpp; sourceTree = "<group>"; };
-		EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiThreadedTasklet.cpp; sourceTree = "<group>"; };
+		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
 		EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EAB235E31142AD89009578A9 /* Uniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Uniform.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
@@ -1037,10 +1028,8 @@
 		EABA968F11260EF60025F788 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../../../thirdparty/boost/boost_1_42_0/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
 		EABA969611260EFB0025F788 /* tss_null.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tss_null.cpp; path = ../../../thirdparty/boost/boost_1_42_0/libs/thread/src/tss_null.cpp; sourceTree = SOURCE_ROOT; };
 		EACB3E2D113C7D5F00A65E63 /* Window.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Window.mm; path = iphone/Window.mm; sourceTree = "<group>"; };
-		EACB3E2E113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThreadAutoreleasePoolHack.m; path = iphone/ThreadAutoreleasePoolHack.m; sourceTree = "<group>"; };
 		EACB3E2F113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = iphone/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EACB3E30113C7D5F00A65E63 /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = iphone/Application.mm; sourceTree = "<group>"; };
-		EACB3E31113C7D5F00A65E63 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = iphone/Runner.cpp; sourceTree = "<group>"; };
 		EACB3E3D113C7E0E00A65E63 /* ApplicationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ApplicationDelegate.mm; path = mac/ApplicationDelegate.mm; sourceTree = "<group>"; };
 		EACB3E4D113C840000A65E63 /* LEApplicationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEApplicationDelegate.mm; path = iphone/LEApplicationDelegate.mm; sourceTree = "<group>"; };
 		EACB3E4E113C840000A65E63 /* LEGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEGLView.mm; path = iphone/LEGLView.mm; sourceTree = "<group>"; };
@@ -1260,10 +1249,9 @@
 				EACB3E4F113C840000A65E63 /* LEApplication.mm */,
 				EACB3E50113C840000A65E63 /* LEWindow.mm */,
 				EACB3E2D113C7D5F00A65E63 /* Window.mm */,
-				EACB3E2E113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m */,
 				EACB3E2F113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp */,
 				EACB3E30113C7D5F00A65E63 /* Application.mm */,
-				EACB3E31113C7D5F00A65E63 /* Runner.cpp */,
+				8DA63E2C1143C1FE00BACF61 /* Tasklet.mm */,
 			);
 			name = iphone;
 			sourceTree = "<group>";
@@ -1287,8 +1275,7 @@
 				EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */,
 				8DE56F6E0F3118840072FB28 /* Window.mm */,
 				EACB3E6F113C862100A65E63 /* GLView.mm */,
-				EAAD3333113ADA0F001111C8 /* Runner.cpp */,
-				EA67DDA00F91574E00FF661C /* ThreadAutoreleasePoolHack.m */,
+				8DA741B31142D5A30057ACC0 /* Tasklet.mm */,
 			);
 			name = mac;
 			sourceTree = "<group>";
@@ -1576,14 +1563,14 @@
 		EA3B94640E04639D00B6423B /* application */ = {
 			isa = PBXGroup;
 			children = (
-				8D48E4CD10FE473E00338B01 /* Queue.cpp */,
-				8D48E4CE10FE473E00338B01 /* QueueEntityLua.cpp */,
 				8D77F0410F34DBF600C86FFD /* iphone */,
 				8DE56F6B0F31186F0072FB28 /* mac */,
 				3E9531300EC98D62003FCAF0 /* Application.cpp */,
+				8D48E4CD10FE473E00338B01 /* Queue.cpp */,
+				8D48E4CE10FE473E00338B01 /* QueueEntityLua.cpp */,
+				EAAD3333113ADA0F001111C8 /* Runner.cpp */,
 				8D40911A0F89322D00163B63 /* Tasklet.cpp */,
-				EAAD339C113AF962001111C8 /* SingleThreadedTasklet.cpp */,
-				EAAD33A0113AF967001111C8 /* MultiThreadedTasklet.cpp */,
+				8DA741C51142D6F80057ACC0 /* TaskletThread.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
 			path = application;
@@ -2097,7 +2084,6 @@
 				EA26B91C0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B92A0F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92E0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
-				EA67DDA30F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EA2E6AD50F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496ED0F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB499230F9FA2B100F3036A /* LostCommon.cpp in Sources */,
@@ -2170,14 +2156,10 @@
 				EABA969511260EF60025F788 /* once.cpp in Sources */,
 				EABA969911260EFB0025F788 /* tss_null.cpp in Sources */,
 				EAAD3336113ADA0F001111C8 /* Runner.cpp in Sources */,
-				EAAD339F113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
-				EAAD33A3113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
 				EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 				EACB3E37113C7D5F00A65E63 /* Window.mm in Sources */,
-				EACB3E38113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m in Sources */,
 				EACB3E39113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp in Sources */,
 				EACB3E3A113C7D5F00A65E63 /* Application.mm in Sources */,
-				EACB3E3B113C7D5F00A65E63 /* Runner.cpp in Sources */,
 				EACB3E51113C840000A65E63 /* LEApplicationDelegate.mm in Sources */,
 				EACB3E52113C840000A65E63 /* LEGLView.mm in Sources */,
 				EACB3E53113C840000A65E63 /* LEApplication.mm in Sources */,
@@ -2188,6 +2170,7 @@
 				8DBDEEED113EDF7500F39BD5 /* tasklet.cpp in Sources */,
 				8DBDEEF2113EDF8300F39BD5 /* variant.cpp in Sources */,
 				8DBDEEF3113EDF8300F39BD5 /* version.cpp in Sources */,
+				8DA63E2E1143C1FE00BACF61 /* Tasklet.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2335,7 +2318,6 @@
 				EA26B91A0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9280F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92C0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
-				EA67DDA10F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EA2E6ACD0F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496E90F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB499210F9FA2B100F3036A /* LostCommon.cpp in Sources */,
@@ -2408,8 +2390,6 @@
 				EABA969111260EF60025F788 /* once.cpp in Sources */,
 				EABA969711260EFB0025F788 /* tss_null.cpp in Sources */,
 				EAAD3334113ADA0F001111C8 /* Runner.cpp in Sources */,
-				EAAD339D113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
-				EAAD33A1113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
 				EAAD3481113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 				EADE515F113BC9A8005F7BB6 /* ApplicationWindow.mm in Sources */,
 				EACB3E3E113C7E0E00A65E63 /* ApplicationDelegate.mm in Sources */,
@@ -2420,6 +2400,8 @@
 				8DBDEEEF113EDF7500F39BD5 /* tasklet.cpp in Sources */,
 				8DBDEEF6113EDF8300F39BD5 /* variant.cpp in Sources */,
 				8DBDEEF7113EDF8300F39BD5 /* version.cpp in Sources */,
+				8DA741B41142D5A30057ACC0 /* Tasklet.mm in Sources */,
+				8DA741C61142D6F80057ACC0 /* TaskletThread.cpp in Sources */,
 				EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */,
 				EAB61FD31142ED0100295C1B /* VertexAttribute.cpp in Sources */,
 			);
@@ -2611,7 +2593,6 @@
 				EA26B91B0F91494400318279 /* Loader.cpp in Sources */,
 				EA26B9290F91498E00318279 /* DefaultLoader.cpp in Sources */,
 				EA26B92D0F91499400318279 /* ApplicationResourceRepository.cpp in Sources */,
-				EA67DDA20F91574E00FF661C /* ThreadAutoreleasePoolHack.m in Sources */,
 				EA2E6AD10F9E45E300696425 /* LostMesh.cpp in Sources */,
 				3EB496EB0F9F99DE00F3036A /* LostApplication.cpp in Sources */,
 				3EB4991F0F9FA2B100F3036A /* LostCommon.cpp in Sources */,
@@ -2684,14 +2665,10 @@
 				EABA969311260EF60025F788 /* once.cpp in Sources */,
 				EABA969811260EFB0025F788 /* tss_null.cpp in Sources */,
 				EAAD3335113ADA0F001111C8 /* Runner.cpp in Sources */,
-				EAAD339E113AF962001111C8 /* SingleThreadedTasklet.cpp in Sources */,
-				EAAD33A2113AF967001111C8 /* MultiThreadedTasklet.cpp in Sources */,
 				EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */,
 				EACB3E32113C7D5F00A65E63 /* Window.mm in Sources */,
-				EACB3E33113C7D5F00A65E63 /* ThreadAutoreleasePoolHack.m in Sources */,
 				EACB3E34113C7D5F00A65E63 /* ApplicationTaskletSpawn.cpp in Sources */,
 				EACB3E35113C7D5F00A65E63 /* Application.mm in Sources */,
-				EACB3E36113C7D5F00A65E63 /* Runner.cpp in Sources */,
 				EACB3E55113C840000A65E63 /* LEApplicationDelegate.mm in Sources */,
 				EACB3E56113C840000A65E63 /* LEGLView.mm in Sources */,
 				EACB3E57113C840000A65E63 /* LEApplication.mm in Sources */,
@@ -2702,6 +2679,7 @@
 				8DBDEEEE113EDF7500F39BD5 /* tasklet.cpp in Sources */,
 				8DBDEEF4113EDF8300F39BD5 /* variant.cpp in Sources */,
 				8DBDEEF5113EDF8300F39BD5 /* version.cpp in Sources */,
+				8DA63E2D1143C1FE00BACF61 /* Tasklet.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

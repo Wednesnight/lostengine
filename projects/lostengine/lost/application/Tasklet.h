@@ -25,10 +25,16 @@ namespace lost
   
     struct Tasklet
     {
-      // if true, only runs the main loop once a low level event arrives
-      bool waitForEvents;    
-      bool scriptLoaded; // tru if 'main.lua' was successfully loaded
-      
+	  protected:
+      /**
+       * forward declaration for platform specific stuff
+       */
+      struct TaskletHiddenMembers;
+      TaskletHiddenMembers* hiddenMembers;
+
+      bool isAlive;
+      bool scriptLoaded; // true if 'main.lua' was successfully loaded
+
       bool hasLuaStartup;
       luabind::object luaStartup;
       bool hasLuaUpdate;
@@ -36,42 +42,45 @@ namespace lost
       bool hasLuaShutdown;
       luabind::object luaShutdown;
 
+      lua::StatePtr                   lua;
+      WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
+
+      virtual void init(); // reads main.lua if present and creates a window if desired
+
+  	  virtual bool startup();	  // called once in run, return false if startup fails
+      virtual bool update();    // called repeatedly in run, return false if you want to shutdown
+      virtual void render();    // called repeatedly in run
+      virtual bool shutdown();  // called once in run, return false if shutdown failed
+
+      void createWindow(const WindowParams& params);
+      void closeWindow(WindowEventPtr event);
+      
+      void processEvents();
+
+    public:
+      bool waitForEvents; // if true, only runs the main loop once a low level event arrives
+      
       event::EventDispatcherPtr       eventDispatcher;    
       std::string                     name;
       resource::LoaderPtr             loader;
-      lua::StatePtr                   lua;
-      WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
-      Window*                         window;         // contains the window pointer after init() if it could be created
+
+	    Window*                         window;         // contains the window pointer after init() if it could be created
       rg::NodePtr                     renderNode;     // render graph root node
       QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
       
 
-      Tasklet(lost::resource::LoaderPtr inLoader= lost::resource::LoaderPtr(new lost::resource::DefaultLoader));
+      Tasklet(lost::resource::LoaderPtr inLoader = resource::DefaultLoader::create());
       virtual ~Tasklet();
 
       void queueApplicationEvent(event::EventPtr event);
       void dispatchApplicationEvent(event::EventPtr event);
       void processApplicationEvents();  
 
-      virtual void init(); // runs on main thread: reads main.lua if present and creates a window if desired
+      bool alive();         // tell application if tasklet is still alive      
 
-      virtual bool startup(); // called once on worker thread, return false if startup fails
-      virtual bool update(); // called repeatedly on worker thread, return false if you want to shutdown
-      virtual bool shutdown(); // called once on worker thread, return false if shutdown failed
-
-      void render();
-      void processEvents();
-      
-      void createWindow(const WindowParams& params);
-      void closeWindow(WindowEventPtr event);
-      
-      // this is the part of the interface that can be/is used for correct handling of multithreading
-      // FIXME: hat are the semantics of these functions within a single threaded use case?
-      virtual bool start() { return false; }; // override this, starts tasklet, potentially on separate thread
-      virtual bool stop() { return false; }; // override this, tells tasklet to stop and shutdown
-      virtual bool alive() { return false; } // override this to tell application if you're still alive, FIXME: what's the definition of this state?
-      virtual bool wait() { return false; } // WTF?
-      
+      void start(); // starts tasklet; platform specific implementation
+      void run();   // the tasklet run loop; platform specific implementation
+      void stop();  // tells tasklet to stop and shutdown; platform specific implementation
     };
 
   }
