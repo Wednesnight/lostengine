@@ -3,15 +3,15 @@
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-  struct Tasklet;
+    struct Tasklet;
 
-  int runDefaultTasklet();
-  int runTasklet(Tasklet* t);
-    
-}
+    int runTasklet();
+    int runTasklet(Tasklet* t);
+      
+  }
 }
 
 #endif

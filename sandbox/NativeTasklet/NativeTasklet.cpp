@@ -40,7 +40,7 @@ NativeTasklet::NativeTasklet()
 
 void NativeTasklet::init()
 {
-  MultiThreadedTasklet::init();
+  Tasklet::init();
   // setup window
   WindowParams params("NativeTasklet Demo", Rect(100,100,640,480));
   createWindow(params);
@@ -53,7 +53,7 @@ void NativeTasklet::init()
 
 bool NativeTasklet::startup()
 {
-  if(!MultiThreadedTasklet::startup())
+  if(!Tasklet::startup())
     return false;
   
   ClearColorPtr clearColor = ClearColor::create(blackColor);
@@ -69,7 +69,7 @@ bool NativeTasklet::startup()
 
 bool NativeTasklet::update()
 {
-  return (running && MultiThreadedTasklet::update());
+  return (running && Tasklet::update());
 }
 
 void NativeTasklet::keyDown(KeyEventPtr event)

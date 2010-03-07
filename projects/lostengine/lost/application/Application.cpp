@@ -1,9 +1,6 @@
-// FIXME: needed for NOMINMAX definition on windows
-#include "lost/platform/Platform.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"
-#include "lost/resource/DefaultLoader.h"
 #include "lost/event/Receive.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
@@ -11,7 +8,6 @@
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
-#include "lost/gl/Context.h"
 #include "lost/application/Window.h"
 
 using namespace lost::resource;
@@ -73,7 +69,6 @@ namespace lost
     {
       for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
-        (*tasklet)->init();
         (*tasklet)->start();
       }
       running = true;
@@ -88,7 +83,6 @@ namespace lost
       {
         try
         {
-          tasklet->init();
           tasklet->start();
         }
         catch(std::exception& ex)
@@ -105,9 +99,8 @@ namespace lost
       {
         if ((*tasklet)->alive())
         {
-          (*tasklet)->stop();
           (*tasklet)->eventDispatcher->queueEvent(event);
-          (*tasklet)->wait();
+          (*tasklet)->stop();
         }
       }
       shutdown();
