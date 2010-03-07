@@ -1,3 +1,5 @@
+require("lost.common.Shaders")
+
 using "lost.gl.loadShader"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -24,6 +26,7 @@ function addTextNode(rootNode, panelText, colIndex, rowIndex, col)
     local xOffset = (colIndex * fboSize.width) + (fboSize.width - txt.size.width) / 2
     local yOffset = (rowIndex+1) * fboSize.height - yinset
     txt.material.color = col;
+    txt.material.shader = lost.common.Shaders.textureShader()
     txt.transform = MatrixTranslation(Vec3(xOffset, yOffset, 0))
     rootNode:add(lost.rg.Draw.create(txt))
 end
@@ -65,7 +68,7 @@ function startup(tasklet)
   cam3D:target(Vec3(0,0,0))
   cam3D:stickToTarget(true)  
 
-  blurShader = loadShader(tasklet.loader, "blur")
+--[[  blurShader = loadShader(tasklet.loader, "blur")
   blurShader:enable()
   blurShader:setFloat("width", fboSize.width)
   blurShader:setFloat("height", fboSize.height)
@@ -109,7 +112,7 @@ function startup(tasklet)
   sepiaShader = loadShader(tasklet.loader, "sepia")
   sepiaShader:enable()
   sepiaShader:setInt("tex", 0)
-  sepiaShader:disable()
+  sepiaShader:disable()]]
 
   heatsigShader = loadShader(tasklet.loader, "heatsig")
   heatsigShader:enable()

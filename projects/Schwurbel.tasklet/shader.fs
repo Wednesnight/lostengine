@@ -1,11 +1,13 @@
-uniform sampler2D sampler;
+uniform sampler2D texture0;
 uniform float shader;
 uniform float factor;
 uniform vec2 pos;
 
+varying vec2 texcoord;
+
 void main(void)
 {
-	vec2 texCoord = gl_TexCoord[0].xy; // [0.0 ,1.0] x [0.0, 1.0]
+	vec2 texCoord = texcoord; // [0.0 ,1.0] x [0.0, 1.0]
 	vec2 normCoord = 2.0 * texCoord - pos; // [-1.0 ,1.0] x [-1.0, 1.0]
 	float r = length(normCoord); // to polar coords
 	float phi = atan(normCoord.y, normCoord.x); // to polar coords
@@ -31,5 +33,5 @@ void main(void)
 
 	texCoord = normCoord / 2.0 + pos / 2.0; // [0.0 ,1.0] x [0.0, 1.0]
 
-	gl_FragColor = texture2D(sampler, texCoord);
+	gl_FragColor = texture2D(texture0, texCoord);
 }

@@ -1,28 +1,18 @@
-uniform vec3 LightPosition;
-uniform vec3 LightColor;
-uniform vec3 EyePosition;
-uniform vec3 Specular;
-uniform vec3 Ambient;
-uniform float Kd;
+uniform vec3 lightPosition;
+varying float lightIntensity;  // will becalculated per vertex and interpolated per fragment
+uniform mat4 modelViewMatrix;  // mesh transform
+uniform mat4 projectionMatrix; // from camera
 
-varying vec3 DiffuseColor;
-varying vec3 SpecularColor;
+attribute vec3 position;
+attribute vec3 normal;
 
 void main(void)
 {
-  vec3 ecPosition = vec3(gl_ModelViewMatrix * gl_Vertex);
-  vec3 tnorm = normalize(gl_NormalMatrix * gl_Normal);
-  vec3 lightVec = normalize(LightPosition - ecPosition);
-  vec3 viewVec = normalize(EyePosition - ecPosition);
-  vec3 hvec = normalize(viewVec + lightVec);
-  
-  float spec = clamp(dot(hvec, tnorm), 0.0, 1.0);
-  
-  spec = pow(spec, 16.0);
-  DiffuseColor = LightColor * vec3(Kd * dot(lightVec, tnorm));
-  DiffuseColor = clamp(Ambient+ DiffuseColor, 0.0, 1.0);
-  SpecularColor = clamp((LightColor * Specular * spec), 0.0, 1.0);
-  
-  gl_TexCoord[0] = gl_MultiTexCoord0;
-  gl_Position = ftransform();
+  vec4 pos = vec4(position, 1.0);
+  gl_Position = projectionMatrix*modelViewMatrix*pos; // equivalent to builtin function ftransform()
+
+	vec3 ecpos = vec3(modelViewMatrix * pos);
+	vec3 lightVec = normalize(lightPosition-ecpos);
+  vec3 tnorm = vec3(normalize(modelViewMatrix*vec4(normal,0.0)));
+  lightIntensity = max(dot(lightVec, tnorm), 0.0);
 }

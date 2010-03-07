@@ -38,19 +38,7 @@ return
       {
         shader = dcl.gl:Shader
         {
-          filename = "light",
-          params =
-          {
-            LightPosition = camPos,
-            LightColor = Color(1, 1, 1),
-            EyePosition = camPos,
-            Specular = Color(.75, .75, .5),
-            Ambient = Color(.1, .1, .1),
-            Kd = 0.8,
-            Scale = Vec2(0.7, 3.7),
-            Threshold = Vec2(.3, .2),
-            SurfaceColor = Color(1,1,1)
-          }
+          filename = "light"
         }
       }
     }

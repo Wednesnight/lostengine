@@ -89,7 +89,6 @@ function startup(tasklet)
 
   shader = mesh.material.shader
   shader:enable()
-  shader:setInt("sampler", 0)
   shader:setFloat("shader", 1)
   shader:setFloat("factor", 0)
   shader:set("pos", Vec2(0,0))

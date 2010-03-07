@@ -3,11 +3,12 @@
 // map grayscale to heat signature
 //
 
-uniform sampler2D  tex;
+varying vec2 texcoord;
+uniform sampler2D  texture0;
 
 void main(void)
 {
-	vec4 color = texture2D(tex, gl_TexCoord[0].st);
+	vec4 color = texture2D(texture0, texcoord);
 	
 	// Convert to grayscale using NTSC conversion weights
 	

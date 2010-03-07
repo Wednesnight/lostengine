@@ -2,6 +2,7 @@
 module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
+require("lost.common.Shaders")
 
 local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
@@ -91,6 +92,7 @@ function Image:afterRedraw()
   
   if self._textureMesh then
     self._textureMesh.material.blend = true
+    self._textureMesh.material.shader = lost.common.Shaders.textureShader()
   end
   
   -- attach mesh to draw node, remove the node if it's already in the hierarchy
