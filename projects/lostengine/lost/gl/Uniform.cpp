@@ -20,12 +20,12 @@ Uniform::Uniform(const std::string& inName, GLint inIndex, GLenum inGlType, GLin
 {
 }
 
-void Uniform::Uniform::operator=(float v) { setFloat(v); }
-void Uniform::Uniform::operator=(const lost::common::Color& inCol) { set(inCol); }
-void Uniform::Uniform::operator=(const lost::math::Vec2& vec) { set(vec); }
-void Uniform::Uniform::operator=(const lost::math::Vec3& vec) { set(vec); }
-void Uniform::Uniform::operator=(const lost::math::Vec4& vec) { set(vec); }
-void Uniform::Uniform::operator=(GLint v) { setInt(v); }
+void Uniform::operator=(float v) { setFloat(v); }
+void Uniform::operator=(const lost::common::Color& inCol) { set(inCol); }
+void Uniform::operator=(const lost::math::Vec2& vec) { set(vec); }
+void Uniform::operator=(const lost::math::Vec3& vec) { set(vec); }
+void Uniform::operator=(const lost::math::Vec4& vec) { set(vec); }
+void Uniform::operator=(GLint v) { setInt(v); }
 
 void Uniform::setInt(GLint inVal)
 {

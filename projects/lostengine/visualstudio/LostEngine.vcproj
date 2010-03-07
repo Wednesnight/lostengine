@@ -307,26 +307,6 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\lost\application\MultiThreadedTasklet.cpp"
-						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
 						RelativePath="..\lost\application\Queue.cpp"
 						>
 						<FileConfiguration
@@ -367,7 +347,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath="..\lost\application\SingleThreadedTasklet.cpp"
+						RelativePath="..\lost\application\Runner.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -388,6 +368,26 @@
 					</File>
 					<File
 						RelativePath="..\lost\application\Tasklet.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\lost\application\TaskletThread.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -450,7 +450,7 @@
 							</FileConfiguration>
 						</File>
 						<File
-							RelativePath="..\lost\application\windows\Runner.cpp"
+							RelativePath="..\lost\application\windows\Tasklet.cpp"
 							>
 							<FileConfiguration
 								Name="Debug|Win32"
@@ -1019,7 +1019,47 @@
 						</FileConfiguration>
 					</File>
 					<File
+						RelativePath="..\lost\gl\Uniform.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
 						RelativePath="..\lost\gl\Utils.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(SafeParentName)/$(SafeInputName).obj"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\lost\gl\VertexAttribute.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
