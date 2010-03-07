@@ -33,6 +33,11 @@ ShaderProgramPtr loadShader(lost::shared_ptr<lost::resource::Loader> loader, con
   if(!shaderProgram->linked())
     throw std::runtime_error(shaderProgram->log());
 
+  shaderProgram->enable();
+  shaderProgram->buildUniformMap();
+  shaderProgram->buildVertexAttributeMap();
+  shaderProgram->disable();
+  
   return shaderProgram;
 }
 

@@ -2,16 +2,32 @@
 #define LOST_MESH_MESH
 
 #include "lost/mesh/Material.h"
-#include "lost/math/Matrix.h"
 #include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
+#include "lost/math/Vec4.h"
+#include "lost/math/Matrix.h"
 #include "lost/gl/BufferLayout.h"
-#include "lost/gl/HybridVertexBuffer.h"
-#include "lost/gl/HybridIndexBuffer.h"
 
 namespace lost
 {
+
+namespace gl
+{
+  struct HybridBuffer;
+  typedef lost::shared_ptr<HybridBuffer> HybridBufferPtr;
+
+  struct HybridVertexBuffer;
+  typedef lost::shared_ptr<HybridVertexBuffer> HybridVertexBufferPtr;
+
+  struct HybridIndexBuffer;
+  typedef lost::shared_ptr<HybridIndexBuffer> HybridIndexBufferPtr;
+}
+
 namespace mesh
 {
+
+struct Material;
+typedef lost::shared_ptr<Material> MaterialPtr;
 
 struct Mesh;
 typedef lost::shared_ptr<Mesh> MeshPtr;

@@ -7,6 +7,8 @@
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_increment_actor.hpp>
 #include <boost/spirit/include/classic_decrement_actor.hpp>
+#include "lost/gl/HybridIndexBuffer.h"
+#include "lost/gl/HybridVertexBuffer.h"
 
 using namespace boost;
 using namespace boost::spirit;

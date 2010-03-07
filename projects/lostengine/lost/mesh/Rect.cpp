@@ -1,4 +1,7 @@
 #include "lost/mesh/Rect.h"
+#include "lost/gl/gl.h"
+#include "lost/gl/HybridIndexBuffer.h"
+#include "lost/gl/HybridVertexBuffer.h"
 
 namespace lost
 {

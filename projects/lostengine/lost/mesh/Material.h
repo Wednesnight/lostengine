@@ -1,13 +1,19 @@
 #ifndef LOST_MESH_MATERIAL_H
 #define LOST_MESH_MATERIAL_H
 
-#include "lost/gl/ShaderProgram.h"
-#include "lost/gl/Texture.h"
 #include <vector>
+#include "lost/common/Color.h"
 #include "lost/gl/gltypes.h"
 
 namespace lost
 {
+namespace gl
+{
+  struct ShaderProgram;
+  typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
+  struct Texture;
+  typedef lost::shared_ptr<Texture> TexturePtr;
+}
 namespace mesh
 {
 

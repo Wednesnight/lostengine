@@ -1,4 +1,8 @@
 #include "lost/mesh/ScaleGrid.h"
+#include "lost/gl/Texture.h"
+#include "lost/gl/gl.h"
+#include "lost/gl/HybridIndexBuffer.h"
+#include "lost/gl/HybridVertexBuffer.h"
 
 namespace lost
 {

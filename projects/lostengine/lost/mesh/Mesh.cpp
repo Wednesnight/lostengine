@@ -1,5 +1,8 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/common/Logger.h"
+#include "lost/math/Matrix.h"
+#include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/HybridIndexBuffer.h"
 
 namespace lost
 {

@@ -8,6 +8,9 @@ namespace lost
 {
 namespace gl
 {
+struct Shader;
+typedef lost::shared_ptr<Shader> ShaderPtr;
+
 struct Shader 
 {
   Shader(GLenum type);
