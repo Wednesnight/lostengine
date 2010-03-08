@@ -4,8 +4,7 @@
 #include <stdexcept>
 #include <boost/filesystem.hpp>
 
-// no deprecated warnings for hashlib++
-#pragma warning(disable:4996)
+#pragma warning(disable:4996) // no deprecated warnings for hashlib++
 #include <hashlibpp.h>
 
 using namespace boost;

@@ -161,7 +161,7 @@ namespace lost
       if (needsUpdate)
       {
         double aspectRatio = (double)mViewport.width / (double)mViewport.height;
-        mProjectionMatrix = lost::math::MatrixPerspective(mFovY, aspectRatio, mDepth) * lost::math::MatrixLookAt(position(), target(), up());
+        mProjectionMatrix = lost::math::MatrixPerspective(mFovY, (float)aspectRatio, mDepth) * lost::math::MatrixLookAt(position(), target(), up());
         needsUpdate = false;
       }
       return mProjectionMatrix;

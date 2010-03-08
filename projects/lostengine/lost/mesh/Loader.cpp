@@ -3,6 +3,8 @@
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
 
+#pragma warning(disable:4244) // warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
+
 //#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/include/classic_core.hpp>
 #include <boost/spirit/include/classic_increment_actor.hpp>
@@ -169,7 +171,7 @@ namespace lost
               vertexNormals[i3] += n;
             }
             // normalize all vertex normals to create final vnormal from sum of tri normals
-            for(int i=0; i<vertexCount; ++i)
+            for(unsigned int i = 0; i < vertexCount; ++i)
             {
               normalise(vertexNormals[i]);
               mesh->vertexBuffer->set(i, UT_normal, vertexNormals[i]);

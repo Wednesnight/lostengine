@@ -9,7 +9,7 @@ namespace boost
 {
 namespace filesystem
 {
-    template<typename S, typename PT> struct basic_path;
+    template<typename S, typename PT> class basic_path;
     struct path_traits;
     typedef basic_path< std::string, path_traits > path;
 }

@@ -8,7 +8,7 @@
 namespace lost
 {
   template <typename T>
-  struct shared_ptr;
+  class shared_ptr;
   namespace application
   {
     struct DragNDropEvent;

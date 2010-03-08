@@ -6,6 +6,7 @@
 #include "lost/application/DragNDropEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
+#include <map>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -139,32 +140,34 @@ namespace lost
       DragFinish(drop);
     }
 
+    static std::map<HWND, Window*> windowMap;
     LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
-      Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       switch (message)
       {
         case WM_CREATE:
+          windowMap[hwnd] = (Window*)((LPCREATESTRUCT)lParam)->lpCreateParams;
           break;
 
         case WM_CLOSE:
-          dispatchEvent(window, event::EventPtr(new WindowEvent(WindowEvent::CLOSE(), window)));
+          dispatchEvent(windowMap[hwnd], event::EventPtr(new WindowEvent(WindowEvent::CLOSE(), windowMap[hwnd])));
           break;
 
         case WM_DESTROY:
+          windowMap[hwnd] = NULL;
           break;
 
         case WM_SIZE:
-          dispatchEvent(window, event::EventPtr(new ResizeEvent(LOWORD(lParam), HIWORD(lParam))));
+          dispatchEvent(windowMap[hwnd], event::EventPtr(new ResizeEvent(LOWORD(lParam), HIWORD(lParam))));
           break;
 
         case WM_KEYDOWN:
-          dispatchKeyEvent(window, KeyEvent::KEY_DOWN(), wParam, true,
+          dispatchKeyEvent(windowMap[hwnd], KeyEvent::KEY_DOWN(), wParam, true,
             (lParam & KF_REPEAT) == KF_REPEAT);
           break;
 
         case WM_DROPFILES:
-          dispatchDragNDropEvent(window, (HDROP)wParam);
+          dispatchDragNDropEvent(windowMap[hwnd], (HDROP)wParam);
           break;
       }
 
@@ -173,7 +176,6 @@ namespace lost
 
     struct Window::WindowHiddenMembers
     {
-      ATOM  windowClass;
       HWND  handle;
       HDC   deviceContext;
       HGLRC glContext;
@@ -200,7 +202,7 @@ namespace lost
       wc.hIcon         = LoadIcon(NULL, IDI_WINLOGO);
 
       // Register the window class
-      hiddenMembers->windowClass = RegisterClass(&wc);
+      RegisterClass(&wc);
 
       std::wstring wTitle(params.caption.begin(), params.caption.end());
       // Create window
@@ -216,7 +218,7 @@ namespace lost
                                              NULL,
                                              NULL,
                                              GetModuleHandle(NULL),
-                                             NULL);
+                                             (LPVOID)this);
 
       // Get a device context
       hiddenMembers->deviceContext = GetDC(hiddenMembers->handle);
@@ -287,7 +289,7 @@ namespace lost
     void Window::close()
     {
       DOUT("Window::close()");
-      ShowWindow(hiddenMembers->handle, SW_HIDE);
+      CloseWindow(hiddenMembers->handle);
     }
 
   }

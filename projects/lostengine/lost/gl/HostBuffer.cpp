@@ -124,7 +124,7 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint16_t val)
   {
     case ET_u8:
     {
-      uint8_t conv = val;
+      uint8_t conv = (uint8_t)val;
       memcpy(elementAddress(idx, ut), &conv, sizeof(conv));      
       break;
     }

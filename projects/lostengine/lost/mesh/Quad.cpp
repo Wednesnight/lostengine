@@ -46,7 +46,7 @@ Quad::Quad(common::DataPtr data, bool flip)
 
   this->drawMode = GL_TRIANGLES;
   gl::TexturePtr tex(new gl::Texture(data));
-  math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
+  math::Rect rect(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
   this->material->textures.push_back(tex);
   uint32_t numQuads = 1;
   uint32_t numVertices = numQuads*4;
@@ -68,7 +68,7 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
   this->resetBuffers(layout, gl::ET_u32);
 
   this->drawMode = GL_TRIANGLES;
-  math::Rect rect(0,0,tex->dataWidth, tex->dataHeight);
+  math::Rect rect(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
   this->material->textures.push_back(tex);
   uint32_t numQuads = 1;
   uint32_t numVertices = numQuads*4;
@@ -197,7 +197,7 @@ void Quad::createTexCoords(uint32_t quadNum,       // the index of the quad whos
                      bool flip)                // if flip 0 true, texture coordinates will be flipped vertically
 {
   gl::TexturePtr tex = this->material->textures[texNum];
-  math::Rect pixelCoords(0,0,tex->dataWidth, tex->dataHeight);
+  math::Rect pixelCoords(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
   createTexCoords(quadNum, texNum, pixelCoords, flip);
 }
 

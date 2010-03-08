@@ -49,8 +49,8 @@ ScaleGrid::ScaleGrid(gl::TexturePtr tex,
   // we need to calculate the texel coordinates from the texture.
   this->createVertices(math::Vec2(rect.width, rect.height), left, right, top, bottom);
 
-  float tw = std::min(tex->dataWidth, tex->width);
-  float th = std::min(tex->dataHeight, tex->height);
+  float tw = (float)std::min(tex->dataWidth, tex->width);
+  float th = (float)std::min(tex->dataHeight, tex->height);
 
   if(flip)
   {
