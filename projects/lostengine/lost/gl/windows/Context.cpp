@@ -56,7 +56,7 @@ namespace lost
     void* Context::getCurrentOsSpecific()
     {
 	    return currentContext;
-	}
+    }
     
     void Context::setCurrentOsSpecififc(void* ctx)
     {

@@ -95,7 +95,7 @@ namespace lost
     void FrameBuffer::Attachment::updateRenderBuffer()
     {
       renderBuffer->enable();
-      renderBuffer->storage(bitFormat, size.width, size.height);
+      renderBuffer->storage(bitFormat, (GLsizei)size.width, (GLsizei)size.height);
       renderBuffer->disable();
     }
 
@@ -121,7 +121,7 @@ namespace lost
     FrameBuffer::Attachment::Attachment(const TexturePtr& texture)
     {
       bitFormat = texture->internalFormat;
-      size = Vec2(texture->width, texture->height);
+      size = Vec2((float)texture->width, (float)texture->height);
       usageType = UT_texture;
 
       this->texture = texture;
@@ -133,7 +133,7 @@ namespace lost
     FrameBuffer::Attachment::Attachment(const RenderBufferPtr& renderBuffer)
     {
       bitFormat = renderBuffer->internalFormat();
-      size = Vec2(renderBuffer->width(), renderBuffer->height());
+      size = Vec2((float)renderBuffer->width(), (float)renderBuffer->height());
       usageType = UT_renderBuffer;
       
       this->renderBuffer = renderBuffer;
@@ -213,7 +213,7 @@ namespace lost
 
     FrameBuffer::FrameBuffer(const math::Vec2& size, GLenum colorBits, GLenum depthBits, GLenum stencilBits)
     {
-      this->size = Vec2(nextPowerOf2((unsigned long)size.width), nextPowerOf2((unsigned long)size.height));
+      this->size = Vec2((float)nextPowerOf2((unsigned long)size.width), (float)nextPowerOf2((unsigned long)size.height));
 
       lglGenFramebuffers(1, &buffer); GLDEBUG_THROW;
 
@@ -384,7 +384,7 @@ namespace lost
 
     void FrameBuffer::resize(const Vec2& size)
     {
-      this->size = Vec2(nextPowerOf2((unsigned long)size.width), nextPowerOf2((unsigned long)size.height));
+      this->size = Vec2((float)nextPowerOf2((unsigned long)size.width), (float)nextPowerOf2((unsigned long)size.height));
       for (map<uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
       {
         idx->second->resize(size);

@@ -199,7 +199,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     {
       if(currentScissorRect != rect)
       {
-        glScissor(rect.x, rect.y, rect.width, rect.height);
+        glScissor((GLint)rect.x, (GLint)rect.y, (GLsizei)rect.width, (GLsizei)rect.height);
         currentScissorRect = rect;
       }
     }
@@ -228,7 +228,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       if (currentCam != cam || currentCam->needsUpdate)
       {
         math::Rect viewport = cam->viewport();
-        glViewport(viewport.x, viewport.y, viewport.width, viewport.height);GLDEBUG;
+        glViewport((GLint)viewport.x, (GLint)viewport.y, (GLsizei)viewport.width, (GLsizei)viewport.height);GLDEBUG;
         glMatrixMode(GL_PROJECTION);GLDEBUG;
         glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
         if (currentCam != cam) currentCam = cam;
@@ -428,8 +428,8 @@ std::map<void*, Context*> glContext2lostGlContext;
     {
       GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;
       Bitmap::Components bitmapFormat = withAlphaChannel ? Bitmap::COMPONENTS_RGBA : Bitmap::COMPONENTS_RGB;
-      Bitmap bmp(currentCam->viewport().width,
-                 currentCam->viewport().height,
+      Bitmap bmp((uint32_t)currentCam->viewport().width,
+                 (uint32_t)currentCam->viewport().height,
                  bitmapFormat);
       glReadPixels(0,
                    0,

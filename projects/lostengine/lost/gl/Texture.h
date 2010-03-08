@@ -124,7 +124,7 @@ namespace lost
 
       inline math::Vec2 normalisedCoord(const math::Vec2& pixelCoord)
       {
-        return math::Vec2(normalisedXCoord(pixelCoord.x), normalisedYCoord(pixelCoord.y));
+        return math::Vec2(normalisedXCoord((uint32_t)pixelCoord.x), normalisedYCoord((uint32_t)pixelCoord.y));
       }
       
       // returns pixel 0,0 as normalised textur coordianate 
@@ -142,7 +142,7 @@ namespace lost
         uint32_t maxY = std::min(dataHeight, height);
 //        float fMaxX = maxX ? (float)(maxX-1) : (float)maxX;
 //        float fMaxY = maxY ? (float)(maxY-1) : (float)maxY;
-        return normalisedCoord(math::Vec2(maxX, maxY));
+        return normalisedCoord(math::Vec2((float)maxX, (float)maxY));
       }
       
     private:

@@ -142,8 +142,8 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   // memorize texture and raw data sizes for texture coordinate calculations
   width = texwidth;
   height = texheight;
-  dataWidth = inSize.width;
-  dataHeight = inSize.height;
+  dataWidth = (uint32_t)inSize.width;
+  dataHeight = (uint32_t)inSize.height;
 }
 
 void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
@@ -180,8 +180,8 @@ void Texture::subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr inBi
 {
   glTexSubImage2D(GL_TEXTURE_2D,
                   0,
-                  targetPos.x,
-                  targetPos.y,
+                  (GLint)targetPos.x,
+                  (GLint)targetPos.y,
                   inBitmap->width,
                   inBitmap->height,
                   bitmapComponents2GlFormat(inBitmap->format),

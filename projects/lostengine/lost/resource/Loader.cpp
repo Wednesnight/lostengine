@@ -31,7 +31,7 @@ namespace lost
           result = repositories[idx]->load( inPath);
           break;
         }
-        catch (std::exception& e)
+        catch (std::exception& /*e*/)
         {
 //          DOUT("trying next repository: " << e.what());
         }
