@@ -24,7 +24,6 @@ namespace lost
       void TaskletThread::error(fhtagn::threads::tasklet& t, std::exception const& e)
       {
         EOUT(e.what());
-        tasklet->stop();
       }
 
   }

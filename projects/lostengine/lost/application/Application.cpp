@@ -122,6 +122,7 @@ namespace lost
         return;
       }
 
+      (*t_iter)->stop();
       delete *t_iter;
       tasklets.erase(t_iter);
     }
