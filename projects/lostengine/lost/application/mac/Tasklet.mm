@@ -1,6 +1,7 @@
 #include "lost/application/Tasklet.h"
 #include "lost/application/TaskletThread.h"
 #include "lost/application/TaskletEvent.h"
+#include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include <sstream>
 #include <stdexcept>
@@ -34,6 +35,11 @@ namespace lost
       bool hasError = false;
       try
       {
+        // make sure that our GL context is the current context
+        if(window != NULL)
+        {
+          window->context->makeCurrent();
+        }
         if (startup())
         {
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update())
@@ -56,9 +62,9 @@ namespace lost
       {
         hasError = true;
       }
+      isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
       [pool drain];
-      isAlive = false;
       if (hasError)
       {
         ostringstream os;
@@ -76,7 +82,15 @@ namespace lost
         if (waitForEvents) eventDispatcher->wakeup();
         hiddenMembers->thread->wait();
       }
-      cleanup();
+      else
+      {
+        // make sure that our GL context is the current context
+        if(window != NULL)
+        {
+          window->context->makeCurrent();
+        }
+        cleanup();
+      }
     }
 
   }

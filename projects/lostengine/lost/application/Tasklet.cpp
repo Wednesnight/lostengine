@@ -131,11 +131,6 @@ namespace lost
     bool Tasklet::startup()
     {    
       bool result = true;
-      // make sure that our GL context is the current context on startup of this thread
-      if(window != NULL)
-      {
-        window->context->makeCurrent();
-      }
       if(hasLuaStartup)
       {
         result = call_function<bool>(luaStartup, this);
