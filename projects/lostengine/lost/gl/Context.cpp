@@ -136,6 +136,15 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
 
+    void Context::cleanup()
+    {
+      currentCam.reset();
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+      currentShader.reset();
+#endif
+      currentBuffer = NULL;
+    }
+
     void Context::bindFramebuffer(FrameBufferPtr& fbo)
     {
       fbo->bind();

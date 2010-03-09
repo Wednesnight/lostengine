@@ -56,18 +56,6 @@ namespace lost
     
     Tasklet::~Tasklet()
     {
-      // first: clear the dispatcher/callbacks and cleanup all lua callback resources
-      eventDispatcher->clear();
-      luabind::object nil;
-      luaStartup = nil;
-      luaUpdate = nil;
-      luaShutdown = nil;
-      renderNode.reset();
-      updateQueue.reset();
-      if (window) delete window;
-      loader.reset(); // loader is also present in lua state, so kill it first
-      eventDispatcher.reset(); 
-      lua.reset();
     }
 
     void Tasklet::init()
@@ -105,6 +93,23 @@ namespace lost
       if(luabind::type(luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
       luaShutdown = lua->globals["shutdown"];
       if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
+    }
+
+    void Tasklet::cleanup()
+    {
+      // first: clear the dispatcher/callbacks and cleanup all lua callback resources
+      eventDispatcher->clear();
+      luabind::object nil;
+      luaStartup = nil;
+      luaUpdate = nil;
+      luaShutdown = nil;
+      renderNode.reset();
+      updateQueue.reset();
+      loader.reset(); // loader is also present in lua state, so kill it first
+      eventDispatcher.reset(); 
+      if (window) window->context->cleanup();
+      lua.reset();
+      if (window) delete window;
     }
 
     void Tasklet::render()
