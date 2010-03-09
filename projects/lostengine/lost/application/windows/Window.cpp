@@ -289,7 +289,7 @@ namespace lost
     void Window::close()
     {
       DOUT("Window::close()");
-      CloseWindow(hiddenMembers->handle);
+      ShowWindow(hiddenMembers->handle, SW_HIDE);
     }
 
   }

@@ -91,6 +91,8 @@ namespace lost
       Context();
       ~Context();
 
+      void cleanup(); // cleanup all resources
+
       /**
        * sets this OpenGL context as the thread's current context
        */

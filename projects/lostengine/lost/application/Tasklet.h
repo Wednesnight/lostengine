@@ -30,7 +30,7 @@ namespace lost
        * forward declaration for platform specific stuff
        */
       struct TaskletHiddenMembers;
-      TaskletHiddenMembers* hiddenMembers;
+      lost::shared_ptr<TaskletHiddenMembers> hiddenMembers;
 
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
@@ -45,7 +45,8 @@ namespace lost
       lua::StatePtr                   lua;
       WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
 
-      virtual void init(); // reads main.lua if present and creates a window if desired
+      virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
+      virtual void cleanup(); // cleanup all resources; called from platform specific implementation
 
   	  virtual bool startup();	  // called once in run, return false if startup fails
       virtual bool update();    // called repeatedly in run, return false if you want to shutdown
