@@ -19,11 +19,15 @@
 #include "lost/application/QueueEntity.h"
 #include "lost/application/QueueEntityLua.h"
 #include "lost/rg/Node.h"
+#include "lost/resource/Loader.h"
+#include "lost/resource/ApplicationResourceRepository.h"
+#include "lost/resource/FilesystemRepository.h"
 #include <luabind/shared_ptr_converter.hpp>
 
 using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
+using namespace lost::resource;
 
 namespace lost
 {
@@ -275,6 +279,14 @@ namespace lost
       ];
     }
 
+    EventPtr SpawnTaskletEvent_create(const std::string& absolutePath)
+    {
+      LoaderPtr loader = Loader::create();
+      loader->addRepository(FilesystemRepository::create(absolutePath));
+      loader->addRepository(ApplicationResourceRepository::create());
+      return SpawnTaskletEvent::create(loader);
+    }
+
     void LostApplicationSpawnTaskletEvent(lua_State* state)
     {
       module(state, "lost")
@@ -282,10 +294,9 @@ namespace lost
         namespace_("application")
         [
           class_<SpawnTaskletEvent, Event>("SpawnTaskletEvent")
-            .def(constructor<resource::LoaderPtr>()) 
             .scope
             [
-              def("create", &SpawnTaskletEvent::create)         
+              def("create", &SpawnTaskletEvent_create)
             ]
         ]
       ];

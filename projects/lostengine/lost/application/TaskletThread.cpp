@@ -13,6 +13,7 @@ namespace lost
       : fhtagn::threads::tasklet(bind(&TaskletThread::run, this, _1)),
         tasklet(inTasklet)
       {
+        add_error_handler(bind(&TaskletThread::error, this, _1, _2));
       }
 
       void TaskletThread::run(fhtagn::threads::tasklet& t)
@@ -23,7 +24,7 @@ namespace lost
       void TaskletThread::error(fhtagn::threads::tasklet& t, std::exception const& e)
       {
         EOUT(e.what());
-        tasklet->dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), tasklet)));
+        tasklet->stop();
       }
 
   }

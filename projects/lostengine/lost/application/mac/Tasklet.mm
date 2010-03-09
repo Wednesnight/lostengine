@@ -2,8 +2,12 @@
 #include "lost/application/TaskletThread.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/event/EventDispatcher.h"
+#include <sstream>
+#include <stdexcept>
 
 #include <Foundation/NSAutoreleasePool.h>
+
+using namespace std;
 
 namespace lost
 {
@@ -12,49 +16,67 @@ namespace lost
 
     struct Tasklet::TaskletHiddenMembers
     {
-      TaskletThread* thread;
+      lost::shared_ptr<TaskletThread> thread;
     };
 
     void Tasklet::start()
     {
       init();
-      hiddenMembers = new TaskletHiddenMembers;
-      hiddenMembers->thread = new TaskletThread(this);
-      isAlive = hiddenMembers->thread->start();
+      hiddenMembers.reset(new TaskletHiddenMembers);
+      hiddenMembers->thread.reset(new TaskletThread(this));
+      hiddenMembers->thread->start();
     }
 
     void Tasklet::run()
     {
+      isAlive = true;
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-      if (startup())
+      bool hasError = false;
+      try
       {
-        while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update())
+        if (startup())
         {
-          render();
-
-          if(waitForEvents)
+          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update())
           {
-            eventDispatcher->waitForEvents();
-          }
-          processEvents();
+            render();
 
-          [pool drain];
-          pool = [[NSAutoreleasePool alloc] init];  
+            if(waitForEvents)
+            {
+              eventDispatcher->waitForEvents();
+            }
+            processEvents();
+
+            [pool drain];
+            pool = [[NSAutoreleasePool alloc] init];  
+          }
+          shutdown();
         }
-        shutdown();
       }
-      [pool drain];
+      catch (...)
+      {
+        hasError = true;
+      }
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      [pool drain];
+      isAlive = false;
+      if (hasError)
+      {
+        ostringstream os;
+        os << "Tasklet terminated with error: " << name;
+        throw runtime_error(os.str());
+      }
     }
 
     void Tasklet::stop()
     {
-      isAlive = !hiddenMembers->thread->stop();
-      if (!isAlive)
+      if (isAlive)
       {
+        hiddenMembers->thread->stop();
+        // wakeup
+        if (waitForEvents) eventDispatcher->wakeup();
         hiddenMembers->thread->wait();
-        delete hiddenMembers;
       }
+      cleanup();
     }
 
   }
