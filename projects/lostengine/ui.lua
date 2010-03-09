@@ -16,10 +16,7 @@ return dcl.guiro:Screen
     bubble =
     {
       drop = function(event)
-        local loader = Loader.create()
-        loader:addRepository(FilesystemRepository.create(event.filename))
-        loader:addRepository(ApplicationResourceRepository.create())
-        currentTasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(loader))
+        currentTasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(event.filename))
       end
     }
   },

@@ -29,19 +29,5 @@ function startup(tasklet)
 --  tasklet.renderNode:print()
 --  screen:printSubviews()
 
-  -- finally, setup events
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-
   return true
-end
-
-
---[[
-    key handler
-  ]]
-function keyHandler(event)
-  local tasklet = lost.application.currentTasklet
-  if event.key == lost.application.K_ESCAPE and tasklet ~= nil then
-    tasklet:dispatchApplicationEvent(ApplicationEvent.create(ApplicationEvent.QUIT))
-  end
 end
