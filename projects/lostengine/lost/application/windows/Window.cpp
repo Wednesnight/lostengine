@@ -283,13 +283,13 @@ namespace lost
     void Window::open()
     {
       DOUT("Window::open()");
-      ShowWindow(hiddenMembers->handle, SW_SHOW);
+      SendMessage(hiddenMembers->handle, WM_SHOWWINDOW, TRUE, 0);
     }
 
     void Window::close()
     {
       DOUT("Window::close()");
-      ShowWindow(hiddenMembers->handle, SW_HIDE);
+      SendMessage(hiddenMembers->handle, WM_CLOSE, 0, 0);
     }
 
   }
