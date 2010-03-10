@@ -20,6 +20,7 @@ void main(void)
     v = 1.0-smoothstep(srstart, r, currentR);
   }
   float f = v;
+  if(f <= 0.0) discard;
   gl_FragColor = vec4(color.rgb*lightIntensity,f);
 //gl_FragColor = vec4(f,f,f,1);
 }
