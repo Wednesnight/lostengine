@@ -19,6 +19,7 @@ namespace lost
     struct Tasklet::TaskletHiddenMembers
     {
       lost::shared_ptr<TaskletThread> thread;
+      unsigned int threadId;
     };
 
     void Tasklet::start()
@@ -31,6 +32,7 @@ namespace lost
     void Tasklet::run()
     {
       isAlive = true;
+      hiddenMembers->threadId = GetCurrentThreadId();
       init();
       bool hasError = false;
       try
@@ -85,7 +87,7 @@ namespace lost
         // wakeup
         if (waitForEvents)
         {
-          if (window) window->close();
+          if (window) PostThreadMessage(hiddenMembers->threadId, WM_NOTIFY, 0, 0);
             else eventDispatcher->wakeup();
         }
         hiddenMembers->thread->wait();
