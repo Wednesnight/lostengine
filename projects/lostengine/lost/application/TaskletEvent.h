@@ -14,6 +14,7 @@ namespace lost
   
     struct TaskletEvent : public event::Event
     {
+      static const event::Type& TERMINATE() { static event::Type d = "taskletTerminate"; return d; }
       static const event::Type& DONE() { static event::Type d = "taskletDone"; return d; }
 
       Tasklet* tasklet;

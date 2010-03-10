@@ -169,7 +169,7 @@ namespace lost
 
     void Tasklet::closeWindow(WindowEventPtr event)
     {
-      stop();
+      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::TERMINATE(), this)));
     }
     
     void Tasklet::queueApplicationEvent(EventPtr event)

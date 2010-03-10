@@ -99,6 +99,13 @@ namespace lost
        * should be executed on main thread!
        */
       void shutdown();
+
+      void taskletSpawn(const SpawnTaskletEventPtr& event);   // Tasklet spawn handler
+      void taskletTerminate(const TaskletEventPtr& event);    // Tasklet terminate handler
+      void taskletDone(const TaskletEventPtr& event);         // Tasklet done handler
+      void queueEvent(const QueueEventPtr& event);            // listener for QueueEvent.QUEUE()
+      void processEvents(const ProcessEventPtr& event);       // should be executed on main thread!
+
     public:
       lost::event::EventDispatcherPtr eventDispatcher;
 
@@ -110,14 +117,10 @@ namespace lost
 
       ~Application();
 
-      void addTasklet(Tasklet* tasklet); // adds the specified tasklet, calls it's init() and start() methods
-      void run(); // starts all tasklets and queues a run event
-      void quit(); // quits the app
-      void showMouse(bool visible); // call this to show/hide the OS mouse
-      void taskletSpawn(const SpawnTaskletEventPtr& event); // Tasklet spawn handler
-      void taskletDone(const TaskletEventPtr& event); // Tasklet done handler
-      void queueEvent(const QueueEventPtr& event); // listener for QueueEvent.QUEUE()
-      void processEvents(const ProcessEventPtr& event); // should be executed on main thread!
+      void addTasklet(Tasklet* tasklet);  // adds the specified tasklet, calls it's init() and start() methods
+      void run();                         // starts all tasklets and queues a run event
+      void quit();                        // quits the app
+      void showMouse(bool visible);       // call this to show/hide the OS mouse
     };
 
   }

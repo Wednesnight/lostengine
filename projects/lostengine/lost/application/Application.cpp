@@ -43,6 +43,7 @@ namespace lost
       eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
       eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::quitHandler, this, _1)));
       eventDispatcher->addEventListener(SpawnTaskletEvent::SPAWN_TASKLET(), event::receive<SpawnTaskletEvent>(bind(&Application::taskletSpawn, this, _1)));
+      eventDispatcher->addEventListener(TaskletEvent::TERMINATE(), event::receive<TaskletEvent>(bind(&Application::taskletTerminate, this, _1)));
       eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
     }
 
@@ -125,6 +126,11 @@ namespace lost
       (*t_iter)->stop();
       delete *t_iter;
       tasklets.erase(t_iter);
+    }
+
+    void Application::taskletTerminate(const TaskletEventPtr& event)
+    {
+      event->tasklet->stop();
     }
 
     void Application::taskletDone(const TaskletEventPtr& event)
