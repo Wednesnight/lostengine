@@ -1,16 +1,16 @@
-varying float lightIntensity;
-varying vec3 texcoord;
-uniform vec4 color; // same semantics as gl_Color
+varying highp float lightIntensity;
+varying highp vec3 texcoord;
+uniform highp vec4 color; // same semantics as gl_Color
 
 void main(void)
 {
-  vec2 c = vec2(.5, .5);
-  float r = texcoord.z;
-  float border = .01;
-  float srstart = r-border;
-  vec2 p = (texcoord-vec3(c, 0)).xy;
-  float currentR = sqrt(p.x*p.x+p.y*p.y);
-  float v = 0.0;
+  highp vec2 c = vec2(.5, .5);
+  highp float r = texcoord.z;
+  highp float border = .01;
+  highp float srstart = r-border;
+  highp vec2 p = (texcoord-vec3(c, 0)).xy;
+  highp float currentR = sqrt(p.x*p.x+p.y*p.y);
+  highp float v = 0.0;
   if(currentR < srstart)
   {
     v = 1.0;
@@ -19,7 +19,7 @@ void main(void)
   {
     v = 1.0-smoothstep(srstart, r, currentR);
   }
-  float f = v;
+  highp float f = v;
   gl_FragColor = vec4(color.rgb*lightIntensity,f);
 //gl_FragColor = vec4(f,f,f,1);
 }
