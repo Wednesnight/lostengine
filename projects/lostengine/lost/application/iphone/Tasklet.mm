@@ -69,19 +69,17 @@ namespace lost
     {
       DOUT("");
       init();
-      // initialize CADisplayLink
-      isAlive = true;
-      hiddenMembers = NULL;
 
       if(startup())
       {
+        isAlive = true;
 
-        // FIXME: my ass
+        // FIXME: fake resize event from here, window size won't probably ever change so we're fine
         lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(new lost::application::ResizeEvent(320, 480));
         eventDispatcher->dispatchEvent(resizeEvent);
       
         DOUT("startup ok, starting DisplayLink");
-        hiddenMembers = new TaskletHiddenMembers;
+        hiddenMembers.reset(new TaskletHiddenMembers);
         hiddenMembers->displayLink = [[TaskletDisplayLink alloc] initWithTasklet:this];
         [hiddenMembers->displayLink start];
       }
@@ -112,14 +110,22 @@ namespace lost
     void Tasklet::stop()
     {
       DOUT("");
-      // cleanup CADisplayLink
-      if(hiddenMembers && hiddenMembers->displayLink)
+      if(isAlive==true)
       {
-        [hiddenMembers->displayLink stop];
+        if(hiddenMembers && hiddenMembers->displayLink)
+        {
+          [hiddenMembers->displayLink stop];
+          [hiddenMembers->displayLink release];
+          hiddenMembers.reset();
+        }
+        isAlive = false;
+        shutdown();
+        dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
       }
-      isAlive = false;
-      shutdown();
-      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      else
+      {
+        cleanup();
+      }
     }
 
   }
