@@ -8,19 +8,19 @@ namespace lost
   namespace application
   {
 
-    int runTasklet()
+    int runTasklet(int argc, char *argv[])
     {
-      return runTasklet(new Tasklet);
+      return runTasklet(argc, argv, new Tasklet);
     }
     
 
-    int runTasklet(Tasklet* t)
+    int runTasklet(int argc, char *argv[], Tasklet* t)
     {
       int result = EXIT_SUCCESS;
       try
       {
         static ApplicationPtr app = Application::create(t);
-        app->run();      
+        app->run(argc, argv);      
       }
       catch (std::exception& e)
       {

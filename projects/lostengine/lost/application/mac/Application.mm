@@ -98,7 +98,7 @@ namespace lost
       delete hiddenMembers;
     }
 
-    void Application::run()
+    void Application::run(int argc, char *argv[])
     {
       [NSApp run];
     }
