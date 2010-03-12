@@ -18,7 +18,7 @@ Quad::Quad(const math::Rect& inRect)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  this->resetBuffers(layout, gl::ET_u32);
+  this->resetBuffers(layout, gl::ET_u16);
   
   this->drawMode = GL_TRIANGLES;
   uint32_t numQuads = 1;
@@ -42,7 +42,7 @@ Quad::Quad(common::DataPtr data, bool flip)
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
-  this->resetBuffers(layout, gl::ET_u32);
+  this->resetBuffers(layout, gl::ET_u16);
 
   this->drawMode = GL_TRIANGLES;
   gl::TexturePtr tex(new gl::Texture(data));
@@ -65,7 +65,7 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
-  this->resetBuffers(layout, gl::ET_u32);
+  this->resetBuffers(layout, gl::ET_u16);
 
   this->drawMode = GL_TRIANGLES;
   math::Rect rect(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
@@ -87,7 +87,7 @@ Quad::Quad(const std::vector<math::Rect>& rects)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  this->resetBuffers(layout, gl::ET_u32);
+  this->resetBuffers(layout, gl::ET_u16);
 
   this->drawMode = GL_TRIANGLES;
   uint32_t numQuads = rects.size();
@@ -128,7 +128,7 @@ void Quad::init(const std::vector<math::Rect>& rects,
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
-  this->resetBuffers(layout, gl::ET_u32);
+  this->resetBuffers(layout, gl::ET_u16);
   
   this->drawMode = GL_TRIANGLES;
   this->material->textures.clear();
