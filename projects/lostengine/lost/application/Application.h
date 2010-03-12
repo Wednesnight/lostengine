@@ -40,7 +40,6 @@ namespace lost
     
     struct Application : public lost::enable_shared_from_this<Application>
     {
-    private:
       /**
        * forward declaration for platform specific stuff
        */
@@ -118,7 +117,7 @@ namespace lost
       ~Application();
 
       void addTasklet(Tasklet* tasklet);  // adds the specified tasklet, calls it's init() and start() methods
-      void run();                         // starts all tasklets and queues a run event
+      void run(int argc, char *argv[]);   // starts all tasklets and queues a run event
       void quit();                        // quits the app
       void showMouse(bool visible);       // call this to show/hide the OS mouse
     };

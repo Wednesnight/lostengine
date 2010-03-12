@@ -8,8 +8,8 @@ namespace lost
 
     struct Tasklet;
 
-    int runTasklet();
-    int runTasklet(Tasklet* t);
+    int runTasklet(int argc, char *argv[]);
+    int runTasklet(int argc, char *argv[], Tasklet* t);
       
   }
 }
