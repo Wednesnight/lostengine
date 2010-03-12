@@ -4,10 +4,7 @@
 #include "lost/lgl/lgl.h"
 #include "lost/camera/Camera.h"
 #include <algorithm>
-
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
 #include "lost/gl/ShaderProgram.h"
-#endif
 
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
@@ -95,14 +92,14 @@ std::map<void*, Context*> glContext2lostGlContext;
       // have to set the default in the context, after creation
       m_defaultFrameBuffer = 0; 
 
-      vertexArrayEnabled = getParam<bool>(GL_VERTEX_ARRAY);
-      normalArrayEnabled = getParam<bool>(GL_NORMAL_ARRAY);
-      texCoordArrayEnabled = getParam<bool>(GL_TEXTURE_COORD_ARRAY);
+//      vertexArrayEnabled = getParam<bool>(GL_VERTEX_ARRAY);
+//      normalArrayEnabled = getParam<bool>(GL_NORMAL_ARRAY);
+//      texCoordArrayEnabled = getParam<bool>(GL_TEXTURE_COORD_ARRAY);
 //      indexArrayEnabled = getParam<bool>(GL_INDEX_ARRAY);
       depthTestEnabled = getParam<bool>(GL_DEPTH_TEST);  
       blendEnabled = getParam<bool>(GL_BLEND);
-      currentBlendFuncSource = getParam<int>(GL_BLEND_SRC);
-      currentBlendFuncDestination = getParam<int>(GL_BLEND_DST);
+      currentBlendFuncSource = GL_ZERO; //getParam<int>(GL_BLEND_SRC);
+      currentBlendFuncDestination = GL_ZERO; //getParam<int>(GL_BLEND_DST);
       scissorEnabled = getParam<bool>(GL_SCISSOR_TEST);
       texture2DEnabled = getParam<bool>(GL_TEXTURE_2D);
       currentActiveTexture = getParam<int>(GL_ACTIVE_TEXTURE);
@@ -112,8 +109,8 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentBuffer = NULL;
       cullEnabled = getParam<bool>(GL_CULL_FACE);
       cullFaceMode = getParam<int>(GL_CULL_FACE_MODE);
-/*      
-      uint32_t maxNumVertexAttribs = getParam<int>(GL_MAX_VERTEX_ATTRIBS);
+
+/*      uint32_t maxNumVertexAttribs = getParam<int>(GL_MAX_VERTEX_ATTRIBS);
       DOUT("------------ max num vertex attributes: "<<maxNumVertexAttribs);
       // enable all, but not more than 16
       uint32_t arbitraryLimit = 16;
@@ -121,8 +118,8 @@ std::map<void*, Context*> glContext2lostGlContext;
       for(uint32_t i=0; i<numEnabledVertexAttribs; ++i)
       {
         glEnableVertexAttribArray(i);GLDEBUG;
-      }
-*/
+      }*/
+
     }
     
     Context::~Context()
@@ -139,9 +136,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::cleanup()
     {
       currentCam.reset();
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       currentShader.reset();
-#endif
       currentBuffer = NULL;
     }
 
@@ -171,10 +166,10 @@ std::map<void*, Context*> glContext2lostGlContext;
     }
 
     // FIXME: replace macros by dedficated functions that operate on member reference
-    void Context::vertexArray(bool enable) { CLIENTSTATE(vertexArrayEnabled, enable, GL_VERTEX_ARRAY); }
-    void Context::normalArray(bool enable) { CLIENTSTATE(normalArrayEnabled, enable, GL_NORMAL_ARRAY); }
-    void Context::colorArray(bool enable) { CLIENTSTATE(colorArrayEnabled, enable, GL_COLOR_ARRAY); }
-    void Context::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
+//    void Context::vertexArray(bool enable) { CLIENTSTATE(vertexArrayEnabled, enable, GL_VERTEX_ARRAY); }
+//    void Context::normalArray(bool enable) { CLIENTSTATE(normalArrayEnabled, enable, GL_NORMAL_ARRAY); }
+//    void Context::colorArray(bool enable) { CLIENTSTATE(colorArrayEnabled, enable, GL_COLOR_ARRAY); }
+//    void Context::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
 //    void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
     void Context::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
     void Context::blend(bool enable) { SERVERSTATE(blendEnabled, enable, GL_BLEND);}
@@ -196,14 +191,14 @@ std::map<void*, Context*> glContext2lostGlContext;
          (currentBlendFuncDestination != dest)
          )
       {
-        glBlendFunc(src, dest);
+        glBlendFunc(src, dest);GLDEBUG;
         currentBlendFuncSource = src;
         currentBlendFuncDestination = dest;
       }
     }
     
     void Context::scissor(bool enable) {SERVERSTATE(scissorEnabled, enable, GL_SCISSOR_TEST);}
-    void Context::texture2D(bool enable) {SERVERSTATE(texture2DEnabled, enable, GL_TEXTURE_2D);}
+    void Context::texture2D(bool enable) {/*SERVERSTATE(texture2DEnabled, enable, GL_TEXTURE_2D);*/}
     
     void Context::scissorRect(const math::Rect& rect)
     {
@@ -214,14 +209,14 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
 
-    void Context::color(const common::Color& col)
+/*    void Context::color(const common::Color& col)
     {
       if(currentColor != col)
       {
         glColor4f(col.fv[0], col.fv[1], col.fv[2], col.fv[3]); GLDEBUG; // OpenGL ES compatible 
         currentColor = col;
       }
-    }
+    }*/
   
     void Context::clearColor(const common::Color& col)
     {
@@ -239,23 +234,23 @@ std::map<void*, Context*> glContext2lostGlContext;
       {
         math::Rect viewport = cam->viewport();
         glViewport((GLint)viewport.x, (GLint)viewport.y, (GLsizei)viewport.width, (GLsizei)viewport.height);GLDEBUG;
-        glMatrixMode(GL_PROJECTION);GLDEBUG;
-        glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
+//        glMatrixMode(GL_PROJECTION);GLDEBUG;
+//        glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
         if (currentCam != cam) currentCam = cam;
       }
     }
     
     void Context::transform(const math::Matrix& inTransform)
     {
-      glMatrixMode(GL_MODELVIEW);GLDEBUG;
+//      glMatrixMode(GL_MODELVIEW);GLDEBUG;
       if(currentCam && currentCam->hasModelViewMatrix)
       {
-        glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
-        glMultMatrixf(inTransform.m);GLDEBUG;
+//        glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
+//        glMultMatrixf(inTransform.m);GLDEBUG;
       }
       else
       {
-        glLoadMatrixf(inTransform.m);GLDEBUG;
+//        glLoadMatrixf(inTransform.m);GLDEBUG;
       }
       currentTransform = inTransform;
     }
@@ -285,7 +280,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
     void Context::shader(ShaderProgramPtr prog)
     {
       if(currentShader && !prog)
@@ -296,11 +290,10 @@ std::map<void*, Context*> glContext2lostGlContext;
         currentShader->enable();
       }
     }
-#endif    
     
     void Context::material(MaterialPtr mat)
     {
-      color(mat->color);
+//      color(mat->color);
       if(mat->textures.size()>0)
       {
         bindActiveTextures(mat->textures);
@@ -328,9 +321,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       {
         cull(false);
       }
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       shader(mat->shader);
-#endif
     }
         
     void Context::draw(MeshPtr mesh)
@@ -343,7 +334,7 @@ std::map<void*, Context*> glContext2lostGlContext;
 
       Buffer* gpuBuffer = vb->bufferForUsageType(UT_position);
       bind(gpuBuffer);
-      vertexArray(true);
+//      vertexArray(true);
       
 /*      const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_position);
       glVertexPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;
@@ -410,6 +401,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
         if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
 
+
         // map vertex attributes from buffer to shader according to the vertex buffers attribute map
         VertexAttributeMap::iterator i = vb->vertexAttributeMap.begin();
         VertexAttributeMap::iterator end = vb->vertexAttributeMap.end();
@@ -428,7 +420,12 @@ std::map<void*, Context*> glContext2lostGlContext;
         }
       }
       
-      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);
+      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+      // disable vertex attributes when we're done
+      for (std::vector<GLint>::iterator idx = enabledVertexAttributes.begin(); idx != enabledVertexAttributes.end(); ++idx)
+      {
+        glDisableVertexAttribArray(*idx);
+      }
 
       // disable vertex attributes when we're done
       for (std::vector<GLint>::iterator idx = enabledVertexAttributes.begin(); idx != enabledVertexAttributes.end(); ++idx)
@@ -464,11 +461,11 @@ std::map<void*, Context*> glContext2lostGlContext;
 
     void Context::bind(Buffer* buffer)
     {
-      if(buffer != currentBuffer)
-      {
+//      if(buffer != currentBuffer)
+//      {
         glBindBuffer(buffer->target, buffer->buffer);GLDEBUG;
-        currentBuffer = buffer;
-      }
+//        currentBuffer = buffer;
+//      }
     }
 
     Context* Context::getCurrent()

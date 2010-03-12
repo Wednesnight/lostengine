@@ -31,9 +31,7 @@ namespace utils
 #   define GLDEBUG_THROW
 #endif
 
-#if TARGET_OPENGL
     std::string enum2string(GLenum inVal);
-#endif
 }
 
 }

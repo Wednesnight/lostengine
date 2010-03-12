@@ -27,13 +27,13 @@ namespace gl
    void Buffer::bufferSubData(GLintptr offset,GLsizeiptr sizeInBytes,	const GLvoid* data) {Buffer::bufferSubData(target, offset, size, data);};
    void Buffer::bindBufferSubData(GLintptr offset,GLsizeiptr size,	const GLvoid* data) {bind(); Buffer::bufferSubData(target, offset, size, data);};
 
-
+/*
 //  virtual void bindIndexPointer(GLsizei stride=0, const GLvoid* pointer=0){bind();indexPointer(stride, pointer);}
    void Buffer::bindVertexPointer(GLsizei stride, const GLvoid* pointer){bind();vertexPointer(stride, pointer);}
    void Buffer::bindTexCoordPointer(GLsizei stride, const GLvoid* pointer) {bind();texCoordPointer(stride, pointer);}
    void Buffer::bindNormalPointer(GLsizei stride, const GLvoid* pointer) {bind();normalPointer(stride, pointer);}
    void Buffer::bindColorPointer(GLsizei stride, const GLvoid* pointer) {bind();colorPointer(stride, pointer);}
-
+*/
    void Buffer::drawArrays(GLenum mode, GLint first, GLsizei count)
   {
     if(count == -1)
@@ -57,8 +57,7 @@ namespace gl
     glDrawElements(mode, count, inType, indices);GLDEBUG_THROW;
   }
 
-#if TARGET_OPENGL
-  // indices: used as byte offset into buffer when element array is bound
+/*  // indices: used as byte offset into buffer when element array is bound
    void Buffer::drawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, const GLvoid* indices)
   {
     if(count == -1)
@@ -75,7 +74,7 @@ namespace gl
   {
     glDrawRangeElements(mode, start, end, count, inType, indices);GLDEBUG_THROW;
   }
-#endif
+*/
 
   /**
    * GL_ARRAY_BUFFER
@@ -144,31 +143,30 @@ namespace gl
    * stride: byte offset between consecutive vertices, default 0
    * pointer to first coord in array, default 0
    */
-   void Buffer::vertexPointer(GLsizei stride, const GLvoid* pointer)
+/*   void Buffer::vertexPointer(GLsizei stride, const GLvoid* pointer)
   {
     glVertexPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  }*/
 
   // size: 1,2,3 or 4
-   void Buffer::texCoordPointer(GLsizei stride, const GLvoid* pointer)
+/*   void Buffer::texCoordPointer(GLsizei stride, const GLvoid* pointer)
   {
     glTexCoordPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  }*/
 
   // always 3 coords?
-   void Buffer::normalPointer(GLsizei stride, const GLvoid* pointer)
+/*   void Buffer::normalPointer(GLsizei stride, const GLvoid* pointer)
   {
     glNormalPointer(type, stride, pointer);GLDEBUG_THROW;
-  }
+  }*/
 
   // size: 3 or 4
   // type: GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_UNSIGNED_INT, GL_FLOAT, GL_DOUBLE
-   void Buffer::colorPointer(GLsizei stride, const GLvoid* pointer)
+/*   void Buffer::colorPointer(GLsizei stride, const GLvoid* pointer)
   {
     glColorPointer(size, type, stride, pointer);GLDEBUG_THROW;
-  }
+  }*/
 
-#if TARGET_OPENGL
   /**
    * index_ index of generic vertex attribute
    * size: number of components per attribute, 1,2,3 or 4
@@ -179,7 +177,6 @@ namespace gl
   {
     glVertexAttribPointer(index, size, type, normalized, stride, pointer);GLDEBUG_THROW;
   }
-#endif
 
 }
 }

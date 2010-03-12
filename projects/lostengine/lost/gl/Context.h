@@ -33,10 +33,8 @@ namespace lost
     struct Context;
     typedef lost::shared_ptr<Context> ContextPtr;
 
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
     struct ShaderProgram;
     typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
-#endif
     struct Texture;
     typedef lost::shared_ptr<Texture> TexturePtr;
 
@@ -61,13 +59,11 @@ namespace lost
       bool scissorEnabled;
       math::Rect currentScissorRect;
       bool texture2DEnabled;
-      common::Color currentColor;
+//      common::Color currentColor;
       common::Color currentClearColor;
       camera::CameraPtr currentCam;
       GLenum currentActiveTexture;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       ShaderProgramPtr currentShader;
-#endif
       math::Matrix currentTransform;
       Buffer* currentBuffer;
       bool cullEnabled;
@@ -113,10 +109,10 @@ namespace lost
       void defaultFramebuffer(GLuint fbo);
       GLuint defaultFramebuffer();
 
-      void vertexArray(bool enable);
-      void normalArray(bool enable);
-      void colorArray(bool enable);
-      void texCoordArray(bool enable);
+//      void vertexArray(bool enable);
+//      void normalArray(bool enable);
+//      void colorArray(bool enable);
+//      void texCoordArray(bool enable);
 //      void indexArray(bool enable);
       void depthTest(bool enable);
       void blend(bool enable);
@@ -128,7 +124,7 @@ namespace lost
       void cullFace(GLenum v);
       
       void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
-      void color(const common::Color& col); // sets the current drawing color to col
+//      void color(const common::Color& col); // sets the current drawing color to col
       void clearColor(const common::Color& col); // sets the current clear color to col
       
       void camera(camera::CameraPtr cam);
@@ -144,9 +140,7 @@ namespace lost
       void draw(mesh::MeshPtr mesh);
       void drawSeparateBuffers(mesh::MeshPtr mesh);
       void drawInterleavedBuffers(mesh::MeshPtr mesh);
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
       void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
-#endif
       // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
       void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
       
