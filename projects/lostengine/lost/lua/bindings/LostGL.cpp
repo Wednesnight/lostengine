@@ -142,12 +142,12 @@ namespace lost
       globals(state)["gl"]["GL_DEPTH_BUFFER_BIT"] = GL_DEPTH_BUFFER_BIT;
       globals(state)["gl"]["GL_DEPTH_TEST"] = GL_DEPTH_TEST;
       globals(state)["gl"]["GL_FLOAT"] = GL_FLOAT;
-      globals(state)["gl"]["GL_LINE_SMOOTH"] = GL_LINE_SMOOTH;
+//      globals(state)["gl"]["GL_LINE_SMOOTH"] = GL_LINE_SMOOTH;
       globals(state)["gl"]["GL_LINEAR"] = GL_LINEAR;
-      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
+//      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
       globals(state)["gl"]["GL_NEAREST"] = GL_NEAREST;
       globals(state)["gl"]["GL_ONE_MINUS_SRC_ALPHA"] = GL_ONE_MINUS_SRC_ALPHA;
-      globals(state)["gl"]["GL_POINT_SMOOTH"] = GL_POINT_SMOOTH;
+//      globals(state)["gl"]["GL_POINT_SMOOTH"] = GL_POINT_SMOOTH;
       globals(state)["gl"]["GL_RGB"] = GL_RGB;
       globals(state)["gl"]["GL_RGBA"] = GL_RGBA;
       globals(state)["gl"]["GL_SCISSOR_TEST"] = GL_SCISSOR_TEST;
@@ -155,8 +155,8 @@ namespace lost
       globals(state)["gl"]["GL_TEXTURE_2D"] = GL_TEXTURE_2D;
       globals(state)["gl"]["GL_TRIANGLES"] = GL_TRIANGLES;
       globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
-      globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
-      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
+//      globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
+//      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
       globals(state)["gl"]["GL_FRONT"] = GL_FRONT;
       globals(state)["gl"]["GL_BACK"] = GL_BACK;
       globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
@@ -207,7 +207,7 @@ namespace lost
         ]
       ];
     }
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
+
     object ShaderProgram_uniformMap(object shaderProgramObj)
     {
       ShaderProgramPtr shaderProgram = object_cast<ShaderProgramPtr>(shaderProgramObj);
@@ -263,7 +263,7 @@ namespace lost
         ]
       ];
     }
-#endif
+
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
     {
       texture->init(p1, p2, p3, p4, p5, p6, p7, 0);
@@ -317,10 +317,8 @@ namespace lost
       LostGLContext(state);
       LostGLFrameBuffer(state);
       LostGLRenderBuffer(state);
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE            
       LostGLShaderProgram(state);
       LostGLUniform(state);
-#endif
       LostGLTexture(state);
     }
 

@@ -110,9 +110,7 @@ namespace lost
         [
           class_<Material>("Material")
             .def("addTexture", &LostMeshMaterial_addTexture)
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
             .def_readwrite("shader", &Material::shader)
-#endif
             .def_readwrite("color", &Material::color)
             .def_readwrite("blend", &Material::blend)
             .def_readwrite("blendSrc", &Material::blendSrc)
