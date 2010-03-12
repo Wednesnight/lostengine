@@ -1,10 +1,11 @@
-#import "LEApplication.h"
+#import "lost/application/iphone/LEApplication.h"
+#import "lost/common/Logger.h"
 
 @implementation LEApplication
 
 -(id)init
 {
-  NSLog(@"%s", __FUNCTION__);
+  DOUT("");
   if(self = [super init])
   {
   }

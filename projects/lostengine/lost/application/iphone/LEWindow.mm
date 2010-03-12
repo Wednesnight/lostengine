@@ -1,5 +1,6 @@
 #import "LEWindow.h"
 #import "LEGLView.h"
+#import "lost/common/Logger.h"
 
 @implementation LEWindow
 
@@ -9,7 +10,7 @@ leglView = _leglView
 
 -(id)initWithFrame:(CGRect)fr
 {
-  NSLog(@"building window");
+  DOUT("building window");
   if(self = [super initWithFrame:fr])
   {
     _leglView = [[LEGLView alloc] initWithFrame:fr];

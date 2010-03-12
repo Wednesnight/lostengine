@@ -1,7 +1,7 @@
 #import "LEGLView.h"
 #import <QuartzCore/CAEAGLLayer.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
+#import "lost/gl/Utils.h"
+#import "lost/common/Logger.h"
 
 @implementation LEGLView
 
@@ -10,7 +10,8 @@ context = _context,
 backingWidth = _backingWidth,
 backingHeight = _backingHeight,
 defaultFramebuffer = _defaultFramebuffer,
-colorRenderbuffer = _colorRenderbuffer
+colorRenderbuffer = _colorRenderbuffer,
+depthRenderbuffer = _depthRenderbuffer
 ;
 
 + (Class) layerClass
@@ -20,7 +21,7 @@ colorRenderbuffer = _colorRenderbuffer
 
 -(id)initWithFrame:(CGRect)fr
 {
-  NSLog(@"%s", __FUNCTION__);
+  DOUT("");
   if(self = [super initWithFrame:fr])
   {
     // initialise basic layer properties
@@ -43,27 +44,32 @@ colorRenderbuffer = _colorRenderbuffer
     // FIXME: this needs to be configurable via WindowParams, has only colorbuffer for a start
 		glGenFramebuffers(1, &_defaultFramebuffer);GLDEBUG;
 		glGenRenderbuffers(1, &_colorRenderbuffer);GLDEBUG;
+    glGenRenderbuffers(1, &_depthRenderbuffer);GLDEBUG;
 		glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);GLDEBUG;
 		glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
+//		glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
+//    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
   }
   return self;
 }
 
 - (void) layoutSubviews
 {
-  NSLog(@"%s", __FUNCTION__);
+  DOUT("");
   glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
   CAEAGLLayer* eaglLayer = (CAEAGLLayer *)self.layer;        
   [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);GLDEBUG;
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_backingHeight);GLDEBUG;
 
+/*  glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);
+  glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _backingWidth, _backingHeight);
+  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);*/
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-      NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+      DOUT("Failed to make complete framebuffer object " << glCheckFramebufferStatus(GL_FRAMEBUFFER));
   }  
-  GLDEBUG;
 }
 
 @end

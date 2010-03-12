@@ -1,10 +1,12 @@
-@class LEWindow;
-@class CADisplayLink;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+//@class LEWindow;
+//@class CADisplayLink;
 
 @interface LEApplicationDelegate : NSObject
 {
-  LEWindow* _window;
-  CADisplayLink* _displayLink;
+//  LEWindow* _window;
+//  CADisplayLink* _displayLink;
 }
 
 @end
