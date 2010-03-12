@@ -26,7 +26,7 @@ speed = 50
 lasttime = 0
 
 globalRadius = 200
-numSlices = 15
+numSlices = 13
 
 accumulateFrames = 100
 currentFrameNum = 0
