@@ -60,21 +60,21 @@ namespace lost
       return TrueTypeFontPtr(new TrueTypeFont(lib, data));
     }
 
-    RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, boost::uint32_t sz)
+    RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, uint32_t sz)
     {
       return ttf->render(str, sz);
     }
 
     void renderToTarget(TrueTypeFontPtr ttf, 
                         const std::string & inText,
-                        boost::uint32_t inSizeInPoints,
+                        uint32_t inSizeInPoints,
                         RenderedTextPtr target)
     {
       ttf->render(inText, inSizeInPoints, target);
     }
 
 
-    typedef RenderedTextPtr (TrueTypeFont::*render_func_t)(const std::string &, boost::uint32_t);
+    typedef RenderedTextPtr (TrueTypeFont::*render_func_t)(const std::string &, uint32_t);
 
     void LostFontTrueTypeFont(lua_State* state)
     {
