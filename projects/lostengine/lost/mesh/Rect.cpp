@@ -12,7 +12,7 @@ Rectangle::Rectangle(const math::Rect& rect)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  this->resetBuffers(layout, gl::ET_u32);      
+  this->resetBuffers(layout, gl::ET_u16);      
 
   this->drawMode = GL_LINE_LOOP;
   uint32_t numVertices = 4;

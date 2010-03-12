@@ -16,7 +16,7 @@ Mesh::Mesh()
   gl::BufferLayout layout;
   layout.add(gl::ET_vec3_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
-  init(layout, gl::ET_u32);
+  init(layout, gl::ET_u16);
 }
 
 Mesh::Mesh(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
