@@ -5,14 +5,22 @@ local _textureShader = nil;
 
 function colorShader()
   if _colorShader == nil then
-    _colorShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/basic_color")
+    if lost.platform.isIPhone() then
+      _colorShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/es/basic_color")      
+    else
+      _colorShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/basic_color")
+    end
   end
   return _colorShader
 end
 
 function textureShader()
   if _textureShader == nil then
-    _textureShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/basic_texture")
+    if lost.platform.isIPhone() then
+      _colorShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/es/basic_texture")      
+    else
+      _textureShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/basic_texture")
+    end
   end
   return _textureShader
 end
