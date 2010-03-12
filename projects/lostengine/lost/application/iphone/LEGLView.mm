@@ -48,6 +48,12 @@ depthRenderbuffer = _depthRenderbuffer
 		glBindFramebuffer(GL_FRAMEBUFFER, _defaultFramebuffer);GLDEBUG;
 		glBindRenderbuffer(GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
+    
+    
+    glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 320, 480);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);
+    
 //		glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
 //    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
   }
