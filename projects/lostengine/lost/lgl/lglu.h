@@ -6,15 +6,15 @@
 #include "lost/math/Matrix.h"
 #include "lost/math/Vec3.h"
 
-static inline void lgluOrtho2D(GLfloat left,
+/*static inline void lgluOrtho2D(GLfloat left,
             GLfloat right,
             GLfloat bottom,
             GLfloat top)
 {
   lglOrtho(left, right, bottom, top, -1.0, 1.0);
-}
+}*/
 
-// reimplementation of gluPerspective
+/*// reimplementation of gluPerspective
 // following the OpenGL blue book, version 1.4, p. 652
 static inline void lgluPerspective(GLfloat fovy,
                      GLfloat aspect,
@@ -41,9 +41,9 @@ static inline void lgluPerspective(GLfloat fovy,
   matrix.m[14] = m14;
 
   glMultMatrixf(matrix.m);
-}
+}*/
 
-// reimplementation of gluLookAt
+/*// reimplementation of gluLookAt
 // following the OpenGL blue book, version 1.4, p. 627
 static inline void lgluLookAt(GLfloat eyeX,
                 GLfloat eyeY,
@@ -84,6 +84,6 @@ static inline void lgluLookAt(GLfloat eyeX,
 
   glMultMatrixf(matrix.m);
   glTranslatef(-1.0f*eyeX, -1.0f*eyeY, -1.0f*eyeZ);
-}
+}*/
 
 #endif
