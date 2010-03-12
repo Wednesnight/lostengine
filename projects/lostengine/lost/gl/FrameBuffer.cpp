@@ -333,10 +333,10 @@ namespace lost
         case LGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
           throw runtime_error("FrameBuffer: invalid dimensions");
           break;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
         case LGL_FRAMEBUFFER_INCOMPLETE_FORMATS:
           throw runtime_error("FrameBuffer: invalid format");
           break;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
 
         case LGL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
           throw runtime_error("FrameBuffer: invalid draw buffer");

@@ -15,8 +15,8 @@
   // every other platform gets the standard gl headers plus helpers provided 
   // by GLee (extension handling) and GLFW (platform abstraction)
   #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
-    #import <OpenGLES/ES1/gl.h>
-    #import <OpenGLES/ES1/glext.h>
+    #import <OpenGLES/ES2/gl.h>
+    #import <OpenGLES/ES2/glext.h>
 
     #define OPENGL_ES_1_1 11
     #define OPENGL_ES_2_0 20

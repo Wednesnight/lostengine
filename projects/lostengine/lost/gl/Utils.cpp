@@ -30,10 +30,10 @@ namespace utils
         case GL_INVALID_ENUM:result="GL_INVALID_ENUM";break;
         case GL_INVALID_VALUE:result="GL_INVALID_VALUE";break;
         case GL_INVALID_OPERATION:result="GL_INVALID_OPERATION";break;
-        case GL_STACK_OVERFLOW:result="GL_STACK_OVERFLOW";break;
-        case GL_STACK_UNDERFLOW:result="GL_STACK_UNDERFLOW";break;
+//        case GL_STACK_OVERFLOW:result="GL_STACK_OVERFLOW";break;
+//        case GL_STACK_UNDERFLOW:result="GL_STACK_UNDERFLOW";break;
         case GL_OUT_OF_MEMORY:result="GL_OUT_OF_MEMORY";break;
-        case GL_INVALID_FRAMEBUFFER_OPERATION_OES:result="GL_INVALID_FRAMEBUFFER_OPERATION_OES";break;
+//        case GL_INVALID_FRAMEBUFFER_OPERATION_OES:result="GL_INVALID_FRAMEBUFFER_OPERATION_OES";break;
         default:
           std::ostringstream os;
           os << "error 0x" << std::hex << err;
@@ -55,7 +55,6 @@ namespace utils
     #endif
   }
 
-#if TARGET_OPENGL
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
 
     std::string enum2string(GLenum inVal)
@@ -77,6 +76,7 @@ namespace utils
         enum2string_helper(GL_FLOAT_MAT2)
         enum2string_helper(GL_FLOAT_MAT3)
         enum2string_helper(GL_FLOAT_MAT4)
+#if TARGET_OPENGL
         enum2string_helper(GL_FLOAT_MAT2x3)
         enum2string_helper(GL_FLOAT_MAT2x4)
         enum2string_helper(GL_FLOAT_MAT3x2)
@@ -84,9 +84,7 @@ namespace utils
         enum2string_helper(GL_FLOAT_MAT4x2)
         enum2string_helper(GL_FLOAT_MAT4x3)
         enum2string_helper(GL_SAMPLER_1D)
-        enum2string_helper(GL_SAMPLER_2D)
         enum2string_helper(GL_SAMPLER_3D)
-        enum2string_helper(GL_SAMPLER_CUBE)
         enum2string_helper(GL_SAMPLER_1D_SHADOW)
         enum2string_helper(GL_SAMPLER_2D_SHADOW)
         enum2string_helper(GL_FRAMEBUFFER_COMPLETE_EXT)
@@ -97,11 +95,13 @@ namespace utils
         enum2string_helper(GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT)
         enum2string_helper(GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT)
         enum2string_helper(GL_FRAMEBUFFER_UNSUPPORTED_EXT)
+#endif
+        enum2string_helper(GL_SAMPLER_2D)
+        enum2string_helper(GL_SAMPLER_CUBE)
 
         default: throw std::runtime_error("enum2string: don't know enum: "+boost::lexical_cast<std::string>(inVal));
       }
     }
-#endif
 }
 
 }
