@@ -11,14 +11,18 @@ void main(void)
   highp vec2 p = (texcoord-vec3(c, 0)).xy;
   highp float currentR = sqrt(p.x*p.x+p.y*p.y);
   highp float v = 0.0;
-  if(currentR < srstart)
+  v=step(currentR, srstart);
+  
+/*  if(currentR < srstart)
   {
     v = 1.0;
   }
-  else if(currentR <=r)
+  else
+    discard;*/
+/*  else if(currentR <=r)
   {
     v = 1.0-smoothstep(srstart, r, currentR);
-  }
+  }*/
   highp float f = v;
   gl_FragColor = vec4(color.rgb*lightIntensity,f);
 //gl_FragColor = vec4(f,f,f,1);
