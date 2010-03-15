@@ -51,7 +51,6 @@ namespace lost
       bool normalArrayEnabled;
       bool colorArrayEnabled;
       bool texCoordArrayEnabled;
-//      bool indexArrayEnabled;
       bool depthTestEnabled;
       bool blendEnabled;
       GLenum currentBlendFuncSource;
@@ -59,7 +58,6 @@ namespace lost
       bool scissorEnabled;
       math::Rect currentScissorRect;
       bool texture2DEnabled;
-//      common::Color currentColor;
       common::Color currentClearColor;
       camera::CameraPtr currentCam;
       GLenum currentActiveTexture;
@@ -109,26 +107,18 @@ namespace lost
       void defaultFramebuffer(GLuint fbo);
       GLuint defaultFramebuffer();
 
-//      void vertexArray(bool enable);
-//      void normalArray(bool enable);
-//      void colorArray(bool enable);
-//      void texCoordArray(bool enable);
-//      void indexArray(bool enable);
       void depthTest(bool enable);
       void blend(bool enable);
       void blendFunc(GLenum src, GLenum dest);
       void scissor(bool enable);
-      void texture2D(bool enable);
 
       void cull(bool enable);
       void cullFace(GLenum v);
       
       void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
-//      void color(const common::Color& col); // sets the current drawing color to col
       void clearColor(const common::Color& col); // sets the current clear color to col
       
       void camera(camera::CameraPtr cam);
-      void transform(const math::Matrix& inTransform); // sets the GL_MODEL_VIEW matrix to inTransform if the new one is != old one
       
       void clear(GLbitfield flags);    
       
@@ -136,7 +126,6 @@ namespace lost
       void bindActiveTextures(const std::vector<TexturePtr>& textures);
       void material(mesh::MaterialPtr mat);
       
-      // meshes must have index and vertexbuffer, or you will crash. Everything else is optional.
       void draw(mesh::MeshPtr mesh);
       void drawSeparateBuffers(mesh::MeshPtr mesh);
       void drawInterleavedBuffers(mesh::MeshPtr mesh);
