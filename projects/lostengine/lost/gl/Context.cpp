@@ -92,10 +92,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       // have to set the default in the context, after creation
       m_defaultFrameBuffer = 0; 
 
-//      vertexArrayEnabled = getParam<bool>(GL_VERTEX_ARRAY);
-//      normalArrayEnabled = getParam<bool>(GL_NORMAL_ARRAY);
-//      texCoordArrayEnabled = getParam<bool>(GL_TEXTURE_COORD_ARRAY);
-//      indexArrayEnabled = getParam<bool>(GL_INDEX_ARRAY);
       depthTestEnabled = getParam<bool>(GL_DEPTH_TEST);  
       blendEnabled = getParam<bool>(GL_BLEND);
       currentBlendFuncSource = GL_ZERO; //getParam<int>(GL_BLEND_SRC);
@@ -109,17 +105,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentBuffer = NULL;
       cullEnabled = getParam<bool>(GL_CULL_FACE);
       cullFaceMode = getParam<int>(GL_CULL_FACE_MODE);
-
-/*      uint32_t maxNumVertexAttribs = getParam<int>(GL_MAX_VERTEX_ATTRIBS);
-      DOUT("------------ max num vertex attributes: "<<maxNumVertexAttribs);
-      // enable all, but not more than 16
-      uint32_t arbitraryLimit = 16;
-      uint32_t numEnabledVertexAttribs = std::min(maxNumVertexAttribs, arbitraryLimit);
-      for(uint32_t i=0; i<numEnabledVertexAttribs; ++i)
-      {
-        glEnableVertexAttribArray(i);GLDEBUG;
-      }*/
-
     }
     
     Context::~Context()
@@ -165,12 +150,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       return m_defaultFrameBuffer;
     }
 
-    // FIXME: replace macros by dedficated functions that operate on member reference
-//    void Context::vertexArray(bool enable) { CLIENTSTATE(vertexArrayEnabled, enable, GL_VERTEX_ARRAY); }
-//    void Context::normalArray(bool enable) { CLIENTSTATE(normalArrayEnabled, enable, GL_NORMAL_ARRAY); }
-//    void Context::colorArray(bool enable) { CLIENTSTATE(colorArrayEnabled, enable, GL_COLOR_ARRAY); }
-//    void Context::texCoordArray(bool enable){ CLIENTSTATE(texCoordArrayEnabled, enable, GL_TEXTURE_COORD_ARRAY); }
-//    void Context::indexArray(bool enable){ CLIENTSTATE(indexArrayEnabled, enable, GL_INDEX_ARRAY); }
     void Context::depthTest(bool enable) { SERVERSTATE(depthTestEnabled, enable, GL_DEPTH_TEST); }
     void Context::blend(bool enable) { SERVERSTATE(blendEnabled, enable, GL_BLEND);}
 
@@ -198,7 +177,6 @@ std::map<void*, Context*> glContext2lostGlContext;
     }
     
     void Context::scissor(bool enable) {SERVERSTATE(scissorEnabled, enable, GL_SCISSOR_TEST);}
-    void Context::texture2D(bool enable) {/*SERVERSTATE(texture2DEnabled, enable, GL_TEXTURE_2D);*/}
     
     void Context::scissorRect(const math::Rect& rect)
     {
@@ -208,15 +186,6 @@ std::map<void*, Context*> glContext2lostGlContext;
         currentScissorRect = rect;
       }
     }
-
-/*    void Context::color(const common::Color& col)
-    {
-      if(currentColor != col)
-      {
-        glColor4f(col.fv[0], col.fv[1], col.fv[2], col.fv[3]); GLDEBUG; // OpenGL ES compatible 
-        currentColor = col;
-      }
-    }*/
   
     void Context::clearColor(const common::Color& col)
     {
@@ -234,27 +203,10 @@ std::map<void*, Context*> glContext2lostGlContext;
       {
         math::Rect viewport = cam->viewport();
         glViewport((GLint)viewport.x, (GLint)viewport.y, (GLsizei)viewport.width, (GLsizei)viewport.height);GLDEBUG;
-//        glMatrixMode(GL_PROJECTION);GLDEBUG;
-//        glLoadMatrixf(cam->projectionMatrix().m);GLDEBUG;
         if (currentCam != cam) currentCam = cam;
       }
     }
-    
-    void Context::transform(const math::Matrix& inTransform)
-    {
-//      glMatrixMode(GL_MODELVIEW);GLDEBUG;
-      if(currentCam && currentCam->hasModelViewMatrix)
-      {
-//        glLoadMatrixf(currentCam->mModelViewMatrix.m);GLDEBUG;
-//        glMultMatrixf(inTransform.m);GLDEBUG;
-      }
-      else
-      {
-//        glLoadMatrixf(inTransform.m);GLDEBUG;
-      }
-      currentTransform = inTransform;
-    }
-    
+        
     void Context::clear(GLbitfield flags) { glClear(flags);GLDEBUG; }
     
     void Context::activeTexture(GLenum tex)
@@ -293,15 +245,9 @@ std::map<void*, Context*> glContext2lostGlContext;
     
     void Context::material(MaterialPtr mat)
     {
-//      color(mat->color);
       if(mat->textures.size()>0)
       {
         bindActiveTextures(mat->textures);
-        texture2D(true);
-      }
-      else
-      {
-        texture2D(false);
       }
       if(mat->blend)
       {
@@ -334,52 +280,11 @@ std::map<void*, Context*> glContext2lostGlContext;
 
       Buffer* gpuBuffer = vb->bufferForUsageType(UT_position);
       bind(gpuBuffer);
-//      vertexArray(true);
       
-/*      const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_position);
-      glVertexPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;
-
-      if(vb->hasUsageType(UT_normal))
-      {
-        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_normal);
-        Buffer* gpuBuffer = vb->bufferForUsageType(UT_normal);
-        bind(gpuBuffer);
-        normalArray(true);
-        glNormalPointer(apc.type,apc.stride,apc.offset);GLDEBUG;        
-      }
-      else {
-        normalArray(false);
-      }
-
-      if(vb->hasUsageType(UT_color))
-      {
-        Buffer* gpuBuffer = vb->bufferForUsageType(UT_color);
-        bind(gpuBuffer);
-        colorArray(true);
-        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_color);
-        glColorPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;        
-      }
-      else {
-        colorArray(false);
-      }
-
-      if(vb->hasUsageType(UT_texcoord0))
-      {
-        Buffer* gpuBuffer = vb->bufferForUsageType(UT_texcoord0);
-        bind(gpuBuffer);
-        texCoordArray(true);
-        const AttributePointerConfig& apc = vb->pointerConfigForUsageType(UT_texcoord0);
-        glTexCoordPointer(apc.size,apc.type,apc.stride,apc.offset);GLDEBUG;        
-      }
-      else {
-        texCoordArray(false);
-      }
-*/      
       if(mesh->material)
       {
         material(mesh->material);      
       }
-      transform(mesh->transform);
       bind(ib->gpuBuffers[0].get());
 
       // store the enabled vertex attributes
@@ -421,12 +326,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       
       glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
-      // disable vertex attributes when we're done
-      for (std::vector<GLint>::iterator idx = enabledVertexAttributes.begin(); idx != enabledVertexAttributes.end(); ++idx)
-      {
-        glDisableVertexAttribArray(*idx);
-      }
-
       // disable vertex attributes when we're done
       for (std::vector<GLint>::iterator idx = enabledVertexAttributes.begin(); idx != enabledVertexAttributes.end(); ++idx)
       {
