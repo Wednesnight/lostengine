@@ -419,6 +419,43 @@ void Bitmap::disc(float x, float y, float r)
   }
 }
 
+void Bitmap::ring(float x, float y, float r, float t)
+{
+  float w = (float)width;
+  float h = (float)height;
+  float lr = r - t;
+  common::Color white(1,1,1,1);
+  common::Color black(0,0,0,0);
+  for(float cx=0; cx<w; cx+=1.0f)
+  {
+    for(float cy=0; cy<h; cy+=1.0f)
+    {
+      float dx = cx-x;
+      float dy = cy-y;
+      float cr = sqrtf(dx*dx+dy*dy);
+      pixel((uint32_t)cx, (uint32_t)cy, ((cr < r) && (cr > lr)) ? white : black);
+
+      // outer AA
+      float dr = cr-r;
+      if(dr >= 0.0f && (dr < 1.0f))
+      {
+        float fract = 1.0f-(dr - floor(dr));
+        pixel((uint32_t)cx, (uint32_t)cy, common::Color(1,1,1,fract));
+      }
+
+      // inner AA
+      dr = cr-lr;
+      if(dr >= 0.0f && (dr < 1.0f))
+      {
+        float fract = (dr - floor(dr));
+        pixel((uint32_t)cx, (uint32_t)cy, common::Color(1,1,1,fract));
+      }
+
+
+    }
+  }
+}
+
 
 }
 }

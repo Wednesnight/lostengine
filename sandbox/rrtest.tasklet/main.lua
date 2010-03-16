@@ -28,6 +28,18 @@ function pow2discTexture(n)
   return tex
 end
 
+function pow2ringTexture(n, thickness)
+  local size = math.pow(2,n)
+  local bmp = Bitmap.create(size, size, lost.bitmap.COMPONENTS_RGBA)
+  local cx = size/2 - 0.5
+  local cy = cx
+  local cr = cy
+  bmp:ring(cx,cy,cr, thickness)
+  local defaultParams = lost.gl.Texture.Params()
+  local tex = lost.gl.Texture.create(bmp, defaultParams)  
+  return tex
+end
+
 function startup(tasklet)
   tasklet.name = "rrtest"
   tasklet.waitForEvents = true
@@ -54,7 +66,7 @@ function startup(tasklet)
     {
       mesh = dcl.mesh:Quad
       {
-        texture = pow2discTexture(9),
+        texture = pow2ringTexture(3, 1),
         material = 
         {
           blend = true
