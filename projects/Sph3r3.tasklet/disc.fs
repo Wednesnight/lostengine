@@ -12,7 +12,7 @@ void main(void)
   float currentR = sqrt(p.x*p.x+p.y*p.y);
   float v = 0.0;
   v=step(currentR, srstart);
-  
+  if(v <= 0.0) discard;
   /*if(currentR < srstart)
   {
     v = 1.0;
