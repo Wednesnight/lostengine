@@ -26,15 +26,8 @@ namespace lost
       //        returned file size of zero is NOT a valid reason for throwing an exception.
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
       {
-        try
-        {
-          result = repositories[idx]->load( inPath);
-          break;
-        }
-        catch (std::exception& /*e*/)
-        {
-//          DOUT("trying next repository: " << e.what());
-        }
+          if(result = repositories[idx]->load( inPath))
+            break;
       }
 
       // we have to throw here, otherwise the following checks will segfault
