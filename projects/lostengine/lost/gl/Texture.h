@@ -4,16 +4,14 @@
 #include "lost/gl/gltypes.h"
 #include "lost/math/Vec2.h"
 #include "lost/common/Data.h"
+#include <vector>
+#include "lost/bitmap/forward.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
-  namespace bitmap { struct Bitmap; typedef lost::shared_ptr<Bitmap> BitmapPtr; };
-
   namespace gl
-  {
-    struct Texture;
-    typedef lost::shared_ptr<Texture> TexturePtr;
-  
+  {  
     /** a 2D Texture helper class.
      *
      */
@@ -63,6 +61,7 @@ namespace lost
       void init(common::DataPtr inData,  const Params& inParams = Params());
       void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
+      void init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams = Params()); // assumes inBitmaps[0] is the largest, all others reductions, doesn't check for power of two, bitmaps must have same format
       
       void init(GLint level, // mipmap level
                  GLenum internalformat, // number of color components

@@ -54,7 +54,7 @@ namespace lost
     }
 
     // calculate the next value that is >= inVal and also a power of two  
-    static inline unsigned long nextPowerOf2(unsigned long inVal)
+    static inline uint32_t nextPowerOf2(uint32_t inVal)
     {
       unsigned long result = 1;
 

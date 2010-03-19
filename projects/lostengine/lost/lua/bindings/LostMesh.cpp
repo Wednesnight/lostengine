@@ -12,6 +12,7 @@
 #include "lost/platform/shared_ptr.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/ShaderProgram.h"
+#include "lost/mesh/TextureManager.h"
 
 using namespace luabind;
 using namespace lost::mesh;
@@ -192,6 +193,24 @@ namespace lost
       ];
     }
 
+    void LostMeshTextureManager(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<TextureManager>("TextureManager")
+          .def("ringTexture", &TextureManager::ringTexture)
+          .def("discTexture", &TextureManager::discTexture)
+          .scope
+          [
+            def("create", (TextureManagerPtr(*)())&TextureManager::create)            
+          ]
+        ]
+      ];      
+    }
+
+
     void LostMesh(lua_State* state)
     {
       // mesh first because following classes are based on it
@@ -203,6 +222,7 @@ namespace lost
       LostMeshMaterial(state);
       LostMeshQuad(state);
       LostMeshScaleGrid(state);
+      LostMeshTextureManager(state);
     }
 
   }
