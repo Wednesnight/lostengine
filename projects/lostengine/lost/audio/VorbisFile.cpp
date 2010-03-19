@@ -2,7 +2,6 @@
 #include "stb_vorbis.h"
 #include "lost/resource/File.h"
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
 #include "lost/common/Logger.h"
 
 using namespace std;
@@ -19,7 +18,12 @@ VorbisFile::VorbisFile(lost::shared_ptr<resource::File> inFile)
 	int err;
 	stb_vorbis* oggfile = stb_vorbis_open_memory((unsigned char*)inFile->data.get(), inFile->size, &err, NULL);
 	if(!oggfile)
-		throw runtime_error(string("couldn't open ogg file '")+inFile->location+"' with error: "+lexical_cast<string>(err));
+    {
+        EOUT("throwing from here");
+        std::ostringstream os;
+        os << "couldn't open ogg file '";
+        throw runtime_error(os.str());
+    }
 	stb_vorbis_info info = stb_vorbis_get_info(oggfile);
 	stb_vorbis_close(oggfile);
 

@@ -2,10 +2,10 @@
 #define LOST_GL_UTILS_H
 
 #include <string>
-#include <boost/lexical_cast.hpp>
 #include <stdexcept>
 #include "lost/common/Logger.h"
 #include "lost/gl/gltypes.h"
+#include <sstream>
 
 namespace lost
 {
@@ -26,7 +26,10 @@ namespace utils
 #endif
 
 #if defined(LOST_GL_ENABLE_DEBUG_THROW)
-#   define GLDEBUG_THROW { GLenum err = glGetError(); if(err != GL_NO_ERROR) {DOUT("throwing from here"); throw std::runtime_error("GL ERROR:"+lost::gl::utils::getGlErrorAsString(err)+std::string(" Line: ")+boost::lexical_cast<std::string>(__LINE__));};}
+#   define GLDEBUG_THROW { GLenum err = glGetError(); if(err != GL_NO_ERROR) { \
+    DOUT("throwing from here"); \
+    std::ostringstream os; os << "GL ERROR:" << lost::gl::utils::getGlErrorAsString(err) << " Line: " << __LINE__; \
+    throw std::runtime_error(os.str());};}
 #else
 #   define GLDEBUG_THROW
 #endif
