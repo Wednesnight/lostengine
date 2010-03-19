@@ -1,9 +1,9 @@
 #ifndef LOST_BITMAP_PACKER_H
 #define LOST_BITMAP_PACKER_H
 
-#include "lost/bitmap/Bitmap.h"
 #include "lost/math/Rect.h"
 #include "lost/math/RectPacker.h"
+#include "lost/bitmap/forward.h"
 
 namespace lost
 {
@@ -14,10 +14,10 @@ struct Packer
   struct Result
   {
 
-    lost::shared_ptr<lost::bitmap::Bitmap> packedBitmap; // the resulting bitmap
-    std::vector<lost::math::Rect>           rects;        // the resulting rects. Size of this vector is number of bitmaps that fit into the target area
-    std::vector<int32_t>                    bitmapIds;    // the initial index of the bitmap in the incoming data
-    std::vector<bool>                       rotated;      // true if the bitmap was rotated
+    BitmapPtr                 packedBitmap; // the resulting bitmap
+    std::vector<math::Rect>   rects;        // the resulting rects. Size of this vector is number of bitmaps that fit into the target area
+    std::vector<int32_t>      bitmapIds;    // the initial index of the bitmap in the incoming data
+    std::vector<bool>         rotated;      // true if the bitmap was rotated
 
     void clear();
   };
@@ -35,14 +35,14 @@ struct Packer
    */
   void pack(Packer::Result& outResult,
             const lost::math::Vec2& targetSize,
-            std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
+            std::vector<BitmapPtr> bitmaps,
             Bitmap::Components format = Bitmap::COMPONENTS_RGBA,
             bool rotate = false,  /* won't do anything for now, so you can leave it at false */
             bool sort = true); // use sorting for best packing density
 
 private:
   void buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
-                             std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps);
+                             std::vector<BitmapPtr> inBitmaps);
 
   lost::math::RectPacker rectPacker;
 };

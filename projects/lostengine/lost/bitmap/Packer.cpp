@@ -1,4 +1,6 @@
+#include "lost/bitmap/Bitmap.h"
 #include "lost/bitmap/Packer.h"
+
 using namespace lost::math;
 
 namespace lost

@@ -620,6 +620,9 @@
 		EA9A681B0F15A170007E8A3D /* prefix-debug.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68170F15A170007E8A3D /* prefix-debug.pch */; };
 		EA9A681C0F15A170007E8A3D /* prefix-release.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68160F15A170007E8A3D /* prefix-release.pch */; };
 		EA9A681D0F15A170007E8A3D /* prefix-debug.pch in Headers */ = {isa = PBXBuildFile; fileRef = EA9A68170F15A170007E8A3D /* prefix-debug.pch */; };
+		EAA4520A1152CFD500FFE886 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA452091152CFD500FFE886 /* TextureManager.cpp */; };
+		EAA4520C1152CFDB00FFE886 /* Ring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4520B1152CFDB00FFE886 /* Ring.cpp */; };
+		EAA4520E1152CFE200FFE886 /* Disc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4520D1152CFE200FFE886 /* Disc.cpp */; };
 		EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
@@ -1003,6 +1006,9 @@
 		EA9A67EA0F159C51007E8A3D /* prefix-shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "prefix-shared.h"; path = "../lost/prefix-shared.h"; sourceTree = "<group>"; };
 		EA9A68160F15A170007E8A3D /* prefix-release.pch */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = "prefix-release.pch"; path = "../lost/prefix-release.pch"; sourceTree = "<group>"; };
 		EA9A68170F15A170007E8A3D /* prefix-debug.pch */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = "prefix-debug.pch"; path = "../lost/prefix-debug.pch"; sourceTree = "<group>"; };
+		EAA452091152CFD500FFE886 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = mesh/TextureManager.cpp; sourceTree = "<group>"; };
+		EAA4520B1152CFDB00FFE886 /* Ring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ring.cpp; path = mesh/Ring.cpp; sourceTree = "<group>"; };
+		EAA4520D1152CFE200FFE886 /* Disc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Disc.cpp; path = mesh/Disc.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
@@ -1694,11 +1700,14 @@
 		EA4F9C110F8B6A5C00967F8D /* mesh */ = {
 			isa = PBXGroup;
 			children = (
+				EAA4520D1152CFE200FFE886 /* Disc.cpp */,
 				3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */,
 				EAF56B3F111CD794008D5A0D /* Mesh.cpp */,
 				EA3D458F111C077300CB661C /* Quad.cpp */,
 				EAF56B2C111CD694008D5A0D /* Rect.cpp */,
+				EAA4520B1152CFDB00FFE886 /* Ring.cpp */,
 				EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */,
+				EAA452091152CFD500FFE886 /* TextureManager.cpp */,
 			);
 			name = mesh;
 			sourceTree = "<group>";
@@ -2404,6 +2413,9 @@
 				8DA741C61142D6F80057ACC0 /* TaskletThread.cpp in Sources */,
 				EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */,
 				EAB61FD31142ED0100295C1B /* VertexAttribute.cpp in Sources */,
+				EAA4520A1152CFD500FFE886 /* TextureManager.cpp in Sources */,
+				EAA4520C1152CFDB00FFE886 /* Ring.cpp in Sources */,
+				EAA4520E1152CFE200FFE886 /* Disc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

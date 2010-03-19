@@ -96,7 +96,7 @@ void Texture::unbind() const
 
 void Texture::init(common::DataPtr inData,  const Params& inParams)
 {
-  shared_ptr<Bitmap> bmp(new Bitmap(inData));
+  BitmapPtr bmp(new Bitmap(inData));
   init(bmp, inParams);
 }
 
@@ -149,14 +149,16 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
 void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
 {
   Texture::Params bitmapParams(inParams);
-  bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format);
+  bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format); // FIXME: is this correct?
+
+  // creates texture with correct size according to size hint
   init(lost::math::Vec2((float)inBitmap->width, (float)inBitmap->height), bitmapParams);
 
   // then use texsubimage to upload the actual data. Strictly speaking, we only need this in the
   // case of power-of-two textures, but always creating textures like this saves us one branch
   // now we copy the actual data to the previously allocated texture
   glTexSubImage2D(GL_TEXTURE_2D,
-                  0,
+                  inParams.level,
                   0,
                   0,
                   inBitmap->width,
@@ -174,6 +176,37 @@ void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
   dataWidth = inBitmap->width;
   dataHeight = inBitmap->height;
 
+}
+
+void Texture::init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams)
+{
+  bind();  
+  Texture::Params bitmapParams(inParams);
+  bitmapParams.level = 0;
+  bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmaps[0]->format); // FIXME: is this correct?
+
+  for(uint32_t i=0; i<inBitmaps.size(); ++i)
+  {
+    glTexImage2D(GL_TEXTURE_2D,
+             bitmapParams.level,
+             bitmapParams.internalFormat,
+             inBitmaps[i]->width,
+             inBitmaps[i]->height,
+             bitmapParams.border,
+             bitmapParams.format,
+             bitmapParams.type,
+             inBitmaps[i]->data);GLDEBUG_THROW;
+    ++bitmapParams.level;
+  }
+  
+  wrapS(bitmapParams.wrapS);
+  wrapT(bitmapParams.wrapT);
+  minFilter(bitmapParams.minFilter);
+  magFilter(bitmapParams.magFilter);
+
+  // size hint is ignored for now, size of first texture is used, assuming power-of-two and complete usage of area
+  width = dataWidth = inBitmaps[0]->width;
+  height = dataHeight = inBitmaps[0]->height;  
 }
 
 void Texture::subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr inBitmap)

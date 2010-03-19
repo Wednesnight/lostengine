@@ -6,12 +6,17 @@ using "lost.application.WindowParams"
 using "lost.common.Color"
 using "lost.bitmap.Bitmap"
 
+using "lost.math.MatrixTranslation"
+
 screensize = Vec2(512,512)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
 
 running = true
 rootNode = nil
 dcl = nil
+
+radius = 67
+quadsize = Vec2(radius*2, radius*2)
 
 -- creates a square texture with a white circle on transparent background
 -- n is log2(width)
@@ -46,7 +51,17 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
 
-
+  textureManager = lost.mesh.TextureManager.create()
+  texmesh = dcl.mesh:Quad
+  {
+    texture = textureManager:discTexture(radius), -- pow2ringTexture(8, 1.5),
+    material = 
+    {
+      blend = true
+    },
+    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+  }
+  
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor
@@ -64,14 +79,7 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
-      mesh = dcl.mesh:Quad
-      {
-        texture = pow2ringTexture(3, 1),
-        material = 
-        {
-          blend = true
-        }
-      }
+      mesh = texmesh
     }
   }
 
@@ -86,5 +94,12 @@ end
 function keyHandler(event)
   if (event.key == lost.application.K_ESCAPE) then
     running = false
+  elseif (event.key == lost.application.K_A) then
+    quadsize = Vec2(quadsize.x+1, quadsize.y+1)
+    texmesh:updateSize(quadsize)
+  elseif (event.key == lost.application.K_S) then
+    quadsize = Vec2(quadsize.x-1, quadsize.y-1)
+    texmesh:updateSize(quadsize)
   end
+  
 end
