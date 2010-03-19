@@ -1,10 +1,8 @@
-
 #include "lost/gl/Utils.h"
 #include "lost/gl/gl.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "stb_image.h"
-#include "lost/common/DisplayAttributes.h"
 #include "lost/lgl/lglu.h"
 #include "lost/bitmap/Bitmap.h"
 
@@ -99,7 +97,10 @@ namespace utils
         enum2string_helper(GL_SAMPLER_2D)
         enum2string_helper(GL_SAMPLER_CUBE)
 
-        default: throw std::runtime_error("enum2string: don't know enum: "+boost::lexical_cast<std::string>(inVal));
+        default: 
+            std::ostringstream os;
+            os << "enum2string: don't know enum: " << inVal;
+            throw std::runtime_error(os.str());
       }
     }
 }

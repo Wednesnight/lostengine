@@ -1,6 +1,5 @@
 #include "lost/audio/Source.h"
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
 #include "lost/audio/VorbisFile.h"
 #include "lost/common/Logger.h"
 

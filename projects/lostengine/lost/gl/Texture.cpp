@@ -3,7 +3,6 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/gl.h"
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
 #include "lost/math/lmath.h"
 
 using namespace std;
@@ -38,8 +37,10 @@ GLenum bitmapComponents2GlFormat(bitmap::Bitmap::Components components)
     case bitmap::Bitmap::COMPONENTS_RGBA:result=GL_RGBA;break;
     case bitmap::Bitmap::COMPONENTS_ALPHA:result=GL_ALPHA;break;
     default:
-      DOUT("throwing from here");
-      throw runtime_error(string("can't convert bitmap components ")+lexical_cast<string>(components));
+      EOUT("throwing from here");
+      std::ostringstream os;
+      os << "can't convert bitmap components " << components;
+      throw runtime_error(os.str());
   }
   return result;
 }
