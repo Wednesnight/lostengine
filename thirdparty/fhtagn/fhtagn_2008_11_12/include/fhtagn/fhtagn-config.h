@@ -10,7 +10,7 @@
 /* Version of the installed boost library */
 #define FHTAGN_BOOST_VERSION 1.36.0
 /* Found boost library? */
-#define HAVE_BOOST 1
+//#define HAVE_BOOST 1
 /* Version of the installed cppunit library */
 /* #define FHTAGN_CPPUNIT_VERSION */
 /* Found cppunit library? */
