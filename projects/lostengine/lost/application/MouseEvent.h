@@ -3,6 +3,7 @@
 
 #include "lost/application/InputEvent.h"
 #include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
 #include "lost/application/MouseButton.h"
 
 namespace lost

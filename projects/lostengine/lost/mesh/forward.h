@@ -9,6 +9,9 @@ namespace mesh
 struct TextureManager;
 typedef lost::shared_ptr<TextureManager> TextureManagerPtr;
 
+struct Mesh; typedef lost::shared_ptr<Mesh> MeshPtr;
+struct Material; typedef lost::shared_ptr<Material> MaterialPtr;
+
 }
 }
 

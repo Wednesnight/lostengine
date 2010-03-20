@@ -5,11 +5,8 @@
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
 #include <iostream>
-
 #include "boost/filesystem.hpp"
-#include "boost/lexical_cast.hpp"
 
 namespace lost
 {
@@ -50,7 +47,9 @@ namespace lost
 
 
       // Read the exe link in the /proc filesystem
-      path /= boost::lexical_cast<std::string>(getpid());
+      ostringstream os;
+      os << getpid();
+      path /= os.str();
       path /= "exe";
 
       // There's no limit to how long a path in Linux can be, but let's assume

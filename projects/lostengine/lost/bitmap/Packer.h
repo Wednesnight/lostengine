@@ -4,6 +4,7 @@
 #include "lost/math/Rect.h"
 #include "lost/math/RectPacker.h"
 #include "lost/bitmap/forward.h"
+#include "lost/bitmap/Components.h"
 
 namespace lost
 {
@@ -36,7 +37,7 @@ struct Packer
   void pack(Packer::Result& outResult,
             const lost::math::Vec2& targetSize,
             std::vector<BitmapPtr> bitmaps,
-            Bitmap::Components format = Bitmap::COMPONENTS_RGBA,
+            Components format = COMPONENTS_RGBA,
             bool rotate = false,  /* won't do anything for now, so you can leave it at false */
             bool sort = true); // use sorting for best packing density
 

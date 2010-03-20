@@ -28,7 +28,7 @@ Packer::~Packer()
 void Packer::pack(Packer::Result& outResult,
         const lost::math::Vec2& targetSize,
         std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
-        Bitmap::Components format,
+        Components format,
         bool rotate,
         bool sort)
 {

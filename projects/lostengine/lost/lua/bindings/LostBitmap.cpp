@@ -25,14 +25,14 @@ namespace lost
             .scope
             [
               def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create),
-              def("create", (BitmapPtr(*)(uint32_t, uint32_t, Bitmap::Components))&Bitmap::create)
+              def("create", (BitmapPtr(*)(uint32_t, uint32_t, bitmap::Components))&Bitmap::create)
             ]
         ]
       ];
-      globals(state)["lost"]["bitmap"]["COMPONENTS_UNDEFINED"] = lost::bitmap::Bitmap::COMPONENTS_UNDEFINED;
-      globals(state)["lost"]["bitmap"]["COMPONENTS_ALPHA"] = lost::bitmap::Bitmap::COMPONENTS_ALPHA;
-      globals(state)["lost"]["bitmap"]["COMPONENTS_RGB"] = lost::bitmap::Bitmap::COMPONENTS_RGB;
-      globals(state)["lost"]["bitmap"]["COMPONENTS_RGBA"] = lost::bitmap::Bitmap::COMPONENTS_RGBA;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_UNDEFINED"] = lost::bitmap::COMPONENTS_UNDEFINED;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_ALPHA"] = lost::bitmap::COMPONENTS_ALPHA;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_RGB"] = lost::bitmap::COMPONENTS_RGB;
+      globals(state)["lost"]["bitmap"]["COMPONENTS_RGBA"] = lost::bitmap::COMPONENTS_RGBA;
     }
 
     void LostBitmap(lua_State* state)

@@ -1,3 +1,5 @@
+#include "lost/event/Event.h"
+#include "lost/event/EventDispatcher.h"
 #include "lost/application/Window.h"
 
 namespace lost
@@ -5,7 +7,7 @@ namespace lost
   namespace application
   {
     
-    Window::Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+    Window::Window(const event::EventDispatcherPtr& inDispatcher,
                    const WindowParams& inParams)
     : dispatcher(inDispatcher),
       params(inParams)

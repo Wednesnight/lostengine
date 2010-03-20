@@ -1,3 +1,4 @@
+#include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
@@ -16,6 +17,17 @@ namespace lost
 {
   namespace lua
   {
+
+      void State::openLibs()  { luaL_openlibs(state);  }
+      void State::openBaseLib() { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
+      void State::openDebugLib() { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
+      void State::openIoLib() { lua_pushcfunction(state, luaopen_io);lua_pushstring(state, "io");lua_call(state, 1, 0);}
+      void State::openMathLib() { lua_pushcfunction(state, luaopen_math);lua_pushstring(state, "math");lua_call(state, 1, 0); }
+      void State::openPackageLib() { lua_pushcfunction(state, luaopen_package);lua_pushstring(state, "package");lua_call(state, 1, 0); }
+      void State::openStringLib() { lua_pushcfunction(state, luaopen_string);lua_pushstring(state, "string");lua_call(state, 1, 0); }
+      void State::openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
+      void State::openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
+
     
     State::State(lost::shared_ptr<resource::Loader> inLoader)
     : callstackSize(10), 

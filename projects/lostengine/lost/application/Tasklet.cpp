@@ -1,4 +1,7 @@
+#include "lost/lua/lua.h"
 #include "lost/lua/State.h"
+#include "lost/gl/Context.h"
+#include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"
@@ -32,7 +35,14 @@ namespace lost
 {
   namespace application
   {
-    
+   
+    struct Tasklet::LuaStateHelper
+    {
+      luabind::object luaStartup;
+      luabind::object luaUpdate;
+      luabind::object luaShutdown;
+    };
+      
     Tasklet::Tasklet(LoaderPtr inLoader)
     {
       isAlive = false;
@@ -52,6 +62,7 @@ namespace lost
       ModuleLoader::install(*lua);
       // publish global utility functions
       GlobalFunctions::install(*lua);
+      lsh.reset(new LuaStateHelper);
     }
     
     Tasklet::~Tasklet()
@@ -87,12 +98,12 @@ namespace lost
       hasLuaStartup = false;
       hasLuaUpdate = false;
       hasLuaShutdown = false;
-      luaStartup = lua->globals["startup"];
-      if(luabind::type(luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
-      luaUpdate = lua->globals["update"];
-      if(luabind::type(luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
-      luaShutdown = lua->globals["shutdown"];
-      if(luabind::type(luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
+      lsh->luaStartup = lua->globals["startup"];
+      if(luabind::type(lsh->luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
+      lsh->luaUpdate = lua->globals["update"];
+      if(luabind::type(lsh->luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
+      lsh->luaShutdown = lua->globals["shutdown"];
+      if(luabind::type(lsh->luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
     }
 
     void Tasklet::cleanup()
@@ -100,9 +111,10 @@ namespace lost
       // first: clear the dispatcher/callbacks and cleanup all lua callback resources
       eventDispatcher->clear();
       luabind::object nil;
-      luaStartup = nil;
-      luaUpdate = nil;
-      luaShutdown = nil;
+      lsh->luaStartup = nil;
+      lsh->luaUpdate = nil;
+      lsh->luaShutdown = nil;
+      lsh.reset();
       renderNode.reset();
       updateQueue.reset();
       loader.reset(); // loader is also present in lua state, so kill it first
@@ -133,7 +145,7 @@ namespace lost
       bool result = true;
       if(hasLuaStartup)
       {
-        result = call_function<bool>(luaStartup, this);
+        result = call_function<bool>(lsh->luaStartup, this);
       }
       updateQueue->process(this);      
       return result;
@@ -144,7 +156,7 @@ namespace lost
       bool result = true;
       if(hasLuaUpdate)
       {
-        result = call_function<bool>(luaUpdate, this);
+        result = call_function<bool>(lsh->luaUpdate, this);
       }
       updateQueue->process(this);      
       return  result;      
@@ -155,7 +167,7 @@ namespace lost
       bool result = true;
       if(hasLuaShutdown)
       {
-        result = call_function<bool>(luaShutdown, this);
+        result = call_function<bool>(lsh->luaShutdown, this);
       }
       return  result;      
     }

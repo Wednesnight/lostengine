@@ -1,3 +1,4 @@
+#include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 
 namespace lost

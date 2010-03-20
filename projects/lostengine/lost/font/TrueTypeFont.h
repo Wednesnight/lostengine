@@ -1,26 +1,23 @@
 #ifndef LOST_FONT_TRUETYPEFONT_H
 #define LOST_FONT_TRUETYPEFONT_H
 
-#include <list>
 #include <vector>
 #include <string>
 #include <map>
-#include <fhtagn/text/transcoding.h>
-#include <fhtagn/text/decoders.h>
-#include "lost/font/freetype/Library.h"
-#include "lost/font/freetype/Face.h"
-#include "lost/font/RenderedText.h"
-#include "lost/gl/Texture.h"
+
+#include "lost/font/freetype/forward.h"
+#include "lost/font/forward.h"
+#include "lost/gl/forward.h"
+#include "lost/bitmap/forward.h"
+#include "lost/common/forward.h"
+
 #include "lost/math/Vec2.h"
-#include "lost/bitmap/Bitmap.h"
-#include "lost/gl/Texture.h"
+#include "lost/math/Rect.h"
 
 namespace lost
 {
 namespace font
 {
-struct TrueTypeFont;
-typedef lost::shared_ptr<TrueTypeFont> TrueTypeFontPtr;
 
 struct TrueTypeFont
 {
@@ -36,7 +33,7 @@ struct TrueTypeFont
     
     bool drawable;
     
-    lost::shared_ptr<bitmap::Bitmap> bitmap;
+    bitmap::BitmapPtr bitmap;
   };
 
   typedef lost::shared_ptr<Glyph> GlyphPtr;

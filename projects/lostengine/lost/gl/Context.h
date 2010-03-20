@@ -16,33 +16,17 @@
 
 #include "lost/math/Matrix.h"
 #include "lost/common/Color.h"
-#include "lost/platform/shared_ptr.h"
 #include <vector>
+
 #include "lost/gl/gltypes.h"
+#include "lost/gl/forward.h"
+#include "lost/camera/forward.h"
+#include "lost/mesh/forward.h"
 
 namespace lost
 {
-  namespace camera { struct Camera; typedef lost::shared_ptr<Camera> CameraPtr; }
-  namespace mesh
-  {
-    struct Mesh; typedef lost::shared_ptr<Mesh> MeshPtr;
-    struct Material; typedef lost::shared_ptr<Material> MaterialPtr;
-  }
   namespace gl
-  {
-    struct Context;
-    typedef lost::shared_ptr<Context> ContextPtr;
-
-    struct ShaderProgram;
-    typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
-    struct Texture;
-    typedef lost::shared_ptr<Texture> TexturePtr;
-
-    struct FrameBuffer;
-    typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
-    
-    struct Buffer;
-    
+  {    
     struct Context
     {
     // private for now, deliberately no getters

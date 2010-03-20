@@ -1,3 +1,5 @@
+#include <boost/bind.hpp>
+#include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"

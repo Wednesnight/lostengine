@@ -343,7 +343,7 @@ std::map<void*, Context*> glContext2lostGlContext;
                                  bool withAlphaChannel)
     {
       GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;
-      Bitmap::Components bitmapFormat = withAlphaChannel ? Bitmap::COMPONENTS_RGBA : Bitmap::COMPONENTS_RGB;
+      Components bitmapFormat = withAlphaChannel ? bitmap::COMPONENTS_RGBA : bitmap::COMPONENTS_RGB;
       Bitmap bmp((uint32_t)currentCam->viewport().width,
                  (uint32_t)currentCam->viewport().height,
                  bitmapFormat);

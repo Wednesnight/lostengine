@@ -6,39 +6,14 @@
 #include <map>
 #include <string>
 #include "lost/resource/Loader.h"
-#include "lost/event/Event.h"
+#include "lost/event/forward.h"
+#include "lost/application/forward.h"
 
 namespace lost
 {
-  namespace event
-  {
-    struct EventDispatcher;
-    typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
-  }
-
   namespace application
   {
-    struct Tasklet;
-    
-    struct TaskletEvent;
-    typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
-
-    struct Application;
-    typedef lost::shared_ptr<Application> ApplicationPtr;
-
-    struct ApplicationEvent;
-    typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
-
-    struct SpawnTaskletEvent;
-    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
-    
-    struct QueueEvent;
-    typedef lost::shared_ptr<QueueEvent> QueueEventPtr;
-    
-    struct ProcessEvent;
-    typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
-    
-    struct Application : public lost::enable_shared_from_this<Application>
+    struct Application 
     {
       /**
        * forward declaration for platform specific stuff
@@ -64,7 +39,6 @@ namespace lost
 
       /**
        * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
-       * otherwise shared_from_this() will fail!
        */
       Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
       Application(Tasklet* tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
@@ -111,8 +85,8 @@ namespace lost
       /**
        * static ctor helpers, make sure that we're held by a lost::shared_ptr
        */
-      static lost::shared_ptr<Application> create();
-      static lost::shared_ptr<Application> create(Tasklet* tasklet);
+      static ApplicationPtr create();
+      static ApplicationPtr create(Tasklet* tasklet);
 
       ~Application();
 

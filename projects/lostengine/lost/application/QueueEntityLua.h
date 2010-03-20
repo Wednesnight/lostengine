@@ -1,16 +1,14 @@
 #ifndef LOST_APPLICATION_QUEUEENTITYLUA_H
 #define LOST_APPLICATION_QUEUEENTITYLUA_H
 
+#include "lost/application/forward.h"
 #include "lost/application/QueueEntity.h"
-
-namespace luabind { class object; }
+#include "lost/lua/forward.h"
 
 namespace lost
 {
   namespace application
   {
-    struct Tasklet;
-  
     struct QueueEntityLua : public QueueEntity
     {
 

@@ -5,24 +5,16 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/WindowParams.h"
 #include "lost/application/Queue.h"
-#include "lost/lua/lua.h"
+
+#include "lost/application/forward.h"
+#include "lost/lua/forward.h"
+#include "lost/event/forward.h"
+#include "lost/rg/forward.h"
 
 namespace lost
 {
-  namespace event 
-  { 
-    struct EventDispatcher; typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
-    struct Event; typedef lost::shared_ptr<Event> EventPtr;    
-  }
-  namespace rg { struct Node; typedef lost::shared_ptr<Node> NodePtr; }
-  namespace lua { struct State; typedef lost::shared_ptr<State> StatePtr; }
   namespace application
   {
-    struct Window;
-
-    struct WindowEvent;
-    typedef lost::shared_ptr<WindowEvent> WindowEventPtr;
-  
     struct Tasklet
     {
 	  protected:
@@ -32,15 +24,15 @@ namespace lost
       struct TaskletHiddenMembers;
       lost::shared_ptr<TaskletHiddenMembers> hiddenMembers;
 
+      struct LuaStateHelper;
+      lost::shared_ptr<LuaStateHelper> lsh;
+
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
 
       bool hasLuaStartup;
-      luabind::object luaStartup;
       bool hasLuaUpdate;
-      luabind::object luaUpdate;
       bool hasLuaShutdown;
-      luabind::object luaShutdown;
 
       lua::StatePtr                   lua;
       WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context

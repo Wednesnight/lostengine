@@ -11,6 +11,7 @@
 #include "lost/application/mac/ApplicationWindow.h"
 #include "lost/application/mac/GLView.h"
 #import <AppKit/NSOpenGL.h>
+#include "lost/gl/Context.h"
 
 namespace lost
 {

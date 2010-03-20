@@ -2,15 +2,12 @@
 #define LOST_EVENT_EVENT_H
 
 #include <string>
-#include "lost/platform/shared_ptr.h"
+#include "lost/event/forward.h"
 
 namespace lost
 {
   namespace event
   {
-    struct Event;
-    typedef lost::shared_ptr<Event> EventPtr;
-
     typedef std::string Type;
 
 		/** low-level event class.

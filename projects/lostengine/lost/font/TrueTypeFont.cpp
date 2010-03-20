@@ -1,8 +1,17 @@
+#include "ft2build.h"
+#include FT_FREETYPE_H
 #include "lost/font/TrueTypeFont.h"
-#include <boost/lexical_cast.hpp>
 #include "lost/common/Logger.h"
 #include "lost/bitmap/Packer.h"
+#include "lost/gl/Texture.h"
 #include <stdexcept>
+#include <fhtagn/text/transcoding.h>
+#include <fhtagn/text/decoders.h>
+#include "lost/font/freetype/Library.h"
+#include "lost/font/freetype/Face.h"
+#include "lost/font/RenderedText.h"
+#include "lost/bitmap/Bitmap.h"
+
 
 using namespace std;
 using namespace lost::bitmap;
@@ -45,7 +54,12 @@ TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
                                   uint32_t inSizeInPoints)
 {
   FT_Error error = FT_Set_Char_Size(face->face(), 0, inSizeInPoints*64, 72, 72);
-  if(error) { throw std::runtime_error("FT_Set_Char_Size error: " + boost::lexical_cast<std::string>(error));}
+  if(error)
+  {
+    ostringstream os;
+    os << error;
+    throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
+  }
   
   FT_UInt idx = FT_Get_Char_Index(face->face(), c);
   FT_Int32 load_flags = 0;
@@ -58,8 +72,8 @@ TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
   
   BitmapPtr result(new Bitmap(face->face()->glyph->bitmap.width,
                                face->face()->glyph->bitmap.rows,
-                               Bitmap::COMPONENTS_RGBA,
-                               Bitmap::COMPONENTS_ALPHA,
+                               bitmap::COMPONENTS_RGBA,
+                               bitmap::COMPONENTS_ALPHA,
                                face->face()->glyph->bitmap.buffer));  
   result->flip();  
   return result;
@@ -111,7 +125,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   bitmapPacker.pack(packerResult,
                     atlasSize,
                     characterBitmaps,
-                    Bitmap::COMPONENTS_RGBA, // bitmaps rendered byte the renderGlyphToBitmap method are always RGBA
+                    bitmap::COMPONENTS_RGBA, // bitmaps rendered byte the renderGlyphToBitmap method are always RGBA
                     false, // don't rotate rectbecause we don't support it yet
                     false); // don't sort because we don't want to alter position of previously rendered glyphs in texture
   
