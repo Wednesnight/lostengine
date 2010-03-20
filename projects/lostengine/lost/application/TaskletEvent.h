@@ -2,16 +2,12 @@
 #define LOST_APPLICATION_TASKLETEVENT_H
 
 #include "lost/event/Event.h"
-#include "lost/application/Tasklet.h"
+#include "lost/application/forward.h"
 
 namespace lost
 {
   namespace application
   {
-  
-    struct TaskletEvent;
-    typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
-  
     struct TaskletEvent : public event::Event
     {
       static const event::Type& TERMINATE() { static event::Type d = "taskletTerminate"; return d; }

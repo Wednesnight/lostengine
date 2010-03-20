@@ -5,7 +5,7 @@
 #include "lost/event/EventDispatcher.h"
 #include <sstream>
 #include <stdexcept>
-
+#include "lost/gl/Context.h"
 #include <Foundation/NSAutoreleasePool.h>
 
 using namespace std;

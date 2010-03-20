@@ -3,6 +3,8 @@
 #include "lost/mesh/Mesh.h"
 #include "lost/font/freetype/Library.h"
 #include "lost/font/TrueTypeFont.h"
+#include "lost/font/RenderedText.h"
+#include "lost/gl/Texture.h"
 
 using namespace luabind;
 using namespace lost;

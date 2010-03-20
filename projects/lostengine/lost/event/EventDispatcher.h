@@ -5,8 +5,8 @@
 #include <boost/signal.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition.hpp>
-#include "lost/event/Event.h"
 #include <stdexcept>
+#include "lost/event/forward.h"
 
 namespace boost
 {

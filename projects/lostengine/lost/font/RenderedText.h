@@ -2,17 +2,14 @@
 #define LOST_FONT_RENDEREDTEXT
 
 #include "lost/math/Vec2.h"
-#include "lost/gl/Texture.h"
+#include "lost/gl/forward.h"
 #include "lost/mesh/Quad.h"
+#include "lost/font/forward.h"
 
 namespace lost
 {
-
   namespace font
-  {
-    struct RenderedText;
-    typedef lost::shared_ptr<RenderedText> RenderedTextPtr;
-    
+  {    
     struct RenderedText : mesh::Quad
     {
       RenderedText() : mesh::Quad()

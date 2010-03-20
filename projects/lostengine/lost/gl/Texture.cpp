@@ -28,14 +28,14 @@ Texture::Params::Params()
   sizeHint = SIZE_DONT_CARE;
 }
 
-GLenum bitmapComponents2GlFormat(bitmap::Bitmap::Components components)
+GLenum bitmapComponents2GlFormat(bitmap::Components components)
 {
   GLenum result = 0;
   switch(components)
   {
-    case bitmap::Bitmap::COMPONENTS_RGB:result=GL_RGB;break;
-    case bitmap::Bitmap::COMPONENTS_RGBA:result=GL_RGBA;break;
-    case bitmap::Bitmap::COMPONENTS_ALPHA:result=GL_ALPHA;break;
+    case bitmap::COMPONENTS_RGB:result=GL_RGB;break;
+    case bitmap::COMPONENTS_RGBA:result=GL_RGBA;break;
+    case bitmap::COMPONENTS_ALPHA:result=GL_ALPHA;break;
     default:
       EOUT("throwing from here");
       std::ostringstream os;

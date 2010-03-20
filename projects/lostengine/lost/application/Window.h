@@ -1,9 +1,10 @@
 #ifndef LOST_APPLICATION_WINDOW_H
 #define LOST_APPLICATION_WINDOW_H
 
-#include "lost/gl/Context.h"
+#include "lost/gl/forward.h"
+#include "lost/event/forward.h"
+
 #include "lost/math/Rect.h"
-#include "lost/event/EventDispatcher.h"
 #include "lost/application/WindowParams.h"
 
 namespace lost
@@ -31,7 +32,7 @@ namespace lost
        * the target for all events received by the window (typically key/mouse events)
        */
       // FIXME: should be private
-      lost::shared_ptr<lost::event::EventDispatcher> dispatcher;
+      event::EventDispatcherPtr dispatcher;
       /**
        * generic interface to the window's OpenGL context
        */
@@ -42,7 +43,7 @@ namespace lost
        */
       WindowParams params;
       
-      Window(const lost::shared_ptr<lost::event::EventDispatcher>& inDispatcher,
+      Window(const event::EventDispatcherPtr& inDispatcher,
              const WindowParams& inParams);
       ~Window();
 

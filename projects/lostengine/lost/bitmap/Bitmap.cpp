@@ -1,18 +1,23 @@
+#include "lost/common/Data.h"
 #include "lost/bitmap/Bitmap.h"
 #include "stb_image.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 
 using namespace std;
-//using namespace boost;
 
+#define THROW_RTE(s) \
+{ \
+  ostringstream os; \
+  os << s; \
+  throw runtime_error(os.str()); \
+}
+  
 namespace lost
 {
 namespace bitmap
 {
-
-using boost::lexical_cast;
 
 void Bitmap::reset()
 {
@@ -61,12 +66,10 @@ void Bitmap::destroy()
 {
   if(data && loaded)
   {
-//    DOUT("stbi_image_free");
     stbi_image_free(data);
   }
   else if(data && !loaded)
   {
-//    DOUT("delete");
     delete [] data;
   }
   reset();
@@ -136,7 +139,8 @@ void Bitmap::copyPixel(uint8_t* dest,
         case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=src[3];break;
         case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=255;break;
         case COMPONENTS_ALPHA:dest[0]=255;dest[1]=255;dest[2]=255;dest[3]=src[0];break;
-        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+        default:
+          THROW_RTE("can't copy pixel from source with components: " << srcComponents);
       }
       break;
     case COMPONENTS_RGB:
@@ -145,7 +149,8 @@ void Bitmap::copyPixel(uint8_t* dest,
         case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];break;
         case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];break;
         case COMPONENTS_ALPHA:dest[0]=src[0];dest[1]=src[0];dest[2]=src[0];break;
-        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+        default:
+          THROW_RTE("can't copy pixel from source with components: " << srcComponents);
       }
       break;
     case COMPONENTS_ALPHA:
@@ -154,10 +159,12 @@ void Bitmap::copyPixel(uint8_t* dest,
         case COMPONENTS_RGBA:dest[0]=src[3];break;
         case COMPONENTS_RGB:dest[0]=255;break;
         case COMPONENTS_ALPHA:dest[0]=src[0];break;
-        default:throw runtime_error("can't copy pixel from source with components: "+lexical_cast<string>(srcComponents));
+        default:
+          THROW_RTE("can't copy pixel from source with components: " << srcComponents);
       }
       break;
-    default:throw runtime_error("can't copy pixel to destination with components: "+lexical_cast<string>(destComponents));
+    default:
+      THROW_RTE("can't copy pixel to destination with components: " << destComponents);
   }
 }
 
@@ -169,7 +176,8 @@ uint32_t Bitmap::bytesPerPixelFromComponents(Components components)
     case COMPONENTS_ALPHA:result = 1;break;
     case COMPONENTS_RGB:result = 3;break;
     case COMPONENTS_RGBA:result = 4;break;
-    default:throw runtime_error("can't determine bytes per pixel from components: "+lexical_cast<string>(components));
+    default:
+      THROW_RTE("can't determine bytes per pixel from components: " << components);
   }
   return result;
 }
@@ -191,7 +199,8 @@ void Bitmap::init(const common::DataPtr& inData)
   {
     case 3:format = COMPONENTS_RGB;break;
     case 4:format = COMPONENTS_RGBA;break;
-    default:throw std::runtime_error("couldn't init image, don't know what to do with bytesPerPixel: "+boost::lexical_cast<std::string>(bytesPerPixel));
+    default:
+      THROW_RTE("couldn't init image, don't know what to do with bytesPerPixel: " << bytesPerPixel);
   }
   loaded = true;
 }
@@ -204,7 +213,8 @@ void Bitmap::clear(const lost::common::Color& inColor)
     case 1:clearA(inColor);break;
     case 3:clearRGB(inColor);break;
     case 4:clearRGBA(inColor);break;
-    default:throw std::runtime_error("couldn't clear image with bpp: "+boost::lexical_cast<std::string>(bpp));
+    default:
+      THROW_RTE("couldn't clear image with bpp: " << bpp);
   }
 }
 
@@ -257,7 +267,9 @@ void Bitmap::clearRGBA(const lost::common::Color& inColor)
 void Bitmap::write(const std::string inFullPathname)
 {
   if(!stbi_write_tga(inFullPathname.c_str(), width, height, bytesPerPixelFromComponents(format), data))
+  {
     throw std::runtime_error("screenshot save failed");
+  }
 }
 
 void Bitmap::flip()

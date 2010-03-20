@@ -12,6 +12,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseButton.h"
 #include "lost/application/MouseEvent.h"
+#include "lost/event/EventDispatcher.h"
 
 @implementation ApplicationWindow
 

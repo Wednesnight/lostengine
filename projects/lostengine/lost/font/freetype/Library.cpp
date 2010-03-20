@@ -1,7 +1,9 @@
+#include "ft2build.h"
+#include FT_FREETYPE_H
 #include "lost/font/freetype/Library.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 
 namespace lost
 {
@@ -10,12 +12,16 @@ namespace font
 namespace freetype
 {
 
+using namespace std;
+
 Library::Library()
 {
   FT_Error error = FT_Init_FreeType(&library);
   if(error)
   {
-    throw std::runtime_error("FT_Init_FreeType error: " + boost::lexical_cast<std::string>(error));
+    ostringstream os;
+    os << "FT_Init_FreeType error: " << error;
+    throw std::runtime_error(os.str());
     return;
   }
 }

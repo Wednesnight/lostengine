@@ -45,7 +45,7 @@ void TextureManager::updateDiscTexture(float diameter)
   // create all mipmap levels
   while(diameter > 0)
   {
-    BitmapPtr bmp(new Bitmap(diameter, diameter, Bitmap::COMPONENTS_RGBA));
+    BitmapPtr bmp(new Bitmap(diameter, diameter, bitmap::COMPONENTS_RGBA));
     float cx = (diameter / 2.0f) - .5f;
     float cy = cx;
     float cr = cy;

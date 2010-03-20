@@ -3,13 +3,12 @@
 
 #include <string>
 #include "lost/platform/shared_ptr.h"
+#include "lost/common/forward.h"
 
 namespace lost
 {
 namespace common
 {
-  struct Data;
-  typedef lost::shared_ptr<Data> DataPtr;
 
   struct Data
   {

@@ -1,8 +1,11 @@
+#include "ft2build.h"
+#include FT_FREETYPE_H
 #include <stdexcept>
-
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 #include "lost/font/freetype/Face.h"
 #include "lost/common/Logger.h"
+#include "lost/common/Data.h"
+#include "lost/font/freetype/Library.h"
 
 namespace lost
 {
@@ -10,6 +13,8 @@ namespace font
 {
 namespace freetype
 {
+
+using namespace std;
 
 Face::Face(LibraryPtr inLibrary,
            common::DataPtr inData)
@@ -21,7 +26,9 @@ Face::Face(LibraryPtr inLibrary,
                                        &mFace);
   if(error)
   {
-    throw std::runtime_error("FT_New_Face error: "+boost::lexical_cast<std::string>(error));
+    ostringstream os;
+    os << "FT_New_Face error: " << error;
+    throw std::runtime_error(os.str());
   }
 
   mFontData = inData;

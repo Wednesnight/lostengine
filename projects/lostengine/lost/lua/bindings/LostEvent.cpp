@@ -11,11 +11,6 @@ namespace lost
 {
   namespace lua
   {
-
-//    lost::shared_ptr<Event> asSharedPtr(Event* event)
-//    {
-//      return event->shared_from_this();
-//    }
     
     void LostEventEvent(lua_State* state)
     {

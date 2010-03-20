@@ -23,6 +23,8 @@
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/resource/FilesystemRepository.h"
 #include <luabind/shared_ptr_converter.hpp>
+#include "lost/gl/Context.h"
+#include "lost/event/EventDispatcher.h"
 
 using namespace luabind;
 using namespace lost::application;

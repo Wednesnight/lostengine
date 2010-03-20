@@ -1,20 +1,15 @@
 #ifndef LOST_FONT_FREETYPE_FACE_H
 #define LOST_FONT_FREETYPE_FACE_H
 
-#include "ft2build.h"
-#include FT_FREETYPE_H
-#include "lost/font/freetype/Library.h"
-#include "lost/common/Data.h"
+#include "lost/font/freetype/forward.h"
+#include "lost/common/forward.h"
 
 namespace lost
 {
   namespace font
   {
     namespace freetype
-    {
-      struct Face;
-      typedef lost::shared_ptr<Face> FacePtr;
-    
+    {    
       struct Face
       {
         Face(LibraryPtr inLibrary,

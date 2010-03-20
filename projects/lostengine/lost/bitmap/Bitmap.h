@@ -4,26 +4,17 @@
 #include <boost/noncopyable.hpp>
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
-#include "lost/platform/shared_ptr.h"
-#include "lost/common/Data.h"
+#include "lost/bitmap/Components.h"
+
+#include "lost/bitmap/forward.h"
+#include "lost/common/forward.h"
 
 namespace lost
 {
   namespace bitmap
-  {
-    struct Bitmap;
-    typedef lost::shared_ptr<Bitmap> BitmapPtr;
-  
+  {  
     struct Bitmap : private boost::noncopyable
     {
-      enum Components
-      {
-        COMPONENTS_UNDEFINED = 0, // for undefined init, can't be used for anything else
-        COMPONENTS_ALPHA = 1,     // 8 bit
-        COMPONENTS_RGB = 3,       // 24 bit
-        COMPONENTS_RGBA = 4,      // 32 bit
-        COMPONENTS_NUM
-      };
       
       uint8_t*    data;   // points to the raw pixel data
       uint32_t    width;  // width in pixels
@@ -178,13 +169,13 @@ namespace lost
       void drawRectOutline(const lost::math::Rect& inRect, const common::Color& inColor);  
         
       /** rotates the bitmap clock wise and returns it as a new bitmap*/
-      lost::shared_ptr<Bitmap> rotCW();
+      BitmapPtr rotCW();
       
       /** returns the occupied are in pixels. */
       float area() { return (float)(width*height); }
       
       /** draws this bitmap into the specified target. */
-      void draw(uint32_t x, uint32_t y, lost::shared_ptr<Bitmap> target);
+      void draw(uint32_t x, uint32_t y, BitmapPtr target);
       
     private:
       void destroy();
