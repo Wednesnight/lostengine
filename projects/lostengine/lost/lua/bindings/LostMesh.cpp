@@ -6,6 +6,7 @@
 #include "lost/mesh/Material.h"
 #include "lost/mesh/Mesh.h"
 #include "lost/mesh/Quad.h"
+#include "lost/mesh/Disc.h"
 #include "lost/mesh/ScaleGrid.h"
 #include "lost/mesh/Rect.h"
 #include "lost/mesh/Circular.h"
@@ -177,6 +178,22 @@ namespace lost
       ];
     }
 
+    void LostMeshDisc(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<Disc, Mesh>("Disc")
+            .def("updateSize", &Disc::updateSize)
+            .scope
+            [
+              def("create", &Disc::create)
+            ]
+        ]
+      ];
+    }
+
     void LostMeshScaleGrid(lua_State* state)
     {
       module(state, "lost")
@@ -221,6 +238,7 @@ namespace lost
       LostMeshLoader(state);
       LostMeshMaterial(state);
       LostMeshQuad(state);
+      LostMeshDisc(state);
       LostMeshScaleGrid(state);
       LostMeshTextureManager(state);
     }
