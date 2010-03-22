@@ -3,6 +3,8 @@
 
 #ifdef __cplusplus
 
+  #define BOOST_SP_NO_ATOMIC_ACCESS
+  
   // boost
   #ifndef __STDC_CONSTANT_MACROS
     #define __STDC_CONSTANT_MACROS
