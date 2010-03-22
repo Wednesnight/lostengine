@@ -43,6 +43,7 @@ void TextureManager::updateDiscTexture(float diameter)
   params.magFilter = GL_LINEAR;
   
   // create all mipmap levels
+  uint32_t numTextures = 0;
   while(diameter > 0)
   {
     BitmapPtr bmp(new Bitmap(diameter, diameter, bitmap::COMPONENTS_RGBA));
@@ -52,7 +53,9 @@ void TextureManager::updateDiscTexture(float diameter)
     bmp->disc(cx, cy, cr);
     bitmaps.push_back(bmp);
     diameter = floor(diameter / 2.0f);
+    ++numTextures;
   }
+  DOUT("rebuild "<<numTextures<<" bitmaps for disc");
 
   _discTexture->init(bitmaps, params); // preserves texture object, but reinitialises data
 }
@@ -63,6 +66,7 @@ gl::TexturePtr TextureManager::discTexture(float radius)
   {
     float diameter = (float)math::nextPowerOf2((uint32_t)(radius*2));
     updateDiscTexture(diameter);
+    _discTextureRadius = radius;
   }
   
   logStats();

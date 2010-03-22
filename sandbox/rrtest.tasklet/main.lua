@@ -1,6 +1,8 @@
 require("lost.declarative.Context")
+require("lost.common.Shaders")
 
 using "lost.math.Vec2"
+using "lost.math.Vec3"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.common.Color"
@@ -15,7 +17,7 @@ running = true
 rootNode = nil
 dcl = nil
 
-radius = 67
+radius = 50
 quadsize = Vec2(radius*2, radius*2)
 
 -- creates a square texture with a white circle on transparent background
@@ -50,6 +52,12 @@ function startup(tasklet)
   tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
+  
+  log.debug("disc: " .. tostring(lost.mesh.Disc))
+
+  for k,v in pairs(lost.mesh) do
+    log.debug(k .. " : " .. tostring(v))
+  end
 
   textureManager = lost.mesh.TextureManager.create()
   texmesh = dcl.mesh:Quad
@@ -61,6 +69,12 @@ function startup(tasklet)
     },
     transform = MatrixTranslation(lost.math.Vec3(10,10,0))
   }
+  
+  local discradius = 50
+  discmesh = lost.mesh.Disc.create(textureManager, discradius)
+  discmesh.material.blend = true
+  discmesh.material.shader = lost.common.Shaders.textureShader()
+  discmesh.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
   
   rootNode = dcl.rg:Node
   {
@@ -79,7 +93,7 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
-      mesh = texmesh
+      mesh = texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
     }
   }
 

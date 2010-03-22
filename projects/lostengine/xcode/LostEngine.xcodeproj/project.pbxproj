@@ -52,18 +52,6 @@
 		3E531EA10F14FD7B00D7C8B4 /* hl_sha256wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E531E5C0F14FD7B00D7C8B4 /* hl_sha256wrapper.cpp */; };
 		3E531EA30F14FD7B00D7C8B4 /* hl_sha384wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E531E5E0F14FD7B00D7C8B4 /* hl_sha384wrapper.cpp */; };
 		3E531EA50F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E531E600F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp */; };
-		3E531EF00F14FE2C00D7C8B4 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE40F14FE2C00D7C8B4 /* zutil.c */; };
-		3E531EF10F14FE2C00D7C8B4 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE50F14FE2C00D7C8B4 /* uncompr.c */; };
-		3E531EF20F14FE2C00D7C8B4 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE60F14FE2C00D7C8B4 /* compress.c */; };
-		3E531EF30F14FE2C00D7C8B4 /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE70F14FE2C00D7C8B4 /* infback.c */; };
-		3E531EF40F14FE2C00D7C8B4 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE80F14FE2C00D7C8B4 /* inflate.c */; };
-		3E531EF50F14FE2C00D7C8B4 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE90F14FE2C00D7C8B4 /* adler32.c */; };
-		3E531EF60F14FE2C00D7C8B4 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EEA0F14FE2C00D7C8B4 /* deflate.c */; };
-		3E531EF70F14FE2C00D7C8B4 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EEB0F14FE2C00D7C8B4 /* inffast.c */; };
-		3E531EF80F14FE2C00D7C8B4 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EEC0F14FE2C00D7C8B4 /* trees.c */; };
-		3E531EF90F14FE2C00D7C8B4 /* gzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EED0F14FE2C00D7C8B4 /* gzio.c */; };
-		3E531EFA0F14FE2C00D7C8B4 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EEE0F14FE2C00D7C8B4 /* crc32.c */; };
-		3E531EFB0F14FE2C00D7C8B4 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EEF0F14FE2C00D7C8B4 /* inftrees.c */; };
 		3E531EFC0F14FE2C00D7C8B4 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE40F14FE2C00D7C8B4 /* zutil.c */; };
 		3E531EFD0F14FE2C00D7C8B4 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE50F14FE2C00D7C8B4 /* uncompr.c */; };
 		3E531EFE0F14FE2C00D7C8B4 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E531EE60F14FE2C00D7C8B4 /* compress.c */; };
@@ -2235,18 +2223,6 @@
 				3E531E730F14FD7B00D7C8B4 /* hl_sha256wrapper.cpp in Sources */,
 				3E531E750F14FD7B00D7C8B4 /* hl_sha384wrapper.cpp in Sources */,
 				3E531E770F14FD7B00D7C8B4 /* hl_sha512wrapper.cpp in Sources */,
-				3E531EF00F14FE2C00D7C8B4 /* zutil.c in Sources */,
-				3E531EF10F14FE2C00D7C8B4 /* uncompr.c in Sources */,
-				3E531EF20F14FE2C00D7C8B4 /* compress.c in Sources */,
-				3E531EF30F14FE2C00D7C8B4 /* infback.c in Sources */,
-				3E531EF40F14FE2C00D7C8B4 /* inflate.c in Sources */,
-				3E531EF50F14FE2C00D7C8B4 /* adler32.c in Sources */,
-				3E531EF60F14FE2C00D7C8B4 /* deflate.c in Sources */,
-				3E531EF70F14FE2C00D7C8B4 /* inffast.c in Sources */,
-				3E531EF80F14FE2C00D7C8B4 /* trees.c in Sources */,
-				3E531EF90F14FE2C00D7C8B4 /* gzio.c in Sources */,
-				3E531EFA0F14FE2C00D7C8B4 /* crc32.c in Sources */,
-				3E531EFB0F14FE2C00D7C8B4 /* inftrees.c in Sources */,
 				3E5322240F1514FA00D7C8B4 /* psnames.c in Sources */,
 				3E5322250F1514FA00D7C8B4 /* psaux.c in Sources */,
 				3E5322260F1514FA00D7C8B4 /* ftlzw.c in Sources */,
