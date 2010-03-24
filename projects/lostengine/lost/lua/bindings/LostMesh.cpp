@@ -219,6 +219,7 @@ namespace lost
           class_<TextureManager>("TextureManager")
           .def("ringTexture", &TextureManager::ringTexture)
           .def("discTexture", &TextureManager::discTexture)
+          .def_readwrite("maxDiameter", &TextureManager::maxDiameter)
           .scope
           [
             def("create", (TextureManagerPtr(*)())&TextureManager::create)            

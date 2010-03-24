@@ -60,9 +60,11 @@ function startup(tasklet)
   end
 
   textureManager = lost.mesh.TextureManager.create()
+  textureManager.maxDiameter = 16 -- change this to test effect on quads with larger diameter
   texmesh = dcl.mesh:Quad
   {
     texture = textureManager:discTexture(radius), -- pow2ringTexture(8, 1.5),
+    size = Vec2(radius, radius), -- blow up quad to desired size, irrespective of actual texture size
     material = 
     {
       blend = true
