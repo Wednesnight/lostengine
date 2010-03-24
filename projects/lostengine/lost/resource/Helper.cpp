@@ -1,41 +1,35 @@
 #include "lost/resource/Helper.h"
-#include <fstream>
-#include <stdexcept>
 #include "lost/common/Logger.h"
+#include "zzip/zzip.h"
 
 namespace lost
 {
-namespace resource
-{
-
-common::DataPtr loadFromAbsolutePath(const std::string& inPath)
-{
-  common::DataPtr result(new common::Data);
-  
-  std::ifstream ifs( inPath.c_str(), std::ios_base::in | std::ios_base::binary );
-  if(!ifs.good()) 
+  namespace resource
   {
-    // common case: the file wasn't found in a particular repository and we just return NULL, no need to panic
-//    DOUT("couldn't open file: '"+ inPath +"'");
-    common::DataPtr null;
-    return null;
-  }
-  ifs.seekg(0,std::ios_base::end);
-  if(ifs.fail())
-  {
-    EOUT("seek failed!");
-    common::DataPtr null;
-    return null;
-  }
-  unsigned long filesize = ifs.tellg();
-  ifs.seekg(std::ios_base::beg);
-  result->size = filesize;
-  result->bytes.reset(new char[filesize]);
-  ifs.read(result->bytes.get(), filesize);
-  
-  return result;
-}
 
-}
-}
+    common::DataPtr loadFromAbsolutePath(const std::string& inPath)
+    {
+      common::DataPtr result;
 
+      ZZIP_FILE* file = zzip_fopen(inPath.c_str(), "rb");
+      if (file != NULL)
+      {
+        if (zzip_file_real(file)) { DOUT("read from filesystem <" << inPath << ">"); }
+          else { DOUT("read from zip <" << inPath << ">"); }
+
+        ZZIP_STAT stat;
+        if (zzip_fstat(file, &stat) > -1)
+        {
+          result.reset(new common::Data);
+          result->size = stat.st_size;
+          result->bytes.reset(new char[stat.st_size]);
+          zzip_fread(result->bytes.get(), 1, stat.st_size, file);
+        }
+        zzip_fclose(file);
+      }
+      
+      return result;
+    }
+
+  }
+}
