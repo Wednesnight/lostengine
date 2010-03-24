@@ -105,6 +105,12 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentBuffer = NULL;
       cullEnabled = getParam<bool>(GL_CULL_FACE);
       cullFaceMode = getParam<int>(GL_CULL_FACE_MODE);
+      
+      // reset active textures
+      for(uint32_t i=0; i<_maxTextures; ++i)
+      {
+        activeTextures[i] = 0;
+      }
     }
     
     Context::~Context()
@@ -218,7 +224,18 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-    void Context::bindActiveTextures(const std::vector<TexturePtr>& textures)
+    void Context::bindTexture(GLuint tex)
+    {
+      uint32_t idx = currentActiveTexture - GL_TEXTURE0; // have to subtract since GL_TEXTURE0 is some arbitrary hex value and not zero based
+      assert((idx>=0) && (idx<_maxTextures));
+      if(activeTextures[idx] != tex)
+      {
+        glBindTexture(GL_TEXTURE_2D, tex); GLDEBUG_THROW;        
+        activeTextures[idx] = tex;
+      }
+    }
+    
+    void Context::bindTextures(const std::vector<TexturePtr>& textures)
     {
       if(textures.size() > 0)
       {
@@ -226,7 +243,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         for(uint32_t i=0; i<num; ++i)
         {
           activeTexture(GL_TEXTURE0+i); // the standard guarantees GL_TEXTUREi = GL_TEXTURE0+i
-          textures[i]->bind();
+          bindTexture(textures[i]->texture);
         }
         activeTexture(GL_TEXTURE0); // reset 
       }
@@ -247,7 +264,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     {
       if(mat->textures.size()>0)
       {
-        bindActiveTextures(mat->textures);
+        bindTextures(mat->textures);
       }
       if(mat->blend)
       {

@@ -50,7 +50,8 @@ namespace lost
       Buffer* currentBuffer;
       bool cullEnabled;
       GLenum cullFaceMode;
-      
+      static const uint32_t _maxTextures = 32;
+      GLuint activeTextures[_maxTextures]; // hardcoded 32 texture limit, index represents value set with glActiveTexture
       /**
        * forward declaration for platform specific stuff
        */
@@ -107,7 +108,8 @@ namespace lost
       void clear(GLbitfield flags);    
       
       void activeTexture(GLenum tex);
-      void bindActiveTextures(const std::vector<TexturePtr>& textures);
+      void bindTexture(GLuint tex);
+      void bindTextures(const std::vector<TexturePtr>& textures);
       void material(mesh::MaterialPtr mat);
       
       void draw(mesh::MeshPtr mesh);
