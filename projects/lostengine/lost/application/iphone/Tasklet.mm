@@ -6,6 +6,7 @@
 #import <QuartzCore/CADisplayLink.h>
 #import <Foundation/NSRunLoop.h>
 #include "lost/application/Window.h"
+#include "lost/gl/Context.h"
 
 @interface TaskletDisplayLink : NSObject
 {

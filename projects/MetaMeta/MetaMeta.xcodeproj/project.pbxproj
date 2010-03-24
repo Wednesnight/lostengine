@@ -11,6 +11,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		EA4697F5115991A800919BA8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4697F4115991A800919BA8 /* TextureManager.cpp */; };
+		EA4697F7115991AE00919BA8 /* Disc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4697F6115991AE00919BA8 /* Disc.cpp */; };
 		EAA41323114451B3002FBD5F /* LEApplicationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAA4131B114451B3002FBD5F /* LEApplicationDelegate.mm */; };
 		EAA41324114451B3002FBD5F /* LEGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAA4131C114451B3002FBD5F /* LEGLView.mm */; };
 		EAA41325114451B3002FBD5F /* LEApplication.mm in Sources */ = {isa = PBXBuildFile; fileRef = EAA4131D114451B3002FBD5F /* LEApplication.mm */; };
@@ -244,6 +246,8 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MetaMeta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MetaMeta-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		EA4697F4115991A800919BA8 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = ../lostengine/lost/mesh/TextureManager.cpp; sourceTree = SOURCE_ROOT; };
+		EA4697F6115991AE00919BA8 /* Disc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Disc.cpp; path = ../lostengine/lost/mesh/Disc.cpp; sourceTree = SOURCE_ROOT; };
 		EAA4131B114451B3002FBD5F /* LEApplicationDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEApplicationDelegate.mm; path = iphone/LEApplicationDelegate.mm; sourceTree = "<group>"; };
 		EAA4131C114451B3002FBD5F /* LEGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEGLView.mm; path = iphone/LEGLView.mm; sourceTree = "<group>"; };
 		EAA4131D114451B3002FBD5F /* LEApplication.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEApplication.mm; path = iphone/LEApplication.mm; sourceTree = "<group>"; };
@@ -1002,11 +1006,13 @@
 		EABA7D0E112F22F70016E322 /* mesh */ = {
 			isa = PBXGroup;
 			children = (
+				EA4697F6115991AE00919BA8 /* Disc.cpp */,
 				EABA7D0F112F22F70016E322 /* Loader.cpp */,
 				EABA7D10112F22F70016E322 /* Mesh.cpp */,
 				EABA7D11112F22F70016E322 /* Quad.cpp */,
 				EABA7D12112F22F70016E322 /* Rect.cpp */,
 				EABA7D13112F22F70016E322 /* ScaleGrid.cpp */,
+				EA4697F4115991A800919BA8 /* TextureManager.cpp */,
 			);
 			name = mesh;
 			sourceTree = "<group>";
@@ -1359,6 +1365,8 @@
 				EAA413A4114455B3002FBD5F /* Shader.cpp in Sources */,
 				EAA413A5114455B9002FBD5F /* FragmentShader.cpp in Sources */,
 				EAA413A6114455BB002FBD5F /* VertexShader.cpp in Sources */,
+				EA4697F5115991A800919BA8 /* TextureManager.cpp in Sources */,
+				EA4697F7115991AE00919BA8 /* Disc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,7 +1381,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PFE_FILE_C_DIALECTS = "c++ ";
+				GCC_PFE_FILE_C_DIALECTS = "c++ objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "../lostengine/lost/prefix-debug.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
