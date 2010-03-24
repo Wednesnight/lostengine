@@ -27,7 +27,7 @@ struct TextureManager
   // assumes diameter is a power of two
   void updateDiscTexture(float diameter); 
 
-  
+  float maxDiameter; // used for both disc and ring. set this to some value to prevent textures from growing arbitrarily
   float _discTextureRadius;
   gl::TexturePtr _discTexture; // theres is only one which is the power-oftwo maximum of all previously used
 
