@@ -2,6 +2,7 @@
 #import "lost/application/iphone/LEWindow.h"
 #import "lost/application/iphone/LEGLView.h"
 #import "lost/common/Logger.h"
+#include "lost/gl/Context.h"
 
 namespace lost
 {
