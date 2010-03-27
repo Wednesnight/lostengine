@@ -20,6 +20,8 @@ TextureManager::TextureManager()
   _discTextureRadius = 0;
   _discTexture.reset(new Texture);
   maxDiameter = 256;
+  _radiusOffset = -.5;
+  _centerOffset = -.5f;
 }
 
 TextureManager::~TextureManager()
@@ -34,7 +36,7 @@ TexturePtr TextureManager::ringTexture(float radius, float lineWidth)
   return result;
 }
 
-void TextureManager::updateDiscTexture(float diameter)
+void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diameter)
 {
   vector<BitmapPtr> bitmaps; // 0 = mimap level 0 = largest, all others are the following reduction levels
 
@@ -48,9 +50,9 @@ void TextureManager::updateDiscTexture(float diameter)
   while(diameter > 0)
   {
     BitmapPtr bmp(new Bitmap(diameter, diameter, bitmap::COMPONENTS_RGBA));
-    float cx = (diameter / 2.0f) - .5f;
-    float cy = cx;
-    float cr = cy;
+    float cx = (diameter / 2.0f) + _centerOffset;
+    float cy = (diameter / 2.0f) + _centerOffset;
+    float cr = (diameter / 2.0f) + _radiusOffset;
     bmp->disc(cx, cy, cr);
     bitmaps.push_back(bmp);
     diameter = floor(diameter / 2.0f);
@@ -58,7 +60,13 @@ void TextureManager::updateDiscTexture(float diameter)
   }
   DOUT("rebuild "<<numTextures<<" bitmaps for disc");
 
-  _discTexture->init(bitmaps, params); // preserves texture object, but reinitialises data
+  tex->init(bitmaps, params); // preserves texture object, but reinitialises data  
+}
+
+
+void TextureManager::updateDiscTexture(float diameter)
+{
+  updateTexture(_discTexture, true, diameter);
 }
 
 gl::TexturePtr TextureManager::discTexture(float radius)
@@ -81,8 +89,10 @@ gl::TexturePtr TextureManager::discTexture(float radius)
 
 void TextureManager::logStats()
 {
+  // FIXME: log texture count and approximate memory usage
 }
 
 
 }
 }
+

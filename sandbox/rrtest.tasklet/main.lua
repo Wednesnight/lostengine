@@ -17,7 +17,7 @@ running = true
 rootNode = nil
 dcl = nil
 
-radius = 50
+radius = 32
 quadsize = Vec2(radius*2, radius*2)
 
 -- creates a square texture with a white circle on transparent background
@@ -60,7 +60,11 @@ function startup(tasklet)
   end
 
   textureManager = lost.mesh.TextureManager.create()
-  textureManager.maxDiameter = 16 -- change this to test effect on quads with larger diameter
+
+  textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
+--  textureManager._radiusOffset = -.5
+--  textureManager._centerOffset = -.5
+
   texmesh = dcl.mesh:Quad
   {
     texture = textureManager:discTexture(radius), -- pow2ringTexture(8, 1.5),
@@ -69,7 +73,7 @@ function startup(tasklet)
     {
       blend = true
     },
-    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+    transform = MatrixTranslation(lost.math.Vec3(0,0,0))
   }
   
   local discradius = 50
@@ -88,10 +92,22 @@ function startup(tasklet)
     {
       mask = gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT
     },
-    dcl.rg:DepthTest{true},
+    dcl.rg:DepthTest{false},
     dcl.rg:Camera2D
     {
       viewport = Rect(0,0,screensize.x, screensize.y)
+    },
+    dcl.rg:Draw
+    {
+      active = false,
+      mesh = dcl.mesh:Quad
+      {
+        rect = Rect(0,0,radius, radius),
+        material =
+        {
+          color = Color(1,0,0)
+        }
+      }
     },
     dcl.rg:Draw
     {
