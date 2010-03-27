@@ -220,6 +220,8 @@ namespace lost
           .def("ringTexture", &TextureManager::ringTexture)
           .def("discTexture", &TextureManager::discTexture)
           .def_readwrite("maxDiameter", &TextureManager::maxDiameter)
+          .def_readwrite("_radiusOffset", &TextureManager::_radiusOffset)
+          .def_readwrite("_centerOffset", &TextureManager::_centerOffset)
           .scope
           [
             def("create", (TextureManagerPtr(*)())&TextureManager::create)            
