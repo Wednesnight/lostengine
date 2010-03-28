@@ -111,7 +111,7 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
-      mesh = texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
+      mesh = discmesh --texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
     }
   }
 
