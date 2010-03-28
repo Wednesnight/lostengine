@@ -17,17 +17,17 @@ namespace mesh
  */
 struct Disc : Mesh
 {
-  Disc(const TextureManagerPtr& inTextureManager, float radius);
+  Disc(const TextureManagerPtr& inTextureManager, float diameter);
   virtual ~Disc() {}
   
   void createIndices();
   void createTexCoords();
-  void updateSize(float radius);
-  void updateTexture(float radius);  
+  void updateSize(float diameter);
+  void updateTexture(float diameter);  
   
-  static DiscPtr create(const TextureManagerPtr& inTextureManager, float radius) 
+  static DiscPtr create(const TextureManagerPtr& inTextureManager, float diameter) 
   {
-    return DiscPtr(new Disc(inTextureManager, radius));
+    return DiscPtr(new Disc(inTextureManager, diameter));
   }
   
   TextureManagerPtr textureManager;

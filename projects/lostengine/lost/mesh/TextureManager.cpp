@@ -17,7 +17,7 @@ using namespace std;
 
 TextureManager::TextureManager()
 {
-  _discTextureRadius = 0;
+  _discTextureDiameter = 0;
   _discTexture.reset(new Texture);
   maxDiameter = 256;
   _radiusOffset = -.5;
@@ -28,7 +28,7 @@ TextureManager::~TextureManager()
 {
 }
 
-TexturePtr TextureManager::ringTexture(float radius, float lineWidth)
+TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
 {
   TexturePtr result;
   
@@ -69,17 +69,17 @@ void TextureManager::updateDiscTexture(float diameter)
   updateTexture(_discTexture, true, diameter);
 }
 
-gl::TexturePtr TextureManager::discTexture(float radius)
+gl::TexturePtr TextureManager::discTexture(float diameter)
 {
-  if(radius > _discTextureRadius)
+  if(diameter > _discTextureDiameter)
   {
-    float diameter = (float)math::nextPowerOf2((uint32_t)(radius*2)); // we need this anyway, new textures must be power of two
+    float diameterp2 = (float)math::nextPowerOf2((uint32_t)diameter); // we need this anyway, new textures must be power of two
     float mdp2 = (float)math::nextPowerOf2((uint32_t)maxDiameter); // just to make sure the maximum is also always power of two
-    float md = std::min(diameter, mdp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
-    if(md > (_discTextureRadius*2)) // so check if the suggested diameter, clamped against mdp2, is larger than the current texture an recreate if necessary
+    float md = std::min(diameterp2, mdp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
+    if(md > (_discTextureDiameter)) // so check if the suggested diameter, clamped against mdp2, is larger than the current texture an recreate if necessary
     {
       updateDiscTexture(md); // use md here because diameter contains the desired value, but md contains the allowed maximum
-      _discTextureRadius = md/2; // memorize the processed md/2, since its power of two, instead of probably bogus input value
+      _discTextureDiameter = md; // memorize the processed md/2, since its power of two, instead of probably bogus input value
     }
   }
   

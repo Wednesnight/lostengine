@@ -16,8 +16,8 @@ struct TextureManager
   virtual ~TextureManager();
   
   // textures are cached, reused and always rounded up to the next power-of-two
-  gl::TexturePtr ringTexture(float radius, float lineWidth); // in pixels,radius is rounded up, linewidth is used as is
-  gl::TexturePtr discTexture(float radius);
+  gl::TexturePtr ringTexture(float diameter, float lineWidth); // in pixels,radius is rounded up, linewidth is used as is
+  gl::TexturePtr discTexture(float diameter);
   
   void logStats(); // calculates how much memory is probably used on the gfx hardware by the textures known to the TextureManager andlogs them using DOUT
   
@@ -32,23 +32,14 @@ struct TextureManager
 
   float maxDiameter; // used for both disc and ring. set this to some value to prevent textures from growing arbitrarily
 
-  float _discTextureRadius;
+  float _discTextureDiameter;
   gl::TexturePtr _discTexture; // theres is only one which is the power-oftwo maximum of all previously used
 
-  std::map<float, float> _lw2ringRadius; // line width to radius
+  std::map<float, float> _lw2ringDiameter; // line width to diameter
   std::map<float, gl::TexturePtr> _lw2ringTexture;
-
 
   float _radiusOffset;
   float _centerOffset;
-
-  struct RadiusLineWidth
-  {
-    RadiusLineWidth(float r, float lw) : radius(r), lineWidth(lw) {}
-    float radius;
-    float lineWidth;
-  };
-  std::map<RadiusLineWidth, gl::TexturePtr> _rlw2texture;
 };
 
 }
