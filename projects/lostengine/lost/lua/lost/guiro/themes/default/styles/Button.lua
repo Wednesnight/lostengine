@@ -46,7 +46,7 @@ function Button:apply(target)
   target:label(lost.guiro.Button.STATE_NORMAL, self:buildLabel(Color(1,1,1)))
   target:label(lost.guiro.Button.STATE_HOVER, self:buildLabel(Color(1,1,1)))
   target:label(lost.guiro.Button.STATE_PUSHED, self:buildLabel(Color(1,1,1)))
-  target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(1,1,1)))
+  target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(.3,.3,.3)))
 end
 
 function Button:buildBackgroundImage(tex, vid)
