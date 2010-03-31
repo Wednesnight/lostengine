@@ -409,6 +409,7 @@ void Bitmap::drawRectOutline(const lost::math::Rect& inRect, const common::Color
 
 void Bitmap::disc(float x, float y, float r)
 {
+  r = std::max(1.0f, r-1.0f);
   float w = (float)width;
   float h = (float)height;
   common::Color white(1,1,1,1);
@@ -433,6 +434,7 @@ void Bitmap::disc(float x, float y, float r)
 
 void Bitmap::ring(float x, float y, float r, float t)
 {
+  r = std::max(1.0f, r-1.0f);
   float w = (float)width;
   float h = (float)height;
   float lr = r - t;
