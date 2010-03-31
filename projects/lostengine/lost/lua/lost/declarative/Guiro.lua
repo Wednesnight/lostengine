@@ -75,6 +75,7 @@ end
 
 function Guiro:assignButtonAttributes(target, source)
 	if source.title ~= nil then target:title(source.title) end
+	if source.enabled ~= nil then target:enabled(source.enabled) end
 end
 
 function Guiro:assignVBoxAttributes(target, source)

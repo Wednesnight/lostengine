@@ -24,7 +24,7 @@ function Button:constructor()
 	self._states[Button.STATE_HOVER] = {}
 	self._states[Button.STATE_PUSHED] = {}
 	self._states[Button.STATE_DISABLED] = {}
-	self._disabled = false
+	self._enabled = true
 	self._title = ""
 	
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)	
@@ -35,44 +35,54 @@ function Button:constructor()
 end
 
 function Button:mouseEnter(event)
-  self._state = Button.STATE_HOVER
-  callLater(self.updateViewVisibility, self)
+  if self._enabled then
+    self._state = Button.STATE_HOVER
+    callLater(self.updateViewVisibility, self)
+  end
 end
 
 function Button:mouseLeave(event)
-  self._state = Button.STATE_NORMAL
-  callLater(self.updateViewVisibility, self)
+  if self._enabled then
+    self._state = Button.STATE_NORMAL
+    callLater(self.updateViewVisibility, self)
+  end
 end
 
 function Button:mouseDown(event)
-  self._state = Button.STATE_PUSHED
-  callLater(self.updateViewVisibility, self)
-  local pressEvent = lost.guiro.event.Event("buttonDown")
-  pressEvent.bubbles = true
-  pressEvent.target = self
-  self:dispatchEvent(pressEvent)
+  if self._enabled then
+    self._state = Button.STATE_PUSHED
+    callLater(self.updateViewVisibility, self)
+    local pressEvent = lost.guiro.event.Event("buttonDown")
+    pressEvent.bubbles = true
+    pressEvent.target = self
+    self:dispatchEvent(pressEvent)
+  end
 end
 
 function Button:mouseUpInside(event)
-  self._state = Button.STATE_HOVER
-  callLater(self.updateViewVisibility, self)
-  local clickEvent = lost.guiro.event.Event("buttonClick")
-  clickEvent.bubbles = true
-  clickEvent.target = self
-  self:dispatchEvent(clickEvent)
-  local releaseEvent = lost.guiro.event.Event("buttonUp")
-  releaseEvent.bubbles = true
-  releaseEvent.target = self
-  self:dispatchEvent(releaseEvent)
+  if self._enabled then
+    self._state = Button.STATE_HOVER
+    callLater(self.updateViewVisibility, self)
+    local clickEvent = lost.guiro.event.Event("buttonClick")
+    clickEvent.bubbles = true
+    clickEvent.target = self
+    self:dispatchEvent(clickEvent)
+    local releaseEvent = lost.guiro.event.Event("buttonUp")
+    releaseEvent.bubbles = true
+    releaseEvent.target = self
+    self:dispatchEvent(releaseEvent)
+  end
 end
 
 function Button:mouseUpOutside(event)
-  self._state = Button.STATE_NORMAL
-  callLater(self.updateViewVisibility, self)
-  local releaseEvent = lost.guiro.event.Event("buttonUp")
-  releaseEvent.bubbles = true
-  releaseEvent.target = self
-  self:dispatchEvent(releaseEvent)
+  if self._enabled then
+    self._state = Button.STATE_NORMAL
+    callLater(self.updateViewVisibility, self)
+    local releaseEvent = lost.guiro.event.Event("buttonUp")
+    releaseEvent.bubbles = true
+    releaseEvent.target = self
+    self:dispatchEvent(releaseEvent)
+  end
 end
 
 
@@ -154,5 +164,18 @@ function Button:title(txt)
     end
   else
     return self._title
+  end
+end
+
+function Button:enabled(enabled)
+  if enabled ~= nil then
+    self._enabled = enabled
+    if self._enabled then
+      self:state(Button.STATE_NORMAL)
+    else
+      self:state(Button.STATE_DISABLED)
+    end
+  else
+    return not self._enabled
   end
 end
