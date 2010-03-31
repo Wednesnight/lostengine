@@ -71,10 +71,17 @@ function startup(tasklet)
   }
   
   local discradius = 50
-  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 1.1)
+  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 3)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
+	discmesh.material.color = Color(1,0,0)
   discmesh.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
+
+  discmesh2 = lost.mesh.Disc.create(textureManager, true, discradius-1, 0)
+  discmesh2.material.blend = true
+  discmesh2.material.shader = lost.common.Shaders.textureShader()
+	discmesh2.material.color = Color(.8,.8,.8)
+  discmesh2.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
   
   rootNode = dcl.rg:Node
   {
@@ -102,6 +109,10 @@ function startup(tasklet)
           color = Color(1,0,0)
         }
       }
+    },
+    dcl.rg:Draw
+    {
+      mesh = discmesh2
     },
     dcl.rg:Draw
     {
