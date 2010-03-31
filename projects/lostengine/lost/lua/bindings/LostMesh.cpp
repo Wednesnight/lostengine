@@ -186,6 +186,8 @@ namespace lost
         [
           class_<Disc, Mesh>("Disc")
             .def("update", &Disc::update)
+            .def("updateDiameter", &Disc::updateDiameter)
+            .def("updateLineWidth", &Disc::updateLineWidth)
             .scope
             [
               def("create", &Disc::create)
