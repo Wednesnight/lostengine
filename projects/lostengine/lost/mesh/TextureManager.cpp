@@ -34,7 +34,7 @@ void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diame
 
   Texture::Params params;
   params.sizeHint = Texture::SIZE_POWER_OF_TWO;
-  params.minFilter = GL_LINEAR_MIPMAP_LINEAR;
+  params.minFilter = GL_LINEAR_MIPMAP_NEAREST;
   params.magFilter = GL_LINEAR;
   
   // create all mipmap levels
