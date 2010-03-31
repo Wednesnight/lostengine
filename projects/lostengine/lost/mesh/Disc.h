@@ -11,26 +11,29 @@ namespace mesh
 
 /** Creates a Quad with a disc texture obtained fmor the provided TextureManager.
  * The Disc Mesh will attempt to maintain optimal fidelity of the disc texture by 
- * requesting an updated texture from the TExtureManager if it receives an updateSize call.
+ * requesting an updated texture from the TextureManager if it receives an updateSize call.
  * Scaling the Mesh through its transform matrix will not refresh the texture.
  * The disc will always be placed with it's center at 0,0,0.
  */
 struct Disc : Mesh
 {
-  Disc(const TextureManagerPtr& inTextureManager, float diameter);
+  Disc(const TextureManagerPtr& inTextureManager, bool filled, float diameter, float lineWidth);
   virtual ~Disc() {}
+  static DiscPtr create(const TextureManagerPtr& inTextureManager, bool filled, float diameter, float lineWidth) 
+  {
+    return DiscPtr(new Disc(inTextureManager, filled, diameter, lineWidth));
+  }
+
+  void update(bool filled, float diameter, float lineWidth); // call this to resize the Quad, texture will be resized automatically if possible/necessary
+
   
   void createIndices();
   void createTexCoords();
-  void updateSize(float diameter);
-  void updateTexture(float diameter);  
+  void updateTexture(bool filled, float diameter, float lineWidth);  
   
-  static DiscPtr create(const TextureManagerPtr& inTextureManager, float diameter) 
-  {
-    return DiscPtr(new Disc(inTextureManager, diameter));
-  }
-  
-  TextureManagerPtr textureManager;
+  TextureManagerPtr textureManager; // maintained for texture recreation
+  // cached so you don't have to specify all params when calling updateSize
+  float filled; // 
 };
 }
 }

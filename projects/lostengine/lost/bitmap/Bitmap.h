@@ -151,7 +151,7 @@ namespace lost
       void hline(uint32_t y, uint32_t xl, uint32_t xr, const common::Color& inColor);
       
       /** draws a horizontal line into the bitmap.
-       * No bounds checks are performed, you'll crsah if you draw outside the bitmap.
+       * No bounds checks are performed, you'll crash if you draw outside the bitmap.
        * @param x         the x coordinate of the line.
        * @param yb        the bottom y coordinate of the starting point.
        * @param yt        the top y coordinate of the end point.
