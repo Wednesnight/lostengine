@@ -28,15 +28,7 @@ TextureManager::~TextureManager()
 {
 }
 
-TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
-{
-  TexturePtr result;
-  
-  logStats();
-  return result;
-}
-
-void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diameter)
+void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diameter, float lineWidth)
 {
   vector<BitmapPtr> bitmaps; // 0 = mimap level 0 = largest, all others are the following reduction levels
 
@@ -53,12 +45,16 @@ void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diame
     float cx = (diameter / 2.0f) + _centerOffset;
     float cy = (diameter / 2.0f) + _centerOffset;
     float cr = (diameter / 2.0f) + _radiusOffset;
-    bmp->disc(cx, cy, cr);
+    if(filled)
+      bmp->disc(cx, cy, cr);
+    else 
+      bmp->ring(cx, cy, cr, lineWidth);
+
     bitmaps.push_back(bmp);
     diameter = floor(diameter / 2.0f);
     ++numTextures;
   }
-  DOUT("rebuild "<<numTextures<<" bitmaps for disc");
+  DOUT("rebuild "<<numTextures<<" bitmaps for "<< (filled ? "disc" : "ring"));
 
   tex->init(bitmaps, params); // preserves texture object, but reinitialises data  
 }
@@ -66,7 +62,23 @@ void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diame
 
 void TextureManager::updateDiscTexture(float diameter)
 {
-  updateTexture(_discTexture, true, diameter);
+  updateTexture(_discTexture, true, diameter, 0.0f);
+}
+
+void TextureManager::updateRingTexture(float diameter, float lineWidth)
+{
+  TexturePtr tex;
+  std::map<float, gl::TexturePtr>::iterator pos = _lw2ringTexture.find(lineWidth);
+  if(pos != _lw2ringTexture.end())
+  {
+    tex = pos->second;
+  }
+  else
+  {
+    tex.reset(new Texture);
+    _lw2ringTexture[lineWidth]= tex;
+  }
+  updateTexture(tex, false, diameter, lineWidth);
 }
 
 // calculate maximum possible diameter for a disc texture given the following restrictions
@@ -81,13 +93,28 @@ float TextureManager::calculateMaxDiameter(float diameter)
 }
 
 // returns new safe radius if the texture needs to be updated, zero if it has to stay the same 
-float TextureManager::textureNeedsUpdate(float requestedDiameter)
+float TextureManager::textureNeedsUpdate(bool filled, float requestedDiameter, float lineWidth)
 {
   float result= 0.0f;
-  if(requestedDiameter > _discTextureDiameter) // only recalculate texture if incoming desired is larger than current diameter
+  
+  float currentMaxDiameter = 0.0f;
+  if(filled) // if it's a disc there's only one
+  {
+    currentMaxDiameter = _discTextureDiameter;
+  }
+  else // if it's a ring we must look up the current max diameter for the given linewidth
+  {
+    std::map<float, float>::iterator pos = _lw2ringDiameter.find(lineWidth);
+    if(pos != _lw2ringDiameter.end())
+    {
+      currentMaxDiameter = pos->second;
+    }
+  }
+  
+  if(requestedDiameter > currentMaxDiameter) // only recalculate texture if incoming desired is larger than current diameter
   {
     float md = calculateMaxDiameter(requestedDiameter); // get safe maximum given the restrictions
-    if(md > (_discTextureDiameter)) // and only build if the same maximum is larger than the current
+    if(md > (currentMaxDiameter)) // and only build if the same maximum is larger than the current
     {
       result = md;
     }
@@ -97,15 +124,27 @@ float TextureManager::textureNeedsUpdate(float requestedDiameter)
 
 gl::TexturePtr TextureManager::discTexture(float diameter)
 {
-  float newRadius;
-  if(newRadius = textureNeedsUpdate(diameter))
+  float newDiameter;
+  if(newDiameter = textureNeedsUpdate(true, diameter, 0.0f))
   {
-      updateDiscTexture(newRadius); 
-      _discTextureDiameter = newRadius; 
+      updateDiscTexture(newDiameter); 
+      _discTextureDiameter = newDiameter; 
   }
   
   logStats();
   return _discTexture;
+}
+
+gl::TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
+{
+  float newDiameter;
+  if(newDiameter = textureNeedsUpdate(false, diameter, lineWidth))
+  {
+    updateRingTexture(newDiameter, lineWidth);
+    _lw2ringDiameter[lineWidth] = newDiameter;
+  }
+  logStats();
+  return _lw2ringTexture[lineWidth];
 }
 
 void TextureManager::logStats()

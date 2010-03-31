@@ -14,8 +14,8 @@ namespace lost
       ZZIP_FILE* file = zzip_fopen(inPath.c_str(), "rb");
       if (file != NULL)
       {
-        if (zzip_file_real(file)) { DOUT("read from filesystem <" << inPath << ">"); }
-          else { DOUT("read from zip <" << inPath << ">"); }
+        if (zzip_file_real(file)) { /*DOUT("read from filesystem <" << inPath << ">");*/ }
+          else { /*DOUT("read from zip <" << inPath << ">");*/ }
 
         ZZIP_STAT stat;
         if (zzip_fstat(file, &stat) > -1)

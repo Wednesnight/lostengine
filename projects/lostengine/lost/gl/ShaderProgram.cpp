@@ -144,7 +144,7 @@ void ShaderProgram::buildUniformMap()
     GLint loc = glGetUniformLocation(program, buffer.get());
     Uniform uniform(buffer.get(), i, type, size, loc);
     name2uniform[uniform.name] = uniform;
-    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
+//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
   }
 }
 
@@ -165,7 +165,7 @@ void ShaderProgram::buildVertexAttributeMap()
     GLint loc = glGetAttribLocation(program, buffer.get());
     VertexAttribute attribute(buffer.get(), i, type, size, loc);
     name2vertexAttribute[attribute.name] = attribute;
-    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
+//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
   }
 }
 

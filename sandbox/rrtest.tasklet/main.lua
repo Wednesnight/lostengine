@@ -53,12 +53,6 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
   
-  log.debug("disc: " .. tostring(lost.mesh.Disc))
-
-  for k,v in pairs(lost.mesh) do
-    log.debug(k .. " : " .. tostring(v))
-  end
-
   textureManager = lost.mesh.TextureManager.create()
 
   textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
@@ -77,7 +71,7 @@ function startup(tasklet)
   }
   
   local discradius = 50
-  discmesh = lost.mesh.Disc.create(textureManager, discradius)
+  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 1.1)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
   discmesh.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
