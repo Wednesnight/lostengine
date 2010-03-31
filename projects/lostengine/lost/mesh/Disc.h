@@ -25,6 +25,8 @@ struct Disc : Mesh
   }
 
   void update(bool filled, float diameter, float lineWidth); // call this to resize the Quad, texture will be resized automatically if possible/necessary
+  void updateDiameter(float newDiameter); // sets new diameter, recalculates mesh, uses all other cached values
+  void updateLineWidth(float newLineWidth); // sets new lineWidth, recalculates mesh, uses all other cached values
 
   
   void createIndices();
@@ -33,7 +35,9 @@ struct Disc : Mesh
   
   TextureManagerPtr textureManager; // maintained for texture recreation
   // cached so you don't have to specify all params when calling updateSize
-  float filled; // 
+  float filled; 
+  float diameter;
+  float lineWidth;
 };
 }
 }

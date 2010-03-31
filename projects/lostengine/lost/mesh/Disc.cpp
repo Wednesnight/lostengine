@@ -9,8 +9,11 @@ namespace lost
 namespace mesh
 {
 
-Disc::Disc(const TextureManagerPtr& inTextureManager, bool filled, float diameter, float lineWidth)
+Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float d, float lw)
 {
+  filled = f;
+  diameter = d;
+  lineWidth = lw;
   textureManager = inTextureManager;
 
   gl::BufferLayout layout;
@@ -49,14 +52,30 @@ void Disc::createTexCoords()
   vertexBuffer->set(3, gl::UT_texcoord0, math::Vec2(0.0f,1.0f));
 }
 
-void Disc::update(bool filled, float diameter, float lineWidth)
+void Disc::update(bool f, float d, float lw)
 {
+  filled = f;
+  diameter = d;
+  lineWidth = lw;
+
   float radius = diameter / 2.0f;
   vertexBuffer->set(0, gl::UT_position, math::Vec2(-radius,-radius));
   vertexBuffer->set(1, gl::UT_position, math::Vec2(radius,-radius));
   vertexBuffer->set(2, gl::UT_position, math::Vec2(radius,radius));
   vertexBuffer->set(3, gl::UT_position, math::Vec2(-radius,radius));
   updateTexture(filled, diameter, lineWidth);
+}
+
+void Disc::updateLineWidth(float newLineWidth)
+{
+  lineWidth = newLineWidth;
+  update(filled, diameter, lineWidth);
+}
+
+void Disc::updateDiameter(float newDiameter)
+{
+  diameter = newDiameter;
+  update(filled, diameter, lineWidth);
 }
 
 void Disc::updateTexture(bool filled, float diameter, float lineWidth)

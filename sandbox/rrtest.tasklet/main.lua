@@ -56,7 +56,7 @@ function startup(tasklet)
   textureManager = lost.mesh.TextureManager.create()
 
   textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
-  textureManager._radiusOffset = 0
+  textureManager._radiusOffset = -.5
   textureManager._centerOffset = -.5
 
   texmesh = dcl.mesh:Quad
@@ -70,18 +70,21 @@ function startup(tasklet)
     transform = MatrixTranslation(lost.math.Vec3(0,0,0))
   }
   
-  local discradius = 12
-  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 1)
+  discDiameter = 12
+  discLineWidth = 1
+  discDiameterDelta = 0
+  posoffset = 100
+  discmesh = lost.mesh.Disc.create(textureManager, false, discDiameter, discLineWidth)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
 	discmesh.material.color = Color(1,0,0)
-  discmesh.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
+  discmesh.transform = MatrixTranslation(Vec3(discDiameter+posoffset, discDiameter+posoffset, 0))
 
-  discmesh2 = lost.mesh.Disc.create(textureManager, true, discradius, 0)
+  discmesh2 = lost.mesh.Disc.create(textureManager, true, discDiameter-discDiameterDelta, 0)
   discmesh2.material.blend = true
   discmesh2.material.shader = lost.common.Shaders.textureShader()
 	discmesh2.material.color = Color(.8,.8,.8)
-  discmesh2.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
+  discmesh2.transform = MatrixTranslation(Vec3(discDiameter+posoffset, discDiameter+posoffset, 0))
   
   rootNode = dcl.rg:Node
   {
@@ -112,13 +115,13 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
-      mesh = discmesh2
+      mesh = discmesh --texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
     },
     dcl.rg:Draw
     {
 --			active = false,
-      mesh = discmesh --texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
-    }
+      mesh = discmesh2
+    },
   }
 
   tasklet.renderNode:add(rootNode)
@@ -133,11 +136,34 @@ function keyHandler(event)
   if (event.key == lost.application.K_ESCAPE) then
     running = false
   elseif (event.key == lost.application.K_A) then
-    quadsize = Vec2(quadsize.x+1, quadsize.y+1)
-    texmesh:updateSize(quadsize)
+    discDiameter = discDiameter+1
+    discmesh:updateDiameter(discDiameter)
+    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
+    log.debug("diameter "..discDiameter)
   elseif (event.key == lost.application.K_S) then
-    quadsize = Vec2(quadsize.x-1, quadsize.y-1)
-    texmesh:updateSize(quadsize)
+    discDiameter = discDiameter-1
+    discmesh:updateDiameter(discDiameter)
+    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
+    log.debug("diameter "..discDiameter)
+  elseif (event.key == lost.application.K_Q) then
+    discLineWidth = discLineWidth+.1
+    discmesh:updateLineWidth(discLineWidth)
+    discmesh2:updateLineWidth(discLineWidth)
+    log.debug("lineWidth "..discLineWidth)
+  elseif (event.key == lost.application.K_W) then
+    discLineWidth = discLineWidth-.1
+    discmesh:updateLineWidth(discLineWidth)
+    discmesh2:updateLineWidth(discLineWidth)
+    log.debug("lineWidth "..discLineWidth)
+  elseif (event.key == lost.application.K_Y) then
+    discDiameterDelta = discDiameterDelta+1
+    discmesh:updateDiameter(discDiameter)
+    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
+    log.debug("diameterDelta "..discDiameterDelta)
+  elseif (event.key == lost.application.K_X) then
+    discDiameterDelta = discDiameterDelta-1
+    discmesh:updateDiameter(discDiameter)
+    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
+    log.debug("diameterDelta "..discDiameterDelta)
   end
-  
 end
