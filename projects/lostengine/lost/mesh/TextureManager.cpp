@@ -21,7 +21,7 @@ TextureManager::TextureManager()
   _discTexture.reset(new Texture);
   maxDiameter = 256;
   _radiusOffset = -.5;
-  _centerOffset = -.5f;
+  _centerOffset = -.75f;
 }
 
 TextureManager::~TextureManager()
@@ -69,18 +69,39 @@ void TextureManager::updateDiscTexture(float diameter)
   updateTexture(_discTexture, true, diameter);
 }
 
+// calculate maximum possible diameter for a disc texture given the following restrictions
+// * must be power-of-two
+// * must not be larger than maxDiameter
+float TextureManager::calculateMaxDiameter(float diameter)
+{
+  float diameterp2 = (float)math::nextPowerOf2((uint32_t)diameter); // we need this anyway, new textures must be power of two
+  float mdp2 = (float)math::nextPowerOf2((uint32_t)maxDiameter); // just to make sure the maximum is also always power of two
+  float md = std::min(diameterp2, mdp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
+  return md;
+}
+
+// returns new safe radius if the texture needs to be updated, zero if it has to stay the same 
+float TextureManager::textureNeedsUpdate(float requestedDiameter)
+{
+  float result= 0.0f;
+  if(requestedDiameter > _discTextureDiameter) // only recalculate texture if incoming desired is larger than current diameter
+  {
+    float md = calculateMaxDiameter(requestedDiameter); // get safe maximum given the restrictions
+    if(md > (_discTextureDiameter)) // and only build if the same maximum is larger than the current
+    {
+      result = md;
+    }
+  }
+  return result;
+}
+
 gl::TexturePtr TextureManager::discTexture(float diameter)
 {
-  if(diameter > _discTextureDiameter)
+  float newRadius;
+  if(newRadius = textureNeedsUpdate(diameter))
   {
-    float diameterp2 = (float)math::nextPowerOf2((uint32_t)diameter); // we need this anyway, new textures must be power of two
-    float mdp2 = (float)math::nextPowerOf2((uint32_t)maxDiameter); // just to make sure the maximum is also always power of two
-    float md = std::min(diameterp2, mdp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
-    if(md > (_discTextureDiameter)) // so check if the suggested diameter, clamped against mdp2, is larger than the current texture an recreate if necessary
-    {
-      updateDiscTexture(md); // use md here because diameter contains the desired value, but md contains the allowed maximum
-      _discTextureDiameter = md; // memorize the processed md/2, since its power of two, instead of probably bogus input value
-    }
+      updateDiscTexture(newRadius); 
+      _discTextureDiameter = newRadius; 
   }
   
   logStats();
