@@ -661,6 +661,7 @@
 		EAA4B7720E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7730E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
 		EAA4B7740E9C6D9E001D1778 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA4B7710E9C6D9E001D1778 /* Utils.cpp */; };
+		EAA861C41162D92D004B5D3D /* ColorGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAA861C31162D92D004B5D3D /* ColorGradient.cpp */; };
 		EAAC568D0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
 		EAAC568E0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
 		EAAC568F0ECB8AD7004AD566 /* RectPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */; };
@@ -1056,6 +1057,7 @@
 		EAA452091152CFD500FFE886 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureManager.cpp; path = mesh/TextureManager.cpp; sourceTree = "<group>"; };
 		EAA4520D1152CFE200FFE886 /* Disc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Disc.cpp; path = mesh/Disc.cpp; sourceTree = "<group>"; };
 		EAA4B7710E9C6D9E001D1778 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		EAA861C31162D92D004B5D3D /* ColorGradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorGradient.cpp; sourceTree = "<group>"; };
 		EAAC568C0ECB8AD7004AD566 /* RectPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectPacker.cpp; sourceTree = "<group>"; };
 		EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
 		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
@@ -1660,6 +1662,7 @@
 		EA3B946C0E04639D00B6423B /* common */ = {
 			isa = PBXGroup;
 			children = (
+				EAA861C31162D92D004B5D3D /* ColorGradient.cpp */,
 				EA3B94720E04639D00B6423B /* Logger.cpp */,
 				EA3B94750E04639D00B6423B /* Profiler.cpp */,
 				EA5FC5E510C3D2D10078A9FD /* Data.cpp */,
@@ -2504,6 +2507,7 @@
 				3EAF8E63115A1168004BD15F /* gzio.c in Sources */,
 				3EAF8E64115A1168004BD15F /* crc32.c in Sources */,
 				3EAF8E65115A1168004BD15F /* inftrees.c in Sources */,
+				EAA861C41162D92D004B5D3D /* ColorGradient.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
