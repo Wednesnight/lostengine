@@ -63,7 +63,7 @@ function startup(tasklet)
 
   textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
 --  textureManager._radiusOffset = -.5
---  textureManager._centerOffset = -.5
+--  textureManager._centerOffset = -.75
 
   texmesh = dcl.mesh:Quad
   {

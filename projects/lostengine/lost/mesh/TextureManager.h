@@ -29,6 +29,8 @@ struct TextureManager
 
 
   void updateTexture(gl::TexturePtr& tex, bool filled, float diameter);
+  float calculateMaxDiameter(float diameter);
+  float textureNeedsUpdate(float requestedDiameter);
 
   float maxDiameter; // used for both disc and ring. set this to some value to prevent textures from growing arbitrarily
 
