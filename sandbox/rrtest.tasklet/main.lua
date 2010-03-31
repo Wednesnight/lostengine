@@ -56,8 +56,8 @@ function startup(tasklet)
   textureManager = lost.mesh.TextureManager.create()
 
   textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
---  textureManager._radiusOffset = -.5
---  textureManager._centerOffset = -.75
+  textureManager._radiusOffset = 0
+  textureManager._centerOffset = -.5
 
   texmesh = dcl.mesh:Quad
   {
@@ -70,14 +70,14 @@ function startup(tasklet)
     transform = MatrixTranslation(lost.math.Vec3(0,0,0))
   }
   
-  local discradius = 50
-  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 3)
+  local discradius = 12
+  discmesh = lost.mesh.Disc.create(textureManager, false, discradius, 1)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
 	discmesh.material.color = Color(1,0,0)
   discmesh.transform = MatrixTranslation(Vec3(discradius+10, discradius+10, 0))
 
-  discmesh2 = lost.mesh.Disc.create(textureManager, true, discradius-1, 0)
+  discmesh2 = lost.mesh.Disc.create(textureManager, true, discradius, 0)
   discmesh2.material.blend = true
   discmesh2.material.shader = lost.common.Shaders.textureShader()
 	discmesh2.material.color = Color(.8,.8,.8)
@@ -116,6 +116,7 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
+--			active = false,
       mesh = discmesh --texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
     }
   }
