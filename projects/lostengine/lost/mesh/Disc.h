@@ -29,8 +29,10 @@ struct Disc : Mesh
   void updateLineWidth(float newLineWidth); // sets new lineWidth, recalculates mesh, uses all other cached values
 
   
-  void createIndices();
-  void createTexCoords();
+  void updateIndices();
+  void updateTexCoords0();
+  void updateTexCoords1();
+  void updateVertices();
   void updateTexture(bool filled, float radius, float lineWidth);  
   
   TextureManagerPtr textureManager; // maintained for texture recreation
