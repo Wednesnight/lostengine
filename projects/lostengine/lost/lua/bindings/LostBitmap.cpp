@@ -22,6 +22,8 @@ namespace lost
             .def("pixel", (void(Bitmap::*)(uint32_t, uint32_t, const common::Color&))&Bitmap::pixel)
             .def("disc", &Bitmap::disc)
             .def("ring", &Bitmap::ring)
+            .def("arc", &Bitmap::arc)
+            .def("arcFilled", &Bitmap::arcFilled)
             .scope
             [
               def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create),

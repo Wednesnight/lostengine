@@ -464,12 +464,19 @@ void Bitmap::ring(float x, float y, float r, float t)
         float fract = (dr - floor(dr));
         pixel((uint32_t)cx, (uint32_t)cy, common::Color(1,1,1,fract));
       }
-
-
     }
   }
 }
 
+void Bitmap::arc(float radius, float lineWidth)
+{
+  ring(0.0f,0.0f,radius, lineWidth);
+}
+
+void Bitmap::arcFilled(float radius)
+{
+  disc(0,0,radius);
+}
 
 }
 }
