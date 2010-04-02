@@ -186,7 +186,7 @@ namespace lost
         [
           class_<Disc, Mesh>("Disc")
             .def("update", &Disc::update)
-            .def("updateDiameter", &Disc::updateDiameter)
+            .def("updateRadius", &Disc::updateRadius)
             .def("updateLineWidth", &Disc::updateLineWidth)
             .scope
             [
@@ -219,11 +219,9 @@ namespace lost
         namespace_("mesh")
         [
           class_<TextureManager>("TextureManager")
-          .def("ringTexture", &TextureManager::ringTexture)
-          .def("discTexture", &TextureManager::discTexture)
-          .def_readwrite("maxDiameter", &TextureManager::maxDiameter)
-          .def_readwrite("_radiusOffset", &TextureManager::_radiusOffset)
-          .def_readwrite("_centerOffset", &TextureManager::_centerOffset)
+//          .def("ringTexture", &TextureManager::ringTexture)
+          .def("arcFilledTexture", &TextureManager::arcFilledTexture)
+          .def_readwrite("maxRadius", &TextureManager::maxRadius)
           .scope
           [
             def("create", (TextureManagerPtr(*)())&TextureManager::create)            

@@ -85,10 +85,10 @@ void RoundedRect::updateTexture()
   // calculate max diameter for request to textureManager
   float maxDiameter = std::max(tlr*2, std::max(trr*2, std::max(blr*2, brr*2)));
   TexturePtr tex;
-  if(filled)
+/*  if(filled)
     tex = textureManager->discTexture(maxDiameter);
   else
-    tex = textureManager->ringTexture(maxDiameter, lineWidth);
+    tex = textureManager->ringTexture(maxDiameter, lineWidth);*/
   
   if(material->textures.size() > 0)
     material->textures[0] = tex;

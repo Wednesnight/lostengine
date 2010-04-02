@@ -54,41 +54,12 @@ function startup(tasklet)
   dcl = lost.declarative.Context(tasklet.loader)
   
   textureManager = lost.mesh.TextureManager.create()
-
-  textureManager.maxDiameter = 256 -- change this to test effect on quads with larger diameter
-  textureManager._radiusOffset = -.5
-  textureManager._centerOffset = -.5
-
-  texmesh = dcl.mesh:Quad
-  {
-    texture = textureManager:discTexture(radius), -- pow2ringTexture(8, 1.5),
-    size = Vec2(radius, radius), -- blow up quad to desired size, irrespective of actual texture size
-    material = 
-    {
-      blend = true
-    },
-    transform = MatrixTranslation(lost.math.Vec3(0,0,0))
-  }
-  
-  discDiameter = 12
-  discLineWidth = 1
-  discDiameterDelta = 0
-  posoffset = 100
-  discmesh = lost.mesh.Disc.create(textureManager, false, discDiameter, discLineWidth)
-  discmesh.material.blend = true
-  discmesh.material.shader = lost.common.Shaders.textureShader()
-	discmesh.material.color = Color(1,0,0)
-  discmesh.transform = MatrixTranslation(Vec3(discDiameter+posoffset, discDiameter+posoffset, 0))
-
-  discmesh2 = lost.mesh.Disc.create(textureManager, true, discDiameter-discDiameterDelta, 0)
-  discmesh2.material.blend = true
-  discmesh2.material.shader = lost.common.Shaders.textureShader()
-	discmesh2.material.color = Color(.8,.8,.8)
-  discmesh2.transform = MatrixTranslation(Vec3(discDiameter+posoffset, discDiameter+posoffset, 0))
-  
+  textureManager.maxRadius = 256 -- change this to test effect on quads with larger diameter
+    
   ------------------
   -- ARC
   arcSize = 64
+  spacing = 10
   arcBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
   arcBitmap:arc(arcSize, 4)
 
@@ -106,7 +77,7 @@ function startup(tasklet)
     {
       blend = true
     },
-    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+    transform = MatrixTranslation(lost.math.Vec3(spacing,spacing,0))
   }
 
   arcFilledMesh = dcl.mesh:Quad
@@ -116,7 +87,7 @@ function startup(tasklet)
     {
       blend = true
     },
-    transform = MatrixTranslation(lost.math.Vec3(2*10+arcSize,10,0))
+    transform = MatrixTranslation(lost.math.Vec3(2*spacing+arcSize,spacing,0))
   }
 
   debugQuad1 = dcl.mesh:Quad
@@ -127,7 +98,7 @@ function startup(tasklet)
       blend = true,
       color = Color(1,0,0)
     },
-    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+    transform = MatrixTranslation(lost.math.Vec3(spacing,spacing,0))
   }
 
   debugQuad2 = dcl.mesh:Quad
@@ -138,8 +109,24 @@ function startup(tasklet)
       blend = true,
       color = Color(0,1,0)
     },
-    transform = MatrixTranslation(lost.math.Vec3(2*10+arcSize,10,0))
+    transform = MatrixTranslation(lost.math.Vec3(2*spacing+arcSize,spacing,0))
   }
+
+  texmesh = dcl.mesh:Quad
+  {
+    texture = textureManager:arcFilledTexture(radius), -- pow2ringTexture(8, 1.5),
+    material = 
+    {
+      blend = true
+    },
+    transform = MatrixTranslation(lost.math.Vec3(spacing,arcSize+2*spacing,0))
+  }
+
+  discmesh = lost.mesh.Disc.create(textureManager, true, arcSize, 0)
+  discmesh.material.blend = true
+  discmesh.material.shader = lost.common.Shaders.textureShader()
+--  discmesh.material.color = Color(.8,.8,.8)
+  discmesh.transform = MatrixTranslation(Vec3(spacing+arcSize, 2*spacing+arcSize, 0))
   
   rootNode = dcl.rg:Node
   {
@@ -170,11 +157,7 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
-      mesh = discmesh --texmesh -- discmesh --lost.mesh.Disc.create(textureManager, 50) -- texmesh
-    },
-    dcl.rg:Draw
-    {
-      mesh = discmesh2
+      mesh = texmesh
     },
     dcl.rg:Draw
     {
@@ -192,6 +175,10 @@ function startup(tasklet)
     {
       mesh = arcFilledMesh
     },
+    dcl.rg:Draw
+    {
+      mesh = discmesh
+    },
   }
 
   tasklet.renderNode:add(rootNode)
@@ -205,35 +192,5 @@ end
 function keyHandler(event)
   if (event.key == lost.application.K_ESCAPE) then
     running = false
-  elseif (event.key == lost.application.K_A) then
-    discDiameter = discDiameter+1
-    discmesh:updateDiameter(discDiameter)
-    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
-    log.debug("diameter "..discDiameter)
-  elseif (event.key == lost.application.K_S) then
-    discDiameter = discDiameter-1
-    discmesh:updateDiameter(discDiameter)
-    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
-    log.debug("diameter "..discDiameter)
-  elseif (event.key == lost.application.K_Q) then
-    discLineWidth = discLineWidth+.1
-    discmesh:updateLineWidth(discLineWidth)
-    discmesh2:updateLineWidth(discLineWidth)
-    log.debug("lineWidth "..discLineWidth)
-  elseif (event.key == lost.application.K_W) then
-    discLineWidth = discLineWidth-.1
-    discmesh:updateLineWidth(discLineWidth)
-    discmesh2:updateLineWidth(discLineWidth)
-    log.debug("lineWidth "..discLineWidth)
-  elseif (event.key == lost.application.K_Y) then
-    discDiameterDelta = discDiameterDelta+1
-    discmesh:updateDiameter(discDiameter)
-    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
-    log.debug("diameterDelta "..discDiameterDelta)
-  elseif (event.key == lost.application.K_X) then
-    discDiameterDelta = discDiameterDelta-1
-    discmesh:updateDiameter(discDiameter)
-    discmesh2:updateDiameter(discDiameter-discDiameterDelta)
-    log.debug("diameterDelta "..discDiameterDelta)
   end
 end

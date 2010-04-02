@@ -17,18 +17,16 @@ using namespace std;
 
 TextureManager::TextureManager()
 {
-  _discTextureDiameter = 0;
-  _discTexture.reset(new Texture);
-  maxDiameter = 256;
-  _radiusOffset = -.5;
-  _centerOffset = -.75f;
+  _arcFilledRadius = 0;
+  _arcFilledTexture.reset(new Texture);
+  maxRadius = 256;
 }
 
 TextureManager::~TextureManager()
 {
 }
 
-void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diameter, float lineWidth)
+void TextureManager::updateArcFilledTexture(float radius)
 {
   vector<BitmapPtr> bitmaps; // 0 = mimap level 0 = largest, all others are the following reduction levels
 
@@ -39,33 +37,20 @@ void TextureManager::updateTexture(gl::TexturePtr& tex, bool filled, float diame
   
   // create all mipmap levels
   uint32_t numTextures = 0;
-  while(diameter > 0)
+  while(radius > 0)
   {
-    BitmapPtr bmp(new Bitmap(diameter, diameter, bitmap::COMPONENTS_RGBA));
-    float cx = (diameter / 2.0f) + _centerOffset;
-    float cy = (diameter / 2.0f) + _centerOffset;
-    float cr = (diameter / 2.0f) + _radiusOffset;
-    if(filled)
-      bmp->disc(cx, cy, cr);
-    else 
-      bmp->ring(cx, cy, cr, lineWidth);
-
+    BitmapPtr bmp(new Bitmap(radius, radius, bitmap::COMPONENTS_RGBA));
+    bmp->arcFilled(radius);
     bitmaps.push_back(bmp);
-    diameter = floor(diameter / 2.0f);
+    radius = floor(radius / 2.0f);
     ++numTextures;
   }
-  DOUT("rebuild "<<numTextures<<" bitmaps for "<< (filled ? "disc" : "ring"));
+  DOUT("rebuilt "<<numTextures<<" bitmaps for arcFilled");
 
-  tex->init(bitmaps, params); // preserves texture object, but reinitialises data  
+  _arcFilledTexture->init(bitmaps, params); // preserves texture object, but reinitialises data  
 }
 
-
-void TextureManager::updateDiscTexture(float diameter)
-{
-  updateTexture(_discTexture, true, diameter, 0.0f);
-}
-
-void TextureManager::updateRingTexture(float diameter, float lineWidth)
+/*void TextureManager::updateRingTexture(float diameter, float lineWidth)
 {
   TexturePtr tex;
   std::map<float, gl::TexturePtr>::iterator pos = _lw2ringTexture.find(lineWidth);
@@ -79,63 +64,48 @@ void TextureManager::updateRingTexture(float diameter, float lineWidth)
     _lw2ringTexture[lineWidth]= tex;
   }
   updateTexture(tex, false, diameter, lineWidth);
-}
+}*/
 
-// calculate maximum possible diameter for a disc texture given the following restrictions
+// calculate maximum possible radius for a disc texture given the following restrictions
 // * must be power-of-two
-// * must not be larger than maxDiameter
-float TextureManager::calculateMaxDiameter(float diameter)
+// * must not be larger than maxRadius
+float TextureManager::calculateMaxRadius(float radius)
 {
-  float diameterp2 = (float)math::nextPowerOf2((uint32_t)diameter); // we need this anyway, new textures must be power of two
-  float mdp2 = (float)math::nextPowerOf2((uint32_t)maxDiameter); // just to make sure the maximum is also always power of two
-  float md = std::min(diameterp2, mdp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
-  return md;
+  float radiusp2 = (float)math::nextPowerOf2((uint32_t)radius); // we need this anyway, new textures must be power of two
+  float mrp2 = (float)math::nextPowerOf2((uint32_t)maxRadius); // just to make sure the maximum is also always power of two
+  float mr = std::min(radiusp2, mrp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
+  return mr;
 }
 
 // returns new safe radius if the texture needs to be updated, zero if it has to stay the same 
-float TextureManager::textureNeedsUpdate(bool filled, float requestedDiameter, float lineWidth)
+float TextureManager::textureNeedsUpdate(float requestedRadius)
 {
-  float result= 0.0f;
-  
-  float currentMaxDiameter = 0.0f;
-  if(filled) // if it's a disc there's only one
+  float result= 0.0f;  
+  if(requestedRadius > _arcFilledRadius) // only recalculate texture if incoming desired is larger than current diameter
   {
-    currentMaxDiameter = _discTextureDiameter;
-  }
-  else // if it's a ring we must look up the current max diameter for the given linewidth
-  {
-    std::map<float, float>::iterator pos = _lw2ringDiameter.find(lineWidth);
-    if(pos != _lw2ringDiameter.end())
+    float mr = calculateMaxRadius(requestedRadius); // get safe maximum given the restrictions
+    if(mr > (_arcFilledRadius)) // and only build if the same maximum is larger than the current
     {
-      currentMaxDiameter = pos->second;
-    }
-  }
-  
-  if(requestedDiameter > currentMaxDiameter) // only recalculate texture if incoming desired is larger than current diameter
-  {
-    float md = calculateMaxDiameter(requestedDiameter); // get safe maximum given the restrictions
-    if(md > (currentMaxDiameter)) // and only build if the same maximum is larger than the current
-    {
-      result = md;
+      result = mr;
     }
   }
   return result;
 }
 
-gl::TexturePtr TextureManager::discTexture(float diameter)
+gl::TexturePtr TextureManager::arcFilledTexture(float radius)
 {
-  float newDiameter;
-  if(newDiameter = textureNeedsUpdate(true, diameter, 0.0f))
+  float newRadius;
+  if(newRadius = textureNeedsUpdate(radius))
   {
-      updateDiscTexture(newDiameter); 
-      _discTextureDiameter = newDiameter; 
+      updateArcFilledTexture(newRadius); 
+      _arcFilledRadius = newRadius; 
   }
   
   logStats();
-  return _discTexture;
+  return _arcFilledTexture;
 }
 
-gl::TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
+/*gl::TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
 {
   float newDiameter;
   if(newDiameter = textureNeedsUpdate(false, diameter, lineWidth))
@@ -145,7 +115,7 @@ gl::TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
   }
   logStats();
   return _lw2ringTexture[lineWidth];
-}
+}*/
 
 void TextureManager::logStats()
 {
