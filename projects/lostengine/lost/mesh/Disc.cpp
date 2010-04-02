@@ -9,10 +9,14 @@ namespace lost
 namespace mesh
 {
 
-Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float d, float lw)
+/**  
+ *
+ *
+ */
+Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float r, float lw)
 {
   filled = f;
-  diameter = d;
+  radius = r;
   lineWidth = lw;
   textureManager = inTextureManager;
 
@@ -31,7 +35,7 @@ Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float d, float lw)
   
   createIndices();
   createTexCoords();
-  update(filled, diameter, lineWidth);
+  update(filled, radius, lineWidth);
 }
 
 void Disc::createIndices()
@@ -52,43 +56,43 @@ void Disc::createTexCoords()
   vertexBuffer->set(3, gl::UT_texcoord0, math::Vec2(0.0f,1.0f));
 }
 
-void Disc::update(bool f, float d, float lw)
+void Disc::update(bool f, float r, float lw)
 {
   filled = f;
-  diameter = d;
+  radius = r;
   lineWidth = lw;
 
-  float radius = diameter / 2.0f;
-  vertexBuffer->set(0, gl::UT_position, math::Vec2(-radius,-radius));
-  vertexBuffer->set(1, gl::UT_position, math::Vec2(radius,-radius));
-  vertexBuffer->set(2, gl::UT_position, math::Vec2(radius,radius));
-  vertexBuffer->set(3, gl::UT_position, math::Vec2(-radius,radius));
-  updateTexture(filled, diameter, lineWidth);
+  float diameter = radius * 2.0f;
+  vertexBuffer->set(0, gl::UT_position, math::Vec2(0,0));
+  vertexBuffer->set(1, gl::UT_position, math::Vec2(diameter,0));
+  vertexBuffer->set(2, gl::UT_position, math::Vec2(diameter,diameter));
+  vertexBuffer->set(3, gl::UT_position, math::Vec2(0,diameter));
+  updateTexture(filled, radius, lineWidth);
 }
 
 void Disc::updateLineWidth(float newLineWidth)
 {
   lineWidth = newLineWidth;
-  update(filled, diameter, lineWidth);
+  update(filled, radius, lineWidth);
 }
 
-void Disc::updateDiameter(float newDiameter)
+void Disc::updateRadius(float newRadius)
 {
-  diameter = newDiameter;
-  update(filled, diameter, lineWidth);
+  radius = newRadius;
+  update(filled, radius, lineWidth);
 }
 
-void Disc::updateTexture(bool filled, float diameter, float lineWidth)
+void Disc::updateTexture(bool filled, float radius, float lineWidth)
 {
-  gl::TexturePtr tex;
-  if(filled)
+  gl::TexturePtr tex = textureManager->arcFilledTexture(radius);
+/*  if(filled)
   {
     tex = textureManager->discTexture(diameter);
   }
   else 
   {
     tex = textureManager->ringTexture(diameter, lineWidth);
-  }
+  }*/
 
   if(material->textures.size() > 0)
   {

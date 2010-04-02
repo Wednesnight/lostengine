@@ -17,26 +17,26 @@ namespace mesh
  */
 struct Disc : Mesh
 {
-  Disc(const TextureManagerPtr& inTextureManager, bool filled, float diameter, float lineWidth);
+  Disc(const TextureManagerPtr& inTextureManager, bool filled, float radius, float lineWidth);
   virtual ~Disc() {}
-  static DiscPtr create(const TextureManagerPtr& inTextureManager, bool filled, float diameter, float lineWidth) 
+  static DiscPtr create(const TextureManagerPtr& inTextureManager, bool filled, float radius, float lineWidth) 
   {
-    return DiscPtr(new Disc(inTextureManager, filled, diameter, lineWidth));
+    return DiscPtr(new Disc(inTextureManager, filled, radius, lineWidth));
   }
 
-  void update(bool filled, float diameter, float lineWidth); // call this to resize the Quad, texture will be resized automatically if possible/necessary
-  void updateDiameter(float newDiameter); // sets new diameter, recalculates mesh, uses all other cached values
+  void update(bool filled, float radius, float lineWidth); // call this to resize the Quad, texture will be resized automatically if possible/necessary
+  void updateRadius(float newRadius); // sets new diameter, recalculates mesh, uses all other cached values
   void updateLineWidth(float newLineWidth); // sets new lineWidth, recalculates mesh, uses all other cached values
 
   
   void createIndices();
   void createTexCoords();
-  void updateTexture(bool filled, float diameter, float lineWidth);  
+  void updateTexture(bool filled, float radius, float lineWidth);  
   
   TextureManagerPtr textureManager; // maintained for texture recreation
   // cached so you don't have to specify all params when calling updateSize
   float filled; 
-  float diameter;
+  float radius;
   float lineWidth;
 };
 }
