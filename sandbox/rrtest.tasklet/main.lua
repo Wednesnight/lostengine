@@ -86,6 +86,61 @@ function startup(tasklet)
 	discmesh2.material.color = Color(.8,.8,.8)
   discmesh2.transform = MatrixTranslation(Vec3(discDiameter+posoffset, discDiameter+posoffset, 0))
   
+  ------------------
+  -- ARC
+  arcSize = 64
+  arcBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
+  arcBitmap:arc(arcSize, 4)
+
+  arcFilledBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
+  arcFilledBitmap:arcFilled(arcSize)
+  
+  texparams = lost.gl.Texture.Params()
+  arcTex = lost.gl.Texture.create(arcBitmap, texparams)
+  arcFilledTex = lost.gl.Texture.create(arcFilledBitmap, texparams)
+
+  arcMesh = dcl.mesh:Quad
+  {
+    texture = arcTex, 
+    material = 
+    {
+      blend = true
+    },
+    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+  }
+
+  arcFilledMesh = dcl.mesh:Quad
+  {
+    texture = arcFilledTex, 
+    material = 
+    {
+      blend = true
+    },
+    transform = MatrixTranslation(lost.math.Vec3(2*10+arcSize,10,0))
+  }
+
+  debugQuad1 = dcl.mesh:Quad
+  {
+    rect = Rect(0,0,arcSize, arcSize),
+    material = 
+    {
+      blend = true,
+      color = Color(1,0,0)
+    },
+    transform = MatrixTranslation(lost.math.Vec3(10,10,0))
+  }
+
+  debugQuad2 = dcl.mesh:Quad
+  {
+    rect = Rect(0,0,arcSize, arcSize),
+    material = 
+    {
+      blend = true,
+      color = Color(0,1,0)
+    },
+    transform = MatrixTranslation(lost.math.Vec3(2*10+arcSize,10,0))
+  }
+  
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor
@@ -119,8 +174,23 @@ function startup(tasklet)
     },
     dcl.rg:Draw
     {
---			active = false,
       mesh = discmesh2
+    },
+    dcl.rg:Draw
+    {
+      mesh = debugQuad1
+    },
+    dcl.rg:Draw
+    {
+      mesh = arcMesh
+    },
+    dcl.rg:Draw
+    {
+      mesh = debugQuad2
+    },
+    dcl.rg:Draw
+    {
+      mesh = arcFilledMesh
     },
   }
 

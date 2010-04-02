@@ -2,14 +2,12 @@
 #define LOST_MESH_SCALEGRID_H
 
 #include "lost/mesh/Mesh.h"
+#include "lost/mesh/forward.h"
 
 namespace lost
 {
 namespace mesh
 {
-
-struct ScaleGrid;
-typedef lost::shared_ptr<ScaleGrid> ScaleGridPtr;
 
 /** A ScaleGrid is basically a 2D Quad comprised of a connected 3x3 quad matrix.
  * The corners defined by the left/right/top/bottom parameters are not scaled. Everything else is.
