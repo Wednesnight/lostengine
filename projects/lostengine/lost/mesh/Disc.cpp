@@ -40,7 +40,7 @@ Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float r, float lw)
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord1, 0); // secondary coords for texturemultiplication
   this->resetBuffers(layout, gl::ET_u16);
 
-  this->drawMode = GL_TRIANGLE_STRIP;
+  this->drawMode = GL_TRIANGLES;
   uint32_t numQuads = 4;
   uint32_t numVertices = numQuads*4;
   uint32_t numIndices = numQuads*6;
@@ -78,7 +78,7 @@ void Disc::updateIndices()
   indexBuffer->set(20, gl::UT_index, (uint16_t)7);
   indexBuffer->set(21, gl::UT_index, (uint16_t)4);    
   indexBuffer->set(22, gl::UT_index, (uint16_t)5);
-  indexBuffer->set(23, gl::UT_index, (uint16_t)8);    
+  indexBuffer->set(23, gl::UT_index, (uint16_t)8);
 }
 
 void Disc::updateTexCoords0()
