@@ -163,9 +163,6 @@ namespace lost
       // the disc is drawn by evaluating all pixels of the bitmap and setting them accordingly
       void disc(float x, float y, float r);
       void ring(float x, float y, float r, float t);
-
-      void arc(float radius, float lineWidth); // draws a quarter ring around 0,0 with lineWidth
-      void arcFilled(float radius); // draws a quarter disc around 0,0
          
       /** draws the rect outline into the bitmap with the given color
        */
