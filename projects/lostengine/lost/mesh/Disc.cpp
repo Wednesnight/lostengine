@@ -3,6 +3,7 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/mesh/TextureManager.h"
+#include "lost/gl/Texture.h"
 
 namespace lost
 {
@@ -48,9 +49,10 @@ Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float r, float lw)
   this->vertexBuffer->reset(numVertices);
   this->indexBuffer->reset(numIndices);  
   
+  update(filled, radius, lineWidth); // must be called before updateTexCoords because texture is referenced later on
   updateIndices();
   updateTexCoords0();
-  update(filled, radius, lineWidth);
+  updateTexCoords1();
 }
 
 void Disc::updateIndices()
@@ -83,32 +85,36 @@ void Disc::updateIndices()
 
 void Disc::updateTexCoords0()
 {
-  vertexBuffer->set(0, gl::UT_texcoord0, Vec2(1.0f,1.0f));
-  vertexBuffer->set(1, gl::UT_texcoord0, Vec2(0.0f,1.0f));
-  vertexBuffer->set(2, gl::UT_texcoord0, Vec2(1.0f,1.0f));
+  Vec2 maxtc = material->textures[0]->topRightTexCoord();
+  float mx = maxtc.x;
+  float my = maxtc.y;
 
-  vertexBuffer->set(3, gl::UT_texcoord0, Vec2(1.0f,0.0f));
+  vertexBuffer->set(0, gl::UT_texcoord0, Vec2(mx,my));
+  vertexBuffer->set(1, gl::UT_texcoord0, Vec2(0.0f,my));
+  vertexBuffer->set(2, gl::UT_texcoord0, Vec2(mx,my));
+
+  vertexBuffer->set(3, gl::UT_texcoord0, Vec2(mx,0.0f));
   vertexBuffer->set(4, gl::UT_texcoord0, Vec2(0.0f,0.0f));
-  vertexBuffer->set(5, gl::UT_texcoord0, Vec2(1.0f,0.0f));
+  vertexBuffer->set(5, gl::UT_texcoord0, Vec2(mx,0.0f));
 
-  vertexBuffer->set(6, gl::UT_texcoord0, Vec2(1.0f,1.0f));
-  vertexBuffer->set(7, gl::UT_texcoord0, Vec2(0.0f,1.0f));
-  vertexBuffer->set(8, gl::UT_texcoord0, Vec2(1.0f,1.0f));  
+  vertexBuffer->set(6, gl::UT_texcoord0, Vec2(mx,my));
+  vertexBuffer->set(7, gl::UT_texcoord0, Vec2(0.0f,my));
+  vertexBuffer->set(8, gl::UT_texcoord0, Vec2(mx,my));  
 }
 
 void Disc::updateTexCoords1()
 {
-  vertexBuffer->set(0, gl::UT_texcoord0, Vec2(0.0f,0.0f));
-  vertexBuffer->set(1, gl::UT_texcoord0, Vec2(.5f,0.0f));
-  vertexBuffer->set(2, gl::UT_texcoord0, Vec2(1.0f,0.0f));
+  vertexBuffer->set(0, gl::UT_texcoord1, Vec2(0.0f,0.0f));
+  vertexBuffer->set(1, gl::UT_texcoord1, Vec2(.5f,0.0f));
+  vertexBuffer->set(2, gl::UT_texcoord1, Vec2(1.0f,0.0f));
 
-  vertexBuffer->set(3, gl::UT_texcoord0, Vec2(0.0f,.5f));
-  vertexBuffer->set(4, gl::UT_texcoord0, Vec2(.5f,.5f));
-  vertexBuffer->set(5, gl::UT_texcoord0, Vec2(1.0f,.5f));
+  vertexBuffer->set(3, gl::UT_texcoord1, Vec2(0.0f,.5f));
+  vertexBuffer->set(4, gl::UT_texcoord1, Vec2(.5f,.5f));
+  vertexBuffer->set(5, gl::UT_texcoord1, Vec2(1.0f,.5f));
 
-  vertexBuffer->set(6, gl::UT_texcoord0, Vec2(0.0f,1.0f));
-  vertexBuffer->set(7, gl::UT_texcoord0, Vec2(.5f,1.0f));
-  vertexBuffer->set(8, gl::UT_texcoord0, Vec2(1.0f,1.0f));
+  vertexBuffer->set(6, gl::UT_texcoord1, Vec2(0.0f,1.0f));
+  vertexBuffer->set(7, gl::UT_texcoord1, Vec2(.5f,1.0f));
+  vertexBuffer->set(8, gl::UT_texcoord1, Vec2(1.0f,1.0f));
 }
 
 void Disc::updateVertices()
@@ -150,15 +156,15 @@ void Disc::updateRadius(float newRadius)
 
 void Disc::updateTexture(bool filled, float radius, float lineWidth)
 {
-  gl::TexturePtr tex = textureManager->arcFilledTexture(radius);
-/*  if(filled)
+  gl::TexturePtr tex;
+  if(filled)
   {
-    tex = textureManager->discTexture(diameter);
+    tex = textureManager->arcFilledTexture(radius);
   }
   else 
   {
-    tex = textureManager->ringTexture(diameter, lineWidth);
-  }*/
+    tex = textureManager->arcTexture(radius, lineWidth);
+  }
 
   if(material->textures.size() > 0)
   {
@@ -168,8 +174,6 @@ void Disc::updateTexture(bool filled, float radius, float lineWidth)
   {
     material->textures.push_back(tex);
   }
-  
-  
 }
 
 }

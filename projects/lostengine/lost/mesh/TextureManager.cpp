@@ -20,6 +20,7 @@ TextureManager::TextureManager()
   _arcFilledRadius = 0;
   _arcFilledTexture.reset(new Texture);
   maxRadius = 256;
+  _centerOffset = -.5f;
 }
 
 TextureManager::~TextureManager()
@@ -40,7 +41,7 @@ void TextureManager::updateArcFilledTexture(float radius)
   while(radius > 0)
   {
     BitmapPtr bmp(new Bitmap(radius, radius, bitmap::COMPONENTS_RGBA));
-    bmp->arcFilled(radius);
+    bmp->disc(_centerOffset, _centerOffset, radius);
     bitmaps.push_back(bmp);
     radius = floor(radius / 2.0f);
     ++numTextures;
@@ -50,21 +51,22 @@ void TextureManager::updateArcFilledTexture(float radius)
   _arcFilledTexture->init(bitmaps, params); // preserves texture object, but reinitialises data  
 }
 
-/*void TextureManager::updateRingTexture(float diameter, float lineWidth)
+TexturePtr TextureManager::createArcTexture(float lineWidth, float radius)
 {
-  TexturePtr tex;
-  std::map<float, gl::TexturePtr>::iterator pos = _lw2ringTexture.find(lineWidth);
-  if(pos != _lw2ringTexture.end())
-  {
-    tex = pos->second;
-  }
-  else
-  {
-    tex.reset(new Texture);
-    _lw2ringTexture[lineWidth]= tex;
-  }
-  updateTexture(tex, false, diameter, lineWidth);
-}*/
+  TexturePtr result;
+  
+  BitmapPtr bmp = Bitmap::create(radius, radius, COMPONENTS_RGBA);
+  bmp->ring(_centerOffset, _centerOffset, radius, lineWidth);
+
+  Texture::Params params;
+  params.sizeHint = Texture::SIZE_POWER_OF_TWO;
+  params.minFilter = GL_LINEAR;
+  params.magFilter = GL_LINEAR;
+  
+  result.reset(new Texture(bmp, params));
+  
+  return result;
+}
 
 // calculate maximum possible radius for a disc texture given the following restrictions
 // * must be power-of-two
@@ -102,26 +104,39 @@ gl::TexturePtr TextureManager::arcFilledTexture(float radius)
   }
   
   logStats();
+  collectGarbage();
   return _arcFilledTexture;
 }
 
-/*gl::TexturePtr TextureManager::ringTexture(float diameter, float lineWidth)
+gl::TexturePtr TextureManager::arcTexture(float radius, float lineWidth)
 {
-  float newDiameter;
-  if(newDiameter = textureNeedsUpdate(false, diameter, lineWidth))
+  TexturePtr result;
+  LineWidthRadius lwr = make_pair(lineWidth, radius);
+  ArcMap::iterator pos = _arcMap.find(lwr);
+  if(pos != _arcMap.end())
   {
-    updateRingTexture(newDiameter, lineWidth);
-    _lw2ringDiameter[lineWidth] = newDiameter;
+    result = pos->second;
   }
+  else
+  {
+    result = createArcTexture(lineWidth, radius);
+    _arcMap[lwr] = result;
+  }
+  
   logStats();
-  return _lw2ringTexture[lineWidth];
-}*/
+  collectGarbage();
+  return result;
+}
 
 void TextureManager::logStats()
 {
   // FIXME: log texture count and approximate memory usage
 }
 
+void TextureManager::collectGarbage()
+{
+  // FIXME: throw  away all textures with use_count 1 (only referenced by texturemanager)
+}
 
 }
 }
