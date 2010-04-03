@@ -58,7 +58,7 @@ function startup(tasklet)
     
   ------------------
   -- ARC
-  arcSize = 64
+  arcSize = 8
   spacing = 10
   arcBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
   arcBitmap:arc(arcSize, 4)
@@ -122,10 +122,10 @@ function startup(tasklet)
     transform = MatrixTranslation(lost.math.Vec3(spacing,arcSize+2*spacing,0))
   }
 
-  discmesh = lost.mesh.Disc.create(textureManager, true, arcSize, 0)
+  discmesh = lost.mesh.Disc.create(textureManager, false, arcSize, 1)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
---  discmesh.material.color = Color(.8,.8,.8)
+--  discmesh.material.color = Color(1,1,1, .2)
   discmesh.transform = MatrixTranslation(Vec3(spacing+arcSize, 2*spacing+arcSize, 0))
   
   rootNode = dcl.rg:Node
@@ -155,30 +155,12 @@ function startup(tasklet)
         }
       }
     },
-    dcl.rg:Draw
-    {
-      mesh = texmesh
-    },
-    dcl.rg:Draw
-    {
-      mesh = debugQuad1
-    },
-    dcl.rg:Draw
-    {
-      mesh = arcMesh
-    },
-    dcl.rg:Draw
-    {
-      mesh = debugQuad2
-    },
-    dcl.rg:Draw
-    {
-      mesh = arcFilledMesh
-    },
-    dcl.rg:Draw
-    {
-      mesh = discmesh
-    },
+--    dcl.rg:Draw{mesh = texmesh},
+    dcl.rg:Draw{mesh = debugQuad1},
+    dcl.rg:Draw{mesh = arcMesh},
+    dcl.rg:Draw{mesh = debugQuad2},
+    dcl.rg:Draw{mesh = arcFilledMesh},
+    dcl.rg:Draw{mesh = discmesh},
   }
 
   tasklet.renderNode:add(rootNode)
