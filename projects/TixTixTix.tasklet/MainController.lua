@@ -49,10 +49,10 @@ function MainController:startup(tasklet)
     target = Vec3(0, 0, 0),
     stickToTarget = true
   }
-  tasklet.eventDispatcher:addEventListener(MAIN_WINDOW_RESIZE, function(event) 
-        self.camera.viewport.width = event.width
-        self.camera.viewport.height = event.height
-      end)
+  tasklet.eventDispatcher:addEventListener(MAIN_WINDOW_RESIZE, function(event)
+    local viewport = lost.math.Rect(0,0,event.width,event.height)
+    self.camera.cam:viewport(viewport)
+  end)
 
   self.mesh = dcl.mesh:Obj
   {
