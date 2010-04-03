@@ -77,7 +77,7 @@ function MainView:constructor(tasklet)
             {
               id = "newGameButton",
               bounds = Bounds(xleft(), ytop(), wrel(1), habs(25)),
-              title = "New Game"
+              title = "New Game (Esc)"
             },
             dcl.guiro:Button
             {
@@ -104,7 +104,4 @@ function MainView:constructor(tasklet)
       }
     }
   }
-  
-  -- initially hidden
-  self.screen:hidden(true)
 end

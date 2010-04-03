@@ -112,6 +112,16 @@ namespace lost
             .def(constructor<>())
             .def(constructor<const Vec4&>())
             .def(constructor<float, float, float, float>())
+            .def_readwrite("x", &Vec4::x)
+            .def_readwrite("y", &Vec4::y)            
+            .def_readwrite("z", &Vec4::z)            
+            .def_readwrite("w", &Vec4::w)            
+            .def(self * float())
+            .def(self * other<Vec4>())
+            .def(self + other<Vec4>())
+            .def(self - other<Vec4>())
+            .def(self == other<Vec4>())
+            .def(tostring(self))
             .def("clear", &Vec4::clear)
         ]
       ];
