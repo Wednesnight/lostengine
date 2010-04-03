@@ -174,6 +174,7 @@ void Disc::updateTexture(bool filled, float radius, float lineWidth)
   {
     material->textures.push_back(tex);
   }
+  textureManager->collectGarbage();
 }
 
 }

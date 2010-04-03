@@ -144,7 +144,7 @@ function startup(tasklet)
   rr3.material.blend = true
   rr3.material.color = Color(1,.6, .9, .5);
   rr3.material.shader = lost.common.Shaders.textureShader()
-  rr3.transform = MatrixTranslation(Vec3(280, 200, 0))
+  rr3.transform = MatrixTranslation(Vec3(240, 200, 0))
   
   rootNode = dcl.rg:Node
   {
