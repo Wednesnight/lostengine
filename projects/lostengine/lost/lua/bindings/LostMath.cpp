@@ -124,7 +124,9 @@ namespace lost
         namespace_("math")
         [
           class_<Matrix>("Matrix")
-          .def(const_self*Matrix()),
+          .def(const_self * other<Matrix>())
+          .def(const_self * other<Vec3>())
+          .def(const_self * other<Vec4>()),
           class_<MatrixRotX, Matrix>("MatrixRotX")
             .def(constructor<float>()),
           class_<MatrixRotY, Matrix>("MatrixRotY")
