@@ -23,30 +23,6 @@ TextureManager::~TextureManager()
 {
 }
 
-/*void TextureManager::updateArcFilledTexture(float radius)
-{
-  vector<BitmapPtr> bitmaps; // 0 = mimap level 0 = largest, all others are the following reduction levels
-
-  Texture::Params params;
-  params.sizeHint = Texture::SIZE_POWER_OF_TWO;
-  params.minFilter = GL_LINEAR_MIPMAP_NEAREST;
-  params.magFilter = GL_LINEAR;
-  
-  // create all mipmap levels
-  uint32_t numTextures = 0;
-  while(radius > 0)
-  {
-    BitmapPtr bmp(new Bitmap(radius, radius, bitmap::COMPONENTS_RGBA));
-    bmp->disc(0, 0, radius);
-    bitmaps.push_back(bmp);
-    radius = floor(radius / 2.0f);
-    ++numTextures;
-  }
-  DOUT("rebuilt "<<numTextures<<" bitmaps for arcFilled");
-
-  _arcFilledTexture->init(bitmaps, params); // preserves texture object, but reinitialises data  
-}*/
-
 TexturePtr TextureManager::createArcTexture(float lineWidth, float radius)
 {
   TexturePtr result;
@@ -122,12 +98,48 @@ gl::TexturePtr TextureManager::arcTexture(float radius, float lineWidth)
 
 void TextureManager::logStats()
 {
-  // FIXME: log texture count and approximate memory usage
+  DOUT("arcFilled: "<<_arcFilledMap.size() << " arc:"<<_arcMap.size());
 }
 
 void TextureManager::collectGarbage()
 {
-  // FIXME: throw  away all textures with use_count 1 (only referenced by texturemanager)
+    vector<LineWidthRadius> arcGarbage;
+    vector<float> arcFilledGarbage;
+    
+    for(ArcFilledMap::iterator i=_arcFilledMap.begin(); i!=_arcFilledMap.end(); ++i)
+    {
+      if(i->second.use_count() == 1)
+      {
+        arcFilledGarbage.push_back(i->first);
+      }
+    }
+    uint32_t afg = arcFilledGarbage.size();
+    if(afg)
+    {
+      DOUT("arcFilled garbage: "<<arcFilledGarbage.size());
+      for(uint32_t i=0; i<arcFilledGarbage.size(); ++i)
+      {
+        _arcFilledMap.erase(arcFilledGarbage[i]);
+      }
+    }
+    
+    for(ArcMap::iterator i=_arcMap.begin(); i!=_arcMap.end(); ++i)
+    {
+      if(i->second.use_count() == 1)
+      {
+        arcGarbage.push_back(i->first);
+      }
+    }
+    uint32_t ag = arcGarbage.size();
+    if(ag)
+    {
+      DOUT("arc garbage: "<<arcGarbage.size());
+      for(uint32_t i=0; i<arcGarbage.size(); ++i)
+      {
+        _arcMap.erase(arcGarbage[i]);
+      }
+    }
+    
 }
 
 }

@@ -65,7 +65,9 @@ void RoundedRect::updateTexture()
     material->textures[0] = tex;
   else
     material->textures.push_back(tex);
+  textureManager->collectGarbage();
 }
+
 void RoundedRect::updateSize(const Vec2& newSize)
 {
   size = newSize;

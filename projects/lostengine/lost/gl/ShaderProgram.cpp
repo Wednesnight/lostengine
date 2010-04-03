@@ -137,7 +137,7 @@ void ShaderProgram::buildUniformMap()
   GLenum type;
   GLint size;
 
-  DOUT("--- Uniforms");
+//  DOUT("--- Uniforms");
   for(GLint i=0; i<numUniforms; ++i)
   {
     glGetActiveUniform(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
@@ -158,7 +158,7 @@ void ShaderProgram::buildVertexAttributeMap()
   GLenum type;
   GLint size;
 
-  DOUT("--- Attributes");
+//  DOUT("--- Attributes");
   for(GLint i=0; i<numAttributes; ++i)
   {
     glGetActiveAttrib(program, i, bufferSize, &writtenBytes, &size, &type, buffer.get());
