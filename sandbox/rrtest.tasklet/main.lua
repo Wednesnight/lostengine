@@ -58,13 +58,13 @@ function startup(tasklet)
     
   ------------------
   -- ARC
-  arcSize = 8
+  arcSize = 16
   spacing = 10
   arcBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
-  arcBitmap:arc(arcSize, 1)
+  arcBitmap:ring(0,0,arcSize, 1)
 
   arcFilledBitmap = lost.bitmap.Bitmap.create(arcSize, arcSize, lost.bitmap.COMPONENTS_RGBA)
-  arcFilledBitmap:arcFilled(arcSize)
+  arcFilledBitmap:disc(0,0,arcSize)
   
   texparams = lost.gl.Texture.Params()
   arcTex = lost.gl.Texture.create(arcBitmap, texparams)
@@ -123,7 +123,7 @@ function startup(tasklet)
     transform = MatrixTranslation(lost.math.Vec3(spacing,arcSize+2*spacing,0))
   }
 
-  discmesh = lost.mesh.Disc.create(textureManager, false, arcSize, 1)
+  discmesh = lost.mesh.Disc.create(textureManager, false, arcSize, 2)
   discmesh.material.blend = true
   discmesh.material.shader = lost.common.Shaders.textureShader()
 --  discmesh.material.color = Color(1,1,1, .2)
@@ -139,6 +139,12 @@ function startup(tasklet)
   rr2.material.color = Color(0,.6, .9, .5);
   rr2.material.shader = lost.common.Shaders.textureShader()
   rr2.transform = MatrixTranslation(Vec3(200, 200, 0))
+
+  rr3 = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), true, 8, 1);
+  rr3.material.blend = true
+  rr3.material.color = Color(1,.6, .9, .5);
+  rr3.material.shader = lost.common.Shaders.textureShader()
+  rr3.transform = MatrixTranslation(Vec3(280, 200, 0))
   
   rootNode = dcl.rg:Node
   {
@@ -175,6 +181,7 @@ function startup(tasklet)
     dcl.rg:Draw{mesh = discmesh},
     dcl.rg:Draw{mesh = rr2},
     dcl.rg:Draw{mesh = rr},
+    dcl.rg:Draw{mesh = rr3},
   }
 
   tasklet.renderNode:add(rootNode)

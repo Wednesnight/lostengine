@@ -236,9 +236,8 @@ namespace lost
         namespace_("mesh")
         [
           class_<TextureManager>("TextureManager")
-//          .def("ringTexture", &TextureManager::ringTexture)
+          .def("arcTexture", &TextureManager::arcTexture)
           .def("arcFilledTexture", &TextureManager::arcFilledTexture)
-          .def_readwrite("maxRadius", &TextureManager::maxRadius)
           .scope
           [
             def("create", (TextureManagerPtr(*)())&TextureManager::create)            

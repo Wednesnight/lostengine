@@ -17,17 +17,13 @@ using namespace std;
 
 TextureManager::TextureManager()
 {
-  _arcFilledRadius = 0;
-  _arcFilledTexture.reset(new Texture);
-  maxRadius = 256;
-  _centerOffset = -.5f;
 }
 
 TextureManager::~TextureManager()
 {
 }
 
-void TextureManager::updateArcFilledTexture(float radius)
+/*void TextureManager::updateArcFilledTexture(float radius)
 {
   vector<BitmapPtr> bitmaps; // 0 = mimap level 0 = largest, all others are the following reduction levels
 
@@ -41,7 +37,7 @@ void TextureManager::updateArcFilledTexture(float radius)
   while(radius > 0)
   {
     BitmapPtr bmp(new Bitmap(radius, radius, bitmap::COMPONENTS_RGBA));
-    bmp->disc(_centerOffset, _centerOffset, radius);
+    bmp->disc(0, 0, radius);
     bitmaps.push_back(bmp);
     radius = floor(radius / 2.0f);
     ++numTextures;
@@ -49,63 +45,59 @@ void TextureManager::updateArcFilledTexture(float radius)
   DOUT("rebuilt "<<numTextures<<" bitmaps for arcFilled");
 
   _arcFilledTexture->init(bitmaps, params); // preserves texture object, but reinitialises data  
-}
+}*/
 
 TexturePtr TextureManager::createArcTexture(float lineWidth, float radius)
 {
   TexturePtr result;
   
   BitmapPtr bmp = Bitmap::create(radius, radius, COMPONENTS_RGBA);
-  bmp->ring(_centerOffset, _centerOffset, radius, lineWidth);
+  bmp->ring(0, 0, radius, lineWidth);
 
   Texture::Params params;
   params.sizeHint = Texture::SIZE_POWER_OF_TWO;
-  params.minFilter = GL_LINEAR;
-  params.magFilter = GL_LINEAR;
+  params.minFilter = GL_NEAREST;
+  params.magFilter = GL_NEAREST;
   
   result.reset(new Texture(bmp, params));
   
   return result;
 }
 
-// calculate maximum possible radius for a disc texture given the following restrictions
-// * must be power-of-two
-// * must not be larger than maxRadius
-float TextureManager::calculateMaxRadius(float radius)
+TexturePtr TextureManager::createArcFilledTexture(float radius)
 {
-  float radiusp2 = (float)math::nextPowerOf2((uint32_t)radius); // we need this anyway, new textures must be power of two
-  float mrp2 = (float)math::nextPowerOf2((uint32_t)maxRadius); // just to make sure the maximum is also always power of two
-  float mr = std::min(radiusp2, mrp2); // we need to recreate the texture to a certain maximum even if the user specified some ridiculously high value 
-  return mr;
-}
+  TexturePtr result;
+  
+  BitmapPtr bmp = Bitmap::create(radius, radius, COMPONENTS_RGBA);
+  bmp->disc(0, 0, radius);
 
-// returns new safe radius if the texture needs to be updated, zero if it has to stay the same 
-float TextureManager::textureNeedsUpdate(float requestedRadius)
-{
-  float result= 0.0f;  
-  if(requestedRadius > _arcFilledRadius) // only recalculate texture if incoming desired is larger than current diameter
-  {
-    float mr = calculateMaxRadius(requestedRadius); // get safe maximum given the restrictions
-    if(mr > (_arcFilledRadius)) // and only build if the same maximum is larger than the current
-    {
-      result = mr;
-    }
-  }
+  Texture::Params params;
+  params.sizeHint = Texture::SIZE_POWER_OF_TWO;
+  params.minFilter = GL_NEAREST;
+  params.magFilter = GL_NEAREST;
+  
+  result.reset(new Texture(bmp, params));
+  
   return result;
 }
 
 gl::TexturePtr TextureManager::arcFilledTexture(float radius)
 {
-  float newRadius;
-  if(newRadius = textureNeedsUpdate(radius))
+  TexturePtr result;
+  ArcFilledMap::iterator pos = _arcFilledMap.find(radius);
+  if(pos != _arcFilledMap.end())
   {
-      updateArcFilledTexture(newRadius); 
-      _arcFilledRadius = newRadius; 
+    result = pos->second;
+  }
+  else
+  {
+    result = createArcFilledTexture(radius);
+    _arcFilledMap[radius] = result;
   }
   
   logStats();
   collectGarbage();
-  return _arcFilledTexture;
+  return result;
 }
 
 gl::TexturePtr TextureManager::arcTexture(float radius, float lineWidth)

@@ -16,30 +16,23 @@ struct TextureManager
   virtual ~TextureManager();
   static TextureManagerPtr create() { return TextureManagerPtr(new TextureManager); };
   
-  
+  // use these two functions to retrieve the texture
   gl::TexturePtr arcTexture(float radius, float lineWidth); 
   gl::TexturePtr arcFilledTexture(float radius);
   
+  // helpers
   void logStats(); 
   void collectGarbage();
     
-  void updateArcFilledTexture(float radius); 
-
-
-  // internal helper functions, you probably won't need these
-  float calculateMaxRadius(float radius);
-  float textureNeedsUpdate(float requestedRadius);
   gl::TexturePtr createArcTexture(float lineWidth, float radius);
+  gl::TexturePtr createArcFilledTexture(float radius);
 
-  float maxRadius; // used for both disc and ring. set this to some value to prevent textures from growing arbitrarily
-
-  float _arcFilledRadius;
-  gl::TexturePtr _arcFilledTexture; // theres is only one which is the power-oftwo maximum of all previously used
+  typedef std::map<float, gl::TexturePtr> ArcFilledMap;
+  ArcFilledMap _arcFilledMap;
 
   typedef std::pair<float, float> LineWidthRadius;
   typedef std::map<LineWidthRadius, gl::TexturePtr> ArcMap;
   ArcMap _arcMap;
-  float _centerOffset;
 };
 
 }

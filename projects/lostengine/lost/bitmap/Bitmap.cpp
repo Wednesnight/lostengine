@@ -426,7 +426,7 @@ void Bitmap::disc(float x, float y, float r)
       if(dr >= 0.0f && (dr < 1.0f))
       {
         float fract = 1.0f-(dr - floor(dr));
-        pixel((uint32_t)cx, (uint32_t)cy, common::Color(1,1,1,fract));
+        pixel((uint32_t)cx, (uint32_t)cy, common::Color(1,1,1, fract));
       }
     }
   }
@@ -466,16 +466,6 @@ void Bitmap::ring(float x, float y, float r, float t)
       }
     }
   }
-}
-
-void Bitmap::arc(float radius, float lineWidth)
-{
-  ring(0.0f,0.0f,radius, lineWidth);
-}
-
-void Bitmap::arcFilled(float radius)
-{
-  disc(0,0,radius);
 }
 
 }
