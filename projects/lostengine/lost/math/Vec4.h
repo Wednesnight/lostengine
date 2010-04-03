@@ -41,6 +41,16 @@ namespace lost
       float w;
     };
     
+    inline Vec4 operator*(const Vec4& inOp1,  float v)
+    {
+      Vec4 result;
+      result.x = inOp1.x * v;
+      result.y = inOp1.y * v;
+      result.z = inOp1.z * v;
+      result.w = inOp1.w * v;
+      return result;
+    }
+
     inline float operator*(const Vec4& inOp1, const Vec4& inOp2) 
     {
         return (inOp1.x*inOp2.x + inOp1.y*inOp2.y + inOp1.z*inOp2.z + inOp1.w*inOp2.w);
@@ -52,6 +62,26 @@ namespace lost
         return true;
       else
         return false;
+    }
+    
+    inline Vec4 operator+(const Vec4& inOp1, const Vec4& inOp2)
+    {
+      Vec4 result;
+      result.x = inOp1.x + inOp2.x;
+      result.y = inOp1.y + inOp2.y;
+      result.z = inOp1.z + inOp2.z;
+      result.w = inOp1.w + inOp2.w;
+      return result;
+    }
+    
+    inline Vec4 operator-(const Vec4& inOp1, const Vec4& inOp2)
+    {
+      Vec4 result;
+      result.x = inOp1.x - inOp2.x;
+      result.y = inOp1.y - inOp2.y;
+      result.z = inOp1.z - inOp2.z;
+      result.w = inOp1.w - inOp2.w;
+      return result;
     }
     
     // compares two vectors, taking epsilong into account for rounding errors
