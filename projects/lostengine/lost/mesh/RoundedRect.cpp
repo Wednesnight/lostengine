@@ -3,6 +3,7 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/Texture.h"
 
 namespace lost
 {
@@ -22,42 +23,14 @@ RoundedRect::RoundedRect(const TextureManagerPtr& tm,
   textureManager = tm;
   filled = f;
   lineWidth = lw;
-  tlr = r;
-  trr = r;
-  blr = r;
-  brr = r;
+  radius = r;
   size = sz;
   commonInit();
   updateTexture(); 
-  updateSize(size);
-  createIndices();
-  createTexcoords0();
-  createTexcoords1();
-}
-
-RoundedRect::RoundedRect(const TextureManagerPtr& tm, 
-                         const math::Vec2 sz, 
-                         bool f, 
-                         float intlr,
-                         float intrr,
-                         float inblr,
-                         float inbrr,
-                         float lw)
-{
-  textureManager = tm;
-  filled = f;
-  lineWidth = lw;
-  tlr = intlr;
-  trr = intrr;
-  blr = inblr;
-  brr = inbrr;
-  size = sz;
-  commonInit(); 
-  updateTexture(); 
-  updateSize(size);
-  createIndices();
-  createTexcoords0();
-  createTexcoords1();
+  updateVertices();
+  updateIndices();
+  updateTexcoords0();
+  updateTexcoords1();
 }
 
 void RoundedRect::commonInit()
@@ -82,32 +55,67 @@ void RoundedRect::commonInit()
 
 void RoundedRect::updateTexture()
 {
-  // calculate max diameter for request to textureManager
-  float maxDiameter = std::max(tlr*2, std::max(trr*2, std::max(blr*2, brr*2)));
   TexturePtr tex;
-/*  if(filled)
-    tex = textureManager->discTexture(maxDiameter);
+  if(filled)
+    tex = textureManager->arcFilledTexture(radius);
   else
-    tex = textureManager->ringTexture(maxDiameter, lineWidth);*/
+    tex = textureManager->arcTexture(radius, lineWidth);
   
   if(material->textures.size() > 0)
     material->textures[0] = tex;
   else
     material->textures.push_back(tex);
 }
-  // vertices are created in this order:
-  // 0  1  2  3
-  // 4  5  6  7
-  // 8  9  10 11
-  // 12 13 14 15
-  // 
-  // 0,3,12,15 are the corners of the provided rect
 void RoundedRect::updateSize(const Vec2& newSize)
 {
   size = newSize;
+  updateVertices();
+}
+
+// vertices are created in this order:
+// 0  1  2  3
+// 4  5  6  7
+// 8  9  10 11
+// 12 13 14 15
+void RoundedRect::updateVertices()
+{
+  float top = size.y;
+  float top2 = top - radius;
+  float bot = 0;
+  float bot2 = bot + radius;
+  float left = 0;
+  float left2 = left+radius;
+  float right = size.x;
+  float right2 = right - radius;
+  
+  vertexBuffer->set(0, UT_position, Vec2(left,top));
+  vertexBuffer->set(1, UT_position, Vec2(left2,top));
+  vertexBuffer->set(2, UT_position, Vec2(right2,top));
+  vertexBuffer->set(3, UT_position, Vec2(right,top));
+
+  vertexBuffer->set(4, UT_position, Vec2(left,top2));
+  vertexBuffer->set(5, UT_position, Vec2(left2,top2));
+  vertexBuffer->set(6, UT_position, Vec2(right2,top2));
+  vertexBuffer->set(7, UT_position, Vec2(right,top2));
+
+  vertexBuffer->set(8, UT_position, Vec2(left,bot2));
+  vertexBuffer->set(9, UT_position, Vec2(left2,bot2));
+  vertexBuffer->set(10, UT_position, Vec2(right2,bot2));
+  vertexBuffer->set(11, UT_position, Vec2(right,bot2));
+
+  vertexBuffer->set(12, UT_position, Vec2(left,bot));
+  vertexBuffer->set(13, UT_position, Vec2(left2,bot));
+  vertexBuffer->set(14, UT_position, Vec2(right2,bot));
+  vertexBuffer->set(15, UT_position, Vec2(right,bot));
+  
+  collapseCorners();  
+}
+
+void RoundedRect::collapseCorners()
+{
 }
   
-void RoundedRect::createIndices()
+void RoundedRect::updateIndices()
 {
   setIndex(0, 0);
   setIndex(1, 4);
@@ -165,30 +173,34 @@ void RoundedRect::createIndices()
   setIndex(53, 11);
 }
 
-void RoundedRect::createTexcoords0()
+void RoundedRect::updateTexcoords0()
 {
-/*  setTexCoord(0, tex->normalisedCoord(math::Vec2(0,0)));
-  setTexCoord(1, tex->normalisedCoord(math::Vec2(left, 0)));
-  setTexCoord(2, tex->normalisedCoord(math::Vec2(tw-right, 0)));
-  setTexCoord(3, tex->normalisedCoord(math::Vec2(tw, 0)));
+  Vec2 maxtc = material->textures[0]->topRightTexCoord();
+  float mx = maxtc.x;
+  float my = maxtc.y;
 
-  setTexCoord(4, tex->normalisedCoord(math::Vec2(0,bottom)));
-  setTexCoord(5, tex->normalisedCoord(math::Vec2(left,bottom)));
-  setTexCoord(6, tex->normalisedCoord(math::Vec2(tw-right,bottom)));
-  setTexCoord(7, tex->normalisedCoord(math::Vec2(tw,bottom)));
+  vertexBuffer->set(0,UT_texcoord0, Vec2(mx,my));
+  vertexBuffer->set(1,UT_texcoord0, Vec2(0,my));
+  vertexBuffer->set(2,UT_texcoord0, Vec2(0,my));
+  vertexBuffer->set(3,UT_texcoord0, Vec2(mx,my));
 
-  setTexCoord(8, tex->normalisedCoord(math::Vec2(0,th-top)));
-  setTexCoord(9, tex->normalisedCoord(math::Vec2(left,th-top)));
-  setTexCoord(10, tex->normalisedCoord(math::Vec2(tw-right, th-top)));
-  setTexCoord(11, tex->normalisedCoord(math::Vec2(tw, th-top)));
+  vertexBuffer->set(4,UT_texcoord0, Vec2(mx,0));
+  vertexBuffer->set(5,UT_texcoord0, Vec2(0,0));
+  vertexBuffer->set(6,UT_texcoord0, Vec2(0,0));
+  vertexBuffer->set(7,UT_texcoord0, Vec2(mx,0));
 
-  setTexCoord(12, tex->normalisedCoord(math::Vec2(0,th)));
-  setTexCoord(13, tex->normalisedCoord(math::Vec2(left,th)));
-  setTexCoord(14, tex->normalisedCoord(math::Vec2(tw-right,th)));
-  setTexCoord(15, tex->normalisedCoord(math::Vec2(tw, th)));*/
+  vertexBuffer->set(8,UT_texcoord0, Vec2(mx,0));
+  vertexBuffer->set(9,UT_texcoord0, Vec2(0,0));
+  vertexBuffer->set(10,UT_texcoord0, Vec2(0,0));
+  vertexBuffer->set(11,UT_texcoord0, Vec2(mx,0));
+
+  vertexBuffer->set(12,UT_texcoord0, Vec2(mx,my));
+  vertexBuffer->set(13,UT_texcoord0, Vec2(0,my));
+  vertexBuffer->set(14,UT_texcoord0, Vec2(0,my));
+  vertexBuffer->set(15,UT_texcoord0, Vec2(mx,my));
 }
 
-void RoundedRect::createTexcoords1()
+void RoundedRect::updateTexcoords1()
 {
 }
 

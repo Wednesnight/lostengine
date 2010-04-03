@@ -15,32 +15,31 @@ struct RoundedRect : Mesh
        bool filled, 
        float radius, // all corners have same radius
        float lineWidth); // optional, set to any value if filled
-  RoundedRect(const TextureManagerPtr& inTextureManager, 
+  virtual ~RoundedRect() {}
+  static RoundedRectPtr create(const TextureManagerPtr& inTextureManager, 
        const math::Vec2 inSize, 
        bool filled, 
-       float topLeftRadius,
-       float topRightRadius,
-       float bottomLeftRadius,
-       float bottomRightRadius,
-       float lineWidth); // optional, set to any value if filled
-  virtual ~RoundedRect() {}
+       float radius, 
+       float lineWidth) 
+       {
+        return RoundedRectPtr(new RoundedRect(inTextureManager, inSize, filled, radius, lineWidth));
+       };
 
   void updateSize(const math::Vec2& newSize); // recalculates vertices, using Vec2 x/y as width/height
 
+  void updateVertices();
+  void collapseCorners();
   void updateTexture(); // updates the texture, using textureManager, filled flag an corner radii
-  void createIndices();
-  void createTexcoords0(); // for the disc/ring texture
-  void createTexcoords1(); // helper coords that allow multiplication of color gradient onto primary texture
+  void updateIndices();
+  void updateTexcoords0(); // for the disc/ring texture
+  void updateTexcoords1(); // helper coords that allow multiplication of color gradient onto primary texture
 
   void commonInit(); // called by all constructors
   
   TextureManagerPtr textureManager;
   bool filled;
   float lineWidth;
-  float tlr;
-  float trr;
-  float blr;
-  float brr;
+  float radius;
   math::Vec2 size; // needed for secondary texture coordinate generation
 
   uint32_t numVertices;

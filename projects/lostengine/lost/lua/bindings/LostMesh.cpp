@@ -14,6 +14,7 @@
 #include "lost/gl/Texture.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/mesh/TextureManager.h"
+#include "lost/mesh/RoundedRect.h"
 
 using namespace luabind;
 using namespace lost::mesh;
@@ -212,6 +213,22 @@ namespace lost
       ];
     }
 
+    void LostMeshRoundedRect(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<RoundedRect, Mesh>("RoundedRect")
+          .def("updateSize", &RoundedRect::updateSize)
+          .scope
+          [
+            def("create", &RoundedRect::create)            
+          ]
+        ]
+      ];
+    }
+
     void LostMeshTextureManager(lua_State* state)
     {
       module(state, "lost")
@@ -243,6 +260,7 @@ namespace lost
       LostMeshQuad(state);
       LostMeshDisc(state);
       LostMeshScaleGrid(state);
+      LostMeshRoundedRect(state);      
       LostMeshTextureManager(state);
     }
 
