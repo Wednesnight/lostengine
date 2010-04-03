@@ -106,5 +106,5 @@ function MainView:constructor(tasklet)
   }
   
   -- initially hidden
---  self.screen:hidden(true)
+  self.screen:hidden(true)
 end

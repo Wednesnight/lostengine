@@ -1,5 +1,8 @@
 require("lost.common.Class")
+require("lost.common.CallLater")
 require("MainView")
+require("animation.RotateMesh")
+require("animation.TranslateMesh")
 
 lost.common.Class "MainController"
 {
@@ -8,6 +11,7 @@ lost.common.Class "MainController"
 }
 
 using "lost.application.K_ESCAPE"
+using "lost.application.K_SPACE"
 using "lost.application.K_NUMPAD_PLUS"
 using "lost.application.K_NUMPAD_MINUS"
 using "lost.common.Color"
@@ -93,20 +97,17 @@ function MainController:startup(tasklet)
   local exitButton = self.mainView.screen("ui")("window")("menu")("buttons")("exitButton")
   exitButton:addEventListener("buttonClick", function(event) self.running = false end)
 
+  -- setup animation
+  self.translate = animation.TranslateMesh(self.mesh, 2, lost.math.Vec3(0,0,1))
+  self.translate.onFinished = function(animation)
+    animation:reverse()
+  end
+  self.rotate = animation.RotateMesh(self.mesh, 2, lost.math.Vec3(0, 0, 360))
+
   return self.running
 end
 
 function MainController:update(tasklet)
-
-  if self.running then
-    local currentSec = lost.platform.currentTimeSeconds()
-    local delta = currentSec - self.passedSec
-
-    self.angle = math.fmod(delta * 50 + self.angle, 360)
-    self.mesh.transform = lost.math.MatrixRotX(self.angle) * lost.math.MatrixRotY(self.angle)
-
-    self.passedSec = currentSec
-  end
 
   -- render scene
   self.scene:process(tasklet.window.context)
@@ -118,6 +119,18 @@ function MainController:keyHandler(event)
 
   if event.key == K_ESCAPE then
     self.mainView.screen:hidden(not self.mainView.screen:hidden())
-  end
 
+  elseif event.key == K_SPACE then
+    if self.translate.running then
+      self.translate:stop()
+    else
+      self.translate:run()
+    end
+    if self.rotate.running then
+      self.rotate:stop()
+    else
+      self.rotate:run()
+    end
+
+  end
 end
