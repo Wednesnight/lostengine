@@ -22,42 +22,17 @@ dcl = nil
 radius = 32
 quadsize = Vec2(radius*2, radius*2)
 
--- creates a square texture with a white circle on transparent background
--- n is log2(width)
--- circle is centered and sized so it completely fills the bitmap used to create the texture
-function pow2discTexture(n)
-  local size = math.pow(2,n)
-  local bmp = Bitmap.create(size, size, lost.bitmap.COMPONENTS_RGBA)
-  local cx = size/2 - 0.5
-  local cy = cx
-  local cr = cy
-  bmp:disc(cx,cy,cr)
-  local defaultParams = lost.gl.Texture.Params()
-  local tex = lost.gl.Texture.create(bmp, defaultParams)  
-  return tex
-end
-
-function pow2ringTexture(n, thickness)
-  local size = math.pow(2,n)
-  local bmp = Bitmap.create(size, size, lost.bitmap.COMPONENTS_RGBA)
-  local cx = size/2 - 0.5
-  local cy = cx
-  local cr = cy
-  bmp:ring(cx,cy,cr, thickness)
-  local defaultParams = lost.gl.Texture.Params()
-  local tex = lost.gl.Texture.create(bmp, defaultParams)  
-  return tex
-end
-
 function startup(tasklet)
+  textureManager = lost.mesh.TextureManager.create()
+  textureManager.maxRadius = 256 -- change this to test effect on quads with larger diameter
+  gradients = require("gradients")
+  require("helpers")
+
   tasklet.name = "rrtest"
   tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
-  
-  textureManager = lost.mesh.TextureManager.create()
-  textureManager.maxRadius = 256 -- change this to test effect on quads with larger diameter
-    
+      
   ------------------
   -- ARC
   arcSize = 16
@@ -221,7 +196,8 @@ function startup(tasklet)
   ub = lost.gl.UniformBlock.create()
   ub:set("color", Color(0,1,1))
   rr3.material.uniforms = ub
-  
+  local trheight = 44
+  local trwidth = 80
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor
@@ -262,6 +238,24 @@ function startup(tasklet)
     dcl.rg:Draw{mesh = gradDisc},
     dcl.rg:Draw{mesh = gradRing},
     dcl.rg:Draw{mesh = rr4},
+    dcl.rg:Draw
+    {
+      mesh = rrgrad(Rect(0,screensize.y-trheight,screensize.x, trheight),
+                    true, 8, 1, gradients["c5light"],
+                    {blr=false, brr=false, tlr=false, trr=false})
+    },    
+    dcl.rg:Draw
+    {
+      mesh = rrgrad(Rect(0,screensize.y-2*trheight,trwidth, trheight),
+                    true, 8, 1, gradients["c5light"],
+                    {blr=false, brr=false, tlr=false, trr=false})
+    },    
+    dcl.rg:Draw
+    {
+      mesh = rrgrad(Rect(0,screensize.y-3*trheight,trwidth, trheight),
+                    true, 8, 1, gradients["c5light"],
+                    {blr=false, brr=false, tlr=false, trr=false})
+    },    
   }
 
   tasklet.renderNode:add(rootNode)
