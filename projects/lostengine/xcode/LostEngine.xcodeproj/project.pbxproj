@@ -641,6 +641,7 @@
 		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
+		EA92A2F611682A5700B32ECE /* UniformBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA92A2F511682A5700B32ECE /* UniformBlock.cpp */; };
 		EA9365AA1163F0A50013F765 /* RoundedRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA9365A91163F0A50013F765 /* RoundedRect.cpp */; };
 		EA964E1D1055A7C000191DDD /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA964E1C1055A7C000191DDD /* Scissor.cpp */; };
 		EA964E1E1055A7C000191DDD /* Scissor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA964E1C1055A7C000191DDD /* Scissor.cpp */; };
@@ -1048,6 +1049,7 @@
 		EA8A15260FA26D7600E42FBE /* DepthTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthTest.cpp; path = rg/DepthTest.cpp; sourceTree = "<group>"; };
 		EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostRg.cpp; path = bindings/LostRg.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
+		EA92A2F511682A5700B32ECE /* UniformBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformBlock.cpp; sourceTree = "<group>"; };
 		EA9365A91163F0A50013F765 /* RoundedRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoundedRect.cpp; path = mesh/RoundedRect.cpp; sourceTree = "<group>"; };
 		EA964E1C1055A7C000191DDD /* Scissor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scissor.cpp; path = rg/Scissor.cpp; sourceTree = "<group>"; };
 		EA97FC110E35ABD800851245 /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bitmap.cpp; sourceTree = "<group>"; };
@@ -1719,6 +1721,7 @@
 				EA0F5CCA1051C35A00545DCC /* ShaderProgram.cpp */,
 				EA91363D0E994F18006884D7 /* Texture.cpp */,
 				EAB235E31142AD89009578A9 /* Uniform.cpp */,
+				EA92A2F511682A5700B32ECE /* UniformBlock.cpp */,
 				EAA4B7710E9C6D9E001D1778 /* Utils.cpp */,
 				EAB61FD21142ED0100295C1B /* VertexAttribute.cpp */,
 				EA0F5CDF1051C6E000545DCC /* VertexShader.cpp */,
@@ -2512,6 +2515,7 @@
 				3EAF8E65115A1168004BD15F /* inftrees.c in Sources */,
 				EAA861C41162D92D004B5D3D /* ColorGradient.cpp in Sources */,
 				EA9365AA1163F0A50013F765 /* RoundedRect.cpp in Sources */,
+				EA92A2F611682A5700B32ECE /* UniformBlock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

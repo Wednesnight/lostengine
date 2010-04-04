@@ -4,16 +4,10 @@
 #include <vector>
 #include "lost/common/Color.h"
 #include "lost/gl/gltypes.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
-namespace gl
-{
-  struct ShaderProgram;
-  typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
-  struct Texture;
-  typedef lost::shared_ptr<Texture> TexturePtr;
-}
 namespace mesh
 {
 
@@ -28,6 +22,7 @@ struct Material
   GLenum                      blendSrc;
   GLenum                      blendDest;
   gl::ShaderProgramPtr        shader; // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
+  gl::UniformBlockPtr         uniformBlock; // optional, will be applied to shader if present
   bool                        cull;
   GLenum                      cullMode;
   

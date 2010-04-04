@@ -8,6 +8,7 @@
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/Uniform.h"
+#include "lost/gl/UniformBlock.h"
 #include "lost/gl/ShaderHelper.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/HybridVertexBuffer.h"
@@ -264,6 +265,24 @@ namespace lost
       ];
     }
 
+    void LostGLUniformBlock(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<UniformBlock>("Uniform")
+          .def("setFloat", &UniformBlock::setFloat)
+          .def("setVec2", &UniformBlock::setVec2)
+          .def("setVec3", &UniformBlock::setVec3)
+          .scope
+          [
+            def("create", &UniformBlock::create)
+          ]
+        ]
+      ];
+    }
+
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
     {
       texture->init(p1, p2, p3, p4, p5, p6, p7, 0);
@@ -319,6 +338,7 @@ namespace lost
       LostGLRenderBuffer(state);
       LostGLShaderProgram(state);
       LostGLUniform(state);
+      LostGLUniformBlock(state);
       LostGLTexture(state);
     }
 

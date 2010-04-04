@@ -13,6 +13,7 @@
 #include "lost/platform/shared_ptr.h"
 #include "lost/gl/Texture.h"
 #include "lost/gl/ShaderProgram.h"
+#include "lost/gl/UniformBlock.h"
 #include "lost/mesh/TextureManager.h"
 #include "lost/mesh/RoundedRect.h"
 
@@ -114,6 +115,7 @@ namespace lost
           class_<Material>("Material")
             .def("addTexture", &LostMeshMaterial_addTexture)
             .def_readwrite("shader", &Material::shader)
+            .def_readwrite("uniformBlock", &Material::uniformBlock)
             .def_readwrite("color", &Material::color)
             .def_readwrite("blend", &Material::blend)
             .def_readwrite("blendSrc", &Material::blendSrc)
