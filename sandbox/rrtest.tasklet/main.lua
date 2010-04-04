@@ -150,6 +150,7 @@ function startup(tasklet)
   rr3.material.shader = lost.common.Shaders.textureShader()
   rr3.transform = MatrixTranslation(Vec3(spacing+80, 200, 0))
   rr3:updateCorners(false, true, true, true)
+
   
   -- GRADIENT  
   g1 = ColorGradient.create()
@@ -197,6 +198,15 @@ function startup(tasklet)
   gradRing.material.uniforms = lost.gl.UniformBlock.create()
   gradRing.material.uniforms:setFloat("gradientCoord", g3coord)
   gradRing.material:add(textureManager.gradientTexture)
+
+  rr4 = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), true, 8, 2);
+  rr4.material.blend = true
+  rr4.material.shader = lost.common.Shaders.gradientShader()
+  rr4.transform = MatrixTranslation(Vec3(2*spacing+80+20, 200, 0))
+  rr4.material.uniforms = lost.gl.UniformBlock.create()
+  rr4.material.uniforms:setFloat("gradientCoord", g3coord)
+  rr4.material:add(textureManager.gradientTexture)
+  rr4:updateCorners(false, false, false, true)
 
   gradmesh = dcl.mesh:Quad
   {
@@ -251,6 +261,7 @@ function startup(tasklet)
     dcl.rg:Draw{mesh = gradmesh},
     dcl.rg:Draw{mesh = gradDisc},
     dcl.rg:Draw{mesh = gradRing},
+    dcl.rg:Draw{mesh = rr4},
   }
 
   tasklet.renderNode:add(rootNode)

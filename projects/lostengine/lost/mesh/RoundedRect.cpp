@@ -126,6 +126,7 @@ void RoundedRect::updateVertices()
   vertexBuffer->set(14, UT_position, Vec2(right2,bot));
   vertexBuffer->set(15, UT_position, Vec2(right,bot));
   
+  updateTexcoords1();
   collapseCorners();  
 }
 
@@ -135,24 +136,36 @@ void RoundedRect::collapseCorners()
   {
     vertexBuffer->set(8, UT_position, Vec2(0,0));
     vertexBuffer->set(13, UT_position, Vec2(0,0));
+    
+    vertexBuffer->set(8,UT_texcoord1, Vec2(0,0));    
+    vertexBuffer->set(13,UT_texcoord1, Vec2(0,0));    
   }
 
   if(!roundBR)
   {
     vertexBuffer->set(11, UT_position, Vec2(size.x,0));
     vertexBuffer->set(14, UT_position, Vec2(size.x,0));
+
+    vertexBuffer->set(11,UT_texcoord1, Vec2(1,0));    
+    vertexBuffer->set(14,UT_texcoord1, Vec2(1,0));    
   }
 
   if(!roundTL)
   {
     vertexBuffer->set(1, UT_position, Vec2(0,size.y));
     vertexBuffer->set(4, UT_position, Vec2(0,size.y));
+
+    vertexBuffer->set(1,UT_texcoord1, Vec2(0,1));    
+    vertexBuffer->set(4,UT_texcoord1, Vec2(0,1));    
   }
 
   if(!roundTR)
   {
     vertexBuffer->set(2, UT_position, Vec2(size.x,size.y));
     vertexBuffer->set(7, UT_position, Vec2(size.x,size.y));
+
+    vertexBuffer->set(2,UT_texcoord1, Vec2(1,1));    
+    vertexBuffer->set(7,UT_texcoord1, Vec2(1,1));    
   }
 }
   
