@@ -131,6 +131,8 @@ function startup(tasklet)
 --  discmesh.material.color = Color(1,1,1, .2)
   discmesh.transform = MatrixTranslation(Vec3(spacing+arcSize, 2*spacing+arcSize, 0))
 
+
+
   rr = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), false, 8, 1);
   rr.material.blend = true
   rr.material.shader = lost.common.Shaders.textureShader()
@@ -165,10 +167,35 @@ function startup(tasklet)
   g3:add(ColorPoint(.75,Color(.75,.8,.2)))
   g3:add(ColorPoint(1,Color(.8,.8,.8)))
 
-  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g1));
-  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g2));
-  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g3));
+  g4 = ColorGradient.create()
+  g4:add(ColorPoint(0,Color(1,1,1)))
+  g4:add(ColorPoint(1,Color(0,0,0)))
+
+  g1coord = textureManager:addGradient(g1)
+  g2coord = textureManager:addGradient(g2)
+  g3coord = textureManager:addGradient(g3)
+  g4coord = textureManager:addGradient(g4)
+
+--  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g1));
+--  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g2));
+--  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g3));
 --  log.debug("!!!!!! gradcoord "..textureManager:addGradient(gradient));
+
+  gradDisc = lost.mesh.Disc.create(textureManager, true, arcSize, 2)
+  gradDisc.material.blend = true
+  gradDisc.material.shader = lost.common.Shaders.gradientShader()
+  gradDisc.transform = MatrixTranslation(Vec3(2*spacing+3*arcSize, 2*spacing+arcSize, 0))
+  gradDisc.material.uniforms = lost.gl.UniformBlock.create()
+  gradDisc.material.uniforms:setFloat("gradientCoord", g2coord)
+  gradDisc.material:add(textureManager.gradientTexture)
+
+  gradRing = lost.mesh.Disc.create(textureManager, false, arcSize, 1)
+  gradRing.material.blend = true
+  gradRing.material.shader = lost.common.Shaders.gradientShader()
+  gradRing.transform = MatrixTranslation(Vec3(2*spacing+3*arcSize, 2*spacing+arcSize, 0))
+  gradRing.material.uniforms = lost.gl.UniformBlock.create()
+  gradRing.material.uniforms:setFloat("gradientCoord", g4coord)
+  gradRing.material:add(textureManager.gradientTexture)
 
   gradmesh = dcl.mesh:Quad
   {
@@ -221,6 +248,8 @@ function startup(tasklet)
     dcl.rg:Draw{mesh = rr},
     dcl.rg:Draw{mesh = rr3},
     dcl.rg:Draw{mesh = gradmesh},
+    dcl.rg:Draw{mesh = gradDisc},
+    dcl.rg:Draw{mesh = gradRing},
   }
 
   tasklet.renderNode:add(rootNode)
