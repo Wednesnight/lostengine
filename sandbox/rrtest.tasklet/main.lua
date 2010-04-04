@@ -180,6 +180,9 @@ function startup(tasklet)
     transform = MatrixTranslation(lost.math.Vec3(300,spacing,0))
   }
 
+  ub = lost.gl.UniformBlock.create()
+  ub:set("color", Color(0,1,1))
+  rr3.material.uniforms = ub
   
   rootNode = dcl.rg:Node
   {

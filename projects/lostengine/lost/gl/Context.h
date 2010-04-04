@@ -124,6 +124,7 @@ namespace lost
       static Context* getCurrent();
       
       void bind(Buffer* buffer);
+      void applyUniforms(UniformBlock* ub); // applies a uniform block to the current shader
     };
   }
 }
