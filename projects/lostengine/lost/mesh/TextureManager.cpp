@@ -4,6 +4,7 @@
 #include "lost/bitmap/Bitmap.h"
 #include <vector>
 #include "lost/gl/gl.h"
+#include "lost/common/ColorGradient.h"
 
 namespace lost
 {
@@ -13,10 +14,16 @@ namespace mesh
 using namespace lost::math;
 using namespace lost::bitmap;
 using namespace lost::gl;
+using namespace lost::common;
 using namespace std;
 
 TextureManager::TextureManager()
 {
+  _gradientTextureHeight = 256;
+  _gradientTextureWidth = 256;
+  _gradientWidth = 3;
+  _maxNumGradients = _gradientTextureWidth / _gradientWidth;
+  gradientTexture.reset(new Texture());
 }
 
 TextureManager::~TextureManager()
@@ -139,8 +146,53 @@ void TextureManager::collectGarbage()
         _arcMap.erase(arcGarbage[i]);
       }
     }
-    
 }
+
+float TextureManager::addGradient(const common::ColorGradientPtr& inGradient)
+{
+  float result;
+  
+  assert(_gradients.size() < _maxNumGradients);
+  _gradients.push_back(inGradient);
+  updateGradientTexture();
+
+  float center = ceil(((float)_gradientWidth)/2.0f);
+  result = _gradients.size()*_gradientWidth;
+  result -= center;
+  result /= (float)_gradientTextureWidth;
+  
+  return result;
+}
+
+
+
+void TextureManager::updateGradientTexture()
+{
+  BitmapPtr bitmap = Bitmap::create(_gradientTextureWidth, _gradientTextureHeight, COMPONENTS_RGBA);
+  bitmap->clear(Color(0,0,0,0));
+  Texture::Params params;
+  params.minFilter = GL_NEAREST;
+  params.magFilter = GL_NEAREST;
+  
+  float x = 0.0f;
+  float gh = _gradientTextureHeight-1;
+  for(uint32_t gidx=0; gidx<_gradients.size(); ++gidx)
+  {
+    for(float y=0.0f; y<_gradientTextureHeight; y+=1.0f)
+    {
+      float ccoord = y/gh;
+      Color col = _gradients[gidx]->colorAt(ccoord);
+      for(uint32_t ix=0; ix<_gradientWidth; ++ix)
+      {
+        bitmap->pixel(x+ix, y, col);
+      }
+    }
+    x+=_gradientWidth;
+  }
+  
+  gradientTexture->init(bitmap, params);
+}
+
 
 }
 }

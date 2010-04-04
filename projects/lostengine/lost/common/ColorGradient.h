@@ -4,20 +4,26 @@
 #include "lost/common/Color.h"
 #include "lost/common/forward.h"
 #include <vector>
+#include "lost/common/ColorPoint.h"
+
 namespace lost
 {
 namespace common
 {
 // describes a one dimensional color gradient.
-// coordinates range from [0,1] and will be clamped in add()
+// coordinates must be in range [0,1] 
 // calling colorAt(c) will return the color of the gradient at coordinate c
 struct ColorGradient
 {
-  void add(float coord, const Color& col);
+  void add(const ColorPoint& cp);
   Color colorAt(float coord);
   // colors.size() must always be == coords.size()
-  std::vector<float> coords;
-  std::vector<Color> colors;  
+  std::vector<ColorPoint> colorPoints;  
+
+  static ColorGradientPtr create() {return ColorGradientPtr(new ColorGradient);}
+  
+  ColorPoint findNearestColorBefore(float coord);
+  ColorPoint findNearestColorAfter(float coord);
 };
 }
 }

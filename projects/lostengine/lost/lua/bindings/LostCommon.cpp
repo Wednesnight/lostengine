@@ -5,6 +5,8 @@
 #include "lost/common/Color.h"
 #include "lost/common/Data.h"
 #include "lost/common/Logger.h"
+#include "lost/common/ColorPoint.h"
+#include "lost/common/ColorGradient.h"
 
 using namespace luabind;
 using namespace lost::common;
@@ -56,6 +58,35 @@ namespace lost
        globals(state)["lost"]["common"]["blueColor"]        = Color(blueColor);
        globals(state)["lost"]["common"]["yellowColor"]      = Color(yellowColor);
        */
+    }
+
+    void LostCommonColorPoint(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("common")
+        [
+          class_<ColorPoint>("ColorPoint")
+            .def(constructor<>()) 
+            .def(constructor<float, const Color&>())
+        ]
+      ];
+    }
+
+    void LostCommonColorGradient(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("common")
+        [
+          class_<ColorGradient>("ColorGradient")
+          .def("add", &ColorGradient::add)
+          .scope
+          [
+            def("create", &ColorGradient::create)
+          ]
+        ]
+      ];
     }
 
     // from: http://osdir.com/ml/lang.lua.bind.user/2005-12/msg00034.html
@@ -113,6 +144,8 @@ namespace lost
     void LostCommon(lua_State* state)
     {
       LostCommonColor(state);
+      LostCommonColorPoint(state);
+      LostCommonColorGradient(state);
       LostCommonLog(state);
       LostCommonData(state);
     }

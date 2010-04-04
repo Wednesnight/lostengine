@@ -6,11 +6,13 @@ using "lost.math.Vec3"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.common.Color"
+using "lost.common.ColorPoint"
+using "lost.common.ColorGradient"
 using "lost.bitmap.Bitmap"
 
 using "lost.math.MatrixTranslation"
 
-screensize = Vec2(512,512)
+screensize = Vec2(800,600)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
 
 running = true
@@ -132,20 +134,52 @@ function startup(tasklet)
   rr = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), false, 8, 1);
   rr.material.blend = true
   rr.material.shader = lost.common.Shaders.textureShader()
-  rr.transform = MatrixTranslation(Vec3(200, 200, 0))
+  rr.transform = MatrixTranslation(Vec3(spacing, 200, 0))
 
   rr2 = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), true, 8, 1);
   rr2.material.blend = true
   rr2.material.color = Color(0,.6, .9, .5);
   rr2.material.shader = lost.common.Shaders.textureShader()
-  rr2.transform = MatrixTranslation(Vec3(200, 200, 0))
+  rr2.transform = MatrixTranslation(Vec3(spacing, 200, 0))
 
   rr3 = lost.mesh.RoundedRect.create(textureManager, Vec2(16, 16), true, 8, 2);
   rr3.material.blend = true
   rr3.material.color = Color(1,.6, .9, 1);
   rr3.material.shader = lost.common.Shaders.textureShader()
-  rr3.transform = MatrixTranslation(Vec3(280, 200, 0))
+  rr3.transform = MatrixTranslation(Vec3(spacing+80, 200, 0))
   rr3:updateCorners(false, true, true, true)
+  
+  -- GRADIENT  
+  g1 = ColorGradient.create()
+  g1:add(ColorPoint(0,Color(1,0,0)))
+  g1:add(ColorPoint(.5,Color(0,1,0)))
+  g1:add(ColorPoint(1,Color(0,0,1)))
+
+  g2 = ColorGradient.create()
+  g2:add(ColorPoint(0,Color(0,0,0)))
+  g2:add(ColorPoint(1,Color(1,1,1)))
+
+  g3 = ColorGradient.create()
+  g3:add(ColorPoint(0,Color(1,1,0)))
+  g3:add(ColorPoint(.25,Color(1,.5,0)))
+  g3:add(ColorPoint(.75,Color(.75,.8,.2)))
+  g3:add(ColorPoint(1,Color(.8,.8,.8)))
+
+  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g1));
+  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g2));
+  log.debug("!!!!!! gradcoord "..textureManager:addGradient(g3));
+--  log.debug("!!!!!! gradcoord "..textureManager:addGradient(gradient));
+
+  gradmesh = dcl.mesh:Quad
+  {
+    texture = textureManager.gradientTexture,
+    material = 
+    {
+      blend = true
+    },
+    transform = MatrixTranslation(lost.math.Vec3(300,spacing,0))
+  }
+
   
   rootNode = dcl.rg:Node
   {
@@ -183,6 +217,7 @@ function startup(tasklet)
     dcl.rg:Draw{mesh = rr2},
     dcl.rg:Draw{mesh = rr},
     dcl.rg:Draw{mesh = rr3},
+    dcl.rg:Draw{mesh = gradmesh},
   }
 
   tasklet.renderNode:add(rootNode)

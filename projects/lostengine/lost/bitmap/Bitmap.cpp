@@ -303,6 +303,7 @@ uint8_t* Bitmap::pixelPointer(uint32_t x, uint32_t y)
 
 void Bitmap::pixel(uint32_t x, uint32_t y, const common::Color& inColor)
 {
+  assert((x<width) && (y<height));
   uint8_t* target = pixelPointer(x,y);
   switch(format)
   {
