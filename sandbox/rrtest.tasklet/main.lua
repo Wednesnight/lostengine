@@ -140,11 +140,12 @@ function startup(tasklet)
   rr2.material.shader = lost.common.Shaders.textureShader()
   rr2.transform = MatrixTranslation(Vec3(200, 200, 0))
 
-  rr3 = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), true, 8, 1);
+  rr3 = lost.mesh.RoundedRect.create(textureManager, Vec2(16, 16), true, 8, 2);
   rr3.material.blend = true
-  rr3.material.color = Color(1,.6, .9, .5);
+  rr3.material.color = Color(1,.6, .9, 1);
   rr3.material.shader = lost.common.Shaders.textureShader()
-  rr3.transform = MatrixTranslation(Vec3(240, 200, 0))
+  rr3.transform = MatrixTranslation(Vec3(280, 200, 0))
+  rr3:updateCorners(false, true, true, true)
   
   rootNode = dcl.rg:Node
   {

@@ -35,6 +35,14 @@ struct RoundedRect : Mesh
   void updateTexcoords1(); // helper coords that allow multiplication of color gradient onto primary texture
 
   void commonInit(); // called by all constructors
+
+  void updateCorners(bool rbl, bool rbr, bool rtl, bool rtr);
+  
+  
+  bool roundBL;
+  bool roundBR;
+  bool roundTL;
+  bool roundTR;
   
   TextureManagerPtr textureManager;
   bool filled;
