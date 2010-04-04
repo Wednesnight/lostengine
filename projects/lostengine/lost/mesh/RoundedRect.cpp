@@ -51,6 +51,11 @@ void RoundedRect::commonInit()
 
   vertexBuffer->reset(numVertices);
   indexBuffer->reset(numIndices);
+
+  roundBL = true;
+  roundBR = true;
+  roundTL = true;
+  roundTR = true;
 }
 
 void RoundedRect::updateTexture()
@@ -72,6 +77,17 @@ void RoundedRect::updateSize(const Vec2& newSize)
 {
   size = newSize;
   updateVertices();
+}
+
+void RoundedRect::updateCorners(bool rbl, bool rbr, bool rtl, bool rtr)
+{
+  roundBL = rbl;
+  roundBR = rbr;
+  roundTL = rtl;
+  roundTR = rtr;
+  updateVertices();
+  updateTexcoords1();
+  collapseCorners();
 }
 
 // vertices are created in this order:
@@ -115,6 +131,29 @@ void RoundedRect::updateVertices()
 
 void RoundedRect::collapseCorners()
 {
+  if(!roundBL)
+  {
+    vertexBuffer->set(8, UT_position, Vec2(0,0));
+    vertexBuffer->set(13, UT_position, Vec2(0,0));
+  }
+
+  if(!roundBR)
+  {
+    vertexBuffer->set(11, UT_position, Vec2(size.x,0));
+    vertexBuffer->set(14, UT_position, Vec2(size.x,0));
+  }
+
+  if(!roundTL)
+  {
+    vertexBuffer->set(1, UT_position, Vec2(0,size.y));
+    vertexBuffer->set(4, UT_position, Vec2(0,size.y));
+  }
+
+  if(!roundTR)
+  {
+    vertexBuffer->set(2, UT_position, Vec2(size.x,size.y));
+    vertexBuffer->set(7, UT_position, Vec2(size.x,size.y));
+  }
 }
   
 void RoundedRect::updateIndices()
@@ -204,6 +243,30 @@ void RoundedRect::updateTexcoords0()
 
 void RoundedRect::updateTexcoords1()
 {
+  float bot = radius/size.y;
+  float top = (size.y-radius)/size.y;
+  float left = radius/size.x;
+  float right = (size.x-radius)/size.x;
+
+  vertexBuffer->set(0,UT_texcoord1, Vec2(0,1.0f));
+  vertexBuffer->set(1,UT_texcoord1, Vec2(left,1.0f));
+  vertexBuffer->set(2,UT_texcoord1, Vec2(right,1.0f));
+  vertexBuffer->set(3,UT_texcoord1, Vec2(1.0f,1.0f));
+
+  vertexBuffer->set(4,UT_texcoord1, Vec2(0,top));
+  vertexBuffer->set(5,UT_texcoord1, Vec2(left,top));
+  vertexBuffer->set(6,UT_texcoord1, Vec2(right,top));
+  vertexBuffer->set(7,UT_texcoord1, Vec2(1.0f,top));
+
+  vertexBuffer->set(8,UT_texcoord1, Vec2(0,bot));
+  vertexBuffer->set(9,UT_texcoord1, Vec2(left,bot));
+  vertexBuffer->set(10,UT_texcoord1, Vec2(right,bot));
+  vertexBuffer->set(11,UT_texcoord1, Vec2(1.0f,bot));
+
+  vertexBuffer->set(12,UT_texcoord1, Vec2(0,0.0f));
+  vertexBuffer->set(13,UT_texcoord1, Vec2(left,0.0f));
+  vertexBuffer->set(14,UT_texcoord1, Vec2(right,0.0f));
+  vertexBuffer->set(15,UT_texcoord1, Vec2(1.0f,0.0f));  
 }
 
 }
