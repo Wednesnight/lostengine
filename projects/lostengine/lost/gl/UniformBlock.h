@@ -14,13 +14,15 @@ namespace gl
 {
 struct UniformBlock
 {
+  typedef std::map<std::string, Variant> VariantMap;
   void setFloat(const std::string& name, float v);
-  void setVec2(const std::string& name, const math::Vec2& v);
-  void setVec3(const std::string& name, const math::Vec3& v);
+  void set(const std::string& name, const math::Vec2& v);
+  void set(const std::string& name, const math::Vec3& v);
+  void set(const std::string& name, const common::Color& v);
   
   static UniformBlockPtr create() { return UniformBlockPtr(new UniformBlock());}
   
-  std::map<std::string, Variant> variantMap;
+  VariantMap variantMap;
 };
 }
 }

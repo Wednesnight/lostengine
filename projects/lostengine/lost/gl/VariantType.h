@@ -9,6 +9,7 @@ namespace gl
 enum VariantType
 {
   VT_undefined=0,
+  VT_color,
   VT_float,
   VT_vec2,
   VT_vec3,

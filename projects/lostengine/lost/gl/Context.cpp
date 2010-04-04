@@ -11,9 +11,11 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/UniformBlock.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
+using namespace std;
 
 bool getBoolParam(GLenum pname)
 {
@@ -286,6 +288,24 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       shader(mat->shader);
     }
+
+    void Context::applyUniforms(UniformBlock* ub)
+    {
+      for(UniformBlock::VariantMap::iterator i = ub->variantMap.begin(); 
+          i != ub->variantMap.end();
+          ++i)
+      {
+        Variant& v = i->second;
+        string name = i->first;
+        switch(v.type)
+        {
+          case VT_color:currentShader->set(name, v.color);break;
+          case VT_float:currentShader->setFloat(name, v.f);break;
+          case VT_vec2:currentShader->set(name, v.vec2);break;
+          case VT_vec3:currentShader->set(name, v.vec3);break;
+        }
+      }
+    }
         
     void Context::draw(MeshPtr mesh)
     {
@@ -324,6 +344,11 @@ std::map<void*, Context*> glContext2lostGlContext;
         if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
         if(currentShader->hasUniform("texture1")) { currentShader->setInt("texture1", 1); }
 
+        // set mesh specific uniforms after automatic ones
+        if(mesh->material->uniforms)
+        {
+          applyUniforms(mesh->material->uniforms.get());
+        }
 
         // map vertex attributes from buffer to shader according to the vertex buffers attribute map
         VertexAttributeMap::iterator i = vb->vertexAttributeMap.begin();

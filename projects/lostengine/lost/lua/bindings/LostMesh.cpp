@@ -115,7 +115,7 @@ namespace lost
           class_<Material>("Material")
             .def("addTexture", &LostMeshMaterial_addTexture)
             .def_readwrite("shader", &Material::shader)
-            .def_readwrite("uniformBlock", &Material::uniformBlock)
+            .def_readwrite("uniforms", &Material::uniforms)
             .def_readwrite("color", &Material::color)
             .def_readwrite("blend", &Material::blend)
             .def_readwrite("blendSrc", &Material::blendSrc)

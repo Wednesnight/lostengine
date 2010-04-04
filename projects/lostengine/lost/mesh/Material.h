@@ -22,7 +22,7 @@ struct Material
   GLenum                      blendSrc;
   GLenum                      blendDest;
   gl::ShaderProgramPtr        shader; // FIXME: shaders will probably need dedicated parameter sets that can be associated with a certain material
-  gl::UniformBlockPtr         uniformBlock; // optional, will be applied to shader if present
+  gl::UniformBlockPtr         uniforms; // optional, will be applied to shader if present
   bool                        cull;
   GLenum                      cullMode;
   

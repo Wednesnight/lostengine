@@ -271,10 +271,11 @@ namespace lost
       [
         namespace_("gl")
         [
-          class_<UniformBlock>("Uniform")
+          class_<UniformBlock>("UniformBlock")
           .def("setFloat", &UniformBlock::setFloat)
-          .def("setVec2", &UniformBlock::setVec2)
-          .def("setVec3", &UniformBlock::setVec3)
+          .def("set", (void(UniformBlock::*)(const std::string&, const common::Color&))&UniformBlock::set)
+          .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec2&))&UniformBlock::set)
+          .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec3&))&UniformBlock::set)
           .scope
           [
             def("create", &UniformBlock::create)
