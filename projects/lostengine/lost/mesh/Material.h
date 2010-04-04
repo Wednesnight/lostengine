@@ -47,6 +47,11 @@ struct Material
     result.reset(new Material);
     return result;
   }
+  
+  void add(const gl::TexturePtr& tex)
+  {
+    textures.push_back(tex);
+  }
 };
 }
 }
