@@ -322,6 +322,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         }
         if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
         if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
+        if(currentShader->hasUniform("texture1")) { currentShader->setInt("texture1", 1); }
 
 
         // map vertex attributes from buffer to shader according to the vertex buffers attribute map
