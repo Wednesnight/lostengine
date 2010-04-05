@@ -38,7 +38,7 @@ struct TextureManager
   ArcMap _arcMap;
   
   uint32_t _gradientTextureHeight; // must be power of two
-  uint32_t _gradientTextureWidth; // must be power of two
+  uint32_t gradientTextureWidth; // must be power of two
   uint32_t _maxNumGradients;
   uint32_t _gradientWidth; // in pixels, should be 2n+1 to avoid filter artefacts
   gl::TexturePtr gradientTexture;

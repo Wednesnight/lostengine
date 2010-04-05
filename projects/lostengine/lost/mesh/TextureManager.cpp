@@ -20,9 +20,9 @@ using namespace std;
 TextureManager::TextureManager()
 {
   _gradientTextureHeight = 256;
-  _gradientTextureWidth = 256;
+  gradientTextureWidth = 256;
   _gradientWidth = 3;
-  _maxNumGradients = _gradientTextureWidth / _gradientWidth;
+  _maxNumGradients = gradientTextureWidth / _gradientWidth;
   gradientTexture.reset(new Texture());
 }
 
@@ -159,7 +159,7 @@ float TextureManager::addGradient(const common::ColorGradientPtr& inGradient)
   float center = ceil(((float)_gradientWidth)/2.0f);
   result = _gradients.size()*_gradientWidth;
   result -= center;
-  result /= (float)_gradientTextureWidth;
+  result /= (float)gradientTextureWidth;
   
   return result;
 }
@@ -168,7 +168,7 @@ float TextureManager::addGradient(const common::ColorGradientPtr& inGradient)
 
 void TextureManager::updateGradientTexture()
 {
-  BitmapPtr bitmap = Bitmap::create(_gradientTextureWidth, _gradientTextureHeight, COMPONENTS_RGBA);
+  BitmapPtr bitmap = Bitmap::create(gradientTextureWidth, _gradientTextureHeight, COMPONENTS_RGBA);
   bitmap->clear(Color(0,0,0,0));
   Texture::Params params;
   params.minFilter = GL_NEAREST;
