@@ -244,6 +244,7 @@ namespace lost
           .def("arcFilledTexture", &TextureManager::arcFilledTexture)
           .def("addGradient", &TextureManager::addGradient)
           .def_readonly("gradientTexture", &TextureManager::gradientTexture)
+          .def_readwrite("gradientTextureWidth", &TextureManager::gradientTextureWidth)
           .scope
           [
             def("create", (TextureManagerPtr(*)())&TextureManager::create)            

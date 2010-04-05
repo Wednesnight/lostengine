@@ -19,9 +19,10 @@ lost.common.Class "lost.declarative.Guiro" {}
 
 using "lost.guiro.event.Event"
 
-function Guiro:constructor(loader, themeManager)
+function Guiro:constructor(loader, themeManager, textureManager)
   self.loader = loader
-  self.themeManager = themeManager or lost.guiro.ThemeManager(loader)
+  self.themeManager = themeManager 
+  self.textureManager = textureManager
 end
 
 -- searches i ntable "source" for classes derived from View and adds
