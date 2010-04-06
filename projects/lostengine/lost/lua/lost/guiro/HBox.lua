@@ -5,8 +5,8 @@ require("lost.guiro.Bounds")
 
 lost.common.Class "lost.guiro.HBox" "lost.guiro.View" {}
 
-function HBox:constructor()
-	lost.guiro.View.constructor(self)
+function HBox:constructor(textureManager)
+	lost.guiro.View.constructor(self, textureManager)
 	self._mode = "spread" -- spread or stack
 	self._valign = "top" -- only used if mode != spread, 'top' 'center' or 'bottom'
 	self._halign = "center"

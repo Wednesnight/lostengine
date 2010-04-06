@@ -14,8 +14,9 @@ using "lost.guiro.yrel"
 using "lost.guiro.wrel"
 using "lost.guiro.hrel"
 
-function SpinEdit:constructor()
+function SpinEdit:constructor(textureManager)
   lost.guiro.Style(self)
+  self.textureManager = textureManager
   self.name = "default"
   self.targetClassName = "lost.guiro.SpinEdit"
 end
@@ -30,7 +31,7 @@ function SpinEdit:apply(target)
 end
 
 function SpinEdit:buildButton(vid, bounds, title, styleName)
-  local result = lost.guiro.Button()
+  local result = lost.guiro.Button(self.textureManager)
   result.id = vid
   result.bounds = bounds
   self.theme.themeManager:apply(result, self.theme.name, styleName)
@@ -46,7 +47,7 @@ function SpinEdit:buildButton(vid, bounds, title, styleName)
 end
 
 function SpinEdit:buildLabel(vid, bounds, styleName)
-  local result = lost.guiro.Label()
+  local result = lost.guiro.Label(self.textureManager)
   result.id = vid
   result.bounds = bounds
   result:fontSize(10)

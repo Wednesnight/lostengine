@@ -8,6 +8,7 @@ using "lost.resource.FilesystemRepository"
 using "lost.resource.ApplicationResourceRepository"
 using "lost.application.SpawnTaskletEvent"
 using "lost.application.currentTasklet"
+using "lost.common.Color"
 
 return dcl.guiro:Screen
 {
@@ -30,11 +31,13 @@ return dcl.guiro:Screen
     {
       id = "window",
       bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+      showFrame = true,
       dcl.guiro:Label
       {
+        hidden = false,
         id = "startupLabel",
         bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
-        text = "Drop tasklet directory to get started!"
+        text = "Drop tasklet directory to get started!",
       }
     }
   }

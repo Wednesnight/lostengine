@@ -14,8 +14,8 @@ Button.STATE_HOVER = "hover"
 Button.STATE_PUSHED = "pushed"
 Button.STATE_DISABLED = "disabled"
 
-function Button:constructor()
-	lost.guiro.View.constructor(self)
+function Button:constructor(textureManager)
+	lost.guiro.View.constructor(self, textureManager)
 
 	self._state = Button.STATE_NORMAL
   self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}

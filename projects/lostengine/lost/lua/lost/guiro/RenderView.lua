@@ -18,9 +18,8 @@ using "lost.rg.Node"
 --[[
     A RenderView manages a framebuffer that can be used to draw custom scenes within Guiro UIs
 ]]
-function RenderView:constructor()
-  lost.guiro.Image.constructor(self)
-
+function RenderView:constructor(textureManager)
+  lost.guiro.Image.constructor(self, textureManager)
   -- suppress frame by default
   self:showFrame(false)
   -- suppress background by default
