@@ -22,8 +22,8 @@ lost.common.Class "lost.guiro.Screen" "lost.guiro.View" "lost.guiro.ReceivesEven
 
 using "lost.application.currentTasklet"
 
-function Screen:constructor()
-  lost.guiro.View.constructor(self)
+function Screen:constructor(textureManager)
+  lost.guiro.View.constructor(self, textureManager)
   lost.guiro.ReceivesEvents.constructor(self)
 
   -- init size

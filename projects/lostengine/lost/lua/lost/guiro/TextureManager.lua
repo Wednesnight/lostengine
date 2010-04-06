@@ -7,11 +7,7 @@ lost.common.Class "lost.guiro.TextureManager" {}
 function TextureManager:constructor(gradientMaxWidthPixels)
   self._textureManager = lost.mesh.TextureManager.create()
   self._gradientName2Coord = {}
-  local gw = 256
-  if gradientMaxWidthPixels then
-    gw = gradientMaxWidthPixels
-  end
-  self._textureManager.gradientTextureWidth = gw
+  self._textureManager.gradientTextureWidth = gradientMaxWidthPixels
 end
 
 function TextureManager:addGradient(name, colorGradient)

@@ -46,6 +46,7 @@ typedef long GLsizeiptr;
 #define GL_DOUBLE                         0x140A
 
 /* BlendingFactorDest */
+#define GL_ONE                            1
 #define GL_SRC_ALPHA                      0x0302
 #define GL_ONE_MINUS_SRC_ALPHA            0x0303
 

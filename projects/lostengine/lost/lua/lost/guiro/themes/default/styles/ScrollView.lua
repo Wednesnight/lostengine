@@ -23,8 +23,9 @@ local hrel = lost.guiro.hrel
 
 lost.common.Class "lost.guiro.themes.default.styles.ScrollView" "lost.guiro.Style" {}
 
-function ScrollView:constructor()
+function ScrollView:constructor(textureManager)
   lost.guiro.Style(self)
+  self.textureManager = textureManager
   self.name = "default"
   self.targetClassName = "lost.guiro.ScrollView"
 end
@@ -41,7 +42,7 @@ function ScrollView:apply(target)
 end
 
 function ScrollView:buildContentView(vid)
-  local result = lost.guiro.View()
+  local result = lost.guiro.View(self.textureManager)
   result.id = vid
   self.theme.themeManager:apply(result, self.theme.name, self.name)
   result:showFrame(false)
@@ -50,7 +51,7 @@ function ScrollView:buildContentView(vid)
 end
 
 function ScrollView:buildScrollbar(vid, orientation)
-  local result = lost.guiro.Scrollbar()
+  local result = lost.guiro.Scrollbar(self.textureManager)
   result.id = vid
   self.theme.themeManager:apply(result, self.theme.name, self.name)
   result:orientation(orientation)

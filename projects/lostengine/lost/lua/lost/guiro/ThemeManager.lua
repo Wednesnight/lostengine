@@ -6,11 +6,13 @@ require("lost.guiro.themes.default.Theme")
 
 lost.common.Class "lost.guiro.ThemeManager" {}
 
-function ThemeManager:constructor(loader)
+function ThemeManager:constructor(loader, textureManager)
+  assert(textureManager)
   self.themes = {}
   self.defaultTheme = "default"
   self.defaultStyle = "default"
-  self:addTheme(lost.guiro.themes.default.Theme(loader))
+  self.textureManager = textureManager
+  self:addTheme(lost.guiro.themes.default.Theme(loader, self.textureManager))
 end
 
 function ThemeManager:addTheme(theme)

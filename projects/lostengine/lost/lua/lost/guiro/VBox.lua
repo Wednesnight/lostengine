@@ -4,8 +4,8 @@ require("lost.guiro.View")
 
 lost.common.Class "lost.guiro.VBox" "lost.guiro.View" {}
 
-function VBox:constructor()
-	lost.guiro.View.constructor(self)
+function VBox:constructor(textureManager)
+	lost.guiro.View.constructor(self, textureManager)
 	self._mode = "spread" -- spread or stack
 	self._valign = "top" -- only used if mode != spread, 'top' 'center' or 'bottom'
 	self._halign = "center"

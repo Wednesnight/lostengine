@@ -38,7 +38,8 @@ using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.MatrixTranslation"
 
-function View:constructor()
+function View:constructor(textureManager)
+  assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
   -- call interface ctors
   lost.guiro.HasLayout.constructor(self)
   lost.guiro.HasSubviews.constructor(self)
@@ -82,15 +83,27 @@ function View:constructor()
   self.rootNode:add(self.disableScissorNode)
 
   -- meshes and draw nodes
-  self.backgroundMesh = lost.mesh.Quad.create(self.rect)
-  self.backgroundMesh.material.shader = lost.common.Shaders.colorShader()
+  self.backgroundMesh = lost.mesh.RoundedRect.create(textureManager._textureManager, 
+                                                     Vec2(self.rect.width, self.rect.height),
+                                                     true,
+                                                     8,
+                                                     1)
+  self.backgroundMesh:updateCorners(false, false, false, false)
+  self.backgroundMesh.material.shader = lost.common.Shaders.textureShader()
+  self.backgroundMesh.material.blend = true  
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
-  self.frameMesh = lost.mesh.Rect.create(self.rect)
-  self.frameMesh.material.shader = lost.common.Shaders.colorShader()
+  self.frameMesh = lost.mesh.RoundedRect.create(textureManager._textureManager,
+                                                Vec2(self.rect.width, self.rect.height),
+                                                false,
+                                                8,
+                                                1)
+  self.frameMesh:updateCorners(false, false, false, false)                                                
+  self.frameMesh.material.shader = lost.common.Shaders.textureShader()
+  self.frameMesh.material.blend = true  
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
   self.frameNode.name = "drawViewFrame"

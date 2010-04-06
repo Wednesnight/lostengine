@@ -25,8 +25,8 @@ lost.common.Class "lost.guiro.Image" "lost.guiro.View" {}
 
 --[[  An Image displays one texture inside it's bounds.
 ]]
-function Image:constructor()
-  lost.guiro.View.constructor(self)
+function Image:constructor(textureManager)
+  lost.guiro.View.constructor(self, textureManager)
 
   self._texture = nil
   self._textureMesh = nil

@@ -194,6 +194,22 @@ namespace lost
       }
       return err;
     }
+
+    std::string State::getFilenameFuncnameLine()
+    {
+      lua_Debug debug;
+      string result = "(Lua)";
+      if(lua_getstack(state, 1, &debug)==1)
+      {
+        lua_getinfo(state, "Sln", &debug);
+        string filename = getScriptFilename(debug.source, "<unknown>");
+        string funcname = debug.name ? debug.name : "<unknown>";
+        ostringstream os;
+        os <<"("<< filename << " " << funcname << " " << debug.currentline<<")";
+        result = os.str();
+      }
+      return result;
+    }
     
   }
 }

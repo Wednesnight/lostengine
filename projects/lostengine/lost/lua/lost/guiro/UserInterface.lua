@@ -7,8 +7,8 @@ require("lost.guiro.View")
   ]]
 lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
 
-function UserInterface:constructor()
-  lost.guiro.View.constructor(self)
+function UserInterface:constructor(textureManager)
+  lost.guiro.View.constructor(self, textureManager)
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 

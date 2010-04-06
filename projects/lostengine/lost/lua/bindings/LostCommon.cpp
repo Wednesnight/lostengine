@@ -7,8 +7,10 @@
 #include "lost/common/Logger.h"
 #include "lost/common/ColorPoint.h"
 #include "lost/common/ColorGradient.h"
+#include "lost/lua/State.h"
 
 using namespace luabind;
+using namespace std;
 using namespace lost::common;
 
 namespace lost
@@ -102,31 +104,37 @@ namespace lost
       return std::string(lua_tostring(interpreter, -1), lua_strlen(interpreter, -1));
     }
     
+    std::string getFilenameFuncnameLine(lua_State* state)
+    {
+      State* ls = State::stateFromState(state);
+      return ls->getFilenameFuncnameLine();
+    }
+    
     void debug(luabind::object obj)
     {
 #if defined(LOST_LOGGER_ENABLE_DOUT)
-			lost::common::Logger::logMessage("DEBUG", "(Lua)", luabind_tostring(obj));
+			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
 #endif
     }
     
     void info(luabind::object obj)
     {
 #if defined(LOST_LOGGER_ENABLE_IOUT)
-			lost::common::Logger::logMessage("INFO", "(Lua)", luabind_tostring(obj));
+			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
 #endif
     }
     
     void warn(luabind::object obj)
     {
 #if defined(LOST_LOGGER_ENABLE_WOUT)
-			lost::common::Logger::logMessage("WARNING", "(Lua)", luabind_tostring(obj));
+			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
 #endif
     }
     
     void error(luabind::object obj)
     {
 #if defined(LOST_LOGGER_ENABLE_EOUT)
-			lost::common::Logger::logMessage("ERROR", "(Lua)", luabind_tostring(obj));
+			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
 #endif
     }
     

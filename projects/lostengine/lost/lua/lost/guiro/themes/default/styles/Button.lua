@@ -17,8 +17,9 @@ local hrel = lost.guiro.hrel
 
 lost.common.Class "lost.guiro.themes.default.styles.Button" "lost.guiro.Style" {}
 
-function Button:constructor(loader, df)
+function Button:constructor(loader, df, textureManager)
   lost.guiro.Style(self)
+  self.textureManager = textureManager
   self.caps = {left=3, right=3, top=3, bottom=3}
   local texParams = lost.gl.Texture.Params()
   texParams.minFilter = gl.GL_LINEAR
@@ -50,7 +51,7 @@ function Button:apply(target)
 end
 
 function Button:buildBackgroundImage(tex, vid)
-  local result = lost.guiro.Image()
+  local result = lost.guiro.Image(self.textureManager)
   result.id = vid
   result:texture(tex)
   result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
@@ -65,7 +66,7 @@ function Button:buildBackgroundImage(tex, vid)
 end
 
 function Button:buildLabel(col)
-  local result = lost.guiro.Label()
+  local result = lost.guiro.Label(self.textureManager)
   result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
   result:font(self.defaultFont)
   result:fontSize(12)

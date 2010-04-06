@@ -55,6 +55,8 @@ namespace lost
       // returns memory usage of the lua state in kilobytes
       int memUsage() { return lua_getgccount(state); }
 
+      std::string getFilenameFuncnameLine(); // formatted for logging
+
       lua_State* state;
       int callstackSize;
       std::map<std::string, std::string> fileHashes;

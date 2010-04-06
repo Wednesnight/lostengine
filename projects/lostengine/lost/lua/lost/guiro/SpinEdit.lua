@@ -6,8 +6,8 @@ require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.SpinEdit" "lost.guiro.View" {}
 
-function SpinEdit:constructor()
-  lost.guiro.View.constructor(self)
+function SpinEdit:constructor(textureManager)
+  lost.guiro.View.constructor(self, textureManager)
   
   self._value = 0
   self._min = 0
