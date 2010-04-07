@@ -34,7 +34,7 @@ function MainView:constructor(tasklet)
     dcl.guiro:UserInterface
     {
       id = "ui",
-      bounds = Bounds(xcenter(), ycenter(), wabs(250), habs(185)),
+      bounds = Bounds(xcenter(), ycenter(), wabs(250), habs(135)),
       dcl.guiro:Window
       {
         id = "window",
@@ -75,23 +75,9 @@ function MainView:constructor(tasklet)
             spacing = 5,
             dcl.guiro:Button
             {
-              id = "newGameButton",
+              id = "startButton",
               bounds = Bounds(xleft(), ytop(), wrel(1), habs(25)),
-              title = "New Game (Esc)"
-            },
-            dcl.guiro:Button
-            {
-              id = "optionsButton",
-              bounds = Bounds(xleft(), ytop(), wrel(1), habs(25)),
-              title = "Options",
-              enabled = false
-            },
-            dcl.guiro:Button
-            {
-              id = "helpButton",
-              bounds = Bounds(xleft(), ytop(), wrel(1), habs(25)),
-              title = "Help",
-              enabled = false
+              title = "Start"
             },
             dcl.guiro:Button
             {
