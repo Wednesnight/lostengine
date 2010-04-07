@@ -1,6 +1,7 @@
 module("lost.animation", package.seeall)
 
 require("lost.common.Class")
+require("lost.common.CallLater")
 
 lost.common.Class "lost.animation.Animation" {}
 
