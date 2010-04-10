@@ -52,6 +52,9 @@ namespace lost
       GLenum cullFaceMode;
       static const uint32_t _maxTextures = 32;
       GLuint activeTextures[_maxTextures]; // hardcoded 32 texture limit, index represents value set with glActiveTexture
+      static const uint32_t _maxVertexAttributes = 32;
+      bool _vertexAttributeEnabled[_maxVertexAttributes]; // true if glEnableVertexAttribArray was called for index i
+      bool _vertexAttributeRequired[_maxVertexAttributes]; // true if the vertex attribute enable state changed
       /**
        * forward declaration for platform specific stuff
        */
@@ -85,7 +88,7 @@ namespace lost
       void vsync(bool enable); // true to enable vsync to prevent tearing
       void multithreaded(bool enable); // true to enable multithreaded OpenGL execution on Mac
       
-      void bindFramebuffer(FrameBufferPtr& fbo);
+      void bindFramebuffer(const FrameBufferPtr& fbo);
       void bindFramebuffer(GLuint fbo);
 
       void bindDefaultFramebuffer();
@@ -103,19 +106,17 @@ namespace lost
       void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
       void clearColor(const common::Color& col); // sets the current clear color to col
       
-      void camera(camera::CameraPtr cam);
+      void camera(const camera::CameraPtr& cam);
       
       void clear(GLbitfield flags);    
       
-      void activeTexture(GLenum tex);
-      void bindTexture(GLuint tex);
-      void bindTextures(const std::vector<TexturePtr>& textures);
-      void material(mesh::MaterialPtr mat);
+      void activeTexture(GLenum tex); // sets the currently active texture unit
+      void bindTexture(GLuint tex); // binds tex to currently active texture unit
+      void bindTextures(const std::vector<TexturePtr>& textures); // binds textures to the units equivalent to the index in the vector
+      void material(const mesh::MaterialPtr& mat); // applies the Material parameters to the state
       
-      void draw(mesh::MeshPtr mesh);
-      void drawSeparateBuffers(mesh::MeshPtr mesh);
-      void drawInterleavedBuffers(mesh::MeshPtr mesh);
-      void shader(ShaderProgramPtr prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
+      void draw(const mesh::MeshPtr& mesh);
+      void shader(const ShaderProgramPtr& prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
       // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
       void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
       
@@ -125,6 +126,10 @@ namespace lost
       
       void bind(Buffer* buffer);
       void applyUniforms(UniformBlock* ub); // applies a uniform block to the current shader
+      void vertexAttributeEnable(uint32_t idx, bool enable);
+      void clearVertexAttributeEnabled();
+      void clearVertexAttributeRequired();
+      void disableUnrequiredVertexAttributes();
     };
   }
 }

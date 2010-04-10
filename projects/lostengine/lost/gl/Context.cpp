@@ -113,6 +113,8 @@ std::map<void*, Context*> glContext2lostGlContext;
       {
         activeTextures[i] = 0;
       }
+      clearVertexAttributeEnabled();
+      clearVertexAttributeRequired();
     }
     
     Context::~Context()
@@ -133,7 +135,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentBuffer = NULL;
     }
 
-    void Context::bindFramebuffer(FrameBufferPtr& fbo)
+    void Context::bindFramebuffer(const FrameBufferPtr& fbo)
     {
       fbo->bind();
     }
@@ -205,7 +207,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     }
 
     // only update if the new cam is either a new one or the same one, but with the dirty flag set. 
-    void Context::camera(camera::CameraPtr cam)
+    void Context::camera(const camera::CameraPtr& cam)
     {
       if (currentCam != cam || currentCam->needsUpdate)
       {
@@ -251,7 +253,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-    void Context::shader(ShaderProgramPtr prog)
+    void Context::shader(const ShaderProgramPtr& prog)
     {
       if(currentShader && !prog)
         currentShader->disable();
@@ -262,7 +264,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-    void Context::material(MaterialPtr mat)
+    void Context::material(const MaterialPtr& mat)
     {
       if(mat->textures.size()>0)
       {
@@ -306,9 +308,52 @@ std::map<void*, Context*> glContext2lostGlContext;
         }
       }
     }
-        
-    void Context::draw(MeshPtr mesh)
+
+    void Context::vertexAttributeEnable(uint32_t idx, bool enable)
     {
+      _vertexAttributeRequired[idx] = enable;
+      if(_vertexAttributeEnabled[idx] != enable)
+      {
+        _vertexAttributeEnabled[idx] = enable;
+        if(enable){
+          glEnableVertexAttribArray(idx);GLDEBUG;
+        }
+        else {
+          glDisableVertexAttribArray(idx);GLDEBUG;          
+        }
+      }
+    }
+    
+    void Context::clearVertexAttributeEnabled()
+    {
+      for(uint32_t i=0; i<_maxVertexAttributes; ++i)
+      {
+        _vertexAttributeEnabled[i] = false;
+      }
+    }
+    
+    void Context::clearVertexAttributeRequired()
+    {
+      for(uint32_t i=0; i<_maxVertexAttributes; ++i)
+      {
+        _vertexAttributeRequired[i] = false;
+      }
+    }
+
+    void Context::disableUnrequiredVertexAttributes()
+    {
+      for(uint32_t i=0; i<_maxVertexAttributes; ++i)
+      {
+        if(!_vertexAttributeRequired[i] && _vertexAttributeEnabled[i])
+        {
+          vertexAttributeEnable(i, false);
+        }
+      }
+    }
+        
+    void Context::draw(const MeshPtr& mesh)
+    {
+      clearVertexAttributeRequired();
       HybridIndexBuffer* ib = mesh->indexBuffer.get();
       HybridVertexBuffer* vb = mesh->vertexBuffer.get();
 
@@ -361,19 +406,15 @@ std::map<void*, Context*> glContext2lostGlContext;
           {
             const VertexAttribute& va = currentShader->name2vertexAttribute[attributeName];
             const AttributePointerConfig apc = vb->pointerConfigForUsageType(ut);
-            glEnableVertexAttribArray(va.location);GLDEBUG;
+            vertexAttributeEnable(va.location, true);
             glVertexAttribPointer(va.location, apc.size, apc.type, apc.normalise, apc.stride, apc.offset);GLDEBUG;
             enabledVertexAttributes.push_back(va.location);
           }
         }
       }
       
+      disableUnrequiredVertexAttributes();
       glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
-      // disable vertex attributes when we're done
-      for (std::vector<GLint>::iterator idx = enabledVertexAttributes.begin(); idx != enabledVertexAttributes.end(); ++idx)
-      {
-        glDisableVertexAttribArray(*idx);
-      }
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it
