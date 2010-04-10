@@ -499,7 +499,6 @@
 		EA2E6ACD0F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA2E6AD10F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
 		EA2E6AD50F9E45E300696425 /* LostMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA2E6AC90F9E45E300696425 /* LostMesh.cpp */; };
-		EA3B944A0E0462B200B6423B /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
 		EA3B95380E04639D00B6423B /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94720E04639D00B6423B /* Logger.cpp */; };
 		EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94750E04639D00B6423B /* Profiler.cpp */; };
 		EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94FB0E04639D00B6423B /* Platform.cpp */; };
@@ -763,6 +762,7 @@
 		EAD9DC89111E2F6200A21AC7 /* RangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */; };
 		EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */; };
 		EADE515F113BC9A8005F7BB6 /* ApplicationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */; };
+		EAE108D0116C05140057432F /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
 		EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
@@ -2281,7 +2281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3B944A0E0462B200B6423B /* GLee.c in Sources */,
 				EA3B95380E04639D00B6423B /* Logger.cpp in Sources */,
 				EA3B953B0E04639D00B6423B /* Profiler.cpp in Sources */,
 				EA3B95AB0E04639D00B6423B /* Platform.cpp in Sources */,
@@ -2516,6 +2515,7 @@
 				EAA861C41162D92D004B5D3D /* ColorGradient.cpp in Sources */,
 				EA9365AA1163F0A50013F765 /* RoundedRect.cpp in Sources */,
 				EA92A2F611682A5700B32ECE /* UniformBlock.cpp in Sources */,
+				EAE108D0116C05140057432F /* GLee.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
