@@ -7,6 +7,7 @@ namespace lost
 {
   namespace application
   {
+    int runResourceTasklet(int argc, char *argv[], const std::string& relativePathToTaskletInResourceDir);
     int runTasklet(int argc, char *argv[]);
     int runTasklet(int argc, char *argv[], Tasklet* t);      
   }
