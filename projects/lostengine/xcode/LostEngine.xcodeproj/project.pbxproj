@@ -2007,7 +2007,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\ncp -R ../lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\ncp -Rf ../Launcher.tasklet \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n";
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost\"\nrm -fR \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/Launcher.tasklet\"\n#cp -R ../lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\n#cp -Rf ../Launcher.tasklet \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"\ncp -Rf ../resources/* \"${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
