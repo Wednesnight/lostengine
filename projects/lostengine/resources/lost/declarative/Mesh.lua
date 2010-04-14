@@ -38,10 +38,11 @@ end
 
 function Mesh:Obj(def)
   local filename = def["filename"] -- path to OBJ file to load
-  if filename == nil then
-    error("filename is mandatory for mesh:Obj")
+  local file = def["file"] -- handle to OBJ file
+  if filename == nil and file == nil then
+    error("filename/file is mandatory for mesh:Obj")
   end
-  local filedata = self.loader:load(filename)
+  local filedata = file or self.loader:load(filename)
   local objmesh = lost.mesh.Loader.obj(filedata)
   objmesh.material.shader = lost.common.Shaders.colorShader()
   self:applyMaterial(objmesh, def) 
