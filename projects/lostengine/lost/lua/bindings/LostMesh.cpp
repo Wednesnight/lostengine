@@ -16,6 +16,7 @@
 #include "lost/gl/UniformBlock.h"
 #include "lost/mesh/TextureManager.h"
 #include "lost/mesh/RoundedRect.h"
+#include "lost/mesh/Sphere.h"
 
 using namespace luabind;
 using namespace lost::mesh;
@@ -200,6 +201,23 @@ namespace lost
       ];
     }
 
+    void LostMeshSphere(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("mesh")
+        [
+          class_<Sphere, Mesh>("Sphere")
+            .def("updateRadius", &Sphere::updateRadius)
+            .def("updateSubdivisions", &Sphere::updateSubdivisions)
+            .scope
+            [
+              def("create", &Sphere::create)
+            ]
+        ]
+      ];
+    }
+    
     void LostMeshScaleGrid(lua_State* state)
     {
       module(state, "lost")
@@ -265,6 +283,7 @@ namespace lost
       LostMeshMaterial(state);
       LostMeshQuad(state);
       LostMeshDisc(state);
+      LostMeshSphere(state);
       LostMeshScaleGrid(state);
       LostMeshRoundedRect(state);      
       LostMeshTextureManager(state);

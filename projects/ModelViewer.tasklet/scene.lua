@@ -3,7 +3,22 @@ using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.Rect"
 
-camPos = Vec3(1,2,2)
+local camPos = Vec3(1,2,2)
+local controller = require("controller")
+controller.sphereSubdivisions = 16
+local sphere = lost.mesh.Sphere.create(1.0, controller.sphereSubdivisions)
+sphere.material.shader = dcl.gl:Shader
+{
+  filename = "light"
+}
+sphere.material.shader:enable()
+sphere.material.shader:set("lightPosition", camPos)
+sphere.material.shader:disable()
+controller.model = dcl.rg:Draw
+{
+  name = "model",
+  mesh = sphere
+}
 
 return
 {
@@ -27,5 +42,6 @@ return
   dcl.rg:DepthTest
   {
     true
-  }
+  },
+  controller.model
 }
