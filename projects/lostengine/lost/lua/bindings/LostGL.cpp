@@ -106,6 +106,11 @@ namespace lost
       }
     }
 
+    TexturePtr FrameBuffer_depthTexture(FrameBufferPtr framebuffer)
+    {
+      return framebuffer->depthBuffer->texture;
+    }
+    
     void LostGLFrameBuffer(lua_State* state)
     {
       module(state, "lost")
@@ -118,6 +123,7 @@ namespace lost
               def("create", &FrameBuffer::create)
             ]
             .def("colorTexture", &FrameBuffer_colorTexture)
+            .def("depthTexture", &FrameBuffer_depthTexture)
             .def("resize", &FrameBuffer::resize)
         ]
       ];
