@@ -26,7 +26,7 @@ function RenderView:constructor(textureManager)
   self:showBackground(false)
 
   self._framebuffer = lost.gl.FrameBuffer.create(Vec2(16,16), gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
-  self:texture(self._framebuffer:colorTexture(0))
+  self:texture(self._framebuffer:depthTexture())
 
   self._renderViewNode = Node.create()
   self._renderViewNode.name = "renderViewNode"
