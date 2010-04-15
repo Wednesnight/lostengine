@@ -14,6 +14,9 @@
 		3E27FE640EFAB09C00DFF147 /* LostLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */; };
 		3E27FE660EFAB09C00DFF147 /* LostLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */; };
 		3E27FE680EFAB09C00DFF147 /* LostLGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */; };
+		3E32F9FD1176F3C40014D096 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F9FC1176F3C40014D096 /* Sphere.cpp */; };
+		3E32F9FE1176F3C40014D096 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F9FC1176F3C40014D096 /* Sphere.cpp */; };
+		3E32F9FF1176F3C40014D096 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E32F9FC1176F3C40014D096 /* Sphere.cpp */; };
 		3E35F5BD0FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		3E35F5BF0FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
 		3E35F5C20FA04F65007DDAB1 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */; };
@@ -795,6 +798,7 @@
 		3E0358590FA24F5600EE43A8 /* TestLostMathQuat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostMathQuat.cpp; path = test/TestLostMathQuat.cpp; sourceTree = "<group>"; };
 		3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindingHelpers.cpp; sourceTree = "<group>"; };
 		3E27FE620EFAB09C00DFF147 /* LostLGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostLGL.cpp; path = bindings/LostLGL.cpp; sourceTree = "<group>"; };
+		3E32F9FC1176F3C40014D096 /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = mesh/Sphere.cpp; sourceTree = "<group>"; };
 		3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Loader.cpp; path = mesh/Loader.cpp; sourceTree = "<group>"; };
 		3E376F4A0E543F6F0050A5DF /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = camera/Camera.cpp; sourceTree = "<group>"; };
 		3E3B3D860E9D5E2800DD2D4E /* Camera2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera2D.cpp; path = camera/Camera2D.cpp; sourceTree = "<group>"; };
@@ -1765,6 +1769,7 @@
 		EA4F9C110F8B6A5C00967F8D /* mesh */ = {
 			isa = PBXGroup;
 			children = (
+				3E32F9FC1176F3C40014D096 /* Sphere.cpp */,
 				EAA4520D1152CFE200FFE886 /* Disc.cpp */,
 				3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */,
 				EAF56B3F111CD794008D5A0D /* Mesh.cpp */,
@@ -2254,6 +2259,7 @@
 				3EAF8E2D115A0ABB004BD15F /* stat.c in Sources */,
 				3EAF8E2E115A0ABB004BD15F /* write.c in Sources */,
 				3EAF8E2F115A0ABB004BD15F /* zip.c in Sources */,
+				3E32F9FD1176F3C40014D096 /* Sphere.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2504,6 +2510,7 @@
 				EA9365AA1163F0A50013F765 /* RoundedRect.cpp in Sources */,
 				EA92A2F611682A5700B32ECE /* UniformBlock.cpp in Sources */,
 				EAE108D0116C05140057432F /* GLee.c in Sources */,
+				3E32F9FE1176F3C40014D096 /* Sphere.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2792,6 +2799,7 @@
 				3EAF8E10115A0ABB004BD15F /* stat.c in Sources */,
 				3EAF8E11115A0ABB004BD15F /* write.c in Sources */,
 				3EAF8E12115A0ABB004BD15F /* zip.c in Sources */,
+				3E32F9FF1176F3C40014D096 /* Sphere.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

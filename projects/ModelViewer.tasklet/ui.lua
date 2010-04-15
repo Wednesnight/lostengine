@@ -17,6 +17,19 @@ using "lost.common.Color"
 
 local controller = require("controller")
 local scene = require("scene")
+controller.renderView = dcl.guiro:RenderView
+{
+  id = "scene",
+  bounds = Bounds(xleft({abs = 1}), ybottom({abs = 1}), wrel(1, -2), hrel(1, -2)),
+  rendergraph = scene,
+  listeners =
+  {
+    mouseDown = controller.sceneMouseDown,
+    mouseMove = controller.sceneMouseMove,
+    mouseUp = controller.sceneMouseUp,
+    drop = controller.droppedModel
+  }
+}
 
 return dcl.guiro:Screen
 {
@@ -58,19 +71,7 @@ return dcl.guiro:Screen
         id = "renderView",
         bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -20), hrel(1, -50)),
         showFrame = true,
-        dcl.guiro:RenderView
-        {
-          id = "scene",
-          bounds = Bounds(xleft({abs = 1}), ybottom({abs = 1}), wrel(1, -2), hrel(1, -2)),
-          rendergraph = scene,
-          listeners =
-          {
-            mouseDown = controller.sceneMouseDown,
-            mouseMove = controller.sceneMouseMove,
-            mouseUp = controller.sceneMouseUp,
-            drop = controller.droppedModel
-          }
-        }
+        controller.renderView
       }
     }
   }

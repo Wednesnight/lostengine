@@ -154,6 +154,9 @@ namespace lost
       globals(state)["gl"]["GL_SCISSOR_TEST"] = GL_SCISSOR_TEST;
       globals(state)["gl"]["GL_SRC_ALPHA"] = GL_SRC_ALPHA;
       globals(state)["gl"]["GL_TEXTURE_2D"] = GL_TEXTURE_2D;
+      globals(state)["gl"]["GL_LINE_LOOP"] = GL_LINE_LOOP;
+      globals(state)["gl"]["GL_LINES"] = GL_LINES;
+      globals(state)["gl"]["GL_POINTS"] = GL_POINTS;
       globals(state)["gl"]["GL_TRIANGLES"] = GL_TRIANGLES;
       globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
 //      globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
