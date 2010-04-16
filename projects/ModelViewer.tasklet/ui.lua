@@ -17,11 +17,28 @@ using "lost.common.Color"
 
 local controller = require("controller")
 local scene = require("scene")
+local shadowScene = require("shadowScene")
+
+controller.debugView = dcl.guiro:RenderView
+{
+  id = "debugScene",
+  bounds = Bounds(xleft({abs = 1}), ybottom({abs = 1}), wrel(.5, -2), hrel(1, -2)),
+  rendergraph = scene,
+  listeners =
+  {
+    mouseDown = controller.sceneMouseDown,
+    mouseMove = controller.sceneMouseMove,
+    mouseUp = controller.sceneMouseUp,
+    drop = controller.droppedModel
+  }
+}
+controller.debugView:texture(controller.debugView._framebuffer:depthTexture())
+
 controller.renderView = dcl.guiro:RenderView
 {
   id = "scene",
-  bounds = Bounds(xleft({abs = 1}), ybottom({abs = 1}), wrel(1, -2), hrel(1, -2)),
-  rendergraph = scene,
+  bounds = Bounds(xright({abs = 1}), ybottom({abs = 1}), wrel(.5, -2), hrel(1, -2)),
+  rendergraph = shadowScene,
   listeners =
   {
     mouseDown = controller.sceneMouseDown,
@@ -71,6 +88,7 @@ return dcl.guiro:Screen
         id = "renderView",
         bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -20), hrel(1, -50)),
         showFrame = true,
+        controller.debugView,
         controller.renderView
       }
     }
