@@ -28,14 +28,26 @@ controller.keyHandler = function(event)
     else
       controller.model.mesh.drawMode = gl.GL_TRIANGLES
     end
+    if controller.debugModel.mesh.drawMode == gl.GL_TRIANGLES then
+      controller.debugModel.mesh.drawMode = gl.GL_LINE_LOOP
+    elseif controller.debugModel.mesh.drawMode == gl.GL_LINE_LOOP then
+      controller.debugModel.mesh.drawMode = gl.GL_POINTS
+    else
+      controller.debugModel.mesh.drawMode = gl.GL_TRIANGLES
+    end
+    controller.debugView:needsRedraw()
     controller.renderView:needsRedraw()
   elseif event.character == "+" then
     controller.sphereSubdivisions = controller.sphereSubdivisions + 1
     controller.model.mesh:updateSubdivisions(controller.sphereSubdivisions)
+    controller.debugModel.mesh:updateSubdivisions(controller.sphereSubdivisions)
+    controller.debugView:needsRedraw()
     controller.renderView:needsRedraw()
   elseif event.character == "-" and controller.sphereSubdivisions > 12 then
     controller.sphereSubdivisions = controller.sphereSubdivisions - 1
     controller.model.mesh:updateSubdivisions(controller.sphereSubdivisions)
+    controller.debugModel.mesh:updateSubdivisions(controller.sphereSubdivisions)
+    controller.debugView:needsRedraw()
     controller.renderView:needsRedraw()
   end
 end
@@ -68,7 +80,8 @@ controller.droppedModel = function(event)
         if rg ~= nil then
           rg:add(controller.model)
         end
-        event.target:needsRedraw()
+        controller.debugView:needsRedraw()
+        controller.renderView:needsRedraw()
       else
         controller.model.mesh = dcl.mesh:Obj
         {
@@ -81,7 +94,8 @@ controller.droppedModel = function(event)
             }
           }
         }
-        event.target:needsRedraw()
+        controller.debugView:needsRedraw()
+        controller.renderView:needsRedraw()
       end
     end
   end
@@ -103,7 +117,9 @@ controller.sceneMouseMove = function(event)
       controller.angle.y = math.fmod(deltaX + controller.angle.y, 360)
 
       controller.model.mesh.transform = MatrixRotX(controller.angle.x) * MatrixRotY(controller.angle.y)
-      event.target:needsRedraw()
+      controller.debugModel.mesh.transform = MatrixRotX(controller.angle.x) * MatrixRotY(controller.angle.y)
+      controller.debugView:needsRedraw()
+      controller.renderView:needsRedraw()
     end
   end
 end
