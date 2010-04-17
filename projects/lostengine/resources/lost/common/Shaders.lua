@@ -36,3 +36,14 @@ function gradientShader()
   end
   return _gradientShader
 end
+
+function lightShader()
+  if _lightShader == nil then
+    if lost.platform.isIPhone() then
+      _lightShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/es/basic_light")      
+    else
+      _lightShader = lost.gl.loadShader(lost.application.currentTasklet.loader, "lost/resources/glsl/basic_light")
+    end
+  end
+  return _lightShader
+end

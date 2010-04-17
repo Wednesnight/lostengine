@@ -19,7 +19,13 @@ function Mesh:applyMaterial(target, def)
   if def["material"] ~= nil then
     local mat = def["material"]
     for k,v in pairs(mat) do
-      target.material[k] = v
+      if k == "textures" then
+        for ktex,tex in next,v do
+          target.material:addTexture(tex)
+        end
+      else
+        target.material[k] = v
+      end
     end
 	end
 end
@@ -110,3 +116,16 @@ function Mesh:ScaleGrid(def)
   return result
 end
 
+function Mesh:Sphere(def)
+  if def.radius == nil then error("needs radius", 2) end
+  if def.subdivisions == nil then def.subdivisions = 16 end
+
+  local result = lost.mesh.Sphere.create(def.radius, def.subdivisions)
+  if def.transform ~= nil then
+    result.transform = def.transform
+  end
+  result.material.shader = lost.common.Shaders.lightShader()
+  self:applyMaterial(result, def)
+
+  return result
+end
