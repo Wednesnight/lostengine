@@ -25,12 +25,19 @@ function startup(tasklet)
     end
   end)
   tasklet.eventDispatcher:addEventListener(ResizeEvent.MAIN_WINDOW_RESIZE, function(event)
+    scene.fb:resize(Vec2(event.width, event.height))
     local camNode = scene.rg:recursiveFindByName("cam")
     if camNode ~= nil then
-      local current = camNode.cam:viewport()
-      camNode.cam:viewport(Rect(current.x, current.y, event.width, event.height))
+      camNode.cam:viewport(Rect(0, 0, event.width, event.height))
     end
-    scene.fb:resize(Vec2(event.width, event.height))
+    camNode = scene.debugNode:recursiveFindByName("cam")
+    if camNode ~= nil then
+      camNode.cam:viewport(Rect(0, 0, event.width, event.height))
+    end
+    local quad = scene.debugNode:recursiveFindByName("quad")
+    if quad ~= nil then
+      quad.mesh:updateSize(Vec2(event.width, event.height))
+    end
   end)
 
   return true
@@ -39,7 +46,6 @@ end
 function update(tasklet)
   scene.firstPass:setup()
   scene.firstPass:process(tasklet.window.context)
-  scene.firstPass:cleanup()
   if debug then
     scene.debugNode:process(tasklet.window.context)
   else

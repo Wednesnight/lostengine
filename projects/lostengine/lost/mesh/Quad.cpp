@@ -18,6 +18,7 @@ Quad::Quad(const math::Rect& inRect)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   this->resetBuffers(layout, gl::ET_u16);
   
   this->drawMode = GL_TRIANGLES;
@@ -41,6 +42,7 @@ Quad::Quad(common::DataPtr data, bool flip)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
@@ -64,6 +66,7 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
@@ -87,6 +90,7 @@ Quad::Quad(const std::vector<math::Rect>& rects)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
   this->drawMode = GL_TRIANGLES;
@@ -127,6 +131,7 @@ void Quad::init(const std::vector<math::Rect>& rects,
   
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
   
@@ -169,11 +174,25 @@ void Quad::createVertices(uint32_t quadNum, const math::Rect& inRect)
 {
   uint32_t verticesPerQuad = 4;
   uint32_t offset = quadNum*verticesPerQuad;
-    
-  this->setVertex(offset+0,math::Vec2(inRect.x,inRect.y));
-  this->setVertex(offset+1,math::Vec2(inRect.x+inRect.width,inRect.y));
-  this->setVertex(offset+2,math::Vec2(inRect.x+inRect.width,inRect.y+inRect.height));
-  this->setVertex(offset+3,math::Vec2(inRect.x,inRect.y+inRect.height));
+
+  this->setVertex(offset+0, math::Vec2(inRect.x,inRect.y));
+  this->setVertex(offset+1, math::Vec2(inRect.x+inRect.width,inRect.y));
+  this->setVertex(offset+2, math::Vec2(inRect.x+inRect.width,inRect.y+inRect.height));
+  this->setVertex(offset+3, math::Vec2(inRect.x,inRect.y+inRect.height));
+
+  // calculate normals
+  math::Vec3 v1(inRect.x,inRect.y,0);
+  math::Vec3 v2(inRect.x+inRect.width,inRect.y,0);
+  math::Vec3 v3(inRect.x+inRect.width,inRect.y+inRect.height,0);
+  math::Vec3 v4(inRect.x,inRect.y+inRect.height,0);
+  math::Vec3 normal1 = cross(v2-v1, v3-v2);
+  normalise(normal1);
+  math::Vec3 normal2 = cross(v4-v3, v1-v4);
+  normalise(normal2);
+  this->vertexBuffer->set(offset+0, gl::UT_normal, normal1+normal2);
+  this->vertexBuffer->set(offset+1, gl::UT_normal, normal1);
+  this->vertexBuffer->set(offset+2, gl::UT_normal, normal1+normal2);
+  this->vertexBuffer->set(offset+3, gl::UT_normal, normal1);
 }
             
 void Quad::updateSize(const math::Vec2& size)

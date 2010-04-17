@@ -51,6 +51,9 @@ function Mesh:Obj(def)
   local filedata = file or self.loader:load(filename)
   local objmesh = lost.mesh.Loader.obj(filedata)
   objmesh.material.shader = lost.common.Shaders.colorShader()
+  if def.transform ~= nil then
+    objmesh.transform = def.transform
+  end
   self:applyMaterial(objmesh, def) 
 	return objmesh
 end
