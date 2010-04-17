@@ -22,7 +22,8 @@ namespace lost
         [
           class_<Camera>("Camera")
             .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
-            .def("viewport", (Rect&(Camera::*)())&Camera::viewport),
+            .def("viewport", (Rect&(Camera::*)())&Camera::viewport)
+            .def("projectionMatrix", &Camera::projectionMatrix),
           class_<Camera2D, Camera>("Camera2D")
             .scope
             [
@@ -46,6 +47,8 @@ namespace lost
             .def("rotate", &Camera3D::rotate)
             .def("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
             .def("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
+            .def("up", (Vec3(Camera3D::*)()) &Camera3D::up)
+            .def("up", (void(Camera3D::*)(const Vec3&)) &Camera3D::up)
             .scope
             [
               def("create", &Camera3D::create)

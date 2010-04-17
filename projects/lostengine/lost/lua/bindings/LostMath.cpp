@@ -134,9 +134,13 @@ namespace lost
         namespace_("math")
         [
           class_<Matrix>("Matrix")
-          .def(const_self * other<Matrix>())
-          .def(const_self * other<Vec3>())
-          .def(const_self * other<Vec4>()),
+            .def(constructor<>())
+            .def(constructor<const Matrix&>())
+            .def(const_self * other<Matrix>())
+            .def(const_self * other<Vec3>())
+            .def(const_self * other<Vec4>())
+            .def("transpose", &Matrix::transpose)
+            .def("row", (void(Matrix::*)(long, const Vec4&))&Matrix::row),
           class_<MatrixRotX, Matrix>("MatrixRotX")
             .def(constructor<float>()),
           class_<MatrixRotY, Matrix>("MatrixRotY")
@@ -144,7 +148,11 @@ namespace lost
           class_<MatrixRotZ, Matrix>("MatrixRotZ")
             .def(constructor<float>()),
           class_<MatrixTranslation, Matrix>("MatrixTranslation")
-            .def(constructor<const lost::math::Vec3&>())
+            .def(constructor<const lost::math::Vec3&>()),
+          class_<MatrixScaling, Matrix>("MatrixScaling")
+            .def(constructor<const lost::math::Vec3&>()),
+          class_<MatrixLookAt, Matrix>("MatrixLookAt")
+            .def(constructor<const lost::math::Vec3&, const lost::math::Vec3&, const lost::math::Vec3&>())
         ]
       ];
     }
