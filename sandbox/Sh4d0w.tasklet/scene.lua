@@ -9,6 +9,7 @@ using "lost.math.Vec3"
 using "lost.math.Vec4"
 using "lost.math.MatrixTranslation"
 using "lost.math.MatrixRotX"
+using "lost.math.MatrixRotY"
 using "lost.math.MatrixScaling"
 using "lost.gl.FrameBuffer"
 
@@ -18,6 +19,16 @@ function createScene(loader)
   
   result.fb = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
     gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
+  
+  result.shadowShader = dcl.gl:Shader
+  {
+    filename = "shadow",
+    params =
+    {
+      lightPosition = Vec3(1,5,1),
+      textureMatrix = lost.math.Matrix()
+    }
+  }
   
   result.rg = dcl.rg:Node
   {
@@ -46,23 +57,29 @@ function createScene(loader)
     },
     dcl.rg:Draw
     {
-      name = "sphere",
-      mesh = dcl.mesh:Sphere
+      name = "magnolia",
+      mesh = dcl.mesh:Obj
       {
-        radius = 1.0,
+        filename = "lost/resources/models/magnolia_tri.obj",
         material =
         {
-          shader = dcl.gl:Shader
-          {
-            filename = "lost/resources/glsl/basic_light",
-            params =
-            {
-              lightPosition = Vec3(1,5,1)
-            }
-          }
+          shader = result.shadowShader
         }
       }
-    }
+    },
+    dcl.rg:Draw
+    {
+      name = "magnolia2",
+      mesh = dcl.mesh:Obj
+      {
+        filename = "lost/resources/models/magnolia_tri.obj",
+        transform = MatrixTranslation(Vec3(1,2,0)) * MatrixScaling(Vec3(1,1,1)),
+        material =
+        {
+          shader = result.shadowShader
+        }
+      }
+    },
   }
 
   result.firstPass = 
@@ -75,18 +92,19 @@ function createScene(loader)
         local currentSec = lost.platform.currentTimeSeconds()
         self.angle = math.fmod((currentSec - self.passedSec) * 50 + self.angle, 360)
         camNode.cam:position(Vec3(1,5,1))
-        camNode.cam:rotate(Vec3(0,self.angle,0))
+        local model = self.node:recursiveFindByName("magnolia")
+        if model ~= nil then
+          model.mesh.transform = MatrixRotY(self.angle)
+        end
+        model = self.node:recursiveFindByName("magnolia2")
+        if model ~= nil then
+          model.mesh.transform = MatrixTranslation(Vec3(1,2,0)) * MatrixScaling(Vec3(1,1,1)) * MatrixRotY(self.angle)
+        end
         self.passedSec = currentSec
       end
     end,
     process = function(self, context)
       self.node:process(context)
-    end,
-    cleanup = function(self, context)
-      local camNode = self.node:recursiveFindByName("cam")
-      if camNode ~= nil then
-        camNode.cam:rotate(Vec3(0,-self.angle,0))
-      end
     end,
     node = dcl.rg:Node
     {
@@ -102,14 +120,11 @@ function createScene(loader)
     setup = function(self)
       local camNode = self.node:recursiveFindByName("cam")
       if camNode ~= nil then
-        local plane = self.node:recursiveFindByName("plane")
-        if plane ~= nil then
-          local textureMatrix = MatrixTranslation(Vec3(.5,.5,.5)) * MatrixScaling(Vec3(.5,.5,.5)) *
-            camNode.cam:projectionMatrix()
-          plane.mesh.material.shader:enable()
-          plane.mesh.material.shader:set("textureMatrix", textureMatrix)
-          plane.mesh.material.shader:disable()
-        end
+        local textureMatrix = MatrixTranslation(Vec3(.5,.5,.5)) * MatrixScaling(Vec3(.5,.5,.5)) *
+          camNode.cam:projectionMatrix()
+        result.shadowShader:enable()
+        result.shadowShader:set("textureMatrix", textureMatrix)
+        result.shadowShader:disable()
         camNode.cam:position(Vec3(3,4,3))
       end
     end,
@@ -129,10 +144,7 @@ function createScene(loader)
           transform = MatrixTranslation(Vec3(0,-2,0)) * MatrixRotX(90),
           material =
           {
-            shader = dcl.gl:Shader
-            {
-              filename = "shadow"
-            },
+            shader = result.shadowShader,
             textures =
             {
               result.fb:depthTexture()
@@ -156,6 +168,7 @@ function createScene(loader)
     },
     dcl.rg:Camera2D
     {
+      name = "cam",
       viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height)
     },
     dcl.rg:DepthTest
@@ -164,6 +177,7 @@ function createScene(loader)
     },
     dcl.rg:Draw
     {
+      name = "quad",
       mesh = dcl.mesh:Quad
       {
         texture = result.fb:depthTexture()
