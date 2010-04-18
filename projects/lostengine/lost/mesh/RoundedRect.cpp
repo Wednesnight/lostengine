@@ -24,7 +24,7 @@ RoundedRect::RoundedRect(const TextureManagerPtr& tm,
   filled = f;
   lineWidth = lw;
   radius = r;
-  size = sz;
+  _size = sz;
   commonInit();
   updateTexture(); 
   updateVertices();
@@ -73,13 +73,13 @@ void RoundedRect::updateTexture()
   textureManager->collectGarbage();
 }
 
-void RoundedRect::updateSize(const Vec2& newSize)
+void RoundedRect::size(const Vec2& newSize)
 {
-  size = newSize;
+  _size = newSize;
   updateVertices();
 }
 
-void RoundedRect::updateCorners(bool rbl, bool rbr, bool rtl, bool rtr)
+void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
 {
   roundBL = rbl;
   roundBR = rbr;
@@ -97,13 +97,13 @@ void RoundedRect::updateCorners(bool rbl, bool rbr, bool rtl, bool rtr)
 // 12 13 14 15
 void RoundedRect::updateVertices()
 {
-  float top = size.y;
+  float top = _size.y;
   float top2 = top - radius;
   float bot = 0;
   float bot2 = bot + radius;
   float left = 0;
   float left2 = left+radius;
-  float right = size.x;
+  float right = _size.x;
   float right2 = right - radius;
   
   vertexBuffer->set(0, UT_position, Vec2(left,top));
@@ -143,8 +143,8 @@ void RoundedRect::collapseCorners()
 
   if(!roundBR)
   {
-    vertexBuffer->set(11, UT_position, Vec2(size.x,0));
-    vertexBuffer->set(14, UT_position, Vec2(size.x,0));
+    vertexBuffer->set(11, UT_position, Vec2(_size.x,0));
+    vertexBuffer->set(14, UT_position, Vec2(_size.x,0));
 
     vertexBuffer->set(11,UT_texcoord1, Vec2(1,0));    
     vertexBuffer->set(14,UT_texcoord1, Vec2(1,0));    
@@ -152,8 +152,8 @@ void RoundedRect::collapseCorners()
 
   if(!roundTL)
   {
-    vertexBuffer->set(1, UT_position, Vec2(0,size.y));
-    vertexBuffer->set(4, UT_position, Vec2(0,size.y));
+    vertexBuffer->set(1, UT_position, Vec2(0,_size.y));
+    vertexBuffer->set(4, UT_position, Vec2(0,_size.y));
 
     vertexBuffer->set(1,UT_texcoord1, Vec2(0,1));    
     vertexBuffer->set(4,UT_texcoord1, Vec2(0,1));    
@@ -161,8 +161,8 @@ void RoundedRect::collapseCorners()
 
   if(!roundTR)
   {
-    vertexBuffer->set(2, UT_position, Vec2(size.x,size.y));
-    vertexBuffer->set(7, UT_position, Vec2(size.x,size.y));
+    vertexBuffer->set(2, UT_position, _size);
+    vertexBuffer->set(7, UT_position, _size);
 
     vertexBuffer->set(2,UT_texcoord1, Vec2(1,1));    
     vertexBuffer->set(7,UT_texcoord1, Vec2(1,1));    
@@ -256,10 +256,10 @@ void RoundedRect::updateTexcoords0()
 
 void RoundedRect::updateTexcoords1()
 {
-  float bot = radius/size.y;
-  float top = (size.y-radius)/size.y;
-  float left = radius/size.x;
-  float right = (size.x-radius)/size.x;
+  float bot = radius/_size.y;
+  float top = (_size.y-radius)/_size.y;
+  float left = radius/_size.x;
+  float right = (_size.x-radius)/_size.x;
 
   vertexBuffer->set(0,UT_texcoord1, Vec2(0,1.0f));
   vertexBuffer->set(1,UT_texcoord1, Vec2(left,1.0f));

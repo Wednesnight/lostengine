@@ -88,7 +88,7 @@ function View:constructor(textureManager)
                                                      true,
                                                      8,
                                                      1)
-  self.backgroundMesh:updateCorners(false, false, false, false)
+  self.backgroundMesh:roundCorners(false, false, false, false)
   self.backgroundMesh.material.shader = lost.common.Shaders.textureShader()
   self.backgroundMesh.material.blend = true  
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
@@ -101,7 +101,7 @@ function View:constructor(textureManager)
                                                 false,
                                                 8,
                                                 1)
-  self.frameMesh:updateCorners(false, false, false, false)                                                
+  self.frameMesh:roundCorners(false, false, false, false)                                                
   self.frameMesh.material.shader = lost.common.Shaders.textureShader()
   self.frameMesh.material.blend = true  
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
@@ -209,11 +209,11 @@ function View:afterLayout()
   lost.guiro.HasLayout.afterLayout(self)
 
   -- update background mesh
-  self.backgroundMesh:updateSize(Vec2(self.rect.width, self.rect.height))
+  self.backgroundMesh:size(Vec2(self.rect.width, self.rect.height))
   self.backgroundMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
 
   -- update frame mesh
-  self.frameMesh:updateSize(Vec2(self.rect.width, self.rect.height))
+  self.frameMesh:size(Vec2(self.rect.width, self.rect.height))
   self.frameMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
 
   -- update scissoring

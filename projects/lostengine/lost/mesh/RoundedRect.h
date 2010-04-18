@@ -25,7 +25,8 @@ struct RoundedRect : Mesh
         return RoundedRectPtr(new RoundedRect(inTextureManager, inSize, filled, radius, lineWidth));
        };
 
-  void updateSize(const math::Vec2& newSize); // recalculates vertices, using Vec2 x/y as width/height
+  void size(const math::Vec2& newSize); // recalculates vertices, using Vec2 x/y as width/height
+  void roundCorners(bool rbl, bool rbr, bool rtl, bool rtr);
 
   void updateVertices();
   void collapseCorners();
@@ -36,9 +37,6 @@ struct RoundedRect : Mesh
 
   void commonInit(); // called by all constructors
 
-  void updateCorners(bool rbl, bool rbr, bool rtl, bool rtr);
-  
-  
   bool roundBL;
   bool roundBR;
   bool roundTL;
@@ -48,7 +46,7 @@ struct RoundedRect : Mesh
   bool filled;
   float lineWidth;
   float radius;
-  math::Vec2 size; // needed for secondary texture coordinate generation
+  math::Vec2 _size; // needed for secondary texture coordinate generation
 
   uint32_t numVertices;
   uint32_t numIndices;

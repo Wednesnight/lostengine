@@ -124,7 +124,7 @@ function startup(tasklet)
   rr3.material.color = Color(1,.6, .9, 1);
   rr3.material.shader = lost.common.Shaders.textureShader()
   rr3.transform = MatrixTranslation(Vec3(spacing+80, 200, 0))
-  rr3:updateCorners(false, true, true, true)
+  rr3:roundCorners(false, true, true, true)
 
   
   -- GRADIENT  
@@ -181,7 +181,7 @@ function startup(tasklet)
   rr4.material.uniforms = lost.gl.UniformBlock.create()
   rr4.material.uniforms:setFloat("gradientCoord", g3coord)
   rr4.material:add(textureManager.gradientTexture)
-  rr4:updateCorners(false, false, false, true)
+  rr4:roundCorners(false, false, false, true)
 
   gradmesh = dcl.mesh:Quad
   {

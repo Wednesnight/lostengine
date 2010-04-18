@@ -18,7 +18,7 @@ function rrgrad(rect, filled, radius, lineWidth, gcoord, cc)
     local tlr = cc.tlr and cc.tlr or true
     local trr = cc.trr and cc.trr or true
     log.debug(tostring(blr).." "..tostring(brr).." "..tostring(tlr).." "..tostring(trr))
-    result:updateCorners(cc.blr, cc.brr, cc.tlr, cc.trr)
+    result:roundCorners(cc.blr, cc.brr, cc.tlr, cc.trr)
   end
 
   return result
