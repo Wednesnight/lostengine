@@ -51,7 +51,7 @@ function Screen:constructor(textureManager)
   self:showFrame(false)
   
   if currentTasklet ~= nil then
-    currentTasklet.renderNode:add(self.rootNode)
+    currentTasklet.uiNode:add(self.rootNode)
   end
 
   -- trigger updates
