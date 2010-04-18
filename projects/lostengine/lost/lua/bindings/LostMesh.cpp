@@ -241,8 +241,8 @@ namespace lost
         namespace_("mesh")
         [
           class_<RoundedRect, Mesh>("RoundedRect")
-          .def("updateSize", &RoundedRect::updateSize)
-          .def("updateCorners", &RoundedRect::updateCorners)
+          .def("size", &RoundedRect::size)
+          .def("roundCorners", &RoundedRect::roundCorners)
           .scope
           [
             def("create", &RoundedRect::create)            
