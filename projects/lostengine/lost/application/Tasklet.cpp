@@ -19,8 +19,11 @@
 #include "lost/application/WindowEvent.h"
 #include "lost/event/Receive.h"
 #include "lost/rg/Node.h"
+#include "lost/rg/Clear.h"
+#include "lost/rg/ClearColor.h"
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/gl/gl.h"
 
 using namespace boost;
 using namespace luabind;
@@ -30,6 +33,7 @@ using namespace lost::lua;
 using namespace lost::platform;
 using namespace lost::resource;
 using namespace lost::rg;
+using namespace lost::common;
 
 namespace lost
 {
@@ -53,7 +57,11 @@ namespace lost
       loader = inLoader;
       eventDispatcher.reset(new event::EventDispatcher());
       lua.reset(new State(loader));
+      clearNode.reset(new Node());
+      clearNode->add(NodePtr(new ClearColor(Color(1,1,0))));
+      clearNode->add(NodePtr(new Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)));
       renderNode.reset(new Node());
+      uiNode.reset(new Node());
       updateQueue.reset(new Queue());
 
       // bind lostengine lua mappings
@@ -115,7 +123,9 @@ namespace lost
       lsh->luaUpdate = nil;
       lsh->luaShutdown = nil;
       lsh.reset();
+      clearNode.reset();
       renderNode.reset();
+      uiNode.reset();
       updateQueue.reset();
       loader.reset(); // loader is also present in lua state, so kill it first
       eventDispatcher.reset(); 
@@ -129,7 +139,9 @@ namespace lost
       // render
       if(window != NULL)
       {
+        clearNode->process(window->context);
         renderNode->process(window->context);
+        uiNode->process(window->context);
         window->context->swapBuffers();
       }    
     }

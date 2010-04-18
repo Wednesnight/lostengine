@@ -16,14 +16,14 @@ require("lost.guiro.themes.default.styles.Button")
 require("lost.guiro.themes.default.styles.RenderView")
 require("lost.guiro.themes.default.styles.SpinEdit")
 
-local Vec2 = lost.math.Vec2
+using("lost.math.Vec2")
 
 lost.common.Class "lost.guiro.themes.default.Theme" "lost.guiro.Theme" {}
 
 function Theme:constructor(loader, textureManager)
   lost.guiro.Theme(self, loader)
   self.ftlib = lost.font.freetype.Library.create()
-  self.defaultFont = lost.font.TrueTypeFont.create(self.ftlib, loader:load("lost/guiro/themes/default/resources/Vera.ttf"))
+  self.defaultFont = lost.font.TrueTypeFont.create(self.ftlib, loader:load("lost/resources/ttf-bitstream-vera-1.10/Vera.ttf"))
   self.defaultFont.atlasSize = Vec2(256, 256)
   self.name = "default"
   self.styles = {} -- FIXME why is styles not properly initialised from base class constructor?

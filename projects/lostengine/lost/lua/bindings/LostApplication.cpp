@@ -275,7 +275,9 @@ namespace lost
             .def_readonly("window", &Tasklet::window)
             .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
             .def_readonly("updateQueue", &Tasklet::updateQueue)
+            .def_readonly("clearNode", &Tasklet::clearNode)
             .def_readonly("renderNode", &Tasklet::renderNode)
+            .def_readonly("uiNode", &Tasklet::uiNode)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
         ]
       ];

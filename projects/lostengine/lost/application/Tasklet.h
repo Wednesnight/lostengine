@@ -58,7 +58,9 @@ namespace lost
       resource::LoaderPtr             loader;
 
 	    Window*                         window;         // contains the window pointer after init() if it could be created
+      rg::NodePtr                     clearNode;      // default clear node, always present
       rg::NodePtr                     renderNode;     // render graph root node
+      rg::NodePtr                     uiNode;         // guiro.Screen will add its render nodes here
       QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
       
 

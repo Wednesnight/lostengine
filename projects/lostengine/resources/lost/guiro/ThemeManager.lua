@@ -3,6 +3,7 @@ module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.themes.default.Theme")
+require("lost.guiro.themes.pebble.Theme")
 
 lost.common.Class "lost.guiro.ThemeManager" {}
 
@@ -13,6 +14,7 @@ function ThemeManager:constructor(loader, textureManager)
   self.defaultStyle = "default"
   self.textureManager = textureManager
   self:addTheme(lost.guiro.themes.default.Theme(loader, self.textureManager))
+  self:addTheme(lost.guiro.themes.pebble.Theme(loader, self.textureManager))
 end
 
 function ThemeManager:addTheme(theme)
