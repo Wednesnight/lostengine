@@ -15,6 +15,7 @@ local debug = false
 function startup(tasklet)
   tasklet.name = _meta.name
 --  tasklet.waitForEvents = true
+  tasklet.clearNode.active = false
 
   scene = createScene(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(KeyEvent.KEY_DOWN, function(event)
