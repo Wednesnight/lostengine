@@ -120,7 +120,8 @@ namespace lost
           class_<FrameBuffer>("FrameBuffer")
             .scope
             [
-              def("create", &FrameBuffer::create)
+              def("create", &FrameBuffer::create),
+              def("setup", &FrameBuffer::setup)
             ]
             .def("colorTexture", &FrameBuffer_colorTexture)
             .def("depthTexture", &FrameBuffer_depthTexture)
