@@ -228,11 +228,13 @@ namespace lost
       }
       if (depthBits != -1)
       {
+        doCheck = true;
         AttachmentPtr attachment = Attachment::create(size, depthBits, Attachment::UT_texture);
         attachDepthBuffer(attachment);
       }
       if (stencilBits != -1)
       {
+        doCheck = true;
         AttachmentPtr attachment = Attachment::create(size, stencilBits, Attachment::UT_renderBuffer);
         attachStencilBuffer(attachment);
       }
@@ -256,6 +258,27 @@ namespace lost
     {
       colorBuffers[index] = buffer;
       buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
+
+      // try other bit formats if attaching fails
+      while (!isComplete())
+      {
+        switch (buffer->bitFormat)
+        {
+          case GL_RGB:
+            throw runtime_error("FrameBuffer: couldn't determine compatible color buffer bit format");
+          case GL_RGBA:
+            buffer->resetBitFormat(GL_RGB);
+            break;
+          case GL_RGBA8:
+            buffer->resetBitFormat(GL_RGBA);
+            break;
+          default:
+            ostringstream os;
+            os << "invalid color buffer bit format: " << buffer->bitFormat;
+            throw runtime_error(os.str());
+        }
+        buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
+      }
       check();
     }
     
@@ -400,6 +423,47 @@ namespace lost
     {
       bindFramebuffer();
       check();
+    }
+
+    /*
+     * Produces some debug output regarding FBO sizing and bit formats
+     */
+    void FrameBuffer::setup()
+    {
+      FrameBufferPtr fb;
+      /*
+       * defaults
+       */
+      Vec2 size(0,0);
+      GLenum color = GL_RGBA8;
+      GLenum depth = LGL_DEPTH_COMPONENT32;
+      
+      bool done = false;
+      unsigned int step = 1;
+
+      IOUT("Determine sizing");
+      while (!done) {
+        try {
+          fb = FrameBuffer::create(size, color, depth);
+          fb->check();
+          IOUT("Step " << step++ << " (ok): " << fb->size.x << "x" << fb->size.y);
+          done = true;
+        } catch (std::exception& e) {
+          size.x = nextPowerOf2(size.x);
+          size.y = nextPowerOf2(size.y);
+          WOUT("Step " << step++ << " (failed): " << size.x << "x" << size.y << ", " << e.what());
+          size.x += 1;
+          size.y += 1;
+        }
+      }
+
+      IOUT("FBO setup");
+      IOUT("---------");
+      IOUT("  size            : " << fb->size.x << "x" << fb->size.y);
+      if (fb->colorBuffers.size() > 0) IOUT("  color component : " << ((fb->colorBuffers[0]->bitFormat == GL_RGB) ? "RGB" : (fb->colorBuffers[0]->bitFormat == GL_RGBA) ? "RGBA" : "RGBA8"));
+      if (fb->depthBuffer) IOUT("  depth component : " << ((fb->depthBuffer->bitFormat == LGL_DEPTH_COMPONENT16) ? "16" : (fb->depthBuffer->bitFormat == LGL_DEPTH_COMPONENT24) ? "24" : "32"));
+      
+      fb.reset();
     }
 
   }

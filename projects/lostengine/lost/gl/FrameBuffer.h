@@ -100,6 +100,7 @@ namespace lost
       
       void bind();
 
+      static void setup();
     };
 
   }

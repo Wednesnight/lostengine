@@ -32,6 +32,8 @@ function startup(tasklet)
   -- finally, setup events
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
+  lost.gl.FrameBuffer.setup()
+
   return true
 end
 
