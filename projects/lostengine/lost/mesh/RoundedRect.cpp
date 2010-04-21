@@ -23,7 +23,7 @@ RoundedRect::RoundedRect(const TextureManagerPtr& tm,
   textureManager = tm;
   filled = f;
   lineWidth = lw;
-  radius = r;
+  _radius = r;
   _size = sz;
   commonInit();
   updateTexture(); 
@@ -62,9 +62,9 @@ void RoundedRect::updateTexture()
 {
   TexturePtr tex;
   if(filled)
-    tex = textureManager->arcFilledTexture(radius);
+    tex = textureManager->arcFilledTexture(_radius);
   else
-    tex = textureManager->arcTexture(radius, lineWidth);
+    tex = textureManager->arcTexture(_radius, lineWidth);
   
   if(material->textures.size() > 0)
     material->textures[0] = tex;
@@ -77,6 +77,14 @@ void RoundedRect::size(const Vec2& newSize)
 {
   _size = newSize;
   updateVertices();
+}
+
+void RoundedRect::radius(float r)
+{
+  _radius = r;
+  updateVertices();
+  updateTexcoords1();
+  collapseCorners();
 }
 
 void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
@@ -98,13 +106,13 @@ void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
 void RoundedRect::updateVertices()
 {
   float top = _size.y;
-  float top2 = top - radius;
+  float top2 = top - _radius;
   float bot = 0;
-  float bot2 = bot + radius;
+  float bot2 = bot + _radius;
   float left = 0;
-  float left2 = left+radius;
+  float left2 = left+_radius;
   float right = _size.x;
-  float right2 = right - radius;
+  float right2 = right - _radius;
   
   vertexBuffer->set(0, UT_position, Vec2(left,top));
   vertexBuffer->set(1, UT_position, Vec2(left2,top));
@@ -256,10 +264,10 @@ void RoundedRect::updateTexcoords0()
 
 void RoundedRect::updateTexcoords1()
 {
-  float bot = radius/_size.y;
-  float top = (_size.y-radius)/_size.y;
-  float left = radius/_size.x;
-  float right = (_size.x-radius)/_size.x;
+  float bot = _radius/_size.y;
+  float top = (_size.y-_radius)/_size.y;
+  float left = _radius/_size.x;
+  float right = (_size.x-_radius)/_size.x;
 
   vertexBuffer->set(0,UT_texcoord1, Vec2(0,1.0f));
   vertexBuffer->set(1,UT_texcoord1, Vec2(left,1.0f));
