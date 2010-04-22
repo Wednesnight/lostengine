@@ -112,6 +112,7 @@ function startup(tasklet)
   rr.material.blend = true
   rr.material.shader = lost.common.Shaders.textureShader()
   rr.transform = MatrixTranslation(Vec3(spacing, 200, 0))
+  rr:showSides(true, true, true, false)
 
   rr2 = lost.mesh.RoundedRect.create(textureManager, Vec2(64, 64), true, 8, 1);
   rr2.material.blend = true

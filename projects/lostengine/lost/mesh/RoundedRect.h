@@ -36,6 +36,7 @@ struct RoundedRect : Mesh
   void updateIndices();
   void updateTexcoords0(); // for the disc/ring texture
   void updateTexcoords1(); // helper coords that allow multiplication of color gradient onto primary texture
+  void updateSides();
 
   void commonInit(); // called by all constructors
 
@@ -43,6 +44,12 @@ struct RoundedRect : Mesh
   bool roundBR;
   bool roundTL;
   bool roundTR;
+  
+  // show which sides of a rectangle? This is probably only useful for non-filled rects
+  bool showTop;
+  bool showBottom;
+  bool showLeft;
+  bool showRight;
   
   TextureManagerPtr textureManager;
   bool filled;
