@@ -244,6 +244,7 @@ namespace lost
           .def("size", &RoundedRect::size)
           .def("roundCorners", &RoundedRect::roundCorners)
           .def("radius", &RoundedRect::radius)
+          .def("showSides", &RoundedRect::showSides)
           .scope
           [
             def("create", &RoundedRect::create)            

@@ -56,6 +56,11 @@ void RoundedRect::commonInit()
   roundBR = true;
   roundTL = true;
   roundTR = true;
+
+  showTop = true;
+  showBottom = true;
+  showLeft = true;
+  showRight = true;
 }
 
 void RoundedRect::updateTexture()
@@ -96,6 +101,79 @@ void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
   updateVertices();
   updateTexcoords1();
   collapseCorners();
+}
+
+void RoundedRect::showSides(bool top, bool bottom, bool left, bool right)
+{
+  showTop = top;
+  showBottom = bottom;
+  showLeft = left;
+  showRight = right;  
+  updateTexcoords0();
+  updateSides();
+}
+
+void RoundedRect::updateSides()
+{
+  Vec2 maxtc = material->textures[0]->topRightTexCoord();
+  float mx = maxtc.x;
+  float my = maxtc.y;
+
+  if(!showBottom)
+  {
+    if(showLeft)
+      vertexBuffer->set(12,UT_texcoord0, Vec2(mx,0));
+    else 
+      vertexBuffer->set(12,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(13,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(14,UT_texcoord0, Vec2(0,0));
+    if(showRight)
+      vertexBuffer->set(15,UT_texcoord0, Vec2(mx,0));    
+    else
+      vertexBuffer->set(15,UT_texcoord0, Vec2(0,0));    
+  }
+
+  if(!showTop)
+  {
+    if(showLeft)
+      vertexBuffer->set(0,UT_texcoord0, Vec2(mx,0));
+    else 
+      vertexBuffer->set(0,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(1,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(2,UT_texcoord0, Vec2(0,0));
+    if(showRight)
+      vertexBuffer->set(3,UT_texcoord0, Vec2(mx,0));    
+    else
+      vertexBuffer->set(3,UT_texcoord0, Vec2(0,0));    
+  }
+  
+  if(!showLeft)
+  {
+    if(showTop)
+      vertexBuffer->set(0,UT_texcoord0, Vec2(0,my));
+    else
+      vertexBuffer->set(0,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(4,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(8,UT_texcoord0, Vec2(0,0));
+    if(showBottom)
+      vertexBuffer->set(12,UT_texcoord0, Vec2(0,my));
+    else
+      vertexBuffer->set(12,UT_texcoord0, Vec2(0,0));    
+  }
+
+  if(!showRight)
+  {
+    if(showTop)
+      vertexBuffer->set(3,UT_texcoord0, Vec2(0,my));
+    else
+      vertexBuffer->set(3,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(7,UT_texcoord0, Vec2(0,0));
+    vertexBuffer->set(11,UT_texcoord0, Vec2(0,0));
+    if(showBottom)
+      vertexBuffer->set(15,UT_texcoord0, Vec2(0,my));
+    else
+      vertexBuffer->set(15,UT_texcoord0, Vec2(0,0));    
+  }
 }
 
 // vertices are created in this order:
