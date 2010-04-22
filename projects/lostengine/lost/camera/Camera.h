@@ -13,16 +13,20 @@ namespace lost
     typedef lost::shared_ptr<Camera> CameraPtr;
     struct Camera
     {
-      lost::math::Matrix mProjectionMatrix;
-      lost::math::Matrix mModelViewMatrix;
+    protected:
       lost::math::Rect   mViewport;
-      bool hasModelViewMatrix;
+
+      lost::math::Matrix mViewMatrix;
+      lost::math::Matrix mProjectionMatrix;
       
+      virtual void update() = 0;
+    public:
       bool needsUpdate;
 
       Camera(const lost::math::Rect& inViewport);
 
-      virtual lost::math::Matrix& projectionMatrix() = 0;
+      lost::math::Matrix& viewMatrix();
+      lost::math::Matrix& projectionMatrix();
 
       lost::math::Rect& viewport(const lost::math::Rect& inViewport);
       lost::math::Rect& viewport();

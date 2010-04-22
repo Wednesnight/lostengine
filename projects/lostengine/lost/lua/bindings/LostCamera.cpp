@@ -23,6 +23,7 @@ namespace lost
           class_<Camera>("Camera")
             .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
             .def("viewport", (Rect&(Camera::*)())&Camera::viewport)
+            .def("viewMatrix", &Camera::viewMatrix)
             .def("projectionMatrix", &Camera::projectionMatrix),
           class_<Camera2D, Camera>("Camera2D")
             .scope

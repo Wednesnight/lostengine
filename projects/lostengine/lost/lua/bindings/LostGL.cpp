@@ -52,7 +52,9 @@ namespace lost
         [
           class_<BufferLayout>("BufferLayout")
             .def(constructor<>())
-            .def("add", &BufferLayout::add)
+            .def("add", &BufferLayout::add),
+          class_<HybridVertexBuffer>("HybridVertexBuffer"),
+          class_<HybridIndexBuffer>("HybridIndexBuffer")
         ]
       ];
       globals(state)["gl"]["ET_u8"] =   ET_u8;

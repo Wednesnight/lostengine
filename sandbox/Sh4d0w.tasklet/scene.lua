@@ -7,105 +7,171 @@ using "lost.math.Rect"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.Vec4"
+using "lost.math.Matrix"
 using "lost.math.MatrixTranslation"
 using "lost.math.MatrixRotX"
 using "lost.math.MatrixRotY"
 using "lost.math.MatrixScaling"
 using "lost.gl.FrameBuffer"
 
+local meshNum = 30
+local meshRangeX = Vec2(-3,3)
+local meshRangeY = Vec2(-1,3)
+local meshRangeZ = Vec2(-3,3)
+
 function createScene(loader)
   local result = {}
   local dcl = lost.declarative.Context(loader)
   
+  -- framebuffer setup
   result.fb = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
     gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
   
+  -- light cam used for shadow map calculations
+  result.lightCam = dcl.rg:Camera3D
+  {
+    name = "lightCam",
+    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
+    position = Vec3(1,5,1),
+    fovY = 45.0,
+    depth = Vec2(1.0, 1000.0),
+    target = Vec3(0, 0, 0),
+    stickToTarget = false
+  }
+  
+  -- shadow projection shader
+  local biasMatrix = Matrix()
+  biasMatrix:row(0, Vec4(.5,  0,  0, .5))
+  biasMatrix:row(1, Vec4( 0, .5,  0, .5))
+  biasMatrix:row(2, Vec4( 0,  0, .5, .5))
+  biasMatrix:row(3, Vec4( 0,  0,  0,  1))
   result.shadowShader = dcl.gl:Shader
   {
     filename = "shadow",
     params =
     {
-      lightPosition = Vec3(1,5,1),
-      textureMatrix = lost.math.Matrix()
+      lightPosition = result.lightCam.cam:position(),
+      biasMatrix = biasMatrix,
+      lightViewMatrix = result.lightCam.cam:viewMatrix(),
+      lightProjectionMatrix = result.lightCam.cam:projectionMatrix()
     }
   }
+
+  -- scene cam
+  result.cam = dcl.rg:Camera3D
+  {
+    name = "cam",
+    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
+    position = Vec3(0,6,6),
+    fovY = 45.0,
+    depth = Vec2(1.0, 1000.0),
+    target = Vec3(0, -2, 0),
+    stickToTarget = true
+  }
   
+  -- meshes
+  result.meshes = {}
+  table.insert(result.meshes,
+  {
+    mesh = dcl.mesh:Obj
+    {
+      filename = "lost/resources/models/magnolia_tri.obj",
+      material =
+      {
+        shader = result.shadowShader,
+        textures =
+        {
+          result.fb:depthTexture()
+        }
+      }
+    },
+    transform = MatrixTranslation(Vec3(math.random(meshRangeX.x, meshRangeX.y),
+      math.random(meshRangeY.x, meshRangeY.y), math.random(meshRangeZ.x, meshRangeZ.y)))
+  })
+  local idx = 1
+  while idx < meshNum do
+    -- init new mesh instance
+    local mesh = lost.mesh.Mesh.create()
+    mesh.drawMode = result.meshes[1].mesh.drawMode
+    mesh.vertexBuffer = result.meshes[1].mesh.vertexBuffer
+    mesh.indexBuffer = result.meshes[1].mesh.indexBuffer
+    mesh.material = result.meshes[1].mesh.material
+    table.insert(result.meshes,
+    {
+      mesh = mesh,
+      transform = MatrixTranslation(Vec3(math.random(meshRangeX.x, meshRangeX.y),
+        math.random(meshRangeY.x, meshRangeY.y), math.random(meshRangeZ.x, meshRangeZ.y)))
+    })
+    idx = idx + 1
+  end
+
+  -- rendergraph node (used for shadow map and resulting scene)
   result.rg = dcl.rg:Node
   {
-    name = "scene",
-    dcl.rg:ClearColor
-    {
-      color = Color(0,0,0)
-    },
-    dcl.rg:Clear
-    {
-      mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT
-    },
-    dcl.rg:Camera3D
-    {
-      name = "cam",
-      viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
-      position = Vec3(1,5,1),
-      fovY = 45.0,
-      depth = Vec2(1.0, 1000.0),
-      target = Vec3(0, 0, 0),
-      stickToTarget = false
-    },
-    dcl.rg:DepthTest
-    {
-      true
-    },
-    dcl.rg:Draw
-    {
-      name = "magnolia",
-      mesh = dcl.mesh:Obj
-      {
-        filename = "lost/resources/models/magnolia_tri.obj",
-        material =
-        {
-          shader = result.shadowShader
-        }
-      }
-    },
-    dcl.rg:Draw
-    {
-      name = "magnolia2",
-      mesh = dcl.mesh:Obj
-      {
-        filename = "lost/resources/models/magnolia_tri.obj",
-        transform = MatrixTranslation(Vec3(1,2,0)) * MatrixScaling(Vec3(1,1,1)),
-        material =
-        {
-          shader = result.shadowShader
-        }
-      }
-    },
+    name = "rg",
+    dcl.rg:ClearColor { color = Color(0,0,0) },
+    dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT },
+    result.lightCam,
+    result.cam,
+    dcl.rg:DepthTest { true }
   }
+
+  for k,v in next,result.meshes do
+    result.rg:add(dcl.rg:Draw
+    {
+      mesh = v.mesh
+    })
+  end
+
+  result.rg:add(dcl.rg:Draw
+  {
+    name = "plane",
+    mesh = dcl.mesh:Quad
+    {
+      rect = Rect(-5,-5,10,10),
+      transform = MatrixTranslation(Vec3(0,-2,0)) * MatrixRotX(90),
+      material =
+      {
+        shader = result.shadowShader,
+        textures =
+        {
+          result.fb:depthTexture()
+        }
+      }
+    }
+  })
 
   result.firstPass = 
   {
+    -- time delta and angle used for rotation
     passedSec = lost.platform.currentTimeSeconds(),
     angle = 0,
+    factor = 1,
+
+    -- prepare stuff for the next render pass
+    -- disables cam
+    -- enables lightCam
+    -- transforms meshes
     setup = function(self)
-      local camNode = self.node:recursiveFindByName("cam")
-      if camNode ~= nil then
-        local currentSec = lost.platform.currentTimeSeconds()
-        self.angle = math.fmod((currentSec - self.passedSec) * 50 + self.angle, 360)
-        camNode.cam:position(Vec3(1,5,1))
-        local model = self.node:recursiveFindByName("magnolia")
-        if model ~= nil then
-          model.mesh.transform = MatrixRotY(self.angle)
-        end
-        model = self.node:recursiveFindByName("magnolia2")
-        if model ~= nil then
-          model.mesh.transform = MatrixTranslation(Vec3(1,2,0)) * MatrixScaling(Vec3(1,1,1)) * MatrixRotY(self.angle)
-        end
-        self.passedSec = currentSec
+      local currentSec = lost.platform.currentTimeSeconds()
+      self.angle = math.fmod((currentSec - self.passedSec) * 50 + self.angle, 360)
+      for k,v in next,result.meshes do
+        v.mesh.transform = v.transform * MatrixRotY(self.factor*self.angle)
+        self.factor = self.factor * -1
       end
+      self.passedSec = currentSec
+      
+      result.cam.active = false
+      result.lightCam.active = true
     end,
+
+    -- process rg node
     process = function(self, context)
+      self:setup()
       self.node:process(context)
     end,
+
+    -- scene surround by framebuffer
     node = dcl.rg:Node
     {
       name = "firstPass",
@@ -117,71 +183,49 @@ function createScene(loader)
 
   result.secondPass = 
   {
+    -- prepare stuff for the next render pass
+    -- enables cam
+    -- disables lightCam
     setup = function(self)
-      local camNode = self.node:recursiveFindByName("cam")
-      if camNode ~= nil then
-        local textureMatrix = MatrixTranslation(Vec3(.5,.5,.5)) * MatrixScaling(Vec3(.5,.5,.5)) *
-          camNode.cam:projectionMatrix()
-        result.shadowShader:enable()
-        result.shadowShader:set("textureMatrix", textureMatrix)
-        result.shadowShader:disable()
-        camNode.cam:position(Vec3(3,4,3))
-      end
+      result.cam.active = true
+      result.lightCam.active = false
     end,
+
+    -- process rg node
     process = function(self, context)
+      self:setup()
       self.node:process(context)
     end,
+
+    -- scene with additional plane receiving shadows
     node = dcl.rg:Node
     {
       name = "secondPass",
-      result.rg,
-      dcl.rg:Draw
-      {
-        name = "plane",
-        mesh = dcl.mesh:Quad
-        {
-          rect = Rect(-5,-5,10,10),
-          transform = MatrixTranslation(Vec3(0,-2,0)) * MatrixRotX(90),
-          material =
-          {
-            shader = result.shadowShader,
-            textures =
-            {
-              result.fb:depthTexture()
-            }
-          }
-        }
-      }
+      result.rg
     }
   }
 
+  -- optional: draw depth buffer for debugging purposes
+  result.debugCam = dcl.rg:Camera2D
+  {
+    name = "cam",
+    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height)
+  }
+  result.debugMesh = dcl.mesh:Quad
+  {
+    texture = result.fb:depthTexture()
+  }
   result.debugNode = dcl.rg:Node
   {
     name = "debug",
-    dcl.rg:ClearColor
-    {
-      color = Color(0,0,0)
-    },
-    dcl.rg:Clear
-    {
-      mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT
-    },
-    dcl.rg:Camera2D
-    {
-      name = "cam",
-      viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height)
-    },
-    dcl.rg:DepthTest
-    {
-      false
-    },
+    dcl.rg:ClearColor { color = Color(0,0,0) },
+    dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT },
+    result.debugCam,
+    dcl.rg:DepthTest { false },
     dcl.rg:Draw
     {
       name = "quad",
-      mesh = dcl.mesh:Quad
-      {
-        texture = result.fb:depthTexture()
-      }
+      mesh = result.debugMesh
     }
   }
   return result

@@ -22,6 +22,10 @@ namespace lost
       float      mFovY;
       math::Vec2 mDepth;
       bool       mStickToTarget;
+
+    protected:
+      void update();
+
     public:
       // constructor
       Camera3D(const lost::math::Rect& inViewport);
@@ -49,8 +53,6 @@ namespace lost
       // methods
       void move(const math::Vec3& deltaMove);
       void rotate(const math::Vec3& deltaRotate);
-
-      lost::math::Matrix& projectionMatrix();
     };
 
   }

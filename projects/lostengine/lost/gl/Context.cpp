@@ -375,20 +375,12 @@ std::map<void*, Context*> glContext2lostGlContext;
       if(currentShader)
       {
         // set automatic uniforms if the shader wants them
-        if(currentShader->hasUniform("projectionMatrix")) { currentShader->set("projectionMatrix", currentCam->projectionMatrix()); }
-        if(currentShader->hasUniform("modelViewMatrix"))
-        {
-          if(currentCam->hasModelViewMatrix)
-            currentShader->set("modelViewMatrix", currentCam->mModelViewMatrix*mesh->transform);
-          else
-          {
-            currentShader->set("modelViewMatrix", mesh->transform);
-          }
-        }
+        if(currentShader->hasUniform("projectionMatrix")) { currentShader->set("projectionMatrix", currentCam->projectionMatrix() * currentCam->viewMatrix()); }
+        if(currentShader->hasUniform("modelViewMatrix")) { currentShader->set("modelViewMatrix", mesh->transform); }
         if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
         if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
         if(currentShader->hasUniform("texture1")) { currentShader->setInt("texture1", 1); }
-
+        
         // set mesh specific uniforms after automatic ones
         if(mesh->material->uniforms)
         {
