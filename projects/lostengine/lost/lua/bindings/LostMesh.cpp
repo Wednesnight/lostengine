@@ -17,6 +17,8 @@
 #include "lost/mesh/TextureManager.h"
 #include "lost/mesh/RoundedRect.h"
 #include "lost/mesh/Sphere.h"
+#include "lost/gl/HybridVertexBuffer.h"
+#include "lost/gl/HybridIndexBuffer.h"
 
 using namespace luabind;
 using namespace lost::mesh;
@@ -139,6 +141,8 @@ namespace lost
         namespace_("mesh")
         [
           class_<Mesh>("Mesh")
+            .def_readwrite("vertexBuffer", &Mesh::vertexBuffer)
+            .def_readwrite("indexBuffer", &Mesh::indexBuffer)
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("transform", &Mesh::transform)
             .def_readwrite("drawMode", &Mesh::drawMode)

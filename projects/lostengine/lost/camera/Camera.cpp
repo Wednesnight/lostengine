@@ -9,8 +9,8 @@ namespace lost
     : mViewport(inViewport),
       needsUpdate(true)
     {
-      mProjectionMatrix.zero();
-      hasModelViewMatrix = false;
+      mViewMatrix.initIdentity();
+      mProjectionMatrix.initIdentity();
     }
     
     lost::math::Rect& Camera::viewport(const lost::math::Rect& inViewport)
@@ -27,6 +27,18 @@ namespace lost
     {
       return mViewport;
     }
-    
+
+    lost::math::Matrix& Camera::viewMatrix()
+    {
+      if (needsUpdate) update();
+      return mViewMatrix;
+    }
+
+    lost::math::Matrix& Camera::projectionMatrix()
+    {
+      if (needsUpdate) update();
+      return mProjectionMatrix;
+    }
+
   }
 }
