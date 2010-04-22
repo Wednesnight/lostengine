@@ -49,6 +49,8 @@ function startup(tasklet)
         dcl.guiro:Button
         {
           id = "roundedRectButton",
+          theme = "pebble",
+          style = "RoundedRect",
           bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(20)), 
           title = "Rounded Rect"       
         }
