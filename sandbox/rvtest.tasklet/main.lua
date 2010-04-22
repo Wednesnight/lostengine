@@ -52,7 +52,7 @@ function startup(tasklet)
           id = "roundedRectButton",
           theme = "pebble",
           style = "RoundedRect",
-          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(20)), 
+          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
           title = "Round Rect Button"       
         }
       }
