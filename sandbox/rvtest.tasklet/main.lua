@@ -14,7 +14,7 @@ using "lost.guiro.wabs"
 using "lost.guiro.xleft"
 using "lost.guiro.ybottom"
 
-screensize = Vec2(800,600)
+screensize = Vec2(640,480)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
 
 running = true
@@ -44,15 +44,16 @@ function startup(tasklet)
         id = "window",
         bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
         showBackground = true,
-        backgroundColor = Color(0,0,0),
-        frameColor = Color(1,1,1),
+				showFrame = false,
+        backgroundColor = Color(.9294,.9294,.9294),
+--        frameColor = Color(1,1,1),
         dcl.guiro:Button
         {
           id = "roundedRectButton",
           theme = "pebble",
           style = "RoundedRect",
-          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(20)), 
-          title = "Rounded Rect"       
+          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(20)), 
+          title = "Round Rect Button"       
         }
       }
     }

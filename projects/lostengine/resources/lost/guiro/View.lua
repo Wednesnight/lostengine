@@ -297,11 +297,19 @@ function View:hidden(val)
 end
 
 function View:backgroundCornerRadius(val)
-  self.backgroundMesh:radius(r)
+  self.backgroundMesh:radius(val)
 end
 
 function View:frameCornerRadius(val)
-  self.frameMesh:radius(r)
+  self.frameMesh:radius(val)
+end
+
+function View:backgroundRoundCorners(t,b,l,r)
+	self.backgroundMesh:roundCorners(t,b,l,r)
+end
+
+function View:frameRoundCorners(t,b,l,r)
+	self.frameMesh:roundCorners(t,b,l,r)
 end
 
 function View:backgroundGradient(tex, coord)
