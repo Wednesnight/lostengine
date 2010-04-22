@@ -88,15 +88,15 @@ void RoundedRect::radius(float r)
 {
   _radius = r;
   updateTexture();
+  updateTexcoords0();
   updateVertices();
-//  updateTexcoords1();
-//  collapseCorners();
 }
 
 void RoundedRect::lineWidth(float lw)
 {
   _lineWidth = lw;
   updateTexture();
+  updateTexcoords0();
   updateVertices();
 }
 

@@ -105,7 +105,7 @@ gl::TexturePtr TextureManager::arcTexture(float radius, float lineWidth)
 
 void TextureManager::logStats()
 {
-  DOUT("arcFilled: "<<_arcFilledMap.size() << " arc:"<<_arcMap.size());
+//  DOUT("arcFilled: "<<_arcFilledMap.size() << " arc:"<<_arcMap.size());
 }
 
 void TextureManager::collectGarbage()
