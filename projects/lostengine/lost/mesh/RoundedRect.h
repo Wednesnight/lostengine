@@ -27,6 +27,7 @@ struct RoundedRect : Mesh
 
   void size(const math::Vec2& newSize); // recalculates vertices, using Vec2 x/y as width/height
   void radius(float r);
+  void lineWidth(float lw);
   void roundCorners(bool rbl, bool rbr, bool rtl, bool rtr);
   void showSides(bool top, bool bottom, bool left, bool right); // enable/disable drawing of the sides. Disables rounding for adjacent corners.
 
@@ -53,7 +54,7 @@ struct RoundedRect : Mesh
   
   TextureManagerPtr textureManager;
   bool filled;
-  float lineWidth;
+  float _lineWidth;
   float _radius;
   math::Vec2 _size; // needed for secondary texture coordinate generation
 

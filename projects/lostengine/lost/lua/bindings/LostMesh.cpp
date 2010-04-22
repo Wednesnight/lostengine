@@ -126,6 +126,8 @@ namespace lost
             .def_readwrite("cull", &Material::cull)
             .def_readwrite("cullMode", &Material::cullMode)
             .def("add", &Material::add)
+            .def("setTexture", &Material::setTexture)
+            .def("limitTextures", &Material::limitTextures)
             .scope
             [
               def("create", (MaterialPtr(*)())&Material::create)

@@ -22,7 +22,7 @@ RoundedRect::RoundedRect(const TextureManagerPtr& tm,
 {
   textureManager = tm;
   filled = f;
-  lineWidth = lw;
+  _lineWidth = lw;
   _radius = r;
   _size = sz;
   commonInit();
@@ -69,7 +69,7 @@ void RoundedRect::updateTexture()
   if(filled)
     tex = textureManager->arcFilledTexture(_radius);
   else
-    tex = textureManager->arcTexture(_radius, lineWidth);
+    tex = textureManager->arcTexture(_radius, _lineWidth);
   
   if(material->textures.size() > 0)
     material->textures[0] = tex;
@@ -87,9 +87,17 @@ void RoundedRect::size(const Vec2& newSize)
 void RoundedRect::radius(float r)
 {
   _radius = r;
+  updateTexture();
   updateVertices();
-  updateTexcoords1();
-  collapseCorners();
+//  updateTexcoords1();
+//  collapseCorners();
+}
+
+void RoundedRect::lineWidth(float lw)
+{
+  _lineWidth = lw;
+  updateTexture();
+  updateVertices();
 }
 
 void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
@@ -99,8 +107,8 @@ void RoundedRect::roundCorners(bool rbl, bool rbr, bool rtl, bool rtr)
   roundTL = rtl;
   roundTR = rtr;
   updateVertices();
-  updateTexcoords1();
-  collapseCorners();
+//  updateTexcoords1();
+//  collapseCorners();
 }
 
 void RoundedRect::showSides(bool top, bool bottom, bool left, bool right)

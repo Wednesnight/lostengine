@@ -296,6 +296,42 @@ function View:hidden(val)
 	end
 end
 
+function View:backgroundCornerRadius(val)
+  self.backgroundMesh:radius(r)
+end
+
+function View:frameCornerRadius(val)
+  self.frameMesh:radius(r)
+end
+
+function View:backgroundGradient(tex, coord)
+  if tex ~= nil then
+    if self.backgroundMesh.material.uniforms == nil then
+      self.backgroundMesh.material.uniforms = lost.gl.UniformBlock.create()
+    end
+    self.backgroundMesh.material:setTexture(1, tex)
+    self.backgroundMesh.material.uniforms:setFloat("gradientCoord", coord)
+    self.backgroundMesh.material.shader = lost.common.Shaders.gradientShader()
+  else
+    self.backgroundMesh.material:limitTextures(1)
+    self.backgroundMesh.shader = lost.common.Shaders.textureShader()
+  end
+end
+
+function View:frameGradient(tex, coord)
+  if tex ~= nil then
+    if self.frameMesh.material.uniforms == nil then
+      self.frameMesh.material.uniforms = lost.gl.UniformBlock.create()
+    end
+    self.frameMesh.material:setTexture(1, tex)
+    self.frameMesh.material.uniforms:setFloat("gradientCoord", coord)
+    self.frameMesh.material.shader = lost.common.Shaders.gradientShader()
+  else
+    self.frameMesh.material:limitTextures(1)
+    self.frameMesh.shader = lost.common.Shaders.textureShader()
+  end
+end
+
 --[[
     metatable methods
   ]]

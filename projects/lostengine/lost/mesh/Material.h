@@ -52,6 +52,18 @@ struct Material
   {
     textures.push_back(tex);
   }
+  
+  void setTexture(uint32_t texIndex, const gl::TexturePtr& tex)
+  {
+    if(textures.size() < texIndex+1)
+      textures.resize(texIndex+1);
+    textures[texIndex] = tex;
+  }
+  
+  void limitTextures(uint32_t num) // throws away all textures with index > num
+  {
+    textures.resize(num);
+  }
 };
 }
 }
