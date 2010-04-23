@@ -14,7 +14,8 @@ namespace lost
     struct Camera
     {
     protected:
-      lost::math::Rect   mViewport;
+      lost::math::Rect mViewport;
+      math::Vec2       mDepth;
 
       lost::math::Matrix mViewMatrix;
       lost::math::Matrix mProjectionMatrix;
@@ -25,11 +26,14 @@ namespace lost
 
       Camera(const lost::math::Rect& inViewport);
 
-      lost::math::Matrix& viewMatrix();
-      lost::math::Matrix& projectionMatrix();
-
       lost::math::Rect& viewport(const lost::math::Rect& inViewport);
       lost::math::Rect& viewport();
+
+      math::Vec2 depth();
+      void depth(const math::Vec2& inDepth);
+
+      lost::math::Matrix& viewMatrix();
+      lost::math::Matrix& projectionMatrix();
     };
 
   }

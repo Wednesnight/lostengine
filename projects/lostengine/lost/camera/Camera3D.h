@@ -20,7 +20,6 @@ namespace lost
       math::Vec3 mDirection;
       math::Vec3 mRotation;
       float      mFovY;
-      math::Vec2 mDepth;
       bool       mStickToTarget;
 
     protected:
@@ -31,7 +30,6 @@ namespace lost
       Camera3D(const lost::math::Rect& inViewport);
       static Camera3DPtr create(const lost::math::Rect& inViewport);
       // getters
-      math::Vec2 depth();
       float fovY();
       math::Vec3 position();
       math::Vec3 direction();
@@ -42,7 +40,6 @@ namespace lost
 
       // setters
       void plane(const math::Vec3& inPlane);
-      void depth(const math::Vec2& inDepth);
       void fovY(const float inFovY);
       void position(const math::Vec3& newPosition);
       void direction(const math::Vec3& newDirection);

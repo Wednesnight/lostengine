@@ -28,6 +28,17 @@ namespace lost
       return mViewport;
     }
 
+    math::Vec2 Camera::depth()
+    {
+      return mDepth;
+    }
+    
+    void Camera::depth(const math::Vec2& inDepth)
+    {
+      mDepth = inDepth;
+      needsUpdate = true;
+    }
+    
     lost::math::Matrix& Camera::viewMatrix()
     {
       if (needsUpdate) update();

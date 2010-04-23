@@ -6,42 +6,43 @@
 // 1 2 1	
 float kernel[KERNEL_SIZE];
 
-uniform sampler2D colorMap;
-uniform float width;
-uniform float height;
+uniform sampler2D texture0;
+uniform vec2 viewport;
 
-float step_w = 1.0/width;
-float step_h = 1.0/height;
+varying vec2 texcoord;
+
+float step_w = 1.0/viewport.x;
+float step_h = 1.0/viewport.y;
 
 vec2 offset[KERNEL_SIZE];
 						 
 void main(void)
 {
-   int i = 0;
-   vec4 sum = vec4(0.0);
+  int i = 0;
+  vec4 sum = vec4(0.0);
    
-   offset[0] = vec2(-step_w, -step_h);
-   offset[1] = vec2(0.0, -step_h);
-   offset[2] = vec2(step_w, -step_h);
+  offset[0] = vec2(-step_w, -step_h);
+  offset[1] = vec2(0.0, -step_h);
+  offset[2] = vec2(step_w, -step_h);
    
-   offset[3] = vec2(-step_w, 0.0);
-   offset[4] = vec2(0.0, 0.0);
-   offset[5] = vec2(step_w, 0.0);
+  offset[3] = vec2(-step_w, 0.0);
+  offset[4] = vec2(0.0, 0.0);
+  offset[5] = vec2(step_w, 0.0);
    
-   offset[6] = vec2(-step_w, step_h);
-   offset[7] = vec2(0.0, step_h);
-   offset[8] = vec2(step_w, step_h);
+  offset[6] = vec2(-step_w, step_h);
+  offset[7] = vec2(0.0, step_h);
+  offset[8] = vec2(step_w, step_h);
    
-   kernel[0] = 2.0; 	kernel[1] = 0.0;	kernel[2] = 0.0;
-   kernel[3] = 0.0;	kernel[4] = -1.0;	kernel[5] = 0.0;
-   kernel[6] = 0.0;   	kernel[7] = 0.0;	kernel[8] = -1.0;
+  kernel[0] = 2.0; 	kernel[1] = 0.0;	kernel[2] = 0.0;
+  kernel[3] = 0.0;	kernel[4] = -1.0;	kernel[5] = 0.0;
+  kernel[6] = 0.0;   	kernel[7] = 0.0;	kernel[8] = -1.0;
    
    
-   for( i=0; i<KERNEL_SIZE; i++ )
-   {
-    vec4 tmp = texture2D(colorMap, gl_TexCoord[0].st + offset[i]);
+  for( i=0; i<KERNEL_SIZE; i++ )
+  {
+    vec4 tmp = texture2D(texture0, texcoord.st + offset[i]);
     sum += tmp * kernel[i];
-   }
+  }
 	sum.a = 1.0;
-   gl_FragColor = sum;
+  gl_FragColor = sum;
 }

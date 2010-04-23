@@ -11,9 +11,9 @@ namespace lost
       mDirection(0.0f, 0.0f, -1.0f),
       mRotation(0.0f, 0.0f, 0.0f),
       mFovY(45.0f),
-      mDepth(1.0f, 100.0f),
       mStickToTarget(false)
     {
+      mDepth = lost::math::Vec2(1.0f, 100.0f);
     }
 
     Camera3DPtr Camera3D::create(const lost::math::Rect& inViewport)
@@ -75,11 +75,6 @@ namespace lost
       return mFovY;
     }
     
-    math::Vec2 Camera3D::depth()
-    {
-      return mDepth;
-    }
-
     void Camera3D::position(const math::Vec3& newPosition)
     {
       mPosition = newPosition;
@@ -134,12 +129,6 @@ namespace lost
     void Camera3D::fovY(const float inFovY)
     {
       mFovY = inFovY;
-      needsUpdate = true;
-    }
-    
-    void Camera3D::depth(const math::Vec2& inDepth)
-    {
-      mDepth = inDepth;
       needsUpdate = true;
     }
     

@@ -6,12 +6,13 @@
 // 1 2 1	
 float kernel[KERNEL_SIZE];
 
-uniform sampler2D colorMap;
-uniform float width;
-uniform float height;
+uniform sampler2D texture0;
+uniform vec2 viewport;
 
-float step_w = 1.0/width;
-float step_h = 1.0/height;
+varying vec2 texcoord;
+
+float step_w = 1.0/viewport.x;
+float step_h = 1.0/viewport.y;
 
 vec2 offset[KERNEL_SIZE];
 						 
@@ -39,7 +40,7 @@ void main(void)
    
    for( i=0; i<KERNEL_SIZE; i++ )
    {
-    vec4 tmp = texture2D(colorMap, gl_TexCoord[0].st + offset[i]);
+    vec4 tmp = texture2D(texture0, texcoord.st + offset[i]);
     sum += tmp * kernel[i];
    }
    gl_FragColor = sum;

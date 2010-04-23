@@ -1,6 +1,14 @@
+uniform mat4 modelViewMatrix;  // mesh transform
+uniform mat4 projectionMatrix; // from camera
+
+attribute vec3 position;
+attribute vec2 texcoord0;
+
+varying vec2 texcoord;
+
 void main(void)
 {
-	gl_Position = ftransform();
-	gl_TexCoord[0] = gl_MultiTexCoord0;
-	gl_FrontColor = gl_Color;
+  texcoord = texcoord0;
+  vec4 pos = vec4(position, 1.0);
+  gl_Position = projectionMatrix*modelViewMatrix*pos; // equivalent to builtin function ftransform()
 }

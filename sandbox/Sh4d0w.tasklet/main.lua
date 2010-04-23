@@ -16,6 +16,7 @@ using "lost.math.Vec3"
 local scene = nil
 local running = true
 local debug = false
+local ssao = true
 
 function startup(tasklet)
   tasklet.name = _meta.name
@@ -28,6 +29,8 @@ function startup(tasklet)
       running = false
     elseif event.key == K_SPACE then
       debug = not debug
+    elseif event.character == "+" then
+      ssao = not ssao
     elseif event.character == "w" then
       scene.cam.cam:rotate(Vec3(2,0,0))
     elseif event.character == "s" then
@@ -56,6 +59,10 @@ function startup(tasklet)
       scene.shadowShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
       scene.shadowShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
       scene.shadowShader:disable()
+      scene.ssaoShader:enable()
+      scene.ssaoShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
+      scene.ssaoShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
+      scene.ssaoShader:disable()
     end
   end)
   tasklet.eventDispatcher:addEventListener(ResizeEvent.MAIN_WINDOW_RESIZE, function(event)
@@ -63,10 +70,11 @@ function startup(tasklet)
     -- update cams
     scene.cam.cam:viewport(Rect(0, 0, event.width, event.height))
     scene.lightCam.cam:viewport(Rect(0, 0, event.width, event.height))
-    -- ...framebuffer
-    scene.fb:resize(Vec2(event.width, event.height))
-    -- ...and debug quad
     scene.debugCam.cam:viewport(Rect(0, 0, event.width, event.height))
+    -- ...framebuffers
+    scene.fb:resize(Vec2(event.width, event.height))
+    scene.fbSsao:resize(Vec2(event.width, event.height))
+    -- ...and quads
     scene.debugMesh:updateSize(Vec2(event.width, event.height))
     
     -- update shader params
@@ -74,6 +82,10 @@ function startup(tasklet)
     scene.shadowShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
     scene.shadowShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
     scene.shadowShader:disable()
+    scene.ssaoShader:enable()
+    scene.ssaoShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
+    scene.ssaoShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
+    scene.ssaoShader:disable()
   end)
 
   return true
@@ -81,11 +93,11 @@ end
 
 function update(tasklet)
   scene.firstPass:process(tasklet.window.context)
+  scene.secondPass:process(tasklet.window.context)
+  scene.thirdPass:process(tasklet.window.context, ssao)
   -- debug output?
   if debug then
     scene.debugNode:process(tasklet.window.context)
-  else
-    scene.secondPass:process(tasklet.window.context)
   end
   return running
 end

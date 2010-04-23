@@ -1,14 +1,19 @@
-uniform sampler2D texture0;
+uniform sampler2DShadow texture0;
+uniform sampler2D texture1;
 uniform vec4 color;
 
 uniform vec2 depth;
 uniform vec2 viewport;
 
-varying vec2 texcoord;
+// will be calculated per vertex and interpolated per fragment
+varying float lightIntensity;
+
+varying vec4 ssaoTexcoord;
+varying vec4 shadowTexCoord;
 
 float readDepth( in vec2 coord )
 {
-	return (2.0 * depth.x) / (depth.y + depth.x - texture2D( texture0, coord ).x * (depth.y - depth.x));	
+	return (2.0 * depth.x) / (depth.y + depth.x - texture2D(texture1, coord).x * (depth.y - depth.x));	
 }
 
 
@@ -26,7 +31,22 @@ float compareDepths( in float depth1, in float depth2 )
 
 void main(void)
 {	
-	float depth = readDepth(texcoord);
+  float shadow = 1.0;
+
+  vec3 s = vec3(shadowTexCoord.xyz / shadowTexCoord.w);
+  if (s.x >= 0.0 && s.x <= 1.0 && s.y >= 0.0 && s.y <= 1.0)
+  {
+    float shadowMapDepth = shadow2D(texture0, s).z;
+    if (shadowMapDepth < s.z - 0.005)
+    {
+      shadow = 0.2;
+    }
+  }
+  vec4 shadowedColor = vec4(shadow * color.rgb * lightIntensity, color.a);
+
+  vec2 texcoord = ssaoTexcoord.xy / ssaoTexcoord.w;
+
+	float ssaoDepth = readDepth(texcoord);
 	float d;
 	
 	float pw = 1.0 / viewport.x;
@@ -35,7 +55,7 @@ void main(void)
 	float aoCap = 1.0;
 
 	float ao = 0.0;
-	
+
 	float aoMultiplier=10000.0;
 
 	float depthTolerance = 0.001;
@@ -43,16 +63,16 @@ void main(void)
 	float aoscale=1.0;
 
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 	
 	pw*=2.0;
 	ph*=2.0;
@@ -60,16 +80,16 @@ void main(void)
 	aoscale*=1.2;
 	
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	pw*=2.0;
 	ph*=2.0;
@@ -77,16 +97,16 @@ void main(void)
 	aoscale*=1.2;
 	
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 	
 	pw*=2.0;
 	ph*=2.0;
@@ -94,18 +114,18 @@ void main(void)
 	aoscale*=1.2;
 	
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y+ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x+pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	d=readDepth( vec2(texcoord.x-pw,texcoord.y-ph));
-	ao+=compareDepths(depth,d)/aoscale;
+	ao+=compareDepths(ssaoDepth,d)/aoscale;
 
 	ao/=16.0;
-	
-	gl_FragColor = vec4(1.0-ao) * color;
+
+	gl_FragColor = vec4(1.0-ao) * shadowedColor;
 }
