@@ -34,8 +34,8 @@ function createScene(loader)
     viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
     position = Vec3(1,5,1),
     fovY = 45.0,
-    depth = Vec2(1.0, 1000.0),
-    target = Vec3(0, 0, 0),
+    depth = Vec2(1.0, 100.0),
+    target = Vec3(0,0,0),
     stickToTarget = false
   }
   
@@ -155,9 +155,13 @@ function createScene(loader)
     setup = function(self)
       local currentSec = lost.platform.currentTimeSeconds()
       self.angle = math.fmod((currentSec - self.passedSec) * 50 + self.angle, 360)
-      for k,v in next,result.meshes do
-        v.mesh.transform = v.transform * MatrixRotY(self.factor*self.angle)
-        self.factor = self.factor * -1
+      local idx = 1
+      while idx <= #result.meshes do
+        result.meshes[idx].mesh.transform = result.meshes[idx].transform * MatrixRotY(self.factor*self.angle)
+        if math.fmod(#result.meshes, 2) == 0 or idx < #result.meshes then
+          self.factor = self.factor * -1
+        end
+        idx = idx + 1
       end
       self.passedSec = currentSec
       
