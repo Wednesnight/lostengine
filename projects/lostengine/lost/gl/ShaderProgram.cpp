@@ -106,6 +106,7 @@ GLenum ShaderProgram::numericalType(const std::string& inName) { return uniform(
 
 void ShaderProgram::setInt(const std::string& inName, GLint inVal) {uniform(inName).setInt(inVal);}
 void ShaderProgram::setFloat(const std::string& inName, float inVal) {uniform(inName).setFloat(inVal);}
+void ShaderProgram::setBool(const std::string& inName, bool inVal) {uniform(inName).setBool(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::common::Color& inVal) {uniform(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec4& inVal) {uniform(inName).set(inVal);}
 void ShaderProgram::set(const std::string& inName, const lost::math::Vec2& inVal) {uniform(inName).set(inVal);}

@@ -176,7 +176,7 @@ namespace lost
 
       // types
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
-      globals(state)["gl"]["GL_INT"]                = GL_BOOL;
+      globals(state)["gl"]["GL_BOOL"]               = GL_BOOL;
       globals(state)["gl"]["GL_BOOL_VEC2"]          = GL_BOOL_VEC2;
       globals(state)["gl"]["GL_BOOL_VEC3"]          = GL_BOOL_VEC3;
       globals(state)["gl"]["GL_BOOL_VEC4"]          = GL_BOOL_VEC4;
@@ -252,6 +252,7 @@ namespace lost
             .def("numericalType", &ShaderProgram::numericalType)
             .def("setInt", (void(ShaderProgram::*)(const std::string& inName, GLint inVal)) &ShaderProgram::setInt)
             .def("setFloat", (void(ShaderProgram::*)(const std::string& inName, float inVal)) &ShaderProgram::setFloat)
+            .def("setBool", (void(ShaderProgram::*)(const std::string& inName, bool inVal)) &ShaderProgram::setBool)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
