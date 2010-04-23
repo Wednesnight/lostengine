@@ -1,6 +1,8 @@
 // This texture should hold the image to blur.
 // This can perhaps be a previous rendered scene.
-uniform sampler2D colorMap;
+uniform sampler2D texture0;
+
+varying vec2 texcoord;
  
 // some const, tweak for best look
 const float sampleDist = 0.5;
@@ -9,7 +11,7 @@ const float sampleStrength = 4.0;
 void main(void)
 {
    // texture coordinates
-   vec2 uv = vec2(gl_TexCoord[0]);
+   vec2 uv = vec2(texcoord);
  
    // some sample positions
    float samples[10];
@@ -37,7 +39,7 @@ void main(void)
  
     // this is the original colour of this fragment
     // using only this would result in a nonblurred version
-    vec4 color = texture2D(colorMap,uv); 
+    vec4 color = texture2D(texture0,uv); 
  
     vec4 sum = color;
  
@@ -45,7 +47,7 @@ void main(void)
     // the center of the screen
     for (int i = 0; i < 10; i++)
     {
-      sum += texture2D( colorMap, uv + dir * samples[i] * sampleDist );
+      sum += texture2D( texture0, uv + dir * samples[i] * sampleDist );
     }
  
     // we have taken eleven samples

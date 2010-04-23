@@ -26,6 +26,8 @@ function createScene(loader)
   -- framebuffer setup
   result.fb = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
     gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
+  result.fbSsao = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
+    gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
   
   -- light cam used for shadow map calculations
   result.lightCam = dcl.rg:Camera3D
@@ -57,6 +59,19 @@ function createScene(loader)
     }
   }
 
+  --ssao shader
+  result.ssaoShader = dcl.gl:Shader
+  {
+    filename = "ssao",
+    params =
+    {
+      lightPosition = result.lightCam.cam:position(),
+      biasMatrix = biasMatrix,
+      lightViewMatrix = result.lightCam.cam:viewMatrix(),
+      lightProjectionMatrix = result.lightCam.cam:projectionMatrix()
+    }
+  }
+
   -- scene cam
   result.cam = dcl.rg:Camera3D
   {
@@ -78,10 +93,10 @@ function createScene(loader)
       filename = "lost/resources/models/magnolia_tri.obj",
       material =
       {
-        shader = result.shadowShader,
         textures =
         {
-          result.fb:depthTexture()
+          result.fb:depthTexture(),
+          result.fbSsao:depthTexture()
         }
       }
     },
@@ -152,11 +167,13 @@ function createScene(loader)
     -- disables cam
     -- enables lightCam
     -- transforms meshes
+    -- set shadow map material
     setup = function(self)
       local currentSec = lost.platform.currentTimeSeconds()
       self.angle = math.fmod((currentSec - self.passedSec) * 50 + self.angle, 360)
       local idx = 1
       while idx <= #result.meshes do
+        result.meshes[idx].mesh.material.shader = result.shadowShader
         result.meshes[idx].mesh.transform = result.meshes[idx].transform * MatrixRotY(self.factor*self.angle)
         if math.fmod(#result.meshes, 2) == 0 or idx < #result.meshes then
           self.factor = self.factor * -1
@@ -175,7 +192,7 @@ function createScene(loader)
       self.node:process(context)
     end,
 
-    -- scene surround by framebuffer
+    -- scene, surrounded by framebuffer (shadow map)
     node = dcl.rg:Node
     {
       name = "firstPass",
@@ -201,10 +218,40 @@ function createScene(loader)
       self.node:process(context)
     end,
 
-    -- scene with additional plane receiving shadows
+    -- scene, surrounded by framebuffer (ssao)
     node = dcl.rg:Node
     {
       name = "secondPass",
+      dcl.rg:FrameBuffer { framebuffer = result.fbSsao },
+      result.rg,
+      dcl.rg:DefaultFrameBuffer {}
+    }
+  }
+
+  result.thirdPass = 
+  {
+    -- prepare stuff for the next render pass
+    -- set ssao material
+    setup = function(self)
+      local idx = 1
+      while idx <= #result.meshes do
+        result.meshes[idx].mesh.material.shader = result.ssaoShader
+        idx = idx + 1
+      end
+    end,
+
+    -- process rg node
+    process = function(self, context, doSsao)
+      if doSsao then
+        self:setup()
+      end
+      self.node:process(context)
+    end,
+
+    -- scene with applied ssao
+    node = dcl.rg:Node
+    {
+      name = "thirdPass",
       result.rg
     }
   }
@@ -217,7 +264,7 @@ function createScene(loader)
   }
   result.debugMesh = dcl.mesh:Quad
   {
-    texture = result.fb:depthTexture()
+    texture = result.fbSsao:depthTexture()
   }
   result.debugNode = dcl.rg:Node
   {

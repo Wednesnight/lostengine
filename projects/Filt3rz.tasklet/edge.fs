@@ -6,10 +6,10 @@
 // 1 2 1	
 float kernel[KERNEL_SIZE];
 
-uniform sampler2D colorMap;
-uniform float width;
-uniform float height;
+uniform sampler2D texture0;
+uniform vec2 viewport;
 
+varying vec2 texcoord;
 
 vec2 offset[KERNEL_SIZE];
 						 
@@ -18,8 +18,8 @@ void main(void)
    int i = 0;
    vec4 sum = vec4(0.0);
 
-float step_w = 1.0/width;
-float step_h = 1.0/height;
+  float step_w = 1.0/viewport.x;
+  float step_h = 1.0/viewport.y;
    
    offset[0] = vec2(-step_w, -step_h);
    offset[1] = vec2(0.0, -step_h);
@@ -40,7 +40,7 @@ float step_h = 1.0/height;
    
    for( i=0; i<KERNEL_SIZE; i++ )
    {
-    vec4 tmp = texture2D(colorMap, gl_TexCoord[0].st + offset[i]);
+    vec4 tmp = texture2D(texture0, texcoord.st + offset[i]);
     sum += tmp * kernel[i];
    }
    sum.a = 1.0;

@@ -11,6 +11,7 @@ namespace lost
     Camera2D::Camera2D(const lost::math::Rect& inViewport)
     : Camera(inViewport)
     {
+      mDepth = lost::math::Vec2(-1.0, 1.0);
       float offset = .375f;
       mViewMatrix = MatrixTranslation(Vec3(offset, offset, .0f));
     }
@@ -24,8 +25,7 @@ namespace lost
     {
       if (needsUpdate)
       {
-        mProjectionMatrix = math::MatrixOrtho(math::Rect(0, 0, mViewport.width, mViewport.height),
-                                              math::Vec2(-1.0, 1.0));
+        mProjectionMatrix = math::MatrixOrtho(math::Rect(0, 0, mViewport.width, mViewport.height), mDepth);
         needsUpdate = false;        
       }
     }
