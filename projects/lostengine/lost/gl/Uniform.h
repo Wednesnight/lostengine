@@ -38,6 +38,7 @@ struct Uniform
 
   void setInt(GLint inVal);
   void setFloat(float inVal);
+  void setBool(bool inVal);
   void set(const lost::common::Color& inCol);
   void set(const lost::math::Vec4& vec);
   void set(const lost::math::Vec2& inVec);

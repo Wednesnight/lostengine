@@ -37,6 +37,11 @@ void Uniform::setFloat(float inVal)
   glUniform1f(location, inVal);GLDEBUG_THROW;
 }
 
+void Uniform::setBool(bool inVal)
+{
+  glUniform1f(location, inVal);GLDEBUG_THROW;
+}
+
 void Uniform::set(const lost::common::Color& inCol)
 {
     switch(glType)

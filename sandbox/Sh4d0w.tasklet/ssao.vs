@@ -12,9 +12,13 @@ uniform mat4 modelViewMatrix;
 // from camera
 uniform mat4 projectionMatrix;
 
+// flag for direct lighting / ssao / shadowmap
+uniform bool lightingEnabled;
+uniform bool ssaoEnabled;
+uniform bool shadowmapEnabled;
+
 attribute vec3 position;
 attribute vec3 normal;
-attribute vec2 texcoord0;
 
 // will be calculated per vertex and interpolated per fragment
 varying float lightIntensity;
@@ -33,15 +37,31 @@ void main(void)
   /*
    * light shader params
    */
-	vec3 ecpos = vec3(modelViewMatrix * pos);
-	vec3 lightVec = normalize(lightPosition-ecpos);
-  vec3 tnorm = vec3(normalize(modelViewMatrix*vec4(normal,0.0)));
-  lightIntensity = max(dot(lightVec, tnorm), 0.0);
+  if (lightingEnabled)
+  {
+  	vec3 ecpos = vec3(modelViewMatrix * pos);
+  	vec3 lightVec = normalize(lightPosition-ecpos);
+    vec3 tnorm = vec3(normalize(modelViewMatrix*vec4(normal,0.0)));
+    lightIntensity = max(dot(lightVec, tnorm), 0.0);
+  }
+  else
+  {
+    lightIntensity = 1.0;
+  }
 
-  ssaoTexcoord = biasMatrix * gl_Position;
+  /*
+   * ssao
+   */
+  if (ssaoEnabled)
+  {
+    ssaoTexcoord = biasMatrix * gl_Position;
+  }
 
   /*
    * shadow projection
    */
-  shadowTexCoord = biasMatrix * lightProjectionMatrix * lightViewMatrix * modelViewMatrix * pos;
+  if (shadowmapEnabled)
+  {
+    shadowTexCoord = biasMatrix * lightProjectionMatrix * lightViewMatrix * modelViewMatrix * pos;
+  }
 }

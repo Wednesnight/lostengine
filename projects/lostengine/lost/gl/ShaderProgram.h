@@ -44,6 +44,7 @@ typedef std::list<ShaderPtr>                    ShaderList;
 
   void setInt(const std::string& inName, GLint inVal);
   void setFloat(const std::string& inName, float inVal);
+  void setBool(const std::string& inName, bool inVal);
   void set(const std::string& inName, const lost::common::Color& inVal);
   void set(const std::string& inName, const lost::math::Vec4& inVal);
   void set(const std::string& inName, const lost::math::Vec2& inVal);

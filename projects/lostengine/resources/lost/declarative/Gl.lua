@@ -41,6 +41,8 @@ function Gl:Shader(def)
         shaderProgram:setInt(k, v)
       elseif nt == gl.GL_FLOAT then
         shaderProgram:setFloat(k,v)
+      elseif nt == gl.GL_BOOL then
+        shaderProgram:setBool(k,v)
       else
         shaderProgram:set(k,v)
       end
