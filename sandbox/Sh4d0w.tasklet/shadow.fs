@@ -9,12 +9,17 @@ varying vec4 shadowTexCoord;
 
 void main(void)
 {
-  float col = 1.0;
+  float shadow = 1.0;
+
   vec3 s = vec3(shadowTexCoord.xyz / shadowTexCoord.w);
-  float depth = shadow2D(texture0, s).z;
-  if (depth < s.z - 0.005)
+  if (s.x >= 0.0 && s.x <= 1.0 && s.y >= 0.0 && s.y <= 1.0)
   {
-    col = 0.2;
+    float depth = shadow2D(texture0, s).z;
+    if (depth < s.z - 0.005)
+    {
+      shadow = 0.2;
+    }
   }
-  gl_FragColor = vec4(col * color.rgb * lightIntensity, color.a);
+
+  gl_FragColor = vec4(shadow * color.rgb * lightIntensity, color.a);
 }
