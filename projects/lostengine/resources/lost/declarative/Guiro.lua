@@ -35,8 +35,26 @@ function Guiro:searchAndAddSubviews(target, source)
   end
 end
 
+-- in order to enable the setting of parts of the bounds from theme and declarative guiro constructs,
+-- we need to carefully merge the bounds. Creation happens as follows:
+-- * the View class constructs default bounds for itself, which are initially fullscreen, so you can see at least something
+-- * derived classes can override this in their constructor
+-- * a style can modify the bounds of the target view 
+-- * the last step is the application of the declarative bounds instance
+-- during that last step, the bounds should be carefully merged, so that the style can create a temporary bounds
+-- object which is partially filled, then the rest of the bounds parameters can be copied from the declarative instance.
+-- in order to help debug broken constructs , we should report bounds objects that are incomplete after the merge
+function mergeBounds(targetBounds, sourceBounds)
+  if sourceBounds == nil then return end
+  targetBounds:merge(sourceBounds)
+  if not targetBounds:complete() then
+    log.error("incomplete bounds detected after merge")
+  end
+end
+
 function Guiro:assignViewAttributes(target, source)
-  if source.bounds ~= nil then target.bounds = source.bounds end
+--  if source.bounds ~= nil then target.bounds = source.bounds end
+  mergeBounds(target.bounds, source.bounds)
   if source.id  ~= nil then target.id = source.id end
   if source.showFrame  ~= nil then target:showFrame(source.showFrame)	end
   if source.frameColor  ~= nil then target:frameColor(source.frameColor) end
