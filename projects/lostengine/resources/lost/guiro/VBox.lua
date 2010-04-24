@@ -91,6 +91,7 @@ function VBox:updateStack()
 end
 
 function VBox:afterLayout()
+  lost.guiro.View.afterLayout(self)
   if self._mode == "spread" then
     self:updateSpread()
   elseif self._mode == "stack" then
