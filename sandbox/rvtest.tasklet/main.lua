@@ -15,6 +15,7 @@ using "lost.guiro.habs"
 using "lost.guiro.wabs"
 using "lost.guiro.xleft"
 using "lost.guiro.ybottom"
+using "lost.guiro.ycenter"
 
 screensize = Vec2(640,480)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
@@ -49,29 +50,65 @@ function startup(tasklet)
 				showFrame = false,
         backgroundColor = Color(.9294,.9294,.9294),
 --        frameColor = Color(1,1,1),
-				dcl.guiro:VBox
-				{
-					bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
-					mode = "stack",
-					spacing = 10,
-					valign = "center",
-	        dcl.guiro:Button
-	        {
-	          id = "roundedRectButton",
-	          theme = "pebble",
-	          style = "RoundedRect",
-	          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(18)), 
-	          title = "Timmy !!!!"       
-	        },
-	        dcl.guiro:Button
-	        {
-	          id = "roundedRectButton",
-	          theme = "pebble",
-	          style = "RoundedRect",
-	          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
-	          title = "Rounded Rect Button"       
-	        }
-				}
+        dcl.guiro:HBox
+        {
+          showFrame = true,
+          frameColor = Color(0,1,0),
+--          showBackground = true,
+--          backgroundColor = Color(0,1,0),
+          bounds = Bounds(xleft(),ybottom(), wrel(1), hrel(1)),
+          mode = "stack",
+  				dcl.guiro:VBox
+  				{
+  				  showFrame = true,
+  				  frameColor = Color(1,0,0),
+  					bounds = Bounds(xabs(0), yabs(0), wabs(200), hrel(1)),
+  					mode = "stack",
+  					spacing = 10,
+  					valign = "center",
+  	        dcl.guiro:Button
+  	        {
+  	          id = "roundedRectButton",
+  	          theme = "pebble",
+  	          style = "RoundedRect",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(18)), 
+  	          title = "Timmy !!!!"       
+  	        },
+  	        dcl.guiro:Button
+  	        {
+  	          id = "roundedRectButton",
+  	          theme = "pebble",
+  	          style = "RoundedRect",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
+  	          title = "Rounded Rect Button"       
+  	        }
+  				},
+  				dcl.guiro:VBox
+  				{
+  					bounds = Bounds(xabs(0), ycenter(), wabs(200), hrel(1)),
+  					mode = "stack",
+  					spacing = 10,
+  					valign = "center",
+  					showFrame = true,
+  					frameColor = Color(0,0,1),
+  	        dcl.guiro:Button
+  	        {
+  	          id = "roundedRectButton",
+  	          theme = "pebble",
+  	          style = "RoundedRect",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(18)), 
+  	          title = "Timmy !!!!"       
+  	        },
+  	        dcl.guiro:Button
+  	        {
+  	          id = "roundedRectButton",
+  	          theme = "pebble",
+  	          style = "RoundedRect",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
+  	          title = "Rounded Rect Button"       
+  	        }
+  				}
+        }
       }
     }
   }
