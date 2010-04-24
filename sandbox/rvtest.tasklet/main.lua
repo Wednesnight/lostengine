@@ -64,23 +64,31 @@ function startup(tasklet)
   				  frameColor = Color(1,0,0),
   					bounds = Bounds(xabs(0), yabs(0), wabs(200), hrel(1)),
   					mode = "stack",
-  					spacing = 10,
+  					spacing = 2,
   					valign = "center",
   	        dcl.guiro:Button
   	        {
   	          id = "roundedRectButton",
   	          theme = "pebble",
-  	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(18)), 
-  	          title = "Timmy !!!!"       
+  	          style = "RoundedRectRegular",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          title = "Regular"       
   	        },
   	        dcl.guiro:Button
   	        {
   	          id = "roundedRectButton",
   	          theme = "pebble",
-  	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
-  	          title = "Rounded Rect Button"       
+  	          style = "RoundedRectSmall",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          title = "Small"       
+  	        },
+  	        dcl.guiro:Button
+  	        {
+  	          id = "roundedRectButton",
+  	          theme = "pebble",
+  	          style = "RoundedRectMini",
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          title = "Mini"       
   	        }
   				},
   				dcl.guiro:VBox
@@ -96,16 +104,16 @@ function startup(tasklet)
   	          id = "roundedRectButton",
   	          theme = "pebble",
   	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), habs(18)), 
-  	          title = "Timmy !!!!"       
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), nil), 
+  	          title = "Base SDK"       
   	        },
   	        dcl.guiro:Button
   	        {
   	          id = "roundedRectButton",
   	          theme = "pebble",
   	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), habs(18)), 
-  	          title = "Rounded Rect Button"       
+  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), nil), 
+  	          title = "Base SDK | Debug"       
   	        }
   				}
         }

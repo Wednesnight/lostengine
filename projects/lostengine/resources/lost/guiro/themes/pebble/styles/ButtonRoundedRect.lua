@@ -6,6 +6,7 @@ require("lost.guiro.Style")
 require("lost.guiro.Image")
 require("lost.guiro.Bounds")
 require("lost.guiro.Label")
+require("lost.guiro.Bounds")
 
 using "lost.common.ColorGradient"
 using "lost.common.ColorPoint"
@@ -34,14 +35,23 @@ function ButtonRoundedRect:constructor(loader, df, textureManager)
 	local c2 = 245/255
 	rrbg:add(ColorPoint(0, Color(c1,c1,c1)))
 	rrbg:add(ColorPoint(1, Color(c2,c2,c2)))
-	self.textureManager:addGradient("rrbg", rrbg)
+	
+	if not self.textureManager:hasGradient("rrbg") then
+	  self.textureManager:addGradient("rrbg", rrbg)
+	end
 
 	c1 = 210/255
 	c2 = 167/255
 	rrbg2:add(ColorPoint(0, Color(c1,c1,c1)))
 	rrbg2:add(ColorPoint(1, Color(c2,c2,c2)))
 
-	self.textureManager:addGradient("rrbg2", rrbg2)
+	if not self.textureManager:hasGradient("rrbg2") then
+	  self.textureManager:addGradient("rrbg2", rrbg2)
+	end
+	
+	self.fontSize = 16
+	self.buttonHeight = 24
+	self.cornerRadius = self.buttonHeight / 2
 end
 
 function ButtonRoundedRect:apply(target)
@@ -59,6 +69,8 @@ function ButtonRoundedRect:apply(target)
   target:label(lost.guiro.Button.STATE_HOVER, self:buildLabel(Color(.2,.2,.2)))
   target:label(lost.guiro.Button.STATE_PUSHED, self:buildLabel(Color(0,0,0)))
   target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(.1,.1,.1)))
+  
+  target.bounds.height = lost.guiro.habs(self.buttonHeight)
 end
 
 function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
@@ -66,7 +78,7 @@ function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
   result.id = vid
   result:showFrame(true)
   result:showBackground(true)
-	result:backgroundCornerRadius(9)
+	result:backgroundCornerRadius(self.cornerRadius)
 	result:backgroundColor(Color(1,1,1))
 	result:backgroundGradient(self.textureManager._textureManager.gradientTexture, self.textureManager:gradientCoord(gradname))
 	local c = .6588
@@ -85,7 +97,7 @@ function ButtonRoundedRect:buildLabel(col)
   local result = lost.guiro.Label(self.textureManager)
   result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
   result:font(self.defaultFont)
-  result:fontSize(10)
+  result:fontSize(self.fontSize)
   result:text("Button")
   result:textColor(col)
   result:showShadow(false)

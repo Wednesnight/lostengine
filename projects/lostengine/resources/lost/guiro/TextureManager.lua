@@ -18,6 +18,10 @@ function TextureManager:addGradient(name, colorGradient)
   self._gradientName2Coord[name] = coord
 end
 
+function TextureManager:hasGradient(name)
+  return (self._gradientName2Coord[name] ~= nil)
+end
+
 function TextureManager:gradientCoord(name)
   local result = self._gradientName2Coord[name]
   if not result then

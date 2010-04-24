@@ -28,6 +28,27 @@ function Bounds:rect(parentRect)
       math.floor(self:width(parentRect)), math.floor(self:height(parentRect)))
 end
 
+-- the receiver is the target, source will be applied to it
+-- values from source are only copied if they are ~= nil
+function Bounds:merge(source)
+  if source.x ~= nil then self.x = source.x end
+  if source.y ~= nil then self.y = source.y end
+  if source.width ~= nil then self.width = source.width end
+  if source.height ~= nil then self.height = source.height end
+end
+
+-- returns true if all bounds parameters are ~= nil
+function Bounds:complete()
+  local result = true
+  if (self.x == nil) or 
+     (self.y == nil) or 
+     (self.width == nil) or 
+     (self.height == nil) then
+    result = false
+  end
+  return result
+end
+
 function xcenter(mod)
   mod = mod or {}
   mod.abs = mod.abs or 0

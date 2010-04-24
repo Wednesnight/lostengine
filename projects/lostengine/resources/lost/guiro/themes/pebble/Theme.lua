@@ -6,6 +6,9 @@ require("lost.guiro.Theme")
 
 require("lost.guiro.themes.pebble.styles.ViewDefault")
 require("lost.guiro.themes.pebble.styles.ButtonRoundedRect")
+require("lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular")
+require("lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall")
+require("lost.guiro.themes.pebble.styles.ButtonRoundedRectMini")
 
 using("lost.math.Vec2")
 
@@ -21,4 +24,7 @@ function Theme:constructor(loader, textureManager)
   self.styles = {} -- FIXME why is styles not properly initialised from base class constructor?  
   self:addStyle(lost.guiro.themes.pebble.styles.ViewDefault())  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRect(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectMini(loader, self.defaultFont, textureManager))  
 end
