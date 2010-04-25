@@ -8,9 +8,6 @@ require("lost.guiro.Bounds")
 require("lost.guiro.Label")
 require("lost.guiro.Bounds")
 
-using "lost.common.ColorGradient"
-using "lost.common.ColorPoint"
-
 local Color = lost.common.Color
 local Vec2 = lost.math.Vec2
 local Bounds = lost.guiro.Bounds
@@ -27,27 +24,6 @@ function ButtonRoundedRect:constructor(loader, df, textureManager)
   self.defaultFont = df
   self.name = "RoundedRect"
   self.targetClassName = "lost.guiro.Button"
-
-	local rrbg = ColorGradient.create()
-	local rrbg2 = ColorGradient.create()
-
-	local c1 = 222/255
-	local c2 = 245/255
-	rrbg:add(ColorPoint(0, Color(c1,c1,c1)))
-	rrbg:add(ColorPoint(1, Color(c2,c2,c2)))
-	
-	if not self.textureManager:hasGradient("rrbg") then
-	  self.textureManager:addGradient("rrbg", rrbg)
-	end
-
-	c1 = 210/255
-	c2 = 167/255
-	rrbg2:add(ColorPoint(0, Color(c1,c1,c1)))
-	rrbg2:add(ColorPoint(1, Color(c2,c2,c2)))
-
-	if not self.textureManager:hasGradient("rrbg2") then
-	  self.textureManager:addGradient("rrbg2", rrbg2)
-	end
 	
 	self.fontSize = 16
 	self.buttonHeight = 24
