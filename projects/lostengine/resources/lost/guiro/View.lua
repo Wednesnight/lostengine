@@ -40,6 +40,7 @@ using "lost.math.MatrixTranslation"
 
 function View:constructor(textureManager)
   assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
+  self.textureManager = textureManager
   -- call interface ctors
   lost.guiro.HasLayout.constructor(self)
   lost.guiro.HasSubviews.constructor(self)
@@ -312,8 +313,12 @@ function View:frameRoundCorners(t,b,l,r)
 	self.frameMesh:roundCorners(t,b,l,r)
 end
 
-function View:backgroundGradient(tex, coord)
-  if tex ~= nil then
+function View:backgroundGradient(gradientName)
+--function View:backgroundGradient(tex, coord)
+  if gradientName ~= nil then
+    local tex = self.textureManager._textureManager.gradientTexture
+    local coord = self.textureManager:gradientCoord(gradientName)
+    log.debug("gradient "..gradientName.." coord: "..tostring(coord))
     if self.backgroundMesh.material.uniforms == nil then
       self.backgroundMesh.material.uniforms = lost.gl.UniformBlock.create()
     end
@@ -326,8 +331,11 @@ function View:backgroundGradient(tex, coord)
   end
 end
 
-function View:frameGradient(tex, coord)
-  if tex ~= nil then
+function View:frameGradient(gradientName)
+--function View:frameGradient(tex, coord)
+  if gradientName ~= nil then
+    local tex = self.textureManager._textureManager.gradientTexture
+    local coord = self.textureManager:gradientCoord(gradientName)
     if self.frameMesh.material.uniforms == nil then
       self.frameMesh.material.uniforms = lost.gl.UniformBlock.create()
     end

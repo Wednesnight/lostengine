@@ -10,6 +10,7 @@ require("lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular")
 require("lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall")
 require("lost.guiro.themes.pebble.styles.ButtonRoundedRectMini")
 require("lost.guiro.themes.pebble.buildGradients")
+require("lost.guiro.themes.pebble.styles.ViewBubbleGrey")
 
 using("lost.math.Vec2")
 using("lost.guiro.themes.pebble.buildGradients")
@@ -30,4 +31,5 @@ function Theme:constructor(loader, textureManager)
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectMini(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ViewBubbleGrey())
 end

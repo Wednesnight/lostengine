@@ -48,7 +48,8 @@ function startup(tasklet)
         bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
         showBackground = true,
 				showFrame = false,
-        backgroundColor = Color(.9294,.9294,.9294),
+--        backgroundColor = Color(.9294,.9294,.9294),
+        backgroundColor = Color(0,0,0),
 --        frameColor = Color(1,1,1),
         dcl.guiro:HBox
         {
@@ -89,6 +90,10 @@ function startup(tasklet)
   	          style = "RoundedRectMini",
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
   	          title = "Mini"       
+  	        },
+  	        dcl.guiro:View
+  	        {
+  	            theme = "pebble", style="bubbleGrey"
   	        }
   				},
   				dcl.guiro:VBox
