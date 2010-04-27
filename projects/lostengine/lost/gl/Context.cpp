@@ -385,6 +385,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         if(currentShader->hasUniform("color")) { currentShader->set("color", mesh->material->color); }
         if(currentShader->hasUniform("texture0")) { currentShader->setInt("texture0", 0); }
         if(currentShader->hasUniform("texture1")) { currentShader->setInt("texture1", 1); }
+        if(currentShader->hasUniform("texture2")) { currentShader->setInt("texture2", 2); }
         
         // set mesh specific uniforms after automatic ones
         if(mesh->material->uniforms)
