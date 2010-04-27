@@ -1,5 +1,6 @@
 uniform sampler2DShadow texture0;
 uniform sampler2D texture1;
+uniform sampler2D texture2;
 uniform vec4 color;
 
 uniform vec2 depth;
@@ -7,12 +8,14 @@ uniform vec2 viewport;
 
 uniform bool ssaoEnabled;
 uniform bool shadowmapEnabled;
+uniform bool matcapEnabled;
 
 // will be calculated per vertex and interpolated per fragment
 varying float lightIntensity;
 
 varying vec4 ssaoTexcoord;
 varying vec4 shadowTexCoord;
+varying vec4 matcapTexCoord;
 
 float readDepth( in vec2 coord )
 {
@@ -43,11 +46,21 @@ void main(void)
       float shadowMapDepth = shadow2D(texture0, s).z;
       if (shadowMapDepth < s.z - 0.005)
       {
-        shadow = 0.2;
+        shadow = 0.6;
       }
     }
   }
-  vec4 shadowedColor = vec4(shadow * color.rgb * lightIntensity, color.a);
+
+  vec4 shadowedColor;
+  if (matcapEnabled)
+  {
+    vec4 matcapColor = texture2D(texture2, matcapTexCoord.xy);
+    shadowedColor = vec4(shadow * color.rgb * matcapColor.rgb * lightIntensity, color.a * matcapColor.a);
+  }
+  else
+  {
+    shadowedColor = vec4(shadow * color.rgb * lightIntensity, color.a);
+  }
 
 	float ao = 0.0;
   if (ssaoEnabled)

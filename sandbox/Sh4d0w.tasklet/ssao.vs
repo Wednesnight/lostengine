@@ -16,6 +16,7 @@ uniform mat4 projectionMatrix;
 uniform bool lightingEnabled;
 uniform bool ssaoEnabled;
 uniform bool shadowmapEnabled;
+uniform bool matcapEnabled;
 
 attribute vec3 position;
 attribute vec3 normal;
@@ -25,6 +26,7 @@ varying float lightIntensity;
 
 varying vec4 ssaoTexcoord;
 varying vec4 shadowTexCoord;
+varying vec4 matcapTexCoord;
 
 void main(void)
 {
@@ -63,5 +65,13 @@ void main(void)
   if (shadowmapEnabled)
   {
     shadowTexCoord = biasMatrix * lightProjectionMatrix * lightViewMatrix * modelViewMatrix * pos;
+  }
+
+  /*
+   * calculate matcap coord
+   */
+  if (matcapEnabled)
+  {
+    matcapTexCoord = biasMatrix * normalize(modelViewMatrix * vec4(normal, 0.0));
   }
 }

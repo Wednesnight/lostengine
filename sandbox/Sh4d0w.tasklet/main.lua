@@ -73,6 +73,7 @@ function startup(tasklet)
       scene.ssaoShader:disable()
     end
   end)
+
   tasklet.eventDispatcher:addEventListener(ResizeEvent.MAIN_WINDOW_RESIZE, function(event)
     
     -- update cams
@@ -90,6 +91,12 @@ function startup(tasklet)
     scene.ssaoShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
     scene.ssaoShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
     scene.ssaoShader:disable()
+  end)
+
+  matcapLoader = lost.resource.Loader.create()
+  matcapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
+  tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, function(event)
+    scene:setMatCap(matcapLoader:load(event.filename))
   end)
 
   return true
