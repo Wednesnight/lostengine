@@ -55,6 +55,7 @@ function createScene(loader)
       lightingEnabled = true,
       ssaoEnabled = true,
       shadowmapEnabled = true,
+      matcapEnabled = true,
       lightPosition = result.lightCam.cam:position(),
       biasMatrix = biasMatrix,
       lightViewMatrix = result.lightCam.cam:viewMatrix(),
@@ -87,7 +88,16 @@ function createScene(loader)
         textures =
         {
           result.fb:depthTexture(),
-          result.fbSsao:depthTexture()
+          result.fbSsao:depthTexture(),
+          dcl.gl:Texture
+          {
+            filename = "materials/gold.tga",
+            params = dcl.gl:TextureParams
+            {
+              minFilter = gl.GL_LINEAR,
+              magFilter = gl.GL_LINEAR
+            }
+          }
         }
       }
     },
@@ -109,6 +119,23 @@ function createScene(loader)
         math.random(meshRangeY.x, meshRangeY.y), math.random(meshRangeZ.x, meshRangeZ.y)))
     })
     idx = idx + 1
+  end
+
+  result.setMatCap = function(self, data)
+    for k,m in next,self.meshes do
+      m.mesh.material = lost.mesh.Material.create()
+      m.mesh.material.shader = self.ssaoShader
+      m.mesh.material:addTexture(self.fb:depthTexture())
+      m.mesh.material:addTexture(self.fbSsao:depthTexture())
+      m.mesh.material:addTexture(dcl.gl:Texture {
+        bitmap = data,
+        params = dcl.gl:TextureParams
+        {
+          minFilter = gl.GL_LINEAR,
+          magFilter = gl.GL_LINEAR
+        }
+      })
+    end
   end
 
   -- rendergraph node (used for shadow map and resulting scene)
@@ -141,7 +168,17 @@ function createScene(loader)
         shader = result.ssaoShader,
         textures =
         {
-          result.fb:depthTexture()
+          result.fb:depthTexture(),
+          result.fbSsao:depthTexture(),
+          dcl.gl:Texture
+          {
+            filename = "materials/white.png",
+            params = dcl.gl:TextureParams
+            {
+              minFilter = gl.GL_LINEAR,
+              magFilter = gl.GL_LINEAR
+            }
+          }
         }
       }
     }
