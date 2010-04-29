@@ -16,7 +16,6 @@ function TextureManager:addGradient(name, colorGradient)
     log.warn("overwriting gradient "..tostring(name))
   end
   self._gradientName2Coord[name] = coord
-  log.debug("adding "..name.." coord: "..tostring(coord))
 end
 
 function TextureManager:hasGradient(name)

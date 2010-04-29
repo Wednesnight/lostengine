@@ -1,4 +1,5 @@
 require("lost.declarative.Context")
+require("lost.common.Shaders")
 
 using "lost.math.Vec2"
 using "lost.math.Rect"
@@ -14,10 +15,11 @@ using "lost.guiro.ybottom"
 using "lost.guiro.habs"
 using "lost.guiro.wabs"
 using "lost.guiro.xleft"
+using "lost.guiro.xcenter"
 using "lost.guiro.ybottom"
 using "lost.guiro.ycenter"
 
-screensize = Vec2(640,480)
+screensize = Vec2(320,480)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
 
 running = true
@@ -48,8 +50,8 @@ function startup(tasklet)
         bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
         showBackground = true,
 				showFrame = false,
---        backgroundColor = Color(.9294,.9294,.9294),
-        backgroundColor = Color(0,0,0),
+        backgroundColor = Color(.9294,.9294,.9294),
+--        backgroundColor = Color(0,0,0,0),
 --        frameColor = Color(1,1,1),
         dcl.guiro:HBox
         {
@@ -91,10 +93,134 @@ function startup(tasklet)
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
   	          title = "Mini"       
   	        },
-  	        dcl.guiro:View
+  	        dcl.guiro:HBox
   	        {
-  	            theme = "pebble", style="bubbleGrey"
-  	        }
+  	          bounds=Bounds(xcenter(), nil, wrel(1), habs(20)),
+  	          mode="stack",
+  	          spacing=2,
+  	          valign = "center",
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleGrey",
+    	            size="regular",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleGrey",
+    	            size="small",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleGrey",
+    	            size="mini",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleGrey",
+    	        }
+    	      },
+  	        dcl.guiro:HBox
+  	        {
+  	          bounds=Bounds(xcenter(), nil, wrel(1), habs(20)),
+  	          mode="stack",
+  	          spacing=2,
+  	          valign = "center",
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleBlue",
+    	            size="regular",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleBlue",
+    	            size="small",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleBlue",
+    	            size="mini",
+    	        },
+              dcl.guiro:View
+    	        {
+    	            theme = "pebble",
+    	            style="bubbleBlue",
+    	        }
+    	      },
+    	      dcl.guiro:HBox
+    	      {
+    	        bounds = Bounds(xleft(), nil, wrel(1), habs(30)),
+    	        mode="stack",
+    	        spacing=0,
+    	        valign="center",
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(50), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "regular",
+    	            segmentColor = "blue",
+    	            orientation = "left"
+    	        },
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(40), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "regular",
+    	            segmentColor = "grey",
+    	            orientation = "mid"
+    	        },
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "regular",
+    	            segmentColor = "grey",
+    	            orientation = "right"
+    	        }
+    	      },
+    	      dcl.guiro:HBox
+    	      {
+    	        bounds = Bounds(xleft(), nil, wrel(1), habs(30)),
+    	        mode="stack",
+    	        spacing=0,
+    	        valign="center",
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "mini",
+    	            segmentColor = "blue",
+    	            orientation = "left"
+    	        },
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "mini",
+    	            segmentColor = "grey",
+    	            orientation = "mid"
+    	        },
+              dcl.guiro:View
+    	        {
+    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            theme = "pebble",
+    	            style = "segment",
+    	            size = "mini",
+    	            segmentColor = "grey",
+    	            orientation = "right"
+    	        }
+    	      }
   				},
   				dcl.guiro:VBox
   				{
@@ -125,6 +251,38 @@ function startup(tasklet)
       }
     }
   }
+  
+  tasklet.renderNode:add(
+    dcl.rg:Node
+    {
+      dcl.rg:ClearColor
+      {
+        color = Color(0,0,0,0)
+      },
+      dcl.rg:Clear
+      {
+        mask = gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT
+      },
+      dcl.rg:DepthTest{false},
+      dcl.rg:Camera2D
+      {
+        viewport = Rect(0,0,screensize.x, screensize.y)
+      },    
+      dcl.rg:Draw
+      {
+        mesh = dcl.mesh:Quad
+        {
+          texture = dcl.guiro.textureManager._textureManager.gradientTexture,
+          material = 
+          {
+            blend = true,
+            color = Color(1,1,1),
+            shader = lost.common.Shaders.textureShader()
+          }
+        }
+      }
+    }
+  )
   
   return true
 end

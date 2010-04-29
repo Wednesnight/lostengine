@@ -172,7 +172,7 @@ void RoundedRect::updateSides()
   if(!showRight)
   {
     if(showTop)
-      vertexBuffer->set(3,UT_texcoord0, Vec2(0,my));
+      vertexBuffer->set(3,UT_texcoord0, Vec2(mx,0));
     else
       vertexBuffer->set(3,UT_texcoord0, Vec2(0,0));
     vertexBuffer->set(7,UT_texcoord0, Vec2(0,0));

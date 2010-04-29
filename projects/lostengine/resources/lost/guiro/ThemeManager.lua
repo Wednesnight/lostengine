@@ -22,7 +22,7 @@ function ThemeManager:addTheme(theme)
   self.themes[theme.name] = theme
 end
 
-function ThemeManager:apply(target, themeName, styleName)
+function ThemeManager:apply(target, themeName, styleName, def)
 --  log.debug("apply theme '"..themeName.."' style '"..styleName.."' to instance of "..target:className())
   
   -- FIXME: this will fail horribly if target is not an instance of a class declared with lost.common.Class.
@@ -47,5 +47,5 @@ function ThemeManager:apply(target, themeName, styleName)
     return
   end
   
-  style:apply(target)
+  style:apply(target, def)
 end
