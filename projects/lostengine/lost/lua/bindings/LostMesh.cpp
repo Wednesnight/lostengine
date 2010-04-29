@@ -251,6 +251,7 @@ namespace lost
           .def("roundCorners", &RoundedRect::roundCorners)
           .def("radius", &RoundedRect::radius)
           .def("showSides", &RoundedRect::showSides)
+          .def("lineWidth", &RoundedRect::lineWidth)
           .scope
           [
             def("create", &RoundedRect::create)            

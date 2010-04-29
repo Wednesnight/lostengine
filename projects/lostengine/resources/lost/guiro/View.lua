@@ -323,6 +323,10 @@ function View:frameShowSides(t,b,l,r)
   self.frameMesh:showSides(t,b,l,r)
 end
 
+function View:frameWidth(val)
+	self.frameMesh:lineWidth(val)
+end
+
 function View:backgroundGradient(gradientName)
 --function View:backgroundGradient(tex, coord)
   if gradientName ~= nil then

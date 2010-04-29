@@ -65,7 +65,7 @@ function startup(tasklet)
   				{
   				  showFrame = true,
   				  frameColor = Color(1,0,0),
-  					bounds = Bounds(xabs(0), yabs(0), wabs(200), hrel(1)),
+  					bounds = Bounds(xabs(0), yabs(0), wrel(.25), hrel(1)),
   					mode = "stack",
   					spacing = 2,
   					valign = "center",
@@ -161,7 +161,7 @@ function startup(tasklet)
     	        valign="center",
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(50), nil),
+    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
@@ -170,7 +170,8 @@ function startup(tasklet)
     	        },
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(40), nil),
+									hidden = false,
+    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
@@ -179,7 +180,8 @@ function startup(tasklet)
     	        },
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+  								hidden = false,
+    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
