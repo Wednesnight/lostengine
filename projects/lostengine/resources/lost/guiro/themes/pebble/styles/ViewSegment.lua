@@ -52,11 +52,11 @@ function ViewSegment:apply(target, def)
   end
 
   if orientation == "left" then
-    target:frameRoundCorners(true, false, true, false)
+    target:frameRoundCorners(true, true, true, true)
     target:backgroundRoundCorners(true, false, true, false)
     target:frameShowSides(true, true, true, false)
   elseif orientation == "mid" then
-    target:frameRoundCorners(false, false, false, false)
+    target:frameRoundCorners(false, true, false, true)
     target:backgroundRoundCorners(false, false, false, false)
     target:frameShowSides(true, true, true, false)
   elseif orientation == "right" then
