@@ -1,4 +1,4 @@
--- lost.guiro.themes.pebble.styles.ViewBubbleGrey
+-- lost.guiro.themes.pebble.styles.ViewBubbleBlue
 module("lost.guiro.themes.pebble.styles", package.seeall)
 
 require("lost.common.Class")
@@ -6,11 +6,11 @@ require("lost.guiro.Style")
 
 using("lost.common.Color")
 
-lost.common.Class "lost.guiro.themes.pebble.styles.ViewBubbleGrey" "lost.guiro.Style" {}
+lost.common.Class "lost.guiro.themes.pebble.styles.ViewBubbleBlue" "lost.guiro.Style" {}
 
-function ViewBubbleGrey:constructor()
+function ViewBubbleBlue:constructor()
   lost.guiro.Style(self)
-  self.name = "bubbleGrey"
+  self.name = "bubbleBlue"
   self.targetClassName = "lost.guiro.View"
   self.sizes = {}
   self.sizes["regular"] = 16;
@@ -18,7 +18,7 @@ function ViewBubbleGrey:constructor()
   self.sizes["mini"] = 10;
 end
 
-function ViewBubbleGrey:apply(target, def)
+function ViewBubbleBlue:apply(target, def)
   local size = 16
   if def and def.size then
     size = self.sizes[def.size] or size
@@ -33,7 +33,7 @@ function ViewBubbleGrey:apply(target, def)
   target:showFrame(true)
   target:showBackground(true)
   target:backgroundColor(Color(1,1,1))
-  target:frameColor(Color(1,1,1))
-  target:backgroundGradient("bubbleGreyBg")
-  target:frameGradient("bubbleGreyFrame")
+  target:frameColor(Color(37/255, 28/255, 169/255))
+  target:backgroundGradient("bubbleBlueBg")
+  target:frameGradient(nil)
 end

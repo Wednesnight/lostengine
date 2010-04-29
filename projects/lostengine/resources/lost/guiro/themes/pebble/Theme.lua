@@ -11,6 +11,8 @@ require("lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall")
 require("lost.guiro.themes.pebble.styles.ButtonRoundedRectMini")
 require("lost.guiro.themes.pebble.buildGradients")
 require("lost.guiro.themes.pebble.styles.ViewBubbleGrey")
+require("lost.guiro.themes.pebble.styles.ViewBubbleBlue")
+require("lost.guiro.themes.pebble.styles.ViewSegment")
 
 using("lost.math.Vec2")
 using("lost.guiro.themes.pebble.buildGradients")
@@ -27,9 +29,11 @@ function Theme:constructor(loader, textureManager)
   self.name = "pebble"
   self.styles = {} -- FIXME why is styles not properly initialised from base class constructor?  
   self:addStyle(lost.guiro.themes.pebble.styles.ViewDefault())  
---  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRect(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRect(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectMini(loader, self.defaultFont, textureManager))  
   self:addStyle(lost.guiro.themes.pebble.styles.ViewBubbleGrey())
+  self:addStyle(lost.guiro.themes.pebble.styles.ViewBubbleBlue())
+  self:addStyle(lost.guiro.themes.pebble.styles.ViewSegment())  
 end

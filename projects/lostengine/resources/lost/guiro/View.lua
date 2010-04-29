@@ -313,12 +313,22 @@ function View:frameRoundCorners(t,b,l,r)
 	self.frameMesh:roundCorners(t,b,l,r)
 end
 
+function View:backgroundShowSides(t,b,l,r)
+  log.debug("bgss")
+  self.backgroundMesh:showSides(t,b,l,r)
+end
+
+function View:frameShowSides(t,b,l,r)
+  log.debug("frss")
+  self.frameMesh:showSides(t,b,l,r)
+end
+
 function View:backgroundGradient(gradientName)
 --function View:backgroundGradient(tex, coord)
   if gradientName ~= nil then
     local tex = self.textureManager._textureManager.gradientTexture
     local coord = self.textureManager:gradientCoord(gradientName)
-    log.debug("gradient "..gradientName.." coord: "..tostring(coord))
+--    log.debug("gradient "..gradientName.." coord: "..tostring(coord))
     if self.backgroundMesh.material.uniforms == nil then
       self.backgroundMesh.material.uniforms = lost.gl.UniformBlock.create()
     end

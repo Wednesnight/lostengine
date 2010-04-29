@@ -1,13 +1,27 @@
 #include "lost/common/ColorGradient.h"
+#include <algorithm>
+
+using namespace std;
+
 
 namespace lost
 {
 namespace common
 {
 
+bool sortfunc(const ColorPoint& c1, const ColorPoint& c2)
+{
+  if(c1.coord < c2.coord)
+    return true;
+  else 
+    return false;
+
+}
+
 void ColorGradient::add(const ColorPoint& cp)
 {
   colorPoints.push_back(cp);
+  sort(colorPoints.begin(), colorPoints.end(), sortfunc);
 }
 
 Color ColorGradient::colorAt(float coord)

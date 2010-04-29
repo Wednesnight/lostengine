@@ -130,7 +130,7 @@ end
 function Guiro:applyStyle(target, def)
   local themeName = def.theme or self.themeManager.defaultTheme
   local styleName = def.style or self.themeManager.defaultStyle
-  self.themeManager:apply(target, themeName, styleName)
+  self.themeManager:apply(target, themeName, styleName, def)
 end
 
 -- if source contains a key 'listeners' with a table as value
