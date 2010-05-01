@@ -35,7 +35,7 @@ Uniform& ShaderProgram::operator[](const std::string& inName)
   return uniform(inName);
 }
 
-void ShaderProgram::attach(const ShaderPtr& inShader)
+void ShaderProgram::attach(ShaderPtr& inShader)
 {
   glAttachShader(program, inShader->shader);GLDEBUG_THROW;
   shaders.push_back(inShader);

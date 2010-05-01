@@ -5,13 +5,17 @@
 
 namespace lost
 {
-namespace gl
-{
-struct VertexShader : public Shader
-{
-  VertexShader();
-};
-}
+  namespace gl
+  {
+    struct VertexShader;
+    typedef lost::shared_ptr<VertexShader> VertexShaderPtr;
+
+    struct VertexShader : public Shader
+    {
+      VertexShader();
+      static ShaderPtr create() { return VertexShaderPtr(new VertexShader); }
+    };
+  }
 }
 
 #endif

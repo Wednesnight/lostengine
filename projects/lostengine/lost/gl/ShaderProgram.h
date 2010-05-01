@@ -27,9 +27,11 @@ typedef std::list<ShaderPtr>                    ShaderList;
 
   ShaderProgram();
   virtual ~ShaderProgram();
+  static ShaderProgramPtr create() { return ShaderProgramPtr(new ShaderProgram); }
+
   Uniform& uniform(const std::string& inName);
   Uniform& operator[](const std::string& inName);
-  void attach(const ShaderPtr& inShader);
+  void attach(ShaderPtr& inShader);
   void detachAllShaders(); // detaches all shaders, throwing awa all internal references to shader objects
   void link();
   bool linked();
