@@ -7,6 +7,9 @@
 #include "lost/gl/Utils.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/ShaderProgram.h"
+#include "lost/gl/Shader.h"
+#include "lost/gl/VertexShader.h"
+#include "lost/gl/FragmentShader.h"
 #include "lost/gl/Uniform.h"
 #include "lost/gl/UniformBlock.h"
 #include "lost/gl/ShaderHelper.h"
@@ -246,6 +249,11 @@ namespace lost
           class_<ShaderProgram>("ShaderProgram")
             .def("enable", &ShaderProgram::enable)
             .def("disable", &ShaderProgram::disable)
+            .def("attach", &ShaderProgram::attach)
+            .def("link", &ShaderProgram::link)
+            .def("linked", &ShaderProgram::linked)
+            .def("buildUniformMap", &ShaderProgram::buildUniformMap)
+            .def("buildVertexAttributeMap", &ShaderProgram::buildVertexAttributeMap)
             .def("log", &ShaderProgram::log)
             .def("validate", &ShaderProgram::validate)
             .def("validated", &ShaderProgram::validated)
@@ -259,10 +267,59 @@ namespace lost
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
             .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
             .def("uniformMap", &ShaderProgram_uniformMap)
+            .scope
+            [
+              def("create", &ShaderProgram::create)
+            ]
         ]
       ];
     }
-        
+
+    void LostGLShader(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<Shader>("Shader")
+            .def("source", &Shader::source)
+            .def("compile", &Shader::compile)
+            .def("compiled", &Shader::compiled)
+            .def("log", &Shader::log)
+        ]
+       ];
+    }
+
+    void LostGLVertexShader(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<VertexShader, Shader>("VertexShader")
+            .scope
+            [
+              def("create", &VertexShader::create)
+            ]
+        ]
+      ];
+    }
+    
+    void LostGLFragmentShader(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("gl")
+        [
+          class_<FragmentShader, Shader>("FragmentShader")
+            .scope
+            [
+              def("create", &FragmentShader::create)
+            ]
+         ]
+      ];
+    }
+    
     void LostGLUniform(lua_State* state)
     {
       module(state, "lost")
@@ -351,6 +408,9 @@ namespace lost
       LostGLFrameBuffer(state);
       LostGLRenderBuffer(state);
       LostGLShaderProgram(state);
+      LostGLShader(state);
+      LostGLVertexShader(state);
+      LostGLFragmentShader(state);
       LostGLUniform(state);
       LostGLUniformBlock(state);
       LostGLTexture(state);

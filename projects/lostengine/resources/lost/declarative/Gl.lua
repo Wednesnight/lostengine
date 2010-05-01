@@ -21,18 +21,72 @@ function Gl:ShaderParams(def)
 end
 
 function Gl:Shader(def)
-  -- "name" is the mandatory basename from which vertex/fragment shader names
+  -- "filename" is the mandatory basename from which vertex/fragment shader names
   -- are derived for the actual load process
-  local shaderBaseName = def["filename"]
-  if not shaderBaseName then
-    error("filename is required for gl:Shader",2)
+  local filename = def["filename"]
+  local source = def["source"]
+  if filename == nil and source == nil then
+    error("filename/source is required for gl:Shader",2)
   end
-  local shaderProgram = lost.gl.loadShader(self.loader, shaderBaseName)
+
+  local shaderProgram = lost.gl.ShaderProgram.create()
+  local vertexShader = lost.gl.VertexShader.create()
+  local fragmentShader = lost.gl.FragmentShader.create()
+
+  local vertexSource = nil
+  local fragmentSource = nil
+
+  local libs = def["libs"]
+  if libs ~= nil then
+    for k,shader in next,libs do
+      shaderProgram:attach(shader)
+    end
+  end
+
+  if filename ~= nil then
+    local vsFile = self.loader:load(filename..".vs")
+    if vsFile then
+      vertexSource = vsFile:str()
+    end
+    local fsFile = self.loader:load(filename..".fs")
+    if fsFile then
+      fragmentSource = fsFile:str()
+    end
+  elseif source ~= nil then
+    vertexSource = source.vertexShader
+    fragmentSource = source.fragmentShader
+  end
+
+  if vertexSource ~= nil then
+    vertexShader:source(vertexSource)
+    vertexShader:compile()
+    if not vertexShader:compiled() then
+      error(vertexShader:log(), 2)
+    end
+    shaderProgram:attach(vertexShader)
+  end
+
+  if fragmentSource ~= nil then
+    fragmentShader:source(fragmentSource)
+    fragmentShader:compile()
+    if not fragmentShader:compiled() then
+      error(fragmentShader:log(), 2)
+    end
+    shaderProgram:attach(fragmentShader)
+  end
+
+  shaderProgram:link()
+  if not shaderProgram:linked() then
+    error(shaderProgram:log(), 2)
+  end
+
+  shaderProgram:enable()
+  shaderProgram:buildUniformMap()
+  shaderProgram:buildVertexAttributeMap()
 
   -- apply params if present
   local params = def["params"]
   if params ~= nil then
-    shaderProgram:enable()
     for k,v in pairs(params) do
       local nt = shaderProgram:numericalType(k)
       -- since Lua only knows floats/doubles, we need to disambiguate here by
@@ -47,10 +101,45 @@ function Gl:Shader(def)
         shaderProgram:set(k,v)
       end
     end
-    shaderProgram:disable()
   end
-  
+
+  shaderProgram:disable()
+
   return shaderProgram
+end
+
+function Gl:VertexShader(def)
+  -- "filename" is the mandatory
+  local filename = def["filename"]
+  if filename == nil then
+    error("filename is required for gl:VertexShader",2)
+  end
+
+  local vertexShader = lost.gl.VertexShader.create()
+  local vsFile = self.loader:load(filename)
+  vertexShader:source(vsFile:str())
+  vertexShader:compile()
+  if not vertexShader:compiled() then
+    error(vertexShader:log(), 2)
+  end
+  return vertexShader
+end
+
+function Gl:FragmentShader(def)
+  -- "filename" is the mandatory
+  local filename = def["filename"]
+  if filename == nil then
+    error("filename is required for gl:FragmentShader",2)
+  end
+
+  local fragmentShader = lost.gl.FragmentShader.create()
+  local fsFile = self.loader:load(filename)
+  fragmentShader:source(fsFile:str())
+  fragmentShader:compile()
+  if not fragmentShader:compiled() then
+    error(fragmentShader:log(), 2)
+  end
+  return fragmentShader
 end
 
 -- we can't pass through the actual definition here, because def is a lua table, but

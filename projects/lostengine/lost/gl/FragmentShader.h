@@ -5,13 +5,17 @@
 
 namespace lost
 {
-namespace gl
-{
-struct FragmentShader : public Shader
-{
-  FragmentShader();
-};
-}
+  namespace gl
+  {
+    struct FragmentShader;
+    typedef lost::shared_ptr<FragmentShader> FragmentShaderPtr;
+
+    struct FragmentShader : public Shader
+    {
+      FragmentShader();
+      static ShaderPtr create() { return FragmentShaderPtr(new FragmentShader); }
+    };
+  }
 }
 
 #endif

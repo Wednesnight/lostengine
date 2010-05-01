@@ -11,9 +11,9 @@ namespace gl
 
 ShaderProgramPtr loadShader(lost::shared_ptr<lost::resource::Loader> loader, const std::string& inName)
 {
-  lost::shared_ptr<lost::gl::FragmentShader> fragmentShader(new lost::gl::FragmentShader());
-  lost::shared_ptr<lost::gl::VertexShader>   vertexShader(new lost::gl::VertexShader());
-  lost::shared_ptr<lost::gl::ShaderProgram>  shaderProgram(new lost::gl::ShaderProgram());
+  lost::gl::ShaderProgramPtr  shaderProgram(new lost::gl::ShaderProgram());
+  lost::gl::ShaderPtr         vertexShader(new lost::gl::VertexShader());
+  lost::gl::ShaderPtr         fragmentShader(new lost::gl::FragmentShader());
 
   common::DataPtr vsfile = loader->load(inName+".vs");
   vertexShader->source(vsfile->str());
