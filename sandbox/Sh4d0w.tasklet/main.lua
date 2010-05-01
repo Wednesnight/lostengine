@@ -19,6 +19,7 @@ local debug = false
 
 local lightingEnabled = true
 local shadowmapEnabled = true
+local matcapEnabled = true
 
 function startup(tasklet)
   tasklet.name = _meta.name
@@ -42,6 +43,11 @@ function startup(tasklet)
       shadowmapEnabled = not shadowmapEnabled
       scene.ssaoShader:enable()
       scene.ssaoShader:setBool("shadowmapEnabled", shadowmapEnabled)
+      scene.ssaoShader:disable()
+    elseif event.character == "4" then
+      matcapEnabled = not matcapEnabled
+      scene.ssaoShader:enable()
+      scene.ssaoShader:setBool("matcapEnabled", matcapEnabled)
       scene.ssaoShader:disable()
     elseif event.character == "w" then
       scene.cam.cam:rotate(Vec3(2,0,0))
