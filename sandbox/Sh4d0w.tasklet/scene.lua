@@ -49,7 +49,14 @@ function createScene(loader)
   biasMatrix:row(3, Vec4( 0,  0,  0,  1))
   result.ssaoShader = dcl.gl:Shader
   {
-    filename = "ssao",
+    libs =
+    {
+      -- lighting
+      dcl.gl:VertexShader { filename = "shaders/light.vs" },
+      -- SSAO
+      dcl.gl:FragmentShader { filename = "shaders/ssao.fs" }
+    },
+    source = require("shader"),
     params =
     {
       lightingEnabled = true,
@@ -74,7 +81,7 @@ function createScene(loader)
     target = Vec3(0, -2, 0),
     stickToTarget = true
   }
-  
+
   -- meshes
   result.meshes = {}
   table.insert(result.meshes,
