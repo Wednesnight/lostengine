@@ -36,55 +36,49 @@ end
 
 function Button:mouseEnter(event)
   if self._enabled then
-    self._state = Button.STATE_HOVER
-    callLater(self.updateViewVisibility, self)
+    self:changeState(Button.STATE_HOVER)
   end
 end
 
 function Button:mouseLeave(event)
   if self._enabled then
-    self._state = Button.STATE_NORMAL
-    callLater(self.updateViewVisibility, self)
+    self:changeState(Button.STATE_NORMAL)
   end
 end
 
 function Button:mouseDown(event)
   if self._enabled then
-    self._state = Button.STATE_PUSHED
-    callLater(self.updateViewVisibility, self)
-    local pressEvent = lost.guiro.event.Event("buttonDown")
-    pressEvent.bubbles = true
-    pressEvent.target = self
-    self:dispatchEvent(pressEvent)
+    self:changeState(Button.STATE_PUSHED)
+    self:dispatchButtonEvent("buttonDown")    
   end
 end
 
 function Button:mouseUpInside(event)
   if self._enabled then
-    self._state = Button.STATE_HOVER
-    callLater(self.updateViewVisibility, self)
-    local clickEvent = lost.guiro.event.Event("buttonClick")
-    clickEvent.bubbles = true
-    clickEvent.target = self
-    self:dispatchEvent(clickEvent)
-    local releaseEvent = lost.guiro.event.Event("buttonUp")
-    releaseEvent.bubbles = true
-    releaseEvent.target = self
-    self:dispatchEvent(releaseEvent)
+    self:changeState(Button.STATE_HOVER)
+    self:dispatchButtonEvent("buttonClick")    
+    self:dispatchButtonEvent("buttonUp")    
   end
 end
 
 function Button:mouseUpOutside(event)
   if self._enabled then
-    self._state = Button.STATE_NORMAL
-    callLater(self.updateViewVisibility, self)
-    local releaseEvent = lost.guiro.event.Event("buttonUp")
-    releaseEvent.bubbles = true
-    releaseEvent.target = self
-    self:dispatchEvent(releaseEvent)
+    self:changeState(Button.STATE_NORMAL)
+    self:dispatchButtonEvent("buttonUp")    
   end
 end
 
+function Button:dispatchButtonEvent(name)
+  local event = lost.guiro.event.Event(name)
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
+end
+
+function Button:changeState(newState)
+  self._state = newState
+  callLater(self.updateViewVisibility, self)
+end
 
 -- makes sure backgrounds are in the back and labels are in front
 function Button:updateViewOrder()
