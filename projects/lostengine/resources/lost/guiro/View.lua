@@ -314,12 +314,10 @@ function View:frameRoundCorners(t,b,l,r)
 end
 
 function View:backgroundShowSides(t,b,l,r)
-  log.debug("bgss")
   self.backgroundMesh:showSides(t,b,l,r)
 end
 
 function View:frameShowSides(t,b,l,r)
-  log.debug("frss")
   self.frameMesh:showSides(t,b,l,r)
 end
 
