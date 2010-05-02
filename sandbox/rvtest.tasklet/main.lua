@@ -99,7 +99,8 @@ function startup(tasklet)
   	          theme = "pebble",
   	          style = "RoundedRectMini",
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
-  	          title = "Mini"       
+  	          title = "Mini",       
+  	          mode = "toggle"      
   	        },
   	        dcl.guiro:HBox
   	        {
