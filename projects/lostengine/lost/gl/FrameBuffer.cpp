@@ -214,8 +214,8 @@ namespace lost
     FrameBuffer::FrameBuffer(const math::Vec2& size, GLenum colorBits, GLenum depthBits, GLenum stencilBits)
     {
       Vec2 correctedSize((float)nextPowerOf2((unsigned long)size.width), (float)nextPowerOf2((unsigned long)size.height));
-      correctedSize.x = fmax(correctedSize.x, correctedSize.y);
-      correctedSize.y = fmax(correctedSize.x, correctedSize.y);
+//      correctedSize.x = fmax(correctedSize.x, correctedSize.y);
+//      correctedSize.y = fmax(correctedSize.x, correctedSize.y);
       this->size = correctedSize;
 
       lglGenFramebuffers(1, &buffer); GLDEBUG_THROW;
