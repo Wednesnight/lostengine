@@ -1,6 +1,7 @@
 local _meta = require("_meta")
 require("lost.declarative.Context")
 require("lost.common.Shaders")
+require("lost.shaders.ShaderFactory")
 
 using "lost.common.Color"
 using "lost.math.Rect"
@@ -13,6 +14,7 @@ using "lost.math.MatrixRotX"
 using "lost.math.MatrixRotY"
 using "lost.math.MatrixScaling"
 using "lost.gl.FrameBuffer"
+using "lost.shaders.ShaderFactory"
 
 local meshNum = 30
 local meshRangeX = Vec2(-3,3)
@@ -42,11 +44,8 @@ function createScene(loader)
   }
   
   -- shader
-  local biasMatrix = Matrix()
-  biasMatrix:row(0, Vec4(.5,  0,  0, .5))
-  biasMatrix:row(1, Vec4( 0, .5,  0, .5))
-  biasMatrix:row(2, Vec4( 0,  0, .5, .5))
-  biasMatrix:row(3, Vec4( 0,  0,  0,  1))
+  local shaderFactory = ShaderFactory(loader)
+  result.ssaoShader = shaderFactory:newInstance("shader")
 
   result.shaderParams = lost.gl.UniformBlock.create()
   result.shaderParams:setBool("lightingEnabled", true)
@@ -54,21 +53,8 @@ function createScene(loader)
   result.shaderParams:setBool("shadowmapEnabled", true)
   result.shaderParams:setBool("matcapEnabled", true)
   result.shaderParams:set("lightPosition", result.lightCam.cam:position())
-  result.shaderParams:set("biasMatrix", biasMatrix)
   result.shaderParams:set("lightViewMatrix", result.lightCam.cam:viewMatrix())
   result.shaderParams:set("lightProjectionMatrix", result.lightCam.cam:projectionMatrix())
-
-  result.ssaoShader = dcl.gl:Shader
-  {
-    libs =
-    {
-      -- lighting
-      dcl.gl:VertexShader { filename = "shaders/light.vs" },
-      -- SSAO
-      dcl.gl:FragmentShader { filename = "shaders/ssao.fs" }
-    },
-    source = require("shader")
-  }
 
   -- scene cam
   result.cam = dcl.rg:Camera3D
@@ -194,6 +180,11 @@ function createScene(loader)
     }
   })
 
+  result.lightingEnabled = true
+  result.shadowmapEnabled = true
+  result.ssaoEnabled = true
+  result.matcapEnabled = true
+
   result.firstPass = 
   {
     -- time delta and angle used for rotation
@@ -219,7 +210,10 @@ function createScene(loader)
       end
       self.passedSec = currentSec
       
+      result.shaderParams:setBool("lightingEnabled", false)
+      result.shaderParams:setBool("shadowmapEnabled", false)
       result.shaderParams:setBool("ssaoEnabled", false)
+      result.shaderParams:setBool("matcapEnabled", false)
       result.cam.active = false
       result.lightCam.active = true
     end,
@@ -246,6 +240,9 @@ function createScene(loader)
     -- enables cam
     -- disables lightCam
     setup = function(self)
+      result.shaderParams:setBool("lightingEnabled", result.lightingEnabled)
+      result.shaderParams:setBool("shadowmapEnabled", result.shadowmapEnabled)
+      result.shaderParams:setBool("matcapEnabled", result.matcapEnabled)
       result.cam.active = true
       result.lightCam.active = false
     end,
@@ -268,12 +265,10 @@ function createScene(loader)
 
   result.thirdPass = 
   {
-    ssaoEnabled = true,
-
     -- prepare stuff for the next render pass
     -- enable ssao
     setup = function(self)
-      result.shaderParams:setBool("ssaoEnabled", self.ssaoEnabled)
+      result.shaderParams:setBool("ssaoEnabled", result.ssaoEnabled)
     end,
 
     -- process rg node
