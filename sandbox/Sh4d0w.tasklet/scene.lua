@@ -47,6 +47,17 @@ function createScene(loader)
   biasMatrix:row(1, Vec4( 0, .5,  0, .5))
   biasMatrix:row(2, Vec4( 0,  0, .5, .5))
   biasMatrix:row(3, Vec4( 0,  0,  0,  1))
+
+  result.shaderParams = lost.gl.UniformBlock.create()
+  result.shaderParams:setBool("lightingEnabled", true)
+  result.shaderParams:setBool("ssaoEnabled", true)
+  result.shaderParams:setBool("shadowmapEnabled", true)
+  result.shaderParams:setBool("matcapEnabled", true)
+  result.shaderParams:set("lightPosition", result.lightCam.cam:position())
+  result.shaderParams:set("biasMatrix", biasMatrix)
+  result.shaderParams:set("lightViewMatrix", result.lightCam.cam:viewMatrix())
+  result.shaderParams:set("lightProjectionMatrix", result.lightCam.cam:projectionMatrix())
+
   result.ssaoShader = dcl.gl:Shader
   {
     libs =
@@ -56,18 +67,7 @@ function createScene(loader)
       -- SSAO
       dcl.gl:FragmentShader { filename = "shaders/ssao.fs" }
     },
-    source = require("shader"),
-    params =
-    {
-      lightingEnabled = true,
-      ssaoEnabled = true,
-      shadowmapEnabled = true,
-      matcapEnabled = true,
-      lightPosition = result.lightCam.cam:position(),
-      biasMatrix = biasMatrix,
-      lightViewMatrix = result.lightCam.cam:viewMatrix(),
-      lightProjectionMatrix = result.lightCam.cam:projectionMatrix()
-    }
+    source = require("shader")
   }
 
   -- scene cam
@@ -92,6 +92,7 @@ function createScene(loader)
       material =
       {
         shader = result.ssaoShader,
+        uniforms = result.shaderParams,
         textures =
         {
           result.fb:depthTexture(),
@@ -132,6 +133,7 @@ function createScene(loader)
     for k,m in next,self.meshes do
       m.mesh.material = lost.mesh.Material.create()
       m.mesh.material.shader = self.ssaoShader
+      m.mesh.material.uniforms = self.shaderParams
       m.mesh.material:addTexture(self.fb:depthTexture())
       m.mesh.material:addTexture(self.fbSsao:depthTexture())
       m.mesh.material:addTexture(dcl.gl:Texture {
@@ -173,6 +175,7 @@ function createScene(loader)
       material =
       {
         shader = result.ssaoShader,
+        uniforms = result.shaderParams,
         textures =
         {
           result.fb:depthTexture(),
@@ -216,10 +219,7 @@ function createScene(loader)
       end
       self.passedSec = currentSec
       
-      result.ssaoShader:enable()
-      result.ssaoShader:setBool("ssaoEnabled", false)
-      result.ssaoShader:disable()
-
+      result.shaderParams:setBool("ssaoEnabled", false)
       result.cam.active = false
       result.lightCam.active = true
     end,
@@ -273,9 +273,7 @@ function createScene(loader)
     -- prepare stuff for the next render pass
     -- enable ssao
     setup = function(self)
-      result.ssaoShader:enable()
-      result.ssaoShader:setBool("ssaoEnabled", self.ssaoEnabled)
-      result.ssaoShader:disable()
+      result.shaderParams:setBool("ssaoEnabled", self.ssaoEnabled)
     end,
 
     -- process rg node

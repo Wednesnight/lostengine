@@ -36,19 +36,13 @@ function startup(tasklet)
       scene.thirdPass.ssaoEnabled = not scene.thirdPass.ssaoEnabled
     elseif event.character == "2" then
       lightingEnabled = not lightingEnabled
-      scene.ssaoShader:enable()
-      scene.ssaoShader:setBool("lightingEnabled", lightingEnabled)
-      scene.ssaoShader:disable()
+      scene.shaderParams:setBool("lightingEnabled", lightingEnabled)
     elseif event.character == "3" then
       shadowmapEnabled = not shadowmapEnabled
-      scene.ssaoShader:enable()
-      scene.ssaoShader:setBool("shadowmapEnabled", shadowmapEnabled)
-      scene.ssaoShader:disable()
+      scene.shaderParams:setBool("shadowmapEnabled", shadowmapEnabled)
     elseif event.character == "4" then
       matcapEnabled = not matcapEnabled
-      scene.ssaoShader:enable()
-      scene.ssaoShader:setBool("matcapEnabled", matcapEnabled)
-      scene.ssaoShader:disable()
+      scene.shaderParams:setBool("matcapEnabled", matcapEnabled)
     elseif event.character == "w" then
       scene.cam.cam:rotate(Vec3(2,0,0))
     elseif event.character == "s" then
@@ -73,10 +67,8 @@ function startup(tasklet)
     
     -- update shader params
     if updateCam then
-      scene.ssaoShader:enable()
-      scene.ssaoShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
-      scene.ssaoShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
-      scene.ssaoShader:disable()
+      scene.shaderParams:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
+      scene.shaderParams:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
     end
   end)
 
@@ -93,10 +85,8 @@ function startup(tasklet)
     scene.debugMesh:updateSize(Vec2(event.width, event.height))
     
     -- update shader params
-    scene.ssaoShader:enable()
-    scene.ssaoShader:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
-    scene.ssaoShader:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
-    scene.ssaoShader:disable()
+    scene.shaderParams:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
+    scene.shaderParams:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
   end)
 
   matcapLoader = lost.resource.Loader.create()

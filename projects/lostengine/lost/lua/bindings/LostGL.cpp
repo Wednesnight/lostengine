@@ -342,14 +342,18 @@ namespace lost
         namespace_("gl")
         [
           class_<UniformBlock>("UniformBlock")
-          .def("setFloat", &UniformBlock::setFloat)
-          .def("set", (void(UniformBlock::*)(const std::string&, const common::Color&))&UniformBlock::set)
-          .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec2&))&UniformBlock::set)
-          .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec3&))&UniformBlock::set)
-          .scope
-          [
-            def("create", &UniformBlock::create)
-          ]
+            .def("setInt", &UniformBlock::setInt)
+            .def("setFloat", &UniformBlock::setFloat)
+            .def("setBool", &UniformBlock::setBool)
+            .def("set", (void(UniformBlock::*)(const std::string&, const common::Color&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec2&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec3&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec4&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const std::string&, const math::Matrix&))&UniformBlock::set)
+            .scope
+            [
+              def("create", &UniformBlock::create)
+            ]
         ]
       ];
     }
