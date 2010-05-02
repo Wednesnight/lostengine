@@ -40,6 +40,12 @@ function startup(tasklet)
   -- guiro.Screen adds itself implicitly to the tasklets renderNode, so call it last
   screen = dcl.guiro:Screen
   {
+    listeners = 
+    {
+      buttonClick = function(event)
+                      log.debug("clicked on '"..tostring(event.target.id).."'")
+                    end,
+    },
     dcl.guiro:UserInterface
     {
       id = "ui",
@@ -71,23 +77,25 @@ function startup(tasklet)
   					valign = "center",
   	        dcl.guiro:Button
   	        {
-  	          id = "roundedRectButton",
+  	          id = "roundedRectButtonRegular",
   	          theme = "pebble",
   	          style = "RoundedRectRegular",
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
-  	          title = "Regular"       
+  	          title = "Regular",
+  	          mode = "normal",
   	        },
   	        dcl.guiro:Button
   	        {
-  	          id = "roundedRectButton",
+  	          id = "roundedRectButtonSmall",
   	          theme = "pebble",
   	          style = "RoundedRectSmall",
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
-  	          title = "Small"       
+  	          title = "Small",       
+  	          mode = "sticky"      
   	        },
   	        dcl.guiro:Button
   	        {
-  	          id = "roundedRectButton",
+  	          id = "roundedRectButtonMini",
   	          theme = "pebble",
   	          style = "RoundedRectMini",
   	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 

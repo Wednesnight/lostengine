@@ -26,6 +26,7 @@ function Button:constructor(textureManager)
 	self._states[Button.STATE_DISABLED] = {}
 	self._enabled = true
 	self._title = ""
+  self._pushed = false;
 
   self._handlerMaps = {}
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
@@ -41,10 +42,28 @@ function Button:constructor(textureManager)
   self:addEventListener("mouseUpOutside", function(event) self:eventHandler(event) end)	
 end
 
+function Button:pushed(val)
+  if val ~= nil then
+    if val then 
+      self._pushed = true
+    else
+      self._pushed = false
+    end
+    if self._pushed then
+      self:state(Button.STATE_PUSHED)
+    else
+      self:state(Button.STATE_NORMAL)
+    end
+  else
+    return self._pushed
+  end
+end
+
 function Button:mode(modeName)
   self._currentHandlerMap = self._handlerMaps[modeName]
   if self._currentHandlerMap == nil then
     log.warn("couldn't find handlerMap for mode: '"..tostring(modeName).."', defaulting to normal")
+    self._currentHandlerMap = self._handlerMaps["normal"]
   end
 end
 
@@ -57,6 +76,8 @@ function Button:eventHandler(event)
   end
 end
 
+-- doesn't affect pushed value because state change is only momentary and not really necessary for handlers
+-- FIXME: is this correct?
 function Button:createNormalHandlerMap()
   return {
     mouseEnter = function(event) 
@@ -82,7 +103,36 @@ function Button:createNormalHandlerMap()
 end
 
 function Button:createStickyHandlerMap()
-  return {}
+  return {
+    mouseEnter = function(event) 
+                    if not self:pushed() then
+                      self:state(Button.STATE_HOVER) 
+                    end
+                  end,
+    mouseLeave = function(event)
+                    if not self:pushed() then
+                      self:state(Button.STATE_NORMAL) 
+                    end
+                  end,
+    mouseDown = function(event)
+                    if not self:pushed() then
+                      self:state(Button.STATE_PUSHED)
+                      self:dispatchButtonEvent("buttonDown")    
+                    end
+                  end,
+    mouseUpInside = function(event)
+                        if not self:pushed() then      
+                          self:pushed(true)
+                          self:dispatchButtonEvent("buttonClick")
+                        end
+                      end,
+    mouseUpOutside = function(event)
+                         if not self:pushed() then      
+                           self:state(Button.STATE_NORMAL)
+                           self:dispatchButtonEvent("buttonUp")    
+                         end
+                       end,
+  }
 end
 
 function Button:createToggleHandlerMap()
