@@ -14,16 +14,24 @@ namespace lost
   {
 
     // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string& currentTimeFormat( std::string& sTime )
+    std::string currentTimeFormat()
     {
-      char   timeformat[20];
-      time_t timestamp;
+      const size_t bufsize = 30;
+      char   timeformat[bufsize];
 
-      timestamp = time( &timestamp );
-      if (strftime( timeformat, 20, "%Y/%m/%d %H:%M:%S", localtime( &timestamp ) ) > 0)
-        sTime = timeformat;
+      struct timeval tv;
+      gettimeofday(&tv, NULL);
 
-      return sTime;
+      strftime( timeformat, bufsize, "%Y/%m/%d %H:%M:%S", localtime(&tv.tv_sec));
+      timeformat[19] = ':';
+      timeformat[20] = '%';
+      timeformat[21] = '0';
+      timeformat[22] = '2';
+      timeformat[23] = 'd';
+      timeformat[24] = 0;
+      snprintf(timeformat, bufsize, timeformat, tv.tv_usec/1000);
+
+      return timeformat;
     }
 
     // returns current time in microseconds

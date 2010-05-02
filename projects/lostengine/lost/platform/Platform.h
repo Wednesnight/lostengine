@@ -126,10 +126,8 @@ namespace lost
     // returns current time in microseconds
     double currentTimeMicroSeconds();
 
-    // FIXME: why do we need a string parameter here? it bit me in the ass when I just wanted to log the time from a macro and needed to instaniate a bogus parameter
-    // FIXME: name is misleading: we don't return a time format, we return the current time formatted in string form.
-    // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string& currentTimeFormat( std::string& sTime );
+    // returns current time as formatted string (e.g. "2007/11/26 23:30:37:123")
+    std::string currentTimeFormat();
 
   //***
 

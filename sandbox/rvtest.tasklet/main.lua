@@ -293,7 +293,6 @@ function startup(tasklet)
       }
     }
   )
-  
   return true
 end
 

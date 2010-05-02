@@ -35,9 +35,8 @@ namespace lost
       {
         boost::call_once(initOnce, &initLogMutex);
 
-        std::string t;
         logMutex->lock();
-        std::cout << lost::platform::currentTimeFormat(t) << " \t " <<
+        std::cout << lost::platform::currentTimeFormat() << " \t " <<
                      inLevel                              << " \t " <<
                      inLocation                           << " \t " <<
                      inMsg                                << std::endl;	
