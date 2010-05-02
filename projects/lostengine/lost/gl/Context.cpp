@@ -304,10 +304,14 @@ std::map<void*, Context*> glContext2lostGlContext;
         string name = i->first;
         switch(v.type)
         {
-          case VT_color:currentShader->set(name, v.color);break;
-          case VT_float:currentShader->setFloat(name, v.f);break;
-          case VT_vec2:currentShader->set(name, v.vec2);break;
-          case VT_vec3:currentShader->set(name, v.vec3);break;
+          case VT_int     : currentShader->setInt(name, v.i);   break;
+          case VT_float   : currentShader->setFloat(name, v.f); break;
+          case VT_bool    : currentShader->setBool(name, v.b);  break;
+          case VT_color   : currentShader->set(name, v.color);  break;
+          case VT_vec2    : currentShader->set(name, v.vec2);   break;
+          case VT_vec3    : currentShader->set(name, v.vec3);   break;
+          case VT_vec4    : currentShader->set(name, v.vec4);   break;
+          case VT_matrix  : currentShader->set(name, v.matrix); break;
         }
       }
     }
