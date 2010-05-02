@@ -33,16 +33,13 @@ function startup(tasklet)
     elseif event.key == K_SPACE then
       debug = not debug
     elseif event.character == "1" then
-      scene.thirdPass.ssaoEnabled = not scene.thirdPass.ssaoEnabled
+      scene.ssaoEnabled = not scene.ssaoEnabled
     elseif event.character == "2" then
-      lightingEnabled = not lightingEnabled
-      scene.shaderParams:setBool("lightingEnabled", lightingEnabled)
+      scene.lightingEnabled = not scene.lightingEnabled
     elseif event.character == "3" then
-      shadowmapEnabled = not shadowmapEnabled
-      scene.shaderParams:setBool("shadowmapEnabled", shadowmapEnabled)
+      scene.shadowmapEnabled = not scene.shadowmapEnabled
     elseif event.character == "4" then
-      matcapEnabled = not matcapEnabled
-      scene.shaderParams:setBool("matcapEnabled", matcapEnabled)
+      scene.matcapEnabled = not scene.matcapEnabled
     elseif event.character == "w" then
       scene.cam.cam:rotate(Vec3(2,0,0))
     elseif event.character == "s" then
