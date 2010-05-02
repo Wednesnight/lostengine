@@ -136,7 +136,40 @@ function Button:createStickyHandlerMap()
 end
 
 function Button:createToggleHandlerMap()
-  return {}
+  return {
+    mouseEnter = function(event) 
+                    if not self:pushed() then      
+                      self:state(Button.STATE_HOVER) 
+                    end
+                  end,
+    mouseLeave = function(event)
+                    if not self:pushed() then      
+                      self:state(Button.STATE_NORMAL) 
+                    end
+                  end,
+    mouseDown = function(event)
+                    if not self:pushed() then      
+                      self:state(Button.STATE_PUSHED)
+                      self:dispatchButtonEvent("buttonDown")    
+                    end
+                  end,
+    mouseUpInside = function(event)
+                      if not self:pushed() then      
+                        self:state(Button.STATE_PUSHED)
+                      else
+                        self:state(Button.STATE_HOVER)
+                      end
+                      self:pushed(not self:pushed())
+                      self:dispatchButtonEvent("buttonClick")    
+                      self:dispatchButtonEvent("buttonUp")    
+                      end,
+    mouseUpOutside = function(event)
+                       if not self:pushed() then      
+                         self:state(Button.STATE_NORMAL)
+                         self:dispatchButtonEvent("buttonUp")    
+                       end
+                     end
+  }
 end
 
 function Button:dispatchButtonEvent(name)

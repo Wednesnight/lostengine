@@ -26,7 +26,7 @@ namespace lost
       timeformat[19] = ':';
       timeformat[20] = '%';
       timeformat[21] = '0';
-      timeformat[22] = '2';
+      timeformat[22] = '3';
       timeformat[23] = 'd';
       timeformat[24] = 0;
       snprintf(timeformat, bufsize, timeformat, tv.tv_usec/1000);
