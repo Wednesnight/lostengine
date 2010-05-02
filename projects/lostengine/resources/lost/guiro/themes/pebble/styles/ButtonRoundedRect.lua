@@ -42,7 +42,7 @@ function ButtonRoundedRect:apply(target)
   target:background(lost.guiro.Button.STATE_DISABLED, self:buildBackgroundImage("disabled", "rrbg"))
   
   target:label(lost.guiro.Button.STATE_NORMAL, self:buildLabel(Color(0,0,0)))
-  target:label(lost.guiro.Button.STATE_HOVER, self:buildLabel(Color(.2,.2,.2)))
+  target:label(lost.guiro.Button.STATE_HOVER, self:buildLabel(Color(.5,.5,.5)))
   target:label(lost.guiro.Button.STATE_PUSHED, self:buildLabel(Color(0,0,0)))
   target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(.1,.1,.1)))
   
