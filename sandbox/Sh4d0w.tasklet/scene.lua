@@ -102,7 +102,6 @@ function createScene(loader)
   while idx < meshNum do
     -- init new mesh instance
     local mesh = lost.mesh.Mesh.create()
-    mesh.drawMode = result.meshes[1].mesh.drawMode
     mesh.vertexBuffer = result.meshes[1].mesh.vertexBuffer
     mesh.indexBuffer = result.meshes[1].mesh.indexBuffer
     mesh.material = result.meshes[1].mesh.material

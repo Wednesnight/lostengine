@@ -2,14 +2,12 @@
 #define LOST_GL_HYBRIDINDEXBUFFER_H
 
 #include "lost/gl/HybridBuffer.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
 namespace gl
 {
-
-struct HybridIndexBuffer;
-typedef lost::shared_ptr<HybridIndexBuffer> HybridIndexBufferPtr;
 
 struct HybridIndexBuffer : HybridBuffer
 {
@@ -18,6 +16,7 @@ struct HybridIndexBuffer : HybridBuffer
   HybridIndexBuffer(ElementType et);
   
   GLenum type; // required for the actual draw operation, derived in constructor
+  GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
 };
 
 }

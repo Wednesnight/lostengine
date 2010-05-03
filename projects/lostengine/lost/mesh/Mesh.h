@@ -7,30 +7,14 @@
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/gl/BufferLayout.h"
+#include "lost/mesh/forward.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
 
-namespace gl
-{
-  struct HybridBuffer;
-  typedef lost::shared_ptr<HybridBuffer> HybridBufferPtr;
-
-  struct HybridVertexBuffer;
-  typedef lost::shared_ptr<HybridVertexBuffer> HybridVertexBufferPtr;
-
-  struct HybridIndexBuffer;
-  typedef lost::shared_ptr<HybridIndexBuffer> HybridIndexBufferPtr;
-}
-
 namespace mesh
 {
-
-struct Material;
-typedef lost::shared_ptr<Material> MaterialPtr;
-
-struct Mesh;
-typedef lost::shared_ptr<Mesh> MeshPtr;
 
 // Mesh base class, provides a render() method that applies the relevant minimal state 
 // and issues the gl calls for drawing
@@ -73,8 +57,6 @@ struct Mesh
   math::Vec3 getAsVec3(uint32_t idx, gl::UsageType ut);
   uint32_t   getAsU32(uint32_t idx, gl::UsageType ut);  
 
-
-  GLenum drawMode; // GL_LINES, GL_TRIANGLES etc.
   MaterialPtr material;
   math::Matrix transform;
   gl::HybridVertexBufferPtr vertexBuffer;

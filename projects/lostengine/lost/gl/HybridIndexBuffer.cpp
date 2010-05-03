@@ -26,6 +26,7 @@ HybridIndexBuffer::HybridIndexBuffer(ElementType et)
       os << "only u8, u16, u32 are allowed";
       LOGTHROW(runtime_error(os.str()));
   }
+  drawMode = GL_TRIANGLES;
   init(GL_ELEMENT_ARRAY_BUFFER, layout);
 }
 

@@ -10,7 +10,7 @@ namespace mesh
 
 Quad::Quad()
 {
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
 }
 
 // creates a white rectangle with the given size and position.
@@ -21,7 +21,7 @@ Quad::Quad(const math::Rect& inRect)
   layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   this->resetBuffers(layout, gl::ET_u16);
   
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
   uint32_t numQuads = 1;
   uint32_t numVertices = numQuads*4;
   uint32_t numIndices = numQuads*6;
@@ -46,7 +46,7 @@ Quad::Quad(common::DataPtr data, bool flip)
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
   gl::TexturePtr tex(new gl::Texture(data));
   math::Rect rect(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
   this->material->textures.push_back(tex);
@@ -70,7 +70,7 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
   math::Rect rect(0, 0, (float)tex->dataWidth, (float)tex->dataHeight);
   this->material->textures.push_back(tex);
   uint32_t numQuads = 1;
@@ -93,7 +93,7 @@ Quad::Quad(const std::vector<math::Rect>& rects)
   layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   this->resetBuffers(layout, gl::ET_u16);
 
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
   uint32_t numQuads = rects.size();
   uint32_t numVertices = numQuads*4;
   uint32_t numIndices = numQuads*6;
@@ -135,7 +135,7 @@ void Quad::init(const std::vector<math::Rect>& rects,
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);
   
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
   this->material->textures.clear();
   this->material->textures.push_back(tex);
   uint32_t numQuads = rects.size();

@@ -21,7 +21,7 @@ namespace lost
       layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
       this->resetBuffers(layout, gl::ET_u16);
 
-      this->drawMode = GL_TRIANGLES;
+      indexBuffer->drawMode = GL_TRIANGLES;
 
       update();
     }

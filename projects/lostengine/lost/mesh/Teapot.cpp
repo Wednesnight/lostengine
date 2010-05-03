@@ -11,7 +11,7 @@ Teapot::Teapot()
   layout.add(gl::ET_vec3_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
   this->resetBuffers(layout, gl::ET_u32);
-  this->drawMode = GL_TRIANGLE_STRIP;
+  indexBuffer->drawMode = GL_TRIANGLE_STRIP;
 
   uint32_t numVertices = 530;
   

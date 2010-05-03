@@ -23,7 +23,7 @@ ScaleGrid::ScaleGrid(gl::TexturePtr tex,
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   this->resetBuffers(layout, gl::ET_u16);  
 
-  this->drawMode = GL_TRIANGLES;
+  indexBuffer->drawMode = GL_TRIANGLES;
 
   numVertices = 16; // draw it on paper and you'll see it's correct
   uint32_t numQuads = 9; // it's a 3x3 matrix of quads

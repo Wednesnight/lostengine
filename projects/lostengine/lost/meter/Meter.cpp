@@ -40,7 +40,7 @@ namespace lost
       adjustRange = true;
 
       mesh.reset(new Mesh2D());
-      mesh->drawMode = GL_LINE_STRIP;
+      mesh->indexBuffer->drawMode = GL_LINE_STRIP;
       vertices = NULL;
       updateMesh();
     }
