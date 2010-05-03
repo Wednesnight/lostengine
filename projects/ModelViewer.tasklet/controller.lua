@@ -21,19 +21,19 @@ controller.keyHandler = function(event)
   if event.key == K_ESCAPE then
     controller.running = false
   elseif event.key == K_SPACE then
-    if controller.model.mesh.drawMode == gl.GL_TRIANGLES then
-      controller.model.mesh.drawMode = gl.GL_LINE_LOOP
-    elseif controller.model.mesh.drawMode == gl.GL_LINE_LOOP then
-      controller.model.mesh.drawMode = gl.GL_POINTS
+    if controller.model.mesh.indexBuffer.drawMode == gl.GL_TRIANGLES then
+      controller.model.mesh.indexBuffer.drawMode = gl.GL_LINE_LOOP
+    elseif controller.model.mesh.indexBuffer.drawMode == gl.GL_LINE_LOOP then
+      controller.model.mesh.indexBuffer.drawMode = gl.GL_POINTS
     else
-      controller.model.mesh.drawMode = gl.GL_TRIANGLES
+      controller.model.mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
     end
-    if controller.debugModel.mesh.drawMode == gl.GL_TRIANGLES then
-      controller.debugModel.mesh.drawMode = gl.GL_LINE_LOOP
-    elseif controller.debugModel.mesh.drawMode == gl.GL_LINE_LOOP then
-      controller.debugModel.mesh.drawMode = gl.GL_POINTS
+    if controller.debugModel.mesh.indexBuffer.drawMode == gl.GL_TRIANGLES then
+      controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_LINE_LOOP
+    elseif controller.debugModel.indexBuffer.mesh.drawMode == gl.GL_LINE_LOOP then
+      controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_POINTS
     else
-      controller.debugModel.mesh.drawMode = gl.GL_TRIANGLES
+      controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
     end
     controller.debugView:needsRedraw()
     controller.renderView:needsRedraw()

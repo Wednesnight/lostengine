@@ -2,15 +2,13 @@
 #define LOST_GL_SHADER_H
 
 #include "lost/gl/gltypes.h"
+#include "lost/gl/forward.h"
 #include <string>
 
 namespace lost
 {
 namespace gl
 {
-struct Shader;
-typedef lost::shared_ptr<Shader> ShaderPtr;
-
 struct Shader 
 {
   Shader(GLenum type);

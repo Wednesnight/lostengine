@@ -58,6 +58,7 @@ namespace lost
             .def("add", &BufferLayout::add),
           class_<HybridVertexBuffer>("HybridVertexBuffer"),
           class_<HybridIndexBuffer>("HybridIndexBuffer")
+          .def_readwrite("drawMode", &HybridIndexBuffer::drawMode)
         ]
       ];
       globals(state)["gl"]["ET_u8"] =   ET_u8;

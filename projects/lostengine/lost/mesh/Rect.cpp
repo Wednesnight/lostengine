@@ -14,7 +14,7 @@ Rectangle::Rectangle(const math::Rect& rect)
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
   this->resetBuffers(layout, gl::ET_u16);      
 
-  this->drawMode = GL_LINE_LOOP;
+  indexBuffer->drawMode = GL_LINE_LOOP;
   uint32_t numVertices = 4;
   uint32_t numIndices = numVertices;
   

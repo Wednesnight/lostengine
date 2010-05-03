@@ -147,7 +147,6 @@ namespace lost
             .def_readwrite("indexBuffer", &Mesh::indexBuffer)
             .def_readwrite("material", &Mesh::material)
             .def_readwrite("transform", &Mesh::transform)
-            .def_readwrite("drawMode", &Mesh::drawMode)
             .def("resetBuffers", &Mesh::resetBuffers)
             .def("resetSize", &Mesh::resetSize)
             .def("setU8", (void(Mesh::*)(uint32_t, gl::UsageType, uint8_t))&Mesh::set)

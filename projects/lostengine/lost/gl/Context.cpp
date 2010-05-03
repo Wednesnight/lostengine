@@ -416,7 +416,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       
       disableUnrequiredVertexAttributes();
-      glDrawElements(mesh->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
+      glDrawElements(ib->drawMode, ib->hostBuffer->count, ib->type, 0);GLDEBUG;
     }
 
     /** Uses glReadPixels to retrieve the current framebuffer data as rgba and saves it

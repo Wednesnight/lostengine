@@ -142,7 +142,7 @@ namespace lost
 
         if (parse(objData.c_str(), assign_p).full)
         {
-          mesh->drawMode = GL_TRIANGLES;
+          mesh->indexBuffer->drawMode = GL_TRIANGLES;
 
           if(!normalCount)
           {

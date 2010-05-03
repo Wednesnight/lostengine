@@ -19,7 +19,7 @@ function create(sideLength, numPlanes)
   layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
 
   local m = lost.mesh.Mesh.create(layout, gl.ET_u16)
-  m.drawMode = gl.GL_TRIANGLES
+  m.indexBuffer.drawMode = gl.GL_TRIANGLES
   local numQuads = numPlanes * 2 -- back and front facing
   local numVertsPerQuad = 4
   local numIndicesPerQuad = 6
