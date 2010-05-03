@@ -23,7 +23,7 @@ local meshRangeZ = Vec2(-3,3)
 
 function createScene(loader)
   local result = {}
-  local dcl = lost.declarative.Context(loader)
+  dcl = lost.declarative.Context(loader) -- deliberately global so ui script can use it as well
   
   -- framebuffer setup
   result.fb = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
