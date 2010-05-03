@@ -13,7 +13,7 @@ using "lost.math.Rect"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 
-local scene = nil
+scene = nil -- deliberately global so ui can access it
 local running = true
 local debug = false
 
@@ -21,11 +21,21 @@ local lightingEnabled = true
 local shadowmapEnabled = true
 local matcapEnabled = true
 
+function updateButtons()
+  screen("ui")("buttons")("stack")("ssao"):pushed(scene.ssaoEnabled)
+  screen("ui")("buttons")("stack")("light"):pushed(scene.lightingEnabled)
+  screen("ui")("buttons")("stack")("shadow"):pushed(scene.shadowmapEnabled)
+  screen("ui")("buttons")("stack")("matcap"):pushed(scene.matcapEnabled)
+end
+
 function startup(tasklet)
   tasklet.name = _meta.name
   tasklet.clearNode.active = false
 
   scene = createScene(tasklet.loader)
+  screen = require("ui")
+  updateButtons()
+
   tasklet.eventDispatcher:addEventListener(KeyEvent.KEY_DOWN, function(event)
     local updateCam = false
     if event.key == K_ESCAPE then
@@ -34,12 +44,16 @@ function startup(tasklet)
       debug = not debug
     elseif event.character == "1" then
       scene.ssaoEnabled = not scene.ssaoEnabled
+      updateButtons()
     elseif event.character == "2" then
       scene.lightingEnabled = not scene.lightingEnabled
+      updateButtons()
     elseif event.character == "3" then
       scene.shadowmapEnabled = not scene.shadowmapEnabled
+      updateButtons()
     elseif event.character == "4" then
       scene.matcapEnabled = not scene.matcapEnabled
+      updateButtons()
     elseif event.character == "w" then
       scene.cam.cam:rotate(Vec3(2,0,0))
     elseif event.character == "s" then
