@@ -9,8 +9,6 @@
 
 namespace lost
 {
-namespace common {  struct DisplayAttributes; };
-namespace math { struct Vec2; struct Vec3; };
 
 namespace gl
 {

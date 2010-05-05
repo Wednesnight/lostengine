@@ -4,16 +4,14 @@
 #include <map>
 #include <list>
 #include "lost/gl/Shader.h"
-#include "lost/platform/shared_ptr.h"
 #include "lost/gl/Uniform.h"
 #include "lost/gl/VertexAttribute.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
 namespace gl
 {
-struct ShaderProgram;
-typedef lost::shared_ptr<ShaderProgram> ShaderProgramPtr;
 
 /** NOTE: in order to minimise side effects of functions, you manually have to call 
  *  buildUniformMap() and buildVertexAttributeMap() after you compiled, linked and enabled the shader.

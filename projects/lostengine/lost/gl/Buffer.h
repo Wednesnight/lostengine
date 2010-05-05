@@ -2,14 +2,12 @@
 #define LOST_GL_BUFFER_H
 
 #include "lost/gl/gl.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
 namespace gl
 {
-
-struct Buffer;
-typedef lost::shared_ptr<Buffer> BufferPtr;
 
 struct Buffer
 {

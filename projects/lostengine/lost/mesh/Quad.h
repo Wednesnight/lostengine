@@ -7,14 +7,13 @@
 #include "lost/gl/TextureTile.h"
 #include "lost/math/Rect.h"
 #include <vector>
+#include "lost/mesh/forward.h"
 
 namespace lost
 {
 namespace mesh
 {
 
-struct Quad;
-typedef lost::shared_ptr<Quad> QuadPtr;
 // This class, even though it looks relatively flexible, is meant as a simple 2D Quad replacement.
 // it draws a quad with two triangles. Size is derived from a math::Rect. If a texture is provided, 
 // the texture coords are calculated and a buffer created for them.

@@ -163,6 +163,9 @@ namespace lost
       // the disc is drawn by evaluating all pixels of the bitmap and setting them accordingly
       void disc(float x, float y, float r);
       void ring(float x, float y, float r, float t);
+    
+      // draws a filled rect at pos with size
+      void filledRect(const common::Color& col, uint32_t posx, uint32_t posy, uint32_t sizew, uint32_t sizeh);
          
       /** draws the rect outline into the bitmap with the given color
        */

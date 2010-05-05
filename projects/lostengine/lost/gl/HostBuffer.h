@@ -7,15 +7,12 @@
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/common/Color.h"
-#include "lost/platform/shared_ptr.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
 namespace gl
 {
-
-struct HostBuffer;
-typedef lost::shared_ptr<HostBuffer> HostBufferPtr;
 
 struct HostBuffer
 {

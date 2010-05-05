@@ -5,17 +5,13 @@
 #include <map>
 #include "lost/gl/Texture.h"
 #include "lost/gl/RenderBuffer.h"
+#include "lost/gl/forward.h"
+#include "lost/math/forward.h"
 
 namespace lost
 {
-  namespace math { struct Vec2; }
   namespace gl
   {
-    struct Context;
-    typedef lost::shared_ptr<Context> ContextPtr;
-
-    struct FrameBuffer;
-    typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
 
     struct FrameBuffer
     {

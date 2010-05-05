@@ -9,9 +9,6 @@ namespace lost
 namespace gl
 {
 
-struct HybridBuffer;
-typedef lost::shared_ptr<HybridBuffer> HybridBufferPtr;
-
 typedef std::map<UsageType, std::string> VertexAttributeMap;
 
 /** base class for hybrid buffers that contain a hostbuffer as well as one or more
