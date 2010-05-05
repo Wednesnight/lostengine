@@ -51,8 +51,6 @@ function Image:constructor(textureManager)
   self.deferredFilterUpdate = function(self, tasklet)
     if self._texture then
       if self._filter then
-        --FIXME: binding the texture here is actually a bad idea because it might throw the gl.Context of guard 
-        -- and mess up the shadowed state
         self._texture:bind()
         self._texture:filter(gl.GL_LINEAR)
       else
