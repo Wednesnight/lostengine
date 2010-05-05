@@ -469,5 +469,19 @@ void Bitmap::ring(float x, float y, float r, float t)
   }
 }
 
+void Bitmap::filledRect(const common::Color& col, uint32_t posx, uint32_t posy, uint32_t sizew, uint32_t sizeh)
+{
+  uint32_t maxx = posx+sizew;
+  uint32_t maxy = posy+sizeh;
+  for(uint32_t x=posx; x<maxx; ++x)
+  {
+    for(uint32_t y=posy; y<maxy; ++y)
+    {
+      pixel(x,y,col);
+    }
+  }
+}
+
+
 }
 }

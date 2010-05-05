@@ -5,14 +5,12 @@
 #include <map>
 #include "lost/math/Rect.h"
 #include "lost/gl/TextureTile.h"
+#include "lost/gl/TextureAtlas.h"
 
 namespace lost
 {
 namespace gl
 {
-
-struct TextureAtlas;
-typedef lost::shared_ptr<TextureAtlas> TextureAtlasPtr;
 
 /** Maintains a texture and rectangular pixel sections defined within that texture.
  * The tiles are indexed with arbitrary but unique ids.

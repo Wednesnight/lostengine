@@ -2,16 +2,12 @@
 #define LOST_GL_RENDERBUFFER_H
 
 #include "lost/gl/gltypes.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
-  template <typename T>
-  class shared_ptr;
   namespace gl
   {
-    struct RenderBuffer;
-    typedef lost::shared_ptr<RenderBuffer> RenderBufferPtr;
-
     struct RenderBuffer
     {
       RenderBuffer();

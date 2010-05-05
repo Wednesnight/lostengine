@@ -12,6 +12,7 @@ namespace lost
     struct ScaleGrid;typedef lost::shared_ptr<ScaleGrid> ScaleGridPtr;
     struct RoundedRect;typedef lost::shared_ptr<RoundedRect> RoundedRectPtr;
     struct Sphere; typedef lost::shared_ptr<Sphere> SpherePtr;
+    struct Quad;typedef lost::shared_ptr<Quad> QuadPtr;    
   }
 }
 
