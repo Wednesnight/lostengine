@@ -30,7 +30,7 @@ controller.keyHandler = function(event)
     end
     if controller.debugModel.mesh.indexBuffer.drawMode == gl.GL_TRIANGLES then
       controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_LINE_LOOP
-    elseif controller.debugModel.indexBuffer.mesh.drawMode == gl.GL_LINE_LOOP then
+    elseif controller.debugModel.mesh.indexBuffer.drawMode == gl.GL_LINE_LOOP then
       controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_POINTS
     else
       controller.debugModel.mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
