@@ -215,6 +215,7 @@ zzip_disk_close(ZZIP_DISK * disk)
 
 /*                      helper functions                                  */
 
+#undef ZZIP_HAVE_STRNDUP
 #ifdef ZZIP_HAVE_STRNDUP
 #define _zzip_strndup strndup
 #else
@@ -227,10 +228,10 @@ _zzip_strndup(char *p, size_t maxlen)
         return 0;
     ___ zzip_byte_t *r = malloc(maxlen + 1);
     if (! r)
-        return r;
-    strncpy(r, p, maxlen);
+        return (char *)r;
+    strncpy((char*)r, p, maxlen);
     r[maxlen] = '\0';
-    return r;
+    return (char *)r;
     ____;
 }
 #endif
