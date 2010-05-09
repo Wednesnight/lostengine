@@ -1,7 +1,7 @@
 #ifndef LOST_GL_VARIANT_H
 #define LOST_GL_VARIANT_H
 
-#include "lost/gl/gl.h"
+#include "lost/gl/gltypes.h"
 #include "lost/common/Color.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
