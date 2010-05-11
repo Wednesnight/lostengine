@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8D2520DA1198BD4C00FEEAFA /* color.fs in Resources */ = {isa = PBXBuildFile; fileRef = 8D2520D81198BD4C00FEEAFA /* color.fs */; };
+		8D2520DB1198BD4C00FEEAFA /* color.vs in Resources */ = {isa = PBXBuildFile; fileRef = 8D2520D91198BD4C00FEEAFA /* color.vs */; };
+		8D2526911198CDF200FEEAFA /* cube_tri.obj in Resources */ = {isa = PBXBuildFile; fileRef = 8D2526901198CDF200FEEAFA /* cube_tri.obj */; };
+		8D58688F113AABEC006E8EB6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D58688C113AABEC006E8EB6 /* main.cpp */; };
+		8D586890113AABEC006E8EB6 /* BulletTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D58688D113AABEC006E8EB6 /* BulletTest.cpp */; };
+		8D5868A8113AAC0C006E8EB6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5868A7113AAC0C006E8EB6 /* OpenGL.framework */; };
+		8D5868A9113AAC18006E8EB6 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D58689A113AAC02006E8EB6 /* libLostEngine.a */; };
+		8D5868B1113AAC2B006E8EB6 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AB113AAC2B006E8EB6 /* global-debug.xcconfig */; };
+		8D5868B2113AAC2B006E8EB6 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */; };
+		8D5868B3113AAC2B006E8EB6 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AD113AAC2B006E8EB6 /* global.xcconfig */; };
+		8D5868B5113AAC2B006E8EB6 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D25201C1198B52000FEEAFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D /* LostEngine */;
+			remoteInfo = LostEngine;
+		};
+		8D586899113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = LostEngine;
+		};
+		8D58689B113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA6711250E3E885300B961EC;
+			remoteInfo = "LostEngine-iphone";
+		};
+		8D58689D113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7325750E5CE3A5000FF838;
+			remoteInfo = "LostEngine-simulator";
+		};
+		8D58689F113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
+			remoteInfo = LostEngineUnittests;
+		};
+		8D5868A1113AAC02006E8EB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D607DCC104F0665004818BA;
+			remoteInfo = LostEngineLauncher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* BulletTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BulletTest-Info.plist"; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* BulletTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BulletTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D2520D81198BD4C00FEEAFA /* color.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = color.fs; sourceTree = "<group>"; };
+		8D2520D91198BD4C00FEEAFA /* color.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = color.vs; sourceTree = "<group>"; };
+		8D2526901198CDF200FEEAFA /* cube_tri.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube_tri.obj; sourceTree = "<group>"; };
+		8D58688C113AABEC006E8EB6 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8D58688D113AABEC006E8EB6 /* BulletTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BulletTest.cpp; sourceTree = "<group>"; };
+		8D58688E113AABEC006E8EB6 /* BulletTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletTest.h; sourceTree = "<group>"; };
+		8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8D5868A7113AAC0C006E8EB6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		8D5868AB113AAC2B006E8EB6 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-debug.xcconfig"; sourceTree = "<group>"; };
+		8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-release.xcconfig"; sourceTree = "<group>"; };
+		8D5868AD113AAC2B006E8EB6 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = global.xcconfig; sourceTree = "<group>"; };
+		8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = macosx.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5868A9113AAC18006E8EB6 /* libLostEngine.a in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				8D5868A8113AAC0C006E8EB6 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* BulletTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* NativeTasklet */ = {
+			isa = PBXGroup;
+			children = (
+				8D5868AA113AAC2B006E8EB6 /* Configurations */,
+				8D58688B113AABDD006E8EB6 /* Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = NativeTasklet;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D2520D81198BD4C00FEEAFA /* color.fs */,
+				8D2520D91198BD4C00FEEAFA /* color.vs */,
+				8D2526901198CDF200FEEAFA /* cube_tri.obj */,
+				8D1107310486CEB800E47090 /* BulletTest-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */,
+				8D5868A7113AAC0C006E8EB6 /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D58688B113AABDD006E8EB6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8D58688C113AABEC006E8EB6 /* main.cpp */,
+				8D58688D113AABEC006E8EB6 /* BulletTest.cpp */,
+				8D58688E113AABEC006E8EB6 /* BulletTest.h */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		8D586892113AAC02006E8EB6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D58689A113AAC02006E8EB6 /* libLostEngine.a */,
+				8D58689C113AAC02006E8EB6 /* libLostEngine.a */,
+				8D58689E113AAC02006E8EB6 /* libLostEngine.a */,
+				8D5868A0113AAC02006E8EB6 /* LostEngineUnittests.app */,
+				8D5868A2113AAC02006E8EB6 /* LostEngine.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D5868AA113AAC2B006E8EB6 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				8D5868AB113AAC2B006E8EB6 /* global-debug.xcconfig */,
+				8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */,
+				8D5868AD113AAC2B006E8EB6 /* global.xcconfig */,
+				8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */,
+			);
+			name = Configurations;
+			path = ../../projects/lostengine/xcode/xcconfig;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* NativeTasklet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "NativeTasklet" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8D25201D1198B52000FEEAFA /* PBXTargetDependency */,
+			);
+			name = NativeTasklet;
+			productInstallPath = "$(HOME)/Applications";
+			productName = NativeTasklet;
+			productReference = 8D1107320486CEB800E47090 /* BulletTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BulletTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* NativeTasklet */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8D586892113AAC02006E8EB6 /* Products */;
+					ProjectRef = 8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* NativeTasklet */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8D58689A113AAC02006E8EB6 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 8D586899113AAC02006E8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D58689C113AAC02006E8EB6 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 8D58689B113AAC02006E8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D58689E113AAC02006E8EB6 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 8D58689D113AAC02006E8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D5868A0113AAC02006E8EB6 /* LostEngineUnittests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngineUnittests.app;
+			remoteRef = 8D58689F113AAC02006E8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D5868A2113AAC02006E8EB6 /* LostEngine.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngine.app;
+			remoteRef = 8D5868A1113AAC02006E8EB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5868B1113AAC2B006E8EB6 /* global-debug.xcconfig in Resources */,
+				8D5868B2113AAC2B006E8EB6 /* global-release.xcconfig in Resources */,
+				8D5868B3113AAC2B006E8EB6 /* global.xcconfig in Resources */,
+				8D5868B5113AAC2B006E8EB6 /* macosx.xcconfig in Resources */,
+				8D2520DA1198BD4C00FEEAFA /* color.fs in Resources */,
+				8D2520DB1198BD4C00FEEAFA /* color.vs in Resources */,
+				8D2526911198CDF200FEEAFA /* cube_tri.obj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D58688F113AABEC006E8EB6 /* main.cpp in Sources */,
+				8D586890113AABEC006E8EB6 /* BulletTest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D25201D1198B52000FEEAFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LostEngine;
+			targetProxy = 8D25201C1198B52000FEEAFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "BulletTest-Info.plist";
+				PRODUCT_NAME = BulletTest;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "BulletTest-Info.plist";
+				PRODUCT_NAME = BulletTest;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D5868AB113AAC2B006E8EB6 /* global-debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "NativeTasklet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "BulletTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

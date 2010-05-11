@@ -306,6 +306,16 @@ namespace lost
       return s;
     }
     
+    struct MatrixRotation : public Matrix
+    {
+      MatrixRotation(const Vec3& inAngles)
+      {
+        initRotateX(inAngles.x);
+        initRotateY(inAngles.y);
+        initRotateZ(inAngles.z);
+      }
+    };
+
     struct MatrixRotX : public Matrix
     {
       MatrixRotX(float inAngle)
