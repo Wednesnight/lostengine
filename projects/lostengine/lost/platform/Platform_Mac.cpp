@@ -23,7 +23,7 @@ namespace lost
       gettimeofday(&tv, NULL);
 
       strftime( timeformat, bufsize, "%Y/%m/%d %H:%M:%S", localtime(&tv.tv_sec));
-      timeformat[19] = ':';
+      timeformat[19] = '.';
       timeformat[20] = '%';
       timeformat[21] = '0';
       timeformat[22] = '3';
