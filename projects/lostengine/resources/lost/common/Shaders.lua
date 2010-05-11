@@ -3,6 +3,7 @@ module("lost.common.Shaders", package.seeall)
 local _colorShader = nil; 
 local _textureShader = nil; 
 local _gradientShader = nil; 
+local _lightShader = nil; 
 
 function colorShader()
   if _colorShader == nil then
