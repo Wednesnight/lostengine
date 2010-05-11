@@ -97,8 +97,6 @@ namespace lost
       lua_getstack(state, 1, &debug);
       lua_getinfo(state, "Sln", &debug);
       
-      // get call stack
-//      std::string offset;
       for (unsigned int idx = callstackSize; idx > 0; --idx)
       {
         std::stringstream msg;
@@ -110,12 +108,7 @@ namespace lost
             else msg << " unknown";
           if (debug.name != 0) msg << " " << debug.name;
           if (debug.currentline >= 0) msg  << " (" << getScriptSource(debug) << ", line " << debug.currentline << ")";
-          
-          // print out info
           EOUT(msg.str());
-
-          // format next message
-//          offset.append("  ");
         }
       }
       

@@ -3,21 +3,32 @@ module("lost.guiro", package.seeall)
 require("lost.common.Class")
 require("lost.guiro.OldLayoutFunctions")
 
---[[
-     Bounds class
-  ]]
 lost.common.Class "lost.guiro.Bounds" {}
 
---[[
-  choose the functions below to build a bounds object
-  all values are functions!
-  use rect to conert a bounds object to a lost.math.Rect
-  
-  example: 
-  local b = lost.guiro.Bounds
-  local mybounds = b.Bounds(b.xabs(0), b.xabs(0))
-]]
-function Bounds:constructor(x, y, width, height)
+local constructParamErrorMsg = "Bounds must be constructed with one table or 4 functions"
+local errorLevel = 3
+
+-- either one prameter, a table
+-- or 4 functions
+function Bounds:constructor(...)
+--  log.debug("argn "..tostring(arg.n))
+  local x,y,width, height = nil
+
+  local argsAreFuncs = true
+  for k,v in ipairs(arg) do
+    if type(v) ~= "function" then
+      argsAreFuncs = false
+      break
+    end
+  end
+
+  if argsAreFuncs then
+--    log.debug("--- CONSTRUCT ... CLASSIC")
+    x,y,width, height = unpack(arg)
+  else
+--    log.debug("--- CONSTRUCT ... NEW")
+  end
+
   self.x = x
   self.y = y
   self.width = width
@@ -25,8 +36,10 @@ function Bounds:constructor(x, y, width, height)
 end
 
 function Bounds:rect(parentRect)
-  return lost.math.Rect(math.floor(self:x(parentRect)), math.floor(self:y(parentRect)),
-      math.floor(self:width(parentRect)), math.floor(self:height(parentRect)))
+  return lost.math.Rect(math.floor(self:x(parentRect)),
+                        math.floor(self:y(parentRect)),
+                        math.floor(self:width(parentRect)),
+                        math.floor(self:height(parentRect)))
 end
 
 -- the receiver is the target, source will be applied to it
