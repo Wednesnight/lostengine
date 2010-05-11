@@ -7,6 +7,9 @@ namespace lost
 {
 namespace application
 {
+  struct ResizeEvent;
+  typedef lost::shared_ptr<ResizeEvent> ResizeEventPtr;
+
   /** sent when main application window size changes.
    */
   struct ResizeEvent : public event::Event

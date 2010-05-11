@@ -1,7 +1,7 @@
 #include "lost/application/Runner.h"
 #include "NativeTasklet.h"
 
-int main(int argn, char** args)
+int main(int argc, char *argv[])
 {
-  return lost::application::runTasklet(new NativeTasklet);
+  return lost::application::runTasklet(argc, argv, new NativeTasklet);
 }

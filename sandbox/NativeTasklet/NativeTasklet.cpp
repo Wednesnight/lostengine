@@ -7,6 +7,9 @@
 #include "lost/gl/gl.h"
 #include "lost/event/Receive.h"
 #include "lost/application/KeyCode.h"
+#include "lost/event/EventDispatcher.h"
+
+#include <boost/bind.hpp>
 
 using namespace lost;
 using namespace lost::application;
