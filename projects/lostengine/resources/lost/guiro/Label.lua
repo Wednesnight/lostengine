@@ -47,6 +47,8 @@ function Label:constructor(textureManager)
   -- suppress background and frame by default
   self:showFrame(false)
   self:showBackground(false)
+  
+  self._dirtyText = false -- guard to prevent continuous recreation of text upon resize
 end
 
 function Label:afterRedraw()
@@ -55,9 +57,12 @@ function Label:afterRedraw()
     return
   end
 
-  self._font:render(self._text, self._fontSize, self.textMesh)
-  self._font:render(self._text, self._fontSize, self.shadowMesh)
-  self:updateAlign()
+  if self._dirtyText then
+    self._font:render(self._text, self._fontSize, self.textMesh)
+    self._font:render(self._text, self._fontSize, self.shadowMesh)
+    self:updateAlign()
+    self._dirtyText = false
+  end
 end
 
 function Label:afterLayout()
@@ -94,8 +99,10 @@ end
 
 function Label:text(s)
   if s~= nil then
+    self._dirtyText = true
     self._text = s
     self:needsRedraw()
+    self:needsLayout()
   else
     return self._text
   end
@@ -103,8 +110,10 @@ end
 
 function Label:font(v)
   if v ~= nil then
+    self._dirtyText = true
     self._font = v
     self:needsRedraw()
+    self:needsLayout()
   else
     return self._font
   end
@@ -112,8 +121,10 @@ end
 
 function Label:fontSize(v)
   if v ~= nil then
+    self._dirtyText = true  
     self._fontSize = v
     self:needsRedraw()
+    self:needsLayout()
   else
     return self._fontSize
   end
