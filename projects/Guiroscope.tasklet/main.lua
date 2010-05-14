@@ -7,11 +7,6 @@ using "lost.math.Rect"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.common.Color"
-using "lost.guiro.Bounds"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.wabs"
-using "lost.guiro.habs"
 
 windowParams = WindowParams("Guiroscope", Rect(300,300,800,600))
 

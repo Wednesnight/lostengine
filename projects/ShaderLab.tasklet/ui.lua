@@ -1,18 +1,3 @@
-using "lost.guiro.Bounds"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.xrel"
-using "lost.guiro.yrel"
-using "lost.guiro.xleft"
-using "lost.guiro.ytop"
-using "lost.guiro.xright"
-using "lost.guiro.ybottom"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
-using "lost.guiro.wabs"
-using "lost.guiro.habs"
-using "lost.guiro.wfit"
-using "lost.guiro.hfit"
 using "lost.common.Color"
 
 local controller = require("controller")
@@ -28,27 +13,27 @@ return dcl.guiro:Screen
   dcl.guiro:UserInterface
   {
     id = "ui",
-    bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+    bounds = {"left", "bottom", "1", "1"},
     dcl.guiro:Window
     {
       id = "window",
-      bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+      bounds = {"left", "bottom", "1", "1"},
       showFrame = false,
       showBackground = true,
       backgroundColor = Color(.1, .1, .1, 1),
       dcl.guiro:View
       {
-        bounds = Bounds(xleft(), ytop(), wfit(), habs(40)),
+        bounds = {"left", "top", "1", 40}, 
         dcl.guiro:Label
         {
-          bounds = Bounds(xabs(10), ytop(), wabs(100), habs(25)),
+          bounds = {10, "top", 100, 25},
           fontSize = 12,
           halign="left",
           text = "LostEngine"
         },
         dcl.guiro:Label
         {
-          bounds = Bounds(xabs(15), ytop({abs = -15}), wabs(100), habs(25)),
+          bounds = {15, {"top", -15}, 100, 25},
           fontSize = 16,
           halign="left",
           text = "Shader Lab"
@@ -57,12 +42,12 @@ return dcl.guiro:Screen
       dcl.guiro:View
       {
         id = "renderView",
-        bounds = Bounds(xleft({abs = 10}), ybottom({abs = 10}), wrel(1, -380), hrel(1, -50)),
+        bounds = {{"left", 10}, {"bottom", 10}, {"1", -380}, {"1", -50}}, 
         showFrame = true,
         dcl.guiro:RenderView
         {
           id = "scene",
-          bounds = Bounds(xleft({abs = 1}), ybottom({abs = 1}), wrel(1, -2), hrel(1, -2)),
+          bounds = {{"left", 1}, {"bottom", 1}, {"1", -2}, {"1", -2}}, 
           rendergraph = scene,
           listeners =
           {

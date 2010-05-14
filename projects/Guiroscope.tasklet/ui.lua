@@ -1,18 +1,3 @@
-using "lost.guiro.Bounds"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.xrel"
-using "lost.guiro.yrel"
-using "lost.guiro.xright"
-using "lost.guiro.xleft"
-using "lost.guiro.ytop"
-using "lost.guiro.ybottom"
-using "lost.guiro.xcenter"
-using "lost.guiro.ycenter"
-using "lost.guiro.wabs"
-using "lost.guiro.habs"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
 using "lost.common.Color"
 using "lost.math.Rect"
 using "lost.math.Vec2"
@@ -35,15 +20,15 @@ return dcl.guiro:Screen
   dcl.guiro:UserInterface
   {
     id = "mainUi",
-    bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1)),
+    bounds = {0,0,"1", "1"},
     dcl.guiro:Window
     {
       id = "window1",
-      bounds = Bounds(xabs(0), yabs(0), wrel(.5), hrel(.5)),
+      bounds = {0,0,".5", ".5"},
       dcl.guiro:Image
       {
         id = "image1",
-        bounds = Bounds(xabs(10), yabs(100), wabs(100), habs(75)),
+        bounds = {10,100,100,75},
         filename = "lost/guiro/themes/default/resources/ButtonHover.png",
         scale="scalegrid",
         showFrame = false,
@@ -59,7 +44,7 @@ return dcl.guiro:Screen
       },
       dcl.guiro:Button
       {
-        bounds = Bounds(xabs(50), yabs(240), wabs(500), habs(25)),
+        bounds = {50,240,500,25},
         title = "riesig",
         listeners = 
         {
@@ -71,23 +56,23 @@ return dcl.guiro:Screen
     dcl.guiro:Window
     {
       id = "window2",
-      bounds = Bounds(xright(), ytop(), wrel(.5), hrel(1)),
+      bounds = {"right", "top", ".5", "1"},
 			dcl.guiro:HBox
 			{
-				bounds = Bounds(xleft(), ytop(), wrel(1), habs(300)),
+				bounds = {"left", "top", "1", 300},
 				halign = "center",
 				valign = "center",
 				mode = "spread",
   			dcl.guiro:VBox
   			{
-  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				bounds = {"left", "bottom", 100, 270},
   				halign = "center",
   				valign = "center",
   				mode = "stack",
   	      dcl.guiro:Label
   	      {
   	        id="label1",
-  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        bounds = {"center", "center", 100, 30},
   	        text = "Hello!",
   	        listeners = 
   	        {
@@ -107,35 +92,35 @@ return dcl.guiro:Screen
   	      },
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				}
   			},
   			dcl.guiro:VBox
   			{
-  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				bounds = {"left", "bottom", 100, 270},
   				halign = "center",
   				valign = "center",
   				mode = "stack",
   	      dcl.guiro:Label
   	      {
   	        id="label1",
-  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        bounds = {"center", "center", 100, 30},
   	        text = "Hello!",
   	        listeners = 
   	        {
@@ -145,35 +130,35 @@ return dcl.guiro:Screen
   	      },
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				}
   			},
   			dcl.guiro:VBox
   			{
-  				bounds = Bounds(xleft(), ybottom(), wabs(100), habs(270)),
+  				bounds = {"left", "bottom", 100, 270},
   				halign = "center",
   				valign = "center",
   				mode = "stack",
   	      dcl.guiro:Label
   	      {
   	        id="label1",
-  	        bounds = Bounds(xcenter(), ycenter(), wabs(100), habs(30)),
+  	        bounds = {"center", "center", 100, 30},
   	        text = "Hello!",
   	        listeners = 
   	        {
@@ -183,22 +168,22 @@ return dcl.guiro:Screen
   	      },
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(40)),					
+  	        bounds = {0,0,100,40},
   					text="noch eins"
   				},
   				dcl.guiro:Label
   				{
-  	        bounds = Bounds(xabs(0), yabs(0), wabs(100), habs(30)),					
+  	        bounds = {0,0,100,30},
   					text="und noch eins"
   				}
   			}				
