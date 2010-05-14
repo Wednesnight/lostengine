@@ -55,7 +55,7 @@ namespace lost
       ~Texture();
       void destroy();
 
-      void bind() const;
+      void bind();
       void unbind() const;
       
       void init(common::DataPtr inData,  const Params& inParams = Params());
@@ -91,6 +91,11 @@ namespace lost
       uint32_t dataWidth; 
       uint32_t dataHeight;
 
+      // this is required to work around a caching bug in gl::Context, because if a Texture with id 14 was destroyed and then immediately recreated, it MUST 
+      // be bound or it will not be correctly used. neverBeenBound will be set to true in the constructor and then to false once the texture was bound 
+      // for the first time.
+      bool neverBeenBound; 
+      
       inline uint32_t dataMaxY() { return dataHeight ? dataHeight-1 : dataHeight; }
       inline uint32_t dataMaxX() { return dataWidth ? dataWidth-1 : dataWidth; }
 
