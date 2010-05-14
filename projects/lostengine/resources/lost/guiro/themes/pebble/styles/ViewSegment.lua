@@ -35,7 +35,7 @@ function ViewSegment:apply(target, def)
     segcolor = def.segmentColor
   end
   
-  target.bounds.height = lost.guiro.habs(height)
+  target.bounds.height = lost.guiro.hsize{abs=height}
   target:backgroundCornerRadius(self.cornerRadius)
   target:frameCornerRadius(self.cornerRadius)
   target:showFrame(true)

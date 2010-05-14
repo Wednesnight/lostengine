@@ -55,16 +55,12 @@ end
 function Guiro:assignViewAttributes(target, source)
 
   if source.bounds and source.bounds.isDerivedFrom and source.bounds:isDerivedFrom("lost.guiro.Bounds") then
-    log.debug("user provided bounds instance")
     mergeBounds(target.bounds, source.bounds)
   elseif source.bounds and (type(source.bounds)=="table") then
-    log.debug("-- need to decode bounds")
-    local t = source.bounds
-    for k,v in pairs(t) do
-      log.debug("  --  "..tostring(k).." "..tostring(v))
-    end
-    local b = lost.guiro.Bounds(t[1],t[2],t[3],t[4]) -- decodes the values from the input table
-    mergeBounds(target.bounds, b) -- we still need to merge    
+--    local t = source.bounds
+--    local b = lost.guiro.Bounds(t[1],t[2],t[3],t[4]) -- decodes the values from the input table
+--    mergeBounds(target.bounds, b) -- we still need to merge    
+    mergeBounds(target.bounds, lost.guiro.Bounds(unpack(source.bounds))) -- we still need to merge    
   end
   
   if source.id  ~= nil then target.id = source.id end

@@ -1,18 +1,6 @@
-using "lost.guiro.xleft"
-using "lost.guiro.xright"
-using "lost.guiro.ybottom"
-using "lost.guiro.ytop"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.habs"
-using "lost.guiro.wabs"
-using "lost.guiro.Bounds"
 using "lost.common.Color"
 
 local radius = 20
-
 
 return dcl.guiro:Screen
 {
@@ -34,12 +22,12 @@ return dcl.guiro:Screen
   dcl.guiro:UserInterface
   {
     id = "ui",
-    bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
+    bounds = {"left", "bottom", "1", "1"},
     dcl.guiro:Window
     {
       hidden = true,
       id = "hintWindow",
-      bounds = Bounds(xleft(), ytop(), wrel(1, -100), habs(40)),
+      bounds = {"left", "top", {"1", -100}, 40}, 
       showBackground = true,
       backgroundColor = Color(1,1,1,.5),
       showFrame = true,
@@ -51,7 +39,7 @@ return dcl.guiro:Screen
       frameShowSides = {false, true, false, false},
       dcl.guiro:Label
       {
-        bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
+        bounds = {"left", "bottom", "1", "1"},
         text = "hello there",
         fontSize = 16,
         showShadow = false,
@@ -61,7 +49,7 @@ return dcl.guiro:Screen
     dcl.guiro:Window
     {
       id = "buttons",
-      bounds = Bounds(xright(), ytop(), wabs(100), habs(100)),
+      bounds = {"right", "top", 100, 100},
       showBackground = true,
       backgroundColor = Color(1,1,1,.5),
       showFrame = true,
@@ -74,7 +62,7 @@ return dcl.guiro:Screen
       dcl.guiro:VBox
       {
         id = "stack",
-        bounds = Bounds(xright(), ybottom(), wrel(1,-6), hrel(1)),
+        bounds = {"right", "bottom", {"1", -6}, "1"}, 
         mode = "stack",
         spacing = 4,
         halign = "center",
@@ -84,7 +72,7 @@ return dcl.guiro:Screen
           id = "ssao",
           theme = "pebble",
           style = "RoundedRectSmall",
-          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+          bounds = {50, 50, 80, nil},
           title = "SSAO (1)",
           mode = "toggle",
         },
@@ -93,7 +81,7 @@ return dcl.guiro:Screen
           id = "light",
           theme = "pebble",
           style = "RoundedRectSmall",
-          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+          bounds = {50, 50, 80, nil},
           title = "Lighting (2)",
           mode = "toggle",
         },
@@ -102,7 +90,7 @@ return dcl.guiro:Screen
           id = "shadow",
           theme = "pebble",
           style = "RoundedRectSmall",
-          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+          bounds = {50, 50, 80, nil},
           title = "Shadows (3)",
           mode = "toggle",
         },
@@ -111,7 +99,7 @@ return dcl.guiro:Screen
           id = "matcap",
           theme = "pebble",
           style = "RoundedRectSmall",
-          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+          bounds = {50, 50, 80, nil},
           title = "MatCap (4)",
           mode = "toggle",
         }, 

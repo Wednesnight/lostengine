@@ -39,11 +39,11 @@ end
 
 function VBox:updateHorizontalAlignment(targetView)
   if self._halign == "center" then
-    targetView.bounds.x = xcenter()
+    targetView.bounds.x = lost.guiro.Bounds.decodeEntry(1, "center")
   elseif self._halign == "left" then
-    targetView.bounds.x = xleft()
+    targetView.bounds.x = lost.guiro.Bounds.decodeEntry(1, "left")
   elseif self._halign == "right" then
-    targetView.bounds.x = xright()
+    targetView.bounds.x = lost.guiro.Bounds.decodeEntry(1, "right")
   else
     log.warn("unknown horizontal alignment in VBox: '"..self._halign.."'")
   end
@@ -56,7 +56,7 @@ function VBox:updateSpread()
 --	log.debug("relfactor "..relfactor)
 	local f = 1
 	for k,view in pairs(self.subviews) do
-		view.bounds.y = lost.guiro.ycenter{rel=f}		
+		view.bounds.y = lost.guiro.yc{rel=f}		
 		f = f- relfactor
 		self:updateHorizontalAlignment(view)
 		view:needsLayout()
@@ -83,7 +83,7 @@ function VBox:updateStack()
   for k,view in pairs(self.subviews) do
     gr = view.rect
     currentOffset = currentOffset - gr.height
-    view.bounds.y = lost.guiro.yabs(currentOffset)
+    view.bounds.y = lost.guiro.ypos{abs=currentOffset}
     view:needsLayout()
 		self:updateHorizontalAlignment(view)    
     currentOffset = currentOffset - self._spacing

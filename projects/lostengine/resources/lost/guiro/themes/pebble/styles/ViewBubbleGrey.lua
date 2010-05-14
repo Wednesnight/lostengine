@@ -24,8 +24,8 @@ function ViewBubbleGrey:apply(target, def)
     size = self.sizes[def.size] or size
   end
   local radius = size / 2
-  target.bounds.width = lost.guiro.wabs(size)
-  target.bounds.height = lost.guiro.habs(size)
+  target.bounds.width = lost.guiro.wsize{abs=size}
+  target.bounds.height = lost.guiro.hsize{abs=size}
   target:backgroundCornerRadius(radius)
   target:frameCornerRadius(radius)
   target:frameRoundCorners(true, true, true, true)

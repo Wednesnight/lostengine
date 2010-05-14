@@ -1,16 +1,14 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.guiro.OldLayoutFunctions")
 require("lost.guiro.LayoutFunctions")
 
 lost.common.Class "lost.guiro.Bounds" {}
 
 -- all builtin layout functions known to Bounds
-Bounds.builtins = {xleft, xcenter, xright, xrel, xabs, 
-                  ybottom, ycenter, ytop, yrel, yabs,
-                  wabs, wrel, wfit,
-                  habs, hrel, hfit
+Bounds.builtins = {xpos, ypos, wsize, hsize,
+                   xl,xc,xr,
+                   yb,yc,yt
                  }
 
 -- default layout functions for the positions in the parameter table passed to bounds
@@ -80,10 +78,8 @@ function Bounds.decodeEntry(index, entry)
   -- if any of the parameters is a bultin function, it will override the default
   local builtin = nil
   if type(entry) == "table" then
-    log.debug("-- decoding TABLE with length "..tostring(#entry))
     local t = {}
     for k,v in ipairs(entry) do
-      log.debug("-- decoding "..tostring(k).." "..tostring(v))
       if type(v) == "string" then
         local bi = Bounds.aliases[index][v]
         if bi == nil then
@@ -95,10 +91,6 @@ function Bounds.decodeEntry(index, entry)
         t.abs = v
       end
     end
-
-    for k,v in pairs(t) do -- DEBUG
-      log.debug("-- RESULT: "..tostring(k).." "..tostring(v))
-    end -- DEBUG
 
     if builtin then
       result = builtin(t)

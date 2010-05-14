@@ -29,7 +29,7 @@ function Screen:constructor(textureManager)
   -- init size
   if currentTasklet ~= nil then
     local windowRect = currentTasklet.window.params.rect
-    self.bounds = lost.guiro.Bounds(xabs(0), yabs(0), wabs(windowRect.width), habs(windowRect.height))
+    self.bounds = lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height)
   end
 
   self.focusable = true
@@ -43,8 +43,6 @@ function Screen:constructor(textureManager)
   self.rootNode:add(disableScissorNode)
 
   self.camera = lost.camera.Camera2D.create(lost.math.Rect())
---  self.renderNode:add(lost.rg.ClearColor.create(lost.common.Color(0,0,0,1)))
---  self.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT))
   self.renderNode:add(lost.rg.Camera.create(self.camera))
   self.renderNode:add(lost.rg.DepthTest.create(false))
   self:showBackground(false)
@@ -64,8 +62,8 @@ function Screen:setEventDispatcher(eventDispatcher)
     lost.guiro.ReceivesEvents.setEventDispatcher(self, eventDispatcher)
 
     eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
-          self.bounds.width = lost.guiro.wabs(event.width)
-          self.bounds.height = lost.guiro.habs(event.height)
+          self.bounds.width = lost.guiro.wsize{abs=event.width}
+          self.bounds.height = lost.guiro.hsize{abs=event.height}
           self:needsLayout()
         end)
   end
