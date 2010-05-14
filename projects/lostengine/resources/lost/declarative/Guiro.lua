@@ -53,8 +53,20 @@ function mergeBounds(targetBounds, sourceBounds)
 end
 
 function Guiro:assignViewAttributes(target, source)
---  if source.bounds ~= nil then target.bounds = source.bounds end
-  mergeBounds(target.bounds, source.bounds)
+
+  if source.bounds and source.bounds.isDerivedFrom and source.bounds:isDerivedFrom("lost.guiro.Bounds") then
+    log.debug("user provided bounds instance")
+    mergeBounds(target.bounds, source.bounds)
+  elseif source.bounds and (type(source.bounds)=="table") then
+    log.debug("-- need to decode bounds")
+    local t = source.bounds
+    for k,v in pairs(t) do
+      log.debug("  --  "..tostring(k).." "..tostring(v))
+    end
+    local b = lost.guiro.Bounds(t[1],t[2],t[3],t[4]) -- decodes the values from the input table
+    mergeBounds(target.bounds, b) -- we still need to merge    
+  end
+  
   if source.id  ~= nil then target.id = source.id end
   if source.showFrame  ~= nil then target:showFrame(source.showFrame)	end
   if source.frameColor  ~= nil then target:frameColor(source.frameColor) end
