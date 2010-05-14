@@ -2,14 +2,6 @@
 require("lost.declarative.Context")
 require("sizes")
 
-using "lost.guiro.Bounds"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.wabs"
-using "lost.guiro.habs"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
-
 windowParams = lost.application.WindowParams("Ivy", lost.math.Rect(200,200,640,480))
 dcl = nil
 rootLoader = lost.resource.Loader.create()

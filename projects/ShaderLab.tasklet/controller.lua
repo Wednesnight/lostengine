@@ -2,21 +2,6 @@ using "lost.resource.Loader"
 using "lost.resource.FilesystemRepository"
 using "lost.resource.ApplicationResourceRepository"
 using "lost.application.K_ESCAPE"
-using "lost.guiro.Bounds"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.xrel"
-using "lost.guiro.yrel"
-using "lost.guiro.xleft"
-using "lost.guiro.ytop"
-using "lost.guiro.xright"
-using "lost.guiro.ybottom"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
-using "lost.guiro.wabs"
-using "lost.guiro.habs"
-using "lost.guiro.wfit"
-using "lost.guiro.hfit"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.Rect"
@@ -157,7 +142,7 @@ controller.droppedShader = function(event)
         if readonly then
           editor = dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
+            bounds = {0,0,".12", "1"},
             fontSize = 10,
             text = "(builtin)",
             halign = "left"
@@ -167,7 +152,7 @@ controller.droppedShader = function(event)
           if type:find("^sampler") or type == "int" or type == "float" then
             editor = dcl.guiro:SpinEdit
             {
-              bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
+              bounds = {0,0,".12", "1"},
               value = 0,
               min = 0,
               max = 15,
@@ -190,7 +175,7 @@ controller.droppedShader = function(event)
           else
             editor = dcl.guiro:Label
             {
-              bounds = Bounds(xabs(0), yabs(0), wrel(.12), hrel(1)),
+              bounds = {0,0,".12", "1"},
               fontSize = 10,
               text = "",
               halign = "left"
@@ -200,27 +185,27 @@ controller.droppedShader = function(event)
 
         local param = dcl.guiro:HBox
         {
-          bounds = Bounds(xabs(0), yabs(0), wrel(1), habs(20)),
+          bounds = {0,0,"1", 20},
           showFrame = true,
           valign = "center",
           mode = "stack",
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.19), hrel(1)),
+            bounds = {0,0,".19", "1"},
             fontSize = 10,
             text = typeName(v.paramType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.19), hrel(1)),
+            bounds = {0,0,".19", "1"},
             fontSize = 10,
             text = valueTypeName(v.glType),
             halign = "left"
           },
           dcl.guiro:Label
           {
-            bounds = Bounds(xabs(0), yabs(0), wrel(.50), hrel(1)),
+            bounds = {0,0,".5", "1"},
             fontSize = 10,
             text = k,
             halign = "left"
