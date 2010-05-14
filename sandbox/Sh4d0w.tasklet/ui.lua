@@ -25,7 +25,7 @@ return dcl.guiro:Screen
     bounds = {"left", "bottom", "1", "1"},
     dcl.guiro:Window
     {
-      hidden = true,
+      hidden = false,
       id = "hintWindow",
       bounds = {"left", "top", {"1", -100}, 40}, 
       showBackground = true,
