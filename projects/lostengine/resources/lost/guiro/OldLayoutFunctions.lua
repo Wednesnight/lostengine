@@ -21,9 +21,14 @@ function xright(mod)
   return function(self, parentRect) return (parentRect:maxX() - self:width(parentRect) + 1) + (mod.abs + (parentRect.width * mod.rel)) end
 end
 
-function xabs(x, mod)
-  mod = mod or 0
-  return function(self, parentRect) return (parentRect.x + x) + (parentRect.width * mod) end
+function xabs(abs, rel)
+  if type(abs) == "table" then -- compatibility for new calling conventions that require tabel as sole parameter
+    abs = abs.abs or 0
+    rel = abs.rel or 0
+  else
+    rel = rel or 0
+  end
+  return function(self, parentRect) return (parentRect.x + abs) + (parentRect.width * rel) end
 end
 
 function xrel(x, mod)

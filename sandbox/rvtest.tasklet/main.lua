@@ -4,20 +4,7 @@ require("lost.common.Shaders")
 using "lost.math.Vec2"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
-using "lost.guiro.Bounds"
 using "lost.common.Color"
-using "lost.guiro.wrel"
-using "lost.guiro.hrel"
-using "lost.guiro.xabs"
-using "lost.guiro.yabs"
-using "lost.guiro.xleft"
-using "lost.guiro.ybottom"
-using "lost.guiro.habs"
-using "lost.guiro.wabs"
-using "lost.guiro.xleft"
-using "lost.guiro.xcenter"
-using "lost.guiro.ybottom"
-using "lost.guiro.ycenter"
 
 screensize = Vec2(320,480)
 windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
@@ -49,11 +36,11 @@ function startup(tasklet)
     dcl.guiro:UserInterface
     {
       id = "ui",
-      bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
+      bounds = {"left", "bottom", "1", "1"},
       dcl.guiro:Window
       {
         id = "window",
-        bounds = Bounds(xleft(), ybottom(), wrel(1), hrel(1)),
+        bounds = {"left", "bottom", "1", "1"},
         showBackground = true,
 				showFrame = false,
         backgroundColor = Color(.9294,.9294,.9294),
@@ -65,13 +52,13 @@ function startup(tasklet)
           frameColor = Color(0,1,0),
 --          showBackground = true,
 --          backgroundColor = Color(0,1,0),
-          bounds = Bounds(xleft(),ybottom(), wrel(1), hrel(1)),
+          bounds = {"left", "bottom", "1", "1"},
           mode = "stack",
   				dcl.guiro:VBox
   				{
   				  showFrame = true,
   				  frameColor = Color(1,0,0),
-  					bounds = Bounds(xabs(0), yabs(0), wrel(.25), hrel(1)),
+  					bounds = {0,0,".25", "1"},
   					mode = "stack",
   					spacing = 2,
   					valign = "center",
@@ -80,7 +67,7 @@ function startup(tasklet)
   	          id = "roundedRectButtonRegular",
   	          theme = "pebble",
   	          style = "RoundedRectRegular",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          bounds = {50,50,80,nil}, 
   	          title = "Regular",
   	          mode = "normal",
   	        },
@@ -89,7 +76,7 @@ function startup(tasklet)
   	          id = "roundedRectButtonSmall",
   	          theme = "pebble",
   	          style = "RoundedRectSmall",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          bounds = {50,50,80,nil}, 
   	          title = "Small",       
   	          mode = "sticky"      
   	        },
@@ -98,13 +85,13 @@ function startup(tasklet)
   	          id = "roundedRectButtonMini",
   	          theme = "pebble",
   	          style = "RoundedRectMini",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(80), nil), 
+  	          bounds = {50,50,80,nil}, 
   	          title = "Mini",       
   	          mode = "toggle"      
   	        },
   	        dcl.guiro:HBox
   	        {
-  	          bounds=Bounds(xcenter(), nil, wrel(1), habs(20)),
+  	          bounds={"center", nil, "1", 20},
   	          mode="stack",
   	          spacing=2,
   	          valign = "center",
@@ -134,7 +121,7 @@ function startup(tasklet)
     	      },
   	        dcl.guiro:HBox
   	        {
-  	          bounds=Bounds(xcenter(), nil, wrel(1), habs(20)),
+  	          bounds={"center", nil, "1", 20},
   	          mode="stack",
   	          spacing=2,
   	          valign = "center",
@@ -164,13 +151,13 @@ function startup(tasklet)
     	      },
     	      dcl.guiro:HBox
     	      {
-    	        bounds = Bounds(xleft(), nil, wrel(1), habs(30)),
+    	        bounds = {"left", nil, "1", 30},
     	        mode="stack",
     	        spacing=0,
     	        valign="center",
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
+    	            bounds = {nil, 20, ".3", nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
@@ -180,7 +167,7 @@ function startup(tasklet)
               dcl.guiro:View
     	        {
 									hidden = false,
-    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
+    	            bounds = {nil, 20, ".3", nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
@@ -190,7 +177,7 @@ function startup(tasklet)
               dcl.guiro:View
     	        {
   								hidden = false,
-    	            bounds = Bounds(nil, yabs(20), wrel(.3), nil),
+    	            bounds = {nil, 20, ".3", nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "regular",
@@ -200,13 +187,13 @@ function startup(tasklet)
     	      },
     	      dcl.guiro:HBox
     	      {
-    	        bounds = Bounds(xleft(), nil, wrel(1), habs(30)),
+    	        bounds = {"left", nil, "1", 30},
     	        mode="stack",
     	        spacing=0,
     	        valign="center",
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            bounds = {nil, 20, 30, nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "mini",
@@ -215,7 +202,7 @@ function startup(tasklet)
     	        },
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            bounds = {nil, 20, 30, nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "mini",
@@ -224,7 +211,7 @@ function startup(tasklet)
     	        },
               dcl.guiro:View
     	        {
-    	            bounds = Bounds(nil, yabs(20), wabs(30), nil),
+    	            bounds = {nil, 20, 30, nil},
     	            theme = "pebble",
     	            style = "segment",
     	            size = "mini",
@@ -235,7 +222,7 @@ function startup(tasklet)
   				},
   				dcl.guiro:VBox
   				{
-  					bounds = Bounds(xabs(0), ycenter(), wabs(200), hrel(1)),
+  					bounds = {0, "center", 200, "1"},
   					mode = "stack",
   					spacing = 10,
   					valign = "center",
@@ -246,7 +233,7 @@ function startup(tasklet)
   	          id = "roundedRectButton",
   	          theme = "pebble",
   	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(100), nil), 
+  	          bounds = {50,50,100,nil}, 
   	          title = "Base SDK"       
   	        },
   	        dcl.guiro:Button
@@ -254,7 +241,7 @@ function startup(tasklet)
   	          id = "roundedRectButton",
   	          theme = "pebble",
   	          style = "RoundedRect",
-  	          bounds = Bounds(xabs(50), yabs(50), wabs(150), nil), 
+  	          bounds = {50,50,150,nil}, 
   	          title = "Base SDK | Debug"       
   	        }
   				}
