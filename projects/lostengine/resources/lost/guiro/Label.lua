@@ -1,7 +1,6 @@
 module("lost.guiro", package.seeall)
 
 require("lost.guiro.View")
-require("lost.guiro.Bounds")
 require("lost.common.Shaders")
 
 lost.common.Class "lost.guiro.Label" "lost.guiro.View" {}

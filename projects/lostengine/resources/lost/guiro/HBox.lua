@@ -40,11 +40,11 @@ end
 
 function HBox:updateVerticalAlignment(targetView)
   if self._valign == "center" then
-    targetView.bounds.y = lost.guiro.ycenter()
+    targetView.bounds.y = lost.guiro.Bounds.decodeEntry(2, "center")
   elseif self._valign == "top" then
-    targetView.bounds.y = lost.guiro.ytop()
+    targetView.bounds.y = lost.guiro.Bounds.decodeEntry(2, "top")
   elseif self._valign == "bottom" then
-    targetView.bounds.y = lost.guiro.ybottom()
+    targetView.bounds.y = lost.guiro.Bounds.decodeEntry(2, "bottom")
   else
     log.warn("unknown vertical alignment in HBox: '"..self._halign.."'")
   end
@@ -56,7 +56,7 @@ function HBox:updateSpread()
 	local f = 1
 	for k = #self.subviews,1,-1 do
 	  local view = self.subviews[k]
-		view.bounds.x = lost.guiro.xcenter{rel=f}		
+		view.bounds.x = lost.guiro.xc{rel=f} 
 		f = f- relfactor
 		self:updateVerticalAlignment(view)
 		view:needsLayout()
@@ -83,7 +83,7 @@ function HBox:updateStack()
     local view = self.subviews[k]
     gr = view.rect
     currentOffset = currentOffset - gr.width
-    view.bounds.x = lost.guiro.xabs(currentOffset)
+    view.bounds.x = lost.guiro.xpos{abs=currentOffset}
     view:needsLayout()
 		self:updateVerticalAlignment(view)    
     currentOffset = currentOffset - self._spacing

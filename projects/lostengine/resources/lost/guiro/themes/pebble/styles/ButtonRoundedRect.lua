@@ -4,17 +4,11 @@ module("lost.guiro.themes.pebble.styles", package.seeall)
 require("lost.common.Class")
 require("lost.guiro.Style")
 require("lost.guiro.Image")
-require("lost.guiro.Bounds")
 require("lost.guiro.Label")
-require("lost.guiro.Bounds")
 
 local Color = lost.common.Color
 local Vec2 = lost.math.Vec2
 local Bounds = lost.guiro.Bounds
-local xabs = lost.guiro.xabs
-local yabs = lost.guiro.yabs
-local wrel = lost.guiro.wrel
-local hrel = lost.guiro.hrel
 
 lost.common.Class "lost.guiro.themes.pebble.styles.ButtonRoundedRect" "lost.guiro.Style" {}
 
@@ -46,7 +40,7 @@ function ButtonRoundedRect:apply(target)
   target:label(lost.guiro.Button.STATE_PUSHED, self:buildLabel(Color(0,0,0)))
   target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(.1,.1,.1)))
   
-  target.bounds.height = lost.guiro.habs(self.buttonHeight)
+  target.bounds.height = lost.guiro.hsize{abs=self.buttonHeight}
 end
 
 function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
@@ -63,7 +57,7 @@ function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
 	result:frameCornerRadius(9)
 	result:backgroundRoundCorners(true, true, true, true)
 	result:frameRoundCorners(true, true, true, true)
-  result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
+  result.bounds = Bounds(0, 0, "1", "1")
   result:hidden(true)
   result:needsLayout()
   result:needsRedraw()
@@ -72,7 +66,7 @@ end
 
 function ButtonRoundedRect:buildLabel(col)
   local result = lost.guiro.Label(self.textureManager)
-  result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
+  result.bounds = Bounds(0, 0, "1", "1")
   result:font(self.defaultFont)
   result:fontSize(self.fontSize)
   result:text("Button")

@@ -59,7 +59,7 @@ function View:constructor(textureManager)
   self.subviewNodes.name = "subviewNodes"
 
   -- scissoring, initially enabled but inactive (will not be processed)
-  self.scissorBounds = lost.guiro.Bounds(lost.guiro.xleft(), lost.guiro.ytop(), lost.guiro.wrel(1), lost.guiro.hrel(1))
+  self.scissorBounds = lost.guiro.Bounds("left", "top", "1", "1")
   self.scissorNode = lost.rg.Scissor.create(true)
   self.scissorNode.active = false
   self.scissorNode.name = "scissorNode"

@@ -29,7 +29,7 @@ lost.common.Class "lost.guiro.HasLayout" {}
 using "lost.common.callLater"
 
 function HasLayout:constructor()
-  self.bounds = lost.guiro.Bounds(xabs(0), yabs(0), wabs(0), habs(0))
+  self.bounds = lost.guiro.Bounds(0,0,0,0)
   self.rect = lost.math.Rect()
 
   self.dirtyLayout = false

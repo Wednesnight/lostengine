@@ -1,8 +1,3 @@
-using "lost.guiro.Bounds"
-using "lost.guiro.xleft"
-using "lost.guiro.ybottom"
-using "lost.guiro.wfit"
-using "lost.guiro.hfit"
 using "lost.resource.Loader"
 using "lost.resource.FilesystemRepository"
 using "lost.resource.ApplicationResourceRepository"
@@ -26,17 +21,17 @@ return dcl.guiro:Screen
   dcl.guiro:UserInterface
   {
     id = "ui",
-    bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+    bounds = {"left", "bottom", "1", "1"},
     dcl.guiro:Window
     {
       id = "window",
-      bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+      bounds = {"left", "bottom", "1", "1"}, 
       showFrame = true,
       dcl.guiro:Label
       {
         hidden = false,
         id = "startupLabel",
-        bounds = Bounds(xleft(), ybottom(), wfit(), hfit()),
+        bounds = {"left", "bottom", "1", "1"},
         text = "Drop tasklet directory to get started!",
       }
     }

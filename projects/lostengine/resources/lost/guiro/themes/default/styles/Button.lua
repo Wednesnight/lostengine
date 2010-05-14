@@ -7,13 +7,9 @@ require("lost.guiro.Image")
 require("lost.guiro.Bounds")
 require("lost.guiro.Label")
 
-local Color = lost.common.Color
-local Vec2 = lost.math.Vec2
-local Bounds = lost.guiro.Bounds
-local xabs = lost.guiro.xabs
-local yabs = lost.guiro.yabs
-local wrel = lost.guiro.wrel
-local hrel = lost.guiro.hrel
+using "lost.common.Color"
+using "lost.math.Vec2"
+using "lost.guiro.Bounds"
 
 lost.common.Class "lost.guiro.themes.default.styles.Button" "lost.guiro.Style" {}
 
@@ -54,7 +50,7 @@ function Button:buildBackgroundImage(tex, vid)
   local result = lost.guiro.Image(self.textureManager)
   result.id = vid
   result:texture(tex)
-  result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
+  result.bounds = Bounds(0,0,"1","1")
   result:flip(true)
   result:scale("scalegrid")
   result:caps(self.caps)
@@ -67,7 +63,7 @@ end
 
 function Button:buildLabel(col)
   local result = lost.guiro.Label(self.textureManager)
-  result.bounds = Bounds(xabs(0), yabs(0), wrel(1), hrel(1))
+  result.bounds = Bounds(0,0,"1","1")
   result:font(self.defaultFont)
   result:fontSize(12)
   result:text("Button")
