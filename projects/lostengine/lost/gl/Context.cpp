@@ -231,10 +231,14 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-    void Context::bindTexture(GLuint tex)
+    void Context::bindTexture(GLuint tex, bool override)
     {
       uint32_t idx = currentActiveTexture - GL_TEXTURE0; // have to subtract since GL_TEXTURE0 is some arbitrary hex value and not zero based
       assert((idx>=0) && (idx<_maxTextures));
+      if(override) // set current entry to something other than incoming value so it gets set
+      {
+        activeTextures[idx] = (tex-1);
+      }
       if(activeTextures[idx] != tex)
       {
         glBindTexture(GL_TEXTURE_2D, tex); GLDEBUG_THROW;        
@@ -250,7 +254,12 @@ std::map<void*, Context*> glContext2lostGlContext;
         for(uint32_t i=0; i<num; ++i)
         {
           activeTexture(GL_TEXTURE0+i); // the standard guarantees GL_TEXTUREi = GL_TEXTURE0+i
-          bindTexture(textures[i]->texture);
+          Texture* texture = textures[i].get();
+          bindTexture(texture->texture, texture->neverBeenBound);
+          if(texture->neverBeenBound)
+          {
+            texture->neverBeenBound = false;
+          }
         }
         activeTexture(GL_TEXTURE0); // reset 
       }

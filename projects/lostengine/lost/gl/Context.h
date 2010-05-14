@@ -111,7 +111,7 @@ namespace lost
       void clear(GLbitfield flags);    
       
       void activeTexture(GLenum tex); // sets the currently active texture unit
-      void bindTexture(GLuint tex); // binds tex to currently active texture unit
+      void bindTexture(GLuint tex, bool override); // binds tex to currently active texture unit. Override is required to rebind destroyed and immediately recreated texture objects 
       void bindTextures(const std::vector<TexturePtr>& textures); // binds textures to the units equivalent to the index in the vector
       void material(const mesh::MaterialPtr& mat); // applies the Material parameters to the state
       

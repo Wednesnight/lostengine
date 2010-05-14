@@ -49,6 +49,7 @@ GLenum bitmapComponents2GlFormat(bitmap::Components components)
 void Texture::create()
 {
   glGenTextures(1, &texture);GLDEBUG_THROW;
+  neverBeenBound = true;
 }
 
 
@@ -60,18 +61,21 @@ Texture::Texture()
 Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
 {
   create();
+  bind();
   init(inSize, inParams);
 }
 
 Texture::Texture(common::DataPtr inData,  const Params& inParams)
 {
   create();
+  bind();
   init(inData, inParams);
 }
 
 Texture::Texture(bitmap::BitmapPtr inBitmap, const Params& inParams)
 {
   create();
+  bind();
   init(inBitmap, inParams);
 }
 
@@ -85,17 +89,20 @@ void Texture::destroy()
   glDeleteTextures(1, &texture);GLDEBUG;
 }
 
-void Texture::bind() const
+void Texture::bind() 
 {
-//  glBindTexture(GL_TEXTURE_2D, texture); GLDEBUG_THROW;
-  Context::getCurrent()->bindTexture(texture);
+  Context::getCurrent()->bindTexture(texture, neverBeenBound);
+  if(neverBeenBound)
+  {
+    neverBeenBound = false;
+  }
 }
 
 void Texture::unbind() const
 {
   // reset to default texture
 //  glBindTexture(GL_TEXTURE_2D, 0); GLDEBUG_THROW;
-  Context::getCurrent()->bindTexture(0);
+  Context::getCurrent()->bindTexture(0, neverBeenBound);
 }
 
 void Texture::init(common::DataPtr inData,  const Params& inParams)
@@ -152,6 +159,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
 
 void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
 {
+  bind();
   Texture::Params bitmapParams(inParams);
   bitmapParams.internalFormat = bitmapParams.format = bitmapComponents2GlFormat(inBitmap->format); // FIXME: is this correct?
 
@@ -281,6 +289,7 @@ void Texture::magFilter(GLint p)
 
 void Texture::param(GLenum pname, GLint p)
 {
+  bind();
   glTexParameteri(GL_TEXTURE_2D, pname, p);GLDEBUG_THROW;
 }
 
