@@ -107,6 +107,9 @@ struct TrueTypeFont
                                 // this is important to preserve the ordering fo rth packing of the atlas
 
   gl::TexturePtr atlas;
+  
+  std::map<uint32_t, float> _fontSize2ascender;
+  std::map<uint32_t, float> _fontSize2descender;
 };
 }  
 }
