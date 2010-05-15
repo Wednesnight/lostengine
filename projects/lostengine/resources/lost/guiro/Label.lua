@@ -85,12 +85,16 @@ function Label:updateAlign()
   end
 
   if self._valign == "center" then
-    textPos.y = self.rect.y+((self.rect.height-self.textMesh.size.height)/2)+(-1*self.textMesh.min.y)
+--    textPos.y = self.rect.y+((self.rect.height-self.textMesh.size.height)/2)-self.textMesh.min.y
+      textPos.y = self.rect.y+((self.rect.height-self.textMesh.fontHeight)/2)+math.abs(self.textMesh.fontDescender)
   elseif self._valign == "top" then
-    textPos.y = self.rect.y+self.rect.height-self.textMesh.size.height
+    textPos.y = self.rect.y+self.rect.height-self.textMesh.fontHeight
   elseif self._valign == "bottom" then
-    textPos.y = self.rect.y+(-1*self.textMesh.min.y)
+    textPos.y = self.rect.y+(-1*self.textMesh.fontDescender)
   end
+  
+  textPos.x = math.floor(textPos.x)
+  textPos.y = math.floor(textPos.y)
 
   local shadowPos = textPos + Vec3(self._shadowOffset.x, self._shadowOffset.y, 0)
   self.textMesh.transform = MatrixTranslation(textPos)

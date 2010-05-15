@@ -76,7 +76,7 @@ function startup(tasklet)
   	          id = "roundedRectButtonSmall",
   	          theme = "pebble",
   	          style = "RoundedRectSmall",
-  	          bounds = {50,50,80,nil}, 
+  	          bounds = {50,50,60,nil}, 
   	          title = "Small",       
   	          mode = "sticky"      
   	        },
@@ -85,7 +85,7 @@ function startup(tasklet)
   	          id = "roundedRectButtonMini",
   	          theme = "pebble",
   	          style = "RoundedRectMini",
-  	          bounds = {50,50,80,nil}, 
+  	          bounds = {50,50,40,nil}, 
   	          title = "Mini",       
   	          mode = "toggle"      
   	        },
