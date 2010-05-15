@@ -95,6 +95,17 @@ bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
       glyph->advance = (face->face()->glyph->advance.x >> 6);
       char2size2glyph[c][inSizeInPoints] = glyph;
       glyphs.push_back(glyph);
+      
+//      DOUT("-- font ascender:"<<(face->face()->ascender >> 6) << " descender:"<<(face->face()->descender >> 6)<<" height:"<<(face->face()->height >> 6)
+//           << " xscale:"<<(face->face()->size->metrics.x_scale) <<" yscale:"<<(face->face()->size->metrics.y_scale));
+           
+      float debug_height = ((float)face->face()->height)/64.0f;
+      float debug_scale = ((float)face->face()->size->metrics.y_scale)/65536.0f;
+
+      float debug_ascender = (((float)face->face()->ascender)/64.0f)*debug_scale;
+      float debug_descender = (((float)face->face()->descender)/64.0f)*debug_scale;
+
+//      DOUT("--- estimated height in pixels: "<<debug_height*debug_scale<<" ascender:"<<debug_ascender<<" descender:"<<debug_descender);
     }
     return result;
 }
@@ -137,11 +148,13 @@ void TrueTypeFont::rebuildTextureAtlas()
   // glyphs that were rendered in a previous pass should end up in the same spot in the atlas since we forced the packer to omit sorting
   if(!atlas)
   {
+    DOUT("--- CREATING FONT ATLAS");
     atlas.reset(new gl::Texture(packerResult.packedBitmap));
   }
   else
   {
 //    DOUT("reinitialising bitmap");
+    atlas->bind();
     atlas->init(packerResult.packedBitmap);
   }
   
@@ -190,6 +203,7 @@ RenderedTextPtr TrueTypeFont::render(const std::string & inText, uint32_t inSize
 
 void TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints, RenderedTextPtr target)
 {
+  DOUT("////////////////////////// "<<inText);
 //  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
   // Assume std::string is always utf8 encoded.
@@ -233,7 +247,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
             uint32_t inSizeInPoints,
             RenderedTextPtr target)
 {
-//  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
+  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
   // used to draw the character
@@ -301,6 +315,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   target->material->blend = true;
   target->material->blendSrc = GL_SRC_ALPHA;
   target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+  DOUT("-- rendered size: w:"<<target->size.width<<" height:"<<target->size.height);
 }
 
 
