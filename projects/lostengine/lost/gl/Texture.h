@@ -56,7 +56,6 @@ namespace lost
       void destroy();
 
       void bind();
-      void unbind() const;
       
       void init(common::DataPtr inData,  const Params& inParams = Params());
       void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());

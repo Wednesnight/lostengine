@@ -98,13 +98,6 @@ void Texture::bind()
   }
 }
 
-void Texture::unbind() const
-{
-  // reset to default texture
-//  glBindTexture(GL_TEXTURE_2D, 0); GLDEBUG_THROW;
-  Context::getCurrent()->bindTexture(0, neverBeenBound);
-}
-
 void Texture::init(common::DataPtr inData,  const Params& inParams)
 {
   BitmapPtr bmp(new Bitmap(inData));
