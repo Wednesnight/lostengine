@@ -65,14 +65,14 @@ Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
   init(inSize, inParams);
 }
 
-Texture::Texture(common::DataPtr inData,  const Params& inParams)
+Texture::Texture(const common::DataPtr& inData,  const Params& inParams)
 {
   create();
   bind();
   init(inData, inParams);
 }
 
-Texture::Texture(bitmap::BitmapPtr inBitmap, const Params& inParams)
+Texture::Texture(const bitmap::BitmapPtr& inBitmap, const Params& inParams)
 {
   create();
   bind();
@@ -98,7 +98,7 @@ void Texture::bind()
   }
 }
 
-void Texture::init(common::DataPtr inData,  const Params& inParams)
+void Texture::init(const common::DataPtr& inData,  const Params& inParams)
 {
   BitmapPtr bmp(new Bitmap(inData));
   init(bmp, inParams);
@@ -150,7 +150,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
   dataHeight = (uint32_t)inSize.height;
 }
 
-void Texture::init(bitmap::BitmapPtr inBitmap, const Texture::Params& inParams)
+void Texture::init(const bitmap::BitmapPtr& inBitmap, const Texture::Params& inParams)
 {
   bind();
   Texture::Params bitmapParams(inParams);
@@ -214,7 +214,7 @@ void Texture::init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params
   height = dataHeight = inBitmaps[0]->height;  
 }
 
-void Texture::subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr inBitmap)
+void Texture::subImage(const lost::math::Vec2& targetPos, const bitmap::BitmapPtr& inBitmap)
 {
   glTexSubImage2D(GL_TEXTURE_2D,
                   0,

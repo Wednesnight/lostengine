@@ -372,13 +372,13 @@ namespace lost
           class_<Texture>("Texture")
             .scope
             [
-              def("create", (TexturePtr(*)(common::DataPtr, const Texture::Params&))&Texture::create),
+              def("create", (TexturePtr(*)(const common::DataPtr&, const Texture::Params&))&Texture::create),
               def("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create),
-              def("create", (TexturePtr(*)(bitmap::BitmapPtr, const Texture::Params&))&Texture::create)
+              def("create", (TexturePtr(*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::create)
             ]
             .def("bind", &Texture::bind)
-            .def("init", (void(Texture::*)(common::DataPtr, const Texture::Params&))&Texture::init)
-            .def("init", (void(Texture::*)(shared_ptr<Bitmap>, const Texture::Params&))&Texture::init)
+            .def("init", (void(Texture::*)(const common::DataPtr&, const Texture::Params&))&Texture::init)
+            .def("init", (void(Texture::*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::init)
             .def("init", (void(Texture::*)(const lost::math::Vec2&, const Texture::Params&))&Texture::init)
             .def("init", (void(*)(Texture*, GLint, GLenum, GLsizei, GLsizei, GLint, GLenum, GLenum))&TextureInit)
             .def("filter", &Texture::filter)
