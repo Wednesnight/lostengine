@@ -45,20 +45,20 @@ namespace lost
     
       Texture();
       Texture(const lost::math::Vec2& inSize, const Params& inParams = Params());
-      Texture(common::DataPtr inData,  const Params& inParams = Params());
-      Texture(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());      
+      Texture(const common::DataPtr& inData,  const Params& inParams = Params());
+      Texture(const bitmap::BitmapPtr& inBitmap, const Params& inParams = Params());      
       
       static TexturePtr create(const lost::math::Vec2& inSize, const Params& inParams = Params()) { return TexturePtr(new Texture(inSize, inParams)); };
-      static TexturePtr create(common::DataPtr inData,  const Params& inParams = Params()) { return TexturePtr(new Texture(inData, inParams)); };
-      static TexturePtr create(bitmap::BitmapPtr inBitmap, const Params& inParams = Params()) { return TexturePtr(new Texture(inBitmap, inParams)); };
+      static TexturePtr create(const common::DataPtr& inData,  const Params& inParams = Params()) { return TexturePtr(new Texture(inData, inParams)); };
+      static TexturePtr create(const bitmap::BitmapPtr& inBitmap, const Params& inParams = Params()) { return TexturePtr(new Texture(inBitmap, inParams)); };
       
       ~Texture();
       void destroy();
 
       void bind();
       
-      void init(common::DataPtr inData,  const Params& inParams = Params());
-      void init(bitmap::BitmapPtr inBitmap, const Params& inParams = Params());
+      void init(const common::DataPtr& inData,  const Params& inParams = Params());
+      void init(const bitmap::BitmapPtr& inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
       void init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams = Params()); // assumes inBitmaps[0] is the largest, all others reductions, doesn't check for power of two, bitmaps must have same format
       
@@ -71,7 +71,7 @@ namespace lost
                  GLenum type, // numerical type of provided pixel data
                  const GLvoid* data); // pointer to the data or 0 if you only want to reserve data for later usage
 
-      void subImage(const lost::math::Vec2& targetPos, bitmap::BitmapPtr bmp);
+      void subImage(const lost::math::Vec2& targetPos, const bitmap::BitmapPtr& bmp);
 
       void wrap(GLint p);
       void wrapS(GLint p);
