@@ -67,7 +67,7 @@ namespace lost
       GLuint buffer;
 
       void bindFramebuffer();
-      void unbindFramebuffer();
+      static void bindDefaultFramebuffer();
 
     public:
       math::Vec2 size;

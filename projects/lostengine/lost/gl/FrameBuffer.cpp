@@ -83,7 +83,6 @@ namespace lost
       }
       texture->init(size, textureParams);
       texture->filter(GL_NEAREST);
-      texture->unbind();
     }
     
     void FrameBuffer::Attachment::createRenderBuffer()
@@ -127,7 +126,6 @@ namespace lost
       this->texture = texture;
       this->texture->bind();
       this->texture->filter(GL_NEAREST);
-      this->texture->unbind();
     }
 
     FrameBuffer::Attachment::Attachment(const RenderBufferPtr& renderBuffer)
@@ -164,7 +162,6 @@ namespace lost
         case Attachment::UT_texture:
           texture->bind();
           lglFramebufferTexture2D(LGL_FRAMEBUFFER, target, GL_TEXTURE_2D, texture->texture, 0); GLDEBUG_THROW;
-          texture->unbind();
           break;
           
         case Attachment::UT_renderBuffer:
@@ -244,7 +241,7 @@ namespace lost
       if (doCheck) check();
 
       // reset
-      unbindFramebuffer();
+      bindDefaultFramebuffer();
     }
     
     FrameBuffer::~FrameBuffer()
@@ -403,7 +400,7 @@ namespace lost
       Context::getCurrent()->bindFramebuffer(buffer);
     }
 
-    void FrameBuffer::unbindFramebuffer()
+    void FrameBuffer::bindDefaultFramebuffer()
     {
       Context::getCurrent()->bindDefaultFramebuffer();
     }
