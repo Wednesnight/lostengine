@@ -115,9 +115,6 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
       clearVertexAttributeEnabled();
       clearVertexAttributeRequired();
-      DOUT("!!! max texture size: "<<getParam<int>(GL_MAX_TEXTURE_SIZE));
-      DOUT("!!! max color attachments: "<<getParam<int>(GL_MAX_COLOR_ATTACHMENTS_EXT));
-      DOUT("!!! max renderbuffer size: "<<getParam<int>(GL_MAX_RENDERBUFFER_SIZE_EXT));
     }
     
     Context::~Context()
