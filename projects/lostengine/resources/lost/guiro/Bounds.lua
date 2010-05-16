@@ -109,17 +109,6 @@ function Bounds.decode(t)
          Bounds.decodeEntry(4,t[4])
 end
 
-function Bounds.argsAreFunctions(args)
-  local result = true
-  for k,v in ipairs(args) do
-    if type(v) ~= "function" then
-      result = false
-      break
-    end
-  end
-  return result
-end
-
 -- either one prameter, a table
 -- or 4 functions
 function Bounds:constructor(...)
