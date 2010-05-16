@@ -5,6 +5,7 @@ using "lost.math.Vec2"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.guiro.Bounds"
+using "lost.common.Color"
 
 screensize = Vec2(320,480)
 windowParams = WindowParams("LayoutIntegration", Rect(0,0,screensize.x, screensize.y))
@@ -31,10 +32,7 @@ function test(b, parent, resultRect)
   return result
 end
 
-function startup(tasklet)
-  tasklet.name = "LayoutIntegration"
-  tasklet.waitForEvents = true
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
+function testcases()
   log.debug("----------------------------------------------")
   log.debug("----------------------------------------------")
   local b2 = Bounds(13,13, 13, 13)
@@ -53,12 +51,37 @@ function startup(tasklet)
   assert(test(Bounds({"right", 10},0,50,50), prect, Rect(72,24, 50,50)))
   assert(test(Bounds("left","bottom",50,50), prect, Rect(12,24, 50,50)))
   assert(test(Bounds("left","bottom",".5",".25"), prect, Rect(12,24, 50,25)))
+end
+
+function startup(tasklet)
+  tasklet.name = "LayoutIntegration"
+  tasklet.waitForEvents = true
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
+
+--  testcases()
 
   dcl = lost.declarative.Context(tasklet.loader)
   
-  v = dcl.guiro:View
+  screen = dcl.guiro:Screen
   {
-    bounds = {"left","top",13,".5"}
+    id = "screen",
+    dcl.guiro:UserInterface
+    {
+      id = "ui",
+      bounds = {0,0,"1", "1"},
+      dcl.guiro:Window
+      {
+        id = "window",
+        bounds = {0,0,"1", "1"},
+        dcl.guiro:View
+        {
+          id = "view",
+          bounds = {0,0,"1", "1"},
+          showBackground = true,
+          backgroundColor = Color(0,1,0)
+        }
+      }
+    }
   }
   
   return running

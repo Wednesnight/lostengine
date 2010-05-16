@@ -31,6 +31,10 @@ function startup(tasklet)
     {
       buttonClick = function(event)
                       log.debug("clicked on '"..tostring(event.target.id).."'")
+                      if event.target.id == "roundedRectButtonRegular" then
+                        screen:printSubviews()
+                        screen.rootNode:print()                        
+                      end
                     end,
     },
     dcl.guiro:UserInterface
