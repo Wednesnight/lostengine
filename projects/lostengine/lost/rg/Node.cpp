@@ -7,12 +7,14 @@ namespace lost
   namespace rg
   {
 
-    void printNode(NodePtr n, const std::string prefix)
+    void printNode(NodePtr n, const std::string prefix, uint32_t& numNodes, uint32_t& enabledNodes)
     {
+      numNodes++;
+      if(n->active) enabledNodes++;
       DOUT(prefix << "|-- " << (n->active ? "(+)" : "(-)") << n->name);
       for(std::list<NodePtr>::iterator i=n->children.begin(); i!=n->children.end(); ++i)
       {
-        printNode(*i, prefix+"    ");
+        printNode(*i, prefix+"    ", numNodes, enabledNodes);
       }      
     }
 
@@ -29,7 +31,10 @@ namespace lost
 
     void Node::print()
     {
-      printNode(shared_ptr<Node>(this, common::NullDeleter()), std::string(""));
+      uint32_t numNodes, enabledNodes;
+      numNodes = enabledNodes = 0;
+      printNode(shared_ptr<Node>(this, common::NullDeleter()), std::string(""), numNodes, enabledNodes);
+      DOUT("Num nodes:"<<numNodes<<" enabled:"<<enabledNodes<<" disabled:"<<(numNodes-enabledNodes));
     }
 
     void Node::add(NodePtr child)
