@@ -2,14 +2,13 @@
 #define LOST_RG_SCISSOR_H
 
 #include "lost/rg/Node.h"
+#include "lost/rg/forward.h"
 
 namespace lost
 {
   namespace rg
   {
     
-    struct Scissor;
-    typedef lost::shared_ptr<Scissor> ScissorPtr;
     /** enables/disables scissoring.
      *  does not process children.
      */

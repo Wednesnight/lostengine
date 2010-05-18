@@ -9,9 +9,6 @@ namespace lost
 namespace rg
 {
 
-struct ClearColor;
-typedef lost::shared_ptr<ClearColor> ClearColorPtr;
-
 struct ClearColor : public Node
 {
   common::Color col;

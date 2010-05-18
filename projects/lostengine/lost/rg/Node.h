@@ -3,24 +3,18 @@
 
 #include <string>
 #include <list>
+#include "lost/gl/forward.h"
+#include "lost/rg/forward.h"
 #include "lost/platform/shared_ptr.h"
 
 namespace lost
 {
 
-namespace gl
-{
-struct Context;
-typedef lost::shared_ptr<Context> ContextPtr;
-}
 namespace rg
 {
 
 /** can contain and process other nodes.
- */
-struct Node;
-typedef lost::shared_ptr<Node> NodePtr;
-  
+ */  
 struct Node 
 {
   std::string name;
