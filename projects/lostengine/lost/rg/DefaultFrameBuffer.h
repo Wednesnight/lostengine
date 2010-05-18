@@ -8,9 +8,6 @@ namespace lost
 namespace rg
 {
 
-struct DefaultFrameBuffer;
-typedef lost::shared_ptr<DefaultFrameBuffer> DefaultFrameBufferPtr;
-
 struct DefaultFrameBuffer : public Node
 {
   static DefaultFrameBufferPtr create();

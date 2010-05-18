@@ -9,8 +9,6 @@ namespace lost
 namespace rg
 {
 
-struct Clear;
-typedef lost::shared_ptr<Clear> ClearPtr;
 
 struct Clear : public Node
 {

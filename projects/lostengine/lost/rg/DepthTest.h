@@ -8,8 +8,6 @@ namespace lost
 namespace rg
 {
 
-struct DepthTest;
-typedef lost::shared_ptr<DepthTest> DepthTestPtr;
 /** enables/disables depth testing.
  * does not process children.
  */

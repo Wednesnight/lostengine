@@ -1,5 +1,4 @@
 #include "lost/rg/Camera.h"
-#include "lost/camera/Camera.h"
 #include "lost/camera/Camera2D.h"
 #include "lost/camera/Camera3D.h"
 #include "lost/gl/Context.h"

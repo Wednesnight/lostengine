@@ -2,18 +2,13 @@
 #define LOST_RG_DRAW_H
 
 #include "lost/rg/Node.h"
+#include "lost/mesh/forward.h"
+#include "lost/rg/forward.h"
 
 namespace lost
 {
-namespace mesh
-{
-struct Mesh;
-typedef lost::shared_ptr<Mesh> MeshPtr;
-}
 namespace rg
 {
-struct Draw;
-typedef lost::shared_ptr<Draw> DrawPtr;
 
 /** draws a single mesh.
  * does not process children.

@@ -2,14 +2,12 @@
 #define LOST_RG_BLEND_H
 
 #include "lost/rg/Node.h"
-
+#include "lost/rg/forward.h"
 namespace lost
 {
   namespace rg
   {
     
-    struct Blend;
-    typedef lost::shared_ptr<Blend> BlendPtr;
     /** enables/disables blending.
      *  does not process children.
      */

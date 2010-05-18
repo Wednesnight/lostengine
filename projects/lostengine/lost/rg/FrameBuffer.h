@@ -2,19 +2,12 @@
 #define LOST_RG_FRAMEBUFFER_H
 
 #include "lost/rg/Node.h"
+#include "lost/gl/forward.h"
 
 namespace lost
 {
-namespace gl
-{
-struct FrameBuffer;
-typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
-}
 namespace rg
 {
-
-struct FrameBuffer;
-typedef lost::shared_ptr<FrameBuffer> FrameBufferPtr;
 
 struct FrameBuffer : public Node
 {
