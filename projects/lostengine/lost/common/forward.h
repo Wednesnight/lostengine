@@ -12,6 +12,8 @@ typedef lost::shared_ptr<Data> DataPtr;
 struct ColorGradient;
 typedef lost::shared_ptr<ColorGradient> ColorGradientPtr;
 
+struct Color;
+
 }
 }
 

@@ -3,6 +3,7 @@
 
 #include "lost/math/Rect.h"
 #include "lost/math/Matrix.h"
+#include "lost/math/Vec2.h"
 #include "lost/platform/shared_ptr.h"
 
 namespace lost

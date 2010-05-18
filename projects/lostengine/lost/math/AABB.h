@@ -13,16 +13,8 @@ namespace lost
       Vec3 origin;
       Vec3 size;
       
-      AABB(Vec3 inOrigin, Vec3 inSize)
-      : origin(inOrigin),
-        size(inSize)
-      {
-      }
-
-      AABB()
-      {
-        AABB(Vec3(0,0,0), Vec3(0,0,0));
-      }
+      AABB(Vec3 inOrigin, Vec3 inSize);
+      AABB();
     };
     
   }

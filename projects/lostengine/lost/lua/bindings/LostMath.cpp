@@ -7,6 +7,7 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
+#include "lost/math/io.h"
 
 using namespace luabind;
 using namespace lost::math;

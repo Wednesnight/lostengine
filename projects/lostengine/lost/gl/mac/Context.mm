@@ -1,7 +1,7 @@
 #include "lost/gl/Context.h"
 #import <OpenGL/OpenGL.h>
 #import <AppKit/NSOpenGL.h>
-
+#include "lost/common/Logger.h"
 
 namespace lost
 {

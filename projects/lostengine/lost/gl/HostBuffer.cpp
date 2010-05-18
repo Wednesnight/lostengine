@@ -1,6 +1,6 @@
 #include "lost/gl/HostBuffer.h"
 #include "lost/common/Logger.h"
-
+#include <stdexcept>
 using namespace std;
 
 namespace lost

@@ -1,5 +1,6 @@
 #include "lost/camera/Camera2D.h"
 #include "lost/math/Matrix.h"
+#include "lost/math/Vec3.h"
 
 using namespace lost::math;
 

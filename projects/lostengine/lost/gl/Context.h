@@ -22,6 +22,7 @@
 #include "lost/gl/forward.h"
 #include "lost/camera/forward.h"
 #include "lost/mesh/forward.h"
+#include "lost/math/Rect.h"
 
 namespace lost
 {

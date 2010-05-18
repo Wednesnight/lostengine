@@ -6,6 +6,8 @@
 #include "lost/gl/gl.h"
 #include "lost/lgl/lgl.h"
 #include "lost/gl/Utils.h"
+#include "lost/math/lmath.h"
+#include "lost/math/io.h"
 
 using namespace std;
 using namespace lost::math;

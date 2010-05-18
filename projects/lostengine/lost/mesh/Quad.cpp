@@ -2,7 +2,7 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
-
+#include <stdexcept>
 namespace lost
 {
 namespace mesh

@@ -3,6 +3,7 @@
 #include "lost/gl/gl.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
+#include "lost/math/Rect.h"
 
 namespace lost
 {
