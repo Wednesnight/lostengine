@@ -257,41 +257,43 @@ end
 function View:afterRedraw()
 end
 
-function View:showFrame(flag)
-  if flag ~= nil then
-    self.frameNode.active = flag
+-- set bool flag or retrieve it
+function View:showFrame(...)
+  if arg.n > 0 then
+    self.frameNode.active = arg[1]
   else
     return self.frameNode.active
   end
 end
 
-function View:frameColor(col)
-  if col ~= nil then
-    self.frameMesh.material.color = col
+-- set color or retrieve it
+function View:frameColor(...)
+  if arg.n > 0 then
+    self.frameMesh.material.color = arg[1]
   else
     return self.frameMesh.material.color
   end
 end
 
-function View:showBackground(flag)
-  if flag ~= nil then
-    self.backgroundNode.active = flag
+function View:showBackground(...)
+  if arg.n > 0 then
+    self.backgroundNode.active = arg[1]
   else
     return self.backgroundNode.active
   end
 end
 
-function View:backgroundColor(col)
-  if col ~= nil then
-    self.backgroundMesh.material.color = col
+function View:backgroundColor(...)
+  if arg.n > 0 then
+    self.backgroundMesh.material.color = arg[1]
   else
     return self.backgroundMesh.material.color
   end
 end
 
-function View:hidden(val)
-	if val ~= nil then
-		self.rootNode.active = not val
+function View:hidden(...)
+	if arg.n > 0 then
+		self.rootNode.active = not arg[1]
 	else
 		return not self.rootNode.active
 	end
