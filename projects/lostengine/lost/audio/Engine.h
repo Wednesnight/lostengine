@@ -27,6 +27,11 @@ struct Engine : public lost::enable_shared_from_this<Engine>
 
   lost::shared_ptr<al::Context> context;
 	std::list<lost::weak_ptr<audio::Source> > sources;
+
+  static lost::shared_ptr<Engine> create()
+  {
+    return lost::shared_ptr<Engine>(new Engine);
+  }
 };
 
 }

@@ -11,6 +11,7 @@
 #include "lost/audio/Engine.h"
 #include "lost/audio/Source.h"
 #include "lost/resource/DefaultLoader.h"
+#include <boost/filesystem.hpp>
 
 //---kasdkj
 
@@ -102,8 +103,15 @@ int main (int argc, char* const argv[]) {
 		shared_ptr<lost::audio::Engine> engine(new audio::Engine);
 		shared_ptr<audio::Source> src = engine->createSource();
 		resource::DefaultLoader loader;
-		shared_ptr<File> file = loader.load("wannabill.ogg");
+		DataPtr file = loader.load("wannabill.ogg");
 		src->initWithFile(file);
+    src->play();
+    while(src->source->processedBuffers() != src->source->queuedBuffers())
+    {
+      DOUT("processed: "<<src->source->processedBuffers());
+      DOUT("queued: "<<src->source->queuedBuffers());
+      sleep(1);
+    }
 		
     return 0;
   }

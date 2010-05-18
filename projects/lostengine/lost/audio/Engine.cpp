@@ -34,7 +34,7 @@ lost::shared_ptr<audio::Source> Engine::createSource()
 {
 	shared_ptr<Source> result(new Source);
 
-	result->engine = shared_from_this();;
+	result->engine = shared_from_this();
 	sources.push_back(result);
 
 	return result;

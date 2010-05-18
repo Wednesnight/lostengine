@@ -1,6 +1,5 @@
 #include "lost/audio/VorbisFile.h"
 #include "stb_vorbis.h"
-#include "lost/resource/File.h"
 #include <stdexcept>
 #include "lost/common/Logger.h"
 
@@ -12,11 +11,11 @@ namespace lost
 namespace audio
 {
 
-VorbisFile::VorbisFile(lost::shared_ptr<resource::File> inFile)
+VorbisFile::VorbisFile(const common::DataPtr& inFile)
 {
 	data = NULL;
 	int err;
-	stb_vorbis* oggfile = stb_vorbis_open_memory((unsigned char*)inFile->data.get(), inFile->size, &err, NULL);
+	stb_vorbis* oggfile = stb_vorbis_open_memory((unsigned char*)inFile->bytes.get(), inFile->size, &err, NULL);
 	if(!oggfile)
     {
         EOUT("throwing from here");
@@ -28,12 +27,18 @@ VorbisFile::VorbisFile(lost::shared_ptr<resource::File> inFile)
 	stb_vorbis_close(oggfile);
 
 	sampleRate = info.sample_rate;
-	numSamples = stb_vorbis_decode_memory((unsigned char*)(inFile->data.get()), inFile->size, &channels, &data);
+	numSamples = stb_vorbis_decode_memory((unsigned char*)(inFile->bytes.get()), inFile->size, &channels, &data);
 	DOUT("decoded to "<<numSamples*2 <<" bytes");
+  buffer.reset(new al::Buffer);
+  buffer->bufferData((channels == 2) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16,
+                     data,
+                     numSamples*2,
+                     sampleRate);
 }
 
 VorbisFile::~VorbisFile()
 {
+  buffer.reset();
 	if(data)
 		free(data);
 }

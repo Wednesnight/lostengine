@@ -15,12 +15,15 @@ Source::Source()
 {
 	DOUT("");
 	sourceType = ST_UNDEFINED;
+  source.reset(new al::Source);
 }
 
 Source::~Source()
 {
 	DOUT("");
 
+  source->stop();
+  if (vorbisFile) source->unqueue(vorbisFile->buffer);
 	shared_ptr<Engine> ng = engine.lock();
 	if(ng)
 	{
@@ -28,27 +31,31 @@ Source::~Source()
 	}
 }
 
-void Source::initWithFile(lost::shared_ptr<resource::File> inFile)
+void Source::initWithFile(const common::DataPtr& inFile)
 {
 	sourceType = ST_STATIC;
 	vorbisFile.reset(new VorbisFile(inFile));
+  source->queue(vorbisFile->buffer);
 }
 
 void Source::play()
 {
-
+  source->play();
 }
 
 void Source::stop()
 {
+  source->stop();
 }
 
 void Source::pause()
 {
+  source->pause();
 }
 
 void Source::rewind()
 {
+  source->rewind();
 }
 
 }

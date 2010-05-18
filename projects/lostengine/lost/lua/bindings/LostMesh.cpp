@@ -27,21 +27,21 @@ namespace lost
 {
   namespace lua
   {
-/*    void LostMeshLine(lua_State* state)
+
+    void LostMeshLine(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("mesh")
         [
-          class_<Line2D, Mesh>("Line2D")
+          class_<Line, Mesh>("Line")
             .scope
             [
-              def("create", (Line2DPtr(*)()) &Line2D::create),
-              def("create", (Line2DPtr(*)(const math::Vec2&, const math::Vec2&)) &Line2D::create)
+              def("create", &Line::create)
             ]
         ]
       ];
-    }*/
+    }
 
     void LostMeshRect(lua_State* state)
     {
@@ -284,7 +284,7 @@ namespace lost
     {
       // mesh first because following classes are based on it
       LostMeshMesh(state);
-//      LostMeshLine(state);
+      LostMeshLine(state);
       LostMeshRect(state);
 //      LostMeshCircular(state);
       LostMeshLoader(state);

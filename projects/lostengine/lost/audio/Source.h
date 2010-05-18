@@ -3,6 +3,7 @@
 
 #include "lost/al/Source.h"
 #include "lost/audio/Engine.h"
+#include "lost/common/Data.h"
 
 namespace lost
 {
@@ -31,7 +32,7 @@ struct Source : public lost::enable_shared_from_this<Source>
 	// the source will decompress the audio if necessary and keep a copy
 	// so you can discard the file afterwards.
 	// NOTE: this currently only supports ogg files.
-	void initWithFile(lost::shared_ptr<resource::File> inFile);
+	void initWithFile(const common::DataPtr& inFile);
 
 	void play();
 	void stop();
