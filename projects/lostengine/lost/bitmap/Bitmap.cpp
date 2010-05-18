@@ -4,6 +4,7 @@
 #include "lost/common/Logger.h"
 #include <stdexcept>
 #include <sstream>
+#include <math.h>
 
 using namespace std;
 

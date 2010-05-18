@@ -3,6 +3,7 @@
 #include <luabind/operator.hpp>
 
 #include "lost/common/Color.h"
+#include "lost/common/io.h"
 #include "lost/common/Data.h"
 #include "lost/common/Logger.h"
 #include "lost/common/ColorPoint.h"

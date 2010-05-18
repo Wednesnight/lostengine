@@ -1,7 +1,7 @@
 #include "lost/lua/bindings/LostLSystem.h"
 #include "lost/lua/lua.h"
-
 #include "lost/lsystem/LSystem.h"
+#include <iostream>
 
 using namespace luabind;
 using namespace lost::lsystem;

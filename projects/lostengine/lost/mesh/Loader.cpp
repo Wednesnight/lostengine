@@ -1,8 +1,7 @@
 #include "lost/mesh/Loader.h"
-
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
-
+#include <stdexcept>
 #pragma warning(disable:4244) // warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
 
 //#define BOOST_SPIRIT_DEBUG

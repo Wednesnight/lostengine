@@ -11,7 +11,7 @@
 #include "lost/font/freetype/Face.h"
 #include "lost/font/RenderedText.h"
 #include "lost/bitmap/Bitmap.h"
-
+#include <math.h>
 
 using namespace std;
 using namespace lost::bitmap;
@@ -315,7 +315,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
   target->fontAscender = _fontSize2ascender[inSizeInPoints];
   target->fontDescender = _fontSize2descender[inSizeInPoints];
-  float ascsum = abs(_fontSize2ascender[inSizeInPoints])+abs(_fontSize2descender[inSizeInPoints]);
+  float ascsum = fabs(_fontSize2ascender[inSizeInPoints])+fabs(_fontSize2descender[inSizeInPoints]);
   int iascsum = floorf(ascsum+.5f);
 /*  DOUT("-- rendered size: w:"<<target->size.width
      <<" height:"<<target->size.height

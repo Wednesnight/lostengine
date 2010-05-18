@@ -5,6 +5,7 @@
 #include <vector>
 #include "lost/gl/gl.h"
 #include "lost/common/ColorGradient.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
