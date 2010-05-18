@@ -1083,6 +1083,23 @@
 		8D2526511198C7D700FEEAFA /* btSimplexSolverInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D25238F1198C7D700FEEAFA /* btSimplexSolverInterface.h */; };
 		8D2526521198C7D700FEEAFA /* btSubSimplexConvexCast.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2523901198C7D700FEEAFA /* btSubSimplexConvexCast.h */; };
 		8D2526531198C7D700FEEAFA /* btVoronoiSimplexSolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D2523911198C7D700FEEAFA /* btVoronoiSimplexSolver.h */; };
+		8D2F97A811A315E20084E459 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F97A711A315E20084E459 /* Line.cpp */; };
+		8D2F97A911A315E20084E459 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F97A711A315E20084E459 /* Line.cpp */; };
+		8D2F97AA11A315E20084E459 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F97A711A315E20084E459 /* Line.cpp */; };
+		8D2F986511A330060084E459 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48B0EE31EB600672EF4 /* Engine.cpp */; };
+		8D2F986611A330060084E459 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA15B48C0EE31EB600672EF4 /* Source.cpp */; };
+		8D2F986711A330060084E459 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
+		8D2F988111A330990084E459 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9330ED08E99000AA8CB /* Buffer.cpp */; };
+		8D2F988211A330990084E459 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9320ED08E99000AA8CB /* Context.cpp */; };
+		8D2F988311A330990084E459 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F8F40ED08713000AA8CB /* Debug.cpp */; };
+		8D2F988411A330990084E459 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9450ED08EA0000AA8CB /* Device.cpp */; };
+		8D2F988511A330990084E459 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9BE0ED0A092000AA8CB /* Listener.cpp */; };
+		8D2F988611A330990084E459 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA70F9440ED08EA0000AA8CB /* Source.cpp */; };
+		8D2F98CF11A3347A0084E459 /* LostAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F98CD11A3347A0084E459 /* LostAudio.cpp */; };
+		8D2F98D111A3347A0084E459 /* LostAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F98CD11A3347A0084E459 /* LostAudio.cpp */; };
+		8D2F98D311A3347A0084E459 /* LostAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D2F98CD11A3347A0084E459 /* LostAudio.cpp */; };
+		8D2F991111A344040084E459 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2F991011A344040084E459 /* OpenAL.framework */; };
+		8D2F991811A3441C0084E459 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D2F991011A344040084E459 /* OpenAL.framework */; };
 		8D40911B0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
 		8D40911C0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
 		8D40911D0F89322D00163B63 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D40911A0F89322D00163B63 /* Tasklet.cpp */; };
@@ -1876,6 +1893,9 @@
 		8D2523901198C7D700FEEAFA /* btSubSimplexConvexCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = btSubSimplexConvexCast.h; path = "../../../thirdparty/bullet-2.76/src/BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.h"; sourceTree = SOURCE_ROOT; };
 		8D2523911198C7D700FEEAFA /* btVoronoiSimplexSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = btVoronoiSimplexSolver.h; path = "../../../thirdparty/bullet-2.76/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.h"; sourceTree = SOURCE_ROOT; };
 		8D2523921198C7D700FEEAFA /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = "../../../thirdparty/bullet-2.76/src/BulletCollision/CMakeLists.txt"; sourceTree = SOURCE_ROOT; };
+		8D2F97A711A315E20084E459 /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Line.cpp; path = mesh/Line.cpp; sourceTree = "<group>"; };
+		8D2F98CD11A3347A0084E459 /* LostAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostAudio.cpp; path = bindings/LostAudio.cpp; sourceTree = "<group>"; };
+		8D2F991011A344040084E459 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		8D40911A0F89322D00163B63 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		8D48E4CD10FE473E00338B01 /* Queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Queue.cpp; sourceTree = "<group>"; };
 		8D48E4CE10FE473E00338B01 /* QueueEntityLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QueueEntityLua.cpp; sourceTree = "<group>"; };
@@ -2080,6 +2100,7 @@
 				8D607DC7104F0665004818BA /* libLostEngine.a in Frameworks */,
 				8D607DC8104F0665004818BA /* OpenGL.framework in Frameworks */,
 				8D607E05104F0860004818BA /* Cocoa.framework in Frameworks */,
+				8D2F991111A344040084E459 /* OpenAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2087,6 +2108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D2F991811A3441C0084E459 /* OpenAL.framework in Frameworks */,
 				3E531F260F14FE6F00D7C8B4 /* AGL.framework in Frameworks */,
 				3E531F270F14FE6F00D7C8B4 /* OpenGL.framework in Frameworks */,
 			);
@@ -2208,6 +2230,7 @@
 				3E531F230F14FE6F00D7C8B4 /* AGL.framework */,
 				3E531F240F14FE6F00D7C8B4 /* OpenGL.framework */,
 				8D607E04104F0860004818BA /* Cocoa.framework */,
+				8D2F991011A344040084E459 /* OpenAL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3049,6 +3072,7 @@
 				EA9365A91163F0A50013F765 /* RoundedRect.cpp */,
 				EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */,
 				EAA452091152CFD500FFE886 /* TextureManager.cpp */,
+				8D2F97A711A315E20084E459 /* Line.cpp */,
 			);
 			name = mesh;
 			sourceTree = "<group>";
@@ -3070,6 +3094,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB496E70F9F99DE00F3036A /* LostApplication.cpp */,
+				8D2F98CD11A3347A0084E459 /* LostAudio.cpp */,
 				EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */,
 				EA7BE11D0E6F38A10017B031 /* LostCamera.cpp */,
 				3EB4991D0F9FA2B100F3036A /* LostCommon.cpp */,
@@ -4006,6 +4031,8 @@
 				8D2524EE1198C7D700FEEAFA /* btRaycastCallback.cpp in Sources */,
 				8D2524EF1198C7D700FEEAFA /* btSubSimplexConvexCast.cpp in Sources */,
 				8D2524F01198C7D700FEEAFA /* btVoronoiSimplexSolver.cpp in Sources */,
+				8D2F97A911A315E20084E459 /* Line.cpp in Sources */,
+				8D2F98D111A3347A0084E459 /* LostAudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4382,6 +4409,17 @@
 				EA97FA9811A21F260090BF1E /* io.cpp in Sources */,
 				EA5ED51711A22D9F00053AE1 /* Color.cpp in Sources */,
 				EA5ED51A11A22DC000053AE1 /* io.cpp in Sources */,
+				8D2F97AA11A315E20084E459 /* Line.cpp in Sources */,
+				8D2F986511A330060084E459 /* Engine.cpp in Sources */,
+				8D2F986611A330060084E459 /* Source.cpp in Sources */,
+				8D2F986711A330060084E459 /* VorbisFile.cpp in Sources */,
+				8D2F988111A330990084E459 /* Buffer.cpp in Sources */,
+				8D2F988211A330990084E459 /* Context.cpp in Sources */,
+				8D2F988311A330990084E459 /* Debug.cpp in Sources */,
+				8D2F988411A330990084E459 /* Device.cpp in Sources */,
+				8D2F988511A330990084E459 /* Listener.cpp in Sources */,
+				8D2F988611A330990084E459 /* Source.cpp in Sources */,
+				8D2F98D311A3347A0084E459 /* LostAudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4786,6 +4824,8 @@
 				8D2524031198C7D700FEEAFA /* btRaycastCallback.cpp in Sources */,
 				8D2524041198C7D700FEEAFA /* btSubSimplexConvexCast.cpp in Sources */,
 				8D2524051198C7D700FEEAFA /* btVoronoiSimplexSolver.cpp in Sources */,
+				8D2F97A811A315E20084E459 /* Line.cpp in Sources */,
+				8D2F98CF11A3347A0084E459 /* LostAudio.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

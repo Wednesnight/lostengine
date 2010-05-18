@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D2F984311A32E960084E459 /* global-debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F983D11A32E960084E459 /* global-debug.xcconfig */; };
+		8D2F984411A32E960084E459 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F983E11A32E960084E459 /* global-release.xcconfig */; };
+		8D2F984511A32E960084E459 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F983F11A32E960084E459 /* global.xcconfig */; };
+		8D2F984611A32E960084E459 /* iphone.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F984011A32E960084E459 /* iphone.xcconfig */; };
+		8D2F984711A32E960084E459 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F984111A32E960084E459 /* macosx.xcconfig */; };
+		8D2F984811A32E960084E459 /* simulator.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D2F984211A32E960084E459 /* simulator.xcconfig */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */ = {isa = PBXBuildFile; fileRef = EA054B730ED4A03800E41D83 /* wannabill.ogg */; };
 		EA70F8790ED082D7000AA8CB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA70F8780ED082D7000AA8CB /* OpenAL.framework */; };
@@ -15,6 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8D2F982C11A32C9A0084E459 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D607DCC104F0665004818BA /* LostEngine.app */;
+			remoteInfo = LostEngineLauncher;
+		};
 		EA70F8A90ED0838A000AA8CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
@@ -47,13 +60,19 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = EA70F8830ED0838A000AA8CB /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = EA1BF6620F67342000862B2F /* LostEngineUnittests.app */;
+			remoteGlobalIDString = EA1BF6620F67342000862B2F;
 			remoteInfo = LostEngineUnittests;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8D2F983D11A32E960084E459 /* global-debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-debug.xcconfig"; sourceTree = "<group>"; };
+		8D2F983E11A32E960084E459 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-release.xcconfig"; sourceTree = "<group>"; };
+		8D2F983F11A32E960084E459 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = global.xcconfig; sourceTree = "<group>"; };
+		8D2F984011A32E960084E459 /* iphone.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = iphone.xcconfig; sourceTree = "<group>"; };
+		8D2F984111A32E960084E459 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = macosx.xcconfig; sourceTree = "<group>"; };
+		8D2F984211A32E960084E459 /* simulator.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = simulator.xcconfig; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* altest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = altest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA054B730ED4A03800E41D83 /* wannabill.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = wannabill.ogg; sourceTree = "<group>"; };
 		EA70F8780ED082D7000AA8CB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
@@ -78,6 +97,7 @@
 		08FB7794FE84155DC02AAC07 /* altest */ = {
 			isa = PBXGroup;
 			children = (
+				8D2F983C11A32E960084E459 /* xcconfig */,
 				EA4143D70ED10BF600712F45 /* Resources */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -101,6 +121,20 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		8D2F983C11A32E960084E459 /* xcconfig */ = {
+			isa = PBXGroup;
+			children = (
+				8D2F983D11A32E960084E459 /* global-debug.xcconfig */,
+				8D2F983E11A32E960084E459 /* global-release.xcconfig */,
+				8D2F983F11A32E960084E459 /* global.xcconfig */,
+				8D2F984011A32E960084E459 /* iphone.xcconfig */,
+				8D2F984111A32E960084E459 /* macosx.xcconfig */,
+				8D2F984211A32E960084E459 /* simulator.xcconfig */,
+			);
+			name = xcconfig;
+			path = ../../projects/lostengine/xcode/xcconfig;
+			sourceTree = SOURCE_ROOT;
 		};
 		EA4143D70ED10BF600712F45 /* Resources */ = {
 			isa = PBXGroup;
@@ -127,6 +161,7 @@
 				EA70F8AC0ED0838A000AA8CB /* libLostEngine.a */,
 				EA70F8AE0ED0838A000AA8CB /* libLostEngine.a */,
 				EA7F01960F7F03E500CE0B02 /* LostEngineUnittests.app */,
+				8D2F982D11A32C9A0084E459 /* LostEngine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +213,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		8D2F982D11A32C9A0084E459 /* LostEngine.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LostEngine.app;
+			remoteRef = 8D2F982C11A32C9A0084E459 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		EA70F8AA0ED0838A000AA8CB /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -214,6 +256,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA054B740ED4A03800E41D83 /* wannabill.ogg in Resources */,
+				8D2F984311A32E960084E459 /* global-debug.xcconfig in Resources */,
+				8D2F984411A32E960084E459 /* global-release.xcconfig in Resources */,
+				8D2F984511A32E960084E459 /* global.xcconfig in Resources */,
+				8D2F984611A32E960084E459 /* iphone.xcconfig in Resources */,
+				8D2F984711A32E960084E459 /* macosx.xcconfig in Resources */,
+				8D2F984811A32E960084E459 /* simulator.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,54 +305,31 @@
 /* Begin XCBuildConfiguration section */
 		1DEB923208733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D2F984111A32E960084E459 /* macosx.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = altest;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../thirdparty/boost/boost_1_36_0/include\" \"$(SRCROOT)/../../projects/lostengine\" \"$(SRCROOT)/../../thirdparty/freetype2/freetype_2_3_7/include\" \"$(SRCROOT)/../../thirdparty/glee/glee_5_21/include\" \"$(SRCROOT)/../../thirdparty/glfw/glfw_2_6/include\" \"$(SRCROOT)/../../thirdparty/hashlib++/hashlib++_0_3_1\" \"$(SRCROOT)/../../thirdparty/lua/lua_5_1_4/include\" \"$(SRCROOT)/../../thirdparty/zlib/zlib_1_2_3/include\" \"$(SRCROOT)/../../thirdparty/luabind/luabind_0_7_1/include\" \"$(SRCROOT)/../../thirdparty/stb/stb_image_1_14\" \"$(SRCROOT)/../../thirdparty/stb/stb_vorbis_0_99996\"";
 			};
 			name = Debug;
 		};
 		1DEB923308733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D2F984111A32E960084E459 /* macosx.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
 				PRODUCT_NAME = altest;
 			};
 			name = Release;
 		};
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D2F983D11A32E960084E459 /* global-debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
 		1DEB923708733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D2F983E11A32E960084E459 /* global-release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};

@@ -2,6 +2,7 @@
 #include "lost/lua/BindAll.h"
 
 #include "lost/lua/bindings/LostApplication.h"
+#include "lost/lua/bindings/LostAudio.h"
 #include "lost/lua/bindings/LostBitmap.h"
 #include "lost/lua/bindings/LostCamera.h"
 #include "lost/lua/bindings/LostCommon.h"
@@ -48,6 +49,7 @@ namespace lost
       LostCommon(state);
       LostEvent(state);
       LostApplication(state);
+      LostAudio(state);
       LostBitmap(state);
       LostCamera(state);
       LostMesh(state); // must bind mesh before font since font already requires the binding for inheritance
