@@ -22,16 +22,16 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.guiro.HasLayout")
 require("lost.guiro.HasSubviews")
 require("lost.common.Shaders")
 require("lost.guiro.event.Event")
 require("lost.guiro.event.EventDispatcher")
+require("lost.common.CallLater")
 
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
 
-lost.common.Class "lost.guiro.View" "lost.guiro.HasLayout" "lost.guiro.HasSubviews"
+lost.common.Class "lost.guiro.View" "lost.guiro.HasSubviews"
 {
   -- helper for auto-generated view ids
   indices = {}
@@ -45,9 +45,17 @@ using "lost.math.MatrixTranslation"
 function View:constructor(textureManager)
   assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
   self.textureManager = textureManager
-  -- call interface ctors
-  lost.guiro.HasLayout.constructor(self)
+
   lost.guiro.HasSubviews.constructor(self)
+  -- setup event dispatchers
+  self.captureEventDispatcher = EventDispatcher()
+  self.targetEventDispatcher = EventDispatcher()
+  self.bubbleEventDispatcher = EventDispatcher()
+
+  -- layout
+  self.bounds = lost.guiro.Bounds(0,0,0,0)
+  self.rect = lost.math.Rect()
+  self.dirtyLayout = false
 
   -- all views and derived classes receive a default id in the
   -- constructor so they can be uniquely identified
@@ -117,11 +125,6 @@ function View:constructor(textureManager)
   self.renderNode:add(self.frameNode)
 
   self.dirty = false
-  
-  -- setup event dispatchers
-  self.captureEventDispatcher = EventDispatcher()
-  self.targetEventDispatcher = EventDispatcher()
-  self.bubbleEventDispatcher = EventDispatcher()
   
 end
 
@@ -212,25 +215,6 @@ function View:needsRedraw()
     
     -- add to tasklet queue
     callLater(View._redraw, self)
-  end
-end
-
-function View:afterLayout()
-  lost.guiro.HasLayout.afterLayout(self)
-
-  -- update background mesh
-  self.backgroundMesh:size(Vec2(self.rect.width, self.rect.height))
-  self.backgroundMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
-
-  -- update frame mesh
-  self.frameMesh:size(Vec2(self.rect.width, self.rect.height))
-  self.frameMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
-
-  -- update scissoring
-  if self.scissorRect ~= nil then
-    self.scissorRectNode.rect = self.scissorRect
-  else
-    self.scissorRectNode.rect = self.rect
   end
 end
 
@@ -487,4 +471,76 @@ function View:routeEvent(event)
   elseif event.phase == Event.PHASE_BUBBLE then
     self.bubbleEventDispatcher:dispatchEvent(event)
   end
+end
+
+--[[
+    resize and call needsLayout
+  ]]
+function View:resize(bounds)
+  self.bounds = bounds
+  self:needsLayout()
+end
+
+--[[
+    Updates dirtyLayout flag and inserts self into layout queue
+  ]]
+function View:needsLayout()
+  if not self.dirtyLayout then
+    self.dirtyLayout = true
+    
+    -- add to tasklet queue
+    callLater(View._layout, self)
+  end
+end
+
+function View:_layout(force)
+--  log.debug(tostring(self) .."(".. self.id .."):_layout()")
+  if force or self.dirtyLayout then
+    self:beforeLayout()
+
+    self.dirtyLayout = false
+    
+    -- update rect
+    local parentRect = nil
+    if self.parent ~= nil then
+      parentRect = self.parent.rect
+    else
+      parentRect = lost.math.Rect()
+    end
+    self.rect = self.bounds:rect(parentRect)
+--    log.debug(tostring(self) ..": ".. tostring(self.rect))
+    
+    -- Call invisible _layout() on all subviews
+    if type(self.subviews) == "table" then
+      for k,view in next,self.subviews do
+        view:_layout(true)
+      end
+    end
+
+    self:afterLayout()
+  end
+end
+
+function View:beforeLayout()
+end
+
+function View:afterLayout()
+  -- update background mesh
+  self.backgroundMesh:size(Vec2(self.rect.width, self.rect.height))
+  self.backgroundMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+
+  -- update frame mesh
+  self.frameMesh:size(Vec2(self.rect.width, self.rect.height))
+  self.frameMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+
+  -- update scissoring
+  if self.scissorRect ~= nil then
+    self.scissorRectNode.rect = self.scissorRect
+  else
+    self.scissorRectNode.rect = self.rect
+  end
+end
+
+function View:containsCoord(point)
+  return self.rect:contains(point)
 end
