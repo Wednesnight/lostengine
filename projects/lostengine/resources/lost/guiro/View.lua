@@ -22,7 +22,6 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.guiro.HasSubviews")
 require("lost.common.Shaders")
 require("lost.guiro.event.Event")
 require("lost.guiro.event.EventDispatcher")
@@ -31,7 +30,7 @@ require("lost.common.CallLater")
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
 
-lost.common.Class "lost.guiro.View" "lost.guiro.HasSubviews"
+lost.common.Class "lost.guiro.View" 
 {
   -- helper for auto-generated view ids
   indices = {}
@@ -46,7 +45,7 @@ function View:constructor(textureManager)
   assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
   self.textureManager = textureManager
 
-  lost.guiro.HasSubviews.constructor(self)
+  self.subviews = {}
   -- setup event dispatchers
   self.captureEventDispatcher = EventDispatcher()
   self.targetEventDispatcher = EventDispatcher()
@@ -128,16 +127,10 @@ function View:constructor(textureManager)
   
 end
 
---[[
-    Called by lost.guiro.HasSubviews when attaching this View to another
-  ]]
 function View:onAttach(parent)
   self:setParent(parent)
 end
 
---[[
-    Called by lost.guiro.HasSubviews when detaching this View from its parent
-  ]]
 function View:onDetach(parent)
   self:setParent(nil)
 end
@@ -543,4 +536,78 @@ end
 
 function View:containsCoord(point)
   return self.rect:contains(point)
+end
+
+--[[
+    Adds subview at the end of self.subviews and calls subview:onAttach(self)
+  ]]
+function View:addSubview(subview)
+  if subview:isDerivedFrom("lost.guiro.View") then
+    table.insert(self.subviews, subview)
+  	subview:onAttach(self)
+  else
+    local typeName = type(subview)
+    if type(subview.className) == "function" then
+      typeName = subview:className()
+    end
+    error("View:addSubview() expected lost.guiro.View, got ".. typeName, 2)
+  end
+end
+
+--[[
+    Removes subview from self.subviews and calls subview:onDetach(self)
+  ]]
+function View:removeSubview(subview)
+  if subview:isDerivedFrom("lost.guiro.View") then
+    for k,view in next,self.subviews do
+      if rawequal(view, subview) then
+        self.subviews[k] = nil
+        view:onDetach(self)
+      end
+    end
+  else
+    local typeName = type(subview)
+    if type(subview.className) == "function" then
+      typeName = subview:className()
+    end
+    error("View:removeSubview() expected lost.guiro.View, got ".. typeName, 2)
+  end
+end
+
+function View:removeAllSubviews()
+  local idx = #self.subviews
+  while idx > 0 do
+    local view = table.remove(self.subviews, idx)
+    view:onDetach(self)
+    idx = idx-1
+  end
+end
+
+--[[
+    returns subview with given subviewId
+    nil if subviewId is invalid
+  ]]
+function View:__call(subviewId)
+  local result = nil
+  for k,view in next,self.subviews do
+    if (view.id == subviewId) then
+      result = view
+      break
+    end
+  end
+  return result
+end
+
+--breadth-first search for subview with given id
+function View:recursiveFindById(viewId)
+  local result = self(viewId)
+  if result == nil then
+    for k,view in next,self.subviews do
+      result = view:recursiveFindById(viewId)
+      if result ~= nil then
+        break
+      end
+    end
+  end
+  return result
 end
