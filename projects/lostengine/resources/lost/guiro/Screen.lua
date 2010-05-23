@@ -106,7 +106,7 @@ end
   ]]
 function Screen:addSubview(subview)
   if subview:isDerivedFrom("lost.guiro.UserInterface") then
-    lost.guiro.HasSubviews.addSubview(self, subview)
+    lost.guiro.View.addSubview(self, subview)
   else
     error("Screen:addSubview() can only add subviews of type UserInterface : ".. subview:className(), 2)
   end
