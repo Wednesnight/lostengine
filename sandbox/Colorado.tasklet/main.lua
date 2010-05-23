@@ -54,7 +54,7 @@ function startup(tasklet)
   _tasklet = tasklet
 
   tasklet.name = "Colorado"
-  tasklet.waitForEvents = false
+  tasklet.waitForEvents = true
 
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)  

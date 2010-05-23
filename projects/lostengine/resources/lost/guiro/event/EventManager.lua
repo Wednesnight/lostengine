@@ -38,7 +38,7 @@ function EventManager:findViewStack(rootView, mouseEvent)
   local containsPoint  = rootView:containsCoord(pos)-- containsPoint designates if a view contained the point
   local view = rootView
   local k, v
-  while containsPoint and view:isDerivedFrom("lost.guiro.HasEvents") do
+  while containsPoint do
     viewStack[#viewStack+1] = view
     containsPoint = false
     local i = #(view.subviews)
