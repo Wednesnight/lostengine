@@ -45,10 +45,7 @@ local scoreLabel = nil
 local finished = false
 local finishNode = nil
 
-local audioEngine = nil
-local blockSound = nil
-local pathSound = nil
-local finishSound = nil
+local sounds = nil
 
 function startup(tasklet)
   _tasklet = tasklet
@@ -59,13 +56,7 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)  
 
-  audioEngine = lost.audio.Engine.create()
-  blockSound = audioEngine:createSource()
-  pathSound = audioEngine:createSource()
-  finishSound = audioEngine:createSource()
-  blockSound:initWithFile(tasklet.loader:load("block.ogg"))
-  pathSound:initWithFile(tasklet.loader:load("path.ogg"))
-  finishSound:initWithFile(tasklet.loader:load("wannabill.ogg"))
+  sounds = require("sounds")
 
   dcl = lost.declarative.Context(tasklet.loader)
   
@@ -121,7 +112,7 @@ function startup(tasklet)
     showFrame = true,
     frameWidth = 2,
     showBackground = true,
-    backgroundColor = Color(.25,.25,.25),
+    backgroundColor = Color(.25,.25,.25,.75),
     backgroundCornerRadius = 20,
     frameCornerRadius = 20,
     backgroundRoundCorners = {true, true, true, true},
@@ -281,6 +272,34 @@ function setup()
     colorNum = math.ceil(colorIdx / numStartBlocksPerColor)
   end
 
+  -- clear complete paths
+  for x = 2,boardSize.x+1 do
+    for y = 2,boardSize.y+1 do
+      if board[x][y] ~= nil then
+        local color = board[x][y].material.color
+        local stack = {[x] = {[y] = true}}
+        local path = checkPath(color, x, y, stack)
+        if path ~= nil then
+          local path2 = checkPath(color, x, y, stack)
+          if path2 ~= nil then
+            table.insert(path, 1, Vec2(x,y))
+            for idx = 1,#path2 do
+              table.insert(path,1,path2[idx])
+            end
+            score = score + clearPath(path)
+            clearStartBlocksAndColors()
+            sounds.pathRemoved:play()
+          end
+        end
+
+        scoreLabel:text(tostring(score))
+        if #activeColors == 0 then
+          finish()
+        end
+      end
+    end
+  end
+
   local currentBounds = Rect(windowParams.rect.width / 2 - blockSize.x / 2,
                              windowParams.rect.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
                              blockSize.x, blockSize.y)
@@ -312,6 +331,7 @@ function setup()
   )
 
   _tasklet.renderNode:add(boardNode)
+
 end
 
 function update(tasklet)
@@ -338,23 +358,28 @@ function checkColor(color, target)
   return result
 end
 
-function checkPath(color, x, y, stack)
+function checkPath(color, x, y, stack, complete)
   local result = nil
   local dir = {left = Vec2(x-1,y), right = Vec2(x+1,y), up = Vec2(x,y+1), down = Vec2(x,y-1)}
   for k,v in next,dir do
-    if board[v.x] ~= nil and board[v.x][v.y] ~= nil and (color == nil or board[v.x][v.y].material.color == color) and
-       (stack[v.x] == nil or stack[v.x][v.y] == nil)
+    if board[v.x] ~= nil and board[v.x][v.y] ~= nil and (stack[v.x] == nil or stack[v.x][v.y] ~= true) and
+       (complete or board[v.x][v.y].material.color == color)
     then
+--      if complete then log.debug("checking ".. tostring(v)) end
       if stack[v.x] == nil then
         stack[v.x] = {}
       end
       stack[v.x][v.y] = true
-      if v.x == 1 or v.x == boardSize.x+2 or v.y == 1 or v.y == boardSize.y+2 then
+      if (v.x == 1 or v.x == boardSize.x+2 or v.y == 1 or v.y == boardSize.y+2) and
+        (not complete or board[v.x][v.y].material.color == color)
+      then
+--        if complete then log.debug(tostring(v)) end
         result = {v}
         break
       end
-      local nextResult = checkPath(color, v.x, v.y, stack)
+      local nextResult = checkPath(color, v.x, v.y, stack,complete)
       if nextResult ~= nil then
+--        if complete then log.debug(tostring(v)) end
         result = {v}
         for nk,nv in next,nextResult do
           table.insert(result, nv)
@@ -398,11 +423,15 @@ function clearStartBlocksAndColors()
   for k,v in next,startBlocks do
     if board[v.x] ~= nil and board[v.x][v.y] ~= nil then
       local stack = {[v.x] = {[v.y] = true}}
-      if checkPath(nil,v.x,v.y,stack) == nil then
+--      log.debug("CHECK")
+      local path = checkPath(board[v.x][v.y].material.color,v.x,v.y,stack,true)
+      if path == nil then
+--        log.debug("REMOVE")
         boardNode:remove(boardNodes[v.x][v.y])
         boardNodes[v.x][v.y] = nil
         board[v.x][v.y] = nil
       else
+--        log.debug("OK")
         table.insert(remaining, board[v.x][v.y].material.color)
       end
     end
@@ -416,6 +445,13 @@ function clearStartBlocksAndColors()
       end
     end
     if found <= 1 then
+      for k,v in next,startBlocks do
+        if board[v.x] ~= nil and board[v.x][v.y] ~= nil and board[v.x][v.y].material.color == color then
+          boardNode:remove(boardNodes[v.x][v.y])
+          boardNodes[v.x][v.y] = nil
+          board[v.x][v.y] = nil
+        end
+      end
       table.remove(activeColors,idx)
       maxColors = maxColors - 1
     end
@@ -425,7 +461,7 @@ end
 function finish()
   finished = true
   finishNode:hidden(false)
-  finishSound:play()
+  sounds.levelFinished:play()
 end
 
 function mouseClickHandler(event)
@@ -437,7 +473,7 @@ function mouseClickHandler(event)
 
         local block = board[x][y]
         block.material.color = color
-        blockSound:play()
+        sounds.blockRemoved:play()
 
         local points = checkColor(color, board[x-1][y]) + checkColor(color, board[x+1][y]) +
                        checkColor(color, board[x][y-1]) + checkColor(color, board[x][y+1])
@@ -449,12 +485,12 @@ function mouseClickHandler(event)
           local path2 = checkPath(color, x, y, stack)
           if path2 ~= nil then
             table.insert(path, 1, Vec2(x,y))
-            for idx = #path2,1,-1 do
+            for idx = 1,#path2 do
               table.insert(path,1,path2[idx])
             end
             score = score + clearPath(path)
             clearStartBlocksAndColors()
-            pathSound:play()
+            sounds.pathRemoved:play()
           end
         end
 
