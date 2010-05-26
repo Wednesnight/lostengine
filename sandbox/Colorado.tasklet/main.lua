@@ -13,7 +13,7 @@ local dcl = nil
 local _tasklet = nil
 
 local boardPos = Vec2(75,75)
-local boardSize = Vec2(4,4)
+local boardSize = Vec2(8,8)
 local boardColors = {
   Color(.75,0,0),
   Color(.75,.75,0),
@@ -28,7 +28,7 @@ local boardColors = {
   Color(.25,0,.25)
 }
 local activeColors = nil
-local numStartBlocksPerColor = 2
+local numStartBlocksPerColor = 3
 local maxColors = nil
 local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x + 2), (windowParams.rect.height - boardPos.y*2) / (boardSize.y + 2))
 
@@ -47,6 +47,8 @@ local finishNode = nil
 
 local sounds = nil
 
+local scorePrefix = " Score: "
+
 function startup(tasklet)
   _tasklet = tasklet
 
@@ -56,7 +58,7 @@ function startup(tasklet)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)  
 
-  sounds = require("sounds")
+  sounds = require("resources/sounds")
 
   dcl = lost.declarative.Context(tasklet.loader)
   
@@ -92,17 +94,30 @@ function startup(tasklet)
   -- UI
   scoreLabel = dcl.guiro:Label
   {
-    bounds = {50, "top", 50, 25},
-    text = "0",
+    bounds = {"left", "top", 100, 25},
+    text = scorePrefix.."0",
+    halign = "left",
     showFrame = true,
     frameWidth = 2,
     showBackground = true,
     backgroundColor = Color(.25,.25,.25),
-    backgroundCornerRadius = 20,
-    frameCornerRadius = 20,
+    backgroundCornerRadius = 10,
+    frameCornerRadius = 10,
     backgroundRoundCorners = {false, true, false, false},
-    frameRoundCorners = {false, true, false, false},
-    frameShowSides = {true, true, false, true}
+    frameRoundCorners = {false, true, false, false}
+  }
+  soundLabel = dcl.guiro:Label
+  {
+    bounds = {"right", "bottom", 105, 25},
+    text = "Sound: Enabled",
+    showFrame = true,
+    frameWidth = 2,
+    showBackground = true,
+    backgroundColor = Color(.25,.25,.25),
+    backgroundCornerRadius = 10,
+    frameCornerRadius = 10,
+    backgroundRoundCorners = {false, false, true, false},
+    frameRoundCorners = {false, false, true, false}
   }
   finishNode = dcl.guiro:Label
   {
@@ -127,17 +142,8 @@ function startup(tasklet)
       {
         bounds = {"left", "bottom", "1", "1"},
         showBackground = false,
-        dcl.guiro:Label
-        {
-          bounds = {"left", "top", 50, 25},
-          showFrame = true,
-          frameWidth = 2,
-          showBackground = true,
-          backgroundColor = Color(.25,.25,.25),
-          frameShowSides = {true, true, true, false},
-          text = "Score:"
-        },
         scoreLabel,
+        soundLabel,
         finishNode
       }
     }
@@ -166,7 +172,7 @@ function setup()
     table.insert(activeColors, boardColors[idx])
   end
   score = 0
-  scoreLabel:text(tostring(score))
+  scoreLabel:text(scorePrefix..tostring(score))
 
   for x = 2,boardSize.x+1 do
     if board[x] == nil then
@@ -288,11 +294,11 @@ function setup()
             end
             score = score + clearPath(path)
             clearStartBlocksAndColors()
-            sounds.pathRemoved:play()
+            sounds:play("pathRemoved")
           end
         end
 
-        scoreLabel:text(tostring(score))
+        scoreLabel:text(scorePrefix..tostring(score))
         if #activeColors == 0 then
           finish()
         end
@@ -343,6 +349,13 @@ function keyHandler(event)
     running = false
   elseif (event.key == lost.application.K_SPACE) then
     setup()
+  elseif (event.key == lost.application.K_S) then
+    sounds.enabled = not sounds.enabled
+    if sounds.enabled then
+      soundLabel:text("Sound: Enabled")
+    else
+      soundLabel:text("Sound: Disabled")
+    end
   end
 end
 
@@ -461,7 +474,7 @@ end
 function finish()
   finished = true
   finishNode:hidden(false)
-  sounds.levelFinished:play()
+  sounds:play("levelFinished")
 end
 
 function mouseClickHandler(event)
@@ -473,7 +486,7 @@ function mouseClickHandler(event)
 
         local block = board[x][y]
         block.material.color = color
-        sounds.blockRemoved:play()
+        sounds:play("blockRemoved")
 
         local points = checkColor(color, board[x-1][y]) + checkColor(color, board[x+1][y]) +
                        checkColor(color, board[x][y-1]) + checkColor(color, board[x][y+1])
@@ -490,11 +503,11 @@ function mouseClickHandler(event)
             end
             score = score + clearPath(path)
             clearStartBlocksAndColors()
-            sounds.pathRemoved:play()
+            sounds:play("pathRemoved")
           end
         end
 
-        scoreLabel:text(tostring(score))
+        scoreLabel:text(scorePrefix..tostring(score))
         if #activeColors == 0 then
           finish()
         else
