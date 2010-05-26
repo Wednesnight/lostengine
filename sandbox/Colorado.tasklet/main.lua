@@ -34,6 +34,7 @@ local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x +
 
 local board = nil
 local boardNodes = nil
+local startFrames = nil
 local boardNode = nil
 local currentBlock = nil
 local startBlocks = nil
@@ -108,8 +109,8 @@ function startup(tasklet)
   }
   soundLabel = dcl.guiro:Label
   {
-    bounds = {"right", "bottom", 105, 25},
-    text = "Sound: Enabled",
+    bounds = {"right", "bottom", 75, 25},
+    text = "Sound: On",
     showFrame = true,
     frameWidth = 2,
     showBackground = true,
@@ -123,7 +124,7 @@ function startup(tasklet)
   {
     bounds = {"center", "center", 300, 50},
     fontSize = 16,
-    text = "Game Over (Press Space to restart)",
+    text = "Press Space to restart",
     showFrame = true,
     frameWidth = 2,
     showBackground = true,
@@ -200,6 +201,7 @@ function setup()
   end
 
   startBlocks = {}
+  startFrames = {}
   local currentPos = 1
   -- top
   for pos = 1, boardSize.x+2 do
@@ -264,15 +266,19 @@ function setup()
     boardNodes[coord.x][coord.y] = dcl.rg:Draw { mesh = board[coord.x][coord.y] }
     boardNode:add(boardNodes[coord.x][coord.y])
 
+    if startFrames[coord.x] == nil then
+      startFrames[coord.x] = {}
+    end
     local frame = lost.mesh.Rect.create(bounds)
     frame.material.shader = lost.common.Shaders.colorShader()
-    frame.material.color = Color(1,1,1)
+    frame.material.color = lost.common.Color(1,1,1)
     boardNode:add(
       dcl.rg:Draw
       {
         mesh = frame
       }
     )
+    startFrames[coord.x][coord.y] = frame
   
     colorIdx = colorIdx + 1
     colorNum = math.ceil(colorIdx / numStartBlocksPerColor)
@@ -352,9 +358,9 @@ function keyHandler(event)
   elseif (event.key == lost.application.K_S) then
     sounds.enabled = not sounds.enabled
     if sounds.enabled then
-      soundLabel:text("Sound: Enabled")
+      soundLabel:text("Sound: On")
     else
-      soundLabel:text("Sound: Disabled")
+      soundLabel:text("Sound: Off")
     end
   end
 end
@@ -409,10 +415,17 @@ function clearPath(path)
   local lastPos = nil
   for k,v in next,path do
     if lastPos ~= nil then
+      local color = lost.common.Color(1,1,1)
+      if board[v.x] ~= nil and board[v.x][v.y] ~= nil then
+        color = board[v.x][v.y].material.color
+      end
       boardNode:add(dcl.rg:Draw {
         mesh = dcl.mesh:Line {
           start = Vec2(boardPos.x + lastPos.x * blockSize.x - blockSize.x / 2, boardPos.y + lastPos.y * blockSize.y - blockSize.y / 2),
-          finish = Vec2(boardPos.x + v.x * blockSize.x - blockSize.x / 2, boardPos.y + v.y * blockSize.y - blockSize.y / 2)
+          finish = Vec2(boardPos.x + v.x * blockSize.x - blockSize.x / 2, boardPos.y + v.y * blockSize.y - blockSize.y / 2),
+          material = {
+            color = color
+          }
         }
       })
     end
@@ -425,6 +438,9 @@ function clearPath(path)
       end
       boardNode:remove(boardNodes[v.x][v.y])
       boardNodes[v.x][v.y] = nil
+      if board[v.x] ~= nil and board[v.x][v.y] ~= nil and startFrames[v.x] ~= nil and startFrames[v.x][v.y] ~= nil then
+        startFrames[v.x][v.y].material.color = board[v.x][v.y].material.color
+      end
       board[v.x][v.y] = nil
     end
   end
