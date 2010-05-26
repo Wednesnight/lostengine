@@ -5,6 +5,8 @@ using "lost.math.Vec2"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.common.Color"
+using "lost.math.MatrixTranslation"
+using "lost.math.Vec3"
 
 windowParams = WindowParams("Colorado", Rect(50,50,640,480))
 
@@ -12,7 +14,7 @@ local running = true
 local dcl = nil
 local _tasklet = nil
 
-local boardPos = Vec2(75,75)
+local boardPos = Vec2(100, 100)
 local boardSize = Vec2(8,8)
 local boardColors = {
   Color(.75,0,0),
@@ -30,14 +32,17 @@ local boardColors = {
 local activeColors = nil
 local numStartBlocksPerColor = 3
 local maxColors = nil
-local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x + 2), (windowParams.rect.height - boardPos.y*2) / (boardSize.y + 2))
+local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x + 2),
+                       (windowParams.rect.height - boardPos.y*2) / (boardSize.y + 2))
 
 local board = nil
 local boardNodes = nil
 local startFrames = nil
 local boardNode = nil
 local currentBlock = nil
+local currentFrame = nil
 local startBlocks = nil
+local boardFrame = nil
 
 local screen = nil
 local score = nil
@@ -56,13 +61,17 @@ function startup(tasklet)
   tasklet.name = "Colorado"
   tasklet.waitForEvents = true
 
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
-  tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)  
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+  tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)
+  tasklet.eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 
   sounds = require("resources/sounds")
 
   dcl = lost.declarative.Context(tasklet.loader)
-  
+
+  camera = dcl.rg:Camera2D {
+    viewport = Rect(0, 0, windowParams.rect.width, windowParams.rect.height)
+  }
   tasklet.renderNode:add(
     dcl.rg:Node
     {
@@ -74,15 +83,12 @@ function startup(tasklet)
       {
         mask = gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT
       },
-      dcl.rg:Camera2D
-      {
-        viewport = Rect(0, 0, windowParams.rect.width, windowParams.rect.height)
-      },    
+      camera,    
       dcl.rg:DepthTest{ false }
     }
   )
 
-  local boardFrame = lost.mesh.Rect.create(Rect(boardPos.x, boardPos.y, windowParams.rect.width - boardPos.x*2, windowParams.rect.height - boardPos.y*2))
+  boardFrame = lost.mesh.Rect.create(Rect(boardPos.x, boardPos.y, windowParams.rect.width - boardPos.x*2, windowParams.rect.height - boardPos.y*2))
   boardFrame.material.shader = lost.common.Shaders.colorShader()
   boardFrame.material.color = Color(1,1,1)
   tasklet.renderNode:add(
@@ -332,7 +338,7 @@ function setup()
     }
   )
 
-  local currentFrame = lost.mesh.Rect.create(currentBounds)
+  currentFrame = lost.mesh.Rect.create(currentBounds)
   currentFrame.material.shader = lost.common.Shaders.colorShader()
   currentFrame.material.color = Color(1,1,1)
   boardNode:add(
@@ -361,6 +367,35 @@ function keyHandler(event)
       soundLabel:text("Sound: On")
     else
       soundLabel:text("Sound: Off")
+    end
+  end
+end
+
+function resizeHandler(event)
+  camera.cam:viewport(Rect(0,0,event.width,event.height))
+
+  blockSize = Vec2((event.width - boardPos.x*2) / (boardSize.x + 2), (event.height - boardPos.y*2) / (boardSize.y + 2))
+
+  local currentBounds = Rect(event.width / 2 - blockSize.x / 2,
+                             event.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
+                             blockSize.x, blockSize.y)
+
+  currentBlock:updateSize(Vec2(currentBounds.width, currentBounds.height))
+  currentBlock.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
+  currentFrame:updateSize(Vec2(currentBounds.width, currentBounds.height))
+  currentFrame.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
+
+  boardFrame:updateSize(Vec2(event.width - boardPos.x*2, event.height - boardPos.y*2))
+  for x,ys in next,board do
+    for y,mesh in next,ys do
+      board[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
+      board[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
+    end
+  end
+  for x,ys in next,startFrames do
+    for y,mesh in next,ys do
+      startFrames[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
+      startFrames[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
     end
   end
 end
