@@ -30,7 +30,7 @@ local boardColors = {
   Color(.25,0,.25)
 }
 local activeColors = nil
-local numStartBlocksPerColor = 3
+local numStartBlocksPerColor = 4
 local maxColors = nil
 local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x + 2),
                        (windowParams.rect.height - boardPos.y*2) / (boardSize.y + 2))
@@ -372,6 +372,9 @@ function keyHandler(event)
 end
 
 function resizeHandler(event)
+  windowParams.rect.width = event.width
+  windowParams.rect.height = event.height
+
   camera.cam:viewport(Rect(0,0,event.width,event.height))
 
   blockSize = Vec2((event.width - boardPos.x*2) / (boardSize.x + 2), (event.height - boardPos.y*2) / (boardSize.y + 2))
@@ -447,6 +450,7 @@ end
 
 function clearPath(path)
   local result = 0
+  local factor = 1
   local lastPos = nil
   for k,v in next,path do
     if lastPos ~= nil then
@@ -466,11 +470,10 @@ function clearPath(path)
     end
     lastPos = v
     if boardNodes[v.x] ~= nil and boardNodes[v.x][v.y] ~= nil then
-      if result == 0 then
-        result = 1
-      else
-        result = result * 2
-      end
+
+      result = result + factor
+      factor = factor + 1
+
       boardNode:remove(boardNodes[v.x][v.y])
       boardNodes[v.x][v.y] = nil
       if board[v.x] ~= nil and board[v.x][v.y] ~= nil and startFrames[v.x] ~= nil and startFrames[v.x][v.y] ~= nil then
@@ -539,9 +542,9 @@ function mouseClickHandler(event)
         block.material.color = color
         sounds:play("blockRemoved")
 
-        local points = checkColor(color, board[x-1][y]) + checkColor(color, board[x+1][y]) +
-                       checkColor(color, board[x][y-1]) + checkColor(color, board[x][y+1])
-        score = score + points
+--        local points = checkColor(color, board[x-1][y]) + checkColor(color, board[x+1][y]) +
+--                       checkColor(color, board[x][y-1]) + checkColor(color, board[x][y+1])
+--        score = score + points
 
         local stack = {[x] = {[y] = true}}
         local path = checkPath(color, x, y, stack)
