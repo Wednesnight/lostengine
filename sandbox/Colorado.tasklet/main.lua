@@ -1,6 +1,9 @@
 require("lost.declarative.Context")
 require("lost.common.Shaders")
 
+require("animations.AnimationManager")
+require("animations.BlockScoreAnimation")
+
 using "lost.math.Vec2"
 using "lost.math.Rect"
 using "lost.application.WindowParams"
@@ -54,6 +57,8 @@ local finishNode = nil
 local sounds = nil
 
 local scorePrefix = " Score: "
+
+local animationManager = nil
 
 function startup(tasklet)
   _tasklet = tasklet
@@ -156,6 +161,8 @@ function startup(tasklet)
     }
   }
 
+  animationManager = AnimationManager(tasklet.loader, boardNode, board)
+
   -- setup
   setup()
 
@@ -173,6 +180,8 @@ function setup()
   board = {}
   boardNodes = {}
   boardNode = lost.rg.Node.create()
+  animationManager.renderNode = boardNode
+  animationManager.board = board
   maxColors = math.min(math.floor((boardSize.x + boardSize.y) / numStartBlocksPerColor), #boardColors)
   activeColors = {}
   for idx = 1,maxColors do
@@ -353,6 +362,11 @@ function setup()
 end
 
 function update(tasklet)
+  if running then
+    if not animationManager:process() then
+      tasklet.waitForEvents = false
+    end
+  end
   return running
 end
 
@@ -473,6 +487,8 @@ function clearPath(path)
 
       result = result + factor
       factor = factor + 1
+      animationManager:add(BlockScoreAnimation(blockSize, boardSize, boardPos, v, result))
+      _tasklet.waitForEvents = false
 
       boardNode:remove(boardNodes[v.x][v.y])
       boardNodes[v.x][v.y] = nil
