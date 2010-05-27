@@ -51,8 +51,11 @@ local screen = nil
 local score = nil
 local scoreLabel = nil
 
-local finished = false
-local finishNode = nil
+local initialized = false
+local finished = true
+local scoreboard = nil
+local scoretable = nil
+local endScore = nil
 
 local sounds = nil
 
@@ -118,6 +121,7 @@ function startup(tasklet)
     backgroundRoundCorners = {false, true, false, false},
     frameRoundCorners = {false, true, false, false}
   }
+
   soundLabel = dcl.guiro:Label
   {
     bounds = {"right", "bottom", 75, 25},
@@ -131,8 +135,226 @@ function startup(tasklet)
     backgroundRoundCorners = {false, false, true, false},
     frameRoundCorners = {false, false, true, false}
   }
-  finishNode = dcl.guiro:Label
+
+  scoretable = dcl.guiro:VBox
   {
+    bounds = {"left", {"top", -100}, "1", "1"},
+    backgrondColor = Color(0,0,0),
+    mode = "stack",
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 14,
+        textColor = Color(1,0,0),
+        text = "1.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 14,
+        textColor = Color(1,0,0),
+        text = "3569087",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 14,
+        textColor = Color(1,0,0),
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      }
+    },
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 12,
+        text = "2.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 12,
+        text = "356908",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 12,
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      }
+    },
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 12,
+        text = "3.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 12,
+        text = "35690",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 12,
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      }
+    },
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 12,
+        text = "4.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 12,
+        text = "3569",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 12,
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      },
+    },
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 12,
+        text = "5.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 12,
+        text = "356",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 12,
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      },
+    },
+    dcl.guiro:HBox
+    {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = 12,
+        text = "6.",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = 12,
+        text = "35",
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = 12,
+        text = "[2010-05-27]",
+        halign = "right",
+        showBackground = false
+      },
+    }
+  }
+  endScore = dcl.guiro:Label
+  {
+    bounds = {"center", "bottom", 150, 50},
+    fontSize = 16,
+    text = "",
+    showFrame = true,
+    frameWidth = 1,
+    showBackground = false,
+    frameShowSides = {true, false, false, false}
+  }
+  scoreboard = dcl.guiro:Window
+  {
+    bounds = {"left", "bottom", "1", "1"},
+    backgroundColor = Color(0,0,0),
+    showFrame = false,
+    dcl.guiro:Label
+    {
+      bounds = {"center", "top", 150, 50},
+      fontSize = 16,
+      text = "Highscores",
+      showFrame = true,
+      frameWidth = 1,
+      showBackground = false,
+      frameShowSides = {false, true, false, false}
+    },
+    dcl.guiro:Label
+    {
+      bounds = {"center", {"top", -50}, 150, 50},
+      fontSize = 10,
+      text = "Press Space to start a new game!",
+      showBackground = false
+    },
+    scoretable,
+    endScore
+  }
+--[[
     bounds = {"center", "center", 300, 50},
     fontSize = 16,
     text = "Press Space to restart",
@@ -144,7 +366,8 @@ function startup(tasklet)
     frameCornerRadius = 20,
     backgroundRoundCorners = {true, true, true, true},
     frameRoundCorners = {true, true, true, true}
-  }
+]]
+
   screen = dcl.guiro:Screen
   {
     dcl.guiro:UserInterface
@@ -155,23 +378,24 @@ function startup(tasklet)
         bounds = {"left", "bottom", "1", "1"},
         showBackground = false,
         scoreLabel,
-        soundLabel,
-        finishNode
-      }
+        soundLabel
+      },
+      scoreboard
     }
   }
 
   animationManager = AnimationManager(tasklet.loader, boardNode, board)
 
   -- setup
-  setup()
+--  setup()
 
   return true
 end
 
 function setup()
+  initialized = true
   finished = false
-  finishNode:hidden(true)
+  scoreboard:hidden(true)
 
   if boardNode ~= nil then
     _tasklet.renderNode:remove(boardNode)
@@ -393,26 +617,28 @@ function resizeHandler(event)
 
   blockSize = Vec2((event.width - boardPos.x*2) / (boardSize.x + 2), (event.height - boardPos.y*2) / (boardSize.y + 2))
 
-  local currentBounds = Rect(event.width / 2 - blockSize.x / 2,
-                             event.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
-                             blockSize.x, blockSize.y)
+  if initialized then
+    local currentBounds = Rect(event.width / 2 - blockSize.x / 2,
+                               event.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
+                               blockSize.x, blockSize.y)
 
-  currentBlock:updateSize(Vec2(currentBounds.width, currentBounds.height))
-  currentBlock.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
-  currentFrame:updateSize(Vec2(currentBounds.width, currentBounds.height))
-  currentFrame.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
+    currentBlock:updateSize(Vec2(currentBounds.width, currentBounds.height))
+    currentBlock.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
+    currentFrame:updateSize(Vec2(currentBounds.width, currentBounds.height))
+    currentFrame.transform = MatrixTranslation(Vec3(currentBounds.x, currentBounds.y, 0))
 
-  boardFrame:updateSize(Vec2(event.width - boardPos.x*2, event.height - boardPos.y*2))
-  for x,ys in next,board do
-    for y,mesh in next,ys do
-      board[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
-      board[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
+    boardFrame:updateSize(Vec2(event.width - boardPos.x*2, event.height - boardPos.y*2))
+    for x,ys in next,board do
+      for y,mesh in next,ys do
+        board[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
+        board[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
+      end
     end
-  end
-  for x,ys in next,startFrames do
-    for y,mesh in next,ys do
-      startFrames[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
-      startFrames[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
+    for x,ys in next,startFrames do
+      for y,mesh in next,ys do
+        startFrames[x][y]:updateSize(Vec2(blockSize.x, blockSize.y))
+        startFrames[x][y].transform = MatrixTranslation(Vec3(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), 0))
+      end
     end
   end
 end
@@ -464,6 +690,7 @@ end
 
 function clearPath(path)
   local result = 0
+  local blockScore = 10
   local factor = 1
   local lastPos = nil
   for k,v in next,path do
@@ -485,9 +712,9 @@ function clearPath(path)
     lastPos = v
     if boardNodes[v.x] ~= nil and boardNodes[v.x][v.y] ~= nil then
 
-      result = result + factor
+      animationManager:add(BlockScoreAnimation(blockSize, boardSize, boardPos, v, "x"..factor))
+      result = result + blockScore*factor
       factor = factor + 1
-      animationManager:add(BlockScoreAnimation(blockSize, boardSize, boardPos, v, result))
       _tasklet.waitForEvents = false
 
       boardNode:remove(boardNodes[v.x][v.y])
@@ -502,6 +729,7 @@ function clearPath(path)
 end
 
 function clearStartBlocksAndColors()
+  local result = 0
   local remaining = {}
   for k,v in next,startBlocks do
     if board[v.x] ~= nil and board[v.x][v.y] ~= nil then
@@ -510,6 +738,8 @@ function clearStartBlocksAndColors()
       local path = checkPath(board[v.x][v.y].material.color,v.x,v.y,stack,true)
       if path == nil then
 --        log.debug("REMOVE")
+        result = result - 10
+        animationManager:add(BlockScoreAnimation(blockSize, boardSize, boardPos, v, result))
         boardNode:remove(boardNodes[v.x][v.y])
         boardNodes[v.x][v.y] = nil
         board[v.x][v.y] = nil
@@ -530,6 +760,8 @@ function clearStartBlocksAndColors()
     if found <= 1 then
       for k,v in next,startBlocks do
         if board[v.x] ~= nil and board[v.x][v.y] ~= nil and board[v.x][v.y].material.color == color then
+          result = result - 10
+          animationManager:add(BlockScoreAnimation(blockSize, boardSize, boardPos, v, result))
           boardNode:remove(boardNodes[v.x][v.y])
           boardNodes[v.x][v.y] = nil
           board[v.x][v.y] = nil
@@ -539,11 +771,13 @@ function clearStartBlocksAndColors()
       maxColors = maxColors - 1
     end
   end
+  return result
 end
 
 function finish()
   finished = true
-  finishNode:hidden(false)
+  endScore:text("Score: ".. tostring(score))
+  scoreboard:hidden(false)
   sounds:play("levelFinished")
 end
 
@@ -572,7 +806,7 @@ function mouseClickHandler(event)
               table.insert(path,1,path2[idx])
             end
             score = score + clearPath(path)
-            clearStartBlocksAndColors()
+            score = score + clearStartBlocksAndColors()
             sounds:play("pathRemoved")
           end
         end
