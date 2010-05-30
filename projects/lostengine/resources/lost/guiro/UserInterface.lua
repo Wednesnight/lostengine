@@ -40,7 +40,7 @@ function UserInterface:updateFocus(event)
     local idx = table.maxn(self.subviews)
     while idx > 0 do
       local subview = self.subviews[idx]
-      if subview:containsCoord(mouseEvent.pos) then
+      if subview.focusable and subview:containsCoord(mouseEvent.pos) then
         table.remove(self.subviews, idx)
         table.insert(self.subviews, subview)
         self:needsRedraw()

@@ -18,6 +18,16 @@ common::DataPtr FilesystemRepository::load( const boost::filesystem::path& relat
   return loadFromAbsolutePath(absolutePath.string());;
 }
 
+bool FilesystemRepository::locate(std::string& inOutRelativePath)
+{
+  boost::filesystem::path absolutePath = rootDirectory / inOutRelativePath;
+  bool exists = fileExists(absolutePath.string());
+  if (exists) {
+    inOutRelativePath = absolutePath.string();
+  }
+  return exists;
+}
+
 RepositoryPtr FilesystemRepository::create(const std::string& inRootDir)
 {
   return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));

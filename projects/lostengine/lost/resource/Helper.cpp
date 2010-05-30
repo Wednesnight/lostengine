@@ -31,5 +31,15 @@ namespace lost
       return result;
     }
 
+    bool fileExists(const std::string& inPath)
+    {
+      ZZIP_FILE* file = zzip_fopen(inPath.c_str(), "rb");
+      bool result = (file != NULL);
+      if (result)
+      {
+        zzip_fclose(file);
+      }
+      return result;
+    }
   }
 }

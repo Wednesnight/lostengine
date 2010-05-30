@@ -31,6 +31,12 @@ namespace lost
       return loader->load(inRelativePath);
     }
 
+    std::string LostResourceLoader_locate(object inLoader, const std::string& inRelativePath)
+    {
+      Loader* loader = object_cast<Loader*>(inLoader);
+      return loader->locate(inRelativePath);
+    }
+    
     void LostResourceLoader(lua_State* state)
     {
       module(state, "lost")
@@ -39,6 +45,7 @@ namespace lost
         [
           class_<Loader>("Loader")
             .def("load", &LostResourceLoader_load)
+            .def("locate", &LostResourceLoader_locate)
             .def("addRepository", &Loader::addRepository)
             .scope
             [
