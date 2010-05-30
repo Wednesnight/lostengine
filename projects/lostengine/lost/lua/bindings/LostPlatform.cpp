@@ -36,7 +36,9 @@ namespace lost
           def("isLinux", &isLinux),
           def("isIPhone", &isIPhone),
           def("currentTimeSeconds", &currentTimeSeconds),
-          def("currentTimeMilliSeconds", &currentTimeMilliSeconds)
+          def("currentTimeMilliSeconds", &currentTimeMilliSeconds),
+          def("buildResourcePath", &buildResourcePath),
+          def("getResourcePath", &getResourcePath)
         ]
       ];
     }

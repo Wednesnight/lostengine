@@ -20,6 +20,7 @@ namespace lost
       virtual ~Loader();
 
       common::DataPtr load( const boost::filesystem::path& inPath);
+      std::string locate(const boost::filesystem::path& inPath);
       void addRepository( RepositoryPtr inRepository );
 
 

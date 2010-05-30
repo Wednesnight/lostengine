@@ -12,6 +12,9 @@ namespace resource
 // reads file from path into new Data instance, leaves location member unset.
 common::DataPtr loadFromAbsolutePath(const std::string& inPath);
 
+// checks if file exists
+bool fileExists(const std::string& inPath);
+
 }
 }
 

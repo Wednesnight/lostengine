@@ -38,6 +38,17 @@ namespace lost
       return result;
     }
 
+    std::string Loader::locate(const boost::filesystem::path& inPath)
+    {
+      std::string result = inPath.string();
+      for (unsigned int idx = 0; idx < repositories.size(); ++idx)
+      {
+        if(repositories[idx]->locate(result))
+          break;
+      }
+      return result;
+    }
+
     void Loader::addRepository( lost::shared_ptr<Repository> inRepository )
     {
       repositories.push_back( inRepository );

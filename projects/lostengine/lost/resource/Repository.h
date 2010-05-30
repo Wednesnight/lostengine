@@ -28,6 +28,7 @@ namespace lost
       virtual ~Repository() {}
 
       virtual common::DataPtr load( const boost::filesystem::path& inPath) = 0;
+      virtual bool locate(std::string& inOutRelativePath) = 0;
     };
   }
 }

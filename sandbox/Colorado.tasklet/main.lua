@@ -50,12 +50,15 @@ local boardFrame = nil
 local screen = nil
 local score = nil
 local scoreLabel = nil
+local scores = require("resources.scores")
+local scoresChanged = false
 
 local initialized = false
 local finished = true
 local scoreboard = nil
 local scoretable = nil
 local endScore = nil
+local buttons = nil
 
 local sounds = nil
 
@@ -63,13 +66,15 @@ local scorePrefix = " Score: "
 
 local animationManager = nil
 
+-- Initialize the pseudo random number generator
+math.randomseed(os.time())
+
 function startup(tasklet)
   _tasklet = tasklet
 
   tasklet.name = "Colorado"
   tasklet.waitForEvents = true
 
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)
   tasklet.eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 
@@ -124,7 +129,7 @@ function startup(tasklet)
 
   soundLabel = dcl.guiro:Label
   {
-    bounds = {"right", "bottom", 75, 25},
+    bounds = {"right", "top", 75, 25},
     text = "Sound: On",
     showFrame = true,
     frameWidth = 2,
@@ -132,198 +137,23 @@ function startup(tasklet)
     backgroundColor = Color(.25,.25,.25),
     backgroundCornerRadius = 10,
     frameCornerRadius = 10,
-    backgroundRoundCorners = {false, false, true, false},
-    frameRoundCorners = {false, false, true, false}
-  }
-
-  scoretable = dcl.guiro:VBox
-  {
-    bounds = {"left", {"top", -100}, "1", "1"},
-    backgrondColor = Color(0,0,0),
-    mode = "stack",
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 14,
-        textColor = Color(1,0,0),
-        text = "1.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 14,
-        textColor = Color(1,0,0),
-        text = "3569087",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 14,
-        textColor = Color(1,0,0),
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      }
-    },
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 12,
-        text = "2.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 12,
-        text = "356908",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 12,
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      }
-    },
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 12,
-        text = "3.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 12,
-        text = "35690",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 12,
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      }
-    },
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 12,
-        text = "4.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 12,
-        text = "3569",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 12,
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      },
-    },
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 12,
-        text = "5.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 12,
-        text = "356",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 12,
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      },
-    },
-    dcl.guiro:HBox
-    {
-      bounds = {nil, nil, 150, 50},
-      mode = "stack",
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 25, 50},
-        fontSize = 12,
-        text = "6.",
-        halign = "left",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 100, 50},
-        fontSize = 12,
-        text = "35",
-        halign = "right",
-        showBackground = false
-      },
-      dcl.guiro:Label
-      {
-        bounds = {nil, nil, 150, 50},
-        fontSize = 12,
-        text = "[2010-05-27]",
-        halign = "right",
-        showBackground = false
-      },
+    backgroundRoundCorners = {true, false, false, false},
+    frameRoundCorners = {true, false, false, false},
+    listeners = {
+      mouseDown = function(event)
+        if event.target == event.currentTarget then
+          toggleSound()
+        end
+      end
     }
   }
+
   endScore = dcl.guiro:Label
   {
     bounds = {"center", "bottom", 150, 50},
     fontSize = 16,
     text = "",
+    textColor = Color(0,1,0),
     showFrame = true,
     frameWidth = 1,
     showBackground = false,
@@ -331,7 +161,8 @@ function startup(tasklet)
   }
   scoreboard = dcl.guiro:Window
   {
-    bounds = {"left", "bottom", "1", "1"},
+    bounds = {"left", "top", "1", {"1", -50}},
+    focusable = false,
     backgroundColor = Color(0,0,0),
     showFrame = false,
     dcl.guiro:Label
@@ -344,29 +175,55 @@ function startup(tasklet)
       showBackground = false,
       frameShowSides = {false, true, false, false}
     },
-    dcl.guiro:Label
-    {
-      bounds = {"center", {"top", -50}, 150, 50},
-      fontSize = 10,
-      text = "Press Space to start a new game!",
-      showBackground = false
-    },
-    scoretable,
     endScore
   }
---[[
-    bounds = {"center", "center", 300, 50},
-    fontSize = 16,
-    text = "Press Space to restart",
-    showFrame = true,
-    frameWidth = 2,
-    showBackground = true,
-    backgroundColor = Color(.25,.25,.25,.75),
-    backgroundCornerRadius = 20,
-    frameCornerRadius = 20,
-    backgroundRoundCorners = {true, true, true, true},
-    frameRoundCorners = {true, true, true, true}
-]]
+  rebuildScoretable()
+
+  buttons = dcl.guiro:Window {
+    bounds = {"left", "bottom", "1", 50},
+    showBackground = false,
+    showFrame = false,
+    dcl.guiro:Button
+    {
+      id = "newGame",
+      bounds = {{"right", -120}, {"bottom", 10}, 100, 30},
+      title = "New Game",
+      listeners = {
+        buttonClick = function(event)
+          if event.target == event.currentTarget then
+            setup()
+          end
+        end
+      }
+    },
+    dcl.guiro:Button
+    {
+      id = "restart",
+      hidden = true,
+      bounds = {{"right", -120}, {"bottom", 10}, 100, 30},
+      title = "Restart",
+      listeners = {
+        buttonClick = function(event)
+          if event.target == event.currentTarget then
+            setup()
+          end
+        end
+      }
+    },
+    dcl.guiro:Button
+    {
+      id = "quit",
+      bounds = {{"right", -10}, {"bottom", 10}, 100, 30},
+      title = "Quit",
+      listeners = {
+        buttonClick = function(event)
+          if event.target == event.currentTarget then
+            running = false
+          end
+        end
+      }
+    }
+  }
 
   screen = dcl.guiro:Screen
   {
@@ -375,27 +232,53 @@ function startup(tasklet)
       bounds = {"left", "bottom", "1", "1"},
       dcl.guiro:Window
       {
-        bounds = {"left", "bottom", "1", "1"},
+        bounds = {"left", "top", "1", 50},
+        focusable = false,
         showBackground = false,
+        showFrame = false,
         scoreLabel,
         soundLabel
       },
-      scoreboard
+      scoreboard,
+      buttons
     }
   }
 
   animationManager = AnimationManager(tasklet.loader, boardNode, board)
 
-  -- setup
---  setup()
-
   return true
+end
+
+function shutdown(tasklet)
+  if scoresChanged then
+    local scoresFile, err = io.open(tasklet.loader:locate("resources/scores.lua"), "w+")
+    if scoresFile ~= nil then
+      scoresFile:write("return {\n")
+      for k,v in next,scores do
+        scoresFile:write("  {\n")
+        scoresFile:write("    points = ".. tostring(v.points) ..",\n")
+        scoresFile:write("    date = \"".. v.date .."\"\n")
+        if k < #scores then
+          scoresFile:write("  },\n")
+        else
+          scoresFile:write("  }\n")
+        end
+      end
+      scoresFile:write("}\n")
+      scoresFile:flush()
+      scoresFile:close()
+    else
+      log.error(err)
+    end
+  end
 end
 
 function setup()
   initialized = true
   finished = false
   scoreboard:hidden(true)
+  buttons("newGame"):hidden(true)
+  buttons("restart"):hidden(false)
 
   if boardNode ~= nil then
     _tasklet.renderNode:remove(boardNode)
@@ -423,9 +306,11 @@ function setup()
     end
     for y = 2,boardSize.y+1 do
 
+      local bounds = Rect(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), blockSize.x, blockSize.y)
+
       board[x][y] = dcl.mesh:Quad
       {
-        rect = Rect(boardPos.x + blockSize.x * (x-1), boardPos.y + blockSize.y * (y-1), blockSize.x, blockSize.y),
+        rect = bounds,
         material = 
         {
           blend = true,
@@ -435,6 +320,16 @@ function setup()
 
       boardNodes[x][y] = dcl.rg:Draw { mesh = board[x][y] }
       boardNode:add(boardNodes[x][y])
+
+      local frame = lost.mesh.Rect.create(bounds)
+      frame.material.shader = lost.common.Shaders.colorShader()
+      frame.material.color = lost.common.Color(1,1,1)
+      boardNode:add(
+        dcl.rg:Draw
+        {
+          mesh = frame
+        }
+      )
 
     end
   end
@@ -585,6 +480,62 @@ function setup()
 
 end
 
+function rebuildScoretable(newIndex)
+  if scoretable ~= nil then
+    scoreboard:removeSubview(scoretable)
+  end
+
+  scoretable = dcl.guiro:VBox {
+    bounds = {"left", {"top", -60}, "1", "1"},
+    backgrondColor = Color(0,0,0),
+    mode = "stack"
+  }
+  
+  local fontSize, fontColor = 14, Color(1,0,0)
+  for k,v in next,scores do
+    if newIndex ~= nil and k == newIndex then
+      fontSize = 14
+      fontColor = Color(0,1,0)
+    elseif k > 1 then
+      fontSize = 12
+      fontColor = Color(1,1,1)
+    end
+    scoretable:addSubview(dcl.guiro:HBox {
+      bounds = {nil, nil, 150, 50},
+      mode = "stack",
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 25, 50},
+        fontSize = fontSize,
+        textColor = fontColor,
+        text = tostring(k) ..".",
+        halign = "left",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 100, 50},
+        fontSize = fontSize,
+        textColor = fontColor,
+        text = tostring(v.points),
+        halign = "right",
+        showBackground = false
+      },
+      dcl.guiro:Label
+      {
+        bounds = {nil, nil, 150, 50},
+        fontSize = fontSize,
+        textColor = fontColor,
+        text = "[".. tostring(v.date) .."]",
+        halign = "right",
+        showBackground = false
+      }
+    })
+  end
+
+  scoreboard:addSubview(scoretable)
+end
+
 function update(tasklet)
   if running then
     if not animationManager:process() then
@@ -594,18 +545,12 @@ function update(tasklet)
   return running
 end
 
-function keyHandler(event)
-  if (event.key == lost.application.K_ESCAPE) then
-    running = false
-  elseif (event.key == lost.application.K_SPACE) then
-    setup()
-  elseif (event.key == lost.application.K_S) then
-    sounds.enabled = not sounds.enabled
-    if sounds.enabled then
-      soundLabel:text("Sound: On")
-    else
-      soundLabel:text("Sound: Off")
-    end
+function toggleSound()
+  sounds.enabled = not sounds.enabled
+  if sounds.enabled then
+    soundLabel:text("Sound: On")
+  else
+    soundLabel:text("Sound: Off")
   end
 end
 
@@ -776,8 +721,20 @@ end
 
 function finish()
   finished = true
+  for k,v in next,scores do
+    if score > v.points then
+      scoresChanged = true
+      local newEntry = {points = score, date = os.date("%Y-%m-%d")}
+      table.insert(scores, k, newEntry) -- add new score
+      table.remove(scores)              -- remove last
+      rebuildScoretable(k)
+      break
+    end
+  end
   endScore:text("Score: ".. tostring(score))
   scoreboard:hidden(false)
+  buttons("newGame"):hidden(false)
+  buttons("restart"):hidden(true)
   sounds:play("levelFinished")
 end
 

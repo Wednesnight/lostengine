@@ -125,6 +125,7 @@ function View:constructor(textureManager)
 
   self.dirty = false
   
+  self.focusable = true
 end
 
 function View:onAttach(parent)
@@ -281,7 +282,7 @@ function View:hidden(...)
 	if arg.n > 0 then
 		self.rootNode.active = not arg[1]
 	else
-		return not self.rootNode.active
+		return not self.rootNode.active or (self.parent ~= nil and self.parent:hidden())
 	end
 end
 
@@ -411,7 +412,7 @@ end
   ]]
 function View:dispatchEvent(event, phase)
   -- accept valid events only
-  if event ~= nil then
+  if event ~= nil and not self:hidden() then
     -- default is target + bubble
     local capture = (phase ~= nil and phase == Event.PHASE_CAPTURE)
     local target = (phase == nil or phase == Event.PHASE_TARGET)
@@ -457,12 +458,14 @@ end
     Routes the event to the appropriate EventDispatcher
   ]]
 function View:routeEvent(event)
-  if event.phase == Event.PHASE_CAPTURE then
-    self.captureEventDispatcher:dispatchEvent(event)
-  elseif event.phase == Event.PHASE_TARGET then
-    self.targetEventDispatcher:dispatchEvent(event)
-  elseif event.phase == Event.PHASE_BUBBLE then
-    self.bubbleEventDispatcher:dispatchEvent(event)
+  if event ~= nil and not self:hidden() then
+    if event.phase == Event.PHASE_CAPTURE then
+      self.captureEventDispatcher:dispatchEvent(event)
+    elseif event.phase == Event.PHASE_TARGET then
+      self.targetEventDispatcher:dispatchEvent(event)
+    elseif event.phase == Event.PHASE_BUBBLE then
+      self.bubbleEventDispatcher:dispatchEvent(event)
+    end
   end
 end
 
