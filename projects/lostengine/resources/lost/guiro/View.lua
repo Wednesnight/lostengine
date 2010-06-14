@@ -144,11 +144,7 @@ function View:setParent(parent)
     if parent:isDerivedFrom("lost.guiro.View") then
       self.parent = parent
     else
-      local typeName = type(parent)
-      if type(parent.className) == "function" then
-        typeName = parent:className()
-      end
-      error("View:setParent() expected lost.guiro.View, got ".. typeName, 2)
+      error("View:setParent() expected lost.guiro.View, got ".. type(parent), 2)
     end
     self.parent.subviewNodes:add(self.rootNode)
     self:needsLayout()
@@ -545,15 +541,13 @@ end
     Adds subview at the end of self.subviews and calls subview:onAttach(self)
   ]]
 function View:addSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.View") then
+  if (type(subview)=="table") and 
+     (subview.isDerivedFrom ~= nil) and 
+     subview:isDerivedFrom("lost.guiro.View") then
     table.insert(self.subviews, subview)
   	subview:onAttach(self)
   else
-    local typeName = type(subview)
-    if type(subview.className) == "function" then
-      typeName = subview:className()
-    end
-    error("View:addSubview() expected lost.guiro.View, got ".. typeName, 2)
+    error("View:addSubview() expected lost.guiro.View, got ".. type(subview), 2)
   end
 end
 
@@ -569,11 +563,7 @@ function View:removeSubview(subview)
       end
     end
   else
-    local typeName = type(subview)
-    if type(subview.className) == "function" then
-      typeName = subview:className()
-    end
-    error("View:removeSubview() expected lost.guiro.View, got ".. typeName, 2)
+    error("View:removeSubview() expected lost.guiro.View, got ".. type(subview), 2)
   end
 end
 
