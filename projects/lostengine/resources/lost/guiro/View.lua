@@ -1,24 +1,3 @@
---[[
-    lost.guiro.View
-    
-    View is the base class of all Guiro objects, it also implements all drawing related functionality.
-    Example:
-
-      lost.common.Class "MyDrawable" "lost.guiro.View" {}
-      
-      function MyDrawable:beforeRedraw()
-        -- update meshes, colors, etc.
-      end
-      
-      function MyDrawable:afterRedraw()
-        -- update meshes, colors, etc.
-      end
-      
-      function MyDrawable:modifyingMethod()
-        -- modify members, colors, etc.
-        self:needsRedraw()
-      end
-  ]]
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
@@ -208,35 +187,22 @@ function View:needsRedraw()
   end
 end
 
---[[
-    Internal redraw, do not use! See also: View:beforeRedraw(), View:afterRedraw()
-  ]]
+-- Internal redraw, do not use! See also: View:beforeRedraw(), View:afterRedraw()
 function View:_redraw()
 --  log.debug(tostring(self) .."(".. self.id .."):_redraw()")
   self:beforeRedraw()
   self.dirty = false
-
-  -- Call invisible _redraw() on all subviews
-  if type(self.subviews) == "table" then
-    for k,view in next,self.subviews do
-      if view:isDerivedFrom("lost.guiro.View") then
-        view:_redraw(true)
-      end
-    end
+  for k,view in next,self.subviews do
+    view:_redraw(true)
   end
-
   self:afterRedraw()
 end
 
---[[
-    Override this method to implement your redraw code before base objects are updated
-  ]]
+-- Override this method to implement your redraw code before base objects are updated
 function View:beforeRedraw()
 end
 
---[[
-    Override this method to implement your redraw code after base objects were updated
-  ]]
+--  Override this method to implement your redraw code after base objects were updated
 function View:afterRedraw()
 end
 
@@ -345,9 +311,6 @@ function View:frameGradient(gradientName)
   end
 end
 
---[[
-    metatable methods
-  ]]
 function View:__tostring()
   return self:className() .."(".. self.id ..")"
 end
