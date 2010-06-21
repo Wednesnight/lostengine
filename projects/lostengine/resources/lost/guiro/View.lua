@@ -5,6 +5,7 @@ require("lost.common.Shaders")
 require("lost.guiro.event.Event")
 require("lost.guiro.event.EventDispatcher")
 require("lost.common.CallLater")
+require("lost.guiro.Layer")
 
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
@@ -23,6 +24,8 @@ using "lost.math.MatrixTranslation"
 function View:constructor(textureManager)
   assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
   self.textureManager = textureManager
+
+	self.layer = lost.guiro.Layer(textureManager)
 
   self.subviews = {}
   -- setup event dispatchers
