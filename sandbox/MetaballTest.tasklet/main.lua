@@ -59,11 +59,11 @@ function startup(tasklet)
       local c2 = m2col * v2
       local c3 = m3col * v3
       local cs = Color()
-      cs.r = c1.r + c2.r + c3.r
-      cs.g = c1.g + c2.g + c3.g
-      cs.b = c1.b + c2.b + c3.b
+      cs.r = min(1,max(0,c1.r + c2.r + c3.r))
+      cs.g = min(1,max(0,c1.g + c2.g + c3.g))
+      cs.b = min(1,max(0,c1.b + c2.b + c3.b))
       
-      local m = max(max(max(0,cs.r), cs.g), cs.b)
+      local m = 1 --max(max(max(0,cs.r), cs.g), cs.b)
       local s= min(1,max(0,v1+v2+v3)) -- clamp to [0,1]
       if s < .96 then s = 0 end
       cs.r = (cs.r/m)*s
