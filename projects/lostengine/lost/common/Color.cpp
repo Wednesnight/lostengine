@@ -54,6 +54,18 @@ namespace lost
       return result;
     }
 
+    lost::common::Color operator*(const Color& l, float f)
+    {
+      lost::common::Color result;
+
+      result.fv[0] = l.fv[0] * f;
+      result.fv[1] = l.fv[1] * f;
+      result.fv[2] = l.fv[2] * f;
+      result.fv[3] = l.fv[3] * f;
+
+      return result;
+    }
+
     bool operator ==(const Color& l, const Color& r)
     {
       return (l.fv[0] == r.fv[0]) && (l.fv[1] == r.fv[1]) && (l.fv[2] == r.fv[2]) && (l.fv[3] == r.fv[3]);

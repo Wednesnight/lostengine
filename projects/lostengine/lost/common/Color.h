@@ -37,6 +37,7 @@ namespace lost
     };
 
     lost::common::Color operator*(const Color& l, const Color& r);
+    lost::common::Color operator*(const Color& l, float);
     bool operator ==(const Color& l, const Color& r);
     bool operator !=(const Color& l, const Color& r);
     void operator+=(Color& l, const Color& r);

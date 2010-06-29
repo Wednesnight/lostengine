@@ -17,6 +17,7 @@ namespace lost
         namespace_("bitmap")
         [
           class_<Bitmap>("Bitmap")
+            .def("clear", &Bitmap::clear)
             .def_readwrite("width", &Bitmap::width)
             .def_readwrite("height", &Bitmap::height)
             .def("pixel", (void(Bitmap::*)(uint32_t, uint32_t, const common::Color&))&Bitmap::pixel)
