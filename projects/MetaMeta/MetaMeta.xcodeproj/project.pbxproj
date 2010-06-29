@@ -234,6 +234,44 @@
 		EABA7DE2112F3EA80016E322 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABA7DD8112F3EA80016E322 /* Application.cpp */; };
 		EABA7DE3112F3EA80016E322 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABA7DD9112F3EA80016E322 /* Tasklet.cpp */; };
 		EABA7DE4112F3EA80016E322 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EABA7DDA112F3EA80016E322 /* Window.cpp */; };
+		EAD3E3E311D76E78003B6129 /* dir.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3D711D76E78003B6129 /* dir.c */; };
+		EAD3E3E411D76E78003B6129 /* err.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3D811D76E78003B6129 /* err.c */; };
+		EAD3E3E511D76E78003B6129 /* fetch.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3D911D76E78003B6129 /* fetch.c */; };
+		EAD3E3E611D76E78003B6129 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DA11D76E78003B6129 /* file.c */; };
+		EAD3E3E711D76E78003B6129 /* fseeko.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DB11D76E78003B6129 /* fseeko.c */; };
+		EAD3E3E811D76E78003B6129 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DC11D76E78003B6129 /* info.c */; };
+		EAD3E3E911D76E78003B6129 /* memdisk.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DD11D76E78003B6129 /* memdisk.c */; };
+		EAD3E3EA11D76E78003B6129 /* mmapped.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DE11D76E78003B6129 /* mmapped.c */; };
+		EAD3E3EB11D76E78003B6129 /* plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3DF11D76E78003B6129 /* plugin.c */; };
+		EAD3E3EC11D76E78003B6129 /* stat.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3E011D76E78003B6129 /* stat.c */; };
+		EAD3E3ED11D76E78003B6129 /* write.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3E111D76E78003B6129 /* write.c */; };
+		EAD3E3EE11D76E78003B6129 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3E211D76E78003B6129 /* zip.c */; };
+		EAD3E3FE11D7701A003B6129 /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3F611D7701A003B6129 /* AABB.cpp */; };
+		EAD3E3FF11D7701A003B6129 /* io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3F711D7701A003B6129 /* io.cpp */; };
+		EAD3E40011D7701A003B6129 /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3F811D7701A003B6129 /* Matrix.cpp */; };
+		EAD3E40111D7701A003B6129 /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3F911D7701A003B6129 /* Quat.cpp */; };
+		EAD3E40211D7701A003B6129 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3FA11D7701A003B6129 /* Rect.cpp */; };
+		EAD3E40311D7701A003B6129 /* Vec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3FB11D7701A003B6129 /* Vec2.cpp */; };
+		EAD3E40411D7701A003B6129 /* Vec3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3FC11D7701A003B6129 /* Vec3.cpp */; };
+		EAD3E40511D7701A003B6129 /* Vec4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E3FD11D7701A003B6129 /* Vec4.cpp */; };
+		EAD3E40B11D77043003B6129 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E40811D77043003B6129 /* Color.cpp */; };
+		EAD3E40C11D77043003B6129 /* ColorGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E40911D77043003B6129 /* ColorGradient.cpp */; };
+		EAD3E40D11D77043003B6129 /* io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E40A11D77043003B6129 /* io.cpp */; };
+		EAD3E41211D77080003B6129 /* UniformBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E41111D77080003B6129 /* UniformBlock.cpp */; };
+		EAD3E41611D770BE003B6129 /* RoundedRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E41511D770BE003B6129 /* RoundedRect.cpp */; };
+		EAD3E41A11D770CC003B6129 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E41911D770CC003B6129 /* Sphere.cpp */; };
+		EAD3E41E11D770DA003B6129 /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E41D11D770DA003B6129 /* Line.cpp */; };
+		EAD3E42211D7713C003B6129 /* LostAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E42111D7713C003B6129 /* LostAudio.cpp */; };
+		EAD3E42C11D77178003B6129 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E42911D77178003B6129 /* Engine.cpp */; };
+		EAD3E42D11D77178003B6129 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E42A11D77178003B6129 /* Source.cpp */; };
+		EAD3E42E11D77178003B6129 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E42B11D77178003B6129 /* VorbisFile.cpp */; };
+		EAD3E43611D7718E003B6129 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43011D7718E003B6129 /* Buffer.cpp */; };
+		EAD3E43711D7718E003B6129 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43111D7718E003B6129 /* Context.cpp */; };
+		EAD3E43811D7718E003B6129 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43211D7718E003B6129 /* Debug.cpp */; };
+		EAD3E43911D7718E003B6129 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43311D7718E003B6129 /* Device.cpp */; };
+		EAD3E43A11D7718E003B6129 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43411D7718E003B6129 /* Listener.cpp */; };
+		EAD3E43B11D7718E003B6129 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD3E43511D7718E003B6129 /* Source.cpp */; };
+		EAD3E43E11D771D7003B6129 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAD3E43D11D771D7003B6129 /* OpenAL.framework */; };
 		EAD94E6F1148461D0027F10E /* disc.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6C1148461D0027F10E /* disc.vs */; };
 		EAD94E701148461D0027F10E /* cube.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6D1148461D0027F10E /* cube.lua */; };
 		EAD94E711148461D0027F10E /* disc.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6E1148461D0027F10E /* disc.fs */; };
@@ -469,6 +507,44 @@
 		EABA7DD8112F3EA80016E322 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		EABA7DD9112F3EA80016E322 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		EABA7DDA112F3EA80016E322 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		EAD3E3D711D76E78003B6129 /* dir.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dir.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/dir.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3D811D76E78003B6129 /* err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = err.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/err.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3D911D76E78003B6129 /* fetch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fetch.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/fetch.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DA11D76E78003B6129 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = file.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/file.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DB11D76E78003B6129 /* fseeko.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fseeko.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/fseeko.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DC11D76E78003B6129 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = info.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/info.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DD11D76E78003B6129 /* memdisk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = memdisk.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/memdisk.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DE11D76E78003B6129 /* mmapped.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mmapped.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/mmapped.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3DF11D76E78003B6129 /* plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = plugin.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/plugin.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3E011D76E78003B6129 /* stat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stat.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/stat.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3E111D76E78003B6129 /* write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = write.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/write.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3E211D76E78003B6129 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zip.c; path = "../../thirdparty/zziplib/zziplib-0.13.58/zzip/zip.c"; sourceTree = SOURCE_ROOT; };
+		EAD3E3F611D7701A003B6129 /* AABB.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AABB.cpp; sourceTree = "<group>"; };
+		EAD3E3F711D7701A003B6129 /* io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = io.cpp; sourceTree = "<group>"; };
+		EAD3E3F811D7701A003B6129 /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
+		EAD3E3F911D7701A003B6129 /* Quat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quat.cpp; sourceTree = "<group>"; };
+		EAD3E3FA11D7701A003B6129 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
+		EAD3E3FB11D7701A003B6129 /* Vec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vec2.cpp; sourceTree = "<group>"; };
+		EAD3E3FC11D7701A003B6129 /* Vec3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vec3.cpp; sourceTree = "<group>"; };
+		EAD3E3FD11D7701A003B6129 /* Vec4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vec4.cpp; sourceTree = "<group>"; };
+		EAD3E40811D77043003B6129 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		EAD3E40911D77043003B6129 /* ColorGradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorGradient.cpp; sourceTree = "<group>"; };
+		EAD3E40A11D77043003B6129 /* io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = io.cpp; sourceTree = "<group>"; };
+		EAD3E41111D77080003B6129 /* UniformBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformBlock.cpp; sourceTree = "<group>"; };
+		EAD3E41511D770BE003B6129 /* RoundedRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoundedRect.cpp; path = ../lostengine/lost/mesh/RoundedRect.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E41911D770CC003B6129 /* Sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sphere.cpp; path = ../lostengine/lost/mesh/Sphere.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E41D11D770DA003B6129 /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Line.cpp; path = ../lostengine/lost/mesh/Line.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E42111D7713C003B6129 /* LostAudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostAudio.cpp; path = ../lostengine/lost/lua/bindings/LostAudio.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E42911D77178003B6129 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = ../lostengine/lost/audio/Engine.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E42A11D77178003B6129 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = ../lostengine/lost/audio/Source.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E42B11D77178003B6129 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = ../lostengine/lost/audio/VorbisFile.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43011D7718E003B6129 /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../lostengine/lost/al/Buffer.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43111D7718E003B6129 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = ../lostengine/lost/al/Context.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43211D7718E003B6129 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Debug.cpp; path = ../lostengine/lost/al/Debug.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43311D7718E003B6129 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = ../lostengine/lost/al/Device.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43411D7718E003B6129 /* Listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Listener.cpp; path = ../lostengine/lost/al/Listener.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43511D7718E003B6129 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = ../lostengine/lost/al/Source.cpp; sourceTree = SOURCE_ROOT; };
+		EAD3E43D11D771D7003B6129 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		EAD94E6C1148461D0027F10E /* disc.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disc.vs; sourceTree = "<group>"; };
 		EAD94E6D1148461D0027F10E /* cube.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.lua; sourceTree = "<group>"; };
 		EAD94E6E1148461D0027F10E /* disc.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disc.fs; sourceTree = "<group>"; };
@@ -484,6 +560,7 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				EABA7D9D112F3BB60016E322 /* OpenGLES.framework in Frameworks */,
 				EAA413B1114455FF002FBD5F /* QuartzCore.framework in Frameworks */,
+				EAD3E43E11D771D7003B6129 /* OpenAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +584,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				EAD3E43D11D771D7003B6129 /* OpenAL.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -561,6 +639,7 @@
 				EABA7BCE112F20410016E322 /* boost */,
 				EABA7BAA112F20060016E322 /* luabind */,
 				EABA7B69112F1F5E0016E322 /* lua */,
+				EAD3E3D511D76E68003B6129 /* zziplib */,
 			);
 			name = thirdparty;
 			sourceTree = "<group>";
@@ -844,7 +923,9 @@
 		EABA7C91112F22190016E322 /* lost */ = {
 			isa = PBXGroup;
 			children = (
+				EAD3E42F11D7717E003B6129 /* al */,
 				EABA7DCE112F3EA80016E322 /* application */,
+				EAD3E42511D7715E003B6129 /* audio */,
 				EABA7C92112F22300016E322 /* bitmap */,
 				EABA7C9B112F228F0016E322 /* camera */,
 				EABA7CA2112F229C0016E322 /* common */,
@@ -887,6 +968,9 @@
 				EABA7CA3112F229C0016E322 /* Logger.cpp */,
 				EABA7CA4112F229C0016E322 /* Profiler.cpp */,
 				EABA7CA5112F229C0016E322 /* Data.cpp */,
+				EAD3E40811D77043003B6129 /* Color.cpp */,
+				EAD3E40911D77043003B6129 /* ColorGradient.cpp */,
+				EAD3E40A11D77043003B6129 /* io.cpp */,
 			);
 			name = common;
 			path = ../lostengine/lost/common;
@@ -939,6 +1023,7 @@
 				EABA7CC9112F22BC0016E322 /* ShaderProgram.cpp */,
 				EABA7CCA112F22BC0016E322 /* Texture.cpp */,
 				EAA4139911445509002FBD5F /* Uniform.cpp */,
+				EAD3E41111D77080003B6129 /* UniformBlock.cpp */,
 				EABA7CCB112F22BC0016E322 /* Utils.cpp */,
 				EAA4139711445503002FBD5F /* VertexAttribute.cpp */,
 				EABA7CCC112F22BC0016E322 /* VertexShader.cpp */,
@@ -975,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				EABA7CE3112F22E10016E322 /* LostApplication.cpp */,
+				EAD3E42111D7713C003B6129 /* LostAudio.cpp */,
 				EABA7CE4112F22E10016E322 /* LostBitmap.cpp */,
 				EABA7CE5112F22E10016E322 /* LostCamera.cpp */,
 				EABA7CE6112F22E10016E322 /* LostCommon.cpp */,
@@ -998,6 +1084,14 @@
 			isa = PBXGroup;
 			children = (
 				EABA7D0C112F22F10016E322 /* RectPacker.cpp */,
+				EAD3E3F611D7701A003B6129 /* AABB.cpp */,
+				EAD3E3F711D7701A003B6129 /* io.cpp */,
+				EAD3E3F811D7701A003B6129 /* Matrix.cpp */,
+				EAD3E3F911D7701A003B6129 /* Quat.cpp */,
+				EAD3E3FA11D7701A003B6129 /* Rect.cpp */,
+				EAD3E3FB11D7701A003B6129 /* Vec2.cpp */,
+				EAD3E3FC11D7701A003B6129 /* Vec3.cpp */,
+				EAD3E3FD11D7701A003B6129 /* Vec4.cpp */,
 			);
 			name = math;
 			path = ../lostengine/lost/math;
@@ -1008,10 +1102,13 @@
 			children = (
 				EA4697F6115991AE00919BA8 /* Disc.cpp */,
 				EABA7D0F112F22F70016E322 /* Loader.cpp */,
+				EAD3E41D11D770DA003B6129 /* Line.cpp */,
 				EABA7D10112F22F70016E322 /* Mesh.cpp */,
 				EABA7D11112F22F70016E322 /* Quad.cpp */,
 				EABA7D12112F22F70016E322 /* Rect.cpp */,
+				EAD3E41511D770BE003B6129 /* RoundedRect.cpp */,
 				EABA7D13112F22F70016E322 /* ScaleGrid.cpp */,
+				EAD3E41911D770CC003B6129 /* Sphere.cpp */,
 				EA4697F4115991A800919BA8 /* TextureManager.cpp */,
 			);
 			name = mesh;
@@ -1072,6 +1169,48 @@
 			name = application;
 			path = ../lostengine/lost/application;
 			sourceTree = SOURCE_ROOT;
+		};
+		EAD3E3D511D76E68003B6129 /* zziplib */ = {
+			isa = PBXGroup;
+			children = (
+				EAD3E3D711D76E78003B6129 /* dir.c */,
+				EAD3E3D811D76E78003B6129 /* err.c */,
+				EAD3E3D911D76E78003B6129 /* fetch.c */,
+				EAD3E3DA11D76E78003B6129 /* file.c */,
+				EAD3E3DB11D76E78003B6129 /* fseeko.c */,
+				EAD3E3DC11D76E78003B6129 /* info.c */,
+				EAD3E3DD11D76E78003B6129 /* memdisk.c */,
+				EAD3E3DE11D76E78003B6129 /* mmapped.c */,
+				EAD3E3DF11D76E78003B6129 /* plugin.c */,
+				EAD3E3E011D76E78003B6129 /* stat.c */,
+				EAD3E3E111D76E78003B6129 /* write.c */,
+				EAD3E3E211D76E78003B6129 /* zip.c */,
+			);
+			name = zziplib;
+			sourceTree = "<group>";
+		};
+		EAD3E42511D7715E003B6129 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				EAD3E42911D77178003B6129 /* Engine.cpp */,
+				EAD3E42A11D77178003B6129 /* Source.cpp */,
+				EAD3E42B11D77178003B6129 /* VorbisFile.cpp */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
+		EAD3E42F11D7717E003B6129 /* al */ = {
+			isa = PBXGroup;
+			children = (
+				EAD3E43011D7718E003B6129 /* Buffer.cpp */,
+				EAD3E43111D7718E003B6129 /* Context.cpp */,
+				EAD3E43211D7718E003B6129 /* Debug.cpp */,
+				EAD3E43311D7718E003B6129 /* Device.cpp */,
+				EAD3E43411D7718E003B6129 /* Listener.cpp */,
+				EAD3E43511D7718E003B6129 /* Source.cpp */,
+			);
+			name = al;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -1137,7 +1276,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/${PRODUCT_NAME}.app/lost\"\ncp -R ../lostengine/lost/lua/lost \"${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/${PRODUCT_NAME}.app/\"\n";
+			shellScript = "rm -fR \"${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/${PRODUCT_NAME}.app/lost\"\ncp -R ../lostengine/resources/lost \"${BUILD_DIR}/${CONFIGURATION}${EFFECTIVE_PLATFORM_NAME}/${PRODUCT_NAME}.app/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1367,6 +1506,43 @@
 				EAA413A6114455BB002FBD5F /* VertexShader.cpp in Sources */,
 				EA4697F5115991A800919BA8 /* TextureManager.cpp in Sources */,
 				EA4697F7115991AE00919BA8 /* Disc.cpp in Sources */,
+				EAD3E3E311D76E78003B6129 /* dir.c in Sources */,
+				EAD3E3E411D76E78003B6129 /* err.c in Sources */,
+				EAD3E3E511D76E78003B6129 /* fetch.c in Sources */,
+				EAD3E3E611D76E78003B6129 /* file.c in Sources */,
+				EAD3E3E711D76E78003B6129 /* fseeko.c in Sources */,
+				EAD3E3E811D76E78003B6129 /* info.c in Sources */,
+				EAD3E3E911D76E78003B6129 /* memdisk.c in Sources */,
+				EAD3E3EA11D76E78003B6129 /* mmapped.c in Sources */,
+				EAD3E3EB11D76E78003B6129 /* plugin.c in Sources */,
+				EAD3E3EC11D76E78003B6129 /* stat.c in Sources */,
+				EAD3E3ED11D76E78003B6129 /* write.c in Sources */,
+				EAD3E3EE11D76E78003B6129 /* zip.c in Sources */,
+				EAD3E3FE11D7701A003B6129 /* AABB.cpp in Sources */,
+				EAD3E3FF11D7701A003B6129 /* io.cpp in Sources */,
+				EAD3E40011D7701A003B6129 /* Matrix.cpp in Sources */,
+				EAD3E40111D7701A003B6129 /* Quat.cpp in Sources */,
+				EAD3E40211D7701A003B6129 /* Rect.cpp in Sources */,
+				EAD3E40311D7701A003B6129 /* Vec2.cpp in Sources */,
+				EAD3E40411D7701A003B6129 /* Vec3.cpp in Sources */,
+				EAD3E40511D7701A003B6129 /* Vec4.cpp in Sources */,
+				EAD3E40B11D77043003B6129 /* Color.cpp in Sources */,
+				EAD3E40C11D77043003B6129 /* ColorGradient.cpp in Sources */,
+				EAD3E40D11D77043003B6129 /* io.cpp in Sources */,
+				EAD3E41211D77080003B6129 /* UniformBlock.cpp in Sources */,
+				EAD3E41611D770BE003B6129 /* RoundedRect.cpp in Sources */,
+				EAD3E41A11D770CC003B6129 /* Sphere.cpp in Sources */,
+				EAD3E41E11D770DA003B6129 /* Line.cpp in Sources */,
+				EAD3E42211D7713C003B6129 /* LostAudio.cpp in Sources */,
+				EAD3E42C11D77178003B6129 /* Engine.cpp in Sources */,
+				EAD3E42D11D77178003B6129 /* Source.cpp in Sources */,
+				EAD3E42E11D77178003B6129 /* VorbisFile.cpp in Sources */,
+				EAD3E43611D7718E003B6129 /* Buffer.cpp in Sources */,
+				EAD3E43711D7718E003B6129 /* Context.cpp in Sources */,
+				EAD3E43811D7718E003B6129 /* Debug.cpp in Sources */,
+				EAD3E43911D7718E003B6129 /* Device.cpp in Sources */,
+				EAD3E43A11D7718E003B6129 /* Listener.cpp in Sources */,
+				EAD3E43B11D7718E003B6129 /* Source.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1398,10 +1574,12 @@
 					"\"$(SRCROOT)/../../thirdparty/fhtagn/fhtagn_2008_11_12/include\"",
 					"\"$(SRCROOT)/../../thirdparty/fhtagn/fhtagn_2008_11_12/source\"",
 					"\"$(SRCROOT)/../lostengine\"",
+					"\"$(SRCROOT)/../../thirdparty/zziplib/zziplib-0.13.58\"",
 				);
 				INFOPLIST_FILE = "MetaMeta-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MetaMeta;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Debug;
 		};
@@ -1433,10 +1611,12 @@
 					"\"$(SRCROOT)/../../thirdparty/fhtagn/fhtagn_2008_11_12/include\"",
 					"\"$(SRCROOT)/../../thirdparty/fhtagn/fhtagn_2008_11_12/source\"",
 					"\"$(SRCROOT)/../lostengine\"",
+					"\"$(SRCROOT)/../../thirdparty/zziplib/zziplib-0.13.58\"",
 				);
 				INFOPLIST_FILE = "MetaMeta-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MetaMeta;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
 		};

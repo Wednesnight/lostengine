@@ -271,8 +271,10 @@ namespace lost
           case GL_RGBA:
             buffer->resetBitFormat(GL_RGB);
             break;
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
           case GL_RGBA8:
             buffer->resetBitFormat(GL_RGBA);
+#endif
             break;
           default:
             ostringstream os;
@@ -440,9 +442,13 @@ namespace lost
        * defaults
        */
       Vec2 size(0,0);
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
       GLenum color = GL_RGBA8;
       GLenum depth = LGL_DEPTH_COMPONENT32;
-      
+#else
+      GLenum color = GL_RGBA;
+      GLenum depth = LGL_DEPTH_COMPONENT24;
+#endif      
       bool done = false;
       unsigned int step = 1;
 
