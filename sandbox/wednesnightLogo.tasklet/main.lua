@@ -17,7 +17,7 @@ windowParams = WindowParams("logo test", windowRect)
 local exportScreens = false
 local running = true
 
-function startup(tasklet)
+function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   animator = Animator()
   logoEntity = LogoEntity()
@@ -26,7 +26,7 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   if not exportScreens then
     animator:update(tasklet, rootEntity)
   else
@@ -36,6 +36,6 @@ function update(tasklet)
   return running
 end
 
-function shutdown(tasklet)
+function shutdown()
   return true
 end

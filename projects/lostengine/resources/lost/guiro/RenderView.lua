@@ -5,7 +5,6 @@ require("lost.guiro.Image")
 
 lost.common.Class "lost.guiro.RenderView" "lost.guiro.Image" {}
 
-using "lost.application.currentTasklet"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.Rect"
@@ -81,7 +80,7 @@ function RenderView:afterLayout()
 end
 
 function RenderView:beforeRedraw()
-  self._renderViewNode:process(currentTasklet.window.context)
+  self._renderViewNode:process(tasklet.window.context)
   self._oldShader = self:shader()
   lost.guiro.Image.beforeRedraw(self)
 end

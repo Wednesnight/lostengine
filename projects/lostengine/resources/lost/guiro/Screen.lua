@@ -18,17 +18,16 @@ require("lost.guiro.event.EventManager")
   ]]
 lost.common.Class "lost.guiro.Screen" "lost.guiro.View" {}
 
-using "lost.application.currentTasklet"
 using "lost.guiro.event.EventManager"
 
 function Screen:constructor(textureManager)
   lost.guiro.View.constructor(self, textureManager)
 
   self.eventManager = EventManager(self)
-  self:setEventDispatcher(currentTasklet.eventDispatcher)
+  self:setEventDispatcher(tasklet.eventDispatcher)
 
   -- init size
-  local windowRect = currentTasklet.window.params.rect
+  local windowRect = tasklet.window.params.rect
   self.bounds = lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height)
 
   self.focusable = true
@@ -45,9 +44,7 @@ function Screen:constructor(textureManager)
   self:showBackground(false)
   self:showFrame(false)
   
-  if currentTasklet ~= nil then
-    currentTasklet.uiNode:add(self.rootNode)
-  end
+  tasklet.uiNode:add(self.rootNode)
 
   -- trigger updates
   self:needsLayout()

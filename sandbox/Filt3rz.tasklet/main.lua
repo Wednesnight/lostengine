@@ -9,7 +9,6 @@ using "lost.camera.Camera2D"
 using "lost.camera.Camera3D"
 using "lost.application.WindowParams"
 using "lost.math.MatrixTranslation"
-using "lost.application.currentTasklet"
 
 fboSize = Vec2(256, 256)
 numPanels = 5
@@ -40,7 +39,7 @@ function addPanelNode(rootNode, tex, colIndex, rowIndex, theShader)
   rootNode:add(lost.rg.Draw.create(quad))
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = "Filt3rz"
   log.debug("startup")
 
@@ -193,12 +192,12 @@ function startup(tasklet)
   scene:add(rootTextNode)
   
   -- add to tasklet node
-  currentTasklet.renderNode:add(scene)
+  tasklet.renderNode:add(scene)
 
   return true;
 end
 
-function update(tasklet)
+function update()
   local currentSec = lost.platform.currentTimeSeconds()
   local delta = currentSec - passedSec
   

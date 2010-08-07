@@ -14,7 +14,7 @@ windowParams = WindowParams("Guiroscope", Rect(300,300,800,600))
 dcl = nil
 screen = nil
 
-function startup(tasklet)
+function startup()
 
   log.debug("starting up")
 
@@ -31,11 +31,11 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   return running
 end
 
-function shutdown(tasklet)
+function shutdown()
   log.debug("shutting down")
   return true
 end

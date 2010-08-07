@@ -28,7 +28,7 @@ function updateButtons()
   screen("ui")("buttons")("stack")("matcap"):pushed(scene.matcapEnabled)
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = _meta.name
   tasklet.clearNode.active = false
 
@@ -109,7 +109,7 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   scene.firstPass:process(tasklet.window.context)
   -- shadow map debug output?
   if debug then

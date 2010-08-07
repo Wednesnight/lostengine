@@ -11,7 +11,7 @@ windowParams = WindowParams(taskletName, Rect(200,200,640,480))
 
 local controller = require("controller")
 
-function startup(tasklet)
+function startup()
   controller.running = true
 
   tasklet.name = taskletName
@@ -24,6 +24,6 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   return controller.running
 end

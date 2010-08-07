@@ -53,7 +53,7 @@ function testcases()
   assert(test(Bounds("left","bottom",".5",".25"), prect, Rect(12,24, 50,25)))
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = "LayoutIntegration"
   tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
@@ -87,11 +87,11 @@ function startup(tasklet)
   return running
 end
 
-function update(tasklet)
+function update()
   return running
 end
 
-function shutdown(tasklet)
+function shutdown()
   return true
 end
 

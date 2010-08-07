@@ -2,7 +2,6 @@ using "lost.resource.Loader"
 using "lost.resource.FilesystemRepository"
 using "lost.resource.ApplicationResourceRepository"
 using "lost.application.SpawnTaskletEvent"
-using "lost.application.currentTasklet"
 using "lost.common.Color"
 
 return dcl.guiro:Screen
@@ -12,7 +11,7 @@ return dcl.guiro:Screen
     bubble =
     {
       drop = function(event)
-        currentTasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(event.filename))
+        tasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(event.filename))
       end
     }
   },

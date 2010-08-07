@@ -80,7 +80,7 @@ namespace lost
     void Tasklet::init()
     {  
       // populate self into lua context
-      lua->globals["lost"]["application"]["currentTasklet"] = this;
+      lua->globals["tasklet"] = this;
 
       // try to load the main script and memorize result in a flag
       scriptLoaded = false;
@@ -157,7 +157,7 @@ namespace lost
       bool result = true;
       if(hasLuaStartup)
       {
-        result = call_function<bool>(lsh->luaStartup, this);
+        result = call_function<bool>(lsh->luaStartup);
       }
       updateQueue->process(this);      
       return result;
@@ -168,7 +168,7 @@ namespace lost
       bool result = true;
       if(hasLuaUpdate)
       {
-        result = call_function<bool>(lsh->luaUpdate, this);
+        result = call_function<bool>(lsh->luaUpdate);
       }
       updateQueue->process(this);      
       return  result;      
@@ -179,7 +179,7 @@ namespace lost
       bool result = true;
       if(hasLuaShutdown)
       {
-        result = call_function<bool>(lsh->luaShutdown, this);
+        result = call_function<bool>(lsh->luaShutdown);
       }
       return  result;      
     }

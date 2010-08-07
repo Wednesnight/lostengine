@@ -16,7 +16,7 @@ windowParams = WindowParams("LostEngine", Rect(50,800,400,128))
 --[[
     tasklet startup
   ]]
-function startup(tasklet)
+function startup()
 
   -- setup tasklet
   tasklet.name = "LostEngine Launcher"
@@ -42,8 +42,7 @@ end
     key handler
   ]]
 function keyHandler(event)
-  local tasklet = lost.application.currentTasklet
-  if event.key == lost.application.K_ESCAPE and tasklet ~= nil then
+  if event.key == lost.application.K_ESCAPE then
     tasklet.window:close()
   end
 end

@@ -30,7 +30,7 @@ rootNode = nil
 dcl = nil
 screen = nil
 
-function startup(tasklet)
+function startup()
   log.debug("startup")
   dcl = lost.declarative.Context(tasklet.loader)
 --[[  rootNode = dcl.rg:Node
@@ -101,12 +101,12 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   
   return true
 end
 
-function shutdown(tasklet)
+function shutdown()
   log.debug("shutdown")
   return true
 end

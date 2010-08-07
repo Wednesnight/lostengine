@@ -39,7 +39,7 @@ function mb(mpos, mrad, x,y)
   return v*falloff
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = taskletName
   tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
@@ -110,7 +110,7 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   return running
 end
 

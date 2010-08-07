@@ -3,10 +3,6 @@
   ]]
 module("lost.common", package.seeall)
 
-using "lost.application.currentTasklet"
-
 function callLater(func, obj)
-  if currentTasklet ~= nil then
-    currentTasklet.updateQueue:queue(func, obj)
-  end
+  tasklet.updateQueue:queue(func, obj)
 end
