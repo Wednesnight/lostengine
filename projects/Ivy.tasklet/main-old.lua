@@ -12,7 +12,7 @@ currentPicNode = nil -- receives a quad that draws the dropped bitmap at 0,0
 bitmapLoader = lost.resource.Loader.create()
 bitmapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
 
-function startup(tasklet)
+function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, dropHandler)
   rootNode = dcl.rg:Node
@@ -31,13 +31,13 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   rootNode:process(tasklet.window.context)
   tasklet.window.context:swapBuffers()
   return true
 end
 
-function shutdown(tasklet)
+function shutdown()
   return true
 end
 

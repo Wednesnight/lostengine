@@ -22,7 +22,7 @@ dcl = nil
 radius = 32
 quadsize = Vec2(radius*2, radius*2)
 
-function startup(tasklet)
+function startup()
   textureManager = lost.mesh.TextureManager.create()
   textureManager.maxRadius = 256 -- change this to test effect on quads with larger diameter
   gradients = require("gradients")
@@ -263,7 +263,7 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   return running
 end
 

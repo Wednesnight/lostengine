@@ -16,7 +16,7 @@ screenSize = Vec2(imageSize.x*2, imageSize.y)
 hasWindow = true
 windowParams = WindowParams("Schwurbel", Rect(50, 200, screenSize.width, screenSize.height))
 
-function startup(tasklet)
+function startup()
   tasklet.name = "Schwurbel"
   log.debug("startup")
 
@@ -99,7 +99,7 @@ function startup(tasklet)
   return true;
 end
 
-function update(tasklet)
+function update()
   local currentSec = lost.platform.currentTimeSeconds()
   local delta = currentSec - passedSec
   if animated then

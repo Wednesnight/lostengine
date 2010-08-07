@@ -69,7 +69,7 @@ local animationManager = nil
 -- Initialize the pseudo random number generator
 math.randomseed(os.time())
 
-function startup(tasklet)
+function startup()
   _tasklet = tasklet
 
   tasklet.name = "Colorado"
@@ -249,7 +249,7 @@ function startup(tasklet)
   return true
 end
 
-function shutdown(tasklet)
+function shutdown()
   if scoresChanged then
     local scoresFile, err = io.open(tasklet.loader:locate("resources/scores.lua"), "w+")
     if scoresFile ~= nil then
@@ -536,7 +536,7 @@ function rebuildScoretable(newIndex)
   scoreboard:addSubview(scoretable)
 end
 
-function update(tasklet)
+function update()
   if running then
     if not animationManager:process() then
       tasklet.waitForEvents = false

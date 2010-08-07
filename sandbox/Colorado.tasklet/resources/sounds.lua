@@ -5,9 +5,9 @@ local _engine = lost.audio.Engine.create()
 local _blockRemoved = _engine:createSource()
 local _pathRemoved = _engine:createSource()
 local _levelFinished = _engine:createSource()
-_blockRemoved:initWithFile(lost.application.currentTasklet.loader:load("resources/sounds/block.ogg"))
-_pathRemoved:initWithFile(lost.application.currentTasklet.loader:load("resources/sounds/path.ogg"))
-_levelFinished:initWithFile(lost.application.currentTasklet.loader:load("resources/sounds/wannabill.ogg"))
+_blockRemoved:initWithFile(tasklet.loader:load("resources/sounds/block.ogg"))
+_pathRemoved:initWithFile(tasklet.loader:load("resources/sounds/path.ogg"))
+_levelFinished:initWithFile(tasklet.loader:load("resources/sounds/wannabill.ogg"))
 
 local sounds = {enabled = true}
 

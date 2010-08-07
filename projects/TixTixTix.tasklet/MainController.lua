@@ -21,12 +21,12 @@ using "lost.math.Rect"
 using "lost.application.ResizeEvent.MAIN_WINDOW_RESIZE"
 
 function MainController:constructor()
-  _G.startup = function(tasklet) return self:startup(tasklet) end
-  _G.update = function(tasklet) return self:update(tasklet) end
-  _G.shutdown = function(tasklet) return self:shutdown(tasklet) end
+  _G.startup = function() return self:startup() end
+  _G.update = function() return self:update() end
+  _G.shutdown = function() return self:shutdown() end
 end
 
-function MainController:startup(tasklet)
+function MainController:startup()
 
   -- init tasklet attributes
   tasklet.name = "TixTixTix"
@@ -69,12 +69,12 @@ function MainController:startup(tasklet)
   return self.running
 end
 
-function MainController:update(tasklet)
+function MainController:update()
   self.animation:update(tasklet)
   return self.running
 end
 
-function MainController:shutdown(tasklet)
+function MainController:shutdown()
   self.animation:stop()
 end
 

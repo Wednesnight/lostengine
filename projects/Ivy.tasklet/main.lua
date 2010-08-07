@@ -13,7 +13,7 @@ function keyHandler(event)
   end
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = "Ivy"
   tasklet.waitForEvents = true
 
@@ -35,7 +35,7 @@ function startup(tasklet)
   return true
 end
 
-function update(tasklet)
+function update()
   return running
 end
 

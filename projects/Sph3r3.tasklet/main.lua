@@ -51,7 +51,7 @@ function createDisc()
   }
 end
 
-function startup(tasklet)
+function startup()
   tasklet.name = "Sphere"
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   dcl = lost.declarative.Context(tasklet.loader)
@@ -95,12 +95,12 @@ function startup(tasklet)
   circleMesh2 = rootNode:recursiveFindByName("circle2").mesh
   lasttime = lost.platform.currentTimeMilliSeconds()
   
-  lost.application.currentTasklet.renderNode:add(rootNode)
+  tasklet.renderNode:add(rootNode)
   cam = rootNode:recursiveFindByName("cam").cam
   return true
 end
 
-function update(tasklet)
+function update()
   local now = lost.platform.currentTimeMilliSeconds()
   local delta = now - lasttime
   angle = math.fmod(angle + (delta/speed), 360)
