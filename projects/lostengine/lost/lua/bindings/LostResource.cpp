@@ -5,6 +5,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
+#include "lost/common/Data.h"
 
 using namespace luabind;
 using namespace lost::resource;

@@ -24,6 +24,7 @@
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/gl.h"
+#include <boost/filesystem.hpp>
 
 using namespace boost;
 using namespace luabind;
@@ -45,6 +46,7 @@ namespace lost
       luabind::object luaStartup;
       luabind::object luaUpdate;
       luabind::object luaShutdown;
+      luabind::object config;
     };
       
     Tasklet::Tasklet(LoaderPtr inLoader)
@@ -54,6 +56,8 @@ namespace lost
       name = "<unnamed tasklet>";
 	    window = NULL;
 
+      scriptLoaded = false;
+      configLoaded = false;
       loader = inLoader;
       eventDispatcher.reset(new event::EventDispatcher());
       lua.reset(new State(loader));
@@ -82,8 +86,14 @@ namespace lost
       // populate self into lua context
       lua->globals["tasklet"] = this;
 
+      configLoaded = config.load(lua, loader);
+      WindowParams windowParams;
+      
+      windowParams.caption = config.windowTitle;
+      windowParams.rect = config.windowRect;
+      name = config.taskletName;
+      waitForEvents = config.taskletWaitForEvents;
       // try to load the main script and memorize result in a flag
-      scriptLoaded = false;
       try
       {
         lua->doFile("main.lua");
@@ -96,10 +106,18 @@ namespace lost
 
       // try to extract window params and flag from interpreter
       // the values are optional and set as globals
-      luabind::object obj = lua->globals["windowParams"];
-      if(obj)
+      // they will only be used if no config was loaded!
+      if(!configLoaded)
       {
-        createWindow(object_cast<WindowParams>(obj));
+        luabind::object obj = lua->globals["windowParams"];
+        if(obj)
+        {
+          windowParams = object_cast<WindowParams>(obj);
+        }
+      }
+      if(config.taskletHasWindow)
+      {
+        createWindow(windowParams);
       }
             
       // get lua functions if they are present
@@ -118,10 +136,6 @@ namespace lost
     {
       // first: clear the dispatcher/callbacks and cleanup all lua callback resources
       eventDispatcher->clear();
-      luabind::object nil;
-      lsh->luaStartup = nil;
-      lsh->luaUpdate = nil;
-      lsh->luaShutdown = nil;
       lsh.reset();
       clearNode.reset();
       renderNode.reset();

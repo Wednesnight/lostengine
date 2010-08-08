@@ -43,9 +43,25 @@ namespace lost
       std::string result = inPath.string();
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
       {
-        if(repositories[idx]->locate(result))
+        if(repositories[idx]->exists(result))
           break;
       }
+      return result;
+    }
+
+    bool Loader::exists(const boost::filesystem::path& inPath)
+    {
+      bool result = false;
+      std::string p = inPath.string();
+      for (unsigned int idx = 0; idx < repositories.size(); ++idx)
+      {
+        if(repositories[idx]->exists(p))
+        {
+          result = true;
+          break;
+        }
+      }
+      
       return result;
     }
 

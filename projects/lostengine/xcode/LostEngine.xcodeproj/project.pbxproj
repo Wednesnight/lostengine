@@ -1361,6 +1361,9 @@
 		EA8A15B20FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
 		EA8A15B30FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
 		EA8A15B40FA27BBF00E42FBE /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */; };
+		EA8D535A120E007E0098CAFD /* TaskletConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8D5359120E007E0098CAFD /* TaskletConfig.cpp */; };
+		EA8D535B120E007E0098CAFD /* TaskletConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8D5359120E007E0098CAFD /* TaskletConfig.cpp */; };
+		EA8D535C120E007E0098CAFD /* TaskletConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA8D5359120E007E0098CAFD /* TaskletConfig.cpp */; };
 		EA91363E0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA91363F0E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
 		EA9136400E994F18006884D7 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA91363D0E994F18006884D7 /* Texture.cpp */; };
@@ -2019,6 +2022,7 @@
 		EA8A15250FA26D7600E42FBE /* Draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Draw.cpp; path = rg/Draw.cpp; sourceTree = "<group>"; };
 		EA8A15260FA26D7600E42FBE /* DepthTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DepthTest.cpp; path = rg/DepthTest.cpp; sourceTree = "<group>"; };
 		EA8A15B10FA27BBF00E42FBE /* LostRg.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostRg.cpp; path = bindings/LostRg.cpp; sourceTree = "<group>"; };
+		EA8D5359120E007E0098CAFD /* TaskletConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskletConfig.cpp; sourceTree = "<group>"; };
 		EA91363D0E994F18006884D7 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		EA92A2F511682A5700B32ECE /* UniformBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UniformBlock.cpp; sourceTree = "<group>"; };
 		EA9365A91163F0A50013F765 /* RoundedRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoundedRect.cpp; path = mesh/RoundedRect.cpp; sourceTree = "<group>"; };
@@ -2927,6 +2931,7 @@
 				8D48E4CE10FE473E00338B01 /* QueueEntityLua.cpp */,
 				EAAD3333113ADA0F001111C8 /* Runner.cpp */,
 				8D40911A0F89322D00163B63 /* Tasklet.cpp */,
+				EA8D5359120E007E0098CAFD /* TaskletConfig.cpp */,
 				8DA741C51142D6F80057ACC0 /* TaskletThread.cpp */,
 				8DE56F660F3118600072FB28 /* Window.cpp */,
 			);
@@ -4033,6 +4038,7 @@
 				8D2524F01198C7D700FEEAFA /* btVoronoiSimplexSolver.cpp in Sources */,
 				8D2F97A911A315E20084E459 /* Line.cpp in Sources */,
 				8D2F98D111A3347A0084E459 /* LostAudio.cpp in Sources */,
+				EA8D535C120E007E0098CAFD /* TaskletConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4420,6 +4426,7 @@
 				8D2F988511A330990084E459 /* Listener.cpp in Sources */,
 				8D2F988611A330990084E459 /* Source.cpp in Sources */,
 				8D2F98D311A3347A0084E459 /* LostAudio.cpp in Sources */,
+				EA8D535A120E007E0098CAFD /* TaskletConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4826,6 +4833,7 @@
 				8D2524051198C7D700FEEAFA /* btVoronoiSimplexSolver.cpp in Sources */,
 				8D2F97A811A315E20084E459 /* Line.cpp in Sources */,
 				8D2F98CF11A3347A0084E459 /* LostAudio.cpp in Sources */,
+				EA8D535B120E007E0098CAFD /* TaskletConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
