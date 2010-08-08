@@ -2,7 +2,6 @@
 require("lost.declarative.Context")
 require("sizes")
 
-windowParams = lost.application.WindowParams("Ivy", lost.math.Rect(200,200,640,480))
 dcl = nil
 rootLoader = lost.resource.Loader.create()
 rootLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
@@ -14,9 +13,6 @@ function keyHandler(event)
 end
 
 function startup()
-  tasklet.name = "Ivy"
-  tasklet.waitForEvents = true
-
   running = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   
