@@ -29,7 +29,6 @@ end
 function MainController:startup()
 
   -- init tasklet attributes
-  tasklet.name = "TixTixTix"
   tasklet.clearNode.active = false
   -- init members
   self.running = true

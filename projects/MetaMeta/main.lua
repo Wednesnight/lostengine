@@ -16,8 +16,7 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotX = lost.math.MatrixRotX
 local MatrixRotZ = lost.math.MatrixRotZ
 
-screensize = Vec2(320,480)
-windowParams = WindowParams("Sphere", Rect(50,50,screensize.x, screensize.y))
+config = require("config")
 running = true
 dcl = nil
 rootNode = nil
@@ -52,7 +51,6 @@ function createDisc()
 end
 
 function startup()
-  tasklet.name = "Sphere"
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   dcl = lost.declarative.Context(tasklet.loader)
     
@@ -70,7 +68,7 @@ function startup()
     dcl.rg:Camera3D
     {
       name = "cam",
-      viewport = Rect(0,0,screensize.x,screensize.y),
+      viewport = Rect(0,0,config.screenWidth,config.screenHeight),
       fovy=90,
       depth=Vec2(.01, 4000),
       position = Vec3(0,0,370),
