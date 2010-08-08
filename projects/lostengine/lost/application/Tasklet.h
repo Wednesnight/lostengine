@@ -10,6 +10,7 @@
 #include "lost/lua/forward.h"
 #include "lost/event/forward.h"
 #include "lost/rg/forward.h"
+#include "lost/application/TaskletConfig.h"
 
 namespace lost
 {
@@ -29,6 +30,7 @@ namespace lost
 
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
+      bool configLoaded; // true if config.lua was successfully loaded
 
       bool hasLuaStartup;
       bool hasLuaUpdate;
@@ -56,6 +58,7 @@ namespace lost
       event::EventDispatcherPtr       eventDispatcher;    
       std::string                     name;
       resource::LoaderPtr             loader;
+      TaskletConfig                   config;
 
 	    Window*                         window;         // contains the window pointer after init() if it could be created
       rg::NodePtr                     clearNode;      // default clear node, always present

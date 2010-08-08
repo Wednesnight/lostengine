@@ -2,16 +2,25 @@
 #define LOST_RESOURCE_LOADER_H
 
 #include <vector>
-#include "lost/resource/Repository.h"
 #include <stdexcept>
+#include "lost/common/forward.h"
+#include "lost/resource/forward.h"
+
+// filesystem path foward declaration
+namespace boost
+{
+namespace filesystem
+{
+    template<typename S, typename PT> class basic_path;
+    struct path_traits;
+    typedef basic_path< std::string, path_traits > path;
+}
+}
 
 namespace lost
 {
   namespace resource
   {
-    struct Loader;
-    typedef lost::shared_ptr<Loader> LoaderPtr;
-
     struct LoaderError : public std::runtime_error { LoaderError(const std::string& error) : runtime_error(error) {} };
 
     struct Loader
@@ -21,6 +30,7 @@ namespace lost
 
       common::DataPtr load( const boost::filesystem::path& inPath);
       std::string locate(const boost::filesystem::path& inPath);
+      bool exists(const boost::filesystem::path& inPath);
       void addRepository( RepositoryPtr inRepository );
 
 

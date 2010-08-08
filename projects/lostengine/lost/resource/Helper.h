@@ -2,7 +2,7 @@
 #define LOST_RESOURCE_HELPER_H
 
 #include <string>
-#include "lost/common/Data.h"
+#include "lost/common/forward.h"
 
 namespace lost
 {
