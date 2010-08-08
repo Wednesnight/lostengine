@@ -10,16 +10,9 @@ local Camera3D = lost.camera.Camera3D
 local WindowParams = lost.application.WindowParams
 local MatrixTranslation = lost.math.MatrixTranslation
 
-imageSize = Vec2(400, 392)
-screenSize = Vec2(imageSize.x*2, imageSize.y)
-
-hasWindow = true
-windowParams = WindowParams("Schwurbel", Rect(50, 200, screenSize.width, screenSize.height))
-
 function startup()
-  tasklet.name = "Schwurbel"
   log.debug("startup")
-
+  config = require("config")
   running = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE, updateShader)
@@ -41,7 +34,7 @@ function startup()
     },
     dcl.rg:Camera2D
     {
-      viewport = Rect(0,0,screenSize.x,screenSize.y)
+      viewport = Rect(0,0,config.screenWidth,config.screenHeight)
     },
     dcl.rg:Draw
     {
@@ -49,7 +42,7 @@ function startup()
       mesh = dcl.mesh:Quad
       {
         filename = "foo.jpg",
-        size = imageSize,
+        size = Vec2(config.imageWidth, config.imageHeight),
         flip = true
       }
     },
@@ -67,7 +60,7 @@ function startup()
             magFilter = gl.GL_LINEAR
           }
         },
-        size = imageSize,
+        size = Vec2(config.imageWidth, config.imageHeight),
         flip = true,
         material = 
         {
@@ -77,7 +70,7 @@ function startup()
           },
           blend = true
         },
-        transform = MatrixTranslation(Vec3(imageSize.x,0,0))
+        transform = MatrixTranslation(Vec3(config.imageWidth,0,0))
       }
     }
   }
@@ -144,9 +137,9 @@ function keyHandler(event)
 end
 
 function updateShader(event)
-  if event.pos.x > imageSize.x then
+  if event.pos.x > config.imageWidth then
     shader:enable()
-    shader:set("pos", Vec2(((event.pos.x-imageSize.x)/imageSize.x)*2, ((imageSize.y-event.pos.y)/imageSize.y)*2))
+    shader:set("pos", Vec2(((event.pos.x-config.imageWidth)/config.imageWidth)*2, ((config.imageHeight-event.pos.y)/config.imageHeight)*2))
     shader:disable()
   end
 end

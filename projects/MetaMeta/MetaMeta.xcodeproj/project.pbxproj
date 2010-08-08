@@ -275,6 +275,8 @@
 		EAD94E6F1148461D0027F10E /* disc.vs in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6C1148461D0027F10E /* disc.vs */; };
 		EAD94E701148461D0027F10E /* cube.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6D1148461D0027F10E /* cube.lua */; };
 		EAD94E711148461D0027F10E /* disc.fs in Resources */ = {isa = PBXBuildFile; fileRef = EAD94E6E1148461D0027F10E /* disc.fs */; };
+		EAEDEE4B120F2AE700320364 /* TaskletConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAEDEE4A120F2AE700320364 /* TaskletConfig.cpp */; };
+		EAEDEE51120F2B1D00320364 /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = EAEDEE50120F2B1D00320364 /* config.lua */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -548,6 +550,8 @@
 		EAD94E6C1148461D0027F10E /* disc.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disc.vs; sourceTree = "<group>"; };
 		EAD94E6D1148461D0027F10E /* cube.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.lua; sourceTree = "<group>"; };
 		EAD94E6E1148461D0027F10E /* disc.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disc.fs; sourceTree = "<group>"; };
+		EAEDEE4A120F2AE700320364 /* TaskletConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskletConfig.cpp; sourceTree = "<group>"; };
+		EAEDEE50120F2B1D00320364 /* config.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -595,6 +599,7 @@
 				EAD94E6C1148461D0027F10E /* disc.vs */,
 				EAD94E6D1148461D0027F10E /* cube.lua */,
 				EAD94E6E1148461D0027F10E /* disc.fs */,
+				EAEDEE50120F2B1D00320364 /* config.lua */,
 				EAA41456114461A8002FBD5F /* main.lua */,
 				8D1107310486CEB800E47090 /* MetaMeta-Info.plist */,
 			);
@@ -1158,6 +1163,7 @@
 			isa = PBXGroup;
 			children = (
 				EAA4131A114451A6002FBD5F /* iphone */,
+				EAEDEE4A120F2AE700320364 /* TaskletConfig.cpp */,
 				EABA7DD8112F3EA80016E322 /* Application.cpp */,
 				EABA7DCF112F3EA80016E322 /* Queue.cpp */,
 				EABA7DD0112F3EA80016E322 /* QueueEntityLua.cpp */,
@@ -1259,6 +1265,7 @@
 				EAD94E6F1148461D0027F10E /* disc.vs in Resources */,
 				EAD94E701148461D0027F10E /* cube.lua in Resources */,
 				EAD94E711148461D0027F10E /* disc.fs in Resources */,
+				EAEDEE51120F2B1D00320364 /* config.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,6 +1550,7 @@
 				EAD3E43911D7718E003B6129 /* Device.cpp in Sources */,
 				EAD3E43A11D7718E003B6129 /* Listener.cpp in Sources */,
 				EAD3E43B11D7718E003B6129 /* Source.cpp in Sources */,
+				EAEDEE4B120F2AE700320364 /* TaskletConfig.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
