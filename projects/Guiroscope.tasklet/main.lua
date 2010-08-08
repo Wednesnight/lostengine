@@ -8,18 +8,12 @@ using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.common.Color"
 
-windowParams = WindowParams("Guiroscope", Rect(300,300,800,600))
-
 -- these are deliberately global so we can access them from startup/update/shutdown
 dcl = nil
 screen = nil
 
 function startup()
-
   log.debug("starting up")
-
-  tasklet.name = "Guiroscope"
-  tasklet.waitForEvents = true
 
   -- running state
   running = true

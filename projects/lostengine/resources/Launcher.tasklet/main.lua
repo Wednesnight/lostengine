@@ -5,23 +5,10 @@ using "lost.math.Rect"
 using "lost.application.ApplicationEvent"
 using "lost.declarative.Context"
 
-
---[[
-    setup windowParams
-    this should be done in startup, fix this after implementing Window:setParams()
-  ]]
-windowParams = WindowParams("LostEngine", Rect(50,800,400,128))
-
-
 --[[
     tasklet startup
   ]]
 function startup()
-
-  -- setup tasklet
-  tasklet.name = "LostEngine Launcher"
-  tasklet.waitForEvents = true
-
   dcl = Context(tasklet.loader)
   local screen = require("ui")
 
