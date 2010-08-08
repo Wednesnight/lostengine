@@ -11,8 +11,6 @@ using "lost.common.Color"
 using "lost.math.MatrixTranslation"
 using "lost.math.Vec3"
 
-windowParams = WindowParams("Colorado", Rect(50,50,640,480))
-
 local running = true
 local dcl = nil
 local _tasklet = nil
@@ -35,8 +33,9 @@ local boardColors = {
 local activeColors = nil
 local numStartBlocksPerColor = 4
 local maxColors = nil
-local blockSize = Vec2((windowParams.rect.width - boardPos.x*2) / (boardSize.x + 2),
-                       (windowParams.rect.height - boardPos.y*2) / (boardSize.y + 2))
+local config = require("config")
+local blockSize = Vec2((config.window.width - boardPos.x*2) / (boardSize.x + 2),
+                       (config.window.height - boardPos.y*2) / (boardSize.y + 2))
 
 local board = nil
 local boardNodes = nil
@@ -71,10 +70,6 @@ math.randomseed(os.time())
 
 function startup()
   _tasklet = tasklet
-
-  tasklet.name = "Colorado"
-  tasklet.waitForEvents = true
-
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, mouseClickHandler)
   tasklet.eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, resizeHandler)
 
@@ -83,7 +78,7 @@ function startup()
   dcl = lost.declarative.Context(tasklet.loader)
 
   camera = dcl.rg:Camera2D {
-    viewport = Rect(0, 0, windowParams.rect.width, windowParams.rect.height)
+    viewport = Rect(0, 0, config.window.width, config.window.height)
   }
   tasklet.renderNode:add(
     dcl.rg:Node
@@ -101,7 +96,7 @@ function startup()
     }
   )
 
-  boardFrame = lost.mesh.Rect.create(Rect(boardPos.x, boardPos.y, windowParams.rect.width - boardPos.x*2, windowParams.rect.height - boardPos.y*2))
+  boardFrame = lost.mesh.Rect.create(Rect(boardPos.x, boardPos.y, config.window.width - boardPos.x*2, config.window.height - boardPos.y*2))
   boardFrame.material.shader = lost.common.Shaders.colorShader()
   boardFrame.material.color = Color(1,1,1)
   tasklet.renderNode:add(

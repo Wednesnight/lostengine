@@ -1,4 +1,4 @@
-local _meta = require("_meta")
+local config = require("config")
 require("scene")
 
 using "lost.application.KeyEvent"
@@ -29,7 +29,6 @@ function updateButtons()
 end
 
 function startup()
-  tasklet.name = _meta.name
   tasklet.clearNode.active = false
 
   scene = createScene(tasklet.loader)

@@ -18,6 +18,7 @@ local exportScreens = false
 local running = true
 
 function startup()
+  tasklet.clearNode.active = false
   dcl = lost.declarative.Context(tasklet.loader)
   animator = Animator()
   logoEntity = LogoEntity()
