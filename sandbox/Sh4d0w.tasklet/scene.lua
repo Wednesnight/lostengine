@@ -1,4 +1,4 @@
-local _meta = require("_meta")
+local config = require("config")
 require("lost.declarative.Context")
 require("lost.common.Shaders")
 require("lost.shaders.ShaderFactory")
@@ -26,16 +26,16 @@ function createScene(loader)
   dcl = lost.declarative.Context(loader) -- deliberately global so ui script can use it as well
   
   -- framebuffer setup
-  result.fb = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
+  result.fb = FrameBuffer.create(Vec2(config.window.width, config.window.height),
     gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
-  result.fbSsao = FrameBuffer.create(Vec2(_meta.windowRect.width, _meta.windowRect.height),
+  result.fbSsao = FrameBuffer.create(Vec2(config.window.width, config.window.height),
     gl.GL_RGBA8, gl.GL_DEPTH_COMPONENT24, -1)
   
   -- light cam used for shadow map calculations
   result.lightCam = dcl.rg:Camera3D
   {
     name = "lightCam",
-    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
+    viewport = Rect(0, 0, config.window.width, config.window.height),
     position = Vec3(1,5,1),
     fovY = 45.0,
     depth = Vec2(1.0, 100.0),
@@ -60,7 +60,7 @@ function createScene(loader)
   result.cam = dcl.rg:Camera3D
   {
     name = "cam",
-    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height),
+    viewport = Rect(0, 0, config.window.width, config.window.height),
     position = Vec3(0,5,5),
     fovY = 45.0,
     depth = Vec2(1.0, 1000.0),
@@ -288,7 +288,7 @@ function createScene(loader)
   result.debugCam = dcl.rg:Camera2D
   {
     name = "cam",
-    viewport = Rect(0, 0, _meta.windowRect.width, _meta.windowRect.height)
+    viewport = Rect(0, 0, config.window.width, config.window.height)
   }
   result.debugMesh = dcl.mesh:Quad
   {

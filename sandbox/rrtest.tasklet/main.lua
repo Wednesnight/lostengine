@@ -11,10 +11,7 @@ using "lost.common.ColorGradient"
 using "lost.bitmap.Bitmap"
 
 using "lost.math.MatrixTranslation"
-
-screensize = Vec2(800,600)
-windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
-
+config = require("config")
 running = true
 rootNode = nil
 dcl = nil
@@ -212,7 +209,7 @@ function startup()
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D
     {
-      viewport = Rect(0,0,screensize.x, screensize.y)
+      viewport = Rect(0,0,config.window.width, config.window.height)
     },
     dcl.rg:Draw
     {
@@ -241,19 +238,19 @@ function startup()
     dcl.rg:Draw{mesh = rr4},
     dcl.rg:Draw
     {
-      mesh = rrgrad(Rect(0,screensize.y-trheight,screensize.x, trheight),
+      mesh = rrgrad(Rect(0,config.window.height-trheight,config.window.width, trheight),
                     true, 8, 1, gradients["c5light"],
                     {blr=false, brr=false, tlr=false, trr=false})
     },    
     dcl.rg:Draw
     {
-      mesh = rrgrad(Rect(0,screensize.y-2*trheight,trwidth, trheight),
+      mesh = rrgrad(Rect(0,config.window.height-2*trheight,trwidth, trheight),
                     true, 8, 1, gradients["c5light"],
                     {blr=false, brr=false, tlr=false, trr=false})
     },    
     dcl.rg:Draw
     {
-      mesh = rrgrad(Rect(0,screensize.y-3*trheight,trwidth, trheight),
+      mesh = rrgrad(Rect(0,config.window.height-3*trheight,trwidth, trheight),
                     true, 8, 1, gradients["c5light"],
                     {blr=false, brr=false, tlr=false, trr=false})
     },    

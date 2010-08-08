@@ -7,8 +7,6 @@ using "lost.application.WindowParams"
 using "lost.guiro.Bounds"
 using "lost.common.Color"
 
-screensize = Vec2(320,480)
-windowParams = WindowParams("LayoutIntegration", Rect(0,0,screensize.x, screensize.y))
 running = true
 
 function sameRect(a,b)
@@ -54,8 +52,6 @@ function testcases()
 end
 
 function startup()
-  tasklet.name = "LayoutIntegration"
-  tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
 
 --  testcases()

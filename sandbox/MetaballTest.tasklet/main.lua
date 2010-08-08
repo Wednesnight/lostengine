@@ -7,9 +7,7 @@ using "lost.application.WindowParams"
 using "lost.common.Color"
 
 local taskletName = "MetaballTest"
-screensize = Vec2(640,480)
-windowParams = WindowParams(taskletName, Rect(50,50,screensize.x, screensize.y))
-
+local config = require("config")
 local running = true
 
 function keyHandler(event)
@@ -40,18 +38,18 @@ function mb(mpos, mrad, x,y)
 end
 
 function startup()
-  tasklet.name = taskletName
-  tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
 
   log.debug("!!! CALCULATING !!! Please wait ...")
-  local bmp = lost.bitmap.Bitmap.create(screensize.x,screensize.y,lost.bitmap.COMPONENTS_RGBA)
+  local bmp = lost.bitmap.Bitmap.create(config.window.width,
+                                        config.window.height,
+                                        lost.bitmap.COMPONENTS_RGBA)
   bmp:clear(Color(1,0,0))
   local max = math.max
   local min = math.min
-  for x=0,screensize.x-1,1 do
-    for y=0,screensize.y-1,1 do
+  for x=0,config.window.width-1,1 do
+    for y=0,config.window.height-1,1 do
       local v1 = mb(m1pos, m1rad,x,y)
       local v2= mb(m2pos, m2rad,x,y)
       local v3= mb(m3pos, m3rad,x,y)
@@ -90,7 +88,7 @@ function startup()
       dcl.rg:DepthTest{false},
       dcl.rg:Camera2D
       {
-        viewport = Rect(0,0,screensize.x, screensize.y)
+        viewport = Rect(0,0,config.window.width, config.window.height)
       },    
       dcl.rg:Draw
       {

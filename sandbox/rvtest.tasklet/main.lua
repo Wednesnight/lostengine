@@ -6,9 +6,7 @@ using "lost.math.Rect"
 using "lost.application.WindowParams"
 using "lost.common.Color"
 
-screensize = Vec2(320,480)
-windowParams = WindowParams("rrtest", Rect(50,50,screensize.x, screensize.y))
-
+config = require("config")
 running = true
 rootNode = nil
 dcl = nil
@@ -268,7 +266,7 @@ function startup()
       dcl.rg:DepthTest{false},
       dcl.rg:Camera2D
       {
-        viewport = Rect(0,0,screensize.x, screensize.y)
+        viewport = Rect(0,0,config.window.width, config.window.height)
       },    
       dcl.rg:Draw
       {
