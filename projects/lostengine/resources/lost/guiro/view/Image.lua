@@ -1,7 +1,7 @@
 -- lost.guiro.Image
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 require("lost.common.Shaders")
 
 local Vec2 = lost.math.Vec2
@@ -10,7 +10,7 @@ local Rect = lost.math.Rect
 local MatrixTranslation = lost.math.MatrixTranslation
 local Color = lost.common.Color
 
-lost.common.Class "lost.guiro.Image" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.Image" "lost.guiro.view.View" {}
 
 -- render triggers
 -- * _bitmap
@@ -26,7 +26,7 @@ lost.common.Class "lost.guiro.Image" "lost.guiro.View" {}
 --[[  An Image displays one texture inside it's bounds.
 ]]
 function Image:constructor(textureManager)
-  lost.guiro.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self, textureManager)
 
   self._texture = nil
   self._textureMesh = nil

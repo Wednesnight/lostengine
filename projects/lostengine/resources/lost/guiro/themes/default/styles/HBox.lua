@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.default.styles.HBox" "lost.guiro.Style" {}
 function HBox:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.HBox"
+  self.targetClassName = "lost.guiro.view.HBox"
 end
 
 function HBox:apply(target)

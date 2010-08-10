@@ -1,17 +1,17 @@
 -- lost.declarative.Guiro
 module("lost.declarative", package.seeall)
 
-require("lost.guiro.Screen")
-require("lost.guiro.UserInterface")
-require("lost.guiro.Window")
-require("lost.guiro.View")
-require("lost.guiro.Label")
-require("lost.guiro.Image")
-require("lost.guiro.Button")
-require("lost.guiro.VBox")
-require("lost.guiro.HBox")
-require("lost.guiro.RenderView")
-require("lost.guiro.SpinEdit")
+require("lost.guiro.view.Screen")
+require("lost.guiro.view.UserInterface")
+require("lost.guiro.view.Window")
+require("lost.guiro.view.View")
+require("lost.guiro.view.Label")
+require("lost.guiro.view.Image")
+require("lost.guiro.view.Button")
+require("lost.guiro.view.VBox")
+require("lost.guiro.view.HBox")
+require("lost.guiro.view.RenderView")
+require("lost.guiro.view.SpinEdit")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.event.Event")
 
@@ -29,7 +29,7 @@ end
 -- them to target as subviews 
 function Guiro:searchAndAddSubviews(target, source)
   for k,v in pairs(source) do
-    if (type(v) == "table") and (v.isDerivedFrom ~= nil) and (v:isDerivedFrom("lost.guiro.View")) then
+    if (type(v) == "table") and (v.isDerivedFrom ~= nil) and (v:isDerivedFrom("lost.guiro.view.View")) then
       target:addSubview(v)
     end
   end
@@ -191,7 +191,7 @@ function Guiro:addEventListeners(target, source)
 end
 
 function Guiro:View(def)
-  local result = lost.guiro.View(self.textureManager)
+  local result = lost.guiro.view.View(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)    
   self:assignViewAttributes(result, def) 
@@ -200,7 +200,7 @@ function Guiro:View(def)
 end
 
 function Guiro:Screen(def)
-  local result = lost.guiro.Screen(self.textureManager)
+  local result = lost.guiro.view.Screen(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def) 
   self:assignViewAttributes(result, def) 
@@ -209,7 +209,7 @@ function Guiro:Screen(def)
 end
 
 function Guiro:UserInterface(def)
-  local result = lost.guiro.UserInterface(self.textureManager)
+  local result = lost.guiro.view.UserInterface(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)      
   self:assignViewAttributes(result, def) 
@@ -218,7 +218,7 @@ function Guiro:UserInterface(def)
 end
 
 function Guiro:Window(def)
-  local result = lost.guiro.Window(self.textureManager)
+  local result = lost.guiro.view.Window(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
@@ -227,7 +227,7 @@ function Guiro:Window(def)
 end
 
 function Guiro:Label(def)
-  local result = lost.guiro.Label(self.textureManager)
+  local result = lost.guiro.view.Label(self.textureManager)
   self:applyStyle(result, def)
   -- don't allow label subviews
   self:assignViewAttributes(result, def) 
@@ -237,7 +237,7 @@ function Guiro:Label(def)
 end
 
 function Guiro:Image(def)
-  local result = lost.guiro.Image(self.textureManager)
+  local result = lost.guiro.view.Image(self.textureManager)
   self:applyStyle(result, def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
@@ -247,7 +247,7 @@ function Guiro:Image(def)
 end
 
 function Guiro:Button(def)
-  local result = lost.guiro.Button(self.textureManager)
+  local result = lost.guiro.view.Button(self.textureManager)
   self:applyStyle(result, def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
@@ -257,7 +257,7 @@ function Guiro:Button(def)
 end
 
 function Guiro:VBox(def)
-  local result = lost.guiro.VBox(self.textureManager)
+  local result = lost.guiro.view.VBox(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
@@ -267,7 +267,7 @@ function Guiro:VBox(def)
 end
 
 function Guiro:HBox(def)
-  local result = lost.guiro.HBox(self.textureManager)
+  local result = lost.guiro.view.HBox(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
@@ -277,7 +277,7 @@ function Guiro:HBox(def)
 end
 
 function Guiro:RenderView(def)
-  local result = lost.guiro.RenderView(self.textureManager)
+  local result = lost.guiro.view.RenderView(self.textureManager)
   self:applyStyle(result, def)
   -- don't allow subviews
   self:assignViewAttributes(result, def)
@@ -288,7 +288,7 @@ function Guiro:RenderView(def)
 end
 
 function Guiro:SpinEdit(def)
-  local result = lost.guiro.SpinEdit(self.textureManager)
+  local result = lost.guiro.view.SpinEdit(self.textureManager)
   self:applyStyle(result, def)
   -- don't allow subviews
   self:assignViewAttributes(result, def)

@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.default.styles.Window" "lost.guiro.Style" {
 function Window:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.Window"
+  self.targetClassName = "lost.guiro.view.Window"
 end
 
 function Window:apply(target)

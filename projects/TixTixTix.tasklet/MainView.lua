@@ -1,5 +1,5 @@
 require("lost.common.Class")
-require("lost.guiro.Screen")
+require("lost.guiro.view.Screen")
 require("lost.declarative.Context")
 
 lost.common.Class "MainView" {}

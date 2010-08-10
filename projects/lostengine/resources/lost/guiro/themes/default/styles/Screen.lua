@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.default.styles.Screen" "lost.guiro.Style" {
 function Screen:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.Screen"
+  self.targetClassName = "lost.guiro.view.Screen"
 end
 
 function Screen:apply(target)

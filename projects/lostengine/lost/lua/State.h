@@ -40,6 +40,8 @@ namespace lost
       void openTableLib();
       void openOsLib();
 
+      void addScriptPathEntry(const std::string& inScript, const std::string& inAbsolutePath);
+
       // convert naming convention "lost.lua..." to path "lost/lua/..."
       std::string pathFromNamespace(const std::string& inNamespace);
 

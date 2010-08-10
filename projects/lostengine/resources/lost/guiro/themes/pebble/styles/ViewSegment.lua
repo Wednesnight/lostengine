@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.pebble.styles.ViewSegment" "lost.guiro.Styl
 function ViewSegment:constructor()
   lost.guiro.Style(self)
   self.name = "segment"
-  self.targetClassName = "lost.guiro.View"
+  self.targetClassName = "lost.guiro.view.View"
   self.cornerRadius = 4
   self.height = {}
   self.height["regular"] = 21;

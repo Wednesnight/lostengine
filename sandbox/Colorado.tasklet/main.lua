@@ -6,7 +6,6 @@ require("animations.BlockScoreAnimation")
 
 using "lost.math.Vec2"
 using "lost.math.Rect"
-using "lost.application.WindowParams"
 using "lost.common.Color"
 using "lost.math.MatrixTranslation"
 using "lost.math.Vec3"
@@ -441,8 +440,8 @@ function setup()
     end
   end
 
-  local currentBounds = Rect(windowParams.rect.width / 2 - blockSize.x / 2,
-                             windowParams.rect.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
+  local currentBounds = Rect(config.window.width / 2 - blockSize.x / 2,
+                             config.window.height - boardPos.y + (boardPos.y - blockSize.y) / 2,
                              blockSize.x, blockSize.y)
   currentBlock = dcl.mesh:Quad
   {
@@ -550,8 +549,8 @@ function toggleSound()
 end
 
 function resizeHandler(event)
-  windowParams.rect.width = event.width
-  windowParams.rect.height = event.height
+  config.window.width = event.width
+  config.window.height = event.height
 
   camera.cam:viewport(Rect(0,0,event.width,event.height))
 

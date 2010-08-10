@@ -1,12 +1,12 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 require("lost.guiro.Bounds")
 
-lost.common.Class "lost.guiro.HBox" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.HBox" "lost.guiro.view.View" {}
 
 function HBox:constructor(textureManager)
-	lost.guiro.View.constructor(self, textureManager)
+	lost.guiro.view.View.constructor(self, textureManager)
 	self._mode = "spread" -- spread or stack
 	self._valign = "top" -- only used if mode != spread, 'top' 'center' or 'bottom'
 	self._halign = "center"
@@ -14,17 +14,17 @@ function HBox:constructor(textureManager)
 end
 
 function HBox:addSubview(subview)
-  lost.guiro.View.addSubview(self, subview)
+  lost.guiro.view.View.addSubview(self, subview)
   self:needsLayout()
 end
 
 function HBox:removeSubview(subview)
-  lost.guiro.View.removeSubview(self, subview)
+  lost.guiro.view.View.removeSubview(self, subview)
   self:needsLayout()
 end
 
 function HBox:removeAllSubviews()
-  lost.guiro.View.removeAllSubviews(self)
+  lost.guiro.view.View.removeAllSubviews(self)
   self:needsLayout()
 end
 
@@ -91,7 +91,7 @@ function HBox:updateStack()
 end
 
 function HBox:afterLayout()
-  lost.guiro.View.afterLayout(self)
+  lost.guiro.view.View.afterLayout(self)
   if self._mode == "spread" then
     self:updateSpread()
   elseif self._mode == "stack" then
