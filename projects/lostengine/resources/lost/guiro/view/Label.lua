@@ -1,9 +1,9 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 require("lost.common.Shaders")
 
-lost.common.Class "lost.guiro.Label" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.Label" "lost.guiro.view.View" {}
 
 -- local shortcuts
 local Rect = lost.math.Rect
@@ -18,7 +18,7 @@ local MatrixTranslation = lost.math.MatrixTranslation
   ]]
 function Label:constructor(textureManager)
   assert(textureManager)
-  lost.guiro.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self, textureManager)
 
   self._font = nil
   self._fontSize = 12
@@ -66,7 +66,7 @@ function Label:afterRedraw()
 end
 
 function Label:afterLayout()
-  lost.guiro.View.afterLayout(self)
+  lost.guiro.view.View.afterLayout(self)
   self:updateAlign()
 end
 

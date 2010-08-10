@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.default.styles.UserInterface" "lost.guiro.S
 function UserInterface:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.UserInterface"
+  self.targetClassName = "lost.guiro.view.UserInterface"
 end
 
 function UserInterface:apply(target)

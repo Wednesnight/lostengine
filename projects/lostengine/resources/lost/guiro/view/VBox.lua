@@ -1,11 +1,11 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 
-lost.common.Class "lost.guiro.VBox" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.VBox" "lost.guiro.view.View" {}
 
 function VBox:constructor(textureManager)
-	lost.guiro.View.constructor(self, textureManager)
+	lost.guiro.view.View.constructor(self, textureManager)
 	self._mode = "spread" -- spread or stack
 	self._valign = "top" -- only used if mode != spread, 'top' 'center' or 'bottom'
 	self._halign = "center"
@@ -13,17 +13,17 @@ function VBox:constructor(textureManager)
 end
 
 function VBox:addSubview(subview)
-  lost.guiro.View.addSubview(self, subview)
+  lost.guiro.view.View.addSubview(self, subview)
   self:needsLayout()
 end
 
 function VBox:removeSubview(subview)
-  lost.guiro.View.removeSubview(self, subview)
+  lost.guiro.view.View.removeSubview(self, subview)
   self:needsLayout()
 end
 
 function VBox:removeAllSubviews()
-  lost.guiro.View.removeAllSubviews(self)
+  lost.guiro.view.View.removeAllSubviews(self)
   self:needsLayout()
 end
 
@@ -91,7 +91,7 @@ function VBox:updateStack()
 end
 
 function VBox:afterLayout()
-  lost.guiro.View.afterLayout(self)
+  lost.guiro.view.View.afterLayout(self)
   if self._mode == "spread" then
     self:updateSpread()
   elseif self._mode == "stack" then

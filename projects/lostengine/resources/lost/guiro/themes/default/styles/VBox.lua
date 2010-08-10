@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.default.styles.VBox" "lost.guiro.Style" {}
 function VBox:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.VBox"
+  self.targetClassName = "lost.guiro.view.VBox"
 end
 
 function VBox:apply(target)

@@ -2,8 +2,8 @@ module("lost.guiro.themes.default.styles", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.Style")
-require("lost.guiro.Button")
-require("lost.guiro.Label")
+require("lost.guiro.view.Button")
+require("lost.guiro.view.Label")
 require("lost.guiro.Bounds")
 
 lost.common.Class "lost.guiro.themes.default.styles.SpinEdit" "lost.guiro.Style" {}
@@ -14,7 +14,7 @@ function SpinEdit:constructor(textureManager)
   lost.guiro.Style(self)
   self.textureManager = textureManager
   self.name = "default"
-  self.targetClassName = "lost.guiro.SpinEdit"
+  self.targetClassName = "lost.guiro.view.SpinEdit"
 end
 
 function SpinEdit:apply(target)
@@ -27,7 +27,7 @@ function SpinEdit:apply(target)
 end
 
 function SpinEdit:buildButton(vid, bounds, title, styleName)
-  local result = lost.guiro.Button(self.textureManager)
+  local result = lost.guiro.view.Button(self.textureManager)
   result.id = vid
   result.bounds = bounds
   self.theme.themeManager:apply(result, self.theme.name, styleName)
@@ -43,7 +43,7 @@ function SpinEdit:buildButton(vid, bounds, title, styleName)
 end
 
 function SpinEdit:buildLabel(vid, bounds, styleName)
-  local result = lost.guiro.Label(self.textureManager)
+  local result = lost.guiro.view.Label(self.textureManager)
   result.id = vid
   result.bounds = bounds
   result:fontSize(10)

@@ -13,7 +13,7 @@ function Label:constructor(fnt)
   lost.guiro.Style(self)
   self.fnt = fnt
   self.name = "default"
-  self.targetClassName = "lost.guiro.Label"
+  self.targetClassName = "lost.guiro.view.Label"
 end
 
 function Label:apply(target)

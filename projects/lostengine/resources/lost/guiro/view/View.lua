@@ -1,4 +1,4 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
 require("lost.common.Class")
 require("lost.common.Shaders")
@@ -10,7 +10,7 @@ require("lost.guiro.layer.Layer")
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
 
-lost.common.Class "lost.guiro.View" 
+lost.common.Class "lost.guiro.view.View" 
 {
   -- helper for auto-generated view ids
   indices = {}
@@ -123,10 +123,10 @@ end
   ]]
 function View:setParent(parent)
   if parent ~= nil then
-    if parent:isDerivedFrom("lost.guiro.View") then
+    if parent:isDerivedFrom("lost.guiro.view.View") then
       self.parent = parent
     else
-      error("View:setParent() expected lost.guiro.View, got ".. type(parent), 2)
+      error("View:setParent() expected lost.guiro.view.View, got ".. type(parent), 2)
     end
     self.parent.subviewNodes:add(self.rootNode)
     self:needsLayout()
@@ -509,11 +509,11 @@ end
 function View:addSubview(subview)
   if (type(subview)=="table") and 
      (subview.isDerivedFrom ~= nil) and 
-     subview:isDerivedFrom("lost.guiro.View") then
+     subview:isDerivedFrom("lost.guiro.view.View") then
     table.insert(self.subviews, subview)
   	subview:onAttach(self)
   else
-    error("View:addSubview() expected lost.guiro.View, got ".. type(subview), 2)
+    error("View:addSubview() expected lost.guiro.view.View, got ".. type(subview), 2)
   end
 end
 
@@ -521,7 +521,7 @@ end
     Removes subview from self.subviews and calls subview:onDetach(self)
   ]]
 function View:removeSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.View") then
+  if subview:isDerivedFrom("lost.guiro.view.View") then
     for k,view in next,self.subviews do
       if rawequal(view, subview) then
         self.subviews[k] = nil
@@ -529,7 +529,7 @@ function View:removeSubview(subview)
       end
     end
   else
-    error("View:removeSubview() expected lost.guiro.View, got ".. type(subview), 2)
+    error("View:removeSubview() expected lost.guiro.view.View, got ".. type(subview), 2)
   end
 end
 

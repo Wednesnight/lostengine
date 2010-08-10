@@ -1,14 +1,14 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 
 --[[
      UserInterface class
   ]]
-lost.common.Class "lost.guiro.UserInterface" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
 function UserInterface:constructor(textureManager)
-  lost.guiro.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self, textureManager)
   self:addEventListener(lost.application.MouseEvent.MOUSE_DOWN, function(event) self:updateFocus(event) end)
 end
 
@@ -16,8 +16,8 @@ end
     only accepts lost.guiro.controls.Window
   ]]
 function UserInterface:addSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.Window") then
-    lost.guiro.View.addSubview(self, subview)
+  if subview:isDerivedFrom("lost.guiro.view.Window") then
+    lost.guiro.view.View.addSubview(self, subview)
   else
     error("UserInterface:addSubview() can only add subviews of type Window : ".. subview:className(), 2)    
   end

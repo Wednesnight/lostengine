@@ -1,11 +1,11 @@
--- lost.guiro.Button
-module("lost.guiro", package.seeall)
+-- lost.guiro.view.Button
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
-require("lost.guiro.Label")
+require("lost.guiro.view.View")
+require("lost.guiro.view.Label")
 require("lost.guiro.event.Event")
 
-lost.common.Class "lost.guiro.Button" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.Button" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.Event"
 
@@ -15,7 +15,7 @@ Button.STATE_PUSHED = "pushed"
 Button.STATE_DISABLED = "disabled"
 
 function Button:constructor(textureManager)
-	lost.guiro.View.constructor(self, textureManager)
+	lost.guiro.view.View.constructor(self, textureManager)
 
 	self._state = Button.STATE_NORMAL
   self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}

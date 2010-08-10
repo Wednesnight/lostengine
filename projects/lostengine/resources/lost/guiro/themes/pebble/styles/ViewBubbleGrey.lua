@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.pebble.styles.ViewBubbleGrey" "lost.guiro.S
 function ViewBubbleGrey:constructor()
   lost.guiro.Style(self)
   self.name = "bubbleGrey"
-  self.targetClassName = "lost.guiro.View"
+  self.targetClassName = "lost.guiro.view.View"
   self.sizes = {}
   self.sizes["regular"] = 16;
   self.sizes["small"] = 12;

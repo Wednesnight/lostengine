@@ -1,9 +1,9 @@
 -- lost.guiro.RenderView
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.Image")
+require("lost.guiro.view.Image")
 
-lost.common.Class "lost.guiro.RenderView" "lost.guiro.Image" {}
+lost.common.Class "lost.guiro.view.RenderView" "lost.guiro.view.Image" {}
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -18,7 +18,7 @@ using "lost.rg.Node"
     A RenderView manages a framebuffer that can be used to draw custom scenes within Guiro UIs
 ]]
 function RenderView:constructor(textureManager)
-  lost.guiro.Image.constructor(self, textureManager)
+  lost.guiro.view.Image.constructor(self, textureManager)
   -- suppress frame by default
   self:showFrame(false)
   -- suppress background by default
@@ -48,7 +48,7 @@ end
 
 function RenderView:beforeLayout()
   self._oldRect = self.rect
-  lost.guiro.Image.beforeLayout(self)
+  lost.guiro.view.Image.beforeLayout(self)
 end
 
 function RenderView:afterLayout()
@@ -76,17 +76,17 @@ function RenderView:afterLayout()
     end
     self:needsRedraw()
   end
-  lost.guiro.Image.afterLayout(self)
+  lost.guiro.view.Image.afterLayout(self)
 end
 
 function RenderView:beforeRedraw()
   self._renderViewNode:process(tasklet.window.context)
   self._oldShader = self:shader()
-  lost.guiro.Image.beforeRedraw(self)
+  lost.guiro.view.Image.beforeRedraw(self)
 end
 
 function RenderView:afterRedraw()
-  lost.guiro.Image.afterRedraw(self)
+  lost.guiro.view.Image.afterRedraw(self)
   if self._oldShader ~= nil then
     if self._textureMesh ~= nil and not rawequal(self._oldShader, self._textureMesh.material.shader) then
       self._textureMesh.material.shader = self._oldShader

@@ -1,6 +1,6 @@
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 require("lost.guiro.event.EventManager")
 
 --[[
@@ -16,12 +16,12 @@ require("lost.guiro.event.EventManager")
      Screen the new size, so it can track it and force an update of the subviews
      if required.
   ]]
-lost.common.Class "lost.guiro.Screen" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.Screen" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.EventManager"
 
 function Screen:constructor(textureManager)
-  lost.guiro.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self, textureManager)
 
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
@@ -102,8 +102,8 @@ end
     will fail if subview is not a lost.common.Class
   ]]
 function Screen:addSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.UserInterface") then
-    lost.guiro.View.addSubview(self, subview)
+  if subview:isDerivedFrom("lost.guiro.view.UserInterface") then
+    lost.guiro.view.View.addSubview(self, subview)
   else
     error("Screen:addSubview() can only add subviews of type UserInterface : ".. subview:className(), 2)
   end

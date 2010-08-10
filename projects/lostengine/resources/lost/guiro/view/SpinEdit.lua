@@ -1,13 +1,13 @@
 -- lost.guiro.SpinEdit
-module("lost.guiro", package.seeall)
+module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.View")
+require("lost.guiro.view.View")
 require("lost.guiro.event.Event")
 
-lost.common.Class "lost.guiro.SpinEdit" "lost.guiro.View" {}
+lost.common.Class "lost.guiro.view.SpinEdit" "lost.guiro.view.View" {}
 
 function SpinEdit:constructor(textureManager)
-  lost.guiro.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self, textureManager)
   
   self._value = 0
   self._min = 0

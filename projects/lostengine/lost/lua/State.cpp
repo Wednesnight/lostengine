@@ -4,6 +4,7 @@
 #include "lost/common/Logger.h"
 #include <stdexcept>
 #include <boost/filesystem.hpp>
+#include <luabind/exception_handler.hpp>
 
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++
 #include <hashlibpp.h>
@@ -18,6 +19,11 @@ namespace lost
   namespace lua
   {
 
+      struct LoadException : std::runtime_error
+      {
+        LoadException(const std::string& v) : runtime_error(v){};
+      };
+
       void State::openLibs()  { luaL_openlibs(state);  }
       void State::openBaseLib() { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
       void State::openDebugLib() { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
@@ -28,6 +34,10 @@ namespace lost
       void State::openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
       void State::openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
 
+    void translateLoadException(lua_State* L, lost::lua::LoadException const& ex)
+    {
+      lua_pushstring(L, ex.what());
+    }
     
     State::State(lost::shared_ptr<resource::Loader> inLoader)
     : callstackSize(10), 
@@ -39,6 +49,7 @@ namespace lost
       stateMap[state] = this;
       // set our own error callback
       luabind::set_pcall_callback(errorHandler);
+      luabind::register_exception_handler<lost::lua::LoadException>(&translateLoadException);
     }
     
     State::~State()
@@ -72,9 +83,7 @@ namespace lost
     
     std::string State::getScriptSource(lua_Debug& debug)
     {
-      std::string result("source: ");
-      result.append(getScriptFilename(debug.source, debug.short_src));
-      return result;
+      return getScriptFilename(debug.source, debug.short_src);
     }
 
     State* State::stateFromState(lua_State* state)
@@ -92,32 +101,63 @@ namespace lost
     
     int State::handleError()
     {
-			EOUT("////////////////// ERROR");
       lua_Debug debug;
       lua_getstack(state, 1, &debug);
       lua_getinfo(state, "Sln", &debug);
-      
+
       for (unsigned int idx = callstackSize; idx > 0; --idx)
       {
         std::stringstream msg;
         if (lua_getstack(state, idx, &debug) == 1)
         {
+          string name = "";
+          string scriptpath = "";
+          int32_t currentLine = -1;
+
           lua_getinfo(state, "Sln", &debug);
-          msg << "-> " << debug.what;
-          if (debug.namewhat != "") msg << " " << debug.namewhat;
-            else msg << " unknown";
-          if (debug.name != 0) msg << " " << debug.name;
-          if (debug.currentline >= 0) msg  << " (" << getScriptSource(debug) << ", line " << debug.currentline << ")";
+
+          // line and path
+          if (debug.currentline >= 0) 
+          {
+            currentLine = debug.currentline;
+            scriptpath = getScriptSource(debug);
+          }
+          // name
+          if(debug.name != 0)
+          {
+            name = debug.name; 
+          }
+          else
+          {
+            name = "???";
+          }
+
+          // filter builtins that produce only noise in stack trace
+          // these have to be adjusted should they ever change
+          // require
+          if((currentLine == -1) && (scriptpath.length() == 0) && (name=="require")) continue;
+          // ModuleLoader
+          if(scriptpath == "ModuleLoader.cpp") continue;
+          if((currentLine == -1) && (scriptpath.length() == 0) && (name=="doResourceFile")) continue;
+
+          // finally, if it wasn't filtered, build the stack frame message
+          msg << "-> ";
+          if(currentLine >= 0)
+          {
+            msg << scriptpath << ":" << currentLine << ":";
+          }
+          else
+          {
+            msg << "::";
+          }
+          msg << name;
           EOUT(msg.str());
         }
       }
       
-      // lua error message
-      std::string error;
-      const char* errorc = lua_tostring(state, -1);
-      if (errorc != NULL) error = errorc;
+      luabind::object error_msg(luabind::from_stack(state, -1));
+      EOUT("==> "<<luabind::object_cast<string>(error_msg));
       lua_pop(state, 1);
-      EOUT(error);
 
       return 1;
     }
@@ -140,14 +180,19 @@ namespace lost
       return doFile(pathFromNamespace(inRelativePath));
     }
     
+    void State::addScriptPathEntry(const std::string& inScript, const std::string& inAbsolutePath)
+    {
+      md5wrapper md5;
+      fileHashes[md5.getHashFromString(inScript)] = inAbsolutePath;      
+    }
+    
     // loads and executes a file
     int State::doFile(const std::string& inAbsolutePath)
     {
       std::ostringstream os;
       shared_ptr<common::Data> rawData = loader->load(inAbsolutePath);
       string data = rawData->str();
-      md5wrapper md5;
-      fileHashes[md5.getHashFromString(data)] = inAbsolutePath;
+      addScriptPathEntry(data, inAbsolutePath);
       return doString(data);
     }
 
@@ -166,7 +211,7 @@ namespace lost
         switch(err)
         {
           case LUA_YIELD:errcode="LUA_YIELD";break;
-          case LUA_ERRRUN:errcode="LUA_ERRUN";break;
+          case LUA_ERRRUN:errcode="LUA_ERRRUN";break;
           case LUA_ERRSYNTAX:errcode="LUA_ERRSYNTAX";break;
           case LUA_ERRMEM:errcode="LUA_ERRMEM";break;
           case LUA_ERRERR:errcode="LUA_ERRERR";break;
@@ -178,11 +223,11 @@ namespace lost
         if (errstringc != NULL)
         {
           errstring = errstringc;
-          throw std::runtime_error(errcode +" ("+ getScriptFilename(inData, inData) +"): "+ errstring);
+          throw LoadException(getScriptFilename(inData, inData) +" "+ errcode   +": "+ errstring);
         }
         else
         {
-          throw std::runtime_error(errcode +" ("+ getScriptFilename(inData, inData) +")");
+          throw LoadException(getScriptFilename(inData, inData) +" "+ errcode  +"");
         }
       }
       return err;

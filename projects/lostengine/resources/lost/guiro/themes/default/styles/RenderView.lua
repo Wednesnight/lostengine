@@ -9,7 +9,7 @@ lost.common.Class "lost.guiro.themes.default.styles.RenderView" "lost.guiro.them
 function RenderView:constructor()
   lost.guiro.themes.default.styles.Image.constructor(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.RenderView"
+  self.targetClassName = "lost.guiro.view.RenderView"
 end
 
 function RenderView:apply(target)

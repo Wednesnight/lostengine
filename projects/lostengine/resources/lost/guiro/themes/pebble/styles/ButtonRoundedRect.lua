@@ -3,8 +3,8 @@ module("lost.guiro.themes.pebble.styles", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.Style")
-require("lost.guiro.Image")
-require("lost.guiro.Label")
+require("lost.guiro.view.Image")
+require("lost.guiro.view.Label")
 
 local Color = lost.common.Color
 local Vec2 = lost.math.Vec2
@@ -17,7 +17,7 @@ function ButtonRoundedRect:constructor(loader, df, textureManager)
   self.textureManager = textureManager
   self.defaultFont = df
   self.name = "RoundedRect"
-  self.targetClassName = "lost.guiro.Button"
+  self.targetClassName = "lost.guiro.view.Button"
 	
 	self.fontSize = 16
 	self.buttonHeight = 24
@@ -30,21 +30,21 @@ function ButtonRoundedRect:apply(target)
   target:backgroundColor(Color(.5,.5,.5,1))
   target:frameColor(Color(1,1,1,1))
   
-  target:background(lost.guiro.Button.STATE_NORMAL, self:buildBackgroundImage("normal", "rrbg"))
-  target:background(lost.guiro.Button.STATE_HOVER, self:buildBackgroundImage("hover", "rrbg"))
-  target:background(lost.guiro.Button.STATE_PUSHED, self:buildBackgroundImage("pushed", "rrbg2"))
-  target:background(lost.guiro.Button.STATE_DISABLED, self:buildBackgroundImage("disabled", "rrbg"))
+  target:background(lost.guiro.view.Button.STATE_NORMAL, self:buildBackgroundImage("normal", "rrbg"))
+  target:background(lost.guiro.view.Button.STATE_HOVER, self:buildBackgroundImage("hover", "rrbg"))
+  target:background(lost.guiro.view.Button.STATE_PUSHED, self:buildBackgroundImage("pushed", "rrbg2"))
+  target:background(lost.guiro.view.Button.STATE_DISABLED, self:buildBackgroundImage("disabled", "rrbg"))
   
-  target:label(lost.guiro.Button.STATE_NORMAL, self:buildLabel(Color(0,0,0)))
-  target:label(lost.guiro.Button.STATE_HOVER, self:buildLabel(Color(.5,.5,.5)))
-  target:label(lost.guiro.Button.STATE_PUSHED, self:buildLabel(Color(0,0,0)))
-  target:label(lost.guiro.Button.STATE_DISABLED, self:buildLabel(Color(.1,.1,.1)))
+  target:label(lost.guiro.view.Button.STATE_NORMAL, self:buildLabel(Color(0,0,0)))
+  target:label(lost.guiro.view.Button.STATE_HOVER, self:buildLabel(Color(.5,.5,.5)))
+  target:label(lost.guiro.view.Button.STATE_PUSHED, self:buildLabel(Color(0,0,0)))
+  target:label(lost.guiro.view.Button.STATE_DISABLED, self:buildLabel(Color(.1,.1,.1)))
   
   target.bounds.height = lost.guiro.hsize{abs=self.buttonHeight}
 end
 
 function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
-  local result = lost.guiro.View(self.textureManager)
+  local result = lost.guiro.view.View(self.textureManager)
   result.id = vid
   result:showFrame(true)
   result:showBackground(true)
@@ -65,7 +65,7 @@ function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
 end
 
 function ButtonRoundedRect:buildLabel(col)
-  local result = lost.guiro.Label(self.textureManager)
+  local result = lost.guiro.view.Label(self.textureManager)
   result.bounds = Bounds(0, 0, "1", "1")
   result:font(self.defaultFont)
   result:fontSize(self.fontSize)

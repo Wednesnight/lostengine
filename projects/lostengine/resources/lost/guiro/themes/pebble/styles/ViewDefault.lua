@@ -11,7 +11,7 @@ lost.common.Class "lost.guiro.themes.pebble.styles.ViewDefault" "lost.guiro.Styl
 function ViewDefault:constructor()
   lost.guiro.Style(self)
   self.name = "default"
-  self.targetClassName = "lost.guiro.View"
+  self.targetClassName = "lost.guiro.view.View"
 end
 
 function ViewDefault:apply(target)
