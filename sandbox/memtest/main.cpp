@@ -2,25 +2,22 @@
 #include "Bitmap.h"
 #include "MemoryPool.h"
 
-#include <vector>
-#include <map>
-#include <list>
+#include "lost.h"
 
-#include "MemoryPoolAllocator.h"
-
-using namespace std;
+using namespace lost;
+using std::cout;
+using std::endl;
 
 MemoryPool memPool;
 HandlePool handlePool(&memPool); // global handle pool, implicitly used by all create functions
 
-typedef basic_string<char, std::char_traits<char>, MemoryPoolAllocator<char> > mpstring;
-
 int main (int argc, char * const argv[])
 {
-    mpstring s1;
+    string s1;
     s1 = "asd";
 
-/*    BitmapPtr bh1 = Bitmap::create(); 
+
+    BitmapPtr bh1 = Bitmap::create(); 
     cout << bh1 << endl;
     
     BitmapPtr bh2 = bh1;
@@ -39,9 +36,10 @@ int main (int argc, char * const argv[])
     bm1[13] = bh1;
     bm2[bh1] = 13;
 
-    bh1->height = 18;*/
+    bh1->height = 18;
     
-    vector<mpstring, MemoryPoolAllocator<mpstring> > mpsv;
+    vector<string> mpsv;
+    
     mpsv.push_back("asd");
     mpsv.push_back("hello");
     mpsv.push_back("was");
