@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "HandlePool.h"
 #include "Bitmap.h"
+#include "MemoryPool.h"
 
 #include <vector>
 #include <map>
@@ -11,7 +12,8 @@
 
 using namespace std;
 
-HandlePool pool; // global handle pool, implicitly used by all create functions
+MemoryPool memPool;
+HandlePool handlePool(&memPool); // global handle pool, implicitly used by all create functions
 
 int main (int argc, char * const argv[])
 {
@@ -35,7 +37,6 @@ int main (int argc, char * const argv[])
     bm2[bh1] = 13;
 
     bh1->height = 18;
-
-
+  
     return 0;
 }

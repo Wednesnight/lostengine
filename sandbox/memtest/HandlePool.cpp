@@ -1,12 +1,14 @@
 #include "HandlePool.h"
 #include <iostream>
+#include "MemoryPool.h"
 
 using namespace std;
 
-HandlePool::HandlePool()
+HandlePool::HandlePool(MemoryPool* mempool)
 {
   cout << __PRETTY_FUNCTION__ << endl;
   nextFree = 0;
+  memoryPool = mempool;
 }
 
 HandlePool::~HandlePool()
@@ -37,7 +39,7 @@ HandleId HandlePool::createHandle(size_t size, HandleDeleter deleter)
   HandleId res = nextFree;
   nextFree++;
   handleId2refCount[res] = 1;
-  handleId2mem[res] = malloc(size);
+  handleId2mem[res] = memoryPool->malloc(size);
   handleId2deleter[res] = deleter;
   
   return res;
@@ -51,7 +53,7 @@ void HandlePool::destroyHandle(HandleId hid)
     handleId2refCount.erase(hid);
     void* mem = handleId2mem[hid];
     // if mem contained an object or an array, the appropriate destructor must have been called in advance
-    free(mem);  
+    memoryPool->free(mem);  
     handleId2mem.erase(hid);
     
     cout << "refsize " << handleId2refCount.size() << endl;
