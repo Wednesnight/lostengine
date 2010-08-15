@@ -1,6 +1,8 @@
 #include "MemoryPool.h"
 #include "nedmalloc.h"
 
+using namespace std;
+
 MemoryPool::MemoryPool()
 {
   context = nedcreatepool(1024, 2);

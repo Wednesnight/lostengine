@@ -1,5 +1,5 @@
 #include "Bitmap.h"
-#include <iostream>
+//#include <iostream>
 
 using namespace std;
 
@@ -7,12 +7,12 @@ extern HandlePool handlePool;
 
 Bitmap::Bitmap() 
 {
-  cout << "// Bitmap constructor +++" << endl;
+//  cout << "// Bitmap constructor +++" << endl;
 }
 
 Bitmap::~Bitmap()
 {
-  cout << "// Bitmap destructor ---" << endl;
+//  cout << "// Bitmap destructor ---" << endl;
 }
     
 BitmapPtr Bitmap::create()

@@ -3,7 +3,7 @@
 
 #include "Handle.h"
 #include "HandlePool.h"
-#include <iostream>
+//#include <iostream>
 
 template<typename T>
 struct ObjectHandle : Handle
@@ -18,25 +18,25 @@ struct ObjectHandle : Handle
 
   void destroyIfNeeded()
   {
-    std::cout << __PRETTY_FUNCTION__ << std::endl;
+//    std::cout << __PRETTY_FUNCTION__ << std::endl;
     if(getRefCount() == 1) // explicitly call destructor if we're the last handle thats decrementing
     {
-      std::cout << "handle is valid, refcount is 1, calling destructor" << std::endl;
+//      std::cout << "handle is valid, refcount is 1, calling destructor" << std::endl;
       T* p = (T*)getRawPointer();
       if(p)
       {
-        std::cout << "calling destructor on " << p << std::endl;
+//        std::cout << "calling destructor on " << p << std::endl;
         p->~T();
       }
       else {
-        std::cout << "couldn'T call destructor because pointer was NULL" << std::endl;
+//        std::cout << "couldn'T call destructor because pointer was NULL" << std::endl;
       }
     }
   }
     
   virtual ~ObjectHandle()
   {
-    std::cout << "/////////////////////// DESTRUCTOR" << std::endl;
+//    std::cout << "/////////////////////// DESTRUCTOR" << std::endl;
     destroyIfNeeded();
   }
   
