@@ -5,10 +5,14 @@
 #include "Handle.h"
 #include "Types.h"
 
+struct MemoryPool;
+
 struct HandlePool
 {
-  HandlePool();  
+  HandlePool(MemoryPool* mempool);  
   ~HandlePool();
+  
+  MemoryPool* memoryPool;
   
   HandleId createHandle(size_t size, HandleDeleter hdt);
   void destroyHandle(HandleId hid);

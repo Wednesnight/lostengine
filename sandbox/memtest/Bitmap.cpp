@@ -3,7 +3,7 @@
 
 using namespace std;
 
-extern HandlePool pool;
+extern HandlePool handlePool;
 
 Bitmap::Bitmap() 
 {
@@ -17,7 +17,7 @@ Bitmap::~Bitmap()
     
 BitmapPtr Bitmap::create()
 {
-  BitmapPtr result = createObjectHandle<Bitmap>(pool); // create correctly typed handle, only allocates memory and handle slot
+  BitmapPtr result = createObjectHandle<Bitmap>(handlePool); // create correctly typed handle, only allocates memory and handle slot
   new(result.getRawPointer()) Bitmap; // call operator via placement new
   return result;
 }
