@@ -58,8 +58,14 @@ function World:constructor()
   }
     
   tasklet.renderNode:add(self.renderNode)
-  
-  self:addEntity(aqua.Cloud())
+  self.screenSize = Vec2(config.window.width, config.window.height)
+  log.debug("!!!!!!!!!! screensize "..tostring(self.screenSize))
+
+  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(50,400), 20))
+  self:addEntity(aqua.Cloud(Color(1,.7,.7),Vec2(150,350), 8))
+  self:addEntity(aqua.Cloud(Color(1,1,.5),Vec2(230,380), 15))
+  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(75,280), 12))
+  self:addEntity(aqua.Cloud(Color(.8,.8,.8),Vec2(48,265), 60))
 end
 
 function World:addEntity(ent)
@@ -68,11 +74,9 @@ function World:addEntity(ent)
   self.renderNode:add(ent.renderNode)
 end
 
-function World:updateEntitites(dt)
-  log.debug("!!! starting entity update")
-  for k,v in pairs(self.entitites) do
-    print("updating entity "..v.name)
+function World:updateEntities(dt)
+  for k,v in pairs(self.entities) do
+    v:update(dt,self)
   end
-  log.debug("!!! DONE entity update")
 end
 
