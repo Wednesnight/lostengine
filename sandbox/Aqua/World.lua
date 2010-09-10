@@ -4,6 +4,7 @@ require("lost.common.Class")
 require("Player")
 require("lost.common.Shaders")
 require("Cloud")
+require("Ground")
 
 local config = require("config")
 local Color = lost.common.Color
@@ -66,6 +67,18 @@ function World:constructor()
   self:addEntity(aqua.Cloud(Color(1,1,.5),Vec2(230,380), 15))
   self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(75,280), 12))
   self:addEntity(aqua.Cloud(Color(.8,.8,.8),Vec2(48,265), 60))
+  
+  local w = 32
+  for i = 0,20,1 do
+    log.debug(i*w)
+    self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,0)))
+  end
+
+  for i = 10,14,1 do
+    log.debug(i*w)
+    self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,192)))
+  end
+
 end
 
 function World:addEntity(ent)
