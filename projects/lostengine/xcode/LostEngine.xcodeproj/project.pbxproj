@@ -1323,19 +1323,16 @@
 		EA7BE13E0E6F38A10017B031 /* LostCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCamera.cpp */; };
 		EA7BE1410E6F38A10017B031 /* LostResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1200E6F38A10017B031 /* LostResource.cpp */; };
 		EA7BE1450E6F38A10017B031 /* LostLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLua.cpp */; };
-		EA7BE1460E6F38A10017B031 /* LostLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */; };
 		EA7BE14A0E6F38A10017B031 /* LostBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */; };
 		EA7BE1580E6F38A10017B031 /* LostMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMath.cpp */; };
 		EA7BE15F0E6F38A10017B031 /* LostCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCamera.cpp */; };
 		EA7BE1620E6F38A10017B031 /* LostResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1200E6F38A10017B031 /* LostResource.cpp */; };
 		EA7BE1660E6F38A10017B031 /* LostLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLua.cpp */; };
-		EA7BE1670E6F38A10017B031 /* LostLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */; };
 		EA7BE16B0E6F38A10017B031 /* LostBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */; };
 		EA7BE1790E6F38A10017B031 /* LostMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1160E6F38A10017B031 /* LostMath.cpp */; };
 		EA7BE1800E6F38A10017B031 /* LostCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE11D0E6F38A10017B031 /* LostCamera.cpp */; };
 		EA7BE1830E6F38A10017B031 /* LostResource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1200E6F38A10017B031 /* LostResource.cpp */; };
 		EA7BE1870E6F38A10017B031 /* LostLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1240E6F38A10017B031 /* LostLua.cpp */; };
-		EA7BE1880E6F38A10017B031 /* LostLSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1250E6F38A10017B031 /* LostLSystem.cpp */; };
 		EA7BE18C0E6F38A10017B031 /* LostBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7BE1290E6F38A10017B031 /* LostBitmap.cpp */; };
 		EA7CEB170FACC446005F7AAB /* ClearColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB150FACC446005F7AAB /* ClearColor.cpp */; };
 		EA7CEB180FACC446005F7AAB /* Clear.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7CEB160FACC446005F7AAB /* Clear.cpp */; };
@@ -3697,7 +3694,6 @@
 				EA7BE1800E6F38A10017B031 /* LostCamera.cpp in Sources */,
 				EA7BE1830E6F38A10017B031 /* LostResource.cpp in Sources */,
 				EA7BE1870E6F38A10017B031 /* LostLua.cpp in Sources */,
-				EA7BE1880E6F38A10017B031 /* LostLSystem.cpp in Sources */,
 				EA7BE18C0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA0907200E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87E0E94104F000535DB /* Context.cpp in Sources */,
@@ -4069,7 +4065,6 @@
 				EA7BE13E0E6F38A10017B031 /* LostCamera.cpp in Sources */,
 				EA7BE1410E6F38A10017B031 /* LostResource.cpp in Sources */,
 				EA7BE1450E6F38A10017B031 /* LostLua.cpp in Sources */,
-				EA7BE1460E6F38A10017B031 /* LostLSystem.cpp in Sources */,
 				EA7BE14A0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA09071E0E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87C0E94104F000535DB /* Context.cpp in Sources */,
@@ -4492,7 +4487,6 @@
 				EA7BE15F0E6F38A10017B031 /* LostCamera.cpp in Sources */,
 				EA7BE1620E6F38A10017B031 /* LostResource.cpp in Sources */,
 				EA7BE1660E6F38A10017B031 /* LostLua.cpp in Sources */,
-				EA7BE1670E6F38A10017B031 /* LostLSystem.cpp in Sources */,
 				EA7BE16B0E6F38A10017B031 /* LostBitmap.cpp in Sources */,
 				EA09071F0E6F4F7A00852256 /* LostPlatform.cpp in Sources */,
 				EAD2E87D0E94104F000535DB /* Context.cpp in Sources */,
@@ -4915,8 +4909,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "LostEngineLauncher-Info.plist";
 				PRODUCT_NAME = LostEngine;
+				SEPARATE_STRIP = NO;
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
 		};

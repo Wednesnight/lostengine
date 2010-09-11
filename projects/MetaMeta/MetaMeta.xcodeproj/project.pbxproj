@@ -1597,7 +1597,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PFE_FILE_C_DIALECTS = "c++ objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "../lostengine/lost/prefix-release.pch";
@@ -1625,6 +1625,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MetaMeta;
 				SDKROOT = iphoneos4.0;
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
 		};

@@ -8,6 +8,7 @@ lost.common.Class "lost.guiro.Theme" {}
 function Theme:constructor(loader)
   self.name = ""
   self.styles = {}
+  self.styleFuncs = {}
 end
 
 function Theme:addStyle(style)
@@ -16,4 +17,8 @@ function Theme:addStyle(style)
     self.styles[style.targetClassName] = {}
   end
   self.styles[style.targetClassName][style.name] = style
+end
+
+function Theme:addStyleFunc(className, styleName, func)
+  
 end

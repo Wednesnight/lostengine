@@ -10,12 +10,14 @@ namespace lost
     
     struct AABB
     {
-      Vec3 origin;
+      Vec3 pos;
       Vec3 size;
       
       AABB(Vec3 inOrigin, Vec3 inSize);
       AABB();
     };
+    
+    bool intersect(const AABB& l, const AABB& r);
     
   }
 }

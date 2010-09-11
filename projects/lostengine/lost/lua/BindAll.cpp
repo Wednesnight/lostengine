@@ -56,7 +56,7 @@ namespace lost
       LostFont(state);
       LostGL(state);
       LostLGL(state);
-      LostLSystem(state);
+//      LostLSystem(state);
       LostLua(state);
       LostMath(state);
       LostPlatform(state);
