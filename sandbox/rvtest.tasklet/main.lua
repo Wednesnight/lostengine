@@ -13,7 +13,6 @@ dcl = nil
 screen = nil
 
 function startup()
-  tasklet.name = "rrtest"
   tasklet.waitForEvents = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)  
   dcl = lost.declarative.Context(tasklet.loader)
@@ -21,6 +20,7 @@ function startup()
   -- add clear commands before all others
   tasklet.renderNode:add(lost.rg.ClearColor.create(lost.common.Color(0,0,0,1)))
   tasklet.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT + gl.GL_DEPTH_BUFFER_BIT))
+  
   
   -- guiro.Screen adds itself implicitly to the tasklets renderNode, so call it last
   screen = dcl.guiro:Screen

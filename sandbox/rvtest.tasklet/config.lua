@@ -1,10 +1,10 @@
 return {
   tasklet = {
-    name = "rrtest",
+    name = "rvtest",
     waitForEvents = true
   },
   window = {
-    title = "rrtest",
+    title = "rvtest",
     x = 50,
     y = 50,
     width = 320,
