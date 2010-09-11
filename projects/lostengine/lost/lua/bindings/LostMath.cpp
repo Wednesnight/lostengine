@@ -7,6 +7,7 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
+#include "lost/math/AABB.h"
 #include "lost/math/io.h"
 
 using namespace luabind;
@@ -41,6 +42,20 @@ namespace lost
       ];
     }
 
+    void LostMathAABB(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("math")
+        [
+          class_<AABB>("AABB")
+            .def(constructor<Vec3, Vec3>())
+            .def_readwrite("pos", &AABB::pos)
+            .def_readwrite("size", &AABB::size)
+        ]
+      ];
+    }
+    
     void LostMathVec2(lua_State* state)
     {
       module(state, "lost")
@@ -165,6 +180,7 @@ namespace lost
       LostMathVec3(state);
       LostMathVec4(state);
       LostMathMatrix(state);
+      LostMathAABB(state);
     }
 
   }

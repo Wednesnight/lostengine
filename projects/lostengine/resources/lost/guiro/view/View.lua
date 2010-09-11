@@ -10,12 +10,8 @@ require("lost.guiro.layer.Layer")
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
 
-lost.common.Class "lost.guiro.view.View" 
-{
-  -- helper for auto-generated view ids
-  indices = {}
-}
-
+lost.common.Class "lost.guiro.view.View" {}
+View.indices = {} -- class member for global view ids
 using "lost.common.callLater"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
