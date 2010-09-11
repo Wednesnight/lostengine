@@ -2,6 +2,7 @@
 #include "Bitmap.h"
 #include "MemoryPool.h"
 
+//#include "lost.h"
 #include "lost.h"
 
 using namespace lost;
