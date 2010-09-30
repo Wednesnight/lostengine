@@ -3,7 +3,7 @@ module("aqua", package.seeall)
 require("lost.common.Class")
 require("lost.common.Shaders")
 
-lost.common.Class "Cloud" {}
+lost.common.Class "Cloud" "aqua.Entity" {}
 
 local Color = lost.common.Color
 
@@ -23,8 +23,12 @@ function Cloud:constructor(color, pos, vel)
 end
 
 function Cloud:update(dt, world)
-  local x = math.fmod(self.pos.x+self.velocity*dt,world.screenSize.x) 
+  local x = self.pos.x + self.velocity * dt
+  if x > world.screenSize.x then
+    x = -self.cloudTex.width
+  elseif x < -self.cloudTex.width then
+    x = world.screenSize.x
+  end
   self.pos = Vec2(x, self.pos.y)
   self.quad.transform = lost.math.MatrixTranslation(lost.math.Vec3(self.pos.x,self.pos.y,0))
 end
-

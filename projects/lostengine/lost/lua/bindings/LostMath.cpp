@@ -9,6 +9,7 @@
 #include "lost/math/Matrix.h"
 #include "lost/math/AABB.h"
 #include "lost/math/io.h"
+#include <float.h>
 
 using namespace luabind;
 using namespace lost::math;
@@ -181,6 +182,13 @@ namespace lost
       LostMathVec4(state);
       LostMathMatrix(state);
       LostMathAABB(state);
+
+      // constants
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
+      globals(state)["lost"]["math"]["EPSILON"] = FLT_EPSILON;
+#else
+      globals(state)["lost"]["math"]["EPSILON"] = DBL_EPSILON;
+#endif
     }
 
   }

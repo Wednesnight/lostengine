@@ -17,6 +17,7 @@
 #include "lost/lua/bindings/LostPlatform.h"
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/bindings/LostRg.h"
+#include "lost/lua/bindings/ThirdpartyBox2D.h"
 
 #include "luabind/class_info.hpp"
 
@@ -62,7 +63,9 @@ namespace lost
       LostPlatform(state);
       LostResource(state);
       LostRg(state);
-      
+
+      ThirdpartyBox2D(state);
+
       luabind::bind_class_info(state);
     }
   }
