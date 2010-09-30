@@ -15,10 +15,44 @@ lost.common.Class "World" {}
 
 function World:constructor()
   self.entities = {}
-  self.player = aqua.Player()
-  
+
   tasklet.clearNode.active = false
   
+  local aabb = box2d.b2AABB()
+  aabb.lowerBound:Set(-config.window.width, -config.window.height)
+  aabb.upperBound:Set(config.window.width*2, config.window.height*2)
+  local gravity = box2d.b2Vec2(0, -5)
+  local doSleep = true
+  self.physics = box2d.b2World(aabb, gravity, doSleep)
+
+  -- level bounds
+  -- bottom/left
+  local bodyDef = box2d.b2BodyDef()
+  bodyDef.position:Set(0, -2)
+  local body = self.physics:CreateBody(bodyDef)
+  local shapeDef = box2d.b2PolygonDef()
+  shapeDef:SetAsBox(config.window.width/2, 1, box2d.b2Vec2(config.window.width/2, 1), 0)
+  body:CreateShape(shapeDef)
+  bodyDef = box2d.b2BodyDef()
+  bodyDef.position:Set(-2, 0)
+  body = self.physics:CreateBody(bodyDef)
+  shapeDef = box2d.b2PolygonDef()
+  shapeDef:SetAsBox(1, config.window.height/2, box2d.b2Vec2(1, config.window.height/2), 0)
+  body:CreateShape(shapeDef)
+  -- top/right
+  bodyDef = box2d.b2BodyDef()
+  bodyDef.position:Set(0, config.window.height)
+  body = self.physics:CreateBody(bodyDef)
+  shapeDef = box2d.b2PolygonDef()
+  shapeDef:SetAsBox(config.window.width/2, 1, box2d.b2Vec2(config.window.width/2, 1), 0)
+  body:CreateShape(shapeDef)
+  bodyDef = box2d.b2BodyDef()
+  bodyDef.position:Set(config.window.width, 0)
+  body = self.physics:CreateBody(bodyDef)
+  shapeDef = box2d.b2PolygonDef()
+  shapeDef:SetAsBox(1, config.window.height/2, box2d.b2Vec2(1, config.window.height/2), 0)
+  body:CreateShape(shapeDef)
+
   self.renderNode = lost.rg.Node.create()
   self.renderNode:add(lost.rg.ClearColor.create(lost.common.Color(0,0,0)))
   self.renderNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT))
@@ -62,14 +96,14 @@ function World:constructor()
   self.screenSize = Vec2(config.window.width, config.window.height)
   log.debug("!!!!!!!!!! screensize "..tostring(self.screenSize))
 
-  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(50,400), 20))
-  self:addEntity(aqua.Cloud(Color(1,.7,.7),Vec2(150,350), 8))
-  self:addEntity(aqua.Cloud(Color(1,1,.5),Vec2(230,380), 15))
-  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(75,280), 12))
-  self:addEntity(aqua.Cloud(Color(.8,.8,.8),Vec2(48,265), 60))
+  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(50,400), 13))
+  self:addEntity(aqua.Cloud(Color(1,.7,.7),Vec2(150,350), -8))
+  self:addEntity(aqua.Cloud(Color(1,1,.5),Vec2(230,380), 12))
+  self:addEntity(aqua.Cloud(Color(1,1,1),Vec2(75,280), -10))
+  self:addEntity(aqua.Cloud(Color(.8,.8,.8),Vec2(48,265), 15))
   
   local w = 32
-  for i = 0,200,1 do
+  for i = 0,19,1 do
 --    log.debug(i*w)
     self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,0)))
   end
@@ -79,15 +113,25 @@ function World:constructor()
     self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,192)))
   end
 
+  self.player = aqua.Player(Color(1,1,1), Vec2(0,28))
+  self:addEntity(self.player)
+
 end
 
 function World:addEntity(ent)
 --  log.debug("!!!!!! adding entity: "..ent.name)
-  table.insert(self.entities, ent)
-  self.renderNode:add(ent.renderNode)
+  if ent:init(self) then
+    table.insert(self.entities, ent)
+    self.renderNode:add(ent.renderNode)
+  end
 end
 
 function World:updateEntities(dt)
+
+  local iterations = 10
+  self.physics:Step(1/60, iterations)
+  self.physics:Validate()
+
   for k,v in pairs(self.entities) do
     v:update(dt,self)
   end

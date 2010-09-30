@@ -10,7 +10,10 @@ function Entity:constructor()
   self.pos = Vec2(0,0)
 end
 
+function Entity:init(world)
+  return true
+end
+
 function Entity:update(dt, world)
-  
 end
 

@@ -2,7 +2,7 @@ module("aqua", package.seeall)
 
 require("lost.common.Class")
 
-lost.common.Class "Ground" {}
+lost.common.Class "Ground" "aqua.Entity" {}
 
 function Ground:constructor(color, pos)
   aqua.Entity.constructor(self)
@@ -16,6 +16,17 @@ function Ground:constructor(color, pos)
   self.drawNode = lost.rg.Draw.create(self.quad)
   self.renderNode:add(self.drawNode)
   self.pos = pos
+end
+
+function Ground:init(world)
+  self.bodyDef = box2d.b2BodyDef()
+  self.bodyDef.position:Set(self.pos.x, self.pos.y)
+  self.body = world.physics:CreateBody(self.bodyDef)
+  self.shapeDef = box2d.b2PolygonDef()
+  self.shapeDef:SetAsBox(14, 14, box2d.b2Vec2(14, 14), 0)
+  self.shapeDef.friction = 0.6
+  self.shape = self.body:CreateShape(self.shapeDef)
+  return true
 end
 
 function Ground:update(dt, world)
