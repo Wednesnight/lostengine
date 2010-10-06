@@ -11,6 +11,7 @@
 #include "lost/event/forward.h"
 #include "lost/rg/forward.h"
 #include "lost/application/TaskletConfig.h"
+#include "lost/common/Timer.h"
 
 namespace lost
 {
@@ -28,6 +29,8 @@ namespace lost
       struct LuaStateHelper;
       lost::shared_ptr<LuaStateHelper> lsh;
 
+      common::Timer timer;
+
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
       bool configLoaded; // true if config.lua was successfully loaded
@@ -42,10 +45,10 @@ namespace lost
       virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
       virtual void cleanup(); // cleanup all resources; called from platform specific implementation
 
-  	  virtual bool startup();	  // called once in run, return false if startup fails
-      virtual bool update();    // called repeatedly in run, return false if you want to shutdown
-      virtual void render();    // called repeatedly in run
-      virtual bool shutdown();  // called once in run, return false if shutdown failed
+  	  virtual bool startup();                       // called once in run, return false if startup fails
+      virtual bool update(double deltaSeconds);     // called repeatedly in run, return false if you want to shutdown
+      virtual void render();                        // called repeatedly in run
+      virtual bool shutdown();                      // called once in run, return false if shutdown failed
 
       void createWindow(const WindowParams& params);
       void closeWindow(WindowEventPtr event);

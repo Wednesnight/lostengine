@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include "lost/gl/Context.h"
 #include <Foundation/NSAutoreleasePool.h>
+#include <float.h>
+
 
 using namespace std;
 
@@ -28,45 +30,59 @@ namespace lost
       hiddenMembers->thread->start();
     }
 
-    void Tasklet::run()
-    {
+    void Tasklet::run() {
+
       isAlive = true;
-      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
       bool hasError = false;
-      try
-      {
+
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+
+      try {
+
         // make sure that our GL context is the current context
-        if(window != NULL)
-        {
+        if(window != NULL) {
+
           window->context->makeCurrent();
         }
-        if (startup())
-        {
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update())
-          {
+
+        if (startup()) {
+
+          double framerate = config.framerate;
+          double offset = timer.getTime();
+
+          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update(framerate)) {
+
             render();
 
-            if(waitForEvents)
-            {
+            if(waitForEvents) {
+
               eventDispatcher->waitForEvents();
             }
+
             processEvents();
+
+            framerate = timer.getElapsedAndUpdateOffset(offset);
+            if (framerate > config.framerate) {
+
+              framerate = config.framerate;
+            }
 
             [pool drain];
             pool = [[NSAutoreleasePool alloc] init];  
           }
+
           shutdown();
         }
       }
-      catch (...)
-      {
+      catch (...) {
+
         hasError = true;
       }
       isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
       [pool drain];
-      if (hasError)
-      {
+      if (hasError) {
+
         ostringstream os;
         os << "Tasklet terminated with error: " << name;
         throw runtime_error(os.str());

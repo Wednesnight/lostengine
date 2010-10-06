@@ -1247,6 +1247,9 @@
 		8DFDE5AD0F56D45E005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5A90F56D45E005D3927 /* Context.mm */; };
 		8DFDE5AE0F56D45E005D3927 /* GLContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE5AA0F56D45E005D3927 /* GLContext.mm */; };
 		8DFDE6150F56D477005D3927 /* Context.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8DFDE6140F56D477005D3927 /* Context.mm */; };
+		8DFF6F18125674A9005D4590 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF6F16125674A9005D4590 /* Timer.cpp */; };
+		8DFF6F1A125674A9005D4590 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF6F16125674A9005D4590 /* Timer.cpp */; };
+		8DFF6F1C125674A9005D4590 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF6F16125674A9005D4590 /* Timer.cpp */; };
 		EA044CB10EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA044CB20EE8B09600D3EE10 /* VorbisFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */; };
 		EA09071E0E6F4F7A00852256 /* LostPlatform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */; };
@@ -2048,6 +2051,7 @@
 		8DFDE5A90F56D45E005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = iphone/Context.mm; sourceTree = "<group>"; };
 		8DFDE5AA0F56D45E005D3927 /* GLContext.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GLContext.mm; path = iphone/GLContext.mm; sourceTree = "<group>"; };
 		8DFDE6140F56D477005D3927 /* Context.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Context.mm; path = mac/Context.mm; sourceTree = "<group>"; };
+		8DFF6F16125674A9005D4590 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA044CAF0EE8B09600D3EE10 /* VorbisFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VorbisFile.cpp; path = audio/VorbisFile.cpp; sourceTree = "<group>"; };
 		EA09071D0E6F4F7A00852256 /* LostPlatform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostPlatform.cpp; path = bindings/LostPlatform.cpp; sourceTree = "<group>"; };
@@ -3171,6 +3175,7 @@
 				EA3B94720E04639D00B6423B /* Logger.cpp */,
 				EA3B94750E04639D00B6423B /* Profiler.cpp */,
 				EA5FC5E510C3D2D10078A9FD /* Data.cpp */,
+				8DFF6F16125674A9005D4590 /* Timer.cpp */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -3852,7 +3857,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* LostEngine */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4286,6 +4298,7 @@
 				8D2C9EF312510AE200EE478F /* b2PulleyJoint.cpp in Sources */,
 				8D2C9EF512510AE200EE478F /* b2RevoluteJoint.cpp in Sources */,
 				8D2C9F6F12510C1A00EE478F /* ThirdpartyBox2D.cpp in Sources */,
+				8DFF6F1C125674A9005D4590 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4705,6 +4718,7 @@
 				8D2C9F3012510AE200EE478F /* b2PulleyJoint.cpp in Sources */,
 				8D2C9F3212510AE200EE478F /* b2RevoluteJoint.cpp in Sources */,
 				8D2C9F7012510C1A00EE478F /* ThirdpartyBox2D.cpp in Sources */,
+				8DFF6F18125674A9005D4590 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5143,6 +5157,7 @@
 				8D2C9EB612510AE200EE478F /* b2PulleyJoint.cpp in Sources */,
 				8D2C9EB812510AE200EE478F /* b2RevoluteJoint.cpp in Sources */,
 				8D2C9F7112510C1A00EE478F /* ThirdpartyBox2D.cpp in Sources */,
+				8DFF6F1A125674A9005D4590 /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
