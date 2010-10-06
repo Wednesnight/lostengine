@@ -5,6 +5,7 @@ require("Player")
 require("lost.common.Shaders")
 require("Cloud")
 require("Ground")
+require("Physics")
 
 local config = require("config")
 local Color = lost.common.Color
@@ -18,39 +19,45 @@ function World:constructor()
 
   tasklet.clearNode.active = false
   
+  self.physicsFrequency = 1.0 / 60.0
+
   local aabb = box2d.b2AABB()
-  aabb.lowerBound:Set(-config.window.width, -config.window.height)
-  aabb.upperBound:Set(config.window.width*2, config.window.height*2)
-  local gravity = box2d.b2Vec2(0, -5)
+  aabb.lowerBound:Set(Physics.screenToWorld(-config.window.width, -config.window.height))
+  aabb.upperBound:Set(Physics.screenToWorld(config.window.width*2, config.window.height*2))
+  local gravity = box2d.b2Vec2(Physics.getGravity().x, Physics.getGravity().y)
   local doSleep = true
   self.physics = box2d.b2World(aabb, gravity, doSleep)
 
   -- level bounds
   -- bottom/left
   local bodyDef = box2d.b2BodyDef()
-  bodyDef.position:Set(0, -2)
+  bodyDef.position:Set(Physics.screenToWorld(0, -2))
   local body = self.physics:CreateBody(bodyDef)
   local shapeDef = box2d.b2PolygonDef()
-  shapeDef:SetAsBox(config.window.width/2, 1, box2d.b2Vec2(config.window.width/2, 1), 0)
+  local x, y = Physics.screenToWorld(config.window.width/2, 1)
+  shapeDef:SetAsBox(x, y, Physics.screenToWorldVec2(box2d.b2Vec2(config.window.width/2, 1)), 0)
   body:CreateShape(shapeDef)
   bodyDef = box2d.b2BodyDef()
-  bodyDef.position:Set(-2, 0)
+  bodyDef.position:Set(Physics.screenToWorld(-2, 0))
   body = self.physics:CreateBody(bodyDef)
   shapeDef = box2d.b2PolygonDef()
-  shapeDef:SetAsBox(1, config.window.height/2, box2d.b2Vec2(1, config.window.height/2), 0)
+  x, y = Physics.screenToWorld(1, config.window.height/2)
+  shapeDef:SetAsBox(x, y, Physics.screenToWorldVec2(box2d.b2Vec2(1, config.window.height/2)), 0)
   body:CreateShape(shapeDef)
   -- top/right
   bodyDef = box2d.b2BodyDef()
-  bodyDef.position:Set(0, config.window.height)
+  bodyDef.position:Set(Physics.screenToWorld(0, config.window.height))
   body = self.physics:CreateBody(bodyDef)
   shapeDef = box2d.b2PolygonDef()
-  shapeDef:SetAsBox(config.window.width/2, 1, box2d.b2Vec2(config.window.width/2, 1), 0)
+  x, y = Physics.screenToWorld(config.window.width/2, 1)
+  shapeDef:SetAsBox(x, y, Physics.screenToWorldVec2(box2d.b2Vec2(config.window.width/2, 1)), 0)
   body:CreateShape(shapeDef)
   bodyDef = box2d.b2BodyDef()
-  bodyDef.position:Set(config.window.width, 0)
+  bodyDef.position:Set(Physics.screenToWorld(config.window.width, 0))
   body = self.physics:CreateBody(bodyDef)
   shapeDef = box2d.b2PolygonDef()
-  shapeDef:SetAsBox(1, config.window.height/2, box2d.b2Vec2(1, config.window.height/2), 0)
+  x, y = Physics.screenToWorld(1, config.window.height/2)
+  shapeDef:SetAsBox(x, y, Physics.screenToWorldVec2(box2d.b2Vec2(1, config.window.height/2)), 0)
   body:CreateShape(shapeDef)
 
   self.renderNode = lost.rg.Node.create()
@@ -105,7 +112,11 @@ function World:constructor()
   local w = 32
   for i = 0,19,1 do
 --    log.debug(i*w)
-    self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,0)))
+    if i > 4 and i < 8 then
+      self:addEntity(aqua.Ground(Color(1,0,0),Vec2(i*w,0), 1.4))
+    else
+      self:addEntity(aqua.Ground(Color(1,1,1),Vec2(i*w,0)))
+    end
   end
 
   for i = 10,14,1 do
@@ -128,9 +139,12 @@ end
 
 function World:updateEntities(dt)
 
-  local iterations = 10
-  self.physics:Step(1/60, iterations)
-  self.physics:Validate()
+  self.physicsFrequency = self.physicsFrequency + dt
+  if self.physicsFrequency >= 1.0 / 60.0 then
+    self.physics:Step(1.0 / 60.0--[[fixed timestep]], 10--[[iterations]])
+    self.physics:Validate()
+    self.physicsFrequency = 0.0
+  end
 
   for k,v in pairs(self.entities) do
     v:update(dt,self)

@@ -1,10 +1,11 @@
 module("aqua", package.seeall)
 
 require("lost.common.Class")
+require("Physics")
 
 lost.common.Class "Ground" "aqua.Entity" {}
 
-function Ground:constructor(color, pos)
+function Ground:constructor(color, pos, restitution)
   aqua.Entity.constructor(self)
   self.name = "Ground"
   self.bitmap = lost.bitmap.Bitmap.create(tasklet.loader:load("BG_ground2.png"))
@@ -16,15 +17,18 @@ function Ground:constructor(color, pos)
   self.drawNode = lost.rg.Draw.create(self.quad)
   self.renderNode:add(self.drawNode)
   self.pos = pos
+  self.restitution = restitution or 0.0
 end
 
 function Ground:init(world)
   self.bodyDef = box2d.b2BodyDef()
-  self.bodyDef.position:Set(self.pos.x, self.pos.y)
+  self.bodyDef.position:Set(Physics.screenToWorld(self.pos.x, self.pos.y))
   self.body = world.physics:CreateBody(self.bodyDef)
   self.shapeDef = box2d.b2PolygonDef()
-  self.shapeDef:SetAsBox(14, 14, box2d.b2Vec2(14, 14), 0)
+  local x, y = Physics.screenToWorld(14, 14)
+  self.shapeDef:SetAsBox(x, y, Physics.screenToWorldVec2(box2d.b2Vec2(14, 14)), 0)
   self.shapeDef.friction = 0.6
+  self.shapeDef.restitution = self.restitution
   self.shape = self.body:CreateShape(self.shapeDef)
   return true
 end

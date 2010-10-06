@@ -16,4 +16,3 @@ end
 
 function Entity:update(dt, world)
 end
-
