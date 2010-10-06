@@ -177,12 +177,12 @@ namespace lost
       return result;
     }
 
-    bool Tasklet::update()
+    bool Tasklet::update(double deltaSeconds)
     {
       bool result = true;
       if(hasLuaUpdate)
       {
-        result = call_function<bool>(lsh->luaUpdate);
+        result = call_function<bool>(lsh->luaUpdate, deltaSeconds);
       }
       updateQueue->process(this);      
       return  result;      

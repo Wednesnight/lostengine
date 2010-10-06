@@ -8,30 +8,32 @@
 
 namespace lost
 {
-namespace application
-{
+  namespace application
+  {
 
-/** loads a tasklets "config.lua" file with the given loader and parses its contents into
- * the member variables.
- * This class mainly exists to encapsualte the loading/parsing code and prevent the luabind data types
- * from leaking in other classes.
- */
-struct TaskletConfig
-{
-  TaskletConfig();
-  
-  bool load(lua::StatePtr interpreter, resource::LoaderPtr loader);
-  void reset();
-    
-  std::string   taskletName;
-  bool          taskletWaitForEvents;
-  bool          taskletHasWindow;
-  
-  std::string   windowTitle;
-  math::Rect    windowRect;
-  
-};
-}
+    /** loads a tasklets "config.lua" file with the given loader and parses its contents into
+     * the member variables.
+     * This class mainly exists to encapsualte the loading/parsing code and prevent the luabind data types
+     * from leaking in other classes.
+     */
+    struct TaskletConfig
+    {
+      TaskletConfig();
+      
+      bool load(lua::StatePtr interpreter, resource::LoaderPtr loader);
+      void reset();
+        
+      std::string   taskletName;
+      bool          taskletWaitForEvents;
+      bool          taskletHasWindow;
+      
+      std::string   windowTitle;
+      math::Rect    windowRect;
+
+      double framerate;
+    };
+
+  }
 }
 
 #endif
