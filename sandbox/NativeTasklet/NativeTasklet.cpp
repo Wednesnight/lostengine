@@ -37,21 +37,12 @@ void ToggleClearColor::process(const lost::application::Tasklet* sender) const
 
 NativeTasklet::NativeTasklet()
 {
-  name = "NativeTasklet Demo";
-  waitForEvents = true;
-}
-
-void NativeTasklet::init()
-{
-  Tasklet::init();
-  // setup window
-  WindowParams params("NativeTasklet Demo", Rect(100,100,640,480));
-  createWindow(params);
-
-  // setup event listeners
-  window->dispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&NativeTasklet::keyDown, this, _1)));
-
-  Tasklet::init();
+  config.taskletName = "NativeTasklet Demo";
+  config.taskletWaitForEvents = true;
+  config.taskletHasWindow = true;
+  
+  config.windowTitle = config.taskletName;
+  config.windowRect = Rect(100, 100, 640, 480);
 }
 
 bool NativeTasklet::startup()
@@ -59,6 +50,10 @@ bool NativeTasklet::startup()
   if(!Tasklet::startup())
     return false;
   
+  // setup event listeners
+  window->dispatcher->addEventListener(KeyEvent::KEY_DOWN(), receive<KeyEvent>(bind(&NativeTasklet::keyDown, this, _1)));
+
+  // setup nodes
   ClearColorPtr clearColor = ClearColor::create(blackColor);
   ClearPtr clear = Clear::create(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -70,9 +65,9 @@ bool NativeTasklet::startup()
   return running;
 }
 
-bool NativeTasklet::update()
+bool NativeTasklet::update(double deltaSec)
 {
-  return (running && Tasklet::update());
+  return (running && Tasklet::update(deltaSec));
 }
 
 void NativeTasklet::keyDown(KeyEventPtr event)

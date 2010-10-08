@@ -16,6 +16,7 @@
 		8D5868B2113AAC2B006E8EB6 /* global-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */; };
 		8D5868B3113AAC2B006E8EB6 /* global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AD113AAC2B006E8EB6 /* global.xcconfig */; };
 		8D5868B5113AAC2B006E8EB6 /* macosx.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */; };
+		8D8C40F8125FB2A400C860F8 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D8C40F7125FB2A400C860F8 /* OpenAL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		8D5868AC113AAC2B006E8EB6 /* global-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "global-release.xcconfig"; sourceTree = "<group>"; };
 		8D5868AD113AAC2B006E8EB6 /* global.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = global.xcconfig; sourceTree = "<group>"; };
 		8D5868AF113AAC2B006E8EB6 /* macosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = macosx.xcconfig; sourceTree = "<group>"; };
+		8D8C40F7125FB2A400C860F8 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				8D5868A9113AAC18006E8EB6 /* libLostEngine.a in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				8D5868A8113AAC0C006E8EB6 /* OpenGL.framework in Frameworks */,
+				8D8C40F8125FB2A400C860F8 /* OpenAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +122,7 @@
 				8D586891113AAC02006E8EB6 /* LostEngine.xcodeproj */,
 				8D5868A7113AAC0C006E8EB6 /* OpenGL.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				8D8C40F7125FB2A400C860F8 /* OpenAL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,7 +189,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NativeTasklet" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* NativeTasklet */;
 			projectDirPath = "";
 			projectReferences = (
