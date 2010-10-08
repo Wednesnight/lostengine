@@ -4,7 +4,8 @@
 #ifdef __cplusplus
 
   #define BOOST_SP_NO_ATOMIC_ACCESS
-  
+  #define BOOST_FILESYSTEM_VERSION 3
+  #define BOOST_SYSTEM_NO_DEPRECATED
   // boost
   #ifndef __STDC_CONSTANT_MACROS
     #define __STDC_CONSTANT_MACROS

@@ -2,17 +2,7 @@
 #define LOST_RESOURCE_FILESYSTEMREPOSITORY_H
 
 #include "lost/resource/Repository.h"
-
-// filesystem path foward declaration
-namespace boost
-{
-namespace filesystem
-{
-    template<typename S, typename PT> class basic_path;
-    struct path_traits;
-    typedef basic_path< std::string, path_traits > path;
-}
-}
+#include <boost/filesystem.hpp>
 
 namespace lost
 {
