@@ -1,7 +1,7 @@
 local taskletName = "Model Viewer"
 
 require("lost.declarative.Context")
-require("lost.guiro.RenderView")
+require("lost.guiro.view.RenderView")
 
 using "lost.application.WindowParams"
 using "lost.math.Rect"

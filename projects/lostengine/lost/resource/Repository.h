@@ -5,17 +5,8 @@
 #include "lost/common/forward.h"
 #include "lost/resource/forward.h"
 #include <string>
+#include <boost/filesystem.hpp>
 
-// filesystem path foward declaration
-namespace boost
-{
-namespace filesystem
-{
-    template<typename S, typename PT> class basic_path;
-    struct path_traits;
-    typedef basic_path< std::string, path_traits > path;
-}
-}
 
 namespace lost
 {

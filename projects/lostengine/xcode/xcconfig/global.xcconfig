@@ -12,7 +12,7 @@ VALID_ARCHS = x86_64 armv6
 
 // thirdparty defines
 THIRDPARTY_ROOT = "$(LOSTENGINE_ROOT)/thirdparty"
-BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_42_0"
+BOOST_ROOT = "$(THIRDPARTY_ROOT)/boost/boost_1_44_0"
 BOX2D_ROOT = "$(THIRDPARTY_ROOT)/box2d/box2d_2_0_1"
 BULLET_ROOT = "$(THIRDPARTY_ROOT)/bullet-2.76"
 FHTAGN_ROOT = "$(THIRDPARTY_ROOT)/fhtagn/fhtagn-0.3"
@@ -20,7 +20,7 @@ FREETYPE_ROOT = "$(THIRDPARTY_ROOT)/freetype2/freetype_2_3_7"
 GLEE_ROOT = "$(THIRDPARTY_ROOT)/glee/glee_5_21"
 HASHLIB_ROOT = "$(THIRDPARTY_ROOT)/hashlib++/hashlib++_0_3_1"
 LUA_ROOT = "$(THIRDPARTY_ROOT)/lua/lua_5_1_4"
-LUABIND_ROOT = "$(THIRDPARTY_ROOT)/luabind/luabind_0_9"
+LUABIND_ROOT = "$(THIRDPARTY_ROOT)/luabind/luabind_0_9_1"
 STBIMAGE_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_image_1_18"
 STBVORBIS_ROOT = "$(THIRDPARTY_ROOT)/stb/stb_vorbis_0_99996"
 UNITTESTPP_ROOT = "$(THIRDPARTY_ROOT)/UnitTest++"
