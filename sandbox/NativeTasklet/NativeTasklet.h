@@ -14,9 +14,8 @@ struct NativeTasklet : public lost::application::Tasklet
 {
   NativeTasklet();
 
-  void init();
   bool startup();
-  bool update();
+  bool update(double deltaSec);
 
   void keyDown(lost::application::KeyEventPtr event);
 
