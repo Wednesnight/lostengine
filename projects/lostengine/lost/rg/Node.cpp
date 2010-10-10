@@ -37,22 +37,22 @@ namespace lost
       DOUT("Num nodes:"<<numNodes<<" enabled:"<<enabledNodes<<" disabled:"<<(numNodes-enabledNodes));
     }
 
-    void Node::add(NodePtr child)
+    void Node::add(const NodePtr& child)
     {
       children.push_back(child);
     }
 
-    void Node::addFront(NodePtr child)
+    void Node::addFront(NodePtr& child)
     {
       children.push_front(child);
     }
     
-    void Node::remove(NodePtr child)
+    void Node::remove(NodePtr& child)
     {
       children.remove(child);
     }
       
-    void Node::process(gl::ContextPtr ctx)
+    void Node::process(gl::ContextPtr& ctx)
     {
       if(!active) return;
 //      DOUT(name);

@@ -17,7 +17,7 @@ namespace lost
       return BlendPtr(new Blend(inEnable));
     }
     
-    void Blend::process(gl::ContextPtr ctx)
+    void Blend::process(gl::ContextPtr& ctx)
     {
       if(!active) return;
       ctx->blend(enable);

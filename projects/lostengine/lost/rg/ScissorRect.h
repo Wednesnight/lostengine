@@ -19,7 +19,7 @@ namespace lost
       ScissorRect(const math::Rect& inRect);
       static ScissorRectPtr create(const math::Rect& inRect);
       
-      void process(gl::ContextPtr ctx);
+      void process(gl::ContextPtr& ctx);
     };
   }
 }

@@ -11,7 +11,7 @@ DefaultFrameBufferPtr DefaultFrameBuffer::create()
   return DefaultFrameBufferPtr(new DefaultFrameBuffer);
 }
 
-void DefaultFrameBuffer::process(gl::ContextPtr ctx)
+void DefaultFrameBuffer::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->bindDefaultFramebuffer();

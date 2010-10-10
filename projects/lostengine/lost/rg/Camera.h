@@ -26,7 +26,7 @@ namespace rg
     static CameraPtr create(camera::Camera2DPtr inCam);
     static CameraPtr create(camera::Camera3DPtr inCam);
 
-    void process(gl::ContextPtr ctx);
+    void process(gl::ContextPtr& ctx);
   };
 }
 }

@@ -18,7 +18,7 @@ DrawPtr Draw::create(mesh::MeshPtr inMesh)
   return DrawPtr(new Draw(inMesh));
 }
 
-void Draw::process(gl::ContextPtr ctx)
+void Draw::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->draw(mesh);

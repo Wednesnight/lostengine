@@ -17,7 +17,7 @@ namespace lost
       return ScissorPtr(new Scissor(inEnable));
     }
     
-    void Scissor::process(gl::ContextPtr ctx)
+    void Scissor::process(gl::ContextPtr& ctx)
     {
       if(!active) return;
       ctx->scissor(enable);

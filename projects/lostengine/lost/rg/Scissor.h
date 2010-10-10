@@ -18,7 +18,7 @@ namespace lost
       Scissor(bool inEnable);
       static ScissorPtr create(bool inEnable);
       
-      void process(gl::ContextPtr ctx);
+      void process(gl::ContextPtr& ctx);
     };
   }
 }
