@@ -17,7 +17,7 @@ namespace lost
       return ScissorRectPtr(new ScissorRect(inRect));
     }
     
-    void ScissorRect::process(gl::ContextPtr ctx)
+    void ScissorRect::process(gl::ContextPtr& ctx)
     {
       if(!active) return;
       ctx->scissorRect(rect);

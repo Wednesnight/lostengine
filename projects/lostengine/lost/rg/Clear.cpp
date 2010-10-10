@@ -17,7 +17,7 @@ ClearPtr Clear::create(GLbitfield inMask)
   return ClearPtr(new Clear(inMask));
 }
 
-void Clear::process(gl::ContextPtr ctx)
+void Clear::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->clear(mask);

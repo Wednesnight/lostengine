@@ -29,7 +29,7 @@ CameraPtr Camera::create(camera::Camera3DPtr inCam)
   return CameraPtr(new Camera(inCam));
 }
 
-void Camera::process(gl::ContextPtr ctx)
+void Camera::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->camera(cam); 

@@ -22,10 +22,10 @@ struct Node
   Node();
   virtual ~Node();
   
-  virtual void process(gl::ContextPtr ctx);
-  void add(NodePtr child);
-  void addFront(NodePtr child);
-  void remove(NodePtr child);
+  virtual void process(gl::ContextPtr& ctx);
+  void add(const NodePtr& child);
+  void addFront(NodePtr& child);
+  void remove(NodePtr& child);
   static NodePtr create();
   std::list<NodePtr> children;
   

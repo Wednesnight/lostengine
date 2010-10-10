@@ -16,7 +16,7 @@ struct Clear : public Node
   Clear(GLbitfield inMask);
   static ClearPtr create(GLbitfield inMask);
 
-  void process(gl::ContextPtr ctx);
+  void process(gl::ContextPtr& ctx);
 };
 
 }

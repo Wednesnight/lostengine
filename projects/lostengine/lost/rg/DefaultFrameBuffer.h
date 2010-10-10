@@ -11,7 +11,7 @@ namespace rg
 struct DefaultFrameBuffer : public Node
 {
   static DefaultFrameBufferPtr create();
-  void process(gl::ContextPtr ctx);
+  void process(gl::ContextPtr& ctx);
 };
 
 }

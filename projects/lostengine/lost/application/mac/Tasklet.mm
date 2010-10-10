@@ -34,6 +34,7 @@ namespace lost
 
       isAlive = true;
       bool hasError = false;
+      std::string errorMsg = "";
 
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
@@ -74,8 +75,13 @@ namespace lost
           shutdown();
         }
       }
+      catch(std::exception& ex)
+      {
+        errorMsg = ex.what();
+        hasError = true;
+      }
       catch (...) {
-
+        errorMsg = "<catch all>";
         hasError = true;
       }
       isAlive = false;
@@ -84,7 +90,7 @@ namespace lost
       if (hasError) {
 
         ostringstream os;
-        os << "Tasklet terminated with error: " << name;
+        os << "Tasklet '"<<name<<"' terminated with error: " <<errorMsg;
         throw runtime_error(os.str());
       }
     }

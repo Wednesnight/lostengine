@@ -17,7 +17,7 @@ ClearColorPtr ClearColor::create(const common::Color& inCol)
   return ClearColorPtr(new ClearColor(inCol));
 }
 
-void ClearColor::process(gl::ContextPtr ctx)
+void ClearColor::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->clearColor(col);

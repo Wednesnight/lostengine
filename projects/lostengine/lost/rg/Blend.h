@@ -17,7 +17,7 @@ namespace lost
       Blend(bool inEnable);
       static BlendPtr create(bool inEnable);
       
-      void process(gl::ContextPtr ctx);
+      void process(gl::ContextPtr& ctx);
     };
   }
 }
