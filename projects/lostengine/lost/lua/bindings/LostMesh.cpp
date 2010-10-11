@@ -128,6 +128,9 @@ namespace lost
             .def("add", &Material::add)
             .def("setTexture", &Material::setTexture)
             .def("limitTextures", &Material::limitTextures)
+            .def("blendNormal", &Material::blendNormal)
+            .def("blendPremultiplied", &Material::blendPremultiplied)
+            .def("blendOff", &Material::blendOff)
             .scope
             [
               def("create", (MaterialPtr(*)())&Material::create)

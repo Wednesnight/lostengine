@@ -48,6 +48,25 @@ struct Material
     return result;
   }
   
+  void blendNormal()
+  {
+    blend = true;
+    blendSrc = GL_SRC_ALPHA;
+    blendDest = GL_ONE_MINUS_SRC_ALPHA; 
+  }
+
+  void blendPremultiplied()
+  {
+    blend = true;
+    blendSrc = GL_SRC_ALPHA;
+    blendDest = GL_ONE; 
+  }
+  
+  void blendOff()
+  {
+    blend = false;
+  }
+  
   void add(const gl::TexturePtr& tex)
   {
     textures.push_back(tex);
