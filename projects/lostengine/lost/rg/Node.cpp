@@ -47,7 +47,7 @@ namespace lost
       children.push_front(child);
     }
     
-    void Node::remove(NodePtr& child)
+    void Node::remove(const NodePtr& child)
     {
       children.remove(child);
     }
