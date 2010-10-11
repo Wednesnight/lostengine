@@ -4,28 +4,35 @@ uniform vec2 center;
 uniform float radius;
 varying vec2 vtc; 
 
-vec4 nonAAcircle(vec2 lpc)
+float disc(vec2 lpc, vec2 c, float r)
 {
-  vec4 gradColor = color;
-  gradColor.r = lpc.x / size.x;
-  gradColor.g = lpc.y / size.y;
   vec4 white = vec4(1,1,1,1);
 
-  float f = length(lpc - center) - radius;
-  float circleColor = 1.0 - step(radius, f);
+  float dist = distance(lpc ,c);
+  float circleColor = 1.0 - step(r, dist);
+  float aawidth = 1.0;
+  float aa = (step(r-aawidth, dist)*circleColor)*fract(dist);
+  circleColor = circleColor-aa;
 
-  return (white*(circleColor)) + (gradColor*(1.0-circleColor));  
+  return circleColor; 
+}
+
+float ring(vec2 lpc, vec2 c, float r, float w)
+{
+  return disc(lpc, c, r) - disc(lpc, c, r-w);
 }
 
 // returns the current fragments pixel coord in quad space
 // i.e. with origin of quad = 0,0
 vec2 quadPixelCoord() 
 {
-  return vtc*size;
+  return vtc*(size-vec2(1,1));
 }
 
 void main(void)
 {  
-  
-  gl_FragColor = nonAAcircle(quadPixelCoord());    
+  float f = 0.0;
+  f = disc(quadPixelCoord(), center, radius);    
+//  f = ring(quadPixelCoord(), center, radius, 6.0);
+  gl_FragColor = vec4(1,1,1,1)*f;
 }

@@ -20,8 +20,8 @@ function startup()
   local shaderParams = lost.gl.UniformBlock.create()
   local quadSize = Vec2(200,200)
   shaderParams:set("size", quadSize)
-  shaderParams:set("center", Vec2(50,50))
-  shaderParams:setFloat("radius", 20)
+  shaderParams:set("center", Vec2(123,123))
+  shaderParams:setFloat("radius", 16)
 
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
@@ -44,7 +44,6 @@ function startup()
   rrmesh:set(2,gl.UT_texcoord0, Vec2(1,1))
   rrmesh:set(3,gl.UT_texcoord0, Vec2(0,1))
 
-  
   rrmesh:setU16(0,gl.UT_index, 0)
   rrmesh:setU16(1,gl.UT_index, 1)
   rrmesh:setU16(2,gl.UT_index, 2)
@@ -55,6 +54,7 @@ function startup()
   rrmesh.material.color = Color(1,0,0)
   rrmesh.material.shader = lost.gl.loadShader(tasklet.loader, "rr")
   rrmesh.material.uniforms = shaderParams
+  rrmesh.material:blendPremultiplied()
   rrmesh.transform = MatrixTranslation(Vec3(20,20,0))
 
   rootNode = dcl.rg:Node
