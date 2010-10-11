@@ -182,6 +182,17 @@ void RayTracer::render(double timeout) {
 
     shared_ptr<Primitive> primitive;
 
+    // Gaussian kernel
+    Vec2 offset[9];
+    offset[0] = Vec2(-scale.x, -scale.y); offset[1] = Vec2(0.0f, -scale.y); offset[2] = Vec2(scale.x, -scale.y);
+    offset[3] = Vec2(-scale.x, 0.0f);     offset[4] = Vec2(0.0f, 0.0f);     offset[5] = Vec2(scale.x, 0.0f);
+    offset[6] = Vec2(-scale.x, scale.y);  offset[7] = Vec2(0.0f, scale.y);  offset[8] = Vec2(scale.x, scale.y);
+    
+    float kernel[9];
+    kernel[0] = 1.0/16.0; kernel[1] = 2.0/16.0;	kernel[2] = 1.0/16.0;
+    kernel[3] = 2.0/16.0;	kernel[4] = 4.0/16.0;	kernel[5] = 2.0/16.0;
+    kernel[6] = 1.0/16.0; kernel[7] = 2.0/16.0;	kernel[8] = 1.0/16.0;
+    
     for (int y = currentLine; y < config.windowRect.height; ++y) {
 
       currentPosition.x = world.x;
@@ -197,22 +208,21 @@ void RayTracer::render(double timeout) {
         float distance = 0.0f;
 
         shared_ptr<Primitive> p = raytrace(ray, color, 1, 1.0f, distance);
+        // apply gaussian blur for edges
         if (p != primitive) {
 
           primitive = p;
+
           color = Color(0.0f, 0.0f, 0.0f);
-          for (int tx = -1; tx < 2; ++tx) {
-
-            for (int ty = -1; ty < 2; ++ty) {
-
-              Vec3 dir = Vec3(currentPosition.x + scale.x * tx / 2.0f, currentPosition.y + scale.y * ty / 2.0f, 0.0f) - eye;
-              dir = normalise(dir);
-              Ray r(eye, dir);
-              float dist;
-              raytrace(r, color, 1, 1.0f, dist);
-            }
+          for(int i = 0; i < 9; ++i) {
+            
+            Color tmp(0.0f, 0.0f, 0.0f);
+            Vec3 dir = Vec3(currentPosition.x + offset[i].x, currentPosition.y + offset[i].y, 0.0f) - eye;
+            dir = normalise(dir);
+            Ray r(eye, dir);
+            raytrace(r, tmp, 1, 1.0f, distance);
+            color += tmp * kernel[i];
           }
-          color /= 9.0f;
         }
 
         bitmap->pixel(x, y, color);
@@ -305,7 +315,7 @@ shared_ptr<Primitive> RayTracer::raytrace(Ray& ray, Color& color, int depth, flo
 
           numIntersectionTests++;
           
-          if (!(*target)->isLight && (*target)->intersect(r, tdist) != 0) {
+          if (!(*target)->isLight && (*target) != primitive && (*target)->intersect(r, tdist) != 0) {
             shade = 0.0f;
             break;
           }
