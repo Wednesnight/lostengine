@@ -92,5 +92,15 @@ namespace lost
       l.fv[3] = std::max( 0.0f, l.fv[3] - r.fv[3] );
     }
 
+    void operator/=(Color& l, float f)
+    {
+      assert(f != 0.0f);
+
+      l.fv[0] = l.fv[0] / f;
+      l.fv[1] = l.fv[1] / f;
+      l.fv[2] = l.fv[2] / f;
+      l.fv[3] = l.fv[3] / f;
+    }
+    
 }
 }

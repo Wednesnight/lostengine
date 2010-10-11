@@ -42,6 +42,7 @@ namespace lost
     bool operator !=(const Color& l, const Color& r);
     void operator+=(Color& l, const Color& r);
     void operator-=(Color& l, const Color& r);
+    void operator/=(Color& l, float);
 
     extern const lost::common::Color transparentColor;
     extern const lost::common::Color whiteColor      ;
