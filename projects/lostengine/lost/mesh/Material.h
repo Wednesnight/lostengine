@@ -58,8 +58,8 @@ struct Material
   void blendPremultiplied()
   {
     blend = true;
-    blendSrc = GL_SRC_ALPHA;
-    blendDest = GL_ONE; 
+    blendSrc = GL_ONE;
+    blendDest = GL_ONE_MINUS_SRC_ALPHA; 
   }
   
   void blendOff()

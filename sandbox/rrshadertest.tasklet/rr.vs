@@ -13,3 +13,4 @@ void main(void)
   vtc = texcoord0;
   gl_Position = projectionMatrix*modelViewMatrix*pos; // equivalent to builtin function ftransform()
 }
+
