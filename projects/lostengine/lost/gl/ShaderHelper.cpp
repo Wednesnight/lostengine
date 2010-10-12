@@ -183,21 +183,25 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string
 
   std::string vsname = inName+".vs";
   common::DataPtr vsfile = loader->load(vsname);
-  vertexShader->source(processDependencies(loader, vsfile->str()));
+  string source = processDependencies(loader, vsfile->str());
+  vertexShader->source(source);
   vertexShader->compile();
   if(!vertexShader->compiled())
   {
     ostringstream os;
+    EOUT(source)
     os << "vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log();
     throw std::runtime_error(os.str());
   }
 
   std::string fsname = inName+".fs";
   common::DataPtr fsfile = loader->load(fsname);
-  fragmentShader->source(processDependencies(loader, fsfile->str()));
+  source = processDependencies(loader, fsfile->str());
+  fragmentShader->source(source);
   fragmentShader->compile();
   if(!fragmentShader->compiled())
   {
+    EOUT(source);
     ostringstream os;
     os << "fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log();
     throw std::runtime_error(os.str());

@@ -6,6 +6,7 @@ varying vec2 vtc;
 
 #import "disc.fsp"
 #import "ring.fsp"
+#import "arc.fsp"
 
 // returns the current fragments pixel coord in quad space
 // i.e. with origin of quad = 0,0, ranged 0-(max-1)
@@ -18,6 +19,8 @@ void main(void)
 {  
   float f = 0.0;
 //  f = disc(localPixelCoord(), center, radius);    
-  f = ring(localPixelCoord(), center, radius, 6.0);
-  gl_FragColor = color*f;
+  vec2 lpc = localPixelCoord();
+  float a = arc(lpc, center, radius, vec4(1,1,0,0));
+  f = ring(lpc, center, radius, 1.0);
+  gl_FragColor = color*f*a;
 }
