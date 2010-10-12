@@ -1,6 +1,14 @@
 #import "disc.fsp"
+#import "quadrant.fsp"
 
 float ring(vec2 lpc, vec2 c, float r, float w)
 {
   return disc(lpc, c, r) - disc(lpc, c, r-w);
+}
+
+float quadring(vec2 lpc, vec2 c, float r, float w, bvec2 sel)
+{
+  float res = ring(lpc, c, r, w);
+  float q = quadrant(lpc, c, sel);
+  return res*q;
 }
