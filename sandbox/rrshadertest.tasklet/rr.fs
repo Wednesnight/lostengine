@@ -32,7 +32,7 @@ vec2 localPixelCoord()
 void main(void)
 {  
   float f = 0.0;
-  f = disc(localPixelCoord(), center, radius);    
-//  f = ring(localPixelCoord(), center, radius, 6.0);
+//  f = disc(localPixelCoord(), center, radius);    
+  f = ring(localPixelCoord(), center, radius, 6.0);
   gl_FragColor = color*f;
 }

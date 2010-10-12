@@ -54,7 +54,7 @@ function createRR(pos, radius)
   shaderParams:set("center", Vec2(radius-1,radius-1))
   shaderParams:setFloat("radius", radius)
 
-  result.material.color = Color(1,0,0,1)
+  result.material.color = Color(1,1,1,1)
   result.material.shader = lost.gl.loadShader(tasklet.loader, "rr")
   result.material.uniforms = shaderParams
   result.material:blendPremultiplied()
@@ -67,15 +67,18 @@ function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  local rrmesh = createRR(Vec2(20,20), 16)
-
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor { color = Color(92/255,174/255,210/255,1) },
     dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT },
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
-    dcl.rg:Draw { mesh = rrmesh }
+    dcl.rg:Draw { mesh = createRR(Vec2(20,20), 16) },
+    dcl.rg:Draw { mesh = createRR(Vec2(100,50), 64) },
+    dcl.rg:Draw { mesh = createRR(Vec2(10,100), 13) },
+    dcl.rg:Draw { mesh = createRR(Vec2(200,200), 57) },
+    dcl.rg:Draw { mesh = createRR(Vec2(420,300), 164) },
+    dcl.rg:Draw { mesh = createRR(Vec2(400,187), 47) },
   }    
   tasklet.renderNode:add(rootNode)
 
