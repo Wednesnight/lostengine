@@ -1,3 +1,5 @@
+#import "quadrant.fsp"
+
 float disc(vec2 lpc, vec2 c, float r)
 {
   float dist = distance(lpc ,c);
@@ -8,4 +10,11 @@ float disc(vec2 lpc, vec2 c, float r)
   circleColor = circleColor-aa;
 
   return circleColor; 
+}
+
+float quaddisc(vec2 lpc, vec2 c, float r, bvec2 sel)
+{
+  float d = disc(lpc, c, r);
+  float q = quadrant(lpc, c, sel);
+  return d*q;
 }

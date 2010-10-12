@@ -51,8 +51,8 @@ function createRR(pos, radius)
 
   local shaderParams = lost.gl.UniformBlock.create()
   shaderParams:set("size", size)
-  shaderParams:set("center", Vec2(radius-1,radius-1))
-  shaderParams:setFloat("radius", radius)
+--  shaderParams:set("center", Vec2(radius-1,radius-1))
+--  shaderParams:setFloat("radius", radius)
 
   result.material.color = Color(1,1,1,1)
   result.material.shader = lost.gl.loadShader(tasklet.loader, "rr")

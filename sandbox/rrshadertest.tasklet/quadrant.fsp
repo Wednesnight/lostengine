@@ -1,0 +1,7 @@
+// returns 1 if p is in the quadrant described by sel, relative to c
+// sel is interpreted as a bit field where x = left (false) or right (true) 
+// and y = bottom (false) or top (true)
+float quadrant(vec2 p, vec2 c, bvec2 sel)
+{
+  return float(all(equal(bvec2(step(c.x, p.x), step(c.y, p.y)), sel)));
+}
