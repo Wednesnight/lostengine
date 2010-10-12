@@ -1,0 +1,14 @@
+// sel = r/t/l/b
+float arc(vec2 p, vec2 c, float r, vec4 sel)
+{
+  vec2 tr = vec2(step(c.x, p.x), step(c.y, p.y));
+  vec2 bl = vec2(1,1)-tr;
+  vec4 current = vec4(tr.x, tr.y, bl.x, bl.y);
+  float l = abs(length(current - sel));
+  float res = 0.0;
+  if(l <= 0.0)
+  {
+    res = 1.0;
+  }
+  return res;
+}
