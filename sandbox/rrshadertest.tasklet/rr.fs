@@ -23,8 +23,8 @@ float ring(vec2 lpc, vec2 c, float r, float w)
 }
 
 // returns the current fragments pixel coord in quad space
-// i.e. with origin of quad = 0,0
-vec2 quadPixelCoord() 
+// i.e. with origin of quad = 0,0, ranged 0-(max-1)
+vec2 localPixelCoord() 
 {
   return vtc*(size-vec2(1,1));
 }
@@ -32,7 +32,7 @@ vec2 quadPixelCoord()
 void main(void)
 {  
   float f = 0.0;
-  f = disc(quadPixelCoord(), center, radius);    
-//  f = ring(quadPixelCoord(), center, radius, 6.0);
-  gl_FragColor = vec4(1,1,1,1)*f;
+  f = disc(localPixelCoord(), center, radius);    
+//  f = ring(localPixelCoord(), center, radius, 6.0);
+  gl_FragColor = color*f;
 }
