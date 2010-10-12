@@ -1,0 +1,6 @@
+#import "disc.fsp"
+
+float ring(vec2 lpc, vec2 c, float r, float w)
+{
+  return disc(lpc, c, r) - disc(lpc, c, r-w);
+}

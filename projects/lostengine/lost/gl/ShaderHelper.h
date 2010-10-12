@@ -19,7 +19,7 @@ namespace gl
  *
  *  throws if one of the compile stages or the link stage fail.
  */
-ShaderProgramPtr loadShader(resource::LoaderPtr loader,
+ShaderProgramPtr loadShader(const resource::LoaderPtr& loader,
                                    const std::string& inName);
 
 }
