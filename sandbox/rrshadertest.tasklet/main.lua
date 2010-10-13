@@ -13,6 +13,9 @@ running = true
 rootNode = nil
 dcl = nil
 
+sum = 0
+curwidth = 3
+
 function createQuad(size)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
@@ -54,7 +57,8 @@ function createRR(pos, radius)
 --  shaderParams:set("center", Vec2(radius-1,radius-1))
 --  shaderParams:setFloat("radius", radius)
 
-  result.material.color = Color(1,1,1,1)
+  local c = 1
+  result.material.color = Color(c,c,c,c)
   result.material.shader = lost.gl.loadShader(tasklet.loader, "rr")
   result.material.uniforms = shaderParams
   result.material:blendPremultiplied()
@@ -73,11 +77,12 @@ function startup()
     dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT },
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
+    dcl.rg:Draw { mesh = createRR(Vec2(20,180), 10) },
     dcl.rg:Draw { mesh = createRR(Vec2(20,20), 16) },
     dcl.rg:Draw { mesh = createRR(Vec2(100,50), 64) },
     dcl.rg:Draw { mesh = createRR(Vec2(10,100), 13) },
     dcl.rg:Draw { mesh = createRR(Vec2(200,200), 57) },
-    dcl.rg:Draw { mesh = createRR(Vec2(420,300), 164) },
+    dcl.rg:Draw { mesh = createRR(Vec2(420,200), 164) },
     dcl.rg:Draw { mesh = createRR(Vec2(400,187), 47) },
   }    
   tasklet.renderNode:add(rootNode)
@@ -85,7 +90,9 @@ function startup()
   return running
 end
 
-function update()
+function update(dt)
+  --log.debug(dt)
+  
   return running
 end
 
