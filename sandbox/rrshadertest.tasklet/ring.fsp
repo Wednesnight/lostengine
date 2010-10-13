@@ -1,5 +1,4 @@
 #import "disc.fsp"
-#import "quadrant.fsp"
 
 float ring(vec2 lpc, vec2 c, float r, float w)
 {
