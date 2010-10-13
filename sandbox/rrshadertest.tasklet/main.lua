@@ -57,6 +57,7 @@ function createQuad(size)
   result:setU16(5,gl.UT_index, 0)
   
   result.material.uniforms = lost.gl.UniformBlock.create()
+  result.material:blendPremultiplied()
   
   return result
 end
@@ -69,7 +70,6 @@ function createDisc(col, pos, radius)
   result.material.uniforms:set("size", size)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
-  result.material:blendPremultiplied()
   result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))  
   return result
 end
@@ -83,21 +83,43 @@ function createRing(col, pos, radius, width)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
   result.material.uniforms:setFloat("width", width)
-  result.material:blendPremultiplied()
   result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))  
   return result
 end
 
-function createRR(col, pos, radius)
-  local size = Vec2(radius*2, radius*2)
+function createRoundedRect(col, rect, radius)
+  local size = Vec2(rect.width, rect.height)
   local result = createQuad(size)
 
   result.material.color = col
-  result.material.shader = loadShader("rr")
+  result.material.shader = loadShader("roundedRect")
   result.material.uniforms:set("size", size)
-  result.material:blendPremultiplied()
-  result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))
+  result.material.uniforms:setFloat("radius", radius)
+  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
   
+  return result
+end
+
+function createRoundedRectFrame(col, rect, radius, width)
+  local size = Vec2(rect.width, rect.height)
+  local result = createQuad(size)
+
+  result.material.color = col
+  result.material.shader = loadShader("roundedRectFrame")
+  result.material.uniforms:set("size", size)
+  result.material.uniforms:setFloat("radius", radius)
+  result.material.uniforms:setFloat("width", width)
+  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
+  
+  return result
+end
+
+function createComboRectNode(col1, col2, rect, radius, width)
+  local result = dcl.rg:Node
+  {
+    dcl.rg:Draw{mesh = createRoundedRect(col1, rect, radius)},
+    dcl.rg:Draw{mesh = createRoundedRectFrame(col2, rect, radius, width)},
+  }
   return result
 end
 
@@ -107,6 +129,12 @@ function startup()
 
   local white = Color(1,1,1,1)
   local red = Color(1,0,0,1)
+  local blue = Color(0,0,1,1)
+  local gray1 = Color(.2, .2, .2, 1)
+  local gray2 = Color(.8, .8, .8, 1)
+
+  local r = 4
+  local w = 2
 
   rootNode = dcl.rg:Node
   {
@@ -114,15 +142,21 @@ function startup()
     dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT },
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
-    dcl.rg:Draw { mesh = createRR(white, Vec2(20,180), 10) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(20,20), 16) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(100,50), 64) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(10,100), 13) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(200,200), 57) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(420,200), 164) },
-    dcl.rg:Draw { mesh = createRR(white, Vec2(400,187), 47) },
+
+    createComboRectNode(gray2, gray1, Rect(20,400,200,200), 47, 2),
     dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
     dcl.rg:Draw { mesh = createRing(red, Vec2(600,300), 47, 2) },
+    
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(200,200, 57, 57), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(420,200, 64, 46), r,w) },
+
+    dcl.rg:Draw { mesh = createRoundedRect(gray2, Rect(400,287, 120, 20), 4) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(gray1, Rect(400,287, 120, 20), 4, 1) },
+    
   }    
   tasklet.renderNode:add(rootNode)
 
