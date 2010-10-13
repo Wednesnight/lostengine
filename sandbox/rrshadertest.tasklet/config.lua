@@ -9,5 +9,5 @@ return {
     y = 50,
     width = 800,
     height = 600
-  }
+  },
 }
