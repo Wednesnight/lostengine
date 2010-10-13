@@ -45,22 +45,45 @@ function createQuad(size)
   result:setU16(4,gl.UT_index, 3)
   result:setU16(5,gl.UT_index, 0)
   
+  result.material.uniforms = lost.gl.UniformBlock.create()
+  
   return result
 end
 
-function createRR(pos, radius)
+function createDisc(col, pos, radius)
+  local size = Vec2(radius*2, radius*2)
+  local result = createQuad(size)
+  result.material.color = col
+  result.material.shader = lost.gl.loadShader(tasklet.loader, "disc")
+  result.material.uniforms:set("size", size)
+  result.material.uniforms:set("center", Vec2(radius-1, radius-1))
+  result.material.uniforms:setFloat("radius", radius)
+  result.material:blendPremultiplied()
+  result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))  
+  return result
+end
+
+function createRing(col, pos, radius, width)
+  local size = Vec2(radius*2, radius*2)
+  local result = createQuad(size)
+  result.material.color = col
+  result.material.shader = lost.gl.loadShader(tasklet.loader, "ring")
+  result.material.uniforms:set("size", size)
+  result.material.uniforms:set("center", Vec2(radius-1, radius-1))
+  result.material.uniforms:setFloat("radius", radius)
+  result.material.uniforms:setFloat("width", width)
+  result.material:blendPremultiplied()
+  result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))  
+  return result
+end
+
+function createRR(col, pos, radius)
   local size = Vec2(radius*2, radius*2)
   local result = createQuad(size)
 
-  local shaderParams = lost.gl.UniformBlock.create()
-  shaderParams:set("size", size)
---  shaderParams:set("center", Vec2(radius-1,radius-1))
---  shaderParams:setFloat("radius", radius)
-
-  local c = 1
-  result.material.color = Color(c,c,c,c)
+  result.material.color = col
   result.material.shader = lost.gl.loadShader(tasklet.loader, "rr")
-  result.material.uniforms = shaderParams
+  result.material.uniforms:set("size", size)
   result.material:blendPremultiplied()
   result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))
   
@@ -71,19 +94,24 @@ function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
+  local white = Color(1,1,1,1)
+  local red = Color(1,0,0,1)
+
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor { color = Color(92/255,174/255,210/255,1) },
     dcl.rg:Clear { mask = gl.GL_COLOR_BUFFER_BIT },
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
-    dcl.rg:Draw { mesh = createRR(Vec2(20,180), 10) },
-    dcl.rg:Draw { mesh = createRR(Vec2(20,20), 16) },
-    dcl.rg:Draw { mesh = createRR(Vec2(100,50), 64) },
-    dcl.rg:Draw { mesh = createRR(Vec2(10,100), 13) },
-    dcl.rg:Draw { mesh = createRR(Vec2(200,200), 57) },
-    dcl.rg:Draw { mesh = createRR(Vec2(420,200), 164) },
-    dcl.rg:Draw { mesh = createRR(Vec2(400,187), 47) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(20,180), 10) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(20,20), 16) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(100,50), 64) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(10,100), 13) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(200,200), 57) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(420,200), 164) },
+    dcl.rg:Draw { mesh = createRR(white, Vec2(400,187), 47) },
+    dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
+    dcl.rg:Draw { mesh = createRing(red, Vec2(600,300), 47, 2) },
   }    
   tasklet.renderNode:add(rootNode)
 
