@@ -1,8 +1,7 @@
 uniform vec4 color; // same semantics as gl_Color
 uniform vec2 size;
-//uniform vec2 center;
 uniform float radius;
-varying vec2 vtc; 
+varying vec2 tc0; 
 
 #import "quadrant.fsp"
 #import "disc.fsp"
@@ -13,7 +12,7 @@ varying vec2 vtc;
 // i.e. with origin of quad = 0,0, ranged 0-(max-1)
 vec2 localPixelCoord() 
 {
-  return floor(vtc*(size-vec2(1,1)));
+  return floor(tc0*(size-vec2(1,1)));
 }
 
 float rr(vec2 lpc, vec2 size, float r, float width)
