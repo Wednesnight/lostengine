@@ -16,6 +16,17 @@ dcl = nil
 sum = 0
 curwidth = 3
 
+shaderCache = {}
+
+function loadShader(name)
+  local result = shaderCache[name]
+  if not result then
+    result = lost.gl.loadShader(tasklet.loader, name)
+    shaderCache[name] = result
+  end
+  return result
+end
+
 function createQuad(size)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
@@ -54,7 +65,7 @@ function createDisc(col, pos, radius)
   local size = Vec2(radius*2, radius*2)
   local result = createQuad(size)
   result.material.color = col
-  result.material.shader = lost.gl.loadShader(tasklet.loader, "disc")
+  result.material.shader = loadShader("disc")
   result.material.uniforms:set("size", size)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
@@ -67,7 +78,7 @@ function createRing(col, pos, radius, width)
   local size = Vec2(radius*2, radius*2)
   local result = createQuad(size)
   result.material.color = col
-  result.material.shader = lost.gl.loadShader(tasklet.loader, "ring")
+  result.material.shader = loadShader("ring")
   result.material.uniforms:set("size", size)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
@@ -82,7 +93,7 @@ function createRR(col, pos, radius)
   local result = createQuad(size)
 
   result.material.color = col
-  result.material.shader = lost.gl.loadShader(tasklet.loader, "rr")
+  result.material.shader = loadShader("rr")
   result.material.uniforms:set("size", size)
   result.material:blendPremultiplied()
   result.transform = MatrixTranslation(Vec3(pos.x,pos.y,0))

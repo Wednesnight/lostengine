@@ -5,7 +5,6 @@ uniform float radius;
 uniform float width;
 varying vec2 tc0; 
 
-#import "quadrant.fsp"
 #import "ring.fsp"
 
 vec2 localPixelCoord() 
