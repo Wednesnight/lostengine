@@ -145,6 +145,8 @@ function iqcreateComboRectNode(col1, col2, rect, radius, width)
   return result
 end
 
+--function roundedRect(col, rect, radius, )
+
 function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
@@ -173,12 +175,12 @@ function startup()
 --    dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
 --    dcl.rg:Draw { mesh = createRing(red, Vec2(600,300), 47, 2) },
     
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(200,200, 57, 57), r,w) },
---    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(420,200, 64, 46), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(200,200, 57, 57), r,w) },
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(420,200, 64, 46), r,w) },
 
     createComboRectNode(gray2, gray1, Rect(left, 350, 120, 20), r, 1),
     iqcreateComboRectNode(gray2, gray1, Rect(right, 350, 120, 20), r, 1),
@@ -186,11 +188,15 @@ function startup()
     dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(left,230, 100, 100), r,w) },
     dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,230, 100, 100), r,w) },
 
-    dcl.rg:Draw { mesh = createRoundedRect(white, Rect(left,150, 80, 50), r) },
-    dcl.rg:Draw { mesh = iqcreateRoundedRect(white, Rect(right,150, 80, 50), r) },
+--    dcl.rg:Draw { mesh = createRoundedRect(white, Rect(left,150, 80, 50), r) },
+--    dcl.rg:Draw { mesh = iqcreateRoundedRect(white, Rect(right,150, 80, 50), r) },
 
     dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(left,30, 100, 100), r,1) },
     dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right, 30, 100, 100), r,1) },
+
+    dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
+
+    dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,180, 10, 10), r,w) },
     
   }    
   tasklet.renderNode:add(rootNode)
