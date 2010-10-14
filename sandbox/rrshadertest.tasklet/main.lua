@@ -96,6 +96,7 @@ function createRoundedRect(col, rect, radius)
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
+--  result.material:blendOff();
   
   return result
 end
@@ -114,11 +115,32 @@ function createRoundedRectFrame(col, rect, radius, width)
   return result
 end
 
+function iqcreateRoundedRect(col, rect, radius)
+  local result = createRoundedRect(col, rect, radius)
+  result.material.shader = loadShader("iqrr")
+  return result
+end
+
+function iqcreateRoundedRectFrame(col, rect, radius, width)
+  local result = createRoundedRectFrame(col, rect, radius, width)
+  result.material.shader = loadShader("iqrrf")
+  return result
+end
+
 function createComboRectNode(col1, col2, rect, radius, width)
   local result = dcl.rg:Node
   {
     dcl.rg:Draw{mesh = createRoundedRect(col1, rect, radius)},
     dcl.rg:Draw{mesh = createRoundedRectFrame(col2, rect, radius, width)},
+  }
+  return result
+end
+
+function iqcreateComboRectNode(col1, col2, rect, radius, width)
+  local result = dcl.rg:Node
+  {
+    dcl.rg:Draw{mesh = iqcreateRoundedRect(col1, rect, radius)},
+    dcl.rg:Draw{mesh = iqcreateRoundedRectFrame(col2, rect, radius, width)},
   }
   return result
 end
@@ -136,6 +158,9 @@ function startup()
   local r = 4
   local w = 2
 
+  local left = 20
+  local right = 320
+
   rootNode = dcl.rg:Node
   {
     dcl.rg:ClearColor { color = Color(92/255,174/255,210/255,1) },
@@ -143,19 +168,29 @@ function startup()
     dcl.rg:DepthTest{false},
     dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
 
-    createComboRectNode(gray2, gray1, Rect(20,400,200,200), 47, 2),
-    dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
-    dcl.rg:Draw { mesh = createRing(red, Vec2(600,300), 47, 2) },
+    createComboRectNode(gray2, gray1, Rect(left,390,200,200), 27, 2),
+    iqcreateComboRectNode(gray2, gray1, Rect(right,390,200,200), 27, 2),
+--    dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
+--    dcl.rg:Draw { mesh = createRing(red, Vec2(600,300), 47, 2) },
     
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(200,200, 57, 57), r,w) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(420,200, 64, 46), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(200,200, 57, 57), r,w) },
+--    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(420,200, 64, 46), r,w) },
 
-    dcl.rg:Draw { mesh = createRoundedRect(gray2, Rect(400,287, 120, 20), 4) },
-    dcl.rg:Draw { mesh = createRoundedRectFrame(gray1, Rect(400,287, 120, 20), 4, 1) },
+    createComboRectNode(gray2, gray1, Rect(left, 350, 120, 20), r, 1),
+    iqcreateComboRectNode(gray2, gray1, Rect(right, 350, 120, 20), r, 1),
+    
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(left,230, 100, 100), r,w) },
+    dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,230, 100, 100), r,w) },
+
+    dcl.rg:Draw { mesh = createRoundedRect(white, Rect(left,150, 80, 50), r) },
+    dcl.rg:Draw { mesh = iqcreateRoundedRect(white, Rect(right,150, 80, 50), r) },
+
+    dcl.rg:Draw { mesh = createRoundedRectFrame(white, Rect(left,30, 100, 100), r,1) },
+    dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right, 30, 100, 100), r,1) },
     
   }    
   tasklet.renderNode:add(rootNode)

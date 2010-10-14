@@ -13,6 +13,7 @@ vec2 localPixelCoord()
 }
 
 void main(void)
-{  
-  gl_FragColor = color*roundedRect(localPixelCoord(), size, radius);
+{ 
+  float f = roundedRect(localPixelCoord(), size, radius);
+  gl_FragColor = color*f;
 }
