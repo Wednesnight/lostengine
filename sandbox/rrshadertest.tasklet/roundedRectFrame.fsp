@@ -4,10 +4,11 @@
 float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
 {
   float minradius = min(min(size.x/2.0, size.y/2.0), r);
-  float tl = quadring(lpc, vec2(minradius-1.0, size.y-minradius-1.0), minradius, width, bvec2(false, true));
-  float tr = quadring(lpc, vec2(size.x-minradius-1.0, size.y-minradius-1.0), minradius, width, bvec2(true, true));
-  float bl = quadring(lpc, vec2(minradius-1.0, minradius-1.0), minradius, width, bvec2(false, false));
-  float br = quadring(lpc, vec2(size.x-minradius-1.0, minradius-1.0), minradius, width, bvec2(true, false));
+  float mr = minradius;
+  float tl = quadring(lpc, vec2(minradius-1.0, size.y-minradius-1.0), mr, width, bvec2(false, true));
+  float tr = quadring(lpc, vec2(size.x-minradius-1.0, size.y-minradius-1.0), mr, width, bvec2(true, true));
+  float bl = quadring(lpc, vec2(minradius-1.0, minradius-1.0), mr, width, bvec2(false, false));
+  float br = quadring(lpc, vec2(size.x-minradius-1.0, minradius-1.0), mr, width, bvec2(true, false));
   float topl = box(lpc, vec2(minradius-1.0, size.y-1.0-width), vec2(size.x-minradius-1.0, size.y));
   float botl = box(lpc, vec2(minradius-1.0, 0), vec2(size.x-minradius-1.0, width));
   float leftl = box(lpc, vec2(0, minradius-1.0), vec2(width, size.y-minradius-1.0));

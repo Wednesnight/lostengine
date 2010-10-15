@@ -27,6 +27,42 @@ function loadShader(name)
   return result
 end
 
+function buildRRShaderCacheKey(f, rc, s)
+  local result = tostring(f).."-("..tostring(rc.tl).."-"..tostring(rc.tr).."-"..tostring(rc.bl).."-"..tostring(rc.br)..")"
+  result = result.."-("..tostring(s.top).."-"..tostring(s.bottom).."-"..tostring(s.left).."-"..tostring(s.right)..")"
+  return result
+end
+
+-- builds a shader that implements a rounded rectangle with the given configuration
+-- switching off sides disables adjacent round corners
+-- shaders are cached and reuses
+--
+-- roundCorners is a table with the following keys set to either true or false
+-- not all keys need to be present and will default to true if not set
+-- roundCorners = {tl=true, tr=true, bl=true, br=true}
+--
+-- sides is a table with the following keys set to either true or false
+-- not all keys need to be present and will default to true if not set
+-- sides = {top = true, bottom=true, left=true, right=true}
+function buildRRShader(filled, roundCorners, sides)
+  local result = nil
+  
+  -- create local tables for configuration to handle nil params and so we don't modify incoming configuration
+  local rc = {}
+  local s = {}
+  
+  -- switching off sides affects the corners
+  -- all corners adjacent to a disabled side will be set to NOT round
+  
+  local cacheKey = buildRRShaderCacheKey(filled, roundCorners, sides)
+  log.debug("-- CACHEKEY: '"..cacheKey.."'")
+  
+  if filled then
+  else
+  end
+  return result
+end
+
 function createQuad(size)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
@@ -161,6 +197,8 @@ end
 function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+
+  local s = buildRRShader(true, {}, {})
 
   local white = Color(1,1,1,1)
   local red = Color(1,0,0,1)

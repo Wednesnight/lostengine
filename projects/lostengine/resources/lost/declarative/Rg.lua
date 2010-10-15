@@ -154,7 +154,7 @@ end
 -- node expects an array of other nodes, simple or specialised,
 -- which are simply added to the new node
 function Rg:Node(def)
-  log.debug("loading node")
+--  log.debug("loading node")
   local result = lost.rg.Node.create()
   
   for k,v in pairs(def) do
@@ -167,7 +167,7 @@ function Rg:Node(def)
       -- iterating over the array part of the table where the child nodes
       -- should be stored. We store the current value as child node without
       -- any further checks
-      log.debug("adding child node: "..v.name)
+--      log.debug("adding child node: "..v.name)
       result:add(v)
     end
   end
