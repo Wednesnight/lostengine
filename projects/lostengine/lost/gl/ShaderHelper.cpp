@@ -5,7 +5,7 @@
 #include <boost/filesystem.hpp>
 #include "lost/common/Data.h"
 #include "lost/common/Logger.h"
-
+#include <iomanip>
 //#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/include/classic_core.hpp>
 #include <sstream>
@@ -174,6 +174,22 @@ std::string processDependencies(const resource::LoaderPtr& loader, const std::st
   return buffer;
 }
 
+// logs shader source with line numbers
+void broken(const std::string& source)
+{
+  istringstream s;
+  s.str(source);
+  uint32_t lineNumber = 1;
+  string line;
+  s.clear();
+  while(!s.eof())
+  {
+    getline(s, line);
+    EOUT(setw(4) << lineNumber << " : " << line);
+    lineNumber++;
+  }
+}
+
 ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string& inName)
 {
 //  DOUT("--- loading shader '"<<inName<<"'");
@@ -189,7 +205,7 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string
   if(!vertexShader->compiled())
   {
     ostringstream os;
-    EOUT(source)
+    broken(source);
     os << "vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log();
     throw std::runtime_error(os.str());
   }
@@ -201,7 +217,7 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string
   fragmentShader->compile();
   if(!fragmentShader->compiled())
   {
-    EOUT(source);
+    broken(source);
     ostringstream os;
     os << "fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log();
     throw std::runtime_error(os.str());
