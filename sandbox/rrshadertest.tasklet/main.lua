@@ -115,6 +115,17 @@ function createRoundedRectFrame(col, rect, radius, width)
   return result
 end
 
+function createBox(col, rect)
+  local size = Vec2(rect.width, rect.height)
+  local result = createQuad(size)
+  result.material.color = col
+  result.material.shader = loadShader("box")
+  result.material.uniforms:set("size", size)
+  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
+  result.material:blendOff()
+  return result
+end
+
 function iqcreateRoundedRect(col, rect, radius)
   local result = createRoundedRect(col, rect, radius)
   result.material.shader = loadShader("iqrr")
@@ -156,6 +167,7 @@ function startup()
   local blue = Color(0,0,1,1)
   local gray1 = Color(.2, .2, .2, 1)
   local gray2 = Color(.8, .8, .8, 1)
+  local green = Color(0, 1, 0, 1)
 
   local r = 4
   local w = 2
@@ -197,7 +209,8 @@ function startup()
     dcl.rg:Draw { mesh = createDisc(white, Vec2(600,300), 47) },
 
     dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,180, 10, 10), r,w) },
-    
+
+--    dcl.rg:Draw { mesh = createBox(red, Rect(left,10, 40, 40)) },
   }    
   tasklet.renderNode:add(rootNode)
 
