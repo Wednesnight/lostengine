@@ -2,28 +2,40 @@
 #define LOST_MESH_LINE_H
 
 #include "lost/mesh/Mesh.h"
+#include "lost/mesh/forward.h"
 #include "lost/math/forward.h"
 
 namespace lost
 {
   namespace mesh
   {
-    
+
     struct Line;
     typedef lost::shared_ptr<Line> LinePtr;
     
     struct Line : public Mesh
     {
-      Line(const math::Vec2& start, const math::Vec2& finish);
+    private:
+      TextureManagerPtr textureManager;
+      math::Vec2 start, finish;
+      math::Vec2 vector;
+      float length;
+      float angle;
+      unsigned int width;
+
+      Line(const TextureManagerPtr& inTextureManager, const math::Vec2& lineStart, const math::Vec2& lineFinish, const int lineWidth);
       
       void createIndices();
-      void createVertices(const math::Vec2& start, const math::Vec2& finish);
+      void createVertices(bool flip);
 
-      static LinePtr create(const math::Vec2& start, const math::Vec2& finish)
+    public:
+      static LinePtr create(const TextureManagerPtr& inTextureManager, const math::Vec2& lineStart, const math::Vec2& lineFinish, const int lineWidth)
       {
-        return LinePtr(new Line(start, finish));
+        return LinePtr(new Line(inTextureManager, lineStart, lineFinish, lineWidth));
       }
-      
+
+      void update(const math::Vec2& lineStart, const math::Vec2& lineFinish, const int lineWidth);
+        
     };
     
   }

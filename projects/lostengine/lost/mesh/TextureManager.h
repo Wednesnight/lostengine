@@ -18,7 +18,8 @@ struct TextureManager
   virtual ~TextureManager();
   static TextureManagerPtr create() { return TextureManagerPtr(new TextureManager); };
   
-  // use these two functions to retrieve the texture
+  // use these functions to retrieve the texture
+  gl::TexturePtr lineTexture(const unsigned int lineWidth); 
   gl::TexturePtr arcTexture(float radius, float lineWidth); 
   gl::TexturePtr arcFilledTexture(float radius);
   float addGradient(const common::ColorGradientPtr& inGradient); // returns horizontal texture coordinate of gradient. Gradients always span full vertical range.
@@ -27,6 +28,7 @@ struct TextureManager
   void logStats(); 
   void collectGarbage();
     
+  gl::TexturePtr createLineTexture(const unsigned int lineWidth);
   gl::TexturePtr createArcTexture(float lineWidth, float radius);
   gl::TexturePtr createArcFilledTexture(float radius);
 
@@ -36,7 +38,10 @@ struct TextureManager
   typedef std::pair<float, float> LineWidthRadius;
   typedef std::map<LineWidthRadius, gl::TexturePtr> ArcMap;
   ArcMap _arcMap;
-  
+
+  typedef std::map<unsigned int, gl::TexturePtr> LineMap;
+  LineMap _lineMap;
+
   uint32_t _gradientTextureHeight; // must be power of two
   uint32_t gradientTextureWidth; // must be power of two
   uint32_t _maxNumGradients;
