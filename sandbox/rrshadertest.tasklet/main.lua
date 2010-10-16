@@ -7,6 +7,7 @@ using "lost.math.Rect"
 using "lost.common.Color"
 using "lost.bitmap.Bitmap"
 using "lost.math.MatrixTranslation"
+using "lost.math.MatrixRotZ"
 
 config = require("config")
 running = true
@@ -51,10 +52,20 @@ function buildRRShader(filled, roundCorners, sides)
   local rc = {}
   local s = {}
   
+  if roundCorners.tl ~= nil then rc.tl = roundCorners.tl else rc.tl = true end
+  if roundCorners.tr ~= nil then rc.tr = roundCorners.tr else rc.tr = true end
+  if roundCorners.bl ~= nil then rc.bl = roundCorners.bl else rc.bl = true end
+  if roundCorners.br ~= nil then rc.br = roundCorners.br else rc.br = true end
+
+  if sides.top ~= nil then s.top = sides.top else s.top = true end
+  if sides.bottom ~= nil then s.bottom = sides.bottom else s.bottom = true end
+  if sides.left ~= nil then s.left = sides.left else s.left = true end
+  if sides.right ~= nil then s.right = sides.right else s.right = true end
+  
   -- switching off sides affects the corners
   -- all corners adjacent to a disabled side will be set to NOT round
   
-  local cacheKey = buildRRShaderCacheKey(filled, roundCorners, sides)
+  local cacheKey = buildRRShaderCacheKey(filled, rc, s)
   log.debug("-- CACHEKEY: '"..cacheKey.."'")
   
   if filled then
@@ -157,8 +168,8 @@ function createBox(col, rect)
   result.material.color = col
   result.material.shader = loadShader("box")
   result.material.uniforms:set("size", size)
-  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
-  result.material:blendOff()
+  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))*MatrixRotZ(-45)
+  result.material:blendPremultiplied()
   return result
 end
 
@@ -248,7 +259,7 @@ function startup()
 
     dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,180, 10, 10), r,w) },
 
---    dcl.rg:Draw { mesh = createBox(red, Rect(left,10, 40, 40)) },
+    dcl.rg:Draw { mesh = createBox(green, Rect(left,10, 400, 400)) },
   }    
   tasklet.renderNode:add(rootNode)
 
