@@ -64,11 +64,30 @@ function buildRRShader(filled, roundCorners, sides)
   
   -- switching off sides affects the corners
   -- all corners adjacent to a disabled side will be set to NOT round
+  if not s.top then
+    rc.tl = false
+    rc.tr = false
+  end
+  if not s.left then
+    rc.tl = false
+    rc.bl = false
+  end
+  if not s.right then
+    rc.tr = false
+    rc.br = false
+  end
+  if not s.bottom then
+    rc.bl = false
+    rc.br = false
+  end
   
   local cacheKey = buildRRShaderCacheKey(filled, rc, s)
   log.debug("-- CACHEKEY: '"..cacheKey.."'")
   
+  local shader = ""
+  
   if filled then
+    
   else
   end
   return result
@@ -168,7 +187,7 @@ function createBox(col, rect)
   result.material.color = col
   result.material.shader = loadShader("box")
   result.material.uniforms:set("size", size)
-  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))*MatrixRotZ(-45)
+  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))*MatrixRotZ(-87)
   result.material:blendPremultiplied()
   return result
 end
@@ -259,7 +278,7 @@ function startup()
 
     dcl.rg:Draw { mesh = iqcreateRoundedRectFrame(white, Rect(right,180, 10, 10), r,w) },
 
-    dcl.rg:Draw { mesh = createBox(green, Rect(left,10, 400, 400)) },
+    dcl.rg:Draw { mesh = createBox(white, Rect(right,10, 400, 400)) },
   }    
   tasklet.renderNode:add(rootNode)
 
