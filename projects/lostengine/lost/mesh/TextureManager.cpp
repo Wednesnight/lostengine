@@ -4,6 +4,7 @@
 #include "lost/bitmap/Bitmap.h"
 #include <vector>
 #include "lost/gl/gl.h"
+#include "lost/common/Color.h"
 #include "lost/common/ColorGradient.h"
 #include "lost/common/Logger.h"
 
@@ -29,6 +30,35 @@ TextureManager::TextureManager()
 
 TextureManager::~TextureManager()
 {
+}
+
+gl::TexturePtr TextureManager::createLineTexture(const unsigned int lineWidth) {
+
+  TexturePtr result;
+
+  BitmapPtr bmp = Bitmap::create(1, lineWidth, COMPONENTS_RGBA);
+  int midNum = 2 - (lineWidth % 2);
+  for (unsigned int idx = 0; idx < midNum; ++idx) {
+
+    bmp->pixel(0, (((lineWidth + midNum) / 2) - 1) - idx, Color(1.0f, 1.0f, 1.0f, 1.0f));
+  }
+
+  for (unsigned int idx = 0; idx < ((lineWidth + midNum) / 2) - midNum; ++idx) {
+
+    float alpha = (idx + 1) * (1.0f / ((lineWidth + midNum) / 2));
+    Color col = Color(alpha, alpha, alpha, alpha);
+    bmp->pixel(0, idx, col);
+    bmp->pixel(0, (lineWidth - 1) - idx, col);
+  }
+
+  Texture::Params params;
+//  params.sizeHint = Texture::SIZE_POWER_OF_TWO;
+  params.minFilter = GL_LINEAR;
+  params.magFilter = GL_LINEAR;
+
+  result.reset(new Texture(bmp, params));
+  
+  return result;
 }
 
 TexturePtr TextureManager::createArcTexture(float lineWidth, float radius)
@@ -104,13 +134,32 @@ gl::TexturePtr TextureManager::arcTexture(float radius, float lineWidth)
   return result;
 }
 
+gl::TexturePtr TextureManager::lineTexture(const unsigned int lineWidth)
+{
+  TexturePtr result;
+  LineMap::iterator pos = _lineMap.find(lineWidth);
+  if(pos != _lineMap.end()) {
+
+    result = pos->second;
+  } else {
+
+    result = createLineTexture(lineWidth);
+    _lineMap[lineWidth] = result;
+  }
+  
+  logStats();
+  collectGarbage();
+  return result;
+}
+  
 void TextureManager::logStats()
 {
-//  DOUT("arcFilled: "<<_arcFilledMap.size() << " arc:"<<_arcMap.size());
+//  DOUT("arcFilled: "<<_arcFilledMap.size() << " arc:"<<_arcMap.size() << " line:"<<_lineMap.size());
 }
 
 void TextureManager::collectGarbage()
 {
+    vector<unsigned int> lineGarbage;
     vector<LineWidthRadius> arcGarbage;
     vector<float> arcFilledGarbage;
     
@@ -145,6 +194,23 @@ void TextureManager::collectGarbage()
       for(uint32_t i=0; i<arcGarbage.size(); ++i)
       {
         _arcMap.erase(arcGarbage[i]);
+      }
+    }
+
+    for(LineMap::iterator i=_lineMap.begin(); i!=_lineMap.end(); ++i)
+    {
+      if(i->second.use_count() == 1)
+      {
+        lineGarbage.push_back(i->first);
+      }
+    }
+    uint32_t lg = lineGarbage.size();
+    if(lg)
+    {
+      DOUT("line garbage: "<<lineGarbage.size());
+      for(uint32_t i=0; i<lineGarbage.size(); ++i)
+      {
+        _lineMap.erase(lineGarbage[i]);
       }
     }
 }

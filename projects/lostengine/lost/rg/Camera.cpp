@@ -33,6 +33,7 @@ void Camera::process(gl::ContextPtr& ctx)
 {
   if(!active) return;
   ctx->camera(cam); 
+  Node::process(ctx);
 }
 
 }
