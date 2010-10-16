@@ -11,5 +11,6 @@ vec2 localPixelCoord()
 
 void main(void)
 { 
-  gl_FragColor = color*box2(localPixelCoord(), vec2(1.,1.), vec2(size.x, 3.));
+  float off = .3;
+  gl_FragColor = color*box2(localPixelCoord(), vec2(1.,3.), vec2(size.x, 3.-off));
 }
