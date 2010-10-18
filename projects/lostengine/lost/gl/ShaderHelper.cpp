@@ -190,16 +190,17 @@ void broken(const std::string& source)
   }
 }
 
-ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string& inName)
+ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const std::string& inName, const std::string& vssource, const std::string& fssource)
 {
-//  DOUT("--- loading shader '"<<inName<<"'");
+  // DOUT("building shader: '"<<inName<<"'");
   lost::gl::ShaderProgramPtr  shaderProgram(new lost::gl::ShaderProgram());
   lost::gl::ShaderPtr         vertexShader(new lost::gl::VertexShader());
   lost::gl::ShaderPtr         fragmentShader(new lost::gl::FragmentShader());
 
   std::string vsname = inName+".vs";
-  common::DataPtr vsfile = loader->load(vsname);
-  string source = processDependencies(loader, vsfile->str());
+  std::string fsname = inName+".fs";
+
+  string source = processDependencies(loader, vssource);
   vertexShader->source(source);
   vertexShader->compile();
   if(!vertexShader->compiled())
@@ -210,9 +211,7 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string
     throw std::runtime_error(os.str());
   }
 
-  std::string fsname = inName+".fs";
-  common::DataPtr fsfile = loader->load(fsname);
-  source = processDependencies(loader, fsfile->str());
+  source = processDependencies(loader, fssource);
   fragmentShader->source(source);
   fragmentShader->compile();
   if(!fragmentShader->compiled())
@@ -239,6 +238,16 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string
   shaderProgram->disable();
   
   return shaderProgram;
+}
+
+ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string& inName)
+{
+//  DOUT("--- loading shader '"<<inName<<"'");
+  std::string vsname = inName+".vs";
+  common::DataPtr vsfile = loader->load(vsname);
+  std::string fsname = inName+".fs";
+  common::DataPtr fsfile = loader->load(fsname);
+  return buildShader(loader, inName, vsfile->str(), fsfile->str());
 }
 
 }
