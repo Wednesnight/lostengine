@@ -22,6 +22,14 @@ namespace gl
 ShaderProgramPtr loadShader(const resource::LoaderPtr& loader,
                                    const std::string& inName);
 
+/** Helper function for assembling a shader from vertex/fragment shader data.
+ * Resolves imports/includes before compiling/linking the shader.
+ */
+ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, 
+                             const std::string& inName, 
+                             const std::string& vssource,
+                             const std::string& fssource);
+
 }
 }
 

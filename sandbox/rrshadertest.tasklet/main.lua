@@ -87,8 +87,11 @@ function buildRRShader(filled, roundCorners, sides)
   local shader = ""
   
   if filled then
+    local imports = "#import \"disc.fsp\"\n#import \"box.fsp\""
     
   else
+    local imports = "#import \"ring.fsp\"\n#import \"box.fsp\""
+    
   end
   return result
 end
