@@ -246,6 +246,7 @@ namespace lost
         namespace_("gl")
         [
           def("loadShader", loadShader),
+          def("buildShader", buildShader),
           class_<ShaderProgram>("ShaderProgram")
             .def("enable", &ShaderProgram::enable)
             .def("disable", &ShaderProgram::disable)
