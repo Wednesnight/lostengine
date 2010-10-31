@@ -18,6 +18,8 @@ sum = 0
 curwidth = 3
 
 shaderCache = {}
+roundedRectVsSource = nil
+roundedRectFrameVsSource = nil
 
 function loadShader(name)
   local result = shaderCache[name]
@@ -83,16 +85,121 @@ function buildRRShader(filled, roundCorners, sides)
   
   local cacheKey = buildRRShaderCacheKey(filled, rc, s)
   log.debug("-- CACHEKEY: '"..cacheKey.."'")
+
+  local parts = {} -- receives the vars that need to bee added and clamped for the final result
   
   local shader = ""
   
   if filled then
-    local imports = "#import \"disc.fsp\"\n#import \"box.fsp\""
-    
+    shader = shader .. [[
+
+uniform vec4 color;
+uniform vec2 size;
+uniform float radius;
+varying vec2 tc0;
+
+#import "disc.fsp"
+#import "box.fsp"
+
+float roundedRect(vec2 lpc, vec2 size, float r)
+{
+  float mr = min(min(size.x/2.0, size.y/2.0), r);
+
+]]
   else
-    local imports = "#import \"ring.fsp\"\n#import \"box.fsp\""
-    
+    shader = shader .. [[
+uniform vec4 color;
+uniform vec2 size;
+uniform float radius;
+uniform float width;
+varying vec2 tc0;
+
+#import "ring.fsp"
+#import "box.fsp"
+
+float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
+{
+  float mr = min(min(size.x/2.0, size.y/2.0), r);
+
+]]
   end
+  
+  if filled then
+    if rc.tl then shader = shader.."  float tl = disc(lpc, vec2(mr-1.0, size.y-mr-1.0), mr);\n";table.insert(parts, "tl") end
+    if rc.tr then shader = shader.."  float tr = disc(lpc, vec2(size.x-mr-1.0, size.y-mr-1.0), mr);\n";table.insert(parts, "tr") end
+    if rc.bl then shader = shader.."  float bl = disc(lpc, vec2(mr-1.0, mr-1.0), mr);\n";table.insert(parts, "bl") end
+    if rc.br then shader = shader.."  float br = disc(lpc, vec2(size.x-mr-1.0, mr-1.0), mr);\n";table.insert(parts, "br") end
+
+    table.insert(parts, "top")
+    table.insert(parts, "mid")
+    table.insert(parts, "bot")
+
+--    float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, mr-1.0));
+
+    -- top section
+    if rc.tl and rc.tr then
+      shader = shader .. "  float top = box(lpc, vec2(mr-1.0, size.y-1.0-mr), vec2(size.x-mr-1.0, size.y));\n"
+    elseif rc.tl and not rc.tr then
+      shader = shader .. "  float top = box(lpc, vec2(mr-1.0, size.y-1.0-mr), vec2(size.x, size.y));\n"
+    elseif not rc.tl and rc.tr then
+      shader = shader .. "  float top = box(lpc, vec2(0, size.y-1.0-mr), vec2(size.x-mr-1.0, size.y));\n"
+    elseif not rc.tl and not rc.tr then
+      shader = shader .. "  float top = box(lpc, vec2(0, size.y-1.0-mr), vec2(size.x, size.y));\n"
+    end
+    
+    -- mid section
+    -- always the same
+    shader = shader .. "  float mid = box(lpc, vec2(0, mr-1.0), vec2(size.x, size.y-mr-1.0));\n"
+    
+    -- bottom section
+    if rc.bl and rc.br then
+      shader = shader .. "  float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, mr-1.0));\n"
+    elseif rc.bl and not rc.br then
+      shader = shader .. "  float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x, mr-1.0));\n"
+    elseif not rc.bl and rc.br then
+      shader = shader .. "  float bot = box(lpc, vec2(0, 0), vec2(size.x-mr-1.0, mr-1.0));\n"
+    elseif not rc.bl and not rc.br then
+        shader = shader .. "  float bot = box(lpc, vec2(0, 0), vec2(size.x, mr-1.0));\n"
+    end
+    
+    -- assemble parts
+    shader = shader .. "  float f = 0.0"
+    for k,v in pairs(parts) do
+      shader = shader .. "+" .. v
+    end
+    shader = shader..";\n"
+    shader = shader .. "  return clamp(f, 0.0, 1.0);\n}"
+    
+    shader = shader .. [[
+
+    
+vec2 localPixelCoord() 
+{
+  return tc0*(size-vec2(1,1));
+}
+
+void main(void)
+{ 
+  float f = roundedRect(localPixelCoord(), size, radius);
+  gl_FragColor = color*f;
+}
+      
+]]
+  else    
+    -- frame rr
+  end
+  
+  log.debug("-------------- VERTEX SHADER")
+  log.debug(roundedRectVsSource)
+  log.debug("-------------- FRAGMENT SHADER")
+  log.debug(shader)
+  
+  if filled then
+    result = lost.gl.buildShader(tasklet.loader, "roundedRect", roundedRectVsSource, shader)
+  else
+    result = lost.gl.buildShader(tasklet.loader, "roundedRectFrame", roundedRectFrameVsSource, shader)
+  end
+  
   return result
 end
 
@@ -231,7 +338,10 @@ function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  local s = buildRRShader(true, {}, {})
+  roundedRectVsSource = tasklet.loader:load("roundedRect.vs"):str()
+  roundedRectFrameVsSource = tasklet.loader:load("roundedRectFrame.vs"):str()
+  
+  local s = buildRRShader(true,{tl=false, tr=false, bl=true, br=true}, {})
 
   local white = Color(1,1,1,1)
   local red = Color(1,0,0,1)
