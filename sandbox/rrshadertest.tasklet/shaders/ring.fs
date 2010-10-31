@@ -5,7 +5,7 @@ uniform float radius;
 uniform float width;
 varying vec2 tc0; 
 
-#import "ring.fsp"
+#import "shaders/ring.fsp"
 
 vec2 localPixelCoord() 
 {

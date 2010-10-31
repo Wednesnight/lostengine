@@ -1,5 +1,5 @@
-#import "disc.fsp"
-#import "box.fsp"
+#import "shaders/disc.fsp"
+#import "shaders/box.fsp"
 
 float roundedRect(vec2 lpc, vec2 size, float r)
 {

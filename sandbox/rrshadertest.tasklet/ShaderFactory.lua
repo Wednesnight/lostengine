@@ -7,8 +7,8 @@ lost.common.Class "lost.common.ShaderFactory" {}
 function ShaderFactory:constructor(loader)
   self.loader = loader
   self.cache = {}
-  self.roundedRectVsSource = self.loader:load("roundedRect.vs"):str()
-  self.roundedRectFrameVsSource = self.loader:load("roundedRectFrame.vs"):str()  
+  self.roundedRectVsSource = self.loader:load("shaders/roundedRect.vs"):str()
+  self.roundedRectFrameVsSource = self.loader:load("shaders/roundedRectFrame.vs"):str()  
 end
 
 function ShaderFactory:loadShader(name)
@@ -21,23 +21,23 @@ function ShaderFactory:loadShader(name)
 end
 
 function ShaderFactory:ring()
-  return self:loadShader("ring")
+  return self:loadShader("shaders/ring")
 end
 
 function ShaderFactory:disc()
-  return self:loadShader("disc")
+  return self:loadShader("shaders/disc")
 end
 
 function ShaderFactory:box()
-  return self:loadShader("box")
+  return self:loadShader("shaders/box")
 end
 
 function ShaderFactory:iqrr()
-  return self:loadShader("iqrr")
+  return self:loadShader("shaders/iqrr")
 end
 
 function ShaderFactory:iqrrf()
-  return self:loadShader("iqrrf")
+  return self:loadShader("shaders/iqrrf")
 end
 
 -- f = filled
@@ -114,8 +114,8 @@ uniform vec2 size;
 uniform float radius;
 varying vec2 tc0;
 
-#import "disc.fsp"
-#import "box.fsp"
+#import "shaders/disc.fsp"
+#import "shaders/box.fsp"
 
 float roundedRect(vec2 lpc, vec2 size, float r)
 {
@@ -130,8 +130,8 @@ uniform float radius;
 uniform float width;
 varying vec2 tc0;
 
-#import "ring.fsp"
-#import "box.fsp"
+#import "shaders/ring.fsp"
+#import "shaders/box.fsp"
 
 float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
 {
@@ -203,16 +203,6 @@ void main(void)
 ]]
   else    
     -- frame rr
-
---    float tl = quadring(lpc, vec2(mr-1.0, size.y-mr-1.0), mr, width, bvec2(false, true));
---    float tr = quadring(lpc, vec2(size.x-mr-1.0, size.y-mr-1.0), mr, width, bvec2(true, true));
---    float bl = quadring(lpc, vec2(mr-1.0, mr-1.0), mr, width, bvec2(false, false));
---    float br = quadring(lpc, vec2(size.x-mr-1.0, mr-1.0), mr, width, bvec2(true, false));
---    float topl = box(lpc, vec2(mr-1.0, size.y-1.0-width), vec2(size.x-mr-1.0, size.y));
---    float botl = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, width));
---    float leftl = box(lpc, vec2(0, mr-1.0), vec2(width, size.y-mr-1.0));
---    float rightl = box(lpc, vec2(size.x-width-1.0, mr-1.0), vec2(size.x-1.0, size.y-mr-1.0));
---    return clamp(tl+tr+bl+br+topl+botl+leftl+rightl,0.0,1.0);
 
     -- corners
     if rc.tl then shader=shader.."  float tl = quadring(lpc, vec2(mr-1.0, size.y-mr-1.0), mr, width, bvec2(false, true));\n"; table.insert(parts, "tl") end

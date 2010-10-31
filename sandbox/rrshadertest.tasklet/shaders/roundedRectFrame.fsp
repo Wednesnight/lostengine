@@ -1,5 +1,5 @@
-#import "ring.fsp"
-#import "box.fsp"
+#import "shaders/ring.fsp"
+#import "shaders/box.fsp"
 
 float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
 {
