@@ -4,7 +4,7 @@ uniform vec2 center;
 uniform vec4 color; 
 varying vec2 tc0; 
 
-#import "disc.fsp"
+#import "shaders/disc.fsp"
 
 vec2 localPixelCoord() 
 {
