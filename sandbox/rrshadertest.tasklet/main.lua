@@ -1,5 +1,6 @@
 require("lost.declarative.Context")
 require("lost.common.Shaders")
+require("ShaderFactory")
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -13,195 +14,9 @@ config = require("config")
 running = true
 rootNode = nil
 dcl = nil
-
 sum = 0
 curwidth = 3
-
-shaderCache = {}
-roundedRectVsSource = nil
-roundedRectFrameVsSource = nil
-
-function loadShader(name)
-  local result = shaderCache[name]
-  if not result then
-    result = lost.gl.loadShader(tasklet.loader, name)
-    shaderCache[name] = result
-  end
-  return result
-end
-
-function buildRRShaderCacheKey(f, rc, s)
-  local result = tostring(f).."-("..tostring(rc.tl).."-"..tostring(rc.tr).."-"..tostring(rc.bl).."-"..tostring(rc.br)..")"
-  result = result.."-("..tostring(s.top).."-"..tostring(s.bottom).."-"..tostring(s.left).."-"..tostring(s.right)..")"
-  return result
-end
-
--- builds a shader that implements a rounded rectangle with the given configuration
--- switching off sides disables adjacent round corners
--- shaders are cached and reuses
---
--- roundCorners is a table with the following keys set to either true or false
--- not all keys need to be present and will default to true if not set
--- roundCorners = {tl=true, tr=true, bl=true, br=true}
---
--- sides is a table with the following keys set to either true or false
--- not all keys need to be present and will default to true if not set
--- sides = {top = true, bottom=true, left=true, right=true}
-function buildRRShader(filled, roundCorners, sides)
-  local result = nil
-  
-  -- create local tables for configuration to handle nil params and so we don't modify incoming configuration
-  local rc = {}
-  local s = {}
-  
-  if roundCorners.tl ~= nil then rc.tl = roundCorners.tl else rc.tl = true end
-  if roundCorners.tr ~= nil then rc.tr = roundCorners.tr else rc.tr = true end
-  if roundCorners.bl ~= nil then rc.bl = roundCorners.bl else rc.bl = true end
-  if roundCorners.br ~= nil then rc.br = roundCorners.br else rc.br = true end
-
-  if sides.top ~= nil then s.top = sides.top else s.top = true end
-  if sides.bottom ~= nil then s.bottom = sides.bottom else s.bottom = true end
-  if sides.left ~= nil then s.left = sides.left else s.left = true end
-  if sides.right ~= nil then s.right = sides.right else s.right = true end
-  
-  -- switching off sides affects the corners
-  -- all corners adjacent to a disabled side will be set to NOT round
-  if not s.top then
-    rc.tl = false
-    rc.tr = false
-  end
-  if not s.left then
-    rc.tl = false
-    rc.bl = false
-  end
-  if not s.right then
-    rc.tr = false
-    rc.br = false
-  end
-  if not s.bottom then
-    rc.bl = false
-    rc.br = false
-  end
-  
-  local cacheKey = buildRRShaderCacheKey(filled, rc, s)
-  log.debug("-- CACHEKEY: '"..cacheKey.."'")
-
-  local parts = {} -- receives the vars that need to bee added and clamped for the final result
-  
-  local shader = ""
-  
-  if filled then
-    shader = shader .. [[
-
-uniform vec4 color;
-uniform vec2 size;
-uniform float radius;
-varying vec2 tc0;
-
-#import "disc.fsp"
-#import "box.fsp"
-
-float roundedRect(vec2 lpc, vec2 size, float r)
-{
-  float mr = min(min(size.x/2.0, size.y/2.0), r);
-
-]]
-  else
-    shader = shader .. [[
-uniform vec4 color;
-uniform vec2 size;
-uniform float radius;
-uniform float width;
-varying vec2 tc0;
-
-#import "ring.fsp"
-#import "box.fsp"
-
-float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
-{
-  float mr = min(min(size.x/2.0, size.y/2.0), r);
-
-]]
-  end
-  
-  if filled then
-    if rc.tl then shader = shader.."  float tl = disc(lpc, vec2(mr-1.0, size.y-mr-1.0), mr);\n";table.insert(parts, "tl") end
-    if rc.tr then shader = shader.."  float tr = disc(lpc, vec2(size.x-mr-1.0, size.y-mr-1.0), mr);\n";table.insert(parts, "tr") end
-    if rc.bl then shader = shader.."  float bl = disc(lpc, vec2(mr-1.0, mr-1.0), mr);\n";table.insert(parts, "bl") end
-    if rc.br then shader = shader.."  float br = disc(lpc, vec2(size.x-mr-1.0, mr-1.0), mr);\n";table.insert(parts, "br") end
-
-    table.insert(parts, "top")
-    table.insert(parts, "mid")
-    table.insert(parts, "bot")
-
---    float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, mr-1.0));
-
-    -- top section
-    if rc.tl and rc.tr then
-      shader = shader .. "  float top = box(lpc, vec2(mr-1.0, size.y-1.0-mr), vec2(size.x-mr-1.0, size.y));\n"
-    elseif rc.tl and not rc.tr then
-      shader = shader .. "  float top = box(lpc, vec2(mr-1.0, size.y-1.0-mr), vec2(size.x, size.y));\n"
-    elseif not rc.tl and rc.tr then
-      shader = shader .. "  float top = box(lpc, vec2(0, size.y-1.0-mr), vec2(size.x-mr-1.0, size.y));\n"
-    elseif not rc.tl and not rc.tr then
-      shader = shader .. "  float top = box(lpc, vec2(0, size.y-1.0-mr), vec2(size.x, size.y));\n"
-    end
-    
-    -- mid section
-    -- always the same
-    shader = shader .. "  float mid = box(lpc, vec2(0, mr-1.0), vec2(size.x, size.y-mr-1.0));\n"
-    
-    -- bottom section
-    if rc.bl and rc.br then
-      shader = shader .. "  float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, mr-1.0));\n"
-    elseif rc.bl and not rc.br then
-      shader = shader .. "  float bot = box(lpc, vec2(mr-1.0, 0), vec2(size.x, mr-1.0));\n"
-    elseif not rc.bl and rc.br then
-      shader = shader .. "  float bot = box(lpc, vec2(0, 0), vec2(size.x-mr-1.0, mr-1.0));\n"
-    elseif not rc.bl and not rc.br then
-        shader = shader .. "  float bot = box(lpc, vec2(0, 0), vec2(size.x, mr-1.0));\n"
-    end
-    
-    -- assemble parts
-    shader = shader .. "  float f = 0.0"
-    for k,v in pairs(parts) do
-      shader = shader .. "+" .. v
-    end
-    shader = shader..";\n"
-    shader = shader .. "  return clamp(f, 0.0, 1.0);\n}"
-    
-    shader = shader .. [[
-
-    
-vec2 localPixelCoord() 
-{
-  return tc0*(size-vec2(1,1));
-}
-
-void main(void)
-{ 
-  float f = roundedRect(localPixelCoord(), size, radius);
-  gl_FragColor = color*f;
-}
-      
-]]
-  else    
-    -- frame rr
-  end
-  
-  log.debug("-------------- VERTEX SHADER")
-  log.debug(roundedRectVsSource)
-  log.debug("-------------- FRAGMENT SHADER")
-  log.debug(shader)
-  
-  if filled then
-    result = lost.gl.buildShader(tasklet.loader, "roundedRect", roundedRectVsSource, shader)
-  else
-    result = lost.gl.buildShader(tasklet.loader, "roundedRectFrame", roundedRectFrameVsSource, shader)
-  end
-  
-  return result
-end
+shaderFactory = lost.common.ShaderFactory(tasklet.loader)
 
 function createQuad(size)
   local layout = lost.gl.BufferLayout()
@@ -242,7 +57,7 @@ function createDisc(col, pos, radius)
   local size = Vec2(radius*2, radius*2)
   local result = createQuad(size)
   result.material.color = col
-  result.material.shader = loadShader("disc")
+  result.material.shader = shaderFactory:disc()
   result.material.uniforms:set("size", size)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
@@ -254,7 +69,7 @@ function createRing(col, pos, radius, width)
   local size = Vec2(radius*2, radius*2)
   local result = createQuad(size)
   result.material.color = col
-  result.material.shader = loadShader("ring")
+  result.material.shader = shaderFactory:ring()
   result.material.uniforms:set("size", size)
   result.material.uniforms:set("center", Vec2(radius-1, radius-1))
   result.material.uniforms:setFloat("radius", radius)
@@ -268,7 +83,7 @@ function createRoundedRect(col, rect, radius)
   local result = createQuad(size)
 
   result.material.color = col
-  result.material.shader = loadShader("roundedRect")
+  result.material.shader = shaderFactory:roundedRect(true, {}, {}) --buildRRShader(true,{tl=true, tr=true, bl=true, br=true}, {}) --loadShader("roundedRect")
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
@@ -282,7 +97,7 @@ function createRoundedRectFrame(col, rect, radius, width)
   local result = createQuad(size)
 
   result.material.color = col
-  result.material.shader = loadShader("roundedRectFrame")
+  result.material.shader = shaderFactory:roundedRect(false, {}, {}) --loadShader("roundedRectFrame")
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.material.uniforms:setFloat("width", width)
@@ -295,7 +110,7 @@ function createBox(col, rect)
   local size = Vec2(rect.width, rect.height)
   local result = createQuad(size)
   result.material.color = col
-  result.material.shader = loadShader("box")
+  result.material.shader = shaderFactory:box()
   result.material.uniforms:set("size", size)
   result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))*MatrixRotZ(-87)
   result.material:blendPremultiplied()
@@ -304,13 +119,13 @@ end
 
 function iqcreateRoundedRect(col, rect, radius)
   local result = createRoundedRect(col, rect, radius)
-  result.material.shader = loadShader("iqrr")
+  result.material.shader = shaderFactory:iqrr()
   return result
 end
 
 function iqcreateRoundedRectFrame(col, rect, radius, width)
   local result = createRoundedRectFrame(col, rect, radius, width)
-  result.material.shader = loadShader("iqrrf")
+  result.material.shader = shaderFactory:iqrrf()
   return result
 end
 
@@ -337,12 +152,7 @@ end
 function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-
-  roundedRectVsSource = tasklet.loader:load("roundedRect.vs"):str()
-  roundedRectFrameVsSource = tasklet.loader:load("roundedRectFrame.vs"):str()
   
-  local s = buildRRShader(true,{tl=false, tr=false, bl=true, br=true}, {})
-
   local white = Color(1,1,1,1)
   local red = Color(1,0,0,1)
   local blue = Color(0,0,1,1)
@@ -398,9 +208,7 @@ function startup()
   return running
 end
 
-function update(dt)
-  --log.debug(dt)
-  
+function update(dt)  
   return running
 end
 
