@@ -230,19 +230,19 @@ void main(void)
     end
     
     if s.left then
-      if rc.tl and rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, mr-1.0), vec2(width, size.y-mr-1.0));"
-      elseif not rc.tl and rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, mr-1.0), vec2(width, size.y));"
-      elseif rc.tl and not rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, 0.0), vec2(width, size.y-mr-1.0));"
-      elseif not rc.tl and not rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, 0.0), vec2(width, size.y));"
+      if rc.tl and rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, mr-1.0), vec2(width, size.y-mr-1.0));\n"
+      elseif not rc.tl and rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, mr-1.0), vec2(width, size.y));\n"
+      elseif rc.tl and not rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, 0.0), vec2(width, size.y-mr-1.0));\n"
+      elseif not rc.tl and not rc.bl then shader=shader.."  float leftl = box(lpc, vec2(0, 0.0), vec2(width, size.y));\n"
       end
       table.insert(parts, "leftl")
     end
 
     if s.right then
-      if rc.tr and rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, mr-1.0), vec2(size.x-1.0, size.y-mr-1.0));"
-      elseif not rc.tr and rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, mr-1.0), vec2(size.x-1.0, size.y));"
-      elseif rc.tr and not rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, 0.0), vec2(size.x-1.0, size.y-mr-1.0));"
-      elseif not rc.tr and not rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, 0.0), vec2(size.x-1.0, size.y));"
+      if rc.tr and rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, mr-1.0), vec2(size.x-1.0, size.y-mr-1.0));\n"
+      elseif not rc.tr and rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, mr-1.0), vec2(size.x-1.0, size.y));\n"
+      elseif rc.tr and not rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, 0.0), vec2(size.x-1.0, size.y-mr-1.0));\n"
+      elseif not rc.tr and not rc.br then shader=shader.."  float rightl = box(lpc, vec2(size.x-width-1.0, 0.0), vec2(size.x-1.0, size.y));\n"
       end
       table.insert(parts, "rightl")
     end
