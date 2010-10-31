@@ -81,7 +81,7 @@ function MeshFactory:createRoundedRect(col, rect, radius)
   local result = self:createQuad(size)
 
   result.material.color = col
-  result.material.shader = self.shaderFactory:roundedRect(true, {}, {})
+  result.material.shader = self.shaderFactory:roundedRect(true, {tl=false}, {})
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
@@ -94,7 +94,7 @@ function MeshFactory:createRoundedRectFrame(col, rect, radius, width)
   local result = self:createQuad(size)
 
   result.material.color = col
-  result.material.shader = self.shaderFactory:roundedRect(false, {}, {}) 
+  result.material.shader = self.shaderFactory:roundedRect(false, {tl=false}, {top=false}) 
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.material.uniforms:setFloat("width", width)
