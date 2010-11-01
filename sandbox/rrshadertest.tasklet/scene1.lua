@@ -10,7 +10,7 @@ dcl.rg:Node
   meshFactory:createComboRectNode(gray2, gray1, Rect(left,390,200,200), 27, 2),
   meshFactory:iqcreateComboRectNode(gray2, gray1, Rect(right,390,200,200), 27, 2),
   
-  dcl.rg:Draw { mesh = meshFactory:createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },
+  dcl.rg:Draw { mesh = meshFactory:createRoundedRectFrame(white, Rect(20,180, 10, 10), r,w) },  
   dcl.rg:Draw { mesh = meshFactory:createRoundedRectFrame(white, Rect(20,20, 16, 16), r,w) },
   dcl.rg:Draw { mesh = meshFactory:createRoundedRectFrame(white, Rect(100,50, 64, 64), r,w) },
   dcl.rg:Draw { mesh = meshFactory:createRoundedRectFrame(white, Rect(10,100, 13, 13), r,w) },

@@ -20,6 +20,7 @@ shaderFactory = lost.common.ShaderFactory(tasklet.loader)
 meshFactory = lost.common.MeshFactory(shaderFactory)
 
 white = Color(1,1,1,1)
+yellow = Color(1,1,0,1)
 red = Color(1,0,0,1)
 blue = Color(0,0,1,1)
 gray1 = Color(.2, .2, .2, 1)

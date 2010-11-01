@@ -269,10 +269,10 @@ void main(void)
 ]]
   end
   
-  log.debug("-------------- VERTEX SHADER")
-  log.debug(roundedRectVsSource)
-  log.debug("-------------- FRAGMENT SHADER")
-  log.debug(shader)
+--  log.debug("-------------- VERTEX SHADER")
+--  log.debug(roundedRectVsSource)
+--  log.debug("-------------- FRAGMENT SHADER")
+--  log.debug(shader)
   
   if filled then
     result = lost.gl.buildShader(self.loader, "roundedRect", self.roundedRectVsSource, shader)
