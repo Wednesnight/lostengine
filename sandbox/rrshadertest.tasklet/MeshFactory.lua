@@ -77,31 +77,27 @@ function MeshFactory:createRing(col, pos, radius, width)
 end
 
 function MeshFactory:createRoundedRect(col, rect, radius)
-  local size = Vec2(rect.width, rect.height)
-  local result = self:createQuad(size)
-
-  result.material.color = col
-  result.material.shader = self.shaderFactory:roundedRect(true, {tl=false}, {})
-  result.material.uniforms:set("size", size)
-  result.material.uniforms:setFloat("radius", radius)
-  result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
-  
-  return result
+  return self:roundedRect(col, rect, radius, 0, true, {}, {})
 end
 
 function MeshFactory:createRoundedRectFrame(col, rect, radius, width)
+  return self:roundedRect(col, rect, radius, width, false, {}, {})  
+end
+
+function MeshFactory:roundedRect(col, rect, radius, width, filled, roundCorners, sides)
   local size = Vec2(rect.width, rect.height)
   local result = self:createQuad(size)
-
   result.material.color = col
-  result.material.shader = self.shaderFactory:roundedRect(false, {tl=false}, {top=true}) 
+  result.material.shader = self.shaderFactory:roundedRect(filled, roundCorners, sides)
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
-  result.material.uniforms:setFloat("width", width)
+  if not filled then
+    result.material.uniforms:setFloat("width", width)    
+  end
   result.transform = MatrixTranslation(Vec3(rect.x,rect.y,0))
-  
   return result
 end
+
 
 function MeshFactory:createBox(col, rect)
   local size = Vec2(rect.width, rect.height)
@@ -126,11 +122,20 @@ function MeshFactory:iqcreateRoundedRectFrame(col, rect, radius, width)
   return result
 end
 
-function MeshFactory:createComboRectNode(col1, col2, rect, radius, width)
+function MeshFactory:createComboRectNode(fillColor, frameColor, rect, radius, width)
   local result = dcl.rg:Node
   {
-    dcl.rg:Draw{mesh = meshFactory:createRoundedRect(col1, rect, radius)},
-    dcl.rg:Draw{mesh = meshFactory:createRoundedRectFrame(col2, rect, radius, width)},
+    dcl.rg:Draw{mesh = meshFactory:createRoundedRect(fillColor, rect, radius)},
+    dcl.rg:Draw{mesh = meshFactory:createRoundedRectFrame(frameColor, rect, radius, width)},
+  }
+  return result
+end
+
+function MeshFactory:comboRectNode(fillColor, frameColor, rect, radius, width, roundCorners, sides)
+  local result = dcl.rg:Node
+  {
+    dcl.rg:Draw{mesh = meshFactory:roundedRect(fillColor, rect, radius, width, true, roundCorners, sides)},
+    dcl.rg:Draw{mesh = meshFactory:roundedRect(frameColor, rect, radius, width, false, roundCorners, sides)},
   }
   return result
 end
