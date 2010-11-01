@@ -1,11 +1,10 @@
 uniform vec2 size;
+uniform float radius;
 uniform vec2 center;
 uniform vec4 color; 
-uniform float radius;
-uniform float width;
 varying vec2 tc0; 
 
-#import "shaders/ring.fsp"
+#import "lost/resources/glsl/disc.fsp"
 
 vec2 localPixelCoord() 
 {
@@ -14,5 +13,5 @@ vec2 localPixelCoord()
 
 void main(void)
 {  
-  gl_FragColor = color*ring(localPixelCoord(), center, radius, width);    
+  gl_FragColor = color*disc(localPixelCoord(), center, radius);    
 }

@@ -1,4 +1,4 @@
-#import "shaders/disc.fsp"
+#import "lost/resources/glsl/disc.fsp"
 
 float ring(vec2 lpc, vec2 c, float r, float w)
 {
