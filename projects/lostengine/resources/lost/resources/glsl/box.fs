@@ -2,7 +2,7 @@ uniform vec4 color;
 uniform vec2 size;
 varying vec2 tc0; 
 
-#import "shaders/box.fsp"
+#import "lost/resources/glsl/box.fsp"
 
 vec2 localPixelCoord() 
 {

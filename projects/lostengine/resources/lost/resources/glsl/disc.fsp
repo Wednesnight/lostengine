@@ -1,4 +1,4 @@
-#import "shaders/quadrant.fsp"
+#import "lost/resources/glsl/quadrant.fsp"
 
 float disc(vec2 lpc, vec2 c, float r)
 {

@@ -7,8 +7,8 @@ lost.common.Class "lost.common.ShaderFactory" {}
 function ShaderFactory:constructor(loader)
   self.loader = loader
   self.cache = {}
-  self.roundedRectVsSource = self.loader:load("shaders/roundedRect.vs"):str()
-  self.roundedRectFrameVsSource = self.loader:load("shaders/roundedRectFrame.vs"):str()  
+  self.roundedRectVsSource = self.loader:load("lost/resources/glsl/roundedRect.vs"):str()
+  self.roundedRectFrameVsSource = self.loader:load("lost/resources/glsl/roundedRectFrame.vs"):str()  
 end
 
 function ShaderFactory:loadShader(name)
@@ -21,23 +21,23 @@ function ShaderFactory:loadShader(name)
 end
 
 function ShaderFactory:ring()
-  return self:loadShader("shaders/ring")
+  return self:loadShader("lost/resources/glsl/ring")
 end
 
 function ShaderFactory:disc()
-  return self:loadShader("shaders/disc")
+  return self:loadShader("lost/resources/glsl/disc")
 end
 
 function ShaderFactory:box()
-  return self:loadShader("shaders/box")
+  return self:loadShader("lost/resources/glsl/box")
 end
 
 function ShaderFactory:iqrr()
-  return self:loadShader("shaders/iqrr")
+  return self:loadShader("lost/resources/glsl/iqrr")
 end
 
 function ShaderFactory:iqrrf()
-  return self:loadShader("shaders/iqrrf")
+  return self:loadShader("lost/resources/glsl/iqrrf")
 end
 
 -- f = filled
@@ -114,8 +114,8 @@ uniform vec2 size;
 uniform float radius;
 varying vec2 tc0;
 
-#import "shaders/disc.fsp"
-#import "shaders/box.fsp"
+#import "lost/resources/glsl/disc.fsp"
+#import "lost/resources/glsl/box.fsp"
 
 float roundedRect(vec2 lpc, vec2 size, float r)
 {
@@ -130,8 +130,8 @@ uniform float radius;
 uniform float width;
 varying vec2 tc0;
 
-#import "shaders/ring.fsp"
-#import "shaders/box.fsp"
+#import "lost/resources/glsl/ring.fsp"
+#import "lost/resources/glsl/box.fsp"
 
 float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
 {
