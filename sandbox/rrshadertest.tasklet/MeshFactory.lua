@@ -94,7 +94,7 @@ function MeshFactory:createRoundedRectFrame(col, rect, radius, width)
   local result = self:createQuad(size)
 
   result.material.color = col
-  result.material.shader = self.shaderFactory:roundedRect(false, {tl=false}, {top=false}) 
+  result.material.shader = self.shaderFactory:roundedRect(false, {tl=false}, {top=true}) 
   result.material.uniforms:set("size", size)
   result.material.uniforms:setFloat("radius", radius)
   result.material.uniforms:setFloat("width", width)
@@ -123,5 +123,23 @@ end
 function MeshFactory:iqcreateRoundedRectFrame(col, rect, radius, width)
   local result = self:createRoundedRectFrame(col, rect, radius, width)
   result.material.shader = self.shaderFactory:iqrrf()
+  return result
+end
+
+function MeshFactory:createComboRectNode(col1, col2, rect, radius, width)
+  local result = dcl.rg:Node
+  {
+    dcl.rg:Draw{mesh = meshFactory:createRoundedRect(col1, rect, radius)},
+    dcl.rg:Draw{mesh = meshFactory:createRoundedRectFrame(col2, rect, radius, width)},
+  }
+  return result
+end
+
+function MeshFactory:iqcreateComboRectNode(col1, col2, rect, radius, width)
+  local result = dcl.rg:Node
+  {
+    dcl.rg:Draw{mesh = meshFactory:iqcreateRoundedRect(col1, rect, radius)},
+    dcl.rg:Draw{mesh = meshFactory:iqcreateRoundedRectFrame(col2, rect, radius, width)},
+  }
   return result
 end
