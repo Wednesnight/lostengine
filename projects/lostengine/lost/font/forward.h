@@ -22,6 +22,12 @@ namespace font
 struct TrueTypeFont;
 typedef lost::shared_ptr<TrueTypeFont> TrueTypeFontPtr;
 
+struct Font;
+typedef lost::shared_ptr<Font> FontPtr;
+
+struct BitmapFont;
+typedef lost::shared_ptr<BitmapFont> BitmapFontPtr;
+
 struct RenderedText;
 typedef lost::shared_ptr<RenderedText> RenderedTextPtr;
 
