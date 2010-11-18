@@ -1,5 +1,3 @@
-#include "ft2build.h"
-#include FT_FREETYPE_H
 #include "lost/font/TrueTypeFont.h"
 #include "lost/common/Logger.h"
 #include "lost/bitmap/Packer.h"
@@ -11,6 +9,7 @@
 #include "lost/font/freetype/Face.h"
 #include "lost/font/RenderedText.h"
 #include "lost/bitmap/Bitmap.h"
+#include "lost/font/Glyph.h"
 #include <math.h>
 
 using namespace std;
@@ -25,18 +24,6 @@ namespace lost
 namespace font
 {
 
-TrueTypeFont::Glyph::Glyph()
-{
-  drawable = true;
-  xoffset = 0;
-  yoffset = 0;
-  advance = 0;
-}
-
-TrueTypeFont::Glyph::~Glyph()
-{
-}
-
 TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
                            common::DataPtr inData)
 {
@@ -48,36 +35,6 @@ TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
 TrueTypeFont::~TrueTypeFont()
 {
 }
-
-bitmap::BitmapPtr
-TrueTypeFont::renderGlyphToBitmap(ftxt::utf32_char_t c,
-                                  uint32_t inSizeInPoints)
-{
-  FT_Error error = FT_Set_Char_Size(face->face(), 0, inSizeInPoints*64, 72, 72);
-  if(error)
-  {
-    ostringstream os;
-    os << error;
-    throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
-  }
-  
-  FT_UInt idx = FT_Get_Char_Index(face->face(), c);
-  FT_Int32 load_flags = 0;
-  error = FT_Load_Glyph(face->face(), idx, load_flags);
-  if(error) {WOUT("FT_Load_Glyph error: " << error);}
-  
-  FT_Render_Mode render_mode = FT_RENDER_MODE_NORMAL;
-  error = FT_Render_Glyph(face->face()->glyph, render_mode);
-  if(error) {WOUT("FT_Render_Glyph error: " << error);}
-  
-  BitmapPtr result(new Bitmap(face->face()->glyph->bitmap.width,
-                               face->face()->glyph->bitmap.rows,
-                               bitmap::COMPONENTS_RGBA,
-                               bitmap::COMPONENTS_ALPHA,
-                               face->face()->glyph->bitmap.buffer));  
-  result->flip();  
-  return result;
-}
   
 bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
                                uint32_t inSizeInPoints)
@@ -88,23 +45,13 @@ bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
     {
       result = true;
       glyph.reset(new Glyph);
-      glyph->bitmap = renderGlyphToBitmap(c, inSizeInPoints);
-      
-      glyph->xoffset = face->face()->glyph->bitmap_left;
-      glyph->yoffset = face->face()->glyph->bitmap_top - (face->face()->glyph->metrics.height >> 6);
-      glyph->advance = (face->face()->glyph->advance.x >> 6);
+      glyph->render(face, inSizeInPoints, c);
       char2size2glyph[c][inSizeInPoints] = glyph;
       glyphs.push_back(glyph);
 
       // due to the fact that font size is not fixed within a font instance, we have to recalculate 
-//      float font_height = ((float)face->face()->height)/64.0f;
-      float font_scale = ((float)face->face()->size->metrics.y_scale)/65536.0f;
-
-      float font_ascender = (((float)face->face()->ascender)/64.0f)*font_scale;
-      float font_descender = (((float)face->face()->descender)/64.0f)*font_scale;
-
-      _fontSize2ascender[inSizeInPoints] = font_ascender;
-      _fontSize2descender[inSizeInPoints] = font_descender;
+      _fontSize2ascender[inSizeInPoints] = face->ascender();
+      _fontSize2descender[inSizeInPoints] = face->descender();
     }
     return result;
 }
@@ -271,10 +218,8 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   float xoffset = 0;
   
   // kerning setup
-  bool hasKerning = FT_HAS_KERNING(face->face()) != 0;
-  FT_UInt previousGlyphIndex, currentGlyphIndex;
-  previousGlyphIndex = 0;
-  FT_Vector kerningDelta;
+  bool hasKerning = face->hasKerning();
+  uint32_t previousGlyphIndex = 0;
   
   // size calculation 
   Vec2 pmin, pmax; 
@@ -287,11 +232,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
     
     if(hasKerning)
     {
-      currentGlyphIndex = FT_Get_Char_Index(face->face(), c);
-      FT_Get_Kerning(face->face(), previousGlyphIndex, currentGlyphIndex, FT_KERNING_DEFAULT, &kerningDelta);
-      signed long kerningoffset = kerningDelta.x>>6;
-      xoffset+=kerningoffset;
-      previousGlyphIndex = currentGlyphIndex;
+      xoffset+=face->kerningOffset(previousGlyphIndex, c);
     }
     
     GlyphPtr glyph = char2size2glyph[c][inSizeInPoints];

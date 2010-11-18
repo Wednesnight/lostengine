@@ -9,6 +9,8 @@ struct Font
 {
   Font();
   virtual ~Font();
+  
+  uint32_t size;
 };
 }
 }

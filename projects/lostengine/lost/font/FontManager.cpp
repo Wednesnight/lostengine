@@ -13,5 +13,10 @@ FontManager::~FontManager()
 {
 }
 
+FontManagerPtr FontManager::create()
+{
+  return FontManagerPtr(new FontManager);
+}
+
 }
 }

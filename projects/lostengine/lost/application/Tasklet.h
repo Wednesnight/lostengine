@@ -12,6 +12,7 @@
 #include "lost/rg/forward.h"
 #include "lost/application/TaskletConfig.h"
 #include "lost/common/Timer.h"
+#include "lost/font/forward.h"
 
 namespace lost
 {
@@ -30,6 +31,7 @@ namespace lost
       lost::shared_ptr<LuaStateHelper> lsh;
 
       common::Timer timer;
+      font::FontManagerPtr fontManager;
 
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded

@@ -20,35 +20,10 @@ namespace font
 {
 
 struct TrueTypeFont
-{
-  struct Glyph
-  {
-    Glyph();
-    ~Glyph();
-    lost::math::Rect  rect; // the glyphs bitmaps rect inside the atlas texture
-    
-    int32_t xoffset;
-    int32_t yoffset;
-    int32_t advance;
-    
-    bool drawable;
-    
-    bitmap::BitmapPtr bitmap;
-  };
-
-  typedef lost::shared_ptr<Glyph> GlyphPtr;
-  
+{  
   TrueTypeFont(freetype::LibraryPtr inLibrary,
                common::DataPtr inData);
   virtual ~TrueTypeFont();
-
-  /** lets freetype render the specified glyph.
-   * All memory management is performed by freetype. The result is placed in the
-   * face->glyph->bitmap structure.
-   */
-  bitmap::BitmapPtr
-  renderGlyphToBitmap(fhtagn::text::utf32_char_t c,
-                      uint32_t inSizeInPoints);
     
   /** renders the given string with this font and returns it as a textured mesh that
    *  has it's origin at 0,0.
@@ -98,7 +73,6 @@ struct TrueTypeFont
                 lost::math::Vec2& pmax); // will be updated with new max values
   
   freetype::FacePtr face;
-  freetype::LibraryPtr library;
 
   lost::math::Vec2  atlasSize;
   
