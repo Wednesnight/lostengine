@@ -25,6 +25,7 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/gl.h"
 #include <boost/filesystem.hpp>
+#include "lost/font/FontManager.h"
 
 using namespace boost;
 using namespace luabind;
@@ -35,6 +36,7 @@ using namespace lost::platform;
 using namespace lost::resource;
 using namespace lost::rg;
 using namespace lost::common;
+using namespace lost::font;
 
 namespace lost
 {
@@ -55,6 +57,7 @@ namespace lost
       waitForEvents = false;
       name = "<unnamed tasklet>";
 	    window = NULL;
+      fontManager = FontManager::create();
 
       scriptLoaded = false;
       configLoaded = false;
@@ -136,6 +139,7 @@ namespace lost
     {
       // first: clear the dispatcher/callbacks and cleanup all lua callback resources
       eventDispatcher->clear();
+      fontManager.reset();
       lsh.reset();
       clearNode.reset();
       renderNode.reset();
