@@ -1,7 +1,7 @@
 require("lost.declarative.Context")
 require("lost.common.Shaders")
 require("lost.common.ShaderFactory")
-require("MeshFactory")
+require("lost.common.MeshFactory")
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
