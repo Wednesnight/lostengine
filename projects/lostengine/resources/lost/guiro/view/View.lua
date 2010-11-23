@@ -21,7 +21,7 @@ function View:constructor(textureManager)
   assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
   self.textureManager = textureManager
 
-	self.layer = lost.guiro.layer.Layer(textureManager)
+	self.layer = lost.guiro.layer.Layer()
 
   self.subviews = {}
   -- setup event dispatchers

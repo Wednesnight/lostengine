@@ -43,6 +43,16 @@ function startup()
   tasklet.renderNode:add(scene2)
   scene2.active = false
 
+  rootLayer = lost.guiro.layer.Layer()
+  sl1 = lost.guiro.layer.Layer()
+  sl1.id = "sl1"
+  sl2 = lost.guiro.layer.Layer()
+  sl2.id = "sl2"
+  rootLayer:addSubLayer(sl1)
+  rootLayer:addSubLayer(sl2)
+  rootLayer:print()
+  rootLayer._renderNode:print()
+
   return running
 end
 
