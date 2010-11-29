@@ -23,7 +23,7 @@ function startup()
   
   
   -- guiro.Screen adds itself implicitly to the tasklets renderNode, so call it last
-  screen = dcl.guiro:Screen
+  screen = dcl.guiro:UserInterface
   {
     listeners = 
     {
@@ -35,10 +35,6 @@ function startup()
                       end
                     end,
     },
-    dcl.guiro:UserInterface
-    {
-      id = "ui",
-      bounds = {"left", "bottom", "1", "1"},
       dcl.guiro:Window
       {
         id = "window",
@@ -248,7 +244,6 @@ function startup()
   	        }
   				}
         }
-      }
     }
   }
   

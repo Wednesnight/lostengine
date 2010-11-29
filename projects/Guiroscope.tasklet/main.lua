@@ -10,7 +10,7 @@ using "lost.common.Color"
 
 -- these are deliberately global so we can access them from startup/update/shutdown
 dcl = nil
-screen = nil
+ui = nil
 
 function startup()
   log.debug("starting up")
@@ -20,7 +20,8 @@ function startup()
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
   dcl = lost.declarative.Context(tasklet.loader)
-  screen = require("ui")
+  ui = require("ui")
+  ui:printSubviews()
 
   return true
 end
