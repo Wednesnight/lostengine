@@ -1,5 +1,7 @@
 module("lost.guiro.layer", package.seeall)
 
+require("lost.guiro.Bounds")
+
 lost.common.Class "lost.guiro.layer.Layer" {}
 
 function Layer:constructor()
@@ -8,6 +10,16 @@ function Layer:constructor()
   self.sublayers = {}
 	self.z = 0
 	self.id = "layer"
+	self._bounds = lost.guiro.Bounds("left", "bottom", "1", "1")
+end
+
+function Layer:bounds(...)
+  if arg.n > 0 then
+    self._bounds = arg[1]
+    self:needsLayout()
+  else
+    return self._bounds
+  end
 end
 
 function Layer:superlayer(...)
@@ -32,6 +44,7 @@ function Layer:addSublayer(layer)
   self._renderNode:add(layer._renderNode)
   layer:superlayer(self)
   self:updateSublayerZ()
+  self:needsLayout()
 end
 
 function Layer:removeSublayer(layer)
@@ -72,4 +85,15 @@ function Layer:__tostring()
   return self:className() .."(".. self.id ..")"
 end
 
+function Layer:needsUpdate()
+  ui:layerNeedsUpdate(self)
+end
+
+function Layer:needsLayout()
+  ui:layerNeedsLayout(self)
+end
+
+function Layer:needsDisplay()
+  ui:layerNeedsDisplay(self)
+end
 

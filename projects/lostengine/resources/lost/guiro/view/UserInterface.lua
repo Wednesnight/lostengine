@@ -77,3 +77,15 @@ end
 function UserInterface:afterLayout()
   self.camera:viewport(self.rect)
 end
+
+function UserInterface:layerNeedsUpdate(layer)
+  log.debug("layer would need update: "..layer.id)
+end
+
+function UserInterface:layerNeedsLayout(layer)
+  log.debug("layer would need layout: "..layer.id)
+end
+
+function UserInterface:layerNeedsDisplay(layer)
+  log.debug("layer would need display: "..layer.id)
+end

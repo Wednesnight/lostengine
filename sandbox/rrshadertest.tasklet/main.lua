@@ -43,6 +43,11 @@ function startup()
   tasklet.renderNode:add(scene2)
   scene2.active = false
 
+  dcl.guiro:UserInterface
+  {
+    id = "ui"
+  }
+
   rootLayer = lost.guiro.layer.Layer()
   sl1 = lost.guiro.layer.Layer()
   sl1.id = "sl1"
