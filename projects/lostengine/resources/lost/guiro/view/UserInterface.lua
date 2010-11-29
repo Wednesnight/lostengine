@@ -2,6 +2,9 @@ module("lost.guiro.view", package.seeall)
 
 require("lost.guiro.view.View")
 require("lost.guiro.event.EventManager")
+require("lost.guiro.TextureManager")
+require("lost.common.ShaderFactory")
+require("lost.common.MeshFactory")
 
 lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
@@ -10,6 +13,9 @@ using "lost.guiro.event.EventManager"
 function UserInterface:constructor(textureManager)
   lost.guiro.view.View.constructor(self, textureManager)
 
+  self.textureManager = lost.guiro.TextureManager(256)
+  self.shaderFactory = lost.common.ShaderFactory(tasklet.loader)
+  self.meshFactory = lost.common.MeshFactory(self.shaderFactory)
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
 

@@ -48,10 +48,33 @@ function startup()
   sl1.id = "sl1"
   sl2 = lost.guiro.layer.Layer()
   sl2.id = "sl2"
-  rootLayer:addSubLayer(sl1)
-  rootLayer:addSubLayer(sl2)
+  sl3 = lost.guiro.layer.Layer()
+  sl3.id = "sl3"
+  sl4 = lost.guiro.layer.Layer()
+  sl4.id = "sl4"
+  rootLayer:addSublayer(sl1)
+  rootLayer:addSublayer(sl2)
+  sl2:addSublayer(sl3)
+  rootLayer:addSublayer(sl4)
   rootLayer:print()
   rootLayer._renderNode:print()
+
+  sl1:removeFromSuperlayer()
+  rootLayer:print()
+  rootLayer._renderNode:print()
+
+  sl3:removeFromSuperlayer()
+  rootLayer:print()
+  rootLayer._renderNode:print()
+
+  sl2:removeFromSuperlayer()
+  rootLayer:print()
+  rootLayer._renderNode:print()
+
+  sl4:removeFromSuperlayer()
+  rootLayer:print()
+  rootLayer._renderNode:print()
+
 
   return running
 end
