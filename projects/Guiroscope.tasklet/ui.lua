@@ -21,9 +21,9 @@ return dcl.guiro:Screen
   {
     id = "mainUi",
     bounds = {0,0,"1", "1"},
-    dcl.guiro:Window
+    dcl.guiro:View
     {
-      id = "window1",
+      id = "view1",
       bounds = {0,0,".5", ".5"},
       dcl.guiro:Image
       {
@@ -53,9 +53,9 @@ return dcl.guiro:Screen
         }
       }
     },
-    dcl.guiro:Window
+    dcl.guiro:View
     {
-      id = "window2",
+      id = "view2",
       bounds = {"right", "top", ".5", "1"},
 			dcl.guiro:HBox
 			{
@@ -79,13 +79,13 @@ return dcl.guiro:Screen
   	          mouseEnter = function(event)
   	                          if event.currentTarget == event.target then
   															event.target:showFrame(true)
-  															event.target:rootView()("mainUi")("window1"):hidden(true)
+  															event.target:rootView()("mainUi")("view1"):hidden(true)
   														end
 													 end,
   	          mouseLeave = function(event)
                               if event.currentTarget == event.target then
 													 	    event.target:showFrame(false)
-															  event.target:rootView()("mainUi")("window1"):hidden(false)
+															  event.target:rootView()("mainUi")("view1"):hidden(false)
 															end
 												   end
   	        }          

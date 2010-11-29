@@ -46,30 +46,10 @@ function View:constructor(textureManager)
   self.subviewNodes = lost.rg.Node.create()
   self.subviewNodes.name = "subviewNodes"
 
-  -- scissoring, initially enabled but inactive (will not be processed)
-  self.scissorBounds = lost.guiro.Bounds("left", "top", "1", "1")
-  self.scissorNode = lost.rg.Scissor.create(true)
-  self.scissorNode.active = false
-  self.scissorNode.name = "scissorNode"
-  self.scissorRectNode = lost.rg.ScissorRect.create(lost.math.Rect())
-  self.scissorRectNode.active = false
-  self.scissorRectNode.name = "scissorRectNode"
-  self.disableScissorNode = lost.rg.Scissor.create(false)
-  self.disableScissorNode.active = false
-  self.disableScissorNode.name = "disableScissorNode"
-
-  -- set scissor rect to enable scissoring for this view
-  self.scissorRect = nil
-
   -- draw the view
   self.rootNode:add(self.renderNode)
-  -- apply the views scissoring
-  self.rootNode:add(self.scissorNode)
-  self.rootNode:add(self.scissorRectNode)
   -- draw subviews
   self.rootNode:add(self.subviewNodes)
-  -- disable scissoring
-  self.rootNode:add(self.disableScissorNode)
 
   -- meshes and draw nodes
   self.backgroundMesh = lost.mesh.RoundedRect.create(textureManager._textureManager, 
@@ -119,11 +99,7 @@ end
   ]]
 function View:setParent(parent)
   if parent ~= nil then
-    if parent:isDerivedFrom("lost.guiro.view.View") then
-      self.parent = parent
-    else
-      error("View:setParent() expected lost.guiro.view.View, got ".. type(parent), 2)
-    end
+    self.parent = parent
     self.parent.subviewNodes:add(self.rootNode)
     self:needsLayout()
     self:needsRedraw()
@@ -486,13 +462,6 @@ function View:afterLayout()
   -- update frame mesh
   self.frameMesh:size(Vec2(self.rect.width, self.rect.height))
   self.frameMesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
-
-  -- update scissoring
-  if self.scissorRect ~= nil then
-    self.scissorRectNode.rect = self.scissorRect
-  else
-    self.scissorRectNode.rect = self.rect
-  end
 end
 
 function View:containsCoord(point)
@@ -504,8 +473,7 @@ end
   ]]
 function View:addSubview(subview)
   if (type(subview)=="table") and 
-     (subview.isDerivedFrom ~= nil) and 
-     subview:isDerivedFrom("lost.guiro.view.View") then
+     (subview.isDerivedFrom ~= nil) then
     table.insert(self.subviews, subview)
   	subview:onAttach(self)
   else
@@ -517,15 +485,11 @@ end
     Removes subview from self.subviews and calls subview:onDetach(self)
   ]]
 function View:removeSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.view.View") then
-    for k,view in next,self.subviews do
-      if rawequal(view, subview) then
-        self.subviews[k] = nil
-        view:onDetach(self)
-      end
+  for k,view in next,self.subviews do
+    if rawequal(view, subview) then
+      self.subviews[k] = nil
+      view:onDetach(self)
     end
-  else
-    error("View:removeSubview() expected lost.guiro.view.View, got ".. type(subview), 2)
   end
 end
 

@@ -20,11 +20,6 @@ function Screen:constructor(textureManager)
   self.focusable = true
 	self.parent = nil
 
-  -- disable scissoring when drawing is done
-  local disableScissorNode = lost.rg.Scissor.create(false)
-  disableScissorNode.name = "disableScissorNode"
-  self.rootNode:add(disableScissorNode)
-
   self.camera = lost.camera.Camera2D.create(lost.math.Rect())
   self.renderNode:add(lost.rg.Camera.create(self.camera))
   self.renderNode:add(lost.rg.DepthTest.create(false))
@@ -78,16 +73,4 @@ end
   ]]
 function Screen:afterLayout()
   self.camera:viewport(self.rect)
-end
-
---[[
-    only accepts lost.guiro.UserInterface
-    will fail if subview is not a lost.common.Class
-  ]]
-function Screen:addSubview(subview)
-  if subview:isDerivedFrom("lost.guiro.view.UserInterface") then
-    lost.guiro.view.View.addSubview(self, subview)
-  else
-    error("Screen:addSubview() can only add subviews of type UserInterface : ".. subview:className(), 2)
-  end
 end
