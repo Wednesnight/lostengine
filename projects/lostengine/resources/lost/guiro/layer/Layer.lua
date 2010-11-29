@@ -4,48 +4,57 @@ lost.common.Class "lost.guiro.layer.Layer" {}
 
 function Layer:constructor()
 	self._renderNode = lost.rg.Node.create()
-	self._superLayer = nil
-  self._subLayers = {}
-	self._z = 0
+	self._superlayer = nil
+  self.sublayers = {}
+	self.z = 0
 	self.id = "layer"
 end
 
-function Layer:superLayer(...)
+function Layer:superlayer(...)
   if arg.n > 0 then
     local newsl = arg[1]
-    self._superLayer = newsl
+    self._superlayer = newsl
   else
-    return self._superLayer
+    return self._superlayer
   end
 end
 
-function Layer:addSubLayer(layer)
-  if layer:superLayer() ~= nil then layer:removeFromSuperLayer() end
-  table.insert(self._subLayers, layer)
-  self._renderNode:add(layer._renderNode)
+function Layer:updateSublayerZ()
+  for _,v in pairs(self.sublayers) do
+    v.z = self.z+1
+    v:updateSublayerZ()
+  end
 end
 
-function Layer:removeLayer(layer)
-  for k,v in pairs(self._subLayers) do
+function Layer:addSublayer(layer)
+  if layer:superlayer() ~= nil then layer:removeFromSuperlayer() end
+  table.insert(self.sublayers, layer)
+  self._renderNode:add(layer._renderNode)
+  layer:superlayer(self)
+  self:updateSublayerZ()
+end
+
+function Layer:removeSublayer(layer)
+  for k,v in pairs(self.sublayers) do
     if rawequal(v,layer) then
-      self._subLayers[k] = nil
+      self.sublayers[k] = nil
       self._renderNode:remove(layer._renderNode)
-      layer:superLayer(nil)
+      layer:superlayer(nil)
       break
     end
   end
 end
 
-function Layer:removeFromSuperLayer()
-  if self._superLayer then
-    self._superLayer:removeLayer(self)
+function Layer:removeFromSuperlayer()
+  if self._superlayer then
+    self._superlayer:removeSublayer(self)
   end
 end
 
-function Layer:removeAllSubLayers()
-  while (#self._subLayers) > 0 do
-    local l = self._subLayers[1]
-    l:removeFromSuperLayer()
+function Layer:removeAllSublayers()
+  while (#self.sublayers) > 0 do
+    local l = self.sublayers[1]
+    l:removeFromSuperlayer()
   end
 end
 
@@ -53,8 +62,8 @@ function Layer:print(prefix)
   if not prefix then
     prefix = ""
   end
-  log.debug(prefix .."|-- ".. self.id)
-  for k,view in pairs(self._subLayers) do
+  log.debug(prefix .."|--("..self.z..") ".. self.id)
+  for k,view in pairs(self.sublayers) do
     view:print(prefix .."    ")
   end
 end
