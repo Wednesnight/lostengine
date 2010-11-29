@@ -1,7 +1,6 @@
 -- lost.declarative.Guiro
 module("lost.declarative", package.seeall)
 
-require("lost.guiro.view.Screen")
 require("lost.guiro.view.UserInterface")
 require("lost.guiro.view.Window")
 require("lost.guiro.view.View")
@@ -194,15 +193,6 @@ function Guiro:View(def)
   local result = lost.guiro.view.View(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)    
-  self:assignViewAttributes(result, def) 
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:Screen(def)
-  local result = lost.guiro.view.Screen(self.textureManager)
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def) 
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
