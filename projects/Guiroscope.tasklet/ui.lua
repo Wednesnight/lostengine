@@ -75,13 +75,13 @@ return dcl.guiro:UserInterface
 	          mouseEnter = function(event)
 	                          if event.currentTarget == event.target then
 															event.target:showFrame(true)
-															event.target:rootView()("mainUi")("view1"):hidden(true)
+															event.target:rootView()("view1"):hidden(true)
 														end
 												 end,
 	          mouseLeave = function(event)
                             if event.currentTarget == event.target then
 												 	    event.target:showFrame(false)
-														  event.target:rootView()("mainUi")("view1"):hidden(false)
+														  event.target:rootView()("view1"):hidden(false)
 														end
 											   end
 	        }          

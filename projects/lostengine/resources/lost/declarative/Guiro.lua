@@ -2,7 +2,6 @@
 module("lost.declarative", package.seeall)
 
 require("lost.guiro.view.UserInterface")
-require("lost.guiro.view.Window")
 require("lost.guiro.view.View")
 require("lost.guiro.view.Label")
 require("lost.guiro.view.Image")
@@ -202,15 +201,6 @@ function Guiro:UserInterface(def)
   local result = lost.guiro.view.UserInterface(self.textureManager)
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)      
-  self:assignViewAttributes(result, def) 
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:Window(def)
-  local result = lost.guiro.view.Window(self.textureManager)
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def)  
   self:assignViewAttributes(result, def) 
   self:addEventListeners(result, def)
   return result
