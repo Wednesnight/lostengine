@@ -3,19 +3,6 @@ module("lost.guiro.view", package.seeall)
 require("lost.guiro.view.View")
 require("lost.guiro.event.EventManager")
 
---[[
-     Screen
-     Holds only UserInterfaces.
-     Sets up basic 2D camera and other flags for rendering.
-     
-     The Screen is the only view who's global rect is controlled from the outside. 
-     A Screen should always span the whole physical window area OR the area of the
-     physical window that you want to have covered by the guiro user interfaces.
-     Therefore, you need to attach a listener to the tasklets EventDispatcher and 
-     listen for resize events. If the physical window resizes, you need to tell the
-     Screen the new size, so it can track it and force an update of the subviews
-     if required.
-  ]]
 lost.common.Class "lost.guiro.view.Screen" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.EventManager"
@@ -62,10 +49,6 @@ function Screen:setEventDispatcher(eventDispatcher)
   eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_SCROLL, function(event) self:propagateMouseEvent(event) end)
   eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:propagateKeyEvent(event) end)
   eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
-  eventDispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_BEGAN, function(event) self:propagateTouchEvent(event) end)
-  eventDispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_ENDED, function(event) self:propagateTouchEvent(event) end)
-  eventDispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_CANCELLED, function(event) self:propagateTouchEvent(event) end)
-  eventDispatcher:addEventListener(lost.application.TouchEvent.TOUCHES_MOVED, function(event) self:propagateTouchEvent(event) end)
 
   eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
         self.bounds.width = lost.guiro.wsize{abs=event.width}
