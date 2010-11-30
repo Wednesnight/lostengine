@@ -4,13 +4,15 @@ require("lost.guiro.Bounds")
 
 lost.common.Class "lost.guiro.layer.Layer" {}
 
-function Layer:constructor()
+-- optionally set id and bounds in args
+function Layer:constructor(args)
+  local t = args or {}
 	self._renderNode = lost.rg.Node.create()
 	self._superlayer = nil
   self.sublayers = {}
 	self.z = 0
-	self.id = "layer"
-	self._bounds = lost.guiro.Bounds("left", "bottom", "1", "1")
+	self.id = t.id or "layer"
+	self._bounds = t.bounds or lost.guiro.Bounds("left", "bottom", "1", "1")
 end
 
 function Layer:bounds(...)
@@ -44,7 +46,7 @@ function Layer:addSublayer(layer)
   self._renderNode:add(layer._renderNode)
   layer:superlayer(self)
   self:updateSublayerZ()
-  self:needsLayout()
+  layer:needsLayout()
 end
 
 function Layer:removeSublayer(layer)
@@ -97,3 +99,14 @@ function Layer:needsDisplay()
   ui:layerNeedsDisplay(self)
 end
 
+function Layer:update()
+  log.debug("-- layer update ("..self.z..") "..self.id)
+end
+
+function Layer:updateLayout()
+  log.debug("-- layer update layout ("..self.z..") "..self.id)
+end
+
+function Layer:updateDisplay()
+  log.debug("-- layer update display ("..self.z..") "..self.id)
+end
