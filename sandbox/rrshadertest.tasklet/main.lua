@@ -33,30 +33,17 @@ w = 3
 left = 20
 right = 320
 
-function startup()
-  dcl = lost.declarative.Context(tasklet.loader)
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  
-  scene1 = require("scene1")
-  scene2 = require("scene2")
-  tasklet.renderNode:add(scene1)
-  tasklet.renderNode:add(scene2)
-  scene2.active = false
-
+function layerTest()
   dcl.guiro:UserInterface
   {
     id = "ui"
   }
 
-  rootLayer = lost.guiro.layer.Layer()
-  sl1 = lost.guiro.layer.Layer()
-  sl1.id = "sl1"
-  sl2 = lost.guiro.layer.Layer()
-  sl2.id = "sl2"
-  sl3 = lost.guiro.layer.Layer()
-  sl3.id = "sl3"
-  sl4 = lost.guiro.layer.Layer()
-  sl4.id = "sl4"
+  rootLayer = lost.guiro.layer.Layer{id="rootLayer", bounds=nil}
+  sl1 = lost.guiro.layer.Layer{id="sl1", bounds=nil}
+  sl2 = lost.guiro.layer.Layer{id="sl2", bounds=nil}
+  sl3 = lost.guiro.layer.Layer{id="sl3", bounds=nil}
+  sl4 = lost.guiro.layer.Layer{id="sl4", bounds=nil}
   rootLayer:addSublayer(sl1)
   rootLayer:addSublayer(sl2)
   sl2:addSublayer(sl3)
@@ -79,7 +66,19 @@ function startup()
   sl4:removeFromSuperlayer()
   rootLayer:print()
   rootLayer._renderNode:print()
+end
 
+function startup()
+  dcl = lost.declarative.Context(tasklet.loader)
+  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+  
+  scene1 = require("scene1")
+  scene2 = require("scene2")
+  tasklet.renderNode:add(scene1)
+  tasklet.renderNode:add(scene2)
+  scene2.active = false
+
+  layerTest()
 
   return running
 end

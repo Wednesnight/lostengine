@@ -42,7 +42,6 @@ namespace lost
 
         // make sure that our GL context is the current context
         if(window != NULL) {
-
           window->context->makeCurrent();
         }
 
@@ -51,20 +50,15 @@ namespace lost
           double framerate = config.framerate;
           double offset = timer.getTime();
 
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update(framerate)) {
-
-            render();
-
-            if(waitForEvents) {
-
-              eventDispatcher->waitForEvents();
-            }
-
+          bool running = true;
+          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running) {
             processEvents();
+            running = update(framerate);
+            render();
+            if(waitForEvents) { eventDispatcher->waitForEvents(); }
 
             framerate = timer.getElapsedAndUpdateOffset(offset);
             if (framerate > config.framerate) {
-
               framerate = config.framerate;
             }
 

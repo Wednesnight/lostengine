@@ -35,7 +35,7 @@ function startup()
                       end
                     end,
     },
-      dcl.guiro:Window
+      dcl.guiro:View
       {
         id = "window",
         bounds = {"left", "bottom", "1", "1"},

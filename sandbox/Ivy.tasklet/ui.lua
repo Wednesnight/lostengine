@@ -5,12 +5,9 @@ require("sizes")
 
 local wincol = .1
 
-return dcl.guiro:Screen
+return dcl.guiro:UserInterface
 {
-  dcl.guiro:UserInterface
-  {
-    bounds = {0,0,"1","1"},
-    dcl.guiro:Window
+    dcl.guiro:View
     {
       bounds = {0,0,"1", "1"},
       showFrame = false,
@@ -55,5 +52,4 @@ return dcl.guiro:Screen
         showFrame = false
       }      
     }
-  }
 }

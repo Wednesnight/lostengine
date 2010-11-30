@@ -5,8 +5,8 @@ return {
   },
   window = {
     title = "Guiroscope",
-    x = 300,
-    y = 300,
+    x = 50,
+    y = 50,
     width = 800,
     height = 600
   }

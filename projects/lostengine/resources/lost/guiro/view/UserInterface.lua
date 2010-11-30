@@ -34,6 +34,12 @@ function UserInterface:constructor(textureManager)
   
   tasklet.uiNode:add(self.rootNode)
 
+  self._updateScheduled = false
+
+  self._layerUpdateQ = {}
+  self._layerLayoutQ = {}
+  self._layerDisplayQ = {}
+
   -- trigger updates
   self:needsLayout()
   self:needsRedraw()
@@ -78,14 +84,81 @@ function UserInterface:afterLayout()
   self.camera:viewport(self.rect)
 end
 
+-- processes the given q, calling f with the element of each bucket, cearing the buckets afterwards
+function UserInterface:processQ(q, f)
+  for depth,bucket in pairs(q) do
+    for layer,_ in pairs(bucket) do
+      f(layer)
+    end
+    -- remove all layers from this bucket
+    while #bucket > 0 do
+      table.remove(bucket)
+    end
+  end
+end
+
+function UserInterface:processLayerUpdates()
+--[[  for depth,bucket in pairs(self._layerUpdateQ) do
+    log.debug("-- updating layers at depth "..depth)
+    for layer,_ in pairs(bucket) do
+      layer:update()
+    end
+    -- remove all layers from this bucket
+    while #bucket > 0 do
+      table.remove(bucket)
+    end
+  end]]
+  self:processQ(self._layerUpdateQ, function(layer) layer:update() end)
+end
+
+function UserInterface:processLayerLayoutUpdates()
+  self:processQ(self._layerLayoutQ, function(layer) layer:updateLayout() end)
+end
+
+function UserInterface:processLayerDisplayUpdates()
+  self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end)
+end
+
+
+function UserInterface:update()
+  log.debug("-- UPDATE")
+  self:processLayerUpdates()
+  self:processLayerLayoutUpdates()
+  self:processLayerDisplayUpdates()
+  self._updateScheduled = false
+end
+
+function UserInterface:scheduleUpdateIfNeeded()
+  if not self._updateScheduled then
+    log.debug("-- scheduling update")
+    self._updateScheduled = true
+    callLater(UserInterface.update, self)
+  end
+end
+
 function UserInterface:layerNeedsUpdate(layer)
   log.debug("layer would need update: "..layer.id)
+  if not self._layerUpdateQ[layer.z] then
+    self._layerUpdateQ[layer.z] = {}
+  end
+  self._layerUpdateQ[layer.z][layer] = true
+  self:scheduleUpdateIfNeeded()
 end
 
 function UserInterface:layerNeedsLayout(layer)
   log.debug("layer would need layout: "..layer.id)
+  if not self._layerLayoutQ[layer.z] then
+    self._layerLayoutQ[layer.z] = {}
+  end
+  self._layerLayoutQ[layer.z][layer] = true
+  self:scheduleUpdateIfNeeded()
 end
 
 function UserInterface:layerNeedsDisplay(layer)
   log.debug("layer would need display: "..layer.id)
+  if not self._layerDisplayQ[layer.z] then
+    self._layerDisplayQ[layer.z] = {}
+  end
+  self._layerDisplayQ[layer.z][layer] = true
+  self:scheduleUpdateIfNeeded()
 end

@@ -6,7 +6,7 @@ return {
   window = {
     title = "LostEngine",
     x = 50,
-    y = 800,
+    y = 1050,
     width = 400,
     height = 128
   }
