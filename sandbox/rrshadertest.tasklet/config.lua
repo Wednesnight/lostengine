@@ -5,8 +5,8 @@ return {
   },
   window = {
     title = "RoundedRect Shader Test",
-    x = 50,
-    y = 50,
+    x = 300,
+    y = 1050,
     width = 800,
     height = 600
   },

@@ -39,15 +39,17 @@ function layerTest()
     id = "ui"
   }
 
-  rootLayer = lost.guiro.layer.Layer{id="rootLayer", bounds=nil}
-  sl1 = lost.guiro.layer.Layer{id="sl1", bounds=nil}
-  sl2 = lost.guiro.layer.Layer{id="sl2", bounds=nil}
-  sl3 = lost.guiro.layer.Layer{id="sl3", bounds=nil}
-  sl4 = lost.guiro.layer.Layer{id="sl4", bounds=nil}
+  rootLayer = lost.guiro.layer.Layer{id="rootLayer", bounds={0,0,200,200}}
+  rootLayer:needsLayout()
+  sl1 = lost.guiro.layer.Layer{id="sl1", bounds={0,0,50,50}}
+  sl2 = lost.guiro.layer.Layer{id="sl2", bounds={50,0,50,50}}
+  sl3 = lost.guiro.layer.Layer{id="sl3", bounds={"top", "left", ".5", ".5"}}
+  sl4 = lost.guiro.layer.Layer{id="sl4", bounds={10,10,20,20}}
   rootLayer:addSublayer(sl1)
   rootLayer:addSublayer(sl2)
   sl2:addSublayer(sl3)
-  rootLayer:addSublayer(sl4)
+
+--[[  rootLayer:addSublayer(sl4)
   rootLayer:print()
   rootLayer._renderNode:print()
 
@@ -65,7 +67,7 @@ function layerTest()
 
   sl4:removeFromSuperlayer()
   rootLayer:print()
-  rootLayer._renderNode:print()
+  rootLayer._renderNode:print()]]
 end
 
 function startup()
