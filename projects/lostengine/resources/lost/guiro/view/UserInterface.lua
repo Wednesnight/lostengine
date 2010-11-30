@@ -10,10 +10,21 @@ lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.EventManager"
 
-function UserInterface:constructor(textureManager)
-  lost.guiro.view.View.constructor(self, textureManager)
-
+function UserInterface:constructor()
+  -- setup update scheduling before first layer can request updates in View constructor
+  if not _G.ui then 
+    _G.ui = self
+  end
+  self._updateScheduled = false
+  self._layerUpdateQ = {}
+  self._layerLayoutQ = {}
+  self._layerDisplayQ = {}
   self.textureManager = lost.guiro.TextureManager(256)
+
+  -- update scheduling and singleton ui must be live when we call the View constructor because it creates a layer
+  -- that might immediately schedule itself
+  lost.guiro.view.View.constructor(self)
+
   self.shaderFactory = lost.common.ShaderFactory(tasklet.loader)
   self.meshFactory = lost.common.MeshFactory(self.shaderFactory)
   self.eventManager = EventManager(self)
@@ -34,11 +45,7 @@ function UserInterface:constructor(textureManager)
   
   tasklet.uiNode:add(self.rootNode)
 
-  self._updateScheduled = false
 
-  self._layerUpdateQ = {}
-  self._layerLayoutQ = {}
-  self._layerDisplayQ = {}
 
   -- trigger updates
   self:needsLayout()
@@ -87,6 +94,7 @@ end
 -- processes the given q, calling f with the element of each bucket, cearing the buckets afterwards
 function UserInterface:processQ(q, f)
   for depth,bucket in pairs(q) do
+    log.debug("--- Z: "..depth)
     for layer,_ in pairs(bucket) do
       f(layer)
     end
@@ -137,7 +145,7 @@ function UserInterface:scheduleUpdateIfNeeded()
 end
 
 function UserInterface:layerNeedsUpdate(layer)
-  log.debug("layer would need update: "..layer.id)
+  log.debug("layer needs update: ("..layer.z..") "..layer.id)
   if not self._layerUpdateQ[layer.z] then
     self._layerUpdateQ[layer.z] = {}
   end
@@ -146,7 +154,7 @@ function UserInterface:layerNeedsUpdate(layer)
 end
 
 function UserInterface:layerNeedsLayout(layer)
-  log.debug("layer would need layout: "..layer.id)
+  log.debug("layer needs layout: ("..layer.z..") "..layer.id)
   if not self._layerLayoutQ[layer.z] then
     self._layerLayoutQ[layer.z] = {}
   end
@@ -155,7 +163,7 @@ function UserInterface:layerNeedsLayout(layer)
 end
 
 function UserInterface:layerNeedsDisplay(layer)
-  log.debug("layer would need display: "..layer.id)
+  log.debug("layer needs display: ("..layer.z..") "..layer.id)
   if not self._layerDisplayQ[layer.z] then
     self._layerDisplayQ[layer.z] = {}
   end

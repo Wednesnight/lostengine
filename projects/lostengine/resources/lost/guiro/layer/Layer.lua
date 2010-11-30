@@ -16,9 +16,9 @@ function Layer:constructor(args)
 	self.z = 0
 	self.id = t.id or "layer"
 	if t.bounds then 
-	  self._bounds = Bounds(unpack(t.bounds))
+	  self:bounds(Bounds(unpack(t.bounds)))
 	else
-	  self._bounds = Bounds("left", "bottom", "1", "1")
+	  self:bounds(Bounds("left", "bottom", "1", "1"))
 	end
 	self.rect = Rect()
 end
@@ -30,16 +30,28 @@ function Layer:bounds(...)
   else
     return self._bounds
   end
+  self:updateZ()
+  self:needsLayout()
 end
 
 function Layer:superlayer(...)
   if arg.n > 0 then
     local newsl = arg[1]
-    log.debug("-- "..self.id.." setting superlayer to "..tostring(newsl))
+--    log.debug("-- "..self.id.." setting superlayer to "..tostring(newsl))
     self._superlayer = newsl
   else
     return self._superlayer
   end
+  self:updateZ()  
+end
+
+function Layer:updateZ()
+  if self._superlayer then 
+    self.z = self._superlayer.z+1
+  else
+    self.z = 0
+  end
+  self:updateSublayerZ()
 end
 
 function Layer:updateSublayerZ()
@@ -54,7 +66,6 @@ function Layer:addSublayer(layer)
   table.insert(self.sublayers, layer)
   self._renderNode:add(layer._renderNode)
   layer:superlayer(self)
-  self:updateSublayerZ()
   layer:needsLayout()
 end
 
@@ -113,22 +124,24 @@ function Layer:update()
 end
 
 function Layer:updateLayout()
-  local slid = nil
+  log.debug("-- layer update layout ("..self.z..") "..self.id)
+--[[  local slid = nil
   if self._superlayer then
     slid = self._superlayer.id
   end
   log.debug("-- layer update layout ("..self.z..") "..self.id.." superlayer "..tostring(slid))
+  ]]
   
   local superrect = nil
   if self._superlayer then
     superrect = self._superlayer.rect
   else
-    log.debug("!! no superlayer")
+--    log.debug("!! no superlayer")
     superrect = Rect()
   end  
-  log.debug("updating with superrect: "..tostring(superrect))
+--  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
-  log.debug(tostring(self.rect))
+--  log.debug(tostring(self.rect))
 end
 
 function Layer:updateDisplay()

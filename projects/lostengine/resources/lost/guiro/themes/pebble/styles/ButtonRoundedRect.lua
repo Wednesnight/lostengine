@@ -12,9 +12,8 @@ local Bounds = lost.guiro.Bounds
 
 lost.common.Class "lost.guiro.themes.pebble.styles.ButtonRoundedRect" "lost.guiro.Style" {}
 
-function ButtonRoundedRect:constructor(loader, df, textureManager)
+function ButtonRoundedRect:constructor(loader, df)
   lost.guiro.Style(self)
-  self.textureManager = textureManager
   self.defaultFont = df
   self.name = "RoundedRect"
   self.targetClassName = "lost.guiro.view.Button"
@@ -44,7 +43,7 @@ function ButtonRoundedRect:apply(target)
 end
 
 function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
-  local result = lost.guiro.view.View(self.textureManager)
+  local result = lost.guiro.view.View()
   result.id = vid
   result:showFrame(true)
   result:showBackground(true)
@@ -65,7 +64,7 @@ function ButtonRoundedRect:buildBackgroundImage(vid, gradname)
 end
 
 function ButtonRoundedRect:buildLabel(col)
-  local result = lost.guiro.view.Label(self.textureManager)
+  local result = lost.guiro.view.Label()
   result.bounds = Bounds(0, 0, "1", "1")
   result:font(self.defaultFont)
   result:fontSize(self.fontSize)

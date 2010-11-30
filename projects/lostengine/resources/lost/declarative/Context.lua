@@ -14,13 +14,9 @@ lost.common.Class "lost.declarative.Context"
 {
 }
 
-function Context:constructor(loader, textureManager)
-  if textureManager == nil then
-    self.textureManager = lost.guiro.TextureManager(256)
-  else
-    self.textureManager = textureManager
-  end
-  self.themeManager = lost.guiro.ThemeManager(loader, self.textureManager)
+function Context:constructor(loader)
+  lost.guiro.view.UserInterface() -- creates global ui
+  self.themeManager = lost.guiro.ThemeManager(loader)
   self.loader = loader
   self.rg = lost.declarative.Rg(self.loader)
   self.font = lost.declarative.Font(self.loader)

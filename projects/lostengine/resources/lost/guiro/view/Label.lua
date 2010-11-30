@@ -17,8 +17,7 @@ local MatrixTranslation = lost.math.MatrixTranslation
     Optionally, a shadow can be drawn underneath the original text with a flexible offset and different color.
   ]]
 function Label:constructor(textureManager)
-  assert(textureManager)
-  lost.guiro.view.View.constructor(self, textureManager)
+  lost.guiro.view.View.constructor(self)
 
   self._font = nil
   self._fontSize = 12

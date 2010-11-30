@@ -17,10 +17,7 @@ using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.MatrixTranslation"
 
-function View:constructor(textureManager)
-  assert(textureManager, "View requires lost.guiro.TextureManager instance for construction")
-  self.textureManager = textureManager
-
+function View:constructor()
 	self.layer = lost.guiro.layer.Layer()
 
   self.subviews = {}
@@ -52,7 +49,7 @@ function View:constructor(textureManager)
   self.rootNode:add(self.subviewNodes)
 
   -- meshes and draw nodes
-  self.backgroundMesh = lost.mesh.RoundedRect.create(textureManager._textureManager, 
+  self.backgroundMesh = lost.mesh.RoundedRect.create(ui.textureManager._textureManager, 
                                                      Vec2(self.rect.width, self.rect.height),
                                                      true,
                                                      8,
@@ -65,7 +62,7 @@ function View:constructor(textureManager)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
-  self.frameMesh = lost.mesh.RoundedRect.create(textureManager._textureManager,
+  self.frameMesh = lost.mesh.RoundedRect.create(ui.textureManager._textureManager,
                                                 Vec2(self.rect.width, self.rect.height),
                                                 false,
                                                 8,
@@ -254,8 +251,8 @@ end
 function View:backgroundGradient(gradientName)
 --function View:backgroundGradient(tex, coord)
   if gradientName ~= nil then
-    local tex = self.textureManager._textureManager.gradientTexture
-    local coord = self.textureManager:gradientCoord(gradientName)
+    local tex = ui.textureManager._textureManager.gradientTexture
+    local coord = ui.textureManager:gradientCoord(gradientName)
 --    log.debug("gradient "..gradientName.." coord: "..tostring(coord))
     if self.backgroundMesh.material.uniforms == nil then
       self.backgroundMesh.material.uniforms = lost.gl.UniformBlock.create()
@@ -272,8 +269,8 @@ end
 function View:frameGradient(gradientName)
 --function View:frameGradient(tex, coord)
   if gradientName ~= nil then
-    local tex = self.textureManager._textureManager.gradientTexture
-    local coord = self.textureManager:gradientCoord(gradientName)
+    local tex = ui.textureManager._textureManager.gradientTexture
+    local coord = ui.textureManager:gradientCoord(gradientName)
     if self.frameMesh.material.uniforms == nil then
       self.frameMesh.material.uniforms = lost.gl.UniformBlock.create()
     end

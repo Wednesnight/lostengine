@@ -19,20 +19,19 @@ using("lost.guiro.themes.pebble.buildGradients")
 
 lost.common.Class "lost.guiro.themes.pebble.Theme" "lost.guiro.Theme" {}
 
-function Theme:constructor(loader, textureManager)
+function Theme:constructor(loader)
   lost.guiro.Theme(self, loader)
-  buildGradients(textureManager);
-  self.textureManager = textureManager
+  buildGradients(ui.textureManager)
   self.ftlib = lost.font.freetype.Library.create()
   self.defaultFont = lost.font.TrueTypeFont.create(self.ftlib, loader:load("lost/resources/ttf-bitstream-vera-1.10/Vera.ttf"))
   self.defaultFont.atlasSize = Vec2(256, 256)
   self.name = "pebble"
   self.styles = {} -- FIXME why is styles not properly initialised from base class constructor?  
   self:addStyle(lost.guiro.themes.pebble.styles.ViewDefault())  
-  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRect(loader, self.defaultFont, textureManager))  
-  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular(loader, self.defaultFont, textureManager))  
-  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall(loader, self.defaultFont, textureManager))  
-  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectMini(loader, self.defaultFont, textureManager))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRect(loader, self.defaultFont))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectRegular(loader, self.defaultFont))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall(loader, self.defaultFont))  
+  self:addStyle(lost.guiro.themes.pebble.styles.ButtonRoundedRectMini(loader, self.defaultFont))  
   self:addStyle(lost.guiro.themes.pebble.styles.ViewBubbleGrey())
   self:addStyle(lost.guiro.themes.pebble.styles.ViewBubbleBlue())
   self:addStyle(lost.guiro.themes.pebble.styles.ViewSegment())  

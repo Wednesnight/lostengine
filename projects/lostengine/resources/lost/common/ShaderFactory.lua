@@ -40,6 +40,47 @@ function ShaderFactory:iqrrf()
   return self:loadShader("lost/resources/glsl/iqrrf")
 end
 
+function ShaderFactory:color()
+  local result = nil
+  if lost.platform.isIPhone() then
+    result = self:loadShader("lost/resources/glsl/es/basic_color")      
+  else
+    result = self:loadShader("lost/resources/glsl/basic_color")
+  end  
+  return result
+end
+
+function ShaderFactory:texture()
+  local result = nil
+  if lost.platform.isIPhone() then
+    result = self:loadShader("lost/resources/glsl/es/basic_texture")      
+  else
+    result = self:loadShader("lost/resources/glsl/basic_texture")
+  end  
+  return result
+end
+
+function ShaderFactory:gradient()
+  local result = nil
+  if lost.platform.isIPhone() then
+    result = self:loadShader("lost/resources/glsl/es/gradient")      
+  else
+    result = self:loadShader("lost/resources/glsl/gradient")
+  end  
+  return result
+end
+
+function ShaderFactory:gradient()
+  local result = nil
+  if lost.platform.isIPhone() then
+    result = self:loadShader("lost/resources/glsl/es/gradient")      
+  else
+    result = self:loadShader("lost/resources/glsl/gradient")
+  end  
+  return result
+end
+
+
 -- f = filled
 -- rc = roundedCorners
 -- s = sides

@@ -267,7 +267,7 @@ function startup()
       {
         mesh = dcl.mesh:Quad
         {
-          texture = dcl.guiro.textureManager._textureManager.gradientTexture,
+          texture = ui.textureManager._textureManager.gradientTexture,
           material = 
           {
             blend = true,

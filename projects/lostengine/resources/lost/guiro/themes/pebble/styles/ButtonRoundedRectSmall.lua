@@ -5,8 +5,8 @@ require("lost.guiro.themes.pebble.styles.ButtonRoundedRect")
 
 lost.common.Class "lost.guiro.themes.pebble.styles.ButtonRoundedRectSmall" "lost.guiro.themes.pebble.styles.ButtonRoundedRect" {}
 
-function ButtonRoundedRectSmall:constructor(loader, df, textureManager)
-  lost.guiro.themes.pebble.styles.ButtonRoundedRect.constructor(self, loader, df, textureManager)
+function ButtonRoundedRectSmall:constructor(loader, df)
+  lost.guiro.themes.pebble.styles.ButtonRoundedRect.constructor(self, loader, df)
   self.name = "RoundedRectSmall"
   self.fontSize = 10
   self.buttonHeight = 16
