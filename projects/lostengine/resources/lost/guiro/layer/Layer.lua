@@ -4,6 +4,9 @@ require("lost.guiro.Bounds")
 
 lost.common.Class "lost.guiro.layer.Layer" {}
 
+local Rect = lost.math.Rect
+local Bounds = lost.guiro.Bounds
+
 -- optionally set id and bounds in args
 function Layer:constructor(args)
   local t = args or {}
@@ -12,7 +15,12 @@ function Layer:constructor(args)
   self.sublayers = {}
 	self.z = 0
 	self.id = t.id or "layer"
-	self._bounds = t.bounds or lost.guiro.Bounds("left", "bottom", "1", "1")
+	if t.bounds then 
+	  self._bounds = Bounds(unpack(t.bounds))
+	else
+	  self._bounds = Bounds("left", "bottom", "1", "1")
+	end
+	self.rect = Rect()
 end
 
 function Layer:bounds(...)
@@ -27,6 +35,7 @@ end
 function Layer:superlayer(...)
   if arg.n > 0 then
     local newsl = arg[1]
+    log.debug("-- "..self.id.." setting superlayer to "..tostring(newsl))
     self._superlayer = newsl
   else
     return self._superlayer
@@ -104,7 +113,22 @@ function Layer:update()
 end
 
 function Layer:updateLayout()
-  log.debug("-- layer update layout ("..self.z..") "..self.id)
+  local slid = nil
+  if self._superlayer then
+    slid = self._superlayer.id
+  end
+  log.debug("-- layer update layout ("..self.z..") "..self.id.." superlayer "..tostring(slid))
+  
+  local superrect = nil
+  if self._superlayer then
+    superrect = self._superlayer.rect
+  else
+    log.debug("!! no superlayer")
+    superrect = Rect()
+  end  
+  log.debug("updating with superrect: "..tostring(superrect))
+  self.rect = self._bounds:rect(superrect)
+  log.debug(tostring(self.rect))
 end
 
 function Layer:updateDisplay()
