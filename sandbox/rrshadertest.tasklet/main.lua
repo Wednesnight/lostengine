@@ -49,11 +49,11 @@ function layerTest()
   rootLayer:addSublayer(sl2)
   sl2:addSublayer(sl3)
 
---[[  rootLayer:addSublayer(sl4)
+  rootLayer:addSublayer(sl4)
   rootLayer:print()
   rootLayer._renderNode:print()
 
-  sl1:removeFromSuperlayer()
+--[[  sl1:removeFromSuperlayer()
   rootLayer:print()
   rootLayer._renderNode:print()
 

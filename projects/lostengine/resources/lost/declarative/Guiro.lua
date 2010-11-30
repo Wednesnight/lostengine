@@ -198,10 +198,7 @@ function Guiro:View(def)
 end
 
 function Guiro:UserInterface(def)
-  local result = lost.guiro.view.UserInterface(self.textureManager)
-  if _G.ui == nil then
-    _G.ui = result
-  end
+  local result = _G.ui or lost.guiro.view.UserInterface()
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)      
   self:assignViewAttributes(result, def) 
