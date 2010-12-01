@@ -16,9 +16,12 @@ function UserInterface:constructor()
     _G.ui = self
   end
   self._updateScheduled = false
-  self._layerUpdateQ = {}
-  self._layerLayoutQ = {}
-  self._layerDisplayQ = {}
+  -- each update queue has a set to track unique elements. within each set k == v, and if a new element was not present
+  -- in the set it is also added to the list. The list is sorted by z values before the actual update funtions are called
+  -- sets and lists are recreated after all updates have been performed
+  self._layerUpdateQ = { set={}, list={}}
+  self._layerLayoutQ = { set={}, list={}}
+  self._layerDisplayQ = { set={}, list={}}
   self.textureManager = lost.guiro.TextureManager(256)
 
   -- update scheduling and singleton ui must be live when we call the View constructor because it creates a layer
@@ -91,31 +94,20 @@ function UserInterface:afterLayout()
   self.camera:viewport(self.rect)
 end
 
--- processes the given q, calling f with the element of each bucket, cearing the buckets afterwards
+function depthSortFunc(a,b)
+  return a.z < b.z
+end
+
 function UserInterface:processQ(q, f)
-  for depth,bucket in pairs(q) do
-    log.debug("--- Z: "..depth)
-    for layer,_ in pairs(bucket) do
-      f(layer)
-    end
-    -- remove all layers from this bucket
-    while #bucket > 0 do
-      table.remove(bucket)
-    end
+  table.sort(q.list, depthSortFunc)
+  for k,v in pairs(q.list) do
+    f(v)
   end
+  q.list = {}
+  q.set = {}
 end
 
 function UserInterface:processLayerUpdates()
---[[  for depth,bucket in pairs(self._layerUpdateQ) do
-    log.debug("-- updating layers at depth "..depth)
-    for layer,_ in pairs(bucket) do
-      layer:update()
-    end
-    -- remove all layers from this bucket
-    while #bucket > 0 do
-      table.remove(bucket)
-    end
-  end]]
   self:processQ(self._layerUpdateQ, function(layer) layer:update() end)
 end
 
@@ -144,29 +136,27 @@ function UserInterface:scheduleUpdateIfNeeded()
   end
 end
 
+function UserInterface:addElementToQ(q, e)
+  if q.set[e] == nil then
+    q.set[e] = e
+    table.insert(q.list, e)
+  end
+end
+
 function UserInterface:layerNeedsUpdate(layer)
   log.debug("layer needs update: ("..layer.z..") "..layer.id)
-  if not self._layerUpdateQ[layer.z] then
-    self._layerUpdateQ[layer.z] = {}
-  end
-  self._layerUpdateQ[layer.z][layer] = true
+  self:addElementToQ(self._layerUpdateQ, layer)
   self:scheduleUpdateIfNeeded()
 end
 
 function UserInterface:layerNeedsLayout(layer)
   log.debug("layer needs layout: ("..layer.z..") "..layer.id)
-  if not self._layerLayoutQ[layer.z] then
-    self._layerLayoutQ[layer.z] = {}
-  end
-  self._layerLayoutQ[layer.z][layer] = true
+  self:addElementToQ(self._layerLayoutQ, layer)
   self:scheduleUpdateIfNeeded()
 end
 
 function UserInterface:layerNeedsDisplay(layer)
   log.debug("layer needs display: ("..layer.z..") "..layer.id)
-  if not self._layerDisplayQ[layer.z] then
-    self._layerDisplayQ[layer.z] = {}
-  end
-  self._layerDisplayQ[layer.z][layer] = true
+  self:addElementToQ(self._layerDisplayQ, layer)
   self:scheduleUpdateIfNeeded()
 end
