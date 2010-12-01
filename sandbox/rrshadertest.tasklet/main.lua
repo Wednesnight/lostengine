@@ -58,7 +58,11 @@ function layerTest()
                         lrect{id="sl3", bounds={"top", "left", ".5", ".5"}, color=Color(0,0,1)}
                       }
                   },
-                  lrect{id="sl4", bounds={10,10,20,20}, color=Color(1,1,0)}
+                  lrect{
+                          id="sl4", bounds={10,10,20,20}, color=Color(1,1,0),
+                          filled = true,
+                          width = 3
+                          }
                 }
               }
   rootLayer:print()

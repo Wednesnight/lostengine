@@ -32,6 +32,10 @@ function ShaderFactory:box()
   return self:loadShader("lost/resources/glsl/box")
 end
 
+function ShaderFactory:rectFrame()
+  return self:loadShader("lost/resources/glsl/rectFrame")
+end
+
 function ShaderFactory:iqrr()
   return self:loadShader("lost/resources/glsl/iqrr")
 end

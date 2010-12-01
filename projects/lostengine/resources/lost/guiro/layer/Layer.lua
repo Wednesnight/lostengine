@@ -7,7 +7,10 @@ lost.common.Class "lost.guiro.layer.Layer" {}
 local Rect = lost.math.Rect
 local Bounds = lost.guiro.Bounds
 
--- optionally set id and bounds in args
+-- valid params:
+-- * id: the name of the layer, also used for naming the renderNode for debug display
+-- * bounds: the bounds of the layer, default is (0,0,"1", "1")
+-- * sublayers: additional layers that will be added as sublayers to the current one
 function Layer:constructor(args)
   local t = args or {}
 	self.id = t.id or "layer"
@@ -23,7 +26,7 @@ function Layer:constructor(args)
 	if t.bounds then 
 	  self:bounds(Bounds(unpack(t.bounds)))
 	else
-	  self:bounds(Bounds("left", "bottom", "1", "1"))
+	  self:bounds(Bounds(0, 0, "1", "1"))
 	end
 	self.rect = Rect()
 	
