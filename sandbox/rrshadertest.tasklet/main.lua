@@ -2,6 +2,7 @@ require("lost.declarative.Context")
 require("lost.common.Shaders")
 require("lost.common.ShaderFactory")
 require("lost.common.MeshFactory")
+require("lost.guiro.layer.Rect")
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -41,33 +42,35 @@ function layerTest()
 
   rootLayer = lost.guiro.layer.Layer{id="rootLayer", bounds={0,0,200,200}}
   rootLayer:needsLayout()
-  sl1 = lost.guiro.layer.Layer{id="sl1", bounds={0,0,50,50}}
-  sl2 = lost.guiro.layer.Layer{id="sl2", bounds={50,0,50,50}}
-  sl3 = lost.guiro.layer.Layer{id="sl3", bounds={"top", "left", ".5", ".5"}}
-  sl4 = lost.guiro.layer.Layer{id="sl4", bounds={10,10,20,20}}
+  sl1 = lost.guiro.layer.Rect{id="sl1", bounds={0,0,50,50}, color=Color(1,0,0)}
+  sl2 = lost.guiro.layer.Rect{id="sl2", bounds={50,0,50,50}, color=Color(0,1,0)}
+  sl3 = lost.guiro.layer.Rect{id="sl3", bounds={"top", "left", ".5", ".5"}, color=Color(0,0,1)}
+  sl4 = lost.guiro.layer.Rect{id="sl4", bounds={10,10,20,20}, color=Color(1,1,0)}
   rootLayer:addSublayer(sl1)
   rootLayer:addSublayer(sl2)
   sl2:addSublayer(sl3)
 
   rootLayer:addSublayer(sl4)
   rootLayer:print()
-  rootLayer._renderNode:print()
+  rootLayer.renderNode:print()
+
+  scene2:add(rootLayer.renderNode)
 
 --[[  sl1:removeFromSuperlayer()
   rootLayer:print()
-  rootLayer._renderNode:print()
+  rootLayer.renderNode:print()
 
   sl3:removeFromSuperlayer()
   rootLayer:print()
-  rootLayer._renderNode:print()
+  rootLayer.renderNode:print()
 
   sl2:removeFromSuperlayer()
   rootLayer:print()
-  rootLayer._renderNode:print()
+  rootLayer.renderNode:print()
 
   sl4:removeFromSuperlayer()
   rootLayer:print()
-  rootLayer._renderNode:print()]]
+  rootLayer.renderNode:print()]]
 end
 
 function startup()

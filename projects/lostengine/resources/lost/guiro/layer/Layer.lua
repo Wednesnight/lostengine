@@ -10,11 +10,14 @@ local Bounds = lost.guiro.Bounds
 -- optionally set id and bounds in args
 function Layer:constructor(args)
   local t = args or {}
-	self._renderNode = lost.rg.Node.create()
+	self.renderNode = lost.rg.Node.create()
 	self._superlayer = nil
   self.sublayers = {}
 	self.z = 0
 	self.id = t.id or "layer"
+	
+	log.debug(tostring(t.bounds))
+	
 	if t.bounds then 
 	  self:bounds(Bounds(unpack(t.bounds)))
 	else
@@ -64,7 +67,7 @@ end
 function Layer:addSublayer(layer)
   if layer:superlayer() ~= nil then layer:removeFromSuperlayer() end
   table.insert(self.sublayers, layer)
-  self._renderNode:add(layer._renderNode)
+  self.renderNode:add(layer.renderNode)
   layer:superlayer(self)
   layer:needsLayout()
 end
@@ -73,7 +76,7 @@ function Layer:removeSublayer(layer)
   for k,v in pairs(self.sublayers) do
     if rawequal(v,layer) then
       self.sublayers[k] = nil
-      self._renderNode:remove(layer._renderNode)
+      self.renderNode:remove(layer.renderNode)
       layer:superlayer(nil)
       break
     end
