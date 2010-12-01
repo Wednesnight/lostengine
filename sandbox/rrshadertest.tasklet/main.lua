@@ -40,17 +40,27 @@ function layerTest()
     id = "ui"
   }
 
-  rootLayer = lost.guiro.layer.Layer{id="rootLayer", bounds={0,0,200,200}}
-  rootLayer:needsLayout()
-  sl1 = lost.guiro.layer.Rect{id="sl1", bounds={0,0,50,50}, color=Color(1,0,0)}
-  sl2 = lost.guiro.layer.Rect{id="sl2", bounds={50,0,50,50}, color=Color(0,1,0)}
-  sl3 = lost.guiro.layer.Rect{id="sl3", bounds={"top", "left", ".5", ".5"}, color=Color(0,0,1)}
-  sl4 = lost.guiro.layer.Rect{id="sl4", bounds={10,10,20,20}, color=Color(1,1,0)}
-  rootLayer:addSublayer(sl1)
-  rootLayer:addSublayer(sl2)
-  sl2:addSublayer(sl3)
+  local Layer = lost.guiro.layer.Layer
+  local lrect = lost.guiro.layer.Rect
 
-  rootLayer:addSublayer(sl4)
+  rootLayer = Layer
+              {
+                id="rootLayer", 
+                bounds={0,0,200,200},
+                sublayers = 
+                {
+                  lrect{id="sl1", bounds={0,0,50,50}, color=Color(1,0,0)},
+                  lrect
+                  {
+                      id="sl2",bounds={50,0,50,50},color=Color(0,1,0),
+                      sublayers=
+                      {
+                        lrect{id="sl3", bounds={"top", "left", ".5", ".5"}, color=Color(0,0,1)}
+                      }
+                  },
+                  lrect{id="sl4", bounds={10,10,20,20}, color=Color(1,1,0)}
+                }
+              }
   rootLayer:print()
   rootLayer.renderNode:print()
 
