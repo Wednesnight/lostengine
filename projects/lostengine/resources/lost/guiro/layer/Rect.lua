@@ -13,7 +13,7 @@ function Rect:constructor(args)
   self.mesh.material.shader = ui.shaderFactory:color()
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
   self.drawNode = lost.rg.Draw.create(self.mesh)
-  self.renderNode:add(self.drawNode)
+  self.layerNodes:add(self.drawNode)
   self:needsLayout()
 end
 

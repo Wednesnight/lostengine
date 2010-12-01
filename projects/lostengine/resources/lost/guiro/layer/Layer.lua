@@ -10,13 +10,15 @@ local Bounds = lost.guiro.Bounds
 -- optionally set id and bounds in args
 function Layer:constructor(args)
   local t = args or {}
+	self.id = t.id or "layer"
 	self.renderNode = lost.rg.Node.create()
+	self.renderNode.name = self.id
+	self.layerNodes = lost.rg.Node.create() -- add draw for this layer to this node so sublayers are drawn after this layer
+	self.layerNodes.name = "layerNodes"
+	self.renderNode:add(self.layerNodes)
 	self._superlayer = nil
   self.sublayers = {}
 	self.z = 0
-	self.id = t.id or "layer"
-	
-	log.debug(tostring(t.bounds))
 	
 	if t.bounds then 
 	  self:bounds(Bounds(unpack(t.bounds)))
@@ -24,6 +26,11 @@ function Layer:constructor(args)
 	  self:bounds(Bounds("left", "bottom", "1", "1"))
 	end
 	self.rect = Rect()
+	
+	local layers = t.sublayers or {}
+	for _,v in pairs(layers) do
+	  self:addSublayer(v)
+	end
 end
 
 function Layer:bounds(...)
