@@ -12,8 +12,8 @@ function ThemeManager:constructor(loader)
   self.defaultTheme = "default"
   self.defaultStyle = "default"
   self.textureManager = textureManager
-  self:addTheme(lost.guiro.themes.default.Theme(loader))
-  self:addTheme(lost.guiro.themes.pebble.Theme(loader))
+--  self:addTheme(lost.guiro.themes.default.Theme(loader))
+--  self:addTheme(lost.guiro.themes.pebble.Theme(loader))
 end
 
 function ThemeManager:addTheme(theme)

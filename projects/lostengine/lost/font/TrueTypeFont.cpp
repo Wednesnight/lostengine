@@ -25,9 +25,11 @@ namespace font
 {
 
 TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
-                           common::DataPtr inData)
+                           common::DataPtr inData,
+                           uint32_t inSizeInPoints)
 {
   face.reset(new Face(inLibrary, inData));
+  _size = inSizeInPoints;
   atlasSize.width = 256;
   atlasSize.height = 256;
 }
@@ -36,22 +38,21 @@ TrueTypeFont::~TrueTypeFont()
 {
 }
   
-bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c,
-                               uint32_t inSizeInPoints)
+bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c)
 {
     bool result = false;
-    GlyphPtr glyph = char2size2glyph[c][inSizeInPoints];
+    GlyphPtr glyph = char2glyph[c];
     if(!glyph) 
     {
       result = true;
       glyph.reset(new Glyph);
-      glyph->render(face, inSizeInPoints, c);
-      char2size2glyph[c][inSizeInPoints] = glyph;
+      glyph->render(face, _size, c);
+      char2glyph[c] = glyph;
       glyphs.push_back(glyph);
 
       // due to the fact that font size is not fixed within a font instance, we have to recalculate 
-      _fontSize2ascender[inSizeInPoints] = face->ascender();
-      _fontSize2descender[inSizeInPoints] = face->descender();
+      ascender = face->ascender();
+      descender = face->descender();
     }
     return result;
 }
@@ -133,7 +134,7 @@ void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects,
   pmax.y = max(pmax.y, tr.maxY());
 }
 
-RenderedTextPtr TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints)
+RenderedTextPtr TrueTypeFont::render(const std::string & inText)
 {
 //  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
@@ -144,10 +145,10 @@ RenderedTextPtr TrueTypeFont::render(const std::string & inText, uint32_t inSize
   ftxt::decode(decoder, inText.begin(), inText.end(),
          std::back_insert_iterator<ftxt::utf32_string>(decodedString));
 
-  return render(decodedString, inSizeInPoints);
+  return render(decodedString);
 }
 
-void TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints, RenderedTextPtr target)
+void TrueTypeFont::render(const std::string & inText, const RenderedTextPtr& target)
 {
 //  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
 
@@ -158,15 +159,14 @@ void TrueTypeFont::render(const std::string & inText, uint32_t inSizeInPoints, R
   ftxt::decode(decoder, inText.begin(), inText.end(),
          std::back_insert_iterator<ftxt::utf32_string>(decodedString));
 
-  render(decodedString, inSizeInPoints, target);
+  render(decodedString, target);
 }
   
-void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText,
-                                     uint32_t inSizeInPoints)
+void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
 {
   for(uint32_t i=0; i<inText.size(); ++i)
   {
-    shared_ptr<Glyph> glyph = char2size2glyph[inText[i]][inSizeInPoints];
+    shared_ptr<Glyph> glyph = char2glyph[inText[i]];
     if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
     {
       glyph->drawable = true;
@@ -179,18 +179,15 @@ void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText,
   }
 }
   
-RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText,
-                              uint32_t inSizeInPoints)
+RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText)
 {
 
   RenderedTextPtr result(new RenderedText);
-  render(inText, inSizeInPoints, result);
+  render(inText, result);
   return result;
 }
 
-void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
-            uint32_t inSizeInPoints,
-            RenderedTextPtr target)
+void TrueTypeFont::render(const fhtagn::text::utf32_string& inText, const RenderedTextPtr& target)
 {
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
@@ -203,7 +200,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   uint32_t renderedGlyphs = 0;
   for(unsigned int i=0; i<inText.length(); ++i)
   {
-    if(renderGlyph(inText[i], inSizeInPoints))
+    if(renderGlyph(inText[i]))
       ++renderedGlyphs;
   }
 //  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
@@ -214,7 +211,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   // flag drawable characters AFTER the bitmaps have been created so we can distinguish between
   // drawables and non-darwables. This is important so we don't create geometry for characters
   // that don't need any (spaces)
-  flagDrawableChars(inText, inSizeInPoints);
+  flagDrawableChars(inText);
   float xoffset = 0;
   
   // kerning setup
@@ -235,7 +232,7 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
       xoffset+=face->kerningOffset(previousGlyphIndex, c);
     }
     
-    GlyphPtr glyph = char2size2glyph[c][inSizeInPoints];
+    GlyphPtr glyph = char2glyph[c];
     if (!glyph) continue;
 
     if (glyph->drawable)
@@ -254,16 +251,16 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText,
   target->material->blend = true;
   target->material->blendSrc = GL_SRC_ALPHA;
   target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-  target->fontAscender = _fontSize2ascender[inSizeInPoints];
-  target->fontDescender = _fontSize2descender[inSizeInPoints];
-  float ascsum = fabs(_fontSize2ascender[inSizeInPoints])+fabs(_fontSize2descender[inSizeInPoints]);
+  target->fontAscender = ascender;
+  target->fontDescender = descender;
+  float ascsum = fabs(ascender)+fabs(descender);
   int iascsum = floorf(ascsum+.5f);
 /*  DOUT("-- rendered size: w:"<<target->size.width
      <<" height:"<<target->size.height
      <<" rounded:"<<iascsum
      <<" delta:"<<abs(target->size.height-iascsum));*/
   target->fontHeight = iascsum;
-  target->pointSize = inSizeInPoints;
+  target->pointSize = _size;
 }
 
 
