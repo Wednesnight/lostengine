@@ -1,0 +1,8 @@
+uniform mat4 modelViewMatrix;  // mesh transform
+uniform mat4 projectionMatrix; // from camera
+
+// equivalent to ftransform()
+vec4 lftransform(vec4 vertexPosition)
+{
+  return projectionMatrix*modelViewMatrix*vertexPosition;
+}

@@ -1,0 +1,11 @@
+// returns 1 if the pixel is covered by the frame, 0 otherwise
+float rectFrame(vec2 normalizedTexCoord, vec2 rectSize, float lineWidth)
+{
+  vec2 cp = normalizedTexCoord*rectSize;
+  float top = 1.0-step(lineWidth, size.y - cp.y);
+  float bottom = 1.0-step(lineWidth, cp.y);
+  float left = 1.0-step(lineWidth, cp.x);
+  float right = 1.0-step(lineWidth, size.x - cp.x);
+  float res = clamp(top+bottom+left+right, 0.0, 1.0);
+  return res;
+}
