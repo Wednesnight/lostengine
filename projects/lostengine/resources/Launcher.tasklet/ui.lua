@@ -9,11 +9,11 @@ return dcl.guiro:UserInterface
       tasklet:dispatchApplicationEvent(SpawnTaskletEvent.create(event.filename))
     end
   },
-  dcl.guiro:Label
+--[[  dcl.guiro:Label
   {
     hidden = false,
     id = "startupLabel",
     bounds = {"left", "bottom", "1", "1"},
     text = "Drop tasklet directory to get started!",
-  }
+  }]]
 }

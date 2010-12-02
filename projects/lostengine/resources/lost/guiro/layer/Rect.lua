@@ -53,6 +53,7 @@ function Rect:constructor(args)
     else
       self.mesh.material.shader = ui.shaderFactory:rectFrame()    
     end
+    self.mesh.material.uniforms:setFloat("width", self.width)
   end
 
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
@@ -71,7 +72,6 @@ function Rect:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
   self.quad:update(self.rect)
   if not self.filled then
-    self.mesh.material.uniforms:setFloat("width", self.width)
     self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
   end
 end
