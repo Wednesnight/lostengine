@@ -46,21 +46,21 @@ function layerTest()
   rootLayer = Layer
               {
                 id="rootLayer", 
-                bounds={0,0,200,200},
+                bounds={0,0,config.window.width,config.window.height},
                 sublayers = 
                 {
-                  lrect{id="sl1", bounds={0,0,50,50}, color=Color(1,0,0)},
+                  lrect{id="sl1", bounds={"left","top",50,50}, color=Color(1,0,0)},
                   lrect
                   {
                       id="sl2",bounds={50,0,50,50},color=Color(0,1,0),
                       sublayers=
                       {
-                        lrect{id="sl3", bounds={"top", "left", ".5", ".5"}, color=Color(0,0,1)}
+                        lrect{id="sl3", bounds={"right", "top", ".5", ".5"}, color=Color(0,0,1)}
                       }
                   },
                   lrect{
                           id="sl4", bounds={10,10,20,20}, color=Color(1,1,0),
-                          filled = true,
+                          filled = false,
                           width = 3
                           }
                 }
@@ -95,7 +95,7 @@ function startup()
   scene2 = require("scene2")
   tasklet.renderNode:add(scene1)
   tasklet.renderNode:add(scene2)
-  scene2.active = false
+  scene1.active = false
 
   layerTest()
 

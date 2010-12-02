@@ -154,7 +154,7 @@ function Layer:updateLayout()
   end  
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
---  log.debug(tostring(self.rect))
+  log.debug(tostring(self.rect))
 end
 
 function Layer:updateDisplay()
