@@ -3,6 +3,7 @@ require("lost.common.Shaders")
 require("lost.common.ShaderFactory")
 require("lost.common.MeshFactory")
 require("lost.guiro.layer.Rect")
+require("lost.guiro.layer.RoundedRect")
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -42,6 +43,7 @@ function layerTest()
 
   local Layer = lost.guiro.layer.Layer
   local lrect = lost.guiro.layer.Rect
+  local rrect = lost.guiro.layer.RoundedRect
 
   rootLayer = Layer
               {
@@ -62,7 +64,13 @@ function layerTest()
                           id="sl4", bounds={10,10,20,20}, color=Color(1,1,0),
                           filled = false,
                           width = 3
-                          }
+                          },
+                  rrect
+                  {
+                    id="rr1",
+                    bounds = {".5", ".5", 200, 200},
+                    color = Color(1,0,1)
+                  }
                 }
               }
   rootLayer:print()
