@@ -61,22 +61,21 @@ namespace lost
       ];
     }
 
-    TrueTypeFontPtr createTTF(LibraryPtr lib, common::DataPtr data)
+    TrueTypeFontPtr createTTF(LibraryPtr lib, common::DataPtr data, uint32_t size)
     {
-      return TrueTypeFontPtr(new TrueTypeFont(lib, data));
+      return TrueTypeFontPtr(new TrueTypeFont(lib, data, size));
     }
 
-    RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str, uint32_t sz)
+    RenderedTextPtr renderCrippled(TrueTypeFontPtr ttf, const std::string & str)
     {
-      return ttf->render(str, sz);
+      return ttf->render(str);
     }
 
     void renderToTarget(TrueTypeFontPtr ttf, 
                         const std::string & inText,
-                        uint32_t inSizeInPoints,
                         RenderedTextPtr target)
     {
-      ttf->render(inText, inSizeInPoints, target);
+      ttf->render(inText, target);
     }
 
 

@@ -185,6 +185,7 @@ function layerTest()
 
   buildGradients(ui.textureManager)
 
+
   rootLayer = Layer
               {
                 id="rootLayer", 
@@ -194,7 +195,7 @@ function layerTest()
                   lrect{id="sl1", bounds={"left","top",50,50}, color=Color(1,1,1), gradient="segBlueFrame"},
                   lrect
                   {
-                      id="sl2",bounds={50,0,50,50},color=Color(1,1,1),
+                      id="sl2",bounds={50,0,50,50},color=Color(.6,.6,.6),
                       gradient="segLightGrey",
                       filled = false,
                       width=12,
@@ -213,7 +214,7 @@ function layerTest()
                   {
                     id="rr1",
                     bounds = {".3", {".5", -10}, 200, 200},
-                    color = Color(1,1,1),
+                    color = Color(1,0,0),
                     sides = {top=true, bottom=false, left=true, right=true},
                     roundCorners = {tl=false, tr=true, bl=true, br=true},
                     radius = 24,
@@ -259,6 +260,15 @@ end
 function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+
+
+  local ftlib = lost.font.freetype.Library.create()
+  local defaultFont = lost.font.TrueTypeFont.create(ftlib, tasklet.loader:load("lost/resources/ttf-bitstream-vera-1.10/Vera.ttf"), 12)
+  defaultFont.atlasSize = Vec2(256, 256)
+  renderedText = defaultFont:render("Hello new font stuff!")
+  renderedText.material.shader = ui.shaderFactory:texture()
+  renderedText.material.color = Color(0,0,0)
+  renderedText.transform = MatrixTranslation(Vec3(100,100,0))
   
   scene1 = require("scene1")
   scene2 = require("scene2")
