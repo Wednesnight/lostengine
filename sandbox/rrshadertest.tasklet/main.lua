@@ -212,13 +212,25 @@ function layerTest()
                   rrect
                   {
                     id="rr1",
-                    bounds = {".5", {".5", -10}, 200, 200},
+                    bounds = {".3", {".5", -10}, 200, 200},
                     color = Color(1,1,1),
                     sides = {top=true, bottom=false, left=true, right=true},
                     roundCorners = {tl=false, tr=true, bl=true, br=true},
                     radius = 24,
                     width = 12,
                     filled = false
+                  },
+                  rrect
+                  {
+                    id="rr2",
+                    bounds = {{".3", 220}, {".5", -10}, 200, 200},
+                    color = Color(1,1,1),
+                    sides = {top=true, bottom=true, left=true, right=true},
+                    roundCorners = {tl=false, tr=true, bl=true, br=true},
+                    radius = 24,
+                    width = 12,
+                    filled = false,
+                    gradient = "segBlue"
                   }
                 }
               }
