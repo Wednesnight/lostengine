@@ -31,7 +31,6 @@ namespace lost
       lost::shared_ptr<LuaStateHelper> lsh;
 
       common::Timer timer;
-      font::FontManagerPtr fontManager;
 
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
@@ -64,6 +63,7 @@ namespace lost
       std::string                     name;
       resource::LoaderPtr             loader;
       TaskletConfig                   config;
+      font::FontManagerPtr            fontManager;
 
 	    Window*                         window;         // contains the window pointer after init() if it could be created
       rg::NodePtr                     clearNode;      // default clear node, always present

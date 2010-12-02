@@ -25,6 +25,7 @@
 #include <luabind/shared_ptr_converter.hpp>
 #include "lost/gl/Context.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/font/FontManager.h"
 
 using namespace luabind;
 using namespace lost::application;
@@ -278,6 +279,7 @@ namespace lost
             .def_readonly("clearNode", &Tasklet::clearNode)
             .def_readonly("renderNode", &Tasklet::renderNode)
             .def_readonly("uiNode", &Tasklet::uiNode)
+            .def_readonly("fontManager", &Tasklet::fontManager)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
         ]
       ];

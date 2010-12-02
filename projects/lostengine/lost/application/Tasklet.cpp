@@ -57,7 +57,7 @@ namespace lost
       waitForEvents = false;
       name = "<unnamed tasklet>";
 	    window = NULL;
-      fontManager = FontManager::create();
+      fontManager = FontManager::create(inLoader);
 
       scriptLoaded = false;
       configLoaded = false;
@@ -89,6 +89,7 @@ namespace lost
       // populate self into lua context
       lua->globals["tasklet"] = this;
 
+      lua->doString("require 'lost/common/FontInit'");
       configLoaded = config.load(lua, loader);
       WindowParams windowParams;
       

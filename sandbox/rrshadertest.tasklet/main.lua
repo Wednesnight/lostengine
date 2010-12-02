@@ -262,9 +262,8 @@ function startup()
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
 
-  local ftlib = lost.font.freetype.Library.create()
-  local defaultFont = lost.font.TrueTypeFont.create(ftlib, tasklet.loader:load("lost/resources/ttf-bitstream-vera-1.10/Vera.ttf"), 12)
-  defaultFont.atlasSize = Vec2(256, 256)
+  local defaultFont = tasklet.fontManager:getFont("Vera serif bold", 12)
+  log.debug("-------- "..type(defaultFont))
   renderedText = defaultFont:render("Hello new font stuff!")
   renderedText.material.shader = ui.shaderFactory:texture()
   renderedText.material.color = Color(0,0,0)
