@@ -117,7 +117,7 @@ end
 -- sides is a table with the following keys set to either true or false
 -- not all keys need to be present and will default to true if not set
 -- sides = {top = true, bottom=true, left=true, right=true}
-function ShaderFactory:roundedRect(filled, roundCorners, sides)
+function ShaderFactory:roundedRect(filled, roundCorners, sides, hasGradient)
   local result = nil
   
   -- create local tables for configuration to handle nil params and so we don't modify incoming configuration
@@ -164,6 +164,9 @@ function ShaderFactory:roundedRect(filled, roundCorners, sides)
   local shader = ""
   
   if filled then
+    if hasGradient then
+      shader = shader .. "#define HAS_GRADIENT 1\n"
+    end
     shader = shader .. [[
 
 uniform vec4 color;
@@ -174,12 +177,21 @@ varying vec2 tc0;
 #import "lost/resources/glsl/disc.fsp"
 #import "lost/resources/glsl/box.fsp"
 
+#ifdef HAS_GRADIENT
+#import "lost/resources/glsl/gradient.fsp"
+uniform sampler2D texture0;
+uniform float gradientCoord;
+#endif
+
 float roundedRect(vec2 lpc, vec2 size, float r)
 {
   float mr = min(min(size.x/2.0, size.y/2.0), r);
 
 ]]
   else
+    if hasGradient then
+      shader = shader .. "#define HAS_GRADIENT 1\n"
+    end  
     shader = shader .. [[
 uniform vec4 color;
 uniform vec2 size;
@@ -189,6 +201,12 @@ varying vec2 tc0;
 
 #import "lost/resources/glsl/ring.fsp"
 #import "lost/resources/glsl/box.fsp"
+
+#ifdef HAS_GRADIENT
+#import "lost/resources/glsl/gradient.fsp"
+uniform sampler2D texture0;
+uniform float gradientCoord;
+#endif
 
 float roundedRectFrame(vec2 lpc, vec2 size, float r, float width)
 {
@@ -254,7 +272,11 @@ vec2 localPixelCoord()
 void main(void)
 { 
   float f = roundedRect(localPixelCoord(), size, radius);
+#ifdef HAS_GRADIENT
+  gl_FragColor = color*f*gradient(tc0, gradientCoord, texture0);
+#else
   gl_FragColor = color*f;
+#endif
 }
       
 ]]
@@ -320,7 +342,11 @@ vec2 localPixelCoord()
 
 void main(void)
 {  
+#ifdef HAS_GRADIENT
+  gl_FragColor = color*roundedRectFrame(localPixelCoord(), size, radius, width)*gradient(tc0, gradientCoord, texture0);
+#else  
   gl_FragColor = color*roundedRectFrame(localPixelCoord(), size, radius, width);
+#endif
 }
     
 ]]
