@@ -32,8 +32,20 @@ function ShaderFactory:box()
   return self:loadShader("lost/resources/glsl/box")
 end
 
+function ShaderFactory:rect()
+  return self:loadShader("lost/resources/glsl/rect")
+end
+
+function ShaderFactory:rectGradient()
+  return self:loadShader("lost/resources/glsl/rectGradient")
+end
+
 function ShaderFactory:rectFrame()
   return self:loadShader("lost/resources/glsl/rectFrame")
+end
+
+function ShaderFactory:rectFrameGradient()
+  return self:loadShader("lost/resources/glsl/rectFrameGradient")
 end
 
 function ShaderFactory:iqrr()

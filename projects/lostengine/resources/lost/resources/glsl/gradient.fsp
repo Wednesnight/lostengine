@@ -1,0 +1,5 @@
+// reads the color of a vertical gradient from a gradient TextureAtlas
+vec4 gradient(vec2 normalizedTexCoord, float horizontalGradientCoord, sampler2D gradientTexture)
+{
+  return texture2D(gradientTexture, vec2(horizontalGradientCoord, normalizedTexCoord.y));
+}

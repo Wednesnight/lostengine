@@ -17,11 +17,13 @@ function Rect:constructor(args)
   local t = args or {}
   self.quad = lost.guiro.Quad{}
   self.mesh = self.quad.mesh
+
   if t.filled ~= nil then
     self.filled = t.filled
   else
     self.filled = true
   end
+
   if t.width ~= nil then
     self.width = t.width
   else
@@ -31,12 +33,35 @@ function Rect:constructor(args)
       self.width = 1
     end
   end
-  if self.filled then
-    self.mesh.material.shader = ui.shaderFactory:color()
-  else
-    self.mesh.material.shader = ui.shaderFactory:rectFrame()    
+
+  if t.gradient ~= nil then
+    self.gradientName = t.gradient
   end
+  if self.gradientName then
+    self.gradientCoord = ui.textureManager:gradientCoord(self.gradientName)
+  end
+
+  if self.filled then
+    if self.gradientName then
+      self.mesh.material.shader = ui.shaderFactory:rectGradient()
+    else
+      self.mesh.material.shader = ui.shaderFactory:rect()
+    end
+  else
+    if self.gradientName then
+      self.mesh.material.shader = ui.shaderFactory:rectFrameGradient()    
+    else
+      self.mesh.material.shader = ui.shaderFactory:rectFrame()    
+    end
+  end
+
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
+
+  if self.gradientName then
+    self.mesh.material:setTexture(0,ui.textureManager._textureManager.gradientTexture)
+    self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
+  end
+  
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)
   self:needsLayout()
