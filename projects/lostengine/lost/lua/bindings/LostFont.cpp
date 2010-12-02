@@ -5,6 +5,7 @@
 #include "lost/font/TrueTypeFont.h"
 #include "lost/font/RenderedText.h"
 #include "lost/gl/Texture.h"
+#include "lost/font/FontManager.h"
 
 using namespace luabind;
 using namespace lost;
@@ -100,11 +101,25 @@ namespace lost
       ];
     }
     
+    void LostFontManager(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("font")
+        [
+          class_<FontManager>("FontManager")
+          .def("addEntry",&FontManager::addEntry)
+          .def("getFont",&FontManager::getFont)
+        ]
+      ];
+    }
+    
     void LostFont(lua_State* state)
     {
       LostFontFreetypeLibrary(state);
       LostFontRenderedText(state);
       LostFontTrueTypeFont(state);
+      LostFontManager(state);
     }
 
   }
