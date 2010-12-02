@@ -12,7 +12,21 @@ function RoundedRect:constructor(args)
   local t = args or {}
   self.quad = lost.guiro.Quad{}
   self.mesh = self.quad.mesh
-  self.mesh.material.shader = ui.shaderFactory:color()
+  
+  local sides = t.sides or {}
+  local roundCorners = t.roundCorners or {}
+  local filled = true
+  if t.filled ~= nil then
+    filled = t.filled
+  end
+  local radius = t.radius or 8
+  local width = t.width or 1
+  
+  self.mesh.material.shader = ui.shaderFactory:roundedRect(filled, roundCorners, sides)
+  self.mesh.material.uniforms:setFloat("radius", radius)
+  if not filled then
+    self.mesh.material.uniforms:setFloat("width", width)
+  end
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)
@@ -22,4 +36,5 @@ end
 function RoundedRect:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
   self.quad:update(self.rect)
+  self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
 end
