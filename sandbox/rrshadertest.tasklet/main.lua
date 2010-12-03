@@ -185,7 +185,7 @@ function layerTest()
   local rrect = lost.guiro.layer.RoundedRect
   local text = lost.guiro.layer.Text
 
-  buildGradients(ui.textureManager)
+  buildGradients(lost.guiro.textureManager())
 
 
   rootLayer = Layer

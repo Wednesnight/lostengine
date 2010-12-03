@@ -198,7 +198,7 @@ function Guiro:View(def)
 end
 
 function Guiro:UserInterface(def)
-  local result = _G.ui or lost.guiro.view.UserInterface()
+  local result = lost.guiro.view.UserInterface()
   self:applyStyle(result, def)
   self:searchAndAddSubviews(result, def)      
   self:assignViewAttributes(result, def) 

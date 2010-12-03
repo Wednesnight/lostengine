@@ -1,6 +1,7 @@
 module("lost.guiro.layer", package.seeall)
 
 require("lost.guiro.Bounds")
+require("lost.guiro.Singletons")
 
 lost.common.Class "lost.guiro.layer.Layer" {}
 
@@ -121,15 +122,15 @@ function Layer:__tostring()
 end
 
 function Layer:needsUpdate()
-  ui:layerNeedsUpdate(self)
+  lost.guiro.updateManager():layerNeedsUpdate(self)
 end
 
 function Layer:needsLayout()
-  ui:layerNeedsLayout(self)
+  lost.guiro.updateManager():layerNeedsLayout(self)
 end
 
 function Layer:needsDisplay()
-  ui:layerNeedsDisplay(self)
+  lost.guiro.updateManager():layerNeedsDisplay(self)
 end
 
 function Layer:update()

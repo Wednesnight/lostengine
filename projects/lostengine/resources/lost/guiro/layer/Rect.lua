@@ -1,5 +1,6 @@
 module("lost.guiro.layer", package.seeall)
 
+require("lost.guiro.Singletons")
 require("lost.guiro.Bounds")
 require("lost.guiro.Quad")
 
@@ -38,20 +39,20 @@ function Rect:constructor(args)
     self.gradientName = t.gradient
   end
   if self.gradientName then
-    self.gradientCoord = ui.textureManager:gradientCoord(self.gradientName)
+    self.gradientCoord = lost.guiro.textureManager():gradientCoord(self.gradientName)
   end
 
   if self.filled then
     if self.gradientName then
-      self.mesh.material.shader = ui.shaderFactory:rectGradient()
+      self.mesh.material.shader = lost.guiro.shaderFactory():rectGradient()
     else
-      self.mesh.material.shader = ui.shaderFactory:rect()
+      self.mesh.material.shader = lost.guiro.shaderFactory():rect()
     end
   else
     if self.gradientName then
-      self.mesh.material.shader = ui.shaderFactory:rectFrameGradient()    
+      self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradient()    
     else
-      self.mesh.material.shader = ui.shaderFactory:rectFrame()    
+      self.mesh.material.shader = lost.guiro.shaderFactory():rectFrame()    
     end
     self.mesh.material.uniforms:setFloat("width", self.width)
   end
@@ -59,7 +60,7 @@ function Rect:constructor(args)
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
 
   if self.gradientName then
-    self.mesh.material:setTexture(0,ui.textureManager._textureManager.gradientTexture)
+    self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
   end
   

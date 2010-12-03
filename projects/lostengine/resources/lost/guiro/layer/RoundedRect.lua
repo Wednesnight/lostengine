@@ -1,5 +1,6 @@
 module("lost.guiro.layer", package.seeall)
 
+require("lost.guiro.Singletons")
 require("lost.guiro.Bounds")
 require("lost.guiro.Quad")
 
@@ -26,7 +27,7 @@ function RoundedRect:constructor(args)
     self.gradientName = t.gradient
   end
   if self.gradientName then
-    self.gradientCoord = ui.textureManager:gradientCoord(self.gradientName)
+    self.gradientCoord = lost.guiro.textureManager():gradientCoord(self.gradientName)
   end
 
   local hasGradient = false
@@ -34,13 +35,13 @@ function RoundedRect:constructor(args)
     hasGradient = true
   end
   
-  self.mesh.material.shader = ui.shaderFactory:roundedRect(filled, roundCorners, sides, hasGradient)
+  self.mesh.material.shader = lost.guiro.shaderFactory():roundedRect(filled, roundCorners, sides, hasGradient)
   self.mesh.material.uniforms:setFloat("radius", radius)
   
   if not filled then self.mesh.material.uniforms:setFloat("width", width) end
   if hasGradient then 
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
-    self.mesh.material:setTexture(0,ui.textureManager._textureManager.gradientTexture)
+    self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
   end
   self.mesh.material.color = t.color or lost.common.Color(1,1,1)
   self.drawNode = lost.rg.Draw.create(self.mesh)

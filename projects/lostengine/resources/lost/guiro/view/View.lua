@@ -49,26 +49,26 @@ function View:constructor()
   self.rootNode:add(self.subviewNodes)
 
   -- meshes and draw nodes
-  self.backgroundMesh = lost.mesh.RoundedRect.create(ui.textureManager._textureManager, 
+  self.backgroundMesh = lost.mesh.RoundedRect.create(lost.guiro.textureManager()._textureManager, 
                                                      Vec2(self.rect.width, self.rect.height),
                                                      true,
                                                      8,
                                                      1)
   self.backgroundMesh:roundCorners(false, false, false, false)
-  self.backgroundMesh.material.shader = lost.common.Shaders.textureShader()
+  self.backgroundMesh.material.shader = lost.guiro.shaderFactory():texture()
   self.backgroundMesh.material.blend = true  
   self.backgroundMesh.material.color = lost.common.Color(1,0,0,1)
   self.backgroundNode = lost.rg.Draw.create(self.backgroundMesh)
   self.backgroundNode.name = "drawViewBackground"
   self.backgroundNode.active = false
 
-  self.frameMesh = lost.mesh.RoundedRect.create(ui.textureManager._textureManager,
+  self.frameMesh = lost.mesh.RoundedRect.create(lost.guiro.textureManager()._textureManager,
                                                 Vec2(self.rect.width, self.rect.height),
                                                 false,
                                                 8,
                                                 1)
   self.frameMesh:roundCorners(false, false, false, false)                                                
-  self.frameMesh.material.shader = lost.common.Shaders.textureShader()
+  self.frameMesh.material.shader = lost.guiro.shaderFactory():texture()
   self.frameMesh.material.blend = true  
   self.frameMesh.material.color = lost.common.Color(1,1,1,1)
   self.frameNode = lost.rg.Draw.create(self.frameMesh)
