@@ -62,27 +62,7 @@ function Guiro:assignViewAttributes(target, source)
   end
   
   if source.id  ~= nil then target.id = source.id end
-  if source.showFrame  ~= nil then target:showFrame(source.showFrame)	end
-  if source.frameColor  ~= nil then target:frameColor(source.frameColor) end
-  if source.showBackground  ~= nil then	target:showBackground(source.showBackground)	end
-  if source.backgroundColor  ~= nil then target:backgroundColor(source.backgroundColor) end
   if source.hidden  ~= nil then target:hidden(source.hidden) end
-  if source.frameWidth  ~= nil then target:frameWidth(source.frameWidth) end
-  if source.backgroundCornerRadius  ~= nil then target:backgroundCornerRadius(source.backgroundCornerRadius) end
-  if source.frameCornerRadius  ~= nil then target:frameCornerRadius(source.frameCornerRadius) end
-  if source.backgroundRoundCorners ~= nil then 
-    local t = source.backgroundRoundCorners
-    target:backgroundRoundCorners(t[1],t[2],t[3],t[4]) 
-  end
-  if source.frameRoundCorners ~= nil then 
-    local t = source.frameRoundCorners
-    target:frameRoundCorners(t[1],t[2],t[3],t[4]) 
-  end
-  if source.frameShowSides ~= nil then 
-    local t = source.frameShowSides
-    target:frameShowSides(t[1],t[2],t[3],t[4]) 
-  end
-  target:needsRedraw()
   target:needsLayout()
 end
 

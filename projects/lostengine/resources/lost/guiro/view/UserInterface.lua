@@ -6,35 +6,35 @@ require("lost.guiro.TextureManager")
 require("lost.common.ShaderFactory")
 require("lost.common.MeshFactory")
 
+local _ui = nil
+lost.guiro.ui = function()
+  if not _ui then
+    _ui = lost.guiro.view.UserInterface()
+  end
+  return _ui
+end
+
 lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.EventManager"
 
 function UserInterface:constructor()
+  log.debug("-- UI CONSTRUCTOR")
   lost.guiro.view.View.constructor(self)
-
+  self.id = "ui"
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
 
-  -- init size
   local windowRect = tasklet.window.params.rect
-  self.bounds = lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height)
+  self:bounds(lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height))
 
   self.focusable = true
 
   self.camera = lost.camera.Camera2D.create(lost.math.Rect())
-  self.renderNode:add(lost.rg.Camera.create(self.camera))
-  self.renderNode:add(lost.rg.DepthTest.create(false))
-  self:showBackground(false)
-  self:showFrame(false)
+  self.layer.renderNode:add(lost.rg.Camera.create(self.camera))
+  self.layer.renderNode:add(lost.rg.DepthTest.create(false))
   
-  tasklet.uiNode:add(self.rootNode)
-
-
-
-  -- trigger updates
-  self:needsLayout()
-  self:needsRedraw()
+  tasklet.uiNode:add(self.layer.renderNode)  
 end
 
 function UserInterface:setEventDispatcher(eventDispatcher)
@@ -72,6 +72,7 @@ function UserInterface:propagateTouchEvent(event)
   self.eventManager:propagateTouchEvent(self, event)
 end
 
-function UserInterface:afterLayout()
+function UserInterface:updateLayout()
+  lost.guiro.view.View.updateLayout(self)
   self.camera:viewport(self.rect)
 end

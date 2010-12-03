@@ -11,6 +11,7 @@ local _shaderFactory = nil
 local _meshFactory = nil
 local _updateManager = nil
 local _themeManager = nil
+-- due to a cyclic dependency, ui() had to be moved to lost.guiro.view.UserInterface, but you can still use lost.guiro.ui() to access it
 
 function textureManager()
   if not _textureManager then
