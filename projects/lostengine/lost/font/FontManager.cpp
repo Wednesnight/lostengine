@@ -26,23 +26,22 @@ FontManagerPtr FontManager::create(const resource::LoaderPtr& inLoader)
 
 void FontManager::addEntry(const std::string& name, const std::string& pathToData)
 {
-  DOUT("-- ADDING FONT ENTRY: "<<name<<" : "<<pathToData);
   name2path[name] = pathToData;
 }
 
 TrueTypeFontPtr FontManager::getFont(const std::string& name, uint32_t size)
 {
   TrueTypeFontPtr result;
-  std::map<std::string, TrueTypeFontPtr>::iterator pos = name2font.find(name);
-  if(pos == name2font.end())
+  std::pair<std::string, uint32_t> fontKey = std::make_pair(name, size);
+  std::map<std::pair<std::string, uint32_t>, TrueTypeFontPtr>::iterator pos = nameAndSize2font.find(fontKey);
+  if(pos == nameAndSize2font.end())
   {
     std::map<std::string, std::string>::iterator ppos = name2path.find(name);
     if (ppos != name2path.end()) {
       std::string path = name2path[name];
-      DOUT("loading font "<<name<<" from "<<path);
       common::DataPtr data = _loader->load(path);
       result.reset(new TrueTypeFont(lib(),data, size));
-      name2font[name] = result;
+      nameAndSize2font[fontKey] = result;
       result->atlasSize = lost::math::Vec2(256,256); // FIXME: make this configurable?      
     }
     else {
@@ -51,7 +50,6 @@ TrueTypeFontPtr FontManager::getFont(const std::string& name, uint32_t size)
   }
   else
   {
-    DOUT("returning cached font "<<name)
     result = pos->second;
   }
   return result;

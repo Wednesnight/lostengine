@@ -4,6 +4,7 @@ require("lost.common.ShaderFactory")
 require("lost.common.MeshFactory")
 require("lost.guiro.layer.Rect")
 require("lost.guiro.layer.RoundedRect")
+require("lost.guiro.layer.Text")
 
 using "lost.math.Vec2"
 using "lost.math.Vec3"
@@ -182,6 +183,7 @@ function layerTest()
   local Layer = lost.guiro.layer.Layer
   local lrect = lost.guiro.layer.Rect
   local rrect = lost.guiro.layer.RoundedRect
+  local text = lost.guiro.layer.Text
 
   buildGradients(ui.textureManager)
 
@@ -232,6 +234,27 @@ function layerTest()
                     width = 12,
                     filled = false,
                     gradient = "segBlue"
+                  },
+                  Layer
+                  {
+                    id="textContainer",
+                    bounds={400,100,350,50},
+                    sublayers=
+                    {
+                      --lrect{bounds={0,0,"1","1"}, color=Color(.8,.8,.8), },
+                      rrect{bounds={0,0,"1","1"},radius=8,width=4,filled=true, gradient="segBlue"},
+                      text
+                      {
+                        id="text",
+                        bounds = {0,0,"1","1"},
+                        color=Color(0,0,0),
+                        font = {"Vera", 17},
+                        text = "Hello new text layer! | Mini",
+                        valign="center",
+                        halign = "center"
+                      },
+                      rrect{bounds={0,0,"1","1"},radius=8,width=1,filled=false,gradient="segBlueFrame"}
+                    },
                   }
                 }
               }
@@ -260,14 +283,6 @@ end
 function startup()
   dcl = lost.declarative.Context(tasklet.loader)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-
-
-  local defaultFont = tasklet.fontManager:getFont("Vera serif bold", 12)
-  log.debug("-------- "..type(defaultFont))
-  renderedText = defaultFont:render("Hello new font stuff!")
-  renderedText.material.shader = ui.shaderFactory:texture()
-  renderedText.material.color = Color(0,0,0)
-  renderedText.transform = MatrixTranslation(Vec3(100,100,0))
   
   scene1 = require("scene1")
   scene2 = require("scene2")
