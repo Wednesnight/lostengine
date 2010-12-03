@@ -13,6 +13,9 @@ function UpdateManager:constructor()
   self._layerUpdateQ = { set={}, list={}}
   self._layerLayoutQ = { set={}, list={}}
   self._layerDisplayQ = { set={}, list={}}
+  self._viewUpdateQ = { set={}, list={}}
+  self._viewLayoutQ = { set={}, list={}}
+  self._viewDisplayQ = { set={}, list={}}
 end
 
 local function depthSortFunc(a,b)
@@ -40,8 +43,23 @@ function UpdateManager:processLayerDisplayUpdates()
   self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end)
 end
 
+function UpdateManager:processViewUpdates()
+  self:processQ(self._viewUpdateQ, function(view) view:update() end)
+end
+
+function UpdateManager:processViewLayoutUpdates()
+  self:processQ(self._viewLayoutQ, function(view) view:updateLayout() end)
+end
+
+function UpdateManager:processViewDisplayUpdates()
+  self:processQ(self._viewDisplayQ, function(view) view:updateDisplay() end)
+end
+
 function UpdateManager:update()
   log.debug("-- UPDATE")
+  self:processViewUpdates()
+  self:processViewLayoutUpdates()
+  self:processViewDisplayUpdates()
   self:processLayerUpdates()
   self:processLayerLayoutUpdates()
   self:processLayerDisplayUpdates()
@@ -78,5 +96,23 @@ end
 function UpdateManager:layerNeedsDisplay(layer)
   log.debug("layer needs display: ("..layer.z..") "..layer.id)
   self:addElementToQ(self._layerDisplayQ, layer)
+  self:scheduleUpdateIfNeeded()
+end
+
+function UpdateManager:viewNeedsUpdate(view)
+  log.debug("view needs update: ("..view.z..") "..view.id)
+  self:addElementToQ(self._viewUpdateQ, view)
+  self:scheduleUpdateIfNeeded()
+end
+
+function UpdateManager:viewNeedsLayout(view)
+  log.debug("view needs layout: ("..view.z..") "..view.id)
+  self:addElementToQ(self._viewLayoutQ, view)
+  self:scheduleUpdateIfNeeded()
+end
+
+function UpdateManager:viewNeedsDisplay(view)
+  log.debug("view needs display: ("..view.z..") "..view.id)
+  self:addElementToQ(self._viewDisplayQ, view)
   self:scheduleUpdateIfNeeded()
 end

@@ -44,7 +44,7 @@ function Layer:bounds(...)
   else
     return self._bounds
   end
-  self:updateZ()
+--  self:updateZ()
   self:needsLayout()
 end
 
@@ -155,7 +155,7 @@ function Layer:updateLayout()
   end  
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
-  log.debug(tostring(self.rect))
+--  log.debug(tostring(self.rect))
 end
 
 function Layer:updateDisplay()

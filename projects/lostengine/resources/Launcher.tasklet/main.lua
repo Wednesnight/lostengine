@@ -1,8 +1,13 @@
-require("lost.declarative.Context")
+
+require("lost.guiro.view.UserInterface")
+
+function drop(event)
+  tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(event.filename))
+end
 
 function startup()
-  dcl = lost.declarative.Context(tasklet.loader)
-  ui = require("ui")
+  local ui = lost.guiro.ui()
+  ui:addEventListener("drop", drop)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   return true
 end
