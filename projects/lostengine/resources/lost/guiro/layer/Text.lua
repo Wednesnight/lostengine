@@ -1,5 +1,6 @@
 module("lost.guiro.layer", package.seeall)
 
+require("lost.guiro.Singletons")
 require("lost.guiro.Bounds")
 require("lost.guiro.Quad")
 
@@ -24,7 +25,7 @@ function Text:constructor(args)
   self.id = t.id or "text"
   self.text = t.text or ""
   self.mesh = lost.font.RenderedText.create()
-  self.mesh.material.shader = ui.shaderFactory:texture()
+  self.mesh.material.shader = lost.guiro.shaderFactory():texture()
   self.mesh.material.color = t.color or Color(1,1,1)
   self.mesh.material:blendNormal()
   self.drawNode = lost.rg.Draw.create(self.mesh)

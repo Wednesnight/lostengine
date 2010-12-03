@@ -11,25 +11,8 @@ lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 using "lost.guiro.event.EventManager"
 
 function UserInterface:constructor()
-  -- setup update scheduling before first layer can request updates in View constructor
-  if not _G.ui then 
-    _G.ui = self
-  end
-  self._updateScheduled = false
-  -- each update queue has a set to track unique elements. within each set k == v, and if a new element was not present
-  -- in the set it is also added to the list. The list is sorted by z values before the actual update funtions are called
-  -- sets and lists are recreated after all updates have been performed
-  self._layerUpdateQ = { set={}, list={}}
-  self._layerLayoutQ = { set={}, list={}}
-  self._layerDisplayQ = { set={}, list={}}
-  self.textureManager = lost.guiro.TextureManager(256)
-
-  -- update scheduling and singleton ui must be live when we call the View constructor because it creates a layer
-  -- that might immediately schedule itself
   lost.guiro.view.View.constructor(self)
 
-  self.shaderFactory = lost.common.ShaderFactory(tasklet.loader)
-  self.meshFactory = lost.common.MeshFactory(self.shaderFactory)
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
 
@@ -38,7 +21,6 @@ function UserInterface:constructor()
   self.bounds = lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height)
 
   self.focusable = true
-	self.parent = nil
 
   self.camera = lost.camera.Camera2D.create(lost.math.Rect())
   self.renderNode:add(lost.rg.Camera.create(self.camera))
@@ -92,71 +74,4 @@ end
 
 function UserInterface:afterLayout()
   self.camera:viewport(self.rect)
-end
-
-function depthSortFunc(a,b)
-  return a.z < b.z
-end
-
-function UserInterface:processQ(q, f)
-  table.sort(q.list, depthSortFunc)
-  for k,v in pairs(q.list) do
-    f(v)
-  end
-  q.list = {}
-  q.set = {}
-end
-
-function UserInterface:processLayerUpdates()
-  self:processQ(self._layerUpdateQ, function(layer) layer:update() end)
-end
-
-function UserInterface:processLayerLayoutUpdates()
-  self:processQ(self._layerLayoutQ, function(layer) layer:updateLayout() end)
-end
-
-function UserInterface:processLayerDisplayUpdates()
-  self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end)
-end
-
-
-function UserInterface:update()
-  log.debug("-- UPDATE")
-  self:processLayerUpdates()
-  self:processLayerLayoutUpdates()
-  self:processLayerDisplayUpdates()
-  self._updateScheduled = false
-end
-
-function UserInterface:scheduleUpdateIfNeeded()
-  if not self._updateScheduled then
-    log.debug("-- scheduling update")
-    self._updateScheduled = true
-    callLater(UserInterface.update, self)
-  end
-end
-
-function UserInterface:addElementToQ(q, e)
-  if q.set[e] == nil then
-    q.set[e] = e
-    table.insert(q.list, e)
-  end
-end
-
-function UserInterface:layerNeedsUpdate(layer)
-  log.debug("layer needs update: ("..layer.z..") "..layer.id)
-  self:addElementToQ(self._layerUpdateQ, layer)
-  self:scheduleUpdateIfNeeded()
-end
-
-function UserInterface:layerNeedsLayout(layer)
-  log.debug("layer needs layout: ("..layer.z..") "..layer.id)
-  self:addElementToQ(self._layerLayoutQ, layer)
-  self:scheduleUpdateIfNeeded()
-end
-
-function UserInterface:layerNeedsDisplay(layer)
-  log.debug("layer needs display: ("..layer.z..") "..layer.id)
-  self:addElementToQ(self._layerDisplayQ, layer)
-  self:scheduleUpdateIfNeeded()
 end

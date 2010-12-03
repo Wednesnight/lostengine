@@ -2,8 +2,8 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
-require("lost.guiro.themes.default.Theme")
-require("lost.guiro.themes.pebble.Theme")
+--require("lost.guiro.themes.default.Theme")
+--require("lost.guiro.themes.pebble.Theme")
 
 lost.common.Class "lost.guiro.ThemeManager" {}
 
