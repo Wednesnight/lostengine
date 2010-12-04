@@ -1,14 +1,12 @@
 module("lost.guiro", package.seeall)
 
 require("lost.common.ShaderFactory")
-require("lost.common.MeshFactory")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.UpdateManager")
 require("lost.guiro.TextureManager")
 
 local _textureManager = nil
 local _shaderFactory = nil
-local _meshFactory = nil
 local _updateManager = nil
 local _themeManager = nil
 -- due to a cyclic dependency, ui() had to be moved to lost.guiro.view.UserInterface, but you can still use lost.guiro.ui() to access it
@@ -25,13 +23,6 @@ function shaderFactory()
     _shaderFactory = lost.common.ShaderFactory(tasklet.loader)
   end
   return _shaderFactory
-end
-
-function meshFactory()
-  if not _meshFactory then
-    _meshFactory = lost.common.MeshFactory(shaderFactory())
-  end
-  return _meshFactory
 end
 
 function updateManager()

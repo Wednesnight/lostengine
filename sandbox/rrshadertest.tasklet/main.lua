@@ -1,7 +1,6 @@
 require("lost.declarative.Context")
 require("lost.common.Shaders")
 require("lost.common.ShaderFactory")
-require("lost.common.MeshFactory")
 require("lost.guiro.layer.Rect")
 require("lost.guiro.layer.RoundedRect")
 require("lost.guiro.layer.Text")
@@ -18,8 +17,6 @@ config = require("config")
 dcl = nil
 sum = 0
 curwidth = 3
-shaderFactory = lost.common.ShaderFactory(tasklet.loader)
-meshFactory = lost.common.MeshFactory(shaderFactory)
 
 white = Color(1,1,1,1)
 yellow = Color(1,1,0,1)
