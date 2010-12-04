@@ -43,7 +43,11 @@ function RoundedRect:constructor(args)
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
   end
-  self.mesh.material.color = t.color or lost.common.Color(1,1,1)
+  if t.color then
+    self.mesh.material.color = t.color:premultiplied()
+  else
+    self.mesh.material.color = lost.common.Color(1,1,1)
+  end
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)
   self:needsLayout()

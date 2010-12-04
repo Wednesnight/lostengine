@@ -50,8 +50,8 @@ function UserInterface:setEventDispatcher(eventDispatcher)
   eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
 
   eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
-        self.bounds.width = lost.guiro.wsize{abs=event.width}
-        self.bounds.height = lost.guiro.hsize{abs=event.height}
+        self._bounds.width = lost.guiro.wsize{abs=event.width}
+        self._bounds.height = lost.guiro.hsize{abs=event.height}
         self:needsLayout()
       end)
 end

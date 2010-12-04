@@ -41,6 +41,11 @@ namespace lost
        void Color::bu8(uint8_t v) { fv[2] = float(v)/255.0f; }
        void Color::au8(uint8_t v) { fv[3] = float(v)/255.0f; }
 
+    Color Color::premultiplied()
+    {
+      return Color(fv[0]*fv[3], fv[1]*fv[3], fv[2]*fv[3], fv[3]);
+    }
+
 
     lost::common::Color operator*(const Color& l, const Color& r)
     {
@@ -65,6 +70,7 @@ namespace lost
 
       return result;
     }
+
 
     bool operator ==(const Color& l, const Color& r)
     {

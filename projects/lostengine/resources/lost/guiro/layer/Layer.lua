@@ -44,8 +44,6 @@ function Layer:bounds(...)
   else
     return self._bounds
   end
---  self:updateZ()
-  self:needsLayout()
 end
 
 function Layer:superlayer(...)
@@ -127,6 +125,9 @@ end
 
 function Layer:needsLayout()
   lost.guiro.updateManager():layerNeedsLayout(self)
+  for _,l in pairs(self.sublayers) do
+    l:needsLayout()
+  end
 end
 
 function Layer:needsDisplay()

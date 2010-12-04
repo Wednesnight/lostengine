@@ -17,17 +17,38 @@ local Vec3 = lost.math.Vec3
 local Rect = lost.math.Rect
 local MatrixTranslation = lost.math.MatrixTranslation
 
-function View:constructor()
+-- optional params:
+-- id: the id/name of this view, can be used for debug output or to find views in the hierarchy. ids don't have to be unique
+-- bounds: the bounds of this view
+-- sublayers: must only contain layers, will be added to this views layers
+-- subviews: must only contain views, ill be added to this view as subviews
+-- listeners: event listener functions at this view level
+function View:constructor(args)
 	self.layer = lost.guiro.layer.Layer()
+  local t = args or {}
+  self.id = t.id or "view"
+  if t.sublayers then
+    for _,v in ipairs(t.sublayers) do
+      self.layer:addSublayer(v)
+    end
+  end
+  if t.subviews then
+    for _,v in ipairs(t.subviews) do
+      self:addSubview(v)
+    end
+  end
 	self.z = 0
   self._superview = nil
   self.subviews = {}
   self.captureEventDispatcher = EventDispatcher()
   self.targetEventDispatcher = EventDispatcher()
   self.bubbleEventDispatcher = EventDispatcher()
-  self._bounds = lost.guiro.Bounds(0,0,"1","1")
+  if t.bounds ~=nil then
+    self:bounds(lost.guiro.Bounds(unpack(t.bounds)))
+  else
+    self:bounds(lost.guiro.Bounds(0,0,"1","1"))
+  end
   self.rect = lost.math.Rect()
-  self.id = "view"
 end
 
 function View:bounds(...)
@@ -37,8 +58,6 @@ function View:bounds(...)
   else
     return self._bounds
   end
---  self:updateZ()
-  self:needsLayout()
 end
 
 function View:superview(...)
@@ -80,7 +99,7 @@ end
 
 function View:addSubview(view)
   if view:superview() ~= nil then view:removeFromSuperview() end
-  table.insert(self.subview, views)
+  table.insert(self.subviews, view)
   self.layer:addSublayer(view.layer)
   view:superview(self)
   view:needsLayout()
@@ -88,7 +107,8 @@ end
 
 -- shortcut for construction of view hierarchies, just pass an array of views
 function View:add(views)
-  for _,v in ipairs(t) do
+  for _,v in ipairs(views) do
+    log.debug(_..tostring(v))
     self:addSubview(v)
   end
 end
@@ -131,6 +151,9 @@ end
 
 function View:needsLayout()
   lost.guiro.updateManager():viewNeedsLayout(self)
+  for _,v in pairs(self.subviews) do
+    v:needsLayout()
+  end
 end
 
 function View:needsDisplay()

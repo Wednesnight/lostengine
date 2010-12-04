@@ -7,6 +7,9 @@ require("lost.guiro.Quad")
 lost.common.Class "lost.guiro.layer.Text" "lost.guiro.layer.Layer" {}
 
 local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
+local MatrixTranslation = lost.math.MatrixTranslation
+local Color = lost.common.Color
 
 -- valid params:
 -- * all layer params

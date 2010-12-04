@@ -47,6 +47,7 @@ namespace lost
             .def(tostring(self))
             .def(self * other<Color>())
             .def(self * other<float>())
+            .def("premultiplied", &Color::premultiplied)
             .property("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
             .property("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)
             .property("b", (float(Color::*)() const)&Color::b, (void(Color::*)(float))&Color::b)

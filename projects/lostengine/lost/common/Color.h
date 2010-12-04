@@ -34,7 +34,10 @@ namespace lost
        void au8(uint8_t v);
       
       float fv[4];
+
+      Color premultiplied(); // creates a new color object from the current one with color values premultiplied with alpha
     };
+
 
     lost::common::Color operator*(const Color& l, const Color& r);
     lost::common::Color operator*(const Color& l, float);
