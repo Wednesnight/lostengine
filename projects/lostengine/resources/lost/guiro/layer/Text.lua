@@ -20,13 +20,13 @@ function Text:constructor(args)
   lost.guiro.layer.Layer.constructor(self, args)
   local t = args or {}
   if t.font ~= nil then -- font must contain a name and a size in this order
-    self.font = tasklet.fontManager:getFont(t.font[1], t.font[2])
+    self._font = tasklet.fontManager:getFont(t.font[1], t.font[2])
   else
     log.warn("Text layer '"..self.id.."' constructed without font!")
-    self.font = nil
+    self._font = nil
   end
   self.id = t.id or "text"
-  self.text = t.text or ""
+  self._text = t.text or ""
   self.mesh = lost.font.RenderedText.create()
   self.mesh.material.shader = lost.guiro.shaderFactory():texture()
   self.mesh.material.color = t.color or Color(1,1,1)
@@ -71,8 +71,8 @@ end
 
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
-  if self.font then
-    self.font:render(self.text, self.mesh)
+  if self._font then
+    self._font:render(self._text, self.mesh)
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
   end
@@ -80,6 +80,25 @@ function Text:updateDisplay()
 end
 
 function Text:text(s)
-  self.text = s
+  self._text = s
   self:needsDisplay()
+end
+
+function Text:font(v)
+  self._font = v
+  self:needsDisplay()
+end
+
+function Text:color(v)
+  self.mesh.material.color = v
+end
+
+function Text:valign(v)
+  self._valign = v
+  self:needsLayout()
+end
+
+function Text:halign(v)
+  self._halign = v
+  self:needsLayout()
 end
