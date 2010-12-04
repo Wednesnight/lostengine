@@ -82,37 +82,37 @@ function UpdateManager:addElementToQ(q, e)
 end
 
 function UpdateManager:layerNeedsUpdate(layer)
-  log.debug("layer needs update: ("..layer.z..") "..layer.id)
+--  log.debug("layer needs update: ("..layer.z..") "..layer.id)
   self:addElementToQ(self._layerUpdateQ, layer)
   self:scheduleUpdateIfNeeded()
 end
 
 function UpdateManager:layerNeedsLayout(layer)
-  log.debug("layer needs layout: ("..layer.z..") "..layer.id)
+--  log.debug("layer needs layout: ("..layer.z..") "..layer.id)
   self:addElementToQ(self._layerLayoutQ, layer)
   self:scheduleUpdateIfNeeded()
 end
 
 function UpdateManager:layerNeedsDisplay(layer)
-  log.debug("layer needs display: ("..layer.z..") "..layer.id)
+--  log.debug("layer needs display: ("..layer.z..") "..layer.id)
   self:addElementToQ(self._layerDisplayQ, layer)
   self:scheduleUpdateIfNeeded()
 end
 
 function UpdateManager:viewNeedsUpdate(view)
-  log.debug("view needs update: ("..view.z..") "..view.id)
+--  log.debug("view needs update: ("..view.z..") "..view.id)
   self:addElementToQ(self._viewUpdateQ, view)
   self:scheduleUpdateIfNeeded()
 end
 
 function UpdateManager:viewNeedsLayout(view)
-  log.debug("view needs layout: ("..view.z..") "..view.id)
+--  log.debug("view needs layout: ("..view.z..") "..view.id)
   self:addElementToQ(self._viewLayoutQ, view)
   self:scheduleUpdateIfNeeded()
 end
 
 function UpdateManager:viewNeedsDisplay(view)
-  log.debug("view needs display: ("..view.z..") "..view.id)
+--  log.debug("view needs display: ("..view.z..") "..view.id)
   self:addElementToQ(self._viewDisplayQ, view)
   self:scheduleUpdateIfNeeded()
 end

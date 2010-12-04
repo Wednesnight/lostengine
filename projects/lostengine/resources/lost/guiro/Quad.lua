@@ -4,6 +4,8 @@ require("lost.common.Class")
 
 lost.common.Class "lost.guiro.Quad" {}
 
+local Vec2 = lost.math.Vec2
+
 -- basic geometry for guiro layers.
 -- encapsulates rules for mesh creation, a mesh instance, and provides helper functions for 
 -- geometry updates.

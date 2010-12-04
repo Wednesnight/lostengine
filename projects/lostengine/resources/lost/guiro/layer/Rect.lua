@@ -57,7 +57,7 @@ function Rect:constructor(args)
     self.mesh.material.uniforms:setFloat("width", self.width)
   end
 
-  self.mesh.material.color = t.color or lost.common.Color(1,1,1)
+  self.mesh.material.color = t.color:premultiplied() or lost.common.Color(1,1,1)
 
   if self.gradientName then
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
