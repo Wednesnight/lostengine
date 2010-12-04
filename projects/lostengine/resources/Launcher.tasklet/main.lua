@@ -5,9 +5,7 @@ require("lost.guiro.layer.Text")
 
 local Color = lost.common.Color
 
-function drop(event)
-  tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(event.filename))
-end
+local running = true
 
 function startup()
   local ui = lost.guiro.ui()
@@ -17,6 +15,12 @@ function startup()
     {
       id = "anotherView",
       bounds = {0,0,"1","1"},
+      listeners =
+      {
+        drop = function (event)
+          tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(event.filename))
+        end
+      },
       sublayers = 
       {
         lost.guiro.layer.Rect
@@ -50,15 +54,6 @@ function startup()
           radius = 8,
           filled = true
         },
---[[        lost.guiro.layer.RoundedRect
-        {
-          id = "centerTextFrame",
-          bounds = {"center", "center", ".6", 60},
-          color = Color(0, 0, 0, 1),
-          radius = 8,
-          filled = false,
-          width = 1
-        },]]
         lost.guiro.layer.Text
         {
           id="dropMessage",
@@ -88,13 +83,16 @@ function startup()
       }
     }
   }
-  ui:addEventListener("drop", drop)
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  return true
+  return running
+end
+
+function update()
+  return running
 end
 
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    tasklet.window:close()
+    running = false
   end
 end

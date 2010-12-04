@@ -27,16 +27,7 @@ function View:constructor(args)
 	self.layer = lost.guiro.layer.Layer()
   local t = args or {}
   self.id = t.id or "view"
-  if t.sublayers then
-    for _,v in ipairs(t.sublayers) do
-      self.layer:addSublayer(v)
-    end
-  end
-  if t.subviews then
-    for _,v in ipairs(t.subviews) do
-      self:addSubview(v)
-    end
-  end
+  self.rect = lost.math.Rect()
 	self.z = 0
   self._superview = nil
   self.subviews = {}
@@ -48,7 +39,22 @@ function View:constructor(args)
   else
     self:bounds(lost.guiro.Bounds(0,0,"1","1"))
   end
-  self.rect = lost.math.Rect()
+
+  if t.sublayers then
+    for _,v in ipairs(t.sublayers) do
+      self.layer:addSublayer(v)
+    end
+  end
+  if t.subviews then
+    for _,v in ipairs(t.subviews) do
+      self:addSubview(v)
+    end
+  end
+  if t.listeners then
+    for event,func in pairs(t.listeners) do
+      self:addEventListener(event, func)
+    end
+  end
 end
 
 function View:bounds(...)
