@@ -15,7 +15,6 @@ using "lost.math.MatrixTranslation"
 using "lost.math.MatrixRotZ"
 
 config = require("config")
-running = true
 dcl = nil
 sum = 0
 curwidth = 3
@@ -291,17 +290,11 @@ function startup()
   scene1.active = false
 
   layerTest()
-
-  return running
-end
-
-function update(dt)  
-  return running
 end
 
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    running = false
+    tasklet.running = false
   elseif event.key == lost.application.K_1 then
     scene1.active = true
     scene2.active = false

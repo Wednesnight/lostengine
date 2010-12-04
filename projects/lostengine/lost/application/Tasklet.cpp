@@ -58,7 +58,7 @@ namespace lost
       name = "<unnamed tasklet>";
 	    window = NULL;
       fontManager = FontManager::create(inLoader);
-
+      running = true;
       scriptLoaded = false;
       configLoaded = false;
       loader = inLoader;
@@ -173,34 +173,30 @@ namespace lost
 
     bool Tasklet::startup()
     {    
-      bool result = true;
       if(hasLuaStartup)
       {
-        result = call_function<bool>(lsh->luaStartup);
+        call_function<bool>(lsh->luaStartup);
       }
       updateQueue->process(this);      
-      return result;
+      return running;
     }
 
     bool Tasklet::update(double deltaSeconds)
     {
-      bool result = true;
       if(hasLuaUpdate)
       {
-        result = call_function<bool>(lsh->luaUpdate, deltaSeconds);
+        call_function<bool>(lsh->luaUpdate, deltaSeconds);
       }
       updateQueue->process(this);      
-      return  result;      
+      return  running;      
     }
 
-    bool Tasklet::shutdown()
+    void Tasklet::shutdown()
     {
-      bool result = true;
       if(hasLuaShutdown)
       {
-        result = call_function<bool>(lsh->luaShutdown);
+        call_function<bool>(lsh->luaShutdown);
       }
-      return  result;      
     }
     
     void Tasklet::createWindow(const WindowParams& params)

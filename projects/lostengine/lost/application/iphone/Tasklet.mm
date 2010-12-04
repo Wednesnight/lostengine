@@ -70,8 +70,8 @@ namespace lost
     {
       DOUT("");
       init();
-
-      if(startup())
+      startup()
+      if(running)
       {
         isAlive = true;
 
@@ -92,7 +92,8 @@ namespace lost
 
     void Tasklet::run()
     {
-        if(update())
+        update()
+        if(running)
         {
           window->context->makeCurrent();
           window->context->defaultFramebuffer();
