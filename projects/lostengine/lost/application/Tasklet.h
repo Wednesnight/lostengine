@@ -46,10 +46,10 @@ namespace lost
       virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
       virtual void cleanup(); // cleanup all resources; called from platform specific implementation
 
-  	  virtual bool startup();                       // called once in run, return false if startup fails
-      virtual bool update(double deltaSeconds);     // called repeatedly in run, return false if you want to shutdown
+  	  virtual bool startup();                       // called once in run, returns this->running
+      virtual bool update(double deltaSeconds);     // called repeatedly in run, returns this->running
       virtual void render();                        // called repeatedly in run
-      virtual bool shutdown();                      // called once in run, return false if shutdown failed
+      virtual void shutdown();                      // called once in run
 
       void createWindow(const WindowParams& params);
       void closeWindow(WindowEventPtr event);
@@ -70,7 +70,7 @@ namespace lost
       rg::NodePtr                     renderNode;     // render graph root node
       rg::NodePtr                     uiNode;         // guiro.Screen will add its render nodes here
       QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
-      
+      bool                            running;        // tasklet will shutdown if this flag is set to false
 
       Tasklet(lost::resource::LoaderPtr inLoader = resource::DefaultLoader::create());
       virtual ~Tasklet();

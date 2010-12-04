@@ -5,8 +5,6 @@ require("lost.guiro.layer.Text")
 
 local Color = lost.common.Color
 
-local running = true
-
 function startup()
   local ui = lost.guiro.ui()
   ui:add
@@ -84,15 +82,11 @@ function startup()
     }
   }
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-  return running
 end
 
-function update()
-  return running
-end
 
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    running = false
+    tasklet.running = false
   end
 end

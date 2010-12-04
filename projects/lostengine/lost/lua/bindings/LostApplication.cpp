@@ -280,6 +280,7 @@ namespace lost
             .def_readonly("renderNode", &Tasklet::renderNode)
             .def_readonly("uiNode", &Tasklet::uiNode)
             .def_readonly("fontManager", &Tasklet::fontManager)
+            .def_readwrite("running", &Tasklet::running)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
         ]
       ];

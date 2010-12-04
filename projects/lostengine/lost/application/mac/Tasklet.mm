@@ -45,15 +45,15 @@ namespace lost
           window->context->makeCurrent();
         }
 
-        if (startup()) {
+        startup();
+        if (running) {
 
           double framerate = config.framerate;
           double offset = timer.getTime();
 
-          bool running = true;
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running) {
             processEvents();
-            running = update(framerate);
+            update(framerate);
             render();
             if(waitForEvents) { eventDispatcher->waitForEvents(); }
 
