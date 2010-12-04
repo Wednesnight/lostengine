@@ -7,6 +7,7 @@ dcl.rg:Node
   dcl.rg:DepthTest{false},
   dcl.rg:Camera2D { viewport = Rect(0,0,config.window.width, config.window.height) },    
 
+--[[
   meshFactory:createComboRectNode(gray2, gray1, Rect(left,390,200,200), 27, 2),
   meshFactory:iqcreateComboRectNode(gray2, gray1, Rect(right,390,200,200), 27, 2),
   
@@ -31,4 +32,5 @@ dcl.rg:Node
   dcl.rg:Draw { mesh = meshFactory:iqcreateRoundedRectFrame(white, Rect(right,180, 10, 10), r,w) },
 
   dcl.rg:Draw { mesh = meshFactory:createBox(white, Rect(right,10, 400, 400)) },
+  ]]
 }

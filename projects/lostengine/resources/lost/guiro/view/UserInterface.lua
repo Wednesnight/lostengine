@@ -4,7 +4,6 @@ require("lost.guiro.view.View")
 require("lost.guiro.event.EventManager")
 require("lost.guiro.TextureManager")
 require("lost.common.ShaderFactory")
-require("lost.common.MeshFactory")
 
 local _ui = nil
 lost.guiro.ui = function()
