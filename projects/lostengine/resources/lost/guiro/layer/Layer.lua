@@ -162,3 +162,28 @@ end
 function Layer:updateDisplay()
   log.debug("-- layer update display ("..self.z..") "..self.id)
 end
+
+function Layer:__call(layerId)
+  local result = nil
+  for k,layer in pairs(self.sublayers) do
+    if (layer.id == layerId) then
+      result = layer
+      break
+    end
+  end
+  return result
+end
+
+--breadth-first search for subview with given id
+function Layer:recursiveFindById(layerId)
+  local result = self(layerId)
+  if result == nil then
+    for k,layer in pairs(self.sublayers) do
+      result = layer:recursiveFindById(layerId)
+      if result ~= nil then
+        break
+      end
+    end
+  end
+  return result
+end

@@ -1,42 +1,53 @@
--- Guiroscope main.lua
-
 require("lost.declarative.Context")
+require("lost.guiro.view.Label")
+require("lost.guiro.layer.Text")
 
-using "lost.application.WindowParams"
-using "lost.math.Rect"
-using "lost.math.Vec2"
-using "lost.math.Vec3"
-using "lost.common.Color"
-
--- these are deliberately global so we can access them from startup/update/shutdown
-dcl = nil
-ui = nil
+local Color = lost.common.Color
 
 function startup()
-  log.debug("starting up")
-
-  -- running state
-  running = true
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-
-  dcl = lost.declarative.Context(tasklet.loader)
-  ui = require("ui")
+  local ui = lost.guiro.ui()
+  ui:add
+  {
+    lost.guiro.view.View
+    {
+      listeners = 
+      {
+        mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target.rect)) end,
+        mouseLeave = function(event) log.debug("leave "..event.target.id) end,
+        mouseDown = function(event) log.debug("down "..event.target.id) end,
+        mouseUp = function(event) log.debug("up "..event.target.id) end,
+        mouseUpInside = function(event) log.debug("up inside "..event.target.id) end,
+        mouseUpOutside = function(event) log.debug("up outside "..event.target.id) end,
+        buttonClick = function(event) log.debug("CLICKED "..event.target.id) end,
+        mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
+      },
+      subviews=
+      {
+        lost.guiro.view.Label
+        {
+          bounds = {0,0,"1","1"},
+          text = "hello",
+          font = {"Vera", 12},
+          color = Color(0,0,0),
+          halign = "center",
+          valign = "center",
+          sublayers = 
+          {
+            lost.guiro.layer.Text
+            {
+          
+            }
+          }
+        }
+      }
+    }
+  }
   ui:printSubviews()
-
-  return true
-end
-
-function update()
-  return running
-end
-
-function shutdown()
-  log.debug("shutting down")
-  return true
 end
 
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    running = false
+    tasklet.running = false
   end
 end
