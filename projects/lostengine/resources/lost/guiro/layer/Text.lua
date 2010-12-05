@@ -1,6 +1,6 @@
 module("lost.guiro.layer", package.seeall)
 
-require("lost.guiro.Singletons")
+require("lost.common.ShaderFactory")
 require("lost.guiro.Bounds")
 require("lost.guiro.Quad")
 

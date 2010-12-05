@@ -55,6 +55,7 @@ function View:constructor(args)
       self:addEventListener(event, func)
     end
   end
+  lost.guiro.themeManager():apply(self, "pebble", "default", args)
 end
 
 function View:bounds(...)
@@ -114,7 +115,7 @@ end
 -- shortcut for construction of view hierarchies, just pass an array of views
 function View:add(views)
   for _,v in ipairs(views) do
-    log.debug(_..tostring(v))
+--    log.debug(_..tostring(v))
     self:addSubview(v)
   end
 end

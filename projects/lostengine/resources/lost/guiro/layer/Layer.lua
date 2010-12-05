@@ -1,7 +1,7 @@
 module("lost.guiro.layer", package.seeall)
 
 require("lost.guiro.Bounds")
-require("lost.guiro.Singletons")
+require("lost.guiro.UpdateManager")
 
 lost.common.Class "lost.guiro.layer.Layer" {}
 

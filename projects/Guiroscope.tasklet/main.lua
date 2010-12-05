@@ -28,17 +28,6 @@ function startup()
         {
           bounds = {0,0,"1","1"},
           text = "hello",
-          font = {"Vera", 12},
-          color = Color(0,0,0),
-          halign = "center",
-          valign = "center",
-          sublayers = 
-          {
-            lost.guiro.layer.Text
-            {
-          
-            }
-          }
         }
       }
     }
