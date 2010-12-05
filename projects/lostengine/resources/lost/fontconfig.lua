@@ -10,4 +10,5 @@ return
   ["Vera mono"] = "lost/resources/ttf-bitstream-vera-1.10/VeraMono.ttf",
   ["Vera serif"] = "lost/resources/ttf-bitstream-vera-1.10/VeraSe.ttf",
   ["Vera serif bold"] = "lost/resources/ttf-bitstream-vera-1.10/VeraSeBd.ttf",
+  ["Grinched"] = "lost/resources/grinched/Grinched.ttf",
 }

@@ -47,7 +47,7 @@ function startup()
         lost.guiro.layer.RoundedRect
         {
           id = "centerTextBg",
-          bounds = {"center", "center", ".6", ".4"},
+          bounds = {"center", "center", ".7", ".4"},
           color = Color(1, 1, 1,1),
           radius = 8,
           filled = true
@@ -56,7 +56,7 @@ function startup()
         {
           id="dropMessage",
           bounds = {"center", "center", ".6", ".4"},
-          font = {"Vera", 14},
+          font = {"Grinched", 28},
           text = "Drop tasklet directory here!",
           color = Color(0,0,0)          
         },
@@ -64,7 +64,7 @@ function startup()
         lost.guiro.layer.RoundedRect
         {
           id = "leftCutout",
-          bounds = {"left", "center", ".15", ".4"},
+          bounds = {"left", "center", ".10", ".4"},
           color = Color(1, 1, 1),
           radius = 8,
           filled = true,
@@ -72,7 +72,7 @@ function startup()
         lost.guiro.layer.RoundedRect
         {
           id = "rightCutout",
-          bounds = {"right", "center", ".15", ".4"},
+          bounds = {"right", "center", ".10", ".4"},
           color = Color(1, 1, 1),
           radius = 8,
           filled = true,
