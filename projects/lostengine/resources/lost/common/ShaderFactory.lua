@@ -4,6 +4,13 @@ require("lost.common.Class")
 
 lost.common.Class "lost.common.ShaderFactory" {}
 
+lost.guiro.shaderFactory = function()
+  if not _shaderFactory then
+    _shaderFactory = lost.common.ShaderFactory(tasklet.loader)
+  end
+  return _shaderFactory
+end
+
 function ShaderFactory:constructor(loader)
   self.loader = loader
   self.cache = {}

@@ -1,50 +1,30 @@
--- lost.guiro.ThemeManager
 module("lost.guiro", package.seeall)
 
 require("lost.common.Class")
---require("lost.guiro.themes.default.Theme")
---require("lost.guiro.themes.pebble.Theme")
 
 lost.common.Class "lost.guiro.ThemeManager" {}
 
+require("lost.guiro.themes.Pebble")
+
 function ThemeManager:constructor(loader)
   self.themes = {}
-  self.defaultTheme = "default"
+  self.defaultTheme = "pebble"
   self.defaultStyle = "default"
-  self.textureManager = textureManager
---  self:addTheme(lost.guiro.themes.default.Theme(loader))
---  self:addTheme(lost.guiro.themes.pebble.Theme(loader))
+  self:addTheme(lost.guiro.themes.Pebble())
 end
 
 function ThemeManager:addTheme(theme)
-  theme.themeManager = self
+--  log.debug("/// adding theme: "..theme.name)
   self.themes[theme.name] = theme
 end
 
-function ThemeManager:apply(target, themeName, styleName, def)
+function ThemeManager:apply(target, themeName, styleName, args)
+    
+  local theme = self.themes[themeName]
+  if not theme then
+    log.warn("--- couldn't find theme '"..theme.."'")
+    return
+  end
 --  log.debug("apply theme '"..themeName.."' style '"..styleName.."' to instance of "..target:className())
-  
-  -- FIXME: this will fail horribly if target is not an instance of a class declared with lost.common.Class.
-  -- we should probably add more error checks here
-  local targetClassName = target:className()
-  
-  local currentTheme = self.themes[themeName]
-  if not currentTheme then
-    log.warn("--- couldn't find theme '"..themeName.."'")
-    return
-  end
-  
-  local classStyles = currentTheme.styles[targetClassName]
-  if not classStyles then
-    log.warn("--- couldn't find styles for class '"..targetClassName.."' in theme '"..themeName.."'")
-    return 
-  end
-  
-  local style = classStyles[styleName]
-  if not style then 
-    log.warn("--- couldn't find style named '"..tostring(styleName).."' in theme '"..themeName.."' for class '"..targetClassName.."'")
-    return
-  end
-  
-  style:apply(target, def)
+  theme:apply(target, styleName, args)
 end
