@@ -13,15 +13,20 @@ Button.STATE_PUSHED = "pushed"
 Button.STATE_DISABLED = "disabled"
 
 function Button:constructor(args)
-	lost.guiro.view.View.constructor(self, args)
+  self.titles = {} -- one string per state
+  self.titleColors = {} -- color for title per state
+  self.backgrounds = {} -- each state has a dedicated layer
+  self.textLayer = nil -- only one layer that holds the current title
+  self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}
+	self:state(Button.STATE_NORMAL)
+
+	lost.guiro.view.View.constructor(self, args) -- call after aall members that are required for style are setup
+
   local t = args or {}
   self.id = t.id or "button"
-	self._state = Button.STATE_NORMAL
-  self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}
 	self._enabled = true
   self._pushed = false;
 
-  self._titles = {} -- one string per state
 
   self._handlerMaps = {}
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
@@ -38,8 +43,9 @@ function Button:constructor(args)
   self:needsLayout()
 end
 
-function Button:pushed(val)
-  if val ~= nil then
+function Button:pushed(...)
+  if arg.n >= 1 then
+    local val = arg[1]
     if val then 
       self._pushed = true
     else
@@ -175,9 +181,31 @@ function Button:dispatchButtonEvent(name)
   self:dispatchEvent(event)  
 end
 
+function Button:updateDisplay()
+  lost.guiro.view.View.updateDisplay(self)
+  -- show active background layer or normal by default
+  local current = self.backgrounds[self._state]
+  if not current then
+    current = self.backgrounds[Button.STATE_NORMAL]
+  end
+  if not current then
+    log.warn("no current background found!")
+    return
+  end
+  for _,v in pairs(self.backgrounds) do
+    if not rawequal(current, v) then
+      v:hidden(true)
+    else
+      v:hidden(false)
+    end
+  end
+
+end
+
 function Button:state(newState)
-  if newState ~= nil then
+  if newState ~= nil and (newState ~= self._state) then
     self._state = newState
+    self:needsDisplay()
     -- FIXME: update display
   else
     return self._state

@@ -187,3 +187,12 @@ function Layer:recursiveFindById(layerId)
   end
   return result
 end
+
+-- true to hide layer, false to show, no params to get current setting
+function Layer:hidden(...)
+  if arg.n>=1 then
+    self.renderNode.active = not arg[1]
+  else
+    return not self.renderNode.active
+  end
+end
