@@ -37,23 +37,24 @@ function startup()
           bounds = {50,0,100,30},
           text = "Button",
         },
+
         lost.guiro.view.Button
         {
-          bounds = {50,70,100,50},
+          bounds = {50,{"top",-10},154,50},
           text = "Rounded Regular",
           style = "rounded",
           size = "regular"
         },
         lost.guiro.view.Button
         {
-          bounds = {50,90,100,70},
+          bounds = {50,{"top",-30},154,70},
           text = "Rounded Small",
           style = "rounded",
           size = "small"
         },
         lost.guiro.view.Button
         {
-          bounds = {50,110,100,90},
+          bounds = {50,{"top",-50},154,90},
           text = "Rounded Mini",
           style = "rounded",
           size = "mini"

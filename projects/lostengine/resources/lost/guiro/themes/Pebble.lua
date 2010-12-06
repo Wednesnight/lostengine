@@ -159,7 +159,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.View", "gray", function(target, args) self:viewGray(target, args) end)
   
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
-  self.buttonRoundedFonts = {mini={"Vera", 8}, small={"Vera", 10}, regular={"Vera", 12}}
+  self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
 --  self:addStyle("lost.guiro.view.View", "default", function(target, args) self:viewGray(target, args) end)
 end
@@ -207,9 +207,11 @@ function Pebble:buttonRounded(target,args)
   local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="rrbg2",filled=true,radius=r},
                               rr{bounds={0,0,"1","1"},color=self.buttonRoundedFrameCol,filled=false,radius=r}}
                              }
-  local text = lost.guiro.layer.Text{bounds = {0,0,"1","1"},font = {"Vera",12}}
+  local text = lost.guiro.layer.Text{bounds = {0,0,"1","1"},font = self.buttonRoundedFonts[size], color=Color(0,0,0),text="Rounded Button"}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
+  target.layer:addSublayer(text)
+  target.textLayer = text
   target.backgrounds[b.STATE_NORMAL] = normal
   target.backgrounds[b.STATE_PUSHED] = pushed
 end
