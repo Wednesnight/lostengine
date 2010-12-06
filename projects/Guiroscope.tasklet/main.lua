@@ -34,12 +34,8 @@ function startup()
         },
         lost.guiro.view.Button
         {
-          bounds = {50,50,100,100},
+          bounds = {50,50,100,30},
           text = "Button",
-          sublayers = 
-          {
-            lost.guiro.layer.Rect{id="buttonBg", color=Color(1,0,0)}
-          }
         }
       }
     }

@@ -73,7 +73,38 @@ end
 
 function Pebble:buttonGray(target,args)
   local b = lost.guiro.view.Button
-  
+  local normal = lost.guiro.layer.RoundedRect{
+    bounds = {0,0,"1","1"},
+    color = Color(1,0,0),
+    filled = true,
+    radius = 8
+  }
+--[[  local hover = lost.guiro.layer.RoundedRect{
+    bounds = {0,0,"1","1"},
+    color = Color(1,.5,0),
+    filled = true,
+    radius = 8
+  }]]
+  local pushed = lost.guiro.layer.RoundedRect{
+    bounds = {0,0,"1","1"},
+    color = Color(1,1,0),
+    filled = true,
+    radius = 8
+  }
+  local disabled = lost.guiro.layer.RoundedRect{
+    bounds = {0,0,"1","1"},
+    color = Color(.3,.3,.3),
+    filled = true,
+    radius = 8
+  }
+  target.layer:addSublayer(normal)
+--  target.layer:addSublayer(hover)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(disabled)
+  target.backgrounds[b.STATE_NORMAL] = normal
+--  target.backgrounds[b.STATE_HOVER] = hover
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_DISABLED] = disabled
 end
 
 function Pebble:viewGray(target, args)
