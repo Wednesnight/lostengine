@@ -26,6 +26,7 @@
 #include "lost/gl/gl.h"
 #include <boost/filesystem.hpp>
 #include "lost/font/FontManager.h"
+#include "lost/application/ResizeEvent.h"
 
 using namespace boost;
 using namespace luabind;
@@ -50,6 +51,12 @@ namespace lost
       luabind::object luaShutdown;
       luabind::object config;
     };
+
+    void Tasklet::updateWindowSize(const application::ResizeEventPtr& event)
+    {
+      DOUT("-- updating window size: "<<event->width<<" "<<event->height);
+      window->size = math::Vec2(event->width, event->height);
+    }
       
     Tasklet::Tasklet(LoaderPtr inLoader)
     {
@@ -78,6 +85,7 @@ namespace lost
       // publish global utility functions
       GlobalFunctions::install(*lua);
       lsh.reset(new LuaStateHelper);
+      eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Tasklet::updateWindowSize, this, _1)));      
     }
     
     Tasklet::~Tasklet()
@@ -91,10 +99,6 @@ namespace lost
 
       lua->doString("require 'lost/common/FontInit'");
       configLoaded = config.load(lua, loader);
-      WindowParams windowParams;
-      
-      windowParams.caption = config.windowTitle;
-      windowParams.rect = config.windowRect;
       name = config.taskletName;
       waitForEvents = config.taskletWaitForEvents;
       // try to load the main script and memorize result in a flag
@@ -107,21 +111,9 @@ namespace lost
       {
         DOUT("couldn't load script 'main.lua', reason: "+ string(ex.what()));
       }
-
-      // try to extract window params and flag from interpreter
-      // the values are optional and set as globals
-      // they will only be used if no config was loaded!
-      if(!configLoaded)
-      {
-        luabind::object obj = lua->globals["windowParams"];
-        if(obj)
-        {
-          windowParams = object_cast<WindowParams>(obj);
-        }
-      }
       if(config.taskletHasWindow)
       {
-        createWindow(windowParams);
+        createWindow();
       }
             
       // get lua functions if they are present
@@ -199,9 +191,9 @@ namespace lost
       }
     }
     
-    void Tasklet::createWindow(const WindowParams& params)
+    void Tasklet::createWindow()
     {
-      window = new Window(eventDispatcher, params);
+      window = new Window(eventDispatcher, &config);
       window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(bind(&Tasklet::closeWindow, this, _1)));
       window->open();        
     }

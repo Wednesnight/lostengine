@@ -260,7 +260,7 @@ namespace lost
             .def_readwrite("height", &ResizeEvent::height)
         ]
       ];
-      globals(state)["lost"]["application"]["ResizeEvent"]["MAIN_WINDOW_RESIZE"] = ResizeEvent::MAIN_WINDOW_RESIZE();
+      globals(state)["lost"]["application"]["ResizeEvent"]["TASKLET_WINDOW_RESIZE"] = ResizeEvent::TASKLET_WINDOW_RESIZE();
     }
 
     void LostApplicationTasklet(lua_State* state)
@@ -348,12 +348,7 @@ namespace lost
             .def("open", &Window::open)
             .def("close", &Window::close)
             .def_readonly("context", &Window::context)
-            .def_readonly("params", &Window::params),
-
-          class_<WindowParams>("WindowParams")
-            .def(constructor<const std::string&, const lost::math::Rect&>())
-            .def_readwrite("caption", &WindowParams::caption)
-            .def_readwrite("rect", &WindowParams::rect)
+            .def_readonly("size", &Window::size)
         ]
       ];
     }

@@ -3,7 +3,6 @@ require("lost.common.Shaders")
 
 using "lost.math.Vec2"
 using "lost.math.Rect"
-using "lost.application.WindowParams"
 using "lost.common.Color"
 
 local taskletName = "MetaballTest"

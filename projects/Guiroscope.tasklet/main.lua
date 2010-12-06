@@ -28,6 +28,11 @@ function startup()
         {
           bounds = {0,0,"1","1"},
           text = "hello",
+        },
+        lost.guiro.view.Button
+        {
+          bounds = {50,50,100,100},
+          text = "Button"
         }
       }
     }

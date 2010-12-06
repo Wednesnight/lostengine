@@ -4,8 +4,6 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local Vec3 = lost.math.Vec3
 local Rect = lost.math.Rect
 
-windowParams = lost.application.WindowParams("Ivy", lost.math.Rect(200,200,640,480))
-
 rootNode = nil
 currentPicNode = nil -- receives a quad that draws the dropped bitmap at 0,0
 -- create a custom loader that takes absolute filepaths 
@@ -23,7 +21,6 @@ function startup()
     dcl.rg:Camera2D
     {
       name = "2D Cam",
-      viewport = Rect(0,0,windowParams.rect.width,windowParams.rect.height)
     },
     dcl.rg:DepthTest{false}
   }

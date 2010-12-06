@@ -26,7 +26,6 @@ struct BulletTest : public lost::application::Tasklet
   void resize(lost::application::ResizeEventPtr event);
 
 private:
-  lost::application::WindowParams windowParams;
   bool running;
 
   btBroadphaseInterface* broadphase;

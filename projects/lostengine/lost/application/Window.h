@@ -3,9 +3,8 @@
 
 #include "lost/gl/forward.h"
 #include "lost/event/forward.h"
-
-#include "lost/math/Rect.h"
-#include "lost/application/WindowParams.h"
+#include "lost/application/forward.h"
+#include "lost/math/Vec2.h"
 
 namespace lost
 {
@@ -38,13 +37,9 @@ namespace lost
        */
       gl::ContextPtr context;
 
-      /**
-       * holds generic window params
-       */
-      WindowParams params;
+      TaskletConfig* config;
       
-      Window(const event::EventDispatcherPtr& inDispatcher,
-             const WindowParams& inParams);
+      Window(const event::EventDispatcherPtr& inDispatcher, TaskletConfig* inConfig);
       ~Window();
 
       /**
@@ -58,6 +53,8 @@ namespace lost
        */
       // TODO: close event (wait for the new dispatcher machanism since this only makes sense when we're able to cancel the process)
       void close();
+      
+      math::Vec2 size; // current size of the window
     };
 
   }

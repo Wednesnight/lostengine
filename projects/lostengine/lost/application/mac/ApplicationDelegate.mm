@@ -16,16 +16,13 @@
     if(self = [super init])
     {
       // make this application multithreaded by spawning a dummy thread that exits immediately
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);
       [NSThread detachNewThreadSelector:@selector(dummyThread:) toTarget:self withObject:nil];
-      DOUT("isMultiThreaded: " << (bool)[NSThread isMultiThreaded]);        
     }
     return self;
 }
 
 - (void)applicationDidFinishLaunching: (NSNotification *)notification
 {
-  DOUT("applicationDidFinishLaunching");
   if (parent)
   {
     lost::shared_ptr<lost::application::ApplicationEvent> event(new lost::application::ApplicationEvent(lost::application::ApplicationEvent::RUN()));

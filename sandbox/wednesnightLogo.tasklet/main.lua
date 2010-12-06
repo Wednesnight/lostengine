@@ -3,7 +3,6 @@ require("Animator")
 require("LogoEntity")
 require("Fullscreen2DEntity")
 
-local WindowParams = lost.application.WindowParams
 local Rect = lost.math.Rect
 local Vec3 = lost.math.Vec3
 local Vec2 = lost.math.Vec2
@@ -12,7 +11,6 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotZ = lost.math.MatrixRotZ
 
 windowRect = Rect(200,200,640,480)
-windowParams = WindowParams("logo test", windowRect)
 
 local exportScreens = false
 local running = true

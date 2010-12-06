@@ -1,6 +1,5 @@
 #include "BulletTest.h"
 #include "lost/application/Window.h"
-#include "lost/application/WindowParams.h"
 #include "lost/math/Rect.h"
 #include "lost/common/Color.h"
 #include "lost/rg/ClearColor.h"
@@ -38,7 +37,6 @@ BulletTest::BulletTest()
 {
   name = "BulletTest";
   waitForEvents = false;
-  windowParams = WindowParams(name, Rect(100,100,640,480));
 }
 
 void BulletTest::init()
@@ -46,7 +44,6 @@ void BulletTest::init()
   Tasklet::init();
 
   // setup window
-  createWindow(windowParams);
 
   // setup event listeners
   window->dispatcher->addEventListener(ResizeEvent::MAIN_WINDOW_RESIZE(), receive<ResizeEvent>(bind(&BulletTest::resize, this, _1)));
@@ -61,7 +58,7 @@ bool BulletTest::startup()
   if(!Tasklet::startup())
     return false;
   
-  camera = Camera3D::create(Rect(0,0,windowParams.rect.width,windowParams.rect.height));
+  camera = Camera3D::create(Rect(0,0,));
   camera->position(Vec3(0,10,25));
   camera->target(Vec3(0,8,0));
   camera->depth(Vec2(1.0, 1000.0));

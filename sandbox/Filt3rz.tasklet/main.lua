@@ -7,7 +7,6 @@ using "lost.math.Rect"
 using "lost.common.Color"
 using "lost.camera.Camera2D"
 using "lost.camera.Camera3D"
-using "lost.application.WindowParams"
 using "lost.math.MatrixTranslation"
 
 fboSize = Vec2(256, 256)
@@ -16,7 +15,6 @@ numRows = 2
 screenSize = Vec2(fboSize.width * numPanels, fboSize.height * numRows)
 
 hasWindow = true
-windowParams = WindowParams("Filt3rz", Rect(50, 200, screenSize.width, screenSize.height))
 
 -- blur edge emboss sharpen
 -- radial ssao sepia heatsig

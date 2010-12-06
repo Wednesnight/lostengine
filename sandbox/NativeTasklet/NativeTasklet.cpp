@@ -1,5 +1,4 @@
 #include "NativeTasklet.h"
-#include "lost/application/WindowParams.h"
 #include "lost/math/Rect.h"
 #include "lost/common/Color.h"
 #include "lost/rg/ClearColor.h"

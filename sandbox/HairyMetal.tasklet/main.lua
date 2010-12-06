@@ -1,4 +1,3 @@
-windowParams = lost.application.WindowParams("HairyMetal",lost.math.Rect(0,0,320,480))
 
 function startup()
 	return true

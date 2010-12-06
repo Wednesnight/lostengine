@@ -65,7 +65,6 @@ bool TaskletConfig::load(lua::StatePtr interpreter, resource::LoaderPtr loader)
     luabind::object config = interpreter->globals["__tasklet_config"];
     if(luabind::type(config) == LUA_TTABLE)
     {
-      DOUT("tasklet confg loaded OK");
       parse(config, this);
       result = true;
     }

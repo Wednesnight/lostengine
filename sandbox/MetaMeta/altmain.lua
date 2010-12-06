@@ -2,7 +2,6 @@ log.debug("hello")
 
 require("lost.declarative.Context")
 
-using "lost.application.WindowParams"
 using "lost.math.Rect"
 using "lost.guiro.Bounds"
 using "lost.guiro.xabs"
@@ -23,8 +22,6 @@ using "lost.common.Color"
 using "lost.math.Rect"
 using "lost.math.Vec2"
 using "lost.math.Vec3"
-
-windowParams = WindowParams("hello",Rect(50,50,50,50))
 
 rootNode = nil
 dcl = nil

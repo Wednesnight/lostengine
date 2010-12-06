@@ -12,6 +12,7 @@
 #include "lost/application/mac/GLView.h"
 #import <AppKit/NSOpenGL.h>
 #include "lost/gl/Context.h"
+#include "lost/application/TaskletConfig.h"
 
 namespace lost
 {
@@ -26,13 +27,11 @@ namespace lost
 
     void Window::initialize()
     {
-      DOUT("Window::initialize()");
-
       // initialize hiddenMembers
       hiddenMembers = new WindowHiddenMembers;
 
       // create view
-      hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(params.rect.x, params.rect.y, params.rect.width, params.rect.height)];
+      hiddenMembers->view = [[GLView alloc] initWithFrame: NSMakeRect(config->windowRect.x, config->windowRect.y, config->windowRect.width, config->windowRect.height)];
 
       // create window
       hiddenMembers->window = [[ApplicationWindow alloc]
@@ -43,7 +42,7 @@ namespace lost
 
       // set params
       [hiddenMembers->window setParent: this];
-      [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:params.caption.c_str()]];
+      [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:config->windowTitle.c_str()]];
       [hiddenMembers->window setAcceptsMouseMovedEvents: YES];
       [hiddenMembers->window setContentView: hiddenMembers->view];
       [hiddenMembers->window setDelegate: hiddenMembers->window];
