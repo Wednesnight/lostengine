@@ -1,8 +1,8 @@
 module("lost.guiro.layer", package.seeall)
 
-require("lost.guiro.Singletons")
 require("lost.guiro.Bounds")
 require("lost.guiro.Quad")
+require("lost.guiro.TextureManager")
 
 lost.common.Class "lost.guiro.layer.Rect" "lost.guiro.layer.Layer" {}
 

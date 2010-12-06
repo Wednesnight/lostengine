@@ -1,6 +1,7 @@
 require("lost.declarative.Context")
 require("lost.guiro.view.Label")
 require("lost.guiro.layer.Text")
+require("lost.guiro.layer.Rect")
 
 local Color = lost.common.Color
 
@@ -11,6 +12,7 @@ function startup()
   {
     lost.guiro.view.View
     {
+      style="gray",
       listeners = 
       {
         mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target.rect)) end,
@@ -26,13 +28,18 @@ function startup()
       {
         lost.guiro.view.Label
         {
-          bounds = {0,0,"1","1"},
+          bounds = {200,200,100,30},
           text = "hello",
+          style="roundFramed"
         },
         lost.guiro.view.Button
         {
           bounds = {50,50,100,100},
-          text = "Button"
+          text = "Button",
+          sublayers = 
+          {
+            lost.guiro.layer.Rect{id="buttonBg", color=Color(1,0,0)}
+          }
         }
       }
     }

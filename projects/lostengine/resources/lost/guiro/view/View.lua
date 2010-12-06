@@ -6,6 +6,7 @@ require("lost.guiro.event.Event")
 require("lost.guiro.event.EventDispatcher")
 require("lost.common.CallLater")
 require("lost.guiro.layer.Layer")
+require("lost.guiro.ThemeManager")
 
 using "lost.guiro.event.Event"
 using "lost.guiro.event.EventDispatcher"
@@ -40,6 +41,7 @@ function View:constructor(args)
     self:bounds(lost.guiro.Bounds(0,0,"1","1"))
   end
 
+  lost.guiro.themeManager():apply(self, t.theme or lost.guiro.themeManager().defaultTheme, t.style or lost.guiro.themeManager().defaultStyle, args)
   if t.sublayers then
     for _,v in ipairs(t.sublayers) do
       self.layer:addSublayer(v)
@@ -55,7 +57,6 @@ function View:constructor(args)
       self:addEventListener(event, func)
     end
   end
-  lost.guiro.themeManager():apply(self, "pebble", "default", args)
 end
 
 function View:bounds(...)
@@ -183,7 +184,7 @@ function View:updateLayout()
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
   log.debug(tostring(self.rect))
-  self.layer:bounds(lost.guiro.Bounds(0,0,self.rect.width, self.rect.height))
+  self.layer:bounds(lost.guiro.Bounds(self.rect.x,self.rect.y,self.rect.width, self.rect.height))
   self.layer:needsLayout()
 end
 

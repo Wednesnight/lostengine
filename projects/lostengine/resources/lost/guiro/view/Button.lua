@@ -35,6 +35,7 @@ function Button:constructor(args)
   self:addEventListener("mouseDown", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseUpInside", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseUpOutside", function(event) self:eventHandler(event) end)	
+  self:needsLayout()
 end
 
 function Button:pushed(val)

@@ -1,7 +1,6 @@
 module("lost.guiro.view", package.seeall)
 
 require("lost.guiro.view.View")
-require("lost.guiro.Singletons")
 
 lost.common.Class "lost.guiro.view.Label" "lost.guiro.view.View" {}
 

@@ -4,6 +4,13 @@ require("lost.common.Class")
 
 lost.common.Class "lost.guiro.ThemeManager" {}
 
+function themeManager()
+  if not _themeManager then
+    _themeManager = lost.guiro.ThemeManager(tasklet.loader)
+  end
+  return _themeManager
+end
+
 require("lost.guiro.themes.Pebble")
 
 function ThemeManager:constructor(loader)
