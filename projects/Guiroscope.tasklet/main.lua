@@ -34,8 +34,29 @@ function startup()
         },
         lost.guiro.view.Button
         {
-          bounds = {50,50,100,30},
+          bounds = {50,0,100,30},
           text = "Button",
+        },
+        lost.guiro.view.Button
+        {
+          bounds = {50,70,100,50},
+          text = "Rounded Regular",
+          style = "rounded",
+          size = "regular"
+        },
+        lost.guiro.view.Button
+        {
+          bounds = {50,90,100,70},
+          text = "Rounded Small",
+          style = "rounded",
+          size = "small"
+        },
+        lost.guiro.view.Button
+        {
+          bounds = {50,110,100,90},
+          text = "Rounded Mini",
+          style = "rounded",
+          size = "mini"
         }
       }
     }
