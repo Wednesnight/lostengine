@@ -1,7 +1,6 @@
 require("lost.declarative.Context")
 require("lost.guiro.view.RenderView")
 
-using "lost.application.WindowParams"
 using "lost.math.Rect"
 using "lost.declarative.Context"
 

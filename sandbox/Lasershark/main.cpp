@@ -143,7 +143,6 @@ public:
     windowWidth = 512;
     windowHeight = 512;
     ds = 0;
-    mainWindow = app->createWindow("window", WindowParams("Application", lost::math::Rect(100, 100, windowWidth, windowHeight)));
     bmp.reset(new Bitmap(windowWidth, windowHeight, Bitmap::COMPONENTS_RGB));
     bmp->clear(Color(0,0,0));
     bmp->hline(50, 0, 100, redColor);

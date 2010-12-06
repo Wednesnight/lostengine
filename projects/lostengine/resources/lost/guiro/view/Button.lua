@@ -1,8 +1,6 @@
--- lost.guiro.view.Button
 module("lost.guiro.view", package.seeall)
 
 require("lost.guiro.view.View")
-require("lost.guiro.view.Label")
 require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.view.Button" "lost.guiro.view.View" {}
@@ -14,19 +12,16 @@ Button.STATE_HOVER = "hover"
 Button.STATE_PUSHED = "pushed"  
 Button.STATE_DISABLED = "disabled"
 
-function Button:constructor(textureManager)
-	lost.guiro.view.View.constructor(self, textureManager)
-
+function Button:constructor(args)
+	lost.guiro.view.View.constructor(self, args)
+  local t = args or {}
+  self.id = t.id or "button"
 	self._state = Button.STATE_NORMAL
   self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}
-	self._states = {}
-	self._states[Button.STATE_NORMAL] = {}
-	self._states[Button.STATE_HOVER] = {}
-	self._states[Button.STATE_PUSHED] = {}
-	self._states[Button.STATE_DISABLED] = {}
 	self._enabled = true
-	self._title = ""
   self._pushed = false;
+
+  self._titles = {} -- one string per state
 
   self._handlerMaps = {}
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
@@ -179,84 +174,12 @@ function Button:dispatchButtonEvent(name)
   self:dispatchEvent(event)  
 end
 
--- makes sure backgrounds are in the back and labels are in front
-function Button:updateViewOrder()
-  self:removeAllSubviews()
-  for k,stateName in pairs(self._allStates) do
-    local bg = self._states[stateName].background
-    local label = self._states[stateName].label
-    if bg then
-      self:addSubview(bg)
-      bg:needsLayout()
-    end
-    if label then 
-      self:addSubview(label)
-      label:needsLayout()
-    end
-  end
-end
-
--- call this after the state has changed or the control was created to 
--- toggle visibility flags accoridng to the current state
-function Button:updateViewVisibility()
-  for k,stateName in pairs(self._allStates) do
-    local bg = self._states[stateName].background
-    local l = self._states[stateName].label
-    if stateName == self._state then
-      if bg then bg:hidden(false) end
-      if l then l:hidden(false) end
-    else
-      if bg then bg:hidden(true) end
-      if l then l:hidden(true) end
-    end
-  end
-end
-
--- removes old view and memorizes new view in state tables, but deferrs ordering of view
--- until all states are set
-function Button:background(stateName, view)
-  if (stateName == nil) or (type(stateName) ~= "string") then
-    error("Button:background : stateName is mandatory and must be a string, got: '"..tostring(stateName).."'")
-  end
-  local oldView = self._states[stateName].background
-  if oldView then
-    self:removeSubview(oldView)
-  end
-  self._states[stateName].background = view
-  callLater(self.updateViewOrder, self)
-  callLater(self.updateViewVisibility, self)
-end
-
-function Button:label(stateName, view)
-  if (stateName == nil) or (type(stateName) ~= "string") then
-    error("Button:label : stateName is mandatory and must be a string, got: '"..tostring(stateName).."'")
-  end
-  local oldView = self._states[stateName].label
-  if oldView then
-    self:removeSubview(oldView)
-  end
-  self._states[stateName].label = view
-  callLater(self.updateViewOrder, self)
-  callLater(self.updateViewVisibility, self)
-end
-
 function Button:state(newState)
   if newState ~= nil then
     self._state = newState
-    callLater(self.updateViewVisibility, self)
+    -- FIXME: update display
   else
     return self._state
-  end
-end
-
-function Button:title(txt)
-  if txt ~= nil then
-    for k,stateName in pairs(self._allStates) do
-      local l = self._states[stateName].label
-      if l then l:text(txt) end
-    end
-  else
-    return self._title
   end
 end
 

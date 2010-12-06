@@ -3,12 +3,10 @@
 
 #include <list>
 #include "lost/resource/DefaultLoader.h"
-#include "lost/application/WindowParams.h"
 #include "lost/application/Queue.h"
-
+#include "lost/event/forward.h"
 #include "lost/application/forward.h"
 #include "lost/lua/forward.h"
-#include "lost/event/forward.h"
 #include "lost/rg/forward.h"
 #include "lost/application/TaskletConfig.h"
 #include "lost/common/Timer.h"
@@ -41,7 +39,6 @@ namespace lost
       bool hasLuaShutdown;
 
       lua::StatePtr                   lua;
-      WindowParams                    windowParams;   // fill this structure with the necessary params if you want a window with GL context
 
       virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
       virtual void cleanup(); // cleanup all resources; called from platform specific implementation
@@ -51,10 +48,12 @@ namespace lost
       virtual void render();                        // called repeatedly in run
       virtual void shutdown();                      // called once in run
 
-      void createWindow(const WindowParams& params);
+      void createWindow();
       void closeWindow(WindowEventPtr event);
       
       void processEvents();
+      void updateWindowSize(const application::ResizeEventPtr& event);
+      
 
     public:
       bool waitForEvents; // if true, only runs the main loop once a low level event arrives

@@ -13,6 +13,7 @@ function Pebble:constructor()
   lost.guiro.Theme.constructor(self)
   self.name = "pebble"
   self:addStyle("lost.guiro.view.Label", "default", function(target, args) self:labelDefault(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "default", function(target, args) self:buttonGray(target, args) end)
 end
 
 function Pebble:labelDefault(target, args)
@@ -24,3 +25,7 @@ function Pebble:labelDefault(target, args)
                             })
 end
 
+function Pebble:buttonGray(target,args)
+  log.debug("------------ YAY!")
+  local b = lost.guiro.view.Button
+end

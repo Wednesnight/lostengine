@@ -10,6 +10,9 @@ namespace lost
     struct TaskletEvent;
     typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
 
+    struct ResizeEvent;
+    typedef lost::shared_ptr<ResizeEvent> ResizeEventPtr;
+
     struct Application;
     typedef lost::shared_ptr<Application> ApplicationPtr;
 
@@ -32,7 +35,7 @@ namespace lost
     typedef lost::shared_ptr<ProcessEvent> ProcessEventPtr;
 
     struct Window;
-    struct WindowParams;
+    struct TaskletConfig;
 
     struct WindowEvent;
     typedef lost::shared_ptr<WindowEvent> WindowEventPtr;

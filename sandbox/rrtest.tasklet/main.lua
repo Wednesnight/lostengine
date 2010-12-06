@@ -4,7 +4,6 @@ require("lost.common.Shaders")
 using "lost.math.Vec2"
 using "lost.math.Vec3"
 using "lost.math.Rect"
-using "lost.application.WindowParams"
 using "lost.common.Color"
 using "lost.common.ColorPoint"
 using "lost.common.ColorGradient"

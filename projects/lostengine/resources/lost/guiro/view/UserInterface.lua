@@ -24,8 +24,7 @@ function UserInterface:constructor()
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
 
-  local windowRect = tasklet.window.params.rect
-  self:bounds(lost.guiro.Bounds(0, 0, windowRect.width, windowRect.height))
+  self:bounds(lost.guiro.Bounds(0, 0, tasklet.window.size.width, tasklet.window.size.height))
 
   self.focusable = true
 
@@ -48,7 +47,7 @@ function UserInterface:setEventDispatcher(eventDispatcher)
   eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event) self:propagateKeyEvent(event) end)
   eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_UP, function(event) self:propagateKeyEvent(event) end)
 
-  eventDispatcher:addEventListener(lost.application.ResizeEvent.MAIN_WINDOW_RESIZE, function(event) 
+  eventDispatcher:addEventListener(lost.application.ResizeEvent.TASKLET_WINDOW_RESIZE, function(event) 
         self._bounds.width = lost.guiro.wsize{abs=event.width}
         self._bounds.height = lost.guiro.hsize{abs=event.height}
         self:needsLayout()

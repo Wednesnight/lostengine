@@ -26,7 +26,7 @@ depthRenderbuffer = _depthRenderbuffer
   {
     // initialise basic layer properties
     CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;        
-    // FIXME: these should probably be configurable from WindowParams
+    // FIXME: these should probably be configurable from TaskletConfig
     eaglLayer.opaque = TRUE;
     eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
@@ -41,7 +41,7 @@ depthRenderbuffer = _depthRenderbuffer
     }
     
     // configure framebuffer
-    // FIXME: this needs to be configurable via WindowParams, has only colorbuffer for a start
+    // FIXME: this needs to be configurable via TaskletConfig, has only colorbuffer for a start
 		glGenFramebuffers(1, &_defaultFramebuffer);GLDEBUG;
 		glGenRenderbuffers(1, &_colorRenderbuffer);GLDEBUG;
     glGenRenderbuffers(1, &_depthRenderbuffer);GLDEBUG;

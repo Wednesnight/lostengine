@@ -41,7 +41,7 @@ struct Line
 FunkyFractals::FunkyFractals()
 : application(Application::create(bind(&FunkyFractals::redraw, this, _1)))
 {
-  window = application->createWindow("MainWindow", WindowParams("FunkyFractals", Rect(100, 100, 800, 600)));
+  // create window
   camera.reset(new Camera3D(window->canvas->context, window->canvas->camera->viewport));
   camera->fovY(45.0f);
   camera->depth(Vec2(1.0f, 100.0f));

@@ -7,7 +7,6 @@ local Rect = lost.math.Rect
 local Color = lost.common.Color
 local Camera2D = lost.camera.Camera2D
 local Camera3D = lost.camera.Camera3D
-local WindowParams = lost.application.WindowParams
 local MatrixTranslation = lost.math.MatrixTranslation
 
 function startup()
