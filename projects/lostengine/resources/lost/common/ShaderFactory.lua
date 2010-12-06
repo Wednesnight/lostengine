@@ -107,9 +107,9 @@ end
 -- f = filled
 -- rc = roundedCorners
 -- s = sides
-function ShaderFactory:rrCacheKey(f, rc, s)
+function ShaderFactory:rrCacheKey(f, rc, s, grad)
   local result = tostring(f).."-("..tostring(rc.tl).."-"..tostring(rc.tr).."-"..tostring(rc.bl).."-"..tostring(rc.br)..")"
-  result = result.."-("..tostring(s.top).."-"..tostring(s.bottom).."-"..tostring(s.left).."-"..tostring(s.right)..")"
+  result = result.."-("..tostring(s.top).."-"..tostring(s.bottom).."-"..tostring(s.left).."-"..tostring(s.right).."-"..tostring(grad)..")"
   return result
 end
 
@@ -160,7 +160,7 @@ function ShaderFactory:roundedRect(filled, roundCorners, sides, hasGradient)
     rc.br = false
   end
   
-  local cacheKey = self:rrCacheKey(filled, rc, s)
+  local cacheKey = self:rrCacheKey(filled, rc, s, hasGradient)
 --  log.debug("-- CACHEKEY: '"..cacheKey.."'")
 
   result = self.cache[cacheKey]
