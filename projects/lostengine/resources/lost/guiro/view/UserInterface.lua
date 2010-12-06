@@ -18,7 +18,6 @@ lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 using "lost.guiro.event.EventManager"
 
 function UserInterface:constructor()
-  log.debug("-- UI CONSTRUCTOR")
   lost.guiro.view.View.constructor(self)
   self.id = "ui"
   self.eventManager = EventManager(self)

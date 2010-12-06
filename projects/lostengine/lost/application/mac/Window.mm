@@ -56,7 +56,7 @@ namespace lost
 
     void Window::finalize()
     {
-      DOUT("Window::finalize()");
+//      DOUT("Window::finalize()");
       if(hiddenMembers) [hiddenMembers->window setParent: NULL]; else EOUT("hiddenMembers is NULL!");
       
       if(hiddenMembers) context.reset(); else EOUT("hiddenMembers is NULL!"); // prevents crash when it actually is null, dunno why it can become NULL 

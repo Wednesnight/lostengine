@@ -135,11 +135,11 @@ function Layer:needsDisplay()
 end
 
 function Layer:update()
-  log.debug("-- layer update ("..self.z..") "..self.id)
+--  log.debug("-- layer update ("..self.z..") "..self.id)
 end
 
 function Layer:updateLayout()
-  log.debug("-- layer update layout ("..self.z..") "..self.id)
+--  log.debug("-- layer update layout ("..self.z..") "..self.id)
 --[[  local slid = nil
   if self._superlayer then
     slid = self._superlayer.id
@@ -160,7 +160,7 @@ function Layer:updateLayout()
 end
 
 function Layer:updateDisplay()
-  log.debug("-- layer update display ("..self.z..") "..self.id)
+--  log.debug("-- layer update display ("..self.z..") "..self.id)
 end
 
 function Layer:__call(layerId)

@@ -65,7 +65,7 @@ function UpdateManager:processViewDisplayUpdates()
 end
 
 function UpdateManager:update()
-  log.debug("-- UPDATE")
+--  log.debug("-- UPDATE")
   self:processViewUpdates()
   self:processViewLayoutUpdates()
   self:processViewDisplayUpdates()
@@ -77,7 +77,7 @@ end
 
 function UpdateManager:scheduleUpdateIfNeeded()
   if not self._updateScheduled then
-    log.debug("-- scheduling update")
+--    log.debug("-- scheduling update")
     self._updateScheduled = true
     lost.common.callLater(UpdateManager.update, self)
   end

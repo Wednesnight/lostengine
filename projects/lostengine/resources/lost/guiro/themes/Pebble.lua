@@ -72,13 +72,11 @@ end
 
 
 function Pebble:buttonGray(target,args)
-  log.debug("------------ YAY!")
   local b = lost.guiro.view.Button
   
 end
 
 function Pebble:viewGray(target, args)
-  log.debug("-------- view gray")
   target.layer:addSublayer(lost.guiro.layer.Rect
                             {
                               bounds={0,0,"1","1"},

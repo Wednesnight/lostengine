@@ -54,7 +54,6 @@ namespace lost
 
     void Tasklet::updateWindowSize(const application::ResizeEventPtr& event)
     {
-      DOUT("-- updating window size: "<<event->width<<" "<<event->height);
       window->size = math::Vec2(event->width, event->height);
     }
       
