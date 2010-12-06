@@ -32,7 +32,7 @@
 
 - (void)applicationWillTerminate: (NSNotification *)notification
 {
-  DOUT("applicationWillTerminate");
+//  DOUT("applicationWillTerminate");
 }
 
 - (void)setParent: (lost::application::Application*)newParent

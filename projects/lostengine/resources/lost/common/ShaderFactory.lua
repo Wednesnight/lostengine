@@ -371,7 +371,7 @@ void main(void)
   end
   
   self.cache[cacheKey] = result
-  log.debug("build shader for key "..cacheKey)
+--  log.debug("build shader for key "..cacheKey)
   
   return result
 end

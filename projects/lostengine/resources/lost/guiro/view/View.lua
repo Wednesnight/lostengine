@@ -169,11 +169,11 @@ function View:needsDisplay()
 end
 
 function View:update()
-  log.debug("-- view update ("..self.z..") "..self.id)
+--  log.debug("-- view update ("..self.z..") "..self.id)
 end
 
 function View:updateLayout()
-  log.debug("-- view update layout ("..self.z..") "..self.id)
+--  log.debug("-- view update layout ("..self.z..") "..self.id)
   local superrect = nil
   if self._superview then
     superrect = self._superview.rect
@@ -183,13 +183,13 @@ function View:updateLayout()
   end  
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
-  log.debug(tostring(self.rect))
+--  log.debug(tostring(self.rect))
   self.layer:bounds(lost.guiro.Bounds(self.rect.x,self.rect.y,self.rect.width, self.rect.height))
   self.layer:needsLayout()
 end
 
 function View:updateDisplay()
-  log.debug("-- view update layout ("..self.z..") "..self.id)
+--  log.debug("-- view update layout ("..self.z..") "..self.id)
 end
 
 function View:__tostring()
