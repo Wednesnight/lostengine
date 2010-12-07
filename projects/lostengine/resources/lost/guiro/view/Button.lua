@@ -82,22 +82,29 @@ end
 -- FIXME: is this correct?
 function Button:createNormalHandlerMap()
   return {
-    mouseEnter = function(event) 
-                  self:state(Button.STATE_HOVER) 
+    mouseEnter = function(event)
+                  if not self.mouseIsDown then
+                    self:state(Button.STATE_HOVER) 
+                  else
+                    self:state(Button.STATE_PUSHED)
+                  end
                   end,
     mouseLeave = function(event)
                   self:state(Button.STATE_NORMAL) 
                   end,
     mouseDown = function(event)
+                  self.mouseIsDown = true
                   self:state(Button.STATE_PUSHED)
                   self:dispatchButtonEvent("buttonDown")    
                   end,
     mouseUpInside = function(event)
+                      self.mouseIsDown = false
                       self:state(Button.STATE_HOVER)
                       self:dispatchButtonEvent("buttonClick")    
                       self:dispatchButtonEvent("buttonUp")    
                       end,
     mouseUpOutside = function(event)
+                       self.mouseIsDown = false
                        self:state(Button.STATE_NORMAL)
                        self:dispatchButtonEvent("buttonUp")    
                        end,
@@ -218,7 +225,6 @@ function Button:state(newState)
   if newState ~= nil and (newState ~= self._state) then
     self._state = newState
     self:needsDisplay()
-    -- FIXME: update display
   else
     return self._state
   end

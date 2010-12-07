@@ -282,10 +282,10 @@ function View:dispatchEvent(event, phase)
       event.target = self
       -- build capture hierarchy
       local stack = {}
-      local current = self.parent
+      local current = self._superview
       while current ~= nil do
         table.insert(stack, 1, current)
-        current = current.parent
+        current = current._superview
       end
       -- dispatch capture
       for index, view in next,stack do
@@ -303,11 +303,11 @@ function View:dispatchEvent(event, phase)
     end
 
     if event.bubbles and not event.stopPropagation then
-      local currentTarget = self.parent
+      local currentTarget = self._superview
       while currentTarget ~= nil and not event.stopPropagation do
         event.currentTarget = currentTarget
         currentTarget.bubbleEventDispatcher:dispatchEvent(event)
-        currentTarget = currentTarget.parent
+        currentTarget = currentTarget._superview
       end
     end
   end
