@@ -199,7 +199,19 @@ function Button:updateDisplay()
       v:hidden(false)
     end
   end
-
+  -- update title for state, default to normal title or nil, will only be set if there is a textLayer
+  local t = self.titles[self._state]
+  if not t then t = self.titles[Button.STATE_NORMAL] end
+  if not t then t = "" end
+  if t and self.textLayer then
+    self.textLayer:text(t)
+  end
+  -- update color for state
+  local c = self.titleColors[self._state]
+  if not c then c = self.titleColors[Button.STATE_NORMAL] end
+  if c and self.textLayer then
+    self.textLayer:color(c)
+  end
 end
 
 function Button:state(newState)
