@@ -157,6 +157,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "default", function(target, args) self:buttonGray(target, args) end)
   self:addStyle("lost.guiro.view.Button", "rounded", function(target, args) self:buttonRounded(target, args) end)
   self:addStyle("lost.guiro.view.View", "gray", function(target, args) self:viewGray(target, args) end)
+  self:addStyle("lost.guiro.view.UserInterface", "default", function(target, args) self:viewGray(target, args) end)
   
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}

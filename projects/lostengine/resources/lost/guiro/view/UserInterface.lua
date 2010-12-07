@@ -5,20 +5,12 @@ require("lost.guiro.event.EventManager")
 require("lost.guiro.TextureManager")
 require("lost.common.ShaderFactory")
 
-local _ui = nil
-lost.guiro.ui = function()
-  if not _ui then
-    _ui = lost.guiro.view.UserInterface()
-  end
-  return _ui
-end
-
 lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
 using "lost.guiro.event.EventManager"
 
-function UserInterface:constructor()
-  lost.guiro.view.View.constructor(self)
+function UserInterface:constructor(args)
+  lost.guiro.view.View.constructor(self,args)
   self.id = "ui"
   self.eventManager = EventManager(self)
   self:setEventDispatcher(tasklet.eventDispatcher)
@@ -28,8 +20,8 @@ function UserInterface:constructor()
   self.focusable = true
 
   self.camera = lost.camera.Camera2D.create(lost.math.Rect())
-  self.layer.renderNode:add(lost.rg.Camera.create(self.camera))
-  self.layer.renderNode:add(lost.rg.DepthTest.create(false))
+  self.layer.layerNodes:add(lost.rg.Camera.create(self.camera))
+  self.layer.layerNodes:add(lost.rg.DepthTest.create(false))
   
   tasklet.uiNode:add(self.layer.renderNode)  
 end
