@@ -30,6 +30,11 @@ function Layer:constructor(args)
 	  self:bounds(Bounds(0, 0, "1", "1"))
 	end
 	self.rect = Rect()
+	if t.layout then
+	  self.layout = t.layout 
+	else
+    self.layout = nil
+	end
 	
 	local layers = t.sublayers or {}
 	for _,v in pairs(layers) do
@@ -44,6 +49,14 @@ function Layer:bounds(...)
   else
     return self._bounds
   end
+end
+
+function Layer:superRect()
+  local result = Rect()
+  if self._superlayer then
+    result = self._superlayer.rect
+  end
+  return result
 end
 
 function Layer:superlayer(...)
@@ -138,15 +151,8 @@ function Layer:update()
 --  log.debug("-- layer update ("..self.z..") "..self.id)
 end
 
-function Layer:updateLayout()
---  log.debug("-- layer update layout ("..self.z..") "..self.id)
---[[  local slid = nil
-  if self._superlayer then
-    slid = self._superlayer.id
-  end
-  log.debug("-- layer update layout ("..self.z..") "..self.id.." superlayer "..tostring(slid))
-  ]]
-  
+function Layer:updateRect()
+--  log.debug("updateRect "..self.id)
   local superrect = nil
   if self._superlayer then
     superrect = self._superlayer.rect
@@ -157,6 +163,11 @@ function Layer:updateLayout()
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
 --  log.debug(tostring(self.rect))
+end
+
+function Layer:updateLayout()
+--  log.debug("updateLayout "..self.id)
+  self:updateRect()
 end
 
 function Layer:updateDisplay()

@@ -41,6 +41,12 @@ function View:constructor(args)
     self:bounds(lost.guiro.Bounds(0,0,"1","1"))
   end
 
+  if t.layout then
+    self.layout = t.layout
+  else
+    self.layout = nil
+  end
+
   lost.guiro.themeManager():apply(self, t.theme or lost.guiro.themeManager().defaultTheme, t.style or lost.guiro.themeManager().defaultStyle, args)
   if t.sublayers then
     for _,v in ipairs(t.sublayers) do
@@ -57,6 +63,14 @@ function View:constructor(args)
       self:addEventListener(event, func)
     end
   end
+end
+
+function View:superRect()
+  local result = Rect()
+  if self._superview then
+    result = self._superview.rect
+  end
+  return result
 end
 
 function View:bounds(...)
@@ -172,8 +186,8 @@ function View:update()
 --  log.debug("-- view update ("..self.z..") "..self.id)
 end
 
-function View:updateLayout()
---  log.debug("-- view update layout ("..self.z..") "..self.id)
+function View:updateRect()
+--  log.debug("updateRect "..self.id)
   local superrect = nil
   if self._superview then
     superrect = self._superview.rect
@@ -184,6 +198,11 @@ function View:updateLayout()
 --  log.debug("updating with superrect: "..tostring(superrect))
   self.rect = self._bounds:rect(superrect)
 --  log.debug(tostring(self.rect))
+end
+
+function View:updateLayout()
+--  log.debug("-- view update layout ("..self.z..") "..self.id)
+  self:updateRect()
   self.layer:bounds(lost.guiro.Bounds(self.rect.x,self.rect.y,self.rect.width, self.rect.height))
   self.layer:needsLayout()
 end

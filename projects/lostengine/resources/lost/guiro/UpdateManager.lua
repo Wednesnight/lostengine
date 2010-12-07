@@ -31,37 +31,51 @@ local function depthSortFunc(a,b)
   return a.z < b.z
 end
 
-function UpdateManager:processQ(q, f)
-  table.sort(q.list, depthSortFunc)
+function UpdateManager:processQ(q, f, doSort, doClear)
+  if doSort then table.sort(q.list, depthSortFunc) end
   for k,v in pairs(q.list) do
     f(v)
   end
-  q.list = {}
-  q.set = {}
+  if doClear then
+    q.list = {}
+    q.set = {}
+  end
 end
 
 function UpdateManager:processLayerUpdates()
-  self:processQ(self._layerUpdateQ, function(layer) layer:update() end)
+  self:processQ(self._layerUpdateQ, function(layer) layer:update() end, true, true)
 end
 
 function UpdateManager:processLayerLayoutUpdates()
-  self:processQ(self._layerLayoutQ, function(layer) layer:updateLayout() end)
+  self:processQ(self._layerLayoutQ, function(layer) layer:updateLayout() end, true, false)
+  self:processQ(self._layerLayoutQ, function(layer) 
+                                        if layer.layout then 
+                                          layer.layout:apply(layer, layer.sublayers)
+                                        end 
+                                    end, false, true)
 end
 
 function UpdateManager:processLayerDisplayUpdates()
-  self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end)
+  self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end, true, true)
 end
 
 function UpdateManager:processViewUpdates()
-  self:processQ(self._viewUpdateQ, function(view) view:update() end)
+  self:processQ(self._viewUpdateQ, function(view) view:update() end, true, true)
 end
 
 function UpdateManager:processViewLayoutUpdates()
-  self:processQ(self._viewLayoutQ, function(view) view:updateLayout() end)
+  self:processQ(self._viewLayoutQ, function(view) 
+                                       view:updateLayout()
+                                   end, true, false)
+  self:processQ(self._viewLayoutQ, function(view)
+                                     if view.layout then
+                                       view.layout:apply(view, view.subviews)
+                                     end
+                                   end, false, true)
 end
 
 function UpdateManager:processViewDisplayUpdates()
-  self:processQ(self._viewDisplayQ, function(view) view:updateDisplay() end)
+  self:processQ(self._viewDisplayQ, function(view) view:updateDisplay() end, true, true)
 end
 
 function UpdateManager:update()
