@@ -15,7 +15,6 @@
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/Texture.h"
-#include "lost/lsystem/LSystem.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/Repository.h"
@@ -50,8 +49,6 @@ namespace luabind
   GET_POINTER(lost::gl::FrameBuffer);
   GET_POINTER(lost::gl::RenderBuffer);
   GET_POINTER(lost::gl::Texture);
-  GET_POINTER(lost::lsystem::LSystem);
-  GET_POINTER(lost::lsystem::LSystemState);
   GET_POINTER(lost::lua::State);
   GET_POINTER(lost::common::Data);
   GET_POINTER(lost::resource::Loader);

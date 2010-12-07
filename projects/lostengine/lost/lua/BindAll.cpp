@@ -10,7 +10,6 @@
 #include "lost/lua/bindings/LostFont.h"
 #include "lost/lua/bindings/LostGL.h"
 #include "lost/lua/bindings/LostLGL.h"
-#include "lost/lua/bindings/LostLSystem.h"
 #include "lost/lua/bindings/LostLua.h"
 #include "lost/lua/bindings/LostMath.h"
 #include "lost/lua/bindings/LostMesh.h"
@@ -57,7 +56,6 @@ namespace lost
       LostFont(state);
       LostGL(state);
       LostLGL(state);
-//      LostLSystem(state);
       LostLua(state);
       LostMath(state);
       LostPlatform(state);

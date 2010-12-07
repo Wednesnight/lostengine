@@ -6,10 +6,6 @@ require("lost.guiro.view.View")
 require("lost.guiro.view.Label")
 require("lost.guiro.view.Image")
 require("lost.guiro.view.Button")
-require("lost.guiro.view.VBox")
-require("lost.guiro.view.HBox")
-require("lost.guiro.view.RenderView")
-require("lost.guiro.view.SpinEdit")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.event.Event")
 
@@ -101,35 +97,6 @@ function Guiro:assignButtonAttributes(target, source)
 	if source.pushed ~= nil then target:pushed(source.pushed) end
 end
 
-function Guiro:assignVBoxAttributes(target, source)
-	if source.mode ~= nil then target:mode(source.mode) end
-	if source.halign ~= nil then target:halign(source.halign) end
-	if source.valign ~= nil then target:valign(source.valign) end
-	if source.spacing ~= nil then target:spacing(source.spacing) end
-end
-
-function Guiro:assignHBoxAttributes(target, source)
-	if source.mode ~= nil then target:mode(source.mode) end
-	if source.halign ~= nil then target:halign(source.halign) end
-	if source.valign ~= nil then target:valign(source.valign) end
-	if source.spacing ~= nil then target:spacing(source.spacing) end
-end
-
-function Guiro:assignRenderViewAttributes(target, source)
-  if type(source.rendergraph) == "table" then
-    for k,node in next,source.rendergraph do
-      target:renderGraph():add(node)
-    end
-  end
-end
-
-function Guiro:assignSpinEditAttributes(target, source)
-  if source.value ~= nil then target:value(source.value) end
-  if source.min ~= nil then target:min(source.min) end
-  if source.max ~= nil then target:max(source.max) end
-  if source.stepSize ~= nil then target:stepSize(source.stepSize) end
-end
-
 function Guiro:applyStyle(target, def)
   local themeName = def.theme or self.themeManager.defaultTheme
   local styleName = def.style or self.themeManager.defaultStyle
@@ -212,47 +179,6 @@ function Guiro:Button(def)
   -- don't allow image subviews
   self:assignViewAttributes(result, def) 
   self:assignButtonAttributes(result, def)   
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:VBox(def)
-  local result = lost.guiro.view.VBox(self.textureManager)
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def)  
-  self:assignViewAttributes(result, def) 
-  self:assignVBoxAttributes(result, def)   
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:HBox(def)
-  local result = lost.guiro.view.HBox(self.textureManager)
-  self:applyStyle(result, def)
-  self:searchAndAddSubviews(result, def)  
-  self:assignViewAttributes(result, def) 
-  self:assignHBoxAttributes(result, def)   
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:RenderView(def)
-  local result = lost.guiro.view.RenderView(self.textureManager)
-  self:applyStyle(result, def)
-  -- don't allow subviews
-  self:assignViewAttributes(result, def)
-  self:assignImageAttributes(result, def)
-  self:assignRenderViewAttributes(result, def)
-  self:addEventListeners(result, def)
-  return result
-end
-
-function Guiro:SpinEdit(def)
-  local result = lost.guiro.view.SpinEdit(self.textureManager)
-  self:applyStyle(result, def)
-  -- don't allow subviews
-  self:assignViewAttributes(result, def)
-  self:assignSpinEditAttributes(result, def)
   self:addEventListeners(result, def)
   return result
 end
