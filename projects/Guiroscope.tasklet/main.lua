@@ -29,7 +29,7 @@ function startup()
       lost.guiro.view.View
       {
         bounds = {0,0,"1",{"1",-tabbarheight}},
-        layout = lost.guiro.layout.Vertical{halign="center",valign = "top",xoffset = -0,yoffset = 0,spacing = 10,},
+        layout = lost.guiro.layout.Vertical{halign="center",valign = "center",xoffset = -0,yoffset = 0,spacing = 10,},
         subviews=
         {
           lost.guiro.view.Label{bounds={200,200,100,30},text="hello",style="roundFramed"},

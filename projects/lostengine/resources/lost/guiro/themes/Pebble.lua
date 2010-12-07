@@ -4,6 +4,7 @@ require("lost.common.Class")
 require("lost.guiro.Theme")
 
 require("lost.guiro.layer.Text")
+require("lost.guiro.layer.HLine")
 require("lost.guiro.layer.RoundedRect")
 require("lost.guiro.themes.PebbleGradients")
 
@@ -97,4 +98,5 @@ end
 
 function Pebble:viewToolbar(target, args)
   target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},gradient="toolbarBg",filled = true})  
+  target.layer:addSublayer(lost.guiro.layer.HLine{bounds={0,0,"1","1"},color=Color(.317,.317,.317)})  
 end
