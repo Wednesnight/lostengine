@@ -2,6 +2,8 @@ require("lost.declarative.Context")
 require("lost.guiro.view.Label")
 require("lost.guiro.layer.Text")
 require("lost.guiro.layer.Rect")
+require("lost.guiro.layout.Horizontal")
+require("lost.guiro.layout.Vertical")
 
 local Color = lost.common.Color
 
@@ -24,6 +26,7 @@ function startup()
         buttonClick = function(event) log.debug("CLICKED "..event.target.id) end,
         mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
       },
+      layout = lost.guiro.layout.Vertical{halign="center",valign = "center",xoffset = -0,yoffset = 0,spacing = 10,},
       subviews=
       {
         lost.guiro.view.Label
