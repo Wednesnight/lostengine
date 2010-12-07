@@ -8,6 +8,7 @@ require("lost.guiro.layout.Vertical")
 local Color = lost.common.Color
 
 function startup()
+  local tabbarheight = 52
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
   ui = lost.guiro.view.UserInterface
   {
@@ -22,14 +23,22 @@ function startup()
       buttonClick = function(event) log.debug("CLICKED "..event.target.id) end,
       mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
     },
-    layout = lost.guiro.layout.Vertical{halign="center",valign = "top",xoffset = -0,yoffset = 0,spacing = 10,},
-    subviews=
+    subviews = 
     {
-      lost.guiro.view.Label{bounds={200,200,100,30},text="hello",style="roundFramed"},
-      lost.guiro.view.Button{bounds={50,0,100,30},text="Button",},
-      lost.guiro.view.Button{bounds={50,{"top",-10},154,50},text="Rounded Regular",style="rounded",size="regular"},
-      lost.guiro.view.Button{bounds={50,{"top",-30},154,70},text="Rounded Small",style="rounded",size="small"},
-      lost.guiro.view.Button{bounds={50,{"top",-50},154,90},text="Rounded Mini",style="rounded",size="mini"}
+      lost.guiro.view.View{style="toolbar", bounds={0,"top","1",tabbarheight}},
+      lost.guiro.view.View
+      {
+        bounds = {0,0,"1",{"1",-tabbarheight}},
+        layout = lost.guiro.layout.Vertical{halign="center",valign = "top",xoffset = -0,yoffset = 0,spacing = 10,},
+        subviews=
+        {
+          lost.guiro.view.Label{bounds={200,200,100,30},text="hello",style="roundFramed"},
+          lost.guiro.view.Button{bounds={50,0,100,30},text="Button",},
+          lost.guiro.view.Button{bounds={50,{"top",-10},154,50},text="Rounded Regular",style="rounded",size="regular"},
+          lost.guiro.view.Button{bounds={50,{"top",-30},154,70},text="Rounded Small",style="rounded",size="small"},
+          lost.guiro.view.Button{bounds={50,{"top",-50},154,90},text="Rounded Mini",style="rounded",size="mini"}
+        }
+      }
     }
   }
   ui:printSubviews()
