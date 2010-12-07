@@ -1,7 +1,7 @@
 #ifndef LOST_LUA_BINDINGS_LOSTMATH_H
 #define LOST_LUA_BINDINGS_LOSTMATH_H
 
-#include "lost/forward/lost/lua"
+#include "lost/lua/forward.h"
 
 namespace lost
 {
