@@ -11,13 +11,17 @@ Button.STATE_NORMAL = "normal"
 Button.STATE_HOVER = "hover" 
 Button.STATE_PUSHED = "pushed"  
 Button.STATE_DISABLED = "disabled"
+Button.STATE_NORMAL2 = "normal2"  
+Button.STATE_HOVER2 = "hover2" 
+Button.STATE_PUSHED2 = "pushed2"  
 
 function Button:constructor(args)
   self.titles = {} -- one string per state
   self.titleColors = {} -- color for title per state
   self.backgrounds = {} -- each state has a dedicated layer
   self.textLayer = nil -- only one layer that holds the current title
-  self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED}
+  self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED,
+                     Button.STATE_NORMAL2, Button.STATE_HOVER2, Button.STATE_PUSHED2}
 	self:state(Button.STATE_NORMAL)
 
 	lost.guiro.view.View.constructor(self, args) -- call after aall members that are required for style are setup
@@ -27,13 +31,14 @@ function Button:constructor(args)
 	self._enabled = true
   self._pushed = false;
 
+  if t.title then self:title(t.title) end
 
   self._handlerMaps = {}
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
   self._handlerMaps["sticky"] = self:createStickyHandlerMap()
   self._handlerMaps["toggle"] = self:createToggleHandlerMap()
   self._currentHandlerMap = nil
-	self:mode("normal")
+	self:mode(t.mode or "normal")
 	
   self:addEventListener("mouseEnter", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseLeave", function(event) self:eventHandler(event) end)	
@@ -114,8 +119,12 @@ end
 function Button:createStickyHandlerMap()
   return {
     mouseEnter = function(event) 
-                    if not self:pushed() then
-                      self:state(Button.STATE_HOVER) 
+                    if not self:pushed()  then
+                      if not self.mouseIsDown then
+                        self:state(Button.STATE_HOVER)                       
+                      else
+                        self:state(Button.STATE_PUSHED)
+                      end
                     end
                   end,
     mouseLeave = function(event)
@@ -125,18 +134,22 @@ function Button:createStickyHandlerMap()
                   end,
     mouseDown = function(event)
                     if not self:pushed() then
+                      self.mouseIsDown = true
                       self:state(Button.STATE_PUSHED)
                       self:dispatchButtonEvent("buttonDown")    
                     end
                   end,
     mouseUpInside = function(event)
-                        if not self:pushed() then      
+                        if not self:pushed() then   
+                          self.mouseIsDown = false                           
                           self:pushed(true)
+                          self:state(Button.STATE_PUSHED)
                           self:dispatchButtonEvent("buttonClick")
                         end
                       end,
     mouseUpOutside = function(event)
                          if not self:pushed() then      
+                           self.mouseIsDown = false
                            self:state(Button.STATE_NORMAL)
                            self:dispatchButtonEvent("buttonUp")    
                          end
@@ -148,7 +161,11 @@ function Button:createToggleHandlerMap()
   return {
     mouseEnter = function(event) 
                     if not self:pushed() then      
-                      self:state(Button.STATE_HOVER) 
+                      if not self.mouseIsDown then
+                        self:state(Button.STATE_HOVER)                       
+                      else
+                        self:state(Button.STATE_PUSHED) 
+                      end
                     end
                   end,
     mouseLeave = function(event)
@@ -157,12 +174,14 @@ function Button:createToggleHandlerMap()
                     end
                   end,
     mouseDown = function(event)
-                    if not self:pushed() then      
+                    if not self:pushed() then   
+                      self.mouseIsDown = true                       
                       self:state(Button.STATE_PUSHED)
                       self:dispatchButtonEvent("buttonDown")    
                     end
                   end,
     mouseUpInside = function(event)
+                      self.mouseIsDown = false
                       if not self:pushed() then      
                         self:state(Button.STATE_PUSHED)
                       else
@@ -173,6 +192,7 @@ function Button:createToggleHandlerMap()
                       self:dispatchButtonEvent("buttonUp")    
                       end,
     mouseUpOutside = function(event)
+                       self.mouseIsDown = false
                        if not self:pushed() then      
                          self:state(Button.STATE_NORMAL)
                          self:dispatchButtonEvent("buttonUp")    
@@ -223,6 +243,7 @@ end
 
 function Button:state(newState)
   if newState ~= nil and (newState ~= self._state) then
+    log.debug("-- "..newState)
     self._state = newState
     self:needsDisplay()
   else
@@ -240,5 +261,20 @@ function Button:enabled(enabled)
     end
   else
     return not self._enabled
+  end
+end
+
+-- either one param = text for all states => will only be put into normal and reused
+-- or state/title pair => will only be set for exactly this state
+function Button:title(...)
+  if arg.n == 1 then
+    for k,v in pairs(self._allStates) do
+      self.titles[v] = nil
+    end
+    self.titles[Button.STATE_NORMAL] = arg[1]
+    self:needsDisplay()
+  elseif arg.n == 2 then
+    self.titles[arg[1]] = arg[2]
+    self:needsDisplay()
   end
 end
