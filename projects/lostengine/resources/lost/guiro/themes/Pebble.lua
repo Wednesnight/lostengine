@@ -108,8 +108,8 @@ function Pebble:buttonRoundedToggle(target,args)
 --[[ local hover = l{id="hover",sublayers={rr{bounds={0,0,"1","1"},color=Color(1,1,0),filled=true,radius=r},
                              rr{bounds={0,0,"1","1"},color=self.buttonRoundedFrameCol,filled=false,radius=r}}
                             }]]
-  local pushed = l{id="pushed",sublayers={rr{bounds={0,0,"1","1"},gradient="rrbg2",filled=true,radius=r},
-                              rr{bounds={0,0,"1","1"},color=self.buttonRoundedFrameCol,filled=false,radius=r}}
+  local pushed = l{id="pushed",sublayers={rr{bounds={0,0,"1","1"},gradient="segLightGrey",color=Color(.9,.9,.9),filled=true,radius=r},
+                              rr{bounds={0,0,"1","1"},gradient="segGreyFrame",filled=false,radius=r}}
                              }
 
   local normal2 = l{id="normal2",sublayers={rr{bounds={0,0,"1","1"},gradient="segBlue",filled=true,radius=r},
@@ -118,7 +118,7 @@ function Pebble:buttonRoundedToggle(target,args)
 --[[  local hover2 = l{id="hover2",sublayers={rr{bounds={0,0,"1","1"},color=Color(1,1,.5),filled=true,radius=r},
                               rr{bounds={0,0,"1","1"},color=self.buttonRoundedFrameCol,filled=false,radius=r}}
                              }]]
-  local pushed2 = l{id="pushed2",sublayers={rr{bounds={0,0,"1","1"},gradient="segBlue",color=Color(.8,.8,.8),filled=true,radius=r},
+  local pushed2 = l{id="pushed2",sublayers={rr{bounds={0,0,"1","1"},gradient="segBlue",color=Color(.9,.9,.9),filled=true,radius=r},
                                rr{bounds={0,0,"1","1"},gradient="segBlueFrame",filled=false,radius=r}}
                               }
 
@@ -137,13 +137,13 @@ function Pebble:buttonRoundedToggle(target,args)
   target.backgrounds[b.STATE_NORMAL2] = normal2
   target.backgrounds[b.STATE_PUSHED2] = pushed2
   --  target.backgrounds[b.STATE_HOVER2] = hover2
-  target.titleColors[b.STATE_NORMAL] = Color(1,0,0)
-  target.titleColors[b.STATE_HOVER] = Color(0,1,0)
-  target.titleColors[b.STATE_PUSHED] = Color(1,1,0)
-  target.titleColors[b.STATE_NORMAL2] = Color(.8,.8,.8)
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_HOVER] = Color(0,0,0)
+  target.titleColors[b.STATE_PUSHED] = Color(0,0,0)
+  target.titleColors[b.STATE_NORMAL2] = Color(1,1,1)
   target.titleColors[b.STATE_HOVER2] = Color(1,1,1)
-  target.titleColors[b.STATE_PUSHED2] = Color(.8,.8,.8)
-  target.titleColors[b.STATE_DISABLED] = Color(1,1,1)
+  target.titleColors[b.STATE_PUSHED2] = Color(1,1,1)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)
 end
 
 function Pebble:viewGray(target, args)
