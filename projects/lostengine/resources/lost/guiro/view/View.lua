@@ -203,7 +203,10 @@ end
 function View:updateLayout()
 --  log.debug("-- view update layout ("..self.z..") "..self.id)
   self:updateRect()
-  self.layer:bounds(lost.guiro.Bounds(self.rect.x,self.rect.y,self.rect.width, self.rect.height))
+  self.layer._bounds.x = self._bounds.x
+  self.layer._bounds.y = self._bounds.y
+  self.layer._bounds.width = lost.guiro.Bounds.decodeEntry(3,self.rect.width)
+  self.layer._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.rect.height)
   self.layer:needsLayout()
 end
 
