@@ -160,45 +160,47 @@ end
 function Button:createToggleHandlerMap()
   return {
     mouseEnter = function(event) 
-                    if not self:pushed() then      
                       if not self.mouseIsDown then
-                        self:state(Button.STATE_HOVER)                       
+                        self:togglestate(Button.STATE_HOVER)                       
                       else
-                        self:state(Button.STATE_PUSHED) 
+                        self:togglestate(Button.STATE_PUSHED) 
                       end
-                    end
                   end,
     mouseLeave = function(event)
-                    if not self:pushed() then      
-                      self:state(Button.STATE_NORMAL) 
-                    end
+                  self:togglestate(Button.STATE_NORMAL) 
                   end,
     mouseDown = function(event)
-                    if not self:pushed() then   
                       self.mouseIsDown = true                       
-                      self:state(Button.STATE_PUSHED)
+                      self:togglestate(Button.STATE_PUSHED)
                       self:dispatchButtonEvent("buttonDown")    
-                    end
                   end,
     mouseUpInside = function(event)
                       self.mouseIsDown = false
-                      if not self:pushed() then      
-                        self:state(Button.STATE_PUSHED)
-                      else
-                        self:state(Button.STATE_HOVER)
-                      end
                       self:pushed(not self:pushed())
+                      self:togglestate(Button.STATE_HOVER)
                       self:dispatchButtonEvent("buttonClick")    
                       self:dispatchButtonEvent("buttonUp")    
                       end,
     mouseUpOutside = function(event)
                        self.mouseIsDown = false
-                       if not self:pushed() then      
-                         self:state(Button.STATE_NORMAL)
-                         self:dispatchButtonEvent("buttonUp")    
-                       end
+                       self:togglestate(Button.STATE_NORMAL)
+                       self:dispatchButtonEvent("buttonUp")    
                      end
   }
+end
+
+-- use this function like you would use state. IT will set the state
+-- depending on the value(), i.e. if you set STATE_NORMAL and 
+-- pushed is true, STATE_NORMAL2 will be set
+function Button:togglestate(newstate)
+  if self:pushed() then
+    if newstate == Button.STATE_NORMAL then self:state(Button.STATE_NORMAL2) 
+    elseif newstate == Button.STATE_HOVER then self:state(Button.STATE_HOVER2) 
+    elseif newstate == Button.STATE_PUSHED then self:state(Button.STATE_PUSHED2) 
+    else self:state(newstate) end
+  else
+    self:state(newstate)
+  end
 end
 
 function Button:dispatchButtonEvent(name)
@@ -213,14 +215,15 @@ function Button:updateDisplay()
   -- show active background layer or normal by default
   local current = self.backgrounds[self._state]
   if not current then
-    current = self.backgrounds[Button.STATE_NORMAL]
+    if self._state == Button.STATE_HOVER then current = self.backgrounds[Button.STATE_NORMAL] 
+    elseif self._state == Button.STATE_HOVER2 then current = self.backgrounds[Button.STATE_NORMAL2] 
+    else current = nil end
   end
   if not current then
-    log.warn("no current background found!")
     return
   end
   for _,v in pairs(self.backgrounds) do
-    if not rawequal(current, v) then
+    if not rawequal(current,v) then
       v:hidden(true)
     else
       v:hidden(false)
@@ -243,7 +246,7 @@ end
 
 function Button:state(newState)
   if newState ~= nil and (newState ~= self._state) then
-    log.debug("-- "..newState)
+--    log.debug("-- "..newState)
     self._state = newState
     self:needsDisplay()
   else
