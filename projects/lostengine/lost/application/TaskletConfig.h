@@ -31,6 +31,8 @@ namespace lost
       math::Rect    windowRect;
 
       double framerate;
+      
+      bool          glVsync;
     };
 
   }

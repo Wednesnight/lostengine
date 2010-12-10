@@ -6,7 +6,6 @@ require("lost.guiro.layout.Layout")
 lost.common.Class "lost.guiro.layout.Vertical" "lost.guiro.layout.Layout" {}
 
 function Vertical:constructor(args)
-  log.debug("layout constructor")
   self.halign = args.halign or nil -- left, center, right, nil
   self.valign = args.valign or nil -- top, center, bottom, nil
   self.xoffset = args.xoffset or 0
