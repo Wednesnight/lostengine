@@ -50,6 +50,7 @@ namespace lost
 
       [[hiddenMembers->view openGLContext] makeCurrentContext];
       context.reset(new gl::Context);
+      context->vsync(config->glVsync);
       
       open();
     }

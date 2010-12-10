@@ -24,6 +24,7 @@ void TaskletConfig::reset()
   windowRect = Rect(0,0,640,480);
 
   framerate = 1.0 / 60.0;
+  glVsync = false;
 }
 
 TaskletConfig::TaskletConfig()
@@ -54,6 +55,12 @@ void parse(object config, TaskletConfig* tc)
     
     if(type(config["renderer"]["framerate"]) != LUA_TNIL) { tc->framerate = object_cast<double>(config["renderer"]["framerate"]); }
   }
+
+  if(type(config["gl"]) == LUA_TTABLE) {
+    
+    if(type(config["gl"]["vsync"]) != LUA_TNIL) { tc->glVsync = object_cast<bool>(config["gl"]["vsync"]); }
+  }
+
 }
 
 bool TaskletConfig::load(lua::StatePtr interpreter, resource::LoaderPtr loader)
