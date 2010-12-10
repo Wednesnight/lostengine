@@ -33,6 +33,13 @@ namespace lost
       double framerate;
       
       bool          glVsync;
+      // FIXME:
+      // multithreaded: toggle (probably only relevant for Mac)
+      // rgba bit depths: bit depth per field or grouped as in RGBA_5551, RGBA_8888 ?
+      // stencil buffer: toggle, accuracy
+      // depth buffer
+      // aa settings
+      // iPhone UIView scaling factor
     };
 
   }
