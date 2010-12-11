@@ -56,7 +56,11 @@ function Button:pushed(...)
       self._pushed = false
     end
     if self._pushed then
-      self:state(Button.STATE_PUSHED)
+      if self._mode == "toggle" then
+        self:togglestate(Button.STATE_NORMAL)
+      else  
+        self:state(Button.STATE_PUSHED)
+      end
     else
       self:state(Button.STATE_NORMAL)
     end
@@ -66,6 +70,7 @@ function Button:pushed(...)
 end
 
 function Button:mode(modeName)
+  self._mode = modeName
   self._currentHandlerMap = self._handlerMaps[modeName]
   if self._currentHandlerMap == nil then
     log.warn("couldn't find handlerMap for mode: '"..tostring(modeName).."', defaulting to normal")
