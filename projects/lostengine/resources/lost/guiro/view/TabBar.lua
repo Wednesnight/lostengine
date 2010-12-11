@@ -26,6 +26,8 @@ function TabBar:constructor(args)
   self._items = t.items or {} -- items as passed in constructor, will be used for button creation, currently only a list of strings
   self:rebuildButtons()
   self.layout = lost.guiro.layout.Horizontal{valign="center", halign="center"} -- buttons are always stacked horizontally, tightly packed and centered in all directions
+  self.selected = -1
+  self:select(t.selected or 1)
   self:needsLayout()
 end
 
@@ -74,4 +76,22 @@ function TabBar:rebuildButtons()
     table.insert(self._buttons, button)
   end
   self:needsLayout()
+end
+
+function TabBar:update()
+  for index,button in ipairs(self._buttons) do
+    if index == self.selected then
+      button:pushed(true)
+    else
+      button:pushed(false)
+    end
+  end
+end
+
+-- sets the current tabbar selection, 1-based
+function TabBar:select(v)
+  if v ~= self.selected then
+    self.selected = v
+    self:needsUpdate()
+  end
 end

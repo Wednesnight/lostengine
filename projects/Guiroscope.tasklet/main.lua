@@ -38,12 +38,8 @@ function startup()
             {
                 bounds={"right", "center", ".5","1"},
 --                sublayers={lost.guiro.layer.Rect{color=Color(1,0,0)}},
---                items={"Item 1", "Item 2", "supercalifragilistic","Item 4"},
-                items={"Item 1", 
-                       "Item 2",
-                       "supercalifragilistic",
-                       "Item 4"
-                },
+                items={"Item 1", "Item 2", "supercalifragilistic","Item 4"},
+                selected = 3
             },
           }
       },
