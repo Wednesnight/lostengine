@@ -152,7 +152,7 @@ function Pebble:buttonTabCandyRoundSingle(target, args)
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
-  target:mode("toggle")
+  target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
   local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
@@ -191,7 +191,7 @@ function Pebble:buttonTabCandyRoundLeft(target, args)
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
-  target:mode("toggle")
+  target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
   local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
@@ -231,7 +231,7 @@ function Pebble:buttonTabCandyRoundMid(target, args)
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
-  target:mode("toggle")
+  target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
   local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
@@ -270,7 +270,7 @@ function Pebble:buttonTabCandyRoundRight(target, args)
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
-  target:mode("toggle")
+  target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
   local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
