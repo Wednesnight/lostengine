@@ -40,7 +40,8 @@ function startup()
                 bounds={"right", "center", ".5","1"},
 --                sublayers={lost.guiro.layer.Rect{color=Color(1,0,0)}},
                 items={"Item 1", "Item 2", "supercalifragilistic","Item 4"},
-                selected = 3
+                selected = 3,
+                size="regular"
             },
           }
       },
@@ -56,21 +57,6 @@ function startup()
           lost.guiro.view.Button{id="small",mode="sticky",bounds={50,{"top",-30},154,70},style="rounded",size="small", title="Small"},
           lost.guiro.view.Button{id="mini",bounds={50,{"top",-50},154,90},style="rounded",size="mini", title="Mini"},
           lost.guiro.view.Button{id="regular",mode="toggle",bounds={50,{"top",-10},154,50},style="roundedToggle",size="regular",title="Toggle"},
-          lost.guiro.view.View
-          {
-            bounds = {0,0,"1", 50},
-            layout = lost.guiro.layout.Horizontal{valign="center",halign="center"},       
---            sublayers={lost.guiro.layer.Rect{bounds={0,0,"1","1"}, color=Color(1,0,0)}},
-            subviews =
-            {
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Single",style="tabCandyRoundSingle", size="regular"},        
-              lost.guiro.view.Button{bounds={0,0,90,50},title="Left",style="tabCandyRoundLeft", size="regular"},        
-              lost.guiro.view.Button{bounds={0,0,80,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
-              lost.guiro.view.Button{bounds={0,0,70,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
-              lost.guiro.view.Button{bounds={0,0,60,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
-              lost.guiro.view.Button{bounds={0,0,50,50},title="Right",style="tabCandyRoundRight", size="regular"},        
-            }
-          },
         }
       },
     }
