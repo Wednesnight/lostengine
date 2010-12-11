@@ -1,5 +1,6 @@
 require("lost.declarative.Context")
 require("lost.guiro.view.Label")
+require("lost.guiro.view.TabBar")
 require("lost.guiro.layer.Text")
 require("lost.guiro.layer.Rect")
 require("lost.guiro.layout.Horizontal")
@@ -20,9 +21,9 @@ function startup()
 --      mouseUp = function(event) log.debug("up "..event.target.id) end,
 --      mouseUpInside = function(event) log.debug("up inside "..event.target.id) end,
 --      mouseUpOutside = function(event) log.debug("up outside "..event.target.id) end,
-      buttonClick = function(event) log.debug("buttonClick "..event.target.id) end,
-      buttonUp = function(event) log.debug("buttonUp "..event.target.id) end,
-      buttonDown = function(event) log.debug("buttonDown "..event.target.id) end,
+--      buttonClick = function(event) log.debug("buttonClick "..event.target.id) end,
+--      buttonUp = function(event) log.debug("buttonUp "..event.target.id) end,
+--      buttonDown = function(event) log.debug("buttonDown "..event.target.id) end,
 --      mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
     },
     subviews = 
@@ -33,6 +34,17 @@ function startup()
           subviews=
           {
             lost.guiro.view.Label{bounds={10,0,"1",50},halign="left", text="Guiroscope",font={"Grinched",30}},
+            lost.guiro.view.TabBar
+            {
+                bounds={"right", "center", ".5","1"},
+--                sublayers={lost.guiro.layer.Rect{color=Color(1,0,0)}},
+--                items={"Item 1", "Item 2", "supercalifragilistic","Item 4"},
+                items={"Item 1", 
+                       "Item 2",
+                       "supercalifragilistic",
+                       "Item 4"
+                },
+            },
           }
       },
       lost.guiro.view.View

@@ -20,9 +20,10 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Label", "default", function(target, args) self:labelDefault(target, args) end)
   self:addStyle("lost.guiro.view.Label", "round", function(target, args) self:labelRound(target, args) end)
   self:addStyle("lost.guiro.view.Label", "roundFramed", function(target, args) self:labelRoundFramed(target, args) end)
-  self:addStyle("lost.guiro.view.Button", "default", function(target, args) self:buttonGray(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "default", function(target, args) self:buttonRounded(target, args) end)
   self:addStyle("lost.guiro.view.Button", "rounded", function(target, args) self:buttonRounded(target, args) end)
   self:addStyle("lost.guiro.view.Button", "roundedToggle", function(target, args) self:buttonRoundedToggle(target, args) end)
+  self:addStyle("lost.guiro.view.View", "default", function(target, args)  end)
   self:addStyle("lost.guiro.view.View", "gray", function(target, args) self:viewGray(target, args) end)
   self:addStyle("lost.guiro.view.View", "toolbar", function(target, args) self:viewToolbar(target, args) end)
   self:addStyle("lost.guiro.view.UserInterface", "default", function(target, args) self:viewGray(target, args) end)
@@ -31,6 +32,9 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundLeft", function(target, args) self:buttonTabCandyRoundLeft(target, args) end)
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundMid", function(target, args) self:buttonTabCandyRoundMid(target, args) end)
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundRight", function(target, args) self:buttonTabCandyRoundRight(target, args) end)
+
+  self:addStyle("lost.guiro.view.TabBar", "default", function(target, args) self:tabBarCandy(target, args) end)
+  self:addStyle("lost.guiro.view.TabBar", "candy", function(target, args) self:tabBarCandy(target, args) end)
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -51,19 +55,6 @@ function Pebble:labelRoundFramed(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(0,0,0),radius=8,filled = false,width=1})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color=Color(0,0,0),font={"Vera", 12}})
-end
-
-function Pebble:buttonGray(target,args)
-  local b = lost.guiro.view.Button
-  local normal = lost.guiro.layer.RoundedRect{bounds = {0,0,"1","1"},color=Color(1,0,0),filled=true,radius=8}
-  local pushed = lost.guiro.layer.RoundedRect{bounds = {0,0,"1","1"},color = Color(1,1,0),filled = true,radius = 8}
-  local disabled = lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(.3,.3,.3),filled=true,radius=8}
-  target.layer:addSublayer(normal)
-  target.layer:addSublayer(pushed)
-  target.layer:addSublayer(disabled)
-  target.backgrounds[b.STATE_NORMAL] = normal
-  target.backgrounds[b.STATE_PUSHED] = pushed
-  target.backgrounds[b.STATE_DISABLED] = disabled
 end
 
 function Pebble:buttonRounded(target,args)
@@ -150,9 +141,8 @@ function Pebble:viewToolbar(target, args)
 end
 
 -------------
--- tabbar styles
+-- tabbar button styles
 --
-
 
 -- round candy
 
@@ -311,4 +301,25 @@ function Pebble:buttonTabCandyRoundRight(target, args)
   target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
+------------
+-- tabbar styles
+
+function Pebble:tabBarCandy(target, args)
+  local size = args.size or "regular"
+
+  target.singleButtonStyleParams.size = size
+  target.singleButtonStyleParams.style = "tabCandyRoundSingle"
+
+  target.leftButtonStyleParams.size = size 
+  target.leftButtonStyleParams.style = "tabCandyRoundLeft" 
+
+  target.midButtonStyleParams.size = size
+  target.midButtonStyleParams.style = "tabCandyRoundMid"
+
+  target.rightButtonStyleParams.size = size
+  target.rightButtonStyleParams.style = "tabCandyRoundRight"
+  
+  target.buttonSizeAdjust = 30
 end
