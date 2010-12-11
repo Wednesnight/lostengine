@@ -16,6 +16,7 @@ Button.STATE_HOVER2 = "hover2"
 Button.STATE_PUSHED2 = "pushed2"  
 
 function Button:constructor(args)
+  local t = args or {}
   self.titles = {} -- one string per state
   self.titleColors = {} -- color for title per state
   self.backgrounds = {} -- each state has a dedicated layer
@@ -23,22 +24,20 @@ function Button:constructor(args)
   self._allStates = {Button.STATE_NORMAL, Button.STATE_HOVER, Button.STATE_PUSHED, Button.STATE_DISABLED,
                      Button.STATE_NORMAL2, Button.STATE_HOVER2, Button.STATE_PUSHED2}
 	self:state(Button.STATE_NORMAL)
-
-	lost.guiro.view.View.constructor(self, args) -- call after aall members that are required for style are setup
-
-  local t = args or {}
-  self.id = t.id or "button"
 	self._enabled = true
   self._pushed = false;
-
-  if t.title then self:title(t.title) end
-
   self._handlerMaps = {}
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
   self._handlerMaps["sticky"] = self:createStickyHandlerMap()
   self._handlerMaps["toggle"] = self:createToggleHandlerMap()
   self._currentHandlerMap = nil
 	self:mode(t.mode or "normal")
+
+	lost.guiro.view.View.constructor(self, args) -- call after aall members that are required for style are setup
+
+  self.id = t.id or "button"
+
+  if t.title then self:title(t.title) end
 	
   self:addEventListener("mouseEnter", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseLeave", function(event) self:eventHandler(event) end)	
