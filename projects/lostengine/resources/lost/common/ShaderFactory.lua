@@ -308,7 +308,7 @@ void main(void)
 
     if s.bottom then
       if rc.bl and rc.br then shader=shader.."  float botl = box(lpc, vec2(mr-1.0, 0), vec2(size.x-mr-1.0, width));\n"
-      elseif rc.bl and not rc.br then shader=shader.."  float botl = box(lpc, vec2(mr-1.0, 0), vec2(size.x.0, width));\n"
+      elseif rc.bl and not rc.br then shader=shader.."  float botl = box(lpc, vec2(mr-1.0, 0), vec2(size.x, width));\n"
       elseif not rc.bl and rc.br then shader=shader.."  float botl = box(lpc, vec2(0.0, 0), vec2(size.x-mr-1.0, width));\n"
       elseif not rc.bl and not rc.br then shader=shader.."  float botl = box(lpc, vec2(0.0, 0), vec2(size.x, width));\n" 
       end

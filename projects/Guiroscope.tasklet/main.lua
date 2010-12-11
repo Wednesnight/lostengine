@@ -47,8 +47,45 @@ function startup()
           lost.guiro.view.Button{id="small",mode="sticky",bounds={50,{"top",-30},154,70},style="rounded",size="small", title="Small"},
           lost.guiro.view.Button{id="mini",bounds={50,{"top",-50},154,90},style="rounded",size="mini", title="Mini"},
           lost.guiro.view.Button{id="regular",mode="toggle",bounds={50,{"top",-10},154,50},style="roundedToggle",size="regular",title="Toggle"},
+          lost.guiro.view.View
+          {
+            bounds = {0,0,300, 50},
+            layout = lost.guiro.layout.Horizontal{valign="center"},        
+            subviews =
+            {
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 1",style="rounded"},        
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 2",style="rounded"},        
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 3",style="rounded"},        
+            }
+          },
+          lost.guiro.view.View
+          {
+            bounds = {0,0,300, 50},
+            layout = lost.guiro.layout.Horizontal{valign="center"},        
+            subviews =
+            {
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 1",style="rounded"},        
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 2",style="rounded"},        
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 3",style="rounded"},        
+            }
+          },
+          lost.guiro.view.View
+          {
+            bounds = {0,0,600, 50},
+            layout = lost.guiro.layout.Horizontal{valign="center"},       
+--            sublayers={lost.guiro.layer.Rect{bounds={0,0,"1","1"}, color=Color(1,0,0)}},
+            subviews =
+            {
+              lost.guiro.view.Button{bounds={0,0,100,50},title="Single",style="tabCandyRoundSingle", size="regular"},        
+              lost.guiro.view.Button{bounds={0,0,90,50},title="Left",style="tabCandyRoundLeft", size="regular"},        
+              lost.guiro.view.Button{bounds={0,0,80,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
+              lost.guiro.view.Button{bounds={0,0,70,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
+              lost.guiro.view.Button{bounds={0,0,60,50},title="Mid",style="tabCandyRoundMid", size="regular"},        
+              lost.guiro.view.Button{bounds={0,0,50,50},title="Right",style="tabCandyRoundRight", size="regular"},        
+            }
+          },
         }
-      }
+      },
     }
   }
   ui:printSubviews()
