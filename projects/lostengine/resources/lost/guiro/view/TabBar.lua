@@ -29,6 +29,21 @@ function TabBar:constructor(args)
   self.selected = -1
   self:select(t.selected or 1)
   self:needsLayout()
+  self:addEventListener("buttonClick", function(event) self:buttonClicked(event) end)
+end
+
+function TabBar:buttonClicked(event)
+  for index,button in ipairs(self._buttons) do
+    if rawequal(button, event.target) then
+      self:select(index)
+      local ev = lost.guiro.event.Event("tabBarSelectionChanged")
+      ev.bubbles = true
+      ev.target = self
+      self:dispatchEvent(ev)  
+      
+      break
+    end
+  end
 end
 
 function TabBar:adjustButtonWidth(button, item)
@@ -36,7 +51,6 @@ function TabBar:adjustButtonWidth(button, item)
   if button.textLayer then
     local rt = button.textLayer._font:render(item)
     width = rt.size.width + self.buttonSizeAdjust
-    log.debug("-- NEWWIDTH: "..width)
   end
   button._bounds.width = lost.guiro.Bounds.decodeEntry(3,width) 
 end

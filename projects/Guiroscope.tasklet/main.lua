@@ -25,6 +25,7 @@ function startup()
 --      buttonUp = function(event) log.debug("buttonUp "..event.target.id) end,
 --      buttonDown = function(event) log.debug("buttonDown "..event.target.id) end,
 --      mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
+        tabBarSelectionChanged = function(event) log.debug("new tabbar selection: "..event.target.selected) end
     },
     subviews = 
     {

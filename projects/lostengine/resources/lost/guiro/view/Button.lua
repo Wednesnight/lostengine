@@ -30,6 +30,7 @@ function Button:constructor(args)
   self._handlerMaps["normal"] = self:createNormalHandlerMap()
   self._handlerMaps["sticky"] = self:createStickyHandlerMap()
   self._handlerMaps["toggle"] = self:createToggleHandlerMap()
+  self._handlerMaps["toggleOnce"] = self:createToggleOnceHandlerMap()
   self._currentHandlerMap = nil
 	self:mode(t.mode or "normal")
 
@@ -56,7 +57,7 @@ function Button:pushed(...)
       self._pushed = false
     end
     if self._pushed then
-      if self._mode == "toggle" then
+      if (self._mode == "toggle") or (self._mode == "toggleOnce") then
         self:togglestate(Button.STATE_NORMAL)
       else  
         self:state(Button.STATE_PUSHED)
@@ -64,6 +65,7 @@ function Button:pushed(...)
     else
       self:state(Button.STATE_NORMAL)
     end
+    self:needsDisplay()
   else
     return self._pushed
   end
@@ -75,6 +77,7 @@ function Button:mode(modeName)
   if self._currentHandlerMap == nil then
     log.warn("couldn't find handlerMap for mode: '"..tostring(modeName).."', defaulting to normal")
     self._currentHandlerMap = self._handlerMaps["normal"]
+    self._mode = "normal"
   end
 end
 
@@ -192,6 +195,44 @@ function Button:createToggleHandlerMap()
                      end
   }
 end
+
+function Button:createToggleOnceHandlerMap()
+  return {
+    mouseEnter = function(event)
+                    if self:pushed() then return end
+                    if not self.mouseIsDown then
+                      self:togglestate(Button.STATE_HOVER)                       
+                    else
+                      self:togglestate(Button.STATE_PUSHED) 
+                    end
+                  end,
+    mouseLeave = function(event)
+                    if self:pushed() then return end
+                    self:togglestate(Button.STATE_NORMAL) 
+                  end,
+    mouseDown = function(event)
+                    if self:pushed() then return end
+                    self.mouseIsDown = true                       
+                    self:togglestate(Button.STATE_PUSHED)
+                    self:dispatchButtonEvent("buttonDown")    
+                  end,
+    mouseUpInside = function(event)
+                        if self:pushed() then return end
+                        self.mouseIsDown = false
+                        self:pushed(not self:pushed())
+                        self:togglestate(Button.STATE_HOVER)
+                        self:dispatchButtonEvent("buttonClick")    
+                        self:dispatchButtonEvent("buttonUp")    
+                      end,
+    mouseUpOutside = function(event)
+                       if self:pushed() then return end
+                       self.mouseIsDown = false
+                       self:togglestate(Button.STATE_NORMAL)
+                       self:dispatchButtonEvent("buttonUp")    
+                     end
+  }
+end
+
 
 -- use this function like you would use state. IT will set the state
 -- depending on the value(), i.e. if you set STATE_NORMAL and 
