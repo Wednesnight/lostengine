@@ -49,30 +49,8 @@ function startup()
           lost.guiro.view.Button{id="regular",mode="toggle",bounds={50,{"top",-10},154,50},style="roundedToggle",size="regular",title="Toggle"},
           lost.guiro.view.View
           {
-            bounds = {0,0,300, 50},
-            layout = lost.guiro.layout.Horizontal{valign="center"},        
-            subviews =
-            {
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 1",style="rounded"},        
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 2",style="rounded"},        
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 3",style="rounded"},        
-            }
-          },
-          lost.guiro.view.View
-          {
-            bounds = {0,0,300, 50},
-            layout = lost.guiro.layout.Horizontal{valign="center"},        
-            subviews =
-            {
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 1",style="rounded"},        
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 2",style="rounded"},        
-              lost.guiro.view.Button{bounds={0,0,100,50},title="Button 3",style="rounded"},        
-            }
-          },
-          lost.guiro.view.View
-          {
-            bounds = {0,0,600, 50},
-            layout = lost.guiro.layout.Horizontal{valign="center"},       
+            bounds = {0,0,"1", 50},
+            layout = lost.guiro.layout.Horizontal{valign="center",halign="center"},       
 --            sublayers={lost.guiro.layer.Rect{bounds={0,0,"1","1"}, color=Color(1,0,0)}},
             subviews =
             {
