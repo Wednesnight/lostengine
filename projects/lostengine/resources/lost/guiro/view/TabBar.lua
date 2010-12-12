@@ -85,6 +85,7 @@ function TabBar:rebuildButtons()
     local params = {bounds={0,0,50,10},title=item}
     self:addStyleParams(params, index)
     local button = lost.guiro.view.Button(params)
+    button.id = tostring(index)
     self:adjustButtonWidth(button, item)
     self:addSubview(button)
     table.insert(self._buttons, button)

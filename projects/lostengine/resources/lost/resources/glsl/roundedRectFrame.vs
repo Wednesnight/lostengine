@@ -1,4 +1,4 @@
-#import "lost/Resources/glsl/lftransform.vsp"
+#import "lost/resources/glsl/lftransform.vsp"
 
 attribute vec2 position;
 attribute vec2 texcoord0;

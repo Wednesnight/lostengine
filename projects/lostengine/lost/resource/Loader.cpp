@@ -1,6 +1,7 @@
 #include "lost/resource/Loader.h"
 #include "lost/resource/Repository.h"
 #include "lost/common/Logger.h"
+#include "lost/common/Data.h"
 #include <stdexcept>
 
 namespace lost
