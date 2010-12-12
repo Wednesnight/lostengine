@@ -69,6 +69,7 @@ end
 
 function update()
 --  ui.layer.renderNode:print()
+--  local u = gcinfo();collectgarbage("collect");local u2 = gcinfo();log.debug("used: "..u.."kb after gc: "..u2.."kb")
 end
 
 function shutdown()
