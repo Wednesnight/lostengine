@@ -3,6 +3,7 @@
 
 #include "lost/font/forward.h"
 #include "lost/font/freetype/forward.h"
+#include "lost/common/forward.h"
 #include "lost/resource/forward.h"
 #include <map>
 #include <string>
@@ -23,6 +24,7 @@ struct FontManager
   
   freetype::LibraryPtr lib();
   std::map<std::string, std::string> name2path;
+  std::map<std::string, lost::common::DataPtr> path2data;
   std::map<std::pair<std::string, uint32_t>, TrueTypeFontPtr> nameAndSize2font;
   
   freetype::LibraryPtr  _lib;

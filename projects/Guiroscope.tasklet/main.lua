@@ -11,6 +11,13 @@ local Color = lost.common.Color
 function startup()
   local tabbarheight = 52
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
+
+  lost.guiro.themeManager() -- make sure it is instantiated and gradients are created
+  local layers = require("layers")
+  layers:hidden(false)
+  local views = require("views")
+  views:hidden(true)
+
   ui = lost.guiro.view.UserInterface
   {
     listeners = 
@@ -25,40 +32,36 @@ function startup()
 --      buttonUp = function(event) log.debug("buttonUp "..event.target.id) end,
 --      buttonDown = function(event) log.debug("buttonDown "..event.target.id) end,
 --      mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
-        tabBarSelectionChanged = function(event) log.debug("new tabbar selection: "..event.target.selected) end
+        tabBarSelectionChanged = function(event) 
+--          log.debug("new tabbar selection: "..event.target.selected.." id:"..event.target.id)
+            if event.target.id ~= "main" then return end
+            if event.target.selected == 1 then
+              layers:hidden(false)
+              views:hidden(true)
+            else
+              layers:hidden(true)
+              views:hidden(false)          
+            end
+          end
     },
     subviews = 
     {
       lost.guiro.view.View
       {
+          id="mainToolBar",
           style="toolbar", bounds={0,"top","1",tabbarheight},
           subviews=
           {
             lost.guiro.view.Label{bounds={10,0,"1",50},halign="left", text="Guiroscope",font={"Grinched",30}},
-            lost.guiro.view.TabBar
-            {
-                bounds={"right", "center", ".5","1"},
---                sublayers={lost.guiro.layer.Rect{color=Color(1,0,0)}},
-                items={"Item 1", "Item 2", "supercalifragilistic","Item 4"},
-                selected = 3,
-                size="regular"
-            },
+            lost.guiro.view.TabBar{id="main",bounds={"right", "top", "1","1"},items={"Layers", "Views"},selected = 1,size="regular"},
           }
       },
       lost.guiro.view.View
       {
-        bounds = {0,0,"1",{"1",-tabbarheight}},
-        layout = lost.guiro.layout.Vertical{halign="center",valign = "center",xoffset = -0,yoffset = 0,spacing = 10,},
-        subviews=
-        {
-          lost.guiro.view.Label{bounds={200,200,100,30},text="hello",style="roundFramed"},
-          lost.guiro.view.Button{id="ugly",mode="sticky",bounds={50,0,100,30},title="Button",},
-          lost.guiro.view.Button{id="regular",mode="normal",bounds={50,{"top",-10},154,50},style="rounded",size="regular", title="Regular"},
-          lost.guiro.view.Button{id="small",mode="sticky",bounds={50,{"top",-30},154,70},style="rounded",size="small", title="Small"},
-          lost.guiro.view.Button{id="mini",bounds={50,{"top",-50},154,90},style="rounded",size="mini", title="Mini"},
-          lost.guiro.view.Button{id="regular",mode="toggle",bounds={50,{"top",-10},154,50},style="roundedToggle",size="regular",title="Toggle"},
-        }
-      },
+          id="mainView",
+          bounds = {0,0,"1",{"1",-tabbarheight}},
+          subviews = {layers,views}
+      }
     }
   }
   ui:printSubviews()

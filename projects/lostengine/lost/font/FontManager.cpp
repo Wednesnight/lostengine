@@ -39,7 +39,12 @@ TrueTypeFontPtr FontManager::getFont(const std::string& name, uint32_t size)
     std::map<std::string, std::string>::iterator ppos = name2path.find(name);
     if (ppos != name2path.end()) {
       std::string path = name2path[name];
-      common::DataPtr data = _loader->load(path);
+      common::DataPtr data = path2data[path];
+      if(!data)
+      {
+        data = _loader->load(path);
+        path2data[path] = data;
+      }
       result.reset(new TrueTypeFont(lib(),data, size));
       nameAndSize2font[fontKey] = result;
       result->atlasSize = lost::math::Vec2(256,256); // FIXME: make this configurable?      
