@@ -2,7 +2,6 @@ module("lost.guiro.layer", package.seeall)
 
 require("lost.guiro.Bounds")
 require("lost.guiro.HLine")
-require("lost.guiro.TextureManager")
 
 lost.common.Class "lost.guiro.layer.HLine" "lost.guiro.layer.Layer" {}
 
