@@ -64,11 +64,14 @@ function startup()
       }
     }
   }
-  ui:printSubviews()
+--  ui:printSubviews()
 end
 
 function update()
 --  ui.layer.renderNode:print()
+end
+
+function shutdown()
 end
 
 function keyHandler(event)

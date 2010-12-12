@@ -2,6 +2,7 @@ local tabbarHeight = 30
 
 return lost.guiro.view.View
 {
+  id="views",
   bounds = {0,0,"1","1"},
   subviews=
   {
