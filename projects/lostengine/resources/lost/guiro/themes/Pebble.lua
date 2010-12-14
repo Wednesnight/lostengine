@@ -166,21 +166,16 @@ function Pebble:buttonTabCandyRoundSingle(target, args)
   local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r},
                                rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r}}
                               }
-  local pushed2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",color=Color(.9,.9,.9),filled=true,radius=r},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r}}
-                              }
 
   local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
-  target.layer:addSublayer(pushed2)
   target.layer:addSublayer(text)
   target.textLayer = text
   target.backgrounds[b.STATE_NORMAL] = normal
   target.backgrounds[b.STATE_PUSHED] = pushed
   target.backgrounds[b.STATE_NORMAL2] = normal2
-  target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
@@ -205,21 +200,16 @@ function Pebble:buttonTabCandyRoundLeft(target, args)
   local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r,roundCorners={tl=true, bl=true, br=false, tr=false}},
                                rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=true, bl=true, br=false, tr=false}}}
                               }
-  local pushed2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",color=Color(.9,.9,.9),filled=true,radius=r,roundCorners={tl=true, bl=true, br=false, tr=false}},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=true, bl=true, br=false, tr=false}}}
-                              }
 
   local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
-  target.layer:addSublayer(pushed2)
   target.layer:addSublayer(text)
   target.textLayer = text
   target.backgrounds[b.STATE_NORMAL] = normal
   target.backgrounds[b.STATE_PUSHED] = pushed
   target.backgrounds[b.STATE_NORMAL2] = normal2
-  target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
@@ -245,21 +235,16 @@ function Pebble:buttonTabCandyRoundMid(target, args)
   local normal2 = l{sublayers={rc{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,},
                                rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
                               }
-  local pushed2 = l{sublayers={rc{bounds={0,0,"1","1"},gradient="candyBlue",color=Color(.9,.9,.9),filled=true},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
-                              }
 
   local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
-  target.layer:addSublayer(pushed2)
   target.layer:addSublayer(text)
   target.textLayer = text
   target.backgrounds[b.STATE_NORMAL] = normal
   target.backgrounds[b.STATE_PUSHED] = pushed
   target.backgrounds[b.STATE_NORMAL2] = normal2
-  target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
@@ -284,21 +269,16 @@ function Pebble:buttonTabCandyRoundRight(target, args)
   local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
                                rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
                               }
-  local pushed2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",color=Color(.9,.9,.9),filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
-                              }
 
   local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
-  target.layer:addSublayer(pushed2)
   target.layer:addSublayer(text)
   target.textLayer = text
   target.backgrounds[b.STATE_NORMAL] = normal
   target.backgrounds[b.STATE_PUSHED] = pushed
   target.backgrounds[b.STATE_NORMAL2] = normal2
-  target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
