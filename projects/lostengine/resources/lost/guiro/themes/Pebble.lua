@@ -39,6 +39,9 @@ function Pebble:constructor()
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
+  
+  self.radioSize = {regular=15,small=13,mini=10}
+  self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
 --  self:addStyle("lost.guiro.view.View", "default", function(target, args) self:viewGray(target, args) end)
 end
 
@@ -303,3 +306,38 @@ function Pebble:tabBarCandy(target, args)
   
   target.buttonSizeAdjust = 30
 end
+
+function Pebble:buttonRadioCandy(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggle")
+  -- target bounds must have been set by now so we can modify height
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
+  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",filled=true,radius=r, roundCorners={tl=false, bl=false, br=true, tr=true}},
+                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r, roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+                             }
+  local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",color=Color(.9,.9,.9),filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
+                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+                             }
+
+  local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
+                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
