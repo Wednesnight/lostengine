@@ -12,7 +12,7 @@
     NSOpenGLPFADoubleBuffer,
     NSOpenGLPFAAccelerated,
     NSOpenGLPFAColorSize, [[[NSUserDefaults standardUserDefaults] objectForKey:@"colorDepth"] intValue],
-    NSOpenGLPFAAlphaSize, 16,
+    NSOpenGLPFAAlphaSize, 8,
     NSOpenGLPFADepthSize, 32,
     0
   };
