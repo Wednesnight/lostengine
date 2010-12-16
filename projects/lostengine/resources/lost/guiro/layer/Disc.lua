@@ -78,10 +78,7 @@ function Disc:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
   self.quad:update(self.rect)
   local radius = math.min(self.rect.height/2, self.rect.width/2)
-  if not self.filled then
-    self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
-  end
-  self.mesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+  self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
   self.mesh.material.uniforms:set("center", Vec2(radius-1, radius-1))
   self.mesh.material.uniforms:setFloat("radius", radius)
 end

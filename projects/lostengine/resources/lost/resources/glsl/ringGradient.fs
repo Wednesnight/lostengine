@@ -5,7 +5,7 @@ varying vec2 tc0;
 uniform sampler2D texture0; // gradient
 uniform float radius;
 uniform float width;
-varying float gradientCoord;
+uniform float gradientCoord;
 
 #import "lost/resources/glsl/ring.fsp"
 #import "lost/resources/glsl/gradient.fsp"
