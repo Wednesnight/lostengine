@@ -31,6 +31,18 @@ function ShaderFactory:ring()
   return self:loadShader("lost/resources/glsl/ring")
 end
 
+function ShaderFactory:ringGradient()
+  return self:loadShader("lost/resources/glsl/ringGradient")
+end
+
+function ShaderFactory:discGradient()
+  return self:loadShader("lost/resources/glsl/discGradient")
+end
+
+function ShaderFactory:ring()
+  return self:loadShader("lost/resources/glsl/ring")
+end
+
 function ShaderFactory:disc()
   return self:loadShader("lost/resources/glsl/disc")
 end
