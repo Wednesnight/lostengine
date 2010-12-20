@@ -386,6 +386,8 @@ namespace lost
             .def("wrap", &Texture::wrap)
             .def_readwrite("width", &Texture::width)
             .def_readwrite("height", &Texture::height)
+            .def_readwrite("dataWidth", &Texture::dataWidth)
+            .def_readwrite("dataHeight", &Texture::dataHeight)
             .scope
             [
               class_<Texture::Params>("Params")
