@@ -180,6 +180,8 @@ namespace lost
       /** draws this bitmap into the specified target. */
       void draw(uint32_t x, uint32_t y, BitmapPtr target);
       
+      void premultiplyAlpha(); // multiplies each pixels color channels with its alpha channel.
+      
     private:
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.

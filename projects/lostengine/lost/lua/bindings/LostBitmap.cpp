@@ -24,6 +24,7 @@ namespace lost
             .def("disc", &Bitmap::disc)
             .def("ring", &Bitmap::ring)
             .def("filledRect", &Bitmap::filledRect)
+            .def("premultiplyAlpha", &Bitmap::premultiplyAlpha)
             .scope
             [
               def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create),

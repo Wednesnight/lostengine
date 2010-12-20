@@ -483,6 +483,22 @@ void Bitmap::filledRect(const common::Color& col, uint32_t posx, uint32_t posy, 
   }
 }
 
+void Bitmap::premultiplyAlpha()
+{
+  for(uint32_t x=0; x<width; ++x)
+  {
+    for(uint32_t y=0; y<height; ++y)
+    {
+      common::Color c = pixel(x,y);
+      float a = c.fv[3];
+      c.fv[0] = c.fv[0]*a;
+      c.fv[1] = c.fv[1]*a;
+      c.fv[2] = c.fv[2]*a;
+      pixel(x,y,c);
+    }
+  }
+}
+
 
 }
 }
