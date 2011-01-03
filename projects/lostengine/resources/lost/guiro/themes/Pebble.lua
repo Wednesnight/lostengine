@@ -35,6 +35,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundRight", function(target, args) self:buttonTabCandyRoundRight(target, args) end)
 
   self:addStyle("lost.guiro.view.Button", "checkboxCandy", function(target, args) self:buttonCheckboxCandy(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "radioCandy", function(target, args) self:buttonRadioCandy(target, args) end)
 
   self:addStyle("lost.guiro.view.TabBar", "default", function(target, args) self:tabBarCandy(target, args) end)
   self:addStyle("lost.guiro.view.TabBar", "candy", function(target, args) self:tabBarCandy(target, args) end)
@@ -44,12 +45,13 @@ function Pebble:constructor()
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
   
   self.checkboxRadius = 3
-  self.checkboxSizes = {mini=10, small=13, regular=14}
+  self.checkboxSizes = {mini=10, small=12, regular=14}
   self.checkboxFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.checkboxSpacing = 4
   
-  self.radioSize = {regular=15,small=13,mini=10}
+  self.radioSize = {regular=14,small=12,mini=10}
   self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
+  self.radioCenterRadius = {regular=6,small=6,mini=4}
 --  self:addStyle("lost.guiro.view.View", "default", function(target, args) self:viewGray(target, args) end)
 end
 
@@ -317,23 +319,25 @@ end
 
 function Pebble:buttonRadioCandy(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
+  local d = lost.guiro.layer.Disc
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
-  target:mode("toggle")
+  target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
   local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
-  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",filled=true,radius=r, roundCorners={tl=false, bl=false, br=true, tr=true}},
-                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r, roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+  local cr = self.radioCenterRadius[size]
+  local normal = l{sublayers={d{bounds={0,0,"1","1"},gradient="candyGray",filled=true},
+                              d{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false}}
                              }
-  local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",color=Color(.9,.9,.9),filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
-                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+  local pushed = l{sublayers={d{bounds={0,0,"1","1"},gradient="candyGray",color=Color(.9,.9,.9),filled=true,},
+                              d{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,}}
                              }
 
-  local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false, br=true, tr=true},sides={left=false}}}
+  local normal2 = l{sublayers={d{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,},
+                               d{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false},
+                               d{bounds={r-cr/2,r-cr/2,cr,cr},color=Color(0,0,0),filled=true}}
                               }
 
   local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}

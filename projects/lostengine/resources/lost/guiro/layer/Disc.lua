@@ -79,6 +79,6 @@ function Disc:updateLayout()
   self.quad:update(self.rect)
   local radius = math.min(self.rect.height/2, self.rect.width/2)
   self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
-  self.mesh.material.uniforms:set("center", Vec2(radius-1, radius-1))
+  self.mesh.material.uniforms:set("center", Vec2(radius-1+.25, radius-1+.25))
   self.mesh.material.uniforms:setFloat("radius", radius)
 end
