@@ -38,6 +38,27 @@ return lost.guiro.view.View
       size="regular",
       title = "Checkbox",
       bounds = {50,140,100,30}
-    }
+    },
+    lost.guiro.view.Button
+    {
+      style="radioCandy",
+      size="regular",
+      title = "Radio",
+      bounds = {50,"top",100,30}
+    },
+    lost.guiro.view.Button
+    {
+      style="radioCandy",
+      size="small",
+      title = "Radio",
+      bounds = {50,{"top",-25},100,30}
+    },
+    lost.guiro.view.Button
+    {
+      style="radioCandy",
+      size="mini",
+      title = "Radio",
+      bounds = {50,{"top",-50},100,30}
+    }    
   }
 }
