@@ -200,6 +200,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::pushScissorRect(const math::Rect& v)
     {
       _scissorRectStack.push_back(v);
+      scissorRect(v);
       scissor(true);
     }
     

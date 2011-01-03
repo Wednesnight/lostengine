@@ -15,7 +15,7 @@ local Bounds = lost.guiro.Bounds
 function Layer:constructor(args)
   local t = args or {}
 	self.id = t.id or "layer"
-	self.renderNode = lost.rg.Node.create()
+	self.renderNode = lost.rg.ScissorStack.create()
 	self.renderNode.name = self.id
 	self.layerNodes = lost.rg.Node.create() -- add draw for this layer to this node so sublayers are drawn after this layer
 	self.layerNodes.name = "layerNodes"
@@ -34,6 +34,10 @@ function Layer:constructor(args)
 	  self.layout = t.layout 
 	else
     self.layout = nil
+	end
+	
+	if t.clip then
+	  self:clip(t.clip)
 	end
 	
 	local layers = t.sublayers or {}
@@ -168,6 +172,7 @@ end
 function Layer:updateLayout()
 --  log.debug("updateLayout "..self.id)
   self:updateRect()
+  self.renderNode.rect = self.rect
 end
 
 function Layer:updateDisplay()
@@ -207,3 +212,12 @@ function Layer:hidden(...)
     return not self.renderNode.active
   end
 end
+
+function Layer:clip(...)
+  if arg.n >= 1 then
+    self.renderNode.clip = arg[1]
+  else
+    return self.renderNode.clip
+  end
+end
+

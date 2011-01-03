@@ -16,6 +16,7 @@ return lost.guiro.view.View
     {      
       bounds={10,10,{"1",-20},{"1",-textHeight}},
       layout=lost.guiro.layout.Vertical{valign="center", halign="center", spacing=10},
+      clip = true,
       sublayers=
       {
         lost.guiro.layer.Text{bounds={0,0,"1",exampleHeight},font={"Vera", 12}, text="The quick brown fox jumps over the lazy dog.",color=Color(0,0,0),halign="left"},
