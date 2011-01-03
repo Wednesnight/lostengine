@@ -69,6 +69,7 @@ namespace lost
       void finalize();
 
       GLuint m_defaultFrameBuffer;
+      std::vector<math::Rect> _scissorRectStack;
       
     public:
       Context();
@@ -99,12 +100,17 @@ namespace lost
       void depthTest(bool enable);
       void blend(bool enable);
       void blendFunc(GLenum src, GLenum dest);
+
       void scissor(bool enable);
+      void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
+      void pushScissorRect(const math::Rect& v); // pushes a rect on the scissor stack, setting it for scissoring and enabling scissor if required
+      void pushClippedScissorRect(const math::Rect& v); // same as pushScissorRect, but clips the new rect against a previews one if one exists.
+      void popScissorRect(); // pops the current scissor rect fro the stack, disabling scissoring if it was the last one.
+      
 
       void cull(bool enable);
       void cullFace(GLenum v);
       
-      void scissorRect(const math::Rect& rect); // sets the current scissoring region to rect
       void clearColor(const common::Color& col); // sets the current clear color to col
       
       void camera(const camera::CameraPtr& cam);

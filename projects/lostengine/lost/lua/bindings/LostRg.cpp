@@ -18,6 +18,7 @@
 #include "lost/rg/Blend.h"
 #include "lost/rg/Scissor.h"
 #include "lost/rg/ScissorRect.h"
+#include "lost/rg/ScissorStack.h"
 
 #include "lost/mesh/Line.h"
 #include "lost/mesh/Quad.h"
@@ -116,6 +117,13 @@ namespace lost
           .scope
           [
             def("create", &ScissorRect::create)
+          ],
+          class_<ScissorStack, Node>("ScissorStack")
+          .def_readwrite("rect", &ScissorStack::rect)
+          .def_readwrite("clip", &ScissorStack::clip)
+          .scope
+          [
+            def("create", &ScissorStack::create)
           ]         
         ]
       ];

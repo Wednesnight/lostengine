@@ -763,6 +763,9 @@
 		EAAD3482113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAAD3483113B2077001111C8 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */; };
 		EAB235E41142AD89009578A9 /* Uniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB235E31142AD89009578A9 /* Uniform.cpp */; };
+		EAB38F0912D14CBE00362802 /* ScissorStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB38F0812D14CBE00362802 /* ScissorStack.cpp */; };
+		EAB38F0A12D14CBE00362802 /* ScissorStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB38F0812D14CBE00362802 /* ScissorStack.cpp */; };
+		EAB38F0B12D14CBE00362802 /* ScissorStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB38F0812D14CBE00362802 /* ScissorStack.cpp */; };
 		EAB50A7B10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7C10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
 		EAB50A7D10C7FF9B00BEE727 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = EAB50A7A10C7FF9B00BEE727 /* stb_image.c */; };
@@ -1239,6 +1242,7 @@
 		EAAD3333113ADA0F001111C8 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Runner.cpp; sourceTree = "<group>"; };
 		EAAD3480113B2077001111C8 /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EAB235E31142AD89009578A9 /* Uniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Uniform.cpp; sourceTree = "<group>"; };
+		EAB38F0812D14CBE00362802 /* ScissorStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScissorStack.cpp; path = rg/ScissorStack.cpp; sourceTree = "<group>"; };
 		EAB50A7A10C7FF9B00BEE727 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_image.c; path = ../../../thirdparty/stb/stb_image_1_18/stb_image.c; sourceTree = SOURCE_ROOT; };
 		EAB61FD21142ED0100295C1B /* VertexAttribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexAttribute.cpp; sourceTree = "<group>"; };
 		EAB67C611115EF6300442904 /* BufferLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
@@ -2126,6 +2130,7 @@
 			children = (
 				EA964E1C1055A7C000191DDD /* Scissor.cpp */,
 				3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */,
+				EAB38F0812D14CBE00362802 /* ScissorStack.cpp */,
 				8D13D8040FD8011A00CEC1AF /* Blend.cpp */,
 				EA18C3200FA25C5600C2652A /* Node.cpp */,
 				EA8A15230FA26D7600E42FBE /* Camera.cpp */,
@@ -2610,6 +2615,7 @@
 				EA836EF21295792B004DB2BA /* FontManager.cpp in Sources */,
 				EA836EF61295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2D12957FCF004DB2BA /* Glyph.cpp in Sources */,
+				EAB38F0B12D14CBE00362802 /* ScissorStack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2920,6 +2926,7 @@
 				EA836EF01295792B004DB2BA /* FontManager.cpp in Sources */,
 				EA836EF41295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2B12957FCF004DB2BA /* Glyph.cpp in Sources */,
+				EAB38F0912D14CBE00362802 /* ScissorStack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3249,6 +3256,7 @@
 				EA836EF11295792B004DB2BA /* FontManager.cpp in Sources */,
 				EA836EF51295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2C12957FCF004DB2BA /* Glyph.cpp in Sources */,
+				EAB38F0A12D14CBE00362802 /* ScissorStack.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
