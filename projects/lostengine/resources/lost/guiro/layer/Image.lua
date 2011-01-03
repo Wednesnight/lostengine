@@ -27,7 +27,6 @@ function Image:constructor(args)
   
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)  
-  log.debug("---------- tex "..self.texture.dataWidth.." "..self.texture.dataHeight)
   self.quad:update(Rect(0,0,self.texture.dataWidth, self.texture.dataHeight))
   self:needsLayout()
 end
