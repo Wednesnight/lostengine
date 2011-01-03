@@ -60,6 +60,7 @@ function startup()
       {
           id="mainView",
           bounds = {0,0,"1",{"1",-tabbarheight}},
+          clip=true,
           subviews = {layers,views}
       }
     }

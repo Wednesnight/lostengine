@@ -6,6 +6,7 @@ return lost.guiro.view.View
 {
   id="layers_disc",
   bounds = {0,0,"1","1"},
+  clip=true,
   sublayers =
   {
     lost.guiro.layer.Text{bounds={"center", "top",200,20},font={"Vera",12},
