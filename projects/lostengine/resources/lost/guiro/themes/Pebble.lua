@@ -6,6 +6,7 @@ require("lost.guiro.Theme")
 require("lost.guiro.layer.Text")
 require("lost.guiro.layer.HLine")
 require("lost.guiro.layer.RoundedRect")
+require("lost.guiro.layer.Image")
 require("lost.guiro.themes.PebbleGradients")
 
 lost.common.Class "lost.guiro.themes.Pebble" "lost.guiro.Theme" {}
@@ -33,12 +34,19 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundMid", function(target, args) self:buttonTabCandyRoundMid(target, args) end)
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundRight", function(target, args) self:buttonTabCandyRoundRight(target, args) end)
 
+  self:addStyle("lost.guiro.view.Button", "checkboxCandy", function(target, args) self:buttonCheckboxCandy(target, args) end)
+
   self:addStyle("lost.guiro.view.TabBar", "default", function(target, args) self:tabBarCandy(target, args) end)
   self:addStyle("lost.guiro.view.TabBar", "candy", function(target, args) self:tabBarCandy(target, args) end)
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
+  
+  self.checkboxRadius = 3
+  self.checkboxSizes = {mini=10, small=13, regular=14}
+  self.checkboxFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
+  self.checkboxSpacing = 4
   
   self.radioSize = {regular=15,small=13,mini=10}
   self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -341,3 +349,60 @@ function Pebble:buttonRadioCandy(target, args)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
 
+function Pebble:checkmarkTexture()
+  if not self._checkmarkTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/checkmark.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._checkmarkTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._checkmarkTexture
+end
+
+function Pebble:buttonCheckboxCandy(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+  local img = lost.guiro.layer.Image
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggle")
+  -- target bounds must have been set by now so we can modify height
+  local s = self.checkboxSizes[size]
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,s)
+  local r = self.checkboxRadius
+  local io = 2 -- image offset
+  local dc = .7
+  local dimColor = Color(dc,dc,dc)
+  local normal = l{sublayers={rr{bounds={0,0,s,s},gradient="candyGray",filled=true,radius=r,},
+                              rr{bounds={0,0,s,s},gradient="candyGrayFrame",filled=false,radius=r}}
+                             }
+  local pushed = l{sublayers={rr{bounds={0,0,s,s},gradient="candyGray",color=dimColor,filled=true,radius=r,},
+                              rr{bounds={0,0,s,s},gradient="candyGrayFrame",filled=false,radius=r}}
+                             }
+
+  local normal2 = l{sublayers={rr{bounds={0,0,s,s},gradient="candyBlue",filled=true,radius=r},
+                               rr{bounds={0,0,s,s},gradient="candyBlueFrame",filled=false,radius=r},
+                               img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,scale="aspect",filter=true}}
+                              }
+  local pushed2 = l{sublayers={rr{bounds={0,0,s,s},gradient="candyBlue",color=dimColor,filled=true,radius=r},
+                              rr{bounds={0,0,s,s},gradient="candyBlueFrame",filled=false,radius=r},
+                              img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,scale="aspect",filter=true}}
+                             }
+
+  local d = s + self.checkboxSpacing
+  local text = lost.guiro.layer.Text{bounds={d,0,{"1",-d},"1"},font=self.checkboxFonts[size],color=Color(0,0,0),halign="left",valign="center"}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(pushed2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.backgrounds[b.STATE_PUSHED2] = pushed2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end

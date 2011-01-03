@@ -1,3 +1,5 @@
+require("lost.guiro.view.Button")
+
 local Color = lost.common.Color
 
 return lost.guiro.view.View
@@ -8,5 +10,34 @@ return lost.guiro.view.View
     lost.guiro.layer.Text{bounds={"center", "top",200,20},font={"Vera",12},
           text="Button",
           color=Color(0,0,0)},
+  },
+  subviews=
+  {
+    lost.guiro.view.Button
+    {
+      title = "hello",
+      bounds = {50,50,100,30}
+    },
+    lost.guiro.view.Button
+    {
+      style="checkboxCandy",
+      size="mini",
+      title = "Checkbox",
+      bounds = {50,100,100,30}
+    },
+    lost.guiro.view.Button
+    {
+      style="checkboxCandy",
+      size="small",
+      title = "Checkbox",
+      bounds = {50,120,100,30}
+    },
+    lost.guiro.view.Button
+    {
+      style="checkboxCandy",
+      size="regular",
+      title = "Checkbox",
+      bounds = {50,140,100,30}
+    }
   }
 }
