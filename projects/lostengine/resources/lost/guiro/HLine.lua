@@ -6,7 +6,7 @@ lost.common.Class "lost.guiro.HLine" {}
 
 local Vec2 = lost.math.Vec2
 
--- horizontal line
+-- horizontal line Mesh
 function HLine:constructor(args)
   local t = args or {}
   
