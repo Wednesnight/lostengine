@@ -47,6 +47,8 @@ function View:constructor(args)
     self.layout = nil
   end
 
+  if t.clip then self:clip(t.clip) end
+
   lost.guiro.themeManager():apply(self, t.theme or lost.guiro.themeManager().defaultTheme, t.style or lost.guiro.themeManager().defaultStyle, args)
   if t.sublayers then
     for _,v in ipairs(t.sublayers) do
@@ -359,4 +361,12 @@ function View:recursiveFindById(viewId)
     end
   end
   return result
+end
+
+function View:clip(...)
+  if arg.n >= 1 then
+    self.layer:clip(arg[1])
+  else
+    return self.layer:clip()
+  end
 end

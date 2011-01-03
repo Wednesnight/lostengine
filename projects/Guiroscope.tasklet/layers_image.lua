@@ -16,7 +16,9 @@ return lost.guiro.view.View
           color=Color(0,0,0)},
     lost.guiro.layer.Image
     {
-      bitmap = bmp
+      bitmap = bmp,
+      clip = true,
+--      bounds = {0,0,200,50}
     }
   }
 }

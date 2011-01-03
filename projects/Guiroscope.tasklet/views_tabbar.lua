@@ -25,7 +25,7 @@ return lost.guiro.view.View
         lost.guiro.view.TabBar{bounds={0,0,300,30},items={"Single item"}},
         lost.guiro.view.TabBar{bounds={0,0,300,30},items={"Two items", "Another one"}},
         lost.guiro.view.TabBar{bounds={0,0,300,30},items={"Three items", "Another one", "Yay, more!"}},
-        lost.guiro.view.TabBar{bounds={0,0,300,30},items={"Four items", "Another one", "Yay, more!", "W00t?"}},
+        lost.guiro.view.TabBar{bounds={0,0,300,30},items={"Four items", "Another one", "Yay, more!", "W00t?"}, clip=true},
       }
     }    
   }
