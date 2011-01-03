@@ -8,6 +8,7 @@ namespace rg
 struct Node; typedef lost::shared_ptr<Node> NodePtr;
 struct Scissor; typedef lost::shared_ptr<Scissor> ScissorPtr;
 struct ScissorRect; typedef lost::shared_ptr<ScissorRect> ScissorRectPtr;
+struct ScissorStack; typedef lost::shared_ptr<ScissorStack> ScissorStackPtr;
 struct Blend; typedef lost::shared_ptr<Blend> BlendPtr;
 struct Camera;typedef lost::shared_ptr<Camera> CameraPtr;
 struct Draw; typedef lost::shared_ptr<Draw> DrawPtr;

@@ -196,6 +196,39 @@ std::map<void*, Context*> glContext2lostGlContext;
         currentScissorRect = rect;
       }
     }
+
+    void Context::pushScissorRect(const math::Rect& v)
+    {
+      _scissorRectStack.push_back(v);
+      scissor(true);
+    }
+    
+    void Context::pushClippedScissorRect(const math::Rect& v)
+    {
+      math::Rect r = v;
+      if(_scissorRectStack.size())
+      {
+        r.clipTo(_scissorRectStack[_scissorRectStack.size()-1]);
+      }
+      pushScissorRect(r);
+    }
+    
+    void Context::popScissorRect()
+    {
+      if(!_scissorRectStack.size()) return; // don't do anything if stack is empty
+      
+      _scissorRectStack.pop_back();
+      uint32_t s = _scissorRectStack.size();
+      if(s > 0)
+      {
+        scissorRect(_scissorRectStack[s-1]);
+        scissor(true);
+      }
+      else
+      {
+        scissor(false);
+      }
+    }
   
     void Context::clearColor(const common::Color& col)
     {
