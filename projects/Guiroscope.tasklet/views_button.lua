@@ -1,4 +1,5 @@
 require("lost.guiro.view.Button")
+require("lost.guiro.view.RadioGroup")
 
 local Color = lost.common.Color
 
@@ -59,6 +60,35 @@ return lost.guiro.view.View
       size="mini",
       title = "Radio",
       bounds = {50,{"top",-50},100,30}
-    }    
+    },
+    lost.guiro.view.RadioGroup
+    {
+      bounds = {200,200,200,200},
+      layout = lost.guiro.layout.Vertical{halign="center",valign="center",spacing = 4},
+      subviews = 
+      {
+        lost.guiro.view.Button
+        {
+          style="radioCandy",
+          size="regular",
+          title = "Radio 1",
+          bounds = {50,"top",100,30}
+        },
+        lost.guiro.view.Button
+        {
+          style="radioCandy",
+          size="small",
+          title = "Radio 2",
+          bounds = {50,{"top",-25},100,30}
+        },
+        lost.guiro.view.Button
+        {
+          style="radioCandy",
+          size="mini",
+          title = "Radio 3",
+          bounds = {50,{"top",-50},100,30}
+        },        
+      }
+    } 
   }
 }
