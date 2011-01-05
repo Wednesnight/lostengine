@@ -40,6 +40,8 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.TabBar", "default", function(target, args) self:tabBarCandy(target, args) end)
   self:addStyle("lost.guiro.view.TabBar", "candy", function(target, args) self:tabBarCandy(target, args) end)
 
+  self:addStyle("lost.guiro.view.RadioGroup", "default", function(target, args) end)
+
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
