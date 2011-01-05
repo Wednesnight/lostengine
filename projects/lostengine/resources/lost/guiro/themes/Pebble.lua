@@ -51,7 +51,8 @@ function Pebble:constructor()
   
   self.radioSize = {regular=14,small=12,mini=10}
   self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
-  self.radioCenterRadius = {regular=6,small=6,mini=4}
+  self.radioCenterRadius = {regular=5,small=4,mini=3}
+  self.radioSpacing = 4
 --  self:addStyle("lost.guiro.view.View", "default", function(target, args) self:viewGray(target, args) end)
 end
 
@@ -325,8 +326,8 @@ function Pebble:buttonRadioCandy(target, args)
   local size = args.size or "small"
   target:mode("toggleOnce")
   -- target bounds must have been set by now so we can modify height
-  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
-  local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.radioSize[size])
+  local r = self.radioSize[size]/2 
   local cr = self.radioCenterRadius[size]
   local normal = l{sublayers={d{bounds={0,0,"1","1"},gradient="candyGray",filled=true},
                               d{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false}}
@@ -339,8 +340,8 @@ function Pebble:buttonRadioCandy(target, args)
                                d{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false},
                                d{bounds={r-cr/2,r-cr/2,cr,cr},color=Color(0,0,0),filled=true}}
                               }
-
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  local d = self.radioSize[size] + self.radioSpacing
+  local text = lost.guiro.layer.Text{bounds={d,0,{"1",-d},"1"},font=self.radioFonts[size],color=Color(0,0,0),halign="left",valign="center"}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
