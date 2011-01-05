@@ -6,6 +6,7 @@ local allViews = {
   require("views_button"),
   require("views_tabbar"),
   require("views_image"),
+  require("views_window"),
 }
 
 local function hideAll()
@@ -35,7 +36,7 @@ return lost.guiro.view.View
     {
       id="viewselect",
       bounds={"left", "top", "1",tabbarHeight},
-      items={"View", "Label","Button", "TabBar", "Image"}
+      items={"View", "Label","Button", "TabBar", "Image", "Window"}
       },
     lost.guiro.view.View
     {

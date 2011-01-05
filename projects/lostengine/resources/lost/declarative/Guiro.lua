@@ -4,7 +4,6 @@ module("lost.declarative", package.seeall)
 require("lost.guiro.view.UserInterface")
 require("lost.guiro.view.View")
 require("lost.guiro.view.Label")
-require("lost.guiro.view.Image")
 require("lost.guiro.view.Button")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.event.Event")
@@ -72,22 +71,6 @@ function Guiro:assignLabelAttributes(target, source)
   if source.shadowColor  ~= nil then target:shadowColor(source.shadowColor) end
   if source.halign  ~= nil then target:halign(source.halign) end
   if source.valign  ~= nil then target:valign(source.valign) end
-end
-
-function Guiro:assignImageAttributes(target, source)
-  if (source.bitmap and source.texture) or (source.bitmap and source.filename) or
-     (source.texture and source.filename)
-  then
-    error("you can only specify bitmap, texture OR filename for the creation of a guiro Image", 2)
-  end
-
-  if source.bitmap  ~= nil then target:bitmap(source.bitmap) end
-  if source.filename  ~= nil then target:bitmap(self.loader:load(source.filename)) end
-  if source.texture  ~= nil then target:texture(source.texture) end
-  if source.scale  ~= nil then target:scale(source.scale) end
-  if source.caps  ~= nil then target:caps(source.caps) end
-  if source.filter  ~= nil then target:filter(source.filter) end
-  if source.flip  ~= nil then target:flip(source.flip) end
 end
 
 function Guiro:assignButtonAttributes(target, source)
