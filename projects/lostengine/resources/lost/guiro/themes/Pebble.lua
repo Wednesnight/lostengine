@@ -55,7 +55,6 @@ function Pebble:constructor()
   self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.radioCenterRadius = {regular=5,small=4,mini=3}
   self.radioSpacing = 4
---  self:addStyle("lost.guiro.view.View", "default", function(target, args) self:viewGray(target, args) end)
 end
 
 function Pebble:labelDefault(target, args)
