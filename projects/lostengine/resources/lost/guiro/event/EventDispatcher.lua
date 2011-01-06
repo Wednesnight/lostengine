@@ -39,7 +39,7 @@ function EventDispatcher:removeEventListener(which, listener)
     for k,v in ipairs(t) do
       if v == listener then
         table.remove(t, k)
-        log.debug("removed listener for "..which)
+--        log.debug("removed listener for "..which)
       end
     end
   end

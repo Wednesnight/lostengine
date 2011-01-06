@@ -437,7 +437,7 @@ function Pebble:windowNormal(target, args)
   target:addSubview(headerView)
   target:addSubview(contentView)
   target.headerView = headerView
-  target.contentView = contentView
+  target.contentView = contentView -- set contentView after all other views were added, because when contentView is set, all following addSubview calls will redirect to this view
   target.titleLabel = titleLabel
 end
 
