@@ -43,6 +43,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.RadioGroup", "default", function(target, args) end)
 
   self:addStyle("lost.guiro.view.View", "windowHeader", function(target, args) self:viewWindowHeader(target, args) end)
+  self:addStyle("lost.guiro.view.View", "windowBack", function(target, args) self:viewWindowBack(target, args) end)
   self:addStyle("lost.guiro.view.Window", "default", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "normal", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "panel", function(target, args) self:windowPanel(target, args) end)
@@ -64,6 +65,7 @@ function Pebble:constructor()
   
   self.separatorColor = Color(.317,.317,.317)
   self.windowNormalHeaderHeight = 22
+  self.windowPanelHeaderHeight = 16
 end
 
 function Pebble:labelDefault(target, args)
@@ -429,9 +431,22 @@ function Pebble:viewWindowHeader(target, args)
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.windowNormalHeaderHeight)
 end
 
+-- style for header of a normal window, gray, top rounded, bottom square, dark gray separator line at bottom
+function Pebble:viewPanelHeader(target, args)
+  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},radius=4,gradient="toolbarBg"})
+  target.layer:addSublayer(lost.guiro.layer.HLine{bounds={0,0,"1",1},color=self.separatorColor})    
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.windowPanelHeaderHeight)
+end
+
+
+function Pebble:viewWindowBack(target, args)
+  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color = Color(.9294,.9294,.9294),filled = true})  
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=false,bounds={0,0,"1","1"},color=Color(.8,.8,.8),roundCorners={tl=false, bl=false, br=false, tr=false},sides={top=false}})
+end
+
 function Pebble:windowNormal(target, args)
   local headerView = lost.guiro.view.View{id="header",theme="pebble", style="windowHeader",bounds={0,"top","1",self.windowNormalHeaderHeight}}
-  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="gray",clip=true,bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
+  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="windowBack",clip=true,bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
   local titleLabel = lost.guiro.view.Label{font={"Vera",12},color=Color(0,0,0),bounds={0,0,"1","1"},text="Window"}
   headerView:addSubview(titleLabel)
   target:addSubview(headerView)

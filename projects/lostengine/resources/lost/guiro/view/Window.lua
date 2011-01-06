@@ -65,22 +65,18 @@ function Window:setupMoveBody()
 end
 
 function Window:mouseDown(event)
---  log.debug("down: "..tostring(event.pos).." : "..tostring(event.absPos))
   self.downPos = event.pos
   self.windowPos = Vec2(self.rect.x - self:superview().rect.x, self.rect.y - self:superview().rect.y) -- window pos in local coordinates of superview
   self.moveInProgress = true
---  log.debug("winpos: "..tostring(self.windowPos))
   self:rootview():addEventListener("mouseMove", self.mouseMoveHandler)
 end
 
 function Window:mouseUp(event)
---  log.debug("up: "..tostring(event.pos).." : "..tostring(event.absPos))
   self.moveInProgress = false
   self:rootview():removeEventListener("mouseMove", self.mouseMoveHandler)
 end
 
 function Window:mouseMove(event)
---  log.debug("move: "..tostring(event.pos).." : "..tostring(event.absPos))
   if self.moveInProgress then
     local delta = event.pos - self.downPos
     local newWinPos = self.windowPos + delta
@@ -92,17 +88,17 @@ end
 
 function Window:addSubview(view)
   if self.contentView then
---    log.debug("adding "..view.id.." to contentView")
     self.contentView:addSubview(view)
   else
---    log.debug("adding "..view.id.." as window subview")
     lost.guiro.view.View.addSubview(self, view)
   end
 end
 
 function Window:title(...)
   if arg.n >=1 then
-    self.titleLabel:text(arg[1])
+    if self.titleLabel then
+      self.titleLabel:text(arg[1])
+    end
   else
     if self.titleLabel then
       return self.titleLabel:text()
