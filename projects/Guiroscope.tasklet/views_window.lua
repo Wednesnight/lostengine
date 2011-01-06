@@ -23,6 +23,7 @@ return lost.guiro.view.View
     lost.guiro.view.Window
     {
       bounds = {20,20,300,200},
+      title="Testwindow 1",
       subviews =
       {
         lost.guiro.view.RadioGroup

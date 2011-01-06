@@ -43,6 +43,7 @@ function Window:constructor(args)
     else
     end
   end
+  if t.title then self:title(t.title) end
 
   self.mouseDownHandler = function(event) self:mouseDown(event) end
   self.mouseUpHandler = function(event) self:mouseUp(event) end
@@ -96,5 +97,17 @@ function Window:addSubview(view)
   else
 --    log.debug("adding "..view.id.." as window subview")
     lost.guiro.view.View.addSubview(self, view)
+  end
+end
+
+function Window:title(...)
+  if arg.n >=1 then
+    self.titleLabel:text(arg[1])
+  else
+    if self.titleLabel then
+      return self.titleLabel:text()
+    else
+      return nil
+    end
   end
 end
