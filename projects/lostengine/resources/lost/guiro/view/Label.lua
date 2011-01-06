@@ -26,5 +26,15 @@ function Label:constructor(args)
   end
 end
 
-
+function Label:text(...)
+  if arg.n >= 1 then 
+    self.textLayer:text(arg[1])
+  else
+    if self.textLayer then
+      return self.textLayer:text()
+    else
+      return nil
+    end
+  end
+end
 

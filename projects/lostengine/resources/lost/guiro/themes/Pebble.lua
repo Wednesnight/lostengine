@@ -431,7 +431,7 @@ end
 
 function Pebble:windowNormal(target, args)
   local headerView = lost.guiro.view.View{id="header",theme="pebble", style="windowHeader",bounds={0,"top","1",self.windowNormalHeaderHeight}}
-  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="gray",bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
+  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="gray",clip=true,bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
   local titleLabel = lost.guiro.view.Label{font={"Vera",12},color=Color(0,0,0),bounds={0,0,"1","1"},text="Window"}
   headerView:addSubview(titleLabel)
   target:addSubview(headerView)
