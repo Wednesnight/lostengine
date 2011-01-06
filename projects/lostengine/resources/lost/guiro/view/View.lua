@@ -95,6 +95,14 @@ function View:superview(...)
   self:updateZ()    
 end
 
+function View:rootview()
+  if self:superview() then
+    return self:superview():rootview()
+  else
+    return self
+  end
+end
+
 function View:updateZ()
   if self._superview then 
     self.z = self._superview.z+1

@@ -42,6 +42,12 @@ function Pebble:constructor()
 
   self:addStyle("lost.guiro.view.RadioGroup", "default", function(target, args) end)
 
+  self:addStyle("lost.guiro.view.View", "windowHeader", function(target, args) self:viewWindowHeader(target, args) end)
+  self:addStyle("lost.guiro.view.Window", "default", function(target, args) self:windowNormal(target, args) end)
+  self:addStyle("lost.guiro.view.Window", "normal", function(target, args) self:windowNormal(target, args) end)
+  self:addStyle("lost.guiro.view.Window", "panel", function(target, args) self:windowPanel(target, args) end)
+  self:addStyle("lost.guiro.view.Window", "hud", function(target, args) self:windowHud(target, args) end)
+
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
@@ -55,6 +61,9 @@ function Pebble:constructor()
   self.radioFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.radioCenterRadius = {regular=5,small=4,mini=3}
   self.radioSpacing = 4
+  
+  self.separatorColor = Color(.317,.317,.317)
+  self.windowNormalHeaderHeight = 22
 end
 
 function Pebble:labelDefault(target, args)
@@ -411,4 +420,29 @@ function Pebble:buttonCheckboxCandy(target, args)
   target.backgrounds[b.STATE_PUSHED2] = pushed2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
+-- style for header of a normal window, gray, top rounded, bottom square, dark gray separator line at bottom
+function Pebble:viewWindowHeader(target, args)
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
+  target.layer:addSublayer(lost.guiro.layer.HLine{bounds={0,0,"1",1},color=self.separatorColor})    
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.windowNormalHeaderHeight)
+end
+
+function Pebble:windowNormal(target, args)
+  local headerView = lost.guiro.view.View{id="header",theme="pebble", style="windowHeader",bounds={0,"top","1",self.windowNormalHeaderHeight}}
+  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="gray",bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
+  local titleLabel = lost.guiro.view.Label{font={"Vera",12},color=Color(0,0,0),bounds={0,0,"1","1"},text="Window"}
+  headerView:addSubview(titleLabel)
+  target:addSubview(headerView)
+  target:addSubview(contentView)
+  target.headerView = headerView
+  target.contentView = contentView
+  target.titleLabel = titleLabel
+end
+
+function Pebble:windowPanel(target, args)
+end
+
+function Pebble:windowHud(target, args)
 end
