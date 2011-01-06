@@ -424,7 +424,7 @@ end
 
 -- style for header of a normal window, gray, top rounded, bottom square, dark gray separator line at bottom
 function Pebble:viewWindowHeader(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},radius=4,gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
   target.layer:addSublayer(lost.guiro.layer.HLine{bounds={0,0,"1",1},color=self.separatorColor})    
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.windowNormalHeaderHeight)
 end
