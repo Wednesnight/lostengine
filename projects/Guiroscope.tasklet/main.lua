@@ -65,6 +65,7 @@ function startup()
       }
     }
   }
+--  ui.layer:print()
 --  ui:printSubviews()
 end
 
