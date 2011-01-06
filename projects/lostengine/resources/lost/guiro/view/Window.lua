@@ -29,7 +29,7 @@ function Window:constructor(args)
   if t.movable then
     self.movable = t.movable
   else
-    self.movable = false
+    self.movable = true
   end
   if t.moveType then
     self.moveType = t.moveType
@@ -89,4 +89,12 @@ function Window:mouseMove(event)
   end
 end
 
-
+function Window:addSubview(view)
+  if self.contentView then
+--    log.debug("adding "..view.id.." to contentView")
+    self.contentView:addSubview(view)
+  else
+--    log.debug("adding "..view.id.." as window subview")
+    lost.guiro.view.View.addSubview(self, view)
+  end
+end
