@@ -26,6 +26,18 @@ local function miscGradients(textureManager)
   cg:add(ColorPoint(1, bgrey(208)))
   cg:add(ColorPoint(0, bgrey(167)))
   textureManager:addGradient("toolbarBg", cg)  
+
+  cg = ColorGradient.create()
+  cg:add(ColorPoint(1, Color(1,1,1)))
+  cg:add(ColorPoint(.7, Color(1,.4,.4)))
+  cg:add(ColorPoint(0, Color(1,0,0)))
+  textureManager:addGradient("closeButtonFill", cg)  
+
+  cg = ColorGradient.create()
+  cg:add(ColorPoint(1, Color(.1,0,0)))
+  cg:add(ColorPoint(0, Color(1,0,0)))
+  textureManager:addGradient("closeButtonFrame", cg)  
+
 end
 
 local function roundRectGradients(textureManager)

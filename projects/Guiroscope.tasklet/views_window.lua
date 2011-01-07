@@ -24,6 +24,7 @@ return lost.guiro.view.View
     {
       bounds = {20,20,300,200},
       title="Testwindow 1",
+      closeButton = true,
       subviews =
       {
         lost.guiro.view.RadioGroup
@@ -64,7 +65,8 @@ return lost.guiro.view.View
     {
       bounds = {20,20,140,300},
       title="Testwindow 2",
-      style="normal",
+      style="panel",
+      closeButton = true,      
       subviews =
       {
         lost.guiro.view.RadioGroup

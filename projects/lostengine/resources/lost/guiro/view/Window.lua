@@ -52,6 +52,15 @@ function Window:constructor(args)
   if self.movable and self.moveType == "header" then self:setupMoveHeader()
   elseif self.movable and self.moveType == "body" then self:setupMoveBody() 
   end
+  
+  if self.closeButton then 
+    self.closeButton:addEventListener("buttonClick", function(event) self:closeButtonClick(event) end)
+  end
+end
+
+function Window:closeButtonClick(event)
+  self:hidden(true)
+  self:dispatchWindowEvent("windowClose")
 end
 
 function Window:setupMoveHeader()
@@ -106,4 +115,11 @@ function Window:title(...)
       return nil
     end
   end
+end
+
+function Window:dispatchWindowEvent(name)
+  local event = lost.guiro.event.Event(name)
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
 end
