@@ -43,7 +43,9 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.RadioGroup", "default", function(target, args) end)
 
   self:addStyle("lost.guiro.view.View", "windowHeader", function(target, args) self:viewWindowHeader(target, args) end)
+  self:addStyle("lost.guiro.view.View", "panelHeader", function(target, args) self:viewPanelHeader(target, args) end)
   self:addStyle("lost.guiro.view.View", "windowBack", function(target, args) self:viewWindowBack(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "windowCloseButton", function(target, args) self:buttonWindowClose(target, args) end)
   self:addStyle("lost.guiro.view.Window", "default", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "normal", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "panel", function(target, args) self:windowPanel(target, args) end)
@@ -66,6 +68,10 @@ function Pebble:constructor()
   self.separatorColor = Color(.317,.317,.317)
   self.windowNormalHeaderHeight = 22
   self.windowPanelHeaderHeight = 16
+  self.windowNormalCloseButtonSize = 14
+  self.panelCloseButtonSize = 11
+  self.windowCloseButtonSpacing = 8 --- distance to left window border
+  self.panelCloseButtonSpacing = 6
 end
 
 function Pebble:labelDefault(target, args)
@@ -424,6 +430,28 @@ function Pebble:buttonCheckboxCandy(target, args)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
 
+function Pebble:buttonWindowClose(target,args)
+  local l = lost.guiro.layer.Layer
+  local d = lost.guiro.layer.Disc
+
+  local b = lost.guiro.view.Button
+  target:mode("normal")
+
+  local dc = .7
+  local dimColor = Color(dc,dc,dc)
+  local normal = l{sublayers={d{bounds={0,0,"1","1"},gradient="closeButtonFill",filled=true},
+                              d{bounds={0,0,"1","1"},gradient="closeButtonFrame",filled=false}}
+                             }
+  local pushed = l{sublayers={d{bounds={0,0,"1","1"},gradient="closeButtonFill",color=dimColor,filled=true},
+                              d{bounds={0,0,"1","1"},gradient="closeButtonFrame",color=dimColor,filled=false}}
+                             }
+
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+end
+
 -- style for header of a normal window, gray, top rounded, bottom square, dark gray separator line at bottom
 function Pebble:viewWindowHeader(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},radius=4,gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
@@ -449,6 +477,12 @@ function Pebble:windowNormal(target, args)
   local contentView = lost.guiro.view.View{id="content",theme="pebble", style="windowBack",clip=true,bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
   local titleLabel = lost.guiro.view.Label{font={"Vera",12},color=Color(0,0,0),bounds={0,0,"1","1"},text="Window"}
   headerView:addSubview(titleLabel)
+  if args.closeButton then
+    local s = self.windowNormalCloseButtonSize
+    local closeButton = lost.guiro.view.Button{theme="pebble", style="windowCloseButton",bounds={self.windowCloseButtonSpacing,"center",s,s}}
+    headerView:addSubview(closeButton)
+    target.closeButton = closeButton
+  end
   target:addSubview(headerView)
   target:addSubview(contentView)
   target.headerView = headerView
@@ -457,7 +491,19 @@ function Pebble:windowNormal(target, args)
 end
 
 function Pebble:windowPanel(target, args)
-end
-
-function Pebble:windowHud(target, args)
+  local headerView = lost.guiro.view.View{id="header",theme="pebble", style="panelHeader",bounds={0,"top","1",self.windowPanelHeaderHeight}}
+  local contentView = lost.guiro.view.View{id="content",theme="pebble", style="windowBack",clip=true,bounds={0,0,"1",{"1",-self.windowPanelHeaderHeight}}}
+  local titleLabel = lost.guiro.view.Label{font={"Vera",10},color=Color(0,0,0),bounds={0,0,"1","1"},text="Window"}
+  headerView:addSubview(titleLabel)
+  if args.closeButton then
+    local s = self.panelCloseButtonSize
+    local closeButton = lost.guiro.view.Button{theme="pebble", style="windowCloseButton",bounds={self.panelCloseButtonSpacing,"center",s,s}}
+    headerView:addSubview(closeButton)
+    target.closeButton = closeButton
+  end
+  target:addSubview(headerView)
+  target:addSubview(contentView)
+  target.headerView = headerView
+  target.contentView = contentView -- set contentView after all other views were added, because when contentView is set, all following addSubview calls will redirect to this view
+  target.titleLabel = titleLabel
 end
