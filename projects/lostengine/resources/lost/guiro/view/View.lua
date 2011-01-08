@@ -318,10 +318,8 @@ function View:dispatchEvent(event, phase)
     end
 
     if event.bubbles and not event.stopPropagation then
---      log.debug("bubbling")
       local currentTarget = self._superview
       while currentTarget ~= nil and not event.stopPropagation do
---        log.debug("currentTarget: "..currentTarget.id)
         event.currentTarget = currentTarget
         currentTarget.bubbleEventDispatcher:dispatchEvent(event)
         currentTarget = currentTarget._superview

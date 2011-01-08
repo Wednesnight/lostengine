@@ -18,7 +18,16 @@ return lost.guiro.view.View
   },
   listeners=
   {
-   windowClose = function(event) log.debug("closed window "..event.target.id) end 
+   windowClose = function(event)
+    log.debug(event.target.id)
+    if event.target.id == "window1" then windowControl("content")("wb1"):pushed(false) end
+    if event.target.id == "window2" then windowControl("content")("wb2"):pushed(false) end
+   end,
+   buttonClick = function(event) 
+    log.debug(event.target.id)
+    if event.target.id == "wb1" then window1:hidden(false) end
+    if event.target.id == "wb2" then window2:hidden(false) end
+   end,
   },
   subviews=
   {

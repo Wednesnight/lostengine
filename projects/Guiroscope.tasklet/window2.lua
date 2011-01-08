@@ -2,8 +2,9 @@ return
 lost.guiro.view.Window
 {
   bounds = {20,20,140,300},
-  title="Testwindow 2",
+  title="Window 2",
   style="panel",
+  id="window2",  
   closeButton = true,      
   subviews =
   {
