@@ -39,6 +39,7 @@ function Button:constructor(args)
   self.id = t.id or "button"
 
   if t.title then self:title(t.title) end
+	if t.pushed then self:pushed(t.pushed) end
 	
   self:addEventListener("mouseEnter", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseLeave", function(event) self:eventHandler(event) end)	

@@ -7,7 +7,7 @@ lost.guiro.view.Window
   closeButton = false,      
   subviews =
   {
-    lost.guiro.view.Button{id="wb1",mode="sticky",style="rounded", bounds={"center",{"top",-10},{"1",-10},20},title="window1"},
-    lost.guiro.view.Button{id="wb2",mode="sticky",style="rounded", bounds={"center",{"top",-30},{"1",-10},20},title="window2"}
+    lost.guiro.view.Button{id="wb1",pushed=true,mode="sticky",style="rounded", bounds={"center",{"top",-10},{"1",-10},20},title="window1"},
+    lost.guiro.view.Button{id="wb2",pushed=true,mode="sticky",style="rounded", bounds={"center",{"top",-30},{"1",-10},20},title="window2"}
   } 
 }

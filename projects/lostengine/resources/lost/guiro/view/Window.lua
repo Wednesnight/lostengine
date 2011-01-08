@@ -59,8 +59,9 @@ function Window:constructor(args)
 end
 
 function Window:closeButtonClick(event)
-  self:hidden(true)
   self:dispatchWindowEvent("windowClose")
+  self.moveInProgress = false -- or window will be stuck in move mode upon un-hide
+  self:hidden(true) -- set hidden flag AFTER dispatching event, or event won't make it
 end
 
 function Window:setupMoveHeader()
@@ -118,7 +119,6 @@ function Window:title(...)
 end
 
 function Window:dispatchWindowEvent(name)
-  log.debug("dispatching event "..name)
   local event = lost.guiro.event.Event(name)
   event.bubbles = true
   event.target = self
