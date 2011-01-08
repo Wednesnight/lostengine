@@ -62,6 +62,7 @@ function View:constructor(args)
   end
   if t.listeners then
     for event,func in pairs(t.listeners) do
+--      log.debug("adding listener for event type "..event)
       self:addEventListener(event, func)
     end
   end
@@ -283,6 +284,7 @@ end
     If phase is set, dispatchEvent will only notify the appropriate listeners
   ]]
 function View:dispatchEvent(event, phase)
+--  log.debug(event.type)
   -- accept valid events only
   if event ~= nil and not self:hidden() then
     -- default is target + bubble
@@ -316,8 +318,10 @@ function View:dispatchEvent(event, phase)
     end
 
     if event.bubbles and not event.stopPropagation then
+--      log.debug("bubbling")
       local currentTarget = self._superview
       while currentTarget ~= nil and not event.stopPropagation do
+--        log.debug("currentTarget: "..currentTarget.id)
         event.currentTarget = currentTarget
         currentTarget.bubbleEventDispatcher:dispatchEvent(event)
         currentTarget = currentTarget._superview
