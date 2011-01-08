@@ -118,6 +118,7 @@ function Window:title(...)
 end
 
 function Window:dispatchWindowEvent(name)
+  log.debug("dispatching event "..name)
   local event = lost.guiro.event.Event(name)
   event.bubbles = true
   event.target = self
