@@ -49,7 +49,9 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Window", "default", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "normal", function(target, args) self:windowNormal(target, args) end)
   self:addStyle("lost.guiro.view.Window", "panel", function(target, args) self:windowPanel(target, args) end)
-  self:addStyle("lost.guiro.view.Window", "hud", function(target, args) self:windowHud(target, args) end)
+
+  self:addStyle("lost.guiro.view.Box", "default", function(target, args) self:box(target, args) end)
+
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -531,4 +533,41 @@ function Pebble:windowPanel(target, args)
     target:addSubview(rv, true)
     target.resizeView = rv
   end
+end
+
+function Pebble:layerRecess()
+  local c = 171/255
+  return lost.guiro.layer.Layer
+  {
+    sublayers=
+    {
+      lost.guiro.layer.RoundedRect
+      {
+        gradient="recess",
+        radius=4,
+        filled=true
+      },
+      lost.guiro.layer.RoundedRect
+      {
+        color=Color(c,c,c),
+        radius=4,
+        filled=false
+      }
+    }
+  }
+end
+
+function Pebble:box(target,args)
+  local xoff = 8
+  local titleHeight = 12
+  local contentInset = 4
+  local label = lost.guiro.view.Label{bounds={xoff, "top","1",titleHeight},theme="pebble", style="default",font={"Vera",10},halign="left",valign="center"}
+  local contentView = lost.guiro.view.View{bounds={contentInset,contentInset,{"1",-2*contentInset},{"1",-(titleHeight+2*contentInset)}}}
+  local recessLayer = self:layerRecess()
+  recessLayer._bounds.height = lost.guiro.Bounds.decodeEntry(4,{"1",-titleHeight})
+  target.layer:addSublayer(recessLayer)
+  target:addSubview(label,true)
+  target:addSubview(contentView,true)
+  target.titleLabel = label
+  target.contentView = contentView
 end

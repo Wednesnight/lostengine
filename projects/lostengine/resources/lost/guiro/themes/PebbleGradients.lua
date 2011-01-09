@@ -38,6 +38,15 @@ local function miscGradients(textureManager)
   cg:add(ColorPoint(0, Color(1,0,0)))
   textureManager:addGradient("closeButtonFrame", cg)  
 
+  cg = ColorGradient.create()
+  cg:add(ColorPoint(1, bgrey(171)))
+  cg:add(ColorPoint(.99, bgrey(197)))
+  cg:add(ColorPoint(.98, bgrey(218)))
+  cg:add(ColorPoint(.97, bgrey(228)))
+  cg:add(ColorPoint(0, bgrey(229)))
+  textureManager:addGradient("recess", cg)  
+
+
 end
 
 local function roundRectGradients(textureManager)
