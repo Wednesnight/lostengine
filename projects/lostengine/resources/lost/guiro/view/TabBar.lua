@@ -23,6 +23,7 @@ function TabBar:constructor(args)
   
 	lost.guiro.view.View.constructor(self, args) 
   self.id = t.id or "tabBar"
+  self.itemWidth = t.itemWidth or "fit"
   self._items = t.items or {} -- items as passed in constructor, will be used for button creation, currently only a list of strings
   self:rebuildButtons()
   self.layout = lost.guiro.layout.Horizontal{valign="center", halign="center"} -- buttons are always stacked horizontally, tightly packed and centered in all directions
@@ -40,7 +41,6 @@ function TabBar:buttonClicked(event)
       ev.bubbles = true
       ev.target = self
       self:dispatchEvent(ev)  
-      
       break
     end
   end
@@ -108,5 +108,18 @@ function TabBar:select(v)
   if v ~= self.selected then
     self.selected = v
     self:needsUpdate()
+  end
+end
+
+function TabBar:updateLayout()
+  lost.guiro.view.View.updateLayout(self)
+  if self.itemWidth == "equal" then
+    local w = math.floor(self.rect.width / #self._items)
+    local pos = 0
+    for k,button in ipairs(self._buttons) do
+      button._bounds.x = lost.guiro.Bounds.decodeEntry(1,pos) 
+      button._bounds.width = lost.guiro.Bounds.decodeEntry(3,w)
+      button:needsLayout() 
+    end
   end
 end
