@@ -22,18 +22,7 @@ function startup()
   {
     listeners = 
     {
---      mouseEnter = function(event) log.debug("enter "..event.target.id.." "..tostring(event.target.rect)) end,
---      mouseLeave = function(event) log.debug("leave "..event.target.id) end,
---      mouseDown = function(event) log.debug("down "..event.target.id) end,
---      mouseUp = function(event) log.debug("up "..event.target.id) end,
---      mouseUpInside = function(event) log.debug("up inside "..event.target.id) end,
---      mouseUpOutside = function(event) log.debug("up outside "..event.target.id) end,
---      buttonClick = function(event) log.debug("buttonClick "..event.target.id) end,
---      buttonUp = function(event) log.debug("buttonUp "..event.target.id) end,
---      buttonDown = function(event) log.debug("buttonDown "..event.target.id) end,
---      mouseScroll = function(event) log.debug("scroll ".. event.target.id .." ".. tostring(event.scrollDelta)) end
         tabBarSelectionChanged = function(event) 
---          log.debug("new tabbar selection: "..event.target.selected.." id:"..event.target.id)
             if event.target.id ~= "main" then return end
             if event.target.selected == 1 then
               layers:hidden(false)
