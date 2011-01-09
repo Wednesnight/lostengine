@@ -1,6 +1,7 @@
 #include "lost/lua/bindings/LostApplication.h"
 #include "lost/lua/lua.h"
 #include "lost/lua/EventCast.h"
+#include "lost/lua/State.h"
 #include <luabind/iterator_policy.hpp>
 
 #include "lost/application/AccelerometerEvent.h"
@@ -273,6 +274,7 @@ namespace lost
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
             .def_readwrite("name", &Tasklet::name)
             .def_readonly("loader", &Tasklet::loader)
+            .def_readonly("lua", &Tasklet::lua)
             .def_readonly("window", &Tasklet::window)
             .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
             .def_readonly("updateQueue", &Tasklet::updateQueue)

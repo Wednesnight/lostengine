@@ -5,7 +5,7 @@ require("lost.common.Class")
 --[[
      Profiler
   ]]
-lost.common.Class "lost.common.Profiler"
+lost.common.Class "lost.common.Profiler" {}
 
 function Profiler:constructor()
   self.calls = {}
@@ -25,9 +25,7 @@ function Profiler:call(info)
   if info.short_src ~= "[C]" then
     info.source = info.source or ""
     info.short_src = info.short_src or ""
-    if lost.globals.state then
-      info.short_src = lost.globals.state:getScriptFilename(info.source, info.short_src)
-    end
+    info.short_src = tasklet.lua:getScriptFilename(info.source, info.short_src)
     info.linedefined = info.linedefined or ""
     info.name = info.name or ""
     local source

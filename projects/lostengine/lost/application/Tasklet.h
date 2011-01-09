@@ -38,7 +38,6 @@ namespace lost
       bool hasLuaUpdate;
       bool hasLuaShutdown;
 
-      lua::StatePtr                   lua;
 
       virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
       virtual void cleanup(); // cleanup all resources; called from platform specific implementation
@@ -56,7 +55,8 @@ namespace lost
       
 
     public:
-      bool waitForEvents; // if true, only runs the main loop once a low level event arrives
+      lua::StatePtr                   lua;
+      bool                            waitForEvents; // if true, only runs the main loop once a low level event arrives
       
       event::EventDispatcherPtr       eventDispatcher;    
       std::string                     name;
