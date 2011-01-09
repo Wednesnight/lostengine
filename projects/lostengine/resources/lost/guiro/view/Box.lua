@@ -17,10 +17,8 @@ end
 
 function Box:addSubview(view,forceSubview)
   if self.contentView and not forceSubview then
-    log.debug("adding to content")
     self.contentView:addSubview(view)
   else
-  log.debug("adding as subview")
     lost.guiro.view.View.addSubview(self, view)
   end
 end

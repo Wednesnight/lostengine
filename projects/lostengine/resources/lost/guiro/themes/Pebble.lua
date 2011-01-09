@@ -34,11 +34,17 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundMid", function(target, args) self:buttonTabCandyRoundMid(target, args) end)
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundRight", function(target, args) self:buttonTabCandyRoundRight(target, args) end)
 
+  self:addStyle("lost.guiro.view.Button", "tabSquareSingle", function(target, args) self:buttonTabSquareSingle(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "tabSquareLeft", function(target, args) self:buttonTabSquareLeft(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "tabSquareMid", function(target, args) self:buttonTabSquareMid(target, args) end)
+  self:addStyle("lost.guiro.view.Button", "tabSquareRight", function(target, args) self:buttonTabSquareRight(target, args) end)
+
   self:addStyle("lost.guiro.view.Button", "checkboxCandy", function(target, args) self:buttonCheckboxCandy(target, args) end)
   self:addStyle("lost.guiro.view.Button", "radioCandy", function(target, args) self:buttonRadioCandy(target, args) end)
 
   self:addStyle("lost.guiro.view.TabBar", "default", function(target, args) self:tabBarCandy(target, args) end)
   self:addStyle("lost.guiro.view.TabBar", "candy", function(target, args) self:tabBarCandy(target, args) end)
+  self:addStyle("lost.guiro.view.TabBar", "square", function(target, args) self:tabBarSquare(target, args) end)
 
   self:addStyle("lost.guiro.view.RadioGroup", "default", function(target, args) end)
 
@@ -74,6 +80,9 @@ function Pebble:constructor()
   self.panelCloseButtonSize = 11
   self.windowCloseButtonSpacing = 8 --- distance to left window border
   self.panelCloseButtonSpacing = 6
+  
+  self.squareButtonLightFrameCol = Color(168/255, 168/255, 168/255)
+  self.squareButtonDarkFrameCol = Color(145/255, 145/255, 145/255)
 end
 
 function Pebble:labelDefault(target, args)
@@ -317,6 +326,139 @@ function Pebble:buttonTabCandyRoundRight(target, args)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
 
+function Pebble:buttonTabSquareSingle(target, args)
+  local l = lost.guiro.layer.Layer
+  local r = lost.guiro.layer.Rect
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggleOnce")
+  -- target bounds must have been set by now so we can modify height
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local normal = l{sublayers={r{bounds={0,0,"1","1"},gradient="squareGlass",filled=true},
+                              r{bounds={0,0,"1","1"},color=self.squareButtonLightFrameCol,filled=false}}
+                             }
+  local pushed = l{sublayers={r{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.8,.8,.8),filled=true},
+                              r{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false}}
+                             }
+
+  local normal2 = l{sublayers={r{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.9,.9,.9),filled=true},
+                               r{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
+function Pebble:buttonTabSquareLeft(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggleOnce")
+  -- target bounds must have been set by now so we can modify height
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",filled=true,roundCorners={tl=false, bl=false, br=false, tr=false}},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonLightFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false}}}
+                             }
+  local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.8,.8,.8),filled=true,roundCorners={tl=false, bl=false, br=false, tr=false}},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false}}}
+                             }
+
+  local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.9,.9,.9),filled=true,roundCorners={tl=false, bl=false, br=false, tr=false}},
+                               rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false}}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
+function Pebble:buttonTabSquareMid(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+  local rc = lost.guiro.layer.Rect
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggleOnce")
+  -- target bounds must have been set by now so we can modify height
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local normal = l{sublayers={rc{bounds={0,0,"1","1"},gradient="squareGlass",filled=true,},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonLightFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                             }
+  local pushed = l{sublayers={rc{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.8,.8,.8),filled=true},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                             }
+
+  local normal2 = l{sublayers={rc{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.9,.9,.9),filled=true,},
+                               rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
+function Pebble:buttonTabSquareRight(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggleOnce")
+  -- target bounds must have been set by now so we can modify height
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",filled=true,roundCorners={tl=false, bl=false, br=false, tr=false}},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonLightFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                             }
+  local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.8,.8,.8),filled=true,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}},
+                              rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                             }
+
+  local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="squareGlass",color=Color(.9,.9,.9),filled=true,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}},
+                               rr{bounds={0,0,"1","1"},color=self.squareButtonDarkFrameCol,filled=false,roundCorners={tl=false, bl=false, br=false, tr=false},sides={left=false}}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+end
+
 ------------
 -- tabbar styles
 
@@ -337,6 +479,25 @@ function Pebble:tabBarCandy(target, args)
   
   target.buttonSizeAdjust = 30
 end
+
+function Pebble:tabBarSquare(target, args)
+  local size = args.size or "regular"
+
+  target.singleButtonStyleParams.size = size
+  target.singleButtonStyleParams.style = "tabSquareSingle"
+
+  target.leftButtonStyleParams.size = size 
+  target.leftButtonStyleParams.style = "tabSquareLeft" 
+
+  target.midButtonStyleParams.size = size
+  target.midButtonStyleParams.style = "tabSquareMid"
+
+  target.rightButtonStyleParams.size = size
+  target.rightButtonStyleParams.style = "tabSquareRight"
+  
+  target.buttonSizeAdjust = 30
+end
+
 
 function Pebble:buttonRadioCandy(target, args)
   local l = lost.guiro.layer.Layer
@@ -535,7 +696,7 @@ function Pebble:windowPanel(target, args)
   end
 end
 
-function Pebble:layerRecess()
+function Pebble:layerRoundedRectRecess()
   local c = 171/255
   return lost.guiro.layer.Layer
   {
@@ -563,7 +724,7 @@ function Pebble:box(target,args)
   local contentInset = 4
   local label = lost.guiro.view.Label{bounds={xoff, "top","1",titleHeight},theme="pebble", style="default",font={"Vera",10},halign="left",valign="center"}
   local contentView = lost.guiro.view.View{bounds={contentInset,contentInset,{"1",-2*contentInset},{"1",-(titleHeight+2*contentInset)}}}
-  local recessLayer = self:layerRecess()
+  local recessLayer = self:layerRoundedRectRecess()
   recessLayer._bounds.height = lost.guiro.Bounds.decodeEntry(4,{"1",-titleHeight})
   target.layer:addSublayer(recessLayer)
   target:addSubview(label,true)
