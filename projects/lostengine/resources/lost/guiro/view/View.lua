@@ -49,7 +49,8 @@ function View:constructor(args)
 
   if t.clip then self:clip(t.clip) end
 
-  lost.guiro.themeManager():apply(self, t.theme or lost.guiro.themeManager().defaultTheme, t.style or lost.guiro.themeManager().defaultStyle, args)
+  local tm = lost.guiro.themeManager()
+  tm:apply(self, t.theme or tm.defaultTheme, t.style or tm.defaultStyle, args)
   if t.sublayers then
     for _,v in ipairs(t.sublayers) do
       self.layer:addSublayer(v)
@@ -62,7 +63,6 @@ function View:constructor(args)
   end
   if t.listeners then
     for event,func in pairs(t.listeners) do
---      log.debug("adding listener for event type "..event)
       self:addEventListener(event, func)
     end
   end
@@ -136,6 +136,11 @@ function View:addSubview(view)
   self.layer:addSublayer(view.layer)
   view:superview(self)
   view:needsLayout()
+end
+
+function View:bringSubviewToFront(view)
+  view:removeFromSuperview()
+  self:addSubview(view)
 end
 
 -- shortcut for construction of view hierarchies, just pass an array of views

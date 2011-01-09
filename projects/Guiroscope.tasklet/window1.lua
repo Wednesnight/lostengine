@@ -5,6 +5,7 @@ lost.guiro.view.Window
   title="Window 1",
   id="window1",
   closeButton = true,
+  resizable = true,
   subviews =
   {
     lost.guiro.view.RadioGroup

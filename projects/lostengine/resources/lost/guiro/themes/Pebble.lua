@@ -383,6 +383,17 @@ function Pebble:checkmarkTexture()
   return self._checkmarkTexture
 end
 
+function Pebble:windowResizeTexture()
+  if not self._windowResizeTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/resize.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._windowResizeTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._windowResizeTexture
+end
+
 function Pebble:buttonCheckboxCandy(target, args)
   local l = lost.guiro.layer.Layer
   local rr = lost.guiro.layer.RoundedRect
@@ -472,6 +483,10 @@ function Pebble:viewWindowBack(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=false,bounds={0,0,"1","1"},color=Color(.8,.8,.8),roundCorners={tl=false, bl=false, br=false, tr=false},sides={top=false}})
 end
 
+function Pebble:windowResizeView()
+  return lost.guiro.view.View{bounds={{"right",-1},1,11,11},sublayers={lost.guiro.layer.Image{bounds={0,0,11,11},texture=self:windowResizeTexture(),flip=true,scale="none"}}}  
+end
+
 function Pebble:windowNormal(target, args)
   local headerView = lost.guiro.view.View{id="header",theme="pebble", style="windowHeader",bounds={0,"top","1",self.windowNormalHeaderHeight}}
   local contentView = lost.guiro.view.View{id="content",theme="pebble", style="windowBack",clip=true,bounds={0,0,"1",{"1",-self.windowNormalHeaderHeight}}}
@@ -483,11 +498,16 @@ function Pebble:windowNormal(target, args)
     headerView:addSubview(closeButton)
     target.closeButton = closeButton
   end
-  target:addSubview(headerView)
-  target:addSubview(contentView)
+  target:addSubview(headerView,true)
+  target:addSubview(contentView,true)
   target.headerView = headerView
   target.contentView = contentView -- set contentView after all other views were added, because when contentView is set, all following addSubview calls will redirect to this view
   target.titleLabel = titleLabel
+  if args.resizable then
+    local rv = self:windowResizeView()
+    target:addSubview(rv, true)
+    target.resizeView = rv
+  end
 end
 
 function Pebble:windowPanel(target, args)
@@ -506,4 +526,9 @@ function Pebble:windowPanel(target, args)
   target.headerView = headerView
   target.contentView = contentView -- set contentView after all other views were added, because when contentView is set, all following addSubview calls will redirect to this view
   target.titleLabel = titleLabel
+  if args.resizable then
+    local rv = self:windowResizeView()
+    target:addSubview(rv, true)
+    target.resizeView = rv
+  end
 end

@@ -49,13 +49,37 @@ function Window:constructor(args)
   self.mouseUpHandler = function(event) self:mouseUp(event) end
   self.mouseMoveHandler = function(event) self:mouseMove(event) end
 
+  self.resizeMouseDownHandler = function(event) self:resizeMouseDown(event) end
+  self.resizeMouseUpHandler = function(event) self:resizeMouseUp(event) end
+
   if self.movable and self.moveType == "header" then self:setupMoveHeader()
   elseif self.movable and self.moveType == "body" then self:setupMoveBody() 
   end
-  
+
+  self.resizable = t.resizable or false
+  if self.resizable then self:setupResizing() end
+    
   if self.closeButton then 
     self.closeButton:addEventListener("buttonClick", function(event) self:closeButtonClick(event) end)
   end
+end
+
+function Window:setupResizing()
+  self.resizeView:addEventListener("mouseDown", self.resizeMouseDownHandler)
+  self.resizeView:addEventListener("mouseUp", self.resizeMouseUpHandler)
+  self.resizeView:addEventListener("mouseUpOutside", self.resizeMouseUpHandler)
+end
+
+function Window:resizeMouseDown(event)
+  self.resizeInProgress = true
+  self.downPos = event.pos
+  self.windowSize = Vec2(self.rect.width, self.rect.height)
+  self.windowPos = Vec2(self.rect.x - self:superview().rect.x, self.rect.y - self:superview().rect.y)  
+  self:rootview():addEventListener("mouseMove", self.mouseMoveHandler)  
+end
+
+function Window:resizeMouseUp(event)
+  self.resizeInProgress = false
 end
 
 function Window:closeButtonClick(event)
@@ -93,11 +117,19 @@ function Window:mouseMove(event)
     self._bounds.x = lost.guiro.Bounds.decodeEntry(1,newWinPos.x)
     self._bounds.y = lost.guiro.Bounds.decodeEntry(2,newWinPos.y)
     self:needsLayout()
+  elseif self.resizeInProgress then
+    local delta = event.pos - self.downPos
+    local newSize = Vec2(self.windowSize.x + delta.x, self.windowSize.y - delta.y)
+    local newWinPos = self.windowPos + delta
+    self._bounds.width = lost.guiro.Bounds.decodeEntry(3,newSize.x)
+    self._bounds.height = lost.guiro.Bounds.decodeEntry(4,newSize.y)
+    self._bounds.y = lost.guiro.Bounds.decodeEntry(2,newWinPos.y)
+    self:needsLayout()
   end
 end
 
-function Window:addSubview(view)
-  if self.contentView then
+function Window:addSubview(view,forceSubview)
+  if self.contentView and not forceSubview then
     self.contentView:addSubview(view)
   else
     lost.guiro.view.View.addSubview(self, view)
