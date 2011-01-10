@@ -1,11 +1,7 @@
-require("lost.guiro.view.UserInterface")
-require("lost.guiro.layer.Rect")
-require("lost.guiro.layer.RoundedRect")
-require("lost.guiro.layer.Text")
-
 local Color = lost.common.Color
 
 function startup()  
+  require("lost.guiro")
   local r = lost.guiro.layer.Rect
   local rr = lost.guiro.layer.RoundedRect
   local t = lost.guiro.layer.Text
