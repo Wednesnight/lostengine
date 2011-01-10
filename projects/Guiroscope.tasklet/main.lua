@@ -1,56 +1,22 @@
-require("lost.declarative.Context")
-require("lost.guiro.view.Label")
-require("lost.guiro.view.TabBar")
-require("lost.guiro.layer.Text")
-require("lost.guiro.layer.Rect")
-require("lost.guiro.layout.Horizontal")
-require("lost.guiro.layout.Vertical")
 
 local Color = lost.common.Color
 
 function startup()
+  require("lost.guiro")
   local tabbarheight = 52
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  lost.guiro.themeManager() -- make sure it is instantiated and gradients are created
-  local layers = require("layers")
-  layers:hidden(false)
-  local views = require("views")
-  views:hidden(true)
 
   ui = lost.guiro.view.UserInterface
   {
-    listeners = 
-    {
-        tabBarSelectionChanged = function(event) 
-            if event.target.id ~= "main" then return end
-            if event.target.selected == 1 then
-              layers:hidden(false)
-              views:hidden(true)
-            else
-              layers:hidden(true)
-              views:hidden(false)          
-            end
-          end
-    },
     subviews = 
     {
-      lost.guiro.view.View
+      lost.guiro.view.TabView
       {
-          id="mainToolBar",
-          style="toolbar", bounds={0,"top","1",tabbarheight},
-          subviews=
-          {
-            lost.guiro.view.Label{bounds={10,0,"1",50},halign="left", text="Guiroscope",font={"Grinched",30}},
-            lost.guiro.view.TabBar{id="main",bounds={"right", "top", "1","1"},items={"Layers", "Views"},selected = 1,size="regular"},
-          }
-      },
-      lost.guiro.view.View
-      {
-          id="mainView",
-          bounds = {0,0,"1",{"1",-tabbarheight}},
-          clip=true,
-          subviews = {layers,views}
+        size="regular",
+        style="square",
+        items={{"Layers",require("layers")},
+               {"Views",require("views")}}
       }
     }
   }

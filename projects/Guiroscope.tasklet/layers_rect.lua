@@ -1,3 +1,8 @@
+require("lost.guiro.layout.Horizontal")
+require("lost.guiro.layout.Vertical")
+require("lost.guiro.layer.Rect")
+require("lost.guiro.view.TabBar")
+
 local Color = lost.common.Color
 
 return lost.guiro.view.View
