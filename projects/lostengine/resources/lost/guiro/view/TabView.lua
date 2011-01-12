@@ -16,6 +16,7 @@ function TabView:constructor(args)
   local items = t.items or {}
   t.items = nil
   lost.guiro.view.View.constructor(self, t)
+  self.id = t.id or "tabview"
   self.tabbarItems = {}
   self.tabViews = {}
   for k,item in ipairs(items) do

@@ -1,11 +1,7 @@
 
-local Color = lost.common.Color
-
 function startup()
   require("lost.guiro")
-  local tabbarheight = 52
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
-
 
   ui = lost.guiro.view.UserInterface
   {
@@ -13,8 +9,8 @@ function startup()
     {
       lost.guiro.view.TabView
       {
-        size="regular",
         style="square",
+        size="regular",
         items={{"Layers",require("layers")},
                {"Views",require("views")}}
       }
@@ -22,11 +18,10 @@ function startup()
   }
 --  ui.layer:print()
 --  ui:printSubviews()
+--  ui.layer.renderNode:print()
 end
 
 function update()
---  ui.layer.renderNode:print()
---  local u = gcinfo();collectgarbage("collect");local u2 = gcinfo();log.debug("used: "..u.."kb after gc: "..u2.."kb")
 end
 
 function shutdown()
