@@ -156,3 +156,11 @@ function Window:dispatchWindowEvent(name)
   event.target = self
   self:dispatchEvent(event)  
 end
+
+function Window:open()
+  lost.guiro.windowManager():openWindow(self)
+end
+
+function Window:close()
+  lost.guiro.windowManager():closeWindow(self)
+end

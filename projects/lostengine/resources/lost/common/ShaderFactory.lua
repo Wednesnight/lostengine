@@ -112,6 +112,7 @@ end
 -- f = filled
 -- rc = roundedCorners
 -- s = sides
+-- grad = gradient
 function ShaderFactory:rrCacheKey(f, rc, s, grad)
   local result = tostring(f).."-("..tostring(rc.tl).."-"..tostring(rc.tr).."-"..tostring(rc.bl).."-"..tostring(rc.br)..")"
   result = result.."-("..tostring(s.top).."-"..tostring(s.bottom).."-"..tostring(s.left).."-"..tostring(s.right).."-"..tostring(grad)..")"
