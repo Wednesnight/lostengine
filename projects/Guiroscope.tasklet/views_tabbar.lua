@@ -1,21 +1,11 @@
-local Color = lost.common.Color
-
-local tabbarHeight = 20
-
 return lost.guiro.view.View
 {
-  bounds = {0,0,"1","1"},
-  sublayers =
-  {
-    lost.guiro.layer.Text{bounds={"center", "top",200,tabbarHeight},font={"Vera",12},
-          text="TabBar",
-          color=Color(0,0,0)},
-  },
+  layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=20},
   subviews =
   {
     lost.guiro.view.View
     {
-      bounds={0,0,300,{"1",-tabbarHeight}},
+      bounds={0,0,".3","1"},
       layout = lost.guiro.layout.Vertical{valign="center",halign="center",spacing=20},
       subviews=
       {
@@ -30,7 +20,7 @@ return lost.guiro.view.View
     },    
     lost.guiro.view.View
     {
-      bounds={300,0,300,{"1",-tabbarHeight}},
+      bounds={300,0,".3","1"},
       layout = lost.guiro.layout.Vertical{valign="center",halign="center",spacing=20},
       subviews=
       {
@@ -45,7 +35,7 @@ return lost.guiro.view.View
     },
     lost.guiro.view.View
     {
-      bounds={600,0,300,{"1",-tabbarHeight}},
+      bounds={600,0,".3","1"},
       layout = lost.guiro.layout.Vertical{valign="center",halign="center",spacing=20},
       subviews=
       {
