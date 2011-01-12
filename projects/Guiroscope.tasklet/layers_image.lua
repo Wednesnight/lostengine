@@ -18,7 +18,6 @@ return lost.guiro.view.View
     {
       bitmap = bmp,
       clip = true,
---      bounds = {0,0,200,50}
     }
   }
 }

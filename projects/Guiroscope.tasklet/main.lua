@@ -3,17 +3,14 @@ function startup()
   require("lost.guiro")
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  ui = lost.guiro.view.UserInterface
+  lost.guiro.ui():add
   {
-    subviews = 
+    lost.guiro.view.TabView
     {
-      lost.guiro.view.TabView
-      {
-        style="square",
-        size="regular",
-        items={{"Layers",require("layers")},
-               {"Views",require("views")}}
-      }
+      style="square",
+      size="regular",
+      items={{"Layers",require("layers")},
+             {"Views",require("views")}}
     }
   }
 --  ui.layer:print()

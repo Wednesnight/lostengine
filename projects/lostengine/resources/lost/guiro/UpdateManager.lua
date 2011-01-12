@@ -5,15 +5,6 @@ require("lost.common.CallLater")
 
 lost.common.Class "lost.guiro.UpdateManager" {}
 
-local _updateManager = nil
-
-lost.guiro.updateManager = function()
-  if not _updateManager then
-    _updateManager = lost.guiro.UpdateManager()
-  end
-  return _updateManager
-end
-
 function UpdateManager:constructor()
   self._updateScheduled = false
   -- each update queue has a set to track unique elements. within each set k == v, and if a new element was not present
