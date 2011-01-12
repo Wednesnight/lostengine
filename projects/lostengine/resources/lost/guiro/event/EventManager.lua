@@ -272,15 +272,6 @@ function EventManager:propagateKeyEvent(event)
   self:propagateEvent(self.previousFocusStack, keyevent, #self.previousFocusStack)
 end
 
-function EventManager:propagateTouchEvent(rootView, event)
-  local touchEvent = lost.guiro.event.TouchEvent(event)
-
-  log.debug("received ".. touchEvent.size .." touches")
-  for touch in touchEvent.touches do
-    log.debug(tostring(touch.location))
-  end
-end
-
 function EventManager:focusedView()
   if self.focusChanged then
     local idx = #self.previousFocusStack

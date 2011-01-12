@@ -4,13 +4,6 @@ require("lost.common.Class")
 
 lost.common.Class "lost.guiro.TextureManager" {}
 
-lost.guiro.textureManager = function()
-  if not _textureManager then
-    _textureManager = lost.guiro.TextureManager(256)
-  end
-  return _textureManager
-end
-
 function TextureManager:constructor(gradientMaxWidthPixels)
   self._textureManager = lost.mesh.TextureManager.create()
   self._gradientName2Coord = {}

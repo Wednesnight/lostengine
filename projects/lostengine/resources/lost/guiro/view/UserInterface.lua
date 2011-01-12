@@ -57,10 +57,6 @@ function UserInterface:propagateKeyEvent(event)
   self.eventManager:propagateKeyEvent(event)
 end
 
-function UserInterface:propagateTouchEvent(event)
-  self.eventManager:propagateTouchEvent(self, event)
-end
-
 function UserInterface:updateLayout()
   lost.guiro.view.View.updateLayout(self)
   self.camera:viewport(self.rect)
