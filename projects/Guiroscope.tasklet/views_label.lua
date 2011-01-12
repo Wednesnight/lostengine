@@ -1,12 +1,10 @@
-local Color = lost.common.Color
-
 return lost.guiro.view.View
 {
-  bounds = {0,0,"1","1"},
-  sublayers =
-  {
-    lost.guiro.layer.Text{bounds={"center", "top",200,20},font={"Vera",12},
-          text="Label",
-          color=Color(0,0,0)},
-  }
+    layout=lost.guiro.layout.Vertical{valign="center",halign="center",spacing=20},
+    subviews=
+    {
+      lost.guiro.view.Label{style="default",bounds={"center","center",200,30},valign="center",halign="center",text="Label"},
+      lost.guiro.view.Label{style="round",bounds={"center","center",200,30},valign="center",halign="center",text="Label"},
+      lost.guiro.view.Label{style="roundFramed",bounds={"center","center",200,30},valign="center",halign="center",text="Label"},
+    }
 }

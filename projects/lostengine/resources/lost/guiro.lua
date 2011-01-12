@@ -27,4 +27,5 @@ require("lost.guiro.view.TabView")
 require("lost.guiro.view.UserInterface")
 require("lost.guiro.view.View")
 require("lost.guiro.view.Window")
+require("lost.guiro.view.Slider")
 

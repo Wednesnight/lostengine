@@ -63,6 +63,9 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.TabView", "candyRecess", function(target, args) self:tabviewCandyRecess(target, args) end)
   self:addStyle("lost.guiro.view.TabView", "square", function(target, args) self:tabviewSquare(target, args) end)
 
+  self:addStyle("lost.guiro.view.Slider", "default", function(target, args) self:sliderCandy(target, args) end)
+  self:addStyle("lost.guiro.view.Slider", "candy", function(target, args) self:sliderCandy(target, args) end)
+
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -782,7 +785,7 @@ function Pebble:tabviewCandyRecess(target,args)
   local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="candy",bounds={0,"top","1",tabbarHeight},itemWidth="fit", size=sz}
   local ci = 4 -- contentInset
   local contentView = lost.guiro.view.View{bounds={ci,ci,{"1",-(2*ci)}
-                                                        ,{"1",-((2*ci)+(tabbarHeight/2))}
+                                                        ,{"1",-((2*ci)+tabbarHeight)}
                                                         }}
   local recessedLayer = self:layerTabviewRectRecess()
   recessedLayer._bounds.height = lost.guiro.Bounds.decodeEntry(4,{"1",-(tabbarHeight/2)})
@@ -804,3 +807,7 @@ function Pebble:tabviewSquare(target,args)
   target.contentView = contentView
 end
 
+function Pebble:sliderCandy(target,args)
+  local sz = args.size or "regular"
+  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+end
