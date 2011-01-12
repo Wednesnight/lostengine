@@ -43,4 +43,10 @@ lost.guiro.ui = function()
   return _ui
 end
 
+lost.guiro.shaderFactory = function()
+  if not _shaderFactory then
+    _shaderFactory = lost.common.ShaderFactory(tasklet.loader)
+  end
+  return _shaderFactory
+end
 
