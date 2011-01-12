@@ -175,6 +175,17 @@ function View:removeAllSubviews()
   end
 end
 
+function View:containsView(view)
+  local result = false
+  for k,cv in ipairs(self.subviews) do
+    if rawequal(cv,view) then
+      result = true
+      break
+    end
+  end
+  return result
+end
+
 function View:hidden(...)
 	if arg.n > 0 then
 		self.layer.renderNode.active = not arg[1]
