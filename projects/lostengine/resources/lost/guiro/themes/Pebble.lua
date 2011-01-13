@@ -810,4 +810,14 @@ end
 function Pebble:sliderCandy(target,args)
   local sz = args.size or "regular"
   target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+  target.mode = "horizontal"
+  target.handleSize=20
+  local l = lost.guiro.layer.Rect{bounds={0,0,target.handleSize,"1"},color=Color(1,1,0)}
+  target.layer:addSublayer(l)
+  target.handleReleasedLayer = l
+  l = lost.guiro.layer.Rect{bounds={0,0,target.handleSize,"1"},color=Color(0,1,0)}
+  target.layer:addSublayer(l)
+  target.handlePushedLayer = l
+  target.minValue = 0
+  target.maxValue = 1
 end
