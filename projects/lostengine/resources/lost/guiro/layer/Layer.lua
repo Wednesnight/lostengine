@@ -213,6 +213,14 @@ function Layer:hidden(...)
   end
 end
 
+function Layer:show()
+  self:hidden(false)
+end
+
+function Layer:hide()
+  self:hidden(true)
+end
+
 function Layer:clip(...)
   if arg.n >= 1 then
     self.renderNode.clip = arg[1]

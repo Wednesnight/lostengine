@@ -194,6 +194,14 @@ function View:hidden(...)
 	end
 end
 
+function View:show()
+  self:hidden(false)
+end
+
+function View:hide()
+  self:hidden(true)
+end
+
 function View:needsUpdate()
   lost.guiro.updateManager():viewNeedsUpdate(self)
 end
