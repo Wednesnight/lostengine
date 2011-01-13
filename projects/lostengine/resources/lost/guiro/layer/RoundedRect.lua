@@ -36,7 +36,9 @@ function RoundedRect:constructor(args)
   end
   
   self.mesh.material.shader = lost.guiro.shaderFactory():roundedRect(filled, roundCorners, sides, hasGradient)
-  self.mesh.material.uniforms:setFloat("radius", radius)
+  if self.mesh.material.shader:hasUniform("radius") then
+    self.mesh.material.uniforms:setFloat("radius", radius)
+  end
   
   if not filled then self.mesh.material.uniforms:setFloat("width", width) end
   if hasGradient then 

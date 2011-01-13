@@ -21,9 +21,37 @@ function Slider:constructor(args)
   local t = args or {}
   self.id = t.id or "slider"
   
+  
+  self.mouseDownHandler = function(event) self:mouseDown(event) end
+  self.mouseUpHandler = function(event) self:mouseUp(event) end
+  self:addEventListener("mouseDown", self.mouseDownHandler)
+  self:addEventListener("mouseUp", self.mouseUpHandler)
+
   self:needsLayout()
   self:value(0)
+  self.dragInProgress = false
+  self:release()
 end
 
 function Slider:value(val)
+end
+
+function Slider:mouseDown(event)
+  log.debug("down")
+  self:press()
+end
+
+function Slider:mouseUp(event)
+  log.debug("up")
+  self:release()
+end
+
+function Slider:press()
+  self.handleReleasedLayer:hide()
+  self.handlePushedLayer:show()
+end
+
+function Slider:release()
+  self.handleReleasedLayer:show()
+  self.handlePushedLayer:hide()
 end
