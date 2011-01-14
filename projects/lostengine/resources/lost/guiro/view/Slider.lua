@@ -20,7 +20,7 @@ function Slider:constructor(args)
   lost.guiro.view.View.constructor(self, args)
   local t = args or {}
   self.id = t.id or "slider"
-  
+  self.mode = t.mode or "horizontal"
   
   self.mouseDownHandler = function(event) self:mouseDown(event) end
   self.mouseUpHandler = function(event) self:mouseUp(event) end
@@ -36,6 +36,7 @@ function Slider:constructor(args)
   self.handleMouseOffset = 0 -- x offset of the mosue within the slider handle
   self.handlePos = 0 -- handle x position within the slider view
   self:value(self.min)
+  log.debug("slider mode "..self.mode)
 end
 
 -- sets current value, updates handle position accordingly
@@ -112,6 +113,7 @@ function Slider:updateHandlePosFromMousePos(mousepos)
   elseif self.handlePos > self:upperHandleRangeBound() then
     self.handlePos = self:upperHandleRangeBound()
   end
+
   if self.mode == "horizontal" then
     self.handleReleasedLayer:x(self.handlePos)
     self.handlePushedLayer:x(self.handlePos)

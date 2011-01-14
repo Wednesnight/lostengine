@@ -808,16 +808,26 @@ function Pebble:tabviewSquare(target,args)
 end
 
 function Pebble:sliderCandy(target,args)
-  local sz = args.size or "regular"
-  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
-  target.mode = "horizontal"
+--  local sz = args.size or "regular"
+
   target.handleSize=20
-  local l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(1,1,0)}
-  target.layer:addSublayer(l)
-  target.handleReleasedLayer = l
-  l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(0,1,0)}
-  target.layer:addSublayer(l)
-  target.handlePushedLayer = l
-  target.minValue = 0
-  target.maxValue = 1
+  target.mode = args.mode or "horizontal"
+  
+  if target.mode == "horizontal" then
+    target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+    local l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(1,1,0)}
+    target.layer:addSublayer(l)
+    target.handleReleasedLayer = l
+    l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(0,1,0)}
+    target.layer:addSublayer(l)
+    target.handlePushedLayer = l
+  else
+    target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+    local l = lost.guiro.layer.Rect{bounds={2,0,{"1",-4},target.handleSize,},color=Color(1,1,0)}
+    target.layer:addSublayer(l)
+    target.handleReleasedLayer = l
+    l = lost.guiro.layer.Rect{bounds={2,0,{"1",-4},target.handleSize},color=Color(0,1,0)}
+    target.layer:addSublayer(l)
+    target.handlePushedLayer = l
+  end
 end
