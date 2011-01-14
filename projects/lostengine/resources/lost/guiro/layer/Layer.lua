@@ -55,6 +55,21 @@ function Layer:bounds(...)
   end
 end
 
+function Layer:x(v)
+  self._bounds.x = lost.guiro.Bounds.decodeEntry(1,v)
+  self:needsLayout()
+end
+
+function Layer:y()
+  self._bounds.x = lost.guiro.Bounds.decodeEntry(2,v)
+  self:needsLayout()
+end
+
+function Layer:pos(xv,yv)
+  self:x(xv)
+  self:y(yv)
+end
+
 function Layer:superRect()
   local result = Rect()
   if self._superlayer then
