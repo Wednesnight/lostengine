@@ -100,6 +100,15 @@ function View:pos(xv,yv)
   self:y(yv)
 end
 
+function View:width(v)
+  self._bounds.width = lost.guiro.Bounds.decodeEntry(3,v)
+  self:needsLayout()
+end
+
+function View:height(v)
+  self._bounds.height = lost.guiro.Bounds.decodeEntry(4,v)
+  self:needsLayout()
+end
 
 function View:superview(...)
   if arg.n > 0 then
