@@ -85,6 +85,22 @@ function View:bounds(...)
   end
 end
 
+function View:x(v)
+  self._bounds.x = lost.guiro.Bounds.decodeEntry(1,v)
+  self:needsLayout()
+end
+
+function View:y()
+  self._bounds.x = lost.guiro.Bounds.decodeEntry(2,v)
+  self:needsLayout()
+end
+
+function View:pos(xv,yv)
+  self:x(xv)
+  self:y(yv)
+end
+
+
 function View:superview(...)
   if arg.n > 0 then
     local newsv = arg[1]
