@@ -127,7 +127,6 @@ function Slider:updateValueFromHandlePos()
   local range = self:range()
   local v = self.handlePos / range
   self.value = self.min + v*(self.max - self.min)
-  log.debug(self.value)
 end
 
 function Slider:mouseDown(event)
@@ -135,6 +134,7 @@ function Slider:mouseDown(event)
   self:initHandleMouseOffset(self:mousePos(event.pos))
   self:updateHandlePosFromMousePos(self:mousePos(event.pos))
   self:updateValueFromHandlePos()
+  self:dispatchValueChangedEvent()
   self:press()
 end
 
@@ -146,6 +146,7 @@ end
 function Slider:mouseMove(event)
   self:updateHandlePosFromMousePos(self:mousePos(event.pos))
   self:updateValueFromHandlePos()
+  self:dispatchValueChangedEvent()  
 end
 
 function Slider:press()
@@ -157,3 +158,11 @@ function Slider:release()
   self.handleReleasedLayer:show()
   self.handlePushedLayer:hide()
 end
+
+function Slider:dispatchValueChangedEvent()
+  local event = lost.guiro.event.Event("valueChanged")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
+end
+

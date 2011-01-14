@@ -91,6 +91,9 @@ function Pebble:constructor()
   
   self.squareButtonLightFrameCol = Color(168/255, 168/255, 168/255)
   self.squareButtonDarkFrameCol = Color(145/255, 145/255, 145/255)
+  
+  self.sliderCandyTrackSize={regular=6, small=4,mini=2}
+  self.sliderCandyHandleSize={regular=16, small=12,mini=10}
 end
 
 function Pebble:labelDefault(target, args)
@@ -808,26 +811,64 @@ function Pebble:tabviewSquare(target,args)
 end
 
 function Pebble:sliderCandy(target,args)
---  local sz = args.size or "regular"
+  local l = lost.guiro.layer.Layer
+  local d = lost.guiro.layer.Disc
+  local rr = lost.guiro.layer.RoundedRect
 
-  target.handleSize=20
+  local sz = args.size or "regular"
+
   target.mode = args.mode or "horizontal"
+
+  local ts = self.sliderCandyTrackSize[sz]
+  local hs = self.sliderCandyHandleSize[sz]
+  target.handleSize=hs
+  local trackRadius = 2
+  local dc = .7
+  local dimColor = Color(dc, dc, dc)
+  local trackFillColor = Color(.4,.4,.4)
+  local trackFrameColor = Color(.1,.1,.1)
+  
+  local handleReleased = l{bounds={0,0,hs,hs},
+                           sublayers={d{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,},
+                                      d{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false}}}
+
+  local handlePushed = l{bounds={0,0,hs,hs},
+                           sublayers={d{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlue",filled=true,},
+                                      d{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlueFrame",filled=false}}}
+  local tw = 0
+  local th = 0
+  if target.mode == "horizontal" then
+    tw="1"
+    th=ts
+--    target:height(ts)
+  else
+    tw=ts
+    th="1"
+--    target:width(ts)
+  end
+  local track = l{bounds={0,0,tw,th},
+                  sublayers={
+                    rr{filled=true,radius=trackRadius,color=trackFillColor},
+--                    rr{filled=false,radius=trackRadius,color=trackFrameColor,width=1},
+                  }}
   
   if target.mode == "horizontal" then
-    target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
-    local l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(1,1,0)}
-    target.layer:addSublayer(l)
-    target.handleReleasedLayer = l
-    l = lost.guiro.layer.Rect{bounds={0,2,target.handleSize,{"1",-4}},color=Color(0,1,0)}
-    target.layer:addSublayer(l)
-    target.handlePushedLayer = l
+    track:y("center")
+    handleReleased:y("center")
+    handlePushed:y("center")
+    target.layer:addSublayer(track)
+    target.layer:addSublayer(handleReleased)
+    target.handleReleasedLayer = handleReleased
+    target.layer:addSublayer(handlePushed)
+    target.handlePushedLayer = handlePushed
   else
-    target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
-    local l = lost.guiro.layer.Rect{bounds={2,0,{"1",-4},target.handleSize,},color=Color(1,1,0)}
-    target.layer:addSublayer(l)
-    target.handleReleasedLayer = l
-    l = lost.guiro.layer.Rect{bounds={2,0,{"1",-4},target.handleSize},color=Color(0,1,0)}
-    target.layer:addSublayer(l)
-    target.handlePushedLayer = l
+    track:x("center")
+    handleReleased:x("center")
+    handlePushed:x("center")
+    target.layer:addSublayer(track)
+    target.layer:addSublayer(handleReleased)
+    target.handleReleasedLayer = handleReleased
+    target.layer:addSublayer(handlePushed)
+    target.handlePushedLayer = handlePushed
   end
 end
