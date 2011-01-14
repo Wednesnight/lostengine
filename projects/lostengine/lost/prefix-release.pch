@@ -2,10 +2,16 @@
 #define LOST_PREFIX_RELEASE_PCH
 
 #ifdef __cplusplus
-  #define NDEBUG
-  #include "prefix-shared.h"
-
+  #ifdef NDEBUG
+    #undef NDEBUG
+  #endif
+  #undef LOST_GL_ENABLE_DEBUG
+  #undef LOST_GL_ENABLE_DEBUG_THROW
   #define LOST_LOGGER_ENABLE_DOUT
+  #define LOST_LOGGER_ENABLE_EOUT
+  #define LOST_LOGGER_ENABLE_IOUT
+  #define LOST_LOGGER_ENABLE_WOUT
+  #include "prefix-shared.h"
 #endif
 
 #endif

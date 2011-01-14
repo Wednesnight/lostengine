@@ -412,8 +412,8 @@ namespace lost
     void FrameBuffer::resize(const Vec2& size)
     {
       Vec2 correctedSize((float)nextPowerOf2((unsigned long)size.width), (float)nextPowerOf2((unsigned long)size.height));
-      correctedSize.x = fmax(correctedSize.x, correctedSize.y);
-      correctedSize.y = fmax(correctedSize.x, correctedSize.y);
+      correctedSize.x = fmaxf(correctedSize.x, correctedSize.y);
+      correctedSize.y = fmaxf(correctedSize.x, correctedSize.y);
       this->size = correctedSize;
       for (map<uint8_t, AttachmentPtr>::iterator idx = colorBuffers.begin(); idx != colorBuffers.end(); ++idx)
       {

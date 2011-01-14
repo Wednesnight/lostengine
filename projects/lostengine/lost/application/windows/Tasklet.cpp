@@ -3,6 +3,7 @@
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/gl/Context.h"
 #include <sstream>
 #include <stdexcept>
 
@@ -35,6 +36,7 @@ namespace lost
       hiddenMembers->threadId = GetCurrentThreadId();
       init();
       bool hasError = false;
+      std::string errorMsg;
       try
       {
         // make sure that our GL context is the current context
@@ -42,10 +44,17 @@ namespace lost
         {
           window->context->makeCurrent();
         }
-        if (startup())
+
+        startup();
+		    if (running)
         {
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && update())
+          double framerate = config.framerate;
+          double offset = timer.getTime();
+
+          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running)
           {
+            processEvents();
+            update(framerate);
             render();
 
             if(waitForEvents)
@@ -59,22 +68,26 @@ namespace lost
               TranslateMessage(&msg);
               DispatchMessage(&msg);
             }
-            processEvents();
+
+            framerate = timer.getElapsedAndUpdateOffset(offset);
           }
+
           shutdown();
         }
       }
-      catch (...)
+      catch (std::exception& e)
       {
+        errorMsg = e.what();
         hasError = true;
       }
+
       isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
       cleanup();
       if (hasError)
       {
         ostringstream os;
-        os << "Tasklet terminated with error: " << name;
+        os << "Tasklet terminated with error: " << errorMsg;
         throw runtime_error(os.str());
       }
     }

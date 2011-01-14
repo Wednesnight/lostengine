@@ -1,12 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C++ Express 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LostEngine", "LostEngine.vcproj", "{414B8958-C717-4AEB-A047-101F385DD166}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LostEngine", "LostEngine.vcxproj", "{414B8958-C717-4AEB-A047-101F385DD166}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Launcher", "Launcher.vcproj", "{EC9931DB-A99C-4873-A147-C2F504D49A72}"
-	ProjectSection(ProjectDependencies) = postProject
-		{414B8958-C717-4AEB-A047-101F385DD166} = {414B8958-C717-4AEB-A047-101F385DD166}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Launcher", "Launcher.vcxproj", "{EC9931DB-A99C-4873-A147-C2F504D49A72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

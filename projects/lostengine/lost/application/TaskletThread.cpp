@@ -13,7 +13,7 @@ namespace lost
       : fhtagn::threads::tasklet(bind(&TaskletThread::run, this, _1)),
         tasklet(inTasklet)
       {
-        add_error_handler(bind(&TaskletThread::error, this, _1, _2));
+        add_error_handler(boost::bind(&TaskletThread::error, this, _1, _2));
       }
 
       void TaskletThread::run(fhtagn::threads::tasklet& t)

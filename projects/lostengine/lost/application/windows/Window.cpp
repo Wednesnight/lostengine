@@ -1,16 +1,22 @@
 #include "lost/application/Window.h"
 #include "lost/event/Event.h"
+#include "lost/event/EventDispatcher.h"
 #include "lost/application/WindowEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/application/MouseEvent.h"
 #include "lost/application/DragNDropEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
+#include "lost/application/TaskletConfig.h"
 #include <map>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <shellapi.h>
+
+// windows consts get in our way here...
+#undef MB_RIGHT
 
 namespace lost
 {
@@ -111,6 +117,29 @@ namespace lost
       window->dispatcher->queueEvent(event);
     }
 
+    void dispatchMouseEvent(Window* window, HWND hwnd, event::Type which, POINTS pos, MouseButton button, bool pressed)
+    {
+      // get cursor pos in screen coordinates
+      POINT cursorPos;
+      GetCursorPos(&cursorPos);
+
+      // invert Y
+      DWORD dwHeight = GetSystemMetrics(SM_CYBORDER);
+      cursorPos.y = dwHeight - cursorPos.y;
+      RECT clientRect;
+      GetClientRect(hwnd, &clientRect);
+      pos.y = (SHORT) clientRect.bottom - pos.y;
+
+      MouseEventPtr event(new MouseEvent(which));
+      event->window  = window;
+      event->pos     = math::Vec2(pos.x, pos.y);
+      event->absPos  = math::Vec2((float) cursorPos.x, (float) cursorPos.y);
+      event->button  = button;
+      event->pressed = pressed;
+//      event->scrollDelta = lost::math::Vec3([event deltaX], [event deltaY], [event deltaZ]);
+      window->dispatcher->queueEvent(event);
+    }
+
     void dispatchDragNDropEvent(Window* window, HDROP drop)
     {
       UINT numFiles = DragQueryFile(drop, 0xFFFFFFFF, NULL, 0);
@@ -169,6 +198,27 @@ namespace lost
         case WM_DROPFILES:
           dispatchDragNDropEvent(windowMap[hwnd], (HDROP)wParam);
           break;
+
+        case WM_MOUSEMOVE:
+          dispatchMouseEvent(windowMap[hwnd], hwnd, MouseEvent::MOUSE_MOVE(), MAKEPOINTS(lParam), MB_UNKNOWN, false);
+          break;
+
+        case WM_LBUTTONDOWN:
+          dispatchMouseEvent(windowMap[hwnd], hwnd, MouseEvent::MOUSE_DOWN(), MAKEPOINTS(lParam), MB_LEFT, true);
+          break;
+
+        case WM_LBUTTONUP:
+          dispatchMouseEvent(windowMap[hwnd], hwnd, MouseEvent::MOUSE_UP(), MAKEPOINTS(lParam), MB_LEFT, false);
+          break;
+
+        case WM_RBUTTONDOWN:
+          dispatchMouseEvent(windowMap[hwnd], hwnd, MouseEvent::MOUSE_DOWN(), MAKEPOINTS(lParam), MB_RIGHT, true);
+          break;
+
+        case WM_RBUTTONUP:
+          dispatchMouseEvent(windowMap[hwnd], hwnd, MouseEvent::MOUSE_UP(), MAKEPOINTS(lParam), MB_RIGHT, false);
+          break;
+
       }
 
       return DefWindowProc(hwnd, message, wParam, lParam);
@@ -204,17 +254,17 @@ namespace lost
       // Register the window class
       RegisterClass(&wc);
 
-      std::wstring wTitle(params.caption.begin(), params.caption.end());
+      std::wstring wTitle(config->windowTitle.begin(), config->windowTitle.end());
       // Create window
       hiddenMembers->handle = CreateWindowEx(WS_EX_APPWINDOW,
                                              L"LostEngineApplicationWindow",
                                              wTitle.c_str(),
                                              WS_SIZEBOX | WS_CLIPSIBLINGS | 
                                              WS_CLIPCHILDREN | WS_VISIBLE | WS_EX_ACCEPTFILES,
-                                             (int)params.rect.x,
-                                             (int)params.rect.y,
-                                             (int)params.rect.width,
-                                             (int)params.rect.height,
+                                             (int)config->windowRect.x,
+                                             (int)config->windowRect.y,
+                                             (int)config->windowRect.width,
+                                             (int)config->windowRect.height,
                                              NULL,
                                              NULL,
                                              GetModuleHandle(NULL),

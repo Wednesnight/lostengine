@@ -51,7 +51,7 @@ namespace lost
       delete hiddenMembers;
     }
 
-    void Application::run()
+    void Application::run(int argc, char *argv[])
     {
       DOUT("Application::run()");
 

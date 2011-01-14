@@ -39,7 +39,7 @@ namespace lost
 //***
 
     // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string& currentTimeFormat( std::string& sTime )
+    std::string currentTimeFormat()
     {
       char   timeformat[20];
       time_t timestamp;
@@ -49,10 +49,10 @@ namespace lost
       if (localtime_s(&localtimestamp, &timestamp) == 0 &&
           strftime( timeformat, 20, "%Y/%m/%d %H:%M:%S", &localtimestamp ) > 0)
       {
-        sTime = timeformat;
+        return timeformat;
       }
 
-      return sTime;
+      return "";
     }
 
     // returns current time in microseconds
