@@ -1,0 +1,1029 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\lost">
+      <UniqueIdentifier>{c8d60369-0a4d-417c-8c54-ca26fc00d4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\al">
+      <UniqueIdentifier>{8daec0ec-8734-44ab-8dc6-0060a5da1342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\application">
+      <UniqueIdentifier>{fb8feaf7-fdd3-4493-91a7-e75e8e88dbcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\application\windows">
+      <UniqueIdentifier>{dca41ffa-2dc1-4d84-8187-71e8286dbfb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\bitmap">
+      <UniqueIdentifier>{f2e58ce4-4512-4b80-b600-605123f1b2d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\camera">
+      <UniqueIdentifier>{6905364b-2970-40fd-9741-1c1225baf744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\common">
+      <UniqueIdentifier>{d7fa8d82-d47a-4f64-b3ca-a47919bbbf95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\event">
+      <UniqueIdentifier>{a9252ad8-4396-4388-b868-0c642408e5f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\font">
+      <UniqueIdentifier>{e81f6ff3-8949-4dc1-a27c-1745059455ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\font\freetype">
+      <UniqueIdentifier>{d062764f-7bf3-4a73-a488-70b7dae27f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\gl">
+      <UniqueIdentifier>{33c187a9-ce7c-447e-84d6-74e000420a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\gl\windows">
+      <UniqueIdentifier>{25dc4d50-0b14-4a4c-abcb-b0372e66d4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\lua">
+      <UniqueIdentifier>{5a704524-e359-4bed-b8bd-3544615d1302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\lua\bindings">
+      <UniqueIdentifier>{35f8d227-a184-450d-ac9f-bc377c41f9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\math">
+      <UniqueIdentifier>{c7a88ec2-b1e4-4607-96ab-b7453a797273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\mesh">
+      <UniqueIdentifier>{a62b062d-fd7f-4786-a2b6-764623165a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\platform">
+      <UniqueIdentifier>{e7074aa6-d052-4c9f-9751-23e999a2cca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\resource">
+      <UniqueIdentifier>{91b82dfa-0665-46c3-8db9-f493f6cf446c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\rg">
+      <UniqueIdentifier>{1c888c37-d97e-419b-b834-6756bee5ae67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty">
+      <UniqueIdentifier>{0336d610-0bf7-4fa7-a949-964820396f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\fhtagn">
+      <UniqueIdentifier>{26e0d557-98e2-4ee4-ab70-3624406a7928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\fhtagn\text">
+      <UniqueIdentifier>{47180ef7-21f3-4973-b294-6884d79bd9e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\fhtagn\threads">
+      <UniqueIdentifier>{0b536335-0a6d-483f-ba83-1762cc844296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\hashlib++">
+      <UniqueIdentifier>{23793743-c43c-421b-9add-347d9e9244c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\boost">
+      <UniqueIdentifier>{26bc19e6-a56b-48e2-800e-6f76e3b8c8f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\boost\filesystem">
+      <UniqueIdentifier>{c5c4b815-5256-448b-9ebb-2c5fdea79b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\boost\signals">
+      <UniqueIdentifier>{4b4c88df-4e07-40ad-8938-7baec35b73fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\boost\system">
+      <UniqueIdentifier>{ec8efb14-c1f0-48d2-9b2d-0164c0bebe73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\boost\thread">
+      <UniqueIdentifier>{73861479-b4d7-4eeb-a215-65e49a8fc70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\zlib">
+      <UniqueIdentifier>{3207cec4-c6ed-4ba4-9cd5-7b022c011072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\stb">
+      <UniqueIdentifier>{078cca87-9965-4540-bd16-c2ee866a9c3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\GLee">
+      <UniqueIdentifier>{b146f1a5-33cf-43d8-8d95-832634f38cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\freetype2">
+      <UniqueIdentifier>{c557b2dd-b115-4936-904b-82d098807494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\luabind">
+      <UniqueIdentifier>{b12aa975-151c-4849-b1cb-67f6639e6cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\lua">
+      <UniqueIdentifier>{22a32184-e9ac-4bfb-a43d-533dfdef5391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\box2d">
+      <UniqueIdentifier>{4d0fd5f0-ca01-40cc-9b1c-89a2e10a6cf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\lost\audio">
+      <UniqueIdentifier>{3ef6d08a-5457-415a-8a6f-968caaee5a1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\thirdparty\zzip">
+      <UniqueIdentifier>{f9588242-b413-4291-861a-6dc0ab8c5fd8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lost\al\Buffer.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\al\Context.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\al\Debug.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\al\Device.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\al\Listener.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\al\Source.cpp">
+      <Filter>Sources\lost\al</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\Application.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\Queue.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\QueueEntityLua.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\Runner.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\Tasklet.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\TaskletThread.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\Window.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\windows\Application.cpp">
+      <Filter>Sources\lost\application\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\windows\Tasklet.cpp">
+      <Filter>Sources\lost\application\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\windows\Window.cpp">
+      <Filter>Sources\lost\application\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\bitmap\Bitmap.cpp">
+      <Filter>Sources\lost\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\bitmap\Packer.cpp">
+      <Filter>Sources\lost\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\camera\Camera.cpp">
+      <Filter>Sources\lost\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\camera\Camera2D.cpp">
+      <Filter>Sources\lost\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\camera\Camera3D.cpp">
+      <Filter>Sources\lost\camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\Data.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\Logger.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\event\EventDispatcher.cpp">
+      <Filter>Sources\lost\event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\TrueTypeFont.cpp">
+      <Filter>Sources\lost\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\freetype\Face.cpp">
+      <Filter>Sources\lost\font\freetype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\freetype\Library.cpp">
+      <Filter>Sources\lost\font\freetype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Buffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\BufferLayout.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Context.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\FragmentShader.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\FrameBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\HostBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\HybridBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\HybridIndexBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\HybridVertexBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\RenderBuffer.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Shader.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\ShaderHelper.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\ShaderProgram.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Texture.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Uniform.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\Utils.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\VertexAttribute.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\VertexShader.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\windows\Context.cpp">
+      <Filter>Sources\lost\gl\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\BindAll.cpp">
+      <Filter>Sources\lost\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\BindingHelpers.cpp">
+      <Filter>Sources\lost\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\GlobalFunctions.cpp">
+      <Filter>Sources\lost\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\ModuleLoader.cpp">
+      <Filter>Sources\lost\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\State.cpp">
+      <Filter>Sources\lost\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostApplication.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostBitmap.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostCamera.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostCommon.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostEvent.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostFont.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostGL.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostLGL.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostLua.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostMath.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostMesh.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostPlatform.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostResource.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostRg.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\RectPacker.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Loader.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Mesh.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Quad.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Rect.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\ScaleGrid.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\platform\Platform.cpp">
+      <Filter>Sources\lost\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\platform\Platform_Windows.cpp">
+      <Filter>Sources\lost\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\resource\ApplicationResourceRepository.cpp">
+      <Filter>Sources\lost\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\resource\DefaultLoader.cpp">
+      <Filter>Sources\lost\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\resource\FilesystemRepository.cpp">
+      <Filter>Sources\lost\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\resource\Helper.cpp">
+      <Filter>Sources\lost\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\resource\Loader.cpp">
+      <Filter>Sources\lost\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Blend.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Camera.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Clear.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\ClearColor.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\DefaultFrameBuffer.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\DepthTest.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Draw.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\FrameBuffer.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Node.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\Scissor.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\ScissorRect.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\variant.cpp">
+      <Filter>Sources\thirdparty\fhtagn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\version.cpp">
+      <Filter>Sources\thirdparty\fhtagn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\text\decoders.cpp">
+      <Filter>Sources\thirdparty\fhtagn\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\text\encoders.cpp">
+      <Filter>Sources\thirdparty\fhtagn\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\text\transcoding.cpp">
+      <Filter>Sources\thirdparty\fhtagn\text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\fhtagn\fhtagn-0.3\fhtagn\threads\tasklet.cpp">
+      <Filter>Sources\thirdparty\fhtagn\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_md5.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_md5wrapper.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha1.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha1wrapper.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha256.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha256wrapper.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha2ext.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha384wrapper.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\hashlib++\hashlib++_0_3_1\hl_sha512wrapper.cpp">
+      <Filter>Sources\thirdparty\hashlib++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\adler32.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\compress.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\crc32.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\deflate.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\gzio.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\infback.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\inffast.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\inflate.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\inftrees.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\trees.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\uncompr.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zlib\zlib_1_2_3\source\zutil.c">
+      <Filter>Sources\thirdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\stb\stb_image_1_18\stb_image.c">
+      <Filter>Sources\thirdparty\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\glee\glee_5_21\source\GLee.c">
+      <Filter>Sources\thirdparty\GLee</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lapi.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lauxlib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lbaselib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lcode.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ldblib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ldebug.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ldo.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ldump.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lfunc.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lgc.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\linit.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\liolib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\llex.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lmathlib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lmem.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\loadlib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lobject.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lopcodes.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\loslib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lparser.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lstate.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lstring.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lstrlib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ltable.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ltablib.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\ltm.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lua.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lundump.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lvm.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\lzio.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\lua\lua_5_1_4\source\src\print.c">
+      <Filter>Sources\thirdparty\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\codecvt_error_category.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\operations.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\path.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\path_traits.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\portability.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\unique_path.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\windows_file_codecvt.cpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\signals\src\connection.cpp">
+      <Filter>Sources\thirdparty\boost\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\signals\src\named_slot_map.cpp">
+      <Filter>Sources\thirdparty\boost\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\signals\src\signal_base.cpp">
+      <Filter>Sources\thirdparty\boost\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\signals\src\slot.cpp">
+      <Filter>Sources\thirdparty\boost\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\signals\src\trackable.cpp">
+      <Filter>Sources\thirdparty\boost\signals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\system\src\error_code.cpp">
+      <Filter>Sources\thirdparty\boost\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\thread\src\win32\thread.cpp">
+      <Filter>Sources\thirdparty\boost\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\thread\src\win32\tss_dll.cpp">
+      <Filter>Sources\thirdparty\boost\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\thread\src\win32\tss_pe.cpp">
+      <Filter>Sources\thirdparty\boost\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\thread\src\tss_null.cpp">
+      <Filter>Sources\thirdparty\boost\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\class.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\wrapper_base.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\class_info.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\class_registry.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\class_rep.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\create_class.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\error.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\exception_handler.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\function.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\inheritance.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\link_compatibility.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\object_rep.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\open.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\pcall.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\scope.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\stack_content_by_name.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\luabind\luabind_0_9_1\src\weak_ref.cpp">
+      <Filter>Sources\thirdparty\luabind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\stb\stb_vorbis_0_99996\stb_vorbis.c">
+      <Filter>Sources\thirdparty\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\application\TaskletConfig.cpp">
+      <Filter>Sources\lost\application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\Color.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\ColorGradient.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\io.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\Profiler.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\common\Timer.cpp">
+      <Filter>Sources\lost\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\BitmapFont.cpp">
+      <Filter>Sources\lost\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\Font.cpp">
+      <Filter>Sources\lost\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\FontManager.cpp">
+      <Filter>Sources\lost\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\font\Glyph.cpp">
+      <Filter>Sources\lost\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\RangeManager.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\gl\UniformBlock.cpp">
+      <Filter>Sources\lost\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\AABB.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\io.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Matrix.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Quat.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Rect.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Vec2.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Vec3.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\math\Vec4.cpp">
+      <Filter>Sources\lost\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Disc.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Line.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\RoundedRect.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\TextureManager.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\rg\ScissorStack.cpp">
+      <Filter>Sources\lost\rg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\ThirdpartyBox2D.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2BroadPhase.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2CollideCircle.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2CollidePoly.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2Collision.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2Distance.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2PairManager.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\b2TimeOfImpact.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\Shapes\b2CircleShape.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\Shapes\b2PolygonShape.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Collision\Shapes\b2Shape.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Common\b2BlockAllocator.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Common\b2Math.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Common\b2Settings.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Common\b2StackAllocator.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\b2Body.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\b2ContactManager.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\b2Island.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\b2World.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\b2WorldCallbacks.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Contacts\b2CircleContact.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Contacts\b2Contact.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Contacts\b2ContactSolver.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Contacts\b2PolyAndCircleContact.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Contacts\b2PolyContact.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2DistanceJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2GearJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2Joint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2MouseJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2PrismaticJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2PulleyJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\box2d\box2d_2_0_1\source\Source\Dynamics\Joints\b2RevoluteJoint.cpp">
+      <Filter>Sources\thirdparty\box2d</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\audio\Engine.cpp">
+      <Filter>Sources\lost\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\audio\Source.cpp">
+      <Filter>Sources\lost\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\audio\VorbisFile.cpp">
+      <Filter>Sources\lost\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\lua\bindings\LostAudio.cpp">
+      <Filter>Sources\lost\lua\bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\dir.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\err.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\fetch.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\file.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\fseeko.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\info.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\memdisk.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\mmapped.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\plugin.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\stat.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\write.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\zziplib\zziplib-0.13.58\zzip\zip.c">
+      <Filter>Sources\thirdparty\zzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lost\mesh\Sphere.cpp">
+      <Filter>Sources\lost\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\autofit\autofit.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftbase.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftbbox.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftbdf.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftbitmap.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftcid.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftdebug.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftgasp.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftglyph.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftgxval.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftinit.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftlcdfil.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftmm.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftotval.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftpatent.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftpfr.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftstroke.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftsynth.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftsystem.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\fttype1.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftwinfnt.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\base\ftxf86.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\bdf\bdf.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\cache\ftcache.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\cff\cff.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\cid\type1cid.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\gzip\ftgzip.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\lzw\ftlzw.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\pcf\pcf.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\pfr\pfr.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\psaux\psaux.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\pshinter\pshinter.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\psnames\psnames.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\raster\raster.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\sfnt\sfnt.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\smooth\smooth.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\truetype\truetype.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\type1\type1.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\type42\type42.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\thirdparty\freetype2\freetype_2_4_3\src\winfonts\winfnt.c">
+      <Filter>Sources\thirdparty\freetype2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\filesystem\v3\src\windows_file_codecvt.hpp">
+      <Filter>Sources\thirdparty\boost\filesystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\thirdparty\boost\boost_1_44_0\libs\thread\src\win32\timeconv.inl">
+      <Filter>Sources\thirdparty\boost\thread</Filter>
+    </None>
+  </ItemGroup>
+</Project>

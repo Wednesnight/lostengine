@@ -32,6 +32,7 @@
 #define __FT2_BUILD_GENERIC_H__
 
 #include <freetype/config/ftheader.h>
+#include <freetype/internal/internal.h>
 
 #endif /* __FT2_BUILD_GENERIC_H__ */
 

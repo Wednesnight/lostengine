@@ -17,12 +17,7 @@
     #define BOOST_THREAD_BUILD_LIB
   #endif
 
-  // stdint
-  #if defined WIN32
-    #include "lost/platform/stdint.h"
-  #else
-    #include <stdint.h>
-  #endif
+  #include <stdint.h>
 
   // lostengine
   #include "lost/platform/shared_ptr.h"

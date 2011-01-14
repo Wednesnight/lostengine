@@ -1,5 +1,6 @@
 #include "lost/gl/Context.h"
 #include "lost/gl/gl.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {

@@ -84,7 +84,7 @@ namespace lost
       // publish global utility functions
       GlobalFunctions::install(*lua);
       lsh.reset(new LuaStateHelper);
-      eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(bind(&Tasklet::updateWindowSize, this, _1)));      
+      eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
     }
     
     Tasklet::~Tasklet()
@@ -193,7 +193,7 @@ namespace lost
     void Tasklet::createWindow()
     {
       window = new Window(eventDispatcher, &config);
-      window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(bind(&Tasklet::closeWindow, this, _1)));
+      window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(boost::bind(&Tasklet::closeWindow, this, _1)));
       window->open();        
     }
 
