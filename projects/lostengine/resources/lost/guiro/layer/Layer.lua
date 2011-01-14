@@ -60,8 +60,8 @@ function Layer:x(v)
   self:needsLayout()
 end
 
-function Layer:y()
-  self._bounds.x = lost.guiro.Bounds.decodeEntry(2,v)
+function Layer:y(v)
+  self._bounds.y = lost.guiro.Bounds.decodeEntry(2,v)
   self:needsLayout()
 end
 

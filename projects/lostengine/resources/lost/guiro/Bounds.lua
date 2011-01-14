@@ -149,6 +149,10 @@ function Bounds:complete()
   return result
 end
 
+function Bounds:print()
+  log.debug("x:"..tostring(self.x).." y:"..tostring(self.y).." w:"..tostring(self.width).." h:"..tostring(self.height))
+end
+
 
 
 
