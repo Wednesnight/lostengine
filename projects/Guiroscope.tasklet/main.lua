@@ -11,6 +11,10 @@ function startup()
       size="regular",
       items={{"Layers",require("layers")},
              {"Views",require("views")}}
+    },
+    lost.guiro.view.FpsMeter
+    {
+      bounds={"right","bottom",140,70}
     }
   }
 --  ui.layer:print()
@@ -18,8 +22,9 @@ function startup()
 --  ui.layer.renderNode:print()
 end
 
-function update()
-end
+--function update()
+--  log.debug("------------------ UPDATE")
+--end
 
 function shutdown()
 end

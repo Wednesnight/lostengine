@@ -185,7 +185,7 @@ namespace lost
       {
         call_function<void>(lsh->luaUpdate, deltaSeconds);
       }
-      updateQueue->process(this);      
+//-- disableed so the queue is only cleared once per frame      updateQueue->process(this);      
       return  running;      
     }
 

@@ -16,7 +16,6 @@ local Color = lost.common.Color
 -- * all layer params
 -- * font: must be a table with two entries in this order: a string containing a font name known to the fontmanager, a number containing the desired fontsize
 -- * text: the string to render
--- * 
 function Text:constructor(args)
   lost.guiro.layer.Layer.constructor(self, args)
   local t = args or {}

@@ -70,6 +70,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.ColorPicker", "default", function(target, args) self:colorPicker(target, args) end)
   self:addStyle("lost.guiro.view.ColorPickerWindow", "default", function(target, args) self:colorPickerWindow(target, args) end)
 
+  self:addStyle("lost.guiro.view.FpsMeter", "default", function(target, args) self:fpsMeter(target, args) end)
 
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
@@ -999,3 +1000,12 @@ function Pebble:colorPickerWindow(target, args)
   target.contentView.layer:addSublayer(colorLayer)
   target.colorLayer = colorLayer
 end
+
+function Pebble:fpsMeter(target, args)
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=true, radius=8,color=Color(0,0,0,.6)})
+  local tl = lost.guiro.layer.Text{font={"Vera bold",48},color=Color(1,1,1),valign="center",halign="center"}
+  target.layer:addSublayer(tl)
+  target.textLayer = tl
+end
+
+
