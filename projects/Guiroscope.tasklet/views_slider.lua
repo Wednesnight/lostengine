@@ -5,7 +5,7 @@ return lost.guiro.view.View
     listeners =
     {
       valueChanged = function(event) 
-        event.currentTarget("val"):text(tostring(event.target.value))
+        event.currentTarget("val"):text(string.format("%1.1f",event.target:value()))
       end
     },
     subviews=
