@@ -17,6 +17,7 @@ return lost.guiro.view.View
              {"Box", require("views_box")},
              {"RadioGroup",require("views_radiogroup")},
              {"Slider",require("views_slider")},
+             {"ColorPicker",require("views_colorpicker")},
              },
     }
   }

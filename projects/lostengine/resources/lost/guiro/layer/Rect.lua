@@ -73,6 +73,15 @@ function Rect:constructor(args)
   self:needsLayout()
 end
 
+function Rect:color(...)
+  if arg.n >= 1 then 
+    self._color = arg[1]
+    self.mesh.material.color = t.color:premultiplied()
+  else
+    return self._color
+  end
+end
+
 function Rect:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
   self.quad:update(self.rect)

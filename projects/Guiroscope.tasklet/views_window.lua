@@ -13,12 +13,8 @@ return lost.guiro.view.View
     if event.target.id == "window2" then windowControl("content")("wb2"):pushed(false) end
    end,
    buttonClick = function(event) 
-    if event.target.id == "wb1" then window1:hidden(false) end
-    if event.target.id == "wb2" then window2:hidden(false) end
+    if event.target.id == "wb1" then window1:open() end
+    if event.target.id == "wb2" then window2:open() end
    end,
-  },
-  subviews=
-  {
-    window1,window2,windowControl
   },
 }

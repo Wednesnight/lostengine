@@ -27,6 +27,8 @@ function Slider:constructor(args)
   self.mouseMoveHandler = function(event) self:mouseMove(event) end
   self:addEventListener("mouseDown", self.mouseDownHandler)
   self:addEventListener("mouseUp", self.mouseUpHandler)
+  self:addEventListener("mouseUpOutside", self.mouseUpHandler)
+  self:addEventListener("mouseUpInside", self.mouseUpHandler)
 
   self:needsLayout()
   self:release()
@@ -36,7 +38,7 @@ function Slider:constructor(args)
   self.handleMouseOffset = 0 -- x offset of the mosue within the slider handle
   self.handlePos = 0 -- handle x position within the slider view
   self:value(self.min)
-  log.debug("slider mode "..self.mode)
+  self.dragInProgress = false
 end
 
 -- sets current value, updates handle position accordingly
@@ -136,17 +138,23 @@ function Slider:mouseDown(event)
   self:updateValueFromHandlePos()
   self:dispatchValueChangedEvent()
   self:press()
+  self.dragInProgress = true
 end
 
 function Slider:mouseUp(event)
-  self:rootview():removeEventListener("mouseMove",self.mouseMoveHandler)
-  self:release()
+  if self.dragInProgress then
+    self:rootview():removeEventListener("mouseMove",self.mouseMoveHandler)
+    self:release()
+    self.dragInProgress = false
+  end
 end
 
 function Slider:mouseMove(event)
-  self:updateHandlePosFromMousePos(self:mousePos(event.pos))
-  self:updateValueFromHandlePos()
-  self:dispatchValueChangedEvent()  
+  if self.dragInProgress then
+    self:updateHandlePosFromMousePos(self:mousePos(event.pos))
+    self:updateValueFromHandlePos()
+    self:dispatchValueChangedEvent()  
+  end
 end
 
 function Slider:press()

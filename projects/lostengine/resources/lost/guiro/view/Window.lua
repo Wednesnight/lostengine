@@ -85,7 +85,7 @@ end
 function Window:closeButtonClick(event)
   self:dispatchWindowEvent("windowClose")
   self.moveInProgress = false -- or window will be stuck in move mode upon un-hide
-  self:hidden(true) -- set hidden flag AFTER dispatching event, or event won't make it
+  self:close() -- set hidden flag AFTER dispatching event, or event won't make it
 end
 
 function Window:setupMoveHeader()
