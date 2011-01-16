@@ -76,7 +76,7 @@ end
 function Rect:color(...)
   if arg.n >= 1 then 
     self._color = arg[1]
-    self.mesh.material.color = t.color:premultiplied()
+    self.mesh.material.color = self._color:premultiplied()
   else
     return self._color
   end

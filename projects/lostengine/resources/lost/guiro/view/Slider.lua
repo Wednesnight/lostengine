@@ -42,9 +42,24 @@ function Slider:constructor(args)
 end
 
 -- sets current value, updates handle position accordingly
-function Slider:value(val)
-  self.value = val
-  -- FIXME: update handle position according to value
+function Slider:value(...)
+  if arg.n >= 1 then
+    self._value = arg[1]
+    self:updateHandlePosFromValue()
+    self:updateLayerPosFromHandlePos()
+  else
+    return self._value
+  end
+end
+
+function Slider:updateHandlePosFromValue()
+  self.handlePos = ((self._value - self.min)/self.max)*self:range()
+end
+
+function Slider:updateLayout()
+  lost.guiro.view.View.updateLayout(self)
+  self:updateHandlePosFromValue()
+  self:updateLayerPosFromHandlePos()  
 end
 
 function Slider:mousePos(pos)
@@ -107,15 +122,7 @@ function Slider:initHandleMouseOffset(currentGlobalPos)
   end  
 end
 
-function Slider:updateHandlePosFromMousePos(mousepos)
-  self.handlePos = mousepos - self.handleMouseOffset - self:rectMinPos()
-  -- clip the handlepos against the bounds of the view minus handlesize
-  if self.handlePos < 0 then
-    self.handlePos = 0
-  elseif self.handlePos > self:upperHandleRangeBound() then
-    self.handlePos = self:upperHandleRangeBound()
-  end
-
+function Slider:updateLayerPosFromHandlePos()
   if self.mode == "horizontal" then
     self.handleReleasedLayer:x(self.handlePos)
     self.handlePushedLayer:x(self.handlePos)
@@ -125,10 +132,21 @@ function Slider:updateHandlePosFromMousePos(mousepos)
   end
 end
 
+function Slider:updateHandlePosFromMousePos(mousepos)
+  self.handlePos = mousepos - self.handleMouseOffset - self:rectMinPos()
+  -- clip the handlepos against the bounds of the view minus handlesize
+  if self.handlePos < 0 then
+    self.handlePos = 0
+  elseif self.handlePos > self:upperHandleRangeBound() then
+    self.handlePos = self:upperHandleRangeBound()
+  end
+  self:updateLayerPosFromHandlePos()
+end
+
 function Slider:updateValueFromHandlePos()
   local range = self:range()
   local v = self.handlePos / range
-  self.value = self.min + v*(self.max - self.min)
+  self._value = self.min + v*(self.max - self.min)
 end
 
 function Slider:mouseDown(event)

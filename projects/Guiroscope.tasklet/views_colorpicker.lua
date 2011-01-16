@@ -3,7 +3,7 @@ local function lv(txt,y)
   return lost.guiro.view.View
   {
     id="lineView",
-    bounds={0,y,"1",30},
+    bounds={0,0,"1",30},
     subviews=
     {
       lost.guiro.view.Label{bounds={0,0,labelWidth,"1"},text=txt,valign="center",halign="left"},
@@ -32,7 +32,7 @@ return lost.guiro.view.View
         lost.guiro.view.View
         {
           id="boxLayoutView",
---          layout=lost.guiro.layout.Vertical{valign="center",halign="center",spacing=10},
+          layout=lost.guiro.layout.Vertical{valign="top",halign="center",spacing=10},
           subviews = 
           {
             lv("Border Color",20),
