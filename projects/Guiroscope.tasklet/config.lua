@@ -11,6 +11,6 @@ return {
     height = 768
   },
   gl ={
-    vsync = true
+    vsync = false
   }
 }

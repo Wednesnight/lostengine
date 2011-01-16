@@ -1,4 +1,5 @@
 #include "lost/application/Queue.h"
+//#include "lost/common/Logger.h"
 
 using namespace std;
 
@@ -19,6 +20,7 @@ namespace lost
 
     void Queue::process(const Tasklet* sender)
     {
+//      DOUT("-- Q size "<< this->size());
       // get list snapshot since entities could modify the list
       Queue current(*this);
       // clear own list

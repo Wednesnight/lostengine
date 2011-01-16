@@ -2,6 +2,7 @@
 -- You must do this in startup() because a GL context might not exist before startup is called.
 -- This is mainly to prevent a circular dependency mess until we figure out a better solution.
 -- the order of the requires is relevant so stuff might break if you change it around
+require("lost.common.CallLater")
 require("lost.guiro.TextureManager")
 require("lost.guiro.ThemeManager")
 require("lost.guiro.WindowManager")
@@ -30,3 +31,4 @@ require("lost.guiro.view.Window")
 require("lost.guiro.view.Slider")
 require("lost.guiro.view.ColorPicker")
 require("lost.guiro.view.ColorPickerWindow")
+require("lost.guiro.view.FpsMeter")
