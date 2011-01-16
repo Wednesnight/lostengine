@@ -48,7 +48,8 @@ function ColorPickerWindow:valueChanged(event)
   self._color = c
   self._button:color(c)
   self:updateLabelsFromColor()
-  self:updateColorLayerFromColor()  
+  self:updateColorLayerFromColor()
+  self._button:dispatchValueChangedEvent()  
 end
 
 function ColorPickerWindow:button(b)

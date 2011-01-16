@@ -31,3 +31,11 @@ function ColorPicker:color(...)
     return self._color
   end
 end
+
+-- triggered by ColorPickerWindow so color setter doesn't always broadcast it's changes
+function ColorPicker:dispatchValueChangedEvent()
+  local event = lost.guiro.event.Event("valueChanged")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)    
+end
