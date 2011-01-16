@@ -27,6 +27,7 @@
 #include <boost/filesystem.hpp>
 #include "lost/font/FontManager.h"
 #include "lost/application/ResizeEvent.h"
+#include "lost/application/KeyEvent.h"
 
 using namespace boost;
 using namespace luabind;
@@ -49,6 +50,7 @@ namespace lost
       luabind::object luaStartup;
       luabind::object luaUpdate;
       luabind::object luaShutdown;
+      luabind::object luaKey;
       luabind::object config;
     };
 
@@ -85,6 +87,8 @@ namespace lost
       GlobalFunctions::install(*lua);
       lsh.reset(new LuaStateHelper);
       eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
+      eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
+      eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
     }
     
     Tasklet::~Tasklet()
@@ -119,12 +123,15 @@ namespace lost
       hasLuaStartup = false;
       hasLuaUpdate = false;
       hasLuaShutdown = false;
+      hasLuaKey = false;
       lsh->luaStartup = lua->globals["startup"];
       if(luabind::type(lsh->luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
       lsh->luaUpdate = lua->globals["update"];
       if(luabind::type(lsh->luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
       lsh->luaShutdown = lua->globals["shutdown"];
       if(luabind::type(lsh->luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
+      lsh->luaKey = lua->globals["key"];
+      if(luabind::type(lsh->luaKey)==LUA_TFUNCTION) hasLuaKey=true; else DOUT("no key() found in Lua");
     }
 
     void Tasklet::cleanup()
@@ -166,7 +173,7 @@ namespace lost
     {    
       if(hasLuaStartup)
       {
-        call_function<bool>(lsh->luaStartup);
+        call_function<void>(lsh->luaStartup);
       }
       updateQueue->process(this);      
       return running;
@@ -176,7 +183,7 @@ namespace lost
     {
       if(hasLuaUpdate)
       {
-        call_function<bool>(lsh->luaUpdate, deltaSeconds);
+        call_function<void>(lsh->luaUpdate, deltaSeconds);
       }
       updateQueue->process(this);      
       return  running;      
@@ -186,7 +193,15 @@ namespace lost
     {
       if(hasLuaShutdown)
       {
-        call_function<bool>(lsh->luaShutdown);
+        call_function<void>(lsh->luaShutdown);
+      }
+    }
+    
+    void Tasklet::key(const application::KeyEventPtr& ev)
+    {
+      if(hasLuaKey)
+      {
+        call_function<void>(lsh->luaKey,ev);
       }
     }
     

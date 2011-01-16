@@ -37,6 +37,7 @@ namespace lost
       bool hasLuaStartup;
       bool hasLuaUpdate;
       bool hasLuaShutdown;
+      bool hasLuaKey;
 
 
       virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
@@ -83,6 +84,8 @@ namespace lost
       void start(); // starts tasklet; platform specific implementation
       void run();   // the tasklet run loop; platform specific implementation
       void stop();  // tells tasklet to stop and shutdown; platform specific implementation
+      
+      virtual void key(const application::KeyEventPtr& ev);
     };
 
   }
