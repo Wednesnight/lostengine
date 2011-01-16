@@ -18,7 +18,7 @@ function TabBar:constructor(args)
 
   -- button size = rendered text width + buttonSizeAdjust
   -- buttons will be created with default size first, text rendered, then button size readjusted
-  self.buttonSizeAdjust = 20 -- 
+  self.buttonSizeAdjust = t.buttonSizeAdjust or 20
 
   self._buttons = {} -- buttons as created from items
   

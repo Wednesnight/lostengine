@@ -492,7 +492,7 @@ function Pebble:tabBarCandy(target, args)
   target.rightButtonStyleParams.size = size
   target.rightButtonStyleParams.style = "tabCandyRoundRight"
   
-  target.buttonSizeAdjust = 30
+  target.buttonSizeAdjust = args.buttonSizeAdjust or 30
 end
 
 function Pebble:tabBarSquare(target, args)
@@ -510,7 +510,7 @@ function Pebble:tabBarSquare(target, args)
   target.rightButtonStyleParams.size = size
   target.rightButtonStyleParams.style = "tabSquareRight"
   
-  target.buttonSizeAdjust = 30
+  target.buttonSizeAdjust = args.buttonSizeAdjust or 30
 end
 
 
@@ -772,7 +772,8 @@ end
 function Pebble:tabviewCandyRoundedRecess(target,args)
   local sz = args.size or "regular"
   local tabbarHeight = self.buttonRoundedHeight[sz]
-  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="candy",bounds={0,"top","1",tabbarHeight},itemWidth="fit", size=sz}
+  local bsa = args.buttonSizeAdjust
+  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="candy",bounds={0,"top","1",tabbarHeight},itemWidth="fit", size=sz,buttonSizeAdjust=bsa}
   local ci = 4 -- contentInset
   local contentView = lost.guiro.view.View{bounds={ci,ci,{"1",-(2*ci)}
                                                         ,{"1",-((2*ci)+(tabbarHeight/2))}
@@ -789,7 +790,8 @@ end
 function Pebble:tabviewCandyRecess(target,args)
   local sz = args.size or "regular"
   local tabbarHeight = self.buttonRoundedHeight[sz]
-  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="candy",bounds={0,"top","1",tabbarHeight},itemWidth="fit", size=sz}
+  local bsa = args.buttonSizeAdjust
+  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="candy",bounds={0,"top","1",tabbarHeight},itemWidth="fit", size=sz,buttonSizeAdjust=bsa}
   local ci = 4 -- contentInset
   local contentView = lost.guiro.view.View{bounds={ci,ci,{"1",-(2*ci)}
                                                         ,{"1",-((2*ci)+tabbarHeight)}
@@ -806,7 +808,8 @@ end
 function Pebble:tabviewSquare(target,args)
   local sz = args.size or "regular"
   local tabbarHeight = self.buttonRoundedHeight[sz]
-  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="square",bounds={0,"top","1",tabbarHeight},itemWidth="equal", size=sz}
+  local bsa = args.buttonSizeAdjust
+  local tabbar  = lost.guiro.view.TabBar{theme="pebble", style="square",bounds={0,"top","1",tabbarHeight},itemWidth="equal", size=sz,buttonSizeAdjust=bsa}
   local contentView = lost.guiro.view.View{bounds={0,0,"1",{"1",-tabbarHeight}}}
   target:addSubview(tabbar)
   target:addSubview(contentView)

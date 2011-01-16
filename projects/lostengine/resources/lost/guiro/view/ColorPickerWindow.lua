@@ -12,7 +12,6 @@ function lost.guiro.view.colorPickerWindow(wtheme, wstyle, button)
   if not lost.guiro.view._colorPickerWindow then lost.guiro.view._colorPickerWindow = {} end
   if not lost.guiro.view._colorPickerWindow[wtheme] then lost.guiro.view._colorPickerWindow[wtheme] = {} end
   if not lost.guiro.view._colorPickerWindow[wtheme][wstyle] then
-    log.debug("creating window")
     lost.guiro.view._colorPickerWindow[wtheme][wstyle] = lost.guiro.view.ColorPickerWindow{theme=wtheme,style=wstyle}
   end
   local result = lost.guiro.view._colorPickerWindow[wtheme][wstyle]
