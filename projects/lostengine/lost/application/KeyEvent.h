@@ -8,9 +8,6 @@ namespace lost
 {
   namespace application
   {
-    struct KeyEvent;
-    typedef lost::shared_ptr<KeyEvent> KeyEventPtr;
-
     struct KeyEvent : public InputEvent
     {
       static const event::Type& KEY_DOWN() { static const event::Type d = "keyDown"; return d; }
