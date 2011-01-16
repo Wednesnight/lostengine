@@ -99,10 +99,12 @@ function Window:setupMoveBody()
 end
 
 function Window:mouseDown(event)
-  self.downPos = event.pos
-  self.windowPos = Vec2(self.rect.x - self:superview().rect.x, self.rect.y - self:superview().rect.y) -- window pos in local coordinates of superview
-  self.moveInProgress = true
-  self:rootview():addEventListener("mouseMove", self.mouseMoveHandler)
+  if event.target ~= self.closeButton then
+    self.downPos = event.pos
+    self.windowPos = Vec2(self.rect.x - self:superview().rect.x, self.rect.y - self:superview().rect.y) -- window pos in local coordinates of superview
+    self.moveInProgress = true
+    self:rootview():addEventListener("mouseMove", self.mouseMoveHandler)
+  end
 end
 
 function Window:mouseUp(event)
