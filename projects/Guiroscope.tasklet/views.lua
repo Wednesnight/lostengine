@@ -7,6 +7,7 @@ return lost.guiro.view.View
       bounds = {0,0,"1",{"1",-8}},
       style="candyRecess",
       size="regular",
+      buttonSizeAdjust = 20,
       items={
              {"Label",require("views_label")},
              {"Button",require("views_button")},
