@@ -21,6 +21,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Label", "default", function(target, args) self:labelDefault(target, args) end)
   self:addStyle("lost.guiro.view.Label", "round", function(target, args) self:labelRound(target, args) end)
   self:addStyle("lost.guiro.view.Label", "roundFramed", function(target, args) self:labelRoundFramed(target, args) end)
+  self:addStyle("lost.guiro.view.Label", "cplabel", function(target, args) self:labelColorPicker(target, args) end)
   self:addStyle("lost.guiro.view.Button", "default", function(target, args) self:buttonRounded(target, args) end)
   self:addStyle("lost.guiro.view.Button", "rounded", function(target, args) self:buttonRounded(target, args) end)
   self:addStyle("lost.guiro.view.Button", "roundedToggle", function(target, args) self:buttonRoundedToggle(target, args) end)
@@ -108,6 +109,13 @@ function Pebble:labelRound(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color = Color(0,0,0),font = {"Vera", 12}})
 end
+
+function Pebble:labelColorPicker(target, args)
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=4,filled=true})
+  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(0,0,0),radius=4,filled = false,width=1})
+  target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color = Color(0,0,0),font = {"Vera", 12}})
+end
+
 
 function Pebble:labelRoundFramed(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
@@ -926,26 +934,68 @@ function Pebble:colorPickerWindow(target, args)
     target:bounds(lost.guiro.Bounds(unpack(args.bounds)))
   end
   
-  local ci = 4
-  local h = 16
-  local sp = 4
-  local ss = "regular"
-  local rs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-ci},{"1",-2*ci},h}}
+  -- names shortened so layer definitions don't get too long
+  local ci = 4 -- content inset
+  local h = 16 -- height
+  local sp = 4 -- spacing
+  local ss = "regular" -- slider size
+  local lw = 30 -- labelwidth
+  local clw = 30
+
+  -- sliders
+  local rs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci+clw+sp,{"top",-ci},{"1",-(2*ci+2*sp+lw+clw)},h}}
   target:addSubview(rs)
   target.redSlider = rs
-
-  local gs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+h+sp)},{"1",-2*ci},h}}
+  local gs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci+clw+sp,{"top",-(ci+h+sp)},{"1",-(2*ci+2*sp+lw+clw)},h}}
   target:addSubview(gs)
   target.greenSlider = gs
-
-  local bs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+2*h+2*sp)},{"1",-2*ci},h}}
+  local bs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci+clw+sp,{"top",-(ci+2*h+2*sp)},{"1",-(2*ci+2*sp+lw+clw)},h}}
   target:addSubview(bs)
   target.blueSlider = bs
-
-  local as = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+3*h+3*sp)},{"1",-2*ci},h}}
+  local as = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci+clw+sp,{"top",-(ci+3*h+3*sp)},{"1",-(2*ci+2*sp+lw+clw)},h}}
   target:addSubview(as)
   target.alphaSlider = as
 
+  -- value labels
+  local rl = lost.guiro.view.Label{style="cplabel", bounds={{"right",-ci}, {"top",-(ci+0*h+0*sp)},lw,h}, valign="center", halign="center"}
+  target:addSubview(rl)
+  target.redLabel = rl
+  local gl = lost.guiro.view.Label{style="cplabel", bounds={{"right",-ci}, {"top",-(ci+1*h+1*sp)},lw,h}, valign="center", halign="center"}
+  target:addSubview(gl)
+  target.greenLabel = gl
+  local bl = lost.guiro.view.Label{style="cplabel", bounds={{"right",-ci}, {"top",-(ci+2*h+2*sp)},lw,h}, valign="center", halign="center"}
+  target:addSubview(bl)
+  target.blueLabel = bl
+  local al = lost.guiro.view.Label{style="cplabel", bounds={{"right",-ci}, {"top",-(ci+3*h+3*sp)},lw,h}, valign="center", halign="center"}
+  target:addSubview(al)
+  target.alphaLabel = al
   
-  -- FIXME: add sliders and stuff
+  -- color labels
+  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+0*h+0*sp)},clw,h},filled=true,color=Color(1,0,0),radius=4})
+  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+1*h+1*sp)},clw,h},filled=true,color=Color(0,1,0),radius=4})
+  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+2*h+2*sp)},clw,h},filled=true,color=Color(0,0,1),radius=4})
+  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+3*h+3*sp)},clw,h},filled=false,width=1,color=Color(0,0,0),radius=4})
+  
+  -- colorLayer for better visualisation of current setting
+  target.contentView.layer:addSublayer(lost.guiro.layer.Rect{
+      filled=false,
+      color=Color(0,0,0), 
+      bounds={ci,
+              ci,
+              {"1",-2*ci},
+              {"1",-(2*ci+4*h+4*sp)}
+              }
+      } 
+  )
+  local colorLayer = lost.guiro.layer.Rect{
+      filled=true,
+      color=Color(1,1,1), 
+      bounds={ci+1,
+              ci+1,
+              {"1",-2*(ci+1)},
+              {"1",-(2*(ci+1)+4*h+4*sp)}
+              }
+      }
+  target.contentView.layer:addSublayer(colorLayer)
+  target.colorLayer = colorLayer
 end

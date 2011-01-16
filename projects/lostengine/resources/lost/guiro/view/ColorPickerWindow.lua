@@ -45,7 +45,10 @@ function ColorPickerWindow:valueChanged(event)
                   self.greenSlider:value(),
                   self.blueSlider:value(),
                   self.alphaSlider:value())
+  self._color = c
   self._button:color(c)
+  self:updateLabelsFromColor()
+  self:updateColorLayerFromColor()  
 end
 
 function ColorPickerWindow:button(b)
@@ -65,11 +68,29 @@ function ColorPickerWindow:close()
   self._button = nil
 end
 
+function ColorPickerWindow:updateSlidersFromColor()
+  self.redSlider:value(self._color.r)
+  self.greenSlider:value(self._color.g)
+  self.blueSlider:value(self._color.b)
+  self.alphaSlider:value(self._color.a)
+end
+
+function ColorPickerWindow:updateLabelsFromColor()
+  self.redLabel:text(string.format("%3.0f",self._color.r*255))
+  self.greenLabel:text(string.format("%3.0f",self._color.g*255))
+  self.blueLabel:text(string.format("%3.0f",self._color.b*255))
+  self.alphaLabel:text(string.format("%3.0f",self._color.a*255))
+end
+
+function ColorPickerWindow:updateColorLayerFromColor()
+  self.colorLayer:color(self._color)
+end
+
 function ColorPickerWindow:color(val)
-  self.redSlider:value(val.r)
-  self.greenSlider:value(val.g)
-  self.blueSlider:value(val.b)
-  self.alphaSlider:value(val.a)
+  self._color = val
+  self:updateSlidersFromColor()
+  self:updateLabelsFromColor()
+  self:updateColorLayerFromColor()
 end
 
 

@@ -125,13 +125,13 @@ namespace lost
       hasLuaShutdown = false;
       hasLuaKey = false;
       lsh->luaStartup = lua->globals["startup"];
-      if(luabind::type(lsh->luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; else DOUT("no startup() found in Lua");
+      if(luabind::type(lsh->luaStartup)==LUA_TFUNCTION) hasLuaStartup=true; //else DOUT("no startup() found in Lua");
       lsh->luaUpdate = lua->globals["update"];
-      if(luabind::type(lsh->luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; else DOUT("no update() found in Lua");
+      if(luabind::type(lsh->luaUpdate)==LUA_TFUNCTION) hasLuaUpdate=true; //else DOUT("no update() found in Lua");
       lsh->luaShutdown = lua->globals["shutdown"];
-      if(luabind::type(lsh->luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; else DOUT("no shutdown() found in Lua");
+      if(luabind::type(lsh->luaShutdown)==LUA_TFUNCTION) hasLuaShutdown=true; //else DOUT("no shutdown() found in Lua");
       lsh->luaKey = lua->globals["key"];
-      if(luabind::type(lsh->luaKey)==LUA_TFUNCTION) hasLuaKey=true; else DOUT("no key() found in Lua");
+      if(luabind::type(lsh->luaKey)==LUA_TFUNCTION) hasLuaKey=true; //else DOUT("no key() found in Lua");
     }
 
     void Tasklet::cleanup()
