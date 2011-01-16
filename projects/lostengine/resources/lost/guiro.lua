@@ -28,4 +28,5 @@ require("lost.guiro.view.UserInterface")
 require("lost.guiro.view.View")
 require("lost.guiro.view.Window")
 require("lost.guiro.view.Slider")
-
+require("lost.guiro.view.ColorPicker")
+require("lost.guiro.view.ColorPickerWindow")

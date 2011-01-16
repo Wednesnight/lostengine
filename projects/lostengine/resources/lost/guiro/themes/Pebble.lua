@@ -66,6 +66,10 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Slider", "default", function(target, args) self:sliderCandy(target, args) end)
   self:addStyle("lost.guiro.view.Slider", "candy", function(target, args) self:sliderCandy(target, args) end)
 
+  self:addStyle("lost.guiro.view.ColorPicker", "default", function(target, args) self:colorPicker(target, args) end)
+  self:addStyle("lost.guiro.view.ColorPickerWindow", "default", function(target, args) self:colorPickerWindow(target, args) end)
+
+
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -84,8 +88,8 @@ function Pebble:constructor()
   self.separatorColor = Color(.317,.317,.317)
   self.windowNormalHeaderHeight = 22
   self.windowPanelHeaderHeight = 16
-  self.windowNormalCloseButtonSize = 14
-  self.panelCloseButtonSize = 11
+  self.windowNormalCloseButtonSize = 12
+  self.panelCloseButtonSize = 9
   self.windowCloseButtonSpacing = 8 --- distance to left window border
   self.panelCloseButtonSpacing = 6
   
@@ -840,35 +844,105 @@ function Pebble:sliderCandy(target,args)
   if target.mode == "horizontal" then
     tw="1"
     th=ts
---    target:height(ts)
   else
     tw=ts
     th="1"
---    target:width(ts)
   end
   local track = l{bounds={0,0,tw,th},
                   sublayers={
                     rr{filled=true,radius=trackRadius,color=trackFillColor},
---                    rr{filled=false,radius=trackRadius,color=trackFrameColor,width=1},
                   }}
   
   if target.mode == "horizontal" then
     track:y("center")
     handleReleased:y("center")
     handlePushed:y("center")
-    target.layer:addSublayer(track)
-    target.layer:addSublayer(handleReleased)
-    target.handleReleasedLayer = handleReleased
-    target.layer:addSublayer(handlePushed)
-    target.handlePushedLayer = handlePushed
   else
     track:x("center")
     handleReleased:x("center")
     handlePushed:x("center")
-    target.layer:addSublayer(track)
-    target.layer:addSublayer(handleReleased)
-    target.handleReleasedLayer = handleReleased
-    target.layer:addSublayer(handlePushed)
-    target.handlePushedLayer = handlePushed
   end
+  target.layer:addSublayer(track)
+  target.layer:addSublayer(handleReleased)
+  target.handleReleasedLayer = handleReleased
+  target.layer:addSublayer(handlePushed)
+  target.handlePushedLayer = handlePushed
+end
+
+function Pebble:colorPicker(target, args)
+  local fc = 151/255
+  local frameColor = Color(fc, fc, fc)
+  local ifc = 131/255
+  local innerFrameColor = Color(ifc, ifc, ifc)
+  local dc = .7
+  local dimColor = Color(dc, dc, dc)
+  local dc2 = .8
+  local dimColor2 = Color(dc2, dc2, dc2)
+  
+  local l = lost.guiro.layer.Layer
+  local r = lost.guiro.layer.Rect
+
+  target:mode("toggleOnce")
+  local normal = l{sublayers={r{bounds={0,0,"1","1"},color=frameColor,filled=false},
+                              r{bounds={1,1,{"1",-2},{"1",-2}},gradient="colorpicker",filled=true}}
+                             }
+
+  local pushed = l{sublayers={r{bounds={0,0,"1","1"},color=frameColor,filled=false},
+                              r{bounds={1,1,{"1",-2},{"1",-2}},gradient="colorpicker",color=dimColor,filled=true}}
+                              }
+                             
+  local normal2 = l{sublayers={r{bounds={0,0,"1","1"},color=frameColor,filled=false},
+                              r{bounds={1,1,{"1",-2},{"1",-2}},gradient="colorpicker",color=dimColor2,filled=true}}
+                              }
+
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  local b = lost.guiro.view.Button
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2  
+
+  -- the actual color display must always be visible and is added last on top of all the state layers
+  local colorLayerFrame = r{bounds={5,5,{"1",-10},{"1",-10}},filled=false,color=innerFrameColor}
+  local colorLayer = r{bounds={6,6,{"1",-12},{"1",-12}},filled=true,color=Color(1,1,1)}
+  target.layer:addSublayer(colorLayerFrame)
+  target.layer:addSublayer(colorLayer)
+  target.colorLayer = colorLayer
+  target.windowTheme = "pebble"
+  target.windowStyle = "default"
+end
+
+function Pebble:colorPickerWindow(target, args)
+  args.closeButton = true
+  args.resizable = true
+  self:windowPanel(target, args)
+  if not args.bounds then
+    target:bounds(lost.guiro.Bounds(50,{"top",-50},260,160))
+  else
+    target:bounds(lost.guiro.Bounds(unpack(args.bounds)))
+  end
+  
+  local ci = 4
+  local h = 16
+  local sp = 4
+  local ss = "regular"
+  local rs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-ci},{"1",-2*ci},h}}
+  target:addSubview(rs)
+  target.redSlider = rs
+
+  local gs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+h+sp)},{"1",-2*ci},h}}
+  target:addSubview(gs)
+  target.greenSlider = gs
+
+  local bs = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+2*h+2*sp)},{"1",-2*ci},h}}
+  target:addSubview(bs)
+  target.blueSlider = bs
+
+  local as = lost.guiro.view.Slider{size=ss,min=0,max=1,bounds={ci,{"top",-(ci+3*h+3*sp)},{"1",-2*ci},h}}
+  target:addSubview(as)
+  target.alphaSlider = as
+
+  
+  -- FIXME: add sliders and stuff
 end

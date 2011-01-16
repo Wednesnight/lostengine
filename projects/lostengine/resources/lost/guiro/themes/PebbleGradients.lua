@@ -46,6 +46,12 @@ local function miscGradients(textureManager)
   cg:add(ColorPoint(0, bgrey(229)))
   textureManager:addGradient("recess", cg)  
 
+  cg = ColorGradient.create()
+  cg:add(ColorPoint(21/21, bgrey(251)))
+  cg:add(ColorPoint(20/21, bgrey(242)))
+  cg:add(ColorPoint(19/21, bgrey(229)))
+  cg:add(ColorPoint(0/21, bgrey(249)))
+  textureManager:addGradient("colorpicker", cg)  
 
 end
 

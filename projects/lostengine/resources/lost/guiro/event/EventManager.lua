@@ -52,7 +52,7 @@ function EventManager:findViewStack(rootView, mouseEvent)
         view = v
         break
       else
---        log.debug("o noes")
+--        log.debug("o noes, hidden:"..tostring(v:hidden()).." rect:"..tostring(v.rect))
       end
       i = i - 1
     end

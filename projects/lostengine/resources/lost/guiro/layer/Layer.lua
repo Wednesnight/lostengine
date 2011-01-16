@@ -244,3 +244,10 @@ function Layer:clip(...)
   end
 end
 
+function Layer:color(...)
+  if arg.n >= 1 then
+    self._color = arg[1]
+  else
+    return self._color
+  end
+end
