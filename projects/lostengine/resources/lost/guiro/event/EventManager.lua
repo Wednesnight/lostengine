@@ -61,10 +61,11 @@ function EventManager:findViewStack(rootView, mouseEvent)
 end
 
 function EventManager:logViewStack(vs)
+  if not vs then log.debug("stack empty") end
   local k = nil
   local v = nil
 
-  for k,v in pairs(viewStack) do
+  for k,v in ipairs(vs) do
     log.debug(k.." - "..v.id)
   end  
 end
@@ -152,27 +153,34 @@ function EventManager:propagateEnterLeaveEvents(viewStack, oldViewStack, event, 
 end
 
 function EventManager:propagateUpDownEvents(viewStack, event)
+--  log.debug("-------------- PREVIOUS")
+--  self:logViewStack(self.previousMouseClickStack)
+--  log.debug("-------------- CURRENT")
+--  self:logViewStack(viewStack)
   if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
     event.target = viewStack[#viewStack] -- the lowermost view is the target
     self:propagateEvent(viewStack, event, #viewStack)
     self.previousMouseClickStack = viewStack
   elseif event.type == lost.guiro.event.MouseEvent.MOUSE_UP then
-    local idx = math.max(#viewStack, #(self.previousMouseClickStack))
-    local oldView = self.previousMouseClickStack[idx] -- the lowermost view is the target
-    local newView = viewStack[idx] -- the lowermost view is the target
+    local oldidx = #(self.previousMouseClickStack)
+    local newidx = #viewStack
+--    local idx = math.max(#viewStack, #(self.previousMouseClickStack))
+    local oldView = self.previousMouseClickStack[oldidx] -- the lowermost view is the target
+    local newView = viewStack[newidx] -- the lowermost view is the target
+--    log.debug("oldView: "..tostring(oldView).." newview:"..tostring(newView))
     if oldView and oldView ~= newView then
       event.target = oldView
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
-      self:propagateEvent(self.previousMouseClickStack, event, idx)
+      self:propagateEvent(self.previousMouseClickStack, event, oldidx)
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP
-      self:propagateEvent(self.previousMouseClickStack, event, idx)
+      self:propagateEvent(self.previousMouseClickStack, event, oldidx)
     end
     if newView then
       event.target = newView
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP_INSIDE
-      self:propagateEvent(viewStack, event, idx)
+      self:propagateEvent(viewStack, event, newidx)
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP
-      self:propagateEvent(viewStack, event, idx)
+      self:propagateEvent(viewStack, event, newidx)
     end
     self.previousMouseClickStack = {}
   end
