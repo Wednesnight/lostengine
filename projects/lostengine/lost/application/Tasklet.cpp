@@ -100,7 +100,15 @@ namespace lost
       // populate self into lua context
       lua->globals["tasklet"] = this;
 
-      lua->doString("require 'lost/common/FontInit'");
+      try
+      {
+        lua->doFile("lost/common/FontInit.lua");
+      }
+      catch(std::exception& ex)
+      {
+        WOUT("couldn't initialize fonts, reason: "+ string(ex.what()));
+      }
+
       configLoaded = config.load(lua, loader);
       name = config.taskletName;
       waitForEvents = config.taskletWaitForEvents;
