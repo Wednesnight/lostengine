@@ -29,7 +29,6 @@ struct NativeTasklet : public lost::application::Tasklet
   void keyDown(lost::application::KeyEventPtr event);
 
 private:
-  bool running;
   TextureManagerPtr textureManager;
 
   void toggleClearColor();
