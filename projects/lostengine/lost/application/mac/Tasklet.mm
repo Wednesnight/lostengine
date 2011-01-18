@@ -58,9 +58,6 @@ namespace lost
             if(waitForEvents) { eventDispatcher->waitForEvents(); }
 
             framerate = timer.getElapsedAndUpdateOffset(offset);
-            if (framerate > config.framerate) {
-              framerate = config.framerate;
-            }
 
             [pool drain];
             pool = [[NSAutoreleasePool alloc] init];  
