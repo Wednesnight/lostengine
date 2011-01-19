@@ -19,23 +19,30 @@ local Color = lost.common.Color
 function Text:constructor(args)
   lost.guiro.layer.Layer.constructor(self, args)
   local t = args or {}
-  if t.font ~= nil then -- font must contain a name and a size in this order
-    self._font = tasklet.fontManager:getFont(t.font[1], t.font[2])
-  else
-    log.warn("Text layer '"..self.id.."' constructed without font!")
-    self._font = nil
-  end
   self.id = t.id or "text"
-  self._text = t.text or ""
+
   self.mesh = lost.font.RenderedText.create()
   self.mesh.material.shader = lost.guiro.shaderFactory():texture()
-  self.mesh.material.color = t.color or Color(1,1,1)
   self.mesh.material:blendNormal()
+  
+  self.shadowMesh = lost.font.RenderedText.create()
+  self.shadowMesh.material.shader = lost.guiro.shaderFactory():texture()
+  self.shadowMesh.material:blendNormal()
+  
+  self.shadowDrawNode = lost.rg.Draw.create(self.shadowMesh)
+  self.renderNode:add(self.shadowDrawNode)
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.renderNode:add(self.drawNode)
-  self._halign = t.halign or "center"
-  self._valign = t.valign or "center"
-  self:needsLayout()
+  
+  if t.font then self:font(t.font) end
+  self:text(t.text or "")
+  self:color(t.color or Color(0,0,0))
+  self:shadow(t.shadow or false)
+  self:shadowOffset(t.shadowOffset or Vec2(1,1))
+  self:shadowColor(t.shadowColor or Color(0,0,0,.3))
+  self:halign(t.halign or "center")
+  self:valign(t.valign or "center")
+
   self:needsDisplay()
 end
 
@@ -62,6 +69,7 @@ function Text:updateAlign()
   textPos.y = math.floor(textPos.y)
 
   self.mesh.transform = MatrixTranslation(textPos)  
+  self.shadowMesh.transform = MatrixTranslation(textPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))
 end
 
 function Text:updateLayout()
@@ -73,6 +81,9 @@ function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
   if self._font then
     self._font:render(self._text, self.mesh)
+    if self.shadowDrawNode.active then
+      self._font:render(self._text, self.shadowMesh)
+    end
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
   end
@@ -84,9 +95,13 @@ function Text:text(s)
   self:needsDisplay()
 end
 
-function Text:font(v)
-  self._font = v
-  self:needsDisplay()
+function Text:font(...)
+  if arg.n >=1 then
+    self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
+    self:needsDisplay()
+  else
+    return self._font
+  end
 end
 
 function Text:color(v)
@@ -102,3 +117,31 @@ function Text:halign(v)
   self._halign = v
   self:needsLayout()
 end
+
+function Text:shadow(...)
+  if arg.n >= 1 then
+    self.shadowDrawNode.active = arg[1]
+    self:needsDisplay()
+  else
+    return self.shadowDrawNode.active
+  end
+end
+
+function Text:shadowOffset(...)
+  if arg.n >= 1 then
+    self._shadowOffset = arg[1]
+    self:needsLayout()
+  else
+    return self._shadowOffset
+  end
+end
+
+function Text:shadowColor(...)
+  if arg.n >= 1 then
+    self.shadowMesh.material.color = arg[1]
+  else
+    return self.shadowMesh.color
+  end
+end
+
+
