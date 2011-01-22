@@ -11,6 +11,7 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/font/Glyph.h"
 #include <math.h>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 using namespace lost::bitmap;
@@ -28,7 +29,7 @@ TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
                            common::DataPtr inData,
                            uint32_t inSizeInPoints)
 {
-  face.reset(new Face(inLibrary, inData));
+  face.reset(new Face(inLibrary, inData,inSizeInPoints));
   _size = inSizeInPoints;
   atlasSize.width = 256;
   atlasSize.height = 256;
@@ -117,12 +118,13 @@ void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects,
                             std::vector<math::Rect>& pixelCoordRects,
                             GlyphPtr glyph,
                             float xoffset,
+                            float yoffset,                            
                             lost::math::Vec2& pmin,
                             lost::math::Vec2& pmax)
 {
   Rect tr = glyph->rect; 
   tr.x = xoffset+glyph->xoffset;
-  tr.y = (float)glyph->yoffset;
+  tr.y = yoffset+glyph->yoffset;
   
   characterRects.push_back(tr);
   pixelCoordRects.push_back(glyph->rect);
@@ -136,30 +138,16 @@ void TrueTypeFont::addGlyph(std::vector<math::Rect>& characterRects,
 
 RenderedTextPtr TrueTypeFont::render(const std::string & inText)
 {
-//  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
-
-  // Assume std::string is always utf8 encoded.
-  ftxt::utf32_string decodedString;
-
-  ftxt::utf8_decoder decoder;
-  ftxt::decode(decoder, inText.begin(), inText.end(),
-         std::back_insert_iterator<ftxt::utf32_string>(decodedString));
-
-  return render(decodedString);
+  RenderedTextPtr result(new RenderedText);
+  render(inText, result);
+  return result;
 }
 
 void TrueTypeFont::render(const std::string & inText, const RenderedTextPtr& target)
 {
-//  DOUT("rendering utf-8 text " << inText << " with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
-
-  // Assume std::string is always utf8 encoded.
-  ftxt::utf32_string decodedString;
-
-  ftxt::utf8_decoder decoder;
-  ftxt::decode(decoder, inText.begin(), inText.end(),
-         std::back_insert_iterator<ftxt::utf32_string>(decodedString));
-
-  render(decodedString, target);
+  vector<fhtagn::text::utf32_string> spl;
+  split(BREAKMODE_NONE, 0,inText, spl);
+  render(spl, target);
 }
   
 void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
@@ -179,15 +167,56 @@ void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
   }
 }
   
-RenderedTextPtr TrueTypeFont::render(const ftxt::utf32_string& inText)
+// splits newlines
+// converts result strings to utf32
+void splitAtNewline(const std::string& inText, vector<fhtagn::text::utf32_string>& outSplit)
 {
+  std::string txt(inText); // make a copy we can modify
+  // replace all newlines so only \n is left so we can safely split newlines
+  vector<string> tmp;
+  boost::algorithm::ireplace_all(txt, "\r\n", "\n");
+  boost::algorithm::ireplace_all(txt, "\r", "\n");
+  boost::algorithm::split(tmp, txt, boost::algorithm::is_any_of("\n"));
 
-  RenderedTextPtr result(new RenderedText);
-  render(inText, result);
-  return result;
+  vector<string>::iterator pos;
+//  DOUT("split ---------------");
+  ftxt::utf8_decoder decoder;
+  for(pos=tmp.begin(); pos!=tmp.end(); ++pos)
+  {
+//    DOUT("'"<<*pos<<"'");
+
+    ftxt::utf32_string decodedString;
+    ftxt::decode(decoder, (*pos).begin(), (*pos).end(),
+           std::back_insert_iterator<ftxt::utf32_string>(decodedString));
+    outSplit.push_back(decodedString);
+  }
 }
 
-void TrueTypeFont::render(const fhtagn::text::utf32_string& inText, const RenderedTextPtr& target)
+// 1.) normalise newlines and split text there
+// 2.) perform additional splits if char or word is specified
+void TrueTypeFont::split(BreakMode mode, float width, const std::string& inText, std::vector<fhtagn::text::utf32_string>& outSplit)
+{
+  outSplit.clear();
+  splitAtNewline(inText, outSplit);
+  switch(mode)
+  {
+    case BREAKMODE_NONE:
+    {
+      break;
+    }
+    case BREAKMODE_CHAR:
+    {
+      
+      break;
+    }
+    case BREAKMODE_WORD:
+    {
+      break;
+    }
+  }
+}  
+  
+void TrueTypeFont::render(const vector<fhtagn::text::utf32_string>& inLines, const RenderedTextPtr& target)
 {
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
@@ -196,51 +225,43 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText, const Render
   std::vector<math::Rect> characterRects;
   std::vector<math::Rect> pixelCoordRects;
     
-  // render glyphs if required
-  uint32_t renderedGlyphs = 0;
-  for(unsigned int i=0; i<inText.length(); ++i)
-  {
-    if(renderGlyph(inText[i]))
-      ++renderedGlyphs;
-  }
-//  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
-  // rebuild atlas if any new glyphs were rendered
-  if(renderedGlyphs > 0)
-    rebuildTextureAtlas();
-
-  // flag drawable characters AFTER the bitmaps have been created so we can distinguish between
-  // drawables and non-darwables. This is important so we don't create geometry for characters
-  // that don't need any (spaces)
-  flagDrawableChars(inText);
-  float xoffset = 0;
   
   // kerning setup
   bool hasKerning = face->hasKerning();
-  uint32_t previousGlyphIndex = 0;
   
   // size calculation 
   Vec2 pmin, pmax; 
-  uint32_t numChars = inText.size();
   uint32_t addIndex=0; // we iterate over all chracters, but not all of them might be drawable
                        // so we need a separate index for the actual insertion of a character into the mesh
-  for(unsigned int i=0; i<numChars; ++i)
+  
+  vector<fhtagn::text::utf32_string>::const_iterator pos;
+  float yoffset = max(0.0f, ((float)inLines.size())-1)*floorf(face->height());// floor to prevent offcenter pixels in 2D
+  for(pos=inLines.begin(); pos!=inLines.end(); ++pos)
   {
-    ftxt::utf32_char_t c = inText[i];
-    
-    if(hasKerning)
+    uint32_t numChars = (*pos).size();
+    uint32_t previousGlyphIndex = 0;
+    prepareGlyphs(*pos);
+    float xoffset = 0;    
+    for(unsigned int i=0; i<numChars; ++i)
     {
-      xoffset+=face->kerningOffset(previousGlyphIndex, c);
-    }
-    
-    GlyphPtr glyph = char2glyph[c];
-    if (!glyph) continue;
+      ftxt::utf32_char_t c = (*pos)[i];
+      
+      if(hasKerning)
+      {
+        xoffset+=face->kerningOffset(previousGlyphIndex, c);
+      }
+      
+      GlyphPtr glyph = char2glyph[c];
+      if (!glyph) continue;
 
-    if (glyph->drawable)
-    {
-      addGlyph(characterRects, pixelCoordRects, glyph, xoffset, pmin, pmax);
-      addIndex++;
+      if (glyph->drawable)
+      {
+        addGlyph(characterRects, pixelCoordRects, glyph, xoffset, yoffset, pmin, pmax);
+        addIndex++;
+      }
+      xoffset+=glyph->advance;
     }
-    xoffset+=glyph->advance;
+    yoffset-=floorf(face->height()); // floor to prevent offcenter pixels in 2D
   }
 
   target->init(characterRects, atlas, pixelCoordRects, false);
@@ -253,6 +274,8 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText, const Render
   target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
   target->fontAscender = ascender;
   target->fontDescender = descender;
+  target->numLines = inLines.size();
+  target->lineHeight = floorf(face->height());// floor to prevent offcenter pixels in 2D
   float ascsum = fabs(ascender)+fabs(descender);
   int iascsum = floorf(ascsum+.5f);
 /*  DOUT("-- rendered size: w:"<<target->size.width
@@ -263,6 +286,42 @@ void TrueTypeFont::render(const fhtagn::text::utf32_string& inText, const Render
   target->pointSize = _size;
 }
 
+// for splitting with breakmode
+bool isWhiteSpace(char c)
+{
+  bool result = false;
+  switch(c)
+  {
+    case ' ':
+    case '\t':
+    case '\r':
+    case '\n':
+      result=true;
+    default:
+      result=false;
+  }
+  return result;
+}
+
+void TrueTypeFont::prepareGlyphs(const fhtagn::text::utf32_string& inText)
+{
+  // render glyphs if required
+  uint32_t renderedGlyphs = 0;
+  for(unsigned int i=0; i<inText.length(); ++i)
+  {
+    if(renderGlyph(inText[i]))
+      ++renderedGlyphs;
+  }
+//  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
+  // rebuild atlas if any new glyphs were rendered
+  if(renderedGlyphs > 0)
+    rebuildTextureAtlas();  
+
+  // flag drawable characters AFTER the bitmaps have been created so we can distinguish between
+  // drawables and non-darwables. This is important so we don't create geometry for characters
+  // that don't need any (spaces)
+  flagDrawableChars(inText);
+}
 
 }  
 }

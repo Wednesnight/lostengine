@@ -32,6 +32,8 @@ namespace lost
       float fontAscender;
       float fontDescender;
       float fontHeight;
+      float lineHeight;
+      float numLines;
       float pointSize; // the point or pixel size value requested for the rendering of the text
     };
 

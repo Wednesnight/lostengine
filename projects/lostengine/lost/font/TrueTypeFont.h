@@ -10,7 +10,7 @@
 #include "lost/gl/forward.h"
 #include "lost/bitmap/forward.h"
 #include "lost/common/forward.h"
-
+#include "lost/font/BreakMode.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Rect.h"
 
@@ -26,13 +26,10 @@ struct TrueTypeFont
                uint32_t inSizeInPoints);
   virtual ~TrueTypeFont();
     
-  // renders the given text, creating a new mesh in the process.  
-  RenderedTextPtr render(const fhtagn::text::utf32_string& inText);
-  RenderedTextPtr render(const std::string & inText);
-
-  // same as above, but the provided mesh is reused 
-  void render(const fhtagn::text::utf32_string& inText, const RenderedTextPtr& target);
-  void render(const std::string & inText, const RenderedTextPtr& target);
+ 
+  // text will be treated as UTF-8 characters
+  RenderedTextPtr render(const std::string & inText);   // renders the given text, creating a new mesh in the process.  
+  void render(const std::string & inText, const RenderedTextPtr& target);// same as above, but the provided mesh is reused 
   
   
   
@@ -49,6 +46,17 @@ struct TrueTypeFont
 
 private:
 
+  // always splits newline
+  // optionally splits resulting strings at char/word boundaries if requested
+  void split(BreakMode mode, // use none to only split newlines
+             float width, // only used for char/word breaks
+             const std::string& inText, // text to split
+             std::vector<fhtagn::text::utf32_string>& outSplit); // receives result, will be cleared 
+
+
+  void prepareGlyphs(const fhtagn::text::utf32_string& inText); // renders glyphs if missing from atlas, rebuilds atlas if required
+  void render(const std::vector<fhtagn::text::utf32_string>& inLines, const RenderedTextPtr& target);
+
   /** checks if the caches already contain the glyph for the given character 
    *  and updates it if they don't.
    *  @return true if the glyph was rendered, false if it was cached and didn't need to be rendered again.
@@ -60,6 +68,7 @@ private:
                 std::vector<math::Rect>& pixelCoordRects, // receives a rect that describes the character quads subtexture inside the font texture atlas
                 GlyphPtr glyph, // the glyph from which to build the new character
                 float xoffset, // horizontal offset of the new character within the rendered string
+                float yoffset,
                 lost::math::Vec2& pmin, // will be updated with new min values
                 lost::math::Vec2& pmax); // will be updated with new max values
 
