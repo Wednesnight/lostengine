@@ -1,5 +1,6 @@
 #include "ft2build.h"
 #include FT_FREETYPE_H
+#include FT_TRUETYPE_TABLES_H
 #include <stdexcept>
 #include <sstream>
 #include "lost/font/freetype/Face.h"
@@ -19,7 +20,8 @@ using namespace std;
 using namespace lost::bitmap;
 
 Face::Face(LibraryPtr inLibrary,
-           common::DataPtr inData)
+           common::DataPtr inData,
+           uint32_t inSizeInPoints)
 {
   FT_Error error  = FT_New_Memory_Face(inLibrary->library,
                                        reinterpret_cast<FT_Byte*>(inData->bytes.get()),
@@ -35,6 +37,15 @@ Face::Face(LibraryPtr inLibrary,
 
   mFontData = inData;
   mLibrary = inLibrary;
+
+  error = FT_Set_Char_Size(mFace, 0, inSizeInPoints*64, 72, 72);
+  if(error)
+  {
+    ostringstream os;
+    os << error;
+    throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
+  }
+  sizeInPoints = inSizeInPoints;
 }
 
 Face::~Face()
@@ -54,18 +65,10 @@ FT_Face Face::face()
 bitmap::BitmapPtr
 Face::renderGlyphToBitmap(uint32_t c,
                           uint32_t inSizeInPoints)
-{
-  FT_Error error = FT_Set_Char_Size(mFace, 0, inSizeInPoints*64, 72, 72);
-  if(error)
-  {
-    ostringstream os;
-    os << error;
-    throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
-  }
-  
+{  
   FT_UInt idx = FT_Get_Char_Index(mFace, c);
   FT_Int32 load_flags = 0;
-  error = FT_Load_Glyph(mFace, idx, load_flags);
+  FT_Error error = FT_Load_Glyph(mFace, idx, load_flags);
   if(error) {WOUT("FT_Load_Glyph error: " << error);}
   
   FT_Render_Mode render_mode = FT_RENDER_MODE_NORMAL;
@@ -87,6 +90,8 @@ int32_t Face::advance() { return mFace->glyph->advance.x >> 6; }
 float Face::scale() { return ((float)mFace->size->metrics.y_scale)/65536.0f; }
 float Face::ascender() { return (((float)mFace->ascender)/64.0f)*scale(); }
 float Face::descender() { return (((float)mFace->descender)/64.0f)*scale(); }
+float Face::height() { return (((float)mFace->height)/64.0f)*scale(); }
+float Face::linegap() { return height() - (ascender() - descender()); }
 
 bool Face::hasKerning()
 {

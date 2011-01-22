@@ -58,9 +58,9 @@ function Text:updateAlign()
   end
 
   if self._valign == "center" then
-      textPos.y = self.rect.y+((self.rect.height-self.mesh.fontHeight)/2)+math.abs(self.mesh.fontDescender)
+      textPos.y = self.rect.y+((self.rect.height-(self.mesh.numLines*self.mesh.lineHeight))/2)+math.abs(self.mesh.fontDescender)
   elseif self._valign == "top" then
-    textPos.y = self.rect.y+self.rect.height-self.mesh.fontAscender
+    textPos.y = self.rect.y+self.rect.height-self.mesh.max.y
   elseif self._valign == "bottom" then
     textPos.y = self.rect.y-self.mesh.fontDescender+1
   end

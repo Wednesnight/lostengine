@@ -6,6 +6,7 @@
 #include "lost/font/RenderedText.h"
 #include "lost/gl/Texture.h"
 #include "lost/font/FontManager.h"
+#include "lost/font/BreakMode.h"
 
 using namespace luabind;
 using namespace lost;
@@ -54,6 +55,8 @@ namespace lost
             .def_readwrite("fontDescender", &RenderedText::fontDescender)            
             .def_readwrite("fontHeight", &RenderedText::fontHeight)            
             .def_readwrite("pointSize", &RenderedText::pointSize)            
+            .def_readwrite("numLines", &RenderedText::numLines)            
+            .def_readwrite("lineHeight", &RenderedText::lineHeight)            
             .scope
             [
               def("create", &RenderedText::create)
@@ -114,12 +117,20 @@ namespace lost
       ];
     }
     
+    void LostFontBreakMode(lua_State* state)
+    {
+      globals(state)["lost"]["font"]["BREAKMODE_NONE"] = lost::font::BREAKMODE_NONE;
+      globals(state)["lost"]["font"]["BREAKMODE_CHAR"] = lost::font::BREAKMODE_CHAR;
+      globals(state)["lost"]["font"]["BREAKMODE_WORD"] = lost::font::BREAKMODE_WORD;
+    }
+    
     void LostFont(lua_State* state)
     {
       LostFontFreetypeLibrary(state);
       LostFontRenderedText(state);
       LostFontTrueTypeFont(state);
       LostFontManager(state);
+      LostFontBreakMode(state);
     }
 
   }

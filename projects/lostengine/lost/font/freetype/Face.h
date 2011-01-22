@@ -13,12 +13,15 @@ namespace lost
     {    
       struct Face
       {
-        Face(LibraryPtr inLibrary, common::DataPtr inData);
+        Face(LibraryPtr inLibrary, common::DataPtr inData, uint32_t inSizeInPoints);
         virtual ~Face();
 
         FT_Face face();
         bitmap::BitmapPtr renderGlyphToBitmap(uint32_t c, uint32_t inSizeInPoints);
 
+        uint32_t sizeInPoints;
+        
+        
         // some values derived from last rendered character
         // names don't necessarily match freetype terminology, but our own for mesh rendering
         // units in pixels
@@ -28,6 +31,9 @@ namespace lost
         float ascender();
         float descender();
         float scale(); // this one not in pixels, used for asceder/Descender calculation
+
+        float height(); // height of one line or baseline distance
+        float linegap(); // distance between lines
         
         bool hasKerning();
         // calculates the kerningoffset between previousGlyphIndex and currentGlyph in pixels
@@ -35,6 +41,9 @@ namespace lost
         // initially, previousGlyphIndex should be set to 0 if you are starting a new string.
         int32_t kerningOffset(uint32_t& previousGlyphIndex, uint32_t currentGlyph);
       private:
+        float       _linegap;
+        float       _height;
+        float       _baselineDistance;
         FT_Face     mFace;
         
         // font faces are only valid as long as the loaded data stays alive
