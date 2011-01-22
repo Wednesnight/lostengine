@@ -29,11 +29,11 @@ void FontManager::addEntry(const std::string& name, const std::string& pathToDat
   name2path[name] = pathToData;
 }
 
-TrueTypeFontPtr FontManager::getFont(const std::string& name, uint32_t size)
+FontPtr FontManager::getFont(const std::string& name, uint32_t size)
 {
-  TrueTypeFontPtr result;
+  FontPtr result;
   std::pair<std::string, uint32_t> fontKey = std::make_pair(name, size);
-  std::map<std::pair<std::string, uint32_t>, TrueTypeFontPtr>::iterator pos = nameAndSize2font.find(fontKey);
+  std::map<std::pair<std::string, uint32_t>, FontPtr>::iterator pos = nameAndSize2font.find(fontKey);
   if(pos == nameAndSize2font.end())
   {
     std::map<std::string, std::string>::iterator ppos = name2path.find(name);
@@ -47,7 +47,6 @@ TrueTypeFontPtr FontManager::getFont(const std::string& name, uint32_t size)
       }
       result.reset(new TrueTypeFont(lib(),data, size));
       nameAndSize2font[fontKey] = result;
-      result->atlasSize = lost::math::Vec2(256,256); // FIXME: make this configurable?      
     }
     else {
       EOUT("no path to data registered for font name '"<<name<<"'");

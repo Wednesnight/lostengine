@@ -50,7 +50,7 @@ end
 function TabBar:adjustButtonWidth(button, item)
   local width = 0
   if button.textLayer then
-    local rt = button.textLayer._font:render(item)
+    local rt = lost.font.render(item, button.textLayer._font)
     width = rt.size.width + self.buttonSizeAdjust
   end
   button._bounds.width = lost.guiro.Bounds.decodeEntry(3,width) 

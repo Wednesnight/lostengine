@@ -20,12 +20,12 @@ struct FontManager
   static FontManagerPtr create(const resource::LoaderPtr& inLoader);
   
   void addEntry(const std::string& name, const std::string& pathToData);
-  TrueTypeFontPtr getFont(const std::string& name, uint32_t size);
+  FontPtr getFont(const std::string& name, uint32_t size);
   
   freetype::LibraryPtr lib();
   std::map<std::string, std::string> name2path;
   std::map<std::string, lost::common::DataPtr> path2data;
-  std::map<std::pair<std::string, uint32_t>, TrueTypeFontPtr> nameAndSize2font;
+  std::map<std::pair<std::string, uint32_t>, FontPtr> nameAndSize2font;
   
   freetype::LibraryPtr  _lib;
   resource::LoaderPtr   _loader;

@@ -907,6 +907,7 @@
 		EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */; };
 		EADE515F113BC9A8005F7BB6 /* ApplicationWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */; };
 		EAE108D0116C05140057432F /* GLee.c in Sources */ = {isa = PBXBuildFile; fileRef = EA3B94490E0462B200B6423B /* GLee.c */; };
+		EAE85D2812EB3E8000797D6B /* Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAE85D2712EB3E8000797D6B /* Render.cpp */; };
 		EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
 		EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */; };
@@ -1294,6 +1295,7 @@
 		EAD9DC86111E2F6200A21AC7 /* RangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RangeManager.cpp; sourceTree = "<group>"; };
 		EAD9DCAF111E3AB900A21AC7 /* TestLostGlRangeManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestLostGlRangeManager.cpp; path = test/TestLostGlRangeManager.cpp; sourceTree = "<group>"; };
 		EADE515E113BC9A8005F7BB6 /* ApplicationWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ApplicationWindow.mm; path = mac/ApplicationWindow.mm; sourceTree = "<group>"; };
+		EAE85D2712EB3E8000797D6B /* Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Render.cpp; sourceTree = "<group>"; };
 		EAF56B03111CD271008D5A0D /* ScaleGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScaleGrid.cpp; path = mesh/ScaleGrid.cpp; sourceTree = "<group>"; };
 		EAF56B2C111CD694008D5A0D /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Rect.cpp; path = mesh/Rect.cpp; sourceTree = "<group>"; };
 		EAF56B3F111CD794008D5A0D /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = mesh/Mesh.cpp; sourceTree = "<group>"; };
@@ -1979,6 +1981,7 @@
 				EA836F2A12957FCF004DB2BA /* Glyph.cpp */,
 				EA836EEB12957924004DB2BA /* BitmapFont.cpp */,
 				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
+				EAE85D2712EB3E8000797D6B /* Render.cpp */,
 				EA3B94970E04639D00B6423B /* freetype */,
 			);
 			path = font;
@@ -2284,6 +2287,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2927,6 +2931,7 @@
 				EA836EF41295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2B12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0912D14CBE00362802 /* ScissorStack.cpp in Sources */,
+				EAE85D2812EB3E8000797D6B /* Render.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
