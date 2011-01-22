@@ -80,9 +80,9 @@ end
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
   if self._font then
-    self._font:render(self._text, self.mesh)
+      lost.font.render(self._text, self._font, self.mesh)
     if self.shadowDrawNode.active then
-      self._font:render(self._text, self.shadowMesh)
+      lost.font.render(self._text, self._font, self.shadowMesh)
     end
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")

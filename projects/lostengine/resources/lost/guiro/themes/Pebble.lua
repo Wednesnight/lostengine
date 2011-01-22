@@ -1003,7 +1003,7 @@ end
 
 function Pebble:fpsMeter(target, args)
   target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=true, radius=8,color=Color(0,0,0,.6)})
-  local tl = lost.guiro.layer.Text{font={"Vera bold",48},color=Color(1,1,1),valign="center",halign="center"}
+  local tl = lost.guiro.layer.Text{font={"Vera mono bold",48},color=Color(1,1,1),valign="center",halign="center"}
   target.layer:addSublayer(tl)
   target.textLayer = tl
 end

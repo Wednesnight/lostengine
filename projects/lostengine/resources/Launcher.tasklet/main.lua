@@ -26,7 +26,7 @@ function startup()
         t{id="dropMessage",
           bounds={"center", "center", ".6", ".4"},
           font={"Grinched", 28},
-          text="Drop\r\ntasklet\rdirectory\nhere!",
+          text="Drop tasklet directory here!",
           color=Color(0,0,0),
           shadow=true,
           shadowOffset=Vec2(2,-2),
