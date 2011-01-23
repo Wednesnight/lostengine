@@ -135,7 +135,7 @@ void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
 {
   for(uint32_t i=0; i<inText.size(); ++i)
   {
-    shared_ptr<Glyph> glyph = char2glyph[inText[i]];
+    shared_ptr<Glyph>& glyph = char2glyph[inText[i]];
     if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
     {
       glyph->drawable = true;

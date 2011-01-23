@@ -30,12 +30,7 @@ namespace lost
             .def_readonly("min", &RenderedText::min)
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
-            .def_readwrite("fontAscender", &RenderedText::fontAscender)
-            .def_readwrite("fontDescender", &RenderedText::fontDescender)            
-            .def_readwrite("fontHeight", &RenderedText::fontHeight)            
-            .def_readwrite("pointSize", &RenderedText::pointSize)            
             .def_readwrite("numLines", &RenderedText::numLines)            
-            .def_readwrite("lineHeight", &RenderedText::lineHeight)            
             .scope
             [
               def("create", &RenderedText::create)
