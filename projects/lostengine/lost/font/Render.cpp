@@ -156,18 +156,7 @@ void render(const std::string & inUtf8String, const FontPtr& font, const Rendere
   target->material->blend = true;
   target->material->blendSrc = GL_SRC_ALPHA;
   target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
-  target->fontAscender = font->ascender;
-  target->fontDescender = font->descender;
   target->numLines = 1;
-  target->lineHeight = floorf(font->lineHeight);// floor to prevent offcenter pixels in 2D
-  float ascsum = fabs(font->ascender)+fabs(font->descender);
-  int iascsum = floorf(ascsum+.5f);
-/*  DOUT("-- rendered size: w:"<<target->size.width
-     <<" height:"<<target->size.height
-     <<" rounded:"<<iascsum
-     <<" delta:"<<abs(target->size.height-iascsum));*/
-  target->fontHeight = iascsum;
-  target->pointSize = font->size;
 }
 
 }
