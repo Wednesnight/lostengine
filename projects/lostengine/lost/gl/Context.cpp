@@ -12,10 +12,19 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/UniformBlock.h"
+#include <boost/thread/tss.hpp>
+#include <boost/thread/thread.hpp>
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
 using namespace std;
+
+void context_cleanup(lost::gl::Context* p)
+{
+  DOUT("context cleanup");
+}
+
+boost::thread_specific_ptr<lost::gl::Context> context_ptr(context_cleanup);
 
 bool getBoolParam(GLenum pname)
 {
@@ -495,7 +504,11 @@ std::map<void*, Context*> glContext2lostGlContext;
 
     Context* Context::getCurrent()
     {
-      return glContext2lostGlContext[getCurrentOsSpecific()];
+      if(!context_ptr.get())
+      {
+        context_ptr.reset(glContext2lostGlContext[getCurrentOsSpecific()]);
+      }
+      return context_ptr.get(); 
     }
   }
 }
