@@ -625,6 +625,9 @@
 		EA4143AE0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143AF0ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
 		EA4143B00ED0E5AE00712F45 /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */; };
+		EA54EA1812EF359C00E9E0D9 /* TextBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */; };
+		EA54EA1912EF359C00E9E0D9 /* TextBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */; };
+		EA54EA1A12EF359C00E9E0D9 /* TextBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */; };
 		EA54FA6B0E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
 		EA54FA6E0E676E2200605409 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA660E676E2200605409 /* Face.cpp */; };
 		EA54FA730E676E2200605409 /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA54FA630E676E2200605409 /* Library.cpp */; };
@@ -1182,6 +1185,7 @@
 		EA3B94FE0E04639D00B6423B /* Platform_Mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Mac.cpp; sourceTree = "<group>"; };
 		EA3D458F111C077300CB661C /* Quad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quad.cpp; path = mesh/Quad.cpp; sourceTree = "<group>"; };
 		EA4143AD0ED0E5AE00712F45 /* stb_vorbis.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stb_vorbis.c; path = ../../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c; sourceTree = SOURCE_ROOT; };
+		EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBuffer.cpp; sourceTree = "<group>"; };
 		EA54FA630E676E2200605409 /* Library.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Library.cpp; sourceTree = "<group>"; };
 		EA54FA660E676E2200605409 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		EA5D3C1F0F7C5C78002804E4 /* FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
@@ -1976,12 +1980,13 @@
 		EA3B94940E04639D00B6423B /* font */ = {
 			isa = PBXGroup;
 			children = (
+				EA836EEB12957924004DB2BA /* BitmapFont.cpp */,
 				EA836EF31295792F004DB2BA /* Font.cpp */,
 				EA836EEF1295792B004DB2BA /* FontManager.cpp */,
 				EA836F2A12957FCF004DB2BA /* Glyph.cpp */,
-				EA836EEB12957924004DB2BA /* BitmapFont.cpp */,
-				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
 				EAE85D2712EB3E8000797D6B /* Render.cpp */,
+				EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */,
+				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
 				EA3B94970E04639D00B6423B /* freetype */,
 			);
 			path = font;
@@ -1990,8 +1995,8 @@
 		EA3B94970E04639D00B6423B /* freetype */ = {
 			isa = PBXGroup;
 			children = (
-				EA54FA630E676E2200605409 /* Library.cpp */,
 				EA54FA660E676E2200605409 /* Face.cpp */,
+				EA54FA630E676E2200605409 /* Library.cpp */,
 			);
 			path = freetype;
 			sourceTree = "<group>";
@@ -2287,7 +2292,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2620,6 +2624,7 @@
 				EA836EF61295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2D12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0B12D14CBE00362802 /* ScissorStack.cpp in Sources */,
+				EA54EA1A12EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2932,6 +2937,7 @@
 				EA836F2B12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0912D14CBE00362802 /* ScissorStack.cpp in Sources */,
 				EAE85D2812EB3E8000797D6B /* Render.cpp in Sources */,
+				EA54EA1812EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3262,6 +3268,7 @@
 				EA836EF51295792F004DB2BA /* Font.cpp in Sources */,
 				EA836F2C12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0A12D14CBE00362802 /* ScissorStack.cpp in Sources */,
+				EA54EA1912EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
