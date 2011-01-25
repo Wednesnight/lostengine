@@ -26,6 +26,7 @@ void Bitmap::reset()
   loaded = false;
   width = 0;
   height = 0;
+  premultiplied = false;
   format = COMPONENTS_UNDEFINED;
 }
 
@@ -139,7 +140,7 @@ void Bitmap::copyPixel(uint8_t* dest,
       {
         case COMPONENTS_RGBA:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=src[3];break;
         case COMPONENTS_RGB:dest[0]=src[0];dest[1]=src[1];dest[2]=src[2];dest[3]=255;break;
-        case COMPONENTS_ALPHA:dest[0]=255;dest[1]=255;dest[2]=255;dest[3]=src[0];break;
+        case COMPONENTS_ALPHA:dest[0]=src[0];dest[1]=src[0];dest[2]=src[0];dest[3]=src[0];break;
         default:
           THROW_RTE("can't copy pixel from source with components: " << srcComponents);
       }
@@ -485,17 +486,21 @@ void Bitmap::filledRect(const common::Color& col, uint32_t posx, uint32_t posy, 
 
 void Bitmap::premultiplyAlpha()
 {
-  for(uint32_t x=0; x<width; ++x)
+  if(!premultiplied)
   {
-    for(uint32_t y=0; y<height; ++y)
+    for(uint32_t x=0; x<width; ++x)
     {
-      common::Color c = pixel(x,y);
-      float a = c.fv[3];
-      c.fv[0] = c.fv[0]*a;
-      c.fv[1] = c.fv[1]*a;
-      c.fv[2] = c.fv[2]*a;
-      pixel(x,y,c);
+      for(uint32_t y=0; y<height; ++y)
+      {
+        common::Color c = pixel(x,y);
+        float a = c.fv[3];
+        c.fv[0] = c.fv[0]*a;
+        c.fv[1] = c.fv[1]*a;
+        c.fv[2] = c.fv[2]*a;
+        pixel(x,y,c);
+      }
     }
+    premultiplied = true;
   }
 }
 
