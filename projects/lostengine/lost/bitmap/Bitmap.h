@@ -20,6 +20,7 @@ namespace lost
       uint32_t    width;  // width in pixels
       uint32_t    height; // height in pixels
       Components  format; // format of bitmap (rgb, rgba)
+      bool        premultiplied; // true if alpha was premlultiplied, false otherwise
 
       /** creates an empty bitmap with zero size.
        * Use init to resize it in a given format.

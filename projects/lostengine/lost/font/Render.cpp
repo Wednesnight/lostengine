@@ -153,9 +153,7 @@ void render(const std::string & inUtf8String, const FontPtr& font, const Rendere
   target->max = pmax;
   target->size.width = (pmax.x-pmin.x)+1;  
   target->size.height = (pmax.y-pmin.y)+1;
-  target->material->blend = true;
-  target->material->blendSrc = GL_SRC_ALPHA;
-  target->material->blendDest = GL_ONE_MINUS_SRC_ALPHA;
+  target->material->blendPremultiplied();
   target->numLines = 1;
 }
 

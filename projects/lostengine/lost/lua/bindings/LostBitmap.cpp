@@ -24,6 +24,7 @@ namespace lost
             .def("disc", &Bitmap::disc)
             .def("ring", &Bitmap::ring)
             .def("filledRect", &Bitmap::filledRect)
+            .def_readwrite("premultiplied", &Bitmap::premultiplied)
             .def("premultiplyAlpha", &Bitmap::premultiplyAlpha)
             .scope
             [
