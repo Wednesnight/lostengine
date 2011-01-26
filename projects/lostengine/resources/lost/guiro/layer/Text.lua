@@ -84,7 +84,7 @@ function Text:updateDisplay()
   self.buffer:reset(self._text, self._font, 0,0)
   if self._font then
 --      lost.font.render(self._text, self._font, self.mesh)
-      self.buffer:renderPhysicalLine(0, self.mesh)
+      self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
 --      lost.font.render(self._text, self._font, self.shadowMesh)
       self.shadowMesh = self.mesh:clone()

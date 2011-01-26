@@ -112,6 +112,7 @@ namespace lost
           .def(constructor<>())
           .def("reset", &TextBuffer::reset)
           .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
+          .def("renderAllPhysicalLines", &TextBuffer::renderAllPhysicalLines)
         ]
       ];
     }
