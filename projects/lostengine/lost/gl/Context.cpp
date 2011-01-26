@@ -21,7 +21,6 @@ using namespace std;
 
 void context_cleanup(lost::gl::Context* p)
 {
-  DOUT("context cleanup");
 }
 
 boost::thread_specific_ptr<lost::gl::Context> context_ptr(context_cleanup);
