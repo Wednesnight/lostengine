@@ -86,7 +86,11 @@ function Text:updateDisplay()
       self.buffer:renderPhysicalLine(0, self.mesh)
     if self.shadowDrawNode.active then
 --      lost.font.render(self._text, self._font, self.shadowMesh)
-      self.buffer:renderPhysicalLine(0, self.shadowMesh)
+      self.shadowMesh = self.mesh:clone()
+      self.shadowMesh.material = self.mesh.material:clone()
+      self.shadowMesh.material.color = self._shadowColor
+      self.shadowDrawNode.mesh = self.shadowMesh
+--      self.buffer:renderPhysicalLine(0, self.shadowMesh)
     end
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
@@ -144,7 +148,8 @@ end
 
 function Text:shadowColor(...)
   if arg.n >= 1 then
-    self.shadowMesh.material.color = arg[1]
+    self._shadowColor = arg[1]
+    self.shadowMesh.material.color = self._shadowColor
   else
     return self.shadowMesh.color
   end

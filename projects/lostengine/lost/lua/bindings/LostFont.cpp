@@ -17,6 +17,13 @@ namespace lost
 {
   namespace lua
   {
+  
+    RenderedTextPtr clone_cast(RenderedTextPtr p)
+    {
+      MeshPtr m = p->clone();
+      return boost::static_pointer_cast<RenderedText>(m);
+    }
+  
     void LostFontRenderedText(lua_State* state)
     {
       module(state, "lost")
@@ -27,7 +34,8 @@ namespace lost
             .def_readonly("min", &RenderedText::min)
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
-            .def_readwrite("numLines", &RenderedText::numLines)            
+            .def_readwrite("numLines", &RenderedText::numLines)      
+            .def("clone", clone_cast)      
             .scope
             [
               def("create", &RenderedText::create)

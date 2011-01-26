@@ -576,6 +576,12 @@
 		EA18C3210FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
 		EA18C3220FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
 		EA18C3230FA25C5600C2652A /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA18C3200FA25C5600C2652A /* Node.cpp */; };
+		EA1933B812F06E3D00F75728 /* RenderedText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933B712F06E3D00F75728 /* RenderedText.cpp */; };
+		EA1933B912F06E3D00F75728 /* RenderedText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933B712F06E3D00F75728 /* RenderedText.cpp */; };
+		EA1933BA12F06E3D00F75728 /* RenderedText.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933B712F06E3D00F75728 /* RenderedText.cpp */; };
+		EA1933DF12F075CA00F75728 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933DE12F075CA00F75728 /* Material.cpp */; };
+		EA1933E012F075CA00F75728 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933DE12F075CA00F75728 /* Material.cpp */; };
+		EA1933E112F075CA00F75728 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1933DE12F075CA00F75728 /* Material.cpp */; };
 		EA1BF66D0F67349200862B2F /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC046055464E500DB518D /* libLostEngine.a */; };
 		EA1BF67B0F67350D00862B2F /* TestCompileLostMathVec2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6710F67350D00862B2F /* TestCompileLostMathVec2.cpp */; };
 		EA1BF67D0F67350D00862B2F /* TestEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA1BF6730F67350D00862B2F /* TestEvent.cpp */; };
@@ -1146,6 +1152,8 @@
 		EA15B48B0EE31EB600672EF4 /* Engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Engine.cpp; path = audio/Engine.cpp; sourceTree = "<group>"; };
 		EA15B48C0EE31EB600672EF4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = audio/Source.cpp; sourceTree = "<group>"; };
 		EA18C3200FA25C5600C2652A /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = rg/Node.cpp; sourceTree = "<group>"; };
+		EA1933B712F06E3D00F75728 /* RenderedText.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderedText.cpp; sourceTree = "<group>"; };
+		EA1933DE12F075CA00F75728 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Material.cpp; path = mesh/Material.cpp; sourceTree = "<group>"; };
 		EA1BF6620F67342000862B2F /* LostEngineUnittests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngineUnittests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1BF6640F67342000862B2F /* LostEngineUnittests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LostEngineUnittests-Info.plist"; sourceTree = "<group>"; };
 		EA1BF6710F67350D00862B2F /* TestCompileLostMathVec2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestCompileLostMathVec2.cpp; path = test/TestCompileLostMathVec2.cpp; sourceTree = "<group>"; };
@@ -1985,6 +1993,7 @@
 				EA836EEF1295792B004DB2BA /* FontManager.cpp */,
 				EA836F2A12957FCF004DB2BA /* Glyph.cpp */,
 				EAE85D2712EB3E8000797D6B /* Render.cpp */,
+				EA1933B712F06E3D00F75728 /* RenderedText.cpp */,
 				EA54EA1712EF359C00E9E0D9 /* TextBuffer.cpp */,
 				EAAC572B0ECBAE71004AD566 /* TrueTypeFont.cpp */,
 				EA3B94970E04639D00B6423B /* freetype */,
@@ -2086,6 +2095,7 @@
 				3E32F9FC1176F3C40014D096 /* Sphere.cpp */,
 				EAA4520D1152CFE200FFE886 /* Disc.cpp */,
 				3E35F5BB0FA04F65007DDAB1 /* Loader.cpp */,
+				EA1933DE12F075CA00F75728 /* Material.cpp */,
 				EAF56B3F111CD794008D5A0D /* Mesh.cpp */,
 				EA3D458F111C077300CB661C /* Quad.cpp */,
 				EAF56B2C111CD694008D5A0D /* Rect.cpp */,
@@ -2625,6 +2635,8 @@
 				EA836F2D12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0B12D14CBE00362802 /* ScissorStack.cpp in Sources */,
 				EA54EA1A12EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
+				EA1933BA12F06E3D00F75728 /* RenderedText.cpp in Sources */,
+				EA1933E112F075CA00F75728 /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2938,6 +2950,8 @@
 				EAB38F0912D14CBE00362802 /* ScissorStack.cpp in Sources */,
 				EAE85D2812EB3E8000797D6B /* Render.cpp in Sources */,
 				EA54EA1812EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
+				EA1933B812F06E3D00F75728 /* RenderedText.cpp in Sources */,
+				EA1933DF12F075CA00F75728 /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3269,6 +3283,8 @@
 				EA836F2C12957FCF004DB2BA /* Glyph.cpp in Sources */,
 				EAB38F0A12D14CBE00362802 /* ScissorStack.cpp in Sources */,
 				EA54EA1912EF359C00E9E0D9 /* TextBuffer.cpp in Sources */,
+				EA1933B912F06E3D00F75728 /* RenderedText.cpp in Sources */,
+				EA1933E012F075CA00F75728 /* Material.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

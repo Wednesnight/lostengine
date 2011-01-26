@@ -62,7 +62,7 @@ struct Mesh
   gl::HybridVertexBufferPtr vertexBuffer;
   gl::HybridIndexBufferPtr indexBuffer;
   
-//  virtual MeshPtr clone();
+  virtual MeshPtr clone();
 };
 
 }
