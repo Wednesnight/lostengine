@@ -17,12 +17,10 @@ namespace ftxt = fhtagn::text;
 TextBuffer::TextBuffer()
 {
   _breakMode = BREAKMODE_NONE;
-  DOUT("");
 }
 
 TextBuffer::~TextBuffer()
 {
-  DOUT("");
 }
 
 void TextBuffer::text(const std::string& inText)
@@ -77,7 +75,7 @@ void TextBuffer::resetLogicalLines(const std::string& inText)
   // normalise newlines into copy of text
   std::string normalised(inText); 
   normaliseNewlines(normalised);
-
+  _text.clear();
   // transcode to utf32 for parsing
   ftxt::utf8_decoder decoder;
   ftxt::decode(decoder, normalised.begin(), normalised.end(),
@@ -113,7 +111,7 @@ void TextBuffer::resetPhysicalLines()
   {
     _physicalLines.push_back(pos->line);
   }
-  DOUT("physical lines: "<<_physicalLines.size());
+//  DOUT("physical lines: "<<_physicalLines.size());
 }
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)

@@ -29,6 +29,12 @@ void FontManager::addEntry(const std::string& name, const std::string& pathToDat
   name2path[name] = pathToData;
 }
 
+void FontManager::logStats()
+{
+  DOUT(" num fonts: "<<nameAndSize2font.size() << "num known fonts: "<<name2path.size()<<" num data chunks: "<<path2data.size());
+}
+
+
 FontPtr FontManager::getFont(const std::string& name, uint32_t size)
 {
   FontPtr result;
@@ -51,6 +57,7 @@ FontPtr FontManager::getFont(const std::string& name, uint32_t size)
     else {
       EOUT("no path to data registered for font name '"<<name<<"'");
     }
+//    logStats();
   }
   else
   {

@@ -51,6 +51,11 @@ namespace lost
     {
       children.remove(child);
     }
+
+    void Node::removeLast()
+    {
+      children.pop_back();
+    }
       
     void Node::process(gl::ContextPtr& ctx)
     {
