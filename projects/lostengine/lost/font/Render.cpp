@@ -118,13 +118,17 @@ RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& 
 
 void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target)
 {
+  render(inText, 0, inText.size(), font, target);
+}
+
+void render(const fhtagn::text::utf32_string& inText, uint32_t begin, uint32_t end, const FontPtr& font, const RenderedTextPtr& target)
+{
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
   // used to draw the character
   std::vector<math::Rect> characterRects;
   std::vector<math::Rect> pixelCoordRects;
-    
   
   // kerning setup
   bool hasKerning = font->hasKerning();
@@ -134,23 +138,16 @@ void render(const ftxt::utf32_string& inText, const FontPtr& font, const Rendere
   uint32_t addIndex=0; // we iterate over all chracters, but not all of them might be drawable
                        // so we need a separate index for the actual insertion of a character into the mesh
 
-  uint32_t numChars = inText.size();
   uint32_t previousGlyphIndex = 0;
   font->prepareGlyphs(inText);
   float xoffset = 0;    
   float yoffset = 0;
-  for(unsigned int i=0; i<numChars; ++i)
+  for(uint32_t i=begin; i<end; ++i)
   {
     ftxt::utf32_char_t c = inText[i];
-    
-    if(hasKerning)
-    {
-      xoffset+=font->kerningOffset(previousGlyphIndex, c);
-    }
-    
+    if(hasKerning) { xoffset+=font->kerningOffset(previousGlyphIndex, c);}
     GlyphPtr glyph = font->glyph(c);
     if (!glyph) continue;
-
     if (glyph->drawable)
     {
       addGlyph(characterRects, pixelCoordRects, glyph, xoffset, yoffset, pmin, pmax);
@@ -166,7 +163,6 @@ void render(const ftxt::utf32_string& inText, const FontPtr& font, const Rendere
   target->size.height = (pmax.y-pmin.y)+1;
   target->material->blendPremultiplied();
   target->numLines = 1;
-  
 }
 
 }
