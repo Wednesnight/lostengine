@@ -81,6 +81,7 @@ end
 
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
+  self.buffer:reset(self._text, self._font, 0,0)
   if self._font then
 --      lost.font.render(self._text, self._font, self.mesh)
       self.buffer:renderPhysicalLine(0, self.mesh)
@@ -100,14 +101,12 @@ end
 
 function Text:text(s)
   self._text = s
-  self.buffer:text(s)
   self:needsDisplay()
 end
 
 function Text:font(...)
   if arg.n >=1 then
     self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
-    self.buffer:font(self._font)
     self:needsDisplay()
   else
     return self._font

@@ -17,9 +17,10 @@ public:
   TextBuffer();
   ~TextBuffer();
 
-  void text(const std::string& inText); // resets the text with the given utf8 string, recalculates everything
-  void font(const FontPtr& inFont); // sets font, triggers recalculation of physical lines
-  void breakMode(BreakMode inBreakMode); // sets the breakMode, triggers recalculation of physical lines
+  void reset(const std::string& utf8String, 
+             const FontPtr& inFont,
+             BreakMode inBreakMode,
+             float width);
   
   uint32_t numLogicalLines();
   uint32_t numPhysicalLines();
@@ -53,6 +54,7 @@ private:
   FontPtr                   _font;
   BreakMode                 _breakMode;
   Utf32String               _text;
+  float                     _width;
   
   void resetLogicalLines(const std::string& inText);
   void resetPhysicalLines();
