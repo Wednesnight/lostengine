@@ -3,6 +3,8 @@
 #include <fhtagn/text/decoders.h>
 #include "lost/font/Font.h"
 #include <boost/algorithm/string.hpp>
+#include "lost/common/Logger.h"
+#include "lost/font/Render.h"
 
 namespace lost
 {
@@ -15,10 +17,12 @@ namespace ftxt = fhtagn::text;
 TextBuffer::TextBuffer()
 {
   _breakMode = BREAKMODE_NONE;
+  DOUT("");
 }
 
 TextBuffer::~TextBuffer()
 {
+  DOUT("");
 }
 
 void TextBuffer::text(const std::string& inText)
@@ -26,7 +30,7 @@ void TextBuffer::text(const std::string& inText)
   resetLogicalLines(inText);
 }
 
-void TextBuffer::font(const FontPtr inFont)
+void TextBuffer::font(const FontPtr& inFont)
 {
   _font = inFont;
   resetPhysicalLines();
@@ -48,41 +52,69 @@ uint32_t TextBuffer::numPhysicalLines()
   return _physicalLines.size();
 }
 
-void TextBuffer::splitAtNewline(const std::string& inText)
+void TextBuffer::normaliseNewlines(std::string& inText)
 {
-  std::string txt(inText); // make a copy we can modify
-  // normalise newlines so only \n is left so we can safely split newlines
-  vector<string> tmp;
-  boost::algorithm::ireplace_all(txt, "\r\n", "\n");
-  boost::algorithm::ireplace_all(txt, "\r", "\n");
-  boost::algorithm::split(tmp, txt, boost::algorithm::is_any_of("\n"));
+  boost::algorithm::ireplace_all(inText, "\r\n", "\n");
+  boost::algorithm::ireplace_all(inText, "\r", "\n");
+}
 
-  vector<string>::iterator pos;
-//  DOUT("split ---------------");
-  ftxt::utf8_decoder decoder;
-  for(pos=tmp.begin(); pos!=tmp.end(); ++pos)
+uint32_t skipToNewlineOrEnd(uint32_t pos, const lost::font::TextBuffer::Utf32String& txt)
+{
+  if(pos < txt.size())
   {
-//    DOUT("'"<<*pos<<"'");
-
-    Utf32String decodedString;
-    ftxt::decode(decoder, (*pos).begin(), (*pos).end(),
-           std::back_insert_iterator<Utf32String>(decodedString));
-    LogicalLinePtr ll(new LogicalLine);
-    ll->line.reset(new Utf32String(decodedString));
-    _logicalLines.push_back(ll);
+    while((txt[pos] != '\n') && (pos < txt.size()))
+    {
+      ++pos;
+    }
   }
+  return pos;
 }
 
 void TextBuffer::resetLogicalLines(const std::string& inText)
 {
-  _logicalLines.clear();
-  splitAtNewline(inText);
+  _logicalLines.clear(); // discard all previous lines
+  
+  // normalise newlines into copy of text
+  std::string normalised(inText); 
+  normaliseNewlines(normalised);
+
+  // transcode to utf32 for parsing
+  ftxt::utf8_decoder decoder;
+  ftxt::decode(decoder, normalised.begin(), normalised.end(),
+         std::back_insert_iterator<Utf32String>(_text));
+  
+  uint32_t pos = 0;
+  uint32_t nextPos = 0;
+  do {
+    pos = nextPos;
+    nextPos = skipToNewlineOrEnd(pos, _text);
+    if(nextPos != pos)
+    {
+      _logicalLines.push_back(LogicalLine(Range(pos, nextPos)));
+      ++nextPos;
+    }
+  } while (pos != nextPos);
+  
   resetPhysicalLines();
 }
 
 void TextBuffer::resetPhysicalLines()
 {
+  _physicalLines.clear();
+  for(std::vector<LogicalLine>::iterator pos=_logicalLines.begin(); pos!=_logicalLines.end(); ++pos)
+  {
+    _physicalLines.push_back(pos->line);
+  }
 }
+
+void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
+{
+  Range& r = _physicalLines[num];
+  Utf32String s = _text.substr(r.begin, (r.end-r.begin));
+  DOUT("rendering pl with size: "<<s.size());
+  render(s, _font, target);
+}
+
 
 }
 }

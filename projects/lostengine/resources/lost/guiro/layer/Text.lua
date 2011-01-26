@@ -21,6 +21,8 @@ function Text:constructor(args)
   local t = args or {}
   self.id = t.id or "text"
 
+  self.buffer = lost.font.TextBuffer()
+
   self.mesh = lost.font.RenderedText.create()
   self.mesh.material.shader = lost.guiro.shaderFactory():texture()
   self.mesh.material:blendNormal()
@@ -80,9 +82,11 @@ end
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
   if self._font then
-      lost.font.render(self._text, self._font, self.mesh)
+--      lost.font.render(self._text, self._font, self.mesh)
+      self.buffer:renderPhysicalLine(0, self.mesh)
     if self.shadowDrawNode.active then
-      lost.font.render(self._text, self._font, self.shadowMesh)
+--      lost.font.render(self._text, self._font, self.shadowMesh)
+      self.buffer:renderPhysicalLine(0, self.shadowMesh)
     end
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
@@ -92,12 +96,14 @@ end
 
 function Text:text(s)
   self._text = s
+  self.buffer:text(s)
   self:needsDisplay()
 end
 
 function Text:font(...)
   if arg.n >=1 then
     self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
+    self.buffer:font(self._font)
     self:needsDisplay()
   else
     return self._font

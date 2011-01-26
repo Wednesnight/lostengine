@@ -101,6 +101,23 @@ RenderedTextPtr render(const std::string & inText, const FontPtr& font)
 
 void render(const std::string & inUtf8String, const FontPtr& font, const RenderedTextPtr& target)
 {
+  ftxt::utf8_decoder decoder;
+  ftxt::utf32_string txt;
+  ftxt::decode(decoder, inUtf8String.begin(), inUtf8String.end(),
+         std::back_insert_iterator<ftxt::utf32_string>(txt));
+
+  render(txt, font, target);
+}
+
+RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& font)
+{
+  RenderedTextPtr result(new RenderedText);
+  render(inText, font, result);
+  return result;  
+}
+
+void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target)
+{
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
@@ -117,20 +134,14 @@ void render(const std::string & inUtf8String, const FontPtr& font, const Rendere
   uint32_t addIndex=0; // we iterate over all chracters, but not all of them might be drawable
                        // so we need a separate index for the actual insertion of a character into the mesh
 
-  ftxt::utf8_decoder decoder;
-  ftxt::utf32_string txt;
-  ftxt::decode(decoder, inUtf8String.begin(), inUtf8String.end(),
-         std::back_insert_iterator<ftxt::utf32_string>(txt));
-
-  
-  uint32_t numChars = txt.size();
+  uint32_t numChars = inText.size();
   uint32_t previousGlyphIndex = 0;
-  font->prepareGlyphs(txt);
+  font->prepareGlyphs(inText);
   float xoffset = 0;    
   float yoffset = 0;
   for(unsigned int i=0; i<numChars; ++i)
   {
-    ftxt::utf32_char_t c = txt[i];
+    ftxt::utf32_char_t c = inText[i];
     
     if(hasKerning)
     {
@@ -155,6 +166,7 @@ void render(const std::string & inUtf8String, const FontPtr& font, const Rendere
   target->size.height = (pmax.y-pmin.y)+1;
   target->material->blendPremultiplied();
   target->numLines = 1;
+  
 }
 
 }
