@@ -23,21 +23,15 @@ TextBuffer::~TextBuffer()
 {
 }
 
-void TextBuffer::text(const std::string& inText)
-{
-  resetLogicalLines(inText);
-}
-
-void TextBuffer::font(const FontPtr& inFont)
+void TextBuffer::reset(const std::string& utf8String,
+                       const FontPtr& inFont,
+                       BreakMode inBreakMode,
+                       float width)
 {
   _font = inFont;
-  resetPhysicalLines();
-}
-
-void TextBuffer::breakMode(BreakMode inBreakMode)
-{
+  _width = width;
   _breakMode = inBreakMode;
-  resetPhysicalLines();
+  resetLogicalLines(utf8String);  
 }
 
 uint32_t TextBuffer::numLogicalLines()
@@ -119,7 +113,6 @@ void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
   Range& r = _physicalLines[num];
   render(_text, r.begin, r.end, _font, target);
 }
-
 
 }
 }

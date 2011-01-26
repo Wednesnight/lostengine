@@ -110,8 +110,7 @@ namespace lost
         [
           class_<TextBuffer>("TextBuffer")
           .def(constructor<>())
-          .def("text", &TextBuffer::text)
-          .def("font", &TextBuffer::font)
+          .def("reset", &TextBuffer::reset)
           .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
         ]
       ];
