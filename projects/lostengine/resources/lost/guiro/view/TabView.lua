@@ -31,7 +31,11 @@ function TabView:constructor(args)
   self.selected = t.selected or 1
   self:select(self.selected)
   self.tabbarView:addEventListener("tabBarSelectionChanged",function(event) self:tabbarSelectionChanged(event) end)
-  self.contentView:clip(t.clip or true)
+  local clip = true
+  if t.clip ~= nil then
+    clip = t.clip
+  end
+  self.contentView:clip(clip)
 end
 
 function TabView:tabbarSelectionChanged(event)
