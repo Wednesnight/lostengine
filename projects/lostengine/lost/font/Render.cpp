@@ -118,10 +118,17 @@ RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& 
 
 void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target)
 {
-  render(inText, 0, inText.size(), font, target);
+  render(inText, Range(0, inText.size()), font, target);
 }
 
-void render(const fhtagn::text::utf32_string& inText, uint32_t begin, uint32_t end, const FontPtr& font, const RenderedTextPtr& target)
+void render(const fhtagn::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target)
+{
+  std::vector<Range> lines;
+  lines.push_back(range);
+  render(inText, lines, font, target);
+}
+
+void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target)
 {
 //  DOUT("rendering text with size "<<inSizeInPoints<<" atlas size: "<<atlasSize);
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
@@ -141,19 +148,28 @@ void render(const fhtagn::text::utf32_string& inText, uint32_t begin, uint32_t e
   uint32_t previousGlyphIndex = 0;
   font->prepareGlyphs(inText);
   float xoffset = 0;    
-  float yoffset = 0;
-  for(uint32_t i=begin; i<end; ++i)
+  float yoffset = max((float)lines.size()-1, 0.0f)*font->lineHeight;
+  for(std::vector<Range>::const_iterator pos=lines.begin(); pos!=lines.end(); ++pos)
   {
-    ftxt::utf32_char_t c = inText[i];
-    if(hasKerning) { xoffset+=font->kerningOffset(previousGlyphIndex, c);}
-    GlyphPtr glyph = font->glyph(c);
-    if (!glyph) continue;
-    if (glyph->drawable)
+    if(pos->begin != pos->end) // skip empty lines
     {
-      addGlyph(characterRects, pixelCoordRects, glyph, xoffset, yoffset, pmin, pmax);
-      addIndex++;
+      for(uint32_t i=pos->begin; i!=pos->end; ++i)
+      {
+        ftxt::utf32_char_t c = inText[i];
+        if(hasKerning) { xoffset+=font->kerningOffset(previousGlyphIndex, c);}
+        GlyphPtr glyph = font->glyph(c);
+        if (!glyph) continue;
+        if (glyph->drawable)
+        {
+          addGlyph(characterRects, pixelCoordRects, glyph, xoffset, yoffset, pmin, pmax);
+          addIndex++;
+        }
+        xoffset+=glyph->advance;
+      }
     }
-    xoffset+=glyph->advance;
+    xoffset = 0;
+    yoffset -= font->lineHeight;
+    previousGlyphIndex = 0;
   }
 
   target->init(characterRects, font->atlas, pixelCoordRects, false);
@@ -162,7 +178,7 @@ void render(const fhtagn::text::utf32_string& inText, uint32_t begin, uint32_t e
   target->size.width = (pmax.x-pmin.x)+1;  
   target->size.height = (pmax.y-pmin.y)+1;
   target->material->blendPremultiplied();
-  target->numLines = 1;
+  target->numLines = lines.size();
 }
 
 }

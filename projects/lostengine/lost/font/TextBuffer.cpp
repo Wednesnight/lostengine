@@ -110,8 +110,12 @@ void TextBuffer::resetPhysicalLines()
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
 {
-  Range& r = _physicalLines[num];
-  render(_text, r.begin, r.end, _font, target);
+  render(_text, _physicalLines[num], _font, target);
+}
+
+void TextBuffer::renderAllPhysicalLines(const RenderedTextPtr& target)
+{
+  render(_text, _physicalLines, _font, target);
 }
 
 }
