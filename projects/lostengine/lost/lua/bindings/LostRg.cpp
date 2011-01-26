@@ -50,6 +50,7 @@ namespace lost
           .def("add", &Node::add)
           .def("addFront", &Node::addFront)
           .def("remove", &Node::remove)
+          .def("removeLast", &Node::removeLast)
           .def("process", &Node::process)
           .def("recursiveFindByName", &Node::recursiveFindByName)
           .def("print", &Node::print)

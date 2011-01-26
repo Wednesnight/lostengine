@@ -90,6 +90,11 @@ math::Vec2 Mesh::getAsVec2(uint32_t idx, UsageType ut) { return bufferFromUsageT
 math::Vec3 Mesh::getAsVec3(uint32_t idx, UsageType ut) { return bufferFromUsageType(ut)->getAsVec3(idx, ut); }
 uint32_t   Mesh::getAsU32(uint32_t idx, UsageType ut) { return bufferFromUsageType(ut)->getAsU32(idx, ut); }
 
+/*MeshPtr Mesh::clone()
+{
+  
+}*/
+
 
 }
 }

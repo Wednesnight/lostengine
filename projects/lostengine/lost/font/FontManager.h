@@ -21,6 +21,7 @@ struct FontManager
   
   void addEntry(const std::string& name, const std::string& pathToData);
   FontPtr getFont(const std::string& name, uint32_t size);
+  void logStats();
   
   freetype::LibraryPtr lib();
   std::map<std::string, std::string> name2path;

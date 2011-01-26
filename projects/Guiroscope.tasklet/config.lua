@@ -1,7 +1,7 @@
 return {
   tasklet = {
     name = "Guiroscope",
-    waitForEvents = false
+    waitForEvents = true
   },
   window = {
     title = "Guiroscope",

@@ -26,6 +26,7 @@ struct Node
   void add(const NodePtr& child);
   void addFront(NodePtr& child);
   void remove(const NodePtr& child);
+  void removeLast();
   static NodePtr create();
   std::list<NodePtr> children;
   
