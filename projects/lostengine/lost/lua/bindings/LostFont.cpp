@@ -1,14 +1,11 @@
 #include "lost/lua/bindings/LostFont.h"
 #include "lost/lua/lua.h"
-//#include "lost/mesh/Mesh.h"
-//#include "lost/font/freetype/Library.h"
 #include "lost/font/TrueTypeFont.h"
 #include "lost/font/RenderedText.h"
-//#include "lost/gl/Texture.h"
 #include "lost/font/FontManager.h"
 #include "lost/font/BreakMode.h"
 #include "lost/font/Render.h"
-
+#include "lost/font/TextBuffer.h"
 
 using namespace luabind;
 using namespace lost;
@@ -96,6 +93,22 @@ namespace lost
         ]
       ];
     }
+
+    void LostFontTextBuffer(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("font")
+        [
+          class_<TextBuffer>("TextBuffer")
+          .def(constructor<>())
+          .def("text", &TextBuffer::text)
+          .def("font", &TextBuffer::font)
+          .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
+        ]
+      ];
+    }
+
     
     void LostFont(lua_State* state)
     {
@@ -105,6 +118,7 @@ namespace lost
       LostFontManager(state);
       LostFontBreakMode(state);
       LostFontRender(state);
+      LostFontTextBuffer(state);
     }
 
   }
