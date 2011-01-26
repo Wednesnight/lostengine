@@ -131,6 +131,7 @@ namespace lost
             .def("blendNormal", &Material::blendNormal)
             .def("blendPremultiplied", &Material::blendPremultiplied)
             .def("blendOff", &Material::blendOff)
+            .def("clone", &Material::clone)
             .scope
             [
               def("create", (MaterialPtr(*)())&Material::create)
@@ -163,6 +164,7 @@ namespace lost
             .def("getAsVec2",&Mesh::getAsVec2)
             .def("getAsVec3",&Mesh::getAsVec3)
             .def("getAsU32",&Mesh::getAsU32)
+            .def("clone", &Mesh::clone)
             .scope
             [
               def("create", (MeshPtr(*)())&Mesh::create),

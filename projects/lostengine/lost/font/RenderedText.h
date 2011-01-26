@@ -8,31 +8,26 @@
 
 namespace lost
 {
-  namespace font
-  {    
-    struct RenderedText : mesh::Quad
-    {
-      RenderedText() : mesh::Quad()
-      {
-      }
-    
-      RenderedText(const std::vector<math::Rect>& rects,
-                   gl::TexturePtr tex,
-                   const std::vector<math::Rect>& pixelCoords) : mesh::Quad(rects, tex, pixelCoords, false)
-      {
-      }
-      
-      virtual ~RenderedText() {};
+namespace font
+{    
 
-      static RenderedTextPtr create() { return RenderedTextPtr(new RenderedText); };
+struct RenderedText : mesh::Quad
+{
+  RenderedText();
+  RenderedText(const std::vector<math::Rect>& rects,
+               gl::TexturePtr tex,
+               const std::vector<math::Rect>& pixelCoords);
+  virtual ~RenderedText();
+  static RenderedTextPtr create();
+  mesh::MeshPtr clone();
 
-      lost::math::Vec2 min; // min in pixel of the rendered string. baseline is at y=0
-      lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0
-      lost::math::Vec2 size; // min, max, width and height in pixel of the rendered string. baseline is at y=0
-      float numLines;
-    };
+  lost::math::Vec2 min; // min in pixel of the rendered string. baseline is at y=0
+  lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0
+  lost::math::Vec2 size; // min, max, width and height in pixel of the rendered string. baseline is at y=0
+  float numLines;
+};
 
-  }
+}
 }
 
 #endif
