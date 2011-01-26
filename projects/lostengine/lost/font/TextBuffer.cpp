@@ -93,6 +93,14 @@ void TextBuffer::resetLogicalLines(const std::string& inText)
       _logicalLines.push_back(LogicalLine(Range(pos, nextPos)));
       ++nextPos;
     }
+    else {
+      // must check for empty line
+      if(nextPos < _text.size())
+      {
+        _logicalLines.push_back(LogicalLine(Range(pos, pos)));
+        ++nextPos;
+      }
+    }
   } while (pos != nextPos);
   
   resetPhysicalLines();
@@ -105,13 +113,13 @@ void TextBuffer::resetPhysicalLines()
   {
     _physicalLines.push_back(pos->line);
   }
+  DOUT("physical lines: "<<_physicalLines.size());
 }
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
 {
   Range& r = _physicalLines[num];
   Utf32String s = _text.substr(r.begin, (r.end-r.begin));
-  DOUT("rendering pl with size: "<<s.size());
   render(s, _font, target);
 }
 
