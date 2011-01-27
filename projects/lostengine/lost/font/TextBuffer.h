@@ -52,6 +52,10 @@ private:
   void resetLogicalLines(const std::string& inText);
   void resetPhysicalLines();
   void normaliseNewlines(std::string& inText);
+  
+  void breakModeNone();
+  void breakModeChar();
+  void breakModeWord();
 };
 }
 }

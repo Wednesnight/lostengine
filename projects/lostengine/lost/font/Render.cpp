@@ -93,7 +93,7 @@ void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& 
 
   uint32_t previousGlyphIndex = 0;
   float xoffset = 0;    
-  float yoffset = max((float)lines.size()-1, 0.0f)*font->lineHeight;
+  float yoffset = max((float)lines.size()-1, 0.0f)*floorf(font->lineHeight);
   for(std::vector<Range>::const_iterator pos=lines.begin(); pos!=lines.end(); ++pos)
   {
     if(pos->begin != pos->end) // skip empty lines
@@ -113,7 +113,7 @@ void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& 
       }
     }
     xoffset = 0;
-    yoffset -= font->lineHeight;
+    yoffset -= floorf(font->lineHeight);
     previousGlyphIndex = 0;
   }
 
