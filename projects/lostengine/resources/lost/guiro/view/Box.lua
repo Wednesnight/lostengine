@@ -13,6 +13,9 @@ function Box:constructor(args)
   if t.title and self.titleLabel then
     self.titleLabel:text(t.title)
   end
+  if t.clip and self.contentView then
+    self.contentView:clip(t.clip)
+  end
 end
 
 function Box:addSubview(view,forceSubview)
