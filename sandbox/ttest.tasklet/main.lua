@@ -43,10 +43,11 @@ function startup()
     lost.guiro.view.Label
     {
       text=t2,
---      color=Color(1,1,1),
---      shadow=true,
+      color=Color(1,1,1),
+      shadow=true,
       shadowColor=Color(1,0,0),
-      shadowOffset=Vec2(1,-1)      
+      shadowOffset=Vec2(1,-1),
+      breakMode="word"    
     }
   }
 end
