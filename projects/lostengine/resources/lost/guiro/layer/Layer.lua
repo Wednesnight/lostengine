@@ -24,6 +24,7 @@ function Layer:constructor(args)
   self.sublayers = {}
 	self.z = 0
 	
+	if t.hidden then self:hidden(t.hidden) end
 	if t.bounds then 
 	  self:bounds(Bounds(unpack(t.bounds)))
 	else
