@@ -30,6 +30,20 @@ public:
   void renderAllPhysicalLines(const RenderedTextPtr& target);
 
   typedef fhtagn::text::utf32_string Utf32String;
+  struct WordPos
+  {
+    WordPos() : size(0), pos(0), prevchar(0) {}
+    float size; // size of the segment up to but not including the current char
+    uint32_t pos; // the start or end of the current word
+    uint32_t prevchar; // for kerning/advance calculation
+  };
+
+  struct Word
+  {
+    WordPos start;
+    WordPos end;
+    float size() {return end.size;}
+  };
 
 // =========================================
 private:  
@@ -56,6 +70,12 @@ private:
   void breakModeNone();
   void breakModeChar();
   void breakModeWord();
+  
+  
+  WordPos skipToWordStart(const WordPos& fromHere, const Range& lineRange);
+  WordPos skipToWordEnd(const WordPos& fromHere, const Range& lineRange);
+  Word skipToNextWord(const Word& curword, const Range& lineRange);
+  
 };
 }
 }
