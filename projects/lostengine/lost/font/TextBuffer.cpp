@@ -5,6 +5,7 @@
 #include <boost/algorithm/string.hpp>
 #include "lost/common/Logger.h"
 #include "lost/font/Render.h"
+#include "lost/font/Glyph.h"
 
 namespace lost
 {
@@ -101,11 +102,68 @@ void TextBuffer::resetLogicalLines(const std::string& inText)
 void TextBuffer::resetPhysicalLines()
 {
   _physicalLines.clear();
-  for(std::vector<LogicalLine>::iterator pos=_logicalLines.begin(); pos!=_logicalLines.end(); ++pos)
-  {
-    _physicalLines.push_back(pos->line);
+  switch(_breakMode)
+  { 
+    case BREAKMODE_NONE:
+    {
+      for(std::vector<LogicalLine>::iterator pos=_logicalLines.begin(); pos!=_logicalLines.end(); ++pos)
+      {
+        _physicalLines.push_back(pos->line);
+      }
+      break;
+    }
+    case BREAKMODE_CHAR:
+    {
+      DOUT("--- break char");
+      for(std::vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
+      {
+        Range& lr = line->line;
+        if(lr.begin == lr.end) // skip empty lines
+        {
+          DOUT("skipping empty");
+          _physicalLines.push_back(lr); // doesn't matter what we push here as long as begin == end
+          continue;
+        }
+        uint32_t prevChar = 0;
+        float sum = 0.0f;
+        Range curRange;
+        for(uint32_t i=lr.begin; i<lr.end; ++i)
+        {
+          uint32_t curChar = _text[i];
+          float adv = 0.0f;
+          GlyphPtr glyph = _font->glyph(curChar);
+          if(glyph) { adv = _font->kerningOffset(prevChar, curChar) + glyph->advance; }
+          prevChar = curChar;
+          if((sum+adv)<_width)
+          {
+            curRange.end++;
+            sum+=adv;
+            if(i == lr.end-1)
+            {
+              DOUT("adding short part"<<curRange.begin<<" "<<curRange.end);
+              _physicalLines.push_back(Range(lr.begin+curRange.begin, lr.begin+curRange.end));
+            }
+          }
+          else
+          {
+            DOUT("adding full part "<<curRange.begin<<" "<<curRange.end);
+            _physicalLines.push_back(Range(lr.begin+curRange.begin, lr.begin+curRange.end));
+            curRange.begin = curRange.end;
+            curRange.end++;
+            prevChar = 0;
+            if(glyph) { sum = _font->kerningOffset(prevChar, curChar) + glyph->advance; }
+            else
+              sum = 0.0f;
+          }
+        }
+      }
+      break;
+    }
+    case BREAKMODE_WORD:
+    {
+      break;
+    }
   }
-//  DOUT("physical lines: "<<_physicalLines.size());
 }
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)

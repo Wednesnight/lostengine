@@ -40,7 +40,6 @@ private:
   {
     LogicalLine(const Range& r) : line(r) {}
     Range line;
-    std::vector<Range> physicalLines;
   };
 
   std::vector<LogicalLine>  _logicalLines;

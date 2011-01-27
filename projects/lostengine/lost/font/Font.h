@@ -15,7 +15,7 @@ struct Font
   virtual ~Font();
   
   virtual bool hasKerning() = 0;
-  virtual void prepareGlyphs(const fhtagn::text::utf32_string& inText) = 0; // renders glyphs if missing from atlas, rebuilds atlas if required
+//  virtual void prepareGlyphs(const fhtagn::text::utf32_string& inText) = 0; // renders glyphs if missing from atlas, rebuilds atlas if required
   virtual GlyphPtr glyph(uint32_t utf32character) = 0;
   virtual float kerningOffset(uint32_t previousChar, uint32_t currentChar) = 0;
 
