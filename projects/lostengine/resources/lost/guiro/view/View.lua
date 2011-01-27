@@ -35,6 +35,8 @@ function View:constructor(args)
   self.captureEventDispatcher = EventDispatcher()
   self.targetEventDispatcher = EventDispatcher()
   self.bubbleEventDispatcher = EventDispatcher()
+
+  if t.hidden ~= nil then self:hidden(t.hidden) end
   if t.bounds ~=nil then
     self:bounds(lost.guiro.Bounds(unpack(t.bounds)))
   else
