@@ -5,13 +5,10 @@ local exampleHeight=40
 
 return lost.guiro.view.View
 {
-  id="layers_text",
+  id="layers_text_fonts",
   bounds = {0,0,"1","1"},
   sublayers =
   {
-    lost.guiro.layer.Text{bounds={"center", "top",200,textHeight},font={"Vera",12},
-          text="One line of text with a simple color and a font. Text-Mesh can be aligned within the bounds of the layer.",
-          color=Color(0,0,0)},
     lost.guiro.layer.Layer
     {      
       bounds={10,10,{"1",-20},{"1",-textHeight}},
