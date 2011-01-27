@@ -25,6 +25,7 @@ function Window:constructor(args)
   self.contentView = nil -- mandatory,must be set by theme or no subviews will be added into content area
   self.titleLabel = nil -- optional, 
   lost.guiro.view.View.constructor(self, args)
+  self.focusable = true
   self.id = t.id or "window"
   if t.movable then
     self.movable = t.movable

@@ -27,6 +27,7 @@ local MatrixTranslation = lost.math.MatrixTranslation
 function View:constructor(args)
 	self.layer = lost.guiro.layer.Layer()
   local t = args or {}
+  self.focusable = false
   self.id = t.id or "view"
   self.rect = lost.math.Rect()
 	self.z = 0

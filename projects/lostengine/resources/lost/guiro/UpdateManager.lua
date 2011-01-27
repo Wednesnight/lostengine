@@ -16,6 +16,25 @@ function UpdateManager:constructor()
   self._viewUpdateQ = { set={}, list={}}
   self._viewLayoutQ = { set={}, list={}}
   self._viewDisplayQ = { set={}, list={}}
+  
+  self.lupdateFunc = function(layer) layer:update() end
+  self.lupdateLayoutFunc = function(layer) layer:updateLayout() end
+  self.lapplyLayoutfunc = function(layer) 
+                                        if layer.layout then 
+                                          layer.layout:apply(layer, layer.sublayers)
+                                        end 
+                                    end
+  self.lupdateDisplayFunc = function(layer) layer:updateDisplay() end
+  
+  
+  self.vupdateFunc = function(view) view:update() end
+  self.vupdateLayoutFunc = function(view) view:updateLayout() end
+  self.vapplyLayoutfunc = function(view)
+                                     if view.layout then
+                                       view.layout:apply(view, view.subviews)
+                                     end
+                                   end
+  self.vupdateDisplayFunc = function(view) view:updateDisplay() end
 end
 
 local function depthSortFunc(a,b)
@@ -35,39 +54,29 @@ function UpdateManager:processQ(q, f, doSort, doClear)
 end
 
 function UpdateManager:processLayerUpdates()
-  self:processQ(self._layerUpdateQ, function(layer) layer:update() end, true, true)
+  self:processQ(self._layerUpdateQ, self.lupdateFunc, true, true)
 end
 
 function UpdateManager:processLayerLayoutUpdates()
-  self:processQ(self._layerLayoutQ, function(layer) layer:updateLayout() end, true, false)
-  self:processQ(self._layerLayoutQ, function(layer) 
-                                        if layer.layout then 
-                                          layer.layout:apply(layer, layer.sublayers)
-                                        end 
-                                    end, false, true)
+  self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true, false)
+  self:processQ(self._layerLayoutQ, self.lapplyLayoutfunc, false, true)
 end
 
 function UpdateManager:processLayerDisplayUpdates()
-  self:processQ(self._layerDisplayQ, function(layer) layer:updateDisplay() end, true, true)
+  self:processQ(self._layerDisplayQ, self.lupdateDisplayFunc, true, true)
 end
 
 function UpdateManager:processViewUpdates()
-  self:processQ(self._viewUpdateQ, function(view) view:update() end, true, true)
+  self:processQ(self._viewUpdateQ, self.vupdateFunc, true, true)
 end
 
 function UpdateManager:processViewLayoutUpdates()
-  self:processQ(self._viewLayoutQ, function(view) 
-                                       view:updateLayout()
-                                   end, true, false)
-  self:processQ(self._viewLayoutQ, function(view)
-                                     if view.layout then
-                                       view.layout:apply(view, view.subviews)
-                                     end
-                                   end, false, true)
+  self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true, false)
+  self:processQ(self._viewLayoutQ, self.vapplyLayoutfunc, false, true)
 end
 
 function UpdateManager:processViewDisplayUpdates()
-  self:processQ(self._viewDisplayQ, function(view) view:updateDisplay() end, true, true)
+  self:processQ(self._viewDisplayQ, self.vupdateDisplayFunc, true, true)
 end
 
 function UpdateManager:update()
