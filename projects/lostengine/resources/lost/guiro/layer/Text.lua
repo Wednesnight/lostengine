@@ -76,12 +76,13 @@ end
 
 function Text:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
+  self:needsDisplay()
   self:updateAlign()
 end
 
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
-  self.buffer:reset(self._text, self._font, 0,0)
+  self.buffer:reset(self._text, self._font, 1,self.rect.width)
   if self._font then
 --      lost.font.render(self._text, self._font, self.mesh)
       self.buffer:renderAllPhysicalLines(self.mesh)

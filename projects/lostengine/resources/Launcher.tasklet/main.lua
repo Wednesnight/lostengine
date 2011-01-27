@@ -30,7 +30,8 @@ function startup()
           color=Color(0,0,0),
           shadow=true,
           shadowOffset=Vec2(2,-2),
-          shadowColor=Color(0,0,0,.3)},
+          shadowColor=Color(0,0,0,.3),
+          },
         rr{id="leftCutout",bounds={"left", "center", ".10", ".4"},color=Color(1, 1, 1),radius=8,filled=true},
         rr{id="rightCutout",bounds={"right", "center", ".10", ".4"},color=Color(1, 1, 1),radius=8,filled=true},
       }

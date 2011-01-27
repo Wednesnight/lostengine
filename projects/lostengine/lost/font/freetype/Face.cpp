@@ -46,6 +46,7 @@ Face::Face(LibraryPtr inLibrary,
     throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
   }
   sizeInPoints = inSizeInPoints;
+  _hasKerning = FT_HAS_KERNING(mFace) != 0;
 }
 
 Face::~Face()
@@ -95,7 +96,7 @@ float Face::linegap() { return height() - (ascender() - descender()); }
 
 bool Face::hasKerning()
 {
-  return FT_HAS_KERNING(mFace) != 0;
+  return _hasKerning;
 }
 
 int32_t Face::kerningOffset(uint32_t& previousGlyphIndex, uint32_t currentGlyph)

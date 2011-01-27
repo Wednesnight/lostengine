@@ -41,6 +41,7 @@ namespace lost
         // initially, previousGlyphIndex should be set to 0 if you are starting a new string.
         int32_t kerningOffset(uint32_t& previousGlyphIndex, uint32_t currentGlyph);
       private:
+        bool        _hasKerning;
         float       _linegap;
         float       _height;
         float       _baselineDistance;

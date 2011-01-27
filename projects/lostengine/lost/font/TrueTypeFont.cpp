@@ -111,7 +111,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   }  
 }
     
-void TrueTypeFont::prepareGlyphs(const fhtagn::text::utf32_string& inText)
+/*void TrueTypeFont::prepareGlyphs(const fhtagn::text::utf32_string& inText)
 {
   // render glyphs if required
   uint32_t renderedGlyphs = 0;
@@ -129,7 +129,7 @@ void TrueTypeFont::prepareGlyphs(const fhtagn::text::utf32_string& inText)
   // drawables and non-darwables. This is important so we don't create geometry for characters
   // that don't need any (spaces)
   flagDrawableChars(inText);
-}
+}*/
 
 void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
 {
@@ -149,12 +149,34 @@ void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
 }
 GlyphPtr TrueTypeFont::glyph(uint32_t utf32character)
 {
-  return char2glyph[utf32character];
+  GlyphPtr result = char2glyph[utf32character];
+  if(!result)
+  {
+    if(renderGlyph(utf32character))
+    {
+      rebuildTextureAtlas();
+    }
+    result = char2glyph[utf32character];
+    if(result && result->bitmap && (result->bitmap->width > 0) && (result->bitmap->height > 0))
+    {
+      result->drawable = true;
+    }
+    else
+    {
+      if(result)
+        result->drawable = false;
+    }
+  }
+  return result;
 }
 
 float TrueTypeFont::kerningOffset(uint32_t previousChar, uint32_t currentChar)
 {
-  return face->kerningOffset(previousChar, currentChar);
+  float result = 0.0f;
+  if(face->hasKerning()) {
+    face->kerningOffset(previousChar, currentChar);
+  }
+  return result;
 }
 
 bool TrueTypeFont::hasKerning()
