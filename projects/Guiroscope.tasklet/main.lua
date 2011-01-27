@@ -17,9 +17,9 @@ function startup()
       bounds={"right","bottom",140,70}
     }
   }
---  ui.layer:print()
---  ui:printSubviews()
---  ui.layer.renderNode:print()
+--  lost.guiro.ui().layer:print()
+--  lost.guiro.ui():printSubviews()
+--  lost.guiro.ui().layer.renderNode:print()
 end
 
 --function update()
