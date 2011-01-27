@@ -213,9 +213,9 @@ end
 
 function View:hidden(...)
 	if arg.n > 0 then
-		self.layer.renderNode.active = not arg[1]
+		self.layer:hidden(arg[1])
 	else
-		return not self.layer.renderNode.active or (self._superview ~= nil and self._superview:hidden())
+		return (self.layer:hidden()) or ((self._superview ~= nil) and self._superview:hidden())
 	end
 end
 

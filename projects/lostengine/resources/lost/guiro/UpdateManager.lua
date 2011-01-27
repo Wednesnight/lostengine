@@ -23,6 +23,7 @@ local function depthSortFunc(a,b)
 end
 
 function UpdateManager:processQ(q, f, doSort, doClear)
+--  log.debug("Q elems: "..tostring(#(q.list)))
   if doSort then table.sort(q.list, depthSortFunc) end
   for k,v in pairs(q.list) do
     f(v)

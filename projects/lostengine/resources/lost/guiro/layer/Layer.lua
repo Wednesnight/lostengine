@@ -224,7 +224,7 @@ function Layer:hidden(...)
   if arg.n>=1 then
     self.renderNode.active = not arg[1]
   else
-    return not self.renderNode.active
+    return (not self.renderNode.active) or ((self._superlayer ~= nil) and self._superlayer:hidden())
   end
 end
 
