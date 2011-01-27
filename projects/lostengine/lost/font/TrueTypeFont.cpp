@@ -184,5 +184,16 @@ bool TrueTypeFont::hasKerning()
   return face->hasKerning();
 }
 
+float TrueTypeFont::characterAdvance(uint32_t previousChar, uint32_t currentChar)
+{
+  float result = 0.0f;
+  GlyphPtr g = this->glyph(currentChar);
+  if(g)
+  {
+    result = g->advance + kerningOffset(previousChar, currentChar);
+  }
+  return result;
+}
+
 }  
 }

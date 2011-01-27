@@ -123,9 +123,7 @@ void TextBuffer::breakModeChar()
     for(uint32_t i=lr.begin; i<lr.end; ++i)
     {
       uint32_t curChar = _text[i];
-      float adv = 0.0f;
-      GlyphPtr glyph = _font->glyph(curChar);
-      if(glyph) { adv = _font->kerningOffset(prevChar, curChar) + glyph->advance; }
+      float adv = _font->characterAdvance(prevChar, curChar);
       prevChar = curChar;
       if((sum+adv)<_width)
       {
@@ -142,9 +140,7 @@ void TextBuffer::breakModeChar()
         curRange.begin = curRange.end;
         curRange.end++;
         prevChar = 0;
-        if(glyph) { sum = _font->kerningOffset(prevChar, curChar) + glyph->advance; }
-        else
-          sum = 0.0f;
+        sum = _font->characterAdvance(prevChar, curChar);
         // if the trigger was the last character, we have to add it since the loop will now finish and it would be dropped
         if(i == lr.end-1)
         {
@@ -171,6 +167,54 @@ bool isWhiteSpace(uint32_t c)
   return result;
 }
 
+TextBuffer::WordPos TextBuffer::skipToWordStart(const WordPos& fromHere, const Range& lineRange)
+{
+  WordPos result = fromHere;
+  while(isWhiteSpace(_text[result.pos]) && (result.pos<lineRange.end))
+  {
+    result.size += _font->characterAdvance(result.prevchar, _text[result.pos]);
+    ++result.pos;
+  }
+  return result;
+}
+
+TextBuffer::WordPos TextBuffer::skipToWordEnd(const WordPos& fromHere, const Range& lineRange)
+{
+  WordPos result = fromHere;
+  while(!isWhiteSpace(_text[result.pos]) && (result.pos<lineRange.end))
+  {
+    result.size += _font->characterAdvance(result.prevchar, _text[result.pos]);
+    ++result.pos;
+  }
+  return result;
+}
+
+// assuming skip was started in range and we only need to check end
+bool inRange(const TextBuffer::WordPos& pos, const Range& r)
+{
+  return pos.pos < r.end;
+}
+
+bool inRange(const TextBuffer::Word& w, const Range& r)
+{
+  return inRange(w.start, r) && inRange(w.end, r);
+}
+
+TextBuffer::Word TextBuffer::skipToNextWord(const Word& curword, const Range& lineRange)
+{
+  Word result;
+  
+  result.start = skipToWordStart(curword.end, lineRange);
+  result.end = skipToWordEnd(result.start, lineRange);
+  
+  return result;
+}
+
+bool terminalWord(const TextBuffer::Word& w, const Range& r)
+{
+  return ((w.start.pos == r.end) && (w.end.pos == r.end));
+}
+
 void TextBuffer::breakModeWord()
 {
   for(std::vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
@@ -181,9 +225,24 @@ void TextBuffer::breakModeWord()
       _physicalLines.push_back(lr); // doesn't matter what we push here as long as begin == end
       continue;
     }
-    for(uint32_t i=lr.begin; i<lr.end; ++i)
-    {
-    }
+  
+    uint32_t segmentstart = lr.begin;
+    Word prevword;
+    prevword.start.pos = lr.begin;
+    prevword.end.pos = lr.begin;
+    Word curword;
+    do {
+      curword = skipToNextWord(prevword, lr);
+      if((curword.size() > _width) || (terminalWord(curword, lr)))
+      {
+        _physicalLines.push_back(Range(segmentstart, prevword.end.pos));
+        segmentstart = curword.start.pos;
+        curword.end.size -= curword.start.size; // reset size for further line measurement
+        curword.start.size = 0;
+      }
+      prevword = curword;
+    } while (!terminalWord(curword, lr));
+
   }
 }
 

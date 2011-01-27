@@ -23,10 +23,10 @@ struct TrueTypeFont : Font
                uint32_t inSizeInPoints);
   virtual ~TrueTypeFont();
   
-//  void prepareGlyphs(const fhtagn::text::utf32_string& inText); // renders glyphs if missing from atlas, rebuilds atlas if required
   GlyphPtr glyph(uint32_t utf32character);
   bool hasKerning();
   float kerningOffset(uint32_t previousChar, uint32_t currentChar);
+  float characterAdvance(uint32_t previousChar, uint32_t currentChar); 
   
 
 private:
