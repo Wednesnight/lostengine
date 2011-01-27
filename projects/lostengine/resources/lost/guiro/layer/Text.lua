@@ -12,6 +12,8 @@ local Vec3 = lost.math.Vec3
 local MatrixTranslation = lost.math.MatrixTranslation
 local Color = lost.common.Color
 
+local breakModes = {none=0, char=1, word=2}
+
 -- valid params:
 -- * all layer params
 -- * font: must be a table with two entries in this order: a string containing a font name known to the fontmanager, a number containing the desired fontsize
@@ -37,6 +39,11 @@ function Text:constructor(args)
   self.renderNode:add(self.drawNode)
   
   if t.font then self:font(t.font) end
+  if t.breakMode then
+    self:breakMode(t.breakMode)
+  else
+    self:breakMode("none")
+  end
   self:text(t.text or "")
   self:color(t.color or Color(0,0,0))
   self:shadow(t.shadow or false)
@@ -82,22 +89,33 @@ end
 
 function Text:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
-  self.buffer:reset(self._text, self._font, 2,self.rect.width)
+  self.buffer:reset(self._text, self._font, breakModes[self._breakMode],self.rect.width)
   if self._font then
---      lost.font.render(self._text, self._font, self.mesh)
       self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
---      lost.font.render(self._text, self._font, self.shadowMesh)
       self.shadowMesh = self.mesh:clone()
       self.shadowMesh.material = self.mesh.material:clone()
       self.shadowMesh.material.color = self._shadowColor
       self.shadowDrawNode.mesh = self.shadowMesh
---      self.buffer:renderPhysicalLine(0, self.shadowMesh)
     end
   else
     log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
   end
   self:updateAlign()
+end
+
+function Text:breakMode(...)
+  if arg.n >= 1 then
+    local bm = arg[1]
+    if (bm == "none") or (bm=="char") or (bm=="word") then
+      self._breakMode = bm
+    else
+      self._breakMode = "none"
+    end
+    self:needsDisplay()
+  else
+    return self._breakMode
+  end
 end
 
 function Text:text(s)

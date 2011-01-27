@@ -20,6 +20,7 @@ function Label:constructor(args)
   self.textLayer:shadowColor(t.shadowColor or Color(0,0,0,.3))
   self.textLayer:valign(t.valign or "center")
   self.textLayer:halign(t.halign or "center")
+  self.textLayer:breakMode(t.breakMode or "none")
 end
 
 function Label:text(...)
@@ -31,6 +32,14 @@ function Label:text(...)
     else
       return nil
     end
+  end
+end
+
+function Label:breakMode(...)
+  if arg.n >=1 then
+    self.textLayer:breakMode(arg[1])
+  else
+    return self.textLayer:breakMode()
   end
 end
 
