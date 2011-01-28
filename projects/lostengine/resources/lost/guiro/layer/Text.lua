@@ -99,9 +99,9 @@ function Text:updateAlign()
   end
 
   if self._valign == "center" then
-      self.alignedMeshPos.y = self.rect.y+((self.rect.height-(self.mesh.numLines*math.floor(self._font.lineHeight)))/2)+math.abs(self._font.descender)
+      self.alignedMeshPos.y = self.rect.y+((self.rect.height-(self.buffer:numPhysicalLines()*math.floor(self._font.lineHeight)))/2)+math.abs(self._font.descender)
   elseif self._valign == "top" then
-    self.alignedMeshPos.y = self.rect.y+self.rect.height-self.mesh.max.y
+    self.alignedMeshPos.y = self.rect.y+self.rect.height-(self.buffer:numPhysicalLines()*math.floor(self._font.lineHeight))
   elseif self._valign == "bottom" then
     self.alignedMeshPos.y = self.rect.y-self._font.descender+1
   end
