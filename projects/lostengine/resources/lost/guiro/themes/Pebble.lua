@@ -72,6 +72,8 @@ function Pebble:constructor()
 
   self:addStyle("lost.guiro.view.FpsMeter", "default", function(target, args) self:fpsMeter(target, args) end)
 
+  self:addStyle("lost.guiro.view.TextInput", "default", function(target, args) self:textInput(target, args) end)
+
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -1008,4 +1010,15 @@ function Pebble:fpsMeter(target, args)
   target.textLayer = tl
 end
 
+function Pebble:textInput(target, args)
+  local r = lost.guiro.layer.Rect
+  local rr = lost.guiro.layer.RoundedRect
+  local w = 3
+  local focusColor = Color(.4,.6,1)
+  local focusRing = rr{hidden=true,radius=4,bounds={-w,-w,{"1",2*w},{"1",2*w}},filled=false,color=focusColor,width=w}
+  target.layer:addSublayer(focusRing)  
+  target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=true,color=Color(1,1,1)})
+  target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=false,color=Color(0,0,0)})
+  target.focusLayer = focusRing
+end
 
