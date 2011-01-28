@@ -278,5 +278,16 @@ void TextBuffer::setCharacterMetrics(bool v)
   _characterMetrics = v;
 }
 
+uint32_t TextBuffer::numCharsInPhysicalLine(uint32_t lineIndex)
+{
+  uint32_t result = 0;
+  if(lineIndex < _physicalLines.size())
+  {
+    const Range& r = _physicalLines[lineIndex];
+    result = r.end - r.begin;
+  }
+  return result;
+}
+
 }
 }

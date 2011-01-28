@@ -30,6 +30,8 @@ public:
   uint32_t numLogicalLines();
   uint32_t numPhysicalLines();
 
+  uint32_t numCharsInPhysicalLine(uint32_t lineIndex); // returns number of utf32 characters in that line
+
   void renderPhysicalLine(uint32_t num, const RenderedTextPtr& target);
   void renderAllPhysicalLines(const RenderedTextPtr& target);
 

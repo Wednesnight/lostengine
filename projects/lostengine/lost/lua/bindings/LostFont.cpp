@@ -114,6 +114,7 @@ namespace lost
           .def("reset", &TextBuffer::reset)
           .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
           .def("renderAllPhysicalLines", &TextBuffer::renderAllPhysicalLines)
+          .def("numCharsInPhysicalLine", &TextBuffer::numCharsInPhysicalLine)
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
         ]
       ];
