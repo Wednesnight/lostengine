@@ -23,6 +23,10 @@ public:
              BreakMode inBreakMode,
              float width);
   
+  // activating character metrics will add additional character rect information to the rendered mesh
+  bool getCharacterMetrics();
+  void setCharacterMetrics(bool v);
+    
   uint32_t numLogicalLines();
   uint32_t numPhysicalLines();
 
@@ -62,6 +66,7 @@ private:
   BreakMode                 _breakMode;
   Utf32String               _text;
   float                     _width;
+  bool                      _characterMetrics;
   
   void resetLogicalLines(const std::string& inText);
   void resetPhysicalLines();

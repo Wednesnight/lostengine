@@ -18,6 +18,7 @@ namespace ftxt = fhtagn::text;
 TextBuffer::TextBuffer()
 {
   _breakMode = BREAKMODE_NONE;
+  _characterMetrics = false;
 }
 
 TextBuffer::~TextBuffer()
@@ -259,12 +260,22 @@ void TextBuffer::resetPhysicalLines()
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
 {
-  render(_text, _physicalLines[num], _font, target);
+  render(_text, _physicalLines[num], _font, target, _characterMetrics);
 }
 
 void TextBuffer::renderAllPhysicalLines(const RenderedTextPtr& target)
 {
-  render(_text, _physicalLines, _font, target);
+  render(_text, _physicalLines, _font, target, _characterMetrics);
+}
+
+bool TextBuffer::getCharacterMetrics()
+{
+  return _characterMetrics;
+}
+
+void TextBuffer::setCharacterMetrics(bool v)
+{
+  _characterMetrics = v;
 }
 
 }
