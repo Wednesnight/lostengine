@@ -164,10 +164,8 @@ function EventManager:propagateUpDownEvents(viewStack, event)
   elseif event.type == lost.guiro.event.MouseEvent.MOUSE_UP then
     local oldidx = #(self.previousMouseClickStack)
     local newidx = #viewStack
---    local idx = math.max(#viewStack, #(self.previousMouseClickStack))
     local oldView = self.previousMouseClickStack[oldidx] -- the lowermost view is the target
     local newView = viewStack[newidx] -- the lowermost view is the target
---    log.debug("oldView: "..tostring(oldView).." newview:"..tostring(newView))
     if oldView and oldView ~= newView then
       event.target = oldView
       event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
@@ -186,35 +184,33 @@ function EventManager:propagateUpDownEvents(viewStack, event)
   end
 end
 
-function EventManager:propagateFocusEvents(viewStack, event)
-  if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
-    local focusEvent = lost.guiro.event.FocusEvent()
-    local maxi = math.max(#viewStack, #(self.previousFocusStack))
-    local oldView = nil
-    local newView = nil
-    local i = 1
-    while i <= maxi do
-      oldView = self.previousFocusStack[i]
-      newView = viewStack[i]
-      if oldView ~= newView then
-        self.focusChanged = true
-        if oldView and oldView.focusable then
-          oldView.focused = false
-          focusEvent.target = oldView
-          focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
-          self:propagateEvent(self.previousFocusStack, focusEvent, i)
-        end
-        if newView and newView.focusable then
-          newView.focused = true
-          focusEvent.target = newView
-          focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_RECEIVED
-          self:propagateEvent(viewStack, focusEvent, i)
-        end
+function EventManager:propagateFocusEvents(viewStack)
+  local focusEvent = lost.guiro.event.FocusEvent()
+  local maxi = math.max(#viewStack, #(self.previousFocusStack))
+  local oldView = nil
+  local newView = nil
+  local i = 1
+  while i <= maxi do
+    oldView = self.previousFocusStack[i]
+    newView = viewStack[i]
+    if oldView ~= newView then
+      self.focusChanged = true
+      if oldView and oldView.focusable then
+        oldView.focused = false
+        focusEvent.target = oldView
+        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
+        self:propagateEvent(self.previousFocusStack, focusEvent, i)
       end
-      i = i + 1
+      if newView and newView.focusable then
+        newView.focused = true
+        focusEvent.target = newView
+        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_RECEIVED
+        self:propagateEvent(viewStack, focusEvent, i)
+      end
     end
-    self.previousFocusStack = viewStack
+    i = i + 1
   end
+  self.previousFocusStack = viewStack
 end
 
 
@@ -230,7 +226,7 @@ function EventManager:propagateMouseEvent(rootView, event)
   if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
     self:propagateUpDownEvents(viewStack, mouseevent)
     if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
-      self:propagateFocusEvents(viewStack, mouseevent)
+      self:propagateFocusEvents(viewStack)
     end  
   -- scroll, move
   else
@@ -293,4 +289,54 @@ function EventManager:focusedView()
     self.focusChanged = false
   end
   return self.currentFocusedView
+end
+
+function EventManager:receiveFocus(view)
+  if (view ~= nil) and view.focusable then -- view must be focusable
+    -- find stack to new view
+    local reversedStack = {}
+    local v = view
+    repeat
+      table.insert(reversedStack, v)
+      v = v:superview()
+    until v == nil
+    -- reverse it because other functions expect it top down, not bottom up
+    local viewstack = {}
+    for i=#reversedStack,1,-1 do
+      table.insert(viewstack,reversedStack[i])
+    end
+    -- use the regular function to sync the stack and send events
+    self:propagateFocusEvents(viewstack)
+  end
+end
+
+function EventManager:loseFocus(view)
+  -- check if view that wants to lose focus is in focus stack
+  local inStack = false
+  local stackidx = 0
+  for k,v in ipairs(self.previousFocusStack) do
+    if rawequal(v,view) then
+      inStack = true
+      stackidx = k
+    end
+  end
+  
+  -- if it was found in the stack 
+  if inStack then
+    -- make the view and every view beneath it lose the focus
+    local focusEvent = lost.guiro.event.FocusEvent()
+    for i=stackidx,#self.previousFocusStack do
+      local currentView = self.previousFocusStack[i]
+      if currentView.focused then
+        currentView.focused = false
+        focusEvent.target = currentView
+        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
+        self:propagateEvent(self.previousFocusStack, focusEvent, i)    
+      end
+    end
+    -- remove the view and every view beneath it from the focus stack
+    for i=#self.previousFocusStack,stackidx,-1 do
+      table.remove(self.previousFocusStack,i)
+    end
+  end
 end

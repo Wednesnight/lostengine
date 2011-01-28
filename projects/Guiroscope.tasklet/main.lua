@@ -1,4 +1,12 @@
 
+function focusHandler(event)
+  log.debug(event.type.." "..event.target.id)
+end
+
+function mouseDownHandler(event)
+  log.debug("//////////////////////////////////")
+end
+
 function startup()
   require("lost.guiro")
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
@@ -17,6 +25,11 @@ function startup()
       bounds={"right","bottom",140,70}
     }
   }
+  
+  lost.guiro.ui():addEventListener("mouseDown", mouseDownHandler)
+  lost.guiro.ui():addEventListener("focusReceived", focusHandler)
+  lost.guiro.ui():addEventListener("focusLost", focusHandler)
+  
 --  lost.guiro.ui().layer:print()
 --  lost.guiro.ui():printSubviews()
 --  lost.guiro.ui().layer.renderNode:print()
