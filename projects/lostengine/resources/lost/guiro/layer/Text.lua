@@ -54,6 +54,7 @@ function Text:constructor(args)
   self:characterMetrics(t.characterMetrics or false)
   self:needsDisplay()
   self.alignedMeshPos = lost.math.Vec3()
+  self:cursorPos(t.cursorPos or Vec2(0,0))
 end
 
 function Text:characterMetrics(...)
@@ -61,6 +62,16 @@ function Text:characterMetrics(...)
     self.buffer.characterMetrics = arg[1]
   else
     return self.buffer.characterMetrics
+  end
+end
+
+function Text:cursorPos(...)
+  if arg.n >= 1 then
+    self._cursorPos = arg[1]
+    self:needsLayout()
+    if self.cursorLayer then self.cursorLayer:needsLayout() end
+  else
+    return self._cursorPos
   end
 end
 
@@ -88,18 +99,32 @@ function Text:updateAlign()
 
   self.mesh.transform = MatrixTranslation(self.alignedMeshPos)  
   self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))
+  
+  if self.cursorLayer then
+    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
+    log.debug("cursor repos, chars "..tostring(nc))
+    local r = self.mesh:characterRect(self._cursorPos.y, math.min(self._cursorPos.x,nc-1))
+    log.debug("cursor cr "..tostring(r))
+    local x = r.x+self.alignedMeshPos.x-self.rect.x
+    log.debug("setting cursor to x "..tostring(x))
+    self.cursorLayer:x(x)
+    self.cursorLayer:y(r.y+self.alignedMeshPos.y-self.rect.y+self._font.descender)
+  end
 end
 
 function Text:updateLayout()
+  log.debug("layout")
   lost.guiro.layer.Layer.updateLayout(self)
   self:needsDisplay()
   self:updateAlign()
 end
 
 function Text:updateDisplay()
+  log.debug("display")
   lost.guiro.layer.Layer.updateDisplay(self)
   self.buffer:reset(self._text, self._font, breakModes[self._breakMode],self.rect.width)
   if self._font then
+      log.debug("rebuilding text mesh")
       self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
       self.shadowMesh = self.mesh:clone()
@@ -190,6 +215,7 @@ end
 -- returns the rect of the specified character within the text layer
 -- mesh alignment is taken into account
 function Text:characterRect(lineIndex, charIndex)
+  
   local result = self.mesh:characterRect(lineIndex, charIndex)
   result.x = result.x + self.alignedMeshPos.x
   result.y = result.y + self.alignedMeshPos.y
