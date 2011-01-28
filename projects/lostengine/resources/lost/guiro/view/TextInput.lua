@@ -12,11 +12,10 @@ function TextInput:constructor(args)
   self:addEventListener("keyDown", function(event) self:keyDown(event) end)
   self.textLayer:text(args.text or "")
   self:valign(args.valign or "center")
-  self:halign(args.halign or "left")
-  
-  self.insertPos = 0
+  self:halign(args.halign or "center")  
   self:needsDisplay()
   self:needsLayout()
+  self.textLayer:cursorPos(lost.math.Vec2(0,0))
 end
 
 function TextInput:valign(v)
@@ -44,8 +43,11 @@ function TextInput:text(...)
 end
 
 function TextInput:keyDown(event)
-  self.insertPos = self.insertPos + 1
-  self.textLayer:cursorPos(lost.math.Vec2(self.insertPos-1,0))
-  self.textLayer:appendText(event.character)
+  if event.key == lost.application.K_RIGHT then self.textLayer:cursorIncX() 
+  elseif event.key == lost.application.K_LEFT then self.textLayer:cursorDecX()
+  elseif string.len(event.character) > 0 then
+    self.textLayer:appendText(event.character)
+    self.textLayer:cursorIncX()
+  end
 end
 

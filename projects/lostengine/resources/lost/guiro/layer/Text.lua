@@ -46,7 +46,7 @@ function Text:constructor(args)
   end
   self._dirtyText = false
   self._lastBuildWidth = 0
-  self:text(t.text or "")
+  self:text(t.text or " ")
   self:color(t.color or Color(0,0,0))
   self:shadow(t.shadow or false)
   self:shadowOffset(t.shadowOffset or Vec2(1,1))
@@ -56,7 +56,7 @@ function Text:constructor(args)
   self:characterMetrics(t.characterMetrics or false)
   self:needsDisplay()
   self.alignedMeshPos = lost.math.Vec3()
-  self:cursorPos(t.cursorPos or Vec2(0,0))
+  self:cursorPos(Vec2(0,0))
 end
 
 function Text:characterMetrics(...)
@@ -75,6 +75,16 @@ function Text:cursorPos(...)
   else
     return self._cursorPos
   end
+end
+
+function Text:cursorIncX()
+  self._cursorPos.x = self._cursorPos.x + 1
+  self:needsLayout()
+end
+
+function Text:cursorDecX()
+  self._cursorPos.x = self._cursorPos.x - 1
+  self:needsLayout()
 end
 
 function Text:updateAlign()
@@ -105,14 +115,28 @@ end
 
 function Text:updateCursor()
   if self.cursorLayer then
-    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
---    log.debug("cursor repos, chars "..tostring(nc))
-    local r = self.mesh:characterRect(self._cursorPos.y, math.min(self._cursorPos.x,nc-1))
---    log.debug("cursor cr "..tostring(r))
-    local x = r.x+self.alignedMeshPos.x-self.rect.x
---    log.debug("setting cursor to x "..tostring(x))
+    local pl = self.buffer:numPhysicalLines()
+    -- clip cursor position to allowed range of current line
+    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y) -- clip y for real y movement 
+    
+    if self._cursorPos.x < 0 then self._cursorPos.x = 0 end
+    if self._cursorPos.x > nc then self._cursorPos.x = nc end
+--    log.debug("clipped cpos: "..tostring(self._cursorPos.x))
+    local lh = self._font.lineHeight
+    local x = 0
+    local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
+    if nc == 0 then x = self._halign 
+    elseif nc > 0 and self._cursorPos.x == nc then 
+      r = self.mesh:characterRect(self._cursorPos.y, nc-1)
+--      log.debug("--"..tostring(r))
+      x = r.x+self.alignedMeshPos.x-self.rect.x+r.width
+    else x = r.x+self.alignedMeshPos.x-self.rect.x end
+--    log.debug("x: "..tostring(x).." nc:"..tostring(nc))
+
     self.cursorLayer:x(x)
-    self.cursorLayer:y(r.y+self.alignedMeshPos.y-self.rect.y+self._font.descender)
+    self.cursorLayer:y(self.alignedMeshPos.y+(pl*lh)-lh-self.rect.y+self._font.descender)
+    self.cursorLayer:height(lh)
+    self.cursorLayer:needsUpdate()
   end
 end
 

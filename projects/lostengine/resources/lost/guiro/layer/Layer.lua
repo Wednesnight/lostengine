@@ -66,9 +66,24 @@ function Layer:y(v)
   self:needsLayout()
 end
 
+function Layer:width(v)
+  self._bounds.width = lost.guiro.Bounds.decodeEntry(3,v)
+  self:needsLayout()
+end
+
+function Layer:height(v)
+  self._bounds.height = lost.guiro.Bounds.decodeEntry(4,v)
+  self:needsLayout()
+end
+
 function Layer:pos(xv,yv)
   self:x(xv)
   self:y(yv)
+end
+
+function Layer:size(wv,hv)
+  self:width(wv)
+  self:height(hv)
 end
 
 function Layer:superRect()

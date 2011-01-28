@@ -115,6 +115,8 @@ namespace lost
           .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
           .def("renderAllPhysicalLines", &TextBuffer::renderAllPhysicalLines)
           .def("numCharsInPhysicalLine", &TextBuffer::numCharsInPhysicalLine)
+          .def("numLogicalLines", &TextBuffer::numLogicalLines)
+          .def("numPhysicalLines", &TextBuffer::numPhysicalLines)
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
         ]
       ];
