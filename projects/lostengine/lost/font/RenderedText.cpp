@@ -51,8 +51,23 @@ void RenderedText::pushCharacterRect(const math::Rect& cr)
 {
   int32_t line = characterMetrics->size();
   line = std::max(line-1, 0);
-  DOUT("// pushing char metrics rect "<<line<<" "<<characterMetrics->at(line).size()<<" "<<cr);
+//  DOUT("// pushing char metrics rect "<<line<<" "<<characterMetrics->at(line).size()<<" "<<cr);
   characterMetrics->at(line).push_back(cr);
+}
+
+math::Rect RenderedText::characterRect(uint32_t lineIndex, uint32_t charIndex)
+{
+  math::Rect result;
+  
+  if(characterMetrics && (lineIndex < characterMetrics->size()))
+  {
+    if(charIndex < characterMetrics->at(lineIndex).size())
+    {
+      result = characterMetrics->at(lineIndex).at(charIndex);
+    }
+  }
+  
+  return result;
 }
 
 

@@ -53,6 +53,7 @@ function Text:constructor(args)
   self:valign(t.valign or "center")
   self:characterMetrics(t.characterMetrics or false)
   self:needsDisplay()
+  self.alignedMeshPos = lost.math.Vec3()
 end
 
 function Text:characterMetrics(...)
@@ -64,29 +65,29 @@ function Text:characterMetrics(...)
 end
 
 function Text:updateAlign()
-  local textPos = Vec3(self.rect.x, self.rect.y, 0)
+  self.alignedMeshPos = Vec3(self.rect.x, self.rect.y, 0)
 
   if self._halign == "center" then
-    textPos.x = self.rect.x + (self.rect.width-self.mesh.size.width)/2
+    self.alignedMeshPos.x = self.rect.x + (self.rect.width-self.mesh.size.width)/2
   elseif self._halign == "left" then
-    textPos.x = self.rect.x
+    self.alignedMeshPos.x = self.rect.x
   elseif self._halign == "right" then
-    textPos.x = self.rect.x+self.rect.width - self.mesh.size.width
+    self.alignedMeshPos.x = self.rect.x+self.rect.width - self.mesh.size.width
   end
 
   if self._valign == "center" then
-      textPos.y = self.rect.y+((self.rect.height-(self.mesh.numLines*math.floor(self._font.lineHeight)))/2)+math.abs(self._font.descender)
+      self.alignedMeshPos.y = self.rect.y+((self.rect.height-(self.mesh.numLines*math.floor(self._font.lineHeight)))/2)+math.abs(self._font.descender)
   elseif self._valign == "top" then
-    textPos.y = self.rect.y+self.rect.height-self.mesh.max.y
+    self.alignedMeshPos.y = self.rect.y+self.rect.height-self.mesh.max.y
   elseif self._valign == "bottom" then
-    textPos.y = self.rect.y-self._font.descender+1
+    self.alignedMeshPos.y = self.rect.y-self._font.descender+1
   end
   
-  textPos.x = math.floor(textPos.x)
-  textPos.y = math.floor(textPos.y)
+  self.alignedMeshPos.x = math.floor(self.alignedMeshPos.x)
+  self.alignedMeshPos.y = math.floor(self.alignedMeshPos.y)
 
-  self.mesh.transform = MatrixTranslation(textPos)  
-  self.shadowMesh.transform = MatrixTranslation(textPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))
+  self.mesh.transform = MatrixTranslation(self.alignedMeshPos)  
+  self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))
 end
 
 function Text:updateLayout()
@@ -186,4 +187,12 @@ function Text:shadowColor(...)
   end
 end
 
+-- returns the rect of the specified character within the text layer
+-- mesh alignment is taken into account
+function Text:characterRect(lineIndex, charIndex)
+  local result = self.mesh:characterRect(lineIndex, charIndex)
+  result.x = result.x + self.alignedMeshPos.x
+  result.y = result.y + self.alignedMeshPos.y
+  return result
+end
 

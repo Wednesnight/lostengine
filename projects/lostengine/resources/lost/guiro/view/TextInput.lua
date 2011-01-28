@@ -31,4 +31,12 @@ end
 
 function TextInput:keyDown(event)
   self.textLayer:appendText(event.character)
+  self:needsDisplay()
+end
+
+function TextInput:updateDisplay()
+  lost.guiro.view.View.updateDisplay(self)
+  local r = self.textLayer:characterRect(0,0) -- r is now global within OS window context
+  self.cursorLayer:x(r.x-self.textLayer.rect.x) -- which is why we need to subtract our own global x position
+  log.debug("0 0 cursor pos would be "..tostring(r))
 end
