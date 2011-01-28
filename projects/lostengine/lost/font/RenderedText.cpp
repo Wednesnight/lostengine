@@ -63,6 +63,7 @@ math::Rect RenderedText::characterRect(uint32_t lineIndex, uint32_t charIndex)
   {
     if(charIndex < characterMetrics->at(lineIndex).size())
     {
+//      DOUT("cr found");
       result = characterMetrics->at(lineIndex).at(charIndex);
     }
   }
