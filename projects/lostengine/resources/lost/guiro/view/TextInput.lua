@@ -10,6 +10,7 @@ function TextInput:constructor(args)
   self:addEventListener("focusReceived", function(event) self:focusReceived(event) end)
   self:addEventListener("focusLost", function(event) self:focusLost(event) end)
   self:addEventListener("keyDown", function(event) self:keyDown(event) end)
+  if args.font then self.textLayer:font(args.font) end
   self.textLayer:text(args.text or "")
   self:valign(args.valign or "center")
   self:halign(args.halign or "center")  
