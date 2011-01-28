@@ -1018,7 +1018,7 @@ function Pebble:textInput(target, args)
   local focusRing = rr{hidden=true,radius=4,bounds={-w,-w,{"1",2*w},{"1",2*w}},filled=false,color=focusColor,width=w}
   local tmarg=2
   -- bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}}
-  local textLayer = lost.guiro.layer.Text{clip=true,bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}},font={"Vera",12},color=Color(0,0,0)}
+  local textLayer = lost.guiro.layer.Text{characterMetrics=true,clip=true,bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}},font={"Vera",12},color=Color(0,0,0)}
   target.layer:addSublayer(focusRing)  
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=true,color=Color(1,1,1)})
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=false,color=Color(0,0,0)})

@@ -25,6 +25,12 @@ struct RenderedText : mesh::Quad
   lost::math::Vec2 max; // max in pixel of the rendered string. baseline is at y=0
   lost::math::Vec2 size; // min, max, width and height in pixel of the rendered string. baseline is at y=0
   float numLines;
+  
+  void resetCharacterMetrics(); // resets the shared_ptr, clearing all data and adding a new empty vector
+  void pushEmptyCharacterMetricLine(); // pushes a new empty line vector
+  void pushCharacterRect(const math::Rect& cr); // pushes a character rect into the last line
+  
+  lost::shared_ptr<std::vector<std::vector<math::Rect> > > characterMetrics;
 };
 
 }

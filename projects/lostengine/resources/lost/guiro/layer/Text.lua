@@ -51,8 +51,16 @@ function Text:constructor(args)
   self:shadowColor(t.shadowColor or Color(0,0,0,.3))
   self:halign(t.halign or "center")
   self:valign(t.valign or "center")
-
+  self:characterMetrics(t.characterMetrics or false)
   self:needsDisplay()
+end
+
+function Text:characterMetrics(...)
+  if arg.n >=1 then
+    self.buffer.characterMetrics = arg[1]
+  else
+    return self.buffer.characterMetrics
+  end
 end
 
 function Text:updateAlign()

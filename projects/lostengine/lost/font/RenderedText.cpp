@@ -1,4 +1,6 @@
 #include "lost/font/RenderedText.h"
+#include "lost/common/Logger.h"
+#include "lost/math/io.h"
 
 namespace lost
 {
@@ -34,6 +36,25 @@ mesh::MeshPtr RenderedText::clone()
   
   return result;
 }
+
+void RenderedText::resetCharacterMetrics()
+{
+  characterMetrics.reset(new std::vector<std::vector<math::Rect> >);
+}
+
+void RenderedText::pushEmptyCharacterMetricLine()
+{
+  characterMetrics->push_back(std::vector<math::Rect>());
+}
+
+void RenderedText::pushCharacterRect(const math::Rect& cr)
+{
+  int32_t line = characterMetrics->size();
+  line = std::max(line-1, 0);
+  DOUT("// pushing char metrics rect "<<line<<" "<<characterMetrics->at(line).size()<<" "<<cr);
+  characterMetrics->at(line).push_back(cr);
+}
+
 
 }
 }
