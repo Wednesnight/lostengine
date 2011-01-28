@@ -11,6 +11,20 @@ function TextInput:constructor(args)
   self:addEventListener("focusLost", function(event) self:focusLost(event) end)
   self:addEventListener("keyDown", function(event) self:keyDown(event) end)
   self.textLayer:text(args.text or "")
+  self:valign(args.valign or "center")
+  self:halign(args.halign or "left")
+  
+  self.insertPos = 0
+  self:needsDisplay()
+  self:needsLayout()
+end
+
+function TextInput:valign(v)
+  self.textLayer:valign(v)
+end
+
+function TextInput:halign(v)
+  self.textLayer:halign(v)
 end
 
 function TextInput:focusReceived(event)
@@ -30,13 +44,8 @@ function TextInput:text(...)
 end
 
 function TextInput:keyDown(event)
+  self.insertPos = self.insertPos + 1
+  self.textLayer:cursorPos(lost.math.Vec2(self.insertPos-1,0))
   self.textLayer:appendText(event.character)
-  self:needsDisplay()
 end
 
-function TextInput:updateDisplay()
-  lost.guiro.view.View.updateDisplay(self)
-  local r = self.textLayer:characterRect(0,0) -- r is now global within OS window context
-  self.cursorLayer:x(r.x-self.textLayer.rect.x) -- which is why we need to subtract our own global x position
-  log.debug("0 0 cursor pos would be "..tostring(r))
-end
