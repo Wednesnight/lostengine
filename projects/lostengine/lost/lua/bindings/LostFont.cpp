@@ -35,7 +35,8 @@ namespace lost
             .def_readonly("max", &RenderedText::max)
             .def_readonly("size", &RenderedText::size)
             .def_readwrite("numLines", &RenderedText::numLines)      
-            .def("clone", clone_cast)      
+            .def("clone", clone_cast)    
+            .def("characterRect", &RenderedText::characterRect)  
             .scope
             [
               def("create", &RenderedText::create)
