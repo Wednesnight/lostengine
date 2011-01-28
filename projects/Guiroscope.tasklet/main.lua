@@ -20,10 +20,10 @@ function startup()
       items={{"Layers",require("layers")},
              {"Views",require("views")}}
     },
-    lost.guiro.view.FpsMeter
-    {
-      bounds={"right","bottom",140,70}
-    }
+--    lost.guiro.view.FpsMeter
+--    {
+--      bounds={"right","bottom",140,70}
+--    }
   }
   
   lost.guiro.ui():addEventListener("mouseDown", mouseDownHandler)
