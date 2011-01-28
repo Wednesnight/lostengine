@@ -123,6 +123,11 @@ function Text:text(s)
   self:needsDisplay()
 end
 
+function Text:appendText(s)
+  self._text = self._text..s
+  self:needsDisplay()
+end
+
 function Text:font(...)
   if arg.n >=1 then
     self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
