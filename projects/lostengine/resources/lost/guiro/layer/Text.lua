@@ -44,6 +44,8 @@ function Text:constructor(args)
   else
     self:breakMode("none")
   end
+  self._dirtyText = false
+  self._lastBuildWidth = 0
   self:text(t.text or "")
   self:color(t.color or Color(0,0,0))
   self:shadow(t.shadow or false)
@@ -98,72 +100,93 @@ function Text:updateAlign()
   self.alignedMeshPos.y = math.floor(self.alignedMeshPos.y)
 
   self.mesh.transform = MatrixTranslation(self.alignedMeshPos)  
-  self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))
-  
+  self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))  
+end
+
+function Text:updateCursor()
   if self.cursorLayer then
     local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
-    log.debug("cursor repos, chars "..tostring(nc))
+--    log.debug("cursor repos, chars "..tostring(nc))
     local r = self.mesh:characterRect(self._cursorPos.y, math.min(self._cursorPos.x,nc-1))
-    log.debug("cursor cr "..tostring(r))
+--    log.debug("cursor cr "..tostring(r))
     local x = r.x+self.alignedMeshPos.x-self.rect.x
-    log.debug("setting cursor to x "..tostring(x))
+--    log.debug("setting cursor to x "..tostring(x))
     self.cursorLayer:x(x)
     self.cursorLayer:y(r.y+self.alignedMeshPos.y-self.rect.y+self._font.descender)
   end
 end
 
-function Text:updateLayout()
-  log.debug("layout")
-  lost.guiro.layer.Layer.updateLayout(self)
-  self:needsDisplay()
-  self:updateAlign()
+function Text:meshNeedsRebuild()
+  local widthChanged = self._lastBuildWidth ~= self.rect.width
+  return self._dirtyText or ((self._breakMode ~= "none") and widthChanged)
 end
 
-function Text:updateDisplay()
-  log.debug("display")
-  lost.guiro.layer.Layer.updateDisplay(self)
-  self.buffer:reset(self._text, self._font, breakModes[self._breakMode],self.rect.width)
-  if self._font then
-      log.debug("rebuilding text mesh")
-      self.buffer:renderAllPhysicalLines(self.mesh)
+function Text:updateMesh()
+  if self:meshNeedsRebuild() then
+    self.buffer:reset(self._text, self._font, breakModes[self._breakMode],self.rect.width)
+    log.debug("rebuilding text mesh")
+    self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
       self.shadowMesh = self.mesh:clone()
       self.shadowMesh.material = self.mesh.material:clone()
       self.shadowMesh.material.color = self._shadowColor
       self.shadowDrawNode.mesh = self.shadowMesh
     end
-  else
-    log.warn("called updateDisplay on Text layer '"..self.id.."' without font")
+    self._dirtyText = false
+    self._lastBuildWidth = self.rect.width
   end
+end
+
+function Text:updateLayout()
+--  log.debug("layout")
+  lost.guiro.layer.Layer.updateLayout(self)
+  self:updateMesh()
   self:updateAlign()
+  self:updateCursor()
+end
+
+function Text:updateDisplay()
+--  log.debug("display")
+  lost.guiro.layer.Layer.updateDisplay(self)
+  self:updateMesh()
+  self:updateAlign()
+  self:updateCursor()
 end
 
 function Text:breakMode(...)
   if arg.n >= 1 then
     local bm = arg[1]
-    if (bm == "none") or (bm=="char") or (bm=="word") then
-      self._breakMode = bm
-    else
-      self._breakMode = "none"
+    if (bm ~= self.breakMode) then
+      if (bm == "none") or (bm=="char") or (bm=="word") then
+        self._breakMode = bm
+      else
+        self._breakMode = "none"
+      end
+      self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
+      self:needsDisplay()
     end
-    self:needsDisplay()
   else
     return self._breakMode
   end
 end
 
 function Text:text(s)
-  self._text = s
-  self:needsDisplay()
+  if self._text ~= s then
+    self._text = s
+    self._dirtyText = true
+    self:needsDisplay()
+  end
 end
 
 function Text:appendText(s)
   self._text = self._text..s
+  self._dirtyText = true
   self:needsDisplay()
 end
 
 function Text:font(...)
   if arg.n >=1 then
+    self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
     self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
     self:needsDisplay()
   else
@@ -176,17 +199,20 @@ function Text:color(v)
 end
 
 function Text:valign(v)
+  self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
   self._valign = v
   self:needsLayout()
 end
 
 function Text:halign(v)
+  self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
   self._halign = v
   self:needsLayout()
 end
 
 function Text:shadow(...)
   if arg.n >= 1 then
+    self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
     self.shadowDrawNode.active = arg[1]
     self:needsDisplay()
   else
@@ -196,6 +222,7 @@ end
 
 function Text:shadowOffset(...)
   if arg.n >= 1 then
+    self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
     self._shadowOffset = arg[1]
     self:needsLayout()
   else
@@ -215,7 +242,6 @@ end
 -- returns the rect of the specified character within the text layer
 -- mesh alignment is taken into account
 function Text:characterRect(lineIndex, charIndex)
-  
   local result = self.mesh:characterRect(lineIndex, charIndex)
   result.x = result.x + self.alignedMeshPos.x
   result.y = result.y + self.alignedMeshPos.y
