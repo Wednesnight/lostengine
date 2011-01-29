@@ -20,6 +20,7 @@ public:
 
   bool _dirty;
   void text(const std::string& inUtf8String);
+  std::string utf8String(); // returns the current data as utf8 string
   void font(const FontPtr& inFont);
   void breakMode(BreakMode inBreakMode);
   void width(float inWidth);

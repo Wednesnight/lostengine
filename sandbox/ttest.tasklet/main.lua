@@ -17,6 +17,12 @@ function startup()
     },
     lost.guiro.view.TextInput
     {
+      listeners=
+      {
+        valueChanged=function(event) log.debug("'"..event.target:text().."'") end,
+        enterPressed=function(event) log.debug(event.type) end,
+      },
+      
       bounds={50,50,200,30},
       halign="left",
       font=f,

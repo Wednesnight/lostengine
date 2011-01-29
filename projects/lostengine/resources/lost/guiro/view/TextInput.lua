@@ -51,17 +51,28 @@ function TextInput:keyDown(event)
   elseif event.key == lost.application.K_LEFT then self.textLayer:cursorDecX()
   elseif event.key == lost.application.K_UP then 
   elseif event.key == lost.application.K_DOWN then 
-  elseif event.key == lost.application.K_ENTER then 
+  elseif event.key == lost.application.K_ENTER then self:dispatchInputEvent("enterPressed")
   elseif event.key == lost.application.K_TAB then 
   elseif event.key == lost.application.K_ESCAPE then 
   elseif event.key == lost.application.K_BACKSPACE then 
     self.textLayer:eraseBeforeCursor()
     self.textLayer:cursorDecX()
+    self:dispatchInputEvent("valueChanged")
   elseif event.key == lost.application.K_DELETE then
     self.textLayer:eraseAfterCursor()
+    self:dispatchInputEvent("valueChanged")
   elseif string.len(event.character) > 0 then
     self.textLayer:insertAtCursor(event.character)
     self.textLayer:cursorIncX()
+    self:dispatchInputEvent("valueChanged")
   end
 end
+
+function TextInput:dispatchInputEvent(name)
+  local event = lost.guiro.event.Event(name)
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
+end
+
 

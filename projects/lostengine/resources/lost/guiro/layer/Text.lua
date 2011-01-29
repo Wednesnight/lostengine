@@ -147,13 +147,13 @@ function Text:updateCursor()
 
     if type(x) == "number" then
       local b = 2
-      log.debug("x "..tostring(x))
+--      log.debug("x "..tostring(x))
       if (x < b) and (self._lastCursorMove == 0) then 
-        log.debug("cursor out left")
+--        log.debug("cursor out left")
         self._scrollOffset = x + b
       end
       if (x > (self.rect.width-b)) and (self._lastCursorMove == 1) then 
-        log.debug("cursor out right"); 
+--        log.debug("cursor out right"); 
         self._scrollOffset = x - (self.rect.width-b)
       end
       self:repositionMeshes(self.alignedMeshPos.x - self._scrollOffset, self.alignedMeshPos.y)
@@ -221,10 +221,14 @@ function Text:breakMode(...)
   end
 end
 
-function Text:text(s)
-  self.buffer:text(s)
-  self._dirtyText = true
-  self:needsDisplay()
+function Text:text(...)
+  if arg.n >= 1 then
+    self.buffer:text(arg[1])
+    self._dirtyText = true
+    self:needsDisplay()
+  else
+    return self.buffer:utf8String()
+  end
 end
 
 function Text:appendText(s)
