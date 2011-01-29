@@ -20,7 +20,8 @@ function startup()
       bounds={50,50,200,30},
       halign="left",
       font=f,
-      text="yeah"
+      text="yeah",
+      halign = "center"
     }
   }
 end
