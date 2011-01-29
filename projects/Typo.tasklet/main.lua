@@ -6,6 +6,8 @@ function key(event)
   end
 end
 
+local m = 10
+
 function startup()
   require("lost/guiro")
 
@@ -17,12 +19,12 @@ function startup()
       subviews={
         lost.guiro.view.TextInput
         {
-          bounds={10,{"top",-10},200,20},
+          bounds={m,{"top",-m},200,2*m},
           font={"Vera", 12},
         },
         lost.guiro.view.View
         {
-          bounds={{"right",-10},10,fnt.atlasSize.width,fnt.atlasSize.height},
+          bounds={{"right",-m},m,fnt.atlasSize.width,fnt.atlasSize.height},
           sublayers=
           {
             lost.guiro.layer.Rect{color=Color(0,0,0),filled=true}
@@ -30,7 +32,7 @@ function startup()
         },
         lost.guiro.view.Image
         {
-          bounds={{"right",-10},10,fnt.atlasSize.width,fnt.atlasSize.height},
+          bounds={{"right",-m},m,fnt.atlasSize.width,fnt.atlasSize.height},
           texture=fnt.atlas,
           scale="none",
           filter=false,
