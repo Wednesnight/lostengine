@@ -125,6 +125,7 @@ namespace lost
           .def("numPhysicalLines", &TextBuffer::numPhysicalLines)
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
           .def("insertUtf8StringAtPosition", &TextBuffer::insertUtf8StringAtPosition)
+          .def("eraseCharAtPosition", &TextBuffer::eraseCharAtPosition)
         ]
       ];
     }

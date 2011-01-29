@@ -278,3 +278,21 @@ function Text:insertAtCursor(utf8str)
   self:needsDisplay()
 end
 
+function Text:eraseBeforeCursor()
+  if self._cursorPos.x > 0 then
+--    log.debug("erasing char at pos "..(self._cursorPos.y).." "..tostring(self._cursorPos.x-1))
+    self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x-1)
+    self._dirtyText = true
+    self:needsDisplay()
+  end
+end
+
+function Text:eraseAfterCursor()
+  if self._cursorPos.x ~= self.buffer:numCharsInPhysicalLine(self._cursorPos.y) then
+--    log.debug("erasing char at pos "..(self._cursorPos.y).." "..tostring(self._cursorPos.x))
+    self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x)
+    self._dirtyText = true
+    self:needsDisplay()
+  end
+end
+
