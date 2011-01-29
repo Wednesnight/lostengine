@@ -19,7 +19,8 @@ function startup()
     {
       bounds={50,50,200,30},
       halign="left",
-      font=f
+      font=f,
+      text="yeah"
     }
   }
 end

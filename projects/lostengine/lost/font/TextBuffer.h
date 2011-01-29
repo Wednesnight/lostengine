@@ -18,10 +18,12 @@ public:
   TextBuffer();
   ~TextBuffer();
 
-  void reset(const std::string& utf8String, 
-             const FontPtr& inFont,
-             BreakMode inBreakMode,
-             float width);
+  bool _dirty;
+  void text(const std::string& inUtf8String);
+  void font(const FontPtr& inFont);
+  void breakMode(BreakMode inBreakMode);
+  void width(float inWidth);
+  void reset();
   
   // activating character metrics will add additional character rect information to the rendered mesh
   bool getCharacterMetrics();
@@ -34,6 +36,9 @@ public:
 
   void renderPhysicalLine(uint32_t num, const RenderedTextPtr& target);
   void renderAllPhysicalLines(const RenderedTextPtr& target);
+
+  void insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const std::string& inString);
+  void eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex);
 
   typedef fhtagn::text::utf32_string Utf32String;
   struct WordPos
