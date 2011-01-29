@@ -332,7 +332,14 @@ void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charInd
 
 void TextBuffer::eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex)
 {
+  Range r;
+  if(lineIndex < _physicalLines.size())
+  {
+    r = _physicalLines[lineIndex];
+  }
+  _text.erase(r.begin+charIndex, 1);
 }
 
 }
 }
+

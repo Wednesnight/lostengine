@@ -13,6 +13,7 @@
 #include "lost/application/MouseButton.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/common/Logger.h"
 
 @implementation ApplicationWindow
 
@@ -166,6 +167,7 @@
     case 49 : return lost::application::K_SPACE;
     case 51 : return lost::application::K_BACKSPACE;
     case 53 : return lost::application::K_ESCAPE;
+    case 117 : return lost::application::K_DELETE;
 
     case 123 : return lost::application::K_LEFT;
     case 124 : return lost::application::K_RIGHT;

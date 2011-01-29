@@ -2,7 +2,7 @@
 local Color=lost.common.Color
 local Vec2=lost.math.Vec2
 
-local f = {"Vera bold",24}
+local f = {"Vera",12}
 
 function startup()
   require("lost.guiro")

@@ -46,6 +46,15 @@ end
 function TextInput:keyDown(event)
   if event.key == lost.application.K_RIGHT then self.textLayer:cursorIncX() 
   elseif event.key == lost.application.K_LEFT then self.textLayer:cursorDecX()
+  elseif event.key == lost.application.K_UP then 
+  elseif event.key == lost.application.K_DOWN then 
+  elseif event.key == lost.application.K_ENTER then 
+  elseif event.key == lost.application.K_TAB then 
+  elseif event.key == lost.application.K_BACKSPACE then 
+    self.textLayer:eraseBeforeCursor()
+    self.textLayer:cursorDecX()
+  elseif event.key == lost.application.K_DELETE then
+    self.textLayer:eraseAfterCursor()
   elseif string.len(event.character) > 0 then
 --    self.textLayer:appendText(event.character)
     self.textLayer:insertAtCursor(event.character)
