@@ -34,6 +34,7 @@ TrueTypeFont::TrueTypeFont(freetype::LibraryPtr inLibrary,
   ascender = face->ascender();
   descender = face->descender();  
   lineHeight = face->height();
+  rebuildTextureAtlas(); // so we have an initial texture and don't crash upo first text draw call
 }
 
 TrueTypeFont::~TrueTypeFont()

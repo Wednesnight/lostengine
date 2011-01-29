@@ -55,6 +55,8 @@ namespace lost
           .def_readonly("ascender", &Font::ascender)
           .def_readonly("descender", &Font::descender)
           .def_readonly("lineHeight", &Font::lineHeight)
+          .def_readonly("atlas", &Font::atlas)
+          .def_readonly("atlasSize", &Font::atlasSize)
         ]
       ];
     }

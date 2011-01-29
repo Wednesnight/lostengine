@@ -73,6 +73,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.FpsMeter", "default", function(target, args) self:fpsMeter(target, args) end)
 
   self:addStyle("lost.guiro.view.TextInput", "default", function(target, args) self:textInput(target, args) end)
+  self:addStyle("lost.guiro.view.Image", "default", function(target, args) self:imageView(target, args) end)
 
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
@@ -1031,3 +1032,8 @@ function Pebble:textInput(target, args)
   target.cursorLayer = cursorLayer
 end
 
+function Pebble:imageView(target, args)
+  local iv = lost.guiro.layer.Image{}
+  target.layer:addSublayer(iv)
+  target.imageLayer = iv
+end
