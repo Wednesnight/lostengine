@@ -13,27 +13,27 @@ local MatrixTranslation = lost.math.MatrixTranslation
 function Image:constructor(args)
   lost.guiro.layer.Layer.constructor(self, args)
   local t = args or {}
-  if t.bitmap then -- must be premultiplied alpha
-    local texparams = lost.gl.Texture.Params()
-    self.texture = lost.gl.Texture.create(t.bitmap, texparams)
-  elseif t.texture then
-    self.texture = t.texture
-  end
-  
-  self._flip = t.flip  
-  self._filter = t.filter
-  
-  self._scale = t.scale or "none" -- none, aspect  FIXME: needs stretch, repeat
-  
+
+  -- mesh and rg
   self.quad = lost.guiro.Quad()
   self.mesh = self.quad.mesh
   self.mesh.material:blendPremultiplied()
-  self.mesh.material:setTexture(0,self.texture)
   self.mesh.material.shader = lost.guiro.shaderFactory():texture()
-  
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)  
-  self.quad:update(Rect(0,0,self.texture.dataWidth, self.texture.dataHeight)) -- for scale == none
+
+  -- attributes
+  if t.bitmap then -- must be premultiplied alpha
+    self:bitmap(t.bitmap)
+  elseif t.texture then
+    self:texture(t.texture)
+  end
+  self:flip(t.flip or false)
+  self:filter(t.filter or false)
+  self:scale(t.scale or "none") -- none, aspect  FIXME: needs stretch, repeat
+  
+  
+  -- trigger initial updates
   self:needsUpdate()
   self:needsLayout()
 end
@@ -67,5 +67,47 @@ function Image:updateLayout()
     local w = math.floor(self.rect.width*f)
     local h = math.floor(self.rect.height*f)
     self.quad:update(Rect(0,0,w, h))    
+  else
+    self.quad:update(Rect(0,0,self.texture.dataWidth, self.texture.dataHeight)) -- for scale == none
   end
 end
+
+function Image:bitmap(v)
+  local texparams = lost.gl.Texture.Params()
+  self:texture(lost.gl.Texture.create(v, texparams))
+end
+
+function Image:texture(v)
+  self.texture = v
+  self.mesh.material:setTexture(0,self.texture)
+  self:needsUpdate()
+  self:needsLayout()
+end
+
+function Image:flip(...)
+  if arg.n >= 1 then
+    self._flip = arg[1]
+    self:needsUpdate()
+  else
+    return self._flip
+  end
+end
+
+function Image:filter(...)
+  if arg.n >= 1 then
+    self._filter = arg[1]
+    self:needsUpdate()
+  else
+    return self._filter
+  end
+end
+
+function Image:scale(...)
+  if arg.n >= 1 then
+    self._scale = arg[1]
+    self:needsLayout()
+  else
+    return self._scale
+  end
+end
+
