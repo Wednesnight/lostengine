@@ -1,7 +1,5 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-
 lost.common.Class "lost.guiro.view.Label" "lost.guiro.view.View" {}
 
 local Color = lost.common.Color

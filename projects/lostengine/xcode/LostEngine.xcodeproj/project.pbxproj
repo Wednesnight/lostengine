@@ -370,10 +370,6 @@
 		3EDEE3B51050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
 		3EDEE3B61050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
 		3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */; };
-		8D03AB67110395E600700CF3 /* GlobalFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */; };
-		8D03AB69110395E600700CF3 /* GlobalFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */; };
-		8D03AB6A110395E600700CF3 /* GlobalFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */; };
-		8D03AB6C110395E600700CF3 /* GlobalFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */; };
 		8D13D8050FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8060FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
 		8D13D8070FD8011A00CEC1AF /* Blend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D13D8040FD8011A00CEC1AF /* Blend.cpp */; };
@@ -1077,7 +1073,6 @@
 		3EB499D50F9FA50600F3036A /* LostGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LostGL.cpp; path = bindings/LostGL.cpp; sourceTree = "<group>"; };
 		3EC9CFCE0E673182003CED66 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
 		3EDEE3B31050158B0079BBB3 /* ScissorRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScissorRect.cpp; path = rg/ScissorRect.cpp; sourceTree = "<group>"; };
-		8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalFunctions.cpp; sourceTree = "<group>"; };
 		8D13D8040FD8011A00CEC1AF /* Blend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Blend.cpp; path = rg/Blend.cpp; sourceTree = "<group>"; };
 		8D2C9E3B12510AE200EE478F /* b2BroadPhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2BroadPhase.cpp; sourceTree = "<group>"; };
 		8D2C9E3D12510AE200EE478F /* b2CollideCircle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2CollideCircle.cpp; sourceTree = "<group>"; };
@@ -2047,7 +2042,6 @@
 				3E20607E0E9E066D0042BC53 /* BindingHelpers.cpp */,
 				EA9A36530E29A61D0090BAD0 /* ModuleLoader.cpp */,
 				3EC9CFCE0E673182003CED66 /* State.cpp */,
-				8D03AB65110395E600700CF3 /* GlobalFunctions.cpp */,
 			);
 			path = lua;
 			sourceTree = "<group>";
@@ -2527,7 +2521,6 @@
 				EAB67CF0111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
 				8D48E4CF10FE473E00338B01 /* Queue.cpp in Sources */,
 				8D48E4D010FE473E00338B01 /* QueueEntityLua.cpp in Sources */,
-				8D03AB67110395E600700CF3 /* GlobalFunctions.cpp in Sources */,
 				EA3D4592111C077300CB661C /* Quad.cpp in Sources */,
 				EAF56B06111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2F111CD694008D5A0D /* Rect.cpp in Sources */,
@@ -2805,7 +2798,6 @@
 				EAB67CEE111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
 				8D48E4D110FE473E00338B01 /* Queue.cpp in Sources */,
 				8D48E4D210FE473E00338B01 /* QueueEntityLua.cpp in Sources */,
-				8D03AB6C110395E600700CF3 /* GlobalFunctions.cpp in Sources */,
 				EA3D4590111C077300CB661C /* Quad.cpp in Sources */,
 				EAF56B04111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2D111CD694008D5A0D /* Rect.cpp in Sources */,
@@ -2992,7 +2984,6 @@
 				3EDEE3B71050158B0079BBB3 /* ScissorRect.cpp in Sources */,
 				8D48E4D510FE473E00338B01 /* Queue.cpp in Sources */,
 				8D48E4D610FE473E00338B01 /* QueueEntityLua.cpp in Sources */,
-				8D03AB6A110395E600700CF3 /* GlobalFunctions.cpp in Sources */,
 				EA65F8EB111AFEC8005AB754 /* TestLostGlHostBuffer.cpp in Sources */,
 				EAD9DCEE111E40E300A21AC7 /* TestLostGlRangeManager.cpp in Sources */,
 			);
@@ -3175,7 +3166,6 @@
 				EAB67CEF111603D800442904 /* HybridVertexBuffer.cpp in Sources */,
 				8D48E4D310FE473E00338B01 /* Queue.cpp in Sources */,
 				8D48E4D410FE473E00338B01 /* QueueEntityLua.cpp in Sources */,
-				8D03AB69110395E600700CF3 /* GlobalFunctions.cpp in Sources */,
 				EA3D4591111C077300CB661C /* Quad.cpp in Sources */,
 				EAF56B05111CD271008D5A0D /* ScaleGrid.cpp in Sources */,
 				EAF56B2E111CD694008D5A0D /* Rect.cpp in Sources */,

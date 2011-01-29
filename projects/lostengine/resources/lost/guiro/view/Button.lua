@@ -1,11 +1,10 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
 require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.view.Button" "lost.guiro.view.View" {}
 
-using "lost.guiro.event.Event"
+local Event = lost.guiro.event.Event
 
 Button.STATE_NORMAL = "normal"  
 Button.STATE_HOVER = "hover" 

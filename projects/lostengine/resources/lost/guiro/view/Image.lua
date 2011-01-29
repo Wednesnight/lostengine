@@ -1,7 +1,5 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-
 lost.common.Class "lost.guiro.view.Image" "lost.guiro.view.View" {}
 
 -- imageLayer needs to be created and set by style

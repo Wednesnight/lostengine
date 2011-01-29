@@ -10,7 +10,7 @@ require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
 
-using "lost.guiro.event.Event"
+local Event = lost.guiro.event.Event
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.

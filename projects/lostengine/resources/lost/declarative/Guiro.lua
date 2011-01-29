@@ -10,7 +10,7 @@ require("lost.guiro.event.Event")
 
 lost.common.Class "lost.declarative.Guiro" {}
 
-using "lost.guiro.event.Event"
+local Event = lost.guiro.event.Event
 
 function Guiro:constructor(loader, themeManager, textureManager)
   self.loader = loader
