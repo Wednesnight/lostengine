@@ -1,6 +1,7 @@
 #include "lost/font/TextBuffer.h"
 #include <fhtagn/text/transcoding.h>
 #include <fhtagn/text/decoders.h>
+#include <fhtagn/text/encoders.h>
 #include "lost/font/Font.h"
 #include <boost/algorithm/string.hpp>
 #include "lost/common/Logger.h"
@@ -53,6 +54,18 @@ void TextBuffer::text(const std::string& inUtf8String)
   ftxt::decode(decoder, normalised.begin(), normalised.end(),
          std::back_insert_iterator<Utf32String>(_text));
 }
+
+std::string TextBuffer::utf8String()
+{
+  std::string result;
+
+  ftxt::utf32_encoder encoder;
+  ftxt::encode(encoder, _text.begin(), _text.end(),
+         std::back_insert_iterator<std::string>(result));
+         
+  return result;
+}
+
 
 void TextBuffer::font(const FontPtr& inFont) 
 {
