@@ -3,7 +3,7 @@
 #include <fhtagn/text/decoders.h>
 #include "lost/font/Font.h"
 #include <boost/algorithm/string.hpp>
-//#include "lost/common/Logger.h"
+#include "lost/common/Logger.h"
 #include "lost/font/Render.h"
 #include "lost/font/Glyph.h"
 
@@ -14,43 +14,6 @@ namespace font
 
 using namespace std;
 namespace ftxt = fhtagn::text;
-
-TextBuffer::TextBuffer()
-{
-  _breakMode = BREAKMODE_NONE;
-  _characterMetrics = false;
-}
-
-TextBuffer::~TextBuffer()
-{
-}
-
-void TextBuffer::reset(const std::string& utf8String,
-                       const FontPtr& inFont,
-                       BreakMode inBreakMode,
-                       float width)
-{
-  _font = inFont;
-  _width = width;
-  _breakMode = inBreakMode;
-  resetLogicalLines(utf8String);  
-}
-
-uint32_t TextBuffer::numLogicalLines()
-{
-  return _logicalLines.size();
-}
-
-uint32_t TextBuffer::numPhysicalLines()
-{
-  return _physicalLines.size();
-}
-
-void TextBuffer::normaliseNewlines(std::string& inText)
-{
-  boost::algorithm::ireplace_all(inText, "\r\n", "\n");
-  boost::algorithm::ireplace_all(inText, "\r", "\n");
-}
 
 uint32_t skipToNewlineOrEnd(uint32_t pos, const lost::font::TextBuffer::Utf32String& txt)
 {
@@ -64,18 +27,61 @@ uint32_t skipToNewlineOrEnd(uint32_t pos, const lost::font::TextBuffer::Utf32Str
   return pos;
 }
 
-void TextBuffer::resetLogicalLines(const std::string& inText)
+
+TextBuffer::TextBuffer()
 {
+  _breakMode = BREAKMODE_NONE;
+  _characterMetrics = false;
+  _dirty = true;
+}
+
+TextBuffer::~TextBuffer()
+{
+}
+
+void TextBuffer::text(const std::string& inUtf8String)
+{
+  _dirty = true;
   _logicalLines.clear(); // discard all previous lines
-  
+  _physicalLines.clear();    
   // normalise newlines into copy of text
-  std::string normalised(inText); 
+  std::string normalised(inUtf8String); 
   normaliseNewlines(normalised);
   _text.clear();
   // transcode to utf32 for parsing
   ftxt::utf8_decoder decoder;
   ftxt::decode(decoder, normalised.begin(), normalised.end(),
          std::back_insert_iterator<Utf32String>(_text));
+}
+
+void TextBuffer::font(const FontPtr& inFont) 
+{
+  _dirty = true;
+  _font = inFont;
+}
+
+void TextBuffer::breakMode(BreakMode inBreakMode) 
+{
+  _dirty = true;
+  _breakMode = inBreakMode;
+}
+
+void TextBuffer::width(float inWidth) 
+{
+  _dirty = true;
+  _width = inWidth;
+}
+
+void TextBuffer::reset()
+{
+  if(!_dirty)
+  {
+//    DOUT("!!!! skipping reset because not dirrty");
+    return;
+  }
+  _dirty = false;
+  _logicalLines.clear(); // discard all previous lines
+  _physicalLines.clear();
   
   uint32_t pos = 0;
   uint32_t nextPos = 0;
@@ -98,6 +104,22 @@ void TextBuffer::resetLogicalLines(const std::string& inText)
   } while (pos != nextPos);
   
   resetPhysicalLines();
+}
+
+uint32_t TextBuffer::numLogicalLines()
+{
+  return _logicalLines.size();
+}
+
+uint32_t TextBuffer::numPhysicalLines()
+{
+  return _physicalLines.size();
+}
+
+void TextBuffer::normaliseNewlines(std::string& inText)
+{
+  boost::algorithm::ireplace_all(inText, "\r\n", "\n");
+  boost::algorithm::ireplace_all(inText, "\r", "\n");
 }
 
 void TextBuffer::breakModeNone()
@@ -250,6 +272,7 @@ void TextBuffer::breakModeWord()
 void TextBuffer::resetPhysicalLines()
 {
   _physicalLines.clear();
+//  DOUT("using breakmode "<<_breakMode);
   switch(_breakMode)
   { 
     case BREAKMODE_NONE:breakModeNone();break;
@@ -287,6 +310,28 @@ uint32_t TextBuffer::numCharsInPhysicalLine(uint32_t lineIndex)
     result = r.end - r.begin;
   }
   return result;
+}
+
+void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const std::string& inString)
+{
+  ftxt::utf8_decoder decoder;
+  Utf32String decoded;
+  ftxt::decode(decoder, inString.begin(), inString.end(),
+         std::back_insert_iterator<Utf32String>(decoded));
+
+  Range r;
+  if(lineIndex < _physicalLines.size())
+  {
+    r = _physicalLines[lineIndex];
+  }
+//  DOUT("previous text size "<<_text.size());
+  _text.insert(r.begin+charIndex, decoded);
+//  DOUT("new text size "<<_text.size());
+  reset();
+}
+
+void TextBuffer::eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex)
+{
 }
 
 }

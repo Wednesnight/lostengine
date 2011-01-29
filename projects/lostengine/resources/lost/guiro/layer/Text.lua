@@ -116,6 +116,7 @@ end
 function Text:updateCursor()
   if self.cursorLayer then
     local pl = self.buffer:numPhysicalLines()
+--    log.debug("-- physical lines "..pl)
     -- clip cursor position to allowed range of current line
     local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y) -- clip y for real y movement 
     
@@ -147,8 +148,10 @@ end
 
 function Text:updateMesh()
   if self:meshNeedsRebuild() then
-    self.buffer:reset(self._text, self._font, breakModes[self._breakMode],self.rect.width)
-    log.debug("rebuilding text mesh")
+--    self.buffer:reset(self.#, self._font, breakModes[self._breakMode],self.rect.width)
+    self.buffer:width(self.rect.width)
+    self.buffer:reset()
+--    log.debug("rebuilding text mesh")
     self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
       self.shadowMesh = self.mesh:clone()
@@ -180,41 +183,38 @@ end
 function Text:breakMode(...)
   if arg.n >= 1 then
     local bm = arg[1]
-    if (bm ~= self.breakMode) then
-      if (bm == "none") or (bm=="char") or (bm=="word") then
-        self._breakMode = bm
-      else
-        self._breakMode = "none"
-      end
-      self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
-      self:needsDisplay()
+    if (bm == "none") or (bm=="char") or (bm=="word") then
+      self.buffer:breakMode(breakModes[bm])
+    else
+      self.buffer:breakMode(breakModes["none"])
     end
+    self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
+    self:needsDisplay()
   else
-    return self._breakMode
+    return nil -- self._breakMode
   end
 end
 
 function Text:text(s)
-  if self._text ~= s then
-    self._text = s
-    self._dirtyText = true
-    self:needsDisplay()
-  end
+  self.buffer:text(s)
+  self._dirtyText = true
+  self:needsDisplay()
 end
 
 function Text:appendText(s)
-  self._text = self._text..s
-  self._dirtyText = true
-  self:needsDisplay()
+--  self._text = self._text..s
+--  self._dirtyText = true
+--  self:needsDisplay()
 end
 
 function Text:font(...)
   if arg.n >=1 then
     self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
     self._font = tasklet.fontManager:getFont(arg[1][1], arg[1][2])
+    self.buffer:font(self._font)
     self:needsDisplay()
   else
-    return self._font
+    return nil -- FIXME self._font
   end
 end
 
@@ -270,5 +270,11 @@ function Text:characterRect(lineIndex, charIndex)
   result.x = result.x + self.alignedMeshPos.x
   result.y = result.y + self.alignedMeshPos.y
   return result
+end
+
+function Text:insertAtCursor(utf8str)
+  self.buffer:insertUtf8StringAtPosition(self._cursorPos.y, self._cursorPos.x, utf8str)
+  self._dirtyText = true
+  self:needsDisplay()
 end
 

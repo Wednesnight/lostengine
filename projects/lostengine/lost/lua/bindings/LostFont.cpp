@@ -111,13 +111,20 @@ namespace lost
         [
           class_<TextBuffer>("TextBuffer")
           .def(constructor<>())
+
+          .def("text", &TextBuffer::text)
+          .def("font", &TextBuffer::font)
+          .def("breakMode", &TextBuffer::breakMode)
+          .def("width", &TextBuffer::width)
           .def("reset", &TextBuffer::reset)
+
           .def("renderPhysicalLine", &TextBuffer::renderPhysicalLine)
           .def("renderAllPhysicalLines", &TextBuffer::renderAllPhysicalLines)
           .def("numCharsInPhysicalLine", &TextBuffer::numCharsInPhysicalLine)
           .def("numLogicalLines", &TextBuffer::numLogicalLines)
           .def("numPhysicalLines", &TextBuffer::numPhysicalLines)
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
+          .def("insertUtf8StringAtPosition", &TextBuffer::insertUtf8StringAtPosition)
         ]
       ];
     }
