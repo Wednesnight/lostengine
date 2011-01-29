@@ -1,9 +1,6 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-require("lost.guiro.view.Button")
 require("lost.guiro.event.Event")
-require("lost.guiro.layout.Horizontal")
 
 lost.common.Class "lost.guiro.view.TabBar" "lost.guiro.view.View" {}
 

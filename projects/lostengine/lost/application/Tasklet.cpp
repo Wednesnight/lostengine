@@ -8,7 +8,6 @@
 #include <boost/bind.hpp>
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
-#include "lost/lua/GlobalFunctions.h"
 #include <algorithm>
 #include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
@@ -83,8 +82,6 @@ namespace lost
       bindAll(*lua);
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua);
-      // publish global utility functions
-      GlobalFunctions::install(*lua);
       lsh.reset(new LuaStateHelper);
       eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
       eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      

@@ -1,7 +1,5 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-
 lost.common.Class "lost.guiro.view.Slider" "lost.guiro.view.View" {}
 
 -- Slider will modify either x or y value of handle, depending on the selected mode

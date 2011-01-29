@@ -8,8 +8,8 @@ require("lost.common.CallLater")
 require("lost.guiro.layer.Layer")
 require("lost.guiro.ThemeManager")
 
-using "lost.guiro.event.Event"
-using "lost.guiro.event.EventDispatcher"
+local Event = lost.guiro.event.Event
+local EventDispatcher = lost.guiro.event.EventDispatcher
 
 lost.common.Class "lost.guiro.view.View" {}
 

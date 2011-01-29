@@ -1,7 +1,5 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-
 lost.common.Class "lost.guiro.view.TabView" "lost.guiro.view.View" {}
 
 -- mandatory, set by theme:

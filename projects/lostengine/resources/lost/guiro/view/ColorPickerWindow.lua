@@ -1,7 +1,5 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-
 local Color = lost.common.Color
 
 -- theme: the theme for the window

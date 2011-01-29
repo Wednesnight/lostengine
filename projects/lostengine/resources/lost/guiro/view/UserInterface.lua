@@ -1,13 +1,8 @@
 module("lost.guiro.view", package.seeall)
 
-require("lost.guiro.view.View")
-require("lost.guiro.event.EventManager")
-require("lost.guiro.TextureManager")
-require("lost.common.ShaderFactory")
-
 lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
-using "lost.guiro.event.EventManager"
+local EventManager = lost.guiro.event.EventManager
 
 function UserInterface:constructor(args)
   lost.guiro.view.View.constructor(self,args)

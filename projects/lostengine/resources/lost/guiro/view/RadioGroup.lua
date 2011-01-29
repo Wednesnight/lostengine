@@ -1,5 +1,4 @@
 module("lost.guiro.view", package.seeall)
-require("lost.guiro.view.View")
 
 lost.common.Class "lost.guiro.view.RadioGroup" "lost.guiro.view.View" {}
 

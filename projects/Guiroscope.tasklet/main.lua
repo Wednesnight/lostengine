@@ -26,9 +26,9 @@ function startup()
 --    }
   }
   
-  lost.guiro.ui():addEventListener("mouseDown", mouseDownHandler)
-  lost.guiro.ui():addEventListener("focusReceived", focusHandler)
-  lost.guiro.ui():addEventListener("focusLost", focusHandler)
+--  lost.guiro.ui():addEventListener("mouseDown", mouseDownHandler)
+--  lost.guiro.ui():addEventListener("focusReceived", focusHandler)
+--  lost.guiro.ui():addEventListener("focusLost", focusHandler)
   
 --  lost.guiro.ui().layer:print()
 --  lost.guiro.ui():printSubviews()
