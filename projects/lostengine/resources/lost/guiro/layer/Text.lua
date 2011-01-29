@@ -57,6 +57,8 @@ function Text:constructor(args)
   self:needsDisplay()
   self.alignedMeshPos = lost.math.Vec3()
   self:cursorPos(Vec2(0,0))
+  self._lastCursorMove = 0 -- 0 = left, 1 == right
+  self._scrollOffset = 0
 end
 
 function Text:characterMetrics(...)
@@ -80,11 +82,21 @@ end
 function Text:cursorIncX()
   self._cursorPos.x = self._cursorPos.x + 1
   self:needsLayout()
+  self._lastCursorMove = 1
 end
 
 function Text:cursorDecX()
   self._cursorPos.x = self._cursorPos.x - 1
   self:needsLayout()
+  self._lastCursorMove = 0
+end
+
+function Text:repositionMeshes(x,y) -- Vec2
+  self.alignedMeshPos.x = math.floor(x)
+  self.alignedMeshPos.y = math.floor(y)
+
+  self.mesh.transform = MatrixTranslation(self.alignedMeshPos)  
+  self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))  
 end
 
 function Text:updateAlign()
@@ -106,11 +118,7 @@ function Text:updateAlign()
     self.alignedMeshPos.y = self.rect.y-self._font.descender+1
   end
   
-  self.alignedMeshPos.x = math.floor(self.alignedMeshPos.x)
-  self.alignedMeshPos.y = math.floor(self.alignedMeshPos.y)
-
-  self.mesh.transform = MatrixTranslation(self.alignedMeshPos)  
-  self.shadowMesh.transform = MatrixTranslation(self.alignedMeshPos+Vec3(self._shadowOffset.x, self._shadowOffset.y,0))  
+  self:repositionMeshes(self.alignedMeshPos.x, self.alignedMeshPos.y)
 end
 
 function Text:updateCursor()
@@ -137,6 +145,21 @@ function Text:updateCursor()
       x = r.x+self.alignedMeshPos.x-self.rect.x
     end
 
+    if type(x) == "number" then
+      local b = 2
+      log.debug("x "..tostring(x))
+      if (x < b) and (self._lastCursorMove == 0) then 
+        log.debug("cursor out left")
+        self._scrollOffset = x + b
+      end
+      if (x > (self.rect.width-b)) and (self._lastCursorMove == 1) then 
+        log.debug("cursor out right"); 
+        self._scrollOffset = x - (self.rect.width-b)
+      end
+      self:repositionMeshes(self.alignedMeshPos.x - self._scrollOffset, self.alignedMeshPos.y)
+      x = x- self._scrollOffset
+    end
+    
     self.cursorLayer:x(x)
     self.cursorLayer:y(y)
     self.cursorLayer:height(lh)

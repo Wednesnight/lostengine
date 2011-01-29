@@ -53,6 +53,7 @@ function TextInput:keyDown(event)
   elseif event.key == lost.application.K_DOWN then 
   elseif event.key == lost.application.K_ENTER then 
   elseif event.key == lost.application.K_TAB then 
+  elseif event.key == lost.application.K_ESCAPE then 
   elseif event.key == lost.application.K_BACKSPACE then 
     self.textLayer:eraseBeforeCursor()
     self.textLayer:cursorDecX()
