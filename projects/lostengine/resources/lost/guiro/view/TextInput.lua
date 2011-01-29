@@ -13,10 +13,11 @@ function TextInput:constructor(args)
   if args.font then self.textLayer:font(args.font) end
   self.textLayer:text(args.text or "")
   self:valign(args.valign or "center")
-  self:halign(args.halign or "center")  
+  self:halign(args.halign or "left")  
   self:needsDisplay()
   self:needsLayout()
   self.textLayer:cursorPos(lost.math.Vec2(0,0))
+  self.cursorLayer:hidden(true)
 end
 
 function TextInput:valign(v)
@@ -29,10 +30,12 @@ end
 
 function TextInput:focusReceived(event)
   self.focusLayer:hidden(false)
+  self.cursorLayer:hidden(false)
 end
 
 function TextInput:focusLost(event)
   self.focusLayer:hidden(true)
+  self.cursorLayer:hidden(true)
 end
 
 function TextInput:text(...)
@@ -56,7 +59,6 @@ function TextInput:keyDown(event)
   elseif event.key == lost.application.K_DELETE then
     self.textLayer:eraseAfterCursor()
   elseif string.len(event.character) > 0 then
---    self.textLayer:appendText(event.character)
     self.textLayer:insertAtCursor(event.character)
     self.textLayer:cursorIncX()
   end

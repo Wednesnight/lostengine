@@ -125,17 +125,20 @@ function Text:updateCursor()
 --    log.debug("clipped cpos: "..tostring(self._cursorPos.x))
     local lh = self._font.lineHeight
     local x = 0
+    local y = self.alignedMeshPos.y+(pl*lh)-lh-self.rect.y+self._font.descender
     local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
-    if nc == 0 then x = self._halign 
+    if nc == 0 then 
+      x = self._halign 
+      y = self._valign
     elseif nc > 0 and self._cursorPos.x == nc then 
       r = self.mesh:characterRect(self._cursorPos.y, nc-1)
---      log.debug("--"..tostring(r))
       x = r.x+self.alignedMeshPos.x-self.rect.x+r.width
-    else x = r.x+self.alignedMeshPos.x-self.rect.x end
---    log.debug("x: "..tostring(x).." nc:"..tostring(nc))
+    else 
+      x = r.x+self.alignedMeshPos.x-self.rect.x
+    end
 
     self.cursorLayer:x(x)
-    self.cursorLayer:y(self.alignedMeshPos.y+(pl*lh)-lh-self.rect.y+self._font.descender)
+    self.cursorLayer:y(y)
     self.cursorLayer:height(lh)
     self.cursorLayer:needsUpdate()
   end
