@@ -1047,7 +1047,9 @@ end
 
 function Pebble:menuBar(target, args)
   target.layer:addSublayer(lost.guiro.layer.Rect{filled=true,color=Color(1,1,1),gradient="menubarback"})
-  target:height(22)
+  target:height(20)
+  target.menuBarItemTheme="pebble"
+  target.menuBarItemStyle="default"
 end
 
 function Pebble:menuBarItem(target, args)
