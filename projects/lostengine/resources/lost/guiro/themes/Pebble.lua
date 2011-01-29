@@ -75,6 +75,13 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.TextInput", "default", function(target, args) self:textInput(target, args) end)
   self:addStyle("lost.guiro.view.Image", "default", function(target, args) self:imageView(target, args) end)
 
+  self:addStyle("lost.guiro.view.MenuBar", "default", function(target, args) self:menuBar(target, args) end)
+  self:addStyle("lost.guiro.view.MenuBarItem", "default", function(target, args) self:menuBarItem(target, args) end)
+  self:addStyle("lost.guiro.view.Menu", "default", function(target, args) self:menuRoundRect(target, args) end)
+  self:addStyle("lost.guiro.view.Menu", "toprect", function(target, args) self:menuTopRect(target, args) end)
+  self:addStyle("lost.guiro.view.Menu", "roundrect", function(target, args) self:menuRoundRect(target, args) end)
+  self:addStyle("lost.guiro.view.MenuItem", "default", function(target, args) self:menuItem(target, args) end)
+
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -1037,3 +1044,24 @@ function Pebble:imageView(target, args)
   target.layer:addSublayer(iv)
   target.imageLayer = iv
 end
+
+function Pebble:menuBar(target, args)
+  target.layer:addSublayer(lost.guiro.layer.Rect{filled=true,color=Color(1,1,1),gradient="menubarback"})
+  target:height(22)
+end
+
+function Pebble:menuBarItem(target, args)
+end
+
+function Pebble:menuRoundRect(target, args)
+end
+
+function Pebble:menuTopRect(target, args)
+end
+
+function Pebble:menuRoundRect(target, args)
+end
+
+function Pebble:menuItem(target, args)
+end
+
