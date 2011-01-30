@@ -110,6 +110,9 @@ function Pebble:constructor()
   
   self.sliderCandyTrackSize={regular=6, small=4,mini=2}
   self.sliderCandyHandleSize={regular=16, small=12,mini=10}
+  
+  self.menuBarHeight = 22
+  self.menuBarItemFont = {"Vera", 12}
 end
 
 function Pebble:labelDefault(target, args)
@@ -1047,12 +1050,35 @@ end
 
 function Pebble:menuBar(target, args)
   target.layer:addSublayer(lost.guiro.layer.Rect{filled=true,color=Color(1,1,1),gradient="menubarback"})
-  target:height(20)
+  target:height(self.menuBarHeight)
   target.menuBarItemTheme="pebble"
   target.menuBarItemStyle="default"
+  target.menuBarItemStyleParams = {theme="pebble", style="default"}  
 end
 
 function Pebble:menuBarItem(target, args)
+  local l = lost.guiro.layer.Layer
+  local r = lost.guiro.layer.Rect
+  local b = lost.guiro.view.Button
+  
+  target:mode("menuBarItem")
+  local normal = l{}
+  local pushed = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
+  local normal2 = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.menuBarItemFont,color=Color(0,0,0)}
+
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_PUSHED] = Color(1,1,1)
+  target.titleColors[b.STATE_NORMAL2] = Color(1,1,1)
+  target.titleColors[b.STATE_HOVER2] = Color(1,1,1)  
 end
 
 function Pebble:menuRoundRect(target, args)
