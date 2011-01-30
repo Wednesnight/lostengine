@@ -30,6 +30,7 @@ function Button:constructor(args)
   self._handlerMaps["sticky"] = self:createStickyHandlerMap()
   self._handlerMaps["toggle"] = self:createToggleHandlerMap()
   self._handlerMaps["toggleOnce"] = self:createToggleOnceHandlerMap()
+  self._handlerMaps["menuBarItem"] = self:createMenuBarItemHandlerMap()
   self._currentHandlerMap = nil
 	self:mode(t.mode or "normal")
 
@@ -232,6 +233,44 @@ function Button:createToggleOnceHandlerMap()
                      end
   }
 end
+
+function Button:createMenuBarItemHandlerMap()
+  return {
+    mouseEnter = function(event)
+                    if self:pushed() then return end
+                    if not self.mouseIsDown then
+                      self:togglestate(Button.STATE_HOVER)                       
+                    else
+                      self:togglestate(Button.STATE_PUSHED) 
+                    end
+                  end,
+    mouseLeave = function(event)
+                    if self:pushed() then return end
+--                    self:togglestate(Button.STATE_NORMAL) 
+                  end,
+    mouseDown = function(event)
+                    if self:pushed() then return end
+                    self.mouseIsDown = true                       
+                    self:togglestate(Button.STATE_PUSHED)
+                    self:dispatchButtonEvent("buttonDown")    
+                  end,
+    mouseUpInside = function(event)
+                        if self:pushed() then return end
+                        self.mouseIsDown = false
+                        self:pushed(not self:pushed())
+                        self:togglestate(Button.STATE_HOVER)
+                        self:dispatchButtonEvent("buttonClick")    
+                        self:dispatchButtonEvent("buttonUp")    
+                      end,
+    mouseUpOutside = function(event)
+                       if self:pushed() then return end
+                       self.mouseIsDown = false
+                       self:togglestate(Button.STATE_NORMAL)
+                       self:dispatchButtonEvent("buttonUp")    
+                     end
+  }
+end
+
 
 
 -- use this function like you would use state. IT will set the state
