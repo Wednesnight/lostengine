@@ -1061,33 +1061,20 @@ function Pebble:menuBarItem(target, args)
   local r = lost.guiro.layer.Rect
   local b = lost.guiro.view.Button
   
-  target:mode("menuBarItem")
-  local normal = l{}
-  local pushed = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
-  local normal2 = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.menuBarItemFont,color=Color(0,0,0)}
-
-  target.layer:addSublayer(normal)
-  target.layer:addSublayer(pushed)
-  target.layer:addSublayer(normal2)
+  local highlight = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},valign="center", halign="center",font=self.menuBarItemFont,color=Color(0,0,0)}
+  target.layer:addSublayer(highlight)
   target.layer:addSublayer(text)
   target.textLayer = text
-  target.backgrounds[b.STATE_NORMAL] = normal
-  target.backgrounds[b.STATE_PUSHED] = pushed
-  target.backgrounds[b.STATE_NORMAL2] = normal2
-  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
-  target.titleColors[b.STATE_PUSHED] = Color(1,1,1)
-  target.titleColors[b.STATE_NORMAL2] = Color(1,1,1)
-  target.titleColors[b.STATE_HOVER2] = Color(1,1,1)  
+  target.highlightLayer = highlight
+  target.normalTextColor = Color(0,0,0)
+  target.highlightedTextColor = Color(1,1,1)  
 end
 
 function Pebble:menuRoundRect(target, args)
 end
 
 function Pebble:menuTopRect(target, args)
-end
-
-function Pebble:menuRoundRect(target, args)
 end
 
 function Pebble:menuItem(target, args)
