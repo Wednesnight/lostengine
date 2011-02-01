@@ -22,6 +22,9 @@ end
 
 function MenuBar:menuBarMouseDown(event)
   log.debug(event.type.." "..event.target.id)
+  self:releaseAllItems()
+  event.target:highlight(true)
+  log.debug("down time: "..tostring(lost.platform.currentTimeSeconds()))
 end
 
 function MenuBar:menuBarMouseUpInside(event)
@@ -34,7 +37,7 @@ end
 
 function MenuBar:releaseAllItems()
   for k,barItem in ipairs(self._menuBarItems) do
-    barItem:pushed(false)
+    barItem:highlight(false)
   end
 end
 
@@ -43,7 +46,10 @@ function MenuBar:rebuildMenuBarItems()
   for k,v in ipairs(self._menuBarItems) do 
     self:removeSubview(v)
   end
+  self._menuBarItems = {}
   
+  -- build style table that's used for construction of the items
+  -- copy style params that were sent from MenuBar style
   local mbistyle = {}
   for k,v in ipairs(self.menuBarItemStyleParams) do
     mbistyle[k] = v
