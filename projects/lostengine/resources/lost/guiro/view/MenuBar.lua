@@ -14,6 +14,7 @@ function MenuBar:constructor(args)
   self.mouseUpInsideHandler = function(event) self:menuBarMouseUpInside(event) end
   self.mouseUpOutsideHandler = function(event) self:menuBarMouseUpOutside(event) end
   self:items(t.items or {})
+  self._hoverMode = false
 end
 
 function MenuBar:menuBarItemClick(event)
@@ -62,11 +63,12 @@ function MenuBar:rebuildMenuBarItems()
     mbistyle.title = item.title
     mbistyle.id = tostring(i+1)
     local mbi = lost.guiro.view.MenuBarItem(mbistyle)
+    mbi.delegate = self
     table.insert(self._menuBarItems, mbi)
-    mbi:addEventListener("buttonClick", self.buttonClickHandler )
-    mbi:addEventListener("mouseDown", self.mouseDownHandler )
-    mbi:addEventListener("mouseUpInside", self.mouseUpInsideHandler )
-    mbi:addEventListener("mouseUpOutside", self.mouseUpOutsideHandler )
+--    mbi:addEventListener("buttonClick", self.buttonClickHandler )
+--    mbi:addEventListener("mouseDown", self.mouseDownHandler )
+--    mbi:addEventListener("mouseUpInside", self.mouseUpInsideHandler )
+--    mbi:addEventListener("mouseUpOutside", self.mouseUpOutsideHandler )
     self:addSubview(mbi)
     i = i+1
   end
@@ -80,3 +82,28 @@ function MenuBar:items(...)
     return self._items
   end
 end
+
+-- delegate methods
+
+function MenuBar:itemPressed(mbi)
+  self._hoverMode = true
+  log.debug("PRESSED "..mbi.id)
+end
+
+function MenuBar:itemReleased(mbi)
+  log.debug("RELEASED "..mbi.id)
+  self._hoverMode = false
+end
+
+function MenuBar:itemShouldHighlight()
+  return self._hoverMode
+end
+
+function MenuBar:itemActive(mbi)
+  log.debug("active "..mbi.id)
+end
+
+function MenuBar:itemInactive(mbi)
+  log.debug("inactive "..mbi.id)
+end
+
