@@ -3298,6 +3298,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E531D920F14EDEA00D7C8B4 /* macosx.xcconfig */;
 			buildSettings = {
+				SDKROOT = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -3319,6 +3320,7 @@
 					__STDC_CONSTANT_MACROS,
 				);
 				PRODUCT_NAME = LostEngine;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -3350,6 +3352,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "LostEngineLauncher-Info.plist";
 				PRODUCT_NAME = LostEngine;
+				SDKROOT = "";
 				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
@@ -3381,6 +3384,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = LostEngineUnittests;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
