@@ -18,7 +18,8 @@ function startup()
       style="square",
       size="regular",
       items={{"Layers",require("layers")},
-             {"Views",require("views")}}
+             {"Views",require("views")},
+             {"Animations",require("animations")}}
     },
 --    lost.guiro.view.FpsMeter
 --    {
