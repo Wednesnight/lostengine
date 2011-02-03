@@ -14,13 +14,26 @@ function MenuBarItem:constructor(args)
   local t = args or {}
   self.id = t.id or "menubaritem"
   self:title(t.title or "")
+  self:menu(args.menu)
   self:highlight(false)
-  
   self:addEventListener("mouseDown", function(event) self:mouseDown(event) end)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)
+  
+end
+
+function MenuBarItem:openMenu()
+  self._menu:x(self.rect.x)
+  local ny = self.rect.y-self._menu.rect.height
+--  log.debug("setting y to "..tostring(ny))
+  self._menu:y(ny)
+  self._menu:open()
+end
+
+function MenuBarItem:closeMenu()
+  self._menu:close()
 end
 
 function MenuBarItem:highlight(v)
@@ -28,11 +41,23 @@ function MenuBarItem:highlight(v)
     self._highlighted = true
     self.highlightLayer:show()
     self.textLayer:color(self.highlightedTextColor)
+    self:openMenu()
   else
     self._highlighted = false
     self.highlightLayer:hide()
     self.textLayer:color(self.normalTextColor)
+    self:closeMenu()
   end
+end
+
+function MenuBarItem:menu(t)
+  local params = {}
+  params.style = self.menuStyle
+  params.theme = self.menuTheme
+  for k,v in ipairs(t) do
+    params[k] = v
+  end
+  self._menu = lost.guiro.view.Menu(params)
 end
 
 function MenuBarItem:title(v)

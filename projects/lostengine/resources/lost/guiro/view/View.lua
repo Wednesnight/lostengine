@@ -93,8 +93,8 @@ function View:x(v)
   self:needsLayout()
 end
 
-function View:y()
-  self._bounds.x = lost.guiro.Bounds.decodeEntry(2,v)
+function View:y(v)
+  self._bounds.y = lost.guiro.Bounds.decodeEntry(2,v)
   self:needsLayout()
 end
 
@@ -111,6 +111,11 @@ end
 function View:height(v)
   self._bounds.height = lost.guiro.Bounds.decodeEntry(4,v)
   self:needsLayout()
+end
+
+function View:size(wv, hv)
+  self:width(wv)
+  self:height(hv)
 end
 
 function View:superview(...)
