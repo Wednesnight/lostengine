@@ -62,6 +62,7 @@ function MenuBar:rebuildMenuBarItems()
     mbistyle.bounds = {i*100,0,100,22}
     mbistyle.title = item.title
     mbistyle.id = tostring(i+1)
+    mbistyle.menu = item
     local mbi = lost.guiro.view.MenuBarItem(mbistyle)
     mbi.delegate = self
     table.insert(self._menuBarItems, mbi)

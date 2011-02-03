@@ -113,6 +113,11 @@ function Pebble:constructor()
   
   self.menuBarHeight = 22
   self.menuBarItemFont = {"Vera", 12}
+  self.menuRadius = 8
+--  self.menuColor = Color(244/255, 244/255, 244/255,.8)
+  self.menuColor = Color(1, 1, 1,.95)
+  self.menuSeparatorColor = Color(218/255,218/255,218/255)
+  self.menuFrameColor = Color(0,0,0,.2)
 end
 
 function Pebble:labelDefault(target, args)
@@ -1069,12 +1074,26 @@ function Pebble:menuBarItem(target, args)
   target.highlightLayer = highlight
   target.normalTextColor = Color(0,0,0)
   target.highlightedTextColor = Color(1,1,1)  
+  target.menuTheme="pebble"
+  target.menuStyle="toprect"
 end
 
 function Pebble:menuRoundRect(target, args)
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius}
+  target.layer:addSublayer(bg)
+  target:size(100, 200)
 end
 
 function Pebble:menuTopRect(target, args)
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius,roundCorners={tl=false, tr=false}}
+  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=self.menuRadius, roundCorners={tl=false, tr=false}, bounds={-1,-1,{"1",2},{"1",1}}}
+  target.layer:addSublayer(fr)
+  target.layer:addSublayer(bg)
+--  target:pos(20,10)
+--  target:size(100, 200)
+  
+--  self:windowPanel(target, args)
+  target:bounds(lost.guiro.Bounds(10,10,100,200))
 end
 
 function Pebble:menuItem(target, args)

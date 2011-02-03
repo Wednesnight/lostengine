@@ -6,8 +6,9 @@ return lost.guiro.view.View
     {
       bounds={0,"top","1",30},
       items={
-        {"Menu 1", 
-          {
+        {
+          title="Menu 1", 
+          items={
             {title="m1 First"},
             {title="m1 Second"},
             "-",
@@ -15,8 +16,9 @@ return lost.guiro.view.View
             {title="m1 Fourth"},              
           }
         },
-        {"Menu 2", 
-          {
+        {
+          title="Menu 2", 
+          items={
             {title="m2 First"},
             {title="m2 Second"},
             "-",
@@ -25,13 +27,22 @@ return lost.guiro.view.View
             "-",
             {title="m2 Fifth"},              
           }
+        },
+        {
+          title="Menu 3", 
+          items={
+            {title="m3 First"},
+            {title="m3 Second"},
+            "-",
+            {title="m3 Third"},              
+            {title="m3 Fourth"},              
+            "-",
+            {title="m3 Fifth"},              
+            {title="m3 Sixth"},              
+            {title="m3 Seventh"},              
+          }
         }
       }
     },
-    lost.guiro.view.MenuBarItem
-    {
-      bounds = {50,50,200,22},
-      title = "Hello",
-    }
   }
 }
