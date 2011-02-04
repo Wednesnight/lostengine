@@ -15,6 +15,8 @@ function MenuBar:constructor(args)
   self.mouseUpOutsideHandler = function(event) self:menuBarMouseUpOutside(event) end
   self:items(t.items or {})
   self._hoverMode = false
+  self._itemPressTime = 0
+  self.clickDelta = 0.400
 end
 
 function MenuBar:menuBarItemClick(event)
@@ -84,16 +86,32 @@ function MenuBar:items(...)
   end
 end
 
--- delegate methods
+-- MenuBarItem delegate methods
 
 function MenuBar:itemPressed(mbi)
-  self._hoverMode = true
-  log.debug("PRESSED "..mbi.id)
+  if self._hoverMode then
+    self._itemPressTime = 0
+    log.debug("!! preparing switch off from hover mode")
+  else
+    self._hoverMode = true
+    self._itemPressTime = lost.platform.currentTimeSeconds()
+  end
+  log.debug("PRESSED "..mbi.id.." "..tostring(self._itemPressTime))
 end
 
 function MenuBar:itemReleased(mbi)
-  log.debug("RELEASED "..mbi.id)
-  self._hoverMode = false
+  log.debug("/////// press time "..tostring(self._itemPressTime))
+  if self._itemPressTime == 0 then
+    self._hoverMode = false
+    log.debug("!!!!!!!!!!!!!!!! switch off from hover!")
+  else
+    local t = lost.platform.currentTimeSeconds()
+    local d = t - self._itemPressTime
+    if d > self.clickDelta then
+      self._hoverMode = false
+    end
+  end
+  log.debug("RELEASED "..mbi.id.." clickdelta "..tostring(d))  
 end
 
 function MenuBar:itemShouldHighlight()

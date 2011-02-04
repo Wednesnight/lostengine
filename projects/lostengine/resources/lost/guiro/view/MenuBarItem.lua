@@ -65,21 +65,33 @@ function MenuBarItem:title(v)
 end
 
 function MenuBarItem:mouseDown(event) 
-  self:highlight(true)
   self.delegate:itemPressed(self)
-  self.delegate:itemActive(self)
+  if self.delegate:itemShouldHighlight() then
+    self:highlight(true)
+    self.delegate:itemActive(self)
+  end
 end
 
 function MenuBarItem:mouseUpInside(event) 
-  self:highlight(false)  
   self.delegate:itemReleased(self)
-  self.delegate:itemInactive(self)
+  if self.delegate:itemShouldHighlight() then
+    self:highlight(true)
+    self.delegate:itemActive(self)
+  else
+    self:highlight(false)  
+    self.delegate:itemInactive(self)
+  end
 end
 
 function MenuBarItem:mouseUpOutside(event) 
-  self:highlight(false)  
   self.delegate:itemReleased(self)
-  self.delegate:itemInactive(self)
+  if self.delegate:itemShouldHighlight() then
+    self:highlight(true)
+    self.delegate:itemActive(self)
+  else
+    self:highlight(false)  
+    self.delegate:itemInactive(self)
+  end
 end
 
 function MenuBarItem:mouseEnter(event) 
