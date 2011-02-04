@@ -41,12 +41,12 @@ function MenuBarItem:highlight(v)
     self._highlighted = true
     self.highlightLayer:show()
     self.textLayer:color(self.highlightedTextColor)
-    self:openMenu()
+--    self:openMenu()
   else
     self._highlighted = false
     self.highlightLayer:hide()
     self.textLayer:color(self.normalTextColor)
-    self:closeMenu()
+--    self:closeMenu()
   end
 end
 
@@ -58,6 +58,7 @@ function MenuBarItem:menu(t)
     params[k] = v
   end
   self._menu = lost.guiro.view.Menu(params)
+  self._menu.delegate = self
 end
 
 function MenuBarItem:title(v)
@@ -68,6 +69,7 @@ function MenuBarItem:mouseDown(event)
   self.delegate:itemPressed(self)
   if self.delegate:itemShouldHighlight() then
     self:highlight(true)
+    self:openMenu()
     self.delegate:itemActive(self)
   end
 end
@@ -76,9 +78,11 @@ function MenuBarItem:mouseUpInside(event)
   self.delegate:itemReleased(self)
   if self.delegate:itemShouldHighlight() then
     self:highlight(true)
+    self:openMenu()
     self.delegate:itemActive(self)
   else
     self:highlight(false)  
+    self:closeMenu()
     self.delegate:itemInactive(self)
   end
 end
@@ -87,17 +91,20 @@ function MenuBarItem:mouseUpOutside(event)
   self.delegate:itemReleased(self)
   if self.delegate:itemShouldHighlight() then
     self:highlight(true)
+    self:openMenu()
     self.delegate:itemActive(self)
   else
     self:highlight(false)  
+    self:closeMenu()
     self.delegate:itemInactive(self)
   end
 end
 
 function MenuBarItem:mouseEnter(event) 
-  log.debug(event.type.." "..event.target.id)
+--  log.debug(event.type.." "..event.target.id)
   if self.delegate:itemShouldHighlight() then
     self:highlight(true)
+    self:openMenu()
     self.delegate:itemActive(self)
   end
 end
@@ -113,10 +120,19 @@ function MenuBarItem:mouseUnderItem(pos)
 end
 
 function MenuBarItem:mouseLeave(event) 
-  log.debug(event.type.." "..event.target.id)
+--  log.debug(event.type.." "..event.target.id)
   if self._highlighted and (not self:mouseUnderItem(event.pos)) then 
     self:highlight(false)
+    self:closeMenu()
     self.delegate:itemInactive(self)
   end
 end
 
+-- Menu delegate methods
+
+function MenuBarItem:menuWillClose(menu)
+  log.debug("!!")
+  self:highlight(false)
+  self.delegate:itemReleased(self)  
+  self.delegate:itemInactive(self)
+end

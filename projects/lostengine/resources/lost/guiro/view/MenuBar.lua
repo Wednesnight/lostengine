@@ -11,40 +11,11 @@ function MenuBar:constructor(args)
   self.id = t.id or "menubar"
   
   self._menuBarItems = {}
-  self.buttonClickHandler = function(event) self:menuBarItemClick(event) end
-  self.mouseDownHandler = function(event) self:menuBarMouseDown(event) end
-  self.mouseUpInsideHandler = function(event) self:menuBarMouseUpInside(event) end
-  self.mouseUpOutsideHandler = function(event) self:menuBarMouseUpOutside(event) end
   self:items(t.items or {})
   self._hoverMode = false
   self._itemPressTime = 0
   self.clickDelta = 0.400
   self._activeItem = nil
-end
-
-function MenuBar:menuBarItemClick(event)
-  log.debug(event.type.." "..event.target.id)
-end
-
-function MenuBar:menuBarMouseDown(event)
-  log.debug(event.type.." "..event.target.id)
-  self:releaseAllItems()
-  event.target:highlight(true)
-  log.debug("down time: "..tostring(lost.platform.currentTimeSeconds()))
-end
-
-function MenuBar:menuBarMouseUpInside(event)
-  log.debug(event.type.." "..event.target.id)
-end
-
-function MenuBar:menuBarMouseUpOutside(event)
-  log.debug(event.type.." "..event.target.id)
-end
-
-function MenuBar:releaseAllItems()
-  for k,barItem in ipairs(self._menuBarItems) do
-    barItem:highlight(false)
-  end
 end
 
 function MenuBar:rebuildMenuBarItems()
@@ -70,10 +41,6 @@ function MenuBar:rebuildMenuBarItems()
     local mbi = lost.guiro.view.MenuBarItem(mbistyle)
     mbi.delegate = self
     table.insert(self._menuBarItems, mbi)
---    mbi:addEventListener("buttonClick", self.buttonClickHandler )
---    mbi:addEventListener("mouseDown", self.mouseDownHandler )
---    mbi:addEventListener("mouseUpInside", self.mouseUpInsideHandler )
---    mbi:addEventListener("mouseUpOutside", self.mouseUpOutsideHandler )
     self:addSubview(mbi)
     local m = lost.font.render(item.title, mbi.textLayer:font(), false)
     local w = m.size.width+self.itemPadding
@@ -130,6 +97,7 @@ function MenuBar:itemActive(mbi)
   if self._activeItem then
     if self._activeItem ~= mbi then
       self._activeItem:highlight(false)
+      self._activeItem:closeMenu()
     end
   end
   self._activeItem = mbi
