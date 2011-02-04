@@ -3,6 +3,7 @@ module("lost.guiro.view", package.seeall)
 lost.common.Class "lost.guiro.view.UserInterface" "lost.guiro.view.View" {}
 
 local EventManager = lost.guiro.event.EventManager
+local Event = lost.guiro.event.Event
 
 function UserInterface:constructor(args)
   lost.guiro.view.View.constructor(self,args)
@@ -19,6 +20,9 @@ function UserInterface:constructor(args)
   self.layer.layerNodes:add(lost.rg.DepthTest.create(false))
   
   tasklet.uiNode:add(self.layer.renderNode)  
+  self._wmMouseDown = function(event) lost.guiro.windowManager():mouseDown(event) end
+  self:addEventListener("mouseDown", self._wmMouseDown, Event.PHASE_CAPTURE)
+  self:addEventListener("mouseDown", self._wmMouseDown, Event.PHASE_TARGET)
 end
 
 function UserInterface:setEventDispatcher(eventDispatcher)
