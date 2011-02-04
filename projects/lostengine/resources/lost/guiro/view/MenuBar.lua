@@ -3,6 +3,8 @@ module("lost.guiro.view", package.seeall)
 lost.common.Class "lost.guiro.view.MenuBar" "lost.guiro.view.View" {}
 
 -- menuBarItemStyleParams must be set in style
+-- itemPadding: will be added to width, so padding = item title margin*2
+-- itemLeftOffset: x offset of first item
 function MenuBar:constructor(args)
   lost.guiro.view.View.constructor(self, args)
   local t = args or {}
@@ -17,6 +19,7 @@ function MenuBar:constructor(args)
   self._hoverMode = false
   self._itemPressTime = 0
   self.clickDelta = 0.400
+  self._activeItem = nil
 end
 
 function MenuBar:menuBarItemClick(event)
@@ -59,11 +62,10 @@ function MenuBar:rebuildMenuBarItems()
   end
   
   -- create new ones
-  local i = 0
+  local xoffset = self.itemLeftOffset
   for k,item in ipairs(self._items) do
-    mbistyle.bounds = {i*100,0,100,22}
+    mbistyle.bounds = {100,0,100,22}
     mbistyle.title = item.title
-    mbistyle.id = tostring(i+1)
     mbistyle.menu = item
     local mbi = lost.guiro.view.MenuBarItem(mbistyle)
     mbi.delegate = self
@@ -73,7 +75,12 @@ function MenuBar:rebuildMenuBarItems()
 --    mbi:addEventListener("mouseUpInside", self.mouseUpInsideHandler )
 --    mbi:addEventListener("mouseUpOutside", self.mouseUpOutsideHandler )
     self:addSubview(mbi)
-    i = i+1
+    local m = lost.font.render(item.title, mbi.textLayer:font(), false)
+    local w = m.size.width+self.itemPadding
+    log.debug("!! text width "..tostring(w))
+    mbi:width(w)
+    mbi:x(xoffset)
+    xoffset = xoffset+w
   end
 end
 
@@ -91,19 +98,19 @@ end
 function MenuBar:itemPressed(mbi)
   if self._hoverMode then
     self._itemPressTime = 0
-    log.debug("!! preparing switch off from hover mode")
+--    log.debug("!! preparing switch off from hover mode")
   else
     self._hoverMode = true
     self._itemPressTime = lost.platform.currentTimeSeconds()
   end
-  log.debug("PRESSED "..mbi.id.." "..tostring(self._itemPressTime))
+--  log.debug("PRESSED "..mbi.id.." "..tostring(self._itemPressTime))
 end
 
 function MenuBar:itemReleased(mbi)
-  log.debug("/////// press time "..tostring(self._itemPressTime))
+--  log.debug("/////// press time "..tostring(self._itemPressTime))
   if self._itemPressTime == 0 then
     self._hoverMode = false
-    log.debug("!!!!!!!!!!!!!!!! switch off from hover!")
+--    log.debug("!!!!!!!!!!!!!!!! switch off from hover!")
   else
     local t = lost.platform.currentTimeSeconds()
     local d = t - self._itemPressTime
@@ -111,7 +118,7 @@ function MenuBar:itemReleased(mbi)
       self._hoverMode = false
     end
   end
-  log.debug("RELEASED "..mbi.id.." clickdelta "..tostring(d))  
+--  log.debug("RELEASED "..mbi.id.." clickdelta "..tostring(d))  
 end
 
 function MenuBar:itemShouldHighlight()
@@ -119,10 +126,18 @@ function MenuBar:itemShouldHighlight()
 end
 
 function MenuBar:itemActive(mbi)
-  log.debug("active "..mbi.id)
+--  log.debug("active "..mbi.id)
+  if self._activeItem then
+    if self._activeItem ~= mbi then
+      self._activeItem:highlight(false)
+    end
+  end
+  self._activeItem = mbi
 end
 
 function MenuBar:itemInactive(mbi)
-  log.debug("inactive "..mbi.id)
+  if self._activeItem == mbi then
+    self._activeItem = nil
+  end
 end
 

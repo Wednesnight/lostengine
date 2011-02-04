@@ -18,7 +18,7 @@ function startup()
       bounds={0,"top","1",30},
       items={
         {
-          title="Menu 1", 
+          title="File", 
           items={
             {title="m1 First"},
             {title="m1 Second"},
@@ -28,7 +28,7 @@ function startup()
           }
         },
         {
-          title="Menu 2", 
+          title="Edit", 
           items={
             {title="m2 First"},
             {title="m2 Second"},
@@ -40,7 +40,7 @@ function startup()
           }
         },
         {
-          title="Menu 3", 
+          title="Long Menu Name", 
           items={
             {title="m3 First"},
             {title="m3 Second"},
@@ -52,7 +52,15 @@ function startup()
             {title="m3 Sixth"},              
             {title="m3 Seventh"},              
           }
-        }
+        },
+        {
+          title="Short Again", 
+          items={
+            {title="m4 First"},
+            {title="m4 Second"},
+            {title="m4 Third"},              
+          }
+        },
       }
     },
   }

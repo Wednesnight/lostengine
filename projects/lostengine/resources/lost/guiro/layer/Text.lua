@@ -27,7 +27,7 @@ function Text:constructor(args)
 
   self.mesh = lost.font.RenderedText.create()
   self.mesh.material.shader = lost.guiro.shaderFactory():texture()
-  self.mesh.material:blendNormal()
+  self.mesh.material:blendPremultiplied()
   
   self.shadowMesh = lost.font.RenderedText.create()
   self.shadowMesh.material.shader = lost.guiro.shaderFactory():texture()
@@ -231,6 +231,10 @@ function Text:text(...)
   end
 end
 
+function Text:renderedTextWidth()
+  return self.mesh.size.width
+end
+
 function Text:appendText(s)
 --  self._text = self._text..s
 --  self._dirtyText = true
@@ -244,7 +248,7 @@ function Text:font(...)
     self.buffer:font(self._font)
     self:needsDisplay()
   else
-    return nil -- FIXME self._font
+    return self._font
   end
 end
 
