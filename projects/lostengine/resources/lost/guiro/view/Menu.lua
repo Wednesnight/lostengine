@@ -15,8 +15,13 @@ function Menu:open()
 end
 
 function Menu:close()
-  if self.delegate then
-    self.delegate:menuWillClose(self)
-  end
   lost.guiro.windowManager():closeMenu(self)
+end
+
+function Menu:externalCloseRequest(event)
+  if self.delegate then
+    return self.delegate:menuExternalCloseRequest(self, event)
+  else
+    return true
+  end
 end

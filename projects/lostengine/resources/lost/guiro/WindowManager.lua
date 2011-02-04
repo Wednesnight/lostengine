@@ -28,7 +28,7 @@ function WindowManager:openMenu(menu)
     self:openWindow(menu)
     self._menus[menu] = menu
     self._numMenus = self._numMenus + 1
-    log.debug("menus "..self._numMenus)
+--    log.debug("menus "..self._numMenus)
   end
 end
 
@@ -37,7 +37,7 @@ function WindowManager:closeMenu(menu)
     self:closeWindow(menu)
     self._menus[menu] = nil
     self._numMenus = self._numMenus - 1
-    log.debug("menus "..self._numMenus)
+--    log.debug("menus "..self._numMenus)
   end
 end
 
@@ -55,7 +55,9 @@ function WindowManager:mouseDown(event)
   -- close all menus if click was not on any one of them
   if not oneMenuContainsEvent then
     for k,v in pairs(self._menus) do
-      v:close()
+      if v:externalCloseRequest(event) then
+        v:close()
+      end
     end
   end
   
