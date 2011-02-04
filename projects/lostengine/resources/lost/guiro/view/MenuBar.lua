@@ -44,7 +44,6 @@ function MenuBar:rebuildMenuBarItems()
     self:addSubview(mbi)
     local m = lost.font.render(item.title, mbi.textLayer:font(), false)
     local w = m.size.width+self.itemPadding
-    log.debug("!! text width "..tostring(w))
     mbi:width(w)
     mbi:x(xoffset)
     xoffset = xoffset+w
@@ -63,24 +62,27 @@ end
 -- MenuBarItem delegate methods
 
 function MenuBar:itemPressed(mbi)
+--  log.debug("/// hover "..tostring(self._hoverMode))
   if self._hoverMode then
     self._itemPressTime = 0
 --    log.debug("!! preparing switch off from hover mode")
   else
     self._hoverMode = true
     self._itemPressTime = lost.platform.currentTimeSeconds()
+--    log.debug("!!! switching on hover mode")
   end
 --  log.debug("PRESSED "..mbi.id.." "..tostring(self._itemPressTime))
 end
 
 function MenuBar:itemReleased(mbi)
 --  log.debug("/////// press time "..tostring(self._itemPressTime))
+  local d = 0
   if self._itemPressTime == 0 then
     self._hoverMode = false
 --    log.debug("!!!!!!!!!!!!!!!! switch off from hover!")
   else
     local t = lost.platform.currentTimeSeconds()
-    local d = t - self._itemPressTime
+    d = t - self._itemPressTime
     if d > self.clickDelta then
       self._hoverMode = false
     end
@@ -109,3 +111,7 @@ function MenuBar:itemInactive(mbi)
   end
 end
 
+function MenuBar:menuBarItemExternalCloseRequest(item)
+--  log.debug("//////////////////////////////////////////////////////////")
+  self._hoverMode = false
+end

@@ -27,7 +27,6 @@ end
 function MenuBarItem:openMenu()
   self._menu:x(self.rect.x)
   local ny = self.rect.y-self._menu.rect.height
---  log.debug("setting y to "..tostring(ny))
   self._menu:y(ny)
   self._menu:open()
 end
@@ -41,12 +40,10 @@ function MenuBarItem:highlight(v)
     self._highlighted = true
     self.highlightLayer:show()
     self.textLayer:color(self.highlightedTextColor)
---    self:openMenu()
   else
     self._highlighted = false
     self.highlightLayer:hide()
     self.textLayer:color(self.normalTextColor)
---    self:closeMenu()
   end
 end
 
@@ -101,7 +98,7 @@ function MenuBarItem:mouseUpOutside(event)
 end
 
 function MenuBarItem:mouseEnter(event) 
---  log.debug(event.type.." "..event.target.id)
+--  log.debug(event.type.." "..event.target.id.." shouldHghlight: "..tostring(self.delegate:itemShouldHighlight()))
   if self.delegate:itemShouldHighlight() then
     self:highlight(true)
     self:openMenu()
@@ -130,9 +127,15 @@ end
 
 -- Menu delegate methods
 
-function MenuBarItem:menuWillClose(menu)
+function MenuBarItem:menuExternalCloseRequest(menu, event)
   log.debug("!!")
-  self:highlight(false)
-  self.delegate:itemReleased(self)  
-  self.delegate:itemInactive(self)
+  if not self:containsCoord(event.pos) then
+    self:highlight(false)
+  --  self.delegate:itemReleased(self)  
+    self.delegate:menuBarItemExternalCloseRequest(self)
+    self.delegate:itemInactive(self)
+    return true
+  else
+    return false
+  end
 end
