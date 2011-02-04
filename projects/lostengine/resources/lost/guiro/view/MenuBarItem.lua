@@ -102,9 +102,19 @@ function MenuBarItem:mouseEnter(event)
   end
 end
 
+function MenuBarItem:mouseUnderItem(pos)
+  local result = false
+  
+  if (pos.x >= self.rect.x) and (pos.x <= (self.rect.x+self.rect.width)) and (pos.y < self.rect.y) then
+    result = true
+  end
+  
+  return result
+end
+
 function MenuBarItem:mouseLeave(event) 
   log.debug(event.type.." "..event.target.id)
-  if self._highlighted then 
+  if self._highlighted and (not self:mouseUnderItem(event.pos)) then 
     self:highlight(false)
     self.delegate:itemInactive(self)
   end

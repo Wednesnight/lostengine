@@ -1059,6 +1059,8 @@ function Pebble:menuBar(target, args)
   target.menuBarItemTheme="pebble"
   target.menuBarItemStyle="default"
   target.menuBarItemStyleParams = {theme="pebble", style="default"}  
+  target.itemPadding = 20
+  target.itemLeftOffset = 10
 end
 
 function Pebble:menuBarItem(target, args)
@@ -1067,7 +1069,7 @@ function Pebble:menuBarItem(target, args)
   local b = lost.guiro.view.Button
   
   local highlight = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},valign="center", halign="center",font=self.menuBarItemFont,color=Color(0,0,0)}
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},valign="center", clip=true, characterMetrics=false, halign="center",font=self.menuBarItemFont,color=Color(0,0,0)}
   target.layer:addSublayer(highlight)
   target.layer:addSublayer(text)
   target.textLayer = text
