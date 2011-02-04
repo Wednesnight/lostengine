@@ -62,20 +62,21 @@ function Tween:process()
   local now = lost.platform.currentTimeSeconds()
   self.time = math.min(self.time + (now - self.timestamp), self.tweenProperties.duration)
   self.timestamp = now
-  
+
+  -- Since we always use 0 and 1, we could simplify the Interpolation functions
+  -- instead.
+  local delta = self.tweenProperties.method(self.time, 0, 1, self.tweenProperties.duration)
+
   if type(self.tweenProperties.beforeProcess) == "function" then
-    self.tweenProperties.beforeProcess(self)
+    self.tweenProperties.beforeProcess(self, delta)
   end
 
   for property in next, self.targetProperties do
-    self.target[property] = self.tweenProperties.method(self.time,
-                                                        self.originalProperties[property],
-                                                        self.targetProperties[property] - self.originalProperties[property],
-                                                        self.tweenProperties.duration)
+    self.target[property] = self.originalProperties[property] + (delta * (self.targetProperties[property] - self.originalProperties[property]))
   end
 
   if type(self.tweenProperties.afterProcess) == "function" then
-    self.tweenProperties.afterProcess(self)
+    self.tweenProperties.afterProcess(self, delta)
   end
 
   if self.time < self.tweenProperties.duration then

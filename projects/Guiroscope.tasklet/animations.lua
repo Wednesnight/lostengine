@@ -376,6 +376,25 @@ return lost.guiro.view.View
               animate(event.target, Tween.bounceInOut, {x = 430, y = 450, width = 100, height = 16}, {x = 430 + mode.x, y = 450 + mode.y, width = 100 + mode.width, height = 16 + mode.height})
             end
           }
+        },
+        lost.guiro.view.Button
+        {
+          title = "Custom Animation",
+          bounds = {430,400,100,16},
+          listeners = {
+            buttonClick = function(event)
+              Tween(event.target, {}, {
+                  method = Tween.bounceInOut,
+                  afterProcess = function(t, delta)
+                    -- Instead of translation, do shader geschwurbel or
+                    -- some other pretty things with delta.
+                    local x = 430 + (delta * 150)
+                    local y = 400 + (math.sin(delta * 2 * math.pi) * 50)
+                    t.target:bounds(lost.guiro.Bounds(x, y, 100, 16))
+                  end
+                })
+            end
+          }
         }
       }
     }
