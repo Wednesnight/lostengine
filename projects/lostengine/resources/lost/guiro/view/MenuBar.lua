@@ -27,17 +27,21 @@ function MenuBar:rebuildMenuBarItems()
   
   -- build style table that's used for construction of the items
   -- copy style params that were sent from MenuBar style
-  local mbistyle = {}
   for k,v in ipairs(self.menuBarItemStyleParams) do
     mbistyle[k] = v
   end
   
+  local mbistyle = {}
   -- create new ones
   local xoffset = self.itemLeftOffset
   for k,item in ipairs(self._items) do
+    mbistyle = {}
     mbistyle.bounds = {100,0,100,22}
-    mbistyle.title = item.title
-    mbistyle.menu = item
+--    mbistyle.title = item.title
+--    mbistyle.menu = item
+    for k,v in pairs(item) do
+      mbistyle[k] = v
+    end
     local mbi = lost.guiro.view.MenuBarItem(mbistyle)
     mbi.delegate = self
     table.insert(self._menuBarItems, mbi)

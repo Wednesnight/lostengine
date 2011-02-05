@@ -1096,8 +1096,35 @@ function Pebble:menuTopRect(target, args)
   
 --  self:windowPanel(target, args)
   target:bounds(lost.guiro.Bounds(10,10,100,200))
+  target.topMargin = 4
+  target.bottomMargin = 4
+  target.leftMargin = 4
+  target.rightMargin = 4
+  local hl =  lost.guiro.layer.HLine
+  local l = lost.guiro.layer.Layer
+  local sepHeight = 19
+  target.createSeparatorLayerFunc = function() return l{bounds={0,0,"1",sepHeight},
+                                                        sublayers={hl{bounds={0,"center","1",1}, color=self.menuFrameColor}} 
+                                                       } 
+                                    end
+  target.separatorHeight = sepHeight                       
 end
 
 function Pebble:menuItem(target, args)
+  local tl = lost.guiro.layer.Text{font={"Vera", 12}, color=Color(0,0,0), breakMode="none",valign="center",halign="left"}
+  local checkmark = lost.guiro.layer.Layer{}
+  local submenu = lost.guiro.layer.Layer{}
+  target.layer:addSublayer(tl)
+  target.layer:addSublayer(checkmark)
+  target.layer:addSublayer(submenu)
+  target.textLayer = tl
+  target.checkmarkLayer = checkmark
+  target.submenuLayer = submenu
+  
+  target.contentHeight = 22
+  target.checkmarkWidth = 8
+  target.submenuWidth = 8
+  target.checkmarkTextDistance = 4
+  target.textSubmenuDistance = 4
 end
 

@@ -14,7 +14,7 @@ function MenuBarItem:constructor(args)
   local t = args or {}
   self.id = t.id or "menubaritem"
   self:title(t.title or "")
-  self:menu(args.menu)
+  if args.menu then self:menu(args.menu) end
   self:highlight(false)
   self:addEventListener("mouseDown", function(event) self:mouseDown(event) end)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)
@@ -51,8 +51,9 @@ function MenuBarItem:menu(t)
   local params = {}
   params.style = self.menuStyle
   params.theme = self.menuTheme
-  for k,v in ipairs(t) do
+  for k,v in pairs(t) do
     params[k] = v
+    log.debug("-- "..tostring(k).." "..tostring(v))
   end
   self._menu = lost.guiro.view.Menu(params)
   self._menu.delegate = self
@@ -128,7 +129,6 @@ end
 -- Menu delegate methods
 
 function MenuBarItem:menuExternalCloseRequest(menu, event)
-  log.debug("!!")
   if not self:containsCoord(event.pos) then
     self:highlight(false)
   --  self.delegate:itemReleased(self)  

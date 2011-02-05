@@ -19,46 +19,58 @@ function startup()
       items={
         {
           title="File", 
-          items={
-            {title="m1 First"},
-            {title="m1 Second"},
-            "-",
-            {title="m1 Third"},              
-            {title="m1 Fourth"},              
+          menu={ -- menu constructor 
+            items=
+            {
+              {title="m1 First"},
+              {title="m1 Second"},
+              "-",
+              {title="m1 Third"},              
+              {title="m1 Fourth"},              
+            }
           }
         },
         {
           title="Edit", 
-          items={
-            {title="m2 First"},
-            {title="m2 Second"},
-            "-",
-            {title="m2 Third"},              
-            {title="m2 Fourth"},              
-            "-",
-            {title="m2 Fifth"},              
+          menu={
+            items=
+            {
+              {title="m2 First"},
+              {title="m2 Second"},
+              "-",
+              {title="m2 Third"},              
+              {title="m2 Fourth"},              
+              "-",
+              {title="m2 Fifth"},              
+            },
           }
         },
         {
           title="Long Menu Name", 
-          items={
-            {title="m3 First"},
-            {title="m3 Second"},
-            "-",
-            {title="m3 Third"},              
-            {title="m3 Fourth"},              
-            "-",
-            {title="m3 Fifth"},              
-            {title="m3 Sixth"},              
-            {title="m3 Seventh"},              
+          menu={
+            items=
+            {
+              {title="m3 First"},
+              {title="m3 Second"},
+              "-",
+              {title="m3 Third"},              
+              {title="m3 Fourth"},              
+              "-",
+              {title="m3 Fifth"},              
+              {title="m3 Sixth"},              
+              {title="m3 Seventh"},              
+            }
           }
         },
         {
           title="Short Again", 
-          items={
-            {title="m4 First"},
-            {title="m4 Second"},
-            {title="m4 Third"},              
+          menu={
+            items=
+            {
+              {title="m4 First"},
+              {title="m4 Second"},
+              {title="m4 Third"},              
+            }
           }
         },
       }
