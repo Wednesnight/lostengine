@@ -41,7 +41,7 @@ function startup()
   }
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
-  require("lost.animation")
+--[[  require("lost.animation")
   local Tween = lost.animation.Tween
   local Bounds = lost.guiro.Bounds
   local Rect = lost.math.Rect
@@ -66,7 +66,7 @@ function startup()
       anim(lost.guiro.ui()("mainView").layer("centerTextBg"), {"center", "center", ".7", ".4"}, nil, 0.5)
       anim(lost.guiro.ui()("mainView").layer("dropMessage"), {"center", "center", ".6", ".4"}, nil, 0.5)
     end)
-  end)
+  end)]]
 end
 
 function keyHandler(event)
