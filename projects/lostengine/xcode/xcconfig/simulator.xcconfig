@@ -1,8 +1,0 @@
-// Architectures
-SDKROOT = iphonesimulator2.0
-
-// Linking
-PREBINDING = NO
-
-// User-Defined
-ZERO_LINK = NO

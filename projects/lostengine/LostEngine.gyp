@@ -1,21 +1,5 @@
 {
 
-  'xcode_settings': {
-    'GCC_VERSION': '4.2',
-    'GCC_C_LANGUAGE_STANDARD': 'c99',
-    'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
-    'GCC_WARN_UNUSED_VARIABLE': 'YES',
-    'GCC_PRECOMPILE_PREFIX_HEADER': 'YES',
-    'GCC_PFE_FILE_C_DIALECTS': 'c++ objective-c++',
-    'GCC_INCREASE_PRECOMPILED_HEADER_SHARING': 'YES',
-    'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',
-    'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
-    'ALWAYS_SEARCH_USER_PATHS': 'NO',
-
-    # FIXME: split for debug/release
-    'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
-  },
-
   'variables': {
     'boost_path': '../../thirdparty/boost/boost_1_44_0',
     'box2d_path': '../../thirdparty/box2d/box2d_2_0_1',
@@ -27,6 +11,7 @@
     'luabind_path': '../../thirdparty/luabind/luabind_0_9_1',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
     'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
+    'unittest++_path': '../../thirdparty/UnitTest++',
     'zlib_path': '../../thirdparty/zlib/zlib_1_2_3',
     'zziplib_path': '../../thirdparty/zziplib/zziplib-0.13.58',
   },
@@ -37,6 +22,48 @@
       'target_name': 'Launcher',
 
       'type': 'executable',
+
+      'default_configuration': 'Debug',
+
+      'configurations': {
+
+        'Common': {
+          'abstract': 1,
+          'xcode_settings': {
+            'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
+            'ONLY_ACTIVE_ARCH': 'YES',
+            'VALID_ARCHS': 'i386 x86_64 armv6',
+            'GCC_VERSION': '4.2',
+            'GCC_C_LANGUAGE_STANDARD': 'c99',
+            'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
+            'GCC_WARN_UNUSED_VARIABLE': 'YES',
+            'GCC_PRECOMPILE_PREFIX_HEADER': 'YES',
+            'GCC_PFE_FILE_C_DIALECTS': 'c++ objective-c++',
+            'GCC_INCREASE_PRECOMPILED_HEADER_SHARING': 'YES',
+            'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',
+            'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
+            'ALWAYS_SEARCH_USER_PATHS': 'NO',
+            'INFOPLIST_FILE': 'xcode/LostEngineLauncher-Info.plist',
+          },
+        },
+
+        'Debug': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '0',
+            'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
+          },
+        },
+
+        'Release': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '3',
+            'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
+          },
+        },
+
+      },
 
       'dependencies': [
         'LostEngine'
@@ -56,23 +83,6 @@
       'sources': [
         'main.cpp',
       ],
-
-      'xcode_settings': {
-        'GCC_VERSION': '4.2',
-        'GCC_C_LANGUAGE_STANDARD': 'c99',
-        'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
-        'GCC_WARN_UNUSED_VARIABLE': 'YES',
-        'GCC_PRECOMPILE_PREFIX_HEADER': 'YES',
-        'GCC_PFE_FILE_C_DIALECTS': 'c++ objective-c++',
-        'GCC_INCREASE_PRECOMPILED_HEADER_SHARING': 'YES',
-        'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',
-        'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
-
-        # FIXME: split for debug/release
-        'GCC_PREFIX_HEADER': 'lost/prefix-shared.h',
-
-        'INFOPLIST_FILE': 'xcode/LostEngineLauncher-Info.plist',
-      },
 
       'mac_bundle': 1,
 
@@ -96,9 +106,154 @@
 
     {
 
+      'target_name': 'UnitTests',
+
+      'type': 'executable',
+
+      'default_configuration': 'Debug',
+
+      'configurations': {
+
+        'Common': {
+          'abstract': 1,
+          'xcode_settings': {
+            'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
+            'ONLY_ACTIVE_ARCH': 'YES',
+            'VALID_ARCHS': 'i386 x86_64 armv6',
+            'GCC_VERSION': '4.2',
+            'GCC_C_LANGUAGE_STANDARD': 'c99',
+            'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
+            'GCC_WARN_UNUSED_VARIABLE': 'YES',
+            'GCC_PRECOMPILE_PREFIX_HEADER': 'YES',
+            'GCC_PFE_FILE_C_DIALECTS': 'c++ objective-c++',
+            'GCC_INCREASE_PRECOMPILED_HEADER_SHARING': 'YES',
+            'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',
+            'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
+            'ALWAYS_SEARCH_USER_PATHS': 'NO',
+            'INFOPLIST_FILE': 'xcode/LostEngineUnittests-Info.plist',
+          },
+        },
+
+        'Debug': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '0',
+            'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
+          },
+        },
+
+        'Release': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '3',
+            'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
+          },
+        },
+
+      },
+
+      'dependencies': [
+        'LostEngine'
+      ],
+
+      'libraries': [
+        '/System/Library/Frameworks/Cocoa.framework',
+        '/System/Library/Frameworks/OpenAL.framework',
+        '/System/Library/Frameworks/OpenGL.framework',
+      ],
+
+      'include_dirs': [
+        '.',
+        '<@(boost_path)',
+        '<@(unittest++_path)/include',
+      ],
+
+      'sources': [
+
+        # test
+        'lost/test/main.cpp',
+        'lost/test/TestCompileLostMathVec2.cpp',
+        'lost/test/TestEvent.cpp',
+        'lost/test/TestEventDispatcher.cpp',
+        'lost/test/TestGlUtils.cpp',
+        'lost/test/TestLostGlHostBuffer.cpp',
+        'lost/test/TestLostGlRangeManager.cpp',
+        'lost/test/TestLostMathMatrix.cpp',
+        'lost/test/TestLostMathQuat.cpp',
+        'lost/test/TestLostMathVec4.cpp',
+        'lost/test/TestPlatform.cpp',
+        'lost/test/TestProfiler.cpp',
+        'lost/test/TestTimer.cpp',
+
+        # UnitTest++
+        '<@(unittest++_path)/include/XmlTestReporter.cpp',
+        '<@(unittest++_path)/include/TimeConstraint.cpp',
+        '<@(unittest++_path)/include/TestRunner.cpp',
+        '<@(unittest++_path)/include/TestResults.cpp',
+        '<@(unittest++_path)/include/TestReporterStdout.cpp',
+        '<@(unittest++_path)/include/TestReporter.cpp',
+        '<@(unittest++_path)/include/TestList.cpp',
+        '<@(unittest++_path)/include/TestDetails.cpp',
+        '<@(unittest++_path)/include/Test.cpp',
+        '<@(unittest++_path)/include/ReportAssert.cpp',
+        '<@(unittest++_path)/include/MemoryOutStream.cpp',
+        '<@(unittest++_path)/include/DeferredTestResult.cpp',
+        '<@(unittest++_path)/include/DeferredTestReporter.cpp',
+        '<@(unittest++_path)/include/Checks.cpp',
+        '<@(unittest++_path)/include/AssertException.cpp',
+        '<@(unittest++_path)/include/Posix/TimeHelpers.cpp',
+        '<@(unittest++_path)/include/Posix/SignalTranslator.cpp',
+
+      ],
+
+    },
+
+    {
+
       'target_name': 'LostEngine',
 
       'type': 'static_library',
+
+      'default_configuration': 'Debug',
+
+      'configurations': {
+
+        'Common': {
+          'abstract': 1,
+          'xcode_settings': {
+            'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
+            'ONLY_ACTIVE_ARCH': 'YES',
+            'VALID_ARCHS': 'i386 x86_64 armv6',
+            'GCC_VERSION': '4.2',
+            'GCC_C_LANGUAGE_STANDARD': 'c99',
+            'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
+            'GCC_WARN_UNUSED_VARIABLE': 'YES',
+            'GCC_PRECOMPILE_PREFIX_HEADER': 'YES',
+            'GCC_PFE_FILE_C_DIALECTS': 'c++ objective-c++',
+            'GCC_INCREASE_PRECOMPILED_HEADER_SHARING': 'YES',
+            'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',
+            'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
+            'ALWAYS_SEARCH_USER_PATHS': 'NO',
+          },
+        },
+
+        'Debug': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '0',
+            'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
+          },
+        },
+
+        'Release': {
+          'inherit_from': ['Common'],
+          'xcode_settings': {
+            'GCC_OPTIMIZATION_LEVEL': '3',
+            'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
+          },
+        },
+
+      },
 
       'include_dirs': [
 
