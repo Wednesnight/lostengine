@@ -1,7 +1,7 @@
 return {
   tasklet = {
     name = "LostEngine Launcher",
-    waitForEvents = true,
+    waitForEvents = true
   },
   window = {
     title = "LostEngine Launcher",

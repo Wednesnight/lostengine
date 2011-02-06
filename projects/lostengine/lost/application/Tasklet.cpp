@@ -27,6 +27,8 @@
 #include "lost/font/FontManager.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/KeyEvent.h"
+#include "lost/time/Clock.h"
+#include "lost/time/ThreadedTimerScheduler.h"
 
 using namespace boost;
 using namespace luabind;
@@ -38,6 +40,7 @@ using namespace lost::resource;
 using namespace lost::rg;
 using namespace lost::common;
 using namespace lost::font;
+using namespace lost::time;
 
 namespace lost
 {
@@ -70,6 +73,7 @@ namespace lost
       configLoaded = false;
       loader = inLoader;
       eventDispatcher.reset(new event::EventDispatcher());
+      scheduler.reset(new ThreadedTimerScheduler(eventDispatcher));
       lua.reset(new State(loader));
       clearNode.reset(new Node());
       clearNode->add(NodePtr(new ClearColor(Color(1,1,0))));

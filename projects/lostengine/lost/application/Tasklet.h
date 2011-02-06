@@ -9,8 +9,9 @@
 #include "lost/lua/forward.h"
 #include "lost/rg/forward.h"
 #include "lost/application/TaskletConfig.h"
-#include "lost/common/Timer.h"
 #include "lost/font/forward.h"
+#include "lost/time/Clock.h"
+#include "lost/time/TimerScheduler.h"
 
 namespace lost
 {
@@ -28,7 +29,7 @@ namespace lost
       struct LuaStateHelper;
       lost::shared_ptr<LuaStateHelper> lsh;
 
-      common::Timer timer;
+      time::Clock clock;
 
       bool isAlive;
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
@@ -64,6 +65,7 @@ namespace lost
       resource::LoaderPtr             loader;
       TaskletConfig                   config;
       font::FontManagerPtr            fontManager;
+      lost::shared_ptr<time::TimerScheduler> scheduler;
 
 	    Window*                         window;         // contains the window pointer after init() if it could be created
       rg::NodePtr                     clearNode;      // default clear node, always present

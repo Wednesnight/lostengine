@@ -272,6 +272,7 @@ namespace lost
         [
           class_<Tasklet>("Tasklet")
             .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
+            .def_readonly("scheduler", &Tasklet::scheduler)
             .def_readwrite("name", &Tasklet::name)
             .def_readonly("loader", &Tasklet::loader)
             .def_readonly("lua", &Tasklet::lua)

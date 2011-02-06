@@ -1,16 +1,19 @@
+#ifndef LOST_TIME_CLOCK_H
+#define LOST_TIME_CLOCK_H
+
 #include <stdint.h>
 
 namespace lost {
 
-  namespace common {
+  namespace time {
 
-    class Timer {
+    class Clock {
 
 
     public:
       
       
-      Timer(double t0 = 0.0);
+      Clock(double t0 = 0.0);
 
 
       /**
@@ -74,3 +77,5 @@ namespace lost {
 
   }
 }
+
+#endif
