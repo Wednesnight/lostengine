@@ -72,6 +72,18 @@
         'main.cpp',
       ],
 
+      'postbuilds': [{
+        'variables': {
+          # Define copy_resources_path in a variable ending in _path
+          # so that gyp understands it's a path and performs proper
+          # relativization during dict merging.
+          'copy_resources_path':
+          '<(DEPTH)/copy_resources.sh',
+        },
+        'postbuild_name': 'Copy Resources',
+        'action': ['<(copy_resources_path)'],
+      }],
+
     },
 
     {
@@ -147,7 +159,6 @@
         'lost/common/io.cpp',
         'lost/common/Logger.cpp',
         'lost/common/Profiler.cpp',
-        'lost/common/Timer.cpp',
 
         # event
         'lost/event/EventDispatcher.cpp',
@@ -157,6 +168,9 @@
         'lost/font/Font.cpp',
         'lost/font/FontManager.cpp',
         'lost/font/Glyph.cpp',
+        'lost/font/Render.cpp',
+        'lost/font/RenderedText.cpp',
+        'lost/font/TextBuffer.cpp',
         'lost/font/TrueTypeFont.cpp',
         'lost/font/freetype/Face.cpp',
         'lost/font/freetype/Library.cpp',
@@ -189,7 +203,6 @@
         # lua
         'lost/lua/BindAll.cpp',
         'lost/lua/BindingHelpers.cpp',
-        'lost/lua/GlobalFunctions.cpp',
         'lost/lua/ModuleLoader.cpp',
         'lost/lua/State.cpp',
 
@@ -209,6 +222,7 @@
         'lost/lua/bindings/LostPlatform.cpp',
         'lost/lua/bindings/LostResource.cpp',
         'lost/lua/bindings/LostRg.cpp',
+        'lost/lua/bindings/LostTime.cpp',
         'lost/lua/bindings/ThirdpartyBox2D.cpp',
 
         # math
@@ -226,6 +240,7 @@
         'lost/mesh/Disc.cpp',
         'lost/mesh/Line.cpp',
         'lost/mesh/Loader.cpp',
+        'lost/mesh/Material.cpp',
         'lost/mesh/Mesh.cpp',
         'lost/mesh/Quad.cpp',
         'lost/mesh/Rect.cpp',
@@ -258,6 +273,11 @@
         'lost/rg/Scissor.cpp',
         'lost/rg/ScissorRect.cpp',
         'lost/rg/ScissorStack.cpp',
+
+        # time
+        'lost/time/Clock.cpp',
+        'lost/time/ThreadedTimerScheduler.cpp',
+        'lost/time/Timer.cpp',
 
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
