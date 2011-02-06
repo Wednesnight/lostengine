@@ -53,7 +53,6 @@ function MenuBarItem:menu(t)
   params.theme = self.menuTheme
   for k,v in pairs(t) do
     params[k] = v
-    log.debug("-- "..tostring(k).." "..tostring(v))
   end
   self._menu = lost.guiro.view.Menu(params)
   self._menu.delegate = self

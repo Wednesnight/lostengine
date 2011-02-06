@@ -14,13 +14,7 @@ local Color = lost.common.Color
 -- * createSeparatorLayerFunc
 -- FIXME: MenuItem class as parameter as well?
 function Menu:constructor(args)
-  log.debug("--")
-  local t = args or {}
-  
-  for k,v in ipairs(t) do
-    log.debug(tostring(k))
-  end
-  
+  local t = args or {}  
   self._itemViews = {}
   self._separatorLayers = {}
   self.delegate = t.delegate or nil
@@ -36,7 +30,6 @@ function Menu:constructor(args)
 end
 
 function Menu:rebuildItems(t)
-  log.debug("--")
   -- remove old menuitem views and layers
   for k,v in ipairs(self._itemViews) do
     self:removeSubview(v)
@@ -65,7 +58,6 @@ function Menu:rebuildItems(t)
       mi = lost.guiro.view.MenuItem(v)
       self:addSubview(mi)
       table.insert(self._itemViews, mi)
-      log.debug("/// "..mi.contentHeight)
       mi:height(mi.contentHeight)
       mi:width(mi.contentWidth)
       mi:x(self.leftMargin)
@@ -82,7 +74,6 @@ function Menu:rebuildItems(t)
       menuHeight = menuHeight +self.separatorHeight
     end
   end
-  log.debug("menuwidth: "..menuWidth.." height "..menuHeight)
   menuWidth = menuWidth + self.leftMargin + self.rightMargin
   menuHeight = menuHeight + self.topMargin + self.bottomMargin
   self:width(menuWidth)

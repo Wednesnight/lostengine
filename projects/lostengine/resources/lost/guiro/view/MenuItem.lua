@@ -29,6 +29,7 @@ end
 
 function MenuItem:updateTextWidth()
   local m = lost.font.render(self.textLayer:text(), self.textLayer:font(), false)
+  log.debug("!! txt: '"..self.textLayer:text().."' "..tostring(m.size).." "..tostring(m.min).." "..tostring(m.max))
   self.textWidth = m.size.width  
 end
 
