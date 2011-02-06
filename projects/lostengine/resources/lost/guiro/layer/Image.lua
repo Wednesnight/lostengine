@@ -9,6 +9,7 @@ local Vec2 = lost.math.Vec2
 local Vec3 = lost.math.Vec3
 local Rect = lost.math.Rect
 local MatrixTranslation = lost.math.MatrixTranslation
+local Color = lost.common.Color
 
 function Image:constructor(args)
   lost.guiro.layer.Layer.constructor(self, args)
@@ -31,7 +32,7 @@ function Image:constructor(args)
   self:flip(t.flip or false)
   self:filter(t.filter or false)
   self:scale(t.scale or "none") -- none, aspect  FIXME: needs stretch, repeat
-  
+  self:color(t.color or Color(1,1,1))
   
   -- trigger initial updates
   self:needsUpdate()
@@ -57,6 +58,14 @@ function Image:update()
   else
     self.texture:filter(gl.GL_NEAREST)
   end
+end
+
+function Image:color(...)
+  if arg.n >= 1 then
+    local c = arg[1]
+    self.mesh.material.color = c:premultiplied()
+  end
+  -- FIXME: return color, needs to take premultiplication into account
 end
 
 function Image:updateLayout()

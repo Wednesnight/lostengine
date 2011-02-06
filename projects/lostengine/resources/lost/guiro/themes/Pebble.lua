@@ -588,6 +588,18 @@ function Pebble:checkmarkTexture()
   return self._checkmarkTexture
 end
 
+function Pebble:submenuarrowTexture()
+  if not self._submenuarrowTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/submenuarrow.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._submenuarrowTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._submenuarrowTexture
+end
+
+
 function Pebble:windowResizeTexture()
   if not self._windowResizeTexture then
     local data = tasklet.loader:load("lost/guiro/themes/resize.png")
@@ -623,11 +635,11 @@ function Pebble:buttonCheckboxCandy(target, args)
 
   local normal2 = l{sublayers={rr{bounds={0,0,s,s},gradient="candyBlue",filled=true,radius=r},
                                rr{bounds={0,0,s,s},gradient="candyBlueFrame",filled=false,radius=r},
-                               img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,scale="aspect",filter=true}}
+                               img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,color=Color(0,0,0),scale="aspect",filter=true}}
                               }
   local pushed2 = l{sublayers={rr{bounds={0,0,s,s},gradient="candyBlue",color=dimColor,filled=true,radius=r},
                               rr{bounds={0,0,s,s},gradient="candyBlueFrame",filled=false,radius=r},
-                              img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,scale="aspect",filter=true}}
+                              img{bounds={io,io,s,s},texture=self:checkmarkTexture(),flip=true,color=Color(0,0,0),scale="aspect",filter=true}}
                              }
 
   local d = s + self.checkboxSpacing
@@ -1116,8 +1128,13 @@ end
 
 function Pebble:menuItem(target, args)
   local tl = lost.guiro.layer.Text{font={"Vera", 12}, color=Color(0,0,0), breakMode="none",valign="center",halign="left", clip=true}
-  local checkmark = lost.guiro.layer.Layer{}
-  local submenu = lost.guiro.layer.Layer{}
+  local fnt = tasklet.fontManager:getFont("Vera", 12)
+  local imageOffset = math.abs(fnt.descender)
+  target.checkmarkWidth = 12
+  target.submenuWidth = 16
+  local accessoireColor = Color(.6,.6,.6)
+  local checkmark = lost.guiro.layer.Image{bounds={0,{"center",imageOffset},target.checkmarkWidth,target.checkmarkWidth},texture=self:checkmarkTexture(),flip=true,color=accessoireColor,scale="aspect",filter=true}  
+  local submenu = lost.guiro.layer.Image{bounds={0,{"center",imageOffset},target.submenuWidth,target.submenuWidth},texture=self:submenuarrowTexture(),flip=true,color=accessoireColor,scale="aspect",filter=true}  
   target.layer:addSublayer(tl)
   target.layer:addSublayer(checkmark)
   target.layer:addSublayer(submenu)
@@ -1128,14 +1145,12 @@ function Pebble:menuItem(target, args)
   target.normalTextColor = Color(0,0,0)
   
   target.contentHeight = 22
-  target.checkmarkWidth = 8
-  target.submenuWidth = 8
   target.checkmarkTextDistance = 4
   target.textSubmenuDistance = 4
   checkmark:bounds(Bounds(0,"center", target.checkmarkWidth, target.checkmarkWidth))
   tl:x(target.checkmarkWidth+target.checkmarkTextDistance)
   tl:width({"1",-(target.checkmarkWidth+target.submenuWidth+target.checkmarkTextDistance+target.textSubmenuDistance)})
-  submenu:x({"right",-target.submenuWidth})
+  submenu:x("right")
   submenu:size(target.submenuWidth, target.submenuWidth)
 end
 

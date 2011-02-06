@@ -21,11 +21,20 @@ function MenuItem:constructor(args)
   self.id = t.id or "menuitem"
   self:title(t.title or " ")
   self:checked(t.checked or false)
+  self:submenuIcon(false)
   
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)
   self:highlight(false)
+end
+
+function MenuItem:submenuIcon(...)
+  if arg.n >= 1 then 
+    self.submenuLayer:hidden(not arg[1])
+  else
+    return not self.submenuLayer:hidden()
+  end
 end
 
 function MenuItem:highlight(...)
