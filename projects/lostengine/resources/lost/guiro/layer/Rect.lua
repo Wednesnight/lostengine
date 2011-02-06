@@ -26,12 +26,12 @@ function Rect:constructor(args)
   end
 
   if t.width ~= nil then
-    self.width = t.width
+    self._width = t.width
   else
     if self.filled then
-      self.width = 0
+      self._width = 0
     else
-      self.width = 1
+      self._width = 1
     end
   end
 
@@ -54,7 +54,7 @@ function Rect:constructor(args)
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():rectFrame()    
     end
-    self.mesh.material.uniforms:setFloat("width", self.width)
+    self.mesh.material.uniforms:setFloat("width", self._width)
   end
 
   if t.color then

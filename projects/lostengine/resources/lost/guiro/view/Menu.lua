@@ -12,6 +12,7 @@ local Color = lost.common.Color
 -- * bottomMargin
 -- * separatorHeight
 -- * createSeparatorLayerFunc
+-- * highlightLayer
 -- FIXME: MenuItem class as parameter as well?
 function Menu:constructor(args)
   local t = args or {}  
@@ -27,6 +28,7 @@ function Menu:constructor(args)
   lost.guiro.view.Window.constructor(self, args)
   self.id = t.id or "menu"
   if t.items then self:rebuildItems(args.items) end
+  self.highlightLayer:hide()
 end
 
 function Menu:rebuildItems(t)
@@ -62,6 +64,7 @@ function Menu:rebuildItems(t)
       mi:width(mi.contentWidth)
       mi:x(self.leftMargin)
       mi:y(yoffset)
+      mi.delegate = self
       menuWidth = math.max(menuWidth, mi.contentWidth)
       yoffset = yoffset + mi.contentHeight
       menuHeight = menuHeight + mi.contentHeight
@@ -73,6 +76,10 @@ function Menu:rebuildItems(t)
       yoffset = yoffset + self.separatorHeight
       menuHeight = menuHeight +self.separatorHeight
     end
+  end
+  -- adjust item width to new maxwidth
+  for k,v in pairs(self._itemViews) do
+    v:width(menuWidth)
   end
   menuWidth = menuWidth + self.leftMargin + self.rightMargin
   menuHeight = menuHeight + self.topMargin + self.bottomMargin
@@ -98,4 +105,32 @@ function Menu:externalCloseRequest(event)
   else
     return true
   end
+end
+
+function Menu:enableHighlight(menuItem)
+  menuItem:highlight(true)
+  local b = menuItem:bounds()
+  self.highlightLayer:show()
+  self.highlightLayer:x(0)
+  self.highlightLayer:y(b.y)
+  self.highlightLayer:width("1")
+  self.highlightLayer:height(b.height)
+end
+
+function Menu:disableHighlight(menuItem)
+  menuItem:highlight(false)
+  self.highlightLayer:hide()
+end
+
+function Menu:menuItemEntered(menuItem)
+  menuItem:highlight(true)
+  self:enableHighlight(menuItem)
+end
+
+function Menu:menuItemLeft(menuItem)
+  menuItem:highlight(false)
+  self:disableHighlight(menuItem)
+end
+
+function Menu:menuItemClicked(menuItem)
 end
