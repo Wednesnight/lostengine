@@ -8,8 +8,8 @@
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>
 #elif defined linux
-  #include <OpenAL/al.h>
-  #include <OpenAL/alc.h>
+  #include <AL/al.h>
+  #include <AL/alc.h>
 #elif defined __APPLE__
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>
