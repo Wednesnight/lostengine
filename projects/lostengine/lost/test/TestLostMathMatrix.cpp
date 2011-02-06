@@ -1,4 +1,7 @@
 #include "lost/math/Matrix.h"
+#include "lost/math/Vec2.h"
+#include "lost/math/Vec3.h"
+#include "lost/math/Vec4.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 using namespace lost::math;

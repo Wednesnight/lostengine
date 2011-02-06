@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "lost/time/Clock.h"
 #include "lost/platform/Platform.h"
 
 
@@ -9,10 +9,10 @@
 
 namespace lost {
 
-  namespace common {
+  namespace time {
 
 
-    Timer::Timer(double t0) {
+    Clock::Clock(double t0) {
 
       this->t0 = t0;
       this->frequency = this->initializeFrequency();
@@ -20,26 +20,26 @@ namespace lost {
     }
 
 
-    double Timer::getTime() {
+    double Clock::getTime() {
 
       return this->deltaSec(this->ticks0, getTicks()) + this->t0;
     }
 
 
-    double Timer::getElapsed(double offset) {
+    double Clock::getElapsed(double offset) {
 
       return this->getTime() - offset;
     }
 
 
-    double Timer::getElapsedAndUpdateOffset(double& offset) {
+    double Clock::getElapsedAndUpdateOffset(double& offset) {
 
       double start = offset;
       return (offset = this->getTime()) - start;
     }
 
 
-    uint64_t Timer::initializeFrequency() {
+    uint64_t Clock::initializeFrequency() {
 
 #ifdef WIN32
       LARGE_INTEGER frequency;
@@ -53,7 +53,7 @@ namespace lost {
     }
 
 
-    uint64_t Timer::getTicks() {
+    uint64_t Clock::getTicks() {
 #ifdef WIN32
 
       LARGE_INTEGER ticks;
@@ -72,7 +72,7 @@ namespace lost {
     }
 
 
-    double Timer::deltaSec(uint64_t ticks1, uint64_t ticks2) {
+    double Clock::deltaSec(uint64_t ticks1, uint64_t ticks2) {
 
       return (double) ((ticks1 > ticks2) ? ticks1 - ticks2 : ticks2 - ticks1) / (double) this->frequency;
     }

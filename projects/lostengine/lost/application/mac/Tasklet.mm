@@ -49,7 +49,7 @@ namespace lost
         if (running) {
 
           double framerate = config.framerate;
-          double offset = timer.getTime();
+          double offset = clock.getTime();
 
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running) {
             processEvents();
@@ -57,7 +57,7 @@ namespace lost
             render();
             if(waitForEvents) { eventDispatcher->waitForEvents(); }
 
-            framerate = timer.getElapsedAndUpdateOffset(offset);
+            framerate = clock.getElapsedAndUpdateOffset(offset);
 
             [pool drain];
             pool = [[NSAutoreleasePool alloc] init];  

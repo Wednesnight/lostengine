@@ -49,7 +49,7 @@ namespace lost
 		    if (running)
         {
           double framerate = config.framerate;
-          double offset = timer.getTime();
+          double offset = clock.getTime();
 
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running)
           {
@@ -69,7 +69,7 @@ namespace lost
               DispatchMessage(&msg);
             }
 
-            framerate = timer.getElapsedAndUpdateOffset(offset);
+            framerate = clock.getElapsedAndUpdateOffset(offset);
           }
 
           shutdown();

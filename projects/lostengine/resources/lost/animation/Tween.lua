@@ -55,12 +55,12 @@ function Tween:constructor(target, targetProperties, tweenProperties)
   self.time = 0
   self.timestamp = lost.platform.currentTimeSeconds()
 
-  lost.common.callLater(Tween.process, self)
+  local timer = tasklet.scheduler:createTimer(1/60, Tween.process, self)
+  timer:start()
 end
 
-function Tween:process()
-  local now = lost.platform.currentTimeSeconds()
-  self.time = math.min(self.time + (now - self.timestamp), self.tweenProperties.duration)
+function Tween:process(timer)
+  self.time = math.min(self.time + timer:getInterval(), self.tweenProperties.duration)
   self.timestamp = now
 
   -- Since we always use 0 and 1, we could simplify the Interpolation functions
@@ -80,10 +80,11 @@ function Tween:process()
   end
 
   if self.time < self.tweenProperties.duration then
-    lost.common.callLater(Tween.process, self)
+    return true
   else
     if type(self.tweenProperties.onComplete) == "function" then
       self.tweenProperties.onComplete(self)
     end
+    return false
   end
 end

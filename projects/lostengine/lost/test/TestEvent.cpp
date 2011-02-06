@@ -30,6 +30,6 @@ TEST(mouseevent)
 
 TEST(resizeevent)
 {
-  ResizeEvent event(ResizeEvent::MAIN_WINDOW_RESIZE());
-  CHECK(event.type == ResizeEvent::MAIN_WINDOW_RESIZE());  
+  ResizeEvent event(ResizeEvent::TASKLET_WINDOW_RESIZE());
+  CHECK(event.type == ResizeEvent::TASKLET_WINDOW_RESIZE());  
 }
