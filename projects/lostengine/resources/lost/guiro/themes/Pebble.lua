@@ -12,7 +12,7 @@ require("lost.guiro.themes.PebbleGradients")
 lost.common.Class "lost.guiro.themes.Pebble" "lost.guiro.Theme" {}
 
 local Color = lost.common.Color
-
+local Bounds = lost.guiro.Bounds
 
 function Pebble:constructor()
   lost.guiro.Theme.constructor(self)
@@ -1089,8 +1089,12 @@ end
 function Pebble:menuTopRect(target, args)
   local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius,roundCorners={tl=false, tr=false}}
   local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=self.menuRadius, roundCorners={tl=false, tr=false}, bounds={-1,-1,{"1",2},{"1",1}}}
+  local highlight = lost.guiro.layer.Rect{gradient="menubaritemselected", filled=true}
   target.layer:addSublayer(fr)
   target.layer:addSublayer(bg)
+  target.layer:addSublayer(highlight)
+  target.highlightLayer = highlight
+  
 --  target:pos(20,10)
 --  target:size(100, 200)
   
@@ -1102,7 +1106,7 @@ function Pebble:menuTopRect(target, args)
   target.rightMargin = 4
   local hl =  lost.guiro.layer.HLine
   local l = lost.guiro.layer.Layer
-  local sepHeight = 19
+  local sepHeight = 11
   target.createSeparatorLayerFunc = function() return l{bounds={0,0,"1",sepHeight},
                                                         sublayers={hl{bounds={0,"center","1",1}, color=self.menuFrameColor}} 
                                                        } 
@@ -1111,7 +1115,7 @@ function Pebble:menuTopRect(target, args)
 end
 
 function Pebble:menuItem(target, args)
-  local tl = lost.guiro.layer.Text{font={"Vera", 12}, color=Color(0,0,0), breakMode="none",valign="center",halign="left"}
+  local tl = lost.guiro.layer.Text{font={"Vera", 12}, color=Color(0,0,0), breakMode="none",valign="center",halign="left", clip=true}
   local checkmark = lost.guiro.layer.Layer{}
   local submenu = lost.guiro.layer.Layer{}
   target.layer:addSublayer(tl)
@@ -1120,11 +1124,18 @@ function Pebble:menuItem(target, args)
   target.textLayer = tl
   target.checkmarkLayer = checkmark
   target.submenuLayer = submenu
+  target.highlightTextColor = Color(1,1,1)
+  target.normalTextColor = Color(0,0,0)
   
   target.contentHeight = 22
   target.checkmarkWidth = 8
   target.submenuWidth = 8
   target.checkmarkTextDistance = 4
   target.textSubmenuDistance = 4
+  checkmark:bounds(Bounds(0,"center", target.checkmarkWidth, target.checkmarkWidth))
+  tl:x(target.checkmarkWidth+target.checkmarkTextDistance)
+  tl:width({"1",-(target.checkmarkWidth+target.submenuWidth+target.checkmarkTextDistance+target.textSubmenuDistance)})
+  submenu:x({"right",-target.submenuWidth})
+  submenu:size(target.submenuWidth, target.submenuWidth)
 end
 
