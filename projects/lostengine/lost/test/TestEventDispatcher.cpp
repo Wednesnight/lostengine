@@ -1,4 +1,5 @@
 #include <boost/bind.hpp>
+#include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
