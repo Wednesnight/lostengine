@@ -36,7 +36,7 @@
 
       'target_name': 'Launcher',
 
-      'type': 'executable+bundle',
+      'type': 'executable',
 
       'dependencies': [
         'LostEngine'
@@ -53,6 +53,10 @@
         '<@(boost_path)',
       ],
 
+      'sources': [
+        'main.cpp',
+      ],
+
       'xcode_settings': {
         'GCC_VERSION': '4.2',
         'GCC_C_LANGUAGE_STANDARD': 'c99',
@@ -66,10 +70,14 @@
 
         # FIXME: split for debug/release
         'GCC_PREFIX_HEADER': 'lost/prefix-shared.h',
+
+        'INFOPLIST_FILE': 'xcode/LostEngineLauncher-Info.plist',
       },
 
-      'sources': [
-        'main.cpp',
+      'mac_bundle': 1,
+
+      'mac_bundle_resources': [
+        'LostEngine.icns',
       ],
 
       'postbuilds': [{

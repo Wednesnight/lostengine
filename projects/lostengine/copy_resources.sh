@@ -8,5 +8,4 @@ then
 else
   mkdir "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources"
 fi
-echo cp -Rf resources/* "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/"
 cp -Rf resources/* "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/"
