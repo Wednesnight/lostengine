@@ -301,6 +301,11 @@
         'lost/application/mac/Tasklet.mm',
         'lost/application/mac/Window.mm',
 
+        # application/windows
+        'lost/application/windows/Application.cpp',
+        'lost/application/windows/Tasklet.cpp',
+        'lost/application/windows/Window.cpp',
+
         # audio
         'lost/audio/Engine.cpp',
         'lost/audio/Source.cpp',
@@ -363,6 +368,9 @@
         # gl/mac
         'lost/gl/mac/Context.mm',
 
+        # gl/windows
+        'lost/gl/windows/Context.cpp',
+
         # lua
         'lost/lua/BindAll.cpp',
         'lost/lua/BindingHelpers.cpp',
@@ -413,8 +421,9 @@
         'lost/mesh/TextureManager.cpp',
 
         # platform
-        'lost/platform/Platform_Mac.cpp',
         'lost/platform/Platform.cpp',
+        'lost/platform/Platform_Mac.cpp',
+        'lost/platform/Platform_Windows.cpp',
 
         # resource
         'lost/resource/ApplicationResourceRepository.cpp',
@@ -639,6 +648,7 @@
       ],
 
       'conditions': [
+
         ['OS != "mac"', {
           'sources!': [
             'lost/application/mac/Application.mm',
@@ -652,6 +662,17 @@
             'lost/platform/Platform_Mac.cpp',
           ]
         }],
+
+        ['OS != "win"', {
+          'sources!': [
+            'lost/application/windows/Application.cpp',
+            'lost/application/windows/Tasklet.cpp',
+            'lost/application/windows/Window.cpp',
+            'lost/gl/windows/Context.cpp',
+            'lost/platform/Platform_Windows.cpp',
+          ]
+        }],
+
       ],
     },
 
