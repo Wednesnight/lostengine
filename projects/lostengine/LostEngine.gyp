@@ -268,6 +268,7 @@
         '<@(luabind_path)',
         '<@(stb_image_path)',
         '<@(stb_vorbis_path)',
+        '<@(zlib_path)/include',
         '<@(zziplib_path)',
 
       ],
