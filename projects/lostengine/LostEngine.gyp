@@ -13,7 +13,7 @@
     'ALWAYS_SEARCH_USER_PATHS': 'NO',
 
     # FIXME: split for debug/release
-    'GCC_PREFIX_HEADER': 'lost/prefix-shared.h',
+    'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
   },
 
   'variables': {
