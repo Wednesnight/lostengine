@@ -59,7 +59,7 @@ std::string TextBuffer::utf8String()
 {
   std::string result;
 
-  ftxt::utf32_encoder encoder;
+  ftxt::utf8_encoder encoder;
   ftxt::encode(encoder, _text.begin(), _text.end(),
          std::back_insert_iterator<std::string>(result));
          
