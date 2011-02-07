@@ -22,6 +22,7 @@ local Color = lost.common.Color
 -- FIXME: MenuItem class as parameter as well?
 function Menu:constructor(args)
   local t = args or {}  
+  self._itemStyleSize = args.size
   self._itemViews = {}
   self._separatorLayers = {}
   self.delegate = t.delegate or nil
@@ -54,7 +55,7 @@ function Menu:rebuildItems(t)
   for i=#t,1,-1 do
     table.insert(reversedItems, t[i])
   end
-  
+  log.debug("!! enu rebuid size "..self._itemStyleSize)
   -- create new items with contents from provided table
   -- assumes table of tables that are in MenuItem constructor format
   local mi = 0
@@ -64,7 +65,12 @@ function Menu:rebuildItems(t)
   local menuWidth = 0
   for k,v in ipairs(reversedItems) do
     if type(v) == "table" then
-      mi = lost.guiro.view.MenuItem(v)
+      local midef = {}
+      for k2,v2 in pairs(v) do
+        midef[k2] = v2
+      end
+      if midef.size == nil then midef.size = self._itemStyleSize end
+      mi = lost.guiro.view.MenuItem(midef)
       self:addSubview(mi)
       table.insert(self._itemViews, mi)
       mi:height(mi.contentHeight)

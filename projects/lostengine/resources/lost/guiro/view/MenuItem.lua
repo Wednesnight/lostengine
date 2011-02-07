@@ -19,6 +19,7 @@ function MenuItem:constructor(args)
   lost.guiro.view.View.constructor(self, args)
   local t = args or {}
   self.id = t.id or "menuitem"
+  self._styleSize = args.size
   self:title(t.title or " ")
   self:checked(t.checked or false)
   
@@ -27,7 +28,14 @@ function MenuItem:constructor(args)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)
   self:highlight(false)
   if t.menu then
-    local m = lost.guiro.view.Menu(t.menu)
+    local mdef = {}
+    for k,v in pairs(t.menu) do
+      mdef[k] = v
+    end
+    if mdef.size == nil then
+      mdef.size = self._styleSize
+    end
+    local m = lost.guiro.view.Menu(mdef)
     self:menu(m)
   else
     self:submenuIcon(false)

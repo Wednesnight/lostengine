@@ -11,6 +11,7 @@ lost.common.Class "lost.guiro.view.MenuBarItem" "lost.guiro.view.View" {}
 -- * delegate: receives notifications about mouse up/down enter/leave and will be asked about highlight behaviour of item
 function MenuBarItem:constructor(args)
   lost.guiro.view.View.constructor(self, args)
+  self._styleSize = args.size -- for menu creation
   local t = args or {}
   self.id = t.id or "menubaritem"
   self:title(t.title or "")
@@ -21,7 +22,6 @@ function MenuBarItem:constructor(args)
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)
-  
 end
 
 function MenuBarItem:openMenu()
@@ -51,6 +51,7 @@ function MenuBarItem:menu(t)
   local params = {}
   params.style = self.menuStyle
   params.theme = self.menuTheme
+  params.size = self._styleSize
   for k,v in pairs(t) do
     params[k] = v
   end

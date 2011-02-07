@@ -26,7 +26,20 @@ function startup()
     lost.guiro.view.MenuBar
     {
       bounds={0,"top","1",30},
-      items=require("menudef")
+      items=require("menudef"),
+      size="regular",
+    },
+    lost.guiro.view.MenuBar
+    {
+      bounds={0,{"top",-50},"1",30},
+      items=require("menudef"),
+      size="small",
+    },
+    lost.guiro.view.MenuBar
+    {
+      bounds={0,{"top",-100},"1",30},
+      items=require("menudef"),
+      size="mini",
     }
   }
 end
