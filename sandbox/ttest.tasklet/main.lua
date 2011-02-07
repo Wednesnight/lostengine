@@ -35,7 +35,41 @@ function startup()
           menu={
             items=
             {
-              {title="m2 First"},
+              {
+                title="m2 First",
+                menu=
+                {
+                  items=
+                  {
+                   {title="sm1 First"},
+                   {title="sm1 Second"},
+                   {
+                     title="sm1 Third",
+                     menu=
+                     {
+                       items=
+                       {
+                         {title="sm11 First"},
+                         {title="sm11 Second"},                       
+                         {title="sm11 Third"},                       
+                       }
+                     }
+                   },              
+                   {
+                     title="sm1 Fourth",
+                     menu=
+                     {
+                       items=
+                       {
+                         {title="sm12 First"},
+                         {title="sm12 Second"},                       
+                       }
+                     }                     
+                   },              
+                   {title="sm1 Fifth"},
+                  }
+                }                             
+              },
               {title="m2 Second"},
               "-",
               {title="m2 Third"},              

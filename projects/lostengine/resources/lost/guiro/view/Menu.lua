@@ -29,6 +29,7 @@ function Menu:constructor(args)
   self.id = t.id or "menu"
   if t.items then self:rebuildItems(args.items) end
   self.highlightLayer:hide()
+  self.currentMenuItem = nil -- will be set during highlighting
 end
 
 function Menu:rebuildItems(t)
@@ -96,6 +97,12 @@ function Menu:open()
 end
 
 function Menu:close()
+  if self.currentMenuItem then
+    local m = self.currentMenuItem:menu()
+    if m then
+      m:close()
+    end
+  end
   lost.guiro.windowManager():closeMenu(self)
 end
 
@@ -122,15 +129,47 @@ function Menu:disableHighlight(menuItem)
   self.highlightLayer:hide()
 end
 
-function Menu:menuItemEntered(menuItem)
+-- MenuItem delegate methods
+
+function Menu:openMenuItemSubmenu(menuItem)
+  local m = menuItem:menu()
+  m:x(self.rect.x+self.rect.width)
+  m:y(menuItem.rect.y+menuItem.rect.height-m.rect.height+m.topMargin)
+  m:open()
+end
+
+function Menu:menuItemEntered(event, menuItem)
+  if self.currentMenuItem and (self.currentMenuItem ~= menuItem) then
+    self.currentMenuItem:highlight(false)
+    local m = self.currentMenuItem:menu()
+    if m then m:close() end
+  end
   menuItem:highlight(true)
   self:enableHighlight(menuItem)
+  if menuItem:menu() then
+    self:openMenuItemSubmenu(menuItem)
+  end
+  self.currentMenuItem=menuItem
 end
 
-function Menu:menuItemLeft(menuItem)
-  menuItem:highlight(false)
-  self:disableHighlight(menuItem)
+function Menu:menuItemLeft(event, menuItem)
+  -- only close if mouse didn't go out to the right into a submenu
+  if menuItem:menu() 
+      and (event.pos.y>=menuItem.rect.y) 
+      and (event.pos.y<(menuItem.rect.y+menuItem.rect.height))
+      and (event.pos.x >= (menuItem.rect.x+menuItem.rect.width))
+  then
+    self:openMenuItemSubmenu(menuItem)
+  else      
+    menuItem:highlight(false)
+    self:disableHighlight(menuItem)
+    if menuItem:menu() then
+      menuItem:menu():close()
+    end
+    self.currentMenuItem=nil
+  end
 end
 
-function Menu:menuItemClicked(menuItem)
+function Menu:menuItemClicked(event, menuItem)
 end
+
