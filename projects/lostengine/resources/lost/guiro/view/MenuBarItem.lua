@@ -127,6 +127,13 @@ end
 
 -- Menu delegate methods
 
+function MenuBarItem:menuItemSelected(menu, indexPath)
+  self.delegate:itemReleased(self)
+  self:highlight(false)  
+  self:closeMenu()
+  self.delegate:itemInactive(self)  
+end
+
 function MenuBarItem:menuExternalCloseRequest(menu, event)
   if not self:containsCoord(event.pos) then
     self:highlight(false)

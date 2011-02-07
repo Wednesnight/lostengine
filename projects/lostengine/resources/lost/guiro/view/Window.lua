@@ -20,14 +20,14 @@ lost.common.Class "lost.guiro.view.Window" "lost.guiro.view.View" {}
 -- * resizeButton: if present, the window will be resizable when this button is pushed and move events are registered.
 -- All views can be styled via layers as usual.
 function Window:constructor(args)
-  local t = args or {}
   self.headerView = nil -- optional, set this from theme to optinally enable movement by header dragging
   self.contentView = nil -- mandatory,must be set by theme or no subviews will be added into content area
   self.titleLabel = nil -- optional, 
   lost.guiro.view.View.constructor(self, args)
+  local t = args or {}
   self.focusable = true
   self.id = t.id or "window"
-  if t.movable then
+  if t.movable ~= nil then
     self.movable = t.movable
   else
     self.movable = true
