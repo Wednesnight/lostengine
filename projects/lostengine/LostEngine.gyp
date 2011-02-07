@@ -9,6 +9,8 @@
     'hashlib++_path': '../../thirdparty/hashlib++/hashlib++_0_3_1',
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
     'luabind_path': '../../thirdparty/luabind/luabind_0_9_1',
+    'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
+    'opengl_path': '../../thirdparty/OpenGL',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
     'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
     'unittest++_path': '../../thirdparty/UnitTest++',
@@ -24,6 +26,8 @@
       'type': 'executable',
 
       'default_configuration': 'Debug',
+
+      'msvs_guid': '472D67EC-ABEA-C7DD-DBE2-7FC039681EE8',
 
       'configurations': {
 
@@ -45,6 +49,11 @@
             'ALWAYS_SEARCH_USER_PATHS': 'NO',
             'INFOPLIST_FILE': 'xcode/LostEngineLauncher-Info.plist',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'ObjectFile': '$(IntDir)\\%(RelativeDir)',
+             },
+           },
         },
 
         'Debug': {
@@ -53,6 +62,13 @@
             'GCC_OPTIMIZATION_LEVEL': '0',
             'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '0',
+              'PreprocessorDefinitions': ['_DEBUG'],
+            },
+          },
+          'msvs_precompiled_header': 'lost/prefix-debug.pch',
         },
 
         'Release': {
@@ -61,18 +77,19 @@
             'GCC_OPTIMIZATION_LEVEL': '3',
             'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '2',
+              'PreprocessorDefinitions': ['NDEBUG'],
+            },
+          },
+          'msvs_precompiled_header': 'lost/prefix-release.pch',
         },
 
       },
 
       'dependencies': [
         'LostEngine'
-      ],
-
-      'libraries': [
-        '/System/Library/Frameworks/Cocoa.framework',
-        '/System/Library/Frameworks/OpenAL.framework',
-        '/System/Library/Frameworks/OpenGL.framework',
       ],
 
       'include_dirs': [
@@ -84,23 +101,57 @@
         'main.cpp',
       ],
 
-      'mac_bundle': 1,
+      'conditions': [
 
-      'mac_bundle_resources': [
-        'LostEngine.icns',
+        ['OS == "mac"', {
+
+          'libraries': [
+            '/System/Library/Frameworks/Cocoa.framework',
+            '/System/Library/Frameworks/OpenAL.framework',
+            '/System/Library/Frameworks/OpenGL.framework',
+          ],
+
+          'mac_bundle': 1,
+
+          'mac_bundle_resources': [
+            'LostEngine.icns',
+          ],
+
+          'postbuilds': [{
+            'variables': {
+              # Define copy_resources_path in a variable ending in _path
+              # so that gyp understands it's a path and performs proper
+              # relativization during dict merging.
+              'copy_resources_path':
+              '<(DEPTH)/copy_resources.sh',
+            },
+            'postbuild_name': 'Copy Resources',
+            'action': ['<(copy_resources_path)'],
+          }],
+
+        }],
+
+        ['OS == "win"', {
+
+          'defines': [
+            'WIN32',
+            'UNICODE',
+          ],
+
+          'postbuilds': [{
+            'variables': {
+              # Define copy_resources_path in a variable ending in _path
+              # so that gyp understands it's a path and performs proper
+              # relativization during dict merging.
+              'copy_resources_path':
+              '<(DEPTH)/copy_resources.bat',
+            },
+            'postbuild_name': 'Copy Resources',
+            'action': ['<(copy_resources_path)'],
+          }],
+
+        }],
       ],
-
-      'postbuilds': [{
-        'variables': {
-          # Define copy_resources_path in a variable ending in _path
-          # so that gyp understands it's a path and performs proper
-          # relativization during dict merging.
-          'copy_resources_path':
-          '<(DEPTH)/copy_resources.sh',
-        },
-        'postbuild_name': 'Copy Resources',
-        'action': ['<(copy_resources_path)'],
-      }],
 
     },
 
@@ -111,6 +162,8 @@
       'type': 'executable',
 
       'default_configuration': 'Debug',
+
+      'msvs_guid': '758C194B-7D13-83E3-8A41-A6FC2E6B722D',
 
       'configurations': {
 
@@ -132,6 +185,11 @@
             'ALWAYS_SEARCH_USER_PATHS': 'NO',
             'INFOPLIST_FILE': 'xcode/LostEngineUnittests-Info.plist',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'ObjectFile': '$(IntDir)\\%(RelativeDir)',
+             },
+           },
         },
 
         'Debug': {
@@ -140,6 +198,13 @@
             'GCC_OPTIMIZATION_LEVEL': '0',
             'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '0',
+              'PreprocessorDefinitions': ['_DEBUG'],
+            },
+          },
+          'msvs_precompiled_header': 'lost/prefix-debug.pch',
         },
 
         'Release': {
@@ -148,18 +213,19 @@
             'GCC_OPTIMIZATION_LEVEL': '3',
             'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '2',
+              'PreprocessorDefinitions': ['NDEBUG'],
+            },
+          },
+          'msvs_precompiled_header': 'lost/prefix-release.pch',
         },
 
       },
 
       'dependencies': [
         'LostEngine'
-      ],
-
-      'libraries': [
-        '/System/Library/Frameworks/Cocoa.framework',
-        '/System/Library/Frameworks/OpenAL.framework',
-        '/System/Library/Frameworks/OpenGL.framework',
       ],
 
       'include_dirs': [
@@ -206,6 +272,27 @@
 
       ],
 
+      'conditions': [
+        ['OS == "mac"', {
+
+          'libraries': [
+            '/System/Library/Frameworks/Cocoa.framework',
+            '/System/Library/Frameworks/OpenAL.framework',
+            '/System/Library/Frameworks/OpenGL.framework',
+          ],
+
+        }],
+
+        ['OS == "win"', {
+
+          'defines': [
+            'WIN32',
+            'UNICODE',
+          ],
+
+        }],
+      ],
+
     },
 
     {
@@ -215,6 +302,8 @@
       'type': 'static_library',
 
       'default_configuration': 'Debug',
+
+      'msvs_guid': '8AAE7A8A-8DAC-204C-8BA8-1013866E2AD4',
 
       'configurations': {
 
@@ -235,6 +324,11 @@
             'GCC_OBJC_CALL_CXX_CDTORS': 'YES',
             'ALWAYS_SEARCH_USER_PATHS': 'NO',
           },
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'ObjectFile': '$(IntDir)\\%(RelativeDir)',
+             },
+           },
         },
 
         'Debug': {
@@ -243,6 +337,16 @@
             'GCC_OPTIMIZATION_LEVEL': '0',
             'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
           },
+          'msvs_precompiled_header': 'lost/prefix-debug.pch',
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '0',
+              'PreprocessorDefinitions': ['_DEBUG'],
+            },
+          },
+          'defines': [
+            '_DEBUG',
+          ],
         },
 
         'Release': {
@@ -251,6 +355,16 @@
             'GCC_OPTIMIZATION_LEVEL': '3',
             'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
           },
+          'msvs_precompiled_header': 'lost/prefix-release.pch',
+          'msvs_settings': {
+            'VCCLCompilerTool': {
+              'Optimization': '2',
+              'PreprocessorDefinitions': ['NDEBUG'],
+            },
+          },
+          'defines': [
+            'NDEBUG',
+          ],
         },
 
       },
@@ -466,6 +580,9 @@
         '<@(boost_path)/libs/thread/src/tss_null.cpp',
         '<@(boost_path)/libs/thread/src/pthread/once.cpp',
         '<@(boost_path)/libs/thread/src/pthread/thread.cpp',
+        '<@(boost_path)/libs/thread/src/win32/thread.cpp',
+        '<@(boost_path)/libs/thread/src/win32/tss_dll.cpp',
+        '<@(boost_path)/libs/thread/src/win32/tss_pe.cpp',
 
         # thirdparty/box2d
         '<@(box2d_path)/source/Source/Collision/b2BroadPhase.cpp',
@@ -661,7 +778,7 @@
             'lost/application/mac/Window.mm',
             'lost/gl/mac/Context.mm',
             'lost/platform/Platform_Mac.cpp',
-          ]
+          ],
         }],
 
         ['OS != "win"', {
@@ -671,8 +788,33 @@
             'lost/application/windows/Window.cpp',
             'lost/gl/windows/Context.cpp',
             'lost/platform/Platform_Windows.cpp',
-          ]
+            '<@(boost_path)/libs/thread/src/win32/thread.cpp',
+            '<@(boost_path)/libs/thread/src/win32/tss_dll.cpp',
+            '<@(boost_path)/libs/thread/src/win32/tss_pe.cpp',
+          ],
         }],
+        ['OS == "win"', {
+          'sources!': [
+            '<@(boost_path)/libs/thread/src/pthread/once.cpp',
+            '<@(boost_path)/libs/thread/src/pthread/thread.cpp',
+          ],
+          'link_settings': {
+            'libraries': [
+              '-l<@(openal_path)/libs/Win32/EFX-Util.lib',
+              '-l<@(openal_path)/libs/Win32/OpenAL32.lib',
+            ],
+          },
+          'include_dirs': [
+            '<@(openal_path)/include',
+            '<@(opengl_path)/include',
+          ],
+          'defines': [
+            'WIN32',
+            'UNICODE',
+            '_LIB',
+          ],
+        }],
+
 
       ],
     },
