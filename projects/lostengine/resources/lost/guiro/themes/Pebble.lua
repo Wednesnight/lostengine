@@ -119,14 +119,15 @@ function Pebble:constructor()
   self.menuSeparatorColor = Color(218/255,218/255,218/255)
   self.menuFrameColor = Color(0,0,0,.2)
 ]]
-  local menuColor = Color(1, 1, 1,.95)
-  local menuFrameColor = Color(0,0,0,.2)
-  local menuSeparatorColor = Color(218/255,218/255,218/255)
-  local menuAccessoireColor = Color(.6,.6,.6)
-  local menuBarItemTextColor = Color(0,0,0)
-  local menuBarItemHighlightTextColor = Color(1,1,1)
-  local menuItemTextColor = Color(0,0,0)
-  local menuItemHighlightTextColor = Color(1,1,1)
+  self.menuColor = Color(1, 1, 1,.95)
+  self.menuFrameColor = Color(0,0,0,.2)
+  self.menuSeparatorColor = Color(218/255,218/255,218/255)
+  self.menuAccessoireColor = Color(.6,.6,.6)
+  self.menuBarItemTextColor = Color(0,0,0)
+  self.menuBarItemHighlightTextColor = Color(1,1,1)
+  self.menuItemTextColor = Color(0,0,0)
+  self.menuItemHighlightTextColor = Color(1,1,1)
+
   self.menuParams = 
   {
     regular =
@@ -138,19 +139,12 @@ function Pebble:constructor()
       itemFont = {"Vera",12},
       radius = 6,
       color=menuColor,
-      separatorColor=menuSeparatorColor,
-      frameColor=menuFrameColor,
       separatorHeight = 11,
       checkmarkWidth = 12,
       submenuWidth = 16,
-      accessoireColor = menuAccessoireColor,
       menuItemHeight=22,
       checkmarkTextDistance=4,
       textSubmenuDistance=4,
-      barItemTextColor = menuBarItemTextColor,
-      barItemHighlightTextColor = menuBarItemHighlightTextColor,
-      itemTextColor = menuItemTextColor,
-      itemHighlightTextColor = menuItemHighlightTextColor,
       menuTopMargin = 4,
       menuBottomMargin = 4,
       menuLeftMargin = 4,
@@ -1134,13 +1128,14 @@ function Pebble:menuBarItem(target, args)
   local b = lost.guiro.view.Button
   
   local highlight = r{bounds={0,0,"1","1"},gradient="menubaritemselected",filled=true}
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},valign="center", clip=true, characterMetrics=false, halign="center",font=mp.barItemFont,color=mp.barItemTextColor}
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},valign="center", clip=true, characterMetrics=false, halign="center",font=mp.barItemFont,
+                                     color=self.menuBarItemTextColor}
   target.layer:addSublayer(highlight)
   target.layer:addSublayer(text)
   target.textLayer = text
   target.highlightLayer = highlight
-  target.normalTextColor = mp.barItemTextColor
-  target.highlightedTextColor = mp.barItemHighlightTextColor
+  target.normalTextColor = self.menuBarItemTextColor
+  target.highlightedTextColor = self.menuBarItemHighlightTextColor
   target.menuTheme="pebble"
   target.menuStyle="toprect"
 end
@@ -1161,7 +1156,7 @@ function Pebble:menuShared(target, args)
   local hl =  lost.guiro.layer.HLine
   local l = lost.guiro.layer.Layer
   target.createSeparatorLayerFunc = function() return l{bounds={0,0,"1",mp.separatorHeight},
-                                                        sublayers={hl{bounds={0,"center","1",1}, color=mp.frameColor}} 
+                                                        sublayers={hl{bounds={0,"center","1",1}, color=self.menuSeparatorColor}} 
                                                        } 
                                     end
   target.separatorHeight = mp.separatorHeight                       
@@ -1171,8 +1166,8 @@ function Pebble:menuRoundRect(target, args)
   local size = args.size or "regular"
   local mp = self.menuParams[size]
 
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=mp.color,radius=mp.radius}
-  local fr = lost.guiro.layer.RoundedRect{filled=false, color=mp.frameColor, radius=mp.radius,bounds={0,0,"1","1"}}
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=mp.radius}
+  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=mp.radius,bounds={0,0,"1","1"}}
   target.layer:addSublayer(bg)
   target.layer:addSublayer(fr)
   self:menuShared(target, args)
@@ -1181,9 +1176,8 @@ end
 function Pebble:menuTopRect(target, args)
   local size = args.size or "regular"
   local mp = self.menuParams[size]
-
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=mp.color,radius=mp.radius,roundCorners={tl=false, tr=false}}
-  local fr = lost.guiro.layer.RoundedRect{filled=false, color=mp.frameColor, radius=mp.radius, roundCorners={tl=false, tr=false}, sides={top=false},bounds={0,0,"1","1"}}
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=mp.radius,roundCorners={tl=false, tr=false}}
+  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=mp.radius, roundCorners={tl=false, tr=false}, sides={top=false},bounds={0,0,"1","1"}}
   target.layer:addSublayer(bg)
   target.layer:addSublayer(fr)
   self:menuShared(target, args)
@@ -1192,14 +1186,12 @@ end
 function Pebble:menuItem(target, args)
   local size = args.size or "regular"
   local mp = self.menuParams[size]
-  
-  
   local tl = lost.guiro.layer.Text{font=mp.barItemFont, color=mp.itemTextColor, breakMode="none",valign="center",halign="left", clip=true}
   local fnt = tasklet.fontManager:getFont(mp.itemFont[1], mp.itemFont[2])
   local imageOffset = math.abs(fnt.descender)
   target.checkmarkWidth = mp.checkmarkWidth
   target.submenuWidth = mp.submenuWidth
-  local accessoireColor = mp.accessoireColor
+  local accessoireColor = self.menuAccessoireColor
   local checkmark = lost.guiro.layer.Image{bounds={0,{"center",imageOffset},target.checkmarkWidth,target.checkmarkWidth},texture=self:checkmarkTexture(),flip=true,color=accessoireColor,scale="aspect",filter=true}  
   local submenu = lost.guiro.layer.Image{bounds={0,{"center",imageOffset},target.submenuWidth,target.submenuWidth},texture=self:submenuarrowTexture(),flip=true,color=accessoireColor,scale="aspect",filter=true}  
   target.layer:addSublayer(tl)
@@ -1208,8 +1200,8 @@ function Pebble:menuItem(target, args)
   target.textLayer = tl
   target.checkmarkLayer = checkmark
   target.submenuLayer = submenu
-  target.highlightTextColor = mp.itemHighlightTextColor
-  target.normalTextColor = mp.itemTextColor
+  target.highlightTextColor = self.menuItemHighlightTextColor
+  target.normalTextColor = self.menuItemTextColor
   
   target.contentHeight = mp.menuItemHeight
   target.checkmarkTextDistance = mp.checkmarkTextDistance
