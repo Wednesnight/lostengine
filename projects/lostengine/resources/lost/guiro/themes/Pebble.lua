@@ -119,10 +119,10 @@ function Pebble:constructor()
   self.menuSeparatorColor = Color(218/255,218/255,218/255)
   self.menuFrameColor = Color(0,0,0,.2)
 ]]
-  self.menuColor = Color(1, 1, 1,.95)
+  self.menuColor = Color(1, 1, 1,.93)
   self.menuFrameColor = Color(0,0,0,.2)
   self.menuSeparatorColor = Color(218/255,218/255,218/255)
-  self.menuAccessoireColor = Color(.6,.6,.6)
+  self.menuAccessoireColor = Color(.5,.5,.5)
   self.menuBarItemTextColor = Color(0,0,0)
   self.menuBarItemHighlightTextColor = Color(1,1,1)
   self.menuItemTextColor = Color(0,0,0)
@@ -152,11 +152,43 @@ function Pebble:constructor()
     },
     small=
     {
-      
+      barHeight = 18,
+      barItemFont = {"Vera",10},
+      barItemPadding = 20,
+      barItemLeftOffset = 10,
+      itemFont = {"Vera",10},
+      radius = 6,
+      color=menuColor,
+      separatorHeight = 9,
+      checkmarkWidth = 10,
+      submenuWidth = 14,
+      menuItemHeight=18,
+      checkmarkTextDistance=4,
+      textSubmenuDistance=4,
+      menuTopMargin = 4,
+      menuBottomMargin = 4,
+      menuLeftMargin = 4,
+      menuRightMargin = 4,
     },
     mini=
     {
-      
+      barHeight = 16,
+      barItemFont = {"Vera",8},
+      barItemPadding = 20,
+      barItemLeftOffset = 10,
+      itemFont = {"Vera",8},
+      radius = 6,
+      color=menuColor,
+      separatorHeight = 7,
+      checkmarkWidth = 10,
+      submenuWidth = 12,
+      menuItemHeight=16,
+      checkmarkTextDistance=4,
+      textSubmenuDistance=4,
+      menuTopMargin = 4,
+      menuBottomMargin = 4,
+      menuLeftMargin = 4,
+      menuRightMargin = 4,
     }
   }
 end
@@ -1114,7 +1146,7 @@ function Pebble:menuBar(target, args)
   target:height(mp.barHeight)
   target.menuBarItemTheme="pebble"
   target.menuBarItemStyle="default"
-  target.menuBarItemStyleParams = {theme="pebble", style="default"}  
+  target.menuBarItemStyleParams = {theme="pebble", style="default", ["size"]=size}  
   target.itemPadding = mp.barItemPadding
   target.itemLeftOffset = mp.barItemLeftOffset
 end
@@ -1138,6 +1170,7 @@ function Pebble:menuBarItem(target, args)
   target.highlightedTextColor = self.menuBarItemHighlightTextColor
   target.menuTheme="pebble"
   target.menuStyle="toprect"
+  target:height(mp.barHeight)
 end
 
 function Pebble:menuShared(target, args)

@@ -9,7 +9,7 @@ function MenuBar:constructor(args)
   lost.guiro.view.View.constructor(self, args)
   local t = args or {}
   self.id = t.id or "menubar"
-  
+  self.menuBarItemStyleParams.size = args.size
   self._menuBarItems = {}
   self:items(t.items or {})
   self._hoverMode = false
@@ -25,17 +25,16 @@ function MenuBar:rebuildMenuBarItems()
   end
   self._menuBarItems = {}
   
-  -- build style table that's used for construction of the items
-  -- copy style params that were sent from MenuBar style
-  for k,v in ipairs(self.menuBarItemStyleParams) do
-    mbistyle[k] = v
-  end
   
-  local mbistyle = {}
   -- create new ones
   local xoffset = self.itemLeftOffset
   for k,item in ipairs(self._items) do
-    mbistyle = {}
+    -- build style table that's used for construction of the items
+    -- copy style params that were sent from MenuBar style
+    local mbistyle = {}
+    for k,v in pairs(self.menuBarItemStyleParams) do
+      mbistyle[k] = v
+    end
     mbistyle.bounds = {100,0,100,22}
     for k,v in pairs(item) do
       mbistyle[k] = v
@@ -48,6 +47,7 @@ function MenuBar:rebuildMenuBarItems()
     local w = m.size.width+self.itemPadding
     mbi:width(w)
     mbi:x(xoffset)
+    mbi:y("center")
     xoffset = xoffset+w
   end
 end
