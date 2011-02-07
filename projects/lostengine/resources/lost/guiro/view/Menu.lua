@@ -4,6 +4,12 @@ lost.common.Class "lost.guiro.view.Menu" "lost.guiro.view.Window" {}
 
 local Color = lost.common.Color
 
+-- Menu
+-- Sends menuItemSelected events with target = self and indexPath = {a,b,c} where a,b,c are 1-based indices into
+-- the (sub)menu tree. Indices use the visual order, but the menuItems might be ordered different internally.
+-- This is why you MUST use Menu:menuItemForIndexPath() to retrieve the appropriate MenuItem, even if it's only 
+-- a single index. 
+--
 -- optional attributes:
 -- * delegate: will receive additional messages from Menu
 -- * leftMargin
@@ -102,6 +108,8 @@ function Menu:close()
     if m then
       m:close()
     end
+    self:disableHighlight(self.currentMenuItem)
+    self.currentMenuItem = nil
   end
   lost.guiro.windowManager():closeMenu(self)
 end
@@ -135,6 +143,7 @@ function Menu:openMenuItemSubmenu(menuItem)
   local m = menuItem:menu()
   m:x(self.rect.x+self.rect.width)
   m:y(menuItem.rect.y+menuItem.rect.height-m.rect.height+m.topMargin)
+  m.superMenu = self
   m:open()
 end
 
@@ -170,6 +179,61 @@ function Menu:menuItemLeft(event, menuItem)
   end
 end
 
-function Menu:menuItemClicked(event, menuItem)
+function Menu:indexForMenuItem(menuItem)
+  local result = 0
+  for k,v in ipairs(self._itemViews) do
+    if rawequal(v, menuItem) then
+      result = (#self._itemViews) - k + 1
+      break
+    end
+  end
+  return result
+end
+
+function Menu:menuItemClicked(event, menuItem, indexPath)
+--  log.debug("/// item selected "..menuItem.id)
+  -- add currently clicked menuItem to path
+  if indexPath == nil then
+    indexPath = {}
+  end
+  table.insert(indexPath, self:indexForMenuItem(self.currentMenuItem))
+
+  if self.superMenu then
+--    log.debug("delegating to supermenu, current item "..tostring(self.currentMenuItem))
+    self.superMenu:menuItemClicked(event, self.currentMenuItem, indexPath)
+  else
+    -- reverse indexPath since we built it traversing upwards
+    local reversed = {}
+    for k,v in ipairs(indexPath) do
+      table.insert(reversed, 1,v)
+    end
+    indexPath = reversed
+--    log.debug("!!! indexPath for click")
+--    for k,v in ipairs(indexPath) do
+--      log.debug(v)
+--    end
+    self:dispatchSelectedEvent(indexPath)
+    if self.delegate then 
+      self.delegate:menuItemSelected(self, indexPath)
+    end
+  end
+end
+
+function Menu:dispatchSelectedEvent(indexPath)
+  local event = lost.guiro.event.Event("menuItemSelected")
+  event.bubbles = true
+  event.target = self
+  event.indexPath = indexPath
+  self:dispatchEvent(event)    
+end
+
+function Menu:menuItemForIndexPath(indexPath)
+  local currentMenu = self
+  local result = 0
+  for k,v in ipairs(indexPath) do
+    result = currentMenu._itemViews[#currentMenu._itemViews-v+1]
+    currentMenu = result:menu()
+  end
+  return result
 end
 

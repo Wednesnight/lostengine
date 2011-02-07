@@ -1096,11 +1096,7 @@ function Pebble:menuShared(target, args)
   local highlight = lost.guiro.layer.Rect{gradient="menubaritemselected", filled=true}
   target.layer:addSublayer(highlight)
   target.highlightLayer = highlight
-  
---  target:pos(20,10)
---  target:size(100, 200)
-  
---  self:windowPanel(target, args)
+  args.movable = false
   target:bounds(lost.guiro.Bounds(10,10,100,200))
   target.topMargin = 4
   target.bottomMargin = 6
