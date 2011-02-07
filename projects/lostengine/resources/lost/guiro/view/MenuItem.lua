@@ -21,12 +21,31 @@ function MenuItem:constructor(args)
   self.id = t.id or "menuitem"
   self:title(t.title or " ")
   self:checked(t.checked or false)
-  self:submenuIcon(false)
   
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)
   self:addEventListener("mouseUpInside", function(event) self:mouseUpInside(event) end)
   self:highlight(false)
+  if t.menu then
+    local m = lost.guiro.view.Menu(t.menu)
+    self:menu(m)
+  else
+    self:submenuIcon(false)
+  end
+end
+
+function MenuItem:menu(...)
+  if arg.n >= 1 then
+    local m = arg[1]
+    self._menu = m
+    if m ~= nil then
+      self:submenuIcon(true)
+    else
+      self:submenuIcon(false)
+    end
+  else
+    return self._menu
+  end
 end
 
 function MenuItem:submenuIcon(...)
@@ -49,19 +68,19 @@ end
 
 function MenuItem:mouseEnter(event)
   if self.delegate then
-    self.delegate:menuItemEntered(self)
+    self.delegate:menuItemEntered(event,self)
   end
 end
 
 function MenuItem:mouseLeave(event)
   if self.delegate then
-    self.delegate:menuItemLeft(self)
+    self.delegate:menuItemLeft(event,self)
   end
 end
 
 function MenuItem:mouseUpInside(event)
   if self.delegate then
-    self.delegate:menuItemClicked(self)
+    self.delegate:menuItemClicked(event,self)
   end
 end
 

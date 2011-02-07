@@ -1092,18 +1092,8 @@ function Pebble:menuBarItem(target, args)
   target.menuStyle="toprect"
 end
 
-function Pebble:menuRoundRect(target, args)
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius}
-  target.layer:addSublayer(bg)
-  target:size(100, 200)
-end
-
-function Pebble:menuTopRect(target, args)
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius,roundCorners={tl=false, tr=false}}
-  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=self.menuRadius, roundCorners={tl=false, tr=false}, bounds={-1,-1,{"1",2},{"1",1}}}
+function Pebble:menuShared(target, args)
   local highlight = lost.guiro.layer.Rect{gradient="menubaritemselected", filled=true}
-  target.layer:addSublayer(fr)
-  target.layer:addSublayer(bg)
   target.layer:addSublayer(highlight)
   target.highlightLayer = highlight
   
@@ -1113,7 +1103,7 @@ function Pebble:menuTopRect(target, args)
 --  self:windowPanel(target, args)
   target:bounds(lost.guiro.Bounds(10,10,100,200))
   target.topMargin = 4
-  target.bottomMargin = 4
+  target.bottomMargin = 6
   target.leftMargin = 4
   target.rightMargin = 4
   local hl =  lost.guiro.layer.HLine
@@ -1124,6 +1114,22 @@ function Pebble:menuTopRect(target, args)
                                                        } 
                                     end
   target.separatorHeight = sepHeight                       
+end
+
+function Pebble:menuRoundRect(target, args)
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius}
+  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=self.menuRadius,bounds={0,0,"1","1"}}
+  target.layer:addSublayer(bg)
+  target.layer:addSublayer(fr)
+  self:menuShared(target, args)
+end
+
+function Pebble:menuTopRect(target, args)
+  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=self.menuRadius,roundCorners={tl=false, tr=false}}
+  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=self.menuRadius, roundCorners={tl=false, tr=false}, sides={top=false},bounds={0,0,"1","1"}}
+  target.layer:addSublayer(bg)
+  target.layer:addSublayer(fr)
+  self:menuShared(target, args)
 end
 
 function Pebble:menuItem(target, args)
