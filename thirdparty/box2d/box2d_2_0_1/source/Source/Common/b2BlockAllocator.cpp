@@ -20,6 +20,7 @@
 #include <cstdlib>
 #include <memory>
 #include <climits>
+#include <string.h>
 
 int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 
 {

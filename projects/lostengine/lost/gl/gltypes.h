@@ -27,10 +27,15 @@ typedef void GLvoid;
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32
 typedef int GLintptr;
 typedef int GLsizeiptr;
+#elif defined linux
+typedef int GLintptr;
+typedef int GLsizeiptr;
 #else
 typedef long GLintptr;
 typedef long GLsizeiptr;
 #endif
+
+#ifndef __gl_h_
 
 /* DataType */
 #define GL_BYTE                           0x1400
@@ -56,6 +61,8 @@ typedef long GLsizeiptr;
 #define GL_FRONT                          0x0404
 #define GL_BACK                           0x0405
 #define GL_FRONT_AND_BACK                 0x0408
+
+#endif // #ifndef __gl_h_
 
 #endif
 
