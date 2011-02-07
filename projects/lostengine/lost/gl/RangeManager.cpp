@@ -1,4 +1,4 @@
-#include "lost/gl/rangeManager.h"
+#include "lost/gl/RangeManager.h"
 
 namespace lost
 {

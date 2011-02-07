@@ -1,14 +1,16 @@
-#include "Context.h"
-
-// FIXME: include GLX headers
+#include "lost/gl/Context.h"
+#include "lost/gl/gl.h"
 
 namespace lost
 {
   namespace gl
   {
+    // set to the current context in makeCurrent
+    void* currentContext;
+
     struct Context::ContextHiddenMembers
     {
-      PDisplay    glDisplay;
+      Display*    glDisplay;
       GLXDrawable glDrawable;
       GLXContext  glContext;
     };
@@ -33,6 +35,7 @@ namespace lost
           glXGetCurrentContext() != hiddenMembers->glContext)
       {
         glXMakeCurrent(hiddenMembers->glDisplay, hiddenMembers->glDrawable, hiddenMembers->glContext);
+        currentContext = hiddenMembers;
       }
     }
 
@@ -49,6 +52,17 @@ namespace lost
     void Context::multithreaded(bool enable)
     {
       // FIXME: implement Context::multithreaded
+    }
+
+    void* Context::getCurrentOsSpecific()
+    {
+      return currentContext;
+    }
+    
+    void Context::setCurrentOsSpecififc(void* ctx)
+    {
+      Context::ContextHiddenMembers* members = (Context::ContextHiddenMembers*)ctx;
+      glXMakeCurrent(members->glDisplay, members->glDrawable, members->glContext);
     }
 
   }

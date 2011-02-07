@@ -1,0 +1,158 @@
+# This file is generated; do not edit.
+
+import os
+
+Import("env")
+
+env = env.Clone(COMPONENT_NAME='LostEngine',
+                TARGET_NAME='UnitTests')
+
+configurations = {
+    'Debug' : {
+        'Append' : dict(
+            CPPPATH = [
+                env.Dir('$SRC_DIR/.'),
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
+            ],
+            CXXFLAGS = [
+                '-includelost/prefix-debug.pch'
+            ],
+            LIBS = [
+                '-lopenal',
+                '-lGL',
+                '-lGLU',
+                'libLostEngine'
+            ],
+        ),
+        'FilterOut' : dict(
+        ),
+        'Replace' : dict(
+        ),
+        'ImportExternal' : [
+        ],
+        'PropagateExternal' : [
+        ],
+    },
+    'Release' : {
+        'Append' : dict(
+            CPPPATH = [
+                env.Dir('$SRC_DIR/.'),
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
+            ],
+            CXXFLAGS = [
+                '-includelost/prefix-release.pch'
+            ],
+            LIBS = [
+                '-lopenal',
+                '-lGL',
+                '-lGLU',
+                'libLostEngine'
+            ],
+        ),
+        'FilterOut' : dict(
+        ),
+        'Replace' : dict(
+        ),
+        'ImportExternal' : [
+        ],
+        'PropagateExternal' : [
+        ],
+    },
+}
+
+config = configurations[env['CONFIG_NAME']]
+env.Append(**config['Append'])
+env.FilterOut(**config['FilterOut'])
+env.Replace(**config['Replace'])
+
+# Scons forces -fPIC for SHCCFLAGS on some platforms.
+# Disable that so we can control it from cflags in gyp.
+# Note that Scons itself is inconsistent with its -fPIC
+# setting. SHCCFLAGS forces -fPIC, and SHCFLAGS does not.
+# This will make SHCCFLAGS consistent with SHCFLAGS.
+env['SHCCFLAGS'] = ['$CCFLAGS']
+
+for _var in config['ImportExternal']:
+  if _var in ARGUMENTS:
+    env[_var] = ARGUMENTS[_var]
+  elif _var in os.environ:
+    env[_var] = os.environ[_var]
+for _var in config['PropagateExternal']:
+  if _var in ARGUMENTS:
+    env[_var] = ARGUMENTS[_var]
+  elif _var in os.environ:
+    env['ENV'][_var] = os.environ[_var]
+
+env['ENV']['LD_LIBRARY_PATH'] = env.subst('$LIB_DIR')
+
+input_files = [
+    'lost/test/main.cpp',
+    'lost/test/TestCompileLostMathVec2.cpp',
+    'lost/test/TestEvent.cpp',
+    'lost/test/TestEventDispatcher.cpp',
+    'lost/test/TestGlUtils.cpp',
+    'lost/test/TestLostGlHostBuffer.cpp',
+    'lost/test/TestLostGlRangeManager.cpp',
+    'lost/test/TestLostMathMatrix.cpp',
+    'lost/test/TestLostMathQuat.cpp',
+    'lost/test/TestLostMathVec4.cpp',
+    'lost/test/TestPlatform.cpp',
+    'lost/test/TestProfiler.cpp',
+    'lost/test/TestTimer.cpp',
+    '../../thirdparty/UnitTest++/include/XmlTestReporter.cpp',
+    '../../thirdparty/UnitTest++/include/TimeConstraint.cpp',
+    '../../thirdparty/UnitTest++/include/TestRunner.cpp',
+    '../../thirdparty/UnitTest++/include/TestResults.cpp',
+    '../../thirdparty/UnitTest++/include/TestReporterStdout.cpp',
+    '../../thirdparty/UnitTest++/include/TestReporter.cpp',
+    '../../thirdparty/UnitTest++/include/TestList.cpp',
+    '../../thirdparty/UnitTest++/include/TestDetails.cpp',
+    '../../thirdparty/UnitTest++/include/Test.cpp',
+    '../../thirdparty/UnitTest++/include/ReportAssert.cpp',
+    '../../thirdparty/UnitTest++/include/MemoryOutStream.cpp',
+    '../../thirdparty/UnitTest++/include/DeferredTestResult.cpp',
+    '../../thirdparty/UnitTest++/include/DeferredTestReporter.cpp',
+    '../../thirdparty/UnitTest++/include/Checks.cpp',
+    '../../thirdparty/UnitTest++/include/AssertException.cpp',
+    '../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp',
+    '../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp',
+]
+
+target_files = []
+prerequisites = []
+
+_result = []
+for infile in input_files:
+  if env.compilable(infile):
+    if (type(infile) == type('')
+        and (infile.startswith('$SRC_DIR/')
+             or not os.path.isabs(env.subst(infile)))):
+      # Force files below the build directory by replacing all '..'
+      # elements in the path with '__':
+      base, ext = os.path.splitext(os.path.normpath(infile))
+      base = [d == '..' and '__' or d for d in base.split('/')]
+      base = os.path.join(*base)
+      object = '${OBJ_DIR}/${COMPONENT_NAME}/${TARGET_NAME}/' + base
+      if not infile.startswith('$SRC_DIR/'):
+        infile = '$SRC_DIR/' + infile
+      infile = env.StaticObject(object, infile)[0]
+    else:
+      infile = env.StaticObject(infile)[0]
+  _result.append(infile)
+input_files = _result
+
+_outputs = env.GypProgram(env.File('${TOP_BUILDDIR}/${PROGPREFIX}UnitTests${PROGSUFFIX}'), input_files)
+target_files.extend(_outputs)
+
+gyp_target = env.Alias('UnitTests', target_files)
+dependencies = [
+    Alias('LostEngine')
+]
+env.Requires(target_files, dependencies)
+env.Requires(gyp_target, dependencies)
+for prerequisite in prerequisites:
+  env.Requires(prerequisite, dependencies)
+env.Requires(gyp_target, prerequisites)
+Return("gyp_target")

@@ -1,0 +1,433 @@
+# This file is generated; do not edit.
+
+import os
+
+Import("env")
+
+env = env.Clone(COMPONENT_NAME='LostEngine',
+                TARGET_NAME='LostEngine')
+
+configurations = {
+    'Debug' : {
+        'Append' : dict(
+            CPPDEFINES = [
+                "'_DEBUG'"
+            ],
+            CPPPATH = [
+                env.Dir('$SRC_DIR/.'),
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/box2d/box2d_2_0_1/source/Include'),
+                env.Dir('$SRC_DIR/../../thirdparty/fhtagn/fhtagn-0.3'),
+                env.Dir('$SRC_DIR/../../thirdparty/freetype2/freetype_2_4_3/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/glee/glee_5_21/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/hashlib++/hashlib++_0_3_1'),
+                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/luabind/luabind_0_9_1'),
+                env.Dir('$SRC_DIR/../../thirdparty/stb/stb_image_1_18'),
+                env.Dir('$SRC_DIR/../../thirdparty/stb/stb_vorbis_0_99996'),
+                env.Dir('$SRC_DIR/../../thirdparty/zlib/zlib_1_2_3/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/zziplib/zziplib-0.13.58')
+            ],
+            CXXFLAGS = [
+                '-includelost/prefix-debug.pch'
+            ],
+        ),
+        'FilterOut' : dict(
+        ),
+        'Replace' : dict(
+        ),
+        'ImportExternal' : [
+        ],
+        'PropagateExternal' : [
+        ],
+    },
+    'Release' : {
+        'Append' : dict(
+            CPPDEFINES = [
+                "'NDEBUG'"
+            ],
+            CPPPATH = [
+                env.Dir('$SRC_DIR/.'),
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/box2d/box2d_2_0_1/source/Include'),
+                env.Dir('$SRC_DIR/../../thirdparty/fhtagn/fhtagn-0.3'),
+                env.Dir('$SRC_DIR/../../thirdparty/freetype2/freetype_2_4_3/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/glee/glee_5_21/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/hashlib++/hashlib++_0_3_1'),
+                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/luabind/luabind_0_9_1'),
+                env.Dir('$SRC_DIR/../../thirdparty/stb/stb_image_1_18'),
+                env.Dir('$SRC_DIR/../../thirdparty/stb/stb_vorbis_0_99996'),
+                env.Dir('$SRC_DIR/../../thirdparty/zlib/zlib_1_2_3/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/zziplib/zziplib-0.13.58')
+            ],
+            CXXFLAGS = [
+                '-includelost/prefix-release.pch'
+            ],
+        ),
+        'FilterOut' : dict(
+        ),
+        'Replace' : dict(
+        ),
+        'ImportExternal' : [
+        ],
+        'PropagateExternal' : [
+        ],
+    },
+}
+
+config = configurations[env['CONFIG_NAME']]
+env.Append(**config['Append'])
+env.FilterOut(**config['FilterOut'])
+env.Replace(**config['Replace'])
+
+# Scons forces -fPIC for SHCCFLAGS on some platforms.
+# Disable that so we can control it from cflags in gyp.
+# Note that Scons itself is inconsistent with its -fPIC
+# setting. SHCCFLAGS forces -fPIC, and SHCFLAGS does not.
+# This will make SHCCFLAGS consistent with SHCFLAGS.
+env['SHCCFLAGS'] = ['$CCFLAGS']
+
+for _var in config['ImportExternal']:
+  if _var in ARGUMENTS:
+    env[_var] = ARGUMENTS[_var]
+  elif _var in os.environ:
+    env[_var] = os.environ[_var]
+for _var in config['PropagateExternal']:
+  if _var in ARGUMENTS:
+    env[_var] = ARGUMENTS[_var]
+  elif _var in os.environ:
+    env['ENV'][_var] = os.environ[_var]
+
+env['ENV']['LD_LIBRARY_PATH'] = env.subst('$LIB_DIR')
+
+input_files = [
+    'lost/al/Buffer.cpp',
+    'lost/al/Context.cpp',
+    'lost/al/Debug.cpp',
+    'lost/al/Device.cpp',
+    'lost/al/Listener.cpp',
+    'lost/al/Source.cpp',
+    'lost/application/Application.cpp',
+    'lost/application/Queue.cpp',
+    'lost/application/QueueEntityLua.cpp',
+    'lost/application/Runner.cpp',
+    'lost/application/Tasklet.cpp',
+    'lost/application/TaskletConfig.cpp',
+    'lost/application/TaskletThread.cpp',
+    'lost/application/Window.cpp',
+    'lost/application/linux/Application.cpp',
+    'lost/application/linux/Tasklet.cpp',
+    'lost/application/linux/Window.cpp',
+    'lost/audio/Engine.cpp',
+    'lost/audio/Source.cpp',
+    'lost/audio/VorbisFile.cpp',
+    'lost/bitmap/Bitmap.cpp',
+    'lost/bitmap/Packer.cpp',
+    'lost/camera/Camera.cpp',
+    'lost/camera/Camera2D.cpp',
+    'lost/camera/Camera3D.cpp',
+    'lost/common/Color.cpp',
+    'lost/common/ColorGradient.cpp',
+    'lost/common/Data.cpp',
+    'lost/common/io.cpp',
+    'lost/common/Logger.cpp',
+    'lost/common/Profiler.cpp',
+    'lost/event/EventDispatcher.cpp',
+    'lost/font/BitmapFont.cpp',
+    'lost/font/Font.cpp',
+    'lost/font/FontManager.cpp',
+    'lost/font/Glyph.cpp',
+    'lost/font/Render.cpp',
+    'lost/font/RenderedText.cpp',
+    'lost/font/TextBuffer.cpp',
+    'lost/font/TrueTypeFont.cpp',
+    'lost/font/freetype/Face.cpp',
+    'lost/font/freetype/Library.cpp',
+    'lost/gl/Buffer.cpp',
+    'lost/gl/BufferLayout.cpp',
+    'lost/gl/Context.cpp',
+    'lost/gl/FragmentShader.cpp',
+    'lost/gl/FrameBuffer.cpp',
+    'lost/gl/HostBuffer.cpp',
+    'lost/gl/HybridBuffer.cpp',
+    'lost/gl/HybridIndexBuffer.cpp',
+    'lost/gl/HybridVertexBuffer.cpp',
+    'lost/gl/RangeManager.cpp',
+    'lost/gl/RenderBuffer.cpp',
+    'lost/gl/Shader.cpp',
+    'lost/gl/ShaderHelper.cpp',
+    'lost/gl/ShaderProgram.cpp',
+    'lost/gl/Texture.cpp',
+    'lost/gl/Uniform.cpp',
+    'lost/gl/UniformBlock.cpp',
+    'lost/gl/Utils.cpp',
+    'lost/gl/VertexAttribute.cpp',
+    'lost/gl/VertexShader.cpp',
+    'lost/gl/linux/Context.cpp',
+    'lost/lua/BindAll.cpp',
+    'lost/lua/BindingHelpers.cpp',
+    'lost/lua/ModuleLoader.cpp',
+    'lost/lua/State.cpp',
+    'lost/lua/bindings/LostApplication.cpp',
+    'lost/lua/bindings/LostAudio.cpp',
+    'lost/lua/bindings/LostBitmap.cpp',
+    'lost/lua/bindings/LostCamera.cpp',
+    'lost/lua/bindings/LostCommon.cpp',
+    'lost/lua/bindings/LostEvent.cpp',
+    'lost/lua/bindings/LostFont.cpp',
+    'lost/lua/bindings/LostGL.cpp',
+    'lost/lua/bindings/LostLGL.cpp',
+    'lost/lua/bindings/LostLua.cpp',
+    'lost/lua/bindings/LostMath.cpp',
+    'lost/lua/bindings/LostMesh.cpp',
+    'lost/lua/bindings/LostPlatform.cpp',
+    'lost/lua/bindings/LostResource.cpp',
+    'lost/lua/bindings/LostRg.cpp',
+    'lost/lua/bindings/LostTime.cpp',
+    'lost/lua/bindings/ThirdpartyBox2D.cpp',
+    'lost/math/AABB.cpp',
+    'lost/math/io.cpp',
+    'lost/math/Matrix.cpp',
+    'lost/math/Quat.cpp',
+    'lost/math/Rect.cpp',
+    'lost/math/RectPacker.cpp',
+    'lost/math/Vec2.cpp',
+    'lost/math/Vec3.cpp',
+    'lost/math/Vec4.cpp',
+    'lost/mesh/Disc.cpp',
+    'lost/mesh/Line.cpp',
+    'lost/mesh/Loader.cpp',
+    'lost/mesh/Material.cpp',
+    'lost/mesh/Mesh.cpp',
+    'lost/mesh/Quad.cpp',
+    'lost/mesh/Rect.cpp',
+    'lost/mesh/RoundedRect.cpp',
+    'lost/mesh/ScaleGrid.cpp',
+    'lost/mesh/Sphere.cpp',
+    'lost/mesh/TextureManager.cpp',
+    'lost/platform/Platform.cpp',
+    'lost/platform/Platform_Linux.cpp',
+    'lost/resource/ApplicationResourceRepository.cpp',
+    'lost/resource/DefaultLoader.cpp',
+    'lost/resource/FilesystemRepository.cpp',
+    'lost/resource/Helper.cpp',
+    'lost/resource/Loader.cpp',
+    'lost/rg/Blend.cpp',
+    'lost/rg/Camera.cpp',
+    'lost/rg/Clear.cpp',
+    'lost/rg/ClearColor.cpp',
+    'lost/rg/DefaultFrameBuffer.cpp',
+    'lost/rg/DepthTest.cpp',
+    'lost/rg/Draw.cpp',
+    'lost/rg/FrameBuffer.cpp',
+    'lost/rg/Node.cpp',
+    'lost/rg/Scissor.cpp',
+    'lost/rg/ScissorRect.cpp',
+    'lost/rg/ScissorStack.cpp',
+    'lost/time/Clock.cpp',
+    'lost/time/ThreadedTimerScheduler.cpp',
+    'lost/time/Timer.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/filesystem/v3/src/path.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/filesystem/v3/src/operations.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/filesystem/v3/src/portability.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/filesystem/v3/src/utf8_codecvt_facet.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/signals/src/connection.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/signals/src/named_slot_map.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/signals/src/signal_base.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/signals/src/slot.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/signals/src/trackable.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/system/src/error_code.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/thread/src/tss_null.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/thread/src/pthread/once.cpp',
+    '../../thirdparty/boost/boost_1_44_0/libs/thread/src/pthread/thread.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2BroadPhase.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2CollideCircle.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2CollidePoly.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2Collision.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2Distance.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2PairManager.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/b2TimeOfImpact.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/Shapes/b2CircleShape.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/Shapes/b2PolygonShape.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Collision/Shapes/b2Shape.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Common/b2BlockAllocator.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Common/b2Math.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Common/b2Settings.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Common/b2StackAllocator.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/b2Body.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/b2ContactManager.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/b2Island.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/b2World.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/b2WorldCallbacks.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Contacts/b2CircleContact.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Contacts/b2Contact.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Contacts/b2ContactSolver.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Contacts/b2PolyAndCircleContact.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Contacts/b2PolyContact.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2DistanceJoint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2GearJoint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2Joint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2MouseJoint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2PrismaticJoint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2PulleyJoint.cpp',
+    '../../thirdparty/box2d/box2d_2_0_1/source/Source/Dynamics/Joints/b2RevoluteJoint.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/variant.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/version.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/decoders.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/encoders.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/text/transcoding.cpp',
+    '../../thirdparty/fhtagn/fhtagn-0.3/fhtagn/threads/tasklet.cpp',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/psnames/psnames.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/psaux/psaux.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/lzw/ftlzw.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/gzip/ftgzip.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/cache/ftcache.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/smooth/smooth.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/raster/raster.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/pshinter/pshinter.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/autofit/autofit.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/sfnt/sfnt.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/bdf/bdf.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/pcf/pcf.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/winfonts/winfnt.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/type42/type42.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/pfr/pfr.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/cid/type1cid.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/cff/cff.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/type1/type1.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/truetype/truetype.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftinit.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftsystem.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftdebug.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftbase.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftbdf.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftcid.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftgxval.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftglyph.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftsynth.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftstroke.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftlcdfil.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftgasp.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftpfr.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftpatent.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftotval.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftmm.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftbbox.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftwinfnt.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/fttype1.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftbitmap.c',
+    '../../thirdparty/freetype2/freetype_2_4_3/src/base/ftxf86.c',
+    '../../thirdparty/glee/glee_5_21/source/GLee.c',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_md5.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_md5wrapper.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha1.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha1wrapper.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha2ext.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha256.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha256wrapper.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha384wrapper.cpp',
+    '../../thirdparty/hashlib++/hashlib++_0_3_1/hl_sha512wrapper.cpp',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lzio.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lvm.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lundump.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ltm.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ltablib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ltable.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lstrlib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lstring.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lstate.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lparser.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/loslib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lopcodes.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lobject.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/loadlib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lmem.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lmathlib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/llex.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/liolib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/linit.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ldblib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ldebug.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lauxlib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lbaselib.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ldo.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lfunc.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/ldump.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lapi.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lcode.c',
+    '../../thirdparty/lua/lua_5_1_4/source/src/lgc.c',
+    '../../thirdparty/luabind/luabind_0_9_1/src/class_info.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/class_registry.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/class_rep.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/class.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/create_class.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/error.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/exception_handler.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/function.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/inheritance.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/link_compatibility.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/object_rep.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/open.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/pcall.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/scope.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/stack_content_by_name.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/weak_ref.cpp',
+    '../../thirdparty/luabind/luabind_0_9_1/src/wrapper_base.cpp',
+    '../../thirdparty/stb/stb_image_1_18/stb_image.c',
+    '../../thirdparty/stb/stb_vorbis_0_99996/stb_vorbis.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/zutil.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/uncompr.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/compress.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/infback.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/inflate.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/adler32.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/deflate.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/inffast.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/trees.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/gzio.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/crc32.c',
+    '../../thirdparty/zlib/zlib_1_2_3/source/inftrees.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/dir.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/err.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/fetch.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/file.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/fseeko.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/info.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/memdisk.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/mmapped.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/plugin.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/stat.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/write.c',
+    '../../thirdparty/zziplib/zziplib-0.13.58/zzip/zip.c',
+]
+
+target_files = []
+prerequisites = []
+
+_result = []
+for infile in input_files:
+  if env.compilable(infile):
+    if (type(infile) == type('')
+        and (infile.startswith('$SRC_DIR/')
+             or not os.path.isabs(env.subst(infile)))):
+      # Force files below the build directory by replacing all '..'
+      # elements in the path with '__':
+      base, ext = os.path.splitext(os.path.normpath(infile))
+      base = [d == '..' and '__' or d for d in base.split('/')]
+      base = os.path.join(*base)
+      object = '${OBJ_DIR}/${COMPONENT_NAME}/${TARGET_NAME}/' + base
+      if not infile.startswith('$SRC_DIR/'):
+        infile = '$SRC_DIR/' + infile
+      infile = env.StaticObject(object, infile)[0]
+    else:
+      infile = env.StaticObject(infile)[0]
+  _result.append(infile)
+input_files = _result
+
+_outputs = env.GypStaticLibrary(env.File('${LIB_DIR}/${LIBPREFIX}LostEngine${LIBSUFFIX}'), input_files)
+target_files.extend(_outputs)
+
+gyp_target = env.Alias('LostEngine', target_files)
+env.Requires(gyp_target, prerequisites)
+Return("gyp_target")

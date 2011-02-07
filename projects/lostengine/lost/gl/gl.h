@@ -34,6 +34,7 @@
       #include <wingdi.h>
     #elif defined linux
       #include <GL/gl.h>
+      #include <GL/glx.h>
       #include <GL/glext.h>
       #include <GL/glu.h>
     #elif defined __APPLE__

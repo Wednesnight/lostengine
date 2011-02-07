@@ -69,6 +69,13 @@
             },
           },
           'msvs_precompiled_header': 'lost/prefix-debug.pch',
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-debug.pch',
+              ],
+            }],
+          ],
         },
 
         'Release': {
@@ -84,6 +91,13 @@
             },
           },
           'msvs_precompiled_header': 'lost/prefix-release.pch',
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-release.pch',
+              ],
+            }],
+          ],
         },
 
       },
@@ -205,6 +219,13 @@
             },
           },
           'msvs_precompiled_header': 'lost/prefix-debug.pch',
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-debug.pch',
+              ],
+            }],
+          ],
         },
 
         'Release': {
@@ -220,6 +241,13 @@
             },
           },
           'msvs_precompiled_header': 'lost/prefix-release.pch',
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-release.pch',
+              ],
+            }],
+          ],
         },
 
       },
@@ -347,6 +375,13 @@
           'defines': [
             '_DEBUG',
           ],
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-debug.pch',
+              ],
+            }],
+          ],
         },
 
         'Release': {
@@ -364,6 +399,13 @@
           },
           'defines': [
             'NDEBUG',
+          ],
+          'conditions': [
+            ['OS == "linux"', {
+              'cflags_cc': [
+                '-includelost/prefix-release.pch',
+              ],
+            }],
           ],
         },
 
@@ -406,6 +448,11 @@
         'lost/application/TaskletConfig.cpp',
         'lost/application/TaskletThread.cpp',
         'lost/application/Window.cpp',
+
+        # application/linux
+        'lost/application/linux/Application.cpp',
+        'lost/application/linux/Tasklet.cpp',
+        'lost/application/linux/Window.cpp',
 
         # application/mac
         'lost/application/mac/Application.mm',
@@ -480,6 +527,9 @@
         'lost/gl/VertexAttribute.cpp',
         'lost/gl/VertexShader.cpp',
 
+        # gl/linux
+        'lost/gl/linux/Context.cpp',
+
         # gl/mac
         'lost/gl/mac/Context.mm',
 
@@ -539,6 +589,7 @@
         'lost/platform/Platform.cpp',
         'lost/platform/Platform_Mac.cpp',
         'lost/platform/Platform_Windows.cpp',
+        'lost/platform/Platform_Linux.cpp',
 
         # resource
         'lost/resource/ApplicationResourceRepository.cpp',
@@ -815,6 +866,24 @@
           ],
         }],
 
+        ['OS != "linux"', {
+          'sources!': [
+            'lost/application/linux/Application.cpp',
+            'lost/application/linux/Tasklet.cpp',
+            'lost/application/linux/Window.cpp',
+           'lost/gl/linux/Context.cpp',
+            'lost/platform/Platform_Linux.cpp',
+          ],
+        }],
+        ['OS == "linux"', {
+          'link_settings': {
+            'libraries': [
+              '-lopenal',
+              '-lGL',
+              '-lGLU',
+            ],
+          },
+        }],
 
       ],
     },
