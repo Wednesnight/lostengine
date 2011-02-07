@@ -113,7 +113,7 @@ function Pebble:constructor()
   
   self.menuBarHeight = 22
   self.menuBarItemFont = {"Vera", 12}
-  self.menuRadius = 8
+  self.menuRadius = 6
 --  self.menuColor = Color(244/255, 244/255, 244/255,.8)
   self.menuColor = Color(1, 1, 1,.95)
   self.menuSeparatorColor = Color(218/255,218/255,218/255)

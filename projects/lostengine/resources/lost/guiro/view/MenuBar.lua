@@ -37,8 +37,6 @@ function MenuBar:rebuildMenuBarItems()
   for k,item in ipairs(self._items) do
     mbistyle = {}
     mbistyle.bounds = {100,0,100,22}
---    mbistyle.title = item.title
---    mbistyle.menu = item
     for k,v in pairs(item) do
       mbistyle[k] = v
     end
@@ -66,24 +64,18 @@ end
 -- MenuBarItem delegate methods
 
 function MenuBar:itemPressed(mbi)
---  log.debug("/// hover "..tostring(self._hoverMode))
   if self._hoverMode then
     self._itemPressTime = 0
---    log.debug("!! preparing switch off from hover mode")
   else
     self._hoverMode = true
     self._itemPressTime = lost.platform.currentTimeSeconds()
---    log.debug("!!! switching on hover mode")
   end
---  log.debug("PRESSED "..mbi.id.." "..tostring(self._itemPressTime))
 end
 
 function MenuBar:itemReleased(mbi)
---  log.debug("/////// press time "..tostring(self._itemPressTime))
   local d = 0
   if self._itemPressTime == 0 then
     self._hoverMode = false
---    log.debug("!!!!!!!!!!!!!!!! switch off from hover!")
   else
     local t = lost.platform.currentTimeSeconds()
     d = t - self._itemPressTime
@@ -91,7 +83,6 @@ function MenuBar:itemReleased(mbi)
       self._hoverMode = false
     end
   end
---  log.debug("RELEASED "..mbi.id.." clickdelta "..tostring(d))  
 end
 
 function MenuBar:itemShouldHighlight()
@@ -99,7 +90,6 @@ function MenuBar:itemShouldHighlight()
 end
 
 function MenuBar:itemActive(mbi)
---  log.debug("active "..mbi.id)
   if self._activeItem then
     if self._activeItem ~= mbi then
       self._activeItem:highlight(false)
@@ -116,6 +106,5 @@ function MenuBar:itemInactive(mbi)
 end
 
 function MenuBar:menuBarItemExternalCloseRequest(item)
---  log.debug("//////////////////////////////////////////////////////////")
   self._hoverMode = false
 end
