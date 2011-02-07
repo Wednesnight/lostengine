@@ -7,6 +7,16 @@ local f = {"Vera",12}
 function startup()
   require("lost.guiro")
 
+  lost.guiro.ui():addEventListener("menuItemSelected",function(event) 
+        log.debug(event.type.." "..event.target.id)
+        for k,v in ipairs(event.indexPath) do
+          log.debug(v)
+        end
+        local mi = event.target:menuItemForIndexPath(event.indexPath)
+        mi:checked(not mi:checked())
+      end
+      )
+
   lost.guiro.ui():add
   {
     lost.guiro.view.Label{bounds={0,{"top",-40},"1",50},
