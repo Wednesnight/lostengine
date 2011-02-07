@@ -49,7 +49,7 @@ function Menu:rebuildItems(t)
   self._itemViews = {}
   self._separatorLayers = {}
   
-  -- reverse items so they're visualy constructed in teh same order as they're written in the text file
+  -- reverse items so they're visualy constructed in the same order as they're written in the text file
   local reversedItems = {}
   for i=#t,1,-1 do
     table.insert(reversedItems, t[i])
