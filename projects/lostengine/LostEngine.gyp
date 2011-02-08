@@ -467,6 +467,7 @@
         'lost/application/linux/Application.cpp',
         'lost/application/linux/Tasklet.cpp',
         'lost/application/linux/Window.cpp',
+	'lost/application/linux/WindowHandler.cpp',
 
         # application/mac
         'lost/application/mac/Application.mm',
@@ -885,7 +886,8 @@
             'lost/application/linux/Application.cpp',
             'lost/application/linux/Tasklet.cpp',
             'lost/application/linux/Window.cpp',
-           'lost/gl/linux/Context.cpp',
+            'lost/application/linux/WindowHandler.cpp',
+	    'lost/gl/linux/Context.cpp',
             'lost/platform/Platform_Linux.cpp',
           ],
         }],

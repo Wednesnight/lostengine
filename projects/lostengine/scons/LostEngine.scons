@@ -119,6 +119,7 @@ input_files = [
     'lost/application/linux/Application.cpp',
     'lost/application/linux/Tasklet.cpp',
     'lost/application/linux/Window.cpp',
+    'lost/application/linux/WindowHandler.cpp',
     'lost/audio/Engine.cpp',
     'lost/audio/Source.cpp',
     'lost/audio/VorbisFile.cpp',
