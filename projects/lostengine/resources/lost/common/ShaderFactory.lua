@@ -20,54 +20,19 @@ function ShaderFactory:loadShader(name)
   return shader
 end
 
-function ShaderFactory:ring()
-  return self:loadShader("lost/resources/glsl/ring")
-end
-
-function ShaderFactory:ringGradient()
-  return self:loadShader("lost/resources/glsl/ringGradient")
-end
-
-function ShaderFactory:discGradient()
-  return self:loadShader("lost/resources/glsl/discGradient")
-end
-
-function ShaderFactory:ring()
-  return self:loadShader("lost/resources/glsl/ring")
-end
-
-function ShaderFactory:disc()
-  return self:loadShader("lost/resources/glsl/disc")
-end
-
-function ShaderFactory:box()
-  return self:loadShader("lost/resources/glsl/box")
-end
-
-function ShaderFactory:rect()
-  return self:loadShader("lost/resources/glsl/rect")
-end
-
-function ShaderFactory:rectGradient()
-  return self:loadShader("lost/resources/glsl/rectGradient")
-end
-
-function ShaderFactory:rectFrame()
-  return self:loadShader("lost/resources/glsl/rectFrame")
-end
-
-function ShaderFactory:rectFrameGradient()
-  return self:loadShader("lost/resources/glsl/rectFrameGradient")
-end
-
-function ShaderFactory:iqrr()
-  return self:loadShader("lost/resources/glsl/iqrr")
-end
-
-function ShaderFactory:iqrrf()
-  return self:loadShader("lost/resources/glsl/iqrrf")
-end
-
+function ShaderFactory:ring() return self:loadShader("lost/resources/glsl/ring") end
+function ShaderFactory:ringGradient() return self:loadShader("lost/resources/glsl/ringGradient") end
+function ShaderFactory:discGradient() return self:loadShader("lost/resources/glsl/discGradient") end
+function ShaderFactory:ring() return self:loadShader("lost/resources/glsl/ring") end
+function ShaderFactory:disc() return self:loadShader("lost/resources/glsl/disc") end
+function ShaderFactory:box() return self:loadShader("lost/resources/glsl/box") end
+function ShaderFactory:rect() return self:loadShader("lost/resources/glsl/rect") end
+function ShaderFactory:rectGradient() return self:loadShader("lost/resources/glsl/rectGradient") end
+function ShaderFactory:rectFrame() return self:loadShader("lost/resources/glsl/rectFrame") end
+function ShaderFactory:rectFrameGradient() return self:loadShader("lost/resources/glsl/rectFrameGradient") end
+function ShaderFactory:iqrr() return self:loadShader("lost/resources/glsl/iqrr") end
+function ShaderFactory:iqrrf() return self:loadShader("lost/resources/glsl/iqrrf") end
+function ShaderFactory:dfrr() return self:loadShader("lost/resources/glsl/dfrr") end
 function ShaderFactory:color()
   local result = nil
   if lost.platform.isIPhone() then
