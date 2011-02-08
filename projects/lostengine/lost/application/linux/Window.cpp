@@ -2,12 +2,16 @@
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
 #include "lost/application/TaskletConfig.h"
+#include "lost/application/linux/WindowHandler.h"
 
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/xf86vmode.h>
 #include <X11/Xatom.h>
+
+#include <boost/thread.hpp>
+#include <boost/bind.hpp>
 
 namespace lost
 {
@@ -21,6 +25,8 @@ namespace lost
       GLXContext glContext;
       Colormap colorMap;
       ::Window window;
+      lost::shared_ptr<linux_::WindowHandler> windowHandler;
+      lost::shared_ptr<boost::thread> windowThread;
     };
 
     void Window::initialize()
@@ -49,6 +55,7 @@ namespace lost
         None
       };
 
+      XInitThreads();
       hiddenMembers->display = XOpenDisplay(0);
 
       int majorVersion, minorVersion;
@@ -102,11 +109,23 @@ namespace lost
       else {
         IOUT("Renderer: Software");
       }
+
+      hiddenMembers->windowHandler.reset(new linux_::WindowHandler(this, hiddenMembers->display, hiddenMembers->window));
+      hiddenMembers->windowThread.reset(new boost::thread(boost::bind(&linux_::WindowHandler::operator(), hiddenMembers->windowHandler.get())));
     }
 
     void Window::finalize()
     {
       DOUT("Window::finalize()");
+
+      if (!hiddenMembers->windowHandler->wakeupAndFinish()) {
+	hiddenMembers->windowThread->detach();
+      }
+      if (hiddenMembers->windowThread->joinable()) {
+	hiddenMembers->windowThread->join();
+      }
+      hiddenMembers->windowThread.reset();
+      hiddenMembers->windowHandler.reset();
 
       XDestroyWindow(hiddenMembers->display, hiddenMembers->window);
       XFreeColormap(hiddenMembers->display, hiddenMembers->colorMap);
