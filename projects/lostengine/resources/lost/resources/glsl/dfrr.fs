@@ -3,6 +3,10 @@ uniform vec2 size;
 uniform float radius;
 varying vec2 tc0; 
 uniform float width;
+uniform float blrect;
+uniform float brrect;
+uniform float tlrect;
+uniform float trrect;
 
 #include "lost/resources/glsl/box.fsp"
 
@@ -28,21 +32,23 @@ float roundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, float radiu
 }
 
 float hyperRoundedRect(vec2 pixel, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
-                       float blBlock)
+                       float blrect, float brrect, float tlrect, float trrect)
 {
-//  vec2 q = size*.25;
   float f = roundedRect(pixel, pos, size, radius);
   float bl = box2(pixel, pos-quarterSize, quarterSize);
-  return clamp(f+bl, 0.0, 1.0);
+  float br = box2(pixel, vec2(pos.x+quarterSize.x, pos.y-quarterSize.y), quarterSize);
+  float tr = box2(pixel, vec2(pos.x+quarterSize.x, pos.y+quarterSize.y), quarterSize);
+  float tl = box2(pixel, vec2(pos.x-quarterSize.x, pos.y+quarterSize.y), quarterSize);
+  return clamp(f+(bl*blrect)+(br*brrect)+(tr*trrect)+(tl*tlrect), 0.0, 1.0);
 }
 
 float hyperRoundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
-                            float blBlock)
+                            float blrect, float brrect, float tlrect, float trrect)
 {
-  float outer = hyperRoundedRect(pixel, pos, size, quarterSize, radius, blBlock);
+  float outer = hyperRoundedRect(pixel, pos, size, quarterSize, radius, blrect, brrect, tlrect, trrect);
   vec2 innerSize = size-vec2(2.0*width);
   vec2 innerQuarterSize = innerSize*vec2(.25);
-  float inner = hyperRoundedRect(pixel, pos, innerSize, innerQuarterSize, max(0.0,radius-width), blBlock);
+  float inner = hyperRoundedRect(pixel, pos, innerSize, innerQuarterSize, max(0.0,radius-width), blrect, brrect, tlrect, trrect);
   return outer - inner;  
 }
 
@@ -58,7 +64,7 @@ void main(void)
 //  float  f = roundedRect(lp, pos, rrsize, radius);
 //  float f =  roundedRectFrame(localPixelCoord(), width, pos, rrsize, radius);
 //  float f = hyperRoundedRect(lp, pos, rrsize, quarterSize, radius, 1.0);
-  float f = hyperRoundedRectFrame(lp, width, pos, rrsize, quarterSize, radius, 1.0);
+  float f = hyperRoundedRectFrame(lp, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
 
 /*  vec2 boxpos = vec2(20,20);
   vec2 boxsize = vec2(10,10);

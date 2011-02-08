@@ -88,9 +88,37 @@ function startup()
   {
     lost.guiro.view.View
     {
+      id="main",
       bounds={{"right",-10},0,".5","1"},
       layout=lost.guiro.layout.Vertical{halign="center",valign="center",spacing=10},
       subviews={
+        lost.guiro.view.Box
+        {
+          id="corners",
+          title="Round corners",
+          bounds={0,0,"1",50},
+          subviews=
+          {
+            lost.guiro.view.Button{bounds={"left","bottom", ".5",".5"},id="bl",style="checkboxCandy",title="bottom left"},
+            lost.guiro.view.Button{bounds={"right","bottom", ".5",".5"},id="br",style="checkboxCandy",title="bottom right"},
+            lost.guiro.view.Button{bounds={"left","top", ".5",".5"},id="tl",style="checkboxCandy",title="top left"},
+            lost.guiro.view.Button{bounds={"right","top", ".5",".5"},id="tr",style="checkboxCandy",title="top right"},
+          },
+          listeners=
+          {
+            buttonClick=function(event) 
+              if event.target.id == "bl" then
+                l:blround(event.target:pushed())
+              elseif event.target.id == "br" then
+                l:brround(event.target:pushed())
+              elseif event.target.id == "tr" then
+                l:trround(event.target:pushed())
+              elseif event.target.id == "tl" then
+                l:tlround(event.target:pushed())
+              end
+            end
+          }
+        },
         lost.guiro.view.Button{
           bounds={0,0,"1",30},title="Show Background",style="checkboxCandy",
           size="regular",
@@ -118,8 +146,13 @@ function startup()
     }
   }
   
+--  lost.guiro.ui():printSubviews()
   lost.guiro.ui().layer:addSublayer(bg)
   lost.guiro.ui().layer:addSublayer(l)
+  lost.guiro.ui()("main")("corners")("view")("bl"):pushed(l:blround())
+  lost.guiro.ui()("main")("corners")("view")("br"):pushed(l:brround())
+  lost.guiro.ui()("main")("corners")("view")("tl"):pushed(l:tlround())
+  lost.guiro.ui()("main")("corners")("view")("tr"):pushed(l:trround())
 end
 
 function update()
