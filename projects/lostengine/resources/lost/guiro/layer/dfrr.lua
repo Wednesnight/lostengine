@@ -32,10 +32,11 @@ function dfrr:constructor(args)
   end
   
   self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
-  if self.mesh.material.shader:hasUniform("radius") then
-    self.mesh.material.uniforms:setFloat("radius", radius)
-  end
-  
+  self:blround(true)
+  self:brround(true)
+  self:tlround(true)
+  self:trround(true)
+  self:radius(radius)  
   if not filled then self.mesh.material.uniforms:setFloat("width", width) end
   if hasGradient then 
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
@@ -73,6 +74,58 @@ function dfrr:color(...)
     self.mesh.material.color = self._color:premultiplied()
   else
     return self._color
+  end
+end
+
+function dfrr:blround(...)
+  if arg.n >= 1 then 
+    self._blround = arg[1]
+    local v = 1
+    if self._blround then
+      v = 0
+    end
+    self.mesh.material.uniforms:setFloat("blrect", v)
+  else
+    return self._blround
+  end
+end
+
+function dfrr:brround(...)
+  if arg.n >= 1 then 
+    self._brround = arg[1]
+    local v = 1
+    if self._brround then
+      v = 0
+    end
+    self.mesh.material.uniforms:setFloat("brrect", v)
+  else
+    return self._brround
+  end
+end
+
+function dfrr:tlround(...)
+  if arg.n >= 1 then 
+    self._tlround = arg[1]
+    local v = 1
+    if self._tlround then
+      v = 0
+    end
+    self.mesh.material.uniforms:setFloat("tlrect", v)
+  else
+    return self._tlround
+  end
+end
+
+function dfrr:trround(...)
+  if arg.n >= 1 then 
+    self._trround = arg[1]
+    local v = 1
+    if self._trround then
+      v = 0
+    end
+    self.mesh.material.uniforms:setFloat("trrect", v)
+  else
+    return self._trround
   end
 end
   
