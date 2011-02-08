@@ -55,7 +55,6 @@ function Menu:rebuildItems(t)
   for i=#t,1,-1 do
     table.insert(reversedItems, t[i])
   end
-  log.debug("!! enu rebuid size "..self._itemStyleSize)
   -- create new items with contents from provided table
   -- assumes table of tables that are in MenuItem constructor format
   local mi = 0
