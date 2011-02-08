@@ -92,6 +92,17 @@ function startup()
       bounds={{"right",-10},0,".5","1"},
       layout=lost.guiro.layout.Vertical{halign="center",valign="center",spacing=10},
       subviews={
+        lost.guiro.view.Button{
+          bounds={0,0,"1",30},title="Filled",style="checkboxCandy",
+          size="regular",
+          pushed=true,
+          listeners=
+          {
+            buttonClick=function(event)
+              l:filled(event.target:pushed())
+            end
+          }
+        },
         lost.guiro.view.Box
         {
           id="corners",

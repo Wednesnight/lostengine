@@ -37,7 +37,8 @@ function dfrr:constructor(args)
   self:tlround(true)
   self:trround(true)
   self:radius(radius)  
-  if not filled then self.mesh.material.uniforms:setFloat("width", width) end
+  self:filled(filled)
+  self:width(width)
   if hasGradient then 
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
@@ -59,9 +60,7 @@ function dfrr:updateLayout()
 end
 
 function dfrr:width(v)
-  if self.mesh.material.shader:hasUniform("width") then
-    self.mesh.material.uniforms:setFloat("width", v)
-  end
+  self.mesh.material.uniforms:setFloat("width", math.max(1,v)) -- never let width run under 1 or we'll get artifacts
 end
 
 function dfrr:radius(v)
@@ -126,6 +125,20 @@ function dfrr:trround(...)
     self.mesh.material.uniforms:setFloat("trrect", v)
   else
     return self._trround
+  end
+end
+
+function dfrr:filled(...)
+  if arg.n >= 1 then 
+    self._filled = arg[1]
+    local v = 0
+    if self._filled then
+      v = 1
+    end
+    log.debug("setting filled to "..tostring(v))
+    self.mesh.material.uniforms:setFloat("filled", v)
+  else
+    return self._filled
   end
 end
   
