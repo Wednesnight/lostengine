@@ -108,7 +108,7 @@ namespace lost
 
     void dispatchKeyEvent(Window* window, event::Type which, int code, bool pressed, bool repeat)
     {
-      KeyEventPtr event(new KeyEvent(KeyEvent::KEY_DOWN()));
+      KeyEventPtr event(new KeyEvent(which));
       event->window    = window;
       event->key       = lost::application::translateKeyCode(code);
       event->character = "FIXME";

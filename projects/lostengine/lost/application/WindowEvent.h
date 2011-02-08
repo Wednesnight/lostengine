@@ -19,6 +19,8 @@ namespace lost
 
       WindowEvent(const event::Type& inType, Window* inWindow) : Event(inType), window(inWindow) {}
       virtual ~WindowEvent() {}
+
+      static WindowEventPtr create(const event::Type& inType, Window* inWindow) { return WindowEventPtr(new WindowEvent(inType, inWindow)); }
     };
   }
 }

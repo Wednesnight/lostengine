@@ -17,12 +17,10 @@ namespace lost
     {
         static const event::Type& PROCESS() { static const event::Type d = "processEvent"; return d; }
 
-        ProcessEvent()
-        : Event(PROCESS())
-        {
-        }
+        ProcessEvent() : Event(PROCESS()) {}
         virtual ~ProcessEvent() {}
 
+	static ProcessEventPtr create() { return ProcessEventPtr(new ProcessEvent); }
     };
 
   }
