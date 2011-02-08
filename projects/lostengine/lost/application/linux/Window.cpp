@@ -41,7 +41,7 @@ namespace lost
         GLX_RED_SIZE,   8,
         GLX_GREEN_SIZE, 8,
         GLX_BLUE_SIZE,  8,
-	GLX_DEPTH_SIZE, 16,
+        GLX_DEPTH_SIZE, 16,
         None
       };
 
@@ -51,7 +51,7 @@ namespace lost
         GLX_RED_SIZE,   8,
         GLX_GREEN_SIZE, 8,
         GLX_BLUE_SIZE,  8,
-	GLX_DEPTH_SIZE, 16,
+        GLX_DEPTH_SIZE, 16,
         None
       };
 
@@ -68,37 +68,37 @@ namespace lost
 
       hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display, defaultScreen, attributesDouble);
       if (hiddenMembers->visualInfo == NULL) {
-	hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display, defaultScreen, attributesSingle);
-	IOUT("Buffer: Single buffering");
+        hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display, defaultScreen, attributesSingle);
+        IOUT("Buffer: Single buffering");
       }
       else {
-	IOUT("Buffer: Double buffering");
+        IOUT("Buffer: Double buffering");
       }
 
       hiddenMembers->glContext = glXCreateContext(hiddenMembers->display, hiddenMembers->visualInfo, 0, GL_TRUE);
 
       hiddenMembers->colorMap = XCreateColormap(hiddenMembers->display, RootWindow(hiddenMembers->display,
-	  hiddenMembers->visualInfo->screen), hiddenMembers->visualInfo->visual, AllocNone);
+      hiddenMembers->visualInfo->screen), hiddenMembers->visualInfo->visual, AllocNone);
 
       XSetWindowAttributes swa;
       swa.colormap = hiddenMembers->colorMap;
       swa.border_pixel = 0;
       swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask |
-		       StructureNotifyMask | ButtonMotionMask | PointerMotionMask;
+            StructureNotifyMask | ButtonMotionMask | PointerMotionMask;
       hiddenMembers->window = XCreateWindow(hiddenMembers->display, RootWindow(hiddenMembers->display,
-	  hiddenMembers->visualInfo->screen), (int)config->windowRect.x, (int)config->windowRect.y,
+      hiddenMembers->visualInfo->screen), (int)config->windowRect.x, (int)config->windowRect.y,
           (int)config->windowRect.width, (int)config->windowRect.height, 0, hiddenMembers->visualInfo->depth,
-	  InputOutput, hiddenMembers->visualInfo->visual, CWBorderPixel | CWColormap | CWEventMask, &swa);
+          InputOutput, hiddenMembers->visualInfo->visual, CWBorderPixel | CWColormap | CWEventMask, &swa);
 
       Atom WM_DELETE_WINDOW = XInternAtom(hiddenMembers->display, "WM_DELETE_WINDOW", False);
       XSetWMProtocols(hiddenMembers->display, hiddenMembers->window, &WM_DELETE_WINDOW, 1);
       XSetStandardProperties(hiddenMembers->display, hiddenMembers->window, config->windowTitle.c_str(),
-	  config->windowTitle.c_str(), None, NULL, 0, NULL);
+      config->windowTitle.c_str(), None, NULL, 0, NULL);
 
       // enable drag&drop
       Atom XdndAware = XInternAtom(hiddenMembers->display, "XdndAware", False);
-      long version = 4;
-      XChangeProperty(hiddenMembers->display, hiddenMembers->window, XdndAware, XA_ATOM, sizeof(int)*8, 0, (unsigned char*)&version, 1);
+      Atom version = 5;
+      XChangeProperty(hiddenMembers->display, hiddenMembers->window, XdndAware, XA_ATOM, 32, PropModeReplace, (unsigned char*)&version, 1);
 
       glXMakeCurrent(hiddenMembers->display, hiddenMembers->window, hiddenMembers->glContext);
       context.reset(new gl::Context);
@@ -119,10 +119,10 @@ namespace lost
       DOUT("Window::finalize()");
 
       if (!hiddenMembers->windowHandler->wakeupAndFinish()) {
-	hiddenMembers->windowThread->detach();
+        hiddenMembers->windowThread->detach();
       }
       if (hiddenMembers->windowThread->joinable()) {
-	hiddenMembers->windowThread->join();
+        hiddenMembers->windowThread->join();
       }
       hiddenMembers->windowThread.reset();
       hiddenMembers->windowHandler.reset();
