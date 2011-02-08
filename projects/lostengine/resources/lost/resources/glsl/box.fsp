@@ -8,7 +8,7 @@ float box(vec2 p, vec2 bl, vec2 tr)
 
 float box2(vec2 p, vec2 pos, vec2 size)
 {
-  vec2 p2 = abs(p-pos)-(size-vec2(1, 1)+vec2(0, 0));
+  vec2 p2 = abs(p-pos)-(size);
   float f = max(p2.x, p2.y);
   return clamp(1.0-f, 0.0, 1.0);
 }

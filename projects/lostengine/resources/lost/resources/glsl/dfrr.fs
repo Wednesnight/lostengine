@@ -27,11 +27,44 @@ float roundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, float radiu
   return outer - inner;
 }
 
+float hyperRoundedRect(vec2 pixel, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
+                       float blBlock)
+{
+//  vec2 q = size*.25;
+  float f = roundedRect(pixel, pos, size, radius);
+  float bl = box2(pixel, pos-quarterSize, quarterSize);
+  return clamp(f+bl, 0.0, 1.0);
+}
+
+float hyperRoundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
+                            float blBlock)
+{
+  float outer = hyperRoundedRect(pixel, pos, size, quarterSize, radius, blBlock);
+  vec2 innerSize = size-vec2(2.0*width);
+  vec2 innerQuarterSize = innerSize*vec2(.25);
+  float inner = hyperRoundedRect(pixel, pos, innerSize, innerQuarterSize, max(0.0,radius-width), blBlock);
+  return outer - inner;  
+}
+
 void main(void)
 { 
   vec2 pos = size*.5-vec2(.5);
-  vec2 rrsize = size-vec2(1);
-//float  f = roundedRect(localPixelCoord(), pos, rrsize, radius);
-  float f =  roundedRectFrame(localPixelCoord(), width, pos, rrsize, radius);
+  vec2 quarterSize = size*.25;
+  vec2 rrsize = size-vec2(1.0);
+  vec2 lp = localPixelCoord();
+//  float  f = roundedRect(lp, pos, rrsize, radius);
+//  float b = box2(lp, pos-q-vec2(1.0), q);
+//  f = clamp(f+b, 0.0, 1.0);
+//  float  f = roundedRect(lp, pos, rrsize, radius);
+//  float f =  roundedRectFrame(localPixelCoord(), width, pos, rrsize, radius);
+//  float f = hyperRoundedRect(lp, pos, rrsize, quarterSize, radius, 1.0);
+  float f = hyperRoundedRectFrame(lp, width, pos, rrsize, quarterSize, radius, 1.0);
+
+/*  vec2 boxpos = vec2(20,20);
+  vec2 boxsize = vec2(10,10);
+  vec2 bp = boxpos-(boxsize*vec2(.5))-vec2(.5);
+  vec2 bs = boxsize-vec2(1.0);
+  float f = box2(lp, bp, bs);*/
+
   gl_FragColor = color*f;
 }
