@@ -1,13 +1,20 @@
 // platform specific code, forwarded in Platform.h
 // LINUX
 
+#include "lost/platform/Platform.h"
 #include <string>
+#include <stdexcept>
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
 #include "boost/filesystem.hpp"
+
+using namespace std;
 
 namespace lost
 {
@@ -36,6 +43,12 @@ namespace lost
 
     std::string getApplicationDirectory()
     {
+      boost::filesystem::path path = getApplicationFilename();
+      return path.branch_path().string();
+    }
+
+    std::string getApplicationFilename(bool excludeExtension)
+    {
       boost::filesystem::path path = "/proc";
       struct stat info;
       if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
@@ -62,34 +75,46 @@ namespace lost
         throw std::runtime_error("Could not determine application path!");
       }
 
-      path = std::string(pathbuf, pathsize);
-      return path.branch_path().string();
+      return std::string(pathbuf, pathsize);
     }
 
-    // TODO: getApplicationFilename() not implemented
-    std::string getApplicationFilename( bool excludeExtension = false )
-    {
-      std::string result;
-      return result;
-    }
-
-    // TODO: buildResourcePath() not implemented
     std::string buildResourcePath( const std::string& filename )
     {
-      std::string result( filename );
+      std::string result( getResourcePath().append( filename ) );
+
+      FILE *l_filecheck = fopen(result.c_str(), "r");
+      if (l_filecheck != NULL) fclose(l_filecheck);
+        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
+
       return result;
     }
 
     std::string getResourcePath()
     {
-      std::string result;
-      return result;
+      return getApplicationDirectory();
     }
 
-    // TODO: buildUserDataPath() not implemented
     std::string buildUserDataPath( const std::string& filename )
     {
-      std::string result( filename );
+      boost::filesystem::path path(filename);
+
+      struct passwd pd;
+      struct passwd* pwdptr=&pd;
+      struct passwd* tempPwdPtr;
+      char pwdbuffer[200];
+      int  pwdlinelen = sizeof(pwdbuffer);
+
+      if ((getpwuid_r(getuid(), pwdptr, pwdbuffer, pwdlinelen, &tempPwdPtr)) == 0) {
+	path = pd.pw_dir;
+      }
+      path /= filename;
+
+      std::string result = path.string();
+
+      FILE *l_filecheck = fopen(result.c_str(), "r");
+      if (l_filecheck != NULL) fclose(l_filecheck);
+        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
+
       return result;
     }
 

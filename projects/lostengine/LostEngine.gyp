@@ -137,7 +137,7 @@
               # so that gyp understands it's a path and performs proper
               # relativization during dict merging.
               'copy_resources_path':
-              '<(DEPTH)/copy_resources.sh',
+              '<(DEPTH)/xcode/copy_resources.sh',
             },
             'postbuild_name': 'Copy Resources',
             'action': ['<(copy_resources_path)'],
@@ -164,6 +164,20 @@
             'action': ['<(copy_resources_path)'],
           }],
 
+        }],
+
+        ['OS == "linux"', {
+          'postbuilds': [{
+            'variables': {
+              # Define copy_resources_path in a variable ending in _path
+              # so that gyp understands it's a path and performs proper
+              # relativization during dict merging.
+              'copy_resources_path':
+              '<(DEPTH)/scons/copy_resources.sh',
+            },
+            'postbuild_name': 'Copy Resources',
+            'action': ['<(copy_resources_path)'],
+          }],
         }],
       ],
 

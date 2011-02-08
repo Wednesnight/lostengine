@@ -1,41 +1,18 @@
 #include "lost/application/Window.h"
-#include "lost/event/Event.h"
-#include "lost/event/EventDispatcher.h"
-#include "lost/application/WindowEvent.h"
-#include "lost/application/ResizeEvent.h"
-#include "lost/application/KeyEvent.h"
-#include "lost/application/MouseEvent.h"
-#include "lost/application/DragNDropEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
 #include "lost/application/TaskletConfig.h"
 
-#include <map>
-
+#include <GL/glx.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include <GL/glx.h>
-
-#include <boost/thread.hpp>
-#include <boost/bind.hpp>
+#include <X11/extensions/xf86vmode.h>
+#include <X11/Xatom.h>
 
 namespace lost
 {
   namespace application
   {
-
-    void threadFunc(Window* window, Display* display)
-    {
-      XEvent event;
-      while(true)
-      { 
-        XNextEvent(display, &event); 
-        DOUT("event: " << event.type);
-        switch(event.type)
-        {
-        }
-      }
-    }
 
     struct Window::WindowHiddenMembers
     {
@@ -44,7 +21,6 @@ namespace lost
       GLXContext glContext;
       Colormap colorMap;
       ::Window window;
-      boost::thread* thread;
     };
 
     void Window::initialize()
@@ -54,52 +30,83 @@ namespace lost
       // initialize hiddenMembers
       hiddenMembers = new WindowHiddenMembers;
 
-      int attributes[] = { 
-        GLX_RGBA, 
+      int attributesSingle[] = {
+        GLX_RGBA,
+        GLX_RED_SIZE,   8,
+        GLX_GREEN_SIZE, 8,
+        GLX_BLUE_SIZE,  8,
+	GLX_DEPTH_SIZE, 16,
+        None
+      };
+
+      int attributesDouble[] = {
+        GLX_RGBA,
         GLX_DOUBLEBUFFER,
-        GLX_RED_SIZE,   1, 
-        GLX_GREEN_SIZE, 1, 
-        GLX_BLUE_SIZE,  1, 
+        GLX_RED_SIZE,   8,
+        GLX_GREEN_SIZE, 8,
+        GLX_BLUE_SIZE,  8,
+	GLX_DEPTH_SIZE, 16,
         None
       };
 
       hiddenMembers->display = XOpenDisplay(0);
-      hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display,
-          DefaultScreen(hiddenMembers->display), attributes);
 
-      hiddenMembers->glContext = glXCreateContext(hiddenMembers->display,
-          hiddenMembers->visualInfo, 0, GL_TRUE);
+      int majorVersion, minorVersion;
+      XF86VidModeQueryVersion(hiddenMembers->display, &majorVersion, &minorVersion);
+      IOUT("XFree86 Version: " << majorVersion << "." << minorVersion);
+      glXQueryVersion(hiddenMembers->display, &majorVersion, &minorVersion);
+      IOUT("glX Version: " << majorVersion << "." << minorVersion);
 
-      hiddenMembers->colorMap = XCreateColormap(hiddenMembers->display,
-          RootWindow(hiddenMembers->display, hiddenMembers->visualInfo->screen),
-          hiddenMembers->visualInfo->visual, AllocNone);
+      int defaultScreen = DefaultScreen(hiddenMembers->display);
+
+      hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display, defaultScreen, attributesDouble);
+      if (hiddenMembers->visualInfo == NULL) {
+	hiddenMembers->visualInfo = glXChooseVisual(hiddenMembers->display, defaultScreen, attributesSingle);
+	IOUT("Buffer: Single buffering");
+      }
+      else {
+	IOUT("Buffer: Double buffering");
+      }
+
+      hiddenMembers->glContext = glXCreateContext(hiddenMembers->display, hiddenMembers->visualInfo, 0, GL_TRUE);
+
+      hiddenMembers->colorMap = XCreateColormap(hiddenMembers->display, RootWindow(hiddenMembers->display,
+	  hiddenMembers->visualInfo->screen), hiddenMembers->visualInfo->visual, AllocNone);
 
       XSetWindowAttributes swa;
       swa.colormap = hiddenMembers->colorMap;
       swa.border_pixel = 0;
-      swa.event_mask = StructureNotifyMask;
-      hiddenMembers->window = XCreateWindow(hiddenMembers->display,
-          RootWindow(hiddenMembers->display, hiddenMembers->visualInfo->screen), 
-          (int)config->windowRect.x, (int)config->windowRect.y,
-          (int)config->windowRect.width, (int)config->windowRect.height,
-          0, hiddenMembers->visualInfo->depth, InputOutput, hiddenMembers->visualInfo->visual,
-          CWBorderPixel | CWColormap | CWEventMask, &swa);
+      swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask |
+		       StructureNotifyMask | ButtonMotionMask | PointerMotionMask;
+      hiddenMembers->window = XCreateWindow(hiddenMembers->display, RootWindow(hiddenMembers->display,
+	  hiddenMembers->visualInfo->screen), (int)config->windowRect.x, (int)config->windowRect.y,
+          (int)config->windowRect.width, (int)config->windowRect.height, 0, hiddenMembers->visualInfo->depth,
+	  InputOutput, hiddenMembers->visualInfo->visual, CWBorderPixel | CWColormap | CWEventMask, &swa);
+
+      Atom WM_DELETE_WINDOW = XInternAtom(hiddenMembers->display, "WM_DELETE_WINDOW", False);
+      XSetWMProtocols(hiddenMembers->display, hiddenMembers->window, &WM_DELETE_WINDOW, 1);
+      XSetStandardProperties(hiddenMembers->display, hiddenMembers->window, config->windowTitle.c_str(),
+	  config->windowTitle.c_str(), None, NULL, 0, NULL);
+
+      // enable drag&drop
+      Atom XdndAware = XInternAtom(hiddenMembers->display, "XdndAware", False);
+      long version = 4;
+      XChangeProperty(hiddenMembers->display, hiddenMembers->window, XdndAware, XA_ATOM, sizeof(int)*8, 0, (unsigned char*)&version, 1);
 
       glXMakeCurrent(hiddenMembers->display, hiddenMembers->window, hiddenMembers->glContext);
       context.reset(new gl::Context);
 
-      hiddenMembers->thread = new boost::thread(boost::bind(&threadFunc, this, hiddenMembers->display));
+      if (glXIsDirect(hiddenMembers->display, hiddenMembers->glContext)) { 
+        IOUT("Renderer: Hardware");
+      }
+      else {
+        IOUT("Renderer: Software");
+      }
     }
 
     void Window::finalize()
     {
       DOUT("Window::finalize()");
-
-      hiddenMembers->thread->detach();
-      if (hiddenMembers->thread->joinable()) {
-        hiddenMembers->thread->join();
-      }
-      delete hiddenMembers->thread;
 
       XDestroyWindow(hiddenMembers->display, hiddenMembers->window);
       XFreeColormap(hiddenMembers->display, hiddenMembers->colorMap);
@@ -114,7 +121,7 @@ namespace lost
     void Window::open()
     {
       DOUT("Window::open()");
-      XMapWindow(hiddenMembers->display, hiddenMembers->window);
+      XMapRaised(hiddenMembers->display, hiddenMembers->window);
     }
 
     void Window::close()
@@ -125,4 +132,3 @@ namespace lost
 
   }
 }
-
