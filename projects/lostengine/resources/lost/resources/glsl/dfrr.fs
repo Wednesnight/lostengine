@@ -1,12 +1,13 @@
 uniform vec4 color;
+varying vec2 tc0; 
 uniform vec2 size;
 uniform float radius;
-varying vec2 tc0; 
 uniform float width;
 uniform float blrect;
 uniform float brrect;
 uniform float tlrect;
 uniform float trrect;
+uniform float filled;
 
 #include "lost/resources/glsl/box.fsp"
 
@@ -42,14 +43,14 @@ float hyperRoundedRect(vec2 pixel, vec2 pos, vec2 size, vec2 quarterSize, float 
   return clamp(f+(bl*blrect)+(br*brrect)+(tr*trrect)+(tl*tlrect), 0.0, 1.0);
 }
 
-float hyperRoundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
+float hyperRoundedRectFrame(vec2 pixel, float filled, float width, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
                             float blrect, float brrect, float tlrect, float trrect)
 {
   float outer = hyperRoundedRect(pixel, pos, size, quarterSize, radius, blrect, brrect, tlrect, trrect);
   vec2 innerSize = size-vec2(2.0*width);
   vec2 innerQuarterSize = innerSize*vec2(.25);
   float inner = hyperRoundedRect(pixel, pos, innerSize, innerQuarterSize, max(0.0,radius-width), blrect, brrect, tlrect, trrect);
-  return outer - inner;  
+  return clamp(outer - (1.0-filled)*inner, 0.0, 1.0);  
 }
 
 void main(void)
@@ -64,7 +65,7 @@ void main(void)
 //  float  f = roundedRect(lp, pos, rrsize, radius);
 //  float f =  roundedRectFrame(localPixelCoord(), width, pos, rrsize, radius);
 //  float f = hyperRoundedRect(lp, pos, rrsize, quarterSize, radius, 1.0);
-  float f = hyperRoundedRectFrame(lp, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
+  float f = hyperRoundedRectFrame(lp, filled, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
 
 /*  vec2 boxpos = vec2(20,20);
   vec2 boxsize = vec2(10,10);
@@ -72,5 +73,5 @@ void main(void)
   vec2 bs = boxsize-vec2(1.0);
   float f = box2(lp, bp, bs);*/
 
-  gl_FragColor = color*f;
+    gl_FragColor = color*f;
 }
