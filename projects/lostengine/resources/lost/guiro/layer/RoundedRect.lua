@@ -1,9 +1,5 @@
 module("lost.guiro.layer", package.seeall)
 
-require("lost.guiro.Bounds")
-require("lost.guiro.Quad")
-require("lost.guiro.TextureManager")
-
 lost.common.Class "lost.guiro.layer.RoundedRect" "lost.guiro.layer.Layer" {}
 
 local Vec2 = lost.math.Vec2
