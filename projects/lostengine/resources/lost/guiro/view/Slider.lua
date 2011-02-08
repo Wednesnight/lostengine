@@ -42,7 +42,7 @@ end
 -- sets current value, updates handle position accordingly
 function Slider:value(...)
   if arg.n >= 1 then
-    self._value = arg[1]
+    self._value = math.min(math.max(self.min, arg[1]), self.max)
     self:updateHandlePosFromValue()
     self:updateLayerPosFromHandlePos()
   else
