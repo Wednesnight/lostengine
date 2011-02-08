@@ -25,7 +25,7 @@ function sliderInputLabelView(viewBounds, labelText, sliderMin, sliderMax, updat
       lost.guiro.view.Label
       {
         text=labelText,
-        bounds={0,"center",".15",20}
+        bounds={0,"center",".12",20}
       },
       lost.guiro.view.TextInput
       {
@@ -57,11 +57,19 @@ function startup()
   {
     lost.guiro.view.View
     {
-      bounds={"right",0,".5","1"},
+      bounds={{"right",-10},0,".5","1"},
       layout=lost.guiro.layout.Vertical{halign="center",valign="center",spacing=10},
       subviews={
-        sliderInputLabelView({0,0,300, 30}, "Width:", 0, 100, function(val) l.mesh.material.uniforms:setFloat("width", val) end),
-        sliderInputLabelView({0,0,300, 30}, "Radius:", 0, 100, function(val) l.mesh.material.uniforms:setFloat("radius", val) end)        
+        sliderInputLabelView({0,0,"1", 30}, "Width:", 0, 100, function(val) 
+            if l.mesh.material.shader:hasUniform("width") then
+              l.mesh.material.uniforms:setFloat("width", val) 
+            end
+          end),
+        sliderInputLabelView({0,0,"1", 30}, "Radius:", 0, 100, function(val) 
+            if l.mesh.material.shader:hasUniform("radius") then
+              l.mesh.material.uniforms:setFloat("radius", val)
+            end
+          end)        
       }
     }
   }
