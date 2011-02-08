@@ -1,9 +1,5 @@
 module("lost.guiro.layer", package.seeall)
 
---require("lost.guiro.Bounds")
---require("lost.guiro.Quad")
---require("lost.guiro.TextureManager")
-
 lost.common.Class "lost.guiro.layer.dfrr" "lost.guiro.layer.Layer" {}
 
 local Vec2 = lost.math.Vec2
@@ -46,9 +42,9 @@ function dfrr:constructor(args)
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
   end
   if t.color then
-    self.mesh.material.color = t.color:premultiplied()
+    self:color(t.color)
   else
-    self.mesh.material.color = lost.common.Color(1,1,1)
+    self:color(lost.common.Color(1,1,1))
   end
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)
@@ -60,3 +56,23 @@ function dfrr:updateLayout()
   self.quad:update(self.rect)
   self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
 end
+
+function dfrr:width(v)
+  if self.mesh.material.shader:hasUniform("width") then
+    self.mesh.material.uniforms:setFloat("width", v)
+  end
+end
+
+function dfrr:radius(v)
+  self.mesh.material.uniforms:setFloat("radius", v)
+end
+
+function dfrr:color(...)
+  if arg.n >= 1 then
+    self._color = arg[1]
+    self.mesh.material.color = self._color:premultiplied()
+  else
+    return self._color
+  end
+end
+  

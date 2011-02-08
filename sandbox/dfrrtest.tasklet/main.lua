@@ -44,6 +44,36 @@ function sliderInputLabelView(viewBounds, labelText, sliderMin, sliderMax, updat
   }
 end
 
+function colorView(viewBounds, labelText, updateFunc)
+  return lost.guiro.view.View
+  {
+    bounds = viewBounds,  
+    layout=lost.guiro.layout.Horizontal{valign="center",spacing=4},
+    listeners=
+    {
+      valueChanged=function(event)
+          updateFunc(event.currentTarget("color"):color())
+        end
+    },
+    subviews=
+    {
+      lost.guiro.view.Label
+      {
+        bounds={0,"center", ".4", "1"},
+        text=labelText,
+        halign="left",
+      },
+      lost.guiro.view.ColorPicker
+      {
+        id="color",
+        name=labelText,
+        bounds={0, "center", ".6", "1"}
+      }
+    }
+  }
+  
+end
+
 function startup()
   require("lost/guiro")
 
@@ -53,6 +83,7 @@ function startup()
   local b = {50,50,{".5",-100},{"1",-100}}
 
   local l = lost.guiro.layer.dfrr{bounds=b,filled=true,radius=r,color=c2}
+  local bg = lost.guiro.layer.Rect{bounds=b,filled=true,color=c1}
   lost.guiro.ui():add
   {
     lost.guiro.view.View
@@ -60,21 +91,34 @@ function startup()
       bounds={{"right",-10},0,".5","1"},
       layout=lost.guiro.layout.Vertical{halign="center",valign="center",spacing=10},
       subviews={
+        lost.guiro.view.Button{
+          bounds={0,0,"1",30},title="Show Background",style="checkboxCandy",
+          size="regular",
+          pushed=true,
+          listeners=
+          {
+            buttonClick=function(event)
+              bg:hidden(not event.target:pushed())
+            end
+          }
+        },
+        colorView({0,0,"1", 30}, "Background Color:", function(val) bg:color(val) end),
+        colorView({0,0,"1", 30}, "Rect Color:", function(val) l:color(val) end),
         sliderInputLabelView({0,0,"1", 30}, "Width:", 0, 100, function(val) 
             if l.mesh.material.shader:hasUniform("width") then
-              l.mesh.material.uniforms:setFloat("width", val) 
+              l:width(val) 
             end
           end),
         sliderInputLabelView({0,0,"1", 30}, "Radius:", 0, 100, function(val) 
             if l.mesh.material.shader:hasUniform("radius") then
-              l.mesh.material.uniforms:setFloat("radius", val)
+              l:radius(val) 
             end
           end)        
       }
     }
   }
   
-  lost.guiro.ui().layer:addSublayer(lost.guiro.layer.RoundedRect{bounds=b,filled=true,radius=r,color=c1})
+  lost.guiro.ui().layer:addSublayer(bg)
   lost.guiro.ui().layer:addSublayer(l)
 end
 
