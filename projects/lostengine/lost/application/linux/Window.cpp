@@ -18,6 +18,13 @@ namespace lost
   namespace application
   {
 
+    int handleXError(Display* display, XErrorEvent* event)
+    {
+      if (event) {
+        EOUT("X11: error "<< event->error_code);
+      }
+    }
+    
     struct Window::WindowHiddenMembers
     {
       Display* display;
@@ -38,25 +45,29 @@ namespace lost
 
       int attributesSingle[] = {
         GLX_RGBA,
-        GLX_RED_SIZE,   8,
-        GLX_GREEN_SIZE, 8,
-        GLX_BLUE_SIZE,  8,
-        GLX_DEPTH_SIZE, 16,
+        GLX_RED_SIZE,   1,
+        GLX_GREEN_SIZE, 1,
+        GLX_BLUE_SIZE,  1,
+        GLX_DEPTH_SIZE, 1,
+//         GLX_STEREO,
         None
       };
 
       int attributesDouble[] = {
         GLX_RGBA,
         GLX_DOUBLEBUFFER,
-        GLX_RED_SIZE,   8,
-        GLX_GREEN_SIZE, 8,
-        GLX_BLUE_SIZE,  8,
-        GLX_DEPTH_SIZE, 16,
+        GLX_RED_SIZE,   1,
+        GLX_GREEN_SIZE, 1,
+        GLX_BLUE_SIZE,  1,
+        GLX_DEPTH_SIZE, 1,
+//         GLX_STEREO,
         None
       };
 
       XInitThreads();
-      hiddenMembers->display = XOpenDisplay(0);
+      XSetErrorHandler(&handleXError);
+
+      hiddenMembers->display = XOpenDisplay(NULL);
 
       int majorVersion, minorVersion;
       XF86VidModeQueryVersion(hiddenMembers->display, &majorVersion, &minorVersion);
@@ -75,14 +86,13 @@ namespace lost
         IOUT("Buffer: Double buffering");
       }
 
-      hiddenMembers->glContext = glXCreateContext(hiddenMembers->display, hiddenMembers->visualInfo, 0, GL_TRUE);
-
       hiddenMembers->colorMap = XCreateColormap(hiddenMembers->display, RootWindow(hiddenMembers->display,
-      hiddenMembers->visualInfo->screen), hiddenMembers->visualInfo->visual, AllocNone);
+          hiddenMembers->visualInfo->screen), hiddenMembers->visualInfo->visual, AllocNone);
 
       XSetWindowAttributes swa;
-      swa.colormap = hiddenMembers->colorMap;
+      swa.background_pixel = 0;
       swa.border_pixel = 0;
+      swa.colormap = hiddenMembers->colorMap;
       swa.event_mask = ExposureMask | KeyPressMask | KeyReleaseMask | ButtonPressMask | ButtonReleaseMask |
             StructureNotifyMask | ButtonMotionMask | PointerMotionMask;
       hiddenMembers->window = XCreateWindow(hiddenMembers->display, RootWindow(hiddenMembers->display,
@@ -100,6 +110,7 @@ namespace lost
       Atom version = 5;
       XChangeProperty(hiddenMembers->display, hiddenMembers->window, XdndAware, XA_ATOM, 32, PropModeReplace, (unsigned char*)&version, 1);
 
+      hiddenMembers->glContext = glXCreateContext(hiddenMembers->display, hiddenMembers->visualInfo, NULL, True);
       glXMakeCurrent(hiddenMembers->display, hiddenMembers->window, hiddenMembers->glContext);
       context.reset(new gl::Context);
 
@@ -118,12 +129,7 @@ namespace lost
     {
       DOUT("Window::finalize()");
 
-      if (!hiddenMembers->windowHandler->wakeupAndFinish()) {
-        hiddenMembers->windowThread->detach();
-      }
-      if (hiddenMembers->windowThread->joinable()) {
-        hiddenMembers->windowThread->join();
-      }
+      hiddenMembers->windowHandler->wakeupAndFinish();
       hiddenMembers->windowThread.reset();
       hiddenMembers->windowHandler.reset();
 

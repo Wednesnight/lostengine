@@ -46,10 +46,10 @@ namespace lost
             processEvents();
             update(framerate);
             render();
-
-	    if (waitForEvents) {
-	      eventDispatcher->waitForEvents();
-	    }
+            
+            if (waitForEvents) {
+              eventDispatcher->waitForEvents();
+            }
 
             framerate = clock.getElapsedAndUpdateOffset(offset);
           }

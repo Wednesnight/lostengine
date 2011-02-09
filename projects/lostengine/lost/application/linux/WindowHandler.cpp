@@ -210,7 +210,8 @@ namespace lost
           XEvent event;
           event.xclient.message_type = ClientMessage;
           event.xclient.data.l[0] = WM_WAKEUP;
-          return XSendEvent (display, nativeWindow, False, 0l, &event);
+          XSendEvent (display, nativeWindow, False, 0l, &event);
+          return XSync(display, False);
       }
 
       KeyCode WindowHandler::translateKeyCode(int nativeKeyCode)
@@ -304,6 +305,13 @@ namespace lost
 
       void WindowHandler::dispatchMouseEvent (event::Type which, int x, int y, int absX, int absY, int buttonCode, bool pressed)
       {
+        // invert y
+        XWindowAttributes wa;
+        XGetWindowAttributes(display, nativeWindow, &wa);
+        y = wa.height - y;
+        // invert absY
+        absY = DisplayHeight(display, DefaultScreen(display)) - absY;
+
         MouseEventPtr event (new MouseEvent (which));
         event->window  = window;
         event->pos     = math::Vec2 (x, y);
