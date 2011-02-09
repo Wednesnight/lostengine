@@ -69,12 +69,21 @@ function dfrr:updateDisplay()
   lost.guiro.layer.Layer.updateDisplay(self)
   local so = lost.math.Vec2()
   local po = lost.math.Vec2()
-  if not self._topVisible then
-    so.y = so.y + self._frameWidth+self._radius+2
+  local d = 2
+  if (not self._topVisible) and (not self._bottomVisible) then
+    so.y = so.y + 2*self._frameWidth+2*self._radius+2*d
+  elseif (not self._topVisible) or (not self._bottomVisible) then
+    so.y = so.y + self._frameWidth+self._radius+d
   end
-  if not self._topVisible then
+
+  if (not self._topVisible) and (not self._bottomVisible) then
+    -- stays at 0/0
+  elseif not self._topVisible then
     po.y = po.y + so.y/2
-  end
+  elseif not self._bottomVisible then
+    po.y = po.y - so.y/2
+  end  
+  
   self:sizeOffset(so)
   self:posOffset(po)
 end
