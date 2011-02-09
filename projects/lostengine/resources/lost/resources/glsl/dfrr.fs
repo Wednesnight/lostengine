@@ -1,6 +1,8 @@
 uniform vec4 color;
 varying vec2 tc0; 
 uniform vec2 size;
+uniform vec2 posOffset;
+uniform vec2 sizeOffset;
 uniform float radius;
 uniform float width;
 uniform float blrect;
@@ -55,9 +57,10 @@ float hyperRoundedRectFrame(vec2 pixel, float filled, float width, vec2 pos, vec
 
 void main(void)
 { 
-  vec2 pos = size*.5-vec2(.5);
-  vec2 quarterSize = size*.25;
-  vec2 rrsize = size-vec2(1.0);
+  vec2 pos = size*.5-vec2(.5)+posOffset; // must be centered in visible area, altered by posOffset
+  vec2 sz = size + sizeOffset; 
+  vec2 quarterSize = sz*.25; // uses modified size, NOT quad size
+  vec2 rrsize = sz-vec2(1.0); // uses modified size, NOT quad size
   vec2 lp = localPixelCoord();
 //  float  f = roundedRect(lp, pos, rrsize, radius);
 //  float b = box2(lp, pos-q-vec2(1.0), q);
@@ -65,13 +68,8 @@ void main(void)
 //  float  f = roundedRect(lp, pos, rrsize, radius);
 //  float f =  roundedRectFrame(localPixelCoord(), width, pos, rrsize, radius);
 //  float f = hyperRoundedRect(lp, pos, rrsize, quarterSize, radius, 1.0);
+
   float f = hyperRoundedRectFrame(lp, filled, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
 
-/*  vec2 boxpos = vec2(20,20);
-  vec2 boxsize = vec2(10,10);
-  vec2 bp = boxpos-(boxsize*vec2(.5))-vec2(.5);
-  vec2 bs = boxsize-vec2(1.0);
-  float f = box2(lp, bp, bs);*/
-
-    gl_FragColor = color*f;
+  gl_FragColor = color*f;
 }
