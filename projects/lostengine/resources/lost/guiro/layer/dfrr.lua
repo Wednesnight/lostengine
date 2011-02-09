@@ -76,12 +76,26 @@ function dfrr:updateDisplay()
     so.y = so.y + self._frameWidth+self._radius+d
   end
 
+  if (not self._leftVisible) and (not self._rightVisible) then
+    so.x = so.x + 2*self._frameWidth+2*self._radius+2*d
+  elseif (not self._leftVisible) or (not self._rightVisible) then
+    so.x = so.x + self._frameWidth+self._radius+d
+  end
+
   if (not self._topVisible) and (not self._bottomVisible) then
     -- stays at 0/0
   elseif not self._topVisible then
     po.y = po.y + so.y/2
   elseif not self._bottomVisible then
     po.y = po.y - so.y/2
+  end  
+
+  if (not self._leftVisible) and (not self._rightVisible) then
+    -- stays at 0/0
+  elseif not self._rightVisible then
+    po.x = po.x + so.x/2
+  elseif not self._leftVisible then
+    po.x = po.x - so.x/2
   end  
   
   self:sizeOffset(so)
