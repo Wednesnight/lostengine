@@ -97,7 +97,6 @@ function dfrr:updateDisplay()
   elseif not self._leftVisible then
     po.x = po.x - so.x/2
   end  
-  
   self:sizeOffset(so)
   self:posOffset(po)
 end

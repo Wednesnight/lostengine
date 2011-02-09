@@ -119,7 +119,7 @@ function startup()
                 lost.guiro.view.Button{bounds={"center","top", ".5",20},id="top",style="checkboxCandy",title="top"},
                 lost.guiro.view.Button{bounds={"center","bottom", ".5",20},id="bottom",style="checkboxCandy",title="bottom"},
                 lost.guiro.view.Button{bounds={"left","center", ".5",20},id="left",style="checkboxCandy",title="left"},
-                lost.guiro.view.Button{bounds={"right","center", ".5",20},id="tr",style="checkboxCandy",title="right"},
+                lost.guiro.view.Button{bounds={"right","center", ".5",20},id="right",style="checkboxCandy",title="right"},
               },
               listeners=
               {
@@ -127,8 +127,7 @@ function startup()
                   if event.target.id == "top" then l:topVisible(event.target:pushed())
                   elseif event.target.id == "bottom" then l:bottomVisible(event.target:pushed())
                   elseif event.target.id == "left" then l:leftVisible(event.target:pushed())
-                  elseif event.target.id == "right" then l:rightVisible(event.target:pushed())
-                  end
+                  elseif event.target.id == "right" then l:rightVisible(event.target:pushed()) end
                 end
               }
             },              
