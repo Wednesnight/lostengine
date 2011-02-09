@@ -116,10 +116,10 @@ function startup()
               bounds={0,0,"1",100},
               subviews=
               {
-                lost.guiro.view.Button{bounds={"center","top", ".5",".5"},id="top",style="checkboxCandy",title="top"},
-                lost.guiro.view.Button{bounds={"center","bottom", ".5",".5"},id="bottom",style="checkboxCandy",title="bottom"},
-                lost.guiro.view.Button{bounds={"left","center", ".5",".5"},id="left",style="checkboxCandy",title="left"},
-                lost.guiro.view.Button{bounds={"right","center", ".5",".5"},id="tr",style="checkboxCandy",title="right"},
+                lost.guiro.view.Button{bounds={"center","top", ".5",20},id="top",style="checkboxCandy",title="top"},
+                lost.guiro.view.Button{bounds={"center","bottom", ".5",20},id="bottom",style="checkboxCandy",title="bottom"},
+                lost.guiro.view.Button{bounds={"left","center", ".5",20},id="left",style="checkboxCandy",title="left"},
+                lost.guiro.view.Button{bounds={"right","center", ".5",20},id="tr",style="checkboxCandy",title="right"},
               },
               listeners=
               {
@@ -180,9 +180,9 @@ function startup()
   lost.guiro.ui().layer:addSublayer(bg)
   lost.guiro.ui().layer:addSublayer(l)
   lost.guiro.ui()("main")("view")("view")("corners")("view")("bl"):pushed(l:blround())
---  lost.guiro.ui()("main")("view")("corners")("view")("br"):pushed(l:brround())
---  lost.guiro.ui()("main")("view")("corners")("view")("tl"):pushed(l:tlround())
---  lost.guiro.ui()("main")("view")("corners")("view")("tr"):pushed(l:trround())
+  lost.guiro.ui()("main")("view")("view")("corners")("view")("br"):pushed(l:brround())
+  lost.guiro.ui()("main")("view")("view")("corners")("view")("tl"):pushed(l:tlround())
+  lost.guiro.ui()("main")("view")("view")("corners")("view")("tr"):pushed(l:trround())
 end
 
 function update()
