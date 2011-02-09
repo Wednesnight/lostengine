@@ -6,7 +6,7 @@ return lost.guiro.view.View
     {    
       bounds = {0,0,"1",{"1",-8}},
       style="candyRecess",
-      size="regular",
+      size="mini",
       buttonSizeAdjust = 20,
       items={
              {"Label",require("views_label")},
@@ -20,7 +20,7 @@ return lost.guiro.view.View
              {"Slider",require("views_slider")},
              {"ColorPicker",require("views_colorpicker")},
              {"TextInput",require("views_textinput")},
-             {"Menus",require("views_menus")},             
+             {"MenuBar",require("views_menus")},             
              },
     }
   }
