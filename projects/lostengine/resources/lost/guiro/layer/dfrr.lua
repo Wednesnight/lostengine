@@ -38,7 +38,13 @@ function dfrr:constructor(args)
   self:trround(true)
   self:radius(radius)  
   self:filled(filled)
-  self:width(width)
+  self:frameWidth(width)
+  self:posOffset(Vec2(0,0))
+  self:sizeOffset(Vec2(0,0))
+  self:topVisible(true)
+  self:bottomVisible(true)
+  self:leftVisible(true)
+  self:rightVisible(true)
   if hasGradient then 
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
@@ -59,12 +65,38 @@ function dfrr:updateLayout()
   self.mesh.material.uniforms:set("size", Vec2(self.rect.width, self.rect.height))
 end
 
-function dfrr:width(v)
-  self.mesh.material.uniforms:setFloat("width", math.max(1,v)) -- never let width run under 1 or we'll get artifacts
+function dfrr:updateDisplay()
+  lost.guiro.layer.Layer.updateDisplay(self)
+  local so = lost.math.Vec2()
+  local po = lost.math.Vec2()
+  if not self._topVisible then
+    so.y = so.y + self._frameWidth+self._radius+2
+  end
+  if not self._topVisible then
+    po.y = po.y + so.y/2
+  end
+  self:sizeOffset(so)
+  self:posOffset(po)
 end
 
-function dfrr:radius(v)
-  self.mesh.material.uniforms:setFloat("radius", v)
+function dfrr:frameWidth(...)
+  if arg.n >= 1 then
+    self._frameWidth = arg[1]
+    self.mesh.material.uniforms:setFloat("width", math.max(1,self._frameWidth)) -- never let width run under 1 or we'll get artifacts
+    self:needsDisplay() -- to adjust size/pos offset for switched off sides
+  else
+    return self._frameWidth
+  end
+end
+
+function dfrr:radius(...)
+  if arg.n >= 1 then
+    self._radius = arg[1]
+    self.mesh.material.uniforms:setFloat("radius", self._radius)
+    self:needsDisplay()
+  else
+    return self._radius
+  end
 end
 
 function dfrr:color(...)
@@ -128,6 +160,42 @@ function dfrr:trround(...)
   end
 end
 
+function dfrr:topVisible(...)
+  if arg.n >= 1 then 
+    self._topVisible = arg[1]
+    self:needsDisplay()
+  else
+    return self._topVisible
+  end
+end
+
+function dfrr:bottomVisible(...)
+  if arg.n >= 1 then 
+    self._bottomVisible = arg[1]
+    self:needsDisplay()
+  else
+    return self._bottomVisible
+  end
+end
+
+function dfrr:leftVisible(...)
+  if arg.n >= 1 then 
+    self._leftVisible = arg[1]
+    self:needsDisplay()
+  else
+    return self._leftVisible
+  end
+end
+
+function dfrr:rightVisible(...)
+  if arg.n >= 1 then 
+    self._rightVisible = arg[1]
+    self:needsDisplay()
+  else
+    return self._rightVisible
+  end
+end
+
 function dfrr:filled(...)
   if arg.n >= 1 then 
     self._filled = arg[1]
@@ -139,6 +207,26 @@ function dfrr:filled(...)
     self.mesh.material.uniforms:setFloat("filled", v)
   else
     return self._filled
+  end
+end
+  
+-- Vec2
+function dfrr:sizeOffset(...)
+  if arg.n >= 1 then 
+    self._sizeOffset = arg[1]
+    self.mesh.material.uniforms:set("sizeOffset", self._sizeOffset)
+  else
+    return self._sizeOffset
+  end
+end
+
+-- Vec2
+function dfrr:posOffset(...)
+  if arg.n >= 1 then 
+    self._posOffset = arg[1]
+    self.mesh.material.uniforms:set("posOffset", self._posOffset)
+  else
+    return self._posOffset
   end
 end
   

@@ -86,84 +86,103 @@ function startup()
   local bg = lost.guiro.layer.Rect{bounds=b,filled=true,color=c1}
   lost.guiro.ui():add
   {
-    lost.guiro.view.View
+    lost.guiro.view.Box
     {
+      title="Configurator",
       id="main",
-      bounds={{"right",-10},0,".5","1"},
-      layout=lost.guiro.layout.Vertical{halign="center",valign="center",spacing=10},
+      bounds={{"right",-10},10,".5",{"1",-20}},
       subviews={
-        lost.guiro.view.Button{
-          bounds={0,0,"1",30},title="Filled",style="checkboxCandy",
-          size="regular",
-          pushed=true,
-          listeners=
-          {
-            buttonClick=function(event)
-              l:filled(event.target:pushed())
-            end
-          }
-        },
-        lost.guiro.view.Box
+        lost.guiro.view.View
         {
-          id="corners",
-          title="Round corners",
-          bounds={0,0,"1",50},
+          layout=lost.guiro.layout.Vertical{halign="center",valign="top",spacing=10},
+          bounds={10,0,{"1",-20},"1"},
           subviews=
           {
-            lost.guiro.view.Button{bounds={"left","bottom", ".5",".5"},id="bl",style="checkboxCandy",title="bottom left"},
-            lost.guiro.view.Button{bounds={"right","bottom", ".5",".5"},id="br",style="checkboxCandy",title="bottom right"},
-            lost.guiro.view.Button{bounds={"left","top", ".5",".5"},id="tl",style="checkboxCandy",title="top left"},
-            lost.guiro.view.Button{bounds={"right","top", ".5",".5"},id="tr",style="checkboxCandy",title="top right"},
-          },
-          listeners=
-          {
-            buttonClick=function(event) 
-              if event.target.id == "bl" then
-                l:blround(event.target:pushed())
-              elseif event.target.id == "br" then
-                l:brround(event.target:pushed())
-              elseif event.target.id == "tr" then
-                l:trround(event.target:pushed())
-              elseif event.target.id == "tl" then
-                l:tlround(event.target:pushed())
-              end
-            end
+            lost.guiro.view.Button{
+              bounds={0,0,"1",30},title="Filled",style="checkboxCandy",
+              size="regular",
+              pushed=true,
+              listeners=
+              {
+                buttonClick=function(event)
+                  l:filled(event.target:pushed())
+                end
+              }
+            },
+            lost.guiro.view.Box
+            {
+              id="sides",
+              title="Sides",
+              bounds={0,0,"1",100},
+              subviews=
+              {
+                lost.guiro.view.Button{bounds={"center","top", ".5",".5"},id="top",style="checkboxCandy",title="top"},
+                lost.guiro.view.Button{bounds={"center","bottom", ".5",".5"},id="bottom",style="checkboxCandy",title="bottom"},
+                lost.guiro.view.Button{bounds={"left","center", ".5",".5"},id="left",style="checkboxCandy",title="left"},
+                lost.guiro.view.Button{bounds={"right","center", ".5",".5"},id="tr",style="checkboxCandy",title="right"},
+              },
+              listeners=
+              {
+                buttonClick=function(event) 
+                  if event.target.id == "top" then l:topVisible(event.target:pushed())
+                  elseif event.target.id == "bottom" then l:bottomVisible(event.target:pushed())
+                  elseif event.target.id == "left" then l:leftVisible(event.target:pushed())
+                  elseif event.target.id == "right" then l:rightVisible(event.target:pushed())
+                  end
+                end
+              }
+            },              
+            lost.guiro.view.Box
+            {
+              id="corners",
+              title="Round corners",
+              bounds={0,0,"1",50},
+              subviews=
+              {
+                lost.guiro.view.Button{bounds={"left","bottom", ".5",".5"},id="bl",style="checkboxCandy",title="bottom left"},
+                lost.guiro.view.Button{bounds={"right","bottom", ".5",".5"},id="br",style="checkboxCandy",title="bottom right"},
+                lost.guiro.view.Button{bounds={"left","top", ".5",".5"},id="tl",style="checkboxCandy",title="top left"},
+                lost.guiro.view.Button{bounds={"right","top", ".5",".5"},id="tr",style="checkboxCandy",title="top right"},
+              },
+              listeners=
+              {
+                buttonClick=function(event) 
+                  if event.target.id == "bl" then l:blround(event.target:pushed())
+                  elseif event.target.id == "br" then l:brround(event.target:pushed())
+                  elseif event.target.id == "tr" then l:trround(event.target:pushed())
+                  elseif event.target.id == "tl" then l:tlround(event.target:pushed())
+                  end
+                end
+              }
+            },
+            lost.guiro.view.Button{
+              bounds={0,0,"1",30},title="Show Background",style="checkboxCandy",
+              size="regular",
+              pushed=true,
+              listeners=
+              {
+                buttonClick=function(event)
+                  bg:hidden(not event.target:pushed())
+                end
+              }
+            },
+            colorView({0,0,"1", 30}, "Background Color:", function(val) bg:color(val) end),
+            colorView({0,0,"1", 30}, "Rect Color:", function(val) l:color(val) end),
+            sliderInputLabelView({0,0,"1", 30}, "Width:", 0, 100, function(val) l:frameWidth(val) end),
+            sliderInputLabelView({0,0,"1", 30}, "Radius:", 0, 100, function(val) l:radius(val) end)   
           }
-        },
-        lost.guiro.view.Button{
-          bounds={0,0,"1",30},title="Show Background",style="checkboxCandy",
-          size="regular",
-          pushed=true,
-          listeners=
-          {
-            buttonClick=function(event)
-              bg:hidden(not event.target:pushed())
-            end
-          }
-        },
-        colorView({0,0,"1", 30}, "Background Color:", function(val) bg:color(val) end),
-        colorView({0,0,"1", 30}, "Rect Color:", function(val) l:color(val) end),
-        sliderInputLabelView({0,0,"1", 30}, "Width:", 0, 100, function(val) 
-            if l.mesh.material.shader:hasUniform("width") then
-              l:width(val) 
-            end
-          end),
-        sliderInputLabelView({0,0,"1", 30}, "Radius:", 0, 100, function(val) 
-            if l.mesh.material.shader:hasUniform("radius") then
-              l:radius(val) 
-            end
-          end)        
-      }
+        }     
+      },
     }
   }
   
 --  lost.guiro.ui():printSubviews()
   lost.guiro.ui().layer:addSublayer(bg)
   lost.guiro.ui().layer:addSublayer(l)
-  lost.guiro.ui()("main")("corners")("view")("bl"):pushed(l:blround())
-  lost.guiro.ui()("main")("corners")("view")("br"):pushed(l:brround())
-  lost.guiro.ui()("main")("corners")("view")("tl"):pushed(l:tlround())
-  lost.guiro.ui()("main")("corners")("view")("tr"):pushed(l:trround())
+  lost.guiro.ui()("main")("view")("view")("corners")("view")("bl"):pushed(l:blround())
+--  lost.guiro.ui()("main")("view")("corners")("view")("br"):pushed(l:brround())
+--  lost.guiro.ui()("main")("view")("corners")("view")("tl"):pushed(l:tlround())
+--  lost.guiro.ui()("main")("view")("corners")("view")("tr"):pushed(l:trround())
 end
 
 function update()
