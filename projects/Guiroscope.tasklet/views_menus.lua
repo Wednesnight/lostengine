@@ -1,3 +1,24 @@
+--[[lost.guiro.ui():addEventListener("menuItemSelected",function(event) 
+      log.debug(event.type.." "..event.target.id)
+      for k,v in ipairs(event.indexPath) do
+        log.debug(v)
+      end
+      local mi = event.target:menuItemForIndexPath(event.indexPath)
+      mi:checked(not mi:checked())
+    end
+    )]]
+
+local function checkFunction(event) 
+  for k,v in ipairs(event.indexPath) do
+    log.debug(v)
+  end
+  local mi = event.target:menuItemForIndexPath(event.indexPath)
+  mi:checked(not mi:checked())
+end
+
+-- FIXME: menuItemSelected events only through ui
+lost.guiro.ui():addEventListener("menuItemSelected", checkFunction)        
+        
 return lost.guiro.view.View
 {
   subviews=
@@ -5,44 +26,20 @@ return lost.guiro.view.View
     lost.guiro.view.MenuBar
     {
       bounds={0,"top","1",30},
-      items={
-        {
-          title="Menu 1", 
-          items={
-            {title="m1 First"},
-            {title="m1 Second"},
-            "-",
-            {title="m1 Third"},              
-            {title="m1 Fourth"},              
-          }
-        },
-        {
-          title="Menu 2", 
-          items={
-            {title="m2 First"},
-            {title="m2 Second"},
-            "-",
-            {title="m2 Third"},              
-            {title="m2 Fourth"},              
-            "-",
-            {title="m2 Fifth"},              
-          }
-        },
-        {
-          title="Menu 3", 
-          items={
-            {title="m3 First"},
-            {title="m3 Second"},
-            "-",
-            {title="m3 Third"},              
-            {title="m3 Fourth"},              
-            "-",
-            {title="m3 Fifth"},              
-            {title="m3 Sixth"},              
-            {title="m3 Seventh"},              
-          }
-        }
-      }
+      items=require("menudef"),
+      size="regular",
     },
+    lost.guiro.view.MenuBar
+    {
+      bounds={0,{"top",-50},"1",30},
+      items=require("menudef"),
+      size="small",
+    },
+    lost.guiro.view.MenuBar
+    {
+      bounds={0,{"top",-100},"1",30},
+      items=require("menudef"),
+      size="mini",
+    }    
   }
 }
