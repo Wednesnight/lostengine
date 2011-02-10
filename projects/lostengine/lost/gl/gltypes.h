@@ -24,15 +24,16 @@ typedef double GLdouble;
 typedef double GLclampd;
 typedef void GLvoid;
 
-#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32
-typedef int GLintptr;
-typedef int GLsizeiptr;
-#elif defined linux
-typedef int GLintptr;
-typedef int GLsizeiptr;
+#if defined ANDROID
+  typedef signed long int GLintptr;
+  typedef signed long int GLsizeiptr;
+  typedef char GLchar;
+#elif TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32 || defined linux
+  typedef int GLintptr;
+  typedef int GLsizeiptr;
 #else
-typedef long GLintptr;
-typedef long GLsizeiptr;
+  typedef long GLintptr;
+  typedef long GLsizeiptr;
 #endif
 
 #ifndef __gl_h_

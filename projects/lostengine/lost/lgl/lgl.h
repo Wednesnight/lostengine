@@ -13,7 +13,7 @@
   #include <TargetConditionals.h>
 #endif
 
-#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined ANDROID
   #include "lost/lgl/lgl_gles.h"
 #else
   #include "lost/lgl/lgl_gl.h"

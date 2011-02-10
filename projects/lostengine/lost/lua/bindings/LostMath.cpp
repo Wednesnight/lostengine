@@ -184,7 +184,7 @@ namespace lost
       LostMathAABB(state);
 
       // constants
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
       globals(state)["lost"]["math"]["EPSILON"] = FLT_EPSILON;
 #else
       globals(state)["lost"]["math"]["EPSILON"] = DBL_EPSILON;

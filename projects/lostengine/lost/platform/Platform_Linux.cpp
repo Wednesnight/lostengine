@@ -98,6 +98,12 @@ namespace lost
     {
       boost::filesystem::path path(filename);
 
+#ifdef ANDROID
+      struct passwd* pwdptr = getpwuid(getuid());
+      if (pwdptr != NULL) {
+	path = pwdptr->pw_dir;
+      }
+#else
       struct passwd pd;
       struct passwd* pwdptr=&pd;
       struct passwd* tempPwdPtr;
@@ -107,6 +113,7 @@ namespace lost
       if ((getpwuid_r(getuid(), pwdptr, pwdbuffer, pwdlinelen, &tempPwdPtr)) == 0) {
 	path = pd.pw_dir;
       }
+#endif
       path /= filename;
 
       std::string result = path.string();

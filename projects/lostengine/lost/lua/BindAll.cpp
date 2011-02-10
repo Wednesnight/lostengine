@@ -2,7 +2,9 @@
 #include "lost/lua/BindAll.h"
 
 #include "lost/lua/bindings/LostApplication.h"
-#include "lost/lua/bindings/LostAudio.h"
+#ifndef ANDROID
+  #include "lost/lua/bindings/LostAudio.h"
+#endif
 #include "lost/lua/bindings/LostBitmap.h"
 #include "lost/lua/bindings/LostCamera.h"
 #include "lost/lua/bindings/LostCommon.h"
@@ -44,13 +46,15 @@ namespace lost
       PackageLib(state);
       StringLib(state);
       TableLib(state);
-      OsLib(state);		
+      OsLib(state);
 
       // other packages derive from Event package so register that first
       LostCommon(state);
       LostEvent(state);
       LostApplication(state);
+#ifndef ANDROID
       LostAudio(state);
+#endif
       LostBitmap(state);
       LostCamera(state);
       LostMesh(state); // must bind mesh before font since font already requires the binding for inheritance

@@ -29,6 +29,8 @@ namespace lost
         #endif
       #elif defined linux
         return platform_linux;
+      #elif defined ANDROID
+        return platform_android;
       #endif
     }
 

@@ -55,7 +55,8 @@ namespace lost
       platform_windows = 0,
       platform_mac     = 1,
       platform_linux   = 2,
-      platform_iphone  = 3
+      platform_iphone  = 3,
+      platform_android = 4,
     } PlatformType;
 
     PlatformType getPlatform();
