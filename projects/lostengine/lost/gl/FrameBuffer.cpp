@@ -76,7 +76,7 @@ namespace lost
       {
         case LGL_DEPTH_COMPONENT16:
         case LGL_DEPTH_COMPONENT24:
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
         case LGL_DEPTH_COMPONENT32:
 #endif        
           textureParams.format = LGL_DEPTH_COMPONENT; // FIXME: this is probably the wrong constant, jst a try for ES
@@ -271,7 +271,7 @@ namespace lost
           case GL_RGBA:
             buffer->resetBitFormat(GL_RGB);
             break;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
           case GL_RGBA8:
             buffer->resetBitFormat(GL_RGBA);
 #endif
@@ -306,7 +306,7 @@ namespace lost
           case LGL_DEPTH_COMPONENT24:
             depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT16);
             break;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
           case LGL_DEPTH_COMPONENT32:
             depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT24);
             break;
@@ -360,7 +360,7 @@ namespace lost
         case LGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
           throw runtime_error("FrameBuffer: invalid dimensions");
           break;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
         case LGL_FRAMEBUFFER_INCOMPLETE_FORMATS:
           throw runtime_error("FrameBuffer: invalid format");
           break;
@@ -386,7 +386,7 @@ namespace lost
             {
               case LGL_DEPTH_COMPONENT16: os << "16"; break;
               case LGL_DEPTH_COMPONENT24: os << "24"; break;
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE                    
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
               case LGL_DEPTH_COMPONENT32: os << "32"; break;
 #endif
             }
@@ -442,7 +442,7 @@ namespace lost
        * defaults
        */
       Vec2 size(0,0);
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
       GLenum color = GL_RGBA8;
       GLenum depth = LGL_DEPTH_COMPONENT32;
 #else

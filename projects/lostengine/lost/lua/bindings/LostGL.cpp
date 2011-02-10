@@ -178,7 +178,7 @@ namespace lost
       globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
 
       // types
-#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE      
+#if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
       globals(state)["gl"]["GL_BOOL"]               = GL_BOOL;
       globals(state)["gl"]["GL_BOOL_VEC2"]          = GL_BOOL_VEC2;
       globals(state)["gl"]["GL_BOOL_VEC3"]          = GL_BOOL_VEC3;
