@@ -19,7 +19,7 @@ zziplib_path:= ../../../../thirdparty/zziplib/zziplib-0.13.58
 include $(CLEAR_VARS)
 
 LOCAL_MODULE  := LostEngine
-LOCAL_CXXFLAGS:= -includelost/prefix-debug.pch -D_GLIBCXX_USE_WCHAR_T
+LOCAL_CXXFLAGS:= -includelost/prefix-debug.pch
 
 LOCAL_C_INCLUDES:= \
 $(LOCAL_PATH)/../../ \
@@ -151,10 +151,9 @@ LOCAL_SRC_FILES := \
 ../../lost/time/Clock.cpp \
 ../../lost/time/ThreadedTimerScheduler.cpp \
 ../../lost/time/Timer.cpp \
-$(boost_path)/libs/filesystem/v3/src/path.cpp \
-$(boost_path)/libs/filesystem/v3/src/operations.cpp \
-$(boost_path)/libs/filesystem/v3/src/portability.cpp \
-$(boost_path)/libs/filesystem/v3/src/utf8_codecvt_facet.cpp \
+$(boost_path)/libs/filesystem/v2/src/v2_path.cpp \
+$(boost_path)/libs/filesystem/v2/src/v2_operations.cpp \
+$(boost_path)/libs/filesystem/v2/src/v2_portability.cpp \
 $(boost_path)/libs/signals/src/connection.cpp \
 $(boost_path)/libs/signals/src/named_slot_map.cpp \
 $(boost_path)/libs/signals/src/signal_base.cpp \
@@ -329,7 +328,7 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := Launcher
-LOCAL_CXXFLAGS  := -includelost/prefix-debug.pch -D_GLIBCXX_USE_WCHAR_T
+LOCAL_CXXFLAGS  := -includelost/prefix-debug.pch
 LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
 LOCAL_STATIC_LIBRARIES  := android_native_app_glue LostEngine
 LOCAL_C_INCLUDES:= $(LOCAL_PATH)/../../ $(LOCAL_PATH)/$(boost_path)
@@ -338,3 +337,4 @@ LOCAL_SRC_FILES:= ../../main.cpp
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/native_app_glue)
+
