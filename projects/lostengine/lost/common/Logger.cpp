@@ -4,6 +4,12 @@
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
 
+#ifdef ANDROID
+extern "C" {
+  #include <android/log.h>
+}
+#endif
+
 namespace lost
 {
   namespace common
@@ -36,10 +42,20 @@ namespace lost
         boost::call_once(initOnce, &initLogMutex);
 
         logMutex->lock();
+#ifndef ANDROID
         std::cout << lost::platform::currentTimeFormat() << " \t " <<
                      inLevel                              << " \t " <<
                      inLocation                           << " \t " <<
-                     inMsg                                << std::endl;	
+                     inMsg                                << std::endl;
+#else
+        std::ostringstream os;
+        os << lost::platform::currentTimeFormat() << " \t " <<
+              inLevel                              << " \t " <<
+              inLocation                           << " \t " <<
+              inMsg;
+
+        __android_log_print(ANDROID_LOG_INFO, "LostEngine", os.str().c_str());
+#endif
         logMutex->unlock();
       }
 

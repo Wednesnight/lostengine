@@ -8,6 +8,30 @@
 #include <iostream>
 #include <stdexcept>
 
+extern "C" {
+  #include <android_native_app_glue.h>
+  
+  extern int main(int argn, char** args);
+  
+  static struct android_app* _android_app = NULL;
+  
+  void setAndroidApp(struct android_app* app) {
+    _android_app = app;
+  }
+  
+  struct android_app* getAndroidApp() {
+    return _android_app;
+  }
+  
+  void android_main(struct android_app* state) {
+    // Make sure glue isn't stripped.
+    app_dummy();
+    
+    setAndroidApp(state);
+    main(0, NULL);
+  }
+}
+
 using namespace std;
 
 namespace lost
@@ -17,7 +41,7 @@ namespace lost
 
     struct Application::ApplicationHiddenMembers
     {
-      boost::condition condition;
+      struct android_app* app;
     };
 
     void Application::initialize()
@@ -26,6 +50,7 @@ namespace lost
 
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
+      hiddenMembers->app = getAndroidApp();
     }
 
     void Application::finalize()
@@ -41,18 +66,38 @@ namespace lost
       ApplicationEventPtr event = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(event);
 
-      boost::mutex applicationMutex;
-      boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
-      while (running)
-      {
-        hiddenMembers->condition.wait(applicationLock);
-        eventDispatcher->processEvents();
+      struct android_app* app = getAndroidApp();
+
+      int ident;
+      int events;
+      struct android_poll_source* source;
+      while (running) {
+        
+        while ((ident = ALooper_pollAll(-1, NULL, &events, (void**)&source)) >= 0) {
+          
+          // Process this event.
+          if (source != NULL) {
+            source->process(app, source);
+          }
+          
+          // Check if we are exiting.
+          if (app->destroyRequested != 0) {
+            quit();
+          }
+
+          eventDispatcher->processEvents();
+
+          if (!running) {
+            break;
+          }
+        }
+          
       }
     }
 
     void Application::shutdown()
     {
-      hiddenMembers->condition.notify_one();
+      ALooper_wake(hiddenMembers->app->looper);
     }
 
     void Application::showMouse(bool visible)
@@ -61,7 +106,7 @@ namespace lost
 
     void Application::processEvents(const ProcessEventPtr& event)
     {
-      hiddenMembers->condition.notify_one();
+      ALooper_wake(hiddenMembers->app->looper);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
@@ -71,4 +116,3 @@ namespace lost
 
   }
 }
-

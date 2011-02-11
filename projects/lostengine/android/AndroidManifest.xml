@@ -6,10 +6,11 @@
         android:versionName="1.0">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="7" />
 
     <!-- This .apk has no Java code itself, so set hasCode to false. -->
-    <application android:label="@string/app_name" android:hasCode="false">
+    <application android:icon="@drawable/icon" android:label="@string/app_name"
+        android:hasCode="false" android:debuggable="true">
 
         <!-- Our activity is the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
