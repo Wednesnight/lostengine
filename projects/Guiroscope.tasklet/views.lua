@@ -20,7 +20,8 @@ return lost.guiro.view.View
              {"Slider",require("views_slider")},
              {"ColorPicker",require("views_colorpicker")},
              {"TextInput",require("views_textinput")},
-             {"MenuBar",require("views_menus")},             
+             {"MenuBar",require("views_menubar")},             
+             {"PopUpButton",require("views_popupbutton")},             
              },
     }
   }
