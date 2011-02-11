@@ -83,7 +83,7 @@ function startup()
   local b = {50,50,{".5",-100},{"1",-100}}
   local white = Color(1,1,1)
 
-  local l = lost.guiro.layer.dfrr{bounds=b,filled=true,radius=r,color=white, gradient="candyBlue"}
+  local l = lost.guiro.layer.RoundedRect{bounds=b,filled=true,radius=r,color=white, gradient="candyBlue"}
   local bg = lost.guiro.layer.Rect{bounds=b,filled=true,color=c1}
   lost.guiro.ui():add
   {

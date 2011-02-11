@@ -4,7 +4,7 @@ local Vec2 = lost.math.Vec2
 function startup()  
   require("lost.guiro")
   local r = lost.guiro.layer.Rect
-  local rr = lost.guiro.layer.dfrr
+  local rr = lost.guiro.layer.RoundedRect
   local t = lost.guiro.layer.Text
   
   lost.guiro.ui():add

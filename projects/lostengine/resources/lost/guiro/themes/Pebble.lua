@@ -6,7 +6,6 @@ require("lost.guiro.Theme")
 require("lost.guiro.layer.Text")
 require("lost.guiro.layer.HLine")
 require("lost.guiro.layer.RoundedRect")
-require("lost.guiro.layer.dfrr")
 require("lost.guiro.layer.Image")
 require("lost.guiro.themes.PebbleGradients")
 
@@ -16,7 +15,7 @@ local Color = lost.common.Color
 local Bounds = lost.guiro.Bounds
 
 --local rr = lost.guiro.layer.RoundedRect
-local rr = lost.guiro.layer.dfrr
+local rr = lost.guiro.layer.RoundedRect
 
 function Pebble:constructor()
   lost.guiro.Theme.constructor(self)
