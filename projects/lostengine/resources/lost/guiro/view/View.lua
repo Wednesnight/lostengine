@@ -157,7 +157,7 @@ function View:printSubviews(prefix)
   if not prefix then
     prefix = ""
   end
-  log.debug(prefix .."|-- ".. self.id)
+  log.debug(prefix .."|-- ".. self.id.." "..tostring(self.rect))
   for k,view in next,self.subviews do
     view:printSubviews(prefix .."    ")
   end

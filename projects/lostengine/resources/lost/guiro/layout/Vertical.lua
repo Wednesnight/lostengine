@@ -40,11 +40,10 @@ function Vertical:apply(target, items)
   end
   local offset = yAlignOffset + self.yoffset
   for k,item in ipairs(items) do
-    item._bounds.y = lost.guiro.Bounds.decodeEntry(2,offset)
+    item:y(offset)
     if self.halign then
-      item._bounds.x = lost.guiro.Bounds.decodeEntry(1,{self.halign, self.xoffset})
+      item:x({self.halign, self.xoffset})
     end
-    item:updateLayout()
     offset = offset + item.rect.height + self.spacing
   end
 end
