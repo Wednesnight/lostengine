@@ -9,6 +9,7 @@ return lost.guiro.view.View
       size="regular",
       items={{"Rect",require("layers_rect")},
              {"RoundedRect",require("layers_roundedrect")},
+             {"Configurator",require("layers_rrconfigurator")},
              {"Text",require("layers_text")},
              {"HLine",require("layers_hline")},
              {"Disc",require("layers_disc")},
