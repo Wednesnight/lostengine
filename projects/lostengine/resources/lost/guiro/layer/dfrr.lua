@@ -31,7 +31,12 @@ function dfrr:constructor(args)
     hasGradient = true
   end
   
-  self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
+  if hasGradient then
+    self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradient()
+  else
+    self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
+  end
+  
   self:blround(true)
   self:brround(true)
   self:tlround(true)

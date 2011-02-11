@@ -1,0 +1,36 @@
+#include "lost/resources/glsl/box.fsp"
+
+// all coordinates in pixels
+float roundedRect(vec2 pixel, vec2 pos, vec2 size, float radius)
+{
+  vec2 boxsize = size*.5;
+  return 1.0-clamp(length(max(abs(pixel-pos) - boxsize + vec2(radius, radius), 0.0))-radius, 0.0, 1.0);
+}
+
+float roundedRectFrame(vec2 pixel, float width, vec2 pos, vec2 size, float radius)
+{
+  float outer = roundedRect(pixel, pos, size, radius);
+  float inner = roundedRect(pixel, pos, size-vec2(2.0*width), max(0.0,radius-width));
+  return outer - inner;
+}
+
+float hyperRoundedRect(vec2 pixel, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
+                       float blrect, float brrect, float tlrect, float trrect)
+{
+  float f = roundedRect(pixel, pos, size, radius);
+  float bl = box2(pixel, pos-quarterSize, quarterSize);
+  float br = box2(pixel, vec2(pos.x+quarterSize.x, pos.y-quarterSize.y), quarterSize);
+  float tr = box2(pixel, vec2(pos.x+quarterSize.x, pos.y+quarterSize.y), quarterSize);
+  float tl = box2(pixel, vec2(pos.x-quarterSize.x, pos.y+quarterSize.y), quarterSize);
+  return clamp(f+(bl*blrect)+(br*brrect)+(tr*trrect)+(tl*tlrect), 0.0, 1.0);
+}
+
+float hyperRoundedRectFrame(vec2 pixel, float filled, float width, vec2 pos, vec2 size, vec2 quarterSize, float radius, 
+                            float blrect, float brrect, float tlrect, float trrect)
+{
+  float outer = hyperRoundedRect(pixel, pos, size, quarterSize, radius, blrect, brrect, tlrect, trrect);
+  vec2 innerSize = size-vec2(2.0*width);
+  vec2 innerQuarterSize = innerSize*vec2(.25);
+  float inner = hyperRoundedRect(pixel, pos, innerSize, innerQuarterSize, max(0.0,radius-width), blrect, brrect, tlrect, trrect);
+  return clamp(outer - (1.0-filled)*inner, 0.0, 1.0);  
+}
