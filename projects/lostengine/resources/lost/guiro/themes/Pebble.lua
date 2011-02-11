@@ -14,6 +14,8 @@ lost.common.Class "lost.guiro.themes.Pebble" "lost.guiro.Theme" {}
 local Color = lost.common.Color
 local Bounds = lost.guiro.Bounds
 
+local rr = lost.guiro.layer.RoundedRect
+
 function Pebble:constructor()
   lost.guiro.Theme.constructor(self)
   pebbleBuildGradients(lost.guiro.textureManager())
@@ -198,26 +200,25 @@ function Pebble:labelDefault(target, args)
 end
 
 function Pebble:labelRound(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color = Color(0,0,0),font = {"Vera", 12}})
 end
 
 function Pebble:labelColorPicker(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=4,filled=true})
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(0,0,0),radius=4,filled = false,width=1})
+  target.layer:addSublayer(lost.guiro.layer.rr{bounds={0,0,"1","1"},color=Color(1,1,1),radius=4,filled=true})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(0,0,0),radius=4,filled = false,width=1})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color = Color(0,0,0),font = {"Vera", 12}})
 end
 
 
 function Pebble:labelRoundFramed(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},color=Color(0,0,0),radius=8,filled = false,width=1})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(1,1,1),radius=8,filled=true})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(0,0,0),radius=8,filled = false,width=1})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color=Color(0,0,0),font={"Vera", 12}})
 end
 
 function Pebble:buttonRounded(target,args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -243,7 +244,6 @@ end
 
 function Pebble:buttonRoundedToggle(target,args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -306,7 +306,6 @@ end
 
 function Pebble:buttonTabCandyRoundSingle(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -340,7 +339,6 @@ end
 
 function Pebble:buttonTabCandyRoundLeft(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -374,7 +372,6 @@ end
 
 function Pebble:buttonTabCandyRoundMid(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
   local rc = lost.guiro.layer.Rect
 
   local b = lost.guiro.view.Button
@@ -409,7 +406,6 @@ end
 
 function Pebble:buttonTabCandyRoundRight(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -476,7 +472,6 @@ end
 
 function Pebble:buttonTabSquareLeft(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -509,7 +504,6 @@ end
 
 function Pebble:buttonTabSquareMid(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
   local rc = lost.guiro.layer.Rect
 
   local b = lost.guiro.view.Button
@@ -543,7 +537,6 @@ end
 
 function Pebble:buttonTabSquareRight(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
 
   local b = lost.guiro.view.Button
   local size = args.size or "small"
@@ -686,7 +679,6 @@ end
 
 function Pebble:buttonCheckboxCandy(target, args)
   local l = lost.guiro.layer.Layer
-  local rr = lost.guiro.layer.RoundedRect
   local img = lost.guiro.layer.Image
 
   local b = lost.guiro.view.Button
@@ -755,7 +747,7 @@ end
 
 -- style for header of a normal window, gray, top rounded, bottom square, dark gray separator line at bottom
 function Pebble:viewWindowHeader(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={0,0,"1","1"},radius=4,gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},radius=4,gradient="toolbarBg",roundCorners={tl=true, bl=false, br=false, tr=true}})
   target.layer:addSublayer(lost.guiro.layer.HLine{bounds={0,0,"1",1},color=self.separatorColor})    
   target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.windowNormalHeaderHeight)
 end
@@ -770,7 +762,7 @@ end
 
 function Pebble:viewWindowBack(target, args)
   target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color = Color(.9294,.9294,.9294),filled = true})  
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=false,bounds={0,0,"1","1"},color=Color(.8,.8,.8),roundCorners={tl=false, bl=false, br=false, tr=false},sides={top=false}})
+  target.layer:addSublayer(rr{filled=false,bounds={0,0,"1","1"},color=Color(.8,.8,.8),roundCorners={tl=false, bl=false, br=false, tr=false},sides={top=false}})
 end
 
 function Pebble:windowResizeView()
@@ -829,13 +821,13 @@ function Pebble:layerRoundedRectRecess()
   {
     sublayers=
     {
-      lost.guiro.layer.RoundedRect
+      rr
       {
         gradient="recess",
         radius=4,
         filled=true
       },
-      lost.guiro.layer.RoundedRect
+      rr
       {
         color=Color(c,c,c),
         radius=4,
@@ -932,7 +924,6 @@ end
 function Pebble:sliderCandy(target,args)
   local l = lost.guiro.layer.Layer
   local d = lost.guiro.layer.Disc
-  local rr = lost.guiro.layer.RoundedRect
 
   local sz = args.size or "regular"
 
@@ -1075,10 +1066,10 @@ function Pebble:colorPickerWindow(target, args)
   target.alphaLabel = al
   
   -- color labels
-  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+0*h+0*sp)},clw,h},filled=true,color=Color(1,0,0),radius=4})
-  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+1*h+1*sp)},clw,h},filled=true,color=Color(0,1,0),radius=4})
-  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+2*h+2*sp)},clw,h},filled=true,color=Color(0,0,1),radius=4})
-  target.contentView.layer:addSublayer(lost.guiro.layer.RoundedRect{bounds={ci,{"top",-(ci+3*h+3*sp)},clw,h},filled=false,width=1,color=Color(0,0,0),radius=4})
+  target.contentView.layer:addSublayer(rr{bounds={ci,{"top",-(ci+0*h+0*sp)},clw,h},filled=true,color=Color(1,0,0),radius=4})
+  target.contentView.layer:addSublayer(rr{bounds={ci,{"top",-(ci+1*h+1*sp)},clw,h},filled=true,color=Color(0,1,0),radius=4})
+  target.contentView.layer:addSublayer(rr{bounds={ci,{"top",-(ci+2*h+2*sp)},clw,h},filled=true,color=Color(0,0,1),radius=4})
+  target.contentView.layer:addSublayer(rr{bounds={ci,{"top",-(ci+3*h+3*sp)},clw,h},filled=false,width=1,color=Color(0,0,0),radius=4})
   
   -- colorLayer for better visualisation of current setting
   target.contentView.layer:addSublayer(lost.guiro.layer.Rect{
@@ -1105,7 +1096,7 @@ function Pebble:colorPickerWindow(target, args)
 end
 
 function Pebble:fpsMeter(target, args)
-  target.layer:addSublayer(lost.guiro.layer.RoundedRect{filled=true, radius=8,color=Color(0,0,0,.6)})
+  target.layer:addSublayer(rr{filled=true, radius=8,color=Color(0,0,0,.6)})
   local tl = lost.guiro.layer.Text{font={"Vera mono bold",48},color=Color(1,1,1),valign="center",halign="center"}
   target.layer:addSublayer(tl)
   target.textLayer = tl
@@ -1113,7 +1104,6 @@ end
 
 function Pebble:textInput(target, args)
   local r = lost.guiro.layer.Rect
-  local rr = lost.guiro.layer.RoundedRect
   local w = 3
   local focusColor = Color(.4,.6,1)
   local focusRing = rr{hidden=true,radius=4,bounds={-w,-w,{"1",2*w},{"1",2*w}},filled=false,color=focusColor,width=w}
@@ -1199,8 +1189,8 @@ function Pebble:menuRoundRect(target, args)
   local size = args.size or "regular"
   local mp = self.menuParams[size]
 
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=mp.radius}
-  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=mp.radius,bounds={0,0,"1","1"}}
+  local bg = rr{filled=true, color=self.menuColor,radius=mp.radius}
+  local fr = rr{filled=false, color=self.menuFrameColor, radius=mp.radius,bounds={0,0,"1","1"}}
   target.layer:addSublayer(bg)
   target.layer:addSublayer(fr)
   self:menuShared(target, args)
@@ -1209,8 +1199,8 @@ end
 function Pebble:menuTopRect(target, args)
   local size = args.size or "regular"
   local mp = self.menuParams[size]
-  local bg = lost.guiro.layer.RoundedRect{filled=true, color=self.menuColor,radius=mp.radius,roundCorners={tl=false, tr=false}}
-  local fr = lost.guiro.layer.RoundedRect{filled=false, color=self.menuFrameColor, radius=mp.radius, roundCorners={tl=false, tr=false}, sides={top=false},bounds={0,0,"1","1"}}
+  local bg = rr{filled=true, color=self.menuColor,radius=mp.radius,roundCorners={tl=false, tr=false}}
+  local fr = rr{filled=false, color=self.menuFrameColor, radius=mp.radius, roundCorners={tl=false, tr=false}, sides={top=false},bounds={0,0,"1","1"}}
   target.layer:addSublayer(bg)
   target.layer:addSublayer(fr)
   self:menuShared(target, args)

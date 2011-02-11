@@ -36,7 +36,10 @@ function dfrr:constructor(args)
   else
     self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
   end
-  
+  local _sides = t.sides or {}
+  local _roundCorners = t.roundCorners or {}
+  self:sides(_sides)
+  self:roundCorners(_roundCorners)
   self:blround(true)
   self:brround(true)
   self:tlround(true)
@@ -257,3 +260,20 @@ function dfrr:posOffset(...)
   end
 end
   
+function dfrr:sides(t)
+  for k,v in pairs(t) do
+    if k == "top" then self:topVisible(v) 
+    elseif k == "bottom" then self:bottomVisible(v) 
+    elseif k == "left" then self:leftVisible(v) 
+    elseif k == "right" then self:rightVisible(v) end
+  end
+end
+
+function dfrr:roundCorners(t)
+  for k,v in pairs(t) do
+    if k == "tl" then self:tlround(v)
+    elseif k == "tr" then self:trround(v)
+    elseif k == "bl" then self:blround(v)
+    elseif k == "br" then self:brround(v) end
+  end
+end
