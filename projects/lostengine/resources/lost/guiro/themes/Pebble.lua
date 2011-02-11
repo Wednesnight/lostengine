@@ -87,6 +87,7 @@ function Pebble:constructor()
 
   self:addStyle("lost.guiro.view.PopUpButton", "round", function(target, args) self:popUpButtonRound(target, args) end)
   self:addStyle("lost.guiro.view.PopUpButton", "candy", function(target, args) self:popUpButtonCandy(target, args) end)
+  self:addStyle("lost.guiro.view.PopUpButton", "default", function(target, args) self:popUpButtonCandy(target, args) end)
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -1245,6 +1246,7 @@ function Pebble:popUpButtonRound(target, args)
 end
 
 function Pebble:popUpButtonCandy(target, args)
+  local l = lost.guiro.layer.Layer
   local size = args.size or "regular"
   local b = lost.guiro.view.Button
   local size = args.size or "small"
