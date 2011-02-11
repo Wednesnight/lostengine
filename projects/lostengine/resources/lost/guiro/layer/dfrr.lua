@@ -40,19 +40,9 @@ function dfrr:constructor(args)
   local _roundCorners = t.roundCorners or {}
   self:sides(_sides)
   self:roundCorners(_roundCorners)
-  self:blround(true)
-  self:brround(true)
-  self:tlround(true)
-  self:trround(true)
   self:radius(radius)  
   self:filled(filled)
   self:frameWidth(width)
-  self:posOffset(Vec2(0,0))
-  self:sizeOffset(Vec2(0,0))
-  self:topVisible(true)
-  self:bottomVisible(true)
-  self:leftVisible(true)
-  self:rightVisible(true)
   if hasGradient then 
     self.mesh.material.uniforms:setFloat("gradientCoord", self.gradientCoord)
     self.mesh.material:setTexture(0,lost.guiro.textureManager()._textureManager.gradientTexture)
@@ -233,7 +223,7 @@ function dfrr:filled(...)
     if self._filled then
       v = 1
     end
-    log.debug("setting filled to "..tostring(v))
+--    log.debug("setting filled to "..tostring(v))
     self.mesh.material.uniforms:setFloat("filled", v)
   else
     return self._filled
@@ -261,7 +251,13 @@ function dfrr:posOffset(...)
 end
   
 function dfrr:sides(t)
-  for k,v in pairs(t) do
+local s = {}
+if t.top ~= nil then s.top = t.top else s.top = true end
+if t.bottom ~= nil then s.bottom = t.bottom else s.bottom = true end
+if t.left ~= nil then s.left = t.left else s.left = true end
+if t.right ~= nil then s.right = t.right else s.right = true end
+
+  for k,v in pairs(s) do
     if k == "top" then self:topVisible(v) 
     elseif k == "bottom" then self:bottomVisible(v) 
     elseif k == "left" then self:leftVisible(v) 
@@ -270,7 +266,13 @@ function dfrr:sides(t)
 end
 
 function dfrr:roundCorners(t)
-  for k,v in pairs(t) do
+  local rc = {}
+if t.tl ~= nil then rc.tl = t.tl else rc.tl = true end
+if t.tr ~= nil then rc.tr = t.tr else rc.tr = true end
+if t.bl ~= nil then rc.bl = t.bl else rc.bl = true end
+if t.br ~= nil then rc.br = t.br else rc.br = true end
+
+  for k,v in pairs(rc) do
     if k == "tl" then self:tlround(v)
     elseif k == "tr" then self:trround(v)
     elseif k == "bl" then self:blround(v)
