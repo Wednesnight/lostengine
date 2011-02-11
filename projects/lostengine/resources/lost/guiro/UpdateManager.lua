@@ -59,7 +59,10 @@ end
 
 function UpdateManager:processLayerLayoutUpdates()
   self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true, false)
-  self:processQ(self._layerLayoutQ, self.lapplyLayoutfunc, false, true)
+  local oldq = self._layerLayoutQ
+  self._layerLayoutQ = {list={}, set={}}
+  self:processQ(oldq, self.lapplyLayoutfunc, false, true)
+  self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true, true)
 end
 
 function UpdateManager:processLayerDisplayUpdates()
