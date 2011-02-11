@@ -72,7 +72,10 @@ end
 
 function UpdateManager:processViewLayoutUpdates()
   self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true, false)
-  self:processQ(self._viewLayoutQ, self.vapplyLayoutfunc, false, true)
+  local oldq = self._viewLayoutQ
+  self._viewLayoutQ = {list={}, set={}}
+  self:processQ(oldq, self.vapplyLayoutfunc, false, true)
+  self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true, true)
 end
 
 function UpdateManager:processViewDisplayUpdates()
