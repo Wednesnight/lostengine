@@ -85,6 +85,8 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Menu", "roundrect", function(target, args) self:menuRoundRect(target, args) end)
   self:addStyle("lost.guiro.view.MenuItem", "default", function(target, args) self:menuItem(target, args) end)
 
+  self:addStyle("lost.guiro.view.PopUpButton", "round", function(target, args) self:popUpButtonRound(target, args) end)
+  self:addStyle("lost.guiro.view.PopUpButton", "candy", function(target, args) self:popUpButtonCandy(target, args) end)
 
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
@@ -1235,5 +1237,41 @@ function Pebble:menuItem(target, args)
   tl:width({"1",-(target.checkmarkWidth+target.submenuWidth+target.checkmarkTextDistance+target.textSubmenuDistance)})
   submenu:x("right")
   submenu:size(target.submenuWidth, target.submenuWidth)
+end
+
+function Pebble:popUpButtonRound(target, args)
+  local size = args.size or "regular"
+  target:mode("toggleOnce")
+end
+
+function Pebble:popUpButtonCandy(target, args)
+  local size = args.size or "regular"
+  local b = lost.guiro.view.Button
+  local size = args.size or "small"
+  target:mode("toggleOnce")
+  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
+  local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
+  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",filled=true,radius=r},
+                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r}}
+                             }
+  local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",color=Color(.9,.9,.9),filled=true,radius=r},
+                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r}}
+                             }
+
+  local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r},
+                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r}}
+                              }
+
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
+  target.layer:addSublayer(normal2)
+  target.layer:addSublayer(text)
+  target.textLayer = text
+  target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
+  target.backgrounds[b.STATE_NORMAL2] = normal2
+  target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
+  target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
 end
 
