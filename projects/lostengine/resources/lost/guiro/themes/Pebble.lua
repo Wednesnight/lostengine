@@ -6,6 +6,7 @@ require("lost.guiro.Theme")
 require("lost.guiro.layer.Text")
 require("lost.guiro.layer.HLine")
 require("lost.guiro.layer.RoundedRect")
+require("lost.guiro.layer.dfrr")
 require("lost.guiro.layer.Image")
 require("lost.guiro.themes.PebbleGradients")
 
@@ -14,7 +15,8 @@ lost.common.Class "lost.guiro.themes.Pebble" "lost.guiro.Theme" {}
 local Color = lost.common.Color
 local Bounds = lost.guiro.Bounds
 
-local rr = lost.guiro.layer.RoundedRect
+--local rr = lost.guiro.layer.RoundedRect
+local rr = lost.guiro.layer.dfrr
 
 function Pebble:constructor()
   lost.guiro.Theme.constructor(self)
@@ -205,7 +207,7 @@ function Pebble:labelRound(target, args)
 end
 
 function Pebble:labelColorPicker(target, args)
-  target.layer:addSublayer(lost.guiro.layer.rr{bounds={0,0,"1","1"},color=Color(1,1,1),radius=4,filled=true})
+  target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(1,1,1),radius=4,filled=true})
   target.layer:addSublayer(rr{bounds={0,0,"1","1"},color=Color(0,0,0),radius=4,filled = false,width=1})
   target.layer:addSublayer(lost.guiro.layer.Text{bounds={0,0,"1","1"},color = Color(0,0,0),font = {"Vera", 12}})
 end

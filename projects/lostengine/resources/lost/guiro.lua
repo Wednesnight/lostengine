@@ -9,7 +9,6 @@ require("lost.guiro.WindowManager")
 require("lost.guiro.UpdateManager")
 require("lost.guiro.Singletons")
 -- this is the reason you need to call this in startup(): themeManager might already instantiate some resources that require a GL context
-lost.guiro.themeManager() -- called to instantiate gradients before they're used in places other than the styles
 require("lost.guiro.Bounds")
 require("lost.guiro.event.Event")
 require("lost.guiro.event.EventManager")
@@ -43,3 +42,4 @@ require("lost.guiro.view.Menu")
 require("lost.guiro.view.MenuBar")
 require("lost.guiro.view.MenuBarItem")
 require("lost.guiro.view.PopUpButton")
+lost.guiro.themeManager() -- called to instantiate gradients before they're used in places other than the styles
