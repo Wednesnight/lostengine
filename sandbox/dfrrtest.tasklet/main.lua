@@ -90,6 +90,7 @@ function startup()
     {
       title="Configurator",
       id="main",
+      clip=true,
       bounds={{"right",-10},10,".5",{"1",-20}},
       subviews={
         lost.guiro.view.View
