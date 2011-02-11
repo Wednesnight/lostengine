@@ -126,6 +126,7 @@ namespace lost
       }
 
       (*t_iter)->stop();
+      DOUT("End of tasklet: " << (*t_iter)->name);
       delete *t_iter;
       tasklets.erase(t_iter);
     }
@@ -138,7 +139,6 @@ namespace lost
     void Application::taskletDone(const TaskletEventPtr& event)
     {
       Tasklet* currentTasklet = event->tasklet;
-      DOUT("End of tasklet: " << currentTasklet->name);
       removeTasklet(currentTasklet);
       bool haveActiveTasklets = false;
       for (std::list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)

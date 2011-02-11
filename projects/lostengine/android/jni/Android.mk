@@ -20,6 +20,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE  := LostEngine
 LOCAL_CXXFLAGS:= -includelost/prefix-debug.pch
+LOCAL_STATIC_LIBRARIES:= android_native_app_glue
 
 LOCAL_C_INCLUDES:= \
 $(LOCAL_PATH)/../../ \
@@ -131,6 +132,7 @@ LOCAL_SRC_FILES := \
 ../../lost/mesh/TextureManager.cpp \
 ../../lost/platform/Platform.cpp \
 ../../lost/platform/Platform_Linux.cpp \
+../../lost/resource/AndroidAssetRepository.cpp \
 ../../lost/resource/ApplicationResourceRepository.cpp \
 ../../lost/resource/DefaultLoader.cpp \
 ../../lost/resource/FilesystemRepository.cpp \
@@ -327,14 +329,13 @@ include $(BUILD_STATIC_LIBRARY)
 #
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := Launcher
-LOCAL_CXXFLAGS  := -includelost/prefix-debug.pch
-LOCAL_LDLIBS    := -llog -landroid -lEGL -lGLESv2
-LOCAL_STATIC_LIBRARIES  := android_native_app_glue LostEngine
+LOCAL_MODULE:= Launcher
+LOCAL_CXXFLAGS:= -includelost/prefix-debug.pch
+LOCAL_STATIC_LIBRARIES:= LostEngine android_native_app_glue
+LOCAL_LDLIBS:= -landroid -lEGL -lGLESv2
 LOCAL_C_INCLUDES:= $(LOCAL_PATH)/../../ $(LOCAL_PATH)/$(boost_path)
 LOCAL_SRC_FILES:= ../../main.cpp
 
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/native_app_glue)
-

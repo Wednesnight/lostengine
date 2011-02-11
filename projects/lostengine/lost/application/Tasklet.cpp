@@ -110,7 +110,13 @@ namespace lost
         WOUT("couldn't initialize fonts, reason: "+ string(ex.what()));
       }
 
-      configLoaded = config.load(lua, loader);
+      try {
+        configLoaded = config.load(lua, loader);
+      }
+      catch (std::exception& ex) {
+        WOUT("couldn't load script 'config.lua', reason: "+ string(ex.what()));
+      }
+
       name = config.taskletName;
       waitForEvents = config.taskletWaitForEvents;
       // try to load the main script and memorize result in a flag
