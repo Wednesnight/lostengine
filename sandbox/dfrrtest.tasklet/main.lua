@@ -175,16 +175,22 @@ function startup()
     }
   }
   
---  lost.guiro.ui():printSubviews()
   lost.guiro.ui().layer:addSublayer(bg)
   lost.guiro.ui().layer:addSublayer(l)
   lost.guiro.ui()("main")("view")("view")("corners")("view")("bl"):pushed(l:blround())
   lost.guiro.ui()("main")("view")("view")("corners")("view")("br"):pushed(l:brround())
   lost.guiro.ui()("main")("view")("view")("corners")("view")("tl"):pushed(l:tlround())
   lost.guiro.ui()("main")("view")("view")("corners")("view")("tr"):pushed(l:trround())
+
+
+  lost.guiro.ui()("main")("view")("view")("sides")("view")("top"):pushed(l:blround())
+  lost.guiro.ui()("main")("view")("view")("sides")("view")("bottom"):pushed(l:brround())
+  lost.guiro.ui()("main")("view")("view")("sides")("view")("left"):pushed(l:tlround())
+  lost.guiro.ui()("main")("view")("view")("sides")("view")("right"):pushed(l:trround())
 end
 
 function update()
+--  lost.guiro.ui()("main")("view")("view")("sides"):printSubviews()
 end
 
 function key(event)
