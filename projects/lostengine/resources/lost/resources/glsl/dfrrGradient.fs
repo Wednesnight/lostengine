@@ -13,6 +13,10 @@ uniform float filled;
 
 #include "lost/resources/glsl/dfrr.fsp"
 
+uniform sampler2D texture0;
+uniform float gradientCoord;
+#import "lost/resources/glsl/gradient.fsp"
+
 // returns the current fragments pixel coord in quad space
 // i.e. with origin of quad = 0,0, ranged 0-(max-1)
 vec2 localPixelCoord() 
@@ -36,5 +40,5 @@ void main(void)
 
   float f = hyperRoundedRectFrame(lp, filled, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
 
-  gl_FragColor = color*f;
+  gl_FragColor = color*f*gradient(tc0, gradientCoord, texture0);
 }

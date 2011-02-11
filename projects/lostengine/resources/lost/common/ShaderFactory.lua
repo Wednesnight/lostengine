@@ -33,6 +33,7 @@ function ShaderFactory:rectFrameGradient() return self:loadShader("lost/resource
 function ShaderFactory:iqrr() return self:loadShader("lost/resources/glsl/iqrr") end
 function ShaderFactory:iqrrf() return self:loadShader("lost/resources/glsl/iqrrf") end
 function ShaderFactory:dfrr() return self:loadShader("lost/resources/glsl/dfrr") end
+function ShaderFactory:dfrrGradient() return self:loadShader("lost/resources/glsl/dfrrGradient") end
 function ShaderFactory:color()
   local result = nil
   if lost.platform.isIPhone() then
