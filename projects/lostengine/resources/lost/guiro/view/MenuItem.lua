@@ -105,10 +105,14 @@ function MenuItem:updateTextWidth()
   self.textWidth = m.size.width  
 end
 
-function MenuItem:title(v)
-  self.textLayer:text(v)
-  self:updateTextWidth()
-  self:updateContentWidth()
+function MenuItem:title(...)
+  if arg.n >= 1 then
+    self.textLayer:text(arg[1])
+    self:updateTextWidth()
+    self:updateContentWidth()
+  else
+    return self.textLayer:text()
+  end
 end
 
 function MenuItem:checked(...)

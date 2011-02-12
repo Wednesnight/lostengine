@@ -1275,5 +1275,7 @@ function Pebble:popUpButtonCandy(target, args)
   target.backgrounds[b.STATE_NORMAL2] = normal2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
+  target.menuTheme = "pebble"
+  target.menuStyle = "roundrect"
 end
 
