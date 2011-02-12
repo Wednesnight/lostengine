@@ -4,6 +4,7 @@ return
     {
       title="File", 
       menu={ -- menu constructor 
+        id="m1",
         items=
         {
           {title="m1 First"},
@@ -17,6 +18,7 @@ return
     {
       title="Edit", 
       menu={
+        id="m2",
         items=
         {
           {
@@ -66,6 +68,7 @@ return
     {
       title="Long Menu Name", 
       menu={
+        id="m3",
         items=
         {
           {title="m3 First"},
@@ -83,6 +86,7 @@ return
     {
       title="Short Again", 
       menu={
+        id="m4",        
         items=
         {
           {title="m4 First"},

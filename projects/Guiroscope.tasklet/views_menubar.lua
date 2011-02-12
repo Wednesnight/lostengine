@@ -13,7 +13,13 @@ local function checkFunction(event)
     log.debug(v)
   end
   -- target can be a popupbutton so we need to check
-  if event.target.menuItemForIndexPath then
+  local id = event.target.id
+  log.debug("id of sending menu == '"..id.."'")
+  local menuOk = false
+  if id=="m1" or id=="m2" or id=="m3" or id=="m4" then
+    menuOk = true
+  end
+  if menuOk then
     local mi = event.target:menuItemForIndexPath(event.indexPath)
     mi:checked(not mi:checked())
   end
