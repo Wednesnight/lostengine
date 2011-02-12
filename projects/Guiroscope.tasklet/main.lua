@@ -1,3 +1,4 @@
+--require("lost.common.Profiler")
 
 function focusHandler(event)
   log.debug(event.type.." "..event.target.id)
@@ -8,6 +9,9 @@ function mouseDownHandler(event)
 end
 
 function startup()
+--  local p = lost.common.Profiler()
+--  p:enable()
+  local st = lost.platform.currentTimeSeconds()
   require("lost.guiro")
   tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
@@ -26,7 +30,12 @@ function startup()
 --      bounds={"right","bottom",140,70}
 --    }
   }
-  
+
+  local et = lost.platform.currentTimeSeconds()
+  log.debug("startup in "..tostring(et-st).." seconds")
+
+--  p:disable()
+--  p:report()
 --  lost.guiro.ui():addEventListener("mouseDown", mouseDownHandler)
 --  lost.guiro.ui():addEventListener("focusReceived", focusHandler)
 --  lost.guiro.ui():addEventListener("focusLost", focusHandler)
