@@ -3,16 +3,16 @@ module("lost.guiro.view", package.seeall)
 lost.common.Class "lost.guiro.view.PopUpButton" "lost.guiro.view.Button" {}
 
 -- must be set from style:
--- * menuTheme
--- * menuStyle
+-- * menuStyleParams
 function PopUpButton:constructor(args)
   lost.guiro.view.Button.constructor(self, args)
   local t = args or {}
   self.id = t.id or "popupbutton"
-  local ms = {}
-  ms.theme = self.menuTheme
-  ms.style = self.menuStyle
-  local incoming = t.menu or {}
+  local ms = {} -- this will be the menu style for construction
+  for k,v in pairs(self.menuStyleParams) do -- copy over params that were given by PopUpButton style
+    ms[k] = v
+  end
+  local incoming = t.menu or {} -- find the incoming menu definition that should at lesast contain items, but can overwrite other params
   for k,v in pairs(incoming) do 
     ms[k] = v
   end

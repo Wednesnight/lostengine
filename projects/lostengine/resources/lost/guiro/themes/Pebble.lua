@@ -197,6 +197,42 @@ function Pebble:constructor()
       menuRightMargin = 4,
     }
   }
+  
+  self.popUpButtonParams=
+  {
+    candy=
+    {
+      regular=
+      {
+        font={"Vera", 12},
+        height=20,
+        radius=2,
+      },
+      small=
+      {
+        
+      },
+      mini=
+      {
+        
+      }
+    },
+    round=
+    {
+      regular=
+      {
+      
+      },
+      small=
+      {
+      
+      },
+      mini=
+      {
+      
+      }
+    }
+  }
 end
 
 function Pebble:labelDefault(target, args)
@@ -1246,13 +1282,13 @@ function Pebble:popUpButtonRound(target, args)
 end
 
 function Pebble:popUpButtonCandy(target, args)
-  local l = lost.guiro.layer.Layer
   local size = args.size or "regular"
+  local params = self.popUpButtonParams.candy[size]
+  local l = lost.guiro.layer.Layer
   local b = lost.guiro.view.Button
-  local size = args.size or "small"
   target:mode("toggleOnce")
-  target._bounds.height = lost.guiro.Bounds.decodeEntry(4,self.buttonRoundedHeight[size])
-  local r = self.buttonRoundedHeight[size]/2 -- rounded rect radius
+  target:height(params.height)
+  local r = params.radius
   local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",filled=true,radius=r},
                               rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r}}
                              }
@@ -1264,7 +1300,7 @@ function Pebble:popUpButtonCandy(target, args)
                                rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r}}
                               }
 
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=self.buttonRoundedFonts[size],color=Color(0,0,0)}
+  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=params.font,color=Color(0,0,0)}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
@@ -1275,7 +1311,6 @@ function Pebble:popUpButtonCandy(target, args)
   target.backgrounds[b.STATE_NORMAL2] = normal2
   target.titleColors[b.STATE_NORMAL] = Color(0,0,0)
   target.titleColors[b.STATE_DISABLED] = Color(.8,.8,.8)  
-  target.menuTheme = "pebble"
-  target.menuStyle = "roundrect"
+  target.menuStyleParams = {theme="pebble", style="roundrect", size=size}
 end
 
