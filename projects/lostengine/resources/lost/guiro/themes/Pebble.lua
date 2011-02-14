@@ -207,18 +207,27 @@ function Pebble:constructor()
         font={"Vera", 12},
         height=22,
         radius=3,
+        rightSectionWidth = 21,
+        imageSize = {10,13},
+        imageOffset={0,1},
       },
       small=
       {
         font={"Vera", 10},
         height=18,
         radius=3,
+        rightSectionWidth = 18,
+        imageSize = {10,13},
+        imageOffset={0,1},
       },
       mini=
       {
         font={"Vera", 9},
         height=15,
         radius=3,
+        rightSectionWidth = 14,
+        imageSize = {9,12},
+        imageOffset={0,1},
       }
     },
     round=
@@ -707,6 +716,17 @@ function Pebble:submenuarrowTexture()
     self._submenuarrowTexture = lost.gl.Texture.create(bmp, params)
   end
   return self._submenuarrowTexture
+end
+
+function Pebble:popuparrowTexture()
+  if not self._popuparrowTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/popupArrows.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._popuparrowTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._popuparrowTexture
 end
 
 
@@ -1289,22 +1309,39 @@ function Pebble:popUpButtonCandy(target, args)
   local size = args.size or "regular"
   local params = self.popUpButtonParams.candy[size]
   local l = lost.guiro.layer.Layer
+  local i = lost.guiro.layer.Image
   local b = lost.guiro.view.Button
   target:mode("toggleOnce")
   target:height(params.height)
   local r = params.radius
-  local normal = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",filled=true,radius=r},
-                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r}}
-                             }
+  local imageSize = self.popUpButtonParams.candy[size].imageSize
+  local imageOffset = self.popUpButtonParams.candy[size].imageOffset
+  local rightWidth = self.popUpButtonParams.candy[size].rightSectionWidth
+  local d = (rightWidth-imageSize[2])/2
+  local imageBounds = {{"right",imageOffset[1]-d},
+                       {"center",imageOffset[2]},
+                       imageSize[1],imageSize[2]}
+  log.debug("imagesize "..tostring(imageSize[1]).." "..tostring(imageSize[2]))
+  local normal = l{sublayers={rr{bounds={0,0,{"1",-rightWidth},"1"},gradient="candyGray",filled=true,radius=r,sides={right=false}},
+                              rr{bounds={0,0,{"1",-rightWidth},"1"},gradient="candyGrayFrame",filled=false,radius=r,sides={right=false}},
+                              rr{bounds={"right",0,rightWidth,"1"},gradient="candyBlue",filled=true,radius=r,sides={left=false}},
+                              rr{bounds={"right",0,rightWidth,"1"},gradient="candyBlueFrame",filled=false,radius=r,roundCorners={tl=false, bl=false}},
+                              i{bounds=imageBounds, texture=self:popuparrowTexture(), color=Color(0,0,0),scale="aspect",filter=true},
+                              }
+                            }
   local pushed = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyGray",color=Color(.9,.9,.9),filled=true,radius=r},
-                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r}}
+                              rr{bounds={0,0,"1","1"},gradient="candyGrayFrame",filled=false,radius=r},
+                              i{bounds=imageBounds, texture=self:popuparrowTexture(), color=Color(0,0,0),scale="aspect",filter=true},
+                            }
                              }
 
   local normal2 = l{sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=r},
-                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r}}
+                               rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=r},
+                               i{bounds=imageBounds, texture=self:popuparrowTexture(), color=Color(0,0,0),scale="aspect",filter=true},
+                             }
                               }
 
-  local text = lost.guiro.layer.Text{bounds={0,0,"1","1"},font=params.font,color=Color(0,0,0)}
+  local text = lost.guiro.layer.Text{bounds={0,0,{"1",-rightWidth},"1"},font=params.font,color=Color(0,0,0),clip=true}
   target.layer:addSublayer(normal)
   target.layer:addSublayer(pushed)
   target.layer:addSublayer(normal2)
