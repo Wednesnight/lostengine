@@ -85,7 +85,6 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Menu", "roundrect", function(target, args) self:menuRoundRect(target, args) end)
   self:addStyle("lost.guiro.view.MenuItem", "default", function(target, args) self:menuItem(target, args) end)
 
-  self:addStyle("lost.guiro.view.PopUpButton", "round", function(target, args) self:popUpButtonRound(target, args) end)
   self:addStyle("lost.guiro.view.PopUpButton", "candy", function(target, args) self:popUpButtonCandy(target, args) end)
   self:addStyle("lost.guiro.view.PopUpButton", "default", function(target, args) self:popUpButtonCandy(target, args) end)
 
@@ -209,7 +208,7 @@ function Pebble:constructor()
         radius=3,
         rightSectionWidth = 21,
         imageSize = {10,13},
-        imageOffset={0,1},
+        imageOffset={-1,1},
       },
       small=
       {
@@ -218,7 +217,7 @@ function Pebble:constructor()
         radius=3,
         rightSectionWidth = 18,
         imageSize = {10,13},
-        imageOffset={0,1},
+        imageOffset={-1,1},
       },
       mini=
       {
@@ -227,24 +226,9 @@ function Pebble:constructor()
         radius=3,
         rightSectionWidth = 14,
         imageSize = {9,12},
-        imageOffset={0,1},
+        imageOffset={-1,1},
       }
     },
-    round=
-    {
-      regular=
-      {
-      
-      },
-      small=
-      {
-      
-      },
-      mini=
-      {
-      
-      }
-    }
   }
 end
 
@@ -1298,11 +1282,6 @@ function Pebble:menuItem(target, args)
   tl:width({"1",-(target.checkmarkWidth+target.submenuWidth+target.checkmarkTextDistance+target.textSubmenuDistance)})
   submenu:x("right")
   submenu:size(target.submenuWidth, target.submenuWidth)
-end
-
-function Pebble:popUpButtonRound(target, args)
-  local size = args.size or "regular"
-  target:mode("toggleOnce")
 end
 
 function Pebble:popUpButtonCandy(target, args)

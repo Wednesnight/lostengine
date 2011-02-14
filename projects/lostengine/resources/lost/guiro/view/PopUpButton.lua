@@ -18,6 +18,7 @@ function PopUpButton:constructor(args)
   end
   self.menu = lost.guiro.view.Menu(ms)
   self:addEventListener("buttonClick", function(event) self:buttonClick(event) end)
+  if t.selected then self:select(t.selected) end
 end
 
 function PopUpButton:items(it)
@@ -31,12 +32,25 @@ function PopUpButton:buttonClick(event)
   self.menu:open()
 end
 
+function PopUpButton:select(indexPath)
+  local mi = self.menu:menuItemForIndexPath(indexPath)
+  if self.currentMenuItem ~= nil then
+    self.currentMenuItem:checked(false)
+  end
+  if mi ~= nil then
+    self:title(mi:title())
+    mi:checked(true)
+  else
+    self:title("")
+  end
+  self.currentMenuItem = mi
+end
+
 -- Menu delegate methods
 
 function PopUpButton:menuItemSelected(menu, indexPath)
   self.menu:close()
-  local mi = self.menu:menuItemForIndexPath(indexPath)
-  self:title(mi:title())
+  self:select(indexPath)
   self:pushed(false)
 
   local event = lost.guiro.event.Event("menuItemSelected")
