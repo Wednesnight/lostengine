@@ -205,16 +205,20 @@ function Pebble:constructor()
       regular=
       {
         font={"Vera", 12},
-        height=20,
-        radius=2,
+        height=22,
+        radius=3,
       },
       small=
       {
-        
+        font={"Vera", 10},
+        height=18,
+        radius=3,
       },
       mini=
       {
-        
+        font={"Vera", 9},
+        height=15,
+        radius=3,
       }
     },
     round=

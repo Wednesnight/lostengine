@@ -2,26 +2,16 @@ local Color = lost.common.Color
 
 return lost.guiro.view.View
 {
+  listeners=
+  {
+    menuItemSelected=function(event)  end
+  },
+  layout=lost.guiro.layout.Vertical{valign="center", halign="center",spacing=10},
   subviews=
   {
-    lost.guiro.view.PopUpButton
-    {
-      listeners=
-      {
-        menuItemSelected=function(event) log.debug("mi selected") end
-      },
-      bounds={"center","center",100,30},
-      title = "Colors",
-      menu={
-        items=
-        {
-          {title="m1 First"},
-          {title="m1 Second"},
-          "-",
-          {title="m1 Third"},              
-          {title="m1 Fourth"},              
-        }
-      },
-    }
+    lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="regular",title = "Regular",menu=require("pubmenu1")},
+    lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="small",title = "Small",menu=require("pubmenu1")},
+    lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="mini",title = "Mini",menu=require("pubmenu1")},
+    lost.guiro.view.Button{bounds={0,0,100,20},style="rounded"}
   }
 }
