@@ -22,6 +22,8 @@ return lost.guiro.view.View
              {"TextInput",require("views_textinput")},
              {"MenuBar",require("views_menubar")},             
              {"PopUpButton",require("views_popupbutton")},             
+             {"ScrollBar",require("views_scrollbar")},             
+             {"ScrollView",require("views_scrollview")},             
              },
     }
   }
