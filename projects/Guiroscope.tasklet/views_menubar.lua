@@ -1,20 +1,10 @@
---[[lost.guiro.ui():addEventListener("menuItemSelected",function(event) 
-      log.debug(event.type.." "..event.target.id)
-      for k,v in ipairs(event.indexPath) do
-        log.debug(v)
-      end
-      local mi = event.target:menuItemForIndexPath(event.indexPath)
-      mi:checked(not mi:checked())
-    end
-    )]]
-
 local function checkFunction(event) 
   for k,v in ipairs(event.indexPath) do
     log.debug(v)
   end
   -- target can be a popupbutton so we need to check
   local id = event.target.id
-  log.debug("id of sending menu == '"..id.."'")
+--  log.debug("id of sending menu == '"..id.."'")
   local menuOk = false
   if id=="m1" or id=="m2" or id=="m3" or id=="m4" then
     menuOk = true
