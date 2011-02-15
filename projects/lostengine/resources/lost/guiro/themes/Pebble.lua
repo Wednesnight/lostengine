@@ -88,6 +88,8 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.PopUpButton", "candy", function(target, args) self:popUpButtonCandy(target, args) end)
   self:addStyle("lost.guiro.view.PopUpButton", "default", function(target, args) self:popUpButtonCandy(target, args) end)
 
+  self:addStyle("lost.guiro.view.ScrollBar", "default", function(target, args) self:scrollBar(target, args) end)
+
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
@@ -1334,3 +1336,6 @@ function Pebble:popUpButtonCandy(target, args)
   target.menuStyleParams = {theme="pebble", style="roundrect", size=size}
 end
 
+function Pebble:scrollBar(target, args)
+  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+end
