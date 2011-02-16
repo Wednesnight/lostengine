@@ -44,13 +44,13 @@ function Rect:constructor(args)
 
   if self.filled then
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():rectGradient()
+      self.mesh.material.shader = lost.guiro.shaderFactory():rectGradientV()
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():rect()
     end
   else
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradient()    
+      self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradientV()    
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():rectFrame()    
     end

@@ -40,5 +40,5 @@ void main(void)
 
   float f = hyperRoundedRectFrame(lp, filled, width, pos, rrsize, quarterSize, radius, blrect, brrect, tlrect, trrect);
 
-  gl_FragColor = color*f*gradient(tc0, gradientCoord, texture0);
+  gl_FragColor = color*f*gradientV(tc0, gradientCoord, texture0);
 }

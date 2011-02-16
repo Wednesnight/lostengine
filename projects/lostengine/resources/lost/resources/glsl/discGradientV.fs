@@ -16,5 +16,5 @@ vec2 localPixelCoord()
 
 void main(void)
 {  
-  gl_FragColor = color*disc(localPixelCoord(), center, radius)*gradient(tc0, gradientCoord, texture0);    
+  gl_FragColor = color*disc(localPixelCoord(), center, radius)*gradientV(tc0, gradientCoord, texture0);    
 }

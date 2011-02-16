@@ -32,7 +32,7 @@ function RoundedRect:constructor(args)
   end
   
   if hasGradient then
-    self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradient()
+    self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradientV()
   else
     self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
   end
