@@ -49,7 +49,7 @@ return lost.guiro.view.View
           lost.guiro.layer.Disc{bounds={0,0,20,20},color=Color(1,1,1),filled=true,gradient="candyBlue"},
           lost.guiro.layer.Disc{bounds={0,0,50,50},color=Color(1,1,1),filled=true,gradient="candyBlue"},
           lost.guiro.layer.Disc{bounds={0,0,100,100},color=Color(1,1,1),filled=true,gradient="candyBlue"},
-          lost.guiro.layer.Disc{bounds={0,0,150,150},color=Color(1,1,1),filled=true,gradient="candyBlue"},
+          lost.guiro.layer.Disc{bounds={0,0,150,150},color=Color(1,1,1),filled=true,gradient="candyBlue",gradientVertical=false},
           }
         },        
         lost.guiro.layer.Layer
@@ -61,7 +61,7 @@ return lost.guiro.view.View
           lost.guiro.layer.Disc{bounds={0,0,20,20},color=Color(1,1,1),filled=false,width=2,gradient="candyBlueFrame"},
           lost.guiro.layer.Disc{bounds={0,0,50,50},color=Color(1,1,1),filled=false,width=3,gradient="candyBlueFrame"},
           lost.guiro.layer.Disc{bounds={0,0,100,100},color=Color(1,1,1),filled=false,width=4,gradient="candyBlueFrame"},
-          lost.guiro.layer.Disc{bounds={0,0,150,150},color=Color(1,1,1),filled=false,width=5,gradient="candyBlueFrame"},
+          lost.guiro.layer.Disc{bounds={0,0,150,150},color=Color(1,1,1),filled=false,width=5,gradient="candyBlueFrame",gradientVertical=false},
           }
         },
       }

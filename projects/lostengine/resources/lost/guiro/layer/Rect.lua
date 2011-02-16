@@ -35,6 +35,12 @@ function Rect:constructor(args)
     end
   end
 
+  if t.gradientVertical ~= nil then 
+    self.gradientVertical = t.gradientVertical
+  else
+    self.gradientVertical = true
+  end
+
   if t.gradient ~= nil then
     self.gradientName = t.gradient
   end
@@ -44,13 +50,21 @@ function Rect:constructor(args)
 
   if self.filled then
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():rectGradientV()
+      if self.gradientVertical then 
+        self.mesh.material.shader = lost.guiro.shaderFactory():rectGradientV()
+      else
+        self.mesh.material.shader = lost.guiro.shaderFactory():rectGradientH()
+      end
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():rect()
     end
   else
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradientV()    
+      if self.gradientVertical then 
+        self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradientV()    
+      else
+        self.mesh.material.shader = lost.guiro.shaderFactory():rectFrameGradientH()    
+      end
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():rectFrame()    
     end
