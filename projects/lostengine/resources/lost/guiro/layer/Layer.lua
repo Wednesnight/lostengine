@@ -157,7 +157,7 @@ function Layer:print(prefix)
   if not prefix then
     prefix = ""
   end
-  log.debug(prefix .."|--("..self.z..") ".. self.id)
+  log.debug(prefix .."|--("..self.z..") ".. self.id.." "..tostring(self.rect))
   for k,view in pairs(self.sublayers) do
     view:print(prefix .."    ")
   end
