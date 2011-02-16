@@ -64,3 +64,9 @@ function PopUpButton:menuExternalCloseRequest(menu, event)
   self.menu:close()
   self:pushed(false)
 end
+
+function PopUpButton:updateRect()
+  lost.guiro.view.View.updateRect(self)
+  self.menu:minWidth(self.rect.width)
+end
+

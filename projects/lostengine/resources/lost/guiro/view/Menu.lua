@@ -16,6 +16,7 @@ local Color = lost.common.Color
 -- * rightMargin
 -- * topMargin
 -- * bottomMargin
+-- * minWidth
 -- * separatorHeight
 -- * createSeparatorLayerFunc
 -- * highlightLayer
@@ -30,6 +31,7 @@ function Menu:constructor(args)
   self.rightMargin = t.rightMargin or 0
   self.topMargin = t.topMargin or 0
   self.bottomMargin = t.bottomMargin or 0
+  self._minWidth = t.minWidth or 0
   self.createSeparatorLayerFunc = t.createSeparatorLayerFunc or function() return lost.guiro.layer.Rect{bounds={0,0,"1",2},color=Color(0,0,0)} end
   self.separatorHeight = t.separatorHeight or 2
   lost.guiro.view.Window.constructor(self, args)
@@ -240,5 +242,15 @@ function Menu:menuItemForIndexPath(indexPath)
     currentMenu = result:menu()
   end
   return result
+end
+
+function Menu:minWidth(w)
+  self._minWidth = w
+  self:needsLayout()
+end
+
+function Menu:updateRect()
+  lost.guiro.view.View.updateRect(self)
+  self.rect.width = math.max(self._minWidth, self.rect.width)
 end
 
