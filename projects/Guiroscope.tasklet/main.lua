@@ -23,7 +23,8 @@ function startup()
       size="regular",
       items={{"Layers",require("layers")},
              {"Views",require("views")},
-             {"Animations",require("animations")}}
+             {"Animations",require("animations")},
+             {"Playground",require("playground")}}
     },
 --    lost.guiro.view.FpsMeter
 --    {
