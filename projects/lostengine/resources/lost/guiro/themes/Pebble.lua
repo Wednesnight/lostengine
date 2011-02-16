@@ -981,7 +981,6 @@ function Pebble:sliderCandy(target,args)
 
   local ts = self.sliderCandyTrackSize[sz]
   local hs = self.sliderCandyHandleSize[sz]
-  target.handleSize=hs
   local trackRadius = 2
   local dc = .7
   local dimColor = Color(dc, dc, dc)
@@ -1023,6 +1022,7 @@ function Pebble:sliderCandy(target,args)
   target.handleReleasedLayer = handleReleased
   target.layer:addSublayer(handlePushed)
   target.handlePushedLayer = handlePushed
+  target:handleSize(hs)  
 end
 
 function Pebble:colorPicker(target, args)
@@ -1337,5 +1337,56 @@ function Pebble:popUpButtonCandy(target, args)
 end
 
 function Pebble:scrollBar(target, args)
-  target.layer:addSublayer(lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,0,0),filled=true})
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+
+  local sz = args.size or "regular"
+
+  target.mode = args.mode or "horizontal"
+
+  local ts = self.sliderCandyTrackSize[sz]
+  local hs = self.sliderCandyHandleSize[sz]
+  local trackRadius = 2
+  local dc = .7
+  local dimColor = Color(dc, dc, dc)
+  local trackFillColor = Color(.4,.4,.4)
+  local trackFrameColor = Color(.1,.1,.1)
+  local hr = math.floor(hs/2)
+  local handleReleased = l{bounds={0,0,hs,hs},
+                           sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=hr},
+                                      rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=hr}}}
+
+  local handlePushed = l{bounds={0,0,hs,hs},
+                           sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlue",filled=true,radius=hr},
+                                      rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlueFrame",filled=false,radius=hr}}}
+  local tw = 0
+  local th = 0
+  if target.mode == "horizontal" then
+    tw="1"
+    th=ts
+  else
+    tw=ts
+    th="1"
+  end
+  local track = l{bounds={0,0,tw,th},
+                  sublayers={
+                    rr{filled=true,radius=trackRadius,color=trackFillColor},
+                  }}
+
+  if target.mode == "horizontal" then
+    track:y("center")
+    handleReleased:y("center")
+    handlePushed:y("center")
+  else
+    track:x("center")
+    handleReleased:x("center")
+    handlePushed:x("center")
+  end
+  target.layer:addSublayer(track)
+  target.layer:addSublayer(handleReleased)
+  target.handleReleasedLayer = handleReleased
+  target.layer:addSublayer(handlePushed)
+  target.handlePushedLayer = handlePushed
+  target:handleSize(hs)  
+  target:handleSize(hs*3)  
 end

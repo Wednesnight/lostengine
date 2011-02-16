@@ -33,10 +33,30 @@ function Slider:constructor(args)
 
   self.min = t.min or 0
   self.max = t.max or 1
-  self.handleMouseOffset = 0 -- x offset of the mosue within the slider handle
+  self.handleMouseOffset = 0 -- x offset of the mouse within the slider handle
   self.handlePos = 0 -- handle x position within the slider view
   self:value(self.min)
   self.dragInProgress = false
+end
+
+function Slider:updateHandleLayerSizes()
+  if self.mode == "horizontal" then
+    self.handlePushedLayer:width(self._handleSize)
+    self.handleReleasedLayer:width(self._handleSize)
+  else
+    self.handlePushedLayer:height(self._handleSize)
+    self.handleReleasedLayer:height(self._handleSize)
+  end
+end
+
+function Slider:handleSize(...)
+  if arg.n >= 1 then
+    self._handleSize = arg[1]
+    self:updateHandleLayerSizes()
+    self:needsLayout()
+  else
+    return self._handleSize
+  end
 end
 
 -- sets current value, updates handle position accordingly
@@ -57,7 +77,7 @@ end
 function Slider:updateLayout()
   lost.guiro.view.View.updateLayout(self)
   self:updateHandlePosFromValue()
-  self:updateLayerPosFromHandlePos()  
+  self:updateLayerPosFromHandlePos()    
 end
 
 function Slider:mousePos(pos)
@@ -78,9 +98,9 @@ end
 
 function Slider:upperHandleBound()
   if self.mode == "horizontal" then
-    return self.handlePos + self.handleSize + self.rect.x
+    return self.handlePos + self._handleSize + self.rect.x
   else
-    return self.handlePos + self.handleSize + self.rect.y
+    return self.handlePos + self._handleSize + self.rect.y
   end
 end
 
@@ -94,17 +114,17 @@ end
 
 function Slider:upperHandleRangeBound()
   if self.mode == "horizontal" then
-    return self.rect.width-self.handleSize
+    return self.rect.width-self._handleSize
   else
-    return self.rect.height-self.handleSize
+    return self.rect.height-self._handleSize
   end
 end
 
 function Slider:range()
   if self.mode == "horizontal" then
-    return self.rect.width - self.handleSize
+    return self.rect.width - self._handleSize
   else
-    return self.rect.height - self.handleSize
+    return self.rect.height - self._handleSize
   end
 end
 
@@ -116,7 +136,7 @@ function Slider:initHandleMouseOffset(currentGlobalPos)
     self.handleMouseOffset = currentGlobalPos - self:rectMinPos() - self.handlePos
   else
     -- mouse click was on track, so we set the offset to center of the handle
-    self.handleMouseOffset = self.handleSize / 2
+    self.handleMouseOffset = self._handleSize / 2
   end  
 end
 
