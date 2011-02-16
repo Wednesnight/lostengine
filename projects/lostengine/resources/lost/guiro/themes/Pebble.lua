@@ -69,6 +69,7 @@ function Pebble:constructor()
 
   self:addStyle("lost.guiro.view.Slider", "default", function(target, args) self:sliderCandy(target, args) end)
   self:addStyle("lost.guiro.view.Slider", "candy", function(target, args) self:sliderCandy(target, args) end)
+  self:addStyle("lost.guiro.view.Slider", "scrollbar", function(target, args) self:sliderScrollBar(target, args) end)
 
   self:addStyle("lost.guiro.view.ColorPicker", "default", function(target, args) self:colorPicker(target, args) end)
   self:addStyle("lost.guiro.view.ColorPickerWindow", "default", function(target, args) self:colorPickerWindow(target, args) end)
@@ -1336,15 +1337,12 @@ function Pebble:popUpButtonCandy(target, args)
   target.menuStyleParams = {theme="pebble", style="roundrect", size=size}
 end
 
-function Pebble:scrollBar(target, args)
+function Pebble:sliderScrollBar(target, args)
   local l = lost.guiro.layer.Layer
   local rr = lost.guiro.layer.RoundedRect
-
   local sz = args.size or "regular"
-
   target.mode = args.mode or "horizontal"
 
-  local ts = self.sliderCandyTrackSize[sz]
   local hs = self.sliderCandyHandleSize[sz]
   local trackRadius = 2
   local dc = .7
@@ -1369,30 +1367,14 @@ function Pebble:scrollBar(target, args)
   local handlePushed = l{bounds={0,0,hs,hs},
                            sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient=grad,filled=true,radius=hr,gradientVertical=gv},
                                       rr{bounds={0,0,"1","1"},color=dimColor,gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
-  local tw = 0
-  local th = 0
   if target.mode == "horizontal" then
-    tw="1"
-    th=ts
-  else
-    tw=ts
-    th="1"
-  end
-  local track = l{bounds={0,0,tw,th},
-                  sublayers={
-                    rr{filled=true,radius=trackRadius,color=trackFillColor},
-                  }}
-
-  if target.mode == "horizontal" then
-    track:y("center")
     handleReleased:y("center")
     handlePushed:y("center")
   else
-    track:x("center")
     handleReleased:x("center")
     handlePushed:x("center")
   end
-  target.layer:addSublayer(track)
+  target.layer:addSublayer(lost.guiro.layer.Rect{filled=true, color=Color(1,0,0)})
   target.layer:addSublayer(handleReleased)
   target.handleReleasedLayer = handleReleased
   target.layer:addSublayer(handlePushed)
@@ -1400,3 +1382,26 @@ function Pebble:scrollBar(target, args)
   target:handleSize(hs)  
   target:handleSize(hs*3)  
 end
+
+function Pebble:buttonScrollbarDown(target, args)
+end
+
+function Pebble:scrollBar(target, args)
+  local buttonSize = 18
+  local sliderDelta = buttonSize*2
+  local sliderArgs = {}
+  sliderArgs.mode = args.mode
+  sliderArgs.style = "scrollbar"
+  
+  local slider = lost.guiro.view.Slider(sliderArgs)
+  target:addSubview(slider)
+  local sliderBounds = 0
+  if args.mode == "horizontal" then 
+    sliderBounds = lost.guiro.Bounds(0,0,{"1",-sliderDelta},"1")
+  else
+    sliderBounds = lost.guiro.Bounds(0,0,"1",{"1",-sliderDelta})
+  end
+  slider:bounds(sliderBounds)
+  target.slider = slider
+end
+
