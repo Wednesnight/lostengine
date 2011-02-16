@@ -10,7 +10,7 @@ return lost.guiro.view.View
   subviews=
   {
     lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="regular",title = "Regular",menu=require("pubmenu1"),selected={1}},
-    lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="small",title = "Small",menu=require("pubmenu1"),selected={2}},
-    lost.guiro.view.PopUpButton{bounds={0,0,100,30},size="mini",title = "Mini",menu=require("pubmenu1"),selected={3}},
+    lost.guiro.view.PopUpButton{bounds={0,0,75,30},size="small",title = "Small",menu=require("pubmenu1"),selected={2}},
+    lost.guiro.view.PopUpButton{bounds={0,0,50,30},size="mini",title = "Mini",menu=require("pubmenu1"),selected={3}},
   }
 }
