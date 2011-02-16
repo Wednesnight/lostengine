@@ -19,6 +19,12 @@ function RoundedRect:constructor(args)
   local radius = t.radius or 8
   local width = t.width or 1
 
+  if t.gradientVertical ~= nil then 
+    self.gradientVertical = t.gradientVertical
+  else
+    self.gradientVertical = true
+  end
+
   if t.gradient ~= nil then
     self.gradientName = t.gradient
   end
@@ -32,7 +38,11 @@ function RoundedRect:constructor(args)
   end
   
   if hasGradient then
-    self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradientV()
+    if self.gradientVertical then 
+      self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradientV()
+    else
+      self.mesh.material.shader = lost.guiro.shaderFactory():dfrrGradientH()
+    end
   else
     self.mesh.material.shader = lost.guiro.shaderFactory():dfrr()
   end

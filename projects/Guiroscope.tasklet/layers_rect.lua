@@ -52,8 +52,8 @@ return lost.guiro.view.View
             {
               lost.guiro.layer.Rect{bounds={0,0,20,20},color=Color(1,1,1),gradient="rrbg"},
               lost.guiro.layer.Rect{bounds={0,0,50,50},color=Color(1,1,1),gradient="rrbg2"},
-              lost.guiro.layer.Rect{bounds={0,0,70,70},color=Color(1,1,1),gradient="candyBlue"},
-              lost.guiro.layer.Rect{bounds={0,0,100,80},color=Color(1,1,1),gradient="candyGray"},
+              lost.guiro.layer.Rect{bounds={0,0,70,70},color=Color(1,1,1),gradient="candyBlue",gradientVertical=false},
+              lost.guiro.layer.Rect{bounds={0,0,100,80},color=Color(1,1,1),gradient="candyGray",gradientVertical=false},
             }
           },
           lost.guiro.layer.Layer
@@ -64,8 +64,8 @@ return lost.guiro.view.View
             {
               lost.guiro.layer.Rect{bounds={0,0,20,20},color=Color(1,1,1),filled=false,width=7, gradient="rrbg"},
               lost.guiro.layer.Rect{bounds={0,0,50,50},color=Color(1,1,1),filled=false,width=5,gradient="rrbg2"},
-              lost.guiro.layer.Rect{bounds={0,0,70,70},color=Color(1,1,1),filled=false,width=3,gradient="candyBlue"},
-              lost.guiro.layer.Rect{bounds={0,0,100,80},color=Color(1,1,1),filled=false,width=1,gradient="candyGray"},
+              lost.guiro.layer.Rect{bounds={0,0,70,70},color=Color(1,1,1),filled=false,width=3,gradient="candyBlue",gradientVertical=false},
+              lost.guiro.layer.Rect{bounds={0,0,100,80},color=Color(1,1,1),filled=false,width=1,gradient="candyGray",gradientVertical=false},
             }
           },
         }

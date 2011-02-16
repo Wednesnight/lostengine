@@ -1352,13 +1352,17 @@ function Pebble:scrollBar(target, args)
   local trackFillColor = Color(.4,.4,.4)
   local trackFrameColor = Color(.1,.1,.1)
   local hr = math.floor(hs/2)
+  local gv = true
+  if target.mode == "vertical" then
+    gv = false
+  end
   local handleReleased = l{bounds={0,0,hs,hs},
-                           sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=hr},
-                                      rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=hr}}}
+                           sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=hr,gradientVertical=gv},
+                                      rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=hr,gradientVertical=gv}}}
 
   local handlePushed = l{bounds={0,0,hs,hs},
-                           sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlue",filled=true,radius=hr},
-                                      rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlueFrame",filled=false,radius=hr}}}
+                           sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlue",filled=true,radius=hr,gradientVertical=gv},
+                                      rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlueFrame",filled=false,radius=hr,gradientVertical=gv}}}
   local tw = 0
   local th = 0
   if target.mode == "horizontal" then

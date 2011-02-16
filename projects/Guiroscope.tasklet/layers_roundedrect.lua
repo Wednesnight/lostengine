@@ -70,8 +70,8 @@ return lost.guiro.view.View
           bounds={0,0,"1",50},
           sublayers=
           {
-            lost.guiro.layer.RoundedRect{bounds={10,10,{"1",-20},"1"},radius=10, filled=true, color=Color(1,1,1),gradient="candyBlue",roundCorners={tl=true,tr=true,bl=true,br=true},sides={top=true,bottom=true,left=true,right=true},width=4},            
-            lost.guiro.layer.RoundedRect{bounds={10,10,{"1",-20},"1"},radius=10, filled=false, color=Color(1,1,1),gradient="candyBlueFrame",roundCorners={tl=true,tr=true,bl=true,br=true},sides={top=true,bottom=true,left=true,right=true},width=4},            
+            lost.guiro.layer.RoundedRect{bounds={10,10,{"1",-20},"1"},radius=10, filled=true, color=Color(1,1,1),gradient="candyBlue",roundCorners={tl=true,tr=true,bl=true,br=true},sides={top=true,bottom=true,left=true,right=true},width=4,gradientVertical=false},            
+            lost.guiro.layer.RoundedRect{bounds={10,10,{"1",-20},"1"},radius=10, filled=false, color=Color(1,1,1),gradient="candyBlueFrame",roundCorners={tl=true,tr=true,bl=true,br=true},sides={top=true,bottom=true,left=true,right=true},width=4,gradientVertical=false},            
           }
         },
         lost.guiro.layer.Layer{

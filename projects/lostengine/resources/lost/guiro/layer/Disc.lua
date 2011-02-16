@@ -36,6 +36,12 @@ function Disc:constructor(args)
     end
   end
 
+  if t.gradientVertical ~= nil then 
+    self.gradientVertical = t.gradientVertical
+  else
+    self.gradientVertical = true
+  end
+  
   if t.gradient ~= nil then
     self.gradientName = t.gradient
   end
@@ -45,13 +51,21 @@ function Disc:constructor(args)
 
   if self.filled then
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():discGradientV()
+      if self.gradientVertical then 
+        self.mesh.material.shader = lost.guiro.shaderFactory():discGradientV()
+      else
+        self.mesh.material.shader = lost.guiro.shaderFactory():discGradientH()
+      end
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():disc()
     end
   else
     if self.gradientName then
-      self.mesh.material.shader = lost.guiro.shaderFactory():ringGradientV()    
+      if self.gradientVertical then 
+        self.mesh.material.shader = lost.guiro.shaderFactory():ringGradientV()    
+      else
+        self.mesh.material.shader = lost.guiro.shaderFactory():ringGradientH()    
+      end
     else
       self.mesh.material.shader = lost.guiro.shaderFactory():ring()    
     end
