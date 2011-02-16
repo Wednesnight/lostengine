@@ -8,5 +8,5 @@ varying vec2 tc0;
 
 void main(void)
 {
-  gl_FragColor = color*gradient(tc0, gradientCoord, texture0);
+  gl_FragColor = color*gradientV(tc0, gradientCoord, texture0);
 }

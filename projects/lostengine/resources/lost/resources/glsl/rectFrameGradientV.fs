@@ -10,5 +10,5 @@ uniform float gradientCoord;
 
 void main(void)
 { 
-  gl_FragColor = color*rectFrame(tc0, size, width)*gradient(tc0, gradientCoord, texture0);
+  gl_FragColor = color*rectFrame(tc0, size, width)*gradientV(tc0, gradientCoord, texture0);
 }
