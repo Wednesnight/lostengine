@@ -1356,13 +1356,19 @@ function Pebble:scrollBar(target, args)
   if target.mode == "vertical" then
     gv = false
   end
+  local grad = "candyBlue"
+  local gradFrame = "candyBlueFrame"
+  if target.mode == "vertical" then
+    grad = "candyBlueMirrored"
+    gradFrame = "candyBlueFrameMirrored"    
+  end
   local handleReleased = l{bounds={0,0,hs,hs},
-                           sublayers={rr{bounds={0,0,"1","1"},gradient="candyBlue",filled=true,radius=hr,gradientVertical=gv},
-                                      rr{bounds={0,0,"1","1"},gradient="candyBlueFrame",filled=false,radius=hr,gradientVertical=gv}}}
+                           sublayers={rr{bounds={0,0,"1","1"},gradient=grad,filled=true,radius=hr,gradientVertical=gv},
+                                      rr{bounds={0,0,"1","1"},gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
 
   local handlePushed = l{bounds={0,0,hs,hs},
-                           sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlue",filled=true,radius=hr,gradientVertical=gv},
-                                      rr{bounds={0,0,"1","1"},color=dimColor,gradient="candyBlueFrame",filled=false,radius=hr,gradientVertical=gv}}}
+                           sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient=grad,filled=true,radius=hr,gradientVertical=gv},
+                                      rr{bounds={0,0,"1","1"},color=dimColor,gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
   local tw = 0
   local th = 0
   if target.mode == "horizontal" then
