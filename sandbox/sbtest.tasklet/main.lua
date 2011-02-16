@@ -1,17 +1,27 @@
+local scrollBarSize = 15
+local margin = 40
+
 function startup()
   require("lost/guiro")
   lost.guiro.ui():add
   {
     lost.guiro.view.View{style="gray"},
-    lost.guiro.view.ScrollBar
+    lost.guiro.view.View
     {
-      mode="vertical",
-      bounds={50,50,20,200},
-    },
-    lost.guiro.view.ScrollBar
-    {
-      mode="horizontal",
-      bounds={70,30,200,20},
+      bounds={"center","center",{"1",-margin},{"1",-margin}},
+      subviews=
+      {
+        lost.guiro.view.ScrollBar
+        {
+          mode="vertical",
+          bounds={"right",scrollBarSize,scrollBarSize,{"1",-scrollBarSize}},
+        },
+        lost.guiro.view.ScrollBar
+        {
+          mode="horizontal",
+          bounds={0,0,{"1",-scrollBarSize},scrollBarSize},
+        }
+      }
     }
   }
 end
