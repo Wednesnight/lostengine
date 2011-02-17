@@ -126,6 +126,10 @@ namespace lost
             .def_readwrite("character", &KeyEvent::character)
             .def_readwrite("pressed", &KeyEvent::pressed)
             .def_readwrite("repeat", &KeyEvent::repeat)
+            .def_readwrite("ctrlDown", &KeyEvent::ctrlDown)
+            .def_readwrite("shiftDown", &KeyEvent::shiftDown)
+            .def_readwrite("altDown", &KeyEvent::altDown)
+            .def_readwrite("specialDown", &KeyEvent::specialDown)
         ]
       ];
       globals(state)["lost"]["application"]["KeyEvent"]["KEY_UP"] = KeyEvent::KEY_UP();

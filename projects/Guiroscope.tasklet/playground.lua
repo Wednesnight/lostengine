@@ -12,7 +12,7 @@ return lost.guiro.view.View
         {
           id = "code",
           bounds = {"left", "top", {"1", -100}, "1"},
-          valign = "top",
+          multiLine = true,
           text = [[
             return lost.guiro.view.Button
             {
