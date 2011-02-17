@@ -21,12 +21,6 @@ function startup()
           mode="horizontal",
           bounds={0,0,{"1",-scrollBarSize},scrollBarSize},
         },
-        lost.guiro.view.Slider
-        {
-          bounds={0,100,100,20},
-          mode="horizontal",
-          style="scrollbar"
-        }
       }
     }
   }

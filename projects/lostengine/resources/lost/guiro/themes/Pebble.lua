@@ -1337,6 +1337,7 @@ function Pebble:popUpButtonCandy(target, args)
   target.menuStyleParams = {theme="pebble", style="roundrect", size=size}
 end
 
+-- handle size is different here, spans full "width" (relative) and varying "length"
 function Pebble:sliderScrollBar(target, args)
   local l = lost.guiro.layer.Layer
   local rr = lost.guiro.layer.RoundedRect
@@ -1349,7 +1350,7 @@ function Pebble:sliderScrollBar(target, args)
   local dimColor = Color(dc, dc, dc)
   local trackFillColor = Color(.4,.4,.4)
   local trackFrameColor = Color(.1,.1,.1)
-  local hr = math.floor(hs/2)
+  local hr = 4
   local gv = true
   if target.mode == "vertical" then
     gv = false
@@ -1360,11 +1361,11 @@ function Pebble:sliderScrollBar(target, args)
     grad = "candyBlueMirrored"
     gradFrame = "candyBlueFrameMirrored"    
   end
-  local handleReleased = l{bounds={0,0,hs,hs},
+  local handleReleased = l{bounds={0,0,"1","1"},
                            sublayers={rr{bounds={0,0,"1","1"},gradient=grad,filled=true,radius=hr,gradientVertical=gv},
                                       rr{bounds={0,0,"1","1"},gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
 
-  local handlePushed = l{bounds={0,0,hs,hs},
+  local handlePushed = l{bounds={0,0,"1","1"},
                            sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient=grad,filled=true,radius=hr,gradientVertical=gv},
                                       rr{bounds={0,0,"1","1"},color=dimColor,gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
   if target.mode == "horizontal" then
@@ -1380,7 +1381,6 @@ function Pebble:sliderScrollBar(target, args)
   target.layer:addSublayer(handlePushed)
   target.handlePushedLayer = handlePushed
   target:handleSize(hs)  
-  target:handleSize(hs*3)  
 end
 
 function Pebble:buttonScrollbarDown(target, args)
@@ -1403,5 +1403,6 @@ function Pebble:scrollBar(target, args)
   end
   slider:bounds(sliderBounds)
   target.slider = slider
+  slider:handleSize(30)
 end
 
