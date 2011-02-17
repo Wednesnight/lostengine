@@ -120,11 +120,6 @@ void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& 
         xoffset+=glyph->advance;
       }
     }
-    else
-    {
-      // push dummy rect for metrics if line is empty
-      if(characterMetrics) {target->pushCharacterRect(Rect(xoffset,yoffset,xoffset,font->lineHeight));}
-    }
     xoffset = 0;
     yoffset -= floorf(font->lineHeight);
     previousGlyphIndex = 0;

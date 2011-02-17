@@ -194,24 +194,18 @@ function Text:updateCursor()
     if self._cursorPos.x < 0 then self._cursorPos.x = 0 end
     if self._cursorPos.x > nc then self._cursorPos.x = nc end
 
-    local lh = self._font.lineHeight
+    local lh = math.floor(self._font.lineHeight)
     local x = 0
-    local y = (self.alignedMeshPos.y + self.rect.height) - (self._font.descender + self._cursorPos.y * lh)
+    local y = ((self.rect.height - (self._cursorPos.y+1)*lh) - (self.alignedMeshPos.y - self.rect.y)) - self._font.descender
     local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
 
     if nc == 0 then 
-      x = 0
+      x = self._halign
     elseif nc > 0 and self._cursorPos.x == nc then 
       r = self.mesh:characterRect(self._cursorPos.y, nc-1)
       x = r.x+self.alignedMeshPos.x-self.rect.x+r.width
     else 
       x = r.x + self.alignedMeshPos.x - self.rect.x
-    end
-
-    if pl == 0 then
-      y = 0
-    else
-      y = r.y + self._font.descender + self.alignedMeshPos.y - self.rect.y
     end
 
     if type(x) == "number" then
@@ -226,6 +220,10 @@ function Text:updateCursor()
         self._scrollOffset.x = x - (self.rect.width - b)
       end
       x = math.max(x - self._scrollOffset.x, 0)
+    end
+
+    if pl == 0 then
+      y = self._valign
     end
 
     if type(y) == "number" then
@@ -428,3 +426,32 @@ function Text:eraseAfterCursor()
     self:needsDisplay()
   end
 end
+
+function Text:moveCursor(windowCoords)
+  if windowCoords.x >= self.rect.x and windowCoords.x < self.rect.x + self.rect.width and
+     windowCoords.y >= self.rect.y and windowCoords.y < self.rect.y + self.rect.height
+  then
+    local x = math.floor((windowCoords.x - self.rect.x) - (self.alignedMeshPos.x - self.rect.x))
+    local y = math.floor((windowCoords.y - self.rect.y) - (self.alignedMeshPos.y - self.rect.y))
+    local pl = self.buffer:numPhysicalLines()
+    local lh = math.floor(self._font.lineHeight)
+    self._cursorPos.y = pl - math.ceil(y / lh)
+    if self._cursorPos.y >= pl then self._cursorPos.y = pl-1 end
+    if self._cursorPos.y < 0 then self._cursorPos.y = 0 end
+    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
+    self._cursorPos.x = nc
+    while self._cursorPos.x > 0 do
+      self._cursorPos.x = self._cursorPos.x - 1
+      local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
+      local rx = math.floor(r.x + (self.alignedMeshPos.x - self.rect.x))
+      if rx <= x then
+        if rx + r.width <= x then
+          self._cursorPos.x = self._cursorPos.x + 1
+        end
+        break
+      end
+    end
+    self:needsLayout()
+  end
+end
+
