@@ -20,6 +20,10 @@ function KeyEvent:constructor(laKeyEvent)
   self.key = self.lostAppKeyEvent.key
   self.character = self.lostAppKeyEvent.character
   self.pressed = self.lostAppKeyEvent.pressed
+  self.ctrlDown = self.lostAppKeyEvent.ctrlDown
+  self.shiftDown = self.lostAppKeyEvent.shiftDown
+  self.altDown = self.lostAppKeyEvent.altDown
+  self.specialDown = self.lostAppKeyEvent.specialDown
   self.repeat_ = self.lostAppKeyEvent.repeat_
   self.type = typeConvert[self.lostAppKeyEvent.type]
   self.stopDispatch = false
