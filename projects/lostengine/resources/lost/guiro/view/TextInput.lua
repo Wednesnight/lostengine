@@ -13,11 +13,26 @@ function TextInput:constructor(args)
   if args.font then self.textLayer:font(args.font) end
   self.textLayer:text(args.text or "")
   self:valign(args.valign or "center")
-  self:halign(args.halign or "left")  
+  self:halign(args.halign or "left")
+  self:lineBreak(args.lineBreak or "\n")  -- line breaks = \n
+  self:tabSize(args.tabSize or 4)         -- tab = 4 spaces
+  self:multiLine(args.multiLine or false)
   self:needsDisplay()
   self:needsLayout()
   self.textLayer:cursorPos(lost.math.Vec2(0,0))
   self.cursorLayer:hidden(true)
+end
+
+function TextInput:multiLine(v)
+  self._multiLine = v
+end
+
+function TextInput:lineBreak(v)
+  self._lineBreak = v
+end
+
+function TextInput:tabSize(v)
+  self._tabSize = v
 end
 
 function TextInput:valign(v)
@@ -49,21 +64,46 @@ end
 function TextInput:keyDown(event)
   if event.key == lost.application.K_RIGHT then self.textLayer:cursorIncX() 
   elseif event.key == lost.application.K_LEFT then self.textLayer:cursorDecX()
-  elseif event.key == lost.application.K_UP then 
-  elseif event.key == lost.application.K_DOWN then 
-  elseif event.key == lost.application.K_ENTER then self:dispatchInputEvent("enterPressed")
-  elseif event.key == lost.application.K_TAB then 
+  elseif self._multiLine and event.key == lost.application.K_UP then self.textLayer:cursorDecY()
+  elseif self._multiLine and event.key == lost.application.K_DOWN then self.textLayer:cursorIncY()
+  elseif event.key == lost.application.K_HOME then
+    if self._multiLine and event.ctrlDown or event.specialDown then
+      self.textLayer:cursorFirstY()
+      self.textLayer:cursorFirstX()
+    else
+      self.textLayer:cursorFirstX()
+    end
+  elseif event.key == lost.application.K_END then
+    if self._multiLine and event.ctrlDown or event.specialDown then
+      self.textLayer:cursorLastY()
+      self.textLayer:cursorLastX()
+    else
+      self.textLayer:cursorLastX()
+    end
+  elseif event.key == lost.application.K_ENTER then
+    if self._multiLine then
+      self.textLayer:insertAtCursor(self._lineBreak)
+      self:dispatchInputEvent("valueChanged")
+    else
+      self:dispatchInputEvent("enterPressed")
+    end
+  elseif event.key == lost.application.K_TAB then
+    local tab = ""
+    local tabSize = math.max(self._tabSize, 0)
+    for k = 1, tabSize do
+      tab = tab .." "
+    end
+    self.textLayer:insertAtCursor(tab)
+    self:dispatchInputEvent("valueChanged")
   elseif event.key == lost.application.K_ESCAPE then 
   elseif event.key == lost.application.K_BACKSPACE then 
     self.textLayer:eraseBeforeCursor()
-    self.textLayer:cursorDecX()
     self:dispatchInputEvent("valueChanged")
   elseif event.key == lost.application.K_DELETE then
     self.textLayer:eraseAfterCursor()
     self:dispatchInputEvent("valueChanged")
   elseif string.len(event.character) > 0 then
     self.textLayer:insertAtCursor(event.character)
-    self.textLayer:cursorIncX()
     self:dispatchInputEvent("valueChanged")
   end
 end

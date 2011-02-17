@@ -201,8 +201,12 @@
   if (parent)
   {
     lost::shared_ptr<lost::application::KeyEvent> keyEvent(new lost::application::KeyEvent(type));
-    keyEvent->window    = parent;
-    keyEvent->key       = [self translateKeyCode: [event keyCode]];
+    keyEvent->window      = parent;
+    keyEvent->key         = [self translateKeyCode: [event keyCode]];
+    keyEvent->ctrlDown    = ([event modifierFlags] & NSControlKeyMask) == NSControlKeyMask;
+    keyEvent->shiftDown   = ([event modifierFlags] & NSShiftKeyMask) == NSShiftKeyMask;
+    keyEvent->altDown     = ([event modifierFlags] & NSAlternateKeyMask) == NSAlternateKeyMask;
+    keyEvent->specialDown = ([event modifierFlags] & NSCommandKeyMask) == NSCommandKeyMask;
     // TODO: UTF character
     keyEvent->character = [[event characters] UTF8String];
     keyEvent->pressed   = pressed;

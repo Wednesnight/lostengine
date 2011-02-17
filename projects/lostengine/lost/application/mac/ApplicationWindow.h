@@ -18,6 +18,8 @@ namespace application
 
   bool leftButtonDown;
   bool rightButtonDown;
+
+  NSUInteger modifierFlags;
 }
 
 - (void)mouseEvent: (NSEvent*)event type:(const char*)type;

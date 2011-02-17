@@ -17,8 +17,22 @@ namespace lost
       std::string character; // FIXME: this will work for the moment, replace with more efficient type
       bool        pressed;
       bool        repeat;
+      bool        ctrlDown;
+      bool        shiftDown;
+      bool        altDown;
+      bool        specialDown;
 
-      KeyEvent(const event::Type inType) : InputEvent(inType), key(K_UNKNOWN), pressed(false), repeat(false) {}
+      KeyEvent(const event::Type inType)
+      : InputEvent(inType),
+        key(K_UNKNOWN),
+        pressed(false),
+        repeat(false),
+        ctrlDown(false),
+        shiftDown(false),
+        altDown(false),
+        specialDown(false)
+      {}
+
       virtual ~KeyEvent() {}
     };
 
