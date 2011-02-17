@@ -12,6 +12,7 @@ return lost.guiro.view.View
         {
           id = "code",
           bounds = {"left", "top", {"1", -100}, "1"},
+          font={"Vera mono", 10},
           multiLine = true,
           text = [[
             return lost.guiro.view.Button
@@ -31,7 +32,7 @@ return lost.guiro.view.View
         {
           id = "update",
           title = "Update",
-          bounds = {{"right", -5}, "top", 90, 200},
+          bounds = {{"right", -5}, "center", 90, 200},
           listeners =
           {
             buttonClick = function(event)
