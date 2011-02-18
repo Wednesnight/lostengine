@@ -29,6 +29,7 @@ function Editors.get(v, c)
 end
 
 Editors["lost.guiro.Bounds"] = function(v, c)
+
   local apply = function(e)
     local text = e.target:text()
     if string.len(text) > 0 then
@@ -45,9 +46,8 @@ Editors["lost.guiro.Bounds"] = function(v, c)
       end
 
       if value ~= nil then
-        v.values[tonumber(e.target.id)] = value
-        v.x,v.y,v.width,v.height = lost.guiro.Bounds.decode(v.values)
-        c(v)
+        v[tonumber(e.target.id)] = value
+        c(lost.guiro.Bounds(unpack(v)))
       end
     end
   end
@@ -84,7 +84,7 @@ Editors["lost.guiro.Bounds"] = function(v, c)
         id = "1",
         font = {"Vera mono", 10},
         bounds = {"left", {"bottom", ".35"}, ".5", ".35"},
-        text = getValue(v.values[1]),
+        text = getValue(v[1]),
         listeners = {
           enterPressed = apply
         }
@@ -93,7 +93,7 @@ Editors["lost.guiro.Bounds"] = function(v, c)
         id = "2",
         font = {"Vera mono", 10},
         bounds = {{"left", ".5"}, {"bottom", ".35"}, ".5", ".35"},
-        text = getValue(v.values[2]),
+        text = getValue(v[2]),
         listeners = {
           enterPressed = apply
         }
@@ -102,7 +102,7 @@ Editors["lost.guiro.Bounds"] = function(v, c)
         id = "3",
         font = {"Vera mono", 10},
         bounds = {"left", "bottom", ".5", ".35"},
-        text = getValue(v.values[3]),
+        text = getValue(v[3]),
         listeners = {
           enterPressed = apply
         }
@@ -111,7 +111,7 @@ Editors["lost.guiro.Bounds"] = function(v, c)
         id = "4",
         font = {"Vera mono", 10},
         bounds = {{"left", ".5"}, "bottom", ".5", ".35"},
-        text = getValue(v.values[4]),
+        text = getValue(v[4]),
         listeners = {
           enterPressed = apply
         }
@@ -124,7 +124,7 @@ Editors["lost.guiro.view.View"] = function(v, c)
   return View {
     bounds = {0, 0, "1", "1"},
     subviews = {
-      Editors.get(v:bounds(), function(b)
+      Editors.get({0, 0, "1", "1", className = function() return "lost.guiro.Bounds" end}, function(b)
         v:bounds(b)
       end)
     }
