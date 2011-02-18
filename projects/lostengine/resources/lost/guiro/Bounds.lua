@@ -112,7 +112,8 @@ end
 -- either one prameter, a table
 -- or 4 functions
 function Bounds:constructor(...)
-  self.x,self.y,self.width,self.height = Bounds.decode(arg)
+  self.values = arg
+  self.x,self.y,self.width,self.height = Bounds.decode(self.values)
 
 
 --  self.x = Bounds.decodeEntry(1,arg[1])

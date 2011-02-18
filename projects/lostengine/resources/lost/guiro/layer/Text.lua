@@ -202,22 +202,18 @@ function Text:updateCursor()
     if nc == 0 then 
       x = self._halign
     elseif nc > 0 and self._cursorPos.x == nc then 
-      r = self.mesh:characterRect(self._cursorPos.y, nc-1)
-      x = r.x+self.alignedMeshPos.x-self.rect.x+r.width
-    else 
+      r = self.mesh:characterRect(self._cursorPos.y, nc - 1)
+      x = r.x + self.alignedMeshPos.x - self.rect.x + r.width
+    else
       x = r.x + self.alignedMeshPos.x - self.rect.x
     end
 
     if type(x) == "number" then
-      local b = 2
---      log.debug("x "..tostring(x))
-      if (x < b) then
---        log.debug("cursor out left")
-        self._scrollOffset.x = x + b
+      if (x < 0) then
+        self._scrollOffset.x = x
       end
-      if (x > (self.rect.width - b)) then
---        log.debug("cursor out right");
-        self._scrollOffset.x = x - (self.rect.width - b)
+      if (x > self.rect.width) then
+        self._scrollOffset.x = x - self.rect.width
       end
       x = math.max(x - self._scrollOffset.x, 0)
     end
