@@ -128,7 +128,9 @@ namespace lost
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
           .def("insertUtf8StringAtPosition", &TextBuffer::insertUtf8StringAtPosition)
           .def("eraseCharAtPosition", &TextBuffer::eraseCharAtPosition)
+          .def("eraseChars", &TextBuffer::eraseChars)
           .def("utf8String", &TextBuffer::utf8String)
+          .def("substring", &TextBuffer::substring)
         ]
       ];
     }

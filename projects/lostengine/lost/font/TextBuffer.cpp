@@ -66,6 +66,29 @@ std::string TextBuffer::utf8String()
   return result;
 }
 
+std::string TextBuffer::substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex)
+{
+  std::string result;
+  if (fromLine >= 0 && fromLine < _physicalLines.size() && toLine >= 0 && toLine < _physicalLines.size())
+  {
+    uint32_t f;
+    uint32_t t;
+    if (fromLine < toLine || (fromLine == toLine && fromIndex < toIndex)) {
+      f = _physicalLines[fromLine].begin + fromIndex;
+      t = _physicalLines[toLine].begin + toIndex;
+    }
+    else {
+      f = _physicalLines[toLine].begin + toIndex;
+      t = _physicalLines[fromLine].begin + fromIndex;
+    }
+    if (f >= 0 && f < _text.size() && t > 0 && t <= _text.size()) {
+      ftxt::utf8_encoder encoder;
+      ftxt::encode(encoder, _text.begin()+f, _text.begin()+t,
+                   std::back_insert_iterator<std::string>(result));
+    }
+  }
+  return result;
+}
 
 void TextBuffer::font(const FontPtr& inFont) 
 {
@@ -337,22 +360,51 @@ void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charInd
   {
     r = _physicalLines[lineIndex];
   }
-//  DOUT("previous text size "<<_text.size());
   _text.insert(r.begin+charIndex, decoded);
-//  DOUT("new text size "<<_text.size());
-  reset();
+  if (inString.find("\r") != string::npos || inString.find("\n") != string::npos || inString.find("\r\n") != string::npos) {
+    _dirty = true;
+    reset();
+  }
+  else {
+    // update lines
+    _physicalLines[lineIndex].end += decoded.size();
+    for(std::vector<Range>::iterator r = _physicalLines.begin()+lineIndex+1; r != _physicalLines.end(); ++r) {
+      r->begin += decoded.size();
+      r->end += decoded.size();
+    }
+  }
 }
 
 void TextBuffer::eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex)
 {
-  Range r;
-  if(lineIndex < _physicalLines.size())
-  {
-    r = _physicalLines[lineIndex];
-  }
-  _text.erase(r.begin+charIndex, 1);
+  eraseChars(lineIndex, charIndex, lineIndex, charIndex+1);
 }
 
+void TextBuffer::eraseChars(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex)
+{
+  if (fromLine >= 0 && fromLine < _physicalLines.size() && toLine >= 0 && toLine < _physicalLines.size())
+  {
+    uint32_t f, t, d;
+    if (fromLine < toLine || (fromLine == toLine && fromIndex < toIndex)) {
+      f = _physicalLines[fromLine].begin + fromIndex;
+      t = _physicalLines[toLine].begin + toIndex;
+      d = toLine - fromLine;
+    }
+    else {
+      f = _physicalLines[toLine].begin + toIndex;
+      t = _physicalLines[fromLine].begin + fromIndex;
+      d = fromLine - toLine;
+    }
+    if (f >= 0 && f < _text.size() && t > 0 && t <= _text.size()) {
+      _text.erase(f, t-f);
+      if (d > 0) {
+        _dirty = true;
+        reset();
+      }
+    }
+  }
+}
+  
 }
 }
 

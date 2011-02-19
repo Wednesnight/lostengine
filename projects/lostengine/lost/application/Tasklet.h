@@ -87,6 +87,9 @@ namespace lost
       void run();   // the tasklet run loop; platform specific implementation
       void stop();  // tells tasklet to stop and shutdown; platform specific implementation
       
+      std::string getClipboardString(); // platform specific implementation
+      bool setClipboardString(const std::string& str); // platform specific implementation
+      
       virtual void key(const application::KeyEventPtr& ev);
     };
 

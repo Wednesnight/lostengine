@@ -16,6 +16,8 @@ return lost.guiro.view.View
           bounds = {"left", "top", {"1", -200}, "1"},
           font={"Vera mono", 10},
           multiLine = true,
+          halign = "left",
+          valign = "top",
           text = [[
             return lost.guiro.view.Button
             {

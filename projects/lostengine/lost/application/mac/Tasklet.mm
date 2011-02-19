@@ -9,6 +9,7 @@
 #include <Foundation/NSAutoreleasePool.h>
 #include <float.h>
 
+#import <AppKit/NSPasteboard.h>
 
 using namespace std;
 
@@ -104,6 +105,33 @@ namespace lost
         }
         cleanup();
       }
+    }
+
+    std::string Tasklet::getClipboardString()
+    {
+      std::string str;
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];
+      if ([[pboard types] containsObject: NSStringPboardType]) {
+        NSString* s = [pboard stringForType: NSStringPboardType];
+        if (s != nil) {
+          str = std::string([s cStringUsingEncoding: NSUTF8StringEncoding]);
+        }
+      }
+      [pool drain];
+      return str;
+    }
+
+    bool Tasklet::setClipboardString(const std::string& str)
+    {
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];
+      [pboard declareTypes: [NSArray arrayWithObject: NSStringPboardType] owner: nil];
+      NSString* s = [[NSString alloc] initWithUTF8String: str.c_str()];
+      bool result = [pboard setString: s forType: NSStringPboardType];
+      [s release];
+      [pool drain];
+      return result;
     }
 
   }

@@ -21,6 +21,7 @@ public:
   bool _dirty;
   void text(const std::string& inUtf8String);
   std::string utf8String(); // returns the current data as utf8 string
+  std::string substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
   void font(const FontPtr& inFont);
   void breakMode(BreakMode inBreakMode);
   void width(float inWidth);
@@ -40,6 +41,7 @@ public:
 
   void insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const std::string& inString);
   void eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex);
+  void eraseChars(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
 
   typedef fhtagn::text::utf32_string Utf32String;
   struct WordPos

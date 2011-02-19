@@ -1161,13 +1161,20 @@ function Pebble:textInput(target, args)
   local tmarg=2
   -- bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}}
   local textLayer = lost.guiro.layer.Text{characterMetrics=true,clip=true,bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}},font={"Vera",12},color=Color(0,0,0)}
-  local cursorLayer = lost.guiro.layer.Rect{bounds={0,0,2, textLayer._font.lineHeight}, color=Color(1,0,0,.8),filled=true}
+  local cursorLayer = lost.guiro.layer.Rect{bounds={0,0,2, textLayer._font.lineHeight}, color=Color(.3,.3,.3,.5),filled=true}
+  local selectionLayer1 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
+  local selectionLayer2 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
+  local selectionLayer3 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
   target.layer:addSublayer(focusRing)  
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=true,color=Color(1,1,1)})
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=false,color=Color(0,0,0)})
   target.layer:addSublayer(textLayer)
   textLayer:addSublayer(cursorLayer)
+  textLayer:addSublayer(selectionLayer1)
+  textLayer:addSublayer(selectionLayer2)
+  textLayer:addSublayer(selectionLayer3)
   textLayer.cursorLayer = cursorLayer
+  textLayer.selectionLayers = {selectionLayer1,selectionLayer2,selectionLayer3}
   target.focusLayer = focusRing
   target.textLayer = textLayer
   target.cursorLayer = cursorLayer
