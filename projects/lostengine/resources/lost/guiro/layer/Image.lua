@@ -90,37 +90,27 @@ end
 function Image:updateLayout()
   lost.guiro.layer.Layer.updateLayout(self)
   self.mesh.transform = MatrixTranslation(Vec3(self.rect.x, self.rect.y, 0))
+  local x = 0
+  local y = 0
+  local w = 0
+  local h = 0
   if self._scale == "aspect" then -- aspect scales the image to fit the current rect
     local f = math.min(self.rect.width / self.texture.dataWidth, self.rect.height / self.texture.dataHeight)
-    local w = math.floor(self.rect.width*f)
-    local h = math.floor(self.rect.height*f)
-    local x = 0
-    local y = 0
-    
-    if self._valign == "top" then y = self.rect.height - h
-    elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
-    elseif self._valign == "bottom" then y = 0 end
-
-    if self._halign == "left" then x = 0
-    elseif self._halign == "center" then x = math.floor((self.rect.width - w)/2)
-    elseif self._halign == "right" then x = self.rect.width-w end
-
-    self.quad:update(Rect(x,y,w, h))    
+    w = math.floor(self.rect.width*f)
+    h = math.floor(self.rect.height*f)        
   else
-    local w = self.texture.dataWidth
-    local h = self.texture.dataHeight
-    local x = 0
-    local y = 0
-    if self._valign == "top" then y = self.rect.height - h
-    elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
-    elseif self._valign == "bottom" then y = 0 end
-
-    if self._halign == "left" then x = 0
-    elseif self._halign == "center" then x = math.floor((self.rect.width - w)/2)
-    elseif self._halign == "right" then x = self.rect.width-w end
-
-    self.quad:update(Rect(x,y,w,h)) 
+    w = self.texture.dataWidth
+    h = self.texture.dataHeight
   end
+  if self._valign == "top" then y = self.rect.height - h
+  elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
+  elseif self._valign == "bottom" then y = 0 end
+
+  if self._halign == "left" then x = 0
+  elseif self._halign == "center" then x = math.floor((self.rect.width - w)/2)
+  elseif self._halign == "right" then x = self.rect.width-w end
+
+  self.quad:update(Rect(x,y,w, h))    
 end
 
 function Image:bitmap(v)
