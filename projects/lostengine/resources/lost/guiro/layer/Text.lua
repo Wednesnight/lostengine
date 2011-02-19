@@ -454,27 +454,23 @@ end
 
 function Text:windowToCursorCoords(windowCoords)
   local cx, cy = self._cursorPos.x, self._cursorPos.y
-  if windowCoords.x >= self.alignedMeshPos.x and windowCoords.x < self.rect.x + self.rect.width and
-     windowCoords.y >= self.alignedMeshPos.y and windowCoords.y < self.rect.y + self.rect.height
-  then
-    local x = windowCoords.x - self.alignedMeshPos.x
-    local y = windowCoords.y - self.alignedMeshPos.y
-    local pl = self.buffer:numPhysicalLines()
-    local lh = math.floor(self._font.lineHeight)
-    cy = pl - math.ceil(y / lh)
-    if cy >= pl then cy = pl-1 end
-    if cy < 0 then cy = 0 end
-    local nc = self.buffer:numCharsInPhysicalLine(cy)
-    cx = nc
-    while cx > 0 do
-      cx = cx - 1
-      local r = self.mesh:characterRect(cy, cx)
-      if r.x <= x then
-        if r.x + r.width <= x then
-          cx = cx + 1
-        end
-        break
+  local x = windowCoords.x - self.alignedMeshPos.x
+  local y = windowCoords.y - self.alignedMeshPos.y
+  local pl = self.buffer:numPhysicalLines()
+  local lh = math.floor(self._font.lineHeight)
+  cy = pl - math.ceil(y / lh)
+  if cy >= pl then cy = pl-1 end
+  if cy < 0 then cy = 0 end
+  local nc = self.buffer:numCharsInPhysicalLine(cy)
+  cx = nc
+  while cx > 0 do
+    cx = cx - 1
+    local r = self.mesh:characterRect(cy, cx)
+    if r.x <= x then
+      if r.x + r.width <= x then
+        cx = cx + 1
       end
+      break
     end
   end
   return cx, cy
