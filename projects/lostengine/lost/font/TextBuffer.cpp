@@ -361,7 +361,7 @@ void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charInd
     r = _physicalLines[lineIndex];
   }
   _text.insert(r.begin+charIndex, decoded);
-  if (inString.find("\r") != string::npos || inString.find("\n") != string::npos || inString.find("\r\n") != string::npos) {
+  if (_physicalLines.size() == 0 || inString.find("\r") != string::npos || inString.find("\n") != string::npos || inString.find("\r\n") != string::npos) {
     _dirty = true;
     reset();
   }
