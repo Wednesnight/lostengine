@@ -289,6 +289,8 @@ namespace lost
             .def_readonly("fontManager", &Tasklet::fontManager)
             .def_readwrite("running", &Tasklet::running)
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
+            .def("getClipboardString", &Tasklet::getClipboardString)
+            .def("setClipboardString", &Tasklet::setClipboardString)
         ]
       ];
     }

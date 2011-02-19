@@ -58,6 +58,9 @@ function Text:constructor(args)
   self.alignedMeshPos = lost.math.Vec3()
   self:cursorPos(Vec2(0,0))
   self._scrollOffset = lost.math.Vec2(0,0)
+  self._undoBufferSize = 50
+  self._redoBufferSize = 50
+  self:resetUndoRedoBuffers()
 end
 
 function Text:characterMetrics(...)
@@ -189,23 +192,21 @@ function Text:updateCursor()
     if self._cursorPos.y < 0 then self._cursorPos.y = 0 end
 
     -- clip cursor position to allowed range of current line
-    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y) -- clip y for real y movement 
+    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
     
     if self._cursorPos.x < 0 then self._cursorPos.x = 0 end
     if self._cursorPos.x > nc then self._cursorPos.x = nc end
 
     local lh = math.floor(self._font.lineHeight)
-    local x = 0
-    local y = ((self.rect.height - (self._cursorPos.y+1)*lh) - (self.alignedMeshPos.y - self.rect.y)) - self._font.descender
     local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
+    local x = r.x + self.alignedMeshPos.x - self.rect.x
+    local y = (self.rect.height - (self._cursorPos.y + 1) * lh) + self._font.descender + 1
 
     if nc == 0 then 
       x = self._halign
     elseif nc > 0 and self._cursorPos.x == nc then 
       r = self.mesh:characterRect(self._cursorPos.y, nc - 1)
       x = r.x + self.alignedMeshPos.x - self.rect.x + r.width
-    else
-      x = r.x + self.alignedMeshPos.x - self.rect.x
     end
 
     if type(x) == "number" then
@@ -224,24 +225,17 @@ function Text:updateCursor()
 
     if type(y) == "number" then
       local b = 2
---      log.debug("y "..tostring(y))
       if (y < b) then
---        log.debug("cursor out bottom")
         self._scrollOffset.y = y + b
       end
       if (y > (self.rect.height - lh + b)) then
---        log.debug("cursor out top");
         self._scrollOffset.y = y - (self.rect.height - lh + b)
       end
       y = math.max(y - self._scrollOffset.y, 0)
     end
 
---    log.debug("self._scrollOffset "..tostring(self._scrollOffset))
---    log.debug("self.alignedMeshPos "..tostring(self.alignedMeshPos))
     self:repositionMeshes(self.alignedMeshPos.x - self._scrollOffset.x, self.alignedMeshPos.y - self._scrollOffset.y)
 
---    log.debug(tostring(self.rect))
---    log.debug(x ..", ".. y)
     self.cursorLayer:x(x)
     self.cursorLayer:y(y)
     self.cursorLayer:height(lh)
@@ -261,7 +255,6 @@ function Text:updateMesh()
 --    self.buffer:reset(self.#, self._font, breakModes[self._breakMode],self.rect.width)
     self.buffer:width(self.rect.width)
     self.buffer:reset()
---    log.debug("rebuilding text mesh")
     self.buffer:renderAllPhysicalLines(self.mesh)
     if self.shadowDrawNode.active then
       self.shadowMesh = self.mesh:clone()
@@ -280,7 +273,6 @@ function Text:updateMesh()
 end
 
 function Text:updateLayout()
---  log.debug("layout")
   lost.guiro.layer.Layer.updateLayout(self)
   self:updateMesh()
   self:updateAlign()
@@ -288,7 +280,6 @@ function Text:updateLayout()
 end
 
 function Text:updateDisplay()
---  log.debug("display")
   lost.guiro.layer.Layer.updateDisplay(self)
   self:updateMesh()
   self:updateAlign()
@@ -315,6 +306,7 @@ function Text:text(...)
     self.buffer:text(arg[1])
     self._dirtyText = true
     self:needsDisplay()
+    self:resetUndoRedoBuffers()
   else
     return self.buffer:utf8String()
   end
@@ -396,19 +388,22 @@ function Text:characterRect(lineIndex, charIndex)
 end
 
 function Text:insertAtCursor(utf8str)
-  self.buffer:insertUtf8StringAtPosition(self._cursorPos.y, self._cursorPos.x, utf8str)
-  self:cursorIncX(string.len(utf8str))
-  self._dirtyText = true
-  self:needsDisplay()
+  self:addUndoRedo(function()
+    self.buffer:insertUtf8StringAtPosition(self._cursorPos.y, self._cursorPos.x, utf8str)
+    self:cursorIncX(string.len(utf8str))
+    self._dirtyText = true
+    self:needsDisplay()
+  end)
 end
 
 function Text:eraseBeforeCursor()
   if self._cursorPos.x > 0 or self._cursorPos.y > 0 then
---    log.debug("erasing char at pos "..(self._cursorPos.y).." "..tostring(self._cursorPos.x-1))
-    self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x-1)
-    self:cursorDecX()
-    self._dirtyText = true
-    self:needsDisplay()
+    self:addUndoRedo(function()
+      self:cursorDecX()
+      self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x)
+      self._dirtyText = true
+      self:needsDisplay()
+    end)
   end
 end
 
@@ -416,14 +411,45 @@ function Text:eraseAfterCursor()
   if self._cursorPos.x ~= self.buffer:numCharsInPhysicalLine(self._cursorPos.y) or
      self._cursorPos.y < self.buffer:numPhysicalLines()
   then
---    log.debug("erasing char at pos "..(self._cursorPos.y).." "..tostring(self._cursorPos.x))
-    self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x)
-    self._dirtyText = true
-    self:needsDisplay()
+    self:addUndoRedo(function()
+      self.buffer:eraseCharAtPosition(self._cursorPos.y, self._cursorPos.x)
+      self._dirtyText = true
+      self:needsDisplay()
+    end)
   end
 end
 
-function Text:moveCursor(windowCoords)
+function Text:selectionRect(cx, cy)
+  local pl = self.buffer:numPhysicalLines()
+
+  if cy >= pl then cy = pl-1 end
+  if cy < 0 then cy = 0 end
+
+  local nc = self.buffer:numCharsInPhysicalLine(cy)
+  
+  if cx < 0 then cx = 0 end
+  if cx > nc then cx = nc end
+
+
+  local r = nil
+  if nc > 0 and cx == nc then 
+    r = self.mesh:characterRect(cy, nc - 1)
+    r.x = r.x + self.alignedMeshPos.x - self.rect.x + r.width
+  else
+    r = self.mesh:characterRect(cy, cx)
+  end
+
+  local lh = math.floor(self._font.lineHeight)
+  return lost.math.Rect(
+    math.min(math.max(r.x + self.alignedMeshPos.x - self.rect.x, 0), self.rect.width),
+    math.min(math.max((self.rect.height - (cy + 1) * lh) + self._font.descender + 1, 0), self.rect.height),
+    0,
+    lh
+  )
+end
+
+function Text:windowToCursorCoords(windowCoords)
+  local cx, cy = self._cursorPos.x, self._cursorPos.y
   if windowCoords.x >= self.rect.x and windowCoords.x < self.rect.x + self.rect.width and
      windowCoords.y >= self.rect.y and windowCoords.y < self.rect.y + self.rect.height
   then
@@ -431,23 +457,259 @@ function Text:moveCursor(windowCoords)
     local y = math.floor((windowCoords.y - self.rect.y) - (self.alignedMeshPos.y - self.rect.y))
     local pl = self.buffer:numPhysicalLines()
     local lh = math.floor(self._font.lineHeight)
-    self._cursorPos.y = pl - math.ceil(y / lh)
-    if self._cursorPos.y >= pl then self._cursorPos.y = pl-1 end
-    if self._cursorPos.y < 0 then self._cursorPos.y = 0 end
-    local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
-    self._cursorPos.x = nc
-    while self._cursorPos.x > 0 do
-      self._cursorPos.x = self._cursorPos.x - 1
-      local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
+    cy = pl - math.ceil(y / lh)
+    if cy >= pl then cy = pl-1 end
+    if cy < 0 then cy = 0 end
+    local nc = self.buffer:numCharsInPhysicalLine(cy)
+    cx = nc
+    while cx > 0 do
+      cx = cx - 1
+      local r = self.mesh:characterRect(cy, cx)
       local rx = math.floor(r.x + (self.alignedMeshPos.x - self.rect.x))
       if rx <= x then
         if rx + r.width <= x then
-          self._cursorPos.x = self._cursorPos.x + 1
+          cx = cx + 1
         end
         break
       end
     end
+  end
+  return cx, cy
+end
+
+function Text:moveCursor(windowCoords)
+  self._cursorPos.x, self._cursorPos.y = self:windowToCursorCoords(windowCoords)
+  self:needsLayout()
+end
+
+function Text:hasSelection()
+  return self._selection ~= nil
+end
+
+function Text:getSelectionPos()
+  return self._selection.from.x, self._selection.from.y, self._selection.to.x, self._selection.to.y
+end
+
+function Text:getSelectionRange()
+  if self._selection.from.y < self._selection.to.y or (self._selection.from.y == self._selection.to.y and self._selection.from.x < self._selection.to.x) then
+    return self._selection.from.x, self._selection.from.y, self._selection.to.x, self._selection.to.y
+  else
+    return self._selection.to.x, self._selection.to.y, self._selection.from.x, self._selection.from.y
+  end
+end
+
+function Text:getSelection()
+  if self:hasSelection() then
+    local fx, fy, tx, ty = self:getSelectionRange()
+    return self.buffer:substring(fy, fx, ty, tx)
+  end
+  return nil
+end
+
+function Text:eraseSelection()
+  if self:hasSelection() then
+    self:addUndoRedo(function()
+      local fx, fy, tx, ty = self:getSelectionRange()
+      self.buffer:eraseChars(fy, fx, ty, tx)
+      self._cursorPos.x, self._cursorPos.y = fx, fy
+      self:needsLayout()
+      self:clearSelection()
+      self._dirtyText = true
+      self:needsDisplay()
+    end)
+  end
+  return nil
+end
+
+-- set by cursor pos
+function Text:setSelection(fx, fy, tx, ty)
+  if self.selectionLayers and (math.abs(tx - fx) > 0 or math.abs(ty - fy) > 0) then
+
+    self._selection = {from = {x = fx, y = fy}, to = {x = tx, y = ty}}
+
+    --[[
+
+         [...]    <-- upper
+      [......]    <-- middle
+      [......]    <-- middle
+      [...]       <-- lower
+
+      ]]
+    local upper = nil
+    local lower = nil
+    local middle = nil
+
+    if fy < ty or (fy == ty and fx < tx) then
+      upper = {x = fx, y = fy}
+    else
+      upper = {x = tx, y = ty}
+    end
+
+    local delta = math.abs(ty - fy)
+
+    if delta > 0 then
+      if fy >= ty then
+        lower = {x = fx, y = fy}
+      else
+        lower = {x = tx, y = ty}
+      end
+      if delta > 1 then
+        middle = {x = 0, y = lower.y-1}
+      end
+    end
+
+    if upper then
+      local r = self:selectionRect(upper.x, upper.y)
+      if upper.x <= 0 then
+        r.x = 0
+      end
+      if delta > 0 then
+        r.width = self.rect.width - r.x
+      else
+        local lr = nil
+        if fy < ty or (fy == ty and fx < tx) then
+          lr = self:selectionRect(tx, ty)
+        else
+          lr = self:selectionRect(fx, fy)
+        end
+        r.width = lr.x - r.x
+      end
+      self.selectionLayers[1]:pos(r.x, r.y)
+      self.selectionLayers[1]:size(r.width, r.height)
+      self.selectionLayers[1]:needsUpdate()
+      self.selectionLayers[1]:hidden(false)
+    else
+      self.selectionLayers[1]:hidden(true)
+    end
+
+    if lower then
+      local r = self:selectionRect(lower.x, lower.y)
+      if lower.x <= 0 then
+        r.x = 0
+      end
+      r.width = r.x
+      self.selectionLayers[2]:pos(0, r.y)
+      self.selectionLayers[2]:size(r.width, r.height)
+      self.selectionLayers[2]:needsUpdate()
+      self.selectionLayers[2]:hidden(false)
+    else
+      self.selectionLayers[2]:hidden(true)
+    end
+
+    if middle then
+      local r = self:selectionRect(middle.x, middle.y)
+      self.selectionLayers[3]:pos(0, r.y)
+      self.selectionLayers[3]:size(self.rect.width, r.height * (delta-1))
+      self.selectionLayers[3]:needsUpdate()
+      self.selectionLayers[3]:hidden(false)
+    else
+      self.selectionLayers[3]:hidden(true)
+    end
+  else
+    self:clearSelection()
+  end
+end
+
+-- set by window coordinates
+function Text:setSelectionCoords(from, to)
+  local fx, fy = self:windowToCursorCoords(from)
+  local tx, ty = self:windowToCursorCoords(to)
+  self:setSelection(fx, fy, tx, ty)
+end
+
+function Text:clearSelection()
+  if self._selection ~= nil then
+  end
+  self._selection = nil
+  if self.selectionLayers then
+    for k,s in next,self.selectionLayers do
+      s:hidden(true)
+    end
+  end
+end
+
+function Text:getCursorPos()
+  return self._cursorPos.x, self._cursorPos.y
+end
+
+function Text:resetUndoRedoBuffers()
+  self:resetUndoBuffer()
+  self:resetRedoBuffer()
+end
+
+function Text:resetUndoBuffer()
+  self._undoBuffer = {}
+  self._undoBufferPos = self._undoBufferSize
+end
+
+function Text:resetRedoBuffer()
+  self._redoBuffer = {}
+  self._redoBufferPos = self._redoBufferSize
+end
+
+function Text:addUndoRedo(f)
+  local before = self.buffer:utf8String()
+  local bx, by = self._cursorPos.x, self._cursorPos.y
+  f()
+  local after = self.buffer:utf8String()
+  local ax, ay = self._cursorPos.x, self._cursorPos.y
+  local undo
+  undo = function()
+    self._cursorPos.x, self._cursorPos.y = bx, by
     self:needsLayout()
+    self.buffer:text(before)
+    self._dirtyText = true
+    self:needsDisplay()
+    self:addRedo(function()
+      self._cursorPos.x, self._cursorPos.y = ax, ay
+      self:needsLayout()
+      self.buffer:text(after)
+      self._dirtyText = true
+      self:needsDisplay()
+      self:addUndo(undo, false)
+    end)
+  end
+  self:addUndo(undo)
+end
+
+function Text:addUndo(u, reset)
+  self._undoBuffer[self._undoBufferPos] = u
+  self._undoBufferPos = self._undoBufferPos - 1
+  if self._undoBufferPos <= 0 then
+    self._undoBufferPos = self._undoBufferSize
+  end
+  if reset ~= false then
+    self:resetRedoBuffer()
+  end
+end
+
+function Text:addRedo(r)
+  self._redoBuffer[self._redoBufferPos] = r
+  self._redoBufferPos = self._redoBufferPos - 1
+  if self._redoBufferPos <= 0 then
+    self._redoBufferPos = self._redoBufferSize
+  end
+end
+
+function Text:undo()
+  if table.maxn(self._undoBuffer) > 0 then
+    self._undoBufferPos = self._undoBufferPos + 1
+    if self._undoBufferPos > self._undoBufferSize then
+      self._undoBufferPos = 1
+    end
+    self._undoBuffer[self._undoBufferPos]()
+    self._undoBuffer[self._undoBufferPos] = nil
+  end
+end
+
+function Text:redo()
+  if table.maxn(self._redoBuffer) > 0 then
+    self._redoBufferPos = self._redoBufferPos + 1
+    if self._redoBufferPos > self._redoBufferSize then
+      self._redoBufferPos = 1
+    end
+    self._redoBuffer[self._redoBufferPos]()
+    self._redoBuffer[self._redoBufferPos] = nil
   end
 end
 
