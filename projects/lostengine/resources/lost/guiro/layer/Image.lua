@@ -33,10 +33,29 @@ function Image:constructor(args)
   self:filter(t.filter or false)
   self:scale(t.scale or "none") -- none, aspect  FIXME: needs stretch, repeat
   self:color(t.color or Color(1,1,1))
-  
+  self:valign(t.valign or "center")
+  self:halign(t.halign or "center")
   -- trigger initial updates
   self:needsUpdate()
   self:needsLayout()
+end
+
+function Image:valign(...)
+  if arg.n >= 1 then
+    self._valign = arg[1]
+    self:needsLayout()
+  else
+    return self._valign
+  end
+end
+
+function Image:halign(...)
+  if arg.n >= 1 then
+    self._halign = arg[1]
+    self:needsLayout()
+  else
+    return self._halign
+  end
 end
 
 function Image:update()
@@ -75,9 +94,32 @@ function Image:updateLayout()
     local f = math.min(self.rect.width / self.texture.dataWidth, self.rect.height / self.texture.dataHeight)
     local w = math.floor(self.rect.width*f)
     local h = math.floor(self.rect.height*f)
-    self.quad:update(Rect(0,0,w, h))    
+    local x = 0
+    local y = 0
+    
+    if self._valign == "top" then y = self.rect.height - h
+    elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
+    elseif self._valign == "bottom" then y = 0 end
+
+    if self._halign == "left" then x = 0
+    elseif self._halign == "center" then x = math.floor((self.rect.width - w)/2)
+    elseif self._halign == "right" then x = self.rect.width-w end
+
+    self.quad:update(Rect(x,y,w, h))    
   else
-    self.quad:update(Rect(0,0,self.texture.dataWidth, self.texture.dataHeight)) -- for scale == none
+    local w = self.texture.dataWidth
+    local h = self.texture.dataHeight
+    local x = 0
+    local y = 0
+    if self._valign == "top" then y = self.rect.height - h
+    elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
+    elseif self._valign == "bottom" then y = 0 end
+
+    if self._halign == "left" then x = 0
+    elseif self._halign == "center" then x = math.floor((self.rect.width - w)/2)
+    elseif self._halign == "right" then x = self.rect.width-w end
+
+    self.quad:update(Rect(x,y,w,h)) 
   end
 end
 
