@@ -200,23 +200,24 @@ function Text:updateCursor()
     local lh = math.floor(self._font.lineHeight)
     local r = self.mesh:characterRect(self._cursorPos.y, self._cursorPos.x)
     local x = r.x + self.alignedMeshPos.x - self.rect.x
-    local y = (self.rect.height - (self._cursorPos.y + 1) * lh) + self._font.descender + 1
+    local y = (((self.alignedMeshPos.y - self.rect.y) + pl * lh) - (self._cursorPos.y + 1) * lh) + self._font.descender + 1
 
     if nc == 0 then 
-      x = self._halign
+      x = self.alignedMeshPos.x - self.rect.x
     elseif nc > 0 and self._cursorPos.x == nc then 
       r = self.mesh:characterRect(self._cursorPos.y, nc - 1)
       x = r.x + self.alignedMeshPos.x - self.rect.x + r.width
     end
 
     if type(x) == "number" then
-      if (x < 0) then
+      local lx = x - self._scrollOffset.x
+      if (lx < 0) then
         self._scrollOffset.x = x
       end
-      if (x > self.rect.width) then
+      if lx > self.rect.width then
         self._scrollOffset.x = x - self.rect.width
       end
-      x = math.max(x - self._scrollOffset.x, 0)
+      x = x - self._scrollOffset.x
     end
 
     if pl == 0 then
@@ -224,14 +225,16 @@ function Text:updateCursor()
     end
 
     if type(y) == "number" then
-      local b = 2
-      if (y < b) then
-        self._scrollOffset.y = y + b
+      local ly = y - self._scrollOffset.y
+      if (ly < 0) then
+        log.debug("out bottom: ".. ly)
+        self._scrollOffset.y = y
       end
-      if (y > (self.rect.height - lh + b)) then
-        self._scrollOffset.y = y - (self.rect.height - lh + b)
+      if ly > self.rect.height - lh then
+        log.debug("out top: ".. ly)
+        self._scrollOffset.y = y - (self.rect.height - lh)
       end
-      y = math.max(y - self._scrollOffset.y, 0)
+      y = y - self._scrollOffset.y
     end
 
     self:repositionMeshes(self.alignedMeshPos.x - self._scrollOffset.x, self.alignedMeshPos.y - self._scrollOffset.y)
@@ -434,15 +437,16 @@ function Text:selectionRect(cx, cy)
   local r = nil
   if nc > 0 and cx == nc then 
     r = self.mesh:characterRect(cy, nc - 1)
-    r.x = r.x + self.alignedMeshPos.x - self.rect.x + r.width
+    r.x = r.x + (self.alignedMeshPos.x - self.rect.x) + r.width
   else
     r = self.mesh:characterRect(cy, cx)
+    r.x = r.x + (self.alignedMeshPos.x - self.rect.x)
   end
 
   local lh = math.floor(self._font.lineHeight)
   return lost.math.Rect(
-    math.min(math.max(r.x + self.alignedMeshPos.x - self.rect.x, 0), self.rect.width),
-    math.min(math.max((self.rect.height - (cy + 1) * lh) + self._font.descender + 1, 0), self.rect.height),
+    math.min(math.max(r.x, 0), self.rect.width),
+    math.min(math.max((((self.alignedMeshPos.y - self.rect.y) + pl * lh) - (cy + 1) * lh) + self._font.descender + 1, 0), self.rect.height),
     0,
     lh
   )
@@ -450,11 +454,11 @@ end
 
 function Text:windowToCursorCoords(windowCoords)
   local cx, cy = self._cursorPos.x, self._cursorPos.y
-  if windowCoords.x >= self.rect.x and windowCoords.x < self.rect.x + self.rect.width and
-     windowCoords.y >= self.rect.y and windowCoords.y < self.rect.y + self.rect.height
+  if windowCoords.x >= self.alignedMeshPos.x and windowCoords.x < self.rect.x + self.rect.width and
+     windowCoords.y >= self.alignedMeshPos.y and windowCoords.y < self.rect.y + self.rect.height
   then
-    local x = math.floor((windowCoords.x - self.rect.x) - (self.alignedMeshPos.x - self.rect.x))
-    local y = math.floor((windowCoords.y - self.rect.y) - (self.alignedMeshPos.y - self.rect.y))
+    local x = windowCoords.x - self.alignedMeshPos.x
+    local y = windowCoords.y - self.alignedMeshPos.y
     local pl = self.buffer:numPhysicalLines()
     local lh = math.floor(self._font.lineHeight)
     cy = pl - math.ceil(y / lh)
@@ -465,9 +469,8 @@ function Text:windowToCursorCoords(windowCoords)
     while cx > 0 do
       cx = cx - 1
       local r = self.mesh:characterRect(cy, cx)
-      local rx = math.floor(r.x + (self.alignedMeshPos.x - self.rect.x))
-      if rx <= x then
-        if rx + r.width <= x then
+      if r.x <= x then
+        if r.x + r.width <= x then
           cx = cx + 1
         end
         break
@@ -605,6 +608,10 @@ function Text:setSelection(fx, fy, tx, ty)
     else
       self.selectionLayers[3]:hidden(true)
     end
+
+    local dummy = nil
+    dummy, dummy, self._cursorPos.x, self._cursorPos.y = self:getSelectionPos()
+    self:needsLayout()
   else
     self:clearSelection()
   end
@@ -626,6 +633,12 @@ function Text:clearSelection()
       s:hidden(true)
     end
   end
+end
+
+function Text:selectAll()
+  local maxY = self.buffer:numPhysicalLines()-1
+  local maxX = self.buffer:numCharsInPhysicalLine(maxY)
+  self:setSelection(0, 0, maxX, maxY)
 end
 
 function Text:getCursorPos()

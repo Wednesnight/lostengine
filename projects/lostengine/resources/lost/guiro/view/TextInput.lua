@@ -196,6 +196,8 @@ function TextInput:keyDown(event)
       self.textLayer:insertAtCursor(str)
       self:dispatchInputEvent("valueChanged")
     end
+  elseif event.key == lost.application.K_A and (event.ctrlDown or event.specialDown) then
+    self.textLayer:selectAll()
   elseif string.len(event.character) > 0 then
     if self.textLayer:hasSelection() then
       self.textLayer:eraseSelection()
@@ -223,7 +225,7 @@ function TextInput:mouseDown(event)
 end
 
 function TextInput:mouseMove(event)
-  if event.pressed then
+  if event.pressed and self._selectionStart then
     self._selecting = true
     self.textLayer:setSelectionCoords(self._selectionStart, event.pos)
     -- only blink when idle
