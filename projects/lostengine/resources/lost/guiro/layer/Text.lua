@@ -708,6 +708,7 @@ function Text:undo()
     end
     self._undoBuffer[self._undoBufferPos]()
     self._undoBuffer[self._undoBufferPos] = nil
+    self:clearSelection()
   end
 end
 
@@ -719,6 +720,7 @@ function Text:redo()
     end
     self._redoBuffer[self._redoBufferPos]()
     self._redoBuffer[self._redoBufferPos] = nil
+    self:clearSelection()
   end
 end
 
