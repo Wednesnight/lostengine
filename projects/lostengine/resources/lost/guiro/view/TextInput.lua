@@ -198,7 +198,7 @@ function TextInput:keyDown(event)
     end
   elseif event.key == lost.application.K_A and (event.ctrlDown or event.specialDown) then
     self.textLayer:selectAll()
-  elseif string.len(event.character) > 0 then
+  elseif string.len(event.character) > 0 and (not event.ctrlDown and not event.specialDown and not event.altDown) then
     if self.textLayer:hasSelection() then
       self.textLayer:eraseSelection()
     end

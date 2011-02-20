@@ -1195,21 +1195,22 @@ function Pebble:fpsMeter(target, args)
 end
 
 function Pebble:textInput(target, args)
+  local t = lost.guiro.layer.Text
   local r = lost.guiro.layer.Rect
-  local w = 3
   local focusColor = Color(.4,.6,1)
-  local focusRing = rr{hidden=true,radius=4,bounds={-w,-w,{"1",2*w},{"1",2*w}},filled=false,color=focusColor,width=w}
+  local selectionColor = Color(.4,.6,1,.2)
+  local focusRing = r{hidden=true,bounds={0,0,"1","1"},filled=false,color=focusColor,width=2}
   local tmarg=2
   -- bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}}
-  local textLayer = lost.guiro.layer.Text{characterMetrics=true,clip=true,bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}},font={"Vera",12},color=Color(0,0,0)}
-  local cursorLayer = lost.guiro.layer.Rect{bounds={0,0,2, textLayer._font.lineHeight}, color=Color(.3,.3,.3,.5),filled=true}
-  local selectionLayer1 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
-  local selectionLayer2 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
-  local selectionLayer3 = lost.guiro.layer.Rect{bounds={0,0,0,0}, color=Color(0,0,.7,.5),filled=true,hidden=true}
-  target.layer:addSublayer(focusRing)  
+  local textLayer = t{characterMetrics=true,clip=true,bounds={tmarg,tmarg,{"1",-2*tmarg},{"1",-2*tmarg}},font={"Vera",12},color=Color(0,0,0)}
+  local cursorLayer = r{bounds={0,0,2, textLayer._font.lineHeight}, color=Color(.3,.3,.3,.5),filled=true}
+  local selectionLayer1 = r{bounds={0,0,0,0}, color=selectionColor,filled=true,hidden=true}
+  local selectionLayer2 = r{bounds={0,0,0,0}, color=selectionColor,filled=true,hidden=true}
+  local selectionLayer3 = r{bounds={0,0,0,0}, color=selectionColor,filled=true,hidden=true}
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=true,color=Color(1,1,1)})
   target.layer:addSublayer(r{bounds={0,0,"1","1"},filled=false,color=Color(0,0,0)})
   target.layer:addSublayer(textLayer)
+  target.layer:addSublayer(focusRing)
   textLayer:addSublayer(cursorLayer)
   textLayer:addSublayer(selectionLayer1)
   textLayer:addSublayer(selectionLayer2)
