@@ -96,7 +96,7 @@ function Text:updateXY()
   if self._cursorPos.y >= pl then self._cursorPos.y = pl-1 end
   if self._cursorPos.y < 0 then self._cursorPos.y = 0 end
   local nc = self.buffer:numCharsInPhysicalLine(self._cursorPos.y)
-  if self._cursorPos.x <= 0 and self._cursorPos.y > 0 then
+  if self._cursorPos.x < 0 and self._cursorPos.y > 0 then
     self._cursorPos.y = self._cursorPos.y - 1
     self:cursorLastX()
   elseif self._cursorPos.x > nc and self._cursorPos.y < pl-1 then

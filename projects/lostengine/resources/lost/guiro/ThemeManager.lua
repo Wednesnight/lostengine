@@ -18,6 +18,14 @@ function ThemeManager:addTheme(theme)
   self.themes[theme.name] = theme
 end
 
+function ThemeManager:getTheme(themeName)
+  return self.themes[themeName]
+end
+
+function ThemeManager:getDefaultTheme()
+  return self.themes[self.defaultTheme]
+end
+
 function ThemeManager:apply(target, themeName, styleName, args)
     
   local theme = self.themes[themeName]
