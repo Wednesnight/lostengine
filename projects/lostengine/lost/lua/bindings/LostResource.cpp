@@ -5,6 +5,7 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
+#include "lost/resource/Writer.h"
 #include "lost/common/Data.h"
 
 using namespace luabind;
@@ -48,29 +49,28 @@ namespace lost
             .def("load", &LostResourceLoader_load)
             .def("locate", &LostResourceLoader_locate)
             .def("addRepository", &Loader::addRepository)
-            .scope
-            [
-              def("create", &Loader::create)
-            ]
         ]
       ];
     }
 
-    void LostResourceDefaultLoader(lua_State* state)
+    void LostResourceWriter_write(object inWriter, const std::string& inPath, const common::DataPtr& inData)
+    {
+      Writer* writer = object_cast<Writer*>(inWriter);
+      return writer->write(inPath, inData);
+    }
+    
+    void LostResourceWriter(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("resource")
         [
-          class_<DefaultLoader, Loader>("DefaultLoader")
-            .scope
-            [
-              def("create", &DefaultLoader::create)
-            ]
+          class_<Writer>("Writer")
+            .def("write", &LostResourceWriter_write)
         ]
       ];
     }
-
+    
     void LostResourceFilesystemRepository(lua_State* state)
     {
       module(state, "lost")
@@ -107,7 +107,7 @@ namespace lost
       LostResourceFilesystemRepository(state);
       LostResourceApplicationResourceRepository(state);
       LostResourceLoader(state);
-      LostResourceDefaultLoader(state);
+      LostResourceWriter(state);
     }
 
   }

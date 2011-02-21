@@ -7,19 +7,21 @@
 
 namespace lost
 {
-namespace common
-{
-
-  struct Data
+  namespace common
   {
-    lost::shared_array<char> bytes;
-    uint32_t          size;
-    
-    Data();
-    std::string str(); // returns data as string by stuffing the raw bytes into a string object
-  };
-}
+
+    struct Data
+    {
+      lost::shared_array<char> bytes;
+      uint32_t          size;
+      
+      Data();
+      Data(const std::string& data);
+      std::string str(); // returns data as string by stuffing the raw bytes into a string object
+
+      static DataPtr create(const std::string& data) { return DataPtr(new Data(data)); }
+    };
+  }
 }
 
 #endif
-

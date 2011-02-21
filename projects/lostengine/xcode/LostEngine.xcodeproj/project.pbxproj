@@ -201,6 +201,8 @@
 		8C0A7C26AF20EDA6B9626DF3 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C8C664B8E4092AA64019ED6 /* file.c */; };
 		8D1B7A8B2BB9FDA656AD0030 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5508683953A9F040403D /* ftcache.c */; };
 		8D9AEBA2BBD9FA5567211746 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD63E73CE8AC2231C61F62F /* main.cpp */; };
+		8DF578321312E03000F65076 /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF578311312E03000F65076 /* Writer.cpp */; };
+		8DF578A41312ED0D00F65076 /* DefaultWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8DF578A31312ED0D00F65076 /* DefaultWriter.cpp */; };
 		8EB0C59DC4681FF87B34AD81 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B408C44B2B12BDAD3FFB2EA4 /* Shader.cpp */; };
 		8EB4C538CD0852705373F8BD /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = F17A7878B112E47E81F2A0A5 /* info.c */; };
 		8EC7A34CE855F4BE2CE95FEE /* fttype1.c in Sources */ = {isa = PBXBuildFile; fileRef = 533831A27AB04603F36BEE70 /* fttype1.c */; };
@@ -620,6 +622,8 @@
 		8D769CF7F10EC40F78F5DF2D /* FilesystemRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FilesystemRepository.cpp; sourceTree = "<group>"; };
 		8D8094A68731E6810556FC83 /* ftotval.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ftotval.c; sourceTree = "<group>"; };
 		8DA332481833BFC0250BDB99 /* ApplicationDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ApplicationDelegate.mm; sourceTree = "<group>"; };
+		8DF578311312E03000F65076 /* Writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Writer.cpp; sourceTree = "<group>"; };
+		8DF578A31312ED0D00F65076 /* DefaultWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultWriter.cpp; sourceTree = "<group>"; };
 		90C2FC69E2745F3C9416FDAD /* fseeko.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fseeko.c; sourceTree = "<group>"; };
 		90D86FB01C601C2578398C96 /* lstring.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lstring.c; sourceTree = "<group>"; };
 		90F20C7FCD71F7A730D9D244 /* fetch.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fetch.c; sourceTree = "<group>"; };
@@ -1282,9 +1286,11 @@
 			children = (
 				AEC1D7F2B48D49C9D8391466 /* ApplicationResourceRepository.cpp */,
 				EF2ADA66860A056AB1C0B7AD /* DefaultLoader.cpp */,
+				8DF578A31312ED0D00F65076 /* DefaultWriter.cpp */,
 				8D769CF7F10EC40F78F5DF2D /* FilesystemRepository.cpp */,
 				C110D7075E880D9C9595FEA5 /* Helper.cpp */,
 				B1B4D296B72F297F07CF1F0D /* Loader.cpp */,
+				8DF578311312E03000F65076 /* Writer.cpp */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -1860,6 +1866,7 @@
 			};
 			buildConfigurationList = C4BC31635FECBB26F4E7AAE5 /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2223,6 +2230,8 @@
 				B8CDB9BA4913B4E39D7D26B3 /* stat.c in Sources */,
 				3CE8DD9D9C79103D515EDE2D /* write.c in Sources */,
 				12EDF28F3838C12335B4D5EF /* zip.c in Sources */,
+				8DF578321312E03000F65076 /* Writer.cpp in Sources */,
+				8DF578A41312ED0D00F65076 /* DefaultWriter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

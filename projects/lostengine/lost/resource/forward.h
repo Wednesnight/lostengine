@@ -9,6 +9,9 @@ namespace resource
 struct Loader;
 typedef lost::shared_ptr<Loader> LoaderPtr;
 
+struct Writer;
+typedef lost::shared_ptr<Writer> WriterPtr;
+  
 struct Repository;
 typedef lost::shared_ptr<Repository> RepositoryPtr;
 
@@ -20,6 +23,9 @@ typedef lost::shared_ptr<FilesystemRepository> FilesystemRepositoryPtr;
 
 struct DefaultLoader;
 typedef lost::shared_ptr<DefaultLoader> DefaultLoaderPtr;  
+
+struct DefaultWriter;
+typedef lost::shared_ptr<DefaultWriter> DefaultWriterPtr;  
 
 }
 }

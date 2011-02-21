@@ -10,7 +10,7 @@ namespace lost
     // is platform specific because we need to determine the default type for each platform which might eb compile time dependent
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
     {
-      addTasklet(new Tasklet(event->loader));
+      addTasklet(new Tasklet(event->loader, event->writer));
     }
   }
 }

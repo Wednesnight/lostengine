@@ -42,5 +42,20 @@ namespace lost
       }
       return result;
     }
+
+    void writeToAbsolutePath(const std::string& inPath, const common::DataPtr& inData)
+    {
+      FILE* file = fopen(inPath.c_str(), "wb");
+      if (file != NULL) {
+        if (fwrite(inData->bytes.get(), 1, inData->size, file) != inData->size) {
+          // raise error
+        }
+        fclose(file);
+      }
+      else {
+        // raise error
+      }
+    }
+
   }
 }
