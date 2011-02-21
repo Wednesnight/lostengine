@@ -38,7 +38,7 @@ Tween.bounceIn = Interpolation.bounceIn
 Tween.bounceOut = Interpolation.bounceOut
 Tween.bounceInOut = Interpolation.bounceInOut
 
-function Tween:constructor(target, targetProperties, tweenProperties)
+function Tween:constructor(target, targetProperties, tweenProperties, autoStart)
   tweenProperties = tweenProperties or {}
   tweenProperties.duration = tweenProperties.duration or 1
   tweenProperties.method = tweenProperties.method or Tween.linear
@@ -55,8 +55,25 @@ function Tween:constructor(target, targetProperties, tweenProperties)
   self.time = 0
   self.timestamp = lost.platform.currentTimeSeconds()
 
-  local timer = tasklet.scheduler:createTimer(1/60, Tween.process, self)
-  timer:start()
+  self.timer = tasklet.scheduler:createTimer(1/60, Tween.process, self)
+  if autoStart == nil or autoStart then
+    self.timer:start()
+  end
+end
+
+function Tween:start()
+  self.timer:start()
+end
+
+function Tween:stop()
+  self.timer:stop()
+end
+
+function Tween:restart()
+  for property in next, self.originalProperties do
+    self.target[property] = self.originalProperties[property]
+  end
+  self.timer:restart()
 end
 
 function Tween:process(timer)

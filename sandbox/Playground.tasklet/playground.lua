@@ -1,13 +1,27 @@
-require("lost.guiro.editor.Editors")
+require("lost.animation")
 
 local Color = lost.common.Color
 
 local view = nil
 
+local logLines = {}
+local wrap = function(f)
+  local fenv = {}
+  for k,v in next,_G do
+    fenv[k] = v
+  end
+  fenv.log.debug = function(msg)
+    table.insert(logLines, msg)
+    view("log")("text"):text(table.concat(logLines, "\n"))
+  end
+  setfenv(f, fenv)
+  return f
+end
+
 local compileCode = function(textview)
-  local success, result = pcall(function()
+  local success, result = pcall(wrap(function()
     return assert(loadstring(textview:text()))
-  end)
+  end))
 
   if success then
     textview("success"):hidden(false)
@@ -23,9 +37,9 @@ end
 local runCode = function(textview)
   local success, result = compileCode(textview)
   if success then
-    success, result = pcall(function()
+    success, result = pcall(wrap(function()
       return result()
-    end)
+    end))
   end
   return success, result
 end
@@ -52,19 +66,69 @@ local run = function()
   end
 end
 
-tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event)
-  if event.key == lost.application.K_C and event.altDown then
-    compile()
-  elseif event.key == lost.application.K_R and event.altDown then
-    run()
-  end
-end)
-
 local successImage = lost.bitmap.Bitmap.create(tasklet.loader:load("images/success.png"))
 successImage:premultiplyAlpha()
 
 local errorImage = lost.bitmap.Bitmap.create(tasklet.loader:load("images/error.png"))
 errorImage:premultiplyAlpha()
+
+local Tween = lost.animation.Tween
+local Bounds = lost.guiro.Bounds
+local Rect = lost.math.Rect
+
+local logAnimation = function(target, targetBoundsDef, method, duration, callback)
+  local targetBounds = Bounds(unpack(targetBoundsDef))
+  local targetRect = targetBounds:rect(target:superRect())
+  targetRect = {x = targetRect.x, y = targetRect.y, w = targetRect.width, h = targetRect.height}
+  local sourceRect = {x = target.rect.x, y = target.rect.y, w = target.rect.width, h = target.rect.height}
+
+  return Tween(sourceRect, targetRect, {
+    method = method or Tween.expoOut,
+    duration = duration or 1,
+    afterProcess = function(t)
+      target:bounds(Bounds(sourceRect.x, sourceRect.y, sourceRect.w, sourceRect.h))
+    end,
+    onComplete = function(t)
+      target:bounds(targetBounds)
+      if type(callback) == "function" then
+        callback()
+      end
+    end})
+end
+
+local _logAnimation = nil
+local _logHidden = true
+local toggleLog = function()
+  if _logHidden then
+    _logHidden = false
+    if _logAnimation ~= nil then
+      _logAnimation:stop()
+    end
+    view("log"):hidden(false)
+    _logAnimation = logAnimation(view("log"), {"left",{"top", -30},"1",{".5", -15}}, nil, nil, function()
+      _logAnimation = nil
+    end)
+  else
+    _logHidden = true
+    if _logAnimation ~= nil then
+      _logAnimation:stop()
+    end
+    _logAnimation = logAnimation(view("log"), {"left",{"top", -30},"1",0}, nil, nil, function()
+      _logAnimation = nil
+      view("log"):hidden(true)
+    end)
+  end
+end
+
+tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, function(event)
+  if event.key == lost.application.K_C and event.altDown then
+    compile()
+  elseif event.key == lost.application.K_R and event.altDown then
+    run()
+  elseif event.key == lost.application.K_T and event.altDown then
+    toggleLog()
+  end
+end)
 
 view = lost.guiro.view.View
 {
@@ -98,6 +162,18 @@ view = lost.guiro.view.View
           {
             buttonClick = function(event)
               run()
+            end
+          }
+        },
+        lost.guiro.view.Button
+        {
+          id = "toggleLog",
+          title = "Toggle Log [Alt-t]",
+          bounds = {{"left", 230}, "center", 100, 25},
+          listeners =
+          {
+            buttonClick = function(event)
+              toggleLog()
             end
           }
         }
@@ -187,7 +263,7 @@ end
                   bounds = {"center", {"center", -29}, "1", 26},
                   color = Color(1,0,0),
                   font = {"Vera mono", 12},
-                  halign = "left",
+                  halign = "center",
                   breakMode = "word"
                 }
               },
@@ -288,7 +364,7 @@ end)
                   bounds = {"center", {"center", -29}, "1", 26},
                   color = Color(1,0,0),
                   font = {"Vera mono", 12},
-                  halign = "left",
+                  halign = "center",
                   breakMode = "word"
                 }
               },
@@ -390,7 +466,7 @@ return lost.guiro.view.TestLabel
                   bounds = {"center", {"center", -21}, "1", 26},
                   color = Color(1,0,0),
                   font = {"Vera mono", 12},
-                  halign = "left",
+                  halign = "center",
                   breakMode = "word"
                 }
               },
@@ -441,6 +517,15 @@ return lost.guiro.view.TestLabel
             focusLost = function(event)
               event.target:superview()("result_info"):hidden(false)
             end
+          },
+          sublayers =
+          {
+            lost.guiro.layer.Rect
+            {
+              filled = false,
+              color = Color(0,0,0),
+              width = 1
+            }
           }
         },
         lost.guiro.view.View
@@ -466,6 +551,38 @@ return lost.guiro.view.TestLabel
               color = Color(.8, .8, .8)
             }
           }
+        }
+      }
+    },
+    lost.guiro.view.View
+    {
+      id = "log",
+      bounds = {"left",{"top", -30},"1",0},
+      hidden = true,
+      subviews =
+      {
+        lost.guiro.view.Label
+        {
+          id = "text",
+          clip = true,
+          color = Color(1, 0, 0),
+          font = {"Vera mono", 12},
+          halign = "left",
+          valign = "top"
+        }
+      },
+      sublayers =
+      {
+        lost.guiro.layer.Rect
+        {
+          filled = true,
+          color = Color(.8, .8, .8, .75)
+        },
+        lost.guiro.layer.Rect
+        {
+          filled = false,
+          color = Color(0,0,0),
+          width = 2
         }
       }
     }
