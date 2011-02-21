@@ -111,7 +111,7 @@ namespace lost
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
     {
-      addTasklet(new Tasklet(event->loader));
+      addTasklet(new Tasklet(event->loader, event->writer));
     }
 
   }

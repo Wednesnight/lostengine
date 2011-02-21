@@ -26,8 +26,12 @@ namespace lost
         namespace_("common")
         [
           class_<Data>("Data")
-            .def_readwrite("size", &Data::size)
             .def("str", &Data::str)
+            .def_readwrite("size", &Data::size)
+            .scope
+            [
+              def("create", &Data::create)
+            ]
         ]
       ];
     }

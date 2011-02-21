@@ -15,6 +15,9 @@ common::DataPtr loadFromAbsolutePath(const std::string& inPath);
 // checks if file exists
 bool fileExists(const std::string& inPath);
 
+// writes inData to inPath
+void writeToAbsolutePath(const std::string& inPath, const common::DataPtr& inData);
+
 }
 }
 

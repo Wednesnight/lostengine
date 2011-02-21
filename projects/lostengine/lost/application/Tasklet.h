@@ -3,6 +3,7 @@
 
 #include <list>
 #include "lost/resource/DefaultLoader.h"
+#include "lost/resource/DefaultWriter.h"
 #include "lost/application/Queue.h"
 #include "lost/event/forward.h"
 #include "lost/application/forward.h"
@@ -63,6 +64,7 @@ namespace lost
       event::EventDispatcherPtr       eventDispatcher;    
       std::string                     name;
       resource::LoaderPtr             loader;
+      resource::WriterPtr             writer;
       TaskletConfig                   config;
       font::FontManagerPtr            fontManager;
       lost::shared_ptr<time::TimerScheduler> scheduler;
@@ -74,7 +76,8 @@ namespace lost
       QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
       bool                            running;        // tasklet will shutdown if this flag is set to false
 
-      Tasklet(lost::resource::LoaderPtr inLoader = resource::DefaultLoader::create());
+      Tasklet(lost::resource::LoaderPtr inLoader = resource::DefaultLoader::create(),
+              lost::resource::WriterPtr inWriter = resource::DefaultWriter::create());
       virtual ~Tasklet();
 
       void queueApplicationEvent(event::EventPtr event);

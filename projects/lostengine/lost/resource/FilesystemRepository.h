@@ -17,6 +17,7 @@ struct FilesystemRepository : Repository
 
   virtual common::DataPtr load(const boost::filesystem::path& inRootDir);
   virtual bool exists(std::string& path);
+  virtual void write(const boost::filesystem::path& inPath, const common::DataPtr& inData);
   static RepositoryPtr create(const std::string& inRootDir);
 //  static FilesystemRepositoryPtr create(const boost::filesystem::path& inRootDir);
   

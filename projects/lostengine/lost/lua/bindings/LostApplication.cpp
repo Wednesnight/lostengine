@@ -21,6 +21,7 @@
 #include "lost/application/QueueEntityLua.h"
 #include "lost/rg/Node.h"
 #include "lost/resource/Loader.h"
+#include "lost/resource/Writer.h"
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/resource/FilesystemRepository.h"
 #include <luabind/shared_ptr_converter.hpp>
@@ -279,6 +280,7 @@ namespace lost
             .def_readonly("scheduler", &Tasklet::scheduler)
             .def_readwrite("name", &Tasklet::name)
             .def_readonly("loader", &Tasklet::loader)
+            .def_readonly("writer", &Tasklet::writer)
             .def_readonly("lua", &Tasklet::lua)
             .def_readonly("window", &Tasklet::window)
             .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
@@ -300,7 +302,8 @@ namespace lost
       LoaderPtr loader = Loader::create();
       loader->addRepository(FilesystemRepository::create(absolutePath));
       loader->addRepository(ApplicationResourceRepository::create());
-      return SpawnTaskletEvent::create(loader);
+      WriterPtr writer = Writer::create(FilesystemRepository::create(absolutePath));
+      return SpawnTaskletEvent::create(loader, writer);
     }
 
     void LostApplicationSpawnTaskletEvent(lua_State* state)

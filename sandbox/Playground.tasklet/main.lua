@@ -8,6 +8,11 @@ function startup()
   }
 end
 
+function shutdown()
+--  local data = lost.common.Data.create("funky file content")
+--  tasklet.writer:write("file.txt", data)
+end
+
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
     tasklet.running = false

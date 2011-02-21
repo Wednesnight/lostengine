@@ -4,6 +4,7 @@
 #include "lost/event/Event.h"
 #include "lost/platform/shared_ptr.h"
 #include "lost/resource/Loader.h"
+#include "lost/resource/Writer.h"
 
 namespace lost
 {
@@ -15,17 +16,21 @@ namespace lost
 
     struct SpawnTaskletEvent : public event::Event
     {
-        resource::LoaderPtr loader;
-        static const event::Type& SPAWN_TASKLET() { static const event::Type d = "spawnTasklet"; return d; }
+      resource::LoaderPtr loader;
+      resource::WriterPtr writer;
+      static const event::Type& SPAWN_TASKLET() { static const event::Type d = "spawnTasklet"; return d; }
 
-        SpawnTaskletEvent(resource::LoaderPtr inLoader)
-        : loader(inLoader), Event(SPAWN_TASKLET())
-        {
-        }
+      SpawnTaskletEvent(resource::LoaderPtr inLoader, resource::WriterPtr inWriter)
+      : loader(inLoader), writer(inWriter), Event(SPAWN_TASKLET())
+      {
+      }
         
-        static SpawnTaskletEventPtr create(resource::LoaderPtr inLoader) { return SpawnTaskletEventPtr(new SpawnTaskletEvent(inLoader)); }
+      static SpawnTaskletEventPtr create(resource::LoaderPtr inLoader, resource::WriterPtr inWriter)
+      {
+        return SpawnTaskletEventPtr(new SpawnTaskletEvent(inLoader, inWriter));
+      }
         
-        virtual ~SpawnTaskletEvent() {}
+      virtual ~SpawnTaskletEvent() {}
 
     };
 
