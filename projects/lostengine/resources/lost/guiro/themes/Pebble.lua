@@ -243,7 +243,11 @@ function Pebble:constructor()
   
   self.scrollbarArrowColor = Color(86/255, 86/255, 86/255)
   self.scrollbarFrameColor = Color(171/255, 171/255, 171/255)
-  self.scrollbarArrowInset = 5
+  self.scrollbarTrackColor = Color(230/255, 230/255, 230/255)
+  self.scrollbarArrowInset = {regular=6, small=4, mini=2}
+  self.scrollbarWidth = {regular=16, small=12, mini=10}
+  self.scrollbarHandleRadius = {regular=6,small=4,mini=3}
+  self.scrollbarButtonSize={regular=18,small=14,mini=12}
 end
 
 function Pebble:labelDefault(target, args)
@@ -1413,17 +1417,16 @@ end
 -- handle size is different here, spans full "width" (relative) and varying "length"
 function Pebble:sliderScrollBar(target, args)
   local l = lost.guiro.layer.Layer
+  local r = lost.guiro.layer.Rect
   local rr = lost.guiro.layer.RoundedRect
   local sz = args.size or "regular"
   target.mode = args.mode or "horizontal"
 
-  local hs = self.sliderCandyHandleSize[sz]
-  local trackRadius = 2
   local dc = .7
   local dimColor = Color(dc, dc, dc)
   local trackFillColor = Color(.4,.4,.4)
   local trackFrameColor = Color(.1,.1,.1)
-  local hr = 6
+  local hr = self.scrollbarHandleRadius[sz]
   local gv = true
   if target.mode == "vertical" then
     gv = false
@@ -1434,31 +1437,49 @@ function Pebble:sliderScrollBar(target, args)
     grad = "candyBlueMirrored"
     gradFrame = "candyBlueFrameMirrored"    
   end
-  local handleReleased = l{bounds={0,0,"1","1"},
+  local handleReleased = l{bounds={1,1,{"1",-2},{"1",-2}},
                            sublayers={rr{bounds={0,0,"1","1"},gradient=grad,filled=true,radius=hr,gradientVertical=gv},
                                       rr{bounds={0,0,"1","1"},gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
 
-  local handlePushed = l{bounds={0,0,"1","1"},
+  local handlePushed = l{bounds={1,1,{"1",-2},{"1",-2}},
                            sublayers={rr{bounds={0,0,"1","1"},color=dimColor,gradient=grad,filled=true,radius=hr,gradientVertical=gv},
                                       rr{bounds={0,0,"1","1"},color=dimColor,gradient=gradFrame,filled=false,radius=hr,gradientVertical=gv}}}
   if target.mode == "horizontal" then
     handleReleased:y("center")
     handlePushed:y("center")
+    target.layer:addSublayer(l{sublayers={
+                                r{filled=true, gradient="squareGlass"},
+                                rr{bounds={1,1,{"1",-2},{"1",-2}},filled=true,color=self.scrollbarTrackColor,gradient="squareGlassMirrored",radius=hr+1},
+                              }})
   else
     handleReleased:x("center")
     handlePushed:x("center")
+    target.layer:addSublayer(l{sublayers={
+                                r{filled=true, gradient="squareGlassMirrored", gradientVertical=false},
+                                rr{bounds={1,1,{"1",-2},{"1",-2}},filled=true,gradient="squareGlass",color=self.scrollbarTrackColor,gradientVertical=false,radius=hr+1},
+                              }})
   end
-  target.layer:addSublayer(lost.guiro.layer.Rect{filled=true, color=Color(1,0,0)})
   target.layer:addSublayer(handleReleased)
   target.handleReleasedLayer = handleReleased
   target.layer:addSublayer(handlePushed)
   target.handlePushedLayer = handlePushed
-  target:handleSize(hs)  
+  target:handleSize(10) -- value doesn'T matter but must be set to something
 end
 
 function Pebble:buttonScrollbarDown(target, args)
   local b = lost.guiro.view.Button
-  local normal = lost.guiro.layer.Rect{filled=true,color=Color(0,1,0),bounds={0,0,"1","1"}}
+  local l = lost.guiro.layer.Layer
+  local r = lost.guiro.layer.Rect
+  local i = lost.guiro.layer.Image
+  local rr = lost.guiro.layer.RoundedRect
+  local inset = self.scrollbarArrowInset[args.size]    
+  target:mode("normal")
+  local normal = l{sublayers={
+                   r{filled=true,gradient="squareGlassMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
+--                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={top=false},roundCorners={bl=false, br=false}},
+                   i{flip=false,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:varrowTexture(),filter=true,halign="center"},
+                 }}
+
   target.layer:addSublayer(normal)
   target.backgrounds[b.STATE_NORMAL] = normal
 end
@@ -1469,11 +1490,12 @@ function Pebble:buttonScrollbarUp(target, args)
   local r = lost.guiro.layer.Rect
   local i = lost.guiro.layer.Image
   local rr = lost.guiro.layer.RoundedRect
+  local inset = self.scrollbarArrowInset[args.size]  
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlassMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
-                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={bottom=false},roundCorners={tl=false, tr=false}},
-                   i{flip=true,bounds={"center", "center", {"1",-self.scrollbarArrowInset}, {"1",-self.scrollbarArrowInset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:varrowTexture(),filter=true,halign="center"},
+--                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={bottom=false},roundCorners={tl=false, tr=false}},
+                   i{flip=true,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:varrowTexture(),filter=true,halign="center"},
                  }}
 
   target.layer:addSublayer(normal)
@@ -1486,11 +1508,12 @@ function Pebble:buttonScrollbarLeft(target, args)
   local r = lost.guiro.layer.Rect
   local i = lost.guiro.layer.Image
   local rr = lost.guiro.layer.RoundedRect
+  local inset = self.scrollbarArrowInset[args.size]
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlass",bounds={0,0,"1","1"}},
-                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={right=false},roundCorners={tl=false, bl=false}},
-                   i{bounds={"center", "center", {"1",-self.scrollbarArrowInset}, {"1",-self.scrollbarArrowInset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:larrowTexture(),filter=true,halign="center"},
+--                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={right=false},roundCorners={tl=false, bl=false}},
+                   i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:larrowTexture(),filter=true,halign="center"},
                  }}
   
   target.layer:addSublayer(normal)
@@ -1503,11 +1526,12 @@ function Pebble:buttonScrollbarRight(target, args)
   local r = lost.guiro.layer.Rect
   local i = lost.guiro.layer.Image
   local rr = lost.guiro.layer.RoundedRect
+  local inset = self.scrollbarArrowInset[args.size]
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlass",bounds={0,0,"1","1"}},
-                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={left=false},roundCorners={tr=false, br=false}},
-                   i{bounds={"center", "center", {"1",-self.scrollbarArrowInset}, {"1",-self.scrollbarArrowInset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:rarrowTexture(),filter=true,halign="center"},
+--                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={left=false},roundCorners={tr=false, br=false}},
+                   i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:rarrowTexture(),filter=true,halign="center"},
                  }}
     
   target.layer:addSublayer(normal)
@@ -1515,9 +1539,16 @@ function Pebble:buttonScrollbarRight(target, args)
 end
 
 function Pebble:scrollBar(target, args)
-  local buttonSize = 18
-  local sliderDelta = buttonSize*2
   local sliderArgs = {}
+  local sz = args.size or "regular"
+  if args.mode == "horizontal" then
+    target:height(self.scrollbarWidth[sz])
+  else
+    target:width(self.scrollbarWidth[sz])
+  end
+  local buttonSize = self.scrollbarButtonSize[sz]
+  local sliderDelta = buttonSize*2
+  sliderArgs.size = sz
   sliderArgs.mode = args.mode
   sliderArgs.style = "scrollbar"
   
@@ -1532,6 +1563,7 @@ function Pebble:scrollBar(target, args)
   slider:bounds(sliderBounds)
   target.slider = slider
   slider:handleSize(30)
+  slider.scrollbarMode = true
   
   local buttonTheme = "pebble"
   local ibs = ""
@@ -1549,8 +1581,8 @@ function Pebble:scrollBar(target, args)
     ibs = "scrollbarUp"
     dbs = "scrollbarDown"
   end
-  local incButton = lost.guiro.view.Button{theme=buttonTheme, style=ibs,bounds=ibb,title="+"}
-  local decButton = lost.guiro.view.Button{theme=buttonTheme, style=dbs,bounds=dbb,title="-"}
+  local incButton = lost.guiro.view.Button{theme=buttonTheme, style=ibs,bounds=ibb,size=sz}
+  local decButton = lost.guiro.view.Button{theme=buttonTheme, style=dbs,bounds=dbb,size=sz}
   target:addSubview(incButton)
   target:addSubview(decButton)
   target.incButton = incButton

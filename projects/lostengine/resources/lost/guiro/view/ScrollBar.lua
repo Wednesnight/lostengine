@@ -18,4 +18,25 @@ function ScrollBar:constructor(args)
   local t = args or {}
   self.id = t.id or "scrollbar"
   self:needsLayout()
+  
+  self.incButton:addEventListener("mouseDown", function(event) self:incButtonDown(event) end)
+  self.incButton:addEventListener("mouseUp", function(event) self:incButtonUp(event) end)
+  self.decButton:addEventListener("mouseDown", function(event) self:decButtonDown(event) end)
+  self.decButton:addEventListener("mouseUp", function(event) self:decButtonUp(event) end)
+end
+
+function ScrollBar:incButtonDown(event)
+  log.debug("inc "..event.type)
+end
+
+function ScrollBar:incButtonUp(event)
+log.debug("inc "..event.type)
+end
+
+function ScrollBar:decButtonDown(event)
+log.debug("dec "..event.type)
+end
+
+function ScrollBar:decButtonUp(event)
+log.debug("dec "..event.type)
 end

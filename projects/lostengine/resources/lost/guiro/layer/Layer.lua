@@ -267,3 +267,8 @@ function Layer:color(...)
     return self._color
   end
 end
+
+function Layer:containsPoint(point)
+  return self.rect:contains(point)
+end
+
