@@ -437,3 +437,14 @@ function View:clip(...)
     return self.layer:clip()
   end
 end
+
+function View:focus(focus)
+  if self.focusable then
+    if focus then
+      lost.guiro.ui().eventManager:receiveFocus(self)
+    else
+      lost.guiro.ui().eventManager:loseFocus(self)
+    end
+  end
+end
+
