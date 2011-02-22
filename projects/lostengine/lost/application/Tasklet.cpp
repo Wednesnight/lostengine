@@ -61,7 +61,7 @@ namespace lost
       window->size = math::Vec2(event->width, event->height);
     }
       
-    Tasklet::Tasklet(LoaderPtr inLoader, WriterPtr inWriter)
+    Tasklet::Tasklet(LoaderPtr inLoader)
     {
       isAlive = false;
       waitForEvents = false;
@@ -72,7 +72,6 @@ namespace lost
       scriptLoaded = false;
       configLoaded = false;
       loader = inLoader;
-      writer = inWriter;
       eventDispatcher.reset(new event::EventDispatcher());
       scheduler.reset(new ThreadedTimerScheduler(eventDispatcher));
       lua.reset(new State(loader));
