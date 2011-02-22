@@ -17,8 +17,14 @@ function shutdown()
 --  tasklet.writer:write("file.txt", data)
 end
 
+require("lost.guiro.view.MessageBox")
+local MessageBox = lost.guiro.view.MessageBox
 function keyHandler(event)
   if event.key == lost.application.K_ESCAPE then
-    tasklet.running = false
+    MessageBox.confirm("Close", "Really close?", function(b)
+      if b == MessageBox.YES then
+        tasklet.running = false
+      end
+    end)
   end
 end

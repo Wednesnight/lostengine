@@ -44,14 +44,16 @@ namespace lost
 
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running) {
             processEvents();
-            update(framerate);
-            render();
-            
-            if (waitForEvents) {
-              eventDispatcher->waitForEvents();
-            }
+            if (running) {
+              update(framerate);
+              render();
+              
+              if (waitForEvents) {
+                eventDispatcher->waitForEvents();
+              }
 
-            framerate = clock.getElapsedAndUpdateOffset(offset);
+              framerate = clock.getElapsedAndUpdateOffset(offset);
+            }
           }
 
           shutdown();

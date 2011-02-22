@@ -54,22 +54,24 @@ namespace lost
           while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running)
           {
             processEvents();
-            update(framerate);
-            render();
+            if (running) {
+              update(framerate);
+              render();
 
-            if(waitForEvents)
-            {
-              if (window) WaitMessage();
-                else eventDispatcher->waitForEvents();
-            }
-            MSG msg;
-            while (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
-            {
-              TranslateMessage(&msg);
-              DispatchMessage(&msg);
-            }
+              if(waitForEvents)
+              {
+                if (window) WaitMessage();
+                  else eventDispatcher->waitForEvents();
+              }
+              MSG msg;
+              while (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
+              {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+              }
 
-            framerate = clock.getElapsedAndUpdateOffset(offset);
+              framerate = clock.getElapsedAndUpdateOffset(offset);
+            }
           }
 
           shutdown();
