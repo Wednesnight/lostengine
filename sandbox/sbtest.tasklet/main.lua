@@ -1,5 +1,6 @@
 local scrollBarSize = 15
-local margin = 40
+local margin = 0
+local sbsize= "small"
 
 function startup()
   require("lost/guiro")
@@ -13,11 +14,13 @@ function startup()
       {
         lost.guiro.view.ScrollBar
         {
+          size=sbsize,
           mode="vertical",
           bounds={"right",scrollBarSize,scrollBarSize,{"1",-scrollBarSize}},
         },
         lost.guiro.view.ScrollBar
         {
+          size=sbsize,
           mode="horizontal",
           bounds={0,0,{"1",-scrollBarSize},scrollBarSize},
         },

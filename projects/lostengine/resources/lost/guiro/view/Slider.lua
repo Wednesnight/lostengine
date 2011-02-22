@@ -37,6 +37,7 @@ function Slider:constructor(args)
   self.handlePos = 0 -- handle x position within the slider view
   self:value(self.min)
   self.dragInProgress = false
+  self.scrollbarMode = false
 end
 
 function Slider:updateHandleLayerSizes()
@@ -168,13 +169,15 @@ function Slider:updateValueFromHandlePos()
 end
 
 function Slider:mouseDown(event)
-  self:rootview():addEventListener("mouseMove",self.mouseMoveHandler)
-  self:initHandleMouseOffset(self:mousePos(event.pos))
-  self:updateHandlePosFromMousePos(self:mousePos(event.pos))
-  self:updateValueFromHandlePos()
-  self:dispatchValueChangedEvent()
-  self:press()
-  self.dragInProgress = true
+  if (not self.scrollbarMode) or (self.scrollbarMode and self.handleReleasedLayer:containsPoint(event.pos)) then
+    self:rootview():addEventListener("mouseMove",self.mouseMoveHandler)
+    self:initHandleMouseOffset(self:mousePos(event.pos))
+    self:updateHandlePosFromMousePos(self:mousePos(event.pos))
+    self:updateValueFromHandlePos()
+    self:dispatchValueChangedEvent()
+    self:press()
+    self.dragInProgress = true
+  end
 end
 
 function Slider:mouseUp(event)
