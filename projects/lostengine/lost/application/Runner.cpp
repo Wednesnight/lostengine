@@ -33,8 +33,7 @@ namespace lost
           getAndroidApp()->activity->assetManager, relativePathToTaskletInResourceDir));
 #endif
       loader->addRepository(taskletDir);
-      resource::WriterPtr writer = resource::Writer::create(taskletDir);
-      Tasklet* tasklet = new Tasklet(loader, writer);
+      Tasklet* tasklet = new Tasklet(loader);
       return runTasklet(argc, argv, tasklet);
     }
     
