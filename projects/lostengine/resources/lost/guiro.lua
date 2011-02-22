@@ -42,5 +42,6 @@ require("lost.guiro.view.MenuBarItem")
 require("lost.guiro.view.PopUpButton")
 require("lost.guiro.view.ScrollBar")
 require("lost.guiro.view.ScrollView")
+require("lost.guiro.view.DirectoryView")
 -- this is the reason you need to call this in startup(): themeManager might already instantiate some resources that require a GL context
 lost.guiro.themeManager() -- called to instantiate gradients before they're used in places other than the styles

@@ -203,7 +203,7 @@ end
 
 function View:removeAllSubviews()
   while (#self.subviews) > 0 do
-    local l = self.subviews[1]
+    local l = self.subviews[#self.subviews]
     l:removeFromSuperview()
   end
 end
