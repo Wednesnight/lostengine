@@ -2,17 +2,12 @@
 #define LOST_APPLICATION_SPAWNTASKLETEVENT_H
 
 #include "lost/event/Event.h"
-#include "lost/platform/shared_ptr.h"
-#include "lost/resource/Loader.h"
+#include "lost/resource/forward.h"
 
 namespace lost
 {
   namespace application
   {
-
-    struct SpawnTaskletEvent;
-    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
-
     struct SpawnTaskletEvent : public event::Event
     {
       resource::LoaderPtr loader;

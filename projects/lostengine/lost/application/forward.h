@@ -40,7 +40,8 @@ namespace lost
     struct WindowEvent;
     typedef lost::shared_ptr<WindowEvent> WindowEventPtr;
   
-
+    struct SpawnTaskletEvent;
+    typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
 }
 }
 
