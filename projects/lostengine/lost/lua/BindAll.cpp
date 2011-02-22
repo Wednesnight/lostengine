@@ -19,6 +19,7 @@
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/bindings/LostRg.h"
 #include "lost/lua/bindings/LostTime.h"
+#include "lost/lua/bindings/ThirdpartyBoost.h"
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
 
 #include "luabind/class_info.hpp"
@@ -68,6 +69,7 @@ namespace lost
       LostRg(state);
       LostTime(state);
 
+      ThirdpartyBoost(state);
       ThirdpartyBox2D(state);
 
       luabind::bind_class_info(state);

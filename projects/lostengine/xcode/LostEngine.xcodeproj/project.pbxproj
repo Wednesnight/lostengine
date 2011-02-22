@@ -105,6 +105,7 @@
 		3D8397C3F325E561A45EE587 /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B759C0377C6D06ACF7245CEA /* ModuleLoader.cpp */; };
 		3E58B30BEF0B53E105A712DD /* hl_md5wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB6AB6E8E964B34C729700D9 /* hl_md5wrapper.cpp */; };
 		3E729F45BD6F121E7ED79AEA /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 93190DFD46EBB8453F813D6B /* lapi.c */; };
+		3EC2F0C7131399AE00019BB1 /* ThirdpartyBoost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EC2F0C6131399AE00019BB1 /* ThirdpartyBoost.cpp */; };
 		3FF913EABE45C1D3C7CC8453 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C3813C78C26FBB64D9A77AE /* inffast.c */; };
 		4117C8E952B557F14AD6F871 /* LostBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D94BBE10515FEAB6CE2AF618 /* LostBitmap.cpp */; };
 		41A3F62B092C9660BDE15D06 /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4B7EE2C800AF5FC2ABCB127 /* connection.cpp */; };
@@ -510,6 +511,7 @@
 		3E7B5C6220D5121A8F4B953B /* lzio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lzio.c; sourceTree = "<group>"; };
 		3E993BC54898BA6C79FA4A01 /* lundump.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lundump.c; sourceTree = "<group>"; };
 		3EAF5DC00FB1A8E6EAB7D662 /* psaux.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = psaux.c; sourceTree = "<group>"; };
+		3EC2F0C6131399AE00019BB1 /* ThirdpartyBoost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ThirdpartyBoost.cpp; sourceTree = "<group>"; };
 		3F4732247852813A2D748248 /* raster.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raster.c; sourceTree = "<group>"; };
 		3FD63E73CE8AC2231C61F62F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		421A4C61554EC70E3518FEF6 /* err.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = err.c; sourceTree = "<group>"; };
@@ -1615,6 +1617,7 @@
 				07F495BE3D877B01FFB858FA /* LostResource.cpp */,
 				71C1AE403EBABBD8C7A4D10D /* LostRg.cpp */,
 				F5600EAFA37F7A15AB91BE4E /* LostTime.cpp */,
+				3EC2F0C6131399AE00019BB1 /* ThirdpartyBoost.cpp */,
 				672B0EE4C8932C84CE907B14 /* ThirdpartyBox2D.cpp */,
 			);
 			path = bindings;
@@ -1866,7 +1869,6 @@
 			};
 			buildConfigurationList = C4BC31635FECBB26F4E7AAE5 /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2232,6 +2234,7 @@
 				12EDF28F3838C12335B4D5EF /* zip.c in Sources */,
 				8DF578321312E03000F65076 /* Writer.cpp in Sources */,
 				8DF578A41312ED0D00F65076 /* DefaultWriter.cpp in Sources */,
+				3EC2F0C7131399AE00019BB1 /* ThirdpartyBoost.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

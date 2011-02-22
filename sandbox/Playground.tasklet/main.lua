@@ -6,6 +6,10 @@ function startup()
   {
     require("playground")
   }
+
+  for f in tasklet.loader:directory("") do
+    log.debug(tostring(f))
+  end
 end
 
 function shutdown()
