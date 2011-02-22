@@ -467,7 +467,7 @@
         'lost/application/linux/Application.cpp',
         'lost/application/linux/Tasklet.cpp',
         'lost/application/linux/Window.cpp',
-	'lost/application/linux/WindowHandler.cpp',
+	      'lost/application/linux/WindowHandler.cpp',
 
         # application/mac
         'lost/application/mac/Application.mm',
@@ -574,6 +574,7 @@
         'lost/lua/bindings/LostResource.cpp',
         'lost/lua/bindings/LostRg.cpp',
         'lost/lua/bindings/LostTime.cpp',
+        'lost/lua/bindings/ThirdpartyBoost.cpp',
         'lost/lua/bindings/ThirdpartyBox2D.cpp',
 
         # math
