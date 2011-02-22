@@ -148,7 +148,7 @@ end
 
 function Layer:removeAllSublayers()
   while (#self.sublayers) > 0 do
-    local l = self.sublayers[1]
+    local l = self.sublayers[#self.sublayers]
     l:removeFromSuperlayer()
   end
 end

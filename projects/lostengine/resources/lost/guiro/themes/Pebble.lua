@@ -96,6 +96,8 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.Button", "scrollbarLeft", function(target, args) self:buttonScrollbarLeft(target, args) end)
   self:addStyle("lost.guiro.view.Button", "scrollbarRight", function(target, args) self:buttonScrollbarRight(target, args) end)
 
+  self:addStyle("lost.guiro.view.DirectoryView", "default", function(target, args) self:directoryView(target, args) end)
+
   self.buttonRoundedHeight = {mini=14, small=16, regular=18}
   self.buttonRoundedFonts = {mini={"Vera", 9}, small={"Vera", 10}, regular={"Vera", 11}}
   self.buttonRoundedFrameCol = Color(.6588,.6588,.6588)
@@ -767,6 +769,28 @@ function Pebble:larrowTexture()
     self._larrowTexture = lost.gl.Texture.create(bmp, params)
   end
   return self._larrowTexture
+end
+
+function Pebble:directoryTexture()
+  if not self._directoryTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/directory.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._directoryTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._directoryTexture
+end
+
+function Pebble:fileTexture()
+  if not self._fileTexture then
+    local data = tasklet.loader:load("lost/guiro/themes/file.png")
+    local bmp = lost.bitmap.Bitmap.create(data)
+    bmp:premultiplyAlpha()
+    local params = lost.gl.Texture.Params()
+    self._fileTexture = lost.gl.Texture.create(bmp, params)
+  end
+  return self._fileTexture
 end
 
 function Pebble:buttonCheckboxCandy(target, args)
@@ -1531,5 +1555,49 @@ function Pebble:scrollBar(target, args)
   target:addSubview(decButton)
   target.incButton = incButton
   target.decButton = decButton
+end
+
+function Pebble:directoryView(target, args)
+
+  target.directoryTexture = self:directoryTexture()
+  target.fileTexture = self:fileTexture()
+
+  target.entryHeight = 16
+  target.entryPadding = 5
+
+  target.createRow = function(self)
+    return lost.guiro.view.View
+    {
+      bounds = {"left", "top", "1", target.entryHeight},
+      sublayers =
+      {
+        lost.guiro.layer.Rect
+        {
+          id = "selection",
+          bounds = {0, 0, "1", "1"},
+          hidden = true,
+          filled = true,
+          color = Color(.4,.6,1,.2)
+        },
+        lost.guiro.layer.Image
+        {
+          id = "image",
+          bounds = {{"left", target.entryPadding}, "center", 16, "1"},
+          filter = true,
+          texture = target.directoryTexture
+        },
+        lost.guiro.layer.Text
+        {
+          id = "text",
+          bounds = {"right", "center", {"1", -(16+target.entryPadding*2)}, "1"},
+          font = {"Vera", 10},
+          halign = "left",
+          valign = "top"
+        }
+      }
+    }
+  end
+
+  target.layer:addSublayer(lost.guiro.layer.Rect{filled=true,color=Color(1,1,1),bounds={0,0,"1","1"}})
 end
 

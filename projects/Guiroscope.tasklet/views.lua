@@ -24,6 +24,7 @@ return lost.guiro.view.View
              {"PopUpButton",require("views_popupbutton")},             
              {"ScrollBar",require("views_scrollbar")},             
              {"ScrollView",require("views_scrollview")},             
+             {"DirectoryView",require("views_directoryview")},             
              },
     }
   }

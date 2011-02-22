@@ -59,8 +59,8 @@ function Image:halign(...)
 end
 
 function Image:update()
-  local my = self.texture.dataHeight / self.texture.height
-  local mx = self.texture.dataWidth / self.texture.width
+  local my = self._texture.dataHeight / self._texture.height
+  local mx = self._texture.dataWidth / self._texture.width
   if self._flip then -- flip image vertically 
     self.mesh:set(0,gl.UT_texcoord0, Vec2(0,my))
     self.mesh:set(1,gl.UT_texcoord0, Vec2(mx,my))
@@ -73,9 +73,9 @@ function Image:update()
     self.mesh:set(3,gl.UT_texcoord0, Vec2(0,my))
   end
   if self._filter then
-    self.texture:filter(gl.GL_LINEAR)
+    self._texture:filter(gl.GL_LINEAR)
   else
-    self.texture:filter(gl.GL_NEAREST)
+    self._texture:filter(gl.GL_NEAREST)
   end
 end
 
@@ -95,12 +95,12 @@ function Image:updateLayout()
   local w = 0
   local h = 0
   if self._scale == "aspect" then -- aspect scales the image to fit the current rect
-    local f = math.min(self.rect.width / self.texture.dataWidth, self.rect.height / self.texture.dataHeight)
+    local f = math.min(self.rect.width / self._texture.dataWidth, self.rect.height / self._texture.dataHeight)
     w = math.floor(self.rect.width*f)
     h = math.floor(self.rect.height*f)        
   else
-    w = self.texture.dataWidth
-    h = self.texture.dataHeight
+    w = self._texture.dataWidth
+    h = self._texture.dataHeight
   end
   if self._valign == "top" then y = self.rect.height - h
   elseif self._valign == "center" then y = math.floor((self.rect.height - h)/2)
@@ -119,8 +119,8 @@ function Image:bitmap(v)
 end
 
 function Image:texture(v)
-  self.texture = v
-  self.mesh.material:setTexture(0,self.texture)
+  self._texture = v
+  self.mesh.material:setTexture(0,self._texture)
   self:needsUpdate()
   self:needsLayout()
 end
