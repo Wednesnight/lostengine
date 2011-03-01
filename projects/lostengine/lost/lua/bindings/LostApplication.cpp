@@ -63,6 +63,11 @@ namespace lost
           class_<Application>("Application")
             .def("showMouse", &Application::showMouse)
             .def_readonly("eventDispatcher", &Application::eventDispatcher)
+            .def_readonly("tasklets", &Application::tasklets, return_stl_iterator)
+            .scope
+            [
+              def("getInstance", (ApplicationPtr(*)())&Application::getInstance)
+            ]
         ]
       ];
     }
@@ -268,6 +273,10 @@ namespace lost
       globals(state)["lost"]["application"]["ResizeEvent"]["TASKLET_WINDOW_RESIZE"] = ResizeEvent::TASKLET_WINDOW_RESIZE();
     }
 
+    int Tasklet_id(Tasklet* tasklet) {
+      return (int)tasklet;
+    }
+
     void LostApplicationTasklet(lua_State* state)
     {
       module(state, "lost")
@@ -291,6 +300,7 @@ namespace lost
             .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
             .def("getClipboardString", &Tasklet::getClipboardString)
             .def("setClipboardString", &Tasklet::setClipboardString)
+            .property("id", &Tasklet_id)
         ]
       ];
     }
