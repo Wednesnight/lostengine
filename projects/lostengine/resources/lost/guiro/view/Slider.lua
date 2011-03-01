@@ -168,8 +168,28 @@ function Slider:updateValueFromHandlePos()
   self._value = self.min + v*(self.max - self.min)
 end
 
+function Slider:handleContainsPoint(point) -- vec2
+  return self.handleReleasedLayer:containsPoint(point)
+end
+
+function Slider:pointOverHandle(point) -- "over" = top or right, depending on mode
+  if self.mode == "horizontal" then
+    return point.x >= (self.handleReleasedLayer.rect.x+self.handleReleasedLayer.rect.width)
+  else
+    return point.y >= (self.handleReleasedLayer.rect.y+self.handleReleasedLayer.rect.height)
+  end
+end
+
+function Slider:pointUnderHandle(point) -- "under" = bottom or left, depending on mode
+  if self.mode == "horizontal" then
+    return point.x < self.handleReleasedLayer.rect.x
+  else
+    return point.y < self.handleReleasedLayer.rect.y
+  end
+end
+
 function Slider:mouseDown(event)
-  if (not self.scrollbarMode) or (self.scrollbarMode and self.handleReleasedLayer:containsPoint(event.pos)) then
+  if (not self.scrollbarMode) or (self.scrollbarMode and self:handleContainsPoint(event.pos)) then
     self:rootview():addEventListener("mouseMove",self.mouseMoveHandler)
     self:initHandleMouseOffset(self:mousePos(event.pos))
     self:updateHandlePosFromMousePos(self:mousePos(event.pos))

@@ -1587,6 +1587,8 @@ function Pebble:scrollBar(target, args)
   target:addSubview(decButton)
   target.incButton = incButton
   target.decButton = decButton
+  target.buttonSize = buttonSize
+  target:visibleRange(0.5)
 end
 
 function Pebble:directoryView(target, args)
