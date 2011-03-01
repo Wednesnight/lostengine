@@ -21,12 +21,6 @@ namespace lost
       struct ApplicationHiddenMembers;
       ApplicationHiddenMembers* hiddenMembers;
 
-      /**
-       * list of tasklets
-       * have a look at lost/application/Tasklet.h for details
-       */
-      std::list<Tasklet*> tasklets;
-
       bool running;
 
       /**
@@ -72,9 +66,22 @@ namespace lost
       void processEvents(const ProcessEventPtr& event);       // should be executed on main thread!
 
     public:
+      /**
+       * list of tasklets
+       * see: lost/application/Tasklet.h
+       */
+      std::list<Tasklet*> tasklets;
+      
+      /**
+       * see: lost/event/EventDispatcher.h
+       */
       lost::event::EventDispatcherPtr eventDispatcher;
 
+      /**
+       * returns Application singleton
+       */
       static ApplicationPtr getInstance(Tasklet* tasklet = NULL);
+
       ~Application();
 
       void addTasklet(Tasklet* tasklet);  // adds the specified tasklet, calls it's init() and start() methods
