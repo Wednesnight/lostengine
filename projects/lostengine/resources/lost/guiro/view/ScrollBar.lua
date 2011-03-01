@@ -70,6 +70,7 @@ end
 
 function ScrollBar:incButtonDown(event)
   log.debug("inc "..event.type)
+  self.slider:value(self.slider:value()+self:stepSize())
 end
 
 function ScrollBar:incButtonUp(event)
@@ -77,7 +78,8 @@ log.debug("inc "..event.type)
 end
 
 function ScrollBar:decButtonDown(event)
-log.debug("dec "..event.type)
+  log.debug("dec "..event.type)
+  self.slider:value(self.slider:value()-self:stepSize())
 end
 
 function ScrollBar:decButtonUp(event)

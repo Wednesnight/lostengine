@@ -242,6 +242,7 @@ function Pebble:constructor()
   }
   
   self.scrollbarArrowColor = Color(86/255, 86/255, 86/255)
+  self.scrollbarArrowColorPushed = Color(0,0,0)
   self.scrollbarFrameColor = Color(171/255, 171/255, 171/255)
   self.scrollbarTrackColor = Color(230/255, 230/255, 230/255)
   self.scrollbarArrowInset = {regular=6, small=4, mini=2}
@@ -1476,12 +1477,17 @@ function Pebble:buttonScrollbarDown(target, args)
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlassMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
---                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={top=false},roundCorners={bl=false, br=false}},
                    i{flip=false,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:varrowTexture(),filter=true,halign="center"},
+                 }}
+  local pushed = l{sublayers={
+                   r{filled=true,gradient="candyBlueMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
+                   i{flip=false,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColorPushed, texture=self:varrowTexture(),filter=true,halign="center"},
                  }}
 
   target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
   target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
 end
 
 function Pebble:buttonScrollbarUp(target, args)
@@ -1494,12 +1500,17 @@ function Pebble:buttonScrollbarUp(target, args)
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlassMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
---                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={bottom=false},roundCorners={tl=false, tr=false}},
                    i{flip=true,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:varrowTexture(),filter=true,halign="center"},
+                 }}
+  local pushed = l{sublayers={
+                   r{filled=true,gradient="candyBlueMirrored",gradientVertical=false,bounds={0,0,"1","1"}},
+                   i{flip=true,bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColorPushed, texture=self:varrowTexture(),filter=true,halign="center"},
                  }}
 
   target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
   target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
 end
 
 function Pebble:buttonScrollbarLeft(target, args)
@@ -1512,12 +1523,17 @@ function Pebble:buttonScrollbarLeft(target, args)
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlass",bounds={0,0,"1","1"}},
---                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={right=false},roundCorners={tl=false, bl=false}},
                    i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:larrowTexture(),filter=true,halign="center"},
                  }}
+  local pushed = l{sublayers={
+                  r{filled=true,gradient="candyBlue",bounds={0,0,"1","1"}},
+                  i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColorPushed, texture=self:larrowTexture(),filter=true,halign="center"},
+                }}
   
   target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
   target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
 end
 
 function Pebble:buttonScrollbarRight(target, args)
@@ -1530,12 +1546,17 @@ function Pebble:buttonScrollbarRight(target, args)
   target:mode("normal")
   local normal = l{sublayers={
                    r{filled=true,gradient="squareGlass",bounds={0,0,"1","1"}},
---                   rr{bounds={0,0,"1","1"},filled=false,color=self.scrollbarFrameColor,sides={left=false},roundCorners={tr=false, br=false}},
                    i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColor, texture=self:rarrowTexture(),filter=true,halign="center"},
                  }}
+  local pushed = l{sublayers={
+                 r{filled=true,gradient="candyBlue",bounds={0,0,"1","1"}},
+                 i{bounds={"center", "center", {"1",-inset}, {"1",-inset}},scale="aspect",color=self.scrollbarArrowColorPushed, texture=self:rarrowTexture(),filter=true,halign="center"},
+               }}
     
   target.layer:addSublayer(normal)
+  target.layer:addSublayer(pushed)
   target.backgrounds[b.STATE_NORMAL] = normal
+  target.backgrounds[b.STATE_PUSHED] = pushed
 end
 
 function Pebble:scrollBar(target, args)
@@ -1589,6 +1610,7 @@ function Pebble:scrollBar(target, args)
   target.decButton = decButton
   target.buttonSize = buttonSize
   target:visibleRange(0.5)
+  target:stepSize(0.1)
 end
 
 function Pebble:directoryView(target, args)
