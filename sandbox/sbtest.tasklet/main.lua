@@ -9,6 +9,12 @@ function startup()
     lost.guiro.view.View
     {
       bounds={"center","center",{"1",-margin},{"1",-margin}},
+      listeners=
+      {
+        valueChanged=function(event) 
+          log.debug(event.target.id.." "..tostring(event.target:value()))
+        end
+      },
       subviews=
       {
         lost.guiro.view.ScrollBar
