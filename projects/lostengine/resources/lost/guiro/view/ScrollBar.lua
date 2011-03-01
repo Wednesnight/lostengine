@@ -22,6 +22,7 @@ function ScrollBar:constructor(args)
   self.decButton:addEventListener("mouseUp", function(event) self:decButtonUp(event) end)
   self.slider:addEventListener("mouseDown", function(event) self:sliderMouseDown(event) end)
   self.slider:addEventListener("mouseUp", function(event) self:sliderMouseUp(event) end)
+  self.slider:addEventListener("valueChanged", function(event) self:sliderValueChanged(event) end)
 end
 
 function ScrollBar:updateLayout()
@@ -45,6 +46,14 @@ function ScrollBar:visibleRange(...)
   end
 end
 
+function ScrollBar:value(...)
+  if arg.n >= 1 then
+    self.slider:value(arg[1])
+  else
+    return self.slider:value()
+  end
+end
+
 function ScrollBar:stepSize(...)
   if arg.n >= 1 then
     self._stepSize = arg[1]
@@ -53,35 +62,52 @@ function ScrollBar:stepSize(...)
   end
 end
 
+function ScrollBar:sliderValueChanged(event)
+  event.stopPropagation = true
+  self:dispatchValueChangedEvent()
+end
+
+-- paging 
 function ScrollBar:sliderMouseDown(event)
-  log.debug("slider "..event.type.." inHandle:"..tostring(self.slider:handleContainsPoint(event.pos)).." over:"..tostring(self.slider:pointOverHandle(event.pos)).." under:"..tostring(self.slider:pointUnderHandle(event.pos)))
+--  log.debug("slider "..event.type.." inHandle:"..tostring(self.slider:handleContainsPoint(event.pos)).." over:"..tostring(self.slider:pointOverHandle(event.pos)).." under:"..tostring(self.slider:pointUnderHandle(event.pos)))
   if not self.slider:handleContainsPoint(event.pos) then
     if self.slider:pointOverHandle(event.pos) then
       self.slider:value(self.slider:value()+self._visibleRange)
+      self:dispatchValueChangedEvent()      
     elseif self.slider:pointUnderHandle(event.pos) then
       self.slider:value(self.slider:value()-self._visibleRange)
+      self:dispatchValueChangedEvent()      
     end
   end
 end
 
 function ScrollBar:sliderMouseUp(event)
-  log.debug("slider "..event.type.." inHandle:"..tostring(self.slider:handleContainsPoint(event.pos)).." over:"..tostring(self.slider:pointOverHandle(event.pos)).." under:"..tostring(self.slider:pointUnderHandle(event.pos)))
+--  log.debug("slider "..event.type.." inHandle:"..tostring(self.slider:handleContainsPoint(event.pos)).." over:"..tostring(self.slider:pointOverHandle(event.pos)).." under:"..tostring(self.slider:pointUnderHandle(event.pos)))
 end
 
 function ScrollBar:incButtonDown(event)
-  log.debug("inc "..event.type)
+--  log.debug("inc "..event.type)
   self.slider:value(self.slider:value()+self:stepSize())
+  self:dispatchValueChangedEvent()
 end
 
 function ScrollBar:incButtonUp(event)
-log.debug("inc "..event.type)
+--log.debug("inc "..event.type)
 end
 
 function ScrollBar:decButtonDown(event)
-  log.debug("dec "..event.type)
+--  log.debug("dec "..event.type)
   self.slider:value(self.slider:value()-self:stepSize())
+  self:dispatchValueChangedEvent()
 end
 
 function ScrollBar:decButtonUp(event)
-log.debug("dec "..event.type)
+--log.debug("dec "..event.type)
+end
+
+function ScrollBar:dispatchValueChangedEvent()
+  local event = lost.guiro.event.Event("valueChanged")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)    
 end
