@@ -1,6 +1,6 @@
 local scrollBarSize = 15
 local margin = 0
-local sbsize= "small"
+local sbsize= "regular"
 
 function startup()
   require("lost/guiro")
