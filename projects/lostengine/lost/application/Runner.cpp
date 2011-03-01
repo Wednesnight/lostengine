@@ -48,7 +48,7 @@ namespace lost
       int result = EXIT_SUCCESS;
       try
       {
-        static ApplicationPtr app = Application::create(t);
+        static ApplicationPtr app = Application::getInstance(t);
         app->run(argc, argv);      
       }
       catch (std::exception& e)
