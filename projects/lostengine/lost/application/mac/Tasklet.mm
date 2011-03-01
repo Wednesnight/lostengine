@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include "lost/gl/Context.h"
 #include <Foundation/NSAutoreleasePool.h>
+#include <Foundation/NSArray.h>
 #include <float.h>
 
 #import <AppKit/NSPasteboard.h>
