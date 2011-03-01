@@ -18,45 +18,30 @@ namespace lost
 {
   namespace application
   {
-    
-    Application::Application(resource::LoaderPtr inLoader)
+
+    ApplicationPtr Application::getInstance(Tasklet* tasklet)
     {
-      if(!inLoader)
-        inLoader.reset(new DefaultLoader());
-      initApplication(inLoader);
-      initialize();
-    }
-    
-    Application::Application(Tasklet* tasklet, resource::LoaderPtr inLoader)
-    {
-      if(!inLoader)
-        inLoader.reset(new DefaultLoader());
-      initApplication(inLoader);
-      addTasklet(tasklet);
-      initialize();
+      static ApplicationPtr instance;
+      if (!instance) {
+        instance.reset(new Application(tasklet));
+      }
+      return instance;
     }
 
-    void Application::initApplication(resource::LoaderPtr inLoader)
+    Application::Application(Tasklet* tasklet)
+    : running(false)
     {
-      running = false;
-      loader = inLoader;
-
       eventDispatcher.reset(new lost::event::EventDispatcher());
       eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
       eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::quitHandler, this, _1)));
       eventDispatcher->addEventListener(SpawnTaskletEvent::SPAWN_TASKLET(), event::receive<SpawnTaskletEvent>(bind(&Application::taskletSpawn, this, _1)));
       eventDispatcher->addEventListener(TaskletEvent::TERMINATE(), event::receive<TaskletEvent>(bind(&Application::taskletTerminate, this, _1)));
       eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
-    }
 
-    lost::shared_ptr<Application> Application::create()
-    {
-      return lost::shared_ptr<Application>(new Application);
-    }
-    
-    lost::shared_ptr<Application> Application::create(Tasklet* tasklet)
-    {
-      return lost::shared_ptr<Application>(new Application(tasklet));
+      if (tasklet != NULL) {
+        addTasklet(tasklet);
+      }
+      initialize();
     }
 
     Application::~Application()

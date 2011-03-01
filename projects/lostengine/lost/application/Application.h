@@ -5,7 +5,6 @@
 #include <list>
 #include <map>
 #include <string>
-#include "lost/resource/Loader.h"
 #include "lost/event/forward.h"
 #include "lost/application/forward.h"
 
@@ -15,13 +14,12 @@ namespace lost
   {
     struct Application 
     {
+    private:
       /**
        * forward declaration for platform specific stuff
        */
       struct ApplicationHiddenMembers;
       ApplicationHiddenMembers* hiddenMembers;
-
-      lost::resource::LoaderPtr loader;
 
       /**
        * list of tasklets
@@ -32,21 +30,15 @@ namespace lost
       bool running;
 
       /**
+       * hidden constructor
+       */
+      Application(Tasklet* tasklet);
+      
+      /**
        * hidden ctor/dtor utility methods for platform specific stuff
        */
       void initialize();
       void finalize();
-
-      /**
-       * don't use ctors directly! leave them private since we need to be held by a lost::shared_ptr,
-       */
-      Application(resource::LoaderPtr inLoader = resource::LoaderPtr());
-      Application(Tasklet* tasklet, resource::LoaderPtr inLoader = resource::LoaderPtr());
-
-      /**
-       * ctor helper
-       */
-      void initApplication(resource::LoaderPtr inLoader);
 
       /**
        * Removes the specified tasklet.
@@ -82,12 +74,7 @@ namespace lost
     public:
       lost::event::EventDispatcherPtr eventDispatcher;
 
-      /**
-       * static ctor helpers, make sure that we're held by a lost::shared_ptr
-       */
-      static ApplicationPtr create();
-      static ApplicationPtr create(Tasklet* tasklet);
-
+      static ApplicationPtr getInstance(Tasklet* tasklet = NULL);
       ~Application();
 
       void addTasklet(Tasklet* tasklet);  // adds the specified tasklet, calls it's init() and start() methods
