@@ -16,6 +16,7 @@
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
 #include "lost/application/WindowEvent.h"
+#include "lost/application/DebugEvent.h"
 #include "lost/event/Receive.h"
 #include "lost/rg/Node.h"
 #include "lost/rg/Clear.h"
@@ -90,6 +91,7 @@ namespace lost
       eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
       eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
       eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
+      eventDispatcher->addEventListener(DebugEvent::GET_MEM_INFO(), event::receive<DebugEvent>(boost::bind(&Tasklet::getMemInfo, this, _1)));      
     }
     
     Tasklet::~Tasklet()
@@ -254,5 +256,15 @@ namespace lost
     {
       return isAlive;
     }
+
+    void Tasklet::getMemInfo(const DebugEventPtr& event)
+    {
+      if (event->tasklet == this) {
+        DebugEventPtr result = DebugEvent::create(DebugEvent::MEM_INFO(), this);
+        result->info.memSize = lua->memUsage();
+        eventDispatcher->dispatchEvent(result);
+      }
+    }
+
   }
 }
