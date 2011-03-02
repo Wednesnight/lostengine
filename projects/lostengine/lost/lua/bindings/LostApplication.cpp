@@ -19,6 +19,7 @@
 #include "lost/application/Queue.h"
 #include "lost/application/QueueEntity.h"
 #include "lost/application/QueueEntityLua.h"
+#include "lost/application/DebugEvent.h"
 #include "lost/rg/Node.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/ApplicationResourceRepository.h"
@@ -26,6 +27,7 @@
 #include <luabind/shared_ptr_converter.hpp>
 #include "lost/gl/Context.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/event/Event.h"
 #include "lost/font/FontManager.h"
 
 using namespace luabind;
@@ -388,6 +390,34 @@ namespace lost
         ]
       ];
     }
+
+    EventPtr DebugEvent_create(const Type& type, Tasklet* tasklet)
+    {
+      return DebugEvent::create(type, tasklet);
+    }
+
+    void LostApplicationDebugEvent(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("application")
+        [
+          class_<DebugEvent, Event>("DebugEvent")
+            .def_readonly("tasklet", &DebugEvent::tasklet)
+            .def_readonly("info", &DebugEvent::info)
+
+            .scope
+            [
+              def("create", &DebugEvent_create),
+
+              class_<DebugEvent::DebugInfo>("DebugInfo")
+                .def_readonly("memSize", &DebugEvent::DebugInfo::memSize)
+            ]
+        ]
+      ];
+      globals(state)["lost"]["application"]["DebugEvent"]["GET_MEM_INFO"] = DebugEvent::GET_MEM_INFO();
+      globals(state)["lost"]["application"]["DebugEvent"]["MEM_INFO"] = DebugEvent::MEM_INFO();
+    }
     
     void LostApplication(lua_State* state)
     {
@@ -404,6 +434,7 @@ namespace lost
       LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
       LostApplicationQueue(state);
+      LostApplicationDebugEvent(state);
     }
     
   }

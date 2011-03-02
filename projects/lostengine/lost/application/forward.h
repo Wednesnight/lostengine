@@ -42,7 +42,10 @@ namespace lost
   
     struct SpawnTaskletEvent;
     typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;
-}
+
+    struct DebugEvent;
+    typedef lost::shared_ptr<DebugEvent> DebugEventPtr;
+  }
 }
 
 #endif

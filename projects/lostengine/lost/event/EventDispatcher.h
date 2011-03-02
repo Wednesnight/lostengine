@@ -44,7 +44,7 @@ namespace lost
       /**
        * for debugging purposes
        */
-	  boost::uint32_t numListeners();
+      boost::uint32_t numListeners();
 
       /**
        * returns if at least one event was queued
@@ -63,6 +63,8 @@ namespace lost
        * call this to signal queued events
        */
       void processEvents();
+
+      boost::signals::connection attachTo(const EventDispatcherPtr& target, const lost::event::Type& type);
 
     private:
       boost::mutex queueMutex;

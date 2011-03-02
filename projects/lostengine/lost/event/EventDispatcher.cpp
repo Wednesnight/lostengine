@@ -1,6 +1,8 @@
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 
+#include <boost/bind.hpp>
+
 namespace lost
 {
   namespace event
@@ -21,7 +23,7 @@ namespace lost
       delete listeners;
     }
 
-	boost::uint32_t EventDispatcher::numListeners()
+    boost::uint32_t EventDispatcher::numListeners()
     {
       return listeners->size();
     }
@@ -94,6 +96,11 @@ namespace lost
         } while(eventQueue->size() > 0);
       }
     }
-    
+
+    boost::signals::connection EventDispatcher::attachTo(const EventDispatcherPtr& target, const lost::event::Type& type)
+    {
+      return target->addEventListener(type, bind(&EventDispatcher::queueEvent, this, _1));
+    }
+
   }
 }
