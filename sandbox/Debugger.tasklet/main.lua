@@ -61,47 +61,49 @@ function refresh(t)
 
   local offset = 0
   for t in application.tasklets do
-    local name = t.name
-    if t.id == tasklet.id then
-      name = "[".. name .."]"
-    end
-    mainView:addSubview(lost.guiro.view.View
-    {
-      id = tostring(t.id),
-      subviews =
-      {
-        lost.guiro.view.Label
-        {
-          id = "name",
-          bounds = {{"left", 10}, {"top", -offset}, labelWidth, labelHeight},
-          font = {"Vera", 10},
-          halign = "left",
-          valign = "center",
-          text = name
-        },
-        lost.guiro.view.Label
-        {
-          id = "memInfo",
-          bounds = {{"left", 20}, {"top", -(offset+labelHeight)}, labelWidth, labelHeight},
-          font = {"Vera", 10},
-          halign = "left",
-          valign = "center",
-          text = ""
-        }
-      }
-    })
-    offset = offset + labelHeight*2
-
-    -- listen to debug events
-    for t in application.tasklets do
-      if t.id ~= tasklet.id and eventProxies[t.eventDispatcher] == nil then
-        eventProxies[t.eventDispatcher] = tasklet.eventDispatcher:attachTo(t.eventDispatcher, lost.application.DebugEvent.MEM_INFO)
+    if t.running then
+      local name = t.name
+      if t.id == tasklet.id then
+        name = "[".. name .."]"
       end
-    end
+      mainView:addSubview(lost.guiro.view.View
+      {
+        id = tostring(t.id),
+        subviews =
+        {
+          lost.guiro.view.Label
+          {
+            id = "name",
+            bounds = {{"left", 10}, {"top", -offset}, labelWidth, labelHeight},
+            font = {"Vera", 10},
+            halign = "left",
+            valign = "center",
+            text = name
+          },
+          lost.guiro.view.Label
+          {
+            id = "memInfo",
+            bounds = {{"left", 20}, {"top", -(offset+labelHeight)}, labelWidth, labelHeight},
+            font = {"Vera", 10},
+            halign = "left",
+            valign = "center",
+            text = ""
+          }
+        }
+      })
+      offset = offset + labelHeight*2
 
-    -- request memory info
-    local request = lost.application.DebugEvent.create(lost.application.DebugEvent.GET_MEM_INFO, t)
-    t.eventDispatcher:queueEvent(request)
+      -- listen to debug events
+      for t in application.tasklets do
+        if t.id ~= tasklet.id and eventProxies[t.eventDispatcher] == nil then
+          eventProxies[t.eventDispatcher] = tasklet.eventDispatcher:attachTo(t.eventDispatcher, lost.application.DebugEvent.MEM_INFO)
+        end
+      end
+
+      -- request memory info
+      local request = lost.application.DebugEvent.create(lost.application.DebugEvent.GET_MEM_INFO, t)
+      t.eventDispatcher:queueEvent(request)
+    end
   end
 
   return true

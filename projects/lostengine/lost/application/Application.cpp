@@ -57,9 +57,19 @@ namespace lost
     {
       for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
-        (*tasklet)->start();
+        try
+        {
+          (*tasklet)->start();
+        }
+        catch(std::exception& ex)
+        {
+          EOUT("Tasklet failed with error: "<<ex.what())
+            // just to make sure that we're running on the main thread
+          queueEvent(QueueEventPtr(new QueueEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), *tasklet)))));
+        }
       }
       running = true;
+      processEvents(ProcessEventPtr());
     }
     
     void Application::addTasklet(Tasklet* tasklet)
@@ -76,6 +86,9 @@ namespace lost
         catch(std::exception& ex)
         {
           EOUT("Tasklet failed with error: "<<ex.what())
+          // just to make sure that we're running on the main thread
+          queueEvent(QueueEventPtr(new QueueEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), tasklet)))));
+          processEvents(ProcessEventPtr());
         }
       }
     }

@@ -1869,6 +1869,7 @@
 			};
 			buildConfigurationList = C4BC31635FECBB26F4E7AAE5 /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
