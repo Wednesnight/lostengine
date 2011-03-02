@@ -78,6 +78,7 @@ function Pebble:constructor()
 
   self:addStyle("lost.guiro.view.TextInput", "default", function(target, args) self:textInput(target, args) end)
   self:addStyle("lost.guiro.view.Image", "default", function(target, args) self:imageView(target, args) end)
+  self:addStyle("lost.guiro.view.Image", "roundCell", function(target, args) self:imageRoundCell(target, args) end)
 
   self:addStyle("lost.guiro.view.MenuBar", "default", function(target, args) self:menuBar(target, args) end)
   self:addStyle("lost.guiro.view.MenuBarItem", "default", function(target, args) self:menuBarItem(target, args) end)
@@ -1657,3 +1658,30 @@ function Pebble:directoryView(target, args)
   target.layer:addSublayer(lost.guiro.layer.Rect{filled=true,color=Color(1,1,1),bounds={0,0,"1","1"}})
 end
 
+
+function Pebble:imageRoundCell(target, args)
+  local l = lost.guiro.layer.Layer
+  local rr = lost.guiro.layer.RoundedRect
+  local i = lost.guiro.layer.Image
+  
+  local m=0
+  local d=1
+  local t = m+d
+  local rad=4
+  local bgcol = Color(0,0,0,.3)
+  local framecol = Color(1,1,1)
+
+  local bg = l{
+    sublayers=
+    {
+      rr{bounds={m,m,{"1",-2*m},{"1",-2*m}},filled=true,radius=rad,color=bgcol},
+      rr{bounds={t,t,{"1",-2*t},{"1",-2*t}},filled=false,width=1,radius=rad,color=framecol},
+    }
+  }
+  
+  local imglayer = i{bounds={0,0,"1","1"},scale=none,valign="center",halign="center",flip=true,filter=false}
+  
+  target.layer:addSublayer(bg)
+  target.layer:addSublayer(imglayer)
+  target.imageLayer = imglayer
+end
