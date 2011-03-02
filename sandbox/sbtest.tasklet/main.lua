@@ -2,6 +2,9 @@ local scrollBarSize = 15
 local margin = 0
 local sbsize= "regular"
 
+local bmp = lost.bitmap.Bitmap.create(tasklet.loader:load("img/cancel.png"))
+bmp:premultiplyAlpha()
+
 function startup()
   require("lost/guiro")
   lost.guiro.ui():add
@@ -44,7 +47,8 @@ function startup()
               lost.guiro.ui()("view")("hsb"):visibleRange(event.target:value())
             end
           }
-        }
+        },
+        require("grid")
       }
     }
   }
