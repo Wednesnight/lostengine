@@ -106,9 +106,11 @@ end
 function ScrollView:updateContentPosition()
   local hv = self.horizontalScrollbar:value()
   local hrange = math.max(self._contentSize.x - self.rect.width,0)
+  local hmod = 0
   if not self.verticalScrollbar:hidden() then
-    hrange = hrange + self.scrollbarWidth
+    hmod = self.scrollbarWidth
   end
+  hrange = hrange + hmod
   local hoffset = hrange*hv
   self.contentView:x(-hoffset)
 

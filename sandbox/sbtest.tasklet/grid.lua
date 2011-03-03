@@ -11,6 +11,7 @@ function imgcell(name)
   }
 end
 
+return function()
 return lost.guiro.view.View
 {
   bounds={0,0,gridWidth,gridHeight},
@@ -79,3 +80,5 @@ return lost.guiro.view.View
     },
   }
 }
+end
+

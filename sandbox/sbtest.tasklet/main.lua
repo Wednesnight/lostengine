@@ -11,6 +11,7 @@ bmp:premultiplyAlpha()
 local Vec2 = lost.math.Vec2
 
 local margin = 0
+local blockSpacing = 2
 
 function startup()
   require("lost/guiro")
@@ -24,10 +25,31 @@ function startup()
         lost.guiro.view.ScrollView
         {
           size="regular",
+          bounds={"left",0,{".33333",-blockSpacing},"1"},
           contentSize=Vec2(gridWidth,gridHeight),
           subviews=
           {
-            require("grid"),            
+            require("grid")(),            
+          }
+        },
+        lost.guiro.view.ScrollView
+        {
+          size="small",
+          bounds={"center",0,{".33333",-blockSpacing},"1"},
+          contentSize=Vec2(gridWidth,gridHeight),
+          subviews=
+          {
+            require("grid")(),            
+          }
+        },
+        lost.guiro.view.ScrollView
+        {
+          size="mini",
+          bounds={"right",0,{".33333",-blockSpacing},"1"},
+          contentSize=Vec2(gridWidth,gridHeight),
+          subviews=
+          {
+            require("grid")(),            
           }
         }
       }
