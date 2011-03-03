@@ -1,10 +1,10 @@
 return {
   tasklet = {
-    name = "Guiroscope",
+    name = "sbtest",
     waitForEvents = true
   },
   window = {
-    title = "Guiroscope",
+    title = "sbtest",
     x = 50,
     y = 50,
     width = 640,
