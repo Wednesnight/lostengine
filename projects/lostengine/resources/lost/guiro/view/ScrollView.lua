@@ -129,8 +129,9 @@ function ScrollView:updateContentPosition()
   end
   vrange = vrange + vmod
   local voffset = vrange*vv
---  log.debug()
-  self.contentView:y((self.rect.height-self._contentSize.y)-voffset+vmod)
+  local d = math.max((self.rect.height-self._contentSize.y),0)
+  log.debug("d:"..d.." voffset:"..voffset.." vmod:"..vmod)
+  self.contentView:y(d-voffset+vmod)
 
 end
 
