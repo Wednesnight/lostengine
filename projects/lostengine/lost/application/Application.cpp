@@ -60,6 +60,7 @@ namespace lost
         try
         {
           (*tasklet)->start();
+          eventDispatcher->dispatchEvent(TaskletEvent::create(TaskletEvent::START(), *tasklet));
         }
         catch(std::exception& ex)
         {
@@ -82,6 +83,7 @@ namespace lost
         try
         {
           tasklet->start();
+          eventDispatcher->dispatchEvent(TaskletEvent::create(TaskletEvent::START(), tasklet));
         }
         catch(std::exception& ex)
         {

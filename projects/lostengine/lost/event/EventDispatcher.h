@@ -51,6 +51,10 @@ namespace lost
        */
       void waitForEvents();
       /**
+       * returns when at least one event of type <type> was queued
+       */
+      void waitForEvent(const lost::event::Type& type);
+      /**
        * cancells waitForEvents()
        */
       void wakeup();

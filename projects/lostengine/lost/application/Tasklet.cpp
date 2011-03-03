@@ -91,7 +91,10 @@ namespace lost
       eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
       eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
       eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
-      eventDispatcher->addEventListener(DebugEvent::GET_MEM_INFO(), event::receive<DebugEvent>(boost::bind(&Tasklet::getMemInfo, this, _1)));      
+
+      eventDispatcher->addEventListener(DebugEvent::CMD_MEM_INFO(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
+      eventDispatcher->addEventListener(DebugEvent::CMD_PAUSE(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
+      eventDispatcher->addEventListener(DebugEvent::CMD_CONTINUE(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
     }
     
     Tasklet::~Tasklet()
@@ -257,12 +260,33 @@ namespace lost
       return isAlive;
     }
 
-    void Tasklet::getMemInfo(const DebugEventPtr& event)
+    void TaskletLuaDebugHook(lua_State* state, lua_Debug* debug)
+    {
+      luabind::object taskletObj = luabind::globals(state)["tasklet"];
+      if (luabind::type(taskletObj) != LUA_TNIL) {
+        Tasklet* tasklet = luabind::object_cast<Tasklet*>(taskletObj);
+        tasklet->eventDispatcher->dispatchEvent(DebugEvent::create(DebugEvent::PAUSE(), tasklet));
+        tasklet->eventDispatcher->waitForEvent(DebugEvent::CMD_CONTINUE());
+      }
+    }
+
+    void Tasklet::handleDebugEvent(const DebugEventPtr& event)
     {
       if (event->tasklet == this) {
-        DebugEventPtr result = DebugEvent::create(DebugEvent::MEM_INFO(), this);
-        result->info.memSize = lua->memUsage();
-        eventDispatcher->dispatchEvent(result);
+
+        if (event->type == DebugEvent::CMD_MEM_INFO()) {
+          DebugEventPtr result = DebugEvent::create(DebugEvent::MEM_INFO(), this);
+          result->info.memSize = lua->memUsage();
+          eventDispatcher->dispatchEvent(result);
+        }
+
+        else if (event->type == DebugEvent::CMD_PAUSE()) {
+          lua_sethook(lua->state, &TaskletLuaDebugHook, LUA_MASKCALL | LUA_MASKRET | LUA_MASKLINE, 0);
+        }
+
+        else if (event->type == DebugEvent::CMD_CONTINUE()) {
+          lua_sethook(lua->state, NULL, 0, 0);
+        }
       }
     }
 
