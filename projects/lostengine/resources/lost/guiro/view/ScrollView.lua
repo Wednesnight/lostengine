@@ -84,9 +84,15 @@ function ScrollView:updateScrollbarVisibility()
   local showHorizontal = false
   if self._contentSize.x > self.rect.width then
     showHorizontal = true
+    if self._contentSize.y > (self.rect.height - self.scrollbarWidth) then
+      showVertical = true
+    end
   end
   if self._contentSize.y > self.rect.height then
     showVertical = true
+    if self._contentSize.x > (self.rect.width - self.scrollbarWidth) then
+      showHorizontal = true
+    end
   end
   self:showScrollbars(showHorizontal,showVertical)
 end
@@ -130,7 +136,6 @@ function ScrollView:updateContentPosition()
   vrange = vrange + vmod
   local voffset = vrange*vv
   local d = math.max((self.rect.height-self._contentSize.y),0)
-  log.debug("d:"..d.." voffset:"..voffset.." vmod:"..vmod)
   self.contentView:y(d-voffset+vmod)
 
 end
