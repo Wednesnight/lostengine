@@ -1,5 +1,3 @@
-local cellsize=50
-local cellspacing=4
 
 function imgcell(name)
   local bmp = lost.bitmap.Bitmap.create(tasklet.loader:load(name))
@@ -15,7 +13,7 @@ end
 
 return lost.guiro.view.View
 {
-  bounds={0,30,4*cellsize+3*cellspacing,5*cellsize+4*cellspacing},
+  bounds={0,0,gridWidth,gridHeight},
   layout=lost.guiro.layout.Vertical{valign="center",halign="center",spacing=cellspacing},
   subviews=
   {
