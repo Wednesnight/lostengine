@@ -8,6 +8,7 @@ local Vec2 = lost.math.Vec2
 -- * contentView
 -- * verticalScrollbar
 -- * horizontalScrollbar
+-- * cornerView (missing piece when two scrollbars are present)
 -- * scrollbarWidth
 --
 -- add content as regular subviews, will be put into contentView.
@@ -70,6 +71,12 @@ function ScrollView:showScrollbars(horizontal, vertical)
   else
     self.verticalScrollbar:hidden(true)    
   end
+  
+  if not (horizontal and vertical) then
+    self.cornerView:hidden(true)
+  else
+    self.cornerView:hidden(false)
+  end
 end
 
 function ScrollView:updateScrollbarVisibility()
@@ -122,14 +129,26 @@ function ScrollView:updateContentPosition()
   end
   vrange = vrange + vmod
   local voffset = vrange*vv
-  self.contentView:y(-voffset+vmod)
+--  log.debug()
+  self.contentView:y((self.rect.height-self._contentSize.y)-voffset+vmod)
 
+end
+
+-- checks if the content fits inside the view and resets the scrollbar positions 
+-- to a default alignment
+function ScrollView:alignScrollbars()
+  if not (self._contentSize.x > self.rect.width) then -- content fits, align top
+    self.horizontalScrollbar:value(0)
+  end
+  if not (self._contentSize.y > self.rect.height) then
+    self.verticalScrollbar:value(1)
+  end  
 end
 
 function ScrollView:updateLayout()
   lost.guiro.view.View.updateLayout(self)
-
   self:updateScrollbarVisibility()
   self:updateScrollbarVisibleRange()
+  self:alignScrollbars()
   self:updateContentPosition()
 end

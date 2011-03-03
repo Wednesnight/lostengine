@@ -1694,11 +1694,14 @@ function Pebble:scrollView(target, args)
   local vsb = lost.guiro.view.ScrollBar{bounds={"right",sbwidth,sbwidth,{"1",-sbwidth}},size=sz,mode="vertical"}
   local hsb = lost.guiro.view.ScrollBar{bounds={0,0,{"1",-sbwidth},sbwidth},size=sz,mode="horizontal"}
   local contentView = lost.guiro.view.View{}
+  local corner = lost.guiro.view.View{bounds={"right",0,sbwidth,sbwidth},sublayers={lost.guiro.layer.Rect{bounds={0,0,sbwidth,sbwidth},filled=true,color=Color(250/255,250/255,250/255)}}}
   target:addSubview(contentView, true)
   target:addSubview(vsb, true)
   target:addSubview(hsb, true)
+  target:addSubview(corner,true)
   target.verticalScrollbar = vsb
   target.horizontalScrollbar = hsb
   target.scrollbarWidth = sbwidth
   target.contentView = contentView
+  target.cornerView = corner
 end
