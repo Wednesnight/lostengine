@@ -91,6 +91,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.PopUpButton", "default", function(target, args) self:popUpButtonCandy(target, args) end)
 
   self:addStyle("lost.guiro.view.ScrollBar", "default", function(target, args) self:scrollBar(target, args) end)
+  self:addStyle("lost.guiro.view.ScrollView", "default", function(target, args) self:scrollView(target, args) end)
 
   self:addStyle("lost.guiro.view.Button", "scrollbarUp", function(target, args) self:buttonScrollbarUp(target, args) end)
   self:addStyle("lost.guiro.view.Button", "scrollbarDown", function(target, args) self:buttonScrollbarDown(target, args) end)
@@ -1684,4 +1685,20 @@ function Pebble:imageRoundCell(target, args)
   target.layer:addSublayer(bg)
   target.layer:addSublayer(imglayer)
   target.imageLayer = imglayer
+end
+
+function Pebble:scrollView(target, args)
+  target:clip(true)
+  local sz = args.size or "regular"
+  local sbwidth = self.scrollbarWidth[sz]
+  local vsb = lost.guiro.view.ScrollBar{bounds={"right",sbwidth,sbwidth,{"1",-sbwidth}},size=sz,mode="vertical"}
+  local hsb = lost.guiro.view.ScrollBar{bounds={0,0,{"1",-sbwidth},sbwidth},size=sz,mode="horizontal"}
+  local contentView = lost.guiro.view.View{}
+  target:addSubview(contentView, true)
+  target:addSubview(vsb, true)
+  target:addSubview(hsb, true)
+  target.verticalScrollbar = vsb
+  target.horizontalScrollbar = hsb
+  target.scrollbarWidth = sbwidth
+  target.contentView = contentView
 end

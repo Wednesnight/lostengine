@@ -1,9 +1,16 @@
 local scrollBarSize = 15
-local margin = 0
 local sbsize= "regular"
+cellsize=50
+cellspacing=4
+gridWidth=4*cellsize+3*cellspacing
+gridHeight=5*cellsize+4*cellspacing
 
 local bmp = lost.bitmap.Bitmap.create(tasklet.loader:load("img/cancel.png"))
 bmp:premultiplyAlpha()
+
+local Vec2 = lost.math.Vec2
+
+local margin = 0
 
 function startup()
   require("lost/guiro")
@@ -11,44 +18,18 @@ function startup()
   {
     lost.guiro.view.View
     {
-      bounds={"center","center",{"1",-margin},{"1",-margin}},
-      listeners=
-      {
-        valueChanged=function(event) 
-          log.debug(event.target.id.." "..tostring(event.target:value()))
-        end
-      },
+      bounds={margin,margin,{"1",-2*margin},{"1",-2*margin}},
       subviews=
       {
-        lost.guiro.view.ScrollBar
+        lost.guiro.view.ScrollView
         {
-          id="vsb",
-          size=sbsize,
-          mode="vertical",
-          bounds={"right",scrollBarSize,scrollBarSize,{"1",-scrollBarSize}},
-        },
-        lost.guiro.view.ScrollBar
-        {
-          id="hsb",
-          size=sbsize,
-          mode="horizontal",
-          bounds={0,0,{"1",-scrollBarSize},scrollBarSize},
-        },
-        lost.guiro.view.Slider
-        {
-          mode="horizontal",
-          bounds={"center","center",200,20},
-          min=0,
-          max=1,
-          listeners=
+          size="regular",
+          contentSize=Vec2(gridWidth,gridHeight),
+          subviews=
           {
-            valueChanged = function(event)
-              lost.guiro.ui()("view")("vsb"):visibleRange(event.target:value())
-              lost.guiro.ui()("view")("hsb"):visibleRange(event.target:value())
-            end
+            require("grid"),            
           }
-        },
-        require("grid")
+        }
       }
     }
   }
