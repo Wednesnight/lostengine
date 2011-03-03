@@ -13,6 +13,7 @@
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/SpawnTaskletEvent.h"
+#include "lost/application/TaskletEvent.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/TouchEvent.h"
 #include "lost/application/Window.h"
@@ -329,6 +330,20 @@ namespace lost
         ]
       ];
     }
+
+    void LostApplicationTaskletEvent(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("application")
+        [
+          class_<TaskletEvent, Event>("TaskletEvent")
+            .def_readonly("tasklet", &TaskletEvent::tasklet)
+        ]
+      ];
+      globals(state)["lost"]["application"]["TaskletEvent"]["START"] = TaskletEvent::START();
+      globals(state)["lost"]["application"]["TaskletEvent"]["DONE"] = TaskletEvent::DONE();
+    }
     
     void LostApplicationTouchEvent(lua_State* state)
     {
@@ -415,8 +430,13 @@ namespace lost
             ]
         ]
       ];
-      globals(state)["lost"]["application"]["DebugEvent"]["GET_MEM_INFO"] = DebugEvent::GET_MEM_INFO();
+
+      globals(state)["lost"]["application"]["DebugEvent"]["CMD_MEM_INFO"] = DebugEvent::CMD_MEM_INFO();
+      globals(state)["lost"]["application"]["DebugEvent"]["CMD_PAUSE"] = DebugEvent::CMD_PAUSE();
+      globals(state)["lost"]["application"]["DebugEvent"]["CMD_CONTINUE"] = DebugEvent::CMD_CONTINUE();
+
       globals(state)["lost"]["application"]["DebugEvent"]["MEM_INFO"] = DebugEvent::MEM_INFO();
+      globals(state)["lost"]["application"]["DebugEvent"]["PAUSE"] = DebugEvent::PAUSE();
     }
     
     void LostApplication(lua_State* state)
@@ -431,6 +451,7 @@ namespace lost
       LostApplicationResizeEvent(state);
       LostApplicationTasklet(state);
       LostApplicationSpawnTaskletEvent(state);
+      LostApplicationTaskletEvent(state);
       LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
       LostApplicationQueue(state);

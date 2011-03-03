@@ -55,7 +55,7 @@ namespace lost
       void processEvents();
       void updateWindowSize(const ResizeEventPtr& event);
 
-      void getMemInfo(const DebugEventPtr& event);
+      void handleDebugEvent(const DebugEventPtr& event);
 
     public:
       lua::StatePtr                   lua;

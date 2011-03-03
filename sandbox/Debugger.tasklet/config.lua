@@ -7,7 +7,7 @@ return {
     title = "LostEngine Debugger",
     x = 550,
     y = 550,
-    width = 225,
+    width = 250,
     height = 400
   },
   gl ={
