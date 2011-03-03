@@ -314,7 +314,11 @@ end
 -- either one param = text for all states => will only be put into normal and reused
 -- or state/title pair => will only be set for exactly this state
 function Button:title(...)
-  if arg.n == 1 then
+  if arg.n == 0 then
+    for k,v in pairs(self._allStates) do
+      return self.titles[v]
+    end
+  elseif arg.n == 1 then
     for k,v in pairs(self._allStates) do
       self.titles[v] = nil
     end
