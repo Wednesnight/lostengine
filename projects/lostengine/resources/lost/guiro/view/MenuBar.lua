@@ -16,6 +16,7 @@ function MenuBar:constructor(args)
   self._itemPressTime = 0
   self.clickDelta = 0.400
   self._activeItem = nil
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.MenuBar")          
 end
 
 function MenuBar:rebuildMenuBarItems()

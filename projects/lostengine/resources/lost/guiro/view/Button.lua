@@ -46,6 +46,7 @@ function Button:constructor(args)
   self:addEventListener("mouseUpInside", function(event) self:eventHandler(event) end)	
   self:addEventListener("mouseUpOutside", function(event) self:eventHandler(event) end)	
   self:needsLayout()
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Button")      
 end
 
 function Button:pushed(...)

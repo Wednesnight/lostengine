@@ -25,6 +25,7 @@ function TextInput:constructor(args)
   self.textLayer:cursorPos(lost.math.Vec2(0,0))
   self.cursorLayer:hidden(true)
   self.cursorTimer = tasklet.scheduler:createTimer(.5, self.toggleTimer, self)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.TextInput")          
 end
 
 function TextInput:multiLine(v)

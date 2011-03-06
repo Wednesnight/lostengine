@@ -22,6 +22,7 @@ function MenuBarItem:constructor(args)
   self:addEventListener("mouseUpOutside", function(event) self:mouseUpOutside(event) end)
   self:addEventListener("mouseEnter", function(event) self:mouseEnter(event) end)
   self:addEventListener("mouseLeave", function(event) self:mouseLeave(event) end)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.MenuBarItem")          
 end
 
 function MenuBarItem:openMenu()

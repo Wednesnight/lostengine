@@ -14,6 +14,8 @@ function Box:constructor(args)
   if t.clip and self.contentView then
     self.contentView:clip(t.clip)
   end
+
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Box")    
 end
 
 function Box:addSubview(view,forceSubview)

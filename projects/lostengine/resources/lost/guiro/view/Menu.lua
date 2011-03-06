@@ -39,6 +39,7 @@ function Menu:constructor(args)
   if t.items then self:rebuildItems(args.items) end
   self.highlightLayer:hide()
   self.currentMenuItem = nil -- will be set during highlighting
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Menu")          
 end
 
 function Menu:rebuildItems(t)

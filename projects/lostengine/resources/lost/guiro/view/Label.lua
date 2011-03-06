@@ -19,6 +19,7 @@ function Label:constructor(args)
   self.textLayer:valign(t.valign or "center")
   self.textLayer:halign(t.halign or "center")
   self.textLayer:breakMode(t.breakMode or "none")
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Image")          
 end
 
 function Label:text(...)

@@ -19,6 +19,7 @@ function PopUpButton:constructor(args)
   self.menu = lost.guiro.view.Menu(ms)
   self:addEventListener("buttonClick", function(event) self:buttonClick(event) end)
   if t.selected then self:select(t.selected) end
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.PopUpButton")          
 end
 
 function PopUpButton:items(it)

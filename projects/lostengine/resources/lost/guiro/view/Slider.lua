@@ -38,6 +38,7 @@ function Slider:constructor(args)
   self:value(self.min)
   self.dragInProgress = false
   self.scrollbarMode = false
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Slider")          
 end
 
 function Slider:updateHandleLayerSizes()

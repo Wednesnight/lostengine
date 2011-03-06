@@ -17,24 +17,34 @@ function UpdateManager:constructor()
   self._viewLayoutQ = { set={}, list={}}
   self._viewDisplayQ = { set={}, list={}}
   
-  self.lupdateFunc = function(layer) layer:update() end
-  self.lupdateLayoutFunc = function(layer) layer:updateLayout() end
+  self.lupdateFunc = function(layer) layer:update();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdate") end
+  self.lupdateLayoutFunc = function(layer) layer:updateLayout();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdateLayout") end
   self.lapplyLayoutfunc = function(layer) 
                                         if layer.layout then 
                                           layer.layout:apply(layer, layer.sublayers)
+                                          lost.profiler.bb_inc("lost.guiro.UpdateManager.layerApplyLayout")                                          
                                         end 
                                     end
-  self.lupdateDisplayFunc = function(layer) layer:updateDisplay() end
+  self.lupdateDisplayFunc = function(layer) layer:updateDisplay();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdateDisplay") end
   
   
-  self.vupdateFunc = function(view) view:update() end
-  self.vupdateLayoutFunc = function(view) view:updateLayout() end
+  self.vupdateFunc = function(view) view:update();lost.profiler.bb_inc("lost.guiro.UpdateManager.viewUpdate") end
+  self.vupdateLayoutFunc = function(view) view:updateLayout();lost.profiler.bb_inc("lost.guiro.UpdateManager.viewUpdateLayout") end
   self.vapplyLayoutfunc = function(view)
                                      if view.layout then
                                        view.layout:apply(view, view.subviews)
+                                       lost.profiler.bb_inc("lost.guiro.UpdateManager.viewApplyLayout")                                                                                 
                                      end
                                    end
-  self.vupdateDisplayFunc = function(view) view:updateDisplay() end
+  self.vupdateDisplayFunc = function(view) view:updateDisplay();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdateDisplay") end
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.layerUpdate",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.layerUpdateLayout",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.layerApplyLayout",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.layerUpdateDisplay",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.viewUpdate",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.viewUpdateLayout",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.viewApplyLayout",true)
+  lost.profiler.bb_set_clear("lost.guiro.UpdateManager.viewUpdateDisplay",true)
 end
 
 local function depthSortFunc(a,b)
