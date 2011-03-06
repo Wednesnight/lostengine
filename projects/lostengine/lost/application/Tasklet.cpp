@@ -208,9 +208,8 @@ namespace lost
       {
         call_function<void>(lsh->luaUpdate, deltaSeconds);
       }
-//-- disableed so the queue is only cleared once per frame      updateQueue->process(this);      
       BB_SET("Lua Memory",lua->memUsage());
-      BB_LOG;
+//      BB_LOG;
       BB_SNAP;
       return  running;      
     }
