@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "lost/math/lmath.h"
 #include "lost/gl/Context.h"
+#include "lost/profiler/Blackbox.h"
 
 using namespace std;
 using namespace boost;
@@ -14,6 +15,8 @@ namespace lost
 {
 namespace gl
 {
+
+#define bb_tex_key "lost.gl.Texture"
 
 Texture::Params::Params()
 {
@@ -56,6 +59,7 @@ void Texture::create()
 Texture::Texture()
 {
   create();
+  BB_INC(bb_tex_key);
 }
 
 Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
@@ -63,6 +67,7 @@ Texture::Texture(const lost::math::Vec2& inSize, const Params& inParams)
   create();
   bind();
   init(inSize, inParams);
+  BB_INC(bb_tex_key);
 }
 
 Texture::Texture(const common::DataPtr& inData,  const Params& inParams)
@@ -70,6 +75,7 @@ Texture::Texture(const common::DataPtr& inData,  const Params& inParams)
   create();
   bind();
   init(inData, inParams);
+  BB_INC(bb_tex_key);
 }
 
 Texture::Texture(const bitmap::BitmapPtr& inBitmap, const Params& inParams)
@@ -77,11 +83,13 @@ Texture::Texture(const bitmap::BitmapPtr& inBitmap, const Params& inParams)
   create();
   bind();
   init(inBitmap, inParams);
+  BB_INC(bb_tex_key);
 }
 
 Texture::~Texture()
 {
   destroy();
+  BB_DEC(bb_tex_key);
 }
 
 void Texture::destroy()

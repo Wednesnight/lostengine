@@ -3,6 +3,7 @@
 #include "lost/math/Matrix.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
+#include "lost/profiler/Blackbox.h"
 
 namespace lost
 {
@@ -11,22 +12,26 @@ namespace mesh
 
 using namespace gl;
 
+#define bb_mesh_key "lost.mesh.Mesh"
 Mesh::Mesh()
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec3_f32, gl::UT_position, 0);
   layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
   init(layout, gl::ET_u16);
+  BB_INC(bb_mesh_key);
 }
 
 Mesh::Mesh(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)
 {
   init(vertexLayout, indexType);
+  BB_INC(bb_mesh_key);
 }
 
 Mesh::~Mesh() 
 {
 //  DOUT("destroying mesh");
+  BB_DEC(bb_mesh_key);
 }
 
 void Mesh::init(const gl::BufferLayout& vertexLayout, gl::ElementType indexType)

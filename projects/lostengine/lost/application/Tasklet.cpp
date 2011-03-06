@@ -30,6 +30,7 @@
 #include "lost/application/KeyEvent.h"
 #include "lost/time/Clock.h"
 #include "lost/time/ThreadedTimerScheduler.h"
+#include "lost/profiler/Blackbox.h"
 
 using namespace boost;
 using namespace luabind;
@@ -195,7 +196,9 @@ namespace lost
       {
         call_function<void>(lsh->luaStartup);
       }
-      updateQueue->process(this);      
+      updateQueue->process(this);     
+      BB_SET_CLEAR("Lua Memory", true);
+      BB_SET_UNIT("Lua Memory","kb"); 
       return running;
     }
 
@@ -206,6 +209,9 @@ namespace lost
         call_function<void>(lsh->luaUpdate, deltaSeconds);
       }
 //-- disableed so the queue is only cleared once per frame      updateQueue->process(this);      
+      BB_SET("Lua Memory",lua->memUsage());
+      BB_LOG;
+      BB_SNAP;
       return  running;      
     }
 

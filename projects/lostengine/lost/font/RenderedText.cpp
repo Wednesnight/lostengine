@@ -1,23 +1,31 @@
 #include "lost/font/RenderedText.h"
 #include "lost/common/Logger.h"
 #include "lost/math/io.h"
+#include "lost/profiler/Blackbox.h"
 
 namespace lost
 {
 namespace font
 {    
 
+#define bb_rt_key "lost.font.RenderedText"
+
 RenderedText::RenderedText() : mesh::Quad()
 {
+BB_INC(bb_rt_key);
 }
 
 RenderedText::RenderedText(const std::vector<math::Rect>& rects,
              gl::TexturePtr tex,
              const std::vector<math::Rect>& pixelCoords) : mesh::Quad(rects, tex, pixelCoords, false)
 {
+BB_INC(bb_rt_key);
 }
 
-RenderedText::~RenderedText() {}
+RenderedText::~RenderedText()
+{
+BB_DEC(bb_rt_key);
+}
 
 RenderedTextPtr RenderedText::create() { return RenderedTextPtr(new RenderedText); }
 

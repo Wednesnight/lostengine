@@ -15,6 +15,7 @@ namespace gl
 struct HybridVertexBuffer : HybridBuffer
 {
   HybridVertexBuffer(const BufferLayout& inLayout);
+  ~HybridVertexBuffer();
   
 };
 

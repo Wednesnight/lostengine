@@ -1,6 +1,7 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include "lost/profiler/Blackbox.h"
 
 namespace lost
 {
@@ -8,6 +9,8 @@ namespace gl
 {
 
 using namespace std;
+
+#define bb_hib_key "lost.gl.HybridIndexBuffer"
 
 HybridIndexBuffer::HybridIndexBuffer(ElementType et)
 {
@@ -28,6 +31,12 @@ HybridIndexBuffer::HybridIndexBuffer(ElementType et)
   }
   drawMode = GL_TRIANGLES;
   init(GL_ELEMENT_ARRAY_BUFFER, layout);
+  BB_INC(bb_hib_key);
+}
+
+HybridIndexBuffer::~HybridIndexBuffer()
+{
+  BB_DEC(bb_hib_key);
 }
 
 }
