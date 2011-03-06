@@ -6,6 +6,7 @@ function RadioGroup:constructor(args)
 	lost.guiro.view.View.constructor(self, args) -- call after aall members that are required for style are setup
   self:addEventListener("buttonClick", function(event) self:buttonClick(event) end)
   self.id = args.id or "radiogroup"
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.RadioGroup")          
 end
 
 function RadioGroup:buttonClick(event)

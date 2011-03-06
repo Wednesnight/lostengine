@@ -29,6 +29,7 @@ function TabBar:constructor(args)
   self:select(t.selected or 1)
   self:needsLayout()
   self:addEventListener("buttonClick", function(event) self:buttonClicked(event) end)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.TabBar")          
 end
 
 function TabBar:buttonClicked(event)

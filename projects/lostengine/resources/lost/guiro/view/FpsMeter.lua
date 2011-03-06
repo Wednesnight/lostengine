@@ -15,6 +15,7 @@ function FpsMeter:constructor(args)
   self.avg = args.avg or 10
   self.textLayer:text("0") -- must be set before first render or we'll crash
   self:updatefps()
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.FpsMeter")          
 end
 
 function FpsMeter:updatefps()

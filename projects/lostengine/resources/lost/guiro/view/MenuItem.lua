@@ -40,6 +40,7 @@ function MenuItem:constructor(args)
   else
     self:submenuIcon(false)
   end
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.MenuItem")          
 end
 
 function MenuItem:menu(...)

@@ -8,6 +8,7 @@ function DirectoryView:constructor(args)
 
   self._rootDirectory = args.directory or ""
   self:directory(self._rootDirectory)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.DirectoryView")        
 end
 
 function DirectoryView:directory(...)

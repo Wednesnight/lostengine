@@ -23,6 +23,7 @@ function UserInterface:constructor(args)
   self._wmMouseDown = function(event) lost.guiro.windowManager():mouseDown(event) end
   self:addEventListener("mouseDown", self._wmMouseDown, Event.PHASE_CAPTURE)
   self:addEventListener("mouseDown", self._wmMouseDown, Event.PHASE_TARGET)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.UserInterface")          
 end
 
 function UserInterface:setEventDispatcher(eventDispatcher)

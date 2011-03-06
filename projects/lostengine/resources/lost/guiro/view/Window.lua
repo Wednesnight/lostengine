@@ -63,6 +63,7 @@ function Window:constructor(args)
   if self.closeButton then 
     self.closeButton:addEventListener("buttonClick", function(event) self:closeButtonClick(event) end)
   end
+  self._bbcounter=lost.profiler.BBCount("lost.guiro.view.Window")
 end
 
 function Window:setupResizing()

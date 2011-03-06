@@ -23,6 +23,7 @@ function ScrollBar:constructor(args)
   self.slider:addEventListener("mouseDown", function(event) self:sliderMouseDown(event) end)
   self.slider:addEventListener("mouseUp", function(event) self:sliderMouseUp(event) end)
   self.slider:addEventListener("valueChanged", function(event) self:sliderValueChanged(event) end)
+  self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollBar")          
 end
 
 function ScrollBar:updateLayout()

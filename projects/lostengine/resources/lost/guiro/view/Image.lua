@@ -12,6 +12,7 @@ function Image:constructor(args)
   self:scale(t.scale or "none")
   self:filter(t.filter or false)
   self:flip(t.flip or false)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Image")          
 end
 
 function Image:bitmap(v)

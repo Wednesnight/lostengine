@@ -17,6 +17,7 @@ function ColorPicker:constructor(args)
   self._color = t.color or Color(1,1,1)
   self.name = t.name or ""
   self:addEventListener("buttonClick", function(event) self:buttonClick(event) end)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ColorPicker")        
 end
 
 function ColorPicker:buttonClick(event)

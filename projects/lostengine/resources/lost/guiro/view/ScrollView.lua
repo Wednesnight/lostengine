@@ -24,6 +24,7 @@ function ScrollView:constructor(args)
   self.horizontalScrollbar:value(0)
   self.horizontalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
   self.verticalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollView")            
 end
 
 function ScrollView:scrollbarValueChanged(event)

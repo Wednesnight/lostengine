@@ -34,6 +34,7 @@ function TabView:constructor(args)
     clip = t.clip
   end
   self.contentView:clip(clip)
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.TabView")          
 end
 
 function TabView:tabbarSelectionChanged(event)
