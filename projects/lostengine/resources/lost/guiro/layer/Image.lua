@@ -38,6 +38,8 @@ function Image:constructor(args)
   -- trigger initial updates
   self:needsUpdate()
   self:needsLayout()
+
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.layer.Image")  
 end
 
 function Image:valign(...)

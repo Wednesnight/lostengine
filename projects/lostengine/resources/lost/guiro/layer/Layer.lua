@@ -45,6 +45,8 @@ function Layer:constructor(args)
 	for _,v in pairs(layers) do
 	  self:addSublayer(v)
 	end
+	
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.layer.Layer")
 end
 
 function Layer:bounds(...)

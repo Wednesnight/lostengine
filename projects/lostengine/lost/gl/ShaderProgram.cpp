@@ -1,6 +1,7 @@
 #include "lost/gl/ShaderProgram.h"
 #include "lost/gl/gl.h"
 #include "lost/gl/Utils.h"
+#include "lost/profiler/Blackbox.h"
 
 namespace lost
 {
@@ -10,11 +11,13 @@ namespace gl
 ShaderProgram::ShaderProgram()
 {
   program = glCreateProgram();GLDEBUG_THROW;
+  BB_INC("lost.gl.ShaderProgram")
 }
 
 ShaderProgram::~ShaderProgram()
 {
   glDeleteProgram(program);
+  BB_DEC("lost.gl.ShaderProgram")
 }
 
 Uniform& ShaderProgram::uniform(const std::string& inName)

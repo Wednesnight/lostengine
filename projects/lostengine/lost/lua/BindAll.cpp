@@ -16,6 +16,7 @@
 #include "lost/lua/bindings/LostMath.h"
 #include "lost/lua/bindings/LostMesh.h"
 #include "lost/lua/bindings/LostPlatform.h"
+#include "lost/lua/bindings/LostProfiler.h"
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/bindings/LostRg.h"
 #include "lost/lua/bindings/LostTime.h"
@@ -65,6 +66,7 @@ namespace lost
       LostLua(state);
       LostMath(state);
       LostPlatform(state);
+      LostProfiler(state);
       LostResource(state);
       LostRg(state);
       LostTime(state);

@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <math.h>
+#include "lost/profiler/Blackbox.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ namespace lost
 namespace bitmap
 {
 
+#define bb_bitmap_key "lost.bitmap.Bitmap"
+
 void Bitmap::reset()
 {
   data = NULL;
@@ -33,6 +36,7 @@ void Bitmap::reset()
 Bitmap::Bitmap()
 {
   reset();
+  BB_INC(bb_bitmap_key);
 }
 
 Bitmap::Bitmap(uint32_t inWidth,
@@ -41,6 +45,7 @@ Bitmap::Bitmap(uint32_t inWidth,
 {
   reset();
   init(inWidth, inHeight, format);
+  BB_INC(bb_bitmap_key);
 }
 
 Bitmap::Bitmap(uint32_t inWidth,
@@ -51,17 +56,20 @@ Bitmap::Bitmap(uint32_t inWidth,
 {
   reset();
   init(inWidth, inHeight, destComponents, srcComponents, data);
+  BB_INC(bb_bitmap_key);
 }
 
 Bitmap::Bitmap(const common::DataPtr& inData)
 {
   reset();
   init(inData);
+  BB_INC(bb_bitmap_key);
 }
 
 Bitmap::~Bitmap()
 {
   destroy();
+  BB_DEC(bb_bitmap_key);
 }
 
 void Bitmap::destroy()

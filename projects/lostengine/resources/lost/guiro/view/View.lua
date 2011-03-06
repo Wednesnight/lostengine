@@ -69,6 +69,8 @@ function View:constructor(args)
       self:addEventListener(event, func)
     end
   end
+  
+  self._bbcounter=lost.profiler.BBCount("lost.guiro.view.View")
 end
 
 function View:superRect()

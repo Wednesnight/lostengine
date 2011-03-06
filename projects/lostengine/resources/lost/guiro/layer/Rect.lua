@@ -85,6 +85,8 @@ function Rect:constructor(args)
   self.drawNode = lost.rg.Draw.create(self.mesh)
   self.layerNodes:add(self.drawNode)
   self:needsLayout()
+
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.layer.Rect")  
 end
 
 function Rect:color(...)

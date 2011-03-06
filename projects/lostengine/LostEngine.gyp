@@ -571,6 +571,7 @@
         'lost/lua/bindings/LostMath.cpp',
         'lost/lua/bindings/LostMesh.cpp',
         'lost/lua/bindings/LostPlatform.cpp',
+        'lost/lua/bindings/LostProfiler.cpp',
         'lost/lua/bindings/LostResource.cpp',
         'lost/lua/bindings/LostRg.cpp',
         'lost/lua/bindings/LostTime.cpp',
@@ -606,6 +607,9 @@
         'lost/platform/Platform_Mac.cpp',
         'lost/platform/Platform_Windows.cpp',
         'lost/platform/Platform_Linux.cpp',
+
+        #profiler
+        'lost/profiler/Blackbox.cpp',
 
         # resource
         'lost/resource/ApplicationResourceRepository.cpp',

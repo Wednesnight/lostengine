@@ -14,6 +14,7 @@
 #include "lost/gl/UniformBlock.h"
 #include <boost/thread/tss.hpp>
 #include <boost/thread/thread.hpp>
+#include "lost/profiler/Blackbox.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
@@ -311,6 +312,8 @@ std::map<void*, Context*> glContext2lostGlContext;
       currentShader = prog;
       if(currentShader)
       {
+        BB_SET_CLEAR("lost.gl.Context.shaderSwitch",true);
+        BB_INC("lost.gl.Context.shaderSwitch");
         currentShader->enable();
       }
     }
@@ -408,6 +411,11 @@ std::map<void*, Context*> glContext2lostGlContext;
         
     void Context::draw(const MeshPtr& mesh)
     {
+      BB_SET_CLEAR("lost.gl.Context.draw", true);    
+      BB_SET_CLEAR("lost.gl.Context.bindBuffer", true);   
+      BB_SET_CLEAR("lost.gl.Context.vertexAttributeEnable",true)
+       
+      BB_INC("lost.gl.Context.draw");
       clearVertexAttributeRequired();
       HybridIndexBuffer* ib = mesh->indexBuffer.get();
       HybridVertexBuffer* vb = mesh->vertexBuffer.get();
@@ -457,6 +465,7 @@ std::map<void*, Context*> glContext2lostGlContext;
             const VertexAttribute& va = currentShader->name2vertexAttribute[attributeName];
             const AttributePointerConfig apc = vb->pointerConfigForUsageType(ut);
             vertexAttributeEnable(va.location, true);
+            BB_INC("lost.gl.Context.vertexAttributeEnable")
             glVertexAttribPointer(va.location, apc.size, apc.type, apc.normalise, apc.stride, apc.offset);GLDEBUG;
             enabledVertexAttributes.push_back(va.location);
           }
@@ -496,6 +505,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     {
 //      if(buffer != currentBuffer)
 //      {
+      BB_INC("lost.gl.Context.bindBuffer");
         glBindBuffer(buffer->target, buffer->buffer);GLDEBUG;
 //        currentBuffer = buffer;
 //      }

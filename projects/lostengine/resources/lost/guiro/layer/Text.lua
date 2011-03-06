@@ -61,6 +61,8 @@ function Text:constructor(args)
   self._undoBufferSize = 50
   self._redoBufferSize = 50
   self:resetUndoRedoBuffers()
+
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.layer.Text")  
 end
 
 function Text:characterMetrics(...)
