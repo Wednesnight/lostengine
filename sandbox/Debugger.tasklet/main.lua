@@ -1,6 +1,8 @@
 local application = lost.application.Application.getInstance()
 
 local mainView = nil
+local summaryView = nil
+local tabPadding = 25
 local labelWidth = 120
 local labelHeight = 15
 
@@ -11,39 +13,51 @@ local refreshTimer = nil
 function startup()
   require("lost.guiro")
 
-  local padding = 15
-  mainView = lost.guiro.view.View
+  summaryView = lost.guiro.view.View
   {
     bounds = {"left", "bottom", "1", {"1", -labelHeight*2}}
   }
-  lost.guiro.ui():add{
-    lost.guiro.view.View
+  mainView = lost.guiro.view.TabView
+  {
+    bounds = {"left", "top", "1", "1"},
+    style = "square",
+    items =
     {
-      bounds = {{"left", padding}, {"top", -padding}, {"1", -padding*2}, {"1", -padding*2}},
-      subviews =
       {
-        lost.guiro.view.Label
+        "Summary",
+        lost.guiro.view.View
         {
-          bounds = {"left", "top", labelWidth, labelHeight*2},
-          font = {"Vera", 14},
-          halign = "left",
-          valign = "center",
-          text = "Running tasklets:"
-        },
-        mainView,
-        lost.guiro.view.Button
-        {
-          bounds = {"right", "bottom", 100, labelHeight*2},
-          title = "refresh now",
-          listeners =
+          id = "summary",
+          bounds = {{"left", tabPadding}, {"top", -tabPadding}, {"1", -tabPadding*2}, {"1", -tabPadding*2}},
+          subviews =
           {
-            buttonClick = function(event)
-              refresh()
-            end
+            lost.guiro.view.Label
+            {
+              bounds = {"center", "top", labelWidth, labelHeight*2},
+              font = {"Vera", 14},
+              halign = "left",
+              valign = "center",
+              text = "Running tasklets:"
+            },
+            summaryView,
+            lost.guiro.view.Button
+            {
+              bounds = {"right", "bottom", 100, labelHeight*2},
+              title = "refresh now",
+              listeners =
+              {
+                buttonClick = function(event)
+                  refresh()
+                end
+              }
+            }
           }
         }
       }
     }
+  }
+  lost.guiro.ui():add{
+    mainView
   }
 
   local offset = 0
@@ -65,7 +79,7 @@ function startup()
 
   tasklet.eventDispatcher:addEventListener(lost.application.TaskletEvent.DONE, function(event)
     local current = {}
-    for k,view in next,mainView.subviews do
+    for k,view in next,summaryView.subviews do
       current[view.id] = view
     end
     for t in application.tasklets do
@@ -75,27 +89,32 @@ function startup()
     end
     for id,view in next,current do
       offset = removeTaskletInfo(view)
+      mainView:removeItem(id)
     end
   end)
 
   tasklet.eventDispatcher:addEventListener(lost.application.DebugEvent.MEM_INFO, function(event)
-    mainView(tostring(event.tasklet.id))("memInfo"):text("memSize: ".. tostring(event.info.memSize))
+    summaryView(tostring(event.tasklet.id))("memInfo"):text("memSize: ".. tostring(event.info.memSize))
   end)
 
   tasklet.eventDispatcher:addEventListener(lost.application.DebugEvent.PAUSE, function(event)
-    mainView(tostring(event.tasklet.id))("button"):title("continue")
-    mainView(tostring(event.tasklet.id))("button"):enabled(true)
+    summaryView(tostring(event.tasklet.id))("button"):title("continue")
+    summaryView(tostring(event.tasklet.id))("button"):enabled(true)
   end)
 
   refreshTimer = tasklet.scheduler:createTimer(2, function(t)
-    for t in application.tasklets do
-      if t.running then
-        t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_MEM_INFO, t))
-      end
-    end
+    refresh()
     return true
   end, nil)
   refreshTimer:start()
+end
+
+function refresh()
+  for t in application.tasklets do
+    if t.running then
+      t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_MEM_INFO, t))
+    end
+  end
 end
 
 function addTaskletInfo(t, offset)
@@ -103,10 +122,10 @@ function addTaskletInfo(t, offset)
   if t.id == tasklet.id then
     name = "[".. name .."]"
   end
-  mainView:addSubview(lost.guiro.view.View
+  summaryView:addSubview(lost.guiro.view.View
   {
     id = tostring(t.id),
-    bounds = {{"left", 10}, {"top", -offset}, labelWidth+85, labelHeight*2},
+    bounds = {"center", {"top", -offset}, labelWidth+60, labelHeight*2},
     subviews =
     {
       lost.guiro.view.Label
@@ -118,6 +137,7 @@ function addTaskletInfo(t, offset)
         valign = "center",
         text = name
       },
+--[[
       lost.guiro.view.Button
       {
         id = "button",
@@ -133,6 +153,27 @@ function addTaskletInfo(t, offset)
             else
               t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_CONTINUE, t))
               event.target:title("pause")
+            end
+          end
+        }
+      },
+]]
+      lost.guiro.view.Button
+      {
+        id = "button",
+        bounds = {{"left", labelWidth+10}, "top", 50, labelHeight},
+        title = "-->",
+        hidden = (t.id == tasklet.id),
+        listeners =
+        {
+          buttonClick = function(event)
+            local id = tostring(t.id)
+            if not mainView:select(id) then
+              mainView:addItem(t.name, lost.guiro.view.View {
+                id = id,
+                bounds = {{"left", tabPadding}, {"top", -tabPadding}, {"1", -tabPadding*2}, {"1", -tabPadding*2}}
+              })
+              mainView:select(id)
             end
           end
         }
@@ -168,10 +209,10 @@ function addTaskletInfo(t, offset)
 end
 
 function removeTaskletInfo(infoView)
-  mainView:removeSubview(infoView)
+  summaryView:removeSubview(infoView)
   local offset = 0
-  for k,view in next,mainView.subviews do
-    view:bounds(lost.guiro.Bounds({"left", 10}, {"top", -offset}, labelWidth+85, labelHeight*2))
+  for k,view in next,summaryView.subviews do
+    view:bounds(lost.guiro.Bounds("center", {"top", -offset}, labelWidth+60, labelHeight*2))
     offset = offset + labelHeight*2
   end
   return offset

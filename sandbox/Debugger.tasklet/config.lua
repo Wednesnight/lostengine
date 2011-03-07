@@ -7,8 +7,8 @@ return {
     title = "LostEngine Debugger",
     x = 550,
     y = 550,
-    width = 250,
-    height = 400
+    width = 400,
+    height = 300
   },
   gl ={
     vsync = true
