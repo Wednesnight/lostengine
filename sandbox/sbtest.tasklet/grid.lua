@@ -4,7 +4,7 @@ function imgcell(name)
   bmp:premultiplyAlpha()
   return lost.guiro.view.Image
   {
-    bounds={0,0,cellsize,cellsize},
+    bounds={0,0,svc_cellsize,svc_cellsize},
     style="roundCell",
     flip=true,
     bitmap=bmp
@@ -14,14 +14,14 @@ end
 return function()
 return lost.guiro.view.View
 {
-  bounds={0,0,gridWidth,gridHeight},
-  layout=lost.guiro.layout.Vertical{valign="center",halign="center",spacing=cellspacing},
+  bounds={0,0,svc_gridWidth,svc_gridHeight},
+  layout=lost.guiro.layout.Vertical{valign="center",halign="center",spacing=svc_cellspacing},
   subviews=
   {
     lost.guiro.view.View
     {
-      bounds={0,0,"1",cellsize},
-      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=cellspacing},
+      bounds={0,0,"1",svc_cellsize},
+      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=svc_cellspacing},
       subviews=
       {
         imgcell("img/accept.png"),
@@ -32,8 +32,8 @@ return lost.guiro.view.View
     },
     lost.guiro.view.View
     {
-      bounds={0,0,"1",cellsize},      
-      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=cellspacing},
+      bounds={0,0,"1",svc_cellsize},      
+      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=svc_cellspacing},
       subviews=
       {
         imgcell("img/cross_octagon.png"),
@@ -44,8 +44,8 @@ return lost.guiro.view.View
     },
     lost.guiro.view.View
     {
-      bounds={0,0,"1",cellsize},    
-      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=cellspacing},
+      bounds={0,0,"1",svc_cellsize},    
+      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=svc_cellspacing},
       subviews=
       {
         imgcell("img/delete.png"),
@@ -56,8 +56,8 @@ return lost.guiro.view.View
     },
     lost.guiro.view.View
     {
-      bounds={0,0,"1",cellsize},    
-      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=cellspacing},
+      bounds={0,0,"1",svc_cellsize},    
+      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=svc_cellspacing},
       subviews=
       {
         imgcell("img/emoticon_smile.png"),
@@ -68,8 +68,8 @@ return lost.guiro.view.View
     },
     lost.guiro.view.View
     {
-      bounds={0,0,"1",cellsize},    
-      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=cellspacing},
+      bounds={0,0,"1",svc_cellsize},    
+      layout=lost.guiro.layout.Horizontal{valign="center",halign="center",spacing=svc_cellspacing},
       subviews=
       {
         imgcell("img/emoticon_waii.png"),
