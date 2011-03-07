@@ -19,12 +19,40 @@ function ScrollView:constructor(args)
   local t = args or {}
   self.id = t.id or "scrollview"
   self:contentSize(t.contentSize or Vec2(100,100))
+  if t.hasVerticalScrollbar ~= nil then
+    self:hasVerticalScrollbar(t.hasVerticalScrollbar)
+  else
+    self:hasVerticalScrollbar(true)
+  end
+  if t.hasHorizontalScrollbar ~= nil then
+    self:hasHorizontalScrollbar(t.hasHorizontalScrollbar)
+  else
+    self:hasHorizontalScrollbar(true)
+  end
   -- move scrollbars so content is aligned topleft by default
   self.verticalScrollbar:value(1)
   self.horizontalScrollbar:value(0)
   self.horizontalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
   self.verticalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
 	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollView")            
+end
+
+function ScrollView:hasVerticalScrollbar(...)
+  if arg.n >= 1 then
+    self._hasVerticalScrollbar = arg[1]
+    self:needsLayout()
+  else
+    return self._hasVerticalScrollbar
+  end
+end
+
+function ScrollView:hasHorizontalScrollbar(...)
+  if arg.n >= 1 then
+    self._hasHorizontalScrollbar = arg[1]
+    self:needsLayout()
+  else
+    return self._hasHorizontalScrollbar
+  end
 end
 
 function ScrollView:scrollbarValueChanged(event)
@@ -83,15 +111,15 @@ end
 function ScrollView:updateScrollbarVisibility()
   local showVertical = false
   local showHorizontal = false
-  if self._contentSize.x > self.rect.width then
+  if (self._contentSize.x > self.rect.width) and self:hasHorizontalScrollbar() then
     showHorizontal = true
-    if self._contentSize.y > (self.rect.height - self.scrollbarWidth) then
+    if (self._contentSize.y > (self.rect.height - self.scrollbarWidth)) and self:hasVerticalScrollbar() then
       showVertical = true
     end
   end
-  if self._contentSize.y > self.rect.height then
+  if (self._contentSize.y > self.rect.height) and self:hasVerticalScrollbar() then
     showVertical = true
-    if self._contentSize.x > (self.rect.width - self.scrollbarWidth) then
+    if (self._contentSize.x > (self.rect.width - self.scrollbarWidth)) and self:hasHorizontalScrollbar() then
       showHorizontal = true
     end
   end

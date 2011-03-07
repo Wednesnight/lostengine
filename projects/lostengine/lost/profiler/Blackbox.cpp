@@ -10,12 +10,12 @@ namespace profiler
 
   Blackbox::Blackbox()
   {
-    DOUT("construct");
+//    DOUT("construct");
   }
 
   Blackbox::~Blackbox()
   {
-    DOUT("destruct");
+//    DOUT("destruct");
   }
 
   Blackbox::Value& Blackbox::value(const std::string& inKey)

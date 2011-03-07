@@ -27,6 +27,8 @@ function startup()
           size="regular",
           bounds={"left",0,{".33333",-blockSpacing},"1"},
           contentSize=Vec2(gridWidth,gridHeight),
+          hasVerticalScrollbar = true,
+          hasHorizontalScrollbar = true,          
           subviews=
           {
             require("grid")(),            
@@ -37,6 +39,8 @@ function startup()
           size="small",
           bounds={"center",0,{".33333",-blockSpacing},"1"},
           contentSize=Vec2(gridWidth,gridHeight),
+          hasVerticalScrollbar = true,
+          hasHorizontalScrollbar = false,          
           subviews=
           {
             require("grid")(),            
@@ -47,6 +51,8 @@ function startup()
           size="mini",
           bounds={"right",0,{".33333",-blockSpacing},"1"},
           contentSize=Vec2(gridWidth,gridHeight),
+          hasVerticalScrollbar = false,
+          hasHorizontalScrollbar = true,          
           subviews=
           {
             require("grid")(),            
