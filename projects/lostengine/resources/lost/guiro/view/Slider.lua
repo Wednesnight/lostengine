@@ -25,8 +25,6 @@ function Slider:constructor(args)
   self.mouseMoveHandler = function(event) self:mouseMove(event) end
   self:addEventListener("mouseDown", self.mouseDownHandler)
   self:addEventListener("mouseUp", self.mouseUpHandler)
-  self:addEventListener("mouseUpOutside", self.mouseUpHandler)
-  self:addEventListener("mouseUpInside", self.mouseUpHandler)
 
   self:needsLayout()
   self:release()
@@ -191,7 +189,7 @@ end
 
 function Slider:mouseDown(event)
   if (not self.scrollbarMode) or (self.scrollbarMode and self:handleContainsPoint(event.pos)) then
-    self:rootview():addEventListener("mouseMove",self.mouseMoveHandler)
+    self._mouseMoveListener = tasklet.eventDispatcher:addEventListener("mouseMove",self.mouseMoveHandler)
     self:initHandleMouseOffset(self:mousePos(event.pos))
     self:updateHandlePosFromMousePos(self:mousePos(event.pos))
     self:updateValueFromHandlePos()
@@ -203,7 +201,7 @@ end
 
 function Slider:mouseUp(event)
   if self.dragInProgress then
-    self:rootview():removeEventListener("mouseMove",self.mouseMoveHandler)
+    tasklet.eventDispatcher:removeEventListener(self._mouseMoveListener)
     self:release()
     self.dragInProgress = false
   end

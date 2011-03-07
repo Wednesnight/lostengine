@@ -34,7 +34,15 @@ function ScrollView:constructor(args)
   self.horizontalScrollbar:value(0)
   self.horizontalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
   self.verticalScrollbar:addEventListener("valueChanged", function(event) self:scrollbarValueChanged(event) end)
-	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollView")            
+	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollView")
+
+	self:addEventListener("mouseScroll", function(event)
+	  local x = math.max(math.min(self.horizontalScrollbar:value() - event.scrollDelta.x*2 / self._contentSize.x, 1), 0)
+	  self.horizontalScrollbar:value(x)
+	  local y = math.max(math.min(self.verticalScrollbar:value() + event.scrollDelta.y*2 / self._contentSize.y, 1), 0)
+	  self.verticalScrollbar:value(y)
+	  self:updateContentPosition()
+	end)
 end
 
 function ScrollView:hasVerticalScrollbar(...)
