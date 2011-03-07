@@ -33,16 +33,7 @@ function TabBar:constructor(args)
 end
 
 function TabBar:buttonClicked(event)
-  for index,button in ipairs(self._buttons) do
-    if rawequal(button, event.target) then
-      self:select(index)
-      local ev = lost.guiro.event.Event("tabBarSelectionChanged")
-      ev.bubbles = true
-      ev.target = self
-      self:dispatchEvent(ev)  
-      break
-    end
-  end
+  self:select(tonumber(event.target.id))
 end
 
 function TabBar:adjustButtonWidth(button, item)
@@ -75,9 +66,10 @@ end
 -- rebuild buttons from items
 function TabBar:rebuildButtons()
   -- remove all previous buttons
-  for _,v in pairs(self._buttons) do
-    v:removeFromSuperview()
+  for _,v in ipairs(self._buttons) do
+    self:removeSubview(v)
   end
+  self._buttons = {}
   
   -- create new ones from items
   for index,item in ipairs(self._items) do
@@ -103,10 +95,15 @@ function TabBar:update()
 end
 
 -- sets the current tabbar selection, 1-based
-function TabBar:select(v)
-  if v ~= self.selected then
+function TabBar:select(v, force)
+  if v ~= self.selected or force then
     self.selected = v
     self:needsUpdate()
+
+    local ev = lost.guiro.event.Event("tabBarSelectionChanged")
+    ev.bubbles = true
+    ev.target = self
+    self:dispatchEvent(ev)  
   end
 end
 
