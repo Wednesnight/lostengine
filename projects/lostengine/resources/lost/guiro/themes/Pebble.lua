@@ -93,6 +93,8 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.ScrollBar", "default", function(target, args) self:scrollBar(target, args) end)
   self:addStyle("lost.guiro.view.ScrollView", "default", function(target, args) self:scrollView(target, args) end)
 
+  self:addStyle("lost.guiro.view.ListView", "default", function(target, args) self:listView(target, args) end)
+
   self:addStyle("lost.guiro.view.Button", "scrollbarUp", function(target, args) self:buttonScrollbarUp(target, args) end)
   self:addStyle("lost.guiro.view.Button", "scrollbarDown", function(target, args) self:buttonScrollbarDown(target, args) end)
   self:addStyle("lost.guiro.view.Button", "scrollbarLeft", function(target, args) self:buttonScrollbarLeft(target, args) end)
@@ -1705,3 +1707,8 @@ function Pebble:scrollView(target, args)
   target.contentView = contentView
   target.cornerView = corner
 end
+
+function Pebble:listView(target, args)
+  self:scrollView(target, args)
+end
+  
