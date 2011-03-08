@@ -14,19 +14,95 @@ function ListView:constructor(args)
   
   if t.delegate ~= nil then self:delegate(t.delegate) end
   if t.dataSource ~= nil then self:dataSource(t.dataSource) end
+  
+  self._sectionHeights = {}
+  self._totalHeight = 0
+  self._reloadInProgress = false
+  self._activeHeaders = {}
+  self._activeCells = {}
+  self:reloadData()
+end
+
+function ListView:measureContent()
+  local numSections = self:numberOfSections()
+  log.debug("---reloading, sections: "..numSections)
+  self._totalContentHeight = 0
+  local sectionHeight = 0
+  self._sectionHeights = {}
+  for section=1,numSections do
+    log.debug(section.." # "..self:numberOfRowsInSection(section))
+    local numRows = self:numberOfRowsInSection(section)
+    sectionHeight = self:heightForHeaderInSection(section)
+    for row=1,numRows do
+      sectionHeight = sectionHeight + self:heightForRowAtIndexPath({section,row})
+    end
+    log.debug("section "..section.." height "..sectionHeight)
+    table.insert(self._sectionHeights,sectionHeight)
+    self._totalContentHeight = self._totalContentHeight + sectionHeight
+  end  
+  log.debug("total content height "..self._totalContentHeight)
+end
+
+function ListView:rebuildSubviews()
+  for k,view in ipairs(self._activeHeaders) do
+    self.contentView:removeSubview(view)
+  end
+  for k,cell in ipairs(self._activeCells) do
+    self.contentView:removeSubview(cell)
+  end  
+  self._activeHeaders = {}
+  self._activeCells = {}
+  local vy = self._totalContentHeight
+  for section=1,self:numberOfSections() do
+    local header = self:viewForHeaderInSection(section)
+    if header then
+      vy = vy - self:heightForHeaderInSection(section)
+      log.debug("header at y "..vy)
+      header:x(0)
+      header:y(vy)
+      header:width("1")
+      header:height(self:heightForHeaderInSection())
+      self.contentView:addSubview(header)
+      table.insert(self._activeHeaders,header)
+    end
+    local rows = self:numberOfRowsInSection(section)
+    for row=1,rows do
+      local ip = {section,row}
+      local cell = self:cellForRowAtIndexPath(ip)
+      local rowHeight = self:heightForRowAtIndexPath(ip)
+      vy = vy - rowHeight
+      cell:x(0)
+      cell:y(vy)
+      cell:width("1")
+      cell:height(rowHeight)
+      self.contentView:addSubview(cell)
+      table.insert(self._activeCells,cell)
+    end
+  end
 end
 
 function ListView:update()
   lost.guiro.view.ScrollView.update(self)
+  if self._reloadInProgress then
+    self:measureContent()
+    self:rebuildSubviews()
+  end
+end
+
+function ListView:updateLayout()
+  lost.guiro.view.ScrollView.updateLayout(self)
   
-  local numSections = self:numberOfSections()
-  log.debug("---reloading, sections: "..numSections)
-  for i=1,numSections do
-    log.debug(i.." # "..self:numberOfRowsInSection(i))
-  end  
+  if self._reloadInProgress then
+    self:contentSize(Vec2(self.rect.width,self._totalContentHeight))
+    self:updateScrollbarVisibility()
+    self:updateScrollbarVisibleRange()
+    self:updateContentPosition()
+    self._reloadInProgress = false
+  end
 end
 
 function ListView:reloadData()
+  self._reloadInProgress = true
   self:needsUpdate()
   self:needsLayout()
 end
@@ -53,7 +129,7 @@ end
 function ListView:numberOfSections()
   local result = 1
   if self._dataSource and self._dataSource.numberOfSections then
-    result = self._dataSource:numberOfSections()
+    result = self._dataSource:numberOfSections(self)
   end
   return result
 end
@@ -61,7 +137,7 @@ end
 function ListView:numberOfRowsInSection(sectionIndex)
   local result = 0
   if self._dataSource and self._dataSource.numberOfRowsInSection then
-    result = self._dataSource:numberOfRowsInSection(sectionIndex)
+    result = self._dataSource:numberOfRowsInSection(self,sectionIndex)
   else
     error("'"..self.id.."' datasource and numberOfRowsInSection are mandatory")
   end
@@ -71,7 +147,7 @@ end
 function ListView:sectionInfoForIndex(sectionIndex)
   local result = nil
   if self._dataSource and self._dataSource.sectionInfoForIndex then
-    result = self._dataSource:sectionInfoForIndex(sectionIndex)
+    result = self._dataSource:sectionInfoForIndex(self,sectionIndex)
   end
   return result
 end
@@ -79,7 +155,7 @@ end
 function ListView:rowForIndexPath(indexPath)
   local result = 0
   if self._dataSource and self._dataSource.rowForIndexPath then
-    result = self._dataSource:rowForIndexPath(indexPath)
+    result = self._dataSource:rowForIndexPath(self,indexPath)
   else
     error("'"..self.id.."' datasource and rowForIndexPath are mandatory")
   end
@@ -87,3 +163,35 @@ function ListView:rowForIndexPath(indexPath)
 end
 
 --Delegate
+
+function ListView:viewForHeaderInSection(sectionIndex)
+  local result = nil
+  if self._delegate and self._delegate.viewForHeaderInSection then
+    result = self._delegate:viewForHeaderInSection(self, sectionIndex)
+  end
+  return result
+end
+
+function ListView:heightForHeaderInSection(sectionIndex)
+  local result = 20
+  if self._delegate and self._delegate.heightForHeaderInSection then
+    result = self._delegate:heightForHeaderInSection(sectionIndex)
+  end
+  return result
+end
+
+function ListView:cellForRowAtIndexPath(indexPath)
+  local result = nil
+  if self._delegate and self._delegate.cellForRowAtIndexPath then
+    result = self._delegate:cellForRowAtIndexPath(self, indexPath)
+  end
+  return result
+end
+
+function ListView:heightForRowAtIndexPath(indexPath)
+  local result = 40
+  if self._delegate and self._delegate.heightForRowAtIndexPath then
+    result = self._delegate:heightForRowAtIndexPath(self,indexPath)
+  end
+  return result
+end
