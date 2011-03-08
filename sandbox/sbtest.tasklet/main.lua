@@ -61,7 +61,7 @@ function startup()
                   {
                     text="Header",
                     color=Color(1,1,1),
-                  }
+                  },
                 }
               }
             end,
@@ -78,8 +78,14 @@ function startup()
                   lost.guiro.view.Label
                   {
                     text="Cell",
+                    bounds={0,"center",100,30},
                     color=Color(1,1,1),
                     font={"Grinched",16}
+                  },
+                  lost.guiro.view.Button
+                  {
+                    title="Click!",
+                    bounds={"right","center",100,30},
                   }
                 }
               }

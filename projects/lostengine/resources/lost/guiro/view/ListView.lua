@@ -99,6 +99,12 @@ function ListView:updateLayout()
     self:updateContentPosition()
     self._reloadInProgress = false
   end
+  
+  local w = "1"
+  if not self.verticalScrollbar:hidden() then
+    w = {"1",-self.scrollbarWidth}
+  end
+  self.contentView:width(w)
 end
 
 function ListView:reloadData()
