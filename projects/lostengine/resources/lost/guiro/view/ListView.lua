@@ -63,6 +63,8 @@ function ListView:rebuildSubviews()
       header:width("1")
       header:height(self:heightForHeaderInSection())
       self.contentView:addSubview(header)
+      local si = self:sectionInfoForIndex(section)
+      header:dataSource(si)
       table.insert(self._activeHeaders,header)
     end
     local rows = self:numberOfRowsInSection(section)
@@ -76,6 +78,9 @@ function ListView:rebuildSubviews()
       cell:width("1")
       cell:height(rowHeight)
       self.contentView:addSubview(cell)
+      local ds = self:rowForIndexPath(ip)
+      log.debug("row "..tostring(ds))
+      cell:dataSource(ds)
       table.insert(self._activeCells,cell)
     end
   end

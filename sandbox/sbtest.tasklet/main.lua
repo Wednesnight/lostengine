@@ -50,45 +50,66 @@ function startup()
           delegate = {
             
             createHeaderView=function(self)
-              return lost.guiro.view.View
+              local v = lost.guiro.view.View
               {
                 sublayers={
                   lost.guiro.layer.Rect{filled=true,color=Color(0,0,0)}
                 },
-                subviews=
-                {
-                  lost.guiro.view.Label
-                  {
-                    text="Header",
-                    color=Color(1,1,1),
-                  },
-                }
               }
+              local l = lost.guiro.view.Label
+              {
+                text="Header",
+                color=Color(1,1,1),
+              }
+              v:addSubview(l)
+              v.label = l
+              v.dataSource = function(self,ds)
+                self.label:text(ds.title)
+              end
+              return v
             end,
             
             createCellView=function(self)
-              return lost.guiro.view.View
+              local v = lost.guiro.view.View
               {
                 sublayers={
                   lost.guiro.layer.Rect{filled=true,color=Color(.6,.6,.9)},
                   lost.guiro.layer.HLine{bounds={0,"bottom","1",1},color=Color(.8,.8,.8)}
                 },
-                subviews=
-                {
-                  lost.guiro.view.Label
-                  {
-                    text="Cell",
-                    bounds={0,"center",100,30},
-                    color=Color(1,1,1),
-                    font={"Grinched",16}
-                  },
-                  lost.guiro.view.Button
-                  {
-                    title="Click!",
-                    bounds={"right","center",100,30},
-                  }
-                }
               }
+              local l = lost.guiro.view.Label
+              {
+                text="Cell",
+                bounds={0,"center",100,30},
+                color=Color(1,1,1),
+                font={"Grinched",16},
+                valign="center",
+                halign="center"
+              }
+              local b = lost.guiro.view.Button
+              {
+                title="Click!",
+                bounds={"right","center",100,30},
+              }
+              v.label = l
+              v.button = b
+              v:addSubview(l)
+              v:addSubview(b)
+              v.dataSource = function(self,ds)
+                log.debug("row "..tostring(ds))
+                for a,b in pairs(ds) do
+                  log.debug(tostring(a).." "..tostring(b))
+                end
+                log.debug("setting title: '"..tostring(ds.title).."'")
+                self._dataSource = ds
+                self.label:text(ds.title)
+                self.button:title(ds.title)
+              end
+              v.buttonClick=function(self,event)
+                log.debug("clicked button "..self._dataSource.title)
+              end
+              v.button:addEventListener("buttonClick",function(event) v:buttonClick(event) end)
+              return v
             end,
             
             viewForHeaderInSection=function(self,listView,sectionIndex) return self:createHeaderView() end, -- optional, header will be omitted if nil is returned
