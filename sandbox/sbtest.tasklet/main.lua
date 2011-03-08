@@ -47,6 +47,7 @@ function startup()
       {
         lost.guiro.view.ListView
         {
+          alwaysShowCorner=true,
           delegate = {
             
             createHeaderView=function(self)

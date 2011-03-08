@@ -79,7 +79,6 @@ function ListView:rebuildSubviews()
       cell:height(rowHeight)
       self.contentView:addSubview(cell)
       local ds = self:rowForIndexPath(ip)
-      log.debug("row "..tostring(ds))
       cell:dataSource(ds)
       table.insert(self._activeCells,cell)
     end
