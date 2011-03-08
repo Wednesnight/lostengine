@@ -10,10 +10,11 @@ local Vec2 = lost.math.Vec2
 -- * horizontalScrollbar
 -- * cornerView (missing piece when two scrollbars are present)
 -- * scrollbarWidth
+-- * cornerView
 --
 -- add content as regular subviews, will be put into contentView.
 -- set contentSize afterwards
---
+-- * alwaysShowCorner: set this to true if you want the bottom right corner view always to be shown, permanently insetting the scrollbars
 function ScrollView:constructor(args)
   lost.guiro.view.View.constructor(self, args)
   local t = args or {}
@@ -29,6 +30,12 @@ function ScrollView:constructor(args)
   else
     self:hasHorizontalScrollbar(true)
   end
+
+  if t.alwaysShowCorner ~= nil then 
+    self:alwaysShowCorner(t.alwaysShowCorner) 
+  else
+    self:alwaysShowCorner(false) 
+  end
   -- move scrollbars so content is aligned topleft by default
   self.verticalScrollbar:value(1)
   self.horizontalScrollbar:value(0)
@@ -43,6 +50,15 @@ function ScrollView:constructor(args)
 	  self.verticalScrollbar:value(y)
 	  self:updateContentPosition()
 	end)
+end
+
+function ScrollView:alwaysShowCorner(...)
+  if arg.n >= 1 then
+    self._alwaysShowCorner = arg[1]
+    self:needsLayout()
+  else
+    return self._alwaysShowCorner
+  end
 end
 
 function ScrollView:hasVerticalScrollbar(...)
@@ -88,7 +104,7 @@ end
 function ScrollView:showScrollbars(horizontal, vertical)
   if horizontal then
     self.horizontalScrollbar:hidden(false)
-    if vertical then
+    if vertical or self._alwaysShowCorner then
       self.horizontalScrollbar:width({"1",-self.scrollbarWidth})
     else
       self.horizontalScrollbar:width("1")
@@ -99,7 +115,7 @@ function ScrollView:showScrollbars(horizontal, vertical)
   
   if vertical then
     self.verticalScrollbar:hidden(false)    
-    if horizontal then
+    if horizontal or self._alwaysShowCorner then
       self.verticalScrollbar:height({"1",-self.scrollbarWidth})
       self.verticalScrollbar:y(self.scrollbarWidth)
     else
@@ -110,7 +126,7 @@ function ScrollView:showScrollbars(horizontal, vertical)
     self.verticalScrollbar:hidden(true)    
   end
   
-  if not (horizontal and vertical) then
+  if not ((horizontal and vertical) or self._alwaysShowCorner) then
     self.cornerView:hidden(true)
   else
     self.cornerView:hidden(false)
