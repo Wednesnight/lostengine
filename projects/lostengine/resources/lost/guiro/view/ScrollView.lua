@@ -78,6 +78,7 @@ end
 function ScrollView:contentSize(...) -- Vec2
   if arg.n >= 1 then
     self._contentSize = arg[1]
+    self.contentView:size(self._contentSize.x,self._contentSize.y)
     self:needsLayout()
   else
     return self._contentSize
