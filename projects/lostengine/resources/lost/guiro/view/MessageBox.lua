@@ -1,7 +1,10 @@
 module("lost.guiro.view", package.seeall)
 
 -- no need for class overhead
-MessageBox = {}
+MessageBox = {
+  _currentWindow = nil,
+  _windowQueue = {}
+}
 
 -- MessageBox button types
 MessageBox.YES = "Yes"
@@ -55,6 +58,17 @@ function MessageBox._buttons(buttons, callback, offset)
   end
 end
 
+function MessageBox._nextMessageBox(event)
+  if #MessageBox._windowQueue > 0 then
+    log.debug("open from queue")
+    MessageBox._currentWindow = table.remove(MessageBox._windowQueue, 1)
+    MessageBox._currentWindow:open()
+  else
+    log.debug("close")
+    MessageBox._currentWindow = nil
+  end
+end
+
 -- show a message
 -- optional: call callback on close, first parameter is always MessageBox.OK
 function MessageBox.message(title, message, callback)
@@ -62,6 +76,7 @@ function MessageBox.message(title, message, callback)
   {
     bounds = {"center", "center", 300, 150},
     title = title,
+    modal = true,
     closeButton = false,
     resizable = false,
     subviews =
@@ -72,10 +87,18 @@ function MessageBox.message(title, message, callback)
         text = message
       },
       MessageBox._buttons(MessageBox.OK, callback)
+    },
+    listeners =
+    {
+      windowClose = MessageBox._nextMessageBox
     }
   }
-  window:open()
-  window.contentView(MessageBox.OK):focus(true)
+  if MessageBox._currentWindow == nil then
+    MessageBox._currentWindow = window
+    MessageBox._currentWindow:open()
+  else
+    table.insert(MessageBox._windowQueue, window)
+  end
 end
 
 -- show a message that has to be confirmed
@@ -85,6 +108,7 @@ function MessageBox.confirm(title, message, callback)
   {
     bounds = {"center", "center", 300, 150},
     title = title,
+    modal = true,
     closeButton = false,
     resizable = false,
     subviews =
@@ -95,8 +119,18 @@ function MessageBox.confirm(title, message, callback)
         text = message
       },
       MessageBox._buttons(MessageBox.YESNO, callback)
+    },
+    listeners =
+    {
+      windowClose = MessageBox._nextMessageBox
     }
   }
-  window:open()
-  window.contentView(MessageBox.YES):focus(true)
+  if MessageBox._currentWindow == nil then
+    log.debug("open")
+    MessageBox._currentWindow = window
+    MessageBox._currentWindow:open()
+  else
+    log.debug("queue")
+    table.insert(MessageBox._windowQueue, window)
+  end
 end
