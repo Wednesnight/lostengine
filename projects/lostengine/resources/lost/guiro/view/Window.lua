@@ -27,6 +27,11 @@ function Window:constructor(args)
   local t = args or {}
   self.focusable = true
   self.id = t.id or "window"
+  if t.modal ~= nil then
+    self.modal = t.modal
+  else
+    self.modal = false
+  end
   if t.movable ~= nil then
     self.movable = t.movable
   else
@@ -163,8 +168,16 @@ end
 
 function Window:open()
   lost.guiro.windowManager():openWindow(self)
+  local event = lost.guiro.event.Event("windowOpen")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
 end
 
 function Window:close()
+  local event = lost.guiro.event.Event("windowClose")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)  
   lost.guiro.windowManager():closeWindow(self)
 end

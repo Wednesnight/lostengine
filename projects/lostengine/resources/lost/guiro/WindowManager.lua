@@ -7,10 +7,22 @@ lost.common.Class "lost.guiro.WindowManager" {}
 function WindowManager:constructor()
   self._menus = {}
   self._numMenus = 0
+  self._modalLayer = nil
+  self._modalCount = 0
 end
 
 function WindowManager:openWindow(win)
   if not lost.guiro.ui():containsView(win) then
+    if win.modal then
+      if self._modalLayer == nil then
+        self._modalLayer = lost.guiro.view.View{sublayers = {lost.guiro.layer.Rect{color = lost.common.Color(.3,.3,.3,.3)}}, hidden = true}
+      end
+      if self._modalCount == 0 then
+        lost.guiro.ui():addSubview(self._modalLayer)
+        self._modalLayer:hidden(false)
+      end
+      self._modalCount = self._modalCount+1
+    end
     lost.guiro.ui():addSubview(win)
     win:hidden(false)
     lost.guiro.ui().eventManager:receiveFocus(win)
@@ -21,6 +33,14 @@ function WindowManager:closeWindow(win)
   lost.guiro.ui().eventManager:loseFocus(win)
   win:hidden(true)
   lost.guiro.ui():removeSubview(win)
+  if win.modal and self._modalLayer ~= nil then
+    self._modalCount = self._modalCount-1
+    if self._modalCount <= 0 then
+      self._modalCount = 0
+      self._modalLayer:hidden(true)
+      lost.guiro.ui():removeSubview(self._modalLayer)
+    end
+  end
 end
 
 function WindowManager:openMenu(menu)
