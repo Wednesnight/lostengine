@@ -63,8 +63,13 @@ namespace lost
     
     int make_range(lua_State* L, const boost::filesystem::path& path)
     {
-      return make_range(L, boost::filesystem::directory_iterator(path),
-                        boost::filesystem::directory_iterator());
+      boost::filesystem::directory_iterator iter;
+      try {
+        iter = boost::filesystem::directory_iterator(path);
+      }
+      catch (...) {
+      }
+      return make_range(L, iter, boost::filesystem::directory_iterator());
     }
     
     struct directory_iterator_converter

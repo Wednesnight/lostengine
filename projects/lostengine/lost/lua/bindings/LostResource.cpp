@@ -59,7 +59,11 @@ namespace lost
             .def("locate", &LostResourceLoader_locate)
             .def("addRepository", &Loader::addRepository)
             .def("directory", &LostResourceLoader_directory, return_directory_iterator)
-        ]
+            .scope
+            [
+              def("create", &Loader::create)
+            ]
+         ]
       ];
     }
 
