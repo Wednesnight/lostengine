@@ -10,14 +10,19 @@ end
 
 local directoryImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/blue-folder-horizontal.png"))
 directoryImage:premultiplyAlpha()
+directoryImage = lost.gl.Texture.create(directoryImage, lost.gl.Texture.Params())
 local directoryOpenImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/blue-folder-horizontal-open.png"))
 directoryOpenImage:premultiplyAlpha()
+directoryOpenImage = lost.gl.Texture.create(directoryOpenImage, lost.gl.Texture.Params())
 local rightImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/control-right.png"))
 rightImage:premultiplyAlpha()
+rightImage = lost.gl.Texture.create(rightImage, lost.gl.Texture.Params())
 local downImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/control-down.png"))
 downImage:premultiplyAlpha()
+downImage = lost.gl.Texture.create(downImage, lost.gl.Texture.Params())
 local documentImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/document.png"))
 documentImage:premultiplyAlpha()
+documentImage = lost.gl.Texture.create(documentImage, lost.gl.Texture.Params())
 
 return lost.guiro.view.View
 {
@@ -55,13 +60,13 @@ return lost.guiro.view.View
                     closed = lost.guiro.view.Image {
                       bounds = {ds.padding,"center",16,16},
                       flip = true,
-                      bitmap = rightImage,
+                      texture = rightImage,
                       hidden = ds.data ~= nil
                     },
                     open = lost.guiro.view.Image {
                       bounds = {ds.padding,"center",16,16},
                       flip = true,
-                      bitmap = downImage,
+                      texture = downImage,
                       hidden = ds.data == nil
                     }
                   },
@@ -69,13 +74,13 @@ return lost.guiro.view.View
                     closed = lost.guiro.view.Image {
                       bounds = {ds.padding+16,"center",16,16},
                       flip = true,
-                      bitmap = directoryImage,
+                      texture = directoryImage,
                       hidden = ds.data ~= nil
                     },
                     open = lost.guiro.view.Image {
                       bounds = {ds.padding+16,"center",16,16},
                       flip = true,
-                      bitmap = directoryOpenImage,
+                      texture = directoryOpenImage,
                       hidden = ds.data == nil
                     }
                   }
@@ -88,7 +93,7 @@ return lost.guiro.view.View
                   file = lost.guiro.view.Image {
                     bounds = {ds.padding+16,"center",16,16},
                     flip = true,
-                    bitmap = documentImage
+                    texture = documentImage
                   }
                 }
                 self:addSubview(self.images.file)
