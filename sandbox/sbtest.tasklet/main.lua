@@ -97,11 +97,11 @@ function startup()
               v:addSubview(l)
               v:addSubview(b)
               v.dataSource = function(self,ds)
-                log.debug("row "..tostring(ds))
-                for a,b in pairs(ds) do
-                  log.debug(tostring(a).." "..tostring(b))
-                end
-                log.debug("setting title: '"..tostring(ds.title).."'")
+--                log.debug("row "..tostring(ds))
+--                for a,b in pairs(ds) do
+--                  log.debug(tostring(a).." "..tostring(b))
+--                end
+  --              log.debug("setting title: '"..tostring(ds.title).."'")
                 self._dataSource = ds
                 self.label:text(ds.title)
                 self.button:title(ds.title)

@@ -20,26 +20,42 @@ function ListView:constructor(args)
   self._reloadInProgress = false
   self._activeHeaders = {}
   self._activeCells = {}
+  self._geometry = {}
   self:reloadData()
+end
+
+function ListView:logGeometry()
+  log.debug("--------")
+  for k,v in ipairs(self._geometry) do
+    local s = ""
+    for _,val in ipairs(v) do
+      s = s .. tostring(val).." "
+    end
+    log.debug(s)
+  end
+  log.debug("--------")
 end
 
 function ListView:measureContent()
   local numSections = self:numberOfSections()
   log.debug("---reloading, sections: "..numSections)
   self._totalContentHeight = 0
-  local sectionHeight = 0
-  self._sectionHeights = {}
+  self._geometry = {}
   for section=1,numSections do
     log.debug(section.." # "..self:numberOfRowsInSection(section))
     local numRows = self:numberOfRowsInSection(section)
-    sectionHeight = self:heightForHeaderInSection(section)
-    for row=1,numRows do
-      sectionHeight = sectionHeight + self:heightForRowAtIndexPath({section,row})
+    headerHeight = self:heightForHeaderInSection(section)
+    self._totalContentHeight = self._totalContentHeight + headerHeight
+    if headerHeight > 0 then
+      table.insert(self._geometry,{0,headerHeight,true,section,0})
     end
-    log.debug("section "..section.." height "..sectionHeight)
-    table.insert(self._sectionHeights,sectionHeight)
-    self._totalContentHeight = self._totalContentHeight + sectionHeight
+    for row=1,numRows do
+      local rowHeight = self:heightForRowAtIndexPath({section,row})
+      self._totalContentHeight = self._totalContentHeight + rowHeight
+      table.insert(self._geometry,{0,rowHeight,false,section,row})
+    end
   end  
+  self:logGeometry()
   log.debug("total content height "..self._totalContentHeight)
 end
 
@@ -57,7 +73,7 @@ function ListView:rebuildSubviews()
     local header = self:viewForHeaderInSection(section)
     if header then
       vy = vy - self:heightForHeaderInSection(section)
-      log.debug("header at y "..vy)
+--      log.debug("header at y "..vy)
       header:x(0)
       header:y(vy)
       header:width("1")
@@ -182,8 +198,9 @@ function ListView:viewForHeaderInSection(sectionIndex)
   return result
 end
 
+-- returning 0 means no header 
 function ListView:heightForHeaderInSection(sectionIndex)
-  local result = 20
+  local result = 0
   if self._delegate and self._delegate.heightForHeaderInSection then
     result = self._delegate:heightForHeaderInSection(sectionIndex)
   end
