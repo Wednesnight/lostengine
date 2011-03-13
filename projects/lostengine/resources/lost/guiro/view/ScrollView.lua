@@ -170,6 +170,18 @@ function ScrollView:updateScrollbarVisibleRange()
   self.horizontalScrollbar:visibleRange(hvr)
 end
 
+function ScrollView:calculateVerticalScrollOffset()
+  local vv = self.verticalScrollbar:value()
+  local vrange = math.max(self._contentSize.y - self.rect.height,0)
+  local vmod = 0
+  if not self.horizontalScrollbar:hidden() then
+    vmod = self.scrollbarWidth
+  end
+  vrange = vrange + vmod
+  local voffset = vrange*vv
+  return voffset-vmod
+end
+
 function ScrollView:updateContentPosition()
   local hv = self.horizontalScrollbar:value()
   local hrange = math.max(self._contentSize.x - self.rect.width,0)
@@ -181,17 +193,9 @@ function ScrollView:updateContentPosition()
   local hoffset = hrange*hv
   self.contentView:x(-hoffset)
 
-  local vv = self.verticalScrollbar:value()
-  local vrange = math.max(self._contentSize.y - self.rect.height,0)
-  local vmod = 0
-  if not self.horizontalScrollbar:hidden() then
-    vmod = self.scrollbarWidth
-  end
-  vrange = vrange + vmod
-  local voffset = vrange*vv
+  local voffset = self:calculateVerticalScrollOffset()
   local d = math.max((self.rect.height-self._contentSize.y),0)
-  self.contentView:y(d-voffset+vmod)
-
+  self.contentView:y(d-voffset)
 end
 
 -- checks if the content fits inside the view and resets the scrollbar positions 
