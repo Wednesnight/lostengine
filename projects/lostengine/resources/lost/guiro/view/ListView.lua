@@ -11,17 +11,51 @@ function ListView:constructor(args)
   self.id = t.id or "listview"
   self:hasHorizontalScrollbar(false)
   self:hasVerticalScrollbar(true)  
+  self.verticalScrollbar:addEventListener("valueChanged",function(event) self:scrollbarMoved(event) end)
   
   if t.delegate ~= nil then self:delegate(t.delegate) end
   if t.dataSource ~= nil then self:dataSource(t.dataSource) end
   
-  self._sectionHeights = {}
   self._totalHeight = 0
   self._reloadInProgress = false
   self._activeHeaders = {}
   self._activeCells = {}
   self._geometry = {}
   self:reloadData()
+end
+
+-- top/bottom refer to pixel location, the order in which the cells are draw,top index value should always be < bottom
+function _bsearch(data,top,bottom,val)
+  local iters = 0
+  while top <= bottom do
+    iters = iters + 1
+    local mid = top + math.floor((bottom - top) / 2)
+    local cell = data[mid]
+    if (val <= cell[1]) and (val > cell[2]) then
+        return mid,iters
+    elseif val <= cell[2] then
+        top = mid +1
+    else
+        bottom = mid -1
+    end
+  end
+  return nil
+end
+
+function ListView:calculateVisibleRange(topPixelCoord, bottomPixelCoord)
+  local top = _bsearch(self._geometry, 1,#self._geometry,topPixelCoord)
+  if top == nil then top = 1 end
+  local bottom = _bsearch(self._geometry, 1,#self._geometry,bottomPixelCoord)
+  if bottom == nil then bottom = #self._geometry end
+  return top, bottom
+end
+
+function ListView:scrollbarMoved(event)
+  -- debug
+  local vso = self:calculateVerticalScrollOffset()
+  local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
+  log.debug("vso "..self:calculateVerticalScrollOffset().." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  ---
 end
 
 function ListView:logGeometry()
@@ -36,13 +70,15 @@ function ListView:logGeometry()
   log.debug("--------")
 end
 
+-- creates a table of tables containing the following values in this order
+-- top global pixel coordinate in cell
+-- bottom global pixel coordinate outside cell
+-- 
 function ListView:measureContent()
   local numSections = self:numberOfSections()
-  log.debug("---reloading, sections: "..numSections)
   self._totalContentHeight = 0
   self._geometry = {}
   for section=1,numSections do
-    log.debug(section.." # "..self:numberOfRowsInSection(section))
     local numRows = self:numberOfRowsInSection(section)
     headerHeight = self:heightForHeaderInSection(section)
     self._totalContentHeight = self._totalContentHeight + headerHeight
@@ -55,6 +91,18 @@ function ListView:measureContent()
       table.insert(self._geometry,{0,rowHeight,false,section,row})
     end
   end  
+  -- second pass: correct the cell bounds, taking total height into account
+  for i=1,#self._geometry do
+    local cell = self._geometry[i]
+    local prevcell = self._geometry[i-1]
+    if prevcell ~= nil then
+      cell[1] = prevcell[2]
+      cell[2] = cell[1] - cell[2]
+    else
+      cell[1] = self._totalContentHeight-1
+      cell[2] = cell[1] - cell[2]
+    end
+  end
   self:logGeometry()
   log.debug("total content height "..self._totalContentHeight)
 end
@@ -125,6 +173,12 @@ function ListView:updateLayout()
     w = {"1",-self.scrollbarWidth}
   end
   self.contentView:width(w)
+
+  -- debug
+  local vso = self:calculateVerticalScrollOffset()
+  local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
+  log.debug("vso "..self:calculateVerticalScrollOffset().." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  ---
 end
 
 function ListView:reloadData()
