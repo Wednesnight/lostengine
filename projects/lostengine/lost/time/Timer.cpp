@@ -14,6 +14,13 @@ namespace lost
     {
     }
 
+    Timer::~Timer()
+    {
+      if (active) {
+        scheduler->stopTimer(this);
+      }
+    }
+
     void Timer::start()
     {
       active = scheduler->startTimer(this);

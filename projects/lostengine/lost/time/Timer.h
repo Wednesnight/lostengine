@@ -27,6 +27,7 @@ namespace lost
 
     public:
       Timer(TimerScheduler* scheduler, double interval, const TimerCallback& callback);
+      ~Timer();
 
       void start();
       void stop();

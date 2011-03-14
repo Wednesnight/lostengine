@@ -6,6 +6,7 @@
 #include "lost/time/Timer.h"
 
 #include <boost/bind.hpp>
+#include <luabind/adopt_policy.hpp>
 
 using namespace luabind;
 using namespace lost::time;
@@ -28,7 +29,7 @@ namespace lost
       return false;
     }
     
-    Timer* LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, object targetMethod, object targetObject)
+    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, object targetMethod, object targetObject)
     {
       return scheduler->createTimer(interval, boost::bind(&TimerCallbackProxy, targetMethod, targetObject, _1));
     }
