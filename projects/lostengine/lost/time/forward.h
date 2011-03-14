@@ -8,6 +8,7 @@ namespace lost
 
     struct Clock;
     struct Timer;
+    typedef lost::shared_ptr<Timer> TimerPtr;
     struct TimerScheduler;
     struct ThreadedTimerScheduler;
 

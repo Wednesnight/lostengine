@@ -18,11 +18,11 @@ namespace lost
 
       virtual void processTimers() = 0;
 
-      Timer* createTimer(double interval, const TimerCallback& callback, bool startImmediately = false)
+      TimerPtr createTimer(double interval, const TimerCallback& callback, bool startImmediately = false)
       {
-        Timer* timer = new Timer(this, interval, callback);
+        TimerPtr timer(new Timer(this, interval, callback));
         if (startImmediately) {
-          startTimer(timer);
+          startTimer(timer.get());
         }
         return timer;
       }
