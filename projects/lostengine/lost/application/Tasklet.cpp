@@ -270,7 +270,10 @@ namespace lost
       luabind::object taskletObj = luabind::globals(state)["tasklet"];
       if (luabind::type(taskletObj) != LUA_TNIL) {
         Tasklet* tasklet = luabind::object_cast<Tasklet*>(taskletObj);
-        tasklet->eventDispatcher->dispatchEvent(DebugEvent::create(DebugEvent::PAUSE(), tasklet));
+        DebugEventPtr event = DebugEvent::create(DebugEvent::PAUSE(), tasklet);
+        lua_getinfo(state, "Slnu", debug);
+        event->info.debug = debug;
+        tasklet->eventDispatcher->dispatchEvent(event);
         tasklet->eventDispatcher->waitForEvent(DebugEvent::CMD_CONTINUE());
       }
     }
@@ -289,7 +292,7 @@ namespace lost
           lua_sethook(lua->state, &TaskletLuaDebugHook, LUA_MASKCALL | LUA_MASKRET | LUA_MASKLINE, 0);
         }
 
-        else if (event->type == DebugEvent::CMD_CONTINUE()) {
+        else if (event->type == DebugEvent::CMD_CONTINUE() && event->mode == 0) {
           lua_sethook(lua->state, NULL, 0, 0);
         }
       }

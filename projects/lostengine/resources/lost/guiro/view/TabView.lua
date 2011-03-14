@@ -86,6 +86,10 @@ function TabView:removeSubview(view,forceSubview)
   end
 end
 
+function TabView:__call(subviewId)
+  return self.contentView(subviewId)
+end
+
 function TabView:hideAll()
   for k,v in ipairs(self.tabViews) do
     v:hidden(true)

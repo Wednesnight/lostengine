@@ -418,6 +418,7 @@ namespace lost
         namespace_("application")
         [
           class_<DebugEvent, Event>("DebugEvent")
+            .def_readwrite("mode", &DebugEvent::mode)
             .def_readonly("tasklet", &DebugEvent::tasklet)
             .def_readonly("info", &DebugEvent::info)
 
@@ -426,6 +427,7 @@ namespace lost
               def("create", &DebugEvent_create),
 
               class_<DebugEvent::DebugInfo>("DebugInfo")
+                .def_readonly("debug", &DebugEvent::DebugInfo::debug)
                 .def_readonly("memSize", &DebugEvent::DebugInfo::memSize)
             ]
         ]
