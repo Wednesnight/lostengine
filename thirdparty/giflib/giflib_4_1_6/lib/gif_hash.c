@@ -16,37 +16,17 @@
 * 14 Jun 89 - Version 1.0 by Gershon Elber.				     *
 *****************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 
-/* Find a thirty-two bit int type */
-#ifdef HAVE_STDINT_H
 #include <stdint.h>
-#endif
-#ifdef HAVE_INTTYPES_H
-#include <inttypes.h>
-#endif
-#ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
-#endif
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif
 
-#ifdef __MSDOS__
-#include <io.h>
-#include <alloc.h>
-#include <sys\stat.h>
-#else
 #include <sys/types.h>
 #include <sys/stat.h>
-#endif /* __MSDOS__ */
 
-#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
-#endif /* HAVE_FCNTL_H */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "gif_lib.h"
 #include "gif_hash.h"
@@ -59,7 +39,7 @@ static long NumberOfTests = 0,
 	    NumberOfMisses = 0;
 #endif	/* DEBUG_HIT_RATE */
 
-static int KeyItem(UINT32 Item);
+static int KeyItem(uint32_t Item);
 
 /******************************************************************************
 * Initialize HashTable - allocate the memory needed and clear it.	      *
@@ -83,17 +63,17 @@ GifHashTableType *_InitHashTable(void)
 ******************************************************************************/
 void _ClearHashTable(GifHashTableType *HashTable)
 {
-    memset(HashTable -> HTable, 0xFF, HT_SIZE * sizeof(UINT32));
+    memset(HashTable -> HTable, 0xFF, HT_SIZE * sizeof(uint32_t));
 }
 
 /******************************************************************************
 * Routine to insert a new Item into the HashTable. The data is assumed to be  *
 * new one.								      *
 ******************************************************************************/
-void _InsertHashTable(GifHashTableType *HashTable, UINT32 Key, int Code)
+void _InsertHashTable(GifHashTableType *HashTable, uint32_t Key, int Code)
 {
     int HKey = KeyItem(Key);
-    UINT32 *HTable = HashTable -> HTable;
+    uint32_t *HTable = HashTable -> HTable;
 
 #ifdef DEBUG_HIT_RATE
 	NumberOfTests++;
@@ -113,10 +93,10 @@ void _InsertHashTable(GifHashTableType *HashTable, UINT32 Key, int Code)
 * Routine to test if given Key exists in HashTable and if so returns its code *
 * Returns the Code if key was found, -1 if not.				      *
 ******************************************************************************/
-int _ExistsHashTable(GifHashTableType *HashTable, UINT32 Key)
+int _ExistsHashTable(GifHashTableType *HashTable, uint32_t Key)
 {
     int HKey = KeyItem(Key);
-    UINT32 *HTable = HashTable -> HTable, HTKey;
+    uint32_t *HTable = HashTable -> HTable, HTKey;
 
 #ifdef DEBUG_HIT_RATE
 	NumberOfTests++;
@@ -141,7 +121,7 @@ int _ExistsHashTable(GifHashTableType *HashTable, UINT32 Key)
 * Because the average hit ratio is only 2 (2 hash references per entry),      *
 * evaluating more complex keys (such as twin prime keys) does not worth it!   *
 ******************************************************************************/
-static int KeyItem(UINT32 Item)
+static int KeyItem(uint32_t Item)
 {
     return ((Item >> 12) ^ Item) & HT_KEY_MASK;
 }
