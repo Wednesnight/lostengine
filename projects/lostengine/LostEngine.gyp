@@ -5,6 +5,7 @@
     'box2d_path': '../../thirdparty/box2d/box2d_2_0_1',
     'fhtagn_path': '../../thirdparty/fhtagn/fhtagn-0.3',
     'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
+    'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
     'glee_path': '../../thirdparty/glee/glee_5_21',
     'hashlib++_path': '../../thirdparty/hashlib++/hashlib++_0_3_1',
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
@@ -432,6 +433,7 @@
         '<@(box2d_path)/source/Include',
         '<@(fhtagn_path)',
         '<@(freetype2_path)/include',
+        '<@(giflib_path)/lib',
         '<@(glee_path)/include',
         '<@(hashlib++_path)',
         '<@(lua_path)/include',
@@ -491,6 +493,7 @@
         # bitmap
         'lost/bitmap/Bitmap.cpp',
         'lost/bitmap/Packer.cpp',
+        'lost/bitmap/Gif.cpp',
 
         # camera
         'lost/camera/Camera.cpp',
@@ -739,6 +742,12 @@
         '<@(freetype2_path)/src/base/fttype1.c',
         '<@(freetype2_path)/src/base/ftbitmap.c',
         '<@(freetype2_path)/src/base/ftxf86.c',
+
+        # thirdparty/giflib
+        '<@(giflib_path)/lib/dgif_lib.c',
+        '<@(giflib_path)/lib/gif_hash.c',
+        '<@(giflib_path)/lib/gifalloc.c',
+        '<@(giflib_path)/lib/gif_err.c',
 
         # thirdparty/glee
         '<@(glee_path)/source/GLee.c',

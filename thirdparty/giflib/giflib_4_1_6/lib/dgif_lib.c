@@ -10,30 +10,12 @@
  *  3 Sep 90 - Version 1.1 by Gershon Elber (Support for Gif89, Unique names).
  *****************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 
 #include <stdlib.h>
-#if defined (__MSDOS__) && !defined(__DJGPP__) && !defined(__GNUC__)
-#include <io.h>
-#include <alloc.h>
-#include <sys\stat.h>
-#else
 #include <sys/types.h>
 #include <sys/stat.h>
-#endif /* __MSDOS__ */
-
-#ifdef HAVE_IO_H
-#include <io.h>
-#endif
-
-#ifdef HAVE_FCNTL_H
-#include <fcntl.h>
-#endif /* HAVE_FCNTL_H */
-#ifdef HAVE_UNISTD_H
 #include <unistd.h>
-#endif /* HAVE_UNISTD_H */
+#include <fcntl.h>
 #include <stdio.h>
 #include <string.h>
 #include "gif_lib.h"
@@ -140,7 +122,7 @@ DGifOpenFileHandle(int FileHandle) {
     /* The GIF Version number is ignored at this time. Maybe we should do
      * something more useful with it.  */
     Buf[GIF_STAMP_LEN] = 0;
-    if (strncmp(GIF_STAMP, Buf, GIF_VERSION_POS) != 0) {
+    if (strncmp(GIF_STAMP, (char*)Buf, GIF_VERSION_POS) != 0) {
         _GifError = D_GIF_ERR_NOT_GIF_FILE;
         fclose(f);
         free((char *)Private);
@@ -207,7 +189,7 @@ DGifOpen(void *userData,
     /* The GIF Version number is ignored at this time. Maybe we should do
      * something more useful with it. */
     Buf[GIF_STAMP_LEN] = 0;
-    if (strncmp(GIF_STAMP, Buf, GIF_VERSION_POS) != 0) {
+    if (strncmp(GIF_STAMP, (char*)Buf, GIF_VERSION_POS) != 0) {
         _GifError = D_GIF_ERR_NOT_GIF_FILE;
         free((char *)Private);
         free((char *)GifFile);
