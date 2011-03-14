@@ -12,6 +12,7 @@ namespace lost
     {
       struct DebugInfo
       {
+        lua_Debug* debug;
         int memSize;
       };
 
@@ -22,10 +23,11 @@ namespace lost
       static const event::Type& MEM_INFO() { static event::Type d = "debugMemInfo"; return d; }
       static const event::Type& PAUSE() { static event::Type d = "debugPause"; return d; }
 
+      int mode;
       Tasklet* tasklet;
       DebugInfo info;
 
-      DebugEvent(const event::Type& inType, Tasklet* inTasklet) : Event(inType), tasklet(inTasklet) {}
+      DebugEvent(const event::Type& inType, Tasklet* inTasklet) : Event(inType), mode(0), tasklet(inTasklet) {}
       virtual ~DebugEvent() {}
 
       static DebugEventPtr create(const event::Type& inType, Tasklet* inTasklet) { return DebugEventPtr(new DebugEvent(inType, inTasklet)); }

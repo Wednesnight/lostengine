@@ -98,8 +98,11 @@ function startup()
   end)
 
   tasklet.eventDispatcher:addEventListener(lost.application.DebugEvent.PAUSE, function(event)
-    summaryView(tostring(event.tasklet.id))("button"):title("continue")
-    summaryView(tostring(event.tasklet.id))("button"):enabled(true)
+    local info = event.tasklet.lua:getScriptSource(event.info.debug) ..", line ".. event.info.debug.currentline
+    mainView(tostring(event.tasklet.id))("info"):text(info)
+    mainView(tostring(event.tasklet.id))("button"):title("continue")
+    mainView(tostring(event.tasklet.id))("button"):enabled(true)
+    mainView(tostring(event.tasklet.id))("step"):hidden(false)
   end)
 
   refreshTimer = tasklet.scheduler:createTimer(2, function(t)
@@ -137,27 +140,6 @@ function addTaskletInfo(t, offset)
         valign = "center",
         text = name
       },
---[[
-      lost.guiro.view.Button
-      {
-        id = "button",
-        bounds = {{"left", labelWidth+10}, "top", 75, labelHeight},
-        title = "pause",
-        hidden = (t.id == tasklet.id),
-        listeners =
-        {
-          buttonClick = function(event)
-            if event.target:title() == "pause" then
-              t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_PAUSE, t))
-              event.target:enabled(false)
-            else
-              t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_CONTINUE, t))
-              event.target:title("pause")
-            end
-          end
-        }
-      },
-]]
       lost.guiro.view.Button
       {
         id = "button",
@@ -171,7 +153,53 @@ function addTaskletInfo(t, offset)
             if not mainView:select(id) then
               mainView:addItem(t.name, lost.guiro.view.View {
                 id = id,
-                bounds = {{"left", tabPadding}, {"top", -tabPadding}, {"1", -tabPadding*2}, {"1", -tabPadding*2}}
+                bounds = {{"left", tabPadding}, {"top", -tabPadding}, {"1", -tabPadding*2}, {"1", -tabPadding*2}},
+                subviews =
+                {
+                  lost.guiro.view.Button
+                  {
+                    id = "button",
+                    bounds = {"left", "top", 75, labelHeight},
+                    title = "pause",
+                    listeners =
+                    {
+                      buttonClick = function(event)
+                        if event.target:title() == "pause" then
+                          t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_PAUSE, t))
+                          event.target:enabled(false)
+                        else
+                          t.eventDispatcher:queueEvent(lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_CONTINUE, t))
+                          event.target:title("pause")
+                          event.target:superview()("step"):hidden(true)
+                        end
+                      end
+                    }
+                  },
+                  lost.guiro.view.Button
+                  {
+                    id = "step",
+                    bounds = {{"left", 80}, "top", 75, labelHeight},
+                    title = "step",
+                    hidden = true,
+                    listeners =
+                    {
+                      buttonClick = function(event)
+                        local event = lost.application.DebugEvent.create(lost.application.DebugEvent.CMD_CONTINUE, t)
+                        event.mode = 1
+                        t.eventDispatcher:queueEvent(event)
+                      end
+                    }
+                  },
+                  lost.guiro.view.Label
+                  {
+                    id = "info",
+                    bounds = {"left", {"top", -labelHeight}, "1", {"1", -labelHeight}},
+                    font = {"Vera", 10},
+                    halign = "left",
+                    valign = "top",
+                    text = ""
+                  }
+                }
               })
               mainView:select(id)
             end
