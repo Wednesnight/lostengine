@@ -44,11 +44,21 @@ function ScrollView:constructor(args)
 	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollView")
 
 	self:addEventListener("mouseScroll", function(event)
-	  local x = math.max(math.min(self.horizontalScrollbar:value() - event.scrollDelta.x*2 / self._contentSize.x, 1), 0)
-	  self.horizontalScrollbar:value(x)
-	  local y = math.max(math.min(self.verticalScrollbar:value() + event.scrollDelta.y*2 / self._contentSize.y, 1), 0)
-	  self.verticalScrollbar:value(y)
-	  self:updateContentPosition()
+	  local updated = false
+	  if self:hasHorizontalScrollbar() then
+  	  local x = math.max(math.min(self.horizontalScrollbar:value() - event.scrollDelta.x*2 / self._contentSize.x, 1), 0)
+  	  self.horizontalScrollbar:value(x)
+  	  updated = true
+    end
+    if self:hasVerticalScrollbar() then
+  	  local y = math.max(math.min(self.verticalScrollbar:value() + event.scrollDelta.y*2 / self._contentSize.y, 1), 0)
+  	  self.verticalScrollbar:value(y)
+  	  updated = true
+  	end
+  	if updated then
+	    self:updateContentPosition()
+	    self:dispatchContentPositionChangedEvent()
+	  end
 	end)
 end
 
@@ -81,6 +91,14 @@ end
 
 function ScrollView:scrollbarValueChanged(event)
   self:updateContentPosition()
+  self:dispatchContentPositionChangedEvent()
+end
+
+function ScrollView:dispatchContentPositionChangedEvent()
+  local event = lost.guiro.event.Event("contentPositionChanged")
+  event.bubbles = true
+  event.target = self
+  self:dispatchEvent(event)    
 end
 
 function ScrollView:addSubview(view,forceSubview)
