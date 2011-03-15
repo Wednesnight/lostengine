@@ -11,7 +11,7 @@ function ListView:constructor(args)
   self.id = t.id or "listview"
   self:hasHorizontalScrollbar(false)
   self:hasVerticalScrollbar(true)  
-  self.verticalScrollbar:addEventListener("valueChanged",function(event) self:scrollbarMoved(event) end)
+  self:addEventListener("contentPositionChanged",function(event) self:contentPositionChanged(event) end)
   
   if t.delegate ~= nil then self:delegate(t.delegate) end
   if t.dataSource ~= nil then self:dataSource(t.dataSource) end
@@ -26,13 +26,11 @@ end
 
 -- top/bottom refer to pixel location, the order in which the cells are draw,top index value should always be < bottom
 function _bsearch(data,top,bottom,val)
-  local iters = 0
   while top <= bottom do
-    iters = iters + 1
     local mid = top + math.floor((bottom - top) / 2)
     local cell = data[mid]
     if (val <= cell[1]) and (val > cell[2]) then
-        return mid,iters
+        return mid
     elseif val <= cell[2] then
         top = mid +1
     else
@@ -50,7 +48,7 @@ function ListView:calculateVisibleRange(topPixelCoord, bottomPixelCoord)
   return top, bottom
 end
 
-function ListView:scrollbarMoved(event)
+function ListView:contentPositionChanged(event)
   -- debug
   local vso = self:calculateVerticalScrollOffset()
   local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
