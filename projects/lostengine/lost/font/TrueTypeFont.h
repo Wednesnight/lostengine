@@ -42,7 +42,6 @@ private:
    */
   bool renderGlyph(fhtagn::text::utf32_char_t c);
   void rebuildTextureAtlas(); // builds a new texture atlas from the current glyphs in the cache.
-  void flagDrawableChars(const fhtagn::text::utf32_string& inText);
 };
 }  
 }

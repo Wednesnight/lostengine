@@ -112,42 +112,6 @@ void TrueTypeFont::rebuildTextureAtlas()
   }  
 }
     
-/*void TrueTypeFont::prepareGlyphs(const fhtagn::text::utf32_string& inText)
-{
-  // render glyphs if required
-  uint32_t renderedGlyphs = 0;
-  for(unsigned int i=0; i<inText.length(); ++i)
-  {
-    if(renderGlyph(inText[i]))
-      ++renderedGlyphs;
-  }
-//  DOUT("rendered "<<renderedGlyphs<<" new glyphs");
-  // rebuild atlas if any new glyphs were rendered
-  if(renderedGlyphs > 0)
-    rebuildTextureAtlas();  
-
-  // flag drawable characters AFTER the bitmaps have been created so we can distinguish between
-  // drawables and non-darwables. This is important so we don't create geometry for characters
-  // that don't need any (spaces)
-  flagDrawableChars(inText);
-}*/
-
-void TrueTypeFont::flagDrawableChars(const ftxt::utf32_string& inText)
-{
-  for(uint32_t i=0; i<inText.size(); ++i)
-  {
-    shared_ptr<Glyph>& glyph = char2glyph[inText[i]];
-    if(glyph && glyph->bitmap && (glyph->bitmap->width > 0) && (glyph->bitmap->height > 0))
-    {
-      glyph->drawable = true;
-    }
-    else
-    {
-      if(glyph)
-        glyph->drawable = false;
-    }
-  }
-}
 GlyphPtr TrueTypeFont::glyph(uint32_t utf32character)
 {
   GlyphPtr result = char2glyph[utf32character];
