@@ -21,7 +21,81 @@ function ListView:constructor(args)
   self._activeHeaders = {}
   self._activeCells = {}
   self._geometry = {}
+  
+  self._cellCache = {active={},inactive={}}
+  self._headerCache = {active={},inactive={}}
+  self:resetVisibleRange()
+
   self:reloadData()
+end
+
+function ListView:resetVisibleRange()
+  -- range of visible geometry elements
+  self._rangeTop = 0
+  self._rangeBottom = 0
+end
+
+function ListView:dequeueCell(reuseId)
+  local result = nil
+  if self._cellCache.inactive[reuseId] == nil then
+    self._cellCache.inactive[reuseId] = {}
+  end
+  if self._cellCache.active[reuseId] == nil then
+    self._cellCache.active[reuseId] = {}
+  end
+  local inactive = self._cellCache.inactive[reuseId]
+  local active = self._cellCache.active[reuseId]
+  for k,cell in pairs(inactive) do
+    result = cell
+    table.remove(inactive,k)
+    table.insert(active,cell)
+  end
+  return result
+end
+
+function ListView:dequeueHeader(reuseId)
+  local result = nil
+  if self._headerCache.inactive[reuseId] == nil then
+    self._headerCache.inactive[reuseId] = {}
+  end
+  if self._headerCache.active[reuseId] == nil then
+    self._headerCache.active[reuseId] = {}
+  end
+  local inactive = self._headerCache.inactive[reuseId]
+  local active = self._headerCache.active[reuseId]
+  for k,header in pairs(inactive) do
+    result = header
+    table.remove(inactive,k)
+    table.insert(active,header)
+  end
+  return result
+end
+
+function ListView:clearCellCache()
+  self._cellCache.active = {}
+  self._cellCache.inactive = {}
+end
+
+function ListView:clearHeaderCache()
+  self._headerCache.active = {}
+  self._headerCache.inactive = {}
+end
+
+function ListView:clearViewCaches()
+  self:clearCellCache()
+  self:clearHeaderCache()
+end
+
+
+function ListView:removeActiveSubviews()
+  for k,view in ipairs(self._activeHeaders) do
+    self.contentView:removeSubview(view)
+  end
+  for k,cell in ipairs(self._activeCells) do
+    self.contentView:removeSubview(cell)
+  end  
+  self._activeHeaders = {}
+  self._activeCells = {}
 end
 
 -- top/bottom refer to pixel location, the order in which the cells are draw,top index value should always be < bottom
@@ -50,9 +124,14 @@ end
 
 function ListView:contentPositionChanged(event)
   -- debug
-  local vso = self:calculateVerticalScrollOffset()
+  local vso = math.floor(self:calculateVerticalScrollOffset())
   local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
-  log.debug("vso "..self:calculateVerticalScrollOffset().." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  if (rtop ~= self._rangeTop) and (rbot ~= self._rangeBottom) then
+    self._rangeTop = rtop
+    self._rangeBottom = rbot
+    log.debug("++++++++ would reconfigure")
+    log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  end
   ---
 end
 
@@ -106,14 +185,6 @@ function ListView:measureContent()
 end
 
 function ListView:rebuildSubviews()
-  for k,view in ipairs(self._activeHeaders) do
-    self.contentView:removeSubview(view)
-  end
-  for k,cell in ipairs(self._activeCells) do
-    self.contentView:removeSubview(cell)
-  end  
-  self._activeHeaders = {}
-  self._activeCells = {}
   local vy = self._totalContentHeight
   for section=1,self:numberOfSections() do
     local header = self:viewForHeaderInSection(section)
@@ -150,6 +221,9 @@ end
 function ListView:update()
   lost.guiro.view.ScrollView.update(self)
   if self._reloadInProgress then
+    self:resetVisibleRange()
+    self:removeActiveSubviews()
+    self:clearViewCaches()
     self:measureContent()
     self:rebuildSubviews()
   end
