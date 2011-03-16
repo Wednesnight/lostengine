@@ -67,6 +67,7 @@ function startup()
               v.dataSource = function(self,ds)
                 self.label:text(ds.title)
               end
+              v.reuseId = "header"
               return v
             end,
             
@@ -110,12 +111,25 @@ function startup()
                 log.debug("clicked button "..self._dataSource.title)
               end
               v.button:addEventListener("buttonClick",function(event) v:buttonClick(event) end)
+              v.reuseId = "cell"
               return v
             end,
             
-            viewForHeaderInSection=function(self,listView,sectionIndex) return self:createHeaderView() end, -- optional, header will be omitted if nil is returned
+            viewForHeaderInSection=function(self,listView,sectionIndex) 
+                local result = listView:dequeueCell("header")
+                if result == nil then
+                  result = self:createHeaderView()
+                end
+                return result
+              end, -- optional, header will be omitted if nil is returned
             heightForHeaderInSection=function(self,listView,sectionIndex) return 20 end, -- optional, defaults to something
-            cellForRowAtIndexPath=function(self,listView,indexPath) return self:createCellView() end, -- mandatory, must never return nil
+            cellForRowAtIndexPath=function(self,listView,indexPath) 
+                local result = listView:dequeueCell("cell")
+                if result == nil then
+                  result = self:createCellView()
+                end
+                return result
+              end, -- mandatory, must never return nil
             heightForRowAtIndexPath=function(self,listView,indexPath) return 40 end, -- optional, defaults to something
           },
           dataSource = {  
