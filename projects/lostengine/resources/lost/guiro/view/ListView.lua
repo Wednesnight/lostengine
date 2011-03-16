@@ -5,6 +5,8 @@ lost.common.Class "lost.guiro.view.ListView" "lost.guiro.view.ScrollView" {}
 local Color = lost.common.Color
 local Vec2 = lost.math.Vec2
 
+-- cells and headers must have a dataSource accessor function that allows setting/retrieving of the datasource table
+-- as well as a reuseId string member that is used as a cache key
 function ListView:constructor(args)
   lost.guiro.view.ScrollView.constructor(self, args)
   local t = args or {}
@@ -18,14 +20,10 @@ function ListView:constructor(args)
   
   self._totalHeight = 0
   self._reloadInProgress = false
-  self._activeHeaders = {}
-  self._activeCells = {}
   self._geometry = {}
   
   self._cellCache = {active={},inactive={}}
-  self._headerCache = {active={},inactive={}}
   self:resetVisibleRange()
-
   self:reloadData()
 end
 
@@ -44,31 +42,20 @@ function ListView:dequeueCell(reuseId)
     self._cellCache.active[reuseId] = {}
   end
   local inactive = self._cellCache.inactive[reuseId]
-  local active = self._cellCache.active[reuseId]
   for k,cell in pairs(inactive) do
     result = cell
     table.remove(inactive,k)
-    table.insert(active,cell)
   end
   return result
 end
 
-function ListView:dequeueHeader(reuseId)
-  local result = nil
-  if self._headerCache.inactive[reuseId] == nil then
-    self._headerCache.inactive[reuseId] = {}
-  end
-  if self._headerCache.active[reuseId] == nil then
-    self._headerCache.active[reuseId] = {}
-  end
-  local inactive = self._headerCache.inactive[reuseId]
-  local active = self._headerCache.active[reuseId]
-  for k,header in pairs(inactive) do
-    result = header
-    table.remove(inactive,k)
-    table.insert(active,header)
-  end
-  return result
+-- both headers and rows/cells
+function ListView:addActiveCell(cell)
+  local reuseId = cell.reuseId
+  if self._cellCache.active[reuseId] == nil then
+    self._cellCache.active[reuseId] = {}
+  end  
+  self._cellCache.active[reuseId][cell] = cell
 end
 
 function ListView:clearCellCache()
@@ -76,26 +63,13 @@ function ListView:clearCellCache()
   self._cellCache.inactive = {}
 end
 
-function ListView:clearHeaderCache()
-  self._headerCache.active = {}
-  self._headerCache.inactive = {}
-end
-
-function ListView:clearViewCaches()
-  self:clearCellCache()
-  self:clearHeaderCache()
-end
-
-
 function ListView:removeActiveSubviews()
-  for k,view in ipairs(self._activeHeaders) do
-    self.contentView:removeSubview(view)
-  end
-  for k,cell in ipairs(self._activeCells) do
-    self.contentView:removeSubview(cell)
+  for reuseId,cache in pairs(self._cellCache.active) do
+    for c,cell in pairs(cache) do
+      self.contentView:removeSubview(cell)
+    end
+    self._cellCache.active[reuseId] = {}
   end  
-  self._activeHeaders = {}
-  self._activeCells = {}
 end
 
 -- top/bottom refer to pixel location, the order in which the cells are draw,top index value should always be < bottom
@@ -198,7 +172,7 @@ function ListView:rebuildSubviews()
       self.contentView:addSubview(header)
       local si = self:sectionInfoForIndex(section)
       header:dataSource(si)
-      table.insert(self._activeHeaders,header)
+      self:addActiveCell(header)
     end
     local rows = self:numberOfRowsInSection(section)
     for row=1,rows do
@@ -213,7 +187,7 @@ function ListView:rebuildSubviews()
       self.contentView:addSubview(cell)
       local ds = self:rowForIndexPath(ip)
       cell:dataSource(ds)
-      table.insert(self._activeCells,cell)
+      self:addActiveCell(cell)
     end
   end
 end
@@ -223,7 +197,7 @@ function ListView:update()
   if self._reloadInProgress then
     self:resetVisibleRange()
     self:removeActiveSubviews()
-    self:clearViewCaches()
+    self:clearCellCache()
     self:measureContent()
     self:rebuildSubviews()
   end
@@ -247,9 +221,9 @@ function ListView:updateLayout()
   self.contentView:width(w)
 
   -- debug
-  local vso = self:calculateVerticalScrollOffset()
+  local vso = math.floor(self:calculateVerticalScrollOffset())
   local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
-  log.debug("vso "..self:calculateVerticalScrollOffset().." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
   ---
 end
 
