@@ -42,14 +42,14 @@ void addGlyph(std::vector<math::Rect>& characterRects,
 }
 
 
-RenderedTextPtr render(const std::string & inText, const FontPtr& font, bool characterMetrics)
+RenderedTextPtr render(const std::string & inText, const FontPtr& font, bool characterMetrics, int align)
 {
   RenderedTextPtr result(new RenderedText);
   render(inText, font, result, characterMetrics);
   return result;
 }
 
-void render(const std::string & inUtf8String, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics)
+void render(const std::string & inUtf8String, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   ftxt::utf8_decoder decoder;
   ftxt::utf32_string txt;
@@ -59,30 +59,31 @@ void render(const std::string & inUtf8String, const FontPtr& font, const Rendere
   render(txt, font, target, characterMetrics);
 }
 
-RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& font, bool characterMetrics)
+RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& font, bool characterMetrics, int align)
 {
   RenderedTextPtr result(new RenderedText);
   render(inText, font, result, characterMetrics);
   return result;  
 }
 
-void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics)
+void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   render(inText, Range(0, inText.size()), font, target, characterMetrics);
 }
 
-void render(const fhtagn::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics)
+void render(const fhtagn::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   std::vector<Range> lines;
   lines.push_back(range);
   render(inText, lines, font, target, characterMetrics);
 }
 
-void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics)
+void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
   // used to draw the character
+  std::vector<math::Vec2> lineBounds;
   std::vector<math::Rect> characterRects;
   std::vector<math::Rect> pixelCoordRects;
     
@@ -100,6 +101,7 @@ void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& 
     if(characterMetrics) {target->pushEmptyCharacterMetricLine();}
     if(pos->begin != pos->end) // skip empty lines
     {
+      Vec2 bounds(addIndex,addIndex);
       for(uint32_t i=pos->begin; i<pos->end; ++i)
       {
         ftxt::utf32_char_t c = inText[i];
@@ -119,10 +121,30 @@ void render(const fhtagn::text::utf32_string& inText, const std::vector<Range>& 
         }
         xoffset+=glyph->advance;
       }
+      if (align != 0 && addIndex > 0) {
+        bounds.max = addIndex-1;
+        lineBounds.push_back(bounds);
+      }
     }
     xoffset = 0;
     yoffset -= floorf(font->lineHeight);
     previousGlyphIndex = 0;
+  }
+
+  // horizontal align center/right
+  if (align != 0) {
+    float maxWidth = (pmax.x-pmin.x)+1;
+    for (std::vector<math::Vec2>::iterator b = lineBounds.begin(); b != lineBounds.end(); ++b) {
+      int offset = (maxWidth - (characterRects[b->max].x-characterRects[b->min].x)+1);
+      if (offset > 0) {
+        if (align == 1) {
+          offset /= 2.0f;
+        }
+        for (int c = b->min; c <= b->max; ++c) {
+          characterRects[c].x += offset;
+        }
+      }
+    }
   }
 
   target->init(characterRects, font->atlas, pixelCoordRects, false);

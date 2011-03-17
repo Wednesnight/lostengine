@@ -30,7 +30,14 @@ public:
   // activating character metrics will add additional character rect information to the rendered mesh
   bool getCharacterMetrics();
   void setCharacterMetrics(bool v);
-    
+
+  // horizontal align
+  // 0 = left (default)
+  // 1 = center
+  // 2 = right
+  int getAlign();
+  void setAlign(int v);
+
   uint32_t numLogicalLines();
   uint32_t numPhysicalLines();
 
@@ -77,6 +84,7 @@ private:
   Utf32String               _text;
   float                     _width;
   bool                      _characterMetrics;
+  int                       _align;
   
   void resetLogicalLines(const std::string& inText);
   void resetPhysicalLines();

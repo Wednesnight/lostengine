@@ -33,6 +33,7 @@ TextBuffer::TextBuffer()
 {
   _breakMode = BREAKMODE_NONE;
   _characterMetrics = false;
+  _align = 0;
   _dirty = true;
 }
 
@@ -319,12 +320,12 @@ void TextBuffer::resetPhysicalLines()
 
 void TextBuffer::renderPhysicalLine(uint32_t num, const RenderedTextPtr& target)
 {
-  render(_text, _physicalLines[num], _font, target, _characterMetrics);
+  render(_text, _physicalLines[num], _font, target, _characterMetrics, _align);
 }
 
 void TextBuffer::renderAllPhysicalLines(const RenderedTextPtr& target)
 {
-  render(_text, _physicalLines, _font, target, _characterMetrics);
+  render(_text, _physicalLines, _font, target, _characterMetrics, _align);
 }
 
 bool TextBuffer::getCharacterMetrics()
@@ -403,6 +404,16 @@ void TextBuffer::eraseChars(uint32_t fromLine, uint32_t fromIndex, uint32_t toLi
       }
     }
   }
+}
+
+int TextBuffer::getAlign()
+{
+  return _align;
+}
+
+void TextBuffer::setAlign(int v)
+{
+  _align = v;
 }
   
 }

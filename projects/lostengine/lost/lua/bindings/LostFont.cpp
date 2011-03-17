@@ -99,8 +99,8 @@ namespace lost
       [
         namespace_("font")
         [
-          def("render", (RenderedTextPtr(*)(const std::string & inText, const FontPtr& font,bool characterMetrics))&lost::font::render),
-          def("render", (void(*)(const std::string & inText, const FontPtr& font, const RenderedTextPtr& target,bool characterMetrics))&lost::font::render)
+          def("render", (RenderedTextPtr(*)(const std::string & inText, const FontPtr& font,bool characterMetrics, int align))&lost::font::render),
+          def("render", (void(*)(const std::string & inText, const FontPtr& font, const RenderedTextPtr& target,bool characterMetrics, int align))&lost::font::render)
         ]
       ];
     }
@@ -126,6 +126,7 @@ namespace lost
           .def("numLogicalLines", &TextBuffer::numLogicalLines)
           .def("numPhysicalLines", &TextBuffer::numPhysicalLines)
           .property("characterMetrics",&TextBuffer::getCharacterMetrics, &TextBuffer::setCharacterMetrics)
+          .property("align",&TextBuffer::getAlign, &TextBuffer::setAlign)
           .def("insertUtf8StringAtPosition", &TextBuffer::insertUtf8StringAtPosition)
           .def("eraseCharAtPosition", &TextBuffer::eraseCharAtPosition)
           .def("eraseChars", &TextBuffer::eraseChars)
