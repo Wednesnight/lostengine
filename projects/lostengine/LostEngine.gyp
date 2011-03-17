@@ -494,6 +494,7 @@
         'lost/bitmap/Bitmap.cpp',
         'lost/bitmap/Packer.cpp',
         'lost/bitmap/Gif.cpp',
+        'lost/bitmap/GifDecoder.cpp',
 
         # camera
         'lost/camera/Camera.cpp',

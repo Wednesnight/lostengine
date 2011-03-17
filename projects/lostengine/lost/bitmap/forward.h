@@ -9,6 +9,8 @@ namespace bitmap
 struct Bitmap; 
 typedef lost::shared_ptr<Bitmap> BitmapPtr;
 
+struct Gif;
+typedef lost::shared_ptr<Gif> GifPtr;
 
 }
 }
