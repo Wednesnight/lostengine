@@ -351,6 +351,13 @@ end
 function Text:halign(v)
   self._dirtyText = true -- trigger redraw like this even if the text hasn't changed since it needs to be rebuild anyway
   self._halign = v
+  if v == "center" then
+    self.buffer.align = 1
+  elseif v == "right" then
+    self.buffer.align = 2
+  else
+    self.buffer.align = 0
+  end
   self:needsLayout()
 end
 

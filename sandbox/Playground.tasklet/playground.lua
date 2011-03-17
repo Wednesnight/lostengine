@@ -308,7 +308,7 @@ end
           bounds = {"right", "top", ".5", ".5"},
           font = {"Vera mono", 10},
           multiLine = true,
-          halign = "left",
+          halign = "center",
           valign = "top",
           text =
 [[
@@ -409,7 +409,7 @@ end)
           bounds = {"left", "bottom", ".5", ".5"},
           font = {"Vera mono", 10},
           multiLine = true,
-          halign = "left",
+          halign = "right",
           valign = "top",
           text = 
 [[
