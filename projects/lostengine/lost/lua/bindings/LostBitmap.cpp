@@ -1,6 +1,8 @@
 #include "lost/lua/bindings/LostBitmap.h"
 #include "lost/lua/lua.h"
 #include "lost/bitmap/Bitmap.h"
+#include "lost/bitmap/GifDecoder.h"
+#include "lost/bitmap/Gif.h"
 
 using namespace luabind;
 using namespace lost::bitmap;
@@ -39,9 +41,25 @@ namespace lost
       globals(state)["lost"]["bitmap"]["COMPONENTS_RGBA"] = lost::bitmap::COMPONENTS_RGBA;
     }
 
+    void LostBitmapGif(lua_State* state)
+    {
+      module(state,"lost")
+      [
+        namespace_("bitmap")
+        [
+          class_<Gif>("Gif"),
+          class_<GifDecoder>("GifDecoder")
+          .def(constructor<resource::LoaderPtr>())
+          .def("isGif",&GifDecoder::isGif)
+          .def("load",&GifDecoder::load)
+        ]
+      ];
+    }
+
     void LostBitmap(lua_State* state)
     {
       LostBitmapBitmap(state);
+      LostBitmapGif(state);
     }
   }
 }
