@@ -23,8 +23,24 @@ function ListView:constructor(args)
   self._geometry = {}
   
   self._cellCache = {active={},inactive={}}
+
+  self._rangeTop = 0
+  self._rangeBottom = 0
+
   self:resetVisibleRange()
   self:reloadData()
+end
+
+function ListView:reconfigureIfNeeded()
+  local vso = math.floor(self:calculateVerticalScrollOffset())
+  local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
+--  log.debug("checking "..rtop.." "..rbot.." VS "..self._rangeTop.." "..self._rangeBottom)
+  if (rtop ~= self._rangeTop) or (rbot ~= self._rangeBottom) then
+    self._rangeTop = rtop
+    self._rangeBottom = rbot
+    log.debug("++++++++ would reconfigure")
+    log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+  end
 end
 
 function ListView:resetVisibleRange()
@@ -97,16 +113,7 @@ function ListView:calculateVisibleRange(topPixelCoord, bottomPixelCoord)
 end
 
 function ListView:contentPositionChanged(event)
-  -- debug
-  local vso = math.floor(self:calculateVerticalScrollOffset())
-  local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
-  if (rtop ~= self._rangeTop) and (rbot ~= self._rangeBottom) then
-    self._rangeTop = rtop
-    self._rangeBottom = rbot
-    log.debug("++++++++ would reconfigure")
-    log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
-  end
-  ---
+  self:reconfigureIfNeeded()
 end
 
 function ListView:logGeometry()
@@ -220,11 +227,7 @@ function ListView:updateLayout()
   end
   self.contentView:width(w)
 
-  -- debug
-  local vso = math.floor(self:calculateVerticalScrollOffset())
-  local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
-  log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
-  ---
+  self:reconfigureIfNeeded()
 end
 
 function ListView:reloadData()
