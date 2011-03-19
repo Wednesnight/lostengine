@@ -44,7 +44,7 @@ function MenuBar:rebuildMenuBarItems()
     mbi.delegate = self
     table.insert(self._menuBarItems, mbi)
     self:addSubview(mbi)
-    local m = lost.font.render(item.title, mbi.textLayer:font(), false)
+    local m = lost.font.render(item.title, mbi.textLayer:font(), false,0)
     local w = m.size.width+self.itemPadding
     mbi:width(w)
     mbi:x(xoffset)
