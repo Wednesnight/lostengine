@@ -24,9 +24,6 @@ function ListView:constructor(args)
   
   self._cellCache = {active={},inactive={}}
 
-  self._rangeTop = 0
-  self._rangeBottom = 0
-
   self:resetVisibleRange()
   self:reloadData()
 end
@@ -57,11 +54,13 @@ function ListView:reconfigureIfNeeded()
   local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
 --  log.debug("checking "..rtop.." "..rbot.." VS "..self._rangeTop.." "..self._rangeBottom)
   if (rtop ~= self._rangeTop) or (rbot ~= self._rangeBottom) then
+    self._prevRangeTop = self._rangeTop
+    self._prevRangeBottom = self._rangeBottom
     self._rangeTop = rtop
     self._rangeBottom = rbot
     log.debug("+++ RECONFIGURATION : vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
-    self:removeActiveSubviews()
-    self:deactivateAllCells()
+--    self:removeActiveSubviews()
+--    self:deactivateAllCells()
     self:rebuildSubviews()
     self:dumpStats()
   end
@@ -69,8 +68,11 @@ end
 
 function ListView:resetVisibleRange()
   -- range of visible geometry elements
+  self._prevRangeTop = 0
+  self._prevRangeBottom = 0
   self._rangeTop = 0
   self._rangeBottom = 0
+  self._cellAtIndex = {} -- contains the indices of the currently visible cells, for use with geometry table
 end
 
 function ListView:dequeueCell(reuseId)
@@ -95,13 +97,23 @@ function ListView:dequeueCell(reuseId)
 end
 
 -- both headers and rows/cells
-function ListView:addActiveCell(cell)
+-- if active = true then cell is cached as an active cell, otherwise as an inactive one
+function ListView:cacheCell(cell,active)
   local reuseId = cell.reuseId
---  log.debug("ADDING cell to cache with reuseId '"..reuseId.."'")
   if self._cellCache.active[reuseId] == nil then
     self._cellCache.active[reuseId] = {}
   end  
-  self._cellCache.active[reuseId][cell] = cell
+  if self._cellCache.inactive[reuseId] == nil then
+    self._cellCache.inactive[reuseId] = {}
+  end  
+  
+  if active then
+    self._cellCache.active[reuseId][cell] = cell
+    self._cellCache.inactive[reuseId][cell] = nil
+  else
+    self._cellCache.active[reuseId][cell] = nil
+    self._cellCache.inactive[reuseId][cell] = cell
+  end
 end
 
 function ListView:deactivateAllCells()
@@ -209,60 +221,49 @@ end
 
 function ListView:rebuildSubviews()
   local vy = self._totalContentHeight
---[[  for section=1,self:numberOfSections() do
-    local header = self:viewForHeaderInSection(section)
-    if header then
-      vy = vy - self:heightForHeaderInSection(section)
---      log.debug("header at y "..vy)
-      header:x(0)
-      header:y(vy)
-      header:width("1")
-      header:height(self:heightForHeaderInSection())
-      self.contentView:addSubview(header)
-      local si = self:sectionInfoForIndex(section)
-      header:dataSource(si)
-      self:addActiveCell(header)
+  -- omit scan if this is the first run and no previous geometry was cached
+  if not (self._prevRangeTop == 0) then -- if any of those indices is zero it's the first run
+    -- scan previous range and deactivate and remove all cells that are not in the current one
+    for i=self._prevRangeTop,self._prevRangeBottom do
+      if not ((i>=self._rangeTop) and (i<=self._rangeBottom)) then
+        local cell = self._cellAtIndex[i]
+        self.contentView:removeSubview(cell)
+        self:cacheCell(cell,false)
+        self._cellAtIndex[i] = nil
+        log.debug("--- REMOVING "..i)
+      end
     end
-    local rows = self:numberOfRowsInSection(section)
-    for row=1,rows do
-      local ip = {section,row}
-      local cell = self:cellForRowAtIndexPath(ip)
-      local rowHeight = self:heightForRowAtIndexPath(ip)
-      vy = vy - rowHeight
-      cell:x(0)
-      cell:y(vy)
-      cell:width("1")
-      cell:height(rowHeight)
-      self.contentView:addSubview(cell)
-      local ds = self:rowForIndexPath(ip)
-      cell:dataSource(ds)
-      self:addActiveCell(cell)
-    end
-  end]]
+  end
   for i=self._rangeTop,self._rangeBottom do
-    local entry = self._geometry[i]
-    if entry[3] then -- header
-      local section = entry[4]
-      local header = self:viewForHeaderInSection(section)
-      header:x(0)
-      header:y(entry[2]+1)
-      header:width("1")
-      header:height(entry[1]-entry[2])
-      self.contentView:addSubview(header)
-      local si = self:sectionInfoForIndex(section)
-      header:dataSource(si)
-      self:addActiveCell(header)
-    else -- cell
-      local ip = {entry[4],entry[5]}
-      local cell = self:cellForRowAtIndexPath(ip)
-      cell:x(0)
-      cell:y(entry[2]+1)
-      cell:width("1")
-      cell:height(entry[1]-entry[2])
-      self.contentView:addSubview(cell)
-      local ds = self:rowForIndexPath(ip)
-      cell:dataSource(ds)
-      self:addActiveCell(cell)
+    -- only create new cell if it wasn't already present in old range
+    if not ((i>=self._prevRangeTop) and (i<=self._prevRangeBottom)) then 
+      log.debug("--- ADDING "..i)
+      local entry = self._geometry[i]
+      if entry[3] then -- header
+        local section = entry[4]
+        local header = self:viewForHeaderInSection(section)
+        header:x(0)
+        header:y(entry[2]+1)
+        header:width("1")
+        header:height(entry[1]-entry[2])
+        self.contentView:addSubview(header)
+        local si = self:sectionInfoForIndex(section)
+        header:dataSource(si)
+        self:cacheCell(header,true)
+        self._cellAtIndex[i]=header 
+      else -- cell
+        local ip = {entry[4],entry[5]}
+        local cell = self:cellForRowAtIndexPath(ip)
+        cell:x(0)
+        cell:y(entry[2]+1)
+        cell:width("1")
+        cell:height(entry[1]-entry[2])
+        self.contentView:addSubview(cell)
+        local ds = self:rowForIndexPath(ip)
+        cell:dataSource(ds)
+        self:cacheCell(cell,true)
+        self._cellAtIndex[i]=cell 
+      end
     end
   end
 end
