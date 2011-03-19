@@ -1,16 +1,16 @@
 return {
   tasklet = {
-    name = "Guiroscope",
+    name = "Ivy",
     waitForEvents = true,
   },
   window = {
-    title = "Guiroscope",
+    title = "Ivy",
     x = 50,
     y = 50,
-    width = 1024,
-    height = 768
+    width = 320,
+    height = 480
   },
   gl ={
-    vsync = false
+    vsync = true
   }
 }
