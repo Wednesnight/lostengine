@@ -51,16 +51,20 @@ function startup()
           delegate = {
             
             createHeaderView=function(self)
+              local c = .8
               local v = lost.guiro.view.View
               {
                 sublayers={
-                  lost.guiro.layer.Rect{filled=true,color=Color(0,0,0)}
+                  lost.guiro.layer.Rect{filled=true,color=Color(c,c,c),gradient="candyGray"}
                 },
               }
               local l = lost.guiro.view.Label
               {
                 text="Header",
-                color=Color(1,1,1),
+                color=Color(0,0,0),
+                shadow=true,
+                shadowColor=Color(1,1,1),
+                shadowOffset=Vec2(0,-1)
               }
               v:addSubview(l)
               v.label = l
@@ -72,18 +76,26 @@ function startup()
             end,
             
             createCellView=function(self)
+              local backlayer = lost.guiro.layer.Rect{filled=true,color=Color(.6,.6,.9)}
               local v = lost.guiro.view.View
               {
                 sublayers={
-                  lost.guiro.layer.Rect{filled=true,color=Color(.6,.6,.9)},
-                  lost.guiro.layer.HLine{bounds={0,"bottom","1",1},color=Color(.8,.8,.8)}
+                  backlayer,
                 },
               }
+              v.backlayer = backlayer
+              v.switchColor = function(self,flag)
+                if flag then 
+                  self.backlayer:color(Color(1,1,1))
+                else
+                  self.backlayer:color(Color(237/255,243/255,254/255))
+                end
+              end
               local l = lost.guiro.view.Label
               {
                 text="Cell",
                 bounds={0,"center",100,30},
-                color=Color(1,1,1),
+                color=Color(0,0,0),
                 font={"Grinched",16},
                 valign="center",
                 halign="center"
@@ -130,6 +142,7 @@ function startup()
                   log.debug("creating cell")
                   result = self:createCellView()
                 end
+                result:switchColor((indexPath[2] % 2) == 0)
                 return result
               end, -- mandatory, must never return nil
             heightForRowAtIndexPath=function(self,listView,indexPath) return 40 end, -- optional, defaults to something
