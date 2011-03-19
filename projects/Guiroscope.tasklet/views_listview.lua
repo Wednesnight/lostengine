@@ -114,9 +114,16 @@ return lost.guiro.view.View
               self:superview():superview():reloadData()
             end
           end
+          cell.reuseId = "cell"
           return cell
         end,
-        cellForRowAtIndexPath   = function(self,listView,indexPath) return self:createCellView() end,
+        cellForRowAtIndexPath   = function(self,listView,indexPath) 
+            local result = listView:dequeueCell("cell")
+            if result == nil then
+                result = self:createCellView() 
+            end
+            return result
+          end,
         heightForRowAtIndexPath = function(self,listView,indexPath) return 20 end
       },
       dataSource = {

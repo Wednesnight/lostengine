@@ -102,7 +102,7 @@ function MenuItem:updateContentWidth()
 end
 
 function MenuItem:updateTextWidth()
-  local m = lost.font.render(self.textLayer:text(), self.textLayer:font(), false)
+  local m = lost.font.render(self.textLayer:text(), self.textLayer:font(), false,0)
   self.textWidth = m.size.width  
 end
 
