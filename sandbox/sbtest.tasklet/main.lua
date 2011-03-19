@@ -118,6 +118,7 @@ function startup()
             viewForHeaderInSection=function(self,listView,sectionIndex) 
                 local result = listView:dequeueCell("header")
                 if result == nil then
+                  log.debug("creating header")
                   result = self:createHeaderView()
                 end
                 return result
@@ -126,6 +127,7 @@ function startup()
             cellForRowAtIndexPath=function(self,listView,indexPath) 
                 local result = listView:dequeueCell("cell")
                 if result == nil then
+                  log.debug("creating cell")
                   result = self:createCellView()
                 end
                 return result

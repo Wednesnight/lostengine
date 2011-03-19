@@ -31,6 +31,27 @@ function ListView:constructor(args)
   self:reloadData()
 end
 
+function ListView:dumpStats()
+  local numSubviews = 0
+  for k,v in pairs(self.contentView.subviews) do
+      numSubviews = numSubviews + 1
+  end
+  local activeCells = 0
+  for reuseId,cache in pairs(self._cellCache.active) do
+    for k,v in pairs(cache) do
+      activeCells = activeCells + 1
+    end
+  end
+  local inactiveCells = 0
+  for reuseId,cache in pairs(self._cellCache.inactive) do
+    for k,v in pairs(cache) do
+      inactiveCells = inactiveCells + 1
+    end
+  end
+  log.debug("-- contentView subviews: "..numSubviews)
+  log.debug("-- cell cache active:"..activeCells.." inactive:"..inactiveCells)
+end
+
 function ListView:reconfigureIfNeeded()
   local vso = math.floor(self:calculateVerticalScrollOffset())
   local rtop,rbot = self:calculateVisibleRange(vso+self.rect.height-1,vso)
@@ -38,8 +59,11 @@ function ListView:reconfigureIfNeeded()
   if (rtop ~= self._rangeTop) or (rbot ~= self._rangeBottom) then
     self._rangeTop = rtop
     self._rangeBottom = rbot
-    log.debug("++++++++ would reconfigure")
-    log.debug("vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+    log.debug("+++ RECONFIGURATION : vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+    self:removeActiveSubviews()
+    self:deactivateAllCells()
+    self:rebuildSubviews()
+    self:dumpStats()
   end
 end
 
@@ -52,29 +76,48 @@ end
 function ListView:dequeueCell(reuseId)
   local result = nil
   if self._cellCache.inactive[reuseId] == nil then
+    log.debug("!!! creating new inactive cache for reuseId '"..reuseId.."'")
     self._cellCache.inactive[reuseId] = {}
   end
   if self._cellCache.active[reuseId] == nil then
+    log.debug("!!! creating new active cache for reuseId '"..reuseId.."'")
     self._cellCache.active[reuseId] = {}
   end
   local inactive = self._cellCache.inactive[reuseId]
+--  self:dumpStats()
   for k,cell in pairs(inactive) do
     result = cell
-    table.remove(inactive,k)
+    inactive[k]=nil
+    break
   end
+--  log.debug("!!! DEQUEUE for reuseId: '"..reuseId.."' "..tostring(result))
   return result
 end
 
 -- both headers and rows/cells
 function ListView:addActiveCell(cell)
   local reuseId = cell.reuseId
+--  log.debug("ADDING cell to cache with reuseId '"..reuseId.."'")
   if self._cellCache.active[reuseId] == nil then
     self._cellCache.active[reuseId] = {}
   end  
   self._cellCache.active[reuseId][cell] = cell
 end
 
+function ListView:deactivateAllCells()
+  for reuseId,ridcache in pairs(self._cellCache.active) do
+    for _,cell in pairs(ridcache) do
+      self._cellCache.inactive[reuseId][cell] = cell
+    end
+    self._cellCache.active[reuseId] = {}
+  end
+--  log.debug("----------------------")
+--  self:dumpStats()
+--  log.debug("----------------------")
+end
+
 function ListView:clearCellCache()
+  log.debug("!!! CLEARING CELL CACHE !!!")
   self._cellCache.active = {}
   self._cellCache.inactive = {}
 end
@@ -84,7 +127,6 @@ function ListView:removeActiveSubviews()
     for c,cell in pairs(cache) do
       self.contentView:removeSubview(cell)
     end
-    self._cellCache.active[reuseId] = {}
   end  
 end
 
@@ -167,7 +209,7 @@ end
 
 function ListView:rebuildSubviews()
   local vy = self._totalContentHeight
-  for section=1,self:numberOfSections() do
+--[[  for section=1,self:numberOfSections() do
     local header = self:viewForHeaderInSection(section)
     if header then
       vy = vy - self:heightForHeaderInSection(section)
@@ -196,6 +238,32 @@ function ListView:rebuildSubviews()
       cell:dataSource(ds)
       self:addActiveCell(cell)
     end
+  end]]
+  for i=self._rangeTop,self._rangeBottom do
+    local entry = self._geometry[i]
+    if entry[3] then -- header
+      local section = entry[4]
+      local header = self:viewForHeaderInSection(section)
+      header:x(0)
+      header:y(entry[2]+1)
+      header:width("1")
+      header:height(entry[1]-entry[2])
+      self.contentView:addSubview(header)
+      local si = self:sectionInfoForIndex(section)
+      header:dataSource(si)
+      self:addActiveCell(header)
+    else -- cell
+      local ip = {entry[4],entry[5]}
+      local cell = self:cellForRowAtIndexPath(ip)
+      cell:x(0)
+      cell:y(entry[2]+1)
+      cell:width("1")
+      cell:height(entry[1]-entry[2])
+      self.contentView:addSubview(cell)
+      local ds = self:rowForIndexPath(ip)
+      cell:dataSource(ds)
+      self:addActiveCell(cell)
+    end
   end
 end
 
@@ -206,14 +274,13 @@ function ListView:update()
     self:removeActiveSubviews()
     self:clearCellCache()
     self:measureContent()
-    self:rebuildSubviews()
   end
 end
 
 function ListView:updateLayout()
-  lost.guiro.view.ScrollView.updateLayout(self)
-  
+  lost.guiro.view.ScrollView.updateLayout(self)  
   if self._reloadInProgress then
+    log.debug("RELOADING")
     self:contentSize(Vec2(self.rect.width,self._totalContentHeight))
     self:updateScrollbarVisibility()
     self:updateScrollbarVisibleRange()
