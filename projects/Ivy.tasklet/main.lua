@@ -2,8 +2,18 @@ local rootLoader = lost.resource.Loader.create()
 rootLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
 local gifDecoder = lost.bitmap.GifDecoder(rootLoader)
 
+local Color = lost.common.Color
+
 function startup()
   require("lost/guiro")
+  imageView = lost.guiro.view.Image
+  {
+    bounds={10,10,600,200},
+    scale="aspect",
+    valign="center",
+    halign="center"
+  }
+  
   lost.guiro.ui():add{
     lost.guiro.view.View
     {
@@ -16,8 +26,17 @@ function startup()
           if isGif then
             gif = gifDecoder:load(event.filename)
             log.debug("loaded ok")
+            log.debug("numImages: "..gif:numImages())
+            local paletteBitmap = gif:paletteAsBitmap()
+            local b = lost.bitmap.Bitmap.create(200,200,lost.bitmap.COMPONENTS_RGBA)
+            b:clear(Color(1,0,0))
+            imageView:bitmap(paletteBitmap)
           end
         end
+      },
+      subviews=
+      {
+        imageView
       }
     }
   }

@@ -47,7 +47,10 @@ namespace lost
       [
         namespace_("bitmap")
         [
-          class_<Gif>("Gif"),
+          class_<Gif>("Gif")
+          .def("numImages",&Gif::numImages)
+          .def("paletteAsBitmap",&Gif::paletteAsBitmap)
+            ,
           class_<GifDecoder>("GifDecoder")
           .def(constructor<resource::LoaderPtr>())
           .def("isGif",&GifDecoder::isGif)

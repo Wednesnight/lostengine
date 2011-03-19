@@ -1,10 +1,14 @@
+#include "lost/bitmap/Bitmap.h"
 #include "lost/bitmap/Gif.h"
+#include "lost/common/Color.h"
 #include "gif_lib.h"
 
 namespace lost
 {
 namespace bitmap
 {
+
+using namespace common;
 
 Gif::Gif(void* inData)
 {
@@ -17,6 +21,33 @@ Gif::~Gif()
   {
     DGifCloseFile((GifFileType*)data);
   }
+}
+
+uint32_t Gif::numImages()
+{
+  return ((GifFileType*)data)->ImageCount;
+}
+
+BitmapPtr Gif::paletteAsBitmap()
+{
+  BitmapPtr result(new Bitmap(256,1,COMPONENTS_RGBA));
+  
+  result->clear(Color(0,0,0,0));
+  GifFileType* gif = (GifFileType*)data;
+  
+  if(gif->SColorMap)
+  {
+    for(uint32_t i=0; i<gif->SColorMap->ColorCount; ++i)
+    {
+      GifColorType col = gif->SColorMap->Colors[i];
+      float r = ((float)col.Red)/255.0f;
+      float g = ((float)col.Green)/255.0f;
+      float b = ((float)col.Blue)/255.0f;
+      result->pixel(i,0,Color(r,g,b,1.0));
+    }
+  }
+  
+  return result;
 }
 
 }
