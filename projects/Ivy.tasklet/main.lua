@@ -6,9 +6,17 @@ local Color = lost.common.Color
 
 function startup()
   require("lost/guiro")
-  imageView = lost.guiro.view.Image
+  paletteView = lost.guiro.view.Image
   {
-    bounds={10,10,600,200},
+    bounds={10,{"top",-10},256,20},
+    scale="none",
+    valign="center",
+    halign="center"
+  }
+
+  bitmapView = lost.guiro.view.Image
+  {
+    bounds={10,10,300,300},
     scale="none",
     valign="center",
     halign="center"
@@ -26,17 +34,16 @@ function startup()
           if isGif then
             gif = gifDecoder:load(event.filename)
             log.debug("loaded ok")
-            log.debug("numImages: "..gif:numImages())
-            local paletteBitmap = gif:paletteAsBitmap()
-            local b = lost.bitmap.Bitmap.create(200,200,lost.bitmap.COMPONENTS_RGBA)
-            b:clear(Color(1,0,0))
-            imageView:bitmap(paletteBitmap)
+            log.debug("numBitmaps: "..gif:numBitmaps())
+            paletteView:bitmap(gif:paletteAsBitmap())
+            bitmapView:bitmap(gif:bitmap(0))
           end
         end
       },
       subviews=
       {
-        imageView
+        paletteView,
+        bitmapView
       }
     }
   }
