@@ -2,6 +2,7 @@
 #include "lost/bitmap/Gif.h"
 #include "lost/common/Color.h"
 #include "gif_lib.h"
+#include "lost/common/Logger.h"
 
 namespace lost
 {
@@ -31,9 +32,8 @@ uint32_t Gif::numImages()
 BitmapPtr Gif::paletteAsBitmap()
 {
   BitmapPtr result(new Bitmap(256,1,COMPONENTS_RGBA));
-  
-  result->clear(Color(0,0,0,0));
   GifFileType* gif = (GifFileType*)data;
+  result->clear(Color(0,0,0,0));
   
   if(gif->SColorMap)
   {

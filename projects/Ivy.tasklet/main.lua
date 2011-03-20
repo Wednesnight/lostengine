@@ -9,7 +9,7 @@ function startup()
   imageView = lost.guiro.view.Image
   {
     bounds={10,10,600,200},
-    scale="aspect",
+    scale="none",
     valign="center",
     halign="center"
   }
