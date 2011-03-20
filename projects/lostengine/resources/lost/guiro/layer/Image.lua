@@ -106,8 +106,8 @@ function Image:updateLayout()
   if self._scale == "aspect" then -- aspect scales the image to fit the current rect
     if self._texture then
       local f = math.min(self.rect.width / self._texture.dataWidth, self.rect.height / self._texture.dataHeight)
-      w = math.floor(self.rect.width*f)
-      h = math.floor(self.rect.height*f)        
+      w = math.floor(self._texture.dataWidth*f)
+      h = math.floor(self._texture.dataHeight*f)        
     end
   else
     if self._texture then
