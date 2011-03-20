@@ -99,6 +99,9 @@ end
 -- both headers and rows/cells
 -- if active = true then cell is cached as an active cell, otherwise as an inactive one
 function ListView:cacheCell(cell,active)
+  if not cell.reuseId then
+    error("cells and headers must have a reuseId string member")
+  end
   local reuseId = cell.reuseId
   if self._cellCache.active[reuseId] == nil then
     self._cellCache.active[reuseId] = {}
@@ -242,6 +245,9 @@ function ListView:rebuildSubviews()
       if entry[3] then -- header
         local section = entry[4]
         local header = self:viewForHeaderInSection(section)
+        if not header then
+          error(self.id.." returned nil header!")
+        end
         header:x(0)
         header:y(entry[2]+1)
         header:width("1")
@@ -254,6 +260,9 @@ function ListView:rebuildSubviews()
       else -- cell
         local ip = {entry[4],entry[5]}
         local cell = self:cellForRowAtIndexPath(ip)
+        if not cell then
+          error(self.id.." returned nil cell!")
+        end
         cell:x(0)
         cell:y(entry[2]+1)
         cell:width("1")

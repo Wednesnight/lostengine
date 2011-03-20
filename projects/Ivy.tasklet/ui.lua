@@ -1,5 +1,11 @@
 return lost.guiro.view.View
 {
+  listeners=
+  {
+    drop=function(event)
+      mainController:fileDropped(event.filename)
+    end
+  },
   subviews=
   {
     lost.guiro.view.TabView
