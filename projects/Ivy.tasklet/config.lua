@@ -7,8 +7,8 @@ return {
     title = "Ivy",
     x = 50,
     y = 50,
-    width = 320,
-    height = 480
+    width = 800,
+    height = 600
   },
   gl ={
     vsync = true
