@@ -3,7 +3,6 @@ require("FileListCell")
 lost.common.Class "FileListDelegate" {}
 
 function FileListDelegate:constructor()
-  log.debug("constructor")
 end
 
 function FileListDelegate:heightForRowAtIndexPath(listView,indexPath)

@@ -3,7 +3,6 @@ require("lost.common.Class")
 lost.common.Class "FileListDatasource" {}
 
 function FileListDatasource:constructor(data)
-  log.debug("constructor")
   self._data = data
 end
 

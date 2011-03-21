@@ -58,7 +58,7 @@ BitmapPtr Gif::bitmap(uint32_t num)
   uint32_t w = img.ImageDesc.Width;
   uint32_t h = img.ImageDesc.Height;
   uint8_t bgcol = gif->SBackGroundColor;
-  DOUT("img w:"<<w<<" h:"<<h);
+//  DOUT("img w:"<<w<<" h:"<<h);
   
   BitmapPtr result(new Bitmap(w,h,COMPONENTS_RGBA));
   result->clear(Color(0,0,0,0));

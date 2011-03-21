@@ -5,7 +5,6 @@ require("FileListDelegate")
 lost.common.Class "MainController" {}
 
 function MainController:constructor()
-  log.debug("maincontroller constructor")
   self.files = {}
   self.fileListDelegate = FileListDelegate()
   self.fileListDatasource = FileListDatasource(self.files)
