@@ -23,7 +23,17 @@ function ScrollBar:constructor(args)
   self.slider:addEventListener("mouseDown", function(event) self:sliderMouseDown(event) end)
   self.slider:addEventListener("mouseUp", function(event) self:sliderMouseUp(event) end)
   self.slider:addEventListener("valueChanged", function(event) self:sliderValueChanged(event) end)
-  self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollBar")          
+  self._bbcounter = lost.profiler.BBCount("lost.guiro.view.ScrollBar")     
+  self:minHandleSize(t.minHandleSize or 20)     
+end
+
+function ScrollBar:minHandleSize(...)
+  if arg.n >= 1 then
+    self._minHandleSize = arg[1]
+    self:needsUpdate()
+  else
+    return self._minHandleSize
+  end
 end
 
 function ScrollBar:updateLayout()
@@ -35,7 +45,7 @@ function ScrollBar:updateLayout()
   else
     hs = self.rect.height - 2*self.buttonSize
   end  
-  self.slider:handleSize(hs*self._visibleRange)
+  self.slider:handleSize(math.max(hs*self._visibleRange, self._minHandleSize))
 end
 
 function ScrollBar:visibleRange(...)

@@ -58,11 +58,11 @@ function ListView:reconfigureIfNeeded()
     self._prevRangeBottom = self._rangeBottom
     self._rangeTop = rtop
     self._rangeBottom = rbot
-    log.debug("+++ RECONFIGURATION : vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
+--    log.debug("+++ RECONFIGURATION : vso "..vso.." rect height "..self.rect.height.." => "..rtop.."->"..rbot.." = "..((rbot-rtop)+1))
 --    self:removeActiveSubviews()
 --    self:deactivateAllCells()
     self:rebuildSubviews()
-    self:dumpStats()
+--    self:dumpStats()
   end
 end
 
@@ -78,11 +78,11 @@ end
 function ListView:dequeueCell(reuseId)
   local result = nil
   if self._cellCache.inactive[reuseId] == nil then
-    log.debug("!!! creating new inactive cache for reuseId '"..reuseId.."'")
+--    log.debug("!!! creating new inactive cache for reuseId '"..reuseId.."'")
     self._cellCache.inactive[reuseId] = {}
   end
   if self._cellCache.active[reuseId] == nil then
-    log.debug("!!! creating new active cache for reuseId '"..reuseId.."'")
+--    log.debug("!!! creating new active cache for reuseId '"..reuseId.."'")
     self._cellCache.active[reuseId] = {}
   end
   local inactive = self._cellCache.inactive[reuseId]
@@ -132,7 +132,7 @@ function ListView:deactivateAllCells()
 end
 
 function ListView:clearCellCache()
-  log.debug("!!! CLEARING CELL CACHE !!!")
+--  log.debug("!!! CLEARING CELL CACHE !!!")
   self._cellCache.active = {}
   self._cellCache.inactive = {}
 end
@@ -218,8 +218,8 @@ function ListView:measureContent()
       cell[2] = cell[1] - cell[2]
     end
   end
-  self:logGeometry()
-  log.debug("total content height "..self._totalContentHeight)
+--  self:logGeometry()
+--  log.debug("total content height "..self._totalContentHeight)
 end
 
 function ListView:rebuildSubviews()
@@ -233,14 +233,14 @@ function ListView:rebuildSubviews()
         self.contentView:removeSubview(cell)
         self:cacheCell(cell,false)
         self._cellAtIndex[i] = nil
-        log.debug("--- REMOVING "..i)
+--        log.debug("--- REMOVING "..i)
       end
     end
   end
   for i=self._rangeTop,self._rangeBottom do
     -- only create new cell if it wasn't already present in old range
     if not ((i>=self._prevRangeTop) and (i<=self._prevRangeBottom)) then 
-      log.debug("--- ADDING "..i)
+--      log.debug("--- ADDING "..i)
       local entry = self._geometry[i]
       if entry[3] then -- header
         local section = entry[4]
@@ -290,7 +290,7 @@ end
 function ListView:updateLayout()
   lost.guiro.view.ScrollView.updateLayout(self)  
   if self._reloadInProgress then
-    log.debug("RELOADING")
+--    log.debug("RELOADING")
     self:contentSize(Vec2(self.rect.width,self._totalContentHeight))
     self:updateScrollbarVisibility()
     self:updateScrollbarVisibleRange()
