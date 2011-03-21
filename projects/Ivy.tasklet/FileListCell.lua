@@ -13,7 +13,8 @@ function FileListCell:constructor(args)
   local margin = 4
   local imageWidth = 30
   local imageSpacing = 10
-  local pathLabelHeight = 15
+  local pathLabelHeight = 20
+  local titleLabelHeight = 20
   local pathLabelSpacing=4
   
   self.bgcol1 = Color(1,1,1)
@@ -31,8 +32,10 @@ function FileListCell:constructor(args)
   self:addSubview(self.imageView)
   self.titleLabel=lost.guiro.view.Label
   {
-    bounds={margin+imageWidth+imageSpacing,margin+pathLabelHeight+pathLabelSpacing,{"1",-(2*margin+imageWidth+imageSpacing)},pathLabelHeight},
+    bounds={margin+imageWidth+imageSpacing,{"top",-margin},{"1",-(2*margin+imageWidth+imageSpacing)},titleLabelHeight},
     text="Title",
+    valign="top",
+    halign="left",
     font={"Vera",12},
     color=Color(0,0,0),
     clip=true,
@@ -44,13 +47,24 @@ function FileListCell:constructor(args)
     bounds={margin+imageWidth+imageSpacing,margin,{"1",-(2*margin+imageWidth+imageSpacing)},pathLabelHeight},
     text="path",
     font={"Vera",8},
-    color=Color(.4,.4,.4),
+    color=Color(.5,.5,.5),
     clip=true,
     valign="center",
     halign="left",
     breakMode="char"
   }
   self:addSubview(self.pathLabel)
+  
+  self.bitmapNumberLabel = lost.guiro.view.Label
+  {
+    bounds={{"right",-margin},{"top",-margin},40,titleLabelHeight},
+    cli=true,
+    color=Color(.2,.4,1),
+    font={"Vera",12},
+    halign="center",
+    valign="top",
+  }
+  self:addSubview(self.bitmapNumberLabel)
 end
 
 function FileListCell:switchColor(flag)
@@ -65,4 +79,10 @@ function FileListCell:dataSource(ds)
   self.titleLabel:text(ds.filename)
   self.imageView:texture(ds.texture)
   self.pathLabel:text(ds.path)
+  if ds.isGif and (ds.numBitmaps > 1) then
+    self.bitmapNumberLabel:text("("..tostring(ds.numBitmaps)..")")
+  else
+    self.bitmapNumberLabel:text(nil)
+  end
 end
+

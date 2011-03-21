@@ -50,7 +50,8 @@ namespace lost
 
           class_<file_status>("file_status"),
 
-          def("is_directory", (bool(*)(file_status)) &is_directory)
+          def("is_directory", (bool(*)(file_status)) &is_directory),
+          def("is_regular_file",(bool(*)(const path& p)) &is_regular_file)
         ]
        ];
     }

@@ -25,6 +25,7 @@ namespace lost
             .def("pixel", (void(Bitmap::*)(uint32_t, uint32_t, const common::Color&))&Bitmap::pixel)
             .def("disc", &Bitmap::disc)
             .def("ring", &Bitmap::ring)
+            .def("flip", &Bitmap::flip)
             .def("filledRect", &Bitmap::filledRect)
             .def_readwrite("premultiplied", &Bitmap::premultiplied)
             .def("premultiplyAlpha", &Bitmap::premultiplyAlpha)
