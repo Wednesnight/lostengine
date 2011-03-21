@@ -6,11 +6,13 @@ lost.common.Class "MainController" {}
 
 function MainController:constructor()
   self.files = {}
+  self.selectedFile = 0
   self.fileListDelegate = FileListDelegate()
   self.fileListDatasource = FileListDatasource(self.files)
   self.rootLoader = lost.resource.Loader.create()
   self.rootLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
   self.gifDecoder = lost.bitmap.GifDecoder(self.rootLoader)
+--  lost.guiro.themeManager():addStyle()
 end
 
 function MainController:buildUi()
@@ -18,8 +20,32 @@ function MainController:buildUi()
     require("ui")
   }
   self.fileList = lost.guiro.ui():recursiveFindById("fileList")
+  self.fileEmpty = lost.guiro.ui():recursiveFindById("filesEmpty")
+  self.filePreview = lost.guiro.ui():recursiveFindById("filesPreview")
   self.fileList:delegate(self.fileListDelegate)
   self.fileList:dataSource(self.fileListDatasource)
+end
+
+function MainController:numLoadedFiles()
+  local result =0
+  for k,v in pairs(self.files) do
+    result = result + 1
+  end
+  return result
+end
+
+function MainController:updateFilesView()
+  local numfiles = self:numLoadedFiles()
+  if numfiles == 0 then
+    self.fileEmpty:show()
+    self.filePreview:hide()
+  else
+    self.fileEmpty:hide()
+    self.filePreview:show()
+  end  
+end
+
+function MainController:selectFile(num)
 end
 
 function MainController:fileDropped(path)
@@ -61,5 +87,6 @@ function MainController:fileDropped(path)
   
   table.insert(self.files,entry)
   self.fileList:reloadData()
+  self:updateFilesView()
 end
 

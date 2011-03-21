@@ -19,6 +19,11 @@ function FileListCell:constructor(args)
   
   self.bgcol1 = Color(1,1,1)
   self.bgcol2 = Color(237/255,243/255,254/255)
+  self.titleLabelSelectedColor = Color(1,1,1)
+  self.titleLabelDeselectedColor = Color(0,0,0)
+  self.numberLabelDeselectedColor = Color(.2,.4,1)
+  self.numberLabelSelectedColor = Color(1,1,1)
+  self.bgcolSelected = Color(.2,.4,1)
   self.bglayer = lost.guiro.layer.Rect{filled=true}
   self.layer:addSublayer(self.bglayer)
   
@@ -28,6 +33,7 @@ function FileListCell:constructor(args)
     scale="aspect",
     valign="center",
     halign="center",
+    filter=true
   }
   self:addSubview(self.imageView)
   self.titleLabel=lost.guiro.view.Label
@@ -65,13 +71,51 @@ function FileListCell:constructor(args)
     valign="top",
   }
   self:addSubview(self.bitmapNumberLabel)
+  
+  self.removeButton = lost.guiro.view.Button
+  {
+    title="R",
+    bounds={"left","top",20,20},
+  }
+  self:addSubview(self.removeButton)
+  
+  self._switchColor = true
+  self._selected = false
 end
 
-function FileListCell:switchColor(flag)
-  if flag then
-    self.bglayer:color(self.bgcol1)
+function FileListCell:update()
+  lost.guiro.view.View.update(self)
+    
+  if not self._selected then
+    if self._switchColor then
+      self.bglayer:color(self.bgcol1)
+    else
+      self.bglayer:color(self.bgcol2)
+    end
+    self.titleLabel:color(self.titleLabelDeselectedColor)
+    self.bitmapNumberLabel:color(self.numberLabelDeselectedColor)
   else
-    self.bglayer:color(self.bgcol2)
+    self.bglayer:color(self.bgcolSelected)
+    self.titleLabel:color(self.titleLabelDeselectedColor)
+    self.bitmapNumberLabel:color(self.numberLabelDeselectedColor)
+  end
+end
+
+function FileListCell:switchColor(...)
+  if arg.n >= 1 then
+    self._switchColor = arg[1]
+    self:needsUpdate()
+  else
+    return self._switchColor
+  end
+end
+
+function FileListCell:select(...)
+  if arg.n >= 1 then
+    self._selected = arg[1]
+    self:needsUpdate()
+  else
+    return self._selected
   end
 end
 

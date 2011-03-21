@@ -5,7 +5,8 @@ local Vec2 = lost.math.Vec2
 return 
 lost.guiro.view.View
 {
-  bounds={fileListWidth,0,{"1",-fileListWidth},"1"},
+  id="filesEmpty",
+--  bounds={fileListWidth,0,{"1",-fileListWidth},"1"},
   subviews=
   {
     lost.guiro.view.Label
