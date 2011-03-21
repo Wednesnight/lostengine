@@ -15,6 +15,14 @@ return lost.guiro.view.View
       delegate=fileListDelegate,
       dataSource=fileListDatasource
     },
-    require("ui_files_empty")
+    lost.guiro.view.View
+    {
+      bounds={fileListWidth,0,{"1",-fileListWidth},"1"},
+      subviews=
+      {
+        require("ui_files_empty"),
+        require("ui_files_preview")
+      }
+    }
   }
 }
