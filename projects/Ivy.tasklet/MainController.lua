@@ -27,13 +27,18 @@ function MainController:fileDropped(path)
   log.debug(path)
 
   local p = boost.filesystem.path(path)
-  log.debug("filename "..tostring(p:filename()))
+
+  if not boost.filesystem.is_regular_file(p) then 
+    log.debug("ERROR: dropped item was not a file, ignoring!")
+    return 
+  end
   
   local entry = 
   {
       ["path"]=path,
-      filename = tostring(p:filename()),
-      isGif = self.gifDecoder:isGif(path)
+      filename = tostring(p:stem()),
+      extension = tostring(p:extension()),
+      isGif = self.gifDecoder:isGif(path),
   }
   
   if entry.isGif then
@@ -42,9 +47,15 @@ function MainController:fileDropped(path)
     entry.numBitmaps = entry.gif:numBitmaps()
   else
     local data = self.rootLoader:load(path)
-    entry.bitmap = lost.bitmap.Bitmap.create(data)
-    entry.bitmap:flip()
-    entry.bitmap:premultiplyAlpha()
+    local ok=true
+    ok,entry.bitmap = pcall(lost.bitmap.Bitmap.create,data)
+    if ok then
+      entry.bitmap:flip()
+      entry.bitmap:premultiplyAlpha()
+    else
+      log.error("couldn't create Bitmap object from data at '"..tostring(path).."'")
+      return
+    end
   end
   local texparams = lost.gl.Texture.Params()
   entry.texture = lost.gl.Texture.create(entry.bitmap,texparams)

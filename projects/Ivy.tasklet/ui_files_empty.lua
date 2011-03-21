@@ -10,9 +10,9 @@ lost.guiro.view.View
   {
     lost.guiro.view.Label
     {
-      sublayers={lost.guiro.layer.RoundedRect{filled=true,radius=4,color=Color(.3,.3,.3)}},
-      bounds={"center","center",150,20},
-      text="Drop files here!",
+      sublayers={lost.guiro.layer.RoundedRect{filled=true,radius=4,color=Color(.6,.8,1)}},
+      bounds={"center","center",250,30},
+      text="Drop jpg,tga,png or gif files here!",
       color=Color(0,0,0),
       shadow=true,
       shadowColor=Color(1,1,1),

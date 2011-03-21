@@ -6,6 +6,10 @@ function FileListDelegate:constructor()
   log.debug("constructor")
 end
 
+function FileListDelegate:heightForRowAtIndexPath(listView,indexPath)
+  return 50
+end
+
 function FileListDelegate:cellForRowAtIndexPath(listView,indexPath)
   local result = listView:dequeueCell(FileListCell.reuseId)
   if not result then

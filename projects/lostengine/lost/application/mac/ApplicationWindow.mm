@@ -28,10 +28,35 @@
 }
 // TODO: is screen of any use for us?
 //- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)aStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)flag screen:(NSScreen *)screen;
+- (void) dispatchDropEvents:(id <NSDraggingInfo>)sender 
+{
+  NSPasteboard* pboard = [sender draggingPasteboard];
+  if(!([[pboard types] containsObject:NSURLPboardType] && parent)) return;
+    
+  NSArray *classes = [[NSArray alloc] initWithObjects:[NSURL class], nil];
+  NSDictionary *options = [NSDictionary dictionary];
+  NSArray *copiedItems = [pboard readObjectsForClasses:classes options:options];
+  
+  for(NSURL* fileURL in copiedItems)
+  {
+    NSString* relativePath = [fileURL relativePath];
+    const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
+    std::string filename(cString);
+    lost::application::DragNDropEventPtr dragNDropEvent(new lost::application::DragNDropEvent(lost::application::DragNDropEvent::DROP(), filename));
+    NSPoint rel = [self mouseLocationOutsideOfEventStream];
+    NSPoint abs = [NSEvent mouseLocation];
+    dragNDropEvent->window  = parent;
+    dragNDropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
+    dragNDropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
+    parent->dispatcher->queueEvent(dragNDropEvent);
+  }
+}
 
 - (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(std::string)type
 {
   NSPasteboard* pboard = [sender draggingPasteboard];
+  NSArray* items = [pboard pasteboardItems];
+  int count = [items count];
   if ([[pboard types] containsObject:NSURLPboardType] && parent)
   {
     NSURL *fileURL = [NSURL URLFromPasteboard:pboard];
@@ -50,7 +75,7 @@
 
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
 {
-  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DROP()];
+  [self dispatchDropEvents:sender];
   return YES;
 }
 

@@ -1,6 +1,6 @@
 local Color = lost.common.Color
 local Vec2 = lost.math.Vec2
-fileListWidth = 200
+fileListWidth = 250
 
 return lost.guiro.view.View
 {
@@ -9,6 +9,7 @@ return lost.guiro.view.View
     lost.guiro.view.ListView
     {
       id="fileList",
+      size="small",
       sublayers={lost.guiro.layer.Rect{filled=true,color=Color(1,1,1)}},
       bounds={0,0,fileListWidth,"1"},
       delegate=fileListDelegate,

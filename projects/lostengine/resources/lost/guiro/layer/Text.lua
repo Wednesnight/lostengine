@@ -308,7 +308,11 @@ end
 
 function Text:text(...)
   if arg.n >= 1 then
-    self.buffer:text(arg[1])
+    if arg[1] ~= nil then
+      self.buffer:text(arg[1])
+    else
+      self.buffer:text("")
+    end
     self._dirtyText = true
     self:needsDisplay()
     self:resetUndoRedoBuffers()
