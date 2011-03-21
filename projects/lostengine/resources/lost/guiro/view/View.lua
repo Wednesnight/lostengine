@@ -52,13 +52,13 @@ function View:constructor(args)
 
   if t.clip then self:clip(t.clip) end
 
-  local tm = lost.guiro.themeManager()
-  tm:apply(self, t.theme or tm.defaultTheme, t.style or tm.defaultStyle, args)
   if t.sublayers then
     for _,v in ipairs(t.sublayers) do
       self.layer:addSublayer(v)
     end
   end
+  local tm = lost.guiro.themeManager()
+  tm:apply(self, t.theme or tm.defaultTheme, t.style or tm.defaultStyle, args)
   if t.subviews then
     for _,v in ipairs(t.subviews) do
       self:addSubview(v)

@@ -1,5 +1,5 @@
 require("lost.common.Class")
-
+require("FileListCell")
 lost.common.Class "FileListDelegate" {}
 
 function FileListDelegate:constructor()
@@ -7,19 +7,10 @@ function FileListDelegate:constructor()
 end
 
 function FileListDelegate:cellForRowAtIndexPath(listView,indexPath)
-  local reuseId = "cell"
-  local result = listView:dequeueCell(reuseId)
+  local result = listView:dequeueCell(FileListCell.reuseId)
   if not result then
-    local l = lost.guiro.view.Label{text="Hello"}
-    result=lost.guiro.view.View
-    {
-      subviews={l}
-    }
-    result.label=l
-    result.reuseId = reuseId
-    result.dataSource=function(self,ds)
-      self.label:text(ds.path)
-    end
+    result = FileListCell{}
   end
+  result:switchColor((indexPath[2] % 2)==0)
   return result
 end
