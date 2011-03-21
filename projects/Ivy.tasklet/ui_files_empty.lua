@@ -6,12 +6,12 @@ return
 lost.guiro.view.View
 {
   bounds={fileListWidth,0,{"1",-fileListWidth},"1"},
---  sublayers={lost.guiro.layer.RoundedRect{filled=true,radius=4,color=Color(1,1,1)}},
   subviews=
   {
     lost.guiro.view.Label
     {
-      bounds={"center","center",100,20},
+      sublayers={lost.guiro.layer.RoundedRect{filled=true,radius=4,color=Color(.3,.3,.3)}},
+      bounds={"center","center",150,20},
       text="Drop files here!",
       color=Color(0,0,0),
       shadow=true,

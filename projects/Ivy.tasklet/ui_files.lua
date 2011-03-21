@@ -9,7 +9,7 @@ return lost.guiro.view.View
     lost.guiro.view.ListView
     {
       id="fileList",
---      sublayers={lost.guiro.layer.Rect{filled=true,color=Color(1,1,1)}},
+      sublayers={lost.guiro.layer.Rect{filled=true,color=Color(1,1,1)}},
       bounds={0,0,fileListWidth,"1"},
       delegate=fileListDelegate,
       dataSource=fileListDatasource

@@ -37,7 +37,10 @@ namespace lost
             .def(constructor<const std::string&>())
             .def(tostring(self))
             .def(self / other<std::string>())
-            .def("remove_filename", &path::remove_filename),
+            .def("remove_filename", &path::remove_filename)
+            .def("filename", &path::filename)
+            .def("stem", &path::stem)
+            .def("extension", &path::extension),
         
           class_<directory_iterator>("directory_iterator"),
         
