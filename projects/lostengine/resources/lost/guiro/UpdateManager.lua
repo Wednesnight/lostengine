@@ -95,15 +95,38 @@ function UpdateManager:processViewDisplayUpdates()
   self:processQ(self._viewDisplayQ, self.vupdateDisplayFunc, true, true)
 end
 
-function UpdateManager:update()
---  log.debug("-- UPDATE")
+function UpdateManager:updateOnce()
   self:processViewUpdates()
   self:processViewLayoutUpdates()
   self:processViewDisplayUpdates()
   self:processLayerUpdates()
   self:processLayerLayoutUpdates()
   self:processLayerDisplayUpdates()
+end
+
+function UpdateManager:hasUpdates()
+  local next = next
+  return (next(self._viewUpdateQ.set)~=nil) or
+         (next(self._viewLayoutQ.set)~=nil) or
+         (next(self._viewDisplayQ.set)~=nil) or
+         (next(self._layerUpdateQ.set)~=nil) or
+         (next(self._layerLayoutQ.set)~=nil) or
+         (next(self._layerDisplayQ.set)~=nil)
+end
+
+function UpdateManager:update()
+--  log.debug("-- UPDATE")
+  local numUpdates = 0
+  while self:hasUpdates() do
+    self:updateOnce()
+    numUpdates = numUpdates + 1
+    if numUpdates >= 3 then
+      log.warn("update cycle "..numUpdates)
+    end
+  end
   self._updateScheduled = false
+--  log.debug("performed "..numUpdates.." update cycles")
+--  self:checkQueues()
 end
 
 function UpdateManager:scheduleUpdateIfNeeded()
