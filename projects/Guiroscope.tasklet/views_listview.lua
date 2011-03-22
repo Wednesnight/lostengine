@@ -41,7 +41,7 @@ return lost.guiro.view.View
       alwaysShowCorner = true,
       delegate =
       {
-        createCellView = function(self)
+        createCellView = function(self,indexPath)
           local label = lost.guiro.view.Label {
             bounds = {35,"center","1","1"},
             font = {"Vera", 11},
@@ -114,13 +114,13 @@ return lost.guiro.view.View
               self:superview():superview():reloadData()
             end
           end
-          cell.reuseId = "cell"
+          cell.reuseId = "cell"..indexPath[2]
           return cell
         end,
         cellForRowAtIndexPath   = function(self,listView,indexPath) 
-            local result = listView:dequeueCell("cell")
+            local result = listView:dequeueCell("cell"..indexPath[2])
             if result == nil then
-                result = self:createCellView() 
+                result = self:createCellView(indexPath) 
             end
             return result
           end,
