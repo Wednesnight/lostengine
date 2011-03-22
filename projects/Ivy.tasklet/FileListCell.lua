@@ -81,6 +81,11 @@ function FileListCell:constructor(args)
   
   self._switchColor = true
   self._selected = false
+  self:addEventListener("mouseDown",function(event) self:mouseDown(event) end)
+end
+
+function FileListCell:mouseDown(event)
+  self.delegate:cellSelected(self)
 end
 
 function FileListCell:update()
