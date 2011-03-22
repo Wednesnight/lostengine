@@ -21,6 +21,8 @@ function FileListCell:constructor(args)
   self.bgcol2 = Color(237/255,243/255,254/255)
   self.titleLabelSelectedColor = Color(1,1,1)
   self.titleLabelDeselectedColor = Color(0,0,0)
+  self.pathLabelSelectedColor = Color(.9,.8,1)
+  self.pathLabelDeselectedColor = Color(.5,.5,.5)
   self.numberLabelDeselectedColor = Color(.2,.4,1)
   self.numberLabelSelectedColor = Color(1,1,1)
   self.bgcolSelected = Color(.2,.4,1)
@@ -81,7 +83,6 @@ function FileListCell:constructor(args)
   
   self._switchColor = true
   self._selected = false
-  self:addEventListener("mouseDown",function(event) self:mouseDown(event) end)
 end
 
 function FileListCell:mouseDown(event)
@@ -99,10 +100,12 @@ function FileListCell:update()
     end
     self.titleLabel:color(self.titleLabelDeselectedColor)
     self.bitmapNumberLabel:color(self.numberLabelDeselectedColor)
+    self.pathLabel:color(self.pathLabelDeselectedColor)
   else
     self.bglayer:color(self.bgcolSelected)
-    self.titleLabel:color(self.titleLabelDeselectedColor)
-    self.bitmapNumberLabel:color(self.numberLabelDeselectedColor)
+    self.titleLabel:color(self.titleLabelSelectedColor)
+    self.bitmapNumberLabel:color(self.numberLabelSelectedColor)
+    self.pathLabel:color(self.pathLabelSelectedColor)
   end
 end
 
