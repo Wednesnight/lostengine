@@ -80,6 +80,7 @@ function FileListController:updateViewVisibility()
 end
 
 function FileListController:addFile(path)
+  log.debug(path)
   local p = boost.filesystem.path(path)
 
   if not boost.filesystem.is_regular_file(p) then 
