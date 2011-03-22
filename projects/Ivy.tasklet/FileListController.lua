@@ -42,12 +42,16 @@ function FileListController:numLoadedFiles()
   return result
 end
 
+function FileListController:fileAtIndex(idx)
+  return self.files[idx]
+end
+
 function FileListController:numberOfRowsInSection(listView,section)
   return self:numLoadedFiles()
 end
 
 function FileListController:rowForIndexPath(listView,indexPath)
-  return self.files[indexPath[2]]
+  return self:fileAtIndex(indexPath[2])
 end
 
 function FileListController:heightForRowAtIndexPath(listView,indexPath)
@@ -60,12 +64,9 @@ function FileListController:cellForRowAtIndexPath(listView,indexPath)
     result = FileListCell{}
   end
   result:switchColor((indexPath[2] % 2)==0)
+  result:select(self:fileAtIndex(indexPath[2]).selected)
   result.delegate = self
   return result
-end
-
-function FileListController:cellSelected(cell)
-  log.debug("cell selected")
 end
 
 function FileListController:updateViewVisibility()
