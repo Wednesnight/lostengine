@@ -15,7 +15,11 @@ function startup()
       listeners =
       {
         drop = function (event)
-          tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(event.filename))
+          local originalEvent = event.lostAppDragNDropEvent
+          for i=0,math.max(0,originalEvent:numPaths()-1) do
+            local p = originalEvent:getPath(i)
+            tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(p))
+          end
         end
       },
       sublayers = 

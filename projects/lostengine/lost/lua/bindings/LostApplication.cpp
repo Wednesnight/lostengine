@@ -99,10 +99,11 @@ namespace lost
        namespace_("application")
        [
         class_<DragNDropEvent, Event>("DragNDropEvent")
-        .def_readonly("filename", &DragNDropEvent::filename)
         .def_readonly("window", &DragNDropEvent::window)
         .def_readonly("pos", &DragNDropEvent::pos)
         .def_readonly("absPos", &DragNDropEvent::absPos)
+        .def("numPaths",&DragNDropEvent::numPaths)
+        .def("getPath",&DragNDropEvent::getPath)
        ]
       ];
       globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_ENTER"] = DragNDropEvent::DRAG_ENTER();
