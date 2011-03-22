@@ -115,6 +115,12 @@ function FileListController:addFile(path)
   entry.texture = lost.gl.Texture.create(entry.bitmap,texparams)
 
   table.insert(self.files,entry)
+end
+
+function FileListController:receivedDropEvent(event)
+  for i=0,math.max(0,event:numPaths()-1) do
+    self:addFile(event:getPath(i))
+  end
   self.fileList:reloadData()
   self:updateViewVisibility()
 end

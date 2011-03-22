@@ -21,12 +21,11 @@ function MainController:buildUi()
       }
     }    
   }
-  lost.guiro.ui():addEventListener("drop",function(event) self:fileDropped(event.filename) end)
+  lost.guiro.ui():addEventListener("drop",function(event) self:fileDropped(event) end)
 
 end
 
-function MainController:fileDropped(path)
-  log.debug(path)
-  self.fileListController:addFile(path)
+function MainController:fileDropped(event)
+  self.fileListController:receivedDropEvent(event.lostAppDragNDropEvent)
 end
 

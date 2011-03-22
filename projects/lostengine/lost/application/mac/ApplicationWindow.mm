@@ -36,23 +36,23 @@
   NSArray *classes = [[NSArray alloc] initWithObjects:[NSURL class], nil];
   NSDictionary *options = [NSDictionary dictionary];
   NSArray *copiedItems = [pboard readObjectsForClasses:classes options:options];
+  lost::application::DragNDropEventPtr dragNDropEvent(new lost::application::DragNDropEvent(lost::application::DragNDropEvent::DROP()));
+  NSPoint rel = [self mouseLocationOutsideOfEventStream];
+  NSPoint abs = [NSEvent mouseLocation];
+  dragNDropEvent->window  = parent;
+  dragNDropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
+  dragNDropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
   
   for(NSURL* fileURL in copiedItems)
   {
     NSString* relativePath = [fileURL relativePath];
     const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
-    std::string filename(cString);
-    lost::application::DragNDropEventPtr dragNDropEvent(new lost::application::DragNDropEvent(lost::application::DragNDropEvent::DROP(), filename));
-    NSPoint rel = [self mouseLocationOutsideOfEventStream];
-    NSPoint abs = [NSEvent mouseLocation];
-    dragNDropEvent->window  = parent;
-    dragNDropEvent->pos     = lost::math::Vec2(rel.x, rel.y);
-    dragNDropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
-    parent->dispatcher->queueEvent(dragNDropEvent);
+    dragNDropEvent->addPath(cString);
   }
+  parent->dispatcher->queueEvent(dragNDropEvent);
 }
 
-- (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(std::string)type
+/*- (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(std::string)type
 {
   NSPasteboard* pboard = [sender draggingPasteboard];
   NSArray* items = [pboard pasteboardItems];
@@ -71,7 +71,7 @@
     dragNDropEvent->absPos  = lost::math::Vec2(abs.x, abs.y);
     parent->dispatcher->queueEvent(dragNDropEvent);
   }
-}
+}*/
 
 - (BOOL) performDragOperation:(id <NSDraggingInfo>)sender
 {
@@ -81,13 +81,13 @@
 
 - (NSDragOperation) draggingEntered:(id <NSDraggingInfo>)sender
 {
-  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_ENTER()];
+//  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_ENTER()];
   return NSDragOperationLink;
 }
 
 - (void) draggingExited:(id <NSDraggingInfo>)sender
 {
-  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_LEAVE()];
+//  [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_LEAVE()];
 }
 
 - (NSDragOperation) draggingUpdated:(id <NSDraggingInfo>)sender
@@ -95,7 +95,7 @@
   NSPasteboard* pboard = [sender draggingPasteboard];
   if ([[pboard types] containsObject:NSURLPboardType])
   {
-    [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_UPDATE()];
+//    [self dispatchDragNDropEvent: sender type: lost::application::DragNDropEvent::DRAG_UPDATE()];
     return NSDragOperationLink;
   }
   else
