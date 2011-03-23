@@ -17,12 +17,8 @@ namespace lost
       Repository() {}
       virtual ~Repository() {}
 
-      // read
       virtual common::DataPtr load( const boost::filesystem::path& inPath) = 0;
       virtual bool exists(std::string& inOutRelativePath) = 0;
-
-      // write
-      virtual void write(const boost::filesystem::path& inPath, const common::DataPtr& inData) = 0;
     };
   }
 }

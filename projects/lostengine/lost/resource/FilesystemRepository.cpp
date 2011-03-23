@@ -30,12 +30,6 @@ namespace lost
       return exists;
     }
 
-    void FilesystemRepository::write(const boost::filesystem::path& inPath, const common::DataPtr& inData)
-    {
-      boost::filesystem::path absolutePath = path(rootDirectory) / inPath;
-      writeToAbsolutePath(absolutePath.string(), inData);
-    }
-
     RepositoryPtr FilesystemRepository::create(const std::string& inRootDir)
     {
       return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
