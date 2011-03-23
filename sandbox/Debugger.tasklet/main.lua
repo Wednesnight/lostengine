@@ -1,3 +1,5 @@
+local Color = lost.common.Color
+
 local application = lost.application.Application.getInstance()
 
 local mainView = nil
@@ -13,60 +15,67 @@ local refreshTimer = nil
 function startup()
   require("lost.guiro")
 
-  summaryView = lost.guiro.view.View
+  summaryView = lost.guiro.view.ListView
   {
-    bounds = {"left", "bottom", "1", {"1", -labelHeight*2}}
+    id = "summary",
+    alwaysShowCorner = true,
+    bounds = {10, "top", {"1", -10}, "1"},
+    delegate =
+    {
+      createCellView = function(self)
+        local cell = lost.guiro.view.Label
+        {
+          bounds = {"left","top","1","1"},
+          font = {"Vera", 11},
+          text = "",
+          color = Color(0,0,0),
+          halign = "left"
+        }
+        cell.reuseId = "taskletList"
+        cell.dataSource = function(self,ds)
+          self:text(ds.tasklet.name)
+        end
+        return cell
+      end,
+      cellForRowAtIndexPath   = function(self,listView,indexPath) 
+        local result = listView:dequeueCell("taskletList")
+        if result == nil then
+            result = self:createCellView() 
+        end
+        return result
+      end,
+      heightForRowAtIndexPath = function(self,listView,indexPath) return 20 end
+    },
+    dataSource =
+    {
+      data = {},
+      numberOfRowsInSection = function(self,listView,sectionIndex) return #self.data end,
+      rowForIndexPath = function(self,listViewuitable,indexPath) return self.data[indexPath[2]] end
+    }
   }
+
   mainView = lost.guiro.view.TabView
   {
     bounds = {"left", "top", "1", "1"},
     style = "square",
     items =
     {
-      {
-        "Summary",
-        lost.guiro.view.View
-        {
-          id = "summary",
-          bounds = {{"left", tabPadding}, {"top", -tabPadding}, {"1", -tabPadding*2}, {"1", -tabPadding*2}},
-          subviews =
-          {
-            lost.guiro.view.Label
-            {
-              bounds = {"center", "top", labelWidth, labelHeight*2},
-              font = {"Vera", 14},
-              halign = "left",
-              valign = "center",
-              text = "Running tasklets:"
-            },
-            summaryView,
-            lost.guiro.view.Button
-            {
-              bounds = {"right", "bottom", 100, labelHeight*2},
-              title = "refresh now",
-              listeners =
-              {
-                buttonClick = function(event)
-                  refresh()
-                end
-              }
-            }
-          }
-        }
-      }
+      {"Summary", summaryView}
     }
   }
   lost.guiro.ui():add{
     mainView
   }
 
-  local offset = 0
+  local ds = summaryView:dataSource()
   for t in application.tasklets do
     if t.running then
-      offset = addTaskletInfo(t, offset)
+      table.insert(ds.data, {tasklet = t})
     end
   end
+  summaryView:reloadData()
 
+--[[
   eventProxies[application.eventDispatcher] =
   {
     tasklet.eventDispatcher:attachTo(application.eventDispatcher, lost.application.TaskletEvent.START),
@@ -110,6 +119,7 @@ function startup()
     return true
   end, nil)
   refreshTimer:start()
+]]
 end
 
 function refresh()
