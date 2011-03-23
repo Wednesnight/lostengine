@@ -15,7 +15,7 @@ namespace lost
 
     void Writer::write(const boost::filesystem::path& path, const common::DataPtr& data)
     {
-      repository->write(path, data);
+//      repository->write(path, data);
     }
 
   }

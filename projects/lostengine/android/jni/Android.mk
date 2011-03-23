@@ -4,6 +4,7 @@ boost_path:= ../../../../thirdparty/boost/boost_1_44_0
 box2d_path:= ../../../../thirdparty/box2d/box2d_2_0_1
 fhtagn_path:= ../../../../thirdparty/fhtagn/fhtagn-0.3
 freetype2_path:= ../../../../thirdparty/freetype2/freetype_2_4_3
+giflib_path:= ../../../../thirdparty/giflib/giflib_4_1_6
 hashlib++_path:= ../../../../thirdparty/hashlib++/hashlib++_0_3_1
 lua_path:= ../../../../thirdparty/lua/lua_5_1_4
 luabind_path:= ../../../../thirdparty/luabind/luabind_0_9_1
@@ -28,6 +29,7 @@ $(LOCAL_PATH)/$(boost_path) \
 $(LOCAL_PATH)/$(box2d_path)/source/Include \
 $(LOCAL_PATH)/$(fhtagn_path) \
 $(LOCAL_PATH)/$(freetype2_path)/include \
+$(LOCAL_PATH)/$(giflib_path)/lib \
 $(LOCAL_PATH)/$(hashlib++_path) \
 $(LOCAL_PATH)/$(lua_path)/include \
 $(LOCAL_PATH)/$(luabind_path) \
@@ -48,6 +50,8 @@ LOCAL_SRC_FILES := \
 ../../lost/application/android/Tasklet.cpp \
 ../../lost/application/android/Window.cpp \
 ../../lost/bitmap/Bitmap.cpp \
+../../lost/bitmap/Gif.cpp \
+../../lost/bitmap/GifDecoder.cpp \
 ../../lost/bitmap/Packer.cpp \
 ../../lost/camera/Camera.cpp \
 ../../lost/camera/Camera2D.cpp \
@@ -106,6 +110,7 @@ LOCAL_SRC_FILES := \
 ../../lost/lua/bindings/LostMath.cpp \
 ../../lost/lua/bindings/LostMesh.cpp \
 ../../lost/lua/bindings/LostPlatform.cpp \
+../../lost/lua/bindings/LostProfiler.cpp \
 ../../lost/lua/bindings/LostResource.cpp \
 ../../lost/lua/bindings/LostRg.cpp \
 ../../lost/lua/bindings/LostTime.cpp \
@@ -132,12 +137,14 @@ LOCAL_SRC_FILES := \
 ../../lost/mesh/TextureManager.cpp \
 ../../lost/platform/Platform.cpp \
 ../../lost/platform/Platform_Linux.cpp \
+../../lost/profiler/Blackbox.cpp \
 ../../lost/resource/AndroidAssetRepository.cpp \
 ../../lost/resource/ApplicationResourceRepository.cpp \
 ../../lost/resource/DefaultLoader.cpp \
 ../../lost/resource/FilesystemRepository.cpp \
 ../../lost/resource/Helper.cpp \
 ../../lost/resource/Loader.cpp \
+../../lost/resource/Writer.cpp \
 ../../lost/rg/Blend.cpp \
 ../../lost/rg/Camera.cpp \
 ../../lost/rg/Clear.cpp \
@@ -196,6 +203,10 @@ $(box2d_path)/source/Source/Dynamics/Joints/b2MouseJoint.cpp \
 $(box2d_path)/source/Source/Dynamics/Joints/b2PrismaticJoint.cpp \
 $(box2d_path)/source/Source/Dynamics/Joints/b2PulleyJoint.cpp \
 $(box2d_path)/source/Source/Dynamics/Joints/b2RevoluteJoint.cpp \
+$(giflib_path)/lib/dgif_lib.c \
+$(giflib_path)/lib/gif_hash.c \
+$(giflib_path)/lib/gifalloc.c \
+$(giflib_path)/lib/gif_err.c \
 $(fhtagn_path)/fhtagn/variant.cpp \
 $(fhtagn_path)/fhtagn/version.cpp \
 $(fhtagn_path)/fhtagn/text/decoders.cpp \
