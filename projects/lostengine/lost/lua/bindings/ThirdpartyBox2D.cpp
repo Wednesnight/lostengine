@@ -1,6 +1,6 @@
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
 #include "lost/lua/lua.h"
-#include <Box2D.h>
+#include <Box2D/Box2D.h>
 
 using namespace luabind;
 
@@ -22,7 +22,84 @@ namespace lost
       ];
     }
     
-    void ThirdpartyBox2Db2AABB(lua_State* state) {
+    void ThirdpartyBox2Db2BodyDef(lua_State* state)
+    {
+      module(state, "box2d")
+      [
+        class_<b2BodyDef>("b2BodyDef")
+        .def(constructor<>())
+        .def_readwrite("position",&b2BodyDef::position)
+        .def_readwrite("angle",&b2BodyDef::angle)
+        .def_readwrite("linearVelocity",&b2BodyDef::linearVelocity)
+        .def_readwrite("angularVelocity",&b2BodyDef::angularVelocity)
+        .def_readwrite("linearDamping",&b2BodyDef::linearDamping)
+        .def_readwrite("angularDamping",&b2BodyDef::angularDamping)
+        .def_readwrite("allowSleep",&b2BodyDef::allowSleep)
+        .def_readwrite("awake",&b2BodyDef::awake)
+        .def_readwrite("fixedRotation",&b2BodyDef::fixedRotation)
+        .def_readwrite("bullet",&b2BodyDef::bullet)
+        .def_readwrite("active",&b2BodyDef::active)
+      ];
+    }
+
+/*    void ThirdpartyBox2Db2Body(lua_State* state) {
+      module(state, "box2d")
+      [
+        class_<b2Body>("b2Body")
+          .def("CreateShape", &b2Body::CreateShape)
+          .def("DestroyShape", &b2Body::DestroyShape)
+          .def("SetMass", &b2Body::SetMass)
+          .def("SetMassFromShapes", &b2Body::SetMassFromShapes)
+          .def("SetXForm", &b2Body::SetXForm)
+          .def("GetXForm", &b2Body::GetXForm)
+          .def("GetPosition", &b2Body::GetPosition)
+          .def("GetAngle", &b2Body::GetAngle)
+          .def("GetWorldCenter", &b2Body::GetWorldCenter)
+          .def("GetLocalCenter", &b2Body::GetLocalCenter)
+          .def("SetLinearVelocity", &b2Body::SetLinearVelocity)
+          .def("GetLinearVelocity", &b2Body::GetLinearVelocity)
+          .def("SetAngularVelocity", &b2Body::SetAngularVelocity)
+          .def("GetAngularVelocity", &b2Body::GetAngularVelocity)
+          .def("ApplyForce", &b2Body::ApplyForce)
+          .def("ApplyTorque", &b2Body::ApplyTorque)
+          .def("ApplyImpulse", &b2Body::ApplyImpulse)
+          .def("GetMass", &b2Body::GetMass)
+          .def("GetInertia", &b2Body::GetInertia)
+          .def("GetWorldPoint", &b2Body::GetWorldPoint)
+          .def("GetWorldVector", &b2Body::GetWorldVector)
+          .def("GetLocalPoint", &b2Body::GetLocalPoint)
+          .def("GetLocalVector", &b2Body::GetLocalVector)
+          .def("GetLinearVelocityFromWorldPoint", &b2Body::GetLinearVelocityFromWorldPoint)
+          .def("GetLinearVelocityFromLocalPoint", &b2Body::GetLinearVelocityFromLocalPoint)
+          .def("IsBullet", &b2Body::IsBullet)
+          .def("SetBullet", &b2Body::SetBullet)
+          .def("IsStatic", &b2Body::IsStatic)
+          .def("IsDynamic", &b2Body::IsDynamic)
+          .def("IsFrozen", &b2Body::IsFrozen)
+          .def("IsSleeping", &b2Body::IsSleeping)
+          .def("AllowSleeping", &b2Body::AllowSleeping)
+          .def("WakeUp", &b2Body::WakeUp)
+          .def("PutToSleep", &b2Body::PutToSleep)
+          .def("GetShapeList", &b2Body::GetShapeList)
+          .def("GetJointList", &b2Body::GetJointList)
+          .def("GetNext", &b2Body::GetNext)
+          .def("GetUserData", &b2Body::GetUserData)
+          .def("SetUserData", &b2Body::SetUserData)
+          .def("GetWorld", &b2Body::GetWorld)
+      ];
+    }*/
+
+    void ThirdpartyBox2Db2World(lua_State* state) {
+      module(state, "box2d")
+      [
+        class_<b2World>("b2World")
+          .def(constructor<const b2Vec2&, bool>())
+//          .def("CreateBody", &b2World::CreateBody)
+          .def("Step", &b2World::Step)
+      ];
+    }
+    
+/*    void ThirdpartyBox2Db2AABB(lua_State* state) {
       module(state, "box2d")
       [
         class_<b2AABB>("b2AABB")
@@ -124,85 +201,16 @@ namespace lost
       ];
     }
     
-    void ThirdpartyBox2Db2BodyDef(lua_State* state) {
-      module(state, "box2d")
-      [
-        class_<b2BodyDef>("b2BodyDef")
-          .def(constructor<>())
-          .def_readwrite("massData", &b2BodyDef::massData)
-          .def_readwrite("userData", &b2BodyDef::userData)
-          .def_readwrite("position", &b2BodyDef::position)
-          .def_readwrite("angle", &b2BodyDef::angle)
-          .def_readwrite("linearDamping", &b2BodyDef::linearDamping)
-          .def_readwrite("angularDamping", &b2BodyDef::angularDamping)
-          .def_readwrite("allowSleep", &b2BodyDef::allowSleep)
-          .def_readwrite("isSleeping", &b2BodyDef::isSleeping)
-          .def_readwrite("fixedRotation", &b2BodyDef::fixedRotation)
-          .def_readwrite("isBullet", &b2BodyDef::isBullet)
-      ];
-    }
     
-    void ThirdpartyBox2Db2Body(lua_State* state) {
-      module(state, "box2d")
-      [
-        class_<b2Body>("b2Body")
-          .def("CreateShape", &b2Body::CreateShape)
-          .def("DestroyShape", &b2Body::DestroyShape)
-          .def("SetMass", &b2Body::SetMass)
-          .def("SetMassFromShapes", &b2Body::SetMassFromShapes)
-          .def("SetXForm", &b2Body::SetXForm)
-          .def("GetXForm", &b2Body::GetXForm)
-          .def("GetPosition", &b2Body::GetPosition)
-          .def("GetAngle", &b2Body::GetAngle)
-          .def("GetWorldCenter", &b2Body::GetWorldCenter)
-          .def("GetLocalCenter", &b2Body::GetLocalCenter)
-          .def("SetLinearVelocity", &b2Body::SetLinearVelocity)
-          .def("GetLinearVelocity", &b2Body::GetLinearVelocity)
-          .def("SetAngularVelocity", &b2Body::SetAngularVelocity)
-          .def("GetAngularVelocity", &b2Body::GetAngularVelocity)
-          .def("ApplyForce", &b2Body::ApplyForce)
-          .def("ApplyTorque", &b2Body::ApplyTorque)
-          .def("ApplyImpulse", &b2Body::ApplyImpulse)
-          .def("GetMass", &b2Body::GetMass)
-          .def("GetInertia", &b2Body::GetInertia)
-          .def("GetWorldPoint", &b2Body::GetWorldPoint)
-          .def("GetWorldVector", &b2Body::GetWorldVector)
-          .def("GetLocalPoint", &b2Body::GetLocalPoint)
-          .def("GetLocalVector", &b2Body::GetLocalVector)
-          .def("GetLinearVelocityFromWorldPoint", &b2Body::GetLinearVelocityFromWorldPoint)
-          .def("GetLinearVelocityFromLocalPoint", &b2Body::GetLinearVelocityFromLocalPoint)
-          .def("IsBullet", &b2Body::IsBullet)
-          .def("SetBullet", &b2Body::SetBullet)
-          .def("IsStatic", &b2Body::IsStatic)
-          .def("IsDynamic", &b2Body::IsDynamic)
-          .def("IsFrozen", &b2Body::IsFrozen)
-          .def("IsSleeping", &b2Body::IsSleeping)
-          .def("AllowSleeping", &b2Body::AllowSleeping)
-          .def("WakeUp", &b2Body::WakeUp)
-          .def("PutToSleep", &b2Body::PutToSleep)
-          .def("GetShapeList", &b2Body::GetShapeList)
-          .def("GetJointList", &b2Body::GetJointList)
-          .def("GetNext", &b2Body::GetNext)
-          .def("GetUserData", &b2Body::GetUserData)
-          .def("SetUserData", &b2Body::SetUserData)
-          .def("GetWorld", &b2Body::GetWorld)
-      ];
-    }
 
-    void ThirdpartyBox2Db2World(lua_State* state) {
-      module(state, "box2d")
-      [
-        class_<b2World>("b2World")
-          .def(constructor<const b2AABB&, const b2Vec2&, bool>())
-          .def("CreateBody", &b2World::CreateBody)
-          .def("Step", &b2World::Step)
-          .def("Validate", &b2World::Validate)
-      ];
-    }
-
+*/
     void ThirdpartyBox2D(lua_State* state)
     {
       ThirdpartyBox2Db2Vec2(state);
+      ThirdpartyBox2Db2BodyDef(state);
+//      ThirdpartyBox2Db2Body(state);
+      ThirdpartyBox2Db2World(state);
+/*    
       ThirdpartyBox2Db2AABB(state);
       ThirdpartyBox2Db2FilterData(state);
       ThirdpartyBox2Db2MassData(state);
@@ -211,9 +219,7 @@ namespace lost
       ThirdpartyBox2Db2Shape(state);
       ThirdpartyBox2Db2PolygonDef(state);
       ThirdpartyBox2Db2PolygonShape(state);
-      ThirdpartyBox2Db2BodyDef(state);
-      ThirdpartyBox2Db2Body(state);
-      ThirdpartyBox2Db2World(state);
+*/
     }
 
   }
