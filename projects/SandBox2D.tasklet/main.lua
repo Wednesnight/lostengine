@@ -105,11 +105,11 @@ function startup()
   addBoxNode(Vec2(400,400),Vec2(35,180),-13)
   addBoxNode(Vec2(300,300),Vec2(15,180),0)
   addBoxNode(Vec2(300,280),Vec2(15,180),90)
+  addBoxNode(Vec2(30,280),Vec2(2,230),67)
 --  addBoxNode(Vec2(50,50),Vec2(100,100),17)
 end
 
 function update()
-  
 end
 
 function key(event)
