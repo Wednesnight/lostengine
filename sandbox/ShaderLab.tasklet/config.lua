@@ -7,7 +7,7 @@ return {
     title = "Shader Lab",
     x = 200,
     y = 200,
-    width = 640,
-    height = 480
+    width = 1024,
+    height = 768
   }
 }
