@@ -1,63 +1,89 @@
-using "lost.common.Color"
+require("lost.guiro")
 
-local controller = require("controller")
-local toolview = require("toolview")
-local scene = require("scene")
+local Color = lost.common.Color
 
-return dcl.guiro:Screen
+return lost.guiro.view.View
 {
-  listeners =
+  subviews =
   {
-    keyDown = controller.keyHandler
-  },
-  dcl.guiro:UserInterface
-  {
-    id = "ui",
-    bounds = {"left", "bottom", "1", "1"},
-    dcl.guiro:Window
+    lost.guiro.view.View
     {
-      id = "window",
-      bounds = {"left", "bottom", "1", "1"},
-      showFrame = false,
-      showBackground = true,
-      backgroundColor = Color(.1, .1, .1, 1),
-      dcl.guiro:View
+      id = "toolbar",
+      bounds = {"left", "top", "1", 40},
+      subviews =
       {
-        bounds = {"left", "top", "1", 40}, 
-        dcl.guiro:Label
+        lost.guiro.view.Label
         {
           bounds = {10, "top", 100, 25},
-          fontSize = 12,
+          font = {"Vera", 12},
           halign="left",
           text = "LostEngine"
         },
-        dcl.guiro:Label
+        lost.guiro.view.Label
         {
           bounds = {15, {"top", -15}, 100, 25},
-          fontSize = 16,
+          font = {"Vera", 16},
           halign="left",
           text = "Shader Lab"
         }
-      },
-      dcl.guiro:View
+      }
+    },
+    lost.guiro.view.View
+    {
+      id = "content",
+      bounds = {{"left", 10}, {"bottom", 10}, "1", {"1", -50}},
+      subviews =
       {
-        id = "renderView",
-        bounds = {{"left", 10}, {"bottom", 10}, {"1", -380}, {"1", -50}}, 
-        showFrame = true,
-        dcl.guiro:RenderView
+        lost.guiro.view.View
         {
-          id = "scene",
-          bounds = {{"left", 1}, {"bottom", 1}, {"1", -2}, {"1", -2}}, 
-          rendergraph = scene,
-          listeners =
+          id = "shaders",
+          bounds = {"left", "top", ".5", "1"},
+          subviews =
           {
-            mouseDown = controller.sceneMouseDown,
-            mouseMove = controller.sceneMouseMove,
-            mouseUp = controller.sceneMouseUp
+            lost.guiro.view.TextInput
+            {
+              id = "vs",
+              bounds = {"left", "top", "1", ".5"},
+              font = {"Vera mono", 10},
+              multiLine = true,
+              halign = "left",
+              valign = "top",
+              text =
+[[uniform mat4 modelViewMatrix;  // mesh transform
+uniform mat4 projectionMatrix; // from camera
+uniform vec4 color; // same semantics as gl_Color
+
+attribute vec3 position;
+
+void main(void)
+{
+  vec4 pos = vec4(position, 1.0);
+  gl_Position = projectionMatrix*modelViewMatrix*pos; // equivalent to builtin function ftransform()
+}
+
+]]
+            },
+            lost.guiro.view.TextInput
+            {
+              id = "fs",
+              bounds = {"left", {"top", "-.5"}, "1", ".5"},
+              font = {"Vera mono", 10},
+              multiLine = true,
+              halign = "left",
+              valign = "top",
+              text =
+[[uniform vec4 color; // same semantics as gl_Color
+
+void main(void)
+{
+  gl_FragColor = color;
+}
+
+]]
+            }
           }
         }
-      },
-      toolview
+      }
     }
   }
 }
