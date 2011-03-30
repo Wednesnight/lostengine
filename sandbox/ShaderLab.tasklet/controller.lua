@@ -19,9 +19,15 @@ return {
     self.ui("content")("shaders")("vs"):addEventListener(lost.application.DragNDropEvent.DROP, function(event) self:dropFileInEditor(event, "vs") end)
     self.ui("content")("shaders")("fs"):addEventListener(lost.application.DragNDropEvent.DROP, function(event) self:dropFileInEditor(event, "fs") end)
 
-    --
+    --  TEST
 --    local shader = lost.gl.buildShader(tasklet.loader, "bloom", tasklet.loader:load("bloom.vs"):str(), tasklet.loader:load("bloom.fs"):str())
-    --
+    -- TEST
+
+    tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(tasklet.loader:locate("scene.tasklet")))
+
+    -- TEST
+    require("rgtest")
+    -- TEST
   end,
 
   keyDown = function(self, event)

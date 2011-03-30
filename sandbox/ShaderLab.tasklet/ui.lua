@@ -82,6 +82,12 @@ void main(void)
 ]]
             }
           }
+        },
+        lost.guiro.view.View
+        {
+          id = "rendergraph",
+          bounds = {"right", "top", ".5", "1"},
+          subviews = {}
         }
       }
     }
