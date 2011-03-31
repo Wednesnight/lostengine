@@ -9,8 +9,6 @@ local MatrixRotZ = lost.math.MatrixRotZ
 require("mesh")
 
 function startup()
---  require("lost/guiro")
---  createMesh()
   tasklet.clearNode.active = false
 
   rootNode = lost.rg.Node.create()
@@ -18,19 +16,10 @@ function startup()
   rootNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT))
   cam = lost.camera.Camera3D.create(Rect(0,0,tasklet.window.size.width,tasklet.window.size.height))
   cam:depth(Vec2(0.001,1000))
-  cam:position(Vec3(0,0,50))
+  cam:position(Vec3(50,50,150))
   rootNode:add(lost.rg.Camera.create(cam))
 
-  s = "Supercalifragilistic"
-  font = tasklet.fontManager:getFont("Grinched",20)
-  txtmesh = lost.font.render(s,font,false,0)
-  shader = lost.gl.loadShader(tasklet.loader, "lost/resources/glsl/basic_texture")
-  txtmesh.material.shader = shader
-  txtmesh.material:getTexture(0):filter(gl.GL_LINEAR)
-  txtmesh.transform = MatrixTranslation(Vec3(-100,-.5,-1))*MatrixRotY(20)*MatrixRotZ(10)
   rootNode:add(lost.rg.DepthTest.create(true))
-  rootNode:add(lost.rg.Draw.create(txtmesh))
---  rootNode:add(lost.rg.DepthTest.create(false))
   rootNode:add(lost.rg.Draw.create(createMesh()))
 
   tasklet.renderNode:add(rootNode)
