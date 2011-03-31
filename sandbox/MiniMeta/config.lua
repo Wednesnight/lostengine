@@ -1,7 +1,7 @@
 return {
   tasklet = {
     name = "MiniMeta",
-    waitForEvents = false
+    waitForEvents = true
   },
   window = {
     title = "MiniMeta",
