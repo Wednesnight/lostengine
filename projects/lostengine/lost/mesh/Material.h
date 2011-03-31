@@ -32,6 +32,7 @@ struct Material
   void blendOff();
   void add(const gl::TexturePtr& tex);
   void setTexture(uint32_t texIndex, const gl::TexturePtr& tex);
+  gl::TexturePtr getTexture(uint32_t idx);
   void limitTextures(uint32_t num); // throws away all textures with index > num
   MaterialPtr clone();
 };

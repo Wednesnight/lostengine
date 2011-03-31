@@ -58,6 +58,11 @@ void Material::setTexture(uint32_t texIndex, const gl::TexturePtr& tex)
   textures[texIndex] = tex;
 }
 
+gl::TexturePtr Material::getTexture(uint32_t idx)
+{
+  return textures[idx];
+}
+
 void Material::limitTextures(uint32_t num) // throws away all textures with index > num
 {
   textures.resize(num);

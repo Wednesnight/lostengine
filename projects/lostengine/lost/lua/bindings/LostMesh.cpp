@@ -127,6 +127,7 @@ namespace lost
             .def_readwrite("cullMode", &Material::cullMode)
             .def("add", &Material::add)
             .def("setTexture", &Material::setTexture)
+            .def("getTexture", &Material::getTexture)
             .def("limitTextures", &Material::limitTextures)
             .def("blendNormal", &Material::blendNormal)
             .def("blendPremultiplied", &Material::blendPremultiplied)
