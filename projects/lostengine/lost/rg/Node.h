@@ -18,7 +18,9 @@ namespace rg
 struct Node 
 {
   std::string name;
+  std::list<NodePtr> children;
   bool active;
+
   Node();
   virtual ~Node();
   
@@ -27,8 +29,8 @@ struct Node
   void addFront(NodePtr& child);
   void remove(const NodePtr& child);
   void removeLast();
+  void clear();
   static NodePtr create();
-  std::list<NodePtr> children;
   
   NodePtr recursiveFindByName(const std::string& inName);
   

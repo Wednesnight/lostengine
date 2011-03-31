@@ -29,6 +29,11 @@ namespace lost
       
     }
 
+    void Node::clear()
+    {
+      children.clear();
+    }
+
     void Node::print()
     {
       uint32_t numNodes, enabledNodes;

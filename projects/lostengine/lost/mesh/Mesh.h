@@ -16,8 +16,6 @@ namespace lost
 namespace mesh
 {
 
-// Mesh base class, provides a render() method that applies the relevant minimal state 
-// and issues the gl calls for drawing
 struct Mesh
 {
   Mesh();
