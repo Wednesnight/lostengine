@@ -44,7 +44,7 @@ end
 function createMesh()
   local result = createQuad(lost.math.Rect(0,0,100,100),-10)
   result.material.color = Color(0,1,0)
-  result.material.shader = lost.gl.loadShader(tasklet.loader,"lost/resources/glsl/basic_color")
+  result.material.shader = lost.gl.loadShader(tasklet.loader,"meta")
   return result
 end
 
