@@ -6,7 +6,9 @@ local MatrixTranslation = lost.math.MatrixTranslation
 local MatrixRotY = lost.math.MatrixRotY
 local MatrixRotZ = lost.math.MatrixRotZ
 
-function createQuad(rect,meshZ,mbZ)
+require("Cube")
+
+function createQuad(rect,meshZ,mbZ,col)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec3_f32, gl.UT_position, 0)
   layout:add(gl.ET_vec3_f32, gl.UT_vertexAttrib0, 0)
@@ -38,14 +40,9 @@ function createQuad(rect,meshZ,mbZ)
   mesh.material.uniforms = lost.gl.UniformBlock.create()
   mesh.material:blendPremultiplied()
   mesh.material.cull = false
+  mesh.material.color = col
+  mesh.material.shader = metaShader
   return mesh
-end
-
-function createMesh(meshZ,mbZ,col)
-  local result = createQuad(lost.math.Rect(0,0,200,200),meshZ,mbZ)
-  result.material.color = col
-  result.material.shader = metaShader
-  return result
 end
 
 function startup()
@@ -58,16 +55,17 @@ function startup()
   rootNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT))
   cam = lost.camera.Camera3D.create(Rect(0,0,tasklet.window.size.width,tasklet.window.size.height))
   cam:depth(Vec2(0.001,1000))
-  cam:position(Vec3(150,150,75))
+  cam:position(Vec3(150,250,120))
   cam:target(Vec3(50,50,0))
   rootNode:add(lost.rg.Camera.create(cam))
 
+  local cubeSize = 200
+
+  cube = meta.Cube{color=Color(.1,.6,0),size=200,numPlanes=100}
+
   rootNode:add(lost.rg.DepthTest.create(false))
-  rootNode:add(lost.rg.Draw.create(createMesh(0,0,Color(.1,1,0))))
-  rootNode:add(lost.rg.Draw.create(createMesh(10,.1,Color(.2,.9,0))))
-  rootNode:add(lost.rg.Draw.create(createMesh(20,.2,Color(.3,.8,0))))
-  rootNode:add(lost.rg.Draw.create(createMesh(30,.3,Color(.4,.7,0))))
-  rootNode:add(lost.rg.Draw.create(createMesh(40,.4,Color(.5,.6,0))))
+  rootNode:add(cube.renderNode)
+
 
   tasklet.renderNode:add(rootNode)
 

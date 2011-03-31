@@ -54,6 +54,7 @@ namespace lost
           .def("process", &Node::process)
           .def("recursiveFindByName", &Node::recursiveFindByName)
           .def("print", &Node::print)
+          .def("clear",&Node::clear)
           .scope
           [
             def("create", &Node::create)
