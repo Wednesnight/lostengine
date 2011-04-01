@@ -59,16 +59,16 @@ function startup()
   rootNode:add(lost.rg.ClearColor.create(Color(0,0,0,1)))
   rootNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT+gl.GL_DEPTH_BUFFER_BIT))
   cam = lost.camera.Camera3D.create(Rect(0,0,tasklet.window.size.width,tasklet.window.size.height))
-  cam:depth(Vec2(0.001,300))
-  cam:position(Vec3(100,00,150))
+  cam:depth(Vec2(0.001,1000))
+  cam:position(Vec3(100,00,200))
   cam:target(Vec3(0,0,0))
   rootNode:add(lost.rg.Camera.create(cam))
 
   local cubeSize = 200
 
-  cube = meta.Cube{color=Color(.1,.06,.0),size=200,numPlanes=10}
+  cube = meta.Cube{color=Color(.1,.6,.0),size=200,numPlanes=30}
 
-  rootNode:add(lost.rg.DepthTest.create(false))
+  rootNode:add(lost.rg.DepthTest.create(true))
   rootNode:add(cube.renderNode)
 
 
