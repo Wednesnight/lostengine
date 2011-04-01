@@ -13,43 +13,6 @@ mbdown = false
 roty = 0
 rotx = 0
 
-function createQuad(rect,meshZ,mbZ,col)
-  local layout = lost.gl.BufferLayout()
-  layout:add(gl.ET_vec3_f32, gl.UT_position, 0)
-  layout:add(gl.ET_vec3_f32, gl.UT_vertexAttrib0, 0)
-  local mesh = lost.mesh.Mesh.create(layout, gl.ET_u16)
-  mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
-  local numVerts = 4
-  local numTris = 2
-  local numIndicesPerTri = 3
-  local numIndices = numTris * numIndicesPerTri
-  mesh:resetSize(numVerts, numIndices)
-  
-  mesh:set(0,gl.UT_position, Vec3(rect.x,rect.y,meshZ))
-  mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,rect.y,meshZ))
-  mesh:set(2,gl.UT_position, Vec3(rect.x+rect.width,rect.y+rect.height,meshZ))
-  mesh:set(3,gl.UT_position, Vec3(rect.x,rect.y+rect.height,meshZ))
-
-  mesh:set(0,gl.UT_vertexAttrib0, Vec3(0,0,mbZ))
-  mesh:set(1,gl.UT_vertexAttrib0, Vec3(1,0,mbZ))
-  mesh:set(2,gl.UT_vertexAttrib0, Vec3(1,1,mbZ))
-  mesh:set(3,gl.UT_vertexAttrib0, Vec3(0,1,mbZ))
-
-  mesh:setU16(0,gl.UT_index, 0)
-  mesh:setU16(1,gl.UT_index, 1)
-  mesh:setU16(2,gl.UT_index, 2)
-  mesh:setU16(3,gl.UT_index, 2)
-  mesh:setU16(4,gl.UT_index, 3)
-  mesh:setU16(5,gl.UT_index, 0)
-
-  mesh.material.uniforms = lost.gl.UniformBlock.create()
-  mesh.material:blendPremultiplied()
-  mesh.material.cull = false
-  mesh.material.color = col
-  mesh.material.shader = metaShader
-  return mesh
-end
-
 function startup()
   tasklet.clearNode.active = false
 
@@ -78,6 +41,7 @@ function startup()
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE,mouseMove)
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_UP,mouseUp)
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_DOWN,mouseDown)
+  tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_SCROLL,mouseScroll)
 end
 
 function update()
@@ -91,6 +55,14 @@ function mouseMove(event)
     mousey = event.pos.y
     cube:transform(MatrixRotY(roty)*MatrixRotX(rotx))
   end
+end
+
+function mouseScroll(event)
+  local dir = cam:direction()
+  local pos = cam:position()
+  lost.math.normalise(dir)
+  pos = pos + (dir * event.scrollDelta.y)
+  cam:position(pos)
 end
 
 function mouseUp(event)
