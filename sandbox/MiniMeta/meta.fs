@@ -17,7 +17,7 @@ void main(void)
 
   float f = pow(mb(pos1,rad1,va0)+mb(pos2,rad2,va0),80.0);
   vec4 col = color*f;
-  if(col.a < .01) discard;
-  col.a = 1.0; 
-  gl_FragColor = col; //vec4(1,0,0,col.a);
+  if(col.a < .5) discard;
+  col.a = 1.0;
+  gl_FragColor = col; //vec4(col.rgb/(gl_FragCoord.z*5.0),1.0); //vec4(1,0,0,col.a);
 }
