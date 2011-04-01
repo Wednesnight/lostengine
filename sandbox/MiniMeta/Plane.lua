@@ -39,7 +39,7 @@ function Plane:constructor(args)
   self.mesh:setU16(5,gl.UT_index, 0)
 
   self.mesh.material.uniforms = lost.gl.UniformBlock.create()
-  self.mesh.material:blendPremultiplied()
+  self.mesh.material:blendOff()
   self.mesh.material.cull = false
   self.mesh.material.color = args.color
   self.mesh.material.shader = metaShader
