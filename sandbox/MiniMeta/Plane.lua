@@ -17,6 +17,7 @@ lost.common.Class "meta.Plane" {}
 function Plane:constructor(args)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec3_f32, gl.UT_position, 0)
+  layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
   layout:add(gl.ET_vec3_f32, gl.UT_vertexAttrib0, 0)
   self.mesh = lost.mesh.Mesh.create(layout, gl.ET_u16)
   self.mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
@@ -52,6 +53,19 @@ function Plane:xy(args)
   local mbZ = args.metaOffset
   local offset = args.offset
 
+  local p0 = Vec3(rect.x,rect.y,meshZ)+offset
+  local p1 = Vec3(rect.x+rect.width,rect.y,meshZ)+offset
+  local p2 = Vec3(rect.x+rect.width,rect.y+rect.height,meshZ)+offset
+  local v0 = p1 - p0
+  local v1 = p2-p0
+  local n = lost.math.cross(v0,v1)
+  lost.math.normalise(n)
+
+  self.mesh:set(0,gl.UT_normal,n)
+  self.mesh:set(1,gl.UT_normal,n)
+  self.mesh:set(2,gl.UT_normal,n)
+  self.mesh:set(3,gl.UT_normal,n)
+
   self.mesh:set(0,gl.UT_position, Vec3(rect.x,rect.y,meshZ)+offset)
   self.mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,rect.y,meshZ)+offset)
   self.mesh:set(2,gl.UT_position, Vec3(rect.x+rect.width,rect.y+rect.height,meshZ)+offset)
@@ -68,6 +82,19 @@ function Plane:xz(args)
   local meshY = args.meshOffset
   local mbY = args.metaOffset
   local offset = args.offset
+
+  local p0 = Vec3(rect.x,meshY,rect.y)+offset
+  local p1 = Vec3(rect.x+rect.width,meshY,rect.y)+offset
+  local p2 = Vec3(rect.x+rect.width,meshY,rect.y+rect.height)+offset
+  local v0 = p1 - p0
+  local v1 = p2-p0
+  local n = lost.math.cross(v0,v1)
+  lost.math.normalise(n)
+
+  self.mesh:set(0,gl.UT_normal,n)
+  self.mesh:set(1,gl.UT_normal,n)
+  self.mesh:set(2,gl.UT_normal,n)
+  self.mesh:set(3,gl.UT_normal,n)
   
   self.mesh:set(0,gl.UT_position, Vec3(rect.x,meshY,rect.y)+offset)
   self.mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,meshY,rect.y)+offset)
@@ -85,6 +112,26 @@ function Plane:zy(args)
   local meshX = args.meshOffset
   local mbX = args.metaOffset
   local offset = args.offset
+
+  local p0 = Vec3(meshX,rect.y,rect.x)+offset
+  local p1 = Vec3(meshX,rect.y,rect.x+rect.width)+offset
+  local p2 = Vec3(meshX,rect.y+rect.height,rect.x+rect.width)+offset
+  log.debug("p0: "..tostring(p0))
+  log.debug("p1: "..tostring(p1))
+  log.debug("p2: "..tostring(p2))
+  local v0 = p1 - p0
+  local v1 = p2-p0
+  log.debug("v0: "..tostring(v0))
+  log.debug("v1: "..tostring(v1))
+  local n = lost.math.cross(v0,v1)
+  log.debug("pre normal: "..tostring(n))  
+  lost.math.normalise(n)
+  log.debug("post normal: "..tostring(n))
+
+  self.mesh:set(0,gl.UT_normal,n)
+  self.mesh:set(1,gl.UT_normal,n)
+  self.mesh:set(2,gl.UT_normal,n)
+  self.mesh:set(3,gl.UT_normal,n)
   
   self.mesh:set(0,gl.UT_position, Vec3(meshX,rect.y,rect.x)+offset)
   self.mesh:set(1,gl.UT_position, Vec3(meshX,rect.y,rect.x+rect.width)+offset)
