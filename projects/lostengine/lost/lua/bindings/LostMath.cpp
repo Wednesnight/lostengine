@@ -113,6 +113,7 @@ namespace lost
           def("len", (float(*)(const Vec3&))&len),
           def("squlen", (float(*)(const Vec3&))&squlen),
           def("normalise", (Vec3&(*)(Vec3&))&normalise),
+          def("cross", &cross),
           def("angle", (float(*)(const Vec3&, const Vec3&))&angle),
           def("compare", (bool(*)(const Vec3&, const Vec3&, float))&compare)
         ]
