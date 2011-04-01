@@ -50,14 +50,49 @@ function Plane:xy(args)
   local rect = args.rect
   local meshZ = args.meshOffset
   local mbZ = args.metaOffset
-  
-  self.mesh:set(0,gl.UT_position, Vec3(rect.x,rect.y,meshZ))
-  self.mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,rect.y,meshZ))
-  self.mesh:set(2,gl.UT_position, Vec3(rect.x+rect.width,rect.y+rect.height,meshZ))
-  self.mesh:set(3,gl.UT_position, Vec3(rect.x,rect.y+rect.height,meshZ))
+  local offset = args.offset
+
+  self.mesh:set(0,gl.UT_position, Vec3(rect.x,rect.y,meshZ)+offset)
+  self.mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,rect.y,meshZ)+offset)
+  self.mesh:set(2,gl.UT_position, Vec3(rect.x+rect.width,rect.y+rect.height,meshZ)+offset)
+  self.mesh:set(3,gl.UT_position, Vec3(rect.x,rect.y+rect.height,meshZ)+offset)
 
   self.mesh:set(0,gl.UT_vertexAttrib0, Vec3(0,0,mbZ))
   self.mesh:set(1,gl.UT_vertexAttrib0, Vec3(1,0,mbZ))
   self.mesh:set(2,gl.UT_vertexAttrib0, Vec3(1,1,mbZ))
   self.mesh:set(3,gl.UT_vertexAttrib0, Vec3(0,1,mbZ))
+end
+
+function Plane:xz(args)
+  local rect = args.rect
+  local meshY = args.meshOffset
+  local mbY = args.metaOffset
+  local offset = args.offset
+  
+  self.mesh:set(0,gl.UT_position, Vec3(rect.x,meshY,rect.y)+offset)
+  self.mesh:set(1,gl.UT_position, Vec3(rect.x+rect.width,meshY,rect.y)+offset)
+  self.mesh:set(2,gl.UT_position, Vec3(rect.x+rect.width,meshY,rect.y+rect.height)+offset)
+  self.mesh:set(3,gl.UT_position, Vec3(rect.x,meshY,rect.y+rect.height)+offset)
+
+  self.mesh:set(0,gl.UT_vertexAttrib0, Vec3(0,mbY,0))
+  self.mesh:set(1,gl.UT_vertexAttrib0, Vec3(1,mbY,0))
+  self.mesh:set(2,gl.UT_vertexAttrib0, Vec3(1,mbY,1))
+  self.mesh:set(3,gl.UT_vertexAttrib0, Vec3(0,mbY,1))
+end
+
+function Plane:zy(args)
+  local rect = args.rect
+  local meshX = args.meshOffset
+  local mbX = args.metaOffset
+  local offset = args.offset
+  
+  self.mesh:set(0,gl.UT_position, Vec3(meshX,rect.y,rect.x)+offset)
+  self.mesh:set(1,gl.UT_position, Vec3(meshX,rect.y,rect.x+rect.width)+offset)
+  self.mesh:set(2,gl.UT_position, Vec3(meshX,rect.y+rect.height,rect.x+rect.width)+offset)
+  self.mesh:set(3,gl.UT_position, Vec3(meshX,rect.y+rect.height,rect.x)+offset)
+
+  self.mesh:set(0,gl.UT_vertexAttrib0, Vec3(mbX,0,0))
+  self.mesh:set(1,gl.UT_vertexAttrib0, Vec3(mbX,0,1))
+  self.mesh:set(2,gl.UT_vertexAttrib0, Vec3(mbX,1,1))
+  self.mesh:set(3,gl.UT_vertexAttrib0, Vec3(mbX,1,0))
 end
