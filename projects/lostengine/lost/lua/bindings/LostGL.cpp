@@ -43,6 +43,7 @@ namespace lost
             .def("vsync", &Context::vsync)
             .def("multithreaded", &Context::multithreaded)
             .def("writeScreenshot", &Context::writeScreenshot)
+            .def("shader",&Context::shader)
         ]
       ];
     }

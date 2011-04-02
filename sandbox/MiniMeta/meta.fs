@@ -1,4 +1,7 @@
 uniform vec4 color; // same semantics as gl_Color
+uniform float drama;
+uniform float ambience;
+
 varying vec3 va0;
 varying vec4 nv;
 varying vec4 pos;
@@ -17,7 +20,7 @@ void main(void)
   float rad2 = .045;
   vec3 pos2 = vec3(.7,.7,.7);
 
-  float f = pow(mb(pos1,rad1,va0)+mb(pos2,rad2,va0),80.0);
+  float f = pow(mb(pos1,rad1,va0)+mb(pos2,rad2,va0),drama);
   vec4 col = color*f;
   if(col.a < .5) discard;
   col.a = 1.0;
@@ -25,7 +28,6 @@ void main(void)
   vec4 lightpos = vec4(300,300,300,1.0);
 //  vec4 lightcol = vec4(1,1,1,1);
   vec4 lightvec = normalize(lightpos-pos);
-  float ambience = 0.0;
   float light = clamp(max(dot(abs(nv),lightvec),0.0)+ambience,0.,1.);
   
 //  gl_FragColor = vec4(1.,1.,1.,1.)*light; //col*light; //vec4(col.rgb/(gl_FragCoord.z*5.0),1.0); //vec4(1,0,0,col.a);

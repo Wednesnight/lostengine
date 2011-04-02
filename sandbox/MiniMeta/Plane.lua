@@ -116,17 +116,10 @@ function Plane:zy(args)
   local p0 = Vec3(meshX,rect.y,rect.x)+offset
   local p1 = Vec3(meshX,rect.y,rect.x+rect.width)+offset
   local p2 = Vec3(meshX,rect.y+rect.height,rect.x+rect.width)+offset
-  log.debug("p0: "..tostring(p0))
-  log.debug("p1: "..tostring(p1))
-  log.debug("p2: "..tostring(p2))
   local v0 = p1 - p0
   local v1 = p2-p0
-  log.debug("v0: "..tostring(v0))
-  log.debug("v1: "..tostring(v1))
   local n = lost.math.cross(v0,v1)
-  log.debug("pre normal: "..tostring(n))  
   lost.math.normalise(n)
-  log.debug("post normal: "..tostring(n))
 
   self.mesh:set(0,gl.UT_normal,n)
   self.mesh:set(1,gl.UT_normal,n)
