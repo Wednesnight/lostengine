@@ -17,18 +17,19 @@ function startup()
 
   lost.guiro.ui():add
   {
-    lost.guiro.view.TabView
-    {
-      style="square",
-      size="regular",
-      items={{"Layers",require("layers")},
-             {"Views",require("views")},
-             {"Animations",require("animations")}}
-    },
---    lost.guiro.view.FpsMeter
---    {
---      bounds={"right","bottom",140,70}
---    }
+    lost.guiro.view.View{
+      style="gray",
+      subviews={
+        lost.guiro.view.TabView
+        {
+          style="square",
+          size="regular",
+          items={{"Layers",require("layers")},
+                 {"Views",require("views")},
+                 {"Animations",require("animations")}}
+        },
+      }
+    }
   }
 
   local et = lost.platform.currentTimeSeconds()

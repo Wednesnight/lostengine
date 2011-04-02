@@ -31,7 +31,7 @@ function Pebble:constructor()
   self:addStyle("lost.guiro.view.View", "default", function(target, args)  end)
   self:addStyle("lost.guiro.view.View", "gray", function(target, args) self:viewGray(target, args) end)
   self:addStyle("lost.guiro.view.View", "toolbar", function(target, args) self:viewToolbar(target, args) end)
-  self:addStyle("lost.guiro.view.UserInterface", "default", function(target, args) self:viewGray(target, args) end)
+  self:addStyle("lost.guiro.view.UserInterface", "default", function(target, args)  end)
 
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundSingle", function(target, args) self:buttonTabCandyRoundSingle(target, args) end)
   self:addStyle("lost.guiro.view.Button", "tabCandyRoundLeft", function(target, args) self:buttonTabCandyRoundLeft(target, args) end)

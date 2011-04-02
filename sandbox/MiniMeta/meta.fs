@@ -22,7 +22,7 @@ void main(void)
   if(col.a < .5) discard;
   col.a = 1.0;
   
-  vec4 lightpos = vec4(50,50,50,1.0);
+  vec4 lightpos = vec4(300,300,300,1.0);
 //  vec4 lightcol = vec4(1,1,1,1);
   vec4 lightvec = normalize(lightpos-pos);
   float ambience = 0.0;
