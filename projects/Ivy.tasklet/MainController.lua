@@ -11,15 +11,20 @@ end
 
 function MainController:buildUi()
   lost.guiro.ui():add{
-    lost.guiro.view.TabView
-    {
-      style="square",
-      items=
-      {
-        {"Files",self.fileListController:view()},
-        {"Atlas",lost.guiro.view.View{}},
+    lost.guiro.view.View{
+      style="gray",
+      subviews={
+        lost.guiro.view.TabView
+        {
+          style="square",
+          items=
+          {
+            {"Files",self.fileListController:view()},
+            {"Atlas",lost.guiro.view.View{}},
+          }
+        }    
       }
-    }    
+    }
   }
   lost.guiro.ui():addEventListener("drop",function(event) self:fileDropped(event) end)
 

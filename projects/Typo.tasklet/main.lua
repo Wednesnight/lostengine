@@ -16,6 +16,7 @@ function startup()
   lost.guiro.ui():add{
     lost.guiro.view.View
     {
+      style="gray",
       subviews={
         lost.guiro.view.TextInput
         {

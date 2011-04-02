@@ -14,6 +14,8 @@ roty = 0
 rotx = 0
 
 function startup()
+  require("lost/guiro")
+  lost.guiro.ui():add{require("ui")}
   tasklet.clearNode.active = false
 
   metaShader = lost.gl.loadShader(tasklet.loader,"meta");
