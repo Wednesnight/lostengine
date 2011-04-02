@@ -16,9 +16,13 @@ rotx = 0
 function startup()
   require("lost/guiro")
   lost.guiro.ui():add{require("ui")}
+  controlPanel = lost.guiro.ui():recursiveFindById("controlPanel")
   tasklet.clearNode.active = false
 
   metaShader = lost.gl.loadShader(tasklet.loader,"meta");
+  tasklet.window.context:shader(metaShader)
+  metaShader:setFloat("drama",80)
+  metaShader:setFloat("ambience",0)
 
   rootNode = lost.rg.Node.create()
   rootNode:add(lost.rg.ClearColor.create(Color(0,0,0,1)))
@@ -72,9 +76,11 @@ function mouseUp(event)
 end
 
 function mouseDown(event)
-  mbdown = true
-  mousex = event.pos.x
-  mousey = event.pos.y
+  if not controlPanel:containsCoord(event.pos) then
+    mbdown = true
+    mousex = event.pos.x
+    mousey = event.pos.y
+  end
 end
 
 function resize(event)
@@ -84,5 +90,7 @@ end
 function key(event)
   if event.key == lost.application.K_ESCAPE then
     tasklet.running = false
+  elseif event.key == lost.application.K_TAB and event.pressed then
+    controlPanel:hidden(not controlPanel:hidden())
   end
 end

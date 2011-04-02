@@ -51,12 +51,10 @@ namespace math
 
  Vec3 cross(const Vec3& inOp1, const Vec3& inOp2)
 {
-  DOUT("cross input "<<inOp1<<" "<<inOp2);
   Vec3 result = 
      Vec3(inOp1.y * inOp2.z - inOp1.z * inOp2.y,
                 inOp1.z * inOp2.x - inOp1.x * inOp2.z,
                 inOp1.x * inOp2.y - inOp1.y * inOp2.x);
-  DOUT("cross result "<<result);
   return result;
 }
 
