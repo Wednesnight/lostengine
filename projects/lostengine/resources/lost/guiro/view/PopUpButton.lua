@@ -12,7 +12,7 @@ function PopUpButton:constructor(args)
   for k,v in pairs(self.menuStyleParams) do -- copy over params that were given by PopUpButton style
     ms[k] = v
   end
-  local incoming = t.menu or {} -- find the incoming menu definition that should at lesast contain items, but can overwrite other params
+  local incoming = t.menu or {} -- find the incoming menu definition that should at least contain items, but can overwrite other params
   for k,v in pairs(incoming) do 
     ms[k] = v
   end
