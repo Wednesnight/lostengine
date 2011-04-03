@@ -13,9 +13,40 @@ mbdown = false
 roty = 0
 rotx = 0
 
+function applyPreset(shader,presetTable)
+  tasklet.window.context:shader(shader)
+  for k,v in pairs(presetTable) do
+    if type(v) == "table" then
+      local name = v[1]
+      local val = v[2]
+      local ptype = v[3]
+      if ptype == nil then shader:set(name,val)
+      elseif ptype == "float" then shader:setFloat(name,val)
+      elseif ptype == "int" then shader:setInt(name,val)
+      elseif ptype == "bool" then shader:setBool(name,val)
+      end
+    end
+  end
+end
+
+function changePresetHandler(event)
+  log.debug("preset value "..tostring(event.indexPath[1]))
+  applyPreset(metaShader,presets[event.indexPath[1]])
+end
+
 function startup()
   require("lost/guiro")
+  presets = require("presets")
+  popupitems = {}
+  for k,v in pairs(presets) do
+    table.insert(popupitems,{title=v.name})
+    log.debug("found preset "..v.name)
+  end
   lost.guiro.ui():add{require("ui")}
+  presetButton = lost.guiro.ui():recursiveFindById("presets")
+  presetButton:items(popupitems)
+  presetButton:addEventListener("menuItemSelected",changePresetHandler)
+  
   controlPanel = lost.guiro.ui():recursiveFindById("controlPanel")
   tasklet.clearNode.active = false
 
