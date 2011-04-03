@@ -16,6 +16,7 @@ return lost.guiro.view.View
     lost.guiro.view.Slider
     {
       id="drama",
+      size="mini",
       bounds={"center",{"top",-20},{"1",-40},20},
       min=1,
       max=200,
@@ -26,6 +27,12 @@ return lost.guiro.view.View
       bounds={"center",{"top",-60},{"1",-40},20},
       min=0,
       max=1,
+    },
+    lost.guiro.view.PopUpButton
+    {
+      id="presets",
+      size="mini",
+      bounds={"center",{"top",-100},{"1",-40},20},
     }
   }
 }
