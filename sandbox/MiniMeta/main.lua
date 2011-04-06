@@ -13,6 +13,20 @@ mbdown = false
 roty = 0
 rotx = 0
 
+timeaccu = 0
+fps = 60
+timestep = 1/fps
+rad1 = 0
+
+pos1start = Vec3(1.2,1.2,1.2)
+pos1end = Vec3(.3,.3,.3)
+pos1time = 10
+pos1timecur = 0
+pos1delta = pos1end-pos1start
+pos1current = Vec3(.5,.5,.5)
+pos1dir = 1 -- 2
+
+
 function applyPreset(shader,presetTable)
   tasklet.window.context:shader(shader)
   for k,v in pairs(presetTable) do
@@ -81,7 +95,29 @@ function startup()
   tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_SCROLL,mouseScroll)
 end
 
-function update()
+function updateStuff()
+  pos1current = pos1start+pos1delta*(pos1timecur/pos1time)
+  tasklet.window.context:shader(metaShader)
+  metaShader:set("pos1",pos1current)
+  if pos1timecur < 0 then dir = 1 
+  elseif pos1timecur > pos1time then dir = 2
+  end
+  
+  if dir == 1 then 
+    pos1timecur =  pos1timecur + timestep
+  else
+    pos1timecur =  pos1timecur - timestep
+  end
+end
+
+function update(delta)
+  timeaccu = timeaccu + delta
+  if timeaccu >= timestep then
+    while timeaccu >= timestep do
+      updateStuff()
+      timeaccu = timeaccu - timestep
+    end
+  end
 end
 
 function mouseMove(event)
