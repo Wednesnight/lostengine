@@ -38,7 +38,7 @@ struct shared_array : public std::tr1::shared_ptr<T>
     }    
 };
 
-};
+}
 
 #else // HAVE_TR1_SHARED_PTR
 
@@ -59,7 +59,7 @@ using boost::enable_shared_from_this;
 using boost::static_pointer_cast;
 using boost::dynamic_pointer_cast;
 using boost::const_pointer_cast;
-};
+}
 
 #else // HAVE_BOOST_SHARED_PTR
 
