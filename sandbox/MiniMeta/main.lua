@@ -7,7 +7,7 @@ local MatrixRotY = lost.math.MatrixRotY
 local MatrixRotX = lost.math.MatrixRotX
 local MatrixRotZ = lost.math.MatrixRotZ
 
-require("Cube")
+require("Cube2")
 
 mbdown = false
 roty = 0
@@ -66,8 +66,7 @@ function startup()
 
   metaShader = lost.gl.loadShader(tasklet.loader,"meta");
   tasklet.window.context:shader(metaShader)
-  metaShader:setFloat("drama",80)
-  metaShader:setFloat("ambience",0)
+  applyPreset(metaShader,presets[1])
 
   rootNode = lost.rg.Node.create()
   rootNode:add(lost.rg.ClearColor.create(Color(0,0,0,1)))
@@ -80,7 +79,7 @@ function startup()
 
   local cubeSize = 200
 
-  cube = meta.Cube{color=Color(.1,.6,.0),size=200,numPlanes=70}
+  cube = meta.Cube{color=Color(.1,.6,.0),size=200,numPlanes=170}
 
   rootNode:add(lost.rg.DepthTest.create(true))
   rootNode:add(cube.renderNode)
