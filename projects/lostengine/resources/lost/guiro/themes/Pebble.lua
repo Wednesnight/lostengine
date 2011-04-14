@@ -1385,7 +1385,6 @@ function Pebble:popUpButtonCandy(target, args)
   local imageBounds = {{"right",imageOffset[1]-d},
                        {"center",imageOffset[2]},
                        imageSize[1],imageSize[2]}
-  log.debug("imagesize "..tostring(imageSize[1]).." "..tostring(imageSize[2]))
   local normal = l{sublayers={rr{bounds={0,0,{"1",-rightWidth},"1"},gradient="candyGray",filled=true,radius=r,sides={right=false}},
                               rr{bounds={0,0,{"1",-rightWidth},"1"},gradient="candyGrayFrame",filled=false,radius=r,sides={right=false}},
                               rr{bounds={"right",0,rightWidth,"1"},gradient="candyBlue",filled=true,radius=r,sides={left=false}},
