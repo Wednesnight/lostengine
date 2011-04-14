@@ -15,8 +15,8 @@ namespace math
     Rect();
 
     void operator +=( const lost::math::Vec2& parentPos );
-    bool operator ==(const Rect& rect);
-    bool operator !=(const Rect& rect);
+    bool operator ==(const Rect& rect) const;
+    bool operator !=(const Rect& rect) const;
     bool operator !();
     lost::math::Vec2 pos() const;
     void clipTo(const lost::math::Rect& parent);
