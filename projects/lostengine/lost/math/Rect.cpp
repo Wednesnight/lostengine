@@ -18,7 +18,7 @@ namespace math
       y += parentPos.y;
     }
 
-    bool Rect::operator ==(const Rect& rect)
+    bool Rect::operator ==(const Rect& rect) const
     {
       return (x == rect.x &&
               y == rect.y &&
@@ -26,7 +26,7 @@ namespace math
               height == rect.height);
     }
     
-    bool Rect::operator !=(const Rect& rect)
+    bool Rect::operator !=(const Rect& rect) const
     {
       return !(*this == rect);
     }
