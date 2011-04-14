@@ -45,6 +45,7 @@ namespace lost
       bool texture2DEnabled;
       common::Color currentClearColor;
       camera::CameraPtr currentCam;
+      math::Rect currentViewport;
       GLenum currentActiveTexture;
       ShaderProgramPtr currentShader;
       math::Matrix currentTransform;
@@ -114,7 +115,7 @@ namespace lost
       void clearColor(const common::Color& col); // sets the current clear color to col
       
       void camera(const camera::CameraPtr& cam);
-      
+      void viewport(const math::Rect& val);
       void clear(GLbitfield flags);    
       
       void activeTexture(GLenum tex); // sets the currently active texture unit

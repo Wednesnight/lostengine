@@ -249,13 +249,21 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
 
+    void Context::viewport(const math::Rect& val)
+    {
+      if(val != currentViewport)
+      {
+        glViewport((GLint)val.x, (GLint)val.y, (GLsizei)val.width, (GLsizei)val.height);GLDEBUG;
+        currentViewport = val;
+      }
+    }
+
     // only update if the new cam is either a new one or the same one, but with the dirty flag set. 
     void Context::camera(const camera::CameraPtr& cam)
     {
       if (currentCam != cam || currentCam->needsUpdate)
       {
-        math::Rect viewport = cam->viewport();
-        glViewport((GLint)viewport.x, (GLint)viewport.y, (GLsizei)viewport.width, (GLsizei)viewport.height);GLDEBUG;
+        viewport(cam->viewport());
         if (currentCam != cam) currentCam = cam;
       }
     }
