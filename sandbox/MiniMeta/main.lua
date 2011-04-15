@@ -79,7 +79,7 @@ function startup()
 
   local cubeSize = 200
 
-  cube = meta.Cube{color=Color(.1,.6,.0),size=200,numPlanes=170}
+  cube = meta.Cube{color=Color(.1,.6,.0),size=200,numPlanes=20}
 
   rootNode:add(lost.rg.DepthTest.create(true))
   rootNode:add(cube.renderNode)
