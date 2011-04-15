@@ -36,6 +36,7 @@ depthRenderbuffer = _depthRenderbuffer
 		_context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];        
     if (!_context || ![EAGLContext setCurrentContext:_context])
 		{
+      EOUT("failed to create context, aborting");
       [self release];
       return nil;
     }
@@ -50,9 +51,9 @@ depthRenderbuffer = _depthRenderbuffer
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderbuffer);GLDEBUG;
     
     
-    glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 320, 480);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 768, 1024);GLDEBUG;
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
     
 //		glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
 //    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
@@ -74,7 +75,7 @@ depthRenderbuffer = _depthRenderbuffer
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);*/
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-      DOUT("Failed to make complete framebuffer object " << glCheckFramebufferStatus(GL_FRAMEBUFFER));
+      EOUT("Failed to make complete framebuffer object " << glCheckFramebufferStatus(GL_FRAMEBUFFER));
   }  
 }
 
