@@ -35,7 +35,7 @@
 #include "ftutil.c"
 
 #if defined( FT_MACINTOSH ) && !defined ( DARWIN_NO_CARBON )
-#include "ftmac.c"
+//#include "ftmac.c"
 #endif
 
 /* END */
