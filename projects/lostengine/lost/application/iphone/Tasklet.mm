@@ -64,17 +64,17 @@ namespace lost
     struct Tasklet::TaskletHiddenMembers
     {
       TaskletDisplayLink* displayLink;
+      double offset;
     };
 
     void Tasklet::start()
     {
       DOUT("");
       init();
-      startup()
+      startup();
       if(running)
       {
         isAlive = true;
-
         // FIXME: fake resize event from here, window size won't probably ever change so we're fine
         lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(new lost::application::ResizeEvent(320, 480));
         eventDispatcher->dispatchEvent(resizeEvent);
@@ -83,6 +83,7 @@ namespace lost
         hiddenMembers.reset(new TaskletHiddenMembers);
         hiddenMembers->displayLink = [[TaskletDisplayLink alloc] initWithTasklet:this];
         [hiddenMembers->displayLink start];
+        hiddenMembers->offset = clock.getTime();
       }
       else
       {
@@ -92,14 +93,15 @@ namespace lost
 
     void Tasklet::run()
     {
-        update()
+        processEvents();
+        double framerate = clock.getElapsedAndUpdateOffset(hiddenMembers->offset);
+        update(framerate);
         if(running)
         {
           window->context->makeCurrent();
           window->context->defaultFramebuffer();
         
           render();
-          processEvents();
         }
         else
         {

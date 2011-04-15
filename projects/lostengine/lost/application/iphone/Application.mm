@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #include "lost/application/Application.h"
 #include "lost/common/Logger.h"
+#include "lost/application/Tasklet.h"
 
 lost::application::Application* gApplicationPointerForLEApplicationDelegate = NULL;
 
@@ -9,6 +10,14 @@ namespace lost
 {
 namespace application
 {
+std::string Tasklet::getClipboardString()
+{
+  return std::string("");
+}
+bool Tasklet::setClipboardString(const std::string& str)
+{
+  return true;
+}
 
 void Application::showMouse(bool v) {}
 
