@@ -1,0 +1,715 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		EA4F344A13660C8C00183112 /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F344813660C8C00183112 /* ConvertUTF.c */; };
+		EA4F345813660CBA00183112 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F344B13660CBA00183112 /* adler32.c */; };
+		EA4F345913660CBA00183112 /* compress.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F344C13660CBA00183112 /* compress.c */; };
+		EA4F345A13660CBA00183112 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F344D13660CBA00183112 /* crc32.c */; };
+		EA4F345B13660CBA00183112 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F344F13660CBA00183112 /* deflate.c */; };
+		EA4F345C13660CBA00183112 /* inffast.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F345113660CBA00183112 /* inffast.c */; };
+		EA4F345D13660CBA00183112 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F345413660CBA00183112 /* inflate.c */; };
+		EA4F345E13660CBA00183112 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F345613660CBA00183112 /* inftrees.c */; };
+		EA4F346613660CC200183112 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F345F13660CC200183112 /* trees.c */; };
+		EA4F346713660CC200183112 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F346413660CC200183112 /* zutil.c */; };
+		EA4F346D13660CD300183112 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F346913660CD300183112 /* ioapi.c */; };
+		EA4F346E13660CD300183112 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = EA4F346B13660CD300183112 /* unzip.c */; };
+		EA4F347613660CE200183112 /* irrXML.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347413660CE200183112 /* irrXML.cpp */; };
+		EA4F348513660D3900183112 /* 3DSConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347713660D3900183112 /* 3DSConverter.cpp */; };
+		EA4F348613660D3900183112 /* 3DSLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347813660D3900183112 /* 3DSLoader.cpp */; };
+		EA4F348713660D3900183112 /* ACLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347913660D3900183112 /* ACLoader.cpp */; };
+		EA4F348813660D3900183112 /* ASELoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347A13660D3900183112 /* ASELoader.cpp */; };
+		EA4F348913660D3900183112 /* ASEParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347B13660D3900183112 /* ASEParser.cpp */; };
+		EA4F348A13660D3900183112 /* Assimp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347C13660D3900183112 /* Assimp.cpp */; };
+		EA4F348B13660D3900183112 /* AssimpPCH.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347D13660D3900183112 /* AssimpPCH.cpp */; };
+		EA4F348C13660D3900183112 /* B3DImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347E13660D3900183112 /* B3DImporter.cpp */; };
+		EA4F348D13660D3900183112 /* BaseImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F347F13660D3900183112 /* BaseImporter.cpp */; };
+		EA4F348E13660D3900183112 /* BaseProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F348013660D3900183112 /* BaseProcess.cpp */; };
+		EA4F348F13660D3900183112 /* BlenderDNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F348113660D3900183112 /* BlenderDNA.cpp */; };
+		EA4F349013660D3900183112 /* BlenderLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F348213660D3900183112 /* BlenderLoader.cpp */; };
+		EA4F349113660D3900183112 /* BlenderModifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F348313660D3900183112 /* BlenderModifier.cpp */; };
+		EA4F349213660D3900183112 /* BlenderScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F348413660D3900183112 /* BlenderScene.cpp */; };
+		EA4F34A513660D5800183112 /* BVHLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349313660D5800183112 /* BVHLoader.cpp */; };
+		EA4F34A613660D5800183112 /* CalcTangentsProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349413660D5800183112 /* CalcTangentsProcess.cpp */; };
+		EA4F34A713660D5800183112 /* COBLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349513660D5800183112 /* COBLoader.cpp */; };
+		EA4F34A813660D5800183112 /* ColladaLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349613660D5800183112 /* ColladaLoader.cpp */; };
+		EA4F34A913660D5800183112 /* ColladaParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349713660D5800183112 /* ColladaParser.cpp */; };
+		EA4F34AA13660D5800183112 /* ComputeUVMappingProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349813660D5800183112 /* ComputeUVMappingProcess.cpp */; };
+		EA4F34AB13660D5800183112 /* ConvertToLHProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349913660D5800183112 /* ConvertToLHProcess.cpp */; };
+		EA4F34AC13660D5800183112 /* CSMLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349A13660D5800183112 /* CSMLoader.cpp */; };
+		EA4F34AD13660D5800183112 /* DefaultIOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349B13660D5800183112 /* DefaultIOStream.cpp */; };
+		EA4F34AE13660D5800183112 /* DefaultIOSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349C13660D5800183112 /* DefaultIOSystem.cpp */; };
+		EA4F34AF13660D5800183112 /* DefaultLogger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349D13660D5800183112 /* DefaultLogger.cpp */; };
+		EA4F34B013660D5800183112 /* DXFLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349E13660D5800183112 /* DXFLoader.cpp */; };
+		EA4F34B113660D5800183112 /* FindDegenerates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F349F13660D5800183112 /* FindDegenerates.cpp */; };
+		EA4F34B213660D5800183112 /* FindInstancesProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34A013660D5800183112 /* FindInstancesProcess.cpp */; };
+		EA4F34B313660D5800183112 /* FindInvalidDataProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34A113660D5800183112 /* FindInvalidDataProcess.cpp */; };
+		EA4F34B413660D5800183112 /* FixNormalsStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34A213660D5800183112 /* FixNormalsStep.cpp */; };
+		EA4F34B513660D5800183112 /* GenFaceNormalsProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34A313660D5800183112 /* GenFaceNormalsProcess.cpp */; };
+		EA4F34B613660D5800183112 /* GenVertexNormalsProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34A413660D5800183112 /* GenVertexNormalsProcess.cpp */; };
+		EA4F34F713660DCA00183112 /* HMPLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34B713660DCA00183112 /* HMPLoader.cpp */; };
+		EA4F34F813660DCA00183112 /* Importer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34B813660DCA00183112 /* Importer.cpp */; };
+		EA4F34F913660DCA00183112 /* ImproveCacheLocality.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34B913660DCA00183112 /* ImproveCacheLocality.cpp */; };
+		EA4F34FA13660DCA00183112 /* IRRLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BA13660DCA00183112 /* IRRLoader.cpp */; };
+		EA4F34FB13660DCA00183112 /* IRRMeshLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BB13660DCA00183112 /* IRRMeshLoader.cpp */; };
+		EA4F34FC13660DCA00183112 /* IRRShared.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BC13660DCA00183112 /* IRRShared.cpp */; };
+		EA4F34FD13660DCA00183112 /* JoinVerticesProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BD13660DCA00183112 /* JoinVerticesProcess.cpp */; };
+		EA4F34FE13660DCA00183112 /* LimitBoneWeightsProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BE13660DCA00183112 /* LimitBoneWeightsProcess.cpp */; };
+		EA4F34FF13660DCA00183112 /* LWOAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34BF13660DCA00183112 /* LWOAnimation.cpp */; };
+		EA4F350013660DCA00183112 /* LWOBLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C013660DCA00183112 /* LWOBLoader.cpp */; };
+		EA4F350113660DCA00183112 /* LWOLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C113660DCA00183112 /* LWOLoader.cpp */; };
+		EA4F350213660DCA00183112 /* LWOMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C213660DCA00183112 /* LWOMaterial.cpp */; };
+		EA4F350313660DCA00183112 /* LWSLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C313660DCA00183112 /* LWSLoader.cpp */; };
+		EA4F350413660DCA00183112 /* MakeVerboseFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C413660DCA00183112 /* MakeVerboseFormat.cpp */; };
+		EA4F350513660DCA00183112 /* MaterialSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C513660DCA00183112 /* MaterialSystem.cpp */; };
+		EA4F350613660DCA00183112 /* MD2Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C613660DCA00183112 /* MD2Loader.cpp */; };
+		EA4F350713660DCA00183112 /* MD3Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C713660DCA00183112 /* MD3Loader.cpp */; };
+		EA4F350813660DCA00183112 /* MD5Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C813660DCA00183112 /* MD5Loader.cpp */; };
+		EA4F350913660DCA00183112 /* MD5Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34C913660DCA00183112 /* MD5Parser.cpp */; };
+		EA4F350A13660DCA00183112 /* MDCLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CA13660DCA00183112 /* MDCLoader.cpp */; };
+		EA4F350B13660DCA00183112 /* MDLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CB13660DCA00183112 /* MDLLoader.cpp */; };
+		EA4F350C13660DCA00183112 /* MDLMaterialLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CC13660DCA00183112 /* MDLMaterialLoader.cpp */; };
+		EA4F350D13660DCA00183112 /* MS3DLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CD13660DCA00183112 /* MS3DLoader.cpp */; };
+		EA4F350E13660DCA00183112 /* NDOLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CE13660DCA00183112 /* NDOLoader.cpp */; };
+		EA4F350F13660DCA00183112 /* NFFLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34CF13660DCA00183112 /* NFFLoader.cpp */; };
+		EA4F351013660DCA00183112 /* ObjFileImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D013660DCA00183112 /* ObjFileImporter.cpp */; };
+		EA4F351113660DCA00183112 /* ObjFileMtlImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D113660DCA00183112 /* ObjFileMtlImporter.cpp */; };
+		EA4F351213660DCA00183112 /* ObjFileParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D213660DCA00183112 /* ObjFileParser.cpp */; };
+		EA4F351313660DCA00183112 /* OFFLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D313660DCA00183112 /* OFFLoader.cpp */; };
+		EA4F351413660DCA00183112 /* OgreImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D413660DCA00183112 /* OgreImporter.cpp */; };
+		EA4F351513660DCA00183112 /* OgreImporterMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D513660DCA00183112 /* OgreImporterMaterial.cpp */; };
+		EA4F351613660DCA00183112 /* OptimizeGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D613660DCA00183112 /* OptimizeGraph.cpp */; };
+		EA4F351713660DCA00183112 /* OptimizeMeshes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D713660DCA00183112 /* OptimizeMeshes.cpp */; };
+		EA4F351813660DCA00183112 /* PlyLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D813660DCA00183112 /* PlyLoader.cpp */; };
+		EA4F351913660DCA00183112 /* PlyParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34D913660DCA00183112 /* PlyParser.cpp */; };
+		EA4F351A13660DCA00183112 /* PretransformVertices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DA13660DCA00183112 /* PretransformVertices.cpp */; };
+		EA4F351B13660DCA00183112 /* Q3BSPFileImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DB13660DCA00183112 /* Q3BSPFileImporter.cpp */; };
+		EA4F351C13660DCA00183112 /* Q3BSPFileParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DC13660DCA00183112 /* Q3BSPFileParser.cpp */; };
+		EA4F351D13660DCA00183112 /* Q3BSPZipArchive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DD13660DCA00183112 /* Q3BSPZipArchive.cpp */; };
+		EA4F351E13660DCA00183112 /* Q3DLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DE13660DCA00183112 /* Q3DLoader.cpp */; };
+		EA4F351F13660DCA00183112 /* RawLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34DF13660DCA00183112 /* RawLoader.cpp */; };
+		EA4F352013660DCA00183112 /* RemoveComments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E013660DCA00183112 /* RemoveComments.cpp */; };
+		EA4F352113660DCA00183112 /* RemoveRedundantMaterials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E113660DCA00183112 /* RemoveRedundantMaterials.cpp */; };
+		EA4F352213660DCA00183112 /* RemoveVCProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E213660DCA00183112 /* RemoveVCProcess.cpp */; };
+		EA4F352313660DCA00183112 /* SceneCombiner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E313660DCA00183112 /* SceneCombiner.cpp */; };
+		EA4F352413660DCA00183112 /* ScenePreprocessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E413660DCA00183112 /* ScenePreprocessor.cpp */; };
+		EA4F352513660DCA00183112 /* SGSpatialSort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E513660DCA00183112 /* SGSpatialSort.cpp */; };
+		EA4F352613660DCA00183112 /* SkeletonMeshBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E613660DCA00183112 /* SkeletonMeshBuilder.cpp */; };
+		EA4F352713660DCA00183112 /* SMDLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E713660DCA00183112 /* SMDLoader.cpp */; };
+		EA4F352813660DCA00183112 /* SortByPTypeProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E813660DCA00183112 /* SortByPTypeProcess.cpp */; };
+		EA4F352913660DCA00183112 /* SpatialSort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34E913660DCA00183112 /* SpatialSort.cpp */; };
+		EA4F352A13660DCA00183112 /* SplitLargeMeshes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34EA13660DCA00183112 /* SplitLargeMeshes.cpp */; };
+		EA4F352B13660DCA00183112 /* StandardShapes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34EB13660DCA00183112 /* StandardShapes.cpp */; };
+		EA4F352C13660DCA00183112 /* STLLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34EC13660DCA00183112 /* STLLoader.cpp */; };
+		EA4F352D13660DCA00183112 /* Subdivision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34ED13660DCA00183112 /* Subdivision.cpp */; };
+		EA4F352E13660DCA00183112 /* TargetAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34EE13660DCA00183112 /* TargetAnimation.cpp */; };
+		EA4F352F13660DCA00183112 /* TerragenLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34EF13660DCA00183112 /* TerragenLoader.cpp */; };
+		EA4F353013660DCA00183112 /* TextureTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F013660DCA00183112 /* TextureTransform.cpp */; };
+		EA4F353113660DCA00183112 /* TriangulateProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F113660DCA00183112 /* TriangulateProcess.cpp */; };
+		EA4F353213660DCA00183112 /* UnrealLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F213660DCA00183112 /* UnrealLoader.cpp */; };
+		EA4F353313660DCA00183112 /* ValidateDataStructure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F313660DCA00183112 /* ValidateDataStructure.cpp */; };
+		EA4F353413660DCA00183112 /* VertexTriangleAdjacency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F413660DCA00183112 /* VertexTriangleAdjacency.cpp */; };
+		EA4F353513660DCA00183112 /* XFileImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F513660DCA00183112 /* XFileImporter.cpp */; };
+		EA4F353613660DCA00183112 /* XFileParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA4F34F613660DCA00183112 /* XFileParser.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* assimptest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = assimptest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA4F344813660C8C00183112 /* ConvertUTF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ConvertUTF.c; path = "assimp--2.0.863-sdk/contrib/ConvertUTF/ConvertUTF.c"; sourceTree = "<group>"; };
+		EA4F344913660C8C00183112 /* ConvertUTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConvertUTF.h; path = "assimp--2.0.863-sdk/contrib/ConvertUTF/ConvertUTF.h"; sourceTree = "<group>"; };
+		EA4F344B13660CBA00183112 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = adler32.c; path = "assimp--2.0.863-sdk/contrib/zlib/adler32.c"; sourceTree = "<group>"; };
+		EA4F344C13660CBA00183112 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress.c; path = "assimp--2.0.863-sdk/contrib/zlib/compress.c"; sourceTree = "<group>"; };
+		EA4F344D13660CBA00183112 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = "assimp--2.0.863-sdk/contrib/zlib/crc32.c"; sourceTree = "<group>"; };
+		EA4F344E13660CBA00183112 /* crc32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crc32.h; path = "assimp--2.0.863-sdk/contrib/zlib/crc32.h"; sourceTree = "<group>"; };
+		EA4F344F13660CBA00183112 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = deflate.c; path = "assimp--2.0.863-sdk/contrib/zlib/deflate.c"; sourceTree = "<group>"; };
+		EA4F345013660CBA00183112 /* deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deflate.h; path = "assimp--2.0.863-sdk/contrib/zlib/deflate.h"; sourceTree = "<group>"; };
+		EA4F345113660CBA00183112 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inffast.c; path = "assimp--2.0.863-sdk/contrib/zlib/inffast.c"; sourceTree = "<group>"; };
+		EA4F345213660CBA00183112 /* inffast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffast.h; path = "assimp--2.0.863-sdk/contrib/zlib/inffast.h"; sourceTree = "<group>"; };
+		EA4F345313660CBA00183112 /* inffixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inffixed.h; path = "assimp--2.0.863-sdk/contrib/zlib/inffixed.h"; sourceTree = "<group>"; };
+		EA4F345413660CBA00183112 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inflate.c; path = "assimp--2.0.863-sdk/contrib/zlib/inflate.c"; sourceTree = "<group>"; };
+		EA4F345513660CBA00183112 /* inflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inflate.h; path = "assimp--2.0.863-sdk/contrib/zlib/inflate.h"; sourceTree = "<group>"; };
+		EA4F345613660CBA00183112 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inftrees.c; path = "assimp--2.0.863-sdk/contrib/zlib/inftrees.c"; sourceTree = "<group>"; };
+		EA4F345713660CBA00183112 /* inftrees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = inftrees.h; path = "assimp--2.0.863-sdk/contrib/zlib/inftrees.h"; sourceTree = "<group>"; };
+		EA4F345F13660CC200183112 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trees.c; path = "assimp--2.0.863-sdk/contrib/zlib/trees.c"; sourceTree = "<group>"; };
+		EA4F346013660CC200183112 /* trees.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trees.h; path = "assimp--2.0.863-sdk/contrib/zlib/trees.h"; sourceTree = "<group>"; };
+		EA4F346113660CC200183112 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zconf.h; path = "assimp--2.0.863-sdk/contrib/zlib/zconf.h"; sourceTree = "<group>"; };
+		EA4F346213660CC200183112 /* zconf.in.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zconf.in.h; path = "assimp--2.0.863-sdk/contrib/zlib/zconf.in.h"; sourceTree = "<group>"; };
+		EA4F346313660CC200183112 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zlib.h; path = "assimp--2.0.863-sdk/contrib/zlib/zlib.h"; sourceTree = "<group>"; };
+		EA4F346413660CC200183112 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zutil.c; path = "assimp--2.0.863-sdk/contrib/zlib/zutil.c"; sourceTree = "<group>"; };
+		EA4F346513660CC200183112 /* zutil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zutil.h; path = "assimp--2.0.863-sdk/contrib/zlib/zutil.h"; sourceTree = "<group>"; };
+		EA4F346813660CD300183112 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = "assimp--2.0.863-sdk/contrib/unzip/crypt.h"; sourceTree = "<group>"; };
+		EA4F346913660CD300183112 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = "assimp--2.0.863-sdk/contrib/unzip/ioapi.c"; sourceTree = "<group>"; };
+		EA4F346A13660CD300183112 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = "assimp--2.0.863-sdk/contrib/unzip/ioapi.h"; sourceTree = "<group>"; };
+		EA4F346B13660CD300183112 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = "assimp--2.0.863-sdk/contrib/unzip/unzip.c"; sourceTree = "<group>"; };
+		EA4F346C13660CD300183112 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = "assimp--2.0.863-sdk/contrib/unzip/unzip.h"; sourceTree = "<group>"; };
+		EA4F346F13660CE200183112 /* CXMLReaderImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CXMLReaderImpl.h; path = "assimp--2.0.863-sdk/contrib/irrXML/CXMLReaderImpl.h"; sourceTree = "<group>"; };
+		EA4F347013660CE200183112 /* heapsort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = heapsort.h; path = "assimp--2.0.863-sdk/contrib/irrXML/heapsort.h"; sourceTree = "<group>"; };
+		EA4F347113660CE200183112 /* irrArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = irrArray.h; path = "assimp--2.0.863-sdk/contrib/irrXML/irrArray.h"; sourceTree = "<group>"; };
+		EA4F347213660CE200183112 /* irrString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = irrString.h; path = "assimp--2.0.863-sdk/contrib/irrXML/irrString.h"; sourceTree = "<group>"; };
+		EA4F347313660CE200183112 /* irrTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = irrTypes.h; path = "assimp--2.0.863-sdk/contrib/irrXML/irrTypes.h"; sourceTree = "<group>"; };
+		EA4F347413660CE200183112 /* irrXML.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = irrXML.cpp; path = "assimp--2.0.863-sdk/contrib/irrXML/irrXML.cpp"; sourceTree = "<group>"; };
+		EA4F347513660CE200183112 /* irrXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = irrXML.h; path = "assimp--2.0.863-sdk/contrib/irrXML/irrXML.h"; sourceTree = "<group>"; };
+		EA4F347713660D3900183112 /* 3DSConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = 3DSConverter.cpp; path = "assimp--2.0.863-sdk/code/3DSConverter.cpp"; sourceTree = "<group>"; };
+		EA4F347813660D3900183112 /* 3DSLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = 3DSLoader.cpp; path = "assimp--2.0.863-sdk/code/3DSLoader.cpp"; sourceTree = "<group>"; };
+		EA4F347913660D3900183112 /* ACLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ACLoader.cpp; path = "assimp--2.0.863-sdk/code/ACLoader.cpp"; sourceTree = "<group>"; };
+		EA4F347A13660D3900183112 /* ASELoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ASELoader.cpp; path = "assimp--2.0.863-sdk/code/ASELoader.cpp"; sourceTree = "<group>"; };
+		EA4F347B13660D3900183112 /* ASEParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ASEParser.cpp; path = "assimp--2.0.863-sdk/code/ASEParser.cpp"; sourceTree = "<group>"; };
+		EA4F347C13660D3900183112 /* Assimp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Assimp.cpp; path = "assimp--2.0.863-sdk/code/Assimp.cpp"; sourceTree = "<group>"; };
+		EA4F347D13660D3900183112 /* AssimpPCH.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssimpPCH.cpp; path = "assimp--2.0.863-sdk/code/AssimpPCH.cpp"; sourceTree = "<group>"; };
+		EA4F347E13660D3900183112 /* B3DImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = B3DImporter.cpp; path = "assimp--2.0.863-sdk/code/B3DImporter.cpp"; sourceTree = "<group>"; };
+		EA4F347F13660D3900183112 /* BaseImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseImporter.cpp; path = "assimp--2.0.863-sdk/code/BaseImporter.cpp"; sourceTree = "<group>"; };
+		EA4F348013660D3900183112 /* BaseProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseProcess.cpp; path = "assimp--2.0.863-sdk/code/BaseProcess.cpp"; sourceTree = "<group>"; };
+		EA4F348113660D3900183112 /* BlenderDNA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderDNA.cpp; path = "assimp--2.0.863-sdk/code/BlenderDNA.cpp"; sourceTree = "<group>"; };
+		EA4F348213660D3900183112 /* BlenderLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderLoader.cpp; path = "assimp--2.0.863-sdk/code/BlenderLoader.cpp"; sourceTree = "<group>"; };
+		EA4F348313660D3900183112 /* BlenderModifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderModifier.cpp; path = "assimp--2.0.863-sdk/code/BlenderModifier.cpp"; sourceTree = "<group>"; };
+		EA4F348413660D3900183112 /* BlenderScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderScene.cpp; path = "assimp--2.0.863-sdk/code/BlenderScene.cpp"; sourceTree = "<group>"; };
+		EA4F349313660D5800183112 /* BVHLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BVHLoader.cpp; path = "assimp--2.0.863-sdk/code/BVHLoader.cpp"; sourceTree = "<group>"; };
+		EA4F349413660D5800183112 /* CalcTangentsProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CalcTangentsProcess.cpp; path = "assimp--2.0.863-sdk/code/CalcTangentsProcess.cpp"; sourceTree = "<group>"; };
+		EA4F349513660D5800183112 /* COBLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = COBLoader.cpp; path = "assimp--2.0.863-sdk/code/COBLoader.cpp"; sourceTree = "<group>"; };
+		EA4F349613660D5800183112 /* ColladaLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColladaLoader.cpp; path = "assimp--2.0.863-sdk/code/ColladaLoader.cpp"; sourceTree = "<group>"; };
+		EA4F349713660D5800183112 /* ColladaParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColladaParser.cpp; path = "assimp--2.0.863-sdk/code/ColladaParser.cpp"; sourceTree = "<group>"; };
+		EA4F349813660D5800183112 /* ComputeUVMappingProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComputeUVMappingProcess.cpp; path = "assimp--2.0.863-sdk/code/ComputeUVMappingProcess.cpp"; sourceTree = "<group>"; };
+		EA4F349913660D5800183112 /* ConvertToLHProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ConvertToLHProcess.cpp; path = "assimp--2.0.863-sdk/code/ConvertToLHProcess.cpp"; sourceTree = "<group>"; };
+		EA4F349A13660D5800183112 /* CSMLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSMLoader.cpp; path = "assimp--2.0.863-sdk/code/CSMLoader.cpp"; sourceTree = "<group>"; };
+		EA4F349B13660D5800183112 /* DefaultIOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultIOStream.cpp; path = "assimp--2.0.863-sdk/code/DefaultIOStream.cpp"; sourceTree = "<group>"; };
+		EA4F349C13660D5800183112 /* DefaultIOSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultIOSystem.cpp; path = "assimp--2.0.863-sdk/code/DefaultIOSystem.cpp"; sourceTree = "<group>"; };
+		EA4F349D13660D5800183112 /* DefaultLogger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultLogger.cpp; path = "assimp--2.0.863-sdk/code/DefaultLogger.cpp"; sourceTree = "<group>"; };
+		EA4F349E13660D5800183112 /* DXFLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DXFLoader.cpp; path = "assimp--2.0.863-sdk/code/DXFLoader.cpp"; sourceTree = "<group>"; };
+		EA4F349F13660D5800183112 /* FindDegenerates.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FindDegenerates.cpp; path = "assimp--2.0.863-sdk/code/FindDegenerates.cpp"; sourceTree = "<group>"; };
+		EA4F34A013660D5800183112 /* FindInstancesProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FindInstancesProcess.cpp; path = "assimp--2.0.863-sdk/code/FindInstancesProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34A113660D5800183112 /* FindInvalidDataProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FindInvalidDataProcess.cpp; path = "assimp--2.0.863-sdk/code/FindInvalidDataProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34A213660D5800183112 /* FixNormalsStep.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FixNormalsStep.cpp; path = "assimp--2.0.863-sdk/code/FixNormalsStep.cpp"; sourceTree = "<group>"; };
+		EA4F34A313660D5800183112 /* GenFaceNormalsProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenFaceNormalsProcess.cpp; path = "assimp--2.0.863-sdk/code/GenFaceNormalsProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34A413660D5800183112 /* GenVertexNormalsProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenVertexNormalsProcess.cpp; path = "assimp--2.0.863-sdk/code/GenVertexNormalsProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34B713660DCA00183112 /* HMPLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HMPLoader.cpp; path = "assimp--2.0.863-sdk/code/HMPLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34B813660DCA00183112 /* Importer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Importer.cpp; path = "assimp--2.0.863-sdk/code/Importer.cpp"; sourceTree = "<group>"; };
+		EA4F34B913660DCA00183112 /* ImproveCacheLocality.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImproveCacheLocality.cpp; path = "assimp--2.0.863-sdk/code/ImproveCacheLocality.cpp"; sourceTree = "<group>"; };
+		EA4F34BA13660DCA00183112 /* IRRLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRRLoader.cpp; path = "assimp--2.0.863-sdk/code/IRRLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34BB13660DCA00183112 /* IRRMeshLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRRMeshLoader.cpp; path = "assimp--2.0.863-sdk/code/IRRMeshLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34BC13660DCA00183112 /* IRRShared.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IRRShared.cpp; path = "assimp--2.0.863-sdk/code/IRRShared.cpp"; sourceTree = "<group>"; };
+		EA4F34BD13660DCA00183112 /* JoinVerticesProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JoinVerticesProcess.cpp; path = "assimp--2.0.863-sdk/code/JoinVerticesProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34BE13660DCA00183112 /* LimitBoneWeightsProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LimitBoneWeightsProcess.cpp; path = "assimp--2.0.863-sdk/code/LimitBoneWeightsProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34BF13660DCA00183112 /* LWOAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LWOAnimation.cpp; path = "assimp--2.0.863-sdk/code/LWOAnimation.cpp"; sourceTree = "<group>"; };
+		EA4F34C013660DCA00183112 /* LWOBLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LWOBLoader.cpp; path = "assimp--2.0.863-sdk/code/LWOBLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34C113660DCA00183112 /* LWOLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LWOLoader.cpp; path = "assimp--2.0.863-sdk/code/LWOLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34C213660DCA00183112 /* LWOMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LWOMaterial.cpp; path = "assimp--2.0.863-sdk/code/LWOMaterial.cpp"; sourceTree = "<group>"; };
+		EA4F34C313660DCA00183112 /* LWSLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LWSLoader.cpp; path = "assimp--2.0.863-sdk/code/LWSLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34C413660DCA00183112 /* MakeVerboseFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MakeVerboseFormat.cpp; path = "assimp--2.0.863-sdk/code/MakeVerboseFormat.cpp"; sourceTree = "<group>"; };
+		EA4F34C513660DCA00183112 /* MaterialSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaterialSystem.cpp; path = "assimp--2.0.863-sdk/code/MaterialSystem.cpp"; sourceTree = "<group>"; };
+		EA4F34C613660DCA00183112 /* MD2Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MD2Loader.cpp; path = "assimp--2.0.863-sdk/code/MD2Loader.cpp"; sourceTree = "<group>"; };
+		EA4F34C713660DCA00183112 /* MD3Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MD3Loader.cpp; path = "assimp--2.0.863-sdk/code/MD3Loader.cpp"; sourceTree = "<group>"; };
+		EA4F34C813660DCA00183112 /* MD5Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MD5Loader.cpp; path = "assimp--2.0.863-sdk/code/MD5Loader.cpp"; sourceTree = "<group>"; };
+		EA4F34C913660DCA00183112 /* MD5Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MD5Parser.cpp; path = "assimp--2.0.863-sdk/code/MD5Parser.cpp"; sourceTree = "<group>"; };
+		EA4F34CA13660DCA00183112 /* MDCLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDCLoader.cpp; path = "assimp--2.0.863-sdk/code/MDCLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34CB13660DCA00183112 /* MDLLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDLLoader.cpp; path = "assimp--2.0.863-sdk/code/MDLLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34CC13660DCA00183112 /* MDLMaterialLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MDLMaterialLoader.cpp; path = "assimp--2.0.863-sdk/code/MDLMaterialLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34CD13660DCA00183112 /* MS3DLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MS3DLoader.cpp; path = "assimp--2.0.863-sdk/code/MS3DLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34CE13660DCA00183112 /* NDOLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NDOLoader.cpp; path = "assimp--2.0.863-sdk/code/NDOLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34CF13660DCA00183112 /* NFFLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NFFLoader.cpp; path = "assimp--2.0.863-sdk/code/NFFLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34D013660DCA00183112 /* ObjFileImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjFileImporter.cpp; path = "assimp--2.0.863-sdk/code/ObjFileImporter.cpp"; sourceTree = "<group>"; };
+		EA4F34D113660DCA00183112 /* ObjFileMtlImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjFileMtlImporter.cpp; path = "assimp--2.0.863-sdk/code/ObjFileMtlImporter.cpp"; sourceTree = "<group>"; };
+		EA4F34D213660DCA00183112 /* ObjFileParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjFileParser.cpp; path = "assimp--2.0.863-sdk/code/ObjFileParser.cpp"; sourceTree = "<group>"; };
+		EA4F34D313660DCA00183112 /* OFFLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OFFLoader.cpp; path = "assimp--2.0.863-sdk/code/OFFLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34D413660DCA00183112 /* OgreImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OgreImporter.cpp; path = "assimp--2.0.863-sdk/code/OgreImporter.cpp"; sourceTree = "<group>"; };
+		EA4F34D513660DCA00183112 /* OgreImporterMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OgreImporterMaterial.cpp; path = "assimp--2.0.863-sdk/code/OgreImporterMaterial.cpp"; sourceTree = "<group>"; };
+		EA4F34D613660DCA00183112 /* OptimizeGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OptimizeGraph.cpp; path = "assimp--2.0.863-sdk/code/OptimizeGraph.cpp"; sourceTree = "<group>"; };
+		EA4F34D713660DCA00183112 /* OptimizeMeshes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OptimizeMeshes.cpp; path = "assimp--2.0.863-sdk/code/OptimizeMeshes.cpp"; sourceTree = "<group>"; };
+		EA4F34D813660DCA00183112 /* PlyLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlyLoader.cpp; path = "assimp--2.0.863-sdk/code/PlyLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34D913660DCA00183112 /* PlyParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlyParser.cpp; path = "assimp--2.0.863-sdk/code/PlyParser.cpp"; sourceTree = "<group>"; };
+		EA4F34DA13660DCA00183112 /* PretransformVertices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PretransformVertices.cpp; path = "assimp--2.0.863-sdk/code/PretransformVertices.cpp"; sourceTree = "<group>"; };
+		EA4F34DB13660DCA00183112 /* Q3BSPFileImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Q3BSPFileImporter.cpp; path = "assimp--2.0.863-sdk/code/Q3BSPFileImporter.cpp"; sourceTree = "<group>"; };
+		EA4F34DC13660DCA00183112 /* Q3BSPFileParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Q3BSPFileParser.cpp; path = "assimp--2.0.863-sdk/code/Q3BSPFileParser.cpp"; sourceTree = "<group>"; };
+		EA4F34DD13660DCA00183112 /* Q3BSPZipArchive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Q3BSPZipArchive.cpp; path = "assimp--2.0.863-sdk/code/Q3BSPZipArchive.cpp"; sourceTree = "<group>"; };
+		EA4F34DE13660DCA00183112 /* Q3DLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Q3DLoader.cpp; path = "assimp--2.0.863-sdk/code/Q3DLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34DF13660DCA00183112 /* RawLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawLoader.cpp; path = "assimp--2.0.863-sdk/code/RawLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34E013660DCA00183112 /* RemoveComments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemoveComments.cpp; path = "assimp--2.0.863-sdk/code/RemoveComments.cpp"; sourceTree = "<group>"; };
+		EA4F34E113660DCA00183112 /* RemoveRedundantMaterials.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemoveRedundantMaterials.cpp; path = "assimp--2.0.863-sdk/code/RemoveRedundantMaterials.cpp"; sourceTree = "<group>"; };
+		EA4F34E213660DCA00183112 /* RemoveVCProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RemoveVCProcess.cpp; path = "assimp--2.0.863-sdk/code/RemoveVCProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34E313660DCA00183112 /* SceneCombiner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneCombiner.cpp; path = "assimp--2.0.863-sdk/code/SceneCombiner.cpp"; sourceTree = "<group>"; };
+		EA4F34E413660DCA00183112 /* ScenePreprocessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScenePreprocessor.cpp; path = "assimp--2.0.863-sdk/code/ScenePreprocessor.cpp"; sourceTree = "<group>"; };
+		EA4F34E513660DCA00183112 /* SGSpatialSort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SGSpatialSort.cpp; path = "assimp--2.0.863-sdk/code/SGSpatialSort.cpp"; sourceTree = "<group>"; };
+		EA4F34E613660DCA00183112 /* SkeletonMeshBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SkeletonMeshBuilder.cpp; path = "assimp--2.0.863-sdk/code/SkeletonMeshBuilder.cpp"; sourceTree = "<group>"; };
+		EA4F34E713660DCA00183112 /* SMDLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SMDLoader.cpp; path = "assimp--2.0.863-sdk/code/SMDLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34E813660DCA00183112 /* SortByPTypeProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SortByPTypeProcess.cpp; path = "assimp--2.0.863-sdk/code/SortByPTypeProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34E913660DCA00183112 /* SpatialSort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpatialSort.cpp; path = "assimp--2.0.863-sdk/code/SpatialSort.cpp"; sourceTree = "<group>"; };
+		EA4F34EA13660DCA00183112 /* SplitLargeMeshes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SplitLargeMeshes.cpp; path = "assimp--2.0.863-sdk/code/SplitLargeMeshes.cpp"; sourceTree = "<group>"; };
+		EA4F34EB13660DCA00183112 /* StandardShapes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StandardShapes.cpp; path = "assimp--2.0.863-sdk/code/StandardShapes.cpp"; sourceTree = "<group>"; };
+		EA4F34EC13660DCA00183112 /* STLLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STLLoader.cpp; path = "assimp--2.0.863-sdk/code/STLLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34ED13660DCA00183112 /* Subdivision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Subdivision.cpp; path = "assimp--2.0.863-sdk/code/Subdivision.cpp"; sourceTree = "<group>"; };
+		EA4F34EE13660DCA00183112 /* TargetAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TargetAnimation.cpp; path = "assimp--2.0.863-sdk/code/TargetAnimation.cpp"; sourceTree = "<group>"; };
+		EA4F34EF13660DCA00183112 /* TerragenLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TerragenLoader.cpp; path = "assimp--2.0.863-sdk/code/TerragenLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34F013660DCA00183112 /* TextureTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextureTransform.cpp; path = "assimp--2.0.863-sdk/code/TextureTransform.cpp"; sourceTree = "<group>"; };
+		EA4F34F113660DCA00183112 /* TriangulateProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TriangulateProcess.cpp; path = "assimp--2.0.863-sdk/code/TriangulateProcess.cpp"; sourceTree = "<group>"; };
+		EA4F34F213660DCA00183112 /* UnrealLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UnrealLoader.cpp; path = "assimp--2.0.863-sdk/code/UnrealLoader.cpp"; sourceTree = "<group>"; };
+		EA4F34F313660DCA00183112 /* ValidateDataStructure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ValidateDataStructure.cpp; path = "assimp--2.0.863-sdk/code/ValidateDataStructure.cpp"; sourceTree = "<group>"; };
+		EA4F34F413660DCA00183112 /* VertexTriangleAdjacency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VertexTriangleAdjacency.cpp; path = "assimp--2.0.863-sdk/code/VertexTriangleAdjacency.cpp"; sourceTree = "<group>"; };
+		EA4F34F513660DCA00183112 /* XFileImporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XFileImporter.cpp; path = "assimp--2.0.863-sdk/code/XFileImporter.cpp"; sourceTree = "<group>"; };
+		EA4F34F613660DCA00183112 /* XFileParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XFileParser.cpp; path = "assimp--2.0.863-sdk/code/XFileParser.cpp"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* assimptest */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				EA4F34091365DAC200183112 /* ConvertUTF */,
+				EA4F33E91365DA9700183112 /* zlib */,
+				EA4F33E11365DA7F00183112 /* unzip */,
+				EA4F33D81365DA6600183112 /* irrxml */,
+				08FB7795FE84155DC02AAC07 /* AssImp */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = assimptest;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* AssImp */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F347713660D3900183112 /* 3DSConverter.cpp */,
+				EA4F347813660D3900183112 /* 3DSLoader.cpp */,
+				EA4F347913660D3900183112 /* ACLoader.cpp */,
+				EA4F347A13660D3900183112 /* ASELoader.cpp */,
+				EA4F347B13660D3900183112 /* ASEParser.cpp */,
+				EA4F347C13660D3900183112 /* Assimp.cpp */,
+				EA4F347D13660D3900183112 /* AssimpPCH.cpp */,
+				EA4F347E13660D3900183112 /* B3DImporter.cpp */,
+				EA4F347F13660D3900183112 /* BaseImporter.cpp */,
+				EA4F348013660D3900183112 /* BaseProcess.cpp */,
+				EA4F348113660D3900183112 /* BlenderDNA.cpp */,
+				EA4F348213660D3900183112 /* BlenderLoader.cpp */,
+				EA4F348313660D3900183112 /* BlenderModifier.cpp */,
+				EA4F348413660D3900183112 /* BlenderScene.cpp */,
+				EA4F349313660D5800183112 /* BVHLoader.cpp */,
+				EA4F349413660D5800183112 /* CalcTangentsProcess.cpp */,
+				EA4F349513660D5800183112 /* COBLoader.cpp */,
+				EA4F349613660D5800183112 /* ColladaLoader.cpp */,
+				EA4F349713660D5800183112 /* ColladaParser.cpp */,
+				EA4F349813660D5800183112 /* ComputeUVMappingProcess.cpp */,
+				EA4F349913660D5800183112 /* ConvertToLHProcess.cpp */,
+				EA4F349A13660D5800183112 /* CSMLoader.cpp */,
+				EA4F349B13660D5800183112 /* DefaultIOStream.cpp */,
+				EA4F349C13660D5800183112 /* DefaultIOSystem.cpp */,
+				EA4F349D13660D5800183112 /* DefaultLogger.cpp */,
+				EA4F349E13660D5800183112 /* DXFLoader.cpp */,
+				EA4F349F13660D5800183112 /* FindDegenerates.cpp */,
+				EA4F34A013660D5800183112 /* FindInstancesProcess.cpp */,
+				EA4F34A113660D5800183112 /* FindInvalidDataProcess.cpp */,
+				EA4F34A213660D5800183112 /* FixNormalsStep.cpp */,
+				EA4F34A313660D5800183112 /* GenFaceNormalsProcess.cpp */,
+				EA4F34A413660D5800183112 /* GenVertexNormalsProcess.cpp */,
+				EA4F34B713660DCA00183112 /* HMPLoader.cpp */,
+				EA4F34B813660DCA00183112 /* Importer.cpp */,
+				EA4F34B913660DCA00183112 /* ImproveCacheLocality.cpp */,
+				EA4F34BA13660DCA00183112 /* IRRLoader.cpp */,
+				EA4F34BB13660DCA00183112 /* IRRMeshLoader.cpp */,
+				EA4F34BC13660DCA00183112 /* IRRShared.cpp */,
+				EA4F34BD13660DCA00183112 /* JoinVerticesProcess.cpp */,
+				EA4F34BE13660DCA00183112 /* LimitBoneWeightsProcess.cpp */,
+				EA4F34BF13660DCA00183112 /* LWOAnimation.cpp */,
+				EA4F34C013660DCA00183112 /* LWOBLoader.cpp */,
+				EA4F34C113660DCA00183112 /* LWOLoader.cpp */,
+				EA4F34C213660DCA00183112 /* LWOMaterial.cpp */,
+				EA4F34C313660DCA00183112 /* LWSLoader.cpp */,
+				EA4F34C413660DCA00183112 /* MakeVerboseFormat.cpp */,
+				EA4F34C513660DCA00183112 /* MaterialSystem.cpp */,
+				EA4F34C613660DCA00183112 /* MD2Loader.cpp */,
+				EA4F34C713660DCA00183112 /* MD3Loader.cpp */,
+				EA4F34C813660DCA00183112 /* MD5Loader.cpp */,
+				EA4F34C913660DCA00183112 /* MD5Parser.cpp */,
+				EA4F34CA13660DCA00183112 /* MDCLoader.cpp */,
+				EA4F34CB13660DCA00183112 /* MDLLoader.cpp */,
+				EA4F34CC13660DCA00183112 /* MDLMaterialLoader.cpp */,
+				EA4F34CD13660DCA00183112 /* MS3DLoader.cpp */,
+				EA4F34CE13660DCA00183112 /* NDOLoader.cpp */,
+				EA4F34CF13660DCA00183112 /* NFFLoader.cpp */,
+				EA4F34D013660DCA00183112 /* ObjFileImporter.cpp */,
+				EA4F34D113660DCA00183112 /* ObjFileMtlImporter.cpp */,
+				EA4F34D213660DCA00183112 /* ObjFileParser.cpp */,
+				EA4F34D313660DCA00183112 /* OFFLoader.cpp */,
+				EA4F34D413660DCA00183112 /* OgreImporter.cpp */,
+				EA4F34D513660DCA00183112 /* OgreImporterMaterial.cpp */,
+				EA4F34D613660DCA00183112 /* OptimizeGraph.cpp */,
+				EA4F34D713660DCA00183112 /* OptimizeMeshes.cpp */,
+				EA4F34D813660DCA00183112 /* PlyLoader.cpp */,
+				EA4F34D913660DCA00183112 /* PlyParser.cpp */,
+				EA4F34DA13660DCA00183112 /* PretransformVertices.cpp */,
+				EA4F34DB13660DCA00183112 /* Q3BSPFileImporter.cpp */,
+				EA4F34DC13660DCA00183112 /* Q3BSPFileParser.cpp */,
+				EA4F34DD13660DCA00183112 /* Q3BSPZipArchive.cpp */,
+				EA4F34DE13660DCA00183112 /* Q3DLoader.cpp */,
+				EA4F34DF13660DCA00183112 /* RawLoader.cpp */,
+				EA4F34E013660DCA00183112 /* RemoveComments.cpp */,
+				EA4F34E113660DCA00183112 /* RemoveRedundantMaterials.cpp */,
+				EA4F34E213660DCA00183112 /* RemoveVCProcess.cpp */,
+				EA4F34E313660DCA00183112 /* SceneCombiner.cpp */,
+				EA4F34E413660DCA00183112 /* ScenePreprocessor.cpp */,
+				EA4F34E513660DCA00183112 /* SGSpatialSort.cpp */,
+				EA4F34E613660DCA00183112 /* SkeletonMeshBuilder.cpp */,
+				EA4F34E713660DCA00183112 /* SMDLoader.cpp */,
+				EA4F34E813660DCA00183112 /* SortByPTypeProcess.cpp */,
+				EA4F34E913660DCA00183112 /* SpatialSort.cpp */,
+				EA4F34EA13660DCA00183112 /* SplitLargeMeshes.cpp */,
+				EA4F34EB13660DCA00183112 /* StandardShapes.cpp */,
+				EA4F34EC13660DCA00183112 /* STLLoader.cpp */,
+				EA4F34ED13660DCA00183112 /* Subdivision.cpp */,
+				EA4F34EE13660DCA00183112 /* TargetAnimation.cpp */,
+				EA4F34EF13660DCA00183112 /* TerragenLoader.cpp */,
+				EA4F34F013660DCA00183112 /* TextureTransform.cpp */,
+				EA4F34F113660DCA00183112 /* TriangulateProcess.cpp */,
+				EA4F34F213660DCA00183112 /* UnrealLoader.cpp */,
+				EA4F34F313660DCA00183112 /* ValidateDataStructure.cpp */,
+				EA4F34F413660DCA00183112 /* VertexTriangleAdjacency.cpp */,
+				EA4F34F513660DCA00183112 /* XFileImporter.cpp */,
+				EA4F34F613660DCA00183112 /* XFileParser.cpp */,
+			);
+			name = AssImp;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* assimptest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA4F33D81365DA6600183112 /* irrxml */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F346F13660CE200183112 /* CXMLReaderImpl.h */,
+				EA4F347013660CE200183112 /* heapsort.h */,
+				EA4F347113660CE200183112 /* irrArray.h */,
+				EA4F347213660CE200183112 /* irrString.h */,
+				EA4F347313660CE200183112 /* irrTypes.h */,
+				EA4F347413660CE200183112 /* irrXML.cpp */,
+				EA4F347513660CE200183112 /* irrXML.h */,
+			);
+			name = irrxml;
+			sourceTree = "<group>";
+		};
+		EA4F33E11365DA7F00183112 /* unzip */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F346813660CD300183112 /* crypt.h */,
+				EA4F346913660CD300183112 /* ioapi.c */,
+				EA4F346A13660CD300183112 /* ioapi.h */,
+				EA4F346B13660CD300183112 /* unzip.c */,
+				EA4F346C13660CD300183112 /* unzip.h */,
+			);
+			name = unzip;
+			sourceTree = "<group>";
+		};
+		EA4F33E91365DA9700183112 /* zlib */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F344B13660CBA00183112 /* adler32.c */,
+				EA4F344C13660CBA00183112 /* compress.c */,
+				EA4F344D13660CBA00183112 /* crc32.c */,
+				EA4F344E13660CBA00183112 /* crc32.h */,
+				EA4F344F13660CBA00183112 /* deflate.c */,
+				EA4F345013660CBA00183112 /* deflate.h */,
+				EA4F345113660CBA00183112 /* inffast.c */,
+				EA4F345213660CBA00183112 /* inffast.h */,
+				EA4F345313660CBA00183112 /* inffixed.h */,
+				EA4F345413660CBA00183112 /* inflate.c */,
+				EA4F345513660CBA00183112 /* inflate.h */,
+				EA4F345613660CBA00183112 /* inftrees.c */,
+				EA4F345713660CBA00183112 /* inftrees.h */,
+				EA4F345F13660CC200183112 /* trees.c */,
+				EA4F346013660CC200183112 /* trees.h */,
+				EA4F346113660CC200183112 /* zconf.h */,
+				EA4F346213660CC200183112 /* zconf.in.h */,
+				EA4F346313660CC200183112 /* zlib.h */,
+				EA4F346413660CC200183112 /* zutil.c */,
+				EA4F346513660CC200183112 /* zutil.h */,
+			);
+			name = zlib;
+			sourceTree = "<group>";
+		};
+		EA4F34091365DAC200183112 /* ConvertUTF */ = {
+			isa = PBXGroup;
+			children = (
+				EA4F344813660C8C00183112 /* ConvertUTF.c */,
+				EA4F344913660C8C00183112 /* ConvertUTF.h */,
+			);
+			name = ConvertUTF;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* assimptest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "assimptest" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = assimptest;
+			productInstallPath = "$(HOME)/bin";
+			productName = assimptest;
+			productReference = 8DD76F6C0486A84900D96B5E /* assimptest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "assimptest" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* assimptest */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* assimptest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				EA4F344A13660C8C00183112 /* ConvertUTF.c in Sources */,
+				EA4F345813660CBA00183112 /* adler32.c in Sources */,
+				EA4F345913660CBA00183112 /* compress.c in Sources */,
+				EA4F345A13660CBA00183112 /* crc32.c in Sources */,
+				EA4F345B13660CBA00183112 /* deflate.c in Sources */,
+				EA4F345C13660CBA00183112 /* inffast.c in Sources */,
+				EA4F345D13660CBA00183112 /* inflate.c in Sources */,
+				EA4F345E13660CBA00183112 /* inftrees.c in Sources */,
+				EA4F346613660CC200183112 /* trees.c in Sources */,
+				EA4F346713660CC200183112 /* zutil.c in Sources */,
+				EA4F346D13660CD300183112 /* ioapi.c in Sources */,
+				EA4F346E13660CD300183112 /* unzip.c in Sources */,
+				EA4F347613660CE200183112 /* irrXML.cpp in Sources */,
+				EA4F348513660D3900183112 /* 3DSConverter.cpp in Sources */,
+				EA4F348613660D3900183112 /* 3DSLoader.cpp in Sources */,
+				EA4F348713660D3900183112 /* ACLoader.cpp in Sources */,
+				EA4F348813660D3900183112 /* ASELoader.cpp in Sources */,
+				EA4F348913660D3900183112 /* ASEParser.cpp in Sources */,
+				EA4F348A13660D3900183112 /* Assimp.cpp in Sources */,
+				EA4F348B13660D3900183112 /* AssimpPCH.cpp in Sources */,
+				EA4F348C13660D3900183112 /* B3DImporter.cpp in Sources */,
+				EA4F348D13660D3900183112 /* BaseImporter.cpp in Sources */,
+				EA4F348E13660D3900183112 /* BaseProcess.cpp in Sources */,
+				EA4F348F13660D3900183112 /* BlenderDNA.cpp in Sources */,
+				EA4F349013660D3900183112 /* BlenderLoader.cpp in Sources */,
+				EA4F349113660D3900183112 /* BlenderModifier.cpp in Sources */,
+				EA4F349213660D3900183112 /* BlenderScene.cpp in Sources */,
+				EA4F34A513660D5800183112 /* BVHLoader.cpp in Sources */,
+				EA4F34A613660D5800183112 /* CalcTangentsProcess.cpp in Sources */,
+				EA4F34A713660D5800183112 /* COBLoader.cpp in Sources */,
+				EA4F34A813660D5800183112 /* ColladaLoader.cpp in Sources */,
+				EA4F34A913660D5800183112 /* ColladaParser.cpp in Sources */,
+				EA4F34AA13660D5800183112 /* ComputeUVMappingProcess.cpp in Sources */,
+				EA4F34AB13660D5800183112 /* ConvertToLHProcess.cpp in Sources */,
+				EA4F34AC13660D5800183112 /* CSMLoader.cpp in Sources */,
+				EA4F34AD13660D5800183112 /* DefaultIOStream.cpp in Sources */,
+				EA4F34AE13660D5800183112 /* DefaultIOSystem.cpp in Sources */,
+				EA4F34AF13660D5800183112 /* DefaultLogger.cpp in Sources */,
+				EA4F34B013660D5800183112 /* DXFLoader.cpp in Sources */,
+				EA4F34B113660D5800183112 /* FindDegenerates.cpp in Sources */,
+				EA4F34B213660D5800183112 /* FindInstancesProcess.cpp in Sources */,
+				EA4F34B313660D5800183112 /* FindInvalidDataProcess.cpp in Sources */,
+				EA4F34B413660D5800183112 /* FixNormalsStep.cpp in Sources */,
+				EA4F34B513660D5800183112 /* GenFaceNormalsProcess.cpp in Sources */,
+				EA4F34B613660D5800183112 /* GenVertexNormalsProcess.cpp in Sources */,
+				EA4F34F713660DCA00183112 /* HMPLoader.cpp in Sources */,
+				EA4F34F813660DCA00183112 /* Importer.cpp in Sources */,
+				EA4F34F913660DCA00183112 /* ImproveCacheLocality.cpp in Sources */,
+				EA4F34FA13660DCA00183112 /* IRRLoader.cpp in Sources */,
+				EA4F34FB13660DCA00183112 /* IRRMeshLoader.cpp in Sources */,
+				EA4F34FC13660DCA00183112 /* IRRShared.cpp in Sources */,
+				EA4F34FD13660DCA00183112 /* JoinVerticesProcess.cpp in Sources */,
+				EA4F34FE13660DCA00183112 /* LimitBoneWeightsProcess.cpp in Sources */,
+				EA4F34FF13660DCA00183112 /* LWOAnimation.cpp in Sources */,
+				EA4F350013660DCA00183112 /* LWOBLoader.cpp in Sources */,
+				EA4F350113660DCA00183112 /* LWOLoader.cpp in Sources */,
+				EA4F350213660DCA00183112 /* LWOMaterial.cpp in Sources */,
+				EA4F350313660DCA00183112 /* LWSLoader.cpp in Sources */,
+				EA4F350413660DCA00183112 /* MakeVerboseFormat.cpp in Sources */,
+				EA4F350513660DCA00183112 /* MaterialSystem.cpp in Sources */,
+				EA4F350613660DCA00183112 /* MD2Loader.cpp in Sources */,
+				EA4F350713660DCA00183112 /* MD3Loader.cpp in Sources */,
+				EA4F350813660DCA00183112 /* MD5Loader.cpp in Sources */,
+				EA4F350913660DCA00183112 /* MD5Parser.cpp in Sources */,
+				EA4F350A13660DCA00183112 /* MDCLoader.cpp in Sources */,
+				EA4F350B13660DCA00183112 /* MDLLoader.cpp in Sources */,
+				EA4F350C13660DCA00183112 /* MDLMaterialLoader.cpp in Sources */,
+				EA4F350D13660DCA00183112 /* MS3DLoader.cpp in Sources */,
+				EA4F350E13660DCA00183112 /* NDOLoader.cpp in Sources */,
+				EA4F350F13660DCA00183112 /* NFFLoader.cpp in Sources */,
+				EA4F351013660DCA00183112 /* ObjFileImporter.cpp in Sources */,
+				EA4F351113660DCA00183112 /* ObjFileMtlImporter.cpp in Sources */,
+				EA4F351213660DCA00183112 /* ObjFileParser.cpp in Sources */,
+				EA4F351313660DCA00183112 /* OFFLoader.cpp in Sources */,
+				EA4F351413660DCA00183112 /* OgreImporter.cpp in Sources */,
+				EA4F351513660DCA00183112 /* OgreImporterMaterial.cpp in Sources */,
+				EA4F351613660DCA00183112 /* OptimizeGraph.cpp in Sources */,
+				EA4F351713660DCA00183112 /* OptimizeMeshes.cpp in Sources */,
+				EA4F351813660DCA00183112 /* PlyLoader.cpp in Sources */,
+				EA4F351913660DCA00183112 /* PlyParser.cpp in Sources */,
+				EA4F351A13660DCA00183112 /* PretransformVertices.cpp in Sources */,
+				EA4F351B13660DCA00183112 /* Q3BSPFileImporter.cpp in Sources */,
+				EA4F351C13660DCA00183112 /* Q3BSPFileParser.cpp in Sources */,
+				EA4F351D13660DCA00183112 /* Q3BSPZipArchive.cpp in Sources */,
+				EA4F351E13660DCA00183112 /* Q3DLoader.cpp in Sources */,
+				EA4F351F13660DCA00183112 /* RawLoader.cpp in Sources */,
+				EA4F352013660DCA00183112 /* RemoveComments.cpp in Sources */,
+				EA4F352113660DCA00183112 /* RemoveRedundantMaterials.cpp in Sources */,
+				EA4F352213660DCA00183112 /* RemoveVCProcess.cpp in Sources */,
+				EA4F352313660DCA00183112 /* SceneCombiner.cpp in Sources */,
+				EA4F352413660DCA00183112 /* ScenePreprocessor.cpp in Sources */,
+				EA4F352513660DCA00183112 /* SGSpatialSort.cpp in Sources */,
+				EA4F352613660DCA00183112 /* SkeletonMeshBuilder.cpp in Sources */,
+				EA4F352713660DCA00183112 /* SMDLoader.cpp in Sources */,
+				EA4F352813660DCA00183112 /* SortByPTypeProcess.cpp in Sources */,
+				EA4F352913660DCA00183112 /* SpatialSort.cpp in Sources */,
+				EA4F352A13660DCA00183112 /* SplitLargeMeshes.cpp in Sources */,
+				EA4F352B13660DCA00183112 /* StandardShapes.cpp in Sources */,
+				EA4F352C13660DCA00183112 /* STLLoader.cpp in Sources */,
+				EA4F352D13660DCA00183112 /* Subdivision.cpp in Sources */,
+				EA4F352E13660DCA00183112 /* TargetAnimation.cpp in Sources */,
+				EA4F352F13660DCA00183112 /* TerragenLoader.cpp in Sources */,
+				EA4F353013660DCA00183112 /* TextureTransform.cpp in Sources */,
+				EA4F353113660DCA00183112 /* TriangulateProcess.cpp in Sources */,
+				EA4F353213660DCA00183112 /* UnrealLoader.cpp in Sources */,
+				EA4F353313660DCA00183112 /* ValidateDataStructure.cpp in Sources */,
+				EA4F353413660DCA00183112 /* VertexTriangleAdjacency.cpp in Sources */,
+				EA4F353513660DCA00183112 /* XFileImporter.cpp in Sources */,
+				EA4F353613660DCA00183112 /* XFileParser.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/assimp--2.0.863-sdk/code\"",
+					"\"$(SRCROOT)/assimp--2.0.863-sdk/include\"",
+					"\"$(SRCROOT)/../../thirdparty/boost/boost_1_46_1\"",
+				);
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = assimptest;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = assimptest;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "assimptest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "assimptest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
