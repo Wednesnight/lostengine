@@ -29,6 +29,7 @@ namespace lost
             .def("filledRect", &Bitmap::filledRect)
             .def_readwrite("premultiplied", &Bitmap::premultiplied)
             .def("premultiplyAlpha", &Bitmap::premultiplyAlpha)
+            .def("write", &Bitmap::write)
             .scope
             [
               def("create", (BitmapPtr(*)(const common::DataPtr&))&Bitmap::create),
