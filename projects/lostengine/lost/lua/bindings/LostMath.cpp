@@ -73,6 +73,7 @@ namespace lost
             .def_readwrite("width", &Vec2::width)
             .def_readwrite("height", &Vec2::height)
             .def(self * float())
+            .def(float() * self)
             .def(self * other<Vec2>())
             .def(self + other<Vec2>())
             .def(self - other<Vec2>())
