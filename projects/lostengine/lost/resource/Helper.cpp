@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "lost/common/Data.h"
 #include "lost/resource/Helper.h"
 #include "lost/common/Logger.h"
