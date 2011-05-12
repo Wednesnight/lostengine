@@ -343,7 +343,8 @@ namespace lost
             filename = filename.substr(filename.find_first_not_of("file://")-1);
           }
           DOUT("Dropped file: " << filename);
-          DragNDropEventPtr dragNDropEvent(new DragNDropEvent(DragNDropEvent::DROP(), filename));
+          DragNDropEventPtr dragNDropEvent(new DragNDropEvent(DragNDropEvent::DROP()));
+          dragNDropEvent->addPath(filename);
           dragNDropEvent->window  = window;
           dragNDropEvent->pos     = lost::math::Vec2((float)x, (float)y);
           dragNDropEvent->absPos  = lost::math::Vec2((float)absX, (float)absY);
