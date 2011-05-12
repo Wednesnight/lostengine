@@ -278,7 +278,7 @@ namespace lost
     }
 
     int Tasklet_id(Tasklet* tasklet) {
-      return (int)tasklet;
+      return *(int*)tasklet;
     }
 
     void LostApplicationTasklet(lua_State* state)
