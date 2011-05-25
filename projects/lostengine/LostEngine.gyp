@@ -496,6 +496,9 @@
         'lost/bitmap/Gif.cpp',
         'lost/bitmap/GifDecoder.cpp',
 
+        # box2d
+        'lost/box2d/DebugDraw.cpp',
+
         # camera
         'lost/camera/Camera.cpp',
         'lost/camera/Camera2D.cpp',
@@ -565,6 +568,7 @@
         'lost/lua/bindings/LostApplication.cpp',
         'lost/lua/bindings/LostAudio.cpp',
         'lost/lua/bindings/LostBitmap.cpp',
+        'lost/lua/bindings/LostBox2D.cpp',
         'lost/lua/bindings/LostCamera.cpp',
         'lost/lua/bindings/LostCommon.cpp',
         'lost/lua/bindings/LostEvent.cpp',

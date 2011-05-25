@@ -105,11 +105,14 @@ namespace lost
     void ThirdpartyBox2Db2World(lua_State* state) {
       module(state, "box2d")
       [
+        class_<b2DebugDraw>("b2DebugDraw"),
         class_<b2World>("b2World")
           .def(constructor<const b2Vec2&, bool>())
           .def("CreateBody", &b2World::CreateBody)
           .def("ClearForces", &b2World::ClearForces)
           .def("Step", &b2World::Step)
+          .def("SetDebugDraw", &b2World::SetDebugDraw)
+          .def("DrawDebugData", &b2World::DrawDebugData)
       ];
     }
     
