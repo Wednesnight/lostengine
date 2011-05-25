@@ -6,6 +6,7 @@
   #include "lost/lua/bindings/LostAudio.h"
 #endif
 #include "lost/lua/bindings/LostBitmap.h"
+#include "lost/lua/bindings/LostBox2D.h"
 #include "lost/lua/bindings/LostCamera.h"
 #include "lost/lua/bindings/LostCommon.h"
 #include "lost/lua/bindings/LostEvent.h"
@@ -73,6 +74,7 @@ namespace lost
 
       ThirdpartyBoost(state);
       ThirdpartyBox2D(state);
+      LostBox2D(state); // bind after all of box2d was bound
 
       luabind::bind_class_info(state);
     }
