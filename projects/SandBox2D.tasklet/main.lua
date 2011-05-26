@@ -5,6 +5,10 @@ local MatrixRotZ = lost.math.MatrixRotZ
 local Rect = lost.math.Rect
 local Color = lost.common.Color
 
+local PhysicsManager = require("PhysicsManager")
+local World = require("World")
+local Entity = require("Entity")
+
 function createBoxMesh(size)
   local layout = lost.gl.BufferLayout()
   layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
@@ -51,15 +55,13 @@ function addBoxNode(pos,sz,rotz)
 end
 
 function startup()
-  debugDraw = lost.box2d.DebugDraw()
-
-  gravity = box2d.b2Vec2(0,-10)
-  doSleep = true
-  world = box2d.b2World(gravity, doSleep)
-  world:SetDebugDraw(debugDraw)
+  world = World()
+  pm = PhysicsManager()
+  
   groundBodyDef = box2d.b2BodyDef()
   groundBodyDef.position:Set(0.0,-10.0)
-  groundBody = world:CreateBody(groundBodyDef)
+  groundBody = pm.world:CreateBody(groundBodyDef)
+  
   groundBox = box2d.b2PolygonShape()
   groundBox:SetAsBox(50.0,10.0)
   groundBody:CreateFixture(groundBox,0)
@@ -67,7 +69,7 @@ function startup()
   bodyDef = box2d.b2BodyDef()
   bodyDef.type = box2d.b2_dynamicBody
   bodyDef.position:Set(0,4)
-  body = world:CreateBody(bodyDef)
+  body = pm.world:CreateBody(bodyDef)
   dynamicBox = box2d.b2PolygonShape()
   dynamicBox:SetAsBox(1,1)
   
@@ -78,24 +80,11 @@ function startup()
   fixtureDef.friction = .3
   
   fixture = body:CreateFixture(fixtureDef)
-  
-  timeStep = 1/60
-  velocityIterations = 6
-  positionIterations = 2
-  
-  for i=1,60 do
-    world:Step(timeStep,velocityIterations,positionIterations)
-    world:ClearForces()
-    position = body:GetPosition()
-    angle = body:GetAngle()
-    log.debug(position.x.." "..position.y.." "..angle)
-    world:DrawDebugData()
-  end
-  
+    
   tasklet.clearNode.active = false
   
   clearNode = lost.rg.Node.create()
-  clearNode:add(lost.rg.ClearColor.create(Color(.3,.4,1)))
+  clearNode:add(lost.rg.ClearColor.create(Color(2/255,73/255,152/255)))
   clearNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT))
   tasklet.renderNode:add(clearNode)
   
@@ -113,7 +102,8 @@ function startup()
 --  addBoxNode(Vec2(50,50),Vec2(100,100),17)
 end
 
-function update()
+function update(dt)
+  pm:update(dt)
 end
 
 function key(event)
