@@ -6,7 +6,8 @@ return function() -- constructor. everything outside this function inside this f
     constructor = function(self)
       self.gravity = box2d.b2Vec2(0,-10)
       self.doSleep = true
-      self.debugDraw = lost.box2d.DebugDraw()
+      self.debugDraw = lost.box2d.DebugDraw(tasklet.loader)
+      tasklet.renderNode:add(self.debugDraw.rootNode)
       self.world = box2d.b2World(self.gravity, self.doSleep)
       self.world:SetDebugDraw(self.debugDraw)
       self.timeStep = 1/30
@@ -17,13 +18,15 @@ return function() -- constructor. everything outside this function inside this f
     
     update = function(self, dt)
       self.accu = self.accu + dt
-      log.debug("---")
+--      log.debug("---")
       if self.accu >= self.timeStep then
         while self.accu >= self.timeStep do
-          log.debug("+++ updating physics")
+--          log.debug("+++ updating physics")
           self.world:Step(self.timeStep,self.velocityIterations,self.positionIterations)
           self.world:ClearForces()
+          self.debugDraw:beginDraw()
           self.world:DrawDebugData()
+          self.debugDraw:endDraw()
           self.accu = self.accu - self.timeStep
         end
       end

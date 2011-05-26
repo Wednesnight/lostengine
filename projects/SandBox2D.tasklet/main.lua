@@ -55,23 +55,38 @@ function addBoxNode(pos,sz,rotz)
 end
 
 function startup()
+  tasklet.clearNode.active = false
+
+  clearNode = lost.rg.Node.create()
+  clearNode:add(lost.rg.ClearColor.create(Color(2/255,73/255,152/255)))
+  clearNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT))
+  tasklet.renderNode:add(clearNode)
+
+  cam = lost.camera.Camera2D.create(Rect(0,0,800,800))
+  camNode = lost.rg.Camera.create(cam)
+  tasklet.renderNode:add(camNode)
+  tasklet.renderNode:add(lost.rg.DepthTest.create(false))
+
+
   world = World()
   pm = PhysicsManager()
   
   groundBodyDef = box2d.b2BodyDef()
-  groundBodyDef.position:Set(0.0,-10.0)
+  groundBodyDef.position:Set(20.0,10.0)
   groundBody = pm.world:CreateBody(groundBodyDef)
   
   groundBox = box2d.b2PolygonShape()
-  groundBox:SetAsBox(50.0,10.0)
+  groundBox:SetAsBox(500.0,30.0)
   groundBody:CreateFixture(groundBox,0)
   
   bodyDef = box2d.b2BodyDef()
   bodyDef.type = box2d.b2_dynamicBody
-  bodyDef.position:Set(0,4)
+  bodyDef.position:Set(30,100)
+  bodyDef.angularVelocity = -.7
   body = pm.world:CreateBody(bodyDef)
   dynamicBox = box2d.b2PolygonShape()
-  dynamicBox:SetAsBox(1,1)
+  dynamicBox:SetAsBox(10,10)
+
   
   fixtureDef = box2d.b2FixtureDef()
   fixtureDef:setShape(dynamicBox)
@@ -81,24 +96,15 @@ function startup()
   
   fixture = body:CreateFixture(fixtureDef)
     
-  tasklet.clearNode.active = false
   
-  clearNode = lost.rg.Node.create()
-  clearNode:add(lost.rg.ClearColor.create(Color(2/255,73/255,152/255)))
-  clearNode:add(lost.rg.Clear.create(gl.GL_COLOR_BUFFER_BIT))
-  tasklet.renderNode:add(clearNode)
-  
-  cam = lost.camera.Camera2D.create(Rect(0,0,800,800))
-  camNode = lost.rg.Camera.create(cam)
-  tasklet.renderNode:add(camNode)
-  
-  addBoxNode(Vec2(50,50),Vec2(100,100),17)
+--[[  addBoxNode(Vec2(50,50),Vec2(100,100),17)
   addBoxNode(Vec2(200,200),Vec2(70,180),97)
   addBoxNode(Vec2(200,400),Vec2(30,180),7)
   addBoxNode(Vec2(400,400),Vec2(35,180),-13)
   addBoxNode(Vec2(300,300),Vec2(15,180),0)
   addBoxNode(Vec2(300,280),Vec2(15,180),90)
   addBoxNode(Vec2(30,280),Vec2(2,230),67)
+  ]]
 --  addBoxNode(Vec2(50,50),Vec2(100,100),17)
 end
 
