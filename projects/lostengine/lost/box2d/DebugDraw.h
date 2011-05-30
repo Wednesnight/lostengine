@@ -1,5 +1,6 @@
 #include <Box2D/Box2D.h>
 #include <vector>
+#include <map>
 #include "lost/mesh/forward.h"
 #include "lost/rg/forward.h"
 #include "lost/gl/forward.h"
@@ -40,6 +41,13 @@ private:
   MeshVector unusedQuads;
   MeshVector quads;
   
+  typedef std::vector<rg::NodePtr> NodeVector;
+  typedef std::map<uint32_t, NodeVector> NodeMap;
+  NodeMap numverts2nodevector; // number of vertices -> node vector. each node is a draw node that contains a mesh with the desired number of vertices preallocated
+  NodeVector activeNodes; // will be filled by debugdraw calls. These nodes should be added to the rootNode in endDraw()
+  rg::NodePtr createNode(uint32_t numVertices);
+  rg::NodePtr findInactiveNode(uint32_t numVertices);
+  void deactivateAllNodes();
 };
 
 }

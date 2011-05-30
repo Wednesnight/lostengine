@@ -134,6 +134,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     {
       math::Vec2 pos(vertices[i].x, vertices[i].y);
       quad->set(i,gl::UT_position,pos);
+      quad->material->color = common::Color(color.r, color.g, color.b);
     }
     quads.push_back(quad);
   }
@@ -149,6 +150,7 @@ void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, cons
     {
       math::Vec2 pos(vertices[i].x, vertices[i].y);
       quad->set(i,gl::UT_position,pos);
+      quad->material->color = common::Color(color.r, color.g, color.b);
     }
     quads.push_back(quad);
   }
@@ -174,6 +176,54 @@ void DebugDraw::DrawTransform(const b2Transform& xf)
 //  DOUT("");
 }
 
+// setup for line loop drawing
+rg::NodePtr DebugDraw::createNode(uint32_t numVertices)
+{  
+  lost::gl::BufferLayout layout;
+  layout.add(gl::ET_vec2_f32,gl::UT_position,0);
+  
+  mesh::MeshPtr result(new mesh::Mesh(layout, gl::ET_u16));
+  uint32_t numIndices = numVertices;
+  result->indexBuffer->drawMode = GL_LINE_LOOP;
+  result->resetSize(numVertices,numIndices);
+  result->material->shader = shader();
+
+  for(uint32_t i=0; i<numVertices; ++i)
+  {
+    result->setIndex(i,i);
+  }
+  
+  rg::DrawPtr drawNode = rg::Draw::create(result);
+  return drawNode;
+}
+
+rg::NodePtr DebugDraw::findInactiveNode(uint32_t numVertices)
+{
+  rg::NodePtr result;
+  NodeVector& nv = numverts2nodevector[numVertices];
+  if(nv.size() == 0)
+  {
+    result = createNode(numVertices);
+  }
+  else {
+    result = nv.back();
+    nv.pop_back();
+  }
+
+  return result;
+}
+
+void DebugDraw::deactivateAllNodes()
+{
+  for(NodeVector::iterator i=activeNodes.begin(); i!=activeNodes.end(); ++i)
+  {
+    rg::NodePtr p = *i;
+    rg::DrawPtr dp = static_pointer_cast<rg::Draw>(p);
+    uint32_t numVerts = dp->mesh->numVertices();
+    numverts2nodevector[numVerts].push_back(p);
+  }
+  activeNodes.clear();
+}
 
 }
 }

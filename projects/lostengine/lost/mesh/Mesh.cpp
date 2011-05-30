@@ -107,6 +107,10 @@ MeshPtr Mesh::clone()
   return result;
 }
 
+uint32_t Mesh::numVertices()
+{
+  return vertexBuffer->hostBuffer->count; 
+}
 
 }
 }
