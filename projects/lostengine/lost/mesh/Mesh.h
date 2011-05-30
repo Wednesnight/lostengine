@@ -61,6 +61,7 @@ struct Mesh
   gl::HybridIndexBufferPtr indexBuffer;
   
   virtual MeshPtr clone();
+  uint32_t numVertices(); // returns the current size of the vertexbuffer
 };
 
 }
