@@ -622,11 +622,9 @@
         # resource
         'lost/resource/ApplicationResourceRepository.cpp',
         'lost/resource/DefaultLoader.cpp',
-        'lost/resource/DefaultWriter.cpp',
         'lost/resource/FilesystemRepository.cpp',
         'lost/resource/Helper.cpp',
         'lost/resource/Loader.cpp',
-        'lost/resource/Writer.cpp',
 
         # rg
         'lost/rg/Blend.cpp',

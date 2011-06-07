@@ -4,7 +4,6 @@
 #include "lost/resource/DefaultLoader.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
-#include "lost/resource/Writer.h"
 #include "lost/common/Data.h"
 #include "lost/lua/bindings/directory_iterator_policy.h"
 
@@ -66,24 +65,6 @@ namespace lost
          ]
       ];
     }
-
-    void LostResourceWriter_write(object inWriter, const std::string& inPath, const common::DataPtr& inData)
-    {
-      Writer* writer = object_cast<Writer*>(inWriter);
-      return writer->write(inPath, inData);
-    }
-    
-    void LostResourceWriter(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<Writer>("Writer")
-            .def("write", &LostResourceWriter_write)
-        ]
-      ];
-    }
     
     void LostResourceFilesystemRepository(lua_State* state)
     {
@@ -121,7 +102,6 @@ namespace lost
       LostResourceFilesystemRepository(state);
       LostResourceApplicationResourceRepository(state);
       LostResourceLoader(state);
-      LostResourceWriter(state);
     }
 
   }
