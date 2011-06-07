@@ -21,6 +21,8 @@ namespace platform
     // Windows : done
     // Linux   : not implemented
     boost::filesystem::path getApplicationDirectory();
+    
+    boost::filesystem::path getUserDataPath();
 }
 }
 
