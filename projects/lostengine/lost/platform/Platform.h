@@ -43,6 +43,8 @@
   #endif
 #endif
 
+#include "boost/filesystem.hpp"
+
 namespace lost
 {
   namespace platform
@@ -90,39 +92,18 @@ namespace lost
 
   //*** platform specific forwards, implemented in Platform_*.cpp
 
-    // tries to find the resource in the application resource directory
-    // throws runtime_exception if resource could not be found
-    // Mac OS X: when building a Cocoa app, the resource directory is located inside
-    //           the application bundle
-    // Windows : the directory the main executable remains in
-    // Linux   : not implemented
-    std::string buildResourcePath( const std::string& filename );
-
     // returns the application resource directory
     // Mac OS X: when building a Cocoa app, the resource directory is located inside
     //           the application bundle
     // Windows : the directory the main executable remains in
     // Linux   : not implemented
-    std::string getResourcePath();
-
-    // tries to find the resource in the user's data directory
-    // throws runtime_exception if file could not be found
-    // Mac OS X: not implemented
-    // Windows : ~\Documents and Settings\<user>\Application Data\<program name>
-    // Linux   : not implemented
-    std::string buildUserDataPath( const std::string& filename );
+    boost::filesystem::path getResourcePath();
 
     // the directory the main executable remains in
     // Mac OS X: not implemented
     // Windows : done
     // Linux   : not implemented
-    std::string getApplicationDirectory();
-
-    // the main executable filename
-    // Mac OS X: not implemented
-    // Windows : done
-    // Linux   : not implemented
-    std::string getApplicationFilename( bool excludeExtension = false );
+    boost::filesystem::path getApplicationDirectory();
 
     // returns current time in microseconds
     double currentTimeMicroSeconds();

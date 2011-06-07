@@ -24,7 +24,6 @@ namespace lost
           def("isIPhone", &isIPhone),
           def("currentTimeSeconds", &currentTimeSeconds),
           def("currentTimeMilliSeconds", &currentTimeMilliSeconds),
-          def("buildResourcePath", &buildResourcePath),
           def("getResourcePath", &getResourcePath)
         ]
       ];
