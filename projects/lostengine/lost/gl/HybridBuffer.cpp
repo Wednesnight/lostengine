@@ -1,5 +1,6 @@
 #include "lost/gl/HybridBuffer.h"
 #include "lost/gl/Context.h"
+#include <string>
 
 namespace lost
 {

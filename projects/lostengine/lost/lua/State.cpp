@@ -1,9 +1,7 @@
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
-#include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include <boost/filesystem.hpp>
 #include <luabind/exception_handler.hpp>
 
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++

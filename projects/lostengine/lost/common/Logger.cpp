@@ -2,7 +2,8 @@
 #include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
 #include "lost/common/Logger.h"
-#include "lost/platform/Platform.h"
+#include "lost/platform/Type.h"
+#include "lost/platform/Time.h"
 
 #ifdef ANDROID
 extern "C" {

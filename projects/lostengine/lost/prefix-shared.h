@@ -26,7 +26,7 @@
   // lostengine
   #include "lost/platform/shared_ptr.h"
   //#include "lost/gl/gl.h"
-
+  #include "lost/platform/Platform.h"
 #endif
 
 #endif

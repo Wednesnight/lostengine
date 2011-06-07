@@ -9,7 +9,6 @@
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
 #include <algorithm>
-#include "lost/platform/Platform.h"
 #include "lost/common/Logger.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/Queue.h"
@@ -24,7 +23,6 @@
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/gl.h"
-#include <boost/filesystem.hpp>
 #include "lost/font/FontManager.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/KeyEvent.h"

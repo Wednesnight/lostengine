@@ -1,5 +1,5 @@
 #include "lost/time/ThreadedTimerScheduler.h"
-#include "lost/platform/Platform.h"
+#include "lost/platform/Time.h"
 #include "lost/event/Event.h"
 #include "lost/event/Receive.h"
 

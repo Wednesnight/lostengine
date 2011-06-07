@@ -8,7 +8,7 @@ extern "C" {
 }
 
 #include <luabind/luabind.hpp>
-#include "lost/platform/Platform.h"
+#include "lost/platform/Type.h"
 
 #undef LUA_NUMBER
 #undef LUA_NUMBER_SCAN

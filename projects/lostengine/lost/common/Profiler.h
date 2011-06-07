@@ -5,7 +5,7 @@
 
   #include <map>
 
-  #include "lost/platform/Platform.h"
+//  #include "lost/platform/Platform.h"
   #include "lost/common/Logger.h"
 
   // split macro calls to avoid compiler warnings
