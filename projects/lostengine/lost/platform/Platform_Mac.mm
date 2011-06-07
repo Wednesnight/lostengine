@@ -6,6 +6,9 @@
 #include <stdexcept>
 #include <sys/time.h>
 #include "boost/filesystem.hpp"
+#import <Foundation/Foundation.h>
+#include "lost/common/Logger.h"
+
 using namespace std;
 
 namespace lost
@@ -75,8 +78,37 @@ namespace lost
       
       string result(reinterpret_cast<char*>(buffer));
       CFRelease(resourceDirURL);
-      
+            
       return boost::filesystem::path(result);
     }
+    
+    boost::filesystem::path getUserDataPath()
+    {
+      boost::filesystem::path result;
+      
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+      if(paths.count > 0)
+      {
+        NSString* path = [paths objectAtIndex:0];
+        const char* cpath = [path cStringUsingEncoding:NSUTF8StringEncoding];
+        if(cpath)
+        {
+          std::string stringPath(cpath);
+          result = stringPath;
+        }
+        else 
+        {
+          WOUT("conversion to c-string returned NULL");
+        }
+      }
+      else
+      {
+        WOUT("couldn't find user data path");
+      }
+      [pool release];
+      return result;
+    }
+    
   }
 }

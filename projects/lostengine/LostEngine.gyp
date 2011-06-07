@@ -612,7 +612,7 @@
 
         # platform
         'lost/platform/Platform.cpp',
-        'lost/platform/Platform_Mac.cpp',
+        'lost/platform/Platform_Mac.mm',
         'lost/platform/Platform_Windows.cpp',
         'lost/platform/Platform_Linux.cpp',
 
