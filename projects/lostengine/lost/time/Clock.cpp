@@ -1,5 +1,5 @@
 #include "lost/time/Clock.h"
-#include "lost/platform/Platform.h"
+#include "lost/platform/Time.h"
 
 
 #if defined(__APPLE__) || defined(linux)

@@ -9,7 +9,7 @@
 #ifndef LOST_GL_GL_H
 #define LOST_GL_GL_H
 
-  #include "lost/platform/Platform.h"
+  #include "lost/platform/Type.h"
 
   // in case of iphone, this header includes the OpenGL ES interfaces
   // every other platform gets the standard gl headers plus helpers provided

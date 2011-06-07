@@ -44,9 +44,9 @@ namespace lost
     }
 
     // TODO: getApplicationDirectory() not implemented
-    std::string getApplicationDirectory()
+    boost::filesystem::path getApplicationDirectory()
     {
-      std::string result;
+      boost::filesystem::path result;
       return result;
     }
 
