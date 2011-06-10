@@ -1,7 +1,7 @@
-require("lost.common.Prefs")
+require("lost.common.PrefsManager")
 
 function startup()
-  prefsManager = lost.common.Prefs{prefix="LostEngine/SerializeTest",filename="prefs.lua"}
+  prefsManager = lost.common.PrefsManager{prefix="LostEngine/SerializeTest",filename="prefs.lua"}
   prefs = prefsManager:load()
   log.debug("-- prefs")
   for k,v in pairs(prefs) do
