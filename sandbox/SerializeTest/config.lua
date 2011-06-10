@@ -4,5 +4,9 @@ return
   {
     name = "SerializeTest",
     waitForEvents = true,
+  },
+  window =
+  {
+    title = "SerializeTest",
   }
 }
