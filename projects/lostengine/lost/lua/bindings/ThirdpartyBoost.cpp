@@ -41,7 +41,8 @@ namespace lost
             .def("remove_filename", &path::remove_filename)
             .def("filename", &path::filename)
             .def("stem", &path::stem)
-            .def("extension", &path::extension),
+            .def("extension", &path::extension)
+            .def("native", &path::native),
         
           class_<directory_iterator>("directory_iterator"),
         

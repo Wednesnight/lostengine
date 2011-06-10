@@ -1,27 +1,21 @@
-require("lost.common.Serializer")
-
-t = 
-{
-  color = 
-  {
-    1,1,1
-  },
-  alpha = 1,
-  name = "Hello",
-}
+require("lost.common.Prefs")
 
 function startup()
-  log.debug("--")
-  local s = lost.common.Serializer()
-  log.debug(s:serialize(t))
-  
-  local userDataPath = lost.platform.getUserDataPath()
-  log.debug(tostring(userDataPath))
-  log.debug("userDataPath exists: "..tostring(boost.filesystem.exists(userDataPath)))
-  local appDataPath = userDataPath / "LostEngine" / "SerializeTest"
-  log.debug(tostring(appDataPath))
-  log.debug("appDataPath exists: "..tostring(boost.filesystem.exists(appDataPath)))
-  log.debug("creating appDataPath: "..tostring(boost.filesystem.create_directories(appDataPath)))
+  prefsManager = lost.common.Prefs{prefix="LostEngine/SerializeTest",filename="prefs.lua"}
+  prefs = prefsManager:load()
+  log.debug("-- prefs")
+  for k,v in pairs(prefs) do
+    print(tostring(k).." = "..tostring(v))
+  end
+end
+
+function shutdown()
+  if not prefs.count then
+    prefs.count = 0
+  else
+    prefs.count = prefs.count + 1
+  end
+  prefsManager:save(prefs)
 end
 
 function key(event)
