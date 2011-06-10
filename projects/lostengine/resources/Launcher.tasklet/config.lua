@@ -4,7 +4,7 @@ return {
     waitForEvents = true
   },
   window = {
-    title = "LostEngine Launcher",
+    title = "LostEngine",
     x = 50,
     y = 800,
     width = 430,
