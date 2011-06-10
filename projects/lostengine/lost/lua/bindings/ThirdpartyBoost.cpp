@@ -4,6 +4,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/system/error_code.hpp>
 #include <luabind/operator.hpp>
 
 using namespace boost::filesystem;
@@ -51,7 +52,9 @@ namespace lost
           class_<file_status>("file_status"),
 
           def("is_directory", (bool(*)(file_status)) &is_directory),
-          def("is_regular_file",(bool(*)(const path& p)) &is_regular_file)
+          def("is_regular_file",(bool(*)(const path& p)) &is_regular_file),
+          def("exists",(bool(*)(const path& p)) &exists),
+          def("create_directories",(bool(*)(const path& p)) &create_directories)        
         ]
        ];
     }
