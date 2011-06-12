@@ -30,7 +30,7 @@ function ThemeManager:apply(target, themeName, styleName, args)
     
   local theme = self.themes[themeName]
   if not theme then
-    log.warn("--- couldn't find theme '"..theme.."'")
+    log.warn("--- couldn't find theme '"..tostring(theme).."'")
     return
   end
 --  log.debug("apply theme '"..themeName.."' style '"..styleName.."' to instance of "..target:className())
