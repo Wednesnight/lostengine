@@ -54,25 +54,42 @@ function TaskletListController:playTexture()
   return self._playTexture
 end
 
+function TaskletListController:taskletStartRequested(entry)
+  log.debug("start "..entry.path)
+  tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(entry.path))  
+end
+
 function TaskletListController:createCellView()
   local result = lost.guiro.view.View
   {
     id="cell",
     clip=true,
+    listeners=
+    {
+      buttonClick=function(event) 
+        if event.target.id == "autorun" then
+          log.debug("autorun "..tostring(event.target:pushed())) 
+          event.currentTarget:dataSource().autorun = event.target:pushed()
+        end
+      end,
+      mouseDown=function(event) 
+        if (event.target.id == "start") or (event.target.id == "play") or (event.target.id=="name") then
+          self:taskletStartRequested(event.currentTarget:dataSource())
+        end
+      end
+    },    
     subviews=
     {
       lost.guiro.view.View
       {
+        id="start",
         bounds={0,0,{"1",-64},"1"},
         clip=true,
-        listeners=
-        {
-          mouseDown=function(event) log.debug("start") end
-        },
         subviews=
         {
           lost.guiro.view.Image
           {
+            id="play",
             texture=self:playTexture(),
             bounds={0,0,20,"1"},
             valign="center",
@@ -103,6 +120,10 @@ function TaskletListController:createCellView()
       },
       lost.guiro.view.Button
       {
+        listeners=
+        {
+          buttonClick=function(event) log.debug("remove") end
+        },
         id="remove",
         theme="launcher",
         style="remove",
@@ -112,14 +133,19 @@ function TaskletListController:createCellView()
     sublayers=
     {
       lost.guiro.layer.Rect{bounds={"right",0,64,"1"},color=Color(.7,.7,.7,.7),gradient="rrbg"},
---      lost.guiro.layer.Rect{bounds={0,"bottom","1",20},color=Color(1,1,1,.7),gradient="rrbg"},
       lost.guiro.layer.HLine{bounds={0,"bottom","1",1},color=Color(1,1,1,.7)}
     }
   }
   result.nameLabel = result:recursiveFindById("name")
+  result.autorunCheckbox = result:recursiveFindById("autorun")
   result.dataSource = function(self,ds)
-    self._dataSource = ds
-    self.nameLabel:text(ds.name)
+    if ds ~= nil then
+      self._dataSource = ds
+      self.nameLabel:text(ds.name)
+      self.autorunCheckbox:pushed(ds.autorun)
+    else
+      return self._dataSource
+    end
   end
   result.reuseId = "cell"
   return result

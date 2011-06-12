@@ -61,6 +61,21 @@ end
 
 function MainViewController:startup()
   self._prefs = self._prefsManager:load() or defaultPrefs
+
+  -- make sure there's an autorun flag in the tasklet entry
+  for k,v in pairs(self._prefs.tasklets) do
+    if v.autorun == nil then
+      v.autorun = false
+    end
+  end
+
+  -- start autorun tasklets
+  for k,v in pairs(self._prefs.tasklets) do
+    if v.autorun == true then
+      tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(v.path))    
+    end
+  end
+
   self.taskletController:tasklets(self._prefs.tasklets)
 end
 
