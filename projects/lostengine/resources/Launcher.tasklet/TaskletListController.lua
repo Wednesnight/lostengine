@@ -44,6 +44,16 @@ end
 
 -- listview delegate end
 
+function TaskletListController:playTexture()
+  if not self._playTexture then
+    local bmp = lost.bitmap.Bitmap.create(tasklet.loader:load("131.png"))
+    bmp:premultiplyAlpha()
+    local texparam = lost.gl.Texture.Params()
+    self._playTexture = lost.gl.Texture.create(bmp, texparam)
+  end
+  return self._playTexture
+end
+
 function TaskletListController:createCellView()
   local result = lost.guiro.view.View
   {
@@ -51,37 +61,64 @@ function TaskletListController:createCellView()
     clip=true,
     subviews=
     {
-      lost.guiro.view.Label
+      lost.guiro.view.View
       {
-        id="name",
-        bounds={20,{"top",-10},{"1",-20},15},
-        color=Color(0,0,0),
-        font={"Vera",12},
-        text="Hello",
-        halign="left"
+        bounds={0,0,{"1",-64},"1"},
+        clip=true,
+        listeners=
+        {
+          mouseDown=function(event) log.debug("start") end
+        },
+        subviews=
+        {
+          lost.guiro.view.Image
+          {
+            texture=self:playTexture(),
+            bounds={0,0,20,"1"},
+            valign="center",
+            halign="center"
+          },
+          lost.guiro.view.Label
+          {
+            id="name",
+            bounds={24,"center",{"1",-24},15},
+            color=Color(0,0,0),
+            font={"Vera",12},
+            text="Hello",
+            halign="left"
+          },
+        },
+        sublayers=
+        {
+          lost.guiro.layer.Rect{bounds={0,0,"1","1"},color=Color(1,1,1,.7),gradient="rrbg"},
+        }
       },
-      lost.guiro.view.Label
+      lost.guiro.view.Button
       {
-        id="path",
-        bounds={10,6,{"1",-20},10},
-        text="hello",
-        color=Color(.6,.6,.6),
-        font = {"Vera",9},
-        breakMode="char",
-        halign="left"
+        id="autorun",
+        bounds={"right",{"bottom",8},60,10},
+        style="checkboxCandy",
+        size="mini",
+        title="Autorun"
+      },
+      lost.guiro.view.Button
+      {
+        id="remove",
+        theme="launcher",
+        style="remove",
+        bounds={{"right",-4},{"top",-8},10,10},
       }
     },
     sublayers=
     {
-      lost.guiro.layer.Rect{color=Color(1,1,1,.7),gradient="rrbg"},
+      lost.guiro.layer.Rect{bounds={"right",0,64,"1"},color=Color(.7,.7,.7,.7),gradient="rrbg"},
+--      lost.guiro.layer.Rect{bounds={0,"bottom","1",20},color=Color(1,1,1,.7),gradient="rrbg"},
       lost.guiro.layer.HLine{bounds={0,"bottom","1",1},color=Color(1,1,1,.7)}
     }
   }
-  result.pathLabel = result:recursiveFindById("path")
   result.nameLabel = result:recursiveFindById("name")
   result.dataSource = function(self,ds)
     self._dataSource = ds
-    self.pathLabel:text(ds.path)
     self.nameLabel:text(ds.name)
   end
   result.reuseId = "cell"
