@@ -2,7 +2,7 @@ require("lost.common.PrefsManager")
 
 function startup()
   prefsManager = lost.common.PrefsManager{prefix="LostEngine/SerializeTest",filename="prefs.lua"}
-  prefs = prefsManager:load()
+  prefs = prefsManager:load() or {}
   log.debug("-- prefs")
   for k,v in pairs(prefs) do
     print(tostring(k).." = "..tostring(v))
