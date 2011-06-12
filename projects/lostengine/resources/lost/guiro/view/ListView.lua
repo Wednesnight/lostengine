@@ -269,7 +269,11 @@ function ListView:rebuildSubviews()
         cell:height(entry[1]-entry[2])
         self.contentView:addSubview(cell)
         local ds = self:rowForIndexPath(ip)
-        cell:dataSource(ds)
+        if cell.dataSource and (type(cell.dataSource)=="function") then
+          cell:dataSource(ds)
+        else
+          error("cells must have a dataSource accessor method")
+        end
         self:cacheCell(cell,true)
         self._cellAtIndex[i]=cell 
       end
@@ -391,6 +395,12 @@ function ListView:cellForRowAtIndexPath(indexPath)
   local result = nil
   if self._delegate and self._delegate.cellForRowAtIndexPath then
     result = self._delegate:cellForRowAtIndexPath(self, indexPath)
+  else
+    if not self._delegate then
+      error("'"..self.id.."' has no delegate")
+    else
+      error("'"..self.id.."' delegate has no cellForRowAtIndexPath method")
+    end
   end
   return result
 end
