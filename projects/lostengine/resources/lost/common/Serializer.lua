@@ -57,7 +57,12 @@ function Serializer:_serialize(data,nindent,isRoot)
   
   if ia then
     for k,v in pairs(data) do
+      if type(v) ~= "table" then
         self:append(tostring(v)..",",n+1)
+      else
+        self:_serialize(v,n+1,false)
+        self:append(",",n+1)
+      end
     end
   else
     for k,v in pairs(data) do

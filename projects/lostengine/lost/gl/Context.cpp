@@ -316,8 +316,8 @@ std::map<void*, Context*> glContext2lostGlContext;
     void Context::shader(const ShaderProgramPtr& prog)
     {
       if(currentShader && !prog) {currentShader->disable();}
-      if(currentShader != prog) 
-      {
+//      if(currentShader != prog) 
+//      {
         currentShader = prog;
         if(currentShader)
         {
@@ -325,7 +325,7 @@ std::map<void*, Context*> glContext2lostGlContext;
           BB_INC("lost.gl.Context.shaderSwitch");
           currentShader->enable();
         }
-      }
+//      }
     }
     
     void Context::material(const MaterialPtr& mat)
