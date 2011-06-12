@@ -9,8 +9,13 @@ function startup()
   local rr = lost.guiro.layer.RoundedRect
   local t = lost.guiro.layer.Text
   
-  mainViewController = MainViewController()  
+  mainViewController = MainViewController()
+  mainViewController:startup()  
   lost.guiro.ui():addSubview(mainViewController.view)
+end
+
+function shutdown()
+  mainViewController:shutdown()
 end
 
 function key(event)

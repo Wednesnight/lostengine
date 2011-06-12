@@ -175,6 +175,7 @@ namespace lost
       // render
       if(window != NULL)
       {
+        window->context->makeCurrent();
         clearNode->process(window->context);
         renderNode->process(window->context);
         uiNode->process(window->context);

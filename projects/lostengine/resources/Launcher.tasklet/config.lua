@@ -7,7 +7,7 @@ return {
     title = "LostEngine",
     x = 50,
     y = 800,
-    width = 430,
-    height = 150
+    width = 320,
+    height = 420
   }
 }

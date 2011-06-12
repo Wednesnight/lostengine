@@ -12,6 +12,8 @@ function Image:constructor(args)
   self:scale(t.scale or "none")
   self:filter(t.filter or false)
   self:flip(t.flip or false)
+  self:valign(t.valign or "center")
+  self:halign(t.halign or "center")
 	self._bbcounter = lost.profiler.BBCount("lost.guiro.view.Image")          
 end
 
@@ -30,6 +32,23 @@ function Image:scale(...)
     return self.imageLayer:scale()
   end
 end
+
+function Image:valign(...)
+  if arg.n >= 1 then
+    self.imageLayer:valign(arg[1])
+  else
+    return self.imageLayer:valign()
+  end
+end
+
+function Image:halign(...)
+  if arg.n >= 1 then
+    self.imageLayer:halign(arg[1])
+  else
+    return self.imageLayer:halign()
+  end
+end
+
 
 function Image:filter(...)
   if arg.n >= 1 then

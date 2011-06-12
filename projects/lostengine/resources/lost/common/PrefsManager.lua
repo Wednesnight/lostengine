@@ -17,18 +17,19 @@ function PrefsManager:constructor(t)
 end
 
 function PrefsManager:load()
-  local result = {}
+  local result = nil
   if boost.filesystem.exists(self._prefsFilePath) then
-    log.debug("prefs exits, loading")
     local file = io.open(self._prefsFilePath:native())
     local data = file:read("*all")
     file:close()
-    log.debug("LOADED "..tostring(data))
-    local f = loadstring(data)
-    log.debug("++ "..type(f))
-    result = f()
+    local f,err = loadstring(data)
+    if not f and err then
+      log.error("!! broken prefs file : "..self._prefsFilePath:native())
+    else
+      result = f()
+    end
   else
-    log.debug("no prefs found, returning empty table")
+--    log.debug("no prefs found, returning empty table")
   end
   return result
 end
