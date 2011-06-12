@@ -1,10 +1,4 @@
-return lost.guiro.view.View
+return lost.guiro.view.ListView
 {
-  subviews=
-  {
-    lost.guiro.view.Label
-    {
-      text = "Tasklets"
-    }
-  }  
+--  alwaysShowCorner = true
 }

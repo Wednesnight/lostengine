@@ -16,7 +16,7 @@ function UpdateManager:constructor()
   self._viewUpdateQ = { set={}, list={}}
   self._viewLayoutQ = { set={}, list={}}
   self._viewDisplayQ = { set={}, list={}}
-  
+  self._tq = {} -- temp queue for update loop
   self.lupdateFunc = function(layer) layer:update();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdate") end
   self.lupdateLayoutFunc = function(layer) layer:updateLayout();lost.profiler.bb_inc("lost.guiro.UpdateManager.layerUpdateLayout") end
   self.lapplyLayoutfunc = function(layer) 
@@ -29,7 +29,10 @@ function UpdateManager:constructor()
   
   
   self.vupdateFunc = function(view) view:update();lost.profiler.bb_inc("lost.guiro.UpdateManager.viewUpdate") end
-  self.vupdateLayoutFunc = function(view) view:updateLayout();lost.profiler.bb_inc("lost.guiro.UpdateManager.viewUpdateLayout") end
+  self.vupdateLayoutFunc = function(view) 
+--    log.debug("update layout view "..view.id)
+    view:updateLayout();lost.profiler.bb_inc("lost.guiro.UpdateManager.viewUpdateLayout") 
+  end
   self.vapplyLayoutfunc = function(view)
                                      if view.layout then
                                        view.layout:apply(view, view.subviews)
@@ -51,51 +54,63 @@ local function depthSortFunc(a,b)
   return a.z < b.z
 end
 
-function UpdateManager:processQ(q, f, doSort, doClear)
+function UpdateManager:processQ(q, f, doSort)
 --  log.debug("Q elems: "..tostring(#(q.list)))
-  if doSort then table.sort(q.list, depthSortFunc) end
-  for k,v in pairs(q.list) do
+  local tempQ = {list=q.list,set=q.set}
+  q.list={}
+  q.set={}
+  if doSort then table.sort(tempQ.list, depthSortFunc) end
+  for k,v in pairs(tempQ.list) do
     f(v)
-  end
-  if doClear then
-    q.list = {}
-    q.set = {}
   end
 end
 
 function UpdateManager:processLayerUpdates()
-  self:processQ(self._layerUpdateQ, self.lupdateFunc, true, true)
+    self:processQ(self._layerUpdateQ, self.lupdateFunc, true)
 end
 
 function UpdateManager:processLayerLayoutUpdates()
-  self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true, false)
-  local oldq = self._layerLayoutQ
-  self._layerLayoutQ = {list={}, set={}}
-  self:processQ(oldq, self.lapplyLayoutfunc, false, true)
-  self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true, true)
+  local numUpdates = 0
+  while next(self._layerLayoutQ.set) ~= nil do
+--    log.debug("++ layer layout")
+    self._tq.list = self._layerLayoutQ.list
+    self._tq.set = self._layerLayoutQ.set    
+    self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true)
+    self:processQ(self._tq, self.lapplyLayoutfunc, true)
+    self:processQ(self._layerLayoutQ, self.lupdateLayoutFunc, true)
+    numUpdates = numUpdates + 1
+  end
+--  log.debug("performed "..tostring(numUpdates).." layer layout updates")
 end
 
 function UpdateManager:processLayerDisplayUpdates()
-  self:processQ(self._layerDisplayQ, self.lupdateDisplayFunc, true, true)
+  self:processQ(self._layerDisplayQ, self.lupdateDisplayFunc, true)
 end
 
 function UpdateManager:processViewUpdates()
-  self:processQ(self._viewUpdateQ, self.vupdateFunc, true, true)
+  self:processQ(self._viewUpdateQ, self.vupdateFunc, true)
 end
 
 function UpdateManager:processViewLayoutUpdates()
-  self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true, false)
-  local oldq = self._viewLayoutQ
-  self._viewLayoutQ = {list={}, set={}}
-  self:processQ(oldq, self.vapplyLayoutfunc, false, true)
-  self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true, true)
+  local numUpdates = 0
+  while next(self._viewLayoutQ.set) ~= nil do
+--    log.debug("++ view layout")
+    self._tq.list = self._viewLayoutQ.list
+    self._tq.set = self._viewLayoutQ.set        
+    self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true)
+    self:processQ(self._tq, self.vapplyLayoutfunc, true)
+    self:processQ(self._viewLayoutQ, self.vupdateLayoutFunc, true)
+    numUpdates = numUpdates + 1
+  end
+--  log.debug("performed "..tostring(numUpdates).." view layout updates")
 end
 
 function UpdateManager:processViewDisplayUpdates()
-  self:processQ(self._viewDisplayQ, self.vupdateDisplayFunc, true, true)
+  self:processQ(self._viewDisplayQ, self.vupdateDisplayFunc, true)
 end
 
 function UpdateManager:updateOnce()
+--  log.debug("-- updateOnce")
   self:processViewUpdates()
   self:processViewLayoutUpdates()
   self:processViewDisplayUpdates()
@@ -115,18 +130,17 @@ function UpdateManager:hasUpdates()
 end
 
 function UpdateManager:update()
---  log.debug("-- UPDATE")
+--  log.debug("-- update")
   local numUpdates = 0
   while self:hasUpdates() do
     self:updateOnce()
     numUpdates = numUpdates + 1
     if numUpdates >= 3 then
-      log.warn("update cycle "..numUpdates)
+--      log.warn("update cycle "..numUpdates)
     end
   end
   self._updateScheduled = false
 --  log.debug("performed "..numUpdates.." update cycles")
---  self:checkQueues()
 end
 
 function UpdateManager:scheduleUpdateIfNeeded()
