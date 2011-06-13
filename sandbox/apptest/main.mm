@@ -1,8 +1,8 @@
 #include <iostream>
 #include "tinythread.h"
-#include "Event.h"
-#include "Listener.h"
-#include "Signal.h"
+#include "lost/event/Event.h"
+#include "lost/event/Listener.h"
+#include "lost/event/Signal.h"
 #include <EASTL/string.h>
 #include "lost/common/eastlStreamSupport.h"
 #include "lost/common/Logger.h"
