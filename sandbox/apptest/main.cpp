@@ -3,6 +3,8 @@
 #include "Event.h"
 #include "Listener.h"
 #include "Signal.h"
+#include <EASTL/string.h>
+#include "lost/common/eastlStreamSupport.h"
 
 using namespace std;
 
@@ -64,6 +66,9 @@ int main (int argc, char * const argv[]) {
   CustomEvent ev2;
   listener.call(&ev);
   listener.call(&ev2);
+  
+  eastl::string s = "hello";
+  cout << s << endl;
   
   return EXIT_SUCCESS;
 }
