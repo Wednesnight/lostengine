@@ -15,6 +15,11 @@ typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
 struct Listener;
 typedef lost::shared_ptr<Listener> ListenerPtr;
 
+struct Signal;
+typedef lost::shared_ptr<Signal> SignalPtr;
+
+struct ApplicationEvent;
+typedef lost::shared_ptr<ApplicationEvent> ApplicationEventPtr;
 }
 }
 #endif

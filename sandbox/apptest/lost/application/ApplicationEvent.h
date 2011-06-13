@@ -2,6 +2,7 @@
 #define LOST_APPLICATION_APPLICATIONEVENT_H
 
 #include "lost/event/Event.h"
+#include "lost/application/forward.h"
 
 namespace lost
 {

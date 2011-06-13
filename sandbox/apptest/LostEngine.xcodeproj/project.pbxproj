@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		EA212B0113A6AE0D0064F93C /* LEGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA212B0013A6AE0D0064F93C /* LEGLView.mm */; };
+		EA212B0913A6AE7B0064F93C /* LEAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA212B0813A6AE7B0064F93C /* LEAppDelegate.mm */; };
+		EA212B6313A6B5670064F93C /* Application.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA212B6213A6B5670064F93C /* Application.mm */; };
+		EA212B6513A6B56B0064F93C /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA212B6413A6B56B0064F93C /* ApplicationTaskletSpawn.cpp */; };
 		EA21657F13A664CA00B96B47 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA21657E13A664CA00B96B47 /* main.mm */; };
 		EA21659B13A664D500B96B47 /* Signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21659013A664D500B96B47 /* Signal.cpp */; };
 		EA21659C13A664D500B96B47 /* Platform_Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA21659313A664D500B96B47 /* Platform_Mac.mm */; };
@@ -115,12 +119,20 @@
 		EA21675213A66FE100B96B47 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674F13A66FE100B96B47 /* Runner.cpp */; };
 		EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21675013A66FE100B96B47 /* Tasklet.cpp */; };
 		EA21680713A68D4400B96B47 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21680613A68D4400B96B47 /* EventDispatcher.cpp */; };
+		EAB0D06513A6A4680015411C /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06213A6A4680015411C /* BindAll.cpp */; };
+		EAB0D06613A6A4680015411C /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06313A6A4680015411C /* ModuleLoader.cpp */; };
+		EAB0D06713A6A4680015411C /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06413A6A4680015411C /* State.cpp */; };
+		EAB0D09413A6A7B90015411C /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D09213A6A7B90015411C /* md5.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* LostEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LostEngine-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* LostEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA212B0013A6AE0D0064F93C /* LEGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEGLView.mm; path = lost/application/mac/LEGLView.mm; sourceTree = "<group>"; };
+		EA212B0813A6AE7B0064F93C /* LEAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LEAppDelegate.mm; path = lost/application/mac/LEAppDelegate.mm; sourceTree = "<group>"; };
+		EA212B6213A6B5670064F93C /* Application.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Application.mm; path = lost/application/mac/Application.mm; sourceTree = "<group>"; };
+		EA212B6413A6B56B0064F93C /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationTaskletSpawn.cpp; path = lost/application/mac/ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		EA21657E13A664CA00B96B47 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		EA21659013A664D500B96B47 /* Signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Signal.cpp; path = lost/event/Signal.cpp; sourceTree = "<group>"; };
 		EA21659313A664D500B96B47 /* Platform_Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Platform_Mac.mm; path = lost/platform/Platform_Mac.mm; sourceTree = "<group>"; };
@@ -231,6 +243,11 @@
 		EA21674F13A66FE100B96B47 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = lost/application/Runner.cpp; sourceTree = "<group>"; };
 		EA21675013A66FE100B96B47 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tasklet.cpp; path = lost/application/Tasklet.cpp; sourceTree = "<group>"; };
 		EA21680613A68D4400B96B47 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
+		EAB0D06213A6A4680015411C /* BindAll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindAll.cpp; path = lost/lua/BindAll.cpp; sourceTree = "<group>"; };
+		EAB0D06313A6A4680015411C /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModuleLoader.cpp; path = lost/lua/ModuleLoader.cpp; sourceTree = "<group>"; };
+		EAB0D06413A6A4680015411C /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = lost/lua/State.cpp; sourceTree = "<group>"; };
+		EAB0D09213A6A7B90015411C /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = md5.cpp; path = md5/md5.cpp; sourceTree = "<group>"; };
+		EAB0D09313A6A7B90015411C /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = md5/md5.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +309,7 @@
 				EA21659113A664D500B96B47 /* application */,
 				EA21659513A664D500B96B47 /* common */,
 				EA21658D13A664D500B96B47 /* event */,
+				EAB0D06113A6A4580015411C /* lua */,
 				EA21659213A664D500B96B47 /* platform */,
 				EA2166B113A66AD400B96B47 /* resource */,
 			);
@@ -310,6 +328,7 @@
 		EA21659113A664D500B96B47 /* application */ = {
 			isa = PBXGroup;
 			children = (
+				EAB0D0D013A6ADEC0015411C /* mac */,
 				EA21674E13A66FE100B96B47 /* Application.cpp */,
 				EA21674F13A66FE100B96B47 /* Runner.cpp */,
 				EA21675013A66FE100B96B47 /* Tasklet.cpp */,
@@ -340,6 +359,7 @@
 		EA2165A513A664DD00B96B47 /* thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				EAB0D09113A6A7B20015411C /* md5 */,
 				EA2165A613A664DD00B96B47 /* boost */,
 				EA2165D113A664DD00B96B47 /* eastl */,
 				EA2165B313A664DD00B96B47 /* lua */,
@@ -501,6 +521,36 @@
 				EA21673613A66ED600B96B47 /* zutil.c */,
 			);
 			name = zlib;
+			sourceTree = "<group>";
+		};
+		EAB0D06113A6A4580015411C /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				EAB0D06213A6A4680015411C /* BindAll.cpp */,
+				EAB0D06313A6A4680015411C /* ModuleLoader.cpp */,
+				EAB0D06413A6A4680015411C /* State.cpp */,
+			);
+			name = lua;
+			sourceTree = "<group>";
+		};
+		EAB0D09113A6A7B20015411C /* md5 */ = {
+			isa = PBXGroup;
+			children = (
+				EAB0D09213A6A7B90015411C /* md5.cpp */,
+				EAB0D09313A6A7B90015411C /* md5.h */,
+			);
+			name = md5;
+			sourceTree = "<group>";
+		};
+		EAB0D0D013A6ADEC0015411C /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				EA212B6213A6B5670064F93C /* Application.mm */,
+				EA212B6413A6B56B0064F93C /* ApplicationTaskletSpawn.cpp */,
+				EA212B0013A6AE0D0064F93C /* LEGLView.mm */,
+				EA212B0813A6AE7B0064F93C /* LEAppDelegate.mm */,
+			);
+			name = mac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,6 +736,14 @@
 				EA21675213A66FE100B96B47 /* Runner.cpp in Sources */,
 				EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */,
 				EA21680713A68D4400B96B47 /* EventDispatcher.cpp in Sources */,
+				EAB0D06513A6A4680015411C /* BindAll.cpp in Sources */,
+				EAB0D06613A6A4680015411C /* ModuleLoader.cpp in Sources */,
+				EAB0D06713A6A4680015411C /* State.cpp in Sources */,
+				EAB0D09413A6A7B90015411C /* md5.cpp in Sources */,
+				EA212B0113A6AE0D0064F93C /* LEGLView.mm in Sources */,
+				EA212B0913A6AE7B0064F93C /* LEAppDelegate.mm in Sources */,
+				EA212B6313A6B5670064F93C /* Application.mm in Sources */,
+				EA212B6513A6B56B0064F93C /* ApplicationTaskletSpawn.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
