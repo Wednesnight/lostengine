@@ -5,6 +5,7 @@
 #include "Signal.h"
 #include <EASTL/string.h>
 #include "lost/common/eastlStreamSupport.h"
+#include "lost/common/Logger.h"
 
 using namespace std;
 
@@ -38,7 +39,7 @@ struct Target
 {
   void handleEvent(const Event* ev)
   {
-    cout << "got event: "<<ev->val<<endl;
+    DOUT("got event: "<<ev->val);
   }
 };
 
@@ -46,7 +47,7 @@ struct OtherTarget
 {
   void handleEvent(const CustomEvent* ev)
   {
-    cout << "got event: "<<ev->val<<endl;
+    DOUT("got event: "<<ev->val);
   }
 };
 
@@ -68,7 +69,7 @@ int main (int argc, char * const argv[]) {
   listener.call(&ev2);
   
   eastl::string s = "hello";
-  cout << s << endl;
+  DOUT(s);
   
   return EXIT_SUCCESS;
 }
