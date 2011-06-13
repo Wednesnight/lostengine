@@ -1,7 +1,12 @@
-#ifndef L_LISTENER_H
-#define L_LISTENER_H
+#ifndef LOST_EVENT_LISTENER_H
+#define LOST_EVENT_LISTENER_H
 
-struct Event;
+#include "lost/event/Event.h"
+
+namespace lost
+{
+namespace event
+{
 
 struct Listener
 {
@@ -29,5 +34,8 @@ struct TypedListener : public Listener
     (*_target.*_method)(static_cast<EvType*>(payload));
   };
 };
+
+}
+}
 
 #endif
