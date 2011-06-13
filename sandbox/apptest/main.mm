@@ -7,6 +7,8 @@
 #include "lost/common/eastlStreamSupport.h"
 #include "lost/common/Logger.h"
 
+#include "lost/application/Runner.h"
+
 using namespace std;
 
 static const uint32_t num = 10000;
@@ -52,14 +54,14 @@ struct OtherTarget
 };
 
 
-int main (int argc, char * const argv[]) {
+int main (int argc, char*  argv[]) {
 /*  cout << "hardware concurrency "<<tthread::thread::hardware_concurrency()<<endl;
   tthread::thread t1(func1, NULL);
   tthread::thread t2(func2, NULL);
   t1.join();
   t2.join();*/
   
-  Target target;
+/*  Target target;
   OtherTarget otherTarget;
   lost::event::TypedListener<Target,lost::event::Event> listener(&target, &Target::handleEvent);
   lost::event::TypedListener<OtherTarget,CustomEvent> listener2(&otherTarget, &OtherTarget::handleEvent);
@@ -69,7 +71,8 @@ int main (int argc, char * const argv[]) {
   listener.call(&ev2);
   
   eastl::string s = "hello";
-  DOUT(s);
+  DOUT(s);*/
+  lost::application::runResourceTasklet(argc, argv, "Launcher.tasklet");
   
   return EXIT_SUCCESS;
 }
