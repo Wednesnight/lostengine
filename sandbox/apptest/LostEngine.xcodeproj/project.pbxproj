@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		EA21657F13A664CA00B96B47 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA21657E13A664CA00B96B47 /* main.mm */; };
-		EA21659913A664D500B96B47 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21658E13A664D500B96B47 /* Event.cpp */; };
 		EA21659B13A664D500B96B47 /* Signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21659013A664D500B96B47 /* Signal.cpp */; };
 		EA21659C13A664D500B96B47 /* Platform_Mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA21659313A664D500B96B47 /* Platform_Mac.mm */; };
 		EA21659D13A664D500B96B47 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21659413A664D500B96B47 /* Platform.cpp */; };
@@ -115,6 +114,7 @@
 		EA21675113A66FE100B96B47 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674E13A66FE100B96B47 /* Application.cpp */; };
 		EA21675213A66FE100B96B47 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674F13A66FE100B96B47 /* Runner.cpp */; };
 		EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21675013A66FE100B96B47 /* Tasklet.cpp */; };
+		EA21680713A68D4400B96B47 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21680613A68D4400B96B47 /* EventDispatcher.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,7 +122,6 @@
 		8D1107310486CEB800E47090 /* LostEngine-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LostEngine-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* LostEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LostEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA21657E13A664CA00B96B47 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
-		EA21658E13A664D500B96B47 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Event.cpp; path = lost/event/Event.cpp; sourceTree = "<group>"; };
 		EA21659013A664D500B96B47 /* Signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Signal.cpp; path = lost/event/Signal.cpp; sourceTree = "<group>"; };
 		EA21659313A664D500B96B47 /* Platform_Mac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Platform_Mac.mm; path = lost/platform/Platform_Mac.mm; sourceTree = "<group>"; };
 		EA21659413A664D500B96B47 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform.cpp; path = lost/platform/Platform.cpp; sourceTree = "<group>"; };
@@ -231,6 +230,7 @@
 		EA21674E13A66FE100B96B47 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = lost/application/Application.cpp; sourceTree = "<group>"; };
 		EA21674F13A66FE100B96B47 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = lost/application/Runner.cpp; sourceTree = "<group>"; };
 		EA21675013A66FE100B96B47 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tasklet.cpp; path = lost/application/Tasklet.cpp; sourceTree = "<group>"; };
+		EA21680613A68D4400B96B47 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,7 +301,7 @@
 		EA21658D13A664D500B96B47 /* event */ = {
 			isa = PBXGroup;
 			children = (
-				EA21658E13A664D500B96B47 /* Event.cpp */,
+				EA21680613A68D4400B96B47 /* EventDispatcher.cpp */,
 				EA21659013A664D500B96B47 /* Signal.cpp */,
 			);
 			name = event;
@@ -582,7 +582,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA21657F13A664CA00B96B47 /* main.mm in Sources */,
-				EA21659913A664D500B96B47 /* Event.cpp in Sources */,
 				EA21659B13A664D500B96B47 /* Signal.cpp in Sources */,
 				EA21659C13A664D500B96B47 /* Platform_Mac.mm in Sources */,
 				EA21659D13A664D500B96B47 /* Platform.cpp in Sources */,
@@ -686,6 +685,7 @@
 				EA21675113A66FE100B96B47 /* Application.cpp in Sources */,
 				EA21675213A66FE100B96B47 /* Runner.cpp in Sources */,
 				EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */,
+				EA21680713A68D4400B96B47 /* EventDispatcher.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
