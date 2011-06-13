@@ -1,5 +1,5 @@
 #include "lost/application/Application.h"
-
+#include "lost/event/EventDispatcher.h"
 namespace lost
 {
 namespace application
@@ -17,18 +17,18 @@ ApplicationPtr Application::getInstance()
 Application::Application()
 {
   running = false;
+  eventDispatcher.reset(new event::EventDispatcher);
 }
 
 Application::~Application()
 {
 }
 
-void Application::run(int argc, char *argv[])
+void Application::addTasklet(Tasklet* tasklet)
 {
 }
 
-
-void Application::startTasklet(Tasklet* tasklet)
+void Application::quit()
 {
 }
 

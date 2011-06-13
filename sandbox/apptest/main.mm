@@ -1,13 +1,12 @@
-#include <iostream>
-#include "tinythread.h"
 #include "lost/event/Event.h"
 #include "lost/event/Listener.h"
 #include "lost/event/Signal.h"
 #include <EASTL/string.h>
-#include "lost/common/eastlStreamSupport.h"
 #include "lost/common/Logger.h"
 
 #include "lost/application/Runner.h"
+
+#include "lost/event/EventDispatcher.h"
 
 using namespace std;
 
@@ -38,15 +37,17 @@ struct CustomEvent : public lost::event::Event
 
 struct Target
 {
-  void handleEvent(const lost::event::Event* ev)
+  void handleEvent(const lost::event::EventPtr& ev)
   {
     DOUT("got event: "<<ev->type);
   }
 };
 
+typedef lost::shared_ptr<CustomEvent> CustomEventPtr;
+
 struct OtherTarget
 {
-  void handleEvent(const CustomEvent* ev)
+  void handleEvent(const CustomEventPtr& ev)
   {
     DOUT("got event: "<<ev->type);
   }
@@ -60,9 +61,9 @@ int main (int argc, char*  argv[]) {
   t1.join();
   t2.join();*/
   
-/*  Target target;
+  Target target;
   OtherTarget otherTarget;
-  lost::event::TypedListener<Target,lost::event::Event> listener(&target, &Target::handleEvent);
+/*  lost::event::TypedListener<Target,lost::event::Event> listener(&target, &Target::handleEvent);
   lost::event::TypedListener<OtherTarget,CustomEvent> listener2(&otherTarget, &OtherTarget::handleEvent);
   lost::event::Event ev;
   CustomEvent ev2;
@@ -71,6 +72,23 @@ int main (int argc, char*  argv[]) {
   
   eastl::string s = "hello";
   DOUT(s);*/
+  
+  lost::event::EventDispatcher evd;
+  lost::event::ListenerPtr listener(new lost::event::TypedListener<Target, lost::event::Event>(&target, &Target::handleEvent));
+  lost::event::ListenerPtr listener2(new lost::event::TypedListener<OtherTarget, CustomEvent>(&otherTarget, &OtherTarget::handleEvent));
+  evd.addEventListener("hello", listener);
+  evd.addEventListener("hello2", listener2);
+  
+  using namespace lost::event;
+  
+  EventPtr ev1(new Event("hello"));
+  EventPtr ev2(new Event("hello2"));
+  EventPtr ev3(new Event("bluuuu"));
+  
+  evd.dispatchEvent(ev1);
+  evd.dispatchEvent(ev2);
+  evd.dispatchEvent(ev3);
+  
   lost::application::runResourceTasklet(argc, argv, "Launcher.tasklet");
   
   return EXIT_SUCCESS;

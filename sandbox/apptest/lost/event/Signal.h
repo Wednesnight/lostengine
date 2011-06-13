@@ -2,6 +2,8 @@
 #define LOST_EVENT_SIGNAL_H
 
 #include "lost/event/forward.h"
+#include "EASTL/map.h"
+
 
 namespace lost
 {
@@ -13,11 +15,12 @@ struct Signal
   Signal();
   virtual ~Signal();
   
-  void addListener();
+  uint32_t addListener(ListenerPtr listener);
   
   void call(EventPtr event);
   
-  
+  uint32_t counter; // used for generating ids that can be used for connection tracking
+  eastl::map<uint32_t, ListenerPtr> id2listener;
 };
 
 }

@@ -29,7 +29,7 @@ namespace lost
       try
       {
         static ApplicationPtr app = Application::getInstance();
-        app->startTasklet(t);
+        app->addTasklet(t);
         app->run(argc, argv);      
       }
       catch (std::exception& e)
