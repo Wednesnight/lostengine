@@ -31,9 +31,8 @@ void func2(void* p)
 
 struct CustomEvent : public lost::event::Event
 {
-  CustomEvent()
+  CustomEvent() : Event("custom")
   {
-    val = 1;
   }
 };
 
@@ -41,7 +40,7 @@ struct Target
 {
   void handleEvent(const lost::event::Event* ev)
   {
-    DOUT("got event: "<<ev->val);
+    DOUT("got event: "<<ev->type);
   }
 };
 
@@ -49,7 +48,7 @@ struct OtherTarget
 {
   void handleEvent(const CustomEvent* ev)
   {
-    DOUT("got event: "<<ev->val);
+    DOUT("got event: "<<ev->type);
   }
 };
 
