@@ -112,6 +112,9 @@
 		EA21674013A66ED600B96B47 /* trees.c in Sources */ = {isa = PBXBuildFile; fileRef = EA21673413A66ED600B96B47 /* trees.c */; };
 		EA21674113A66ED600B96B47 /* uncompr.c in Sources */ = {isa = PBXBuildFile; fileRef = EA21673513A66ED600B96B47 /* uncompr.c */; };
 		EA21674213A66ED600B96B47 /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = EA21673613A66ED600B96B47 /* zutil.c */; };
+		EA21675113A66FE100B96B47 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674E13A66FE100B96B47 /* Application.cpp */; };
+		EA21675213A66FE100B96B47 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674F13A66FE100B96B47 /* Runner.cpp */; };
+		EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21675013A66FE100B96B47 /* Tasklet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +228,9 @@
 		EA21673413A66ED600B96B47 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trees.c; path = ../../thirdparty/zlib/zlib_1_2_3/source/trees.c; sourceTree = SOURCE_ROOT; };
 		EA21673513A66ED600B96B47 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = uncompr.c; path = ../../thirdparty/zlib/zlib_1_2_3/source/uncompr.c; sourceTree = SOURCE_ROOT; };
 		EA21673613A66ED600B96B47 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zutil.c; path = ../../thirdparty/zlib/zlib_1_2_3/source/zutil.c; sourceTree = SOURCE_ROOT; };
+		EA21674E13A66FE100B96B47 /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = lost/application/Application.cpp; sourceTree = "<group>"; };
+		EA21674F13A66FE100B96B47 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = lost/application/Runner.cpp; sourceTree = "<group>"; };
+		EA21675013A66FE100B96B47 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tasklet.cpp; path = lost/application/Tasklet.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +310,9 @@
 		EA21659113A664D500B96B47 /* application */ = {
 			isa = PBXGroup;
 			children = (
+				EA21674E13A66FE100B96B47 /* Application.cpp */,
+				EA21674F13A66FE100B96B47 /* Runner.cpp */,
+				EA21675013A66FE100B96B47 /* Tasklet.cpp */,
 			);
 			name = application;
 			sourceTree = "<group>";
@@ -674,6 +683,9 @@
 				EA21674013A66ED600B96B47 /* trees.c in Sources */,
 				EA21674113A66ED600B96B47 /* uncompr.c in Sources */,
 				EA21674213A66ED600B96B47 /* zutil.c in Sources */,
+				EA21675113A66FE100B96B47 /* Application.cpp in Sources */,
+				EA21675213A66FE100B96B47 /* Runner.cpp in Sources */,
+				EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
