@@ -1,8 +1,10 @@
-#ifndef L_EVENT_H
-#define L_EVENT_H
+#ifndef LOST_EVENT_EVENT_H
+#define LOST_EVENT_EVENT_H
 
-#include <stdint.h>
-
+namespace lost
+{
+namespace event
+{
 struct Event
 {
   Event(); 
@@ -10,5 +12,7 @@ struct Event
   
   uint32_t val;
 };
-
+}
+}
 #endif
+

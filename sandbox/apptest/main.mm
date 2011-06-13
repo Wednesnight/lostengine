@@ -27,7 +27,7 @@ void func2(void* p)
   }
 }
 
-struct CustomEvent : public Event
+struct CustomEvent : public lost::event::Event
 {
   CustomEvent()
   {
@@ -37,7 +37,7 @@ struct CustomEvent : public Event
 
 struct Target
 {
-  void handleEvent(const Event* ev)
+  void handleEvent(const lost::event::Event* ev)
   {
     DOUT("got event: "<<ev->val);
   }
@@ -61,9 +61,9 @@ int main (int argc, char * const argv[]) {
   
   Target target;
   OtherTarget otherTarget;
-  TypedListener<Target,Event> listener(&target, &Target::handleEvent);
-  TypedListener<OtherTarget,CustomEvent> listener2(&otherTarget, &OtherTarget::handleEvent);
-  Event ev;
+  lost::event::TypedListener<Target,lost::event::Event> listener(&target, &Target::handleEvent);
+  lost::event::TypedListener<OtherTarget,CustomEvent> listener2(&otherTarget, &OtherTarget::handleEvent);
+  lost::event::Event ev;
   CustomEvent ev2;
   listener.call(&ev);
   listener.call(&ev2);
