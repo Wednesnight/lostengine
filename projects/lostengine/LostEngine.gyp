@@ -14,6 +14,7 @@
     'opengl_path': '../../thirdparty/OpenGL',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
     'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
+    'tinythread_path': '../../thirdparty/tinythread/1_0/source',
     'unittest++_path': '../../thirdparty/UnitTest++',
     'zlib_path': '../../thirdparty/zlib/zlib_1_2_3',
     'zziplib_path': '../../thirdparty/zziplib/zziplib-0.13.58',
@@ -440,6 +441,7 @@
         '<@(luabind_path)',
         '<@(stb_image_path)',
         '<@(stb_vorbis_path)',
+        '<@(tinythread_path)',
         '<@(zlib_path)/include',
         '<@(zziplib_path)',
 
@@ -823,6 +825,9 @@
         # thirdparty/stb
         '<@(stb_image_path)/stb_image.c',
         '<@(stb_vorbis_path)/stb_vorbis.c',
+        
+        # thirdparty/tinythread
+        '<@(tinythread_path)/tinythread.cpp',
 
         # thirdparty/zlib
         '<@(zlib_path)/source/zutil.c',
