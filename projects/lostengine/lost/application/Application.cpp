@@ -3,7 +3,6 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"
-#include "lost/event/Receive.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/application/TaskletEvent.h"

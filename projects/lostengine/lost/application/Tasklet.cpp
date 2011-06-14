@@ -16,7 +16,6 @@
 #include "lost/application/ProcessEvent.h"
 #include "lost/application/WindowEvent.h"
 #include "lost/application/DebugEvent.h"
-#include "lost/event/Receive.h"
 #include "lost/rg/Node.h"
 #include "lost/rg/Clear.h"
 #include "lost/rg/ClearColor.h"
