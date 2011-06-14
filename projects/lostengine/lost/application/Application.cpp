@@ -11,6 +11,7 @@
 #include "lost/application/QueueEvent.h"
 #include "lost/application/ProcessEvent.h"
 #include "lost/application/Window.h"
+#include "lost/event/Listener.h"
 
 using namespace lost::resource;
 
@@ -32,11 +33,12 @@ namespace lost
     : running(false)
     {
       eventDispatcher.reset(new lost::event::EventDispatcher());
-      eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::receive<ApplicationEvent>(bind(&Application::startup, this, _1)));
-      eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::receive<ApplicationEvent>(bind(&Application::quitHandler, this, _1)));
-      eventDispatcher->addEventListener(SpawnTaskletEvent::SPAWN_TASKLET(), event::receive<SpawnTaskletEvent>(bind(&Application::taskletSpawn, this, _1)));
-      eventDispatcher->addEventListener(TaskletEvent::TERMINATE(), event::receive<TaskletEvent>(bind(&Application::taskletTerminate, this, _1)));
-      eventDispatcher->addEventListener(TaskletEvent::DONE(), event::receive<TaskletEvent>(bind(&Application::taskletDone, this, _1)));
+
+      eventDispatcher->addEventListener(ApplicationEvent::RUN(), event::makeListener(this, &Application::startup));
+      eventDispatcher->addEventListener(ApplicationEvent::QUIT(), event::makeListener(this, &Application::quitHandler));
+      eventDispatcher->addEventListener(SpawnTaskletEvent::SPAWN_TASKLET(), event::makeListener(this, &Application::taskletSpawn));
+      eventDispatcher->addEventListener(TaskletEvent::TERMINATE(), event::makeListener(this, &Application::taskletTerminate));
+      eventDispatcher->addEventListener(TaskletEvent::DONE(), event::makeListener(this, &Application::taskletDone));
 
       if (tasklet != NULL) {
         addTasklet(tasklet);
@@ -53,7 +55,7 @@ namespace lost
       tasklets.clear();
     }
 
-    void Application::startup(ApplicationEventPtr& event)
+    void Application::startup(const ApplicationEventPtr& event)
     {
       for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
@@ -75,8 +77,8 @@ namespace lost
     
     void Application::addTasklet(Tasklet* tasklet)
     {
-      tasklet->eventDispatcher->addEventListener(QueueEvent::QUEUE(), event::receive<QueueEvent>(bind(&Application::queueEvent, this, _1)));
-      tasklet->eventDispatcher->addEventListener(ProcessEvent::PROCESS(), event::receive<ProcessEvent>(bind(&Application::processEvents, this, _1)));
+      tasklet->eventDispatcher->addEventListener(QueueEvent::QUEUE(), event::makeListener(this, &Application::queueEvent));
+      tasklet->eventDispatcher->addEventListener(ProcessEvent::PROCESS(), event::makeListener(this, &Application::processEvents));
       tasklets.push_back(tasklet);
       if (running)
       {
@@ -95,7 +97,7 @@ namespace lost
       }
     }
 
-    void Application::quitHandler(ApplicationEventPtr& event)
+    void Application::quitHandler(const ApplicationEventPtr& event)
     {
       running = false;
       for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
@@ -163,7 +165,8 @@ namespace lost
     void Application::quit()
     {
       // just to make sure that we're running on the main thread
-      queueEvent(QueueEventPtr(new QueueEvent(ApplicationEventPtr(new ApplicationEvent(ApplicationEvent::QUIT())))));
+      ApplicationEventPtr ae(new ApplicationEvent(ApplicationEvent::QUIT()));
+      queueEvent(QueueEventPtr(new QueueEvent(ae)));
       processEvents(ProcessEventPtr());
     }
 

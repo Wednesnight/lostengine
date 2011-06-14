@@ -1,83 +1,52 @@
 #ifndef LOST_EVENT_EVENTDISPATCHER_H
 #define LOST_EVENT_EVENTDISPATCHER_H
 
-#include <boost/function.hpp>
-#include <boost/signal.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition.hpp>
-#include <stdexcept>
 #include "lost/event/forward.h"
+#include "lost/event/Event.h"
+#include "lost/event/Signal.h"
+#include "lost/event/Connection.h"
+#include "tinythread.h"
 
-namespace boost
-{
-class mutex;
-class condition_variable_any;
-typedef condition_variable_any condition;
-}
+#include <list>
 
 namespace lost
 {
-  namespace event
-  {
-    typedef lost::shared_ptr<lost::event::Event> EventPtr;
-    typedef boost::function<void (EventPtr)>      EventListenerFunc;
+namespace event
+{
 
-    struct EventDispatcher;
-    typedef lost::shared_ptr<EventDispatcher> EventDispatcherPtr;
+struct EventDispatcher
+{
+  EventDispatcher();
+  virtual ~EventDispatcher();
 
-    struct EventSignalPtrMap;
-    struct EventDispatcherHiddenMembers;
-    struct EventDispatcher
-    {
-      EventSignalPtrMap* listeners;
+  ConnectionPtr addEventListener(const event::Type& evType, ListenerPtr listener);
+  void removeEventListener(const ConnectionPtr& connection);
 
-      EventDispatcher();
-      virtual ~EventDispatcher();
-      
-      boost::signals::connection addEventListener(const lost::event::Type& type, EventListenerFunc callback);
-      void removeEventListener(const boost::signals::connection& connection);
+  void dispatchEvent(EventPtr event);
 
-      virtual void dispatchEvent(EventPtr event);
+  /**
+   * call this to queue the given event. will be dispatched when processEvents() is called
+   */
+  void queueEvent(const event::EventPtr& event);
+  /**
+   * call this to signal queued events
+   */
+  void processEvents();
+  void wakeup();
+  void waitForEvents();
+  void waitForEvent(const lost::event::Type& type);
+  void clear();
+  ConnectionPtr attachTo(const EventDispatcherPtr& target, const lost::event::Type& type);
+  uint32_t numListeners();
+  
+  std::map<event::Type, SignalPtr> eventType2signal;
+  tthread::mutex queueMutex;
+  std::list<EventPtr> eventQueue;
+  tthread::condition_variable waitEventCondition;
+  tthread::mutex waitEventMutex;
+};
 
-      void clear();
-
-      /**
-       * for debugging purposes
-       */
-      boost::uint32_t numListeners();
-
-      /**
-       * returns if at least one event was queued
-       */
-      void waitForEvents();
-      /**
-       * returns when at least one event of type <type> was queued
-       */
-      void waitForEvent(const lost::event::Type& type);
-      /**
-       * cancells waitForEvents()
-       */
-      void wakeup();
-
-      /**
-       * call this to queue the given event. will be dispatched when processEvents() is called
-       */
-      void queueEvent(const lost::shared_ptr<lost::event::Event>& event);
-      /**
-       * call this to signal queued events
-       */
-      void processEvents();
-
-      boost::signals::connection attachTo(const EventDispatcherPtr& target, const lost::event::Type& type);
-
-    private:
-      boost::mutex queueMutex;
-      lost::shared_ptr<std::list<lost::shared_ptr<lost::event::Event> > > eventQueue;
-      
-      boost::mutex waitEventMutex;
-      boost::condition waitEventCondition;
-    };
-  }
+}
 }
 
 #endif

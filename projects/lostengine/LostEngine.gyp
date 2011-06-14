@@ -275,6 +275,7 @@
       'include_dirs': [
         '.',
         '<@(boost_path)',
+        '<@(tinythread_path)',
         '<@(unittest++_path)/include',
       ],
 
@@ -516,6 +517,8 @@
 
         # event
         'lost/event/EventDispatcher.cpp',
+        'lost/event/Connection.cpp',
+        'lost/event/Signal.cpp',
 
         # font
         'lost/font/BitmapFont.cpp',

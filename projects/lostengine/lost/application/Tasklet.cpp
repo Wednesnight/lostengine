@@ -29,6 +29,7 @@
 #include "lost/time/Clock.h"
 #include "lost/time/ThreadedTimerScheduler.h"
 #include "lost/profiler/Blackbox.h"
+#include "lost/event/Listener.h"
 
 using namespace boost;
 using namespace luabind;
@@ -87,13 +88,13 @@ namespace lost
       // install custom module loader so require goes through resourceLoader
       ModuleLoader::install(*lua);
       lsh.reset(new LuaStateHelper);
-      eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::receive<ResizeEvent>(boost::bind(&Tasklet::updateWindowSize, this, _1)));      
-      eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
-      eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), event::receive<KeyEvent>(boost::bind(&Tasklet::key, this, _1)));      
+      eventDispatcher->addEventListener(ResizeEvent::TASKLET_WINDOW_RESIZE(), event::makeListener(this, &Tasklet::updateWindowSize));      
+      eventDispatcher->addEventListener(KeyEvent::KEY_UP(), event::makeListener(this, &Tasklet::key));      
+      eventDispatcher->addEventListener(KeyEvent::KEY_DOWN(), event::makeListener(this, &Tasklet::key));      
 
-      eventDispatcher->addEventListener(DebugEvent::CMD_MEM_INFO(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
-      eventDispatcher->addEventListener(DebugEvent::CMD_PAUSE(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
-      eventDispatcher->addEventListener(DebugEvent::CMD_CONTINUE(), event::receive<DebugEvent>(boost::bind(&Tasklet::handleDebugEvent, this, _1)));
+      eventDispatcher->addEventListener(DebugEvent::CMD_MEM_INFO(), event::makeListener(this, &Tasklet::handleDebugEvent));
+      eventDispatcher->addEventListener(DebugEvent::CMD_PAUSE(), event::makeListener(this, &Tasklet::handleDebugEvent));
+      eventDispatcher->addEventListener(DebugEvent::CMD_CONTINUE(), event::makeListener(this, &Tasklet::handleDebugEvent));
     }
     
     Tasklet::~Tasklet()
@@ -232,11 +233,11 @@ namespace lost
     void Tasklet::createWindow()
     {
       window = new Window(eventDispatcher, &config);
-      window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::receive<WindowEvent>(boost::bind(&Tasklet::closeWindow, this, _1)));
+      window->dispatcher->addEventListener(WindowEvent::CLOSE(), event::makeListener(this, &Tasklet::closeWindow));
       window->open();        
     }
 
-    void Tasklet::closeWindow(WindowEventPtr event)
+    void Tasklet::closeWindow(const WindowEventPtr& event)
     {
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::TERMINATE(), this)));
     }

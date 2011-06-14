@@ -1,9 +1,7 @@
 #include "lost/time/ThreadedTimerScheduler.h"
 #include "lost/platform/Time.h"
 #include "lost/event/Event.h"
-#include "lost/event/Receive.h"
-
-#include <boost/bind.hpp>
+#include "lost/event/Listener.h"
 
 namespace lost
 {
@@ -18,8 +16,7 @@ namespace lost
       nextUpdateTime(0)
     {
       if (eventDispatcher) {
-        eventDispatcher->addEventListener(ThreadedTimerSchedulerEvent::PROCESS_TIMERS(),
-            event::receive<ThreadedTimerSchedulerEvent>(boost::bind(&ThreadedTimerScheduler::processTimers, this, _1)));
+        eventDispatcher->addEventListener(ThreadedTimerSchedulerEvent::PROCESS_TIMERS(), event::makeListener(this, &ThreadedTimerScheduler::processTimers));
       }
       schedulerThread.reset(new boost::thread(boost::bind(&ThreadedTimerScheduler::schedulerThreadMethod, this)));
     }
