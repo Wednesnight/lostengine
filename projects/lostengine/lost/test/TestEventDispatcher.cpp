@@ -5,7 +5,6 @@
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
-#include "lost/event/Receive.h"
 #include <boost/function.hpp>
 #include "lost/event/Listener.h"
 
