@@ -1,4 +1,7 @@
 #include "lost/event/EventDispatcher.h"
+#include "lost/event/Listener.h"
+
+using namespace tthread;
 
 namespace lost
 {
@@ -13,7 +16,12 @@ EventDispatcher::~EventDispatcher()
 {
 }
 
-uint32_t EventDispatcher::addEventListener(const event::Type& evType, ListenerPtr listener)
+uint32_t EventDispatcher::numListeners()
+{
+  return eventType2signal.size();
+}
+
+Connection EventDispatcher::addEventListener(const event::Type& evType, ListenerPtr listener)
 {
   uint32_t result;
   
@@ -25,7 +33,16 @@ uint32_t EventDispatcher::addEventListener(const event::Type& evType, ListenerPt
   }
   result = signal->addListener(listener);
   
-  return result;
+  return Connection(evType, result);
+}
+
+void EventDispatcher::removeEventListener(const Connection& connection)
+{
+  SignalPtr signal = eventType2signal[connection.eventType];
+  if(signal)
+  {
+    signal->removeListener(connection.index);
+  }
 }
 
 void EventDispatcher::dispatchEvent(EventPtr event)
@@ -72,7 +89,7 @@ void EventDispatcher::processEvents()
 
 void EventDispatcher::waitForEvents()
 {
-  waitEventMutex.lock();
+  lock_guard<mutex> lock(waitEventMutex);
   while(eventQueue.size() <= 0)
   {
     waitEventCondition.wait(waitEventMutex);
@@ -81,7 +98,7 @@ void EventDispatcher::waitForEvents()
 
 void EventDispatcher::waitForEvent(const lost::event::Type& type)
 {
-  waitEventMutex.lock();
+  lock_guard<mutex> lock(waitEventMutex);
   bool done = false;
   eastl::list<EventPtr>::iterator pos = eventQueue.begin();
   while(!done)
@@ -99,6 +116,11 @@ void EventDispatcher::waitForEvent(const lost::event::Type& type)
     }
     --pos;
   }
+}
+
+Connection EventDispatcher::attachTo(const EventDispatcherPtr& target, const lost::event::Type& type)
+{
+  return target->addEventListener(type, makeListener(this, &EventDispatcher::queueEvent));
 }
 
 }

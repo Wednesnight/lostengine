@@ -16,6 +16,7 @@ struct Signal
   virtual ~Signal();
   
   uint32_t addListener(ListenerPtr listener);
+  void removeListener(uint32_t index);
   
   void call(EventPtr event);
   

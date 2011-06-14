@@ -119,6 +119,7 @@
 		EA21675213A66FE100B96B47 /* Runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21674F13A66FE100B96B47 /* Runner.cpp */; };
 		EA21675313A66FE100B96B47 /* Tasklet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21675013A66FE100B96B47 /* Tasklet.cpp */; };
 		EA21680713A68D4400B96B47 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21680613A68D4400B96B47 /* EventDispatcher.cpp */; };
+		EA21696A13A6E3AD00B96B47 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA21696913A6E3AD00B96B47 /* Connection.cpp */; };
 		EAB0D06513A6A4680015411C /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06213A6A4680015411C /* BindAll.cpp */; };
 		EAB0D06613A6A4680015411C /* ModuleLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06313A6A4680015411C /* ModuleLoader.cpp */; };
 		EAB0D06713A6A4680015411C /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAB0D06413A6A4680015411C /* State.cpp */; };
@@ -243,6 +244,7 @@
 		EA21674F13A66FE100B96B47 /* Runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Runner.cpp; path = lost/application/Runner.cpp; sourceTree = "<group>"; };
 		EA21675013A66FE100B96B47 /* Tasklet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tasklet.cpp; path = lost/application/Tasklet.cpp; sourceTree = "<group>"; };
 		EA21680613A68D4400B96B47 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
+		EA21696913A6E3AD00B96B47 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Connection.cpp; path = lost/event/Connection.cpp; sourceTree = "<group>"; };
 		EAB0D06213A6A4680015411C /* BindAll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BindAll.cpp; path = lost/lua/BindAll.cpp; sourceTree = "<group>"; };
 		EAB0D06313A6A4680015411C /* ModuleLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModuleLoader.cpp; path = lost/lua/ModuleLoader.cpp; sourceTree = "<group>"; };
 		EAB0D06413A6A4680015411C /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = State.cpp; path = lost/lua/State.cpp; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				EA21680613A68D4400B96B47 /* EventDispatcher.cpp */,
 				EA21659013A664D500B96B47 /* Signal.cpp */,
+				EA21696913A6E3AD00B96B47 /* Connection.cpp */,
 			);
 			name = event;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				EA212B0913A6AE7B0064F93C /* LEAppDelegate.mm in Sources */,
 				EA212B6313A6B5670064F93C /* Application.mm in Sources */,
 				EA212B6513A6B56B0064F93C /* ApplicationTaskletSpawn.cpp in Sources */,
+				EA21696A13A6E3AD00B96B47 /* Connection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
