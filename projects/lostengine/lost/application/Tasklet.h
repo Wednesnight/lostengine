@@ -50,7 +50,7 @@ namespace lost
       virtual void shutdown();                      // called once in run
 
       void createWindow();
-      void closeWindow(WindowEventPtr event);
+      void closeWindow(const WindowEventPtr& event);
       
       void processEvents();
       void updateWindowSize(const ResizeEventPtr& event);

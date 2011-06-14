@@ -45,12 +45,12 @@ namespace lost
        * handled in generic code
        * raised from platform specific code
        */
-      void startup(ApplicationEventPtr& event);
+      void startup(const ApplicationEventPtr& event);
 
       /**
        * listener for ApplicationEvent.QUIT()
        */
-      void quitHandler(ApplicationEventPtr& event);
+      void quitHandler(const ApplicationEventPtr& event);
 
       /**
        * handled in platform specific code
