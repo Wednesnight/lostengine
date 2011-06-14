@@ -25,6 +25,15 @@ uint32_t Signal::addListener(ListenerPtr listener)
   return result;
 }
 
+void Signal::removeListener(uint32_t index)
+{
+  eastl::map<uint32_t, ListenerPtr>::iterator pos = id2listener.find(index);
+  if(pos != id2listener.end())
+  {
+    id2listener.erase(pos);
+  }
+}
+
 void Signal::call(EventPtr event)
 {
   eastl::map<uint32_t, ListenerPtr>::iterator i;

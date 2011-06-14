@@ -35,6 +35,12 @@ struct TypedListener : public Listener
   };
 };
 
+template<typename TargetClass, typename EventType>
+lost::event::ListenerPtr makeListener(TargetClass* target, void(TargetClass::*method)(const lost::shared_ptr<EventType>&))
+{
+  return lost::event::ListenerPtr(new lost::event::TypedListener<TargetClass, EventType>(target, method));
+}
+
 }
 }
 

@@ -54,6 +54,7 @@ struct OtherTarget
 };
 
 
+
 int main (int argc, char*  argv[]) {
 /*  cout << "hardware concurrency "<<tthread::thread::hardware_concurrency()<<endl;
   tthread::thread t1(func1, NULL);
@@ -74,10 +75,9 @@ int main (int argc, char*  argv[]) {
   DOUT(s);*/
   
   lost::event::EventDispatcher evd;
-  lost::event::ListenerPtr listener(new lost::event::TypedListener<Target, lost::event::Event>(&target, &Target::handleEvent));
-  lost::event::ListenerPtr listener2(new lost::event::TypedListener<OtherTarget, CustomEvent>(&otherTarget, &OtherTarget::handleEvent));
-  evd.addEventListener("hello", listener);
-  evd.addEventListener("hello2", listener2);
+  
+  evd.addEventListener("hello", lost::event::makeListener(&target, &Target::handleEvent));
+  evd.addEventListener("hello2", lost::event::makeListener(&otherTarget, &OtherTarget::handleEvent));
   
   using namespace lost::event;
   
