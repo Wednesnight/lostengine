@@ -655,11 +655,6 @@
         '<@(boost_path)/libs/filesystem/v3/src/operations.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/portability.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/utf8_codecvt_facet.cpp',
-        '<@(boost_path)/libs/signals/src/connection.cpp',
-        '<@(boost_path)/libs/signals/src/named_slot_map.cpp',
-        '<@(boost_path)/libs/signals/src/signal_base.cpp',
-        '<@(boost_path)/libs/signals/src/slot.cpp',
-        '<@(boost_path)/libs/signals/src/trackable.cpp',
         '<@(boost_path)/libs/system/src/error_code.cpp',
         '<@(boost_path)/libs/thread/src/tss_null.cpp',
         '<@(boost_path)/libs/thread/src/pthread/once.cpp',
@@ -706,12 +701,9 @@
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2WeldJoint.cpp',
 
         # thirdparty/fhtagn
-        '<@(fhtagn_path)/fhtagn/variant.cpp',
-        '<@(fhtagn_path)/fhtagn/version.cpp',
         '<@(fhtagn_path)/fhtagn/text/decoders.cpp',
         '<@(fhtagn_path)/fhtagn/text/encoders.cpp',
         '<@(fhtagn_path)/fhtagn/text/transcoding.cpp',
-        '<@(fhtagn_path)/fhtagn/threads/tasklet.cpp',
 
         # thirdparty/freetype2
     		'<@(freetype2_path)/src/psnames/psnames.c',
