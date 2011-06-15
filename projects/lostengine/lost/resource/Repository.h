@@ -4,7 +4,6 @@
 #include "lost/platform/shared_ptr.h"
 #include "lost/common/forward.h"
 #include "lost/resource/forward.h"
-#include <string>
 #include <boost/filesystem.hpp>
 
 
@@ -18,7 +17,7 @@ namespace lost
       virtual ~Repository() {}
 
       virtual common::DataPtr load( const boost::filesystem::path& inPath) = 0;
-      virtual bool exists(std::string& inOutRelativePath) = 0;
+      virtual bool exists(string& inOutRelativePath) = 0;
     };
   }
 }

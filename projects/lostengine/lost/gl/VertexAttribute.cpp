@@ -13,7 +13,7 @@ VertexAttribute::VertexAttribute()
   location = 0;
 }
 
-VertexAttribute::VertexAttribute(const std::string& inName, GLint inIndex, GLenum inGlType, GLint inSize, GLint loc)
+VertexAttribute::VertexAttribute(const string& inName, GLint inIndex, GLenum inGlType, GLint inSize, GLint loc)
 : name(inName), index(inIndex), glType(inGlType), size(inSize), location(loc)
 {
 }

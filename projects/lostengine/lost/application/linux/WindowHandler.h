@@ -50,10 +50,10 @@ namespace lost
         KeyCode translateKeyCode(int nativeKeyCode);
         void dispatchKeyEvent(int code, char* character, bool pressed, bool repeat);
         void dispatchMouseEvent(event::Type which, int x, int y, int absX, int absY, int buttonCode, bool pressed);
-        void dispatchDragNDropEvent(const std::string& filename, int x, int y, int absX, int absY);
+        void dispatchDragNDropEvent(const string& filename, int x, int y, int absX, int absY);
         
         // atom handling
-        std::string GetAtomName(Atom a);
+        string GetAtomName(Atom a);
         Property read_property(::Window w, Atom property);
 
         // Xdnd

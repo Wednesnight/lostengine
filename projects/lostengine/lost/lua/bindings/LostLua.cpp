@@ -11,7 +11,7 @@ namespace lost
   namespace lua
   {
   
-    int doResourceFile(const std::string& inRelativePath, lua_State* ls)
+    int doResourceFile(const string& inRelativePath, lua_State* ls)
     {
       lua::State* s = lua::State::stateFromState(ls);
       return s->doResourceFile(inRelativePath);
@@ -25,7 +25,7 @@ namespace lost
         [
            def("doResourceFile", &doResourceFile),        
           class_<State>("State")
-            .def("doResourceFile", (int(State::*)(const std::string&)) &State::doResourceFile)
+            .def("doResourceFile", (int(State::*)(const string&)) &State::doResourceFile)
             .def("getScriptFilename", &State::getScriptFilename)
             .def("getScriptSource", &State::getScriptSource)
             .def_readwrite("callstackSize", &State::callstackSize)

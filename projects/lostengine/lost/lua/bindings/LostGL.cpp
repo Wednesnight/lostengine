@@ -18,7 +18,6 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include <stdexcept>
 
-using namespace std;
 using namespace luabind;
 using namespace lost::bitmap;
 using namespace lost::camera;
@@ -109,7 +108,7 @@ namespace lost
       }
       else
       {
-        throw runtime_error("index out of range");
+        throw std::runtime_error("index out of range");
       }
     }
 
@@ -260,14 +259,14 @@ namespace lost
             .def("validate", &ShaderProgram::validate)
             .def("validated", &ShaderProgram::validated)
             .def("numericalType", &ShaderProgram::numericalType)
-            .def("setInt", (void(ShaderProgram::*)(const std::string& inName, GLint inVal)) &ShaderProgram::setInt)
-            .def("setFloat", (void(ShaderProgram::*)(const std::string& inName, float inVal)) &ShaderProgram::setFloat)
-            .def("setBool", (void(ShaderProgram::*)(const std::string& inName, bool inVal)) &ShaderProgram::setBool)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const std::string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
+            .def("setInt", (void(ShaderProgram::*)(const string& inName, GLint inVal)) &ShaderProgram::setInt)
+            .def("setFloat", (void(ShaderProgram::*)(const string& inName, float inVal)) &ShaderProgram::setFloat)
+            .def("setBool", (void(ShaderProgram::*)(const string& inName, bool inVal)) &ShaderProgram::setBool)
+            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
+            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
             .def("uniformMap", &ShaderProgram_uniformMap)
             .def("hasUniform", &ShaderProgram::hasUniform)
             .scope
@@ -348,11 +347,11 @@ namespace lost
             .def("setInt", &UniformBlock::setInt)
             .def("setFloat", &UniformBlock::setFloat)
             .def("setBool", &UniformBlock::setBool)
-            .def("set", (void(UniformBlock::*)(const std::string&, const common::Color&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec2&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec3&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const std::string&, const math::Vec4&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const std::string&, const math::Matrix&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const string&, const common::Color&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const string&, const math::Vec2&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const string&, const math::Vec3&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const string&, const math::Vec4&))&UniformBlock::set)
+            .def("set", (void(UniformBlock::*)(const string&, const math::Matrix&))&UniformBlock::set)
             .scope
             [
               def("create", &UniformBlock::create)

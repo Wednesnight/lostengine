@@ -29,19 +29,19 @@ namespace lost
     }
 
 
-    common::DataPtr LostResourceLoader_load(object inLoader, const std::string& inRelativePath)
+    common::DataPtr LostResourceLoader_load(object inLoader, const string& inRelativePath)
     {
       Loader* loader = object_cast<Loader*>(inLoader);
       return loader->load(inRelativePath);
     }
 
-    std::string LostResourceLoader_locate(object inLoader, const std::string& inRelativePath)
+    string LostResourceLoader_locate(object inLoader, const string& inRelativePath)
     {
       Loader* loader = object_cast<Loader*>(inLoader);
       return loader->locate(inRelativePath);
     }
 
-    path LostResourceLoader_directory(object inLoader, const std::string& inRelativePath)
+    path LostResourceLoader_directory(object inLoader, const string& inRelativePath)
     {
       Loader* loader = object_cast<Loader*>(inLoader);
       return path(loader->locate(inRelativePath));

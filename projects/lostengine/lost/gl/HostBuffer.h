@@ -17,7 +17,7 @@ namespace gl
 struct HostBuffer
 {
   BufferLayout  layout;
-  std::vector<uint8_t*> partitions; // the actual physical buffers
+  vector<uint8_t*> partitions; // the actual physical buffers
   uint32_t              count; // number of vertices/indices in this HostBuffer
   
   void init(const BufferLayout& inLayout);

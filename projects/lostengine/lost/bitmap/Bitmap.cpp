@@ -7,14 +7,6 @@
 #include <math.h>
 #include "lost/profiler/Blackbox.h"
 
-using namespace std;
-
-#define THROW_RTE(s) \
-{ \
-  ostringstream os; \
-  os << s; \
-  throw runtime_error(os.str()); \
-}
   
 namespace lost
 {
@@ -274,7 +266,7 @@ void Bitmap::clearRGBA(const lost::common::Color& inColor)
   }
 }
 
-void Bitmap::write(const std::string inFullPathname)
+void Bitmap::write(const string inFullPathname)
 {
   if(!stbi_write_tga(inFullPathname.c_str(), width, height, bytesPerPixelFromComponents(format), data))
   {

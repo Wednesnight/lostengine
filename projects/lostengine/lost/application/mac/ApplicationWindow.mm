@@ -2,7 +2,6 @@
 #import <AppKit/NSPasteBoard.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSEvent.h>
-#include <string>
 #include "lost/application/Window.h"
 #include "lost/application/DragNDropEvent.h"
 #include "lost/application/WindowEvent.h"
@@ -52,7 +51,7 @@
   parent->dispatcher->queueEvent(dragNDropEvent);
 }
 
-/*- (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(std::string)type
+/*- (void) dispatchDragNDropEvent:(id <NSDraggingInfo>)sender type:(string)type
 {
   NSPasteboard* pboard = [sender draggingPasteboard];
   NSArray* items = [pboard pasteboardItems];
@@ -62,7 +61,7 @@
     NSURL *fileURL = [NSURL URLFromPasteboard:pboard];
     NSString* relativePath = [fileURL relativePath];
     const char* cString = [relativePath cStringUsingEncoding: NSUTF8StringEncoding];
-    std::string filename(cString);
+    string filename(cString);
     lost::application::DragNDropEventPtr dragNDropEvent(new lost::application::DragNDropEvent(type, filename));
     NSPoint rel = [self mouseLocationOutsideOfEventStream];
     NSPoint abs = [NSEvent mouseLocation];
@@ -220,7 +219,7 @@
   }
 }
 
-- (void)keyEvent: (NSEvent*)event type:(std::string)type pressed:(BOOL)pressed
+- (void)keyEvent: (NSEvent*)event type:(lost::string)type pressed:(BOOL)pressed
 {
   // FIXME: virtual keycode translation!
   if (parent)
@@ -260,7 +259,7 @@
   }
 }
 
-- (bool)mouseButtonPressed: (std::string)eventType button: (lost::application::MouseButton)button
+- (bool)mouseButtonPressed: (lost::string)eventType button: (lost::application::MouseButton)button
 {
   if (eventType == lost::application::MouseEvent::MOUSE_DOWN())
   {

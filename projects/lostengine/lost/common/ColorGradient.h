@@ -3,7 +3,6 @@
 
 #include "lost/common/Color.h"
 #include "lost/common/forward.h"
-#include <vector>
 #include "lost/common/ColorPoint.h"
 
 namespace lost
@@ -18,7 +17,7 @@ struct ColorGradient
   void add(const ColorPoint& cp);
   Color colorAt(float coord);
   // colors.size() must always be == coords.size()
-  std::vector<ColorPoint> colorPoints;  
+  vector<ColorPoint> colorPoints;  
 
   static ColorGradientPtr create() {return ColorGradientPtr(new ColorGradient);}
   

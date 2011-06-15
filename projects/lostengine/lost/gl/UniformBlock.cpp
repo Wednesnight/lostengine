@@ -5,7 +5,7 @@ namespace lost
   namespace gl
   {
 
-    void UniformBlock::setInt(const std::string& name, GLint v)
+    void UniformBlock::setInt(const string& name, GLint v)
     {
       Variant variant;
       variant.i = v;
@@ -13,7 +13,7 @@ namespace lost
       variantMap[name] = variant;
     }
     
-    void UniformBlock::setFloat(const std::string& name, float v)
+    void UniformBlock::setFloat(const string& name, float v)
     {
       Variant variant;
       variant.f = v;
@@ -21,7 +21,7 @@ namespace lost
       variantMap[name] = variant;
     }
     
-    void UniformBlock::setBool(const std::string& name, bool v)
+    void UniformBlock::setBool(const string& name, bool v)
     {
       Variant variant;
       variant.b = v;
@@ -29,7 +29,7 @@ namespace lost
       variantMap[name] = variant;
     }
     
-    void UniformBlock::set(const std::string& name, const common::Color& v)
+    void UniformBlock::set(const string& name, const common::Color& v)
     {
       Variant variant;
       variant.color = v;
@@ -37,7 +37,7 @@ namespace lost
       variantMap[name] = variant;
     }
     
-    void UniformBlock::set(const std::string& name, const math::Vec2& v)
+    void UniformBlock::set(const string& name, const math::Vec2& v)
     {
       Variant variant;
       variant.vec2 = v;
@@ -45,7 +45,7 @@ namespace lost
       variantMap[name] = variant;
     }
 
-    void UniformBlock::set(const std::string& name, const math::Vec3& v)
+    void UniformBlock::set(const string& name, const math::Vec3& v)
     {
       Variant variant;
       variant.vec3 = v;
@@ -53,7 +53,7 @@ namespace lost
       variantMap[name] = variant;
     }
 
-    void UniformBlock::set(const std::string& name, const math::Vec4& v)
+    void UniformBlock::set(const string& name, const math::Vec4& v)
     {
       Variant variant;
       variant.vec4 = v;
@@ -61,7 +61,7 @@ namespace lost
       variantMap[name] = variant;
     }
     
-    void UniformBlock::set(const std::string& name, const math::Matrix& v)
+    void UniformBlock::set(const string& name, const math::Matrix& v)
     {
       Variant variant;
       variant.matrix = v;

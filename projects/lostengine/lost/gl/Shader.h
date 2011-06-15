@@ -3,7 +3,6 @@
 
 #include "lost/gl/gltypes.h"
 #include "lost/gl/forward.h"
-#include <string>
 
 namespace lost
 {
@@ -13,11 +12,11 @@ struct Shader
 {
   Shader(GLenum type);
   virtual ~Shader();
-  void source(const std::string& inSource);
+  void source(const string& inSource);
   void compile();
   bool compiled();
   GLint param(GLenum paramName);
-  std::string log();
+  string log();
   
   GLuint shader;
 };

@@ -2,14 +2,11 @@
 // MAC
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <string>
 #include <stdexcept>
 #include <sys/time.h>
 #include "boost/filesystem.hpp"
 #import <Foundation/Foundation.h>
 #include "lost/common/Logger.h"
-
-using namespace std;
 
 namespace lost
 {
@@ -17,7 +14,7 @@ namespace lost
   {
 
     // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string currentTimeFormat()
+    string currentTimeFormat()
     {
       const size_t bufsize = 30;
       char   timeformat[bufsize];
@@ -60,7 +57,7 @@ namespace lost
 
       if(!resourceDirURL)
       {
-        throw runtime_error( "Couldn't find resource directory, does it exist?" );
+        throw std::runtime_error( "Couldn't find resource directory, does it exist?" );
       }
 
       const unsigned long bufsize = 4096;
@@ -73,7 +70,7 @@ namespace lost
       
       if(!convresult)
       {
-        throw runtime_error("couldn't convert CFURL to path for resource dir");
+        throw std::runtime_error("couldn't convert CFURL to path for resource dir");
       }
       
       string result(reinterpret_cast<char*>(buffer));
@@ -94,7 +91,7 @@ namespace lost
         const char* cpath = [path cStringUsingEncoding:NSUTF8StringEncoding];
         if(cpath)
         {
-          std::string stringPath(cpath);
+          string stringPath(cpath);
           result = stringPath;
         }
         else 

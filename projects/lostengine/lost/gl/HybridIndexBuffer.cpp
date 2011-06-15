@@ -8,8 +8,6 @@ namespace lost
 namespace gl
 {
 
-using namespace std;
-
 #define bb_hib_key "lost.gl.HybridIndexBuffer"
 
 HybridIndexBuffer::HybridIndexBuffer(ElementType et)
@@ -25,9 +23,9 @@ HybridIndexBuffer::HybridIndexBuffer(ElementType et)
     case ET_u16:type = GL_UNSIGNED_SHORT;break;
     case ET_u32:type = GL_UNSIGNED_INT;break;
     default:
-      ostringstream os;
+      std::ostringstream os;
       os << "only u8, u16, u32 are allowed";
-      LOGTHROW(runtime_error(os.str()));
+      LOGTHROW(std::runtime_error(os.str()));
   }
   drawMode = GL_TRIANGLES;
   init(GL_ELEMENT_ARRAY_BUFFER, layout);

@@ -62,7 +62,7 @@ namespace lost
     
     void ThreadedTimerScheduler::addTimerToList(Timer* timer)
     {
-      std::list<Timer*>::iterator iter;
+      list<Timer*>::iterator iter;
       for (iter = timers.begin(); iter != timers.end(); ++iter) {
         if ((*iter)->getTime() >= timer->getTime()) {
           timers.insert(iter, timer);
@@ -79,7 +79,7 @@ namespace lost
 
     void ThreadedTimerScheduler::removeTimerFromList(Timer* timer)
     {
-      std::list<Timer*>::iterator iter;
+      list<Timer*>::iterator iter;
       for (iter = timers.begin(); iter != timers.end(); ++iter) {
         if (*iter == timer) {
           break;
@@ -112,7 +112,7 @@ namespace lost
 
     void ThreadedTimerScheduler::processTimers(const ThreadedTimerSchedulerEventPtr& event)
     {
-      std::list<Timer*> rescheduleTimers;
+      list<Timer*> rescheduleTimers;
 
       while (timers.size() > 0 && timers.front()->getTime() == nextUpdateTime) {
         Timer* timer = timers.front();
@@ -126,7 +126,7 @@ namespace lost
         schedulerWaitCondition.notify_all();
       }
 
-      for (std::list<Timer*>::iterator iter = rescheduleTimers.begin(); iter != rescheduleTimers.end(); ++iter) {
+      for (list<Timer*>::iterator iter = rescheduleTimers.begin(); iter != rescheduleTimers.end(); ++iter) {
         startTimer(*iter);
       }
 

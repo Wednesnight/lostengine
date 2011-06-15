@@ -10,27 +10,27 @@ namespace lost
     using namespace boost::filesystem;
 
     FilesystemRepository::FilesystemRepository(const boost::filesystem::path& inRootDir)
-    :rootDirectory(inRootDir.string())
+    :rootDirectory(inRootDir.string().c_str())
     {
     }
 
     common::DataPtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
     {
       boost::filesystem::path absolutePath = path(rootDirectory) / relativePath;
-      return loadFromAbsolutePath(absolutePath.string());;
+      return loadFromAbsolutePath(absolutePath.string().c_str());;
     }
 
-    bool FilesystemRepository::exists(std::string& inOutRelativePath)
+    bool FilesystemRepository::exists(string& inOutRelativePath)
     {
       boost::filesystem::path absolutePath = path(rootDirectory) / inOutRelativePath;
-      bool exists = fileExists(absolutePath.string());
+      bool exists = fileExists(absolutePath.string().c_str());
       if (exists) {
-        inOutRelativePath = absolutePath.string();
+        inOutRelativePath = absolutePath.string().c_str();
       }
       return exists;
     }
 
-    RepositoryPtr FilesystemRepository::create(const std::string& inRootDir)
+    RepositoryPtr FilesystemRepository::create(const string& inRootDir)
     {
       return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
     }

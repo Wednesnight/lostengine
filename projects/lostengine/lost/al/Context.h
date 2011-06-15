@@ -29,10 +29,10 @@ struct Context
 
   static void distanceModel(ALenum dm);
 
-  static std::string version();
-  static std::string renderer();
-  static std::string vendor();
-  static std::string extensions();
+  static string version();
+  static string renderer();
+  static string vendor();
+  static string extensions();
 
   ALCcontext* context;
   lost::shared_ptr<Device> device;

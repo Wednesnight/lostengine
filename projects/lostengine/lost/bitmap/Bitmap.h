@@ -126,7 +126,7 @@ namespace lost
        *
        * @throws if the file couldn't be written.
        */
-      void write(const std::string inFullPathname);
+      void write(const string inFullPathname);
 
       /** flips the bitmap vertically.
        * This moves a lot of memory, so be careful performance wise.

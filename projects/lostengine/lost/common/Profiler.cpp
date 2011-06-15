@@ -4,7 +4,7 @@
 
 lost::common::ProfilerStatistics profilerStatistics;
 
-lost::common::Profiler::Profiler( const unsigned int& inAddress, const std::string& inFileName, const std::string& inMethodName )
+lost::common::Profiler::Profiler( const unsigned int& inAddress, const string& inFileName, const string& inMethodName )
   : methodStart(lost::platform::currentTimeMilliSeconds()),
     address(inAddress),
     fileName(inFileName),
@@ -50,7 +50,7 @@ lost::common::ProfilerStatistics::~ProfilerStatistics()
   }
 }
 
-lost::common::Profiler* lost::common::ProfilerStatistics::initialize( const unsigned int& inAddress, const std::string& inFileName, const std::string& inMethodName )
+lost::common::Profiler* lost::common::ProfilerStatistics::initialize( const unsigned int& inAddress, const string& inFileName, const string& inMethodName )
 {
   lost::common::Profiler* result = 0;
 
@@ -68,7 +68,7 @@ void lost::common::ProfilerStatistics::add( Profiler* profiler )
 
 void lost::common::ProfilerStatistics::finalize( Profiler* profiler )
 {
-  std::vector<unsigned int>::iterator tmpProfiler = find( profilers.begin(), profilers.end(), profiler->address );
+  vector<unsigned int>::iterator tmpProfiler = find( profilers.begin(), profilers.end(), profiler->address );
   if (tmpProfiler != profilers.end())
   {
     profilers.erase( tmpProfiler );

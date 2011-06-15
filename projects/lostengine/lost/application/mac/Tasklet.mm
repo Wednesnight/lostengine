@@ -12,8 +12,6 @@
 
 #import <AppKit/NSPasteboard.h>
 
-using namespace std;
-
 namespace lost
 {
   namespace application
@@ -36,7 +34,7 @@ namespace lost
 
       isAlive = true;
       bool hasError = false;
-      std::string errorMsg = "";
+      string errorMsg = "";
 
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
@@ -84,9 +82,9 @@ namespace lost
       [pool drain];
       if (hasError) {
 
-        ostringstream os;
+        std::ostringstream os;
         os << "Tasklet '"<<name<<"' terminated with error: " <<errorMsg;
-        throw runtime_error(os.str());
+        throw std::runtime_error(os.str());
       }
     }
 
@@ -110,22 +108,22 @@ namespace lost
       }
     }
 
-    std::string Tasklet::getClipboardString()
+    string Tasklet::getClipboardString()
     {
-      std::string str;
+      string str;
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
       NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];
       if ([[pboard types] containsObject: NSStringPboardType]) {
         NSString* s = [pboard stringForType: NSStringPboardType];
         if (s != nil) {
-          str = std::string([s cStringUsingEncoding: NSUTF8StringEncoding]);
+          str = string([s cStringUsingEncoding: NSUTF8StringEncoding]);
         }
       }
       [pool drain];
       return str;
     }
 
-    bool Tasklet::setClipboardString(const std::string& str)
+    bool Tasklet::setClipboardString(const string& str)
     {
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
       NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];

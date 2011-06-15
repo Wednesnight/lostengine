@@ -1,17 +1,13 @@
-#include <string.h>
 #include <stdexcept>
-
 #include "lost/al/Device.h"
 #include "lost/common/Logger.h"
-
-using namespace std;
 
 namespace lost
 {
 namespace al
 {
 
-Device::Device(const std::string& inDeviceId)
+Device::Device(const string& inDeviceId)
 {
   initWithDeviceId(inDeviceId);
 }
@@ -21,12 +17,12 @@ Device::Device()
   initWithDeviceId(defaultDeviceId());
 }
 
-void Device::initWithDeviceId(const std::string& inDeviceId)
+void Device::initWithDeviceId(const string& inDeviceId)
 {
   DOUT("opening device: "<<inDeviceId);
   device = alcOpenDevice(inDeviceId.c_str());ALDEBUG_THROW;
   if(!device)
-    throw runtime_error("aclOpenDevice returned NULL for id: "+inDeviceId);
+    THROW_RTE("aclOpenDevice returned NULL for id: "+inDeviceId);
   deviceId = inDeviceId;
 }
 
@@ -41,9 +37,9 @@ Device::~Device()
   }
 }
 
-std::vector<std::string> Device::allDeviceIds()
+vector<string> Device::allDeviceIds()
 {
-  std::vector<std::string> result;
+  vector<string> result;
 
   const ALCchar* res = alcGetString(NULL, ALC_DEVICE_SPECIFIER);
   while(res && (strlen(res)!=0))
@@ -55,11 +51,11 @@ std::vector<std::string> Device::allDeviceIds()
   return result;
 }
 
-std::string Device::defaultDeviceId()
+string Device::defaultDeviceId()
 {
   const ALCchar* res = alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
   if(!res)
-    throw runtime_error("no default device found");
+    throw std::runtime_error("no default device found");
   return string(res);
 }
 

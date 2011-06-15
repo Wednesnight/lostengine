@@ -61,7 +61,7 @@ void DebugDraw::updateRenderGraph()
   }
   // set meshes of drawnodes to current meshes
   uint32_t idx=0;
-  for(std::list<rg::NodePtr>::iterator i=rootNode->children.begin(); i!=rootNode->children.end(); ++i)
+  for(list<rg::NodePtr>::iterator i=rootNode->children.begin(); i!=rootNode->children.end(); ++i)
   {
     rg::DrawPtr node = static_pointer_cast<rg::Draw>(*i);
     node->mesh = quads[idx];

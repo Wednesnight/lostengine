@@ -16,8 +16,6 @@
 
 #include "lost/math/Matrix.h"
 #include "lost/common/Color.h"
-#include <vector>
-
 #include "lost/gl/gltypes.h"
 #include "lost/gl/forward.h"
 #include "lost/camera/forward.h"
@@ -70,7 +68,7 @@ namespace lost
       void finalize();
 
       GLuint m_defaultFrameBuffer;
-      std::vector<math::Rect> _scissorRectStack;
+      vector<math::Rect> _scissorRectStack;
       
     public:
       Context();
@@ -120,13 +118,13 @@ namespace lost
       
       void activeTexture(GLenum tex); // sets the currently active texture unit
       void bindTexture(GLuint tex, bool override); // binds tex to currently active texture unit. Override is required to rebind destroyed and immediately recreated texture objects 
-      void bindTextures(const std::vector<TexturePtr>& textures); // binds textures to the units equivalent to the index in the vector
+      void bindTextures(const vector<TexturePtr>& textures); // binds textures to the units equivalent to the index in the vector
       void material(const mesh::MaterialPtr& mat); // applies the Material parameters to the state
       
       void draw(const mesh::MeshPtr& mesh);
       void shader(const ShaderProgramPtr& prog); // makes prog the active shader, switching the previous active shader off. null values are ok.
       // writes the current framebuffer with the current viewport configurtaion to a file as a tga, with optional alpha channel.
-      void writeScreenshot(const std::string& fullPathName, bool withAlphaChannel);
+      void writeScreenshot(const string& fullPathName, bool withAlphaChannel);
       
       static void* getCurrentOsSpecific();
       static void setCurrentOsSpecififc(void* ctx);

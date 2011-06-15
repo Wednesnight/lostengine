@@ -1,7 +1,6 @@
 #ifndef LOST_MATH_RECTPACKER_H
 #define LOST_MATH_RECTPACKER_H
 
-#include <vector>
 #include "lost/math/Rect.h"
 
 namespace lost
@@ -33,7 +32,16 @@ struct RectPacker
     int32_t large;  // index of the large child or -1 if no child
   };
 
-  struct SourceRect;
+  struct SourceRect
+  {
+    SourceRect(const lost::math::Rect inRect, int32_t inId)
+    :rect(inRect), id(inId)
+    {
+    }
+    
+    lost::math::Rect rect; // the original size
+    int32_t id; // it's index in the original incoming data
+  };
 
   RectPacker();
   ~RectPacker();
@@ -42,11 +50,11 @@ struct RectPacker
    *  the result is stored in the nodes vector.
    */
   void pack(const lost::math::Rect& targetArea,
-            const std::vector<lost::math::Rect>& rects,
+            const vector<lost::math::Rect>& rects,
             bool rotate,
             bool sort = true);
 
-  std::vector<Node> nodes; // holds the packed rects. rectid is the index of the rect in the incoming vector
+  vector<Node> nodes; // holds the packed rects. rectid is the index of the rect in the incoming vector
 
 private:
   void checkOverlap();
@@ -57,8 +65,8 @@ private:
   bool pack(int32_t sourceRectId);
   int32_t newNode(const lost::math::Rect& r);
 
-  std::vector<SourceRect> sourceRects;
-  std::vector<int32_t> recursionStack;
+  vector<SourceRect> sourceRects;
+  vector<int32_t> recursionStack;
   bool foundNode;
   bool hasSpace;
 

@@ -4,7 +4,6 @@
 #include "lost/audio/Source.h"
 #include "lost/common/Logger.h"
 
-using namespace std;
 using namespace boost;
 
 namespace lost
@@ -18,7 +17,7 @@ Engine::Engine()
 	context->makeCurrent();
 }
 
-Engine::Engine(const std::string& inDeviceId)
+Engine::Engine(const string& inDeviceId)
 {
 	context.reset(new al::Context(lost::shared_ptr<al::Device>(new al::Device(inDeviceId))));
 	context->makeCurrent();
@@ -43,7 +42,7 @@ lost::shared_ptr<audio::Source> Engine::createSource()
 void Engine::destroySource(audio::Source* source)
 {
 	DOUT("");
-	std::list<weak_ptr<Source> >::iterator i;
+	list<weak_ptr<Source> >::iterator i;
 	for(i=sources.begin(); i!= sources.end(); ++i)
 	{
 		shared_ptr<audio::Source> src = (*i).lock();

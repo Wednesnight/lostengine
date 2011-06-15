@@ -7,8 +7,6 @@ namespace lost
 namespace gl
 {
 
-using namespace std;
-
 uint32_t elementSize(ElementType t)
 {
   uint32_t result = 0;
@@ -32,7 +30,7 @@ uint32_t elementSize(ElementType t)
     case ET_mat4x4_f32:result=64;break;
     
     default:
-      ostringstream os;
+      std::ostringstream os;
       os<<"can't find size for ElementType "<<t;
       throw std::runtime_error(os.str());
       break;
@@ -158,19 +156,19 @@ uint32_t BufferLayout::size() const
 
 uint32_t BufferLayout::partitionFromUsageType(UsageType ut)
 {
-  std::map<UsageType, uint32_t>::const_iterator pos = ut2pid.find(ut);
+  map<UsageType, uint32_t>::const_iterator pos = ut2pid.find(ut);
   if(pos == ut2pid.end())
   {
-    ostringstream os;
+    std::ostringstream os;
     os << "couldn't find partition for usage type: "<<ut;
-    throw runtime_error(os.str());
+    throw std::runtime_error(os.str());
   }
   return pos->second;
 }
 
 bool BufferLayout::hasUsageType(UsageType ut)
 {
-  std::map<UsageType, uint32_t>::iterator pos = ut2pid.find(ut);
+  map<UsageType, uint32_t>::iterator pos = ut2pid.find(ut);
   return (pos != ut2pid.end());
 }
 

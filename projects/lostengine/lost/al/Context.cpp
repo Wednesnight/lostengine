@@ -3,8 +3,6 @@
 #include "lost/common/Logger.h"
 #include "lost/al/Device.h"
 
-using namespace std;
-
 namespace lost
 {
 namespace al
@@ -25,7 +23,7 @@ void Context::initWithDevice(lost::shared_ptr<Device> inDevice)
   DOUT("creating context");
   context = alcCreateContext(inDevice->device, NULL);ALDEBUG_THROW;
   if(!context)
-    throw runtime_error("couldn't create context for device: "+inDevice->deviceId);
+    THROW_RTE("couldn't create context for device: "+inDevice->deviceId);
   device = inDevice;
 }
 
@@ -40,7 +38,7 @@ void Context::makeCurrent()
   DOUT("");
   ALCboolean res = alcMakeContextCurrent(context);ALDEBUG_THROW;
   if(!res)
-    throw runtime_error("couldn't make context current");
+    throw std::runtime_error("couldn't make context current");
 }
 
 void Context::process()
@@ -79,35 +77,35 @@ void Context::distanceModel(ALenum dm)
 }
 
 
-std::string Context::version()
+string Context::version()
 {
   const ALchar* result = alGetString(AL_VERSION);ALDEBUG_THROW;
   if(!result)
-    throw runtime_error("alGetString returned NULL");
+    throw std::runtime_error("alGetString returned NULL");
   return string(result);
 }
 
-std::string Context::renderer()
+string Context::renderer()
 {
   const ALchar* result = alGetString(AL_RENDERER);ALDEBUG_THROW;
   if(!result)
-    throw runtime_error("alGetString returned NULL");
+    throw std::runtime_error("alGetString returned NULL");
   return string(result);
 }
 
-std::string Context::vendor()
+string Context::vendor()
 {
   const ALchar* result = alGetString(AL_VENDOR);ALDEBUG_THROW;
   if(!result)
-    throw runtime_error("alGetString returned NULL");
+    throw std::runtime_error("alGetString returned NULL");
   return string(result);
 }
 
-std::string Context::extensions()
+string Context::extensions()
 {
   const ALchar* result = alGetString(AL_EXTENSIONS);ALDEBUG_THROW;
   if(!result)
-    throw runtime_error("alGetString returned NULL");
+    throw std::runtime_error("alGetString returned NULL");
   return string(result);
 }
 

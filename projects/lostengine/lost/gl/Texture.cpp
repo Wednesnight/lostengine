@@ -7,7 +7,6 @@
 #include "lost/gl/Context.h"
 #include "lost/profiler/Blackbox.h"
 
-using namespace std;
 using namespace boost;
 using namespace lost::bitmap;
 
@@ -44,7 +43,7 @@ GLenum bitmapComponents2GlFormat(bitmap::Components components)
       EOUT("throwing from here");
       std::ostringstream os;
       os << "can't convert bitmap components " << components;
-      throw runtime_error(os.str());
+      throw std::runtime_error(os.str());
   }
   return result;
 }
@@ -191,7 +190,7 @@ void Texture::init(const bitmap::BitmapPtr& inBitmap, const Texture::Params& inP
 
 }
 
-void Texture::init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams)
+void Texture::init(const vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams)
 {
   bind();  
   Texture::Params bitmapParams(inParams);

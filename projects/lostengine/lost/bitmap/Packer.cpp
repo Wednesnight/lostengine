@@ -28,7 +28,7 @@ Packer::~Packer()
 
 void Packer::pack(Packer::Result& outResult,
         const lost::math::Vec2& targetSize,
-        std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
+        vector<lost::shared_ptr<lost::bitmap::Bitmap> > bitmaps,
         Components format,
         bool rotate,
         bool sort)
@@ -62,8 +62,8 @@ void Packer::pack(Packer::Result& outResult,
 }
 
 
-void Packer::buildRectsFromBitmaps(std::vector<lost::math::Rect>& outRects,
-                                   std::vector<lost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
+void Packer::buildRectsFromBitmaps(vector<lost::math::Rect>& outRects,
+                                   vector<lost::shared_ptr<lost::bitmap::Bitmap> > inBitmaps)
 {
   outRects.clear();
   uint32_t numBitmaps = inBitmaps.size();

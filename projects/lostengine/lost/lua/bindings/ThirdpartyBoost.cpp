@@ -35,9 +35,9 @@ namespace lost
         [
           class_<path>("path")
             .def(constructor<>())
-            .def(constructor<const std::string&>())
+            .def(constructor<const string&>())
             .def(tostring(self))
-            .def(self / other<std::string>())
+            .def(self / other<string>())
             .def("remove_filename", &path::remove_filename)
             .def("filename", &path::filename)
             .def("stem", &path::stem)

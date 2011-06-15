@@ -11,7 +11,6 @@
 #include "lost/lua/State.h"
 
 using namespace luabind;
-using namespace std;
 using namespace lost::common;
 
 namespace lost
@@ -102,16 +101,16 @@ namespace lost
     // NOTE: This is potentially buggy, we have to watch this and maybe reimplement it more restrictively
     // with object_cast, surrrounded by try/catch and extended error long in case of failure
     template <typename ValueWrapper>
-    std::string luabind_tostring(ValueWrapper const& value_wrapper)
+    string luabind_tostring(ValueWrapper const& value_wrapper)
     {
       using namespace luabind;
       lua_State* interpreter = value_wrapper_traits<ValueWrapper>::interpreter(value_wrapper);
       value_wrapper_traits<ValueWrapper>::unwrap(interpreter, value_wrapper);
       detail::stack_pop pop(interpreter, 1);
-      return std::string(lua_tostring(interpreter, -1), lua_strlen(interpreter, -1));
+      return string(lua_tostring(interpreter, -1), lua_strlen(interpreter, -1));
     }
     
-    std::string getFilenameFuncnameLine(lua_State* state)
+    string getFilenameFuncnameLine(lua_State* state)
     {
       State* ls = State::stateFromState(state);
       return ls->getFilenameFuncnameLine();

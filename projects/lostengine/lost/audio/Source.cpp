@@ -1,9 +1,7 @@
 #include "lost/audio/Source.h"
-#include <stdexcept>
 #include "lost/audio/VorbisFile.h"
 #include "lost/common/Logger.h"
 
-using namespace std;
 using namespace boost;
 
 namespace lost

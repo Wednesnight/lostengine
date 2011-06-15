@@ -99,8 +99,8 @@ namespace lost
       [
         namespace_("font")
         [
-          def("render", (RenderedTextPtr(*)(const std::string & inText, const FontPtr& font,bool characterMetrics, int align))&lost::font::render),
-          def("render", (void(*)(const std::string & inText, const FontPtr& font, const RenderedTextPtr& target,bool characterMetrics, int align))&lost::font::render)
+          def("render", (RenderedTextPtr(*)(const string & inText, const FontPtr& font,bool characterMetrics, int align))&lost::font::render),
+          def("render", (void(*)(const string & inText, const FontPtr& font, const RenderedTextPtr& target,bool characterMetrics, int align))&lost::font::render)
         ]
       ];
     }

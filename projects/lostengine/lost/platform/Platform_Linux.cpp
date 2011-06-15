@@ -22,7 +22,7 @@ namespace lost
   {
 
     // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string currentTimeFormat()
+    string currentTimeFormat()
     {
       char   timeformat[20];
       time_t timestamp;
@@ -41,13 +41,13 @@ namespace lost
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
-    std::string getApplicationDirectory()
+    string getApplicationDirectory()
     {
       boost::filesystem::path path = getApplicationFilename();
       return path.branch_path().string();
     }
 
-    std::string getApplicationFilename(bool excludeExtension)
+    string getApplicationFilename(bool excludeExtension)
     {
       boost::filesystem::path path = "/proc";
       struct stat info;
@@ -75,12 +75,12 @@ namespace lost
         throw std::runtime_error("Could not determine application path!");
       }
 
-      return std::string(pathbuf, pathsize);
+      return string(pathbuf, pathsize);
     }
 
-    std::string buildResourcePath( const std::string& filename )
+    string buildResourcePath( const string& filename )
     {
-      std::string result( getResourcePath().append( filename ) );
+      string result( getResourcePath().append( filename ) );
 
       FILE *l_filecheck = fopen(result.c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
@@ -89,12 +89,12 @@ namespace lost
       return result;
     }
 
-    std::string getResourcePath()
+    string getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    std::string buildUserDataPath( const std::string& filename )
+    string buildUserDataPath( const string& filename )
     {
       boost::filesystem::path path(filename);
 
@@ -116,7 +116,7 @@ namespace lost
 #endif
       path /= filename;
 
-      std::string result = path.string();
+      string result = path.string();
 
       FILE *l_filecheck = fopen(result.c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);

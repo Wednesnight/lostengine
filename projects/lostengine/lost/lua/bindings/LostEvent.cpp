@@ -25,7 +25,7 @@ namespace lost
       }
     };
     
-    lost::event::ConnectionPtr addEventListener(object dispatcher, const std::string& type, object func)
+    lost::event::ConnectionPtr addEventListener(object dispatcher, const string& type, object func)
     {
       if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
       EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);

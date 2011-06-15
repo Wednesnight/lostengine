@@ -2,7 +2,6 @@
 #define LOST_GL_TEXTUREATALAS_H
 
 #include "lost/gl/Texture.h"
-#include <map>
 #include "lost/math/Rect.h"
 #include "lost/gl/TextureTile.h"
 #include "lost/gl/TextureAtlas.h"
@@ -18,7 +17,7 @@ namespace gl
 struct TextureAtlas
 {  
   TexturePtr texture;
-  std::map<uint32_t, math::Rect> pixelCoordRects;
+  map<uint32_t, math::Rect> pixelCoordRects;
   
   TextureTile tile(uint32_t tileId)
   {

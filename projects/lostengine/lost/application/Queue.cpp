@@ -1,7 +1,4 @@
 #include "lost/application/Queue.h"
-//#include "lost/common/Logger.h"
-
-using namespace std;
 
 namespace lost
 {
@@ -24,7 +21,7 @@ namespace lost
       // get list snapshot since entities could modify the list
       Queue current(*this);
       // clear own list
-      std::vector<const QueueEntity*>::clear();
+      vector<const QueueEntity*>::clear();
 
       for (iterator entity = current.begin(); entity != current.end(); ++entity)
       {
@@ -39,7 +36,7 @@ namespace lost
       {
         delete *entity;
       }
-      std::vector<const QueueEntity*>::clear();
+      vector<const QueueEntity*>::clear();
     }
 
   }

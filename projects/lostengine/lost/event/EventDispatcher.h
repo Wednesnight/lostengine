@@ -7,8 +7,6 @@
 #include "lost/event/Connection.h"
 #include "tinythread.h"
 
-#include <list>
-
 namespace lost
 {
 namespace event
@@ -39,9 +37,9 @@ struct EventDispatcher
   ConnectionPtr attachTo(const EventDispatcherPtr& target, const lost::event::Type& type);
   uint32_t numListeners();
   
-  std::map<event::Type, SignalPtr> eventType2signal;
+  map<event::Type, SignalPtr> eventType2signal;
   tthread::mutex queueMutex;
-  std::list<EventPtr> eventQueue;
+  list<EventPtr> eventQueue;
   tthread::condition_variable waitEventCondition;
   tthread::mutex waitEventMutex;
 };

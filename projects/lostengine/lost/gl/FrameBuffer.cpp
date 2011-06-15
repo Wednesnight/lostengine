@@ -9,7 +9,6 @@
 #include "lost/math/lmath.h"
 #include "lost/math/io.h"
 
-using namespace std;
 using namespace lost::math;
 
 namespace lost
@@ -55,9 +54,9 @@ namespace lost
           break;
 
         default:
-          ostringstream os;
+          std::ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw runtime_error(os.str());
+          throw std::runtime_error(os.str());
       }
     }
 
@@ -113,9 +112,9 @@ namespace lost
           break;
           
         default:
-          ostringstream os;
+          std::ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw runtime_error(os.str());
+          throw std::runtime_error(os.str());
       }
     }
 
@@ -173,9 +172,9 @@ namespace lost
           break;
           
         default:
-          ostringstream os;
+          std::ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw runtime_error(os.str());
+          throw std::runtime_error(os.str());
       }
     }
 
@@ -192,9 +191,9 @@ namespace lost
           break;
           
         default:
-          ostringstream os;
+          std::ostringstream os;
           os << "invalid usage type: " << usageType;
-          throw runtime_error(os.str());
+          throw std::runtime_error(os.str());
       }
     }
     
@@ -267,7 +266,7 @@ namespace lost
         switch (buffer->bitFormat)
         {
           case GL_RGB:
-            throw runtime_error("FrameBuffer: couldn't determine compatible color buffer bit format");
+            throw std::runtime_error("FrameBuffer: couldn't determine compatible color buffer bit format");
           case GL_RGBA:
             buffer->resetBitFormat(GL_RGB);
             break;
@@ -277,9 +276,9 @@ namespace lost
 #endif
             break;
           default:
-            ostringstream os;
+            std::ostringstream os;
             os << "invalid color buffer bit format: " << buffer->bitFormat;
-            throw runtime_error(os.str());
+            throw std::runtime_error(os.str());
         }
         buffer->attach(LGL_COLOR_ATTACHMENT0 + index);
       }
@@ -302,7 +301,7 @@ namespace lost
         switch (depthBuffer->bitFormat)
         {
           case LGL_DEPTH_COMPONENT16:
-            throw runtime_error("FrameBuffer: couldn't determine compatible depth buffer bit format");
+            throw std::runtime_error("FrameBuffer: couldn't determine compatible depth buffer bit format");
           case LGL_DEPTH_COMPONENT24:
             depthBuffer->resetBitFormat(LGL_DEPTH_COMPONENT16);
             break;
@@ -312,9 +311,9 @@ namespace lost
             break;
 #endif            
           default:
-            ostringstream os;
+            std::ostringstream os;
             os << "invalid depth buffer bit format: " << depthBuffer->bitFormat;
-            throw runtime_error(os.str());
+            throw std::runtime_error(os.str());
         }
         depthBuffer->attach(LGL_DEPTH_ATTACHMENT);
       }
@@ -345,31 +344,31 @@ namespace lost
 
     void FrameBuffer::check()
     {
-      ostringstream os;
+      std::ostringstream os;
       switch (status())
       {
         case LGL_FRAMEBUFFER_COMPLETE:
           // ok
           break;
         case LGL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-          throw runtime_error("FrameBuffer: invalid attachment");
+          throw std::runtime_error("FrameBuffer: invalid attachment");
           break;
         case LGL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-          throw runtime_error("FrameBuffer: missing attachment");
+          throw std::runtime_error("FrameBuffer: missing attachment");
           break;
         case LGL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-          throw runtime_error("FrameBuffer: invalid dimensions");
+          throw std::runtime_error("FrameBuffer: invalid dimensions");
           break;
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
         case LGL_FRAMEBUFFER_INCOMPLETE_FORMATS:
-          throw runtime_error("FrameBuffer: invalid format");
+          throw std::runtime_error("FrameBuffer: invalid format");
           break;
 
         case LGL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER:
-          throw runtime_error("FrameBuffer: invalid draw buffer");
+          throw std::runtime_error("FrameBuffer: invalid draw buffer");
           break;
         case LGL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER:
-          throw runtime_error("FrameBuffer: invalid read buffer");
+          throw std::runtime_error("FrameBuffer: invalid read buffer");
           break;
 #endif          
         case LGL_FRAMEBUFFER_UNSUPPORTED:
@@ -392,10 +391,10 @@ namespace lost
             }
           }
           os << ")";
-          throw runtime_error(os.str());
+          throw std::runtime_error(os.str());
           break;
         default:
-          throw runtime_error("FrameBuffer: unknown error");
+          throw std::runtime_error("FrameBuffer: unknown error");
       }
     }
 

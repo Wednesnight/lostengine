@@ -4,7 +4,6 @@
 #include "lost/resource/forward.h"
 #include "lost/lua/forward.h"
 #include "lost/math/Rect.h"
-#include <string>
 
 namespace lost
 {
@@ -23,11 +22,11 @@ namespace lost
       bool load(lua::StatePtr interpreter, resource::LoaderPtr loader);
       void reset();
         
-      std::string   taskletName;
+      string   taskletName;
       bool          taskletWaitForEvents;
       bool          taskletHasWindow;
       
-      std::string   windowTitle;
+      string   windowTitle;
       math::Rect    windowRect;
 
       double framerate;

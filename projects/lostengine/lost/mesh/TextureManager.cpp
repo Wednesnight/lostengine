@@ -2,7 +2,6 @@
 #include "lost/math/lmath.h"
 #include "lost/gl/Texture.h"
 #include "lost/bitmap/Bitmap.h"
-#include <vector>
 #include "lost/gl/gl.h"
 #include "lost/common/Color.h"
 #include "lost/common/ColorGradient.h"
@@ -17,7 +16,6 @@ using namespace lost::math;
 using namespace lost::bitmap;
 using namespace lost::gl;
 using namespace lost::common;
-using namespace std;
 
 TextureManager::TextureManager()
 {

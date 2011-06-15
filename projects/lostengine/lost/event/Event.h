@@ -1,14 +1,13 @@
 #ifndef LOST_EVENT_EVENT_H
 #define LOST_EVENT_EVENT_H
 
-#include <string>
 #include "lost/event/forward.h"
 
 namespace lost
 {
   namespace event
   {
-    typedef std::string Type;
+    typedef string Type;
 
 		/** low-level event class.
 		 *	Any event that should be dispatched via the EventDispatcher must be derived from this class.

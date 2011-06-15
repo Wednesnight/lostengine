@@ -12,7 +12,6 @@ namespace mesh
 
 using namespace lost::math;
 using namespace lost::gl;
-using namespace std;
 
 RoundedRect::RoundedRect(const TextureManagerPtr& tm, 
                          const math::Vec2 sz, 

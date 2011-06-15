@@ -32,7 +32,6 @@
 
 using namespace boost;
 using namespace luabind;
-using namespace std;
 using namespace lost::event;
 using namespace lost::lua;
 using namespace lost::platform;

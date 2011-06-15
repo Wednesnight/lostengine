@@ -33,7 +33,7 @@ namespace lost
       isAlive = true;
       init();
       bool hasError = false;
-      std::string errorMsg;
+      string errorMsg;
 
       try
       {
@@ -90,14 +90,14 @@ namespace lost
       }
     }
 
-    bool Tasklet::setClipboardString(std::string const & str)
+    bool Tasklet::setClipboardString(string const & str)
     {
       // TODO
       throw runtime_error("not implemented");
       return false;
     }
 
-    std::string Tasklet::getClipboardString()
+    string Tasklet::getClipboardString()
     {
       // TODO
       throw runtime_error("not implemented");

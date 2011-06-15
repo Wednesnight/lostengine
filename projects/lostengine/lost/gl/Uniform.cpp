@@ -15,7 +15,7 @@ Uniform::Uniform()
   location = 0;
 }
 
-Uniform::Uniform(const std::string& inName, GLint inIndex, GLenum inGlType, GLint inSize, GLint loc)
+Uniform::Uniform(const string& inName, GLint inIndex, GLenum inGlType, GLint inSize, GLint loc)
 : name(inName), index(inIndex), glType(inGlType), size(inSize), location(loc)
 {
 }
@@ -48,7 +48,7 @@ void Uniform::set(const lost::common::Color& inCol)
     {
       case GL_FLOAT_VEC3: glUniform3f(location, inCol.r(), inCol.g(), inCol.b());GLDEBUG_THROW;break;
       case GL_FLOAT_VEC4: glUniform4f(location, inCol.r(), inCol.g(), inCol.b(), inCol.a());GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Color'");
+      default: THROW_RTE("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Color'");
     }
 }
 
@@ -58,7 +58,7 @@ void Uniform::set(const lost::math::Vec4& vec)
     {
       case GL_FLOAT_VEC3: glUniform3f(location, vec.x, vec.y, vec.z);GLDEBUG_THROW;break;
       case GL_FLOAT_VEC4: glUniform4f(location, vec.x, vec.y, vec.z, vec.w);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec4'");
+      default: THROW_RTE("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec4'");
     }
 }
 
@@ -67,7 +67,7 @@ void Uniform::set(const lost::math::Vec2& inVec)
     switch(glType)
     {
       case GL_FLOAT_VEC2: glUniform2f(location, inVec.x, inVec.y);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec2'");
+      default: THROW_RTE("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec2'");
     }
 }
 
@@ -76,7 +76,7 @@ void Uniform::set(const lost::math::Vec3& inVec)
     switch(glType)
     {
       case GL_FLOAT_VEC3: glUniform3f(location, inVec.x, inVec.y, inVec.z);GLDEBUG_THROW;break;
-      default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec3'");
+      default: THROW_RTE("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Vec3'");
     }
 }
 
@@ -85,7 +85,7 @@ void Uniform::set(const math::Matrix& mat)
   switch(glType)
   {
     case GL_FLOAT_MAT4: glUniformMatrix4fv(location, 1, GL_FALSE, mat.m);GLDEBUG_THROW;break;
-    default: throw std::runtime_error("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Matrix'");
+    default: THROW_RTE("type mismatch for: '"+name+"' required: "+lost::gl::utils::enum2string(glType)+" was 'Matrix'");
   }
 }
 

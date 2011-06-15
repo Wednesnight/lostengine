@@ -37,13 +37,13 @@ namespace lost
 
       struct print
       {
-        std::string msg;
-        print(const std::string& m) : msg(m) {}
+        string msg;
+        print(const string& m) : msg(m) {}
 
         template<typename IteratorT>
         void operator()(IteratorT first, IteratorT last) const
         {
-          std::cout << msg << std::string(first, last) << std::endl;
+          std::cout << msg << string(first, last) << std::endl;
         }
       };
 

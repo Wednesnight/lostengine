@@ -1,7 +1,6 @@
 #ifndef LOST_MATH_BEZIER_H
 #define LOST_MATH_BEZIER_H
 
-#include <vector>
 #include "lost/math/Vec2.h"
 #include "lost/math/Vec3.h"
 #include "lost/math/lmath.h"
@@ -18,7 +17,7 @@ namespace lost
     struct Bezier
     {
     public:
-      std::vector<VEC> points;
+      vector<VEC> points;
 
       static boost::uint32_t defaultSteps()
       {

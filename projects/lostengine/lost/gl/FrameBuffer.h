@@ -1,8 +1,6 @@
 #ifndef LOST_GL_FRAMEBUFFER_H
 #define LOST_GL_FRAMEBUFFER_H
 
-#include <vector>
-#include <map>
 #include "lost/gl/Texture.h"
 #include "lost/gl/RenderBuffer.h"
 #include "lost/gl/forward.h"
@@ -72,7 +70,7 @@ namespace lost
     public:
       math::Vec2 size;
 
-      std::map<uint8_t, AttachmentPtr> colorBuffers;
+      map<uint8_t, AttachmentPtr> colorBuffers;
       AttachmentPtr                           depthBuffer;
       AttachmentPtr                           stencilBuffer;
 

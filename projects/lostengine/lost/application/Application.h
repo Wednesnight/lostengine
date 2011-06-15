@@ -1,10 +1,6 @@
 #ifndef LOST_APPLICATION_APPLICATION_H
 #define LOST_APPLICATION_APPLICATION_H
 
-
-#include <list>
-#include <map>
-#include <string>
 #include "lost/event/forward.h"
 #include "lost/application/forward.h"
 
@@ -70,7 +66,7 @@ namespace lost
        * list of tasklets
        * see: lost/application/Tasklet.h
        */
-      std::list<Tasklet*> tasklets;
+      list<Tasklet*> tasklets;
       
       /**
        * see: lost/event/EventDispatcher.h

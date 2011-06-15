@@ -2,7 +2,6 @@
 #define LOST_GL_SHADERHELPER_H
 
 #include "lost/gl/ShaderProgram.h"
-#include <string>
 #include "lost/resource/Loader.h"
 
 namespace lost
@@ -20,15 +19,15 @@ namespace gl
  *  throws if one of the compile stages or the link stage fail.
  */
 ShaderProgramPtr loadShader(const resource::LoaderPtr& loader,
-                                   const std::string& inName);
+                                   const string& inName);
 
 /** Helper function for assembling a shader from vertex/fragment shader data.
  * Resolves imports/includes before compiling/linking the shader.
  */
 ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, 
-                             const std::string& inName, 
-                             const std::string& vssource,
-                             const std::string& fssource);
+                             const string& inName, 
+                             const string& vssource,
+                             const string& fssource);
 
 }
 }

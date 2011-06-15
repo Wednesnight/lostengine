@@ -309,7 +309,7 @@ namespace lost
       ];
     }
 
-    EventPtr SpawnTaskletEvent_create(const std::string& absolutePath)
+    EventPtr SpawnTaskletEvent_create(const string& absolutePath)
     {
       LoaderPtr loader = Loader::create();
       loader->addRepository(FilesystemRepository::create(absolutePath));

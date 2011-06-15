@@ -10,7 +10,7 @@ namespace lost
   namespace resource
   {
 
-    common::DataPtr loadFromAbsolutePath(const std::string& inPath)
+    common::DataPtr loadFromAbsolutePath(const string& inPath)
     {
       common::DataPtr result;
 
@@ -34,7 +34,7 @@ namespace lost
       return result;
     }
 
-    bool fileExists(const std::string& inPath)
+    bool fileExists(const string& inPath)
     {
       ZZIP_FILE* file = zzip_fopen(inPath.c_str(), "rb");
       bool result = (file != NULL);
@@ -45,7 +45,7 @@ namespace lost
       return result;
     }
 
-    void writeToAbsolutePath(const std::string& inPath, const common::DataPtr& inData)
+    void writeToAbsolutePath(const string& inPath, const common::DataPtr& inData)
     {
       FILE* file = fopen(inPath.c_str(), "wb");
       if (file != NULL) {

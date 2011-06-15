@@ -5,9 +5,6 @@
 #include "lost/application/Window.h"
 #include "lost/math/Vec2.h"
 
-#include <string>
-#include <vector>
-
 namespace lost
 {
   template <typename T>
@@ -19,15 +16,15 @@ namespace lost
     
     struct DragNDropEvent : public event::Event
     {
-      std::vector<std::string> paths;
+      vector<string> paths;
       Window* window;
       lost::math::Vec2 pos;
       lost::math::Vec2 absPos;
 
       uint32_t numPaths() { return paths.size(); }
       void clearPaths() {paths.clear(); }
-      void addPath(const std::string& inPath) { paths.push_back(inPath); }
-      std::string getPath(uint32_t idx) 
+      void addPath(const string& inPath) { paths.push_back(inPath); }
+      string getPath(uint32_t idx) 
       {
         return paths[idx]; 
       };

@@ -14,7 +14,6 @@
 using namespace boost;
 using namespace boost::spirit;
 using namespace boost::spirit::classic;
-using namespace std;
 using namespace lost::math;
 using namespace lost::mesh;
 using namespace lost::gl;
@@ -51,7 +50,7 @@ namespace lost
             mesh->indexBuffer->set(idx, usageType, value);
             break;
           default:
-            throw runtime_error("don't know what to do with usageType");
+            throw std::runtime_error("don't know what to do with usageType");
             break;
         }
       }
@@ -68,7 +67,7 @@ namespace lost
       unsigned int nrmCount = 0;
       unsigned int idxCount = 0;
 
-      std::string objData = objFile->str();
+      string objData = objFile->str();
 
       rule<> unknown_p = *(anychar_p - eol_p) >> eol_p;
 
@@ -98,7 +97,7 @@ namespace lost
 
       if (parse(objData.c_str(), count_p).full)
       {
-        if(normalCount && (vertexCount != normalCount)) {throw runtime_error("number of normals doesn't match number of vertices");}
+        if(normalCount && (vertexCount != normalCount)) {throw std::runtime_error("number of normals doesn't match number of vertices");}
         mesh->resetSize(vertexCount, indexCount);
 //        DOUT("vertexCount      : " << vertexCount);
 //        DOUT("normalCount      : " << normalCount);

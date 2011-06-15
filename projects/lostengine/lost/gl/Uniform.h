@@ -7,7 +7,6 @@
 #include "lost/math/Vec3.h"
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
-#include <string>
 
 namespace lost
 {
@@ -16,14 +15,14 @@ namespace gl
 
 struct Uniform
 {
-  std::string     name;
+  string     name;
   GLint           index;
   GLenum          glType;     // numerical data type (int, float, bool etc.)
   GLint           size;       // size of array
   GLint           location;
 
   Uniform();
-  Uniform(const std::string& inName,
+  Uniform(const string& inName,
             GLint inIndex,
             GLenum inGlType,
             GLint inSize,

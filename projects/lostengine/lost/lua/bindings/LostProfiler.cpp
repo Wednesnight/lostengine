@@ -10,10 +10,10 @@ namespace lost
   namespace lua
   {
 
-    void bb_inc(const std::string& name) { BB_INC(name); }
-    void bb_dec(const std::string& name) { BB_DEC(name); }
-    void bb_set_clear(const std::string& name, bool flag) { BB_SET_CLEAR(name,flag); }
-    void bb_set(const std::string& name,float val) { BB_SET(name,val); }
+    void bb_inc(const string& name) { BB_INC(name); }
+    void bb_dec(const string& name) { BB_DEC(name); }
+    void bb_set_clear(const string& name, bool flag) { BB_SET_CLEAR(name,flag); }
+    void bb_set(const string& name,float val) { BB_SET(name,val); }
 
     void LostProfilerBlackbox(lua_State* state)
     {
@@ -36,7 +36,7 @@ namespace lost
         namespace_("profiler")
         [
           class_<lost::profiler::BBCount>("BBCount")
-          .def(constructor<const std::string&>())
+          .def(constructor<const string&>())
         ]
       ];
     }

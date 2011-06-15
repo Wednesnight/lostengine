@@ -18,7 +18,6 @@
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
-using namespace std;
 
 void context_cleanup(lost::gl::Context* p)
 {
@@ -92,7 +91,7 @@ namespace lost
   namespace gl
   {
 
-std::map<void*, Context*> glContext2lostGlContext;
+map<void*, Context*> glContext2lostGlContext;
 
     Context::Context()
     {
@@ -129,7 +128,7 @@ std::map<void*, Context*> glContext2lostGlContext;
     Context::~Context()
     {
       finalize();
-      std::map<void*, Context*>::iterator pos;
+      map<void*, Context*>::iterator pos;
       pos = glContext2lostGlContext.find(Context::getCurrentOsSpecific());
       if(pos != glContext2lostGlContext.end())
       {
@@ -294,7 +293,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       }
     }
     
-    void Context::bindTextures(const std::vector<TexturePtr>& textures)
+    void Context::bindTextures(const vector<TexturePtr>& textures)
     {
       if(textures.size() > 0)
       {
@@ -443,7 +442,7 @@ std::map<void*, Context*> glContext2lostGlContext;
       bind(ib->gpuBuffers[0].get());
 
       // store the enabled vertex attributes
-      std::vector<GLint> enabledVertexAttributes;
+      vector<GLint> enabledVertexAttributes;
       // don't do anything if there's no shader
       if(currentShader)
       {
@@ -468,7 +467,7 @@ std::map<void*, Context*> glContext2lostGlContext;
         VertexAttributeMap::iterator end = vb->vertexAttributeMap.end();
         for(i = vb->vertexAttributeMap.begin(); i!= end; ++i)
         {
-          const std::string& attributeName = i->second;
+          const string& attributeName = i->second;
           UsageType ut = i->first;
           if(currentShader->hasAttribute(attributeName))
           {
@@ -492,7 +491,7 @@ std::map<void*, Context*> glContext2lostGlContext;
      * @param fullPathName full path name of file to be saved. You must ensure that the location is writable.
      *        
      */
-    void Context::writeScreenshot(const std::string& fullPathName,
+    void Context::writeScreenshot(const string& fullPathName,
                                  bool withAlphaChannel)
     {
       GLenum format = withAlphaChannel ? GL_RGBA : GL_RGB;

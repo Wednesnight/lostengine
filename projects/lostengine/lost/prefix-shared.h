@@ -21,7 +21,48 @@
     #define BOOST_THREAD_BUILD_LIB
   #endif
 
-  #include <stdint.h>
+#include <stdint.h>
+
+#define LOST_USE_EASTL
+#ifndef LOST_USE_EASTL
+  #include <string>
+  #include <list>
+  #include <map>
+  #include <vector>
+  namespace lost
+  {
+    using std::string;
+    using std::list;
+    using std::map;
+    using std::vector;
+    using std::make_pair;
+    using std::pair;
+  }
+#else
+  #include "EASTL/string.h"
+  #include "EASTL/list.h"
+  #include "EASTL/map.h"
+  #include "EASTL/vector.h"
+  namespace lost
+  {
+    using eastl::string;
+    using eastl::list;
+    using eastl::map;
+    using eastl::vector;
+    using eastl::make_pair;
+    using eastl::pair;
+  }
+#include "lost/common/eastlStreamSupport.h"  
+#include "lost/common/StringStream.h"
+#define THROW_RTE(s) \
+{ \
+lost::common::StringStream os; \
+os << s; \
+throw std::runtime_error(os.str().c_str()); \
+}
+
+#endif
+
 
   // lostengine
   #include "lost/platform/shared_ptr.h"
