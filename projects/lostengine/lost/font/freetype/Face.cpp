@@ -16,7 +16,6 @@ namespace font
 namespace freetype
 {
 
-using namespace std;
 using namespace lost::bitmap;
 
 Face::Face(LibraryPtr inLibrary,
@@ -30,7 +29,7 @@ Face::Face(LibraryPtr inLibrary,
                                        &mFace);
   if(error)
   {
-    ostringstream os;
+    std::ostringstream os;
     os << "FT_New_Face error: " << error;
     throw std::runtime_error(os.str());
   }
@@ -41,7 +40,7 @@ Face::Face(LibraryPtr inLibrary,
   error = FT_Set_Char_Size(mFace, 0, inSizeInPoints*64, 72, 72);
   if(error)
   {
-    ostringstream os;
+    std::ostringstream os;
     os << error;
     throw std::runtime_error("FT_Set_Char_Size error: " + os.str());
   }

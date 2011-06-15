@@ -16,12 +16,12 @@ namespace gl
 
 namespace utils
 {
-  std::string getGlErrorAsString(GLenum err)
+  string getGlErrorAsString(GLenum err)
   {
     // FIXME: we need a cleaner way to handle this, maybe move error handling/debugging to a dedicated header
     #if TARGET_OPENGL_ES
       // there are only a handful of error codes in OpenGL ES, so we switch them by hand
-      std::string result;
+      string result;
       switch(err)
       {
         case GL_NO_ERROR:result="GL_NO_ERROR";break;
@@ -41,21 +41,21 @@ namespace utils
     #else
       const char* buf = reinterpret_cast<const char*>(gluErrorString(err));
       if(buf)
-        return std::string(buf);
+        return string(buf);
       else
       {
         // null pointer most probably means some extension produced an error that standard gluErrorString doesn't know
         // so we just output a hex number
         std::ostringstream os;
         os << "error 0x" << std::hex <<  err;
-        return os.str();
+        return os.str().c_str();
       }
     #endif
   }
 
     #define enum2string_helper(glenum) case glenum: return #glenum;break;
 
-    std::string enum2string(GLenum inVal)
+    string enum2string(GLenum inVal)
     {
       switch(inVal)
       {

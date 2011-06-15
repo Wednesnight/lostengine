@@ -1,11 +1,9 @@
 #ifndef LOST_FONT_TEXTBUFFER_H
 #define LOST_FONT_TEXTBUFFER_H
 
-#include <string>
 #include "lost/font/forward.h"
 #include "lost/font/BreakMode.h"
 #include "lost/font/Range.h"
-#include <vector>
 
 namespace lost
 {
@@ -19,9 +17,9 @@ public:
   ~TextBuffer();
 
   bool _dirty;
-  void text(const std::string& inUtf8String);
-  std::string utf8String(); // returns the current data as utf8 string
-  std::string substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
+  void text(const string& inUtf8String);
+  string utf8String(); // returns the current data as utf8 string
+  string substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
   void font(const FontPtr& inFont);
   void breakMode(BreakMode inBreakMode);
   void width(float inWidth);
@@ -46,7 +44,7 @@ public:
   void renderPhysicalLine(uint32_t num, const RenderedTextPtr& target);
   void renderAllPhysicalLines(const RenderedTextPtr& target);
 
-  void insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const std::string& inString);
+  void insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const string& inString);
   void eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex);
   void eraseChars(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
 
@@ -77,8 +75,8 @@ private:
     Range line;
   };
 
-  std::vector<LogicalLine>  _logicalLines;
-  std::vector<Range>        _physicalLines;
+  vector<LogicalLine>  _logicalLines;
+  vector<Range>        _physicalLines;
   FontPtr                   _font;
   BreakMode                 _breakMode;
   Utf32String               _text;
@@ -86,9 +84,9 @@ private:
   bool                      _characterMetrics;
   int                       _align;
   
-  void resetLogicalLines(const std::string& inText);
+  void resetLogicalLines(const string& inText);
   void resetPhysicalLines();
-  void normaliseNewlines(std::string& inText);
+  void normaliseNewlines(string& inText);
   
   void breakModeNone();
   void breakModeChar();

@@ -1,8 +1,6 @@
 #ifndef LOST_GL_SHADERPROGRAM_H
 #define LOST_GL_SHADERPROGRAM_H
 
-#include <map>
-#include <list>
 #include "lost/gl/Shader.h"
 #include "lost/gl/Uniform.h"
 #include "lost/gl/VertexAttribute.h"
@@ -19,16 +17,16 @@ namespace gl
 struct ShaderProgram
 {
 public:
-typedef std::map<std::string, Uniform>          UniformMap;
-typedef std::map<std::string, VertexAttribute>  VertexAttributeMap;
-typedef std::list<ShaderPtr>                    ShaderList;
+typedef map<string, Uniform>          UniformMap;
+typedef map<string, VertexAttribute>  VertexAttributeMap;
+typedef list<ShaderPtr>                    ShaderList;
 
   ShaderProgram();
   virtual ~ShaderProgram();
   static ShaderProgramPtr create() { return ShaderProgramPtr(new ShaderProgram); }
 
-  Uniform& uniform(const std::string& inName);
-  Uniform& operator[](const std::string& inName);
+  Uniform& uniform(const string& inName);
+  Uniform& operator[](const string& inName);
   void attach(ShaderPtr& inShader);
   void detachAllShaders(); // detaches all shaders, throwing awa all internal references to shader objects
   void link();
@@ -37,21 +35,21 @@ typedef std::list<ShaderPtr>                    ShaderList;
   void disable();
   // returns information about the current program state
   GLint param(GLenum paramName);
-  std::string log();
+  string log();
   void validate();
   bool validated();
-  GLenum numericalType(const std::string& inName);
+  GLenum numericalType(const string& inName);
 
-  void setInt(const std::string& inName, GLint inVal);
-  void setFloat(const std::string& inName, float inVal);
-  void setBool(const std::string& inName, bool inVal);
-  void set(const std::string& inName, const lost::common::Color& inVal);
-  void set(const std::string& inName, const lost::math::Vec4& inVal);
-  void set(const std::string& inName, const lost::math::Vec2& inVal);
-  void set(const std::string& inName, const lost::math::Vec3& inVal);
-  void set(const std::string& inName, const math::Matrix& inVal);
-  bool hasUniform(const std::string& name);
-  bool hasAttribute(const std::string& name);
+  void setInt(const string& inName, GLint inVal);
+  void setFloat(const string& inName, float inVal);
+  void setBool(const string& inName, bool inVal);
+  void set(const string& inName, const lost::common::Color& inVal);
+  void set(const string& inName, const lost::math::Vec4& inVal);
+  void set(const string& inName, const lost::math::Vec2& inVal);
+  void set(const string& inName, const lost::math::Vec3& inVal);
+  void set(const string& inName, const math::Matrix& inVal);
+  bool hasUniform(const string& name);
+  bool hasAttribute(const string& name);
 
   UniformMap& uniformMap();
 

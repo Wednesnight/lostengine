@@ -12,7 +12,6 @@ namespace application
 
 using namespace lost::math;
 using namespace luabind;
-using namespace std;
 
 void TaskletConfig::reset()
 {

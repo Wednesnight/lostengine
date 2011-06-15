@@ -8,9 +8,8 @@
 #include <md5.h>
 
 using namespace boost;
-using namespace std;
 
-static std::map<lua_State*, lost::lua::State*> stateMap;
+static lost::map<lua_State*, lost::lua::State*> stateMap;
 
 namespace lost
 {
@@ -19,7 +18,7 @@ namespace lost
 
       struct LoadException : std::runtime_error
       {
-        LoadException(const std::string& v) : runtime_error(v){};
+        LoadException(const string& v) : runtime_error(v.c_str()){};
       };
 
       void State::openLibs()  { luaL_openlibs(state);  }
@@ -64,21 +63,21 @@ namespace lost
       // close state
       lua_close(state);
 
-      std::map<lua_State*, lost::lua::State*>::iterator pos;
+      map<lua_State*, lost::lua::State*>::iterator pos;
       pos = stateMap.find(state);
       if(pos != stateMap.end())
         stateMap.erase(pos);
 //      DOUT("stateMap size: "<<stateMap.size());
     }
     
-    std::string State::getScriptFilename(const std::string& scriptContent, const std::string& defaultName)
+    string State::getScriptFilename(const string& scriptContent, const string& defaultName)
     {
-      std::string file(md5(scriptContent));
+      string file(md5(scriptContent.c_str()).c_str());
       if (fileHashes.find(file) != fileHashes.end()) return fileHashes[file];
         else return defaultName;
     }
     
-    std::string State::getScriptSource(lua_Debug& debug)
+    string State::getScriptSource(lua_Debug& debug)
     {
       return getScriptFilename(debug.source, debug.short_src);
     }
@@ -159,10 +158,10 @@ namespace lost
       return 1;
     }
 
-    std::string State::pathFromNamespace(const std::string& inNamespace)
+    string State::pathFromNamespace(const string& inNamespace)
     {
       // convert naming convention "lost.lua..." to path "lost/lua/..."
-      std::string filename(inNamespace);
+      string filename(inNamespace);
       size_t pos;
       while ((pos = filename.find(".")) != filename.npos && pos != filename.find(".lua"))
       {
@@ -172,18 +171,18 @@ namespace lost
     }
     
     // loads and executes a file from the resource directory
-    int State::doResourceFile(const std::string& inRelativePath)
+    int State::doResourceFile(const string& inRelativePath)
     {
       return doFile(pathFromNamespace(inRelativePath));
     }
     
-    void State::addScriptPathEntry(const std::string& inScript, const std::string& inAbsolutePath)
+    void State::addScriptPathEntry(const string& inScript, const string& inAbsolutePath)
     {
-      fileHashes[md5(inScript)] = inAbsolutePath;      
+      fileHashes[md5(inScript.c_str()).c_str()] = inAbsolutePath;      
     }
     
     // loads and executes a file
-    int State::doFile(const std::string& inAbsolutePath)
+    int State::doFile(const string& inAbsolutePath)
     {
       std::ostringstream os;
       shared_ptr<common::Data> rawData = loader->load(inAbsolutePath);
@@ -193,7 +192,7 @@ namespace lost
     }
 
     // executes the given string as a lua program
-    int State::doString(const std::string& inData)
+    int State::doString(const string& inData)
     {
       // execute the loaded file and handle errors
       int err = luaL_loadstring(state, inData.c_str());
@@ -203,7 +202,7 @@ namespace lost
       }
       if(err)
       {
-        std::string errcode;
+        string errcode;
         switch(err)
         {
           case LUA_YIELD:errcode="LUA_YIELD";break;
@@ -213,7 +212,7 @@ namespace lost
           case LUA_ERRERR:errcode="LUA_ERRERR";break;
           default:errcode="??";break;
         }
-        std::string errstring;
+        string errstring;
         const char* errstringc = lua_tostring(state, -1);
         lua_pop(state,1);
         if (errstringc != NULL)
@@ -229,7 +228,7 @@ namespace lost
       return err;
     }
 
-    std::string State::getFilenameFuncnameLine()
+    string State::getFilenameFuncnameLine()
     {
       lua_Debug debug;
       string result = "(Lua)";
@@ -238,7 +237,7 @@ namespace lost
         lua_getinfo(state, "Sln", &debug);
         string filename = getScriptFilename(debug.source, "<unknown>");
         string funcname = debug.name ? debug.name : "<unknown>";
-        ostringstream os;
+        common::StringStream os;
         os <<"("<< filename << " " << funcname << " " << debug.currentline<<")";
         result = os.str();
       }

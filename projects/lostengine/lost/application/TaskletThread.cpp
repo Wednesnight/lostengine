@@ -48,10 +48,8 @@ namespace lost
       
 
       TaskletThread::TaskletThread(Tasklet* inTasklet)
-//      : fhtagn::threads::tasklet(bind(&TaskletThread::run, this, _1)),
        : tasklet(inTasklet)
       {
-//        add_error_handler(boost::bind(&TaskletThread::error, this, _1, _2));
         _state = STANDING_BY;
         _thread = NULL;
       }

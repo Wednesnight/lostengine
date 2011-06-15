@@ -82,7 +82,7 @@ namespace lost
       return result;
     }
     
-    bool AndroidAssetRepository::exists(std::string& filename)
+    bool AndroidAssetRepository::exists(string& filename)
     {
       bool result = false;
       boost::filesystem::path f = subdir / filename;

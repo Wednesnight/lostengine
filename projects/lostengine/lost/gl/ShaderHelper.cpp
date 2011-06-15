@@ -12,7 +12,6 @@
 using namespace boost;
 using namespace boost::spirit;
 using namespace boost::spirit::classic;
-using namespace std;
 
 namespace lost
 {
@@ -24,15 +23,15 @@ struct loglog
   template<typename IteratorT>
   void operator()(IteratorT first, IteratorT last) const
   { 
-    DOUT("found include: '" << std::string(first, last) << "'");
+    DOUT("found include: '" << string(first, last) << "'");
   }
 };
 
 struct concat
 {
-  ostringstream& target;
+  common::StringStream& target;
 
-  concat(ostringstream& t)
+  concat(common::StringStream& t)
   : target(t)
   {
   }
@@ -40,7 +39,7 @@ struct concat
   template<typename IteratorT>
   void operator()(IteratorT first, IteratorT last) const
   { 
-    std::string d(first, last);
+    string d(first, last);
 //    DOUT("CONCATENATING: '"<<d<<"'");
     target << d;
   }
@@ -49,10 +48,10 @@ struct concat
 struct resolveInclude
 {
   resource::LoaderPtr loader;
-  ostringstream& target;
+  common::StringStream& target;
   uint32_t* counter;
 
-  resolveInclude(const resource::LoaderPtr& l, ostringstream& t, uint32_t& c)
+  resolveInclude(const resource::LoaderPtr& l, common::StringStream& t, uint32_t& c)
   : loader(l), target(t)
   {
     counter = &c;
@@ -72,11 +71,11 @@ struct resolveInclude
 struct resolveImport
 {
   resource::LoaderPtr loader;
-  ostringstream& target;
+  common::StringStream& target;
   vector<string>* imports;
   uint32_t* counter;
 
-  resolveImport(const resource::LoaderPtr& l, ostringstream& t, vector<string>& i, uint32_t& c)
+  resolveImport(const resource::LoaderPtr& l, common::StringStream& t, vector<string>& i, uint32_t& c)
   : loader(l), target(t)
   {
     imports = &i;
@@ -128,9 +127,9 @@ struct resolveImport
 //
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-std::string processDependencies(const resource::LoaderPtr& loader, const std::string& source)
+string processDependencies(const resource::LoaderPtr& loader, const string& source)
 {
-  ostringstream os;
+  lost::common::StringStream os;
   string buffer = source;
   uint32_t counter;
   vector<string> imports;
@@ -162,7 +161,6 @@ std::string processDependencies(const resource::LoaderPtr& loader, const std::st
   do
   {
     counter = 0;
-    os.str("");
     os.clear();
     parse(buffer.c_str(), line);
     buffer = os.str();    
@@ -175,37 +173,38 @@ std::string processDependencies(const resource::LoaderPtr& loader, const std::st
 }
 
 // logs shader source with line numbers
-void broken(const std::string& source)
+void broken(const string& source)
 {
-  istringstream s;
-  s.str(source);
+  std::stringstream s;
+  const char* cc = source.c_str();
+  s << cc;
   uint32_t lineNumber = 1;
-  string line;
+  std::string line;
   s.clear();
   while(!s.eof())
   {
     getline(s, line);
-    EOUT(setw(4) << lineNumber << " : " << line);
+    EOUT(std::setw(4) << lineNumber << " : " << line.c_str());
     lineNumber++;
   }
 }
 
-ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const std::string& inName, const std::string& vssource, const std::string& fssource)
+ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& inName, const string& vssource, const string& fssource)
 {
   // DOUT("building shader: '"<<inName<<"'");
   lost::gl::ShaderProgramPtr  shaderProgram(new lost::gl::ShaderProgram());
   lost::gl::ShaderPtr         vertexShader(new lost::gl::VertexShader());
   lost::gl::ShaderPtr         fragmentShader(new lost::gl::FragmentShader());
 
-  std::string vsname = inName+".vs";
-  std::string fsname = inName+".fs";
+  string vsname = inName+".vs";
+  string fsname = inName+".fs";
 
   string source = processDependencies(loader, vssource);
   vertexShader->source(source);
   vertexShader->compile();
   if(!vertexShader->compiled())
   {
-    ostringstream os;
+    std::ostringstream os;
     broken(source);
     os << "vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log();
     throw std::runtime_error(os.str());
@@ -217,7 +216,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const std::strin
   if(!fragmentShader->compiled())
   {
     broken(source);
-    ostringstream os;
+    std::ostringstream os;
     os << "fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log();
     throw std::runtime_error(os.str());
   }
@@ -227,7 +226,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const std::strin
   shaderProgram->link();
   if(!shaderProgram->linked())
   {
-    ostringstream os;
+    std::ostringstream os;
     os << "shader program '"<<inName<<"' link failed: "<<shaderProgram->log();
     throw std::runtime_error(os.str());
   }
@@ -240,12 +239,12 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const std::strin
   return shaderProgram;
 }
 
-ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const std::string& inName)
+ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const string& inName)
 {
 //  DOUT("--- loading shader '"<<inName<<"'");
-  std::string vsname = inName+".vs";
+  string vsname = inName+".vs";
   common::DataPtr vsfile = loader->load(vsname);
-  std::string fsname = inName+".fs";
+  string fsname = inName+".fs";
   common::DataPtr fsfile = loader->load(fsname);
   return buildShader(loader, inName, vsfile->str(), fsfile->str());
 }

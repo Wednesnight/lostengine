@@ -9,7 +9,7 @@ namespace lost
 namespace gl
 {
 
-typedef std::map<UsageType, std::string> VertexAttributeMap;
+typedef map<UsageType, string> VertexAttributeMap;
 
 /** base class for hybrid buffers that contain a hostbuffer as well as one or more
  *  gpu buffers.
@@ -48,7 +48,7 @@ struct HybridBuffer
   GLenum gpuBufferType; // should be either GL_ARRAY_BUFFER or GL_ELEMENT_ARRAY_BUFFER
   bool dirty;
   HostBufferPtr hostBuffer;
-  std::vector<BufferPtr> gpuBuffers;
+  vector<BufferPtr> gpuBuffers;
   VertexAttributeMap vertexAttributeMap; // maps a usageType to a shader vertex attribute name
 };
 

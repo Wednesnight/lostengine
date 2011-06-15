@@ -20,7 +20,7 @@ namespace lost
 {
   namespace application
   {
-    int runResourceTasklet(int argc, char *argv[], const std::string& relativePathToTaskletInResourceDir)
+    int runResourceTasklet(int argc, char *argv[], const string& relativePathToTaskletInResourceDir)
     {
 #ifndef ANDROID
       resource::LoaderPtr loader = resource::DefaultLoader::create();

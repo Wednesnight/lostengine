@@ -1,8 +1,6 @@
 #ifndef LOST_GL_RANGEMANAGER_H
 #define LOST_GL_RANGEMANAGER_H
 
-#include <list>
-#include <map>
 #include <iostream>
 
 namespace lost
@@ -34,7 +32,7 @@ struct RangeManager
   
   RangeId createRangeId();  
   RangeId           lastRangeId;
-  std::map<RangeId, Range> id2range; // simply stores range objects by mapping id to Range
+  map<RangeId, Range> id2range; // simply stores range objects by mapping id to Range
   std::multimap<uint32_t, RangeId> freeCount2Id; // free ranges, indexed by count
   std::multimap<uint32_t, RangeId> usedCount2Id; // used ranges, indexed by count
 };

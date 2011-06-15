@@ -1,7 +1,6 @@
 #ifndef LOST_MESH_MATERIAL_H
 #define LOST_MESH_MATERIAL_H
 
-#include <vector>
 #include "lost/mesh/forward.h"
 #include "lost/common/Color.h"
 #include "lost/gl/gltypes.h"
@@ -14,7 +13,7 @@ namespace mesh
 
 struct Material
 {
-  std::vector<gl::TexturePtr> textures;
+  vector<gl::TexturePtr> textures;
   common::Color               color;
   bool                        blend;
   GLenum                      blendSrc;

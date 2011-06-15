@@ -3,14 +3,12 @@
 #include <stdexcept>
 
 using namespace lost::gl;
-using namespace std;
-//using namespace lost::math;
 
 TEST(rangemanager)
 { 
   RangeManager rm;
   
-  CHECK_THROW(rm.alloc(2), runtime_error);
+  CHECK_THROW(rm.alloc(2), std::runtime_error);
   
   rm.reset(10);
   

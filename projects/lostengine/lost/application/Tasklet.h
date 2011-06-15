@@ -1,7 +1,6 @@
 #ifndef LOST_APPLICATION_TASKLET_H
 #define LOST_APPLICATION_TASKLET_H
 
-#include <list>
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Queue.h"
 #include "lost/event/forward.h"
@@ -62,7 +61,7 @@ namespace lost
       bool                            waitForEvents; // if true, only runs the main loop once a low level event arrives
       
       event::EventDispatcherPtr       eventDispatcher;    
-      std::string                     name;
+      string                     name;
       resource::LoaderPtr             loader;
       TaskletConfig                   config;
       font::FontManagerPtr            fontManager;
@@ -88,8 +87,8 @@ namespace lost
       void run();   // the tasklet run loop; platform specific implementation
       void stop();  // tells tasklet to stop and shutdown; platform specific implementation
       
-      std::string getClipboardString(); // platform specific implementation
-      bool setClipboardString(const std::string& str); // platform specific implementation
+      string getClipboardString(); // platform specific implementation
+      bool setClipboardString(const string& str); // platform specific implementation
       
       virtual void key(const application::KeyEventPtr& ev);
     };

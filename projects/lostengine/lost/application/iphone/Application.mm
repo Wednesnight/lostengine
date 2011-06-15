@@ -10,11 +10,11 @@ namespace lost
 {
 namespace application
 {
-std::string Tasklet::getClipboardString()
+string Tasklet::getClipboardString()
 {
-  return std::string("");
+  return string("");
 }
-bool Tasklet::setClipboardString(const std::string& str)
+bool Tasklet::setClipboardString(const string& str)
 {
   return true;
 }

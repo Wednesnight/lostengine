@@ -6,7 +6,6 @@
 #include "lost/gl/Texture.h"
 #include "lost/gl/TextureTile.h"
 #include "lost/math/Rect.h"
-#include <vector>
 #include "lost/mesh/forward.h"
 
 namespace lost
@@ -32,24 +31,24 @@ struct Quad : public Mesh
   Quad(common::DataPtr data, bool flip=true);  
   Quad(gl::TexturePtr tex, bool flip=true);  
   // creates a group of independent rects, all inside one mesh
-  Quad(const std::vector<math::Rect>& rects);
+  Quad(const vector<math::Rect>& rects);
   
   // tries to create rects.size() number of quads, texturing them with tex, using the provided 
   // pixelCoords to calculate texture cooridnates.
   // rects.size() must be equal to pixelCoords.size() or it will throw.
-  Quad(const std::vector<math::Rect>& rects,
+  Quad(const vector<math::Rect>& rects,
        gl::TexturePtr tex,
-       const std::vector<math::Rect>& pixelCoords,
+       const vector<math::Rect>& pixelCoords,
        bool flip);
   
-  void init(const std::vector<math::Rect>& rects,
+  void init(const vector<math::Rect>& rects,
             gl::TexturePtr tex,
-            const std::vector<math::Rect>& pixelCoords,
+            const vector<math::Rect>& pixelCoords,
             bool flip);
   
   static QuadPtr create() { return QuadPtr(new Quad()); }
   static QuadPtr create(const math::Rect& inRect) { return QuadPtr(new Quad(inRect)); }
-  static QuadPtr create(const std::vector<math::Rect>& rects) { return QuadPtr(new Quad(rects)); }
+  static QuadPtr create(const vector<math::Rect>& rects) { return QuadPtr(new Quad(rects)); }
   static QuadPtr create(common::DataPtr data, bool flip=true) { return QuadPtr(new Quad(data, flip)); }
   static QuadPtr create(gl::TexturePtr tex, bool flip=true) { return QuadPtr(new Quad(tex, flip)); }
   

@@ -13,7 +13,6 @@ namespace lost
 namespace font
 {
 
-using namespace std;
 namespace ftxt = fhtagn::text;
 
 uint32_t skipToNewlineOrEnd(uint32_t pos, const lost::font::TextBuffer::Utf32String& txt)
@@ -41,13 +40,13 @@ TextBuffer::~TextBuffer()
 {
 }
 
-void TextBuffer::text(const std::string& inUtf8String)
+void TextBuffer::text(const string& inUtf8String)
 {
   _dirty = true;
   _logicalLines.clear(); // discard all previous lines
   _physicalLines.clear();    
   // normalise newlines into copy of text
-  std::string normalised(inUtf8String); 
+  string normalised(inUtf8String); 
   normaliseNewlines(normalised);
   _text.clear();
   // transcode to utf32 for parsing
@@ -56,20 +55,20 @@ void TextBuffer::text(const std::string& inUtf8String)
          std::back_insert_iterator<Utf32String>(_text));
 }
 
-std::string TextBuffer::utf8String()
+string TextBuffer::utf8String()
 {
-  std::string result;
+  string result;
 
   ftxt::utf8_encoder encoder;
   ftxt::encode(encoder, _text.begin(), _text.end(),
-         std::back_insert_iterator<std::string>(result));
+         std::back_insert_iterator<string>(result));
          
   return result;
 }
 
-std::string TextBuffer::substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex)
+string TextBuffer::substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex)
 {
-  std::string result;
+  string result;
   if (fromLine >= 0 && fromLine < _physicalLines.size() && toLine >= 0 && toLine < _physicalLines.size())
   {
     uint32_t f;
@@ -85,7 +84,7 @@ std::string TextBuffer::substring(uint32_t fromLine, uint32_t fromIndex, uint32_
     if (f >= 0 && f < _text.size() && t > 0 && t <= _text.size()) {
       ftxt::utf8_encoder encoder;
       ftxt::encode(encoder, _text.begin()+f, _text.begin()+t,
-                   std::back_insert_iterator<std::string>(result));
+                   std::back_insert_iterator<string>(result));
     }
   }
   return result;
@@ -153,15 +152,19 @@ uint32_t TextBuffer::numPhysicalLines()
   return _physicalLines.size();
 }
 
-void TextBuffer::normaliseNewlines(std::string& inText)
+void TextBuffer::normaliseNewlines(string& inText)
 {
-  boost::algorithm::ireplace_all(inText, "\r\n", "\n");
-  boost::algorithm::ireplace_all(inText, "\r", "\n");
+  #ifndef LOST_USE_EASTL
+    boost::algorithm::ireplace_all(inText, "\r\n", "\n");
+    boost::algorithm::ireplace_all(inText, "\r", "\n");
+  #else
+    // FIXME disabled for use with eastl
+  #endif
 }
 
 void TextBuffer::breakModeNone()
 {
-  for(std::vector<LogicalLine>::iterator pos=_logicalLines.begin(); pos!=_logicalLines.end(); ++pos)
+  for(vector<LogicalLine>::iterator pos=_logicalLines.begin(); pos!=_logicalLines.end(); ++pos)
   {
     _physicalLines.push_back(pos->line);
   }
@@ -169,7 +172,7 @@ void TextBuffer::breakModeNone()
 
 void TextBuffer::breakModeChar()
 {
-  for(std::vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
+  for(vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
   {
     Range& lr = line->line;
     if(lr.begin == lr.end) // skip empty lines
@@ -277,7 +280,7 @@ bool terminalWord(const TextBuffer::Word& w, const Range& r)
 
 void TextBuffer::breakModeWord()
 {
-  for(std::vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
+  for(vector<LogicalLine>::iterator line=_logicalLines.begin(); line!=_logicalLines.end(); ++line)
   {
     Range& lr = line->line;
     if(lr.begin == lr.end) // skip empty lines
@@ -349,7 +352,7 @@ uint32_t TextBuffer::numCharsInPhysicalLine(uint32_t lineIndex)
   return result;
 }
 
-void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const std::string& inString)
+void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const string& inString)
 {
   ftxt::utf8_decoder decoder;
   Utf32String decoded;
@@ -369,7 +372,7 @@ void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charInd
   else {
     // update lines
     _physicalLines[lineIndex].end += decoded.size();
-    for(std::vector<Range>::iterator r = _physicalLines.begin()+lineIndex+1; r != _physicalLines.end(); ++r) {
+    for(vector<Range>::iterator r = _physicalLines.begin()+lineIndex+1; r != _physicalLines.end(); ++r) {
       r->begin += decoded.size();
       r->end += decoded.size();
     }

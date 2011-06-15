@@ -14,8 +14,8 @@ struct GifDecoder
   GifDecoder(const resource::LoaderPtr& inLoader);
   virtual ~GifDecoder();
 
-  bool isGif(const std::string& path);
-  GifPtr load(const::std::string& path);
+  bool isGif(const string& path);
+  GifPtr load(const string& path);
 
 private:
   resource::LoaderPtr _loader;

@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include "lost/common/Logger.h"
 
-using namespace std;
 using namespace boost;
 
 namespace lost
@@ -21,7 +20,7 @@ VorbisFile::VorbisFile(const common::DataPtr& inFile)
         EOUT("throwing from here");
         std::ostringstream os;
         os << "couldn't open ogg file '";
-        throw runtime_error(os.str());
+        throw std::runtime_error(os.str());
     }
 	stb_vorbis_info info = stb_vorbis_get_info(oggfile);
 	stb_vorbis_close(oggfile);

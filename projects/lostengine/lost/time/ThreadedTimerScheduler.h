@@ -5,11 +5,8 @@
 #include "lost/time/Timer.h"
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
-
 #include <boost/thread.hpp>
 #include <boost/thread/condition.hpp>
-
-#include <list>
 
 namespace lost
 {
@@ -47,7 +44,7 @@ namespace lost
       double nextUpdateTime;
       void updateScheduling(double requiredUpdateTime);
 
-      std::list<Timer*> timers;
+      list<Timer*> timers;
       void addTimerToList(Timer* timer);
       void removeTimerFromList(Timer* timer);
       

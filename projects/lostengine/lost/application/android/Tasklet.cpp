@@ -75,7 +75,7 @@ namespace lost
     {
       isAlive = true;
       bool hasError = false;
-      std::string errorMsg = "";
+      string errorMsg = "";
       
       try {
         // initialize window, gl

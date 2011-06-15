@@ -3,7 +3,6 @@
 
 #ifdef PROFILER_ENABLED
 
-  #include <map>
 
 //  #include "lost/platform/Platform.h"
   #include "lost/common/Logger.h"
@@ -24,11 +23,11 @@ namespace lost
       double methodStart;
     public:
       unsigned int address;
-      std::string  fileName;
-      std::string  methodName;
+      string  fileName;
+      string  methodName;
       unsigned int durationMS;
 
-      Profiler( const unsigned int& inAddress, const std::string& inFileName, const std::string& inMethodName );
+      Profiler( const unsigned int& inAddress, const string& inFileName, const string& inMethodName );
       ~Profiler();
 
       void initialize();
@@ -45,10 +44,10 @@ namespace lost
         operator void const*() const {return ptr;}
     };
 
-    typedef std::map<std::string, unsigned int> CallCountList;
-    typedef std::map<std::string, unsigned int> DurationList;
+    typedef map<string, unsigned int> CallCountList;
+    typedef map<string, unsigned int> DurationList;
 
-    typedef std::vector<unsigned int> ProfilerList;
+    typedef vector<unsigned int> ProfilerList;
 
     struct ProfilerStatistics
     {
@@ -61,7 +60,7 @@ namespace lost
       ProfilerStatistics();
       ~ProfilerStatistics();
 
-      Profiler* initialize( const unsigned int& inAddress, const std::string& inFileName, const std::string& inMethodName );
+      Profiler* initialize( const unsigned int& inAddress, const string& inFileName, const string& inMethodName );
       void add( Profiler* profiler );
       void finalize( Profiler* profiler );
     };

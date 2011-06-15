@@ -86,7 +86,7 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
 }
 
 // creates a group of independent rects, all inside one mesh
-Quad::Quad(const std::vector<math::Rect>& rects)
+Quad::Quad(const vector<math::Rect>& rects)
 {
   gl::BufferLayout layout;
   layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
@@ -111,17 +111,17 @@ Quad::Quad(const std::vector<math::Rect>& rects)
 // tries to create rects.size() number of quads, texturing them with tex, using the provided 
 // pixelCoords to calculate texture cooridnates.
 // rects.size() must be equal to pixelCoords.size() or it will throw.
-Quad::Quad(const std::vector<math::Rect>& rects,
+Quad::Quad(const vector<math::Rect>& rects,
      gl::TexturePtr tex,
-     const std::vector<math::Rect>& pixelCoords,
+     const vector<math::Rect>& pixelCoords,
      bool flip)
 {
   this->init(rects, tex, pixelCoords, flip);
 }
 
-void Quad::init(const std::vector<math::Rect>& rects,
+void Quad::init(const vector<math::Rect>& rects,
           gl::TexturePtr tex,
-          const std::vector<math::Rect>& pixelCoords,
+          const vector<math::Rect>& pixelCoords,
           bool flip)
 {
   if(rects.size() != pixelCoords.size())

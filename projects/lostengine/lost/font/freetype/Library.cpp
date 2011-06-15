@@ -12,14 +12,12 @@ namespace font
 namespace freetype
 {
 
-using namespace std;
-
 Library::Library()
 {
   FT_Error error = FT_Init_FreeType(&library);
   if(error)
   {
-    ostringstream os;
+    std::ostringstream os;
     os << "FT_Init_FreeType error: " << error;
     throw std::runtime_error(os.str());
     return;

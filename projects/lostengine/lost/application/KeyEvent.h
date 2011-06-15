@@ -14,7 +14,7 @@ namespace lost
       static const event::Type& KEY_UP() { static const event::Type d = "keyUp"; return d; }
     
       KeyCode     key;
-      std::string character; // FIXME: this will work for the moment, replace with more efficient type
+      string character; // FIXME: this will work for the moment, replace with more efficient type
       bool        pressed;
       bool        repeat;
       bool        ctrlDown;

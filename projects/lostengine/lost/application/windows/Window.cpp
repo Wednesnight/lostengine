@@ -156,7 +156,7 @@ namespace lost
             NULL, NULL) > 0 && DragQueryPoint(drop, &pos) && GetCursorPos(&absPos))
           {
             DragNDropEventPtr dragNDropEvent(new DragNDropEvent(DragNDropEvent::DROP(),
-              std::string(filename)));
+              string(filename)));
             dragNDropEvent->window  = window;
             dragNDropEvent->pos     = lost::math::Vec2((float)pos.x, (float)pos.y);
             dragNDropEvent->absPos  = lost::math::Vec2((float)absPos.x, (float)absPos.y);
@@ -169,7 +169,7 @@ namespace lost
       DragFinish(drop);
     }
 
-    static std::map<HWND, Window*> windowMap;
+    static map<HWND, Window*> windowMap;
     LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
       switch (message)

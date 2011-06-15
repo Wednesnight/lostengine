@@ -18,24 +18,24 @@ namespace profiler
 //    DOUT("destruct");
   }
 
-  Blackbox::Value& Blackbox::value(const std::string& inKey)
+  Blackbox::Value& Blackbox::value(const string& inKey)
   {
     return _key2value[inKey];
   }
 
-  void Blackbox::inc(const std::string& inKey)
+  void Blackbox::inc(const string& inKey)
   {
     value(inKey).value+=1.0f;
   }
   
-  void Blackbox::dec(const std::string& inKey)
+  void Blackbox::dec(const string& inKey)
   {
     value(inKey).value-=1.0f;
   }
 
   void Blackbox::log()
   {
-    std::map<std::string, Blackbox::Value>::iterator pos;
+    map<string, Blackbox::Value>::iterator pos;
     DOUT("-- BLACKBOX LOG");
     for(pos=_key2value.begin(); pos!=_key2value.end(); ++pos)
     {
@@ -45,7 +45,7 @@ namespace profiler
 
   void Blackbox::snapshot()
   {
-    std::map<std::string, Blackbox::Value>::iterator pos;
+    map<string, Blackbox::Value>::iterator pos;
     for(pos=_key2value.begin(); pos!=_key2value.end(); ++pos)
     {
       Value& v = pos->second;
@@ -67,7 +67,7 @@ namespace profiler
     return blackbox_instance.get();
   }
   
-  BBCount::BBCount(const std::string& inName)
+  BBCount::BBCount(const string& inName)
   {
     name = inName;
     BB_INC(name);

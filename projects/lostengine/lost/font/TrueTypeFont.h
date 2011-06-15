@@ -1,10 +1,6 @@
 #ifndef LOST_FONT_TRUETYPEFONT_H
 #define LOST_FONT_TRUETYPEFONT_H
 
-#include <vector>
-#include <string>
-#include <map>
-
 #include "lost/font/freetype/forward.h"
 #include "lost/font/forward.h"
 #include "lost/common/forward.h"
@@ -31,8 +27,8 @@ struct TrueTypeFont : Font
 
 private:
   freetype::FacePtr face;
-  std::map<fhtagn::text::utf32_char_t, GlyphPtr> char2glyph; 
-  std::vector<GlyphPtr> glyphs; // this list of glyphs contains the glyphs in the order they were rendered
+  map<fhtagn::text::utf32_char_t, GlyphPtr> char2glyph; 
+  vector<GlyphPtr> glyphs; // this list of glyphs contains the glyphs in the order they were rendered
                                 // this is important to preserve the ordering fo rth packing of the atlas
 
 

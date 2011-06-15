@@ -1,7 +1,6 @@
 #ifndef LOST_COMMON_LOGGER_H
 #define LOST_COMMON_LOGGER_H
 
-#include <string>
 #include <iostream>
 #include <sstream>
 
@@ -11,8 +10,8 @@ namespace lost
   {
 		namespace Logger
 		{			
-			std::string fileNameFromFullPath(const char* fullPath);
-			void logMessage(const std::string& inLevel, const std::string& inLocation, const std::string& inMsg);
+			string fileNameFromFullPath(const char* fullPath);
+			void logMessage(const string& inLevel, const string& inLocation, const string& inMsg);
 		}
   }
 }
@@ -25,7 +24,7 @@ namespace lost
 	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg << s; \
 	std::ostringstream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc; \
 	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc << fl; \
-	lost::common::Logger::logMessage(m, LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc.str(), LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg.str()); \
+	lost::common::Logger::logMessage(m, LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc.str().c_str(), LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg.str().c_str()); \
 }
 
 

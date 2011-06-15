@@ -17,7 +17,7 @@ namespace gl
     glDeleteShader(shader);
   }
 
-  void Shader::source(const std::string& inSource)
+  void Shader::source(const string& inSource)
   {
     const GLchar* sources[1];
     sources[0] = reinterpret_cast<const GLchar*>(inSource.c_str());
@@ -43,16 +43,16 @@ namespace gl
     return result;
   }
 
-  std::string Shader::log()
+  string Shader::log()
   {
     GLint size = param(GL_INFO_LOG_LENGTH);
-    std::string result;
+    string result;
     if(size > 0)
     {
       shared_array<char> buffer(new char[size]);
       GLsizei length = 0;
       glGetShaderInfoLog(shader, size, &length, buffer.get());GLDEBUG_THROW;
-      result = std::string(buffer.get(), buffer.get()+length);
+      result = string(buffer.get(), buffer.get()+length);
     }
     return result;
   }

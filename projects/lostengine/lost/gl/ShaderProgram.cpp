@@ -20,7 +20,7 @@ ShaderProgram::~ShaderProgram()
   BB_DEC("lost.gl.ShaderProgram")
 }
 
-Uniform& ShaderProgram::uniform(const std::string& inName)
+Uniform& ShaderProgram::uniform(const string& inName)
 {
   ShaderProgram::UniformMap::iterator pos = name2uniform.find(inName);
   if(pos != name2uniform.end())
@@ -29,11 +29,11 @@ Uniform& ShaderProgram::uniform(const std::string& inName)
   }
   else
   {
-    throw std::runtime_error("couldn't find uniform with name: '"+inName+"'");
+    THROW_RTE("couldn't find uniform with name: '"+inName+"'");
   }
 }
 
-Uniform& ShaderProgram::operator[](const std::string& inName)
+Uniform& ShaderProgram::operator[](const string& inName)
 {
   return uniform(inName);
 }
@@ -81,16 +81,16 @@ GLint ShaderProgram::param(GLenum paramName)
   return result;
 }
 
-std::string ShaderProgram::log()
+string ShaderProgram::log()
 {
   GLint size = param(GL_INFO_LOG_LENGTH);
-  std::string result;
+  string result;
   if(size > 0)
   {
     shared_array<char> buffer(new char[size]);
     GLsizei length = 0;
     glGetProgramInfoLog(program, size, &length, buffer.get());GLDEBUG_THROW;
-    result = std::string(buffer.get(), buffer.get()+length);
+    result = string(buffer.get(), buffer.get()+length);
   }
   return result;
 }
@@ -105,23 +105,23 @@ bool ShaderProgram::validated()
   return (param(GL_VALIDATE_STATUS) == GL_TRUE) ? true : false;
 }
 
-GLenum ShaderProgram::numericalType(const std::string& inName) { return uniform(inName).glType; } 
+GLenum ShaderProgram::numericalType(const string& inName) { return uniform(inName).glType; } 
 
-void ShaderProgram::setInt(const std::string& inName, GLint inVal) {uniform(inName).setInt(inVal);}
-void ShaderProgram::setFloat(const std::string& inName, float inVal) {uniform(inName).setFloat(inVal);}
-void ShaderProgram::setBool(const std::string& inName, bool inVal) {uniform(inName).setBool(inVal);}
-void ShaderProgram::set(const std::string& inName, const lost::common::Color& inVal) {uniform(inName).set(inVal);}
-void ShaderProgram::set(const std::string& inName, const lost::math::Vec4& inVal) {uniform(inName).set(inVal);}
-void ShaderProgram::set(const std::string& inName, const lost::math::Vec2& inVal) {uniform(inName).set(inVal);}
-void ShaderProgram::set(const std::string& inName, const lost::math::Vec3& inVal) {uniform(inName).set(inVal);}
-void ShaderProgram::set(const std::string& inName, const math::Matrix& inVal) {uniform(inName).set(inVal);}
+void ShaderProgram::setInt(const string& inName, GLint inVal) {uniform(inName).setInt(inVal);}
+void ShaderProgram::setFloat(const string& inName, float inVal) {uniform(inName).setFloat(inVal);}
+void ShaderProgram::setBool(const string& inName, bool inVal) {uniform(inName).setBool(inVal);}
+void ShaderProgram::set(const string& inName, const lost::common::Color& inVal) {uniform(inName).set(inVal);}
+void ShaderProgram::set(const string& inName, const lost::math::Vec4& inVal) {uniform(inName).set(inVal);}
+void ShaderProgram::set(const string& inName, const lost::math::Vec2& inVal) {uniform(inName).set(inVal);}
+void ShaderProgram::set(const string& inName, const lost::math::Vec3& inVal) {uniform(inName).set(inVal);}
+void ShaderProgram::set(const string& inName, const math::Matrix& inVal) {uniform(inName).set(inVal);}
 
-bool ShaderProgram::hasUniform(const std::string& name)
+bool ShaderProgram::hasUniform(const string& name)
 {
   return (name2uniform.find(name) != name2uniform.end());
 }
 
-bool ShaderProgram::hasAttribute(const std::string& name)
+bool ShaderProgram::hasAttribute(const string& name)
 {
   return (name2vertexAttribute.find(name) != name2vertexAttribute.end());
 }
@@ -148,7 +148,7 @@ void ShaderProgram::buildUniformMap()
     GLint loc = glGetUniformLocation(program, buffer.get());
     Uniform uniform(buffer.get(), i, type, size, loc);
     name2uniform[uniform.name] = uniform;
-//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
+//    DOUT(i << " : " << string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
   }
 }
 
@@ -169,7 +169,7 @@ void ShaderProgram::buildVertexAttributeMap()
     GLint loc = glGetAttribLocation(program, buffer.get());
     VertexAttribute attribute(buffer.get(), i, type, size, loc);
     name2vertexAttribute[attribute.name] = attribute;
-//    DOUT(i << " : " << std::string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
+//    DOUT(i << " : " << string(buffer.get(), buffer.get()+writtenBytes) << " size:"<<size << " type:"<<lost::gl::utils::enum2string(type)<<" location:"<<loc);
   }
 }
 

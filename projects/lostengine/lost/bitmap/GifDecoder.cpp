@@ -32,7 +32,7 @@ int inputfunc(GifFileType* gifFile, GifByteType* buffer, int numBytes)
   return numBytes;
 }
 
-bool GifDecoder::isGif(const std::string& path)
+bool GifDecoder::isGif(const string& path)
 {
   bool result = false;
   common::DataPtr data = _loader->load(path);
@@ -48,7 +48,7 @@ bool GifDecoder::isGif(const std::string& path)
   return result;
 }
 
-GifPtr GifDecoder::load(const::std::string& path)
+GifPtr GifDecoder::load(const string& path)
 {
   common::DataPtr data = _loader->load(path);
   ReadOperation op;

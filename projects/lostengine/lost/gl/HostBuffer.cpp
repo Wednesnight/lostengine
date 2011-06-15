@@ -4,8 +4,6 @@
 #include <stdexcept>
 #include <string.h>
 
-using namespace std;
-
 namespace lost
 {
 namespace gl
@@ -78,7 +76,7 @@ ElementType HostBuffer::elementTypeFromUsageType(UsageType ut)
 
 uint8_t* HostBuffer::elementAddress(uint32_t idx, UsageType ut)
 {
-  if(!partitions.size()) {LOGTHROW(runtime_error("tried to call elementAddress without any partitions")); };
+  if(!partitions.size()) {LOGTHROW(std::runtime_error("tried to call elementAddress without any partitions")); };
   uint8_t* result = 0;
   
   uint32_t pid = layout.partitionFromUsageType(ut);
@@ -113,9 +111,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint8_t val)
       break;
     }
     default:
-      ostringstream os;
+      std::ostringstream os;
       os << "can't set uint8_t for element "<<et;
-      LOGTHROW(runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str()))
       break;
   }
 }
@@ -144,9 +142,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint16_t val)
       break;
     }
     default:
-      ostringstream os;
+      std::ostringstream os;
       os << "can't set uint16_t for element "<<et;
-      LOGTHROW(runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str()))
       break;
   }
 }
@@ -175,9 +173,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint32_t val)
       break;
     }
     default:
-      ostringstream os;
+      std::ostringstream os;
       os << "can't set uint32_t for element "<<et;
-      LOGTHROW(runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str()))
       break;
   }
 }

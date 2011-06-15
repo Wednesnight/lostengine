@@ -1,8 +1,6 @@
 #include "lost/event/Signal.h"
 #include "lost/event/Listener.h"
 
-using namespace std;
-
 namespace lost
 {
 namespace event

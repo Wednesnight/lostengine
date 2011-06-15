@@ -4,7 +4,6 @@
 #include "lost/gl/gltypes.h"
 #include "lost/math/Vec2.h"
 #include "lost/common/Data.h"
-#include <vector>
 #include "lost/bitmap/forward.h"
 #include "lost/gl/forward.h"
 
@@ -60,7 +59,7 @@ namespace lost
       void init(const common::DataPtr& inData,  const Params& inParams = Params());
       void init(const bitmap::BitmapPtr& inBitmap, const Params& inParams = Params());
       void init(const lost::math::Vec2& inSize, const Params& inParams = Params());
-      void init(const std::vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams = Params()); // assumes inBitmaps[0] is the largest, all others reductions, doesn't check for power of two, bitmaps must have same format
+      void init(const vector<bitmap::BitmapPtr>& inBitmaps, const Params& inParams = Params()); // assumes inBitmaps[0] is the largest, all others reductions, doesn't check for power of two, bitmaps must have same format
       
       void init(GLint level, // mipmap level
                  GLenum internalformat, // number of color components

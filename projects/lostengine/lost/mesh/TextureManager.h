@@ -3,8 +3,6 @@
 
 #include "lost/gl/forward.h"
 #include "lost/mesh/forward.h"
-#include <map>
-#include <vector>
 #include "lost/common/forward.h"
 
 namespace lost
@@ -32,14 +30,14 @@ struct TextureManager
   gl::TexturePtr createArcTexture(float lineWidth, float radius);
   gl::TexturePtr createArcFilledTexture(float radius);
 
-  typedef std::map<float, gl::TexturePtr> ArcFilledMap;
+  typedef map<float, gl::TexturePtr> ArcFilledMap;
   ArcFilledMap _arcFilledMap;
 
-  typedef std::pair<float, float> LineWidthRadius;
-  typedef std::map<LineWidthRadius, gl::TexturePtr> ArcMap;
+  typedef pair<float, float> LineWidthRadius;
+  typedef map<LineWidthRadius, gl::TexturePtr> ArcMap;
   ArcMap _arcMap;
 
-  typedef std::map<unsigned int, gl::TexturePtr> LineMap;
+  typedef map<unsigned int, gl::TexturePtr> LineMap;
   LineMap _lineMap;
 
   uint32_t _gradientTextureHeight; // must be power of two
@@ -47,7 +45,7 @@ struct TextureManager
   uint32_t _maxNumGradients;
   uint32_t _gradientWidth; // in pixels, should be 2n+1 to avoid filter artefacts
   gl::TexturePtr gradientTexture;
-  std::vector<common::ColorGradientPtr> _gradients;
+  vector<common::ColorGradientPtr> _gradients;
   
   void updateGradientTexture();
   

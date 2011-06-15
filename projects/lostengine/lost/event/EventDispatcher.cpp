@@ -47,7 +47,7 @@ void EventDispatcher::removeEventListener(const ConnectionPtr& connection)
 
 void EventDispatcher::dispatchEvent(EventPtr event)
 {
-  std::map<event::Type, SignalPtr>::iterator pos = eventType2signal.find(event->type);
+  map<event::Type, SignalPtr>::iterator pos = eventType2signal.find(event->type);
   if(pos != eventType2signal.end())
   {
     pos->second->call(event);
@@ -100,7 +100,7 @@ void EventDispatcher::waitForEvent(const lost::event::Type& type)
 {
   lock_guard<mutex> lock(waitEventMutex);
   bool done = false;
-  std::list<EventPtr>::iterator pos = eventQueue.begin();
+  list<EventPtr>::iterator pos = eventQueue.begin();
   while(!done)
   {
     waitEventCondition.wait(waitEventMutex);

@@ -1,8 +1,6 @@
 #ifndef LOST_SG_NODE
 #define LOST_SG_NODE
 
-#include <string>
-#include <list>
 #include "lost/gl/forward.h"
 #include "lost/rg/forward.h"
 #include "lost/platform/shared_ptr.h"
@@ -17,8 +15,8 @@ namespace rg
  */  
 struct Node 
 {
-  std::string name;
-  std::list<NodePtr> children;
+  string name;
+  list<NodePtr> children;
   bool active;
 
   Node();
@@ -32,7 +30,7 @@ struct Node
   void clear();
   static NodePtr create();
   
-  NodePtr recursiveFindByName(const std::string& inName);
+  NodePtr recursiveFindByName(const string& inName);
   
   void print(); // prints the whole rendergraph from the current node on recursively using DOUT
 };

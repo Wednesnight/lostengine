@@ -17,8 +17,8 @@ namespace lost
 
 //*** HELPER FUNCTIONS
 
-    void splitApplicationPath( std::string* drive,    std::string* directory,
-                               std::string* filename, std::string* extension )
+    void splitApplicationPath( string* drive,    string* directory,
+                               string* filename, string* extension )
     {
       char   l_executable[MAX_PATH];
       char   l_drive[_MAX_DRIVE];
@@ -39,7 +39,7 @@ namespace lost
 //***
 
     // returns current time as string (e.g. "2007/11/26 23:30:37")
-    std::string currentTimeFormat()
+    string currentTimeFormat()
     {
       char   timeformat[20];
       time_t timestamp;
@@ -68,7 +68,7 @@ namespace lost
       return (double)(timevalue.QuadPart / 10);
     }
 
-    std::string getApplicationDirectory()
+    string getApplicationDirectory()
     {
       string result;
       string l_drive;
@@ -83,7 +83,7 @@ namespace lost
       return result;
     }
 
-    std::string getApplicationFilename( bool excludeExtension )
+    string getApplicationFilename( bool excludeExtension )
     {
       string l_filename;
       string l_extension;
@@ -92,9 +92,9 @@ namespace lost
       return (!excludeExtension && !l_extension.empty()) ? l_filename.append( l_extension ) : l_filename;
     }
 
-    std::string buildResourcePath( const std::string& filename )
+    string buildResourcePath( const string& filename )
     {
-      std::string result( getApplicationDirectory().append( filename ) );
+      string result( getApplicationDirectory().append( filename ) );
 
       FILE *l_filecheck;
       if (fopen_s(&l_filecheck, result.c_str(), "r") == 0) fclose( l_filecheck );
@@ -103,14 +103,14 @@ namespace lost
       return result;
     }
 
-    std::string getResourcePath()
+    string getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    std::string buildUserDataPath( const std::string& filename )
+    string buildUserDataPath( const string& filename )
     {
-      std::string  result( filename );
+      string  result( filename );
       char         l_path[MAX_PATH];
       char         l_executable[MAX_PATH];
       char         l_filename[_MAX_FNAME];

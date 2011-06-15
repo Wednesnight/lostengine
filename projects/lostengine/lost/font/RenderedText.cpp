@@ -15,9 +15,9 @@ RenderedText::RenderedText() : mesh::Quad()
 BB_INC(bb_rt_key);
 }
 
-RenderedText::RenderedText(const std::vector<math::Rect>& rects,
+RenderedText::RenderedText(const vector<math::Rect>& rects,
              gl::TexturePtr tex,
-             const std::vector<math::Rect>& pixelCoords) : mesh::Quad(rects, tex, pixelCoords, false)
+             const vector<math::Rect>& pixelCoords) : mesh::Quad(rects, tex, pixelCoords, false)
 {
 BB_INC(bb_rt_key);
 }
@@ -47,12 +47,12 @@ mesh::MeshPtr RenderedText::clone()
 
 void RenderedText::resetCharacterMetrics()
 {
-  characterMetrics.reset(new std::vector<std::vector<math::Rect> >);
+  characterMetrics.reset(new vector<vector<math::Rect> >);
 }
 
 void RenderedText::pushEmptyCharacterMetricLine()
 {
-  characterMetrics->push_back(std::vector<math::Rect>());
+  characterMetrics->push_back(vector<math::Rect>());
 }
 
 void RenderedText::pushCharacterRect(const math::Rect& cr)

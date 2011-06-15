@@ -3,7 +3,6 @@
 
 #include "lost/event/Event.h"
 #include "lost/math/Vec2.h"
-#include <vector>
 
 namespace lost
 {
@@ -51,7 +50,7 @@ namespace lost
 
       // contains all touches for the current event. Might contain more than one, depending
       // on how many fingers the user applied to the screen
-      std::vector<TouchPtr> touches;
+      vector<TouchPtr> touches;
 
       // should only be used for delta calculation, since the baseline might differ from the rest of the framework.
       double timestamp;

@@ -1,7 +1,6 @@
 #ifndef LOST_RESOURCE_LOADER_H
 #define LOST_RESOURCE_LOADER_H
 
-#include <vector>
 #include <stdexcept>
 #include "lost/common/forward.h"
 #include "lost/resource/forward.h"
@@ -11,7 +10,7 @@ namespace lost
 {
   namespace resource
   {
-    struct LoaderError : public std::runtime_error { LoaderError(const std::string& error) : runtime_error(error) {} };
+    struct LoaderError : public std::runtime_error { LoaderError(const string& error) : runtime_error(error.c_str()) {} };
 
     struct Loader
     {
@@ -19,7 +18,7 @@ namespace lost
       virtual ~Loader();
 
       common::DataPtr load( const boost::filesystem::path& inPath);
-      std::string locate(const boost::filesystem::path& inPath);
+      string locate(const boost::filesystem::path& inPath);
       bool exists(const boost::filesystem::path& inPath);
       void addRepository( RepositoryPtr inRepository );
 
@@ -27,7 +26,7 @@ namespace lost
       static LoaderPtr create() { return LoaderPtr(new Loader); }
     private:
       // resource repositories
-      std::vector<RepositoryPtr> repositories;
+      vector<RepositoryPtr> repositories;
     };
 
   }

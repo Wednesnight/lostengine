@@ -4,8 +4,6 @@
 #include <sstream>
 #include <stdexcept>
 
-using namespace std;
-
 namespace lost
 {
 namespace al
@@ -25,9 +23,9 @@ void debug_throw(const char* file, int line, const char* func)
   ALenum error = alGetError();
   if(error != AL_NO_ERROR)
   {
-    ostringstream os;
+    std::ostringstream os;
     os << "AL error: " << alGetString(error) << " from here: "<<file<< " " << line << " " <<func;
-    throw runtime_error(os.str());
+    throw std::runtime_error(os.str());
   }
 }
   

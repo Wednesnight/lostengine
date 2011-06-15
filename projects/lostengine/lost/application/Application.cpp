@@ -47,7 +47,7 @@ namespace lost
 
     Application::~Application()
     {
-      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      for (list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         delete *tasklet;
       }
@@ -56,7 +56,7 @@ namespace lost
 
     void Application::startup(const ApplicationEventPtr& event)
     {
-      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      for (list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         try
         {
@@ -99,7 +99,7 @@ namespace lost
     void Application::quitHandler(const ApplicationEventPtr& event)
     {
       running = false;
-      for (std::list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
+      for (list<Tasklet*>::iterator tasklet = tasklets.begin(); tasklet != tasklets.end(); ++tasklet)
       {
         if ((*tasklet)->alive())
         {
@@ -112,8 +112,8 @@ namespace lost
 
     void Application::removeTasklet(Tasklet * tasklet)
     {
-      std::list<Tasklet*>::iterator t_end = tasklets.end();
-      std::list<Tasklet*>::iterator t_iter = tasklets.begin();
+      list<Tasklet*>::iterator t_end = tasklets.end();
+      list<Tasklet*>::iterator t_iter = tasklets.begin();
       for ( ; t_iter != t_end ; ++t_iter)
       {
         if (tasklet == *t_iter) {
@@ -142,7 +142,7 @@ namespace lost
       Tasklet* currentTasklet = event->tasklet;
       removeTasklet(currentTasklet);
       bool haveActiveTasklets = false;
-      for (std::list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)
+      for (list<Tasklet*>::iterator idx = tasklets.begin(); idx != tasklets.end(); ++idx)
       {
         haveActiveTasklets = (*idx)->alive();
         if (haveActiveTasklets) break;

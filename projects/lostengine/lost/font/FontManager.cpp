@@ -24,7 +24,7 @@ FontManagerPtr FontManager::create(const resource::LoaderPtr& inLoader)
   return FontManagerPtr(new FontManager(inLoader));
 }
 
-void FontManager::addEntry(const std::string& name, const std::string& pathToData)
+void FontManager::addEntry(const string& name, const string& pathToData)
 {
   name2path[name] = pathToData;
 }
@@ -35,16 +35,16 @@ void FontManager::logStats()
 }
 
 
-FontPtr FontManager::getFont(const std::string& name, uint32_t size)
+FontPtr FontManager::getFont(const string& name, uint32_t size)
 {
   FontPtr result;
-  std::pair<std::string, uint32_t> fontKey = std::make_pair(name, size);
-  std::map<std::pair<std::string, uint32_t>, FontPtr>::iterator pos = nameAndSize2font.find(fontKey);
+  pair<string, uint32_t> fontKey = make_pair(name, size);
+  map<pair<string, uint32_t>, FontPtr>::iterator pos = nameAndSize2font.find(fontKey);
   if(pos == nameAndSize2font.end())
   {
-    std::map<std::string, std::string>::iterator ppos = name2path.find(name);
+    map<string, string>::iterator ppos = name2path.find(name);
     if (ppos != name2path.end()) {
-      std::string path = name2path[name];
+      string path = name2path[name];
       common::DataPtr data = path2data[path];
       if(!data)
       {

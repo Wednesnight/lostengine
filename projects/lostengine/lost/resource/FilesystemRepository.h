@@ -10,14 +10,14 @@ namespace resource
 {
 struct FilesystemRepository : Repository
 {
-  std::string rootDirectory;
+  string rootDirectory;
 
   FilesystemRepository(const boost::filesystem::path& inRootDir);
   virtual ~FilesystemRepository() {};
 
   virtual common::DataPtr load(const boost::filesystem::path& inRootDir);
-  virtual bool exists(std::string& path);
-  static RepositoryPtr create(const std::string& inRootDir);
+  virtual bool exists(string& path);
+  static RepositoryPtr create(const string& inRootDir);
   
 };
 }

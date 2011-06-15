@@ -332,14 +332,14 @@ namespace lost
         window->dispatcher->queueEvent (event);
       }
 
-      void WindowHandler::dispatchDragNDropEvent(const std::string& files, int x, int y, int absX, int absY)
+      void WindowHandler::dispatchDragNDropEvent(const string& files, int x, int y, int absX, int absY)
       {
-        std::vector<std::string> fileList;
+        vector<string> fileList;
         boost::split(fileList, files, boost::is_any_of("\r\n"), boost::token_compress_on);
         if (fileList.size() > 0) {
           // FIXME: we only support single files at the moment
-          std::string filename = fileList.front();
-          if (filename.find("file://") != std::string::npos) {
+          string filename = fileList.front();
+          if (filename.find("file://") != string::npos) {
             filename = filename.substr(filename.find_first_not_of("file://")-1);
           }
           DOUT("Dropped file: " << filename);
@@ -366,7 +366,7 @@ namespace lost
         for (int i = 0; !result && i < p.nitems; i++)
         {
           Atom atom = ((Atom*)p.data)[i];
-          std::string atom_name = GetAtomName(atom);
+          string atom_name = GetAtomName(atom);
           DOUT("Type " << i << " = " << atom_name);
 
           if (atom_name == "text/uri-list") {
@@ -379,8 +379,8 @@ namespace lost
         return result;
       }
 
-      //Convert an atom name in to a std::string
-      std::string WindowHandler::GetAtomName(Atom a)
+      //Convert an atom name in to a string
+      string WindowHandler::GetAtomName(Atom a)
       {
         if(a == None)
           return "None";

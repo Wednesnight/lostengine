@@ -1,8 +1,6 @@
 #ifndef LOST_GL_BUFFERLAYOUT_H
 #define LOST_GL_BUFFERLAYOUT_H
 
-#include <vector>
-#include <map>
 #include "lost/gl/gltypes.h"
 
 namespace lost
@@ -109,11 +107,11 @@ struct BufferLayout
 {
   // FIXME: add caching for various size and partition parameters so we don'T have to recalculate on every set call
   // add maps that hold these values. Update maps upon each add call.
-  std::vector<BufferLayoutAttribute> attributes;
-  std::map<uint32_t, bool> partitions;
-  std::map<UsageType, uint32_t> ut2pid; // usage type to partition id
-  std::map<UsageType, ElementType> ut2et;
-  std::map<UsageType, AttributePointerConfig> ut2apc;
+  vector<BufferLayoutAttribute> attributes;
+  map<uint32_t, bool> partitions;
+  map<UsageType, uint32_t> ut2pid; // usage type to partition id
+  map<UsageType, ElementType> ut2et;
+  map<UsageType, AttributePointerConfig> ut2apc;
   
   void updatePointerConfigs();
   void add(ElementType elementType, UsageType usageType, uint32_t p);

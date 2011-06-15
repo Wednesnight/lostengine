@@ -1,6 +1,8 @@
 #include "lost/common/Profiler.h"
 #include "UnitTest++.h"
 
+using namespace lost;
+
 struct Tester
 {
   void test1()
@@ -8,7 +10,7 @@ struct Tester
     PROFILE_METHOD()
   }
 
-  void test2(int x, const std::string& y)
+  void test2(int x, const string& y)
   {
     PROFILE_METHOD()
   }

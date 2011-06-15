@@ -7,12 +7,12 @@ namespace lost
   namespace rg
   {
 
-    void printNode(NodePtr n, const std::string prefix, uint32_t& numNodes, uint32_t& enabledNodes)
+    void printNode(NodePtr n, const string prefix, uint32_t& numNodes, uint32_t& enabledNodes)
     {
       numNodes++;
       if(n->active) enabledNodes++;
       DOUT(prefix << "|-- " << (n->active ? "(+)" : "(-)") << n->name);
-      for(std::list<NodePtr>::iterator i=n->children.begin(); i!=n->children.end(); ++i)
+      for(list<NodePtr>::iterator i=n->children.begin(); i!=n->children.end(); ++i)
       {
         printNode(*i, prefix+"    ", numNodes, enabledNodes);
       }      
@@ -38,7 +38,7 @@ namespace lost
     {
       uint32_t numNodes, enabledNodes;
       numNodes = enabledNodes = 0;
-      printNode(shared_ptr<Node>(this, common::NullDeleter()), std::string(""), numNodes, enabledNodes);
+      printNode(shared_ptr<Node>(this, common::NullDeleter()), string(""), numNodes, enabledNodes);
       DOUT("Num nodes:"<<numNodes<<" enabled:"<<enabledNodes<<" disabled:"<<(numNodes-enabledNodes));
     }
 
@@ -67,7 +67,7 @@ namespace lost
       if(!active) return;
 //      DOUT(name);
       
-      for(std::list<NodePtr>::iterator i=children.begin(); i!=children.end(); ++i)
+      for(list<NodePtr>::iterator i=children.begin(); i!=children.end(); ++i)
       {
         if((*i)->active)
         {
@@ -82,10 +82,10 @@ namespace lost
       return NodePtr(new Node);
     }
 
-    NodePtr Node::recursiveFindByName(const std::string& inName)
+    NodePtr Node::recursiveFindByName(const string& inName)
     {
       NodePtr result;
-      for(std::list<NodePtr>::iterator i=children.begin();
+      for(list<NodePtr>::iterator i=children.begin();
           i!=children.end();
           ++i)
       {

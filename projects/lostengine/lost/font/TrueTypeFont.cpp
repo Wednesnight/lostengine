@@ -11,7 +11,6 @@
 #include "lost/font/Glyph.h"
 #include <math.h>
 
-using namespace std;
 using namespace lost::bitmap;
 using namespace lost::font::freetype;
 using namespace lost::math;
@@ -88,7 +87,7 @@ void TrueTypeFont::rebuildTextureAtlas()
   
   // check if all bitmaps were packed, throw if not
   if(packerResult.rects.size() != characterBitmaps.size())
-    throw runtime_error("couldn't pack all bitmaps in characterAtlas");
+    throw std::runtime_error("couldn't pack all bitmaps in characterAtlas");
     
   // recreate atlas texture from current packed bitmap
   // glyphs that were rendered in a previous pass should end up in the same spot in the atlas since we forced the packer to omit sorting

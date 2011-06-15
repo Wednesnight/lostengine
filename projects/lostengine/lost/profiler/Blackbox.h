@@ -1,9 +1,6 @@
 #ifndef LOST_PROFILER_BLACKBOX_H
 #define LOST_PROFILER_BLACKBOX_H
 
-#include <string>
-#include <map>
-
 namespace lost
 {
 namespace profiler
@@ -15,7 +12,7 @@ struct Blackbox
     Value() {value=0.0f; clear=false;unit="#";}
     float value;
     bool clear;
-    std::string unit;
+    string unit;
   };  
   
   
@@ -24,23 +21,23 @@ struct Blackbox
   ~Blackbox();
   static Blackbox* instance(); // returns thread specific instance
   
-  Value& value(const std::string& inKey);
-  void inc(const std::string& inKey);
-  void dec(const std::string& inKey);
+  Value& value(const string& inKey);
+  void inc(const string& inKey);
+  void dec(const string& inKey);
 
   void snapshot();
   void log();
 
 private:  
-  std::map<std::string, Value> _key2value;  
+  map<string, Value> _key2value;  
 };
 
 struct BBCount
 {
-  BBCount(const std::string& inName);
+  BBCount(const string& inName);
   ~BBCount();
   
-  std::string name;
+  string name;
 };
 }
 }

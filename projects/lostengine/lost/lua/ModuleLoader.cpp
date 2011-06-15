@@ -1,10 +1,8 @@
-#include <string>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 
 #include "lost/lua/ModuleLoader.h"
 
-using namespace std;
 using namespace luabind;
 
 namespace lost

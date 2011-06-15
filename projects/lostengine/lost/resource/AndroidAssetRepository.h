@@ -30,7 +30,7 @@ namespace lost
       virtual ~AndroidAssetRepository();
       
       common::DataPtr load(const boost::filesystem::path& filename);
-      bool exists(std::string& path);
+      bool exists(string& path);
       static RepositoryPtr create(AAssetManager* assetManager, const boost::filesystem::path& subdir = "");
     };
   }

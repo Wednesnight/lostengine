@@ -3,6 +3,7 @@
   'variables': {
     'boost_path': '../../thirdparty/boost/boost_1_44_0',
     'box2d_path': '../../thirdparty/box2d/box2d_2_1_2',
+    'eastl_path': '../../thirdparty/eastl/fe4d920',
     'fhtagn_path': '../../thirdparty/fhtagn/fhtagn-0.3',
     'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
     'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
@@ -111,6 +112,7 @@
       'include_dirs': [
         '.',
         '<@(boost_path)',
+        '<@(eastl_path)/include',
       ],
 
       'sources': [
@@ -276,6 +278,7 @@
         '.',
         '<@(boost_path)',
         '<@(tinythread_path)',
+        '<@(eastl_path)',
         '<@(unittest++_path)/include',
       ],
 
@@ -288,7 +291,6 @@
         'lost/test/TestEventDispatcher.cpp',
         'lost/test/TestGlUtils.cpp',
         'lost/test/TestLostGlHostBuffer.cpp',
-        'lost/test/TestLostGlRangeManager.cpp',
         'lost/test/TestLostMathMatrix.cpp',
         'lost/test/TestLostMathQuat.cpp',
         'lost/test/TestLostMathVec4.cpp',
@@ -433,6 +435,7 @@
         '.',
         '<@(boost_path)',
         '<@(box2d_path)/Box2D',
+        '<@(eastl_path)/include',
         '<@(fhtagn_path)',
         '<@(freetype2_path)/include',
         '<@(giflib_path)/lib',
@@ -514,6 +517,7 @@
         'lost/common/io.cpp',
         'lost/common/Logger.cpp',
         'lost/common/Profiler.cpp',
+        'lost/common/StringStream.cpp',
 
         # event
         'lost/event/EventDispatcher.cpp',
@@ -542,7 +546,6 @@
         'lost/gl/HybridBuffer.cpp',
         'lost/gl/HybridIndexBuffer.cpp',
         'lost/gl/HybridVertexBuffer.cpp',
-        'lost/gl/RangeManager.cpp',
         'lost/gl/RenderBuffer.cpp',
         'lost/gl/Shader.cpp',
         'lost/gl/ShaderHelper.cpp',
@@ -565,7 +568,6 @@
 
         # lua
         'lost/lua/BindAll.cpp',
-        'lost/lua/BindingHelpers.cpp',
         'lost/lua/ModuleLoader.cpp',
         'lost/lua/State.cpp',
 
@@ -699,6 +701,14 @@
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2PulleyJoint.cpp',
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp',
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2WeldJoint.cpp',
+
+        # thirdparty/fhtagn
+        '<@(eastl_path)/src/allocator.cpp',
+        '<@(eastl_path)/src/assert.cpp',
+        '<@(eastl_path)/src/fixed_pool.cpp',
+        '<@(eastl_path)/src/hashtable.cpp',
+        '<@(eastl_path)/src/red_black_tree.cpp',
+        '<@(eastl_path)/src/string.cpp',
 
         # thirdparty/fhtagn
         '<@(fhtagn_path)/fhtagn/text/decoders.cpp',

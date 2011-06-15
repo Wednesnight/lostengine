@@ -8,17 +8,6 @@ namespace lost
 {
 namespace math
 {
-
-struct RectPacker::SourceRect
-{
-  SourceRect(const lost::math::Rect inRect, int32_t inId)
-  :rect(inRect), id(inId)
-  {
-  }
-  
-  lost::math::Rect rect; // the original size
-  int32_t id; // it's index in the original incoming data
-};
   
 RectPacker::Node::Node()
 {
@@ -60,7 +49,7 @@ bool compareRects(const RectPacker::SourceRect& r1, const RectPacker::SourceRect
 }
 
 void RectPacker::pack(const lost::math::Rect& targetArea,
-          const std::vector<lost::math::Rect>& rects,
+          const vector<lost::math::Rect>& rects,
           bool rotate,
           bool sort)
 {

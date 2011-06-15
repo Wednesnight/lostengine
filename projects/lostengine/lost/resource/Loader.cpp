@@ -32,15 +32,15 @@ namespace lost
 
       // we have to throw here, otherwise the following checks will segfault
       if(!result)
-        throw LoaderError("couldn't load file: '"+inPath.string()+"'");
+        throw LoaderError(string("couldn't load file: '")+inPath.string().c_str()+"'");
 
 //      DOUT("'"<<inPath << "' [" << result->size << " Bytes]");
       return result;
     }
 
-    std::string Loader::locate(const boost::filesystem::path& inPath)
+    string Loader::locate(const boost::filesystem::path& inPath)
     {
-      std::string result = inPath.string();
+      string result = inPath.string().c_str();
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
       {
         if(repositories[idx]->exists(result))
@@ -52,7 +52,7 @@ namespace lost
     bool Loader::exists(const boost::filesystem::path& inPath)
     {
       bool result = false;
-      std::string p = inPath.string();
+      string p = inPath.string().c_str();
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
       {
         if(repositories[idx]->exists(p))

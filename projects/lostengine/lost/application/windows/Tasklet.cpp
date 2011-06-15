@@ -36,7 +36,7 @@ namespace lost
       hiddenMembers->threadId = GetCurrentThreadId();
       init();
       bool hasError = false;
-      std::string errorMsg;
+      string errorMsg;
       try
       {
         // make sure that our GL context is the current context
