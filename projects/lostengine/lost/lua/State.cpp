@@ -5,7 +5,7 @@
 #include <luabind/exception_handler.hpp>
 
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++
-#include <hashlibpp.h>
+#include <md5.h>
 
 using namespace boost;
 using namespace std;
@@ -73,8 +73,7 @@ namespace lost
     
     std::string State::getScriptFilename(const std::string& scriptContent, const std::string& defaultName)
     {
-      md5wrapper  md5;
-      std::string file(md5.getHashFromString(scriptContent));
+      std::string file(md5(scriptContent));
       if (fileHashes.find(file) != fileHashes.end()) return fileHashes[file];
         else return defaultName;
     }
@@ -180,8 +179,7 @@ namespace lost
     
     void State::addScriptPathEntry(const std::string& inScript, const std::string& inAbsolutePath)
     {
-      md5wrapper md5;
-      fileHashes[md5.getHashFromString(inScript)] = inAbsolutePath;      
+      fileHashes[md5(inScript)] = inAbsolutePath;      
     }
     
     // loads and executes a file

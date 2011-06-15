@@ -7,7 +7,7 @@
     'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
     'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
     'glee_path': '../../thirdparty/glee/glee_5_21',
-    'hashlib++_path': '../../thirdparty/hashlib++/hashlib++_0_3_1',
+    'md5_path': '../../thirdparty/md5/',
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
     'luabind_path': '../../thirdparty/luabind/luabind_0_9_1',
     'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
@@ -437,7 +437,7 @@
         '<@(freetype2_path)/include',
         '<@(giflib_path)/lib',
         '<@(glee_path)/include',
-        '<@(hashlib++_path)',
+        '<@(md5_path)',
         '<@(lua_path)/include',
         '<@(luabind_path)',
         '<@(stb_image_path)',
@@ -764,16 +764,8 @@
         # thirdparty/glee
         '<@(glee_path)/source/GLee.c',
 
-        # thirdparty/hashlib++
-        '<@(hashlib++_path)/hl_md5.cpp',
-        '<@(hashlib++_path)/hl_md5wrapper.cpp',
-        '<@(hashlib++_path)/hl_sha1.cpp',
-        '<@(hashlib++_path)/hl_sha1wrapper.cpp',
-        '<@(hashlib++_path)/hl_sha2ext.cpp',
-        '<@(hashlib++_path)/hl_sha256.cpp',
-        '<@(hashlib++_path)/hl_sha256wrapper.cpp',
-        '<@(hashlib++_path)/hl_sha384wrapper.cpp',
-        '<@(hashlib++_path)/hl_sha512wrapper.cpp',
+        # thirdparty/md5
+        '<@(md5_path)/md5.cpp',
 
         # thirdparty/lua
         '<@(lua_path)/source/src/lzio.c',
