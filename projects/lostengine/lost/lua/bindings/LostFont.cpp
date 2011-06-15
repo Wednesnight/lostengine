@@ -21,7 +21,7 @@ namespace lost
     RenderedTextPtr clone_cast(RenderedTextPtr p)
     {
       MeshPtr m = p->clone();
-      return boost::static_pointer_cast<RenderedText>(m);
+      return static_pointer_cast<RenderedText>(m);
     }
   
     void LostFontRenderedText(lua_State* state)
