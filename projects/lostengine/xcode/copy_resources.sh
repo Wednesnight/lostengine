@@ -5,7 +5,14 @@ if [[ "$exists" ]]
 then
   rm -fR "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost"
   rm -fR "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/Launcher.tasklet"
+  rm -fR "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost.zip"
+  rm -fR "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/Launcher.tasklet.zip"
 else
   mkdir "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources"
 fi
-cp -Rf resources/* "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/"
+cd resources/lost
+zip -r  "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/lost.zip" *  -x \*/\*.svn/\*
+cd ../..
+#cp -Rf resources/Launcher.tasklet "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/Launcher.tasklet"
+cd resources/Launcher.tasklet
+zip -r "${BUILD_DIR}/${CONFIGURATION}/${PRODUCT_NAME}.app/Contents/Resources/Launcher.tasklet.zip" *  -x \*/\*.svn/\*
