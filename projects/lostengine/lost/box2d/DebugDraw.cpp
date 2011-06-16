@@ -73,7 +73,7 @@ gl::ShaderProgramPtr DebugDraw::shader()
 {
   if(!colorShader)
   {
-    colorShader = lost::gl::loadShader(loader,"lost/Resources/glsl/basic_color");
+    colorShader = lost::gl::loadShader(loader,"lost/resources/glsl/basic_color");
   }
   return colorShader;
 }
