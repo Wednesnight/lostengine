@@ -278,7 +278,7 @@
         '.',
         '<@(boost_path)',
         '<@(tinythread_path)',
-        '<@(eastl_path)',
+        '<@(eastl_path)/include',
         '<@(unittest++_path)/include',
       ],
 
@@ -514,6 +514,8 @@
         'lost/common/Color.cpp',
         'lost/common/ColorGradient.cpp',
         'lost/common/Data.cpp',
+        'lost/common/eastlAllocators.cpp',
+        'lost/common/eastlStreamSupport.cpp',
         'lost/common/io.cpp',
         'lost/common/Logger.cpp',
         'lost/common/Profiler.cpp',
