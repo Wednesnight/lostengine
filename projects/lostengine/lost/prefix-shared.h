@@ -53,6 +53,8 @@
     using eastl::pair;
   }
 #include "lost/common/eastlStreamSupport.h"  
+
+#endif
 #include "lost/common/StringStream.h"
 #define THROW_RTE(s) \
 { \
@@ -60,8 +62,6 @@ lost::common::StringStream os; \
 os << s; \
 throw std::runtime_error(os.str().c_str()); \
 }
-
-#endif
 
 
   // lostengine
