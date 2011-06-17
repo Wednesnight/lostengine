@@ -301,7 +301,8 @@ namespace lost
             .def_readonly("uiNode", &Tasklet::uiNode)
             .def_readonly("fontManager", &Tasklet::fontManager)
             .def_readwrite("running", &Tasklet::running)
-            .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
+//            .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
+            .def("spawnTasklet",&Tasklet::spawnTasklet)
             .def("getClipboardString", &Tasklet::getClipboardString)
             .def("setClipboardString", &Tasklet::setClipboardString)
             .property("id", &Tasklet_id)
@@ -309,7 +310,7 @@ namespace lost
       ];
     }
 
-    EventPtr SpawnTaskletEvent_create(const string& absolutePath)
+/*    EventPtr SpawnTaskletEvent_create(const string& absolutePath)
     {
       LoaderPtr loader = Loader::create();
       loader->addRepository(FilesystemRepository::create(absolutePath));
@@ -330,7 +331,7 @@ namespace lost
             ]
         ]
       ];
-    }
+    }*/
 
     void LostApplicationTaskletEvent(lua_State* state)
     {
@@ -453,7 +454,7 @@ namespace lost
       LostApplicationMouseEvent(state);
       LostApplicationResizeEvent(state);
       LostApplicationTasklet(state);
-      LostApplicationSpawnTaskletEvent(state);
+//      LostApplicationSpawnTaskletEvent(state);
       LostApplicationTaskletEvent(state);
       LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
