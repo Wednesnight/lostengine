@@ -8,12 +8,13 @@ namespace lost
   namespace time
   {
 
-    ThreadedTimerScheduler::ThreadedTimerScheduler(const event::EventDispatcherPtr& eventDispatcher)
+    ThreadedTimerScheduler::ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher)
     : active(true),
       eventDispatcher(eventDispatcher),
       startTime(platform::currentTimeSeconds()),
       startSystemTime(boost::get_system_time()),
-      nextUpdateTime(0)
+      nextUpdateTime(0),
+      _taskletName(taskletName)
     {
       if (eventDispatcher) {
         eventDispatcher->addEventListener(ThreadedTimerSchedulerEvent::PROCESS_TIMERS(), event::makeListener(this, &ThreadedTimerScheduler::processTimers));
@@ -32,6 +33,7 @@ namespace lost
 
     void ThreadedTimerScheduler::schedulerThreadMethod()
     {
+      platform::setThreadName("'"+_taskletName+"' (timer scheduler)");
       boost::mutex::scoped_lock waitLock(schedulerWaitMutex);
       while (active) {
         if (nextUpdateTime == 0) {

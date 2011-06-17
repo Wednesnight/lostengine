@@ -27,9 +27,7 @@ end
 function TaskletListController:numberOfSections(listView) return 1 end -- number of currently available number of sections, defaults to 1 if not specified
 function TaskletListController:numberOfRowsInSection(listView,sectionIndex) return #(self._tasklets) end -- number of currently available rows in given section,mandatory
 function TaskletListController:rowForIndexPath(listView,indexPath) return self._tasklets[indexPath[2]] end -- indexPath = table with two 1-based indices into the actual content, returns the actual item that needs to be displayed,mandatory
-function TaskletListController:heightForRowAtIndexPath(indexPath)
-  return 60
-end
+function TaskletListController:heightForRowAtIndexPath(indexPath) return 60 end
 
 function TaskletListController:cellForRowAtIndexPath(listView,indexPath)  -- mandatory, must never return nil
 --  log.debug("----------------")
@@ -59,6 +57,17 @@ function TaskletListController:taskletStartRequested(entry)
   tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(entry.path))  
 end
 
+function TaskletListController:taskletRemoveRequested(entry)
+  log.debug("remove")
+  for k,v in pairs(self._tasklets) do
+    if v == entry then
+      table.remove(self._tasklets,k)
+      self._listView:reloadData()
+      break
+    end
+  end
+end
+
 function TaskletListController:createCellView()
   local result = lost.guiro.view.View
   {
@@ -70,6 +79,8 @@ function TaskletListController:createCellView()
         if event.target.id == "autorun" then
           log.debug("autorun "..tostring(event.target:pushed())) 
           event.currentTarget:dataSource().autorun = event.target:pushed()
+        elseif event.target.id == "remove" then
+          self:taskletRemoveRequested(event.currentTarget:dataSource())          
         end
       end,
       mouseDown=function(event) 

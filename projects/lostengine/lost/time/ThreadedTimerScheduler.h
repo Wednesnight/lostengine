@@ -47,9 +47,9 @@ namespace lost
       list<Timer*> timers;
       void addTimerToList(Timer* timer);
       void removeTimerFromList(Timer* timer);
-      
+      string _taskletName;
     public:
-      ThreadedTimerScheduler(const event::EventDispatcherPtr& eventDispatcher = event::EventDispatcherPtr());
+      ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher = event::EventDispatcherPtr());
       ~ThreadedTimerScheduler();
 
       bool startTimer(Timer* timer);

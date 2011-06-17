@@ -31,7 +31,7 @@ namespace lost
     }
 
     void Tasklet::run() {
-
+      platform::setThreadName("'"+name+"' (tasklet)");
       isAlive = true;
       bool hasError = false;
       string errorMsg = "";

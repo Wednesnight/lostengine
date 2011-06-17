@@ -4,5 +4,6 @@
 #include "lost/platform/Type.h"
 #include "lost/platform/Time.h"
 #include "lost/platform/Paths.h"
+#include "lost/platform/Thread.h"
 
 #endif

@@ -106,6 +106,14 @@ namespace lost
       [pool release];
       return result;
     }
-    
+
+    void setThreadName(const string& name)
+    {
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSString* objcName = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
+      [[NSThread currentThread] setName:objcName]; // For Cocoa  
+      pthread_setname_np(name.c_str());
+      [pool release];
+    }
   }
 }
