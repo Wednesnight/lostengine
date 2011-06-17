@@ -54,7 +54,7 @@ end
 
 function TaskletListController:taskletStartRequested(entry)
   log.debug("start "..entry.path)
-  tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(entry.path))  
+  tasklet:spawnTasklet(entry.path) 
 end
 
 function TaskletListController:taskletRemoveRequested(entry)

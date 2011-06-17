@@ -26,7 +26,7 @@ function MainViewController:dropEventHandler(event)
   local originalEvent = event.lostAppDragNDropEvent
   for i=0,math.max(0,originalEvent:numPaths()-1) do
     local p = originalEvent:getPath(i)
-    tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(p))
+    tasklet:spawnTasklet(p)
     self:addTaskletPath(p)
   end
 end
@@ -72,7 +72,7 @@ function MainViewController:startup()
   -- start autorun tasklets
   for k,v in pairs(self._prefs.tasklets) do
     if v.autorun == true then
-      tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(v.path))    
+      tasklet:spawnTasklet(v.path)   
     end
   end
 

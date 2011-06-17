@@ -29,6 +29,9 @@
 #include "lost/time/ThreadedTimerScheduler.h"
 #include "lost/profiler/Blackbox.h"
 #include "lost/event/Listener.h"
+#include "lost/resource/FilesystemRepository.h"
+#include "lost/resource/ApplicationResourceRepository.h"
+#include "lost/application/SpawnTaskletEvent.h"
 
 using namespace boost;
 using namespace luabind;
@@ -239,6 +242,16 @@ namespace lost
     {
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::TERMINATE(), this)));
     }
+    
+    void Tasklet::spawnTasklet(const string& taskletPath)
+    {
+      LoaderPtr loader = Loader::create();
+      loader->addRepository(resource::FilesystemRepository::create(taskletPath));
+      loader->addRepository(ApplicationResourceRepository::create());
+      SpawnTaskletEventPtr ev = SpawnTaskletEvent::create(loader);
+      dispatchApplicationEvent(ev); // sends the event to the application on the main thread
+    }
+
     
     void Tasklet::queueApplicationEvent(EventPtr event)
     {
