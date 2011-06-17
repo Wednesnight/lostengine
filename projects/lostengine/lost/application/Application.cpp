@@ -42,6 +42,7 @@ namespace lost
       if (tasklet != NULL) {
         addTasklet(tasklet);
       }
+      platform::setThreadName("LostEngine main thread");
       initialize();
     }
 

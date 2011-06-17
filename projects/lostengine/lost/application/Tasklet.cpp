@@ -72,7 +72,6 @@ namespace lost
       configLoaded = false;
       loader = inLoader;
       eventDispatcher.reset(new event::EventDispatcher());
-      scheduler.reset(new ThreadedTimerScheduler(eventDispatcher));
       lua.reset(new State(loader));
       clearNode.reset(new Node());
       clearNode->add(NodePtr(new ClearColor(Color(1,1,0))));
@@ -190,6 +189,7 @@ namespace lost
 
     bool Tasklet::startup()
     {    
+      scheduler.reset(new ThreadedTimerScheduler(name, eventDispatcher));    
       if(hasLuaStartup)
       {
         call_function<void>(lsh->luaStartup);

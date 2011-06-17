@@ -57,7 +57,7 @@ namespace lost
         namespace_("time")
         [
           class_<ThreadedTimerScheduler, TimerScheduler>("ThreadedTimerScheduler")
-            .def(constructor<>())
+            .def(constructor<const string&>())
         ]
       ];
     }

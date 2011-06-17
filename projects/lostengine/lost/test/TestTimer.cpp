@@ -17,7 +17,7 @@ bool timerCallback(const Timer* timer)
 
 TEST(timer)
 {
-  lost::shared_ptr<TimerScheduler> scheduler(new ThreadedTimerScheduler());
+  lost::shared_ptr<TimerScheduler> scheduler(new ThreadedTimerScheduler("test"));
   lost::shared_ptr<Timer> timer(scheduler->createTimer(1, boost::bind(&timerCallback, _1), true));
   sleep(10);
 }
