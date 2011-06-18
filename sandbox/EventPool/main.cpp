@@ -71,6 +71,9 @@ int main (int argc, char * const argv[]) {
     typedef event::TypedHandle<event::Event> EventHandle;
     vector<EventHandle> v;
     const uint32_t N = 100000;
+    const uint32_t F = 10;
+    const uint32_t N2 = N / F;
+    
     cout << currentTimeFormat()<< " container warmup with empty handles" << endl;
     for(uint32_t i=0; i<N; ++i)
     {
@@ -83,6 +86,13 @@ int main (int argc, char * const argv[]) {
     }
     cout << currentTimeFormat() << " clearing" << endl;
     v.clear();
+    cout << currentTimeFormat()<< " perform "<<F<< " runs reusing old objects" << endl;
+    for (uint32_t f=0; f<F; ++f) {
+      for (uint32_t n2=0; n2<N2; ++n2) {        
+        v.push_back(pool->createEvent<event::Event>("hello"));
+      }
+//      cout << currentTimeFormat() << " " << f << endl;
+    }
     cout << currentTimeFormat()<< " DONE" << endl;
     return 0;
 }
