@@ -47,10 +47,14 @@ private:
       EventRefMap::iterator pos = unused.begin();
       if(pos != unused.end())
       {
+        std::cout << "reusing existing event object" << std::endl;
         result = static_cast<EvType*>(pos->first);
         result->type = inType;
+        used[result] = 1;
+        event2refcount[result] = 1;
       }
       else {
+        std::cout << "allocating new event on heap" << std::endl;
         result = new EvType(inType);
         used[result] = 1;
         event2refcount[result] = 1;

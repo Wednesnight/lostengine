@@ -41,6 +41,12 @@ int main (int argc, char * const argv[]) {
     cout << ev4->type << endl;
     cout << ev5->type << endl;
     }
+    
+    {
+      event::TypedHandle<event::Event> ev1 = pool->createEvent<event::Event>("randomEvent");
+      event::TypedHandle<application::MouseEvent> ev4 = pool->createEvent<application::MouseEvent>("mouseDown");
+    }
+    
     cout << "DONE" << endl;
     return 0;
 }
