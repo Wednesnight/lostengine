@@ -3,6 +3,7 @@
 #include "lost/event/Listener.h"
 #include "lost/event/Pool.h"
 #include "lost/event/Event.h"
+#include "lost/application/MouseEvent.h"
 
 using namespace std;
 using namespace lost;
@@ -23,7 +24,16 @@ int main (int argc, char * const argv[]) {
     event::Pool* pool = event::Pool::instance();
 
     event::TypedHandle<event::Event> ev1 = pool->createEvent<event::Event>("randomEvent");
+    event::TypedHandle<event::Event> ev2 = pool->createEvent<event::Event>("helloEvent");
+    event::TypedHandle<application::MouseEvent> ev3 = pool->createEvent<application::MouseEvent>("mouseUp");
+    event::TypedHandle<application::MouseEvent> ev4 = pool->createEvent<application::MouseEvent>("mouseDown");
+    event::TypedHandle<application::MouseEvent> ev5 = pool->createEvent<application::MouseEvent>("mouseMove");
+
     cout << ev1->type << endl;
+    cout << ev2->type << endl;
+    cout << ev3->type << endl;
+    cout << ev4->type << endl;
+    cout << ev5->type << endl;
     
     return 0;
 }

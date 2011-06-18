@@ -4,6 +4,7 @@
 #include <boost/thread/once.hpp>
 #include "lost/event/Event.h"
 #include "lost/event/Handle.h"
+#include "tinythread.h"
 
 namespace lost
 {
@@ -13,17 +14,72 @@ namespace event
 // there is only one event pool for the whole application
 struct Pool
 {
-  Pool();
-  ~Pool();
-  
-  static Pool* instance();
-  
-  
+private:  
+  tthread::mutex _mutex;
   struct SubPool
   {
-    map<Event*,uint32_t> refcount;
+    typedef map<Event*,int32_t> EventRefMap;
+    EventRefMap event2refcount;
+    EventRefMap unused;
+    EventRefMap used;
     
-    uint32_t numEvents() {return refcount.size(); }
+    uint32_t numEvents() {return event2refcount.size(); }
+
+    // returns events with refcount 1
+    template<typename EvType>
+    EvType* createEvent(const event::Type& inType)
+    {
+      EvType* result = NULL;
+      EventRefMap::iterator pos = unused.begin();
+      if(pos != unused.end())
+      {
+        result = static_cast<EvType*>(pos->first);
+        result->type = inType;
+      }
+      else {
+        result = new EvType(inType);
+        used[result] = 1;
+        event2refcount[result] = 1;
+      }
+      return result;
+    }
+
+    void incRef(Event* ev)
+    {
+      EventRefMap::iterator pos = event2refcount.find(ev);
+      if(pos != event2refcount.end())
+      {
+        pos->second += 1;
+      }
+      else {
+        std::cout << "WARNING: tried to increase refcount on event that is not managed in pool" << std::endl;
+      }
+    }
+
+    void decRef(Event* ev)
+    {
+      EventRefMap::iterator pos = event2refcount.find(ev);
+      if(pos != event2refcount.end())
+      {
+        if(pos->second > 0)
+        {
+          pos->second -= 1;
+          if(pos->second == 0)
+          {
+            std::cout<<"moving event from used to unused" << std::endl;
+            used.erase(pos->first);
+            unused[pos->first] = 0;
+          }
+        }
+        else
+        {
+          std::cout << "WARNING: tried to decrease refcount beyond zero" << std::endl;          
+        }
+      }
+      else {
+        std::cout << "WARNING: tried to decrease refcount on event that is not managed in pool" << std::endl;
+      }
+    }
   };
   
   typedef map<const char*, SubPool*> SubPoolMap;
@@ -45,18 +101,42 @@ struct Pool
     }
     return result;
   }
+public:
+  Pool();
+  ~Pool();
+  
+  static Pool* instance();
   
   template<typename EvType>
   TypedHandle<EvType> createEvent(const event::Type& inType)
   {
+    tthread::lock_guard<tthread::mutex> lock(_mutex);
     TypedHandle<EvType> result;
     SubPool* sp = findSubPool<EvType>();
+    EvType* ev = sp->createEvent<EvType>(inType);
     std::cout << "subpool " << typeid(TypedHandle<EvType>).name() << " has " << sp->numEvents() << " events" << std::endl;
-    result.event = new EvType(inType);
+    result.event = ev;
     result.pool = this;
     std::cout << "creating handle for type " << typeid(TypedHandle<EvType>).name() << std::endl;
     return result;
   }
+
+  template<typename EvType>
+  void incRef(Event* ev)
+  {
+    tthread::lock_guard<tthread::mutex> lock(_mutex);
+    SubPool* sp = findSubPool<EvType>();
+    sp->incRef(ev);
+  }
+
+  template<typename EvType>
+  void decRef(Event* ev)
+  {
+    tthread::lock_guard<tthread::mutex> lock(_mutex);
+    SubPool* sp = findSubPool<EvType>();
+    sp->decRef(ev);
+  }
+  
     
 };
 
