@@ -70,7 +70,7 @@ void EventDispatcher::queueEvent(const event::EventPtr& event)
 void EventDispatcher::wakeup()
 {
   // queue dummy event to get waitForEvents() to return
-  queueEvent(EventPtr(new Event("")));
+  queueEvent(EventPtr(new Event(0)));
 }
 
 void EventDispatcher::processEvents()

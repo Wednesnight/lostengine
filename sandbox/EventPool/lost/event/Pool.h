@@ -16,6 +16,7 @@ struct Handle
 {
   Handle();
   virtual ~Handle();
+  Handle(const Handle& other);
   
   Pool* pool;
   Event* event;
@@ -47,14 +48,14 @@ private:
       EventRefMap::iterator pos = unused.begin();
       if(pos != unused.end())
       {
-        std::cout << "reusing existing event object" << std::endl;
+//        std::cout << "reusing existing event object" << std::endl;
         result = static_cast<EvType*>(pos->first);
         result->type = inType;
         used[result] = 1;
         event2refcount[result] = 1;
       }
       else {
-        std::cout << "allocating new event on heap" << std::endl;
+//        std::cout << "allocating new event on heap" << std::endl;
         result = new EvType(inType);
         used[result] = 1;
         event2refcount[result] = 1;
@@ -84,7 +85,7 @@ private:
           pos->second -= 1;
           if(pos->second == 0)
           {
-            std::cout<<"moving event from used to unused" << std::endl;
+//            std::cout<<"moving event from used to unused" << std::endl;
             used.erase(pos->first);
             unused[pos->first] = 0;
           }
@@ -132,10 +133,10 @@ public:
     TypedHandle<EvType> result;
     SubPool* sp = findSubPool<EvType>();
     EvType* ev = sp->createEvent<EvType>(inType);
-    std::cout << "subpool " << typeid(TypedHandle<EvType>).name() << " has " << sp->numEvents() << " events" << std::endl;
+//    std::cout << "subpool " << typeid(TypedHandle<EvType>).name() << " has " << sp->numEvents() << " events" << std::endl;
     result.event = ev;
     result.pool = this;
-    std::cout << "creating handle for type " << typeid(TypedHandle<EvType>).name() << std::endl;
+//    std::cout << "creating handle for type " << typeid(TypedHandle<EvType>).name() << std::endl;
     return result;
   }
 
@@ -174,9 +175,18 @@ struct TypedHandle : public Handle
   
   TypedHandle(const TypedHandle<EvType>& other)
   {
+    if(other.pool)
+    {
+      Pool* p = other.pool;
+      Event* e = other.event;
+      p->incRef<EvType>(e);
+    }
+    if(event && pool)
+    {
+      pool->decRef<EvType>(event);
+    }
     pool = other.pool;
     event = other.event;
-    pool->incRef<EvType>(event);
   }
   
   TypedHandle<EvType>& operator=(const TypedHandle<EvType>& other)
