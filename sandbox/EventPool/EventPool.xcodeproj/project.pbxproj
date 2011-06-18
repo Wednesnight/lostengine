@@ -11,6 +11,9 @@
 		EAF6E3C513AB7BA900213D84 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C213AB7BA900213D84 /* Connection.cpp */; };
 		EAF6E3C613AB7BA900213D84 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */; };
 		EAF6E3C713AB7BA900213D84 /* Signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C413AB7BA900213D84 /* Signal.cpp */; };
+		EAF6E40213AB821E00213D84 /* Pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E40113AB821E00213D84 /* Pool.cpp */; };
+		EAF6E40413AB822200213D84 /* Handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E40313AB822200213D84 /* Handle.cpp */; };
+		EAF6E42C13AB97F700213D84 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E42B13AB97F700213D84 /* once.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +34,9 @@
 		EAF6E3C213AB7BA900213D84 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Connection.cpp; path = lost/event/Connection.cpp; sourceTree = "<group>"; };
 		EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
 		EAF6E3C413AB7BA900213D84 /* Signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Signal.cpp; path = lost/event/Signal.cpp; sourceTree = "<group>"; };
+		EAF6E40113AB821E00213D84 /* Pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pool.cpp; path = lost/event/Pool.cpp; sourceTree = "<group>"; };
+		EAF6E40313AB822200213D84 /* Handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Handle.cpp; path = lost/event/Handle.cpp; sourceTree = "<group>"; };
+		EAF6E42B13AB97F700213D84 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../../thirdparty/boost/boost_1_46_1/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,7 @@
 			children = (
 				EAF6E3B613AB7B9100213D84 /* lost */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				EAF6E42B13AB97F700213D84 /* once.cpp */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = EventPool;
@@ -77,6 +84,8 @@
 				EAF6E3C213AB7BA900213D84 /* Connection.cpp */,
 				EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */,
 				EAF6E3C413AB7BA900213D84 /* Signal.cpp */,
+				EAF6E40113AB821E00213D84 /* Pool.cpp */,
+				EAF6E40313AB822200213D84 /* Handle.cpp */,
 			);
 			name = event;
 			sourceTree = "<group>";
@@ -142,6 +151,9 @@
 				EAF6E3C513AB7BA900213D84 /* Connection.cpp in Sources */,
 				EAF6E3C613AB7BA900213D84 /* EventDispatcher.cpp in Sources */,
 				EAF6E3C713AB7BA900213D84 /* Signal.cpp in Sources */,
+				EAF6E40213AB821E00213D84 /* Pool.cpp in Sources */,
+				EAF6E40413AB822200213D84 /* Handle.cpp in Sources */,
+				EAF6E42C13AB97F700213D84 /* once.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
