@@ -51,6 +51,7 @@ private:
 //        std::cout << "reusing existing event object" << std::endl;
         result = static_cast<EvType*>(pos->first);
         result->type = inType;
+        unused.erase(pos);
         used[result] = 1;
         event2refcount[result] = 1;
       }
@@ -92,7 +93,12 @@ private:
         }
         else
         {
-          std::cout << "WARNING: tried to decrease refcount beyond zero" << std::endl;          
+          std::cout << "WARNING: tried to decrease refcount beyond zero" << std::endl;     
+          {
+            uint32_t x = 13;
+            std::cout << x << std::endl;
+            lost::event::test();
+          }     
         }
       }
       else {
