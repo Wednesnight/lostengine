@@ -23,9 +23,15 @@ int main (int argc, char * const argv[]) {
     ed.dispatchEvent(event::Event::create("hello"));
     event::Pool* pool = event::Pool::instance();
 
+    event::TypedHandle<event::Event> t1;
+    event::TypedHandle<application::MouseEvent> t2;
+    
+    {
     event::TypedHandle<event::Event> ev1 = pool->createEvent<event::Event>("randomEvent");
+    t1 = ev1;
     event::TypedHandle<event::Event> ev2 = pool->createEvent<event::Event>("helloEvent");
     event::TypedHandle<application::MouseEvent> ev3 = pool->createEvent<application::MouseEvent>("mouseUp");
+    t2 = ev3;
     event::TypedHandle<application::MouseEvent> ev4 = pool->createEvent<application::MouseEvent>("mouseDown");
     event::TypedHandle<application::MouseEvent> ev5 = pool->createEvent<application::MouseEvent>("mouseMove");
 
@@ -34,6 +40,7 @@ int main (int argc, char * const argv[]) {
     cout << ev3->type << endl;
     cout << ev4->type << endl;
     cout << ev5->type << endl;
-    
+    }
+    cout << "DONE" << endl;
     return 0;
 }

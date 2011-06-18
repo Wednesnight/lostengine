@@ -1,7 +1,6 @@
 #ifndef LOST_EVENT_POOL_H
 #define LOST_EVENT_POOL_H
 
-#include <boost/thread/once.hpp>
 #include "lost/event/Event.h"
 #include "lost/event/Handle.h"
 #include "tinythread.h"
@@ -10,6 +9,21 @@ namespace lost
 {
 namespace event
 {
+
+struct Pool;
+
+struct Handle
+{
+  Handle();
+  virtual ~Handle();
+  
+  Pool* pool;
+  Event* event;
+
+};
+
+template<typename EvType>
+struct TypedHandle;
 
 // there is only one event pool for the whole application
 struct Pool
@@ -140,6 +154,58 @@ public:
     
 };
 
+template<typename EvType>
+struct TypedHandle : public Handle
+{
+  EvType* operator->()
+  {
+    return static_cast<EvType*>(event);
+  }
+
+  TypedHandle()
+  {
+    pool = NULL;
+    event = NULL;
+  }
+  
+  TypedHandle(const TypedHandle<EvType>& other)
+  {
+    pool = other.pool;
+    event = other.event;
+    pool->incRef<EvType>(event);
+  }
+  
+  TypedHandle<EvType>& operator=(const TypedHandle<EvType>& other)
+  {
+    // incref other first in case it is self asignment
+    if(other.pool)
+    {
+      Pool* p = other.pool;
+      Event* e = other.event;
+      p->incRef<EvType>(e);
+    }
+    if(event && pool)
+    {
+      pool->decRef<EvType>(event);
+    }
+    pool = other.pool;
+    event = other.event;
+    return *this;
+  }
+
+  
+  virtual ~TypedHandle()
+  {
+    if(pool)
+    {
+      pool->decRef<EvType>(event);
+    }
+  }
+/*  EvType& operator*()
+  {
+    return *(static_cast<EvType*>(event));
+  }*/
+};
 
 }
 }

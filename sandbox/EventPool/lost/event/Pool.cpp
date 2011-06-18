@@ -1,4 +1,5 @@
 #include "lost/event/Pool.h"
+#include <boost/thread/once.hpp>
 
 using namespace std;
 
