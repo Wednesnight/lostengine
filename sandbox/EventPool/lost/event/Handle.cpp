@@ -19,7 +19,6 @@ Handle::Handle(const Handle& other)
 
 Handle::~Handle()
 {
-  // cleanup in pool
 }
 
 }
