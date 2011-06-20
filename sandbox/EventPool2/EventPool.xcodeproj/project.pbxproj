@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		EAE8B7A813AFAE8300E1DD01 /* tinythread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAE8B7A713AFAE8300E1DD01 /* tinythread.cpp */; };
 		EAF6E3C513AB7BA900213D84 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C213AB7BA900213D84 /* Connection.cpp */; };
 		EAF6E3C613AB7BA900213D84 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */; };
 		EAF6E3C713AB7BA900213D84 /* Signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C413AB7BA900213D84 /* Signal.cpp */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* EventPool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EventPool; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE8B7A713AFAE8300E1DD01 /* tinythread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinythread.cpp; path = ../../thirdparty/tinythread/1_0/source/tinythread.cpp; sourceTree = SOURCE_ROOT; };
 		EAF6E3C213AB7BA900213D84 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Connection.cpp; path = lost/event/Connection.cpp; sourceTree = "<group>"; };
 		EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
 		EAF6E3C413AB7BA900213D84 /* Signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Signal.cpp; path = lost/event/Signal.cpp; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				EAF6E3B613AB7B9100213D84 /* lost */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				EAF6E42B13AB97F700213D84 /* once.cpp */,
+				EAE8B7A713AFAE8300E1DD01 /* tinythread.cpp */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = EventPool;
@@ -154,6 +157,7 @@
 				EAF6E40213AB821E00213D84 /* Pool.cpp in Sources */,
 				EAF6E40413AB822200213D84 /* Handle.cpp in Sources */,
 				EAF6E42C13AB97F700213D84 /* once.cpp in Sources */,
+				EAE8B7A813AFAE8300E1DD01 /* tinythread.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
