@@ -18,9 +18,7 @@ struct Handle
   virtual ~Handle();
   Handle(const Handle& other);
   
-  Pool* pool;
   Event* event;
-
 };
 
 template<typename EvType>
@@ -33,77 +31,35 @@ private:
   tthread::mutex _mutex;
   struct SubPool
   {
-    typedef map<Event*,int32_t> EventRefMap;
-    EventRefMap event2refcount;
-    EventRefMap unused;
-    EventRefMap used;
+    typedef vector<Event*> EventVector;
+    EventVector events;
     
-    uint32_t numEvents() {return event2refcount.size(); }
+    uint32_t numEvents() {return events.size(); }
 
     // returns events with refcount 1
     template<typename EvType>
     EvType* createEvent(const event::Type& inType)
     {
       EvType* result = NULL;
-      EventRefMap::iterator pos = unused.begin();
-      if(pos != unused.end())
+      for(EventVector::iterator pos=events.begin(); 
+          pos != events.end();
+          ++pos)
       {
-//        std::cout << "reusing existing event object" << std::endl;
-        result = static_cast<EvType*>(pos->first);
-        result->type = inType;
-        unused.erase(pos);
-        used[result] = 1;
-        event2refcount[result] = 1;
+        if((*pos)->refcount == 0)
+        {
+          result = *pos;
+//          std::cout << "reusing" << std::endl;
+          break;
+        }
       }
-      else {
-//        std::cout << "allocating new event on heap" << std::endl;
+      if(!result)
+      {
         result = new EvType(inType);
-        used[result] = 1;
-        event2refcount[result] = 1;
+        events.push_back(result);
+//        std::cout << "new, size now "<<events.size() << std::endl;
       }
+      result->incRef();
       return result;
-    }
-
-    void incRef(Event* ev)
-    {
-      EventRefMap::iterator pos = event2refcount.find(ev);
-      if(pos != event2refcount.end())
-      {
-        pos->second += 1;
-      }
-      else {
-        std::cout << "WARNING: tried to increase refcount on event that is not managed in pool" << std::endl;
-      }
-    }
-
-    void decRef(Event* ev)
-    {
-      EventRefMap::iterator pos = event2refcount.find(ev);
-      if(pos != event2refcount.end())
-      {
-        if(pos->second > 0)
-        {
-          pos->second -= 1;
-          if(pos->second == 0)
-          {
-//            std::cout<<"moving event from used to unused" << std::endl;
-            used.erase(pos->first);
-            unused[pos->first] = 0;
-          }
-        }
-        else
-        {
-          std::cout << "WARNING: tried to decrease refcount beyond zero" << std::endl;     
-          {
-            uint32_t x = 13;
-            std::cout << x << std::endl;
-            lost::event::test();
-          }     
-        }
-      }
-      else {
-        std::cout << "WARNING: tried to decrease refcount on event that is not managed in pool" << std::endl;
-      }
     }
   };
   
@@ -141,28 +97,9 @@ public:
     EvType* ev = sp->createEvent<EvType>(inType);
 //    std::cout << "subpool " << typeid(TypedHandle<EvType>).name() << " has " << sp->numEvents() << " events" << std::endl;
     result.event = ev;
-    result.pool = this;
 //    std::cout << "creating handle for type " << typeid(TypedHandle<EvType>).name() << std::endl;
     return result;
   }
-
-  template<typename EvType>
-  void incRef(Event* ev)
-  {
-    tthread::lock_guard<tthread::mutex> lock(_mutex);
-    SubPool* sp = findSubPool<EvType>();
-    sp->incRef(ev);
-  }
-
-  template<typename EvType>
-  void decRef(Event* ev)
-  {
-    tthread::lock_guard<tthread::mutex> lock(_mutex);
-    SubPool* sp = findSubPool<EvType>();
-    sp->decRef(ev);
-  }
-  
-    
 };
 
 template<typename EvType>
@@ -175,40 +112,33 @@ struct TypedHandle : public Handle
 
   TypedHandle()
   {
-    pool = NULL;
     event = NULL;
   }
   
   TypedHandle(const TypedHandle<EvType>& other)
   {
-    if(other.pool)
+    if(other.event)
     {
-      Pool* p = other.pool;
-      Event* e = other.event;
-      p->incRef<EvType>(e);
+      other.event->incRef();
     }
-    if(event && pool)
+    if(event)
     {
-      pool->decRef<EvType>(event);
+      event->decRef();
     }
-    pool = other.pool;
     event = other.event;
   }
   
   TypedHandle<EvType>& operator=(const TypedHandle<EvType>& other)
   {
     // incref other first in case it is self asignment
-    if(other.pool)
+    if(other.event)
     {
-      Pool* p = other.pool;
-      Event* e = other.event;
-      p->incRef<EvType>(e);
+      other.event->incRef();
     }
-    if(event && pool)
+    if(event)
     {
-      pool->decRef<EvType>(event);
+      event->decRef();
     }
-    pool = other.pool;
     event = other.event;
     return *this;
   }
@@ -216,15 +146,11 @@ struct TypedHandle : public Handle
   
   virtual ~TypedHandle()
   {
-    if(pool)
+    if(event)
     {
-      pool->decRef<EvType>(event);
+      event->decRef();
     }
   }
-/*  EvType& operator*()
-  {
-    return *(static_cast<EvType*>(event));
-  }*/
 };
 
 }

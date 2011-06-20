@@ -36,6 +36,44 @@ struct Target
       return timeformat;
     }
 
+void testThread(void* p)
+{
+  try
+  {
+    typedef event::TypedHandle<event::Event> EventHandle;
+    event::Pool* pool = event::Pool::instance();
+    vector<EventHandle> v;
+    const uint32_t N = 1000;
+    const uint32_t F = 10;
+    const uint32_t N2 = N / F;
+    
+    cout << currentTimeFormat()<< " container warmup with empty handles" << endl;
+    for(uint32_t i=0; i<N; ++i)
+    {
+      v.push_back(EventHandle());
+    }
+    cout << currentTimeFormat() << " fill with event handles from pool" << endl;
+    for(uint32_t i=0; i<N; ++i)
+    {
+      v.push_back(pool->createEvent<event::Event>("hello"));
+    }
+    cout << currentTimeFormat() << " clearing" << endl;
+    v.clear();
+    cout << currentTimeFormat()<< " perform "<<F<< " runs reusing old objects" << endl;
+    for (uint32_t f=0; f<F; ++f) {
+      for (uint32_t n2=0; n2<N2; ++n2) {        
+        v.push_back(pool->createEvent<event::Event>("hello"));
+      }
+//      cout << currentTimeFormat() << " " << f << endl;
+    }
+    cout << currentTimeFormat()<< " DONE" << endl;  
+  }
+  catch(...)
+  {
+    cout << "err" << endl;
+  }
+}
+
 int main (int argc, char * const argv[]) {
     // insert code here...
 //    Target target;
@@ -68,7 +106,7 @@ int main (int argc, char * const argv[]) {
       event::TypedHandle<application::MouseEvent> ev4 = pool->createEvent<application::MouseEvent>("mouseDown");
     }*/
     
-    typedef event::TypedHandle<event::Event> EventHandle;
+/*    typedef event::TypedHandle<event::Event> EventHandle;
     vector<EventHandle> v;
     const uint32_t N = 100000;
     const uint32_t F = 10;
@@ -93,6 +131,16 @@ int main (int argc, char * const argv[]) {
       }
 //      cout << currentTimeFormat() << " " << f << endl;
     }
-    cout << currentTimeFormat()<< " DONE" << endl;
+    cout << currentTimeFormat()<< " DONE" << endl;*/
+    tthread::thread t1(testThread,0);
+    tthread::thread t2(testThread,0);
+    tthread::thread t3(testThread,0);
+    tthread::thread t4(testThread,0);
+    tthread::thread t5(testThread,0);
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
     return 0;
 }
