@@ -63,19 +63,24 @@ struct Pool
 {
 private:  
   tthread::mutex _mutex;
+
   struct SubPool
   {
-    typedef vector<Event*> EventVector;
+  };
+
+  template<typename EvType>
+  struct TypedSubPool : public SubPool
+  {
+    typedef vector<EvType*> EventVector;
     EventVector events;
     
     uint32_t numEvents() {return events.size(); }
 
     // returns events with refcount 1
-    template<typename EvType>
     EvType* createEvent(const event::Type& inType)
     {
       EvType* result = NULL;
-      for(EventVector::iterator pos=events.begin(); 
+      for(typename EventVector::iterator pos=events.begin(); 
           pos != events.end();
           ++pos)
       {
@@ -101,18 +106,18 @@ private:
   map<const char*, SubPool*> typeName2subPool;
   
   template<typename EvType>
-  SubPool* findSubPool() // creates a subpool if necessary, always returns valid result
+  TypedSubPool<EvType>* findSubPool() // creates a subpool if necessary, always returns valid result
   {
-    SubPool* result = NULL;
+    TypedSubPool<EvType>* result = NULL;
     const char* subpoolName = typeid(TypedHandle<EvType>).name();
     SubPoolMap::iterator pos = typeName2subPool.find(subpoolName);
     if(pos == typeName2subPool.end())
     {
-      result = new SubPool();
+      result = new TypedSubPool<EvType>();
       typeName2subPool[subpoolName] = result;
     }
     else {
-      result = pos->second;
+      result = static_cast<TypedSubPool<EvType>*>(pos->second);
     }
     return result;
   }
@@ -127,8 +132,8 @@ public:
   {
     tthread::lock_guard<tthread::mutex> lock(_mutex);
     TypedHandle<EvType> result;
-    SubPool* sp = findSubPool<EvType>();
-    EvType* ev = sp->createEvent<EvType>(inType);
+    TypedSubPool<EvType>* sp = findSubPool<EvType>();
+    EvType* ev = sp->createEvent(inType);
 //    std::cout << "subpool " << typeid(TypedHandle<EvType>).name() << " has " << sp->numEvents() << " events" << std::endl;
     result.event = ev;
 //    std::cout << "creating handle for type " << typeid(TypedHandle<EvType>).name() << std::endl;
