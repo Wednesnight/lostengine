@@ -2,7 +2,6 @@
 #define LOST_EVENT_POOL_H
 
 #include "lost/event/Event.h"
-#include "lost/event/Handle.h"
 #include "tinythread.h"
 
 namespace lost
@@ -10,19 +9,54 @@ namespace lost
 namespace event
 {
 
-struct Pool;
-
-struct Handle
-{
-  Handle();
-  virtual ~Handle();
-  Handle(const Handle& other);
-  
-  Event* event;
-};
-
 template<typename EvType>
-struct TypedHandle;
+struct TypedHandle 
+{
+  EvType* event;
+
+  EvType* operator->()
+  {
+    return static_cast<EvType*>(event);
+  }
+
+  TypedHandle()
+  {
+    event = NULL;
+  }
+  
+  TypedHandle(const TypedHandle<EvType>& other)
+  {
+    if(other.event)
+    {
+      other.event->incRef();
+    }
+    event = other.event;
+  }
+  
+  TypedHandle<EvType>& operator=(const TypedHandle<EvType>& other)
+  {
+    // incref other first in case it is self asignment
+    if(other.event)
+    {
+      other.event->incRef();
+    }
+    if(event)
+    {
+      event->decRef();
+    }
+    event = other.event;
+    return *this;
+  }
+
+  
+  virtual ~TypedHandle()
+  {
+    if(event)
+    {
+      event->decRef();
+    }
+  }
+};
 
 // there is only one event pool for the whole application
 struct Pool
@@ -102,56 +136,6 @@ public:
   }
 };
 
-template<typename EvType>
-struct TypedHandle : public Handle
-{
-  EvType* operator->()
-  {
-    return static_cast<EvType*>(event);
-  }
-
-  TypedHandle()
-  {
-    event = NULL;
-  }
-  
-  TypedHandle(const TypedHandle<EvType>& other)
-  {
-    if(other.event)
-    {
-      other.event->incRef();
-    }
-    if(event)
-    {
-      event->decRef();
-    }
-    event = other.event;
-  }
-  
-  TypedHandle<EvType>& operator=(const TypedHandle<EvType>& other)
-  {
-    // incref other first in case it is self asignment
-    if(other.event)
-    {
-      other.event->incRef();
-    }
-    if(event)
-    {
-      event->decRef();
-    }
-    event = other.event;
-    return *this;
-  }
-
-  
-  virtual ~TypedHandle()
-  {
-    if(event)
-    {
-      event->decRef();
-    }
-  }
-};
 
 }
 }
