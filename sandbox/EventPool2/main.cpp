@@ -142,5 +142,10 @@ int main (int argc, char * const argv[]) {
     t3.join();
     t4.join();
     t5.join();
+    
+    event::TypedHandle<event::Event> ev2 = pool->createEvent<event::Event>("helloEvent");
+    event::TypedHandle<application::MouseEvent> ev3 = pool->createEvent<application::MouseEvent>("mouseUp");
+    
+    
     return 0;
 }
