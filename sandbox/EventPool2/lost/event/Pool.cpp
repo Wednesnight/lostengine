@@ -8,25 +8,6 @@ namespace lost
 namespace event
 {
 
-Handle::Handle()
-{
-  event = NULL;
-}
-
-Handle::Handle(const Handle& other)
-{
-  event = other.event;
-}
-
-Handle::~Handle()
-{
-}
-
-void test()
-{
-  std::cout << "13" << std::endl;
-}
-
 Pool::Pool()
 {
 }

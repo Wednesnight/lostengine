@@ -13,7 +13,6 @@
 		EAF6E3C613AB7BA900213D84 /* EventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */; };
 		EAF6E3C713AB7BA900213D84 /* Signal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E3C413AB7BA900213D84 /* Signal.cpp */; };
 		EAF6E40213AB821E00213D84 /* Pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E40113AB821E00213D84 /* Pool.cpp */; };
-		EAF6E40413AB822200213D84 /* Handle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E40313AB822200213D84 /* Handle.cpp */; };
 		EAF6E42C13AB97F700213D84 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAF6E42B13AB97F700213D84 /* once.cpp */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventDispatcher.cpp; path = lost/event/EventDispatcher.cpp; sourceTree = "<group>"; };
 		EAF6E3C413AB7BA900213D84 /* Signal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Signal.cpp; path = lost/event/Signal.cpp; sourceTree = "<group>"; };
 		EAF6E40113AB821E00213D84 /* Pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pool.cpp; path = lost/event/Pool.cpp; sourceTree = "<group>"; };
-		EAF6E40313AB822200213D84 /* Handle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Handle.cpp; path = lost/event/Handle.cpp; sourceTree = "<group>"; };
 		EAF6E42B13AB97F700213D84 /* once.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = once.cpp; path = ../../thirdparty/boost/boost_1_46_1/libs/thread/src/pthread/once.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -88,7 +86,6 @@
 				EAF6E3C313AB7BA900213D84 /* EventDispatcher.cpp */,
 				EAF6E3C413AB7BA900213D84 /* Signal.cpp */,
 				EAF6E40113AB821E00213D84 /* Pool.cpp */,
-				EAF6E40313AB822200213D84 /* Handle.cpp */,
 			);
 			name = event;
 			sourceTree = "<group>";
@@ -155,7 +152,6 @@
 				EAF6E3C613AB7BA900213D84 /* EventDispatcher.cpp in Sources */,
 				EAF6E3C713AB7BA900213D84 /* Signal.cpp in Sources */,
 				EAF6E40213AB821E00213D84 /* Pool.cpp in Sources */,
-				EAF6E40413AB822200213D84 /* Handle.cpp in Sources */,
 				EAF6E42C13AB97F700213D84 /* once.cpp in Sources */,
 				EAE8B7A813AFAE8300E1DD01 /* tinythread.cpp in Sources */,
 			);
