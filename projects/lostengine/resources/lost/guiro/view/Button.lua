@@ -14,6 +14,12 @@ Button.STATE_NORMAL2 = "normal2"
 Button.STATE_HOVER2 = "hover2" 
 Button.STATE_PUSHED2 = "pushed2"  
 
+Button.BUTTON_DOWN = lost.common.djb2Hash("buttonDown")
+Button.BUTTON_UP = lost.common.djb2Hash("buttonUp")
+Button.BUTTON_CLICK = lost.common.djb2Hash("buttonClick")
+
+local me = lost.guiro.event.MouseEvent
+
 function Button:constructor(args)
   local t = args or {}
   self.titles = {} -- one string per state
@@ -95,38 +101,38 @@ end
 -- FIXME: is this correct?
 function Button:createNormalHandlerMap()
   return {
-    mouseEnter = function(event)
+    [me.MOUSE_ENTER] = function(event)
                   if not self.mouseIsDown then
                     self:state(Button.STATE_HOVER) 
                   else
                     self:state(Button.STATE_PUSHED)
                   end
                   end,
-    mouseLeave = function(event)
+    [me.MOUSE_LEAVE] = function(event)
                   self:state(Button.STATE_NORMAL) 
                   end,
-    mouseDown = function(event)
+    [me.MOUSE_DOWN] = function(event)
                   self.mouseIsDown = true
                   self:state(Button.STATE_PUSHED)
-                  self:dispatchButtonEvent("buttonDown")    
+                  self:dispatchButtonEvent(Button.BUTTON_DOWN)    
                   end,
-    mouseUpInside = function(event)
+    [me.MOUSE_UP_INSIDE] = function(event)
                       self.mouseIsDown = false
                       self:state(Button.STATE_HOVER)
-                      self:dispatchButtonEvent("buttonClick")    
-                      self:dispatchButtonEvent("buttonUp")    
+                      self:dispatchButtonEvent(Button.BUTTON_CLICK)    
+                      self:dispatchButtonEvent(Button.BUTTON_UP)    
                       end,
-    mouseUpOutside = function(event)
+    [me.MOUSE_UP_OUTSIDE] = function(event)
                        self.mouseIsDown = false
                        self:state(Button.STATE_NORMAL)
-                       self:dispatchButtonEvent("buttonUp")    
+                       self:dispatchButtonEvent(Button.BUTTON_UP)    
                        end,
   }
 end
 
 function Button:createStickyHandlerMap()
   return {
-    mouseEnter = function(event) 
+    [me.MOUSE_ENTER] = function(event) 
                     if not self:pushed()  then
                       if not self.mouseIsDown then
                         self:state(Button.STATE_HOVER)                       
@@ -135,31 +141,31 @@ function Button:createStickyHandlerMap()
                       end
                     end
                   end,
-    mouseLeave = function(event)
+    [me.MOUSE_LEAVE] = function(event)
                     if not self:pushed() then
                       self:state(Button.STATE_NORMAL) 
                     end
                   end,
-    mouseDown = function(event)
+    [me.MOUSE_DOWN] = function(event)
                     if not self:pushed() then
                       self.mouseIsDown = true
                       self:state(Button.STATE_PUSHED)
-                      self:dispatchButtonEvent("buttonDown")    
+                      self:dispatchButtonEvent(Button.BUTTON_DOWN)    
                     end
                   end,
-    mouseUpInside = function(event)
+    [me.MOUSE_UP_INSIDE] = function(event)
                         if not self:pushed() then   
                           self.mouseIsDown = false                           
                           self:pushed(true)
                           self:state(Button.STATE_PUSHED)
-                          self:dispatchButtonEvent("buttonClick")
+                          self:dispatchButtonEvent(Button.BUTTON_CLICK)
                         end
                       end,
-    mouseUpOutside = function(event)
+    [me.MOUSE_UP_OUTSIDE] = function(event)
                          if not self:pushed() then      
                            self.mouseIsDown = false
                            self:state(Button.STATE_NORMAL)
-                           self:dispatchButtonEvent("buttonUp")    
+                           self:dispatchButtonEvent(Button.BUTTON_UP)    
                          end
                        end,
   }
@@ -167,39 +173,39 @@ end
 
 function Button:createToggleHandlerMap()
   return {
-    mouseEnter = function(event) 
+    [me.MOUSE_ENTER] = function(event) 
                       if not self.mouseIsDown then
                         self:togglestate(Button.STATE_HOVER)                       
                       else
                         self:togglestate(Button.STATE_PUSHED) 
                       end
                   end,
-    mouseLeave = function(event)
+    [me.MOUSE_LEAVE] = function(event)
                   self:togglestate(Button.STATE_NORMAL) 
                   end,
-    mouseDown = function(event)
+    [me.MOUSE_DOWN] = function(event)
                       self.mouseIsDown = true                       
                       self:togglestate(Button.STATE_PUSHED)
-                      self:dispatchButtonEvent("buttonDown")    
+                      self:dispatchButtonEvent(Button.BUTTON_DOWN)    
                   end,
-    mouseUpInside = function(event)
+    [me.MOUSE_UP_INSIDE] = function(event)
                       self.mouseIsDown = false
                       self:pushed(not self:pushed())
                       self:togglestate(Button.STATE_HOVER)
-                      self:dispatchButtonEvent("buttonClick")    
-                      self:dispatchButtonEvent("buttonUp")    
+                      self:dispatchButtonEvent(Button.BUTTON_CLICK)    
+                      self:dispatchButtonEvent(Button.BUTTON_UP)    
                       end,
-    mouseUpOutside = function(event)
+    [me.MOUSE_UP_OUTSIDE] = function(event)
                        self.mouseIsDown = false
                        self:togglestate(Button.STATE_NORMAL)
-                       self:dispatchButtonEvent("buttonUp")    
+                       self:dispatchButtonEvent(Button.BUTTON_UP)    
                      end
   }
 end
 
 function Button:createToggleOnceHandlerMap()
   return {
-    mouseEnter = function(event)
+    [me.MOUSE_ENTER] = function(event)
                     if self:pushed() then return end
                     if not self.mouseIsDown then
                       self:togglestate(Button.STATE_HOVER)                       
@@ -207,29 +213,29 @@ function Button:createToggleOnceHandlerMap()
                       self:togglestate(Button.STATE_PUSHED) 
                     end
                   end,
-    mouseLeave = function(event)
+    [me.MOUSE_LEAVE] = function(event)
                     if self:pushed() then return end
                     self:togglestate(Button.STATE_NORMAL) 
                   end,
-    mouseDown = function(event)
+    [me.MOUSE_DOWN] = function(event)
                     if self:pushed() then return end
                     self.mouseIsDown = true                       
                     self:togglestate(Button.STATE_PUSHED)
-                    self:dispatchButtonEvent("buttonDown")    
+                    self:dispatchButtonEvent(Button.BUTTON_DOWN)    
                   end,
-    mouseUpInside = function(event)
+    [me.MOUSE_UP_INSIDE] = function(event)
                         if self:pushed() then return end
                         self.mouseIsDown = false
                         self:pushed(not self:pushed())
                         self:togglestate(Button.STATE_HOVER)
-                        self:dispatchButtonEvent("buttonClick")    
-                        self:dispatchButtonEvent("buttonUp")    
+                        self:dispatchButtonEvent(Button.BUTTON_CLICK)    
+                        self:dispatchButtonEvent(Button.BUTTON_UP)    
                       end,
-    mouseUpOutside = function(event)
+    [me.MOUSE_UP_OUTSIDE] = function(event)
                        if self:pushed() then return end
                        self.mouseIsDown = false
                        self:togglestate(Button.STATE_NORMAL)
-                       self:dispatchButtonEvent("buttonUp")    
+                       self:dispatchButtonEvent(Button.BUTTON_UP)    
                      end
   }
 end

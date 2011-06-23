@@ -219,7 +219,7 @@
   }
 }
 
-- (void)keyEvent: (NSEvent*)event type:(lost::string)type pressed:(BOOL)pressed
+- (void)keyEvent: (NSEvent*)event type:(lost::event::Type)type pressed:(BOOL)pressed
 {
   // FIXME: virtual keycode translation!
   if (parent)
@@ -259,7 +259,7 @@
   }
 }
 
-- (bool)mouseButtonPressed: (lost::string)eventType button: (lost::application::MouseButton)button
+- (bool)mouseButtonPressed: (lost::event::Type)eventType button: (lost::application::MouseButton)button
 {
   if (eventType == lost::application::MouseEvent::MOUSE_DOWN())
   {
@@ -280,7 +280,7 @@
   }
 }
 
-- (void)mouseEvent: (NSEvent*)event type:(const char*)type
+- (void)mouseEvent: (NSEvent*)event type:(lost::event::Type)type
 {
   if (parent)
   {
@@ -299,42 +299,42 @@
 
 - (void)mouseMoved: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
 }
 
 - (void)mouseDragged: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
 }
 
 - (void)rightMouseDragged: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_MOVE()];
 }
 
 - (void)mouseDown: (NSEvent*)event
 {
-    [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+    [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
 }
 
 - (void)mouseUp: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
 }
 
 - (void)rightMouseDown: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_DOWN()];
 }
 
 - (void)rightMouseUp: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_UP()];
 }
 
 - (void)scrollWheel: (NSEvent*)event
 {
-  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL().c_str()];
+  [self mouseEvent: event type: lost::application::MouseEvent::MOUSE_SCROLL()];
 }
 
 

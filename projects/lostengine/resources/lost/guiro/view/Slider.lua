@@ -189,7 +189,7 @@ end
 
 function Slider:mouseDown(event)
   if (not self.scrollbarMode) or (self.scrollbarMode and self:handleContainsPoint(event.pos)) then
-    self._mouseMoveListener = tasklet.eventDispatcher:addEventListener("mouseMove",self.mouseMoveHandler)
+    self._mouseMoveListener = tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE,self.mouseMoveHandler)
     self:initHandleMouseOffset(self:mousePos(event.pos))
     self:updateHandlePosFromMousePos(self:mousePos(event.pos))
     self:updateValueFromHandlePos()

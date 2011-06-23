@@ -1,19 +1,17 @@
 #ifndef LOST_APPLICATION_WINDOWEVENT_H
 #define LOST_APPLICATION_WINDOWEVENT_H
 
+#include "lost/application/forward.h"
 #include "lost/event/Event.h"
-#include "lost/application/Window.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
   namespace application
   {
-    struct WindowEvent;
-    typedef lost::shared_ptr<WindowEvent> WindowEventPtr;
-
     struct WindowEvent : public event::Event
     {
-      static const event::Type& CLOSE() { static event::Type d = "windowClose"; return d; }
+      static const event::Type& CLOSE() { static event::Type d = common::djb2Hash("windowClose"); return d; }
 
       Window* window;
 

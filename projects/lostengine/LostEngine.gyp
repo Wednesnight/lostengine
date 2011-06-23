@@ -516,6 +516,7 @@
         'lost/common/Data.cpp',
         'lost/common/eastlAllocators.cpp',
         'lost/common/eastlStreamSupport.cpp',
+        'lost/common/Hash.cpp',
         'lost/common/io.cpp',
         'lost/common/Logger.cpp',
         'lost/common/Profiler.cpp',

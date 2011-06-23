@@ -3,6 +3,7 @@
 
 #include "lost/event/Event.h"
 #include "lost/application/forward.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
@@ -10,9 +11,9 @@ namespace lost
   {
     struct TaskletEvent : public event::Event
     {
-      static const event::Type& START() { static event::Type d = "taskletStart"; return d; }
-      static const event::Type& TERMINATE() { static event::Type d = "taskletTerminate"; return d; }
-      static const event::Type& DONE() { static event::Type d = "taskletDone"; return d; }
+      static const event::Type& START() { static event::Type d = common::djb2Hash("taskletStart"); return d; }
+      static const event::Type& TERMINATE() { static event::Type d = common::djb2Hash("taskletTerminate"); return d; }
+      static const event::Type& DONE() { static event::Type d = common::djb2Hash("taskletDone"); return d; }
 
       Tasklet* tasklet;
 

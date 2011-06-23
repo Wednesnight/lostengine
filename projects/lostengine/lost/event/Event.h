@@ -2,13 +2,12 @@
 #define LOST_EVENT_EVENT_H
 
 #include "lost/event/forward.h"
+#include "lost/event/EventType.h"
 
 namespace lost
 {
   namespace event
   {
-    typedef string Type;
-
 		/** low-level event class.
 		 *	Any event that should be dispatched via the EventDispatcher must be derived from this class.
 		 */

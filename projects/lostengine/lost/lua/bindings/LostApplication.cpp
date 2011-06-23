@@ -4,18 +4,15 @@
 #include "lost/lua/State.h"
 #include <luabind/iterator_policy.hpp>
 
-#include "lost/application/AccelerometerEvent.h"
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/DragNDropEvent.h"
-#include "lost/application/InputEvent.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
 #include "lost/application/ResizeEvent.h"
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/Tasklet.h"
-#include "lost/application/TouchEvent.h"
 #include "lost/application/Window.h"
 #include "lost/application/Queue.h"
 #include "lost/application/QueueEntity.h"
@@ -40,22 +37,6 @@ namespace lost
 {
   namespace lua
   {
-
-    void LostApplicationAccelerometerEvent(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<AccelerometerEvent, Event>("AccelerometerEvent")
-            .def_readwrite("x", &AccelerometerEvent::x)
-            .def_readwrite("y", &AccelerometerEvent::y)
-            .def_readwrite("z", &AccelerometerEvent::z)
-            .def_readwrite("timeStamp", &AccelerometerEvent::timeStamp)
-        ]
-      ];
-      globals(state)["lost"]["application"]["AccelerometerEvent"]["DEVICE_ACCELERATED"] = AccelerometerEvent::DEVICE_ACCELERATED();
-    }
 
     void LostApplicationApplication(lua_State* state)
     {
@@ -112,25 +93,13 @@ namespace lost
       globals(state)["lost"]["application"]["DragNDropEvent"]["DROP"] = DragNDropEvent::DROP();
     }
     
-    void LostApplicationInputEvent(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<InputEvent, Event>("InputEvent")
-            .def_readonly("window", &InputEvent::window)
-        ]
-      ];
-    }
-
     void LostApplicationKeyEvent(lua_State* state)
     {
       module(state, "lost")
       [
         namespace_("application")
         [
-          class_<KeyEvent, InputEvent>("KeyEvent")
+          class_<KeyEvent, Event>("KeyEvent")
             .def_readwrite("key", &KeyEvent::key)
             .def_readwrite("character", &KeyEvent::character)
             .def_readwrite("pressed", &KeyEvent::pressed)
@@ -243,7 +212,7 @@ namespace lost
       [
         namespace_("application")
         [
-          class_<MouseEvent, InputEvent>("MouseEvent")
+          class_<MouseEvent, Event>("MouseEvent")
             .def_readwrite("pos", &MouseEvent::pos)
             .def_readwrite("absPos", &MouseEvent::absPos)
             .def_readwrite("button", &MouseEvent::button)
@@ -347,35 +316,6 @@ namespace lost
       globals(state)["lost"]["application"]["TaskletEvent"]["DONE"] = TaskletEvent::DONE();
     }
     
-    void LostApplicationTouchEvent(lua_State* state)
-    {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<Touch>("Touch")
-            .def_readwrite("location", &Touch::location)
-            .def_readwrite("tapCount", &Touch::tapCount)
-            .def_readwrite("timeStamp", &Touch::timeStamp)
-            .scope
-            [
-              def("create", &Touch::create)
-            ],            
-          class_<TouchEvent, Event>("TouchEvent")
-            .def("size", &TouchEvent::size) 
-            .def_readwrite("touches", &TouchEvent::touches, return_stl_iterator)            
-            .scope
-            [
-              def("create", &Touch::create)
-            ]
-        ]
-      ];
-      globals(state)["lost"]["application"]["TouchEvent"]["TOUCHES_BEGAN"] = TouchEvent::TOUCHES_BEGAN();
-      globals(state)["lost"]["application"]["TouchEvent"]["TOUCHES_MOVED"] = TouchEvent::TOUCHES_MOVED();
-      globals(state)["lost"]["application"]["TouchEvent"]["TOUCHES_ENDED"] = TouchEvent::TOUCHES_ENDED();
-      globals(state)["lost"]["application"]["TouchEvent"]["TOUCHES_CANCELLED"] = TouchEvent::TOUCHES_CANCELLED();
-    }
-
     void LostApplicationWindow(lua_State* state)
     {
       module(state, "lost")
@@ -446,17 +386,13 @@ namespace lost
     void LostApplication(lua_State* state)
     {
       LostApplicationApplication(state);
-      LostApplicationAccelerometerEvent(state);
       LostApplicationApplicationEvent(state);
       LostApplicationDragNDropEvent(state);
-      LostApplicationInputEvent(state);
       LostApplicationKeyEvent(state);
       LostApplicationMouseEvent(state);
       LostApplicationResizeEvent(state);
       LostApplicationTasklet(state);
-//      LostApplicationSpawnTaskletEvent(state);
       LostApplicationTaskletEvent(state);
-      LostApplicationTouchEvent(state);
       LostApplicationWindow(state);
       LostApplicationQueue(state);
       LostApplicationDebugEvent(state);

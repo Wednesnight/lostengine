@@ -4,8 +4,8 @@ require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.event.KeyEvent" "lost.guiro.event.Event" {}
 
-KeyEvent.KEY_UP   = "keyUp"
-KeyEvent.KEY_DOWN = "keyDown"
+KeyEvent.KEY_UP   = lost.common.djb2Hash("keyUp")
+KeyEvent.KEY_DOWN = lost.common.djb2Hash("keyDown")
 
 local typeConvert = {}
 typeConvert[lost.application.KeyEvent.KEY_UP] = KeyEvent.KEY_UP
