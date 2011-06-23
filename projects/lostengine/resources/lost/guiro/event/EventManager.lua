@@ -2,16 +2,14 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.event.Event")
---require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
-require("lost.guiro.event.KeyEvent")
 require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
 
 local Event = lost.guiro.event.Event
-
 local MouseEvent = lost.application.MouseEvent
+local KeyEvent = lost.application.KeyEvent
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -272,7 +270,9 @@ end
 -- wraps it to lost.guiro.event.KeyEvent
 function EventManager:propagateKeyEvent(event)
 --  log.debug("propagateEvent: " .. event.type)
-  local keyevent = lost.guiro.event.KeyEvent(event) 
+--  local keyevent = lost.guiro.event.KeyEvent(event) 
+  local keyevent = event
+  keyevent.bubbles = true
 
 --  keyevent.currentTarget = nil -- will be set to the receiving view upon dispatch
   keyevent.target = self:focusedView() -- the currently focused view is the target of the click
