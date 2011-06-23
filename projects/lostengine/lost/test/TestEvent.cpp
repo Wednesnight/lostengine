@@ -4,6 +4,7 @@
 #include "lost/application/ResizeEvent.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
+#include "lost/common/Hash.h"
 
 using namespace lost::event;
 using namespace lost::application;
@@ -12,8 +13,8 @@ using namespace boost;
 
 TEST(event)
 {
-  lost::event::Event event("asd");
-  CHECK(event.type == "asd");
+  lost::event::Event event(lost::common::djb2Hash("asd"));
+  CHECK(event.type == lost::common::djb2Hash("asd"));
 }
 
 TEST(keyevent)
