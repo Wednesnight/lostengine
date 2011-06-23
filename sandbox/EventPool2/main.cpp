@@ -146,6 +146,6 @@ int main (int argc, char * const argv[]) {
     event::TypedHandle<event::Event> ev2 = pool->createEvent<event::Event>("helloEvent");
     event::TypedHandle<application::MouseEvent> ev3 = pool->createEvent<application::MouseEvent>("mouseUp");
     
-    
+    ev2 = ev3;
     return 0;
 }
