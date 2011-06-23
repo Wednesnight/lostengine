@@ -40,6 +40,9 @@ namespace lost
         [
           class_<Event>("Event")
             .def_readwrite("type", &Event::type)
+            .def_readwrite("bubbles", &Event::bubbles)
+            .def_readwrite("stopPropagation", &Event::stopPropagation)
+            .def_readwrite("stopDispatch", &Event::stopDispatch)
             .scope
             [
               def("create", &Event::create)
