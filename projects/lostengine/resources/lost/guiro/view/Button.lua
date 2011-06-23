@@ -18,7 +18,7 @@ Button.BUTTON_DOWN = lost.common.djb2Hash("buttonDown")
 Button.BUTTON_UP = lost.common.djb2Hash("buttonUp")
 Button.BUTTON_CLICK = lost.common.djb2Hash("buttonClick")
 
-local me = lost.guiro.event.MouseEvent
+local me = lost.application.MouseEvent
 
 function Button:constructor(args)
   local t = args or {}

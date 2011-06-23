@@ -224,6 +224,10 @@ namespace lost
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_DOWN"] = MouseEvent::MOUSE_DOWN();
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_MOVE"] = MouseEvent::MOUSE_MOVE();
       globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_SCROLL"] = MouseEvent::MOUSE_SCROLL();
+      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP_INSIDE"] = MouseEvent::MOUSE_UP_INSIDE();
+      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP_OUTSIDE"] = MouseEvent::MOUSE_UP_OUTSIDE();
+      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_ENTER"] = MouseEvent::MOUSE_ENTER();
+      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_LEAVE"] = MouseEvent::MOUSE_LEAVE();
       
       globals(state)["lost"]["application"]["MB_UNKNOWN"] = MB_UNKNOWN;
       

@@ -17,6 +17,11 @@ namespace lost
       static const event::Type& MOUSE_DOWN() { static const event::Type d = common::djb2Hash("mouseDown"); return d; }
       static const event::Type& MOUSE_MOVE() { static const event::Type d = common::djb2Hash("mouseMove"); return d; }
       static const event::Type& MOUSE_SCROLL() { static const event::Type d = common::djb2Hash("mouseScroll"); return d; }
+
+      static const event::Type& MOUSE_UP_INSIDE()  { static const event::Type d = common::djb2Hash("mouseUpInside"); return d; }
+      static const event::Type& MOUSE_UP_OUTSIDE() { static const event::Type d = common::djb2Hash("mouseUpOutside"); return d; }
+      static const event::Type& MOUSE_ENTER() { static const event::Type d = common::djb2Hash("mouseEnter"); return d; }
+      static const event::Type& MOUSE_LEAVE() { static const event::Type d = common::djb2Hash("mouseLeave"); return d; }
     
       Window*          window;
       lost::math::Vec2 pos;

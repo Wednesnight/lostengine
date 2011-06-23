@@ -2,7 +2,7 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.event.Event")
-require("lost.guiro.event.MouseEvent")
+--require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
 require("lost.guiro.event.DragNDropEvent")
@@ -10,6 +10,8 @@ require("lost.guiro.event.DragNDropEvent")
 lost.common.Class "lost.guiro.event.EventManager" {}
 
 local Event = lost.guiro.event.Event
+
+local MouseEvent = lost.application.MouseEvent
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -156,27 +158,27 @@ function EventManager:propagateUpDownEvents(viewStack, event)
 --  self:logViewStack(self.previousMouseClickStack)
 --  log.debug("-------------- CURRENT")
 --  self:logViewStack(viewStack)
-  if event.type == lost.guiro.event.MouseEvent.MOUSE_DOWN then
+  if event.type == MouseEvent.MOUSE_DOWN then
     event.target = viewStack[#viewStack] -- the lowermost view is the target
     self:propagateEvent(viewStack, event, #viewStack)
     self.previousMouseClickStack = viewStack
-  elseif event.type == lost.guiro.event.MouseEvent.MOUSE_UP then
+  elseif event.type == MouseEvent.MOUSE_UP then
     local oldidx = #(self.previousMouseClickStack)
     local newidx = #viewStack
     local oldView = self.previousMouseClickStack[oldidx] -- the lowermost view is the target
     local newView = viewStack[newidx] -- the lowermost view is the target
     if oldView and oldView ~= newView then
       event.target = oldView
-      event.type = lost.guiro.event.MouseEvent.MOUSE_UP_OUTSIDE
+      event.type = MouseEvent.MOUSE_UP_OUTSIDE
       self:propagateEvent(self.previousMouseClickStack, event, oldidx)
-      event.type = lost.guiro.event.MouseEvent.MOUSE_UP
+      event.type = MouseEvent.MOUSE_UP
       self:propagateEvent(self.previousMouseClickStack, event, oldidx)
     end
     if newView then
       event.target = newView
-      event.type = lost.guiro.event.MouseEvent.MOUSE_UP_INSIDE
+      event.type = MouseEvent.MOUSE_UP_INSIDE
       self:propagateEvent(viewStack, event, newidx)
-      event.type = lost.guiro.event.MouseEvent.MOUSE_UP
+      event.type = MouseEvent.MOUSE_UP
       self:propagateEvent(viewStack, event, newidx)
     end
     self.previousMouseClickStack = {}
@@ -215,16 +217,18 @@ end
 
 -- propagates an event down the tree of views starting from (and including) the given rootView
 -- expects the incoming event type to be lost.application.MouseEvent 
--- wraps it to lost.guiro.event.MouseEvent
 function EventManager:propagateMouseEvent(rootView, event)
 --  log.debug("propagateEvent: " .. event.type)
-  local mouseevent = lost.guiro.event.MouseEvent(event) 
+--  local mouseevent = lost.guiro.event.MouseEvent(event) 
+  local mouseevent = event
+  mouseevent.bubbles = true
+  
   local viewStack = self:findViewStack(rootView, mouseevent)
 
   -- dispatch up, down
-  if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_UP) or (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
+  if (mouseevent.type == MouseEvent.MOUSE_UP) or (mouseevent.type == MouseEvent.MOUSE_DOWN) then
     self:propagateUpDownEvents(viewStack, mouseevent)
-    if (mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_DOWN) then
+    if (mouseevent.type == MouseEvent.MOUSE_DOWN) then
       self:propagateFocusEvents(viewStack)
     end  
   -- scroll, move
@@ -234,9 +238,9 @@ function EventManager:propagateMouseEvent(rootView, event)
   end
   
   -- dispatch enter, leave
-  if mouseevent.type == lost.guiro.event.MouseEvent.MOUSE_MOVE then
+  if mouseevent.type == MouseEvent.MOUSE_MOVE then
     self:propagateEnterLeaveEvents(viewStack, self.previousMouseMoveStack, mouseevent,
-      lost.guiro.event.MouseEvent.MOUSE_ENTER, lost.guiro.event.MouseEvent.MOUSE_LEAVE)
+      MouseEvent.MOUSE_ENTER, MouseEvent.MOUSE_LEAVE)
     self.previousMouseMoveStack = viewStack
   end  
 
