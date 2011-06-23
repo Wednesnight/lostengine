@@ -1,4 +1,5 @@
 #import <AppKit/NSWindow.h>
+#include "lost/event/EventType.h"
 
 namespace lost
 {
@@ -22,7 +23,7 @@ namespace application
   NSUInteger modifierFlags;
 }
 
-- (void)mouseEvent: (NSEvent*)event type:(const char*)type;
+- (void)mouseEvent: (NSEvent*)event type:(lost::event::Type)type;
 - (void)setParent: (lost::application::Window*)newParent;
 
 @end

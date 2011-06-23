@@ -6,7 +6,11 @@ namespace lost
   namespace application
   {
     struct Tasklet;
-    
+    struct Window;
+
+    struct DragNDropEvent;
+    typedef lost::shared_ptr<DragNDropEvent> DragNDropEventPtr;  
+        
     struct TaskletEvent;
     typedef lost::shared_ptr<TaskletEvent> TaskletEventPtr;
 
@@ -21,6 +25,9 @@ namespace lost
 
     struct KeyEvent;
     typedef lost::shared_ptr<KeyEvent> KeyEventPtr;
+
+    struct MouseEvent;
+    typedef lost::shared_ptr<MouseEvent> MouseEventPtr;
     
     struct SpawnTaskletEvent;
     typedef lost::shared_ptr<SpawnTaskletEvent> SpawnTaskletEventPtr;

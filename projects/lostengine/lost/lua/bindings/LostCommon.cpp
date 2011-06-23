@@ -9,6 +9,7 @@
 #include "lost/common/ColorPoint.h"
 #include "lost/common/ColorGradient.h"
 #include "lost/lua/State.h"
+#include "lost/common/Hash.h"
 
 using namespace luabind;
 using namespace lost::common;
@@ -154,6 +155,17 @@ namespace lost
         def("error", &error)
       ];
     }
+  
+    void LostCommonHash(lua_State* state)
+    {
+      module(state, "lost")
+      [
+        namespace_("common")
+        [
+          def("djb2Hash",&lost::common::djb2Hash)
+        ]
+      ];
+    }
 
     void LostCommon(lua_State* state)
     {
@@ -162,6 +174,7 @@ namespace lost
       LostCommonColorGradient(state);
       LostCommonLog(state);
       LostCommonData(state);
+      LostCommonHash(state);
     }
 
   }

@@ -4,14 +4,14 @@ require("lost.guiro.event.Event")
 
 lost.common.Class "lost.guiro.event.MouseEvent" "lost.guiro.event.Event" {}
 
-MouseEvent.MOUSE_MOVE = "mouseMove"
-MouseEvent.MOUSE_UP = "mouseUp"
-MouseEvent.MOUSE_UP_INSIDE = "mouseUpInside"
-MouseEvent.MOUSE_UP_OUTSIDE = "mouseUpOutside"
-MouseEvent.MOUSE_DOWN = "mouseDown"
-MouseEvent.MOUSE_ENTER = "mouseEnter"
-MouseEvent.MOUSE_LEAVE = "mouseLeave"
-MouseEvent.MOUSE_SCROLL = "mouseScroll"
+MouseEvent.MOUSE_MOVE = lost.common.djb2Hash("mouseMove")
+MouseEvent.MOUSE_UP = lost.common.djb2Hash("mouseUp")
+MouseEvent.MOUSE_UP_INSIDE = lost.common.djb2Hash("mouseUpInside")
+MouseEvent.MOUSE_UP_OUTSIDE = lost.common.djb2Hash("mouseUpOutside")
+MouseEvent.MOUSE_DOWN = lost.common.djb2Hash("mouseDown")
+MouseEvent.MOUSE_ENTER = lost.common.djb2Hash("mouseEnter")
+MouseEvent.MOUSE_LEAVE = lost.common.djb2Hash("mouseLeave")
+MouseEvent.MOUSE_SCROLL = lost.common.djb2Hash("mouseScroll")
 
 local typeConvert = {}
 typeConvert[lost.application.MouseEvent.MOUSE_MOVE] = MouseEvent.MOUSE_MOVE

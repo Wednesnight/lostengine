@@ -5,7 +5,6 @@ require("lost.guiro.event.Event")
 require("lost.guiro.event.MouseEvent")
 require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.KeyEvent")
-require("lost.guiro.event.TouchEvent")
 require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}

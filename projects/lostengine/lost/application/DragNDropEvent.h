@@ -4,16 +4,12 @@
 #include "lost/event/Event.h"
 #include "lost/application/Window.h"
 #include "lost/math/Vec2.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
-  template <typename T>
-  class shared_ptr;
   namespace application
   {
-    struct DragNDropEvent;
-    typedef lost::shared_ptr<DragNDropEvent> DragNDropEventPtr;  
-    
     struct DragNDropEvent : public event::Event
     {
       vector<string> paths;
@@ -29,10 +25,10 @@ namespace lost
         return paths[idx]; 
       };
 
-      static const event::Type& DRAG_ENTER() { static const event::Type d = "dragEnter"; return d; }
-      static const event::Type& DRAG_UPDATE() { static const event::Type d = "dragUpdate"; return d; }
-      static const event::Type& DRAG_LEAVE() { static const event::Type d = "dragLeave"; return d; }
-      static const event::Type& DROP() { static event::Type d = "drop"; return d; }
+      static const event::Type& DRAG_ENTER() { static const event::Type d = common::djb2Hash("dragEnter"); return d; }
+      static const event::Type& DRAG_UPDATE() { static const event::Type d = common::djb2Hash("dragUpdate"); return d; }
+      static const event::Type& DRAG_LEAVE() { static const event::Type d = common::djb2Hash("dragLeave"); return d; }
+      static const event::Type& DROP() { static event::Type d = common::djb2Hash("drop"); return d; }
       
       DragNDropEvent(const event::Type& inType) : Event(inType) {}
       virtual ~DragNDropEvent() {}

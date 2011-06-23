@@ -12,6 +12,9 @@ end
     Lua implementation of the EventDispatcher with no connection to the C++ implementation
   ]]
 function EventDispatcher:addEventListener(which, listener)
+  if type(which) == "string" then
+    which = lost.common.djb2Hash(which)
+  end
   local l = self.listeners[which]
   if not l then
     l = {}
@@ -33,6 +36,9 @@ end
 
 -- removes the provided function from the listener list of the given event type
 function EventDispatcher:removeEventListener(which, listener)
+  if type(which) == "string" then
+    which = lost.common.djb2Hash(which)
+  end
   if self.listeners[which] then
     local t = self.listeners[which]
     for k,v in ipairs(t) do

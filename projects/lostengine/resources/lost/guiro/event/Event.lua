@@ -8,8 +8,14 @@ Event.PHASE_CAPTURE = 0
 Event.PHASE_TARGET = 1
 Event.PHASE_BUBBLE = 2
 
+Event.VALUE_CHANGED = lost.common.djb2Hash("valueChanged")
+
 function Event:constructor(inType) 
-  self.type = inType                                -- identifies the event type
+  if type(inType) == "string" then
+    self.type = lost.common.djb2Hash(inType)
+  else
+    self.type = inType
+  end
   self.bubbles = false                              -- set this to true if the event should bubble
   self.stopDispatch = false                         -- set this to false if you want to stop the dispatching of this event
   self.stopPropagation = false                      -- set this to false if you want to stop the propagation of this event
@@ -19,5 +25,5 @@ function Event:constructor(inType)
 end
 
 function Event:__tostring()
-  return self.type
+  return tostring(self.type)
 end

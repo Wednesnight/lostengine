@@ -1,18 +1,21 @@
 #ifndef LOST_APPLICATION_KEYEVENT_H
 #define LOST_APPLICATION_KEYEVENT_H
 
-#include "lost/application/InputEvent.h"
+#include "lost/application/forward.h"
 #include "lost/application/KeyCode.h"
+#include "lost/event/Event.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
   namespace application
   {
-    struct KeyEvent : public InputEvent
+    struct KeyEvent : public event::Event
     {
-      static const event::Type& KEY_DOWN() { static const event::Type d = "keyDown"; return d; }
-      static const event::Type& KEY_UP() { static const event::Type d = "keyUp"; return d; }
+      static const event::Type& KEY_DOWN() { static const event::Type d = common::djb2Hash("keyDown"); return d; }
+      static const event::Type& KEY_UP() { static const event::Type d = common::djb2Hash("keyUp"); return d; }
     
+      Window*     window;
       KeyCode     key;
       string character; // FIXME: this will work for the moment, replace with more efficient type
       bool        pressed;
@@ -23,7 +26,7 @@ namespace lost
       bool        specialDown;
 
       KeyEvent(const event::Type inType)
-      : InputEvent(inType),
+      : Event(inType),
         key(K_UNKNOWN),
         pressed(false),
         repeat(false),

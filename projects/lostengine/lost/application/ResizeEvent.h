@@ -2,8 +2,8 @@
 #define LOST_APPLICATION_RESIZEEVENT_H
 
 #include "lost/application/forward.h"
-#include "lost/event/forward.h"
 #include "lost/event/Event.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
@@ -13,7 +13,7 @@ namespace application
    */
   struct ResizeEvent : public event::Event
   {
-    static const event::Type& TASKLET_WINDOW_RESIZE() { static event::Type d = "taskletWindowResize"; return d; }
+    static const event::Type& TASKLET_WINDOW_RESIZE() { static event::Type d = common::djb2Hash("taskletWindowResize"); return d; }
     
     int width;
     int height;

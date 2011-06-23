@@ -3,6 +3,7 @@
 
 #include "lost/event/Event.h"
 #include "lost/resource/forward.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
@@ -11,7 +12,7 @@ namespace lost
     struct SpawnTaskletEvent : public event::Event
     {
       resource::LoaderPtr loader;
-      static const event::Type& SPAWN_TASKLET() { static const event::Type d = "spawnTasklet"; return d; }
+      static const event::Type& SPAWN_TASKLET() { static const event::Type d = common::djb2Hash("spawnTasklet"); return d; }
 
       SpawnTaskletEvent(resource::LoaderPtr inLoader)
       : loader(inLoader), Event(SPAWN_TASKLET())

@@ -3,6 +3,7 @@
 
 #include "lost/event/Event.h"
 #include "lost/application/forward.h"
+#include "lost/common/Hash.h"
 
 namespace lost
 {
@@ -16,12 +17,12 @@ namespace lost
         int memSize;
       };
 
-      static const event::Type& CMD_MEM_INFO() { static event::Type d = "debugCmdMemInfo"; return d; }
-      static const event::Type& CMD_PAUSE() { static event::Type d = "debugCmdPause"; return d; }
-      static const event::Type& CMD_CONTINUE() { static event::Type d = "debugCmdContinue"; return d; }
+      static const event::Type& CMD_MEM_INFO() { static event::Type d = common::djb2Hash("debugCmdMemInfo"); return d; }
+      static const event::Type& CMD_PAUSE() { static event::Type d = common::djb2Hash("debugCmdPause"); return d; }
+      static const event::Type& CMD_CONTINUE() { static event::Type d = common::djb2Hash("debugCmdContinue"); return d; }
 
-      static const event::Type& MEM_INFO() { static event::Type d = "debugMemInfo"; return d; }
-      static const event::Type& PAUSE() { static event::Type d = "debugPause"; return d; }
+      static const event::Type& MEM_INFO() { static event::Type d = common::djb2Hash("debugMemInfo"); return d; }
+      static const event::Type& PAUSE() { static event::Type d = common::djb2Hash("debugPause"); return d; }
 
       int mode;
       Tasklet* tasklet;

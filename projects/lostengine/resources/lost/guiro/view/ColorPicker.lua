@@ -35,7 +35,7 @@ end
 
 -- triggered by ColorPickerWindow so color setter doesn't always broadcast it's changes
 function ColorPicker:dispatchValueChangedEvent()
-  local event = lost.guiro.event.Event("valueChanged")
+  local event = lost.guiro.event.Event(lost.guiro.event.Event.VALUE_CHANGED)
   event.bubbles = true
   event.target = self
   self:dispatchEvent(event)    

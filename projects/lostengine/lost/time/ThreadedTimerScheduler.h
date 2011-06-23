@@ -7,6 +7,7 @@
 #include "lost/event/EventDispatcher.h"
 #include <boost/thread.hpp>
 #include <boost/thread/condition.hpp>
+#include "lost/common/Hash.h"
 
 namespace lost
 {
@@ -18,7 +19,7 @@ namespace lost
 
     struct ThreadedTimerSchedulerEvent : public event::Event
     {
-      static const event::Type& PROCESS_TIMERS() { static const event::Type d = "processTimers"; return d; }
+      static const event::Type& PROCESS_TIMERS() { static const event::Type d = common::djb2Hash("processTimers"); return d; }
 
       ThreadedTimerSchedulerEvent() : Event(PROCESS_TIMERS()) {}
       virtual ~ThreadedTimerSchedulerEvent() {}
