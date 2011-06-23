@@ -48,6 +48,21 @@ struct TypedHandle
     return *this;
   }
 
+  TypedHandle<EvType>& operator=(const TypedHandle<OtherType>& other)
+  {
+    // incref other first in case it is self asignment
+    if(other.event)
+    {
+      other.event->incRef();
+    }
+    if(event)
+    {
+      event->decRef();
+    }
+    event = other.event;
+    return *this;
+  }
+
   
   virtual ~TypedHandle()
   {
