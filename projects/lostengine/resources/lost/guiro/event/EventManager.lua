@@ -2,7 +2,6 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.event.Event")
-require("lost.guiro.event.FocusEvent")
 require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
@@ -10,6 +9,11 @@ lost.common.Class "lost.guiro.event.EventManager" {}
 local Event = lost.guiro.event.Event
 local MouseEvent = lost.application.MouseEvent
 local KeyEvent = lost.application.KeyEvent
+
+local FocusEvent = {}
+FocusEvent.FOCUS_RECEIVED = lost.common.djb2Hash("focusReceived")
+FocusEvent.FOCUS_LOST     = lost.common.djb2Hash("focusLost")
+
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -27,6 +31,7 @@ function EventManager:constructor(rootView)
   self.previousFocusStack = { self.rootView }
   self.focusChanged = false
   self.currentFocusedView = self.rootView
+  self.focusEvent = lost.event.Event.create(0)
 end
 
 
@@ -184,7 +189,11 @@ function EventManager:propagateUpDownEvents(viewStack, event)
 end
 
 function EventManager:propagateFocusEvents(viewStack)
-  local focusEvent = lost.guiro.event.FocusEvent()
+  local focusEvent = self.focusEvent
+  focusEvent.bubbles = true
+  focusEvent.stopDispatch = false
+  focusEvent.stopPropagation = false
+  
   local maxi = math.max(#viewStack, #(self.previousFocusStack))
   local oldView = nil
   local newView = nil
@@ -197,13 +206,13 @@ function EventManager:propagateFocusEvents(viewStack)
       if oldView and oldView.focusable then
         oldView.focused = false
         focusEvent.target = oldView
-        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
+        focusEvent.type = FocusEvent.FOCUS_LOST
         self:propagateEvent(self.previousFocusStack, focusEvent, i)
       end
       if newView and newView.focusable then
         newView.focused = true
         focusEvent.target = newView
-        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_RECEIVED
+        focusEvent.type = FocusEvent.FOCUS_RECEIVED
         self:propagateEvent(viewStack, focusEvent, i)
       end
     end
@@ -327,13 +336,16 @@ function EventManager:loseFocus(view)
   -- if it was found in the stack 
   if inStack then
     -- make the view and every view beneath it lose the focus
-    local focusEvent = lost.guiro.event.FocusEvent()
+    local focusEvent = lost.event.Event.create(FocusEvent.FOCUS_LOST)
+    focusEvent.bubbles = true
+    focusEvent.stopDispatch = false
+    focusEvent.stopPropagation = false
     for i=stackidx,#self.previousFocusStack do
       local currentView = self.previousFocusStack[i]
       if currentView.focused then
         currentView.focused = false
         focusEvent.target = currentView
-        focusEvent.type = lost.guiro.event.FocusEvent.FOCUS_LOST
+        focusEvent.type = FocusEvent.FOCUS_LOST
         self:propagateEvent(self.previousFocusStack, focusEvent, i)    
       end
     end
