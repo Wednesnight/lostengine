@@ -6,6 +6,8 @@ namespace lost
 namespace event
 {
 
+struct Pool;
+
 struct Event;
 typedef lost::shared_ptr<Event> EventPtr;
 

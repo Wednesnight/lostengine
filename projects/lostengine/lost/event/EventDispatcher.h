@@ -37,6 +37,7 @@ struct EventDispatcher
   ConnectionPtr attachTo(const EventDispatcherPtr& target, const lost::event::Type& type);
   uint32_t numListeners();
   
+  Pool* pool;
   map<event::Type, SignalPtr> eventType2signal;
   tthread::mutex queueMutex;
   list<EventPtr> eventQueue;
