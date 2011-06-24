@@ -2,7 +2,6 @@ module("lost.guiro.event", package.seeall)
 
 require("lost.common.Class")
 require("lost.guiro.event.Event")
-require("lost.guiro.event.DragNDropEvent")
 
 lost.common.Class "lost.guiro.event.EventManager" {}
 
@@ -14,6 +13,7 @@ local FocusEvent = {}
 FocusEvent.FOCUS_RECEIVED = lost.common.djb2Hash("focusReceived")
 FocusEvent.FOCUS_LOST     = lost.common.djb2Hash("focusLost")
 
+local DragNDropEvent = lost.application.DragNDropEvent
 
 --- main entry point for low level keyboard and mouse events that are received from the application
 -- the EventManager will correctly distribute the events inside the view hierarchy.
@@ -256,9 +256,11 @@ end
 
 -- propagates an event using the hovered View
 -- expects the incoming event type to be lost.application.DragNDropEvent
--- wraps it to lost.guiro.event.DragNDropEvent
 function EventManager:propagateDragNDropEvent(rootView, event)
-  local dropEvent = lost.guiro.event.DragNDropEvent(event)
+  local dropEvent = event 
+  dropEvent.bubbles = true
+  dropEvent.stopDispatch = false
+  dropEvent.stopPropagation = false  
   local viewStack = self:findViewStack(rootView, dropEvent)
 
   -- dispatch dragNdrop
@@ -266,9 +268,9 @@ function EventManager:propagateDragNDropEvent(rootView, event)
   self:propagateEvent(viewStack, dropEvent, #viewStack)
 
   -- dispatch enter, leave
-  if dropEvent.type == lost.guiro.event.DragNDropEvent.DRAG_UPDATE then
+  if dropEvent.type == DragNDropEvent.DRAG_UPDATE then
     self:propagateEnterLeaveEvents(viewStack, self.previousDragUpdateStack, dropEvent,
-      lost.guiro.event.DragNDropEvent.DRAG_ENTER, lost.guiro.event.DragNDropEvent.DRAG_LEAVE)
+      DragNDropEvent.DRAG_ENTER, DragNDropEvent.DRAG_LEAVE)
     self.previousDragUpdateStack = viewStack
   end
 end

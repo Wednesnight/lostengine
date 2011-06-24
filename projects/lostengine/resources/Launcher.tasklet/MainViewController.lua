@@ -23,9 +23,8 @@ function MainViewController:constructor()
 end
 
 function MainViewController:dropEventHandler(event)
-  local originalEvent = event.lostAppDragNDropEvent
-  for i=0,math.max(0,originalEvent:numPaths()-1) do
-    local p = originalEvent:getPath(i)
+  for i=0,math.max(0,event:numPaths()-1) do
+    local p = event:getPath(i)
     tasklet:spawnTasklet(p)
     self:addTaskletPath(p)
   end
