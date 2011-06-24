@@ -14,13 +14,15 @@ namespace lost
     struct Event 
     {    
       Type type;					// the type of the event
-      
+      int32_t refcount; // for Pool management, ignore
       // these are currently only used for guiro
       bool bubbles;
       bool stopPropagation;
       bool stopDispatch;
 
-      Event(const Type& inType) : type(inType),bubbles(false),stopPropagation(false),stopDispatch(false) {}
+      const char* classTypeName() { static const char* d = typeid(this).name(); return d; }
+
+      Event(const Type& inType) : type(inType),bubbles(false),stopPropagation(false),stopDispatch(false),refcount(0) {}
       static EventPtr create(const Type& inType) { return EventPtr(new Event(inType)); }
       virtual ~Event() {}
     };

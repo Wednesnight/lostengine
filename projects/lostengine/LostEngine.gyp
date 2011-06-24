@@ -526,6 +526,7 @@
         'lost/event/EventDispatcher.cpp',
         'lost/event/Connection.cpp',
         'lost/event/Signal.cpp',
+        'lost/event/Pool.cpp',
 
         # font
         'lost/font/BitmapFont.cpp',

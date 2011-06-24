@@ -1,5 +1,7 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/event/Listener.h"
+#include "lost/common/Logger.h"
+#include "lost/event/Pool.h"
 
 using namespace tthread;
 
@@ -10,6 +12,7 @@ namespace event
 
 EventDispatcher::EventDispatcher()
 {
+  pool = Pool::instance();
 }
 
 EventDispatcher::~EventDispatcher()
