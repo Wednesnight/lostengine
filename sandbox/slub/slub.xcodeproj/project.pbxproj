@@ -38,8 +38,33 @@
 		8D8F4DB913C3B77B00848D6C /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D9C13C3B77B00848D6C /* lvm.c */; };
 		8D8F4DBA13C3B77B00848D6C /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D9D13C3B77B00848D6C /* lzio.c */; };
 		8D8F4DBC13C3B78900848D6C /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4DBB13C3B78900848D6C /* print.c */; };
+		8DC0A41A13CB9787008E55C2 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC0A3FE13CB96C7008E55C2 /* libLostEngine.a */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8DC0A3F913CB96C7008E55C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03E55F9365267AD1EA0DE4FC /* Launcher.app */;
+			remoteInfo = Launcher;
+		};
+		8DC0A3FB13CB96C7008E55C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7147607B5175C9321BFF3496 /* UnitTests */;
+			remoteInfo = UnitTests;
+		};
+		8DC0A3FD13CB96C7008E55C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6A19CDA7317562AEAF47AF73 /* libLostEngine.a */;
+			remoteInfo = LostEngine;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		8DD76F690486A84900D96B5E /* CopyFiles */ = {
@@ -95,6 +120,7 @@
 		8D8F4D9C13C3B77B00848D6C /* lvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lvm.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lvm.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D9D13C3B77B00848D6C /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lzio.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lzio.c; sourceTree = SOURCE_ROOT; };
 		8D8F4DBB13C3B78900848D6C /* print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = print.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/print.c; sourceTree = SOURCE_ROOT; };
+		8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = /Users/jomanto/coding/wednesnight/projects/lostengine/LostEngine.xcodeproj; sourceTree = "<absolute>"; };
 		8DD76F6C0486A84900D96B5E /* template-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "template-test"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC0A41A13CB9787008E55C2 /* libLostEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +142,7 @@
 				3E2C0A8713C6FEE00070A4B5 /* resources */,
 				08FB7795FE84155DC02AAC07 /* source */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */,
 			);
 			name = "template-test";
 			sourceTree = "<group>";
@@ -197,6 +225,16 @@
 			name = lua;
 			sourceTree = "<group>";
 		};
+		8DC0A3EF13CB96C7008E55C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC0A3FA13CB96C7008E55C2 /* Launcher.app */,
+				8DC0A3FC13CB96C7008E55C2 /* UnitTests */,
+				8DC0A3FE13CB96C7008E55C2 /* libLostEngine.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -225,6 +263,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -234,12 +273,42 @@
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* template-test */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8DC0A3EF13CB96C7008E55C2 /* Products */;
+					ProjectRef = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8DD76F620486A84900D96B5E /* template-test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8DC0A3FA13CB96C7008E55C2 /* Launcher.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Launcher.app;
+			remoteRef = 8DC0A3F913CB96C7008E55C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8DC0A3FC13CB96C7008E55C2 /* UnitTests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = UnitTests;
+			remoteRef = 8DC0A3FB13CB96C7008E55C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8DC0A3FE13CB96C7008E55C2 /* libLostEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLostEngine.a;
+			remoteRef = 8DC0A3FD13CB96C7008E55C2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DD76F640486A84900D96B5E /* Sources */ = {
@@ -311,7 +380,6 @@
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -319,26 +387,24 @@
 				HEADER_SEARCH_PATHS = (
 					../../thirdparty/lua/lua_5_1_4/include,
 					include,
+					../../projects/lostengine,
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
 		1DEB923708733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../../thirdparty/lua/lua_5_1_4/include,
 					include,
+					../../projects/lostengine,
 				);
 				PREBINDING = NO;
-				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};

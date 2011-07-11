@@ -61,6 +61,15 @@ namespace slub {
   fields fields::instance;
 
   template<typename T>
+  struct constructor {
+
+    static T* newInstance(lua_State* L) {
+      return new T();
+    }
+
+  };
+
+  template<typename T>
   struct clazz {
 
     lua_State* state;
@@ -267,8 +276,9 @@ namespace slub {
   private:
 
     static int __call(lua_State* L) {
+      T* instance = constructor<T>::newInstance(L);
       wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
-      w->ref = new T();
+      w->ref = instance;
       w->gc = true;
       luaL_getmetatable(L, lua_tostring(L, lua_upvalueindex(1)));
       lua_setmetatable(L, -2);
@@ -356,49 +366,49 @@ namespace slub {
     template<typename R, typename F>
     static int __add(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator+(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref + converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R, typename F>
     static int __sub(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator-(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref - converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R, typename F>
     static int __mul(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator*(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref * converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R, typename F>
     static int __div(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator/(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref / converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R, typename F>
     static int __mod(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator%(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref % converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R, typename F>
     static int __pow(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator^(converter<F>::get(L, -1)));
+      converter<R>::push(L, *r->ref ^ converter<F>::get(L, -1));
       return 1;
     }
     
     template<typename R>
     static int __unm(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, r->ref->operator-());
+      converter<R>::push(L, -(*r->ref));
       return 1;
     }
     

@@ -55,6 +55,20 @@ namespace slub {
 
   };
 
+  template<>
+  struct converter<float> {
+    
+    static int get(lua_State* L, int index) {
+      return lua_tonumber(L, index);
+    }
+    
+    static int push(lua_State* L, int value) {
+      lua_pushnumber(L, value);
+      return 1;
+    }
+    
+  };
+  
 }
 
 #endif
