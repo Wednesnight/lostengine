@@ -3,9 +3,14 @@ struct foo {
   int bar;
   foo* f;
   
-  foo() {
+  foo(int i) {
     std::cout << "foo:ctor" << std::endl;
-    this->bar = 111;
+    this->bar = i;
+  }
+  
+  foo(int i, int j) {
+    std::cout << "foo:ctor2" << std::endl;
+    this->bar = j;
   }
   
   ~foo() {

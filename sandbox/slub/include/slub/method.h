@@ -139,6 +139,7 @@ namespace slub {
     }
     
     static int _call(lua_State* L) {
+      std::cout << lua_gettop(L) << std::endl;
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
       method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
       converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1)));

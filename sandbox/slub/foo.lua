@@ -1,7 +1,7 @@
-local f = foo()
+local f = foo(111)
 print(f)
 
-local f2 = foo()
+local f2 = foo(111, 112)
 print(f2)
 
 f.bar = 1337
