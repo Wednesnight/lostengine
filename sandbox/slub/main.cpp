@@ -36,12 +36,12 @@ namespace slub {
   template<>
   struct converter<Vec2> {
     
-    static Vec2& get(lua_State* L, int index) {
+    static Vec2 get(lua_State* L, int index) {
       return *converter<Vec2*>::get(L, index);
     }
     
     static int push(lua_State* L, Vec2 value) {
-      return converter<Vec2*>::push(L, &value);
+      return converter<Vec2*>::push(L, new Vec2(value), true);
     }
     
     static int push(lua_State* L, float value) {
@@ -50,6 +50,10 @@ namespace slub {
     
   };
   
+}
+
+int testing(int i, int j, int k) {
+  return i+j+k;
 }
 
 int main (int argc, char * const argv[]) {
@@ -62,7 +66,7 @@ int main (int argc, char * const argv[]) {
   luaopen_math(L);
   luaopen_debug(L);
 
-  slub::clazz<foo>("foo", L)
+  slub::clazz<foo>(L, "foo")
     .field("bar", &foo::bar)
     .field("f", &foo::f)
     .method("doStuff", &foo::doStuff)
@@ -83,30 +87,50 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
-  slub::clazz<std::string>("str", L);
+  slub::clazz<std::string>(L, "str");
 
-  luaL_dostring(L, "local s = str()");
+  if (luaL_dostring(L, "local s = str()")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
 
-  // TODO: namespaces
+  slub::package(L, "lost").package("math").clazz<Vec2>("Vec2")
+// TODO: method overloading ?
+    .method("zero", &Vec2::zero)
+    .field("x", &Vec2::x)
+    .field("y", &Vec2::y)
+    .field("width", &Vec2::width)
+    .field("height", &Vec2::height)
+    .mul<Vec2, float>()
+    .mul<Vec2, Vec2>()
+    .add<Vec2, Vec2>()
+    .sub<Vec2, Vec2>()
+    .tostring();
 
-  slub::clazz<Vec2>("Vec2", L)
-  .method("zero", &Vec2::zero)
-  .field("x", &Vec2::x)
-  .field("y", &Vec2::y)
-  .field("width", &Vec2::width)
-  .field("height", &Vec2::height)
-  .mul<Vec2, float>()
-  .mul<Vec2, Vec2>()
-  .add<Vec2, Vec2>()
-  .sub<Vec2, Vec2>();
+  if (luaL_dostring(L,
+                "local v2 = lost.math.Vec2() "
+                "local vec2 = lost.math.Vec2(10, 10) "
+                "local vec2_2 = lost.math.Vec2(vec2) "
+                "vec2_2.x = 11 "
+                "vec2_2.y = 11 "
+                "print(vec2 * vec2_2) "
 
-  // TODO: external operators
+// TODO: operator overloading
+//                "print(vec2 * 10) "
 
-//  .tostring();
-
-  luaL_dostring(L, "local v2 = Vec2() local vec2 = Vec2(10, 10) local vec2_2 = Vec2(vec2) vec2_2.x = 11 vec2_2.y = 11 print(vec2 * vec2_2) print(vec2 - vec2_2)");
+                "print(vec2 + vec2_2) "
+                "print(vec2 - vec2_2) "
+                "local v = vec2 - vec2_2 "
+                "print(v.x, v.y)")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
 
   // TODO: simple functions
+
+  slub::function<int, int, int, int>(L, "testing", &testing);
+
+  if (luaL_dostring(L, "print(testing(1, 2, 3))")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
 
 /*
   def("len", (float(*)(const Vec2&))&len)

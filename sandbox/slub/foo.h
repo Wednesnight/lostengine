@@ -2,7 +2,7 @@ struct foo {
   
   int bar;
   foo* f;
-  
+
   foo(int i) {
     std::cout << "foo:ctor" << std::endl;
     this->bar = i;
@@ -33,11 +33,6 @@ struct foo {
     std::cout << "foo::doStuff(" << i << ")" << std::endl;
   }
 
-  std::ostream& operator<<(std::ostream& s) {
-    s << "foo: " << "bar = " << bar;
-    return s;
-  }
-  
   int operator+(int i) {
     return bar + i;
   }
@@ -77,5 +72,10 @@ struct foo {
   bool operator<=(const foo& f) {
     return bar <= f.bar;
   }
-  
+
 };
+
+std::ostream& operator<<(std::ostream& s, const foo& f) {
+  s << "foo: " << "bar = " << f.bar;
+  return s;
+}

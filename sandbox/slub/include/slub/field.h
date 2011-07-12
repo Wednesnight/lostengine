@@ -43,18 +43,40 @@ namespace slub {
     
     int get(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      lua_pushnumber(L, t->ref->*m);
+      lua_pushinteger(L, t->ref->*m);
       return 1;
     }
 
     int set(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      t->ref->*m = lua_tonumber(L, -1);
+      t->ref->*m = lua_tointeger(L, -1);
       return 0;
     }
 
   };
 
+  template<typename T>
+  struct field<T, float> : public abstract_field {
+    
+    float T::*m;
+    
+    field(float T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
+      lua_pushnumber(L, t->ref->*m);
+      return 1;
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
+      t->ref->*m = lua_tonumber(L, -1);
+      return 0;
+    }
+    
+  };
+  
 }
 
 #endif
