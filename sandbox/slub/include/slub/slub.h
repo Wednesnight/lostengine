@@ -10,7 +10,9 @@ extern "C" {
 #include <slub/clazz.h>
 #include <slub/converter.h>
 #include <slub/field.h>
+#include <slub/function.h>
 #include <slub/method.h>
+#include <slub/package.h>
 #include <slub/registry.h>
 #include <slub/wrapper.h>
 

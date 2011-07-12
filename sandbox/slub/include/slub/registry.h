@@ -11,15 +11,15 @@ namespace slub {
     static std::string typeName;
 
     static void registerType(const std::string& typeName) {
-      registry::typeName = typeName;
+      registry<T>::typeName = typeName;
     }
 
     static bool isRegisteredType() {
-      return registry::typeName.size() > 0;
+      return registry<T>::typeName.size() > 0;
     }
 
     static std::string getTypeName() {
-      return registry::typeName;
+      return registry<T>::typeName;
     }
 
   };

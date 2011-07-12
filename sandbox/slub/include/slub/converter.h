@@ -24,11 +24,15 @@ namespace slub {
     }
 
     static int push(lua_State* L, T value) {
+      return push(L, value, false);
+    }
+
+    static int push(lua_State* L, T value, bool gc) {
       if (registry<T>::isRegisteredType()) {
         std::cout << "push, registered" << std::endl;
         wrapper<T>* w = (wrapper<T>*) lua_newuserdata(L, sizeof(wrapper<T>));
         w->ref = value;
-        w->gc = false;
+        w->gc = gc;
         luaL_getmetatable(L, registry<T>::getTypeName().c_str());
         lua_setmetatable(L, -2);
       }
@@ -45,11 +49,11 @@ namespace slub {
   struct converter<int> {
 
     static int get(lua_State* L, int index) {
-      return lua_tonumber(L, index);
+      return lua_tointeger(L, index);
     }
 
     static int push(lua_State* L, int value) {
-      lua_pushnumber(L, value);
+      lua_pushinteger(L, value);
       return 1;
     }
 
@@ -58,11 +62,11 @@ namespace slub {
   template<>
   struct converter<float> {
     
-    static int get(lua_State* L, int index) {
+    static float get(lua_State* L, int index) {
       return lua_tonumber(L, index);
     }
     
-    static int push(lua_State* L, int value) {
+    static int push(lua_State* L, float value) {
       lua_pushnumber(L, value);
       return 1;
     }

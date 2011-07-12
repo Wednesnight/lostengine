@@ -74,55 +74,56 @@ namespace slub {
 
     lua_State* state;
     std::string name;
+    int target;
 
-    clazz(const std::string& name, lua_State* L) : state(L), name(name) {
+    clazz(lua_State* L, const std::string& name, int target = -1) : state(L), name(name), target(target) {
       registry<T*>::registerType(name);
 
-      lua_newtable(L);
-      int methods = lua_gettop(L);
+      lua_newtable(state);
+      int methods = lua_gettop(state);
       
-      luaL_newmetatable(L, name.c_str());
-      int metatable = lua_gettop(L);
+      luaL_newmetatable(state, name.c_str());
+      int metatable = lua_gettop(state);
       
       // store method table in globals so that
       // scripts can add functions written in Lua.
-      lua_pushstring(L, name.c_str());
-      lua_pushvalue(L, methods);
-      lua_settable(L, LUA_GLOBALSINDEX);
+      lua_pushstring(state, name.c_str());
+      lua_pushvalue(state, methods);
+      lua_settable(state, target != -1 ? target : LUA_GLOBALSINDEX);
       
-      lua_pushliteral(L, "__metatable");
-      lua_pushvalue(L, methods);
-      lua_settable(L, metatable);  // hide metatable from Lua getmetatable()
+      lua_pushliteral(state, "__metatable");
+      lua_pushvalue(state, methods);
+      lua_settable(state, metatable);  // hide metatable from Lua getmetatable()
       
-      lua_newtable(L);                // mt for method table
-      int mt = lua_gettop(L);
-      lua_pushliteral(L, "__call");
-      lua_pushstring(L, name.c_str());
-      lua_pushcclosure(L, __call, 1);
-      lua_settable(L, mt);            // mt.__call = ctor
-      lua_setmetatable(L, methods);
+      lua_newtable(state);                // mt for method table
+      int mt = lua_gettop(state);
+      lua_pushliteral(state, "__call");
+      lua_pushstring(state, name.c_str());
+      lua_pushcclosure(state, __call, 1);
+      lua_settable(state, mt);            // mt.__call = ctor
+      lua_setmetatable(state, methods);
       
-      lua_pushliteral(L, "__gc");
-      lua_pushstring(L, name.c_str());
-      lua_pushcclosure(L, __gc, 1);
-      lua_settable(L, metatable);
+      lua_pushliteral(state, "__gc");
+      lua_pushstring(state, name.c_str());
+      lua_pushcclosure(state, __gc, 1);
+      lua_settable(state, metatable);
       
-      lua_pushliteral(L, "__index");
-      lua_pushstring(L, name.c_str());
-      lua_pushcclosure(L, __index, 1);
-      lua_settable(L, metatable);
+      lua_pushliteral(state, "__index");
+      lua_pushstring(state, name.c_str());
+      lua_pushcclosure(state, __index, 1);
+      lua_settable(state, metatable);
       
-      lua_pushliteral(L, "__newindex");
-      lua_pushstring(L, name.c_str());
-      lua_pushcclosure(L, __newindex, 1);
-      lua_settable(L, metatable);
+      lua_pushliteral(state, "__newindex");
+      lua_pushstring(state, name.c_str());
+      lua_pushcclosure(state, __newindex, 1);
+      lua_settable(state, metatable);
       
-      lua_pushliteral(L, "__eq");
-      lua_pushstring(L, name.c_str());
-      lua_pushcclosure(L, __eq, 1);
-      lua_settable(L, metatable);
+      lua_pushliteral(state, "__eq");
+      lua_pushstring(state, name.c_str());
+      lua_pushcclosure(state, __eq, 1);
+      lua_settable(state, metatable);
       
-      lua_pop(L, 2);  // drop metatable and method table
+      lua_pop(state, 2);  // drop metatable and method table
     }
     
     template<typename F>
@@ -358,7 +359,7 @@ namespace slub {
     static int __tostring(lua_State* L) {
       wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
       std::stringstream s;
-      r->ref->operator<<(s);
+      s << *r->ref;
       lua_pushstring(L, s.str().c_str());
       return 1;
     }
