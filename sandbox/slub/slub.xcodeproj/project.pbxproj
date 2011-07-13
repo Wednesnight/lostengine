@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E2C0A8C13C6FF7F0070A4B5 /* foo.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E2C0A8813C6FEF50070A4B5 /* foo.lua */; };
+		3E5A746A13CD8BA00051A333 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A746713CD8B970051A333 /* libLostEngine.a */; };
 		8D8F4D9E13C3B77B00848D6C /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8113C3B77B00848D6C /* lapi.c */; };
 		8D8F4D9F13C3B77B00848D6C /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8213C3B77B00848D6C /* lauxlib.c */; };
 		8D8F4DA013C3B77B00848D6C /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8313C3B77B00848D6C /* lbaselib.c */; };
@@ -38,26 +39,25 @@
 		8D8F4DB913C3B77B00848D6C /* lvm.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D9C13C3B77B00848D6C /* lvm.c */; };
 		8D8F4DBA13C3B77B00848D6C /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D9D13C3B77B00848D6C /* lzio.c */; };
 		8D8F4DBC13C3B78900848D6C /* print.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4DBB13C3B78900848D6C /* print.c */; };
-		8DBD2E6A13CCC7BC0013AC75 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DBD2E6513CCC7A90013AC75 /* libLostEngine.a */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8DBD2E6013CCC7A90013AC75 /* PBXContainerItemProxy */ = {
+		3E5A746213CD8B970051A333 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 03E55F9365267AD1EA0DE4FC /* Launcher.app */;
 			remoteInfo = Launcher;
 		};
-		8DBD2E6213CCC7A90013AC75 /* PBXContainerItemProxy */ = {
+		3E5A746413CD8B970051A333 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7147607B5175C9321BFF3496 /* UnitTests */;
 			remoteInfo = UnitTests;
 		};
-		8DBD2E6413CCC7A90013AC75 /* PBXContainerItemProxy */ = {
+		3E5A746613CD8B970051A333 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
@@ -122,7 +122,7 @@
 		8D8F4DBB13C3B78900848D6C /* print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = print.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/print.c; sourceTree = SOURCE_ROOT; };
 		8DBD2E7713CCC7D70013AC75 /* package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = package.h; path = include/slub/package.h; sourceTree = "<group>"; };
 		8DBD305A13CCD7E40013AC75 /* function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = function.h; path = include/slub/function.h; sourceTree = "<group>"; };
-		8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* template-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "template-test"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DBD2E6A13CCC7BC0013AC75 /* libLostEngine.a in Frameworks */,
+				3E5A746A13CD8BA00051A333 /* libLostEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +174,16 @@
 				3E2C0A8813C6FEF50070A4B5 /* foo.lua */,
 			);
 			name = resources;
+			sourceTree = "<group>";
+		};
+		3E5A745C13CD8B970051A333 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3E5A746313CD8B970051A333 /* Launcher.app */,
+				3E5A746513CD8B970051A333 /* UnitTests */,
+				3E5A746713CD8B970051A333 /* libLostEngine.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3EE92C6213C6E902001D1D17 /* slub */ = {
@@ -229,16 +239,6 @@
 			name = lua;
 			sourceTree = "<group>";
 		};
-		8DBD2E5A13CCC7A90013AC75 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8DBD2E6113CCC7A90013AC75 /* Launcher.app */,
-				8DBD2E6313CCC7A90013AC75 /* UnitTests */,
-				8DBD2E6513CCC7A90013AC75 /* libLostEngine.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -267,7 +267,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -279,7 +278,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 8DBD2E5A13CCC7A90013AC75 /* Products */;
+					ProductGroup = 3E5A745C13CD8B970051A333 /* Products */;
 					ProjectRef = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 				},
 			);
@@ -291,25 +290,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8DBD2E6113CCC7A90013AC75 /* Launcher.app */ = {
+		3E5A746313CD8B970051A333 /* Launcher.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = Launcher.app;
-			remoteRef = 8DBD2E6013CCC7A90013AC75 /* PBXContainerItemProxy */;
+			remoteRef = 3E5A746213CD8B970051A333 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8DBD2E6313CCC7A90013AC75 /* UnitTests */ = {
+		3E5A746513CD8B970051A333 /* UnitTests */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
 			path = UnitTests;
-			remoteRef = 8DBD2E6213CCC7A90013AC75 /* PBXContainerItemProxy */;
+			remoteRef = 3E5A746413CD8B970051A333 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8DBD2E6513CCC7A90013AC75 /* libLostEngine.a */ = {
+		3E5A746713CD8B970051A333 /* libLostEngine.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libLostEngine.a;
-			remoteRef = 8DBD2E6413CCC7A90013AC75 /* PBXContainerItemProxy */;
+			remoteRef = 3E5A746613CD8B970051A333 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

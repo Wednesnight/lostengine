@@ -52,6 +52,22 @@ namespace slub {
   
 }
 
+void testing0() {
+  std::cout << "testing0()" << std::endl;
+}
+
+void testing1(int i) {
+  std::cout << "testing1(" << i << ")" << std::endl;
+}
+
+void testing2(int i, int j) {
+  std::cout << "testing2(" << i << ", " << j << ")" << std::endl;
+}
+
+void testing3(int i, int j, int k) {
+  std::cout << "testing3(" << i << ", " << j << ", " << k << ")" << std::endl;
+}
+
 int testing(int i, int j, int k) {
   return i+j+k;
 }
@@ -126,9 +142,18 @@ int main (int argc, char * const argv[]) {
 
   // TODO: simple functions
 
-  slub::function<int, int, int, int>(L, "testing", &testing);
+  slub::function(L, "testing0", &testing0);
+  slub::function(L, "testing1", &testing1);
+  slub::function(L, "testing2", &testing2);
+  slub::function(L, "testing3", &testing3);
+  slub::function(L, "testing", &testing);
 
-  if (luaL_dostring(L, "print(testing(1, 2, 3))")) {
+  if (luaL_dostring(L,
+                    "testing0() "
+                    "testing1(1) "
+                    "testing2(1, 2) "
+                    "testing3(1, 2, 3) "
+                    "print(testing(1, 2, 3)) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
