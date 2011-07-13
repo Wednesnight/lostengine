@@ -50,6 +50,32 @@ namespace slub {
     
   };
   
+  template<>
+  struct converter<const Vec2&> {
+    
+    static const Vec2& get(lua_State* L, int index) {
+      return *converter<Vec2*>::get(L, index);
+    }
+    
+    static int push(lua_State* L, const Vec2& value) {
+      return converter<Vec2*>::push(L, new Vec2(value), true);
+    }
+    
+  };
+  
+  template<>
+  struct converter<Vec2&> {
+    
+    static Vec2& get(lua_State* L, int index) {
+      return *converter<Vec2*>::get(L, index);
+    }
+    
+    static int push(lua_State* L, Vec2& value) {
+      return converter<Vec2*>::push(L, new Vec2(value), true);
+    }
+    
+  };
+  
 }
 
 void testing0() {
@@ -122,6 +148,14 @@ int main (int argc, char * const argv[]) {
     .sub<Vec2, Vec2>()
     .tostring();
 
+  slub::package lost_math = slub::package(L, "lost").package("math");
+  lost_math.function("len", (float(*)(const Vec2&))&len);
+  lost_math.function("squlen", (float(*)(const Vec2&))&squlen);
+  lost_math.function("normalise", (Vec2&(*)(Vec2&))&normalise);
+  lost_math.function("perpendicular", (Vec2(*)(Vec2&))&perpendicular);
+  lost_math.function("angle", (float(*)(const Vec2&, const Vec2&))&angle);
+  lost_math.function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
+
   if (luaL_dostring(L,
                 "local v2 = lost.math.Vec2() "
                 "local vec2 = lost.math.Vec2(10, 10) "
@@ -136,7 +170,14 @@ int main (int argc, char * const argv[]) {
                 "print(vec2 + vec2_2) "
                 "print(vec2 - vec2_2) "
                 "local v = vec2 - vec2_2 "
-                "print(v.x, v.y)")) {
+                "print(v.x, v.y) "
+                "print(lost.math.len(v)) "
+                "print(lost.math.squlen(v)) "
+                "print(tostring(lost.math.normalise(v))) "
+                "print(tostring(lost.math.perpendicular(v))) "
+                "print(lost.math.angle(v, v2)) "
+                "print(lost.math.compare(v, v2, 0.1)) "
+                "print(lost.math.compare(v, v, 0.1)) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
@@ -157,15 +198,6 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
-/*
-  def("len", (float(*)(const Vec2&))&len)
-  def("squlen", (float(*)(const Vec2&))&squlen)
-  def("normalise", (Vec2&(*)(Vec2&))&normalise)
-  def("perpendicular", (Vec2(*)(Vec2&))&perpendicular)
-  def("angle", (float(*)(const Vec2&, const Vec2&))&angle)
-  def("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare)
-*/
-  
   lua_gc(L, LUA_GCCOLLECT, 0);
   lua_close(L);
 

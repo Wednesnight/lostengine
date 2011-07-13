@@ -46,6 +46,20 @@ namespace slub {
   };
 
   template<>
+  struct converter<bool> {
+    
+    static bool get(lua_State* L, int index) {
+      return lua_toboolean(L, index);
+    }
+    
+    static int push(lua_State* L, bool value) {
+      lua_pushboolean(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
   struct converter<int> {
 
     static int get(lua_State* L, int index) {

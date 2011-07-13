@@ -47,21 +47,21 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 03E55F9365267AD1EA0DE4FC /* Launcher.app */;
+			remoteGlobalIDString = 03E55F9365267AD1EA0DE4FC;
 			remoteInfo = Launcher;
 		};
 		3E5A746413CD8B970051A333 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 7147607B5175C9321BFF3496 /* UnitTests */;
+			remoteGlobalIDString = 7147607B5175C9321BFF3496;
 			remoteInfo = UnitTests;
 		};
 		3E5A746613CD8B970051A333 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 6A19CDA7317562AEAF47AF73 /* libLostEngine.a */;
+			remoteGlobalIDString = 6A19CDA7317562AEAF47AF73;
 			remoteInfo = LostEngine;
 		};
 /* End PBXContainerItemProxy section */
@@ -267,6 +267,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
