@@ -156,7 +156,10 @@ int main (int argc, char * const argv[]) {
   lost_math.function("angle", (float(*)(const Vec2&, const Vec2&))&angle);
   lost_math.function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
 
+  slub::package(L, "lost").package("math").package("Vec2").function("nestedTesting0", &testing0);
+
   if (luaL_dostring(L,
+                "lost.math.Vec2.nestedTesting0() "
                 "local v2 = lost.math.Vec2() "
                 "local vec2 = lost.math.Vec2(10, 10) "
                 "local vec2_2 = lost.math.Vec2(vec2) "
