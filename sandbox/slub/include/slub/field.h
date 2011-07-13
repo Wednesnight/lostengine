@@ -34,6 +34,28 @@ namespace slub {
   };
 
   template<typename T>
+  struct field<T, bool> : public abstract_field {
+    
+    bool T::*m;
+    
+    field(bool T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
+      lua_pushboolean(L, t->ref->*m);
+      return 1;
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
+      t->ref->*m = lua_toboolean(L, -1);
+      return 0;
+    }
+    
+  };
+  
+  template<typename T>
   struct field<T, int> : public abstract_field {
 
     int T::*m;
