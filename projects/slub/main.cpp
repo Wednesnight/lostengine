@@ -133,6 +133,7 @@ int main (int argc, char * const argv[]) {
   slub::package(L, "lost").package("math").package("Vec2").function("nestedTesting0", &testing0);
 
   if (luaL_dostring(L,
+                "print(lost) print(lost.math) print(lost.math.Vec2) print(lost.math.Vec2.nestedTesting0)"
                 "lost.math.Vec2.nestedTesting0() "
                 "local v2 = lost.math.Vec2() "
                 "local vec2 = lost.math.Vec2(10, 10) "

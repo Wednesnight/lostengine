@@ -87,9 +87,8 @@ namespace slub {
       
       // store method table in globals so that
       // scripts can add functions written in Lua.
-      lua_pushstring(state, name.c_str());
       lua_pushvalue(state, methods);
-      lua_settable(state, target != -1 ? target : LUA_GLOBALSINDEX);
+      lua_setfield(state, target != -1 ? target : LUA_GLOBALSINDEX, name.c_str());
       
       lua_pushliteral(state, "__metatable");
       lua_pushvalue(state, methods);

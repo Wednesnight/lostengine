@@ -28,10 +28,9 @@ namespace slub {
     static void add(lua_State* L, const std::string& name, abstract_function_wrapper* f, int target) {
       instance.functions[name] = f;
 
-      lua_pushstring(L, name.c_str());
       lua_pushlightuserdata(L, f);
       lua_pushcclosure(L, call, 1);
-      lua_settable(L, target != -1 ? target : LUA_GLOBALSINDEX);
+      lua_setfield(L, target != -1 ? target : LUA_GLOBALSINDEX, name.c_str());
     }
 
     static int call(lua_State* L) {
