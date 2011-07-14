@@ -52,8 +52,7 @@ namespace slub {
     }
     
     int call(lua_State* L) {
-      converter<R>::push(L, f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1)));
-      return 1;
+      return converter<R>::push(L, f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1)));
     }
     
   };
@@ -118,6 +117,51 @@ namespace slub {
     
   };
   
+  template<>
+  struct function_wrapper<void, lua_State*, empty, empty> : public abstract_function_wrapper {
+    
+    void (*f)(lua_State*);
+    
+    function_wrapper(void (*f)(lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      f(L);
+      return 0;
+    }
+    
+  };
+  
+  template<typename arg1>
+  struct function_wrapper<void, arg1, lua_State*, empty> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, lua_State*);
+    
+    function_wrapper(void (*f)(arg1, lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -1), L);
+      return 0;
+    }
+    
+  };
+  
+  template<typename arg1, typename arg2>
+  struct function_wrapper<void, arg1, arg2, lua_State*> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, arg2, lua_State*);
+    
+    function_wrapper(void (*f)(arg1, arg2, lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1), L);
+      return 0;
+    }
+    
+  };
+  
   template<typename R>
   struct function_wrapper<R, empty, empty, empty> : public abstract_function_wrapper {
     
@@ -127,8 +171,7 @@ namespace slub {
     }
     
     int call(lua_State* L) {
-      converter<R>::push(L, f());
-      return 1;
+      return converter<R>::push(L, f());
     }
     
   };
@@ -142,8 +185,7 @@ namespace slub {
     }
     
     int call(lua_State* L) {
-      converter<R>::push(L, f(converter<arg1>::get(L, -1)));
-      return 1;
+      return converter<R>::push(L, f(converter<arg1>::get(L, -1)));
     }
     
   };
@@ -157,8 +199,49 @@ namespace slub {
     }
     
     int call(lua_State* L) {
-      converter<R>::push(L, f(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1)));
-      return 1;
+      return converter<R>::push(L, f(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1)));
+    }
+    
+  };
+  
+  template<typename R>
+  struct function_wrapper<R, lua_State*, empty, empty> : public abstract_function_wrapper {
+    
+    R (*f)(lua_State*);
+    
+    function_wrapper(R (*f)(lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(L));
+    }
+    
+  };
+  
+  template<typename R, typename arg1>
+  struct function_wrapper<R, arg1, lua_State*, empty> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, lua_State*);
+    
+    function_wrapper(R (*f)(arg1, lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -1), L));
+    }
+    
+  };
+  
+  template<typename R, typename arg1, typename arg2>
+  struct function_wrapper<R, arg1, arg2, lua_State*> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, arg2, lua_State*);
+    
+    function_wrapper(R (*f)(arg1, arg2, lua_State*)) : f(f) {
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1), L));
     }
     
   };

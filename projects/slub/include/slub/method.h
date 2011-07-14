@@ -33,8 +33,7 @@ namespace slub {
     static int _call(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
       method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1), converter<arg2>::get(L, -2)));
-      return 1;
+      return converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1), converter<arg2>::get(L, -2)));
     }
     
   };
@@ -87,8 +86,7 @@ namespace slub {
     static int _call(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
       method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      converter<ret>::push(L, (*m)(t->ref));
-      return 1;
+      return converter<ret>::push(L, (*m)(t->ref));
     }
     
   };
@@ -142,8 +140,7 @@ namespace slub {
       std::cout << lua_gettop(L) << std::endl;
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
       method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1)));
-      return 1;
+      return converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1)));
     }
     
   };

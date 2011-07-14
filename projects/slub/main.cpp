@@ -50,32 +50,6 @@ namespace slub {
     
   };
   
-  template<>
-  struct converter<const Vec2&> {
-    
-    static const Vec2& get(lua_State* L, int index) {
-      return *converter<Vec2*>::get(L, index);
-    }
-    
-    static int push(lua_State* L, const Vec2& value) {
-      return converter<Vec2*>::push(L, new Vec2(value), true);
-    }
-    
-  };
-  
-  template<>
-  struct converter<Vec2&> {
-    
-    static Vec2& get(lua_State* L, int index) {
-      return *converter<Vec2*>::get(L, index);
-    }
-    
-    static int push(lua_State* L, Vec2& value) {
-      return converter<Vec2*>::push(L, new Vec2(value), true);
-    }
-    
-  };
-  
 }
 
 void testing0() {

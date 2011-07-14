@@ -21,8 +21,7 @@ namespace slub {
 
     int get(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      converter<F>::push(L, t->ref->*m);
-      return 1;
+      return converter<F>::push(L, t->ref->*m);
     }
 
     int set(lua_State* L) {
