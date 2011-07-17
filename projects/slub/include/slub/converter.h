@@ -41,15 +41,11 @@ namespace slub {
     }
 
     static int push(lua_State* L, T value) {
-      return push(L, value, false);
-    }
-
-    static int push(lua_State* L, T value, bool gc) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "push, registered" << std::endl;
         wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
-        w->ref = &value;
-        w->gc = gc;
+        w->ref = new T(value);
+        w->gc = true;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
       }

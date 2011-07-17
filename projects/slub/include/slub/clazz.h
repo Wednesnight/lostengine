@@ -6,6 +6,7 @@
 #include <slub/converter.h>
 #include <slub/field.h>
 #include <slub/method.h>
+#include <slub/operators.h>
 #include <slub/registry.h>
 #include <slub/wrapper.h>
 #include <string>
@@ -23,10 +24,10 @@ namespace slub {
     std::map<std::string, std::list<abstract_constructor*> > constructorMap;
     std::map<std::string, abstract_field*> fieldMap;
     std::map<std::string, std::list<abstract_method*> > methodMap;
+    std::map<std::string, std::list<abstract_operator*> > operatorMap;
     
     ~fields() {
-      std::cout << "cleanup fields" << std::endl;
-
+      std::cout << "cleanup constructors" << std::endl;
       for (std::map<std::string, std::list<abstract_constructor*> >::iterator idx = constructorMap.begin(); idx != constructorMap.end(); ++idx) {
         for (std::list<abstract_constructor*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
           delete *midx;
@@ -34,17 +35,27 @@ namespace slub {
       }
       constructorMap.clear();
 
+      std::cout << "cleanup fields" << std::endl;
       for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
         delete idx->second;
       }
       fieldMap.clear();
 
+      std::cout << "cleanup methods" << std::endl;
       for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
         for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
           delete *midx;
         }
       }
       methodMap.clear();
+
+      std::cout << "cleanup operators" << std::endl;
+      for (std::map<std::string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
+        for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
+          delete *midx;
+        }
+      }
+      operatorMap.clear();
     }
     
     static void addConstructor(const std::string& className, abstract_constructor* ctor) {
@@ -56,6 +67,10 @@ namespace slub {
     }
     
     static abstract_constructor* getConstructor(const std::string& className, lua_State* L) {
+      if (!containsConstructor(className)) {
+        throw std::runtime_error("No constructor defined for class: "+ className);
+      }
+
       for (std::list<abstract_constructor*>::iterator cidx = instance.constructorMap[className].begin(); cidx != instance.constructorMap[className].end(); ++cidx) {
         if ((*cidx)->check(L)) {
           return *cidx;
@@ -73,6 +88,10 @@ namespace slub {
     }
     
     static abstract_field* getField(const std::string& fieldName) {
+      if (!containsField(fieldName)) {
+        throw std::runtime_error("No such field: "+ fieldName);
+      }
+      
       return instance.fieldMap[fieldName];
     }
     
@@ -85,9 +104,34 @@ namespace slub {
     }
     
     static abstract_method* getMethod(const std::string& methodName, lua_State* L) {
+      if (!containsMethod(methodName)) {
+        throw std::runtime_error("No such method: "+ methodName);
+      }
+      
       for (std::list<abstract_method*>::iterator midx = instance.methodMap[methodName].begin(); midx != instance.methodMap[methodName].end(); ++midx) {
         if ((*midx)->check(L)) {
           return *midx;
+        }
+      }
+      throw std::runtime_error("No matching overload found, candidates: ...");
+    }
+    
+    static void addOperator(const std::string& operatorName, abstract_operator* op) {
+      instance.operatorMap[operatorName].push_back(op);
+    }
+    
+    static bool containsOperator(const std::string& operatorName) {
+      return instance.operatorMap.find(operatorName) != instance.operatorMap.end();
+    }
+    
+    static abstract_operator* getOperator(const std::string& operatorName, lua_State* L) {
+      if (!containsOperator(operatorName)) {
+        throw std::runtime_error("No such operator: "+ operatorName);
+      }
+      
+      for (std::list<abstract_operator*>::iterator oidx = instance.operatorMap[operatorName].begin(); oidx != instance.operatorMap[operatorName].end(); ++oidx) {
+        if ((*oidx)->check(L)) {
+          return *oidx;
         }
       }
       throw std::runtime_error("No matching overload found, candidates: ...");
@@ -146,8 +190,58 @@ namespace slub {
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__eq");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __eq, 1);
+      lua_pushstring(state, (name + "__eq").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__lt");
+      lua_pushstring(state, (name + "__lt").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__le");
+      lua_pushstring(state, (name + "__le").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__tostring");
+      lua_pushstring(state, (name + "__tostring").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__add");
+      lua_pushstring(state, (name + "__add").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__sub");
+      lua_pushstring(state, (name + "__sub").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__mul");
+      lua_pushstring(state, (name + "__mul").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__div");
+      lua_pushstring(state, (name + "__div").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__mod");
+      lua_pushstring(state, (name + "__mod").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__pow");
+      lua_pushstring(state, (name + "__pow").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
+      lua_settable(state, metatable);
+      
+      lua_pushliteral(state, "__unm");
+      lua_pushstring(state, (name + "__unm").c_str());
+      lua_pushcclosure(state, __callOperator, 1);
       lua_settable(state, metatable);
       
       lua_pop(state, 2);  // drop metatable and method table
@@ -217,113 +311,91 @@ namespace slub {
       return *this;
     }
 
+    clazz& eq() {
+      fields::addOperator(name + "__eq", new eq_operator<T, T>());
+      return *this;
+    }
+
+    template<typename F>
+    clazz& eq() {
+      fields::addOperator(name + "__eq", new eq_operator<T, F>());
+      return *this;
+    }
+    
+    clazz& lt() {
+      fields::addOperator(name + "__lt", new lt_operator<T, T>());
+      return *this;
+    }
+    
+    template<typename F>
+    clazz& lt() {
+      fields::addOperator(name + "__lt", new lt_operator<T, F>());
+      return *this;
+    }
+    
+    clazz& le() {
+      fields::addOperator(name + "__le", new le_operator<T, T>());
+      return *this;
+    }
+    
+    template<typename F>
+    clazz& le() {
+      fields::addOperator(name + "__le", new le_operator<T, F>());
+      return *this;
+    }
+    
     clazz& tostring() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__tostring");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __tostring, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__tostring", new tostring_operator<T>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& add() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__add");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __add<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__add", new add_operator<T, R, F>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& sub() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__sub");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __sub<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__sub", new sub_operator<T, R, F>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& mul() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__mul");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __mul<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__mul", new mul_operator<T, R, F>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& div() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__div");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __div<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__div", new div_operator<T, R, F>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& mod() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__mod");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __mod<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__mod", new mod_operator<T, R, F>());
       return *this;
     }
     
     template<typename R, typename F>
     clazz& pow() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__pow");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __pow<R, F>, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__pow", new pow_operator<T, R, F>());
       return *this;
     }
     
-    template<typename R>
     clazz& unm() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__unm");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __unm<R>, 1);
-      lua_settable(state, metatable);
-      return *this;
-    }
-    
-    clazz& lt() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__lt");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __lt, 1);
-      lua_settable(state, metatable);
-      return *this;
-    }
-    
-    clazz& le() {
-      luaL_getmetatable(state, name.c_str());
-      int metatable = lua_gettop(state);
-      lua_pushliteral(state, "__le");
-      lua_pushstring(state, name.c_str());
-      lua_pushcclosure(state, __le, 1);
-      lua_settable(state, metatable);
+      fields::addOperator(name + "__unm", new unm_operator<T, T>());
       return *this;
     }
 
+    template<typename R>
+    clazz& unm() {
+      fields::addOperator(name + "__unm", new unm_operator<T, R>());
+      return *this;
+    }
+    
   private:
 
     static int __call(lua_State* L) {
@@ -373,10 +445,6 @@ namespace slub {
       }
     }
     
-    static int __callMethod(lua_State* L) {
-      return fields::getMethod(lua_tostring(L, lua_upvalueindex(1)), L)->call(L);
-    }
-    
     static int __newindex(lua_State* L) {
       std::string name(lua_tostring(L, -2));
       if (fields::containsField(name)) {
@@ -395,84 +463,14 @@ namespace slub {
       }
     }
     
-    static int __eq(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      wrapper<T*>* r2 = static_cast<wrapper<T*>*>(luaL_checkudata(L, -1, lua_tostring(L, lua_upvalueindex(1))));
-      lua_pushboolean(L, *r->ref == *r2->ref);
-      return 1;
+    static int __callMethod(lua_State* L) {
+      return fields::getMethod(lua_tostring(L, lua_upvalueindex(1)), L)->call(L);
     }
     
-    static int __lt(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      wrapper<T*>* r2 = static_cast<wrapper<T*>*>(luaL_checkudata(L, -1, lua_tostring(L, lua_upvalueindex(1))));
-      lua_pushboolean(L, *r->ref < *r2->ref);
-      return 1;
+    static int __callOperator(lua_State* L) {
+      return fields::getOperator(lua_tostring(L, lua_upvalueindex(1)), L)->op(L);
     }
-    
-    static int __le(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      wrapper<T*>* r2 = static_cast<wrapper<T*>*>(luaL_checkudata(L, -1, lua_tostring(L, lua_upvalueindex(1))));
-      lua_pushboolean(L, *r->ref <= *r2->ref);
-      return 1;
-    }
-    
-    static int __tostring(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      std::stringstream s;
-      s << *r->ref;
-      lua_pushstring(L, s.str().c_str());
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __add(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref + converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __sub(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref - converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __mul(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref * converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __div(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref / converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __mod(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref % converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R, typename F>
-    static int __pow(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, *r->ref ^ converter<F>::get(L, -1));
-      return 1;
-    }
-    
-    template<typename R>
-    static int __unm(lua_State* L) {
-      wrapper<T*>* r = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
-      converter<R>::push(L, -(*r->ref));
-      return 1;
-    }
-    
+
   };
 
 }

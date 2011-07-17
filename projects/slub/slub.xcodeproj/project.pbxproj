@@ -94,6 +94,7 @@
 		8D3146D913D3715300019863 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = src/slub/function.cpp; sourceTree = "<group>"; };
 		8D31470913D372DF00019863 /* slub_lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slub_lua.h; path = include/slub/slub_lua.h; sourceTree = "<group>"; };
 		8D31478613D378E700019863 /* constructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constructor.h; path = include/slub/constructor.h; sourceTree = "<group>"; };
+		8D3147C513D37F6000019863 /* operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operators.h; path = include/slub/operators.h; sourceTree = "<group>"; };
 		8D8F4D8113C3B77B00848D6C /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lapi.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8213C3B77B00848D6C /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lauxlib.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8313C3B77B00848D6C /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lbaselib.c; sourceTree = SOURCE_ROOT; };
@@ -127,7 +128,7 @@
 		8DBD2E7713CCC7D70013AC75 /* package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = package.h; path = include/slub/package.h; sourceTree = "<group>"; };
 		8DBD305A13CCD7E40013AC75 /* function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = function.h; path = include/slub/function.h; sourceTree = "<group>"; };
 		8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		8DD76F6C0486A84900D96B5E /* template-test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "template-test"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DD76F6C0486A84900D96B5E /* slub */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slub; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +168,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76F6C0486A84900D96B5E /* template-test */,
+				8DD76F6C0486A84900D96B5E /* slub */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +202,7 @@
 				8D3146D913D3715300019863 /* function.cpp */,
 				8D31470913D372DF00019863 /* slub_lua.h */,
 				3E050A7613C70016000DC746 /* method.h */,
+				8D3147C513D37F6000019863 /* operators.h */,
 				8DBD2E7713CCC7D70013AC75 /* package.h */,
 				3E5C976D13CB104800DB6373 /* registry.h */,
 				3E050A7713C70016000DC746 /* slub.h */,
@@ -249,9 +251,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8DD76F620486A84900D96B5E /* template-test */ = {
+		8DD76F620486A84900D96B5E /* slub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "template-test" */;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "slub" */;
 			buildPhases = (
 				8DD76F640486A84900D96B5E /* Sources */,
 				8DD76F660486A84900D96B5E /* Frameworks */,
@@ -261,10 +263,10 @@
 			);
 			dependencies = (
 			);
-			name = "template-test";
+			name = slub;
 			productInstallPath = "$(HOME)/bin";
 			productName = "template-test";
-			productReference = 8DD76F6C0486A84900D96B5E /* template-test */;
+			productReference = 8DD76F6C0486A84900D96B5E /* slub */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -292,7 +294,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				8DD76F620486A84900D96B5E /* template-test */,
+				8DD76F620486A84900D96B5E /* slub */,
 			);
 		};
 /* End PBXProject section */
@@ -374,7 +376,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = "template-test";
+				PRODUCT_NAME = slub;
 			};
 			name = Debug;
 		};
@@ -385,7 +387,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = "template-test";
+				PRODUCT_NAME = slub;
 			};
 			name = Release;
 		};
@@ -423,7 +425,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "template-test" */ = {
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "slub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB923208733DC60010E9CD /* Debug */,

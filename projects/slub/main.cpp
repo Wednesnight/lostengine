@@ -47,6 +47,9 @@ int main (int argc, char * const argv[]) {
     .method("doStuff", (void(foo::*)(void))&foo::doStuff)
     .method("doStuff", (void(foo::*)(int))&foo::doStuff)
     .method("getFoo", &foo::getFoo)
+    .eq()
+    .lt()
+    .le()
     .tostring()
     .add<int, int>()
     .sub<int, int>()
@@ -54,9 +57,7 @@ int main (int argc, char * const argv[]) {
     .div<int, int>()
     .mod<int, int>()
     .pow<int, int>()
-    .unm<int>()
-    .lt()
-    .le();
+    .unm<int>();
 
   if (luaL_dofile(L, "foo.lua")) {
     std::cout << lua_tostring(L, -1) << std::endl;
@@ -102,10 +103,7 @@ int main (int argc, char * const argv[]) {
                 "vec2_2.x = 11 "
                 "vec2_2.y = 11 "
                 "print(vec2 * vec2_2) "
-
-// TODO: operator overloading
-//                "print(vec2 * 10) "
-
+                "print(vec2 * 10) "
                 "print(vec2 + vec2_2) "
                 "print(vec2 - vec2_2) "
                 "local v = vec2 - vec2_2 "
