@@ -29,7 +29,7 @@ struct foo {
     std::cout << "foo::doStuff()" << std::endl;
   }
 
-  void doStuff2(int i) {
+  void doStuff(int i) {
     std::cout << "foo::doStuff(" << i << ")" << std::endl;
   }
 

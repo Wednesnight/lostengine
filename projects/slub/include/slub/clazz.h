@@ -1,6 +1,8 @@
 #ifndef SLUB_CLAZZ_H
 #define SLUB_CLAZZ_H
 
+#include <slub/slub_lua.h>
+#include <slub/constructor.h>
 #include <slub/converter.h>
 #include <slub/field.h>
 #include <slub/method.h>
@@ -9,6 +11,8 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <list>
+#include <stdexcept>
 
 namespace slub {
 
@@ -16,20 +20,48 @@ namespace slub {
     
     static fields instance;
     
+    std::map<std::string, std::list<abstract_constructor*> > constructorMap;
     std::map<std::string, abstract_field*> fieldMap;
-    std::map<std::string, abstract_method*> methodMap;
+    std::map<std::string, std::list<abstract_method*> > methodMap;
     
     ~fields() {
       std::cout << "cleanup fields" << std::endl;
+
+      for (std::map<std::string, std::list<abstract_constructor*> >::iterator idx = constructorMap.begin(); idx != constructorMap.end(); ++idx) {
+        for (std::list<abstract_constructor*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
+          delete *midx;
+        }
+      }
+      constructorMap.clear();
 
       for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
         delete idx->second;
       }
       fieldMap.clear();
-      for (std::map<std::string, abstract_method*>::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
-        delete idx->second;
+
+      for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
+        for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
+          delete *midx;
+        }
       }
       methodMap.clear();
+    }
+    
+    static void addConstructor(const std::string& className, abstract_constructor* ctor) {
+      instance.constructorMap[className].push_back(ctor);
+    }
+    
+    static bool containsConstructor(const std::string& className) {
+      return instance.constructorMap.find(className) != instance.constructorMap.end();
+    }
+    
+    static abstract_constructor* getConstructor(const std::string& className, lua_State* L) {
+      for (std::list<abstract_constructor*>::iterator cidx = instance.constructorMap[className].begin(); cidx != instance.constructorMap[className].end(); ++cidx) {
+        if ((*cidx)->check(L)) {
+          return *cidx;
+        }
+      }
+      throw std::runtime_error("No matching overload found, candidates: ...");
     }
     
     static void addField(const std::string& fieldName, abstract_field* field) {
@@ -45,29 +77,25 @@ namespace slub {
     }
     
     static void addMethod(const std::string& methodName, abstract_method* method) {
-      instance.methodMap[methodName] = method;
+      instance.methodMap[methodName].push_back(method);
     }
     
     static bool containsMethod(const std::string& methodName) {
       return instance.methodMap.find(methodName) != instance.methodMap.end();
     }
     
-    static abstract_method* getMethod(const std::string& methodName) {
-      return instance.methodMap[methodName];
+    static abstract_method* getMethod(const std::string& methodName, lua_State* L) {
+      for (std::list<abstract_method*>::iterator midx = instance.methodMap[methodName].begin(); midx != instance.methodMap[methodName].end(); ++midx) {
+        if ((*midx)->check(L)) {
+          return *midx;
+        }
+      }
+      throw std::runtime_error("No matching overload found, candidates: ...");
     }
     
   };
 
   fields fields::instance;
-
-  template<typename T>
-  struct constructor {
-
-    static T* newInstance(lua_State* L) {
-      return new T();
-    }
-
-  };
 
   template<typename T>
   struct clazz {
@@ -123,6 +151,29 @@ namespace slub {
       lua_settable(state, metatable);
       
       lua_pop(state, 2);  // drop metatable and method table
+    }
+
+    clazz& constructor() {
+      fields::addConstructor(name, new slub::constructor<T>());
+      return *this;
+    }
+    
+    template<typename arg1>
+    clazz& constructor() {
+      fields::addConstructor(name, new slub::constructor<T, arg1>());
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2>
+    clazz& constructor() {
+      fields::addConstructor(name, new slub::constructor<T, arg1, arg2>());
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3>
+    clazz& constructor() {
+      fields::addConstructor(name, new slub::constructor<T, arg1, arg2, arg3>());
+      return *this;
     }
     
     template<typename F>
@@ -276,15 +327,19 @@ namespace slub {
   private:
 
     static int __call(lua_State* L) {
-      T* instance = constructor<T>::newInstance(L);
-      wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
-      w->ref = instance;
-      w->gc = true;
-      luaL_getmetatable(L, lua_tostring(L, lua_upvalueindex(1)));
-      lua_setmetatable(L, -2);
-      return 1;
+      std::string name(lua_tostring(L, lua_upvalueindex(1)));
+      if (fields::containsConstructor(name)) {
+        T* instance = fields::getConstructor(name, L)->newInstance<T>(L);
+        wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
+        w->ref = instance;
+        w->gc = true;
+        luaL_getmetatable(L, lua_tostring(L, lua_upvalueindex(1)));
+        lua_setmetatable(L, -2);
+        return 1;
+      }
+      return 0;
     }
-    
+
     static int __gc(lua_State* L) {
       wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
       if (w->gc) {
@@ -302,7 +357,9 @@ namespace slub {
         return fields::getField(name)->get(L);
       }
       else if (fields::containsMethod(name)) {
-        return fields::getMethod(name)->call(L);
+        lua_pushvalue(L, -1);
+        lua_pushcclosure(L, __callMethod, 1);
+        return 1;
       }
       else {
         lua_pushstring(L, lua_tostring(L, lua_upvalueindex(1)));
@@ -314,6 +371,10 @@ namespace slub {
         
         return 1;
       }
+    }
+    
+    static int __callMethod(lua_State* L) {
+      return fields::getMethod(lua_tostring(L, lua_upvalueindex(1)), L)->call(L);
     }
     
     static int __newindex(lua_State* L) {

@@ -7,10 +7,9 @@
 namespace slub {
 
   struct abstract_method {
+    virtual bool check(lua_State*) = 0;
     virtual int call(lua_State*) = 0;
   };
-
-  struct empty{};
 
   template<typename T, typename ret = void, typename arg1 = empty, typename arg2 = empty>
   struct method : public abstract_method {
@@ -20,20 +19,13 @@ namespace slub {
     method(ret (T::*m)(arg1, arg2)) : m(m) {
     }
     
-    ret operator()(T* t, arg1 a1, arg2 a2) {
-      return (t->*m)(a1, a2);
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -2) && converter<arg2>::check(L, -1);
     }
-    
+
     int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
-    }
-    
-    static int _call(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      return converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1), converter<arg2>::get(L, -2)));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1)));
     }
     
   };
@@ -46,20 +38,13 @@ namespace slub {
     method(void (T::*m)()) : m(m) {
     }
     
-    void operator()(T* t) {
-      (t->*m)();
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 1;
     }
     
     int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
-    }
-    
-    static int _call(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      (*m)(t->ref);
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)();
       return 0;
     }
     
@@ -73,20 +58,13 @@ namespace slub {
     method(ret (T::*m)()) : m(m) {
     }
     
-    ret operator()(T* t) {
-      return (t->*m)();
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 1;
     }
     
     int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
-    }
-    
-    static int _call(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      return converter<ret>::push(L, (*m)(t->ref));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)());
     }
     
   };
@@ -99,20 +77,13 @@ namespace slub {
     method(void (T::*m)(arg1)) : m(m) {
     }
     
-    void operator()(T* t, arg1 a1) {
-      (t->*m)(a1);
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 2 && converter<arg1>::check(L, -1);
     }
     
     int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
-    }
-    
-    static int _call(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      (*m)(t->ref, converter<arg1>::get(L, -1));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)(converter<arg1>::get(L, -1));
       return 0;
     }
     
@@ -125,22 +96,14 @@ namespace slub {
     
     method(ret (T::*m)(arg1)) : m(m) {
     }
-    
-    ret operator()(T* t, arg1 a1) {
-      return (t->*m)(a1);
+
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 2 && converter<arg1>::check(L, -1);
     }
     
     int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
-    }
-    
-    static int _call(lua_State* L) {
-      std::cout << lua_gettop(L) << std::endl;
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      return converter<ret>::push(L, (*m)(t->ref, converter<arg1>::get(L, -1)));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)(converter<arg1>::get(L, -1)));
     }
     
   };
@@ -153,20 +116,13 @@ namespace slub {
     method(void (T::*m)(arg1, arg2)) : m(m) {
     }
 
-    void operator()(T* t, arg1 a1, arg2 a2) {
-      (t->*m)(a1, a2);
-    }
-
-    int call(lua_State* L) {
-      lua_pushlightuserdata(L, this);
-      lua_pushcclosure(L, _call, 1);
-      return 1;
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -2) && converter<arg2>::check(L, -1);
     }
     
-    static int _call(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(lua_touserdata(L, 1));
-      method* m = static_cast<method*>(lua_touserdata(L, lua_upvalueindex(1)));
-      (*m)(t->ref, converter<arg1>::get(L, -1), converter<arg2>::get(L, -2));
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1));
       return 0;
     }
     

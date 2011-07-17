@@ -9,49 +9,6 @@
 
 using namespace lost::math;
 
-namespace slub {
-
-  template<>
-  struct constructor<foo> {
-    static foo* newInstance(lua_State* L) {
-      return lua_gettop(L) == 2 ? new foo(luaL_checknumber(L, -1)) : new foo(luaL_checknumber(L, -2), luaL_checknumber(L, -1));
-    }
-  };
-
-  template<>
-  struct constructor<Vec2> {
-    static Vec2* newInstance(lua_State* L) {
-      if (lua_gettop(L) == 3) {
-        return new Vec2(luaL_checknumber(L, -2), luaL_checknumber(L, -1));
-      }
-      else if (lua_gettop(L) == 2) {
-        return new Vec2(*converter<Vec2*>::get(L, -1));
-      }
-      else {
-        return new Vec2();
-      }
-    }
-  };
-  
-  template<>
-  struct converter<Vec2> {
-    
-    static Vec2 get(lua_State* L, int index) {
-      return *converter<Vec2*>::get(L, index);
-    }
-    
-    static int push(lua_State* L, Vec2 value) {
-      return converter<Vec2*>::push(L, new Vec2(value), true);
-    }
-    
-    static int push(lua_State* L, float value) {
-      return converter<float>::push(L, value);
-    }
-    
-  };
-  
-}
-
 void testing0() {
   std::cout << "testing0()" << std::endl;
 }
@@ -83,10 +40,12 @@ int main (int argc, char * const argv[]) {
   luaopen_debug(L);
 
   slub::clazz<foo>(L, "foo")
+    .constructor<int>()
+    .constructor<int, int>()
     .field("bar", &foo::bar)
     .field("f", &foo::f)
-    .method("doStuff", &foo::doStuff)
-    .method("doStuff2", &foo::doStuff2)
+    .method("doStuff", (void(foo::*)(void))&foo::doStuff)
+    .method("doStuff", (void(foo::*)(int))&foo::doStuff)
     .method("getFoo", &foo::getFoo)
     .tostring()
     .add<int, int>()
@@ -103,21 +62,23 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
-  slub::clazz<std::string>(L, "str");
+  slub::clazz<std::string>(L, "str").constructor();
 
   if (luaL_dostring(L, "local s = str()")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
   slub::package(L, "lost").package("math").clazz<Vec2>("Vec2")
-// TODO: method overloading ?
+    .constructor()
+    .constructor<float, float>()
+    .constructor<Vec2&>()
     .method("zero", &Vec2::zero)
     .field("x", &Vec2::x)
     .field("y", &Vec2::y)
     .field("width", &Vec2::width)
     .field("height", &Vec2::height)
     .mul<Vec2, float>()
-    .mul<Vec2, Vec2>()
+    .mul<float, Vec2>()
     .add<Vec2, Vec2>()
     .sub<Vec2, Vec2>()
     .tostring();
@@ -158,8 +119,6 @@ int main (int argc, char * const argv[]) {
                 "print(lost.math.compare(v, v, 0.1)) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
-
-  // TODO: simple functions
 
   slub::function(L, "testing0", &testing0);
   slub::function(L, "testing1", &testing1);

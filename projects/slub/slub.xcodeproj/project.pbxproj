@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E2C0A8C13C6FF7F0070A4B5 /* foo.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E2C0A8813C6FEF50070A4B5 /* foo.lua */; };
 		3E5A746A13CD8BA00051A333 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A746713CD8B970051A333 /* libLostEngine.a */; };
+		8D3146DA13D3715300019863 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D3146D913D3715300019863 /* function.cpp */; };
 		8D8F4D9E13C3B77B00848D6C /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8113C3B77B00848D6C /* lapi.c */; };
 		8D8F4D9F13C3B77B00848D6C /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8213C3B77B00848D6C /* lauxlib.c */; };
 		8D8F4DA013C3B77B00848D6C /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8313C3B77B00848D6C /* lbaselib.c */; };
@@ -90,6 +91,9 @@
 		3E2C0A8813C6FEF50070A4B5 /* foo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = foo.lua; sourceTree = "<group>"; };
 		3E5C976D13CB104800DB6373 /* registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registry.h; path = include/slub/registry.h; sourceTree = "<group>"; };
 		3E8A3BBB13CAF0C500467EAD /* converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = converter.h; path = include/slub/converter.h; sourceTree = "<group>"; };
+		8D3146D913D3715300019863 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = src/slub/function.cpp; sourceTree = "<group>"; };
+		8D31470913D372DF00019863 /* slub_lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slub_lua.h; path = include/slub/slub_lua.h; sourceTree = "<group>"; };
+		8D31478613D378E700019863 /* constructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constructor.h; path = include/slub/constructor.h; sourceTree = "<group>"; };
 		8D8F4D8113C3B77B00848D6C /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lapi.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8213C3B77B00848D6C /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lauxlib.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8313C3B77B00848D6C /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lbaselib.c; sourceTree = SOURCE_ROOT; };
@@ -190,9 +194,12 @@
 			isa = PBXGroup;
 			children = (
 				3E050A7413C70016000DC746 /* clazz.h */,
+				8D31478613D378E700019863 /* constructor.h */,
 				3E8A3BBB13CAF0C500467EAD /* converter.h */,
 				3E050A7513C70016000DC746 /* field.h */,
 				8DBD305A13CCD7E40013AC75 /* function.h */,
+				8D3146D913D3715300019863 /* function.cpp */,
+				8D31470913D372DF00019863 /* slub_lua.h */,
 				3E050A7613C70016000DC746 /* method.h */,
 				8DBD2E7713CCC7D70013AC75 /* package.h */,
 				3E5C976D13CB104800DB6373 /* registry.h */,
@@ -267,6 +274,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -349,6 +357,7 @@
 				8D8F4DB913C3B77B00848D6C /* lvm.c in Sources */,
 				8D8F4DBA13C3B77B00848D6C /* lzio.c in Sources */,
 				8D8F4DBC13C3B78900848D6C /* print.c in Sources */,
+				8D3146DA13D3715300019863 /* function.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

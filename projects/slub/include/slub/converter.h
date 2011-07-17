@@ -8,17 +8,34 @@
 
 namespace slub {
 
+  struct empty{};
+
   template<typename T>
   struct converter {
+
+    static bool check(lua_State* L, int index) {
+      void *p = lua_touserdata(L, index);
+      if (p != NULL) {  /* value is a userdata? */
+        if (lua_getmetatable(L, index)) {  /* does it have a metatable? */
+          lua_getfield(L, LUA_REGISTRYINDEX, registry<T*>::getTypeName().c_str());  /* get correct metatable */
+          if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
+            lua_pop(L, 2);  /* remove both metatables */
+            return true;
+          }
+        }
+      }
+      return false;
+    }
 
     static T get(lua_State* L, int index) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(lua_touserdata(L, index));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
       else {
         std::cout << "get, unregistered" << std::endl;
+        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
         return *static_cast<T*>(lua_touserdata(L, index));
       }
     }
@@ -48,14 +65,19 @@ namespace slub {
   template<typename T>
   struct converter<T*> {
     
+    static bool check(lua_State* L, int index) {
+      return converter<T>::check(L, index);
+    }
+
     static T* get(lua_State* L, int index) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(lua_touserdata(L, index));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return w->ref;
       }
       else {
         std::cout << "get, unregistered" << std::endl;
+        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
         return static_cast<T*>(lua_touserdata(L, index));
       }
     }
@@ -85,14 +107,19 @@ namespace slub {
   template<typename T>
   struct converter<const T*> {
     
+    static bool check(lua_State* L, int index) {
+      return converter<T>::check(L, index);
+    }
+    
     static const T* get(lua_State* L, int index) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(lua_touserdata(L, index));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return w->ref;
       }
       else {
         std::cout << "get, unregistered" << std::endl;
+        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
         return static_cast<const T*>(lua_touserdata(L, index));
       }
     }
@@ -122,14 +149,19 @@ namespace slub {
   template<typename T>
   struct converter<T&> {
     
+    static bool check(lua_State* L, int index) {
+      return converter<T>::check(L, index);
+    }
+    
     static T& get(lua_State* L, int index) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(lua_touserdata(L, index));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
       else {
         std::cout << "get, unregistered" << std::endl;
+        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
         return *static_cast<T*>(lua_touserdata(L, index));
       }
     }
@@ -159,14 +191,19 @@ namespace slub {
   template<typename T>
   struct converter<const T&> {
     
+    static bool check(lua_State* L, int index) {
+      return converter<T>::check(L, index);
+    }
+    
     static const T& get(lua_State* L, int index) {
       if (registry<T*>::isRegisteredType()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(lua_touserdata(L, index));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
       else {
         std::cout << "get, unregistered" << std::endl;
+        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
         return *static_cast<const T*>(lua_touserdata(L, index));
       }
     }
@@ -196,7 +233,12 @@ namespace slub {
   template<>
   struct converter<bool> {
     
+    static bool check(lua_State* L, int index) {
+      return lua_isboolean(L, index);
+    }
+    
     static bool get(lua_State* L, int index) {
+      luaL_checktype(L, index, LUA_TBOOLEAN);
       return lua_toboolean(L, index);
     }
     
@@ -210,8 +252,12 @@ namespace slub {
   template<>
   struct converter<int> {
 
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
     static int get(lua_State* L, int index) {
-      return lua_tointeger(L, index);
+      return luaL_checkinteger(L, index);
     }
 
     static int push(lua_State* L, int value) {
@@ -224,11 +270,33 @@ namespace slub {
   template<>
   struct converter<float> {
     
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
     static float get(lua_State* L, int index) {
-      return lua_tonumber(L, index);
+      return luaL_checknumber(L, index);
     }
     
     static int push(lua_State* L, float value) {
+      lua_pushnumber(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<double> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
+    static float get(lua_State* L, int index) {
+      return luaL_checknumber(L, index);
+    }
+    
+    static int push(lua_State* L, double value) {
       lua_pushnumber(L, value);
       return 1;
     }

@@ -11,6 +11,7 @@ print(f.bar)
 print(f2.bar)
 
 f:doStuff()
+f:doStuff(10)
 
 function foo:luaMethod(arg)
   print(self.msg)

@@ -1,11 +1,7 @@
 #ifndef SLUB_SLUB_H
 #define SLUB_SLUB_H
 
-extern "C" {
-  #include "lua.h"
-  #include "lauxlib.h"
-  #include "lualib.h"
-}
+#include <slub/slub_lua.h>
 
 #include <slub/clazz.h>
 #include <slub/converter.h>
