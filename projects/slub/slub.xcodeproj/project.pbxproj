@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0FD5AE13D43A3700A4AABC /* clazz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E0FD5AD13D43A3700A4AABC /* clazz.cpp */; };
 		3E2C0A8C13C6FF7F0070A4B5 /* foo.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E2C0A8813C6FEF50070A4B5 /* foo.lua */; };
 		3E5A746A13CD8BA00051A333 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A746713CD8B970051A333 /* libLostEngine.a */; };
 		8D3146DA13D3715300019863 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D3146D913D3715300019863 /* function.cpp */; };
@@ -87,6 +88,7 @@
 		3E050A7613C70016000DC746 /* method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = method.h; path = include/slub/method.h; sourceTree = "<group>"; };
 		3E050A7713C70016000DC746 /* slub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slub.h; path = include/slub/slub.h; sourceTree = "<group>"; };
 		3E050A7813C70016000DC746 /* wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrapper.h; path = include/slub/wrapper.h; sourceTree = "<group>"; };
+		3E0FD5AD13D43A3700A4AABC /* clazz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = clazz.cpp; path = src/slub/clazz.cpp; sourceTree = "<group>"; };
 		3E2C0A7F13C6FE7A0070A4B5 /* foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foo.h; sourceTree = "<group>"; };
 		3E2C0A8813C6FEF50070A4B5 /* foo.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = foo.lua; sourceTree = "<group>"; };
 		3E5C976D13CB104800DB6373 /* registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registry.h; path = include/slub/registry.h; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				3E050A7413C70016000DC746 /* clazz.h */,
+				3E0FD5AD13D43A3700A4AABC /* clazz.cpp */,
 				8D31478613D378E700019863 /* constructor.h */,
 				3E8A3BBB13CAF0C500467EAD /* converter.h */,
 				3E050A7513C70016000DC746 /* field.h */,
@@ -276,7 +279,6 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -360,6 +362,7 @@
 				8D8F4DBA13C3B77B00848D6C /* lzio.c in Sources */,
 				8D8F4DBC13C3B78900848D6C /* print.c in Sources */,
 				8D3146DA13D3715300019863 /* function.cpp in Sources */,
+				3E0FD5AE13D43A3700A4AABC /* clazz.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

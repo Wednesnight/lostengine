@@ -4,9 +4,9 @@ local loader = lost.resource.Loader.create()
 loader:addRepository(lost.resource.FilesystemRepository.create("/"))
 
 local datasource = {}
-for name in loader:directory("") do
-  table.insert(datasource, {name = name, path = tostring(name), padding = 0})
-end
+--for name in loader:directory("") do
+--  table.insert(datasource, {name = name, path = tostring(name), padding = 0})
+--end
 
 local directoryImage = lost.bitmap.Bitmap.create(tasklet.loader:load("img/blue-folder-horizontal.png"))
 directoryImage:premultiplyAlpha()
@@ -108,9 +108,9 @@ return lost.guiro.view.View
               self:superview():superview():reloadData()
             else
               ds.data = {}
-              for name in loader:directory(ds.path) do
-                table.insert(ds.data, {name = name, path = tostring(boost.filesystem.path(ds.path) / tostring(name)), padding = ds.padding+25})
-              end
+--              for name in loader:directory(ds.path) do
+--                table.insert(ds.data, {name = name, path = tostring(boost.filesystem.path(ds.path) / tostring(name)), padding = ds.padding+25})
+--              end
               self:superview():superview():reloadData()
             end
           end

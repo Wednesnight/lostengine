@@ -433,6 +433,7 @@
       'include_dirs': [
 
         '.',
+        '../slub/include',
         '<@(boost_path)',
         '<@(box2d_path)/Box2D',
         '<@(eastl_path)/include',
@@ -655,6 +656,10 @@
         'lost/time/Clock.cpp',
         'lost/time/ThreadedTimerScheduler.cpp',
         'lost/time/Timer.cpp',
+
+        # slub
+        '../slub/src/slub/clazz.cpp',
+        '../slub/src/slub/function.cpp',
 
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',

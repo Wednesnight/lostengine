@@ -5,10 +5,51 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/system/error_code.hpp>
-#include <luabind/operator.hpp>
+
+#include <slub/slub.h>
 
 using namespace boost::filesystem;
-using namespace luabind;
+using namespace slub;
+
+namespace slub {
+
+  template<>
+  struct converter<lost::string> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static lost::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, lost::string value) {
+      lua_pushstring(L, value.c_str());
+      return 1;
+    }
+    
+  };
+
+  template<>
+  struct converter<const lost::string&> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static lost::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, const lost::string& value) {
+      lua_pushstring(L, value.c_str());
+      return 1;
+    }
+    
+  };
+  
+}
 
 std::ostream& operator<<(std::ostream& stream, const path& p)
 {
@@ -29,35 +70,31 @@ namespace lost
 
     void ThirdpartyBoostFilesystem(lua_State* state)
     {
-      module(state, "boost")
-      [
-        namespace_("filesystem")
-        [
-          class_<path>("path")
-            .def(constructor<>())
-            .def(constructor<const string&>())
-            .def(tostring(self))
-            .def(self / other<string>())
-            .def("remove_filename", &path::remove_filename)
-            .def("filename", &path::filename)
-            .def("stem", &path::stem)
-            .def("extension", &path::extension)
-            .def("native", &path::native),
-        
-          class_<directory_iterator>("directory_iterator"),
-        
-          class_<directory_entry>("directory_entry")
-            .def(tostring(self))
-            .def("status", (file_status (directory_entry::*)() const) &directory_entry::status),
+      package fs = package(state, "boost").package("filesystem");
 
-          class_<file_status>("file_status"),
+      fs.clazz<path>("path")
+        .constructor()
+        .constructor<const string&>()
+        .method("remove_filename", &path::remove_filename)
+        .method("filename", &path::filename)
+        .method("stem", &path::stem)
+        .method("extension", &path::extension)
+        .method("native", &path::native)
+        .tostring()
+        .div<path, string>();
 
-          def("is_directory", (bool(*)(file_status)) &is_directory),
-          def("is_regular_file",(bool(*)(const path& p)) &is_regular_file),
-          def("exists",(bool(*)(const path& p)) &exists),
-          def("create_directories",(bool(*)(const path& p)) &create_directories)        
-        ]
-       ];
+      fs.clazz<directory_iterator>("directory_iterator");
+
+      fs.clazz<directory_entry>("directory_entry")
+        .method("status", (file_status (directory_entry::*)() const) &directory_entry::status)
+        .tostring();
+
+      fs.clazz<file_status>("file_status");
+
+      fs.function("is_directory", (bool(*)(file_status)) &is_directory);
+      fs.function("is_regular_file",(bool(*)(const path& p)) &is_regular_file);
+      fs.function("exists",(bool(*)(const path& p)) &exists);
+      fs.function("create_directories",(bool(*)(const path& p)) &create_directories);
     }
 
     void ThirdpartyBoost(lua_State* state)

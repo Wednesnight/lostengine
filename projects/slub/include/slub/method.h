@@ -128,6 +128,123 @@ namespace slub {
     
   };
 
+  template<typename T, typename ret = void, typename arg1 = empty, typename arg2 = empty>
+  struct const_method : public abstract_method {
+    
+    ret (T::*m)(arg1, arg2) const;
+    
+    const_method(ret (T::*m)(arg1, arg2) const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -2) && converter<arg2>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1)));
+    }
+    
+  };
+  
+  template<typename T>
+  struct const_method<T, void, empty, empty> : public abstract_method {
+    
+    void (T::*m)() const;
+    
+    const_method(void (T::*m)() const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 1;
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)();
+      return 0;
+    }
+    
+  };
+  
+  template<typename T, typename ret>
+  struct const_method<T, ret, empty, empty> : public abstract_method {
+    
+    ret (T::*m)() const;
+    
+    const_method(ret (T::*m)() const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 1;
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)());
+    }
+    
+  };
+  
+  template<typename T, typename arg1>
+  struct const_method<T, void, arg1, empty> : public abstract_method {
+    
+    void (T::*m)(arg1) const;
+    
+    const_method(void (T::*m)(arg1) const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 2 && converter<arg1>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)(converter<arg1>::get(L, -1));
+      return 0;
+    }
+    
+  };
+  
+  template<typename T, typename ret, typename arg1>
+  struct const_method<T, ret, arg1, empty> : public abstract_method {
+    
+    ret (T::*m)(arg1) const;
+    
+    const_method(ret (T::*m)(arg1) const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 2 && converter<arg1>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      return converter<ret>::push(L, (t->ref->*m)(converter<arg1>::get(L, -1)));
+    }
+    
+  };
+  
+  template<typename T, typename arg1, typename arg2>
+  struct const_method<T, void, arg1, arg2> : public abstract_method {
+    
+    void (T::*m)(arg1, arg2) const;
+    
+    const_method(void (T::*m)(arg1, arg2) const) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -2) && converter<arg2>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry<T*>::getTypeName().c_str()));
+      (t->ref->*m)(converter<arg1>::get(L, -2), converter<arg2>::get(L, -1));
+      return 0;
+    }
+    
+  };
+
 }
 
 #endif

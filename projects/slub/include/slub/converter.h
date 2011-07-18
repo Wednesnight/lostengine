@@ -33,11 +33,7 @@ namespace slub {
         wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
-      else {
-        std::cout << "get, unregistered" << std::endl;
-        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
-        return *static_cast<T*>(lua_touserdata(L, index));
-      }
+      throw std::runtime_error("trying to use unregistered type");
     }
 
     static int push(lua_State* L, T value) {
@@ -48,12 +44,9 @@ namespace slub {
         w->gc = true;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
+        return 1;
       }
-      else {
-        std::cout << "push, unregistered" << std::endl;
-        lua_pushlightuserdata(L, &value);
-      }
-      return 1;
+      throw std::runtime_error("trying to use unregistered type");
     }
 
   };
@@ -71,11 +64,7 @@ namespace slub {
         wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return w->ref;
       }
-      else {
-        std::cout << "get, unregistered" << std::endl;
-        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
-        return static_cast<T*>(lua_touserdata(L, index));
-      }
+      throw std::runtime_error("trying to use unregistered type");
     }
     
     static int push(lua_State* L, T* value) {
@@ -90,12 +79,9 @@ namespace slub {
         w->gc = gc;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
+        return 1;
       }
-      else {
-        std::cout << "push, unregistered" << std::endl;
-        lua_pushlightuserdata(L, value);
-      }
-      return 1;
+      throw std::runtime_error("trying to use unregistered type");
     }
     
   };
@@ -113,11 +99,7 @@ namespace slub {
         wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return w->ref;
       }
-      else {
-        std::cout << "get, unregistered" << std::endl;
-        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
-        return static_cast<const T*>(lua_touserdata(L, index));
-      }
+      throw std::runtime_error("trying to use unregistered type");
     }
     
     static int push(lua_State* L, const T* value) {
@@ -132,12 +114,9 @@ namespace slub {
         w->gc = gc;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
+        return 1;
       }
-      else {
-        std::cout << "push, unregistered" << std::endl;
-        lua_pushlightuserdata(L, value);
-      }
-      return 1;
+      throw std::runtime_error("trying to use unregistered type");
     }
     
   };
@@ -155,11 +134,7 @@ namespace slub {
         wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
-      else {
-        std::cout << "get, unregistered" << std::endl;
-        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
-        return *static_cast<T*>(lua_touserdata(L, index));
-      }
+      throw std::runtime_error("trying to use unregistered type");
     }
     
     static int push(lua_State* L, T& value) {
@@ -174,12 +149,9 @@ namespace slub {
         w->gc = gc;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
+        return 1;
       }
-      else {
-        std::cout << "push, unregistered" << std::endl;
-        lua_pushlightuserdata(L, &value);
-      }
-      return 1;
+      throw std::runtime_error("trying to use unregistered type");
     }
     
   };
@@ -197,11 +169,7 @@ namespace slub {
         wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
         return *w->ref;
       }
-      else {
-        std::cout << "get, unregistered" << std::endl;
-        luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
-        return *static_cast<const T*>(lua_touserdata(L, index));
-      }
+      throw std::runtime_error("trying to use unregistered type");
     }
     
     static int push(lua_State* L, const T& value) {
@@ -216,12 +184,9 @@ namespace slub {
         w->gc = gc;
         luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
         lua_setmetatable(L, -2);
+        return 1;
       }
-      else {
-        std::cout << "push, unregistered" << std::endl;
-        lua_pushlightuserdata(L, &value);
-      }
-      return 1;
+      return 0;
     }
     
   };
@@ -294,6 +259,60 @@ namespace slub {
     
     static int push(lua_State* L, double value) {
       lua_pushnumber(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<std::string> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static std::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, std::string value) {
+      lua_pushstring(L, value.c_str());
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<const std::string&> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static std::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, const std::string& value) {
+      lua_pushstring(L, value.c_str());
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<std::string&> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static std::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, std::string& value) {
+      lua_pushstring(L, value.c_str());
       return 1;
     }
     
