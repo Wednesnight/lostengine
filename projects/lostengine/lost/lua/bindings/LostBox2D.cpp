@@ -3,28 +3,26 @@
 #include "lost/box2d/DebugDraw.h"
 #include "lost/rg/Node.h"
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::box2d;
+using namespace slub;
 
 namespace lost
 {
-namespace lua
-{
+  namespace lua
+  {
 
-void LostBox2D(lua_State* state)
-{
-  module(state, "lost")
-  [
-    namespace_("box2d")
-    [
-      class_<DebugDraw,b2DebugDraw>("DebugDraw")
-      .def(constructor<resource::LoaderPtr>())
-      .def("beginDraw",&DebugDraw::beginDraw)
-      .def("endDraw",&DebugDraw::endDraw)
-      .def_readonly("rootNode",&DebugDraw::rootNode)
-    ]
-  ];
-}
+    void LostBox2D(lua_State* state)
+    {
+      package(state, "lost")
+        .package("box2d")
+          .clazz<DebugDraw/*,b2DebugDraw*/>("DebugDraw")
+            .constructor<resource::LoaderPtr>()
+            .method("beginDraw",&DebugDraw::beginDraw)
+            .method("endDraw",&DebugDraw::endDraw)
+            .field("rootNode",&DebugDraw::rootNode);
+    }
 
-}
+  }
 }

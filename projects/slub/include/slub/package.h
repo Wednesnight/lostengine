@@ -40,6 +40,14 @@ namespace slub {
       return result;
     }
 
+    template<typename T, typename D>
+    slub::clazz<T, D> clazz(const std::string& name) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      slub::clazz<T, D> result(state, name, lua_gettop(state));
+      lua_pop(state, 1);
+      return result;
+    }
+    
     void function(const std::string& name, void (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function(state, name, f, lua_gettop(state));
@@ -95,6 +103,19 @@ namespace slub {
       lua_pop(state, 1);
     }
     
+    template<typename T>
+    void enumerated(const std::string& constantName, const T& value) {
+      constant<int>(constantName, value);
+    }
+    
+    template<typename T>
+    void constant(const std::string& constantName, const T& value) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      converter<T>::push(state, value);
+      lua_setfield(state, -2, constantName.c_str());
+      lua_pop(state, 1);
+    }
+
   };
 
   typedef package_ package;

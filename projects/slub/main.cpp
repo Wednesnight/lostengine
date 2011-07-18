@@ -29,6 +29,11 @@ int testing(int i, int j, int k) {
   return i+j+k;
 }
 
+enum enm {
+  e1,
+  e2
+};
+
 int main (int argc, char * const argv[]) {
 
   lua_State *L = lua_open();
@@ -39,6 +44,14 @@ int main (int argc, char * const argv[]) {
   luaopen_math(L);
   luaopen_debug(L);
 
+  slub::package enum_ = slub::package(L, "enum");
+  enum_.enumerated("e1", e1);
+  enum_.enumerated("e2", e2);
+
+  if (luaL_dostring(L, "print(enum.e1) print(enum.e2) ")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
+  
   slub::clazz<foo>(L, "foo")
     .constructor<int>()
     .constructor<int, int>()

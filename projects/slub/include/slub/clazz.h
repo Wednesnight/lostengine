@@ -46,14 +46,26 @@ namespace slub {
     
   };
 
-  template<typename T>
+  struct deleter {
+    template<typename T>
+    static void delete_(T* t) {
+      delete t;
+    }
+  };
+
+  struct null_deleter {
+    template<typename T>
+    static void delete_(T* t) {
+    }
+  };
+  
+  template<typename T, typename D = deleter>
   struct clazz {
 
     lua_State* state;
     std::string name;
-    int target;
 
-    clazz(lua_State* L, const std::string& name, int target = -1) : state(L), name(name), target(target) {
+    clazz(lua_State* L, const std::string& name, int target = -1) : state(L), name(name) {
       registry<T*>::registerType(name);
 
       lua_newtable(state);
@@ -216,6 +228,18 @@ namespace slub {
       return *this;
     }
 
+    template<typename ret, typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3)) {
+      fields::addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3)) {
+      fields::addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3>(m));
+      return *this;
+    }
+    
     template<typename ret>
     clazz& method(const std::string& methodName, ret (T::*m)() const) {
       fields::addMethod(methodName, new slub::const_method<T, ret>(m));
@@ -248,6 +272,18 @@ namespace slub {
     template<typename arg1, typename arg2>
     clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2) const) {
       fields::addMethod(methodName, new slub::const_method<T, void, arg1, arg2>(m));
+      return *this;
+    }
+    
+    template<typename ret, typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3) const) {
+      fields::addMethod(methodName, new slub::const_method<T, ret, arg1, arg2, arg3>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3) const) {
+      fields::addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
     
@@ -336,6 +372,20 @@ namespace slub {
       return *this;
     }
     
+    template<typename C>
+    clazz& enumerated(const std::string& constantName, const C& value) {
+      return constant<int>(constantName, value);
+    }
+    
+    template<typename C>
+    clazz& constant(const std::string& constantName, const C& value) {
+      luaL_getmetatable(state, name.c_str());
+      converter<C>::push(state, value);
+      lua_setfield(state, -2, constantName.c_str());
+      lua_pop(state, 1);
+      return *this;
+    }
+    
   private:
 
     static int __call(lua_State* L) {
@@ -355,7 +405,7 @@ namespace slub {
     static int __gc(lua_State* L) {
       wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
       if (w->gc) {
-        delete w->ref;
+        D::delete_(w->ref);
       }
       else {
         w->ref = NULL;

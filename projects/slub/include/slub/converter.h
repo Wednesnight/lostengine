@@ -318,6 +318,25 @@ namespace slub {
     
   };
   
+  template<>
+  struct converter<void*> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isuserdata(L, index);
+    }
+    
+    static void* get(lua_State* L, int index) {
+      luaL_checktype(L, index, LUA_TLIGHTUSERDATA);
+      return lua_touserdata(L, index);
+    }
+    
+    static int push(lua_State* L, void* value) {
+      lua_pushlightuserdata(L, value);
+      return 1;
+    }
+    
+  };
+  
 }
 
 #endif
