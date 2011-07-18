@@ -79,3 +79,8 @@ std::ostream& operator<<(std::ostream& s, const foo& f) {
   s << "foo: " << "bar = " << f.bar;
   return s;
 }
+
+struct baz : public foo {
+  baz(int i, int j) : foo(i, j) {
+  }
+};

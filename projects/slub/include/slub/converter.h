@@ -8,41 +8,40 @@
 
 namespace slub {
 
-  struct empty{};
-
   template<typename T>
   struct converter {
 
     static bool check(lua_State* L, int index) {
+      bool result = false;
       void *p = lua_touserdata(L, index);
       if (p != NULL) {  /* value is a userdata? */
         if (lua_getmetatable(L, index)) {  /* does it have a metatable? */
-          lua_getfield(L, LUA_REGISTRYINDEX, registry<T*>::getTypeName().c_str());  /* get correct metatable */
+          lua_getfield(L, LUA_REGISTRYINDEX, registry::getTypeName<T*>().c_str());  /* get correct metatable */
           if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
-            lua_pop(L, 2);  /* remove both metatables */
-            return true;
+            result = true;
           }
+          lua_pop(L, 2);  /* remove both metatables */
         }
       }
-      return false;
+      return result;
     }
 
     static T get(lua_State* L, int index) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
     }
 
     static int push(lua_State* L, T value) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "push, registered" << std::endl;
         wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
         w->ref = new T(value);
         w->gc = true;
-        luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -59,9 +58,9 @@ namespace slub {
     }
 
     static T* get(lua_State* L, int index) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
         return w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -72,12 +71,12 @@ namespace slub {
     }
     
     static int push(lua_State* L, T* value, bool gc) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "push, registered" << std::endl;
         wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
         w->ref = value;
         w->gc = gc;
-        luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -94,9 +93,9 @@ namespace slub {
     }
     
     static const T* get(lua_State* L, int index) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
         return w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -107,12 +106,12 @@ namespace slub {
     }
     
     static int push(lua_State* L, const T* value, bool gc) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "push, registered" << std::endl;
         wrapper<const T*>* w = (wrapper<const T*>*) lua_newuserdata(L, sizeof(wrapper<const T*>));
         w->ref = value;
         w->gc = gc;
-        luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -129,9 +128,9 @@ namespace slub {
     }
     
     static T& get(lua_State* L, int index) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -142,12 +141,12 @@ namespace slub {
     }
     
     static int push(lua_State* L, T& value, bool gc) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "push, registered" << std::endl;
         wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -164,9 +163,9 @@ namespace slub {
     }
     
     static const T& get(lua_State* L, int index) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry<T*>::getTypeName().c_str()));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -177,12 +176,12 @@ namespace slub {
     }
     
     static int push(lua_State* L, const T& value, bool gc) {
-      if (registry<T*>::isRegisteredType()) {
+      if (registry::isRegisteredType<T*>()) {
         std::cout << "push, registered" << std::endl;
         wrapper<const T*>* w = (wrapper<const T*>*) lua_newuserdata(L, sizeof(wrapper<const T*>));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry<T*>::getTypeName().c_str());
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }

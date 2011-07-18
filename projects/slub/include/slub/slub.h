@@ -5,6 +5,7 @@
 
 #include <slub/clazz.h>
 #include <slub/converter.h>
+#include <slub/exception.h>
 #include <slub/field.h>
 #include <slub/function.h>
 #include <slub/method.h>

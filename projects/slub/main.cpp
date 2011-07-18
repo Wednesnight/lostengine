@@ -76,6 +76,15 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
+  slub::clazz<baz>(L, "baz")
+    .constructor<int, int>();
+
+/*  
+  if (luaL_dostring(L, "local b = baz(10, 11) print(tostring(b)) print(b.x, b.y) b:doStuff() b:doStuff(100) ")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
+*/
+
   slub::clazz<std::string>(L, "str").constructor();
 
   if (luaL_dostring(L, "local s = str()")) {

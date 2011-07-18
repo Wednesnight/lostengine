@@ -197,6 +197,7 @@
 		7FE35EE36029A4E561EBF12B /* inheritance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 050F6E6BFC039DCFC102F4CA /* inheritance.cpp */; };
 		7FFD4DAB7AF9503FDC8B83B5 /* ftgzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C0C975691B7F17C1E86C7D04 /* ftgzip.c */; };
 		83854393AF1AD62FA2CA439B /* string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59380E85A4BEDD6B9DBA9BD1 /* string.cpp */; };
+		853B7E2078294699E4590A8F /* registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08C690BCE612B93ABCE55407 /* registry.cpp */; };
 		8691C30081A57FC4926913E2 /* HostBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E62BE89D1D60FEA8C47C3 /* HostBuffer.cpp */; };
 		86E8F0FC625F56043CEF4D74 /* ThreadedTimerScheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2E70436D1F378DE766E1EA3 /* ThreadedTimerScheduler.cpp */; };
 		879EFD1BB5535DFB610A610C /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B893EBE2A873EADEFE9E46E7 /* function.cpp */; };
@@ -435,6 +436,7 @@
 		07B29B8EEF116EC3B87A38F5 /* FontManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FontManager.cpp; sourceTree = "<group>"; };
 		07F495BE3D877B01FFB858FA /* LostResource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostResource.cpp; sourceTree = "<group>"; };
 		0850788F89B7896D94E46429 /* Buffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffer.cpp; sourceTree = "<group>"; };
+		08C690BCE612B93ABCE55407 /* registry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = registry.cpp; sourceTree = "<group>"; };
 		08F90FCC3036DB3ED068A2A8 /* lmem.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lmem.c; sourceTree = "<group>"; };
 		09B699181EBB84D9384E0A8A /* TestPlatform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestPlatform.cpp; sourceTree = "<group>"; };
 		09C4C7C10139683BC1736A08 /* ldump.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ldump.c; sourceTree = "<group>"; };
@@ -1299,6 +1301,7 @@
 			children = (
 				EA7FDE4756A7CC26675B52CD /* clazz.cpp */,
 				14EAA17D64564F9AE0E72FCF /* function.cpp */,
+				08C690BCE612B93ABCE55407 /* registry.cpp */,
 			);
 			path = slub/src/slub;
 			sourceTree = "<group>";
@@ -1930,7 +1933,14 @@
 			};
 			buildConfigurationList = C4BC31635FECBB26F4E7AAE5 /* Build configuration list for PBXProject "LostEngine" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = ABF2538470E0CFE9C657CDED;
 			projectDirPath = ..;
 			projectRoot = "";
@@ -2129,6 +2139,7 @@
 				C5B09216696F8E3495A84455 /* Timer.cpp in Sources */,
 				67A1966FDD4F755FAF93E109 /* clazz.cpp in Sources */,
 				DFB6BB08F3474AB8DE1A47B8 /* function.cpp in Sources */,
+				853B7E2078294699E4590A8F /* registry.cpp in Sources */,
 				16BF39628718275B6EBBCCCF /* path.cpp in Sources */,
 				8F6B4A43603C2107ECD35163 /* operations.cpp in Sources */,
 				B9A01A694970F5127B136E11 /* portability.cpp in Sources */,

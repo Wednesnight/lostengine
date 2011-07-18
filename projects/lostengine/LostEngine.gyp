@@ -660,6 +660,7 @@
         # slub
         '../slub/src/slub/clazz.cpp',
         '../slub/src/slub/function.cpp',
+        '../slub/src/slub/registry.cpp',
 
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
