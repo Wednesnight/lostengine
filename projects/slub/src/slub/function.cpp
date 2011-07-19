@@ -18,10 +18,12 @@ namespace slub {
     functions.clear();
   }
 
-  void function_holder::add(lua_State* L, const std::string& name, abstract_function_wrapper* f, int target) {
-    instance.functions[name].push_back(f);
+  void function_holder::add(lua_State* L, const std::string& name, abstract_function_wrapper* f, const std::string& prefix, int target) {
+    std::string qualifiedName = prefix.size() > 0 ? prefix +"."+ name : name;
 
-    lua_pushstring(L, name.c_str());
+    instance.functions[qualifiedName].push_back(f);
+
+    lua_pushstring(L, qualifiedName.c_str());
     lua_pushcclosure(L, call, 1);
     lua_setfield(L, target != -1 ? target : LUA_GLOBALSINDEX, name.c_str());
   }

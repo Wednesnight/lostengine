@@ -43,13 +43,16 @@ namespace slub {
     lua_State* state;
     std::string name;
 
-    clazz(lua_State* L, const std::string& name, int target = -1) : state(L), name(name) {
-      registry::registerType<T*>(name);
+    clazz(lua_State* L, const std::string& name, const std::string& prefix = "", int target = -1)
+    : state(L), name(prefix.size() > 0 ? prefix +"."+ name : name)
+    {
+
+      registry::registerType<T*>(this->name);
 
       lua_newtable(state);
       int methods = lua_gettop(state);
       
-      luaL_newmetatable(state, name.c_str());
+      luaL_newmetatable(state, this->name.c_str());
       int metatable = lua_gettop(state);
       
       // store method table in globals so that
@@ -64,88 +67,88 @@ namespace slub {
       lua_newtable(state);                // mt for method table
       int mt = lua_gettop(state);
       lua_pushliteral(state, "__call");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushcclosure(state, __call, 1);
       lua_settable(state, mt);            // mt.__call = ctor
       lua_setmetatable(state, methods);
       
       lua_pushliteral(state, "__gc");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushcclosure(state, __gc, 1);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__index");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushcclosure(state, __index, 1);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__newindex");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushcclosure(state, __newindex, 1);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__eq");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__eq");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__lt");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__lt");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__le");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__le");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__tostring");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__tostring");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__add");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__add");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__sub");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__sub");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__mul");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__mul");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__div");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__div");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__mod");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__mod");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__pow");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__pow");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__unm");
-      lua_pushstring(state, name.c_str());
+      lua_pushstring(state, this->name.c_str());
       lua_pushstring(state, "__unm");
       lua_pushcclosure(state, __callOperator, 2);
       lua_settable(state, metatable);

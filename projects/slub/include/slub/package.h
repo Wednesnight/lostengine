@@ -9,8 +9,9 @@ namespace slub {
 
     lua_State* state;
     int table;
+    std::string name;
 
-    package_(lua_State* L, const std::string& name, int target = -1) : state(L) {
+    package_(lua_State* L, const std::string& name, const std::string& prefix = "", int target = -1) : state(L) {
       lua_getfield(L, target != -1 ? target : LUA_GLOBALSINDEX, name.c_str());
       if (lua_type(L, lua_gettop(L)) == LUA_TNIL) {
         std::cout << "creating package: " << name << std::endl;
@@ -23,11 +24,12 @@ namespace slub {
         std::cout << "using package: " << name << std::endl;
       }
       table = luaL_ref(L, LUA_REGISTRYINDEX);
+      this->name = prefix.size() > 0 ? prefix +"."+ name : name;
     }
 
     package_ package(const std::string& name) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      package_ result(state, name, lua_gettop(state));
+      package_ result(state, name, this->name, lua_gettop(state));
       lua_pop(state, 1);
       return result;
     }
@@ -35,7 +37,7 @@ namespace slub {
     template<typename T>
     slub::clazz<T> clazz(const std::string& name) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::clazz<T> result(state, name, lua_gettop(state));
+      slub::clazz<T> result(state, name, this->name, lua_gettop(state));
       lua_pop(state, 1);
       return result;
     }
@@ -43,63 +45,63 @@ namespace slub {
     template<typename T, typename D>
     slub::clazz<T, D> clazz(const std::string& name) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::clazz<T, D> result(state, name, lua_gettop(state));
+      slub::clazz<T, D> result(state, name, this->name, lua_gettop(state));
       lua_pop(state, 1);
       return result;
     }
     
     void function(const std::string& name, void (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function(state, name, f, lua_gettop(state));
+      slub::function(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename arg1>
     void function(const std::string& name, void (*f)(arg1)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<arg1>(state, name, f, lua_gettop(state));
+      slub::function<arg1>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename arg1, typename arg2>
     void function(const std::string& name, void (*f)(arg1, arg2)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<arg1, arg2>(state, name, f, lua_gettop(state));
+      slub::function<arg1, arg2>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename arg1, typename arg2, typename arg3>
     void function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<arg1, arg2, arg3>(state, name, f, lua_gettop(state));
+      slub::function<arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename R>
     void function(const std::string& name, R (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<R>(state, name, f, lua_gettop(state));
+      slub::function<R>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename R, typename arg1>
     void function(const std::string& name, R (*f)(arg1)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<R, arg1>(state, name, f, lua_gettop(state));
+      slub::function<R, arg1>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename R, typename arg1, typename arg2>
     void function(const std::string& name, R (*f)(arg1, arg2)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<R, arg1, arg2>(state, name, f, lua_gettop(state));
+      slub::function<R, arg1, arg2>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3>
     void function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
-      slub::function<R, arg1, arg2, arg3>(state, name, f, lua_gettop(state));
+      slub::function<R, arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
     }
     
