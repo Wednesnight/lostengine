@@ -46,22 +46,38 @@ namespace slub {
 
     static registry* get(const std::string& className);
 
+    template<typename T>
+    static registry* get() {
+      return get(getTypeName<T>());
+    }
+    
+    std::string getTypeName() {
+      return className;
+    }
+
     void addConstructor(abstract_constructor* ctor);
     bool containsConstructor();
     abstract_constructor* getConstructor(lua_State* L);
     
     void addField(const std::string& fieldName, abstract_field* field);
     bool containsField(const std::string& fieldName);
-    abstract_field* getField(const std::string& fieldName);
+    abstract_field* getField(const std::string& fieldName, bool throw_ = true);
     
     void addMethod(const std::string& methodName, abstract_method* method);
     bool containsMethod(const std::string& methodName);
-    abstract_method* getMethod(const std::string& methodName, lua_State* L);
+    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true);
     
     void addOperator(const std::string& operatorName, abstract_operator* op);
     bool containsOperator(const std::string& operatorName);
-    abstract_operator* getOperator(const std::string& operatorName, lua_State* L);
+    abstract_operator* getOperator(const std::string& operatorName, lua_State* L, bool throw_ = true);
     
+    void registerBase(registry* base);
+    bool hasBase();
+    const std::list<registry*> baseList();
+    void registerDerived(registry* derived);
+    bool isBase();
+    const std::list<registry*> derivedList();
+
   private:
 
     static registry_holder instance;
@@ -76,6 +92,9 @@ namespace slub {
     std::map<std::string, abstract_field*> fieldMap;
     std::map<std::string, std::list<abstract_method*> > methodMap;
     std::map<std::string, std::list<abstract_operator*> > operatorMap;
+
+    std::list<registry*> baseList_;
+    std::list<registry*> derivedList_;
 
   };
 

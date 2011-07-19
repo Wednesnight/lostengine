@@ -56,7 +56,6 @@ int main (int argc, char * const argv[]) {
     .constructor<int>()
     .constructor<int, int>()
     .field("bar", &foo::bar)
-    .field("f", &foo::f)
     .method("doStuff", (void(foo::*)(void))&foo::doStuff)
     .method("doStuff", (void(foo::*)(int))&foo::doStuff)
     .method("getFoo", &foo::getFoo)
@@ -76,14 +75,14 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
-  slub::clazz<baz>(L, "baz")
-    .constructor<int, int>();
+  slub::clazz<baz>(L, "baz").extends<foo>()
+    .constructor<int, int>()
+    .method("get", &baz::get)
+    .method("print", &baz::print);
 
-/*  
-  if (luaL_dostring(L, "local b = baz(10, 11) print(tostring(b)) print(b.x, b.y) b:doStuff() b:doStuff(100) ")) {
+  if (luaL_dostring(L, "local b = baz(10, 11) print(tostring(b)) print(b.bar) b:doStuff() b:doStuff(100) local f = foo(10) print(f:getFoo(b)) b:print(b:get()) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
-*/
 
   slub::clazz<std::string>(L, "str").constructor();
 

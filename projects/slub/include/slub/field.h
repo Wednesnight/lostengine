@@ -21,12 +21,12 @@ namespace slub {
     }
 
     int get(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       return converter<F>::push(L, t->ref->*m);
     }
 
     int set(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       t->ref->*m = converter<F>::get(L, -1);
       return 0;
     }
@@ -42,13 +42,13 @@ namespace slub {
     }
     
     int get(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       lua_pushboolean(L, t->ref->*m);
       return 1;
     }
     
     int set(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       luaL_checktype(L, -1, LUA_TBOOLEAN);
       t->ref->*m = lua_toboolean(L, -1);
       return 0;
@@ -65,13 +65,13 @@ namespace slub {
     }
     
     int get(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       lua_pushinteger(L, t->ref->*m);
       return 1;
     }
 
     int set(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       t->ref->*m = luaL_checkinteger(L, -1);
       return 0;
     }
@@ -87,13 +87,13 @@ namespace slub {
     }
     
     int get(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       lua_pushnumber(L, t->ref->*m);
       return 1;
     }
     
     int set(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       t->ref->*m = luaL_checknumber(L, -1);
       return 0;
     }
@@ -109,13 +109,13 @@ namespace slub {
     }
     
     int get(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       lua_pushnumber(L, t->ref->*m);
       return 1;
     }
     
     int set(lua_State* L) {
-      wrapper<T*>* t = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       t->ref->*m = luaL_checknumber(L, -1);
       return 0;
     }

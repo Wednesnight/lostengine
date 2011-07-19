@@ -67,14 +67,12 @@ namespace slub {
       lua_newtable(state);                // mt for method table
       int mt = lua_gettop(state);
       lua_pushliteral(state, "__call");
-      lua_pushstring(state, this->name.c_str());
-      lua_pushcclosure(state, __call, 1);
+      lua_pushcfunction(state, __call);
       lua_settable(state, mt);            // mt.__call = ctor
       lua_setmetatable(state, methods);
       
       lua_pushliteral(state, "__gc");
-      lua_pushstring(state, this->name.c_str());
-      lua_pushcclosure(state, __gc, 1);
+      lua_pushcfunction(state, __gc);
       lua_settable(state, metatable);
       
       lua_pushliteral(state, "__index");
@@ -154,6 +152,15 @@ namespace slub {
       lua_settable(state, metatable);
       
       lua_pop(state, 2);  // drop metatable and method table
+    }
+
+    template<typename B>
+    clazz& extends() {
+      registry* base = registry::get<B*>();
+      registry* derived = registry::get(name);
+      derived->registerBase(base);
+      base->registerDerived(derived);
+      return *this;
     }
 
     clazz& constructor() {
@@ -278,7 +285,54 @@ namespace slub {
       registry::get(name)->addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
+
+    template<typename ret>
+    clazz& method(const std::string& methodName, ret (*m)(T*)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, ret>(m));
+      return *this;
+    }
     
+    clazz& method(const std::string& methodName, void (*m)(T*)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T>(m));
+      return *this;
+    }
+    
+    template<typename ret, typename arg1>
+    clazz& method(const std::string& methodName, ret (*m)(T*, arg1)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, ret, arg1>(m));
+      return *this;
+    }
+    
+    template<typename arg1>
+    clazz& method(const std::string& methodName, void (*m)(T*, arg1)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, void, arg1>(m));
+      return *this;
+    }
+    
+    template<typename ret, typename arg1, typename arg2>
+    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2>
+    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, void, arg1, arg2>(m));
+      return *this;
+    }
+    
+    template<typename ret, typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3>
+    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3>(m));
+      return *this;
+    }
+
     clazz& eq() {
       registry::get(name)->addOperator("__eq", new eq_operator<T, T>());
       return *this;
@@ -381,13 +435,13 @@ namespace slub {
   private:
 
     static int __call(lua_State* L) {
-      std::string name(lua_tostring(L, lua_upvalueindex(1)));
-      if (registry::get(name)->containsConstructor()) {
-        T* instance = registry::get(name)->getConstructor(L)->newInstance<T>(L);
+      registry* r = registry::get<T*>();
+      if (r->containsConstructor()) {
+        T* instance = r->getConstructor(L)->newInstance<T>(L);
         wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
         w->ref = instance;
         w->gc = true;
-        luaL_getmetatable(L, lua_tostring(L, lua_upvalueindex(1)));
+        luaL_getmetatable(L, r->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -395,7 +449,7 @@ namespace slub {
     }
 
     static int __gc(lua_State* L) {
-      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, lua_tostring(L, lua_upvalueindex(1))));
+      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
       if (w->gc) {
         D::delete_(w->ref);
       }

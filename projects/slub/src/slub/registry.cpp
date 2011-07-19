@@ -78,15 +78,34 @@ namespace slub {
   }
   
   bool registry::containsField(const std::string& fieldName) {
-    return fieldMap.find(fieldName) != fieldMap.end();
+    bool result = fieldMap.find(fieldName) != fieldMap.end();
+    if (!result && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+        result = (*idx)->containsField(fieldName);
+      }
+    }
+    return result;
   }
   
-  abstract_field* registry::getField(const std::string& fieldName) {
-    if (!containsField(fieldName)) {
+  abstract_field* registry::getField(const std::string& fieldName, bool throw_) {
+    if (!containsField(fieldName) && throw_) {
       throw FieldNotFoundException(fieldName);
     }
+
+    abstract_field* result = NULL;
+    if (fieldMap.find(fieldName) != fieldMap.end()) {
+      result = fieldMap[fieldName];
+    }
+    else if (hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
+        result = (*idx)->getField(fieldName, false);
+      }
+    }
     
-    return fieldMap[fieldName];
+    if (result == NULL && throw_) {
+      throw OverloadNotFoundException(fieldName);
+    }
+    return result;
   }
   
   void registry::addMethod(const std::string& methodName, abstract_method* method) {
@@ -94,20 +113,38 @@ namespace slub {
   }
   
   bool registry::containsMethod(const std::string& methodName) {
-    return methodMap.find(methodName) != methodMap.end();
+    bool result = methodMap.find(methodName) != methodMap.end();
+    if (!result && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+        result = (*idx)->containsMethod(methodName);
+      }
+    }
+    return result;
   }
   
-  abstract_method* registry::getMethod(const std::string& methodName, lua_State* L) {
-    if (!containsMethod(methodName)) {
+  abstract_method* registry::getMethod(const std::string& methodName, lua_State* L, bool throw_) {
+    if (!containsMethod(methodName) && throw_) {
       throw MethodNotFoundException(methodName);
     }
     
-    for (std::list<abstract_method*>::iterator midx = methodMap[methodName].begin(); midx != methodMap[methodName].end(); ++midx) {
-      if ((*midx)->check(L)) {
-        return *midx;
+    abstract_method* result = NULL;
+    if (methodMap.find(methodName) != methodMap.end()) {
+      for (std::list<abstract_method*>::iterator midx = methodMap[methodName].begin(); midx != methodMap[methodName].end(); ++midx) {
+        if ((*midx)->check(L)) {
+          result = *midx;
+        }
       }
     }
-    throw OverloadNotFoundException(methodName);
+    if (result == NULL && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
+        result = (*idx)->getMethod(methodName, L, false);
+      }
+    }
+    
+    if (result == NULL && throw_) {
+      throw OverloadNotFoundException(methodName);
+    }
+    return result;
   }
   
   void registry::addOperator(const std::string& operatorName, abstract_operator* op) {
@@ -115,20 +152,38 @@ namespace slub {
   }
   
   bool registry::containsOperator(const std::string& operatorName) {
-    return operatorMap.find(operatorName) != operatorMap.end();
+    bool result = operatorMap.find(operatorName) != operatorMap.end();
+    if (!result && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+        result = (*idx)->containsOperator(operatorName);
+      }
+    }
+    return result;
   }
   
-  abstract_operator* registry::getOperator(const std::string& operatorName, lua_State* L) {
-    if (!containsOperator(operatorName)) {
+  abstract_operator* registry::getOperator(const std::string& operatorName, lua_State* L, bool throw_) {
+    if (!containsOperator(operatorName) && throw_) {
       throw OperatorNotFoundException(operatorName);
     }
     
-    for (std::list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin(); oidx != operatorMap[operatorName].end(); ++oidx) {
-      if ((*oidx)->check(L)) {
-        return *oidx;
+    abstract_operator* result = NULL;
+    if (operatorMap.find(operatorName) != operatorMap.end()) {
+      for (std::list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin(); oidx != operatorMap[operatorName].end(); ++oidx) {
+        if ((*oidx)->check(L)) {
+          result = *oidx;
+        }
       }
     }
-    throw OverloadNotFoundException(operatorName);
+    if (result == NULL && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
+        result = (*idx)->getOperator(operatorName, L, false);
+      }
+    }
+    
+    if (result == NULL && throw_) {
+      throw OverloadNotFoundException(operatorName);
+    }
+    return result;
   }
 
   registry* registry::get(const std::string& className) {
@@ -137,5 +192,29 @@ namespace slub {
     }
     return instance[className];
   }
-  
+
+  void registry::registerBase(registry* base) {
+    baseList_.push_back(base);
+  }
+
+  bool registry::hasBase() {
+    return baseList_.size() > 0;
+  }
+
+  const std::list<registry*> registry::baseList() {
+    return baseList_;
+  }
+
+  void registry::registerDerived(registry* derived) {
+    derivedList_.push_back(derived);
+  }
+
+  bool registry::isBase() {
+    return derivedList_.size() > 0;
+  }
+
+  const std::list<registry*> registry::derivedList() {
+    return derivedList_;
+  }
+
 }

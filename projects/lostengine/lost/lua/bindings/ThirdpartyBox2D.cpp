@@ -6,6 +6,28 @@
 
 using namespace slub;
 
+namespace slub {
+
+  template<>
+  struct converter<b2BodyType> {
+    
+    static bool check(lua_State* L, int index) {
+      return converter<int>::check(L, index);
+    }
+    
+    static b2BodyType get(lua_State* L, int index) {
+      return (b2BodyType) luaL_checkinteger(L, index);
+    }
+    
+    static int push(lua_State* L, b2BodyType t) {
+      lua_pushinteger(L, t);
+      return 1;
+    }
+    
+  };  
+
+}
+
 namespace lost
 {
   namespace lua
@@ -113,19 +135,17 @@ namespace lost
           .field("groupIndex",&b2Filter::groupIndex);
     }
 
-/*  ???
     void shape_setter(b2FixtureDef* fd, b2Shape* sh)
     {
       fd->shape = sh;
     }
-*/
 
     void ThirdpartyBox2Db2FixtureDef(lua_State* state)
     {
       package(state, "box2d")
         .clazz<b2FixtureDef>("b2FixtureDef")
           .constructor()
-// ???          .method("setShape",&shape_setter)
+          .method("setShape",&shape_setter)
           .field("shape",&b2FixtureDef::shape)
           .field("userData",&b2FixtureDef::userData)
           .field("friction",&b2FixtureDef::friction)
@@ -210,7 +230,8 @@ namespace lost
 
     void ThirdpartyBox2Db2PolygonShape(lua_State* state) {
       package(state, "box2d")
-        .clazz<b2PolygonShape/*, b2Shape*/>("b2PolygonShape")
+        .clazz<b2PolygonShape>("b2PolygonShape")
+          .extends<b2Shape>()
           .constructor()
           .method("SetAsBox",(void(b2PolygonShape::*)(float,float)) &b2PolygonShape::SetAsBox);
     }

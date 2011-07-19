@@ -20,16 +20,47 @@ namespace slub {
           if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
             result = true;
           }
+          else {
+            // downcast
+            if (registry::get<T*>()->isBase()) {
+              const std::list<registry*> derived = registry::get<T*>()->derivedList();
+              for (std::list<registry*>::const_iterator idx = derived.begin(); !result && idx != derived.end(); ++idx) {
+                lua_pop(L, 1);
+                lua_getfield(L, LUA_REGISTRYINDEX, (*idx)->getTypeName().c_str());
+                if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
+                  result = true;
+                }
+              }
+            }
+            // upcast
+            if (!result && registry::get<T*>()->hasBase()) {
+              const std::list<registry*> base = registry::get<T*>()->baseList();
+              for (std::list<registry*>::const_iterator idx = base.begin(); !result && idx != base.end(); ++idx) {
+                lua_pop(L, 1);
+                lua_getfield(L, LUA_REGISTRYINDEX, (*idx)->getTypeName().c_str());
+                if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
+                  result = true;
+                }
+              }
+            }
+          }
           lua_pop(L, 2);  /* remove both metatables */
         }
       }
       return result;
     }
 
+    static void* checkudata(lua_State* L, int index) {
+      if (!check(L, index)) {
+        luaL_typerror(L, index, registry::getTypeName<T*>().c_str());
+      }
+      return lua_touserdata(L, index);
+    }
+
     static T get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(checkudata(L, index));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -60,7 +91,7 @@ namespace slub {
     static T* get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, index));
         return w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -95,7 +126,7 @@ namespace slub {
     static const T* get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(converter<T>::checkudata(L, index));
         return w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -130,7 +161,7 @@ namespace slub {
     static T& get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, index));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -165,7 +196,7 @@ namespace slub {
     static const T& get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
         std::cout << "get, registered" << std::endl;
-        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(luaL_checkudata(L, index, registry::getTypeName<T*>().c_str()));
+        wrapper<const T*>* w = static_cast<wrapper<const T*>*>(converter<T>::checkudata(L, index));
         return *w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
@@ -228,31 +259,13 @@ namespace slub {
   };
 
   template<>
-  struct converter<float> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isnumber(L, index);
-    }
-    
-    static float get(lua_State* L, int index) {
-      return luaL_checknumber(L, index);
-    }
-    
-    static int push(lua_State* L, float value) {
-      lua_pushnumber(L, value);
-      return 1;
-    }
-    
-  };
-  
-  template<>
   struct converter<double> {
     
     static bool check(lua_State* L, int index) {
       return lua_isnumber(L, index);
     }
     
-    static float get(lua_State* L, int index) {
+    static double get(lua_State* L, int index) {
       return luaL_checknumber(L, index);
     }
     
@@ -262,7 +275,10 @@ namespace slub {
     }
     
   };
-  
+
+  template<>
+  struct converter<float> : converter<double> {};
+
   template<>
   struct converter<std::string> {
     

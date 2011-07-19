@@ -1,7 +1,6 @@
 struct foo {
   
   int bar;
-  foo* f;
 
   foo(int i) {
     std::cout << "foo:ctor" << std::endl;
@@ -20,7 +19,7 @@ struct foo {
   foo* getFoo(foo* f) {
     return f;
   }
-
+  
   int getBar() {
     return bar;
   }
@@ -81,6 +80,16 @@ std::ostream& operator<<(std::ostream& s, const foo& f) {
 }
 
 struct baz : public foo {
+
   baz(int i, int j) : foo(i, j) {
   }
+  
+  foo* get() {
+    return this;
+  }
+  
+  void print(baz* b) {
+    std::cout << "baz::print() -> " << b << std::endl;
+  }
+
 };
