@@ -22,7 +22,7 @@ namespace slub {
 
     int get(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
-      return converter<F>::push(L, t->ref->*m);
+      return converter<F*>::push(L, &(t->ref->*m));
     }
 
     int set(lua_State* L) {
@@ -33,6 +33,48 @@ namespace slub {
 
   };
 
+  template<typename T, typename F>
+  struct field<T, F*> : public abstract_field {
+    
+    F* T::*m;
+    
+    field(F* T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<F*>::push(L, t->ref->*m);
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = converter<F*>::get(L, -1);
+      return 0;
+    }
+    
+  };
+  
+  template<typename T, typename F>
+  struct field<T, const F*> : public abstract_field {
+    
+    const F* T::*m;
+    
+    field(const F* T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<const F*>::push(L, t->ref->*m);
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = converter<const F*>::get(L, -1);
+      return 0;
+    }
+    
+  };
+  
   template<typename T>
   struct field<T, bool> : public abstract_field {
     
