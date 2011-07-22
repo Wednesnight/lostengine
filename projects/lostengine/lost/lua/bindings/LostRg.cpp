@@ -28,11 +28,13 @@
 #include "lost/font/RenderedText.h"
 #include <luabind/shared_ptr_converter.hpp>
 
+#include <slub/slub.h>
 
 using namespace luabind;
 using namespace lost::rg;
 using namespace lost::mesh;
 using namespace lost::font;
+using namespace slub;
 
 namespace lost
 {
@@ -40,6 +42,79 @@ namespace lost
   {
     void LostRg(lua_State* state)
     {
+/*
+      package rg = package(state, "lost").package("rg");
+
+      rg.clazz<Node>("Node")
+        .method("add", &Node::add)
+        .method("addFront", &Node::addFront)
+        .method("remove", &Node::remove)
+        .method("removeLast", &Node::removeLast)
+        .method("process", &Node::process)
+        .method("recursiveFindByName", &Node::recursiveFindByName)
+        .method("print", &Node::print)
+        .method("clear",&Node::clear)
+        .field("name", &Node::name)
+        .field("active", &Node::active)
+        .function("create", &Node::create);
+
+      rg.clazz<Draw>("Draw")
+        .extends<Node>()
+        .field("mesh", &Draw::mesh)
+        .function("create", &Draw::create);
+
+      rg.clazz<Camera>("Camera")
+        .extends<Node>()
+        .field("cam", &Camera::cam)
+        .function("create", (rg::CameraPtr(*)(camera::CameraPtr))&Camera::create)
+        .function("create", (rg::CameraPtr(*)(camera::Camera2DPtr))&Camera::create)
+        .function("create", (rg::CameraPtr(*)(camera::Camera3DPtr))&Camera::create);
+
+      rg.clazz<DepthTest>("DepthTest")
+        .extends<Node>()
+        .field("enable", &DepthTest::enable)
+        .function("create", &DepthTest::create);
+
+      rg.clazz<Clear>("Clear")
+        .extends<Node>()
+        .field("mask", &Clear::mask)
+        .function("create", &Clear::create);
+
+      rg.clazz<ClearColor>("ClearColor")
+        .extends<Node>()
+        .field("col", &ClearColor::col)
+        .function("create", &ClearColor::create);
+
+      rg.clazz<DefaultFrameBuffer>("DefaultFrameBuffer")
+        .extends<Node>()
+        .function("create", &DefaultFrameBuffer::create);
+
+      rg.clazz<FrameBuffer>("FrameBuffer")
+        .extends<Node>()
+        .field("fb", &FrameBuffer::fb)
+        .function("create", &FrameBuffer::create);
+
+      rg.clazz<Blend>("Blend")
+        .extends<Node>()
+        .field("enable", &Blend::enable)
+        .function("create", &Blend::create);
+
+      rg.clazz<Scissor>("Scissor")
+        .extends<Node>()
+        .field("enable", &Scissor::enable)
+        .function("create", &Scissor::create);
+
+      rg.clazz<ScissorRect>("ScissorRect")
+        .extends<Node>()
+        .field("rect", &ScissorRect::rect)
+        .function("create", &ScissorRect::create);
+
+      rg.clazz<ScissorStack>("ScissorStack")
+        .extends<Node>()
+        .field("rect", &ScissorStack::rect)
+        .field("clip", &ScissorStack::clip)
+        .function("create", &ScissorStack::create);
+*/
       module(state, "lost")
       [
         namespace_("rg")

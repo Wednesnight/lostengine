@@ -5,6 +5,7 @@
 #include <slub/constructor.h>
 #include <slub/exception.h>
 #include <slub/field.h>
+#include <slub/function.h>
 #include <slub/method.h>
 #include <slub/operators.h>
 #include <slub/registry.h>
@@ -239,6 +240,30 @@ namespace slub {
       return *this;
     }
     
+    template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4)) {
+      registry::get(name)->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4)) {
+      registry::get(name)->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+    
+    template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
+      registry::get(name)->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4, arg5>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
+      registry::get(name)->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4, arg5>(m));
+      return *this;
+    }
+    
     template<typename ret>
     clazz& method(const std::string& methodName, ret (T::*m)() const) {
       registry::get(name)->addMethod(methodName, new slub::const_method<T, ret>(m));
@@ -280,12 +305,24 @@ namespace slub {
       return *this;
     }
     
+    template<typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4) const) {
+      registry::get(name)->addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+
+    template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4) const) {
+      registry::get(name)->addMethod(methodName, new slub::const_method<T, ret, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+    
     template<typename arg1, typename arg2, typename arg3>
     clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3) const) {
       registry::get(name)->addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
-
+    
     template<typename ret>
     clazz& method(const std::string& methodName, ret (*m)(T*)) {
       registry::get(name)->addMethod(methodName, new slub::func_method<T, ret>(m));
@@ -333,6 +370,18 @@ namespace slub {
       return *this;
     }
 
+    template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4)) {
+      registry::get(name)->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3, arg4>(m));
+      return *this;
+    }
+    
     clazz& eq() {
       registry::get(name)->addOperator("__eq", new eq_operator<T, T>());
       return *this;
@@ -415,6 +464,69 @@ namespace slub {
     template<typename R>
     clazz& unm() {
       registry::get(name)->addOperator("__unm", new unm_operator<T, R>());
+      return *this;
+    }
+    
+    clazz& function(const std::string& name, void (*f)()) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename arg1>
+    clazz& function(const std::string& name, void (*f)(arg1)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<arg1>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2>
+    clazz& function(const std::string& name, void (*f)(arg1, arg2)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<arg1, arg2>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3>
+    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R>
+    clazz& function(const std::string& name, R (*f)()) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<R>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R, typename arg1>
+    clazz& function(const std::string& name, R (*f)(arg1)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<R, arg1>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2>
+    clazz& function(const std::string& name, R (*f)(arg1, arg2)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<R, arg1, arg2>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2, typename arg3>
+    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
+      luaL_getmetatable(state, this->name.c_str());
+      slub::function<R, arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
       return *this;
     }
     

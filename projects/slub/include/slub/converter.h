@@ -5,6 +5,7 @@
 #include <slub/wrapper.h>
 #include <stdexcept>
 #include <iostream>
+#include <list>
 
 namespace slub {
 

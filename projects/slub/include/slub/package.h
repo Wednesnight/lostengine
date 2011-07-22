@@ -50,72 +50,82 @@ namespace slub {
       return result;
     }
     
-    void function(const std::string& name, void (*f)()) {
+    package_& function(const std::string& name, void (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename arg1>
-    void function(const std::string& name, void (*f)(arg1)) {
+    package_& function(const std::string& name, void (*f)(arg1)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<arg1>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename arg1, typename arg2>
-    void function(const std::string& name, void (*f)(arg1, arg2)) {
+    package_& function(const std::string& name, void (*f)(arg1, arg2)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<arg1, arg2>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3>
-    void function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
+    package_& function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename R>
-    void function(const std::string& name, R (*f)()) {
+    package_& function(const std::string& name, R (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<R>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename R, typename arg1>
-    void function(const std::string& name, R (*f)(arg1)) {
+    package_& function(const std::string& name, R (*f)(arg1)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<R, arg1>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename R, typename arg1, typename arg2>
-    void function(const std::string& name, R (*f)(arg1, arg2)) {
+    package_& function(const std::string& name, R (*f)(arg1, arg2)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<R, arg1, arg2>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3>
-    void function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
+    package_& function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<R, arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
+      return *this;
     }
     
     template<typename T>
-    void enumerated(const std::string& constantName, const T& value) {
+    package_& enumerated(const std::string& constantName, const T& value) {
       constant<int>(constantName, value);
+      return *this;
     }
     
     template<typename T>
-    void constant(const std::string& constantName, const T& value) {
+    package_& constant(const std::string& constantName, const T& value) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       converter<T>::push(state, value);
       lua_setfield(state, -2, constantName.c_str());
       lua_pop(state, 1);
+      return *this;
     }
 
   };

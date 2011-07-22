@@ -28,10 +28,13 @@
 #include "lost/event/Event.h"
 #include "lost/font/FontManager.h"
 
+#include <slub/slub.h>
+
 using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
 using namespace lost::resource;
+using namespace slub;
 
 namespace lost
 {
@@ -40,6 +43,14 @@ namespace lost
 
     void LostApplicationApplication(lua_State* state)
     {
+/*
+      package(state, "lost").package("application")
+        .clazz<Application>("Application")
+          .method("showMouse", &Application::showMouse)
+          .field("eventDispatcher", &Application::eventDispatcher)
+          .field("tasklets", &Application::tasklets)
+          .function("getInstance", (ApplicationPtr(*)())&Application::getInstance);
+*/
       module(state, "lost")
       [
         namespace_("application")
@@ -55,7 +66,7 @@ namespace lost
         ]
       ];
     }
-    
+
     void LostApplicationApplicationEvent(lua_State* state)
     {
       module(state, "lost")
