@@ -1,6 +1,7 @@
 #include "lost/lua/bindings/LostCommon.h"
+
 #include "lost/lua/lua.h"
-#include <luabind/operator.hpp>
+#include "lost/lua/State.h"
 
 #include "lost/common/Color.h"
 #include "lost/common/io.h"
@@ -8,11 +9,12 @@
 #include "lost/common/Logger.h"
 #include "lost/common/ColorPoint.h"
 #include "lost/common/ColorGradient.h"
-#include "lost/lua/State.h"
 #include "lost/common/Hash.h"
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::common;
+using namespace slub;
 
 namespace lost
 {
@@ -21,43 +23,30 @@ namespace lost
 
     void LostCommonData(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          class_<Data>("Data")
-            .def("str", &Data::str)
-            .def_readwrite("size", &Data::size)
-            .scope
-            [
-              def("create", &Data::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("common")
+        .clazz<Data>("Data")
+          .method("str", &Data::str)
+          .field("size", &Data::size)
+          .function("create", &Data::create);
     }
 
     void LostCommonColor(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          class_<Color>("Color")
-            .def(constructor<>()) 
-            .def(constructor<float, float, float>())
-            .def(constructor<float, float, float, float>())
-            .def(constructor<const Color&>())
-            .def(self == other<Color>())
-            .def(tostring(self))
-            .def(self * other<Color>())
-            .def(self * other<float>())
-            .def("premultiplied", &Color::premultiplied)
-            .property("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
-            .property("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)
-            .property("b", (float(Color::*)() const)&Color::b, (void(Color::*)(float))&Color::b)
-            .property("a", (float(Color::*)() const)&Color::a, (void(Color::*)(float))&Color::a)
-        ]
-      ];
+      package(state, "lost").package("common")
+        .clazz<Color>("Color")
+          .constructor()
+          .constructor<float, float, float>()
+          .constructor<float, float, float, float>()
+          .constructor<const Color&>()
+          .eq()
+          .tostring()
+          .mul<Color, Color>()
+          .mul<Color, float>()
+          .method("premultiplied", &Color::premultiplied)
+          .field("r", (float(Color::*)() const)&Color::r, (void(Color::*)(float))&Color::r)
+          .field("g", (float(Color::*)() const)&Color::g, (void(Color::*)(float))&Color::g)
+          .field("b", (float(Color::*)() const)&Color::b, (void(Color::*)(float))&Color::b)
+          .field("a", (float(Color::*)() const)&Color::a, (void(Color::*)(float))&Color::a);
       /*
        globals(state)["lost"]["common"]["transparentColor"] = Color(transparentColor);
        globals(state)["lost"]["common"]["whiteColor"]       = Color(whiteColor);
@@ -71,44 +60,32 @@ namespace lost
 
     void LostCommonColorPoint(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          class_<ColorPoint>("ColorPoint")
-            .def(constructor<>()) 
-            .def(constructor<float, const Color&>())
-        ]
-      ];
+      package(state, "lost").package("common")
+        .clazz<ColorPoint>("ColorPoint")
+          .constructor()
+          .constructor<float, const Color&>();
     }
 
     void LostCommonColorGradient(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          class_<ColorGradient>("ColorGradient")
-          .def("add", &ColorGradient::add)
-          .scope
-          [
-            def("create", &ColorGradient::create)
-          ]
-        ]
-      ];
+      package(state, "lost").package("common")
+        .clazz<ColorGradient>("ColorGradient")
+          .method("add", &ColorGradient::add)
+          .function("create", &ColorGradient::create);
     }
 
-    // from: http://osdir.com/ml/lang.lua.bind.user/2005-12/msg00034.html
-    // NOTE: This is potentially buggy, we have to watch this and maybe reimplement it more restrictively
-    // with object_cast, surrrounded by try/catch and extended error long in case of failure
-    template <typename ValueWrapper>
-    string luabind_tostring(ValueWrapper const& value_wrapper)
+    string tostring(lua_State* state)
     {
-      using namespace luabind;
-      lua_State* interpreter = value_wrapper_traits<ValueWrapper>::interpreter(value_wrapper);
-      value_wrapper_traits<ValueWrapper>::unwrap(interpreter, value_wrapper);
-      detail::stack_pop pop(interpreter, 1);
-      return string(lua_tostring(interpreter, -1), lua_strlen(interpreter, -1));
+      if (lua_getmetatable(state, -1)) {  /* does it have a metatable? */
+        lua_getfield(state, -1, "__tostring");
+        if (lua_type(state, -1) == LUA_TFUNCTION) {
+          // TODO: call & get result
+        }
+        lua_pop(state, 2);
+      }
+      else {
+        return string(luaL_checkstring(state, -1));
+      }
     }
     
     string getFilenameFuncnameLine(lua_State* state)
@@ -117,54 +94,47 @@ namespace lost
       return ls->getFilenameFuncnameLine();
     }
     
-    void debug(luabind::object obj)
+    void debug(lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_DOUT)
-			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
+			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(state), tostring(state));
 #endif
     }
     
-    void info(luabind::object obj)
+    void info(lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_IOUT)
-			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
+			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(state), tostring(state));
 #endif
     }
     
-    void warn(luabind::object obj)
+    void warn(lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_WOUT)
-			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
+			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(state), tostring(state));
 #endif
     }
     
-    void error(luabind::object obj)
+    void error(lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_EOUT)
-			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(obj.interpreter()), luabind_tostring(obj));
+			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(state), tostring(state));
 #endif
     }
     
     void LostCommonLog(lua_State* state)
     {
-      module(state, "log")
-      [
-        def("debug", &debug),
-        def("info", &info),
-        def("warn", &warn),
-        def("error", &error)
-      ];
+      package(state, "log")
+        .function("debug", &debug)
+        .function("info", &info)
+        .function("warn", &warn)
+        .function("error", &error);
     }
   
     void LostCommonHash(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("common")
-        [
-          def("djb2Hash",&lost::common::djb2Hash)
-        ]
-      ];
+      package(state, "lost").package("common")
+        .function("djb2Hash",&lost::common::djb2Hash);
     }
 
     void LostCommon(lua_State* state)

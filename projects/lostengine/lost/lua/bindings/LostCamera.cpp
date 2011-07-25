@@ -1,14 +1,13 @@
 #include "lost/lua/bindings/LostCamera.h"
-#include "lost/lua/lua.h"
-
 #include "lost/camera/Camera.h"
 #include "lost/camera/Camera2D.h"
 #include "lost/camera/Camera3D.h"
 
-using namespace boost;
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::camera;
 using namespace lost::math;
+using namespace slub;
 
 namespace lost
 {
@@ -16,46 +15,39 @@ namespace lost
   {
     void LostCameraCamera(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("camera")
-        [
-          class_<Camera>("Camera")
-            .def("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
-            .def("viewport", (Rect&(Camera::*)())&Camera::viewport)
-            .def("viewMatrix", &Camera::viewMatrix)
-            .def("projectionMatrix", &Camera::projectionMatrix),
-          class_<Camera2D, Camera>("Camera2D")
-            .scope
-            [
-              def("create", &Camera2D::create)
-            ]
-            ,
-          class_<Camera3D, Camera>("Camera3D")
-            .def("fovY", (float(Camera3D::*)()) &Camera3D::fovY)
-            .def("fovY", (void(Camera3D::*)(const float)) &Camera3D::fovY)
-            .def("position", (Vec3(Camera3D::*)()) &Camera3D::position)
-            .def("position", (void(Camera3D::*)(const Vec3&)) &Camera3D::position)
-            .def("direction", (Vec3(Camera3D::*)()) &Camera3D::direction)
-            .def("direction", (void(Camera3D::*)(const Vec3&)) &Camera3D::direction)
-            .def("stickToTarget", (bool(Camera3D::*)()) &Camera3D::stickToTarget)
-            .def("stickToTarget", (void(Camera3D::*)(const bool)) &Camera3D::stickToTarget)
-            .def("rotation", (Vec3(Camera3D::*)()) &Camera3D::rotation)
-            .def("rotation", (void(Camera3D::*)(const Vec3&)) &Camera3D::rotation)
-            .def("target", (Vec3(Camera3D::*)()) &Camera3D::target)
-            .def("target", (void(Camera3D::*)(const Vec3&)) &Camera3D::target)
-            .def("move", &Camera3D::move)
-            .def("rotate", &Camera3D::rotate)
-            .def("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
-            .def("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
-            .def("up", (Vec3(Camera3D::*)()) &Camera3D::up)
-            .def("up", (void(Camera3D::*)(const Vec3&)) &Camera3D::up)
-            .scope
-            [
-              def("create", &Camera3D::create)
-            ]
-        ]
-      ];
+      package camera = package(state, "lost").package("camera");
+
+      camera.clazz<Camera>("Camera")
+        .method("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)
+        .method("viewport", (Rect&(Camera::*)())&Camera::viewport)
+        .method("viewMatrix", &Camera::viewMatrix)
+        .method("projectionMatrix", &Camera::projectionMatrix);
+
+      camera.clazz<Camera2D>("Camera2D")
+        .extends<Camera>()
+        .function("create", &Camera2D::create);
+
+      camera.clazz<Camera3D>("Camera3D")
+        .extends<Camera>()
+        .method("fovY", (float(Camera3D::*)()) &Camera3D::fovY)
+        .method("fovY", (void(Camera3D::*)(const float)) &Camera3D::fovY)
+        .method("position", (Vec3(Camera3D::*)()) &Camera3D::position)
+        .method("position", (void(Camera3D::*)(const Vec3&)) &Camera3D::position)
+        .method("direction", (Vec3(Camera3D::*)()) &Camera3D::direction)
+        .method("direction", (void(Camera3D::*)(const Vec3&)) &Camera3D::direction)
+        .method("stickToTarget", (bool(Camera3D::*)()) &Camera3D::stickToTarget)
+        .method("stickToTarget", (void(Camera3D::*)(const bool)) &Camera3D::stickToTarget)
+        .method("rotation", (Vec3(Camera3D::*)()) &Camera3D::rotation)
+        .method("rotation", (void(Camera3D::*)(const Vec3&)) &Camera3D::rotation)
+        .method("target", (Vec3(Camera3D::*)()) &Camera3D::target)
+        .method("target", (void(Camera3D::*)(const Vec3&)) &Camera3D::target)
+        .method("move", &Camera3D::move)
+        .method("rotate", &Camera3D::rotate)
+        .method("depth", (Vec2(Camera3D::*)()) &Camera3D::depth)
+        .method("depth", (void(Camera3D::*)(const Vec2&)) &Camera3D::depth)
+        .method("up", (Vec3(Camera3D::*)()) &Camera3D::up)
+        .method("up", (void(Camera3D::*)(const Vec3&)) &Camera3D::up)
+        .function("create", &Camera3D::create);
     }
 
     void LostCamera(lua_State* state)

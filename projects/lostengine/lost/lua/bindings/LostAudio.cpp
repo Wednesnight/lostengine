@@ -1,10 +1,11 @@
 #include "lost/lua/bindings/LostAudio.h"
-#include "lost/lua/lua.h"
 #include "lost/audio/Engine.h"
 #include "lost/audio/Source.h"
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::audio;
+using namespace slub;
 
 namespace lost
 {
@@ -13,32 +14,19 @@ namespace lost
     
     void LostAudioEngine(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("audio")
-        [
-          class_<Engine>("Engine")
-            .def("createSource", &Engine::createSource)
-            .scope
-            [
-              def("create", &Engine::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("audio")
+        .clazz<Engine>("Engine")
+          .method("createSource", &Engine::createSource)
+          .function("create", &Engine::create);
     }
     
     void LostAudioSource(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("audio")
-        [
-          class_<Source>("Source")
-            .def("initWithFile", &Source::initWithFile)
-            .def("play", &Source::play)
-            .def("stop", &Source::stop)
-        ]
-      ];
+      package(state, "lost").package("audio")
+        .clazz<Source>("Source")
+          .method("initWithFile", &Source::initWithFile)
+          .method("play", &Source::play)
+          .method("stop", &Source::stop);
     }
         
     void LostAudio(lua_State* state)

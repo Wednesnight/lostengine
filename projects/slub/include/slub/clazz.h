@@ -187,12 +187,24 @@ namespace slub {
       return *this;
     }
     
+    template<typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& constructor() {
+      registry::get(name)->addConstructor(new slub::constructor<T, arg1, arg2, arg3, arg4>());
+      return *this;
+    }
+    
     template<typename F>
     clazz& field(const std::string& fieldName, F T::*m) {
       registry::get(name)->addField(fieldName, new slub::field<T, F>(m));
       return *this;
     }
 
+    template<typename F>
+    clazz& field(const std::string& fieldName, F (T::*getter)() const, void (T::*setter)(F)) {
+      registry::get(name)->addField(fieldName, new slub::field_method<T, F>(getter, setter));
+      return *this;
+    }
+    
     template<typename ret>
     clazz& method(const std::string& methodName, ret (T::*m)()) {
       registry::get(name)->addMethod(methodName, new slub::method<T, ret>(m));
