@@ -74,9 +74,10 @@ namespace lost
           .function("create", &ColorGradient::create);
     }
 
-    string tostring(lua_State* state)
+    string tostring(lua_State* state, const reference& obj)
     {
-      string result(luaL_typename(state, -1));
+      obj.push();
+      string result;
       if (lua_getmetatable(state, -1)) {  /* does it have a metatable? */
         lua_getfield(state, -1, "__tostring");
         if (lua_type(state, -1) == LUA_TFUNCTION) {
@@ -86,9 +87,15 @@ namespace lost
         }
         lua_pop(state, 2);
       }
-      else {
-        result = string(luaL_checkstring(state, -1));
+      if (result.size() == 0) {
+        if (lua_isstring(state, -1)) {
+          result = string(luaL_checkstring(state, -1));
+        }
+        else {
+          result = luaL_typename(state, -1);
+        }
       }
+      lua_pop(state, 1);
       return result;
     }
     
@@ -98,31 +105,31 @@ namespace lost
       return ls->getFilenameFuncnameLine();
     }
     
-    void debug(lua_State* state)
+    void debug(const reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_DOUT)
-			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(state), tostring(state));
+			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void info(lua_State* state)
+    void info(const reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_IOUT)
-			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(state), tostring(state));
+			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void warn(lua_State* state)
+    void warn(const reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_WOUT)
-			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(state), tostring(state));
+			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void error(lua_State* state)
+    void error(const reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_EOUT)
-			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(state), tostring(state));
+			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     

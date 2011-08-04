@@ -15,20 +15,20 @@ namespace lost
   namespace lua
   {
 
-    bool TimerCallbackProxy(const luabind::object& targetMethod, const luabind::object& targetObject, const Timer* timer)
+    bool TimerCallbackProxy(const reference& targetMethod, const reference& targetObject, const Timer* timer)
     {
-      if (luabind::type(targetMethod) == LUA_TFUNCTION) {
-        if (luabind::type(targetObject) != LUA_TNIL) {
-          return luabind::call_function<bool>(targetMethod, targetObject, timer);
+      if (targetMethod.type() == LUA_TFUNCTION) {
+        if (targetObject.type() != LUA_TNIL) {
+          return targetMethod.operator()<bool>(targetObject, timer);
         }
         else {
-          return luabind::call_function<bool>(targetMethod, timer);
+          return targetMethod.operator()<bool>(timer);
         }
       }
       return false;
     }
     
-    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, const luabind::object& targetMethod, const luabind::object& targetObject)
+    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, const reference& targetMethod, const reference& targetObject)
     {
       return scheduler->createTimer(interval, boost::bind(&TimerCallbackProxy, targetMethod, targetObject, _1));
     }

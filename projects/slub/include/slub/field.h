@@ -175,6 +175,28 @@ namespace slub {
   };
 
   template<typename T>
+  struct field<T, unsigned int> : public abstract_field {
+    
+    unsigned int T::*m;
+    
+    field(unsigned int T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      lua_pushinteger(L, t->ref->*m);
+      return 1;
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = luaL_checkinteger(L, -1);
+      return 0;
+    }
+    
+  };
+  
+  template<typename T>
   struct field<T, float> : public abstract_field {
     
     float T::*m;

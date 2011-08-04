@@ -60,12 +60,12 @@ namespace slub {
     abstract_constructor* getConstructor(lua_State* L);
     
     void addField(const std::string& fieldName, abstract_field* field);
-    bool containsField(const std::string& fieldName);
-    abstract_field* getField(const std::string& fieldName, bool throw_ = true);
+    bool containsField(const std::string& fieldName, bool downcast = true);
+    abstract_field* getField(const std::string& fieldName, bool throw_ = true, bool downcast = true);
     
     void addMethod(const std::string& methodName, abstract_method* method);
-    bool containsMethod(const std::string& methodName);
-    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true);
+    bool containsMethod(const std::string& methodName, bool downcast = true);
+    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true, bool downcast = true);
     
     void addOperator(const std::string& operatorName, abstract_operator* op);
     bool containsOperator(const std::string& operatorName);

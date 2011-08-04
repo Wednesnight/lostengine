@@ -8,6 +8,7 @@
 #include <lost/math/io.h>
 
 using namespace lost::math;
+using namespace slub;
 
 void testing0() {
   std::cout << "testing0()" << std::endl;
@@ -33,6 +34,10 @@ enum enm {
   e1,
   e2
 };
+
+reference ref(const reference& r) {
+  return r;
+}
 
 int main (int argc, char * const argv[]) {
 
@@ -154,6 +159,12 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
+  slub::function(L, "ref", &ref);
+
+  if (luaL_dostring(L, "local r = 10 local f = ref(r) print(f) ")) {
+    std::cout << lua_tostring(L, -1) << std::endl;
+  }
+  
   lua_gc(L, LUA_GCCOLLECT, 0);
   lua_close(L);
 

@@ -47,19 +47,7 @@ namespace slub {
   public:
 
     reference(const reference& r) {
-      mode = r.mode;
-      state = r.state;
-      field = r.field;
-      if (mode == NESTED) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, r.parent);
-        parent = luaL_ref(state, LUA_REGISTRYINDEX);
-        ref = LUA_NOREF;
-      }
-      else if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, r.ref);
-        ref = luaL_ref(state, LUA_REGISTRYINDEX);
-        parent = LUA_NOREF;
-      }
+      *this = r;
     }
 
     reference() : mode(NONE), state(NULL), ref(LUA_NOREF), parent(LUA_NOREF) {
@@ -80,6 +68,22 @@ namespace slub {
       if (parent != LUA_NOREF && parent != LUA_REFNIL) {
         luaL_unref(state, LUA_REGISTRYINDEX, parent);
       }
+    }
+
+    void operator=(const reference& r) {
+      mode = r.mode;
+      state = r.state;
+      field = r.field;
+      if (mode == NESTED) {
+        lua_rawgeti(state, LUA_REGISTRYINDEX, r.parent);
+        parent = luaL_ref(state, LUA_REGISTRYINDEX);
+        ref = LUA_NOREF;
+      }
+      else if (mode == REFERENCE) {
+        lua_rawgeti(state, LUA_REGISTRYINDEX, r.ref);
+        ref = luaL_ref(state, LUA_REGISTRYINDEX);
+        parent = LUA_NOREF;
+      }      
     }
 
     reference operator[](const std::string& field) {

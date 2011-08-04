@@ -31,6 +31,32 @@ using namespace lost::event;
 using namespace lost::resource;
 using namespace slub;
 
+namespace slub {
+
+  template<typename T>
+  struct field<T, KeyCode> : public abstract_field {
+    
+    KeyCode T::*m;
+    
+    field(KeyCode T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      lua_pushinteger(L, t->ref->*m);
+      return 1;
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = (KeyCode) luaL_checkinteger(L, -1);
+      return 0;
+    }
+    
+  };
+  
+}
+
 namespace lost
 {
   namespace lua
@@ -89,7 +115,7 @@ namespace lost
         .field("specialDown", &KeyEvent::specialDown)
         .constant("KEY_UP", KeyEvent::KEY_UP())
         .constant("KEY_DOWN", KeyEvent::KEY_DOWN());
-      
+
       application
         .enumerated("K_UNKNOWN", K_UNKNOWN)
 
