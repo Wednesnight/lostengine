@@ -51,11 +51,15 @@ namespace slub {
   }
   
   int abstract_clazz::__callMethod(lua_State* L) {
-    return registry::get(lua_tostring(L, lua_upvalueindex(1)))->getMethod(lua_tostring(L, lua_upvalueindex(2)), L)->call(L);
+    int num = lua_gettop(L);
+    registry::get(lua_tostring(L, lua_upvalueindex(1)))->getMethod(lua_tostring(L, lua_upvalueindex(2)), L)->call(L);
+    return lua_gettop(L) - num;
   }
   
   int abstract_clazz::__callOperator(lua_State* L) {
-    return registry::get(lua_tostring(L, lua_upvalueindex(1)))->getOperator(lua_tostring(L, lua_upvalueindex(2)), L)->op(L);
+    int num = lua_gettop(L);
+    registry::get(lua_tostring(L, lua_upvalueindex(1)))->getOperator(lua_tostring(L, lua_upvalueindex(2)), L)->op(L);
+    return lua_gettop(L) - num;
   }
   
 }

@@ -97,6 +97,9 @@ namespace slub {
   };
 
   template<typename T, typename F>
+  struct field<T, boost::shared_ptr<F>&> : field<T, boost::shared_ptr<F> > {};
+
+  template<typename T, typename F>
   struct field<T, const boost::shared_ptr<F>&> : field<T, boost::shared_ptr<F> > {};
 
   template<typename T, typename F>
@@ -119,6 +122,9 @@ namespace slub {
     }
     
   };
+
+  template<typename T, typename F>
+  struct field<T, std::tr1::shared_ptr<F>&> : field<T, std::tr1::shared_ptr<F> > {};
 
   template<typename T, typename F>
   struct field<T, const std::tr1::shared_ptr<F>&> : field<T, std::tr1::shared_ptr<F> > {};

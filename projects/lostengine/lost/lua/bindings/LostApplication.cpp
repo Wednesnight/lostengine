@@ -26,7 +26,6 @@
 
 #include <slub/slub.h>
 
-using namespace luabind;
 using namespace lost::application;
 using namespace lost::event;
 using namespace lost::resource;
@@ -297,7 +296,7 @@ namespace lost
           .field("size", &Window::size);
     }
 
-    void LostApplicationQueue_queue(Queue* queue, object targetMethod, object targetObject)
+    void LostApplicationQueue_queue(Queue* queue, const reference& targetMethod, const reference& targetObject)
     {
       queue->queue(new QueueEntityLua(targetObject, targetMethod));
     }

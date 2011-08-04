@@ -33,7 +33,9 @@ namespace slub {
     for (std::list<abstract_function_wrapper*>::iterator idx = instance.functions[name].begin(); idx != instance.functions[name].end(); ++idx) {
       abstract_function_wrapper* f = *idx;
       if (f->check(L)) {
-        return f->call(L);
+        int num = lua_gettop(L);
+        f->call(L);
+        return lua_gettop(L) - num;
       }
     }
     throw std::runtime_error("No matching overload found, candidates: ...");

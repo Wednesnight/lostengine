@@ -18,12 +18,15 @@
 #include "lost/gl/HybridIndexBuffer.h"
 #include <stdexcept>
 
+#include <slub/slub.h>
+
 using namespace luabind;
 using namespace lost::bitmap;
 using namespace lost::camera;
 using namespace lost::gl;
 using namespace lost::math;
 using namespace lost::resource;
+using namespace slub;
 
 namespace lost
 {
@@ -32,75 +35,68 @@ namespace lost
 
     void LostGLContext(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Context>("Context")
-            .def("makeCurrent", &Context::makeCurrent)
-            .def("swapBuffers", &Context::swapBuffers)
-            .def("vsync", &Context::vsync)
-            .def("multithreaded", &Context::multithreaded)
-            .def("writeScreenshot", &Context::writeScreenshot)
-            .def("shader",&Context::shader)
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<Context>("Context")
+          .method("makeCurrent", &Context::makeCurrent)
+          .method("swapBuffers", &Context::swapBuffers)
+          .method("vsync", &Context::vsync)
+          .method("multithreaded", &Context::multithreaded)
+          .method("writeScreenshot", &Context::writeScreenshot)
+          .method("shader",&Context::shader);
     }
 
     void LostGLBuffer(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<BufferLayout>("BufferLayout")
-            .def(constructor<>())
-            .def("add", &BufferLayout::add),
-          class_<HybridVertexBuffer>("HybridVertexBuffer"),
-          class_<HybridIndexBuffer>("HybridIndexBuffer")
-          .def_readwrite("drawMode", &HybridIndexBuffer::drawMode)
-        ]
-      ];
-      globals(state)["gl"]["ET_u8"] =   ET_u8;
-      globals(state)["gl"]["ET_u16"] =   ET_u16;
-      globals(state)["gl"]["ET_u32"] =   ET_u32;
-      globals(state)["gl"]["ET_f32"] =   ET_f32;  
-      globals(state)["gl"]["ET_vec2_u8"] =   ET_vec2_u8;
-      globals(state)["gl"]["ET_vec2_u16"] =   ET_vec2_u16;
-      globals(state)["gl"]["ET_vec2_u32"] =   ET_vec2_u32;
-      globals(state)["gl"]["ET_vec2_f32"] =   ET_vec2_f32; 
-      globals(state)["gl"]["ET_vec3_u8"] =   ET_vec3_u8;
-      globals(state)["gl"]["ET_vec3_u16"] =   ET_vec3_u16;
-      globals(state)["gl"]["ET_vec3_u32"] =   ET_vec3_u32;
-      globals(state)["gl"]["ET_vec3_f32"] =   ET_vec3_f32; 
-      globals(state)["gl"]["ET_vec4_u8"] =   ET_vec4_u8;
-      globals(state)["gl"]["ET_vec4_u16"] =   ET_vec4_u16;
-      globals(state)["gl"]["ET_vec4_u32"] =   ET_vec4_u32;
-      globals(state)["gl"]["ET_vec4_f32"] =   ET_vec4_f32;
-      globals(state)["gl"]["ET_mat4x4_f32"] =   ET_mat4x4_f32;
+      package gl = package(state, "lost").package("gl");
 
-      globals(state)["gl"]["UT_unused"] = UT_unused;
-      globals(state)["gl"]["UT_index"] = UT_index;
-      globals(state)["gl"]["UT_position"] = UT_position;
-      globals(state)["gl"]["UT_texcoord0"] = UT_texcoord0;
-      globals(state)["gl"]["UT_texcoord1"] = UT_texcoord1;
-      globals(state)["gl"]["UT_texcoord2"] = UT_texcoord2;
-      globals(state)["gl"]["UT_texcoord3"] = UT_texcoord3;
-      globals(state)["gl"]["UT_normal"] = UT_normal;
-      globals(state)["gl"]["UT_color"] = UT_color;
-      globals(state)["gl"]["UT_vertexAttrib0"] = UT_vertexAttrib0;
-      globals(state)["gl"]["UT_vertexAttrib1"] = UT_vertexAttrib1;
-      globals(state)["gl"]["UT_vertexAttrib2"] = UT_vertexAttrib2;
-      globals(state)["gl"]["UT_vertexAttrib3"] = UT_vertexAttrib3;
-      globals(state)["gl"]["UT_vertexAttrib4"] = UT_vertexAttrib4;
-      globals(state)["gl"]["UT_vertexAttrib5"] = UT_vertexAttrib5;
-      globals(state)["gl"]["UT_vertexAttrib6"] = UT_vertexAttrib6;
-      globals(state)["gl"]["UT_vertexAttrib7"] = UT_vertexAttrib7;
+      gl.clazz<BufferLayout>("BufferLayout")
+          .constructor()
+          .method("add", &BufferLayout::add);
 
-      
+      gl.clazz<HybridVertexBuffer>("HybridVertexBuffer");
+
+      gl.clazz<HybridIndexBuffer>("HybridIndexBuffer")
+        .field("drawMode", &HybridIndexBuffer::drawMode);
+
+      package(state, "gl")
+        .constant("ET_u8", ET_u8)
+        .constant("ET_u16", ET_u16)
+        .constant("ET_u32", ET_u32)
+        .constant("ET_f32", ET_f32)  
+        .constant("ET_vec2_u8", ET_vec2_u8)
+        .constant("ET_vec2_u16", ET_vec2_u16)
+        .constant("ET_vec2_u32", ET_vec2_u32)
+        .constant("ET_vec2_f32", ET_vec2_f32) 
+        .constant("ET_vec3_u8", ET_vec3_u8)
+        .constant("ET_vec3_u16", ET_vec3_u16)
+        .constant("ET_vec3_u32", ET_vec3_u32)
+        .constant("ET_vec3_f32", ET_vec3_f32) 
+        .constant("ET_vec4_u8", ET_vec4_u8)
+        .constant("ET_vec4_u16", ET_vec4_u16)
+        .constant("ET_vec4_u32", ET_vec4_u32)
+        .constant("ET_vec4_f32", ET_vec4_f32)
+        .constant("ET_mat4x4_f32", ET_mat4x4_f32)
+
+        .constant("UT_unused", UT_unused)
+        .constant("UT_index", UT_index)
+        .constant("UT_position", UT_position)
+        .constant("UT_texcoord0", UT_texcoord0)
+        .constant("UT_texcoord1", UT_texcoord1)
+        .constant("UT_texcoord2", UT_texcoord2)
+        .constant("UT_texcoord3", UT_texcoord3)
+        .constant("UT_normal", UT_normal)
+        .constant("UT_color", UT_color)
+        .constant("UT_vertexAttrib0", UT_vertexAttrib0)
+        .constant("UT_vertexAttrib1", UT_vertexAttrib1)
+        .constant("UT_vertexAttrib2", UT_vertexAttrib2)
+        .constant("UT_vertexAttrib3", UT_vertexAttrib3)
+        .constant("UT_vertexAttrib4", UT_vertexAttrib4)
+        .constant("UT_vertexAttrib5", UT_vertexAttrib5)
+        .constant("UT_vertexAttrib6", UT_vertexAttrib6)
+        .constant("UT_vertexAttrib7", UT_vertexAttrib7);
     }
 
-    TexturePtr FrameBuffer_colorTexture(FrameBufferPtr framebuffer, uint8_t index)
+    TexturePtr FrameBuffer_colorTexture(FrameBuffer* framebuffer, uint8_t index)
     {
       if (framebuffer->colorBuffers.find(index) != framebuffer->colorBuffers.end())
       {
@@ -112,122 +108,108 @@ namespace lost
       }
     }
 
-    TexturePtr FrameBuffer_depthTexture(FrameBufferPtr framebuffer)
+    TexturePtr FrameBuffer_depthTexture(FrameBuffer* framebuffer)
     {
       return framebuffer->depthBuffer->texture;
     }
     
     void LostGLFrameBuffer(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<FrameBuffer>("FrameBuffer")
-            .scope
-            [
-              def("create", &FrameBuffer::create),
-              def("setup", &FrameBuffer::setup)
-            ]
-            .def("colorTexture", &FrameBuffer_colorTexture)
-            .def("depthTexture", &FrameBuffer_depthTexture)
-            .def("resize", &FrameBuffer::resize)
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<FrameBuffer>("FrameBuffer")
+          .method("colorTexture", &FrameBuffer_colorTexture)
+          .method("depthTexture", &FrameBuffer_depthTexture)
+          .method("resize", &FrameBuffer::resize)
+          .function("create", &FrameBuffer::create)
+          .function("setup", &FrameBuffer::setup);
     }
     
     void LostGLGL(lua_State* state)
     {
-      globals(state)["gl"] = luabind::newtable(state);
+      package(state, "gl")
 #if TARGET_OPENGL
-      globals(state)["gl"]["GL_REPEAT"] = GL_REPEAT;
-      globals(state)["gl"]["GL_DEPTH_COMPONENT"] = GL_DEPTH_COMPONENT;
-      globals(state)["gl"]["GL_DEPTH_COMPONENT16"] = GL_DEPTH_COMPONENT16;
-      globals(state)["gl"]["GL_DEPTH_COMPONENT24"] = GL_DEPTH_COMPONENT24;
-      globals(state)["gl"]["GL_DEPTH_COMPONENT32"] = GL_DEPTH_COMPONENT32;
-      globals(state)["gl"]["GL_FRAMEBUFFER_COMPLETE_EXT"] = GL_FRAMEBUFFER_COMPLETE_EXT;
-      globals(state)["gl"]["GL_RGBA8"] = GL_RGBA8;
-      globals(state)["gl"]["GL_SCISSOR_BIT"] = GL_SCISSOR_BIT;
-      globals(state)["gl"]["GL_VIEWPORT_BIT"] = GL_VIEWPORT_BIT;
+      .constant("GL_REPEAT", GL_REPEAT)
+      .constant("GL_DEPTH_COMPONENT", GL_DEPTH_COMPONENT)
+      .constant("GL_DEPTH_COMPONENT16", GL_DEPTH_COMPONENT16)
+      .constant("GL_DEPTH_COMPONENT24", GL_DEPTH_COMPONENT24)
+      .constant("GL_DEPTH_COMPONENT32", GL_DEPTH_COMPONENT32)
+      .constant("GL_FRAMEBUFFER_COMPLETE_EXT", GL_FRAMEBUFFER_COMPLETE_EXT)
+      .constant("GL_RGBA8", GL_RGBA8)
+      .constant("GL_SCISSOR_BIT", GL_SCISSOR_BIT)
+      .constant("GL_VIEWPORT_BIT", GL_VIEWPORT_BIT)
 #endif
-      globals(state)["gl"]["GL_CLAMP_TO_EDGE"] = GL_CLAMP_TO_EDGE;
-      globals(state)["gl"]["GL_COLOR_BUFFER_BIT"] = GL_COLOR_BUFFER_BIT;
-      globals(state)["gl"]["GL_DEPTH_BUFFER_BIT"] = GL_DEPTH_BUFFER_BIT;
-      globals(state)["gl"]["GL_DEPTH_TEST"] = GL_DEPTH_TEST;
-      globals(state)["gl"]["GL_FLOAT"] = GL_FLOAT;
-//      globals(state)["gl"]["GL_LINE_SMOOTH"] = GL_LINE_SMOOTH;
-      globals(state)["gl"]["GL_LINEAR"] = GL_LINEAR;
-//      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
-      globals(state)["gl"]["GL_NEAREST"] = GL_NEAREST;
-      globals(state)["gl"]["GL_ONE_MINUS_SRC_ALPHA"] = GL_ONE_MINUS_SRC_ALPHA;
-//      globals(state)["gl"]["GL_POINT_SMOOTH"] = GL_POINT_SMOOTH;
-      globals(state)["gl"]["GL_RGB"] = GL_RGB;
-      globals(state)["gl"]["GL_RGBA"] = GL_RGBA;
-      globals(state)["gl"]["GL_SCISSOR_TEST"] = GL_SCISSOR_TEST;
-      globals(state)["gl"]["GL_SRC_ALPHA"] = GL_SRC_ALPHA;
-      globals(state)["gl"]["GL_TEXTURE_2D"] = GL_TEXTURE_2D;
-      globals(state)["gl"]["GL_LINE_LOOP"] = GL_LINE_LOOP;
-      globals(state)["gl"]["GL_LINES"] = GL_LINES;
-      globals(state)["gl"]["GL_POINTS"] = GL_POINTS;
-      globals(state)["gl"]["GL_TRIANGLES"] = GL_TRIANGLES;
-      globals(state)["gl"]["GL_UNSIGNED_BYTE"] = GL_UNSIGNED_BYTE;
-//      globals(state)["gl"]["GL_VERTEX_ARRAY"] = GL_VERTEX_ARRAY;
-//      globals(state)["gl"]["GL_MODELVIEW"] = GL_MODELVIEW;
-      globals(state)["gl"]["GL_FRONT"] = GL_FRONT;
-      globals(state)["gl"]["GL_BACK"] = GL_BACK;
-      globals(state)["gl"]["GL_FRONT_AND_BACK"] = GL_FRONT_AND_BACK;
+      .constant("GL_CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE)
+      .constant("GL_COLOR_BUFFER_BIT", GL_COLOR_BUFFER_BIT)
+      .constant("GL_DEPTH_BUFFER_BIT", GL_DEPTH_BUFFER_BIT)
+      .constant("GL_DEPTH_TEST", GL_DEPTH_TEST)
+      .constant("GL_FLOAT", GL_FLOAT)
+//      .constant("GL_LINE_SMOOTH", GL_LINE_SMOOTH)
+      .constant("GL_LINEAR", GL_LINEAR)
+//      .constant("GL_MODELVIEW", GL_MODELVIEW)
+      .constant("GL_NEAREST", GL_NEAREST)
+      .constant("GL_ONE_MINUS_SRC_ALPHA", GL_ONE_MINUS_SRC_ALPHA)
+//      .constant("GL_POINT_SMOOTH", GL_POINT_SMOOTH)
+      .constant("GL_RGB", GL_RGB)
+      .constant("GL_RGBA", GL_RGBA)
+      .constant("GL_SCISSOR_TEST", GL_SCISSOR_TEST)
+      .constant("GL_SRC_ALPHA", GL_SRC_ALPHA)
+      .constant("GL_TEXTURE_2D", GL_TEXTURE_2D)
+      .constant("GL_LINE_LOOP", GL_LINE_LOOP)
+      .constant("GL_LINES", GL_LINES)
+      .constant("GL_POINTS", GL_POINTS)
+      .constant("GL_TRIANGLES", GL_TRIANGLES)
+      .constant("GL_UNSIGNED_BYTE", GL_UNSIGNED_BYTE)
+//      .constant("GL_VERTEX_ARRAY", GL_VERTEX_ARRAY)
+//      .constant("GL_MODELVIEW", GL_MODELVIEW)
+      .constant("GL_FRONT", GL_FRONT)
+      .constant("GL_BACK", GL_BACK)
+      .constant("GL_FRONT_AND_BACK", GL_FRONT_AND_BACK)
 
       // types
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
-      globals(state)["gl"]["GL_BOOL"]               = GL_BOOL;
-      globals(state)["gl"]["GL_BOOL_VEC2"]          = GL_BOOL_VEC2;
-      globals(state)["gl"]["GL_BOOL_VEC3"]          = GL_BOOL_VEC3;
-      globals(state)["gl"]["GL_BOOL_VEC4"]          = GL_BOOL_VEC4;
-      globals(state)["gl"]["GL_INT"]                = GL_INT;
-      globals(state)["gl"]["GL_INT_VEC2"]           = GL_INT_VEC2;
-      globals(state)["gl"]["GL_INT_VEC3"]           = GL_INT_VEC3;
-      globals(state)["gl"]["GL_INT_VEC4"]           = GL_INT_VEC4;
-      globals(state)["gl"]["GL_FLOAT"]              = GL_FLOAT;
-      globals(state)["gl"]["GL_FLOAT_VEC2"]         = GL_FLOAT_VEC2;
-      globals(state)["gl"]["GL_FLOAT_VEC3"]         = GL_FLOAT_VEC3;
-      globals(state)["gl"]["GL_FLOAT_VEC4"]         = GL_FLOAT_VEC4;
-      globals(state)["gl"]["GL_FLOAT_MAT2"]         = GL_FLOAT_MAT2;
-      globals(state)["gl"]["GL_FLOAT_MAT2x3"]       = GL_FLOAT_MAT2x3;
-      globals(state)["gl"]["GL_FLOAT_MAT2x4"]       = GL_FLOAT_MAT2x4;
-      globals(state)["gl"]["GL_FLOAT_MAT3"]         = GL_FLOAT_MAT3;
-      globals(state)["gl"]["GL_FLOAT_MAT3x2"]       = GL_FLOAT_MAT3x2;
-      globals(state)["gl"]["GL_FLOAT_MAT3x4"]       = GL_FLOAT_MAT3x4;
-      globals(state)["gl"]["GL_FLOAT_MAT4"]         = GL_FLOAT_MAT4;
-      globals(state)["gl"]["GL_FLOAT_MAT4x2"]       = GL_FLOAT_MAT4x2;
-      globals(state)["gl"]["GL_FLOAT_MAT4x3"]       = GL_FLOAT_MAT4x3;
-      globals(state)["gl"]["GL_SAMPLER_1D"]         = GL_SAMPLER_1D;
-      globals(state)["gl"]["GL_SAMPLER_2D"]         = GL_SAMPLER_2D;
-      globals(state)["gl"]["GL_SAMPLER_3D"]         = GL_SAMPLER_3D;
-      globals(state)["gl"]["GL_SAMPLER_CUBE"]       = GL_SAMPLER_CUBE;
-      globals(state)["gl"]["GL_SAMPLER_1D_SHADOW"]  = GL_SAMPLER_1D_SHADOW;
-      globals(state)["gl"]["GL_SAMPLER_2D_SHADOW"]  = GL_SAMPLER_2D_SHADOW;
+      .constant("GL_BOOL", GL_BOOL)
+      .constant("GL_BOOL_VEC2", GL_BOOL_VEC2)
+      .constant("GL_BOOL_VEC3", GL_BOOL_VEC3)
+      .constant("GL_BOOL_VEC4", GL_BOOL_VEC4)
+      .constant("GL_INT", GL_INT)
+      .constant("GL_INT_VEC2", GL_INT_VEC2)
+      .constant("GL_INT_VEC3", GL_INT_VEC3)
+      .constant("GL_INT_VEC4", GL_INT_VEC4)
+      .constant("GL_FLOAT", GL_FLOAT)
+      .constant("GL_FLOAT_VEC2", GL_FLOAT_VEC2)
+      .constant("GL_FLOAT_VEC3", GL_FLOAT_VEC3)
+      .constant("GL_FLOAT_VEC4", GL_FLOAT_VEC4)
+      .constant("GL_FLOAT_MAT2", GL_FLOAT_MAT2)
+      .constant("GL_FLOAT_MAT2x3", GL_FLOAT_MAT2x3)
+      .constant("GL_FLOAT_MAT2x4", GL_FLOAT_MAT2x4)
+      .constant("GL_FLOAT_MAT3", GL_FLOAT_MAT3)
+      .constant("GL_FLOAT_MAT3x2", GL_FLOAT_MAT3x2)
+      .constant("GL_FLOAT_MAT3x4", GL_FLOAT_MAT3x4)
+      .constant("GL_FLOAT_MAT4", GL_FLOAT_MAT4)
+      .constant("GL_FLOAT_MAT4x2", GL_FLOAT_MAT4x2)
+      .constant("GL_FLOAT_MAT4x3", GL_FLOAT_MAT4x3)
+      .constant("GL_SAMPLER_1D", GL_SAMPLER_1D)
+      .constant("GL_SAMPLER_2D", GL_SAMPLER_2D)
+      .constant("GL_SAMPLER_3D", GL_SAMPLER_3D)
+      .constant("GL_SAMPLER_CUBE", GL_SAMPLER_CUBE)
+      .constant("GL_SAMPLER_1D_SHADOW", GL_SAMPLER_1D_SHADOW)
+      .constant("GL_SAMPLER_2D_SHADOW", GL_SAMPLER_2D_SHADOW);
 #endif
     }
 
     void LostGLRenderBuffer(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<RenderBuffer>("RenderBuffer")
-            .def(constructor<>())
-            .def("enable", &RenderBuffer::enable)
-            .def("disable", &RenderBuffer::disable)
-            .def("storage", &RenderBuffer::storage)
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<RenderBuffer>("RenderBuffer")
+          .constructor()
+          .method("enable", &RenderBuffer::enable)
+          .method("disable", &RenderBuffer::disable)
+          .method("storage", &RenderBuffer::storage);
     }
 
-    object ShaderProgram_uniformMap(object shaderProgramObj)
+    luabind::object ShaderProgram_uniformMap(ShaderProgram* shaderProgram, lua_State* state)
     {
-      ShaderProgramPtr shaderProgram = object_cast<ShaderProgramPtr>(shaderProgramObj);
-      object result = newtable(shaderProgramObj.interpreter());
+      luabind::object result = luabind::newtable(state);
       ShaderProgram::UniformMap& uniformMap = shaderProgram->uniformMap();
       if (uniformMap.size() > 0)
       {
@@ -241,123 +223,84 @@ namespace lost
 
     void LostGLShaderProgram(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          def("loadShader", loadShader),
-          def("buildShader", buildShader),
-          class_<ShaderProgram>("ShaderProgram")
-            .def("enable", &ShaderProgram::enable)
-            .def("disable", &ShaderProgram::disable)
-            .def("attach", &ShaderProgram::attach)
-            .def("link", &ShaderProgram::link)
-            .def("linked", &ShaderProgram::linked)
-            .def("buildUniformMap", &ShaderProgram::buildUniformMap)
-            .def("buildVertexAttributeMap", &ShaderProgram::buildVertexAttributeMap)
-            .def("log", &ShaderProgram::log)
-            .def("validate", &ShaderProgram::validate)
-            .def("validated", &ShaderProgram::validated)
-            .def("numericalType", &ShaderProgram::numericalType)
-            .def("setInt", (void(ShaderProgram::*)(const string& inName, GLint inVal)) &ShaderProgram::setInt)
-            .def("setFloat", (void(ShaderProgram::*)(const string& inName, float inVal)) &ShaderProgram::setFloat)
-            .def("setBool", (void(ShaderProgram::*)(const string& inName, bool inVal)) &ShaderProgram::setBool)
-            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
-            .def("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
-            .def("uniformMap", &ShaderProgram_uniformMap)
-            .def("hasUniform", &ShaderProgram::hasUniform)
-            .scope
-            [
-              def("create", &ShaderProgram::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .function("loadShader", loadShader)
+        .function("buildShader", buildShader)
+
+        .clazz<ShaderProgram>("ShaderProgram")
+          .method("enable", &ShaderProgram::enable)
+          .method("disable", &ShaderProgram::disable)
+          .method("attach", &ShaderProgram::attach)
+          .method("link", &ShaderProgram::link)
+          .method("linked", &ShaderProgram::linked)
+          .method("buildUniformMap", &ShaderProgram::buildUniformMap)
+          .method("buildVertexAttributeMap", &ShaderProgram::buildVertexAttributeMap)
+          .method("log", &ShaderProgram::log)
+          .method("validate", &ShaderProgram::validate)
+          .method("validated", &ShaderProgram::validated)
+          .method("numericalType", &ShaderProgram::numericalType)
+          .method("setInt", (void(ShaderProgram::*)(const string& inName, GLint inVal)) &ShaderProgram::setInt)
+          .method("setFloat", (void(ShaderProgram::*)(const string& inName, float inVal)) &ShaderProgram::setFloat)
+          .method("setBool", (void(ShaderProgram::*)(const string& inName, bool inVal)) &ShaderProgram::setBool)
+          .method("set", (void(ShaderProgram::*)(const string& inName, const lost::common::Color& inVal)) &ShaderProgram::set)
+          .method("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec4& inVal))  &ShaderProgram::set)
+          .method("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec2& inVal)) &ShaderProgram::set)
+          .method("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Vec3& inVal)) &ShaderProgram::set)
+          .method("set", (void(ShaderProgram::*)(const string& inName, const lost::math::Matrix& inVal)) &ShaderProgram::set)
+          .method("uniformMap", &ShaderProgram_uniformMap)
+          .method("hasUniform", &ShaderProgram::hasUniform)
+          .function("create", &ShaderProgram::create);
     }
 
     void LostGLShader(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Shader>("Shader")
-            .def("source", &Shader::source)
-            .def("compile", &Shader::compile)
-            .def("compiled", &Shader::compiled)
-            .def("log", &Shader::log)
-        ]
-       ];
+      package(state, "lost").package("gl")
+        .clazz<Shader>("Shader")
+          .method("source", &Shader::source)
+          .method("compile", &Shader::compile)
+          .method("compiled", &Shader::compiled)
+          .method("log", &Shader::log);
     }
 
     void LostGLVertexShader(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<VertexShader, Shader>("VertexShader")
-            .scope
-            [
-              def("create", &VertexShader::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<VertexShader>("VertexShader")
+          .extends<Shader>()
+          .function("create", &VertexShader::create);
     }
     
     void LostGLFragmentShader(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<FragmentShader, Shader>("FragmentShader")
-            .scope
-            [
-              def("create", &FragmentShader::create)
-            ]
-         ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<FragmentShader>("FragmentShader")
+          .extends<Shader>()
+          .function("create", &FragmentShader::create);
     }
     
     void LostGLUniform(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Uniform>("Uniform")
-            .def_readonly("name", &Uniform::name)
-            .def_readonly("index", &Uniform::index)
-            .def_readonly("glType", &Uniform::glType)
-            .def_readonly("size", &Uniform::size)
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<Uniform>("Uniform")
+          .field("name", &Uniform::name)
+          .field("index", &Uniform::index)
+          .field("glType", &Uniform::glType)
+          .field("size", &Uniform::size);
     }
 
     void LostGLUniformBlock(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<UniformBlock>("UniformBlock")
-            .def("setInt", &UniformBlock::setInt)
-            .def("setFloat", &UniformBlock::setFloat)
-            .def("setBool", &UniformBlock::setBool)
-            .def("set", (void(UniformBlock::*)(const string&, const common::Color&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const string&, const math::Vec2&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const string&, const math::Vec3&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const string&, const math::Vec4&))&UniformBlock::set)
-            .def("set", (void(UniformBlock::*)(const string&, const math::Matrix&))&UniformBlock::set)
-            .scope
-            [
-              def("create", &UniformBlock::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<UniformBlock>("UniformBlock")
+          .method("setInt", &UniformBlock::setInt)
+          .method("setFloat", &UniformBlock::setFloat)
+          .method("setBool", &UniformBlock::setBool)
+          .method("set", (void(UniformBlock::*)(const string&, const common::Color&))&UniformBlock::set)
+          .method("set", (void(UniformBlock::*)(const string&, const math::Vec2&))&UniformBlock::set)
+          .method("set", (void(UniformBlock::*)(const string&, const math::Vec3&))&UniformBlock::set)
+          .method("set", (void(UniformBlock::*)(const string&, const math::Vec4&))&UniformBlock::set)
+          .method("set", (void(UniformBlock::*)(const string&, const math::Matrix&))&UniformBlock::set)
+          .function("create", &UniformBlock::create);
     }
 
     void TextureInit(Texture* texture, GLint p1, GLenum p2, GLsizei p3, GLsizei p4, GLint p5, GLenum p6, GLenum p7)
@@ -367,45 +310,36 @@ namespace lost
 
     void LostGLTexture(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("gl")
-        [
-          class_<Texture>("Texture")
-            .scope
-            [
-              def("create", (TexturePtr(*)(const common::DataPtr&, const Texture::Params&))&Texture::create),
-              def("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create),
-              def("create", (TexturePtr(*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::create)
-            ]
-            .def("bind", &Texture::bind)
-            .def("init", (void(Texture::*)(const common::DataPtr&, const Texture::Params&))&Texture::init)
-            .def("init", (void(Texture::*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::init)
-            .def("init", (void(Texture::*)(const lost::math::Vec2&, const Texture::Params&))&Texture::init)
-            .def("init", (void(*)(Texture*, GLint, GLenum, GLsizei, GLsizei, GLint, GLenum, GLenum))&TextureInit)
-            .def("filter", &Texture::filter)
-            .def("wrap", &Texture::wrap)
-            .def_readwrite("width", &Texture::width)
-            .def_readwrite("height", &Texture::height)
-            .def_readwrite("dataWidth", &Texture::dataWidth)
-            .def_readwrite("dataHeight", &Texture::dataHeight)
-            .scope
-            [
-              class_<Texture::Params>("Params")
-                .def(constructor<>())
-                .def_readwrite("level", &Texture::Params::level)
-                .def_readwrite("internalFormat", &Texture::Params::internalFormat)
-                .def_readwrite("border", &Texture::Params::border)
-                .def_readwrite("format", &Texture::Params::format)
-                .def_readwrite("type", &Texture::Params::type)
-                .def_readwrite("wrapS", &Texture::Params::wrapS)
-                .def_readwrite("wrapT", &Texture::Params::wrapT)
-                .def_readwrite("minFilter", &Texture::Params::minFilter)
-                .def_readwrite("magFilter", &Texture::Params::magFilter)
-                .def_readwrite("sizeHint", &Texture::Params::sizeHint)
-            ]
-        ]
-      ];
+      package(state, "lost").package("gl")
+        .clazz<Texture>("Texture")
+          .method("bind", &Texture::bind)
+          .method("init", (void(Texture::*)(const common::DataPtr&, const Texture::Params&))&Texture::init)
+          .method("init", (void(Texture::*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::init)
+          .method("init", (void(Texture::*)(const lost::math::Vec2&, const Texture::Params&))&Texture::init)
+          .method("init", (void(*)(Texture*, GLint, GLenum, GLsizei, GLsizei, GLint, GLenum, GLenum))&TextureInit)
+          .method("filter", &Texture::filter)
+          .method("wrap", &Texture::wrap)
+          .field("width", &Texture::width)
+          .field("height", &Texture::height)
+          .field("dataWidth", &Texture::dataWidth)
+          .field("dataHeight", &Texture::dataHeight)
+          .function("create", (TexturePtr(*)(const common::DataPtr&, const Texture::Params&))&Texture::create)
+          .function("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create)
+          .function("create", (TexturePtr(*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::create);
+      
+      package(state, "lost").package("gl").package("Texture")
+        .clazz<Texture::Params>("Params")
+          .constructor()
+          .field("level", &Texture::Params::level)
+          .field("internalFormat", &Texture::Params::internalFormat)
+          .field("border", &Texture::Params::border)
+          .field("format", &Texture::Params::format)
+          .field("type", &Texture::Params::type)
+          .field("wrapS", &Texture::Params::wrapS)
+          .field("wrapT", &Texture::Params::wrapT)
+          .field("minFilter", &Texture::Params::minFilter)
+          .field("magFilter", &Texture::Params::magFilter)
+          .field("sizeHint", &Texture::Params::sizeHint);
     }
 
     void LostGL(lua_State* state)

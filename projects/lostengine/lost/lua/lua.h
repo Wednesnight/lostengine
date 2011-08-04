@@ -79,7 +79,7 @@ namespace slub {
       return luaL_checkstring(L, index);
     }
     
-    static int push(lua_State* L, lost::string value) {
+    static int push(lua_State* L, const lost::string& value) {
       lua_pushstring(L, value.c_str());
       return 1;
     }
@@ -87,22 +87,7 @@ namespace slub {
   };
   
   template<>
-  struct converter<const lost::string&> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static lost::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
-    }
-    
-    static int push(lua_State* L, const lost::string& value) {
-      lua_pushstring(L, value.c_str());
-      return 1;
-    }
-    
-  };
+  struct converter<const lost::string&> : converter<lost::string> {};
   
 }
 

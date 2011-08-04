@@ -12,6 +12,15 @@ namespace slub {
 
   struct reference {
 
+  public:
+
+    static reference newtable(lua_State* state) {
+      lua_newtable(state);
+      reference result(state, -1);
+      lua_pop(state, 1);
+      return result;
+    }
+
   private:
 
     enum Mode {
@@ -44,10 +53,12 @@ namespace slub {
       if (mode == NESTED) {
         lua_rawgeti(state, LUA_REGISTRYINDEX, r.parent);
         parent = luaL_ref(state, LUA_REGISTRYINDEX);
+        ref = LUA_NOREF;
       }
       else if (mode == REFERENCE) {
         lua_rawgeti(state, LUA_REGISTRYINDEX, r.ref);
         ref = luaL_ref(state, LUA_REGISTRYINDEX);
+        parent = LUA_NOREF;
       }
     }
 
@@ -101,7 +112,7 @@ namespace slub {
       }
     }
 
-    int type() {
+    int type() const {
       if (mode == GLOBAL) {
         if (field.size() > 0) {
           lua_getfield(state, LUA_GLOBALSINDEX, field.c_str());
@@ -157,7 +168,7 @@ namespace slub {
     }
 
     template<typename T>
-    T get() {
+    T get() const {
       if (mode == NONE) {
         throw std::runtime_error("trying to use uninitialized reference");
       }
@@ -211,7 +222,7 @@ namespace slub {
     }
     
     template<typename R>
-    R operator()() {
+    R operator()() const {
       push();
       lua_call(state, 0, 1);
       R r = converter<R>::get(state, -1);
@@ -219,13 +230,13 @@ namespace slub {
       return r;
     }
     
-    void operator()() {
+    void operator()() const {
       push();
       lua_call(state, 0, 0);
     }
     
     template<typename R, typename arg1>
-    R operator()(arg1 a1) {
+    R operator()(arg1 a1) const {
       push();
       converter<arg1>::push(state, a1);
       lua_call(state, 1, 1);
@@ -235,10 +246,29 @@ namespace slub {
     }
     
     template<typename arg1>
-    void operator()(arg1 a1) {
+    void operator()(arg1 a1) const {
       push();
       converter<arg1>::push(state, a1);
       lua_call(state, 1, 0);
+    }
+    
+    template<typename R, typename arg1, typename arg2>
+    R operator()(arg1 a1, arg2 a2) const {
+      push();
+      converter<arg1>::push(state, a1);
+      converter<arg2>::push(state, a2);
+      lua_call(state, 2, 1);
+      R r = converter<R>::get(state, -1);
+      lua_pop(state, 1);
+      return r;
+    }
+    
+    template<typename arg1, typename arg2>
+    void operator()(arg1 a1, arg2 a2) const {
+      push();
+      converter<arg1>::push(state, a1);
+      converter<arg2>::push(state, a2);
+      lua_call(state, 2, 0);
     }
     
   };

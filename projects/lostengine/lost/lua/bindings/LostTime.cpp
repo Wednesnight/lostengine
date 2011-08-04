@@ -6,81 +6,66 @@
 #include "lost/time/Timer.h"
 
 #include <boost/bind.hpp>
-#include <luabind/adopt_policy.hpp>
 
-using namespace luabind;
 using namespace lost::time;
+using namespace slub;
 
 namespace lost
 {
   namespace lua
   {
 
-    bool TimerCallbackProxy(object targetMethod, object targetObject, const Timer* timer)
+    bool TimerCallbackProxy(const luabind::object& targetMethod, const luabind::object& targetObject, const Timer* timer)
     {
-      if (type(targetMethod) == LUA_TFUNCTION) {
-        if (type(targetObject) != LUA_TNIL) {
-          return call_function<bool>(targetMethod, targetObject, timer);
+      if (luabind::type(targetMethod) == LUA_TFUNCTION) {
+        if (luabind::type(targetObject) != LUA_TNIL) {
+          return luabind::call_function<bool>(targetMethod, targetObject, timer);
         }
         else {
-          return call_function<bool>(targetMethod, timer);
+          return luabind::call_function<bool>(targetMethod, timer);
         }
       }
       return false;
     }
     
-    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, object targetMethod, object targetObject)
+    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, const luabind::object& targetMethod, const luabind::object& targetObject)
     {
       return scheduler->createTimer(interval, boost::bind(&TimerCallbackProxy, targetMethod, targetObject, _1));
     }
     
     void LostTimeTimerScheduler(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("time")
-        [
-          class_<TimerScheduler>("TimerScheduler")
-            .def("startTimer", &TimerScheduler::startTimer)
-            .def("stopTimer", &TimerScheduler::stopTimer)
-            .def("restartTimer", &TimerScheduler::restartTimer)
-            .def("processTimers", &TimerScheduler::processTimers)
-            .def("createTimer", &LostTimeTimerScheduler_createTimer)
-        ]
-      ];
+      package(state, "lost").package("time")
+        .clazz<TimerScheduler>("TimerScheduler")
+          .method("startTimer", &TimerScheduler::startTimer)
+          .method("stopTimer", &TimerScheduler::stopTimer)
+          .method("restartTimer", &TimerScheduler::restartTimer)
+          .method("processTimers", &TimerScheduler::processTimers)
+          .method("createTimer", &LostTimeTimerScheduler_createTimer);
     }
     
     void LostTimeThreadedTimerScheduler(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("time")
-        [
-          class_<ThreadedTimerScheduler, TimerScheduler>("ThreadedTimerScheduler")
-            .def(constructor<const string&>())
-        ]
-      ];
+      package(state, "lost").package("time")
+        .clazz<ThreadedTimerScheduler>("ThreadedTimerScheduler")
+          .extends<TimerScheduler>()
+          .constructor<const string&>();
     }
 
     void LostTimeTimer(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("time")
-        [
-          class_<Timer>("Timer")
-            .def(constructor<TimerScheduler*, double, const TimerCallback&>())
-            .def("start", &Timer::start)
-            .def("stop", &Timer::stop)
-            .def("restart", &Timer::restart)
-            .def("setInterval", &Timer::setInterval)
-            .def("getInterval", &Timer::getInterval)
-            .def("setTime", &Timer::setTime)
-            .def("getTime", &Timer::getTime)
-            .def("isActive", &Timer::isActive)
-            .def("fire", &Timer::fire)
-        ]
-      ];
+      package(state, "lost").package("time")
+        .clazz<Timer>("Timer")
+          .constructor<TimerScheduler*, double, const TimerCallback&>()
+          .method("start", &Timer::start)
+          .method("stop", &Timer::stop)
+          .method("restart", &Timer::restart)
+          .method("setInterval", &Timer::setInterval)
+          .method("getInterval", &Timer::getInterval)
+          .method("setTime", &Timer::setTime)
+          .method("getTime", &Timer::getTime)
+          .method("isActive", &Timer::isActive)
+          .method("fire", &Timer::fire);
     }
     
     void LostTime(lua_State* state)

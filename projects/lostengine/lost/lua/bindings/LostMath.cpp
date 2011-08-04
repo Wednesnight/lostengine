@@ -1,6 +1,5 @@
 #include "lost/lua/bindings/LostMath.h"
 #include "lost/lua/lua.h"
-#include <luabind/operator.hpp>
 
 #include "lost/math/Rect.h"
 #include "lost/math/Vec2.h"
@@ -11,8 +10,41 @@
 #include "lost/math/io.h"
 #include <float.h>
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::math;
+using namespace slub;
+
+namespace slub {
+  template<>
+  struct converter<const Vec2&> {
+    
+    static bool check(lua_State* L, int index) {
+      return converter<Vec2>::check(L, index);
+    }
+    
+    static const Vec2& get(lua_State* L, int index) {
+      if (registry::isRegisteredType<Vec2*>()) {
+        wrapper<const Vec2*>* w = static_cast<wrapper<const Vec2*>*>(converter<Vec2>::checkudata(L, index));
+        return *w->ref;
+      }
+      throw std::runtime_error("trying to use unregistered type");
+    }
+    
+    static int push(lua_State* L, const Vec2& value) {
+      if (registry::isRegisteredType<Vec2*>()) {
+        wrapper<const Vec2*>* w = wrapper<const Vec2*>::create(L);
+        w->ref = &value;
+        w->gc = false;
+        luaL_getmetatable(L, registry::getTypeName<Vec2*>().c_str());
+        lua_setmetatable(L, -2);
+        return 1;
+      }
+      return 0;
+    }
+    
+  };
+}
 
 namespace lost
 {
@@ -21,159 +53,141 @@ namespace lost
 
     void LostMathRect(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Rect>("Rect")
-            .def(constructor<>()) 
-            .def(constructor<float, float, float, float>())
-            .def("contains", &Rect::contains)
-            .def("intersects", &Rect::intersects)
-            .def("clipTo", &Rect::clipTo)
-            .def(self == other<Rect>())
-            .def(tostring(self))
-            .def("maxX", &Rect::maxX)
-            .def("maxY", &Rect::maxY)
-            .def_readwrite("x", &Rect::x)
-            .def_readwrite("y", &Rect::y)
-            .def_readwrite("width", &Rect::width)
-            .def_readwrite("height", &Rect::height)
-        ]
-      ];
+      package(state, "lost").package("math")
+        .clazz<Rect>("Rect")
+          .constructor()
+          .constructor<float, float, float, float>()
+          .method("contains", &Rect::contains)
+          .method("intersects", &Rect::intersects)
+          .method("clipTo", &Rect::clipTo)
+          .method("maxX", &Rect::maxX)
+          .method("maxY", &Rect::maxY)
+          .field("x", &Rect::x)
+          .field("y", &Rect::y)
+          .field("width", &Rect::width)
+          .field("height", &Rect::height)
+          .eq()
+          .tostring();
     }
 
     void LostMathAABB(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<AABB>("AABB")
-            .def(constructor<Vec3, Vec3>())
-            .def_readwrite("pos", &AABB::pos)
-            .def_readwrite("size", &AABB::size)
-        ]
-      ];
+      package(state, "lost").package("math")
+        .clazz<AABB>("AABB")
+          .constructor<Vec3, Vec3>()
+          .field("pos", &AABB::pos)
+          .field("size", &AABB::size);
     }
     
     void LostMathVec2(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Vec2>("Vec2")
-            .def(constructor<>())
-            .def(constructor<const Vec2&>())
-            .def(constructor<float, float>())
-            .def("zero", (void(Vec2::*)()) &Vec2::zero)
-            .def_readwrite("x", &Vec2::x)
-            .def_readwrite("y", &Vec2::y)
-            .def_readwrite("width", &Vec2::width)
-            .def_readwrite("height", &Vec2::height)
-            .def(self * float())
-            .def(float() * self)
-            .def(self * other<Vec2>())
-            .def(self + other<Vec2>())
-            .def(self - other<Vec2>())
-            .def(self == other<Vec2>())
-            .def(tostring(self)),
+      package(state, "lost").package("math")
+        .clazz<Vec2>("Vec2")
+            .constructor()
+            .constructor<const Vec2&>()
+            .constructor<float, float>()
+            .method("zero", (void(Vec2::*)()) &Vec2::zero)
+            .field("x", &Vec2::x)
+            .field("y", &Vec2::y)
+            .field("width", &Vec2::width)
+            .field("height", &Vec2::height)
+            .mul<Vec2, float>()
+            .mul<float, Vec2>()
+            .add<Vec2, Vec2>()
+            .sub<Vec2, Vec2>()
+            .eq()
+            .tostring()
 
-          def("len", (float(*)(const Vec2&))&len),
-          def("squlen", (float(*)(const Vec2&))&squlen),
-          def("normalise", (Vec2&(*)(Vec2&))&normalise),
-          def("perpendicular", (Vec2(*)(Vec2&))&perpendicular),
-          def("angle", (float(*)(const Vec2&, const Vec2&))&angle),
-          def("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare)
-        ]
-      ];
+            .function("len", (float(*)(const Vec2&))&len)
+            .function("squlen", (float(*)(const Vec2&))&squlen)
+            .function("normalise", (Vec2&(*)(Vec2&))&normalise)
+            .function("perpendicular", (Vec2(*)(Vec2&))&perpendicular)
+            .function("angle", (float(*)(const Vec2&, const Vec2&))&angle)
+            .function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
     }
 
     void LostMathVec3(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Vec3>("Vec3")
-            .def(constructor<>())
-            .def(constructor<const Vec3&>())
-            .def(constructor<float, float, float>())
-            .def("zero", (void(Vec3::*)()) &Vec3::zero)
-            .def_readwrite("x", &Vec3::x)
-            .def_readwrite("y", &Vec3::y)            
-            .def_readwrite("z", &Vec3::z)            
-            .def(self * float())
-            .def(self * other<Vec3>())
-            .def(self + other<Vec3>())
-            .def(self - other<Vec3>())
-            .def(self == other<Vec3>())
-            .def(tostring(self)),
+      package(state, "lost").package("math")
+        .clazz<Vec3>("Vec3")
+            .constructor()
+            .constructor<const Vec3&>()
+            .constructor<float, float, float>()
+            .method("zero", (void(Vec3::*)()) &Vec3::zero)
+            .field("x", &Vec3::x)
+            .field("y", &Vec3::y)            
+            .field("z", &Vec3::z)            
+            .mul<Vec3, float>()
+            .mul<float, Vec3>()
+            .add<Vec3, Vec3>()
+            .sub<Vec3, Vec3>()
+            .eq()
+            .tostring()
 
-          def("len", (float(*)(const Vec3&))&len),
-          def("squlen", (float(*)(const Vec3&))&squlen),
-          def("normalise", (Vec3&(*)(Vec3&))&normalise),
-          def("cross", &cross),
-          def("angle", (float(*)(const Vec3&, const Vec3&))&angle),
-          def("compare", (bool(*)(const Vec3&, const Vec3&, float))&compare)
-        ]
-      ];
+            .function("len", (float(*)(const Vec3&))&len)
+            .function("squlen", (float(*)(const Vec3&))&squlen)
+            .function("normalise", (Vec3&(*)(Vec3&))&normalise)
+            .function("cross", &cross)
+            .function("angle", (float(*)(const Vec3&, const Vec3&))&angle)
+            .function("compare", (bool(*)(const Vec3&, const Vec3&, float))&compare);
     }
 
     void LostMathVec4(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Vec4>("Vec4")
-            .def(constructor<>())
-            .def(constructor<const Vec4&>())
-            .def(constructor<float, float, float, float>())
-            .def_readwrite("x", &Vec4::x)
-            .def_readwrite("y", &Vec4::y)            
-            .def_readwrite("z", &Vec4::z)            
-            .def_readwrite("w", &Vec4::w)            
-            .def(self * float())
-            .def(self * other<Vec4>())
-            .def(self + other<Vec4>())
-            .def(self - other<Vec4>())
-            .def(self == other<Vec4>())
-            .def(tostring(self))
-            .def("clear", &Vec4::clear)
-        ]
-      ];
+      package(state, "lost").package("math")
+        .clazz<Vec4>("Vec4")
+            .constructor()
+            .constructor<const Vec4&>()
+            .constructor<float, float, float, float>()
+            .method("clear", &Vec4::clear)
+            .field("x", &Vec4::x)
+            .field("y", &Vec4::y)            
+            .field("z", &Vec4::z)            
+            .field("w", &Vec4::w)            
+            .mul<Vec4, float>()
+            .mul<float, Vec4>()
+            .add<Vec4, Vec4>()
+            .sub<Vec4, Vec4>()
+            .eq()
+            .tostring();
     }
 
     void LostMathMatrix(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("math")
-        [
-          class_<Matrix>("Matrix")
-            .def(constructor<>())
-            .def(constructor<const Matrix&>())
-            .def(const_self * other<Matrix>())
-            .def(const_self * other<Vec3>())
-            .def(const_self * other<Vec4>())
-            .def("transpose", &Matrix::transpose)
-            .def("row", (void(Matrix::*)(long, const Vec4&))&Matrix::row),
-          class_<MatrixRotX, Matrix>("MatrixRotX")
-            .def(constructor<float>()),
-          class_<MatrixRotY, Matrix>("MatrixRotY")
-            .def(constructor<float>()),
-          class_<MatrixRotZ, Matrix>("MatrixRotZ")
-            .def(constructor<float>()),
-          class_<MatrixTranslation, Matrix>("MatrixTranslation")
-            .def(constructor<const lost::math::Vec3&>()),
-          class_<MatrixScaling, Matrix>("MatrixScaling")
-            .def(constructor<const lost::math::Vec3&>()),
-          class_<MatrixLookAt, Matrix>("MatrixLookAt")
-            .def(constructor<const lost::math::Vec3&, const lost::math::Vec3&, const lost::math::Vec3&>())
-        ]
-      ];
+      package math = package(state, "lost").package("math");
+
+      math.clazz<Matrix>("Matrix")
+        .constructor()
+        .constructor<const Matrix&>()
+        .mul<Matrix, Matrix>()
+        .mul<Vec3, Vec3>()
+        .mul<Vec4, Vec4>()
+        .method("transpose", &Matrix::transpose)
+        .method("row", (void(Matrix::*)(long, const Vec4&))&Matrix::row);
+
+      math.clazz<MatrixRotX>("MatrixRotX")
+        .extends<Matrix>()
+        .constructor<float>();
+
+      math.clazz<MatrixRotY>("MatrixRotY")
+        .extends<Matrix>()
+        .constructor<float>();
+
+      math.clazz<MatrixRotZ>("MatrixRotZ")
+        .extends<Matrix>()
+        .constructor<float>();
+
+      math.clazz<MatrixTranslation>("MatrixTranslation")
+        .extends<Matrix>()
+        .constructor<const lost::math::Vec3&>();
+
+      math.clazz<MatrixScaling>("MatrixScaling")
+        .extends<Matrix>()
+        .constructor<const lost::math::Vec3&>();
+
+      math.clazz<MatrixLookAt>("MatrixLookAt")
+        .extends<Matrix>()
+        .constructor<const lost::math::Vec3&, const lost::math::Vec3&, const lost::math::Vec3&>();
     }
 
     void LostMath(lua_State* state)
@@ -187,9 +201,9 @@ namespace lost
 
       // constants
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
-      globals(state)["lost"]["math"]["EPSILON"] = FLT_EPSILON;
+      package(state, "lost").package("math").constant("EPSILON", FLT_EPSILON);
 #else
-      globals(state)["lost"]["math"]["EPSILON"] = DBL_EPSILON;
+      package(state, "lost").package("math").constant("EPSILON", DBL_EPSILON);
 #endif
     }
 

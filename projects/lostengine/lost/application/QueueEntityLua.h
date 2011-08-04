@@ -3,7 +3,8 @@
 
 #include "lost/application/forward.h"
 #include "lost/application/QueueEntity.h"
-#include "lost/lua/forward.h"
+
+#include <slub/slub.h>
 
 namespace lost
 {
@@ -13,11 +14,11 @@ namespace lost
     {
 
     private:
-      luabind::object targetObject;
-      luabind::object targetMethod;
+      slub::reference targetObject;
+      slub::reference targetMethod;
 
     public:
-      QueueEntityLua(const luabind::object& targetObject, const luabind::object& targetMethod);
+      QueueEntityLua(const slub::reference& targetObject, const slub::reference& targetMethod);
       void process(const Tasklet* sender) const;
 
     };

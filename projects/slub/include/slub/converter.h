@@ -100,11 +100,11 @@ namespace slub {
       return converter<T>::check(L, index);
     }
     
-    static boost::shared_ptr<T> get(lua_State* L, int index) {
+    static boost::shared_ptr<T>& get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
 //        std::cout << "get, registered" << std::endl;
         wrapper<T*, boost::shared_ptr<T>*>* w = static_cast<wrapper<T*, boost::shared_ptr<T>*>*>(converter<T>::checkudata(L, index));
-        return boost::shared_ptr<T>(*(w->holder));
+        return *(w->holder);
       }
       throw std::runtime_error("trying to use unregistered type");
     }
@@ -126,6 +126,9 @@ namespace slub {
   };
 
   template<typename T>
+  struct converter<boost::shared_ptr<T>&> : converter<boost::shared_ptr<T> > {};
+  
+  template<typename T>
   struct converter<const boost::shared_ptr<T>&> : converter<boost::shared_ptr<T> > {};
   
   template<typename T>
@@ -135,11 +138,11 @@ namespace slub {
       return converter<T>::check(L, index);
     }
     
-    static std::tr1::shared_ptr<T> get(lua_State* L, int index) {
+    static std::tr1::shared_ptr<T>& get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
 //        std::cout << "get, registered" << std::endl;
         wrapper<T*, std::tr1::shared_ptr<T>*>* w = static_cast<wrapper<T*, std::tr1::shared_ptr<T>*>*>(converter<T>::checkudata(L, index));
-        return std::tr1::shared_ptr<T>(*(w->holder));
+        return *(w->holder);
       }
       throw std::runtime_error("trying to use unregistered type");
     }
@@ -160,6 +163,9 @@ namespace slub {
     
   };
   
+  template<typename T>
+  struct converter<std::tr1::shared_ptr<T>&> : converter<std::tr1::shared_ptr<T> > {};
+
   template<typename T>
   struct converter<const std::tr1::shared_ptr<T>&> : converter<std::tr1::shared_ptr<T> > {};
   
@@ -341,6 +347,9 @@ namespace slub {
   };
 
   template<>
+  struct converter<const int&> : converter<int> {};
+  
+  template<>
   struct converter<unsigned int> {
     
     static bool check(lua_State* L, int index) {
@@ -360,6 +369,48 @@ namespace slub {
   
   template<>
   struct converter<const unsigned int&> : converter<unsigned int> {};
+  
+  template<>
+  struct converter<unsigned short> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
+    static unsigned short get(lua_State* L, int index) {
+      return luaL_checkinteger(L, index);
+    }
+    
+    static int push(lua_State* L, unsigned short value) {
+      lua_pushinteger(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<const unsigned short&> : converter<unsigned short> {};
+  
+  template<>
+  struct converter<unsigned char> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
+    static unsigned char get(lua_State* L, int index) {
+      return luaL_checkinteger(L, index);
+    }
+    
+    static int push(lua_State* L, unsigned char value) {
+      lua_pushinteger(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<const unsigned char&> : converter<unsigned char> {};
   
   template<>
   struct converter<double> {
@@ -474,7 +525,7 @@ namespace slub {
   };
   
   template<>
-  struct converter<const reference&> {
+  struct converter<reference> {
     
     static bool check(lua_State* L, int index) {
       return true;
@@ -489,6 +540,12 @@ namespace slub {
     }
     
   };
+  
+  template<>
+  struct converter<reference&> : converter<reference> {};
+  
+  template<>
+  struct converter<const reference&> : converter<reference> {};
   
 }
 

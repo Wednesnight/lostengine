@@ -103,7 +103,7 @@ namespace slub {
     }
     
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(fieldName);
+      throw OverloadNotFoundException(className +"."+ fieldName);
     }
     return result;
   }
@@ -142,7 +142,21 @@ namespace slub {
     }
     
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(methodName);
+      std::string s;
+      int n = lua_gettop(L);
+      for (int idx = 1; idx < n; ++idx) {
+        if (s.size() == 0) {
+          s = "(";
+        }
+        else {
+          s += ", ";
+        }
+        s += luaL_typename(L, -(n-idx));
+      }
+      if (s.size() > 0) {
+        s += ")";
+      }
+      throw OverloadNotFoundException(className +"."+ methodName + s);
     }
     return result;
   }
@@ -181,7 +195,7 @@ namespace slub {
     }
     
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(operatorName);
+      throw OverloadNotFoundException(className +"."+ operatorName);
     }
     return result;
   }

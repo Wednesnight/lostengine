@@ -24,8 +24,6 @@
 #include "lost/lua/bindings/ThirdpartyBoost.h"
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
 
-#include "luabind/class_info.hpp"
-
 
 void BaseLib(lua_State* state) { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
 void DebugLib(lua_State* state) { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
@@ -75,8 +73,6 @@ namespace lost
       ThirdpartyBoost(state);
       ThirdpartyBox2D(state);
       LostBox2D(state); // bind after all of box2d was bound
-
-      luabind::bind_class_info(state);
     }
   }
 }

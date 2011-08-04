@@ -1,4 +1,5 @@
 #include "lost/lua/bindings/LostEvent.h"
+#include "lost/lua/lua.h"
 
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
@@ -25,7 +26,7 @@ namespace lost
       }
     };
     
-    lost::event::ConnectionPtr addEventListener(EventDispatcher* dispatcher, event::Type type, reference func)
+    lost::event::ConnectionPtr addEventListener(EventDispatcher* dispatcher, event::Type type, const reference& func)
     {
       if(func.type() == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
       return dispatcher->addEventListener(type, ListenerPtr(new LuaHandlerFunction(func)));

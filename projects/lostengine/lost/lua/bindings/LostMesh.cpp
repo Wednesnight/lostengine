@@ -174,13 +174,11 @@ namespace lost
     
     void LostMeshScaleGrid(lua_State* state)
     {
-/*
       package(state, "lost").package("mesh")
         .clazz<ScaleGrid>("ScaleGrid")
           .extends<Mesh>()
           .method("updateSize", &ScaleGrid::updateSize)
           .function("create", &ScaleGrid::create);
-*/
     }
 
     void LostMeshRoundedRect(lua_State* state)

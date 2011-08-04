@@ -97,6 +97,22 @@ namespace slub {
       return *this;
     }
     
+    template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
+    package_& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      slub::function<arg1, arg2, arg3, arg4, arg5, arg6>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
+    package_& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      slub::function<arg1, arg2, arg3, arg4, arg5, arg6, arg7>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
     template<typename R>
     package_& function(const std::string& name, R (*f)()) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
@@ -141,6 +157,22 @@ namespace slub {
     package_& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5)) {
       lua_rawgeti(state, LUA_REGISTRYINDEX, table);
       slub::function<R, arg1, arg2, arg3, arg4, arg5>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
+    package_& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      slub::function<R, arg1, arg2, arg3, arg4, arg5, arg6>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 1);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
+    package_& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, table);
+      slub::function<R, arg1, arg2, arg3, arg4, arg5, arg6, arg7>(state, name, f, this->name, lua_gettop(state));
       lua_pop(state, 1);
       return *this;
     }

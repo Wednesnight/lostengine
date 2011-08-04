@@ -15,6 +15,28 @@ using namespace lost::mesh;
 using namespace lost::font::freetype;
 using namespace slub;
 
+namespace slub {
+
+  template<>
+  struct converter<BreakMode> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isnumber(L, index);
+    }
+    
+    static BreakMode get(lua_State* L, int index) {
+      return (BreakMode) luaL_checkint(L, index);
+    }
+    
+    static int push(lua_State* L, BreakMode value) {
+      lua_pushinteger(L, (int) value);
+      return 1;
+    }
+    
+  };
+  
+}
+
 namespace lost
 {
   namespace lua
