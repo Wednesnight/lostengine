@@ -20,11 +20,11 @@ namespace slub {
     }
     else {
       // get value from Lua table
-      lua_pushstring(L, className.c_str());
-      lua_gettable(L, LUA_GLOBALSINDEX);
+      luaL_getmetatable(L, className.c_str());
+      lua_getfield(L, -1, "__metatable");
       int methods = lua_gettop(L);
     
-      lua_pushvalue(L, -2);
+      lua_pushvalue(L, -3);
       lua_gettable(L, methods);
       
       return 1;
@@ -38,14 +38,14 @@ namespace slub {
       return registry::get(className)->getField(name)->set(L);
     }
     else {
-      lua_pushstring(L, lua_tostring(L, lua_upvalueindex(1)));
-      lua_gettable(L, LUA_GLOBALSINDEX);
+      luaL_getmetatable(L, className.c_str());
+      lua_getfield(L, -1, "__metatable");
       int methods = lua_gettop(L);
       
-      lua_pushvalue(L, -2);
+      lua_pushvalue(L, -3);
       lua_setfield(L, methods, name.c_str());
       
-      lua_pop(L, 1);
+      lua_pop(L, 2);
       return 0;
     }
   }

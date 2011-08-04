@@ -1,8 +1,5 @@
 #include "lost/lua/bindings/LostApplication.h"
 #include "lost/lua/lua.h"
-#include "lost/lua/EventCast.h"
-#include "lost/lua/State.h"
-#include <luabind/iterator_policy.hpp>
 
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
@@ -22,7 +19,6 @@
 #include "lost/resource/Loader.h"
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/resource/FilesystemRepository.h"
-#include <luabind/shared_ptr_converter.hpp>
 #include "lost/gl/Context.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/event/Event.h"
@@ -43,255 +39,219 @@ namespace lost
 
     void LostApplicationApplication(lua_State* state)
     {
-/*
       package(state, "lost").package("application")
         .clazz<Application>("Application")
           .method("showMouse", &Application::showMouse)
           .field("eventDispatcher", &Application::eventDispatcher)
-          .field("tasklets", &Application::tasklets)
+// TODO: stl_iterator
+//          .field("tasklets", &Application::tasklets)
           .function("getInstance", (ApplicationPtr(*)())&Application::getInstance);
-*/
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<Application>("Application")
-            .def("showMouse", &Application::showMouse)
-            .def_readonly("eventDispatcher", &Application::eventDispatcher)
-            .def_readonly("tasklets", &Application::tasklets, return_stl_iterator)
-            .scope
-            [
-              def("getInstance", (ApplicationPtr(*)())&Application::getInstance)
-            ]
-        ]
-      ];
     }
 
     void LostApplicationApplicationEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<ApplicationEvent, Event>("ApplicationEvent")
-          .scope
-          [
-            def("create", &ApplicationEvent::create)
-          ]
-        ]
-      ];
-      globals(state)["lost"]["application"]["ApplicationEvent"]["RUN"] = ApplicationEvent::RUN();
-      globals(state)["lost"]["application"]["ApplicationEvent"]["QUIT"] = ApplicationEvent::QUIT();
+      package(state, "lost").package("application")
+        .clazz<ApplicationEvent>("ApplicationEvent")
+          .extends<Event>()
+          .function("create", &ApplicationEvent::create)
+          .constant("RUN", ApplicationEvent::RUN())
+          .constant("QUIT", ApplicationEvent::QUIT());
     }
 
     void LostApplicationDragNDropEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-       namespace_("application")
-       [
-        class_<DragNDropEvent, Event>("DragNDropEvent")
-        .def_readonly("window", &DragNDropEvent::window)
-        .def_readonly("pos", &DragNDropEvent::pos)
-        .def_readonly("absPos", &DragNDropEvent::absPos)
-        .def("numPaths",&DragNDropEvent::numPaths)
-        .def("getPath",&DragNDropEvent::getPath)
-       ]
-      ];
-      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_ENTER"] = DragNDropEvent::DRAG_ENTER();
-      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_UPDATE"] = DragNDropEvent::DRAG_UPDATE();
-      globals(state)["lost"]["application"]["DragNDropEvent"]["DRAG_LEAVE"] = DragNDropEvent::DRAG_LEAVE();
-      globals(state)["lost"]["application"]["DragNDropEvent"]["DROP"] = DragNDropEvent::DROP();
+      package(state, "lost").package("application")
+        .clazz<DragNDropEvent>("DragNDropEvent")
+          .extends<Event>()
+          .field("window", &DragNDropEvent::window)
+          .field("pos", &DragNDropEvent::pos)
+          .field("absPos", &DragNDropEvent::absPos)
+          .method("numPaths",&DragNDropEvent::numPaths)
+          .method("getPath",&DragNDropEvent::getPath)
+          .constant("DRAG_ENTER", DragNDropEvent::DRAG_ENTER())
+          .constant("DRAG_UPDATE", DragNDropEvent::DRAG_UPDATE())
+          .constant("DRAG_LEAVE", DragNDropEvent::DRAG_LEAVE())
+          .constant("DROP", DragNDropEvent::DROP());
     }
     
     void LostApplicationKeyEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<KeyEvent, Event>("KeyEvent")
-            .def_readwrite("key", &KeyEvent::key)
-            .def_readwrite("character", &KeyEvent::character)
-            .def_readwrite("pressed", &KeyEvent::pressed)
-            .def_readwrite("repeat", &KeyEvent::repeat)
-            .def_readwrite("ctrlDown", &KeyEvent::ctrlDown)
-            .def_readwrite("shiftDown", &KeyEvent::shiftDown)
-            .def_readwrite("altDown", &KeyEvent::altDown)
-            .def_readwrite("specialDown", &KeyEvent::specialDown)
-        ]
-      ];
-      globals(state)["lost"]["application"]["KeyEvent"]["KEY_UP"] = KeyEvent::KEY_UP();
-      globals(state)["lost"]["application"]["KeyEvent"]["KEY_DOWN"] = KeyEvent::KEY_DOWN();
+      package application = package(state, "lost").package("application");
+
+      application.clazz<KeyEvent>("KeyEvent")
+        .extends<Event>()
+        .field("key", &KeyEvent::key)
+        .field("character", &KeyEvent::character)
+        .field("pressed", &KeyEvent::pressed)
+        .field("repeat", &KeyEvent::repeat)
+        .field("ctrlDown", &KeyEvent::ctrlDown)
+        .field("shiftDown", &KeyEvent::shiftDown)
+        .field("altDown", &KeyEvent::altDown)
+        .field("specialDown", &KeyEvent::specialDown)
+        .constant("KEY_UP", KeyEvent::KEY_UP())
+        .constant("KEY_DOWN", KeyEvent::KEY_DOWN());
       
-      globals(state)["lost"]["application"]["K_UNKNOWN"] = K_UNKNOWN;
+      application
+        .enumerated("K_UNKNOWN", K_UNKNOWN)
+
+        .enumerated("K_BACKSPACE", K_BACKSPACE)
+        .enumerated("K_TAB", K_TAB)
+        .enumerated("K_ENTER", K_ENTER)
+        .enumerated("K_PAUSE", K_PAUSE)
+        .enumerated("K_ESCAPE", K_ESCAPE)
+        .enumerated("K_SPACE", K_SPACE)
       
-      globals(state)["lost"]["application"]["K_BACKSPACE"] = K_BACKSPACE;
-      globals(state)["lost"]["application"]["K_TAB"]       = K_TAB;
-      globals(state)["lost"]["application"]["K_ENTER"]     = K_ENTER;
-      globals(state)["lost"]["application"]["K_PAUSE"]     = K_PAUSE;
-      globals(state)["lost"]["application"]["K_ESCAPE"]    = K_ESCAPE;
-      globals(state)["lost"]["application"]["K_SPACE"]     = K_SPACE;
+        .enumerated("K_LEFT", K_LEFT)
+        .enumerated("K_UP", K_UP)
+        .enumerated("K_RIGHT", K_RIGHT)
+        .enumerated("K_DOWN", K_DOWN)
       
-      globals(state)["lost"]["application"]["K_LEFT"]  = K_LEFT;
-      globals(state)["lost"]["application"]["K_UP"]    = K_UP;
-      globals(state)["lost"]["application"]["K_RIGHT"] = K_RIGHT;
-      globals(state)["lost"]["application"]["K_DOWN"]  = K_DOWN;
+        .enumerated("K_0", K_0)
+        .enumerated("K_1", K_1)
+        .enumerated("K_2", K_2)
+        .enumerated("K_3", K_3)
+        .enumerated("K_4", K_4)
+        .enumerated("K_5", K_5)
+        .enumerated("K_6", K_6)
+        .enumerated("K_7", K_7)
+        .enumerated("K_8", K_8)
+        .enumerated("K_9", K_9)
       
-      globals(state)["lost"]["application"]["K_0"] = K_0;
-      globals(state)["lost"]["application"]["K_1"] = K_1;
-      globals(state)["lost"]["application"]["K_2"] = K_2;
-      globals(state)["lost"]["application"]["K_3"] = K_3;
-      globals(state)["lost"]["application"]["K_4"] = K_4;
-      globals(state)["lost"]["application"]["K_5"] = K_5;
-      globals(state)["lost"]["application"]["K_6"] = K_6;
-      globals(state)["lost"]["application"]["K_7"] = K_7;
-      globals(state)["lost"]["application"]["K_8"] = K_8;
-      globals(state)["lost"]["application"]["K_9"] = K_9;
+        .enumerated("K_A", K_A)
+        .enumerated("K_B", K_B)
+        .enumerated("K_C", K_C)
+        .enumerated("K_D", K_D)
+        .enumerated("K_E", K_E)
+        .enumerated("K_F", K_F)
+        .enumerated("K_G", K_G)
+        .enumerated("K_H", K_H)
+        .enumerated("K_I", K_I)
+        .enumerated("K_J", K_J)
+        .enumerated("K_K", K_K)
+        .enumerated("K_L", K_L)
+        .enumerated("K_M", K_M)
+        .enumerated("K_N", K_N)
+        .enumerated("K_O", K_O)
+        .enumerated("K_P", K_P)
+        .enumerated("K_Q", K_Q)
+        .enumerated("K_R", K_R)
+        .enumerated("K_S", K_S)
+        .enumerated("K_T", K_T)
+        .enumerated("K_U", K_U)
+        .enumerated("K_V", K_V)
+        .enumerated("K_W", K_W)
+        .enumerated("K_X", K_X)
+        .enumerated("K_Y", K_Y)
+        .enumerated("K_Z", K_Z)
       
-      globals(state)["lost"]["application"]["K_A"] = K_A;
-      globals(state)["lost"]["application"]["K_B"] = K_B;
-      globals(state)["lost"]["application"]["K_C"] = K_C;
-      globals(state)["lost"]["application"]["K_D"] = K_D;
-      globals(state)["lost"]["application"]["K_E"] = K_E;
-      globals(state)["lost"]["application"]["K_F"] = K_F;
-      globals(state)["lost"]["application"]["K_G"] = K_G;
-      globals(state)["lost"]["application"]["K_H"] = K_H;
-      globals(state)["lost"]["application"]["K_I"] = K_I;
-      globals(state)["lost"]["application"]["K_J"] = K_J;
-      globals(state)["lost"]["application"]["K_K"] = K_K;
-      globals(state)["lost"]["application"]["K_L"] = K_L;
-      globals(state)["lost"]["application"]["K_M"] = K_M;
-      globals(state)["lost"]["application"]["K_N"] = K_N;
-      globals(state)["lost"]["application"]["K_O"] = K_O;
-      globals(state)["lost"]["application"]["K_P"] = K_P;
-      globals(state)["lost"]["application"]["K_Q"] = K_Q;
-      globals(state)["lost"]["application"]["K_R"] = K_R;
-      globals(state)["lost"]["application"]["K_S"] = K_S;
-      globals(state)["lost"]["application"]["K_T"] = K_T;
-      globals(state)["lost"]["application"]["K_U"] = K_U;
-      globals(state)["lost"]["application"]["K_V"] = K_V;
-      globals(state)["lost"]["application"]["K_W"] = K_W;
-      globals(state)["lost"]["application"]["K_X"] = K_X;
-      globals(state)["lost"]["application"]["K_Y"] = K_Y;
-      globals(state)["lost"]["application"]["K_Z"] = K_Z;
+        .enumerated("K_NUMPAD_0", K_NUMPAD_0)
+        .enumerated("K_NUMPAD_1", K_NUMPAD_1)
+        .enumerated("K_NUMPAD_2", K_NUMPAD_2)
+        .enumerated("K_NUMPAD_3", K_NUMPAD_3)
+        .enumerated("K_NUMPAD_4", K_NUMPAD_4)
+        .enumerated("K_NUMPAD_5", K_NUMPAD_5)
+        .enumerated("K_NUMPAD_6", K_NUMPAD_6)
+        .enumerated("K_NUMPAD_7", K_NUMPAD_7)
+        .enumerated("K_NUMPAD_8", K_NUMPAD_8)
+        .enumerated("K_NUMPAD_9", K_NUMPAD_9)
       
-      globals(state)["lost"]["application"]["K_NUMPAD_0"] = K_NUMPAD_0;
-      globals(state)["lost"]["application"]["K_NUMPAD_1"] = K_NUMPAD_1;
-      globals(state)["lost"]["application"]["K_NUMPAD_2"] = K_NUMPAD_2;
-      globals(state)["lost"]["application"]["K_NUMPAD_3"] = K_NUMPAD_3;
-      globals(state)["lost"]["application"]["K_NUMPAD_4"] = K_NUMPAD_4;
-      globals(state)["lost"]["application"]["K_NUMPAD_5"] = K_NUMPAD_5;
-      globals(state)["lost"]["application"]["K_NUMPAD_6"] = K_NUMPAD_6;
-      globals(state)["lost"]["application"]["K_NUMPAD_7"] = K_NUMPAD_7;
-      globals(state)["lost"]["application"]["K_NUMPAD_8"] = K_NUMPAD_8;
-      globals(state)["lost"]["application"]["K_NUMPAD_9"] = K_NUMPAD_9;
+        .enumerated("K_NUMPAD_PLUS", K_NUMPAD_PLUS)
+        .enumerated("K_NUMPAD_MINUS", K_NUMPAD_MINUS)
       
-      globals(state)["lost"]["application"]["K_NUMPAD_PLUS"]  = K_NUMPAD_PLUS;
-      globals(state)["lost"]["application"]["K_NUMPAD_MINUS"] = K_NUMPAD_MINUS;
+        .enumerated("K_F1", K_F1)
+        .enumerated("K_F2", K_F2)
+        .enumerated("K_F3", K_F3)
+        .enumerated("K_F4", K_F4)
+        .enumerated("K_F5", K_F5)
+        .enumerated("K_F6", K_F6)
+        .enumerated("K_F7", K_F7)
+        .enumerated("K_F8", K_F8)
+        .enumerated("K_F9", K_F9)
+        .enumerated("K_F10", K_F10)
+        .enumerated("K_F11", K_F11)
+        .enumerated("K_F12", K_F12)
       
-      globals(state)["lost"]["application"]["K_F1"]  = K_F1;
-      globals(state)["lost"]["application"]["K_F2"]  = K_F2;
-      globals(state)["lost"]["application"]["K_F3"]  = K_F3;
-      globals(state)["lost"]["application"]["K_F4"]  = K_F4;
-      globals(state)["lost"]["application"]["K_F5"]  = K_F5;
-      globals(state)["lost"]["application"]["K_F6"]  = K_F6;
-      globals(state)["lost"]["application"]["K_F7"]  = K_F7;
-      globals(state)["lost"]["application"]["K_F8"]  = K_F8;
-      globals(state)["lost"]["application"]["K_F9"]  = K_F9;
-      globals(state)["lost"]["application"]["K_F10"] = K_F10;
-      globals(state)["lost"]["application"]["K_F11"] = K_F11;
-      globals(state)["lost"]["application"]["K_F12"] = K_F12;
+        .enumerated("K_DELETE", K_DELETE)
+        .enumerated("K_INSERT", K_INSERT)
       
-      globals(state)["lost"]["application"]["K_DELETE"] = K_DELETE;
-      globals(state)["lost"]["application"]["K_INSERT"] = K_INSERT;
+        .enumerated("K_HOME", K_HOME)
+        .enumerated("K_END", K_END)
+        .enumerated("K_PAGEUP", K_PAGEUP)
+        .enumerated("K_PAGEDOWN", K_PAGEDOWN)
       
-      globals(state)["lost"]["application"]["K_HOME"]     = K_HOME;
-      globals(state)["lost"]["application"]["K_END"]      = K_END;
-      globals(state)["lost"]["application"]["K_PAGEUP"]   = K_PAGEUP;
-      globals(state)["lost"]["application"]["K_PAGEDOWN"] = K_PAGEDOWN;
-      
-      globals(state)["lost"]["application"]["K_RSHIFT"] = K_RSHIFT;
-      globals(state)["lost"]["application"]["K_LSHIFT"] = K_LSHIFT;
-      globals(state)["lost"]["application"]["K_RCTRL"]  = K_RCTRL;
-      globals(state)["lost"]["application"]["K_LCTRL"]  = K_LCTRL;
+        .enumerated("K_RSHIFT", K_RSHIFT)
+        .enumerated("K_LSHIFT", K_LSHIFT)
+        .enumerated("K_RCTRL", K_RCTRL)
+        .enumerated("K_LCTRL", K_LCTRL);
     }
 
     void LostApplicationMouseEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<MouseEvent, Event>("MouseEvent")
-            .def_readwrite("pos", &MouseEvent::pos)
-            .def_readwrite("absPos", &MouseEvent::absPos)
-            .def_readwrite("button", &MouseEvent::button)
-            .def_readwrite("pressed", &MouseEvent::pressed)
-            .def_readwrite("scrollDelta", &MouseEvent::scrollDelta)
-        ]
-      ];
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP"] = MouseEvent::MOUSE_UP();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_DOWN"] = MouseEvent::MOUSE_DOWN();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_MOVE"] = MouseEvent::MOUSE_MOVE();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_SCROLL"] = MouseEvent::MOUSE_SCROLL();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP_INSIDE"] = MouseEvent::MOUSE_UP_INSIDE();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_UP_OUTSIDE"] = MouseEvent::MOUSE_UP_OUTSIDE();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_ENTER"] = MouseEvent::MOUSE_ENTER();
-      globals(state)["lost"]["application"]["MouseEvent"]["MOUSE_LEAVE"] = MouseEvent::MOUSE_LEAVE();
-      
-      globals(state)["lost"]["application"]["MB_UNKNOWN"] = MB_UNKNOWN;
-      
-      globals(state)["lost"]["application"]["MB_LEFT"]   = MB_LEFT;
-      globals(state)["lost"]["application"]["MB_RIGHT"]  = MB_RIGHT;
-      globals(state)["lost"]["application"]["MB_MIDDLE"] = MB_MIDDLE;
+      package application = package(state, "lost").package("application");
+
+      application.clazz<MouseEvent>("MouseEvent")
+        .extends<Event>()
+        .field("pos", &MouseEvent::pos)
+        .field("absPos", &MouseEvent::absPos)
+        .field("button", &MouseEvent::button)
+        .field("pressed", &MouseEvent::pressed)
+        .field("scrollDelta", &MouseEvent::scrollDelta)
+        .constant("MOUSE_UP", MouseEvent::MOUSE_UP())
+        .constant("MOUSE_DOWN", MouseEvent::MOUSE_DOWN())
+        .constant("MOUSE_MOVE", MouseEvent::MOUSE_MOVE())
+        .constant("MOUSE_SCROLL", MouseEvent::MOUSE_SCROLL())
+        .constant("MOUSE_UP_INSIDE", MouseEvent::MOUSE_UP_INSIDE())
+        .constant("MOUSE_UP_OUTSIDE", MouseEvent::MOUSE_UP_OUTSIDE())
+        .constant("MOUSE_ENTER", MouseEvent::MOUSE_ENTER())
+        .constant("MOUSE_LEAVE", MouseEvent::MOUSE_LEAVE());
+
+      application
+        .enumerated("MB_UNKNOWN", MB_UNKNOWN)
+        .enumerated("MB_LEFT", MB_LEFT)
+        .enumerated("MB_RIGHT", MB_RIGHT)
+        .enumerated("MB_MIDDLE", MB_MIDDLE);
     }
 
     void LostApplicationResizeEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<ResizeEvent, Event>("ResizeEvent")
-            .def_readwrite("width", &ResizeEvent::width)
-            .def_readwrite("height", &ResizeEvent::height)
-        ]
-      ];
-      globals(state)["lost"]["application"]["ResizeEvent"]["TASKLET_WINDOW_RESIZE"] = ResizeEvent::TASKLET_WINDOW_RESIZE();
+      package(state, "lost").package("application")
+        .clazz<ResizeEvent>("ResizeEvent")
+          .extends<Event>()
+          .field("width", &ResizeEvent::width)
+          .field("height", &ResizeEvent::height)
+          .constant("TASKLET_WINDOW_RESIZE", ResizeEvent::TASKLET_WINDOW_RESIZE());
     }
 
     int Tasklet_id(Tasklet* tasklet) {
       return *(int*)tasklet;
     }
 
+    void Tasklet_id(Tasklet* tasklet, int i) {
+      // not implemented
+    }
+    
     void LostApplicationTasklet(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<Tasklet>("Tasklet")
-            .def_readonly("eventDispatcher", &Tasklet::eventDispatcher)
-            .def_readonly("scheduler", &Tasklet::scheduler)
-            .def_readwrite("name", &Tasklet::name)
-            .def_readonly("loader", &Tasklet::loader)
-            .def_readonly("lua", &Tasklet::lua)
-            .def_readonly("window", &Tasklet::window)
-            .def_readwrite("waitForEvents", &Tasklet::waitForEvents)
-            .def_readonly("updateQueue", &Tasklet::updateQueue)
-            .def_readonly("clearNode", &Tasklet::clearNode)
-            .def_readonly("renderNode", &Tasklet::renderNode)
-            .def_readonly("uiNode", &Tasklet::uiNode)
-            .def_readonly("fontManager", &Tasklet::fontManager)
-            .def_readwrite("running", &Tasklet::running)
-//            .def("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
-            .def("spawnTasklet",&Tasklet::spawnTasklet)
-            .def("getClipboardString", &Tasklet::getClipboardString)
-            .def("setClipboardString", &Tasklet::setClipboardString)
-            .property("id", &Tasklet_id)
-        ]
-      ];
+      package(state, "lost").package("application")
+        .clazz<Tasklet>("Tasklet")
+          .field("eventDispatcher", &Tasklet::eventDispatcher)
+          .field("scheduler", &Tasklet::scheduler)
+          .field("name", &Tasklet::name)
+          .field("loader", &Tasklet::loader)
+          .field("lua", &Tasklet::lua)
+          .field("window", &Tasklet::window)
+          .field("waitForEvents", &Tasklet::waitForEvents)
+          .field("updateQueue", &Tasklet::updateQueue)
+          .field("clearNode", &Tasklet::clearNode)
+          .field("renderNode", &Tasklet::renderNode)
+          .field("uiNode", &Tasklet::uiNode)
+          .field("fontManager", &Tasklet::fontManager)
+          .field("running", &Tasklet::running)
+//          .method("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
+          .method("spawnTasklet",&Tasklet::spawnTasklet)
+          .method("getClipboardString", &Tasklet::getClipboardString)
+          .method("setClipboardString", &Tasklet::setClipboardString)
+          .field("id", (int(*)(Tasklet*)) &Tasklet_id, (void(*)(Tasklet*, int)) &Tasklet_id);
     }
 
 /*    EventPtr SpawnTaskletEvent_create(const string& absolutePath)
@@ -319,31 +279,22 @@ namespace lost
 
     void LostApplicationTaskletEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<TaskletEvent, Event>("TaskletEvent")
-            .def_readonly("tasklet", &TaskletEvent::tasklet)
-        ]
-      ];
-      globals(state)["lost"]["application"]["TaskletEvent"]["START"] = TaskletEvent::START();
-      globals(state)["lost"]["application"]["TaskletEvent"]["DONE"] = TaskletEvent::DONE();
+      package(state, "lost").package("application")
+        .clazz<TaskletEvent>("TaskletEvent")
+          .extends<Event>()
+          .field("tasklet", &TaskletEvent::tasklet)
+          .constant("START", TaskletEvent::START())
+          .constant("DONE", TaskletEvent::DONE());
     }
     
     void LostApplicationWindow(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<Window>("Window")
-            .def("open", &Window::open)
-            .def("close", &Window::close)
-            .def_readonly("context", &Window::context)
-            .def_readonly("size", &Window::size)
-        ]
-      ];
+      package(state, "lost").package("application")
+        .clazz<Window>("Window")
+          .method("open", &Window::open)
+          .method("close", &Window::close)
+          .field("context", &Window::context)
+          .field("size", &Window::size);
     }
 
     void LostApplicationQueue_queue(Queue* queue, object targetMethod, object targetObject)
@@ -353,14 +304,9 @@ namespace lost
 
     void LostApplicationQueue(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<Queue>("Queue")
-            .def("queue", &LostApplicationQueue_queue)
-        ]
-      ];
+      package(state, "lost").package("application")
+        .clazz<Queue>("Queue")
+          .method("queue", &LostApplicationQueue_queue);
     }
 
     EventPtr DebugEvent_create(const Type& type, Tasklet* tasklet)
@@ -370,32 +316,24 @@ namespace lost
 
     void LostApplicationDebugEvent(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("application")
-        [
-          class_<DebugEvent, Event>("DebugEvent")
-            .def_readwrite("mode", &DebugEvent::mode)
-            .def_readonly("tasklet", &DebugEvent::tasklet)
-            .def_readonly("info", &DebugEvent::info)
+      package application = package(state, "lost").package("application");
 
-            .scope
-            [
-              def("create", &DebugEvent_create),
-
-              class_<DebugEvent::DebugInfo>("DebugInfo")
-                .def_readonly("debug", &DebugEvent::DebugInfo::debug)
-                .def_readonly("memSize", &DebugEvent::DebugInfo::memSize)
-            ]
-        ]
-      ];
-
-      globals(state)["lost"]["application"]["DebugEvent"]["CMD_MEM_INFO"] = DebugEvent::CMD_MEM_INFO();
-      globals(state)["lost"]["application"]["DebugEvent"]["CMD_PAUSE"] = DebugEvent::CMD_PAUSE();
-      globals(state)["lost"]["application"]["DebugEvent"]["CMD_CONTINUE"] = DebugEvent::CMD_CONTINUE();
-
-      globals(state)["lost"]["application"]["DebugEvent"]["MEM_INFO"] = DebugEvent::MEM_INFO();
-      globals(state)["lost"]["application"]["DebugEvent"]["PAUSE"] = DebugEvent::PAUSE();
+      application.clazz<DebugEvent>("DebugEvent")
+        .extends<Event>()
+        .field("mode", &DebugEvent::mode)
+        .field("tasklet", &DebugEvent::tasklet)
+        .field("info", &DebugEvent::info)
+        .function("create", &DebugEvent_create)
+        .constant("CMD_MEM_INFO", DebugEvent::CMD_MEM_INFO())
+        .constant("CMD_PAUSE", DebugEvent::CMD_PAUSE())
+        .constant("CMD_CONTINUE", DebugEvent::CMD_CONTINUE())
+        .constant("MEM_INFO", DebugEvent::MEM_INFO())
+        .constant("PAUSE", DebugEvent::PAUSE());
+      
+      application.package("DebugEvent")
+        .clazz<DebugEvent::DebugInfo>("DebugInfo")
+          .field("debug", &DebugEvent::DebugInfo::debug)
+          .field("memSize", &DebugEvent::DebugInfo::memSize);
     }
     
     void LostApplication(lua_State* state)

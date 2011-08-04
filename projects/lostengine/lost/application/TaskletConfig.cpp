@@ -32,32 +32,32 @@ TaskletConfig::TaskletConfig()
 }
 
 // c-function so it doesn't have to go in the header with luabind::object in the signature
-void parse(object config, TaskletConfig* tc)
+void parse(slub::reference config, TaskletConfig* tc)
 {
-  if(type(config["tasklet"]) == LUA_TTABLE) {
+  if(config["tasklet"].type() == LUA_TTABLE) {
 
-    if(type(config["tasklet"]["name"]) != LUA_TNIL) { tc->taskletName = object_cast<string>(config["tasklet"]["name"]); }
-    if(type(config["tasklet"]["waitForEvents"]) != LUA_TNIL) { tc->taskletWaitForEvents = object_cast<bool>(config["tasklet"]["waitForEvents"]); }
-    if(type(config["tasklet"]["hasWindow"]) != LUA_TNIL) { tc->taskletHasWindow = object_cast<bool>(config["tasklet"]["hasWindow"]); }    
+    if(config["tasklet"]["name"].type() != LUA_TNIL) { tc->taskletName = config["tasklet"]["name"].get<string>(); }
+    if(config["tasklet"]["waitForEvents"].type() != LUA_TNIL) { tc->taskletWaitForEvents = config["tasklet"]["waitForEvents"].get<bool>(); }
+    if(config["tasklet"]["hasWindow"].type() != LUA_TNIL) { tc->taskletHasWindow = config["tasklet"]["hasWindow"].get<bool>(); }
   }
 
-  if(type(config["window"]) == LUA_TTABLE) {
+  if(config["window"].type() == LUA_TTABLE) {
 
-    if(type(config["window"]["title"]) != LUA_TNIL) { tc->windowTitle = object_cast<string>(config["window"]["title"]); }
-    if(type(config["window"]["x"]) != LUA_TNIL) { tc->windowRect.x = object_cast<float>(config["window"]["x"]); }
-    if(type(config["window"]["y"]) != LUA_TNIL) { tc->windowRect.y = object_cast<float>(config["window"]["y"]); }
-    if(type(config["window"]["width"]) != LUA_TNIL) { tc->windowRect.width = object_cast<float>(config["window"]["width"]); }
-    if(type(config["window"]["height"]) != LUA_TNIL) { tc->windowRect.height = object_cast<float>(config["window"]["height"]); }
+    if(config["window"]["title"].type() != LUA_TNIL) { tc->windowTitle = config["window"]["title"].get<string>(); }
+    if(config["window"]["x"].type() != LUA_TNIL) { tc->windowRect.x = config["window"]["x"].get<float>(); }
+    if(config["window"]["y"].type() != LUA_TNIL) { tc->windowRect.y = config["window"]["y"].get<float>(); }
+    if(config["window"]["width"].type() != LUA_TNIL) { tc->windowRect.width = config["window"]["width"].get<float>(); }
+    if(config["window"]["height"].type() != LUA_TNIL) { tc->windowRect.height = config["window"]["height"].get<float>(); }
   }
 
-  if(type(config["renderer"]) == LUA_TTABLE) {
+  if(config["renderer"].type() == LUA_TTABLE) {
     
-    if(type(config["renderer"]["framerate"]) != LUA_TNIL) { tc->framerate = object_cast<double>(config["renderer"]["framerate"]); }
+    if(config["renderer"]["framerate"].type() != LUA_TNIL) { tc->framerate = config["renderer"]["framerate"].get<double>(); }
   }
 
-  if(type(config["gl"]) == LUA_TTABLE) {
+  if(config["gl"].type() == LUA_TTABLE) {
     
-    if(type(config["gl"]["vsync"]) != LUA_TNIL) { tc->glVsync = object_cast<bool>(config["gl"]["vsync"]); }
+    if(config["gl"]["vsync"].type() != LUA_TNIL) { tc->glVsync = config["gl"]["vsync"].get<bool>(); }
   }
 
 }
@@ -68,8 +68,8 @@ bool TaskletConfig::load(lua::StatePtr interpreter, resource::LoaderPtr loader)
   if(loader->exists("config.lua"))
   {
     interpreter->doString("__tasklet_config = require(\"config\")");
-    luabind::object config = interpreter->globals["__tasklet_config"];
-    if(luabind::type(config) == LUA_TTABLE)
+    slub::reference config = interpreter->globals["__tasklet_config"];
+    if(config.type() == LUA_TTABLE)
     {
       parse(config, this);
       result = true;

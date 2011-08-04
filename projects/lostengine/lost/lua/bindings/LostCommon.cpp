@@ -76,16 +76,20 @@ namespace lost
 
     string tostring(lua_State* state)
     {
+      string result(luaL_typename(state, -1));
       if (lua_getmetatable(state, -1)) {  /* does it have a metatable? */
         lua_getfield(state, -1, "__tostring");
         if (lua_type(state, -1) == LUA_TFUNCTION) {
-          // TODO: call & get result
+          lua_pushvalue(state, -3);
+          lua_call(state, 1, 1);
+          result = string(luaL_checkstring(state, -1));
         }
         lua_pop(state, 2);
       }
       else {
-        return string(luaL_checkstring(state, -1));
+        result = string(luaL_checkstring(state, -1));
       }
+      return result;
     }
     
     string getFilenameFuncnameLine(lua_State* state)

@@ -26,26 +26,28 @@ namespace slub {
     
   };
 
-  template<typename R, typename arg1, typename arg2, typename arg3>
+  template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
   struct function_wrapper : public abstract_function_wrapper {
     
-    R (*f)(arg1, arg2, arg3);
+    R (*f)(arg1, arg2, arg3, arg4, arg5);
     
-    function_wrapper(R (*f)(arg1, arg2, arg3)) : f(f) {
+    function_wrapper(R (*f)(arg1, arg2, arg3, arg4, arg5)) : f(f) {
     }
     
     bool check(lua_State* L) {
-      return lua_gettop(L) == 3 && converter<arg1>::check(L, -3) && converter<arg2>::check(L, -2) && converter<arg3>::check(L, -1);
+      return lua_gettop(L) == 5 && converter<arg1>::check(L, -5) && converter<arg2>::check(L, -4) && converter<arg3>::check(L, -3)
+          && converter<arg4>::check(L, -2) && converter<arg5>::check(L, -1);
     }
     
     int call(lua_State* L) {
-      return converter<R>::push(L, f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1)));
+      return converter<R>::push(L, f(converter<arg1>::get(L, -5), converter<arg2>::get(L, -4), converter<arg3>::get(L, -3),
+                                     converter<arg4>::get(L, -2), converter<arg5>::get(L, -1)));
     }
     
   };
   
   template<>
-  struct function_wrapper<void, empty, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<void, empty, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     void (*f)();
     
@@ -64,7 +66,7 @@ namespace slub {
   };
 
   template<typename arg1>
-  struct function_wrapper<void, arg1, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<void, arg1, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(arg1);
     
@@ -83,7 +85,7 @@ namespace slub {
   };
   
   template<typename arg1, typename arg2>
-  struct function_wrapper<void, arg1, arg2, empty> : public abstract_function_wrapper {
+  struct function_wrapper<void, arg1, arg2, empty, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(arg1, arg2);
     
@@ -102,7 +104,7 @@ namespace slub {
   };
   
   template<typename arg1, typename arg2, typename arg3>
-  struct function_wrapper<void, arg1, arg2, arg3> : public abstract_function_wrapper {
+  struct function_wrapper<void, arg1, arg2, arg3, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(arg1, arg2, arg3);
     
@@ -120,8 +122,49 @@ namespace slub {
     
   };
   
+  template<typename arg1, typename arg2, typename arg3, typename arg4>
+  struct function_wrapper<void, arg1, arg2, arg3, arg4, empty> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, arg2, arg3, arg4);
+    
+    function_wrapper(void (*f)(arg1, arg2, arg3, arg4)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 4 && converter<arg1>::check(L, -4) && converter<arg2>::check(L, -3) && converter<arg3>::check(L, -2)
+           && converter<arg4>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -4), converter<arg2>::get(L, -3), converter<arg3>::get(L, -2), converter<arg4>::get(L, -1));
+      return 0;
+    }
+    
+  };
+  
+  template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+  struct function_wrapper<void, arg1, arg2, arg3, arg4, arg5> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, arg2, arg3, arg4, arg5);
+    
+    function_wrapper(void (*f)(arg1, arg2, arg3, arg4, arg5)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 5 && converter<arg1>::check(L, -5) && converter<arg2>::check(L, -4) && converter<arg3>::check(L, -3)
+           && converter<arg4>::check(L, -2) && converter<arg5>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -5), converter<arg2>::get(L, -4), converter<arg3>::get(L, -3), converter<arg4>::get(L, -2),
+        converter<arg5>::get(L, -1));
+      return 0;
+    }
+    
+  };
+  
   template<>
-  struct function_wrapper<void, lua_State*, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<void, lua_State*, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(lua_State*);
     
@@ -140,7 +183,7 @@ namespace slub {
   };
   
   template<typename arg1>
-  struct function_wrapper<void, arg1, lua_State*, empty> : public abstract_function_wrapper {
+  struct function_wrapper<void, arg1, lua_State*, empty, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(arg1, lua_State*);
     
@@ -159,7 +202,7 @@ namespace slub {
   };
   
   template<typename arg1, typename arg2>
-  struct function_wrapper<void, arg1, arg2, lua_State*> : public abstract_function_wrapper {
+  struct function_wrapper<void, arg1, arg2, lua_State*, empty, empty> : public abstract_function_wrapper {
     
     void (*f)(arg1, arg2, lua_State*);
     
@@ -177,8 +220,47 @@ namespace slub {
     
   };
   
+  template<typename arg1, typename arg2, typename arg3>
+  struct function_wrapper<void, arg1, arg2, arg3, lua_State*, empty> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, arg2, arg3, lua_State*);
+    
+    function_wrapper(void (*f)(arg1, arg2, arg3, lua_State*)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -3) && converter<arg2>::check(L, -2) && converter<arg3>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1), L);
+      return 0;
+    }
+    
+  };
+  
+  template<typename arg1, typename arg2, typename arg3, typename arg4>
+  struct function_wrapper<void, arg1, arg2, arg3, arg4, lua_State*> : public abstract_function_wrapper {
+    
+    void (*f)(arg1, arg2, arg3, arg4, lua_State*);
+    
+    function_wrapper(void (*f)(arg1, arg2, arg3, arg4, lua_State*)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 4 && converter<arg1>::check(L, -4) && converter<arg2>::check(L, -3) && converter<arg3>::check(L, -2)
+           && converter<arg4>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      f(converter<arg1>::get(L, -4), converter<arg2>::get(L, -3), converter<arg3>::get(L, -2), converter<arg4>::get(L, -1), L);
+      return 0;
+    }
+    
+  };
+  
   template<typename R>
-  struct function_wrapper<R, empty, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<R, empty, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     R (*f)();
     
@@ -196,7 +278,7 @@ namespace slub {
   };
   
   template<typename R, typename arg1>
-  struct function_wrapper<R, arg1, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<R, arg1, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     R (*f)(arg1);
     
@@ -214,7 +296,7 @@ namespace slub {
   };
   
   template<typename R, typename arg1, typename arg2>
-  struct function_wrapper<R, arg1, arg2, empty> : public abstract_function_wrapper {
+  struct function_wrapper<R, arg1, arg2, empty, empty, empty> : public abstract_function_wrapper {
     
     R (*f)(arg1, arg2);
     
@@ -231,8 +313,46 @@ namespace slub {
     
   };
   
+  template<typename R, typename arg1, typename arg2, typename arg3>
+  struct function_wrapper<R, arg1, arg2, arg3, empty, empty> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, arg2, arg3);
+    
+    function_wrapper(R (*f)(arg1, arg2, arg3)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -3) && converter<arg2>::check(L, -2) && converter<arg3>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1)));
+    }
+    
+  };
+  
+  template<typename R, typename arg1, typename arg2, typename arg3, typename arg4>
+  struct function_wrapper<R, arg1, arg2, arg3, arg4, empty> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, arg2, arg3, arg4);
+    
+    function_wrapper(R (*f)(arg1, arg2, arg3, arg4)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 4 && converter<arg1>::check(L, -4) && converter<arg2>::check(L, -3) && converter<arg3>::check(L, -2)
+           && converter<arg4>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -4), converter<arg2>::get(L, -3), converter<arg3>::get(L, -2),
+                                     converter<arg4>::get(L, -1)));
+    }
+    
+  };
+  
   template<typename R>
-  struct function_wrapper<R, lua_State*, empty, empty> : public abstract_function_wrapper {
+  struct function_wrapper<R, lua_State*, empty, empty, empty, empty> : public abstract_function_wrapper {
     
     R (*f)(lua_State*);
     
@@ -250,7 +370,7 @@ namespace slub {
   };
   
   template<typename R, typename arg1>
-  struct function_wrapper<R, arg1, lua_State*, empty> : public abstract_function_wrapper {
+  struct function_wrapper<R, arg1, lua_State*, empty, empty, empty> : public abstract_function_wrapper {
     
     R (*f)(arg1, lua_State*);
     
@@ -268,7 +388,7 @@ namespace slub {
   };
   
   template<typename R, typename arg1, typename arg2>
-  struct function_wrapper<R, arg1, arg2, lua_State*> : public abstract_function_wrapper {
+  struct function_wrapper<R, arg1, arg2, lua_State*, empty, empty> : public abstract_function_wrapper {
     
     R (*f)(arg1, arg2, lua_State*);
     
@@ -285,43 +405,101 @@ namespace slub {
     
   };
   
+  template<typename R, typename arg1, typename arg2, typename arg3>
+  struct function_wrapper<R, arg1, arg2, arg3, lua_State*, empty> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, arg2, arg3, lua_State*);
+    
+    function_wrapper(R (*f)(arg1, arg2, arg3, lua_State*)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 3 && converter<arg1>::check(L, -3) && converter<arg2>::check(L, -2) && converter<arg3>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -3), converter<arg2>::get(L, -2), converter<arg3>::get(L, -1), L));
+    }
+    
+  };
+  
+  template<typename R, typename arg1, typename arg2, typename arg3, typename arg4>
+  struct function_wrapper<R, arg1, arg2, arg3, arg4, lua_State*> : public abstract_function_wrapper {
+    
+    R (*f)(arg1, arg2, arg3, arg4, lua_State*);
+    
+    function_wrapper(R (*f)(arg1, arg2, arg3, arg4, lua_State*)) : f(f) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 4 && converter<arg1>::check(L, -4) && converter<arg2>::check(L, -3) && converter<arg3>::check(L, -2)
+           && converter<arg4>::check(L, -1);
+    }
+    
+    int call(lua_State* L) {
+      return converter<R>::push(L, f(converter<arg1>::get(L, -4), converter<arg2>::get(L, -3), converter<arg3>::get(L, -2),
+                                     converter<arg4>::get(L, -1), L));
+    }
+    
+  };
+  
   static void function(lua_State* L, const std::string& name, void (*f)(), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<void, empty, empty, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<void, empty, empty, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename arg1>
   static void function(lua_State* L, const std::string& name, void (*f)(arg1), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<void, arg1, empty, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<void, arg1, empty, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename arg1, typename arg2>
   static void function(lua_State* L, const std::string& name, void (*f)(arg1, arg2), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename arg1, typename arg2, typename arg3>
   static void function(lua_State* L, const std::string& name, void (*f)(arg1, arg2, arg3), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, arg3>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, arg3, empty, empty>(f), prefix, target);
+  }
+  
+  template<typename arg1, typename arg2, typename arg3, typename arg4>
+  static void function(lua_State* L, const std::string& name, void (*f)(arg1, arg2, arg3, arg4), const std::string& prefix = "", int target = -1) {
+    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, arg3, arg4, empty>(f), prefix, target);
+  }
+  
+  template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+  static void function(lua_State* L, const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5), const std::string& prefix = "", int target = -1) {
+    function_holder::add(L, name, new function_wrapper<void, arg1, arg2, arg3, arg4, arg5>(f), prefix, target);
   }
   
   template<typename R>
   static void function(lua_State* L, const std::string& name, R (*f)(), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<R, empty, empty, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<R, empty, empty, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename R, typename arg1>
   static void function(lua_State* L, const std::string& name, R (*f)(arg1), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<R, arg1, empty, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<R, arg1, empty, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename R, typename arg1, typename arg2>
   static void function(lua_State* L, const std::string& name, R (*f)(arg1, arg2), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, empty>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, empty, empty, empty>(f), prefix, target);
   }
   
   template<typename R, typename arg1, typename arg2, typename arg3>
   static void function(lua_State* L, const std::string& name, R (*f)(arg1, arg2, arg3), const std::string& prefix = "", int target = -1) {
-    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, arg3>(f), prefix, target);
+    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, arg3, empty, empty>(f), prefix, target);
+  }
+  
+  template<typename R, typename arg1, typename arg2, typename arg3, typename arg4>
+  static void function(lua_State* L, const std::string& name, R (*f)(arg1, arg2, arg3, arg4), const std::string& prefix = "", int target = -1) {
+    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, arg3, arg4, empty>(f), prefix, target);
+  }
+  
+  template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+  static void function(lua_State* L, const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5), const std::string& prefix = "", int target = -1) {
+    function_holder::add(L, name, new function_wrapper<R, arg1, arg2, arg3, arg4, arg5>(f), prefix, target);
   }
   
 }

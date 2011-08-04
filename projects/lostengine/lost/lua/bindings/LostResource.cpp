@@ -5,13 +5,11 @@
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/common/Data.h"
-#include "lost/lua/bindings/directory_iterator_policy.h"
 
-#include <boost/filesystem.hpp>
+#include <slub/slub.h>
 
-using namespace boost::filesystem;
-using namespace luabind;
 using namespace lost::resource;
+using namespace slub;
 
 namespace lost
 {
@@ -19,81 +17,52 @@ namespace lost
   {
     void LostResourceRepository(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<Repository>("Repository")
-        ]
-      ];
+      package(state, "lost").package("resource")
+        .clazz<Repository>("Repository");
     }
 
-
-    common::DataPtr LostResourceLoader_load(object inLoader, const string& inRelativePath)
+    common::DataPtr LostResourceLoader_load(Loader* loader, const string& inRelativePath)
     {
-      Loader* loader = object_cast<Loader*>(inLoader);
       return loader->load(inRelativePath);
     }
 
-    string LostResourceLoader_locate(object inLoader, const string& inRelativePath)
+    string LostResourceLoader_locate(Loader* loader, const string& inRelativePath)
     {
-      Loader* loader = object_cast<Loader*>(inLoader);
       return loader->locate(inRelativePath);
     }
 
-    path LostResourceLoader_directory(object inLoader, const string& inRelativePath)
+/*
+    path LostResourceLoader_directory(Loader* loader, const string& inRelativePath)
     {
-      Loader* loader = object_cast<Loader*>(inLoader);
       return path(loader->locate(inRelativePath));
     }
+*/
 
     void LostResourceLoader(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<Loader>("Loader")
-            .def("load", &LostResourceLoader_load)
-            .def("locate", &LostResourceLoader_locate)
-            .def("addRepository", &Loader::addRepository)
-            .def("directory", &LostResourceLoader_directory, return_directory_iterator)
-            .scope
-            [
-              def("create", &Loader::create)
-            ]
-         ]
-      ];
+      package(state, "lost").package("resource")
+        .clazz<Loader>("Loader")
+          .method("load", &LostResourceLoader_load)
+          .method("locate", &LostResourceLoader_locate)
+          .method("addRepository", &Loader::addRepository)
+//          .def("directory", &LostResourceLoader_directory, return_directory_iterator)
+          .function("create", &Loader::create);
     }
     
     void LostResourceFilesystemRepository(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<FilesystemRepository, Repository>("FilesystemRepository")
-            .scope
-            [
-              def("create", &FilesystemRepository::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("resource")
+        .clazz<FilesystemRepository>("FilesystemRepository")
+          .extends<Repository>()
+          .function("create", &FilesystemRepository::create);
     }
     
     void LostResourceApplicationResourceRepository(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("resource")
-        [
-          class_<ApplicationResourceRepository, Repository>("ApplicationResourceRepository")
-            .scope
-            [
-              def("create", &ApplicationResourceRepository::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("resource")
+        .clazz<ApplicationResourceRepository>("ApplicationResourceRepository")
+          .extends<Repository>()
+          .function("create", &ApplicationResourceRepository::create);
     }
     
     void LostResource(lua_State* state)

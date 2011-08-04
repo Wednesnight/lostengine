@@ -11,46 +11,6 @@
 using namespace boost::filesystem;
 using namespace slub;
 
-namespace slub {
-
-  template<>
-  struct converter<lost::string> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static lost::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
-    }
-    
-    static int push(lua_State* L, lost::string value) {
-      lua_pushstring(L, value.c_str());
-      return 1;
-    }
-    
-  };
-
-  template<>
-  struct converter<const lost::string&> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static lost::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
-    }
-    
-    static int push(lua_State* L, const lost::string& value) {
-      lua_pushstring(L, value.c_str());
-      return 1;
-    }
-    
-  };
-  
-}
-
 std::ostream& operator<<(std::ostream& stream, const path& p)
 {
   stream << p.string();

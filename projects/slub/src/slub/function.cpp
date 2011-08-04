@@ -8,7 +8,7 @@ namespace slub {
   function_holder function_holder::instance;
   
   function_holder::~function_holder() {
-    std::cout << "cleanup functions" << std::endl;
+//    std::cout << "cleanup functions" << std::endl;
     
     for (std::map<std::string, std::list<abstract_function_wrapper*> >::iterator idx = functions.begin(); idx != functions.end(); ++idx) {
       for (std::list<abstract_function_wrapper*>::iterator fidx = idx->second.begin(); fidx != idx->second.end(); ++fidx) {

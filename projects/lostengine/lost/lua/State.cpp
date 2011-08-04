@@ -40,7 +40,7 @@ namespace lost
     : callstackSize(10), 
       loader(inLoader),
       state(luaL_newstate()),
-      globals(luabind::globals(state))
+      globals(slub::reference(state))
     {
       luabind::open(state);      
       stateMap[state] = this;
@@ -53,11 +53,13 @@ namespace lost
     {
       // set loader to nil because it's usually contained in state
       this->loader.reset();
+/*
       // cleanup all resource, that is set _G to nil and perform a full garbage collection cycle
       luabind::object nil;
       luabind::object _G = luabind::globals(state);
       _G = nil;
       globals = nil;
+*/
       lua_gc(state, LUA_GCCOLLECT, 0);
 
       // close state

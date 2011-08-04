@@ -135,6 +135,7 @@
 		8DBD305A13CCD7E40013AC75 /* function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = function.h; path = include/slub/function.h; sourceTree = "<group>"; };
 		8DC0A3EE13CB96C7008E55C2 /* LostEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LostEngine.xcodeproj; path = ../../projects/lostengine/xcode/LostEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8DD76F6C0486A84900D96B5E /* slub */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = slub; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DE144BB13E9D1DD0003C023 /* reference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reference.h; path = include/slub/reference.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +214,7 @@
 				3E050A7613C70016000DC746 /* method.h */,
 				8D3147C513D37F6000019863 /* operators.h */,
 				8DBD2E7713CCC7D70013AC75 /* package.h */,
+				8DE144BB13E9D1DD0003C023 /* reference.h */,
 				3E5C976D13CB104800DB6373 /* registry.h */,
 				8DBB5D4413D4BCE10044A2F6 /* registry.cpp */,
 				3E050A7713C70016000DC746 /* slub.h */,
@@ -286,6 +288,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "slub" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,

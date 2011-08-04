@@ -20,8 +20,10 @@
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::mesh;
+using namespace slub;
 
 namespace lost
 {
@@ -30,33 +32,19 @@ namespace lost
 
     void LostMeshLine(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Line, Mesh>("Line")
-            .scope
-            [
-              def("create", &Line::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Line>("Line")
+          .extends<Mesh>()
+          .function("create", &Line::create);
     }
 
     void LostMeshRect(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Rect, Mesh>("Rect")
-            .def("updateSize", &mesh::Rect::updateSize)
-            .scope
-            [
-              def("create", &mesh::Rect::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Rect>("Rect")
+          .extends<Mesh>()
+          .method("updateSize", &mesh::Rect::updateSize)
+          .function("create", &mesh::Rect::create);
     }
     
 /*    void LostMeshCircular(lua_State* state)
@@ -91,17 +79,9 @@ namespace lost
     
     void LostMeshLoader(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Loader>("Loader")
-            .scope
-            [
-              def("obj", &lost::mesh::Loader::obj)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Loader>("Loader")
+          .function("obj", &lost::mesh::Loader::obj);
     }
 
     void LostMeshMaterial_addTexture(Material* material, const gl::TexturePtr& texture)
@@ -111,178 +91,121 @@ namespace lost
 
     void LostMeshMaterial(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Material>("Material")
-            .def("addTexture", &LostMeshMaterial_addTexture)
-            .def_readwrite("shader", &Material::shader)
-            .def_readwrite("uniforms", &Material::uniforms)
-            .def_readwrite("color", &Material::color)
-            .def_readwrite("blend", &Material::blend)
-            .def_readwrite("blendSrc", &Material::blendSrc)
-            .def_readwrite("blendDest", &Material::blendDest)
-            .def_readwrite("cull", &Material::cull)
-            .def_readwrite("cullMode", &Material::cullMode)
-            .def("add", &Material::add)
-            .def("setTexture", &Material::setTexture)
-            .def("getTexture", &Material::getTexture)
-            .def("limitTextures", &Material::limitTextures)
-            .def("blendNormal", &Material::blendNormal)
-            .def("blendPremultiplied", &Material::blendPremultiplied)
-            .def("blendOff", &Material::blendOff)
-            .def("clone", &Material::clone)
-            .scope
-            [
-              def("create", (MaterialPtr(*)())&Material::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Material>("Material")
+          .method("addTexture", &LostMeshMaterial_addTexture)
+          .field("shader", &Material::shader)
+          .field("uniforms", &Material::uniforms)
+          .field("color", &Material::color)
+          .field("blend", &Material::blend)
+          .field("blendSrc", &Material::blendSrc)
+          .field("blendDest", &Material::blendDest)
+          .field("cull", &Material::cull)
+          .field("cullMode", &Material::cullMode)
+          .method("add", &Material::add)
+          .method("setTexture", &Material::setTexture)
+          .method("getTexture", &Material::getTexture)
+          .method("limitTextures", &Material::limitTextures)
+          .method("blendNormal", &Material::blendNormal)
+          .method("blendPremultiplied", &Material::blendPremultiplied)
+          .method("blendOff", &Material::blendOff)
+          .method("clone", &Material::clone)
+          .function("create", (MaterialPtr(*)())&Material::create);
     }
 
     void LostMeshMesh(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Mesh>("Mesh")
-            .def_readwrite("vertexBuffer", &Mesh::vertexBuffer)
-            .def_readwrite("indexBuffer", &Mesh::indexBuffer)
-            .def_readwrite("material", &Mesh::material)
-            .def_readwrite("transform", &Mesh::transform)
-            .def("resetBuffers", &Mesh::resetBuffers)
-            .def("resetSize", &Mesh::resetSize)
-            .def("setU8", (void(Mesh::*)(uint32_t, gl::UsageType, uint8_t))&Mesh::set)
-            .def("setU16", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint16_t val))&Mesh::set)
-            .def("setU32", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint32_t val))&Mesh::set)
-            .def("setF32", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, float val))&Mesh::set)
-            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec2& val))&Mesh::set)
-            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec3& val))&Mesh::set)
-            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec4& val))&Mesh::set)
-            .def("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const common::Color& val))&Mesh::set)
-            .def("getAsVec2",&Mesh::getAsVec2)
-            .def("getAsVec3",&Mesh::getAsVec3)
-            .def("getAsU32",&Mesh::getAsU32)
-            .def("clone", &Mesh::clone)
-            .scope
-            [
-              def("create", (MeshPtr(*)())&Mesh::create),
-              def("create", (MeshPtr(*)(const gl::BufferLayout& vertexLayout, gl::ElementType indexType))&Mesh::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Mesh>("Mesh")
+          .field("vertexBuffer", &Mesh::vertexBuffer)
+          .field("indexBuffer", &Mesh::indexBuffer)
+          .field("material", &Mesh::material)
+          .field("transform", &Mesh::transform)
+          .method("resetBuffers", &Mesh::resetBuffers)
+          .method("resetSize", &Mesh::resetSize)
+          .method("setU8", (void(Mesh::*)(uint32_t, gl::UsageType, uint8_t))&Mesh::set)
+          .method("setU16", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint16_t val))&Mesh::set)
+          .method("setU32", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, uint32_t val))&Mesh::set)
+          .method("setF32", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, float val))&Mesh::set)
+          .method("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec2& val))&Mesh::set)
+          .method("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec3& val))&Mesh::set)
+          .method("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const math::Vec4& val))&Mesh::set)
+          .method("set", (void(Mesh::*)(uint32_t idx, gl::UsageType ut, const common::Color& val))&Mesh::set)
+          .method("getAsVec2",&Mesh::getAsVec2)
+          .method("getAsVec3",&Mesh::getAsVec3)
+          .method("getAsU32",&Mesh::getAsU32)
+          .method("clone", &Mesh::clone)
+          .function("create", (MeshPtr(*)())&Mesh::create)
+          .function("create", (MeshPtr(*)(const gl::BufferLayout& vertexLayout, gl::ElementType indexType))&Mesh::create);
     }
 
     void LostMeshQuad(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Quad, Mesh>("Quad")
-            .def("updateSize", &Quad::updateSize)
-            .scope
-            [
-              def("create", (QuadPtr(*)()) &Quad::create),
-              def("create", (QuadPtr(*)(const math::Rect& inRect)) &Quad::create),
-              def("create", (QuadPtr(*)(common::DataPtr data, bool)) &Quad::create),
-              def("create", (QuadPtr(*)(gl::TexturePtr tex, bool)) &Quad::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Quad>("Quad")
+          .extends<Mesh>()
+          .method("updateSize", &Quad::updateSize)
+          .function("create", (QuadPtr(*)()) &Quad::create)
+          .function("create", (QuadPtr(*)(const math::Rect& inRect)) &Quad::create)
+          .function("create", (QuadPtr(*)(common::DataPtr data, bool)) &Quad::create)
+          .function("create", (QuadPtr(*)(gl::TexturePtr tex, bool)) &Quad::create);
     }
 
     void LostMeshDisc(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Disc, Mesh>("Disc")
-            .def("update", &Disc::update)
-            .def("updateRadius", &Disc::updateRadius)
-            .def("updateLineWidth", &Disc::updateLineWidth)
-            .scope
-            [
-              def("create", &Disc::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Disc>("Disc")
+          .extends<Mesh>()
+          .method("update", &Disc::update)
+          .method("updateRadius", &Disc::updateRadius)
+          .method("updateLineWidth", &Disc::updateLineWidth)
+          .function("create", &Disc::create);
     }
 
     void LostMeshSphere(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<Sphere, Mesh>("Sphere")
-            .def("updateRadius", &Sphere::updateRadius)
-            .def("updateSubdivisions", &Sphere::updateSubdivisions)
-            .scope
-            [
-              def("create", &Sphere::create)
-            ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<Sphere>("Sphere")
+          .extends<Mesh>()
+          .method("updateRadius", &Sphere::updateRadius)
+          .method("updateSubdivisions", &Sphere::updateSubdivisions)
+          .function("create", &Sphere::create);
     }
     
     void LostMeshScaleGrid(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<ScaleGrid, Mesh>("ScaleGrid")
-          .def("updateSize", &ScaleGrid::updateSize)
-          .scope
-          [
-            def("create", &ScaleGrid::create)            
-          ]
-        ]
-      ];
+/*
+      package(state, "lost").package("mesh")
+        .clazz<ScaleGrid>("ScaleGrid")
+          .extends<Mesh>()
+          .method("updateSize", &ScaleGrid::updateSize)
+          .function("create", &ScaleGrid::create);
+*/
     }
 
     void LostMeshRoundedRect(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<RoundedRect, Mesh>("RoundedRect")
-          .def("size", &RoundedRect::size)
-          .def("roundCorners", &RoundedRect::roundCorners)
-          .def("radius", &RoundedRect::radius)
-          .def("showSides", &RoundedRect::showSides)
-          .def("lineWidth", &RoundedRect::lineWidth)
-          .scope
-          [
-            def("create", &RoundedRect::create)            
-          ]
-        ]
-      ];
+      package(state, "lost").package("mesh")
+        .clazz<RoundedRect>("RoundedRect")
+          .extends<Mesh>()
+          .method("size", &RoundedRect::size)
+          .method("roundCorners", &RoundedRect::roundCorners)
+          .method("radius", &RoundedRect::radius)
+          .method("showSides", &RoundedRect::showSides)
+          .method("lineWidth", &RoundedRect::lineWidth)
+          .function("create", &RoundedRect::create);
     }
 
     void LostMeshTextureManager(lua_State* state)
     {
-      module(state, "lost")
-      [
-        namespace_("mesh")
-        [
-          class_<TextureManager>("TextureManager")
-          .def("arcTexture", &TextureManager::arcTexture)
-          .def("arcFilledTexture", &TextureManager::arcFilledTexture)
-          .def("addGradient", &TextureManager::addGradient)
-          .def_readonly("gradientTexture", &TextureManager::gradientTexture)
-          .def_readwrite("gradientTextureWidth", &TextureManager::gradientTextureWidth)
-          .scope
-          [
-            def("create", (TextureManagerPtr(*)())&TextureManager::create)            
-          ]
-        ]
-      ];      
+      package(state, "lost").package("mesh")
+        .clazz<TextureManager>("TextureManager")
+          .method("arcTexture", &TextureManager::arcTexture)
+          .method("arcFilledTexture", &TextureManager::arcFilledTexture)
+          .method("addGradient", &TextureManager::addGradient)
+          .field("gradientTexture", &TextureManager::gradientTexture)
+          .field("gradientTextureWidth", &TextureManager::gradientTextureWidth)
+          .function("create", (TextureManagerPtr(*)())&TextureManager::create);
     }
 
 

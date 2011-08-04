@@ -200,8 +200,20 @@ namespace slub {
     }
 
     template<typename F>
-    clazz& field(const std::string& fieldName, F (T::*getter)() const, void (T::*setter)(F)) {
+    clazz& field(const std::string& fieldName, F (T::*getter)(), void (T::*setter)(F)) {
       registry::get(name)->addField(fieldName, new slub::field_method<T, F>(getter, setter));
+      return *this;
+    }
+    
+    template<typename F>
+    clazz& field(const std::string& fieldName, F (T::*getter)() const, void (T::*setter)(F)) {
+      registry::get(name)->addField(fieldName, new slub::field_method_const<T, F>(getter, setter));
+      return *this;
+    }
+    
+    template<typename F>
+    clazz& field(const std::string& fieldName, F (*getter)(T*), void (*setter)(T*, F)) {
+      registry::get(name)->addField(fieldName, new slub::field_function<T, F>(getter, setter));
       return *this;
     }
     
@@ -481,64 +493,108 @@ namespace slub {
     
     clazz& function(const std::string& name, void (*f)()) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename arg1>
     clazz& function(const std::string& name, void (*f)(arg1)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<arg1>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename arg1, typename arg2>
     clazz& function(const std::string& name, void (*f)(arg1, arg2)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3>
     clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4)) {
+      luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
+      slub::function<arg1, arg2, arg3, arg4>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 2);
+      return *this;
+    }
+    
+    template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5)) {
+      luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
+      slub::function<arg1, arg2, arg3, arg4, arg5>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename R>
     clazz& function(const std::string& name, R (*f)()) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<R>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename R, typename arg1>
     clazz& function(const std::string& name, R (*f)(arg1)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename R, typename arg1, typename arg2>
     clazz& function(const std::string& name, R (*f)(arg1, arg2)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3>
     clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
       luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
-      lua_pop(state, 1);
+      lua_pop(state, 2);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2, typename arg3, typename arg4>
+    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4)) {
+      luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
+      slub::function<R, arg1, arg2, arg3, arg4>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 2);
+      return *this;
+    }
+    
+    template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5)) {
+      luaL_getmetatable(state, this->name.c_str());
+      lua_getfield(state, -1, "__metatable");
+      slub::function<R, arg1, arg2, arg3, arg4, arg5>(state, name, f, this->name, lua_gettop(state));
+      lua_pop(state, 2);
       return *this;
     }
     
@@ -550,9 +606,10 @@ namespace slub {
     template<typename C>
     clazz& constant(const std::string& constantName, const C& value) {
       luaL_getmetatable(state, name.c_str());
+      lua_getfield(state, -1, "__metatable");
       converter<C>::push(state, value);
       lua_setfield(state, -2, constantName.c_str());
-      lua_pop(state, 1);
+      lua_pop(state, 2);
       return *this;
     }
     
@@ -562,7 +619,7 @@ namespace slub {
       registry* r = registry::get<T*>();
       if (r->containsConstructor()) {
         T* instance = r->getConstructor(L)->newInstance<T>(L);
-        wrapper<T*>* w = (wrapper<T*>*) lua_newuserdata(L, sizeof(wrapper<T*>));
+        wrapper<T*>* w = wrapper<T*>::create(L);
         w->ref = instance;
         w->gc = true;
         luaL_getmetatable(L, r->getTypeName().c_str());
@@ -575,7 +632,12 @@ namespace slub {
     static int __gc(lua_State* L) {
       wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
       if (w->gc) {
-        D::delete_(w->ref);
+        if (w->holder != NULL) {
+          D::delete_(w->holder);
+        }
+        else {
+          D::delete_(w->ref);
+        }
       }
       else {
         w->ref = NULL;

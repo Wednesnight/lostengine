@@ -1,13 +1,14 @@
 #include "lost/lua/bindings/LostEvent.h"
-#include "lost/lua/lua.h"
 
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/event/Listener.h"
 #include "lost/event/Connection.h"
 
-using namespace luabind;
+#include <slub/slub.h>
+
 using namespace lost::event;
+using namespace slub;
 
 namespace lost
 {
@@ -15,52 +16,42 @@ namespace lost
   {
     struct LuaHandlerFunction : lost::event::Listener
     {
-      luabind::object func;
+      reference func;
       
-      LuaHandlerFunction(luabind::object inFunction) : func(inFunction) {}
+      LuaHandlerFunction(const reference& inFunction) : func(inFunction) {}
       
-      void call(const EventPtr& event)
-      {
-        luabind::call_function<void>(func, event);
+      void call(const EventPtr& event) {
+        func(event);
       }
     };
     
-    lost::event::ConnectionPtr addEventListener(object dispatcher, event::Type type, object func)
+    lost::event::ConnectionPtr addEventListener(EventDispatcher* dispatcher, event::Type type, reference func)
     {
-      if(luabind::type(func) == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
-      EventDispatcher* disp = object_cast<EventDispatcher*>(dispatcher);
-      return disp->addEventListener(type, ListenerPtr(new LuaHandlerFunction(func)));
+      if(func.type() == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
+      return dispatcher->addEventListener(type, ListenerPtr(new LuaHandlerFunction(func)));
     }
 
     void LostEvent(lua_State* state)
-    {      
-      module(state, "lost")
-      [
-        namespace_("event")
-        [
-          class_<Event>("Event")
-            .def_readwrite("type", &Event::type)
-            .def_readwrite("bubbles", &Event::bubbles)
-            .def_readwrite("stopPropagation", &Event::stopPropagation)
-            .def_readwrite("stopDispatch", &Event::stopDispatch)
-            .scope
-            [
-              def("create", &Event::create)
-            ],
-        
-          class_<Connection>("Connection"),
-            
+    {
+      package event = package(state, "lost").package("event");
 
-          class_<EventDispatcher>("EventDispatcher")
-            .def(constructor<>())
-            .def("addEventListener", &addEventListener)
-            .def("removeEventListener", &EventDispatcher::removeEventListener)
-            .def("dispatchEvent", &EventDispatcher::dispatchEvent)
-            .def("queueEvent", &EventDispatcher::queueEvent)
-            .def("processEvents", &EventDispatcher::processEvents)
-            .def("attachTo", &EventDispatcher::attachTo)
-        ]
-      ];
+      event.clazz<Event>("Event")
+        .field("type", &Event::type)
+        .field("bubbles", &Event::bubbles)
+        .field("stopPropagation", &Event::stopPropagation)
+        .field("stopDispatch", &Event::stopDispatch)
+        .function("create", &Event::create);
+        
+      event.clazz<Connection>("Connection"),      
+
+      event.clazz<EventDispatcher>("EventDispatcher")
+        .constructor()
+        .method("addEventListener", &addEventListener)
+        .method("removeEventListener", &EventDispatcher::removeEventListener)
+        .method("dispatchEvent", &EventDispatcher::dispatchEvent)
+        .method("queueEvent", &EventDispatcher::queueEvent)
+        .method("processEvents", &EventDispatcher::processEvents)
+        .method("attachTo", &EventDispatcher::attachTo);
     }  
   }
 }

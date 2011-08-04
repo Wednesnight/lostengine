@@ -10,6 +10,7 @@
 #include <slub/function.h>
 #include <slub/method.h>
 #include <slub/package.h>
+#include <slub/reference.h>
 #include <slub/registry.h>
 #include <slub/wrapper.h>
 

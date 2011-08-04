@@ -6,6 +6,8 @@
 #include <boost/utility.hpp>
 #include "lost/lua/forward.h"
 
+#include <slub/slub.h>
+
 namespace lost
 {
   namespace lua
@@ -61,7 +63,7 @@ namespace lost
       int callstackSize;
       map<string, string> fileHashes;
       resource::LoaderPtr loader;
-      luabind::object globals;
+      slub::reference globals;
     };
 
   }

@@ -75,6 +75,54 @@ namespace slub {
     
   };
   
+  template<typename T, typename F>
+  struct field<T, boost::shared_ptr<F> > : public abstract_field {
+    
+    boost::shared_ptr<F> T::*m;
+    
+    field(boost::shared_ptr<F> T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<boost::shared_ptr<F> >::push(L, t->ref->*m);
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = converter<boost::shared_ptr<F> >::get(L, -1);
+      return 0;
+    }
+    
+  };
+
+  template<typename T, typename F>
+  struct field<T, const boost::shared_ptr<F>&> : field<T, boost::shared_ptr<F> > {};
+
+  template<typename T, typename F>
+  struct field<T, std::tr1::shared_ptr<F> > : public abstract_field {
+    
+    std::tr1::shared_ptr<F> T::*m;
+    
+    field(std::tr1::shared_ptr<F> T::*m) : m(m) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<std::tr1::shared_ptr<F> >::push(L, t->ref->*m);
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      t->ref->*m = converter<std::tr1::shared_ptr<F> >::get(L, -1);
+      return 0;
+    }
+    
+  };
+
+  template<typename T, typename F>
+  struct field<T, const std::tr1::shared_ptr<F>&> : field<T, std::tr1::shared_ptr<F> > {};
+
   template<typename T>
   struct field<T, bool> : public abstract_field {
     
@@ -166,24 +214,68 @@ namespace slub {
   
   template<typename T, typename F>
   struct field_method : public abstract_field {
-
-    F (T::*getter)() const;
+    
+    F (T::*getter)();
     void (T::*setter)(F);
-
-    field_method(F (T::*getter)() const, void (T::*setter)(F)) : getter(getter), setter(setter) {
+    
+    field_method(F (T::*getter)(), void (T::*setter)(F)) : getter(getter), setter(setter) {
     }
-
+    
     int get(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       return converter<F>::push(L, (t->ref->*getter)());
     }
-
+    
     int set(lua_State* L) {
       wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
       (t->ref->*setter)(converter<F>::get(L, -1));
       return 0;
     }
-
+    
+  };
+  
+  template<typename T, typename F>
+  struct field_method_const : public abstract_field {
+    
+    F (T::*getter)() const;
+    void (T::*setter)(F);
+    
+    field_method_const(F (T::*getter)() const, void (T::*setter)(F)) : getter(getter), setter(setter) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<F>::push(L, (t->ref->*getter)());
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      (t->ref->*setter)(converter<F>::get(L, -1));
+      return 0;
+    }
+    
+  };
+  
+  template<typename T, typename F>
+  struct field_function : public abstract_field {
+    
+    F (*getter)(T*);
+    void (*setter)(T*, F);
+    
+    field_function(F (*getter)(T*), void (*setter)(T*, F)) : getter(getter), setter(setter) {
+    }
+    
+    int get(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<F>::push(L, (*getter)(t->ref));
+    }
+    
+    int set(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      (*setter)(t->ref, converter<F>::get(L, -1));
+      return 0;
+    }
+    
   };
 
 }

@@ -23,19 +23,19 @@ namespace slub {
   }
 
   registry::~registry() {
-    std::cout << className +": cleanup constructors" << std::endl;
+//    std::cout << className +": cleanup constructors" << std::endl;
     for (std::list<abstract_constructor*>::iterator midx = constructors.begin(); midx != constructors.end(); ++midx) {
       delete *midx;
     }
     constructors.clear();
     
-    std::cout << className +": cleanup fields" << std::endl;
+//    std::cout << className +": cleanup fields" << std::endl;
     for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
       delete idx->second;
     }
     fieldMap.clear();
     
-    std::cout << className +": cleanup methods" << std::endl;
+//    std::cout << className +": cleanup methods" << std::endl;
     for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
       for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
@@ -43,7 +43,7 @@ namespace slub {
     }
     methodMap.clear();
     
-    std::cout << className +": cleanup operators" << std::endl;
+//    std::cout << className +": cleanup operators" << std::endl;
     for (std::map<std::string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
       for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
