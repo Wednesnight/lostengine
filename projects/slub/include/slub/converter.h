@@ -532,11 +532,13 @@ namespace slub {
     }
     
     static reference get(lua_State* L, int index) {
-      return reference(L, index);
+      lua_pushvalue(L, index);
+      return reference(L);
     }
     
     static int push(lua_State* L, const reference& ref) {
-      return ref.push();
+      ref.push();
+      return 1;
     }
     
   };

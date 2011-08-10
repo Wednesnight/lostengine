@@ -36,28 +36,28 @@ void parse(slub::reference config, TaskletConfig* tc)
 {
   if(config["tasklet"].type() == LUA_TTABLE) {
 
-    if(config["tasklet"]["name"].type() != LUA_TNIL) { tc->taskletName = config["tasklet"]["name"].get<string>(); }
-    if(config["tasklet"]["waitForEvents"].type() != LUA_TNIL) { tc->taskletWaitForEvents = config["tasklet"]["waitForEvents"].get<bool>(); }
-    if(config["tasklet"]["hasWindow"].type() != LUA_TNIL) { tc->taskletHasWindow = config["tasklet"]["hasWindow"].get<bool>(); }
+    if(config["tasklet"]["name"].type() != LUA_TNIL) { tc->taskletName = config["tasklet"]["name"].cast<string>(); }
+    if(config["tasklet"]["waitForEvents"].type() != LUA_TNIL) { tc->taskletWaitForEvents = config["tasklet"]["waitForEvents"].cast<bool>(); }
+    if(config["tasklet"]["hasWindow"].type() != LUA_TNIL) { tc->taskletHasWindow = config["tasklet"]["hasWindow"].cast<bool>(); }
   }
 
   if(config["window"].type() == LUA_TTABLE) {
 
-    if(config["window"]["title"].type() != LUA_TNIL) { tc->windowTitle = config["window"]["title"].get<string>(); }
-    if(config["window"]["x"].type() != LUA_TNIL) { tc->windowRect.x = config["window"]["x"].get<float>(); }
-    if(config["window"]["y"].type() != LUA_TNIL) { tc->windowRect.y = config["window"]["y"].get<float>(); }
-    if(config["window"]["width"].type() != LUA_TNIL) { tc->windowRect.width = config["window"]["width"].get<float>(); }
-    if(config["window"]["height"].type() != LUA_TNIL) { tc->windowRect.height = config["window"]["height"].get<float>(); }
+    if(config["window"]["title"].type() != LUA_TNIL) { tc->windowTitle = config["window"]["title"].cast<string>(); }
+    if(config["window"]["x"].type() != LUA_TNIL) { tc->windowRect.x = config["window"]["x"].cast<float>(); }
+    if(config["window"]["y"].type() != LUA_TNIL) { tc->windowRect.y = config["window"]["y"].cast<float>(); }
+    if(config["window"]["width"].type() != LUA_TNIL) { tc->windowRect.width = config["window"]["width"].cast<float>(); }
+    if(config["window"]["height"].type() != LUA_TNIL) { tc->windowRect.height = config["window"]["height"].cast<float>(); }
   }
 
   if(config["renderer"].type() == LUA_TTABLE) {
     
-    if(config["renderer"]["framerate"].type() != LUA_TNIL) { tc->framerate = config["renderer"]["framerate"].get<double>(); }
+    if(config["renderer"]["framerate"].type() != LUA_TNIL) { tc->framerate = config["renderer"]["framerate"].cast<double>(); }
   }
 
   if(config["gl"].type() == LUA_TTABLE) {
     
-    if(config["gl"]["vsync"].type() != LUA_TNIL) { tc->glVsync = config["gl"]["vsync"].get<bool>(); }
+    if(config["gl"]["vsync"].type() != LUA_TNIL) { tc->glVsync = config["gl"]["vsync"].cast<bool>(); }
   }
 
 }

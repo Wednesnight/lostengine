@@ -63,7 +63,7 @@ namespace lost
       int callstackSize;
       map<string, string> fileHashes;
       resource::LoaderPtr loader;
-      slub::reference globals;
+      slub::globals globals;
     };
 
   }

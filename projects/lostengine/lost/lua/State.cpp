@@ -40,7 +40,7 @@ namespace lost
     : callstackSize(10), 
       loader(inLoader),
       state(luaL_newstate()),
-      globals(slub::reference(state))
+      globals(slub::globals(state))
     {
       luabind::open(state);      
       stateMap[state] = this;

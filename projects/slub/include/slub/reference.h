@@ -1,6 +1,7 @@
 #ifndef SLUB_REFERENCE_H
 #define SLUB_REFERENCE_H
 
+#include <list>
 #include <string>
 #include <stdexcept>
 #include <slub/converter.h>
@@ -12,217 +13,76 @@ namespace slub {
 
   struct reference {
 
-  public:
+    template<typename T>
+    friend struct converter;
 
-    static reference newtable(lua_State* state) {
-      lua_newtable(state);
-      reference result(state, -1);
-      lua_pop(state, 1);
-      return result;
-    }
-
-  private:
-
-    enum Mode {
-      NONE,
-      GLOBAL,
-      NESTED,
-      REFERENCE
-    };
-
-    Mode mode;
-    lua_State* state;
-    std::string field;
-    int parent;
-    int ref;
-
-    reference(lua_State* state, const std::string& field, int index) : mode(NESTED), state(state), ref(LUA_NOREF), field(field) {
-      lua_pushvalue(state, index);
-      parent = luaL_ref(state, LUA_REGISTRYINDEX);
+    reference() : state(NULL), index(LUA_REFNIL) {
     }
     
-    reference(lua_State* state, const std::string& field) : mode(GLOBAL), state(state), parent(LUA_NOREF), ref(LUA_NOREF), field(field) {
+    reference(lua_State* state) : state(state), index(luaL_ref(state, LUA_REGISTRYINDEX)) {
     }
-
-  public:
-
+    
     reference(const reference& r) {
       *this = r;
     }
-
-    reference() : mode(NONE), state(NULL), ref(LUA_NOREF), parent(LUA_NOREF) {
-    }
-    
-    reference(lua_State* state) : mode(GLOBAL), state(state), ref(LUA_NOREF), parent(LUA_NOREF) {
-    }
-
-    reference(lua_State* state, int index) : mode(REFERENCE), state(state), parent(LUA_NOREF) {
-      lua_pushvalue(state, index);
-      ref = luaL_ref(state, LUA_REGISTRYINDEX);
-    }
     
     ~reference() {
-      if (ref != LUA_NOREF && ref != LUA_REFNIL) {
-        luaL_unref(state, LUA_REGISTRYINDEX, ref);
-      }
-      if (parent != LUA_NOREF && parent != LUA_REFNIL) {
-        luaL_unref(state, LUA_REGISTRYINDEX, parent);
-      }
-    }
-
-    void operator=(const reference& r) {
-      mode = r.mode;
-      state = r.state;
-      field = r.field;
-      if (mode == NESTED) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, r.parent);
-        parent = luaL_ref(state, LUA_REGISTRYINDEX);
-        ref = LUA_NOREF;
-      }
-      else if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, r.ref);
-        ref = luaL_ref(state, LUA_REGISTRYINDEX);
-        parent = LUA_NOREF;
-      }      
-    }
-
-    reference operator[](const std::string& field) {
-      if (mode == NONE) {
-        throw std::runtime_error("trying to use uninitialized reference");
-      }
-
-      if (mode == GLOBAL) {
-        if (this->field.size() > 0) {
-          lua_getfield(state, LUA_GLOBALSINDEX, this->field.c_str());
-          reference r(state, field, -1);
-          lua_pop(state, 1);
-          return r;
-        }
-        else {
-          return reference(state, field);
-        }
-      }
-      else if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, ref);
-        reference r(state, field, -1);
-        lua_pop(state, 1);
-        return r;
-      }
-      else {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, parent);
-        reference r(state, field, -1);
-        lua_pop(state, 1);
-        return r;
-      }
-    }
-
-    int type() const {
-      if (mode == GLOBAL) {
-        if (field.size() > 0) {
-          lua_getfield(state, LUA_GLOBALSINDEX, field.c_str());
-          int result = lua_type(state, -1);
-          lua_pop(state, 1);
-          return result;
-        }
-        else {
-          return lua_type(state, LUA_GLOBALSINDEX);
-        }
-      }
-      else if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, ref);
-        int result = lua_type(state, -1);
-        lua_pop(state, 1);
-        return result;
-      }
-      else if (mode == NESTED) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, parent);
-        lua_getfield(state, -1, field.c_str());
-        int result = lua_type(state, -1);
-        lua_pop(state, 2);
-        return result;
-      }
-      else {
-        return LUA_TNIL;
-      }
-    }
-
-    template<typename T>
-    void operator=(T t) {
-      if (mode == NONE) {
-        throw std::runtime_error("trying to use uninitialized reference");
-      }
-
-      if (mode == GLOBAL) {
-        if (field.size() == 0) {
-          throw std::runtime_error("trying to modify globals table");
-        }
-
-        converter<T>::push(state, t);
-        lua_setfield(state, LUA_GLOBALSINDEX, field.c_str());
-      }
-      else if (mode == NESTED) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, parent);
-        converter<T>::push(state, t);
-        lua_setfield(state, -2, field.c_str());
-        lua_pop(state, 1);
-      }
-      else {
-        throw std::runtime_error("trying to modify reference value");
-      }
-    }
-
-    template<typename T>
-    T get() const {
-      if (mode == NONE) {
-        throw std::runtime_error("trying to use uninitialized reference");
-      }
-
-      if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, ref);
-        T result = converter<T>::get(state, -1);
-        lua_pop(state, 1);
-        return result;
-      }
-      else if (mode == GLOBAL) {
-        if (field.size() == 0) {
-          throw std::runtime_error("trying to cast globals table");
-        }
-        
-        lua_getfield(state, LUA_GLOBALSINDEX, field.c_str());
-        T result = converter<T>::get(state, -1);
-        lua_pop(state, 1);
-        return result;
-      }
-      else {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, parent);
-        lua_getfield(state, -1, field.c_str());
-        T result = converter<T>::get(state, -1);
-        lua_pop(state, 2);
-        return result;
+      if (state != NULL) {
+        luaL_unref(state, LUA_REGISTRYINDEX, index);
       }
     }
     
-    int push() const {
-      if (mode == GLOBAL) {
-        if (field.size() > 0) {
-          lua_getfield(state, LUA_GLOBALSINDEX, field.c_str());
-        }
-        else {
-          lua_pushvalue(state, LUA_GLOBALSINDEX);
-        }
+    void operator=(const reference& r) {
+      this->state = r.state;
+      r.push();
+      this->index = luaL_ref(state, LUA_REGISTRYINDEX);
+    }
+    
+    int type() const {
+      int result = lua_type(state, push());
+      pop();
+      return result;
+    }
+    
+    std::string typeName() const {
+      return lua_typename(state, type());
+    }
+    
+    reference operator[](const std::string& name) const {
+      lua_getfield(state, push(), name.c_str());
+      reference result(state);
+      pop();
+      
+      result.name = name;
+      if (this->path.size() > 0) {
+        result.path.insert(result.path.begin(), this->path.begin(), this->path.end());
       }
-      else if (mode == NESTED) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, parent);
-        lua_getfield(state, -1, field.c_str());
-        lua_remove(state, -2);
+      result.path.push_back(this->name);
+      
+      return result;
+    }
+    
+    template<typename T>
+    void operator=(T value) {
+      if (name.size() == 0) {
+        throw std::runtime_error("trying to modify stack reference");
       }
-      else if (mode == REFERENCE) {
-        lua_rawgeti(state, LUA_REGISTRYINDEX, ref);
+      
+      int index = LUA_GLOBALSINDEX;
+      for (std::list<std::string>::iterator iter = path.begin(); iter != path.end(); ++iter) {
+        lua_getfield(state, index, iter->c_str());
+        index = lua_gettop(state);
       }
-      else {
-        lua_pushnil(state);
-      }
-      return 1;
+      converter<T>::push(state, value);
+      lua_setfield(state, index, name.c_str());
+      lua_pop(state, path.size());
+    }
+    
+    template<typename T>
+    T cast() const {
+      T result = converter<T>::get(state, push());
+      pop();
+      return result;
     }
     
     template<typename R>
@@ -275,8 +135,61 @@ namespace slub {
       lua_call(state, 2, 0);
     }
     
+  protected:
+    
+    friend struct globals;
+    
+    lua_State* state;
+    int index;
+    
+    std::string name;
+    std::list<std::string> path;
+    
+    int push() const {
+      lua_rawgeti(state, LUA_REGISTRYINDEX, index);
+      return lua_gettop(state);
+    }
+    
+    void pop() const {
+      lua_pop(state, 1);
+    }
+    
   };
-
+  
+  struct globals {
+    
+    globals(lua_State* state) : state(state) {
+    }
+    
+    globals(const globals& g) {
+      *this = g;
+    }
+    
+    void operator=(const globals& g) {
+      this->state = g.state;
+    }
+    
+    int type() const {
+      return lua_type(state, LUA_GLOBALSINDEX);
+    }
+    
+    std::string typeName() const {
+      return lua_typename(state, type());
+    }
+    
+    reference operator[](const std::string& name) const {
+      lua_getglobal(state, name.c_str());
+      reference result(state);
+      result.name = name;
+      return result;
+    }
+    
+  protected:
+    
+    lua_State* state;
+    
+  };
+  
 }
 
 #endif

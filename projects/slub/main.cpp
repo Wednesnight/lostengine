@@ -35,10 +35,6 @@ enum enm {
   e2
 };
 
-reference ref(const reference& r) {
-  return r;
-}
-
 int main (int argc, char * const argv[]) {
 
   lua_State *L = lua_open();
@@ -48,6 +44,16 @@ int main (int argc, char * const argv[]) {
   luaopen_string(L);
   luaopen_math(L);
   luaopen_debug(L);
+
+  {
+    globals _G = globals(L);
+    std::cout << _G["math"].typeName() << std::endl;
+    std::cout << _G["math"]["abs"].typeName() << std::endl;
+    std::cout << _G["math"]["abs"].operator()<int, int>(-2) << std::endl;
+
+    _G["foobarbaz"] = "argrml";
+    std::cout << _G["foobarbaz"].cast<std::string>() << std::endl;
+  }
 
   slub::package enum_ = slub::package(L, "enum");
   enum_.enumerated("e1", e1);
@@ -159,12 +165,6 @@ int main (int argc, char * const argv[]) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
-  slub::function(L, "ref", &ref);
-
-  if (luaL_dostring(L, "local r = 10 local f = ref(r) print(f) ")) {
-    std::cout << lua_tostring(L, -1) << std::endl;
-  }
-  
   lua_gc(L, LUA_GCCOLLECT, 0);
   lua_close(L);
 

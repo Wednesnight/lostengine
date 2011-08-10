@@ -76,7 +76,7 @@ namespace lost
 
     string tostring(lua_State* state, const reference& obj)
     {
-      obj.push();
+      converter<const reference&>::push(state, obj);
       string result;
       if (lua_getmetatable(state, -1)) {  /* does it have a metatable? */
         lua_getfield(state, -1, "__tostring");
