@@ -24,6 +24,41 @@ namespace slub {
   struct converter {
 
     static bool check(lua_State* L, int index) {
+      return converter<T*>::check(L, index);
+    }
+
+    static void* checkudata(lua_State* L, int index) {
+      return converter<T*>::checkudata(L, index);
+    }
+
+    static T& get(lua_State* L, int index) {
+      if (registry::isRegisteredType<T*>()) {
+//        std::cout << "get, registered" << std::endl;
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(checkudata(L, index));
+        return *w->ref;
+      }
+      throw std::runtime_error("trying to use unregistered type");
+    }
+
+    static int push(lua_State* L, const T& value) {
+      if (registry::isRegisteredType<T*>()) {
+//        std::cout << "push, registered" << std::endl;
+        wrapper<T*>* w = wrapper<T*>::create(L);
+        w->ref = new T(value);
+        w->gc = true;
+        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
+        lua_setmetatable(L, -2);
+        return 1;
+      }
+      throw std::runtime_error("trying to use unregistered type");
+    }
+
+  };
+
+  template<typename T>
+  struct converter<T*> {
+    
+    static bool check(lua_State* L, int index) {
       bool result = false;
       void *p = lua_touserdata(L, index);
       if (p != NULL) {  /* value is a userdata? */
@@ -33,7 +68,7 @@ namespace slub {
             result = true;
           }
           else {
-            // downcast
+              // downcast
             if (registry::get<T*>()->isBase()) {
               const std::list<registry*> derived = registry::get<T*>()->derivedList();
               for (std::list<registry*>::const_iterator idx = derived.begin(); !result && idx != derived.end(); ++idx) {
@@ -44,7 +79,7 @@ namespace slub {
                 }
               }
             }
-            // upcast
+              // upcast
             if (!result && registry::get<T*>()->hasBase()) {
               const std::list<registry*> base = registry::get<T*>()->baseList();
               for (std::list<registry*>::const_iterator idx = base.begin(); !result && idx != base.end(); ++idx) {
@@ -61,38 +96,42 @@ namespace slub {
       }
       return result;
     }
-
+    
     static void* checkudata(lua_State* L, int index) {
       if (!check(L, index)) {
         luaL_typerror(L, index, registry::getTypeName<T*>().c_str());
       }
       return lua_touserdata(L, index);
     }
-
-    static T get(lua_State* L, int index) {
+    
+    static T* get(lua_State* L, int index) {
       if (registry::isRegisteredType<T*>()) {
-//        std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(checkudata(L, index));
-        return *w->ref;
+          //        std::cout << "get, registered" << std::endl;
+        wrapper<T*>* w = static_cast<wrapper<T*>*>(converter<T*>::checkudata(L, index));
+        return w->ref;
       }
       throw std::runtime_error("trying to use unregistered type");
     }
-
-    static int push(lua_State* L, T value) {
+    
+    static int push(lua_State* L, T* value) {
+      return push(L, value, false);
+    }
+    
+    static int push(lua_State* L, T* value, bool gc) {
       if (registry::isRegisteredType<T*>()) {
-//        std::cout << "push, registered" << std::endl;
+          //        std::cout << "push, registered" << std::endl;
         wrapper<T*>* w = wrapper<T*>::create(L);
-        w->ref = new T(value);
-        w->gc = true;
+        w->ref = value;
+        w->gc = gc;
         luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
       throw std::runtime_error("trying to use unregistered type");
     }
-
+    
   };
-
+  
   template<typename T>
   struct converter<boost::shared_ptr<T> > {
     
@@ -168,41 +207,6 @@ namespace slub {
 
   template<typename T>
   struct converter<const std::tr1::shared_ptr<T>&> : converter<std::tr1::shared_ptr<T> > {};
-  
-  template<typename T>
-  struct converter<T*> {
-    
-    static bool check(lua_State* L, int index) {
-      return converter<T>::check(L, index);
-    }
-
-    static T* get(lua_State* L, int index) {
-      if (registry::isRegisteredType<T*>()) {
-//        std::cout << "get, registered" << std::endl;
-        wrapper<T*>* w = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, index));
-        return w->ref;
-      }
-      throw std::runtime_error("trying to use unregistered type");
-    }
-    
-    static int push(lua_State* L, T* value) {
-      return push(L, value, false);
-    }
-    
-    static int push(lua_State* L, T* value, bool gc) {
-      if (registry::isRegisteredType<T*>()) {
-//        std::cout << "push, registered" << std::endl;
-        wrapper<T*>* w = wrapper<T*>::create(L);
-        w->ref = value;
-        w->gc = gc;
-        luaL_getmetatable(L, registry::getTypeName<T*>().c_str());
-        lua_setmetatable(L, -2);
-        return 1;
-      }
-      throw std::runtime_error("trying to use unregistered type");
-    }
-    
-  };
   
   template<typename T>
   struct converter<const T*> {
@@ -434,24 +438,6 @@ namespace slub {
   struct converter<float> : converter<double> {};
 
   template<>
-  struct converter<std::string> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static std::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
-    }
-    
-    static int push(lua_State* L, std::string value) {
-      lua_pushstring(L, value.c_str());
-      return 1;
-    }
-    
-  };
-  
-  template<>
   struct converter<const char*> {
     
     static bool check(lua_State* L, int index) {
@@ -470,7 +456,7 @@ namespace slub {
   };
   
   template<>
-  struct converter<const std::string&> {
+  struct converter<std::string> {
     
     static bool check(lua_State* L, int index) {
       return lua_isstring(L, index);
@@ -488,22 +474,10 @@ namespace slub {
   };
   
   template<>
-  struct converter<std::string&> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static std::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
-    }
-    
-    static int push(lua_State* L, std::string& value) {
-      lua_pushstring(L, value.c_str());
-      return 1;
-    }
-    
-  };
+  struct converter<std::string&> : converter<std::string> {};
+  
+  template<>
+  struct converter<const std::string&> : converter<std::string> {};
   
   template<>
   struct converter<void*> {

@@ -227,7 +227,7 @@ end
 function EventManager:propagateMouseEvent(rootView, event)
 --  log.debug("propagateEvent: " .. event.type)
 --  local mouseevent = lost.guiro.event.MouseEvent(event) 
-  local mouseevent = event
+  local mouseevent = lost.application.MouseEvent.cast(event)
   mouseevent.bubbles = true
   
   local viewStack = self:findViewStack(rootView, mouseevent)
@@ -257,7 +257,7 @@ end
 -- propagates an event using the hovered View
 -- expects the incoming event type to be lost.application.DragNDropEvent
 function EventManager:propagateDragNDropEvent(rootView, event)
-  local dropEvent = event 
+  local dropEvent = lost.application.DragNDropEvent.cast(event)
   dropEvent.bubbles = true
   dropEvent.stopDispatch = false
   dropEvent.stopPropagation = false  
@@ -282,7 +282,7 @@ end
 function EventManager:propagateKeyEvent(event)
 --  log.debug("propagateEvent: " .. event.type)
 --  local keyevent = lost.guiro.event.KeyEvent(event) 
-  local keyevent = event
+  local keyevent = lost.application.KeyEvent.cast(event)
   keyevent.bubbles = true
 
 --  keyevent.currentTarget = nil -- will be set to the receiving view upon dispatch

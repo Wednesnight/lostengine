@@ -91,7 +91,15 @@ int main (int argc, char * const argv[]) {
     .method("get", &baz::get)
     .method("print", &baz::print);
 
-  if (luaL_dostring(L, "local b = baz(10, 11) print(tostring(b)) print(b.bar) b:doStuff() b:doStuff(100) local f = foo(10) print(f:getFoo(b)) b:print(b:get()) ")) {
+  if (luaL_dostring(L,
+                    "local b = baz(10, 11) "
+                    "print(tostring(b)) "
+                    "print(b.bar) "
+                    "b:doStuff() "
+                    "b:doStuff(100) "
+                    "local f = foo(10) "
+                    "print(f:getFoo(b)) "
+                    "b:print(b:get()) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 

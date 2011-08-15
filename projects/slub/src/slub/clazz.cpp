@@ -6,21 +6,21 @@
 namespace slub {
 
   int abstract_clazz::__index(lua_State* L) {
-    std::string className(lua_tostring(L, lua_upvalueindex(1)));
+    registry* reg = (registry*) lua_touserdata(L, lua_upvalueindex(1));
     std::string name(lua_tostring(L, -1));
     
-    if (registry::get(className)->containsField(name)) {
-      return registry::get(className)->getField(name)->get(L);
+    if (reg->containsField(name)) {
+      return reg->getField(lua_touserdata(L, 1), name)->get(L);
     }
-    else if (registry::get(className)->containsMethod(name)) {
-      lua_pushstring(L, className.c_str());
+    else if (reg->containsMethod(name)) {
+      lua_pushlightuserdata(L, reg);
       lua_pushvalue(L, -2);
       lua_pushcclosure(L, __callMethod, 2);
       return 1;
     }
     else {
       // get value from Lua table
-      luaL_getmetatable(L, className.c_str());
+      luaL_getmetatable(L, reg->getTypeName().c_str());
       lua_getfield(L, -1, "__metatable");
       int methods = lua_gettop(L);
     
@@ -32,13 +32,14 @@ namespace slub {
   }
   
   int abstract_clazz::__newindex(lua_State* L) {
-    std::string className(lua_tostring(L, lua_upvalueindex(1)));
+    registry* reg = (registry*) lua_touserdata(L, lua_upvalueindex(1));
     std::string name(lua_tostring(L, -2));
-    if (registry::get(className)->containsField(name)) {
-      return registry::get(className)->getField(name)->set(L);
+
+    if (reg->containsField(name)) {
+      return reg->getField(lua_touserdata(L, 1), name)->set(L);
     }
     else {
-      luaL_getmetatable(L, className.c_str());
+      luaL_getmetatable(L, reg->getTypeName().c_str());
       lua_getfield(L, -1, "__metatable");
       int methods = lua_gettop(L);
       
@@ -51,14 +52,16 @@ namespace slub {
   }
   
   int abstract_clazz::__callMethod(lua_State* L) {
+    registry* reg = (registry*) lua_touserdata(L, lua_upvalueindex(1));
     int num = lua_gettop(L);
-    registry::get(lua_tostring(L, lua_upvalueindex(1)))->getMethod(lua_tostring(L, lua_upvalueindex(2)), L)->call(L);
+    reg->getMethod(lua_tostring(L, lua_upvalueindex(2)), L)->call(L);
     return lua_gettop(L) - num;
   }
   
   int abstract_clazz::__callOperator(lua_State* L) {
+    registry* reg = (registry*) lua_touserdata(L, lua_upvalueindex(1));
     int num = lua_gettop(L);
-    registry::get(lua_tostring(L, lua_upvalueindex(1)))->getOperator(lua_tostring(L, lua_upvalueindex(2)), L)->op(L);
+    reg->getOperator(lua_tostring(L, lua_upvalueindex(2)), L)->op(L);
     return lua_gettop(L) - num;
   }
   

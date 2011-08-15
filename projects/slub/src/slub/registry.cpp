@@ -77,25 +77,17 @@ namespace slub {
     fieldMap[fieldName] = field;
   }
   
-  bool registry::containsField(const std::string& fieldName, bool downcast) {
+  bool registry::containsField(const std::string& fieldName) {
     bool result = fieldMap.find(fieldName) != fieldMap.end();
     if (!result && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
-        result = (*idx)->containsField(fieldName, false);
-      }
-    }
-    if (!result && downcast && isBase()) {
-
-      // TODO: dynamic_cast check
-
-      for (std::list<registry*>::iterator idx = derivedList_.begin(); !result && idx != derivedList_.end(); ++idx) {
         result = (*idx)->containsField(fieldName);
       }
     }
     return result;
   }
   
-  abstract_field* registry::getField(const std::string& fieldName, bool throw_, bool downcast) {
+  abstract_field* registry::getField(void* v, const std::string& fieldName, bool throw_) {
     if (!containsField(fieldName) && throw_) {
       throw FieldNotFoundException(fieldName);
     }
@@ -106,15 +98,7 @@ namespace slub {
     }
     if (result == NULL && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
-        result = (*idx)->getField(fieldName, false, false);
-      }
-    }
-    if (result == NULL && downcast && isBase()) {
-
-      // TODO: dynamic_cast check
-
-      for (std::list<registry*>::iterator idx = derivedList_.begin(); result == NULL && idx != derivedList_.end(); ++idx) {
-        result = (*idx)->getField(fieldName, false);
+        result = (*idx)->getField(v, fieldName, false);
       }
     }
 
@@ -128,25 +112,17 @@ namespace slub {
     methodMap[methodName].push_back(method);
   }
   
-  bool registry::containsMethod(const std::string& methodName, bool downcast) {
+  bool registry::containsMethod(const std::string& methodName) {
     bool result = methodMap.find(methodName) != methodMap.end();
     if (!result && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
-        result = (*idx)->containsMethod(methodName, false);
-      }
-    }
-    if (!result && downcast && isBase()) {
-      
-        // TODO: dynamic_cast check
-      
-      for (std::list<registry*>::iterator idx = derivedList_.begin(); !result && idx != derivedList_.end(); ++idx) {
         result = (*idx)->containsMethod(methodName);
       }
     }
     return result;
   }
   
-  abstract_method* registry::getMethod(const std::string& methodName, lua_State* L, bool throw_, bool downcast) {
+  abstract_method* registry::getMethod(const std::string& methodName, lua_State* L, bool throw_) {
     if (!containsMethod(methodName) && throw_) {
       throw MethodNotFoundException(methodName);
     }
@@ -161,14 +137,6 @@ namespace slub {
     }
     if (result == NULL && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
-        result = (*idx)->getMethod(methodName, L, false, false);
-      }
-    }
-    if (result == NULL && downcast && isBase()) {
-
-      // TODO: dynamic_cast check
-
-      for (std::list<registry*>::iterator idx = derivedList_.begin(); result == NULL && idx != derivedList_.end(); ++idx) {
         result = (*idx)->getMethod(methodName, L, false);
       }
     }
@@ -230,13 +198,6 @@ namespace slub {
       throw OverloadNotFoundException(className +"."+ operatorName);
     }
     return result;
-  }
-
-  registry* registry::get(const std::string& className) {
-    if (instance.find(className) == instance.end()) {
-      instance[className] = new registry(className);
-    }
-    return instance[className];
   }
 
   void registry::registerBase(registry* base) {

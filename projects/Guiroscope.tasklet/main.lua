@@ -13,7 +13,6 @@ function startup()
 --  p:enable()
   local st = lost.platform.currentTimeSeconds()
   require("lost.guiro")
-  tasklet.eventDispatcher:addEventListener(lost.application.KeyEvent.KEY_DOWN, keyHandler)
 
   lost.guiro.ui():add
   {
@@ -53,7 +52,7 @@ end
 function shutdown()
 end
 
-function keyHandler(event)
+function key(event)
   if event.key == lost.application.K_ESCAPE then
     tasklet.running = false
   end

@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 #include <list>
+#include <iostream>
+#include <typeinfo>
 
 namespace slub {
 
@@ -30,8 +32,9 @@ namespace slub {
     friend class registry_holder;
 
     template<typename T>
-    static void registerType(const std::string& typeName) {
+    static registry* registerType(const std::string& typeName) {
       type_holder<T>::typeName = typeName;
+      return get<T>();
     }
 
     template<typename T>
@@ -44,11 +47,14 @@ namespace slub {
       return type_holder<T>::typeName;
     }
 
-    static registry* get(const std::string& className);
-
     template<typename T>
     static registry* get() {
-      return get(getTypeName<T>());
+      std::string className = getTypeName<T>();
+      if (instance.find(className) == instance.end()) {
+        registry* reg = new registry(className);
+        instance[className] = reg;
+      }
+      return instance[className];
     }
     
     std::string getTypeName() {
@@ -60,12 +66,12 @@ namespace slub {
     abstract_constructor* getConstructor(lua_State* L);
     
     void addField(const std::string& fieldName, abstract_field* field);
-    bool containsField(const std::string& fieldName, bool downcast = true);
-    abstract_field* getField(const std::string& fieldName, bool throw_ = true, bool downcast = true);
+    bool containsField(const std::string& fieldName);
+    abstract_field* getField(void* v, const std::string& fieldName, bool throw_ = true);
     
     void addMethod(const std::string& methodName, abstract_method* method);
-    bool containsMethod(const std::string& methodName, bool downcast = true);
-    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true, bool downcast = true);
+    bool containsMethod(const std::string& methodName);
+    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true);
     
     void addOperator(const std::string& operatorName, abstract_operator* op);
     bool containsOperator(const std::string& operatorName);

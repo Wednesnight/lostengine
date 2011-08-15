@@ -187,7 +187,8 @@ function Slider:pointUnderHandle(point) -- "under" = bottom or left, depending o
   end
 end
 
-function Slider:mouseDown(event)
+function Slider:mouseDown(ev)
+  local event = lost.application.MouseEvent.cast(ev)
   if (not self.scrollbarMode) or (self.scrollbarMode and self:handleContainsPoint(event.pos)) then
     self._mouseMoveListener = tasklet.eventDispatcher:addEventListener(lost.application.MouseEvent.MOUSE_MOVE,self.mouseMoveHandler)
     self:initHandleMouseOffset(self:mousePos(event.pos))
@@ -199,7 +200,8 @@ function Slider:mouseDown(event)
   end
 end
 
-function Slider:mouseUp(event)
+function Slider:mouseUp(ev)
+  local event = lost.application.MouseEvent.cast(ev)
   if self.dragInProgress then
     tasklet.eventDispatcher:removeEventListener(self._mouseMoveListener)
     self:release()
@@ -207,7 +209,8 @@ function Slider:mouseUp(event)
   end
 end
 
-function Slider:mouseMove(event)
+function Slider:mouseMove(ev)
+  local event = lost.application.MouseEvent.cast(ev)
   if self.dragInProgress then
     self:updateHandlePosFromMousePos(self:mousePos(event.pos))
     self:updateValueFromHandlePos()
