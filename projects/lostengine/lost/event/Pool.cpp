@@ -1,4 +1,4 @@
-  #include "lost/event/Pool.h"
+#include "lost/event/Pool.h"
 #include <boost/thread/once.hpp>
 #include "lost/common/Logger.h"
 #include "lost/event/Event.h"
@@ -67,6 +67,16 @@ Event* Pool::eventForType(const char* inType)
   }
   
   return result;
+}
+
+void Pool::logStats()
+{
+  for(TypeMap::iterator pos=type2pool.begin();
+      pos!= type2pool.end();
+      ++pos)
+  {
+    DOUT(pos->first << " - " << pos->second.size());
+  }
 }
 
 
