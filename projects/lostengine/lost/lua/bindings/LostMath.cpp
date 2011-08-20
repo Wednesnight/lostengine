@@ -1,3 +1,4 @@
+#include "lost/math/io.h"
 #include "lost/lua/bindings/LostMath.h"
 #include "lost/lua/lua.h"
 #include <luabind/operator.hpp>
@@ -8,7 +9,6 @@
 #include "lost/math/Vec4.h"
 #include "lost/math/Matrix.h"
 #include "lost/math/AABB.h"
-#include "lost/math/io.h"
 #include <float.h>
 
 using namespace luabind;
