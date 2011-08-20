@@ -94,7 +94,7 @@ namespace lost
           result = *i;
           break;
         }
-        else if(result = (*i)->recursiveFindByName(inName))
+        else if((result = (*i)->recursiveFindByName(inName)))
         {
           break;
         }

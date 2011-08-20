@@ -26,7 +26,7 @@ namespace lost
       //        returned file size of zero is NOT a valid reason for throwing an exception.
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
       {
-          if(result = repositories[idx]->load( inPath))
+          if((result = repositories[idx]->load( inPath)))
             break;
       }
 
