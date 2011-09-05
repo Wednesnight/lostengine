@@ -127,7 +127,7 @@ mesh::MeshPtr DebugDraw::dequeueQuad()
 void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
 //  DOUT(vertexCount);
-  if(vertexCount = 4)
+  if(vertexCount == 4)
   {
     mesh::MeshPtr quad = dequeueQuad();
     for(uint32_t i=0; i<vertexCount; ++i)
@@ -143,7 +143,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
 //  DOUT(vertexCount);
-  if(vertexCount = 4)
+  if(vertexCount == 4)
   {
     mesh::MeshPtr quad = dequeueQuad();
     for(uint32_t i=0; i<vertexCount; ++i)

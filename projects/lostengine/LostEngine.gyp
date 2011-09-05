@@ -10,7 +10,7 @@
     'glee_path': '../../thirdparty/glee/glee_5_21',
     'md5_path': '../../thirdparty/md5/',
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
-    'luabind_path': '../../thirdparty/luabind/luabind_0_9_1',
+    'luabind_path': '../../thirdparty/luabind/luabind-master',
     'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
     'opengl_path': '../../thirdparty/OpenGL',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',

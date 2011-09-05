@@ -32,14 +32,15 @@ struct Pool
 
     EvType* result = NULL;
     const char* ctn = classTypeName<EvType>();
-    Event* temp = eventForType(ctn);
-    if(!ctn)
+    result = eventForType(ctn);
+    if(!result)
     {
       result = new EvType(t);
       type2pool[ctn].push_back(result);
 
     }
-    result->refcount = 1;
+    result->refcount++;
+    logStats();
     return result;
   }
   
@@ -48,8 +49,8 @@ struct Pool
   void returnEvent(Event* inEvent)
   {
     tthread::lock_guard<tthread::mutex> lock(_mutex);
-
     inEvent->refcount--;
+    logStats();
   }
 
 
@@ -61,6 +62,7 @@ struct Pool
   
 private:  
   Event* eventForType(const char* inType);
+  void logStats();
   tthread::mutex _mutex;
   
   typedef vector<Event*> EventVector;
