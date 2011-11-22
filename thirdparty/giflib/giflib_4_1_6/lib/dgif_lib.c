@@ -14,7 +14,11 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
+#ifdef _MSC_VER
+  #include <io.h>
+#else
+  #include <unistd.h>
+#endif
 #include <fcntl.h>
 #include <stdio.h>
 #include <string.h>

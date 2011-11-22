@@ -23,6 +23,8 @@
   #endif
   #include <windows.h>
 
+  #define sleep Sleep
+
   #ifndef __FUNCTION__
     #ifdef __func__
       #define __FUNCTION__ __func__

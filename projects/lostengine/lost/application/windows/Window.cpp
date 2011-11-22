@@ -9,10 +9,9 @@
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
 #include "lost/application/TaskletConfig.h"
+#include "lost/platform/Platform.h"
 #include <map>
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <shellapi.h>
 
 // windows consts get in our way here...
@@ -155,8 +154,8 @@ namespace lost
             WideCharToMultiByte(CP_UTF8, NULL, filenameW, -1, filename, MAX_PATH,
             NULL, NULL) > 0 && DragQueryPoint(drop, &pos) && GetCursorPos(&absPos))
           {
-            DragNDropEventPtr dragNDropEvent(new DragNDropEvent(DragNDropEvent::DROP(),
-              string(filename)));
+            DragNDropEventPtr dragNDropEvent(new DragNDropEvent(DragNDropEvent::DROP()));
+            dragNDropEvent->addPath(string(filename));
             dragNDropEvent->window  = window;
             dragNDropEvent->pos     = lost::math::Vec2((float)pos.x, (float)pos.y);
             dragNDropEvent->absPos  = lost::math::Vec2((float)absPos.x, (float)absPos.y);

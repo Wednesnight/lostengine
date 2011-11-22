@@ -4,11 +4,11 @@
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/platform/Platform.h"
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <iostream>
 #include <stdexcept>
+#include <boost/thread/condition.hpp>
 
 using namespace std;
 

@@ -9,6 +9,7 @@
     'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
     'glee_path': '../../thirdparty/glee/glee_5_21',
     'md5_path': '../../thirdparty/md5/',
+    'msinttypes_path': '../../thirdparty/msinttypes',
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
     'luabind_path': '../../thirdparty/luabind/luabind-master',
     'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
@@ -69,9 +70,9 @@
             'VCCLCompilerTool': {
               'Optimization': '0',
               'PreprocessorDefinitions': ['_DEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-debug.pch',
             },
           },
-          'msvs_precompiled_header': 'lost/prefix-debug.pch',
           'conditions': [
             ['OS == "linux"', {
               'cflags_cc': [
@@ -91,9 +92,9 @@
             'VCCLCompilerTool': {
               'Optimization': '2',
               'PreprocessorDefinitions': ['NDEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-release.pch',
             },
           },
-          'msvs_precompiled_header': 'lost/prefix-release.pch',
           'conditions': [
             ['OS == "linux"', {
               'cflags_cc': [
@@ -154,6 +155,11 @@
           'defines': [
             'WIN32',
             'UNICODE',
+            '_CHAR16T',
+          ],
+
+          'include_dirs': [
+            '<@(msinttypes_path)',
           ],
 
           'postbuilds': [{
@@ -234,9 +240,9 @@
             'VCCLCompilerTool': {
               'Optimization': '0',
               'PreprocessorDefinitions': ['_DEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-debug.pch',
             },
           },
-          'msvs_precompiled_header': 'lost/prefix-debug.pch',
           'conditions': [
             ['OS == "linux"', {
               'cflags_cc': [
@@ -256,9 +262,9 @@
             'VCCLCompilerTool': {
               'Optimization': '2',
               'PreprocessorDefinitions': ['NDEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-release.pch',
             },
           },
-          'msvs_precompiled_header': 'lost/prefix-release.pch',
           'conditions': [
             ['OS == "linux"', {
               'cflags_cc': [
@@ -279,6 +285,7 @@
         '<@(boost_path)',
         '<@(tinythread_path)',
         '<@(eastl_path)/include',
+        '<@(msinttypes_path)',
         '<@(unittest++_path)/include',
       ],
 
@@ -332,9 +339,23 @@
 
         ['OS == "win"', {
 
+          'include_dirs': [
+            '<@(msinttypes_path)',
+          ],
+
           'defines': [
             'WIN32',
             'UNICODE',
+            '_CHAR16T',
+          ],
+
+          'sources!': [
+            '<@(unittest++_path)/include/Posix/TimeHelpers.cpp',
+            '<@(unittest++_path)/include/Posix/SignalTranslator.cpp',
+          ],
+
+          'sources!': [
+            '<@(unittest++_path)/include/Win32/TimeHelpers.cpp',
           ],
 
         }],
@@ -384,11 +405,11 @@
             'GCC_OPTIMIZATION_LEVEL': '0',
             'GCC_PREFIX_HEADER': 'lost/prefix-debug.pch',
           },
-          'msvs_precompiled_header': 'lost/prefix-debug.pch',
           'msvs_settings': {
             'VCCLCompilerTool': {
               'Optimization': '0',
               'PreprocessorDefinitions': ['_DEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-debug.pch',
             },
           },
           'defines': [
@@ -409,11 +430,11 @@
             'GCC_OPTIMIZATION_LEVEL': '3',
             'GCC_PREFIX_HEADER': 'lost/prefix-release.pch',
           },
-          'msvs_precompiled_header': 'lost/prefix-release.pch',
           'msvs_settings': {
             'VCCLCompilerTool': {
               'Optimization': '2',
               'PreprocessorDefinitions': ['NDEBUG'],
+              'ForcedIncludeFiles': 'lost/prefix-release.pch',
             },
           },
           'defines': [
@@ -658,9 +679,11 @@
 
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
+        '<@(boost_path)/libs/filesystem/v3/src/path_traits.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/operations.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/portability.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/utf8_codecvt_facet.cpp',
+        '<@(boost_path)/libs/filesystem/v3/src/windows_file_codecvt.cpp',
         '<@(boost_path)/libs/system/src/error_code.cpp',
         '<@(boost_path)/libs/thread/src/tss_null.cpp',
         '<@(boost_path)/libs/thread/src/pthread/once.cpp',
@@ -883,6 +906,7 @@
             'lost/application/windows/Window.cpp',
             'lost/gl/windows/Context.cpp',
             'lost/platform/Platform_Windows.cpp',
+            '<@(boost_path)/libs/filesystem/v3/src/windows_file_codecvt.cpp',
             '<@(boost_path)/libs/thread/src/win32/thread.cpp',
             '<@(boost_path)/libs/thread/src/win32/tss_dll.cpp',
             '<@(boost_path)/libs/thread/src/win32/tss_pe.cpp',
@@ -897,16 +921,23 @@
             'libraries': [
               '-l<@(openal_path)/libs/Win32/EFX-Util.lib',
               '-l<@(openal_path)/libs/Win32/OpenAL32.lib',
+              '-lopengl32.lib',
+              '-lglu32.lib',
+              '-lshell32.lib',
+              '-lShLwApi.lib',
+              '-lmsvcrt.lib',
             ],
           },
           'include_dirs': [
             '<@(openal_path)/include',
             '<@(opengl_path)/include',
+            '<@(msinttypes_path)',
           ],
           'defines': [
             'WIN32',
             'UNICODE',
             '_LIB',
+            '_CHAR16T',
           ],
         }],
 
@@ -916,7 +947,7 @@
             'lost/application/linux/Tasklet.cpp',
             'lost/application/linux/Window.cpp',
             'lost/application/linux/WindowHandler.cpp',
-	    'lost/gl/linux/Context.cpp',
+	          'lost/gl/linux/Context.cpp',
             'lost/platform/Platform_Linux.cpp',
           ],
         }],

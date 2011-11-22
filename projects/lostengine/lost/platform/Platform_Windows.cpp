@@ -1,14 +1,12 @@
 // platform specific code, forwarded in Platform.h
 // WINDOWS
 
-#include <string>
 #include <stdexcept>
 #include <shlobj.h>
 #include <shlwapi.h>
 #include <iostream>
 #include <time.h>
-
-using namespace std;
+#include <boost/filesystem.hpp>
 
 namespace lost
 {
@@ -68,7 +66,7 @@ namespace lost
       return (double)(timevalue.QuadPart / 10);
     }
 
-    string getApplicationDirectory()
+    boost::filesystem::path getApplicationDirectory()
     {
       string result;
       string l_drive;
@@ -80,37 +78,39 @@ namespace lost
       PathAddBackslashA( l_path );
       result = reinterpret_cast<char*>(l_path);
 
-      return result;
+      return boost::filesystem::path(result);
     }
 
-    string getApplicationFilename( bool excludeExtension )
+    boost::filesystem::path getApplicationFilename( bool excludeExtension )
     {
       string l_filename;
       string l_extension;
 
       splitApplicationPath( NULL, NULL, &l_filename, &l_extension );
-      return (!excludeExtension && !l_extension.empty()) ? l_filename.append( l_extension ) : l_filename;
+      return boost::filesystem::path(
+        (!excludeExtension && !l_extension.empty()) ? l_filename.append( l_extension ) : l_filename);
     }
 
-    string buildResourcePath( const string& filename )
+    boost::filesystem::path buildResourcePath( const string& filename )
     {
-      string result( getApplicationDirectory().append( filename ) );
+      boost::filesystem::path result(getApplicationDirectory() / filename);
 
       FILE *l_filecheck;
-      if (fopen_s(&l_filecheck, result.c_str(), "r") == 0) fclose( l_filecheck );
-        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
+      if (fopen_s(&l_filecheck, result.string().c_str(), "r") == 0) fclose( l_filecheck );
+        else throw std::runtime_error("Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?");
 
       return result;
     }
 
-    string getResourcePath()
+    boost::filesystem::path getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    string buildUserDataPath( const string& filename )
+    boost::filesystem::path buildUserDataPath( const string& filename )
     {
-      string  result( filename );
+      boost::filesystem::path result(filename);
+
       char         l_path[MAX_PATH];
       char         l_executable[MAX_PATH];
       char         l_filename[_MAX_FNAME];
@@ -119,16 +119,16 @@ namespace lost
       if (SUCCEEDED( SHGetFolderPathA( NULL, CSIDL_APPDATA, NULL, 0, l_path ) ) && GetModuleFileNameA( 0, l_executable, MAX_PATH ))
       {
         if (_splitpath_s( l_executable, NULL, 0, NULL, 0, l_filename, _MAX_FNAME, NULL, 0 ) == 0 &&
-            PathAppendA( l_path, l_filename ) && PathAppendA( l_path, result.c_str() ))
+            PathAppendA( l_path, l_filename ) && PathAppendA( l_path, result.string().c_str() ))
         {
           result = reinterpret_cast<char*>(l_path);
         }
       }
 
-      if (fopen_s(&l_filecheck, result.c_str(), "r") == 0) fclose( l_filecheck );
-        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your user data directory? Is the spelling correct?" );
+      if (fopen_s(&l_filecheck, result.string().c_str(), "r") == 0) fclose( l_filecheck );
+        else throw std::runtime_error("Couldn't find resource '"+ result.string() +"', does it exist in your user data directory? Is the spelling correct?");
 
-      return result;
+      return boost::filesystem::path(result);
     }
 
   }

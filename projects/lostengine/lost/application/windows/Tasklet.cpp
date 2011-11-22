@@ -4,11 +4,12 @@
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/Context.h"
+#include "lost/platform/Platform.h"
+
 #include <sstream>
 #include <stdexcept>
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <fhtagn/threads/tasklet.h>
 
 using namespace std;
 
