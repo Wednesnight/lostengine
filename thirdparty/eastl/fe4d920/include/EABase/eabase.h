@@ -157,7 +157,9 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(__psp__) // The GCC compiler defines standard int types (e.g. uint32_t) but not PRId8, etc.
         #include <inttypes.h> // PRId8, SCNd8, etc.
     #endif
-    #include <stdint.h>   // int32_t, INT64_C, UINT8_MAX, etc.
+    #ifndef _MSC_VER
+      #include <stdint.h>   // int32_t, INT64_C, UINT8_MAX, etc.
+    #endif
     #include <math.h>     // float_t, double_t, etc.
     #include <float.h>    // FLT_EVAL_METHOD.
 

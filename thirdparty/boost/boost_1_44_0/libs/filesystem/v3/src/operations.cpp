@@ -50,6 +50,10 @@
 #include <boost/detail/workaround.hpp>
 #include <cstdlib>  // for malloc, free
 
+#ifdef _MSC_VER
+  #include <WinIoCtl.h>
+#endif
+
 #ifdef BOOST_FILEYSTEM_INCLUDE_IOSTREAM
 # include <iostream>
 #endif
