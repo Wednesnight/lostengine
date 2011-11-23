@@ -285,7 +285,6 @@
         '<@(boost_path)',
         '<@(tinythread_path)',
         '<@(eastl_path)/include',
-        '<@(msinttypes_path)',
         '<@(unittest++_path)/include',
       ],
 

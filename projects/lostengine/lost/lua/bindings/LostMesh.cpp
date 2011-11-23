@@ -19,6 +19,7 @@
 #include "lost/mesh/Sphere.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
+#include "lost/common/ColorGradient.h"
 
 #include <slub/slub.h>
 

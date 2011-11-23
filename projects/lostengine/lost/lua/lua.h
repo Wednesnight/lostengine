@@ -1,16 +1,9 @@
 #ifndef LOST_LUA_LUA_H
 #define LOST_LUA_LUA_H
 
-extern "C" {
-  #include "lua.h"
-  #include "lauxlib.h"
-  #include "lualib.h"
-}
-
+#include <slub/slub.h>
 #include <luabind/luabind.hpp>
 #include "lost/platform/Type.h"
-
-#include <slub/slub.h>
 
 #undef LUA_NUMBER
 #undef LUA_NUMBER_SCAN

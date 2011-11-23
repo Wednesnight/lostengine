@@ -1,5 +1,5 @@
-#include "lost/lua/bindings/LostGL.h"
 #include "lost/lua/lua.h"
+#include "lost/lua/bindings/LostGL.h"
 
 #include "lost/gl/Context.h"
 #include "lost/gl/FrameBuffer.h"
@@ -16,9 +16,9 @@
 #include "lost/gl/Texture.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
-#include <stdexcept>
+#include "lost/bitmap/Bitmap.h"
 
-#include <slub/slub.h>
+#include <stdexcept>
 
 using namespace luabind;
 using namespace lost::bitmap;

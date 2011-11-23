@@ -631,6 +631,26 @@ namespace slub {
     
   };
   
+  // TODO: add more lua_State* shortcuts
+  template<typename T, typename ret>
+  struct func_method<T, ret, lua_State*, empty, empty, empty, empty, empty, empty> : public abstract_method {
+    
+    ret (*m)(T*, lua_State*);
+    
+    func_method(ret (*m)(T*, lua_State*)) : m(m) {
+    }
+    
+    bool check(lua_State* L) {
+      return lua_gettop(L) == 1;
+    }
+    
+    int call(lua_State* L) {
+      wrapper<T*>* t = static_cast<wrapper<T*>*>(converter<T>::checkudata(L, 1));
+      return converter<ret>::push(L, (*m)(t->ref, L));
+    }
+    
+  };
+  
   template<typename T, typename arg1, typename arg2>
   struct func_method<T, void, arg1, arg2, empty, empty, empty, empty, empty> : public abstract_method {
     

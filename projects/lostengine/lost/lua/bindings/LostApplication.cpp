@@ -23,6 +23,7 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/event/Event.h"
 #include "lost/font/FontManager.h"
+#include "lost/lua/State.h"
 
 #include <slub/slub.h>
 

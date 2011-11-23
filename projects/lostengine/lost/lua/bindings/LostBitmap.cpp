@@ -2,6 +2,8 @@
 #include "lost/bitmap/Bitmap.h"
 #include "lost/bitmap/GifDecoder.h"
 #include "lost/bitmap/Gif.h"
+#include "lost/common/Data.h"
+#include "lost/resource/Loader.h"
 
 #include <slub/slub.h>
 

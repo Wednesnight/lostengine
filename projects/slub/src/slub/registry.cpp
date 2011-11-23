@@ -13,29 +13,31 @@ namespace slub {
   registry_holder registry::instance;
 
   registry_holder::~registry_holder() {
-    for (std::map<std::string, registry*>::iterator idx = begin(); idx != end(); ++idx) {
+    for (std::map<const std::type_info*, registry*>::iterator idx = begin(); idx != end(); ++idx) {
       delete idx->second;
     }
     clear();
   }
 
-  registry::registry(const std::string& className) : className(className) {
+  registry::registry(const std::type_info& type, const std::string& typeName)
+  : type(type), typeName(typeName)
+  {
   }
 
   registry::~registry() {
-//    std::cout << className +": cleanup constructors" << std::endl;
+//    std::cout << typeName +": cleanup constructors" << std::endl;
     for (std::list<abstract_constructor*>::iterator midx = constructors.begin(); midx != constructors.end(); ++midx) {
       delete *midx;
     }
     constructors.clear();
     
-//    std::cout << className +": cleanup fields" << std::endl;
+//    std::cout << typeName +": cleanup fields" << std::endl;
     for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
       delete idx->second;
     }
     fieldMap.clear();
     
-//    std::cout << className +": cleanup methods" << std::endl;
+//    std::cout << typeName +": cleanup methods" << std::endl;
     for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
       for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
@@ -43,7 +45,7 @@ namespace slub {
     }
     methodMap.clear();
     
-//    std::cout << className +": cleanup operators" << std::endl;
+//    std::cout << typeName +": cleanup operators" << std::endl;
     for (std::map<std::string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
       for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
@@ -62,7 +64,7 @@ namespace slub {
   
   abstract_constructor* registry::getConstructor(lua_State* L) {
     if (!containsConstructor()) {
-      throw ConstructorNotFoundException(className);
+      throw ConstructorNotFoundException(typeName);
     }
     
     for (std::list<abstract_constructor*>::iterator cidx = constructors.begin(); cidx != constructors.end(); ++cidx) {
@@ -70,7 +72,7 @@ namespace slub {
         return *cidx;
       }
     }
-    throw OverloadNotFoundException(className);
+    throw OverloadNotFoundException(typeName);
   }
   
   void registry::addField(const std::string& fieldName, abstract_field* field) {
@@ -103,7 +105,7 @@ namespace slub {
     }
 
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(className +"."+ fieldName);
+      throw OverloadNotFoundException(typeName +"."+ fieldName);
     }
     return result;
   }
@@ -156,7 +158,7 @@ namespace slub {
       if (s.size() > 0) {
         s += ")";
       }
-      throw OverloadNotFoundException(className +"."+ methodName + s);
+      throw OverloadNotFoundException(typeName +"."+ methodName + s);
     }
     return result;
   }
@@ -195,7 +197,7 @@ namespace slub {
     }
     
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(className +"."+ operatorName);
+      throw OverloadNotFoundException(typeName +"."+ operatorName);
     }
     return result;
   }

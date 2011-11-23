@@ -24,7 +24,7 @@ namespace slub {
     }
     
     static const Vec2& get(lua_State* L, int index) {
-      if (registry::isRegisteredType<Vec2*>()) {
+      if (registry::isRegisteredType<Vec2>()) {
         wrapper<const Vec2*>* w = static_cast<wrapper<const Vec2*>*>(converter<Vec2>::checkudata(L, index));
         return *w->ref;
       }
@@ -32,8 +32,8 @@ namespace slub {
     }
     
     static int push(lua_State* L, const Vec2& value) {
-      if (registry::isRegisteredType<Vec2*>()) {
-        wrapper<const Vec2*>* w = wrapper<const Vec2*>::create(L);
+      if (registry::isRegisteredType<Vec2>()) {
+        wrapper<const Vec2*>* w = wrapper<const Vec2*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = false;
         luaL_getmetatable(L, registry::getTypeName<Vec2*>().c_str());
@@ -81,8 +81,9 @@ namespace lost
     
     void LostMathVec2(lua_State* state)
     {
-      package(state, "lost").package("math")
-        .clazz<Vec2>("Vec2")
+      package math = package(state, "lost").package("math");
+
+      math.clazz<Vec2>("Vec2")
             .constructor()
             .constructor<const Vec2&>()
             .constructor<float, float>()
@@ -96,45 +97,48 @@ namespace lost
             .add<Vec2, Vec2>()
             .sub<Vec2, Vec2>()
             .eq()
-            .tostring()
+            .tostring();
 
-            .function("len", (float(*)(const Vec2&))&len)
-            .function("squlen", (float(*)(const Vec2&))&squlen)
-            .function("normalise", (Vec2&(*)(Vec2&))&normalise)
-            .function("perpendicular", (Vec2(*)(Vec2&))&perpendicular)
-            .function("angle", (float(*)(const Vec2&, const Vec2&))&angle)
-            .function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
+      math
+        .function("len", (float(*)(const Vec2&))&len)
+        .function("squlen", (float(*)(const Vec2&))&squlen)
+        .function("normalise", (Vec2&(*)(Vec2&))&normalise)
+        .function("perpendicular", (Vec2(*)(Vec2&))&perpendicular)
+        .function("angle", (float(*)(const Vec2&, const Vec2&))&angle)
+        .function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
     }
 
     void LostMathVec3(lua_State* state)
     {
-      package(state, "lost").package("math")
-        .clazz<Vec3>("Vec3")
-            .constructor()
-            .constructor<const Vec3&>()
-            .constructor<float, float, float>()
-            .method("zero", (void(Vec3::*)()) &Vec3::zero)
-            .field("x", &Vec3::x)
-            .field("y", &Vec3::y)            
-            .field("z", &Vec3::z)            
-            .mul<Vec3, float>()
-            .mul<float, Vec3>()
-            .add<Vec3, Vec3>()
-            .sub<Vec3, Vec3>()
-            .eq()
-            .tostring()
+      package math = package(state, "lost").package("math");
+      
+      math.clazz<Vec3>("Vec3")
+        .constructor()
+        .constructor<const Vec3&>()
+        .constructor<float, float, float>()
+        .method("zero", (void(Vec3::*)()) &Vec3::zero)
+        .field("x", &Vec3::x)
+        .field("y", &Vec3::y)            
+        .field("z", &Vec3::z)            
+        .mul<Vec3, float>()
+        .mul<float, Vec3>()
+        .add<Vec3, Vec3>()
+        .sub<Vec3, Vec3>()
+        .eq()
+      .tostring();
 
-            .function("len", (float(*)(const Vec3&))&len)
-            .function("squlen", (float(*)(const Vec3&))&squlen)
-            .function("normalise", (Vec3&(*)(Vec3&))&normalise)
-            .function("cross", &cross)
-            .function("angle", (float(*)(const Vec3&, const Vec3&))&angle)
-            .function("compare", (bool(*)(const Vec3&, const Vec3&, float))&compare);
+      math
+        .function("len", (float(*)(const Vec3&))&len)
+        .function("squlen", (float(*)(const Vec3&))&squlen)
+        .function("normalise", (Vec3&(*)(Vec3&))&normalise)
+        .function("cross", &cross)
+        .function("angle", (float(*)(const Vec3&, const Vec3&))&angle)
+        .function("compare", (bool(*)(const Vec3&, const Vec3&, float))&compare);
     }
 
     void LostMathVec4(lua_State* state)
     {
-      package(state, "lost").package("math")
+	      package(state, "lost").package("math")
         .clazz<Vec4>("Vec4")
             .constructor()
             .constructor<const Vec4&>()

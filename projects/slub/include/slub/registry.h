@@ -13,15 +13,19 @@ namespace slub {
 
   template<typename T>
   struct type_holder {
+    static const std::type_info* type;
     static std::string typeName;
   };
+
+  template<typename T>
+  const std::type_info* type_holder<T>::type = NULL;
 
   template<typename T>
   std::string type_holder<T>::typeName;
 
   struct registry;
 
-  struct registry_holder : public std::map<std::string, registry*> {
+  struct registry_holder : public std::map<const std::type_info*, registry*> {
     ~registry_holder();
   };
   
@@ -33,32 +37,27 @@ namespace slub {
 
     template<typename T>
     static registry* registerType(const std::string& typeName) {
+      type_holder<T>::type = &typeid(T);
       type_holder<T>::typeName = typeName;
       return get<T>();
     }
 
     template<typename T>
     static bool isRegisteredType() {
-      return type_holder<T>::typeName.size() > 0;
+      return type_holder<T>::type != NULL;
     }
-
+    
     template<typename T>
     static std::string getTypeName() {
       return type_holder<T>::typeName;
     }
 
-    template<typename T>
-    static registry* get() {
-      std::string className = getTypeName<T>();
-      if (instance.find(className) == instance.end()) {
-        registry* reg = new registry(className);
-        instance[className] = reg;
-      }
-      return instance[className];
+    static registry* get(const std::type_info& type) {
+      return instance.find(&type) != instance.end() ? instance[&type] : NULL;
     }
-    
+
     std::string getTypeName() {
-      return className;
+      return typeName;
     }
 
     void addConstructor(abstract_constructor* ctor);
@@ -86,12 +85,28 @@ namespace slub {
 
   private:
 
+    template<typename T>
+    static registry* get() {
+      registry* reg = NULL;
+      const std::type_info& type = typeid(T);
+      std::map<const std::type_info*, registry*>::iterator iter = instance.find(&type);
+      if (iter == instance.end()) {
+        reg = new registry(type, getTypeName<T>());
+        instance[&type] = reg;
+      }
+      else {
+        reg = iter->second;
+      }
+      return reg;
+    }
+
     static registry_holder instance;
 
-    registry(const std::string& className);
+    registry(const std::type_info& type, const std::string& typeName);
     ~registry();
     
-    std::string className;
+    const std::type_info& type;
+    std::string typeName;
     
     std::list<abstract_constructor*> constructors;
 

@@ -53,7 +53,7 @@ namespace slub {
     : state(L), name(prefix.size() > 0 ? prefix +"."+ name : name)
     {
 
-      reg = registry::registerType<T*>(this->name);
+      reg = registry::registerType<T>(this->name);
 
       lua_newtable(state);
       int methods = lua_gettop(state);
@@ -164,7 +164,7 @@ namespace slub {
 
     template<typename B>
     clazz& extends() {
-      registry* base = registry::get<B*>();
+      registry* base = registry::get(typeid(B));
       reg->registerBase(base);
       base->registerDerived(reg);
       return *this;
@@ -391,6 +391,13 @@ namespace slub {
     template<typename ret, typename arg1>
     clazz& method(const std::string& methodName, ret (*m)(T*, arg1)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1>(m));
+      return *this;
+    }
+    
+    // TODO: add more lua_State* shortcuts
+    template<typename ret>
+    clazz& method(const std::string& methodName, ret (*m)(T*, lua_State*)) {
+      reg->addMethod(methodName, new slub::func_method<T, ret, lua_State*>(m));
       return *this;
     }
     
@@ -718,10 +725,10 @@ namespace slub {
   private:
 
     static int __call(lua_State* L) {
-      registry* r = registry::get<T*>();
+      registry* r = registry::get(typeid(T));
       if (r->containsConstructor()) {
         T* instance = r->getConstructor(L)->newInstance<T>(L);
-        wrapper<T*>* w = wrapper<T*>::create(L);
+        wrapper<T*>* w = wrapper<T*>::create(L, typeid(T));
         w->ref = instance;
         w->gc = true;
         luaL_getmetatable(L, r->getTypeName().c_str());
@@ -732,7 +739,7 @@ namespace slub {
     }
 
     static int __gc(lua_State* L) {
-      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T*>().c_str()));
+      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T>().c_str()));
       if (w->gc) {
         if (w->holder != NULL) {
           D::delete_(w->holder);
