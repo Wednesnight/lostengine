@@ -46,16 +46,15 @@ namespace slub {
     static bool isRegisteredType() {
       return type_holder<T>::type != NULL;
     }
-    
-    template<typename T>
-    static std::string getTypeName() {
-      return type_holder<T>::typeName;
-    }
 
     static registry* get(const std::type_info& type) {
       return instance.find(&type) != instance.end() ? instance[&type] : NULL;
     }
 
+    const std::type_info& getType() {
+      return type;
+    }
+    
     std::string getTypeName() {
       return typeName;
     }
@@ -84,6 +83,11 @@ namespace slub {
     const std::list<registry*> derivedList();
 
   private:
+
+    template<typename T>
+    static std::string getTypeName() {
+      return type_holder<T>::typeName;
+    }
 
     template<typename T>
     static registry* get() {

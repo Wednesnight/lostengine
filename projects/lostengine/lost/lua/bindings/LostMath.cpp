@@ -36,7 +36,7 @@ namespace slub {
         wrapper<const Vec2*>* w = wrapper<const Vec2*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = false;
-        luaL_getmetatable(L, registry::getTypeName<Vec2*>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(Vec2))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }

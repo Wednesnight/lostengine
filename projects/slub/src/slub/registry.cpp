@@ -195,7 +195,16 @@ namespace slub {
         result = (*idx)->getOperator(operatorName, L, false);
       }
     }
-    
+
+    if (result == NULL) {
+      std::cout << "num: " << lua_gettop(L) << std::endl;
+      for (std::map<std::string, std::list<abstract_operator*> >::iterator iter =
+           operatorMap.begin(); iter != operatorMap.end(); ++iter)
+      {
+        std::cout << iter->first << std::endl;
+      }
+    }
+
     if (result == NULL && throw_) {
       throw OverloadNotFoundException(typeName +"."+ operatorName);
     }

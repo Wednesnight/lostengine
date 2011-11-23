@@ -25,8 +25,6 @@
 #include "lost/font/FontManager.h"
 #include "lost/lua/State.h"
 
-#include <slub/slub.h>
-
 using namespace lost::application;
 using namespace lost::event;
 using namespace lost::resource;

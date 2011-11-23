@@ -194,7 +194,8 @@ void Bitmap::init(const common::DataPtr& inData)
   height = h;
   if(data == NULL)
   {
-      throw std::runtime_error("couldn't init image from memory");
+    // FIXME: stbi_failure_reason is not threadsafe
+    throw std::runtime_error("couldn't init image from memory: "+ std::string(stbi_failure_reason()));
   }
 
   switch(bytesPerPixel)

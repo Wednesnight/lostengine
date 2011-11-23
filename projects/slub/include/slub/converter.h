@@ -47,7 +47,7 @@ namespace slub {
         wrapper<T*>* w = wrapper<T*>::create(L, typeid(value));
         w->ref = new T(value);
         w->gc = true;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -59,17 +59,13 @@ namespace slub {
   template<typename T>
   struct converter<T*> {
 
-    static bool checkBases(registry* reg, lua_State* L) {
+    static bool checkBases(registry* reg) {
       bool result = false;
       const std::list<registry*> base = reg->baseList();
       for (std::list<registry*>::const_iterator idx = base.begin(); !result && idx != base.end(); ++idx) {
-        lua_pop(L, 1);
-        lua_getfield(L, LUA_REGISTRYINDEX, (*idx)->getTypeName().c_str());
-        if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
-          result = true;
-        }
-        else if ((*idx)->hasBase()) {
-          result = checkBases(*idx, L);
+        result = (*idx)->getType() == typeid(T);
+        if (!result && (*idx)->hasBase()) {
+          result = checkBases(*idx);
         }
       }
       return result;
@@ -78,18 +74,13 @@ namespace slub {
     static bool check(lua_State* L, int index) {
       bool result = false;
       wrapper_base* w = (wrapper_base*) lua_touserdata(L, index);
-      if (w != NULL) {  /* value is a userdata? */
-//        std::cout << typeid(*((wrapper<T*>*) p)->ref).name() << std::endl;
-        if (lua_getmetatable(L, index)) {  /* does it have a metatable? */
-// FIXME: use typeid
-          lua_getfield(L, LUA_REGISTRYINDEX, registry::getTypeName<T>().c_str());  /* get correct metatable */
-          if (lua_rawequal(L, -1, -2)) {  /* does it have the correct mt? */
-            result = true;
+      if (w != NULL) {  // value is a userdata?
+        result = *w->type == typeid(T);
+        if (!result) {
+          registry* reg = registry::get(*w->type);
+          if (reg != NULL && reg->hasBase()) {
+            result = checkBases(reg);
           }
-          else if (registry::get(*w->type)->hasBase()) { // upcast
-            result = checkBases(registry::get(*w->type), L);
-          }
-          lua_pop(L, 2);  /* remove both metatables */
         }
       }
       return result;
@@ -97,7 +88,7 @@ namespace slub {
     
     static void* checkudata(lua_State* L, int index) {
       if (!check(L, index)) {
-        luaL_typerror(L, index, registry::getTypeName<T>().c_str());
+        luaL_typerror(L, index, registry::get(typeid(T))->getTypeName().c_str());
       }
       return lua_touserdata(L, index);
     }
@@ -121,7 +112,7 @@ namespace slub {
         wrapper<T*>* w = wrapper<T*>::create(L, typeid(*value));
         w->ref = value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(*value))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -149,13 +140,21 @@ namespace slub {
     static int push(lua_State* L, const boost::shared_ptr<T>& value) {
       if (registry::isRegisteredType<T>()) {
 //        std::cout << "push, registered" << std::endl;
-        wrapper<T*, boost::shared_ptr<T>*>* w = wrapper<T*, boost::shared_ptr<T>*>::create(L, typeid(*(value.get())));
-        w->holder = new boost::shared_ptr<T>(value);
-        w->ref = value.get();
-        w->gc = true;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
-        lua_setmetatable(L, -2);
-        return 1;
+        const std::type_info* type = &typeid(*(value.get()));
+        registry* reg = registry::get(*type);
+        if (reg == NULL) {
+          type = &typeid(T);
+          reg = registry::get(*type);
+        }
+        if (reg != NULL) {
+          wrapper<T*, boost::shared_ptr<T>*>* w = wrapper<T*, boost::shared_ptr<T>*>::create(L, *type);
+          w->holder = new boost::shared_ptr<T>(value);
+          w->ref = value.get();
+          w->gc = true;
+          luaL_getmetatable(L, reg->getTypeName().c_str());
+          lua_setmetatable(L, -2);
+          return 1;
+        }
       }
       throw std::runtime_error("trying to use unregistered type");
     }
@@ -187,13 +186,21 @@ namespace slub {
     static int push(lua_State* L, const std::tr1::shared_ptr<T>& value) {
       if (registry::isRegisteredType<T>()) {
 //        std::cout << "push, registered" << std::endl;
-        wrapper<T*, std::tr1::shared_ptr<T>*>* w = wrapper<T*, std::tr1::shared_ptr<T>*>::create(L, typeid(*(value.get())));
-        w->holder = new std::tr1::shared_ptr<T>(value);
-        w->ref = value.get();
-        w->gc = true;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
-        lua_setmetatable(L, -2);
-        return 1;
+        const std::type_info* type = &typeid(*(value.get()));
+        registry* reg = registry::get(*type);
+        if (reg == NULL) {
+          type = &typeid(T);
+          reg = registry::get(*type);
+        }
+        if (reg != NULL) {
+          wrapper<T*, std::tr1::shared_ptr<T>*>* w = wrapper<T*, std::tr1::shared_ptr<T>*>::create(L, type);
+          w->holder = new std::tr1::shared_ptr<T>(value);
+          w->ref = value.get();
+          w->gc = true;
+          luaL_getmetatable(L, reg->getTypeName().c_str());
+          lua_setmetatable(L, -2);
+          return 1;
+        }
       }
       throw std::runtime_error("trying to use unregistered type");
     }
@@ -232,7 +239,7 @@ namespace slub {
         wrapper<const T*>* w = wrapper<const T*>::create(L, typeid(*value));
         w->ref = value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(*value))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -267,7 +274,7 @@ namespace slub {
         wrapper<T*>* w = wrapper<T*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -302,7 +309,7 @@ namespace slub {
         wrapper<const T*>* w = wrapper<const T*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::getTypeName<T>().c_str());
+        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }

@@ -739,7 +739,7 @@ namespace slub {
     }
 
     static int __gc(lua_State* L) {
-      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::getTypeName<T>().c_str()));
+      wrapper<T*>* w = static_cast<wrapper<T*>*>(luaL_checkudata(L, 1, registry::get(typeid(T))->getTypeName().c_str()));
       if (w->gc) {
         if (w->holder != NULL) {
           D::delete_(w->holder);
