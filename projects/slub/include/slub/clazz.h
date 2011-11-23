@@ -166,7 +166,6 @@ namespace slub {
     clazz& extends() {
       registry* base = registry::get(typeid(B));
       reg->registerBase(base);
-      base->registerDerived(reg);
       return *this;
     }
 

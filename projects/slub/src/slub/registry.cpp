@@ -25,19 +25,16 @@ namespace slub {
   }
 
   registry::~registry() {
-//    std::cout << typeName +": cleanup constructors" << std::endl;
     for (std::list<abstract_constructor*>::iterator midx = constructors.begin(); midx != constructors.end(); ++midx) {
       delete *midx;
     }
     constructors.clear();
     
-//    std::cout << typeName +": cleanup fields" << std::endl;
     for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
       delete idx->second;
     }
     fieldMap.clear();
     
-//    std::cout << typeName +": cleanup methods" << std::endl;
     for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
       for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
@@ -45,7 +42,6 @@ namespace slub {
     }
     methodMap.clear();
     
-//    std::cout << typeName +": cleanup operators" << std::endl;
     for (std::map<std::string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
       for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
@@ -90,10 +86,6 @@ namespace slub {
   }
   
   abstract_field* registry::getField(void* v, const std::string& fieldName, bool throw_) {
-    if (!containsField(fieldName) && throw_) {
-      throw FieldNotFoundException(fieldName);
-    }
-
     abstract_field* result = NULL;
     if (fieldMap.find(fieldName) != fieldMap.end()) {
       result = fieldMap[fieldName];
@@ -105,7 +97,7 @@ namespace slub {
     }
 
     if (result == NULL && throw_) {
-      throw OverloadNotFoundException(typeName +"."+ fieldName);
+      throw FieldNotFoundException(typeName +"."+ fieldName);
     }
     return result;
   }
@@ -125,25 +117,34 @@ namespace slub {
   }
   
   abstract_method* registry::getMethod(const std::string& methodName, lua_State* L, bool throw_) {
-    if (!containsMethod(methodName) && throw_) {
-      throw MethodNotFoundException(methodName);
-    }
-    
-    abstract_method* result = NULL;
+    struct method_not_found : public abstract_method {
+      method_not_found() {}
+      bool check(lua_State*) {return false;}
+      int call(lua_State*) {return 0;}
+    };
+    static method_not_found not_found;
+
+    abstract_method* result = &not_found;
     if (methodMap.find(methodName) != methodMap.end()) {
-      for (std::list<abstract_method*>::iterator midx = methodMap[methodName].begin(); midx != methodMap[methodName].end(); ++midx) {
+      result = NULL;
+      for (std::list<abstract_method*>::iterator midx = methodMap[methodName].begin();
+           (result == &not_found || result == NULL) && midx != methodMap[methodName].end(); ++midx) {
         if ((*midx)->check(L)) {
           result = *midx;
         }
       }
     }
-    if (result == NULL && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
-        result = (*idx)->getMethod(methodName, L, false);
+    if ((result == &not_found || result == NULL) && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin();
+           (result == &not_found || result == NULL) && idx != baseList_.end(); ++idx) {
+        abstract_method* r = (*idx)->getMethod(methodName, L, false);
+        if ((r != &not_found && r != NULL) || result == &not_found) {
+          result = r;
+        }
       }
     }
     
-    if (result == NULL && throw_) {
+    if ((result == &not_found || result == NULL) && throw_) {
       std::string s;
       int n = lua_gettop(L);
       for (int idx = 1; idx < n; ++idx) {
@@ -158,7 +159,13 @@ namespace slub {
       if (s.size() > 0) {
         s += ")";
       }
-      throw OverloadNotFoundException(typeName +"."+ methodName + s);
+
+      if (result == &not_found) {
+        throw MethodNotFoundException(typeName +"."+ methodName + s);
+      }
+      else {
+        throw OverloadNotFoundException(typeName +"."+ methodName + s);
+      }
     }
     return result;
   }
@@ -178,35 +185,42 @@ namespace slub {
   }
   
   abstract_operator* registry::getOperator(const std::string& operatorName, lua_State* L, bool throw_) {
-    if (!containsOperator(operatorName) && throw_) {
-      throw OperatorNotFoundException(operatorName);
-    }
-    
-    abstract_operator* result = NULL;
+    struct operator_not_found : public abstract_operator {
+      operator_not_found() {}
+      bool check(lua_State*) {return false;}
+      int op(lua_State*) {return 0;}
+    };
+    static operator_not_found not_found;
+
+    abstract_operator* result = &not_found;
     if (operatorMap.find(operatorName) != operatorMap.end()) {
-      for (std::list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin(); oidx != operatorMap[operatorName].end(); ++oidx) {
+      result = NULL;
+      for (std::list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin();
+           (result == &not_found || result == NULL) && oidx != operatorMap[operatorName].end(); ++oidx)
+      {
         if ((*oidx)->check(L)) {
           result = *oidx;
         }
       }
     }
-    if (result == NULL && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
-        result = (*idx)->getOperator(operatorName, L, false);
-      }
-    }
-
-    if (result == NULL) {
-      std::cout << "num: " << lua_gettop(L) << std::endl;
-      for (std::map<std::string, std::list<abstract_operator*> >::iterator iter =
-           operatorMap.begin(); iter != operatorMap.end(); ++iter)
+    if ((result == &not_found || result == NULL) && hasBase()) {
+      for (std::list<registry*>::iterator idx = baseList_.begin();
+           (result == &not_found || result == NULL) && idx != baseList_.end(); ++idx)
       {
-        std::cout << iter->first << std::endl;
+        abstract_operator* r = (*idx)->getOperator(operatorName, L, false);
+        if ((r != &not_found && r != NULL) || result == &not_found) {
+          result = r;
+        }
       }
     }
 
-    if (result == NULL && throw_) {
-      throw OverloadNotFoundException(typeName +"."+ operatorName);
+    if ((result == &not_found || result == NULL) && throw_) {
+      if (result == &not_found) {
+        throw OperatorNotFoundException(typeName +"."+ operatorName);
+      }
+      else {
+        throw OverloadNotFoundException(typeName +"."+ operatorName);
+      }
     }
     return result;
   }
@@ -221,18 +235,6 @@ namespace slub {
 
   const std::list<registry*> registry::baseList() {
     return baseList_;
-  }
-
-  void registry::registerDerived(registry* derived) {
-    derivedList_.push_back(derived);
-  }
-
-  bool registry::isBase() {
-    return derivedList_.size() > 0;
-  }
-
-  const std::list<registry*> registry::derivedList() {
-    return derivedList_;
   }
 
 }

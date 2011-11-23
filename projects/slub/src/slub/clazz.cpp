@@ -9,14 +9,13 @@ namespace slub {
   int abstract_clazz::__index(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     if (reg != NULL) {
-      std::string name(lua_tostring(L, -1));
+      const char* name = lua_tostring(L, -1);
       if (reg->containsField(name)) {
         return reg->getField(lua_touserdata(L, 1), name)->get(L);
       }
       else if (reg->containsMethod(name)) {
-        lua_pushlightuserdata(L, reg);
-        lua_pushvalue(L, -2);
-        lua_pushcclosure(L, __callMethod, 2);
+        lua_pushvalue(L, -1);
+        lua_pushcclosure(L, __callMethod, 1);
         return 1;
       }
       else {
@@ -57,9 +56,9 @@ namespace slub {
   }
   
   int abstract_clazz::__callMethod(lua_State* L) {
-    registry* reg = (registry*) lua_touserdata(L, lua_upvalueindex(1));
+    registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     int num = lua_gettop(L);
-    reg->getMethod(lua_tostring(L, lua_upvalueindex(2)), L)->call(L);
+    reg->getMethod(lua_tostring(L, lua_upvalueindex(1)), L)->call(L);
     return lua_gettop(L) - num;
   }
   

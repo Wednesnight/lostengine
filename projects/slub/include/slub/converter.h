@@ -47,7 +47,7 @@ namespace slub {
         wrapper<T*>* w = wrapper<T*>::create(L, typeid(value));
         w->ref = new T(value);
         w->gc = true;
-        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
+        luaL_getmetatable(L, registry::get(typeid(value))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -274,7 +274,7 @@ namespace slub {
         wrapper<T*>* w = wrapper<T*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
+        luaL_getmetatable(L, registry::get(typeid(value))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }
@@ -309,7 +309,7 @@ namespace slub {
         wrapper<const T*>* w = wrapper<const T*>::create(L, typeid(value));
         w->ref = &value;
         w->gc = gc;
-        luaL_getmetatable(L, registry::get(typeid(T))->getTypeName().c_str());
+        luaL_getmetatable(L, registry::get(typeid(value))->getTypeName().c_str());
         lua_setmetatable(L, -2);
         return 1;
       }

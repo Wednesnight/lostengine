@@ -78,9 +78,6 @@ namespace slub {
     void registerBase(registry* base);
     bool hasBase();
     const std::list<registry*> baseList();
-    void registerDerived(registry* derived);
-    bool isBase();
-    const std::list<registry*> derivedList();
 
   private:
 
@@ -119,7 +116,6 @@ namespace slub {
     std::map<std::string, std::list<abstract_operator*> > operatorMap;
 
     std::list<registry*> baseList_;
-    std::list<registry*> derivedList_;
 
   };
 

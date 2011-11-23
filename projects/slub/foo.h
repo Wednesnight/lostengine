@@ -84,7 +84,7 @@ struct baz : public foo {
   baz(int i, int j) : foo(i, j) {
   }
   
-  foo* get() {
+  baz* get() {
     return this;
   }
   

@@ -37,6 +37,12 @@ enum enm {
 
 int main (int argc, char * const argv[]) {
 
+  baz b(0,0);
+  std::cout << typeid(b).name() << std::endl;
+  std::cout << typeid(&b).name() << std::endl;
+  std::cout << typeid(b.get()).name() << std::endl;
+  std::cout << typeid(*b.get()).name() << std::endl;
+
   lua_State *L = lua_open();
 
   luaopen_base(L);
