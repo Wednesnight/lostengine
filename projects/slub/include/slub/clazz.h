@@ -1,16 +1,17 @@
 #ifndef SLUB_CLAZZ_H
 #define SLUB_CLAZZ_H
 
-#include <slub/forward.h>
-#include <slub/constructor.h>
-#include <slub/exception.h>
-#include <slub/field.h>
-#include <slub/function.h>
-#include <slub/method.h>
-#include <slub/operators.h>
-#include <slub/registry.h>
-#include <slub/slub_lua.h>
-#include <slub/wrapper.h>
+#include "forward.h"
+#include "constructor.h"
+#include "exception.h"
+#include "field.h"
+#include "function.h"
+#include "method.h"
+#include "operators.h"
+#include "registry.h"
+#include "slub_lua.h"
+#include "wrapper.h"
+
 #include <string>
 
 namespace slub {

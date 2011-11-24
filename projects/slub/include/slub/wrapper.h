@@ -1,6 +1,8 @@
 #ifndef SLUB_WRAPPER_H
 #define SLUB_WRAPPER_H
 
+#include "slub_lua.h"
+
 #include <typeinfo>
 
 namespace slub {

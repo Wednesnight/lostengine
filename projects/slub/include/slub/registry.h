@@ -1,8 +1,9 @@
 #ifndef SLUB_REGISTRY_H
 #define SLUB_REGISTRY_H
 
-#include <slub/forward.h>
-#include <slub/slub_lua.h>
+#include "forward.h"
+#include "slub_lua.h"
+
 #include <string>
 #include <map>
 #include <list>

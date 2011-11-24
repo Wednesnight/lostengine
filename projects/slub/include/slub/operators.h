@@ -1,8 +1,9 @@
 #ifndef SLUB_OPERATORS_H
 #define SLUB_OPERATORS_H
 
-#include <slub/slub_lua.h>
-#include <slub/converter.h>
+#include "slub_lua.h"
+#include "converter.h"
+
 #include <sstream>
 
 namespace slub {

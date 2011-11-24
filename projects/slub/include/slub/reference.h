@@ -1,10 +1,11 @@
 #ifndef SLUB_REFERENCE_H
 #define SLUB_REFERENCE_H
 
+#include "converter.h"
+
 #include <list>
 #include <string>
 #include <stdexcept>
-#include <slub/converter.h>
 
 namespace slub {
 
@@ -20,6 +21,11 @@ namespace slub {
     }
     
     reference(lua_State* state) : state(state), index(luaL_ref(state, LUA_REGISTRYINDEX)) {
+    }
+    
+    reference(lua_State* state, int index) : state(state) {
+      lua_pushvalue(state, index);
+      this->index = luaL_ref(state, LUA_REGISTRYINDEX);
     }
     
     reference(const reference& r) {
@@ -153,40 +159,6 @@ namespace slub {
     void pop() const {
       lua_pop(state, 1);
     }
-    
-  };
-  
-  struct globals {
-    
-    globals(lua_State* state) : state(state) {
-    }
-    
-    globals(const globals& g) {
-      *this = g;
-    }
-    
-    void operator=(const globals& g) {
-      this->state = g.state;
-    }
-    
-    int type() const {
-      return lua_type(state, LUA_GLOBALSINDEX);
-    }
-    
-    std::string typeName() const {
-      return lua_typename(state, type());
-    }
-    
-    reference operator[](const std::string& name) const {
-      lua_getglobal(state, name.c_str());
-      reference result(state);
-      result.name = name;
-      return result;
-    }
-    
-  protected:
-    
-    lua_State* state;
     
   };
   

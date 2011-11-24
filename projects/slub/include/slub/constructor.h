@@ -1,8 +1,8 @@
 #ifndef SLUB_CONSTRUCTOR_H
 #define SLUB_CONSTRUCTOR_H
 
-#include <slub/slub_lua.h>
-#include <slub/converter.h>
+#include "slub_lua.h"
+#include "converter.h"
 
 namespace slub {
 

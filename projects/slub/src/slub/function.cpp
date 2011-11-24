@@ -1,4 +1,4 @@
-#include <slub/function.h>
+#include "../../include/slub/function.h"
 
 #include <iostream>
 #include <stdexcept>

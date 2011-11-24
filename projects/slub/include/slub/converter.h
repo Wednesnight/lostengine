@@ -1,9 +1,10 @@
 #ifndef SLUB_CONVERTER_H
 #define SLUB_CONVERTER_H
 
-#include <slub/reference.h>
-#include <slub/registry.h>
-#include <slub/wrapper.h>
+#include "reference.h"
+#include "registry.h"
+#include "wrapper.h"
+
 #include <stdexcept>
 #include <iostream>
 #include <list>

@@ -1,9 +1,9 @@
-#include <slub/registry.h>
-#include <slub/constructor.h>
-#include <slub/exception.h>
-#include <slub/field.h>
-#include <slub/method.h>
-#include <slub/operators.h>
+#include "../../include/slub/registry.h"
+#include "../../include/slub/constructor.h"
+#include "../../include/slub/exception.h"
+#include "../../include/slub/field.h"
+#include "../../include/slub/method.h"
+#include "../../include/slub/operators.h"
 
 #include <iostream>
 #include <stdexcept>

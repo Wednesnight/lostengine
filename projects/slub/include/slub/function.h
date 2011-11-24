@@ -1,8 +1,8 @@
 #ifndef SLUB_FUNCTION_H
 #define SLUB_FUNCTION_H
 
-#include <slub/slub_lua.h>
-#include <slub/converter.h>
+#include "slub_lua.h"
+#include "converter.h"
 
 #include <map>
 #include <list>

@@ -1,9 +1,9 @@
 #ifndef SLUB_FIELD_H
 #define SLUB_FIELD_H
 
-#include <slub/converter.h>
-#include <slub/registry.h>
-#include <slub/wrapper.h>
+#include "converter.h"
+#include "registry.h"
+#include "wrapper.h"
 
 namespace slub {
 

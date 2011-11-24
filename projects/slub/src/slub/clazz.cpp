@@ -1,4 +1,4 @@
-#include <slub/clazz.h>
+#include "../../include/slub/clazz.h"
 
 #include <iostream>
 #include <stdexcept>

@@ -1,7 +1,7 @@
 #ifndef SLUB_PACKAGE_H
 #define SLUB_PACKAGE_H
 
-#include <slub/clazz.h>
+#include "clazz.h"
 
 namespace slub {
 
