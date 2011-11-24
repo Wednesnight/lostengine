@@ -13,7 +13,6 @@ using namespace lost;
 using namespace lost::font;
 using namespace lost::mesh;
 using namespace lost::font::freetype;
-using namespace slub;
 
 namespace slub {
 
@@ -50,7 +49,7 @@ namespace lost
   
     void LostFontRenderedText(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .clazz<RenderedText>("RenderedText")
           .extends<Mesh>()
           .field("min", &RenderedText::min)
@@ -64,7 +63,7 @@ namespace lost
 
     void LostFontFont(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .clazz<Font>("Font")
           .field("ascender", &Font::ascender)
           .field("descender", &Font::descender)
@@ -76,14 +75,14 @@ namespace lost
 
     void LostFontTrueTypeFont(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .clazz<TrueTypeFont>("TrueTypeFont")
           .extends<Font>();
     }
     
     void LostFontManager(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .clazz<FontManager>("FontManager")
           .method("addEntry",&FontManager::addEntry)
           .method("getFont",&FontManager::getFont);
@@ -91,7 +90,7 @@ namespace lost
     
     void LostFontBreakMode(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .enumerated("BREAKMODE_NONE", lost::font::BREAKMODE_NONE)
         .enumerated("BREAKMODE_CHAR", lost::font::BREAKMODE_CHAR)
         .enumerated("BREAKMODE_WORD", lost::font::BREAKMODE_WORD);
@@ -99,14 +98,14 @@ namespace lost
 
     void LostFontRender(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .function("render", (RenderedTextPtr(*)(const string & inText, const FontPtr& font,bool characterMetrics, int align))&lost::font::render)
         .function("render", (void(*)(const string & inText, const FontPtr& font, const RenderedTextPtr& target,bool characterMetrics, int align))&lost::font::render);
     }
 
     void LostFontTextBuffer(lua_State* state)
     {
-      package(state, "lost").package("font")
+      slub::package(state, "lost").package("font")
         .clazz<TextBuffer>("TextBuffer")
           .constructor()
 

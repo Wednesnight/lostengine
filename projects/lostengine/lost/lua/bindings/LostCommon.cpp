@@ -14,7 +14,6 @@
 #include <slub/slub.h>
 
 using namespace lost::common;
-using namespace slub;
 
 namespace lost
 {
@@ -23,7 +22,7 @@ namespace lost
 
     void LostCommonData(lua_State* state)
     {
-      package(state, "lost").package("common")
+      slub::package(state, "lost").package("common")
         .clazz<Data>("Data")
           .method("str", &Data::str)
           .field("size", &Data::size)
@@ -32,7 +31,7 @@ namespace lost
 
     void LostCommonColor(lua_State* state)
     {
-      package(state, "lost").package("common")
+      slub::package(state, "lost").package("common")
         .clazz<Color>("Color")
           .constructor()
           .constructor<float, float, float>()
@@ -60,7 +59,7 @@ namespace lost
 
     void LostCommonColorPoint(lua_State* state)
     {
-      package(state, "lost").package("common")
+      slub::package(state, "lost").package("common")
         .clazz<ColorPoint>("ColorPoint")
           .constructor()
           .constructor<float, const Color&>();
@@ -68,15 +67,15 @@ namespace lost
 
     void LostCommonColorGradient(lua_State* state)
     {
-      package(state, "lost").package("common")
+      slub::package(state, "lost").package("common")
         .clazz<ColorGradient>("ColorGradient")
           .method("add", &ColorGradient::add)
           .function("create", &ColorGradient::create);
     }
 
-    string tostring(lua_State* state, const reference& obj)
+    string tostring(lua_State* state, const slub::reference& obj)
     {
-      converter<const reference&>::push(state, obj);
+      slub::converter<const slub::reference&>::push(state, obj);
       string result;
       if (lua_getmetatable(state, -1)) {  /* does it have a metatable? */
         lua_getfield(state, -1, "__tostring");
@@ -105,28 +104,28 @@ namespace lost
       return ls->getFilenameFuncnameLine();
     }
     
-    void debug(const reference& obj, lua_State* state)
+    void debug(const slub::reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_DOUT)
 			lost::common::Logger::logMessage("DEBUG", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void info(const reference& obj, lua_State* state)
+    void info(const slub::reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_IOUT)
 			lost::common::Logger::logMessage("INFO", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void warn(const reference& obj, lua_State* state)
+    void warn(const slub::reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_WOUT)
 			lost::common::Logger::logMessage("WARNING", getFilenameFuncnameLine(state), tostring(state, obj));
 #endif
     }
     
-    void error(const reference& obj, lua_State* state)
+    void error(const slub::reference& obj, lua_State* state)
     {
 #if defined(LOST_LOGGER_ENABLE_EOUT)
 			lost::common::Logger::logMessage("ERROR", getFilenameFuncnameLine(state), tostring(state, obj));
@@ -135,7 +134,7 @@ namespace lost
     
     void LostCommonLog(lua_State* state)
     {
-      package(state, "log")
+      slub::package(state, "log")
         .function("debug", &debug)
         .function("info", &info)
         .function("warn", &warn)
@@ -144,7 +143,7 @@ namespace lost
   
     void LostCommonHash(lua_State* state)
     {
-      package(state, "lost").package("common")
+      slub::package(state, "lost").package("common")
         .function("djb2Hash",&lost::common::djb2Hash);
     }
 

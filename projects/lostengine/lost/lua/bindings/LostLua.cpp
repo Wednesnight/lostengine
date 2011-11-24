@@ -5,7 +5,6 @@
 #include <slub/slub.h>
 
 using namespace lost::lua;
-using namespace slub;
 
 namespace lost
 {
@@ -20,7 +19,7 @@ namespace lost
     
     void LostLuaState(lua_State* state)
     {    
-      package(state, "lost").package("lua")
+      slub::package(state, "lost").package("lua")
         .function("doResourceFile", &doResourceFile)
 
         .clazz<State>("State")
@@ -33,7 +32,7 @@ namespace lost
 
     void LostLuaDebug(lua_State* state)
     {    
-      package(state, "lost").package("lua")
+      slub::package(state, "lost").package("lua")
         .clazz<lua_Debug>("lua_Debug")
           .field("event", &lua_Debug::event)
           .field("name", &lua_Debug::name)

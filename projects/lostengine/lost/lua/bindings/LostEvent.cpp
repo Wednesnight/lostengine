@@ -9,7 +9,6 @@
 #include <slub/slub.h>
 
 using namespace lost::event;
-using namespace slub;
 
 namespace lost
 {
@@ -17,16 +16,17 @@ namespace lost
   {
     struct LuaHandlerFunction : lost::event::Listener
     {
-      reference func;
+      slub::reference func;
       
-      LuaHandlerFunction(const reference& inFunction) : func(inFunction) {}
+      LuaHandlerFunction(const slub::reference& inFunction) : func(inFunction) {}
       
       void call(const EventPtr& event) {
         func(event);
       }
     };
     
-    lost::event::ConnectionPtr addEventListener(EventDispatcher* dispatcher, event::Type type, const reference& func)
+    lost::event::ConnectionPtr addEventListener(EventDispatcher* dispatcher, event::Type type,
+                                                const slub::reference& func)
     {
       if(func.type() == LUA_TNIL) { throw std::runtime_error("can't register NIL lua callback function"); }
       return dispatcher->addEventListener(type, ListenerPtr(new LuaHandlerFunction(func)));
@@ -34,7 +34,7 @@ namespace lost
 
     void LostEvent(lua_State* state)
     {
-      package event = package(state, "lost").package("event");
+      slub::package event = slub::package(state, "lost").package("event");
 
       event.clazz<Event>("Event")
         .field("type", &Event::type)

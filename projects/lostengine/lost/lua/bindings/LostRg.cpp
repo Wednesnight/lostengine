@@ -32,7 +32,6 @@
 using namespace lost::rg;
 using namespace lost::mesh;
 using namespace lost::font;
-using namespace slub;
 
 namespace lost
 {
@@ -40,7 +39,7 @@ namespace lost
   {
     void LostRg(lua_State* state)
     {
-      package rg = package(state, "lost").package("rg");
+      slub::package rg = slub::package(state, "lost").package("rg");
 
       rg.clazz<Node>("Node")
         .method("add", &Node::add)

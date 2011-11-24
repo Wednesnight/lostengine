@@ -8,14 +8,14 @@
 #include <boost/bind.hpp>
 
 using namespace lost::time;
-using namespace slub;
 
 namespace lost
 {
   namespace lua
   {
 
-    bool TimerCallbackProxy(const reference& targetMethod, const reference& targetObject, const Timer* timer)
+    bool TimerCallbackProxy(const slub::reference& targetMethod,
+                            const slub::reference& targetObject, const Timer* timer)
     {
       if (targetMethod.type() == LUA_TFUNCTION) {
         if (targetObject.type() != LUA_TNIL) {
@@ -28,14 +28,16 @@ namespace lost
       return false;
     }
     
-    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval, const reference& targetMethod, const reference& targetObject)
+    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval,
+                                                const slub::reference& targetMethod,
+                                                const slub::reference& targetObject)
     {
       return scheduler->createTimer(interval, boost::bind(&TimerCallbackProxy, targetMethod, targetObject, _1));
     }
     
     void LostTimeTimerScheduler(lua_State* state)
     {
-      package(state, "lost").package("time")
+      slub::package(state, "lost").package("time")
         .clazz<TimerScheduler>("TimerScheduler")
           .method("startTimer", &TimerScheduler::startTimer)
           .method("stopTimer", &TimerScheduler::stopTimer)
@@ -46,7 +48,7 @@ namespace lost
     
     void LostTimeThreadedTimerScheduler(lua_State* state)
     {
-      package(state, "lost").package("time")
+      slub::package(state, "lost").package("time")
         .clazz<ThreadedTimerScheduler>("ThreadedTimerScheduler")
           .extends<TimerScheduler>()
           .constructor<const string&>();
@@ -54,7 +56,7 @@ namespace lost
 
     void LostTimeTimer(lua_State* state)
     {
-      package(state, "lost").package("time")
+      slub::package(state, "lost").package("time")
         .clazz<Timer>("Timer")
           .constructor<TimerScheduler*, double, const TimerCallback&>()
           .method("start", &Timer::start)

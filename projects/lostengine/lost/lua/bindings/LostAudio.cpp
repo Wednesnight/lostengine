@@ -5,7 +5,6 @@
 #include <slub/slub.h>
 
 using namespace lost::audio;
-using namespace slub;
 
 namespace lost
 {
@@ -14,7 +13,7 @@ namespace lost
     
     void LostAudioEngine(lua_State* state)
     {
-      package(state, "lost").package("audio")
+      slub::package(state, "lost").package("audio")
         .clazz<Engine>("Engine")
           .method("createSource", &Engine::createSource)
           .function("create", &Engine::create);
@@ -22,7 +21,7 @@ namespace lost
     
     void LostAudioSource(lua_State* state)
     {
-      package(state, "lost").package("audio")
+      slub::package(state, "lost").package("audio")
         .clazz<Source>("Source")
           .method("initWithFile", &Source::initWithFile)
           .method("play", &Source::play)

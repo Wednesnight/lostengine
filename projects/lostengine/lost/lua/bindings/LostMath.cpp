@@ -13,7 +13,6 @@
 #include <slub/slub.h>
 
 using namespace lost::math;
-using namespace slub;
 
 namespace slub {
   template<>
@@ -53,7 +52,7 @@ namespace lost
 
     void LostMathRect(lua_State* state)
     {
-      package(state, "lost").package("math")
+      slub::package(state, "lost").package("math")
         .clazz<Rect>("Rect")
           .constructor()
           .constructor<float, float, float, float>()
@@ -72,7 +71,7 @@ namespace lost
 
     void LostMathAABB(lua_State* state)
     {
-      package(state, "lost").package("math")
+      slub::package(state, "lost").package("math")
         .clazz<AABB>("AABB")
           .constructor<Vec3, Vec3>()
           .field("pos", &AABB::pos)
@@ -81,7 +80,7 @@ namespace lost
     
     void LostMathVec2(lua_State* state)
     {
-      package math = package(state, "lost").package("math");
+      slub::package math = slub::package(state, "lost").package("math");
 
       math.clazz<Vec2>("Vec2")
             .constructor()
@@ -110,7 +109,7 @@ namespace lost
 
     void LostMathVec3(lua_State* state)
     {
-      package math = package(state, "lost").package("math");
+      slub::package math = slub::package(state, "lost").package("math");
       
       math.clazz<Vec3>("Vec3")
         .constructor()
@@ -138,7 +137,7 @@ namespace lost
 
     void LostMathVec4(lua_State* state)
     {
-	      package(state, "lost").package("math")
+      slub::package(state, "lost").package("math")
         .clazz<Vec4>("Vec4")
             .constructor()
             .constructor<const Vec4&>()
@@ -158,7 +157,7 @@ namespace lost
 
     void LostMathMatrix(lua_State* state)
     {
-      package math = package(state, "lost").package("math");
+      slub::package math = slub::package(state, "lost").package("math");
 
       math.clazz<Matrix>("Matrix")
         .constructor()
@@ -205,9 +204,9 @@ namespace lost
 
       // constants
 #if !TARGET_IPHONE_SIMULATOR && !TARGET_OS_IPHONE && !defined ANDROID
-      package(state, "lost").package("math").constant("EPSILON", FLT_EPSILON);
+      slub::package(state, "lost").package("math").constant("EPSILON", FLT_EPSILON);
 #else
-      package(state, "lost").package("math").constant("EPSILON", DBL_EPSILON);
+      slub::package(state, "lost").package("math").constant("EPSILON", DBL_EPSILON);
 #endif
     }
 

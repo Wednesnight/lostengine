@@ -8,7 +8,6 @@
 #include <slub/slub.h>
 
 using namespace lost::bitmap;
-using namespace slub;
 
 namespace lost
 {
@@ -17,7 +16,7 @@ namespace lost
 
     void LostBitmapBitmap(lua_State* state)
     {
-      package bitmap = package(state, "lost").package("bitmap");
+      slub::package bitmap = slub::package(state, "lost").package("bitmap");
 
       bitmap.clazz<Bitmap>("Bitmap")
         .method("clear", &Bitmap::clear)
@@ -43,7 +42,7 @@ namespace lost
 
     void LostBitmapGif(lua_State* state)
     {
-      package bitmap = package(state, "lost").package("bitmap");
+      slub::package bitmap = slub::package(state, "lost").package("bitmap");
 
       bitmap.clazz<Gif>("Gif")
         .method("numBitmaps",&Gif::numBitmaps)

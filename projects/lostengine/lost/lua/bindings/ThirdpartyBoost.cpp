@@ -9,7 +9,6 @@
 #include <slub/slub.h>
 
 using namespace boost::filesystem;
-using namespace slub;
 
 std::ostream& operator<<(std::ostream& stream, const path& p)
 {
@@ -30,7 +29,7 @@ namespace lost
 
     void ThirdpartyBoostFilesystem(lua_State* state)
     {
-      package fs = package(state, "boost").package("filesystem");
+      slub::package fs = slub::package(state, "boost").package("filesystem");
 
       fs.clazz<path>("path")
         .constructor()

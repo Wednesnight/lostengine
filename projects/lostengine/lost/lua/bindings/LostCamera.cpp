@@ -7,7 +7,6 @@
 
 using namespace lost::camera;
 using namespace lost::math;
-using namespace slub;
 
 namespace lost
 {
@@ -15,7 +14,7 @@ namespace lost
   {
     void LostCameraCamera(lua_State* state)
     {
-      package camera = package(state, "lost").package("camera");
+      slub::package camera = slub::package(state, "lost").package("camera");
 
       camera.clazz<Camera>("Camera")
         .method("viewport", (Rect&(Camera::*)(const Rect&))&Camera::viewport)

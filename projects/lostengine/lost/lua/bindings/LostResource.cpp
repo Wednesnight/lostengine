@@ -9,7 +9,6 @@
 #include <slub/slub.h>
 
 using namespace lost::resource;
-using namespace slub;
 
 namespace lost
 {
@@ -17,7 +16,7 @@ namespace lost
   {
     void LostResourceRepository(lua_State* state)
     {
-      package(state, "lost").package("resource")
+      slub::package(state, "lost").package("resource")
         .clazz<Repository>("Repository");
     }
 
@@ -40,7 +39,7 @@ namespace lost
 
     void LostResourceLoader(lua_State* state)
     {
-      package(state, "lost").package("resource")
+      slub::package(state, "lost").package("resource")
         .clazz<Loader>("Loader")
           .method("load", &LostResourceLoader_load)
           .method("locate", &LostResourceLoader_locate)
@@ -51,7 +50,7 @@ namespace lost
     
     void LostResourceFilesystemRepository(lua_State* state)
     {
-      package(state, "lost").package("resource")
+      slub::package(state, "lost").package("resource")
         .clazz<FilesystemRepository>("FilesystemRepository")
           .extends<Repository>()
           .function("create", &FilesystemRepository::create);
@@ -59,7 +58,7 @@ namespace lost
     
     void LostResourceApplicationResourceRepository(lua_State* state)
     {
-      package(state, "lost").package("resource")
+      slub::package(state, "lost").package("resource")
         .clazz<ApplicationResourceRepository>("ApplicationResourceRepository")
           .extends<Repository>()
           .function("create", &ApplicationResourceRepository::create);

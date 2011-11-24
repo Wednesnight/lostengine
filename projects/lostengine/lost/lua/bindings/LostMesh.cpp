@@ -24,7 +24,6 @@
 #include <slub/slub.h>
 
 using namespace lost::mesh;
-using namespace slub;
 
 namespace lost
 {
@@ -33,7 +32,7 @@ namespace lost
 
     void LostMeshLine(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Line>("Line")
           .extends<Mesh>()
           .function("create", &Line::create);
@@ -41,7 +40,7 @@ namespace lost
 
     void LostMeshRect(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Rect>("Rect")
           .extends<Mesh>()
           .method("updateSize", &mesh::Rect::updateSize)
@@ -80,7 +79,7 @@ namespace lost
     
     void LostMeshLoader(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Loader>("Loader")
           .function("obj", &lost::mesh::Loader::obj);
     }
@@ -92,7 +91,7 @@ namespace lost
 
     void LostMeshMaterial(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Material>("Material")
           .method("addTexture", &LostMeshMaterial_addTexture)
           .field("shader", &Material::shader)
@@ -116,7 +115,7 @@ namespace lost
 
     void LostMeshMesh(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Mesh>("Mesh")
           .field("vertexBuffer", &Mesh::vertexBuffer)
           .field("indexBuffer", &Mesh::indexBuffer)
@@ -142,7 +141,7 @@ namespace lost
 
     void LostMeshQuad(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Quad>("Quad")
           .extends<Mesh>()
           .method("updateSize", &Quad::updateSize)
@@ -154,7 +153,7 @@ namespace lost
 
     void LostMeshDisc(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Disc>("Disc")
           .extends<Mesh>()
           .method("update", &Disc::update)
@@ -165,7 +164,7 @@ namespace lost
 
     void LostMeshSphere(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<Sphere>("Sphere")
           .extends<Mesh>()
           .method("updateRadius", &Sphere::updateRadius)
@@ -175,7 +174,7 @@ namespace lost
     
     void LostMeshScaleGrid(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<ScaleGrid>("ScaleGrid")
           .extends<Mesh>()
           .method("updateSize", &ScaleGrid::updateSize)
@@ -184,7 +183,7 @@ namespace lost
 
     void LostMeshRoundedRect(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<RoundedRect>("RoundedRect")
           .extends<Mesh>()
           .method("size", &RoundedRect::size)
@@ -197,7 +196,7 @@ namespace lost
 
     void LostMeshTextureManager(lua_State* state)
     {
-      package(state, "lost").package("mesh")
+      slub::package(state, "lost").package("mesh")
         .clazz<TextureManager>("TextureManager")
           .method("arcTexture", &TextureManager::arcTexture)
           .method("arcFilledTexture", &TextureManager::arcFilledTexture)

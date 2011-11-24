@@ -8,7 +8,6 @@
 
 using namespace lost;
 using namespace lost::box2d;
-using namespace slub;
 
 namespace lost
 {
@@ -17,7 +16,7 @@ namespace lost
 
     void LostBox2D(lua_State* state)
     {
-      package(state, "lost")
+      slub::package(state, "lost")
         .package("box2d")
           .clazz<DebugDraw>("DebugDraw")
             .extends<b2DebugDraw>()

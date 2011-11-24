@@ -28,7 +28,6 @@
 using namespace lost::application;
 using namespace lost::event;
 using namespace lost::resource;
-using namespace slub;
 
 namespace slub {
 
@@ -63,7 +62,7 @@ namespace lost
 
     void LostApplicationApplication(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<Application>("Application")
           .method("showMouse", &Application::showMouse)
           .field("eventDispatcher", &Application::eventDispatcher)
@@ -74,7 +73,7 @@ namespace lost
 
     void LostApplicationApplicationEvent(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<ApplicationEvent>("ApplicationEvent")
           .extends<Event>()
           .function("create", &ApplicationEvent::create)
@@ -84,7 +83,7 @@ namespace lost
 
     void LostApplicationDragNDropEvent(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<DragNDropEvent>("DragNDropEvent")
           .extends<Event>()
           .field("window", &DragNDropEvent::window)
@@ -100,7 +99,7 @@ namespace lost
     
     void LostApplicationKeyEvent(lua_State* state)
     {
-      package application = package(state, "lost").package("application");
+      slub::package application = slub::package(state, "lost").package("application");
 
       application.clazz<KeyEvent>("KeyEvent")
         .extends<Event>()
@@ -211,7 +210,7 @@ namespace lost
 
     void LostApplicationMouseEvent(lua_State* state)
     {
-      package application = package(state, "lost").package("application");
+      slub::package application = slub::package(state, "lost").package("application");
 
       application.clazz<MouseEvent>("MouseEvent")
         .extends<Event>()
@@ -238,7 +237,7 @@ namespace lost
 
     void LostApplicationResizeEvent(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<ResizeEvent>("ResizeEvent")
           .extends<Event>()
           .field("width", &ResizeEvent::width)
@@ -256,7 +255,7 @@ namespace lost
     
     void LostApplicationTasklet(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<Tasklet>("Tasklet")
           .field("eventDispatcher", &Tasklet::eventDispatcher)
           .field("scheduler", &Tasklet::scheduler)
@@ -303,7 +302,7 @@ namespace lost
 
     void LostApplicationTaskletEvent(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<TaskletEvent>("TaskletEvent")
           .extends<Event>()
           .field("tasklet", &TaskletEvent::tasklet)
@@ -313,7 +312,7 @@ namespace lost
     
     void LostApplicationWindow(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<Window>("Window")
           .method("open", &Window::open)
           .method("close", &Window::close)
@@ -321,14 +320,15 @@ namespace lost
           .field("size", &Window::size);
     }
 
-    void LostApplicationQueue_queue(Queue* queue, const reference& targetMethod, const reference& targetObject)
+    void LostApplicationQueue_queue(Queue* queue, const slub::reference& targetMethod,
+                                    const slub::reference& targetObject)
     {
       queue->queue(new QueueEntityLua(targetObject, targetMethod));
     }
 
     void LostApplicationQueue(lua_State* state)
     {
-      package(state, "lost").package("application")
+      slub::package(state, "lost").package("application")
         .clazz<Queue>("Queue")
           .method("queue", &LostApplicationQueue_queue);
     }
@@ -340,7 +340,7 @@ namespace lost
 
     void LostApplicationDebugEvent(lua_State* state)
     {
-      package application = package(state, "lost").package("application");
+      slub::package application = slub::package(state, "lost").package("application");
 
       application.clazz<DebugEvent>("DebugEvent")
         .extends<Event>()

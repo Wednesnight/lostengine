@@ -4,8 +4,6 @@
 
 #include <slub/slub.h>
 
-using namespace slub;
-
 namespace slub {
 
   template<>
@@ -34,7 +32,7 @@ namespace lost
   {
 
     void ThirdpartyBox2Db2Vec2(lua_State* state) {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2Vec2>("b2Vec2")
           .constructor()
           .constructor<float32, float32>()
@@ -45,7 +43,7 @@ namespace lost
     }
 
     void ThirdpartyBox2Db2AABB(lua_State* state) {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2AABB>("b2AABB")
           .constructor()
           .method("IsValid", &b2AABB::IsValid)
@@ -58,7 +56,7 @@ namespace lost
     }    
     
     void ThirdpartyBox2Db2MassData(lua_State* state) {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2MassData>("b2MassData")
           .constructor()
           .field("mass", &b2MassData::mass)
@@ -67,7 +65,7 @@ namespace lost
     }
 
     void ThirdpartyBox2Db2Transform(lua_State* state) {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2Transform>("b2Transform")
           .constructor()
           .method("SetIdentity",&b2Transform::SetIdentity)
@@ -78,7 +76,7 @@ namespace lost
     
     void ThirdpartyBox2Db2BodyDef(lua_State* state)
     {
-      package box2d(state, "box2d");
+      slub::package box2d(state, "box2d");
 
       box2d.clazz<b2BodyDef>("b2BodyDef")
         .constructor()
@@ -102,7 +100,7 @@ namespace lost
 
     void ThirdpartyBox2Db2Shape(lua_State* state)
     {
-      package(state,"box2d")
+      slub::package(state,"box2d")
         .clazz<b2Shape>("b2Shape")
           .enumerated("e_unknown", b2Shape::e_unknown)
           .enumerated("e_circle", b2Shape::e_circle)
@@ -113,7 +111,7 @@ namespace lost
 
 
     void ThirdpartyBox2Db2World(lua_State* state) {
-      package box2d(state, "box2d");
+      slub::package box2d(state, "box2d");
 
       box2d.clazz<b2DebugDraw>("b2DebugDraw");
 
@@ -128,7 +126,7 @@ namespace lost
     
     void ThirdpartyBox2Db2Filter(lua_State* state)
     {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2Filter>("b2Filter")
           .field("categoryBits",&b2Filter::categoryBits)
           .field("maskBits",&b2Filter::maskBits)
@@ -142,7 +140,7 @@ namespace lost
 
     void ThirdpartyBox2Db2FixtureDef(lua_State* state)
     {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2FixtureDef>("b2FixtureDef")
           .constructor()
           .method("setShape",&shape_setter)
@@ -157,8 +155,8 @@ namespace lost
     
     void ThirdpartyBox2Db2Body(lua_State* state)
     {
-      package(state, "box2d")
-        .clazz<b2Body, null_deleter>("b2Body")
+      slub::package(state, "box2d")
+        .clazz<b2Body, slub::null_deleter>("b2Body")
           .method("CreateFixture",(b2Fixture*(b2Body::*)(const b2FixtureDef*)) &b2Body::CreateFixture)
           .method("CreateFixture",(b2Fixture*(b2Body::*)(const b2Shape*,float32)) &b2Body::CreateFixture)
           .method("SetTransform",&b2Body::SetTransform)
@@ -206,8 +204,8 @@ namespace lost
     
     void ThirdpartyBox2Db2Fixture(lua_State* state)
     {
-      package(state, "box2d")
-        .clazz<b2Fixture, null_deleter>("b2Fixture")
+      slub::package(state, "box2d")
+        .clazz<b2Fixture, slub::null_deleter>("b2Fixture")
           .method("GetType",&b2Fixture::GetType)
 //          .method("GetShape",&b2Fixture::GetShape)
           .method("SetSensor",&b2Fixture::SetSensor)
@@ -229,7 +227,7 @@ namespace lost
     }
 
     void ThirdpartyBox2Db2PolygonShape(lua_State* state) {
-      package(state, "box2d")
+      slub::package(state, "box2d")
         .clazz<b2PolygonShape>("b2PolygonShape")
           .extends<b2Shape>()
           .constructor()

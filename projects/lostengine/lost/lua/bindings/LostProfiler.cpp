@@ -4,8 +4,6 @@
 
 #include <slub/slub.h>
 
-using namespace slub;
-
 namespace lost
 {
   namespace lua
@@ -18,7 +16,7 @@ namespace lost
 
     void LostProfilerBlackbox(lua_State* state)
     {
-      package(state,"lost").package("profiler")
+      slub::package(state,"lost").package("profiler")
         .function("bb_inc",&bb_inc)
         .function("bb_dec",&bb_dec)
         .function("bb_set_clear",&bb_set_clear)
@@ -27,7 +25,7 @@ namespace lost
 
     void LostProfilerBBCount(lua_State* state)
     {
-      package(state,"lost").package("profiler")
+      slub::package(state,"lost").package("profiler")
         .clazz<lost::profiler::BBCount>("BBCount")
           .constructor<const string&>();
     }

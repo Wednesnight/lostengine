@@ -26,7 +26,6 @@ using namespace lost::camera;
 using namespace lost::gl;
 using namespace lost::math;
 using namespace lost::resource;
-using namespace slub;
 
 namespace lost
 {
@@ -35,7 +34,7 @@ namespace lost
 
     void LostGLContext(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<Context>("Context")
           .method("makeCurrent", &Context::makeCurrent)
           .method("swapBuffers", &Context::swapBuffers)
@@ -47,7 +46,7 @@ namespace lost
 
     void LostGLBuffer(lua_State* state)
     {
-      package gl = package(state, "lost").package("gl");
+      slub::package gl = slub::package(state, "lost").package("gl");
 
       gl.clazz<BufferLayout>("BufferLayout")
           .constructor()
@@ -58,7 +57,7 @@ namespace lost
       gl.clazz<HybridIndexBuffer>("HybridIndexBuffer")
         .field("drawMode", &HybridIndexBuffer::drawMode);
 
-      package(state, "gl")
+      slub::package(state, "gl")
         .constant("ET_u8", ET_u8)
         .constant("ET_u16", ET_u16)
         .constant("ET_u32", ET_u32)
@@ -115,7 +114,7 @@ namespace lost
     
     void LostGLFrameBuffer(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<FrameBuffer>("FrameBuffer")
           .method("colorTexture", &FrameBuffer_colorTexture)
           .method("depthTexture", &FrameBuffer_depthTexture)
@@ -126,7 +125,7 @@ namespace lost
     
     void LostGLGL(lua_State* state)
     {
-      package(state, "gl")
+      slub::package(state, "gl")
 #if TARGET_OPENGL
       .constant("GL_REPEAT", GL_REPEAT)
       .constant("GL_DEPTH_COMPONENT", GL_DEPTH_COMPONENT)
@@ -199,7 +198,7 @@ namespace lost
 
     void LostGLRenderBuffer(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<RenderBuffer>("RenderBuffer")
           .constructor()
           .method("enable", &RenderBuffer::enable)
@@ -223,7 +222,7 @@ namespace lost
 
     void LostGLShaderProgram(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .function("loadShader", loadShader)
         .function("buildShader", buildShader)
 
@@ -254,7 +253,7 @@ namespace lost
 
     void LostGLShader(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<Shader>("Shader")
           .method("source", &Shader::source)
           .method("compile", &Shader::compile)
@@ -264,7 +263,7 @@ namespace lost
 
     void LostGLVertexShader(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<VertexShader>("VertexShader")
           .extends<Shader>()
           .function("create", &VertexShader::create);
@@ -272,7 +271,7 @@ namespace lost
     
     void LostGLFragmentShader(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<FragmentShader>("FragmentShader")
           .extends<Shader>()
           .function("create", &FragmentShader::create);
@@ -280,7 +279,7 @@ namespace lost
     
     void LostGLUniform(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<Uniform>("Uniform")
           .field("name", &Uniform::name)
           .field("index", &Uniform::index)
@@ -290,7 +289,7 @@ namespace lost
 
     void LostGLUniformBlock(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<UniformBlock>("UniformBlock")
           .method("setInt", &UniformBlock::setInt)
           .method("setFloat", &UniformBlock::setFloat)
@@ -310,7 +309,7 @@ namespace lost
 
     void LostGLTexture(lua_State* state)
     {
-      package(state, "lost").package("gl")
+      slub::package(state, "lost").package("gl")
         .clazz<Texture>("Texture")
           .method("bind", &Texture::bind)
           .method("init", (void(Texture::*)(const common::DataPtr&, const Texture::Params&))&Texture::init)
@@ -327,7 +326,7 @@ namespace lost
           .function("create", (TexturePtr(*)(const lost::math::Vec2&, const Texture::Params&))&Texture::create)
           .function("create", (TexturePtr(*)(const bitmap::BitmapPtr&, const Texture::Params&))&Texture::create);
       
-      package(state, "lost").package("gl").package("Texture")
+      slub::package(state, "lost").package("gl").package("Texture")
         .clazz<Texture::Params>("Params")
           .constructor()
           .field("level", &Texture::Params::level)
