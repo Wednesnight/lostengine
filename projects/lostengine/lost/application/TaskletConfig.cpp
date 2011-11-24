@@ -11,7 +11,6 @@ namespace application
 {
 
 using namespace lost::math;
-using namespace luabind;
 
 void TaskletConfig::reset()
 {
@@ -31,7 +30,7 @@ TaskletConfig::TaskletConfig()
   reset();
 }
 
-// c-function so it doesn't have to go in the header with luabind::object in the signature
+// c-function so it doesn't have to go in the header with slub::reference in the signature
 void parse(slub::reference config, TaskletConfig* tc)
 {
   if(config["tasklet"].type() == LUA_TTABLE) {

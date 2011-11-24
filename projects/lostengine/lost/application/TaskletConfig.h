@@ -12,7 +12,7 @@ namespace lost
 
     /** loads a tasklets "config.lua" file with the given loader and parses its contents into
      * the member variables.
-     * This class mainly exists to encapsualte the loading/parsing code and prevent the luabind data types
+     * This class mainly exists to encapsualte the loading/parsing code and prevent the slub data types
      * from leaking in other classes.
      */
     struct TaskletConfig

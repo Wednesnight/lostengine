@@ -19,12 +19,7 @@ namespace rg
 
     Camera(camera::CameraPtr inCam);
 
-    // the fact that all create functions return a NodePtr is another hack for luabind because of the missing downcast
     static CameraPtr create(camera::CameraPtr inCam);
-    // the following two create functions are a hack because luabind doesn't perform
-    // an automatic downcast. Remove these as soon as luabind supports downcast.
-    static CameraPtr create(camera::Camera2DPtr inCam);
-    static CameraPtr create(camera::Camera3DPtr inCam);
 
     void process(gl::ContextPtr& ctx);
   };

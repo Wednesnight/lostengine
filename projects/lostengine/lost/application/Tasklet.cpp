@@ -34,7 +34,6 @@
 #include "lost/application/SpawnTaskletEvent.h"
 
 using namespace boost;
-using namespace luabind;
 using namespace lost::event;
 using namespace lost::lua;
 using namespace lost::platform;
@@ -278,9 +277,9 @@ namespace lost
 
     void TaskletLuaDebugHook(lua_State* state, lua_Debug* debug)
     {
-      luabind::object taskletObj = luabind::globals(state)["tasklet"];
-      if (luabind::type(taskletObj) != LUA_TNIL) {
-        Tasklet* tasklet = luabind::object_cast<Tasklet*>(taskletObj);
+      slub::reference taskletObj = slub::globals(state)["tasklet"];
+      if (taskletObj.type() != LUA_TNIL) {
+        Tasklet* tasklet = taskletObj.cast<Tasklet*>();
         DebugEventPtr event = DebugEvent::create(DebugEvent::PAUSE(), tasklet);
         lua_getinfo(state, "Slnu", debug);
         event->info.debug = debug;

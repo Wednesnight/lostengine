@@ -2,7 +2,6 @@
 #include "lost/lua/State.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
-#include <luabind/exception_handler.hpp>
 
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++
 #include <md5.h>
@@ -36,30 +35,27 @@ namespace lost
       lua_pushstring(L, ex.what());
     }
     
+    int catch_lua_error(lua_State* L) {
+      if (stateMap.find(L) != stateMap.end()) {
+        return stateMap[L]->handleError();
+      }
+      return 0;
+    }
+    
     State::State(lost::shared_ptr<resource::Loader> inLoader)
     : callstackSize(10), 
       loader(inLoader),
       state(luaL_newstate()),
       globals(slub::globals(state))
     {
-      luabind::open(state);      
       stateMap[state] = this;
-      // set our own error callback
-      luabind::set_pcall_callback(errorHandler);
-      luabind::register_exception_handler<lost::lua::LoadException>(&translateLoadException);
+      lua_atpanic(state, catch_lua_error);
     }
     
     State::~State()
     {
       // set loader to nil because it's usually contained in state
       this->loader.reset();
-/*
-      // cleanup all resource, that is set _G to nil and perform a full garbage collection cycle
-      luabind::object nil;
-      luabind::object _G = luabind::globals(state);
-      _G = nil;
-      globals = nil;
-*/
       lua_gc(state, LUA_GCCOLLECT, 0);
 
       // close state
@@ -153,8 +149,8 @@ namespace lost
         }
       }
       
-      luabind::object error_msg(luabind::from_stack(state, -1));
-      EOUT("==> "<<luabind::object_cast<string>(error_msg));
+      slub::reference error_msg(state, -1);
+      EOUT("==> " << error_msg.cast<string>());
       lua_pop(state, 1);
 
       return 1;
@@ -200,7 +196,7 @@ namespace lost
       int err = luaL_loadstring(state, inData.c_str());
       if(!err)
       {
-        err = luabind::detail::pcall(state, 0, LUA_MULTRET);
+        err = lua_pcall(state, 0, LUA_MULTRET, 0);
       }
       if(err)
       {

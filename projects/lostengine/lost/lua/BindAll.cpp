@@ -12,7 +12,6 @@
 #include "lost/lua/bindings/LostEvent.h"
 #include "lost/lua/bindings/LostFont.h"
 #include "lost/lua/bindings/LostGL.h"
-#include "lost/lua/bindings/LostLGL.h"
 #include "lost/lua/bindings/LostLua.h"
 #include "lost/lua/bindings/LostMath.h"
 #include "lost/lua/bindings/LostMesh.h"
@@ -61,7 +60,6 @@ namespace lost
       LostMesh(state); // must bind mesh before font since font already requires the binding for inheritance
       LostFont(state);
       LostGL(state);
-      LostLGL(state);
       LostLua(state);
       LostMath(state);
       LostPlatform(state);

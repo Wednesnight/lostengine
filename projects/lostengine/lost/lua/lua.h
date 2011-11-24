@@ -2,7 +2,6 @@
 #define LOST_LUA_LUA_H
 
 #include <slub/slub.h>
-#include <luabind/luabind.hpp>
 #include "lost/platform/Type.h"
 
 #undef LUA_NUMBER
@@ -18,47 +17,7 @@
   #define LUA_NUMBER_FMT		"%.14g"
 #endif
 
-template <typename T>
-inline T& operator << (T& other, const luabind::object& object)
-{
-  other = luabind::object_cast<T>(object);
-  return other;
-}
-
 #ifdef LOST_USE_EASTL
-namespace luabind
-{
-template <>
-struct default_converter<lost::string>
-  : native_converter_base<lost::string>
-{
-    static int compute_score(lua_State* L, int index)
-    {
-        return lua_type(L, index) == LUA_TSTRING ? 0 : -1;
-    }
-
-    lost::string from(lua_State* L, int index)
-    {
-        return lost::string(lua_tostring(L, index), lua_strlen(L, index));
-    }
-
-    void to(lua_State* L, lost::string const& value)
-    {
-        lua_pushlstring(L, value.data(), value.size());
-    }
-};
-
-template <>
-struct default_converter<lost::string const>
-  : default_converter<lost::string>
-{};
-
-template <>
-struct default_converter<lost::string const&>
-  : default_converter<lost::string>
-{};
-}
-
 namespace slub {
   
   template<>

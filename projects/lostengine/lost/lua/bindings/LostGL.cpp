@@ -20,7 +20,6 @@
 
 #include <stdexcept>
 
-using namespace luabind;
 using namespace lost::bitmap;
 using namespace lost::camera;
 using namespace lost::gl;
@@ -206,18 +205,20 @@ namespace lost
           .method("storage", &RenderBuffer::storage);
     }
 
-    luabind::object ShaderProgram_uniformMap(ShaderProgram* shaderProgram, lua_State* state)
+    slub::reference ShaderProgram_uniformMap(ShaderProgram* shaderProgram, lua_State* state)
     {
-      luabind::object result = luabind::newtable(state);
+      lua_newtable(state);
       ShaderProgram::UniformMap& uniformMap = shaderProgram->uniformMap();
       if (uniformMap.size() > 0)
       {
         for (ShaderProgram::UniformMap::iterator idx = uniformMap.begin(); idx != uniformMap.end(); ++idx)
         {
-          result[idx->first] = idx->second;
+          slub::converter<string>::push(state, idx->first);
+          slub::converter<Uniform>::push(state, idx->second);
+          lua_settable(state, -2);
         }
       }
-      return result;
+      return slub::reference(state);
     }
 
     void LostGLShaderProgram(lua_State* state)

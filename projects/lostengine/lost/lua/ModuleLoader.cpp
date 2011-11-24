@@ -3,8 +3,6 @@
 
 #include "lost/lua/ModuleLoader.h"
 
-using namespace luabind;
-
 namespace lost
 {
   namespace lua

@@ -19,16 +19,6 @@ CameraPtr Camera::create(camera::CameraPtr inCam)
   return CameraPtr(new Camera(inCam));
 }
 
-CameraPtr Camera::create(camera::Camera2DPtr inCam)
-{
-  return CameraPtr(new Camera(inCam));
-}
-
-CameraPtr Camera::create(camera::Camera3DPtr inCam)
-{
-  return CameraPtr(new Camera(inCam));
-}
-
 void Camera::process(gl::ContextPtr& ctx)
 {
   if(!active) return;

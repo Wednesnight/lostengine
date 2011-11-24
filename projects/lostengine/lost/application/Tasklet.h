@@ -78,7 +78,7 @@ namespace lost
       virtual ~Tasklet();
 
       // FIXME: EVIL! we need to get rid of these because if a tasklet creates these events and sends them to the application,
-      // the events will be destroyed on the main thread which will force luabind to access the Lua interpreter from the wrong 
+      // the events will be destroyed on the main thread which will force slub to access the Lua interpreter from the wrong 
       // thread, wreaking havoc. 
       void queueApplicationEvent(event::EventPtr event);
       void dispatchApplicationEvent(event::EventPtr event);

@@ -2,7 +2,7 @@
 #include "lost/application/Tasklet.h"
 #include "lost/application/SpawnTaskletEvent.h"
 
-// needs to be in a separate file that's not .mm because objective-c++ can't handle the Tasklet/luabind code
+// needs to be in a separate file that's not .mm because objective-c++ can't handle the Tasklet/slub code
 namespace lost
 {
   namespace application
