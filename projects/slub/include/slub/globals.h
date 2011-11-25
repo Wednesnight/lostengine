@@ -1,6 +1,7 @@
 #ifndef SLUB_GLOBALS_H
 #define SLUB_GLOBALS_H
 
+#include "config.h"
 #include "slub_lua.h"
 #include "reference.h"
 
@@ -23,11 +24,11 @@ namespace slub {
       return lua_type(state, LUA_GLOBALSINDEX);
     }
     
-    std::string typeName() const {
+    string typeName() const {
       return lua_typename(state, type());
     }
     
-    reference operator[](const std::string& name) const {
+    reference operator[](const string& name) const {
       lua_getglobal(state, name.c_str());
       reference result(state);
       result.name = name;

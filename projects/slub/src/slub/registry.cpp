@@ -1,3 +1,4 @@
+#include "../../include/slub/config.h"
 #include "../../include/slub/registry.h"
 #include "../../include/slub/constructor.h"
 #include "../../include/slub/exception.h"
@@ -19,7 +20,7 @@ namespace slub {
     clear();
   }
 
-  registry::registry(const std::type_info& type, const std::string& typeName)
+  registry::registry(const std::type_info& type, const string& typeName)
   : type(type), typeName(typeName)
   {
   }
@@ -30,19 +31,19 @@ namespace slub {
     }
     constructors.clear();
     
-    for (std::map<std::string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
+    for (std::map<string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
       delete idx->second;
     }
     fieldMap.clear();
     
-    for (std::map<std::string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
+    for (std::map<string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
       for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
       }
     }
     methodMap.clear();
     
-    for (std::map<std::string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
+    for (std::map<string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
       for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
       }
@@ -71,11 +72,11 @@ namespace slub {
     throw OverloadNotFoundException(typeName);
   }
   
-  void registry::addField(const std::string& fieldName, abstract_field* field) {
+  void registry::addField(const string& fieldName, abstract_field* field) {
     fieldMap[fieldName] = field;
   }
   
-  bool registry::containsField(const std::string& fieldName) {
+  bool registry::containsField(const string& fieldName) {
     bool result = fieldMap.find(fieldName) != fieldMap.end();
     if (!result && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
@@ -85,7 +86,7 @@ namespace slub {
     return result;
   }
   
-  abstract_field* registry::getField(void* v, const std::string& fieldName, bool throw_) {
+  abstract_field* registry::getField(void* v, const string& fieldName, bool throw_) {
     abstract_field* result = NULL;
     if (fieldMap.find(fieldName) != fieldMap.end()) {
       result = fieldMap[fieldName];
@@ -102,11 +103,11 @@ namespace slub {
     return result;
   }
   
-  void registry::addMethod(const std::string& methodName, abstract_method* method) {
+  void registry::addMethod(const string& methodName, abstract_method* method) {
     methodMap[methodName].push_back(method);
   }
   
-  bool registry::containsMethod(const std::string& methodName) {
+  bool registry::containsMethod(const string& methodName) {
     bool result = methodMap.find(methodName) != methodMap.end();
     if (!result && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
@@ -116,7 +117,7 @@ namespace slub {
     return result;
   }
   
-  abstract_method* registry::getMethod(const std::string& methodName, lua_State* L, bool throw_) {
+  abstract_method* registry::getMethod(const string& methodName, lua_State* L, bool throw_) {
     struct method_not_found : public abstract_method {
       method_not_found() {}
       bool check(lua_State*) {return false;}
@@ -145,7 +146,7 @@ namespace slub {
     }
     
     if ((result == &not_found || result == NULL) && throw_) {
-      std::string s;
+      string s;
       int n = lua_gettop(L);
       for (int idx = 1; idx < n; ++idx) {
         if (s.size() == 0) {
@@ -170,11 +171,11 @@ namespace slub {
     return result;
   }
   
-  void registry::addOperator(const std::string& operatorName, abstract_operator* op) {
+  void registry::addOperator(const string& operatorName, abstract_operator* op) {
     operatorMap[operatorName].push_back(op);
   }
   
-  bool registry::containsOperator(const std::string& operatorName) {
+  bool registry::containsOperator(const string& operatorName) {
     bool result = operatorMap.find(operatorName) != operatorMap.end();
     if (!result && hasBase()) {
       for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
@@ -184,7 +185,7 @@ namespace slub {
     return result;
   }
   
-  abstract_operator* registry::getOperator(const std::string& operatorName, lua_State* L, bool throw_) {
+  abstract_operator* registry::getOperator(const string& operatorName, lua_State* L, bool throw_) {
     struct operator_not_found : public abstract_operator {
       operator_not_found() {}
       bool check(lua_State*) {return false;}

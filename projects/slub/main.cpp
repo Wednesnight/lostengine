@@ -2,6 +2,8 @@
 #include <iosfwd>
 
 #include <slub/slub.h>
+#include <slub/globals.h>
+
 #include "foo.h"
 
 #include <lost/math/Vec2.h>

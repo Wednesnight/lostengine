@@ -1,10 +1,11 @@
 #ifndef SLUB_REFERENCE_H
 #define SLUB_REFERENCE_H
 
+#include "config.h"
+#include "call.h"
 #include "converter.h"
 
 #include <list>
-#include <string>
 #include <stdexcept>
 
 namespace slub {
@@ -50,11 +51,11 @@ namespace slub {
       return result;
     }
     
-    std::string typeName() const {
+    string typeName() const {
       return lua_typename(state, type());
     }
     
-    reference operator[](const std::string& name) const {
+    reference operator[](const string& name) const {
       lua_getfield(state, push(), name.c_str());
       reference result(state);
       pop();
@@ -75,7 +76,7 @@ namespace slub {
       }
       
       int index = LUA_GLOBALSINDEX;
-      for (std::list<std::string>::iterator iter = path.begin(); iter != path.end(); ++iter) {
+      for (std::list<string>::iterator iter = path.begin(); iter != path.end(); ++iter) {
         lua_getfield(state, index, iter->c_str());
         index = lua_gettop(state);
       }
@@ -94,7 +95,7 @@ namespace slub {
     template<typename R>
     R operator()() const {
       push();
-      lua_call(state, 0, 1);
+      slub::call(state, 0, 1);
       R r = converter<R>::get(state, -1);
       lua_pop(state, 1);
       return r;
@@ -102,14 +103,14 @@ namespace slub {
     
     void operator()() const {
       push();
-      lua_call(state, 0, 0);
+      slub::call(state, 0, 0);
     }
     
     template<typename R, typename arg1>
     R operator()(arg1 a1) const {
       push();
       converter<arg1>::push(state, a1);
-      lua_call(state, 1, 1);
+      slub::call(state, 1, 1);
       R r = converter<R>::get(state, -1);
       lua_pop(state, 1);
       return r;
@@ -119,7 +120,7 @@ namespace slub {
     void operator()(arg1 a1) const {
       push();
       converter<arg1>::push(state, a1);
-      lua_call(state, 1, 0);
+      slub::call(state, 1, 0);
     }
     
     template<typename R, typename arg1, typename arg2>
@@ -127,7 +128,7 @@ namespace slub {
       push();
       converter<arg1>::push(state, a1);
       converter<arg2>::push(state, a2);
-      lua_call(state, 2, 1);
+      slub::call(state, 2, 1);
       R r = converter<R>::get(state, -1);
       lua_pop(state, 1);
       return r;
@@ -138,7 +139,7 @@ namespace slub {
       push();
       converter<arg1>::push(state, a1);
       converter<arg2>::push(state, a2);
-      lua_call(state, 2, 0);
+      slub::call(state, 2, 0);
     }
     
   protected:
@@ -148,8 +149,8 @@ namespace slub {
     lua_State* state;
     int index;
     
-    std::string name;
-    std::list<std::string> path;
+    string name;
+    std::list<string> path;
     
     int push() const {
       lua_rawgeti(state, LUA_REGISTRYINDEX, index);
@@ -161,6 +162,31 @@ namespace slub {
     }
     
   };
+
+  template<>
+  struct converter<reference> {
+    
+    static bool check(lua_State* L, int index) {
+      return true;
+    }
+    
+    static reference get(lua_State* L, int index) {
+      lua_pushvalue(L, index);
+      return reference(L);
+    }
+    
+    static int push(lua_State* L, const reference& ref) {
+      ref.push();
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<reference&> : converter<reference> {};
+  
+  template<>
+  struct converter<const reference&> : converter<reference> {};
   
 }
 

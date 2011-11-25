@@ -1,7 +1,7 @@
 #ifndef SLUB_CONVERTER_H
 #define SLUB_CONVERTER_H
 
-#include "reference.h"
+#include "config.h"
 #include "registry.h"
 #include "wrapper.h"
 
@@ -444,6 +444,24 @@ namespace slub {
   struct converter<float> : converter<double> {};
 
   template<>
+  struct converter<char*> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static const char* get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, char* value) {
+      lua_pushstring(L, value);
+      return 1;
+    }
+    
+  };
+  
+  template<>
   struct converter<const char*> {
     
     static bool check(lua_State* L, int index) {
@@ -462,17 +480,17 @@ namespace slub {
   };
   
   template<>
-  struct converter<std::string> {
+  struct converter<string> {
     
     static bool check(lua_State* L, int index) {
       return lua_isstring(L, index);
     }
     
-    static std::string get(lua_State* L, int index) {
+    static string get(lua_State* L, int index) {
       return luaL_checkstring(L, index);
     }
     
-    static int push(lua_State* L, const std::string& value) {
+    static int push(lua_State* L, const string& value) {
       lua_pushstring(L, value.c_str());
       return 1;
     }
@@ -480,11 +498,32 @@ namespace slub {
   };
   
   template<>
-  struct converter<std::string&> : converter<std::string> {};
+  struct converter<string&> : converter<string> {};
   
   template<>
-  struct converter<const std::string&> : converter<std::string> {};
+  struct converter<const string&> : converter<string> {};
   
+  template<>
+  struct converter<string*> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static string* get(lua_State* L, int index) {
+      throw std::runtime_error("Cannot get a string* value");
+    }
+    
+    static int push(lua_State* L, const string* value) {
+      lua_pushstring(L, value->c_str());
+      return 1;
+    }
+    
+  };
+
+  template<>
+  struct converter<const string*> : converter<string*> {};
+
   template<>
   struct converter<void*> {
     
@@ -503,31 +542,6 @@ namespace slub {
     }
     
   };
-  
-  template<>
-  struct converter<reference> {
-    
-    static bool check(lua_State* L, int index) {
-      return true;
-    }
-    
-    static reference get(lua_State* L, int index) {
-      lua_pushvalue(L, index);
-      return reference(L);
-    }
-    
-    static int push(lua_State* L, const reference& ref) {
-      ref.push();
-      return 1;
-    }
-    
-  };
-  
-  template<>
-  struct converter<reference&> : converter<reference> {};
-  
-  template<>
-  struct converter<const reference&> : converter<reference> {};
   
 }
 

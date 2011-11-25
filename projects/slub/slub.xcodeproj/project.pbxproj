@@ -11,6 +11,7 @@
 		3E2C0A8C13C6FF7F0070A4B5 /* foo.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E2C0A8813C6FEF50070A4B5 /* foo.lua */; };
 		3E5A746A13CD8BA00051A333 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A746713CD8B970051A333 /* libLostEngine.a */; };
 		8D3146DA13D3715300019863 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D3146D913D3715300019863 /* function.cpp */; };
+		8D5F958E14803EA900834EEE /* call.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D5F958D14803EA900834EEE /* call.cpp */; };
 		8D8F4D9E13C3B77B00848D6C /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8113C3B77B00848D6C /* lapi.c */; };
 		8D8F4D9F13C3B77B00848D6C /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8213C3B77B00848D6C /* lauxlib.c */; };
 		8D8F4DA013C3B77B00848D6C /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F4D8313C3B77B00848D6C /* lbaselib.c */; };
@@ -95,9 +96,12 @@
 		3E5C976D13CB104800DB6373 /* registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registry.h; path = include/slub/registry.h; sourceTree = "<group>"; };
 		3E8A3BBB13CAF0C500467EAD /* converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = converter.h; path = include/slub/converter.h; sourceTree = "<group>"; };
 		8D3146D913D3715300019863 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = function.cpp; path = src/slub/function.cpp; sourceTree = "<group>"; };
-		8D31470913D372DF00019863 /* slub_lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = slub_lua.h; path = include/slub/slub_lua.h; sourceTree = "<group>"; };
 		8D31478613D378E700019863 /* constructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = constructor.h; path = include/slub/constructor.h; sourceTree = "<group>"; };
 		8D3147C513D37F6000019863 /* operators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = operators.h; path = include/slub/operators.h; sourceTree = "<group>"; };
+		8D5F958D14803EA900834EEE /* call.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = call.cpp; path = src/slub/call.cpp; sourceTree = "<group>"; };
+		8D5F958F14803EB700834EEE /* call.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = call.h; path = include/slub/call.h; sourceTree = "<group>"; };
+		8D5F959114803EB700834EEE /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = include/slub/config.h; sourceTree = "<group>"; };
+		8D5F959814803EB700834EEE /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = globals.h; path = include/slub/globals.h; sourceTree = "<group>"; };
 		8D8F4D8113C3B77B00848D6C /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lapi.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8213C3B77B00848D6C /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lauxlib.c; sourceTree = SOURCE_ROOT; };
 		8D8F4D8313C3B77B00848D6C /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = ../../thirdparty/lua/lua_5_1_4/source/src/lbaselib.c; sourceTree = SOURCE_ROOT; };
@@ -201,8 +205,11 @@
 		3EE92C6213C6E902001D1D17 /* slub */ = {
 			isa = PBXGroup;
 			children = (
+				8D5F958F14803EB700834EEE /* call.h */,
+				8D5F958D14803EA900834EEE /* call.cpp */,
 				3E050A7413C70016000DC746 /* clazz.h */,
 				3E0FD5AD13D43A3700A4AABC /* clazz.cpp */,
+				8D5F959114803EB700834EEE /* config.h */,
 				8D31478613D378E700019863 /* constructor.h */,
 				3E8A3BBB13CAF0C500467EAD /* converter.h */,
 				8DBB5B9E13D498320044A2F6 /* exception.h */,
@@ -210,7 +217,7 @@
 				8DBB5DB613D4C0C90044A2F6 /* forward.h */,
 				8DBD305A13CCD7E40013AC75 /* function.h */,
 				8D3146D913D3715300019863 /* function.cpp */,
-				8D31470913D372DF00019863 /* slub_lua.h */,
+				8D5F959814803EB700834EEE /* globals.h */,
 				3E050A7613C70016000DC746 /* method.h */,
 				8D3147C513D37F6000019863 /* operators.h */,
 				8DBD2E7713CCC7D70013AC75 /* package.h */,
@@ -377,6 +384,7 @@
 				8D3146DA13D3715300019863 /* function.cpp in Sources */,
 				3E0FD5AE13D43A3700A4AABC /* clazz.cpp in Sources */,
 				8DBB5D4513D4BCE10044A2F6 /* registry.cpp in Sources */,
+				8D5F958E14803EA900834EEE /* call.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

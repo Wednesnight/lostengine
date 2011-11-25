@@ -40,7 +40,7 @@
             'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
             'ONLY_ACTIVE_ARCH': 'YES',
             'VALID_ARCHS': 'i386 x86_64 armv6',
-            'GCC_VERSION': '4.2',
+            'GCC_VERSION': 'com.apple.compilers.llvm.clang.1_0',
             'GCC_C_LANGUAGE_STANDARD': 'c99',
             'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
             'GCC_WARN_UNUSED_VARIABLE': 'YES',
@@ -210,7 +210,7 @@
             'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
             'ONLY_ACTIVE_ARCH': 'YES',
             'VALID_ARCHS': 'i386 x86_64 armv6',
-            'GCC_VERSION': '4.2',
+            'GCC_VERSION': 'com.apple.compilers.llvm.clang.1_0',
             'GCC_C_LANGUAGE_STANDARD': 'c99',
             'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
             'GCC_WARN_UNUSED_VARIABLE': 'YES',
@@ -379,7 +379,7 @@
             'ARCHS': '$(NATIVE_ARCH_ACTUAL)',
             'ONLY_ACTIVE_ARCH': 'YES',
             'VALID_ARCHS': 'i386 x86_64 armv6',
-            'GCC_VERSION': '4.2',
+            'GCC_VERSION': 'com.apple.compilers.llvm.clang.1_0',
             'GCC_C_LANGUAGE_STANDARD': 'c99',
             'GCC_WARN_ABOUT_RETURN_TYPE': 'YES',
             'GCC_WARN_UNUSED_VARIABLE': 'YES',
@@ -394,7 +394,11 @@
             'VCCLCompilerTool': {
               'ObjectFile': '$(IntDir)\\%(RelativeDir)',
              },
-           },
+          },
+          'defines': [
+            'SLUB_STRING_INCLUDE=<EASTL/string.h>',
+            'SLUB_STRING_TYPE=eastl::string',
+          ],
         },
 
         'Debug': {
@@ -675,6 +679,7 @@
         'lost/time/Timer.cpp',
 
         # slub
+        '../slub/src/slub/call.cpp',
         '../slub/src/slub/clazz.cpp',
         '../slub/src/slub/function.cpp',
         '../slub/src/slub/registry.cpp',

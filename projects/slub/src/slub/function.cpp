@@ -1,3 +1,4 @@
+#include "../../include/slub/config.h"
 #include "../../include/slub/function.h"
 
 #include <iostream>
@@ -10,7 +11,7 @@ namespace slub {
   function_holder::~function_holder() {
 //    std::cout << "cleanup functions" << std::endl;
     
-    for (std::map<std::string, std::list<abstract_function_wrapper*> >::iterator idx = functions.begin(); idx != functions.end(); ++idx) {
+    for (std::map<string, std::list<abstract_function_wrapper*> >::iterator idx = functions.begin(); idx != functions.end(); ++idx) {
       for (std::list<abstract_function_wrapper*>::iterator fidx = idx->second.begin(); fidx != idx->second.end(); ++fidx) {
         delete *fidx;
       }
@@ -18,8 +19,8 @@ namespace slub {
     functions.clear();
   }
 
-  void function_holder::add(lua_State* L, const std::string& name, abstract_function_wrapper* f, const std::string& prefix, int target) {
-    std::string qualifiedName = prefix.size() > 0 ? prefix +"."+ name : name;
+  void function_holder::add(lua_State* L, const string& name, abstract_function_wrapper* f, const string& prefix, int target) {
+    string qualifiedName = prefix.size() > 0 ? prefix +"."+ name : name;
 
     instance.functions[qualifiedName].push_back(f);
 
@@ -29,7 +30,7 @@ namespace slub {
   }
 
   int function_holder::call(lua_State* L) {
-    std::string name(lua_tolstring(L, lua_upvalueindex(1), NULL));
+    string name(lua_tolstring(L, lua_upvalueindex(1), NULL));
     for (std::list<abstract_function_wrapper*>::iterator idx = instance.functions[name].begin(); idx != instance.functions[name].end(); ++idx) {
       abstract_function_wrapper* f = *idx;
       if (f->check(L)) {

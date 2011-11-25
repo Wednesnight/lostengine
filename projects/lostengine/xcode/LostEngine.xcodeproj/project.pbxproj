@@ -345,6 +345,7 @@
 		F43516501749BE707DFDF6A5 /* ftcid.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E273971C01D43C669336EBD /* ftcid.c */; };
 		F4572B307ED9388A17A2913C /* ftbase.c in Sources */ = {isa = PBXBuildFile; fileRef = 57091B9754550E1F68A63308 /* ftbase.c */; };
 		F5587B362E9B35FF1E0A059D /* Window.mm in Sources */ = {isa = PBXBuildFile; fileRef = 95A36D7032F497792AF5A254 /* Window.mm */; };
+		F6051C18E4ACC18B2AF836BE /* call.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7D65EB7ADDD9971B9BD3568A /* call.cpp */; };
 		F6118D050B668B4631FC0BE2 /* loslib.c in Sources */ = {isa = PBXBuildFile; fileRef = DCEE8BC8B8BC6688B2F67480 /* loslib.c */; };
 		F614AA21B5A1F3E08EE45CA7 /* LostProfiler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED6AB674854069E242B9CDF2 /* LostProfiler.cpp */; };
 		F749EE9DB3C20169DC4E7861 /* DeferredTestReporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F172B57B2548287F873FB45 /* DeferredTestReporter.cpp */; };
@@ -586,6 +587,7 @@
 		7B6017993C555C15FDB3DED8 /* TaskletThread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TaskletThread.cpp; sourceTree = "<group>"; };
 		7C88C8F1406065E8DB39B712 /* Uniform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Uniform.cpp; sourceTree = "<group>"; };
 		7D301DB7A854FBB226F0831C /* sfnt.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sfnt.c; sourceTree = "<group>"; };
+		7D65EB7ADDD9971B9BD3568A /* call.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = call.cpp; sourceTree = "<group>"; };
 		7DD2AF6136233DCEA12761BA /* HybridVertexBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HybridVertexBuffer.cpp; sourceTree = "<group>"; };
 		7F1FC3FBAAC1054A5223589A /* Context.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Context.mm; sourceTree = "<group>"; };
 		7FAE7EC5D075B1972386B7DB /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
@@ -1244,6 +1246,7 @@
 		5D6CC5A69BB5F905E741C34C /* slub/src/slub */ = {
 			isa = PBXGroup;
 			children = (
+				7D65EB7ADDD9971B9BD3568A /* call.cpp */,
 				EA7FDE4756A7CC26675B52CD /* clazz.cpp */,
 				14EAA17D64564F9AE0E72FCF /* function.cpp */,
 				08C690BCE612B93ABCE55407 /* registry.cpp */,
@@ -2073,6 +2076,7 @@
 				F94DCF67C7D5B1D7405EA30C /* Clock.cpp in Sources */,
 				86E8F0FC625F56043CEF4D74 /* ThreadedTimerScheduler.cpp in Sources */,
 				C5B09216696F8E3495A84455 /* Timer.cpp in Sources */,
+				F6051C18E4ACC18B2AF836BE /* call.cpp in Sources */,
 				67A1966FDD4F755FAF93E109 /* clazz.cpp in Sources */,
 				DFB6BB08F3474AB8DE1A47B8 /* function.cpp in Sources */,
 				853B7E2078294699E4590A8F /* registry.cpp in Sources */,
@@ -2314,9 +2318,13 @@
 				GCC_PFE_FILE_C_DIALECTS = "c++ objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-release.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "\"NDEBUG\"";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"\"SLUB_STRING_INCLUDE=<EASTL/string.h>\"",
+					"\"SLUB_STRING_TYPE=eastl::string\"",
+					"\"NDEBUG\"",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2356,9 +2364,13 @@
 				GCC_PFE_FILE_C_DIALECTS = "c++ objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-debug.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "\"_DEBUG\"";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"\"SLUB_STRING_INCLUDE=<EASTL/string.h>\"",
+					"\"SLUB_STRING_TYPE=eastl::string\"",
+					"\"_DEBUG\"",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2398,7 +2410,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-debug.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2429,7 +2441,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-release.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2476,7 +2488,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-release.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -2507,7 +2519,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lost/prefix-debug.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

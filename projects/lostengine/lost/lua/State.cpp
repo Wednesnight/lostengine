@@ -15,20 +15,20 @@ namespace lost
   namespace lua
   {
 
-      struct LoadException : std::runtime_error
-      {
-        LoadException(const string& v) : runtime_error(v.c_str()){};
-      };
+    struct LoadException : std::runtime_error
+    {
+      LoadException(const string& v) : runtime_error(v.c_str()){};
+    };
 
-      void State::openLibs()  { luaL_openlibs(state);  }
-      void State::openBaseLib() { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
-      void State::openDebugLib() { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
-      void State::openIoLib() { lua_pushcfunction(state, luaopen_io);lua_pushstring(state, "io");lua_call(state, 1, 0);}
-      void State::openMathLib() { lua_pushcfunction(state, luaopen_math);lua_pushstring(state, "math");lua_call(state, 1, 0); }
-      void State::openPackageLib() { lua_pushcfunction(state, luaopen_package);lua_pushstring(state, "package");lua_call(state, 1, 0); }
-      void State::openStringLib() { lua_pushcfunction(state, luaopen_string);lua_pushstring(state, "string");lua_call(state, 1, 0); }
-      void State::openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
-      void State::openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
+    void State::openLibs()  { luaL_openlibs(state);  }
+    void State::openBaseLib() { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
+    void State::openDebugLib() { lua_pushcfunction(state, luaopen_debug);lua_pushstring(state, "debug");lua_call(state, 1, 0); }
+    void State::openIoLib() { lua_pushcfunction(state, luaopen_io);lua_pushstring(state, "io");lua_call(state, 1, 0);}
+    void State::openMathLib() { lua_pushcfunction(state, luaopen_math);lua_pushstring(state, "math");lua_call(state, 1, 0); }
+    void State::openPackageLib() { lua_pushcfunction(state, luaopen_package);lua_pushstring(state, "package");lua_call(state, 1, 0); }
+    void State::openStringLib() { lua_pushcfunction(state, luaopen_string);lua_pushstring(state, "string");lua_call(state, 1, 0); }
+    void State::openTableLib() { lua_pushcfunction(state, luaopen_table);lua_pushstring(state, "table");lua_call(state, 1, 0); }
+    void State::openOsLib() { lua_pushcfunction(state, luaopen_os);lua_pushstring(state, "os");lua_call(state, 1, 0); }
 
     void translateLoadException(lua_State* L, lost::lua::LoadException const& ex)
     {
@@ -36,10 +36,10 @@ namespace lost
     }
     
     int catch_lua_error(lua_State* L) {
-      if (stateMap.find(L) != stateMap.end()) {
+      if (lua_isstring(L, 1) && stateMap.find(L) != stateMap.end()) {
         return stateMap[L]->handleError();
       }
-      return 0;
+      return 1;
     }
     
     State::State(lost::shared_ptr<resource::Loader> inLoader)
@@ -49,7 +49,7 @@ namespace lost
       globals(slub::globals(state))
     {
       stateMap[state] = this;
-      lua_atpanic(state, catch_lua_error);
+      slub::set_error_handler(catch_lua_error);
     }
     
     State::~State()
@@ -149,8 +149,7 @@ namespace lost
         }
       }
       
-      slub::reference error_msg(state, -1);
-      EOUT("==> " << error_msg.cast<string>());
+      EOUT("==> " << lua_tostring(state, -1));
       lua_pop(state, 1);
 
       return 1;
@@ -194,12 +193,11 @@ namespace lost
     {
       // execute the loaded file and handle errors
       int err = luaL_loadstring(state, inData.c_str());
-      if(!err)
-      {
-        err = lua_pcall(state, 0, LUA_MULTRET, 0);
+      if(!err) {
+        err = slub::pcall(state, 0, LUA_MULTRET, catch_lua_error);
       }
-      if(err)
-      {
+
+      if(err) {
         string errcode;
         switch(err)
         {
@@ -223,6 +221,7 @@ namespace lost
           throw LoadException(getScriptFilename(inData, inData) +" "+ errcode  +"");
         }
       }
+
       return err;
     }
 

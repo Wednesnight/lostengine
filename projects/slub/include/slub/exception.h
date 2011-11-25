@@ -1,17 +1,19 @@
 #ifndef SLUB_EXCEPTION_H
 #define SLUB_EXCEPTION_H
 
+#include "config.h"
+
 #include <stdexcept>
 
 namespace slub {
 
   class NotFoundException : public std::exception {
 
-    std::string message;
+    string message;
     
   public:
 
-    NotFoundException(const std::string& message, const std::string& name) throw()
+    NotFoundException(const string& message, const string& name) throw()
     : message(message + name) {}
     
     virtual ~NotFoundException() throw() {}
@@ -26,7 +28,7 @@ namespace slub {
 
   public:
     
-    ConstructorNotFoundException(const std::string& className) throw()
+    ConstructorNotFoundException(const string& className) throw()
     : NotFoundException("No matching constructor found: ", className) {}
 
   };
@@ -35,7 +37,7 @@ namespace slub {
     
   public:
     
-    MethodNotFoundException(const std::string& methodName) throw()
+    MethodNotFoundException(const string& methodName) throw()
     : NotFoundException("No matching method found: ", methodName) {}
     
   };
@@ -44,7 +46,7 @@ namespace slub {
     
   public:
     
-    FieldNotFoundException(const std::string& fieldName) throw()
+    FieldNotFoundException(const string& fieldName) throw()
     : NotFoundException("No matching field found: ", fieldName) {}
     
   };
@@ -53,7 +55,7 @@ namespace slub {
     
   public:
     
-    OperatorNotFoundException(const std::string& fieldName) throw()
+    OperatorNotFoundException(const string& fieldName) throw()
     : NotFoundException("No matching operator found: ", fieldName) {}
     
   };
@@ -62,7 +64,7 @@ namespace slub {
     
   public:
     
-    OverloadNotFoundException(const std::string& overload) throw()
+    OverloadNotFoundException(const string& overload) throw()
     : NotFoundException("No matching overload found: ", overload) {}
     
   };

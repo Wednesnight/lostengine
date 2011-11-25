@@ -1,18 +1,17 @@
 #ifndef SLUB_CLAZZ_H
 #define SLUB_CLAZZ_H
 
-#include "forward.h"
+#include "config.h"
 #include "constructor.h"
 #include "exception.h"
 #include "field.h"
 #include "function.h"
 #include "method.h"
 #include "operators.h"
+#include "reference.h"
 #include "registry.h"
 #include "slub_lua.h"
 #include "wrapper.h"
-
-#include <string>
 
 namespace slub {
 
@@ -31,7 +30,7 @@ namespace slub {
 
   struct abstract_clazz {
     static int __index(lua_State* L);
-    static int __index(lua_State* L, const std::string& className, bool fallback);
+    static int __index(lua_State* L, const string& className, bool fallback);
     
     static int __newindex(lua_State* L);
     
@@ -43,14 +42,14 @@ namespace slub {
   struct clazz : public abstract_clazz {
 
     lua_State* state;
-    std::string name;
+    string name;
     registry* reg;
 
     static T* clazz_cast(const reference& ref) {
       return ref.cast<T*>();
     }
 
-    clazz(lua_State* L, const std::string& name, const std::string& prefix = "", int target = -1)
+    clazz(lua_State* L, const string& name, const string& prefix = "", int target = -1)
     : state(L), name(prefix.size() > 0 ? prefix +"."+ name : name)
     {
 
@@ -200,281 +199,281 @@ namespace slub {
     }
     
     template<typename F>
-    clazz& field(const std::string& fieldName, F T::*m) {
+    clazz& field(const string& fieldName, F T::*m) {
       reg->addField(fieldName, new slub::field<T, F>(m));
       return *this;
     }
 
     template<typename F>
-    clazz& field(const std::string& fieldName, F (T::*getter)(), void (T::*setter)(F)) {
+    clazz& field(const string& fieldName, F (T::*getter)(), void (T::*setter)(F)) {
       reg->addField(fieldName, new slub::field_method<T, F>(getter, setter));
       return *this;
     }
     
     template<typename F>
-    clazz& field(const std::string& fieldName, F (T::*getter)() const, void (T::*setter)(F)) {
+    clazz& field(const string& fieldName, F (T::*getter)() const, void (T::*setter)(F)) {
       reg->addField(fieldName, new slub::field_method_const<T, F>(getter, setter));
       return *this;
     }
     
     template<typename F>
-    clazz& field(const std::string& fieldName, F (*getter)(T*), void (*setter)(T*, F)) {
+    clazz& field(const string& fieldName, F (*getter)(T*), void (*setter)(T*, F)) {
       reg->addField(fieldName, new slub::field_function<T, F>(getter, setter));
       return *this;
     }
     
     template<typename ret>
-    clazz& method(const std::string& methodName, ret (T::*m)()) {
+    clazz& method(const string& methodName, ret (T::*m)()) {
       reg->addMethod(methodName, new slub::method<T, ret>(m));
       return *this;
     }
     
-    clazz& method(const std::string& methodName, void (T::*m)()) {
+    clazz& method(const string& methodName, void (T::*m)()) {
       reg->addMethod(methodName, new slub::method<T>(m));
       return *this;
     }
     
     template<typename ret, typename arg1>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1>(m));
       return *this;
     }
     
     template<typename arg1>
-    clazz& method(const std::string& methodName, void (T::*m)(arg1)) {
+    clazz& method(const string& methodName, void (T::*m)(arg1)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2>(m));
       return *this;
     }
 
     template<typename ret, typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4, arg5>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4, arg5>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4, arg5, arg6>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4, arg5, arg6>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       reg->addMethod(methodName, new slub::method<T, ret, arg1, arg2, arg3, arg4, arg5>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       reg->addMethod(methodName, new slub::method<T, void, arg1, arg2, arg3, arg4, arg5, arg6, arg7>(m));
       return *this;
     }
     
     template<typename ret>
-    clazz& method(const std::string& methodName, ret (T::*m)() const) {
+    clazz& method(const string& methodName, ret (T::*m)() const) {
       reg->addMethod(methodName, new slub::const_method<T, ret>(m));
       return *this;
     }
     
-    clazz& method(const std::string& methodName, void (T::*m)() const) {
+    clazz& method(const string& methodName, void (T::*m)() const) {
       reg->addMethod(methodName, new slub::const_method<T>(m));
       return *this;
     }
     
     template<typename ret, typename arg1>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1) const) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1) const) {
       reg->addMethod(methodName, new slub::const_method<T, ret, arg1>(m));
       return *this;
     }
     
     template<typename arg1>
-    clazz& method(const std::string& methodName, void (T::*m)(arg1) const) {
+    clazz& method(const string& methodName, void (T::*m)(arg1) const) {
       reg->addMethod(methodName, new slub::const_method<T, void, arg1>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2) const) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2) const) {
       reg->addMethod(methodName, new slub::const_method<T, ret, arg1, arg2>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2) const) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2) const) {
       reg->addMethod(methodName, new slub::const_method<T, void, arg1, arg2>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3) const) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3) const) {
       reg->addMethod(methodName, new slub::const_method<T, ret, arg1, arg2, arg3>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4) const) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3, arg4) const) {
       reg->addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
 
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4) const) {
+    clazz& method(const string& methodName, ret (T::*m)(arg1, arg2, arg3, arg4) const) {
       reg->addMethod(methodName, new slub::const_method<T, ret, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, T* t, void (T::*m)(arg1, arg2, arg3) const) {
+    clazz& method(const string& methodName, T* t, void (T::*m)(arg1, arg2, arg3) const) {
       reg->addMethod(methodName, new slub::const_method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
     
     template<typename ret>
-    clazz& method(const std::string& methodName, ret (*m)(T*)) {
+    clazz& method(const string& methodName, ret (*m)(T*)) {
       reg->addMethod(methodName, new slub::func_method<T, ret>(m));
       return *this;
     }
     
-    clazz& method(const std::string& methodName, void (*m)(T*)) {
+    clazz& method(const string& methodName, void (*m)(T*)) {
       reg->addMethod(methodName, new slub::func_method<T>(m));
       return *this;
     }
     
     template<typename ret, typename arg1>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1>(m));
       return *this;
     }
     
     // TODO: add more lua_State* shortcuts
     template<typename ret>
-    clazz& method(const std::string& methodName, ret (*m)(T*, lua_State*)) {
+    clazz& method(const string& methodName, ret (*m)(T*, lua_State*)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, lua_State*>(m));
       return *this;
     }
     
     template<typename arg1>
-    clazz& method(const std::string& methodName, void (*m)(T*, arg1)) {
+    clazz& method(const string& methodName, void (*m)(T*, arg1)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2, arg3)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3>(m));
       return *this;
     }
 
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3, arg4>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3, arg4, arg5>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3, arg4, arg5>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3, arg4, arg5, arg6>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3, arg4, arg5, arg6>(m));
       return *this;
     }
     
     template<typename ret, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& method(const std::string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& method(const string& methodName, ret (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       reg->addMethod(methodName, new slub::func_method<T, ret, arg1, arg2, arg3, arg4, arg5, arg6, arg7>(m));
       return *this;
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& method(const std::string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& method(const string& methodName, T* t, void (*m)(T*, arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       reg->addMethod(methodName, new slub::func_method<T, void, arg1, arg2, arg3, arg4, arg5, arg6, arg7>(m));
       return *this;
     }
@@ -564,7 +563,7 @@ namespace slub {
       return *this;
     }
     
-    clazz& function(const std::string& name, void (*f)()) {
+    clazz& function(const string& name, void (*f)()) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function(state, name, f, this->name, lua_gettop(state));
@@ -573,7 +572,7 @@ namespace slub {
     }
     
     template<typename arg1>
-    clazz& function(const std::string& name, void (*f)(arg1)) {
+    clazz& function(const string& name, void (*f)(arg1)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1>(state, name, f, this->name, lua_gettop(state));
@@ -582,7 +581,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2>(state, name, f, this->name, lua_gettop(state));
@@ -591,7 +590,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2, typename arg3>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2, arg3)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
@@ -600,7 +599,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2, arg3, arg4)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3, arg4>(state, name, f, this->name, lua_gettop(state));
@@ -609,7 +608,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2, arg3, arg4, arg5)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3, arg4, arg5>(state, name, f, this->name, lua_gettop(state));
@@ -618,7 +617,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3, arg4, arg5, arg6>(state, name, f, this->name, lua_gettop(state));
@@ -627,7 +626,7 @@ namespace slub {
     }
     
     template<typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& function(const std::string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& function(const string& name, void (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<arg1, arg2, arg3, arg4, arg5, arg6, arg7>(state, name, f, this->name, lua_gettop(state));
@@ -636,7 +635,7 @@ namespace slub {
     }
     
     template<typename R>
-    clazz& function(const std::string& name, R (*f)()) {
+    clazz& function(const string& name, R (*f)()) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R>(state, name, f, this->name, lua_gettop(state));
@@ -645,7 +644,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1>
-    clazz& function(const std::string& name, R (*f)(arg1)) {
+    clazz& function(const string& name, R (*f)(arg1)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1>(state, name, f, this->name, lua_gettop(state));
@@ -654,7 +653,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2>(state, name, f, this->name, lua_gettop(state));
@@ -663,7 +662,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2, arg3)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3>(state, name, f, this->name, lua_gettop(state));
@@ -672,7 +671,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3, typename arg4>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2, arg3, arg4)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3, arg4>(state, name, f, this->name, lua_gettop(state));
@@ -681,7 +680,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2, arg3, arg4, arg5)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3, arg4, arg5>(state, name, f, this->name, lua_gettop(state));
@@ -690,7 +689,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3, arg4, arg5, arg6>(state, name, f, this->name, lua_gettop(state));
@@ -699,7 +698,7 @@ namespace slub {
     }
     
     template<typename R, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5, typename arg6, typename arg7>
-    clazz& function(const std::string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
+    clazz& function(const string& name, R (*f)(arg1, arg2, arg3, arg4, arg5, arg6, arg7)) {
       luaL_getmetatable(state, this->name.c_str());
       lua_getfield(state, -1, "__metatable");
       slub::function<R, arg1, arg2, arg3, arg4, arg5, arg6, arg7>(state, name, f, this->name, lua_gettop(state));
@@ -708,12 +707,12 @@ namespace slub {
     }
     
     template<typename C>
-    clazz& enumerated(const std::string& constantName, const C& value) {
+    clazz& enumerated(const string& constantName, const C& value) {
       return constant<int>(constantName, value);
     }
     
     template<typename C>
-    clazz& constant(const std::string& constantName, const C& value) {
+    clazz& constant(const string& constantName, const C& value) {
       luaL_getmetatable(state, name.c_str());
       lua_getfield(state, -1, "__metatable");
       converter<C>::push(state, value);

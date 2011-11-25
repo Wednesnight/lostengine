@@ -6,7 +6,7 @@
 #include <boost/utility.hpp>
 #include "lost/lua/forward.h"
 
-#include <slub/slub.h>
+#include <slub/globals.h>
 
 namespace lost
 {

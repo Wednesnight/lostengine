@@ -1,3 +1,4 @@
+#include "../../include/slub/config.h"
 #include "../../include/slub/clazz.h"
 
 #include <iostream>
@@ -36,7 +37,7 @@ namespace slub {
   int abstract_clazz::__newindex(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     if (reg != NULL) {
-      std::string name(lua_tostring(L, -2));
+      string name(lua_tostring(L, -2));
       if (reg->containsField(name)) {
         return reg->getField(lua_touserdata(L, 1), name)->set(L);
       }

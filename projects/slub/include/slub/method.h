@@ -1,6 +1,7 @@
 #ifndef SLUB_METHOD_H
 #define SLUB_METHOD_H
 
+#include "config.h"
 #include "converter.h"
 #include "registry.h"
 #include "wrapper.h"

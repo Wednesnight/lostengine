@@ -22,6 +22,54 @@ std::ostream& operator<<(std::ostream& stream, const directory_entry& e)
   return stream;
 }
 
+namespace slub {
+  template<>
+  struct converter<std::string> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static std::string get(lua_State* L, int index) {
+      return luaL_checkstring(L, index);
+    }
+    
+    static int push(lua_State* L, const std::string& value) {
+      lua_pushstring(L, value.c_str());
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<std::string&> : converter<std::string> {};
+  
+  template<>
+  struct converter<const std::string&> : converter<std::string> {};
+  
+  template<>
+  struct converter<std::string*> {
+    
+    static bool check(lua_State* L, int index) {
+      return lua_isstring(L, index);
+    }
+    
+    static std::string* get(lua_State* L, int index) {
+      throw std::runtime_error("Cannot get a string* value");
+    }
+    
+    static int push(lua_State* L, const std::string* value) {
+      lua_pushstring(L, value->c_str());
+      return 1;
+    }
+    
+  };
+  
+  template<>
+  struct converter<const std::string*> : converter<std::string*> {};
+  
+}
+
 namespace lost
 {
   namespace lua

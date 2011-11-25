@@ -1,10 +1,10 @@
 #ifndef SLUB_REGISTRY_H
 #define SLUB_REGISTRY_H
 
+#include "config.h"
 #include "forward.h"
 #include "slub_lua.h"
 
-#include <string>
 #include <map>
 #include <list>
 #include <iostream>
@@ -15,14 +15,14 @@ namespace slub {
   template<typename T>
   struct type_holder {
     static const std::type_info* type;
-    static std::string typeName;
+    static string typeName;
   };
 
   template<typename T>
   const std::type_info* type_holder<T>::type = NULL;
 
   template<typename T>
-  std::string type_holder<T>::typeName;
+  string type_holder<T>::typeName;
 
   struct registry;
 
@@ -37,7 +37,7 @@ namespace slub {
     friend class registry_holder;
 
     template<typename T>
-    static registry* registerType(const std::string& typeName) {
+    static registry* registerType(const string& typeName) {
       type_holder<T>::type = &typeid(T);
       type_holder<T>::typeName = typeName;
       return get<T>();
@@ -56,7 +56,7 @@ namespace slub {
       return type;
     }
     
-    std::string getTypeName() {
+    string getTypeName() {
       return typeName;
     }
 
@@ -64,17 +64,17 @@ namespace slub {
     bool containsConstructor();
     abstract_constructor* getConstructor(lua_State* L);
     
-    void addField(const std::string& fieldName, abstract_field* field);
-    bool containsField(const std::string& fieldName);
-    abstract_field* getField(void* v, const std::string& fieldName, bool throw_ = true);
+    void addField(const string& fieldName, abstract_field* field);
+    bool containsField(const string& fieldName);
+    abstract_field* getField(void* v, const string& fieldName, bool throw_ = true);
     
-    void addMethod(const std::string& methodName, abstract_method* method);
-    bool containsMethod(const std::string& methodName);
-    abstract_method* getMethod(const std::string& methodName, lua_State* L, bool throw_ = true);
+    void addMethod(const string& methodName, abstract_method* method);
+    bool containsMethod(const string& methodName);
+    abstract_method* getMethod(const string& methodName, lua_State* L, bool throw_ = true);
     
-    void addOperator(const std::string& operatorName, abstract_operator* op);
-    bool containsOperator(const std::string& operatorName);
-    abstract_operator* getOperator(const std::string& operatorName, lua_State* L, bool throw_ = true);
+    void addOperator(const string& operatorName, abstract_operator* op);
+    bool containsOperator(const string& operatorName);
+    abstract_operator* getOperator(const string& operatorName, lua_State* L, bool throw_ = true);
     
     void registerBase(registry* base);
     bool hasBase();
@@ -83,7 +83,7 @@ namespace slub {
   private:
 
     template<typename T>
-    static std::string getTypeName() {
+    static string getTypeName() {
       return type_holder<T>::typeName;
     }
 
@@ -104,17 +104,17 @@ namespace slub {
 
     static registry_holder instance;
 
-    registry(const std::type_info& type, const std::string& typeName);
+    registry(const std::type_info& type, const string& typeName);
     ~registry();
     
     const std::type_info& type;
-    std::string typeName;
+    string typeName;
     
     std::list<abstract_constructor*> constructors;
 
-    std::map<std::string, abstract_field*> fieldMap;
-    std::map<std::string, std::list<abstract_method*> > methodMap;
-    std::map<std::string, std::list<abstract_operator*> > operatorMap;
+    std::map<string, abstract_field*> fieldMap;
+    std::map<string, std::list<abstract_method*> > methodMap;
+    std::map<string, std::list<abstract_operator*> > operatorMap;
 
     std::list<registry*> baseList_;
 
