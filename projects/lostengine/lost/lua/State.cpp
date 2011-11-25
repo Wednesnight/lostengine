@@ -39,7 +39,7 @@ namespace lost
       if (lua_isstring(L, 1) && stateMap.find(L) != stateMap.end()) {
         return stateMap[L]->handleError();
       }
-      return 1;
+      return 0;
     }
     
     State::State(lost::shared_ptr<resource::Loader> inLoader)
