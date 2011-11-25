@@ -2,6 +2,7 @@
 #include "lost/lua/State.h"
 #include "lost/common/Logger.h"
 #include <stdexcept>
+#include <iostream>
 
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++
 #include <md5.h>
@@ -96,61 +97,57 @@ namespace lost
     int State::handleError()
     {
       lua_Debug debug;
-      lua_getstack(state, 1, &debug);
       lua_getinfo(state, "Sln", &debug);
 
-      for (unsigned int idx = callstackSize; idx > 0; --idx)
+      common::StringStream msg;
+      msg << "Trace:";
+      int depth = 1;
+      for (unsigned int idx = 2; (lua_getstack(state, idx, &debug) == 1)
+           && depth <= callstackSize; ++idx)
       {
-        std::stringstream msg;
-        if (lua_getstack(state, idx, &debug) == 1)
+        string name = "";
+        string scriptpath = "";
+        int32_t currentLine = -1;
+
+        lua_getinfo(state, "Sln", &debug);
+
+        // line and path
+        if (debug.currentline >= 0) 
         {
-          string name = "";
-          string scriptpath = "";
-          int32_t currentLine = -1;
-
-          lua_getinfo(state, "Sln", &debug);
-
-          // line and path
-          if (debug.currentline >= 0) 
-          {
-            currentLine = debug.currentline;
-            scriptpath = getScriptSource(debug);
-          }
-          // name
-          if(debug.name != 0)
-          {
-            name = debug.name; 
-          }
-          else
-          {
-            name = "???";
-          }
-
-          // filter builtins that produce only noise in stack trace
-          // these have to be adjusted should they ever change
-          // require
-          if((currentLine == -1) && (scriptpath.length() == 0) && (name=="require")) continue;
-          // ModuleLoader
-          if(scriptpath == "ModuleLoader.cpp") continue;
-          if((currentLine == -1) && (scriptpath.length() == 0) && (name=="doResourceFile")) continue;
-
-          // finally, if it wasn't filtered, build the stack frame message
-          msg << "-> ";
-          if(currentLine >= 0)
-          {
-            msg << scriptpath << ":" << currentLine << ":";
-          }
-          else
-          {
-            msg << "::";
-          }
-          msg << name;
-          EOUT(msg.str());
+          currentLine = debug.currentline;
+          scriptpath = getScriptSource(debug);
         }
+        // name
+        if(debug.name != 0)
+        {
+          name = debug.name; 
+        }
+        else
+        {
+          name = "???";
+        }
+
+        // filter builtins that produce only noise in stack trace
+        // these have to be adjusted should they ever change
+        // require
+        if((currentLine == -1) && (scriptpath.length() == 0) && (name=="require")) continue;
+        // ModuleLoader
+        if(scriptpath == "ModuleLoader.cpp") continue;
+        if((currentLine == -1) && (scriptpath.length() == 0) && (name=="doResourceFile")) continue;
+
+        // finally, if it wasn't filtered, build the stack frame message
+        msg << "\n  ";
+        if(currentLine >= 0) {
+          msg << scriptpath << ":" << currentLine << ":";
+        }
+        else {
+          msg << "::";
+        }
+        msg << name;
+        ++depth;
       }
       
-      EOUT("==> " << lua_tostring(state, -1));
-      lua_pop(state, 1);
+      EOUT(lua_tostring(state, -1) << "\n" << msg.str());
 
       return 1;
     }
@@ -214,11 +211,11 @@ namespace lost
         if (errstringc != NULL)
         {
           errstring = errstringc;
-          throw LoadException(getScriptFilename(inData, inData) +" "+ errcode   +": "+ errstring);
+          throw LoadException(getScriptFilename(inData, inData) +" ("+ errcode   +"): "+ errstring);
         }
         else
         {
-          throw LoadException(getScriptFilename(inData, inData) +" "+ errcode  +"");
+          throw LoadException(getScriptFilename(inData, inData) +" ("+ errcode  +")");
         }
       }
 

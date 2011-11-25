@@ -23,7 +23,8 @@ return {
 --    local shader = lost.gl.buildShader(tasklet.loader, "bloom", tasklet.loader:load("bloom.vs"):str(), tasklet.loader:load("bloom.fs"):str())
     -- TEST
 
-    tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(tasklet.loader:locate("scene.tasklet")))
+    tasklet:spawnTasklet(tasklet.loader:locate("scene.tasklet"))
+--    tasklet:dispatchApplicationEvent(lost.application.SpawnTaskletEvent.create(tasklet.loader:locate("scene.tasklet")))
 
     -- TEST
     require("rgtest")

@@ -10,10 +10,32 @@ namespace slub {
     default_error_handler = error_handler;
   }
 
-  static int error_handler(lua_State* state) {
+  // traceback function from lua.c
+  int traceback (lua_State *L)
+  {
+    // look up Lua's 'debug.traceback' function
+    lua_getglobal(L, "debug");
+    if (!lua_istable(L, -1))
+    {
+      lua_pop(L, 1);
+      return 1;
+    }
+    lua_getfield(L, -1, "traceback");
+    if (!lua_isfunction(L, -1))
+    {
+      lua_pop(L, 2);
+      return 1;
+    }
+    lua_pushvalue(L, 1);  /* pass error message */
+    lua_pushinteger(L, 2);  /* skip this function and traceback */
+    lua_call(L, 2, 1);  /* call debug.traceback */
+    return lua_gettop(L);
+  }
+
+  int error_handler(lua_State* state) {
     int result = 1;
     if (default_error_handler == NULL || (result = default_error_handler(state)) == 0) {
-      throw std::runtime_error(lua_tostring(state, -1));
+      throw std::runtime_error(lua_tostring(state, traceback(state)));
     }
     return result;
   }
