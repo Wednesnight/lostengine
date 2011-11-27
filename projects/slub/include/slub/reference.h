@@ -41,6 +41,8 @@ namespace slub {
     
     void operator=(const reference& r) {
       this->state = r.state;
+      this->name = r.name;
+      this->path = r.path;
       r.push();
       this->index = luaL_ref(state, LUA_REGISTRYINDEX);
     }
