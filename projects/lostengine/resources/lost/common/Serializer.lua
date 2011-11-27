@@ -69,11 +69,11 @@ function Serializer:_serialize(data,nindent,isRoot)
       if type(v) ~= "table" then
         local vs = ""
         if type(v) == "string" then
-          vs = "\""..v.."\""
+          vs = "\"".. v .."\""
         else
           vs = tostring(v)
         end
-        self:append(tostring(k).." = "..vs..",",n+1)
+        self:append(tostring(k).." = ".. string.gsub(vs, "\\", "\\\\") ..",",n+1)
       else
         self:append(tostring(k).." = ",n+1)
         self:_serialize(v,n+1,false)
