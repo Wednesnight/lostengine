@@ -23,50 +23,39 @@ std::ostream& operator<<(std::ostream& stream, const directory_entry& e)
 }
 
 namespace slub {
+
   template<>
-  struct converter<std::string> {
+  struct converter<path::string_type> {
     
     static bool check(lua_State* L, int index) {
       return lua_isstring(L, index);
     }
     
-    static std::string get(lua_State* L, int index) {
-      return luaL_checkstring(L, index);
+    static path::string_type get(lua_State* L, int index) {
+      const char* ascii = luaL_checkstring(L, index);
+      wchar_t* wstr = new wchar_t[mblen(ascii, MAX_PATH) + sizeof(wchar_t)];
+      mbstowcs(wstr, ascii, mblen(ascii, MAX_PATH) + sizeof(wchar_t));
+      path::string_type result(wstr);
+      delete wstr;
+      return result;
     }
     
-    static int push(lua_State* L, const std::string& value) {
-      lua_pushstring(L, value.c_str());
+    static int push(lua_State* L, const path::string_type& value) {
+      const wchar_t* wstr = value.c_str();
+      char* ascii = new char[wcslen(wstr) + 1];
+      wcstombs(ascii, wstr, wcslen(wstr) + 1);
+      lua_pushstring(L, ascii);
+      delete ascii;
       return 1;
     }
     
   };
   
   template<>
-  struct converter<std::string&> : converter<std::string> {};
+  struct converter<path::string_type&> : converter<path::string_type> {};
   
   template<>
-  struct converter<const std::string&> : converter<std::string> {};
-  
-  template<>
-  struct converter<std::string*> {
-    
-    static bool check(lua_State* L, int index) {
-      return lua_isstring(L, index);
-    }
-    
-    static std::string* get(lua_State* L, int index) {
-      throw std::runtime_error("Cannot get a string* value");
-    }
-    
-    static int push(lua_State* L, const std::string* value) {
-      lua_pushstring(L, value->c_str());
-      return 1;
-    }
-    
-  };
-  
-  template<>
-  struct converter<const std::string*> : converter<std::string*> {};
+  struct converter<const path::string_type&> : converter<path::string_type> {};
   
 }
 

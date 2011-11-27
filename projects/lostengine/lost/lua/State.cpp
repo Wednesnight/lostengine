@@ -97,8 +97,6 @@ namespace lost
     int State::handleError()
     {
       lua_Debug debug;
-      lua_getinfo(state, "Sln", &debug);
-
       common::StringStream msg;
       msg << "Trace:";
       int depth = 1;

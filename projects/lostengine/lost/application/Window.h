@@ -33,7 +33,7 @@ namespace lost
       // FIXME: should be private
       event::EventDispatcherPtr dispatcher;
       /**
-       * generic interface to the window's OpenGL context
+       * generic interface to this window's OpenGL context
        */
       gl::ContextPtr context;
 

@@ -255,13 +255,15 @@ namespace lost
 
       std::wstring wTitle(config->windowTitle.begin(), config->windowTitle.end());
       // Create window
+      // used to invert config->windowRect.y
+      DWORD dwHeight = GetSystemMetrics(SM_CYSCREEN);
       hiddenMembers->handle = CreateWindowEx(WS_EX_APPWINDOW,
                                              L"LostEngineApplicationWindow",
                                              wTitle.c_str(),
                                              WS_SIZEBOX | WS_CLIPSIBLINGS | 
                                              WS_CLIPCHILDREN | WS_VISIBLE | WS_EX_ACCEPTFILES,
                                              (int)config->windowRect.x,
-                                             (int)config->windowRect.y,
+                                             (int)(dwHeight - config->windowRect.height) - config->windowRect.y,
                                              (int)config->windowRect.width,
                                              (int)config->windowRect.height,
                                              NULL,

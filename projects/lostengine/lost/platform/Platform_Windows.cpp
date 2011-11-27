@@ -107,28 +107,62 @@ namespace lost
       return getApplicationDirectory();
     }
 
+    boost::filesystem::path getUserDataPath()
+    {
+      boost::filesystem::path result;
+      char l_path[MAX_PATH];
+
+      if (SUCCEEDED(SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, l_path)))
+      {
+        result = reinterpret_cast<char*>(l_path);
+      }
+      return result;
+    }
+
     boost::filesystem::path buildUserDataPath( const string& filename )
     {
-      boost::filesystem::path result(filename);
+      boost::filesystem::path result = getUserDataPath() / filename;
 
-      char         l_path[MAX_PATH];
-      char         l_executable[MAX_PATH];
-      char         l_filename[_MAX_FNAME];
-      FILE        *l_filecheck;
-
-      if (SUCCEEDED( SHGetFolderPathA( NULL, CSIDL_APPDATA, NULL, 0, l_path ) ) && GetModuleFileNameA( 0, l_executable, MAX_PATH ))
-      {
-        if (_splitpath_s( l_executable, NULL, 0, NULL, 0, l_filename, _MAX_FNAME, NULL, 0 ) == 0 &&
-            PathAppendA( l_path, l_filename ) && PathAppendA( l_path, result.string().c_str() ))
-        {
-          result = reinterpret_cast<char*>(l_path);
-        }
-      }
-
+      FILE *l_filecheck;
       if (fopen_s(&l_filecheck, result.string().c_str(), "r") == 0) fclose( l_filecheck );
         else throw std::runtime_error("Couldn't find resource '"+ result.string() +"', does it exist in your user data directory? Is the spelling correct?");
 
-      return boost::filesystem::path(result);
+      return result;
+    }
+
+    /**
+      see: http://msdn.microsoft.com/en-us/library/xcb2z8hs.aspx
+      */
+    //
+    // Usage: SetThreadName (-1, "MainThread");
+    //
+    const DWORD MS_VC_EXCEPTION = 0x406D1388;
+
+    #pragma pack(push,8)
+    typedef struct tagTHREADNAME_INFO
+    {
+       DWORD dwType; // Must be 0x1000.
+       LPCSTR szName; // Pointer to name (in user addr space).
+       DWORD dwThreadID; // Thread ID (-1=caller thread).
+       DWORD dwFlags; // Reserved for future use, must be zero.
+    } THREADNAME_INFO;
+    #pragma pack(pop)
+
+    void setThreadName(const string& name)
+    {
+       THREADNAME_INFO info;
+       info.dwType = 0x1000;
+       info.szName = name.c_str();
+       info.dwThreadID = -1;
+       info.dwFlags = 0;
+
+       __try
+       {
+          RaiseException( MS_VC_EXCEPTION, 0, sizeof(info)/sizeof(ULONG_PTR), (ULONG_PTR*)&info );
+       }
+       __except(EXCEPTION_EXECUTE_HANDLER)
+       {
+       }
     }
 
   }

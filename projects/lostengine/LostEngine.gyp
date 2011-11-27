@@ -71,6 +71,10 @@
               'PreprocessorDefinitions': ['_DEBUG'],
               'ForcedIncludeFiles': 'lost/prefix-debug.pch',
             },
+            'VCLinkerTool': {
+              'AdditionalDependencies': ['msvcrtd.lib'],
+              'AdditionalOptions': ['/DEBUG', '/NODEFAULTLIB:msvcrt.lib'],
+            },
           },
           'conditions': [
             ['OS == "linux"', {
@@ -240,6 +244,10 @@
               'Optimization': '0',
               'PreprocessorDefinitions': ['_DEBUG'],
               'ForcedIncludeFiles': 'lost/prefix-debug.pch',
+            },
+            'VCLinkerTool': {
+              'AdditionalDependencies': ['msvcrtd.lib'],
+              'AdditionalOptions': ['/DEBUG', '/NODEFAULTLIB:msvcrt.lib'],
             },
           },
           'conditions': [
@@ -412,6 +420,10 @@
               'Optimization': '0',
               'PreprocessorDefinitions': ['_DEBUG'],
               'ForcedIncludeFiles': 'lost/prefix-debug.pch',
+            },
+            'VCLinkerTool': {
+              'AdditionalDependencies': ['msvcrtd.lib'],
+              'AdditionalOptions': ['/DEBUG', '/NODEFAULTLIB:msvcrt.lib'],
             },
           },
           'defines': [
@@ -685,6 +697,7 @@
         '../slub/src/slub/registry.cpp',
 
         # thirdparty/boost
+        '<@(boost_path)/libs/filesystem/v3/src/codecvt_error_category.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/path_traits.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/operations.cpp',
@@ -883,7 +896,7 @@
             'lost/application/mac/Tasklet.mm',
             'lost/application/mac/Window.mm',
             'lost/gl/mac/Context.mm',
-            'lost/platform/Platform_Mac.cpp',
+            'lost/platform/Platform_Mac.mm',
           ],
         }],
 
@@ -913,7 +926,6 @@
               '-lglu32.lib',
               '-lshell32.lib',
               '-lShLwApi.lib',
-              '-lmsvcrt.lib',
             ],
           },
           'include_dirs': [
