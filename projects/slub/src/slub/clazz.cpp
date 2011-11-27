@@ -7,7 +7,7 @@
 namespace slub {
 
   // TODO: access by type
-  int abstract_clazz::__index(lua_State* L) {
+  int abstract_clazz::index(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     if (reg != NULL) {
       const char* name = lua_tostring(L, -1);
@@ -16,7 +16,7 @@ namespace slub {
       }
       else if (reg->containsMethod(name)) {
         lua_pushvalue(L, -1);
-        lua_pushcclosure(L, __callMethod, 1);
+        lua_pushcclosure(L, callMethod, 1);
         return 1;
       }
       else {
@@ -34,7 +34,7 @@ namespace slub {
     return 0;
   }
   
-  int abstract_clazz::__newindex(lua_State* L) {
+  int abstract_clazz::newindex(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     if (reg != NULL) {
       string name(lua_tostring(L, -2));
@@ -56,14 +56,14 @@ namespace slub {
     return 0;
   }
   
-  int abstract_clazz::__callMethod(lua_State* L) {
+  int abstract_clazz::callMethod(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     int num = lua_gettop(L);
     reg->getMethod(lua_tostring(L, lua_upvalueindex(1)), L)->call(L);
     return lua_gettop(L) - num;
   }
   
-  int abstract_clazz::__callOperator(lua_State* L) {
+  int abstract_clazz::callOperator(lua_State* L) {
     registry* reg = registry::get(*((wrapper_base*) lua_touserdata(L, 1))->type);
     if (reg != NULL) {
       int num = lua_gettop(L);
