@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <boost/thread/condition.hpp>
 
 using namespace std;
 

@@ -10,6 +10,7 @@
 #include "lost/application/MouseEvent.h"
 #include "lost/application/TaskletConfig.h"
 #include "lost/common/Logger.h"
+#include "lost/common/StringStream.h"
 
 #include <X11/Xlib.h>
 #include <X11/keysymdef.h>
@@ -173,8 +174,8 @@ namespace lost
               m.data.l[0] = nativeWindow;
               if (event.xselection.target != None && event.xselection.target == XdndFormat) {
                 Property prop = read_property(nativeWindow, sel);
-                std::ostringstream os;
-                os.write((char*)prop.data, prop.nitems * prop.format / 8);
+                common::StringStream os;
+                os.append(string((char*)prop.data, prop.nitems * prop.format / 8));
                 XFree(prop.data);
 
                 // success
@@ -335,7 +336,13 @@ namespace lost
       void WindowHandler::dispatchDragNDropEvent(const string& files, int x, int y, int absX, int absY)
       {
         vector<string> fileList;
-        boost::split(fileList, files, boost::is_any_of("\r\n"), boost::token_compress_on);
+	string::const_iterator pos = files.begin();
+	for (string::const_iterator idx = files.begin(); idx != files.end(); ++idx) {
+	  if (*idx == '\r' || *idx == '\n') {
+	    fileList.push_back(files.substr((string::size_type) pos, (string::size_type) idx));
+	    pos = idx;
+	  }
+	}
         if (fileList.size() > 0) {
           // FIXME: we only support single files at the moment
           string filename = fileList.front();

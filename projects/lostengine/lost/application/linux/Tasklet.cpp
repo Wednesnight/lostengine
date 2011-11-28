@@ -42,7 +42,7 @@ namespace lost
           double framerate = config.framerate;
           double offset = clock.getTime();
 
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running) {
+          while (hiddenMembers->thread->get_state() == TaskletThread::RUNNING && running) {
             processEvents();
             if (running) {
               update(framerate);

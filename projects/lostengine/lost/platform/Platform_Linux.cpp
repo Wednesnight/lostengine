@@ -41,13 +41,7 @@ namespace lost
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
-    string getApplicationDirectory()
-    {
-      boost::filesystem::path path = getApplicationFilename();
-      return path.branch_path().string();
-    }
-
-    string getApplicationFilename(bool excludeExtension)
+    boost::filesystem::path getApplicationFilename(bool excludeExtension = false)
     {
       boost::filesystem::path path = "/proc";
       struct stat info;
@@ -78,30 +72,35 @@ namespace lost
       return string(pathbuf, pathsize);
     }
 
-    string buildResourcePath( const string& filename )
+    boost::filesystem::path getApplicationDirectory()
     {
-      string result( getResourcePath().append( filename ) );
+      return getApplicationFilename().branch_path();
+    }
 
-      FILE *l_filecheck = fopen(result.c_str(), "r");
+    boost::filesystem::path buildResourcePath( const string& filename )
+    {
+      boost::filesystem::path result = getResourcePath() / filename;
+
+      FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
 
       return result;
     }
 
-    string getResourcePath()
+    boost::filesystem::path getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    string buildUserDataPath( const string& filename )
+    boost::filesystem::path buildUserDataPath( const string& filename )
     {
-      boost::filesystem::path path(filename);
+      boost::filesystem::path result = filename;
 
 #ifdef ANDROID
       struct passwd* pwdptr = getpwuid(getuid());
       if (pwdptr != NULL) {
-	path = pwdptr->pw_dir;
+	result = pwdptr->pw_dir;
       }
 #else
       struct passwd pd;
@@ -111,16 +110,14 @@ namespace lost
       int  pwdlinelen = sizeof(pwdbuffer);
 
       if ((getpwuid_r(getuid(), pwdptr, pwdbuffer, pwdlinelen, &tempPwdPtr)) == 0) {
-	path = pd.pw_dir;
+	result = pd.pw_dir;
       }
 #endif
-      path /= filename;
+      result /= filename;
 
-      string result = path.string();
-
-      FILE *l_filecheck = fopen(result.c_str(), "r");
+      FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
 
       return result;
     }

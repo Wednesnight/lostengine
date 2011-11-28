@@ -31,7 +31,7 @@ typedef void GLvoid;
 #elif TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32
   typedef int GLintptr;
   typedef int GLsizeiptr;
-#else
+#elif !defined(linux)
   typedef long GLintptr;
   typedef long GLsizeiptr;
 #endif

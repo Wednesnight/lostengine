@@ -1,0 +1,6 @@
+Requirements:
+libgl
+libglu
+libopenal
+libxxf86vm
+

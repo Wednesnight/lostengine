@@ -13,15 +13,19 @@ configurations = {
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
                 env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
+                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
                 env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-debug.pch'
             ],
             LIBS = [
-                '-lopenal',
                 '-lGL',
                 '-lGLU',
+                '-lopenal',
+                '-lpthread',
+                '-lX11',
                 'libLostEngine'
             ],
         ),
@@ -39,15 +43,19 @@ configurations = {
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
                 env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
+                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
                 env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-release.pch'
             ],
             LIBS = [
-                '-lopenal',
                 '-lGL',
                 '-lGLU',
+                '-lopenal',
+                '-lpthread',
+                '-lX11',
                 'libLostEngine'
             ],
         ),
@@ -94,7 +102,6 @@ input_files = [
     'lost/test/TestEventDispatcher.cpp',
     'lost/test/TestGlUtils.cpp',
     'lost/test/TestLostGlHostBuffer.cpp',
-    'lost/test/TestLostGlRangeManager.cpp',
     'lost/test/TestLostMathMatrix.cpp',
     'lost/test/TestLostMathQuat.cpp',
     'lost/test/TestLostMathVec4.cpp',

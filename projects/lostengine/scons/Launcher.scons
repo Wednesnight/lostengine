@@ -12,15 +12,18 @@ configurations = {
         'Append' : dict(
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0')
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-debug.pch'
             ],
             LIBS = [
-                '-lopenal',
                 '-lGL',
                 '-lGLU',
+                '-lopenal',
+                '-lpthread',
+                '-lX11',
                 'libLostEngine'
             ],
         ),
@@ -37,15 +40,18 @@ configurations = {
         'Append' : dict(
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0')
+                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
+                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-release.pch'
             ],
             LIBS = [
-                '-lopenal',
                 '-lGL',
                 '-lGLU',
+                '-lopenal',
+                '-lpthread',
+                '-lX11',
                 'libLostEngine'
             ],
         ),

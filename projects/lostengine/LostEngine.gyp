@@ -510,7 +510,7 @@
         'lost/application/linux/Application.cpp',
         'lost/application/linux/Tasklet.cpp',
         'lost/application/linux/Window.cpp',
-	      'lost/application/linux/WindowHandler.cpp',
+        'lost/application/linux/WindowHandler.cpp',
 
         # application/mac
         'lost/application/mac/Application.mm',
@@ -763,9 +763,9 @@
         '<@(fhtagn_path)/fhtagn/text/transcoding.cpp',
 
         # thirdparty/freetype2
-    		'<@(freetype2_path)/src/psnames/psnames.c',
-    		'<@(freetype2_path)/src/psaux/psaux.c',
-    		'<@(freetype2_path)/src/lzw/ftlzw.c',
+        '<@(freetype2_path)/src/psnames/psnames.c',
+        '<@(freetype2_path)/src/psaux/psaux.c',
+        '<@(freetype2_path)/src/lzw/ftlzw.c',
         '<@(freetype2_path)/src/gzip/ftgzip.c',
         '<@(freetype2_path)/src/cache/ftcache.c',
         '<@(freetype2_path)/src/smooth/smooth.c',
@@ -947,16 +947,18 @@
             'lost/application/linux/Tasklet.cpp',
             'lost/application/linux/Window.cpp',
             'lost/application/linux/WindowHandler.cpp',
-	          'lost/gl/linux/Context.cpp',
+            'lost/gl/linux/Context.cpp',
             'lost/platform/Platform_Linux.cpp',
           ],
         }],
         ['OS == "linux"', {
           'link_settings': {
             'libraries': [
-              '-lopenal',
               '-lGL',
               '-lGLU',
+              '-lopenal',
+              '-lpthread',
+              '-lX11',
             ],
           },
         }],
