@@ -79,6 +79,7 @@
 		2A3E227EEBBF2D93D94E09E5 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = C3C24878424EFF5A3505F605 /* ftgasp.c */; };
 		2B4B75038B2A3BACEACABB53 /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF7BCD307B50A3585139B9A9 /* Camera3D.cpp */; };
 		2C17538AD114F80FCD57B38F /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 19C2D79ADC6B486CE54AA761 /* stb_vorbis.c */; };
+		2CCF702879E7D3E1196D6BF2 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE7DA4CFD4904F93CE417 /* codecvt_error_category.cpp */; };
 		2D8E8DD2CC12803A1C8525B6 /* LostEngine.icns in Resources */ = {isa = PBXBuildFile; fileRef = B7CEAFC10241BFE402F5E8BB /* LostEngine.icns */; };
 		2E0E46B913502C7B920A510B /* b2World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8F91AC710BB93F636D7AD4D9 /* b2World.cpp */; };
 		2E9AC792422AFAD0F58ECA92 /* LostCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A988F6EFA79B4F10F80E2DF6 /* LostCamera.cpp */; };
@@ -682,6 +683,7 @@
 		C98CD3DE58AF42575A284930 /* cff.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cff.c; sourceTree = "<group>"; };
 		CB20BD0C4BC0A6B25D95FEB6 /* Glyph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Glyph.cpp; sourceTree = "<group>"; };
 		CD959BA1C788E01B0C834615 /* TestGlUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestGlUtils.cpp; sourceTree = "<group>"; };
+		CE0FE7DA4CFD4904F93CE417 /* codecvt_error_category.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = codecvt_error_category.cpp; sourceTree = "<group>"; };
 		CF1C0D8B408DA56976FFE4CB /* Context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		CF5BE0CCEAE2FFB1697C59FE /* operations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = operations.cpp; sourceTree = "<group>"; };
 		D038D18E6F3CCCD9D9D7AAEC /* TaskletConfig.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TaskletConfig.cpp; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 		1538CF66096E6FDC97A9013E /* filesystem/v3/src */ = {
 			isa = PBXGroup;
 			children = (
+				CE0FE7DA4CFD4904F93CE417 /* codecvt_error_category.cpp */,
 				CF5BE0CCEAE2FFB1697C59FE /* operations.cpp */,
 				65EC8A07500D089AA6788F65 /* path.cpp */,
 				000EC028C38893DCC9E2D3E4 /* path_traits.cpp */,
@@ -2080,6 +2083,7 @@
 				67A1966FDD4F755FAF93E109 /* clazz.cpp in Sources */,
 				DFB6BB08F3474AB8DE1A47B8 /* function.cpp in Sources */,
 				853B7E2078294699E4590A8F /* registry.cpp in Sources */,
+				2CCF702879E7D3E1196D6BF2 /* codecvt_error_category.cpp in Sources */,
 				16BF39628718275B6EBBCCCF /* path.cpp in Sources */,
 				8FD58184E6C810274BEB21FF /* path_traits.cpp in Sources */,
 				8F6B4A43603C2107ECD35163 /* operations.cpp in Sources */,
