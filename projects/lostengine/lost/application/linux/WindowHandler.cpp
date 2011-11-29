@@ -65,141 +65,146 @@ namespace lost
         
         while (running)
         {
-          XNextEvent (display, &event);
-          switch (event.type)
-          {
+          if (XPending(display) == 0) {
+            usleep(1000);
+          }
+          else {
+            XNextEvent (display, &event);
+            switch (event.type)
+            {
 
-            case Expose:
-              break;
+              case Expose:
+                break;
 
-            case ConfigureNotify:
-              if ((event.xconfigure.width != window->config->windowRect.width) || (event.xconfigure.height != window->config->windowRect.height))
+              case ConfigureNotify:
+                if ((event.xconfigure.width != window->config->windowRect.width) || (event.xconfigure.height != window->config->windowRect.height))
+                {
+                    window->dispatcher->queueEvent (ResizeEvent::create (event.xconfigure.width, event.xconfigure.height));
+                }
+                break;
+
+              case ButtonPress:
+                currentButton = event.xbutton.button;
+              case ButtonRelease:
+                currentButton = 0;
+                dispatchMouseEvent(event.type == ButtonPress ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP(), event.xbutton.x, event.xbutton.y,
+                                  event.xbutton.x_root, event.xbutton.y_root, event.xbutton.button, event.type == ButtonPress);
+                break;
+
+              case KeyPress:
+              case KeyRelease:
+                XLookupString (&event.xkey, text, 255, &key, 0);
+                dispatchKeyEvent(key, text, event.type == KeyPress, false);
+                break;
+
+              case MotionNotify:
+                dispatchMouseEvent(MouseEvent::MOUSE_MOVE(), event.xmotion.x, event.xmotion.y,
+                                  event.xmotion.x_root, event.xmotion.y_root, currentButton, currentButton != 0);
+                break;
+
+              case ClientMessage:
+                DOUT("ClientMessage: " << GetAtomName(event.xclient.message_type) << " (" << event.xclient.format << ")");
+                if (event.xclient.data.l[0] == WM_DELETE_WINDOW) {
+                  window->dispatcher->queueEvent (WindowEvent::create (WindowEvent::CLOSE(), window));
+                }
+                else if (event.xclient.data.l[0] == WM_WAKEUP) {
+                  break;
+                }
+                else if (event.xclient.message_type == XdndEnter) {
+                  XdndFormat = dragAccept(event);
+                  XdndVersion = event.xclient.data.l[1] >> 24;
+                }
+                else if (event.xclient.message_type == XdndPosition) {
+                  if (XdndFormat != None) {
+                    XClientMessageEvent m;
+                    memset(&m, sizeof(m), 0);
+                    m.type = ClientMessage;
+                    m.display = event.xclient.display;
+                    m.window = event.xclient.data.l[0];
+                    m.message_type = XdndStatus;
+                    m.format = 32;
+                    m.data.l[0] = nativeWindow;
+                    m.data.l[1] = True;
+                    m.data.l[2] = 0; // empty rectangle
+                    m.data.l[3] = 0;
+                    m.data.l[4] = XdndActionCopy; // accept copy
+                    
+                    XSendEvent(display, event.xclient.data.l[0], False, NoEventMask, (XEvent*)&m);
+                    XFlush(display);
+                  }
+                }
+                else if (event.xclient.message_type == XdndDrop) {
+                  if (XdndFormat == None) {
+                    // It's sending anyway, despite instructions to the contrary.
+                    // So reply that we're not interested.
+                    XClientMessageEvent m;
+                    memset(&m, sizeof(m), 0);
+                    m.type = ClientMessage;
+                    m.display = event.xclient.display;
+                    m.window = event.xclient.data.l[0];
+                    m.message_type = XdndFinished;
+                    m.format = 32;
+                    m.data.l[0] = nativeWindow;
+                    m.data.l[1] = False;
+                    m.data.l[2] = None; // failed
+
+                    XSendEvent(display, event.xclient.data.l[0], False, NoEventMask, (XEvent*)&m);
+                    XFlush(display);
+                  }
+                  else
+                  {
+                    if (XdndVersion >= 1) {
+                      XConvertSelection(display, XdndSelection, XdndFormat, sel, nativeWindow, event.xclient.data.l[2]);
+                    }
+                    else {
+                      XConvertSelection(display, XdndSelection, XdndFormat, sel, nativeWindow, CurrentTime);
+                    }
+                  }
+                }
+                else if (event.xclient.message_type == XdndLeave) {
+                  XdndFormat = None; // cancelled
+                }
+                break;
+
+              case SelectionNotify:
               {
-                  window->dispatcher->queueEvent (ResizeEvent::create (event.xconfigure.width, event.xconfigure.height));
-              }
-              break;
+                XClientMessageEvent m;
+                memset(&m, sizeof(m), 0);
+                m.type = ClientMessage;
+                m.display = display;
+                m.window = event.xselection.requestor;
+                m.message_type = XdndFinished;
+                m.format = 32;
+                m.data.l[0] = nativeWindow;
+                if (event.xselection.target != None && event.xselection.target == XdndFormat) {
+                  Property prop = read_property(nativeWindow, sel);
+                  common::StringStream os;
+                  os.append(string((char*)prop.data, prop.nitems * prop.format / 8));
+                  XFree(prop.data);
 
-            case ButtonPress:
-              currentButton = event.xbutton.button;
-            case ButtonRelease:
-              currentButton = 0;
-              dispatchMouseEvent(event.type == ButtonPress ? MouseEvent::MOUSE_DOWN() : MouseEvent::MOUSE_UP(), event.xbutton.x, event.xbutton.y,
-                                 event.xbutton.x_root, event.xbutton.y_root, event.xbutton.button, event.type == ButtonPress);
-              break;
+                  // success
+                  m.data.l[1] = True;
+                  m.data.l[2] = XdndActionCopy;
 
-            case KeyPress:
-            case KeyRelease:
-              XLookupString (&event.xkey, text, 255, &key, 0);
-              dispatchKeyEvent(key, text, event.type == KeyPress, false);
-              break;
-
-            case MotionNotify:
-              dispatchMouseEvent(MouseEvent::MOUSE_MOVE(), event.xmotion.x, event.xmotion.y,
-                                 event.xmotion.x_root, event.xmotion.y_root, currentButton, currentButton != 0);
-              break;
-
-            case ClientMessage:
-              DOUT("ClientMessage: " << GetAtomName(event.xclient.message_type) << " (" << event.xclient.format << ")");
-              if (event.xclient.data.l[0] == WM_DELETE_WINDOW) {
-                window->dispatcher->queueEvent (WindowEvent::create (WindowEvent::CLOSE(), window));
-              }
-              else if (event.xclient.data.l[0] == WM_WAKEUP) {
+                  DOUT("Received drop: " << os.str());
+                  ::Window rootWindow, childWindow;
+                  int x, y, absX, absY;
+                  unsigned int mask;
+                  XQueryPointer(display, nativeWindow, &rootWindow, &childWindow, &absX, &absY, &x, &y, &mask);
+                  dispatchDragNDropEvent(os.str(), x, y, absX, absY);
+                } else {
+                  // fail
+                  m.data.l[1] = False;
+                  m.data.l[2] = None;
+                }
+                XSendEvent(display, event.xclient.data.l[0], False, NoEventMask, (XEvent*)&m);
+                XSync(display, False);
                 break;
               }
-              else if (event.xclient.message_type == XdndEnter) {
-                XdndFormat = dragAccept(event);
-                XdndVersion = event.xclient.data.l[1] >> 24;
-              }
-              else if (event.xclient.message_type == XdndPosition) {
-                if (XdndFormat != None) {
-                  XClientMessageEvent m;
-                  memset(&m, sizeof(m), 0);
-                  m.type = ClientMessage;
-                  m.display = event.xclient.display;
-                  m.window = event.xclient.data.l[0];
-                  m.message_type = XdndStatus;
-                  m.format = 32;
-                  m.data.l[0] = nativeWindow;
-                  m.data.l[1] = True;
-                  m.data.l[2] = 0; // empty rectangle
-                  m.data.l[3] = 0;
-                  m.data.l[4] = XdndActionCopy; // accept copy
-                  
-                  XSendEvent(display, event.xclient.data.l[0], False, NoEventMask, (XEvent*)&m);
-                  XFlush(display);
-                }
-              }
-              else if (event.xclient.message_type == XdndDrop) {
-                if (XdndFormat == None) {
-                  // It's sending anyway, despite instructions to the contrary.
-                  // So reply that we're not interested.
-                  XClientMessageEvent m;
-                  memset(&m, sizeof(m), 0);
-                  m.type = ClientMessage;
-                  m.display = event.xclient.display;
-                  m.window = event.xclient.data.l[0];
-                  m.message_type = XdndFinished;
-                  m.format = 32;
-                  m.data.l[0] = nativeWindow;
-                  m.data.l[1] = False;
-                  m.data.l[2] = None; // failed
 
-                  XSendEvent(display, event.xclient.data.l[0], False, NoEventMask, (XEvent*)&m);
-                  XFlush(display);
-                }
-                else
-                {
-                  if (XdndVersion >= 1) {
-                    XConvertSelection(display, XdndSelection, XdndFormat, sel, nativeWindow, event.xclient.data.l[2]);
-                  }
-                  else {
-                    XConvertSelection(display, XdndSelection, XdndFormat, sel, nativeWindow, CurrentTime);
-                  }
-                }
-              }
-              else if (event.xclient.message_type == XdndLeave) {
-                XdndFormat = None; // cancelled
-              }
-              break;
-
-            case SelectionNotify:
-            {
-              XClientMessageEvent m;
-              memset(&m, sizeof(m), 0);
-              m.type = ClientMessage;
-              m.display = display;
-              m.window = event.xselection.requestor;
-              m.message_type = XdndFinished;
-              m.format = 32;
-              m.data.l[0] = nativeWindow;
-              if (event.xselection.target != None && event.xselection.target == XdndFormat) {
-                Property prop = read_property(nativeWindow, sel);
-                common::StringStream os;
-                os.append(string((char*)prop.data, prop.nitems * prop.format / 8));
-                XFree(prop.data);
-
-                // success
-                m.data.l[1] = True;
-                m.data.l[2] = XdndActionCopy;
-
-                DOUT("Received drop: " << os.str());
-                ::Window rootWindow, childWindow;
-                int x, y, absX, absY;
-                unsigned int mask;
-                XQueryPointer(display, nativeWindow, &rootWindow, &childWindow, &absX, &absY, &x, &y, &mask);
-                dispatchDragNDropEvent(os.str(), x, y, absX, absY);
-              } else {
-                // fail
-                m.data.l[1] = False;
-                m.data.l[2] = None;
-              }
-              XSendEvent(display, event.xselection.requestor, False, NoEventMask, (XEvent*)&m);
-              XSync(display, False);
-              break;
+              default:
+                break;
             }
-
-            default:
-              break;
           }
         }
       }
