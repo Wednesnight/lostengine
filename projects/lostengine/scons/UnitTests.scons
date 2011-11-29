@@ -21,11 +21,12 @@ configurations = {
                 '-includelost/prefix-debug.pch'
             ],
             LIBS = [
-                '-lGL',
-                '-lGLU',
-                '-lopenal',
-                '-lpthread',
-                '-lX11',
+                'LostEngine',
+                'GL',
+                'GLU',
+                'openal',
+                'pthread',
+                'X11',
                 'libLostEngine'
             ],
         ),
@@ -51,11 +52,12 @@ configurations = {
                 '-includelost/prefix-release.pch'
             ],
             LIBS = [
-                '-lGL',
-                '-lGLU',
-                '-lopenal',
-                '-lpthread',
-                '-lX11',
+                'LostEngine',
+                'GL',
+                'GLU',
+                'openal',
+                'pthread',
+                'X11',
                 'libLostEngine'
             ],
         ),

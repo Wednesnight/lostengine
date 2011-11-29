@@ -954,11 +954,13 @@
         ['OS == "linux"', {
           'link_settings': {
             'libraries': [
-              '-lGL',
-              '-lGLU',
-              '-lopenal',
-              '-lpthread',
-              '-lX11',
+              # workaround: force correct link order
+              'LostEngine',
+              'GL',
+              'GLU',
+              'openal',
+              'pthread',
+              'X11',
             ],
           },
         }],

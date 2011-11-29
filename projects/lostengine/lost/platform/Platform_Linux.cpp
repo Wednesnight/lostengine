@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include "boost/filesystem.hpp"
 
+#include <sys/prctl.h>
+
 using namespace std;
 
 namespace lost
@@ -93,10 +95,8 @@ namespace lost
       return getApplicationDirectory();
     }
 
-    boost::filesystem::path buildUserDataPath( const string& filename )
-    {
-      boost::filesystem::path result = filename;
-
+    boost::filesystem::path getUserDataPath() {
+      boost::filesystem::path result;
 #ifdef ANDROID
       struct passwd* pwdptr = getpwuid(getuid());
       if (pwdptr != NULL) {
@@ -113,13 +113,22 @@ namespace lost
 	result = pd.pw_dir;
       }
 #endif
-      result /= filename;
+      return result;
+    }
+
+    boost::filesystem::path buildUserDataPath( const string& filename )
+    {
+      boost::filesystem::path result = getUserDataPath() / filename;
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
         else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
 
       return result;
+    }
+
+    void setThreadName(const string& name) {
+      prctl(PR_SET_NAME, name.c_str(), 0, 0, 0);
     }
 
   }

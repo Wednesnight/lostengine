@@ -2,5 +2,7 @@ Requirements:
 libgl
 libglu
 libopenal
+libx11
 libxxf86vm
+libpthread
 

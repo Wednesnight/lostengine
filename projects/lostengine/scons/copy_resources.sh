@@ -10,5 +10,5 @@ if [[ "$exists" ]]
 then
   rm -fR "${CONFIG}/Launcher.tasklet"
 fi
-cp -Rf resources/* "${CONFIG}/"
+cp -Rf ../resources/* "${CONFIG}/"
 

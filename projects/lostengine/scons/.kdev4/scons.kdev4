@@ -15,8 +15,11 @@ Arguments=
 Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
 Dependency Action=Nothing
 EnvironmentGroup=default
-Executable=file:///home/jomanto/coding/wednesnight/projects/lostengine/scons/Debug/Launcher
-Working Directory=file:///home/jomanto/coding/wednesnight/projects/lostengine/scons/Debug
+Executable=file:///home/jomanto/coding/wednesnight-slub-branch/projects/lostengine/scons/Debug/Launcher
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=
+Use External Terminal=false
+Working Directory=file:///home/jomanto/coding/wednesnight-slub-branch/projects/lostengine/scons/Debug
 isExecutable=true
 
 [Project]

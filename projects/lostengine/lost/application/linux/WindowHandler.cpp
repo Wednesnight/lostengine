@@ -336,16 +336,18 @@ namespace lost
       void WindowHandler::dispatchDragNDropEvent(const string& files, int x, int y, int absX, int absY)
       {
         vector<string> fileList;
-	string::const_iterator pos = files.begin();
-	for (string::const_iterator idx = files.begin(); idx != files.end(); ++idx) {
-	  if (*idx == '\r' || *idx == '\n') {
-	    fileList.push_back(files.substr((string::size_type) pos, (string::size_type) idx));
-	    pos = idx;
-	  }
-	}
+        int pos = 0;
+        for (int idx = 0; idx < files.size(); ++idx) {
+          if (files[idx] == '\r' || files[idx] == '\n') {
+            fileList.push_back(files.substr(pos, idx-pos));
+            pos = idx;
+          }
+        }
+        std::cout << "done" << std::endl;
         if (fileList.size() > 0) {
           // FIXME: we only support single files at the moment
           string filename = fileList.front();
+          std::cout << filename << std::endl;
           if (filename.find("file://") != string::npos) {
             filename = filename.substr(filename.find_first_not_of("file://")-1);
           }
