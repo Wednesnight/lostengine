@@ -61,7 +61,10 @@ namespace slub {
   
   abstract_constructor* registry::getConstructor(lua_State* L) {
     if (!containsConstructor()) {
-      throw ConstructorNotFoundException(typeName);
+      ConstructorNotFoundException e(typeName);
+      lua_pushstring(L, e.what());
+      lua_error(L);
+      throw e;
     }
     
     for (std::list<abstract_constructor*>::iterator cidx = constructors.begin(); cidx != constructors.end(); ++cidx) {
@@ -69,7 +72,10 @@ namespace slub {
         return *cidx;
       }
     }
-    throw OverloadNotFoundException(typeName);
+    OverloadNotFoundException e(typeName);
+    lua_pushstring(L, e.what());
+    lua_error(L);
+    throw e;
   }
   
   void registry::addField(const string& fieldName, abstract_field* field) {
@@ -162,10 +168,16 @@ namespace slub {
       }
 
       if (result == &not_found) {
-        throw MethodNotFoundException(typeName +"."+ methodName + s);
+        MethodNotFoundException e(typeName +"."+ methodName + s);
+        lua_pushstring(L, e.what());
+        lua_error(L);
+        throw e;
       }
       else {
-        throw OverloadNotFoundException(typeName +"."+ methodName + s);
+        OverloadNotFoundException e(typeName +"."+ methodName + s);
+        lua_pushstring(L, e.what());
+        lua_error(L);
+        throw e;
       }
     }
     return result;
@@ -217,10 +229,16 @@ namespace slub {
 
     if ((result == &not_found || result == NULL) && throw_) {
       if (result == &not_found) {
-        throw OperatorNotFoundException(typeName +"."+ operatorName);
+        OperatorNotFoundException e(typeName +"."+ operatorName);
+        lua_pushstring(L, e.what());
+        lua_error(L);
+        throw e;
       }
       else {
-        throw OverloadNotFoundException(typeName +"."+ operatorName);
+        OverloadNotFoundException e(typeName +"."+ operatorName);
+        lua_pushstring(L, e.what());
+        lua_error(L);
+        throw e;
       }
     }
     return result;

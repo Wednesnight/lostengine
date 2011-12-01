@@ -1,4 +1,5 @@
 #include "../../include/slub/config.h"
+#include "../../include/slub/exception.h"
 #include "../../include/slub/function.h"
 
 #include <iostream>
@@ -39,7 +40,10 @@ namespace slub {
         return lua_gettop(L) - num;
       }
     }
-    throw std::runtime_error("No matching overload found, candidates: ...");
+    OverloadNotFoundException e(name);
+    lua_pushstring(L, e.what());
+    lua_error(L);
+    throw e;
   }
 
 }
