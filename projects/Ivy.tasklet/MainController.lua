@@ -31,6 +31,6 @@ function MainController:buildUi()
 end
 
 function MainController:fileDropped(event)
-  self.fileListController:receivedDropEvent(event.lostAppDragNDropEvent)
+  self.fileListController:receivedDropEvent(event)
 end
 

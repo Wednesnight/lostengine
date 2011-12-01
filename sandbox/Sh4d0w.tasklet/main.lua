@@ -1,46 +1,68 @@
-local config = require("config")
+config = require("config")
 require("scene")
 
-using "lost.application.KeyEvent"
-using "lost.application.K_ESCAPE"
-using "lost.application.K_SPACE"
-using "lost.application.K_UP"
-using "lost.application.K_DOWN"
-using "lost.application.K_LEFT"
-using "lost.application.K_RIGHT"
-using "lost.application.ResizeEvent"
-using "lost.math.Rect"
-using "lost.math.Vec2"
-using "lost.math.Vec3"
+local KeyEvent = lost.application.KeyEvent
+local K_ESCAPE = lost.application.K_ESCAPE
+local K_SPACE = lost.application.K_SPACE
+local K_UP = lost.application.K_UP
+local K_DOWN = lost.application.K_DOWN
+local K_LEFT = lost.application.K_LEFT
+local K_RIGHT = lost.application.K_RIGHT
+local ResizeEvent = lost.application.ResizeEvent
+local Rect = lost.math.Rect
+local Vec2 = lost.math.Vec2
+local Vec3 = lost.math.Vec3
 
 scene = nil -- deliberately global so ui can access it
-local running = true
-local debug = false
+screen = nil
 
 local lightingEnabled = true
 local shadowmapEnabled = true
 local matcapEnabled = true
 
 function updateButtons()
-  screen("ui")("buttons")("stack")("ssao"):pushed(scene.ssaoEnabled)
-  screen("ui")("buttons")("stack")("light"):pushed(scene.lightingEnabled)
-  screen("ui")("buttons")("stack")("shadow"):pushed(scene.shadowmapEnabled)
-  screen("ui")("buttons")("stack")("matcap"):pushed(scene.matcapEnabled)
+  screen("buttons")("stack")("ssao"):pushed(scene.ssaoEnabled)
+  screen("buttons")("stack")("light"):pushed(scene.lightingEnabled)
+  screen("buttons")("stack")("shadow"):pushed(scene.shadowmapEnabled)
+  screen("buttons")("stack")("matcap"):pushed(scene.matcapEnabled)
 end
 
 function startup()
-  tasklet.clearNode.active = false
-
-  scene = createScene(tasklet.loader)
+  require("lost.guiro")
   screen = require("ui")
-  updateButtons()
+--  lost.guiro.ui():add({screen})
+  scene = createScene(tasklet.loader)
 
-  tasklet.eventDispatcher:addEventListener(KeyEvent.KEY_DOWN, function(event)
+  tasklet.eventDispatcher:addEventListener(ResizeEvent.TASKLET_WINDOW_RESIZE, resize)
+
+  matcapLoader = lost.resource.Loader.create()
+  matcapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
+  tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, function(event)
+    scene:setMatCap(matcapLoader:load(event.filename))
+  end)
+
+  updateButtons()
+end
+
+function update()
+  scene.firstPass:process(tasklet.window.context)
+  if scene.secondPass.node.active then
+    scene.secondPass:process(tasklet.window.context)
+  end
+  if scene.thirdPass.node.active then
+    scene.thirdPass:process(tasklet.window.context, ssao)
+  end
+end
+
+function key(event)
+  if event.type == KeyEvent.KEY_DOWN then
     local updateCam = false
     if event.key == K_ESCAPE then
-      running = false
+      tasklet.running = false
     elseif event.key == K_SPACE then
-      debug = not debug
+      scene.debugNode.active = not scene.debugNode.active
+      scene.secondPass.node.active = not scene.secondPass.node.active
+      scene.thirdPass.node.active = not scene.thirdPass.node.active
     elseif event.character == "1" then
       scene.ssaoEnabled = not scene.ssaoEnabled
       updateButtons()
@@ -74,48 +96,27 @@ function startup()
       scene.lightCam.cam:move(Vec3(-0.1,0,0))
       updateCam = true
     end
-    
+  
     -- update shader params
     if updateCam then
       scene.shaderParams:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
       scene.shaderParams:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
     end
-  end)
-
-  tasklet.eventDispatcher:addEventListener(ResizeEvent.MAIN_WINDOW_RESIZE, function(event)
-    
-    -- update cams
-    scene.cam.cam:viewport(Rect(0, 0, event.width, event.height))
-    scene.lightCam.cam:viewport(Rect(0, 0, event.width, event.height))
-    scene.debugCam.cam:viewport(Rect(0, 0, event.width, event.height))
-    -- ...framebuffers
-    scene.fb:resize(Vec2(event.width, event.height))
-    scene.fbSsao:resize(Vec2(event.width, event.height))
-    -- ...and quads
-    scene.debugMesh:updateSize(Vec2(event.width, event.height))
-    
-    -- update shader params
-    scene.shaderParams:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
-    scene.shaderParams:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
-  end)
-
-  matcapLoader = lost.resource.Loader.create()
-  matcapLoader:addRepository(lost.resource.FilesystemRepository.create("/"))
-  tasklet.eventDispatcher:addEventListener(lost.application.DragNDropEvent.DROP, function(event)
-    scene:setMatCap(matcapLoader:load(event.filename))
-  end)
-
-  return true
+  end
 end
 
-function update()
-  scene.firstPass:process(tasklet.window.context)
-  -- shadow map debug output?
-  if debug then
-    scene.debugNode:process(tasklet.window.context)
-  else
-    scene.secondPass:process(tasklet.window.context)
-    scene.thirdPass:process(tasklet.window.context, ssao)
-  end
-  return running
+function resize(event)  
+  -- update cams
+  scene.cam.cam:viewport(Rect(0, 0, event.width, event.height))
+  scene.lightCam.cam:viewport(Rect(0, 0, event.width, event.height))
+  scene.debugCam.cam:viewport(Rect(0, 0, event.width, event.height))
+  -- ...framebuffers
+  scene.fb:resize(Vec2(event.width, event.height))
+  scene.fbSsao:resize(Vec2(event.width, event.height))
+  -- ...and quads
+  scene.debugMesh:updateSize(Vec2(event.width, event.height))
+  
+  -- update shader params
+  scene.shaderParams:set("lightViewMatrix", scene.lightCam.cam:viewMatrix())
+  scene.shaderParams:set("lightProjectionMatrix", scene.lightCam.cam:projectionMatrix())
 end

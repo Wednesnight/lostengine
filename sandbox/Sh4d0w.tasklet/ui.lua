@@ -1,9 +1,11 @@
-using "lost.common.Color"
+local Color = lost.common.Color
 
 local radius = 20
 
-return dcl.guiro:Screen
-{
+return lost.guiro.view.View {
+  id = "mainView",
+  showBackground = true,
+  backgroundColor = Color(1,1,1,.5),
   listeners = 
   {
     buttonClick = function(event)
@@ -19,14 +21,9 @@ return dcl.guiro:Screen
       end
     end
   },
-  dcl.guiro:UserInterface
-  {
-    id = "ui",
-    bounds = {"left", "bottom", "1", "1"},
-    dcl.guiro:Window
-    {
-      hidden = false,
-      id = "hintWindow",
+  subviews = {
+    lost.guiro.view.View {
+      id = "hints",
       bounds = {"left", "top", {"1", -100}, 40}, 
       showBackground = true,
       backgroundColor = Color(1,1,1,.5),
@@ -37,17 +34,17 @@ return dcl.guiro:Screen
       backgroundRoundCorners = {false, false, false, false},
       frameRoundCorners = {true, true, true, true},
       frameShowSides = {false, true, false, false},
-      dcl.guiro:Label
-      {
-        bounds = {"left", "bottom", "1", "1"},
-        text = "hello there",
-        fontSize = 16,
-        showShadow = false,
-        textColor = Color(0,0,0)
+      subviews = {
+        lost.guiro.view.Label {
+          bounds = {"left", "bottom", "1", "1"},
+          text = "hello there",
+          fontSize = 16,
+          showShadow = false,
+          textColor = Color(0,0,0)
+        }
       }
     },
-    dcl.guiro:Window
-    {
+    lost.guiro.view.View {
       id = "buttons",
       bounds = {"right", "top", 100, 100},
       showBackground = true,
@@ -59,52 +56,42 @@ return dcl.guiro:Screen
       backgroundRoundCorners = {true, false, false, false},
       frameRoundCorners = {true, true, true, true},
       frameShowSides = {false, true, true, false},
-      dcl.guiro:VBox
-      {
-        id = "stack",
-        bounds = {"right", "bottom", {"1", -6}, "1"}, 
-        mode = "stack",
-        spacing = 4,
-        halign = "center",
-        valign = "center",
-        dcl.guiro:Button
-        {
-          id = "ssao",
-          theme = "pebble",
-          style = "RoundedRectSmall",
-          bounds = {50, 50, 80, nil},
-          title = "SSAO (1)",
-          mode = "toggle",
+      subviews = {
+        lost.guiro.view.View {
+          id = "stack",
+          bounds = {"right", "bottom", {"1", -6}, "1"}, 
+          subviews = {
+            lost.guiro.view.Button {
+              id = "ssao",
+              style="checkboxCandy",
+              bounds = {50, 50, 80, 25},
+              title = "SSAO (1)",
+              mode = "toggle",
+            },
+            lost.guiro.view.Button {
+              id = "light",
+              style="checkboxCandy",
+              bounds = {50, 50, 80, 25},
+              title = "Lighting (2)",
+              mode = "toggle",
+            },
+            lost.guiro.view.Button {
+              id = "shadow",
+              style="checkboxCandy",
+              bounds = {50, 50, 80, 25},
+              title = "Shadows (3)",
+              mode = "toggle",
+            },
+            lost.guiro.view.Button {
+              id = "matcap",
+              style="checkboxCandy",
+              bounds = {50, 50, 80, 25},
+              title = "MatCap (4)",
+              mode = "toggle",
+            }, 
+          }
         },
-        dcl.guiro:Button
-        {
-          id = "light",
-          theme = "pebble",
-          style = "RoundedRectSmall",
-          bounds = {50, 50, 80, nil},
-          title = "Lighting (2)",
-          mode = "toggle",
-        },
-        dcl.guiro:Button
-        {
-          id = "shadow",
-          theme = "pebble",
-          style = "RoundedRectSmall",
-          bounds = {50, 50, 80, nil},
-          title = "Shadows (3)",
-          mode = "toggle",
-        },
-        dcl.guiro:Button
-        {
-          id = "matcap",
-          theme = "pebble",
-          style = "RoundedRectSmall",
-          bounds = {50, 50, 80, nil},
-          title = "MatCap (4)",
-          mode = "toggle",
-        }, 
-      },
-      
+      }
     }
   }
 }
