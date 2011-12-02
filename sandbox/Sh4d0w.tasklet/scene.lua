@@ -245,6 +245,7 @@ function createScene(loader)
   result.debugCam = lost.rg.Camera.create(lost.camera.Camera2D.create(Rect(0, 0, config.window.width, config.window.height)))
   result.debugCam.name = "cam"
   result.debugMesh = lost.mesh.Quad.create(result.fb:depthTexture(), false)
+  result.debugMesh.material.shader = lost.common.Shaders.textureShader()
   result.debugNode = lost.rg.Node.create()
   result.debugNode.name = "debug"
   result.debugNode.active = false
