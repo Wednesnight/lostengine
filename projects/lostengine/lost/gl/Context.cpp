@@ -372,6 +372,7 @@ map<void*, Context*> glContext2lostGlContext;
           case VT_vec3    : currentShader->set(name, v.vec3);   break;
           case VT_vec4    : currentShader->set(name, v.vec4);   break;
           case VT_matrix  : currentShader->set(name, v.matrix); break;
+          case VT_undefined:break;
         }
       }
     }
