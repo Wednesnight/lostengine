@@ -8,7 +8,6 @@
 
 using namespace lost::event;
 using namespace lost::application;
-using namespace boost;
 
 TEST(eventmanager)
 {
