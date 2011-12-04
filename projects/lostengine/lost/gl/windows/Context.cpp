@@ -2,24 +2,30 @@
 #include "lost/gl/gl.h"
 #include "lost/common/Logger.h"
 
+#include <boost/thread/tss.hpp>
+
 namespace lost
 {
   namespace gl
   {
-    // set to the current context in makeCurrent
-    void* currentContext;
-
     struct Context::ContextHiddenMembers
     {
       HDC   glDeviceContext;
       HGLRC glContext;
     };
 
+    void context_cleanup(Context* p)
+    {
+    }
+    // set to the current context in makeCurrent
+    boost::thread_specific_ptr<Context> currentContext(context_cleanup);
+
     void Context::initialize()
     {
       hiddenMembers = new ContextHiddenMembers;
       hiddenMembers->glDeviceContext = wglGetCurrentDC();
       hiddenMembers->glContext = wglGetCurrentContext();
+      currentContext.reset(this);
     }
 
     void Context::finalize()
@@ -34,7 +40,7 @@ namespace lost
       {
         DOUT("current");
         wglMakeCurrent(hiddenMembers->glDeviceContext, hiddenMembers->glContext);
-        currentContext = hiddenMembers;
+        currentContext.reset(this);
       }
     }
 
@@ -56,13 +62,12 @@ namespace lost
 
     void* Context::getCurrentOsSpecific()
     {
-	    return currentContext;
+	    return currentContext.get();
     }
     
     void Context::setCurrentOsSpecififc(void* ctx)
     {
-      Context::ContextHiddenMembers* members = (Context::ContextHiddenMembers*)ctx;
-      wglMakeCurrent(members->glDeviceContext, members->glContext);
+      ((Context*) ctx)->makeCurrent();
     }
 
   }

@@ -19,7 +19,7 @@ namespace lost
 
     struct Application::ApplicationHiddenMembers
     {
-      boost::condition condition;
+//      boost::condition condition;
     };
 
     Application* currentApplication = NULL;
@@ -58,18 +58,23 @@ namespace lost
       ApplicationEventPtr event = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(event);
 
-      boost::mutex applicationMutex;
-      boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
-      while (running)
-      {
-        hiddenMembers->condition.wait(applicationLock);
+//      boost::mutex applicationMutex;
+//      boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
+      while (running && WaitMessage()) {
+//        hiddenMembers->condition.wait(applicationLock);
+        MSG msg;
+        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+          TranslateMessage(&msg);
+          DispatchMessage(&msg);
+        }
         eventDispatcher->processEvents();
       }
     }
 
     void Application::shutdown()
     {
-      hiddenMembers->condition.notify_one();
+//      hiddenMembers->condition.notify_one();
+      PostThreadMessage(GetCurrentThreadId(), WM_NULL, 0, 0);
     }
 
     void Application::showMouse(bool visible)
@@ -78,7 +83,8 @@ namespace lost
 
     void Application::processEvents(const ProcessEventPtr& event)
     {
-      hiddenMembers->condition.notify_one();
+//      hiddenMembers->condition.notify_one();
+      PostThreadMessage(GetCurrentThreadId(), WM_NULL, 0, 0);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)

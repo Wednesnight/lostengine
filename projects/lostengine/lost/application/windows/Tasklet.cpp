@@ -26,6 +26,7 @@ namespace lost
 
     void Tasklet::start()
     {
+      init();
       hiddenMembers.reset(new TaskletHiddenMembers);
       hiddenMembers->thread.reset(new TaskletThread(this));
       hiddenMembers->thread->start();
@@ -35,7 +36,6 @@ namespace lost
     {
       isAlive = true;
       hiddenMembers->threadId = GetCurrentThreadId();
-      init();
       bool hasError = false;
       string errorMsg;
       try
@@ -61,21 +61,22 @@ namespace lost
 
               if(waitForEvents)
               {
-                if (window) WaitMessage();
-                  else eventDispatcher->waitForEvents();
+//                if (window) WaitMessage();
+//                  else eventDispatcher->waitForEvents();
+                eventDispatcher->waitForEvents();
               }
+/*
               MSG msg;
               while (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
               {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
               }
+*/
 
               framerate = clock.getElapsedAndUpdateOffset(offset);
             }
           }
-
-          shutdown();
         }
       }
       catch (std::exception& e)
@@ -86,7 +87,6 @@ namespace lost
 
       isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
-      cleanup();
       if (hasError)
       {
         ostringstream os;
@@ -103,11 +103,14 @@ namespace lost
         // wakeup
         if (waitForEvents)
         {
-          if (window) PostThreadMessage(hiddenMembers->threadId, WM_NOTIFY, 0, 0);
-            else eventDispatcher->wakeup();
+//          if (window) PostThreadMessage(hiddenMembers->threadId, WM_NOTIFY, 0, 0);
+//            else eventDispatcher->wakeup();
+          eventDispatcher->wakeup();
         }
         hiddenMembers->thread->wait();
       }
+      shutdown();
+      cleanup();
     }
 
     /**

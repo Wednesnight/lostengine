@@ -290,16 +290,16 @@ namespace lost
       // get a rendering context
       hiddenMembers->glContext = wglCreateContext(hiddenMembers->deviceContext);
 
-      // activate the OpenGL rendering context
-      wglMakeCurrent(hiddenMembers->deviceContext, hiddenMembers->glContext);
-
       // set window param to this
       SetWindowLongPtr(hiddenMembers->handle, GWLP_USERDATA, (LONG)this);
 
       // accept drag&drop
       DragAcceptFiles(hiddenMembers->handle, TRUE);
 
+      // initialize OpenGL rendering context
+      wglMakeCurrent(hiddenMembers->deviceContext, hiddenMembers->glContext);
       context.reset(new gl::Context);
+      wglMakeCurrent(NULL, NULL);
     }
 
     void Window::finalize()
