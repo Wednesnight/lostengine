@@ -11,7 +11,7 @@ uint32_t djb2Hash(const char* data)
   int32_t c;
 
   const unsigned char* str = reinterpret_cast<const unsigned char*> (data);
-  while (c = *str++)
+  while ((c = *str++))
   {
       hash = ((hash << 5) + hash) + c;
   }
