@@ -11,7 +11,6 @@
 
 #include <sstream>
 #include <stdexcept>
-#include <boost/bind.hpp>
 
 extern "C" {
   #include <jni.h>

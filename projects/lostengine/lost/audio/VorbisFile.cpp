@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include "lost/common/Logger.h"
 
-using namespace boost;
-
 namespace lost
 {
 namespace audio

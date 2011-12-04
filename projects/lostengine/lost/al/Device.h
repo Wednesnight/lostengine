@@ -2,14 +2,13 @@
 #define LOST_AL_DEVICE_H
 
 #include "lost/al/al.h"
-#include <boost/noncopyable.hpp>
 
 namespace lost
 {
 namespace al
 {
-
-  struct Device : private boost::noncopyable
+// FIXME: make non-copyable
+  struct Device
 {
   Device(const string& inDeviceId);
   Device(); // creates a default device

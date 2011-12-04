@@ -2,8 +2,6 @@
 #include "lost/audio/VorbisFile.h"
 #include "lost/common/Logger.h"
 
-using namespace boost;
-
 namespace lost
 {
 namespace audio
