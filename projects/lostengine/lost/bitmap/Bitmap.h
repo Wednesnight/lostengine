@@ -1,7 +1,7 @@
 #ifndef LOST_BITMAP_BITMAP_H
 #define LOST_BITMAP_BITMAP_H
 
-#include <boost/noncopyable.hpp>
+#include "lost/common/Disallow.h"
 #include "lost/common/Color.h"
 #include "lost/math/Rect.h"
 #include "lost/bitmap/Components.h"
@@ -13,7 +13,7 @@ namespace lost
 {
   namespace bitmap
   {  
-    struct Bitmap : private boost::noncopyable
+    struct Bitmap 
     {
       
       uint8_t*    data;   // points to the raw pixel data
@@ -184,6 +184,7 @@ namespace lost
       void premultiplyAlpha(); // multiplies each pixels color channels with its alpha channel.
       
     private:
+      DISALLOW_COPY_AND_ASSIGN(Bitmap);
       void destroy();
       bool loaded; // true if the image was loaded with the image library and data must be freed by it.
                    // false if data is just a chunk of memory and can simply be deleted
