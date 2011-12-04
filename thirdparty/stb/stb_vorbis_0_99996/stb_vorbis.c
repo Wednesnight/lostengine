@@ -456,7 +456,7 @@ extern int my_prof(int slot);
 //#define stb_prof my_prof
 
 #ifndef stb_prof
-#define stb_prof(x)  0
+#define stb_prof(x) 
 #endif
 
 #if defined(STB_VORBIS_NO_PUSHDATA_API)
