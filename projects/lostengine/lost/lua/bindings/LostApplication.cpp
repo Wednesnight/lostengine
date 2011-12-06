@@ -272,8 +272,6 @@ namespace lost
           .field("running", &Tasklet::running)
 //          .method("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
           .method("spawnTasklet",&Tasklet::spawnTasklet)
-          .method("getClipboardString", &Tasklet::getClipboardString)
-          .method("setClipboardString", &Tasklet::setClipboardString)
           .field("id", (int(*)(Tasklet*)) &Tasklet_id, (void(*)(Tasklet*, int)) &Tasklet_id);
     }
 

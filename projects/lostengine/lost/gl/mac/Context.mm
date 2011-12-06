@@ -28,6 +28,11 @@ namespace lost
         [hiddenMembers->glContext makeCurrentContext];
     }
 
+    void Context::clearCurrent()
+    {
+      [NSOpenGLContext clearCurrentContext];
+    }
+    
     void Context::swapBuffers()
     {
       [hiddenMembers->glContext flushBuffer];

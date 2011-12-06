@@ -1,3 +1,4 @@
+#include "lost/application/Tasklet.h"
 #include "lost/application/TaskletThread.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/common/Logger.h"

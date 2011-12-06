@@ -8,8 +8,7 @@
 #ifndef LOST_APPLICATION_TASKLETTHREAD_H
 #define LOST_APPLICATION_TASKLETTHREAD_H
 
-//#include "fhtagn/threads/tasklet.h"
-#include "lost/application/Tasklet.h"
+#include "lost/application/forward.h"
 #include "tinythread.h"
 
 namespace lost

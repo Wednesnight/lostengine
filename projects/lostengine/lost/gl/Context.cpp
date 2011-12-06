@@ -127,6 +127,7 @@ map<void*, Context*> glContext2lostGlContext;
     
     Context::~Context()
     {
+      clearCurrent();
       finalize();
       map<void*, Context*>::iterator pos;
       pos = glContext2lostGlContext.find(Context::getCurrentOsSpecific());

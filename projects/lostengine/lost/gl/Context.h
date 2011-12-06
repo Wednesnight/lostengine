@@ -82,6 +82,11 @@ namespace lost
       void makeCurrent();
 
       /**
+       * clear the thread's current context
+       */
+      void clearCurrent();
+
+      /**
        * swaps buffers :)
        */
       void swapBuffers();

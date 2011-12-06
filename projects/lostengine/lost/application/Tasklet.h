@@ -1,6 +1,7 @@
 #ifndef LOST_APPLICATION_TASKLET_H
 #define LOST_APPLICATION_TASKLET_H
 
+#include "lost/application/TaskletThread.h"
 #include "lost/resource/DefaultLoader.h"
 #include "lost/application/Queue.h"
 #include "lost/event/forward.h"
@@ -19,12 +20,8 @@ namespace lost
     struct Tasklet
     {
 	  protected:
-      /**
-       * forward declaration for platform specific stuff
-       */
-      struct TaskletHiddenMembers;
-      lost::shared_ptr<TaskletHiddenMembers> hiddenMembers;
-
+      lost::shared_ptr<TaskletThread> thread;
+      
       struct LuaStateHelper;
       lost::shared_ptr<LuaStateHelper> lsh;
 
@@ -40,13 +37,10 @@ namespace lost
       bool hasLuaKey;
 
 
-      virtual void init();    // reads main.lua if present and creates a window if desired; called from platform specific implementation
-      virtual void cleanup(); // cleanup all resources; called from platform specific implementation
-
-  	  virtual bool startup();                       // called once in run, returns this->running
-      virtual bool update(double deltaSeconds);     // called repeatedly in run, returns this->running
-      virtual void render();                        // called repeatedly in run
-      virtual void shutdown();                      // called once in run
+  	  virtual bool startup();                       // called before starting runloop, returns this->running
+      virtual bool update(double deltaSeconds);     // called repeatedly in runloop, returns this->running
+      virtual void render();                        // called repeatedly in runloop
+      virtual void shutdown();                      // called after finishing runloop
 
       void createWindow();
       void closeWindow(const WindowEventPtr& event);
@@ -89,13 +83,11 @@ namespace lost
 
       bool alive();         // tell application if tasklet is still alive      
 
-      void start(); // starts tasklet; platform specific implementation
+      void start(); // starts tasklet thread
+      void stop();  // tells tasklet thread to stop and shutdown
+
       void run();   // the tasklet run loop; platform specific implementation
-      void stop();  // tells tasklet to stop and shutdown; platform specific implementation
-      
-      string getClipboardString(); // platform specific implementation
-      bool setClipboardString(const string& str); // platform specific implementation
-      
+
       virtual void key(const application::KeyEventPtr& ev);
     };
 

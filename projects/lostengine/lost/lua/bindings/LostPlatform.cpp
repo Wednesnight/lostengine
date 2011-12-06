@@ -24,6 +24,8 @@ namespace lost
       p.function("currentTimeMilliSeconds", &currentTimeMilliSeconds);
       p.function("getResourcePath", &getResourcePath);
       p.function("getUserDataPath", &getUserDataPath);
+      p.function("getClipboardString", &getClipboardString);
+      p.function("setClipboardString", &setClipboardString);
     }
 
     void LostPlatform(lua_State* state)

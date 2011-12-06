@@ -90,19 +90,6 @@ namespace lost
       }
     }
 
-    bool Tasklet::setClipboardString(string const & str)
-    {
-      // TODO
-      throw runtime_error("not implemented");
-      return false;
-    }
-
-    string Tasklet::getClipboardString()
-    {
-      // TODO
-      throw runtime_error("not implemented");
-      return "";
-    }
   }
 }
 

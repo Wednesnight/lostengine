@@ -183,13 +183,13 @@ function TextInput:keyDown(event)
   elseif (event.key == lost.application.K_C or event.key == lost.application.K_X) and (event.ctrlDown or event.specialDown) then
     local str = self.textLayer:getSelection()
     if str ~= nil and string.len(str) > 0 then
-      tasklet:setClipboardString(str)
+      lost.platform.setClipboardString(str)
       if event.key == lost.application.K_X then
         self.textLayer:eraseSelection()
       end
     end
   elseif event.key == lost.application.K_V and (event.ctrlDown or event.specialDown) then
-    local str = tasklet:getClipboardString()
+    local str = lost.platform.getClipboardString()
     if string.len(str) > 0 then
       if self.textLayer:hasSelection() then
         self.textLayer:eraseSelection()

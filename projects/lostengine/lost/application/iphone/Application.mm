@@ -10,14 +10,6 @@ namespace lost
 {
 namespace application
 {
-string Tasklet::getClipboardString()
-{
-  return string("");
-}
-bool Tasklet::setClipboardString(const string& str)
-{
-  return true;
-}
 
 void Application::showMouse(bool v) {}
 

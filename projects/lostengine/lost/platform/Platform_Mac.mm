@@ -7,6 +7,7 @@
 #include "boost/filesystem.hpp"
 #import <Foundation/Foundation.h>
 #include "lost/common/Logger.h"
+#import <AppKit/NSPasteboard.h>
 
 namespace lost
 {
@@ -115,5 +116,33 @@ namespace lost
       pthread_setname_np(name.c_str());
       [pool release];
     }
+
+    string getClipboardString()
+    {
+      string str;
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];
+      if ([[pboard types] containsObject: NSStringPboardType]) {
+        NSString* s = [pboard stringForType: NSStringPboardType];
+        if (s != nil) {
+          str = string([s cStringUsingEncoding: NSUTF8StringEncoding]);
+        }
+      }
+      [pool drain];
+      return str;
+    }
+    
+    bool setClipboardString(const string& str)
+    {
+      NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+      NSPasteboard* pboard = [NSPasteboard pasteboardWithName: NSGeneralPboard];
+      [pboard declareTypes: [NSArray arrayWithObject: NSStringPboardType] owner: nil];
+      NSString* s = [[NSString alloc] initWithUTF8String: str.c_str()];
+      bool result = [pboard setString: s forType: NSStringPboardType];
+      [s release];
+      [pool drain];
+      return result;
+    }
+
   }
 }

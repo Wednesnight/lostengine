@@ -131,5 +131,19 @@ namespace lost
       prctl(PR_SET_NAME, name.c_str(), 0, 0, 0);
     }
 
+    bool setClipboardString(string const & str)
+    {
+      // TODO
+      throw runtime_error("not implemented");
+      return false;
+    }
+    
+    string getClipboardString()
+    {
+      // TODO
+      throw runtime_error("not implemented");
+      return "";
+    }
+
   }
 }

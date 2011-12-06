@@ -100,7 +100,7 @@ namespace lost
     {
     }
 
-    void Tasklet::init()
+    void Tasklet::start()
     {  
       // populate self into lua context
       lua->globals["tasklet"] = this;
@@ -151,23 +151,43 @@ namespace lost
       if(lsh->luaShutdown.type()==LUA_TFUNCTION) hasLuaShutdown=true; //else DOUT("no shutdown() found in Lua");
       lsh->luaKey = lua->globals["key"];
       if(lsh->luaKey.type()==LUA_TFUNCTION) hasLuaKey=true; //else DOUT("no key() found in Lua");
+
+      thread.reset(new TaskletThread(this));
+      thread->start();
     }
 
-    void Tasklet::cleanup()
+    void Tasklet::stop()
     {
-      // first: clear the dispatcher/callbacks and cleanup all lua callback resources
-      eventDispatcher->clear();
-      fontManager.reset();
-      lsh.reset();
-      clearNode.reset();
-      renderNode.reset();
-      uiNode.reset();
-      updateQueue.reset();
-      loader.reset(); // loader is also present in lua state, so kill it first
-      eventDispatcher.reset(); 
-      if (window) window->context->cleanup();
-      lua.reset();
-      if (window) delete window;
+      if (isAlive)
+      {
+        thread->stop();
+        // wakeup
+        if (waitForEvents) {
+          eventDispatcher->wakeup();
+        }
+        thread->wait();
+      }
+      else
+      {
+        // make sure that our GL context is the current context
+        if(window != NULL)
+        {
+          window->context->makeCurrent();
+        }
+        // first: clear the dispatcher/callbacks and cleanup all lua callback resources
+        eventDispatcher->clear();
+        fontManager.reset();
+        lsh.reset();
+        clearNode.reset();
+        renderNode.reset();
+        uiNode.reset();
+        updateQueue.reset();
+        loader.reset(); // loader is also present in lua state, so kill it first
+        eventDispatcher.reset(); 
+        if (window) window->context->cleanup();
+        lua.reset();
+        if (window) delete window;
+      }
     }
 
     void Tasklet::render()

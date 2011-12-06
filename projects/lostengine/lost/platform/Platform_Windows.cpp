@@ -165,5 +165,39 @@ namespace lost
        }
     }
 
+    /**
+     see: http://www.codeproject.com/KB/clipboard/clipboard_faq.aspx
+     */
+    bool setClipboardString(const string& str) {
+      bool result = false;
+      if(OpenClipboard(NULL)) {
+	      HGLOBAL clipbuffer;
+	      char * buffer;
+	      EmptyClipboard();
+	      clipbuffer = GlobalAlloc(GMEM_DDESHARE, str.size()+1);
+	      buffer = (char*)GlobalLock(clipbuffer);
+        strcpy(buffer, str.c_str());
+	      GlobalUnlock(clipbuffer);
+	      result = SetClipboardData(CF_TEXT,clipbuffer) != NULL;
+	      CloseClipboard();
+      }
+      return result;
+    }
+    
+    /**
+     see: http://www.codeproject.com/KB/clipboard/clipboard_faq.aspx
+     */
+    string getClipboardString() {
+      string result;
+      if (OpenClipboard(NULL)) {
+	      HANDLE hData = GetClipboardData(CF_TEXT);
+	      char * buffer = (char*)GlobalLock(hData);
+	      result = buffer;
+	      GlobalUnlock(hData);
+	      CloseClipboard();
+      }
+      return result;
+    }
+    
   }
 }
