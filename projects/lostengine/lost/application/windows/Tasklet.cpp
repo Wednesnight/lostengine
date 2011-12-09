@@ -9,8 +9,6 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <fhtagn/threads/tasklet.h>
-
 using namespace std;
 
 namespace lost
@@ -18,99 +16,61 @@ namespace lost
   namespace application
   {
 
-    struct Tasklet::TaskletHiddenMembers
-    {
-      lost::shared_ptr<TaskletThread> thread;
-      unsigned int threadId;
-    };
-
-    void Tasklet::start()
-    {
-      init();
-      hiddenMembers.reset(new TaskletHiddenMembers);
-      hiddenMembers->thread.reset(new TaskletThread(this));
-      hiddenMembers->thread->start();
-    }
-
-    void Tasklet::run()
-    {
+    void Tasklet::run() {
+      platform::setThreadName("'"+name+"' (tasklet)");
       isAlive = true;
-      hiddenMembers->threadId = GetCurrentThreadId();
       bool hasError = false;
-      string errorMsg;
-      try
-      {
+      string errorMsg = "";
+
+      try {
+
         // make sure that our GL context is the current context
-        if(window != NULL)
-        {
+        if(window != NULL) {
           window->context->makeCurrent();
         }
 
         startup();
-		    if (running)
-        {
+        if (running) {
+
           double framerate = config.framerate;
           double offset = clock.getTime();
 
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running)
-          {
+          while (thread->get_state() == TaskletThread::RUNNING && running) {
             processEvents();
             if (running) {
               update(framerate);
               render();
-
-              if(waitForEvents)
-              {
-//                if (window) WaitMessage();
-//                  else eventDispatcher->waitForEvents();
-                eventDispatcher->waitForEvents();
-              }
-/*
-              MSG msg;
-              while (PeekMessage(&msg, NULL, NULL, NULL, PM_REMOVE))
-              {
-                TranslateMessage(&msg);
-                DispatchMessage(&msg);
-              }
-*/
+              if(waitForEvents) { eventDispatcher->waitForEvents(); }
 
               framerate = clock.getElapsedAndUpdateOffset(offset);
             }
           }
+
+          shutdown();
+
+          // unbind GL context
+          if(window != NULL) {
+            window->context->clearCurrent();
+          }
         }
       }
-      catch (std::exception& e)
+      catch(std::exception& ex)
       {
-        errorMsg = e.what();
+        errorMsg = ex.what();
         hasError = true;
       }
-
+      catch (...) {
+        errorMsg = "<catch all>";
+        hasError = true;
+      }
       isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
-      if (hasError)
-      {
-        ostringstream os;
-        os << "Tasklet terminated with error: " << errorMsg;
-        throw runtime_error(os.str());
-      }
-    }
+      if (hasError) {
 
-    void Tasklet::stop()
-    {
-      if (isAlive)
-      {
-        hiddenMembers->thread->stop();
-        // wakeup
-        if (waitForEvents)
-        {
-//          if (window) PostThreadMessage(hiddenMembers->threadId, WM_NOTIFY, 0, 0);
-//            else eventDispatcher->wakeup();
-          eventDispatcher->wakeup();
-        }
-        hiddenMembers->thread->wait();
+        std::ostringstream os;
+        os << "Tasklet '"<<name<<"' terminated with error: " <<errorMsg;
+        throw std::runtime_error(os.str());
       }
-      shutdown();
-      cleanup();
     }
 
   }

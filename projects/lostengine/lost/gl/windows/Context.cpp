@@ -44,6 +44,11 @@ namespace lost
       }
     }
 
+    void Context::clearCurrent()
+    {
+      wglMakeCurrent(NULL, NULL);
+    }
+
     void Context::swapBuffers()
     {
       //wglSwapLayerBuffers(hiddenMembers->glDeviceContext, WGL_SWAP_MAIN_PLANE);

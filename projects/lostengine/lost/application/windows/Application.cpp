@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <boost/thread/condition.hpp>
 
 using namespace std;
 
@@ -19,7 +18,7 @@ namespace lost
 
     struct Application::ApplicationHiddenMembers
     {
-//      boost::condition condition;
+      DWORD threadId;
     };
 
     Application* currentApplication = NULL;
@@ -43,6 +42,7 @@ namespace lost
 
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
+      hiddenMembers->threadId = GetCurrentThreadId();
     }
 
     void Application::finalize()
@@ -58,10 +58,7 @@ namespace lost
       ApplicationEventPtr event = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(event);
 
-//      boost::mutex applicationMutex;
-//      boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
       while (running && WaitMessage()) {
-//        hiddenMembers->condition.wait(applicationLock);
         MSG msg;
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
           TranslateMessage(&msg);
@@ -73,8 +70,7 @@ namespace lost
 
     void Application::shutdown()
     {
-//      hiddenMembers->condition.notify_one();
-      PostThreadMessage(GetCurrentThreadId(), WM_NULL, 0, 0);
+      PostThreadMessage(hiddenMembers->threadId, WM_NULL, 0, 0);
     }
 
     void Application::showMouse(bool visible)
@@ -83,8 +79,7 @@ namespace lost
 
     void Application::processEvents(const ProcessEventPtr& event)
     {
-//      hiddenMembers->condition.notify_one();
-      PostThreadMessage(GetCurrentThreadId(), WM_NULL, 0, 0);
+      PostThreadMessage(hiddenMembers->threadId, WM_NULL, 0, 0);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
