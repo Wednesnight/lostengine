@@ -22,6 +22,7 @@
   #endif
 
 #include <stdint.h>
+#include "lost/types.h"
 
 #define LOST_USE_EASTL
 #ifndef LOST_USE_EASTL

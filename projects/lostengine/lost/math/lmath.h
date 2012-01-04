@@ -6,7 +6,6 @@
 
 #include <cmath>
 #include <math.h>
-#include <boost/shared_array.hpp>
 
 namespace lost
 {
@@ -18,7 +17,7 @@ namespace lost
       return (in1 > in2) ? in1 : in2;
     }
 #endif
-	  inline float max(const boost::shared_array<float> inArray, int inLength)
+	  inline float max(const lost::shared_array<float> inArray, int inLength)
     {
       float result = (inLength > 0) ? inArray[0] : 0;
       for (int idx = 1; idx < inLength; ++idx)

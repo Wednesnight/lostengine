@@ -194,7 +194,7 @@ namespace slub {
           reg = registry::get(*type);
         }
         if (reg != NULL) {
-          wrapper<T*, std::tr1::shared_ptr<T>*>* w = wrapper<T*, std::tr1::shared_ptr<T>*>::create(L, type);
+          wrapper<T*, std::tr1::shared_ptr<T>*>* w = wrapper<T*, std::tr1::shared_ptr<T>*>::create(L, *type);
           w->holder = new std::tr1::shared_ptr<T>(value);
           w->ref = value.get();
           w->gc = true;

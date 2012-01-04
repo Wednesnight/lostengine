@@ -17,9 +17,9 @@ struct AABB : MESHTYPE
   AABB(const math::AABB& inAABB)
   {
     this->drawMode = GL_LINES;
-    boost::uint32_t numLines = 12;
-    boost::uint32_t numVertices = 8;
-    boost::uint32_t numIndices = numLines*2;
+    u32 numLines = 12;
+    u32 numVertices = 8;
+    u32 numIndices = numLines*2;
     
     this->indices(true);
     this->vertices(true);
