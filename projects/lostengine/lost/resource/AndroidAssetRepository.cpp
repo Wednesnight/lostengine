@@ -10,7 +10,7 @@ namespace lost
   namespace resource
   {
     
-    AndroidAssetRepository::AndroidAssetRepository(AAssetManager* assetManager, const boost::filesystem::path& subdir)
+    AndroidAssetRepository::AndroidAssetRepository(AAssetManager* assetManager, const lost::fs::Path& subdir)
     : assetManager(assetManager),
       subdir(subdir),
       apk(NULL)
@@ -23,10 +23,10 @@ namespace lost
       }
     }
 
-    common::DataPtr AndroidAssetRepository::load(const boost::filesystem::path& filename)
+    common::DataPtr AndroidAssetRepository::load(const lost::fs::Path& filename)
     {
       common::DataPtr result;
-      boost::filesystem::path f = subdir / filename;
+      lost::fs::Path f = subdir / filename;
 
       DOUT("loading: " << filename);
       
@@ -85,7 +85,7 @@ namespace lost
     bool AndroidAssetRepository::exists(string& filename)
     {
       bool result = false;
-      boost::filesystem::path f = subdir / filename;
+      lost::fs::Path f = subdir / filename;
       AAsset* asset = AAssetManager_open(assetManager, f.string().c_str(), AASSET_MODE_UNKNOWN);
       if (asset != NULL) {
         result = true;

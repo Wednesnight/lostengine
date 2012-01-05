@@ -1,7 +1,6 @@
 #include "lost/application/TaskletConfig.h"
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
-#include <boost/filesystem.hpp>
 #include "lost/resource/Loader.h"
 #include "lost/common/Logger.h"
 
@@ -64,7 +63,7 @@ void parse(slub::reference config, TaskletConfig* tc)
 bool TaskletConfig::load(lua::StatePtr interpreter, resource::LoaderPtr loader)
 {
   bool result = false;
-  if(loader->exists("config.lua"))
+  if(loader->exists(lost::fs::Path("config.lua")))
   {
     interpreter->doString("__tasklet_config = require(\"config\")");
     slub::reference config = interpreter->globals["__tasklet_config"];

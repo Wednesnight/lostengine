@@ -200,6 +200,7 @@
 		8A40684CD04CF09E89A7E416 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F2598C7078E9D4789A9DDC8 /* OpenAL.framework */; };
 		8A518C56A145A2CA383F6C93 /* TestLostGlHostBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE9B3345DAD42208ED12B8E4 /* TestLostGlHostBuffer.cpp */; };
 		8A67590CDBF6BE09BB1B8497 /* lmathlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DC834D221B3574C77C04515 /* lmathlib.c */; };
+		8B7384958CBA4DF4B91B158E /* Path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99A6C222044F915922C91056 /* Path.cpp */; };
 		8C0A7C26AF20EDA6B9626DF3 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = 3C8C664B8E4092AA64019ED6 /* file.c */; };
 		8D1B7A8B2BB9FDA656AD0030 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = EE3D5508683953A9F040403D /* ftcache.c */; };
 		8D9AEBA2BBD9FA5567211746 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3FD63E73CE8AC2231C61F62F /* main.cpp */; };
@@ -289,6 +290,7 @@
 		CB02EDD61ED32AE557DC544A /* liolib.c in Sources */ = {isa = PBXBuildFile; fileRef = DBF12FF75E53932FF55A9F41 /* liolib.c */; };
 		CB54B5C7BD16E53150F41F8F /* ltable.c in Sources */ = {isa = PBXBuildFile; fileRef = 1ABD8576FCE8AD41F81F7A1D /* ltable.c */; };
 		CC2DEEDE83A22C7448583D3C /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2421BB549B85E543D5BC4AA8 /* Quat.cpp */; };
+		CC79920BE65F75CB39591E25 /* LostFs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD4A2E926AF64363417FC891 /* LostFs.cpp */; };
 		CE1A547DA535DCE6B1FCFE29 /* b2DistanceJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2C7791649B4625B2D242F76 /* b2DistanceJoint.cpp */; };
 		CF4F4985310258C8DB7627D8 /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F489619B6FDD3A1C6FBBAF41 /* FrameBuffer.cpp */; };
 		D019DF9714856B98CCFA0C73 /* DeferredTestResult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC5B44E32B026DF258BD9150 /* DeferredTestResult.cpp */; };
@@ -463,6 +465,7 @@
 		21B70ACB48E697030FB6AEC5 /* b2FrictionJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2FrictionJoint.cpp; sourceTree = "<group>"; };
 		2243F7EBF4DF13CEC1A871C8 /* TestLostMathVec4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestLostMathVec4.cpp; sourceTree = "<group>"; };
 		2252535ED746F618F484BE50 /* LostEngine.gyp */ = {isa = PBXFileReference; lastKnownFileType = text; path = LostEngine.gyp; sourceTree = "<group>"; };
+		22AA0BDB216AB769A7799A5E /* LostFs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LostFs.h; sourceTree = "<group>"; };
 		23296E1D66E0EA0C3BDEBC8B /* inftrees.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = inftrees.c; sourceTree = "<group>"; };
 		2421BB549B85E543D5BC4AA8 /* Quat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Quat.cpp; sourceTree = "<group>"; };
 		243E32ADF901B5252F3FA61E /* Application.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Application.mm; sourceTree = "<group>"; };
@@ -627,6 +630,7 @@
 		9698DC6B2F80342142C9F014 /* LostBox2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostBox2D.cpp; sourceTree = "<group>"; };
 		98A5C5287A3FF9E9FB4C8C3A /* UniformBlock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UniformBlock.cpp; sourceTree = "<group>"; };
 		98CF0DB27013B90829A6013A /* lstate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = lstate.c; sourceTree = "<group>"; };
+		99A6C222044F915922C91056 /* Path.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Path.cpp; sourceTree = "<group>"; };
 		9A3AEE707ECC20C96FD7CE36 /* b2CircleShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2CircleShape.cpp; sourceTree = "<group>"; };
 		9C6F92E8E8F269430AC45B08 /* LostGL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostGL.cpp; sourceTree = "<group>"; };
 		9CBFA7E6E6B1E3AADDCC91A9 /* Platform_Windows.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Platform_Windows.cpp; sourceTree = "<group>"; };
@@ -681,6 +685,7 @@
 		C82BB197167EE9BCAF2FBAF9 /* TestDetails.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestDetails.cpp; sourceTree = "<group>"; };
 		C8AD245902B3DC6282CB3DE8 /* TestLostMathMatrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestLostMathMatrix.cpp; sourceTree = "<group>"; };
 		C98CD3DE58AF42575A284930 /* cff.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cff.c; sourceTree = "<group>"; };
+		CB1813D964C01BE9888502CC /* Path.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
 		CB20BD0C4BC0A6B25D95FEB6 /* Glyph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Glyph.cpp; sourceTree = "<group>"; };
 		CD959BA1C788E01B0C834615 /* TestGlUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TestGlUtils.cpp; sourceTree = "<group>"; };
 		CE0FE7DA4CFD4904F93CE417 /* codecvt_error_category.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = codecvt_error_category.cpp; sourceTree = "<group>"; };
@@ -757,6 +762,7 @@
 		FA6242B62084F532F085120A /* b2Contact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2Contact.cpp; sourceTree = "<group>"; };
 		FAEB8ABBC988AC9007ABB66B /* Data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Data.cpp; sourceTree = "<group>"; };
 		FCDE918E37F59BF41EB9EE08 /* Camera2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera2D.cpp; sourceTree = "<group>"; };
+		FD4A2E926AF64363417FC891 /* LostFs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostFs.cpp; sourceTree = "<group>"; };
 		FEF7424BA09396C60465E44F /* MemoryOutStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryOutStream.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1076,6 +1082,15 @@
 			path = mac;
 			sourceTree = "<group>";
 		};
+		3911F4EBD03BD0C9FE88AC0D /* fs */ = {
+			isa = PBXGroup;
+			children = (
+				99A6C222044F915922C91056 /* Path.cpp */,
+				CB1813D964C01BE9888502CC /* Path.h */,
+			);
+			path = fs;
+			sourceTree = "<group>";
+		};
 		3A3B79315397E1451DEF5309 /* Build */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,6 +1156,7 @@
 				5BBE9ABA84FEF6A7E954A23A /* common */,
 				09A8C0CF286B5BEDBD820B2A /* event */,
 				C3B79202E6AE4C0ED0C58FC5 /* font */,
+				3911F4EBD03BD0C9FE88AC0D /* fs */,
 				3CFE5DDC2AE02E4C310D9C93 /* gl */,
 				F10A7D5CC91D3F0C9A8ED739 /* lua */,
 				DC43DBFEEDAE7969321F6BE5 /* math */,
@@ -1644,6 +1660,8 @@
 				0121FB25DE48B0E849297DCC /* LostCommon.cpp */,
 				F469B6ACFD1AC8EBD1460085 /* LostEvent.cpp */,
 				4C345291D0A769A4D810AB56 /* LostFont.cpp */,
+				FD4A2E926AF64363417FC891 /* LostFs.cpp */,
+				22AA0BDB216AB769A7799A5E /* LostFs.h */,
 				9C6F92E8E8F269430AC45B08 /* LostGL.cpp */,
 				E9D5CAA2CB3B3FF31B03076F /* LostLua.cpp */,
 				9351EE9750CA93F8B5F9A8ED /* LostMath.cpp */,
@@ -1999,6 +2017,7 @@
 				6593DEF64C122C120C7144C3 /* TrueTypeFont.cpp in Sources */,
 				D9E4D547DCA1C9274BAA4D35 /* Face.cpp in Sources */,
 				42CC8EBD2E75741E49DB4C7B /* Library.cpp in Sources */,
+				8B7384958CBA4DF4B91B158E /* Path.cpp in Sources */,
 				FED80B3511A7257AF3DD9CA4 /* Buffer.cpp in Sources */,
 				89C55C4C534ADFE22012172A /* BufferLayout.cpp in Sources */,
 				94EE65F580398399BE215C66 /* Context.cpp in Sources */,
@@ -2030,6 +2049,7 @@
 				D607F05D6B0BDEFEBDE031BB /* LostCommon.cpp in Sources */,
 				E1F1ECC66A7D367C1519DB9B /* LostEvent.cpp in Sources */,
 				5AA9A62AFCE6D3266E23CB1C /* LostFont.cpp in Sources */,
+				CC79920BE65F75CB39591E25 /* LostFs.cpp in Sources */,
 				7E678C2F45A3E74AB4859317 /* LostGL.cpp in Sources */,
 				5A1E2F8C2A7F92DE8A667C9E /* LostLua.cpp in Sources */,
 				08989995A08462549866AAFB /* LostMath.cpp in Sources */,
@@ -2471,7 +2491,6 @@
 		4D044C61D7D9FED4E4FCDE30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INTERMEDIATE_DIR = "$(PROJECT_DERIVED_FILE_DIR)/$(CONFIGURATION)";
 				SHARED_INTERMEDIATE_DIR = "$(SYMROOT)/DerivedSources/$(CONFIGURATION)";
 			};
@@ -2480,7 +2499,6 @@
 		B82F28950A4779A36BCE753E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INTERMEDIATE_DIR = "$(PROJECT_DERIVED_FILE_DIR)/$(CONFIGURATION)";
 				SHARED_INTERMEDIATE_DIR = "$(SYMROOT)/DerivedSources/$(CONFIGURATION)";
 			};

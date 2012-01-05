@@ -1,28 +1,24 @@
-#include <boost/filesystem.hpp>
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/resource/Helper.h"
-
+//#include "lost/fs/Path.h"
 namespace lost
 {
   namespace resource
   {
-
-    using namespace boost::filesystem;
-
-    FilesystemRepository::FilesystemRepository(const boost::filesystem::path& inRootDir)
+    FilesystemRepository::FilesystemRepository(const lost::fs::Path& inRootDir)
     :rootDirectory(inRootDir.string().c_str())
     {
     }
 
-    common::DataPtr FilesystemRepository::load( const boost::filesystem::path& relativePath)
+    common::DataPtr FilesystemRepository::load( const lost::fs::Path& relativePath)
     {
-      boost::filesystem::path absolutePath = path(rootDirectory) / relativePath;
+      lost::fs::Path absolutePath = lost::fs::Path(rootDirectory) / relativePath;
       return loadFromAbsolutePath(absolutePath.string().c_str());;
     }
 
     bool FilesystemRepository::exists(string& inOutRelativePath)
     {
-      boost::filesystem::path absolutePath = path(rootDirectory) / inOutRelativePath;
+      lost::fs::Path absolutePath = lost::fs::Path(rootDirectory) / inOutRelativePath;
       bool exists = fileExists(absolutePath.string().c_str());
       if (exists) {
         inOutRelativePath = absolutePath.string().c_str();

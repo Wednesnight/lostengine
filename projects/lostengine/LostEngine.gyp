@@ -575,6 +575,10 @@
         'lost/font/freetype/Face.cpp',
         'lost/font/freetype/Library.cpp',
 
+        # fs
+        'lost/fs/Path.cpp',
+        'lost/fs/Path.h',
+
         # gl
         'lost/gl/Buffer.cpp',
         'lost/gl/BufferLayout.cpp',
@@ -619,6 +623,8 @@
         'lost/lua/bindings/LostCommon.cpp',
         'lost/lua/bindings/LostEvent.cpp',
         'lost/lua/bindings/LostFont.cpp',
+        'lost/lua/bindings/LostFs.h',
+        'lost/lua/bindings/LostFs.cpp',
         'lost/lua/bindings/LostGL.cpp',
         'lost/lua/bindings/LostLua.cpp',
         'lost/lua/bindings/LostMath.cpp',

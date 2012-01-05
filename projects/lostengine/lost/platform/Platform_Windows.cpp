@@ -6,7 +6,6 @@
 #include <shlwapi.h>
 #include <iostream>
 #include <time.h>
-#include <boost/filesystem.hpp>
 
 namespace lost
 {
@@ -66,7 +65,7 @@ namespace lost
       return (double)(timevalue.QuadPart / 10);
     }
 
-    boost::filesystem::path getApplicationDirectory()
+    lost::fs::Path getApplicationDirectory()
     {
       string result;
       string l_drive;
@@ -78,22 +77,22 @@ namespace lost
       PathAddBackslashA( l_path );
       result = reinterpret_cast<char*>(l_path);
 
-      return boost::filesystem::path(result);
+      return lost::fs::Path(result);
     }
 
-    boost::filesystem::path getApplicationFilename( bool excludeExtension )
+    lost::fs::Path getApplicationFilename( bool excludeExtension )
     {
       string l_filename;
       string l_extension;
 
       splitApplicationPath( NULL, NULL, &l_filename, &l_extension );
-      return boost::filesystem::path(
+      return lost::fs::Path(
         (!excludeExtension && !l_extension.empty()) ? l_filename.append( l_extension ) : l_filename);
     }
 
-    boost::filesystem::path buildResourcePath( const string& filename )
+    lost::fs::Path buildResourcePath( const string& filename )
     {
-      boost::filesystem::path result(getApplicationDirectory() / filename);
+      lost::fs::Path result(getApplicationDirectory() / filename);
 
       FILE *l_filecheck;
       if (fopen_s(&l_filecheck, result.string().c_str(), "r") == 0) fclose( l_filecheck );
@@ -102,14 +101,14 @@ namespace lost
       return result;
     }
 
-    boost::filesystem::path getResourcePath()
+    lost::fs::Path getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    boost::filesystem::path getUserDataPath()
+    lost::fs::Path getUserDataPath()
     {
-      boost::filesystem::path result;
+      lost::fs::Path result;
       char l_path[MAX_PATH];
 
       if (SUCCEEDED(SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, l_path)))
@@ -119,9 +118,9 @@ namespace lost
       return result;
     }
 
-    boost::filesystem::path buildUserDataPath( const string& filename )
+    lost::fs::Path buildUserDataPath( const string& filename )
     {
-      boost::filesystem::path result = getUserDataPath() / filename;
+      lost::fs::Path result = getUserDataPath() / filename;
 
       FILE *l_filecheck;
       if (fopen_s(&l_filecheck, result.string().c_str(), "r") == 0) fclose( l_filecheck );

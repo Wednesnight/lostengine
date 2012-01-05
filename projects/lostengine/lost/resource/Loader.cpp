@@ -17,7 +17,7 @@ namespace lost
     {
     }
 
-    common::DataPtr Loader::load( const boost::filesystem::path& inPath)
+    common::DataPtr Loader::load( const lost::fs::Path& inPath)
     {
       common::DataPtr result;
 
@@ -38,7 +38,7 @@ namespace lost
       return result;
     }
 
-    string Loader::locate(const boost::filesystem::path& inPath)
+    string Loader::locate(const lost::fs::Path& inPath)
     {
       string result = inPath.string().c_str();
       for (unsigned int idx = 0; idx < repositories.size(); ++idx)
@@ -49,7 +49,7 @@ namespace lost
       return result;
     }
 
-    bool Loader::exists(const boost::filesystem::path& inPath)
+    bool Loader::exists(const lost::fs::Path& inPath)
     {
       bool result = false;
       string p = inPath.string().c_str();

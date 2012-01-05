@@ -2,7 +2,6 @@
 #include "lost/gl/FragmentShader.h"
 #include "lost/gl/VertexShader.h"
 #include <stdexcept>
-#include <boost/filesystem.hpp>
 #include "lost/common/Data.h"
 #include "lost/common/Logger.h"
 #include <iomanip>

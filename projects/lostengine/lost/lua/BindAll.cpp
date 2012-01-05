@@ -11,6 +11,7 @@
 #include "lost/lua/bindings/LostCommon.h"
 #include "lost/lua/bindings/LostEvent.h"
 #include "lost/lua/bindings/LostFont.h"
+#include "lost/lua/bindings/LostFs.h"
 #include "lost/lua/bindings/LostGL.h"
 #include "lost/lua/bindings/LostLua.h"
 #include "lost/lua/bindings/LostMath.h"
@@ -51,6 +52,7 @@ namespace lost
       // other packages derive from Event package so register that first
       LostCommon(state);
       LostEvent(state);
+      LostFs(state);
       LostApplication(state);
 #ifndef ANDROID
       LostAudio(state);

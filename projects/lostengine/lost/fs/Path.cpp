@@ -1,0 +1,63 @@
+#include "lost/fs/Path.h"
+#include "lost/common/Logger.h"
+#include "boost/filesystem.hpp"
+
+namespace lost 
+{
+namespace fs
+{
+
+Path::Path() 
+{
+//  DOUT("");
+//  _path = new boost::filesystem::path;
+}
+
+Path::Path(const lost::string& sp)
+  : _path(sp)
+{
+//  DOUT("");
+//  _path = new boost::filesystem::path(sp);  
+}
+
+Path::~Path() 
+{
+//  DOUT("");
+//  delete _path;
+}
+
+void Path::operator /= (const Path& other)
+{
+  _path /= other._path;
+}
+
+lost::string Path::string() const
+{
+  return lost::string(_path.c_str());
+}
+
+lost::string Path::native() const
+{
+  return lost::string(_path.native().c_str());
+}
+
+  
+Path operator / (const Path& left, const Path& right)
+{
+  Path result(left.string());
+  result /= right;
+  return result;
+}
+
+bool exists(const Path& path)
+{
+  return boost::filesystem::exists(path._path);
+}
+  
+bool create_directories(const Path& path)
+{
+  return boost::filesystem::create_directories(path._path);
+}
+
+}
+}

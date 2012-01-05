@@ -4,7 +4,6 @@
 #include "lost/common/Logger.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/platform/Platform.h"
-#include <boost/filesystem.hpp>
 
 #ifdef ANDROID
 #include "lost/resource/AndroidAssetRepository.h"
@@ -24,7 +23,7 @@ namespace lost
     {
 #ifndef ANDROID
       resource::LoaderPtr loader = resource::DefaultLoader::create();
-      boost::filesystem::path taskletPath(platform::getResourcePath());
+      lost::fs::Path taskletPath(platform::getResourcePath());
       taskletPath /= relativePathToTaskletInResourceDir;
       resource::RepositoryPtr taskletDir(new resource::FilesystemRepository(taskletPath));
 #else
