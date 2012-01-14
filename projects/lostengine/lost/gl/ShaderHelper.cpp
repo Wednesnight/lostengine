@@ -183,7 +183,7 @@ void broken(const string& source)
   while(!s.eof())
   {
     getline(s, line);
-    EOUT(std::setw(4) << lineNumber << " : " << line.c_str());
+    EOUT(lineNumber << " : " << line.c_str());
     lineNumber++;
   }
 }

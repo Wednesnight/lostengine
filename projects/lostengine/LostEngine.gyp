@@ -4,7 +4,6 @@
     'boost_path': '../../thirdparty/boost/boost_1_44_0',
     'box2d_path': '../../thirdparty/box2d/box2d_2_1_2',
     'eastl_path': '../../thirdparty/eastl/fe4d920',
-    'fhtagn_path': '../../thirdparty/fhtagn/fhtagn-0.3',
     'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
     'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
     'glee_path': '../../thirdparty/glee/glee_5_21',
@@ -15,6 +14,7 @@
     'opengl_path': '../../thirdparty/OpenGL',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
     'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
+    'utfcpp_path': '../../thirdparty/utfcpp/utfcpp_2_3_1',
     'tinythread_path': '../../thirdparty/tinythread/1_0/source',
     'unittest++_path': '../../thirdparty/UnitTest++',
     'zlib_path': '../../thirdparty/zlib/zlib_1_2_3',
@@ -472,7 +472,6 @@
         '<@(boost_path)',
         '<@(box2d_path)/Box2D',
         '<@(eastl_path)/include',
-        '<@(fhtagn_path)',
         '<@(freetype2_path)/include',
         '<@(giflib_path)/lib',
         '<@(glee_path)/include',
@@ -480,6 +479,7 @@
         '<@(lua_path)/include',
         '<@(stb_image_path)',
         '<@(stb_vorbis_path)',
+        '<@(utfcpp_path)/source',
         '<@(tinythread_path)',
         '<@(zlib_path)/include',
         '<@(zziplib_path)',
@@ -546,15 +546,30 @@
         'lost/camera/Camera3D.cpp',
 
         # common
+        'lost/common/ArrayDeleter.h',
+        'lost/common/Color.h',
         'lost/common/Color.cpp',
+        'lost/common/ColorGradient.h',
         'lost/common/ColorGradient.cpp',
+        'lost/common/ColorPoint.h',
+        'lost/common/Data.h',
         'lost/common/Data.cpp',
+        'lost/common/Disallow.h',
         'lost/common/eastlAllocators.cpp',
+        'lost/common/eastlStreamSupport.h',
         'lost/common/eastlStreamSupport.cpp',
+        'lost/common/forward.h',
+        'lost/common/Hash.h',
         'lost/common/Hash.cpp',
+        'lost/common/io.h',
         'lost/common/io.cpp',
+        'lost/common/Logger.h',
         'lost/common/Logger.cpp',
+        'lost/common/NullDeleter.h',
+        'lost/common/Profiler.h',
         'lost/common/Profiler.cpp',
+        'lost/common/SpiritHelpers.h',
+        'lost/common/StringStream.h',
         'lost/common/StringStream.cpp',
 
         # event
@@ -564,15 +579,29 @@
         'lost/event/Pool.cpp',
 
         # font
+        'lost/font/BitmapFont.h',
         'lost/font/BitmapFont.cpp',
+        'lost/font/BreakMode.h',
+        'lost/font/Font.h',
         'lost/font/Font.cpp',
+        'lost/font/FontManager.h',
         'lost/font/FontManager.cpp',
+        'lost/font/forward.h',
+        'lost/font/Glyph.h',
         'lost/font/Glyph.cpp',
+        'lost/font/Range.h',
+        'lost/font/Render.h',
         'lost/font/Render.cpp',
+        'lost/font/RenderedText.h',
         'lost/font/RenderedText.cpp',
+        'lost/font/TextBuffer.h',
         'lost/font/TextBuffer.cpp',
+        'lost/font/TrueTypeFont.h',
         'lost/font/TrueTypeFont.cpp',
+        'lost/font/freetype/Face.h',
         'lost/font/freetype/Face.cpp',
+        'lost/font/freetype/forward.h',
+        'lost/font/freetype/Library.h',
         'lost/font/freetype/Library.cpp',
 
         # fs
@@ -691,6 +720,9 @@
         'lost/rg/ScissorRect.cpp',
         'lost/rg/ScissorStack.cpp',
 
+        # text
+        'lost/text/types.h',
+        
         # time
         'lost/time/Clock.cpp',
         'lost/time/ThreadedTimerScheduler.cpp',
@@ -755,18 +787,13 @@
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp',
         '<@(box2d_path)/Box2D/Box2D/Dynamics/Joints/b2WeldJoint.cpp',
 
-        # thirdparty/fhtagn
-        '<@(eastl_path)/src/allocator.cpp',
-        '<@(eastl_path)/src/assert.cpp',
-        '<@(eastl_path)/src/fixed_pool.cpp',
-        '<@(eastl_path)/src/hashtable.cpp',
-        '<@(eastl_path)/src/red_black_tree.cpp',
-        '<@(eastl_path)/src/string.cpp',
-
-        # thirdparty/fhtagn
-        '<@(fhtagn_path)/fhtagn/text/decoders.cpp',
-        '<@(fhtagn_path)/fhtagn/text/encoders.cpp',
-        '<@(fhtagn_path)/fhtagn/text/transcoding.cpp',
+        # thirdparty/eastl
+        '<@(eastl_path)/src/allocator.cpp',        
+        '<@(eastl_path)/src/assert.cpp',        
+        '<@(eastl_path)/src/fixed_pool.cpp',        
+        '<@(eastl_path)/src/hashtable.cpp',        
+        '<@(eastl_path)/src/red_black_tree.cpp',        
+        '<@(eastl_path)/src/string.cpp',        
 
         # thirdparty/freetype2
         '<@(freetype2_path)/src/psnames/psnames.c',
@@ -859,6 +886,12 @@
         
         # thirdparty/tinythread
         '<@(tinythread_path)/tinythread.cpp',
+
+        # thirdparty/utfcpp
+        '<@(utfcpp_path)/source/utf8/checked.h',
+        '<@(utfcpp_path)/source/utf8/core.h',
+        '<@(utfcpp_path)/source/utf8/unchecked.h',
+        '<@(utfcpp_path)/source/utf8.h',
 
         # thirdparty/zlib
         '<@(zlib_path)/source/zutil.c',

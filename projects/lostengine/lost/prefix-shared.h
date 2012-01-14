@@ -33,6 +33,7 @@
   namespace lost
   {
     using std::string;
+    using std::basic_string;
     using std::list;
     using std::map;
     using std::vector;
@@ -47,6 +48,7 @@
   namespace lost
   {
     using eastl::string;
+    using eastl::basic_string;
     using eastl::list;
     using eastl::map;
     using eastl::vector;

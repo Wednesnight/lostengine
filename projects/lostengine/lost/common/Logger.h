@@ -1,9 +1,6 @@
 #ifndef LOST_COMMON_LOGGER_H
 #define LOST_COMMON_LOGGER_H
 
-#include <iostream>
-#include <sstream>
-
 namespace lost
 {
   namespace common
@@ -20,9 +17,9 @@ namespace lost
 
 #define LOGLOG(m, s, fl) \
 { \
-	std::ostringstream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg; \
+	lost::common::StringStream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg; \
 	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg << s; \
-	std::ostringstream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc; \
+	lost::common::StringStream LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc; \
 	LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc << fl; \
 	lost::common::Logger::logMessage(m, LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_loc.str().c_str(), LOGLOG_WE_DONT_WANT_TO_CONFLICT_NAMES_msg.str().c_str()); \
 }

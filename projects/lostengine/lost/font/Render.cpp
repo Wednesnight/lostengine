@@ -4,11 +4,8 @@
 #include "lost/font/RenderedText.h"
 #include "lost/math/Vec2.h"
 #include "lost/math/Rect.h"
-#include <fhtagn/text/transcoding.h>
-#include <fhtagn/text/decoders.h>
+#include "utf8.h"
 #include <math.h>
-
-namespace ftxt = fhtagn::text;
 
 namespace lost
 {
@@ -50,34 +47,31 @@ RenderedTextPtr render(const string & inText, const FontPtr& font, bool characte
 
 void render(const string & inUtf8String, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
-  ftxt::utf8_decoder decoder;
-  ftxt::utf32_string txt;
-  ftxt::decode(decoder, inUtf8String.begin(), inUtf8String.end(),
-         std::back_insert_iterator<ftxt::utf32_string>(txt));
-
+  text::utf32_string txt;
+  utf8::utf8to32(inUtf8String.begin(), inUtf8String.end(), back_inserter(txt));
   render(txt, font, target, characterMetrics);
 }
 
-RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& font, bool characterMetrics, int align)
+RenderedTextPtr render(const text::utf32_string& inText, const FontPtr& font, bool characterMetrics, int align)
 {
   RenderedTextPtr result(new RenderedText);
   render(inText, font, result, characterMetrics);
   return result;  
 }
 
-void render(const ftxt::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
+void render(const text::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   render(inText, Range(0, inText.size()), font, target, characterMetrics);
 }
 
-void render(const fhtagn::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
+void render(const text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   vector<Range> lines;
   lines.push_back(range);
   render(inText, lines, font, target, characterMetrics);
 }
 
-void render(const fhtagn::text::utf32_string& inText, const vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
+void render(const text::utf32_string& inText, const vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align)
 {
   // these arrays will receive the character geometry in space, relative to a 0,0 baseline
   // and the corresponding pixel coordinates of the subtexture within the font texture atlas
@@ -103,7 +97,7 @@ void render(const fhtagn::text::utf32_string& inText, const vector<Range>& lines
       Vec2 bounds(addIndex,addIndex);
       for(uint32_t i=pos->begin; i<pos->end; ++i)
       {
-        ftxt::utf32_char_t c = inText[i];
+        text::utf32_char c = inText[i];
         xoffset+=font->kerningOffset(previousGlyphIndex, c);
         GlyphPtr glyph = font->glyph(c);
         if (!glyph) continue;

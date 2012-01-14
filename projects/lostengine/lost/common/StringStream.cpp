@@ -32,6 +32,23 @@ string endl = "\n";
 }
 }
 
+lost::common::StringStream& operator<<(lost::common::StringStream& s, float v)
+{
+  char buf[256];
+  sprintf(buf, "%f",v);
+  s.append(buf);
+  return s;
+  
+}
+
+lost::common::StringStream& operator<<(lost::common::StringStream& s, double v)
+{
+  char buf[256];
+  sprintf(buf, "%lf",v);
+  s.append(buf);
+  return s;  
+}
+
 lost::common::StringStream& operator<<(lost::common::StringStream& s, int32_t v)
 {
   char buf[32];
