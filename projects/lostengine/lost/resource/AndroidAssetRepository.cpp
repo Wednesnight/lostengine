@@ -94,7 +94,7 @@ namespace lost
       return result;
     }
     
-    RepositoryPtr AndroidAssetRepository::create(AAssetManager* assetManager, const boost::filesystem::path& subdir)
+    RepositoryPtr AndroidAssetRepository::create(AAssetManager* assetManager, const lost::fs::path& subdir)
     {
       return AndroidAssetRepositoryPtr(new AndroidAssetRepository(assetManager, subdir));
     }

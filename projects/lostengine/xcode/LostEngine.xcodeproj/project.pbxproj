@@ -135,7 +135,6 @@
 		53C14EBE51F54DDA64414F5B /* TestRunner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 296E1A88C997E7BBDB6AED1C /* TestRunner.cpp */; };
 		54C69718FE1F395A3D882198 /* truetype.c in Sources */ = {isa = PBXBuildFile; fileRef = 739B6AEF7E53B8F14BDC8C7B /* truetype.c */; };
 		5590A74EDDFDE40E8BF87793 /* type1.c in Sources */ = {isa = PBXBuildFile; fileRef = 95E587773C859C47E0B7471C /* type1.c */; };
-		55A27C5F52A83DE3A6CC9E5A /* ThirdpartyBoost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF5DFCEF68BD541AD2BFAC38 /* ThirdpartyBoost.cpp */; };
 		577F57172522CBBA0D9C8695 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70F681B97CC1536CC5753ADD /* State.cpp */; };
 		5892F2372B2AEFD3DB7FA917 /* b2TOISolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B39C76830396AFF9B5174C36 /* b2TOISolver.cpp */; };
 		58A041B1D3D7B854DBE56A71 /* b2StackAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5314CE241578565F88DE1A5D /* b2StackAllocator.cpp */; };
@@ -770,7 +769,6 @@
 		EF2ADA66860A056AB1C0B7AD /* DefaultLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultLoader.cpp; sourceTree = "<group>"; };
 		EF33FB1C8BE942B72B0CFA43 /* GifDecoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GifDecoder.cpp; sourceTree = "<group>"; };
 		EF5995DE780B8B606720062E /* Source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Source.cpp; sourceTree = "<group>"; };
-		EF5DFCEF68BD541AD2BFAC38 /* ThirdpartyBoost.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ThirdpartyBoost.cpp; sourceTree = "<group>"; };
 		F17A7878B112E47E81F2A0A5 /* info.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = info.c; sourceTree = "<group>"; };
 		F17BFB9E60BED1D287A3AE3F /* DefaultFrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultFrameBuffer.cpp; sourceTree = "<group>"; };
 		F3C2B8E8CBBB41EB69916FAC /* uncompr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = uncompr.c; sourceTree = "<group>"; };
@@ -1736,7 +1734,6 @@
 				07F495BE3D877B01FFB858FA /* LostResource.cpp */,
 				71C1AE403EBABBD8C7A4D10D /* LostRg.cpp */,
 				F5600EAFA37F7A15AB91BE4E /* LostTime.cpp */,
-				EF5DFCEF68BD541AD2BFAC38 /* ThirdpartyBoost.cpp */,
 				672B0EE4C8932C84CE907B14 /* ThirdpartyBox2D.cpp */,
 			);
 			path = bindings;
@@ -2134,7 +2131,6 @@
 				6246BCDB830D936D36FE7071 /* LostResource.cpp in Sources */,
 				5BF4429A862272BF5B15D8C0 /* LostRg.cpp in Sources */,
 				C5110489A27F2BA310D74197 /* LostTime.cpp in Sources */,
-				55A27C5F52A83DE3A6CC9E5A /* ThirdpartyBoost.cpp in Sources */,
 				5181491C99298ADC5103F97E /* ThirdpartyBox2D.cpp in Sources */,
 				6144CEAAD9DCA6F0606ACF5E /* AABB.cpp in Sources */,
 				5CFC780AF30954FC0B46BE60 /* io.cpp in Sources */,

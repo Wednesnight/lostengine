@@ -663,7 +663,6 @@
         'lost/lua/bindings/LostResource.cpp',
         'lost/lua/bindings/LostRg.cpp',
         'lost/lua/bindings/LostTime.cpp',
-        'lost/lua/bindings/ThirdpartyBoost.cpp',
         'lost/lua/bindings/ThirdpartyBox2D.cpp',
 
         # math

@@ -5,7 +5,7 @@ namespace lost
 {
   namespace font
   {
-      // describe sthe possible modes text is wrapped around when rendered by a font
+      // describes the possible modes text is wrapped around when rendered by a font
       enum BreakMode
       {
         BREAKMODE_NONE = 0,// text won't be modified during rendering
