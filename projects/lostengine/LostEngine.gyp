@@ -884,6 +884,8 @@
         '<@(stb_vorbis_path)/stb_vorbis.c',
         
         # thirdparty/tinythread
+        '<@(tinythread_path)/fast_mutex.h',
+        '<@(tinythread_path)/tinythread.h',
         '<@(tinythread_path)/tinythread.cpp',
 
         # thirdparty/utfcpp
