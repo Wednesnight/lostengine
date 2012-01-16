@@ -10,7 +10,6 @@
   #define BOOST_FILESYSTEM_VERSION 3
 #endif
   #define BOOST_SYSTEM_NO_DEPRECATED
-  // boost
   #ifndef __STDC_CONSTANT_MACROS
     #define __STDC_CONSTANT_MACROS
   #endif

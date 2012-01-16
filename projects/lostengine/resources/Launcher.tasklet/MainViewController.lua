@@ -41,7 +41,7 @@ function MainViewController:addTaskletPath(p)
   end
   if not entry then
     entry = {path=p}
-    local bp = boost.filesystem.path(entry.path)
+    local bp = lost.fs.Path(entry.path)
     bp = bp / "config.lua"
     local file = io.open(bp:native(),"r")
     local data = file:read("*all")
