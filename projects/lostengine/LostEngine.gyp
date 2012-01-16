@@ -885,6 +885,7 @@
         
         # thirdparty/tinythread
         '<@(tinythread_path)/fast_mutex.h',
+        '<@(tinythread_path)/once.h',
         '<@(tinythread_path)/tinythread.h',
         '<@(tinythread_path)/tinythread.cpp',
 

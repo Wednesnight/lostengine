@@ -1,12 +1,12 @@
 #include "lost/profiler/Blackbox.h"
 #include "lost/common/Logger.h"
-#include <boost/thread.hpp>
+#include "thread_specific_ptr.h"
 
 namespace lost
 {
 namespace profiler
 {
-  boost::thread_specific_ptr<Blackbox> blackbox_instance;
+  tinythread::thread_specific_ptr<Blackbox> blackbox_instance;
 
   Blackbox::Blackbox()
   {
