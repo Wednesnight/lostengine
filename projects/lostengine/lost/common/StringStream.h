@@ -23,6 +23,7 @@ lost::common::StringStream& operator<<(lost::common::StringStream& s, float v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, double v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, int32_t v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, uint32_t v);
+lost::common::StringStream& operator<<(lost::common::StringStream& s, uint64_t v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, const char* v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, const lost::string& v);
 

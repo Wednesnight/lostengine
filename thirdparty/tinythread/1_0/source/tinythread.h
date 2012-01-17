@@ -604,6 +604,11 @@ class thread::id {
       return os;
     }
 
+    unsigned long get() // FIXME
+    {
+      return mId;
+    }
+  
   private:
     unsigned long int mId;
 };

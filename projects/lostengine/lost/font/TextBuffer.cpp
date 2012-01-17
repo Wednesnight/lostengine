@@ -1,6 +1,5 @@
 #include "lost/font/TextBuffer.h"
 #include "lost/font/Font.h"
-#include <boost/algorithm/string.hpp>
 #include "lost/common/Logger.h"
 #include "lost/font/Render.h"
 #include "lost/font/Glyph.h"
@@ -142,14 +141,19 @@ uint32_t TextBuffer::numPhysicalLines()
   return _physicalLines.size();
 }
 
+// from http://stackoverflow.com/questions/3418231/c-replace-part-of-a-string-with-another-string
+void replaceAll(string& str, const string& from, const string& to) {
+  size_t start_pos = 0;
+  while((start_pos = str.find(from, start_pos)) != string::npos) {
+    str.replace(start_pos, from.length(), to);
+    start_pos += to.length(); 
+  }
+}  
+  
 void TextBuffer::normaliseNewlines(string& inText)
 {
-  #ifndef LOST_USE_EASTL
-    boost::algorithm::ireplace_all(inText, "\r\n", "\n");
-    boost::algorithm::ireplace_all(inText, "\r", "\n");
-  #else
-    // FIXME disabled for use with eastl
-  #endif
+  replaceAll(inText, "\r\n", "\n");
+  replaceAll(inText, "\r", "\n");
 }
 
 void TextBuffer::breakModeNone()

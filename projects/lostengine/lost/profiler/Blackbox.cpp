@@ -63,7 +63,7 @@ namespace profiler
       blackbox_instance.reset(new Blackbox);
 //      DOUT("Building Blackbox");
     }
-//    DOUT("GET "<<(uint64_t)blackbox_instance.get()<<" thread id:"<<boost::this_thread::get_id());
+//    DOUT("GET "<<(uint64_t)blackbox_instance.get()<<" thread id:"<<(uint64_t)tthread::this_thread::get_id().get());
     return blackbox_instance.get();
   }
   
