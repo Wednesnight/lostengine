@@ -9,8 +9,6 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <fhtagn/threads/tasklet.h>
-
 using namespace std;
 
 namespace lost
@@ -52,7 +50,7 @@ namespace lost
           double framerate = config.framerate;
           double offset = clock.getTime();
 
-          while (hiddenMembers->thread->get_state() == fhtagn::threads::tasklet::RUNNING && running)
+          while (hiddenMembers->thread->get_state() == TaskletThread::RUNNING && running)
           {
             processEvents();
             if (running) {

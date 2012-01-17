@@ -1,7 +1,12 @@
 #ifndef LOST_PLATFORM_SHARED_PTR_H
 #define LOST_PLATFORM_SHARED_PTR_H
 
-#include <tr1/memory>
+#ifdef WIN32
+  #include <memory>
+#else
+  #include <tr1/memory>
+#endif
+
 #include "lost/common/ArrayDeleter.h"
 namespace lost {
 using std::tr1::shared_ptr;

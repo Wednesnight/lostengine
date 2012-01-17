@@ -31,14 +31,22 @@ void Path::operator /= (const Path& other)
   _path /= other._path;
 }
 
+void Path::operator = (const char* other)
+{
+  _path = other;
+}
+
 lost::string Path::string() const
 {
-  return lost::string(_path.c_str());
+  return lost::string(_path.string().c_str());
 }
 
 lost::string Path::native() const
 {
-  return lost::string(_path.native().c_str());
+  // boost::filesystem::path::native() == boost::filesystem::path::m_pathname
+  // boost::filesystem::path::c_str() == boost::filesystem::path::m_pathname.c_str()
+  // boost::filesystem::path::string() == codecvt(m_pathname)
+  return string();
 }
 
   
