@@ -15,7 +15,13 @@ struct Path
   virtual ~Path();
 
   void operator /= (const Path& other);
+  void operator /= (const char* other);
   void operator = (const char* other);
+  bool operator ==(const char* other);
+  bool operator !=(const char* other);
+
+  Path branch_path();
+
   lost::string string() const;
   lost::string native() const;
   

@@ -18,6 +18,8 @@ namespace lost
   namespace application
   {
 
+    extern Display* currentXDisplay;
+
     struct Window::WindowHiddenMembers
     {
       Display* display;
@@ -57,7 +59,8 @@ namespace lost
         None
       };
 
-      hiddenMembers->display = XOpenDisplay(NULL);
+//      hiddenMembers->display = XOpenDisplay(NULL);
+      hiddenMembers->display = lost::application::currentXDisplay;
 
       int majorVersion, minorVersion;
       XF86VidModeQueryVersion(hiddenMembers->display, &majorVersion, &minorVersion);
@@ -111,17 +114,19 @@ namespace lost
         IOUT("Renderer: Software");
       }
 
-      hiddenMembers->windowHandler.reset(new linux_::WindowHandler(this, hiddenMembers->display, hiddenMembers->window));
-      hiddenMembers->windowThread.reset(new boost::thread(boost::bind(&linux_::WindowHandler::operator(), hiddenMembers->windowHandler.get())));
+      context->clearCurrent();
+
+//      hiddenMembers->windowHandler.reset(new linux_::WindowHandler(this, hiddenMembers->display, hiddenMembers->window));
+//      hiddenMembers->windowThread.reset(new boost::thread(boost::bind(&linux_::WindowHandler::operator(), hiddenMembers->windowHandler.get())));
     }
 
     void Window::finalize()
     {
       DOUT("Window::finalize()");
 
-      hiddenMembers->windowHandler->wakeupAndFinish();
-      hiddenMembers->windowThread.reset();
-      hiddenMembers->windowHandler.reset();
+//      hiddenMembers->windowHandler->wakeupAndFinish();
+//      hiddenMembers->windowThread.reset();
+//      hiddenMembers->windowHandler.reset();
 
       XDestroyWindow(hiddenMembers->display, hiddenMembers->window);
       XFreeColormap(hiddenMembers->display, hiddenMembers->colorMap);

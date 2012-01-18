@@ -31,9 +31,31 @@ void Path::operator /= (const Path& other)
   _path /= other._path;
 }
 
+void Path::operator /= (const char* other)
+{
+  _path /= other;
+}
+
 void Path::operator = (const char* other)
 {
   _path = other;
+}
+
+bool Path::operator ==(const char* other)
+{
+  return _path == other;
+}
+
+bool Path::operator !=(const char* other)
+{
+  return !this->operator==(other);
+}
+
+Path Path::branch_path()
+{
+  Path result;
+  result._path = _path.branch_path();
+  return result;
 }
 
 lost::string Path::string() const

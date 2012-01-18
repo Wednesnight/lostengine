@@ -18,14 +18,14 @@ namespace lost
   namespace application
   {
 
+    Display* currentXDisplay;
+
     int handleXError(Display* display, XErrorEvent* event)
     {
       if (event) {
-        int length = XGetErrorText(display, event->error_code, NULL, 0);
-        char *buffer = new char[length];
-        XGetErrorText(display, event->error_code, buffer, length);
+        char buffer[1024];
+        XGetErrorText(display, event->error_code, buffer, 1024);
         EOUT("X11: " << buffer);
-        delete buffer;
       }
     }
 
@@ -48,6 +48,8 @@ namespace lost
         throw std::runtime_error("could not open display");
       }
       hiddenMembers->WM_WAKEUP = XInternAtom(hiddenMembers->display, "WM_WAKEUP", False);
+
+      currentXDisplay = hiddenMembers->display;
     }
 
     void Application::finalize()
@@ -66,19 +68,18 @@ namespace lost
       ApplicationEventPtr applicationEvent = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(applicationEvent);
 
+      XEvent event;
       while(running) {
-        XEvent event;
         XNextEvent(hiddenMembers->display, &event);
         switch (event.type) {
 
           case ClientMessage:
             if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
-              DOUT("wakeup!");
               break;
             }
 
           default:
-            DOUT("message received!");
+            // TODO: redirect to target window
             break;
 
         }

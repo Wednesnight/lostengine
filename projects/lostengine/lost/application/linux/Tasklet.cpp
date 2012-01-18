@@ -5,6 +5,7 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/Context.h"
 #include "lost/platform/Platform.h"
+#include "lost/common/Logger.h"
 
 #include <sstream>
 #include <stdexcept>

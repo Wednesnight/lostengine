@@ -345,11 +345,9 @@ namespace lost
             pos = idx;
           }
         }
-        std::cout << "done" << std::endl;
         if (fileList.size() > 0) {
           // FIXME: we only support single files at the moment
           string filename = fileList.front();
-          std::cout << filename << std::endl;
           if (filename.find("file://") != string::npos) {
             filename = filename.substr(filename.find_first_not_of("file://")-1);
           }
@@ -371,7 +369,7 @@ namespace lost
         DOUT("Xdnd Version: " << version);
 
         ::Window source = event.xclient.data.l[0];
-        DOUT(std::hex << "Source window = 0x" << source << std::dec);
+        DOUT("Source window = " << (int) source);
         
         Property p = read_property(source , XdndTypeList);
         for (int i = 0; !result && i < p.nitems; i++)
@@ -425,7 +423,7 @@ namespace lost
 
         DOUT("Actual type: " << GetAtomName(actual_type));
         DOUT("Actual format: " << actual_format);
-        DOUT("Number of items: " << nitems);
+        DOUT("Number of items: " << (int) nitems);
 
         Property p = {ret, actual_format, nitems, actual_type};
 

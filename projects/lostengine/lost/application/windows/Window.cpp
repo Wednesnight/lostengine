@@ -299,7 +299,7 @@ namespace lost
       // initialize OpenGL rendering context
       wglMakeCurrent(hiddenMembers->deviceContext, hiddenMembers->glContext);
       context.reset(new gl::Context);
-      wglMakeCurrent(NULL, NULL);
+      context->clearCurrent();
     }
 
     void Window::finalize()

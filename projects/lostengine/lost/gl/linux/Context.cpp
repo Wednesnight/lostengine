@@ -1,13 +1,12 @@
 #include "lost/gl/Context.h"
 #include "lost/gl/gl.h"
 
+#include <boost/thread/tss.hpp>
+
 namespace lost
 {
   namespace gl
   {
-    // set to the current context in makeCurrent
-    void* currentContext;
-
     struct Context::ContextHiddenMembers
     {
       Display*    glDisplay;
@@ -15,12 +14,19 @@ namespace lost
       GLXContext  glContext;
     };
 
+    void context_cleanup(Context* p)
+    {
+    }
+    // set to the current context in makeCurrent
+    boost::thread_specific_ptr<Context> currentContext(context_cleanup);
+
     void Context::initialize()
     {
       hiddenMembers = new ContextHiddenMembers;
       hiddenMembers->glDisplay  = glXGetCurrentDisplay();
       hiddenMembers->glDrawable = glXGetCurrentDrawable();
       hiddenMembers->glContext  = glXGetCurrentContext();
+      currentContext.reset(this);
     }
 
     void Context::finalize()
@@ -35,7 +41,7 @@ namespace lost
           glXGetCurrentContext() != hiddenMembers->glContext)
       {
         glXMakeCurrent(hiddenMembers->glDisplay, hiddenMembers->glDrawable, hiddenMembers->glContext);
-        currentContext = hiddenMembers;
+        currentContext.reset(this);
       }
     }
 
@@ -61,13 +67,12 @@ namespace lost
 
     void* Context::getCurrentOsSpecific()
     {
-      return currentContext;
+      return currentContext.get();
     }
     
     void Context::setCurrentOsSpecififc(void* ctx)
     {
-      Context::ContextHiddenMembers* members = (Context::ContextHiddenMembers*)ctx;
-      glXMakeCurrent(members->glDisplay, members->glDrawable, members->glContext);
+      ((Context*) ctx)->makeCurrent();
     }
 
   }

@@ -44,7 +44,7 @@ namespace lost
 
     lost::fs::Path getApplicationFilename(bool excludeExtension = false)
     {
-      lost::fs::Path path = "/proc";
+      lost::fs::Path path("/proc");
       struct stat info;
       if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
         // There's no /proc filesystem, we can't find out a lot about our
@@ -56,7 +56,7 @@ namespace lost
       // Read the exe link in the /proc filesystem
       std::ostringstream os;
       os << getpid();
-      path /= os.str();
+      path /= os.str().c_str();
       path /= "exe";
 
       // There's no limit to how long a path in Linux can be, but let's assume
@@ -84,7 +84,7 @@ namespace lost
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error(string("Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?").c_str());
 
       return result;
     }
@@ -121,7 +121,7 @@ namespace lost
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error(string("Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?").c_str());
 
       return result;
     }
