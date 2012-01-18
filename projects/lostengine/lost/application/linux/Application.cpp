@@ -4,14 +4,13 @@
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/application/linux/WindowHandler.h"
 
+#include <map>
 #include <iostream>
 #include <stdexcept>
-#include <boost/thread/condition.hpp>
 
 #include <X11/Xlib.h>
-
-using namespace std;
 
 namespace lost
 {
@@ -19,6 +18,22 @@ namespace lost
   {
 
     Display* currentXDisplay;
+
+    std::map< ::Window, linux_::WindowHandler* > xWindows;
+
+    void registerXWindow(::Window xWindow, Window* window) {
+      if (xWindows.find(xWindow) == xWindows.end()) {
+        xWindows[xWindow] = new linux_::WindowHandler(currentXDisplay, xWindow, window);
+      }
+    }
+
+    void unregisterXWindow(::Window xWindow) {
+      if (xWindows.find(xWindow) == xWindows.end()) {
+        linux_::WindowHandler* handler = xWindows[xWindow];
+        xWindows.erase(xWindow);
+        delete handler;
+      }
+    }
 
     int handleXError(Display* display, XErrorEvent* event)
     {
@@ -68,20 +83,40 @@ namespace lost
       ApplicationEventPtr applicationEvent = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(applicationEvent);
 
+      {
+        XEvent event;
+        event.xclient.message_type = ClientMessage;
+        event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
+        XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
+      }
+
       XEvent event;
       while(running) {
-        XNextEvent(hiddenMembers->display, &event);
-        switch (event.type) {
+        XFlush(hiddenMembers->display);
+        while (XPending(hiddenMembers->display)) {
+          XNextEvent(hiddenMembers->display, &event);
+          switch (event.type) {
 
-          case ClientMessage:
-            if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
+            case ClientMessage:
+              if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
+                DOUT("wakeup!");
+                break;
+              }
+
+            default:
+              if (event.xclient.window) {
+                linux_::WindowHandler* windowHandler = NULL;
+                if (xWindows.find(event.xclient.window) != xWindows.end()) {
+                  windowHandler = xWindows[event.xclient.window];
+                }
+
+                if (windowHandler != NULL) {
+                  windowHandler->handleEvent(event);
+                }
+              }
               break;
-            }
 
-          default:
-            // TODO: redirect to target window
-            break;
-
+          }
         }
         eventDispatcher->processEvents();
       }
@@ -93,6 +128,7 @@ namespace lost
       event.xclient.message_type = ClientMessage;
       event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
       XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
+      XFlush(hiddenMembers->display);
     }
 
     void Application::showMouse(bool visible)
@@ -105,6 +141,7 @@ namespace lost
       event.xclient.message_type = ClientMessage;
       event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
       XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
+      XFlush(hiddenMembers->display);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)

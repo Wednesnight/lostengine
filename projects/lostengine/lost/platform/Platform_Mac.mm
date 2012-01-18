@@ -116,6 +116,10 @@ namespace lost
       [pool release];
     }
 
+    string getThreadName() {
+      return "";
+    }
+
     string getClipboardString()
     {
       string str;

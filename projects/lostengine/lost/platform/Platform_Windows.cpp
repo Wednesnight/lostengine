@@ -164,6 +164,10 @@ namespace lost
        }
     }
 
+    string getThreadName() {
+      return "";
+    }
+
     /**
      see: http://www.codeproject.com/KB/clipboard/clipboard_faq.aspx
      */

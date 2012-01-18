@@ -24,14 +24,11 @@ namespace lost
           Atom type;
         };
 
-        bool running;
-
-        Window* window;
         Display* display;
-        ::Window nativeWindow;
+        ::Window xWindow;
+        Window* window;
 
         Atom WM_DELETE_WINDOW;
-        Atom WM_WAKEUP;
 
         Atom XdndTypeList;
         Atom XdndStatus;
@@ -45,6 +42,14 @@ namespace lost
         Atom XdndDrop;
         Atom XdndLeave;
         Atom XdndFinished;
+
+        KeySym key;
+        char text[255];
+
+        int currentButton;
+        Atom XdndFormat;
+        int XdndVersion;
+        Atom sel;
 
         // events
         KeyCode translateKeyCode(int nativeKeyCode);
@@ -60,9 +65,8 @@ namespace lost
         Atom dragAccept(XEvent& event);
         
       public:
-        WindowHandler(Window* window, Display* display, ::Window nativeWindow);
-        void operator()();
-        bool wakeupAndFinish();
+        WindowHandler(Display* display, ::Window xWindow, Window* window);
+        void handleEvent(XEvent& event);
       };
 
     }  

@@ -130,6 +130,13 @@ namespace lost
       prctl(PR_SET_NAME, name.c_str(), 0, 0, 0);
     }
 
+    string getThreadName() {
+      char buf[17];
+      buf[16] = 0;
+      prctl(PR_GET_NAME, buf, 0, 0, 0);
+      return buf;
+    }
+
     bool setClipboardString(string const & str)
     {
       // TODO

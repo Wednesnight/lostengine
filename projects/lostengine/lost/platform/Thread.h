@@ -3,10 +3,11 @@
 
 namespace lost
 {
-namespace platform
-{
-  void setThreadName(const string& name);
-}
+  namespace platform
+  {
+    void setThreadName(const string& name);
+    string getThreadName();
+  }
 }
 
 #endif

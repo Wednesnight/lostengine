@@ -45,18 +45,19 @@ namespace lost
 
         logMutex->lock();
 #ifndef ANDROID
-        std::cout << lost::platform::currentTimeFormat() << " \t " <<
+        std::cout << lost::platform::currentTimeFormat()  << " \t " <<
+                     lost::platform::getThreadName()      << " \t " << 
                      inLevel                              << " \t " <<
                      inLocation                           << " \t " <<
                      inMsg                                << std::endl;
 #else
         std::ostringstream os;
         os << lost::platform::currentTimeFormat() << " \t " <<
-              inLevel                              << " \t " <<
-              inLocation                           << " \t " <<
+              inLevel                             << " \t " <<
+              inLocation                          << " \t " <<
               inMsg;
 
-        __android_log_print(ANDROID_LOG_INFO, "LostEngine", os.str().c_str());
+        __android_log_print(ANDROID_LOG_INFO, lost::platform::getThreadName().c_str(), os.str().c_str());
 #endif
         logMutex->unlock();
       }
