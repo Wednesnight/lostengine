@@ -39,6 +39,11 @@ namespace lost
       }
     }
 
+    void Context::clearCurrent()
+    {
+      glXMakeCurrent(hiddenMembers->glDisplay, None, NULL);
+    }
+    
     void Context::swapBuffers()
     {
       glXSwapBuffers(hiddenMembers->glDisplay, hiddenMembers->glDrawable);

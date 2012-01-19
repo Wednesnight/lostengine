@@ -18,13 +18,6 @@ namespace lost
   namespace application
   {
 
-    int handleXError(Display* display, XErrorEvent* event)
-    {
-      if (event) {
-        EOUT("X11: error "<< event->error_code);
-      }
-    }
-    
     struct Window::WindowHiddenMembers
     {
       Display* display;
@@ -63,9 +56,6 @@ namespace lost
 //         GLX_STEREO,
         None
       };
-
-      XInitThreads();
-      XSetErrorHandler(&handleXError);
 
       hiddenMembers->display = XOpenDisplay(NULL);
 

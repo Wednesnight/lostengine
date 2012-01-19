@@ -4,7 +4,7 @@
 #include "lost/application/Window.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/gl/Context.h"
-#include "lost/common/Logger.h"
+#include "lost/platform/Platform.h"
 
 #include <sstream>
 #include <stdexcept>
@@ -15,81 +15,63 @@ namespace lost
 {
   namespace application
   {
-
-    struct Tasklet::TaskletHiddenMembers
-    {
-      lost::shared_ptr<TaskletThread> thread;
-    };
-
-    void Tasklet::start()
-    {
-      hiddenMembers.reset(new TaskletHiddenMembers);
-      hiddenMembers->thread.reset(new TaskletThread(this));
-      hiddenMembers->thread->start();
-    }
-
-    void Tasklet::run()
-    {
+    
+    void Tasklet::run() {
+      platform::setThreadName("'"+name+"' (tasklet)");
       isAlive = true;
-      init();
       bool hasError = false;
-      string errorMsg;
-
-      try
-      {
+      string errorMsg = "";
+      
+      try {
+        
+        // make sure that our GL context is the current context
+        if(window != NULL) {
+          window->context->makeCurrent();
+        }
+        
         startup();
         if (running) {
+          
           double framerate = config.framerate;
           double offset = clock.getTime();
-
-          while (hiddenMembers->thread->get_state() == TaskletThread::RUNNING && running) {
+          
+          while (thread->get_state() == TaskletThread::RUNNING && running) {
             processEvents();
             if (running) {
               update(framerate);
               render();
+              if(waitForEvents) { eventDispatcher->waitForEvents(); }
               
-              if (waitForEvents) {
-                eventDispatcher->waitForEvents();
-              }
-
               framerate = clock.getElapsedAndUpdateOffset(offset);
             }
           }
-
+          
           shutdown();
+          
+          // unbind GL context
+          if(window != NULL) {
+            window->context->clearCurrent();
+          }
         }
       }
-      catch (std::exception& e)
+      catch(std::exception& ex)
       {
-        errorMsg = e.what();
+        errorMsg = ex.what();
         hasError = true;
       }
-
+      catch (...) {
+        errorMsg = "<catch all>";
+        hasError = true;
+      }
       isAlive = false;
       dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
-      cleanup();
-      if (hasError)
-      {
-        ostringstream os;
-        os << "Tasklet terminated with error: " << errorMsg;
-        throw runtime_error(os.str());
+      if (hasError) {
+        
+        std::ostringstream os;
+        os << "Tasklet '"<<name<<"' terminated with error: " <<errorMsg;
+        throw std::runtime_error(os.str());
       }
     }
-
-    void Tasklet::stop()
-    {
-      if (isAlive)
-      {
-        hiddenMembers->thread->stop();
-        // wakeup
-        if (waitForEvents)
-        {
-          eventDispatcher->wakeup();
-        }
-        hiddenMembers->thread->wait();
-      }
-    }
-
+    
   }
 }
-

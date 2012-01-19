@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include <boost/thread/condition.hpp>
 
+#include <X11/Xlib.h>
+
 using namespace std;
 
 namespace lost
@@ -16,22 +18,44 @@ namespace lost
   namespace application
   {
 
+    int handleXError(Display* display, XErrorEvent* event)
+    {
+      if (event) {
+        int length = XGetErrorText(display, event->error_code, NULL, 0);
+        char *buffer = new char[length];
+        XGetErrorText(display, event->error_code, buffer, length);
+        EOUT("X11: " << buffer);
+        delete buffer;
+      }
+    }
+
     struct Application::ApplicationHiddenMembers
     {
-      boost::condition condition;
+      Display *display;
+      Atom WM_WAKEUP;
     };
 
     void Application::initialize()
     {
       DOUT("Application::initialize()");
 
+      XInitThreads();
+      XSetErrorHandler(&handleXError);
+
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
+      if(!(hiddenMembers->display = XOpenDisplay(NULL))) {
+        throw std::runtime_error("could not open display");
+      }
+      hiddenMembers->WM_WAKEUP = XInternAtom(hiddenMembers->display, "WM_WAKEUP", False);
     }
 
     void Application::finalize()
     {
       DOUT("Application::finalize()");
+
+      XFree((void *) hiddenMembers->WM_WAKEUP);
+      XCloseDisplay(hiddenMembers->display);
       delete hiddenMembers;
     }
 
@@ -39,30 +63,47 @@ namespace lost
     {
       DOUT("Application::run()");
 
-      ApplicationEventPtr event = ApplicationEvent::create(ApplicationEvent::RUN());
-      eventDispatcher->dispatchEvent(event);
+      ApplicationEventPtr applicationEvent = ApplicationEvent::create(ApplicationEvent::RUN());
+      eventDispatcher->dispatchEvent(applicationEvent);
 
-      boost::mutex applicationMutex;
-      boost::unique_lock<boost::mutex> applicationLock(applicationMutex);
-      while (running)
-      {
-        hiddenMembers->condition.wait(applicationLock);
+      while(running) {
+        XEvent event;
+        XNextEvent(hiddenMembers->display, &event);
+        switch (event.type) {
+
+          case ClientMessage:
+            if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
+              DOUT("wakeup!");
+              break;
+            }
+
+          default:
+            DOUT("message received!");
+            break;
+
+        }
         eventDispatcher->processEvents();
       }
     }
 
     void Application::shutdown()
     {
-      hiddenMembers->condition.notify_one();
+      XEvent event;
+      event.xclient.message_type = ClientMessage;
+      event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
+      XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
     }
 
     void Application::showMouse(bool visible)
     {
     }
 
-    void Application::processEvents(const ProcessEventPtr& event)
+    void Application::processEvents(const ProcessEventPtr& processEvent)
     {
-      hiddenMembers->condition.notify_one();
+      XEvent event;
+      event.xclient.message_type = ClientMessage;
+      event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
+      XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
