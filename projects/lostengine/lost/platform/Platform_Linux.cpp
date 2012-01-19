@@ -12,7 +12,6 @@
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
-#include "boost/filesystem.hpp"
 
 #include <sys/prctl.h>
 
@@ -43,9 +42,9 @@ namespace lost
       return ((double)tv.tv_sec)*1000000.0 + (double)tv.tv_usec;
     }
 
-    boost::filesystem::path getApplicationFilename(bool excludeExtension = false)
+    lost::fs::Path getApplicationFilename(bool excludeExtension = false)
     {
-      boost::filesystem::path path = "/proc";
+      lost::fs::Path path = "/proc";
       struct stat info;
       if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
         // There's no /proc filesystem, we can't find out a lot about our
@@ -74,14 +73,14 @@ namespace lost
       return string(pathbuf, pathsize);
     }
 
-    boost::filesystem::path getApplicationDirectory()
+    lost::fs::Path getApplicationDirectory()
     {
       return getApplicationFilename().branch_path();
     }
 
-    boost::filesystem::path buildResourcePath( const string& filename )
+    lost::fs::Path buildResourcePath( const string& filename )
     {
-      boost::filesystem::path result = getResourcePath() / filename;
+      lost::fs::Path result = getResourcePath() / filename;
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
@@ -90,13 +89,13 @@ namespace lost
       return result;
     }
 
-    boost::filesystem::path getResourcePath()
+    lost::fs::Path getResourcePath()
     {
       return getApplicationDirectory();
     }
 
-    boost::filesystem::path getUserDataPath() {
-      boost::filesystem::path result;
+    lost::fs::Path getUserDataPath() {
+      lost::fs::Path result;
 #ifdef ANDROID
       struct passwd* pwdptr = getpwuid(getuid());
       if (pwdptr != NULL) {
@@ -116,9 +115,9 @@ namespace lost
       return result;
     }
 
-    boost::filesystem::path buildUserDataPath( const string& filename )
+    lost::fs::Path buildUserDataPath( const string& filename )
     {
-      boost::filesystem::path result = getUserDataPath() / filename;
+      lost::fs::Path result = getUserDataPath() / filename;
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);

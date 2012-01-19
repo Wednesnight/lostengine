@@ -23,9 +23,9 @@ HybridIndexBuffer::HybridIndexBuffer(ElementType et)
     case ET_u16:type = GL_UNSIGNED_SHORT;break;
     case ET_u32:type = GL_UNSIGNED_INT;break;
     default:
-      std::ostringstream os;
+      lost::common::StringStream os;
       os << "only u8, u16, u32 are allowed";
-      LOGTHROW(std::runtime_error(os.str()));
+      LOGTHROW(std::runtime_error(os.str().c_str()));
   }
   drawMode = GL_TRIANGLES;
   init(GL_ELEMENT_ARRAY_BUFFER, layout);

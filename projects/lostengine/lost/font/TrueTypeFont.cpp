@@ -3,8 +3,6 @@
 #include "lost/bitmap/Packer.h"
 #include "lost/gl/Texture.h"
 #include <stdexcept>
-#include <fhtagn/text/transcoding.h>
-#include <fhtagn/text/decoders.h>
 #include "lost/font/freetype/Library.h"
 #include "lost/font/freetype/Face.h"
 #include "lost/bitmap/Bitmap.h"
@@ -14,8 +12,6 @@
 using namespace lost::bitmap;
 using namespace lost::font::freetype;
 using namespace lost::math;
-
-namespace ftxt = fhtagn::text;
 
 namespace lost
 {
@@ -40,7 +36,7 @@ TrueTypeFont::~TrueTypeFont()
 {
 }
   
-bool TrueTypeFont::renderGlyph(ftxt::utf32_char_t c)
+bool TrueTypeFont::renderGlyph(text::utf32_char c)
 {
     bool result = false;
     GlyphPtr glyph = char2glyph[c];

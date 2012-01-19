@@ -17,9 +17,6 @@
 #include <X11/Xatom.h>
 #include <GL/glx.h>
 
-#include <boost/thread.hpp>
-#include <boost/algorithm/string.hpp>
-
 #include <vector>
 
 namespace lost

@@ -19,7 +19,7 @@ namespace lost
     public:
       vector<VEC> points;
 
-      static boost::uint32_t defaultSteps()
+      static u32 defaultSteps()
       {
         return 10;
       }
@@ -33,7 +33,7 @@ namespace lost
     private:
       LinearBezier(const VEC& p0,
                    const VEC& p1,
-                   boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                   u32 steps = Bezier<VEC>::defaultSteps())
       {
         update(p0, p1, steps);
       }
@@ -41,18 +41,18 @@ namespace lost
     public:
       static lost::shared_ptr<LinearBezier<VEC> > create(const VEC& p0,
                                     const VEC& p1,
-                                    boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                                    u32 steps = Bezier<VEC>::defaultSteps())
       {
         return lost::shared_ptr<LinearBezier<VEC> >(new LinearBezier<VEC>(p0, p1, steps));
       }
 
       static VEC* create(VEC* array,
-                         boost::uint32_t offset,
+                         u32 offset,
                          const VEC& p0,
                          const VEC& p1,
-                         boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                         u32 steps = Bezier<VEC>::defaultSteps())
       {
-        boost::uint32_t idx = offset;
+        u32 idx = offset;
         float stepSize = 1.0 / steps;
         float t = 0.0;
         while (t <= 1.0)
@@ -65,7 +65,7 @@ namespace lost
       
       void update(const VEC& p0,
                   const VEC& p1,
-                  boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                  u32 steps = Bezier<VEC>::defaultSteps())
       {
         Bezier<VEC>::points.clear();
         float stepSize = 1.0 / steps;
@@ -96,7 +96,7 @@ namespace lost
       QuadraticBezier(const VEC& p0,
                       const VEC& p1,
                       const VEC& p2,
-                      boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                      u32 steps = Bezier<VEC>::defaultSteps())
       {
         update(p0, p1, p2, steps);
       }
@@ -105,19 +105,19 @@ namespace lost
       static lost::shared_ptr<QuadraticBezier<VEC> > create(const VEC& p0,
                                        const VEC& p1,
                                        const VEC& p2,
-                                       boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                                       u32 steps = Bezier<VEC>::defaultSteps())
       {
         return lost::shared_ptr<QuadraticBezier<VEC> >(new QuadraticBezier(p0, p1, p2, steps));
       }
       
       static VEC* create(VEC* array,
-                          boost::uint32_t offset,
+                          u32 offset,
                           const VEC& p0,
                           const VEC& p1,
                           const VEC& p2,
-                          boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                          u32 steps = Bezier<VEC>::defaultSteps())
       {
-        boost::uint32_t idx = offset;
+        u32 idx = offset;
         float stepSize = 1.0 / steps;
         float t = 0.0;
         while (t <= 1.0)
@@ -131,7 +131,7 @@ namespace lost
       void update(const VEC& p0,
                   const VEC& p1,
                   const VEC& p2,
-                  boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                  u32 steps = Bezier<VEC>::defaultSteps())
       {
         Bezier<VEC>::points.clear();
         float stepSize = 1.0 / steps;
@@ -164,7 +164,7 @@ namespace lost
                   const VEC& p1,
                   const VEC& p2,
                   const VEC& p3,
-                  boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                  u32 steps = Bezier<VEC>::defaultSteps())
       {
         update(p0, p1, p2, p3, steps);
       }
@@ -174,20 +174,20 @@ namespace lost
                                    const VEC& p1,
                                    const VEC& p2,
                                    const VEC& p3,
-                                   boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                                   u32 steps = Bezier<VEC>::defaultSteps())
       {
         return lost::shared_ptr<CubicBezier<VEC> >(new CubicBezier(p0, p1, p2, p3, steps));
       }
     
       static VEC* create(VEC* array,
-                          boost::uint32_t offset,
+                          u32 offset,
                           const VEC& p0,
                           const VEC& p1,
                           const VEC& p2,
                           const VEC& p3,
-                          boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                          u32 steps = Bezier<VEC>::defaultSteps())
       {
-        boost::uint32_t idx = offset;
+        u32 idx = offset;
         float stepSize = 1.0 / steps;
         float t = 0.0;
         while (t <= 1.0)
@@ -202,7 +202,7 @@ namespace lost
                   const VEC& p1,
                   const VEC& p2,
                   const VEC& p3,
-                  boost::uint32_t steps = Bezier<VEC>::defaultSteps())
+                  u32 steps = Bezier<VEC>::defaultSteps())
       {
         Bezier<VEC>::points.clear();
         float stepSize = 1.0 / steps;

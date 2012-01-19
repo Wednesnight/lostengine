@@ -1,19 +1,14 @@
 #include "lost/font/TextBuffer.h"
-#include <fhtagn/text/transcoding.h>
-#include <fhtagn/text/decoders.h>
-#include <fhtagn/text/encoders.h>
 #include "lost/font/Font.h"
-#include <boost/algorithm/string.hpp>
 #include "lost/common/Logger.h"
 #include "lost/font/Render.h"
 #include "lost/font/Glyph.h"
+#include "utf8.h"
 
 namespace lost
 {
 namespace font
 {
-
-namespace ftxt = fhtagn::text;
 
 uint32_t skipToNewlineOrEnd(uint32_t pos, const lost::font::TextBuffer::Utf32String& txt)
 {
@@ -50,18 +45,14 @@ void TextBuffer::text(const string& inUtf8String)
   normaliseNewlines(normalised);
   _text.clear();
   // transcode to utf32 for parsing
-  ftxt::utf8_decoder decoder;
-  ftxt::decode(decoder, normalised.begin(), normalised.end(),
-         std::back_insert_iterator<Utf32String>(_text));
+  utf8::utf8to32(normalised.begin(), normalised.end(), back_inserter(_text));  
 }
 
 string TextBuffer::utf8String()
 {
   string result;
 
-  ftxt::utf8_encoder encoder;
-  ftxt::encode(encoder, _text.begin(), _text.end(),
-         std::back_insert_iterator<string>(result));
+  utf8::utf32to8(_text.begin(), _text.end(), back_inserter(result));  
          
   return result;
 }
@@ -82,9 +73,7 @@ string TextBuffer::substring(uint32_t fromLine, uint32_t fromIndex, uint32_t toL
       t = _physicalLines[fromLine].begin + fromIndex;
     }
     if (f < _text.size() && t > 0 && t <= _text.size()) {
-      ftxt::utf8_encoder encoder;
-      ftxt::encode(encoder, _text.begin()+f, _text.begin()+t,
-                   std::back_insert_iterator<string>(result));
+      utf8::utf32to8(_text.begin()+f, _text.begin()+t, back_inserter(result));
     }
   }
   return result;
@@ -152,14 +141,19 @@ uint32_t TextBuffer::numPhysicalLines()
   return _physicalLines.size();
 }
 
+// from http://stackoverflow.com/questions/3418231/c-replace-part-of-a-string-with-another-string
+void replaceAll(string& str, const string& from, const string& to) {
+  size_t start_pos = 0;
+  while((start_pos = str.find(from, start_pos)) != string::npos) {
+    str.replace(start_pos, from.length(), to);
+    start_pos += to.length(); 
+  }
+}  
+  
 void TextBuffer::normaliseNewlines(string& inText)
 {
-  #ifndef LOST_USE_EASTL
-    boost::algorithm::ireplace_all(inText, "\r\n", "\n");
-    boost::algorithm::ireplace_all(inText, "\r", "\n");
-  #else
-    // FIXME disabled for use with eastl
-  #endif
+  replaceAll(inText, "\r\n", "\n");
+  replaceAll(inText, "\r", "\n");
 }
 
 void TextBuffer::breakModeNone()
@@ -354,10 +348,9 @@ uint32_t TextBuffer::numCharsInPhysicalLine(uint32_t lineIndex)
 
 void TextBuffer::insertUtf8StringAtPosition(uint32_t lineIndex, uint32_t charIndex, const string& inString)
 {
-  ftxt::utf8_decoder decoder;
   Utf32String decoded;
-  ftxt::decode(decoder, inString.begin(), inString.end(),
-         std::back_insert_iterator<Utf32String>(decoded));
+  utf8::utf8to32(inString.begin(), inString.end(),
+         back_inserter(decoded));
 
   Range r;
   if(lineIndex < _physicalLines.size())

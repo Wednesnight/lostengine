@@ -4,6 +4,7 @@
 #include "lost/common/Logger.h"
 #include "lost/platform/Type.h"
 #include "lost/platform/Time.h"
+#include <iostream>
 
 #ifdef ANDROID
 extern "C" {

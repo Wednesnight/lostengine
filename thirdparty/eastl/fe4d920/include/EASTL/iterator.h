@@ -332,14 +332,14 @@ namespace eastl
         typedef typename Container::const_reference const_reference;
 
     protected:
-        Container& container;
+        Container* container;
 
     public:
         explicit back_insert_iterator(Container& x)
-            : container(x) { }
+            : container(&x) { }
 
         back_insert_iterator& operator=(const_reference value)
-            { container.push_back(value); return *this; }
+            { container->push_back(value); return *this; }
 
         back_insert_iterator& operator*()
             { return *this; }

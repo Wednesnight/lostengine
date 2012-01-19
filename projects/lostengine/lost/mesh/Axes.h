@@ -20,13 +20,13 @@ struct Axes : public MESHTYPE
   {
     float len = 1;
     this->drawMode = GL_LINES;
-    boost::uint32_t numLines = 6;
+    u32 numLines = 6;
     // since we use a color array to specify the colorof the lines,
     // and the color should be constant over a half axis, we need
     // toconstruct the lines with two vertices each.
-    boost::uint32_t numVertices = numLines*2;
-    boost::uint32_t numIndices = numVertices;
-    boost::uint32_t numColors = numVertices;
+    u32 numVertices = numLines*2;
+    u32 numIndices = numVertices;
+    u32 numColors = numVertices;
     this->indices(true);
     this->vertices(true);
     this->colors(true);

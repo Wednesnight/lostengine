@@ -48,7 +48,7 @@ public:
   void eraseCharAtPosition(uint32_t lineIndex, uint32_t charIndex);
   void eraseChars(uint32_t fromLine, uint32_t fromIndex, uint32_t toLine, uint32_t toIndex);
 
-  typedef fhtagn::text::utf32_string Utf32String;
+  typedef text::utf32_string Utf32String;
   struct WordPos
   {
     WordPos() : size(0), pos(0), prevchar(0) {}

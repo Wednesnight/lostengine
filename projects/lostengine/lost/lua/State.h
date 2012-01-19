@@ -1,9 +1,9 @@
 #ifndef LOST_LUA_STATE_H
 #define LOST_LUA_STATE_H
 
+#include "lost/common/Disallow.h"
 #include "lost/common/Data.h"
 #include "lost/resource/DefaultLoader.h"
-#include <boost/utility.hpp>
 #include "lost/lua/forward.h"
 
 #include <slub/globals.h>
@@ -12,9 +12,7 @@ namespace lost
 {
   namespace lua
   {
-
-
-    struct State : boost::noncopyable
+    struct State 
     {
       State(resource::LoaderPtr inLoader = resource::LoaderPtr(new resource::DefaultLoader));
       ~State();
@@ -64,6 +62,9 @@ namespace lost
       map<string, string> fileHashes;
       resource::LoaderPtr loader;
       slub::globals globals;
+    private:
+      DISALLOW_COPY_AND_ASSIGN(State);
+      
     };
 
   }

@@ -1,15 +1,14 @@
 #ifndef LOST_AL_DEVICE_H
 #define LOST_AL_DEVICE_H
 
+#include "lost/common/Disallow.h"
 #include "lost/al/al.h"
-#include <boost/noncopyable.hpp>
 
 namespace lost
 {
 namespace al
 {
-
-  struct Device : private boost::noncopyable
+struct Device
 {
   Device(const string& inDeviceId);
   Device(); // creates a default device
@@ -24,6 +23,10 @@ namespace al
 
   ALCdevice* device;
   string deviceId;
+
+  private:
+    DISALLOW_COPY_AND_ASSIGN(Device);
+  
 };
 
 }

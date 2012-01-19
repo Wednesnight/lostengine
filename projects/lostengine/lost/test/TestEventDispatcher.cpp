@@ -1,16 +1,13 @@
-#include <boost/bind.hpp>
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 #include "lost/application/KeyEvent.h"
 #include "lost/application/MouseEvent.h"
-#include <boost/function.hpp>
 #include "lost/event/Listener.h"
 
 using namespace lost::event;
 using namespace lost::application;
-using namespace boost;
 
 TEST(eventmanager)
 {
@@ -24,7 +21,7 @@ struct EventListener : Listener
   EventListener(bool* inDest) : dest(inDest) {}
   void call(const EventPtr& event)
   {
-    IOUT("EventListener fired for : "+ event->type);
+    IOUT("EventListener fired for : "<< event->type);
     (*dest) = true;
   }
 };
@@ -47,7 +44,7 @@ struct MouseListener : public Listener
   MouseListener(bool* inDest) : dest(inDest) {}
   void call(const EventPtr& event)
   {
-    IOUT("EventListener fired for : "+ event->type);
+    IOUT("EventListener fired for : "<< event->type);
     (*dest) = true;
   }
 };

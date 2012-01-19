@@ -111,9 +111,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint8_t val)
       break;
     }
     default:
-      std::ostringstream os;
+      lost::common::StringStream os;
       os << "can't set uint8_t for element "<<et;
-      LOGTHROW(std::runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str().c_str()))
       break;
   }
 }
@@ -142,9 +142,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint16_t val)
       break;
     }
     default:
-      std::ostringstream os;
+      lost::common::StringStream os;
       os << "can't set uint16_t for element "<<et;
-      LOGTHROW(std::runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str().c_str()))
       break;
   }
 }
@@ -173,9 +173,9 @@ void HostBuffer::set(uint32_t idx, UsageType ut, uint32_t val)
       break;
     }
     default:
-      std::ostringstream os;
+      lost::common::StringStream os;
       os << "can't set uint32_t for element "<<et;
-      LOGTHROW(std::runtime_error(os.str()))
+      LOGTHROW(std::runtime_error(os.str().c_str()))
       break;
   }
 }

@@ -18,7 +18,7 @@ end
 
 function PrefsManager:load()
   local result = nil
-  if boost.filesystem.exists(self._prefsFilePath) then
+  if lost.fs.exists(self._prefsFilePath) then
     local file = io.open(self._prefsFilePath:native())
     local data = file:read("*all")
     file:close()
@@ -38,10 +38,10 @@ function PrefsManager:save(t)
   local s = lost.common.Serializer()
   local data = s:serialize(t)
   
-  if not boost.filesystem.exists(self._prefsFilePath) then
+  if not lost.fs.exists(self._prefsFilePath) then
     log.debug("no prefs path found, creating")
     local dirpath = lost.platform.getUserDataPath() / self._prefix
-    boost.filesystem.create_directories(dirpath)
+    lost.fs.create_directories(dirpath)
   end
   
   local prefsFile = io.open(self._prefsFilePath:native(),"w+")

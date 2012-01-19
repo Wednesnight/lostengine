@@ -1,7 +1,7 @@
 #ifndef LOST_FONT_FORWARD_H
 #define LOST_FONT_FORWARD_H
 
-#include "lost/font/textforward.h"
+#include "lost/text/types.h"
 
 namespace lost
 {
