@@ -10,12 +10,22 @@ env = env.Clone(COMPONENT_NAME='LostEngine',
 configurations = {
     'Debug' : {
         'Append' : dict(
+            CPPDEFINES = [
+                "'SLUB_STRING_INCLUDE=<EASTL/string.h>'",
+                "'SLUB_STRING_TYPE=eastl::string'",
+                "'SLUB_LIST_INCLUDE=<EASTL/list.h>'",
+                "'SLUB_LIST_TYPE=eastl::list'",
+                "'SLUB_MAP_INCLUDE=<EASTL/map.h>'",
+                "'SLUB_MAP_TYPE=eastl::map'"
+            ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
                 env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
                 env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
                 env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
+                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-debug.pch'
@@ -41,12 +51,22 @@ configurations = {
     },
     'Release' : {
         'Append' : dict(
+            CPPDEFINES = [
+                "'SLUB_STRING_INCLUDE=<EASTL/string.h>'",
+                "'SLUB_STRING_TYPE=eastl::string'",
+                "'SLUB_LIST_INCLUDE=<EASTL/list.h>'",
+                "'SLUB_LIST_TYPE=eastl::list'",
+                "'SLUB_MAP_INCLUDE=<EASTL/map.h>'",
+                "'SLUB_MAP_TYPE=eastl::map'"
+            ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
                 env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
                 env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
                 env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include')
+                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-release.pch'
@@ -157,7 +177,9 @@ target_files.extend(_outputs)
 
 gyp_target = env.Alias('UnitTests', target_files)
 dependencies = [
-    Alias('LostEngine')
+    Alias('LostEngine'),
+    Alias('lua'),
+    Alias('slub')
 ]
 env.Requires(target_files, dependencies)
 env.Requires(gyp_target, dependencies)

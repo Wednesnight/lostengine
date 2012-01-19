@@ -65,6 +65,7 @@ namespace lost
         delete *tasklet;
       }
       tasklets.clear();
+      finalize();
     }
 
     void Application::startup(const ApplicationEventPtr& event)
