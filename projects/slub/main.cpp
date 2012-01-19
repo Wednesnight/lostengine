@@ -23,10 +23,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "foo.h"
 
-#include <lost/math/Vec2.h>
-#include <lost/math/io.h>
-
-using namespace lost::math;
 using namespace slub;
 
 void testing0() {
@@ -131,55 +127,6 @@ int main (int argc, char * const argv[]) {
   slub::clazz<std::string>(L, "str").constructor();
 
   if (luaL_dostring(L, "local s = str()")) {
-    std::cout << lua_tostring(L, -1) << std::endl;
-  }
-
-  slub::package(L, "lost").package("math").clazz<Vec2>("Vec2")
-    .constructor()
-    .constructor<float, float>()
-    .constructor<Vec2&>()
-    .method("zero", &Vec2::zero)
-    .field("x", &Vec2::x)
-    .field("y", &Vec2::y)
-    .field("width", &Vec2::width)
-    .field("height", &Vec2::height)
-    .mul<Vec2, float>()
-    .mul<float, Vec2>()
-    .add<Vec2, Vec2>()
-    .sub<Vec2, Vec2>()
-    .tostring();
-
-  slub::package lost_math = slub::package(L, "lost").package("math");
-  lost_math.function("len", (float(*)(const Vec2&))&len);
-  lost_math.function("squlen", (float(*)(const Vec2&))&squlen);
-  lost_math.function("normalise", (Vec2&(*)(Vec2&))&normalise);
-  lost_math.function("perpendicular", (Vec2(*)(Vec2&))&perpendicular);
-  lost_math.function("angle", (float(*)(const Vec2&, const Vec2&))&angle);
-  lost_math.function("compare", (bool(*)(const Vec2&, const Vec2&, float))&compare);
-
-  slub::package(L, "lost").package("math").package("Vec2").function("nestedTesting0", &testing0);
-
-  if (luaL_dostring(L,
-                "print(lost) print(lost.math) print(lost.math.Vec2) print(lost.math.Vec2.nestedTesting0)"
-                "lost.math.Vec2.nestedTesting0() "
-                "local v2 = lost.math.Vec2() "
-                "local vec2 = lost.math.Vec2(10, 10) "
-                "local vec2_2 = lost.math.Vec2(vec2) "
-                "vec2_2.x = 11 "
-                "vec2_2.y = 11 "
-                "print(vec2 * vec2_2) "
-                "print(vec2 * 10) "
-                "print(vec2 + vec2_2) "
-                "print(vec2 - vec2_2) "
-                "local v = vec2 - vec2_2 "
-                "print(v.x, v.y) "
-                "print(lost.math.len(v)) "
-                "print(lost.math.squlen(v)) "
-                "print(tostring(lost.math.normalise(v))) "
-                "print(tostring(lost.math.perpendicular(v))) "
-                "print(lost.math.angle(v, v2)) "
-                "print(lost.math.compare(v, v2, 0.1)) "
-                "print(lost.math.compare(v, v, 0.1)) ")) {
     std::cout << lua_tostring(L, -1) << std::endl;
   }
 
