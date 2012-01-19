@@ -1,3 +1,20 @@
+/*
+The MIT License (MIT)
+Copyright (c) 2011 Timo Boll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #include "../../include/slub/config.h"
 #include "../../include/slub/registry.h"
 #include "../../include/slub/constructor.h"
@@ -14,7 +31,7 @@ namespace slub {
   registry_holder registry::instance;
 
   registry_holder::~registry_holder() {
-    for (std::map<const std::type_info*, registry*>::iterator idx = begin(); idx != end(); ++idx) {
+    for (map<const std::type_info*, registry*>::iterator idx = begin(); idx != end(); ++idx) {
       delete idx->second;
     }
     clear();
@@ -26,25 +43,25 @@ namespace slub {
   }
 
   registry::~registry() {
-    for (std::list<abstract_constructor*>::iterator midx = constructors.begin(); midx != constructors.end(); ++midx) {
+    for (list<abstract_constructor*>::iterator midx = constructors.begin(); midx != constructors.end(); ++midx) {
       delete *midx;
     }
     constructors.clear();
     
-    for (std::map<string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
+    for (map<string, abstract_field*>::iterator idx = fieldMap.begin(); idx != fieldMap.end(); ++idx) {
       delete idx->second;
     }
     fieldMap.clear();
     
-    for (std::map<string, std::list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
-      for (std::list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
+    for (map<string, list<abstract_method*> >::iterator idx = methodMap.begin(); idx != methodMap.end(); ++idx) {
+      for (list<abstract_method*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
       }
     }
     methodMap.clear();
     
-    for (std::map<string, std::list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
-      for (std::list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
+    for (map<string, list<abstract_operator*> >::iterator idx = operatorMap.begin(); idx != operatorMap.end(); ++idx) {
+      for (list<abstract_operator*>::iterator midx = idx->second.begin(); midx != idx->second.end(); ++midx) {
         delete *midx;
       }
     }
@@ -67,7 +84,7 @@ namespace slub {
       throw e;
     }
     
-    for (std::list<abstract_constructor*>::iterator cidx = constructors.begin(); cidx != constructors.end(); ++cidx) {
+    for (list<abstract_constructor*>::iterator cidx = constructors.begin(); cidx != constructors.end(); ++cidx) {
       if ((*cidx)->check(L)) {
         return *cidx;
       }
@@ -85,7 +102,7 @@ namespace slub {
   bool registry::containsField(const string& fieldName) {
     bool result = fieldMap.find(fieldName) != fieldMap.end();
     if (!result && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+      for (list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
         result = (*idx)->containsField(fieldName);
       }
     }
@@ -98,7 +115,7 @@ namespace slub {
       result = fieldMap[fieldName];
     }
     if (result == NULL && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
+      for (list<registry*>::iterator idx = baseList_.begin(); result == NULL && idx != baseList_.end(); ++idx) {
         result = (*idx)->getField(v, fieldName, false);
       }
     }
@@ -116,7 +133,7 @@ namespace slub {
   bool registry::containsMethod(const string& methodName) {
     bool result = methodMap.find(methodName) != methodMap.end();
     if (!result && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+      for (list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
         result = (*idx)->containsMethod(methodName);
       }
     }
@@ -134,7 +151,7 @@ namespace slub {
     abstract_method* result = &not_found;
     if (methodMap.find(methodName) != methodMap.end()) {
       result = NULL;
-      for (std::list<abstract_method*>::iterator midx = methodMap[methodName].begin();
+      for (list<abstract_method*>::iterator midx = methodMap[methodName].begin();
            (result == &not_found || result == NULL) && midx != methodMap[methodName].end(); ++midx) {
         if ((*midx)->check(L)) {
           result = *midx;
@@ -142,7 +159,7 @@ namespace slub {
       }
     }
     if ((result == &not_found || result == NULL) && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin();
+      for (list<registry*>::iterator idx = baseList_.begin();
            (result == &not_found || result == NULL) && idx != baseList_.end(); ++idx) {
         abstract_method* r = (*idx)->getMethod(methodName, L, false);
         if ((r != &not_found && r != NULL) || result == &not_found) {
@@ -190,7 +207,7 @@ namespace slub {
   bool registry::containsOperator(const string& operatorName) {
     bool result = operatorMap.find(operatorName) != operatorMap.end();
     if (!result && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
+      for (list<registry*>::iterator idx = baseList_.begin(); !result && idx != baseList_.end(); ++idx) {
         result = (*idx)->containsOperator(operatorName);
       }
     }
@@ -208,7 +225,7 @@ namespace slub {
     abstract_operator* result = &not_found;
     if (operatorMap.find(operatorName) != operatorMap.end()) {
       result = NULL;
-      for (std::list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin();
+      for (list<abstract_operator*>::iterator oidx = operatorMap[operatorName].begin();
            (result == &not_found || result == NULL) && oidx != operatorMap[operatorName].end(); ++oidx)
       {
         if ((*oidx)->check(L)) {
@@ -217,7 +234,7 @@ namespace slub {
       }
     }
     if ((result == &not_found || result == NULL) && hasBase()) {
-      for (std::list<registry*>::iterator idx = baseList_.begin();
+      for (list<registry*>::iterator idx = baseList_.begin();
            (result == &not_found || result == NULL) && idx != baseList_.end(); ++idx)
       {
         abstract_operator* r = (*idx)->getOperator(operatorName, L, false);
@@ -252,7 +269,7 @@ namespace slub {
     return baseList_.size() > 0;
   }
 
-  const std::list<registry*> registry::baseList() {
+  const list<registry*> registry::baseList() {
     return baseList_;
   }
 

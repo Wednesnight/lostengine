@@ -1,3 +1,20 @@
+/*
+The MIT License (MIT)
+Copyright (c) 2011 Timo Boll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #ifndef SLUB_REGISTRY_H
 #define SLUB_REGISTRY_H
 
@@ -5,8 +22,6 @@
 #include "forward.h"
 #include "slub_lua.h"
 
-#include <map>
-#include <list>
 #include <iostream>
 #include <typeinfo>
 
@@ -26,7 +41,7 @@ namespace slub {
 
   struct registry;
 
-  struct registry_holder : public std::map<const std::type_info*, registry*> {
+  struct registry_holder : public map<const std::type_info*, registry*> {
     ~registry_holder();
   };
   
@@ -78,7 +93,7 @@ namespace slub {
     
     void registerBase(registry* base);
     bool hasBase();
-    const std::list<registry*> baseList();
+    const list<registry*> baseList();
 
   private:
 
@@ -91,7 +106,7 @@ namespace slub {
     static registry* get() {
       registry* reg = NULL;
       const std::type_info& type = typeid(T);
-      std::map<const std::type_info*, registry*>::iterator iter = instance.find(&type);
+      map<const std::type_info*, registry*>::iterator iter = instance.find(&type);
       if (iter == instance.end()) {
         reg = new registry(type, getTypeName<T>());
         instance[&type] = reg;
@@ -110,13 +125,13 @@ namespace slub {
     const std::type_info& type;
     string typeName;
     
-    std::list<abstract_constructor*> constructors;
+    list<abstract_constructor*> constructors;
 
-    std::map<string, abstract_field*> fieldMap;
-    std::map<string, std::list<abstract_method*> > methodMap;
-    std::map<string, std::list<abstract_operator*> > operatorMap;
+    map<string, abstract_field*> fieldMap;
+    map<string, list<abstract_method*> > methodMap;
+    map<string, list<abstract_operator*> > operatorMap;
 
-    std::list<registry*> baseList_;
+    list<registry*> baseList_;
 
   };
 
