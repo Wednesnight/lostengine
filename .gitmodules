@@ -1,3 +1,6 @@
 [submodule "thirdparty/lua/lua_5_1_4"]
 	path = thirdparty/lua/lua_5_1_4
 	url = git@github.com:Wednesnight/lua_5_1_4.git
+[submodule "thirdparty/slub"]
+	path = thirdparty/slub
+	url = git@github.com:Wednesnight/slub.git

@@ -13,6 +13,7 @@
     'lua_path': '../../thirdparty/lua/lua_5_1_4',
     'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
     'opengl_path': '../../thirdparty/OpenGL',
+    'slub_path': '../../thirdparty/slub',
     'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
     'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
     'tinythread_path': '../../thirdparty/tinythread/1_0/source',
@@ -472,7 +473,7 @@
       'include_dirs': [
 
         '.',
-        '../slub/include',
+        '<@(slub_path)/include',
         '<@(boost_path)',
         '<@(box2d_path)/Box2D',
         '<@(eastl_path)/include',
@@ -695,10 +696,10 @@
         'lost/time/Timer.cpp',
 
         # slub
-        '../slub/src/slub/call.cpp',
-        '../slub/src/slub/clazz.cpp',
-        '../slub/src/slub/function.cpp',
-        '../slub/src/slub/registry.cpp',
+        '<@(slub_path)/src/slub/call.cpp',
+        '<@(slub_path)/src/slub/clazz.cpp',
+        '<@(slub_path)/src/slub/function.cpp',
+        '<@(slub_path)/src/slub/registry.cpp',
 
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/codecvt_error_category.cpp',
