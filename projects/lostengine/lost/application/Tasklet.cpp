@@ -5,7 +5,6 @@
 #include "lost/event/EventDispatcher.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/Application.h"
-#include <boost/bind.hpp>
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
 #include <algorithm>
@@ -33,7 +32,6 @@
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/application/SpawnTaskletEvent.h"
 
-using namespace boost;
 using namespace lost::event;
 using namespace lost::lua;
 using namespace lost::platform;

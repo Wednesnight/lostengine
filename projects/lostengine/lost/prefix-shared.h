@@ -10,7 +10,6 @@
   #define BOOST_FILESYSTEM_VERSION 3
 #endif
   #define BOOST_SYSTEM_NO_DEPRECATED
-  // boost
   #ifndef __STDC_CONSTANT_MACROS
     #define __STDC_CONSTANT_MACROS
   #endif
@@ -22,6 +21,7 @@
   #endif
 
 #include <stdint.h>
+#include "lost/types.h"
 
 #define LOST_USE_EASTL
 #ifndef LOST_USE_EASTL
@@ -32,6 +32,7 @@
   namespace lost
   {
     using std::string;
+    using std::basic_string;
     using std::list;
     using std::map;
     using std::vector;
@@ -46,6 +47,7 @@
   namespace lost
   {
     using eastl::string;
+    using eastl::basic_string;
     using eastl::list;
     using eastl::map;
     using eastl::vector;

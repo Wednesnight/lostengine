@@ -27,7 +27,7 @@ struct TrueTypeFont : Font
 
 private:
   freetype::FacePtr face;
-  map<fhtagn::text::utf32_char_t, GlyphPtr> char2glyph; 
+  map<lost::text::utf32_char, GlyphPtr> char2glyph; 
   vector<GlyphPtr> glyphs; // this list of glyphs contains the glyphs in the order they were rendered
                                 // this is important to preserve the ordering fo rth packing of the atlas
 
@@ -36,7 +36,7 @@ private:
    *  and updates it if they don't.
    *  @return true if the glyph was rendered, false if it was cached and didn't need to be rendered again.
    */
-  bool renderGlyph(fhtagn::text::utf32_char_t c);
+  bool renderGlyph(lost::text::utf32_char c);
   void rebuildTextureAtlas(); // builds a new texture atlas from the current glyphs in the cache.
 };
 }  

@@ -9,11 +9,11 @@ namespace lost
 namespace font
 {
 RenderedTextPtr render(const string & inText, const FontPtr& font, bool characterMetrics, int align = 0);
-RenderedTextPtr render(const fhtagn::text::utf32_string& inText, const FontPtr& font, bool characterMetrics, int align = 0);
+RenderedTextPtr render(const lost::text::utf32_string& inText, const FontPtr& font, bool characterMetrics, int align = 0);
 void render(const string & inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
-void render(const fhtagn::text::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
-void render(const fhtagn::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
-void render(const fhtagn::text::utf32_string& inText, const vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
+void render(const lost::text::utf32_string& inText, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
+void render(const lost::text::utf32_string& inText, const Range& range, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
+void render(const lost::text::utf32_string& inText, const vector<Range>& lines, const FontPtr& font, const RenderedTextPtr& target, bool characterMetrics, int align = 0);
 }
 }
 

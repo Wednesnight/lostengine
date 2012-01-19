@@ -88,7 +88,7 @@ void RectPacker::pack(const lost::math::Rect& targetArea,
   // clean up temporary data
   sourceRects.clear();
   recursionStack.clear();
-//  DOUT("searched "<<(boost::uint32_t)((sumIter/sumNodes)*100)<<"% of all nodes");
+//  DOUT("searched "<<(u32)((sumIter/sumNodes)*100)<<"% of all nodes");
 //  DOUT(" iterations: "<<sumIter<<" nodes:"<<sumNodes);
 }
 

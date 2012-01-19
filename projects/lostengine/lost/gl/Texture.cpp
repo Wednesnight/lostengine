@@ -7,7 +7,6 @@
 #include "lost/gl/Context.h"
 #include "lost/profiler/Blackbox.h"
 
-using namespace boost;
 using namespace lost::bitmap;
 
 namespace lost

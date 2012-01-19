@@ -1,7 +1,7 @@
 #ifndef LOST_PLATFORM_PATHS_H
 #define LOST_PLATFORM_PATHS_H
 
-#include "boost/filesystem.hpp"
+#include "lost/fs/Path.h"
 
 namespace lost 
 {
@@ -14,15 +14,15 @@ namespace platform
     //           the application bundle
     // Windows : the directory the main executable remains in
     // Linux   : not implemented
-    boost::filesystem::path getResourcePath();
+    lost::fs::Path getResourcePath();
 
     // the directory the main executable remains in
     // Mac OS X: not implemented
     // Windows : done
     // Linux   : not implemented
-    boost::filesystem::path getApplicationDirectory();
+    lost::fs::Path getApplicationDirectory();
     
-    boost::filesystem::path getUserDataPath();
+    lost::fs::Path getUserDataPath();
 }
 }
 

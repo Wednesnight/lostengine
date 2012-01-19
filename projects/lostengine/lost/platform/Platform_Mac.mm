@@ -4,7 +4,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdexcept>
 #include <sys/time.h>
-#include "boost/filesystem.hpp"
 #import <Foundation/Foundation.h>
 #include "lost/common/Logger.h"
 #import <AppKit/NSPasteboard.h>
@@ -45,13 +44,13 @@ namespace lost
     }
 
     // TODO: getApplicationDirectory() not implemented
-    boost::filesystem::path getApplicationDirectory()
+    lost::fs::Path getApplicationDirectory()
     {
-      boost::filesystem::path result;
+      lost::fs::Path result;
       return result;
     }
 
-    boost::filesystem::path getResourcePath()
+    lost::fs::Path getResourcePath()
     {
       CFBundleRef mainBundle = CFBundleGetMainBundle();
       CFURLRef resourceDirURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
@@ -77,12 +76,12 @@ namespace lost
       string result(reinterpret_cast<char*>(buffer));
       CFRelease(resourceDirURL);
             
-      return boost::filesystem::path(result);
+      return lost::fs::Path(result);
     }
     
-    boost::filesystem::path getUserDataPath()
+    lost::fs::Path getUserDataPath()
     {
-      boost::filesystem::path result;
+      lost::fs::Path result;
       
       NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
       NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

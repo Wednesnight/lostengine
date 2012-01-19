@@ -6,9 +6,6 @@
 #include "lost/application/ResizeEvent.h"
 #include "lost/event/EventDispatcher.h"
 
-#include <boost/thread.hpp>
-#include <boost/bind.hpp>
-
 extern "C" {
   #include <jni.h>
   #include <android_native_app_glue.h>

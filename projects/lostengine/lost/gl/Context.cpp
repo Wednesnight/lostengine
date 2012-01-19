@@ -5,25 +5,19 @@
 #include "lost/camera/Camera.h"
 #include <algorithm>
 #include "lost/gl/ShaderProgram.h"
-
 #include "lost/mesh/Mesh.h"
 #include "lost/gl/FrameBuffer.h"
 #include "lost/bitmap/Bitmap.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/UniformBlock.h"
-#include <boost/thread/tss.hpp>
-#include <boost/thread/thread.hpp>
 #include "lost/profiler/Blackbox.h"
+#include "thread_specific_ptr.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
 
-void context_cleanup(lost::gl::Context* p)
-{
-}
-
-boost::thread_specific_ptr<lost::gl::Context> context_ptr(context_cleanup);
+tinythread::thread_specific_ptr<lost::gl::Context> context_ptr;
 
 bool getBoolParam(GLenum pname)
 {

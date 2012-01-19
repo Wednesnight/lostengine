@@ -18,8 +18,8 @@ namespace lost
       Circle(const double diameter)
       {
         this->drawMode = CircleType;
-        boost::uint32_t numVertices = (CircleType == GL_TRIANGLE_FAN) ? 361 : 360;
-        boost::uint32_t numIndices = numVertices;
+        u32 numVertices = (CircleType == GL_TRIANGLE_FAN) ? 361 : 360;
+        u32 numIndices = numVertices;
         this->vertices(true);
         this->indices(true);
         this->resetVertices(numVertices);
@@ -72,8 +72,8 @@ namespace lost
       Ellipse(const math::Vec2& diameter)
       {
         this->drawMode = EllipseType;
-        boost::uint32_t numVertices = (EllipseType == GL_TRIANGLE_FAN) ? 361 : 360;
-        boost::uint32_t numIndices = numVertices;
+        u32 numVertices = (EllipseType == GL_TRIANGLE_FAN) ? 361 : 360;
+        u32 numIndices = numVertices;
         this->vertices(true);
         this->indices(true);
         this->resetVertices(numVertices);

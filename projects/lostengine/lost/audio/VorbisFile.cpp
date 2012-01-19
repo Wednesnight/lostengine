@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include "lost/common/Logger.h"
 
-using namespace boost;
-
 namespace lost
 {
 namespace audio
@@ -18,9 +16,9 @@ VorbisFile::VorbisFile(const common::DataPtr& inFile)
 	if(!oggfile)
     {
         EOUT("throwing from here");
-        std::ostringstream os;
+      lost::common::StringStream os;
         os << "couldn't open ogg file '";
-        throw std::runtime_error(os.str());
+        throw std::runtime_error(os.str().c_str());
     }
 	stb_vorbis_info info = stb_vorbis_get_info(oggfile);
 	stb_vorbis_close(oggfile);

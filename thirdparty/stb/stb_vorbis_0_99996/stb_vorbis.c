@@ -456,7 +456,7 @@ extern int my_prof(int slot);
 //#define stb_prof my_prof
 
 #ifndef stb_prof
-#define stb_prof(x)  0
+#define stb_prof(x) 
 #endif
 
 #if defined(STB_VORBIS_NO_PUSHDATA_API)
@@ -995,7 +995,8 @@ static int capture_pattern(vorb *f)
 
 static int start_page_no_capturepattern(vorb *f)
 {
-   uint32 loc0,loc1,n,i;
+   uint32 loc0,loc1,n;
+  int i;
    // stream structure version
    if (0 != get8(f)) return error(f, VORBIS_invalid_stream_structure_version);
    // header flag
@@ -1019,8 +1020,8 @@ static int start_page_no_capturepattern(vorb *f)
    // assume we _don't_ know any the sample position of any segments
    f->end_seg_with_known_loc = -2;
    if (loc0 != ~0 || loc1 != ~0) {
-      // determine which packet is the last one that will complete
-      for (i=f->segment_count-1; i >= 0; --i)
+      // determine which packet is the last one that will complet
+     for (i=f->segment_count-1; i >= 0; --i)
          if (f->segments[i] < 255)
             break;
       // 'i' is now the index of the _last_ segment of a packet that ends

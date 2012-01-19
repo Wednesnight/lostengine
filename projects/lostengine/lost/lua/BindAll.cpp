@@ -11,6 +11,7 @@
 #include "lost/lua/bindings/LostCommon.h"
 #include "lost/lua/bindings/LostEvent.h"
 #include "lost/lua/bindings/LostFont.h"
+#include "lost/lua/bindings/LostFs.h"
 #include "lost/lua/bindings/LostGL.h"
 #include "lost/lua/bindings/LostLua.h"
 #include "lost/lua/bindings/LostMath.h"
@@ -20,7 +21,6 @@
 #include "lost/lua/bindings/LostResource.h"
 #include "lost/lua/bindings/LostRg.h"
 #include "lost/lua/bindings/LostTime.h"
-#include "lost/lua/bindings/ThirdpartyBoost.h"
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
 
 
@@ -51,6 +51,7 @@ namespace lost
       // other packages derive from Event package so register that first
       LostCommon(state);
       LostEvent(state);
+      LostFs(state);
       LostApplication(state);
 #ifndef ANDROID
       LostAudio(state);
@@ -67,8 +68,6 @@ namespace lost
       LostResource(state);
       LostRg(state);
       LostTime(state);
-
-      ThirdpartyBoost(state);
       ThirdpartyBox2D(state);
       LostBox2D(state); // bind after all of box2d was bound
     }

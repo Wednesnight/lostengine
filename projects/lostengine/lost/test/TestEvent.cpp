@@ -9,8 +9,6 @@
 using namespace lost::event;
 using namespace lost::application;
 
-using namespace boost;
-
 TEST(event)
 {
   lost::event::Event event(lost::common::djb2Hash("asd"));

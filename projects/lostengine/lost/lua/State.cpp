@@ -7,8 +7,6 @@
 #pragma warning(disable:4996) // no deprecated warnings for hashlib++
 #include <md5.h>
 
-using namespace boost;
-
 static lost::map<lua_State*, lost::lua::State*> stateMap;
 
 namespace lost

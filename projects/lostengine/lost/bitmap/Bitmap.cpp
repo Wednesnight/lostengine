@@ -126,7 +126,7 @@ void Bitmap::init(uint32_t inWidth,
 //
 // the whole conversion process from one component type to another should really be programmable, but I can't be bothered right now.
 // this thing was really only meant to convert alpha to rgba. This was tweaked to work for the fonts, everything else is an
-// untested bonus. Maybe we should really resort to using boost::gil, but this should be enough for now.
+// untested bonus. 
 //
 void Bitmap::copyPixel(uint8_t* dest,
                 Components destComponents,
