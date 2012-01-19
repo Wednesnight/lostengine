@@ -83,38 +83,52 @@ namespace lost
       ApplicationEventPtr applicationEvent = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(applicationEvent);
 
-      {
-        XEvent event;
-        event.xclient.message_type = ClientMessage;
-        event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
-        XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
-      }
+      XEvent event;      
+      int fd = ConnectionNumber(hiddenMembers->display);
 
-      XEvent event;
       while(running) {
+
         XFlush(hiddenMembers->display);
-        while (XPending(hiddenMembers->display)) {
-          XNextEvent(hiddenMembers->display, &event);
-          switch (event.type) {
 
-            case ClientMessage:
-              if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
-                DOUT("wakeup!");
+        struct timeval tv;
+        fd_set rfds;
+        FD_ZERO(&rfds);
+        FD_SET(fd,&rfds);
+        memset(&tv,0,sizeof(tv));
+        tv.tv_usec = 100000; /* delay in microseconds = 100 milliseconds */
+
+        if (select(fd+1,&rfds,0,0,&tv) > 0) {
+
+          XSync(hiddenMembers->display, False);        
+
+          while(XEventsQueued(hiddenMembers->display, QueuedAlready) > 0) {
+
+            XNextEvent(hiddenMembers->display, &event);
+
+            switch (event.type) {
+              
+              case ClientMessage:
+                if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
+                  DOUT("wakeup!");
+                  break;
+                }
+                
+              default:
+                if (event.xclient.window) {
+                  linux_::WindowHandler* windowHandler = NULL;
+                  if (xWindows.find(event.xclient.window) != xWindows.end()) {
+                    windowHandler = xWindows[event.xclient.window];
+                  }
+                  
+                  if (windowHandler != NULL) {
+                    windowHandler->handleEvent(event);
+                  }
+                }
                 break;
-              }
+                
+            }
 
-            default:
-              if (event.xclient.window) {
-                linux_::WindowHandler* windowHandler = NULL;
-                if (xWindows.find(event.xclient.window) != xWindows.end()) {
-                  windowHandler = xWindows[event.xclient.window];
-                }
-
-                if (windowHandler != NULL) {
-                  windowHandler->handleEvent(event);
-                }
-              }
-              break;
+            XFlush(hiddenMembers->display);
 
           }
         }

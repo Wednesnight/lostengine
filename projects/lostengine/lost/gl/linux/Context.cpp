@@ -57,7 +57,7 @@ namespace lost
 
     void Context::vsync(bool enable)
     {
-      // FIXME: implement Context::vsync
+      XSynchronize(hiddenMembers->glDisplay, enable ? True : False);
     }
 
     void Context::multithreaded(bool enable)
