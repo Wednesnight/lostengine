@@ -6,8 +6,6 @@
 #include <boost/filesystem/operations.hpp>
 #include <boost/system/error_code.hpp>
 
-#include <slub/slub.h>
-
 using namespace boost::filesystem;
 
 std::ostream& operator<<(std::ostream& stream, const path& p)

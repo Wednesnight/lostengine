@@ -406,6 +406,10 @@
           'defines': [
             'SLUB_STRING_INCLUDE=<EASTL/string.h>',
             'SLUB_STRING_TYPE=eastl::string',
+            'SLUB_LIST_INCLUDE=<EASTL/list.h>',
+            'SLUB_LIST_TYPE=eastl::list',
+            'SLUB_MAP_INCLUDE=<EASTL/map.h>',
+            'SLUB_MAP_TYPE=eastl::map',
           ],
         },
 

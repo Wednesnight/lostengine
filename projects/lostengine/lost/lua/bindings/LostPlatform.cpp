@@ -3,8 +3,6 @@
 
 #include "lost/platform/Platform.h"
 
-#include <slub/slub.h>
-
 using namespace slub;
 using namespace lost::platform;
 

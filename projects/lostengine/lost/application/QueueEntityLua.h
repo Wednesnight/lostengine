@@ -3,8 +3,7 @@
 
 #include "lost/application/forward.h"
 #include "lost/application/QueueEntity.h"
-
-#include <slub/slub.h>
+#include "lost/lua/lua.h"
 
 namespace lost
 {
