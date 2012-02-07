@@ -24,7 +24,6 @@
     'SLUB_LIST_TYPE'      : 'eastl::list',
     'SLUB_MAP_INCLUDE'    : '<EASTL/map.h>',
     'SLUB_MAP_TYPE'       : 'eastl::map',
-    'SLUB_INCLUDES'       : '<@(eastl_path)/include',
 
     # dependencies
     'boost_path': '../../thirdparty/boost/boost_1_44_0',
@@ -46,6 +45,19 @@
     'unittest++_path': '../../thirdparty/UnitTest++',
     'zlib_path': '../../thirdparty/zlib/zlib_1_2_3',
     'zziplib_path': '../../thirdparty/zziplib/zziplib-0.13.58',
+
+  },
+
+  'target_defaults': {
+
+    'defines': [
+      'SLUB_STRING_INCLUDE=<(SLUB_STRING_INCLUDE)',
+      'SLUB_STRING_TYPE=<(SLUB_STRING_TYPE)',
+      'SLUB_LIST_INCLUDE=<(SLUB_LIST_INCLUDE)',
+      'SLUB_LIST_TYPE=<(SLUB_LIST_TYPE)',
+      'SLUB_MAP_INCLUDE=<(SLUB_MAP_INCLUDE)',
+      'SLUB_MAP_TYPE=<(SLUB_MAP_TYPE)',
+    ],
 
   },
 

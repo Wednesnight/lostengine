@@ -15,6 +15,10 @@
 #
 {
 
+  'includes': [
+    'settings.gypi',
+  ],
+
   'targets': [
     {
 
@@ -457,7 +461,7 @@
 
       'dependencies': [
         '<@(lua_path)/lua.gyp:liblua',
-        '<@(slub_path)/slub.gyp:libslub',
+        '<@(slub_path)/slub.gyp:slub',
       ],
 
       'include_dirs': [

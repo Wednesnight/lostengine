@@ -48,6 +48,7 @@
 		114B43B0FD029B37EB22A2CD /* infback.c in Sources */ = {isa = PBXBuildFile; fileRef = B44E2D48AE298DFC8026D8F8 /* infback.c */; };
 		12EDF28F3838C12335B4D5EF /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 1881A85113D5EA7242E28154 /* zip.c */; };
 		16BF39628718275B6EBBCCCF /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EC8A07500D089AA6788F65 /* path.cpp */; };
+		16C9A072622E73FD3F2E5115 /* call.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BC58CFA8DECCEF2FDC42F56 /* call.cpp */; };
 		172F5C0798D8544694DDF86C /* ftxf86.c in Sources */ = {isa = PBXBuildFile; fileRef = D341524623FE1B2527800FDD /* ftxf86.c */; };
 		1790040E9C86EB667DD46302 /* libLostEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A19CDA7317562AEAF47AF73 /* libLostEngine.a */; };
 		1955FAACC5C0F43BC84364C3 /* FilesystemRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D769CF7F10EC40F78F5DF2D /* FilesystemRepository.cpp */; };
@@ -137,8 +138,8 @@
 		5A615EC7B731D16B5196CA5B /* Quad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D44305FF22B86F3D48FA6BC6 /* Quad.cpp */; };
 		5AA9A62AFCE6D3266E23CB1C /* LostFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C345291D0A769A4D810AB56 /* LostFont.cpp */; };
 		5BF4429A862272BF5B15D8C0 /* LostRg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 71C1AE403EBABBD8C7A4D10D /* LostRg.cpp */; };
+		5C05A77DE09EC80C5E23BC06 /* registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E108593081E37269F529C0 /* registry.cpp */; };
 		5CFC780AF30954FC0B46BE60 /* io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 53D8A50A3EC9E475F89A8FE5 /* io.cpp */; };
-		5D5F51B7014037688D7D4125 /* libslub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8968E3E8549D511D7F674C0 /* libslub.a */; };
 		5F226241D41C3BBA9CCE071F /* TestResults.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3182F00CBEA5D8819AC5B4B4 /* TestResults.cpp */; };
 		6144CEAAD9DCA6F0606ACF5E /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC416C75E4D29DFC5BAA53 /* AABB.cpp */; };
 		61C2967F4D7D5EECE6E4ACC0 /* RenderBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3929649710796E0FADC63E5 /* RenderBuffer.cpp */; };
@@ -161,6 +162,7 @@
 		722DD7654ACFD6A9380DDD76 /* ftinit.c in Sources */ = {isa = PBXBuildFile; fileRef = DA7F7EAC9AD2244C5C3593BA /* ftinit.c */; };
 		732F2AEA9B04B12C2AE5AC94 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = E8D1298F5C522077279B4B4F /* stb_image.c */; };
 		73350B107B6B04D60D43925D /* HybridIndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3827272248A268B620515FC2 /* HybridIndexBuffer.cpp */; };
+		738FB1C61370E9E1B03DD558 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48C4E15D78C49F8BA50E9866 /* function.cpp */; };
 		74712CF9BD0F98BB2B07CFE1 /* b2BlockAllocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEF46AF35D33DE3238FE9199 /* b2BlockAllocator.cpp */; };
 		748EEE9F3885F1A38A550F4C /* b2FrictionJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B70ACB48E697030FB6AEC5 /* b2FrictionJoint.cpp */; };
 		7598BB1968FDCA15E9D40291 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAE7EC5D075B1972386B7DB /* Mesh.cpp */; };
@@ -206,6 +208,7 @@
 		9FB8CC4CCB3CE5F3E81C9892 /* TaskletThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B6017993C555C15FDB3DED8 /* TaskletThread.cpp */; };
 		9FCA5ACB2962AB88EF3987D6 /* Packer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5460C191DA3189B25E0FDDD5 /* Packer.cpp */; };
 		A074CE023E8C9BE589EBDE86 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 26E5149DE50366A2CACDA75B /* deflate.c */; };
+		A0D9625BEF70942D03DB2FA4 /* clazz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABF44344597C8E4226734A98 /* clazz.cpp */; };
 		A1077BAD8F60421EFF01E1F4 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 927C8BFDA955D8141BAB6F9A /* inflate.c */; };
 		A2C5A70806EDFEB518150C6B /* eastlAllocators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58DBEA15326CF542DE12D41D /* eastlAllocators.cpp */; };
 		A3AC8466D7426875817A8CCD /* plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1007B4C3A904EE7FB3FE9DD0 /* plugin.c */; };
@@ -233,7 +236,6 @@
 		B34B9AEDE9A849508C439E1F /* Gif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1AFBDA40F5434BE99990005 /* Gif.cpp */; };
 		B4E0F4346F28B9AF58A8A04F /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AE642A58ABDBA6E864EEE62 /* Context.cpp */; };
 		B50BCEC982CDDCBC059FA647 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4FA5008F45338C9A3EF6DE7C /* Camera.cpp */; };
-		B516057C336C25D4B6B6CEA5 /* libslub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8968E3E8549D511D7F674C0 /* libslub.a */; };
 		B56ADE6BA7F5C533216AEC86 /* ApplicationResourceRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AEC1D7F2B48D49C9D8391466 /* ApplicationResourceRepository.cpp */; };
 		B5ABC1AD839BCC9ED7BB97C7 /* sfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = 7D301DB7A854FBB226F0831C /* sfnt.c */; };
 		B60761D7CE6F82D0C789EC39 /* HybridBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBE0F53AABE3B15DAB9526E4 /* HybridBuffer.cpp */; };
@@ -335,6 +337,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2F55355241065BC02C03B488 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1561B3365D490ABC75BAAE44 /* slub.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 795CDF6FD4DD54F92DE12775;
+			remoteInfo = slub;
+		};
 		371AE43C71A13776387CE8A1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65A652DC26A3140CCABE5768 /* lua.xcodeproj */;
@@ -356,6 +365,13 @@
 			remoteGlobalIDString = E28AA403C1E758210FC491A3;
 			remoteInfo = liblua;
 		};
+		5EA5139B45D6957DDEC4B61C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1561B3365D490ABC75BAAE44 /* slub.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 795CDF6FD4DD54F92DE12775;
+			remoteInfo = slub;
+		};
 		67BFC303131EB40B6EA6993E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43E3AF88CD93AC00DAE55F6B /* Project object */;
@@ -363,26 +379,12 @@
 			remoteGlobalIDString = 50C3E8650449E3ECD9AD3131;
 			remoteInfo = LostEngine;
 		};
-		7AE95137F20999A4C4956CE9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1561B3365D490ABC75BAAE44 /* slub.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 067ABB5BD509AEE7035B9904;
-			remoteInfo = libslub;
-		};
 		7B7F5BF9769548F75884DDAB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43E3AF88CD93AC00DAE55F6B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1F35986BC50933440E61E713;
 			remoteInfo = UnitTests;
-		};
-		83EEE80EDF33C3A046C7580B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1561B3365D490ABC75BAAE44 /* slub.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 067ABB5BD509AEE7035B9904;
-			remoteInfo = libslub;
 		};
 		8D7FDAD1212AB2455D65DE8D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -398,12 +400,12 @@
 			remoteGlobalIDString = 50C3E8650449E3ECD9AD3131;
 			remoteInfo = LostEngine;
 		};
-		FB350FC32374279E24134E1A /* PBXContainerItemProxy */ = {
+		C5F4472AF03861D0B989E4C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1561B3365D490ABC75BAAE44 /* slub.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9B07DD863F08F32349628DBC;
-			remoteInfo = libslub;
+			proxyType = 1;
+			remoteGlobalIDString = 795CDF6FD4DD54F92DE12775;
+			remoteInfo = slub;
 		};
 		FBC4A26BD3341F2EFC6B6EE7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -488,6 +490,7 @@
 		2A77BCAE58C2297976DC0466 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		2AF3640E8567F490C23D5427 /* Test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
 		2B993C48BDA83771F89DD760 /* TextBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextBuffer.h; sourceTree = "<group>"; };
+		2BC58CFA8DECCEF2FDC42F56 /* call.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = call.cpp; sourceTree = "<group>"; };
 		2C88C37CC3AB78A53D2B71F7 /* TextureManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		2DCC416C75E4D29DFC5BAA53 /* AABB.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AABB.cpp; sourceTree = "<group>"; };
 		2F172B57B2548287F873FB45 /* DeferredTestReporter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DeferredTestReporter.cpp; sourceTree = "<group>"; };
@@ -524,6 +527,7 @@
 		474E97FFCCD45E88A37BC0B7 /* b2CircleContact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2CircleContact.cpp; sourceTree = "<group>"; };
 		47893EA4E18CE5F0E94AE274 /* Face.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
 		4898F38474214C1C36A6F02E /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		48C4E15D78C49F8BA50E9866 /* function.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = function.cpp; sourceTree = "<group>"; };
 		48F99F900149F831C4C9585E /* ShaderProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		49366AF49CD6D33AF7D0D323 /* core.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
 		498E4C00156E4931BA0EA100 /* red_black_tree.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = red_black_tree.cpp; sourceTree = "<group>"; };
@@ -610,6 +614,7 @@
 		8199E59AB132EB0D7D6FB24B /* utf8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
 		81CC1443DE0EB3F607AFF0A8 /* b2PolygonShape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2PolygonShape.cpp; sourceTree = "<group>"; };
 		82C4D5276C4C0B335F944899 /* autofit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = autofit.c; sourceTree = "<group>"; };
+		84E108593081E37269F529C0 /* registry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = registry.cpp; sourceTree = "<group>"; };
 		865BCBDC70B3507A77BB214B /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
 		86BF7DD7C9920B293DC56E8D /* settings.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; path = settings.gypi; sourceTree = "<group>"; };
 		86C1C654CB5F55E07C5E130D /* Tasklet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
@@ -657,6 +662,7 @@
 		A9602E78C53695A270218EF6 /* portability.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = portability.cpp; sourceTree = "<group>"; };
 		A988F6EFA79B4F10F80E2DF6 /* LostCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostCamera.cpp; sourceTree = "<group>"; };
 		AAD29A1F56AF087B0072FA2D /* QueueEntityLua.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = QueueEntityLua.cpp; sourceTree = "<group>"; };
+		ABF44344597C8E4226734A98 /* clazz.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = clazz.cpp; sourceTree = "<group>"; };
 		ABF5845E72A0E923466D6901 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
 		AC5B44E32B026DF258BD9150 /* DeferredTestResult.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DeferredTestResult.cpp; sourceTree = "<group>"; };
 		AEC1D7F2B48D49C9D8391466 /* ApplicationResourceRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ApplicationResourceRepository.cpp; sourceTree = "<group>"; };
@@ -785,7 +791,6 @@
 			files = (
 				A658A2163BE6E065B718681D /* libLostEngine.a in Frameworks */,
 				1A20956CC81F408892C9E629 /* liblua.a in Frameworks */,
-				B516057C336C25D4B6B6CEA5 /* libslub.a in Frameworks */,
 				675B6180A1398221EDD64640 /* Cocoa.framework in Frameworks */,
 				8A40684CD04CF09E89A7E416 /* OpenAL.framework in Frameworks */,
 				D80664A981A50D5723E03C46 /* OpenGL.framework in Frameworks */,
@@ -798,7 +803,6 @@
 			files = (
 				1790040E9C86EB667DD46302 /* libLostEngine.a in Frameworks */,
 				A5D3CE30945D735C47C06777 /* liblua.a in Frameworks */,
-				5D5F51B7014037688D7D4125 /* libslub.a in Frameworks */,
 				C078400B657EC3DF605BD26E /* Cocoa.framework in Frameworks */,
 				9ED22956C7D9BC250C4624FB /* OpenAL.framework in Frameworks */,
 				B2D9AE9225A741889F474BFA /* OpenGL.framework in Frameworks */,
@@ -908,7 +912,6 @@
 		113E095D754F40029D4095E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E8968E3E8549D511D7F674C0 /* libslub.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1171,6 +1174,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		41D933972985DF605B8495B5 /* slub/src/slub */ = {
+			isa = PBXGroup;
+			children = (
+				2BC58CFA8DECCEF2FDC42F56 /* call.cpp */,
+				ABF44344597C8E4226734A98 /* clazz.cpp */,
+				48C4E15D78C49F8BA50E9866 /* function.cpp */,
+				84E108593081E37269F529C0 /* registry.cpp */,
+			);
+			path = slub/src/slub;
+			sourceTree = "<group>";
+		};
 		4532D4F496391186E8522C05 /* mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -1362,6 +1376,7 @@
 				A71782803843914E9DD78589 /* giflib/giflib_4_1_6/lib */,
 				C2FEEC81527C3D727721CEA8 /* glee/glee_5_21/source */,
 				1035F8CE388205D98DB1BCB2 /* md5/ */,
+				41D933972985DF605B8495B5 /* slub/src/slub */,
 				D312C3EBF400DBD0BF1F3996 /* stb */,
 				0C43C8D681E679EDB1A2B730 /* tinythread/1_0/source */,
 				3653EE42523BFD2F147CCDAB /* utfcpp/utfcpp_2_3_1/source */,
@@ -1885,7 +1900,7 @@
 			dependencies = (
 				82DCED86506830F66BF457D1 /* PBXTargetDependency */,
 				38E4665F36961413C657831E /* PBXTargetDependency */,
-				A4CDE2D7B504F3ADE1E00EEF /* PBXTargetDependency */,
+				CDAA4E1E7B606F43E3B8836A /* PBXTargetDependency */,
 			);
 			name = UnitTests;
 			productName = UnitTests;
@@ -1902,6 +1917,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				EDF92353C669522726DC2212 /* PBXTargetDependency */,
 			);
 			name = LostEngine;
 			productName = LostEngine;
@@ -1922,7 +1938,7 @@
 			dependencies = (
 				6B621D392E29802CA8DB9DFC /* PBXTargetDependency */,
 				7866890AC02E9C9B4739EC8B /* PBXTargetDependency */,
-				2C4E9C48B93D1C6D3637F750 /* PBXTargetDependency */,
+				DCDA52CE4C10FCB2771D2A08 /* PBXTargetDependency */,
 			);
 			name = Launcher;
 			productName = Launcher;
@@ -1972,13 +1988,6 @@
 			fileType = archive.ar;
 			path = liblua.a;
 			remoteRef = 53F5EECD1D97ADC5BDA07B48 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E8968E3E8549D511D7F674C0 /* libslub.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libslub.a;
-			remoteRef = FB350FC32374279E24134E1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2292,6 +2301,10 @@
 				B8CDB9BA4913B4E39D7D26B3 /* stat.c in Sources */,
 				3CE8DD9D9C79103D515EDE2D /* write.c in Sources */,
 				12EDF28F3838C12335B4D5EF /* zip.c in Sources */,
+				16C9A072622E73FD3F2E5115 /* call.cpp in Sources */,
+				A0D9625BEF70942D03DB2FA4 /* clazz.cpp in Sources */,
+				738FB1C61370E9E1B03DD558 /* function.cpp in Sources */,
+				5C05A77DE09EC80C5E23BC06 /* registry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2334,11 +2347,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2C4E9C48B93D1C6D3637F750 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libslub;
-			targetProxy = 7AE95137F20999A4C4956CE9 /* PBXContainerItemProxy */;
-		};
 		38E4665F36961413C657831E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = liblua;
@@ -2364,20 +2372,30 @@
 			target = F1CCD7295C528744C4D0C978 /* Launcher */;
 			targetProxy = FBC4A26BD3341F2EFC6B6EE7 /* PBXContainerItemProxy */;
 		};
-		A4CDE2D7B504F3ADE1E00EEF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libslub;
-			targetProxy = 83EEE80EDF33C3A046C7580B /* PBXContainerItemProxy */;
-		};
 		C36D56E740DF382ED10C35C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1F35986BC50933440E61E713 /* UnitTests */;
 			targetProxy = 7B7F5BF9769548F75884DDAB /* PBXContainerItemProxy */;
 		};
+		CDAA4E1E7B606F43E3B8836A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = slub;
+			targetProxy = 2F55355241065BC02C03B488 /* PBXContainerItemProxy */;
+		};
+		DCDA52CE4C10FCB2771D2A08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = slub;
+			targetProxy = 5EA5139B45D6957DDEC4B61C /* PBXContainerItemProxy */;
+		};
 		E7215F4A13BC80708129A5B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 50C3E8650449E3ECD9AD3131 /* LostEngine */;
 			targetProxy = 9B251AA4E3C543D272B3CDF4 /* PBXContainerItemProxy */;
+		};
+		EDF92353C669522726DC2212 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = slub;
+			targetProxy = C5F4472AF03861D0B989E4C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2510,6 +2528,7 @@
 					.,
 					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/eastl/fe4d920/include,
+					../../thirdparty/slub/include,
 				);
 				INFOPLIST_FILE = "xcode/LostEngineLauncher-Info.plist";
 				LIBRARY_SEARCH_PATHS = /System/Library/Frameworks;
@@ -2551,6 +2570,7 @@
 					../../thirdparty/tinythread/1_0/source,
 					../../thirdparty/eastl/fe4d920/include,
 					"../../thirdparty/UnitTest++/include",
+					../../thirdparty/slub/include,
 				);
 				INFOPLIST_FILE = "xcode/LostEngineUnittests-Info.plist";
 				LIBRARY_SEARCH_PATHS = /System/Library/Frameworks;
@@ -2604,6 +2624,7 @@
 					.,
 					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/eastl/fe4d920/include,
+					../../thirdparty/slub/include,
 				);
 				INFOPLIST_FILE = "xcode/LostEngineLauncher-Info.plist";
 				LIBRARY_SEARCH_PATHS = /System/Library/Frameworks;
@@ -2645,6 +2666,7 @@
 					../../thirdparty/tinythread/1_0/source,
 					../../thirdparty/eastl/fe4d920/include,
 					"../../thirdparty/UnitTest++/include",
+					../../thirdparty/slub/include,
 				);
 				INFOPLIST_FILE = "xcode/LostEngineUnittests-Info.plist";
 				LIBRARY_SEARCH_PATHS = /System/Library/Frameworks;

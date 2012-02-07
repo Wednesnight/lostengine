@@ -15,4 +15,4 @@
 #
 
 #!/bin/sh
-gyp --depth=. --generator-output=xcode -I settings.gypi LostEngine.gyp
+gyp --depth=. --generator-output=xcode LostEngine.gyp
