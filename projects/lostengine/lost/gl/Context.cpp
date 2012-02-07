@@ -13,11 +13,17 @@
 #include "lost/gl/UniformBlock.h"
 #include "lost/profiler/Blackbox.h"
 #include "thread_specific_ptr.h"
+#include "lost/common/Logger.h"
 
 using namespace lost::mesh;
 using namespace lost::bitmap;
 
-tinythread::thread_specific_ptr<lost::gl::Context> context_ptr;
+void contextCleanup(void* ctx)
+{
+  DOUT("");
+}
+
+tinythread::thread_specific_ptr<lost::gl::Context> context_ptr(contextCleanup);
 
 bool getBoolParam(GLenum pname)
 {

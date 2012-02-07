@@ -203,10 +203,8 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   vertexShader->compile();
   if(!vertexShader->compiled())
   {
-    std::ostringstream os;
     broken(source);
-    os << "vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log();
-    throw std::runtime_error(os.str());
+    THROW_RTE("vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log());
   }
 
   source = processDependencies(loader, fssource);
@@ -215,9 +213,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   if(!fragmentShader->compiled())
   {
     broken(source);
-    std::ostringstream os;
-    os << "fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log();
-    throw std::runtime_error(os.str());
+    THROW_RTE("fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log());
   }
 
   shaderProgram->attach(fragmentShader);
@@ -225,9 +221,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   shaderProgram->link();
   if(!shaderProgram->linked())
   {
-    std::ostringstream os;
-    os << "shader program '"<<inName<<"' link failed: "<<shaderProgram->log();
-    throw std::runtime_error(os.str());
+    THROW_RTE("shader program '"<<inName<<"' link failed: "<<shaderProgram->log());
   }
 
   shaderProgram->enable();

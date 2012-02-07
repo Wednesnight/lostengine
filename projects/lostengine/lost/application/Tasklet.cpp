@@ -7,7 +7,6 @@
 #include "lost/application/Application.h"
 #include "lost/lua/BindAll.h"
 #include "lost/lua/ModuleLoader.h"
-#include <algorithm>
 #include "lost/common/Logger.h"
 #include "lost/application/TaskletEvent.h"
 #include "lost/application/Queue.h"

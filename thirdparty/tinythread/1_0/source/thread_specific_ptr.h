@@ -5,6 +5,8 @@
 
 namespace tinythread
 {
+
+typedef void(*CleanupFunc)(void*);
   
 template<typename T>
 struct thread_specific_ptr
@@ -14,8 +16,9 @@ struct thread_specific_ptr
 #else
   pthread_key_t _key;
 #endif  
+  CleanupFunc _cleanup;
   
-  thread_specific_ptr()
+  thread_specific_ptr(CleanupFunc cleanupFunc = NULL)
   {
 #if defined(_TTHREAD_WIN32_)
     _key = TlsAlloc(); // FIXME how should errors be handled?
@@ -23,15 +26,24 @@ struct thread_specific_ptr
     _key = NULL;
     pthread_key_create(&_key, NULL); // FIXME how should errors be handled?
 #endif    
+    _cleanup = cleanupFunc;
   }
   
-  ~thread_specific_ptr()
+  void destroy()
   {
     T* ptr = get();
     if(ptr)
     {
-      delete ptr;
-    }
+      if(_cleanup)
+        _cleanup(ptr);
+      else
+        delete ptr;
+    }    
+  }
+  
+  ~thread_specific_ptr()
+  {
+    destroy();
 #if defined(_TTHREAD_WIN32_)
     TlsFree(_key);
 #else
@@ -67,10 +79,15 @@ struct thread_specific_ptr
       T* const current_value=get();
       if(current_value!=new_value)
       {
+        destroy();        
 #if defined(_TTHREAD_WIN32_)
         TlsSetValue(_key, new_value);
 #else
-        pthread_setspecific(_key, new_value);
+        int err = pthread_setspecific(_key, new_value);
+        if(err)
+        {
+          printf("set specific failed with error: %d",err);
+        }
 #endif
       }
   }
