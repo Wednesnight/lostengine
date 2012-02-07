@@ -1,3 +1,19 @@
+/*
+Copyright (c) 2011 Tony Kostanjsek, Timo Boll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 // platform specific code, forwarded in Platform.h
 // LINUX
 
@@ -44,7 +60,7 @@ namespace lost
 
     lost::fs::Path getApplicationFilename(bool excludeExtension = false)
     {
-      lost::fs::Path path = "/proc";
+      lost::fs::Path path("/proc");
       struct stat info;
       if (0 != stat(path.string().c_str(), &info) || !S_ISDIR(info.st_mode)) {
         // There's no /proc filesystem, we can't find out a lot about our
@@ -56,7 +72,7 @@ namespace lost
       // Read the exe link in the /proc filesystem
       std::ostringstream os;
       os << getpid();
-      path /= os.str();
+      path /= os.str().c_str();
       path /= "exe";
 
       // There's no limit to how long a path in Linux can be, but let's assume
@@ -84,7 +100,7 @@ namespace lost
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error(string("Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?").c_str());
 
       return result;
     }
@@ -121,13 +137,20 @@ namespace lost
 
       FILE *l_filecheck = fopen(result.string().c_str(), "r");
       if (l_filecheck != NULL) fclose(l_filecheck);
-        else throw runtime_error( "Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?" );
+        else throw runtime_error(string("Couldn't find resource '"+ result.string() +"', does it exist in your resources directory? Is the spelling correct?").c_str());
 
       return result;
     }
 
     void setThreadName(const string& name) {
       prctl(PR_SET_NAME, name.c_str(), 0, 0, 0);
+    }
+
+    string getThreadName() {
+      char buf[17];
+      buf[16] = 0;
+      prctl(PR_GET_NAME, buf, 0, 0, 0);
+      return buf;
     }
 
     bool setClipboardString(string const & str)

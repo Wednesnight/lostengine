@@ -1,26 +1,23 @@
+#
+# Copyright (c) 2011 Tony Kostanjsek, Timo Boll
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+# following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+# CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
 {
 
-  'variables': {
-    'boost_path': '../../thirdparty/boost/boost_1_44_0',
-    'box2d_path': '../../thirdparty/box2d/box2d_2_1_2',
-    'eastl_path': '../../thirdparty/eastl/fe4d920',
-    'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
-    'giflib_path': '../../thirdparty/giflib/giflib_4_1_6',
-    'glee_path': '../../thirdparty/glee/glee_5_21',
-    'md5_path': '../../thirdparty/md5/',
-    'msinttypes_path': '../../thirdparty/msinttypes',
-    'lua_path': '../../thirdparty/lua/lua_5_1_4',
-    'openal_path': '../../thirdparty/OpenAL/OpenAL_1_1',
-    'opengl_path': '../../thirdparty/OpenGL',
-    'slub_path': '../../thirdparty/slub',
-    'stb_image_path': '../../thirdparty/stb/stb_image_1_18',
-    'stb_vorbis_path': '../../thirdparty/stb/stb_vorbis_0_99996',
-    'utfcpp_path': '../../thirdparty/utfcpp/utfcpp_2_3_1',
-    'tinythread_path': '../../thirdparty/tinythread/1_0/source',
-    'unittest++_path': '../../thirdparty/UnitTest++',
-    'zlib_path': '../../thirdparty/zlib/zlib_1_2_3',
-    'zziplib_path': '../../thirdparty/zziplib/zziplib-0.13.58',
-  },
+  'includes': [
+    'settings.gypi',
+  ],
 
   'targets': [
     {
@@ -404,14 +401,6 @@
               'ObjectFile': '$(IntDir)\\%(RelativeDir)',
              },
           },
-          'defines': [
-            'SLUB_STRING_INCLUDE=<EASTL/string.h>',
-            'SLUB_STRING_TYPE=eastl::string',
-            'SLUB_LIST_INCLUDE=<EASTL/list.h>',
-            'SLUB_LIST_TYPE=eastl::list',
-            'SLUB_MAP_INCLUDE=<EASTL/map.h>',
-            'SLUB_MAP_TYPE=eastl::map',
-          ],
         },
 
         'Debug': {
@@ -469,6 +458,11 @@
         },
 
       },
+
+      'dependencies': [
+        '<@(lua_path)/lua.gyp:liblua',
+        '<@(slub_path)/slub.gyp:slub',
+      ],
 
       'include_dirs': [
 
@@ -732,12 +726,6 @@
         'lost/time/ThreadedTimerScheduler.cpp',
         'lost/time/Timer.cpp',
 
-        # slub
-        '<@(slub_path)/src/slub/call.cpp',
-        '<@(slub_path)/src/slub/clazz.cpp',
-        '<@(slub_path)/src/slub/function.cpp',
-        '<@(slub_path)/src/slub/registry.cpp',
-
         # thirdparty/boost
         '<@(boost_path)/libs/filesystem/v3/src/codecvt_error_category.cpp',
         '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
@@ -852,37 +840,6 @@
 
         # thirdparty/md5
         '<@(md5_path)/md5.cpp',
-
-        # thirdparty/lua
-        '<@(lua_path)/source/src/lzio.c',
-        '<@(lua_path)/source/src/lvm.c',
-        '<@(lua_path)/source/src/lundump.c',
-        '<@(lua_path)/source/src/ltm.c',
-        '<@(lua_path)/source/src/ltablib.c',
-        '<@(lua_path)/source/src/ltable.c',
-        '<@(lua_path)/source/src/lstrlib.c',
-        '<@(lua_path)/source/src/lstring.c',
-        '<@(lua_path)/source/src/lstate.c',
-        '<@(lua_path)/source/src/lparser.c',
-        '<@(lua_path)/source/src/loslib.c',
-        '<@(lua_path)/source/src/lopcodes.c',
-        '<@(lua_path)/source/src/lobject.c',
-        '<@(lua_path)/source/src/loadlib.c',
-        '<@(lua_path)/source/src/lmem.c',
-        '<@(lua_path)/source/src/lmathlib.c',
-        '<@(lua_path)/source/src/llex.c',
-        '<@(lua_path)/source/src/liolib.c',
-        '<@(lua_path)/source/src/linit.c',
-        '<@(lua_path)/source/src/ldblib.c',
-        '<@(lua_path)/source/src/ldebug.c',
-        '<@(lua_path)/source/src/lauxlib.c',
-        '<@(lua_path)/source/src/lbaselib.c',
-        '<@(lua_path)/source/src/ldo.c',
-        '<@(lua_path)/source/src/lfunc.c',
-        '<@(lua_path)/source/src/ldump.c',
-        '<@(lua_path)/source/src/lapi.c',
-        '<@(lua_path)/source/src/lcode.c',
-        '<@(lua_path)/source/src/lgc.c',
 
         # thirdparty/stb
         '<@(stb_image_path)/stb_image.c',

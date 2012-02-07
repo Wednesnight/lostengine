@@ -1,8 +1,23 @@
+/*
+Copyright (c) 2011 Tony Kostanjsek, Timo Boll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #include "lost/application/Window.h"
 #include "lost/common/Logger.h"
 #include "lost/gl/Context.h"
 #include "lost/application/TaskletConfig.h"
-#include "lost/application/linux/WindowHandler.h"
 
 #include <GL/glx.h>
 #include <X11/Xlib.h>
@@ -10,13 +25,15 @@
 #include <X11/extensions/xf86vmode.h>
 #include <X11/Xatom.h>
 
-#include <boost/thread.hpp>
-#include <boost/bind.hpp>
-
 namespace lost
 {
   namespace application
   {
+
+    extern Display* currentXDisplay;
+
+    extern void registerXWindow(::Window xWindow, Window* window);
+    extern void unregisterXWindow(::Window xWindow);
 
     struct Window::WindowHiddenMembers
     {
@@ -25,8 +42,6 @@ namespace lost
       GLXContext glContext;
       Colormap colorMap;
       ::Window window;
-      lost::shared_ptr<linux_::WindowHandler> windowHandler;
-      lost::shared_ptr<boost::thread> windowThread;
     };
 
     void Window::initialize()
@@ -57,7 +72,8 @@ namespace lost
         None
       };
 
-      hiddenMembers->display = XOpenDisplay(NULL);
+//      hiddenMembers->display = XOpenDisplay(NULL);
+      hiddenMembers->display = lost::application::currentXDisplay;
 
       int majorVersion, minorVersion;
       XF86VidModeQueryVersion(hiddenMembers->display, &majorVersion, &minorVersion);
@@ -111,24 +127,22 @@ namespace lost
         IOUT("Renderer: Software");
       }
 
-      hiddenMembers->windowHandler.reset(new linux_::WindowHandler(this, hiddenMembers->display, hiddenMembers->window));
-      hiddenMembers->windowThread.reset(new boost::thread(boost::bind(&linux_::WindowHandler::operator(), hiddenMembers->windowHandler.get())));
+      context->clearCurrent();
+
+      registerXWindow(hiddenMembers->window, this);
     }
 
     void Window::finalize()
     {
       DOUT("Window::finalize()");
 
-      hiddenMembers->windowHandler->wakeupAndFinish();
-      hiddenMembers->windowThread.reset();
-      hiddenMembers->windowHandler.reset();
+      unregisterXWindow(hiddenMembers->window);
 
       XDestroyWindow(hiddenMembers->display, hiddenMembers->window);
       XFreeColormap(hiddenMembers->display, hiddenMembers->colorMap);
       glXMakeCurrent(hiddenMembers->display, None, NULL);
       glXDestroyContext(hiddenMembers->display, hiddenMembers->glContext);
       XFree(hiddenMembers->visualInfo);
-      XCloseDisplay(hiddenMembers->display);
 
       delete hiddenMembers;
     }

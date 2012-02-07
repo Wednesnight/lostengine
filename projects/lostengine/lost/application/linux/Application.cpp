@@ -1,31 +1,62 @@
+/*
+Copyright (c) 2011 Tony Kostanjsek, Timo Boll
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"
 #include "lost/application/Tasklet.h"
 #include "lost/application/SpawnTaskletEvent.h"
 #include "lost/common/Logger.h"
 #include "lost/event/EventDispatcher.h"
+#include "lost/application/linux/WindowHandler.h"
 
+#include <map>
 #include <iostream>
 #include <stdexcept>
-#include <boost/thread/condition.hpp>
 
 #include <X11/Xlib.h>
-
-using namespace std;
 
 namespace lost
 {
   namespace application
   {
 
+    Display* currentXDisplay;
+
+    std::map< ::Window, linux_::WindowHandler* > xWindows;
+
+    void registerXWindow(::Window xWindow, Window* window) {
+      if (xWindows.find(xWindow) == xWindows.end()) {
+        xWindows[xWindow] = new linux_::WindowHandler(currentXDisplay, xWindow, window);
+      }
+    }
+
+    void unregisterXWindow(::Window xWindow) {
+      if (xWindows.find(xWindow) == xWindows.end()) {
+        linux_::WindowHandler* handler = xWindows[xWindow];
+        xWindows.erase(xWindow);
+        delete handler;
+      }
+    }
+
     int handleXError(Display* display, XErrorEvent* event)
     {
       if (event) {
-        int length = XGetErrorText(display, event->error_code, NULL, 0);
-        char *buffer = new char[length];
-        XGetErrorText(display, event->error_code, buffer, length);
+        char buffer[1024];
+        XGetErrorText(display, event->error_code, buffer, 1024);
         EOUT("X11: " << buffer);
-        delete buffer;
       }
     }
 
@@ -48,6 +79,8 @@ namespace lost
         throw std::runtime_error("could not open display");
       }
       hiddenMembers->WM_WAKEUP = XInternAtom(hiddenMembers->display, "WM_WAKEUP", False);
+
+      currentXDisplay = hiddenMembers->display;
     }
 
     void Application::finalize()
@@ -66,21 +99,54 @@ namespace lost
       ApplicationEventPtr applicationEvent = ApplicationEvent::create(ApplicationEvent::RUN());
       eventDispatcher->dispatchEvent(applicationEvent);
 
-      while(running) {
-        XEvent event;
-        XNextEvent(hiddenMembers->display, &event);
-        switch (event.type) {
+      XEvent event;      
+      int fd = ConnectionNumber(hiddenMembers->display);
 
-          case ClientMessage:
-            if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
-              DOUT("wakeup!");
-              break;
+      while(running) {
+
+        XFlush(hiddenMembers->display);
+
+        struct timeval tv;
+        fd_set rfds;
+        FD_ZERO(&rfds);
+        FD_SET(fd,&rfds);
+        memset(&tv,0,sizeof(tv));
+        tv.tv_usec = 100000; /* delay in microseconds = 100 milliseconds */
+
+        if (select(fd+1,&rfds,0,0,&tv) > 0) {
+
+          XSync(hiddenMembers->display, False);        
+
+          while(XEventsQueued(hiddenMembers->display, QueuedAlready) > 0) {
+
+            XNextEvent(hiddenMembers->display, &event);
+
+            switch (event.type) {
+              
+              case ClientMessage:
+                if (event.xclient.data.l[0] == hiddenMembers->WM_WAKEUP) {
+                  DOUT("wakeup!");
+                  break;
+                }
+                
+              default:
+                if (event.xclient.window) {
+                  linux_::WindowHandler* windowHandler = NULL;
+                  if (xWindows.find(event.xclient.window) != xWindows.end()) {
+                    windowHandler = xWindows[event.xclient.window];
+                  }
+                  
+                  if (windowHandler != NULL) {
+                    windowHandler->handleEvent(event);
+                  }
+                }
+                break;
+                
             }
 
-          default:
-            DOUT("message received!");
-            break;
+            XFlush(hiddenMembers->display);
 
+          }
         }
         eventDispatcher->processEvents();
       }
@@ -92,6 +158,7 @@ namespace lost
       event.xclient.message_type = ClientMessage;
       event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
       XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
+      XFlush(hiddenMembers->display);
     }
 
     void Application::showMouse(bool visible)
@@ -104,6 +171,7 @@ namespace lost
       event.xclient.message_type = ClientMessage;
       event.xclient.data.l[0] = hiddenMembers->WM_WAKEUP;
       XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
+      XFlush(hiddenMembers->display);
     }
 
     void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
