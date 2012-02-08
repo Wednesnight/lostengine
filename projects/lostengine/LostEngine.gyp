@@ -460,14 +460,13 @@
       },
 
       'dependencies': [
-        '<@(lua_path)/lua.gyp:liblua',
+        '<@(lua_path)/lua.gyp:lua',
         '<@(slub_path)/slub.gyp:slub',
       ],
 
       'include_dirs': [
 
         '.',
-        '<@(slub_path)/include',
         '<@(boost_path)',
         '<@(box2d_path)/Box2D',
         '<@(eastl_path)/include',
@@ -475,7 +474,6 @@
         '<@(giflib_path)/lib',
         '<@(glee_path)/include',
         '<@(md5_path)',
-        '<@(lua_path)/include',
         '<@(stb_image_path)',
         '<@(stb_vorbis_path)',
         '<@(utfcpp_path)/source',
