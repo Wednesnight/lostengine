@@ -728,7 +728,6 @@
         'lost/lua/ModuleLoader.cpp',
         'lost/lua/State.h',
         'lost/lua/State.cpp',
-        'lost/lua/lua.h',
         'lost/lua/forward.h',
         'lost/lua/EventCast.h',
 
