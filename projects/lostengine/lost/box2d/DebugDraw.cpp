@@ -24,6 +24,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/gl.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/mesh/Quad.h"
+#include "lost/lua/lua.h"
+#include "lost/lua/State.h"
 
 namespace lost
 {
@@ -32,8 +34,9 @@ namespace box2d
 
 using namespace lost::math;
 
-DebugDraw::DebugDraw(resource::LoaderPtr inLoader)
+DebugDraw::DebugDraw(resource::LoaderPtr inLoader, lua_State* state)
 {
+  _state = state;
   AppendFlags(e_shapeBit);
   AppendFlags(e_jointBit);
   AppendFlags(e_aabbBit);		
@@ -89,7 +92,7 @@ gl::ShaderProgramPtr DebugDraw::shader()
 {
   if(!colorShader)
   {
-    colorShader = lost::gl::loadShader(loader,"lost/resources/glsl/basic_color");
+    colorShader = lost::gl::loadShader(loader,"lost/resources/glsl/basic_color",_state);
   }
   return colorShader;
 }

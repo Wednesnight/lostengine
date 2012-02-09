@@ -24,6 +24,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //#define BOOST_SPIRIT_DEBUG
 #include <boost/spirit/include/classic_core.hpp>
 #include <sstream>
+#include "lost/lua/lua.h"
+#include "lost/lua/State.h"
+
 using namespace boost;
 using namespace boost::spirit;
 using namespace boost::spirit::classic;
@@ -142,9 +145,9 @@ struct resolveImport
 //
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-string processDependencies(const resource::LoaderPtr& loader, const string& source)
+string processDependencies(const resource::LoaderPtr& loader, const string& source, lua_State* state)
 {
-  lost::common::StringStream os;
+/*  lost::common::StringStream os;
   string buffer = source;
   uint32_t counter;
   vector<string> imports;
@@ -184,7 +187,12 @@ string processDependencies(const resource::LoaderPtr& loader, const string& sour
   
 //  DOUT("---------- SHADER AFTER DEPENDENCY PROCESSING: ");DOUT(buffer);
   
-  return buffer;
+  return buffer;*/
+  lua::State* lstate = lua::State::stateFromState(state);
+  slub::reference ppfunc = lstate->globals["lost"]["gl"]["preprocessShader"];
+  slub::lua_function<string, resource::LoaderPtr, string> func(ppfunc);
+  string result = func(loader, source);
+  return result;
 }
 
 // logs shader source with line numbers
@@ -204,7 +212,7 @@ void broken(const string& source)
   }
 }
 
-ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& inName, const string& vssource, const string& fssource)
+ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& inName, const string& vssource, const string& fssource, lua_State* state)
 {
   // DOUT("building shader: '"<<inName<<"'");
   lost::gl::ShaderProgramPtr  shaderProgram(new lost::gl::ShaderProgram());
@@ -214,7 +222,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   string vsname = inName+".vs";
   string fsname = inName+".fs";
 
-  string source = processDependencies(loader, vssource);
+  string source = processDependencies(loader, vssource, state);
   vertexShader->source(source);
   vertexShader->compile();
   if(!vertexShader->compiled())
@@ -223,7 +231,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
     THROW_RTE("vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log());
   }
 
-  source = processDependencies(loader, fssource);
+  source = processDependencies(loader, fssource, state);
   fragmentShader->source(source);
   fragmentShader->compile();
   if(!fragmentShader->compiled())
@@ -248,14 +256,14 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   return shaderProgram;
 }
 
-ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const string& inName)
+ShaderProgramPtr loadShader(const resource::LoaderPtr& loader, const string& inName, lua_State* state)
 {
 //  DOUT("--- loading shader '"<<inName<<"'");
   string vsname = inName+".vs";
   common::DataPtr vsfile = loader->load(vsname);
   string fsname = inName+".fs";
   common::DataPtr fsfile = loader->load(fsname);
-  return buildShader(loader, inName, vsfile->str(), fsfile->str());
+  return buildShader(loader, inName, vsfile->str(), fsfile->str(), state);
 }
 
 }

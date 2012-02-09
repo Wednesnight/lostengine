@@ -120,13 +120,18 @@ namespace lost
 
       try
       {
-        lua->doFile("lost/common/FontInit.lua");
+        lua->doFile("lost/TaskletInit.lua");
       }
       catch(std::exception& ex)
       {
         WOUT("couldn't initialize fonts, reason: "+ string(ex.what()));
       }
 
+      slub::reference preprocessShader = lua->globals["lost"]["gl"]["preprocessShader"];
+//      string res = preprocessShader<string, LoaderPtr, string>(this->loader, "hello");
+      slub::lua_function<string, LoaderPtr, string> func(preprocessShader);
+      DOUT("+++ " << func(this->loader, "#include \"lost/resources/glsl/dfrr.fsp\""));
+      
       try {
         configLoaded = config.load(lua, loader);
       }

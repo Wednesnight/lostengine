@@ -20,6 +20,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/ShaderProgram.h"
 #include "lost/resource/Loader.h"
 
+struct lua_State;
+
 namespace lost
 {
 namespace gl
@@ -35,7 +37,8 @@ namespace gl
  *  throws if one of the compile stages or the link stage fail.
  */
 ShaderProgramPtr loadShader(const resource::LoaderPtr& loader,
-                                   const string& inName);
+                            const string& inName,
+                            lua_State* state);
 
 /** Helper function for assembling a shader from vertex/fragment shader data.
  * Resolves imports/includes before compiling/linking the shader.
@@ -43,7 +46,8 @@ ShaderProgramPtr loadShader(const resource::LoaderPtr& loader,
 ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, 
                              const string& inName, 
                              const string& vssource,
-                             const string& fssource);
+                             const string& fssource,
+                             lua_State* state);
 
 }
 }

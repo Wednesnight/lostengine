@@ -114,7 +114,7 @@ namespace lost
       common::StringStream msg;
       msg << "Trace:";
       int depth = 1;
-      for (unsigned int idx = 2; (lua_getstack(state, idx, &debug) == 1)
+      for (unsigned int idx = 1; (lua_getstack(state, idx, &debug) == 1)
            && depth <= callstackSize; ++idx)
       {
         string name = "";

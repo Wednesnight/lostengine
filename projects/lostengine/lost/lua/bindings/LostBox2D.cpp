@@ -36,7 +36,7 @@ namespace lost
         .package("box2d")
           .clazz<DebugDraw>("DebugDraw")
             .extends<b2DebugDraw>()
-            .constructor<resource::LoaderPtr>()
+            .constructor<resource::LoaderPtr, lua_State*>()
             .method("beginDraw",&DebugDraw::beginDraw)
             .method("endDraw",&DebugDraw::endDraw)
             .field("rootNode",&DebugDraw::rootNode);

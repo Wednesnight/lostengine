@@ -20,6 +20,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/forward.h"
 #include "lost/resource/forward.h"
 
+struct lua_State;
+
 namespace lost
 {
 namespace box2d
@@ -27,7 +29,7 @@ namespace box2d
 
 struct DebugDraw : public b2DebugDraw
 {
-  DebugDraw(resource::LoaderPtr loader);
+  DebugDraw(resource::LoaderPtr loader, lua_State* state);
   virtual ~DebugDraw();
   
   // call these before/after calling world.DrawDebugData()
@@ -43,6 +45,7 @@ struct DebugDraw : public b2DebugDraw
 
   rg::NodePtr rootNode;
 private: 
+  lua_State*          _state;
   resource::LoaderPtr loader;
   gl::ShaderProgramPtr colorShader;
   gl::ShaderProgramPtr shader();
