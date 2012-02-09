@@ -7,7 +7,7 @@ local split = lost.string.split
 local normaliseLinebreaks = lost.string.normaliseLinebreaks
 
 local function loadData(loader, path)
-  print("!!! loading: '"..tostring(path).."'")
+--  print("!!! loading: '"..tostring(path).."'")
   local d = loader:load(path):str()
 --  print("!!! loaded: "..tostring(d))
   return d
@@ -39,7 +39,7 @@ local function extractIncludeFilename(line)
 end
 
 local function preprocessOnce(loader, data, imports)
-  print("============================= ITERATION")
+--  print("============================= ITERATION")
   local result = {}
   data = normaliseLinebreaks(data)
   local splitSource = split(data, "\n")
@@ -47,23 +47,23 @@ local function preprocessOnce(loader, data, imports)
   for k,line in pairs(splitSource) do
     if isIncludeDirective(line) then
       local filename = extractIncludeFilename(line)
-      print("++ "..tostring(k).." "..tostring(line).." '"..filename.."'")
+--      print("++ "..tostring(k).." "..tostring(line).." '"..filename.."'")
       local includeData = loadData(loader,filename)
       table.insert(result, includeData)
       addedParts = addedParts +1 
     elseif isImportDirective(line) then
       local filename  = extractIncludeFilename(line)
       if not imports[filename] then
-        print("adding import "..filename)
+--        print("adding import "..filename)
         local includeData = loadData(loader,filename)
         table.insert(result, includeData)
         imports[filename] = true
       else
-        print("ignoring import: "..filename)
+--        print("ignoring import: "..filename)
       end
       addedParts = addedParts +1 
     else
-      print(tostring(k).." "..tostring(line))
+--      print(tostring(k).." "..tostring(line))
       table.insert(result,line)
     end
   end
@@ -78,12 +78,3 @@ function preprocessShader(loader, data)
   end
   return data
 end
-
---print("hello")
---a = trim(" asd ")
---print("'"..a.."'")
-
---local shaderSource = loadData("shader.fs")
---local processedShaderSource = preprocess(shaderSource)
---print("---------------------------------- FINAL")
---print(processedShaderSource)

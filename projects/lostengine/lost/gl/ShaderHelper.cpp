@@ -58,7 +58,7 @@ void broken(const string& source)
 
 ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& inName, const string& vssource, const string& fssource, lua_State* state)
 {
-  // DOUT("building shader: '"<<inName<<"'");
+//  DOUT("building shader: '"<<inName<<"'");
   lost::gl::ShaderProgramPtr  shaderProgram(new lost::gl::ShaderProgram());
   lost::gl::ShaderPtr         vertexShader(new lost::gl::VertexShader());
   lost::gl::ShaderPtr         fragmentShader(new lost::gl::FragmentShader());
