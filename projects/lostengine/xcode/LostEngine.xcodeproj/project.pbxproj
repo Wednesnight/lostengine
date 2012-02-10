@@ -637,6 +637,7 @@
 		4EA5299B6EF8C07DE4B594E3 /* forward.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = forward.h; sourceTree = "<group>"; };
 		4FA5008F45338C9A3EF6DE7C /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		5062567634577FF873EE1368 /* b2MouseJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2MouseJoint.cpp; sourceTree = "<group>"; };
+		512335C322F969384A3D7592 /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
 		5171921A1E57BDBA4B317068 /* Context.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Context.cpp; sourceTree = "<group>"; };
 		519CCE15A915CC1E337E1C53 /* ColorGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorGradient.h; sourceTree = "<group>"; };
 		5284DC470FBFEB7DF9A3EFBF /* ltm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ltm.c; sourceTree = "<group>"; };
@@ -1078,6 +1079,7 @@
 				633FF3DAA2726B9479F6E5C3 /* registry.h */,
 				AD5F45D443574F2940925865 /* slub.h */,
 				F9D5AFEB9F1D28C4EB84777C /* slub_lua.h */,
+				512335C322F969384A3D7592 /* table.h */,
 				38F6207DA8848EFF36AF6877 /* wrapper.h */,
 			);
 			path = include/slub;
