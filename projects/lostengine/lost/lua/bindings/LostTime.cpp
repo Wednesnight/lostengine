@@ -35,10 +35,10 @@ namespace lost
     {
       if (targetMethod.type() == LUA_TFUNCTION) {
         if (targetObject.type() != LUA_TNIL) {
-          return targetMethod.operator()<bool>(targetObject, timer);
+          return slub::call<bool, const slub::reference&, const Timer*>(targetMethod, targetObject, timer);
         }
         else {
-          return targetMethod.operator()<bool>(timer);
+          return slub::call<bool, const Timer*>(targetMethod, timer);
         }
       }
       return false;

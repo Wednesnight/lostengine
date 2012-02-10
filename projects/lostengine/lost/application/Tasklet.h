@@ -47,12 +47,6 @@ namespace lost
       bool scriptLoaded; // true if 'main.lua' was successfully loaded
       bool configLoaded; // true if config.lua was successfully loaded
 
-      bool hasLuaStartup;
-      bool hasLuaUpdate;
-      bool hasLuaShutdown;
-      bool hasLuaKey;
-
-
   	  virtual bool startup();                       // called before starting runloop, returns this->running
       virtual bool update(double deltaSeconds);     // called repeatedly in runloop, returns this->running
       virtual void render();                        // called repeatedly in runloop

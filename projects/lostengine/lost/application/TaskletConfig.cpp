@@ -46,7 +46,7 @@ TaskletConfig::TaskletConfig()
 }
 
 // c-function so it doesn't have to go in the header with slub::reference in the signature
-void parse(slub::reference config, TaskletConfig* tc)
+void parse(const slub::table& config, TaskletConfig* tc)
 {
   if(config["tasklet"].type() == LUA_TTABLE) {
 

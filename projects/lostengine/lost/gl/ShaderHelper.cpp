@@ -32,11 +32,9 @@ namespace gl
 
 string processDependencies(const resource::LoaderPtr& loader, const string& source, lua_State* state)
 {
-  lua::State* lstate = lua::State::stateFromState(state);
-  slub::reference ppfunc = lstate->globals["lost"]["gl"]["preprocessShader"];
-  slub::lua_function<string, resource::LoaderPtr, string> func(ppfunc);
-  string result = func(loader, source);
-  return result;
+  slub::lua_function<string, resource::LoaderPtr, string> func =
+    slub::globals(state)["lost"]["gl"]["preprocessShader"];
+  return func(loader, source);
 }
 
 // logs shader source with line numbers

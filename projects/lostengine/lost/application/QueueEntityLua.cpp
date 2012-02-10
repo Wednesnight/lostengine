@@ -37,11 +37,11 @@ namespace lost
       {
         if (targetObject.type() != LUA_TNIL)
         {
-          targetMethod(targetObject, sender);
+          call<void, const reference&, const Tasklet*>(targetMethod, targetObject, sender);
         }
         else
         {
-          targetMethod(sender);
+          call<void, const Tasklet*>(targetMethod, sender);
         }
 
       }

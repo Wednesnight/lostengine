@@ -37,7 +37,7 @@ namespace lost
       LuaHandlerFunction(const slub::reference& inFunction) : func(inFunction) {}
       
       void call(const EventPtr& event) {
-        func(event);
+        slub::call<void, const EventPtr&>(func, event);
       }
     };
     

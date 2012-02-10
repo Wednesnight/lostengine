@@ -63,10 +63,11 @@ namespace lost
    
     struct Tasklet::LuaStateHelper
     {
-      slub::reference luaStartup;
-      slub::reference luaUpdate;
-      slub::reference luaShutdown;
-      slub::reference luaKey;
+      slub::lua_function<> luaStartup;
+      slub::lua_function<void, double> luaUpdate;
+      slub::lua_function<> luaShutdown;
+      slub::lua_function<void, const application::KeyEventPtr&> luaKey;
+
       slub::reference config;
     };
 
@@ -152,18 +153,10 @@ namespace lost
       }
             
       // get lua functions if they are present
-      hasLuaStartup = false;
-      hasLuaUpdate = false;
-      hasLuaShutdown = false;
-      hasLuaKey = false;
       lsh->luaStartup = lua->globals["startup"];
-      if(lsh->luaStartup.type()==LUA_TFUNCTION) hasLuaStartup=true; //else DOUT("no startup() found in Lua");
       lsh->luaUpdate = lua->globals["update"];
-      if(lsh->luaUpdate.type()==LUA_TFUNCTION) hasLuaUpdate=true; //else DOUT("no update() found in Lua");
       lsh->luaShutdown = lua->globals["shutdown"];
-      if(lsh->luaShutdown.type()==LUA_TFUNCTION) hasLuaShutdown=true; //else DOUT("no shutdown() found in Lua");
       lsh->luaKey = lua->globals["key"];
-      if(lsh->luaKey.type()==LUA_TFUNCTION) hasLuaKey=true; //else DOUT("no key() found in Lua");
 
       thread.reset(new TaskletThread(this));
       thread->start();
@@ -225,7 +218,7 @@ namespace lost
     bool Tasklet::startup()
     {    
       scheduler.reset(new ThreadedTimerScheduler(name, eventDispatcher));    
-      if(hasLuaStartup)
+      if(lsh->luaStartup.valid())
       {
         lsh->luaStartup();
       }
@@ -237,7 +230,7 @@ namespace lost
 
     bool Tasklet::update(double deltaSeconds)
     {
-      if(hasLuaUpdate)
+      if(lsh->luaUpdate.valid())
       {
         lsh->luaUpdate(deltaSeconds);
       }
@@ -249,7 +242,7 @@ namespace lost
 
     void Tasklet::shutdown()
     {
-      if(hasLuaShutdown)
+      if(lsh->luaShutdown.valid())
       {
         lsh->luaShutdown();
       }
@@ -257,7 +250,7 @@ namespace lost
     
     void Tasklet::key(const application::KeyEventPtr& ev)
     {
-      if(hasLuaKey)
+      if(lsh->luaKey.valid())
       {
         lsh->luaKey(ev);
       }
