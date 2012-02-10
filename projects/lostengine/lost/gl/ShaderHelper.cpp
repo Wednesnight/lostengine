@@ -17,11 +17,11 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/ShaderHelper.h"
 #include "lost/gl/FragmentShader.h"
 #include "lost/gl/VertexShader.h"
-#include <stdexcept>
+//#include <stdexcept>
 #include "lost/common/Data.h"
 #include "lost/common/Logger.h"
-#include <iomanip>
-#include <sstream>
+//#include <iomanip>
+//#include <sstream>
 #include "lost/lua/lua.h"
 #include "lost/lua/State.h"
 
@@ -40,20 +40,12 @@ string processDependencies(const resource::LoaderPtr& loader, const string& sour
 }
 
 // logs shader source with line numbers
-void broken(const string& source)
+void broken(const string& source, lua_State* state)
 {
-  std::stringstream s;
-  const char* cc = source.c_str();
-  s << cc;
-  uint32_t lineNumber = 1;
-  std::string line;
-  s.clear();
-  while(!s.eof())
-  {
-    getline(s, line);
-    EOUT(lineNumber << " : " << line.c_str());
-    lineNumber++;
-  }
+  lua::State* lstate = lua::State::stateFromState(state);
+  slub::reference ppfunc = lstate->globals["lost"]["gl"]["logBrokenShader"];
+  slub::lua_function<void, string> func(ppfunc);
+  func(source);  
 }
 
 ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& inName, const string& vssource, const string& fssource, lua_State* state)
@@ -71,7 +63,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   vertexShader->compile();
   if(!vertexShader->compiled())
   {
-    broken(source);
+    broken(source, state);
     THROW_RTE("vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log());
   }
 
@@ -80,7 +72,7 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
   fragmentShader->compile();
   if(!fragmentShader->compiled())
   {
-    broken(source);
+    broken(source, state);
     THROW_RTE("fragment shader '"<<fsname<<"' compilation failed: "<<fragmentShader->log());
   }
 

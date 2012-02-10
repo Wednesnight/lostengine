@@ -78,3 +78,12 @@ function preprocessShader(loader, data)
   end
   return data
 end
+
+-- logs a shader source to console as errors with line numbers
+function logBrokenShader(source)
+  local normalisedSource = normaliseLinebreaks(source)
+  local splitSource = split(normalisedSource, "\n")
+  for k,v in pairs(splitSource) do
+    log.error(k.." : "..v)
+  end
+end
