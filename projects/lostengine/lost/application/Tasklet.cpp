@@ -271,7 +271,8 @@ namespace lost
     void Tasklet::spawnTasklet(const string& taskletPath)
     {
       LoaderPtr loader = Loader::create();
-      loader->addRepository(resource::FilesystemRepository::create(taskletPath));
+      lost::fs::Path tp(taskletPath);
+      loader->addRepository(resource::FilesystemRepository::create(tp));
       loader->addRepository(ApplicationResourceRepository::create());
       SpawnTaskletEventPtr ev = SpawnTaskletEvent::create(loader);
       dispatchApplicationEvent(ev); // sends the event to the application on the main thread

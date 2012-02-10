@@ -69,7 +69,8 @@ namespace lost
       slub::package(state, "lost").package("resource")
         .clazz<FilesystemRepository>("FilesystemRepository")
           .extends<Repository>()
-          .function("create", &FilesystemRepository::create);
+      .function("create", (RepositoryPtr(*)(const lost::fs::Path&)) &FilesystemRepository::create)
+      .function("create", (RepositoryPtr(*)(const string&)) &FilesystemRepository::create);
     }
     
     void LostResourceApplicationResourceRepository(lua_State* state)

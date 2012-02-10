@@ -44,6 +44,11 @@ namespace lost
 
     RepositoryPtr FilesystemRepository::create(const string& inRootDir)
     {
+      return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));      
+    }
+
+    RepositoryPtr FilesystemRepository::create(const lost::fs::Path& inRootDir)
+    {
       return FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
     }
 

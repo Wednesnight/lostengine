@@ -70,6 +70,7 @@ struct Mesh
   math::Vec2 getAsVec2(uint32_t idx, gl::UsageType ut);
   math::Vec3 getAsVec3(uint32_t idx, gl::UsageType ut);
   uint32_t   getAsU32(uint32_t idx, gl::UsageType ut);  
+  uint16_t   getAsU16(uint32_t idx, gl::UsageType ut);  
 
   MaterialPtr material;
   math::Matrix transform;

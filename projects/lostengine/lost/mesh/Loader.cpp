@@ -43,9 +43,9 @@ namespace lost
     {
       MeshPtr mesh;
       Type& value;
-      uint32_t& idx;
+      uint16_t& idx;
       UsageType usageType;
-      MeshSet(uint32_t& inIdx, MeshPtr m, Type& inValue, UsageType ut)
+      MeshSet(uint16_t& inIdx, MeshPtr m, Type& inValue, UsageType ut)
       : idx(inIdx),
         mesh(m),
         value(inValue),
@@ -78,10 +78,10 @@ namespace lost
       BufferLayout layout;
       layout.add(ET_vec3_f32, UT_position, 0);
       layout.add(ET_vec3_f32, UT_normal, 0);
-      MeshPtr mesh(new Mesh(layout, ET_u32));
-      unsigned int vtxCount = 0;
-      unsigned int nrmCount = 0;
-      unsigned int idxCount = 0;
+      MeshPtr mesh(new Mesh(layout, ET_u16));
+      uint16_t vtxCount = 0;
+      uint16_t nrmCount = 0;
+      uint16_t idxCount = 0;
 
       string objData = objFile->str();
 
@@ -95,11 +95,11 @@ namespace lost
                               eol_p)[increment_a(vertexCount)];
       BOOST_SPIRIT_DEBUG_NODE(vertexCount_p);
 
-      unsigned int normalCount = 0;
+      uint16_t normalCount = 0;
       rule<> normalCount_p = (str_p("vn") >> +space_p >> *(anychar_p - eol_p) >> eol_p)[increment_a(normalCount)];
       BOOST_SPIRIT_DEBUG_NODE(normalCount_p);
       
-      unsigned int indexCount = 0;
+      uint16_t indexCount = 0;
       rule<> indexCount_p = 
         ch_p('f') >> +space_p >> 
           int_p[increment_a(indexCount)] >> !('/' >> !(int_p) >> !('/' >> !(int_p))) >> +space_p >>
@@ -138,10 +138,10 @@ namespace lost
           eol_p;
         BOOST_SPIRIT_DEBUG_NODE(normal_p);
 
-        uint32_t index;
+        u16 index;
         rule<> index_p = int_p[assign_a(index)][decrement_a(index)] >> !('/' >> !(int_p) >> !('/' >> !(int_p)));
         BOOST_SPIRIT_DEBUG_NODE(index_p);
-        rule<> indexAssign_p = index_p[MeshSet<uint32_t>(idxCount, mesh, index, UT_index)][increment_a(idxCount)];
+        rule<> indexAssign_p = index_p[MeshSet<uint16_t>(idxCount, mesh, index, UT_index)][increment_a(idxCount)];
         BOOST_SPIRIT_DEBUG_NODE(indexAssign_p);
         rule<> face_p =
           ch_p('f') >> +space_p >>
@@ -167,11 +167,11 @@ namespace lost
             Vec3 v1, v2;
             Vec3 n;
             // caluclate tri normals, add to vertex normals
-            for(uint32_t i=0; i<indexCount; i+=3)
+            for(u16 i=0; i<indexCount; i+=3)
             {
-              uint32_t i1 = mesh->indexBuffer->getAsU32(i, UT_index);
-              uint32_t i2 = mesh->indexBuffer->getAsU32(i+1, UT_index);
-              uint32_t i3 = mesh->indexBuffer->getAsU32(i+2, UT_index);
+              u16 i1 = mesh->indexBuffer->getAsU32(i, UT_index);
+              u16 i2 = mesh->indexBuffer->getAsU16(i+1, UT_index);
+              u16 i3 = mesh->indexBuffer->getAsU16(i+2, UT_index);
               p1 = mesh->vertexBuffer->getAsVec3(i1, UT_position);
               p2 = mesh->vertexBuffer->getAsVec3(i2, UT_position);
               p3 = mesh->vertexBuffer->getAsVec3(i3, UT_position);

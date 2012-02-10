@@ -32,6 +32,7 @@ struct FilesystemRepository : Repository
 
   virtual common::DataPtr load(const lost::fs::Path& inRootDir);
   virtual bool exists(string& path);
+  static RepositoryPtr create(const lost::fs::Path& inRootDir);
   static RepositoryPtr create(const string& inRootDir);
   
 };

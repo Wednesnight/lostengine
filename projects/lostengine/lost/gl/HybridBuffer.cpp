@@ -126,6 +126,11 @@ uint32_t HybridBuffer::getAsU32(uint32_t idx, UsageType ut)
   return hostBuffer->getAsU32(idx, ut);
 }
 
+uint16_t HybridBuffer::getAsU16(uint32_t idx, UsageType ut)
+{
+  return hostBuffer->getAsU16(idx, ut);
+}
+
 void HybridBuffer::upload()
 {
   for(uint32_t i=0; i<hostBuffer->partitions.size(); ++i)

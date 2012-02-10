@@ -239,6 +239,12 @@ uint32_t HostBuffer::getAsU32(uint32_t idx, UsageType ut)
   return *((uint32_t*)elementAddress(idx, ut));
 }
 
+uint16_t HostBuffer::getAsU16(uint32_t idx, UsageType ut)
+{
+  // FIXME: this is completely unsafe
+  return *((uint16_t*)elementAddress(idx, ut));
+}
+    
 bool HostBuffer::hasUsageType(UsageType ut)
 {
   return layout.hasUsageType(ut);

@@ -13,7 +13,7 @@ function startup()
   lost.guiro.themeManager():addTheme(LauncherTheme())
   mainViewController = MainViewController()
   mainViewController:startup()  
-  lost.guiro.ui():addSubview(mainViewController.view)
+  lost.guiro.ui():addSubview(mainViewController.view)  
 end
 
 function shutdown()
