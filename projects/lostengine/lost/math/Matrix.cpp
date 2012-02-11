@@ -21,6 +21,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/math/Matrix.h"
 #include "lost/math/lmath.h"
 #include <stdexcept>
+#include <assert.h>
 
 namespace lost
 {

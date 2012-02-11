@@ -21,6 +21,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <stdexcept>
 #include <sstream>
 #include <math.h>
+#include <assert.h>
 #include "lost/profiler/Blackbox.h"
 
   

@@ -30,6 +30,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/profiler/Blackbox.h"
 #include "thread_specific_ptr.h"
 #include "lost/common/Logger.h"
+#include <assert.h>
 
 using namespace lost::mesh;
 using namespace lost::bitmap;

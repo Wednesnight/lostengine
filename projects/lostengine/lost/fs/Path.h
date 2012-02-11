@@ -17,39 +17,38 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef LOST_FS_PATH_H
 #define LOST_FS_PATH_H
 
-#include "boost/filesystem.hpp"
-
 namespace lost 
 {
-namespace fs
-{
+  namespace fs
+  {
 
-struct Path
-{
-  Path();
-  Path(const lost::string& sp);
-  virtual ~Path();
+    struct Path
+    {
+      Path();
+      Path(const lost::string& sp);
+      virtual ~Path();
 
-  void operator /= (const Path& other);
-  void operator /= (const char* other);
-  void operator = (const char* other);
-  bool operator ==(const char* other);
-  bool operator !=(const char* other);
+      void operator /= (const Path& other);
+      void operator /= (const char* other);
+      void operator = (const char* other);
+      bool operator ==(const char* other);
+      bool operator !=(const char* other);
 
-  Path branch_path();
+      Path branch_path();
 
-  lost::string string() const;
-  lost::string native() const;
-  
-  boost::filesystem::path _path;
-};
+      lost::string string() const;
+      lost::string native() const;
 
-Path operator / (const Path& left, const Path& right);
+    protected:
+      lost::string path;
+    };
 
-bool exists(const Path& path);
-bool create_directories(const Path& path); 
-  
-}
+    Path operator / (const Path& left, const Path& right);
+
+    bool exists(const Path& path);
+    bool create_directories(const Path& path); 
+    
+  }
 }
 
 #endif

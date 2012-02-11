@@ -22,6 +22,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/Color.h"
 #include "lost/common/ColorGradient.h"
 #include "lost/common/Logger.h"
+#include <assert.h>
 
 namespace lost
 {

@@ -15,6 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/common/ColorGradient.h"
+#include <assert.h>
 
 namespace lost
 {
