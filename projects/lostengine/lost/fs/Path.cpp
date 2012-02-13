@@ -65,7 +65,7 @@ namespace lost
       Path result(path);
       string::size_type pos = path.rfind(dir_separator);
       if (pos != string::npos) {
-        result = path.substr(0, (pos > 0 ? pos-1 : 0));
+        result = path.substr(0, pos);
       }
       return result;
     }

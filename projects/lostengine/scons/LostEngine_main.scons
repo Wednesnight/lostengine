@@ -63,6 +63,8 @@ sconscript_file_map = dict(
     Launcher = 'Launcher.scons',
     LostEngine = 'LostEngine.scons',
     UnitTests = 'UnitTests.scons',
+    lua = '../../thirdparty/lua/lua_5_1_4/lua.scons',
+    slub = '../../thirdparty/slub/slub.scons',
 )
 
 class LoadTarget:
