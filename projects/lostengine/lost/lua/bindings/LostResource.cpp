@@ -74,7 +74,7 @@ namespace lost
       slub::package(state, "lost").package("resource")
       .clazz<Bundle>("Bundle")
       .extends<Loader>()
-//      .method("require", &Bundle::require)
+      .method("require", &Bundle::require)
       .function("create", &Bundle::create);      
     }
 
