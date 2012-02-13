@@ -18,7 +18,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/font/freetype/Library.h"
 #include "lost/common/Logger.h"
 #include "lost/common/Data.h"
-#include "lost/resource/Loader.h"
+#include "lost/resource/Bundle.h"
 #include "lost/font/TrueTypeFont.h"
 
 namespace lost
@@ -40,9 +40,10 @@ FontManagerPtr FontManager::create(const resource::LoaderPtr& inLoader)
   return FontManagerPtr(new FontManager(inLoader));
 }
 
-void FontManager::addEntry(const string& name, const string& pathToData)
+void FontManager::addEntry(const string& name, resource::BundlePtr bundle, const string& pathToData)
 {
   name2path[name] = pathToData;
+  name2bundle[name] = bundle;
 }
 
 void FontManager::logStats()
@@ -64,7 +65,8 @@ FontPtr FontManager::getFont(const string& name, uint32_t size)
       common::DataPtr data = path2data[path];
       if(!data)
       {
-        data = _loader->load(path);
+        resource::BundlePtr bundle = name2bundle[name];
+        data = bundle->load(path);
         path2data[path] = data;
       }
       result.reset(new TrueTypeFont(lib(),data, size));

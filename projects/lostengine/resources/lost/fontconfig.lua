@@ -1,3 +1,5 @@
+-- returns a list of font bundle paths relative to tasklet root
+--[[
 return
 {
   ["Vera"] = "lost/resources/fonts/vera/Vera.ttf",
@@ -11,4 +13,11 @@ return
   ["Vera serif"] = "lost/resources/fonts/vera/VeraSe.ttf",
   ["Vera serif bold"] = "lost/resources/fonts/vera/VeraSeBd.ttf",
   ["Grinched"] = "lost/resources/fonts/grinched/Grinched.ttf",
+}
+]]
+
+return 
+{
+  "lost/resources/fonts/grinched.lefont",
+  "lost/resources/fonts/vera.lefont"
 }

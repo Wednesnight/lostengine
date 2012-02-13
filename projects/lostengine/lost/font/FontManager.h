@@ -33,12 +33,13 @@ struct FontManager
   
   static FontManagerPtr create(const resource::LoaderPtr& inLoader);
   
-  void addEntry(const string& name, const string& pathToData);
+  void addEntry(const string& name, resource::BundlePtr bundle, const string& pathToData);
   FontPtr getFont(const string& name, uint32_t size);
   void logStats();
   
   freetype::LibraryPtr lib();
   map<string, string> name2path;
+  map<string, resource::BundlePtr> name2bundle;
   map<string, lost::common::DataPtr> path2data;
   map<pair<string, uint32_t>, FontPtr> nameAndSize2font;
   

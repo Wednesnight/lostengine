@@ -10,7 +10,7 @@ namespace resource
 
 Bundle::Bundle(const fs::Path& inRootDir)  
 {
-  RepositoryPtr repo = FilesystemRepository::create(inRootDir);
+  repo = FilesystemRepositoryPtr(new FilesystemRepository(inRootDir));
   addRepository(repo);
 }
 
@@ -32,12 +32,8 @@ slub::reference Bundle::require(const lost::fs::Path& relativePathToLuaFile, lua
   if(res)
   {
     EOUT("!!! Error loading "<<relativePathToLuaFile.string());
-    return slub::reference();
   }
-  else
-  {
-    return slub::reference(state);    
-  }
+  return slub::reference(state); // currently returns stringified error in case of parse failure
 }
 
 }
