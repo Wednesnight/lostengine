@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/lua/bindings/LostRg.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 
 #include "lost/gl/FrameBuffer.h"
 #include "lost/gl/Context.h"

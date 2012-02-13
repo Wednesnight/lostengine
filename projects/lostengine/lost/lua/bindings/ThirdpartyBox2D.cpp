@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include <Box2D/Box2D.h>
 
 #include <slub/slub.h>

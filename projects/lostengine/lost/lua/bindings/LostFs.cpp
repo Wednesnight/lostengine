@@ -23,7 +23,7 @@ std::ostream& operator<<(std::ostream& stream, const lost::fs::Path& p)
 }
 
 #include "lost/lua/bindings/LostFs.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include <slub/slub.h>
 
 

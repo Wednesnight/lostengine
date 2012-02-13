@@ -14,8 +14,8 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+//#include "lost/lua/lostlua.h"
 #include "lost/lua/bindings/LostResource.h"
-#include "lost/lua/lua.h"
 #include "lost/resource/Loader.h"
 #include "lost/resource/Bundle.h"
 #include "lost/resource/DefaultLoader.h"
@@ -23,7 +23,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/resource/ApplicationResourceRepository.h"
 #include "lost/common/Data.h"
 
-#include <slub/slub.h>
 
 using namespace lost::resource;
 
@@ -65,13 +64,18 @@ namespace lost
           .function("create", &Loader::create);
     }
 
+    slub::reference Bundle_require(Bundle* bundle, const lost::fs::Path& inPath, lua_State* state)
+    {
+      return bundle->require(inPath, state);
+    }
+    
     void LostResourceBundle(lua_State* state)
     {
       slub::package(state, "lost").package("resource")
       .clazz<Bundle>("Bundle")
       .extends<Loader>()
-      //          .def("directory", &LostResourceLoader_directory, return_directory_iterator)
-      .function("create", &Bundle::create);
+//      .method("require", &Bundle::require)
+      .function("create", &Bundle::create);      
     }
 
     void LostResourceFilesystemRepository(lua_State* state)

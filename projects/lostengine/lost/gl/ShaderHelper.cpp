@@ -22,7 +22,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/Logger.h"
 //#include <iomanip>
 //#include <sstream>
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/lua/State.h"
 
 namespace lost

@@ -17,7 +17,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/io.h"
 #include "lost/lua/bindings/LostCommon.h"
 
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/lua/State.h"
 
 #include "lost/common/Color.h"

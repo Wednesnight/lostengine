@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/lua/bindings/LostApplication.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 
 #include "lost/application/Application.h"
 #include "lost/application/ApplicationEvent.h"

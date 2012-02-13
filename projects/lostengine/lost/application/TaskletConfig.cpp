@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/application/TaskletConfig.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/lua/State.h"
 #include "lost/resource/Loader.h"
 #include "lost/common/Logger.h"

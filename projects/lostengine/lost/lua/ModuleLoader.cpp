@@ -14,7 +14,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/lua/State.h"
 
 #include "lost/lua/ModuleLoader.h"

@@ -19,7 +19,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/application/forward.h"
 #include "lost/application/QueueEntity.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 
 namespace lost
 {

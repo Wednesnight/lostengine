@@ -16,7 +16,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/math/io.h"
 #include "lost/lua/bindings/LostMath.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 
 #include "lost/math/Rect.h"
 #include "lost/math/Vec2.h"

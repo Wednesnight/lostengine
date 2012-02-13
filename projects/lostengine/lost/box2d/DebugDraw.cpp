@@ -24,7 +24,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/gl.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/mesh/Quad.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/lua/State.h"
 
 namespace lost

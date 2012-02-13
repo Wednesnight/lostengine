@@ -15,7 +15,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/lua/bindings/LostFont.h"
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 #include "lost/font/TrueTypeFont.h"
 #include "lost/font/RenderedText.h"
 #include "lost/font/FontManager.h"

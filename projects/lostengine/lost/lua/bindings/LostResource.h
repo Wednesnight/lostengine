@@ -17,7 +17,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef LOST_LUA_BINDINGS_LOSTRESOURCE_H
 #define LOST_LUA_BINDINGS_LOSTRESOURCE_H
 
-#include "lost/lua/lua.h"
+#include "lost/lua/lostlua.h"
 
 namespace lost
 {
