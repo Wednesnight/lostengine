@@ -32,7 +32,10 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     NSOpenGLPFADepthSize, 32,
     0
   };
-  return [super initWithFrame: frame pixelFormat: [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes]];
+  NSOpenGLPixelFormat* pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes: windowedAttributes];
+  GLView* result = [super initWithFrame: frame pixelFormat: pixelFormat];
+  [pixelFormat release];
+  return result;
 }
 
 @end
