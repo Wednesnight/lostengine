@@ -122,18 +122,13 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 - (BOOL)windowShouldClose: (id)window
 {
-  // TODO: add windowShouldClose event
-  return YES;
-}
-
-- (void) windowWillClose: (NSNotification *)notification
-{
   if (parent)
   {
     lost::shared_ptr<lost::application::WindowEvent> windowEvent(new lost::application::WindowEvent(
-        lost::application::WindowEvent::CLOSE(), parent));
+                                                                                                    lost::application::WindowEvent::CLOSE(), parent));
     parent->dispatcher->queueEvent(windowEvent);
   }
+  return NO;
 }
 
 - (void)windowDidResize:(NSNotification *)notification
