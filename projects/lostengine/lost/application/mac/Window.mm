@@ -58,7 +58,9 @@ namespace lost
 
       // set params
       [hiddenMembers->window setParent: this];
-      [hiddenMembers->window setTitle: [[NSString alloc] initWithCString:config->windowTitle.c_str() encoding:NSUTF8StringEncoding]];
+      NSString* title = [[NSString alloc] initWithCString:config->windowTitle.c_str() encoding:NSUTF8StringEncoding];
+      [hiddenMembers->window setTitle: title];
+      [title release];
       [hiddenMembers->window setAcceptsMouseMovedEvents: YES];
       [hiddenMembers->window setContentView: hiddenMembers->view];
       [hiddenMembers->window setDelegate: hiddenMembers->window];

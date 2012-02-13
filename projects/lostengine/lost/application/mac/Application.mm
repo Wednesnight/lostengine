@@ -51,8 +51,8 @@ namespace lost
 
     void Application::initialize()
     {
-      // Cocoas needs a NSAutoreleasePool in place
-      [[NSAutoreleasePool alloc] init];
+      // Cocoa needs a NSAutoreleasePool in place
+      NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
       // initialize hiddenMembers
       hiddenMembers = new ApplicationHiddenMembers;
@@ -86,7 +86,8 @@ namespace lost
         {
           title = [[NSProcessInfo processInfo] processName];
         }
-        [NSApp setMainMenu: [[NSMenu allocWithZone: [NSMenu menuZone]] initWithTitle: @"temp"]];
+        NSMenu *main_menu = [[NSMenu allocWithZone: [NSMenu menuZone]] initWithTitle: @"temp"];
+        [NSApp setMainMenu: main_menu];
         menu = [[NSMenu allocWithZone: [NSMenu menuZone]] initWithTitle: @"temp"];
         temp_item = [[NSMenuItem allocWithZone: [NSMenu menuZone]]
                      initWithTitle: @"temp"
@@ -103,8 +104,15 @@ namespace lost
         [menu_item setKeyEquivalentModifierMask: NSCommandKeyMask];
         [menu_item setTarget: hiddenMembers->delegate];
         [menu addItem: menu_item];
+
+        [menu_item release];
+        [temp_item release];
+        [menu release];
+        [main_menu release];
       }
       /*************************************************************/
+
+      [pool release];
     }
 
     void Application::finalize()

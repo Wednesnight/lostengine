@@ -130,7 +130,8 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
 {
   bind();
   
-  uint32_t texwidth, texheight;
+  uint32_t texwidth = (uint32_t)inSize.width;
+  uint32_t texheight = (uint32_t)inSize.height;
   Texture::SizeHint sizeHint = inParams.sizeHint;
   // if sizehint is dontcare we try to choose non-power-of-two, unless the platform doesn't allow it
   if(sizeHint == Texture::SIZE_DONT_CARE)
@@ -143,13 +144,7 @@ void Texture::init(const lost::math::Vec2& inSize, const Texture::Params& inPara
       sizeHint = Texture::SIZE_POWER_OF_TWO;
   }
 
-  // then we calculate the size of the texture object
-  if(sizeHint == Texture::SIZE_ORIGINAL)
-  {
-    texwidth = (uint32_t)inSize.width;
-    texheight = (uint32_t)inSize.height;
-  }
-  else if(sizeHint == Texture::SIZE_POWER_OF_TWO)
+  if(sizeHint == Texture::SIZE_POWER_OF_TWO)
   {
     texwidth = lost::math::nextPowerOf2((unsigned long)inSize.width);
     texheight = lost::math::nextPowerOf2((unsigned long)inSize.height);
