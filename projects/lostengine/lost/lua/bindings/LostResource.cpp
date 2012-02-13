@@ -75,7 +75,9 @@ namespace lost
       .clazz<Bundle>("Bundle")
       .extends<Loader>()
       .method("require", &Bundle::require)
-      .function("create", &Bundle::create);      
+      .method("subBundle", &Bundle::subBundle)
+      .function("create", &Bundle::create)
+      .field("repo", &Bundle::repo);      
     }
 
     void LostResourceFilesystemRepository(lua_State* state)
@@ -84,7 +86,8 @@ namespace lost
         .clazz<FilesystemRepository>("FilesystemRepository")
           .extends<Repository>()
       .function("create", (RepositoryPtr(*)(const lost::fs::Path&)) &FilesystemRepository::create)
-      .function("create", (RepositoryPtr(*)(const string&)) &FilesystemRepository::create);
+      .function("create", (RepositoryPtr(*)(const string&)) &FilesystemRepository::create)
+      .field("rootDirectory",&FilesystemRepository::rootDirectory);
     }
     
     void LostResourceApplicationResourceRepository(lua_State* state)

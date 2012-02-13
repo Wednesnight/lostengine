@@ -29,7 +29,7 @@ namespace lost
     common::DataPtr loadFromAbsolutePath(const string& inPath)
     {
       common::DataPtr result;
-
+      
       ZZIP_FILE* file = zzip_fopen(inPath.c_str(), "rb");
       if (file != NULL)
       {

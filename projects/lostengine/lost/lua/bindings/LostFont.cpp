@@ -22,7 +22,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/font/BreakMode.h"
 #include "lost/font/Render.h"
 #include "lost/font/TextBuffer.h"
-
+#include "lost/resource/Bundle.h"
 #include <slub/slub.h>
 
 using namespace lost;
