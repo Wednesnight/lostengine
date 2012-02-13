@@ -97,6 +97,7 @@ namespace lost
       LostResourceFilesystemRepository(state);
       LostResourceApplicationResourceRepository(state);
       LostResourceLoader(state);
+      LostResourceBundle(state);
     }
 
   }

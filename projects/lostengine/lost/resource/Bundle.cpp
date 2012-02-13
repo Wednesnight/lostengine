@@ -17,5 +17,11 @@ BundlePtr Bundle::create(const fs::Path& inRootDir)
   return BundlePtr(new Bundle(inRootDir));
 }
 
+BundlePtr Bundle::subBundle(const lost::fs::Path& relativePath)
+{
+  return Bundle::create(repo->rootDirectory / relativePath);
+}
+  
+
 }
 }

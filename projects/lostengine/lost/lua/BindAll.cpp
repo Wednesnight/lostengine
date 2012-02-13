@@ -68,6 +68,7 @@ namespace lost
       LostCommon(state);
       LostEvent(state);
       LostFs(state);
+      LostResource(state);
       LostApplication(state);
 #ifndef ANDROID
       LostAudio(state);
@@ -81,7 +82,6 @@ namespace lost
       LostMath(state);
       LostPlatform(state);
       LostProfiler(state);
-      LostResource(state);
       LostRg(state);
       LostTime(state);
       ThirdpartyBox2D(state);

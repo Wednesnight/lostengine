@@ -22,19 +22,19 @@ namespace lost
   namespace resource
   {
     FilesystemRepository::FilesystemRepository(const lost::fs::Path& inRootDir)
-    :rootDirectory(inRootDir.string().c_str())
+    :rootDirectory(inRootDir)
     {
     }
 
     common::DataPtr FilesystemRepository::load( const lost::fs::Path& relativePath)
     {
-      lost::fs::Path absolutePath = lost::fs::Path(rootDirectory) / relativePath;
-      return loadFromAbsolutePath(absolutePath.string().c_str());;
+      lost::fs::Path absolutePath = rootDirectory / relativePath;
+      return loadFromAbsolutePath(absolutePath.string().c_str());
     }
 
     bool FilesystemRepository::exists(string& inOutRelativePath)
     {
-      lost::fs::Path absolutePath = lost::fs::Path(rootDirectory) / inOutRelativePath;
+      lost::fs::Path absolutePath = rootDirectory / inOutRelativePath;
       bool exists = fileExists(absolutePath.string().c_str());
       if (exists) {
         inOutRelativePath = absolutePath.string().c_str();

@@ -25,7 +25,7 @@ namespace resource
 {
 struct FilesystemRepository : Repository
 {
-  string rootDirectory;
+  lost::fs::Path rootDirectory;
 
   FilesystemRepository(const lost::fs::Path& inRootDir);
   virtual ~FilesystemRepository() {};

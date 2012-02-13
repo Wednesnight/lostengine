@@ -286,6 +286,8 @@ namespace lost
           .field("uiNode", &Tasklet::uiNode)
           .field("fontManager", &Tasklet::fontManager)
           .field("running", &Tasklet::running)
+          .field("taskletBundle", &Tasklet::taskletBundle)
+          .field("applicationBundle", &Tasklet::applicationBundle)
 //          .method("dispatchApplicationEvent", &Tasklet::dispatchApplicationEvent)
           .method("spawnTasklet",&Tasklet::spawnTasklet)
           .field("id", (int(*)(Tasklet*)) &Tasklet_id, (void(*)(Tasklet*, int)) &Tasklet_id);
