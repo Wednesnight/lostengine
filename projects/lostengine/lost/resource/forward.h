@@ -24,7 +24,10 @@ namespace resource
 
 struct Loader;
 typedef lost::shared_ptr<Loader> LoaderPtr;
-  
+
+struct Bundle;
+typedef lost::shared_ptr<Bundle> BundlePtr;
+
 struct Repository;
 typedef lost::shared_ptr<Repository> RepositoryPtr;
 

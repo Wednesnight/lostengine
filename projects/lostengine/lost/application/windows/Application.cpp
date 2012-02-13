@@ -97,11 +97,5 @@ namespace lost
     {
       PostThreadMessage(hiddenMembers->threadId, WM_NULL, 0, 0);
     }
-
-    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
-    {
-      addTasklet(new Tasklet(event->loader));
-    }
-
   }
 }

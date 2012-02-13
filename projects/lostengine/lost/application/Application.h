@@ -38,7 +38,7 @@ namespace lost
       /**
        * hidden constructor
        */
-      Application(Tasklet* tasklet);
+      Application();
       
       /**
        * hidden ctor/dtor utility methods for platform specific stuff
@@ -92,7 +92,7 @@ namespace lost
       /**
        * returns Application singleton
        */
-      static ApplicationPtr getInstance(Tasklet* tasklet = NULL);
+      static ApplicationPtr getInstance();
 
       ~Application();
 

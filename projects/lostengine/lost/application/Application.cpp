@@ -34,16 +34,16 @@ namespace lost
   namespace application
   {
 
-    ApplicationPtr Application::getInstance(Tasklet* tasklet)
+    ApplicationPtr Application::getInstance()
     {
       static ApplicationPtr instance;
       if (!instance) {
-        instance.reset(new Application(tasklet));
+        instance.reset(new Application);
       }
       return instance;
     }
 
-    Application::Application(Tasklet* tasklet)
+    Application::Application()
     : running(false)
     {
       eventDispatcher.reset(new lost::event::EventDispatcher());
@@ -54,9 +54,6 @@ namespace lost
       eventDispatcher->addEventListener(TaskletEvent::TERMINATE(), event::makeListener(this, &Application::taskletTerminate));
       eventDispatcher->addEventListener(TaskletEvent::DONE(), event::makeListener(this, &Application::taskletDone));
 
-      if (tasklet != NULL) {
-        addTasklet(tasklet);
-      }
       platform::setThreadName("LostEngine main thread");
       initialize();
     }
@@ -92,6 +89,7 @@ namespace lost
     
     void Application::addTasklet(Tasklet* tasklet)
     {
+      tasklet->applicationBundle = Bundle::create(platform::getResourcePath());
       tasklet->eventDispatcher->addEventListener(QueueEvent::QUEUE(), event::makeListener(this, &Application::queueEvent));
       tasklet->eventDispatcher->addEventListener(ProcessEvent::PROCESS(), event::makeListener(this, &Application::processEvents));
       tasklets.push_back(tasklet);
@@ -170,6 +168,11 @@ namespace lost
         DOUT("Last tasklet died, terminating.");
         quit();
       }
+    }
+
+    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
+    {
+      addTasklet(new Tasklet(event->loader));
     }
 
     void Application::queueEvent(const QueueEventPtr& event)

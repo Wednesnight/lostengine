@@ -28,6 +28,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/font/forward.h"
 #include "lost/time/Clock.h"
 #include "lost/time/TimerScheduler.h"
+#include "lost/resource/Bundle.h"
 
 namespace lost
 {
@@ -78,6 +79,9 @@ namespace lost
       QueuePtr                        updateQueue;    // queue that holds native/lua objects that should be updated within each loop run
       bool                            running;        // tasklet will shutdown if this flag is set to false
 
+      resource::BundlePtr             applicationBundle;
+      resource::BundlePtr             taskletBundle;
+      
       Tasklet(lost::resource::LoaderPtr inLoader = resource::DefaultLoader::create());
       virtual ~Tasklet();
 
@@ -98,9 +102,8 @@ namespace lost
 
       void run();   // the tasklet run loop; platform specific implementation
 
-      virtual void key(const application::KeyEventPtr& ev);
+      virtual void key(const application::KeyEventPtr& ev);      
     };
-
   }
 }
 

@@ -77,6 +77,7 @@
 		28FA9C0F1A43BBB916CB4300 /* DepthTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A78D950CAF09C3441BAC6D47 /* DepthTest.cpp */; };
 		2903983D3D1EBDCA9B171895 /* error_code.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DB6D78478A7F5BB1F89DB34 /* error_code.cpp */; };
 		2A3E227EEBBF2D93D94E09E5 /* ftgasp.c in Sources */ = {isa = PBXBuildFile; fileRef = C3C24878424EFF5A3505F605 /* ftgasp.c */; };
+		2B164D579986D1FD0972D069 /* Bundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FF76B7140C53F61A9215C38F /* Bundle.cpp */; };
 		2B4B75038B2A3BACEACABB53 /* Camera3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF7BCD307B50A3585139B9A9 /* Camera3D.cpp */; };
 		2C17538AD114F80FCD57B38F /* stb_vorbis.c in Sources */ = {isa = PBXBuildFile; fileRef = 19C2D79ADC6B486CE54AA761 /* stb_vorbis.c */; };
 		2CCF702879E7D3E1196D6BF2 /* codecvt_error_category.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE0FE7DA4CFD4904F93CE417 /* codecvt_error_category.cpp */; };
@@ -112,7 +113,6 @@
 		42CC8EBD2E75741E49DB4C7B /* Library.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D84A4A39DDC55B0AE4E30BF /* Library.cpp */; };
 		4466EA45A885479DA24B902C /* b2Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AFF1EC0326629C4A8FCA9376 /* b2Fixture.cpp */; };
 		454C3A8FA4DC536DBDD36229 /* inftrees.c in Sources */ = {isa = PBXBuildFile; fileRef = 23296E1D66E0EA0C3BDEBC8B /* inftrees.c */; };
-		46FA2445780912E28EAA3E11 /* ApplicationTaskletSpawn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 100D32962A46FE7C2194BE4B /* ApplicationTaskletSpawn.cpp */; };
 		4700F00D36B994CEBB4FF523 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = 388274C2BECDEC4660F47BFC /* crc32.c */; };
 		470961FBF540657A015809A5 /* ftpfr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2F48F9D25850F07577FB56A0 /* ftpfr.c */; };
 		48B9632DC7D6CD81A00641D0 /* adler32.c in Sources */ = {isa = PBXBuildFile; fileRef = 767A15D1FD8C6F9B5F598AB1 /* adler32.c */; };
@@ -488,7 +488,6 @@
 		0FA52DA0B9A2DB29141CB763 /* StringStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringStream.cpp; sourceTree = "<group>"; };
 		0FF77E257BB2864CF27E917F /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		1007B4C3A904EE7FB3FE9DD0 /* plugin.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = plugin.c; sourceTree = "<group>"; };
-		100D32962A46FE7C2194BE4B /* ApplicationTaskletSpawn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ApplicationTaskletSpawn.cpp; sourceTree = "<group>"; };
 		1017CB3C35E6012118DD2D2A /* LostAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostAudio.cpp; sourceTree = "<group>"; };
 		1027A4A330DEADD811890C80 /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		1043131F020EE57FF9FFAA56 /* Device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -761,6 +760,7 @@
 		849C3D5E5B88B56F92A1F18D /* Mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		84E108593081E37269F529C0 /* registry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = registry.cpp; sourceTree = "<group>"; };
 		865BCBDC70B3507A77BB214B /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = allocator.cpp; sourceTree = "<group>"; };
+		86B69EE62F2EF40ED180FD29 /* Bundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bundle.h; sourceTree = "<group>"; };
 		86BF7DD7C9920B293DC56E8D /* settings.gypi */ = {isa = PBXFileReference; lastKnownFileType = text; path = settings.gypi; sourceTree = "<group>"; };
 		86C1C654CB5F55E07C5E130D /* Tasklet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tasklet.cpp; sourceTree = "<group>"; };
 		86E78AADA37F841E20F5256E /* tss_null.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tss_null.cpp; sourceTree = "<group>"; };
@@ -1023,6 +1023,7 @@
 		FDCD8550029B5DF7A4C4BBA0 /* Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Render.h; sourceTree = "<group>"; };
 		FDE99238565986E3325812B6 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		FEF7424BA09396C60465E44F /* MemoryOutStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryOutStream.cpp; sourceTree = "<group>"; };
+		FF76B7140C53F61A9215C38F /* Bundle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bundle.cpp; sourceTree = "<group>"; };
 		FFE8E1D846106CCC2EC5BB8E /* Blend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blend.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1555,7 +1556,6 @@
 				243E32ADF901B5252F3FA61E /* Application.mm */,
 				BC22BF7898573B0108069794 /* ApplicationDelegate.h */,
 				8DA332481833BFC0250BDB99 /* ApplicationDelegate.mm */,
-				100D32962A46FE7C2194BE4B /* ApplicationTaskletSpawn.cpp */,
 				BDA584DF8CA0D27721777220 /* ApplicationWindow.h */,
 				C1B3C0B5891B536705A8BA3B /* ApplicationWindow.mm */,
 				D623E0DBAA32A980820DDAE1 /* GLView.h */,
@@ -1678,6 +1678,8 @@
 			children = (
 				AEC1D7F2B48D49C9D8391466 /* ApplicationResourceRepository.cpp */,
 				298EFCC8634C46C372213553 /* ApplicationResourceRepository.h */,
+				FF76B7140C53F61A9215C38F /* Bundle.cpp */,
+				86B69EE62F2EF40ED180FD29 /* Bundle.h */,
 				EF2ADA66860A056AB1C0B7AD /* DefaultLoader.cpp */,
 				403576B11005C209D1790247 /* DefaultLoader.h */,
 				8D769CF7F10EC40F78F5DF2D /* FilesystemRepository.cpp */,
@@ -2529,7 +2531,6 @@
 				FC07FCF6078E989E55E8C310 /* Window.cpp in Sources */,
 				EBA71AB8392F51DFDB821C8C /* Application.mm in Sources */,
 				0340509C561206D24FC57429 /* ApplicationDelegate.mm in Sources */,
-				46FA2445780912E28EAA3E11 /* ApplicationTaskletSpawn.cpp in Sources */,
 				6FDD77DC1F91B8EF3CE317EF /* ApplicationWindow.mm in Sources */,
 				65A9E6ED34BEECA189DBF3C7 /* GLView.mm in Sources */,
 				EA36ABE1E36CBDE4C2E304BF /* Tasklet.mm in Sources */,
@@ -2636,6 +2637,7 @@
 				3085F4BDEA13E9BC58FFB00A /* Platform_Mac.mm in Sources */,
 				788AB52D30BA7CF3358AE4AB /* Blackbox.cpp in Sources */,
 				B56ADE6BA7F5C533216AEC86 /* ApplicationResourceRepository.cpp in Sources */,
+				2B164D579986D1FD0972D069 /* Bundle.cpp in Sources */,
 				B83012167BC365BDAD37DCA4 /* DefaultLoader.cpp in Sources */,
 				1955FAACC5C0F43BC84364C3 /* FilesystemRepository.cpp in Sources */,
 				21E5A47E1F757148E66AC9BA /* Helper.cpp in Sources */,

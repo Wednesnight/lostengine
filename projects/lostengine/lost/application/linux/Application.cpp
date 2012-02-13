@@ -173,12 +173,6 @@ namespace lost
       XSendEvent(hiddenMembers->display, 0, False, 0l, &event);
       XFlush(hiddenMembers->display);
     }
-
-    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
-    {
-      addTasklet(new Tasklet(event->loader));
-    }
-
   }
 }
 

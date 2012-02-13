@@ -28,16 +28,17 @@ namespace lost
     struct SpawnTaskletEvent : public event::Event
     {
       resource::LoaderPtr loader;
+      lost::fs::Path      taskletPath;
       static const event::Type& SPAWN_TASKLET() { static const event::Type d = common::djb2Hash("spawnTasklet"); return d; }
 
-      SpawnTaskletEvent(resource::LoaderPtr inLoader)
-      : loader(inLoader), Event(SPAWN_TASKLET())
+      SpawnTaskletEvent(resource::LoaderPtr inLoader, const lost::fs::Path& inTaskletPath)
+      : loader(inLoader), taskletPath(inTaskletPath), Event(SPAWN_TASKLET())
       {
       }
         
-      static SpawnTaskletEventPtr create(resource::LoaderPtr inLoader)
+      static SpawnTaskletEventPtr create(resource::LoaderPtr inLoader, const lost::fs::Path& inTaskletPath)
       {
-        return SpawnTaskletEventPtr(new SpawnTaskletEvent(inLoader));
+        return SpawnTaskletEventPtr(new SpawnTaskletEvent(inLoader, inTaskletPath));
       }
         
       virtual ~SpawnTaskletEvent() {}

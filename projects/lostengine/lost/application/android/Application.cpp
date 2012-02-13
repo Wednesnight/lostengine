@@ -124,11 +124,5 @@ namespace lost
     {
       ALooper_wake(hiddenMembers->app->looper);
     }
-
-    void Application::taskletSpawn(const SpawnTaskletEventPtr& event)
-    {
-      addTasklet(new Tasklet(event->loader));
-    }
-
   }
 }

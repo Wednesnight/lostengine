@@ -543,7 +543,6 @@
         'lost/application/mac/Application.mm',
         'lost/application/mac/ApplicationDelegate.h',
         'lost/application/mac/ApplicationDelegate.mm',
-        'lost/application/mac/ApplicationTaskletSpawn.cpp',
         'lost/application/mac/ApplicationWindow.h',
         'lost/application/mac/ApplicationWindow.mm',
         'lost/application/mac/GLView.h',
@@ -842,6 +841,8 @@
         # resource
         'lost/resource/ApplicationResourceRepository.cpp',
         'lost/resource/ApplicationResourceRepository.h',
+        'lost/resource/Bundle.cpp',
+        'lost/resource/Bundle.h',
         'lost/resource/DefaultLoader.cpp',
         'lost/resource/DefaultLoader.h',
         'lost/resource/FilesystemRepository.cpp',
@@ -1060,7 +1061,6 @@
           'sources!': [
             'lost/application/mac/Application.mm',
             'lost/application/mac/ApplicationDelegate.mm',
-            'lost/application/mac/ApplicationTaskletSpawn.cpp',
             'lost/application/mac/ApplicationWindow.mm',
             'lost/application/mac/GLView.mm',
             'lost/application/mac/Tasklet.mm',

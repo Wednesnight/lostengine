@@ -20,6 +20,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/Logger.h"
 #include "lost/resource/FilesystemRepository.h"
 #include "lost/platform/Platform.h"
+#include "lost/resource/Bundle.h"
 
 #ifdef ANDROID
 #include "lost/resource/AndroidAssetRepository.h"
@@ -37,10 +38,12 @@ namespace lost
   {
     int runResourceTasklet(int argc, char *argv[], const string& relativePathToTaskletInResourceDir)
     {
+      resource::BundlePtr taskletBundle;
 #ifndef ANDROID
       resource::LoaderPtr loader = resource::DefaultLoader::create();
       lost::fs::Path taskletPath(platform::getResourcePath());
       taskletPath /= relativePathToTaskletInResourceDir;
+      taskletBundle = resource::Bundle::create(taskletPath);
       resource::RepositoryPtr taskletDir(new resource::FilesystemRepository(taskletPath));
 #else
       resource::LoaderPtr loader = resource::Loader::create();
@@ -49,6 +52,7 @@ namespace lost
 #endif
       loader->addRepository(taskletDir);
       Tasklet* tasklet = new Tasklet(loader);
+      tasklet->taskletBundle = taskletBundle;
       return runTasklet(argc, argv, tasklet);
     }
     
@@ -57,13 +61,13 @@ namespace lost
       return runTasklet(argc, argv, new Tasklet);
     }
     
-
     int runTasklet(int argc, char *argv[], Tasklet* t)
     {
       int result = EXIT_SUCCESS;
       try
       {
-        static ApplicationPtr app = Application::getInstance(t);
+        static ApplicationPtr app = Application::getInstance();
+        app->addTasklet(t);
         app->run(argc, argv);      
       }
       catch (std::exception& e)
