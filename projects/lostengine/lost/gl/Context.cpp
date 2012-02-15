@@ -458,7 +458,7 @@ map<void*, Context*> glContext2lostGlContext;
       {
         material(mesh->material);      
       }
-      bind(ib->gpuBuffers[0].get());
+      bind(ib->gpuBuffer.get());
 
       // store the enabled vertex attributes
       vector<GLint> enabledVertexAttributes;

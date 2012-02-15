@@ -40,12 +40,9 @@ void HybridBuffer::init(GLenum inGpuBufferType,
   gpuBufferType = inGpuBufferType;
   hostBuffer.reset(new HostBuffer(inLayout));
 
-  for(uint32_t i=0; i<hostBuffer->layout.partitions.size(); ++i)
-  {
-    BufferPtr buffer(new Buffer);
-    buffer->target = inGpuBufferType;
-    gpuBuffers.push_back(buffer);
-  }
+  gpuBuffer.reset(new Buffer);
+  gpuBuffer->target = inGpuBufferType;
+
   dirty = false;  
   vertexAttributeMap[UT_position] = "position";
   vertexAttributeMap[UT_normal] = "normal";
@@ -133,15 +130,12 @@ uint16_t HybridBuffer::getAsU16(uint32_t idx, UsageType ut)
 
 void HybridBuffer::upload()
 {
-  for(uint32_t i=0; i<hostBuffer->partitions.size(); ++i)
-  {
-    Buffer* buffer = gpuBuffers[i].get();
-    Context::getCurrent()->bind(buffer);
-    buffer->bufferData(buffer->target, 
-                  hostBuffer->count*hostBuffer->layout.partitionSize(i), 
-                  hostBuffer->partitions[i],
-                  GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
-  }
+  Buffer* buffer = gpuBuffer.get();
+  Context::getCurrent()->bind(buffer);
+  buffer->bufferData(buffer->target, 
+                     hostBuffer->count*hostBuffer->layout.structSize(), 
+                     hostBuffer->buffer,
+                     GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
   dirty = false;
 }
 
@@ -152,9 +146,7 @@ bool HybridBuffer::hasUsageType(UsageType ut)
 
 Buffer* HybridBuffer::bufferForUsageType(UsageType ut)
 {
-  // FIXME: check range
-  uint32_t pid = hostBuffer->layout.ut2pid[ut];
-  return gpuBuffers[pid].get();
+  return gpuBuffer.get();
 }
 
 const AttributePointerConfig& HybridBuffer::pointerConfigForUsageType(UsageType ut)

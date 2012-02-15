@@ -19,9 +19,9 @@ function Cube:constructor(args)
   self.renderNode = lost.rg.Node.create()
 
   local layout = lost.gl.BufferLayout()
-  layout:add(gl.ET_vec3_f32, gl.UT_position, 0)
-  layout:add(gl.ET_vec3_f32, gl.UT_normal, 0)
-  layout:add(gl.ET_vec3_f32, gl.UT_vertexAttrib0, 0)
+  layout:add(gl.ET_vec3_f32, gl.UT_position)
+  layout:add(gl.ET_vec3_f32, gl.UT_normal)
+  layout:add(gl.ET_vec3_f32, gl.UT_vertexAttrib0)
   self.mesh = lost.mesh.Mesh.create(layout, gl.ET_u16)
   self.mesh.indexBuffer.drawMode = gl.GL_TRIANGLES
   local numVerts = 4 * self.numPlanes*3

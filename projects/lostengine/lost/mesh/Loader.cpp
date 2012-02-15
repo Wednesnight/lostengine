@@ -76,8 +76,8 @@ namespace lost
     MeshPtr Loader::obj(common::DataPtr objFile)
     {
       BufferLayout layout;
-      layout.add(ET_vec3_f32, UT_position, 0);
-      layout.add(ET_vec3_f32, UT_normal, 0);
+      layout.add(ET_vec3_f32, UT_position);
+      layout.add(ET_vec3_f32, UT_normal);
       MeshPtr mesh(new Mesh(layout, ET_u16));
       uint16_t vtxCount = 0;
       uint16_t nrmCount = 0;

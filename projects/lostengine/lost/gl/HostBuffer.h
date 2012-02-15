@@ -24,6 +24,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/math/Matrix.h"
 #include "lost/common/Color.h"
 #include "lost/gl/forward.h"
+#include "lost/common/Disallow.h"
 
 namespace lost
 {
@@ -33,14 +34,14 @@ namespace gl
 struct HostBuffer
 {
   BufferLayout  layout;
-  vector<uint8_t*> partitions; // the actual physical buffers
-  uint32_t              count; // number of vertices/indices in this HostBuffer
+  uint8_t*      buffer; // the actual physical buffer
+  uint32_t      count; // number of vertices/indices in this HostBuffer
   
   void init(const BufferLayout& inLayout);
   HostBuffer(const BufferLayout& inLayout);
   HostBuffer(const BufferLayout& inLayout, uint32_t num);
   virtual ~HostBuffer();
-  void deleteAllPartitions();
+  void deleteBuffer();
 
   // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
   void reset(uint32_t num);
@@ -62,6 +63,8 @@ struct HostBuffer
   bool hasUsageType(UsageType ut); // true if there is an attribute with that usage type, false otherwise
   
   uint32_t numScalarsForUsageType(UsageType ut);
+private:
+  DISALLOW_COPY_AND_ASSIGN(HostBuffer);
 };
 
 }

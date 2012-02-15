@@ -52,9 +52,9 @@ Disc::Disc(const TextureManagerPtr& inTextureManager, bool f, float r, float lw)
   textureManager = inTextureManager;
 
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0); // primary texcoords for arctexture
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord1, 0); // secondary coords for texturemultiplication
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0); // primary texcoords for arctexture
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord1); // secondary coords for texturemultiplication
   this->resetBuffers(layout, gl::ET_u16);
 
   indexBuffer->drawMode = GL_TRIANGLES;

@@ -99,11 +99,10 @@ struct BufferLayoutAttribute
 {
   ElementType elementType;
   UsageType   usageType;
-  uint32_t    partition;
   bool        normalise;
   
-  BufferLayoutAttribute(ElementType et, UsageType ut, uint32_t p) : elementType(et), usageType(ut), partition(p), normalise(false) {}
-  BufferLayoutAttribute(ElementType et, UsageType ut, uint32_t p, bool inNormalise) : elementType(et), usageType(ut), partition(p), normalise(inNormalise) {}
+  BufferLayoutAttribute(ElementType et, UsageType ut) : elementType(et), usageType(ut), normalise(false) {}
+  BufferLayoutAttribute(ElementType et, UsageType ut, bool inNormalise) : elementType(et), usageType(ut), normalise(inNormalise) {}
   
   uint32_t size() const { return elementSize(elementType);}
 };
@@ -124,25 +123,16 @@ struct BufferLayout
   // FIXME: add caching for various size and partition parameters so we don'T have to recalculate on every set call
   // add maps that hold these values. Update maps upon each add call.
   vector<BufferLayoutAttribute> attributes;
-  map<uint32_t, bool> partitions;
-  map<UsageType, uint32_t> ut2pid; // usage type to partition id
   map<UsageType, ElementType> ut2et;
   map<UsageType, AttributePointerConfig> ut2apc;
   
   void updatePointerConfigs();
-  void add(ElementType elementType, UsageType usageType, uint32_t p);
-
-  // number of partitions in this layout
-  uint32_t numPartitions() const;
-
-  // size of a particular partition in bytes
-  uint32_t partitionSize(uint32_t partitionId) const;
+  void add(ElementType elementType, UsageType usageType);
    
   // size of the whole layout in bytes, without taking partitioning into account, in bytes
   uint32_t size() const;
-  
-  uint32_t partitionFromUsageType(UsageType ut);
   uint32_t numScalarsForUsageType(UsageType ut);
+  uint32_t structSize() const;
   
   const AttributePointerConfig& pointerConfigForUsageType(UsageType ut) { return ut2apc[ut]; };
   

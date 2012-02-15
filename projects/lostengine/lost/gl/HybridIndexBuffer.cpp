@@ -32,7 +32,7 @@ HybridIndexBuffer::HybridIndexBuffer(ElementType et)
   // only the element type can vary, to optimize the buffer for hardware requirements or
   // mesh sizes.
   BufferLayout layout;
-  layout.add(et, UT_index, 0);
+  layout.add(et, UT_index);
   switch(et)
   {
     case ET_u8:type = GL_UNSIGNED_BYTE;break;

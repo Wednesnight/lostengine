@@ -32,8 +32,8 @@ using namespace gl;
 Mesh::Mesh()
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec3_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+  layout.add(gl::ET_vec3_f32, gl::UT_position);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0);
   init(layout, gl::ET_u16);
   BB_INC(bb_mesh_key);
 }

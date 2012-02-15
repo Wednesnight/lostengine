@@ -36,8 +36,8 @@ ScaleGrid::ScaleGrid(gl::TexturePtr tex,
           bool flip) // flips texture coordinates vertically if true
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0);
   this->resetBuffers(layout, gl::ET_u16);  
 
   indexBuffer->drawMode = GL_TRIANGLES;
