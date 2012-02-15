@@ -15,9 +15,10 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include "lost/event/Pool.h"
-#include <boost/thread/once.hpp>
 #include "lost/common/Logger.h"
 #include "lost/event/Event.h"
+
+#include <once.h>
 
 namespace lost
 {
@@ -40,11 +41,11 @@ void initGlobalEventPool()
   _globalEventPool = new Pool();
 }
 
-static boost::once_flag lostEventPoolOnceFlag = BOOST_ONCE_INIT;
+static tthread::once_flag lostEventPoolOnceFlag = TTHREAD_ONCE_INIT;
 
 Pool* Pool::instance()
 {
-  boost::call_once(initGlobalEventPool, lostEventPoolOnceFlag);
+  tthread::call_once(initGlobalEventPool, lostEventPoolOnceFlag);
   return _globalEventPool;  
 }
 

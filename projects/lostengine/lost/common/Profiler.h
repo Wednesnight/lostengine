@@ -20,12 +20,11 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifdef PROFILER_ENABLED
 
 
-//  #include "lost/platform/Platform.h"
-  #include "lost/common/Logger.h"
+  #include "lost/fs/Path.h"
 
   // split macro calls to avoid compiler warnings
   #define PROFILE_METHOD() \
-    lost::common::ProfilerPtr _profiler( profilerStatistics.initialize( (unsigned int)__builtin_frame_address(0), lost::common::Logger::fileNameFromFullPath(__FILE__), __PRETTY_FUNCTION__ ) ); \
+    lost::common::ProfilerPtr _profiler( profilerStatistics.initialize( (unsigned int)__builtin_frame_address(0), lost::fs::Path(__FILE__).file(), __PRETTY_FUNCTION__ ) ); \
     if (_profiler) _profiler->initialize();
 
 namespace lost

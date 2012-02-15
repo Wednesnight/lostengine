@@ -17,6 +17,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef LOST_FS_PATH_H
 #define LOST_FS_PATH_H
 
+#include "lost/fs/io.h"
+
 namespace lost 
 {
   namespace fs
@@ -34,7 +36,8 @@ namespace lost
       bool operator ==(const char* other);
       bool operator !=(const char* other);
 
-      Path branch_path();
+      Path directory();
+      Path file();
 
       lost::string string() const;
       lost::string native() const;

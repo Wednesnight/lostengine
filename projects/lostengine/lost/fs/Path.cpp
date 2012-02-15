@@ -60,12 +60,22 @@ namespace lost
       return !this->operator==(other);
     }
 
-    Path Path::branch_path()
+    Path Path::directory()
     {
       Path result(path);
       string::size_type pos = path.rfind(dir_separator);
       if (pos != string::npos) {
         result = path.substr(0, pos);
+      }
+      return result;
+    }
+
+    Path Path::file()
+    {
+      Path result(path);
+      string::size_type pos = path.rfind(dir_separator);
+      if (pos != string::npos) {
+        result = path.substr(++pos);
       }
       return result;
     }

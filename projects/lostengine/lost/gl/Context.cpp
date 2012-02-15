@@ -40,7 +40,7 @@ void contextCleanup(void* ctx)
   DOUT("");
 }
 
-tinythread::thread_specific_ptr<lost::gl::Context> context_ptr(contextCleanup);
+tthread::thread_specific_ptr<lost::gl::Context> context_ptr(contextCleanup);
 
 bool getBoolParam(GLenum pname)
 {

@@ -655,8 +655,10 @@
         'lost/font/freetype/Library.cpp',
 
         # fs
-        'lost/fs/Path.cpp',
+        'lost/fs/io.h',
+        'lost/fs/io.cpp',
         'lost/fs/Path.h',
+        'lost/fs/Path.cpp',
 
         # gl
         'lost/gl/Buffer.h',
@@ -1016,6 +1018,8 @@
         # thirdparty/tinythread
         '<@(tinythread_path)/fast_mutex.h',
         '<@(tinythread_path)/once.h',
+        '<@(tinythread_path)/once.cpp',
+        '<@(tinythread_path)/thread_specific_ptr.h',
         '<@(tinythread_path)/tinythread.h',
         '<@(tinythread_path)/tinythread.cpp',
 
