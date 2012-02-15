@@ -133,7 +133,7 @@ void HybridBuffer::upload()
   Buffer* buffer = gpuBuffer.get();
   Context::getCurrent()->bind(buffer);
   buffer->bufferData(buffer->target, 
-                     hostBuffer->count*hostBuffer->layout.structSize(), 
+                     hostBuffer->count*hostBuffer->layout.size(), 
                      hostBuffer->buffer,
                      GL_STATIC_DRAW); // FIXME: this parameter should probably be configurable
   dirty = false;

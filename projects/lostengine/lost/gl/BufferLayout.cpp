@@ -113,7 +113,7 @@ uint32_t BufferLayout::numScalarsForUsageType(UsageType ut)
 }
 
 // size of a single struct in bytes
-uint32_t BufferLayout::structSize() const
+/*uint32_t BufferLayout::structSize() const
 {
   uint32_t result = 0;
   
@@ -123,7 +123,7 @@ uint32_t BufferLayout::structSize() const
   }
   
   return result;
-}
+}*/
   
   
 void BufferLayout::updatePointerConfigs()
@@ -173,7 +173,7 @@ GLenum BufferLayout::glScalarTypeFromUsageType(UsageType ut)
 
 uint32_t BufferLayout::stride(UsageType ut)
 {
-  return structSize(); //elementSize(ut2et[ut]);
+  return size();
 }
 
 uint32_t BufferLayout::offset(UsageType ut)

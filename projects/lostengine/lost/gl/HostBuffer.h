@@ -42,7 +42,9 @@ struct HostBuffer
   HostBuffer(const BufferLayout& inLayout, uint32_t num);
   virtual ~HostBuffer();
   void deleteBuffer();
-
+  uint32_t bufferSize(); // returns buffersize in bytes calculated from bufferlayout isze and count
+  
+  
   // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
   void reset(uint32_t num);
   unsigned char* elementAddress(uint32_t idx, UsageType ut); 

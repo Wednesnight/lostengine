@@ -132,7 +132,7 @@ struct BufferLayout
   // size of the whole layout in bytes, without taking partitioning into account, in bytes
   uint32_t size() const;
   uint32_t numScalarsForUsageType(UsageType ut);
-  uint32_t structSize() const;
+//  uint32_t structSize() const;
   
   const AttributePointerConfig& pointerConfigForUsageType(UsageType ut) { return ut2apc[ut]; };
   

@@ -38,6 +38,40 @@ namespace lost
 {
   namespace mesh
   {    
+
+    void write(uint8_t* data, uint32_t numBytes, const lost::fs::Path& inPath)  
+    {
+      FILE* file = fopen(inPath.string().c_str(), "wb");
+      if (file != NULL) {
+        if (fwrite(data, 1, numBytes, file) != numBytes) {
+          EOUT("write failed to "<<inPath.string());
+        }
+        fclose(file);
+      }
+      else {
+        EOUT("failed to open file for write: "<<inPath.string().c_str());
+      }      
+    }
+    
+    void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath)
+    {
+      HybridVertexBufferPtr vb = inMesh->vertexBuffer;
+      HostBufferPtr hostBuffer = vb->hostBuffer;
+      DOUT("MESH write vb size: "<<hostBuffer->bufferSize());
+      write(hostBuffer->buffer, hostBuffer->bufferSize(), inPath);
+      
+      BufferLayout bl = inMesh->vertexBuffer->hostBuffer->layout;
+      
+    }
+    
+    void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath)
+    {
+      HybridIndexBufferPtr ib = inMesh->indexBuffer;
+      HostBufferPtr hostBuffer = ib->hostBuffer;
+      DOUT("MESH write ib size: "<<hostBuffer->bufferSize());      
+      write(hostBuffer->buffer, hostBuffer->bufferSize(), inPath);
+    }
+    
     template <typename Type>
     struct MeshSet
     {
@@ -115,9 +149,9 @@ namespace lost
       {
         if(normalCount && (vertexCount != normalCount)) {throw std::runtime_error("number of normals doesn't match number of vertices");}
         mesh->resetSize(vertexCount, indexCount);
-//        DOUT("vertexCount      : " << vertexCount);
-//        DOUT("normalCount      : " << normalCount);
-//        DOUT("indexCount       : " << indexCount);
+        DOUT("vertexCount      : " << vertexCount);
+        DOUT("normalCount      : " << normalCount);
+        DOUT("indexCount       : " << indexCount);
 
 
         Vec3 vec3;
@@ -194,6 +228,10 @@ namespace lost
           }
         }
       }
+      
+      writeVertexBuffer(mesh, lost::fs::Path("/Users/tony/mesh.vb"));
+      writeIndexBuffer(mesh, lost::fs::Path("/Users/tony/mesh.ib"));
+      
       return mesh;
     }
 

@@ -29,6 +29,9 @@ namespace lost
     struct Loader;
     typedef lost::shared_ptr<Loader> LoaderPtr;
 
+    void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath);
+    void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& path);
+    
     struct Loader
     {
       static MeshPtr obj(common::DataPtr objFile);

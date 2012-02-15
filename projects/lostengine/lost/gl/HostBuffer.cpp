@@ -31,13 +31,7 @@ void HostBuffer::init(const BufferLayout& inLayout)
 {
   layout = inLayout;
   buffer = NULL;
-//  DOUT("layout size: "<<layout.size());
-//  uint32_t nump = layout.numPartitions();
-/*  DOUT("partitions: "<< nump);
-  for(uint32_t i=0; i<nump; ++i)
-  {
-      DOUT("partition " << i << " size " << layout.partitionSize(i));
-  }    */
+  count = 0;
 }
 
 HostBuffer::HostBuffer(const BufferLayout& inLayout)
@@ -73,11 +67,16 @@ void HostBuffer::reset(uint32_t num)
   else
   {
     deleteBuffer();
-    uint32_t s = layout.structSize() *num;
+    uint32_t s = layout.size() *num;
     buffer = (uint8_t*)malloc(s);
 //      DOUT("allocated p:"<<i<<" num:"<<num<<" bytes:"<<s);
   }
   count = num;
+}
+
+uint32_t HostBuffer::bufferSize()
+{
+  return layout.size()*count;
 }
 
 ElementType HostBuffer::elementTypeFromUsageType(UsageType ut)
@@ -89,7 +88,7 @@ uint8_t* HostBuffer::elementAddress(uint32_t idx, UsageType ut)
 {
   uint8_t* result = 0;
   
-  uint32_t size = layout.structSize();
+  uint32_t size = layout.size();
   uint32_t offset = layout.offset(ut);
   result = buffer + size*idx +offset; // this is the start of the vertex partition with the given index
   
