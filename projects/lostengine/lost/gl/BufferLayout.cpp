@@ -112,6 +112,20 @@ uint32_t BufferLayout::numScalarsForUsageType(UsageType ut)
   return numScalarsForElementType(et);
 }
 
+// size of a single struct in bytes
+uint32_t BufferLayout::structSize() const
+{
+  uint32_t result = 0;
+  
+  for(uint32_t i=0; i<attributes.size(); ++i)
+  {
+    result += attributes[i].size();
+  }
+  
+  return result;
+}
+  
+  
 void BufferLayout::updatePointerConfigs()
 {
   ut2apc.clear();
@@ -128,35 +142,11 @@ void BufferLayout::updatePointerConfigs()
   }
 }
 
-void BufferLayout::add(ElementType elementType, UsageType usageType, uint32_t p)
+void BufferLayout::add(ElementType elementType, UsageType usageType)
 {
-  attributes.push_back(BufferLayoutAttribute(elementType, usageType, p));
-  partitions[p] = true;
-  ut2pid[usageType] = p;
+  attributes.push_back(BufferLayoutAttribute(elementType, usageType));
   ut2et[usageType] = elementType;
   updatePointerConfigs();
-}
-
-// number of partitions in this layout
-uint32_t BufferLayout::numPartitions() const
-{
-  return partitions.size();
-}
-
-// size of a particular partition in bytes
-uint32_t BufferLayout::partitionSize(uint32_t partitionId) const
-{
-  uint32_t result = 0;
-  
-  for(uint32_t i=0; i<attributes.size(); ++i)
-  {
-    if(attributes[i].partition==partitionId)
-    {
-      result += attributes[i].size();
-    }
-  }
-  
-  return result;
 }
  
 // size of the whole layout in bytes, without taking partitioning into account, in bytes
@@ -170,22 +160,10 @@ uint32_t BufferLayout::size() const
   return result;
 }
 
-uint32_t BufferLayout::partitionFromUsageType(UsageType ut)
-{
-  map<UsageType, uint32_t>::const_iterator pos = ut2pid.find(ut);
-  if(pos == ut2pid.end())
-  {
-    std::ostringstream os;
-    os << "couldn't find partition for usage type: "<<ut;
-    throw std::runtime_error(os.str());
-  }
-  return pos->second;
-}
-
 bool BufferLayout::hasUsageType(UsageType ut)
 {
-  map<UsageType, uint32_t>::iterator pos = ut2pid.find(ut);
-  return (pos != ut2pid.end());
+  map<UsageType, ElementType>::iterator pos = ut2et.find(ut);
+  return (pos != ut2et.end());
 }
 
 GLenum BufferLayout::glScalarTypeFromUsageType(UsageType ut)
@@ -195,21 +173,17 @@ GLenum BufferLayout::glScalarTypeFromUsageType(UsageType ut)
 
 uint32_t BufferLayout::stride(UsageType ut)
 {
-  return partitionSize(ut2pid[ut]);// - elementSize(ut2et[ut]);
+  return structSize(); //elementSize(ut2et[ut]);
 }
 
 uint32_t BufferLayout::offset(UsageType ut)
 {
   uint32_t result = 0;
   
-  uint32_t pid = ut2pid[ut];
   for(uint32_t i=0; i<attributes.size(); ++i)
   {
     if(attributes[i].usageType == ut) break;
-    if(attributes[i].partition==pid)
-    {
-      result += attributes[i].size();
-    }
+    result += attributes[i].size();
   }
   
   return result;

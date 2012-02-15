@@ -33,8 +33,8 @@ Quad::Quad()
 Quad::Quad(const math::Rect& inRect)
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal);
   this->resetBuffers(layout, gl::ET_u16);
   
   indexBuffer->drawMode = GL_TRIANGLES;
@@ -57,9 +57,9 @@ Quad::Quad(const math::Rect& inRect)
 Quad::Quad(common::DataPtr data, bool flip)
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0);
   this->resetBuffers(layout, gl::ET_u16);
 
   indexBuffer->drawMode = GL_TRIANGLES;
@@ -81,9 +81,9 @@ Quad::Quad(common::DataPtr data, bool flip)
 Quad::Quad(gl::TexturePtr tex, bool flip)
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0);
   this->resetBuffers(layout, gl::ET_u16);
 
   indexBuffer->drawMode = GL_TRIANGLES;
@@ -105,8 +105,8 @@ Quad::Quad(gl::TexturePtr tex, bool flip)
 Quad::Quad(const vector<math::Rect>& rects)
 {
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal);
   this->resetBuffers(layout, gl::ET_u16);
 
   indexBuffer->drawMode = GL_TRIANGLES;
@@ -146,9 +146,9 @@ void Quad::init(const vector<math::Rect>& rects,
   }
   
   gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32, gl::UT_position, 0);
-  layout.add(gl::ET_vec3_f32, gl::UT_normal, 0);
-  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0, 0);
+  layout.add(gl::ET_vec2_f32, gl::UT_position);
+  layout.add(gl::ET_vec3_f32, gl::UT_normal);
+  layout.add(gl::ET_vec2_f32, gl::UT_texcoord0);
   this->resetBuffers(layout, gl::ET_u16);
   
   indexBuffer->drawMode = GL_TRIANGLES;

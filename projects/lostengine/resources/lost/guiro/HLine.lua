@@ -12,8 +12,8 @@ function HLine:constructor(args)
   
   local rect = t.rect or lost.math.Rect()
   local layout = lost.gl.BufferLayout()
-  layout:add(gl.ET_vec2_f32, gl.UT_position, 0)
-  layout:add(gl.ET_vec2_f32, gl.UT_texcoord0, 0)
+  layout:add(gl.ET_vec2_f32, gl.UT_position)
+  layout:add(gl.ET_vec2_f32, gl.UT_texcoord0)
   self.mesh = lost.mesh.Mesh.create(layout, gl.ET_u16)
   self.mesh.indexBuffer.drawMode = gl.GL_LINES
   local numVerts = 2

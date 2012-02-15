@@ -65,7 +65,7 @@ struct HybridBuffer
   GLenum gpuBufferType; // should be either GL_ARRAY_BUFFER or GL_ELEMENT_ARRAY_BUFFER
   bool dirty;
   HostBufferPtr hostBuffer;
-  vector<BufferPtr> gpuBuffers;
+  BufferPtr     gpuBuffer;
   VertexAttributeMap vertexAttributeMap; // maps a usageType to a shader vertex attribute name
 };
 

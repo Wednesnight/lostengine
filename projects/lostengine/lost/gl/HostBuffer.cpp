@@ -30,6 +30,7 @@ using namespace math;
 void HostBuffer::init(const BufferLayout& inLayout)
 {
   layout = inLayout;
+  buffer = NULL;
 //  DOUT("layout size: "<<layout.size());
 //  uint32_t nump = layout.numPartitions();
 /*  DOUT("partitions: "<< nump);
@@ -52,17 +53,14 @@ HostBuffer::HostBuffer(const BufferLayout& inLayout, uint32_t num)
 
 HostBuffer::~HostBuffer()
 {
-  deleteAllPartitions();
+  deleteBuffer();
 }
 
-void HostBuffer::deleteAllPartitions()
+void HostBuffer::deleteBuffer()
 {
-  for(uint32_t i=0; i<partitions.size(); ++i)
-  {
 //    DOUT("deleting partition " << i);
-    free(partitions[i]);
-  }
-  partitions.clear();
+  free(buffer);
+  buffer = NULL;
 }  
 
 // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
@@ -70,17 +68,14 @@ void HostBuffer::reset(uint32_t num)
 {
   if(num == 0)
   {
-    deleteAllPartitions();
+    deleteBuffer();
   }
   else
   {
-    deleteAllPartitions();
-    for(uint32_t i=0; i<layout.numPartitions(); ++i)
-    {
-      uint32_t s = layout.partitionSize(i)*num;
-      partitions.push_back((uint8_t*)malloc(s));
+    deleteBuffer();
+    uint32_t s = layout.structSize() *num;
+    buffer = (uint8_t*)malloc(s);
 //      DOUT("allocated p:"<<i<<" num:"<<num<<" bytes:"<<s);
-    }
   }
   count = num;
 }
@@ -92,13 +87,11 @@ ElementType HostBuffer::elementTypeFromUsageType(UsageType ut)
 
 uint8_t* HostBuffer::elementAddress(uint32_t idx, UsageType ut)
 {
-  if(!partitions.size()) {LOGTHROW(std::runtime_error("tried to call elementAddress without any partitions")); };
   uint8_t* result = 0;
   
-  uint32_t pid = layout.partitionFromUsageType(ut);
-  uint32_t size = layout.partitionSize(pid);
+  uint32_t size = layout.structSize();
   uint32_t offset = layout.offset(ut);
-  result = partitions[pid] + size*idx +offset; // this is the start of the vertex partition with the given index
+  result = buffer + size*idx +offset; // this is the start of the vertex partition with the given index
   
   return result;
 }

@@ -100,7 +100,7 @@ gl::ShaderProgramPtr DebugDraw::shader()
 mesh::MeshPtr DebugDraw::createQuad()
 {
   lost::gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32,gl::UT_position,0);
+  layout.add(gl::ET_vec2_f32,gl::UT_position);
   
   mesh::MeshPtr result(new mesh::Mesh(layout, gl::ET_u16));
   uint32_t numVertices = 4;
@@ -199,7 +199,7 @@ void DebugDraw::DrawTransform(const b2Transform& xf)
 rg::NodePtr DebugDraw::createNode(uint32_t numVertices)
 {  
   lost::gl::BufferLayout layout;
-  layout.add(gl::ET_vec2_f32,gl::UT_position,0);
+  layout.add(gl::ET_vec2_f32,gl::UT_position);
   
   mesh::MeshPtr result(new mesh::Mesh(layout, gl::ET_u16));
   uint32_t numIndices = numVertices;
