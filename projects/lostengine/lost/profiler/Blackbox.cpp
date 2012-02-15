@@ -22,7 +22,7 @@ namespace lost
 {
 namespace profiler
 {
-  tinythread::thread_specific_ptr<Blackbox> blackbox_instance;
+  tthread::thread_specific_ptr<Blackbox> blackbox_instance;
 
   Blackbox::Blackbox()
   {

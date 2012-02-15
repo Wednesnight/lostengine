@@ -59,6 +59,7 @@
 		1B0241591BF5949CDCF55678 /* DebugDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F85FCB36D2BB99C4A209C00C /* DebugDraw.cpp */; };
 		1BD63105B9857C0C04F983AF /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7715C54081E56A2741EB7FA7 /* Device.cpp */; };
 		1C8A1440E767161512F7D96B /* winfnt.c in Sources */ = {isa = PBXBuildFile; fileRef = 57964BBFE83700A13A19ACF0 /* winfnt.c */; };
+		1D1B348210B15AF71AB34B95 /* io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B101275308B5543CE1C4C1CF /* io.cpp */; };
 		1F9BE7E6FC1BF7663C4A1332 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F9514B6C35F80C2B5485769 /* Queue.cpp */; };
 		205F9685310808E7C61B5774 /* TestReporterStdout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F58EB05B0E0577F931C9D2A4 /* TestReporterStdout.cpp */; };
 		211B069F964FEDE30896B267 /* b2Joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 323C5A5A0ECEF3C7C8FDCA9C /* b2Joint.cpp */; };
@@ -227,6 +228,7 @@
 		A074CE023E8C9BE589EBDE86 /* deflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 26E5149DE50366A2CACDA75B /* deflate.c */; };
 		A0D9625BEF70942D03DB2FA4 /* clazz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABF44344597C8E4226734A98 /* clazz.cpp */; };
 		A1077BAD8F60421EFF01E1F4 /* inflate.c in Sources */ = {isa = PBXBuildFile; fileRef = 927C8BFDA955D8141BAB6F9A /* inflate.c */; };
+		A14A0E613DFFC6C152B8EFC3 /* once.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1099BE205DCACE66B0FBE88 /* once.cpp */; };
 		A2C5A70806EDFEB518150C6B /* eastlAllocators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58DBEA15326CF542DE12D41D /* eastlAllocators.cpp */; };
 		A3AC8466D7426875817A8CCD /* plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 1007B4C3A904EE7FB3FE9DD0 /* plugin.c */; };
 		A4EF1E8003E857FAF91CB12C /* BindAll.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 560E700768E83123F1ADA3F1 /* BindAll.cpp */; };
@@ -690,6 +692,7 @@
 		69763357A8D9870CA9353EB9 /* Packer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Packer.h; sourceTree = "<group>"; };
 		69D4B375D69D60F81CAE87DF /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		6A19CDA7317562AEAF47AF73 /* libLostEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLostEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A66C548069F729CF5C83918 /* thread_specific_ptr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thread_specific_ptr.h; sourceTree = "<group>"; };
 		6A942B744BCC2F10DCBBF7BB /* Listener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Listener.h; sourceTree = "<group>"; };
 		6A9F56D0662AE30CBA7D1ADB /* LostBitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LostBitmap.h; sourceTree = "<group>"; };
 		6AD141C7661EE634596031B5 /* DebugDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DebugDraw.h; sourceTree = "<group>"; };
@@ -858,6 +861,7 @@
 		B004F7BC7A671B1B5F29B380 /* BufferLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BufferLayout.h; sourceTree = "<group>"; };
 		B00C1FF0EE4D0CBF5A6BD057 /* Type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
 		B0B790D66EEA3D833E948C6C /* ProcessEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcessEvent.h; sourceTree = "<group>"; };
+		B101275308B5543CE1C4C1CF /* io.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = io.cpp; sourceTree = "<group>"; };
 		B1671A3BC120FD744E14CE89 /* b2PrismaticJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2PrismaticJoint.cpp; sourceTree = "<group>"; };
 		B1B4D296B72F297F07CF1F0D /* Loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
 		B1DC2C96AC0B3C3AAAF87B39 /* b2RevoluteJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2RevoluteJoint.cpp; sourceTree = "<group>"; };
@@ -953,6 +957,7 @@
 		DF7BCD307B50A3585139B9A9 /* Camera3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera3D.cpp; sourceTree = "<group>"; };
 		E01F4411FD81CDF9494A0B76 /* Clock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
 		E0C2F91759F524954809DFD5 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		E1099BE205DCACE66B0FBE88 /* once.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = once.cpp; sourceTree = "<group>"; };
 		E1AA4EAB8C61F7724DEA8BAE /* Vec2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
 		E1AFBDA40F5434BE99990005 /* Gif.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Gif.cpp; sourceTree = "<group>"; };
 		E1E5543DF3BD260DE0281680 /* Variant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Variant.h; sourceTree = "<group>"; };
@@ -963,6 +968,7 @@
 		E4AEF39EBAF210E6C33AAFCE /* Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
 		E546725733E914CCAFD02488 /* dir.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dir.c; sourceTree = "<group>"; };
 		E60E87440F7B2161AB31CB6D /* Render.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Render.cpp; sourceTree = "<group>"; };
+		E61E9E73DF203FFBB054D18C /* io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		E69BE76D81BEF913D7F38E2F /* write.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = write.c; sourceTree = "<group>"; };
 		E69EB4BE3C50FDA88255DA8B /* ftlcdfil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ftlcdfil.c; sourceTree = "<group>"; };
 		E71B74E0E5D67C8F452D81E0 /* ftdebug.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ftdebug.c; sourceTree = "<group>"; };
@@ -1151,7 +1157,9 @@
 			isa = PBXGroup;
 			children = (
 				13CC2A9B1C8509F384BCF941 /* fast_mutex.h */,
+				E1099BE205DCACE66B0FBE88 /* once.cpp */,
 				FBA0327E39CDA57C82A98D7C /* once.h */,
+				6A66C548069F729CF5C83918 /* thread_specific_ptr.h */,
 				696A116666CF915953DF4722 /* tinythread.cpp */,
 				4AC42333A3022AD7DE4E6807 /* tinythread.h */,
 			);
@@ -1419,6 +1427,8 @@
 			children = (
 				99A6C222044F915922C91056 /* Path.cpp */,
 				CB1813D964C01BE9888502CC /* Path.h */,
+				B101275308B5543CE1C4C1CF /* io.cpp */,
+				E61E9E73DF203FFBB054D18C /* io.h */,
 			);
 			path = fs;
 			sourceTree = "<group>";
@@ -2570,6 +2580,7 @@
 				6593DEF64C122C120C7144C3 /* TrueTypeFont.cpp in Sources */,
 				D9E4D547DCA1C9274BAA4D35 /* Face.cpp in Sources */,
 				42CC8EBD2E75741E49DB4C7B /* Library.cpp in Sources */,
+				1D1B348210B15AF71AB34B95 /* io.cpp in Sources */,
 				8B7384958CBA4DF4B91B158E /* Path.cpp in Sources */,
 				FED80B3511A7257AF3DD9CA4 /* Buffer.cpp in Sources */,
 				89C55C4C534ADFE22012172A /* BufferLayout.cpp in Sources */,
@@ -2756,6 +2767,7 @@
 				6BA632A7C81EB1274CE69389 /* md5.cpp in Sources */,
 				732F2AEA9B04B12C2AE5AC94 /* stb_image.c in Sources */,
 				2C17538AD114F80FCD57B38F /* stb_vorbis.c in Sources */,
+				A14A0E613DFFC6C152B8EFC3 /* once.cpp in Sources */,
 				3CB69E748EA145443438D7F0 /* tinythread.cpp in Sources */,
 				B82693CA622F3E3324141D85 /* zutil.c in Sources */,
 				BD1B5BAACD133F11513ADF28 /* uncompr.c in Sources */,

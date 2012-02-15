@@ -91,7 +91,7 @@ namespace lost
 
     lost::fs::Path getApplicationDirectory()
     {
-      return getApplicationFilename().branch_path();
+      return getApplicationFilename().directory();
     }
 
     lost::fs::Path buildResourcePath( const string& filename )

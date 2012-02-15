@@ -17,19 +17,20 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef LOST_COMMON_LOGGER_H
 #define LOST_COMMON_LOGGER_H
 
+#include "lost/fs/Path.h"
+
 namespace lost
 {
   namespace common
   {
 		namespace Logger
 		{			
-			string fileNameFromFullPath(const char* fullPath);
 			void logMessage(const string& inLevel, const string& inLocation, const string& inMsg);
 		}
   }
 }
 
-#define LOST_COMMON_LOGGER_FILE_LINE "(" << lost::common::Logger::fileNameFromFullPath(__FILE__) << " " << __FUNCTION__ << " " << __LINE__ << ")"
+#define LOST_COMMON_LOGGER_FILE_LINE "(" << lost::fs::Path(__FILE__).file() << " " << __FUNCTION__ << " " << __LINE__ << ")"
 
 #define LOGLOG(m, s, fl) \
 { \

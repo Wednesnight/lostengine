@@ -19,23 +19,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifdef __cplusplus
 
-  #define BOOST_SP_NO_ATOMIC_ACCESS
-#ifdef ANDROID
-  #define BOOST_FILESYSTEM_VERSION 2
-#else
-  #define BOOST_FILESYSTEM_VERSION 3
-#endif
-  #define BOOST_SYSTEM_NO_DEPRECATED
-  #ifndef __STDC_CONSTANT_MACROS
-    #define __STDC_CONSTANT_MACROS
-  #endif
-  #ifndef BOOST_ALL_NO_LIB
-    #define BOOST_ALL_NO_LIB
-  #endif
-  #ifndef BOOST_THREAD_BUILD_LIB
-    #define BOOST_THREAD_BUILD_LIB
-  #endif
-
 #include <stdint.h>
 #include "lost/types.h"
 

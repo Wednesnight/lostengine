@@ -17,8 +17,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/Context.h"
 #include "lost/gl/gl.h"
 #include "lost/common/Logger.h"
-
-#include <boost/thread/tss.hpp>
+#include "thread_specific_ptr.h"
 
 namespace lost
 {
@@ -34,7 +33,7 @@ namespace lost
     {
     }
     // set to the current context in makeCurrent
-    boost::thread_specific_ptr<Context> currentContext(context_cleanup);
+    tthread::thread_specific_ptr<Context> currentContext(context_cleanup);
 
     void Context::initialize()
     {

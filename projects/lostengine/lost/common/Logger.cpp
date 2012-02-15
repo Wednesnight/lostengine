@@ -15,12 +15,12 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 #include <string.h>
-#include <boost/thread/once.hpp>
-#include <boost/thread/mutex.hpp>
 #include "lost/common/Logger.h"
 #include "lost/platform/Type.h"
 #include "lost/platform/Time.h"
 #include <iostream>
+#include <tinythread.h>
+#include <once.h>
 
 #ifdef ANDROID
 extern "C" {
@@ -35,29 +35,18 @@ namespace lost
 		namespace Logger
 		{			
 
-      string fileNameFromFullPath(const char* fullPath)
-      {
-        const char* p = strrchr(fullPath, '/'); // FIXME: this might fail on windows due to different separators, we might need to use something like boost::fs here
-        if(p)
-        {
-          return string(p+1); // add 1 to pointer to remove leading '/'
-        }
-        else
-        {
-          return string(fullPath);
-        }
-      }
-
-      boost::mutex* logMutex    = NULL;
-      boost::once_flag initOnce = BOOST_ONCE_INIT;
+      tthread::mutex* logMutex    = NULL;
+      tthread::once_flag initOnce = TTHREAD_ONCE_INIT;
       void initLogMutex()
       {
-        if (!logMutex) logMutex = new boost::mutex;
+        if (logMutex == NULL) {
+          logMutex = new tthread::mutex;
+        }
       }
       
       void logMessage(const string& inLevel, const string& inLocation, const string& inMsg)
       {
-        boost::call_once(initOnce, &initLogMutex);
+        tthread::call_once(&initLogMutex, initOnce);
 
         logMutex->lock();
 #ifndef ANDROID
