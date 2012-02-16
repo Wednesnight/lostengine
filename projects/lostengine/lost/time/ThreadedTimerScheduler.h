@@ -21,9 +21,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/time/Timer.h"
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
-#include <boost/thread.hpp>
-#include <boost/thread/condition.hpp>
 #include "lost/common/Hash.h"
+#include "lost/common/function.h"
+#include <tinythread.h>
 
 namespace lost
 {
@@ -51,13 +51,15 @@ namespace lost
 
       event::EventDispatcherPtr eventDispatcher;
 
-      lost::shared_ptr<boost::thread> schedulerThread;
-      boost::mutex schedulerWaitMutex;
-      boost::condition schedulerWaitCondition;
+      lost::shared_ptr<tthread::thread> schedulerThread;
+      tthread::mutex schedulerWaitMutex;
+      tthread::condition_variable schedulerWaitCondition;
+
+      common::function<void> threadMethod;
       void schedulerThreadMethod();
 
       double startTime;
-      boost::system_time startSystemTime;
+      double startSystemTime;
       double nextUpdateTime;
       void updateScheduling(double requiredUpdateTime);
 
