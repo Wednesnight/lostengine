@@ -23,6 +23,87 @@ namespace lost
 namespace gl
 {
 
+const char* nameForElementType(ElementType et)
+{
+  const char* result = "";
+
+#define ETNAME(ett)  case ett: result = #ett;break;
+  
+  switch(et)
+  {
+    ETNAME(ET_u8);
+    ETNAME(ET_u16);
+    ETNAME(ET_u32);
+    ETNAME(ET_f32);
+    ETNAME(ET_vec2_u8);
+    ETNAME(ET_vec2_u16);
+    ETNAME(ET_vec2_u32);
+    ETNAME(ET_vec2_f32);
+    ETNAME(ET_vec3_u8);
+    ETNAME(ET_vec3_u16);
+    ETNAME(ET_vec3_u32);
+    ETNAME(ET_vec3_f32);
+    ETNAME(ET_vec4_u8);
+    ETNAME(ET_vec4_u16);
+    ETNAME(ET_vec4_u32);
+    ETNAME(ET_vec4_f32);
+    ETNAME(ET_mat4x4_f32);
+    default:result="???";
+  }
+  
+  return result;
+}
+  
+const char* nameForUsageType(UsageType ut)
+{
+  const char* result = "";
+  
+#define UTNAME(utt)  case utt: result = #utt;break;
+  
+  switch(ut)
+  {
+    UTNAME(UT_unused);
+    UTNAME(UT_index);
+    UTNAME(UT_position);
+    UTNAME(UT_normal);
+    UTNAME(UT_color);
+    UTNAME(UT_texcoord0);
+    UTNAME(UT_texcoord1);  
+    UTNAME(UT_texcoord2);  
+    UTNAME(UT_texcoord3);  
+    UTNAME(UT_texcoord4);
+    UTNAME(UT_texcoord5);
+    UTNAME(UT_texcoord6);
+    UTNAME(UT_texcoord7);
+    UTNAME(UT_texcoord8);
+    UTNAME(UT_texcoord9);
+    UTNAME(UT_texcoord10);
+    UTNAME(UT_texcoord11);
+    UTNAME(UT_texcoord12);
+    UTNAME(UT_texcoord13);
+    UTNAME(UT_texcoord14);
+    UTNAME(UT_texcoord15);
+    UTNAME(UT_vertexAttrib0);
+    UTNAME(UT_vertexAttrib1);
+    UTNAME(UT_vertexAttrib2);
+    UTNAME(UT_vertexAttrib3);
+    UTNAME(UT_vertexAttrib4);
+    UTNAME(UT_vertexAttrib5);
+    UTNAME(UT_vertexAttrib6);
+    UTNAME(UT_vertexAttrib7);
+    UTNAME(UT_vertexAttrib8);
+    UTNAME(UT_vertexAttrib9);
+    UTNAME(UT_vertexAttrib10);
+    UTNAME(UT_vertexAttrib11);
+    UTNAME(UT_vertexAttrib12);
+    UTNAME(UT_vertexAttrib13);
+    UTNAME(UT_vertexAttrib14);
+    UTNAME(UT_vertexAttrib15);
+  }
+  return result;
+}
+  
+  
 uint32_t elementSize(ElementType t)
 {
   uint32_t result = 0;
@@ -110,21 +191,7 @@ uint32_t BufferLayout::numScalarsForUsageType(UsageType ut)
 {
   ElementType et = ut2et[ut];
   return numScalarsForElementType(et);
-}
-
-// size of a single struct in bytes
-/*uint32_t BufferLayout::structSize() const
-{
-  uint32_t result = 0;
-  
-  for(uint32_t i=0; i<attributes.size(); ++i)
-  {
-    result += attributes[i].size();
-  }
-  
-  return result;
-}*/
-  
+}  
   
 void BufferLayout::updatePointerConfigs()
 {

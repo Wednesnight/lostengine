@@ -94,6 +94,9 @@ const static UsageType UT_vertexAttrib13 = 34;
 const static UsageType UT_vertexAttrib14 = 35; 
 const static UsageType UT_vertexAttrib15 = 36; 
 
+const char* nameForElementType(ElementType et);
+const char* nameForUsageType(UsageType ut);
+
 // elements must be paired with usage types
 struct BufferLayoutAttribute
 {

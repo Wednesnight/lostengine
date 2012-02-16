@@ -53,6 +53,16 @@ namespace lost
       }      
     }
     
+    void dumpBufferLayout(HybridBufferPtr buffer)
+    {
+      BufferLayout bl = buffer->hostBuffer->layout;
+      for(vector<BufferLayoutAttribute>::iterator pos = bl.attributes.begin(); pos != bl.attributes.end(); ++pos)
+      {
+        BufferLayoutAttribute attr = *pos;
+        DOUT("{ " << gl::nameForElementType(attr.elementType) << ", " << gl::nameForUsageType(attr.usageType) << ", " << (attr.normalise ? "true" : "false") << "},");
+      }      
+    }
+    
     void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath)
     {
       HybridVertexBufferPtr vb = inMesh->vertexBuffer;
@@ -60,8 +70,7 @@ namespace lost
       DOUT("MESH write vb size: "<<hostBuffer->bufferSize());
       write(hostBuffer->buffer, hostBuffer->bufferSize(), inPath);
       
-      BufferLayout bl = inMesh->vertexBuffer->hostBuffer->layout;
-      
+      dumpBufferLayout(vb);
     }
     
     void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath)
@@ -70,6 +79,8 @@ namespace lost
       HostBufferPtr hostBuffer = ib->hostBuffer;
       DOUT("MESH write ib size: "<<hostBuffer->bufferSize());      
       write(hostBuffer->buffer, hostBuffer->bufferSize(), inPath);
+
+      dumpBufferLayout(ib);
     }
     
     template <typename Type>
