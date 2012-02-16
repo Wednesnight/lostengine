@@ -602,6 +602,7 @@
         'lost/common/eastlStreamSupport.h',
         'lost/common/eastlStreamSupport.cpp',
         'lost/common/forward.h',
+        'lost/common/function.h',
         'lost/common/Hash.h',
         'lost/common/Hash.cpp',
         'lost/common/io.h',

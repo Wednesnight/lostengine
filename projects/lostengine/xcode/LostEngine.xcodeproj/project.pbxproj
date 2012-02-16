@@ -1027,6 +1027,7 @@
 		FCDE918E37F59BF41EB9EE08 /* Camera2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera2D.cpp; sourceTree = "<group>"; };
 		FD4A2E926AF64363417FC891 /* LostFs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LostFs.cpp; sourceTree = "<group>"; };
 		FDCD8550029B5DF7A4C4BBA0 /* Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Render.h; sourceTree = "<group>"; };
+		FDDB88D67683A8084A13E740 /* function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = function.h; sourceTree = "<group>"; };
 		FDE99238565986E3325812B6 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		FEF7424BA09396C60465E44F /* MemoryOutStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryOutStream.cpp; sourceTree = "<group>"; };
 		FF76B7140C53F61A9215C38F /* Bundle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bundle.cpp; sourceTree = "<group>"; };
@@ -1662,6 +1663,7 @@
 				6EEC79DAA39AE0A679C91C72 /* eastlStreamSupport.cpp */,
 				19363158A396970C9BA8D5A8 /* eastlStreamSupport.h */,
 				BAB11E29ABF811FFA2F6AEEC /* forward.h */,
+				FDDB88D67683A8084A13E740 /* function.h */,
 				B8128E723C8E3A1EF6495542 /* io.cpp */,
 				74E2AAA2FA27DD73968EFB79 /* io.h */,
 			);
