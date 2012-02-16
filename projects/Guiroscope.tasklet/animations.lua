@@ -33,6 +33,7 @@ return lost.guiro.view.View
   {
     lost.guiro.view.View
     {    
+      id = "animationView",
       bounds = {0,0,"1",{"1",-8}},
       subviews=
       {
@@ -64,7 +65,28 @@ return lost.guiro.view.View
               listeners = {
                 buttonClick = function(event) mode = {x = 0, y = 0, width = 100, height = 15} end
               }
-            }
+            },
+          }
+        },
+        lost.guiro.view.Button
+        {
+          title = "Start all!",
+          bounds = {110,725,100,16},
+          listeners = {
+            buttonClick = function(event)
+              --animate(event.target, Tween.linear, {x = 10, y = 650, width = 100, height = 16}, {x = 10 + mode.x, y = 650 + mode.y, width = 100 + mode.width, height = 16 + mode.height})
+              local root = event.target:rootview()
+              if root ~= nil then
+                local target = root:recursiveFindById("animationView")
+                if target ~= nil then
+                  for k,view in next,target.subviews do
+                    if view ~= event.target and view:isDerivedFrom("lost.guiro.view.Button") then
+                      view:click()
+                    end
+                  end
+                end
+              end
+            end
           }
         },
         lost.guiro.view.Button
