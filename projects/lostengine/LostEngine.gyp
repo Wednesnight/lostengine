@@ -898,13 +898,6 @@
         'lost/time/TimerScheduler.h',
 
         # thirdparty/boost
-        '<@(boost_path)/libs/filesystem/v3/src/codecvt_error_category.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/path.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/path_traits.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/operations.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/portability.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/utf8_codecvt_facet.cpp',
-        '<@(boost_path)/libs/filesystem/v3/src/windows_file_codecvt.cpp',
         '<@(boost_path)/libs/system/src/error_code.cpp',
         '<@(boost_path)/libs/thread/src/tss_null.cpp',
         '<@(boost_path)/libs/thread/src/pthread/once.cpp',
