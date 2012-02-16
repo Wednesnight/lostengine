@@ -24,26 +24,23 @@ namespace lost
   namespace time
   {
 
-    void __dispatch_thread_method(void* func) {
-      common::function<void>* target = static_cast<common::function<void>*>(func);
-      if (target != NULL) {
-        target->operator()();
+    void ThreadedTimerScheduler::__dispatch_thread_method(void* p) {
+      ThreadedTimerScheduler* tts = static_cast<ThreadedTimerScheduler*>(p);
+      if (tts != NULL) {
+        tts->schedulerThreadMethod();
       }
     }
 
     ThreadedTimerScheduler::ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher)
     : active(true),
       eventDispatcher(eventDispatcher),
-      startTime(platform::currentTimeSeconds()),
-      startSystemTime(platform::currentTimeMilliSeconds()),
       nextUpdateTime(0),
-      _taskletName(taskletName),
-      threadMethod(common::bind(this, &ThreadedTimerScheduler::schedulerThreadMethod))
+      _taskletName(taskletName)
     {
       if (eventDispatcher) {
         eventDispatcher->addEventListener(ThreadedTimerSchedulerEvent::PROCESS_TIMERS(), event::makeListener(this, &ThreadedTimerScheduler::processTimers));
       }
-      schedulerThread.reset(new tthread::thread(__dispatch_thread_method, &threadMethod));
+      schedulerThread.reset(new tthread::thread(__dispatch_thread_method, this));
     }
 
     ThreadedTimerScheduler::~ThreadedTimerScheduler()
@@ -58,13 +55,14 @@ namespace lost
     void ThreadedTimerScheduler::schedulerThreadMethod()
     {
       platform::setThreadName("'"+_taskletName+"' (timer scheduler)");
-//      tthread::mutex::scoped_lock waitLock(schedulerWaitMutex);
       while (active) {
         if (nextUpdateTime == 0) {
           schedulerWaitCondition.wait(schedulerWaitMutex);
         }
         else {
-          if (!schedulerWaitCondition.timed_wait(waitLock, startSystemTime + boost::posix_time::milliseconds((nextUpdateTime - startTime) * 1000))) {
+          if (!schedulerWaitCondition.timed_wait(schedulerWaitMutex,
+                 tthread::chrono::milliseconds((long) (nextUpdateTime*1000 - platform::currentTimeMilliSeconds()))))
+          {
             // timeout reached, process timers
             if (eventDispatcher) {
               eventDispatcher->queueEvent(ThreadedTimerSchedulerEvent::create());
@@ -148,9 +146,6 @@ namespace lost
         timers.pop_front();
       }
       nextUpdateTime = 0;
-      if (eventDispatcher) {
-        schedulerWaitCondition.notify_all();
-      }
 
       for (list<Timer*>::iterator iter = rescheduleTimers.begin(); iter != rescheduleTimers.end(); ++iter) {
         startTimer(*iter);
@@ -158,6 +153,10 @@ namespace lost
 
       if (timers.size() > 0) {
         updateScheduling(timers.front()->getTime());
+      }
+
+      if (eventDispatcher) {
+        schedulerWaitCondition.notify_all();
       }
     }
 

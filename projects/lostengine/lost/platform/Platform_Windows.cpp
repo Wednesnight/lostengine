@@ -69,7 +69,7 @@ namespace lost
     }
 
     // returns current time in microseconds
-    double currentTimeMicroSeconds()
+    long currentTimeMicroSeconds()
     {
       FILETIME      filetime;
       LARGE_INTEGER timevalue;
@@ -78,7 +78,7 @@ namespace lost
       timevalue.LowPart  = filetime.dwLowDateTime;
       timevalue.HighPart = filetime.dwHighDateTime;
 
-      return (double)(timevalue.QuadPart / 10);
+      return (long) (timevalue.QuadPart / 10);
     }
 
     lost::fs::Path getApplicationDirectory()

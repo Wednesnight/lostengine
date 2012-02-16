@@ -20,7 +20,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/time/ThreadedTimerScheduler.h"
 #include "lost/time/TimerScheduler.h"
 #include "lost/time/Timer.h"
-#include "lost/common/function.h"
 
 using namespace lost::time;
 
@@ -29,36 +28,49 @@ namespace lost
   namespace lua
   {
 
-    struct TimerCallbackProxy : public common::function<bool, const Timer*> {
+    struct LuaTimer : public Timer {
     private:
-      const slub::reference& targetMethod;
-      const slub::reference& targetObject;
+      slub::reference targetMethod;
+      slub::reference targetObject;
+
     public:
-      TimerCallbackProxy(const slub::reference& targetMethod,
-                         const slub::reference& targetObject)
-      : targetMethod(targetMethod),
+      LuaTimer(TimerScheduler* scheduler, double interval,
+               const slub::reference& targetMethod, const slub::reference& targetObject)
+      : Timer(scheduler, interval, NULL),
+        targetMethod(targetMethod),
         targetObject(targetObject)
       {
       }
 
-      bool operator()(const Timer* timer) {
+      bool fire() {
         if (targetMethod.type() == LUA_TFUNCTION) {
           if (targetObject.type() != LUA_TNIL) {
-            return slub::call<bool, const slub::reference&, const Timer*>(targetMethod, targetObject, timer);
+            return slub::call<bool, const slub::reference&, const Timer*>(
+              targetMethod, targetObject, this);
           }
           else {
-            return slub::call<bool, const Timer*>(targetMethod, timer);
+            return slub::call<bool, const Timer*>(targetMethod, this);
           }
         }
         return false;
       }
+
+      static TimerPtr create(TimerScheduler* scheduler,
+                             double interval,
+                             const slub::reference& targetMethod,
+                             const slub::reference& targetObject)
+      {
+        return TimerPtr(new LuaTimer(scheduler, interval, targetMethod, targetObject));
+      }
     };
 
-    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval,
+    TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler,
+                                                double interval,
                                                 const slub::reference& targetMethod,
                                                 const slub::reference& targetObject)
     {
-      return scheduler->createTimer(interval, TimerCallbackProxy(targetMethod, targetObject));
+      
+      return LuaTimer::create(scheduler, interval, targetMethod, targetObject);
     }
     
     void LostTimeTimerScheduler(lua_State* state)
@@ -82,8 +94,8 @@ namespace lost
 
     void LostTimeTimer(lua_State* state)
     {
-      slub::package(state, "lost").package("time")
-        .clazz<Timer>("Timer")
+      slub::package time = slub::package(state, "lost").package("time");
+      time.clazz<Timer>("Timer")
           .constructor<TimerScheduler*, double, const TimerCallback&>()
           .method("start", &Timer::start)
           .method("stop", &Timer::stop)
@@ -94,6 +106,8 @@ namespace lost
           .method("getTime", &Timer::getTime)
           .method("isActive", &Timer::isActive)
           .method("fire", &Timer::fire);
+      time.clazz<LuaTimer>("LuaTimer")
+          .extends<Timer>();
     }
     
     void LostTime(lua_State* state)

@@ -22,7 +22,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/event/Event.h"
 #include "lost/event/EventDispatcher.h"
 #include "lost/common/Hash.h"
-#include "lost/common/function.h"
 #include <tinythread.h>
 
 namespace lost
@@ -55,11 +54,9 @@ namespace lost
       tthread::mutex schedulerWaitMutex;
       tthread::condition_variable schedulerWaitCondition;
 
-      common::function<void> threadMethod;
+      static void __dispatch_thread_method(void* p);
       void schedulerThreadMethod();
 
-      double startTime;
-      double startSystemTime;
       double nextUpdateTime;
       void updateScheduling(double requiredUpdateTime);
 

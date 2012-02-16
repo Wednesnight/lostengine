@@ -336,3 +336,13 @@ function Button:title(...)
     self:needsDisplay()
   end
 end
+
+function Button:click(dispatchUpDown)
+  if dispatchUpDown == true then
+    self:dispatchButtonEvent(Button.BUTTON_DOWN)
+  end
+  self:dispatchButtonEvent(Button.BUTTON_CLICK)
+  if dispatchUpDown == true then
+    self:dispatchButtonEvent(Button.BUTTON_UP)
+  end
+end

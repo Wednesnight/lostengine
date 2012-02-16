@@ -16,7 +16,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/gl/HostBuffer.h"
 #include "UnitTest++.h"
-
+/*
 using namespace lost::gl;
 using namespace lost::math;
 
@@ -78,3 +78,4 @@ TEST(hostbuffer_getsetU32)
   CHECK(buffer.getAsU32(0, UT_index) == 13);
   CHECK(buffer.getAsU32(7, UT_index) == 8);
 }
+*/

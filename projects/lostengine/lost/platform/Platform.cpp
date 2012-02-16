@@ -24,13 +24,13 @@ namespace lost
     // returns current time in seconds
     double currentTimeSeconds()
     {
-      return (currentTimeMicroSeconds() / 1000000.0);
+      return ((double) currentTimeMicroSeconds() / 1000000.0);
     }
 
     // returns current time in milliseconds
-    double currentTimeMilliSeconds()
+    long currentTimeMilliSeconds()
     {
-      return (currentTimeMicroSeconds() / 1000.0);
+      return (long) (currentTimeMicroSeconds() / 1000);
     }
 
     PlatformType getPlatform()

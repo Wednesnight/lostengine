@@ -19,7 +19,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
-#include <boost/bind.hpp>
 
 using namespace lost::time;
 using namespace lost::platform;
@@ -34,6 +33,8 @@ bool timerCallback(const Timer* timer)
 TEST(timer)
 {
   lost::shared_ptr<TimerScheduler> scheduler(new ThreadedTimerScheduler("test"));
-  lost::shared_ptr<Timer> timer(scheduler->createTimer(1, boost::bind(&timerCallback, _1), true));
+  for (int i = 0; i < 100; ++i) {
+    scheduler->createTimer(1, &timerCallback, true);
+  }
   sleep(10);
 }

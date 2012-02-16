@@ -897,15 +897,6 @@
         'lost/time/Timer.h',
         'lost/time/TimerScheduler.h',
 
-        # thirdparty/boost
-        '<@(boost_path)/libs/system/src/error_code.cpp',
-        '<@(boost_path)/libs/thread/src/tss_null.cpp',
-        '<@(boost_path)/libs/thread/src/pthread/once.cpp',
-        '<@(boost_path)/libs/thread/src/pthread/thread.cpp',
-        '<@(boost_path)/libs/thread/src/win32/thread.cpp',
-        '<@(boost_path)/libs/thread/src/win32/tss_dll.cpp',
-        '<@(boost_path)/libs/thread/src/win32/tss_pe.cpp',
-
         # thirdparty/box2d
         '<@(box2d_path)/Box2D/Box2D/Collision/b2BroadPhase.cpp',
         '<@(box2d_path)/Box2D/Box2D/Collision/b2CollideCircle.cpp',
@@ -1075,17 +1066,9 @@
             'lost/application/windows/Window.cpp',
             'lost/gl/windows/Context.cpp',
             'lost/platform/Platform_Windows.cpp',
-            '<@(boost_path)/libs/filesystem/v3/src/windows_file_codecvt.cpp',
-            '<@(boost_path)/libs/thread/src/win32/thread.cpp',
-            '<@(boost_path)/libs/thread/src/win32/tss_dll.cpp',
-            '<@(boost_path)/libs/thread/src/win32/tss_pe.cpp',
           ],
         }],
         ['OS == "win"', {
-          'sources!': [
-            '<@(boost_path)/libs/thread/src/pthread/once.cpp',
-            '<@(boost_path)/libs/thread/src/pthread/thread.cpp',
-          ],
           'link_settings': {
             'libraries': [
               '-l<@(openal_path)/libs/Win32/EFX-Util.lib',
