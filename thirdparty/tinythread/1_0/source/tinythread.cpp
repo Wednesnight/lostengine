@@ -74,9 +74,16 @@ condition_variable::~condition_variable()
 #if defined(_TTHREAD_WIN32_)
 void condition_variable::_wait()
 {
+  _wait(INFINITE);
+}
+#endif
+
+#if defined(_TTHREAD_WIN32_)
+bool condition_variable::_wait(DWORD timeoutMSec)
+{
   // Wait for either event to become signaled due to notify_one() or
   // notify_all() being called
-  int result = WaitForMultipleObjects(2, mEvents, FALSE, INFINITE);
+  int result = WaitForMultipleObjects(2, mEvents, FALSE, timeoutMSec);
 
   // Check if we are the last waiter
   EnterCriticalSection(&mWaitersCountLock);
@@ -88,6 +95,8 @@ void condition_variable::_wait()
   // If we are the last waiter to be notified to stop waiting, reset the event
   if(lastWaiter)
     ResetEvent(mEvents[_CONDITION_EVENT_ALL]);
+
+  return (result != WAIT_TIMEOUT && result != WAIT_FAILED);
 }
 #endif
 
