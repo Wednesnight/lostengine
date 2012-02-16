@@ -24,18 +24,26 @@ namespace lost
   namespace time
   {
 
+    void __dispatch_thread_method(void* func) {
+      common::function<void>* target = static_cast<common::function<void>*>(func);
+      if (target != NULL) {
+        target->operator()();
+      }
+    }
+
     ThreadedTimerScheduler::ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher)
     : active(true),
       eventDispatcher(eventDispatcher),
       startTime(platform::currentTimeSeconds()),
-      startSystemTime(boost::get_system_time()),
+      startSystemTime(platform::currentTimeMilliSeconds()),
       nextUpdateTime(0),
-      _taskletName(taskletName)
+      _taskletName(taskletName),
+      threadMethod(common::bind(this, &ThreadedTimerScheduler::schedulerThreadMethod))
     {
       if (eventDispatcher) {
         eventDispatcher->addEventListener(ThreadedTimerSchedulerEvent::PROCESS_TIMERS(), event::makeListener(this, &ThreadedTimerScheduler::processTimers));
       }
-      schedulerThread.reset(new boost::thread(boost::bind(&ThreadedTimerScheduler::schedulerThreadMethod, this)));
+      schedulerThread.reset(new tthread::thread(__dispatch_thread_method, &threadMethod));
     }
 
     ThreadedTimerScheduler::~ThreadedTimerScheduler()
@@ -50,17 +58,17 @@ namespace lost
     void ThreadedTimerScheduler::schedulerThreadMethod()
     {
       platform::setThreadName("'"+_taskletName+"' (timer scheduler)");
-      boost::mutex::scoped_lock waitLock(schedulerWaitMutex);
+//      tthread::mutex::scoped_lock waitLock(schedulerWaitMutex);
       while (active) {
         if (nextUpdateTime == 0) {
-          schedulerWaitCondition.wait(waitLock);
+          schedulerWaitCondition.wait(schedulerWaitMutex);
         }
         else {
           if (!schedulerWaitCondition.timed_wait(waitLock, startSystemTime + boost::posix_time::milliseconds((nextUpdateTime - startTime) * 1000))) {
             // timeout reached, process timers
             if (eventDispatcher) {
               eventDispatcher->queueEvent(ThreadedTimerSchedulerEvent::create());
-              schedulerWaitCondition.wait(waitLock);
+              schedulerWaitCondition.wait(schedulerWaitMutex);
             }
             else {
               processTimers();

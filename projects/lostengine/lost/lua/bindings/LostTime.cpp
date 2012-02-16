@@ -20,8 +20,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/time/ThreadedTimerScheduler.h"
 #include "lost/time/TimerScheduler.h"
 #include "lost/time/Timer.h"
-
-#include <boost/bind.hpp>
+#include "lost/common/function.h"
 
 using namespace lost::time;
 
@@ -30,25 +29,36 @@ namespace lost
   namespace lua
   {
 
-    bool TimerCallbackProxy(const slub::reference& targetMethod,
-                            const slub::reference& targetObject, const Timer* timer)
-    {
-      if (targetMethod.type() == LUA_TFUNCTION) {
-        if (targetObject.type() != LUA_TNIL) {
-          return slub::call<bool, const slub::reference&, const Timer*>(targetMethod, targetObject, timer);
-        }
-        else {
-          return slub::call<bool, const Timer*>(targetMethod, timer);
-        }
+    struct TimerCallbackProxy : public common::function<bool, const Timer*> {
+    private:
+      const slub::reference& targetMethod;
+      const slub::reference& targetObject;
+    public:
+      TimerCallbackProxy(const slub::reference& targetMethod,
+                         const slub::reference& targetObject)
+      : targetMethod(targetMethod),
+        targetObject(targetObject)
+      {
       }
-      return false;
-    }
-    
+
+      bool operator()(const Timer* timer) {
+        if (targetMethod.type() == LUA_TFUNCTION) {
+          if (targetObject.type() != LUA_TNIL) {
+            return slub::call<bool, const slub::reference&, const Timer*>(targetMethod, targetObject, timer);
+          }
+          else {
+            return slub::call<bool, const Timer*>(targetMethod, timer);
+          }
+        }
+        return false;
+      }
+    };
+
     TimerPtr LostTimeTimerScheduler_createTimer(TimerScheduler* scheduler, double interval,
                                                 const slub::reference& targetMethod,
                                                 const slub::reference& targetObject)
     {
-      return scheduler->createTimer(interval, boost::bind(&TimerCallbackProxy, targetMethod, targetObject, _1));
+      return scheduler->createTimer(interval, TimerCallbackProxy(targetMethod, targetObject));
     }
     
     void LostTimeTimerScheduler(lua_State* state)
