@@ -29,7 +29,7 @@ namespace lost
       GLXContext  glContext;
     };
 
-    void context_cleanup(Context* p)
+    void context_cleanup(void* p)
     {
     }
     // set to the current context in makeCurrent
