@@ -73,7 +73,7 @@ namespace tthread
 #if defined(_TTHREAD_WIN32_)
       _key = TlsAlloc(); // FIXME how should errors be handled?
 #else
-      _key = NULL;
+      _key = pthread_key_t();
       pthread_key_create(&_key, destructor); // FIXME how should errors be handled?
 #endif    
       _cleanup = cleanupFunc;
