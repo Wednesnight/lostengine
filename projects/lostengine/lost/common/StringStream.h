@@ -17,6 +17,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef LOST_COMMON_STRINGSTREAM_H
 #define LOST_COMMON_STRINGSTREAM_H
 
+#include <stdint.h>
+
 namespace lost
 {
 namespace common
@@ -39,9 +41,8 @@ lost::common::StringStream& operator<<(lost::common::StringStream& s, float v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, double v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, int32_t v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, uint32_t v);
+lost::common::StringStream& operator<<(lost::common::StringStream& s, int64_t v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, uint64_t v);
-lost::common::StringStream& operator<<(lost::common::StringStream& s, unsigned long v);
-lost::common::StringStream& operator<<(lost::common::StringStream& s, long v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, const char* v);
 lost::common::StringStream& operator<<(lost::common::StringStream& s, const lost::string& v);
 

@@ -81,15 +81,7 @@ lost::common::StringStream& operator<<(lost::common::StringStream& s, uint32_t v
   return s;
 }
 
-lost::common::StringStream& operator<<(lost::common::StringStream& s, uint64_t v)
-{
-  char buf[32];
-  sprintf(buf, "%llu",v);
-  s.append(buf);
-  return s;
-}
-
-lost::common::StringStream& operator<<(lost::common::StringStream& s, unsigned long v)
+lost::common::StringStream& operator<<(lost::common::StringStream& s, int64_t v)
 {
   char buf[32];
   sprintf(buf, "%lu",v);
@@ -97,10 +89,10 @@ lost::common::StringStream& operator<<(lost::common::StringStream& s, unsigned l
   return s;
 }
 
-lost::common::StringStream& operator<<(lost::common::StringStream& s, long v)
+lost::common::StringStream& operator<<(lost::common::StringStream& s, uint64_t v)
 {
   char buf[32];
-  sprintf(buf, "%ld",v);
+  sprintf(buf, "%lu",v);
   s.append(buf);
   return s;
 }
