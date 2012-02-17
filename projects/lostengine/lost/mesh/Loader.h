@@ -19,6 +19,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/mesh/Mesh.h"
 #include "lost/common/Data.h"
+#include "lost/lua/lostlua.h"
+#include "lost/resource/Forward.h"
 
 namespace lost
 {
@@ -31,6 +33,7 @@ namespace lost
 
     void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath);
     void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& path);
+    MeshPtr loadMeshBundle(resource::BundlePtr bundle, lua_State* state);
     
     struct Loader
     {
