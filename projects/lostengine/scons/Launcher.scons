@@ -35,6 +35,7 @@ configurations = {
                 'openal',
                 'pthread',
                 'X11',
+                'rt',
                 'libLostEngine'
             ],
         ),
@@ -74,6 +75,7 @@ configurations = {
                 'openal',
                 'pthread',
                 'X11',
+                'rt',
                 'libLostEngine'
             ],
         ),
@@ -145,9 +147,7 @@ target_files.extend(_outputs)
 
 gyp_target = env.Alias('Launcher', target_files)
 dependencies = [
-    Alias('LostEngine'),
-    Alias('lua'),
-    Alias('slub')
+    Alias('LostEngine')
 ]
 env.Requires(target_files, dependencies)
 env.Requires(gyp_target, dependencies)
