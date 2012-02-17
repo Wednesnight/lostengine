@@ -142,7 +142,7 @@ struct BufferLayout
   bool hasUsageType(UsageType ut);
   GLenum glScalarTypeFromUsageType(UsageType ut);
   uint32_t stride(UsageType ut);
-  uint32_t offset(UsageType ut);
+  size_t offset(UsageType ut);
 };
 
 

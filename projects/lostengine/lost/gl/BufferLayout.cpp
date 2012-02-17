@@ -243,9 +243,9 @@ uint32_t BufferLayout::stride(UsageType ut)
   return size();
 }
 
-uint32_t BufferLayout::offset(UsageType ut)
+size_t BufferLayout::offset(UsageType ut)
 {
-  uint32_t result = 0;
+  size_t result = 0;
   
   for(uint32_t i=0; i<attributes.size(); ++i)
   {
