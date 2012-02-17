@@ -1,6 +1,6 @@
 #include "once.h"
 
-#if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= MAC_OS_X_VERSION_10_5 || __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_2_0)
+#if ((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= MAC_OS_X_VERSION_10_5) || (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_2_0))
 #  include <libkern/OSAtomic.h>
 #elif (defined(_WIN32_WINNT) && _WIN32_WINNT >= _WIN32_WINNT_WIN2K) || (defined(WINVER) && WINVER >= _WIN32_WINNT_WIN2K)
 #  include <windows.h>
@@ -13,7 +13,7 @@ namespace tthread {
                     volatile once_flag& ref)
   {
     
-#if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= MAC_OS_X_VERSION_10_5 || __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_2_0)
+#if ((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= MAC_OS_X_VERSION_10_5) || (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_2_0))
     
     return OSAtomicCompareAndSwapInt(old_value,
                                      new_value,
