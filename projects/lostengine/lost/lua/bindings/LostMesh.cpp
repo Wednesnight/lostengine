@@ -36,6 +36,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/gl/HybridVertexBuffer.h"
 #include "lost/gl/HybridIndexBuffer.h"
 #include "lost/common/ColorGradient.h"
+#include "lost/resource/Bundle.h"
 
 #include <slub/slub.h>
 
@@ -96,6 +97,7 @@ namespace lost
     void LostMeshLoader(lua_State* state)
     {
       slub::package(state, "lost").package("mesh")
+        .function("loadMeshBundle", &lost::mesh::loadMeshBundle)
         .clazz<Loader>("Loader")
           .function("obj", &lost::mesh::Loader::obj);
     }

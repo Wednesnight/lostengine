@@ -42,6 +42,10 @@ function startup()
   end)
 
   updateButtons()
+  
+  local pth = lost.fs.Path("lost/resources/models/magnolia.lemesh")
+  local meshBundle = tasklet.applicationBundle:subBundle(pth)
+  local msh = lost.mesh.loadMeshBundle(meshBundle)
 end
 
 function update()

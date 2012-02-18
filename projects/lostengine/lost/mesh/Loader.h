@@ -33,7 +33,7 @@ namespace lost
 
     void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath);
     void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& path);
-    MeshPtr loadMeshBundle(resource::BundlePtr bundle, lua_State* state);
+    MeshPtr loadMeshBundle(const resource::BundlePtr& bundle, lua_State* state);
     
     struct Loader
     {

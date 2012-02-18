@@ -17,6 +17,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/mesh/Loader.h"
 #include "lost/math/Vec3.h"
 #include "lost/common/Logger.h"
+#include "lost/resource/Bundle.h"
+#include <slub/slub.h>
+#include <slub/table.h>
 #include <stdexcept>
 #pragma warning(disable:4244) // warning C4244: 'argument' : conversion from 'const double' to 'float', possible loss of data
 
@@ -59,7 +62,7 @@ namespace lost
       for(vector<BufferLayoutAttribute>::iterator pos = bl.attributes.begin(); pos != bl.attributes.end(); ++pos)
       {
         BufferLayoutAttribute attr = *pos;
-        DOUT("{ " << gl::nameForElementType(attr.elementType) << ", " << gl::nameForUsageType(attr.usageType) << ", " << (attr.normalise ? "true" : "false") << "},");
+        DOUT("{ \"" << gl::nameForElementType(attr.elementType) << "\", \"" << gl::nameForUsageType(attr.usageType) << "\", " << (attr.normalise ? "true" : "false") << "},");
       }      
     }
     
@@ -82,6 +85,27 @@ namespace lost
 
       dumpBufferLayout(ib);
     }
+    
+    MeshPtr loadMeshBundle(const resource::BundlePtr& bundle, lua_State* state)
+    {
+      MeshPtr result;
+      
+/*      slub::table meta = bundle->require(fs::Path("meta.lua"), state);
+      slub::table vblayout = meta["vblayout"];
+      slub::table iblayout = meta["iblayout"];
+//      string vbname = meta["vbname"].cast<string>();
+//      string ibname = meta["ibname"].cast<string>();
+      slub::reference vbname = meta["vbname"];
+      slub::reference ibname = meta["ibname"];
+      
+//      DOUT("vblayout "<<vblayout.isNil());
+//      DOUT("iblayout "<<iblayout.isNil());
+//      DOUT("vbname "<<vbname.isNil());
+//      DOUT("ibname "<<ibname.isNil());
+  */    
+      return result;
+    }
+
     
     template <typename Type>
     struct MeshSet
