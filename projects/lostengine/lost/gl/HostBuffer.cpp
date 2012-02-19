@@ -16,7 +16,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/gl/HostBuffer.h"
 #include "lost/common/Logger.h"
-
+#include "lost/common/Data.h"
 #include <stdexcept>
 #include <string.h>
 
@@ -74,6 +74,15 @@ void HostBuffer::reset(uint32_t num)
   count = num;
 }
 
+void HostBuffer::reset(common::DataPtr data)
+{
+  deleteBuffer();
+  buffer = (uint8_t*)malloc(data->size);
+  memcpy(buffer, data->bytes.get(), data->size);
+  count = data->size / layout.size();
+}
+  
+  
 uint32_t HostBuffer::bufferSize()
 {
   return layout.size()*count;

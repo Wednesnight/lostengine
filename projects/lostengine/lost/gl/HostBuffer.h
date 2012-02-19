@@ -25,6 +25,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/Color.h"
 #include "lost/gl/forward.h"
 #include "lost/common/Disallow.h"
+#include "lost/common/forward.h"
 
 namespace lost
 {
@@ -47,6 +48,7 @@ struct HostBuffer
   
   // resizes the buffer to accomodate num structs with the current layout. if num is 0, the buffer will be cleared
   void reset(uint32_t num);
+  void reset(common::DataPtr data);
   unsigned char* elementAddress(uint32_t idx, UsageType ut); 
   ElementType elementTypeFromUsageType(UsageType ut);
   void set(uint32_t idx, UsageType ut, uint8_t val);

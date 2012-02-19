@@ -97,9 +97,7 @@ namespace lost
     void LostMeshLoader(lua_State* state)
     {
       slub::package(state, "lost").package("mesh")
-        .function("loadMeshBundle", &lost::mesh::loadMeshBundle)
-        .clazz<Loader>("Loader")
-          .function("obj", &lost::mesh::Loader::obj);
+      .function("loadMeshBundle", &lost::mesh::loadMeshBundle);
     }
 
     void LostMeshMaterial_addTexture(Material* material, const gl::TexturePtr& texture)

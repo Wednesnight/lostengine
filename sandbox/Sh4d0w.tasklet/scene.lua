@@ -61,7 +61,12 @@ function createScene(loader)
 
   -- meshes
   result.meshes = {}
-  local mesh = lost.mesh.Loader.obj(loader:load("lost/resources/models/magnolia_tri.obj"))
+--  local mesh = lost.mesh.Loader.obj(loader:load("lost/resources/models/magnolia_tri.obj"))
+  local pth = lost.fs.Path("lost/resources/models/magnolia.lemesh")
+  local meshBundle = tasklet.applicationBundle:subBundle(pth)
+  local mesh = lost.mesh.loadMeshBundle(meshBundle)
+
+
   mesh.material.shader = result.ssaoShader
   mesh.material.uniforms = result.shaderParams
   mesh.material:addTexture(result.fb:depthTexture())

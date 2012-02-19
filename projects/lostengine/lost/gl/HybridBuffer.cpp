@@ -60,6 +60,13 @@ void HybridBuffer::reset(uint32_t num)
   dirty = true;
 }
 
+void HybridBuffer::reset(common::DataPtr data)
+{
+  hostBuffer->reset(data);
+  dirty = true;
+}
+  
+  
 void HybridBuffer::set(uint32_t idx, UsageType ut, uint8_t val)
 {
   hostBuffer->set(idx, ut, val);

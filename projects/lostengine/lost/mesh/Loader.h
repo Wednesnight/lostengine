@@ -27,19 +27,9 @@ namespace lost
 
   namespace mesh
   {
-
-    struct Loader;
-    typedef lost::shared_ptr<Loader> LoaderPtr;
-
     void writeVertexBuffer(const MeshPtr& inMesh, const lost::fs::Path& inPath);
     void writeIndexBuffer(const MeshPtr& inMesh, const lost::fs::Path& path);
     MeshPtr loadMeshBundle(const resource::BundlePtr& bundle, lua_State* state);
-    
-    struct Loader
-    {
-      static MeshPtr obj(common::DataPtr objFile);
-    };
-
   }
 }
 

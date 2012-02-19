@@ -41,7 +41,8 @@ struct HybridBuffer
   virtual ~HybridBuffer();
   
   void reset(uint32_t num);
-
+  void reset(common::DataPtr data);
+  
   void set(uint32_t idx, UsageType ut, uint8_t val);
   void set(uint32_t idx, UsageType ut, uint16_t val);
   void set(uint32_t idx, UsageType ut, uint32_t val);
