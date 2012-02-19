@@ -2860,7 +2860,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/box2d/box2d_2_1_2/Box2D,
 					../../thirdparty/eastl/fe4d920/include,
 					../../thirdparty/freetype2/freetype_2_4_3/include,
@@ -2910,7 +2909,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/box2d/box2d_2_1_2/Box2D,
 					../../thirdparty/eastl/fe4d920/include,
 					../../thirdparty/freetype2/freetype_2_4_3/include,
@@ -2958,7 +2956,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/eastl/fe4d920/include,
 					../../thirdparty/lua/lua_5_1_4/include,
 					../../thirdparty/slub/include,
@@ -2999,7 +2996,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/tinythread/1_0/source,
 					../../thirdparty/eastl/fe4d920/include,
 					"../../thirdparty/UnitTest++/include",
@@ -3056,7 +3052,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/eastl/fe4d920/include,
 					../../thirdparty/lua/lua_5_1_4/include,
 					../../thirdparty/slub/include,
@@ -3097,7 +3092,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					.,
-					../../thirdparty/boost/boost_1_44_0,
 					../../thirdparty/tinythread/1_0/source,
 					../../thirdparty/eastl/fe4d920/include,
 					"../../thirdparty/UnitTest++/include",

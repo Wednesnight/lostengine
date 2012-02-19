@@ -113,7 +113,6 @@
 
       'include_dirs': [
         '.',
-        '<@(boost_path)',
         '<@(eastl_path)/include',
       ],
 
@@ -287,7 +286,6 @@
 
       'include_dirs': [
         '.',
-        '<@(boost_path)',
         '<@(tinythread_path)',
         '<@(eastl_path)/include',
         '<@(unittest++_path)/include',
@@ -467,7 +465,6 @@
       'include_dirs': [
 
         '.',
-        '<@(boost_path)',
         '<@(box2d_path)/Box2D',
         '<@(eastl_path)/include',
         '<@(freetype2_path)/include',

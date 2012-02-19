@@ -26,7 +26,6 @@
     'SLUB_MAP_TYPE'       : 'eastl::map',
 
     # dependencies
-    'boost_path': '../../thirdparty/boost/boost_1_44_0',
     'box2d_path': '../../thirdparty/box2d/box2d_2_1_2',
     'eastl_path': '../../thirdparty/eastl/fe4d920',
     'freetype2_path': '../../thirdparty/freetype2/freetype_2_4_3',
