@@ -86,10 +86,6 @@ freely, subject to the following restrictions:
 // Generic includes
 #include <ostream>
 
-#include <iostream>
-#include <ctime>
-#include <iomanip>
-
 /// TinyThread++ version (major number).
 #define TINYTHREAD_VERSION_MAJOR 1
 /// TinyThread++ version (minor number).
@@ -516,13 +512,11 @@ class condition_variable {
       clock_gettime(CLOCK_REALTIME, &ts);
 #endif
       long usec = long(double(timeout.count()) * (1000000.0 * _Period::_as_double()) + 0.5);
-      std::cout << "waiting for " << usec << " usec" << std::endl;
       ts.tv_sec += long(usec/1000000);
       ts.tv_nsec += (usec%1000000) * 1000;
       int result = 0;
       while ((result = pthread_cond_timedwait(&mHandle, &aMutex.mHandle, &ts)) == EINVAL);
-      std::cout << "pthread_cond_timedwait returned: " << result << std::endl;
-      return result == 0;
+      return result != ETIMEDOUT;
 #endif
     }
   
