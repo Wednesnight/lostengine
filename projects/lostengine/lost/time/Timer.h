@@ -18,13 +18,14 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #define LOST_TIME_TIMER_H
 
 #include "lost/time/forward.h"
+#include "lost/common/Function.h"
 
 namespace lost
 {
   namespace time
   {
 
-    typedef bool(*TimerCallback)(const Timer*);
+    typedef common::Function<bool(*)(const Timer*)> TimerCallback;
 
     struct Timer
     {

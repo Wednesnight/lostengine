@@ -19,22 +19,28 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "UnitTest++.h"
 #include "lost/common/Logger.h"
 #include "lost/platform/Platform.h"
+#include "lost/common/Function.h"
 
 using namespace lost::time;
 using namespace lost::platform;
+using namespace lost::common;
 
-static int count = 0;
-bool timerCallback(const Timer* timer)
-{
-  DOUT("timer fired! now: " << currentTimeSeconds() << ", timer: " << timer->getTime() << ", interval: " << timer->getInterval());
-  return ++count < 5;
-}
+struct Foo {
+  int count;
+  Foo() : count(0) {}
+  bool timerCallback(const Timer* timer)
+  {
+    DOUT("timer fired! now: " << currentTimeSeconds() << ", timer: " << timer->getTime() << ", interval: " << timer->getInterval());
+    return ++count < 5;
+  }
+};
 
 TEST(timer)
 {
   lost::shared_ptr<TimerScheduler> scheduler(new ThreadedTimerScheduler("test"));
+  Foo f;
   for (int i = 0; i < 100; ++i) {
-    scheduler->createTimer(1, &timerCallback, true);
+    scheduler->createTimer(1, bind(&Foo::timerCallback, &f), true);
   }
   sleep(10);
 }
