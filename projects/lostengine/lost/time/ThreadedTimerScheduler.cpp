@@ -84,9 +84,10 @@ namespace lost
         }
     }
     
-    void ThreadedTimerScheduler::addTimerToList(Timer* timer)
+    void ThreadedTimerScheduler::addTimerToList(const TimerPtr& timer)
     {
-      list<Timer*>::iterator iter;
+      timersMutex.lock();
+      list<TimerPtr>::iterator iter;
       for (iter = timers.begin(); iter != timers.end(); ++iter) {
         if ((*iter)->getTime() >= timer->getTime()) {
           timers.insert(iter, timer);
@@ -97,13 +98,15 @@ namespace lost
       if (iter == timers.end()) {
         timers.push_back(timer);
       }
+      timersMutex.unlock();
 
       updateScheduling(timer->getTime());
     }
 
-    void ThreadedTimerScheduler::removeTimerFromList(Timer* timer)
+    void ThreadedTimerScheduler::removeTimerFromList(const TimerPtr& timer)
     {
-      list<Timer*>::iterator iter;
+      timersMutex.lock();
+      list<TimerPtr>::iterator iter;
       for (iter = timers.begin(); iter != timers.end(); ++iter) {
         if (*iter == timer) {
           break;
@@ -112,48 +115,52 @@ namespace lost
       if (iter != timers.end()) {
         timers.erase(iter);
       }
+      timersMutex.unlock();
 
       updateScheduling(timers.size() > 0 ? timers.front()->getTime() : 0);
     }
 
-    bool ThreadedTimerScheduler::startTimer(Timer* timer)
+    bool ThreadedTimerScheduler::startTimer(const TimerPtr& timer)
     {
       timer->setTime(platform::currentTimeSeconds() + timer->getInterval());
       addTimerToList(timer);
       return true;
     }
 
-    bool ThreadedTimerScheduler::stopTimer(Timer* timer)
+    bool ThreadedTimerScheduler::stopTimer(const TimerPtr& timer)
     {
       removeTimerFromList(timer);
       return false;
     }
 
-    bool ThreadedTimerScheduler::restartTimer(Timer* timer)
+    bool ThreadedTimerScheduler::restartTimer(const TimerPtr& timer)
     {
       return !stopTimer(timer) ? startTimer(timer) : true;
     }
 
     void ThreadedTimerScheduler::processTimers(const ThreadedTimerSchedulerEventPtr& event)
     {
-      list<Timer*> rescheduleTimers;
-
+      list<TimerPtr> rescheduleTimers;
+      timersMutex.lock();
       while (timers.size() > 0 && timers.front()->getTime() == nextUpdateTime) {
-        Timer* timer = timers.front();
+        TimerPtr timer = timers.front();
         if (timer->fire()) {
           rescheduleTimers.push_back(timer);
         }
         timers.pop_front();
       }
+      timersMutex.unlock();
       nextUpdateTime = 0;
 
-      for (list<Timer*>::iterator iter = rescheduleTimers.begin(); iter != rescheduleTimers.end(); ++iter) {
+      for (list<TimerPtr>::iterator iter = rescheduleTimers.begin(); iter != rescheduleTimers.end(); ++iter) {
         startTimer(*iter);
       }
 
+      timersMutex.lock();
       if (timers.size() > 0) {
         updateScheduling(timers.front()->getTime());
       }
+      timersMutex.unlock();
 
       if (eventDispatcher) {
         schedulerWaitCondition.notify_all();

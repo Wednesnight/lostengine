@@ -30,28 +30,19 @@ namespace lost
     {
     }
 
-    Timer::~Timer()
-    {
-      if (active) {
-        scheduler->stopTimer(this);
-      }
-    }
-
     void Timer::start()
     {
-      active = scheduler->startTimer(this);
+      active = scheduler->startTimer(shared_from_this());
     }
 
     void Timer::stop()
     {
-      active = scheduler->stopTimer(this);
+      active = scheduler->stopTimer(shared_from_this());
     }
 
     void Timer::restart()
     {
-      if (active) {
-        active = scheduler->restartTimer(this);
-      }
+      active = scheduler->restartTimer(shared_from_this());
     }
 
     void Timer::setInterval(double interval)

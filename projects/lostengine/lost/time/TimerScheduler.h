@@ -28,9 +28,9 @@ namespace lost
     {
 
     public:
-      virtual bool startTimer(Timer* timer) = 0;
-      virtual bool stopTimer(Timer* timer) = 0;
-      virtual bool restartTimer(Timer* timer) = 0;
+      virtual bool startTimer(const TimerPtr& timer) = 0;
+      virtual bool stopTimer(const TimerPtr& timer) = 0;
+      virtual bool restartTimer(const TimerPtr& timer) = 0;
 
       virtual void processTimers() = 0;
 
@@ -38,7 +38,7 @@ namespace lost
       {
         TimerPtr timer(new Timer(this, interval, callback));
         if (startImmediately) {
-          startTimer(timer.get());
+          startTimer(timer);
         }
         return timer;
       }

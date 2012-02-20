@@ -30,8 +30,8 @@ struct Foo {
   Foo() : count(0) {}
   bool timerCallback(const Timer* timer)
   {
-    DOUT("timer fired! now: " << currentTimeSeconds() << ", timer: " << timer->getTime() << ", interval: " << timer->getInterval());
-    return ++count < 5;
+    DOUT("timer fired! count: " << ++count << ", now: " << currentTimeSeconds() << ", timer: " << timer->getTime() << ", interval: " << timer->getInterval());
+    return false;
   }
 };
 

@@ -60,17 +60,19 @@ namespace lost
       double nextUpdateTime;
       void updateScheduling(double requiredUpdateTime);
 
-      list<Timer*> timers;
-      void addTimerToList(Timer* timer);
-      void removeTimerFromList(Timer* timer);
+      list<TimerPtr> timers;
+      tthread::mutex timersMutex;
+
+      void addTimerToList(const TimerPtr& timer);
+      void removeTimerFromList(const TimerPtr& timer);
       string _taskletName;
     public:
       ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher = event::EventDispatcherPtr());
       ~ThreadedTimerScheduler();
 
-      bool startTimer(Timer* timer);
-      bool stopTimer(Timer* timer);
-      bool restartTimer(Timer* timer);
+      bool startTimer(const TimerPtr& timer);
+      bool stopTimer(const TimerPtr& timer);
+      bool restartTimer(const TimerPtr& timer);
 
       void processTimers() { processTimers(ThreadedTimerSchedulerEventPtr()); }
       void processTimers(const ThreadedTimerSchedulerEventPtr& event);
