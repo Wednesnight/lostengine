@@ -19,6 +19,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "lost/time/Timer.h"
 
+#define LOST_TIME_TIMERSCHEDULER_STDDEV 0.00001
+
 namespace lost
 {
   namespace time
@@ -27,7 +29,15 @@ namespace lost
     struct TimerScheduler
     {
 
+    protected:
+      double accuracy;
+
     public:
+      TimerScheduler(double accuracy = LOST_TIME_TIMERSCHEDULER_STDDEV)
+      : accuracy(accuracy)
+      {
+      }
+
       virtual bool startTimer(const TimerPtr& timer) = 0;
       virtual bool stopTimer(const TimerPtr& timer) = 0;
       virtual bool restartTimer(const TimerPtr& timer) = 0;

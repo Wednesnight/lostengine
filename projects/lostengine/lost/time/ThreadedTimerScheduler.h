@@ -67,7 +67,7 @@ namespace lost
       void removeTimerFromList(const TimerPtr& timer);
       string _taskletName;
     public:
-      ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher = event::EventDispatcherPtr());
+      ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher = event::EventDispatcherPtr(), double accuracy = LOST_TIME_TIMERSCHEDULER_STDDEV);
       ~ThreadedTimerScheduler();
 
       bool startTimer(const TimerPtr& timer);

@@ -31,8 +31,9 @@ namespace lost
       }
     }
 
-    ThreadedTimerScheduler::ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher)
-    : active(true),
+    ThreadedTimerScheduler::ThreadedTimerScheduler(const string& taskletName, const event::EventDispatcherPtr& eventDispatcher, double accuracy)
+    : TimerScheduler(accuracy),
+      active(true),
       eventDispatcher(eventDispatcher),
       nextUpdateTime(0),
       _taskletName(taskletName)
@@ -142,7 +143,7 @@ namespace lost
     {
       list<TimerPtr> rescheduleTimers;
       timersMutex.lock();
-      while (timers.size() > 0 && timers.front()->getTime() == nextUpdateTime) {
+      while (timers.size() > 0 && timers.front()->getTime() <= nextUpdateTime+accuracy) {
         TimerPtr timer = timers.front();
         if (timer->fire()) {
           rescheduleTimers.push_back(timer);
