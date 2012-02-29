@@ -100,13 +100,12 @@ namespace lost
 
     bool exists(const Path& path)
     {
-      // TODO
-      return true;
+      return (access(path.string().c_str(), F_OK) != -1);
     }
       
     bool create_directories(const Path& path)
     {
-      // TODO
+      // TODO: mkdir, _mkdir (windows)
       return true;
     }
 
