@@ -144,7 +144,7 @@ void render(const text::utf32_string& inText, const vector<Range>& lines, const 
   if (align != 0) {
     float maxWidth = (pmax.x-pmin.x)+1;
     for (vector<math::Vec2>::iterator b = lineBounds.begin(); b != lineBounds.end(); ++b) {
-      int offset = (maxWidth - (characterRects[b->max].x-characterRects[b->min].x)+1);
+      int offset = (maxWidth - (characterRects[b->max].x+characterRects[b->max].width-characterRects[b->min].x));
       if (offset > 0) {
         if (align == 1) {
           offset /= 2.0f;
