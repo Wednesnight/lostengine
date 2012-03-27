@@ -17,6 +17,13 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/fs/Path.h"
 #include "lost/common/Logger.h"
 
+#if defined WIN32
+  #include <direct.h>
+#else
+  #include <sys/stat.h>
+#endif
+#include <cerrno>
+
 namespace lost 
 {
   namespace fs
@@ -100,14 +107,28 @@ namespace lost
 
     bool exists(const Path& path)
     {
-      // TODO
-      return true;
+      return (access(path.string().c_str(), F_OK) != -1);
     }
       
     bool create_directories(const Path& path)
     {
-      // TODO
-      return true;
+      bool result = true;
+      string dir = path.string();
+      string::size_type pos = dir.rfind(dir_separator);
+      if (pos != string::npos) {
+        string parent = dir.substr(0, pos);
+        if (!exists(parent)) {
+          result = create_directories(parent);
+        }
+      }
+      if (result) {
+#if defined WIN32
+        result = _mkdir(dir.c_str()) != -1 || errno == EEXIST;
+#else
+        result = mkdir(dir.c_str(), S_IRWXU | S_IRWXG | S_IRWXO) != -1 || errno == EEXIST;
+#endif
+      }
+      return result;
     }
 
   }
