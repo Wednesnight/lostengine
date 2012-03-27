@@ -26,7 +26,7 @@ namespace lost
   {
     struct Queue : public vector<const QueueEntity*>
     {
-      ~Queue();
+//      ~Queue();
       void queue(const QueueEntity* entity);
       void process(const Tasklet* sender);
       void clear();

@@ -21,10 +21,10 @@ namespace lost
   namespace application
   {
 
-    Queue::~Queue()
+/*    Queue::~Queue()
     {
       clear();
-    }
+    }*/
 
     void Queue::queue(const QueueEntity* entity)
     {

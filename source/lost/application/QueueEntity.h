@@ -25,6 +25,7 @@ namespace lost
   {
     struct QueueEntity
     {
+      virtual ~QueueEntity() {};
       virtual void process(const Tasklet* sender) const = 0;
     };
   }

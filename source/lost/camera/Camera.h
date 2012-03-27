@@ -42,7 +42,8 @@ namespace lost
       bool needsUpdate;
 
       Camera(const lost::math::Rect& inViewport);
-
+      virtual ~Camera() {};
+      
       lost::math::Rect& viewport(const lost::math::Rect& inViewport);
       lost::math::Rect& viewport();
 

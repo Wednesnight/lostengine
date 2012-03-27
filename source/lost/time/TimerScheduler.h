@@ -38,6 +38,8 @@ namespace lost
       {
       }
 
+      virtual ~TimerScheduler() {};
+      
       virtual bool startTimer(const TimerPtr& timer) = 0;
       virtual bool stopTimer(const TimerPtr& timer) = 0;
       virtual bool restartTimer(const TimerPtr& timer) = 0;
