@@ -20,7 +20,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/mesh/Mesh.h"
 #include "lost/common/Data.h"
 #include "lost/lua/lostlua.h"
-#include "lost/resource/Forward.h"
+#include "lost/resource/forward.h"
 
 namespace lost
 {
