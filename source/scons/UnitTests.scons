@@ -20,12 +20,11 @@ configurations = {
             ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
-                env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
-                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
+                env.Dir('$SRC_DIR/../thirdparty/tinythread/1_0/source'),
+                env.Dir('$SRC_DIR/../thirdparty/eastl/fe4d920/include'),
+                env.Dir('$SRC_DIR/../thirdparty/UnitTest++/include'),
+                env.Dir('$SRC_DIR/../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-debug.pch'
@@ -62,12 +61,11 @@ configurations = {
             ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
-                env.Dir('$SRC_DIR/../../thirdparty/tinythread/1_0/source'),
-                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/UnitTest++/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
+                env.Dir('$SRC_DIR/../thirdparty/tinythread/1_0/source'),
+                env.Dir('$SRC_DIR/../thirdparty/eastl/fe4d920/include'),
+                env.Dir('$SRC_DIR/../thirdparty/UnitTest++/include'),
+                env.Dir('$SRC_DIR/../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-release.pch'
@@ -132,23 +130,23 @@ input_files = [
     'lost/test/TestPlatform.cpp',
     'lost/test/TestProfiler.cpp',
     'lost/test/TestTimer.cpp',
-    '../../thirdparty/UnitTest++/include/XmlTestReporter.cpp',
-    '../../thirdparty/UnitTest++/include/TimeConstraint.cpp',
-    '../../thirdparty/UnitTest++/include/TestRunner.cpp',
-    '../../thirdparty/UnitTest++/include/TestResults.cpp',
-    '../../thirdparty/UnitTest++/include/TestReporterStdout.cpp',
-    '../../thirdparty/UnitTest++/include/TestReporter.cpp',
-    '../../thirdparty/UnitTest++/include/TestList.cpp',
-    '../../thirdparty/UnitTest++/include/TestDetails.cpp',
-    '../../thirdparty/UnitTest++/include/Test.cpp',
-    '../../thirdparty/UnitTest++/include/ReportAssert.cpp',
-    '../../thirdparty/UnitTest++/include/MemoryOutStream.cpp',
-    '../../thirdparty/UnitTest++/include/DeferredTestResult.cpp',
-    '../../thirdparty/UnitTest++/include/DeferredTestReporter.cpp',
-    '../../thirdparty/UnitTest++/include/Checks.cpp',
-    '../../thirdparty/UnitTest++/include/AssertException.cpp',
-    '../../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp',
-    '../../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp',
+    '../thirdparty/UnitTest++/include/XmlTestReporter.cpp',
+    '../thirdparty/UnitTest++/include/TimeConstraint.cpp',
+    '../thirdparty/UnitTest++/include/TestRunner.cpp',
+    '../thirdparty/UnitTest++/include/TestResults.cpp',
+    '../thirdparty/UnitTest++/include/TestReporterStdout.cpp',
+    '../thirdparty/UnitTest++/include/TestReporter.cpp',
+    '../thirdparty/UnitTest++/include/TestList.cpp',
+    '../thirdparty/UnitTest++/include/TestDetails.cpp',
+    '../thirdparty/UnitTest++/include/Test.cpp',
+    '../thirdparty/UnitTest++/include/ReportAssert.cpp',
+    '../thirdparty/UnitTest++/include/MemoryOutStream.cpp',
+    '../thirdparty/UnitTest++/include/DeferredTestResult.cpp',
+    '../thirdparty/UnitTest++/include/DeferredTestReporter.cpp',
+    '../thirdparty/UnitTest++/include/Checks.cpp',
+    '../thirdparty/UnitTest++/include/AssertException.cpp',
+    '../thirdparty/UnitTest++/include/Posix/TimeHelpers.cpp',
+    '../thirdparty/UnitTest++/include/Posix/SignalTranslator.cpp',
 ]
 
 target_files = []

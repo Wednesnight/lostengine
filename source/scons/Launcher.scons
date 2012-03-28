@@ -20,10 +20,9 @@ configurations = {
             ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
-                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
+                env.Dir('$SRC_DIR/../thirdparty/eastl/fe4d920/include'),
+                env.Dir('$SRC_DIR/../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-debug.pch'
@@ -60,10 +59,9 @@ configurations = {
             ],
             CPPPATH = [
                 env.Dir('$SRC_DIR/.'),
-                env.Dir('$SRC_DIR/../../thirdparty/boost/boost_1_44_0'),
-                env.Dir('$SRC_DIR/../../thirdparty/eastl/fe4d920/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/lua/lua_5_1_4/include'),
-                env.Dir('$SRC_DIR/../../thirdparty/slub/include')
+                env.Dir('$SRC_DIR/../thirdparty/eastl/fe4d920/include'),
+                env.Dir('$SRC_DIR/../thirdparty/lua/lua_5_1_4/include'),
+                env.Dir('$SRC_DIR/../thirdparty/slub/include')
             ],
             CXXFLAGS = [
                 '-includelost/prefix-release.pch'
