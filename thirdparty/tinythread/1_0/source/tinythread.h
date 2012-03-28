@@ -205,6 +205,8 @@ class mutex {
     mutex()
 #if defined(_TTHREAD_WIN32_)
       : mAlreadyLocked(false)
+#else
+      : mHandle()
 #endif
     {
 #if defined(_TTHREAD_WIN32_)
@@ -277,7 +279,7 @@ class mutex {
   private:
 #if defined(_TTHREAD_WIN32_)
     CRITICAL_SECTION mHandle;
-    bool mAlreadyLocked;
+    volatile bool mAlreadyLocked;
 #else
     pthread_mutex_t mHandle;
 #endif
