@@ -16,6 +16,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#include "lost/application/Window.h"
 
 @class LEGLView;
 
@@ -23,6 +24,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 {
   LEGLView* _leglView;
 }
+
+-(void)setParentWindow:(lost::application::Window *)parent;
 
 @property(nonatomic, readonly) LEGLView* leglView;
 

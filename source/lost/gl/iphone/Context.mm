@@ -42,6 +42,11 @@ namespace lost
       delete hiddenMembers;
     }
 
+    void Context::clearCurrent()
+    {
+      [EAGLContext setCurrentContext: nil];
+    }
+    
     void Context::makeCurrent()
     {
       [EAGLContext setCurrentContext: hiddenMembers->context];

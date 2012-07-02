@@ -24,6 +24,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   DOUT("");
   if(self = [super init])
   {
+    [self setStatusBarHidden: YES withAnimation: UIStatusBarAnimationNone];
   }
   return self;
 }

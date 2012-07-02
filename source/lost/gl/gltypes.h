@@ -44,7 +44,7 @@ typedef void GLvoid;
   typedef signed long int GLintptr;
   typedef signed long int GLsizeiptr;
   typedef char GLchar;
-#elif TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined WIN32
+#elif defined WIN32
   typedef int GLintptr;
   typedef int GLsizeiptr;
 #elif !defined(linux)

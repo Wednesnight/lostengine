@@ -38,6 +38,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/lua/bindings/LostRg.h"
 #include "lost/lua/bindings/LostTime.h"
 #include "lost/lua/bindings/ThirdpartyBox2D.h"
+#include "lost/lua/bindings/Corona.h"
 
 
 void BaseLib(lua_State* state) { lua_pushcfunction(state, luaopen_base);lua_pushstring(state, "");lua_call(state, 1, 0); }
@@ -86,6 +87,8 @@ namespace lost
       LostTime(state);
       ThirdpartyBox2D(state);
       LostBox2D(state); // bind after all of box2d was bound
+        
+      Corona(state);
     }
   }
 }

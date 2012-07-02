@@ -19,6 +19,8 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #import "lost/gl/gl.h"
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>
+#include "lost/event/EventType.h"
+#include "lost/application/Window.h"
 
 // FIXME: put some common defines inside a forward header so we don't have to choose API just yet
 typedef int             GLint;
@@ -28,19 +30,29 @@ typedef unsigned int    GLuint;
 
 @interface LEGLView : UIView
 {
-	EAGLContext* _context;
+  EAGLContext* _context;
 	
-	// The pixel dimensions of the CAEAGLLayer
-	GLint _backingWidth;
-	GLint _backingHeight;
+  // The pixel dimensions of the CAEAGLLayer
+  GLint _backingWidth;
+  GLint _backingHeight;
 	
-	// The OpenGL names for the framebuffer and renderbuffer used to render to this view
-	GLuint _defaultFramebuffer;
+  // The OpenGL names for the framebuffer and renderbuffer used to render to this view
+  GLuint _defaultFramebuffer;
   GLuint _colorRenderbuffer;
   GLuint _depthRenderbuffer;
+
+  lost::application::Window* _parent;
 }
 
 -(id)initWithFrame:(CGRect)fr;
+
+-(void)setParentWindow:(lost::application::Window *)parent;
+
+-(void)touchEvent: (NSSet*)touches type:(lost::event::Type)type pressed:(bool)pressed;
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @property(nonatomic, readonly)	EAGLContext* context;
 @property(nonatomic, readonly)	GLint backingWidth;

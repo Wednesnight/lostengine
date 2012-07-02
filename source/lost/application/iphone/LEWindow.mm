@@ -35,6 +35,11 @@ leglView = _leglView
   return self;
 }
 
+-(void)setParentWindow:(lost::application::Window *)parent
+{
+  [_leglView setParentWindow: parent];
+}
+
 -(void)dealloc
 {
   [_leglView dealloc];

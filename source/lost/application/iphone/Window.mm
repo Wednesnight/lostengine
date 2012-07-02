@@ -35,6 +35,7 @@ namespace application
     DOUT("");
     hiddenMembers = new WindowHiddenMembers;
     hiddenMembers->window = [[LEWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [hiddenMembers->window setParentWindow: this];
     context.reset(new gl::Context);
     context->defaultFramebuffer(hiddenMembers->window.leglView.defaultFramebuffer);
     open();

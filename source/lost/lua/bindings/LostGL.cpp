@@ -207,8 +207,9 @@ namespace lost
       .constant("GL_SAMPLER_3D", GL_SAMPLER_3D)
       .constant("GL_SAMPLER_CUBE", GL_SAMPLER_CUBE)
       .constant("GL_SAMPLER_1D_SHADOW", GL_SAMPLER_1D_SHADOW)
-      .constant("GL_SAMPLER_2D_SHADOW", GL_SAMPLER_2D_SHADOW);
+      .constant("GL_SAMPLER_2D_SHADOW", GL_SAMPLER_2D_SHADOW)
 #endif
+      ;
     }
 
     void LostGLRenderBuffer(lua_State* state)

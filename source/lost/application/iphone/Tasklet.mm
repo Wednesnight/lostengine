@@ -21,6 +21,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include "lost/common/Logger.h"
 #import <QuartzCore/CADisplayLink.h>
 #import <Foundation/NSRunLoop.h>
+#import <UIKit/UIKit.h>
 #include "lost/application/Window.h"
 #include "lost/gl/Context.h"
 
@@ -76,77 +77,69 @@ namespace lost
 {
   namespace application
   {
-
-    struct Tasklet::TaskletHiddenMembers
-    {
-      TaskletDisplayLink* displayLink;
-      double offset;
-    };
-
-    void Tasklet::start()
-    {
-      DOUT("");
-      init();
-      startup();
-      if(running)
-      {
-        isAlive = true;
-        // FIXME: fake resize event from here, window size won't probably ever change so we're fine
-        lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(new lost::application::ResizeEvent(320, 480));
-        eventDispatcher->dispatchEvent(resizeEvent);
+    
+    void Tasklet::run() {
+      platform::setThreadName("'"+name+"' (tasklet)");
+      isAlive = true;
+      bool hasError = false;
+      string errorMsg = "";
       
-        DOUT("startup ok, starting DisplayLink");
-        hiddenMembers.reset(new TaskletHiddenMembers);
-        hiddenMembers->displayLink = [[TaskletDisplayLink alloc] initWithTasklet:this];
-        [hiddenMembers->displayLink start];
-        hiddenMembers->offset = clock.getTime();
-      }
-      else
-      {
-        dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
-      }
-    }
-
-    void Tasklet::run()
-    {
-        processEvents();
-        double framerate = clock.getElapsedAndUpdateOffset(hiddenMembers->offset);
-        update(framerate);
-        if(running)
-        {
+      try {
+        
+        // make sure that our GL context is the current context
+        if(window != NULL) {
           window->context->makeCurrent();
           window->context->defaultFramebuffer();
+        }
         
-          render();
-        }
-        else
-        {
-          isAlive = false;
+        startup();
+        if (running) {
+          
+          // FIXME: fake resize event from here, window size won't probably ever change so we're fine
+          CGRect screenRect = [[UIScreen mainScreen] bounds];
+          lost::shared_ptr<lost::application::ResizeEvent> resizeEvent(
+            new lost::application::ResizeEvent(screenRect.size.width, screenRect.size.height));
+          eventDispatcher->dispatchEvent(resizeEvent);
+
+          double framerate = config.framerate;
+          double offset = clock.getTime();
+          
+          while (thread->get_state() == TaskletThread::RUNNING && running) {
+            processEvents();
+            if (running) {
+              update(framerate);
+              render();
+              if(waitForEvents) { eventDispatcher->waitForEvents(); }
+              
+              framerate = clock.getElapsedAndUpdateOffset(offset);
+            }
+          }
+          
           shutdown();
-          dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+          
+          // unbind GL context
+          if(window != NULL) {
+            window->context->clearCurrent();
+          }
         }
-    }
-
-    void Tasklet::stop()
-    {
-      DOUT("");
-      if(isAlive==true)
-      {
-        if(hiddenMembers && hiddenMembers->displayLink)
-        {
-          [hiddenMembers->displayLink stop];
-          [hiddenMembers->displayLink release];
-          hiddenMembers.reset();
-        }
-        isAlive = false;
-        shutdown();
-        dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
       }
-      else
+      catch(std::exception& ex)
       {
-        cleanup();
+        errorMsg = ex.what();
+        hasError = true;
+      }
+      catch (...) {
+        errorMsg = "<catch all>";
+        hasError = true;
+      }
+      isAlive = false;
+      dispatchApplicationEvent(TaskletEventPtr(new TaskletEvent(TaskletEvent::DONE(), this)));
+      if (hasError) {
+        
+        std::ostringstream os;
+        os << "Tasklet '"<<name<<"' terminated with error: " <<errorMsg;
+        throw std::runtime_error(os.str());
       }
     }
-
   }
 }

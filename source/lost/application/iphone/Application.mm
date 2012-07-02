@@ -16,6 +16,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "lost/application/iphone/LEApplication.h"
+#import "lost/application/iphone/LEApplicationDelegate.h"
+
 #include "lost/application/Application.h"
 #include "lost/common/Logger.h"
 #include "lost/application/Tasklet.h"
@@ -33,7 +36,8 @@ void Application::run(int argc, char *argv[])
 {
   DOUT("");
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-  UIApplicationMain(argc, argv, @"LEApplication", @"LEApplicationDelegate");
+  UIApplicationMain(argc, argv, NSStringFromClass([LEApplication class]),
+                    NSStringFromClass([LEApplicationDelegate class]));
   [pool release];
 }
 
@@ -43,6 +47,10 @@ void Application::initialize()
   gApplicationPointerForLEApplicationDelegate = this;
 }
 
+void Application::finalize()
+{
+  gApplicationPointerForLEApplicationDelegate = NULL;
+}
 
 void Application::shutdown()
 {

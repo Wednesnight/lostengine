@@ -18,6 +18,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #import <QuartzCore/CAEAGLLayer.h>
 #import "lost/gl/Utils.h"
 #import "lost/common/Logger.h"
+#include "lost/application/MouseButton.h"
+#include "lost/application/MouseEvent.h"
+#include "lost/event/EventDispatcher.h"
 
 @implementation LEGLView
 
@@ -68,7 +71,8 @@ depthRenderbuffer = _depthRenderbuffer
     
     
     glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 768, 1024);GLDEBUG;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, screenRect.size.width, screenRect.size.height);GLDEBUG;
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
     
 //		glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);GLDEBUG;
@@ -85,6 +89,7 @@ depthRenderbuffer = _depthRenderbuffer
   [_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:eaglLayer];
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_backingWidth);GLDEBUG;
   glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_backingHeight);GLDEBUG;
+  DOUT(_backingWidth << ", " << _backingHeight);
 
 /*  glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderbuffer);
   glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _backingWidth, _backingHeight);
@@ -93,6 +98,49 @@ depthRenderbuffer = _depthRenderbuffer
   {
       EOUT("Failed to make complete framebuffer object " << glCheckFramebufferStatus(GL_FRAMEBUFFER));
   }  
+}
+
+-(void)setParentWindow:(lost::application::Window *)parent
+{
+  _parent = parent;
+}
+
+- (void)touchEvent: (NSSet*)touches type:(lost::event::Type)type pressed:(bool)pressed
+{
+  if (_parent)
+  {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    lost::shared_ptr<lost::application::MouseEvent> mouseEvent(new lost::application::MouseEvent(type));
+    UITouch *touch = [touches anyObject];
+    CGPoint touchLocation = [touch locationInView: self];
+    mouseEvent->window  = _parent;
+    mouseEvent->pos     = lost::math::Vec2(touchLocation.x, screenRect.size.height - touchLocation.y);
+    mouseEvent->absPos  = lost::math::Vec2(touchLocation.x, screenRect.size.height - touchLocation.y);
+    mouseEvent->button  = lost::application::MB_LEFT;
+    mouseEvent->pressed = pressed;
+    mouseEvent->scrollDelta = lost::math::Vec3(0, 0, 0);
+    _parent->dispatcher->queueEvent(mouseEvent);
+  }  
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self touchEvent: touches type: lost::application::MouseEvent::MOUSE_DOWN() pressed: YES];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self touchEvent: touches type: lost::application::MouseEvent::MOUSE_MOVE() pressed: YES];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self touchEvent: touches type: lost::application::MouseEvent::MOUSE_UP() pressed: NO];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [self touchEvent: touches type: lost::application::MouseEvent::MOUSE_UP() pressed: NO];
 }
 
 @end

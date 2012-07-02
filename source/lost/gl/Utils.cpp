@@ -51,7 +51,7 @@ namespace utils
         default:
           std::ostringstream os;
           os << "error 0x" << std::hex << err;
-          result = os.str();
+          result = os.str().c_str();
       }
       return result;
     #else

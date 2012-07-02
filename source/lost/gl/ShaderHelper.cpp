@@ -65,7 +65,11 @@ ShaderProgramPtr buildShader(const resource::LoaderPtr& loader, const string& in
     THROW_RTE("vertex shader '"<<vsname<<"' compilation failed: "<<vertexShader->log());
   }
 
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE || defined ANDROID
+  source = processDependencies(loader, "precision highp float; "+ fssource, state);
+#else
   source = processDependencies(loader, fssource, state);
+#endif
   fragmentShader->source(source);
   fragmentShader->compile();
   if(!fragmentShader->compiled())

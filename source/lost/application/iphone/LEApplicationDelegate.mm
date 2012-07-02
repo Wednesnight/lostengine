@@ -36,7 +36,8 @@ using namespace lost::application;
 {
 //  [EAGLContext setCurrentContext:_window.leglView.context];
 //  glBindFramebuffer(GL_FRAMEBUFFER, _window.leglView.defaultFramebuffer);GLDEBUG;
-  glViewport(0, 0, 320, 480);GLDEBUG;
+  CGRect screenRect = [[UIScreen mainScreen] bounds];
+  glViewport(0, 0, screenRect.size.width, screenRect.size.height);GLDEBUG;
 
   glClearColor(0.5f, 0.5f, 0.5f, 1.0f);GLDEBUG;
   glClear(GL_COLOR_BUFFER_BIT);GLDEBUG;
