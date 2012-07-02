@@ -6,3 +6,5 @@ xcuserdata
 source/thirdparty/lua/lua_5_1_4/lua.xcodeproj/project.pbxproj
 
 source/thirdparty/slub/slub.xcodeproj/project.pbxproj
+
+source/xcode/LostEngine.xcodeproj/project.pbxproj
