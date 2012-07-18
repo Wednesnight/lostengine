@@ -18,5 +18,5 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 int main(int argn, char** args)
 {
-  return lost::application::runResourceTasklet(argn, args, "Launcher.tasklet");
+  return lost::application::runResourceTasklet(argn, args, "Guiroscope.tasklet");
 }
