@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -2427,7 +2427,11 @@
 			};
 			buildConfigurationList = 4413D6753580F2B173BAA216 /* Build configuration list for PBXProject "LostEngine-ios" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 588BAFE777721DBB4BC3EE25;
 			projectDirPath = ..;
 			projectReferences = (
@@ -2477,7 +2481,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "exec ./xcode/copy_resources.sh\nexit 1\n";
+			shellScript = "exec ./xcode/copy_resources-ios.sh\nexit 1\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
