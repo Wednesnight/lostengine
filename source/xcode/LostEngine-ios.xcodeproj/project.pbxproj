@@ -2424,6 +2424,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = 4413D6753580F2B173BAA216 /* Build configuration list for PBXProject "LostEngine-ios" */;
 			compatibilityVersion = "Xcode 3.2";
